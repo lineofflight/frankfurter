@@ -18,6 +18,10 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 
 Once the container is running, open your browser and go to `http://localhost`.
 
+## Libraries
+
+* https://github.com/xuhcc/beancount-exchangerates is a [Beancount](https://beancount.github.io/) price source plugin using this API
+
 ## Contributing
 
 Frankfurter is built with Ruby. To contribute:
