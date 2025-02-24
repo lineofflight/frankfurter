@@ -4,7 +4,7 @@
 
 [Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by institutional and non-commercial sources like the European Central Bank. Check the website for a detailed walkthrough.
 
-The API is publicly available at https://api.frankfurter.dev.
+The API is publicly available at <https://api.frankfurter.dev>.
 
 ## Deployment
 
@@ -18,9 +18,10 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 
 Once the container is running, open your browser and go to `http://localhost`.
 
-## Libraries
+## Libraries / Tools
 
-- https://github.com/xuhcc/beancount-exchangerates is a [Beancount](https://beancount.github.io/) price source plugin using this API
+- [beancount-exchangerates](https://github.com/xuhcc/beancount-exchangerates): a [Beancount](https://beancount.github.io/) price source plugin using this API
+- [frankfurte-rs](https://github.com/Rolv-Apneseth/frankfurte-rs): Rust library and CLI to interface with this API
 
 ## Contributing
 
