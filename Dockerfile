@@ -9,4 +9,8 @@ RUN gem install bundler
 RUN bundle config set without "development test"
 RUN bundle install --jobs=8
 ADD . /app
+
+HEALTHCHECK --interval=2s --timeout=4s --start-period=3s --retries=15 \
+  CMD curl -f "http://localhost:${PORT}" || exit 1
+
 CMD ["bundle", "exec", "unicorn", "-c", "./config/unicorn.rb"]
