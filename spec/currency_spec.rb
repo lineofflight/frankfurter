@@ -28,7 +28,7 @@ describe Currency do
     it "returns rates between given working dates" do
       start_date = Date.parse("2010-01-04")
       end_date = Date.parse("2010-01-29")
-      dates = Currency.between((start_date..end_date)).map(:date).sort.uniq
+      dates = Currency.between(start_date..end_date).map(:date).sort.uniq
       _(dates.first).must_equal(start_date)
       _(dates.last).must_equal(end_date)
     end
@@ -36,7 +36,7 @@ describe Currency do
     it "starts on preceding business day if start date is a holiday" do
       start_date = Date.parse("2024-11-03")
       end_date = Date.parse("2024-11-04")
-      dates = Currency.between((start_date..end_date)).map(:date).uniq
+      dates = Currency.between(start_date..end_date).map(:date).uniq
       _(dates).must_include(Date.parse("2024-11-01"))
     end
 
@@ -48,14 +48,14 @@ describe Currency do
     it "allows start date to predate dataset" do
       start_date = Date.parse("1901-01-01")
       end_date = Date.parse("2024-01-01")
-      dates = Currency.between((start_date..end_date)).map(:date)
+      dates = Currency.between(start_date..end_date).map(:date)
       _(dates).wont_be_empty
     end
 
     it "returns nothing if queried for the future" do
       start_date = Date.today + 1
       end_date = start_date + 1
-      dates = Currency.between((start_date..end_date)).map(:date)
+      dates = Currency.between(start_date..end_date).map(:date)
       _(dates).must_be_empty
     end
   end

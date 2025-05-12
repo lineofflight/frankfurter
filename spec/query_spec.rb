@@ -77,6 +77,6 @@ describe Query do
     start_date = "2014-01-01"
     end_date = "2014-12-31"
     query = Query.new(start_date:, end_date:)
-    _(query.date).must_equal((Date.parse(start_date)..Date.parse(end_date)))
+    _(query.date).must_equal(Date.parse(start_date)..Date.parse(end_date))
   end
 end

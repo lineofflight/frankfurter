@@ -3,7 +3,7 @@ inherit_gem:
 
 inherit_from: ".rubocop_todo.yml"
 
-require:
+plugins:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rake
