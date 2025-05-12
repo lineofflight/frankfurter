@@ -44,6 +44,12 @@ describe Versions::V1 do
     _(json["rates"]).wont_be(:empty?)
   end
 
+  it "returns latest quotes when querying future date" do
+    tomorrow = (Date.today + 1).to_s
+    get "/#{tomorrow}"
+    _(last_response).must_be(:ok?)
+  end
+
   it "returns an ETag" do
     ["/latest", "/2012-11-20"].each do |path|
       get path

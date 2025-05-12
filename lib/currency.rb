@@ -5,8 +5,7 @@ require "db"
 class Currency < Sequel::Model
   dataset_module do
     def latest(date = Date.today)
-      return where(false) if date > Date.today
-
+      date = Date.today if date > Date.today
       where(date: nearest_date_with_rates(date))
     end
 

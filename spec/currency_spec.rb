@@ -19,8 +19,11 @@ describe Currency do
       _(Currency.latest(Date.parse("1901-01-01"))).must_be_empty
     end
 
-    it "returns nothing if queried for the future" do
-      _(Currency.latest(Date.today + 1)).must_be_empty
+    it "returns latest available rates for future dates" do
+      future_date = Date.today + 1
+      data = Currency.latest(future_date)
+      _(data).wont_be_empty
+      _(data.to_a.sample.date).must_equal(Currency.latest.to_a.sample.date)
     end
   end
 
@@ -52,7 +55,7 @@ describe Currency do
       _(dates).wont_be_empty
     end
 
-    it "returns nothing if queried for the future" do
+    it "returns nothing when start date is in the future" do
       start_date = Date.today + 1
       end_date = start_date + 1
       dates = Currency.between(start_date..end_date).map(:date)
