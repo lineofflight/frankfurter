@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby File.read("mise.toml").match(/ruby = "(.+)"/)[1]
+ruby "3.4.4"
 
 gem "irb"
 gem "logger"
