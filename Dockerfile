@@ -1,10 +1,10 @@
-FROM ruby:3.4.3
+FROM ruby:3.4.4
 
 RUN mkdir /app
 WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
-ADD .ruby-version /app/.ruby-version
+ADD mise.toml /app/mise.toml
 RUN gem install bundler
 RUN bundle config set without "development test"
 RUN bundle install --jobs=8
