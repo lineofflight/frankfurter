@@ -57,7 +57,7 @@ GEM
     public_suffix (6.0.2)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.14)
+    rack (3.1.16)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
     rack-test (2.2.0)
