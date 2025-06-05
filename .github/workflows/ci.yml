@@ -1,4 +1,4 @@
-name: build
+name: CI/CD Pipeline
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
       - "v*"
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,9 +19,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: gem install bundler
-      - run: bundle install
       - run: bundle exec rake
+
   publish:
     needs: test
     if: ${{ github.event_name == 'push' }}
