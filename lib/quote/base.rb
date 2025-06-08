@@ -24,8 +24,6 @@ module Quote
       prepare_rates
       rebase_rates if must_rebase?
       result.freeze
-
-      true
     end
 
     def must_rebase?
