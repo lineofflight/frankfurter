@@ -3,3 +3,4 @@
 coverage
 pkg
 *.sqlite3
+.claude
