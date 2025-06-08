@@ -101,7 +101,7 @@ GEM
     rubocop-sequel (0.4.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2)
-    rubocop-shopify (2.17.0)
+    rubocop-shopify (2.17.1)
       rubocop (~> 1.62)
     ruby-progressbar (1.13.0)
     rufus-scheduler (3.9.2)
