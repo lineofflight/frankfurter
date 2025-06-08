@@ -31,6 +31,7 @@ module Quote
 
     it "sorts rates" do
       rates = quote.formatted[:rates]
+
       _(rates.keys).must_equal(rates.keys.sort)
     end
 
@@ -49,6 +50,7 @@ module Quote
 
       it "sorts rates" do
         rates = quote.formatted[:rates]
+
         _(rates.keys).must_equal(rates.keys.sort)
       end
     end
@@ -60,12 +62,14 @@ module Quote
 
       it "quotes only for those symbols" do
         rates = quote.formatted[:rates]
+
         _(rates.keys).must_include("USD")
         _(rates.keys).wont_include("CAD")
       end
 
       it "sorts rates" do
         rates = quote.formatted[:rates]
+
         _(rates.keys).must_equal(rates.keys.sort)
       end
     end

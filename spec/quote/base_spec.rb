@@ -68,6 +68,7 @@ module Quote
 
       it "finds nothing" do
         quote.perform
+
         _(quote.not_found?).must_equal(true)
       end
     end
@@ -89,6 +90,7 @@ module Quote
 
       it "finds nothing" do
         quote.perform
+
         _(quote.not_found?).must_equal(true)
       end
     end

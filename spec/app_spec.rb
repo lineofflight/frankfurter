@@ -13,6 +13,7 @@ describe App do
   it "serves static files" do
     ["/", "/favicon.ico", "/robots.txt", "/v1/openapi.json"].each do |path|
       get path
+
       _(last_response).must_be(:ok?)
       _(headers["Cache-Control"]).must_equal("public, max-age=900")
     end
@@ -20,14 +21,17 @@ describe App do
 
   it "returns JSON for 404" do
     get "/nonexistent"
+
     _(last_response.status).must_equal(404)
     _(last_response.headers["Content-Type"]).must_equal("application/json")
     json = Oj.load(last_response.body)
+
     _(json["message"]).must_equal("not found")
   end
 
   it "routes /v1 to V1 handler" do
     get "/v1/latest"
+
     _(last_response).must_be(:ok?)
   end
 

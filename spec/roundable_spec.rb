@@ -37,6 +37,7 @@ describe Roundable do
     skip "We don't conform ¯_(ツ)_/¯"
     require "day"
     rates = Day.all.sample.rates.to_a
+
     rates.shuffle.each_value do |rate|
       _(round(rate)).must_equal(rate)
     end

@@ -15,23 +15,27 @@ module Bank
 
     it "fetches current rates" do
       feed = Feed.current
+
       _(feed.count).must_be(:==, 1)
     end
 
     it "fetches rates for the past 90 days" do
       feed = Feed.ninety_days
+
       _(feed.count).must_be(:>, 1)
       _(feed.count).must_be(:<=, 90)
     end
 
     it "fetches historical rates" do
       feed = Feed.historical
+
       _(feed.count).must_be(:>, 90)
     end
 
     it "parses dates" do
       feed = Feed.current
       day = feed.first
+
       _(day[:date]).must_be_kind_of(Date)
     end
 
