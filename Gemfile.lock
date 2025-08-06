@@ -109,7 +109,7 @@ GEM
     ruby-progressbar (1.13.0)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
-    sequel (5.95.0)
+    sequel (5.95.1)
       bigdecimal
     sqlite3 (2.7.3)
       mini_portile2 (~> 2.8.0)
