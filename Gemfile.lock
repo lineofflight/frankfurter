@@ -58,7 +58,7 @@ GEM
     public_suffix (6.0.2)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.16)
+    rack (3.2.0)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -74,7 +74,7 @@ GEM
     reline (0.6.1)
       io-console (~> 0.5)
     rexml (3.4.1)
-    roda (3.94.0)
+    roda (3.95.0)
       rack
     rubocop (1.76.0)
       json (~> 2.3)
