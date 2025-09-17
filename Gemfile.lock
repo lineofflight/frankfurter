@@ -73,7 +73,7 @@ GEM
     regexp_parser (2.11.2)
     reline (0.6.1)
       io-console (~> 0.5)
-    rexml (3.4.1)
+    rexml (3.4.2)
     roda (3.96.0)
       rack
     rubocop (1.80.2)
