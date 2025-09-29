@@ -42,7 +42,7 @@ jobs:
       issues: read
       discussions: read
       actions: read
-      # id-token: write
+      id-token: write # required for Claude Code action OIDC authentication
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -85,6 +85,7 @@ jobs:
       issues: write
       discussions: write
       actions: read # for CI context
+      id-token: write # required for Claude Code action OIDC authentication
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
