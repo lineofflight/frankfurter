@@ -18,47 +18,45 @@ concurrency:
 
 jobs:
   claude-readonly:
-    if: >
+    if: |
       (
-        (github.event_name == 'issue_comment' &&
-         contains((github.event.comment.body || ''), '@claude')) ||
-        (github.event_name == 'pull_request_review_comment' &&
-         contains((github.event.comment.body || ''), '@claude')) ||
-        (github.event_name == 'discussion_comment' &&
-         contains((github.event.comment.body || ''), '@claude')) ||
-        (github.event_name == 'pull_request_review' &&
-         contains((github.event.review.body || ''), '@claude')) ||
-        (github.event_name == 'issues' &&
-         (contains((github.event.issue.body || ''), '@claude') ||
-          contains((github.event.issue.title || ''), '@claude')))
-      )
-      && !contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'),
-           (github.event.comment.author_association || github.event.review.author_association || github.event.issue.author_association))
-      && !endsWith(github.actor, '[bot]')
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      ) &&
+      !contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), (github.event.comment.author_association || github.event.review.author_association || github.event.issue.author_association)) &&
+      !endsWith(github.actor, '[bot]')
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
       issues: read
-      discussions: read
-      actions: read
-      id-token: write # required for Claude Code action OIDC authentication
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Run Claude Code (Read-only)
-        id: claude-readonly
+      - name: Run Claude Code
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
-          claude_args: >-
-            --model claude-opus-4-1-20250805
-            --allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"
+
+          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
+          # prompt: 'Update the pull request description to include a summary of changes.'
+
+          # Optional: Add claude_args to customize behavior and configuration
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
+          # claude_args: '--model claude-opus-4-1-20250805 --allowed-tools Bash(gh pr:*)'
 
   claude-write:
     if: >
@@ -80,38 +78,25 @@ jobs:
       && !endsWith(github.actor, '[bot]')
     runs-on: ubuntu-latest
     permissions:
-      contents: write # needed for commits/branches
+      contents: write
       pull-requests: write
       issues: write
       discussions: write
-      actions: read # for CI context
-      id-token: write # required for Claude Code action OIDC authentication
+      id-token: write
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Run Claude Code (Full Access)
+      - name: Run Claude Code (Write)
         id: claude-write
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           additional_permissions: |
             actions: read
-          prompt: |
-            You have full repository access as a trusted collaborator.
-
-            User's comment: "${{ github.event.comment.body }}"
-            Issue number: #${{ github.event.issue.number }}
-
-            Read the full issue thread for context, then execute the user's request precisely.
-
-            For batch operations:
-              - Track items with TodoWrite
-              - Process all items
-              - Retry failures; note any that remain
-              - Summarize completed vs failed at the end
-          claude_args: >-
-            --model claude-opus-4-1-20250805
-            --allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*),Bash(gh issue close:*),Bash(gh issue create:*),Bash(gh pr create:*),Bash(gh pr close:*),Bash(gh api:*)"
+          claude_args: |
+            --max-turns 20
+            --allowed-tools "Bash(gh api:*),Bash(gh issue close:*),Bash(gh issue comment:*),Bash(gh issue create:*),Bash(gh issue list:*),Bash(gh issue reopen:*),Bash(gh issue view:*),Bash(gh pr close:*),Bash(gh pr comment:*),Bash(gh pr create:*),Bash(gh pr diff:*),Bash(gh pr list:*),Bash(gh pr merge:*),Bash(gh pr view:*),Bash(gh search:*)"
