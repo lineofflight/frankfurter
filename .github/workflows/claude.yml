@@ -101,12 +101,17 @@ jobs:
             actions: read
           prompt: |
             You have full repository access as a trusted collaborator.
-            Read the user's @claude mention and execute precisely.
-            For batch ops:
-            - Track items with TodoWrite
-            - Process all items
-            - Retry failures; note any that remain
-            - Summarize completed vs failed at the end
+
+            User's comment: "${{ github.event.comment.body }}"
+            Issue number: #${{ github.event.issue.number }}
+
+            Read the full issue thread for context, then execute the user's request precisely.
+
+            For batch operations:
+              - Track items with TodoWrite
+              - Process all items
+              - Retry failures; note any that remain
+              - Summarize completed vs failed at the end
           claude_args: >-
             --model claude-opus-4-1-20250805
             --allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*),Bash(gh issue close:*),Bash(gh issue create:*),Bash(gh pr create:*),Bash(gh pr close:*),Bash(gh api:*)"
