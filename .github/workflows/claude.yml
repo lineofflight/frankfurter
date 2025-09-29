@@ -98,5 +98,5 @@ jobs:
           additional_permissions: |
             actions: read
           claude_args: |
-            --max-turns 20
+            --max-turns 30
             --allowed-tools "Bash(gh api:*),Bash(gh issue close:*),Bash(gh issue comment:*),Bash(gh issue create:*),Bash(gh issue list:*),Bash(gh issue reopen:*),Bash(gh issue view:*),Bash(gh pr close:*),Bash(gh pr comment:*),Bash(gh pr create:*),Bash(gh pr diff:*),Bash(gh pr list:*),Bash(gh pr merge:*),Bash(gh pr view:*),Bash(gh search:*)"
