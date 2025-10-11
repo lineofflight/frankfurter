@@ -3,7 +3,18 @@
 require "db"
 
 class Currency < Sequel::Model
+  many_to_one :source, key: :source_code, primary_key: :code
+
+  def before_validation
+    super
+    self.source_code ||= "ECB"
+  end
+
   dataset_module do
+    def by_source(source_code)
+      where(source_code: source_code)
+    end
+
     def latest(date = Date.today)
       date = Date.today if date > Date.today
       where(date: nearest_date_with_rates(date))

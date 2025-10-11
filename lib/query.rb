@@ -40,7 +40,21 @@ class Query
     end
   end
 
+  def source
+    @params[:source]&.upcase
+  end
+
+  def from
+    base
+  end
+
+  def to
+    symbols
+  end
+
   def to_h
-    { amount:, base:, date:, symbols: }.compact
+    result = { amount:, base:, date:, symbols: }.compact
+    result[:source] = source if @params.key?(:source)
+    result
   end
 end

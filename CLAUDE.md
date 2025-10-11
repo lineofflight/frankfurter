@@ -57,12 +57,21 @@ db/migrate/            # Sequel migrations
 
 ## Database
 
-SQLite database with single `currencies` table:
+SQLite database with two main tables:
+
+**sources** table (NEW):
+- `code`: VARCHAR(10) PRIMARY KEY (e.g., 'ECB', 'BOC', 'FED')
+- `name`: VARCHAR(100) - Full name of source
+- `base_currency`: VARCHAR(3) - Base currency for this source
+
+**currencies** table (ENHANCED):
 - `date`: DATE
 - `iso_code`: VARCHAR (currency code)
-- `rate`: DECIMAL (exchange rate vs EUR)
+- `rate`: DECIMAL (exchange rate)
+- `source_code`: VARCHAR(10) FK to sources.code (NEW, defaults to 'ECB')
+- Unique index: (date, iso_code, source_code)
 
-Base currency is EUR from ECB data.
+Each currency rate is now associated with its data source. Currently only ECB data is available.
 
 ## Testing
 
@@ -103,6 +112,8 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 
 ## API Endpoints
 
+### V1 API
+
 See `lib/versions/v1.rb` for current endpoint implementations:
 - Latest rates
 - Historical rates by date
@@ -111,3 +122,21 @@ See `lib/versions/v1.rb` for current endpoint implementations:
 - Available currencies list
 
 OpenAPI spec available at `/v1/openapi.json`.
+
+### V2 API
+
+See `lib/versions/v2.rb` for V2 endpoint implementations:
+- `/v2/latest?from=EUR&to=USD` - Latest rates with source attribution
+- `/v2/2025-02-04?from=EUR&to=USD` - Historical rates by date
+- `/v2/2025-01-01..2025-01-31?from=EUR` - Date range queries
+- `/v2/sources` - List available data sources
+- `/v2/currencies` - Available currencies list
+
+**Key differences from V1:**
+- Parameter names: `from`/`to` instead of `base`/`symbols`
+- Response includes `source` field indicating data origin
+- **Strict source mode**: Requires native source data by default
+  - `/v2/latest?from=EUR&to=USD` works (ECB native) ✅
+  - `/v2/latest?from=USD&to=EUR` errors (no FED data) ❌
+  - `/v2/latest?from=USD&to=EUR&source=ECB` works (explicit rebasing) ✅
+- Optional `source` parameter allows explicit source selection and rebasing

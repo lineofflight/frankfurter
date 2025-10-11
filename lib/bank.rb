@@ -44,6 +44,7 @@ module Bank
             date: day[:date],
             iso_code: iso_code,
             rate: rate,
+            source_code: "ECB",
           }
         end
       end

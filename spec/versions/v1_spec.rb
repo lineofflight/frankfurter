@@ -106,4 +106,10 @@ describe Versions::V1 do
 
     _(last_response.headers["content-type"]).must_be(:end_with?, "charset=utf-8")
   end
+
+  it "filters by source parameter" do
+    get "/latest?source=ECB"
+
+    _(last_response).must_be(:ok?)
+  end
 end

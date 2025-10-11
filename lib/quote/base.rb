@@ -8,13 +8,14 @@ module Quote
 
     DEFAULT_BASE = "EUR"
 
-    attr_reader :amount, :base, :date, :symbols, :result
+    attr_reader :amount, :base, :date, :symbols, :result, :source
 
-    def initialize(date:, amount: 1.0, base: "EUR", symbols: nil)
-      @date = date
-      @amount = amount
-      @base = base
-      @symbols = symbols
+    def initialize(params)
+      @amount = params[:amount] || 1.0
+      @base = params[:base] || DEFAULT_BASE
+      @date = params[:date]
+      @symbols = params[:symbols]
+      @source = params.key?(:source) ? resolve_source(params[:base] || DEFAULT_BASE, params[:source]) : nil
       @result = {}
     end
 
@@ -43,6 +44,26 @@ module Quote
     end
 
     private
+
+    def resolve_source(from_currency, source_param = nil)
+      require "source"
+      require "currency"
+
+      if source_param
+        source = Source[source_param]
+        raise ArgumentError, "Source #{source_param} not found" unless source
+
+        source_param
+      else
+        source = Source.first(base_currency: from_currency)
+        raise ArgumentError, "No source found for currency #{from_currency}" unless source
+
+        has_data = Currency.by_source(source.code).limit(1).any?
+        raise ArgumentError, "No data available for #{from_currency} from #{source.code} source" unless has_data
+
+        source.code
+      end
+    end
 
     def data
       @data ||= fetch_data
