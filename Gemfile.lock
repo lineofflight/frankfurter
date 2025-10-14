@@ -74,7 +74,7 @@ GEM
     reline (0.6.2)
       io-console (~> 0.5)
     rexml (3.4.4)
-    roda (3.96.0)
+    roda (3.97.0)
       rack
     rubocop (1.81.1)
       json (~> 2.3)
