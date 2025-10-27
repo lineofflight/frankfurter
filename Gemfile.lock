@@ -5,9 +5,9 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.3)
     base64 (0.3.0)
-    bigdecimal (3.2.3)
+    bigdecimal (3.3.1)
     concurrent-ruby (1.3.5)
-    crack (1.0.0)
+    crack (1.0.1)
       bigdecimal
       rexml
     date (3.4.1)
@@ -134,7 +134,7 @@ GEM
       raindrops (~> 0.7)
     vcr (6.3.1)
       base64
-    webmock (3.25.1)
+    webmock (3.26.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
