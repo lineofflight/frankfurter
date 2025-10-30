@@ -38,7 +38,7 @@ GEM
       minitest (>= 4, < 6)
     money (6.19.0)
       i18n (>= 0.6.4, <= 2)
-    oj (3.16.11)
+    oj (3.16.12)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     ostruct (0.6.3)
