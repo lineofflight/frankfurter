@@ -134,7 +134,7 @@ GEM
       raindrops (~> 0.7)
     vcr (6.3.1)
       base64
-    webmock (3.26.0)
+    webmock (3.26.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
