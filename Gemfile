@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.4.6"
+ruby file: "mise.toml"
 
 gem "irb"
 gem "logger"
