@@ -10,12 +10,12 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
-    date (3.4.1)
-    erb (5.0.2)
+    date (3.5.0)
+    erb (5.1.3)
     et-orbi (1.4.0)
       tzinfo
-    fugit (1.11.2)
-      et-orbi (~> 1, >= 1.2.11)
+    fugit (1.12.1)
+      et-orbi (~> 1.4)
       raabro (~> 1.4)
     hashdiff (1.2.1)
     i18n (1.14.7)
@@ -48,7 +48,7 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
-    pp (0.6.2)
+    pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
     prism (1.6.0)
@@ -67,16 +67,17 @@ GEM
     rainbow (3.1.1)
     raindrops (0.20.1)
     rake (13.3.1)
-    rdoc (6.14.2)
+    rdoc (6.15.0)
       erb
       psych (>= 4.0.0)
+      tsort
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
     rexml (3.4.4)
     roda (3.97.0)
       rack
-    rubocop (1.81.6)
+    rubocop (1.81.7)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -124,6 +125,7 @@ GEM
     sqlite3 (2.7.4-x86_64-linux-gnu)
     sqlite3 (2.7.4-x86_64-linux-musl)
     stringio (3.1.7)
+    tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
