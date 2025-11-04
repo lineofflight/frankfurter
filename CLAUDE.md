@@ -96,9 +96,8 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 
 ## Development Notes
 
-- Ruby 3.4.6 required (see `Gemfile`)
+- Ruby (see `Gemfile`)
 - Linting: RuboCop with Shopify style guide
-- Dependencies managed via `Gemfile.lock`
 - Migrations in `db/migrate/`
 
 ## API Endpoints
