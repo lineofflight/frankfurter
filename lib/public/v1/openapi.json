@@ -303,13 +303,13 @@
         "additionalProperties": { "$ref": "#/components/schemas/rates" },
         "minProperties": 1,
         "example": {
-          "Mon Jan 04 1999 01:00:00 GMT+0100 (Central European Standard Time)": {
+          "1999-01-04": {
             "AUD": 1.91
           },
-          "Tue Jan 05 1999 01:00:00 GMT+0100 (Central European Standard Time)": {
+          "1999-01-05": {
             "AUD": 1.8944
           },
-          "Wed Jan 06 1999 01:00:00 GMT+0100 (Central European Standard Time)": {
+          "1999-01-06": {
             "AUD": 1.882
           }
         }
