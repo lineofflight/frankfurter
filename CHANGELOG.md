@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Return latest rates for future rates
 
+### Fixed
+
+- Do not round exchange rates when amount is 1 and base is EUR (fixes #173)
+
 ### Removed
 
 - Removed JSONP

@@ -30,6 +30,10 @@ module Quote
       base != "EUR"
     end
 
+    def should_round?
+      amount != 1.0 || must_rebase?
+    end
+
     def formatted
       raise NotImplementedError
     end
@@ -56,7 +60,8 @@ module Quote
       data.each_with_object(result) do |currency, result|
         date = currency[:date].to_date.to_s
         result[date] ||= {}
-        result[date][currency[:iso_code]] = round(amount * currency[:rate])
+        rate = amount * currency[:rate]
+        result[date][currency[:iso_code]] = should_round? ? round(rate) : rate
       end
     end
 

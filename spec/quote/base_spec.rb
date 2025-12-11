@@ -9,8 +9,12 @@ module Quote
       Class.new(Base)
     end
 
+    let(:date) do
+      Date.today
+    end
+
     let(:quote) do
-      klass.new(date: Date.today)
+      klass.new(date:)
     end
 
     it "requires data" do
@@ -51,11 +55,26 @@ module Quote
       end
     end
 
-    describe "when rebasing from an unavailable currency" do
-      let(:date) do
-        Date.parse("2000-01-01")
+    describe "without rebasing" do
+      let(:amount) { 1.0 }
+      let(:quote) do
+        klass.new(date:, amount:, base: "EUR")
       end
 
+      before do
+        def quote.fetch_data
+          [{ date:, iso_code: "INR", rate: 82.1234 }]
+        end
+      end
+
+      it "does not round rates" do
+        quote.perform
+
+        _(quote.result[date.to_s]["INR"]).must_equal(82.1234)
+      end
+    end
+
+    describe "when rebasing from an unavailable currency" do
       let(:quote) do
         klass.new(date:, base: "ILS")
       end
@@ -74,10 +93,6 @@ module Quote
     end
 
     describe "when rebasing and converting to an unavailable currency" do
-      let(:date) do
-        Date.today
-      end
-
       let(:quote) do
         klass.new(date:, base: "USD", symbols: ["FOO"])
       end
