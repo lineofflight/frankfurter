@@ -3,7 +3,9 @@
 %x(rake db:prepare)
 
 worker_process_count = (ENV["WORKER_PROCESSES"] || 4).to_i
+port = (ENV["PORT"] || 8000).to_i
 
+listen port, tcp_nopush: true
 preload_app true
 worker_processes worker_process_count
 timeout 10
