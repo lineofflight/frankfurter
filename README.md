@@ -13,6 +13,8 @@ The API is publicly available at <https://api.frankfurter.dev>.
 The simplest way to run Frankfurter locally is with Docker:
 
 ```bash
+docker build -t frankfurter:local .
+
 docker run -d -p 8000:8000 lineofflight/frankfurter
 ```
 
@@ -135,7 +137,7 @@ Frankfurter is built with Ruby. To contribute:
 
 - [x] Migrate to SQLite
 - [x] Add API versioning in path
-- [ ] Multiple Data Sources
+- [x] Multiple Data Sources (API with fallback to local sample data)
 - [ ] Add GraphQL endpoint
 - [ ] Deploy as a blockchain oracle
 
