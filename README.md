@@ -15,7 +15,7 @@ The simplest way to run Frankfurter locally is with Docker:
 ```bash
 docker build -t frankfurter:local .
 
-docker run -d -p 8000:8000 lineofflight/frankfurter
+docker run -d -p 8000:8000 --name frankfurter-local frankfurter:local
 ```
 
 Once the container is running, open your browser and go to `http://localhost:8000`.
