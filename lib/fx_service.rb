@@ -16,10 +16,10 @@ class FXService
 
   class << self
     attr_reader :cache, :cache_mutex
-  end
 
-  def self.fetch_range(start_date, end_date, from: "EUR", to: "USD")
-    new.fetch_range(start_date, end_date, from:, to:)
+    def fetch_range(start_date, end_date, from: "EUR", to: "USD")
+      new.fetch_range(start_date, end_date, from:, to:)
+    end
   end
 
   def fetch_range(start_date, end_date, from: "EUR", to: "USD")
@@ -32,15 +32,15 @@ class FXService
     data = fetch_with_retry(url)
 
     result = if data.nil?
-               parse_fallback
-             else
-               parse_response(data)
-             end
+      parse_fallback
+    else
+      parse_response(data)
+    end
 
     set_cache(cache_key, result)
     result
   rescue StandardError => e
-    warn "Error fetching FX data: #{e.message}"
+    warn("Error fetching FX data: #{e.message}")
     parse_fallback
   end
 
@@ -51,22 +51,20 @@ class FXService
     response = nil
 
     retries.times do |attempt|
-      begin
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.read_timeout = 5
-        http.open_timeout = 5
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.read_timeout = 5
+      http.open_timeout = 5
 
-        request = Net::HTTP::Get.new(uri)
-        response = http.request(request)
+      request = Net::HTTP::Get.new(uri)
+      response = http.request(request)
 
-        return response.body if response.code == "200"
+      return response.body if response.code == "200"
 
-        sleep RETRY_DELAY * (attempt + 1)
-      rescue StandardError => e
-        warn "Attempt #{attempt + 1} failed: #{e.message}"
-        sleep RETRY_DELAY * (attempt + 1) if attempt < retries - 1
-      end
+      sleep(RETRY_DELAY * (attempt + 1))
+    rescue StandardError => e
+      warn("Attempt #{attempt + 1} failed: #{e.message}")
+      sleep(RETRY_DELAY * (attempt + 1)) if attempt < retries - 1
     end
 
     nil
@@ -78,7 +76,7 @@ class FXService
       base: data["base"],
       start_date: data["start_date"],
       end_date: data["end_date"],
-      rates: data["rates"] || {}
+      rates: data["rates"] || {},
     }
   end
 
@@ -90,16 +88,16 @@ class FXService
       base: data["base"],
       start_date: data["start_date"],
       end_date: data["end_date"],
-      rates: data["rates"] || {}
+      rates: data["rates"] || {},
     }
   end
 
   def get_from_cache(key)
     self.class.cache_mutex.synchronize do
       entry = self.class.cache[key]
-      return nil unless entry
+      return unless entry
 
-      return nil if Time.now - entry[:timestamp] > CACHE_TTL
+      return if Time.now - entry[:timestamp] > CACHE_TTL
 
       entry[:data]
     end
@@ -109,7 +107,7 @@ class FXService
     self.class.cache_mutex.synchronize do
       self.class.cache[key] = {
         data:,
-        timestamp: Time.now
+        timestamp: Time.now,
       }
     end
   end

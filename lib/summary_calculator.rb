@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class SummaryCalculator
-  def self.calculate(fx_data, breakdown: nil)
-    new(fx_data, breakdown:).calculate
+  class << self
+    def calculate(fx_data, breakdown: nil)
+      new(fx_data, breakdown:).calculate
+    end
   end
 
   def initialize(fx_data, breakdown: nil)
@@ -22,7 +24,7 @@ class SummaryCalculator
       base: @fx_data[:base],
       start_date: @fx_data[:start_date],
       end_date: @fx_data[:end_date],
-      totals:
+      totals:,
     }
 
     result[:breakdown] = daily_data if @breakdown == "day"
@@ -41,7 +43,7 @@ class SummaryCalculator
       {
         date:,
         rate:,
-        pct_change:
+        pct_change:,
       }
     end
   end
@@ -51,26 +53,26 @@ class SummaryCalculator
     end_rate = extract_rate(@rates[sorted_dates.last])
     total_pct_change = calculate_pct_change(start_rate, end_rate)
 
-    all_rates = sorted_dates.map { |d| extract_rate(@rates[d]) }.compact
+    all_rates = sorted_dates.filter_map { |d| extract_rate(@rates[d]) }
     mean_rate = all_rates.empty? ? nil : (all_rates.sum.to_f / all_rates.size)
 
     {
       start_rate:,
       end_rate:,
       total_pct_change:,
-      mean_rate:
+      mean_rate:,
     }
   end
 
   def extract_rate(rate_data)
-    return nil if rate_data.nil?
+    return if rate_data.nil?
 
     rate_data.is_a?(Hash) ? rate_data.values.first : rate_data
   end
 
   def calculate_pct_change(prev_rate, current_rate)
-    return nil if prev_rate.nil? || current_rate.nil?
-    return nil if prev_rate.zero?
+    return if prev_rate.nil? || current_rate.nil?
+    return if prev_rate.zero?
 
     ((current_rate - prev_rate) / prev_rate * 100).round(4)
   end
@@ -84,8 +86,8 @@ class SummaryCalculator
         start_rate: nil,
         end_rate: nil,
         total_pct_change: nil,
-        mean_rate: nil
-      }
+        mean_rate: nil,
+      },
     }
   end
 end

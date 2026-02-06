@@ -208,27 +208,27 @@ class App < Roda
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '<p>Loading...</p>';
             resultsDiv.classList.add('show');
-            
+
             try {
               const response = await fetch('/summary?' + params.toString());
               const data = await response.json();
-              
+
               if (!response.ok) {
                 resultsDiv.innerHTML = '<div class="error">' + data.error + '</div>';
                 return;
               }
-              
+
               let html = '<h2>Summary</h2>';
               html += '<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>';
               html += '<tr class="totals"><td>Start Rate</td><td>' + (data.totals.start_rate || 'N/A') + '</td></tr>';
               html += '<tr class="totals"><td>End Rate</td><td>' + (data.totals.end_rate || 'N/A') + '</td></tr>';
-              html += '<tr class="totals"><td>Total % Change</td><td>' + 
-                (data.totals.total_pct_change !== null ? 
-                  '<span class="' + (data.totals.total_pct_change >= 0 ? 'positive' : 'negative') + '">' + 
+              html += '<tr class="totals"><td>Total % Change</td><td>' +
+                (data.totals.total_pct_change !== null ?
+                  '<span class="' + (data.totals.total_pct_change >= 0 ? 'positive' : 'negative') + '">' +
                   data.totals.total_pct_change + '%</span>' : 'N/A') + '</td></tr>';
               html += '<tr class="totals"><td>Mean Rate</td><td>' + (data.totals.mean_rate || 'N/A') + '</td></tr>';
               html += '</tbody></table>';
-              
+
               if (data.breakdown && data.breakdown.length > 0) {
                 html += '<h3>Daily Breakdown</h3>';
                 html += '<table><thead><tr><th>Date</th><th>Rate</th><th>% Change</th></tr></thead><tbody>';
@@ -237,13 +237,13 @@ class App < Roda
                   html += '<tr>';
                   html += '<td>' + day.date + '</td>';
                   html += '<td>' + day.rate + '</td>';
-                  html += '<td>' + (day.pct_change !== null ? 
+                  html += '<td>' + (day.pct_change !== null ?
                     '<span class="' + pctClass + '">' + day.pct_change + '%</span>' : 'N/A') + '</td>';
                   html += '</tr>';
                 });
                 html += '</tbody></table>';
               }
-              
+
               resultsDiv.innerHTML = html;
             } catch (error) {
               resultsDiv.innerHTML = '<div class="error">Error: ' + error.message + '</div>';
