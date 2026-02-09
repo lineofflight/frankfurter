@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-slim
+FROM ruby:4.0.1-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
