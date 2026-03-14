@@ -2,6 +2,7 @@
 
 require "bank/provider"
 require "bank/providers/ecb"
+require "bank/providers/nbu"
 
 module Bank
   class Importer
@@ -9,7 +10,7 @@ module Bank
       attr_writer :providers
 
       def providers
-        @providers ||= [Bank::Providers::ECB.new].freeze
+        @providers ||= [Bank::Providers::ECB.new, Bank::Providers::NBU.new].freeze
       end
     end
 
