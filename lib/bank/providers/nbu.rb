@@ -42,6 +42,7 @@ module Bank
 
           date = Date.strptime(row.fetch("exchangedate"), "%d.%m.%Y")
           next if date > end_date
+          next if date.saturday? || date.sunday?
 
           {
             date: date,
@@ -65,11 +66,15 @@ module Bank
       end
 
       def extract_rate(row)
+        units = row.fetch("units", 1).to_f
+        rate_per_unit = row["rate_per_unit"]
         rate = row["rate"]
-        rate_per_unit = row.fetch("rate_per_unit", 1).to_f
-        return if rate.nil? || rate_per_unit.zero?
+        return if units.zero?
 
-        rate.to_f / rate_per_unit
+        return rate_per_unit.to_f if rate_per_unit
+        return if rate.nil?
+
+        rate.to_f / units
       end
     end
   end

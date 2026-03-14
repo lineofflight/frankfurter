@@ -24,13 +24,22 @@ describe Bank::Providers::NBU do
               "exchangedate" => "13.03.2026",
               "cc" => "EUR",
               "rate" => 45.0912,
-              "rate_per_unit" => 1,
+              "rate_per_unit" => 45.0912,
+              "units" => 1,
             },
             {
               "exchangedate" => "16.03.2026",
               "cc" => "EUR",
               "rate" => 45.3201,
-              "rate_per_unit" => 1,
+              "rate_per_unit" => 45.3201,
+              "units" => 1,
+            },
+            {
+              "exchangedate" => "14.03.2026",
+              "cc" => "EUR",
+              "rate" => 45.5000,
+              "rate_per_unit" => 45.5000,
+              "units" => 1,
             },
           ],
         ),
@@ -59,6 +68,13 @@ describe Bank::Providers::NBU do
         },
       ],
     )
+  end
+
+  it "skips weekend effective dates" do
+    provider = described_class.new
+    result = provider.historical
+
+    _(result.map { |day| day[:date] }).wont_include(Date.new(2026, 3, 14))
   end
 
   it "returns the last available row for current rates" do
