@@ -4,6 +4,7 @@ require "bank/provider"
 require "bank/providers/bob"
 require "bank/providers/cba"
 require "bank/providers/ecb"
+require "bank/providers/hacienda_cr"
 require "bank/providers/nbu"
 require "bank/providers/nbrb"
 
@@ -19,6 +20,7 @@ module Bank
           Bank::Providers::CBA.new,
           Bank::Providers::NBRB.new,
           Bank::Providers::BOB.new,
+          Bank::Providers::HaciendaCR.new,
         ].freeze
       end
     end

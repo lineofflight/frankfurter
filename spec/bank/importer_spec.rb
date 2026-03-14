@@ -75,4 +75,10 @@ describe Bank::Importer do
       ],
     )
   end
+
+  it "includes the Costa Rica provider by default" do
+    provider_classes = Bank::Importer.providers.map(&:class)
+
+    _(provider_classes).must_include(Bank::Providers::HaciendaCR)
+  end
 end
