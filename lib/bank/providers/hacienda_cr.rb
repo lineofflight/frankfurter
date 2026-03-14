@@ -30,11 +30,11 @@ module Bank
       end
 
       def ninety_days
-        range(Date.today - 120, Date.today, ecb_provider.ninety_days)
+        append_current_quote(range(Date.today - 120, Date.today, ecb_provider.ninety_days))
       end
 
       def historical
-        range(Date.new(1999, 1, 4), Date.today, ecb_provider.historical)
+        append_current_quote(range(Date.new(1999, 1, 4), Date.today, ecb_provider.historical))
       end
 
       def saved_data
@@ -76,7 +76,19 @@ module Bank
           h: end_date.to_s,
         )
 
-        Oj.load(Net::HTTP.get(url))
+        rows = Oj.load(Net::HTTP.get(url))
+        return rows if rows.is_a?(Array)
+        return rows.fetch("data", []) if rows.is_a?(Hash)
+
+        []
+      end
+
+      def append_current_quote(days)
+        latest = current.first
+        return days unless latest
+        return days if days.any? { |day| day[:date] == latest[:date] }
+
+        (days + [latest]).sort_by { |day| day[:date] }
       end
     end
   end

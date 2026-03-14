@@ -34,6 +34,7 @@ module Bank
       private
 
       def parse(csv)
+        csv = csv.dup.force_encoding(Encoding::UTF_8)
         rows = csv.delete_prefix("\uFEFF").lines(chomp: true)
         headers = rows.shift&.split(",")
         eur_index = headers&.index("EUR")

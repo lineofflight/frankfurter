@@ -4,16 +4,23 @@ require_relative "../../helper"
 require "bank/providers/bob"
 
 describe Bank::Providers::BOB do
+  let(:csv_body) do
+    String.new(
+      <<~CSV,
+        \uFEFFDate,CHN,EUR,GBP,USD,SDR,YEN,ZAR
+        "13 Mar 2026",0.5188,0.0655,0.0565,0.0753,0.0554,12.0000,1.2666
+        "12 Mar 2026",0.5228,0.0658,0.0568,0.0760,0.0558,12.0800,1.2581
+      CSV
+      encoding: Encoding::ASCII_8BIT,
+    )
+  end
+
   before do
     stub_request(:get, "https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv")
       .to_return(
         status: 200,
         headers: { "Content-Type" => "text/csv" },
-        body: <<~CSV,
-          Date,CHN,EUR,GBP,USD,SDR,YEN,ZAR
-          "13 Mar 2026",0.5188,0.0655,0.0565,0.0753,0.0554,12.0000,1.2666
-          "12 Mar 2026",0.5228,0.0658,0.0568,0.0760,0.0558,12.0800,1.2581
-        CSV
+        body: csv_body,
       )
   end
 
