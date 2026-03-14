@@ -42,7 +42,7 @@ describe Bank::Importer do
       ],
     )
 
-    result = described_class.new(providers: [primary, fallback]).current
+    result = Bank::Importer.new(providers: [primary, fallback]).current
 
     _(result).must_equal(
       [
@@ -66,7 +66,7 @@ describe Bank::Importer do
       ],
     )
 
-    result = described_class.new(providers: [provider_one, provider_two]).historical
+    result = Bank::Importer.new(providers: [provider_one, provider_two]).historical
 
     _(result).must_equal(
       [

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require "bank/provider"
+require "bank/providers/bob"
+require "bank/providers/cba"
 require "bank/providers/ecb"
 require "bank/providers/nbu"
+require "bank/providers/nbrb"
 
 module Bank
   class Importer
@@ -10,7 +13,13 @@ module Bank
       attr_writer :providers
 
       def providers
-        @providers ||= [Bank::Providers::ECB.new, Bank::Providers::NBU.new].freeze
+        @providers ||= [
+          Bank::Providers::ECB.new,
+          Bank::Providers::NBU.new,
+          Bank::Providers::CBA.new,
+          Bank::Providers::NBRB.new,
+          Bank::Providers::BOB.new,
+        ].freeze
       end
     end
 

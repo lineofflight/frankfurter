@@ -47,13 +47,13 @@ describe Bank::Providers::NBU do
   end
 
   it "reports UAH as the supported currency" do
-    provider = described_class.new
+    provider = Bank::Providers::NBU.new
 
     _(provider.supported_currencies).must_equal(["UAH"])
   end
 
   it "parses historical EUR quotes into UAH rates" do
-    provider = described_class.new
+    provider = Bank::Providers::NBU.new
     result = provider.historical
 
     _(result).must_equal(
@@ -71,14 +71,14 @@ describe Bank::Providers::NBU do
   end
 
   it "skips weekend effective dates" do
-    provider = described_class.new
+    provider = Bank::Providers::NBU.new
     result = provider.historical
 
     _(result.map { |day| day[:date] }).wont_include(Date.new(2026, 3, 14))
   end
 
   it "returns the last available row for current rates" do
-    provider = described_class.new
+    provider = Bank::Providers::NBU.new
     days = [
       {
         date: Date.new(2026, 3, 13),

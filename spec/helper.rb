@@ -6,7 +6,7 @@ require "minitest/autorun"
 require "minitest/around/spec"
 require "minitest/focus"
 require "vcr"
-require "webmock"
+require "webmock/minitest"
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr_cassettes"
