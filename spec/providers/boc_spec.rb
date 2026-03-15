@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
 require_relative "../helper"
-require "providers/ecb"
+require "providers/boc"
 
 module Providers
-  describe ECB do
+  describe BOC do
     before do
       Currency.dataset.delete
     end
 
     before do
-      VCR.insert_cassette("ecb")
+      VCR.insert_cassette("boc")
     end
 
     after do
       VCR.eject_cassette
     end
 
-    let(:provider) { ECB.new }
+    let(:provider) { BOC.new }
 
     def count_unique_dates
       Currency.select(:date).distinct.count
@@ -30,9 +30,9 @@ module Providers
     end
 
     it "imports historical rates" do
-      provider.historical.import
+      provider.historical(start_date: "2025-01-01").import
 
-      _(count_unique_dates).must_be(:>, 90)
+      _(count_unique_dates).must_be(:>, 1)
     end
 
     it "stores multiple currencies per date" do

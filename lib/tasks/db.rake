@@ -14,14 +14,14 @@ namespace :db do
     Sequel::IntegerMigrator.new(db, dir, opts).run
   end
 
-  desc "Run database migrations and seed data"
-  task prepare: ["db:migrate", "rates:all"]
+  desc "Run database migrations and backfill all providers"
+  task prepare: ["db:migrate", "ecb:backfill", "boc:backfill"]
 
   namespace :test do
     desc "Run database migrations and seed with saved data"
     task :prepare do
       Rake::Task["db:migrate"].invoke
-      Rake::Task["rates:seed_with_saved_data"].invoke
+      Rake::Task["ecb:seed"].invoke
     end
   end
 end

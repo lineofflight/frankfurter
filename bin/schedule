@@ -5,8 +5,16 @@ require "rufus-scheduler"
 
 scheduler = Rufus::Scheduler.new
 
+# ECB publishes around 16:00 CET (15:00-17:00 UTC)
+# https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
 scheduler.cron("*/30 15,16,17 * * 1-5") do
-  %x(rake rates:current)
+  %x(rake ecb:import)
+end
+
+# BOC publishes by 16:30 ET (20:30-21:30 UTC)
+# https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
+scheduler.cron("*/30 20,21,22 * * 1-5") do
+  %x(rake boc:import)
 end
 
 scheduler.join
