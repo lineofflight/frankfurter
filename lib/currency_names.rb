@@ -9,8 +9,8 @@ class CurrencyNames
   end
 
   def formatted
-    iso_codes.each_with_object({}) do |iso_code, result|
-      result[iso_code] = Money::Currency.find(iso_code).name
+    iso_codes.to_h do |iso_code|
+      [iso_code, Money::Currency.find(iso_code).name]
     end
   end
 

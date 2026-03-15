@@ -42,9 +42,9 @@ module Bank
     def each
       @document.locate("gesmes:Envelope/Cube/Cube").each do |day|
         yield(date: Date.parse(day["time"]),
-              rates: day.nodes.each_with_object({}) do |currency, rates|
-                rates[currency[:currency]] = Float(currency[:rate])
-              end)
+              rates: day.nodes.to_h do |currency|
+                       [currency[:currency], Float(currency[:rate])]
+                     end)
       end
     end
   end
