@@ -50,7 +50,7 @@ describe "the app" do
   end
 
   it "does not return stale dates" do
-    Currency.db.transaction do
+    Sequel::Model.db.transaction(savepoint: true) do
       get "/v1/latest"
       date = json["date"]
       Currency.where(date: Currency.nearest_date_with_rates(Date.today)).delete
