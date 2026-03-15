@@ -1,54 +1,32 @@
 # frozen_string_literal: true
 
-require "bank/feed"
-require "currency"
+require "providers/ecb"
 
 module Bank
   class << self
     def fetch_all!
-      data = normalize_data(Feed.historical.to_a)
-      Currency.dataset.insert_conflict.multi_insert(data)
-    end
-
-    def fetch_ninety_days!
-      data = normalize_data(Feed.ninety_days.to_a)
-      Currency.dataset.insert_conflict.multi_insert(data)
+      ecb.historical.import
     end
 
     def fetch_current!
-      data = normalize_data(Feed.current.to_a)
-      # Use multi_insert only if we have multiple records
-      if data.is_a?(Array)
-        Currency.dataset.insert_conflict.multi_insert(data)
-      end
+      ecb.current.import
     end
 
     def replace_all!
-      data = normalize_data(Feed.historical.to_a)
       Currency.dataset.delete
-      Currency.multi_insert(data)
+      ecb.historical.import
     end
 
     def seed_with_saved_data!
-      data = normalize_data(Feed.saved_data.to_a)
+      xml = File.read(File.join(__dir__, "bank", "eurofxref-hist.xml"))
       Currency.dataset.delete
-      Currency.multi_insert(data)
+      Providers::ECB.new(dataset: ecb.parse(xml)).import
     end
 
     private
 
-    def normalize_data(days)
-      days.flat_map do |day|
-        day[:rates].map do |quote, rate|
-          {
-            date: day[:date],
-            base: "EUR",
-            quote: quote,
-            rate: rate,
-            source: "ECB",
-          }
-        end
-      end
+    def ecb
+      Providers::ECB.new
     end
   end
 end
