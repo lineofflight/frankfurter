@@ -3,9 +3,10 @@
 require "oj"
 require "roda"
 
-require "currency_names"
-require "query"
-require "quote"
+require "versions/v1/currency_names"
+require "versions/v1/query"
+require "versions/v1/quote/end_of_day"
+require "versions/v1/quote/interval"
 
 module Versions
   class V1 < Roda
