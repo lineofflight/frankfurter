@@ -81,4 +81,10 @@ describe Bank::Importer do
 
     _(provider_classes).must_include(Bank::Providers::HaciendaCR)
   end
+
+  it "includes the Russia provider by default" do
+    provider_classes = Bank::Importer.providers.map(&:class)
+
+    _(provider_classes).must_include(Bank::Providers::CBR)
+  end
 end
