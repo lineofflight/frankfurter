@@ -61,7 +61,7 @@ module Quote
         date = currency[:date].to_date.to_s
         result[date] ||= {}
         rate = amount * currency[:rate]
-        result[date][currency[:iso_code]] = should_round? ? round(rate) : rate
+        result[date][currency[:quote]] = should_round? ? round(rate) : rate
       end
     end
 
@@ -73,8 +73,8 @@ module Quote
           result.delete(date)
         else
           result[date] = rates.sort
-            .map! do |iso_code, rate|
-            [iso_code, round(amount * rate / divisor)]
+            .map! do |quote, rate|
+            [quote, round(amount * rate / divisor)]
           end
             .to_h
         end

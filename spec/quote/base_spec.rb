@@ -63,7 +63,7 @@ module Quote
 
       before do
         def quote.fetch_data
-          [{ date:, iso_code: "INR", rate: 82.1234 }]
+          [{ date:, quote: "INR", rate: 82.1234 }]
         end
       end
 
@@ -81,7 +81,7 @@ module Quote
 
       before do
         def quote.fetch_data
-          [{ date:, iso_code: "USD", rate: 1 }]
+          [{ date:, quote: "USD", rate: 1 }]
         end
       end
 
@@ -99,7 +99,7 @@ module Quote
 
       before do
         def quote.fetch_data
-          [{ date:, iso_code: "USD", rate: 1 }]
+          [{ date:, quote: "USD", rate: 1 }]
         end
       end
 

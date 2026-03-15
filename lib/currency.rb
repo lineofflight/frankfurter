@@ -18,11 +18,11 @@ class Currency < Sequel::Model
         interval.begin,
       ))
         .where(Sequel.expr(:date) <= interval.end)
-        .order(Sequel.asc(:date), Sequel.asc(:iso_code))
+        .order(Sequel.asc(:date), Sequel.asc(:quote))
     end
 
-    def only(*iso_codes)
-      where(iso_code: iso_codes)
+    def only(*quotes)
+      where(quote: quotes)
     end
 
     def sample(precision)
@@ -49,10 +49,10 @@ class Currency < Sequel::Model
         raise ArgumentError, "Invalid precision: #{precision}. Must be one of: week, month, year, day"
       end
 
-      select(:iso_code)
+      select(:quote)
         .select_append { avg(rate).as(rate) }
         .select_append(sampler.as(:date))
-        .group(:iso_code, sampler)
+        .group(:quote, sampler)
         .order(:date)
     end
 

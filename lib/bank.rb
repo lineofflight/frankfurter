@@ -39,11 +39,13 @@ module Bank
 
     def normalize_data(days)
       days.flat_map do |day|
-        day[:rates].map do |iso_code, rate|
+        day[:rates].map do |quote, rate|
           {
             date: day[:date],
-            iso_code: iso_code,
+            base: "EUR",
+            quote: quote,
             rate: rate,
+            source: "ECB",
           }
         end
       end

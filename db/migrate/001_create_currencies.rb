@@ -3,11 +3,13 @@
 Sequel.migration do
   up do
     create_table :currencies do
-      Date    :date
-      String  :iso_code
-      Float   :rate
+      Date    :date,   null: false
+      String  :base,   null: false
+      String  :quote,  null: false
+      Float   :rate,   null: false
+      String  :source, null: false
 
-      index [:date, :iso_code], unique: true
+      index [:source, :date, :quote], unique: true
     end
   end
 

@@ -41,7 +41,7 @@ db/migrate/            # Sequel migrations
 
 ### Data Management (lib/bank.rb, lib/bank/feed.rb)
 - Fetches rates from ECB XML feeds
-- Normalizes data: `{ date, iso_code, rate }`
+- Normalizes data: `{ date, base, quote, rate, source }`
 - Methods: `fetch_all!`, `fetch_current!`, `fetch_ninety_days!`
 - Uses upserts (`insert_conflict`) for idempotent updates
 
@@ -59,10 +59,10 @@ db/migrate/            # Sequel migrations
 
 SQLite database with single `currencies` table:
 - `date`: DATE
-- `iso_code`: VARCHAR (currency code)
-- `rate`: DECIMAL (exchange rate vs EUR)
-
-Base currency is EUR from ECB data.
+- `base`: VARCHAR (source's native base currency)
+- `quote`: VARCHAR (quoted currency code)
+- `rate`: DECIMAL (exchange rate)
+- `source`: VARCHAR (data provider identifier)
 
 ## Testing
 

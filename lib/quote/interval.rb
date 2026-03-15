@@ -25,7 +25,7 @@ module Quote
     def fetch_data
       require "currency"
 
-      scope = Currency.between(date)
+      scope = Currency.where(source: "ECB").between(date)
       scope = scope.only(*(symbols + [base])) if symbols
 
       scope.naked
