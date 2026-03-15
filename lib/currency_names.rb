@@ -17,7 +17,7 @@ class CurrencyNames
   private
 
   def iso_codes
-    currencies.map(&:iso_code).append("EUR").sort
+    currencies.map(&:quote).append("EUR").sort
   end
 
   def currencies
@@ -25,6 +25,6 @@ class CurrencyNames
   end
 
   def find_currencies
-    Currency.latest.all
+    Currency.where(source: "ECB").latest.all
   end
 end

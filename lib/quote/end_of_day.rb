@@ -25,7 +25,7 @@ module Quote
     def fetch_data
       require "currency"
 
-      scope = Currency.latest(date)
+      scope = Currency.where(source: "ECB").latest(date)
       scope = scope.only(*(symbols + [base])) if symbols
 
       scope.naked

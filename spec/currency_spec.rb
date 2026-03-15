@@ -76,7 +76,7 @@ describe Currency do
       iso_codes = ["CAD", "USD"]
       data = Currency.latest.only(*iso_codes).all
 
-      _(data.map(&:iso_code).sort).must_equal(iso_codes)
+      _(data.map(&:quote).sort).must_equal(iso_codes)
     end
 
     it "returns nothing if no matches" do

@@ -38,25 +38,10 @@ describe Bank do
     _(count_unique_dates).must_equal(count)
   end
 
-  it "fetches rates for last 90 days" do
-    Bank.fetch_ninety_days!
-
-    _(count_unique_dates).must_be(:>, 1)
-    _(count_unique_dates).must_be(:<, 90)
-  end
-
   it "seeds rates with saved data" do
     Bank.seed_with_saved_data!
 
     _(count_unique_dates).must_be(:>, 90)
-  end
-
-  it "does not duplicate when fetching rates for last 90 days" do
-    Bank.fetch_ninety_days!
-    count = count_unique_dates
-    Bank.fetch_ninety_days!
-
-    _(count_unique_dates).must_equal(count)
   end
 
   it "fetches current rates" do

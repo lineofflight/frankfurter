@@ -7,12 +7,6 @@ namespace :rates do
     Bank.fetch_all!
   end
 
-  desc "Load last 90 days"
-  task :ninety_days do
-    require "bank"
-    Bank.fetch_ninety_days!
-  end
-
   desc "Load current"
   task :current do
     require "bank"
