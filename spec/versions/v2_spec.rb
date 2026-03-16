@@ -56,8 +56,8 @@ describe Versions::V2 do
     _(eur["rate"]).must_be_kind_of(Float)
   end
 
-  it "filters symbols" do
-    get "/rates?symbols=USD,GBP"
+  it "filters quotes" do
+    get "/rates?quotes=USD,GBP"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)
@@ -67,7 +67,14 @@ describe Versions::V2 do
   end
 
   it "filters by provider" do
-    get "/rates?provider=ecb"
+    get "/rates?providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+  end
+
+  it "filters by multiple providers" do
+    get "/rates?providers=ecb,tcmb"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)

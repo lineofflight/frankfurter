@@ -121,10 +121,10 @@ rake db:prepare    # Run migrations and backfill all providers
 ```
 GET /v2/rates                                # latest blended rates
 GET /v2/rates?base=USD                       # rebased
-GET /v2/rates?symbols=USD,GBP               # filtered
+GET /v2/rates?quotes=USD,GBP                # filtered
 GET /v2/rates?date=2024-01-15               # specific date
 GET /v2/rates?from=2024-01-01&to=2024-01-31 # date range
-GET /v2/rates?provider=ecb                   # single provider
+GET /v2/rates?providers=ecb,tcmb             # filter by providers
 GET /v2/currencies                           # currencies with names and providers
 GET /v2/providers                            # available data providers
 ```

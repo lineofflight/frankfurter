@@ -10,8 +10,8 @@ module Versions
 
       def initialize(params)
         @base = params[:base]&.upcase || "EUR"
-        @symbols = params[:symbols]&.upcase&.split(",")
-        @provider = params[:provider]&.upcase
+        @quotes = params[:quotes]&.upcase&.split(",")
+        @providers = params[:providers]&.upcase&.split(",")
         @raw_params = params
         @date = parse_date(params[:date])
         @start_date = parse_date(params[:from])
@@ -60,7 +60,7 @@ module Versions
         results = Sequel::Model.db.fetch(sql, **bind_params).all
 
         results.filter_map do |r|
-          next if @symbols && !@symbols.include?(r[:quote])
+          next if @quotes && !@quotes.include?(r[:quote])
 
           { date: r[:date].to_s, base: @base, quote: r[:quote], rate: round(r[:rate]) }
         end
@@ -111,7 +111,10 @@ module Versions
       end
 
       def provider_clause
-        @provider ? "AND c.provider = :provider" : ""
+        return "" unless @providers
+
+        placeholders = @providers.each_with_index.map { |_, i| ":provider_#{i}" }.join(", ")
+        "AND c.provider IN (#{placeholders})"
       end
 
       def round(value)
@@ -135,7 +138,7 @@ module Versions
         params[:date] = @date.to_s if @date
         params[:start_date] = @start_date.to_s if @start_date
         params[:end_date] = (@end_date || Date.today).to_s if @start_date
-        params[:provider] = @provider if @provider
+        @providers&.each_with_index { |p, i| params[:"provider_#{i}"] = p }
 
         params
       end

@@ -28,8 +28,8 @@
           { "$ref": "#/components/parameters/from" },
           { "$ref": "#/components/parameters/to" },
           { "$ref": "#/components/parameters/base" },
-          { "$ref": "#/components/parameters/symbols" },
-          { "$ref": "#/components/parameters/provider" }
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/providers" }
         ],
         "responses": {
           "200": {
@@ -142,8 +142,8 @@
           "example": "USD"
         }
       },
-      "symbols": {
-        "name": "symbols",
+      "quotes": {
+        "name": "quotes",
         "in": "query",
         "description": "Comma-separated list of quote currencies to include",
         "required": false,
@@ -152,14 +152,14 @@
           "example": "USD,GBP,JPY"
         }
       },
-      "provider": {
-        "name": "provider",
+      "providers": {
+        "name": "providers",
         "in": "query",
-        "description": "Filter by data provider",
+        "description": "Comma-separated list of data providers to include",
         "required": false,
         "schema": {
           "type": "string",
-          "example": "ECB"
+          "example": "ECB,TCMB"
         }
       }
     },
