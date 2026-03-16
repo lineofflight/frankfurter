@@ -18,21 +18,18 @@ module Versions
         @error = validate
       end
 
-      def formatted
-        {
-          base: @base,
-          rates: query_rates,
-        }
+      def to_a
+        @results ||= fetch_rates
       end
 
       def not_found?
-        query_rates.empty?
+        to_a.empty?
       end
 
       def cache_key
         return if not_found?
 
-        Digest::MD5.hexdigest(query_rates.last[:date].to_s)
+        Digest::MD5.hexdigest(to_a.last[:date].to_s)
       end
 
       private
@@ -51,22 +48,14 @@ module Versions
         nil
       end
 
-      def query_rates
-        @query_rates ||= fetch_rates
-      end
-
       def fetch_rates
         results = Sequel::Model.db.fetch(sql, **bind_params).all
 
-        results
-          .group_by { |r| r[:date] }
-          .sort
-          .map do |date, rows|
-            rates = rows.to_h { |r| [r[:quote], round(r[:rate])] }
-            rates = rates.slice(*@symbols) if @symbols
+        results.filter_map do |r|
+          next if @symbols && !@symbols.include?(r[:quote])
 
-            { date: date.to_s }.merge(rates)
-          end
+          { date: r[:date].to_s, base: @base, quote: r[:quote], rate: round(r[:rate]) }
+        end
       end
 
       def sql
