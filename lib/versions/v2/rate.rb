@@ -68,35 +68,35 @@ module Versions
 
       def sql
         <<~SQL
-          SELECT
-            c.date,
-            c.quote,
-            AVG(c.rate / COALESCE(base_rate.rate, 1.0)) AS rate
-          FROM rates c
-          LEFT JOIN rates base_rate
-            ON base_rate.date = c.date
-            AND base_rate.provider = c.provider
-            AND base_rate.quote = :base
-          WHERE #{date_clause}
-            AND c.quote != :base
-            AND (base_rate.rate IS NOT NULL OR c.base = :base)
-            #{provider_clause}
-          GROUP BY c.date, c.quote
+          SELECT date, quote, AVG(rate) AS rate FROM (
+            SELECT
+              c.date,
+              c.quote,
+              c.rate / COALESCE(base_rate.rate, 1.0) AS rate
+            FROM rates c
+            LEFT JOIN rates base_rate
+              ON base_rate.date = c.date
+              AND base_rate.provider = c.provider
+              AND base_rate.quote = :base
+            WHERE #{date_clause}
+              AND c.quote != :base
+              AND (base_rate.rate IS NOT NULL OR c.base = :base)
+              #{provider_clause}
 
-          UNION ALL
+            UNION ALL
 
-          SELECT
-            c.date,
-            c.base AS quote,
-            AVG(1.0 / c.rate) AS rate
-          FROM rates c
-          WHERE #{date_clause}
-            AND c.quote = :base
-            AND c.base != :base
-            #{provider_clause}
-          GROUP BY c.date, c.base
-
-          ORDER BY 1, 2
+            SELECT
+              c.date,
+              c.base AS quote,
+              1.0 / c.rate AS rate
+            FROM rates c
+            WHERE #{date_clause}
+              AND c.quote = :base
+              AND c.base != :base
+              #{provider_clause}
+          )
+          GROUP BY date, quote
+          ORDER BY date, quote
         SQL
       end
 
@@ -106,15 +106,24 @@ module Versions
         elsif @start_date
           "c.date >= :start_date AND c.date <= :end_date"
         else
-          "c.date = (SELECT date FROM rates ORDER BY date DESC LIMIT 1)"
+          "c.date = (SELECT date FROM rates #{latest_provider_filter} ORDER BY date DESC LIMIT 1)"
         end
+      end
+
+      def provider_placeholders
+        @providers&.each_with_index&.map { |_, i| ":provider_#{i}" }&.join(", ")
       end
 
       def provider_clause
         return "" unless @providers
 
-        placeholders = @providers.each_with_index.map { |_, i| ":provider_#{i}" }.join(", ")
-        "AND c.provider IN (#{placeholders})"
+        "AND c.provider IN (#{provider_placeholders})"
+      end
+
+      def latest_provider_filter
+        return "" unless @providers
+
+        "WHERE provider IN (#{provider_placeholders})"
       end
 
       def round(value)
