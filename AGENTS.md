@@ -57,14 +57,14 @@ db/seeds/                     # Offline seed data
 
 ## Database
 
-SQLite database with single `currencies` table:
+SQLite database with single `rates` table:
 - `date`: DATE
-- `base`: VARCHAR (source's native base currency)
+- `base`: VARCHAR (provider's native base currency)
 - `quote`: VARCHAR (quoted currency code)
 - `rate`: DECIMAL (exchange rate)
-- `source`: VARCHAR (data provider identifier)
+- `provider`: VARCHAR (data provider identifier)
 
-Unique index on `(source, date, quote)`.
+Unique index on `(provider, date, quote)`.
 
 ## Testing
 

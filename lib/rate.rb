@@ -2,7 +2,7 @@
 
 require "db"
 
-class Currency < Sequel::Model
+class Rate < Sequel::Model(:rates)
   dataset_module do
     def latest(date = Date.today)
       date = Date.today if date > Date.today
@@ -30,8 +30,6 @@ class Currency < Sequel::Model
       when "day"
         Sequel.function(:strftime, "%Y-%m-%d", :date)
       when "week"
-        # SQLite's strftime with '%W' gives week number (0-53)
-        # We'll use this to group by week
         Sequel.function(
           :date,
           Sequel.function(

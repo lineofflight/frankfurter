@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "currency"
+require "rate"
 
 module Providers
   class << self
@@ -38,10 +38,10 @@ module Providers
     def import
       records = dataset.flat_map do |day|
         day[:rates].map do |quote, rate|
-          { date: day[:date], source: key, base:, quote:, rate: }
+          { date: day[:date], provider: key, base:, quote:, rate: }
         end
       end
-      Currency.dataset.insert_conflict(target: [:source, :date, :quote]).multi_insert(records)
+      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(records)
 
       self
     end

@@ -35,26 +35,28 @@ module Providers
       let(:provider) do
         klass = Class.new(Base) do
           def key = "TEST"
+          def name = "Test"
           def base = "EUR"
         end
+        Providers.all.delete(klass)
 
         klass.new(dataset: [{ date: Date.today, rates: { "USD" => 1.1 } }])
       end
 
       it "imports" do
         provider.import
-        record = Currency.where(source: "TEST").first
+        record = Rate.where(provider: "TEST").first
 
         _(record.base).must_equal("EUR")
         _(record.quote).must_equal("USD")
         _(record.rate).must_equal(1.1)
-        _(record.source).must_equal("TEST")
+        _(record.provider).must_equal("TEST")
       end
 
       it "upserts" do
         2.times { provider.import }
 
-        _(Currency.where(source: "TEST").count).must_equal(1)
+        _(Rate.where(provider: "TEST").count).must_equal(1)
       end
     end
   end

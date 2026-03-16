@@ -6,10 +6,7 @@ require "providers/boc"
 module Providers
   describe BOC do
     before do
-      Currency.dataset.delete
-    end
-
-    before do
+      Rate.dataset.delete
       VCR.insert_cassette("boc")
     end
 
@@ -20,7 +17,7 @@ module Providers
     let(:provider) { BOC.new }
 
     def count_unique_dates
-      Currency.select(:date).distinct.count
+      Rate.select(:date).distinct.count
     end
 
     it "imports current rates" do
@@ -37,9 +34,9 @@ module Providers
 
     it "stores multiple currencies per date" do
       provider.current.import
-      date = Currency.first.date
+      date = Rate.first.date
 
-      _(Currency.where(date:).count).must_be(:>, 1)
+      _(Rate.where(date:).count).must_be(:>, 1)
     end
   end
 end
