@@ -1,5 +1,4 @@
 .bundle
-.env
 coverage
 pkg
 *.sqlite3

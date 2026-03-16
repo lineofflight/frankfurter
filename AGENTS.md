@@ -111,7 +111,7 @@ rake db:prepare    # Run migrations and backfill all providers
 ## Development Notes
 
 - Ruby (see `Gemfile`)
-- Linting: RuboCop with Shopify style guide
+- Linting: RuboCop with Shopify style guide (120-char line length)
 - Migrations in `db/migrate/`
 
 ## API Endpoints
