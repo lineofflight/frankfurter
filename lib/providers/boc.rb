@@ -45,7 +45,7 @@ module Providers
 
     def extract_rates(observation)
       observation.each_with_object({}) do |(series, data), rates|
-        next unless series.start_with?("FX") && data.is_a?(Hash)
+        next unless series.start_with?("FX")
 
         iso = series.delete_prefix("FX").delete_suffix("CAD")
         rates[iso] = Float(data["v"])
