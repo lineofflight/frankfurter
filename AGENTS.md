@@ -116,11 +116,23 @@ rake db:prepare    # Run migrations and backfill all providers
 
 ## API Endpoints
 
-See `lib/versions/v1.rb` for current endpoint implementations:
-- Latest rates
-- Historical rates by date
-- Date range queries
-- Currency conversions
-- Available currencies list
+### v2 (lib/versions/v2.rb)
+
+```
+GET /v2/rates                                # latest blended rates
+GET /v2/rates?base=USD                       # rebased
+GET /v2/rates?symbols=USD,GBP               # filtered
+GET /v2/rates?date=2024-01-15               # specific date
+GET /v2/rates?from=2024-01-01&to=2024-01-31 # date range
+GET /v2/rates?provider=ecb                   # single provider
+GET /v2/currencies                           # currencies with names and providers
+GET /v2/providers                            # available data providers
+```
+
+Response: normalized array of `{ date, base, quote, rate }` records.
+
+### v1 (lib/versions/v1.rb)
+
+Frozen legacy API, ECB-only. See `lib/versions/v1.rb`.
 
 OpenAPI spec available at `/v1/openapi.json`.
