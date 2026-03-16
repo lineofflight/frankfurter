@@ -14,12 +14,14 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
     steps:
       - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - run: APP_ENV=test bundle exec rake
+      - run: bundle exec rake
 
   publish:
     needs: test
