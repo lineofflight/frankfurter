@@ -12,6 +12,7 @@ module Versions
         @base = params[:base]&.upcase || "EUR"
         @symbols = params[:symbols]&.upcase&.split(",")
         @provider = params[:provider]&.upcase
+        @raw_params = params
         @date = parse_date(params[:date])
         @start_date = parse_date(params[:from])
         @end_date = parse_date(params[:to])
@@ -43,9 +44,16 @@ module Versions
       end
 
       def validate
+        if date_param_invalid?(:date) || date_param_invalid?(:from) || date_param_invalid?(:to)
+          return "invalid date"
+        end
         return "conflicting params" if @date && (@start_date || @end_date)
 
         nil
+      end
+
+      def date_param_invalid?(key)
+        @raw_params[key] && !parse_date(@raw_params[key])
       end
 
       def fetch_rates
