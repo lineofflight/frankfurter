@@ -5,6 +5,7 @@ require "roda"
 
 require "providers/ecb"
 require "providers/boc"
+require "providers/tcmb"
 require "versions/v2/rate"
 
 module Versions

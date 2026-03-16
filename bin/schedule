@@ -17,4 +17,10 @@ scheduler.cron("*/30 20,21,22 * * 1-5") do
   %x(rake boc:import)
 end
 
+# TCMB publishes at 15:30 TRT (12:30 UTC)
+# https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Banka+Hakkinda/Sikca+Sorulan+Sorular
+scheduler.cron("*/30 12,13,14 * * 1-5") do
+  %x(rake tcmb:import)
+end
+
 scheduler.join

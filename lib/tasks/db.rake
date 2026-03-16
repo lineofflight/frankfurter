@@ -15,7 +15,7 @@ namespace :db do
   end
 
   desc "Run database migrations and backfill all providers"
-  task prepare: ["db:migrate", "ecb:backfill", "boc:backfill"]
+  task prepare: ["db:migrate", "ecb:backfill", "boc:backfill", "tcmb:backfill"]
 
   namespace :test do
     desc "Run database migrations and seed with saved data"
