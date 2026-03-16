@@ -3,7 +3,20 @@
 require "currency"
 
 module Providers
+  class << self
+    def all
+      @all ||= []
+    end
+  end
+
   class Base
+    class << self
+      def inherited(subclass)
+        super
+        Providers.all << subclass
+      end
+    end
+
     attr_reader :dataset
 
     def initialize(dataset: [])
@@ -11,6 +24,7 @@ module Providers
     end
 
     def key = raise(NotImplementedError)
+    def name = raise(NotImplementedError)
     def base = raise(NotImplementedError)
 
     def current

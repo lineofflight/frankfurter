@@ -11,6 +11,7 @@ module Providers
     HISTORICAL_URL = URI("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml")
 
     def key = "ECB"
+    def name = "European Central Bank"
     def base = "EUR"
 
     def current
