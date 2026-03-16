@@ -18,7 +18,7 @@ namespace :ecb do
     require "providers/ecb"
     ecb = Providers::ECB.new
     xml = File.read(File.join(Dir.pwd, "db", "seeds", "ecb.xml"))
-    Currency.dataset.delete
+    Rate.dataset.delete
     Providers::ECB.new(dataset: ecb.parse(xml)).import
   end
 end

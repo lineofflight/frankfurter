@@ -23,15 +23,6 @@ module Versions
     route do |r|
       response.cache_control(public: true, max_age: 900)
 
-      r.on(String, "rates") do |source|
-        r.get do
-          rate = build_rate(r.params, source:)
-          r.etag(rate.cache_key)
-
-          rate.formatted
-        end
-      end
-
       r.on("rates") do
         r.get do
           rate = build_rate(r.params)
@@ -47,9 +38,9 @@ module Versions
         end
       end
 
-      r.is("sources") do
+      r.is("providers") do
         r.get do
-          sources
+          providers
         end
       end
     end
@@ -59,19 +50,19 @@ module Versions
     def currencies
       db = Sequel::Model.db
       rows = db.fetch(<<~SQL).all
-        SELECT DISTINCT quote, source FROM currencies ORDER BY quote, source
+        SELECT DISTINCT quote, provider FROM rates ORDER BY quote, provider
       SQL
 
       result = {}
       rows.each do |row|
-        result[row[:quote]] ||= { sources: [] }
-        result[row[:quote]][:sources] << row[:source]
+        result[row[:quote]] ||= { providers: [] }
+        result[row[:quote]][:providers] << row[:provider]
       end
 
-      # Add base currencies from each source
-      db.fetch("SELECT DISTINCT base, source FROM currencies").each do |row|
-        result[row[:base]] ||= { sources: [] }
-        result[row[:base]][:sources] << row[:source] unless result[row[:base]][:sources].include?(row[:source])
+      # Add base currencies from each provider
+      db.fetch("SELECT DISTINCT base, provider FROM rates").each do |row|
+        result[row[:base]] ||= { providers: [] }
+        result[row[:base]][:providers] << row[:provider] unless result[row[:base]][:providers].include?(row[:provider])
       end
 
       # Add currency names
@@ -84,9 +75,8 @@ module Versions
       result.sort.to_h
     end
 
-    def sources
-      Providers.all.sort_by(&:name).to_h do |klass|
-        provider = klass.new
+    def providers
+      Providers.all.map(&:new).sort_by(&:key).to_h do |provider|
         [provider.key, {
           name: provider.name,
           base: provider.base,
@@ -94,8 +84,8 @@ module Versions
       end
     end
 
-    def build_rate(params, source: nil)
-      rate = Rate.new(params, source:)
+    def build_rate(params)
+      rate = Rate.new(params)
       request.halt(400, { message: rate.error }) if rate.error
       request.halt(404, { message: "not found" }) if rate.not_found?
 

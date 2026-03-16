@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "currency"
+require "rate"
 require "money/currency"
 
 module Versions
@@ -27,7 +27,7 @@ module Versions
       end
 
       def find_currencies
-        Currency.where(source: "ECB").latest.all
+        Rate.where(provider: "ECB").latest.all
       end
     end
   end

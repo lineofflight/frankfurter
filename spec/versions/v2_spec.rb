@@ -52,8 +52,8 @@ describe Versions::V2 do
     _(rates.keys.sort).must_equal(["GBP", "USD", "date"])
   end
 
-  it "filters by source" do
-    get "/ecb/rates"
+  it "filters by provider" do
+    get "/rates?provider=ecb"
 
     _(last_response).must_be(:ok?)
     _(json["rates"]).wont_be(:empty?)
@@ -88,7 +88,7 @@ describe Versions::V2 do
     _(last_response).must_be(:ok?)
     _(json["USD"]).must_be_kind_of(Hash)
     _(json["USD"]["name"]).must_equal("United States Dollar")
-    _(json["USD"]["sources"]).must_include("ECB")
+    _(json["USD"]["providers"]).must_include("ECB")
   end
 
   it "includes base currencies in currencies list" do
@@ -97,8 +97,8 @@ describe Versions::V2 do
     _(json["EUR"]).must_be_kind_of(Hash)
   end
 
-  it "returns sources" do
-    get "/sources"
+  it "returns providers" do
+    get "/providers"
 
     _(last_response).must_be(:ok?)
     _(json["ECB"]).must_be_kind_of(Hash)

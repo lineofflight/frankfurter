@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require "digest"
-require "currency"
+require "rate"
 
 module Versions
   class V2 < Roda
     class Rate
       attr_reader :error
 
-      def initialize(params, source: nil)
+      def initialize(params)
         @base = params[:base]&.upcase || "EUR"
         @symbols = params[:symbols]&.upcase&.split(",")
-        @source = source&.upcase
+        @provider = params[:provider]&.upcase
         @date = parse_date(params[:date])
         @start_date = parse_date(params[:from])
         @end_date = parse_date(params[:to])
@@ -75,15 +75,15 @@ module Versions
             c.date,
             c.quote,
             AVG(c.rate / COALESCE(base_rate.rate, 1.0)) AS rate
-          FROM currencies c
-          LEFT JOIN currencies base_rate
+          FROM rates c
+          LEFT JOIN rates base_rate
             ON base_rate.date = c.date
-            AND base_rate.source = c.source
+            AND base_rate.provider = c.provider
             AND base_rate.quote = :base
           WHERE #{date_clause}
             AND c.quote != :base
             AND (base_rate.rate IS NOT NULL OR c.base = :base)
-            #{source_clause}
+            #{provider_clause}
           GROUP BY c.date, c.quote
 
           UNION ALL
@@ -92,11 +92,11 @@ module Versions
             c.date,
             c.base AS quote,
             AVG(1.0 / c.rate) AS rate
-          FROM currencies c
+          FROM rates c
           WHERE #{date_clause}
             AND c.quote = :base
             AND c.base != :base
-            #{source_clause}
+            #{provider_clause}
           GROUP BY c.date, c.base
 
           ORDER BY 1, 2
@@ -109,12 +109,12 @@ module Versions
         elsif @start_date
           "c.date >= :start_date AND c.date <= :end_date"
         else
-          "c.date = (SELECT date FROM currencies ORDER BY date DESC LIMIT 1)"
+          "c.date = (SELECT date FROM rates ORDER BY date DESC LIMIT 1)"
         end
       end
 
-      def source_clause
-        @source ? "AND c.source = :source" : ""
+      def provider_clause
+        @provider ? "AND c.provider = :provider" : ""
       end
 
       def round(value)
@@ -138,7 +138,7 @@ module Versions
         params[:date] = @date.to_s if @date
         params[:start_date] = @start_date.to_s if @start_date
         params[:end_date] = (@end_date || Date.today).to_s if @start_date
-        params[:source] = @source if @source
+        params[:provider] = @provider if @provider
 
         params
       end

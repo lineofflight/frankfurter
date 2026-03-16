@@ -25,9 +25,9 @@ module Versions
         private
 
         def fetch_data
-          require "currency"
+          require "rate"
 
-          scope = Currency.where(source: "ECB").latest(date)
+          scope = Rate.where(provider: "ECB").latest(date)
           scope = scope.only(*(symbols + [base])) if symbols
 
           scope.naked
