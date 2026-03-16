@@ -2,4 +2,5 @@
 
 require "sequel"
 
-Sequel.connect("sqlite://#{Dir.pwd}/db/frankfurter.sqlite3")
+env = ENV.fetch("APP_ENV", "development")
+Sequel.connect("sqlite://#{Dir.pwd}/db/frankfurter_#{env}.sqlite3")

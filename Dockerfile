@@ -21,6 +21,8 @@ RUN gem install bundler && \
 
 COPY --chown=frankfurter:frankfurter . .
 
+ENV APP_ENV=production
+
 USER frankfurter
 
 HEALTHCHECK --interval=2s --timeout=4s --start-period=3s --retries=15 \
