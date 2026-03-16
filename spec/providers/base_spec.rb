@@ -32,15 +32,21 @@ module Providers
     end
 
     describe "with a dataset" do
+      let(:dataset) do
+        [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.1 }]
+      end
+
       let(:provider) do
         klass = Class.new(Base) do
           def key = "TEST"
           def name = "Test"
           def base = "EUR"
         end
-        Providers.all.delete(klass)
+        klass.new(dataset:)
+      end
 
-        klass.new(dataset: [{ date: Date.today, rates: { "USD" => 1.1 } }])
+      after do
+        Providers.all.delete(provider.class)
       end
 
       it "imports" do

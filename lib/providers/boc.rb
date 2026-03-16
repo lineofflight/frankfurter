@@ -17,7 +17,9 @@ module Providers
     def base = "CAD"
 
     def current
-      @dataset = fetch(recent: 1).last(1)
+      records = fetch(recent: 1)
+      last_date = records.last&.dig(:date)
+      @dataset = records.select { |r| r[:date] == last_date }
       self
     end
 
@@ -33,11 +35,11 @@ module Providers
       url.query = URI.encode_www_form(params)
       response = JSON.parse(Net::HTTP.get(url))
 
-      response["observations"].filter_map do |obs|
-        rates = extract_rates(obs)
-        next if rates.empty?
-
-        { date: Date.parse(obs["d"]), rates: }
+      response["observations"].flat_map do |obs|
+        date = Date.parse(obs["d"])
+        extract_rates(obs).map do |quote, rate|
+          { provider: key, date:, base:, quote:, rate: }
+        end
       end
     end
 

@@ -16,9 +16,8 @@ namespace :ecb do
   desc "Seed database from saved ECB data"
   task :seed do
     require "providers/ecb"
-    ecb = Providers::ECB.new
     xml = File.read(File.join(Dir.pwd, "db", "seeds", "ecb.xml"))
     Rate.dataset.delete
-    Providers::ECB.new(dataset: ecb.parse(xml)).import
+    Providers::ECB.new(dataset: Providers::ECB.new.parse(xml)).import
   end
 end

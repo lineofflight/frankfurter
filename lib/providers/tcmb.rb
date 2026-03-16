@@ -52,7 +52,9 @@ module Providers
       return no_key unless api_key
 
       start_date = Date.today - 7
-      @dataset = fetch(start_date, Date.today).last(1)
+      records = fetch(start_date, Date.today)
+      last_date = records.last&.dig(:date)
+      @dataset = records.select { |r| r[:date] == last_date }
       self
     end
 
@@ -91,7 +93,7 @@ module Providers
       data = JSON.parse(response)
       items = data["items"] || []
 
-      items.filter_map do |item|
+      items.flat_map do |item|
         date = Date.strptime(item["Tarih"], "%d-%m-%Y")
         rates = {}
 
@@ -107,9 +109,9 @@ module Providers
         sell = rates.delete("TRY_SELL")
         rates["TRY"] = ((buy + sell) / 2).round(4) if buy && sell
 
-        next if rates.empty?
-
-        { date:, rates: }
+        rates.map do |quote, rate|
+          { provider: key, date:, base:, quote:, rate: }
+        end
       end
     end
 

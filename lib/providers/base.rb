@@ -36,12 +36,7 @@ module Providers
     end
 
     def import
-      records = dataset.flat_map do |day|
-        day[:rates].map do |quote, rate|
-          { date: day[:date], provider: key, base:, quote:, rate: }
-        end
-      end
-      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(records)
+      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset)
 
       self
     end

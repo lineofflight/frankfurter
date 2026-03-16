@@ -25,11 +25,12 @@ module Providers
     end
 
     def parse(xml)
-      Ox.load(xml).locate("gesmes:Envelope/Cube/Cube").map do |day|
-        {
-          date: Date.parse(day["time"]),
-          rates: day.nodes.to_h { |c| [c[:currency], Float(c[:rate])] },
-        }
+      Ox.load(xml).locate("gesmes:Envelope/Cube/Cube").flat_map do |day|
+        date = Date.parse(day["time"])
+        day.nodes.map do |c|
+          rate = Float(c[:rate])
+          { provider: key, date:, base:, quote: c[:currency], rate: }
+        end
       end
     end
   end
