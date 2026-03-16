@@ -81,4 +81,28 @@ describe Versions::V2 do
     _(latest.keys.sort).must_equal(historical.keys.sort)
     _(latest["rates"].first.keys).must_include("date")
   end
+
+  it "returns currencies" do
+    get "/currencies"
+
+    _(last_response).must_be(:ok?)
+    _(json["USD"]).must_be_kind_of(Hash)
+    _(json["USD"]["name"]).must_equal("United States Dollar")
+    _(json["USD"]["sources"]).must_include("ECB")
+  end
+
+  it "includes base currencies in currencies list" do
+    get "/currencies"
+
+    _(json["EUR"]).must_be_kind_of(Hash)
+  end
+
+  it "returns sources" do
+    get "/sources"
+
+    _(last_response).must_be(:ok?)
+    _(json["ECB"]).must_be_kind_of(Hash)
+    _(json["ECB"]["name"]).must_equal("European Central Bank")
+    _(json["ECB"]["base"]).must_equal("EUR")
+  end
 end

@@ -69,10 +69,12 @@ Unique index on `(source, date, quote)`.
 ## Testing
 
 ```bash
-bundle exec rake         # Run linter and test suite
-bundle exec rake rubocop # Run linter only
-bundle exec rake spec    # Run test suite only
+APP_ENV=test bundle exec rake         # Run linter and test suite
+APP_ENV=test bundle exec rake rubocop # Run linter only
+APP_ENV=test bundle exec rake spec    # Run test suite only
 ```
+
+Separate SQLite databases per environment (`APP_ENV`): test, development, production.
 
 ### Test stack
 

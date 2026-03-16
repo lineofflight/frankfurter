@@ -13,6 +13,7 @@ module Providers
     EARLIEST_DATE = "2017-01-03"
 
     def key = "BOC"
+    def name = "Bank of Canada"
     def base = "CAD"
 
     def current
