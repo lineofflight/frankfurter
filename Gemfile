@@ -31,5 +31,6 @@ group :test do
   gem "minitest-focus"
   gem "rack-test"
   gem "vcr"
+  gem "skooma"
   gem "webmock"
 end
