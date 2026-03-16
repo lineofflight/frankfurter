@@ -4,6 +4,7 @@ require "rack/cors"
 require "roda"
 
 require "versions/v1"
+require "versions/v2"
 
 class App < Roda
   use Rack::Cors do
@@ -32,6 +33,10 @@ class App < Roda
   route do |r|
     r.on("v1") do
       r.run(Versions::V1)
+    end
+
+    r.on("v2") do
+      r.run(Versions::V2)
     end
   end
 end
