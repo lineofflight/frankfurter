@@ -74,7 +74,7 @@ describe Rate do
   describe ".only" do
     it "filters symbols" do
       iso_codes = ["CAD", "USD"]
-      data = Rate.latest.only(*iso_codes).all
+      data = Rate.where(provider: "ECB").latest.only(*iso_codes).all
 
       _(data.map(&:quote).sort).must_equal(iso_codes)
     end

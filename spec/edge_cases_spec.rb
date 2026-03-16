@@ -53,7 +53,7 @@ describe "the app" do
     Sequel::Model.db.transaction(savepoint: true) do
       get "/v1/latest"
       date = json["date"]
-      Rate.where(date: Rate.nearest_date_with_rates(Date.today)).delete
+      Rate.where(provider: "ECB", date: Rate.where(provider: "ECB").nearest_date_with_rates(Date.today)).delete
       get "/v1/latest"
 
       _(json["date"]).wont_equal(date)

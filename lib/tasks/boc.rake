@@ -12,4 +12,11 @@ namespace :boc do
     require "providers/boc"
     Providers::BOC.new.historical.import
   end
+
+  desc "Seed database from saved BOC data"
+  task :seed do
+    require "providers/boc"
+    json = File.read(File.join(Dir.pwd, "db", "seeds", "boc.json"))
+    Providers::BOC.new(dataset: Providers::BOC.new.parse(json)).import
+  end
 end

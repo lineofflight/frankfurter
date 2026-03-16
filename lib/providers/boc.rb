@@ -28,19 +28,24 @@ module Providers
       self
     end
 
-    private
+    def parse(json)
+      data = json.is_a?(String) ? JSON.parse(json) : json
 
-    def fetch(**params)
-      url = URI(BASE_URL)
-      url.query = URI.encode_www_form(params)
-      response = JSON.parse(Net::HTTP.get(url))
-
-      response["observations"].flat_map do |obs|
+      data["observations"].flat_map do |obs|
         date = Date.parse(obs["d"])
         extract_rates(obs).map do |quote, rate|
           { provider: key, date:, base:, quote:, rate: }
         end
       end
+    end
+
+    private
+
+    def fetch(**params)
+      url = URI(BASE_URL)
+      url.query = URI.encode_www_form(params)
+
+      parse(Net::HTTP.get(url))
     end
 
     def extract_rates(observation)

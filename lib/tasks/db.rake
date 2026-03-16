@@ -15,13 +15,14 @@ namespace :db do
   end
 
   desc "Run database migrations and backfill all providers"
-  task prepare: ["db:migrate", "ecb:backfill", "boc:backfill", "tcmb:backfill"]
+  task prepare: ["db:migrate", "backfill"]
 
   namespace :test do
     desc "Run database migrations and seed with saved data"
     task :prepare do
       Rake::Task["db:migrate"].invoke
       Rake::Task["ecb:seed"].invoke
+      Rake::Task["boc:seed"].invoke
     end
   end
 end
