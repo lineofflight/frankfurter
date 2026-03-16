@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/lineofflight/frankfurter/workflows/build/badge.svg)](https://github.com/lineofflight/frankfurter/actions)
 
-[Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by institutional and non-commercial sources like the European Central Bank. Check the website for a detailed walkthrough.
+[Frankfurter](https://frankfurter.dev) is a free and open-source currency data API that tracks reference exchange rates published by central banks.
 
 The API is publicly available at <https://api.frankfurter.dev>.
 
@@ -10,15 +10,16 @@ The API is publicly available at <https://api.frankfurter.dev>.
 
 ### Using Docker
 
-The simplest way to run Frankfurter locally is with Docker:
-
 ```bash
-docker run -d -p 80:8080 lineofflight/frankfurter
+docker run -d -p 8080:8080 \
+  -e TCMB_API_KEY=your_key \
+  --pull always \
+  lineofflight/frankfurter
 ```
 
-Once the container is running, open your browser and go to `http://localhost`.
+The `TCMB_API_KEY` enables Turkish Central Bank data. Register at [evds3.tcmb.gov.tr](https://evds3.tcmb.gov.tr) for a free key. Without it, ECB and BOC data still works.
 
-### ⚡ Using One-Click Deploy
+### One-Click Deploy
 
 | Cloud Provider | Deploy Button |
 |----------------|---------------|
@@ -39,7 +40,7 @@ Frankfurter is built with Ruby. To contribute:
 
 1. Fork.
 2. Install dependencies with `bundle install`.
-3. Run tests with `bundle exec rake`.
+3. Run tests with `APP_ENV=test bundle exec rake`.
 4. Push your changes to a feature branch.
 5. Open a pull request.
 
@@ -47,10 +48,6 @@ Frankfurter is built with Ruby. To contribute:
 
 - [x] Migrate to SQLite
 - [x] Add API versioning in path
-- [ ] Multiple Data Sources
-- [ ] Add GraphQL endpoint
+- [x] Multiple data providers (ECB, BOC, TCMB)
+- [x] v2 API with normalized response format
 - [ ] Deploy as a blockchain oracle
-
-### Reporting Missing Currencies
-
-If you notice a currency missing from our data, please open an issue and include a suggested source with the missing data. We're looking for non-commercial sources like the European Central Bank that publish current and historical daily rates at the end of each working day.
