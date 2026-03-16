@@ -79,6 +79,12 @@ describe Versions::V2 do
     _(last_response.status).must_equal(400)
   end
 
+  it "returns 400 for invalid dates" do
+    get "/rates?date=not-a-date"
+
+    _(last_response.status).must_equal(400)
+  end
+
   it "returns 404 for dates before dataset" do
     get "/rates?date=1901-01-01"
 
