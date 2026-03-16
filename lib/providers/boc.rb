@@ -47,11 +47,8 @@ module Providers
       observation.each_with_object({}) do |(series, data), rates|
         next unless series.start_with?("FX") && data.is_a?(Hash)
 
-        value = data["v"]
-        next if value.nil? || value == ""
-
         iso = series.delete_prefix("FX").delete_suffix("CAD")
-        rates[iso] = Float(value)
+        rates[iso] = Float(data["v"])
       end
     end
   end
