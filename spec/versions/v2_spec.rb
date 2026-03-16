@@ -14,49 +14,55 @@ describe Versions::V2 do
     get "/rates"
 
     _(last_response).must_be(:ok?)
-    _(json["base"]).must_equal("EUR")
-    _(json["rates"]).must_be_kind_of(Array)
-    _(json["rates"].length).must_equal(1)
-    _(json["rates"].first["USD"]).must_be_kind_of(Float)
+    _(json).must_be_kind_of(Array)
+    _(json.first["base"]).must_equal("EUR")
+    _(json.first["quote"]).must_be_kind_of(String)
+    _(json.first["rate"]).must_be_kind_of(Float)
+    _(json.first["date"]).must_be_kind_of(String)
   end
 
   it "returns rates for a specific date" do
     get "/rates?date=2024-01-15"
 
     _(last_response).must_be(:ok?)
-    _(json["rates"].first["date"]).must_equal("2024-01-15")
+    _(json.first["date"]).must_equal("2024-01-15")
   end
 
   it "returns rates for a date range" do
     get "/rates?from=2024-01-01&to=2024-01-31"
 
     _(last_response).must_be(:ok?)
-    _(json["rates"].length).must_be(:>, 1)
+    dates = json.map { |r| r["date"] }.uniq
+
+    _(dates.length).must_be(:>, 1)
   end
 
   it "rebases to a different currency" do
     get "/rates?base=USD"
 
     _(last_response).must_be(:ok?)
-    _(json["base"]).must_equal("USD")
-    _(json["rates"].first.keys).wont_include("USD")
-    _(json["rates"].first["EUR"]).must_be_kind_of(Float)
+    _(json.first["base"]).must_equal("USD")
+    _(json.map { |r| r["quote"] }).wont_include("USD")
+
+    eur = json.find { |r| r["quote"] == "EUR" }
+
+    _(eur["rate"]).must_be_kind_of(Float)
   end
 
   it "filters symbols" do
     get "/rates?symbols=USD,GBP"
 
     _(last_response).must_be(:ok?)
-    rates = json["rates"].first
+    quotes = json.map { |r| r["quote"] }.uniq.sort
 
-    _(rates.keys.sort).must_equal(["GBP", "USD", "date"])
+    _(quotes).must_equal(["GBP", "USD"])
   end
 
   it "filters by provider" do
     get "/rates?provider=ecb"
 
     _(last_response).must_be(:ok?)
-    _(json["rates"]).wont_be(:empty?)
+    _(json).wont_be(:empty?)
   end
 
   it "returns 400 for conflicting params" do
@@ -71,15 +77,12 @@ describe Versions::V2 do
     _(last_response.status).must_equal(404)
   end
 
-  it "returns consistent response shape" do
+  it "returns consistent record shape" do
     get "/rates"
-    latest = json
 
-    get "/rates?date=2024-01-15"
-    historical = json
+    keys = json.first.keys.sort
 
-    _(latest.keys.sort).must_equal(historical.keys.sort)
-    _(latest["rates"].first.keys).must_include("date")
+    _(keys).must_equal(["base", "date", "quote", "rate"])
   end
 
   it "returns currencies" do

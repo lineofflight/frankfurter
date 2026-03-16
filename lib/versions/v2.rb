@@ -28,7 +28,7 @@ module Versions
           rate = build_rate(r.params)
           r.etag(rate.cache_key)
 
-          rate.formatted
+          rate.to_a
         end
       end
 
