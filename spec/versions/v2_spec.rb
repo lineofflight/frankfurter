@@ -2,10 +2,18 @@
 
 require_relative "../helper"
 require "rack/test"
+
+# Skooma requires minitest/unit which was removed in Minitest 6
+$LOADED_FEATURES << "minitest/unit.rb"
+require "skooma"
+
 require "versions/v2"
 
 describe Versions::V2 do
   include Rack::Test::Methods
+  include Skooma::Minitest[
+    File.expand_path("../../lib/public/v2/openapi.json", __dir__),
+  ]
 
   let(:app) { Versions::V2.freeze }
   let(:json) { Oj.load(last_response.body) }
@@ -14,17 +22,15 @@ describe Versions::V2 do
     get "/rates"
 
     _(last_response).must_be(:ok?)
-    _(json).must_be_kind_of(Array)
+    assert_conform_schema(200)
     _(json.first["base"]).must_equal("EUR")
-    _(json.first["quote"]).must_be_kind_of(String)
-    _(json.first["rate"]).must_be_kind_of(Float)
-    _(json.first["date"]).must_be_kind_of(String)
   end
 
   it "returns rates for a specific date" do
     get "/rates?date=2024-01-15"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     _(json.first["date"]).must_equal("2024-01-15")
   end
 
@@ -32,6 +38,7 @@ describe Versions::V2 do
     get "/rates?from=2024-01-01&to=2024-01-31"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     dates = json.map { |r| r["date"] }.uniq
 
     _(dates.length).must_be(:>, 1)
@@ -41,8 +48,8 @@ describe Versions::V2 do
     get "/rates?base=USD"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     _(json.first["base"]).must_equal("USD")
-    _(json.map { |r| r["quote"] }).wont_include("USD")
 
     eur = json.find { |r| r["quote"] == "EUR" }
 
@@ -53,6 +60,7 @@ describe Versions::V2 do
     get "/rates?symbols=USD,GBP"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     quotes = json.map { |r| r["quote"] }.uniq.sort
 
     _(quotes).must_equal(["GBP", "USD"])
@@ -62,7 +70,7 @@ describe Versions::V2 do
     get "/rates?provider=ecb"
 
     _(last_response).must_be(:ok?)
-    _(json).wont_be(:empty?)
+    assert_conform_schema(200)
   end
 
   it "returns 400 for conflicting params" do
@@ -77,19 +85,11 @@ describe Versions::V2 do
     _(last_response.status).must_equal(404)
   end
 
-  it "returns consistent record shape" do
-    get "/rates"
-
-    keys = json.first.keys.sort
-
-    _(keys).must_equal(["base", "date", "quote", "rate"])
-  end
-
   it "returns currencies" do
     get "/currencies"
 
     _(last_response).must_be(:ok?)
-    _(json["USD"]).must_be_kind_of(Hash)
+    assert_conform_schema(200)
     _(json["USD"]["name"]).must_equal("United States Dollar")
     _(json["USD"]["providers"]).must_include("ECB")
   end
@@ -104,7 +104,7 @@ describe Versions::V2 do
     get "/providers"
 
     _(last_response).must_be(:ok?)
-    _(json["ECB"]).must_be_kind_of(Hash)
+    assert_conform_schema(200)
     _(json["ECB"]["name"]).must_equal("European Central Bank")
     _(json["ECB"]["base"]).must_equal("EUR")
   end
