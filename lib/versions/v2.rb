@@ -56,21 +56,38 @@ module Versions
     private
 
     def currencies
-      result = {}
+      providers_by_currency = {}
       Rate.select(:quote, :provider).distinct.each do |row|
-        (result[row.quote] ||= Set.new) << row.provider
+        (providers_by_currency[row.quote] ||= Set.new) << row.provider
       end
       Rate.select(:base, :provider).distinct.each do |row|
-        (result[row.base] ||= Set.new) << row.provider
+        (providers_by_currency[row.base] ||= Set.new) << row.provider
       end
 
-      result.sort.map do |iso, providers|
+      date_ranges = {}
+      Rate.group(:quote).select { [quote.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
+        date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
+      end
+      Rate.group(:base).select { [base.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
+        existing = date_ranges[r[:currency]]
+        if existing
+          existing[:start_date] = [existing[:start_date], r[:start_date].to_s].min
+          existing[:end_date] = [existing[:end_date], r[:end_date].to_s].max
+        else
+          date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
+        end
+      end
+
+      providers_by_currency.sort.map do |iso, providers|
         currency = Money::Currency.find(iso)
+        range = date_ranges[iso] || {}
         {
           iso_code: iso,
           iso_numeric: currency&.iso_numeric,
           name: currency&.name || iso,
           symbol: currency&.symbol,
+          start_date: range[:start_date],
+          end_date: range[:end_date],
           providers: providers.to_a.sort,
         }
       end

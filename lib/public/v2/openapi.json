@@ -212,6 +212,8 @@
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
           "providers": {
             "type": "array",
             "items": { "type": "string" },
