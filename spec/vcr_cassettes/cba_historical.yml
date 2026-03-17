@@ -1,0 +1,482 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.cba.am/exchangerates.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <ExchangeRatesLatest xmlns="http://www.cba.am/" />
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - '"http://www.cba.am/ExchangeRatesLatest"'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cba.am
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Tue, 17 Mar 2026 15:06:37 GMT
+      Content-Length:
+      - '3859'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ExchangeRatesLatestResponse
+        xmlns="http://www.cba.am/"><ExchangeRatesLatestResult><CurrentDate>2026-03-17T00:00:00</CurrentDate><NextAvailableDate
+        xsi:nil="true" /><PreviousAvailableDate>2026-03-16T00:00:00</PreviousAvailableDate><Rates><ExchangeRate><ISO>USD</ISO><Amount>1</Amount><Rate>377.46</Rate><Difference>0.05</Difference></ExchangeRate><ExchangeRate><ISO>GBP</ISO><Amount>1</Amount><Rate>502.89</Rate><Difference>2.1</Difference></ExchangeRate><ExchangeRate><ISO>AUD</ISO><Amount>1</Amount><Rate>267.43</Rate><Difference>1.43</Difference></ExchangeRate><ExchangeRate><ISO>EUR</ISO><Amount>1</Amount><Rate>434.27</Rate><Difference>1.31</Difference></ExchangeRate><ExchangeRate><ISO>XDR</ISO><Amount>1</Amount><Rate>512.83</Rate><Difference>0.33</Difference></ExchangeRate><ExchangeRate><ISO>IRR</ISO><Amount>100</Amount><Rate>0.028598</Rate><Difference>-0.000013</Difference></ExchangeRate><ExchangeRate><ISO>PLN</ISO><Amount>1</Amount><Rate>101.82</Rate><Difference>0.25</Difference></ExchangeRate><ExchangeRate><ISO>CAD</ISO><Amount>1</Amount><Rate>275.52</Rate><Difference>-0.12</Difference></ExchangeRate><ExchangeRate><ISO>INR</ISO><Amount>1</Amount><Rate>4.0825</Rate><Difference>-0.0022</Difference></ExchangeRate><ExchangeRate><ISO>NOK</ISO><Amount>1</Amount><Rate>39.185</Rate><Difference>0.323</Difference></ExchangeRate><ExchangeRate><ISO>JPY</ISO><Amount>10</Amount><Rate>23.72</Rate><Difference>0.019</Difference></ExchangeRate><ExchangeRate><ISO>SEK</ISO><Amount>1</Amount><Rate>40.502</Rate><Difference>0.272</Difference></ExchangeRate><ExchangeRate><ISO>CHF</ISO><Amount>1</Amount><Rate>479.68</Rate><Difference>0.92</Difference></ExchangeRate><ExchangeRate><ISO>CZK</ISO><Amount>1</Amount><Rate>17.76</Rate><Difference>0.035</Difference></ExchangeRate><ExchangeRate><ISO>CNY</ISO><Amount>1</Amount><Rate>54.792</Rate><Difference>0.031</Difference></ExchangeRate><ExchangeRate><ISO>SGD</ISO><Amount>1</Amount><Rate>295.31</Rate><Difference>0.25</Difference></ExchangeRate><ExchangeRate><ISO>BRL</ISO><Amount>1</Amount><Rate>72.16</Rate><Difference>1.268</Difference></ExchangeRate><ExchangeRate><ISO>AED</ISO><Amount>1</Amount><Rate>102.76</Rate><Difference>0.01</Difference></ExchangeRate><ExchangeRate><ISO>KGS</ISO><Amount>1</Amount><Rate>4.3228</Rate><Difference>0.0059</Difference></ExchangeRate><ExchangeRate><ISO>KZT</ISO><Amount>10</Amount><Rate>7.8562</Rate><Difference>0.0551</Difference></ExchangeRate><ExchangeRate><ISO>RUB</ISO><Amount>1</Amount><Rate>4.5869</Rate><Difference>-0.0702</Difference></ExchangeRate><ExchangeRate><ISO>UAH</ISO><Amount>1</Amount><Rate>8.5845</Rate><Difference>0.0233</Difference></ExchangeRate><ExchangeRate><ISO>UZS</ISO><Amount>10</Amount><Rate>0.31073</Rate><Difference>-0.00118</Difference></ExchangeRate><ExchangeRate><ISO>BYN</ISO><Amount>1</Amount><Rate>128.11</Rate><Difference>-0.56</Difference></ExchangeRate><ExchangeRate><ISO>TJS</ISO><Amount>1</Amount><Rate>39.277</Rate><Difference>-0.009</Difference></ExchangeRate><ExchangeRate><ISO>GEL</ISO><Amount>1</Amount><Rate>138.74</Rate><Difference>0.55</Difference></ExchangeRate><ExchangeRate><ISO>HKD</ISO><Amount>1</Amount><Rate>48.167</Rate><Difference>-0.029</Difference></ExchangeRate><ExchangeRate><ISO>XAU</ISO><Amount>1</Amount><Rate>60616</Rate><Difference>-595</Difference></ExchangeRate><ExchangeRate><ISO>XAG</ISO><Amount>1</Amount><Rate>958.05</Rate><Difference>-57.55</Difference></ExchangeRate><ExchangeRate><ISO>NZD</ISO><Amount>1</Amount><Rate>220.32</Rate><Difference>-0.01</Difference></ExchangeRate></Rates></ExchangeRatesLatestResult></ExchangeRatesLatestResponse></soap:Body></soap:Envelope>
+  recorded_at: Tue, 17 Mar 2026 15:06:37 GMT
+- request:
+    method: post
+    uri: https://api.cba.am/exchangerates.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <ExchangeRatesByDateRangeByISO xmlns="http://www.cba.am/">
+          <ISOCodes>USD,GBP,AUD,EUR,XDR,IRR,PLN,CAD,INR,NOK,JPY,SEK,CHF,CZK,CNY,SGD,BRL,AED,KGS,KZT,RUB,UAH,UZS,BYN,TJS,GEL,HKD,XAU,XAG,NZD</ISOCodes>
+          <DateFrom>2026-03-01</DateFrom>
+          <DateTo>2026-03-17</DateTo>
+        </ExchangeRatesByDateRangeByISO>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - '"http://www.cba.am/ExchangeRatesByDateRangeByISO"'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cba.am
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Tue, 17 Mar 2026 15:06:37 GMT
+      Content-Length:
+      - '79941'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ExchangeRatesByDateRangeByISOResponse
+        xmlns="http://www.cba.am/"><ExchangeRatesByDateRangeByISOResult><xs:schema
+        id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><xs:element
+        name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ExchangeRatesByRange"
+        msdata:UseCurrentLocale="true"><xs:complexType><xs:choice minOccurs="0" maxOccurs="unbounded"><xs:element
+        name="ExchangeRatesByRange"><xs:complexType><xs:sequence><xs:element name="Rate"
+        type="xs:decimal" minOccurs="0" /><xs:element name="Amount" type="xs:int"
+        minOccurs="0" /><xs:element name="ISO" minOccurs="0"><xs:simpleType><xs:restriction
+        base="xs:string"><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element><xs:element
+        name="Diff" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" /><xs:element
+        name="RateDate" type="xs:dateTime" minOccurs="0" /></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1"><DocumentElement
+        xmlns=""><ExchangeRatesByRange diffgr:id="ExchangeRatesByRange1" msdata:rowOrder="0"><Rate>376.88</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.12</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange2" msdata:rowOrder="1"><Rate>505.17</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-2.8</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange3" msdata:rowOrder="2"><Rate>267.13</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-0.88</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange4" msdata:rowOrder="3"><Rate>442.38</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-2.4</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange5" msdata:rowOrder="4"><Rate>518.12</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-0.49</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange6" msdata:rowOrder="5"><Rate>0.028685</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000009</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange7" msdata:rowOrder="6"><Rate>104.56</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.78</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange8" msdata:rowOrder="7"><Rate>276.08</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>0.35</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange9" msdata:rowOrder="8"><Rate>4.1211</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0238</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange10" msdata:rowOrder="9"><Rate>39.546</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.068</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange11" msdata:rowOrder="10"><Rate>24.02</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.15</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange12" msdata:rowOrder="11"><Rate>41.372</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.278</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange13" msdata:rowOrder="12"><Rate>487.62</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-0.28</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange14" msdata:rowOrder="13"><Rate>18.226</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.115</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange15" msdata:rowOrder="14"><Rate>54.766</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.195</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange16" msdata:rowOrder="15"><Rate>296.43</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-1.38</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange17" msdata:rowOrder="16"><Rate>73.535</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>0.159</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange18" msdata:rowOrder="17"><Rate>102.61</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.03</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange19" msdata:rowOrder="18"><Rate>4.3113</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.0011</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange20" msdata:rowOrder="19"><Rate>7.5518</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.0138</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange21" msdata:rowOrder="20"><Rate>4.8762</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0047</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange22" msdata:rowOrder="21"><Rate>8.7141</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0269</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange23" msdata:rowOrder="22"><Rate>0.3093</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00061</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange24" msdata:rowOrder="23"><Rate>132.07</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.1</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange25" msdata:rowOrder="24"><Rate>40.128</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.013</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange26" msdata:rowOrder="25"><Rate>140.04</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.95</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange27" msdata:rowOrder="26"><Rate>48.177</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.007</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange28" msdata:rowOrder="27"><Rate>63278</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>645</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange29" msdata:rowOrder="28"><Rate>1090.2</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>42.6</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange30" msdata:rowOrder="29"><Rate>224.7</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-0.9</Diff><RateDate>2026-03-02T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange31" msdata:rowOrder="30"><Rate>376.99</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.11</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange32" msdata:rowOrder="31"><Rate>500.79</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-4.38</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange33" msdata:rowOrder="32"><Rate>264.8</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-2.33</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange34" msdata:rowOrder="33"><Rate>436.97</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-5.41</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange35" msdata:rowOrder="34"><Rate>516.69</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-1.43</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange36" msdata:rowOrder="35"><Rate>0.028676</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000009</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange37" msdata:rowOrder="36"><Rate>101.99</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-2.57</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange38" msdata:rowOrder="37"><Rate>274.97</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-1.11</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange39" msdata:rowOrder="38"><Rate>4.1223</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.0012</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange40" msdata:rowOrder="39"><Rate>38.767</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.779</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange41" msdata:rowOrder="40"><Rate>23.89</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.13</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange42" msdata:rowOrder="41"><Rate>40.645</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.727</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange43" msdata:rowOrder="42"><Rate>478.9</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-8.72</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange44" msdata:rowOrder="43"><Rate>17.936</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.29</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange45" msdata:rowOrder="44"><Rate>54.594</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.172</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange46" msdata:rowOrder="45"><Rate>294.59</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-1.84</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange47" msdata:rowOrder="46"><Rate>72.848</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-0.687</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange48" msdata:rowOrder="47"><Rate>102.64</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.03</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange49" msdata:rowOrder="48"><Rate>4.3125</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0012</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange50" msdata:rowOrder="49"><Rate>7.5443</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.0075</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange51" msdata:rowOrder="50"><Rate>4.8556</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0206</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange52" msdata:rowOrder="51"><Rate>8.6652</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0489</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange53" msdata:rowOrder="52"><Rate>0.30888</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00042</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange54" msdata:rowOrder="53"><Rate>131.35</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.72</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange55" msdata:rowOrder="54"><Rate>40.139</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.011</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange56" msdata:rowOrder="55"><Rate>139.8</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.24</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange57" msdata:rowOrder="56"><Rate>48.307</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.13</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange58" msdata:rowOrder="57"><Rate>64407</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>1129</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange59" msdata:rowOrder="58"><Rate>1146.8</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>56.6</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange60" msdata:rowOrder="59"><Rate>221.37</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-3.33</Diff><RateDate>2026-03-03T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange61" msdata:rowOrder="60"><Rate>377.86</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.87</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange62" msdata:rowOrder="61"><Rate>505.5</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>4.71</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange63" msdata:rowOrder="62"><Rate>266.28</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>1.48</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange64" msdata:rowOrder="63"><Rate>439.56</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>2.59</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange65" msdata:rowOrder="64"><Rate>515.17</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-1.52</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange66" msdata:rowOrder="65"><Rate>0.028801</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.000125</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange67" msdata:rowOrder="66"><Rate>103.04</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>1.05</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange68" msdata:rowOrder="67"><Rate>276.4</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>1.43</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange69" msdata:rowOrder="68"><Rate>4.0946</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0277</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange70" msdata:rowOrder="69"><Rate>39.187</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.42</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange71" msdata:rowOrder="70"><Rate>24.023</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.133</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange72" msdata:rowOrder="71"><Rate>41.06</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.415</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange73" msdata:rowOrder="72"><Rate>483.75</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>4.85</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange74" msdata:rowOrder="73"><Rate>18.049</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.113</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange75" msdata:rowOrder="74"><Rate>54.776</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>0.182</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange76" msdata:rowOrder="75"><Rate>296.31</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>1.72</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange77" msdata:rowOrder="76"><Rate>71.669</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-1.179</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange78" msdata:rowOrder="77"><Rate>102.88</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.24</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange79" msdata:rowOrder="78"><Rate>4.3223</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0098</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange80" msdata:rowOrder="79"><Rate>7.5956</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.0513</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange81" msdata:rowOrder="80"><Rate>4.8543</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0013</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange82" msdata:rowOrder="81"><Rate>8.6467</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0185</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange83" msdata:rowOrder="82"><Rate>0.31014</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00126</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange84" msdata:rowOrder="83"><Rate>130.77</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.58</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange85" msdata:rowOrder="84"><Rate>40.232</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.093</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange86" msdata:rowOrder="85"><Rate>138.73</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-1.07</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange87" msdata:rowOrder="86"><Rate>48.335</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.028</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange88" msdata:rowOrder="87"><Rate>61151</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-3256</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange89" msdata:rowOrder="88"><Rate>987.73</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-159.07</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange90" msdata:rowOrder="89"><Rate>223.39</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>2.02</Diff><RateDate>2026-03-04T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange91" msdata:rowOrder="90"><Rate>377.59</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.27</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange92" msdata:rowOrder="91"><Rate>504.01</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-1.49</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange93" msdata:rowOrder="92"><Rate>266.01</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-0.27</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange94" msdata:rowOrder="93"><Rate>438.31</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.25</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange95" msdata:rowOrder="94"><Rate>515.81</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>0.64</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange96" msdata:rowOrder="95"><Rate>0.028699</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000102</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange97" msdata:rowOrder="96"><Rate>102.63</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.41</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange98" msdata:rowOrder="97"><Rate>276.76</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>0.36</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange99" msdata:rowOrder="98"><Rate>4.1209</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.0263</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange100" msdata:rowOrder="99"><Rate>39.103</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.084</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange101" msdata:rowOrder="100"><Rate>24.001</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.022</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange102" msdata:rowOrder="101"><Rate>41.011</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.049</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange103" msdata:rowOrder="102"><Rate>483.66</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-0.09</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange104" msdata:rowOrder="103"><Rate>17.98</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.069</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange105" msdata:rowOrder="104"><Rate>54.77</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.006</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange106" msdata:rowOrder="105"><Rate>295.78</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-0.53</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange107" msdata:rowOrder="106"><Rate>72.18</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>0.511</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange108" msdata:rowOrder="107"><Rate>102.8</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.08</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange109" msdata:rowOrder="108"><Rate>4.3193</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.003</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange110" msdata:rowOrder="109"><Rate>7.6582</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.0626</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange111" msdata:rowOrder="110"><Rate>4.8168</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0375</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange112" msdata:rowOrder="111"><Rate>8.6168</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0299</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange113" msdata:rowOrder="112"><Rate>0.30999</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00015</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange114" msdata:rowOrder="113"><Rate>130.69</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.08</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange115" msdata:rowOrder="114"><Rate>39.921</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.311</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange116" msdata:rowOrder="115"><Rate>138.06</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.67</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange117" msdata:rowOrder="116"><Rate>48.273</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.062</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange118" msdata:rowOrder="117"><Rate>62502</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>1351</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange119" msdata:rowOrder="118"><Rate>1053.6</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>65.87</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange120" msdata:rowOrder="119"><Rate>223.46</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>0.07</Diff><RateDate>2026-03-05T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange121" msdata:rowOrder="120"><Rate>377.31</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.28</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange122" msdata:rowOrder="121"><Rate>503.37</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-0.64</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange123" msdata:rowOrder="122"><Rate>264.49</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-1.52</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange124" msdata:rowOrder="123"><Rate>436.81</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.5</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange125" msdata:rowOrder="124"><Rate>515.02</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-0.79</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange126" msdata:rowOrder="125"><Rate>0.028576</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000123</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange127" msdata:rowOrder="126"><Rate>102.01</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.62</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange128" msdata:rowOrder="127"><Rate>276.22</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.54</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange129" msdata:rowOrder="128"><Rate>4.1154</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0055</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange130" msdata:rowOrder="129"><Rate>39.061</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.042</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange131" msdata:rowOrder="130"><Rate>23.902</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.099</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange132" msdata:rowOrder="131"><Rate>40.859</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.152</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange133" msdata:rowOrder="132"><Rate>482.8</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-0.86</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange134" msdata:rowOrder="133"><Rate>17.89</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.09</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange135" msdata:rowOrder="134"><Rate>54.625</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.145</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange136" msdata:rowOrder="135"><Rate>294.64</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-1.14</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange137" msdata:rowOrder="136"><Rate>71.679</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-0.501</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange138" msdata:rowOrder="137"><Rate>102.73</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.07</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange139" msdata:rowOrder="138"><Rate>4.3162</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.0031</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange140" msdata:rowOrder="139"><Rate>7.6392</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.019</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange141" msdata:rowOrder="140"><Rate>4.7767</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0401</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange142" msdata:rowOrder="141"><Rate>8.616</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0008</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange143" msdata:rowOrder="142"><Rate>0.30952</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00047</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange144" msdata:rowOrder="143"><Rate>130.05</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.64</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange145" msdata:rowOrder="144"><Rate>39.87</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.051</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange146" msdata:rowOrder="145"><Rate>138.21</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>0.15</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange147" msdata:rowOrder="146"><Rate>48.256</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.017</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange148" msdata:rowOrder="147"><Rate>61916</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-586</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange149" msdata:rowOrder="148"><Rate>1021.6</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-32</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange150" msdata:rowOrder="149"><Rate>221.86</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-1.6</Diff><RateDate>2026-03-06T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange151" msdata:rowOrder="150"><Rate>377.29</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.02</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange152" msdata:rowOrder="151"><Rate>503.49</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>0.12</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange153" msdata:rowOrder="152"><Rate>264.71</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>0.22</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange154" msdata:rowOrder="153"><Rate>436.15</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-0.66</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange155" msdata:rowOrder="154"><Rate>513.91</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-1.11</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange156" msdata:rowOrder="155"><Rate>0.028646</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00007</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange157" msdata:rowOrder="156"><Rate>101.91</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.1</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange158" msdata:rowOrder="157"><Rate>278.69</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>2.47</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange159" msdata:rowOrder="158"><Rate>4.0892</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0262</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange160" msdata:rowOrder="159"><Rate>39.076</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.015</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange161" msdata:rowOrder="160"><Rate>23.811</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.091</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange162" msdata:rowOrder="161"><Rate>40.809</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.05</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange163" msdata:rowOrder="162"><Rate>484.57</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>1.77</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange164" msdata:rowOrder="163"><Rate>17.864</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.026</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange165" msdata:rowOrder="164"><Rate>54.548</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.077</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange166" msdata:rowOrder="165"><Rate>294.67</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.03</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange167" msdata:rowOrder="166"><Rate>72.027</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>0.348</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange168" msdata:rowOrder="167"><Rate>102.72</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.01</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange169" msdata:rowOrder="168"><Rate>4.3158</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.0004</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange170" msdata:rowOrder="169"><Rate>7.5779</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.0613</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange171" msdata:rowOrder="170"><Rate>4.8215</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>0.0448</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange172" msdata:rowOrder="171"><Rate>8.5884</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0276</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange173" msdata:rowOrder="172"><Rate>0.30951</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00001</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange174" msdata:rowOrder="173"><Rate>128.95</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-1.1</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange175" msdata:rowOrder="174"><Rate>39.836</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.034</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange176" msdata:rowOrder="175"><Rate>137.62</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.59</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange177" msdata:rowOrder="176"><Rate>48.267</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.011</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange178" msdata:rowOrder="177"><Rate>62198</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>282</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange179" msdata:rowOrder="178"><Rate>998.8</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-22.8</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange180" msdata:rowOrder="179"><Rate>222.87</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>1.01</Diff><RateDate>2026-03-09T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange181" msdata:rowOrder="180"><Rate>377.41</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.12</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange182" msdata:rowOrder="181"><Rate>507.62</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>4.13</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange183" msdata:rowOrder="182"><Rate>268.26</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>3.55</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange184" msdata:rowOrder="183"><Rate>439.27</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>3.12</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange185" msdata:rowOrder="184"><Rate>513.93</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>0.02</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange186" msdata:rowOrder="185"><Rate>0.028587</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000059</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange187" msdata:rowOrder="186"><Rate>103.2</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>1.29</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange188" msdata:rowOrder="187"><Rate>278.08</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.61</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange189" msdata:rowOrder="188"><Rate>4.1015</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.0123</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange190" msdata:rowOrder="189"><Rate>39.341</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.265</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange191" msdata:rowOrder="190"><Rate>23.922</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.111</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange192" msdata:rowOrder="191"><Rate>41.423</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.614</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange193" msdata:rowOrder="192"><Rate>486.23</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>1.66</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange194" msdata:rowOrder="193"><Rate>18.031</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.167</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange195" msdata:rowOrder="194"><Rate>54.906</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>0.358</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange196" msdata:rowOrder="195"><Rate>296.66</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>1.99</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange197" msdata:rowOrder="196"><Rate>73.177</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>1.15</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange198" msdata:rowOrder="197"><Rate>102.76</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.04</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange199" msdata:rowOrder="198"><Rate>4.3171</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0013</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange200" msdata:rowOrder="199"><Rate>7.7332</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.1553</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange201" msdata:rowOrder="200"><Rate>4.7901</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0314</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange202" msdata:rowOrder="201"><Rate>8.6038</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.0154</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange203" msdata:rowOrder="202"><Rate>0.31003</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00052</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange204" msdata:rowOrder="203"><Rate>129.3</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>0.35</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange205" msdata:rowOrder="204"><Rate>39.744</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.092</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange206" msdata:rowOrder="205"><Rate>137.62</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>0</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange207" msdata:rowOrder="206"><Rate>48.236</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.031</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange208" msdata:rowOrder="207"><Rate>61718</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-480</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange209" msdata:rowOrder="208"><Rate>1012.5</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>13.7</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange210" msdata:rowOrder="209"><Rate>224.03</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>1.16</Diff><RateDate>2026-03-10T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange211" msdata:rowOrder="210"><Rate>377.27</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.14</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange212" msdata:rowOrder="211"><Rate>507.31</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-0.31</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange213" msdata:rowOrder="212"><Rate>270.24</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>1.98</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange214" msdata:rowOrder="213"><Rate>437.9</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.37</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange215" msdata:rowOrder="214"><Rate>515.73</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>1.8</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange216" msdata:rowOrder="215"><Rate>0.028581</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000006</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange217" msdata:rowOrder="216"><Rate>102.81</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.39</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange218" msdata:rowOrder="217"><Rate>278.08</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>0</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange219" msdata:rowOrder="218"><Rate>4.1041</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.0026</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange220" msdata:rowOrder="219"><Rate>39.14</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.201</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange221" msdata:rowOrder="220"><Rate>23.837</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.085</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange222" msdata:rowOrder="221"><Rate>41.093</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.33</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange223" msdata:rowOrder="222"><Rate>484.67</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-1.56</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange224" msdata:rowOrder="223"><Rate>17.971</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.06</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange225" msdata:rowOrder="224"><Rate>54.943</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>0.037</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange226" msdata:rowOrder="225"><Rate>296.5</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-0.16</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange227" msdata:rowOrder="226"><Rate>73.129</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-0.048</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange228" msdata:rowOrder="227"><Rate>102.71</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.05</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange229" msdata:rowOrder="228"><Rate>4.3156</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.0015</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange230" msdata:rowOrder="229"><Rate>7.6834</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.0498</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange231" msdata:rowOrder="230"><Rate>4.7436</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0465</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange232" msdata:rowOrder="231"><Rate>8.5724</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.0314</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange233" msdata:rowOrder="232"><Rate>0.31038</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00035</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange234" msdata:rowOrder="233"><Rate>129.06</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.24</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange235" msdata:rowOrder="234"><Rate>39.765</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.021</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange236" msdata:rowOrder="235"><Rate>138.38</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>0.76</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange237" msdata:rowOrder="236"><Rate>48.203</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.033</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange238" msdata:rowOrder="237"><Rate>63191</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>1473</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange239" msdata:rowOrder="238"><Rate>1073.8</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>61.3</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange240" msdata:rowOrder="239"><Rate>223.8</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-0.23</Diff><RateDate>2026-03-11T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange241" msdata:rowOrder="240"><Rate>377.44</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.17</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange242" msdata:rowOrder="241"><Rate>505.51</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-1.8</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange243" msdata:rowOrder="242"><Rate>269.3</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-0.94</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange244" msdata:rowOrder="243"><Rate>436.25</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.65</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange245" msdata:rowOrder="244"><Rate>515.2</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-0.53</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange246" msdata:rowOrder="245"><Rate>0.028555</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000026</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange247" msdata:rowOrder="246"><Rate>102.39</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.42</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange248" msdata:rowOrder="247"><Rate>277.71</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.37</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange249" msdata:rowOrder="248"><Rate>4.0869</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0172</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange250" msdata:rowOrder="249"><Rate>39.008</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.132</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange251" msdata:rowOrder="250"><Rate>23.785</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.052</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange252" msdata:rowOrder="251"><Rate>40.755</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.338</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange253" msdata:rowOrder="252"><Rate>483.4</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-1.27</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange254" msdata:rowOrder="253"><Rate>17.873</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.098</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange255" msdata:rowOrder="254"><Rate>54.934</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.009</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange256" msdata:rowOrder="255"><Rate>296.03</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-0.47</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange257" msdata:rowOrder="256"><Rate>73.194</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>0.065</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange258" msdata:rowOrder="257"><Rate>102.76</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.05</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange259" msdata:rowOrder="258"><Rate>4.3175</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0019</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange260" msdata:rowOrder="259"><Rate>7.7057</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.0223</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange261" msdata:rowOrder="260"><Rate>4.7633</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>0.0197</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange262" msdata:rowOrder="261"><Rate>8.5394</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.033</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange263" msdata:rowOrder="262"><Rate>0.311</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00062</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange264" msdata:rowOrder="263"><Rate>128.99</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.07</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange265" msdata:rowOrder="264"><Rate>39.318</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.447</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange266" msdata:rowOrder="265"><Rate>138.23</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.15</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange267" msdata:rowOrder="266"><Rate>48.221</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.018</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange268" msdata:rowOrder="267"><Rate>62888</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-303</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange269" msdata:rowOrder="268"><Rate>1046.4</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-27.4</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange270" msdata:rowOrder="269"><Rate>222.92</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-0.88</Diff><RateDate>2026-03-12T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange271" msdata:rowOrder="270"><Rate>377.54</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.1</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange272" msdata:rowOrder="271"><Rate>500.62</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-4.89</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange273" msdata:rowOrder="272"><Rate>265.86</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-3.44</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange274" msdata:rowOrder="273"><Rate>432.7</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-3.55</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange275" msdata:rowOrder="274"><Rate>514.7</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-0.5</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange276" msdata:rowOrder="275"><Rate>0.028642</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.000087</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange277" msdata:rowOrder="276"><Rate>101.44</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.95</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange278" msdata:rowOrder="277"><Rate>276.06</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-1.65</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange279" msdata:rowOrder="278"><Rate>4.0841</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0028</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange280" msdata:rowOrder="279"><Rate>38.718</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.29</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange281" msdata:rowOrder="280"><Rate>23.691</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.094</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange282" msdata:rowOrder="281"><Rate>40.162</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.593</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange283" msdata:rowOrder="282"><Rate>479.17</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-4.23</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange284" msdata:rowOrder="283"><Rate>17.713</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.16</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange285" msdata:rowOrder="284"><Rate>54.762</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.172</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange286" msdata:rowOrder="285"><Rate>294.88</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-1.15</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange287" msdata:rowOrder="286"><Rate>71.969</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-1.225</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange288" msdata:rowOrder="287"><Rate>102.79</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.03</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange289" msdata:rowOrder="288"><Rate>4.3186</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0011</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange290" msdata:rowOrder="289"><Rate>7.7167</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.011</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange291" msdata:rowOrder="290"><Rate>4.6847</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0786</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange292" msdata:rowOrder="291"><Rate>8.5517</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.0123</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange293" msdata:rowOrder="292"><Rate>0.31215</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00115</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange294" msdata:rowOrder="293"><Rate>129.02</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>0.03</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange295" msdata:rowOrder="294"><Rate>39.282</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.036</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange296" msdata:rowOrder="295"><Rate>138.5</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>0.27</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange297" msdata:rowOrder="296"><Rate>48.232</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.011</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange298" msdata:rowOrder="297"><Rate>62270</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-618</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange299" msdata:rowOrder="298"><Rate>1056.4</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>10</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange300" msdata:rowOrder="299"><Rate>219.88</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-3.04</Diff><RateDate>2026-03-13T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange301" msdata:rowOrder="300"><Rate>377.41</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.13</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange302" msdata:rowOrder="301"><Rate>500.79</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>0.17</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange303" msdata:rowOrder="302"><Rate>266</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>0.14</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange304" msdata:rowOrder="303"><Rate>432.96</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>0.26</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange305" msdata:rowOrder="304"><Rate>512.5</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>-2.2</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange306" msdata:rowOrder="305"><Rate>0.028611</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000031</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange307" msdata:rowOrder="306"><Rate>101.57</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>0.13</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange308" msdata:rowOrder="307"><Rate>275.64</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.42</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange309" msdata:rowOrder="308"><Rate>4.0847</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.0006</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange310" msdata:rowOrder="309"><Rate>38.862</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.144</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange311" msdata:rowOrder="310"><Rate>23.701</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.01</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange312" msdata:rowOrder="311"><Rate>40.23</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.068</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange313" msdata:rowOrder="312"><Rate>478.76</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-0.41</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange314" msdata:rowOrder="313"><Rate>17.725</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.012</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange315" msdata:rowOrder="314"><Rate>54.761</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.001</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange316" msdata:rowOrder="315"><Rate>295.06</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.18</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange317" msdata:rowOrder="316"><Rate>70.892</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-1.077</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange318" msdata:rowOrder="317"><Rate>102.75</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.04</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange319" msdata:rowOrder="318"><Rate>4.3169</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.0017</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange320" msdata:rowOrder="319"><Rate>7.8011</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.0844</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange321" msdata:rowOrder="320"><Rate>4.6571</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0276</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange322" msdata:rowOrder="321"><Rate>8.5612</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.0095</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange323" msdata:rowOrder="322"><Rate>0.31191</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00024</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange324" msdata:rowOrder="323"><Rate>128.67</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.35</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange325" msdata:rowOrder="324"><Rate>39.286</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.004</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange326" msdata:rowOrder="325"><Rate>138.19</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.31</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange327" msdata:rowOrder="326"><Rate>48.196</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.036</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange328" msdata:rowOrder="327"><Rate>61211</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-1059</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange329" msdata:rowOrder="328"><Rate>1015.6</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-40.8</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange330" msdata:rowOrder="329"><Rate>220.33</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>0.45</Diff><RateDate>2026-03-16T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange331" msdata:rowOrder="330"><Rate>377.46</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.05</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange332" msdata:rowOrder="331"><Rate>502.89</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>2.1</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange333" msdata:rowOrder="332"><Rate>267.43</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>1.43</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange334" msdata:rowOrder="333"><Rate>434.27</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>1.31</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange335" msdata:rowOrder="334"><Rate>512.83</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>0.33</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange336" msdata:rowOrder="335"><Rate>0.028598</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>-0.000013</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange337" msdata:rowOrder="336"><Rate>101.82</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>0.25</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange338" msdata:rowOrder="337"><Rate>275.52</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.12</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange339" msdata:rowOrder="338"><Rate>4.0825</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.0022</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange340" msdata:rowOrder="339"><Rate>39.185</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.323</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange341" msdata:rowOrder="340"><Rate>23.72</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.019</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange342" msdata:rowOrder="341"><Rate>40.502</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.272</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange343" msdata:rowOrder="342"><Rate>479.68</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>0.92</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange344" msdata:rowOrder="343"><Rate>17.76</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.035</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange345" msdata:rowOrder="344"><Rate>54.792</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>0.031</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange346" msdata:rowOrder="345"><Rate>295.31</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.25</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange347" msdata:rowOrder="346"><Rate>72.16</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>1.268</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange348" msdata:rowOrder="347"><Rate>102.76</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.01</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange349" msdata:rowOrder="348"><Rate>4.3228</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.0059</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange350" msdata:rowOrder="349"><Rate>7.8562</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.0551</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange351" msdata:rowOrder="350"><Rate>4.5869</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.0702</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange352" msdata:rowOrder="351"><Rate>8.5845</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.0233</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange353" msdata:rowOrder="352"><Rate>0.31073</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.00118</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange354" msdata:rowOrder="353"><Rate>128.11</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.56</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange355" msdata:rowOrder="354"><Rate>39.277</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.009</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange356" msdata:rowOrder="355"><Rate>138.74</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>0.55</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange357" msdata:rowOrder="356"><Rate>48.167</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.029</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange358" msdata:rowOrder="357"><Rate>60616</Rate><Amount>1</Amount><ISO>XAU</ISO><Diff>-595</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange359" msdata:rowOrder="358"><Rate>958.05</Rate><Amount>1</Amount><ISO>XAG</ISO><Diff>-57.55</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange360" msdata:rowOrder="359"><Rate>220.32</Rate><Amount>1</Amount><ISO>NZD</ISO><Diff>-0.01</Diff><RateDate>2026-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange></DocumentElement></diffgr:diffgram></ExchangeRatesByDateRangeByISOResult></ExchangeRatesByDateRangeByISOResponse></soap:Body></soap:Envelope>
+  recorded_at: Tue, 17 Mar 2026 15:06:38 GMT
+recorded_with: VCR 6.4.0
