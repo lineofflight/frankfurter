@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "logger"
 require "rate"
 
 module Providers
@@ -7,6 +8,12 @@ module Providers
     def all
       @all ||= []
     end
+
+    def logger
+      @logger ||= Logger.new($stdout)
+    end
+
+    attr_writer :logger
   end
 
   class Base
@@ -17,10 +24,11 @@ module Providers
       end
     end
 
-    attr_reader :dataset
+    attr_reader :dataset, :logger
 
-    def initialize(dataset: [])
+    def initialize(dataset: [], logger: Providers.logger)
       @dataset = dataset
+      @logger = logger
     end
 
     def key = raise(NotImplementedError)
@@ -36,7 +44,9 @@ module Providers
     end
 
     def import
-      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset)
+      logger.info("#{key}: started")
+      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
+      logger.info("#{key}: done (#{dataset.size} rates)")
 
       self
     end

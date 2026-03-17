@@ -8,6 +8,9 @@ require "minitest/focus"
 require "vcr"
 require "webmock"
 
+require "providers/base"
+Providers.logger = Logger.new(File::NULL)
+
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr_cassettes"
   c.hook_into(:webmock)

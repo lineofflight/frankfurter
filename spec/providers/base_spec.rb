@@ -28,7 +28,15 @@ module Providers
     end
 
     it "does nothing when importing empty dataset" do
-      _(provider.import).must_be_kind_of(Base)
+      klass = Class.new(Base) do
+        def key = "TEST"
+        def name = "Test"
+        def base = "EUR"
+      end
+
+      _(klass.new.import).must_be_kind_of(Base)
+    ensure
+      Providers.all.delete(klass)
     end
 
     describe "with a dataset" do
