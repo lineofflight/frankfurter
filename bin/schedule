@@ -23,4 +23,29 @@ scheduler.cron("*/30 12,13,14 * * 1-5") do
   %x(rake tcmb:import)
 end
 
+# NBU publishes daily (Ukraine, EET/EEST UTC+2/+3)
+scheduler.cron("*/30 10,11,12 * * 1-5") do
+  %x(rake nbu:import)
+end
+
+# CBA publishes daily (Armenia, UTC+4)
+scheduler.cron("*/30 8,9,10 * * 1-5") do
+  %x(rake cba:import)
+end
+
+# NBRB publishes daily (Belarus, UTC+3)
+scheduler.cron("*/30 9,10,11 * * 1-5") do
+  %x(rake nbrb:import)
+end
+
+# BOB publishes daily (Botswana, UTC+2)
+scheduler.cron("*/30 10,11,12 * * 1-5") do
+  %x(rake bob:import)
+end
+
+# CBR publishes daily (Russia, UTC+3)
+scheduler.cron("*/30 9,10,11 * * 1-5") do
+  %x(rake cbr:import)
+end
+
 scheduler.join
