@@ -28,7 +28,7 @@ module Providers
       end
 
       describe "current" do
-        before { VCR.insert_cassette("tcmb_current", match_requests_on: [:method, :host, :path]) }
+        before { VCR.insert_cassette("tcmb_current", match_requests_on: [:method, :host]) }
         after { VCR.eject_cassette }
 
         it "imports" do
