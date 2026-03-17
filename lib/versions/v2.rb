@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "money/currency"
 require "oj"
 require "roda"
+require "set"
 
 require "providers/ecb"
 require "providers/boc"
@@ -54,30 +56,43 @@ module Versions
     private
 
     def currencies
-      require "set"
-      db = Sequel::Model.db
-
       result = {}
-      db.fetch("SELECT DISTINCT quote, provider FROM rates").each do |row|
-        (result[row[:quote]] ||= Set.new) << row[:provider]
+      Rate.select(:quote, :provider).distinct.each do |row|
+        (result[row.quote] ||= Set.new) << row.provider
       end
-      db.fetch("SELECT DISTINCT base, provider FROM rates").each do |row|
-        (result[row[:base]] ||= Set.new) << row[:provider]
+      Rate.select(:base, :provider).distinct.each do |row|
+        (result[row.base] ||= Set.new) << row.provider
       end
 
-      require "money/currency"
-      result.sort.to_h do |iso, providers|
+      result.sort.map do |iso, providers|
         currency = Money::Currency.find(iso)
-        [iso, { name: currency&.name || iso, providers: providers.to_a }]
+        {
+          iso_code: iso,
+          iso_numeric: currency&.iso_numeric,
+          name: currency&.name || iso,
+          symbol: currency&.symbol,
+          providers: providers.to_a,
+        }
       end
     end
 
     def providers
-      Providers.all.map(&:new).sort_by(&:key).to_h do |provider|
-        [provider.key, {
+      date_ranges = Rate.group(:provider)
+        .select { [provider, min(date).as(start_date), max(date).as(end_date)] }
+        .to_h { |r| [r[:provider], { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }] }
+      currencies = Rate.select(:provider, :quote).distinct.order(:provider, :quote).all
+        .group_by(&:provider).transform_values { |rows| rows.map(&:quote) }
+
+      Providers.all.map(&:new).sort_by(&:key).map do |provider|
+        range = date_ranges[provider.key] || {}
+        {
+          key: provider.key,
           name: provider.name,
           base: provider.base,
-        },]
+          start_date: range[:start_date],
+          end_date: range[:end_date],
+          currencies: currencies[provider.key] || [],
+        }
       end
     end
   end

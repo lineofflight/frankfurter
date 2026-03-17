@@ -142,23 +142,31 @@ describe Versions::V2 do
     get "/currencies"
 
     _(last_response).must_be(:ok?)
-    assert_conform_schema(200)
-    _(json["USD"]["name"]).must_equal("United States Dollar")
-    _(json["USD"]["providers"]).must_include("ECB")
+    usd = json.find { |c| c["iso_code"] == "USD" }
+
+    _(usd["name"]).must_equal("United States Dollar")
+    _(usd["symbol"]).must_equal("$")
+    _(usd["iso_numeric"]).must_equal("840")
+    _(usd["providers"]).must_include("ECB")
   end
 
   it "includes base currencies in currencies list" do
     get "/currencies"
+    eur = json.find { |c| c["iso_code"] == "EUR" }
 
-    _(json["EUR"]).must_be_kind_of(Hash)
+    _(eur).wont_be_nil
   end
 
   it "returns providers" do
     get "/providers"
 
     _(last_response).must_be(:ok?)
-    assert_conform_schema(200)
-    _(json["ECB"]["name"]).must_equal("European Central Bank")
-    _(json["ECB"]["base"]).must_equal("EUR")
+    ecb = json.find { |p| p["key"] == "ECB" }
+
+    _(ecb["name"]).must_equal("European Central Bank")
+    _(ecb["base"]).must_equal("EUR")
+    _(ecb["start_date"]).wont_be_nil
+    _(ecb["end_date"]).wont_be_nil
+    _(ecb["currencies"]).must_include("USD")
   end
 end
