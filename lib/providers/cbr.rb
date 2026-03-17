@@ -45,8 +45,12 @@ module Providers
       doc.locate("ValCurs/Valute").filter_map do |v|
         quote = v.locate("CharCode").first&.text
         next unless quote && !quote.empty?
+        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(quote)
 
-        { provider: key, date: parse_date, base:, quote:, rate: extract_rate(v) }
+        rate = extract_rate(v)
+        next unless rate
+
+        { provider: key, date: parse_date, base:, quote:, rate: }
       end
     end
 
@@ -55,6 +59,7 @@ module Providers
       doc.locate("ValCurs/Valute").filter_map do |v|
         code = v.locate("CharCode").first&.text
         next unless code && !code.empty?
+        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(code)
 
         id = v[:ID]
         nominal = v.locate("Nominal").first&.text.to_i
@@ -74,15 +79,22 @@ module Providers
         date = Date.strptime(row[:Date], "%d.%m.%Y")
         next if date.saturday? || date.sunday?
 
-        { provider: key, date:, base:, quote: code, rate: extract_rate(row) }
+        rate = extract_rate(row)
+        next unless rate
+
+        { provider: key, date:, base:, quote: code, rate: }
       end
     end
 
     def extract_rate(node)
-      value = node.locate("VunitRate").first || node.locate("Value").first
-      nominal = node.locate("Nominal").first
-      rate = Float(value.text.tr(",", "."))
-      nominal ? rate / nominal.text.to_i : rate
+      vunit = node.locate("VunitRate").first
+      return Float(vunit.text.tr(",", ".")) if vunit&.text && !vunit.text.empty?
+
+      value = node.locate("Value").first
+      return unless value&.text
+
+      nominal = node.locate("Nominal").first&.text.to_i
+      Float(value.text.tr(",", ".")) / nominal
     end
   end
 end

@@ -4,6 +4,10 @@ require "db"
 
 class Rate < Sequel::Model(:rates)
   dataset_module do
+    def ecb
+      where(provider: "ECB")
+    end
+
     def latest(date = Date.today)
       date = Date.today if date > Date.today
       where(date: nearest_date_with_rates(date))

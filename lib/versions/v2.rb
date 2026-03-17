@@ -8,6 +8,11 @@ require "set"
 require "providers/ecb"
 require "providers/boc"
 require "providers/tcmb"
+require "providers/nbu"
+require "providers/cba"
+require "providers/nbrb"
+require "providers/bob"
+require "providers/cbr"
 require "versions/v2/query"
 
 module Versions

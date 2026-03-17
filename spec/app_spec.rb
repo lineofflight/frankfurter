@@ -10,8 +10,19 @@ describe App do
   let(:app) { App.freeze }
   let(:headers) { last_response.headers }
 
+  it "serves root" do
+    get "/"
+
+    _(last_response).must_be(:ok?)
+    _(headers["Cache-Control"]).must_equal("public, max-age=900")
+    json = Oj.load(last_response.body)
+
+    _(json["versions"]["v1"]["currencies"]).must_be(:positive?)
+    _(json["versions"]["v2"]["currencies"]).must_be(:positive?)
+  end
+
   it "serves static files" do
-    ["/", "/favicon.ico", "/robots.txt", "/v1/openapi.json"].each do |path|
+    ["/favicon.ico", "/robots.txt", "/v1/openapi.json"].each do |path|
       get path
 
       _(last_response).must_be(:ok?)

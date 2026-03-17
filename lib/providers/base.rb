@@ -39,9 +39,13 @@ module Providers
     def import
       logger.info("#{key}: started")
       Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
-      logger.info("#{key}: done (#{dataset.size} rates)")
+      logger.info("#{key}: imported #{count.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse} rates")
 
       self
+    end
+
+    def count
+      dataset.size
     end
   end
 end

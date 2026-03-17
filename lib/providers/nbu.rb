@@ -35,6 +35,9 @@ module Providers
         next if date.saturday? || date.sunday?
 
         quote = row.fetch("cc")
+        next unless quote.match?(/\A[A-Z]{3}\z/)
+        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(quote)
+
         units = row.fetch("units", 1).to_f
         rate = row.fetch("rate").to_f
         next if rate.zero? || units.zero?
