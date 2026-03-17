@@ -27,14 +27,14 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:43 GMT
+      - Tue, 17 Mar 2026 15:51:58 GMT
       Content-Length:
       - '4520'
     body:
       encoding: ASCII-8BIT
       string: !binary |-
         W3siQ3VyX0lEIjo0NDAsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkFVRCIsIkN1cl9TY2FsZSI6MSwiQ3VyX05hbWUiOiLQkNCy0YHRgtGA0LDQu9C40LnRgdC60LjQuSDQtNC+0LvQu9Cw0YAiLCJDdXJfT2ZmaWNpYWxSYXRlIjoyLjA3MDB9LHsiQ3VyX0lEIjo1MTAsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkFNRCIsIkN1cl9TY2FsZSI6MTAwMCwiQ3VyX05hbWUiOiLQkNGA0LzRj9C90YHQutC40YUg0LTRgNCw0LzQvtCyIiwiQ3VyX09mZmljaWFsUmF0ZSI6Ny44MDE0fSx7IkN1cl9JRCI6NTE0LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJCUkwiLCJDdXJfU2NhbGUiOjEwLCJDdXJfTmFtZSI6ItCR0YDQsNC30LjQu9GM0YHQutC40YUg0YDQtdCw0LvQvtCyIiwiQ3VyX09mZmljaWFsUmF0ZSI6NS41MzkwfSx7IkN1cl9JRCI6NDQ5LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJVQUgiLCJDdXJfU2NhbGUiOjEwMCwiQ3VyX05hbWUiOiLQk9GA0LjQstC10L0iLCJDdXJfT2ZmaWNpYWxSYXRlIjo2LjY2OTl9LHsiQ3VyX0lEIjo0NTAsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkRLSyIsIkN1cl9TY2FsZSI6MTAsIkN1cl9OYW1lIjoi0JTQsNGC0YHQutC40YUg0LrRgNC+0L0iLCJDdXJfT2ZmaWNpYWxSYXRlIjo0LjUxNDZ9LHsiQ3VyX0lEIjo1MTMsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkFFRCIsIkN1cl9TY2FsZSI6MTAsIkN1cl9OYW1lIjoi0JTQuNGA0YXQsNC80L7QsiDQntCQ0K0iLCJDdXJfT2ZmaWNpYWxSYXRlIjo4LjAyMjZ9LHsiQ3VyX0lEIjo0MzEsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IlVTRCIsIkN1cl9TY2FsZSI6MSwiQ3VyX05hbWUiOiLQlNC+0LvQu9Cw0YAg0KHQqNCQIiwiQ3VyX09mZmljaWFsUmF0ZSI6Mi45NDYzfSx7IkN1cl9JRCI6NTEyLCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJWTkQiLCJDdXJfU2NhbGUiOjEwMDAwMCwiQ3VyX05hbWUiOiLQlNC+0L3Qs9C+0LIiLCJDdXJfT2ZmaWNpYWxSYXRlIjoxMS4yMDcxfSx7IkN1cl9JRCI6NDUxLCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJFVVIiLCJDdXJfU2NhbGUiOjEsIkN1cl9OYW1lIjoi0JXQstGA0L4iLCJDdXJfT2ZmaWNpYWxSYXRlIjozLjM3NDF9LHsiQ3VyX0lEIjo0NTIsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IlBMTiIsIkN1cl9TY2FsZSI6MTAsIkN1cl9OYW1lIjoi0JfQu9C+0YLRi9GFIiwiQ3VyX09mZmljaWFsUmF0ZSI6Ny45MDEyfSx7IkN1cl9JRCI6NTA4LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJKUFkiLCJDdXJfU2NhbGUiOjEwMCwiQ3VyX05hbWUiOiLQmNC10L0iLCJDdXJfT2ZmaWNpYWxSYXRlIjoxLjg0OTR9LHsiQ3VyX0lEIjo1MTEsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IklOUiIsIkN1cl9TY2FsZSI6MTAwLCJDdXJfTmFtZSI6ItCY0L3QtNC40LnRgdC60LjRhSDRgNGD0L/QuNC5IiwiQ3VyX09mZmljaWFsUmF0ZSI6My4xODI0fSx7IkN1cl9JRCI6NDYxLCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJJUlIiLCJDdXJfU2NhbGUiOjEwMDAwMCwiQ3VyX05hbWUiOiLQmNGA0LDQvdGB0LrQuNGFINGA0LjQsNC70L7QsiIsIkN1cl9PZmZpY2lhbFJhdGUiOjAuMjIyOX0seyJDdXJfSUQiOjQ1MywiRGF0ZSI6IjIwMjYtMDMtMTdUMDA6MDA6MDAiLCJDdXJfQWJicmV2aWF0aW9uIjoiSVNLIiwiQ3VyX1NjYWxlIjoxMDAsIkN1cl9OYW1lIjoi0JjRgdC70LDQvdC00YHQutC40YUg0LrRgNC+0L0iLCJDdXJfT2ZmaWNpYWxSYXRlIjoyLjMzOTV9LHsiQ3VyX0lEIjozNzEsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkNBRCIsIkN1cl9TY2FsZSI6MSwiQ3VyX05hbWUiOiLQmtCw0L3QsNC00YHQutC40Lkg0LTQvtC70LvQsNGAIiwiQ3VyX09mZmljaWFsUmF0ZSI6Mi4xNTA2fSx7IkN1cl9JRCI6NDYyLCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJDTlkiLCJDdXJfU2NhbGUiOjEwLCJDdXJfTmFtZSI6ItCa0LjRgtCw0LnRgdC60LjRhSDRjtCw0L3QtdC5IiwiQ3VyX09mZmljaWFsUmF0ZSI6NC4zMDU5fSx7IkN1cl9JRCI6Mzk0LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJLV0QiLCJDdXJfU2NhbGUiOjEsIkN1cl9OYW1lIjoi0JrRg9Cy0LXQudGC0YHQutC40Lkg0LTQuNC90LDRgCIsIkN1cl9PZmZpY2lhbFJhdGUiOjkuNjAzM30seyJDdXJfSUQiOjQ1NCwiRGF0ZSI6IjIwMjYtMDMtMTdUMDA6MDA6MDAiLCJDdXJfQWJicmV2aWF0aW9uIjoiTURMIiwiQ3VyX1NjYWxlIjoxMCwiQ3VyX05hbWUiOiLQnNC+0LvQtNCw0LLRgdC60LjRhSDQu9C10LXQsiIsIkN1cl9PZmZpY2lhbFJhdGUiOjEuNjgxMn0seyJDdXJfSUQiOjQ0OCwiRGF0ZSI6IjIwMjYtMDMtMTdUMDA6MDA6MDAiLCJDdXJfQWJicmV2aWF0aW9uIjoiTlpEIiwiQ3VyX1NjYWxlIjoxLCJDdXJfTmFtZSI6ItCd0L7QstC+0LfQtdC70LDQvdC00YHQutC40Lkg0LTQvtC70LvQsNGAIiwiQ3VyX09mZmljaWFsUmF0ZSI6MS43MTU3fSx7IkN1cl9JRCI6NDU1LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJOT0siLCJDdXJfU2NhbGUiOjEwLCJDdXJfTmFtZSI6ItCd0L7RgNCy0LXQttGB0LrQuNGFINC60YDQvtC9IiwiQ3VyX09mZmljaWFsUmF0ZSI6My4wMzAzfSx7IkN1cl9JRCI6NDU2LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJSVUIiLCJDdXJfU2NhbGUiOjEwMCwiQ3VyX05hbWUiOiLQoNC+0YHRgdC40LnRgdC60LjRhSDRgNGD0LHQu9C10LkiLCJDdXJfT2ZmaWNpYWxSYXRlIjozLjY3MDl9LHsiQ3VyX0lEIjo0NTcsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IlhEUiIsIkN1cl9TY2FsZSI6MSwiQ3VyX05hbWUiOiLQodCU0KAgKNCh0L/QtdGG0LjQsNC70YzQvdGL0LUg0L/RgNCw0LLQsCDQt9Cw0LjQvNGB0YLQstC+0LLQsNC90LjRjykiLCJDdXJfT2ZmaWNpYWxSYXRlIjo0LjAwMDl9LHsiQ3VyX0lEIjo0MjEsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IlNHRCIsIkN1cl9TY2FsZSI6MSwiQ3VyX05hbWUiOiLQodC40L3Qs9Cw0L/Rg9GAY9C60LjQuSDQtNC+0LvQu9Cw0YAiLCJDdXJfT2ZmaWNpYWxSYXRlIjoyLjMwMDV9LHsiQ3VyX0lEIjo0NTgsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IktHUyIsIkN1cl9TY2FsZSI6MTAwLCJDdXJfTmFtZSI6ItCh0L7QvNC+0LIiLCJDdXJfT2ZmaWNpYWxSYXRlIjozLjM2OTF9LHsiQ3VyX0lEIjo0NTksIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IktaVCIsIkN1cl9TY2FsZSI6MTAwMCwiQ3VyX05hbWUiOiLQotC10L3Qs9C1IiwiQ3VyX09mZmljaWFsUmF0ZSI6Ni4wNzYxfSx7IkN1cl9JRCI6NDYwLCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJUUlkiLCJDdXJfU2NhbGUiOjEwLCJDdXJfTmFtZSI6ItCi0YPRgNC10YbQutC40YUg0LvQuNGAIiwiQ3VyX09mZmljaWFsUmF0ZSI6MC42NjY3fSx7IkN1cl9JRCI6NDI5LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJHQlAiLCJDdXJfU2NhbGUiOjEsIkN1cl9OYW1lIjoi0KTRg9C90YIg0YHRgtC10YDQu9C40L3Qs9C+0LIiLCJDdXJfT2ZmaWNpYWxSYXRlIjozLjkwMzd9LHsiQ3VyX0lEIjo0NjMsIkRhdGUiOiIyMDI2LTAzLTE3VDAwOjAwOjAwIiwiQ3VyX0FiYnJldmlhdGlvbiI6IkNaSyIsIkN1cl9TY2FsZSI6MTAwLCJDdXJfTmFtZSI6ItCn0LXRiNGB0LrQuNGFINC60YDQvtC9IiwiQ3VyX09mZmljaWFsUmF0ZSI6MTMuODA1Nn0seyJDdXJfSUQiOjQ2NCwiRGF0ZSI6IjIwMjYtMDMtMTdUMDA6MDA6MDAiLCJDdXJfQWJicmV2aWF0aW9uIjoiU0VLIiwiQ3VyX1NjYWxlIjoxMCwiQ3VyX05hbWUiOiLQqNCy0LXQtNGB0LrQuNGFINC60YDQvtC9IiwiQ3VyX09mZmljaWFsUmF0ZSI6My4xMzA3fSx7IkN1cl9JRCI6NDI2LCJEYXRlIjoiMjAyNi0wMy0xN1QwMDowMDowMCIsIkN1cl9BYmJyZXZpYXRpb24iOiJDSEYiLCJDdXJfU2NhbGUiOjEsIkN1cl9OYW1lIjoi0KjQstC10LnRhtCw0YDRgdC60LjQuSDRhNGA0LDQvdC6IiwiQ3VyX09mZmljaWFsUmF0ZSI6My43MzI2fV0=
-  recorded_at: Tue, 17 Mar 2026 15:06:45 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:00 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/440?endDate=2026-03-17&startDate=2026-03-01
@@ -55,8 +55,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -64,11 +62,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:44 GMT
+      - Tue, 17 Mar 2026 15:51:58 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":440,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.0310},{"Cur_ID":440,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":2.0297},{"Cur_ID":440,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":2.0316},{"Cur_ID":440,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.0351},{"Cur_ID":440,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.0329},{"Cur_ID":440,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":2.0443},{"Cur_ID":440,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":2.0443},{"Cur_ID":440,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":2.0443},{"Cur_ID":440,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":2.0478},{"Cur_ID":440,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":2.0476},{"Cur_ID":440,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":2.0795},{"Cur_ID":440,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":2.0916},{"Cur_ID":440,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":2.0884},{"Cur_ID":440,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":2.0884},{"Cur_ID":440,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":2.0884},{"Cur_ID":440,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":2.0643},{"Cur_ID":440,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":2.0700}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:46 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:00 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/510?endDate=2026-03-17&startDate=2026-03-01
@@ -98,11 +98,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:45 GMT
+      - Tue, 17 Mar 2026 15:51:59 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":510,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":7.6101},{"Cur_ID":510,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":7.5765},{"Cur_ID":510,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":7.6176},{"Cur_ID":510,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":7.6497},{"Cur_ID":510,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":7.6718},{"Cur_ID":510,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":7.7002},{"Cur_ID":510,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":7.7002},{"Cur_ID":510,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":7.7002},{"Cur_ID":510,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":7.7732},{"Cur_ID":510,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":7.7947},{"Cur_ID":510,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":7.8035},{"Cur_ID":510,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":7.7644},{"Cur_ID":510,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":7.7326},{"Cur_ID":510,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":7.7326},{"Cur_ID":510,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":7.7326},{"Cur_ID":510,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":7.7536},{"Cur_ID":510,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":7.8014}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:47 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:01 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/514?endDate=2026-03-17&startDate=2026-03-01
@@ -123,6 +123,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -130,13 +132,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:45 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:51:59 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":514,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":5.5591},{"Cur_ID":514,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":5.5431},{"Cur_ID":514,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":5.5895},{"Cur_ID":514,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":5.5755},{"Cur_ID":514,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":5.4734},{"Cur_ID":514,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":5.5429},{"Cur_ID":514,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":5.5429},{"Cur_ID":514,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":5.5429},{"Cur_ID":514,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":5.5504},{"Cur_ID":514,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":5.5649},{"Cur_ID":514,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":5.6637},{"Cur_ID":514,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":5.6679},{"Cur_ID":514,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":5.6722},{"Cur_ID":514,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":5.6722},{"Cur_ID":514,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":5.6722},{"Cur_ID":514,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":5.5921},{"Cur_ID":514,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":5.5390}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:47 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:01 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/449?endDate=2026-03-17&startDate=2026-03-01
@@ -166,11 +166,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:45 GMT
+      - Tue, 17 Mar 2026 15:51:59 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":449,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":6.6203},{"Cur_ID":449,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":6.6016},{"Cur_ID":449,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":6.6527},{"Cur_ID":449,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":6.6563},{"Cur_ID":449,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":6.6225},{"Cur_ID":449,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":6.6143},{"Cur_ID":449,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":6.6143},{"Cur_ID":449,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":6.6143},{"Cur_ID":449,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":6.6792},{"Cur_ID":449,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":6.6496},{"Cur_ID":449,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":6.6855},{"Cur_ID":449,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":6.6624},{"Cur_ID":449,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":6.6124},{"Cur_ID":449,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":6.6124},{"Cur_ID":449,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":6.6124},{"Cur_ID":449,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":6.6024},{"Cur_ID":449,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":6.6699}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:47 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:01 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/450?endDate=2026-03-17&startDate=2026-03-01
@@ -191,6 +191,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -198,13 +200,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:46 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:51:59 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":450,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":4.5042},{"Cur_ID":450,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":4.5050},{"Cur_ID":450,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":4.5080},{"Cur_ID":450,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":4.4888},{"Cur_ID":450,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":4.4884},{"Cur_ID":450,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":4.5132},{"Cur_ID":450,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":4.5132},{"Cur_ID":450,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":4.5132},{"Cur_ID":450,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":4.5324},{"Cur_ID":450,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":4.5150},{"Cur_ID":450,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":4.5580},{"Cur_ID":450,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":4.5405},{"Cur_ID":450,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":4.5267},{"Cur_ID":450,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":4.5267},{"Cur_ID":450,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":4.5267},{"Cur_ID":450,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":4.4961},{"Cur_ID":450,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":4.5146}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:48 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:01 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/513?endDate=2026-03-17&startDate=2026-03-01
@@ -234,11 +234,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:46 GMT
+      - Tue, 17 Mar 2026 15:52:00 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":513,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":7.7666},{"Cur_ID":513,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":7.7702},{"Cur_ID":513,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":7.8151},{"Cur_ID":513,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":7.8682},{"Cur_ID":513,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":7.8668},{"Cur_ID":513,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":7.9001},{"Cur_ID":513,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":7.9001},{"Cur_ID":513,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":7.9001},{"Cur_ID":513,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":7.9671},{"Cur_ID":513,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":7.9480},{"Cur_ID":513,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":7.9597},{"Cur_ID":513,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":7.9676},{"Cur_ID":513,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":7.9676},{"Cur_ID":513,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":7.9676},{"Cur_ID":513,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":7.9676},{"Cur_ID":513,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":7.9869},{"Cur_ID":513,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":8.0226}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:48 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:02 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/431?endDate=2026-03-17&startDate=2026-03-01
@@ -259,6 +259,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -266,13 +268,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:46 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:00 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":431,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.8523},{"Cur_ID":431,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":2.8536},{"Cur_ID":431,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":2.8701},{"Cur_ID":431,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.8896},{"Cur_ID":431,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.8891},{"Cur_ID":431,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":2.9013},{"Cur_ID":431,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":2.9013},{"Cur_ID":431,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":2.9013},{"Cur_ID":431,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":2.9259},{"Cur_ID":431,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":2.9189},{"Cur_ID":431,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":2.9232},{"Cur_ID":431,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":2.9261},{"Cur_ID":431,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":2.9261},{"Cur_ID":431,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":2.9261},{"Cur_ID":431,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":2.9261},{"Cur_ID":431,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":2.9332},{"Cur_ID":431,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":2.9463}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:48 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:02 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/512?endDate=2026-03-17&startDate=2026-03-01
@@ -293,8 +293,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1208'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -302,11 +300,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:46 GMT
+      - Tue, 17 Mar 2026 15:52:00 GMT
+      Content-Length:
+      - '1208'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":512,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":10.9409},{"Cur_ID":512,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":10.9518},{"Cur_ID":512,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":10.9516},{"Cur_ID":512,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":11.0263},{"Cur_ID":512,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":11.0178},{"Cur_ID":512,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":11.0652},{"Cur_ID":512,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":11.0652},{"Cur_ID":512,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":11.0652},{"Cur_ID":512,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":11.1505},{"Cur_ID":512,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":11.1099},{"Cur_ID":512,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":11.1424},{"Cur_ID":512,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":11.1449},{"Cur_ID":512,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":11.1385},{"Cur_ID":512,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":11.1385},{"Cur_ID":512,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":11.1385},{"Cur_ID":512,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":11.1558},{"Cur_ID":512,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":11.2071}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:48 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:02 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/451?endDate=2026-03-17&startDate=2026-03-01
@@ -327,6 +327,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -334,13 +336,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:47 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:01 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":451,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.3653},{"Cur_ID":451,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.3659},{"Cur_ID":451,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.3675},{"Cur_ID":451,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.3532},{"Cur_ID":451,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.3538},{"Cur_ID":451,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.3722},{"Cur_ID":451,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.3722},{"Cur_ID":451,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.3722},{"Cur_ID":451,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.3865},{"Cur_ID":451,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.3727},{"Cur_ID":451,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.4062},{"Cur_ID":451,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.3920},{"Cur_ID":451,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.3824},{"Cur_ID":451,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.3824},{"Cur_ID":451,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.3824},{"Cur_ID":451,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.3597},{"Cur_ID":451,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.3741}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:49 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:02 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/452?endDate=2026-03-17&startDate=2026-03-01
@@ -361,6 +361,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -368,13 +370,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:47 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:01 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":452,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":7.9701},{"Cur_ID":452,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":7.9718},{"Cur_ID":452,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":7.9603},{"Cur_ID":452,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":7.8475},{"Cur_ID":452,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":7.8578},{"Cur_ID":452,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":7.8893},{"Cur_ID":452,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":7.8893},{"Cur_ID":452,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":7.8893},{"Cur_ID":452,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":7.9140},{"Cur_ID":452,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":7.8741},{"Cur_ID":452,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":8.0031},{"Cur_ID":452,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":7.9385},{"Cur_ID":452,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":7.9350},{"Cur_ID":452,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":7.9350},{"Cur_ID":452,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":7.9350},{"Cur_ID":452,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":7.8679},{"Cur_ID":452,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":7.9012}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:49 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:03 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/508?endDate=2026-03-17&startDate=2026-03-01
@@ -402,13 +402,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:47 GMT
+      - Tue, 17 Mar 2026 15:52:02 GMT
       Content-Length:
       - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":508,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":1.8278},{"Cur_ID":508,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":1.8285},{"Cur_ID":508,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":1.8283},{"Cur_ID":508,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":1.8326},{"Cur_ID":508,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":1.8374},{"Cur_ID":508,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":1.8462},{"Cur_ID":508,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":1.8462},{"Cur_ID":508,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":1.8462},{"Cur_ID":508,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":1.8530},{"Cur_ID":508,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":1.8427},{"Cur_ID":508,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":1.8537},{"Cur_ID":508,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":1.8464},{"Cur_ID":508,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":1.8433},{"Cur_ID":508,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":1.8433},{"Cur_ID":508,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":1.8433},{"Cur_ID":508,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":1.8391},{"Cur_ID":508,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":1.8494}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:49 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:04 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/511?endDate=2026-03-17&startDate=2026-03-01
@@ -429,6 +429,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -436,13 +438,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:48 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:02 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":511,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.1368},{"Cur_ID":511,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.1363},{"Cur_ID":511,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.1339},{"Cur_ID":511,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.1371},{"Cur_ID":511,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.1349},{"Cur_ID":511,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.1637},{"Cur_ID":511,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.1637},{"Cur_ID":511,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.1637},{"Cur_ID":511,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.1852},{"Cur_ID":511,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.1557},{"Cur_ID":511,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.1794},{"Cur_ID":511,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.1745},{"Cur_ID":511,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.1697},{"Cur_ID":511,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.1697},{"Cur_ID":511,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.1697},{"Cur_ID":511,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.1676},{"Cur_ID":511,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.1824}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:49 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:04 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/461?endDate=2026-03-17&startDate=2026-03-01
@@ -463,8 +463,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -472,11 +470,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:48 GMT
+      - Tue, 17 Mar 2026 15:52:04 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":461,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":0.2176},{"Cur_ID":461,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":0.2172},{"Cur_ID":461,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":0.2184},{"Cur_ID":461,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":0.2198},{"Cur_ID":461,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":0.2198},{"Cur_ID":461,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":0.2200},{"Cur_ID":461,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":0.2200},{"Cur_ID":461,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":0.2200},{"Cur_ID":461,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":0.2218},{"Cur_ID":461,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":0.2210},{"Cur_ID":461,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":0.2213},{"Cur_ID":461,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":0.2214},{"Cur_ID":461,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":0.2214},{"Cur_ID":461,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":0.2214},{"Cur_ID":461,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":0.2214},{"Cur_ID":461,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":0.2219},{"Cur_ID":461,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":0.2229}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:50 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:05 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/453?endDate=2026-03-17&startDate=2026-03-01
@@ -497,6 +497,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -504,13 +506,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:48 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:05 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":453,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.3485},{"Cur_ID":453,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":2.3501},{"Cur_ID":453,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":2.3479},{"Cur_ID":453,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.3353},{"Cur_ID":453,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.3290},{"Cur_ID":453,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":2.3305},{"Cur_ID":453,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":2.3305},{"Cur_ID":453,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":2.3305},{"Cur_ID":453,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":2.3409},{"Cur_ID":453,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":2.3252},{"Cur_ID":453,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":2.3484},{"Cur_ID":453,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":2.3367},{"Cur_ID":453,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":2.3375},{"Cur_ID":453,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":2.3375},{"Cur_ID":453,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":2.3375},{"Cur_ID":453,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":2.3264},{"Cur_ID":453,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":2.3395}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:50 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:06 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/371?endDate=2026-03-17&startDate=2026-03-01
@@ -540,11 +540,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:48 GMT
+      - Tue, 17 Mar 2026 15:52:05 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":371,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.0856},{"Cur_ID":371,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":2.0876},{"Cur_ID":371,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":2.1022},{"Cur_ID":371,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.1092},{"Cur_ID":371,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.1124},{"Cur_ID":371,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":2.1260},{"Cur_ID":371,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":2.1260},{"Cur_ID":371,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":2.1260},{"Cur_ID":371,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":2.1402},{"Cur_ID":371,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":2.1543},{"Cur_ID":371,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":2.1524},{"Cur_ID":371,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":2.1557},{"Cur_ID":371,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":2.1534},{"Cur_ID":371,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":2.1534},{"Cur_ID":371,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":2.1534},{"Cur_ID":371,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":2.1459},{"Cur_ID":371,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":2.1506}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:50 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:06 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/462?endDate=2026-03-17&startDate=2026-03-01
@@ -565,8 +565,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -574,11 +572,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:49 GMT
+      - Tue, 17 Mar 2026 15:52:05 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":462,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":4.2143},{"Cur_ID":462,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":4.2142},{"Cur_ID":462,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":4.2051},{"Cur_ID":462,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":4.2057},{"Cur_ID":462,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":4.2093},{"Cur_ID":462,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":4.2487},{"Cur_ID":462,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":4.2487},{"Cur_ID":462,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":4.2487},{"Cur_ID":462,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":4.2657},{"Cur_ID":462,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":4.2242},{"Cur_ID":462,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":4.2620},{"Cur_ID":462,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":4.2806},{"Cur_ID":462,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":4.2777},{"Cur_ID":462,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":4.2777},{"Cur_ID":462,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":4.2777},{"Cur_ID":462,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":4.3001},{"Cur_ID":462,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":4.3059}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:51 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:07 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/394?endDate=2026-03-17&startDate=2026-03-01
@@ -599,6 +599,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -606,13 +608,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:49 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:06 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":394,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":9.3030},{"Cur_ID":394,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":9.3072},{"Cur_ID":394,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":9.3458},{"Cur_ID":394,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":9.3971},{"Cur_ID":394,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":9.3954},{"Cur_ID":394,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":9.4321},{"Cur_ID":394,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":9.4321},{"Cur_ID":394,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":9.4321},{"Cur_ID":394,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":9.5058},{"Cur_ID":394,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":9.4769},{"Cur_ID":394,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":9.5249},{"Cur_ID":394,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":9.5375},{"Cur_ID":394,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":9.5375},{"Cur_ID":394,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":9.5375},{"Cur_ID":394,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":9.5375},{"Cur_ID":394,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":9.5513},{"Cur_ID":394,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":9.6033}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:51 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:07 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/454?endDate=2026-03-17&startDate=2026-03-01
@@ -633,8 +633,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -642,11 +640,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:49 GMT
+      - Tue, 17 Mar 2026 15:52:07 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":454,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":1.6661},{"Cur_ID":454,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":1.6673},{"Cur_ID":454,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":1.6726},{"Cur_ID":454,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":1.6703},{"Cur_ID":454,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":1.6695},{"Cur_ID":454,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":1.6775},{"Cur_ID":454,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":1.6775},{"Cur_ID":454,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":1.6775},{"Cur_ID":454,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":1.6918},{"Cur_ID":454,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":1.6843},{"Cur_ID":454,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":1.6985},{"Cur_ID":454,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":1.6973},{"Cur_ID":454,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":1.6851},{"Cur_ID":454,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":1.6851},{"Cur_ID":454,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":1.6851},{"Cur_ID":454,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":1.6814},{"Cur_ID":454,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":1.6812}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:51 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:08 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/448?endDate=2026-03-17&startDate=2026-03-01
@@ -676,11 +676,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:51 GMT
+      - Tue, 17 Mar 2026 15:52:08 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":448,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":1.7083},{"Cur_ID":448,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":1.7086},{"Cur_ID":448,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":1.7087},{"Cur_ID":448,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":1.7014},{"Cur_ID":448,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":1.7069},{"Cur_ID":448,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":1.7181},{"Cur_ID":448,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":1.7181},{"Cur_ID":448,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":1.7181},{"Cur_ID":448,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":1.7181},{"Cur_ID":448,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":1.7247},{"Cur_ID":448,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":1.7360},{"Cur_ID":448,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":1.7323},{"Cur_ID":448,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":1.7288},{"Cur_ID":448,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":1.7288},{"Cur_ID":448,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":1.7288},{"Cur_ID":448,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":1.7068},{"Cur_ID":448,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":1.7157}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:52 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:09 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/455?endDate=2026-03-17&startDate=2026-03-01
@@ -701,8 +701,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -710,11 +708,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:51 GMT
+      - Tue, 17 Mar 2026 15:52:08 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":455,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.9813},{"Cur_ID":455,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.0042},{"Cur_ID":455,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.0127},{"Cur_ID":455,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.9869},{"Cur_ID":455,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.9961},{"Cur_ID":455,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.0046},{"Cur_ID":455,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.0046},{"Cur_ID":455,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.0046},{"Cur_ID":455,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.0287},{"Cur_ID":455,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.0305},{"Cur_ID":455,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.0449},{"Cur_ID":455,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.0380},{"Cur_ID":455,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.0273},{"Cur_ID":455,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.0273},{"Cur_ID":455,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.0273},{"Cur_ID":455,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.0101},{"Cur_ID":455,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.0303}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:52 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:09 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/456?endDate=2026-03-17&startDate=2026-03-01
@@ -742,13 +742,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:51 GMT
+      - Tue, 17 Mar 2026 15:52:08 GMT
       Content-Length:
       - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":456,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.7488},{"Cur_ID":456,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.7489},{"Cur_ID":456,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.7503},{"Cur_ID":456,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.7438},{"Cur_ID":456,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.7458},{"Cur_ID":456,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.7365},{"Cur_ID":456,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.7365},{"Cur_ID":456,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.7365},{"Cur_ID":456,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.7230},{"Cur_ID":456,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.7312},{"Cur_ID":456,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.7271},{"Cur_ID":456,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.7252},{"Cur_ID":456,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.7225},{"Cur_ID":456,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.7225},{"Cur_ID":456,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.7225},{"Cur_ID":456,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.6972},{"Cur_ID":456,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.6709}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:52 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:10 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/457?endDate=2026-03-17&startDate=2026-03-01
@@ -778,11 +778,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:51 GMT
+      - Tue, 17 Mar 2026 15:52:09 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":457,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.9173},{"Cur_ID":457,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.9255},{"Cur_ID":457,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.9457},{"Cur_ID":457,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.9604},{"Cur_ID":457,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.9390},{"Cur_ID":457,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.9633},{"Cur_ID":457,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.9633},{"Cur_ID":457,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.9633},{"Cur_ID":457,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.9938},{"Cur_ID":457,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.9758},{"Cur_ID":457,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.9806},{"Cur_ID":457,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":4.0000},{"Cur_ID":457,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.9941},{"Cur_ID":457,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.9941},{"Cur_ID":457,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.9941},{"Cur_ID":457,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.9989},{"Cur_ID":457,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":4.0009}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:52 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:11 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/421?endDate=2026-03-17&startDate=2026-03-01
@@ -810,13 +810,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:52 GMT
+      - Tue, 17 Mar 2026 15:52:10 GMT
       Content-Length:
       - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":421,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":2.2571},{"Cur_ID":421,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":2.2546},{"Cur_ID":421,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":2.2576},{"Cur_ID":421,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":2.2610},{"Cur_ID":421,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":2.2635},{"Cur_ID":421,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":2.2734},{"Cur_ID":421,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":2.2734},{"Cur_ID":421,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":2.2734},{"Cur_ID":421,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":2.2843},{"Cur_ID":421,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":2.2802},{"Cur_ID":421,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":2.2972},{"Cur_ID":421,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":2.2977},{"Cur_ID":421,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":2.2957},{"Cur_ID":421,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":2.2957},{"Cur_ID":421,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":2.2957},{"Cur_ID":421,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":2.2901},{"Cur_ID":421,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":2.3005}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:53 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:11 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/458?endDate=2026-03-17&startDate=2026-03-01
@@ -844,13 +844,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:52 GMT
+      - Tue, 17 Mar 2026 15:52:10 GMT
       Content-Length:
       - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":458,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.2616},{"Cur_ID":458,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.2631},{"Cur_ID":458,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.2820},{"Cur_ID":458,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.3045},{"Cur_ID":458,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.3037},{"Cur_ID":458,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.3177},{"Cur_ID":458,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.3177},{"Cur_ID":458,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.3177},{"Cur_ID":458,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.3461},{"Cur_ID":458,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.3378},{"Cur_ID":458,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.3427},{"Cur_ID":458,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.3460},{"Cur_ID":458,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.3460},{"Cur_ID":458,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.3460},{"Cur_ID":458,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.3460},{"Cur_ID":458,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.3541},{"Cur_ID":458,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.3691}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:53 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:12 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/459?endDate=2026-03-17&startDate=2026-03-01
@@ -880,11 +880,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:52 GMT
+      - Tue, 17 Mar 2026 15:52:11 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":459,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":5.6909},{"Cur_ID":459,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":5.7317},{"Cur_ID":459,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":5.7188},{"Cur_ID":459,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":5.7933},{"Cur_ID":459,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":5.7846},{"Cur_ID":459,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":5.8968},{"Cur_ID":459,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":5.8968},{"Cur_ID":459,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":5.8968},{"Cur_ID":459,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":5.9319},{"Cur_ID":459,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":5.8612},{"Cur_ID":459,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":5.9808},{"Cur_ID":459,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":5.9862},{"Cur_ID":459,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":5.9623},{"Cur_ID":459,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":5.9623},{"Cur_ID":459,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":5.9623},{"Cur_ID":459,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":5.9780},{"Cur_ID":459,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":6.0761}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:53 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:13 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/460?endDate=2026-03-17&startDate=2026-03-01
@@ -914,11 +914,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:53 GMT
+      - Tue, 17 Mar 2026 15:52:11 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":460,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":0.6500},{"Cur_ID":460,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":0.6491},{"Cur_ID":460,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":0.6528},{"Cur_ID":460,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":0.6570},{"Cur_ID":460,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":0.6571},{"Cur_ID":460,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":0.6594},{"Cur_ID":460,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":0.6594},{"Cur_ID":460,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":0.6594},{"Cur_ID":460,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":0.6638},{"Cur_ID":460,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":0.6621},{"Cur_ID":460,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":0.6636},{"Cur_ID":460,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":0.6636},{"Cur_ID":460,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":0.6633},{"Cur_ID":460,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":0.6633},{"Cur_ID":460,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":0.6633},{"Cur_ID":460,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":0.6638},{"Cur_ID":460,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":0.6667}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:54 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:13 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/429?endDate=2026-03-17&startDate=2026-03-01
@@ -946,13 +946,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:53 GMT
+      - Tue, 17 Mar 2026 15:52:12 GMT
       Content-Length:
       - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":429,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.8584},{"Cur_ID":429,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.8476},{"Cur_ID":429,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.8373},{"Cur_ID":429,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.8382},{"Cur_ID":429,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.8593},{"Cur_ID":429,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.8749},{"Cur_ID":429,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.8749},{"Cur_ID":429,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.8749},{"Cur_ID":429,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.8976},{"Cur_ID":429,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.8952},{"Cur_ID":429,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.9346},{"Cur_ID":429,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.9258},{"Cur_ID":429,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.9190},{"Cur_ID":429,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.9190},{"Cur_ID":429,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.9190},{"Cur_ID":429,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.8907},{"Cur_ID":429,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.9037}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:54 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:14 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/463?endDate=2026-03-17&startDate=2026-03-01
@@ -980,13 +980,13 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:54 GMT
+      - Tue, 17 Mar 2026 15:52:13 GMT
       Content-Length:
       - '1208'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":463,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":13.8812},{"Cur_ID":463,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":13.8806},{"Cur_ID":463,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":13.8837},{"Cur_ID":463,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":13.7839},{"Cur_ID":463,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":13.7572},{"Cur_ID":463,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":13.8264},{"Cur_ID":463,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":13.8264},{"Cur_ID":463,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":13.8264},{"Cur_ID":463,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":13.8869},{"Cur_ID":463,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":13.8076},{"Cur_ID":463,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":13.9785},{"Cur_ID":463,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":13.9014},{"Cur_ID":463,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":13.8649},{"Cur_ID":463,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":13.8649},{"Cur_ID":463,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":13.8649},{"Cur_ID":463,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":13.7536},{"Cur_ID":463,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":13.8056}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:55 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:14 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/464?endDate=2026-03-17&startDate=2026-03-01
@@ -1007,6 +1007,8 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Content-Length:
+      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -1014,13 +1016,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:55 GMT
-      Content-Length:
-      - '1191'
+      - Tue, 17 Mar 2026 15:52:13 GMT
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":464,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.1542},{"Cur_ID":464,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.1593},{"Cur_ID":464,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.1468},{"Cur_ID":464,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.1260},{"Cur_ID":464,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.1289},{"Cur_ID":464,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.1544},{"Cur_ID":464,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.1544},{"Cur_ID":464,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.1544},{"Cur_ID":464,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.1652},{"Cur_ID":464,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.1582},{"Cur_ID":464,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.2042},{"Cur_ID":464,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.1805},{"Cur_ID":464,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.1619},{"Cur_ID":464,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.1619},{"Cur_ID":464,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.1619},{"Cur_ID":464,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.1174},{"Cur_ID":464,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.1307}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:56 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:15 GMT
 - request:
     method: get
     uri: https://api.nbrb.by/exrates/rates/dynamics/426?endDate=2026-03-17&startDate=2026-03-01
@@ -1041,8 +1041,6 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Length:
-      - '1191'
       Content-Type:
       - application/json; charset=utf-8
       Etag:
@@ -1050,9 +1048,11 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       Date:
-      - Tue, 17 Mar 2026 15:06:55 GMT
+      - Tue, 17 Mar 2026 15:52:14 GMT
+      Content-Length:
+      - '1191'
     body:
       encoding: UTF-8
       string: '[{"Cur_ID":426,"Date":"2026-03-01T00:00:00","Cur_OfficialRate":3.6856},{"Cur_ID":426,"Date":"2026-03-02T00:00:00","Cur_OfficialRate":3.6923},{"Cur_ID":426,"Date":"2026-03-03T00:00:00","Cur_OfficialRate":3.7173},{"Cur_ID":426,"Date":"2026-03-04T00:00:00","Cur_OfficialRate":3.6766},{"Cur_ID":426,"Date":"2026-03-05T00:00:00","Cur_OfficialRate":3.6879},{"Cur_ID":426,"Date":"2026-03-06T00:00:00","Cur_OfficialRate":3.7244},{"Cur_ID":426,"Date":"2026-03-07T00:00:00","Cur_OfficialRate":3.7244},{"Cur_ID":426,"Date":"2026-03-08T00:00:00","Cur_OfficialRate":3.7244},{"Cur_ID":426,"Date":"2026-03-09T00:00:00","Cur_OfficialRate":3.7404},{"Cur_ID":426,"Date":"2026-03-10T00:00:00","Cur_OfficialRate":3.7451},{"Cur_ID":426,"Date":"2026-03-11T00:00:00","Cur_OfficialRate":3.7685},{"Cur_ID":426,"Date":"2026-03-12T00:00:00","Cur_OfficialRate":3.7584},{"Cur_ID":426,"Date":"2026-03-13T00:00:00","Cur_OfficialRate":3.7490},{"Cur_ID":426,"Date":"2026-03-14T00:00:00","Cur_OfficialRate":3.7490},{"Cur_ID":426,"Date":"2026-03-15T00:00:00","Cur_OfficialRate":3.7490},{"Cur_ID":426,"Date":"2026-03-16T00:00:00","Cur_OfficialRate":3.7204},{"Cur_ID":426,"Date":"2026-03-17T00:00:00","Cur_OfficialRate":3.7326}]'
-  recorded_at: Tue, 17 Mar 2026 15:06:56 GMT
+  recorded_at: Tue, 17 Mar 2026 15:52:16 GMT
 recorded_with: VCR 6.4.0

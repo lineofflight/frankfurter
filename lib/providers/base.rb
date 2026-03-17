@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "logger"
 require "rate"
 
 module Providers
@@ -8,12 +7,6 @@ module Providers
     def all
       @all ||= []
     end
-
-    def logger
-      @logger ||= Logger.new($stdout)
-    end
-
-    attr_writer :logger
   end
 
   class Base
@@ -26,7 +19,7 @@ module Providers
 
     attr_reader :dataset, :logger
 
-    def initialize(dataset: [], logger: Providers.logger)
+    def initialize(dataset: [], logger: LOGGER)
       @dataset = dataset
       @logger = logger
     end

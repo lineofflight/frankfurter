@@ -7,8 +7,11 @@ require "providers/base"
 
 module Providers
   # National Bank of the Republic of Belarus. Publishes daily rates for ~30 currencies against BYN.
+  # BYN was redenominated on 2016-07-01; earlier data uses different currency IDs.
   class NBRB < Base
     RATES_URL = "https://api.nbrb.by/exrates/rates"
+    EARLIEST_DATE = Date.new(2016, 7, 1)
+    CHUNK_DAYS = 365
 
     def key = "NBRB"
     def name = "National Bank of the Republic of Belarus"
@@ -20,12 +23,12 @@ module Providers
       self
     end
 
-    def historical(start_date: "2016-07-01", end_date: Date.today)
+    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
       start_date = Date.parse(start_date.to_s)
       end_date = Date.parse(end_date.to_s)
-      currencies = Oj.load(Net::HTTP.get(URI("#{RATES_URL}?periodicity=0")))
-      @dataset = currencies.flat_map do |c|
-        fetch_dynamics(c.fetch("Cur_ID"), c.fetch("Cur_Abbreviation"), c.fetch("Cur_Scale"), start_date, end_date)
+      currencies = current_currencies
+      @dataset = currencies.flat_map do |cur_id, quote, scale|
+        chunked_dynamics(cur_id, quote, scale, start_date, end_date)
       end
       self
     end
@@ -44,6 +47,24 @@ module Providers
 
         { provider: key, date:, base:, quote:, rate: rate / scale }
       end
+    end
+
+    def current_currencies
+      data = Oj.load(Net::HTTP.get(URI("#{RATES_URL}?periodicity=0")))
+      data.map { |row| [row.fetch("Cur_ID"), row.fetch("Cur_Abbreviation"), Integer(row.fetch("Cur_Scale"))] }
+    end
+
+    def chunked_dynamics(cur_id, quote, scale, start_date, end_date)
+      records = []
+      chunk_start = start_date
+
+      while chunk_start <= end_date
+        chunk_end = [chunk_start + CHUNK_DAYS - 1, end_date].min
+        records.concat(fetch_dynamics(cur_id, quote, scale, chunk_start, chunk_end))
+        chunk_start = chunk_end + 1
+      end
+
+      records
     end
 
     def fetch_dynamics(cur_id, quote, scale, start_date, end_date)

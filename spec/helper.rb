@@ -8,8 +8,7 @@ require "minitest/focus"
 require "vcr"
 require "webmock"
 
-require "providers/base"
-Providers.logger = Logger.new(File::NULL)
+LOGGER.level = Logger::WARN
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr_cassettes"
