@@ -6,7 +6,7 @@ require "roda"
 require "providers/ecb"
 require "providers/boc"
 require "providers/tcmb"
-require "versions/v2/rate"
+require "versions/v2/query"
 
 module Versions
   class V2 < Roda
@@ -18,7 +18,12 @@ module Versions
     plugin :indifferent_params
     plugin :halt
     plugin :error_handler do |error|
-      request.halt(422, { message: error.message })
+      status = case error
+      when Query::NotFoundError then 404
+      when Query::ValidationError then 422
+      else 500
+      end
+      request.halt(status, { message: error.message })
     end
 
     route do |r|
@@ -26,10 +31,10 @@ module Versions
 
       r.on("rates") do
         r.get do
-          rate = build_rate(r.params)
-          r.etag(rate.cache_key)
+          query = Query.new(r.params)
+          r.etag(query.cache_key)
 
-          rate.to_a
+          query.to_a
         end
       end
 
@@ -83,14 +88,6 @@ module Versions
           base: provider.base,
         },]
       end
-    end
-
-    def build_rate(params)
-      rate = Rate.new(params)
-      request.halt(400, { message: rate.error }) if rate.error
-      request.halt(404, { message: "not found" }) if rate.not_found?
-
-      rate
     end
   end
 end

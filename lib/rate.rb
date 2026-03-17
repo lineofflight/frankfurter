@@ -12,45 +12,31 @@ class Rate < Sequel::Model(:rates)
     def between(interval)
       return where(false) if interval.begin > Date.today
 
-      where(Sequel.expr(:date) >= Sequel.function(
-        :coalesce,
-        nearest_date_with_rates(interval.begin),
-        interval.begin,
-      ))
-        .where(Sequel.expr(:date) <= interval.end)
-        .order(Sequel.asc(:date), Sequel.asc(:quote))
+      nearest = Sequel.function(:coalesce, nearest_date_with_rates(interval.begin), interval.begin)
+      where(Sequel[:date] >= nearest)
+        .where(Sequel[:date] <= interval.end)
+        .order(:date, :quote)
     end
 
     def only(*quotes)
       where(quote: quotes)
     end
 
-    def sample(precision)
+    def downsample(precision)
       sampler = case precision.to_s
-      when "day"
-        Sequel.function(:strftime, "%Y-%m-%d", :date)
       when "week"
-        Sequel.function(
-          :date,
-          Sequel.function(
-            :strftime,
-            "%Y-%m-%d",
-            Sequel.function(:strftime, "%Y-01-01", :date),
-            Sequel.lit("'+' || (CAST(strftime('%W', date) AS INTEGER) * 7) || ' days'"),
-          ),
-        )
+        week_num = Sequel.cast(Sequel.function(:strftime, "%W", :date), Integer)
+        day_offset = Sequel.join(["+", week_num * 7, " days"])
+        year_start = Sequel.function(:strftime, "%Y-01-01", :date)
+        Sequel.function(:date, Sequel.function(:strftime, "%Y-%m-%d", year_start, day_offset))
       when "month"
         Sequel.function(:strftime, "%Y-%m-01", :date)
-      when "year"
-        Sequel.function(:strftime, "%Y-01-01", :date)
-      else
-        raise ArgumentError, "Invalid precision: #{precision}. Must be one of: week, month, year, day"
       end
 
-      select(:quote)
+      select(:base, :provider, :quote)
         .select_append { avg(rate).as(rate) }
         .select_append(sampler.as(:date))
-        .group(:quote, sampler)
+        .group(:base, :provider, :quote, sampler)
         .order(:date)
     end
 

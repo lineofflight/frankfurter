@@ -84,26 +84,24 @@ describe Rate do
     end
   end
 
-  describe ".between with sampling" do
+  describe ".downsample" do
     let(:day) { Date.parse("2010-01-01") }
+    let(:interval) { day..day + 366 }
 
-    it "returns everything up to a year" do
-      interval = day..day + 365
-      dates = Rate.between(interval)
-
-      _(dates.map(:date).uniq.count).must_be(:>, 52)
-    end
-
-    it "can sample weekly" do
-      interval = day..day + 366
-      dates = Rate.between(interval).sample("week")
+    it "groups by week" do
+      dates = Rate.between(interval).downsample("week")
 
       _(dates.map(:date).uniq.count).must_be(:<, 54)
     end
 
-    it "sorts by date when sampling" do
-      interval = day..day + 366
-      dates = Rate.between(interval).sample("week").map(:date)
+    it "groups by month" do
+      dates = Rate.between(interval).downsample("month")
+
+      _(dates.map(:date).uniq.count).must_be(:<=, 13)
+    end
+
+    it "sorts by date" do
+      dates = Rate.between(interval).downsample("week").map(:date)
 
       _(dates).must_equal(dates.sort)
     end

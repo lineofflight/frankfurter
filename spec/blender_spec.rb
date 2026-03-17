@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+require_relative "helper"
+require "blender"
+
+describe Blender do
+  let(:date) { Date.parse("2024-01-15") }
+
+  it "averages rates across providers" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: date, base: "EUR", quote: "GBP", rate: 0.84, provider: "ECB" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
+      { date: date, base: "EUR", quote: "GBP", rate: 0.86, provider: "BOC" },
+    ]
+
+    result = Blender.new(rates, base: "EUR").blend
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:rate]).must_be_close_to((1.08 + 1.10) / 2.0)
+  end
+
+  it "sorts results by date and quote" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: date, base: "EUR", quote: "GBP", rate: 0.85, provider: "ECB" },
+      { date: date + 1, base: "EUR", quote: "USD", rate: 1.09, provider: "ECB" },
+      { date: date + 1, base: "EUR", quote: "GBP", rate: 0.86, provider: "ECB" },
+    ]
+
+    result = Blender.new(rates, base: "EUR").blend
+    keys = result.map { |r| [r[:date], r[:quote]] }
+
+    _(keys).must_equal(keys.sort)
+  end
+end

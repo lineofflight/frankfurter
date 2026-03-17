@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "versions/v1/roundable"
+require "roundable"
 
 module Versions
   class V1 < Roda

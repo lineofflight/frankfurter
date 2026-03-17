@@ -34,6 +34,13 @@ describe Versions::V2 do
     _(json.first["date"]).must_equal("2024-01-15")
   end
 
+  it "snaps to nearest business day for weekends" do
+    get "/rates?date=2024-01-14" # Sunday
+
+    _(last_response).must_be(:ok?)
+    _(json.first["date"]).must_equal("2024-01-12") # Friday
+  end
+
   it "returns rates for a date range" do
     get "/rates?from=2024-01-01&to=2024-01-31"
 
@@ -54,6 +61,15 @@ describe Versions::V2 do
     eur = json.find { |r| r["quote"] == "EUR" }
 
     _(eur["rate"]).must_be_kind_of(Float)
+  end
+
+  it "does not produce duplicate rows when blending providers" do
+    get "/rates?base=CAD"
+
+    _(last_response).must_be(:ok?)
+    pairs = json.map { |r| [r["date"], r["quote"]] }
+
+    _(pairs).must_equal(pairs.uniq)
   end
 
   it "filters quotes" do
@@ -80,16 +96,40 @@ describe Versions::V2 do
     assert_conform_schema(200)
   end
 
-  it "returns 400 for conflicting params" do
-    get "/rates?date=2024-01-15&from=2024-01-01"
+  it "downsamples by week" do
+    get "/rates?from=2024-01-01&to=2024-12-31&group=week"
 
-    _(last_response.status).must_equal(400)
+    _(last_response).must_be(:ok?)
+    dates = json.map { |r| r["date"] }.uniq
+
+    _(dates.length).must_be(:<, 54)
   end
 
-  it "returns 400 for invalid dates" do
+  it "downsamples by month" do
+    get "/rates?from=2024-01-01&to=2024-12-31&group=month"
+
+    _(last_response).must_be(:ok?)
+    dates = json.map { |r| r["date"] }.uniq
+
+    _(dates.length).must_be(:<=, 12)
+  end
+
+  it "returns 422 for invalid group" do
+    get "/rates?from=2024-01-01&to=2024-12-31&group=day"
+
+    _(last_response.status).must_equal(422)
+  end
+
+  it "returns 422 for conflicting params" do
+    get "/rates?date=2024-01-15&from=2024-01-01"
+
+    _(last_response.status).must_equal(422)
+  end
+
+  it "returns 422 for invalid dates" do
     get "/rates?date=not-a-date"
 
-    _(last_response.status).must_equal(400)
+    _(last_response.status).must_equal(422)
   end
 
   it "returns 404 for dates before dataset" do

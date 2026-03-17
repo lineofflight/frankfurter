@@ -1,0 +1,112 @@
+# frozen_string_literal: true
+
+require "digest"
+require "rate"
+require "roundable"
+require "blender"
+
+module Versions
+  class V2 < Roda
+    class Query
+      include Roundable
+
+      class ValidationError < StandardError; end
+      class NotFoundError < StandardError; end
+
+      def initialize(params)
+        @params = params
+        validate!
+      end
+
+      def to_a
+        @rates ||= fetch_rates.tap do |rates|
+          raise NotFoundError, "not found" if rates.empty?
+        end
+      end
+
+      def cache_key
+        Digest::MD5.hexdigest(to_a.last[:date].to_s)
+      end
+
+      private
+
+      def base
+        @params[:base]&.upcase || "EUR"
+      end
+
+      def quotes
+        @params[:quotes]&.upcase&.split(",")
+      end
+
+      def providers
+        @params[:providers]&.upcase&.split(",")
+      end
+
+      def group
+        @params[:group]&.downcase
+      end
+
+      def date
+        parse_date(@params[:date])
+      end
+
+      def start_date
+        parse_date(@params[:from])
+      end
+
+      def end_date
+        parse_date(@params[:to])
+      end
+
+      def parse_date(value)
+        return unless value
+
+        Date.parse(value)
+      rescue Date::Error
+        nil
+      end
+
+      def validate!
+        validate_dates!
+        validate_conflicting_params!
+        validate_group!
+      end
+
+      def validate_dates!
+        raise ValidationError, "invalid date" if [:date, :from, :to].any? { |key| @params[key] && !parse_date(@params[key]) }
+      end
+
+      def validate_conflicting_params!
+        raise ValidationError, "conflicting params" if date && (start_date || end_date)
+      end
+
+      def validate_group!
+        raise ValidationError, "invalid group" if group && !["week", "month"].include?(group)
+      end
+
+      def date_scope
+        if date
+          date
+        elsif start_date
+          start_date..(end_date || Date.today)
+        else
+          Date.today
+        end
+      end
+
+      def fetch_rates
+        ds = Rate.dataset
+        ds = ds.where(provider: providers) if providers
+        d = date_scope
+        ds = d.is_a?(Range) ? ds.where(date: d) : ds.latest(d)
+        ds = ds.downsample(group) if group
+
+        Blender.new(ds.all, base:).blend.filter_map do |r|
+          next if quotes && !quotes.include?(r[:quote])
+
+          { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+        end
+      end
+    end
+  end
+end
