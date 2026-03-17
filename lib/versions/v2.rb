@@ -54,31 +54,22 @@ module Versions
     private
 
     def currencies
+      require "set"
       db = Sequel::Model.db
-      rows = db.fetch(<<~SQL).all
-        SELECT DISTINCT quote, provider FROM rates ORDER BY quote, provider
-      SQL
 
       result = {}
-      rows.each do |row|
-        result[row[:quote]] ||= { providers: [] }
-        result[row[:quote]][:providers] << row[:provider]
+      db.fetch("SELECT DISTINCT quote, provider FROM rates").each do |row|
+        (result[row[:quote]] ||= Set.new) << row[:provider]
       end
-
-      # Add base currencies from each provider
       db.fetch("SELECT DISTINCT base, provider FROM rates").each do |row|
-        result[row[:base]] ||= { providers: [] }
-        result[row[:base]][:providers] << row[:provider] unless result[row[:base]][:providers].include?(row[:provider])
+        (result[row[:base]] ||= Set.new) << row[:provider]
       end
 
-      # Add currency names
       require "money/currency"
-      result.each do |iso, data|
+      result.sort.to_h do |iso, providers|
         currency = Money::Currency.find(iso)
-        data[:name] = currency&.name || iso
+        [iso, { name: currency&.name || iso, providers: providers.to_a }]
       end
-
-      result.sort.to_h
     end
 
     def providers
