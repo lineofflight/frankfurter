@@ -142,6 +142,7 @@ describe Versions::V2 do
     get "/currencies"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     usd = json.find { |c| c["iso_code"] == "USD" }
 
     _(usd["name"]).must_equal("United States Dollar")
@@ -161,6 +162,7 @@ describe Versions::V2 do
     get "/providers"
 
     _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
     ecb = json.find { |p| p["key"] == "ECB" }
 
     _(ecb["name"]).must_equal("European Central Bank")

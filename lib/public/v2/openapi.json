@@ -29,7 +29,8 @@
           { "$ref": "#/components/parameters/to" },
           { "$ref": "#/components/parameters/base" },
           { "$ref": "#/components/parameters/quotes" },
-          { "$ref": "#/components/parameters/providers" }
+          { "$ref": "#/components/parameters/providers" },
+          { "$ref": "#/components/parameters/group" }
         ],
         "responses": {
           "200": {
@@ -47,7 +48,7 @@
               }
             }
           },
-          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
           "404": { "$ref": "#/components/responses/NotFound" }
         }
       }
@@ -62,12 +63,14 @@
             "description": "Available currencies",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Currencies" },
-                "example": {
-                  "EUR": { "name": "Euro", "providers": ["ECB"] },
-                  "USD": { "name": "United States Dollar", "providers": ["ECB", "BOC"] },
-                  "CAD": { "name": "Canadian Dollar", "providers": ["ECB", "BOC"] }
-                }
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Currency" }
+                },
+                "example": [
+                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "providers": ["ECB"] },
+                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "providers": ["ECB", "BOC"] }
+                ]
               }
             }
           }
@@ -84,11 +87,14 @@
             "description": "Available providers",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/Providers" },
-                "example": {
-                  "ECB": { "name": "European Central Bank", "base": "EUR" },
-                  "BOC": { "name": "Bank of Canada", "base": "CAD" }
-                }
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Provider" }
+                },
+                "example": [
+                  { "key": "ECB", "name": "European Central Bank", "base": "EUR", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] },
+                  { "key": "BOC", "name": "Bank of Canada", "base": "CAD", "start_date": "2017-01-03", "end_date": "2026-03-17", "currencies": ["USD", "EUR"] }
+                ]
               }
             }
           }
@@ -161,6 +167,17 @@
           "type": "string",
           "example": "ECB,TCMB"
         }
+      },
+      "group": {
+        "name": "group",
+        "in": "query",
+        "description": "Downsample rates by time period. Only applies to date ranges.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["week", "month"],
+          "example": "month"
+        }
       }
     },
     "schemas": {
@@ -188,44 +205,40 @@
         },
         "required": ["date", "base", "quote", "rate"]
       },
-      "Currencies": {
+      "Currency": {
         "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Full currency name"
-            },
-            "providers": {
-              "type": "array",
-              "items": { "type": "string" },
-              "description": "Data providers that cover this currency"
-            }
-          },
-          "required": ["name", "providers"]
-        }
+        "properties": {
+          "iso_code": { "type": "string", "description": "ISO 4217 currency code" },
+          "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
+          "name": { "type": "string", "description": "Full currency name" },
+          "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "providers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Data providers that cover this currency"
+          }
+        },
+        "required": ["iso_code", "name", "providers"]
       },
-      "Providers": {
+      "Provider": {
         "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Full provider name"
-            },
-            "base": {
-              "type": "string",
-              "description": "Provider's native base currency"
-            }
-          },
-          "required": ["name", "base"]
-        }
+        "properties": {
+          "key": { "type": "string", "description": "Provider identifier" },
+          "name": { "type": "string", "description": "Full provider name" },
+          "base": { "type": "string", "description": "Provider's native base currency" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
+          "currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Currency codes covered by this provider"
+          }
+        },
+        "required": ["key", "name", "base", "currencies"]
       }
     },
     "responses": {
-      "BadRequest": {
+      "UnprocessableEntity": {
         "description": "Invalid request",
         "content": {
           "application/json": {

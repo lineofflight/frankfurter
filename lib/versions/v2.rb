@@ -71,7 +71,7 @@ module Versions
           iso_numeric: currency&.iso_numeric,
           name: currency&.name || iso,
           symbol: currency&.symbol,
-          providers: providers.to_a,
+          providers: providers.to_a.sort,
         }
       end
     end
