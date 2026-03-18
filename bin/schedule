@@ -5,6 +5,13 @@ require "rufus-scheduler"
 
 scheduler = Rufus::Scheduler.new
 
+# Backfill all providers on startup (each runs in its own thread)
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp"].each do |provider|
+  scheduler.in("0s") do
+    %x(rake #{provider}:backfill)
+  end
+end
+
 # ECB publishes around 16:00 CET (15:00-17:00 UTC)
 # https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
 scheduler.cron("*/30 15,16,17 * * 1-5") do

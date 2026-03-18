@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "cache"
 require "logger"
 require "rate"
 
@@ -46,6 +47,9 @@ module Providers
       logger.info("#{key}: started")
       Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
       logger.info("#{key}: imported #{count.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse} rates")
+      if count > 0 && Cache.purge
+        logger.info("#{key}: purged cache")
+      end
 
       self
     end
