@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added v2 API with multi-provider blended exchange rates
 - Added Bank of Canada (BOC) as data provider (CAD base, 2017 onwards)
+- Added Federal Reserve (FRED) as data provider (USD base, daily H.10 rates)
+- Added Central Bank of Turkey (TCMB) as data provider (TRY base)
 - Added healthcheck in Dockerfile
 
 ### Changed

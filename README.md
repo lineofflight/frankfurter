@@ -12,12 +12,16 @@ The API is publicly available at <https://api.frankfurter.dev>.
 
 ```bash
 docker run -d -p 8080:8080 \
+  -e FRED_API_KEY=your_key \
   -e TCMB_API_KEY=your_key \
   --pull always \
   lineofflight/frankfurter
 ```
 
-The `TCMB_API_KEY` enables Turkish Central Bank data. Register at [evds3.tcmb.gov.tr](https://evds3.tcmb.gov.tr) for a free key. Without it, ECB and BOC data still works.
+Both API keys are optional. The app runs without them.
+
+- `FRED_API_KEY` enables Federal Reserve (FRED) data. Register at [fred.stlouisfed.org](https://fred.stlouisfed.org/docs/api/api_key.html) for a free key.
+- `TCMB_API_KEY` enables Turkish Central Bank data. Register at [evds3.tcmb.gov.tr](https://evds3.tcmb.gov.tr) for a free key.
 
 ### One-Click Deploy
 
