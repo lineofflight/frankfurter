@@ -25,12 +25,15 @@ module Versions
     plugin :caching
     plugin :indifferent_params
     plugin :halt
+    plugin :status_handler
+    status_handler(404) { { status: 404, message: "not found" } }
+
     plugin :error_handler do |error|
       status = case error
       when Query::ValidationError then 422
       else 500
       end
-      request.halt(status, { message: error.message })
+      request.halt(status, { status:, message: error.message })
     end
 
     route do |r|

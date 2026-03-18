@@ -28,7 +28,7 @@ class App < Roda
   plugin :json
   plugin :caching
   plugin :not_found do
-    { message: "not found" }
+    { status: 404, message: "not found" }
   end
 
   route do |r|
