@@ -27,7 +27,6 @@ module Versions
     plugin :halt
     plugin :error_handler do |error|
       status = case error
-      when Query::NotFoundError then 404
       when Query::ValidationError then 422
       else 500
       end

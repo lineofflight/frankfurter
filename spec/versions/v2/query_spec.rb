@@ -30,10 +30,24 @@ module Versions
       _(quotes).must_equal(["GBP", "USD"])
     end
 
-    it "raises not found for dates before dataset" do
+    it "returns empty array for dates before dataset" do
       query = V2::Query.new(date: "1901-01-01")
 
-      _ { query.to_a }.must_raise(V2::Query::NotFoundError)
+      _(query.to_a).must_be_empty
+    end
+
+    it "raises on invalid base currency" do
+      _ { V2::Query.new(base: "FOO") }.must_raise(V2::Query::ValidationError)
+    end
+
+    it "raises on invalid quote currency" do
+      _ { V2::Query.new(quotes: "USD,FOO") }.must_raise(V2::Query::ValidationError)
+    end
+
+    it "raises on invalid base and quotes together" do
+      error = _ { V2::Query.new(base: "FOO", quotes: "BAR") }.must_raise(V2::Query::ValidationError)
+      _(error.message).must_include("FOO")
+      _(error.message).must_include("BAR")
     end
 
     it "snaps to nearest business day" do

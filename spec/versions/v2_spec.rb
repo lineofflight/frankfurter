@@ -132,10 +132,11 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
-  it "returns 404 for dates before dataset" do
+  it "returns empty array for dates before dataset" do
     get "/rates?date=1901-01-01"
 
-    _(last_response.status).must_equal(404)
+    _(last_response.status).must_equal(200)
+    _(Oj.load(last_response.body)).must_be_empty
   end
 
   it "returns currencies" do

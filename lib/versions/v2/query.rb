@@ -11,7 +11,6 @@ module Versions
       include Roundable
 
       class ValidationError < StandardError; end
-      class NotFoundError < StandardError; end
 
       def initialize(params)
         @params = params
@@ -19,13 +18,11 @@ module Versions
       end
 
       def to_a
-        @rates ||= fetch_rates.tap do |rates|
-          raise NotFoundError, "not found" if rates.empty?
-        end
+        @rates ||= fetch_rates
       end
 
       def cache_key
-        Digest::MD5.hexdigest(to_a.last[:date].to_s)
+        Digest::MD5.hexdigest(to_a.last&.dig(:date).to_s)
       end
 
       private
@@ -70,6 +67,7 @@ module Versions
         validate_dates!
         validate_conflicting_params!
         validate_group!
+        validate_currencies!
       end
 
       def validate_dates!
@@ -82,6 +80,13 @@ module Versions
 
       def validate_group!
         raise ValidationError, "invalid group" if group && !["week", "month"].include?(group)
+      end
+
+      def validate_currencies!
+        invalid = []
+        invalid << base if @params[:base] && !Money::Currency.find(base)
+        invalid.concat(quotes.reject { |q| Money::Currency.find(q) }) if quotes
+        raise ValidationError, "invalid currency: #{invalid.join(",")}" if invalid.any?
       end
 
       def date_scope
