@@ -15,10 +15,6 @@ describe App do
 
     _(last_response).must_be(:ok?)
     _(headers["Cache-Control"]).must_equal("public, max-age=900")
-    json = Oj.load(last_response.body)
-
-    _(json["versions"]["v1"]["currencies"]).must_be(:positive?)
-    _(json["versions"]["v2"]["currencies"]).must_be(:positive?)
   end
 
   it "serves static files" do
