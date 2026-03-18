@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
+require "logger"
 require "rate"
 
 module Providers
   class << self
+    attr_reader :logger
+
     def all
       @all ||= []
     end
   end
+
+  @logger = Logger.new($stdout)
+  @logger.level = Logger::WARN if ENV["APP_ENV"] == "test"
 
   class Base
     class << self
@@ -19,7 +25,7 @@ module Providers
 
     attr_reader :dataset, :logger
 
-    def initialize(dataset: [], logger: LOGGER)
+    def initialize(dataset: [], logger: Providers.logger)
       @dataset = dataset
       @logger = logger
     end
