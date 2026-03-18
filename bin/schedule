@@ -48,4 +48,10 @@ scheduler.cron("*/30 9,10,11 * * 1-5") do
   %x(rake cbr:import)
 end
 
+# NBP publishes daily around 12:00 CET (11:00-12:00 UTC)
+# https://api.nbp.pl/
+scheduler.cron("*/30 11,12,13 * * 1-5") do
+  %x(rake nbp:import)
+end
+
 scheduler.join

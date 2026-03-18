@@ -1,0 +1,77 @@
+# frozen_string_literal: true
+
+require "json"
+require "net/http"
+
+require "providers/base"
+
+module Providers
+  # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies against PLN.
+  class NBP < Base
+    BASE_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
+    EARLIEST_DATE = Date.new(2002, 1, 2)
+
+    def key = "NBP"
+    def name = "National Bank of Poland"
+    def base = "PLN"
+
+    def current
+      records = fetch(Date.today - 7, Date.today)
+      last_date = records.last&.dig(:date)
+      @dataset = records.select { |r| r[:date] == last_date }
+      self
+    end
+
+    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
+      start_date = Date.parse(start_date.to_s)
+      end_date = Date.parse(end_date.to_s)
+      @dataset = []
+
+      each_chunk(start_date, end_date) do |chunk_start, chunk_end|
+        @dataset.concat(fetch(chunk_start, chunk_end))
+      end
+
+      self
+    end
+
+    def parse(json)
+      data = json.is_a?(String) ? JSON.parse(json) : json
+
+      data.flat_map do |table|
+        date = Date.parse(table["effectiveDate"])
+        table["rates"].filter_map do |rate|
+          quote = rate["code"]
+          mid = rate["mid"]
+          next unless quote.match?(/\A[A-Z]{3}\z/)
+          next if ["XDR"].include?(quote)
+          next if mid.nil? || mid.zero?
+
+          { provider: key, date:, base:, quote:, rate: mid }
+        end
+      end
+    end
+
+    private
+
+    def fetch(start_date, end_date)
+      url = URI("#{BASE_URL}/#{start_date}/#{end_date}/?format=json")
+      response = Net::HTTP.get(url)
+      parse(response)
+    rescue JSON::ParserError
+      []
+    end
+
+    # NBP API limits queries to 93 days per request
+    def each_chunk(start_date, end_date)
+      current = start_date
+      first = true
+      while current <= end_date
+        sleep(0.5) unless first
+        first = false
+        chunk_end = [current + 92, end_date].min
+        yield current, chunk_end
+        current = chunk_end + 1
+      end
+    end
+  end
+end

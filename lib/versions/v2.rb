@@ -13,6 +13,7 @@ require "providers/cba"
 require "providers/nbrb"
 require "providers/bob"
 require "providers/cbr"
+require "providers/nbp"
 require "versions/v2/query"
 
 module Versions
