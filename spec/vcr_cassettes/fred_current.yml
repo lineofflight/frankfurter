@@ -1,0 +1,399 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXBZUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":8140,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"5.2914"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"5.214"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"5.157"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"5.1405"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"5.2099"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:04 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXCAUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"1.3736"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"1.3618"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"1.3603"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"1.3562"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"1.3573"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:05 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXCHUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11791,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"6.8961"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"6.8689"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"6.8655"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"6.8766"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"6.9066"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:06 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXDNUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"6.5294"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"6.4844"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"6.4592"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"6.4135"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"6.445"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:07 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXHKUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11791,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-13","value":"7.827"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-12","value":"7.827"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-11","value":"7.825"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-10","value":"7.8236"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-09","value":"7.8198"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:08 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXINUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":13879,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"92.47"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"92.18"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"92.03"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"91.85"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"92.31"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:09 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXJPUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"159.54"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"159.21"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"158.83"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"157.6"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"158.08"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:10 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXKOUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11720,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"1498.88"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"1491.81"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"1474.94"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"1465.29"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"1478.15"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:11 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXMAUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"3.936"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"3.9239"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"3.913"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"3.9199"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"3.96"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:12 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXMXUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":8440,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"17.9437"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"17.835"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"17.6444"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"17.4765"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"17.7615"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:13 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXNOUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"9.7425"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"9.676"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"9.6472"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"9.6007"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"9.6287"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:14 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXSDUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"9.4189"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"9.3291"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"9.2228"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"9.1294"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"9.2013"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:15 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXSFUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"16.9434"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"16.75"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"16.4612"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"16.1724"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"16.5367"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:16 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXSIUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11791,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"1.2823"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"1.2777"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"1.2739"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"1.2703"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"1.277"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:17 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXSLUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":13879,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"310.97"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"310.84"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"310.74"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"310.86"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"311.35"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:18 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXSZUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"0.7898"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"0.7844"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"0.7806"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"0.7753"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"0.7787"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:19 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXTAUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11075,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"32.1"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"31.8"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"31.76"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"31.75"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"31.87"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:20 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXTHUS&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":11791,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"32.38"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"32.09"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"31.82"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"31.46"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"31.98"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:21 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXUSAL&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-13","value":"0.7004"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-12","value":"0.7089"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-11","value":"0.715"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-10","value":"0.715"},{"realtime_start":"2026-03-17","realtime_end":"2026-03-17","date":"2026-03-09","value":"0.7046"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:22 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXUSEU&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":7095,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"1.1444"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"1.1522"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"1.1566"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"1.1648"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"1.1592"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:24 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXUSNZ&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-13","value":"0.5804"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-12","value":"0.5869"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-11","value":"0.5909"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-10","value":"0.5956"},{"realtime_start":"2026-03-18","realtime_end":"2026-03-18","date":"2026-03-09","value":"0.5918"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:25 GMT
+- request:
+    method: get
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&limit=5&series_id=DEXUSUK&sort_order=desc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","observation_start":"1600-01-01","observation_end":"9999-12-31","units":"lin","output_type":1,"file_type":"json","order_by":"observation_date","sort_order":"desc","count":14400,"offset":0,"limit":5,"observations":[{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-13","value":"1.324"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-12","value":"1.335"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-11","value":"1.3399"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-10","value":"1.346"},{"realtime_start":"2026-03-16","realtime_end":"2026-03-16","date":"2026-03-09","value":"1.3395"}]}'
+  recorded_at: Wed, 18 Mar 2026 13:19:26 GMT
+recorded_with: VCR 6.4.0

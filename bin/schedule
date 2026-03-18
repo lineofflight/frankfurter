@@ -6,7 +6,7 @@ require "rufus-scheduler"
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (each runs in its own thread)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp"].each do |provider|
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred"].each do |provider|
   scheduler.in("0s") do
     %x(rake #{provider}:backfill)
   end
@@ -59,6 +59,12 @@ end
 # https://api.nbp.pl/
 scheduler.cron("*/30 11,12,13 * * 1-5") do
   %x(rake nbp:import)
+end
+
+# FRED publishes H.10 rates Mondays at 16:15 ET (21:15 UTC)
+# https://www.federalreserve.gov/releases/h10/
+scheduler.cron("*/30 21,22,23 * * 1") do
+  %x(rake fred:import)
 end
 
 scheduler.join
