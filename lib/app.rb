@@ -37,11 +37,6 @@ class App < Roda
 
       {
         name: "Frankfurter",
-        description: "Currency data API",
-        versions: {
-          v1: { path: "/v1" },
-          v2: { path: "/v2" },
-        },
         docs: "https://frankfurter.dev",
         source: "https://github.com/lineofflight/frankfurter",
       }
