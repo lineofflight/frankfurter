@@ -49,6 +49,13 @@ module Providers
 
         _(Rate.where(provider: "TEST").count).must_equal(1)
       end
+
+      it "excludes non-currency quotes" do
+        dataset << { date: Date.today, provider: "TEST", base: "EUR", quote: "XAU", rate: 2000.0 }
+        provider.import
+
+        _(Rate.where(provider: "TEST", quote: "XAU").count).must_equal(0)
+      end
     end
   end
 end

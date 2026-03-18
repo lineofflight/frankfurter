@@ -43,7 +43,6 @@ module Providers
           quote = rate["code"]
           mid = rate["mid"]
           next unless quote.match?(/\A[A-Z]{3}\z/)
-          next if ["XDR"].include?(quote)
           next if mid.nil? || mid.zero?
 
           { provider: key, date:, base:, quote:, rate: mid }

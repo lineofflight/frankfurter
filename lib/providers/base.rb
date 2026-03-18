@@ -44,7 +44,11 @@ module Providers
       raise NotImplementedError
     end
 
+    # Precious metals and IMF instruments — not currencies
+    EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
+
     def import
+      @dataset = dataset.reject { |r| EXCLUDED_QUOTES.include?(r[:quote]) }
       before = Rate.where(provider: key).count
       Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = Rate.where(provider: key).count - before

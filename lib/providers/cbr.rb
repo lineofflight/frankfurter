@@ -45,7 +45,6 @@ module Providers
       doc.locate("ValCurs/Valute").filter_map do |v|
         quote = v.locate("CharCode").first&.text
         next unless quote && !quote.empty?
-        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(quote)
 
         rate = extract_rate(v)
         next unless rate
@@ -59,7 +58,6 @@ module Providers
       doc.locate("ValCurs/Valute").filter_map do |v|
         code = v.locate("CharCode").first&.text
         next unless code && !code.empty?
-        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(code)
 
         id = v[:ID]
         nominal = v.locate("Nominal").first&.text.to_i

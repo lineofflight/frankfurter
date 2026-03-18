@@ -45,7 +45,6 @@ module Providers
       result.locate("Rates/ExchangeRate").filter_map do |node|
         quote = node.locate("ISO").first&.text
         next unless quote
-        next if ["XAU", "XAG", "XPT", "XPD", "XDR"].include?(quote)
 
         { provider: key, date:, base:, quote:, rate: extract_rate(node) }
       end
