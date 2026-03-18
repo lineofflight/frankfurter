@@ -8,63 +8,63 @@ scheduler = Rufus::Scheduler.new
 # Backfill all providers on startup (each runs in its own thread)
 ["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred"].each do |provider|
   scheduler.in("0s") do
-    %x(rake #{provider}:backfill)
+    system("rake #{provider}:backfill")
   end
 end
 
 # ECB publishes around 16:00 CET (15:00-17:00 UTC)
 # https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
 scheduler.cron("*/30 15,16,17 * * 1-5") do
-  %x(rake ecb:import)
+  system("rake ecb:import")
 end
 
 # BOC publishes by 16:30 ET (20:30-21:30 UTC)
 # https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
 scheduler.cron("*/30 20,21,22 * * 1-5") do
-  %x(rake boc:import)
+  system("rake boc:import")
 end
 
 # TCMB publishes at 15:30 TRT (12:30 UTC)
 # https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Banka+Hakkinda/Sikca+Sorulan+Sorular
 scheduler.cron("*/30 12,13,14 * * 1-5") do
-  %x(rake tcmb:import)
+  system("rake tcmb:import")
 end
 
 # NBU publishes daily (Ukraine, EET/EEST UTC+2/+3)
 scheduler.cron("*/30 10,11,12 * * 1-5") do
-  %x(rake nbu:import)
+  system("rake nbu:import")
 end
 
 # CBA publishes daily (Armenia, UTC+4)
 scheduler.cron("*/30 8,9,10 * * 1-5") do
-  %x(rake cba:import)
+  system("rake cba:import")
 end
 
 # NBRB publishes daily (Belarus, UTC+3)
 scheduler.cron("*/30 9,10,11 * * 1-5") do
-  %x(rake nbrb:import)
+  system("rake nbrb:import")
 end
 
 # BOB publishes daily (Botswana, UTC+2)
 scheduler.cron("*/30 10,11,12 * * 1-5") do
-  %x(rake bob:import)
+  system("rake bob:import")
 end
 
 # CBR publishes daily (Russia, UTC+3)
 scheduler.cron("*/30 9,10,11 * * 1-5") do
-  %x(rake cbr:import)
+  system("rake cbr:import")
 end
 
 # NBP publishes daily around 12:00 CET (11:00-12:00 UTC)
 # https://api.nbp.pl/
 scheduler.cron("*/30 11,12,13 * * 1-5") do
-  %x(rake nbp:import)
+  system("rake nbp:import")
 end
 
 # FRED publishes H.10 rates Mondays at 16:15 ET (21:15 UTC)
 # https://www.federalreserve.gov/releases/h10/
 scheduler.cron("*/30 21,22,23 * * 1") do
-  %x(rake fred:import)
+  system("rake fred:import")
 end
 
 scheduler.join

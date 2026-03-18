@@ -49,7 +49,7 @@ module Versions
 
       r.is("currencies") do
         r.get do
-          currencies
+          currencies(scope: r.params["scope"])
         end
       end
 
@@ -62,7 +62,7 @@ module Versions
 
     private
 
-    def currencies
+    def currencies(scope: nil)
       date_ranges = {}
       Rate.group(:quote).select { [quote.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
         date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
@@ -76,6 +76,9 @@ module Versions
           date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
         end
       end
+
+      cutoff = (Date.today - 30).to_s
+      date_ranges.reject! { |_, range| range[:end_date] < cutoff } unless scope == "all"
 
       date_ranges.sort.map do |iso, range|
         currency = Money::Currency.find(iso)

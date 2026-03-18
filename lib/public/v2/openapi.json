@@ -57,7 +57,16 @@
       "get": {
         "operationId": "getCurrencies",
         "summary": "Get available currencies",
-        "description": "Returns available currencies with their names and date ranges.",
+        "description": "Returns available currencies with their names and date ranges. By default, only active currencies are included.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Set to 'all' to include legacy currencies",
+            "required": false,
+            "schema": { "type": "string", "enum": ["all"] }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Available currencies",

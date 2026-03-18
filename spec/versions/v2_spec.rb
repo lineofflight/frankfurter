@@ -140,7 +140,7 @@ describe Versions::V2 do
   end
 
   it "returns currencies" do
-    get "/currencies"
+    get "/currencies?scope=all"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)
@@ -152,7 +152,7 @@ describe Versions::V2 do
   end
 
   it "includes base currencies in currencies list" do
-    get "/currencies"
+    get "/currencies?scope=all"
     eur = json.find { |c| c["iso_code"] == "EUR" }
 
     _(eur).wont_be_nil
