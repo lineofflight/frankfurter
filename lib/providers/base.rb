@@ -29,6 +29,7 @@ module Providers
     def initialize(dataset: [], logger: Providers.logger)
       @dataset = dataset
       @logger = logger
+      logger.info("#{key}: started")
     end
 
     def key = raise(NotImplementedError)
@@ -44,10 +45,11 @@ module Providers
     end
 
     def import
-      logger.info("#{key}: started")
+      before = Rate.where(provider: key).count
       Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
-      logger.info("#{key}: imported #{count.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse} rates")
-      if count > 0 && Cache.purge
+      inserted = Rate.where(provider: key).count - before
+      logger.info("#{key}: imported #{inserted} rates")
+      if inserted > 0 && Cache.purge
         logger.info("#{key}: purged cache")
       end
 

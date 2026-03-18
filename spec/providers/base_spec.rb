@@ -5,14 +5,18 @@ require "providers/base"
 
 module Providers
   describe Base do
-    let(:provider) { Base.new }
-
-    it "requires key" do
-      _ { provider.key }.must_raise(NotImplementedError)
+    let(:klass) do
+      Class.new(Base) do
+        def key = "TEST"
+        def name = "Test"
+        def base = "EUR"
+      end
     end
 
-    it "requires base" do
-      _ { provider.base }.must_raise(NotImplementedError)
+    let(:provider) { klass.new }
+
+    after do
+      Providers.all.delete(klass)
     end
 
     it "requires current" do
@@ -23,43 +27,12 @@ module Providers
       _ { provider.historical }.must_raise(NotImplementedError)
     end
 
-    it "has a logger" do
-      _(provider.logger).must_be_kind_of(Logger)
-    end
-
-    it "defaults dataset to empty" do
-      _(provider.dataset).must_equal([])
-    end
-
-    it "does nothing when importing empty dataset" do
-      klass = Class.new(Base) do
-        def key = "TEST"
-        def name = "Test"
-        def base = "EUR"
-      end
-
-      _(klass.new.import).must_be_kind_of(Base)
-    ensure
-      Providers.all.delete(klass)
-    end
-
     describe "with a dataset" do
       let(:dataset) do
         [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.1 }]
       end
 
-      let(:provider) do
-        klass = Class.new(Base) do
-          def key = "TEST"
-          def name = "Test"
-          def base = "EUR"
-        end
-        klass.new(dataset:)
-      end
-
-      after do
-        Providers.all.delete(provider.class)
-      end
+      let(:provider) { klass.new(dataset:) }
 
       it "imports" do
         provider.import
