@@ -20,6 +20,21 @@ describe Blender do
     _(usd[:rate]).must_be_close_to((1.08 + 1.10) / 2.0)
   end
 
+  it "handles mixed bases within a provider" do
+    rates = [
+      { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED" },
+      { date: date, base: "USD", quote: "CHF", rate: 0.88, provider: "FRED" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "FRED" },
+    ]
+
+    result = Blender.new(rates, base: "USD").blend
+    jpy = result.find { |r| r[:quote] == "JPY" }
+    eur = result.find { |r| r[:quote] == "EUR" }
+
+    _(jpy[:rate]).must_be_close_to(150.0)
+    _(eur[:rate]).must_be_close_to(1.0 / 1.10)
+  end
+
   it "sorts results by date and quote" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
