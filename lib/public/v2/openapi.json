@@ -57,7 +57,7 @@
       "get": {
         "operationId": "getCurrencies",
         "summary": "Get available currencies",
-        "description": "Returns available currencies with their names and which providers cover each.",
+        "description": "Returns available currencies with their names and date ranges.",
         "responses": {
           "200": {
             "description": "Available currencies",
@@ -68,8 +68,8 @@
                   "items": { "$ref": "#/components/schemas/Currency" }
                 },
                 "example": [
-                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "providers": ["ECB"] },
-                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "providers": ["ECB", "BOC"] }
+                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "start_date": "1999-01-04", "end_date": "2026-03-17" },
+                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "start_date": "1999-01-04", "end_date": "2026-03-17" }
                 ]
               }
             }
@@ -213,14 +213,9 @@
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
-          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
-          "providers": {
-            "type": "array",
-            "items": { "type": "string" },
-            "description": "Data providers that cover this currency"
-          }
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" }
         },
-        "required": ["iso_code", "name", "providers"]
+        "required": ["iso_code", "name"]
       },
       "Provider": {
         "type": "object",

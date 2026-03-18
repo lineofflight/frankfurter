@@ -3,8 +3,6 @@
 require "money/currency"
 require "oj"
 require "roda"
-require "set"
-
 require "providers/ecb"
 require "providers/boc"
 require "providers/tcmb"
@@ -64,14 +62,6 @@ module Versions
     private
 
     def currencies
-      providers_by_currency = {}
-      Rate.select(:quote, :provider).distinct.each do |row|
-        (providers_by_currency[row.quote] ||= Set.new) << row.provider
-      end
-      Rate.select(:base, :provider).distinct.each do |row|
-        (providers_by_currency[row.base] ||= Set.new) << row.provider
-      end
-
       date_ranges = {}
       Rate.group(:quote).select { [quote.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
         date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
@@ -86,9 +76,8 @@ module Versions
         end
       end
 
-      providers_by_currency.sort.map do |iso, providers|
+      date_ranges.sort.map do |iso, range|
         currency = Money::Currency.find(iso)
-        range = date_ranges[iso] || {}
         {
           iso_code: iso,
           iso_numeric: currency&.iso_numeric,
@@ -96,7 +85,6 @@ module Versions
           symbol: currency&.symbol,
           start_date: range[:start_date],
           end_date: range[:end_date],
-          providers: providers.to_a.sort,
         }
       end
     end

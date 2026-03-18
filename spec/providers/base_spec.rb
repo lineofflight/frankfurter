@@ -23,6 +23,10 @@ module Providers
       _ { provider.historical }.must_raise(NotImplementedError)
     end
 
+    it "has a logger" do
+      _(provider.logger).must_be_kind_of(Logger)
+    end
+
     it "defaults dataset to empty" do
       _(provider.dataset).must_equal([])
     end

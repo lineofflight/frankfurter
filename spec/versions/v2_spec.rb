@@ -149,7 +149,6 @@ describe Versions::V2 do
     _(usd["name"]).must_equal("United States Dollar")
     _(usd["symbol"]).must_equal("$")
     _(usd["iso_numeric"]).must_equal("840")
-    _(usd["providers"]).must_include("ECB")
   end
 
   it "includes base currencies in currencies list" do
