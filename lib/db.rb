@@ -2,6 +2,9 @@
 
 require "sequel"
 
-env = ENV["APP_ENV"]
-db_name = env ? "frankfurter_#{env}" : "frankfurter"
-Sequel.connect("sqlite://#{Dir.pwd}/db/#{db_name}.sqlite3")
+url = ENV.fetch("DATABASE_URL") do
+  env = ENV["APP_ENV"]
+  db_name = env ? "frankfurter_#{env}" : "frankfurter"
+  "sqlite://#{Dir.pwd}/db/#{db_name}.sqlite3"
+end
+Sequel.connect(url)
