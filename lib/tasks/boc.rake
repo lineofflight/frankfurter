@@ -1,16 +1,10 @@
 # frozen_string_literal: true
 
 namespace :boc do
-  desc "Import current BOC rates"
-  task :import do
-    require "providers/boc"
-    Providers::BOC.new.current.import
-  end
-
-  desc "Import all historical BOC rates"
+  desc "Backfill BOC rates"
   task :backfill do
     require "providers/boc"
-    Providers::BOC.new.historical.import
+    Providers::BOC.backfill
   end
 
   desc "Seed database from saved BOC data"

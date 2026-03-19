@@ -19,19 +19,15 @@ module Providers
       "ZAR" => "ZAR",
     }.freeze
 
-    def key = "BOB"
-    def name = "Bank of Botswana"
-    def base = "BWP"
-
-    def current
-      @dataset = parse(Net::HTTP.get(CSV_URL))
-      last_date = @dataset.last&.dig(:date)
-      @dataset = @dataset.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "BOB"
+      def name = "Bank of Botswana"
+      def base = "BWP"
     end
 
-    def historical
-      @dataset = parse(Net::HTTP.get(CSV_URL))
+    def fetch(since: nil)
+      records = parse(Net::HTTP.get(CSV_URL))
+      @dataset = since ? records.select { |r| r[:date] >= since } : records
       self
     end
 

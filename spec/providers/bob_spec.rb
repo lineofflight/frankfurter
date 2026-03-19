@@ -20,20 +20,20 @@ module Providers
       Rate.select(:date).distinct.count
     end
 
-    it "imports current rates" do
-      provider.current.import
-
-      _(count_unique_dates).must_equal(1)
-    end
-
-    it "imports historical rates" do
-      provider.historical.import
+    it "fetches rates" do
+      provider.fetch.import
 
       _(count_unique_dates).must_be(:>, 1)
     end
 
+    it "fetches rates since a date" do
+      provider.fetch(since: Date.today - 30).import
+
+      _(count_unique_dates).must_be(:>=, 1)
+    end
+
     it "stores multiple currencies per date" do
-      provider.current.import
+      provider.fetch(since: Date.today - 7).import
       date = Rate.first.date
 
       _(Rate.where(date:).count).must_be(:>, 1)

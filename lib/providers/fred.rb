@@ -38,36 +38,24 @@ module Providers
       "DEXUSUK" => ["USD", "GBP"],
     }.freeze
 
-    def key = "FRED"
-    def name = "Federal Reserve"
-    def base = "USD"
-
-    def current
-      return no_key unless api_key
-
-      @dataset = SERIES.flat_map do |series_id, (quote, series_base)|
-        sleep(0.2)
-        fetch_series(series_id, quote, series_base, limit: 5, sort_order: "desc")
-      end
-      last_date = @dataset.max_by { |r| r[:date] }&.dig(:date)
-      @dataset = @dataset.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "FRED"
+      def name = "Federal Reserve"
+      def base = "USD"
     end
 
-    def historical(start_date: "2000-01-01", end_date: Date.today.to_s)
+    def fetch(since: nil)
       return no_key unless api_key
 
       @dataset = []
+      params = {}
+      params[:observation_start] = since.to_s if since
+
       SERIES.each do |series_id, (quote, series_base)|
         sleep(0.2)
-        @dataset.concat(fetch_series(
-          series_id,
-          quote,
-          series_base,
-          observation_start: start_date,
-          observation_end: end_date,
-        ))
+        @dataset.concat(fetch_series(series_id, quote, series_base, **params))
       end
+
       self
     end
 

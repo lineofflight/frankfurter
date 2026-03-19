@@ -13,22 +13,18 @@ module Providers
     EARLIEST_DATE = Date.new(2016, 7, 1)
     CHUNK_DAYS = 365
 
-    def key = "NBRB"
-    def name = "National Bank of the Republic of Belarus"
-    def base = "BYN"
-
-    def current
-      data = Oj.load(Net::HTTP.get(URI("#{RATES_URL}?periodicity=0")))
-      @dataset = parse_daily(data)
-      self
+    class << self
+      def key = "NBRB"
+      def name = "National Bank of the Republic of Belarus"
+      def base = "BYN"
     end
 
-    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
+    def fetch(since: nil)
+      start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
-      end_date = Date.parse(end_date.to_s)
       currencies = current_currencies
       @dataset = currencies.flat_map do |cur_id, quote, scale|
-        chunked_dynamics(cur_id, quote, scale, start_date, end_date)
+        chunked_dynamics(cur_id, quote, scale, start_date, Date.today)
       end
       self
     end

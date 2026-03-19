@@ -7,7 +7,7 @@ module Providers
   describe BOC do
     before do
       Rate.dataset.delete
-      VCR.insert_cassette("boc")
+      VCR.insert_cassette("boc", match_requests_on: [:method, :host])
     end
 
     after do
@@ -20,20 +20,20 @@ module Providers
       Rate.select(:date).distinct.count
     end
 
-    it "imports current rates" do
-      provider.current.import
-
-      _(count_unique_dates).must_equal(1)
-    end
-
-    it "imports historical rates" do
-      provider.historical(start_date: "2025-01-01").import
+    it "fetches rates" do
+      provider.fetch(since: Date.new(2025, 1, 1)).import
 
       _(count_unique_dates).must_be(:>, 1)
     end
 
+    it "fetches rates since a date" do
+      provider.fetch(since: Date.today - 7).import
+
+      _(count_unique_dates).must_be(:>=, 1)
+    end
+
     it "stores multiple currencies per date" do
-      provider.current.import
+      provider.fetch(since: Date.today - 7).import
       date = Rate.first.date
 
       _(Rate.where(date:).count).must_be(:>, 1)

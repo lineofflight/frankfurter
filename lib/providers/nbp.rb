@@ -11,24 +11,20 @@ module Providers
     BASE_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
     EARLIEST_DATE = Date.new(2002, 1, 2)
 
-    def key = "NBP"
-    def name = "National Bank of Poland"
-    def base = "PLN"
-
-    def current
-      records = fetch(Date.today - 7, Date.today)
-      last_date = records.last&.dig(:date)
-      @dataset = records.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "NBP"
+      def name = "National Bank of Poland"
+      def base = "PLN"
     end
 
-    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
+    def fetch(since: nil)
+      start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
-      end_date = Date.parse(end_date.to_s)
+      end_date = Date.today
       @dataset = []
 
       each_chunk(start_date, end_date) do |chunk_start, chunk_end|
-        @dataset.concat(fetch(chunk_start, chunk_end))
+        @dataset.concat(fetch_rates(chunk_start, chunk_end))
       end
 
       self
@@ -52,7 +48,7 @@ module Providers
 
     private
 
-    def fetch(start_date, end_date)
+    def fetch_rates(start_date, end_date)
       url = URI("#{BASE_URL}/#{start_date}/#{end_date}/?format=json")
       response = Net::HTTP.get(url)
       parse(response)
