@@ -17,6 +17,7 @@ jobs:
     env:
       APP_ENV: test
       TCMB_API_KEY: test
+      FRED_API_KEY: test
     steps:
       - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
