@@ -29,6 +29,8 @@ module Providers
 
       def backfill
         since = Rate.where(provider: key).max(:date)
+        return if since && Date.parse(since.to_s) >= Date.today
+
         new.fetch(since:).import
       end
     end

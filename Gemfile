@@ -30,6 +30,7 @@ group :test do
   gem "minitest"
   gem "minitest-around"
   gem "minitest-focus"
+  gem "minitest-mock"
   gem "rack-test"
   gem "vcr"
   gem "skooma"

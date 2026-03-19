@@ -51,6 +51,7 @@ GEM
       minitest (> 5.0, < 7.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
+    minitest-mock (5.27.0)
     money (7.0.2)
       bigdecimal
       i18n (~> 1.9)
@@ -179,6 +180,7 @@ DEPENDENCIES
   minitest
   minitest-around
   minitest-focus
+  minitest-mock
   money
   oj
   ox

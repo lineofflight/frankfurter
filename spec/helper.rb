@@ -3,6 +3,7 @@
 require_relative "../boot"
 
 require "minitest/autorun"
+require "minitest/mock"
 require "minitest/around/spec"
 require "minitest/focus"
 require "vcr"

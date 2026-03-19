@@ -77,6 +77,16 @@ module Providers
 
         _(Rate.where(provider: "TEST").count).must_equal(1)
       end
+
+      it "skips when already up to date" do
+        Rate.dataset.insert(
+          date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.1,
+        )
+
+        klass.stub(:new, -> { raise "should not be called" }) do
+          klass.backfill
+        end
+      end
     end
   end
 end
