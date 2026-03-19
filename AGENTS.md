@@ -39,11 +39,12 @@ db/seeds/                     # Offline seed data
 ## Key Components
 
 ### Providers (lib/providers/)
-- `Providers::Base`: Shared interface — `key`, `base`, `current`, `historical`, `import`
-- `Providers::ECB`: European Central Bank (EUR base, data since 1999)
-- `Providers::BOC`: Bank of Canada (CAD base, data since 2017)
-- Providers fetch and parse rates, `import` writes to DB via upsert
-- Usage: `Providers::ECB.new.current.import`
+- `Providers::Base`: Shared interface — `key`, `base`, `fetch(since:)`, `import`, `backfill`
+- `key`, `name`, `base` are class methods; instance methods delegate
+- `fetch(since: nil)`: `nil` fetches full history, a date fetches from that date forward (inclusive)
+- `self.backfill`: queries DB for last stored date, calls `new.fetch(since:).import`
+- `import` writes to DB via upsert, filters excluded quotes, purges cache
+- Usage: `Providers::ECB.backfill` or `Providers::ECB.new.fetch(since: date).import`
 
 ### API (lib/app.rb, lib/versions/v1.rb)
 - v1 API at `/v1/*` endpoints, scoped to ECB data
@@ -51,7 +52,9 @@ db/seeds/                     # Offline seed data
 - JSON responses with 900-second caching
 
 ### Scheduler (lib/scheduler/daemon.rb, bin/schedule)
-- Runs each provider's import task on its own cron schedule
+- Runs `backfill` for all providers on startup
+- Runs each provider's `backfill` task on its own cron schedule
+- Backfill is incremental: fetches only from the last stored date forward
 - ECB: weekdays 15:00-17:00 UTC
 - BOC: weekdays 20:00-22:00 UTC
 
@@ -100,11 +103,10 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 ## Rake Tasks
 
 ```bash
-rake ecb:import    # Import current ECB rates
-rake ecb:backfill  # Import all historical ECB rates
+rake ecb:backfill  # Backfill ECB rates (incremental from last stored date)
 rake ecb:seed      # Seed database from saved ECB data
-rake boc:import    # Import current BOC rates
-rake boc:backfill  # Import all historical BOC rates
+rake boc:backfill  # Backfill BOC rates (incremental from last stored date)
+rake backfill      # Backfill all providers
 rake db:prepare    # Run migrations and backfill all providers
 ```
 
@@ -113,6 +115,7 @@ rake db:prepare    # Run migrations and backfill all providers
 - Ruby (see `Gemfile`)
 - Linting: RuboCop with Shopify style guide (120-char line length)
 - Migrations in `db/migrate/`
+- Update `CHANGELOG.md` for changes that directly impact user experience
 
 ## API Endpoints
 

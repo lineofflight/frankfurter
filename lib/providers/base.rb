@@ -22,6 +22,15 @@ module Providers
         super
         Providers.all << subclass
       end
+
+      def key = raise(NotImplementedError)
+      def name = raise(NotImplementedError)
+      def base = raise(NotImplementedError)
+
+      def backfill
+        since = Rate.where(provider: key).max(:date)
+        new.fetch(since:).import
+      end
     end
 
     attr_reader :dataset, :logger
@@ -32,15 +41,11 @@ module Providers
       logger.info("#{key}: started")
     end
 
-    def key = raise(NotImplementedError)
-    def name = raise(NotImplementedError)
-    def base = raise(NotImplementedError)
+    def key = self.class.key
+    def name = self.class.name
+    def base = self.class.base
 
-    def current
-      raise NotImplementedError
-    end
-
-    def historical
+    def fetch(since: nil)
       raise NotImplementedError
     end
 

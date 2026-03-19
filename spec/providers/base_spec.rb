@@ -7,9 +7,11 @@ module Providers
   describe Base do
     let(:klass) do
       Class.new(Base) do
-        def key = "TEST"
-        def name = "Test"
-        def base = "EUR"
+        class << self
+          def key = "TEST"
+          def name = "Test"
+          def base = "EUR"
+        end
       end
     end
 
@@ -19,12 +21,8 @@ module Providers
       Providers.all.delete(klass)
     end
 
-    it "requires current" do
-      _ { provider.current }.must_raise(NotImplementedError)
-    end
-
-    it "requires historical" do
-      _ { provider.historical }.must_raise(NotImplementedError)
+    it "requires fetch" do
+      _ { provider.fetch }.must_raise(NotImplementedError)
     end
 
     describe "with a dataset" do
@@ -55,6 +53,29 @@ module Providers
         provider.import
 
         _(Rate.where(provider: "TEST", quote: "XAU").count).must_equal(0)
+      end
+    end
+
+    describe ".backfill" do
+      let(:klass) do
+        Class.new(Base) do
+          class << self
+            def key = "TEST"
+            def name = "Test"
+            def base = "EUR"
+          end
+
+          def fetch(since: nil)
+            @dataset = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.1 }]
+            self
+          end
+        end
+      end
+
+      it "imports via class method" do
+        klass.backfill
+
+        _(Rate.where(provider: "TEST").count).must_equal(1)
       end
     end
   end

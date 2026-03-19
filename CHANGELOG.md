@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Replaced current/historical provider split with incremental `fetch(since:)`/`backfill` contract
+- Switched ECB from XML to SDMX CSV endpoint (gains range queries and discontinued series)
+- Scheduler now uses `backfill` for both startup and cron — self-heals gaps automatically
 - Return latest rates for future dates
 
 ### Fixed

@@ -12,19 +12,16 @@ module Providers
     EARLIEST_DATE = Date.new(1999, 1, 4)
     CHUNK_SIZE = 365
 
-    def key = "CBA"
-    def name = "Central Bank of Armenia"
-    def base = "AMD"
-
-    def current
-      @dataset = latest_rates
-      self
+    class << self
+      def key = "CBA"
+      def name = "Central Bank of Armenia"
+      def base = "AMD"
     end
 
-    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
+    def fetch(since: nil)
+      start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
-      end_date = Date.parse(end_date.to_s)
-      @dataset = chunked_range(start_date, end_date, currency_codes)
+      @dataset = chunked_range(start_date, Date.today, currency_codes)
       self
     end
 

@@ -12,19 +12,14 @@ module Providers
     BASE_URL = "https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json"
     EARLIEST_DATE = "2017-01-03"
 
-    def key = "BOC"
-    def name = "Bank of Canada"
-    def base = "CAD"
-
-    def current
-      records = fetch(recent: 1)
-      last_date = records.last&.dig(:date)
-      @dataset = records.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "BOC"
+      def name = "Bank of Canada"
+      def base = "CAD"
     end
 
-    def historical(start_date: EARLIEST_DATE)
-      @dataset = fetch(start_date:)
+    def fetch(since: nil)
+      @dataset = fetch_rates(start_date: since || EARLIEST_DATE)
       self
     end
 
@@ -41,7 +36,7 @@ module Providers
 
     private
 
-    def fetch(**params)
+    def fetch_rates(**params)
       url = URI(BASE_URL)
       url.query = URI.encode_www_form(params)
 

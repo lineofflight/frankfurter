@@ -11,19 +11,16 @@ module Providers
     URL = URI("https://bank.gov.ua/NBU_Exchange/exchange_site")
     EARLIEST_DATE = Date.new(1999, 1, 4)
 
-    def key = "NBU"
-    def name = "National Bank of Ukraine"
-    def base = "UAH"
-
-    def current
-      @dataset = fetch(Date.today - 7, Date.today)
-      last_date = @dataset.last&.dig(:date)
-      @dataset = @dataset.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "NBU"
+      def name = "National Bank of Ukraine"
+      def base = "UAH"
     end
 
-    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
-      @dataset = fetch(Date.parse(start_date.to_s), Date.parse(end_date.to_s))
+    def fetch(since: nil)
+      start_date = since || EARLIEST_DATE
+      start_date = Date.parse(start_date.to_s)
+      @dataset = fetch_rates(start_date, Date.today)
       self
     end
 
@@ -47,7 +44,7 @@ module Providers
 
     private
 
-    def fetch(start_date, end_date)
+    def fetch_rates(start_date, end_date)
       url = URL.dup
       url.query = URI.encode_www_form(
         start: start_date.strftime("%Y%m%d"),

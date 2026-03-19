@@ -9,6 +9,7 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
+    csv (3.3.5)
     date (3.5.1)
     drb (2.2.3)
     erb (6.0.2)
@@ -172,6 +173,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  csv
   irb
   logger
   minitest

@@ -44,29 +44,22 @@ module Providers
 
     COLUMNS = SERIES.to_h { |code, series| [series.tr(".", "_"), code] }.freeze
 
-    def key = "TCMB"
-    def name = "Central Bank of Turkey"
-    def base = "USD"
-
-    def current
-      return no_key unless api_key
-
-      start_date = Date.today - 7
-      records = fetch(start_date, Date.today)
-      last_date = records.last&.dig(:date)
-      @dataset = records.select { |r| r[:date] == last_date }
-      self
+    class << self
+      def key = "TCMB"
+      def name = "Central Bank of Turkey"
+      def base = "USD"
     end
 
-    def historical(start_date: EARLIEST_DATE, end_date: Date.today)
+    def fetch(since: nil)
       return no_key unless api_key
 
+      start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
-      end_date = Date.parse(end_date.to_s)
+      end_date = Date.today
       @dataset = []
 
       each_chunk(start_date, end_date) do |chunk_start, chunk_end|
-        @dataset.concat(fetch(chunk_start, chunk_end))
+        @dataset.concat(fetch_rates(chunk_start, chunk_end))
       end
 
       self
@@ -83,7 +76,7 @@ module Providers
       self
     end
 
-    def fetch(start_date, end_date)
+    def fetch_rates(start_date, end_date)
       url = URI("#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
         "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
         "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
