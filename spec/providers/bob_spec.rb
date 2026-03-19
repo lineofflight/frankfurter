@@ -27,13 +27,13 @@ module Providers
     end
 
     it "fetches rates since a date" do
-      provider.fetch(since: Date.today - 30).import
+      provider.fetch(since: Date.new(2026, 3, 1)).import
 
       _(count_unique_dates).must_be(:>=, 1)
     end
 
     it "stores multiple currencies per date" do
-      provider.fetch(since: Date.today - 7).import
+      provider.fetch.import
       date = Rate.first.date
 
       _(Rate.where(date:).count).must_be(:>, 1)

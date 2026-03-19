@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-desc "Backfill all historical rates from all providers"
+desc "Backfill rates from all providers (incremental from last stored date)"
 task backfill: [
   "ecb:backfill",
   "boc:backfill",
