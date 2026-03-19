@@ -7,10 +7,14 @@ module Versions
   class V1 < Roda
     class CurrencyNames
       def cache_key
+        return if currencies.empty?
+
         Digest::MD5.hexdigest(currencies.first.date.to_s)
       end
 
       def formatted
+        return {} if currencies.empty?
+
         iso_codes.to_h do |iso_code|
           [iso_code, Money::Currency.find(iso_code).name]
         end

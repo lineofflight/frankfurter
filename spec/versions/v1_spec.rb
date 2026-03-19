@@ -101,6 +101,14 @@ describe Versions::V1 do
     _(json["USD"]).must_equal("United States Dollar")
   end
 
+  it "returns empty currencies when no data" do
+    Rate.dataset.delete
+    get "/currencies"
+
+    _(last_response).must_be(:ok?)
+    _(json).must_be(:empty?)
+  end
+
   it "sets charset to utf-8" do
     get "/currencies"
 
