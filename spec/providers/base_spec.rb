@@ -54,6 +54,13 @@ module Providers
 
         _(Rate.where(provider: "TEST", quote: "XAU").count).must_equal(0)
       end
+
+      it "excludes unrecognised currency codes" do
+        dataset << { date: Date.today, provider: "TEST", base: "EUR", quote: "SDR", rate: 1.5 }
+        provider.import
+
+        _(Rate.where(provider: "TEST", quote: "SDR").count).must_equal(0)
+      end
     end
 
     describe ".backfill" do
