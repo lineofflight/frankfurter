@@ -17,8 +17,8 @@ class Blender
       BaseConverter.new(provider_rows, base: base).convert
     end
 
-    rebased.group_by { |r| [r[:date], r[:quote]] }.sort.map do |_, group|
-      group.first.merge(rate: group.sum { |r| r[:rate] } / group.size)
+    rebased.group_by { |r| r[:quote] }.sort.map do |_, group|
+      group.max_by { |r| r[:date] }.merge(rate: group.sum { |r| r[:rate] } / group.size)
     end
   end
 end

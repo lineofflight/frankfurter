@@ -35,17 +35,16 @@ describe Blender do
     _(eur[:rate]).must_be_close_to(1.0 / 1.10)
   end
 
-  it "sorts results by date and quote" do
+  it "blends rates from different dates" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-      { date: date, base: "EUR", quote: "GBP", rate: 0.85, provider: "ECB" },
-      { date: date + 1, base: "EUR", quote: "USD", rate: 1.09, provider: "ECB" },
-      { date: date + 1, base: "EUR", quote: "GBP", rate: 0.86, provider: "ECB" },
+      { date: date - 1, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
     ]
 
     result = Blender.new(rates, base: "EUR").blend
-    keys = result.map { |r| [r[:date], r[:quote]] }
+    usd = result.find { |r| r[:quote] == "USD" }
 
-    _(keys).must_equal(keys.sort)
+    _(usd[:rate]).must_be_close_to((1.08 + 1.10) / 2.0)
+    _(usd[:date]).must_equal(date) # picks most recent date
   end
 end
