@@ -6,7 +6,7 @@ require "rufus-scheduler"
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (each runs in its own thread)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred"].each do |provider|
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm"].each do |provider|
   scheduler.in("0s") do
     system("rake #{provider}:backfill")
   end
@@ -65,6 +65,12 @@ end
 # https://www.federalreserve.gov/releases/h10/
 scheduler.cron("*/30 21,22,23 * * 1") do
   system("rake fred:backfill")
+end
+
+# BNM publishes daily (Malaysia, UTC+8)
+# https://apikijangportal.bnm.gov.my/
+scheduler.cron("*/30 4,5,6 * * 1-5") do
+  system("rake bnm:backfill")
 end
 
 scheduler.join

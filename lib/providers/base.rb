@@ -2,6 +2,7 @@
 
 require "cache"
 require "logger"
+require "money"
 require "rate"
 
 module Providers
@@ -51,11 +52,11 @@ module Providers
       raise NotImplementedError
     end
 
-    # Precious metals and IMF instruments — not currencies
+    # Precious metals and IMF instruments — recognised by Money gem but not currencies
     EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
 
     def import
-      @dataset = dataset.reject { |r| EXCLUDED_QUOTES.include?(r[:quote]) }
+      @dataset = dataset.reject { |r| !Money::Currency.find(r[:quote]) || EXCLUDED_QUOTES.include?(r[:quote]) }
       before = Rate.where(provider: key).count
       Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = Rate.where(provider: key).count - before
