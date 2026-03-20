@@ -13,7 +13,7 @@ class BaseConverter
   def convert
     return [] unless base_rate
 
-    rates.filter_map do |rate|
+    rates.map do |rate|
       if rate[:base] == base
         { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] }
       elsif rate[:quote] == base
