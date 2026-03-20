@@ -10,11 +10,12 @@ describe Rate do
       data = Rate.latest(date)
 
       _(data.to_a.sample.date).must_equal(date)
+    end
 
-      date = Date.parse("2009-12-30")
-      data = Rate.latest(date)
+    it "snaps to nearest prior date when requested date has no rates" do
+      data = Rate.where(provider: "ECB").latest(Date.parse("2010-01-02"))
 
-      _(data.to_a.sample.date).must_equal(Date.parse("2009-12-30"))
+      _(data.map(&:date).uniq).must_equal([Date.parse("2009-12-31")])
     end
 
     it "includes each provider's most recent date" do

@@ -22,7 +22,7 @@ module Versions
       end
 
       def cache_key
-        Digest::MD5.hexdigest(to_a.last&.dig(:date).to_s)
+        Digest::MD5.hexdigest(to_a.map { |r| r[:date] }.max.to_s)
       end
 
       private
@@ -106,7 +106,7 @@ module Versions
         rates = if date_scope.is_a?(Range)
           ds = ds.where(date: date_scope)
           ds = ds.downsample(group) if group
-          ds.all.group_by { |r| r[:date] }.flat_map do |_, rows|
+          ds.order(:date, :quote).all.group_by { |r| r[:date] }.flat_map do |_, rows|
             Blender.new(rows, base:).blend
           end
         else
