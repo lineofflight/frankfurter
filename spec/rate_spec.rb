@@ -11,10 +11,49 @@ describe Rate do
 
       _(data.to_a.sample.date).must_equal(date)
 
-      date = Date.parse("2010-01-01")
+      date = Date.parse("2009-12-30")
       data = Rate.latest(date)
 
-      _(data.to_a.sample.date).must_equal(Date.parse("2009-12-31"))
+      _(data.to_a.sample.date).must_equal(Date.parse("2009-12-30"))
+    end
+
+    it "includes each provider's most recent date" do
+      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "CAD", quote: "XTS", rate: 1.35, provider: "BOC")
+      Rate.dataset.insert(date: Date.parse("2024-01-13"), base: "CAD", quote: "XTS", rate: 1.34, provider: "BOC")
+
+      data = Rate.latest(Date.parse("2024-01-15"))
+      providers = data.map(&:provider).uniq.sort
+
+      _(providers).must_include("ECB")
+      _(providers).must_include("BOC")
+    end
+
+    it "excludes providers outside their publish frequency" do
+      Rate.dataset.insert(date: Date.parse("2024-01-10"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: Date.parse("2024-01-09"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
+      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
+      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+
+      data = Rate.latest(Date.parse("2024-01-15"))
+      providers = data.map(&:provider).uniq
+
+      _(providers).must_include("ECB")
+      _(providers).wont_include("STALE")
+    end
+
+    it "includes weekly providers within their cadence" do
+      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
+      Rate.dataset.insert(date: Date.parse("2024-01-08"), base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
+      Rate.dataset.insert(date: Date.parse("2024-01-19"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
+      Rate.dataset.insert(date: Date.parse("2024-01-18"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+
+      data = Rate.latest(Date.parse("2024-01-19"))
+      providers = data.map(&:provider).uniq
+
+      _(providers).must_include("ECB")
+      _(providers).must_include("FRED")
     end
 
     it "returns nothing if date predates dataset" do
@@ -26,7 +65,7 @@ describe Rate do
       data = Rate.latest(future_date)
 
       _(data).wont_be_empty
-      _(data.to_a.sample.date).must_equal(Rate.latest.to_a.sample.date)
+      _(data.map(:date).uniq.sort).must_equal(Rate.latest.map(:date).uniq.sort)
     end
   end
 
