@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXBZUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXBZUS
     body:
       encoding: US-ASCII
       string: ''
@@ -50,7 +50,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:18 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXCAUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXCAUS
     body:
       encoding: US-ASCII
       string: ''
@@ -100,7 +100,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:18 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXCHUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXCHUS
     body:
       encoding: US-ASCII
       string: ''
@@ -148,7 +148,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:19 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXDNUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXDNUS
     body:
       encoding: US-ASCII
       string: ''
@@ -196,7 +196,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:19 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXHKUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXHKUS
     body:
       encoding: US-ASCII
       string: ''
@@ -244,7 +244,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:20 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXINUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXINUS
     body:
       encoding: US-ASCII
       string: ''
@@ -292,7 +292,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:20 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXJPUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXJPUS
     body:
       encoding: US-ASCII
       string: ''
@@ -342,7 +342,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:21 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXKOUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXKOUS
     body:
       encoding: US-ASCII
       string: ''
@@ -390,7 +390,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:22 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXMAUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXMAUS
     body:
       encoding: US-ASCII
       string: ''
@@ -440,7 +440,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:23 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXMXUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXMXUS
     body:
       encoding: US-ASCII
       string: ''
@@ -488,7 +488,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:23 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXNOUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXNOUS
     body:
       encoding: US-ASCII
       string: ''
@@ -536,7 +536,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:24 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXSDUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXSDUS
     body:
       encoding: US-ASCII
       string: ''
@@ -584,7 +584,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:24 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXSFUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXSFUS
     body:
       encoding: US-ASCII
       string: ''
@@ -632,7 +632,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:25 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXSIUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXSIUS
     body:
       encoding: US-ASCII
       string: ''
@@ -680,7 +680,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:25 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXSLUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXSLUS
     body:
       encoding: US-ASCII
       string: ''
@@ -728,7 +728,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:26 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXSZUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXSZUS
     body:
       encoding: US-ASCII
       string: ''
@@ -776,7 +776,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:26 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXTAUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXTAUS
     body:
       encoding: US-ASCII
       string: ''
@@ -824,7 +824,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:27 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXTHUS
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXTHUS
     body:
       encoding: US-ASCII
       string: ''
@@ -872,7 +872,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:27 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXUSAL
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXUSAL
     body:
       encoding: US-ASCII
       string: ''
@@ -920,7 +920,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:28 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXUSEU
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXUSEU
     body:
       encoding: US-ASCII
       string: ''
@@ -968,7 +968,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:28 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXUSNZ
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXUSNZ
     body:
       encoding: US-ASCII
       string: ''
@@ -1016,7 +1016,7 @@ http_interactions:
   recorded_at: Thu, 19 Mar 2026 14:08:28 GMT
 - request:
     method: get
-    uri: https://api.stlouisfed.org/fred/series/observations?api_key=ebbcb5bbf8830ca592adcf68ba1621a1&file_type=json&observation_start=2026-03-01&series_id=DEXUSUK
+    uri: https://api.stlouisfed.org/fred/series/observations?api_key=<FRED_API_KEY>&file_type=json&observation_start=2026-03-01&series_id=DEXUSUK
     body:
       encoding: US-ASCII
       string: ''
