@@ -102,11 +102,18 @@ module Versions
       def fetch_rates
         ds = Rate.dataset
         ds = ds.where(provider: providers) if providers
-        d = date_scope
-        ds = d.is_a?(Range) ? ds.where(date: d) : ds.latest(d)
-        ds = ds.downsample(group) if group
 
-        Blender.new(ds.all, base:).blend.filter_map do |r|
+        rates = if date_scope.is_a?(Range)
+          ds = ds.where(date: date_scope)
+          ds = ds.downsample(group) if group
+          ds.all.group_by { |r| r[:date] }.flat_map do |_, rows|
+            Blender.new(rows, base:).blend
+          end
+        else
+          Blender.new(ds.latest(date_scope).all, base:).blend
+        end
+
+        rates.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
 
           { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
