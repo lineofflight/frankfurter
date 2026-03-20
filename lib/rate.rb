@@ -70,9 +70,11 @@ class Rate < Sequel::Model(:rates)
     def between(interval)
       return where(false) if interval.begin > Date.today
 
-      nearest = Sequel.function(:coalesce,
+      nearest = Sequel.function(
+        :coalesce,
         select(:date).where(Sequel[:date] <= interval.begin).order(Sequel.desc(:date)).limit(1),
-        interval.begin)
+        interval.begin,
+      )
       where(Sequel[:date] >= nearest)
         .where(Sequel[:date] <= interval.end)
         .order(:date, :quote)
