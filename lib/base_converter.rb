@@ -15,11 +15,11 @@ class BaseConverter
 
     rates.filter_map do |rate|
       if rate[:base] == base
-        { date: rate[:date], base: base, quote: rate[:quote], rate: rate[:rate] }
+        { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] }
       elsif rate[:quote] == base
-        { date: rate[:date], base: base, quote: rate[:base], rate: 1.0 / base_rate }
+        { date: rate[:date], base:, quote: rate[:base], rate: 1.0 / base_rate }
       else
-        { date: rate[:date], base: base, quote: rate[:quote], rate: rate[:rate] / base_rate }
+        { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] / base_rate }
       end
     end
   end
