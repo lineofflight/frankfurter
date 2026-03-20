@@ -1,0 +1,1403 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:02:40 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '4208'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"6628e0d88e176a78f7f4e53a3d4b7329d8d9b513-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:02:40 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521a89b773f1fb57b39973df0b08c23323c046ea66b7223815c03c5f642b6baaca09fad654e5903f15be9582a83fd1044fe7984af6aaa0520dda4b5e8e1e6a71aa6;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"currency_code":"CHF","unit":1,"rate":{"date":"2026-03-19","buying_rate":4.9577,"selling_rate":4.9684999999999997,"middle_rate":4.9630999999999998}},{"currency_code":"CAD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.859,"selling_rate":2.8647,"middle_rate":2.8618999999999999}},{"currency_code":"BND","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.0611999999999999,"selling_rate":3.0684,"middle_rate":3.0648}},{"currency_code":"AUD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.7650999999999999,"selling_rate":2.7709000000000001,"middle_rate":2.7679999999999998}},{"currency_code":"AED","unit":100,"rate":{"date":"2026-03-19","buying_rate":106.9883,"selling_rate":107.2226,"middle_rate":107.1054}},{"currency_code":"CNY","unit":1,"rate":{"date":"2026-03-19","buying_rate":0.56930000000000003,"selling_rate":0.57040000000000002,"middle_rate":0.56979999999999997}},{"currency_code":"NPR","unit":100,"rate":{"date":"2026-03-19","buying_rate":2.6515,"selling_rate":2.6564000000000001,"middle_rate":2.6539000000000001}},{"currency_code":"VND","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999}},{"currency_code":"USD","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.9300000000000002,"selling_rate":3.9369999999999998,"middle_rate":3.9335}},{"currency_code":"TWD","unit":100,"rate":{"date":"2026-03-19","buying_rate":12.287800000000001,"selling_rate":12.321199999999999,"middle_rate":12.304500000000001}},{"currency_code":"THB","unit":100,"rate":{"date":"2026-03-19","buying_rate":11.979900000000001,"selling_rate":12.0122,"middle_rate":11.996}},{"currency_code":"SGD","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.0619000000000001,"selling_rate":3.0676000000000001,"middle_rate":3.0648}},{"currency_code":"SDR","unit":1,"rate":{"date":"2026-03-19","buying_rate":null,"selling_rate":null,"middle_rate":5.3586}},{"currency_code":"SAR","unit":100,"rate":{"date":"2026-03-19","buying_rate":104.6326,"selling_rate":104.8608,"middle_rate":104.7467}},{"currency_code":"PKR","unit":100,"rate":{"date":"2026-03-19","buying_rate":1.4071,"selling_rate":1.4109,"middle_rate":1.409}},{"currency_code":"PHP","unit":100,"rate":{"date":"2026-03-19","buying_rate":6.5368000000000004,"selling_rate":6.5526999999999997,"middle_rate":6.5448000000000004}},{"currency_code":"NZD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.2841,"selling_rate":2.2890000000000001,"middle_rate":2.2865000000000002}},{"currency_code":"MMK","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.18770000000000001,"selling_rate":0.188,"middle_rate":0.18790000000000001}},{"currency_code":"KRW","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.26190000000000002,"selling_rate":0.26250000000000001,"middle_rate":0.26219999999999999}},{"currency_code":"KHR","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.097100000000000006,"selling_rate":0.098299999999999998,"middle_rate":0.097699999999999995}},{"currency_code":"JPY","unit":100,"rate":{"date":"2026-03-19","buying_rate":2.4685999999999999,"selling_rate":2.4735,"middle_rate":2.4710000000000001}},{"currency_code":"INR","unit":100,"rate":{"date":"2026-03-19","buying_rate":4.2118000000000002,"selling_rate":4.2199,"middle_rate":4.2159000000000004}},{"currency_code":"IDR","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.023099999999999999,"selling_rate":0.023199999999999998,"middle_rate":0.023199999999999998}},{"currency_code":"HKD","unit":100,"rate":{"date":"2026-03-19","buying_rate":50.151200000000003,"selling_rate":50.247,"middle_rate":50.199100000000001}},{"currency_code":"GBP","unit":1,"rate":{"date":"2026-03-19","buying_rate":5.2080000000000002,"selling_rate":5.2184999999999997,"middle_rate":5.2133000000000003}},{"currency_code":"EUR","unit":1,"rate":{"date":"2026-03-19","buying_rate":4.4999000000000002,"selling_rate":4.5087000000000002,"middle_rate":4.5042999999999997}},{"currency_code":"EGP","unit":1,"rate":{"date":"2026-03-19","buying_rate":0.075200000000000003,"selling_rate":0.075399999999999995,"middle_rate":0.075300000000000006}}],"meta":{"quote":"rm","session":"1700","last_updated":"2026-03-19
+        23:01:22","total_result":27}}'
+  recorded_at: Fri, 20 Mar 2026 00:02:40 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/CHF/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:02:41 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:02:41 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425211b6ad181d6cf01dba93f76caab318856677af174a97c5bce4f8918b5e252e05a343c0694646d3bcb04f4ebf320ac22fc0e8e0751dbc18dd8ae1a4cf2bad6ecbd;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:02:41 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/CAD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:02 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1547'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"ac932c9e14f8375189af7306bd64cf570ce3bc61-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:01 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521c061bddd740d5254baa3d83ef8cf191bd50a8f41fe611382e08e054964e3c55138bae0397de4db49e0cce9471573d96e4a0a344e572b3da1da91303e6f45badd;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"CAD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":2.8344,"selling_rate":2.8794,"middle_rate":null},{"date":"2026-03-03","buying_rate":2.8481999999999998,"selling_rate":2.8932000000000002,"middle_rate":null},{"date":"2026-03-04","buying_rate":2.8538000000000001,"selling_rate":2.8988,"middle_rate":null},{"date":"2026-03-05","buying_rate":2.8553999999999999,"selling_rate":2.9003999999999999,"middle_rate":null},{"date":"2026-03-06","buying_rate":2.8628,"selling_rate":2.9077999999999999,"middle_rate":null},{"date":"2026-03-09","buying_rate":2.8921999999999999,"selling_rate":2.9371999999999998,"middle_rate":null},{"date":"2026-03-10","buying_rate":2.8675999999999999,"selling_rate":2.9125999999999999,"middle_rate":null},{"date":"2026-03-11","buying_rate":2.8681000000000001,"selling_rate":2.9131,"middle_rate":null},{"date":"2026-03-12","buying_rate":2.8654000000000002,"selling_rate":2.9104000000000001,"middle_rate":null},{"date":"2026-03-13","buying_rate":2.8559999999999999,"selling_rate":2.9009999999999998,"middle_rate":null},{"date":"2026-03-16","buying_rate":2.8401000000000001,"selling_rate":2.8851,"middle_rate":null},{"date":"2026-03-17","buying_rate":2.8384,"selling_rate":2.8834,"middle_rate":null},{"date":"2026-03-18","buying_rate":2.8260000000000001,"selling_rate":2.871,"middle_rate":null},{"date":"2026-03-19","buying_rate":2.8393000000000002,"selling_rate":2.8843000000000001,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:02 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/BND/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:02 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425210533a875acdbca774bb2821131c87a4668f00fb97480c03283599e1169d799b04d7e762ce231f6f38dd8a63124127c5c3ea01546a1a038b2c66683d15be6c477;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:03 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/AUD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1560'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"3c666da8d5e341af0320816465ca7589f920cb9a-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:04 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425216b9052f06f910424c2e38a81b68af72fd51c078a5b2abd5354997454f0e32935fc79da712496f5aed3749209db60873adf45e7471a0fc1946f74295c3a96ba7f;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"AUD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":2.7473999999999998,"selling_rate":2.7924000000000002,"middle_rate":null},{"date":"2026-03-03","buying_rate":2.7639,"selling_rate":2.8089,"middle_rate":null},{"date":"2026-03-04","buying_rate":2.7435,"selling_rate":2.7885,"middle_rate":null},{"date":"2026-03-05","buying_rate":2.7572000000000001,"selling_rate":2.8022,"middle_rate":null},{"date":"2026-03-06","buying_rate":2.7467999999999999,"selling_rate":2.7917999999999998,"middle_rate":null},{"date":"2026-03-09","buying_rate":2.7378999999999998,"selling_rate":2.7829000000000002,"middle_rate":null},{"date":"2026-03-10","buying_rate":2.7551999999999999,"selling_rate":2.8001999999999998,"middle_rate":null},{"date":"2026-03-11","buying_rate":2.7877999999999998,"selling_rate":2.8328000000000002,"middle_rate":null},{"date":"2026-03-12","buying_rate":2.7764000000000002,"selling_rate":2.8214000000000001,"middle_rate":null},{"date":"2026-03-13","buying_rate":2.7566000000000002,"selling_rate":2.8016000000000001,"middle_rate":null},{"date":"2026-03-16","buying_rate":2.7313000000000001,"selling_rate":2.7763,"middle_rate":null},{"date":"2026-03-17","buying_rate":2.7441,"selling_rate":2.7890999999999999,"middle_rate":null},{"date":"2026-03-18","buying_rate":2.7490999999999999,"selling_rate":2.7940999999999998,"middle_rate":null},{"date":"2026-03-19","buying_rate":2.7412000000000001,"selling_rate":2.7862,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:04 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/AED/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:05 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:05 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252197ecc850732e939e26303069fbbf9e68b2084cf38d4180b973c0f6a2beb828af558d1aaa6245a0e1ceadc07b72a64115f58a2447ad37896bd7000c5452ef15de;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:05 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/CNY/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:06 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:06 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425217acea47b268bcdbaf027ae62cdc8dfb17f0872562aed2434ace53d7652baf5c39450307bcf1a80294449ecbdcfb394985c294fd7c3085064b2b40bbf99bdd4cd;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:06 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/NPR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:07 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:07 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425213e39dd57dd47d1ac9373da0d163be8bdaa653d6fd765a3950e0de36531e5a29ff523747808dac5126d573ca54d0afdfc00507d7ec3d3841c928a604bf040fac2;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:08 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/VND/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:09 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:09 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521eaf98980205436949b3b8aea93e9600553d4339a1d326c42d0c708f896cdf976befd9b53070ec4d62d00402e7376f24cbd9e34d0fea5553e2bc27491846c90fe;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:09 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/USD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:10 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1591'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"ee5a7e525ea372d3ef8c9f34735a066a82249e89-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:10 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425216428b359cfc6659ed1fa30b674f18a3eccebd4a3b2386386b4115bbcd123b6b938c4549bab426c41da57d43aaa8f5ffb4b8d5943bba2b11f808237256a6c97e0;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"USD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":3.887,"selling_rate":3.9119999999999999,"middle_rate":null},{"date":"2026-03-03","buying_rate":3.9129999999999998,"selling_rate":3.9380000000000002,"middle_rate":null},{"date":"2026-03-04","buying_rate":3.9220000000000002,"selling_rate":3.9470000000000001,"middle_rate":null},{"date":"2026-03-05","buying_rate":3.9129999999999998,"selling_rate":3.9380000000000002,"middle_rate":null},{"date":"2026-03-06","buying_rate":3.9300000000000002,"selling_rate":3.9550000000000001,"middle_rate":null},{"date":"2026-03-09","buying_rate":3.9529999999999998,"selling_rate":3.9780000000000002,"middle_rate":null},{"date":"2026-03-10","buying_rate":3.919,"selling_rate":3.944,"middle_rate":null},{"date":"2026-03-11","buying_rate":3.9079999999999999,"selling_rate":3.9329999999999998,"middle_rate":null},{"date":"2026-03-12","buying_rate":3.9129999999999998,"selling_rate":3.9380000000000002,"middle_rate":null},{"date":"2026-03-13","buying_rate":3.911,"selling_rate":3.9359999999999999,"middle_rate":null},{"date":"2026-03-16","buying_rate":3.9129999999999998,"selling_rate":3.9380000000000002,"middle_rate":null},{"date":"2026-03-17","buying_rate":3.9049999999999998,"selling_rate":3.9300000000000002,"middle_rate":null},{"date":"2026-03-18","buying_rate":3.8900000000000001,"selling_rate":3.915,"middle_rate":null},{"date":"2026-03-19","buying_rate":3.9159999999999999,"selling_rate":3.9409999999999998,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:10 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/TWD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:11 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:11 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252101be7b32b4404dfd3f37d6ca2c5744ff43a76217f2b1cb1d7200dbd2e9f8b2adb1ef5e0e4ec1483747df0908842d41107f06e3c849e5732fb1a272d7133acaa4;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:11 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/THB/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:12 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:12 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521fd53d3f8a9f37d0db0ca8491850de3df7c5d669db72583a54401f7031624f39b43ef0709670046d8db92e97353df8b725adf5c27a1209526b9336a5b6093d59e;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:12 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/SGD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:13 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1596'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"904e0cfe14812036c2a009f8d06d63d6d4b69c75-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:13 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252141736a8c3193a08e93d15f1dae57f8cf632b75a3330718c8ee7c39197e4a2a3325e5d4de8293ef71fd5d7ff0dc9cfef8195cb73781385f68ac2916d44db3306a;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"SGD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":3.0587,"selling_rate":3.1006999999999998,"middle_rate":null},{"date":"2026-03-03","buying_rate":3.0627,"selling_rate":3.1046999999999998,"middle_rate":null},{"date":"2026-03-04","buying_rate":3.0605000000000002,"selling_rate":3.1025,"middle_rate":null},{"date":"2026-03-05","buying_rate":3.0613999999999999,"selling_rate":3.1034000000000002,"middle_rate":null},{"date":"2026-03-06","buying_rate":3.0617000000000001,"selling_rate":3.1036999999999999,"middle_rate":null},{"date":"2026-03-09","buying_rate":3.0667,"selling_rate":3.1086999999999998,"middle_rate":null},{"date":"2026-03-10","buying_rate":3.0636999999999999,"selling_rate":3.1057000000000001,"middle_rate":null},{"date":"2026-03-11","buying_rate":3.0630999999999999,"selling_rate":3.1051000000000002,"middle_rate":null},{"date":"2026-03-12","buying_rate":3.0552000000000001,"selling_rate":3.0972,"middle_rate":null},{"date":"2026-03-13","buying_rate":3.0489999999999999,"selling_rate":3.0910000000000002,"middle_rate":null},{"date":"2026-03-16","buying_rate":3.0428999999999999,"selling_rate":3.0849000000000002,"middle_rate":null},{"date":"2026-03-17","buying_rate":3.0421999999999998,"selling_rate":3.0842000000000001,"middle_rate":null},{"date":"2026-03-18","buying_rate":3.0358999999999998,"selling_rate":3.0779000000000001,"middle_rate":null},{"date":"2026-03-19","buying_rate":3.0428999999999999,"selling_rate":3.0849000000000002,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:13 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/SDR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:14 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521b82cca918ae6ac34bbf66f028dc71a59ad13ec96fc67a403f5fd086b513169f0cd1a459c4aa3e8e14eab4fc1e372c2ca9b090b597a023e0fba3ae9e8948fce74;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:15 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/SAR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:15 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:15 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252130aae0b2a379e71f7174955d088291f638d2ba70939bd1f9d7b32766ccaecf5e8b1f93836cc4e3cda7c05642f2be73bd73baf9659e778ef232cf05a46699440e;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:16 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/PKR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:17 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:16 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521ba80e9c22845b6f478f5309b574eef3bbf1acf3db51a40879074254d72cf51c8a4f7f12b080af9715cc9c20f526fc63c99e6da2b92e235dddd6a97402ebd7733;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:17 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/PHP/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:18 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:18 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521459a3a5445ce5fc9edd07758a226bbc3e6d6a5ba169c4ae5b4dfa031f23d3a8f853bc969567a43f3758343a25e26aba960808986e2895486e815f64961b5d897;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:18 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/NZD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:20 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:19 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521ff816ddd70f721071006803facc8e386d6d081651ccb0ffa95776632187e58c7c2b125ed036bd057625fa495f6fa735a914cdc05376bfc191867142dfe55b1f9;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:20 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/MMK/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:20 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252144654c41a7eb1884dce6b2fce05c04f279c32761559f6d540cdfae91a855f3dcbb75480dd744c1a94c90ab857be22e86bf8083fda7dd88ce227e4d936f942c24;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:21 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/KRW/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:22 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252141ebad270e78a8e15cf0daa902da642b94e4939b73c00ac859fb48155785f42d35256af020018671241fcf792dc7283ecb2dd5271d2692be374e2090554094a9;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:22 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/KHR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:23 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521d7a1d30cd959b5793e9e7bc018019cb59a56e51a7f7300199a0ed86c506260cf00cc5e5a9f0ad59541ecd6ca6bf9a098b8ae172dfc10afd6db0deeeaeaf78302;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:23 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/JPY/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1574'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"1a3804a41c1f96b83f1463693979d718b274f90b-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:24 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be4252193e62d1839d4cb26b5a4bb17c5f37d6a30d9f0b1505fb0f9df3175cf06c16a2e21c3c089a6c8cc9810ee4a481ecc0b4b76fb1865071e4c0d2a96f64312cf70a5;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"JPY","unit":100,"rate":[{"date":"2026-03-02","buying_rate":2.4721000000000002,"selling_rate":2.5171000000000001,"middle_rate":null},{"date":"2026-03-03","buying_rate":2.4704000000000002,"selling_rate":2.5154000000000001,"middle_rate":null},{"date":"2026-03-04","buying_rate":2.4718,"selling_rate":2.5167999999999999,"middle_rate":null},{"date":"2026-03-05","buying_rate":2.4836,"selling_rate":2.5286,"middle_rate":null},{"date":"2026-03-06","buying_rate":2.4796,"selling_rate":2.5246,"middle_rate":null},{"date":"2026-03-09","buying_rate":2.4773999999999998,"selling_rate":2.5224000000000002,"middle_rate":null},{"date":"2026-03-10","buying_rate":2.4698000000000002,"selling_rate":2.5148000000000001,"middle_rate":null},{"date":"2026-03-11","buying_rate":2.4544999999999999,"selling_rate":2.4994999999999998,"middle_rate":null},{"date":"2026-03-12","buying_rate":2.4447000000000001,"selling_rate":2.4897,"middle_rate":null},{"date":"2026-03-13","buying_rate":2.4422999999999999,"selling_rate":2.4872999999999998,"middle_rate":null},{"date":"2026-03-16","buying_rate":2.4407999999999999,"selling_rate":2.4857999999999998,"middle_rate":null},{"date":"2026-03-17","buying_rate":2.4367999999999999,"selling_rate":2.4817999999999998,"middle_rate":null},{"date":"2026-03-18","buying_rate":2.4308000000000001,"selling_rate":2.4758,"middle_rate":null},{"date":"2026-03-19","buying_rate":2.4357000000000002,"selling_rate":2.4807000000000001,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:24 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/INR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:25 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:25 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521f0ab6217da98ec68a0d2c5cfac2a3e36a060b5295a54ad23bdadefe81fb5ffcb4b5b6e8f8d6e471204b3d54fe73f38d9a88f058bf06aa67f1815107e12e0ea45;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:25 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/IDR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:26 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:26 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521dafe9d3394cab6ddc60dfc42340487bc6548d5efeeae1cd115a7773baf2b26f794a7f4bf303c7ec701a3cee307b71c2c8c01269df35804e61890ee3142785215;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:26 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/HKD/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:27 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521c413d910cfc5177d4aed76c11f65c11c0403bce129234c1515cd9972d17780c79f74a056a392723d61a6bd49ecff41782124250a81505758c0f669eb2bbc4b6d;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:28 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/GBP/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:28 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1608'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"bab9c157c979ef30b992603d38331191a49acf00-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:28 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521ff931f3fb0fffb9fa3fe7271f0c3fe49d327f150e0623c04e933ade746932eda38490fb1be7f311fe6ded2152844dbd754046e949b4320ccbcff732ebfed5163;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"GBP","unit":1,"rate":[{"date":"2026-03-02","buying_rate":5.2169999999999996,"selling_rate":5.2670000000000003,"middle_rate":null},{"date":"2026-03-03","buying_rate":5.2355,"selling_rate":5.2854999999999999,"middle_rate":null},{"date":"2026-03-04","buying_rate":5.2234999999999996,"selling_rate":5.2735000000000003,"middle_rate":null},{"date":"2026-03-05","buying_rate":5.2263999999999999,"selling_rate":5.2763999999999998,"middle_rate":null},{"date":"2026-03-06","buying_rate":5.2420999999999998,"selling_rate":5.2920999999999996,"middle_rate":null},{"date":"2026-03-09","buying_rate":5.2502000000000004,"selling_rate":5.3002000000000002,"middle_rate":null},{"date":"2026-03-10","buying_rate":5.2522000000000002,"selling_rate":5.3022,"middle_rate":null},{"date":"2026-03-11","buying_rate":5.2460000000000004,"selling_rate":5.2960000000000003,"middle_rate":null},{"date":"2026-03-12","buying_rate":5.2206000000000001,"selling_rate":5.2706,"middle_rate":null},{"date":"2026-03-13","buying_rate":5.2171000000000003,"selling_rate":5.2671000000000001,"middle_rate":null},{"date":"2026-03-16","buying_rate":5.1776999999999997,"selling_rate":5.2276999999999996,"middle_rate":null},{"date":"2026-03-17","buying_rate":5.1852,"selling_rate":5.2351999999999999,"middle_rate":null},{"date":"2026-03-18","buying_rate":5.1847000000000003,"selling_rate":5.2347000000000001,"middle_rate":null},{"date":"2026-03-19","buying_rate":5.1875999999999998,"selling_rate":5.2375999999999996,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:29 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/EUR/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:30 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1644'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"bb5436044e38fb67fae6c62fa6cd448416a83d52-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:29 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be42521ca0bbb5e78c809a21136f3c3d2efe402062c1f8cced2b98a68ec542526f7ac28fec8782cd57e39b8aa9d12d4766f9dd2e6cd4e3fefc2b0ae9857a867cf508ef8;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"currency_code":"EUR","unit":1,"rate":[{"date":"2026-03-02","buying_rate":4.5754999999999999,"selling_rate":4.6204999999999998,"middle_rate":null},{"date":"2026-03-03","buying_rate":4.5683999999999996,"selling_rate":4.6134000000000004,"middle_rate":null},{"date":"2026-03-04","buying_rate":4.5446999999999997,"selling_rate":4.5896999999999997,"middle_rate":null},{"date":"2026-03-05","buying_rate":4.5491999999999999,"selling_rate":4.5941999999999998,"middle_rate":null},{"date":"2026-03-06","buying_rate":4.5571000000000002,"selling_rate":4.6021000000000001,"middle_rate":null},{"date":"2026-03-09","buying_rate":4.5472999999999999,"selling_rate":4.5922999999999998,"middle_rate":null},{"date":"2026-03-10","buying_rate":4.5446999999999997,"selling_rate":4.5896999999999997,"middle_rate":null},{"date":"2026-03-11","buying_rate":4.5366999999999997,"selling_rate":4.5816999999999997,"middle_rate":null},{"date":"2026-03-12","buying_rate":4.5067000000000004,"selling_rate":4.5517000000000003,"middle_rate":null},{"date":"2026-03-13","buying_rate":4.4992999999999999,"selling_rate":4.5442999999999998,"middle_rate":null},{"date":"2026-03-16","buying_rate":4.4729999999999999,"selling_rate":4.5179999999999998,"middle_rate":null},{"date":"2026-03-17","buying_rate":4.4794999999999998,"selling_rate":4.5244999999999997,"middle_rate":null},{"date":"2026-03-18","buying_rate":4.4798,"selling_rate":4.5247999999999999,"middle_rate":null},{"date":"2026-03-19","buying_rate":4.4839000000000002,"selling_rate":4.5289000000000001,"middle_rate":null}]},"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":14}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:30 GMT
+- request:
+    method: get
+    uri: https://api.bnm.gov.my/public/exchange-rate/EGP/year/2026/month/3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.BNM.API.v1+json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 20 Mar 2026 00:03:31 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '104'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Cache-Control:
+      - no-cache, private, max-age=2592000
+      Etag:
+      - '"4b84695dfc4bc90d12c2be7ff4c0dae6ece45994-gzip"'
+      Expires:
+      - Sun, 19 Apr 2026 00:03:30 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Set-Cookie:
+      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
+        HttpOnly; Secure; SameSite=None
+      - TS01efcbd3=012be425218f1e708714793f3fb515bce21da5332457d1063693eae05e9cc7447fcecadca54322f9381972c3cb6bab551726ce71d630c998be5a75468b622adda0cacd471e;
+        Path=/; Domain=.api.bnm.gov.my
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[],"meta":{"quote":"rm","session":"1130","last_updated":"2026-03-19
+        23:01:22","total_result":0}}'
+  recorded_at: Fri, 20 Mar 2026 00:03:31 GMT
+recorded_with: VCR 6.4.0
