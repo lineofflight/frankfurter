@@ -40,4 +40,18 @@ describe BaseConverter do
 
     _(result).must_be_empty
   end
+
+  it "handles mixed bases by finding the target as a base in inverted rows" do
+    mixed = [
+      { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "FRED" },
+    ]
+
+    result = BaseConverter.new(mixed, base: "EUR").convert
+    jpy = result.find { |r| r[:quote] == "JPY" }
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(jpy[:rate]).must_be_close_to(150.0 * 1.10)
+    _(usd[:rate]).must_equal(1.10)
+  end
 end
