@@ -35,11 +35,17 @@ module Providers
 
     it "normalizes rates by unit" do
       provider.fetch(since: Date.new(2026, 3, 1)).import
-
-      # JPY has unit=100, rate should be per single yen (small number)
       jpy_rate = Rate.where(quote: "JPY").first
-      if jpy_rate
-        _(jpy_rate.rate).must_be(:<, 1)
+
+      _(jpy_rate).wont_be_nil
+      _(jpy_rate.rate).must_be(:<, 1)
+    end
+
+    it "imports net-new currencies" do
+      provider.fetch(since: Date.new(2026, 3, 1)).import
+
+      ["BND", "EGP", "KHR", "MMK", "NPR"].each do |code|
+        _(Rate.where(quote: code).count).must_be(:>, 0, "expected #{code} rates")
       end
     end
 

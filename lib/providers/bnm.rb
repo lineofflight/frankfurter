@@ -10,7 +10,8 @@ module Providers
   # Historical rates are fetched per-currency per-month.
   class BNM < Base
     BASE_URL = "https://api.bnm.gov.my/public/exchange-rate"
-    EARLIEST_DATE = "2021-01-01"
+    EARLIEST_DATE = "2021-01-04"
+    SESSION = "0900"
     HEADERS = { "Accept" => "application/vnd.BNM.API.v1+json" }.freeze
 
     class << self
@@ -29,9 +30,9 @@ module Providers
     private
 
     def fetch_currencies
-      uri = URI(BASE_URL)
+      uri = URI("#{BASE_URL}?session=#{SESSION}")
       response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        http.get(uri.path, HEADERS)
+        http.get("#{uri.path}?#{uri.query}", HEADERS)
       end
       data = JSON.parse(response.body)
       data["data"].map { |item| item["currency_code"] }
@@ -40,9 +41,9 @@ module Providers
     def fetch_currency(code, start_date)
       records = []
       each_month(start_date) do |year, month|
-        uri = URI("#{BASE_URL}/#{code}/year/#{year}/month/#{month}")
+        uri = URI("#{BASE_URL}/#{code}/year/#{year}/month/#{month}?session=#{SESSION}")
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          http.get(uri.path, HEADERS)
+          http.get("#{uri.path}?#{uri.query}", HEADERS)
         end
         data = JSON.parse(response.body)
         currency_data = data["data"]
@@ -53,12 +54,10 @@ module Providers
         rates = [rates] unless rates.is_a?(Array)
 
         rates.each do |rate|
-          buy = rate["buying_rate"]
-          sell = rate["selling_rate"]
-          next unless buy && sell
+          mid = rate["middle_rate"]
+          next unless mid
 
-          mid = (buy + sell) / 2.0 / unit
-          records << { provider: key, date: Date.parse(rate["date"]), base: base, quote: code, rate: mid }
+          records << { provider: key, date: Date.parse(rate["date"]), base: base, quote: code, rate: mid / unit }
         end
       end
       records
