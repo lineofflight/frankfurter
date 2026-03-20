@@ -47,6 +47,7 @@ docker run -d -p 8080:8080 \
 
 - [beancount-exchangerates](https://github.com/xuhcc/beancount-exchangerates): a [Beancount](https://beancount.github.io/) price source plugin using this API
 - [frankfurte-rs](https://github.com/Rolv-Apneseth/frankfurte-rs): Rust library and CLI to interface with this API
+- [frankfurter-js](https://www.npmjs.com/package/frankfurter-js): JS Libary to interface with this API
 
 ## Contributing
 
