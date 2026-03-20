@@ -14,7 +14,7 @@ class Blender
 
   def blend
     rebased = rates.group_by { |r| r[:provider] }.flat_map do |_, provider_rows|
-      BaseConverter.new(provider_rows, base: base).convert
+      BaseConverter.new(provider_rows, base:).convert
     end
 
     rebased.group_by { |r| r[:quote] }.sort.map do |_, group|
