@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "money/currency"
+require "currency"
 require "oj"
 require "roda"
 require "providers/ecb"
@@ -13,6 +13,7 @@ require "providers/bob"
 require "providers/cbr"
 require "providers/nbp"
 require "providers/fred"
+require "providers/bnm"
 require "versions/v2/query"
 
 module Versions
@@ -47,9 +48,15 @@ module Versions
         end
       end
 
-      r.is("currencies") do
+      r.on("currencies") do
+        r.get(String) do |code|
+          found = Currency.find(code)
+          found ? found.to_h_with_providers : request.halt(404)
+        end
+
         r.get do
-          currencies(scope: r.params["scope"])
+          ds = r.params["scope"] == "all" ? Currency : Currency.active
+          ds.map(&:to_h)
         end
       end
 
@@ -61,37 +68,6 @@ module Versions
     end
 
     private
-
-    def currencies(scope: nil)
-      date_ranges = {}
-      Rate.group(:quote).select { [quote.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
-        date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
-      end
-      Rate.group(:base).select { [base.as(currency), min(date).as(start_date), max(date).as(end_date)] }.each do |r|
-        existing = date_ranges[r[:currency]]
-        if existing
-          existing[:start_date] = [existing[:start_date], r[:start_date].to_s].min
-          existing[:end_date] = [existing[:end_date], r[:end_date].to_s].max
-        else
-          date_ranges[r[:currency]] = { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }
-        end
-      end
-
-      cutoff = (Date.today - 30).to_s
-      date_ranges.reject! { |_, range| range[:end_date] < cutoff } unless scope == "all"
-
-      date_ranges.sort.map do |iso, range|
-        currency = Money::Currency.find(iso)
-        {
-          iso_code: iso,
-          iso_numeric: currency&.iso_numeric,
-          name: currency&.name || iso,
-          symbol: currency&.symbol,
-          start_date: range[:start_date],
-          end_date: range[:end_date],
-        }
-      end
-    end
 
     def providers
       date_ranges = Rate.group(:provider)

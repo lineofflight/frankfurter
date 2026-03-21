@@ -151,6 +151,22 @@ describe Versions::V2 do
     _(usd["iso_numeric"]).must_equal("840")
   end
 
+  it "returns a single currency" do
+    get "/currencies/usd"
+
+    _(last_response).must_be(:ok?)
+    _(json["iso_code"]).must_equal("USD")
+    _(json["name"]).must_equal("United States Dollar")
+    _(json["providers"]).must_be_kind_of(Array)
+    _(json["providers"]).must_include("ECB")
+  end
+
+  it "returns 404 for unknown currency" do
+    get "/currencies/xyz"
+
+    _(last_response.status).must_equal(404)
+  end
+
   it "includes base currencies in currencies list" do
     get "/currencies?scope=all"
     eur = json.find { |c| c["iso_code"] == "EUR" }
