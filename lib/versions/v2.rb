@@ -2,6 +2,7 @@
 
 require "currency"
 require "oj"
+require "provider"
 require "roda"
 require "providers/ecb"
 require "providers/boc"
@@ -78,11 +79,13 @@ module Versions
         .order(:provider, :currency).all
         .group_by(&:provider).transform_values { |rows| rows.map { |r| r[:currency] }.uniq.sort }
 
-      Providers.all.map(&:new).sort_by(&:key).map do |provider|
+      Provider.all.sort_by(&:key).map do |provider|
         range = date_ranges[provider.key] || {}
         {
           key: provider.key,
           name: provider.name,
+          description: provider.description,
+          url: provider.url,
           start_date: range[:start_date],
           end_date: range[:end_date],
           currencies: currencies[provider.key] || [],

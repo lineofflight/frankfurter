@@ -1,0 +1,68 @@
+[
+  {
+    "key": "ECB",
+    "name": "European Central Bank",
+    "description": "Daily reference rates for 30+ currencies against the euro.",
+    "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+  },
+  {
+    "key": "BOC",
+    "name": "Bank of Canada",
+    "description": "Daily indicative exchange rates for 20+ currencies against the Canadian dollar.",
+    "url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/"
+  },
+  {
+    "key": "TCMB",
+    "name": "Central Bank of Turkey",
+    "description": "Daily cross rates for 20+ currencies against the US dollar.",
+    "url": "https://evds2.tcmb.gov.tr/"
+  },
+  {
+    "key": "NBU",
+    "name": "National Bank of Ukraine",
+    "description": "Daily official rates for 45+ currencies against the hryvnia.",
+    "url": "https://bank.gov.ua/en/markets/exchangerates"
+  },
+  {
+    "key": "CBA",
+    "name": "Central Bank of Armenia",
+    "description": "Daily rates for 30+ currencies against the Armenian dram.",
+    "url": "https://www.cba.am/en/SitePage/ExchangeArchive"
+  },
+  {
+    "key": "NBRB",
+    "name": "National Bank of the Republic of Belarus",
+    "description": "Daily official rates for 30+ currencies against the Belarusian ruble.",
+    "url": "https://www.nbrb.by/engl/statistics/rates/ratesdaily.asp"
+  },
+  {
+    "key": "BOB",
+    "name": "Bank of Botswana",
+    "description": "Daily rates for 6 currencies against the Botswana pula.",
+    "url": "https://www.bankofbotswana.bw/exchange-rates"
+  },
+  {
+    "key": "CBR",
+    "name": "Bank of Russia",
+    "description": "Daily official rates for 50+ currencies against the Russian ruble.",
+    "url": "https://www.cbr.ru/eng/currency_base/daily/"
+  },
+  {
+    "key": "NBP",
+    "name": "National Bank of Poland",
+    "description": "Daily mid-market rates for 30+ currencies against the Polish zloty.",
+    "url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/"
+  },
+  {
+    "key": "FRED",
+    "name": "Federal Reserve",
+    "description": "Weekly H.10 exchange rates for 20+ currencies against the US dollar.",
+    "url": "https://www.federalreserve.gov/releases/h10/"
+  },
+  {
+    "key": "BNM",
+    "name": "Bank Negara Malaysia",
+    "description": "Daily exchange rates for 26 currencies against the Malaysian ringgit.",
+    "url": "https://www.bnm.gov.my/exchange-rates"
+  }
+]

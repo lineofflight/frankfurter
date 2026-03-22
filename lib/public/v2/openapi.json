@@ -101,8 +101,7 @@
                   "items": { "$ref": "#/components/schemas/Provider" }
                 },
                 "example": [
-                  { "key": "ECB", "name": "European Central Bank", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] },
-                  { "key": "BOC", "name": "Bank of Canada", "start_date": "2017-01-03", "end_date": "2026-03-17", "currencies": ["USD", "EUR"] }
+                  { "key": "ECB", "name": "European Central Bank", "description": "Daily reference rates for 30+ currencies against the euro.", "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
                 ]
               }
             }
@@ -231,6 +230,8 @@
         "properties": {
           "key": { "type": "string", "description": "Provider identifier" },
           "name": { "type": "string", "description": "Full provider name" },
+          "description": { "type": ["string", "null"], "description": "Brief description of the data source" },
+          "url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
           "currencies": {
