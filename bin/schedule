@@ -14,62 +14,62 @@ end
 
 # ECB publishes around 16:00 CET (15:00-17:00 UTC)
 # https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
-scheduler.cron("*/30 15,16,17 * * 1-5") do
+scheduler.cron("*/30 15,16,17 * * 1-5", overlap: false) do
   system("rake ecb:backfill")
 end
 
 # BOC publishes by 16:30 ET (20:30-21:30 UTC)
 # https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
-scheduler.cron("*/30 20,21,22 * * 1-5") do
+scheduler.cron("*/30 20,21,22 * * 1-5", overlap: false) do
   system("rake boc:backfill")
 end
 
 # TCMB publishes at 15:30 TRT (12:30 UTC)
 # https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Banka+Hakkinda/Sikca+Sorulan+Sorular
-scheduler.cron("*/30 12,13,14 * * 1-5") do
+scheduler.cron("*/30 12,13,14 * * 1-5", overlap: false) do
   system("rake tcmb:backfill")
 end
 
 # NBU publishes daily (Ukraine, EET/EEST UTC+2/+3)
-scheduler.cron("*/30 10,11,12 * * 1-5") do
+scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
   system("rake nbu:backfill")
 end
 
 # CBA publishes daily (Armenia, UTC+4)
-scheduler.cron("*/30 8,9,10 * * 1-5") do
+scheduler.cron("*/30 8,9,10 * * 1-5", overlap: false) do
   system("rake cba:backfill")
 end
 
 # NBRB publishes daily (Belarus, UTC+3)
-scheduler.cron("*/30 9,10,11 * * 1-5") do
+scheduler.cron("*/30 9,10,11 * * 1-5", overlap: false) do
   system("rake nbrb:backfill")
 end
 
 # BOB publishes daily (Botswana, UTC+2)
-scheduler.cron("*/30 10,11,12 * * 1-5") do
+scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
   system("rake bob:backfill")
 end
 
 # CBR publishes daily (Russia, UTC+3)
-scheduler.cron("*/30 9,10,11 * * 1-5") do
+scheduler.cron("*/30 9,10,11 * * 1-5", overlap: false) do
   system("rake cbr:backfill")
 end
 
 # NBP publishes daily around 12:00 CET (11:00-12:00 UTC)
 # https://api.nbp.pl/
-scheduler.cron("*/30 11,12,13 * * 1-5") do
+scheduler.cron("*/30 11,12,13 * * 1-5", overlap: false) do
   system("rake nbp:backfill")
 end
 
 # FRED publishes H.10 rates Mondays at 16:15 ET (21:15 UTC)
 # https://www.federalreserve.gov/releases/h10/
-scheduler.cron("*/30 21,22,23 * * 1") do
+scheduler.cron("*/30 21,22,23 * * 1", overlap: false) do
   system("rake fred:backfill")
 end
 
 # BNM publishes daily (Malaysia, UTC+8)
 # https://apikijangportal.bnm.gov.my/
-scheduler.cron("*/30 4,5,6 * * 1-5") do
+scheduler.cron("*/30 4,5,6 * * 1-5", overlap: false) do
   system("rake bnm:backfill")
 end
 
