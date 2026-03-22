@@ -26,7 +26,6 @@ module Providers
 
       def key = raise(NotImplementedError)
       def name = raise(NotImplementedError)
-      def base = raise(NotImplementedError)
 
       def backfill
         since = Rate.where(provider: key).max(:date)
@@ -46,7 +45,6 @@ module Providers
 
     def key = self.class.key
     def name = self.class.name
-    def base = self.class.base
 
     def fetch(since: nil)
       raise NotImplementedError

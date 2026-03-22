@@ -16,7 +16,6 @@ module Providers
     class << self
       def key = "NBRB"
       def name = "National Bank of the Republic of Belarus"
-      def base = "BYN"
     end
 
     def fetch(since: nil)
@@ -41,7 +40,7 @@ module Providers
         rate = Float(row.fetch("Cur_OfficialRate"))
         next if scale.zero?
 
-        { provider: key, date:, base:, quote:, rate: rate / scale }
+        { provider: key, date:, base: "BYN", quote:, rate: rate / scale }
       end
     end
 
@@ -74,7 +73,7 @@ module Providers
         next if date.saturday? || date.sunday?
 
         rate = Float(row.fetch("Cur_OfficialRate"))
-        { provider: key, date:, base:, quote:, rate: rate / scale }
+        { provider: key, date:, base: "BYN", quote:, rate: rate / scale }
       end
     end
   end

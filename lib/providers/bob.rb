@@ -22,7 +22,6 @@ module Providers
     class << self
       def key = "BOB"
       def name = "Bank of Botswana"
-      def base = "BWP"
     end
 
     def fetch(since: nil)
@@ -53,7 +52,7 @@ module Providers
           rate = Float(val)
           next if rate.zero?
 
-          { provider: key, date:, base:, quote: iso, rate: }
+          { provider: key, date:, base: "BWP", quote: iso, rate: }
         end
         rates.empty? ? nil : rates
       end.flatten.sort_by { |r| r[:date] }

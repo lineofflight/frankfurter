@@ -15,7 +15,6 @@ module Providers
     class << self
       def key = "CBA"
       def name = "Central Bank of Armenia"
-      def base = "AMD"
     end
 
     def fetch(since: nil)
@@ -43,7 +42,7 @@ module Providers
         quote = node.locate("ISO").first&.text
         next unless quote
 
-        { provider: key, date:, base:, quote:, rate: extract_rate(node) }
+        { provider: key, date:, base: "AMD", quote:, rate: extract_rate(node) }
       end
     end
 
@@ -79,7 +78,7 @@ module Providers
           quote = row.locate("ISO").first&.text
           next unless quote
 
-          { provider: key, date: Date.parse(row.locate("RateDate").first.text), base:, quote:, rate: extract_rate(row) }
+          { provider: key, date: Date.parse(row.locate("RateDate").first.text), base: "AMD", quote:, rate: extract_rate(row) }
         end
     end
 

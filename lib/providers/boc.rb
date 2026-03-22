@@ -15,7 +15,6 @@ module Providers
     class << self
       def key = "BOC"
       def name = "Bank of Canada"
-      def base = "CAD"
     end
 
     def fetch(since: nil)

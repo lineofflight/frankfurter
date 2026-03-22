@@ -182,7 +182,6 @@ describe Versions::V2 do
     ecb = json.find { |p| p["key"] == "ECB" }
 
     _(ecb["name"]).must_equal("European Central Bank")
-    _(ecb["base"]).must_equal("EUR")
     _(ecb["start_date"]).wont_be_nil
     _(ecb["end_date"]).wont_be_nil
     _(ecb["currencies"]).must_include("USD")

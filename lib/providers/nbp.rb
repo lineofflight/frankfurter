@@ -14,7 +14,6 @@ module Providers
     class << self
       def key = "NBP"
       def name = "National Bank of Poland"
-      def base = "PLN"
     end
 
     def fetch(since: nil)
@@ -41,7 +40,7 @@ module Providers
           next unless quote.match?(/\A[A-Z]{3}\z/)
           next if mid.nil? || mid.zero?
 
-          { provider: key, date:, base:, quote:, rate: mid }
+          { provider: key, date:, base: "PLN", quote:, rate: mid }
         end
       end
     end

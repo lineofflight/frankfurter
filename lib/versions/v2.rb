@@ -83,7 +83,6 @@ module Versions
         {
           key: provider.key,
           name: provider.name,
-          base: provider.base,
           start_date: range[:start_date],
           end_date: range[:end_date],
           currencies: currencies[provider.key] || [],

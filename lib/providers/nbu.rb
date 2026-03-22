@@ -14,7 +14,6 @@ module Providers
     class << self
       def key = "NBU"
       def name = "National Bank of Ukraine"
-      def base = "UAH"
     end
 
     def fetch(since: nil)
@@ -38,7 +37,7 @@ module Providers
         rate = row.fetch("rate").to_f
         next if rate.zero? || units.zero?
 
-        { provider: key, date:, base:, quote:, rate: rate / units }
+        { provider: key, date:, base: "UAH", quote:, rate: rate / units }
       end
     end
 

@@ -10,7 +10,6 @@ module Providers
         class << self
           def key = "TEST"
           def name = "Test"
-          def base = "EUR"
         end
       end
     end
@@ -69,7 +68,6 @@ module Providers
           class << self
             def key = "TEST"
             def name = "Test"
-            def base = "EUR"
           end
 
           def fetch(since: nil)

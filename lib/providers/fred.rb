@@ -41,7 +41,6 @@ module Providers
     class << self
       def key = "FRED"
       def name = "Federal Reserve"
-      def base = "USD"
     end
 
     def fetch(since: nil)

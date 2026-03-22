@@ -16,7 +16,6 @@ module Providers
     class << self
       def key = "CBR"
       def name = "Bank of Russia"
-      def base = "RUB"
     end
 
     def fetch(since: nil)
@@ -58,7 +57,7 @@ module Providers
         rate = extract_rate(row)
         next unless rate
 
-        { provider: key, date:, base:, quote: code, rate: }
+        { provider: key, date:, base: "RUB", quote: code, rate: }
       end
     end
 

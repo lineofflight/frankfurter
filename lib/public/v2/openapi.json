@@ -101,8 +101,8 @@
                   "items": { "$ref": "#/components/schemas/Provider" }
                 },
                 "example": [
-                  { "key": "ECB", "name": "European Central Bank", "base": "EUR", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] },
-                  { "key": "BOC", "name": "Bank of Canada", "base": "CAD", "start_date": "2017-01-03", "end_date": "2026-03-17", "currencies": ["USD", "EUR"] }
+                  { "key": "ECB", "name": "European Central Bank", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] },
+                  { "key": "BOC", "name": "Bank of Canada", "start_date": "2017-01-03", "end_date": "2026-03-17", "currencies": ["USD", "EUR"] }
                 ]
               }
             }
@@ -231,7 +231,6 @@
         "properties": {
           "key": { "type": "string", "description": "Provider identifier" },
           "name": { "type": "string", "description": "Full provider name" },
-          "base": { "type": "string", "description": "Provider's native base currency" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
           "currencies": {
@@ -240,7 +239,7 @@
             "description": "Currency codes covered by this provider"
           }
         },
-        "required": ["key", "name", "base", "currencies"]
+        "required": ["key", "name", "currencies"]
       }
     },
     "responses": {

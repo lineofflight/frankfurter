@@ -47,7 +47,6 @@ module Providers
     class << self
       def key = "TCMB"
       def name = "Central Bank of Turkey"
-      def base = "USD"
     end
 
     def fetch(since: nil)
@@ -103,7 +102,7 @@ module Providers
         rates["TRY"] = ((buy + sell) / 2).round(4) if buy && sell
 
         rates.map do |quote, rate|
-          { provider: key, date:, base:, quote:, rate: }
+          { provider: key, date:, base: "USD", quote:, rate: }
         end
       end
     end

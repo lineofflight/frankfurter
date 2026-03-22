@@ -17,7 +17,6 @@ module Providers
     class << self
       def key = "BNM"
       def name = "Bank Negara Malaysia"
-      def base = "MYR"
     end
 
     def fetch(since: nil)
@@ -57,7 +56,7 @@ module Providers
           mid = rate["middle_rate"]
           next unless mid
 
-          records << { provider: key, date: Date.parse(rate["date"]), base: base, quote: code, rate: mid / unit }
+          records << { provider: key, date: Date.parse(rate["date"]), base: "MYR", quote: code, rate: mid / unit }
         end
       end
       records

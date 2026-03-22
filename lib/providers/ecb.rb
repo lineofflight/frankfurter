@@ -12,7 +12,6 @@ module Providers
     class << self
       def key = "ECB"
       def name = "European Central Bank"
-      def base = "EUR"
     end
 
     def fetch(since: nil)
@@ -35,7 +34,7 @@ module Providers
         rate = Float(row["OBS_VALUE"])
         date = Date.parse(row["TIME_PERIOD"])
 
-        { provider: key, date:, base:, quote:, rate: }
+        { provider: key, date:, base: "EUR", quote:, rate: }
       rescue ArgumentError, TypeError
         nil
       end
