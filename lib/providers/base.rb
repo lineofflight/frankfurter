@@ -26,12 +26,14 @@ module Providers
 
       def key = raise(NotImplementedError)
       def name = raise(NotImplementedError)
+      def earliest_date = nil
 
       def backfill(range: nil)
         since = Rate.where(provider: key).max(:date)
         since = Date.parse(since.to_s) if since
         return if since && since >= Date.today
 
+        since ||= earliest_date
         each_period(since, range) do |period_since, period_upto|
           new.fetch(since: period_since, upto: period_upto).import
         end

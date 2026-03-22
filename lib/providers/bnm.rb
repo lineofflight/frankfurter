@@ -17,6 +17,7 @@ module Providers
     class << self
       def key = "BNM"
       def name = "Bank Negara Malaysia"
+      def earliest_date = Date.parse(EARLIEST_DATE)
     end
 
     def fetch(since: nil, upto: nil)
