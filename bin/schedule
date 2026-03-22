@@ -6,7 +6,7 @@ require "rufus-scheduler"
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (each runs in its own thread)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm"].each do |provider|
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra"].each do |provider|
   scheduler.in("0s") do
     system("bundle exec rake #{provider}:backfill")
   end
@@ -71,6 +71,17 @@ end
 # https://apikijangportal.bnm.gov.my/
 scheduler.cron("*/30 4,5,6 * * 1-5", overlap: false) do
   system("bundle exec rakebnm:backfill")
+end
+
+# RBA publishes at 16:00 AEST (06:00 UTC, or 05:00 UTC during AEDT)
+# https://www.rba.gov.au/statistics/frequency/exchange-rates.html
+scheduler.cron("*/30 5,6,7 * * 1-5", overlap: false) do
+  system("bundle exec rake rba:backfill")
+end
+
+# BCRA publishes during business hours (Argentina, UTC-3)
+scheduler.cron("*/30 16,17,18 * * 1-5", overlap: false) do
+  system("bundle exec rake bcra:backfill")
 end
 
 scheduler.join

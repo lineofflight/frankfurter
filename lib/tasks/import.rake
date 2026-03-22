@@ -13,4 +13,6 @@ task backfill: [
   "nbp:backfill",
   "fred:backfill",
   "bnm:backfill",
+  "rba:backfill",
+  "bcra:backfill",
 ]
