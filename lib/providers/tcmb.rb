@@ -7,40 +7,43 @@ require "providers/base"
 
 module Providers
   # Central Bank of the Republic of Turkey.
-  # Uses EVDS3 bulk API with cross rates (mid-market, USD base).
+  # Uses EVDS3 bulk API with buying (A) and selling (S) rates in TRY.
+  # Each currency's mid-market rate is derived from the average of buy/sell.
   # Requires TCMB_API_KEY environment variable.
   class TCMB < Base
     EVDS_URL = "https://evds3.tcmb.gov.tr/igmevdsms-dis"
     EARLIEST_DATE = Date.new(1996, 4, 16)
 
-    # Cross rates (C) are mid-market rates expressed in USD. TRY is derived from the mid of USD buying (A)
-    # and selling (S) rates for consistency. Hardcoded because the EVDS3 catalog API doesn't expose a clean list
-    # and the series rarely change.
+    # Buy/sell rates in TRY for each currency. Hardcoded because the EVDS3 catalog API doesn't expose
+    # a clean list and the series rarely change.
     # Browse: https://evds3.tcmb.gov.tr > Exchange Rates > Indicative Exchange Rates
-    SERIES = {
-      "AED" => "TP.DK.AED.C.YTL",
-      "AUD" => "TP.DK.AUD.C.YTL",
-      "AZN" => "TP.DK.AZN.C.YTL",
-      "CAD" => "TP.DK.CAD.C.YTL",
-      "CHF" => "TP.DK.CHF.C.YTL",
-      "CNY" => "TP.DK.CNY.C.YTL",
-      "DKK" => "TP.DK.DKK.C.YTL",
-      "EUR" => "TP.DK.EUR.C.YTL",
-      "GBP" => "TP.DK.GBP.C.YTL",
-      "JPY" => "TP.DK.JPY.C.YTL",
-      "KRW" => "TP.DK.KRW.C.YTL",
-      "KWD" => "TP.DK.KWD.C.YTL",
-      "KZT" => "TP.DK.KZT.C.YTL",
-      "NOK" => "TP.DK.NOK.C.YTL",
-      "PKR" => "TP.DK.PKR.C.YTL",
-      "QAR" => "TP.DK.QAR.C.YTL",
-      "RON" => "TP.DK.RON.C.YTL",
-      "RUB" => "TP.DK.RUB.C.YTL",
-      "SAR" => "TP.DK.SAR.C.YTL",
-      "SEK" => "TP.DK.SEK.C.YTL",
-      "TRY_BUY" => "TP.DK.USD.A.YTL",
-      "TRY_SELL" => "TP.DK.USD.S.YTL",
-    }.freeze
+    CURRENCIES = [
+      "AED",
+      "AUD",
+      "AZN",
+      "CAD",
+      "CHF",
+      "CNY",
+      "DKK",
+      "EUR",
+      "GBP",
+      "JPY",
+      "KRW",
+      "KWD",
+      "KZT",
+      "NOK",
+      "PKR",
+      "QAR",
+      "RON",
+      "RUB",
+      "SAR",
+      "SEK",
+      "USD",
+    ].freeze
+
+    SERIES = CURRENCIES.flat_map do |c|
+      [["#{c}_BUY", "TP.DK.#{c}.A.YTL"], ["#{c}_SELL", "TP.DK.#{c}.S.YTL"]]
+    end.to_h.freeze
 
     COLUMNS = SERIES.to_h { |code, series| [series.tr(".", "_"), code] }.freeze
 
@@ -87,22 +90,26 @@ module Providers
 
       items.flat_map do |item|
         date = Date.strptime(item["Tarih"], "%d-%m-%Y")
-        rates = {}
+        raw = {}
 
         COLUMNS.each do |column, code|
           value = item[column]
           next if value.nil?
 
-          rates[code] = Float(value)
+          raw[code] = Float(value)
         end
 
-        # Mid of buying and selling for TRY
-        buy = rates.delete("TRY_BUY")
-        sell = rates.delete("TRY_SELL")
-        rates["TRY"] = ((buy + sell) / 2).round(4) if buy && sell
+        # Mid of buying and selling for each currency → X→TRY rate
+        # JPY is quoted per 100 units in TCMB data (confirmed via series metadata)
+        CURRENCIES.filter_map do |currency|
+          buy = raw["#{currency}_BUY"]
+          sell = raw["#{currency}_SELL"]
+          next unless buy && sell
 
-        rates.map do |quote, rate|
-          { provider: key, date:, base: "USD", quote:, rate: }
+          rate = (buy + sell) / 2
+          rate /= 100.0 if currency == "JPY"
+
+          { provider: key, date:, base: currency, quote: "TRY", rate: rate.round(4) }
         end
       end
     end
