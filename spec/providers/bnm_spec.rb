@@ -49,6 +49,13 @@ module Providers
       end
     end
 
+    it "respects upto date" do
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 10)).import
+
+      _(Rate.where(Sequel[:date] > Date.new(2026, 3, 10)).count).must_equal(0)
+      _(Rate.where(Sequel[:date] <= Date.new(2026, 3, 10)).count).must_be(:>, 0)
+    end
+
     it "excludes SDR" do
       provider.fetch(since: Date.new(2026, 3, 1)).import
 
