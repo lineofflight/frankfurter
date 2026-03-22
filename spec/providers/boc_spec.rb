@@ -38,5 +38,18 @@ module Providers
 
       _(Rate.where(date:).count).must_be(:>, 1)
     end
+
+    it "stores foreign currency as base and CAD as quote" do
+      records = provider.parse({
+        "observations" => [{
+          "d" => "2026-03-20",
+          "FXUSDCAD" => { "v" => "1.3728" },
+        }],
+      })
+
+      _(records.first[:base]).must_equal("USD")
+      _(records.first[:quote]).must_equal("CAD")
+      _(records.first[:rate]).must_equal(1.3728)
+    end
   end
 end

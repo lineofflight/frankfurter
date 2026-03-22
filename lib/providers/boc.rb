@@ -28,8 +28,8 @@ module Providers
 
       data["observations"].flat_map do |obs|
         date = Date.parse(obs["d"])
-        extract_rates(obs).map do |quote, rate|
-          { provider: key, date:, base:, quote:, rate: }
+        extract_rates(obs).map do |foreign, rate|
+          { provider: key, date:, base: foreign, quote: "CAD", rate: }
         end
       end
     end

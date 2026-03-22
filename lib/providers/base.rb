@@ -58,7 +58,7 @@ module Providers
     def import
       @dataset = dataset.reject { |r| !Money::Currency.find(r[:quote]) || EXCLUDED_QUOTES.include?(r[:quote]) }
       before = Rate.where(provider: key).count
-      Rate.dataset.insert_conflict(target: [:provider, :date, :quote]).multi_insert(dataset) unless dataset.empty?
+      Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = Rate.where(provider: key).count - before
       logger.info("#{key}: imported #{inserted} rates")
       if inserted > 0 && Cache.purge
