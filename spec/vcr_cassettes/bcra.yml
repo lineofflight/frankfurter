@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones?fecha=2026-03-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bcra.gob.ar
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '4155'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Jws-Signature:
+      - eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImlhdCI6MTc3NDIxMjk5OSwiZXhwIjoxNzc0MjQxNzk5fQ..By_LBErIr3vKb1KyimDOMtSzivei6VDcyjk75XZm9SNLz-cwNA376ruKci93-3OAqawReOLRmCDs4KwcXeIPXFaaXNJoDn1ypKB69OZF7rOJEmD2RXSaJdCrNjqpfcGJY7148rF1KN9uz_uxGyEOb_x0U-HGznzUlqFBwPiOFxicmmbYnAuTEMirp2JKj02DL5191QTf1WFQK7-AzlXOtcvjsBkwP204vnxb1qpzpIPUH1GR8maAn5HkS-ICn1eICFhxEyuneWrWpQdLWvEOIftSdx2xqg4PB3BtAdiQKD5i_NeC4P-ce0VKWUqeOAI-6U8QipGJuvjMWg7QS4R3KA
+      Date:
+      - Sun, 22 Mar 2026 20:56:39 GMT
+    body:
+      encoding: UTF-8
+      string: '{"status":200,"results":{"fecha":"2026-03-19","detalle":[{"codigoMoneda":"ARS","descripcion":"PESO","tipoPase":0.00071700,"tipoCotizacion":0.00000000},{"codigoMoneda":"AUD","descripcion":"DOLAR
+        AUSTRALIA","tipoPase":0.70550000,"tipoCotizacion":983.81975000},{"codigoMoneda":"AWG","descripcion":"FLORIN
+        (ANTILLAS HOLANDESAS)","tipoPase":0.55865900,"tipoCotizacion":779.05027900},{"codigoMoneda":"BOB","descripcion":"BOLIVIANOS","tipoPase":0.14499100,"tipoCotizacion":202.18935800},{"codigoMoneda":"BRL","descripcion":"REAL","tipoPase":0.19079600,"tipoCotizacion":266.06502300},{"codigoMoneda":"CAD","descripcion":"DOLAR
+        CANADIEN.","tipoPase":0.72849100,"tipoCotizacion":1015.88111000},{"codigoMoneda":"CHF","descripcion":"FRANCO
+        SUIZO","tipoPase":1.26518200,"tipoCotizacion":1764.29655900},{"codigoMoneda":"CLP","descripcion":"PESO
+        CHILENO","tipoPase":0.00109500,"tipoCotizacion":1.52723200},{"codigoMoneda":"CNH","descripcion":"YUAN
+        CNH RENMINBI OFF SHORE","tipoPase":0.14516300,"tipoCotizacion":202.43003100},{"codigoMoneda":"CNY","descripcion":"YUAN
+        CNY RENMINBI","tipoPase":0.14516300,"tipoCotizacion":202.43003100},{"codigoMoneda":"COP","descripcion":"COLOMBIANOS","tipoPase":0.00027200,"tipoCotizacion":0.37883300},{"codigoMoneda":"CZK","descripcion":"CORONAS
+        CHECAS","tipoPase":0.04721900,"tipoCotizacion":65.84694400},{"codigoMoneda":"DKK","descripcion":"CORONAS
+        DANESAS","tipoPase":0.15473200,"tipoCotizacion":215.77334900},{"codigoMoneda":"EUR","descripcion":"EURO","tipoPase":1.15600000,"tipoCotizacion":1612.04200000},{"codigoMoneda":"GBP","descripcion":"LIBRA
+        ESTERLINA","tipoPase":1.34030000,"tipoCotizacion":1869.04835000},{"codigoMoneda":"HKD","descripcion":"DOLAR
+        HONG KONG","tipoPase":0.12766700,"tipoCotizacion":178.03112500},{"codigoMoneda":"ILS","descripcion":"LIBRA
+        ISRAELI","tipoPase":0.32012300,"tipoCotizacion":446.41142200},{"codigoMoneda":"INR","descripcion":"RUPIA
+        (INDIA)","tipoPase":0.01079500,"tipoCotizacion":15.05329900},{"codigoMoneda":"JPY","descripcion":"YENS","tipoPase":0.00633600,"tipoCotizacion":8.83489600},{"codigoMoneda":"MXP","descripcion":"PESO
+        MEXICANO","tipoPase":0.05624800,"tipoCotizacion":78.43832100},{"codigoMoneda":"NIO","descripcion":"CORDOBA
+        NICARAGUENSE","tipoPase":0.02717400,"tipoCotizacion":37.89464000},{"codigoMoneda":"NOK","descripcion":"CORONAS
+        NORUEGA","tipoPase":0.10516100,"tipoCotizacion":146.64745700},{"codigoMoneda":"NZD","descripcion":"DOLAR
+        NEOZELANDES","tipoPase":0.58490000,"tipoCotizacion":815.64305000},{"codigoMoneda":"PEN","descripcion":"SOLES","tipoPase":0.28998100,"tipoCotizacion":404.37871500},{"codigoMoneda":"PYG","descripcion":"GUARANIES","tipoPase":0.00015300,"tipoCotizacion":0.21402800},{"codigoMoneda":"REF","descripcion":"DOLAR
+        REFERENCIA COM 3500","tipoPase":0.00000000,"tipoCotizacion":1395.51420000},{"codigoMoneda":"RSD","descripcion":"DINAR
+        SERBIA","tipoPase":0.00983900,"tipoCotizacion":13.71999200},{"codigoMoneda":"RUB","descripcion":"RUSIA","tipoPase":0.01162800,"tipoCotizacion":16.21511600},{"codigoMoneda":"SEK","descripcion":"CORONAS
+        SUECAS","tipoPase":0.10728200,"tipoCotizacion":149.60520100},{"codigoMoneda":"SGD","descripcion":"DOLAR
+        DE SINGAPUR","tipoPase":0.78186100,"tipoCotizacion":1090.30492600},{"codigoMoneda":"TRY","descripcion":"LIRA
+        TURCA","tipoPase":0.02257700,"tipoCotizacion":31.48345900},{"codigoMoneda":"USD","descripcion":"DOLAR
+        E.E.U.U.","tipoPase":0.00000000,"tipoCotizacion":1394.50000000},{"codigoMoneda":"UYU","descripcion":"PESO
+        URUGUAYO","tipoPase":0.02459100,"tipoCotizacion":34.29238900},{"codigoMoneda":"VEB","descripcion":"BOLIVARES","tipoPase":0.00224486,"tipoCotizacion":3.13045430},{"codigoMoneda":"VND","descripcion":"DONG
+        VIETNAM (C/1.000 UNIDADES)","tipoPase":0.03803600,"tipoCotizacion":53.04096500},{"codigoMoneda":"XAG","descripcion":"PLATA
+        - ONZA TROY","tipoPase":71.33340000,"tipoCotizacion":0.00000000},{"codigoMoneda":"XAU","descripcion":"ORO
+        FINO (1 ONZA)","tipoPase":4615.33000000,"tipoCotizacion":0.00000000},{"codigoMoneda":"XDR","descripcion":"DEG","tipoPase":1.35860000,"tipoCotizacion":1894.56770000},{"codigoMoneda":"ZAR","descripcion":"RAND
+        SUD","tipoPase":0.05938600,"tipoCotizacion":82.81370600}]}}'
+  recorded_at: Sun, 22 Mar 2026 20:56:07 GMT
+- request:
+    method: get
+    uri: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones?fecha=2026-03-20
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bcra.gob.ar
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '4155'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Jws-Signature:
+      - eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImlhdCI6MTc3NDIxMzAwMSwiZXhwIjoxNzc0MjQxODAxfQ..En52175vW2aEwKBsxCRsHDrV7Of8pOFYsb-IW-iBXKFGTQPuwnQ2ehJ1myE9sEWlQUUcFHy0zo35yuMUuguRtwhy-9ZDl6uYDzlGsDnApDZD1Nmhms912kloWt3z1_CLBaqHl2MAJDvbnW1iJzsnyRchyp9s8VJYTHCF3TrMAiSq_8R_vMfIa7U-aQqZSG0rdOUNNcKnjKdKDDnxWvZHW70cENTTzupUp4snXTtMOZkojJyB_9JCEnMvFqb8UqPZFdcTfIb4BDhv0Z6AEci1lp3COoxAz4-I6w2lb7YnOtg_XRSgcs_F_3uBd3PGZyel1_86PHdd4w-8eDWiLkJ6pA
+      Date:
+      - Sun, 22 Mar 2026 20:56:41 GMT
+    body:
+      encoding: UTF-8
+      string: '{"status":200,"results":{"fecha":"2026-03-20","detalle":[{"codigoMoneda":"ARS","descripcion":"PESO","tipoPase":0.00071900,"tipoCotizacion":0.00000000},{"codigoMoneda":"AUD","descripcion":"DOLAR
+        AUSTRALIA","tipoPase":0.70340000,"tipoCotizacion":978.07770000},{"codigoMoneda":"AWG","descripcion":"FLORIN
+        (ANTILLAS HOLANDESAS)","tipoPase":0.55865900,"tipoCotizacion":776.81564200},{"codigoMoneda":"BOB","descripcion":"BOLIVIANOS","tipoPase":0.14532600,"tipoCotizacion":202.07525000},{"codigoMoneda":"BRL","descripcion":"REAL","tipoPase":0.18870400,"tipoCotizacion":262.39314600},{"codigoMoneda":"CAD","descripcion":"DOLAR
+        CANADIEN.","tipoPase":0.72950100,"tipoCotizacion":1014.37117000},{"codigoMoneda":"CHF","descripcion":"FRANCO
+        SUIZO","tipoPase":1.26839200,"tipoCotizacion":1763.69863000},{"codigoMoneda":"CLP","descripcion":"PESO
+        CHILENO","tipoPase":0.00107400,"tipoCotizacion":1.49318600},{"codigoMoneda":"CNH","descripcion":"YUAN
+        CNH RENMINBI OFF SHORE","tipoPase":0.14482000,"tipoCotizacion":201.37289800},{"codigoMoneda":"CNY","descripcion":"YUAN
+        CNY RENMINBI","tipoPase":0.14485400,"tipoCotizacion":201.41957000},{"codigoMoneda":"COP","descripcion":"COLOMBIANOS","tipoPase":0.00026900,"tipoCotizacion":0.37426300},{"codigoMoneda":"CZK","descripcion":"CORONAS
+        CHECAS","tipoPase":0.04713600,"tipoCotizacion":65.54293900},{"codigoMoneda":"DKK","descripcion":"CORONAS
+        DANESAS","tipoPase":0.15471300,"tipoCotizacion":215.12779300},{"codigoMoneda":"EUR","descripcion":"EURO","tipoPase":1.15600000,"tipoCotizacion":1607.41800000},{"codigoMoneda":"GBP","descripcion":"LIBRA
+        ESTERLINA","tipoPase":1.33390000,"tipoCotizacion":1854.78795000},{"codigoMoneda":"HKD","descripcion":"DOLAR
+        HONG KONG","tipoPase":0.12765000,"tipoCotizacion":177.49779800},{"codigoMoneda":"ILS","descripcion":"LIBRA
+        ISRAELI","tipoPase":0.32191600,"tipoCotizacion":447.62426000},{"codigoMoneda":"INR","descripcion":"RUPIA
+        (INDIA)","tipoPase":0.01067100,"tipoCotizacion":14.83753900},{"codigoMoneda":"JPY","descripcion":"YENS","tipoPase":0.00628100,"tipoCotizacion":8.73374800},{"codigoMoneda":"MXP","descripcion":"PESO
+        MEXICANO","tipoPase":0.05583400,"tipoCotizacion":77.63732400},{"codigoMoneda":"NIO","descripcion":"CORDOBA
+        NICARAGUENSE","tipoPase":0.02717300,"tipoCotizacion":37.78347800},{"codigoMoneda":"NOK","descripcion":"CORONAS
+        NORUEGA","tipoPase":0.10447900,"tipoCotizacion":145.27807100},{"codigoMoneda":"NZD","descripcion":"DOLAR
+        NEOZELANDES","tipoPase":0.58370000,"tipoCotizacion":811.63485000},{"codigoMoneda":"PEN","descripcion":"SOLES","tipoPase":0.28771200,"tipoCotizacion":400.06329700},{"codigoMoneda":"PYG","descripcion":"GUARANIES","tipoPase":0.00015300,"tipoCotizacion":0.21294000},{"codigoMoneda":"REF","descripcion":"DOLAR
+        REFERENCIA COM 3500","tipoPase":0.00000000,"tipoCotizacion":1393.43800000},{"codigoMoneda":"RSD","descripcion":"DINAR
+        SERBIA","tipoPase":0.00984000,"tipoCotizacion":13.68261600},{"codigoMoneda":"RUB","descripcion":"RUSIA","tipoPase":0.01201200,"tipoCotizacion":16.70270300},{"codigoMoneda":"SEK","descripcion":"CORONAS
+        SUECAS","tipoPase":0.10685700,"tipoCotizacion":148.58467900},{"codigoMoneda":"SGD","descripcion":"DOLAR
+        DE SINGAPUR","tipoPase":0.78045700,"tipoCotizacion":1085.22594200},{"codigoMoneda":"TRY","descripcion":"LIRA
+        TURCA","tipoPase":0.02256700,"tipoCotizacion":31.37969100},{"codigoMoneda":"USD","descripcion":"DOLAR
+        E.E.U.U.","tipoPase":0.00000000,"tipoCotizacion":1390.50000000},{"codigoMoneda":"UYU","descripcion":"PESO
+        URUGUAYO","tipoPase":0.02454600,"tipoCotizacion":34.13107500},{"codigoMoneda":"VEB","descripcion":"BOLIVARES","tipoPase":0.00224485,"tipoCotizacion":3.12146646},{"codigoMoneda":"VND","descripcion":"DONG
+        VIETNAM (C/1.000 UNIDADES)","tipoPase":0.03802100,"tipoCotizacion":52.86871200},{"codigoMoneda":"XAG","descripcion":"PLATA
+        - ONZA TROY","tipoPase":69.65200000,"tipoCotizacion":0.00000000},{"codigoMoneda":"XAU","descripcion":"ORO
+        FINO (1 ONZA)","tipoPase":4573.96000000,"tipoCotizacion":0.00000000},{"codigoMoneda":"XDR","descripcion":"DEG","tipoPase":1.36334000,"tipoCotizacion":1895.72427000},{"codigoMoneda":"ZAR","descripcion":"RAND
+        SUD","tipoPase":0.05865700,"tipoCotizacion":81.56190600}]}}'
+  recorded_at: Sun, 22 Mar 2026 20:56:09 GMT
+recorded_with: VCR 6.4.0
