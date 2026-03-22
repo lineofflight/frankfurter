@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../boot"
+require "db"
+require "rate"
+require "currency"
+require "provider"
+
+puts "Frankfurter (#{ENV.fetch("APP_ENV", "development")})"
+
+require "irb"
+IRB.start
