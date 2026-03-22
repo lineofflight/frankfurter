@@ -1,21 +1,16 @@
 # frozen_string_literal: true
 
 require "cache"
-require "logger"
+require "log"
 require "money"
 require "rate"
 
 module Providers
   class << self
-    attr_reader :logger
-
     def all
       @all ||= []
     end
   end
-
-  @logger = Logger.new($stdout)
-  @logger.level = Logger::WARN if ENV["APP_ENV"] == "test"
 
   class Base
     class << self
@@ -35,6 +30,8 @@ module Providers
 
         since ||= earliest_date
         each_period(since, range) do |period_since, period_upto|
+          period = period_upto ? "#{period_since}..#{period_upto}" : "#{period_since}.."
+          Log.info("#{key}: fetching #{period}")
           new.fetch(since: period_since, upto: period_upto).import
         end
       end
@@ -60,12 +57,10 @@ module Providers
       end
     end
 
-    attr_reader :dataset, :logger
+    attr_reader :dataset
 
-    def initialize(dataset: [], logger: Providers.logger)
+    def initialize(dataset: [])
       @dataset = dataset
-      @logger = logger
-      logger.info("#{key}: started")
     end
 
     def key = self.class.key
@@ -85,9 +80,9 @@ module Providers
       before = Rate.where(provider: key).count
       Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = Rate.where(provider: key).count - before
-      logger.info("#{key}: imported #{inserted} rates")
+      Log.info("#{key}: imported #{inserted} rates")
       if inserted > 0 && Cache.purge
-        logger.info("#{key}: purged cache")
+        Log.info("#{key}: purged cache")
       end
 
       self
