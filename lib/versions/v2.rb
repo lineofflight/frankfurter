@@ -73,8 +73,10 @@ module Versions
       date_ranges = Rate.group(:provider)
         .select { [provider, min(date).as(start_date), max(date).as(end_date)] }
         .to_h { |r| [r[:provider], { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }] }
-      currencies = Rate.select(:provider, :quote).distinct.order(:provider, :quote).all
-        .group_by(&:provider).transform_values { |rows| rows.map(&:quote) }
+      currencies = Rate.select(:provider, Sequel[:quote].as(:currency)).distinct
+        .union(Rate.select(:provider, Sequel[:base].as(:currency)).distinct)
+        .order(:provider, :currency).all
+        .group_by(&:provider).transform_values { |rows| rows.map { |r| r[:currency] }.uniq.sort }
 
       Providers.all.map(&:new).sort_by(&:key).map do |provider|
         range = date_ranges[provider.key] || {}
