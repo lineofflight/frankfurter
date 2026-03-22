@@ -14,7 +14,7 @@ module Providers
       def name = "European Central Bank"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       url = URI(SDMX_URL)
       params = { format: "csvdata" }
       params[:startPeriod] = since.to_s if since

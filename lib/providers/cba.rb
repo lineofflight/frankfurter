@@ -17,7 +17,7 @@ module Providers
       def name = "Central Bank of Armenia"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
       @dataset = chunked_range(start_date, Date.today, currency_codes)

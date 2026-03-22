@@ -17,7 +17,7 @@ module Providers
       def name = "Bank of Canada"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       @dataset = fetch_rates(start_date: since || EARLIEST_DATE)
       self
     end

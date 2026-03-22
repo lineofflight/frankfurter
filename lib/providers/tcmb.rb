@@ -49,7 +49,7 @@ module Providers
       def name = "Central Bank of Turkey"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       return no_key unless api_key
 
       start_date = since || EARLIEST_DATE

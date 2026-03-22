@@ -18,7 +18,7 @@ module Providers
       def name = "Bank of Russia"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
       currencies = fetch_currency_list

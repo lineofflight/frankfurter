@@ -24,7 +24,7 @@ module Providers
       def name = "Bank of Botswana"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       records = parse(Net::HTTP.get(CSV_URL))
       @dataset = since ? records.select { |r| r[:date] >= Date.parse(since.to_s) } : records
       self

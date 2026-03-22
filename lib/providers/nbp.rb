@@ -16,7 +16,7 @@ module Providers
       def name = "National Bank of Poland"
     end
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
       end_date = Date.today
