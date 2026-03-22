@@ -12,4 +12,6 @@ unless url.start_with?("sqlite")
   abort "Frankfurter now uses SQLite. Remove DATABASE_URL or set it to a sqlite URL."
 end
 
-Sequel.connect(url)
+DB = Sequel.connect(url)
+DB.run("PRAGMA journal_mode=WAL")
+DB.run("PRAGMA busy_timeout=5000")
