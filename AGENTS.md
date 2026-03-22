@@ -123,6 +123,8 @@ Checklist for adding a new exchange rate data provider:
 4. `lib/tasks/<name>.rake` — rake namespace with `:backfill` task
 5. `lib/tasks/import.rake` — add `"<name>:backfill"` to the backfill dependency list
 6. `bin/schedule` — add to startup backfill array and add cron schedule for publish window
+7. `lib/versions/v2.rb` — add `require "providers/<name>"` so v2 API registers the provider
+8. `db/seeds/providers.json` — add provider metadata (key, name, description, url)
 
 ## Development Notes
 

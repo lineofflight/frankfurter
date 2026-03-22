@@ -64,5 +64,17 @@
     "name": "Bank Negara Malaysia",
     "description": "Daily exchange rates for 26 currencies against the Malaysian ringgit.",
     "url": "https://www.bnm.gov.my/exchange-rates"
+  },
+  {
+    "key": "RBA",
+    "name": "Reserve Bank of Australia",
+    "description": "Daily exchange rates for 20+ currencies against the Australian dollar.",
+    "url": "https://www.rba.gov.au/statistics/frequency/exchange-rates.html"
+  },
+  {
+    "key": "BCRA",
+    "name": "Central Bank of Argentina",
+    "description": "Daily official exchange rates for 30+ currencies against the Argentine peso.",
+    "url": "https://www.bcra.gob.ar/PublicacionesEstadisticas/Cotizaciones_702.asp"
   }
 ]
