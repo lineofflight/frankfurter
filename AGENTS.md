@@ -110,6 +110,20 @@ rake backfill      # Backfill all providers
 rake db:prepare    # Run migrations and backfill all providers
 ```
 
+## Adding a New Provider
+
+Checklist for adding a new exchange rate data provider:
+
+1. `lib/providers/<name>.rb` — provider class inheriting `Providers::Base`
+   - Implement class methods: `key`, `name`, and optionally `earliest_date`
+   - Implement `fetch(since: nil, upto: nil)` and parsing logic
+   - Override `backfill(range:)` if the API needs chunked requests
+2. `spec/providers/<name>_spec.rb` — tests (fetch, since-date, multi-currency, parse unit test)
+3. `spec/vcr_cassettes/<name>.yml` — recorded HTTP fixture (auto-created by VCR on first test run)
+4. `lib/tasks/<name>.rake` — rake namespace with `:backfill` task
+5. `lib/tasks/import.rake` — add `"<name>:backfill"` to the backfill dependency list
+6. `bin/schedule` — add to startup backfill array and add cron schedule for publish window
+
 ## Development Notes
 
 - Ruby (see `Gemfile`)
