@@ -2,7 +2,7 @@
 
 require "cache"
 require "log"
-require "money"
+require "money/currency"
 require "rate"
 
 module Providers
