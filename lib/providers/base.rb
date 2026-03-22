@@ -27,11 +27,34 @@ module Providers
       def key = raise(NotImplementedError)
       def name = raise(NotImplementedError)
 
-      def backfill
+      def backfill(range: nil)
         since = Rate.where(provider: key).max(:date)
-        return if since && Date.parse(since.to_s) >= Date.today
+        since = Date.parse(since.to_s) if since
+        return if since && since >= Date.today
 
-        new.fetch(since:).import
+        each_period(since, range) do |period_since, period_upto|
+          new.fetch(since: period_since, upto: period_upto).import
+        end
+      end
+
+      private
+
+      def each_period(since, range)
+        unless range && since
+          yield(since, nil)
+          return
+        end
+
+        cursor = since
+        loop do
+          period_upto = cursor + range - 1
+          if period_upto >= Date.today
+            yield(cursor, nil)
+            break
+          end
+          yield(cursor, period_upto)
+          cursor = period_upto + 1
+        end
       end
     end
 
@@ -46,7 +69,7 @@ module Providers
     def key = self.class.key
     def name = self.class.name
 
-    def fetch(since: nil)
+    def fetch(since: nil, upto: nil)
       raise NotImplementedError
     end
 
