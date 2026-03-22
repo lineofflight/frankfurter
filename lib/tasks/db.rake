@@ -14,21 +14,21 @@ namespace :db do
     Sequel::IntegerMigrator.new(db, dir, opts).run
   end
 
-  desc "Seed providers table from JSON"
-  task :seed_providers do
+  desc "Seed database from saved data"
+  task :seed do
     require "json"
     require "provider"
     Provider.seed
   end
 
   desc "Run database migrations and backfill all providers"
-  task prepare: ["db:migrate", "db:seed_providers", "backfill"]
+  task prepare: ["db:migrate", "db:seed", "backfill"]
 
   namespace :test do
     desc "Run database migrations and seed with saved data"
     task :prepare do
       Rake::Task["db:migrate"].invoke
-      Rake::Task["db:seed_providers"].invoke
+      Rake::Task["db:seed"].invoke
       Rake::Task["ecb:seed"].invoke
       Rake::Task["boc:seed"].invoke
     end
