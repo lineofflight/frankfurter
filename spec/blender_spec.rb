@@ -35,6 +35,19 @@ describe Blender do
     _(eur[:rate]).must_be_close_to(1.0 / 1.10)
   end
 
+  it "blends rates consistently across providers with different bases" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: date, base: "USD", quote: "CAD", rate: 1.37, provider: "BOC" },
+      { date: date, base: "EUR", quote: "CAD", rate: 1.48, provider: "BOC" },
+    ]
+
+    result = Blender.new(rates, base: "EUR").blend
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:rate]).must_be_close_to(1.08, 0.05)
+  end
+
   it "blends rates from different dates" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },

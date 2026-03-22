@@ -35,12 +35,12 @@ module Providers
       data.flat_map do |table|
         date = Date.parse(table["effectiveDate"])
         table["rates"].filter_map do |rate|
-          quote = rate["code"]
+          iso = rate["code"]
           mid = rate["mid"]
-          next unless quote.match?(/\A[A-Z]{3}\z/)
+          next unless iso.match?(/\A[A-Z]{3}\z/)
           next if mid.nil? || mid.zero?
 
-          { provider: key, date:, base: "PLN", quote:, rate: mid }
+          { provider: key, date:, base: iso, quote: "PLN", rate: mid }
         end
       end
     end

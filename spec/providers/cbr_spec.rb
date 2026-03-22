@@ -30,5 +30,13 @@ module Providers
 
       _(Rate.where(date:).count).must_be(:>, 1)
     end
+
+    it "stores foreign currency as base and RUB as quote" do
+      provider.fetch(since: Date.new(2026, 3, 1)).import
+      usd = Rate.where(provider: "CBR", quote: "RUB").where(base: "USD").first
+
+      _(usd).wont_be_nil
+      _(usd.rate).must_be(:>, 50)
+    end
   end
 end

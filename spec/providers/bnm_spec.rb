@@ -35,7 +35,7 @@ module Providers
 
     it "normalizes rates by unit" do
       provider.fetch(since: Date.new(2026, 3, 1)).import
-      jpy_rate = Rate.where(quote: "JPY").first
+      jpy_rate = Rate.where(base: "JPY").first
 
       _(jpy_rate).wont_be_nil
       _(jpy_rate.rate).must_be(:<, 1)
@@ -45,13 +45,14 @@ module Providers
       provider.fetch(since: Date.new(2026, 3, 1)).import
 
       ["BND", "EGP", "KHR", "MMK", "NPR"].each do |code|
-        _(Rate.where(quote: code).count).must_be(:>, 0, "expected #{code} rates")
+        _(Rate.where(base: code).count).must_be(:>, 0, "expected #{code} rates")
       end
     end
 
     it "excludes SDR" do
       provider.fetch(since: Date.new(2026, 3, 1)).import
 
+      _(Rate.where(base: "SDR").count).must_equal(0)
       _(Rate.where(quote: "SDR").count).must_equal(0)
     end
   end

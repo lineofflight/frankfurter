@@ -22,8 +22,8 @@ module Providers
       start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
       currencies = current_currencies
-      @dataset = currencies.flat_map do |cur_id, quote, scale|
-        chunked_dynamics(cur_id, quote, scale, start_date, Date.today)
+      @dataset = currencies.flat_map do |cur_id, iso, scale|
+        chunked_dynamics(cur_id, iso, scale, start_date, Date.today)
       end
       self
     end
@@ -35,12 +35,12 @@ module Providers
         date = Date.parse(row.fetch("Date"))
         next if date.saturday? || date.sunday?
 
-        quote = row.fetch("Cur_Abbreviation")
+        iso = row.fetch("Cur_Abbreviation")
         scale = Integer(row.fetch("Cur_Scale"))
         rate = Float(row.fetch("Cur_OfficialRate"))
         next if scale.zero?
 
-        { provider: key, date:, base: "BYN", quote:, rate: rate / scale }
+        { provider: key, date:, base: iso, quote: "BYN", rate: rate / scale }
       end
     end
 
@@ -49,20 +49,20 @@ module Providers
       data.map { |row| [row.fetch("Cur_ID"), row.fetch("Cur_Abbreviation"), Integer(row.fetch("Cur_Scale"))] }
     end
 
-    def chunked_dynamics(cur_id, quote, scale, start_date, end_date)
+    def chunked_dynamics(cur_id, iso, scale, start_date, end_date)
       records = []
       chunk_start = start_date
 
       while chunk_start <= end_date
         chunk_end = [chunk_start + CHUNK_DAYS - 1, end_date].min
-        records.concat(fetch_dynamics(cur_id, quote, scale, chunk_start, chunk_end))
+        records.concat(fetch_dynamics(cur_id, iso, scale, chunk_start, chunk_end))
         chunk_start = chunk_end + 1
       end
 
       records
     end
 
-    def fetch_dynamics(cur_id, quote, scale, start_date, end_date)
+    def fetch_dynamics(cur_id, iso, scale, start_date, end_date)
       url = URI("#{RATES_URL}/dynamics/#{cur_id}")
       url.query = URI.encode_www_form(startDate: start_date.to_s, endDate: end_date.to_s)
       data = Oj.load(Net::HTTP.get(url))
@@ -73,7 +73,7 @@ module Providers
         next if date.saturday? || date.sunday?
 
         rate = Float(row.fetch("Cur_OfficialRate"))
-        { provider: key, date:, base: "BYN", quote:, rate: rate / scale }
+        { provider: key, date:, base: iso, quote: "BYN", rate: rate / scale }
       end
     end
   end

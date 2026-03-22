@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-# Converts a single provider's rates for a given date to a new base currency by dividing each rate by the base
-# currency's rate. Produces an inverse rate for the provider's native base when it differs from the requested base.
+# Converts a single provider's rates to a target base currency.
+# Handles three cases:
+# 1. Rate already in target base — pass through
+# 2. Rate quotes the target base — invert
+# 3. Rate shares a currency with a target-base rate — cross-convert
 class BaseConverter
   attr_reader :rates, :base
 
@@ -11,33 +14,38 @@ class BaseConverter
   end
 
   def convert
-    return [] unless base_rate
-
-    rates.map do |rate|
+    rates.filter_map do |rate|
       if rate[:base] == base
         { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] }
       elsif rate[:quote] == base
-        { date: rate[:date], base:, quote: rate[:base], rate: 1.0 / base_rate }
+        { date: rate[:date], base:, quote: rate[:base], rate: 1.0 / rate[:rate] }
       else
-        { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] / base_rate }
+        cross_convert(rate)
       end
     end
   end
 
   private
 
-  def base_rate
-    @base_rate ||= begin
-      direct = rates.find { |r| r[:quote] == base }
-      inverse = rates.find { |r| r[:base] == base } unless direct
-
-      if direct
-        direct[:rate]
-      elsif inverse
-        1.0 / inverse[:rate]
-      elsif rates.first[:base] == base
-        1.0
-      end
+  def cross_convert(rate)
+    # Case A: both rates share the same quote (e.g. USD→CAD and EUR→CAD)
+    bridge = rates.find { |r| r[:base] == base && r[:quote] == rate[:quote] }
+    if bridge
+      return { date: rate[:date], base:, quote: rate[:base], rate: bridge[:rate] / rate[:rate] }
     end
+
+    # Case B: rate's base is quoted against the target (e.g. USD→JPY and EUR→USD)
+    bridge = rates.find { |r| r[:base] == base && r[:quote] == rate[:base] }
+    if bridge
+      return { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] * bridge[:rate] }
+    end
+
+    # Case C: rate's base quotes the target (e.g. USD→JPY and USD→EUR)
+    bridge = rates.find { |r| r[:base] == rate[:base] && r[:quote] == base }
+    if bridge
+      return { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] / bridge[:rate] }
+    end
+
+    nil
   end
 end

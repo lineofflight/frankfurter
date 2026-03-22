@@ -56,7 +56,7 @@ module Providers
           mid = rate["middle_rate"]
           next unless mid
 
-          records << { provider: key, date: Date.parse(rate["date"]), base: "MYR", quote: code, rate: mid / unit }
+          records << { provider: key, date: Date.parse(rate["date"]), base: code, quote: "MYR", rate: mid / unit }
         end
       end
       records

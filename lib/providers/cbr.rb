@@ -57,7 +57,7 @@ module Providers
         rate = extract_rate(row)
         next unless rate
 
-        { provider: key, date:, base: "RUB", quote: code, rate: }
+        { provider: key, date:, base: code, quote: "RUB", rate: }
       end
     end
 

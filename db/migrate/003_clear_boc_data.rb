@@ -2,6 +2,8 @@
 
 Sequel.migration do
   up do
-    from(:rates).where(provider: "BOC").delete
+    ["BOC", "CBA", "CBR", "NBP", "NBRB", "NBU", "BNM"].each do |provider|
+      from(:rates).where(provider:).delete
+    end
   end
 end

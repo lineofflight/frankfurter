@@ -39,15 +39,15 @@ module Providers
 
       date = Date.parse(current_date.text)
       result.locate("Rates/ExchangeRate").filter_map do |node|
-        quote = node.locate("ISO").first&.text
-        next unless quote
+        iso = node.locate("ISO").first&.text
+        next unless iso
 
-        { provider: key, date:, base: "AMD", quote:, rate: extract_rate(node) }
+        { provider: key, date:, base: iso, quote: "AMD", rate: extract_rate(node) }
       end
     end
 
     def currency_codes
-      latest_rates.map { |r| r[:quote] }.join(",")
+      latest_rates.map { |r| r[:base] }.join(",")
     end
 
     def chunked_range(start_date, end_date, iso_codes)
@@ -75,10 +75,10 @@ module Providers
       response
         .locate("soap:Envelope/soap:Body/ExchangeRatesByDateRangeByISOResponse/ExchangeRatesByDateRangeByISOResult/diffgr:diffgram/DocumentElement/ExchangeRatesByRange")
         .filter_map do |row|
-          quote = row.locate("ISO").first&.text
-          next unless quote
+          iso = row.locate("ISO").first&.text
+          next unless iso
 
-          { provider: key, date: Date.parse(row.locate("RateDate").first.text), base: "AMD", quote:, rate: extract_rate(row) }
+          { provider: key, date: Date.parse(row.locate("RateDate").first.text), base: iso, quote: "AMD", rate: extract_rate(row) }
         end
     end
 

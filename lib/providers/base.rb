@@ -54,7 +54,9 @@ module Providers
     EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
 
     def import
-      @dataset = dataset.reject { |r| !Money::Currency.find(r[:quote]) || EXCLUDED_QUOTES.include?(r[:quote]) }
+      @dataset = dataset.reject do |r|
+        [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) }
+      end
       before = Rate.where(provider: key).count
       Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = Rate.where(provider: key).count - before

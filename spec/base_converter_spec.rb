@@ -41,6 +41,21 @@ describe BaseConverter do
     _(result).must_be_empty
   end
 
+  it "cross-converts through a shared quote currency" do
+    rates = [
+      { date: date, base: "USD", quote: "CAD", rate: 1.37, provider: "BOC" },
+      { date: date, base: "EUR", quote: "CAD", rate: 1.48, provider: "BOC" },
+      { date: date, base: "TRY", quote: "CAD", rate: 0.031, provider: "BOC" },
+    ]
+
+    result = BaseConverter.new(rates, base: "EUR").convert
+    usd = result.find { |r| r[:quote] == "USD" }
+    try = result.find { |r| r[:quote] == "TRY" }
+
+    _(usd[:rate]).must_be_close_to(1.48 / 1.37)
+    _(try[:rate]).must_be_close_to(1.48 / 0.031)
+  end
+
   it "handles mixed bases by finding the target as a base in inverted rows" do
     mixed = [
       { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED" },

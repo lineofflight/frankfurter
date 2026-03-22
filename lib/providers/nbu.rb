@@ -30,14 +30,14 @@ module Providers
         date = Date.strptime(row.fetch("exchangedate"), "%d.%m.%Y")
         next if date.saturday? || date.sunday?
 
-        quote = row.fetch("cc")
-        next unless quote.match?(/\A[A-Z]{3}\z/)
+        iso = row.fetch("cc")
+        next unless iso.match?(/\A[A-Z]{3}\z/)
 
         units = row.fetch("units", 1).to_f
         rate = row.fetch("rate").to_f
         next if rate.zero? || units.zero?
 
-        { provider: key, date:, base: "UAH", quote:, rate: rate / units }
+        { provider: key, date:, base: iso, quote: "UAH", rate: rate / units }
       end
     end
 
