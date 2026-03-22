@@ -49,9 +49,10 @@ module Providers
     def parse(json)
       data = json.is_a?(String) ? JSON.parse(json) : json
       detalle = data.dig("results", "detalle")
-      return [] unless detalle
+      fecha = data.dig("results", "fecha")
+      return [] unless detalle && fecha
 
-      date = Date.parse(data.dig("results", "fecha"))
+      date = Date.parse(fecha)
 
       detalle.filter_map do |item|
         code = item["codigoMoneda"]&.strip
