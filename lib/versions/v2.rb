@@ -20,6 +20,7 @@ require "providers/bcra"
 require "providers/cbk"
 require "providers/boj"
 require "providers/imf"
+require "providers/nbrm"
 require "versions/v2/query"
 
 module Versions

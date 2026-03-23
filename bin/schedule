@@ -6,7 +6,7 @@ require "rufus-scheduler"
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (each runs in its own thread)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra", "cbk", "boj", "imf"].each do |provider|
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra", "cbk", "boj", "imf", "nbrm"].each do |provider|
   scheduler.in("0s") do
     system("bundle exec rake #{provider}:backfill")
   end
@@ -97,6 +97,11 @@ end
 # IMF publishes daily (Washington DC, afternoon ET)
 scheduler.cron("*/30 18,19,20 * * 1-5", overlap: false) do
   system("bundle exec rake imf:backfill")
+end
+
+# NBRM publishes during business hours (North Macedonia, UTC+1/+2)
+scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
+  system("bundle exec rake nbrm:backfill")
 end
 
 scheduler.join

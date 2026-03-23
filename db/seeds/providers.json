@@ -94,5 +94,11 @@
     "name": "International Monetary Fund",
     "description": "Daily representative exchange rates for 50+ currencies against the US dollar.",
     "url": "https://www.imf.org/external/np/fin/ert/GUI/Pages/CountryDataBase.aspx"
+  },
+  {
+    "key": "NBRM",
+    "name": "National Bank of North Macedonia",
+    "description": "Daily mid-market rates for 30 currencies against the Macedonian denar.",
+    "url": "https://www.nbrm.mk"
   }
 ]
