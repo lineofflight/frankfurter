@@ -31,9 +31,9 @@ describe Rate do
       _(providers).must_include("BOC")
     end
 
-    it "excludes providers outside their publish frequency" do
-      Rate.dataset.insert(date: Date.parse("2024-01-10"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
-      Rate.dataset.insert(date: Date.parse("2024-01-09"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
+    it "excludes providers more than 7 days behind the global max" do
+      Rate.dataset.insert(date: Date.parse("2024-01-07"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: Date.parse("2024-01-06"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
       Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
       Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
 
@@ -44,7 +44,7 @@ describe Rate do
       _(providers).wont_include("STALE")
     end
 
-    it "includes weekly providers within their cadence" do
+    it "includes providers within 7 days of the global max" do
       Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
       Rate.dataset.insert(date: Date.parse("2024-01-08"), base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
       Rate.dataset.insert(date: Date.parse("2024-01-19"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
