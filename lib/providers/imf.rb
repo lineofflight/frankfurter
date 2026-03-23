@@ -89,7 +89,7 @@ module Providers
     }.freeze
 
     # Currencies marked with (1) in IMF data: quoted as USD per 1 foreign unit
-    USD_PER_UNIT = %w[EUR GBP AUD NZD KWD BHD OMR BWP FJD JOD BBD BSD WST NAD].to_set.freeze
+    USD_PER_UNIT = ["EUR", "GBP", "AUD", "NZD", "KWD", "BHD", "OMR", "BWP", "FJD", "JOD", "BBD", "BSD", "WST", "NAD"].to_set.freeze
 
     class << self
       def key = "IMF"
@@ -108,7 +108,7 @@ module Providers
         last_day = Date.new(cursor.year, cursor.month, -1)
         tsv = fetch_month(last_day)
         @dataset.concat(parse(tsv))
-        cursor = cursor >> 1
+        cursor >>= 1
       end
 
       @dataset = dataset.select { |r| r[:date] >= start_date } if since

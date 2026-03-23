@@ -45,10 +45,12 @@ module Providers
       records = provider.parse(tsv)
 
       eur = records.select { |r| r[:base] == "EUR" || r[:quote] == "EUR" }
+
       _(eur.first[:base]).must_equal("EUR")
       _(eur.first[:quote]).must_equal("USD")
 
       jpy = records.select { |r| r[:base] == "USD" && r[:quote] == "JPY" }
+
       _(jpy.first[:rate]).must_equal(156.4)
     end
 
@@ -61,6 +63,7 @@ module Providers
       TSV
 
       records = provider.parse(tsv)
+
       _(records.none? { |r| r[:base] == "USD" && r[:quote] == "USD" }).must_equal(true)
     end
   end
