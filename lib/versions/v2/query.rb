@@ -63,11 +63,19 @@ module Versions
         nil
       end
 
+      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group"].freeze
+
       def validate!
+        validate_params!
         validate_dates!
         validate_conflicting_params!
         validate_group!
         validate_currencies!
+      end
+
+      def validate_params!
+        unknown = @params.keys.map(&:to_s) - ALLOWED_PARAMS
+        raise ValidationError, "unknown parameter: #{unknown.join(", ")}" if unknown.any?
       end
 
       def validate_dates!

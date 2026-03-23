@@ -132,6 +132,13 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "returns 422 for unknown parameters" do
+    get "/rates?provider=ecb"
+
+    _(last_response.status).must_equal(422)
+    _(json["message"]).must_include("unknown parameter")
+  end
+
   it "returns empty array for dates before dataset" do
     get "/rates?date=1901-01-01"
 
