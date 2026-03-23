@@ -1,0 +1,128 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.imf.org/external/np/fin/data/rms_mth.aspx?SelectDate=2026-03-31&reportType=REP&tsvflag=Y
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.imf.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/vnd.ms-excel
+      Content-Disposition:
+      - attachment;filename=rms_mth.xls
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Length:
+      - '6544'
+      Date:
+      - Mon, 23 Mar 2026 00:19:41 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - TS01e41fe4=01250698b2223aa69b805c63364dc38d7a2dca8f6dd34bd53a942ce8f349db49c3744b5d63c0b7555805bdb4508e937f60eb6218127fc63b1f2cba079551242f4a009e001d;
+        Path=/; Domain=.www.imf.org; Secure; HttpOnly
+      - bm_s=YAAQCijdF8BdUACdAQAAkcsPGAVFXiUnQiqcDoYQIx8ai/go7YsRQKUtnHGOnPFPZ1j+tjTR3ElqUScfCJnKv/tbk+tnnhLHF4RblclZYIZ5pstiLn8/ugg1wiVy1RQ4LffmwNl8EYa5B4O0NPM485o7e70uvsemDRvavp4sANkXWs4+/xhDCg6ynW5oses7bqZwvWBmL0sQW508TU4KgdPHiRntHuZnacQcJ17/4PGyW90I8LyVBvDJEFjKf3HDPT/GandOlMgk7GPDpFcGo3ZlG/jQFvYAghjgdxd4i5DFvbyJkcJheIVh1hQ4jToLJDkxsNERwnQLZbdmvYap9UiyzHxxEIhR4C4vrl0JREJ/SNeAEIlhw3iyC6xTNkZkC1LvYc7cI3lDO1jZQVVwPEoHGUh3ZAU5ghKSr27jHVwVW2pyvwKKsEeCn1XZT/0WNZO1pv3Aeawza1aHLEtz6EueUNIQy926YrtlHtDGUz5VVKlQG0VvU3ha4VTETZprJ2vDdLa8yFWnnmWH39hf0tQE6yNBZQTFk6kYxyM/OeY98kG6UipkbuahKFjWImFTlhDHhOSPAJz1JTETNg==;
+        Domain=.imf.org; Path=/; Expires=Thu, 23 Apr 2026 00:19:41 GMT; Max-Age=2678400;
+        Secure; HttpOnly
+      - bm_so=7C04D6240ECA836B9D28A552731279E67CF8180CC494A6E1910BA51EE59DDC5F~YAAQCijdF8FdUACdAQAAkcsPGAd2rvWTuKDFp5T1JTyQRBGyvmYskQnky3jYySEuY1O/nGAOLZnLiMf5mx7ziZa9vaAlknQpW/pkVdMobkc+OEgDbJV45849GOGJTjRIu/3Whi1Kdm9771bois9DsfB8dRrFVYO4r+bRuUr5A8N8FfxDEpUGfd/xvfzst68PdDrdFALlATCH9/irxVdgbxk2qnAEnyCbT6RdOqzK1eQ8xHIvbZaYtY/w6AfJhun71umlURlkP8yJ6rTSlQvMAXZrHmFYQ7Zl6Cx05ehcPRgzxEgQQ2wPecDxCRpIms4wSEfRxsZ2FTLrWjxFIUludafI9q90hs1d/pG08z7Joffix1UMir3kHiEpvVTpp2x7I0RqZVb9/NOc3bRB8YnY9EVB4UZMR7w8VRyBGK5scNQDu+EPRz+J8YeqXEzV20OR5QNvIC6dFEgfXbVoK5wL6XfqwTSSZxrkzVGif6vUNJZLFLBq;
+        Domain=.imf.org; Path=/; Expires=Tue, 24 Mar 2026 00:19:41 GMT; Max-Age=86400;
+        Secure
+      - bm_ss=ab8e18ef4e; Secure; SameSite=None; Domain=.imf.org; Path=/; HttpOnly;
+        Max-Age=3600
+      - cookie_persistence=!X47+RRSxc1KEfQ3MXpza1cxHRoyt8n2BUSPgCimRtYpADUmktf9nkG9ZCHJTVbwAThC/xYQsk7Fvkg==;
+        path=/; Httponly; Secure
+      Alt-Svc:
+      - h3=":443"; ma=93600
+      Strict-Transport-Security:
+      - max-age=31536000
+      Akamai-Grn:
+      - 0.0a28dd17.1774225180.3c311f4a
+    body:
+      encoding: UTF-8
+      string: "Representative Exchange Rates for Selected Currencies for March 2026\r\nCurrency\tMarch
+        02, 2026\tMarch 03, 2026\tMarch 04, 2026\tMarch 05, 2026\tMarch 06, 2026\tMarch
+        09, 2026\tMarch 10, 2026\tMarch 11, 2026\tMarch 12, 2026\tMarch 13, 2026\tMarch
+        16, 2026\r\nChinese yuan\t6.882900\t6.897100\t6.911700\t6.895700\t6.897900\t6.915300\t6.871800\t6.867000\t6.875700\t6.897400\t6.903200\r\nEuro(1)\t1.169800\t1.160600\t1.164900\t1.161800\t1.156100\t1.155500\t1.164100\t1.158100\t1.154700\t1.147600\t1.147800\r\nJapanese
+        yen\t156.400000\t157.410000\t157.660000\t156.580000\t157.400000\t158.880000\t157.690000\t158.200000\t159.000000\t159.200000\t159.410000\r\nU.K.
+        pound(1)\t1.341050\t1.329250\t1.337850\t1.335800\t1.331950\t1.334700\t1.344450\t1.342950\t1.339700\t1.325550\t1.327950\r\nU.S.
+        dollar\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\t1.000000\r\nAlgerian
+        dinar\t130.230900\t130.521800\t130.690500\t130.731300\t131.237400\t131.436100\t131.239800\t131.386200\t131.661300\t132.394400\t132.476400\r\nAustralian
+        dollar(1)\t0.709400\t0.710400\t0.699600\t0.705300\t0.702900\tNA\t0.706300\t0.718300\t0.712500\t0.706300\t0.700700\r\nBotswana
+        pula(1)\t0.077200\t0.077100\t0.076100\t0.076400\t0.075900\t0.075400\t0.076700\t0.076900\t0.076000\t0.075300\t0.075100\r\nBrazilian
+        real\t5.199500\t5.286400\tNA\t5.244100\tNA\t5.213300\t5.161600\t5.159000\t5.204500\t5.253500\t5.264100\r\nBrunei
+        dollar\t1.267400\t1.272600\t1.277400\t1.276800\tNA\t1.283300\t1.276100\t1.271300\t1.276200\t1.278900\t1.281200\r\nCanadian
+        dollar\t1.368800\t1.368400\t1.366400\t1.367700\tNA\t1.357400\t1.356700\t1.358700\t1.361700\t1.371600\t1.367500\r\nChilean
+        peso\t871.410000\t884.210000\t906.320000\t895.140000\t907.660000\t921.760000\t916.360000\t893.690000\t895.860000\t909.940000\t913.980000\r\nCzech
+        koruna\t20.737000\t21.010000\t20.914000\t20.985000\t21.104000\t21.091000\t20.941000\t21.042000\t21.156000\t21.281000\t21.284000\r\nDanish
+        krone\t6.386700\t6.436700\t6.413900\t6.431100\t6.462100\t6.465400\t6.418100\t6.451800\t6.471100\t6.511500\tNA\r\nIndian
+        rupee\t91.451400\tNA\t92.282800\t91.627500\t91.682900\t92.263900\t92.017400\t91.925700\t92.353000\t92.440500\t92.396600\r\nIsraeli
+        New Shekel\t3.073000\tNA\tNA\t3.072000\t3.077000\t3.115000\t3.091000\t3.106000\t3.114000\t3.147000\t3.119000\r\nKorean
+        won\tNA\t1,435.400000\t1,464.500000\t1,478.800000\t1,464.300000\t1,474.500000\t1,493.100000\t1,472.800000\t1,467.300000\t1,479.800000\t1,489.500000\r\nKuwaiti
+        dinar\t0.305700\t0.306000\t0.306200\t0.306200\tNA\t0.306350\t0.306150\t0.306150\t0.306500\tNA\t0.307000\r\nMalaysian
+        ringgit\t3.905000\t3.925500\t3.947500\t3.944500\t3.948500\t3.969500\t3.936000\t3.923000\t3.930500\t3.931000\t3.933500\r\nMauritian
+        rupee\t46.694400\t47.291500\t47.581000\t47.558300\t47.586600\t47.704100\t45.995100\t45.993600\tNA\t46.500300\t46.874400\r\nMexican
+        peso\t17.348500\t17.722800\t17.544500\t17.677000\tNA\t17.768700\t17.503700\t17.654300\t17.836800\t17.921800\tNA\r\nNew
+        Zealand dollar(1)\t0.597250\t0.594550\t0.587650\t0.594550\t0.590750\t0.585600\t0.592650\t0.592800\t0.590550\t0.585600\t0.580450\r\nNorwegian
+        krone\t9.566600\t9.692000\tNA\t9.652300\tNA\t9.653400\t9.575600\t9.645100\t9.662700\t9.723800\tNA\r\nOmani
+        rial\t0.384500\t0.384500\t0.384500\t0.384500\tNA\t0.384500\t0.384500\t0.384500\t0.384500\tNA\t0.384500\r\nPeruvian
+        sol\t3.350000\t3.359000\t3.403000\t3.405000\t3.424000\t3.467000\t3.482000\t3.434000\t3.419000\t3.440000\t3.446000\r\nPhilippine
+        peso\t57.639000\t58.093000\tNA\t58.599000\tNA\t58.907000\t59.552000\t59.139000\t58.913000\t59.531000\tNA\r\nPolish
+        zloty\t3.605600\t3.682000\t3.677000\t3.677100\t3.696200\t3.707500\t3.652300\t3.687000\t3.687800\t3.727700\t3.728700\r\nQatari
+        riyal\t3.640000\t3.640000\t3.640000\t3.640000\tNA\t3.640000\t3.640000\t3.640000\t3.640000\tNA\t3.640000\r\nSaudi
+        Arabian riyal\t3.750000\t3.750000\t3.750000\t3.750000\tNA\t3.750000\t3.750000\t3.750000\t3.750000\tNA\t3.750000\r\nSingapore
+        dollar\t1.267400\t1.272600\t1.277400\t1.276800\t1.277700\t1.283300\t1.276100\t1.271300\t1.276200\t1.278900\t1.281200\r\nSwedish
+        krona\t9.153700\t9.242200\t9.166880\t9.199950\tNA\t9.255300\t9.110900\t9.199810\t9.275830\t9.371300\t9.382300\r\nSwiss
+        franc\t0.774800\t0.786500\t0.780800\t0.780300\tNA\t0.779100\t0.776000\t0.778700\t0.781100\t0.787200\t0.787600\r\nThai
+        baht\t31.309000\tNA\t31.663000\t31.605000\t31.756000\t32.104000\t31.721000\t31.575000\t31.873000\t32.233000\t32.473000\r\nTrinidadian
+        dollar\t6.716300\t6.703700\t6.726000\t6.731300\tNA\t6.748900\t6.745100\t6.767500\t6.737500\tNA\t6.740200\r\nU.A.E.
+        dirham\t3.672500\t3.672500\t3.672500\t3.672500\tNA\t3.672500\t3.672500\t3.672500\t3.672500\tNA\t3.672500\r\nUruguayan
+        peso\t38.740000\t39.232000\t39.330000\t39.990000\tNA\t40.209000\t39.967000\t40.158000\t40.372000\t40.640000\t40.477000\r\n\r\nRepresentative
+        Exchange Rates for Selected Currencies for March 2026 Continued\r\n\r\nCurrency\tMarch
+        17, 2026\tMarch 18, 2026\tMarch 19, 2026\tMarch 20, 2026\r\nChinese yuan\t6.888300\t6.875600\t6.901900\t6.883000\r\nEuro(1)\t1.153100\t1.150000\t1.148900\t1.155500\r\nJapanese
+        yen\t159.330000\t159.120000\t159.800000\tNA\r\nU.K. pound(1)\t1.331700\t1.336050\t1.329200\t1.339550\r\nU.S.
+        dollar\t1.000000\t1.000000\t1.000000\t1.000000\r\nAlgerian dinar\t132.154100\t132.007600\t132.335900\tNA\r\nAustralian
+        dollar(1)\t0.707400\t0.711500\t0.703800\t0.708800\r\nBotswana pula(1)\t0.075400\t0.075900\t0.074800\t0.075400\r\nBrazilian
+        real\t5.201600\t5.210600\t5.258100\t5.279300\r\nBrunei dollar\t1.279000\t1.276500\t1.282600\t1.279700\r\nCanadian
+        dollar\t1.369900\t1.370600\t1.372800\t1.371800\r\nChilean peso\t909.110000\t906.150000\t912.410000\t920.520000\r\nCzech
+        koruna\t21.186000\t21.278000\t21.324000\t21.204000\r\nDanish krone\t6.479800\tNA\t6.503300\t6.465800\r\nIndian
+        rupee\t92.457000\t92.451400\tNA\t93.348300\r\nIsraeli New Shekel\t3.110000\t3.096000\t3.119000\t3.109000\r\nKorean
+        won\t1,496.000000\t1,491.600000\t1,486.000000\t1,499.700000\r\nKuwaiti dinar\tNA\t0.306600\tNA\tNA\r\nMalaysian
+        ringgit\t3.922500\t3.911000\t3.938500\tNA\r\nMauritian rupee\t46.733600\t46.668500\tNA\t46.529900\r\nMexican
+        peso\t17.692200\tNA\t17.811700\t17.899800\r\nNew Zealand dollar(1)\t0.584600\t0.586250\t0.581750\t0.588150\r\nNorwegian
+        krone\t9.602800\tNA\t9.570900\t9.544800\r\nOmani rial\tNA\tNA\tNA\tNA\r\nPeruvian
+        sol\t3.425000\t3.408000\t3.425000\t3.447000\r\nPhilippine peso\t59.871000\tNA\t59.562000\tNA\r\nPolish
+        zloty\t3.704600\t3.693000\t3.727000\t3.703200\r\nQatari riyal\t3.640000\t3.640000\t3.640000\tNA\r\nSaudi
+        Arabian riyal\t3.750000\tNA\tNA\tNA\r\nSingapore dollar\t1.279000\t1.276500\t1.282600\t1.279700\r\nSwedish
+        krona\t9.284100\tNA\t9.405950\t9.331460\r\nSwiss franc\t0.787300\t0.785700\t0.794800\t0.787100\r\nThai
+        baht\t32.434000\t32.316000\t32.784000\t32.670000\r\nTrinidadian dollar\t6.730800\t6.743800\t6.753000\tNA\r\nU.A.E.
+        dirham\t3.672500\t3.672500\t3.672500\tNA\r\nUruguayan peso\t40.492000\t40.562000\t40.731000\t40.735000\r\n\r\nNotes:\r\n\r\n\r\nThese
+        representative exchange rates, which are reported to the Fund by the issuing
+        central bank, are expressed in terms of currency units per U.S. dollar, except
+        for those indicated by\r\n\r\n(1) which are in terms of U.S. dollars per currency
+        unit, and those indicated by"
+  recorded_at: Mon, 23 Mar 2026 00:19:41 GMT
+recorded_with: VCR 6.4.0
