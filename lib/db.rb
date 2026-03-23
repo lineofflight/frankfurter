@@ -15,3 +15,6 @@ end
 DB = Sequel.connect(url)
 DB.run("PRAGMA journal_mode=WAL")
 DB.run("PRAGMA busy_timeout=5000")
+DB.run("PRAGMA synchronous=NORMAL")
+DB.run("PRAGMA mmap_size=134217728")
+DB.run("PRAGMA journal_size_limit=27103364")
