@@ -75,6 +75,6 @@
     "key": "BCRA",
     "name": "Central Bank of Argentina",
     "description": "Daily official exchange rates for 30+ currencies against the Argentine peso.",
-    "url": "https://www.bcra.gob.ar/PublicacionesEstadisticas/Cotizaciones_702.asp"
+    "url": "https://www.bcra.gob.ar/PublicacionesEstadisticas/Tipos_de_cambios.asp"
   }
 ]
