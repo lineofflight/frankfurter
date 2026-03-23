@@ -4,4 +4,3 @@ pkg
 *.sqlite3
 .claude
 docs/plans
-.worktrees
