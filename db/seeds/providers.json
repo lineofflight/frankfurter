@@ -84,6 +84,12 @@
     "url": "https://www.centralbank.go.ke/forex/"
   },
   {
+    "key": "BOJ",
+    "name": "Bank of Jamaica",
+    "description": "Daily counter rates for 20 currencies against the Jamaican dollar.",
+    "url": "https://boj.org.jm/market/foreign-exchange/counter-rates/"
+  },
+  {
     "key": "IMF",
     "name": "International Monetary Fund",
     "description": "Daily representative exchange rates for 50+ currencies against the US dollar.",

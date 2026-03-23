@@ -16,5 +16,6 @@ task backfill: [
   "rba:backfill",
   "bcra:backfill",
   "cbk:backfill",
+  "boj:backfill",
   "imf:backfill",
 ]
