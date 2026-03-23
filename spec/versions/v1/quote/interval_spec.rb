@@ -8,7 +8,7 @@ module Versions
     module Quote
       describe Interval do
         let(:dates) do
-          (Date.parse("2010-01-01")..Date.parse("2010-12-31"))
+          (Fixtures.latest_date - 365)..Fixtures.latest_date
         end
 
         let(:quote) do

@@ -10,7 +10,9 @@ module Versions
     end
 
     it "raises on conflicting date params" do
-      _ { V2::Query.new(date: "2024-01-15", from: "2024-01-01") }.must_raise(V2::Query::ValidationError)
+      date = Fixtures.latest_date.to_s
+
+      _ { V2::Query.new(date:, from: (Fixtures.latest_date - 30).to_s) }.must_raise(V2::Query::ValidationError)
     end
 
     it "raises on invalid group" do
@@ -18,7 +20,9 @@ module Versions
     end
 
     it "accepts valid group" do
-      query = V2::Query.new(from: "2024-01-01", to: "2024-03-31", group: "month")
+      range_start = (Fixtures.latest_date - 90).to_s
+      range_end = Fixtures.latest_date.to_s
+      query = V2::Query.new(from: range_start, to: range_end, group: "month")
 
       _(query.to_a).wont_be_empty
     end
@@ -51,9 +55,11 @@ module Versions
     end
 
     it "snaps to nearest business day" do
-      query = V2::Query.new(date: "2024-01-14") # Sunday
+      sunday = Fixtures.recent_sunday
+      friday = Fixtures.preceding_friday(sunday)
+      query = V2::Query.new(date: sunday.to_s)
 
-      _(query.to_a.first[:date]).must_equal("2024-01-12") # Friday
+      _(query.to_a.first[:date]).must_equal(friday.to_s)
     end
   end
 end

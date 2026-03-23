@@ -28,12 +28,12 @@ lib/
 ├── scheduler/daemon.rb       # Background data updates
 └── tasks/
     ├── db.rake               # Database migrations and setup
-    ├── ecb.rake              # ECB import/backfill/seed tasks
+    ├── ecb.rake              # ECB import/backfill tasks
     └── boc.rake              # BOC import/backfill tasks
 
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
-db/seeds/                     # Offline seed data
+db/seeds/                     # Provider metadata
 ```
 
 ## Key Components
@@ -104,7 +104,6 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 
 ```bash
 rake ecb:backfill  # Backfill ECB rates (incremental from last stored date)
-rake ecb:seed      # Seed database from saved ECB data
 rake boc:backfill  # Backfill BOC rates (incremental from last stored date)
 rake backfill      # Backfill all providers
 rake db:prepare    # Run migrations and backfill all providers

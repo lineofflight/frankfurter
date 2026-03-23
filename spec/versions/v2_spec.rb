@@ -17,6 +17,11 @@ describe Versions::V2 do
 
   let(:app) { Versions::V2.freeze }
   let(:json) { Oj.load(last_response.body) }
+  let(:historical_date) { Fixtures.business_day(30).to_s }
+  let(:range_start) { Fixtures.business_day(60).to_s }
+  let(:range_end) { Fixtures.business_day(30).to_s }
+  let(:year_start) { (Fixtures.latest_date - 365).to_s }
+  let(:year_end) { Fixtures.latest_date.to_s }
 
   it "returns latest rates" do
     get "/rates"
@@ -27,22 +32,24 @@ describe Versions::V2 do
   end
 
   it "returns rates for a specific date" do
-    get "/rates?date=2024-01-15"
+    get "/rates?date=#{historical_date}"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)
-    _(json.first["date"]).must_equal("2024-01-15")
+    _(json.first["date"]).must_equal(historical_date)
   end
 
   it "snaps to nearest business day for weekends" do
-    get "/rates?date=2024-01-14" # Sunday
+    sunday = Fixtures.recent_sunday
+    friday = Fixtures.preceding_friday(sunday)
+    get "/rates?date=#{sunday}"
 
     _(last_response).must_be(:ok?)
-    _(json.first["date"]).must_equal("2024-01-12") # Friday
+    _(json.first["date"]).must_equal(friday.to_s)
   end
 
   it "returns rates for a date range" do
-    get "/rates?from=2024-01-01&to=2024-01-31"
+    get "/rates?from=#{range_start}&to=#{range_end}"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)
@@ -90,38 +97,38 @@ describe Versions::V2 do
   end
 
   it "filters by multiple providers" do
-    get "/rates?providers=ecb,tcmb"
+    get "/rates?providers=ecb,boc"
 
     _(last_response).must_be(:ok?)
     assert_conform_schema(200)
   end
 
   it "downsamples by week" do
-    get "/rates?from=2024-01-01&to=2024-12-31&group=week"
+    get "/rates?from=#{year_start}&to=#{year_end}&group=week"
 
     _(last_response).must_be(:ok?)
     dates = json.map { |r| r["date"] }.uniq
 
-    _(dates.length).must_be(:<, 54)
+    _(dates.length).must_be(:<=, 55)
   end
 
   it "downsamples by month" do
-    get "/rates?from=2024-01-01&to=2024-12-31&group=month"
+    get "/rates?from=#{year_start}&to=#{year_end}&group=month"
 
     _(last_response).must_be(:ok?)
     dates = json.map { |r| r["date"] }.uniq
 
-    _(dates.length).must_be(:<=, 12)
+    _(dates.length).must_be(:<=, 13)
   end
 
   it "returns 422 for invalid group" do
-    get "/rates?from=2024-01-01&to=2024-12-31&group=day"
+    get "/rates?from=#{range_start}&to=#{range_end}&group=day"
 
     _(last_response.status).must_equal(422)
   end
 
   it "returns 422 for conflicting params" do
-    get "/rates?date=2024-01-15&from=2024-01-01"
+    get "/rates?date=#{historical_date}&from=#{range_start}"
 
     _(last_response.status).must_equal(422)
   end

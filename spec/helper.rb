@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../boot"
+require_relative "fixtures"
 
 require "minitest/autorun"
 require "minitest/mock"

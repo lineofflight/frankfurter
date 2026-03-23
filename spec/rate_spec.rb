@@ -6,51 +6,46 @@ require "rate"
 describe Rate do
   describe ".latest" do
     it "returns latest available rates on given date" do
-      date = Date.parse("2010-01-04")
+      date = Fixtures.latest_date
       data = Rate.latest(date)
 
       _(data.to_a.sample.date).must_equal(date)
     end
 
     it "snaps to nearest prior date when requested date has no rates" do
-      data = Rate.where(provider: "ECB").latest(Date.parse("2010-01-02"))
+      sunday = Fixtures.recent_sunday
+      friday = Fixtures.preceding_friday(sunday)
+      data = Rate.where(provider: "ECB").latest(sunday)
 
-      _(data.map(&:date).uniq).must_equal([Date.parse("2009-12-31")])
+      _(data.map(&:date).uniq).must_equal([friday])
     end
 
     it "includes each provider's most recent date" do
-      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
-      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
-      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "CAD", quote: "XTS", rate: 1.35, provider: "BOC")
-      Rate.dataset.insert(date: Date.parse("2024-01-13"), base: "CAD", quote: "XTS", rate: 1.34, provider: "BOC")
-
-      data = Rate.latest(Date.parse("2024-01-15"))
+      data = Rate.latest(Fixtures.latest_date)
       providers = data.map(&:provider).uniq.sort
 
       _(providers).must_include("ECB")
       _(providers).must_include("BOC")
     end
 
-    it "excludes providers more than 14 days behind the requested date" do
-      Rate.dataset.insert(date: Date.parse("2023-12-31"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
-      Rate.dataset.insert(date: Date.parse("2023-12-30"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
-      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
-      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+    it "excludes providers more than 14 days behind the global max" do
+      date = Fixtures.latest_date
+      Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: date - 21, base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
 
-      data = Rate.latest(Date.parse("2024-01-15"))
+      data = Rate.latest(date)
       providers = data.map(&:provider).uniq
 
       _(providers).must_include("ECB")
       _(providers).wont_include("STALE")
     end
 
-    it "includes providers within 14 days of the requested date" do
-      Rate.dataset.insert(date: Date.parse("2024-01-05"), base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
-      Rate.dataset.insert(date: Date.parse("2023-12-29"), base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
-      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
-      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+    it "includes providers within 14 days of the global max" do
+      date = Fixtures.latest_date
+      Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
+      Rate.dataset.insert(date: date - 17, base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
 
-      data = Rate.latest(Date.parse("2024-01-15"))
+      data = Rate.latest(date)
       providers = data.map(&:provider).uniq
 
       _(providers).must_include("ECB")
@@ -72,20 +67,21 @@ describe Rate do
 
   describe ".between" do
     it "returns rates between given working dates" do
-      start_date = Date.parse("2010-01-04")
-      end_date = Date.parse("2010-01-29")
+      start_date = Fixtures.latest_date - 30
+      end_date = Fixtures.latest_date
       dates = Rate.between(start_date..end_date).map(:date).sort.uniq
 
-      _(dates.first).must_equal(start_date)
+      _(dates.first).must_be(:<=, start_date)
       _(dates.last).must_equal(end_date)
     end
 
-    it "starts on preceding business day if start date is a holiday" do
-      start_date = Date.parse("2024-11-03")
-      end_date = Date.parse("2024-11-04")
-      dates = Rate.between(start_date..end_date).map(:date).uniq
+    it "starts on preceding business day if start date is a weekend" do
+      sunday = Fixtures.recent_sunday
+      monday = sunday + 1
+      friday = Fixtures.preceding_friday(sunday)
+      dates = Rate.between(sunday..monday).map(:date).uniq
 
-      _(dates).must_include(Date.parse("2024-11-01"))
+      _(dates).must_include(friday)
     end
 
     it "returns nothing if end date predates dataset" do
@@ -96,7 +92,7 @@ describe Rate do
 
     it "allows start date to predate dataset" do
       start_date = Date.parse("1901-01-01")
-      end_date = Date.parse("2024-01-01")
+      end_date = Fixtures.latest_date
       dates = Rate.between(start_date..end_date).map(:date)
 
       _(dates).wont_be_empty
@@ -114,7 +110,7 @@ describe Rate do
   describe ".only" do
     it "filters symbols" do
       iso_codes = ["CAD", "USD"]
-      data = Rate.where(provider: "ECB").latest.only(*iso_codes).all
+      data = Rate.where(provider: "ECB").latest(Fixtures.latest_date).only(*iso_codes).all
 
       _(data.map(&:quote).sort).must_equal(iso_codes)
     end
@@ -125,13 +121,12 @@ describe Rate do
   end
 
   describe ".downsample" do
-    let(:day) { Date.parse("2010-01-01") }
-    let(:interval) { day..day + 366 }
+    let(:interval) { (Fixtures.latest_date - 366)..Fixtures.latest_date }
 
     it "groups by week" do
       dates = Rate.between(interval).downsample("week")
 
-      _(dates.map(:date).uniq.count).must_be(:<, 54)
+      _(dates.map(:date).uniq.count).must_be(:<=, 55)
     end
 
     it "groups by month" do

@@ -43,7 +43,7 @@ describe App do
   end
 
   it "allows cross-origin requests" do
-    ["/v1/", "/v1/latest", "/v1/2012-11-20"].each do |path|
+    ["/v1/", "/v1/latest", "/v1/#{Fixtures.latest_date - 30}"].each do |path|
       header "Origin", "*"
       get path
 
@@ -52,7 +52,7 @@ describe App do
   end
 
   it "responds to preflight requests" do
-    ["/v1/", "/v1/latest", "/v1/2012-11-20"].each do |path|
+    ["/v1/", "/v1/latest", "/v1/#{Fixtures.latest_date - 30}"].each do |path|
       header "Origin", "*"
       header "Access-Control-Request-Method", "GET"
       header "Access-Control-Request-Headers", "Content-Type"

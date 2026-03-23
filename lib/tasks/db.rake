@@ -25,12 +25,12 @@ namespace :db do
   task prepare: ["db:migrate", "db:seed", "backfill"]
 
   namespace :test do
-    desc "Run database migrations and seed with saved data"
+    desc "Run database migrations and seed with fixture data"
     task :prepare do
       Rake::Task["db:migrate"].invoke
       Rake::Task["db:seed"].invoke
-      Rake::Task["ecb:seed"].invoke
-      Rake::Task["boc:seed"].invoke
+      require_relative "../../spec/fixtures"
+      Fixtures.seed!
     end
   end
 end

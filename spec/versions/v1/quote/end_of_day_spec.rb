@@ -8,7 +8,7 @@ module Versions
     module Quote
       describe EndOfDay do
         let(:date) do
-          Date.parse("2010-10-10")
+          Fixtures.business_day(30)
         end
 
         let(:quote) do

@@ -10,6 +10,9 @@ describe Versions::V1 do
   let(:app) { Versions::V1.freeze }
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
+  let(:historical_date) { Fixtures.business_day(30).to_s }
+  let(:range_start) { (Fixtures.latest_date - 365).to_s }
+  let(:range_end) { Fixtures.latest_date.to_s }
 
   it "returns latest quotes" do
     get "/latest"
@@ -38,14 +41,15 @@ describe Versions::V1 do
   end
 
   it "returns historical quotes" do
-    get "/2012-11-20"
+    get "/#{historical_date}"
 
     _(json["rates"]).wont_be(:empty?)
-    _(json["date"]).must_equal("2012-11-20")
+    _(json["date"]).must_equal(historical_date)
   end
 
   it "works around holidays" do
-    get "/2010-01-01"
+    sunday = Fixtures.recent_sunday.to_s
+    get "/#{sunday}"
 
     _(json["rates"]).wont_be(:empty?)
   end
@@ -58,7 +62,7 @@ describe Versions::V1 do
   end
 
   it "returns an ETag" do
-    ["/latest", "/2012-11-20"].each do |path|
+    ["/latest", "/#{historical_date}"].each do |path|
       get path
 
       _(headers["ETag"]).wont_be_nil
@@ -66,7 +70,7 @@ describe Versions::V1 do
   end
 
   it "returns a cache control header" do
-    ["/latest", "/2012-11-20"].each do |path|
+    ["/latest", "/#{historical_date}"].each do |path|
       get path
 
       _(headers["Cache-Control"]).wont_be_nil
@@ -80,7 +84,7 @@ describe Versions::V1 do
   end
 
   it "returns rates for a given period" do
-    get "/2010-01-01..2010-12-31"
+    get "/#{range_start}..#{range_end}"
 
     _(json["start_date"]).wont_be(:empty?)
     _(json["end_date"]).wont_be(:empty?)
@@ -88,7 +92,7 @@ describe Versions::V1 do
   end
 
   it "returns rates when given period does not include end date" do
-    get "/2010-01-01.."
+    get "/#{range_start}.."
 
     _(json["start_date"]).wont_be(:empty?)
     _(json["end_date"]).wont_be(:empty?)
