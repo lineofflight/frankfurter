@@ -17,6 +17,8 @@ require "providers/fred"
 require "providers/bnm"
 require "providers/rba"
 require "providers/bcra"
+require "providers/cbk"
+require "providers/imf"
 require "versions/v2/query"
 
 module Versions
