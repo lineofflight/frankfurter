@@ -8,11 +8,11 @@ class Rate < Sequel::Model(:rates)
       where(provider: "ECB")
     end
 
-    # Per-provider latest with a 7-day staleness window.
+    # Per-provider latest with a 14-day staleness window.
     #
     # Each provider contributes its own most recent snapshot. A provider is included only if its latest date is
-    # within 7 days of the global max. This accommodates weekends and holidays (Christmas week is the longest gap
-    # at ~4-5 days) while still filtering out truly stale providers.
+    # within 14 days of the global max. This accommodates weekends, holidays, and weekly publishers like FRED
+    # (whose worst case is ~13 days: holiday-shortened week plus weekend before next Monday release).
     def latest(date = Date.today)
       date = Date.today if date > Date.today
 
@@ -29,7 +29,7 @@ class Rate < Sequel::Model(:rates)
         )
         SELECT provider, max_date
         FROM provider_max
-        WHERE julianday((SELECT MAX(max_date) FROM provider_max)) - julianday(max_date) <= 7
+        WHERE julianday((SELECT MAX(max_date) FROM provider_max)) - julianday(max_date) <= 14
       SQL
 
       return where(false) if eligible.empty?

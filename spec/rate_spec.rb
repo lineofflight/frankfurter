@@ -31,9 +31,9 @@ describe Rate do
       _(providers).must_include("BOC")
     end
 
-    it "excludes providers more than 7 days behind the global max" do
-      Rate.dataset.insert(date: Date.parse("2024-01-07"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
-      Rate.dataset.insert(date: Date.parse("2024-01-06"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
+    it "excludes providers more than 14 days behind the requested date" do
+      Rate.dataset.insert(date: Date.parse("2023-12-31"), base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: Date.parse("2023-12-30"), base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
       Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
       Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
 
@@ -44,13 +44,13 @@ describe Rate do
       _(providers).wont_include("STALE")
     end
 
-    it "includes providers within 7 days of the global max" do
-      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
-      Rate.dataset.insert(date: Date.parse("2024-01-08"), base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
-      Rate.dataset.insert(date: Date.parse("2024-01-19"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
-      Rate.dataset.insert(date: Date.parse("2024-01-18"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
+    it "includes providers within 14 days of the requested date" do
+      Rate.dataset.insert(date: Date.parse("2024-01-05"), base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
+      Rate.dataset.insert(date: Date.parse("2023-12-29"), base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
+      Rate.dataset.insert(date: Date.parse("2024-01-15"), base: "EUR", quote: "XTS", rate: 1.09, provider: "ECB")
+      Rate.dataset.insert(date: Date.parse("2024-01-14"), base: "EUR", quote: "XTS", rate: 1.08, provider: "ECB")
 
-      data = Rate.latest(Date.parse("2024-01-19"))
+      data = Rate.latest(Date.parse("2024-01-15"))
       providers = data.map(&:provider).uniq
 
       _(providers).must_include("ECB")
