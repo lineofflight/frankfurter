@@ -22,6 +22,7 @@ require "providers/boj"
 require "providers/imf"
 require "providers/nbrm"
 require "providers/bceao"
+require "providers/boi"
 require "versions/v2/query"
 
 module Versions
