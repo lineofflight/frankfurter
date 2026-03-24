@@ -23,6 +23,8 @@ require "providers/imf"
 require "providers/nbrm"
 require "providers/bceao"
 require "providers/boi"
+require "providers/nbpb"
+require "providers/banguat"
 require "versions/v2/query"
 
 module Versions

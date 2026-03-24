@@ -131,5 +131,19 @@
     "description": "Daily representative exchange rates for 14 currencies against the Israeli new shekel.",
     "data_url": "https://www.boi.org.il/en/economic-roles/statistics/foreign-exchange-market/exchange-rates/",
     "terms_url": "https://www.boi.org.il/en/terms-of-use"
+  },
+  {
+    "key": "NBP.B",
+    "name": "National Bank of Poland",
+    "description": "Weekly mid-market rates (Table B) for 116 currencies against the Polish zloty.",
+    "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
+    "terms_url": null
+  },
+  {
+    "key": "BANGUAT",
+    "name": "Banco de Guatemala",
+    "description": "Daily reference exchange rate for the Guatemalan quetzal against the US dollar.",
+    "data_url": "https://www.banguat.gob.gt/tipo_cambio/",
+    "terms_url": null
   }
 ]

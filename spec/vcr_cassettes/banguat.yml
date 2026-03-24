@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <TipoCambioRango xmlns="http://www.banguat.gob.gt/variables/ws/">
+              <fechainit>01/03/2026</fechainit>
+              <fechafin>20/03/2026</fechafin>
+            </TipoCambioRango>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.banguat.gob.gt
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache,no.cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0,s-maxage=0
+      Pragma:
+      - no-cache,no-cache
+      Content-Type:
+      - text/xml; charset=utf-8
+      Expires:
+      - "-1"
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 2.0.50727
+      Referrer-Policy:
+      - strict-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Xss-Protection:
+      - 1;mode=block
+      Permissions-Policy:
+      - fullscreen=0
+      Date:
+      - Tue, 24 Mar 2026 17:21:46 GMT
+      Content-Length:
+      - '2428'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><TipoCambioRangoResponse
+        xmlns="http://www.banguat.gob.gt/variables/ws/"><TipoCambioRangoResult><Vars><Var><moneda>2</moneda><fecha>01/03/2026</fecha><venta>7.66476</venta><compra>7.66476</compra></Var><Var><moneda>2</moneda><fecha>02/03/2026</fecha><venta>7.66143</venta><compra>7.66143</compra></Var><Var><moneda>2</moneda><fecha>03/03/2026</fecha><venta>7.6658</venta><compra>7.6658</compra></Var><Var><moneda>2</moneda><fecha>04/03/2026</fecha><venta>7.66344</venta><compra>7.66344</compra></Var><Var><moneda>2</moneda><fecha>05/03/2026</fecha><venta>7.66314</venta><compra>7.66314</compra></Var><Var><moneda>2</moneda><fecha>06/03/2026</fecha><venta>7.66271</venta><compra>7.66271</compra></Var><Var><moneda>2</moneda><fecha>07/03/2026</fecha><venta>7.66271</venta><compra>7.66271</compra></Var><Var><moneda>2</moneda><fecha>08/03/2026</fecha><venta>7.66271</venta><compra>7.66271</compra></Var><Var><moneda>2</moneda><fecha>09/03/2026</fecha><venta>7.65904</venta><compra>7.65904</compra></Var><Var><moneda>2</moneda><fecha>10/03/2026</fecha><venta>7.65857</venta><compra>7.65857</compra></Var><Var><moneda>2</moneda><fecha>11/03/2026</fecha><venta>7.66069</venta><compra>7.66069</compra></Var><Var><moneda>2</moneda><fecha>12/03/2026</fecha><venta>7.6605</venta><compra>7.6605</compra></Var><Var><moneda>2</moneda><fecha>13/03/2026</fecha><venta>7.65814</venta><compra>7.65814</compra></Var><Var><moneda>2</moneda><fecha>14/03/2026</fecha><venta>7.65814</venta><compra>7.65814</compra></Var><Var><moneda>2</moneda><fecha>15/03/2026</fecha><venta>7.65814</venta><compra>7.65814</compra></Var><Var><moneda>2</moneda><fecha>16/03/2026</fecha><venta>7.65284</venta><compra>7.65284</compra></Var><Var><moneda>2</moneda><fecha>17/03/2026</fecha><venta>7.65213</venta><compra>7.65213</compra></Var><Var><moneda>2</moneda><fecha>18/03/2026</fecha><venta>7.65267</venta><compra>7.65267</compra></Var><Var><moneda>2</moneda><fecha>19/03/2026</fecha><venta>7.65445</venta><compra>7.65445</compra></Var><Var><moneda>2</moneda><fecha>20/03/2026</fecha><venta>7.65366</venta><compra>7.65366</compra></Var></Vars><TotalItems>20</TotalItems></TipoCambioRangoResult></TipoCambioRangoResponse></soap:Body></soap:Envelope>
+  recorded_at: Tue, 24 Mar 2026 17:21:46 GMT
+recorded_with: VCR 6.4.0
