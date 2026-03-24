@@ -101,7 +101,7 @@
                   "items": { "$ref": "#/components/schemas/Provider" }
                 },
                 "example": [
-                  { "key": "ECB", "name": "European Central Bank", "description": "Daily reference rates for 30+ currencies against the euro.", "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
+                  { "key": "ECB", "name": "European Central Bank", "description": "Daily reference rates for 30+ currencies against the euro.", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
                 ]
               }
             }
@@ -231,7 +231,8 @@
           "key": { "type": "string", "description": "Provider identifier" },
           "name": { "type": "string", "description": "Full provider name" },
           "description": { "type": ["string", "null"], "description": "Brief description of the data source" },
-          "url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
+          "data_url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
+          "terms_url": { "type": ["string", "null"], "format": "uri", "description": "Link to terms of use" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
           "currencies": {
