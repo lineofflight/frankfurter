@@ -6,7 +6,7 @@ require "rufus-scheduler"
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra", "cbk", "boj", "imf", "nbrm", "bceao", "boi", "nbpb", "banguat", "bccr"].each_with_index do |provider, i|
+["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra", "cbk", "boj", "imf", "nbrm", "bceao", "boi", "nbpb", "bccr"].each_with_index do |provider, i|
   scheduler.in("#{i * 2}s") do
     system("bundle exec rake #{provider}:backfill")
   end
@@ -117,11 +117,6 @@ end
 # NBP Table B publishes weekly on Wednesdays around 12:00 CET (11:00-13:00 UTC)
 scheduler.cron("*/30 11,12,13 * * 3", overlap: false) do
   system("bundle exec rake nbpb:backfill")
-end
-
-# Banguat publishes during business hours (Guatemala, UTC-6)
-scheduler.cron("*/30 16,17,18 * * 1-5", overlap: false) do
-  system("bundle exec rake banguat:backfill")
 end
 
 # BCCR publishes during business hours (Costa Rica, UTC-6)

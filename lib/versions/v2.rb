@@ -24,7 +24,6 @@ require "providers/nbrm"
 require "providers/bceao"
 require "providers/boi"
 require "providers/nbpb"
-require "providers/banguat"
 require "providers/bccr"
 require "versions/v2/query"
 
