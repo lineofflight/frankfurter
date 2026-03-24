@@ -145,5 +145,12 @@
     "description": "Daily reference exchange rate for the Guatemalan quetzal against the US dollar.",
     "data_url": "https://www.banguat.gob.gt/tipo_cambio/",
     "terms_url": null
+  },
+  {
+    "key": "BCCR",
+    "name": "Banco Central de Costa Rica",
+    "description": "Daily reference exchange rate for the US dollar against the Costa Rican colon.",
+    "data_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/Contenedor/6",
+    "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso"
   }
 ]
