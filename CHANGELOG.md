@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Frankfurter will be documented in this file.
+All notable changes to the Frankfurter API will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -9,18 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added v2 API with multi-provider blended exchange rates
-- Added Bank of Canada (BOC) as data provider (CAD base, 2017 onwards)
-- Added Federal Reserve (FRED) as data provider (USD base, daily H.10 rates)
-- Added Central Bank of Turkey (TCMB) as data provider (TRY base)
-- Added healthcheck in Dockerfile
-
-### Changed
-
-- Replaced current/historical provider split with incremental `fetch(since:)`/`backfill` contract
-- Switched ECB from XML to SDMX CSV endpoint (gains range queries and discontinued series)
-- Scheduler now uses `backfill` for both startup and cron — self-heals gaps automatically
-- Return latest rates for future dates
+- v2 API at `/v2/` endpoints with multi-provider blended exchange rates
+- 18 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, FRED, BNM, RBA, BCRA, CBK, BOJ, IMF, NBRM
+- 117 currencies (up from ~30 in v1)
+- `/v2/providers` endpoint listing available data sources with date ranges and currency coverage
+- `/v2/currencies` endpoint with provider coverage per currency
+- `providers` parameter to scope rates to specific sources
+- `group` parameter to downsample time series (`week` or `month`)
+- Strict parameter validation — unknown parameters return 422
 
 ### Fixed
 
@@ -29,6 +25,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Removed JSONP
+
+### Migrating from v1
+
+The v1 API will remain available at `/v1/` endpoints. To migrate to `/v2`:
+
+- Change your base URL from `/v1/latest` to `/v2/rates`.
+- Update response parsing: rates are now an array of `{"date", "base", "quote", "rate"}` objects instead of `{"base", "date", "rates": {"USD": 1.23}}`.
+- The `symbols` parameter is renamed to `quotes`.
+- The `from` and `to` parameters are now used for date ranges in v2.
 
 ## [1.0.0] - 2024-12-04
 
