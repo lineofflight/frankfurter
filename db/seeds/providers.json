@@ -120,7 +120,7 @@
   },
   {
     "key": "BCEAO",
-    "name": "BCEAO",
+    "name": "Banque Centrale des Etats de l'Afrique de l'Ouest",
     "description": "Daily reference rates for 27 currencies against the West African CFA franc.",
     "data_url": "https://www.bceao.int/fr/cours/cours-de-reference-des-principales-devises-contre-Franc-CFA",
     "terms_url": "https://www.bceao.int/fr/mentions-legales"
