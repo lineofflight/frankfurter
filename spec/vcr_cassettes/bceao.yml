@@ -1,0 +1,423 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bceao.int/fr/cours/get_all_reference_by_date?dateJour=2026-03-16
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bceao.int
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Mon, 16 Mar 2026 12:00:00 GMT
+    body:
+      encoding: UTF-8
+      string: "<h2>Cours des devises du lundi 16 mars 2026</h2>\n        \n            <table>\n
+        \               <tbody>\n                <tr>\n                    <th>Devise</th>\n
+        \                   <th>CFA</th>\n                </tr>\n                                    <tr>\n
+        \                       <td>Euro</td>\n                        <td>655,9570</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Dollar
+        us</td>\n                        <td>605,5200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yen
+        japonais</td>\n                        <td>4,0781</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        danoise</td>\n                        <td>87,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        su\\xC3\\xA9doise</td>\n                        <td>59,4700</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Livre
+        sterling</td>\n                        <td>783,7900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        norv\\xC3\\xA9gienne</td>\n                        <td>57,0300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        th\\xC3\\xA8que</td>\n                        <td>26,2200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Forint
+        hongrois</td>\n                        <td>1,6400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Zloty
+        polonais</td>\n                        <td>156,1700</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Franc
+        suisse</td>\n                        <td>685,8600</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        canadien</td>\n                        <td>420,7000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        australien</td>\n                        <td>380,4400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        n\\xC3\\xA9o-z\\xC3\\xA9landais</td>\n                        <td>347,1400</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Rand
+        sud-africain</td>\n                        <td>33,2870</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yuan
+        chinois</td>\n                        <td>83,5800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Roupie
+        Indienne</td>\n                        <td>7,0100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Baht
+        thailandais</td>\n                        <td>17,9100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Real
+        br\\xC3\\xA9silien</td>\n                        <td>107,0600</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        singapourien</td>\n                        <td>453,1300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouvelle
+        livre turque</td>\n                        <td>15,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dirham
+        Emirats Arabes Unis</td>\n                        <td>163,8200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouveau
+        Shekel</td>\n                        <td>164,7000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Won
+        Cor\\xC3\\xA9en</td>\n                        <td>0,4100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        Hong Kong</td>\n                        <td>77,9100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Ryal
+        Saudien</td>\n                        <td>160,4300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dinar
+        Koweitien</td>\n                        <td>1.953,0200</td>\n                    </tr>\n
+        \                                   </tbody>\n            </table>\n            "
+  recorded_at: Mon, 16 Mar 2026 12:00:00 GMT
+- request:
+    method: get
+    uri: https://www.bceao.int/fr/cours/get_all_reference_by_date?dateJour=2026-03-17
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bceao.int
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Tue, 17 Mar 2026 12:00:00 GMT
+    body:
+      encoding: UTF-8
+      string: "<h2>Cours des devises du mardi 17 mars 2026</h2>\n        \n            <table>\n
+        \               <tbody>\n                <tr>\n                    <th>Devise</th>\n
+        \                   <th>CFA</th>\n                </tr>\n                                    <tr>\n
+        \                       <td>Euro</td>\n                        <td>655,9570</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Dollar
+        us</td>\n                        <td>607,3100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yen
+        japonais</td>\n                        <td>4,0900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        danoise</td>\n                        <td>87,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        su\\xC3\\xA9doise</td>\n                        <td>59,5100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Livre
+        sterling</td>\n                        <td>785,2300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        norv\\xC3\\xA9gienne</td>\n                        <td>57,1200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        th\\xC3\\xA8que</td>\n                        <td>26,2500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Forint
+        hongrois</td>\n                        <td>1,6450</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Zloty
+        polonais</td>\n                        <td>156,3200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Franc
+        suisse</td>\n                        <td>686,1200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        canadien</td>\n                        <td>421,5000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        australien</td>\n                        <td>381,2200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        n\\xC3\\xA9o-z\\xC3\\xA9landais</td>\n                        <td>347,8800</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Rand
+        sud-africain</td>\n                        <td>33,3500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yuan
+        chinois</td>\n                        <td>83,6200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Roupie
+        Indienne</td>\n                        <td>7,0200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Baht
+        thailandais</td>\n                        <td>17,9500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Real
+        br\\xC3\\xA9silien</td>\n                        <td>107,2500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        singapourien</td>\n                        <td>453,8500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouvelle
+        livre turque</td>\n                        <td>15,9600</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dirham
+        Emirats Arabes Unis</td>\n                        <td>164,1000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouveau
+        Shekel</td>\n                        <td>165,0200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Won
+        Cor\\xC3\\xA9en</td>\n                        <td>0,4120</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        Hong Kong</td>\n                        <td>78,0500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Ryal
+        Saudien</td>\n                        <td>160,7800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dinar
+        Koweitien</td>\n                        <td>1.955,5000</td>\n                    </tr>\n
+        \                                   </tbody>\n            </table>\n            "
+  recorded_at: Tue, 17 Mar 2026 12:00:00 GMT
+- request:
+    method: get
+    uri: https://www.bceao.int/fr/cours/get_all_reference_by_date?dateJour=2026-03-18
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bceao.int
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Wed, 18 Mar 2026 12:00:00 GMT
+    body:
+      encoding: UTF-8
+      string: "<h2>Cours des devises du mercredi 18 mars 2026</h2>\n        \n            <table>\n
+        \               <tbody>\n                <tr>\n                    <th>Devise</th>\n
+        \                   <th>CFA</th>\n                </tr>\n                                    <tr>\n
+        \                       <td>Euro</td>\n                        <td>655,9570</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Dollar
+        us</td>\n                        <td>606,8800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yen
+        japonais</td>\n                        <td>4,0850</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        danoise</td>\n                        <td>87,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        su\\xC3\\xA9doise</td>\n                        <td>59,4900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Livre
+        sterling</td>\n                        <td>784,5100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        norv\\xC3\\xA9gienne</td>\n                        <td>57,0800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        th\\xC3\\xA8que</td>\n                        <td>26,2300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Forint
+        hongrois</td>\n                        <td>1,6420</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Zloty
+        polonais</td>\n                        <td>156,2500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Franc
+        suisse</td>\n                        <td>686,0000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        canadien</td>\n                        <td>421,1000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        australien</td>\n                        <td>380,8300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        n\\xC3\\xA9o-z\\xC3\\xA9landais</td>\n                        <td>347,5100</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Rand
+        sud-africain</td>\n                        <td>33,3200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yuan
+        chinois</td>\n                        <td>83,6000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Roupie
+        Indienne</td>\n                        <td>7,0150</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Baht
+        thailandais</td>\n                        <td>17,9300</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Real
+        br\\xC3\\xA9silien</td>\n                        <td>107,1500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        singapourien</td>\n                        <td>453,5000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouvelle
+        livre turque</td>\n                        <td>15,9500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dirham
+        Emirats Arabes Unis</td>\n                        <td>163,9600</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouveau
+        Shekel</td>\n                        <td>164,8600</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Won
+        Cor\\xC3\\xA9en</td>\n                        <td>0,4110</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        Hong Kong</td>\n                        <td>77,9800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Ryal
+        Saudien</td>\n                        <td>160,6100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dinar
+        Koweitien</td>\n                        <td>1.954,2800</td>\n                    </tr>\n
+        \                                   </tbody>\n            </table>\n            "
+  recorded_at: Wed, 18 Mar 2026 12:00:00 GMT
+- request:
+    method: get
+    uri: https://www.bceao.int/fr/cours/get_all_reference_by_date?dateJour=2026-03-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bceao.int
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 19 Mar 2026 12:00:00 GMT
+    body:
+      encoding: UTF-8
+      string: "<h2>Cours des devises du jeudi 19 mars 2026</h2>\n        \n            <table>\n
+        \               <tbody>\n                <tr>\n                    <th>Devise</th>\n
+        \                   <th>CFA</th>\n                </tr>\n                                    <tr>\n
+        \                       <td>Euro</td>\n                        <td>655,9570</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Dollar
+        us</td>\n                        <td>606,1500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yen
+        japonais</td>\n                        <td>4,0810</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        danoise</td>\n                        <td>87,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        su\\xC3\\xA9doise</td>\n                        <td>59,4800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Livre
+        sterling</td>\n                        <td>784,1000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        norv\\xC3\\xA9gienne</td>\n                        <td>57,0500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        th\\xC3\\xA8que</td>\n                        <td>26,2100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Forint
+        hongrois</td>\n                        <td>1,6410</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Zloty
+        polonais</td>\n                        <td>156,2000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Franc
+        suisse</td>\n                        <td>685,9200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        canadien</td>\n                        <td>420,9000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        australien</td>\n                        <td>380,6500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        n\\xC3\\xA9o-z\\xC3\\xA9landais</td>\n                        <td>347,3200</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Rand
+        sud-africain</td>\n                        <td>33,3000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yuan
+        chinois</td>\n                        <td>83,5900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Roupie
+        Indienne</td>\n                        <td>7,0100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Baht
+        thailandais</td>\n                        <td>17,9200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Real
+        br\\xC3\\xA9silien</td>\n                        <td>107,0800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        singapourien</td>\n                        <td>453,3000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouvelle
+        livre turque</td>\n                        <td>15,9450</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dirham
+        Emirats Arabes Unis</td>\n                        <td>163,8900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouveau
+        Shekel</td>\n                        <td>164,7800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Won
+        Cor\\xC3\\xA9en</td>\n                        <td>0,4105</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        Hong Kong</td>\n                        <td>77,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Ryal
+        Saudien</td>\n                        <td>160,5000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dinar
+        Koweitien</td>\n                        <td>1.953,7500</td>\n                    </tr>\n
+        \                                   </tbody>\n            </table>\n            "
+  recorded_at: Thu, 19 Mar 2026 12:00:00 GMT
+- request:
+    method: get
+    uri: https://www.bceao.int/fr/cours/get_all_reference_by_date?dateJour=2026-03-20
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bceao.int
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Fri, 20 Mar 2026 12:00:00 GMT
+    body:
+      encoding: UTF-8
+      string: "<h2>Cours des devises du vendredi 20 mars 2026</h2>\n        \n            <table>\n
+        \               <tbody>\n                <tr>\n                    <th>Devise</th>\n
+        \                   <th>CFA</th>\n                </tr>\n                                    <tr>\n
+        \                       <td>Euro</td>\n                        <td>655,9570</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Dollar
+        us</td>\n                        <td>605,8900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yen
+        japonais</td>\n                        <td>4,0790</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        danoise</td>\n                        <td>87,9400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        su\\xC3\\xA9doise</td>\n                        <td>59,4750</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Livre
+        sterling</td>\n                        <td>783,9500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        norv\\xC3\\xA9gienne</td>\n                        <td>57,0400</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Couronne
+        th\\xC3\\xA8que</td>\n                        <td>26,2150</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Forint
+        hongrois</td>\n                        <td>1,6405</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Zloty
+        polonais</td>\n                        <td>156,1900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Franc
+        suisse</td>\n                        <td>685,8800</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        canadien</td>\n                        <td>420,8000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        australien</td>\n                        <td>380,5500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        n\\xC3\\xA9o-z\\xC3\\xA9landais</td>\n                        <td>347,2300</td>\n
+        \                   </tr>\n                                        <tr>\n                        <td>Rand
+        sud-africain</td>\n                        <td>33,2900</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Yuan
+        chinois</td>\n                        <td>83,5850</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Roupie
+        Indienne</td>\n                        <td>7,0100</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Baht
+        thailandais</td>\n                        <td>17,9150</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Real
+        br\\xC3\\xA9silien</td>\n                        <td>107,0700</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        singapourien</td>\n                        <td>453,2000</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouvelle
+        livre turque</td>\n                        <td>15,9420</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dirham
+        Emirats Arabes Unis</td>\n                        <td>163,8500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Nouveau
+        Shekel</td>\n                        <td>164,7200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Won
+        Cor\\xC3\\xA9en</td>\n                        <td>0,4102</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dollar
+        Hong Kong</td>\n                        <td>77,9200</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Ryal
+        Saudien</td>\n                        <td>160,4500</td>\n                    </tr>\n
+        \                                       <tr>\n                        <td>Dinar
+        Koweitien</td>\n                        <td>1.953,1500</td>\n                    </tr>\n
+        \                                   </tbody>\n            </table>\n            "
+  recorded_at: Fri, 20 Mar 2026 12:00:00 GMT
+recorded_at: Mon, 23 Mar 2026 12:00:00 GMT

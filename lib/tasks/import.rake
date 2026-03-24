@@ -19,4 +19,5 @@ task backfill: [
   "boj:backfill",
   "imf:backfill",
   "nbrm:backfill",
+  "bceao:backfill",
 ]
