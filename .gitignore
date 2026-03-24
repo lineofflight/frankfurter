@@ -1,6 +1,6 @@
 .bundle
 coverage
 pkg
-*.sqlite3
+*.sqlite3*
 .claude
 docs/plans
