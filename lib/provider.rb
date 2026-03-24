@@ -11,9 +11,8 @@ class Provider < Sequel::Model(:providers)
     def seed
       path = File.expand_path("../db/seeds/providers.json", __dir__)
       data = JSON.parse(File.read(path))
-      data.each do |attrs|
-        dataset.insert_conflict(target: :key, update: attrs).insert(attrs)
-      end
+      dataset.delete
+      dataset.multi_insert(data)
       load_cache
     end
   end

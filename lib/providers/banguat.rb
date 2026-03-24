@@ -8,6 +8,8 @@ require "providers/base"
 module Providers
   # Banco de Guatemala. Publishes daily reference exchange rates for GTQ/USD
   # via a SOAP web service. The rate is GTQ per 1 USD, so base=USD, quote=GTQ.
+  # NOTE: Currently disabled — the SOAP endpoint rejects connections from
+  # certain datacenter IP ranges during TLS handshake.
   class Banguat < Base
     ENDPOINT = URI("https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx")
     EARLIEST_DATE = Date.new(2000, 1, 1)
