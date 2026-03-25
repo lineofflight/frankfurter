@@ -3,6 +3,8 @@
 require_relative "../boot"
 require_relative "fixtures"
 
+Fixtures.seed!
+
 require "minitest/autorun"
 require "minitest/mock"
 require "minitest/around/spec"
