@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-%x(rake db:migrate db:seed)
+%x(bundle exec rake db:migrate db:seed)
 
 worker_process_count = (ENV["WORKER_PROCESSES"] || 4).to_i
 
