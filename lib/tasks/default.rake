@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-task default: ["rubocop", "db:test:prepare", "spec"]
+task default: ["rubocop", "db:migrate", "db:seed", "spec"]
