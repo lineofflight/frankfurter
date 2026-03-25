@@ -14,7 +14,7 @@ describe App do
     get "/"
 
     _(last_response).must_be(:ok?)
-    _(headers["Cache-Control"]).must_equal("public, max-age=900")
+    _(headers["Cache-Control"]).must_equal("public, max-age=86400")
   end
 
   it "serves static files" do
@@ -22,7 +22,7 @@ describe App do
       get path
 
       _(last_response).must_be(:ok?)
-      _(headers["Cache-Control"]).must_equal("public, max-age=900")
+      _(headers["Cache-Control"]).must_equal("public, max-age=86400")
     end
   end
 
