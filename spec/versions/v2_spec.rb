@@ -188,6 +188,47 @@ describe Versions::V2 do
     _(eur).wont_be_nil
   end
 
+  it "returns a single rate pair" do
+    get "/rate/EUR/USD"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("EUR")
+    _(json["quote"]).must_equal("USD")
+    _(json["rate"]).must_be_kind_of(Float)
+    _(json["date"]).wont_be_nil
+  end
+
+  it "returns a single rate pair for a historical date" do
+    get "/rate/EUR/USD/#{historical_date}"
+
+    _(last_response).must_be(:ok?)
+    _(json["date"]).must_equal(historical_date)
+    _(json["base"]).must_equal("EUR")
+    _(json["quote"]).must_equal("USD")
+  end
+
+  it "handles case-insensitive currency codes in rate" do
+    get "/rate/eur/usd"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("EUR")
+    _(json["quote"]).must_equal("USD")
+  end
+
+  it "filters by provider in single rate" do
+    get "/rate/EUR/USD?providers=ECB"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("EUR")
+    _(json["quote"]).must_equal("USD")
+  end
+
+  it "returns 422 for unknown currency pair" do
+    get "/rate/EUR/XYZ"
+
+    _(last_response.status).must_equal(422)
+  end
+
   it "returns providers" do
     get "/providers"
 

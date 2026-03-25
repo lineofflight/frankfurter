@@ -59,6 +59,16 @@ module Versions
         end
       end
 
+      r.on("rate", String, String) do |base_currency, quote_currency|
+        r.get(String) do |date_str|
+          rate_response(base_currency, quote_currency, date: date_str)
+        end
+
+        r.get do
+          rate_response(base_currency, quote_currency)
+        end
+      end
+
       r.on("currencies") do
         r.get(String) do |code|
           found = Currency.find(code)
@@ -79,6 +89,18 @@ module Versions
     end
 
     private
+
+    def rate_response(base_currency, quote_currency, date: nil)
+      params = {
+        base: base_currency.upcase,
+        quotes: quote_currency.upcase,
+        date: date,
+        providers: request.params["providers"],
+      }.compact
+      query = Query.new(params)
+      result = query.to_a.first
+      result || request.halt(404)
+    end
 
     def providers
       date_ranges = Rate.group(:provider)
