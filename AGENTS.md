@@ -90,9 +90,10 @@ Separate SQLite databases per environment (`APP_ENV`): test, development, produc
 ## Running Locally
 
 ```bash
-bundle install              # Install dependencies
-bundle exec rake db:prepare # Run migrations and backfill all providers
-bundle exec unicorn         # Start server on port 8080
+bundle install                          # Install dependencies
+bundle exec rake db:migrate db:seed     # Run migrations and seed providers
+bundle exec rake backfill               # Backfill all providers (takes a while)
+bundle exec unicorn                     # Start server on port 8080
 ```
 
 Or with Docker:
@@ -103,10 +104,10 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 ## Rake Tasks
 
 ```bash
-rake ecb:backfill  # Backfill ECB rates (incremental from last stored date)
-rake boc:backfill  # Backfill BOC rates (incremental from last stored date)
-rake backfill      # Backfill all providers
-rake db:prepare    # Run migrations and backfill all providers
+rake db:migrate    # Run database migrations
+rake db:seed       # Seed provider metadata
+rake backfill      # Backfill all providers (incremental from last stored date)
+rake ecb:backfill  # Backfill a single provider
 ```
 
 ## Adding a New Provider
