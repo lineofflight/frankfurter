@@ -6,7 +6,13 @@ require "net/http"
 require "providers/base"
 
 module Providers
-  # National Bank of Poland. Publishes weekly mid-market rates (Table B) for ~116 currencies against PLN.
+  # National Bank of Poland Table B. Publishes weekly mid-market rates for
+  # ~150 currencies against PLN every Wednesday. Rates are point-in-time
+  # snapshots calculated from that Wednesday's EUR/PLN rate and market EUR
+  # cross rates — not weekly averages.
+  #
+  # Methodology: NBP Resolution 44/2025 (Poz. 30), §2.1.3 and §3.1
+  # Full text available at https://dzu.nbp.pl
   class NBPB < Base
     BASE_URL = "https://api.nbp.pl/api/exchangerates/tables/B"
     EARLIEST_DATE = Date.new(2002, 1, 2)
