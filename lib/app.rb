@@ -23,7 +23,7 @@ class App < Roda
       "/v2/openapi.json" => "v2/openapi.json",
     },
     header_rules: [
-      [:all, { "cache-control" => "public, max-age=900" }],
+      [:all, { "cache-control" => "public, max-age=86400" }],
     ]
   plugin :json
   plugin :caching
@@ -33,7 +33,7 @@ class App < Roda
 
   route do |r|
     r.root do
-      response.cache_control(public: true, max_age: 900)
+      response.cache_control(public: true, max_age: 86400)
 
       {
         name: "Frankfurter",

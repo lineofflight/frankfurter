@@ -48,7 +48,7 @@ module Versions
     end
 
     route do |r|
-      response.cache_control(public: true, max_age: 900)
+      response.cache_control(public: true, max_age: 86400)
 
       r.on("rates") do
         r.get do

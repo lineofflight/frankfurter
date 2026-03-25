@@ -23,7 +23,7 @@ module Versions
     end
 
     route do |r|
-      response.cache_control(public: true, max_age: 900)
+      response.cache_control(public: true, max_age: 86400)
 
       r.is(/latest|current/) do
         r.params["date"] = Date.today.to_s
