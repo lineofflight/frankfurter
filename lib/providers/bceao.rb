@@ -82,8 +82,13 @@ module Providers
         iso = CURRENCY_MAP[name]
         next unless iso
 
-        # Rates use French number format: period for thousands, comma for decimal
-        rate_value = Float(rate_str.delete(".").tr(",", "."))
+        # Rates normally use French format (period=thousands, comma=decimal).
+        # Fall back to English format if no comma is present.
+        rate_value = if rate_str.include?(",")
+          Float(rate_str.delete(".").tr(",", "."))
+        else
+          Float(rate_str)
+        end
         next if rate_value.zero?
 
         records << { provider: key, date:, base: iso, quote: "XOF", rate: rate_value }
