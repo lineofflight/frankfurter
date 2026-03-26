@@ -8,37 +8,18 @@ class Rate < Sequel::Model(:rates)
       where(provider: "ECB")
     end
 
-    # Per-provider latest with a 14-day staleness window.
+    # Per-currency latest with a 14-day staleness window.
     #
-    # Each provider contributes its own most recent snapshot. A provider is included only if its latest date is
-    # within 14 days of the global max. This accommodates weekends, holidays, and weekly publishers like FRED
-    # (whose worst case is ~13 days: holiday-shortened week plus weekend before next Monday release).
+    # Each provider contributes its most recent rate for each currency pair.
+    # A rate is included only if its date is within 14 days of the requested
+    # date. This accommodates providers that publish different currencies on
+    # different schedules (e.g. daily + weekly tables from the same bank).
     def latest(date = Date.today)
-      date = Date.today if date > Date.today
+      latest_dates = where(date: (date - 14)..date)
+        .group(:provider, :base, :quote)
+        .select(:provider, :base, :quote, Sequel.function(:max, :date).as(:max_date))
 
-      scoped_dates_sql = select(:provider, :date).distinct.where(Sequel[:date] <= date).sql
-
-      eligible = model.db[<<~SQL].all
-        WITH scoped AS (
-          #{scoped_dates_sql}
-        ),
-        provider_max AS (
-          SELECT provider, MAX(date) AS max_date
-          FROM scoped
-          GROUP BY provider
-        )
-        SELECT provider, max_date
-        FROM provider_max
-        WHERE julianday((SELECT MAX(max_date) FROM provider_max)) - julianday(max_date) <= 14
-      SQL
-
-      return where(false) if eligible.empty?
-
-      conditions = eligible.map do |row|
-        Sequel.&(Sequel[:provider] => row[:provider], Sequel[:date] => row[:max_date])
-      end
-
-      where(conditions.reduce { |a, b| a | b })
+      where(Sequel.lit("(provider, base, quote, date) IN (SELECT provider, base, quote, max_date FROM (?) AS ld)", latest_dates))
     end
 
     def between(interval)

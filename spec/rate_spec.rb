@@ -57,7 +57,7 @@ describe Rate do
       older_date = date - 3
       Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", rate: 0.05, provider: "ECB")
 
-      data = Rate.latest(date)
+      data = Rate.latest(date).all
       quotes = data.select { |r| r.provider == "ECB" }.map(&:quote)
 
       _(quotes).must_include("PLN")
@@ -67,7 +67,7 @@ describe Rate do
       _(Rate.latest(Date.parse("1901-01-01"))).must_be_empty
     end
 
-    it "returns latest available rates for future dates" do
+    it "returns latest rates when client date is ahead of server" do
       future_date = Date.today + 1
       data = Rate.latest(future_date)
 
