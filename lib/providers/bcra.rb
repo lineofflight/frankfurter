@@ -52,6 +52,10 @@ module Providers
       fecha = data.dig("results", "fecha")
       return [] unless detalle && fecha
 
+      # Skip the entire date if any currency code appears more than once
+      codes = detalle.filter_map { |item| item["codigoMoneda"]&.strip }
+      return [] if codes.size != codes.uniq.size
+
       date = Date.parse(fecha)
 
       detalle.filter_map do |item|
