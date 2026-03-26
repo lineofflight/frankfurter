@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "db"
+require "json"
 
 class Provider < Sequel::Model(:providers)
   plugin :static_cache

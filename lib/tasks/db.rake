@@ -16,7 +16,6 @@ namespace :db do
 
   desc "Seed database from saved data"
   task :seed do
-    require "json"
     require "provider"
     Provider.seed
   end
