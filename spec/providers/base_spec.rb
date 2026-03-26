@@ -60,6 +60,16 @@ module Providers
 
         _(Rate.where(provider: "TEST", quote: "SDR").count).must_equal(0)
       end
+
+      it "does not purge cache when no new rates are inserted" do
+        provider.import
+        cache_purged = false
+        Cache.stub(:purge, -> { cache_purged = true }) do
+          provider.import
+        end
+
+        _(cache_purged).must_equal(false)
+      end
     end
 
     describe ".backfill" do

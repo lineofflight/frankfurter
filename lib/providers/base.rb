@@ -77,12 +77,13 @@ module Providers
       @dataset = dataset.reject do |r|
         [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) }
       end
-      before = Rate.where(provider: key).count
+      before = DB["SELECT total_changes()"].single_value
       Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
-      inserted = Rate.where(provider: key).count - before
+      inserted = DB["SELECT total_changes()"].single_value - before
       Log.info("#{key}: imported #{inserted} rates")
-      if inserted > 0 && Cache.purge
-        Log.info("#{key}: purged cache")
+      if inserted > 0
+        DB.run("PRAGMA optimize")
+        Log.info("#{key}: purged cache") if Cache.purge
       end
 
       self
