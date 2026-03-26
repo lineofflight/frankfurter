@@ -77,7 +77,7 @@ module Providers
       return [] unless html.include?("<table")
 
       records = []
-      html.scan(%r{<tr>\s*<td>\s*(.*?)\s*</td>\s*<td>\s*([\d.,]+)\s*</td>\s*</tr>}m) do |name, rate_str|
+      html.scan(%r{<tr>\s*<td>\s*([^<]*?)\s*</td>\s*<td>\s*([\d.,]+)\s*</td>\s*</tr>}m) do |name, rate_str|
         name = name.strip
         iso = CURRENCY_MAP[name]
         next unless iso

@@ -24,7 +24,7 @@ module Providers
     end
 
     def parse(json)
-      data = json.is_a?(String) ? Oj.load(json) : json
+      data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
 
       data.filter_map do |row|
         date = Date.strptime(row.fetch("exchangedate"), "%d.%m.%Y")
