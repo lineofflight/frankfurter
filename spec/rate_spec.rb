@@ -52,6 +52,17 @@ describe Rate do
       _(providers).must_include("FRED")
     end
 
+    it "includes rates from different dates within the same provider" do
+      date = Fixtures.latest_date
+      older_date = date - 3
+      Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", rate: 0.05, provider: "ECB")
+
+      data = Rate.latest(date)
+      quotes = data.select { |r| r.provider == "ECB" }.map(&:quote)
+
+      _(quotes).must_include("PLN")
+    end
+
     it "returns nothing if date predates dataset" do
       _(Rate.latest(Date.parse("1901-01-01"))).must_be_empty
     end
