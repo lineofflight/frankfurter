@@ -6,9 +6,11 @@ require "net/http"
 require "providers/base"
 
 module Providers
-  # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies against PLN.
+  # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies
+  # and weekly mid-market rates (Table B) for ~150 additional currencies against PLN.
   class NBP < Base
-    BASE_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
+    TABLE_A_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
+    TABLE_B_URL = "https://api.nbp.pl/api/exchangerates/tables/B"
     EARLIEST_DATE = Date.new(2002, 1, 2)
 
     class << self
@@ -22,8 +24,10 @@ module Providers
       end_date = Date.today
       @dataset = []
 
-      each_chunk(start_date, end_date) do |chunk_start, chunk_end|
-        @dataset.concat(fetch_rates(chunk_start, chunk_end))
+      [TABLE_A_URL, TABLE_B_URL].each do |table_url|
+        each_chunk(start_date, end_date) do |chunk_start, chunk_end|
+          @dataset.concat(fetch_rates(table_url, chunk_start, chunk_end))
+        end
       end
 
       self
@@ -47,8 +51,8 @@ module Providers
 
     private
 
-    def fetch_rates(start_date, end_date)
-      url = URI("#{BASE_URL}/#{start_date}/#{end_date}/?format=json")
+    def fetch_rates(table_url, start_date, end_date)
+      url = URI("#{table_url}/#{start_date}/#{end_date}/?format=json")
       response = Net::HTTP.get(url)
       parse(response)
     rescue JSON::ParserError

@@ -58,7 +58,7 @@
   {
     "key": "NBP",
     "name": "Narodowy Bank Polski",
-    "description": "Daily mid-market rates (Table A) for 30+ currencies against the Polish zloty",
+    "description": "Daily mid-market rates (Table A) for 30+ currencies and weekly rates (Table B) for 150+ additional currencies against the Polish zloty",
     "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
     "terms_url": null
   },
@@ -131,13 +131,6 @@
     "description": "Daily representative exchange rates for 14 currencies against the Israeli new shekel",
     "data_url": "https://www.boi.org.il/en/economic-roles/statistics/foreign-exchange-market/exchange-rates/",
     "terms_url": "https://www.boi.org.il/en/terms-of-use"
-  },
-  {
-    "key": "NBP.B",
-    "name": "Narodowy Bank Polski",
-    "description": "Weekly mid-market rates (Table B) for 150+ currencies against the Polish zloty",
-    "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
-    "terms_url": null
   },
   {
     "key": "BCCR",

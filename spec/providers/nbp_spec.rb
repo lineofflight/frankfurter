@@ -30,5 +30,12 @@ module Providers
 
       _(Rate.where(date:).count).must_be(:>, 1)
     end
+
+    it "includes Table B currencies" do
+      provider.fetch(since: Date.new(2026, 3, 1)).import
+      bases = Rate.select(:base).distinct.map(:base)
+
+      _(bases).must_include("ALL")
+    end
   end
 end
