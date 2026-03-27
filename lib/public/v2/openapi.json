@@ -57,7 +57,7 @@
       "get": {
         "operationId": "getRate",
         "summary": "Get a single exchange rate pair",
-        "description": "Returns the latest blended exchange rate for a single currency pair.",
+        "description": "Returns the blended exchange rate for a single currency pair. Without a date param, returns the latest rate.",
         "parameters": [
           {
             "name": "base",
@@ -71,6 +71,7 @@
             "required": true,
             "schema": { "type": "string", "example": "USD" }
           },
+          { "$ref": "#/components/parameters/date" },
           { "$ref": "#/components/parameters/providers" }
         ],
         "responses": {
@@ -80,47 +81,6 @@
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/Rate" },
                 "example": { "date": "2026-03-25", "base": "EUR", "quote": "USD", "rate": 1.1568 }
-              }
-            }
-          },
-          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
-          "404": { "$ref": "#/components/responses/NotFound" }
-        }
-      }
-    },
-    "/rate/{base}/{quote}/{date}": {
-      "get": {
-        "operationId": "getHistoricalRate",
-        "summary": "Get a historical exchange rate pair",
-        "description": "Returns the blended exchange rate for a single currency pair on a specific date.",
-        "parameters": [
-          {
-            "name": "base",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string", "example": "EUR" }
-          },
-          {
-            "name": "quote",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string", "example": "USD" }
-          },
-          {
-            "name": "date",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string", "format": "date", "example": "2025-01-15" }
-          },
-          { "$ref": "#/components/parameters/providers" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Exchange rate",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/Rate" },
-                "example": { "date": "2025-01-15", "base": "EUR", "quote": "USD", "rate": 1.0289 }
               }
             }
           },

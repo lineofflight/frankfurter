@@ -199,7 +199,7 @@ describe Versions::V2 do
   end
 
   it "returns a single rate pair for a historical date" do
-    get "/rate/EUR/USD/#{historical_date}"
+    get "/rate/EUR/USD?date=#{historical_date}"
 
     _(last_response).must_be(:ok?)
     _(json["date"]).must_equal(historical_date)
