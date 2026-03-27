@@ -45,6 +45,10 @@
                   { "date": "2024-01-15", "base": "EUR", "quote": "USD", "rate": 1.089 },
                   { "date": "2024-01-15", "base": "EUR", "quote": "GBP", "rate": 0.8623 }
                 ]
+              },
+              "application/x-ndjson": {
+                "schema": { "$ref": "#/components/schemas/Rate" },
+                "example": "{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"USD\", \"rate\": 1.089 }\n{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"GBP\", \"rate\": 0.8623 }\n"
               }
             }
           },
