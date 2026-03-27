@@ -254,6 +254,35 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "returns NDJSON when requested" do
+    get(
+      "/rates?from=#{range_start}&to=#{range_end}",
+      {},
+      { "HTTP_ACCEPT" => "application/x-ndjson" },
+    )
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("application/x-ndjson")
+    lines = last_response.body.strip.split("\n")
+
+    _(lines.length).must_be(:>, 1)
+    parsed = Oj.load(lines.first)
+
+    _(parsed["date"]).wont_be_nil
+    _(parsed["rate"]).wont_be_nil
+  end
+
+  it "returns NDJSON for single-date queries when requested" do
+    get "/rates", {}, { "HTTP_ACCEPT" => "application/x-ndjson" }
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("application/x-ndjson")
+    lines = last_response.body.strip.split("\n")
+    parsed = Oj.load(lines.first)
+
+    _(parsed["date"]).wont_be_nil
+  end
+
   it "streams a valid JSON array for range queries" do
     get "/rates?from=#{range_start}&to=#{range_end}"
 
