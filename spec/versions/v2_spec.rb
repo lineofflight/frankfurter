@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../helper"
+require "csv"
 require "rack/test"
 
 # Skooma requires minitest/unit which was removed in Minitest 6
@@ -144,6 +145,23 @@ describe Versions::V2 do
 
     _(last_response.status).must_equal(422)
     _(json["message"]).must_include("unknown parameter")
+  end
+
+  it "returns rates as CSV" do
+    get "/rates.csv"
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("text/csv")
+    rows = CSV.parse(last_response.body, headers: true)
+
+    _(rows.headers).must_equal(["date", "base", "quote", "rate"])
+    _(rows.length).must_be(:>, 1)
+  end
+
+  it "returns 406 for CSV on unsupported endpoints" do
+    get "/currencies.csv"
+
+    _(last_response.status).must_equal(406)
   end
 
   it "returns empty array for dates before dataset" do

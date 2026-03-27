@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "csv"
 require "currency"
 require "oj"
 require "provider"
@@ -32,6 +33,9 @@ module Versions
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
 
+    plugin :type_routing,
+      types: { csv: "text/csv" }
+
     plugin :caching
     plugin :indifferent_params
     plugin :halt
@@ -53,8 +57,10 @@ module Versions
         r.get do
           query = Query.new(r.params)
           r.etag(query.cache_key)
+          results = query.to_a
 
-          query.to_a
+          r.csv { to_csv(results) }
+          results
         end
       end
 
@@ -62,9 +68,13 @@ module Versions
         r.get do
           params = r.params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
           query = Query.new(params)
-          query.to_a.first || r.halt(404)
+          result = query.to_a.first || r.halt(404)
+
+          result
         end
       end
+
+      r.csv { r.halt(406) }
 
       r.on("currencies") do
         r.get(String) do |code|
@@ -86,6 +96,13 @@ module Versions
     end
 
     private
+
+    def to_csv(records)
+      CSV.generate do |csv|
+        csv << records.first.keys unless records.empty?
+        records.each { |r| csv << r.values }
+      end
+    end
 
     def providers
       date_ranges = Rate.group(:provider)
