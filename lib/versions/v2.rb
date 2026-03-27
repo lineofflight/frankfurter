@@ -36,6 +36,7 @@ module Versions
     plugin :type_routing,
       types: { csv: "text/csv" }
 
+    plugin :streaming
     plugin :caching
     plugin :indifferent_params
     plugin :halt
@@ -57,10 +58,38 @@ module Versions
         r.get do
           query = Query.new(r.params)
           r.etag(query.cache_key)
-          results = query.to_a
 
-          r.csv { to_csv(results) }
-          results
+          if query.range?
+            r.csv do
+              response["Content-Type"] = "text/csv"
+              stream do |out|
+                first = true
+                query.each do |record|
+                  if first
+                    out << CSV.generate_line(record.keys)
+                    first = false
+                  end
+                  out << CSV.generate_line(record.values)
+                end
+              end
+            end
+
+            response["Content-Type"] = "application/json; charset=utf-8"
+            stream do |out|
+              out << "["
+              first = true
+              query.each do |record|
+                out << "," unless first
+                out << Oj.dump(record, mode: :compat)
+                first = false
+              end
+              out << "]"
+            end
+          else
+            results = query.to_a
+            r.csv { to_csv(results) }
+            results
+          end
         end
       end
 

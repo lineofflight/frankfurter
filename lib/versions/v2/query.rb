@@ -38,6 +38,10 @@ module Versions
         end
       end
 
+      def range?
+        date_scope.is_a?(Range)
+      end
+
       def cache_key
         Digest::MD5.hexdigest(max_date.to_s)
       end

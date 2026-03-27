@@ -254,6 +254,17 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "streams a valid JSON array for range queries" do
+    get "/rates?from=#{range_start}&to=#{range_end}"
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("application/json")
+    parsed = Oj.load(last_response.body)
+
+    _(parsed).must_be_kind_of(Array)
+    _(parsed.first["date"]).wont_be_nil
+  end
+
   it "iterates over range results" do
     query = Versions::V2::Query.new("from" => range_start, "to" => range_end)
     records = []
