@@ -22,10 +22,20 @@ module Versions
       end
 
       def cache_key
-        Digest::MD5.hexdigest(to_a.map { |r| r[:date] }.max.to_s)
+        Digest::MD5.hexdigest(max_date.to_s)
       end
 
       private
+
+      def max_date
+        if date_scope.is_a?(Range)
+          ds = Rate.dataset
+          ds = ds.where(provider: providers) if providers
+          ds.where(date: date_scope).max(:date)
+        else
+          to_a.map { |r| r[:date] }.max
+        end
+      end
 
       def base
         @params[:base]&.upcase || "EUR"

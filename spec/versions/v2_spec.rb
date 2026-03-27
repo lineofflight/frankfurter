@@ -140,6 +140,13 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "returns an ETag for range queries" do
+    get "/rates?from=#{range_start}&to=#{range_end}"
+
+    _(last_response).must_be(:ok?)
+    _(last_response.headers["ETag"]).wont_be_nil
+  end
+
   it "returns 422 for unknown parameters" do
     get "/rates?provider=ecb"
 
