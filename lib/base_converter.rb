@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-# Converts a single provider's rates to a target base currency.
-# Handles three cases:
-# 1. Rate already in target base — pass through
-# 2. Rate quotes the target base — invert
-# 3. Rate shares a currency with a target-base rate — cross-convert
 class BaseConverter
   attr_reader :rates, :base
 
@@ -16,9 +11,10 @@ class BaseConverter
   def convert
     rates.filter_map do |rate|
       if rate[:base] == base
-        { date: rate[:date], base:, quote: rate[:quote], rate: rate[:rate] }
+        # pass through
+        rate.to_hash.except(:provider)
       elsif rate[:quote] == base
-        { date: rate[:date], base:, quote: rate[:base], rate: 1.0 / rate[:rate] }
+        invert(rate)
       else
         cross_convert(rate)
       end
@@ -26,6 +22,10 @@ class BaseConverter
   end
 
   private
+
+  def invert(rate)
+    { date: rate[:date], base:, quote: rate[:base], rate: 1.0 / rate[:rate] }
+  end
 
   def cross_convert(rate)
     # Case A: both rates share the same quote (e.g. USD→CAD and EUR→CAD)

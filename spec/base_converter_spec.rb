@@ -2,13 +2,14 @@
 
 require_relative "helper"
 require "base_converter"
+require "rate"
 
 describe BaseConverter do
   let(:date) { Date.parse("2024-01-15") }
   let(:rates) do
     [
-      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-      { date: date, base: "EUR", quote: "GBP", rate: 0.85, provider: "ECB" },
+      Rate.new(date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB"),
+      Rate.new(date: date, base: "EUR", quote: "GBP", rate: 0.85, provider: "ECB"),
     ]
   end
 
@@ -43,9 +44,9 @@ describe BaseConverter do
 
   it "cross-converts through a shared quote currency" do
     rates = [
-      { date: date, base: "USD", quote: "CAD", rate: 1.37, provider: "BOC" },
-      { date: date, base: "EUR", quote: "CAD", rate: 1.48, provider: "BOC" },
-      { date: date, base: "TRY", quote: "CAD", rate: 0.031, provider: "BOC" },
+      Rate.new(date: date, base: "USD", quote: "CAD", rate: 1.37, provider: "BOC"),
+      Rate.new(date: date, base: "EUR", quote: "CAD", rate: 1.48, provider: "BOC"),
+      Rate.new(date: date, base: "TRY", quote: "CAD", rate: 0.031, provider: "BOC"),
     ]
 
     result = BaseConverter.new(rates, base: "EUR").convert
@@ -58,8 +59,8 @@ describe BaseConverter do
 
   it "handles mixed bases by finding the target as a base in inverted rows" do
     mixed = [
-      { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED" },
-      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "FRED" },
+      Rate.new(date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED"),
+      Rate.new(date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "FRED"),
     ]
 
     result = BaseConverter.new(mixed, base: "EUR").convert
