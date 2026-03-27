@@ -254,6 +254,20 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "sets Vary header on NDJSON responses" do
+    get "/rates", {}, { "HTTP_ACCEPT" => "application/x-ndjson" }
+
+    _(last_response).must_be(:ok?)
+    _(last_response.headers["Vary"]).must_equal("Accept")
+  end
+
+  it "prefers CSV extension over NDJSON accept header" do
+    get "/rates.csv", {}, { "HTTP_ACCEPT" => "application/x-ndjson" }
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("text/csv")
+  end
+
   it "returns NDJSON when requested" do
     get(
       "/rates?from=#{range_start}&to=#{range_end}",
