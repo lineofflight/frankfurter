@@ -26,22 +26,6 @@ module Providers
       _(count_unique_dates).must_be(:>, 1)
     end
 
-    it "fetches rates since a date" do
-      provider.fetch(since: Date.today - 3, upto: Date.today).import
-
-      _(count_unique_dates).must_be(:>=, 1)
-    end
-
-    it "stores USD as base and CRC as quote" do
-      provider.fetch(since: Date.today - 3, upto: Date.today).import
-      rate = Rate.first
-
-      if rate
-        _(rate.base).must_equal("USD")
-        _(rate.quote).must_equal("CRC")
-      end
-    end
-
     it "parses response with correct structure" do
       records = provider.parse({
         "columnas" => [

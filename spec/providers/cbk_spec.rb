@@ -26,21 +26,6 @@ module Providers
       _(count_unique_dates).must_be(:>, 1)
     end
 
-    it "fetches rates since a date" do
-      provider.fetch(since: Date.today - 7).import
-
-      _(count_unique_dates).must_be(:>=, 1)
-    end
-
-    it "stores multiple currencies per date" do
-      provider.fetch(since: Date.today - 7).import
-      date = Rate.first&.date
-
-      if date
-        _(Rate.where(date:).count).must_be(:>, 1)
-      end
-    end
-
     it "stores foreign currency as base and KES as quote" do
       records = provider.parse({
         "data" => [

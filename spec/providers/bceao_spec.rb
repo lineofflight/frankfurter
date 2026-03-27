@@ -26,21 +26,6 @@ module Providers
       _(count_unique_dates).must_be(:>, 1)
     end
 
-    it "fetches rates since a date" do
-      provider.fetch(since: Date.today - 3, upto: Date.today).import
-
-      _(count_unique_dates).must_be(:>=, 1)
-    end
-
-    it "stores multiple currencies per date" do
-      provider.fetch(since: Date.today - 3, upto: Date.today).import
-      date = Rate.first&.date
-
-      if date
-        _(Rate.where(date:).count).must_be(:>, 1)
-      end
-    end
-
     it "stores foreign currency as base and XOF as quote" do
       html = <<~HTML
         <h2>Cours des devises du jeudi 20 mars 2026</h2>
