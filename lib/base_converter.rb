@@ -12,7 +12,7 @@ class BaseConverter
     rates.filter_map do |rate|
       if rate[:base] == base
         # pass through
-        rate.to_h.except(:provider)
+        rate.values.except(:provider)
       elsif rate[:quote] == base
         invert(rate)
       else
