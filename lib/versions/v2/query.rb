@@ -22,6 +22,8 @@ module Versions
       end
 
       def each(&block)
+        return to_enum(:each) unless block
+
         ds = Rate.dataset
         ds = ds.where(provider: providers) if providers
 
@@ -149,7 +151,7 @@ module Versions
       def each_quarter(range)
         cursor = range.begin
         while cursor <= range.end
-          quarter_end = [cursor >> 3, range.end].min
+          quarter_end = [(cursor >> 3) - 1, range.end].min
           yield cursor..quarter_end
           cursor = quarter_end + 1
         end

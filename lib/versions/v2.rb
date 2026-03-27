@@ -59,16 +59,8 @@ module Versions
           query = Query.new(r.params)
           r.etag(query.cache_key)
 
-          if ndjson?(r)
-            response["Content-Type"] = "application/x-ndjson"
-            stream do |out|
-              query.each do |record|
-                out << Oj.dump(record, mode: :compat)
-                out << "\n"
-              end
-            end
-          elsif query.range?
-            r.csv do
+          r.csv do
+            if query.range?
               response["Content-Type"] = "text/csv"
               stream do |out|
                 first = true
@@ -80,8 +72,21 @@ module Versions
                   out << CSV.generate_line(record.values)
                 end
               end
+            else
+              to_csv(query.to_a)
             end
+          end
 
+          if ndjson?(r)
+            response["Vary"] = "Accept"
+            response["Content-Type"] = "application/x-ndjson"
+            stream do |out|
+              query.each do |record|
+                out << Oj.dump(record, mode: :compat)
+                out << "\n"
+              end
+            end
+          elsif query.range?
             response["Content-Type"] = "application/json; charset=utf-8"
             stream do |out|
               out << "["
@@ -94,9 +99,7 @@ module Versions
               out << "]"
             end
           else
-            results = query.to_a
-            r.csv { to_csv(results) }
-            results
+            query.to_a
           end
         end
       end

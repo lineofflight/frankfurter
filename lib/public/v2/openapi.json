@@ -47,7 +47,10 @@
                 ]
               },
               "application/x-ndjson": {
-                "schema": { "$ref": "#/components/schemas/Rate" },
+                "schema": {
+                  "type": "string",
+                  "description": "NDJSON stream of Rate objects, one JSON object per line"
+                },
                 "example": "{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"USD\", \"rate\": 1.089 }\n{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"GBP\", \"rate\": 0.8623 }\n"
               }
             }
