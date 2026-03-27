@@ -254,6 +254,16 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "iterates over range results" do
+    query = Versions::V2::Query.new("from" => range_start, "to" => range_end)
+    records = []
+    query.each { |r| records << r }
+
+    _(records).wont_be_empty
+    _(records.first).must_include(:date)
+    _(records.first).must_include(:rate)
+  end
+
   it "returns providers" do
     get "/providers"
 

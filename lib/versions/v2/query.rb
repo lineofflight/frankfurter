@@ -18,7 +18,24 @@ module Versions
       end
 
       def to_a
-        @rates ||= fetch_rates
+        @rates ||= [].tap { |a| each { |r| a << r } }
+      end
+
+      def each(&block)
+        ds = Rate.dataset
+        ds = ds.where(provider: providers) if providers
+
+        if date_scope.is_a?(Range)
+          each_quarter(date_scope) do |chunk_range|
+            chunk_ds = ds.where(date: chunk_range)
+            chunk_ds = chunk_ds.downsample(group) if group
+            chunk_ds.order(:date, :quote).all.group_by { |r| r[:date] }.each do |_, rows|
+              emit_blended(rows, &block)
+            end
+          end
+        else
+          emit_blended(ds.latest(date_scope).all, &block)
+        end
       end
 
       def cache_key
@@ -117,24 +134,20 @@ module Versions
         end
       end
 
-      def fetch_rates
-        ds = Rate.dataset
-        ds = ds.where(provider: providers) if providers
-
-        rates = if date_scope.is_a?(Range)
-          ds = ds.where(date: date_scope)
-          ds = ds.downsample(group) if group
-          ds.order(:date, :quote).all.group_by { |r| r[:date] }.flat_map do |_, rows|
-            Blender.new(rows, base:).blend
-          end
-        else
-          Blender.new(ds.latest(date_scope).all, base:).blend
-        end
-
-        rates.filter_map do |r|
+      def emit_blended(rows)
+        Blender.new(rows, base:).blend.each do |r|
           next if quotes && !quotes.include?(r[:quote])
 
-          { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
+        end
+      end
+
+      def each_quarter(range)
+        cursor = range.begin
+        while cursor <= range.end
+          quarter_end = [cursor >> 3, range.end].min
+          yield cursor..quarter_end
+          cursor = quarter_end + 1
         end
       end
     end
