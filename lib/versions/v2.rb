@@ -25,6 +25,8 @@ require "providers/nbrm"
 require "providers/bceao"
 require "providers/boi"
 require "providers/bccr"
+require "providers/nb"
+require "providers/mas"
 require "versions/v2/query"
 
 module Versions
