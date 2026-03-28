@@ -22,4 +22,6 @@ task backfill: [
   "bceao:backfill",
   "boi:backfill",
   "bccr:backfill",
+  "nb:backfill",
+  "mas:backfill",
 ]
