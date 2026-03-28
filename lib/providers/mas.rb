@@ -7,23 +7,22 @@ require "providers/base"
 
 module Providers
   # Monetary Authority of Singapore daily exchange rates.
-  # Publishes ~15 currencies against SGD via a public JSON API.
-  # https://eservices.mas.gov.sg/statistics/api/v1/fin/exchange-rates/daily
+  # Publishes 21 currencies against SGD via a public JSON API (no auth required).
+  # https://eservices.mas.gov.sg/api/action/datastore/search.json
   class MAS < Base
-    BASE_URL = "https://eservices.mas.gov.sg/statistics/api/v1/fin/exchange-rates/daily"
+    BASE_URL = "https://eservices.mas.gov.sg/api/action/datastore/search.json"
+    RESOURCE_ID = "95932927-c8bc-4e7a-b484-68a66a24edfe"
     EARLIEST_DATE = Date.new(2015, 1, 2)
 
     # MAS uses flat column names like "usd_sgd", "eur_sgd", etc.
     # Each column value is the amount of SGD per unit of foreign currency
     # (or per 100 units for JPY, KRW, INR, etc.)
     CURRENCY_COLUMNS = {
+      "aed_sgd_100" => ["AED", 100],
       "aud_sgd" => ["AUD", 1],
-      "bgn_sgd" => ["BGN", 1],
-      "bnd_sgd" => ["BND", 1],
       "cad_sgd" => ["CAD", 1],
       "chf_sgd" => ["CHF", 1],
       "cny_sgd_100" => ["CNY", 100],
-      "dkk_sgd" => ["DKK", 1],
       "eur_sgd" => ["EUR", 1],
       "gbp_sgd" => ["GBP", 1],
       "hkd_sgd_100" => ["HKD", 100],
@@ -31,14 +30,11 @@ module Providers
       "inr_sgd_100" => ["INR", 100],
       "jpy_sgd_100" => ["JPY", 100],
       "krw_sgd_100" => ["KRW", 100],
-      "lkr_sgd_100" => ["LKR", 100],
       "myr_sgd_100" => ["MYR", 100],
-      "nok_sgd" => ["NOK", 1],
       "nzd_sgd" => ["NZD", 1],
       "php_sgd_100" => ["PHP", 100],
       "qar_sgd_100" => ["QAR", 100],
       "sar_sgd_100" => ["SAR", 100],
-      "sek_sgd" => ["SEK", 1],
       "thb_sgd_100" => ["THB", 100],
       "twd_sgd_100" => ["TWD", 100],
       "usd_sgd" => ["USD", 1],
@@ -53,8 +49,8 @@ module Providers
 
     def fetch(since: nil, upto: nil)
       @dataset = []
-      params = { rows: 10000, sort: "end_of_day asc" }
-      params[:between] = "[end_of_day,#{since}]" if since
+      params = { resource_id: RESOURCE_ID, limit: 10000, sort: "end_of_day asc" }
+      params["between[end_of_day]"] = "#{since},#{upto || Date.today}" if since
 
       url = URI(BASE_URL)
       url.query = URI.encode_www_form(params)
