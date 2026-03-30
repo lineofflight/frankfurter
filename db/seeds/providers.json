@@ -4,146 +4,188 @@
     "name": "European Central Bank",
     "description": "Daily reference rates for 30+ currencies against the euro",
     "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
-    "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html"
+    "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+    "publish_time": 15,
+    "publish_days": "1-5"
   },
   {
     "key": "BOC",
     "name": "Bank of Canada",
     "description": "Daily indicative exchange rates for 20+ currencies against the Canadian dollar",
     "data_url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
-    "terms_url": "https://www.bankofcanada.ca/terms/"
+    "terms_url": "https://www.bankofcanada.ca/terms/",
+    "publish_time": 20,
+    "publish_days": "1-5"
   },
   {
     "key": "TCMB",
     "name": "Türkiye Cumhuriyet Merkez Bankası",
     "description": "Daily cross rates for 20+ currencies against the Turkish lira",
     "data_url": "https://evds2.tcmb.gov.tr/",
-    "terms_url": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/Other/Disclaimer"
+    "terms_url": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/Other/Disclaimer",
+    "publish_time": 12,
+    "publish_days": "1-5"
   },
   {
     "key": "NBU",
     "name": "Natsionalnyi Bank Ukrainy",
     "description": "Daily official rates for 45+ currencies against the hryvnia",
     "data_url": "https://bank.gov.ua/en/markets/exchangerates",
-    "terms_url": "https://bank.gov.ua/en/useterms"
+    "terms_url": "https://bank.gov.ua/en/useterms",
+    "publish_time": 10,
+    "publish_days": "1-5"
   },
   {
     "key": "CBA",
     "name": "Central Bank of Armenia",
     "description": "Daily rates for 30+ currencies against the Armenian dram",
     "data_url": "https://www.cba.am/en/SitePage/ExchangeArchive.aspx",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "1-5"
   },
   {
     "key": "NBRB",
     "name": "Natsyyanalny Bank Respubliki Belarus",
     "description": "Daily official rates for 30+ currencies against the Belarusian ruble",
     "data_url": "https://www.nbrb.by/engl/statistics/rates/ratesdaily.asp",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 9,
+    "publish_days": "1-5"
   },
   {
     "key": "BOB",
     "name": "Bank of Botswana",
     "description": "Daily rates for 6 currencies against the Botswana pula",
     "data_url": "https://www.bankofbotswana.bw/exchange-rates",
-    "terms_url": "https://www.bankofbotswana.bw/content/disclaimer"
+    "terms_url": "https://www.bankofbotswana.bw/content/disclaimer",
+    "publish_time": 10,
+    "publish_days": "1-5"
   },
   {
     "key": "CBR",
     "name": "Central Bank of Russia",
     "description": "Daily official rates for 50+ currencies against the Russian ruble",
     "data_url": "https://www.cbr.ru/eng/currency_base/daily/",
-    "terms_url": "https://www.cbr.ru/eng/user_agreement/"
+    "terms_url": "https://www.cbr.ru/eng/user_agreement/",
+    "publish_time": 9,
+    "publish_days": "1-5"
   },
   {
     "key": "NBP",
     "name": "Narodowy Bank Polski",
     "description": "Daily mid-market rates (Table A) for 30+ currencies and weekly rates (Table B) for 150+ additional currencies against the Polish zloty",
     "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 11,
+    "publish_days": "1-5"
   },
   {
     "key": "FRED",
     "name": "Federal Reserve",
     "description": "Weekly H.10 exchange rates for 20+ currencies against the US dollar",
     "data_url": "https://www.federalreserve.gov/releases/h10/",
-    "terms_url": "https://fred.stlouisfed.org/legal/"
+    "terms_url": "https://fred.stlouisfed.org/legal/",
+    "publish_time": 21,
+    "publish_days": "1"
   },
   {
     "key": "BNM",
     "name": "Bank Negara Malaysia",
     "description": "Daily exchange rates for 26 currencies against the Malaysian ringgit",
     "data_url": "https://www.bnm.gov.my/exchange-rates",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 4,
+    "publish_days": "1-5"
   },
   {
     "key": "RBA",
     "name": "Reserve Bank of Australia",
     "description": "Daily exchange rates for 20+ currencies against the Australian dollar",
     "data_url": "https://www.rba.gov.au/statistics/frequency/exchange-rates.html",
-    "terms_url": "https://www.rba.gov.au/copyright/"
+    "terms_url": "https://www.rba.gov.au/copyright/",
+    "publish_time": 5,
+    "publish_days": "1-5"
   },
   {
     "key": "BCRA",
     "name": "Banco Central de la República Argentina",
     "description": "Daily official exchange rates for 30+ currencies against the Argentine peso",
     "data_url": "https://www.bcra.gob.ar/en/monetary-and-financial-statistics/exchange-statistics/",
-    "terms_url": "https://www.bcra.gob.ar/aviso-legal/"
+    "terms_url": "https://www.bcra.gob.ar/aviso-legal/",
+    "publish_time": 16,
+    "publish_days": "1-5"
   },
   {
     "key": "CBK",
     "name": "Central Bank of Kenya",
     "description": "Daily exchange rates for 18 currencies against the Kenyan shilling",
     "data_url": "https://www.centralbank.go.ke/forex/",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "1-5"
   },
   {
     "key": "BOJ",
     "name": "Bank of Jamaica",
     "description": "Daily counter rates for 20 currencies against the Jamaican dollar",
     "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
-    "terms_url": "https://boj.org.jm/disclaimer/"
+    "terms_url": "https://boj.org.jm/disclaimer/",
+    "publish_time": 18,
+    "publish_days": "1-5"
   },
   {
     "key": "IMF",
     "name": "International Monetary Fund",
     "description": "Daily representative exchange rates for 50+ currencies against the US dollar",
     "data_url": "https://www.imf.org/external/np/fin/ert/GUI/Pages/CountryDataBase.aspx",
-    "terms_url": "https://www.imf.org/en/about/copyright-and-terms"
+    "terms_url": "https://www.imf.org/en/about/copyright-and-terms",
+    "publish_time": 18,
+    "publish_days": "1-5"
   },
   {
     "key": "NBRM",
     "name": "Narodna Banka na Republika Severna Makedonija",
     "description": "Daily mid-market rates for 30 currencies against the Macedonian denar",
     "data_url": "https://www.nbrm.mk",
-    "terms_url": null
+    "terms_url": null,
+    "publish_time": 10,
+    "publish_days": "1-5"
   },
   {
     "key": "BCEAO",
     "name": "Banque Centrale des Etats de l'Afrique de l'Ouest",
     "description": "Daily reference rates for 27 currencies against the West African CFA franc",
     "data_url": "https://www.bceao.int/fr/cours/cours-de-reference-des-principales-devises-contre-Franc-CFA",
-    "terms_url": "https://www.bceao.int/fr/mentions-legales"
+    "terms_url": "https://www.bceao.int/fr/mentions-legales",
+    "publish_time": 10,
+    "publish_days": "0-5"
   },
   {
     "key": "BOI",
     "name": "Bank of Israel",
     "description": "Daily representative exchange rates for 14 currencies against the Israeli new shekel",
     "data_url": "https://www.boi.org.il/en/economic-roles/statistics/foreign-exchange-market/exchange-rates/",
-    "terms_url": "https://www.boi.org.il/en/terms-of-use"
+    "terms_url": "https://www.boi.org.il/en/terms-of-use",
+    "publish_time": 12,
+    "publish_days": "0-4"
   },
   {
     "key": "BCCR",
     "name": "Banco Central de Costa Rica",
     "description": "Daily reference exchange rate for the US dollar against the Costa Rican colon",
     "data_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/Contenedor/6",
-    "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso"
+    "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso",
+    "publish_time": 18,
+    "publish_days": "1-5"
   },
   {
     "key": "NB",
     "name": "Norges Bank",
     "description": "Daily exchange rates for 40+ currencies against the Norwegian krone",
     "data_url": "https://data.norges-bank.no/",
-    "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/"
+    "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",
+    "publish_time": 13,
+    "publish_days": "1-5"
   }
 ]

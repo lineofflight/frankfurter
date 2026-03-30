@@ -2,127 +2,28 @@
 # frozen_string_literal: true
 
 require "rufus-scheduler"
+require_relative "../boot"
+require "providers"
 
 scheduler = Rufus::Scheduler.new
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
-["ecb", "boc", "tcmb", "nbu", "cba", "nbrb", "bob", "cbr", "nbp", "fred", "bnm", "rba", "bcra", "cbk", "boj", "imf", "nbrm", "bceao", "boi", "bccr", "nb"].each_with_index do |provider, i|
+Providers.all.each_with_index do |provider, i|
   scheduler.in("#{i * 2}s") do
-    system("bundle exec rake #{provider}:backfill")
+    system("bundle exec rake #{provider.key.downcase}:backfill")
   end
 end
 
-# ECB publishes around 16:00 CET (15:00-17:00 UTC)
-# https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
-scheduler.cron("*/30 15,16,17 * * 1-5", overlap: false) do
-  system("bundle exec rakeecb:backfill")
-end
+# Schedule each provider based on its publish window
+Provider.all.each do |provider|
+  next unless provider.publish_time && provider.publish_days
 
-# BOC publishes by 16:30 ET (20:30-21:30 UTC)
-# https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
-scheduler.cron("*/30 20,21,22 * * 1-5", overlap: false) do
-  system("bundle exec rakeboc:backfill")
-end
+  hours = [provider.publish_time, provider.publish_time + 1, provider.publish_time + 2].map { |h| h % 24 }
+  cron = "*/30 #{hours.join(",")} * * #{provider.publish_days}"
 
-# TCMB publishes at 15:30 TRT (12:30 UTC)
-# https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Banka+Hakkinda/Sikca+Sorulan+Sorular
-scheduler.cron("*/30 12,13,14 * * 1-5", overlap: false) do
-  system("bundle exec raketcmb:backfill")
-end
-
-# NBU publishes daily (Ukraine, EET/EEST UTC+2/+3)
-scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
-  system("bundle exec rakenbu:backfill")
-end
-
-# CBA publishes daily (Armenia, UTC+4)
-scheduler.cron("*/30 8,9,10 * * 1-5", overlap: false) do
-  system("bundle exec rakecba:backfill")
-end
-
-# NBRB publishes daily (Belarus, UTC+3)
-scheduler.cron("*/30 9,10,11 * * 1-5", overlap: false) do
-  system("bundle exec rakenbrb:backfill")
-end
-
-# BOB publishes daily (Botswana, UTC+2)
-scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
-  system("bundle exec rakebob:backfill")
-end
-
-# CBR publishes daily (Russia, UTC+3)
-scheduler.cron("*/30 9,10,11 * * 1-5", overlap: false) do
-  system("bundle exec rakecbr:backfill")
-end
-
-# NBP publishes daily around 12:00 CET (11:00-12:00 UTC)
-# https://api.nbp.pl/
-scheduler.cron("*/30 11,12,13 * * 1-5", overlap: false) do
-  system("bundle exec rakenbp:backfill")
-end
-
-# FRED publishes H.10 rates Mondays at 16:15 ET (21:15 UTC)
-# https://www.federalreserve.gov/releases/h10/
-scheduler.cron("*/30 21,22,23 * * 1", overlap: false) do
-  system("bundle exec rakefred:backfill")
-end
-
-# BNM publishes daily (Malaysia, UTC+8)
-# https://apikijangportal.bnm.gov.my/
-scheduler.cron("*/30 4,5,6 * * 1-5", overlap: false) do
-  system("bundle exec rakebnm:backfill")
-end
-
-# RBA publishes at 16:00 AEST (06:00 UTC, or 05:00 UTC during AEDT)
-# https://www.rba.gov.au/statistics/frequency/exchange-rates.html
-scheduler.cron("*/30 5,6,7 * * 1-5", overlap: false) do
-  system("bundle exec rake rba:backfill")
-end
-
-# BCRA publishes during business hours (Argentina, UTC-3)
-scheduler.cron("*/30 16,17,18 * * 1-5", overlap: false) do
-  system("bundle exec rake bcra:backfill")
-end
-
-# CBK publishes daily (Kenya, UTC+3)
-scheduler.cron("*/30 8,9,10 * * 1-5", overlap: false) do
-  system("bundle exec rake cbk:backfill")
-end
-
-# BOJ publishes during business hours (Jamaica, UTC-5)
-scheduler.cron("*/30 18,19,20 * * 1-5", overlap: false) do
-  system("bundle exec rake boj:backfill")
-end
-
-# IMF publishes daily (Washington DC, afternoon ET)
-scheduler.cron("*/30 18,19,20 * * 1-5", overlap: false) do
-  system("bundle exec rake imf:backfill")
-end
-
-# NBRM publishes during business hours (North Macedonia, UTC+1/+2)
-scheduler.cron("*/30 10,11,12 * * 1-5", overlap: false) do
-  system("bundle exec rake nbrm:backfill")
-end
-
-# BCEAO publishes Sun-Fri (Ghana/Senegal, UTC+0)
-scheduler.cron("*/30 10,11,12 * * 0-5", overlap: false) do
-  system("bundle exec rake bceao:backfill")
-end
-
-# BOI publishes around 15:00 IST (12:00-14:00 UTC), Sun-Thu
-scheduler.cron("*/30 12,13,14 * * 0-4", overlap: false) do
-  system("bundle exec rake boi:backfill")
-end
-
-# BCCR publishes during business hours (Costa Rica, UTC-6)
-scheduler.cron("*/30 18,19,20 * * 1-5", overlap: false) do
-  system("bundle exec rake bccr:backfill")
-end
-
-# NB publishes around 14:15 CET (13:00-15:00 UTC)
-# https://data.norges-bank.no/
-scheduler.cron("*/30 13,14,15 * * 1-5", overlap: false) do
-  system("bundle exec rake nb:backfill")
+  scheduler.cron(cron, overlap: false) do
+    system("bundle exec rake #{provider.key.downcase}:backfill")
+  end
 end
 
 scheduler.join

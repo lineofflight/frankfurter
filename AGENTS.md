@@ -20,16 +20,16 @@ lib/
 ├── provider.rb               # Provider model (Sequel, static cache)
 ├── rate.rb                   # Rate model with query scopes
 ├── db.rb                     # Database configuration
+├── providers.rb              # Auto-requires all providers from providers/
 ├── providers/
 │   ├── base.rb               # Provider interface: fetch, import, backfill
-│   └── <key>.rb              # One file per provider (ecb, boc, tcmb, ...)
+│   └── <key>.rb              # One file per provider (auto-discovered)
 ├── versions/
 │   ├── v1.rb                 # Legacy API (ECB-only, frozen)
 │   ├── v1/                   # V1 internals (quotes, rounding, currency names)
 │   ├── v2.rb                 # Multi-provider API
 │   └── v2/
 │       └── query.rb          # V2 query builder (blending, filtering)
-├── scheduler/daemon.rb       # Background data updates
 ├── public/
 │   ├── v1/openapi.json       # V1 OpenAPI spec
 │   └── v2/openapi.json       # V2 OpenAPI spec
@@ -65,9 +65,10 @@ db/seeds/
 - CORS enabled for all origins
 - OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
 
-### Scheduler (lib/scheduler/daemon.rb, bin/schedule)
+### Scheduler (bin/schedule)
 - Staggers startup backfill for all providers (2s apart)
-- Each provider has its own cron schedule aligned with its publish window
+- Cron schedules derived from `publish_time` and `publish_days` in the providers table
+- Convention: poll every 30 min for 3 hours starting at `publish_time`
 - Backfill is incremental: fetches only from the last stored date forward
 
 ## Database
@@ -79,8 +80,10 @@ SQLite database with `rates` and `providers` tables.
 - Unique index on `(provider, date, base, quote)`
 
 ### providers
-- `key`, `name`, `description`, `data_url`, `terms_url`
+- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`
 - Seeded from `db/seeds/providers.json`
+- `publish_time`: UTC hour when the provider typically publishes new rates
+- `publish_days`: cron-style day range (e.g. "1-5" for Mon-Fri, "0-4" for Sun-Thu)
 
 ## Testing
 
