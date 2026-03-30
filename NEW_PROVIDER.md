@@ -54,25 +54,13 @@ namespace :<key> do
 end
 ```
 
-### 4. Wire into the backfill aggregate — `lib/tasks/import.rake`
+### 4. Seed provider metadata — `db/seeds/providers.json`
 
-Add `"<key>:backfill"` to the dependency list.
+Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri).
 
-### 5. Wire into the scheduler — `bin/schedule`
+The provider class is auto-discovered from `lib/providers/` — no need to edit `v2.rb`, `import.rake`, or `bin/schedule`.
 
-- Add to the startup backfill array
-- Add a cron entry aligned with the provider's publish window (check timezone!)
-- Use `overlap: false` to prevent concurrent runs
-
-### 6. Register in V2 API — `lib/versions/v2.rb`
-
-Add `require "providers/<key>"` to the require block. The provider auto-registers via the `inherited` hook on `Providers::Base`.
-
-### 7. Seed provider metadata — `db/seeds/providers.json`
-
-Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable).
-
-### 8. Verify
+### 5. Verify
 
 ```bash
 APP_ENV=test bundle exec rake spec                    # All tests pass

@@ -3,12 +3,18 @@
 require "cache"
 require "log"
 require "money/currency"
+require "provider"
 require "rate"
 
 module Providers
   class << self
     def all
       @all ||= []
+    end
+
+    def enabled
+      seeded = Provider.map(&:key)
+      all.select { |p| seeded.include?(p.key) }
     end
   end
 
