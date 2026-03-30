@@ -38,7 +38,7 @@ class Blender
       weighted = group.map { |r| [r, recency_weight(reference_date - r[:date])] }
       total_weight = weighted.sum(&:last)
       rate = weighted.sum { |r, w| r[:rate] * w } / total_weight
-      weighted.max_by { |_, w| w }.first.merge(rate:)
+      group.max_by { |r| r[:date] }.merge(rate:)
     end
   end
 

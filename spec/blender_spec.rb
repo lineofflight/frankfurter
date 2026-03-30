@@ -61,6 +61,18 @@ describe Blender do
     _(usd[:date]).must_equal(date)
   end
 
+  it "picks the most recent date regardless of input order" do
+    rates = [
+      { date: date - 1, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+    ]
+
+    result = Blender.new(rates, base: "EUR").blend
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:date]).must_equal(date)
+  end
+
   it "discounts stale rates beyond the grace period" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
