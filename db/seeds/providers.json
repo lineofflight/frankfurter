@@ -187,5 +187,14 @@
     "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",
     "publish_time": 13,
     "publish_days": "1-5"
+  },
+  {
+    "key": "NBG",
+    "name": "National Bank of Georgia",
+    "description": "Daily official exchange rates for 40+ currencies against the Georgian lari",
+    "data_url": "https://nbg.gov.ge/en/monetary-policy/currency",
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "1-5"
   }
 ]
