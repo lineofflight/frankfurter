@@ -40,31 +40,17 @@ Follow the pattern in `spec/providers/boi_spec.rb` or `spec/providers/bccr_spec.
 
 VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first live test run. Pin dates in tests — never use `Date.today` with VCR.
 
-### 3. Rake task — `lib/tasks/<key>.rake`
-
-```ruby
-# frozen_string_literal: true
-
-namespace :<key> do
-  desc "Backfill <NAME> rates"
-  task :backfill do
-    require "providers/<key>"
-    Providers::<CLASS>.backfill
-  end
-end
-```
-
-### 4. Seed provider metadata — `db/seeds/providers.json`
+### 3. Seed provider metadata — `db/seeds/providers.json`
 
 Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri).
 
-The provider class is auto-discovered from `lib/providers/` — no need to edit `v2.rb`, `import.rake`, or `bin/schedule`.
+The provider class is auto-discovered from `lib/providers/` — no need to edit any wiring files.
 
-### 5. Verify
+### 4. Verify
 
 ```bash
 APP_ENV=test bundle exec rake spec                    # All tests pass
 APP_ENV=test bundle exec rake rubocop                 # No lint issues
 bundle exec rake db:seed                              # Provider appears in seed data
-bundle exec rake <key>:backfill                       # Live backfill works
+bundle exec rake backfill[<key>]                      # Live backfill works
 ```

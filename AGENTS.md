@@ -35,8 +35,7 @@ lib/
 │   └── v2/openapi.json       # V2 OpenAPI spec
 └── tasks/
     ├── db.rake               # Database migrations and setup
-    ├── import.rake            # Aggregate backfill task
-    └── <key>.rake             # One rake file per provider
+    └── providers.rake         # Dynamic backfill task for all providers
 
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
@@ -124,8 +123,8 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 rake db:setup        # Run migrations and seed providers
 rake db:migrate      # Run database migrations
 rake db:seed         # Seed provider metadata
-rake backfill        # Backfill all providers (incremental)
-rake <key>:backfill  # Backfill a single provider (e.g. rake ecb:backfill)
+rake backfill        # Backfill all providers (threaded, incremental)
+rake backfill[ecb]   # Backfill a single provider
 ```
 
 ## Adding a New Provider

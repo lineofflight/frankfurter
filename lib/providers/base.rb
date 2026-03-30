@@ -16,6 +16,10 @@ module Providers
       seeded = Provider.map(&:key)
       all.select { |p| seeded.include?(p.key) }
     end
+
+    def backfill
+      enabled.map { |provider| Thread.new { provider.backfill } }.each(&:join)
+    end
   end
 
   class Base

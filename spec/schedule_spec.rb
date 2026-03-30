@@ -18,7 +18,7 @@ describe "bin/schedule --dry-run" do
 
   it "generates valid cron expressions" do
     cron_lines.each do |line|
-      expression = line.match(/cron: (.+) \w+:backfill/)[1]
+      expression = line.match(/cron: (.+) backfill\[/)[1]
       parsed = Fugit::Cron.parse(expression)
 
       _(parsed).wont_be_nil("Invalid cron: #{expression}")
