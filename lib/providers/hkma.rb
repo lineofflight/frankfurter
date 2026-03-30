@@ -82,22 +82,11 @@ module Providers
       offset = 0
 
       loop do
-        page = fetch_page(offset)
+        page = fetch_page(start_date, end_date, offset)
         break if page.empty?
 
-        past_start = false
-        page.each do |record|
-          date = Date.parse(record["end_of_day"].to_s)
-          if date < start_date
-            past_start = true
-            break
-          end
-          raw_records << record if date <= end_date
-        rescue ArgumentError
-          next
-        end
-
-        break if past_start || page.size < PAGE_SIZE
+        raw_records.concat(page)
+        break if page.size < PAGE_SIZE
 
         offset += PAGE_SIZE
       end
@@ -105,9 +94,12 @@ module Providers
       parse(raw_records)
     end
 
-    def fetch_page(offset)
+    def fetch_page(start_date, end_date, offset)
       uri = URI(BASE_URL)
       uri.query = URI.encode_www_form(
+        "choose" => "end_of_day",
+        "from" => start_date.to_s,
+        "to" => end_date.to_s,
         "pagesize" => PAGE_SIZE,
         "offset" => offset,
         "sortby" => "end_of_day",
