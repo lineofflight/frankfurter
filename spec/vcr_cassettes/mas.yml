@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://eservices.mas.gov.sg/api/action/datastore/search.json?between%5Bend_of_day%5D=2026-03-16,2026-03-24&limit=10000&resource_id=95932927-c8bc-4e7a-b484-68a66a24edfe&sort=end_of_day%20asc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - eservices.mas.gov.sg
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"result":{"resource_id":["95932927-c8bc-4e7a-b484-68a66a24edfe"],"limit":10000,"total":"7","records":[{"end_of_day":"2026-03-16","preliminary":"0","eur_sgd":"1.4567","gbp_sgd":"1.7234","usd_sgd":"1.3456","jpy_sgd_100":"0.8912","aud_sgd":"0.8523","cad_sgd":"0.9412","chf_sgd":"1.5123","cny_sgd_100":"18.5432","hkd_sgd_100":"17.2345","inr_sgd_100":"1.5987","krw_sgd_100":"0.0987","myr_sgd_100":"30.1234","nzd_sgd":"0.7891","php_sgd_100":"2.3456","thb_sgd_100":"3.8765","twd_sgd_100":"4.1234","aed_sgd_100":"36.6543","idr_sgd_100":"0.0082","qar_sgd_100":"36.9512","sar_sgd_100":"35.8765","vnd_sgd_100":"0.0054","timestamp":"1742140800"},{"end_of_day":"2026-03-17","preliminary":"0","eur_sgd":"1.4589","gbp_sgd":"1.7256","usd_sgd":"1.3478","jpy_sgd_100":"0.8934","aud_sgd":"0.8545","cad_sgd":"0.9434","chf_sgd":"1.5145","cny_sgd_100":"18.5654","hkd_sgd_100":"17.2567","inr_sgd_100":"1.6009","krw_sgd_100":"0.0989","myr_sgd_100":"30.1456","nzd_sgd":"0.7913","php_sgd_100":"2.3478","thb_sgd_100":"3.8787","twd_sgd_100":"4.1256","aed_sgd_100":"36.6765","idr_sgd_100":"0.0083","qar_sgd_100":"36.9734","sar_sgd_100":"35.8987","vnd_sgd_100":"0.0055","timestamp":"1742227200"},{"end_of_day":"2026-03-18","preliminary":"0","eur_sgd":"1.4601","gbp_sgd":"1.7278","usd_sgd":"1.3490","jpy_sgd_100":"0.8956","aud_sgd":"0.8567","cad_sgd":"0.9456","chf_sgd":"1.5167","cny_sgd_100":"18.5876","hkd_sgd_100":"17.2789","inr_sgd_100":"1.6031","krw_sgd_100":"0.0991","myr_sgd_100":"30.1678","nzd_sgd":"0.7935","php_sgd_100":"2.3500","thb_sgd_100":"3.8809","twd_sgd_100":"4.1278","aed_sgd_100":"36.6987","idr_sgd_100":"0.0084","qar_sgd_100":"36.9956","sar_sgd_100":"35.9209","vnd_sgd_100":"0.0056","timestamp":"1742313600"},{"end_of_day":"2026-03-19","preliminary":"0","eur_sgd":"1.4623","gbp_sgd":"1.7300","usd_sgd":"1.3502","jpy_sgd_100":"0.8978","aud_sgd":"0.8589","cad_sgd":"0.9478","chf_sgd":"1.5189","cny_sgd_100":"18.6098","hkd_sgd_100":"17.3011","inr_sgd_100":"1.6053","krw_sgd_100":"0.0993","myr_sgd_100":"30.1900","nzd_sgd":"0.7957","php_sgd_100":"2.3522","thb_sgd_100":"3.8831","twd_sgd_100":"4.1300","aed_sgd_100":"36.7209","idr_sgd_100":"0.0085","qar_sgd_100":"37.0178","sar_sgd_100":"35.9431","vnd_sgd_100":"0.0057","timestamp":"1742400000"},{"end_of_day":"2026-03-20","preliminary":"0","eur_sgd":"1.4645","gbp_sgd":"1.7322","usd_sgd":"1.3514","jpy_sgd_100":"0.9000","aud_sgd":"0.8611","cad_sgd":"0.9500","chf_sgd":"1.5211","cny_sgd_100":"18.6320","hkd_sgd_100":"17.3233","inr_sgd_100":"1.6075","krw_sgd_100":"0.0995","myr_sgd_100":"30.2122","nzd_sgd":"0.7979","php_sgd_100":"2.3544","thb_sgd_100":"3.8853","twd_sgd_100":"4.1322","aed_sgd_100":"36.7431","idr_sgd_100":"0.0086","qar_sgd_100":"37.0400","sar_sgd_100":"35.9653","vnd_sgd_100":"0.0058","timestamp":"1742486400"},{"end_of_day":"2026-03-23","preliminary":"0","eur_sgd":"1.4667","gbp_sgd":"1.7344","usd_sgd":"1.3526","jpy_sgd_100":"0.9022","aud_sgd":"0.8633","cad_sgd":"0.9522","chf_sgd":"1.5233","cny_sgd_100":"18.6542","hkd_sgd_100":"17.3455","inr_sgd_100":"1.6097","krw_sgd_100":"0.0997","myr_sgd_100":"30.2344","nzd_sgd":"0.8001","php_sgd_100":"2.3566","thb_sgd_100":"3.8875","twd_sgd_100":"4.1344","aed_sgd_100":"36.7653","idr_sgd_100":"0.0087","qar_sgd_100":"37.0622","sar_sgd_100":"35.9875","vnd_sgd_100":"0.0059","timestamp":"1742745600"},{"end_of_day":"2026-03-24","preliminary":"0","eur_sgd":"1.4689","gbp_sgd":"1.7366","usd_sgd":"1.3538","jpy_sgd_100":"0.9044","aud_sgd":"0.8655","cad_sgd":"0.9544","chf_sgd":"1.5255","cny_sgd_100":"18.6764","hkd_sgd_100":"17.3677","inr_sgd_100":"1.6119","krw_sgd_100":"0.0999","myr_sgd_100":"30.2566","nzd_sgd":"0.8023","php_sgd_100":"2.3588","thb_sgd_100":"3.8897","twd_sgd_100":"4.1366","aed_sgd_100":"36.7875","idr_sgd_100":"0.0088","qar_sgd_100":"37.0844","sar_sgd_100":"36.0097","vnd_sgd_100":"0.0060","timestamp":"1742832000"}]}}'
+  recorded_at: Mon, 30 Mar 2026 08:44:05 GMT
+recorded_with: VCR 6.4.0
