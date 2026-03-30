@@ -129,7 +129,7 @@ rake backfill[ecb]   # Backfill a single provider
 
 ## Adding a New Provider
 
-See [NEW_PROVIDER.md](NEW_PROVIDER.md) for the full checklist and workflow.
+See [.claude/skills/add-provider.md](.claude/skills/add-provider.md) for the full checklist and workflow.
 
 ## Development Notes
 

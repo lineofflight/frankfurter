@@ -2,5 +2,6 @@
 coverage
 pkg
 *.sqlite3*
-.claude
+.claude/*.local.*
+.claude/worktrees
 docs

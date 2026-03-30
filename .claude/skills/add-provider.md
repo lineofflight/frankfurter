@@ -1,3 +1,7 @@
+---
+description: Use when adding a new exchange rate data provider, implementing a provider from a GitHub issue, when the user mentions a new central bank or data source, or when working on any issue labeled "provider". Also use when asked to backfill, fix, or update an existing provider.
+---
+
 # Adding a New Provider
 
 Checklist for adding a new exchange rate data provider. Each step references an existing provider as a pattern to follow.
@@ -6,6 +10,7 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 
 - Identify the API endpoint and authentication requirements
 - **Verify the API is accessible** — make a test request and confirm you get a 200 response with valid data. If the API returns 403, times out, or is otherwise inaccessible, **stop here**. Do not proceed with a hand-crafted cassette or fake data.
+- **Read the API docs** — understand pagination, date filtering, and rate limiting. Some APIs require specific params for date ranges (e.g., HKMA needs `choose=end_of_day` for `from`/`to` to work). Getting this right avoids downloading the entire dataset on every request.
 - Confirm the base currency and available quote currencies
 - Check the publish schedule (timezone, frequency, days of week)
 - Determine the earliest available date for historical data
@@ -28,7 +33,7 @@ Optional:
 Notes:
 - The `base` and `quote` in each record are determined by the data, not a class method
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
-- Rescue network errors (`Net::OpenTimeout`, `Net::ReadTimeout`) and return `self` with empty dataset
+- Rescue network errors (`Net::OpenTimeout`, `Net::ReadTimeout`, `Socket::ResolutionError`) and return `self` with empty dataset. Add provider-specific errors as needed (e.g., `Oj::ParseError`, `OpenSSL::SSLError`).
 - **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill(range: N)` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. See `lib/providers/nbg.rb` for a working example.
 
 ### 2. Tests — `spec/providers/<key>_spec.rb`
@@ -40,7 +45,7 @@ Follow the pattern in `spec/providers/boi_spec.rb` or `spec/providers/bccr_spec.
 - Parse unit tests: call `parse` directly with inline fixture data
 - Test edge cases: unit multipliers, empty values, invalid data
 
-VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first live test run. Pin dates in tests — never use `Date.today` with VCR. **Never hand-craft or fabricate cassettes** — they must be recorded from a live API response.
+VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first live test run. Pin dates in tests — never use `Date.today` with VCR. **Never hand-craft or fabricate cassettes** — they must be recorded from a live API response. Use narrow date ranges in integration tests (3-5 days) to keep cassettes small and test runs fast.
 
 ### 3. Seed provider metadata — `db/seeds/providers.json`
 
