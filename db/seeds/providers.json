@@ -187,5 +187,14 @@
     "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",
     "publish_time": 13,
     "publish_days": "1-5"
+  },
+  {
+    "key": "SBI",
+    "name": "Seðlabanki Íslands",
+    "description": "Daily official exchange rates for ~20 currencies against the Icelandic króna",
+    "data_url": "https://www.sedlabanki.is/en/statistics/official-exchange-rates/",
+    "terms_url": null,
+    "publish_time": 10,
+    "publish_days": "1-5"
   }
 ]
