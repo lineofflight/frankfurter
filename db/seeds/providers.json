@@ -205,5 +205,14 @@
     "terms_url": "https://www.hkma.gov.hk/eng/disclaimer/",
     "publish_time": 4,
     "publish_days": "1-5"
+  },
+  {
+    "key": "PEG",
+    "name": "Currency Pegs",
+    "description": "Fixed exchange rates for currencies with long-standing monetary pegs",
+    "data_url": null,
+    "terms_url": null,
+    "publish_time": 0,
+    "publish_days": "1-5"
   }
 ]
