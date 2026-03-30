@@ -250,5 +250,14 @@
     "terms_url": null,
     "publish_time": 16,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BANREP",
+    "name": "Banco de la República",
+    "description": "Daily representative market exchange rate for the US dollar against the Colombian peso",
+    "data_url": "https://www.banrep.gov.co/es/estadisticas/trm",
+    "terms_url": null,
+    "publish_time": 16,
+    "publish_days": "1-5"
   }
 ]

@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.datos.gov.co/resource/32sa-8pi3.json?$limit=50000&$order=vigenciadesde%20ASC&$where=vigenciadesde%3E=%272026-03-16T00:00:00.000%27%20AND%20vigenciadesde%3C=%272026-03-24T00:00:00.000%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.datos.gov.co
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 30 Mar 2026 23:40:21 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - '"Z29sZi41OTEwXzNfOTg5OGJIdll1aXlQUk05dGlyYWNsaUp2NjFMOWxjWQ---gziksjuwFRShDlcCt9j30XwMiOvnSh--gzip--gzip"'
+      X-Soda2-Fields:
+      - '["valor","unidad","vigenciadesde","vigenciahasta"]'
+      X-Soda2-Types:
+      - '["number","text","floating_timestamp","floating_timestamp"]'
+      X-Soda2-Data-Out-Of-Date:
+      - 'false'
+      X-Soda2-Truth-Last-Modified:
+      - Mon, 30 Mar 2026 23:05:36 GMT
+      X-Soda2-Secondary-Last-Modified:
+      - Mon, 30 Mar 2026 23:05:36 GMT
+      Last-Modified:
+      - Mon, 30 Mar 2026 23:05:36 GMT
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Socrata-Requestid:
+      - 4f6ab5fd949ef28f3a2c9a175f281248
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [{"valor":"3691.9","unidad":"COP","vigenciadesde":"2026-03-17T00:00:00.000","vigenciahasta":"2026-03-17T00:00:00.000"}
+        ,{"valor":"3689.97","unidad":"COP","vigenciadesde":"2026-03-18T00:00:00.000","vigenciahasta":"2026-03-18T00:00:00.000"}
+        ,{"valor":"3704.17","unidad":"COP","vigenciadesde":"2026-03-19T00:00:00.000","vigenciahasta":"2026-03-19T00:00:00.000"}
+        ,{"valor":"3692.48","unidad":"COP","vigenciadesde":"2026-03-20T00:00:00.000","vigenciahasta":"2026-03-20T00:00:00.000"}
+        ,{"valor":"3704.87","unidad":"COP","vigenciadesde":"2026-03-21T00:00:00.000","vigenciahasta":"2026-03-24T00:00:00.000"}]
+  recorded_at: Mon, 30 Mar 2026 23:40:21 GMT
+recorded_with: VCR 6.4.0
