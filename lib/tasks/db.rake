@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+desc "Migrate and seed the database"
+task "db:setup" => ["db:migrate", "db:seed"]
+
 namespace :db do
   desc "Run database migrations"
   task :migrate do

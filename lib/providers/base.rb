@@ -10,6 +10,11 @@ module Providers
     def all
       @all ||= []
     end
+
+    def enabled
+      seeded = Provider.pluck(:key)
+      all.select { |p| seeded.include?(p.key) }
+    end
   end
 
   class Base

@@ -7,8 +7,8 @@ require "providers"
 
 scheduler = Rufus::Scheduler.new
 
-# Backfill all providers on startup (staggered to avoid thundering herd)
-Providers.all.each_with_index do |provider, i|
+# Backfill enabled providers on startup (staggered to avoid thundering herd)
+Providers.enabled.each_with_index do |provider, i|
   scheduler.in("#{i * 2}s") do
     system("bundle exec rake #{provider.key.downcase}:backfill")
   end
