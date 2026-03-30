@@ -138,5 +138,12 @@
     "description": "Daily reference exchange rate for the US dollar against the Costa Rican colon",
     "data_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/Contenedor/6",
     "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso"
+  },
+  {
+    "key": "NB",
+    "name": "Norges Bank",
+    "description": "Daily exchange rates for 40+ currencies against the Norwegian krone",
+    "data_url": "https://data.norges-bank.no/",
+    "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/"
   }
 ]

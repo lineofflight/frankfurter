@@ -1,0 +1,332 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://data.norges-bank.no/api/data/EXR/B..NOK.SP?endPeriod=2026-03-24&format=csvdata&startPeriod=2026-03-16
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - data.norges-bank.no
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 30 Mar 2026 08:43:29 GMT
+      Content-Type:
+      - text/csv;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept,Accept-Language
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      - accept-encoding
+      Content-Disposition:
+      - inline; filename="EXR.csv"
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Set-Cookie:
+      - JSESSIONID=2F6DEFA4EDFB4B96335F7D008FEF5675; Path=/FusionRegistry; Secure;
+        HttpOnly; SameSite=Strict
+      - __cf_bm=XCCFNtZotm.AlLQEyR7AYnMqtsva._LS9GJmT9vv8Wk-1774860209.052762-1.0.1.1-E0EfG0cSCd4ECpTp9ta8PYIWFFvnC0Cn.oW93OjE2eBu6k6uSDoyEnp0GHFzmfPTU6tI_tBmuxY9sydLOQnZqr7KvNKklOhbry23_P.31CWMEP2Vh2BcjHN9TM66_d33;
+        HttpOnly; Secure; Path=/; Domain=norges-bank.no; Expires=Mon, 30 Mar 2026
+        09:13:29 GMT
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9e45d3b29ad50b4c-AMS
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        FREQ,BASE_CUR,QUOTE_CUR,TENOR,DECIMALS,CALCULATED,UNIT_MULT,COLLECTION,TIME_PERIOD,OBS_VALUE
+        B,HUF,NOK,SP,4,false,2,C,2026-03-16,2.857
+        B,HUF,NOK,SP,4,false,2,C,2026-03-17,2.8514
+        B,HUF,NOK,SP,4,false,2,C,2026-03-18,2.8054
+        B,HUF,NOK,SP,4,false,2,C,2026-03-19,2.7887
+        B,HUF,NOK,SP,4,false,2,C,2026-03-20,2.8101
+        B,HUF,NOK,SP,4,false,2,C,2026-03-23,2.9051
+        B,HUF,NOK,SP,4,false,2,C,2026-03-24,2.8805
+        B,DKK,NOK,SP,2,false,2,C,2026-03-16,149.21
+        B,DKK,NOK,SP,2,false,2,C,2026-03-17,148.2
+        B,DKK,NOK,SP,2,false,2,C,2026-03-18,147.49
+        B,DKK,NOK,SP,2,false,2,C,2026-03-19,147.17
+        B,DKK,NOK,SP,2,false,2,C,2026-03-20,147.62
+        B,DKK,NOK,SP,2,false,2,C,2026-03-23,151.04
+        B,DKK,NOK,SP,2,false,2,C,2026-03-24,150.32
+        B,MMK,NOK,SP,4,false,2,C,2026-03-16,0.4625
+        B,MMK,NOK,SP,4,false,2,C,2026-03-17,0.4573
+        B,MMK,NOK,SP,4,false,2,C,2026-03-18,0.4563
+        B,MMK,NOK,SP,4,false,2,C,2026-03-19,0.4558
+        B,MMK,NOK,SP,4,false,2,C,2026-03-20,0.4545
+        B,MMK,NOK,SP,4,false,2,C,2026-03-23,0.4634
+        B,MMK,NOK,SP,4,false,2,C,2026-03-24,0.4621
+        B,XDR,NOK,SP,5,true,0,C,2026-03-16,13.19587
+        B,XDR,NOK,SP,5,true,0,C,2026-03-17,13.07222
+        B,XDR,NOK,SP,5,true,0,C,2026-03-18,13.02851
+        B,XDR,NOK,SP,5,true,0,C,2026-03-19,13.0082
+        B,XDR,NOK,SP,5,true,0,C,2026-03-20,13.00312
+        B,XDR,NOK,SP,5,true,0,C,2026-03-23,13.27848
+        B,XDR,NOK,SP,5,true,0,C,2026-03-24,13.2271
+        B,TRY,NOK,SP,2,false,2,C,2026-03-16,21.98
+        B,TRY,NOK,SP,2,false,2,C,2026-03-17,21.72
+        B,TRY,NOK,SP,2,false,2,C,2026-03-18,21.67
+        B,TRY,NOK,SP,2,false,2,C,2026-03-19,21.59
+        B,TRY,NOK,SP,2,false,2,C,2026-03-20,21.54
+        B,TRY,NOK,SP,2,false,2,C,2026-03-23,21.96
+        B,TRY,NOK,SP,2,false,2,C,2026-03-24,21.88
+        B,RON,NOK,SP,2,false,2,C,2026-03-16,218.84
+        B,RON,NOK,SP,2,false,2,C,2026-03-17,217.48
+        B,RON,NOK,SP,2,false,2,C,2026-03-18,216.35
+        B,RON,NOK,SP,2,false,2,C,2026-03-19,215.73
+        B,RON,NOK,SP,2,false,2,C,2026-03-20,216.42
+        B,RON,NOK,SP,2,false,2,C,2026-03-23,221.46
+        B,RON,NOK,SP,2,false,2,C,2026-03-24,220.42
+        B,NZD,NOK,SP,4,false,0,C,2026-03-16,5.6747
+        B,NZD,NOK,SP,4,false,0,C,2026-03-17,5.6228
+        B,NZD,NOK,SP,4,false,0,C,2026-03-18,5.5763
+        B,NZD,NOK,SP,4,false,0,C,2026-03-19,5.5535
+        B,NZD,NOK,SP,4,false,0,C,2026-03-20,5.5919
+        B,NZD,NOK,SP,4,false,0,C,2026-03-23,5.6892
+        B,NZD,NOK,SP,4,false,0,C,2026-03-24,5.6449
+        B,JPY,NOK,SP,4,false,2,C,2026-03-16,6.1037
+        B,JPY,NOK,SP,4,false,2,C,2026-03-17,6.0412
+        B,JPY,NOK,SP,4,false,2,C,2026-03-18,6.006
+        B,JPY,NOK,SP,4,false,2,C,2026-03-19,6.0265
+        B,JPY,NOK,SP,4,false,2,C,2026-03-20,6.0117
+        B,JPY,NOK,SP,4,false,2,C,2026-03-23,6.1378
+        B,JPY,NOK,SP,4,false,2,C,2026-03-24,6.1065
+        B,HKD,NOK,SP,4,false,0,C,2026-03-16,1.2404
+        B,HKD,NOK,SP,4,false,0,C,2026-03-17,1.2255
+        B,HKD,NOK,SP,4,false,0,C,2026-03-18,1.2227
+        B,HKD,NOK,SP,4,false,0,C,2026-03-19,1.2222
+        B,HKD,NOK,SP,4,false,0,C,2026-03-20,1.2181
+        B,HKD,NOK,SP,4,false,0,C,2026-03-23,1.2426
+        B,HKD,NOK,SP,4,false,0,C,2026-03-24,1.2399
+        B,CZK,NOK,SP,3,false,2,C,2026-03-16,45.625
+        B,CZK,NOK,SP,3,false,2,C,2026-03-17,45.312
+        B,CZK,NOK,SP,3,false,2,C,2026-03-18,45.042
+        B,CZK,NOK,SP,3,false,2,C,2026-03-19,44.851
+        B,CZK,NOK,SP,3,false,2,C,2026-03-20,45.007
+        B,CZK,NOK,SP,3,false,2,C,2026-03-23,46.178
+        B,CZK,NOK,SP,3,false,2,C,2026-03-24,45.882
+        B,CAD,NOK,SP,4,false,0,C,2026-03-16,7.0999
+        B,CAD,NOK,SP,4,false,0,C,2026-03-17,7.0065
+        B,CAD,NOK,SP,4,false,0,C,2026-03-18,6.9865
+        B,CAD,NOK,SP,4,false,0,C,2026-03-19,6.9727
+        B,CAD,NOK,SP,4,false,0,C,2026-03-20,6.9588
+        B,CAD,NOK,SP,4,false,0,C,2026-03-23,7.0993
+        B,CAD,NOK,SP,4,false,0,C,2026-03-24,7.0588
+        B,BDT,NOK,SP,2,false,2,C,2026-03-16,7.92
+        B,BDT,NOK,SP,2,false,2,C,2026-03-17,7.83
+        B,BDT,NOK,SP,2,false,2,C,2026-03-18,7.81
+        B,BDT,NOK,SP,2,false,2,C,2026-03-19,7.8
+        B,BDT,NOK,SP,2,false,2,C,2026-03-20,7.78
+        B,BDT,NOK,SP,2,false,2,C,2026-03-23,7.93
+        B,BDT,NOK,SP,2,false,2,C,2026-03-24,7.91
+        B,USD,NOK,SP,4,false,0,C,2026-03-16,9.7134
+        B,USD,NOK,SP,4,false,0,C,2026-03-17,9.6028
+        B,USD,NOK,SP,4,false,0,C,2026-03-18,9.583
+        B,USD,NOK,SP,4,false,0,C,2026-03-19,9.5709
+        B,USD,NOK,SP,4,false,0,C,2026-03-20,9.5448
+        B,USD,NOK,SP,4,false,0,C,2026-03-23,9.7318
+        B,USD,NOK,SP,4,false,0,C,2026-03-24,9.7049
+        B,THB,NOK,SP,3,false,2,C,2026-03-16,30.016
+        B,THB,NOK,SP,3,false,2,C,2026-03-17,29.712
+        B,THB,NOK,SP,3,false,2,C,2026-03-18,29.337
+        B,THB,NOK,SP,3,false,2,C,2026-03-19,29.086
+        B,THB,NOK,SP,3,false,2,C,2026-03-20,29.136
+        B,THB,NOK,SP,3,false,2,C,2026-03-23,30.171
+        B,THB,NOK,SP,3,false,2,C,2026-03-24,29.715
+        B,PLN,NOK,SP,4,false,0,C,2026-03-16,2.612
+        B,PLN,NOK,SP,4,false,0,C,2026-03-17,2.5997
+        B,PLN,NOK,SP,4,false,0,C,2026-03-18,2.5801
+        B,PLN,NOK,SP,4,false,0,C,2026-03-19,2.566
+        B,PLN,NOK,SP,4,false,0,C,2026-03-20,2.5779
+        B,PLN,NOK,SP,4,false,0,C,2026-03-23,2.6464
+        B,PLN,NOK,SP,4,false,0,C,2026-03-24,2.6274
+        B,AUD,NOK,SP,4,false,0,C,2026-03-16,6.8516
+        B,AUD,NOK,SP,4,false,0,C,2026-03-17,6.8238
+        B,AUD,NOK,SP,4,false,0,C,2026-03-18,6.759
+        B,AUD,NOK,SP,4,false,0,C,2026-03-19,6.7037
+        B,AUD,NOK,SP,4,false,0,C,2026-03-20,6.7452
+        B,AUD,NOK,SP,4,false,0,C,2026-03-23,6.8315
+        B,AUD,NOK,SP,4,false,0,C,2026-03-24,6.7442
+        B,MYR,NOK,SP,4,false,0,C,2026-03-16,2.4713
+        B,MYR,NOK,SP,4,false,0,C,2026-03-17,2.451
+        B,MYR,NOK,SP,4,false,0,C,2026-03-18,2.4468
+        B,MYR,NOK,SP,4,false,0,C,2026-03-19,2.4296
+        B,MYR,NOK,SP,4,false,0,C,2026-03-20,2.4228
+        B,MYR,NOK,SP,4,false,0,C,2026-03-23,2.4703
+        B,MYR,NOK,SP,4,false,0,C,2026-03-24,2.4529
+        B,INR,NOK,SP,3,false,2,C,2026-03-16,10.53
+        B,INR,NOK,SP,3,false,2,C,2026-03-17,10.397
+        B,INR,NOK,SP,3,false,2,C,2026-03-18,10.316
+        B,INR,NOK,SP,3,false,2,C,2026-03-19,10.264
+        B,INR,NOK,SP,3,false,2,C,2026-03-20,10.196
+        B,INR,NOK,SP,3,false,2,C,2026-03-23,10.44
+        B,INR,NOK,SP,3,false,2,C,2026-03-24,10.341
+        B,IDR,NOK,SP,6,false,2,C,2026-03-16,0.057256
+        B,IDR,NOK,SP,6,false,2,C,2026-03-17,0.056627
+        B,IDR,NOK,SP,6,false,2,C,2026-03-18,0.056391
+        B,IDR,NOK,SP,6,false,2,C,2026-03-19,0.056432
+        B,IDR,NOK,SP,6,false,2,C,2026-03-20,0.056393
+        B,IDR,NOK,SP,6,false,2,C,2026-03-23,0.057597
+        B,IDR,NOK,SP,6,false,2,C,2026-03-24,0.057457
+        B,GBP,NOK,SP,4,false,0,C,2026-03-16,12.9027
+        B,GBP,NOK,SP,4,false,0,C,2026-03-17,12.8115
+        B,GBP,NOK,SP,4,false,0,C,2026-03-18,12.7562
+        B,GBP,NOK,SP,4,false,0,C,2026-03-19,12.7286
+        B,GBP,NOK,SP,4,false,0,C,2026-03-20,12.7594
+        B,GBP,NOK,SP,4,false,0,C,2026-03-23,13.0583
+        B,GBP,NOK,SP,4,false,0,C,2026-03-24,12.9771
+        B,CNY,NOK,SP,2,false,2,C,2026-03-16,140.85
+        B,CNY,NOK,SP,2,false,2,C,2026-03-17,139.44
+        B,CNY,NOK,SP,2,false,2,C,2026-03-18,139.12
+        B,CNY,NOK,SP,2,false,2,C,2026-03-19,138.7
+        B,CNY,NOK,SP,2,false,2,C,2026-03-20,138.44
+        B,CNY,NOK,SP,2,false,2,C,2026-03-23,141.21
+        B,CNY,NOK,SP,2,false,2,C,2026-03-24,140.79
+        B,BRL,NOK,SP,4,false,0,C,2026-03-16,1.8431
+        B,BRL,NOK,SP,4,false,0,C,2026-03-17,1.8435
+        B,BRL,NOK,SP,4,false,0,C,2026-03-18,1.8343
+        B,BRL,NOK,SP,4,false,0,C,2026-03-19,1.8063
+        B,BRL,NOK,SP,4,false,0,C,2026-03-20,1.8163
+        B,BRL,NOK,SP,4,false,0,C,2026-03-23,1.8503
+        B,BRL,NOK,SP,4,false,0,C,2026-03-24,1.8426
+        B,VND,NOK,SP,4,false,2,C,2026-03-16,0.0369
+        B,VND,NOK,SP,4,false,2,C,2026-03-17,0.0365
+        B,VND,NOK,SP,4,false,2,C,2026-03-18,0.0364
+        B,VND,NOK,SP,4,false,2,C,2026-03-19,0.0364
+        B,VND,NOK,SP,4,false,2,C,2026-03-20,0.0363
+        B,VND,NOK,SP,4,false,2,C,2026-03-23,0.0369
+        B,VND,NOK,SP,4,false,2,C,2026-03-24,0.0368
+        B,BYN,NOK,SP,4,false,0,C,2026-03-16,3.2607
+        B,BYN,NOK,SP,4,false,0,C,2026-03-17,3.186
+        B,BYN,NOK,SP,4,false,0,C,2026-03-18,3.1407
+        B,BYN,NOK,SP,4,false,0,C,2026-03-19,3.1057
+        B,BYN,NOK,SP,4,false,0,C,2026-03-20,3.1615
+        B,BYN,NOK,SP,4,false,0,C,2026-03-23,3.2683
+        B,BYN,NOK,SP,4,false,0,C,2026-03-24,3.2782
+        B,TWI,NOK,SP,2,true,0,C,2026-03-16,127.35
+        B,TWI,NOK,SP,2,true,0,C,2026-03-17,126.56
+        B,TWI,NOK,SP,2,true,0,C,2026-03-18,125.74
+        B,TWI,NOK,SP,2,true,0,C,2026-03-19,125.31
+        B,TWI,NOK,SP,2,true,0,C,2026-03-20,125.69
+        B,TWI,NOK,SP,2,true,0,C,2026-03-23,128.47
+        B,TWI,NOK,SP,2,true,0,C,2026-03-24,127.89
+        B,SGD,NOK,SP,4,false,0,C,2026-03-16,7.5968
+        B,SGD,NOK,SP,4,false,0,C,2026-03-17,7.5209
+        B,SGD,NOK,SP,4,false,0,C,2026-03-18,7.4796
+        B,SGD,NOK,SP,4,false,0,C,2026-03-19,7.4579
+        B,SGD,NOK,SP,4,false,0,C,2026-03-20,7.4556
+        B,SGD,NOK,SP,4,false,0,C,2026-03-23,7.6296
+        B,SGD,NOK,SP,4,false,0,C,2026-03-24,7.5784
+        B,PKR,NOK,SP,3,false,2,C,2026-03-16,3.477
+        B,PKR,NOK,SP,3,false,2,C,2026-03-17,3.44
+        B,PKR,NOK,SP,3,false,2,C,2026-03-18,3.43
+        B,PKR,NOK,SP,3,false,2,C,2026-03-19,3.427
+        B,PKR,NOK,SP,3,false,2,C,2026-03-20,3.419
+        B,PKR,NOK,SP,3,false,2,C,2026-03-23,3.486
+        B,PKR,NOK,SP,3,false,2,C,2026-03-24,3.452
+        B,MXN,NOK,SP,2,false,2,C,2026-03-16,54.57
+        B,MXN,NOK,SP,2,false,2,C,2026-03-17,54.37
+        B,MXN,NOK,SP,2,false,2,C,2026-03-18,54.04
+        B,MXN,NOK,SP,2,false,2,C,2026-03-19,53.42
+        B,MXN,NOK,SP,2,false,2,C,2026-03-20,53.57
+        B,MXN,NOK,SP,2,false,2,C,2026-03-23,54.78
+        B,MXN,NOK,SP,2,false,2,C,2026-03-24,54.26
+        B,ILS,NOK,SP,4,false,0,C,2026-03-16,3.1142
+        B,ILS,NOK,SP,4,false,0,C,2026-03-17,3.0988
+        B,ILS,NOK,SP,4,false,0,C,2026-03-18,3.0887
+        B,ILS,NOK,SP,4,false,0,C,2026-03-19,3.0547
+        B,ILS,NOK,SP,4,false,0,C,2026-03-20,3.0732
+        B,ILS,NOK,SP,4,false,0,C,2026-03-23,3.1242
+        B,ILS,NOK,SP,4,false,0,C,2026-03-24,3.1012
+        B,I44,NOK,SP,2,true,0,C,2026-03-16,114.11
+        B,I44,NOK,SP,2,true,0,C,2026-03-17,113.29
+        B,I44,NOK,SP,2,true,0,C,2026-03-18,112.69
+        B,I44,NOK,SP,2,true,0,C,2026-03-19,112.33
+        B,I44,NOK,SP,2,true,0,C,2026-03-20,112.51
+        B,I44,NOK,SP,2,true,0,C,2026-03-23,114.98
+        B,I44,NOK,SP,2,true,0,C,2026-03-24,114.42
+        B,EUR,NOK,SP,4,false,0,C,2026-03-16,11.149
+        B,EUR,NOK,SP,4,false,0,C,2026-03-17,11.073
+        B,EUR,NOK,SP,4,false,0,C,2026-03-18,11.0205
+        B,EUR,NOK,SP,4,false,0,C,2026-03-19,10.996
+        B,EUR,NOK,SP,4,false,0,C,2026-03-20,11.029
+        B,EUR,NOK,SP,4,false,0,C,2026-03-23,11.285
+        B,EUR,NOK,SP,4,false,0,C,2026-03-24,11.2305
+        B,CHF,NOK,SP,2,false,2,C,2026-03-16,1233.16
+        B,CHF,NOK,SP,2,false,2,C,2026-03-17,1221.11
+        B,CHF,NOK,SP,2,false,2,C,2026-03-18,1214.65
+        B,CHF,NOK,SP,2,false,2,C,2026-03-19,1205.57
+        B,CHF,NOK,SP,2,false,2,C,2026-03-20,1212.51
+        B,CHF,NOK,SP,2,false,2,C,2026-03-23,1236.85
+        B,CHF,NOK,SP,2,false,2,C,2026-03-24,1228.05
+        B,ISK,NOK,SP,2,false,2,C,2026-03-16,7.77
+        B,ISK,NOK,SP,2,false,2,C,2026-03-17,7.71
+        B,ISK,NOK,SP,2,false,2,C,2026-03-18,7.67
+        B,ISK,NOK,SP,2,false,2,C,2026-03-19,7.67
+        B,ISK,NOK,SP,2,false,2,C,2026-03-20,7.67
+        B,ISK,NOK,SP,2,false,2,C,2026-03-23,7.86
+        B,ISK,NOK,SP,2,false,2,C,2026-03-24,7.8
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-16,0.5793
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-17,0.5764
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-18,0.5676
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-19,0.5607
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-20,0.5653
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-23,0.5789
+        B,ZAR,NOK,SP,4,false,0,C,2026-03-24,0.5675
+        B,TWD,NOK,SP,3,false,2,C,2026-03-16,30.348
+        B,TWD,NOK,SP,3,false,2,C,2026-03-17,30.139
+        B,TWD,NOK,SP,3,false,2,C,2026-03-18,30.001
+        B,TWD,NOK,SP,3,false,2,C,2026-03-19,29.935
+        B,TWD,NOK,SP,3,false,2,C,2026-03-20,29.836
+        B,TWD,NOK,SP,3,false,2,C,2026-03-23,30.54
+        B,TWD,NOK,SP,3,false,2,C,2026-03-24,30.329
+        B,SEK,NOK,SP,2,false,2,C,2026-03-16,103.53
+        B,SEK,NOK,SP,2,false,2,C,2026-03-17,103.43
+        B,SEK,NOK,SP,2,false,2,C,2026-03-18,102.25
+        B,SEK,NOK,SP,2,false,2,C,2026-03-19,101.75
+        B,SEK,NOK,SP,2,false,2,C,2026-03-20,102.29
+        B,SEK,NOK,SP,2,false,2,C,2026-03-23,104.17
+        B,SEK,NOK,SP,2,false,2,C,2026-03-24,103.76
+        B,PHP,NOK,SP,3,false,2,C,2026-03-16,16.257
+        B,PHP,NOK,SP,3,false,2,C,2026-03-17,16.123
+        B,PHP,NOK,SP,3,false,2,C,2026-03-18,15.972
+        B,PHP,NOK,SP,3,false,2,C,2026-03-19,15.91
+        B,PHP,NOK,SP,3,false,2,C,2026-03-20,15.942
+        B,PHP,NOK,SP,3,false,2,C,2026-03-23,16.317
+        B,PHP,NOK,SP,3,false,2,C,2026-03-24,16.183
+        B,KRW,NOK,SP,4,false,2,C,2026-03-16,0.6516
+        B,KRW,NOK,SP,4,false,2,C,2026-03-17,0.6457
+        B,KRW,NOK,SP,4,false,2,C,2026-03-18,0.6374
+        B,KRW,NOK,SP,4,false,2,C,2026-03-19,0.6374
+        B,KRW,NOK,SP,4,false,2,C,2026-03-20,0.636
+        B,KRW,NOK,SP,4,false,2,C,2026-03-23,0.6542
+        B,KRW,NOK,SP,4,false,2,C,2026-03-24,0.6475
+  recorded_at: Mon, 30 Mar 2026 08:43:29 GMT
+recorded_with: VCR 6.4.0
