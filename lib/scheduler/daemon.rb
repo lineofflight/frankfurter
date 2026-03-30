@@ -27,6 +27,7 @@ module Scheduler
     private
 
     def run
+      Sequel::DATABASES.each(&:disconnect)
       load("bin/schedule")
     end
 
