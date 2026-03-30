@@ -30,6 +30,8 @@ class Blender
     rebased = rates.group_by { |r| r[:provider] }.flat_map do |_, provider_rows|
       BaseConverter.new(provider_rows, base:).convert
     end
+    # Downsample queries return dates as strings (SQLite has no date type)
+    rebased.each { |r| r[:date] = Date.parse(r[:date]) unless r[:date].is_a?(Date) }
 
     reference_date = rebased.map { |r| r[:date] }.max
     rebased.group_by { |r| r[:quote] }.sort.map do |_, group|
