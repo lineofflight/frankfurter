@@ -1,73 +1,86 @@
 # Frankfurter
 
-Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from institutional sources like the European Central Bank and the Bank of Canada.
+Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from 20+ institutional sources (central banks, the IMF, the Federal Reserve, etc.).
 
 ## Architecture
 
 - Roda web framework with Rack middleware
-- SQLite with Sequel ORM
+- SQLite with Sequel ORM (WAL mode)
 - Unicorn
-- Rufus scheduler
+- Rufus scheduler for background data updates
+- Cloudflare CDN with cache purge on import
 
 ## Project Structure
 
 ```
 lib/
-├── app.rb                    # Main Roda application with routing
-├── currency.rb               # Currency model
+├── app.rb                    # Main Roda app — mounts v1 and v2
+├── cache.rb                  # Cloudflare cache purge
+├── currency.rb               # Currency virtual model (UNION over rates)
+├── provider.rb               # Provider model (Sequel, static cache)
+├── rate.rb                   # Rate model with query scopes
 ├── db.rb                     # Database configuration
 ├── providers/
-│   ├── base.rb               # Provider interface and import logic
-│   ├── ecb.rb                # European Central Bank provider
-│   └── boc.rb                # Bank of Canada provider
+│   ├── base.rb               # Provider interface: fetch, import, backfill
+│   └── <key>.rb              # One file per provider (ecb, boc, tcmb, ...)
 ├── versions/
-│   ├── v1.rb                 # API v1 endpoints, query parsing, currency names
-│   └── v1/
-│       ├── roundable.rb      # Exchange rate rounding rules
-│       └── quote/            # Rate quote classes (base, end_of_day, interval)
+│   ├── v1.rb                 # Legacy API (ECB-only, frozen)
+│   ├── v1/                   # V1 internals (quotes, rounding, currency names)
+│   ├── v2.rb                 # Multi-provider API
+│   └── v2/
+│       └── query.rb          # V2 query builder (blending, filtering)
 ├── scheduler/daemon.rb       # Background data updates
+├── public/
+│   ├── v1/openapi.json       # V1 OpenAPI spec
+│   └── v2/openapi.json       # V2 OpenAPI spec
 └── tasks/
     ├── db.rake               # Database migrations and setup
-    ├── ecb.rake              # ECB import/backfill tasks
-    └── boc.rake              # BOC import/backfill tasks
+    ├── import.rake            # Aggregate backfill task
+    └── <key>.rake             # One rake file per provider
 
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
-db/seeds/                     # Provider metadata
+db/seeds/
+    └── providers.json        # Provider metadata (key, name, description, urls)
 ```
 
 ## Key Components
 
 ### Providers (lib/providers/)
-- `Providers::Base`: Shared interface — `key`, `base`, `fetch(since:)`, `import`, `backfill`
-- `key`, `name`, `base` are class methods; instance methods delegate
-- `fetch(since: nil)`: `nil` fetches full history, a date fetches from that date forward (inclusive)
-- `self.backfill`: queries DB for last stored date, calls `new.fetch(since:).import`
-- `import` writes to DB via upsert, filters excluded quotes, purges cache
-- Usage: `Providers::ECB.backfill` or `Providers::ECB.new.fetch(since: date).import`
+- `Providers::Base`: Shared interface — `key`, `base`, `fetch`, `import`, `backfill`
+- `key`, `name` are class methods; instance methods delegate
+- `fetch(since: nil, upto: nil)`: fetches rate data from the source API
+- `self.backfill(range:)`: queries DB for last stored date, fetches forward, imports. `range:` enables chunked requests for APIs with result limits.
+- `import`: writes to DB via upsert, filters excluded quotes (precious metals, SDR), purges Cloudflare cache
+- All providers auto-register via `inherited` hook into `Providers.all`
 
-### API (lib/app.rb, lib/versions/v1.rb)
-- v1 API at `/v1/*` endpoints, scoped to ECB data
+### Models
+- `Rate`: Sequel model on `rates` table. Scopes: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
+- `Currency`: Virtual model backed by UNION query over rates. Derives currencies, date ranges from data.
+- `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers.json`). Static cache.
+
+### API (lib/app.rb)
+- V1 at `/v1/*` — frozen legacy, ECB-only
+- V2 at `/v2/*` — multi-provider with blended rates
 - CORS enabled for all origins
-- JSON responses with 900-second caching
+- OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
 
 ### Scheduler (lib/scheduler/daemon.rb, bin/schedule)
-- Runs `backfill` for all providers on startup
-- Runs each provider's `backfill` task on its own cron schedule
+- Staggers startup backfill for all providers (2s apart)
+- Each provider has its own cron schedule aligned with its publish window
 - Backfill is incremental: fetches only from the last stored date forward
-- ECB: weekdays 15:00-17:00 UTC
-- BOC: weekdays 20:00-22:00 UTC
 
 ## Database
 
-SQLite database with single `rates` table:
-- `date`: DATE
-- `base`: VARCHAR (provider's native base currency)
-- `quote`: VARCHAR (quoted currency code)
-- `rate`: DECIMAL (exchange rate)
-- `provider`: VARCHAR (data provider identifier)
+SQLite database with `rates` and `providers` tables.
 
-Unique index on `(provider, date, quote)`.
+### rates
+- `date`, `base`, `quote`, `rate`, `provider`
+- Unique index on `(provider, date, base, quote)`
+
+### providers
+- `key`, `name`, `description`, `data_url`, `terms_url`
+- Seeded from `db/seeds/providers.json`
 
 ## Testing
 
@@ -86,6 +99,7 @@ Separate SQLite databases per environment (`APP_ENV`): test, development, produc
 - VCR + WebMock for HTTP recording/mocking
 - Minitest-focus for targeted test runs
 - Global transaction rollback via `Minitest::Spec#around`
+- Test fixtures seed on suite load via `spec/helper.rb`
 
 ## Running Locally
 
@@ -104,27 +118,15 @@ docker run -d -p 80:8080 lineofflight/frankfurter
 ## Rake Tasks
 
 ```bash
-rake db:migrate    # Run database migrations
-rake db:seed       # Seed provider metadata
-rake backfill      # Backfill all providers (incremental from last stored date)
-rake ecb:backfill  # Backfill a single provider
+rake db:migrate      # Run database migrations
+rake db:seed         # Seed provider metadata
+rake backfill        # Backfill all providers (incremental)
+rake <key>:backfill  # Backfill a single provider (e.g. rake ecb:backfill)
 ```
 
 ## Adding a New Provider
 
-Checklist for adding a new exchange rate data provider:
-
-1. `lib/providers/<name>.rb` — provider class inheriting `Providers::Base`
-   - Implement class methods: `key`, `name`, and optionally `earliest_date`
-   - Implement `fetch(since: nil, upto: nil)` and parsing logic
-   - Override `backfill(range:)` if the API needs chunked requests
-2. `spec/providers/<name>_spec.rb` — tests (fetch, since-date, multi-currency, parse unit test)
-3. `spec/vcr_cassettes/<name>.yml` — recorded HTTP fixture (auto-created by VCR on first test run)
-4. `lib/tasks/<name>.rake` — rake namespace with `:backfill` task
-5. `lib/tasks/import.rake` — add `"<name>:backfill"` to the backfill dependency list
-6. `bin/schedule` — add to startup backfill array and add cron schedule for publish window
-7. `lib/versions/v2.rb` — add `require "providers/<name>"` so v2 API registers the provider
-8. `db/seeds/providers.json` — add provider metadata (key, name, description, url)
+See [NEW_PROVIDER.md](NEW_PROVIDER.md) for the full checklist and workflow.
 
 ## Development Notes
 
@@ -135,14 +137,16 @@ Checklist for adding a new exchange rate data provider:
 
 ## API Endpoints
 
-### v2 (lib/versions/v2.rb)
+### V2 (lib/versions/v2.rb)
+
+Multi-provider API with blended rates. Full spec at `/v2/openapi.json`.
 
 ```
 GET /v2/rates                                # latest blended rates
 GET /v2/rates?base=USD                       # rebased
-GET /v2/rates?quotes=USD,GBP                # filtered
-GET /v2/rates?date=2024-01-15               # specific date
-GET /v2/rates?from=2024-01-01&to=2024-01-31 # date range
+GET /v2/rates?quotes=USD,GBP                 # filtered
+GET /v2/rates?date=2024-01-15                # specific date
+GET /v2/rates?from=2024-01-01&to=2024-01-31  # date range
 GET /v2/rates?providers=ecb,tcmb             # filter by providers
 GET /v2/currencies                           # currencies with names and providers
 GET /v2/providers                            # available data providers
@@ -150,8 +154,6 @@ GET /v2/providers                            # available data providers
 
 Response: normalized array of `{ date, base, quote, rate }` records.
 
-### v1 (lib/versions/v1.rb)
+### V1 (lib/versions/v1.rb)
 
-Frozen legacy API, ECB-only. See `lib/versions/v1.rb`.
-
-OpenAPI spec available at `/v1/openapi.json`.
+Frozen legacy API, ECB-only. Full spec at `/v1/openapi.json`.
