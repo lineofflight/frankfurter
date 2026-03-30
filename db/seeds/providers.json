@@ -196,5 +196,14 @@
     "terms_url": null,
     "publish_time": 8,
     "publish_days": "1-5"
+  },
+  {
+    "key": "HKMA",
+    "name": "Hong Kong Monetary Authority",
+    "description": "Daily exchange rates for 17 currencies against the Hong Kong dollar",
+    "data_url": "https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/daily-monetary-statistics/",
+    "terms_url": "https://www.hkma.gov.hk/eng/disclaimer/",
+    "publish_time": 4,
+    "publish_days": "1-5"
   }
 ]
