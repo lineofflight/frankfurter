@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 require_relative "../helper"
-require "providers/boj"
+require "providers/boja"
 
 module Providers
-  describe BOJ do
+  describe BOJA do
     before do
       Rate.dataset.delete
-      VCR.insert_cassette("boj", match_requests_on: [:method, :host], allow_playback_repeats: true)
+      VCR.insert_cassette("boja", match_requests_on: [:method, :host], allow_playback_repeats: true)
     end
 
     after do
       VCR.eject_cassette
     end
 
-    let(:provider) { BOJ.new }
+    let(:provider) { BOJA.new }
 
     def count_unique_dates
       Rate.select(:date).distinct.count

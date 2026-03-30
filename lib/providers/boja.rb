@@ -8,7 +8,7 @@ require "providers/base"
 module Providers
   # Bank of Jamaica daily counter rates in JMD.
   # Fetches from a WPDataTables endpoint (table_id=134), which requires a nonce extracted from the page HTML.
-  class BOJ < Base
+  class BOJA < Base
     PAGE_URL = "https://boj.org.jm/market/foreign-exchange/counter-rates/"
     BASE_URL = "https://boj.org.jm/wp-admin/admin-ajax.php"
     TABLE_ID = 134
@@ -41,7 +41,7 @@ module Providers
     }.freeze
 
     class << self
-      def key = "BOJ"
+      def key = "BOJA"
       def name = "Bank of Jamaica"
       def earliest_date = EARLIEST_DATE
     end

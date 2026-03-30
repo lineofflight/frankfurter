@@ -126,7 +126,7 @@
     "publish_days": "1-5"
   },
   {
-    "key": "BOJ",
+    "key": "BOJA",
     "name": "Bank of Jamaica",
     "description": "Daily counter rates for 20 currencies against the Jamaican dollar",
     "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
