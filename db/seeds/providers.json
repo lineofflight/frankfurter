@@ -214,5 +214,14 @@
     "terms_url": "https://www.riksbank.se/en-gb/about-the-website/terms-of-use/",
     "publish_time": 15,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BOT",
+    "name": "Bank of Tanzania",
+    "description": "Daily exchange rates for 35+ currencies against the Tanzanian shilling",
+    "data_url": "https://www.bot.go.tz/exchangerate/excrates",
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "0-6"
   }
 ]

@@ -1,0 +1,109 @@
+# frozen_string_literal: true
+
+require "net/http"
+require "ox"
+
+require "providers/base"
+
+module Providers
+  # Bank of Tanzania. Publishes daily exchange rates for 35+ currencies
+  # against the Tanzanian shilling (TZS). Uses the Mean column (midpoint
+  # of buy/sell). Publishes 7 days a week.
+  class BOT < Base
+    BASE_URL = "https://www.bot.go.tz"
+    EARLIEST_DATE = Date.new(2015, 1, 1)
+
+    EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
+
+    class << self
+      def key = "BOT"
+      def name = "Bank of Tanzania"
+      def earliest_date = EARLIEST_DATE
+
+      def backfill(range: 90)
+        super
+      end
+    end
+
+    def fetch(since: nil, upto: nil)
+      start_date = since || EARLIEST_DATE
+      end_date = upto || Date.today
+
+      uri = URI("#{BASE_URL}/ExchangeRate/previous_rates")
+      response = Net::HTTP.post_form(uri, {
+        "dateFrom" => start_date.strftime("%m/%d/%Y"),
+        "dateTo" => end_date.strftime("%m/%d/%Y"),
+      })
+
+      @dataset = parse(response.body)
+      self
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
+      @dataset = []
+      self
+    end
+
+    def parse(html)
+      doc = Ox.load(html, mode: :generic, effort: :tolerant, smart: true)
+      rows = find_table_rows(doc)
+      return [] unless rows
+
+      rows.filter_map { |row| parse_row(row) }
+    end
+
+    private
+
+    def find_table_rows(node)
+      return unless node.respond_to?(:nodes)
+
+      if node.respond_to?(:value) && node.value == "tbody"
+        return node.nodes&.select { |n| n.respond_to?(:value) && n.value == "tr" }
+      end
+
+      node.nodes&.each do |child|
+        result = find_table_rows(child)
+        return result if result
+      end
+
+      nil
+    end
+
+    def parse_row(row)
+      cells = row.nodes&.select { |n| n.respond_to?(:value) && n.value == "td" }
+      return unless cells && cells.size >= 6
+
+      currency = cell_text(cells[1])&.strip&.upcase
+      return unless currency
+      return if EXCLUDED_CURRENCIES.include?(currency)
+
+      mean_str = cell_text(cells[4])
+      date_str = cell_text(cells[5])
+      return unless mean_str && date_str
+
+      rate = Float(mean_str.tr(",", ""))
+      return if rate.zero?
+
+      date = Date.parse(date_str.strip)
+
+      { provider: key, date:, base: currency, quote: "TZS", rate: }
+    rescue ArgumentError, TypeError
+      nil
+    end
+
+    def cell_text(node)
+      return unless node
+
+      texts = []
+      collect_text(node, texts)
+      text = texts.join
+      text.empty? ? nil : text
+    end
+
+    def collect_text(node, texts)
+      if node.is_a?(String)
+        texts << node
+      elsif node.respond_to?(:nodes) && node.nodes
+        node.nodes.each { |child| collect_text(child, texts) }
+      end
+    end
+  end
+end
