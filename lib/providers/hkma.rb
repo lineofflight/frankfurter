@@ -9,7 +9,7 @@ module Providers
   # Hong Kong Monetary Authority. Publishes daily HKD exchange rates for 17
   # currencies via a public JSON API. Rates are expressed as HKD per 1 unit
   # of foreign currency (base = foreign currency, quote = HKD). Data is
-  # published monthly (~4th of each month) with approximately a 1-month lag.
+  # published monthly with approximately a 1-month lag.
   # Historical data available from 1981-01-02.
   class HKMA < Base
     BASE_URL = "https://api.hkma.gov.hk/public/market-data-and-statistics/" \
@@ -17,13 +17,34 @@ module Providers
     EARLIEST_DATE = Date.new(1981, 1, 2)
     PAGE_SIZE = 100
 
-    # ISO 4217 currency fields present in the API response
-    CURRENCY_FIELDS = ["usd", "eur", "gbp", "jpy", "cad", "aud", "sgd", "twd", "chf", "cny", "krw", "thb", "myr", "php", "inr", "idr", "zar"].freeze
+    CURRENCY_FIELDS = [
+      "usd",
+      "eur",
+      "gbp",
+      "jpy",
+      "cad",
+      "aud",
+      "sgd",
+      "twd",
+      "chf",
+      "cny",
+      "krw",
+      "thb",
+      "myr",
+      "php",
+      "inr",
+      "idr",
+      "zar",
+    ].freeze
 
     class << self
       def key = "HKMA"
       def name = "Hong Kong Monetary Authority"
       def earliest_date = EARLIEST_DATE
+
+      def backfill(range: 365)
+        super
+      end
     end
 
     def fetch(since: nil, upto: nil)
@@ -45,7 +66,7 @@ module Providers
         date = Date.parse(date_str)
         CURRENCY_FIELDS.each do |field|
           rate_value = record[field]
-          next unless rate_value
+          next unless rate_value.is_a?(Numeric) && rate_value.positive?
 
           result << { provider: key, date:, base: field.upcase, quote: "HKD", rate: rate_value.to_f }
         end
@@ -66,10 +87,7 @@ module Providers
 
         past_start = false
         page.each do |record|
-          date_str = record["end_of_day"]
-          next unless date_str
-
-          date = Date.parse(date_str)
+          date = Date.parse(record["end_of_day"].to_s)
           if date < start_date
             past_start = true
             break

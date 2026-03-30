@@ -7,7 +7,7 @@ module Providers
   describe HKMA do
     before do
       Rate.dataset.delete
-      VCR.insert_cassette("hkma", match_requests_on: [:method, :host, :path], allow_playback_repeats: true)
+      VCR.insert_cassette("hkma", match_requests_on: [:method, :host, :path])
     end
 
     after { VCR.eject_cassette }
@@ -19,13 +19,13 @@ module Providers
     end
 
     it "fetches rates with date range" do
-      provider.fetch(since: Date.new(2026, 2, 1), upto: Date.new(2026, 2, 28)).import
+      provider.fetch(since: Date.new(2026, 2, 25), upto: Date.new(2026, 2, 28)).import
 
       _(count_unique_dates).must_be(:>=, 1)
     end
 
     it "stores multiple currencies per date" do
-      provider.fetch(since: Date.new(2026, 2, 1), upto: Date.new(2026, 2, 28)).import
+      provider.fetch(since: Date.new(2026, 2, 25), upto: Date.new(2026, 2, 28)).import
       date = Rate.first.date
 
       _(Rate.where(date:).count).must_be(:>, 1)
