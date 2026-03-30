@@ -3,6 +3,7 @@
 require "cache"
 require "log"
 require "money/currency"
+require "provider"
 require "rate"
 
 module Providers
@@ -12,7 +13,7 @@ module Providers
     end
 
     def enabled
-      seeded = Provider.pluck(:key)
+      seeded = Provider.map(&:key)
       all.select { |p| seeded.include?(p.key) }
     end
   end
