@@ -34,7 +34,7 @@ module Providers
       response = Net::HTTP.get(url)
       @dataset = parse(response)
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       @dataset = []
       self
     end

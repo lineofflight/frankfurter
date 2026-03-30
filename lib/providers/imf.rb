@@ -178,7 +178,7 @@ module Providers
       )
 
       Net::HTTP.get(url)
-    rescue Net::OpenTimeout, Net::ReadTimeout
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       ""
     end
   end

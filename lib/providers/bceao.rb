@@ -105,7 +105,7 @@ module Providers
       url = URI("#{BASE_URL}?dateJour=#{date.strftime("%Y-%m-%d")}")
       response = Net::HTTP.get(url)
       parse(response, date:)
-    rescue Net::OpenTimeout, Net::ReadTimeout
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       []
     end
   end

@@ -34,7 +34,7 @@ module Providers
       end
 
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       @dataset ||= []
       self
     end

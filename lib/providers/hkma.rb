@@ -53,7 +53,7 @@ module Providers
 
       @dataset = fetch_pages(start_date, end_date)
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       @dataset = []
       self
     end
