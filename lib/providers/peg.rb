@@ -14,6 +14,9 @@ module Providers
       { base: "GBP", quote: "SHP", rate: 1.0, since: Date.new(1976, 1, 1) },
       { base: "INR", quote: "BTN", rate: 1.0, since: Date.new(1974, 1, 1) },
       { base: "USD", quote: "ANG", rate: 1.79, since: Date.new(1971, 1, 1) },
+      { base: "GBP", quote: "GGP", rate: 1.0, since: Date.new(1921, 1, 1) },
+      { base: "GBP", quote: "IMP", rate: 1.0, since: Date.new(1840, 1, 1) },
+      { base: "GBP", quote: "JEP", rate: 1.0, since: Date.new(1834, 1, 1) },
     ].freeze
 
     class << self

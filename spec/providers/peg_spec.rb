@@ -20,13 +20,13 @@ module Providers
       _(provider.count).must_equal(0)
     end
 
-    it "includes all five pegs on a weekday" do
+    it "includes all eight pegs on a weekday" do
       provider.fetch(since: Date.new(2024, 1, 8), upto: Date.new(2024, 1, 8))
 
-      _(provider.count).must_equal(5)
+      _(provider.count).must_equal(8)
       quotes = provider.dataset.map { |r| r[:quote] }.sort
 
-      _(quotes).must_equal(["ANG", "BMD", "BTN", "FKP", "SHP"])
+      _(quotes).must_equal(["ANG", "BMD", "BTN", "FKP", "GGP", "IMP", "JEP", "SHP"])
     end
 
     it "generates correct rates" do
@@ -52,8 +52,8 @@ module Providers
       # Before 1972: BMD peg didn't exist yet, but FKP (1966) and ANG (1971) did
       provider.fetch(since: Date.new(1999, 1, 4), upto: Date.new(1999, 1, 4))
 
-      # All pegs started before 1999, so all 5 should be present
-      _(provider.count).must_equal(5)
+      # All pegs started before 1999, so all 8 should be present
+      _(provider.count).must_equal(8)
     end
 
     it "returns empty dataset for empty range" do
