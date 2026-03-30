@@ -1,0 +1,1013 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKAUDPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Api-Supported-Versions:
+      - '1.0'
+      Date:
+      - Mon, 30 Mar 2026 22:20:54 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"date":"2026-03-24","value":6.5},{"date":"2026-03-25","value":6.47054},{"date":"2026-03-26","value":6.49404},{"date":"2026-03-27","value":6.5017}]'
+  recorded_at: Mon, 30 Mar 2026 22:20:54 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKBRLPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Api-Supported-Versions:
+      - '1.0'
+      Date:
+      - Mon, 30 Mar 2026 22:20:55 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"date":"2026-03-24","value":1.77588},{"date":"2026-03-25","value":1.77569},{"date":"2026-03-26","value":1.79404},{"date":"2026-03-27","value":1.79698}]'
+  recorded_at: Mon, 30 Mar 2026 22:20:55 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKCADPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Api-Supported-Versions:
+      - '1.0'
+      Date:
+      - Mon, 30 Mar 2026 22:20:56 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"date":"2026-03-24","value":6.80314},{"date":"2026-03-25","value":6.74188},{"date":"2026-03-26","value":6.79059},{"date":"2026-03-27","value":6.80982}]'
+  recorded_at: Mon, 30 Mar 2026 22:20:56 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKCHFPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Api-Supported-Versions:
+      - '1.0'
+      Date:
+      - Mon, 30 Mar 2026 22:20:57 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"date":"2026-03-24","value":11.83576},{"date":"2026-03-25","value":11.76827},{"date":"2026-03-26","value":11.84625},{"date":"2026-03-27","value":11.85226}]'
+  recorded_at: Mon, 30 Mar 2026 22:20:57 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKCNYPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Api-Supported-Versions:
+      - '1.0'
+      Date:
+      - Mon, 30 Mar 2026 22:20:59 GMT
+    body:
+      encoding: UTF-8
+      string: '[{"date":"2026-03-24","value":1.35688},{"date":"2026-03-25","value":1.34679},{"date":"2026-03-26","value":1.35953},{"date":"2026-03-27","value":1.36614}]'
+  recorded_at: Mon, 30 Mar 2026 22:20:59 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKCZKPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '54'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:00 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 54 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:00 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKDKKPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '53'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:01 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 53 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:01 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKEURPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '52'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:02 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 52 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:02 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKGBPPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '51'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:03 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 51 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:04 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKHKDPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '50'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:05 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 50 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:05 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKHUFPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '48'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:06 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 48 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:06 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKIDRPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '47'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:07 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 47 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:07 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKILSPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '46'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:08 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 46 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:08 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKINRPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '45'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:09 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 45 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:10 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKISKPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '44'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:11 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 44 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:11 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKJPYPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '42'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:12 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 42 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:12 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKKRWPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '41'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:13 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 41 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:13 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKMXNPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '40'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:14 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 40 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:14 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKMYRPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '39'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:16 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 39 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:16 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKNOKPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '38'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:17 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 38 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:17 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKNZDPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '36'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:18 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 36 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:18 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKPHPPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '35'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:19 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 35 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:19 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKPLNPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '34'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:20 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 34 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:20 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKRONPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '33'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:22 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 33 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:22 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKSGDPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '32'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:23 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 32 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:23 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKTHBPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '30'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:24 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 30 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:24 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKTRYPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '29'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:25 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 29 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:25 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKUSDPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '28'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:26 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 28 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:26 GMT
+- request:
+    method: get
+    uri: https://api.riksbank.se/swea/v1/Observations/SEKZARPMI/2026-03-24/2026-03-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.riksbank.se
+  response:
+    status:
+      code: 429
+      message: Too Many Requests
+    headers:
+      Content-Length:
+      - '84'
+      Content-Type:
+      - application/json
+      Retry-After:
+      - '27'
+      Request-Context:
+      - appId=cid-v1:b53c43df-6992-4362-80ab-8feb63e7d60a
+      Date:
+      - Mon, 30 Mar 2026 22:21:27 GMT
+    body:
+      encoding: UTF-8
+      string: '{ "statusCode": 429, "message": "Rate limit is exceeded. Try again
+        in 27 seconds." }'
+  recorded_at: Mon, 30 Mar 2026 22:21:28 GMT
+recorded_with: VCR 6.4.0
