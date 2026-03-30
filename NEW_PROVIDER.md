@@ -4,6 +4,7 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 
 ## Before You Start
 
+- Verify the API is reachable and returns data. Do not implement a provider against an API you cannot call — assumptions about endpoints, response formats, and field names must be validated against live responses.
 - Identify the API endpoint and authentication requirements
 - Confirm the base currency and available quote currencies
 - Check the publish schedule (timezone, frequency, days of week)
@@ -27,6 +28,7 @@ Optional:
 Notes:
 - The `base` and `quote` in each record are determined by the data, not a class method
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates
+- Don't validate currency codes in `parse` — `import` already filters via `Money::Currency.find`. Just skip nil/empty values.
 - Rescue network errors (`Net::OpenTimeout`, `Net::ReadTimeout`) and return `self` with empty dataset
 
 ### 2. Tests — `spec/providers/<key>_spec.rb`
@@ -35,8 +37,8 @@ Follow the pattern in `spec/providers/boi_spec.rb` or `spec/providers/bccr_spec.
 
 - VCR cassette setup in `before`/`after` blocks
 - Integration test: `fetch(since:, upto:).import` then assert rates were stored
-- Parse unit tests: call `parse` directly with inline fixture data
-- Test edge cases: unit multipliers, empty values, invalid data
+- Parse unit tests: call `parse` directly with inline fixture data based on real API responses
+- Test edge cases: unit multipliers, empty values. Don't test hypothetical scenarios that aren't in the real data.
 
 VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first live test run. Pin dates in tests — never use `Date.today` with VCR.
 
