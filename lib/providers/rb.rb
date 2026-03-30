@@ -7,75 +7,49 @@ require "providers/base"
 
 module Providers
   # Sveriges Riksbank. Fetches daily exchange rates for ~29 currencies
-  # against the Swedish krona (SEK) via the SWEA API. Each currency
-  # requires a separate request (series pattern: SEK{currency}PMI).
-  # Rate limit: ~5 requests per minute; we sleep between requests.
+  # against the Swedish krona (SEK) via the SWEA API. Uses the ByGroup
+  # endpoint (group 130) to fetch all currency series in a single request.
+  # The ByGroup endpoint has a max 1-year date range.
   class RB < Base
-    BASE_URL = "https://api.riksbank.se/swea/v1/Observations"
+    BASE_URL = "https://api.riksbank.se/swea/v1/Observations/ByGroup/130"
     EARLIEST_DATE = Date.new(1993, 1, 4)
-
-    SERIES = [
-      "AUD",
-      "BRL",
-      "CAD",
-      "CHF",
-      "CNY",
-      "CZK",
-      "DKK",
-      "EUR",
-      "GBP",
-      "HKD",
-      "HUF",
-      "IDR",
-      "ILS",
-      "INR",
-      "ISK",
-      "JPY",
-      "KRW",
-      "MXN",
-      "MYR",
-      "NOK",
-      "NZD",
-      "PHP",
-      "PLN",
-      "RON",
-      "SGD",
-      "THB",
-      "TRY",
-      "USD",
-      "ZAR",
-    ].freeze
 
     class << self
       def key = "RB"
       def name = "Sveriges Riksbank"
       def earliest_date = EARLIEST_DATE
+
+      def backfill(range: 365)
+        super
+      end
     end
 
     def fetch(since: nil, upto: nil)
       start_date = since || EARLIEST_DATE
       end_date = upto || Date.today
 
-      @dataset = []
-      SERIES.each_with_index do |currency, index|
-        sleep(1) if index > 0
-        records = fetch_series(currency, start_date, end_date)
-        @dataset.concat(records)
-      end
+      uri = URI("#{BASE_URL}/#{start_date}/#{end_date}")
+      response = Net::HTTP.get(uri)
+      @dataset = parse(response)
 
       self
     rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
-      @dataset ||= []
+      @dataset = []
       self
     end
 
-    def parse(json, currency:)
+    def parse(json)
       data = json.is_a?(String) ? JSON.parse(json) : json
+      return [] unless data.is_a?(Array)
 
       data.filter_map do |obs|
+        series_id = obs["seriesId"]
         date_str = obs["date"]
         value = obs["value"]
-        next unless date_str && value
+        next unless series_id && date_str && value
+
+        currency = series_id.delete_prefix("SEK").delete_suffix("PMI")
+        next if currency == "ETT"
 
         rate = Float(value)
         next if rate.zero?
@@ -84,15 +58,6 @@ module Providers
       rescue ArgumentError, TypeError
         nil
       end
-    end
-
-    private
-
-    def fetch_series(currency, start_date, end_date)
-      series_id = "SEK#{currency}PMI"
-      uri = URI("#{BASE_URL}/#{series_id}/#{start_date}/#{end_date}")
-      response = Net::HTTP.get(uri)
-      parse(response, currency: currency)
     rescue JSON::ParserError
       []
     end
