@@ -65,6 +65,14 @@ module Versions
         @params[:base]&.upcase || "EUR"
       end
 
+      def peg_for_base
+        @peg_for_base ||= Peg.find(base)
+      end
+
+      def effective_base
+        peg_for_base ? peg_for_base.base : base
+      end
+
       def quotes
         @params[:quotes]&.upcase&.split(",")
       end
@@ -142,7 +150,11 @@ module Versions
       end
 
       def emit_blended(rows, &block)
-        blended = Blender.new(rows, base:).blend
+        blended = Blender.new(rows, base: effective_base).blend
+
+        if peg_for_base
+          blended = blended.map { |r| r.merge(rate: r[:rate] / peg_for_base.rate, base:) }
+        end
 
         emitted_quotes = Set.new
         blended.each do |r|
@@ -159,6 +171,7 @@ module Versions
         return if providers
 
         Peg.all.each do |peg|
+          next if peg.quote == base
           next if emitted_quotes.include?(peg.quote)
           next if quotes && !quotes.include?(peg.quote)
 
@@ -166,8 +179,8 @@ module Versions
           next unless date
           next if date < peg.since
 
-          if peg.base == base
-            rate = peg.rate
+          if peg.base == effective_base
+            rate = peg.rate / (peg_for_base&.rate || 1.0)
           else
             anchor = blended.find { |r| r[:quote] == peg.base }
             next unless anchor

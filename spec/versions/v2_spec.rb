@@ -376,4 +376,25 @@ describe Versions::V2 do
 
     _(quotes).must_include("BTN")
   end
+
+  it "resolves pegged base currency" do
+    get "/rates?base=BMD"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+    _(json.first["base"]).must_equal("BMD")
+
+    eur = json.find { |r| r["quote"] == "EUR" }
+
+    _(eur).wont_be_nil
+    _(eur["rate"]).must_be_kind_of(Float)
+  end
+
+  it "resolves pegged base with providers filter" do
+    get "/rates?base=BMD&providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+    _(json.first["base"]).must_equal("BMD")
+  end
 end
