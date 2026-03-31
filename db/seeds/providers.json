@@ -241,5 +241,14 @@
     "terms_url": null,
     "publish_time": 8,
     "publish_days": "1-5"
+  },
+  {
+    "key": "SBI",
+    "name": "Seðlabanki Íslands",
+    "description": "Daily exchange rates for 30+ currencies against the Icelandic króna",
+    "data_url": "https://www.sedlabanki.is/hagtolur/opinbert-gengi/",
+    "terms_url": null,
+    "publish_time": 16,
+    "publish_days": "1-5"
   }
 ]
