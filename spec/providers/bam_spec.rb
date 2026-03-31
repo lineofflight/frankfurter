@@ -5,30 +5,42 @@ require "providers/bam"
 
 module Providers
   describe BAM do
-    before do
-      Rate.dataset.delete
-      VCR.insert_cassette("bam", match_requests_on: [:method, :host, :path])
-    end
-
-    after { VCR.eject_cassette }
-
     let(:provider) { BAM.new }
 
-    def count_unique_dates
-      Rate.select(:date).distinct.count
+    it "returns empty without API key" do
+      original = ENV["BAM_API_KEY"]
+      ENV.delete("BAM_API_KEY")
+
+      _(provider.fetch.dataset).must_be(:empty?)
+    ensure
+      ENV["BAM_API_KEY"] = original
     end
 
-    it "fetches rates with date range" do
-      provider.fetch(since: Date.new(2026, 3, 25), upto: Date.new(2026, 3, 27)).import
+    describe "with API key" do
+      before do
+        ENV["BAM_API_KEY"] ||= "test"
+        Rate.dataset.delete
+        VCR.insert_cassette("bam", match_requests_on: [:method, :host, :path])
+      end
 
-      _(count_unique_dates).must_be(:>=, 1)
-    end
+      after { VCR.eject_cassette }
 
-    it "stores multiple currencies per date" do
-      provider.fetch(since: Date.new(2026, 3, 25), upto: Date.new(2026, 3, 27)).import
-      date = Rate.first.date
+      def count_unique_dates
+        Rate.select(:date).distinct.count
+      end
 
-      _(Rate.where(date:).count).must_be(:>, 1)
+      it "fetches rates with date range" do
+        provider.fetch(since: Date.new(2026, 3, 25), upto: Date.new(2026, 3, 27)).import
+
+        _(count_unique_dates).must_be(:>=, 1)
+      end
+
+      it "stores multiple currencies per date" do
+        provider.fetch(since: Date.new(2026, 3, 25), upto: Date.new(2026, 3, 27)).import
+        date = Rate.first.date
+
+        _(Rate.where(date:).count).must_be(:>, 1)
+      end
     end
 
     it "parses records with correct base and quote" do
