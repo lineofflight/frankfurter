@@ -417,4 +417,36 @@ describe Versions::V2 do
     _(json).wont_be_empty
     _(json.first["base"]).must_equal("BMD")
   end
+
+  it "includes pegged currencies in currencies list" do
+    get "/currencies?scope=all"
+
+    _(last_response).must_be(:ok?)
+    bmd = json.find { |c| c["iso_code"] == "BMD" }
+
+    _(bmd).wont_be_nil
+    _(bmd["name"]).must_equal("Bermudian Dollar")
+    _(bmd["start_date"]).wont_be_nil
+    _(bmd["end_date"]).wont_be_nil
+  end
+
+  it "returns peg metadata for pegged currency detail" do
+    get "/currencies/bmd"
+
+    _(last_response).must_be(:ok?)
+    _(json["iso_code"]).must_equal("BMD")
+    _(json["peg"]).wont_be_nil
+    _(json["peg"]["base"]).must_equal("USD")
+    _(json["peg"]["rate"]).must_equal(1.0)
+    _(json["peg"]["authority"]).must_equal("Bermuda Monetary Authority")
+    _(json).wont_include("providers")
+  end
+
+  it "returns providers for non-pegged currency detail" do
+    get "/currencies/usd"
+
+    _(last_response).must_be(:ok?)
+    _(json["providers"]).must_be_kind_of(Array)
+    _(json).wont_include("peg")
+  end
 end
