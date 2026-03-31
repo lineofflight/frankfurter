@@ -7,13 +7,8 @@ module Providers
   describe BAM do
     let(:provider) { BAM.new }
 
-    it "returns empty without API key" do
-      original = ENV["BAM_API_KEY"]
-      ENV.delete("BAM_API_KEY")
-
-      _(provider.fetch.dataset).must_be(:empty?)
-    ensure
-      ENV["BAM_API_KEY"] = original
+    it "requires an API key" do
+      _(BAM.api_key?).must_equal true
     end
 
     describe "with API key" do

@@ -16,14 +16,15 @@ module Providers
       def name = "Bank Al-Maghrib"
       def earliest_date = EARLIEST_DATE
 
+      def api_key? = true
+      def api_key = ENV["BAM_API_KEY"]
+
       def backfill(range: 30)
         super
       end
     end
 
     def fetch(since: nil, upto: nil)
-      return no_key unless api_key
-
       start_date = since || EARLIEST_DATE
       end_date = upto || Date.today
       @dataset = []
@@ -61,15 +62,6 @@ module Providers
       rescue ArgumentError, TypeError
         nil
       end
-    end
-
-    def api_key
-      ENV["BAM_API_KEY"]
-    end
-
-    def no_key
-      @dataset = []
-      self
     end
 
     private
