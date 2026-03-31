@@ -9,6 +9,15 @@
     "publish_days": "1-5"
   },
   {
+    "key": "BCB",
+    "name": "Banco Central do Brasil",
+    "description": "Daily PTAX closing exchange rates for 10 currencies against the Brazilian real",
+    "data_url": "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/",
+    "terms_url": null,
+    "publish_time": 19,
+    "publish_days": "1-5"
+  },
+  {
     "key": "BOC",
     "name": "Bank of Canada",
     "description": "Daily indicative exchange rates for 20+ currencies against the Canadian dollar",
