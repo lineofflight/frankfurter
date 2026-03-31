@@ -170,21 +170,23 @@ module Versions
       def expand_pegs(blended, emitted_quotes)
         return if providers
 
+        reference_date = blended.map { |r| r[:date] }.max
+        return unless reference_date
+
         Peg.all.each do |peg|
           next if peg.quote == base
           next if emitted_quotes.include?(peg.quote)
           next if quotes && !quotes.include?(peg.quote)
-
-          date = blended.first&.dig(:date)
-          next unless date
-          next if date < peg.since
+          next if reference_date < peg.since
 
           if peg.base == effective_base
+            date = reference_date
             rate = peg.rate / (peg_for_base&.rate || 1.0)
           else
             anchor = blended.find { |r| r[:quote] == peg.base }
             next unless anchor
 
+            date = anchor[:date]
             rate = anchor[:rate] * peg.rate
           end
 
