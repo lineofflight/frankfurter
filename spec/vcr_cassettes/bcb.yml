@@ -1,0 +1,633 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27AUD%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:37 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000diFInvK_qTMQWKT5RrktcL7:1cn7m3fq4; Path=/; HttpOnly
+      - TS013694c2=012e4f88b38c5f01c82343883904d6ccd0caf4fbb6b4903bb8204ffbcfd01a31c80fd255746464190c2a672e939dc24566c1ab5ec7;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192536Z-er1f57765dddx9lvhC1AMSsb2s0000000uv000000000pa7d
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":0.70570,"paridadeVenda":0.70580,"cotacaoCompra":3.66930,"cotacaoVenda":3.67020,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":0.69950,"paridadeVenda":0.69980,"cotacaoCompra":3.69780,"cotacaoVenda":3.69980,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":0.70710,"paridadeVenda":0.70730,"cotacaoCompra":3.68290,"cotacaoVenda":3.68440,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":0.70120,"paridadeVenda":0.70130,"cotacaoCompra":3.67720,"cotacaoVenda":3.67810,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":0.70040,"paridadeVenda":0.70060,"cotacaoCompra":3.70320,"cotacaoVenda":3.70460,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:37 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27CAD%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:38 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000bcEvA5dIz1umTTjxhy6dyYl:1cn7m3fq4; Path=/; HttpOnly
+      - TS013694c2=012e4f88b3b54b0c4b6f37d2a7bfb4e98963131485dd89b9c65f030791a4d71298f41f3983a606a0e90224a2e2305ac08bde38a0f3;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192538Z-er1f57765dd25vwshC1AMSu6x00000000w7000000000m4g5
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":1.37000,"paridadeVenda":1.37040,"cotacaoCompra":3.79410,"cotacaoVenda":3.79570,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":1.37000,"paridadeVenda":1.37050,"cotacaoCompra":3.85730,"cotacaoVenda":3.85910,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":1.36580,"paridadeVenda":1.36600,"cotacaoCompra":3.81300,"cotacaoVenda":3.81400,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":1.36820,"paridadeVenda":1.36840,"cotacaoCompra":3.83230,"cotacaoVenda":3.83330,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":1.36240,"paridadeVenda":1.36280,"cotacaoCompra":3.87970,"cotacaoVenda":3.88120,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:38 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27CHF%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:39 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000WHjKTz7WMIdQh-UVJqCokyv:1dof85j5r; Path=/; HttpOnly
+      - TS013694c2=012e4f88b3aa2b88d63f3ca2a3bad9fc56fb0d68a73eda8b97a18d24e819c8923e8618f7b6586a21fc55a2f42f383f0d8d6988ec54;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192538Z-er1f57765dd5h4wxhC1AMS76gs0000000ts000000000wbhk
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":0.78010,"paridadeVenda":0.78040,"cotacaoCompra":6.66260,"cotacaoVenda":6.66590,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":0.78460,"paridadeVenda":0.78490,"cotacaoCompra":6.73510,"cotacaoVenda":6.73850,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":0.77980,"paridadeVenda":0.78010,"cotacaoCompra":6.67670,"cotacaoVenda":6.68000,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":0.78190,"paridadeVenda":0.78200,"cotacaoCompra":6.70600,"cotacaoVenda":6.70760,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":0.77930,"paridadeVenda":0.77990,"cotacaoCompra":6.77930,"cotacaoVenda":6.78530,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:39 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27DKK%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:40 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000CQqOzcfSypETgqp8xTxGNCM:1dof89mke; Path=/; HttpOnly
+      - TS013694c2=012e4f88b31f5b049dd6b26fdd092ab203689903fe5738a6db402e26311138eefb89b20905980821ebad91c8e6f8fc9432070d4b96;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192539Z-er1f57765dd958x8hC1AMSyvfc0000000vng000000006qm4
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":6.39650,"paridadeVenda":6.39680,"cotacaoCompra":0.81280,"cotacaoVenda":0.81300,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":6.45490,"paridadeVenda":6.45560,"cotacaoCompra":0.81890,"cotacaoVenda":0.81910,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":6.41830,"paridadeVenda":6.41870,"cotacaoCompra":0.81150,"cotacaoVenda":0.81160,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":6.45050,"paridadeVenda":6.45090,"cotacaoCompra":0.81290,"cotacaoVenda":0.81310,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":6.45230,"paridadeVenda":6.45340,"cotacaoCompra":0.81930,"cotacaoVenda":0.81950,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:40 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27EUR%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:41 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000ToniHfnHyQWMxyHRPA-RnXU:1cn7m3fq4; Path=/; HttpOnly
+      - TS013694c2=012e4f88b317b2e11e5d170247bbad001988d7190661308723a2c26e4a3e66eccba88b1803dc8091fb16f2089d6e460b7b5087e0c1;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192540Z-er1f57765dd25vwshC1AMSu6x00000000wcg00000000bz8g
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":1.16790,"paridadeVenda":1.16810,"cotacaoCompra":6.07250,"cotacaoVenda":6.07420,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":1.15730,"paridadeVenda":1.15750,"cotacaoCompra":6.11800,"cotacaoVenda":6.11970,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":1.16390,"paridadeVenda":1.16410,"cotacaoCompra":6.06220,"cotacaoVenda":6.06390,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":1.15820,"paridadeVenda":1.15830,"cotacaoCompra":6.07370,"cotacaoVenda":6.07490,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":1.15790,"paridadeVenda":1.15810,"cotacaoCompra":6.12200,"cotacaoVenda":6.12380,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:41 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27GBP%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:42 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000gfFcXqO6dpFUWdc5phicgUY:1dof89mke; Path=/; HttpOnly
+      - TS013694c2=012e4f88b3ecfd85fc670a17438f99078fa0cc936bdccf9d9b8d63e2ea50ce99911de9dce848dc453eed7f6f4094b361e4f0b9f26a;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192542Z-er1f57765ddrfvf5hC1AMSbwz400000007vg000000012w3v
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":1.33690,"paridadeVenda":1.33730,"cotacaoCompra":6.95120,"cotacaoVenda":6.95410,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":1.33000,"paridadeVenda":1.33050,"cotacaoCompra":7.03090,"cotacaoVenda":7.03440,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":1.33650,"paridadeVenda":1.33660,"cotacaoCompra":6.96120,"cotacaoVenda":6.96250,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":1.33220,"paridadeVenda":1.33230,"cotacaoCompra":6.98620,"cotacaoVenda":6.98750,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":1.33580,"paridadeVenda":1.33610,"cotacaoCompra":7.06260,"cotacaoVenda":7.06500,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:42 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27JPY%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:44 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=4275048876.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000lSX5s1ieX8aWHofw9wGEgLK:1cn7m3fq4; Path=/; HttpOnly
+      - TS013694c2=012e4f88b365e4f74fb66b6cf2f15a0e05448c6c2ede4b9c499c31e47e4d982b24bc7f7d855ce673dd24e52705db40e4e23efd8f65;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192543Z-er1f57765dds4jhdhC1AMSvfv00000000uu00000000071vc
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":157.73000,"paridadeVenda":157.74000,"cotacaoCompra":0.03296,"cotacaoVenda":0.03297,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":157.83000,"paridadeVenda":157.85000,"cotacaoCompra":0.03349,"cotacaoVenda":0.03350,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":157.11000,"paridadeVenda":157.13000,"cotacaoCompra":0.03315,"cotacaoVenda":0.03316,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":157.61000,"paridadeVenda":157.63000,"cotacaoCompra":0.03327,"cotacaoVenda":0.03328,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":157.59000,"paridadeVenda":157.60000,"cotacaoCompra":0.03355,"cotacaoVenda":0.03355,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:44 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27NOK%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:45 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=4275048876.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000a_dv7zFxAao1Bxg2h0fb1ej:1dof85j5r; Path=/; HttpOnly
+      - TS013694c2=012e4f88b3925084c08e8e9c468949fe887492fe500611cd41c3a0155cae812d1524ad18566f41eb01214ab9a9d8e7d50aed73cb34;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192544Z-er1f57765ddmd6qzhC1AMSt7680000000v7g00000000fm9f
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":9.58900,"paridadeVenda":9.59050,"cotacaoCompra":0.54220,"cotacaoVenda":0.54230,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":9.72700,"paridadeVenda":9.72950,"cotacaoCompra":0.54330,"cotacaoVenda":0.54350,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":9.63940,"paridadeVenda":9.64170,"cotacaoCompra":0.54020,"cotacaoVenda":0.54040,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":9.67740,"paridadeVenda":9.67920,"cotacaoCompra":0.54180,"cotacaoVenda":0.54200,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":9.60790,"paridadeVenda":9.61080,"cotacaoCompra":0.55010,"cotacaoVenda":0.55040,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:45 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27SEK%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:46 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=4275048876.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=0000m0UfPqar93bU9_5i_5UNW4P:1dof89mke; Path=/; HttpOnly
+      - TS013694c2=012e4f88b38eb7c60cb0a7dc3f4cfc833b15265da07483d640f3c474609660fbe1324fc115cce39082c9fd63c23e30fdf8ea82e300;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192545Z-er1f57765ddrnz2nhC1AMSd4z40000000tyg000000006k6v
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":9.16760,"paridadeVenda":9.16910,"cotacaoCompra":0.56710,"cotacaoVenda":0.56720,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":9.30500,"paridadeVenda":9.30700,"cotacaoCompra":0.56800,"cotacaoVenda":0.56820,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":9.17370,"paridadeVenda":9.17570,"cotacaoCompra":0.56760,"cotacaoVenda":0.56780,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":9.23420,"paridadeVenda":9.23610,"cotacaoCompra":0.56780,"cotacaoVenda":0.56800,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":9.21090,"paridadeVenda":9.21310,"cotacaoCompra":0.57390,"cotacaoVenda":0.57410,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:46 GMT
+- request:
+    method: get
+    uri: https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?$filter=tipoBoletim%20eq%20%27Fechamento%27&$format=json&@dataFinalCotacao=%2703-07-2026%27&@dataInicial=%2703-01-2026%27&@moeda=%27USD%27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - olinda.bcb.gov.br
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 31 Mar 2026 19:25:47 GMT
+      Content-Type:
+      - application/json;charset=UTF-8;odata.metadata=minimal
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains
+      X-Frame-Options:
+      - DENY
+      Odata-Version:
+      - '4.0'
+      Set-Cookie:
+      - BIGipServer~was_p_as3~was_p~pool_was_443_p=1020268972.47873.0000; path=/;
+        Httponly; Secure
+      - JSESSIONID=00006ZIh_asWe_L4g08nd4XoNA9:1cn7m3fq4; Path=/; HttpOnly
+      - TS013694c2=012e4f88b3f9c26b5f603d0b4f8e49982484fa1865d42ae09ab711f6eb88b97cbf4b40cd404402420dfbf0c55480ebf2245055a6a9;
+        Path=/
+      Content-Language:
+      - en-US
+      X-Azure-Ref:
+      - 20260331T192546Z-er1f57765ddrmmv4hC1AMSgfq0000000047g000000000h4y
+      X-Cache:
+      - CONFIG_NOCACHE
+    body:
+      encoding: UTF-8
+      string: '{"@odata.context":"https://was-p.bcnet.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata$metadata#_CotacaoMoedaPeriodo","value":[{"paridadeCompra":1.00000,"paridadeVenda":1.00000,"cotacaoCompra":5.19950,"cotacaoVenda":5.20010,"dataHoraCotacao":"2026-03-02
+        13:09:26.433","tipoBoletim":"Fechamento"},{"paridadeCompra":1.00000,"paridadeVenda":1.00000,"cotacaoCompra":5.28640,"cotacaoVenda":5.28700,"dataHoraCotacao":"2026-03-03
+        13:10:27.879","tipoBoletim":"Fechamento"},{"paridadeCompra":1.00000,"paridadeVenda":1.00000,"cotacaoCompra":5.20850,"cotacaoVenda":5.20910,"dataHoraCotacao":"2026-03-04
+        13:07:27.146","tipoBoletim":"Fechamento"},{"paridadeCompra":1.00000,"paridadeVenda":1.00000,"cotacaoCompra":5.24410,"cotacaoVenda":5.24470,"dataHoraCotacao":"2026-03-05
+        13:03:29.746","tipoBoletim":"Fechamento"},{"paridadeCompra":1.00000,"paridadeVenda":1.00000,"cotacaoCompra":5.28720,"cotacaoVenda":5.28780,"dataHoraCotacao":"2026-03-06
+        13:10:27.63","tipoBoletim":"Fechamento"}]}'
+  recorded_at: Tue, 31 Mar 2026 19:25:47 GMT
+recorded_with: VCR 6.4.0
