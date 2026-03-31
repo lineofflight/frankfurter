@@ -286,5 +286,14 @@
     "terms_url": "https://www.banxico.org.mx/footer-en/terms-and-conditions.html",
     "publish_time": 18,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BCCH",
+    "name": "Banco Central de Chile",
+    "description": "Daily exchange rates for 8 currencies against the Chilean peso",
+    "data_url": "https://si3.bcentral.cl/Siete/es/Siete/API",
+    "terms_url": null,
+    "publish_time": 16,
+    "publish_days": "1-5"
   }
 ]
