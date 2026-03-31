@@ -24,21 +24,23 @@ module Providers
     end
 
     def fetch(since: nil, upto: nil)
+      effective_since = since || self.class.earliest_date
+      effective_upto = upto || Date.today
+
       url = URI(API_URL)
       params = {
         format: "json",
         lang: "en",
         db: "FM08",
         code: SERIES.keys.join(","),
+        startDate: effective_since.strftime("%Y%m"),
+        endDate: effective_upto.strftime("%Y%m"),
       }
-      if since
-        params[:startDate] = since.strftime("%Y%m")
-        params[:endDate] = (upto || Date.today).strftime("%Y%m")
-      end
       url.query = URI.encode_www_form(params)
 
       response = Net::HTTP.get(url)
-      @dataset = parse(response)
+      raw = parse(response)
+      @dataset = raw.select { |r| r[:date].between?(effective_since, effective_upto) }
       self
     rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError, OpenSSL::SSL::SSLError, JSON::ParserError
       @dataset = []
