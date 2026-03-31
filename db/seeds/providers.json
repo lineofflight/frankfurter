@@ -331,5 +331,14 @@
     "terms_url": null,
     "publish_time": 8,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BCU",
+    "name": "Central Bank of Uruguay",
+    "description": "Daily exchange rates for 27 currencies against the Uruguayan peso",
+    "data_url": "https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones",
+    "terms_url": "https://www.bcu.gub.uy/Paginas/Condiciones-de-uso.aspx",
+    "publish_time": 15,
+    "publish_days": "1-5"
   }
 ]
