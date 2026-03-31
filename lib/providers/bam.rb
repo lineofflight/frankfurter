@@ -22,8 +22,9 @@ module Providers
     end
 
     def fetch(since: nil, upto: nil)
+      return no_key unless api_key
+
       start_date = since || EARLIEST_DATE
-      start_date = Date.parse(start_date.to_s)
       end_date = upto || Date.today
       @dataset = []
 
@@ -62,13 +63,22 @@ module Providers
       end
     end
 
+    def api_key
+      ENV["BAM_API_KEY"]
+    end
+
+    def no_key
+      @dataset = []
+      self
+    end
+
     private
 
     def fetch_date(date)
       uri = URI(URL)
       uri.query = URI.encode_www_form(date: "#{date.strftime("%Y-%m-%d")}T12:30:00")
       request = Net::HTTP::Get.new(uri)
-      request["Ocp-Apim-Subscription-Key"] = ENV["BAM_API_KEY"]
+      request["Ocp-Apim-Subscription-Key"] = api_key
       response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
       parse(response.body)
     rescue Oj::ParseError
