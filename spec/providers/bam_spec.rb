@@ -8,7 +8,7 @@ module Providers
     let(:provider) { BAM.new }
 
     it "requires an API key" do
-      _(BAM.api_key?).must_equal true
+      _(BAM.api_key?).must_equal(true)
     end
 
     describe "with API key" do

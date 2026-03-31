@@ -8,7 +8,7 @@ module Providers
     let(:provider) { FRED.new }
 
     it "requires an API key" do
-      _(FRED.api_key?).must_equal true
+      _(FRED.api_key?).must_equal(true)
     end
 
     describe "with API key" do

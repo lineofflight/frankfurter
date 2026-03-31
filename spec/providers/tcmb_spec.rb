@@ -8,7 +8,7 @@ module Providers
     let(:provider) { TCMB.new }
 
     it "requires an API key" do
-      _(TCMB.api_key?).must_equal true
+      _(TCMB.api_key?).must_equal(true)
     end
 
     describe "with API key" do
