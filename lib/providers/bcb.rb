@@ -22,8 +22,8 @@ module Providers
 
     def fetch(since: nil, upto: nil)
       @dataset = []
-      date_from = since || self.class.earliest_date
-      date_upto = upto || Date.today
+      date_from = Date.parse((since || self.class.earliest_date).to_s)
+      date_upto = Date.parse((upto || Date.today).to_s)
 
       CURRENCIES.each do |currency|
         sleep(0.2)
@@ -45,8 +45,8 @@ module Providers
         next unless rate
         next if rate.zero?
 
-        raw_date = record["dataHoraCotacao"]
-        next unless raw_date
+        raw_date = record["dataHoraCotacao"].to_s.strip[0, 10]
+        next unless raw_date&.length == 10
 
         date = Date.strptime(raw_date, "%Y-%m-%d")
         { provider: key, date:, base: currency, quote: "BRL", rate: }
