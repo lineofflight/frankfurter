@@ -65,4 +65,55 @@ describe Currency do
   it "is case insensitive" do
     _(Currency.find("usd")).wont_be_nil
   end
+
+  it "includes pegged currencies in the list" do
+    codes = Currency.all.map(&:iso_code)
+
+    _(codes).must_include("BMD")
+    _(codes).must_include("FKP")
+  end
+
+  it "derives pegged currency date range from anchor" do
+    bmd = Currency.find("BMD")
+
+    _(bmd).wont_be_nil
+    usd = Currency.find("USD")
+
+    _(bmd.end_date.to_s).must_equal(usd.end_date.to_s)
+  end
+
+  it "uses later of peg since and anchor start_date" do
+    bmd = Currency.find("BMD")
+    usd = Currency.find("USD")
+
+    _(bmd.start_date.to_s).must_be(:>=, usd.start_date.to_s)
+  end
+
+  it "formats pegged currency to hash" do
+    bmd = Currency.find("BMD")
+
+    _(bmd.to_h[:iso_code]).must_equal("BMD")
+    _(bmd.to_h[:name]).must_equal("Bermudian Dollar")
+    _(bmd.to_h[:start_date]).wont_be_nil
+    _(bmd.to_h[:end_date]).wont_be_nil
+  end
+
+  it "includes peg metadata in detail hash" do
+    bmd = Currency.find("BMD")
+    h = bmd.to_h_with_providers
+
+    _(h[:peg]).wont_be_nil
+    _(h[:peg][:base]).must_equal("USD")
+    _(h[:peg][:rate]).must_equal(1.0)
+    _(h[:peg][:authority]).must_equal("Bermuda Monetary Authority")
+    _(h).wont_include(:providers)
+  end
+
+  it "returns providers for non-pegged currency detail" do
+    usd = Currency.find("USD")
+    h = usd.to_h_with_providers
+
+    _(h[:providers]).must_be_kind_of(Array)
+    _(h).wont_include(:peg)
+  end
 end

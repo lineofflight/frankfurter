@@ -318,6 +318,26 @@ describe Versions::V2 do
     _(records.first).must_include(:rate)
   end
 
+  it "excludes pegged currencies when providers filter is set" do
+    get "/rates?providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).wont_include("BMD")
+    _(quotes).wont_include("FKP")
+    _(quotes).wont_include("BTN")
+  end
+
+  it "filters pegged currencies by quotes param" do
+    get "/rates?quotes=USD,BMD"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }.uniq.sort
+
+    _(quotes).must_equal(["BMD", "USD"])
+  end
+
   it "returns providers" do
     get "/providers"
 
@@ -329,5 +349,104 @@ describe Versions::V2 do
     _(ecb["start_date"]).wont_be_nil
     _(ecb["end_date"]).wont_be_nil
     _(ecb["currencies"]).must_include("USD")
+  end
+
+  it "expands pegged currencies in rates" do
+    get "/rates?base=EUR"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("BMD")
+  end
+
+  it "derives correct rate for pegged currency" do
+    get "/rates?base=EUR"
+
+    usd = json.find { |r| r["quote"] == "USD" }
+    bmd = json.find { |r| r["quote"] == "BMD" }
+
+    _(bmd["rate"]).must_equal(usd["rate"])
+  end
+
+  it "derives correct rate for non-1:1 peg" do
+    get "/rates?base=EUR"
+
+    usd = json.find { |r| r["quote"] == "USD" }
+    ang = json.find { |r| r["quote"] == "ANG" }
+
+    expected = (usd["rate"] * 1.79)
+
+    _(ang["rate"]).must_be_close_to(expected, 0.01)
+  end
+
+  it "expands GBP-pegged currencies" do
+    get "/rates?base=EUR"
+
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("FKP")
+    _(quotes).must_include("GGP")
+  end
+
+  it "expands INR-pegged currencies" do
+    get "/rates?base=EUR"
+
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("BTN")
+  end
+
+  it "resolves pegged base currency" do
+    get "/rates?base=BMD"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+    _(json.first["base"]).must_equal("BMD")
+
+    eur = json.find { |r| r["quote"] == "EUR" }
+
+    _(eur).wont_be_nil
+    _(eur["rate"]).must_be_kind_of(Float)
+  end
+
+  it "resolves pegged base with providers filter" do
+    get "/rates?base=BMD&providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+    _(json.first["base"]).must_equal("BMD")
+  end
+
+  it "includes pegged currencies in currencies list" do
+    get "/currencies?scope=all"
+
+    _(last_response).must_be(:ok?)
+    bmd = json.find { |c| c["iso_code"] == "BMD" }
+
+    _(bmd).wont_be_nil
+    _(bmd["name"]).must_equal("Bermudian Dollar")
+    _(bmd["start_date"]).wont_be_nil
+    _(bmd["end_date"]).wont_be_nil
+  end
+
+  it "returns peg metadata for pegged currency detail" do
+    get "/currencies/bmd"
+
+    _(last_response).must_be(:ok?)
+    _(json["iso_code"]).must_equal("BMD")
+    _(json["peg"]).wont_be_nil
+    _(json["peg"]["base"]).must_equal("USD")
+    _(json["peg"]["rate"]).must_equal(1.0)
+    _(json["peg"]["authority"]).must_equal("Bermuda Monetary Authority")
+    _(json).wont_include("providers")
+  end
+
+  it "returns providers for non-pegged currency detail" do
+    get "/currencies/usd"
+
+    _(last_response).must_be(:ok?)
+    _(json["providers"]).must_be_kind_of(Array)
+    _(json).wont_include("peg")
   end
 end

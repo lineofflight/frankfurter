@@ -4,6 +4,7 @@ require "digest"
 require "rate"
 require "roundable"
 require "blender"
+require "peg"
 
 module Versions
   class V2 < Roda
@@ -62,6 +63,14 @@ module Versions
 
       def base
         @params[:base]&.upcase || "EUR"
+      end
+
+      def peg_for_base
+        @peg_for_base ||= Peg.find(base)
+      end
+
+      def effective_base
+        peg_for_base ? peg_for_base.base : base
       end
 
       def quotes
@@ -140,11 +149,48 @@ module Versions
         end
       end
 
-      def emit_blended(rows)
-        Blender.new(rows, base:).blend.each do |r|
+      def emit_blended(rows, &block)
+        blended = Blender.new(rows, base: effective_base).blend
+
+        if peg_for_base
+          blended = blended.map { |r| r.merge(rate: r[:rate] / peg_for_base.rate, base:) }
+        end
+
+        emitted_quotes = Set.new
+        blended.each do |r|
           next if quotes && !quotes.include?(r[:quote])
 
+          emitted_quotes << r[:quote]
           yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
+        end
+
+        expand_pegs(blended, emitted_quotes, &block)
+      end
+
+      def expand_pegs(blended, emitted_quotes)
+        return if providers
+
+        reference_date = blended.map { |r| r[:date] }.max
+        return unless reference_date
+
+        Peg.all.each do |peg|
+          next if peg.quote == base
+          next if emitted_quotes.include?(peg.quote)
+          next if quotes && !quotes.include?(peg.quote)
+          next if reference_date < peg.since
+
+          if peg.base == effective_base
+            date = reference_date
+            rate = peg.rate / (peg_for_base&.rate || 1.0)
+          else
+            anchor = blended.find { |r| r[:quote] == peg.base }
+            next unless anchor
+
+            date = anchor[:date]
+            rate = anchor[:rate] * peg.rate
+          end
+
+          yield({ date: date.to_s, base:, quote: peg.quote, rate: round(rate) })
         end
       end
 

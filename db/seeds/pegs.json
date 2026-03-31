@@ -1,0 +1,66 @@
+[
+  {
+    "quote": "BMD",
+    "base": "USD",
+    "rate": 1.0,
+    "since": "1972-02-06",
+    "authority": "Bermuda Monetary Authority",
+    "source": "https://en.wikipedia.org/wiki/Bermudian_dollar"
+  },
+  {
+    "quote": "FKP",
+    "base": "GBP",
+    "rate": 1.0,
+    "since": "1966-02-14",
+    "authority": "Falkland Islands Government",
+    "source": "https://en.wikipedia.org/wiki/Falkland_Islands_pound"
+  },
+  {
+    "quote": "SHP",
+    "base": "GBP",
+    "rate": 1.0,
+    "since": "1976-02-02",
+    "authority": "Government of Saint Helena",
+    "source": "https://en.wikipedia.org/wiki/Saint_Helena_pound"
+  },
+  {
+    "quote": "GGP",
+    "base": "GBP",
+    "rate": 1.0,
+    "since": "1921-01-01",
+    "authority": "States of Guernsey",
+    "source": "https://en.wikipedia.org/wiki/Guernsey_pound"
+  },
+  {
+    "quote": "IMP",
+    "base": "GBP",
+    "rate": 1.0,
+    "since": "1840-01-01",
+    "authority": "Isle of Man Government",
+    "source": "https://en.wikipedia.org/wiki/Manx_pound"
+  },
+  {
+    "quote": "JEP",
+    "base": "GBP",
+    "rate": 1.0,
+    "since": "1834-01-01",
+    "authority": "States of Jersey",
+    "source": "https://en.wikipedia.org/wiki/Jersey_pound"
+  },
+  {
+    "quote": "BTN",
+    "base": "INR",
+    "rate": 1.0,
+    "since": "1974-01-01",
+    "authority": "Royal Monetary Authority of Bhutan",
+    "source": "https://en.wikipedia.org/wiki/Bhutanese_ngultrum"
+  },
+  {
+    "quote": "ANG",
+    "base": "USD",
+    "rate": 1.79,
+    "since": "1971-12-18",
+    "authority": "Centrale Bank van Curaçao en Sint Maarten",
+    "source": "https://en.wikipedia.org/wiki/Netherlands_Antillean_guilder"
+  }
+]
