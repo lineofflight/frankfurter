@@ -232,5 +232,14 @@
     "terms_url": null,
     "publish_time": 12,
     "publish_days": "1-5"
+  },
+  {
+    "key": "CBC",
+    "name": "Central Bank of the Republic of China (Taiwan)",
+    "description": "Daily interbank spot rates for 15 currencies against the US dollar",
+    "data_url": "https://www.cbc.gov.tw/en/lp-4237-2.html",
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "1-5"
   }
 ]
