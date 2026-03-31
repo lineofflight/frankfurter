@@ -6,7 +6,7 @@ require "net/http"
 require "providers/base"
 
 module Providers
-  # Bank of England (BOE). Fetches daily spot exchange rates for 27 currencies
+  # Bank of England (BOE). Fetches daily spot exchange rates for 26 currencies
   # against the British pound from the Statistical Interactive Database.
   # The CSV API returns pivoted data with series codes as column headers.
   # Historical data available from 2000-01-04.

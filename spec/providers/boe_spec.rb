@@ -19,9 +19,16 @@ module Providers
     end
 
     it "fetches rates with date range" do
-      provider.fetch(since: Date.new(2026, 3, 17), upto: Date.new(2026, 3, 20)).import
+      since = Date.new(2026, 3, 17)
+      upto = Date.new(2026, 3, 20)
 
-      _(count_unique_dates).must_be(:>=, 1)
+      provider.fetch(since:, upto:).import
+
+      dates = Rate.select(:date).distinct.order(:date).map(:date)
+
+      _(dates.size).must_be(:>=, 1)
+      _(dates.min).must_be(:>=, since)
+      _(dates.max).must_be(:<=, upto)
     end
 
     it "stores multiple currencies per date" do
@@ -51,7 +58,7 @@ module Providers
 
     it "skips empty values" do
       csv = <<~CSV
-        DATE,XUDLUSS,XUDLZOS3
+        DATE,XUDLUSS,XUDLERS
         17 Mar 2026,1.3343,
       CSV
 
