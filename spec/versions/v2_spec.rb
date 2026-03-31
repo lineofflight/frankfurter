@@ -191,7 +191,7 @@ describe Versions::V2 do
   end
 
   it "returns a single currency" do
-    get "/currencies/usd"
+    get "/currency/usd"
 
     _(last_response).must_be(:ok?)
     _(json["iso_code"]).must_equal("USD")
@@ -201,7 +201,7 @@ describe Versions::V2 do
   end
 
   it "returns 404 for unknown currency" do
-    get "/currencies/xyz"
+    get "/currency/xyz"
 
     _(last_response.status).must_equal(404)
   end
@@ -449,7 +449,7 @@ describe Versions::V2 do
   end
 
   it "returns peg metadata for pegged currency detail" do
-    get "/currencies/bmd"
+    get "/currency/bmd"
 
     _(last_response).must_be(:ok?)
     _(json["iso_code"]).must_equal("BMD")
@@ -461,7 +461,7 @@ describe Versions::V2 do
   end
 
   it "returns providers for non-pegged currency detail" do
-    get "/currencies/usd"
+    get "/currency/usd"
 
     _(last_response).must_be(:ok?)
     _(json["providers"]).must_be_kind_of(Array)

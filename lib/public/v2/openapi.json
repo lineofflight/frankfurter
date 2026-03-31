@@ -96,6 +96,33 @@
         }
       }
     },
+    "/currency/{code}": {
+      "get": {
+        "operationId": "getCurrency",
+        "summary": "Get a single currency",
+        "description": "Returns details for a single currency, including provider information or peg metadata.",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "USD" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Currency details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CurrencyDetail" },
+                "example": { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "providers": ["ECB", "BOC", "FED"] }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
     "/currencies": {
       "get": {
         "operationId": "getCurrencies",
@@ -265,6 +292,31 @@
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" }
+        },
+        "required": ["iso_code", "name"]
+      },
+      "CurrencyDetail": {
+        "type": "object",
+        "properties": {
+          "iso_code": { "type": "string", "description": "ISO 4217 currency code" },
+          "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
+          "name": { "type": "string", "description": "Full currency name" },
+          "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "providers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Provider keys that publish this currency"
+          },
+          "peg": {
+            "type": "object",
+            "properties": {
+              "base": { "type": "string" },
+              "rate": { "type": "number" },
+              "authority": { "type": "string" },
+              "source": { "type": "string", "format": "uri" }
+            },
+            "description": "Peg metadata, present only for pegged currencies"
+          }
         },
         "required": ["iso_code", "name"]
       },

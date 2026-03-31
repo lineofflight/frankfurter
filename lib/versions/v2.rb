@@ -97,12 +97,14 @@ module Versions
 
       r.csv { r.halt(406) }
 
-      r.on("currencies") do
-        r.get(String) do |code|
+      r.on("currency", String) do |code|
+        r.get do
           found = Currency.find(code)
           found ? found.to_h_with_providers : request.halt(404)
         end
+      end
 
+      r.on("currencies") do
         r.get do
           ds = r.params["scope"] == "all" ? Currency : Currency.active
           ds.map(&:to_h)
