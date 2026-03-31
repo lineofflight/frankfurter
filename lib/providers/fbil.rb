@@ -55,6 +55,8 @@ module Providers
 
         units = match[1].to_i
         currency = match[2]
+        next if units.zero?
+
         adjusted_rate = rate_value / units.to_f
         next if adjusted_rate.zero?
 
