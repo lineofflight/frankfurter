@@ -35,13 +35,14 @@ module Providers
       response = Net::HTTP.get(url)
       @dataset = parse(response)
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError, JSON::ParserError
       @dataset = []
       self
     end
 
     def parse(json)
       data = json.is_a?(String) ? JSON.parse(json) : json
+      return [] unless data.is_a?(Array)
 
       data.filter_map do |record|
         sub_prod = record["subProdName"]

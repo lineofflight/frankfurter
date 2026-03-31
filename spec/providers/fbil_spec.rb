@@ -7,7 +7,7 @@ module Providers
   describe FBIL do
     before do
       Rate.dataset.delete
-      VCR.insert_cassette("fbil", match_requests_on: [:method, :host])
+      VCR.insert_cassette("fbil", match_requests_on: [:method, :host, :path])
     end
 
     after { VCR.eject_cassette }
@@ -18,17 +18,16 @@ module Providers
       Rate.select(:date).distinct.count
     end
 
-    it "fetches rates with date range" do
+    it "fetches and imports rates" do
       provider.fetch(since: Date.new(2026, 3, 17), upto: Date.new(2026, 3, 21)).import
 
-      _(count_unique_dates).must_be(:>=, 1)
-    end
+      _(count_unique_dates).must_equal(3)
 
-    it "stores multiple currencies per date" do
-      provider.fetch(since: Date.new(2026, 3, 17), upto: Date.new(2026, 3, 21)).import
-      date = Rate.first.date
+      currencies = Rate.select(:base).distinct.map(:base).sort
 
-      _(Rate.where(date:).count).must_be(:>, 1)
+      _(currencies).must_include("USD")
+      _(currencies).must_include("EUR")
+      _(currencies.length).must_equal(6)
     end
 
     it "parses JSON with correct base and quote" do
