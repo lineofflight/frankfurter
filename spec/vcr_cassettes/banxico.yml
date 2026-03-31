@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718,SF46410,SF46407,SF46406,SF60632/datos/2026-03-01/2026-03-15
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.banxico.org.mx
+      Bmx-Token:
+      - "<BANXICO_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Bmx-Token, Accept, Accept-Encoding, Content-Type
+      Access-Control-Allow-Methods:
+      - GET
+      Content-Security-Policy:
+      - script-src 'self'
+      Cache-Control:
+      - no-store
+      Content-Language:
+      - es
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 31 Mar 2026 11:23:24 GMT
+      Set-Cookie:
+      - Hex11701280=!GJiSdALwvt9JHHNXnI/D94h9/K2URzo4Z6h+HLkXLxKk8ig5yqIS65oiQi7azil/eNsPAIVYtbGIZqc=;
+        expires=Tue, 31-Mar-2026 19:23:25 GMT; path=/; Httponly
+      - TS012f422b=01ab44a5a812fd50ee106963050340934df127c0430a274f2f53753359567fc4b2874a7f5d3f3de8190faf46af630451bd0ff91036d674fc76f989d738e610e59ea29722fe;
+        Path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJibXgiOnsic2VyaWVzIjpbeyJpZFNlcmllIjoiU0Y0MzcxOCIsInRpdHVsbyI6IlRpcG8gZGUgY2FtYmlvICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUGVzb3MgcG9yIGTDs2xhciBFLlUuQS4gVGlwbyBkZSBjYW1iaW8gcGFyYSBzb2x2ZW50YXIgb2JsaWdhY2lvbmVzIGRlbm9taW5hZGFzIGVuIG1vbmVkYSBleHRyYW5qZXJhIEZlY2hhIGRlIGRldGVybWluYWNpw7NuIChGSVgpIiwiZGF0b3MiOlt7ImZlY2hhIjoiMDIvMDMvMjAyNiIsImRhdG8iOiIxNy4zNDg1In0seyJmZWNoYSI6IjAzLzAzLzIwMjYiLCJkYXRvIjoiMTcuNzIyOCJ9LHsiZmVjaGEiOiIwNC8wMy8yMDI2IiwiZGF0byI6IjE3LjU0NDUifSx7ImZlY2hhIjoiMDUvMDMvMjAyNiIsImRhdG8iOiIxNy42NzcwIn0seyJmZWNoYSI6IjA2LzAzLzIwMjYiLCJkYXRvIjoiMTcuNzk2MiJ9LHsiZmVjaGEiOiIwOS8wMy8yMDI2IiwiZGF0byI6IjE3Ljc2ODcifSx7ImZlY2hhIjoiMTAvMDMvMjAyNiIsImRhdG8iOiIxNy41MDM3In0seyJmZWNoYSI6IjExLzAzLzIwMjYiLCJkYXRvIjoiMTcuNjU0MyJ9LHsiZmVjaGEiOiIxMi8wMy8yMDI2IiwiZGF0byI6IjE3LjgzNjgifSx7ImZlY2hhIjoiMTMvMDMvMjAyNiIsImRhdG8iOiIxNy45MjE4In1dfSx7ImlkU2VyaWUiOiJTRjQ2NDA2IiwidGl0dWxvIjoiQ290aXphY2nDs24gZGUgbGFzIGRpdmlzYXMgcXVlIGNvbmZvcm1hbiBsYSBjYW5hc3RhIGRlbCBERUcgUmVzcGVjdG8gYWwgcGVzbyBtZXhpY2FubyBZZW4gamFwb27DqXMiLCJkYXRvcyI6W3siZmVjaGEiOiIwMi8wMy8yMDI2IiwiZGF0byI6IjAuMTEwNSJ9LHsiZmVjaGEiOiIwMy8wMy8yMDI2IiwiZGF0byI6IjAuMTEyNCJ9LHsiZmVjaGEiOiIwNC8wMy8yMDI2IiwiZGF0byI6IjAuMTExNiJ9LHsiZmVjaGEiOiIwNS8wMy8yMDI2IiwiZGF0byI6IjAuMTEyMyJ9LHsiZmVjaGEiOiIwNi8wMy8yMDI2IiwiZGF0byI6IjAuMTEyNyJ9LHsiZmVjaGEiOiIwOS8wMy8yMDI2IiwiZGF0byI6IjAuMTEyMSJ9LHsiZmVjaGEiOiIxMC8wMy8yMDI2IiwiZGF0byI6IjAuMTEwOSJ9LHsiZmVjaGEiOiIxMS8wMy8yMDI2IiwiZGF0byI6IjAuMTExNCJ9LHsiZmVjaGEiOiIxMi8wMy8yMDI2IiwiZGF0byI6IjAuMTEyNCJ9LHsiZmVjaGEiOiIxMy8wMy8yMDI2IiwiZGF0byI6IjAuMTEyNSJ9XX0seyJpZFNlcmllIjoiU0Y0NjQxMCIsInRpdHVsbyI6IkNvdGl6YWNpw7NuIGRlIGxhcyBkaXZpc2FzIHF1ZSBjb25mb3JtYW4gbGEgY2FuYXN0YSBkZWwgREVHIFJlc3BlY3RvIGFsIHBlc28gbWV4aWNhbm8gRXVybyIsImRhdG9zIjpbeyJmZWNoYSI6IjAyLzAzLzIwMjYiLCJkYXRvIjoiMjAuMzU0MSJ9LHsiZmVjaGEiOiIwMy8wMy8yMDI2IiwiZGF0byI6IjIwLjU1MDUifSx7ImZlY2hhIjoiMDQvMDMvMjAyNiIsImRhdG8iOiIyMC40MTIxIn0seyJmZWNoYSI6IjA1LzAzLzIwMjYiLCJkYXRvIjoiMjAuNTI1NiJ9LHsiZmVjaGEiOiIwNi8wMy8yMDI2IiwiZGF0byI6IjIwLjU3NjkifSx7ImZlY2hhIjoiMDkvMDMvMjAyNiIsImRhdG8iOiIyMC41Mzg4In0seyJmZWNoYSI6IjEwLzAzLzIwMjYiLCJkYXRvIjoiMjAuMzcxNyJ9LHsiZmVjaGEiOiIxMS8wMy8yMDI2IiwiZGF0byI6IjIwLjQ3MTkifSx7ImZlY2hhIjoiMTIvMDMvMjAyNiIsImRhdG8iOiIyMC42MTMxIn0seyJmZWNoYSI6IjEzLzAzLzIwMjYiLCJkYXRvIjoiMjAuNTUzNiJ9XX0seyJpZFNlcmllIjoiU0Y2MDYzMiIsInRpdHVsbyI6IkNvdGl6YWNpw7NuIGRlIGxhIGRpdmlzYSBSZXNwZWN0byBhbCBwZXNvIG1leGljYW5vIETDs2xhciBDYW5hZGllbnNlIiwiZGF0b3MiOlt7ImZlY2hhIjoiMDIvMDMvMjAyNiIsImRhdG8iOiIxMi42NjQ2In0seyJmZWNoYSI6IjAzLzAzLzIwMjYiLCJkYXRvIjoiMTIuOTA5OSJ9LHsiZmVjaGEiOiIwNC8wMy8yMDI2IiwiZGF0byI6IjEyLjg2MDEifSx7ImZlY2hhIjoiMDUvMDMvMjAyNiIsImRhdG8iOiIxMi45NDgzIn0seyJmZWNoYSI6IjA2LzAzLzIwMjYiLCJkYXRvIjoiMTMuMDc4NyJ9LHsiZmVjaGEiOiIwOS8wMy8yMDI2IiwiZGF0byI6IjEzLjEwNzkifSx7ImZlY2hhIjoiMTAvMDMvMjAyNiIsImRhdG8iOiIxMi45MjY2In0seyJmZWNoYSI6IjExLzAzLzIwMjYiLCJkYXRvIjoiMTIuOTg4NyJ9LHsiZmVjaGEiOiIxMi8wMy8yMDI2IiwiZGF0byI6IjEzLjA4MzkifSx7ImZlY2hhIjoiMTMvMDMvMjAyNiIsImRhdG8iOiIxMy4wMjU5In1dfSx7ImlkU2VyaWUiOiJTRjQ2NDA3IiwidGl0dWxvIjoiQ290aXphY2nDs24gZGUgbGFzIGRpdmlzYXMgcXVlIGNvbmZvcm1hbiBsYSBjYW5hc3RhIGRlbCBERUcgUmVzcGVjdG8gYWwgcGVzbyBtZXhpY2FubyBMaWJyYSBlc3RlcmxpbmEiLCJkYXRvcyI6W3siZmVjaGEiOiIwMi8wMy8yMDI2IiwiZGF0byI6IjIzLjI2NTIifSx7ImZlY2hhIjoiMDMvMDMvMjAyNiIsImRhdG8iOiIyMy41NTgwIn0seyJmZWNoYSI6IjA0LzAzLzIwMjYiLCJkYXRvIjoiMjMuNDcxOSJ9LHsiZmVjaGEiOiIwNS8wMy8yMDI2IiwiZGF0byI6IjIzLjYxMjkifSx7ImZlY2hhIjoiMDYvMDMvMjAyNiIsImRhdG8iOiIyMy43MDM2In0seyJmZWNoYSI6IjA5LzAzLzIwMjYiLCJkYXRvIjoiMjMuNzE1OSJ9LHsiZmVjaGEiOiIxMC8wMy8yMDI2IiwiZGF0byI6IjIzLjUzMjgifSx7ImZlY2hhIjoiMTEvMDMvMjAyNiIsImRhdG8iOiIyMy43MDg4In0seyJmZWNoYSI6IjEyLzAzLzIwMjYiLCJkYXRvIjoiMjMuODk2MCJ9LHsiZmVjaGEiOiIxMy8wMy8yMDI2IiwiZGF0byI6IjIzLjc1NjIifV19XX19
+  recorded_at: Tue, 31 Mar 2026 11:23:25 GMT
+recorded_with: VCR 6.4.0
