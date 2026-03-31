@@ -318,6 +318,26 @@ describe Versions::V2 do
     _(records.first).must_include(:rate)
   end
 
+  it "excludes pegged currencies when providers filter is set" do
+    get "/rates?providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).wont_include("BMD")
+    _(quotes).wont_include("FKP")
+    _(quotes).wont_include("BTN")
+  end
+
+  it "filters pegged currencies by quotes param" do
+    get "/rates?quotes=USD,BMD"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }.uniq.sort
+
+    _(quotes).must_equal(["BMD", "USD"])
+  end
+
   it "returns providers" do
     get "/providers"
 
