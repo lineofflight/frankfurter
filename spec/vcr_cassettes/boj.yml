@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.stat-search.boj.or.jp/api/v1/getDataCode?code=FXERD04,FXERD34&db=FM08&endDate=202603&format=json&lang=en&startDate=202603
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.stat-search.boj.or.jp
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - default-src 'self' 'unsafe-inline' 'unsafe-eval';img-src 'self' data:;
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept-Encoding
+      - accecpt-encoding
+      Expires:
+      - Tue, 31 Mar 2026 19:23:53 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store
+      Pragma:
+      - no-cache
+      Date:
+      - Tue, 31 Mar 2026 19:23:53 GMT
+      Content-Length:
+      - '1736'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: |
+        {
+        "STATUS":200,
+        "MESSAGEID":"M181000I",
+        "MESSAGE":"Successfully completed",
+        "DATE":"2026-04-01T04:23:52.923+09:00",
+        "PARAMETER":{
+        "FORMAT":"JSON",
+        "LANG":"EN",
+        "DB":"FM08",
+        "STARTDATE":"202603",
+        "ENDDATE":"202603",
+        "STARTPOSITION":""
+        },
+        "NEXTPOSITION":null,
+        "RESULTSET":[
+        {
+        "SERIES_CODE":"FXERD04",
+        "NAME_OF_TIME_SERIES":"US.Dollar/Yen Spot Rate at 17:00 in JST, Tokyo Market",
+        "UNIT":"Yen per U.S. Dollar",
+        "FREQUENCY":"DAILY",
+        "CATEGORY":"Foreign Exchange Rates",
+        "LAST_UPDATE":20260331,
+        "VALUES":{
+        "SURVEY_DATES":[20260301,20260302,20260303,20260304,20260305,20260306,20260307,20260308,20260309,20260310,20260311,20260312,20260313,20260314,20260315,20260316,20260317,20260318,20260319,20260320,20260321,20260322,20260323,20260324,20260325,20260326,20260327,20260328,20260329,20260330,20260331],
+        "VALUES":[null,156.99,157.42,157.46,157.26,157.54,null,null,158.46,157.32,158.23,158.8,159.43,null,null,159.29,159.23,158.77,159.22,null,null,null,159.59,158.5,159.14,159.5,159.95,null,null,null,null]
+        }
+        },
+        {
+        "SERIES_CODE":"FXERD34",
+        "NAME_OF_TIME_SERIES":"Euro/US.Dollar as of 17:00 in JST, Tokyo Market",
+        "UNIT":"U.S. Dollar per Euro",
+        "FREQUENCY":"DAILY",
+        "CATEGORY":"Foreign Exchange Rates",
+        "LAST_UPDATE":20260331,
+        "VALUES":{
+        "SURVEY_DATES":[20260301,20260302,20260303,20260304,20260305,20260306,20260307,20260308,20260309,20260310,20260311,20260312,20260313,20260314,20260315,20260316,20260317,20260318,20260319,20260320,20260321,20260322,20260323,20260324,20260325,20260326,20260327,20260328,20260329,20260330,20260331],
+        "VALUES":[null,1.1716,1.1644,1.1616,1.1605,1.1615,null,null,1.1564,1.166,1.1618,1.1552,1.1458,null,null,1.1427,1.1495,1.1527,1.1453,null,null,null,1.1528,1.1608,1.1598,1.1554,1.1518,null,null,null,null]
+        }
+        }
+        ]
+        }
+  recorded_at: Tue, 31 Mar 2026 19:23:53 GMT
+recorded_with: VCR 6.4.0
