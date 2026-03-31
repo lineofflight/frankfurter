@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - v2 API at `/v2/` endpoints with multi-provider blended exchange rates
-- 21 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, NBP.B, FRED, BNM, RBA, BCRA, CBK, BOJ, IMF, NBRM, BCEAO, BOI, BCCR
+- 25 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, NBP.B, FRED, BNM, RBA, BCRA, CBK, BOJ, IMF, NBRM, BCEAO, BOI, BCCR, NB, NBG, HKMA, RB
 - 150+ currencies (up from ~30 in v1)
 - `/v2/rate/{base}/{quote}` endpoint for single currency pair lookups
 - `/v2/rate/{base}/{quote}/{date}` for historical single pair lookups
