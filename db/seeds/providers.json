@@ -259,5 +259,14 @@
     "terms_url": null,
     "publish_time": 16,
     "publish_days": "1-5"
+  },
+  {
+    "key": "FBIL",
+    "name": "Financial Benchmarks India",
+    "description": "Daily reference exchange rates for major currencies against the Indian rupee",
+    "data_url": "https://www.fbil.org.in/#/refrates",
+    "terms_url": "https://www.fbil.org.in/#/termsandcondition",
+    "publish_time": 8,
+    "publish_days": "1-6"
   }
 ]
