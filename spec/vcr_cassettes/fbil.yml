@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.fbil.org.in/wasdm/refrates/fetchfiltered?authenticated=false&fromDate=2026-03-17&toDate=2026-03-21
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.fbil.org.in
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 21 Mar 2026 08:00:00 GMT
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '[{"processRunDate":"2026-03-20 00:00:00","subProdName":"INR / 1 USD","displayTime":"2026-03-20
+        13:00:00","rate":93.348300,"comments":""},{"processRunDate":"2026-03-20 00:00:00","subProdName":"INR
+        / 1 GBP","displayTime":"2026-03-20 13:00:00","rate":125.156400,"comments":""},{"processRunDate":"2026-03-20
+        00:00:00","subProdName":"INR / 1 EUR","displayTime":"2026-03-20 13:00:00","rate":107.943600,"comments":""},{"processRunDate":"2026-03-20
+        00:00:00","subProdName":"INR / 100 JPY","displayTime":"2026-03-20 13:00:00","rate":58.940000,"comments":""},{"processRunDate":"2026-03-20
+        00:00:00","subProdName":"INR / 1 AED","displayTime":"2026-03-20 13:00:00","rate":25.413500,"comments":""},{"processRunDate":"2026-03-20
+        00:00:00","subProdName":"INR / 10000 IDR","displayTime":"2026-03-20 13:00:00","rate":55.107900,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 1 USD","displayTime":"2026-03-18 13:00:00","rate":92.451400,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 1 GBP","displayTime":"2026-03-18 13:00:00","rate":123.637100,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 1 EUR","displayTime":"2026-03-18 13:00:00","rate":106.761600,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 100 JPY","displayTime":"2026-03-18 13:00:00","rate":58.290000,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 1 AED","displayTime":"2026-03-18 13:00:00","rate":25.169800,"comments":""},{"processRunDate":"2026-03-18
+        00:00:00","subProdName":"INR / 10000 IDR","displayTime":"2026-03-18 13:00:00","rate":54.640600,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 1 USD","displayTime":"2026-03-17 13:00:00","rate":92.457000,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 1 GBP","displayTime":"2026-03-17 13:00:00","rate":122.826700,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 1 EUR","displayTime":"2026-03-17 13:00:00","rate":106.095000,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 100 JPY","displayTime":"2026-03-17 13:00:00","rate":57.990000,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 1 AED","displayTime":"2026-03-17 13:00:00","rate":25.171300,"comments":""},{"processRunDate":"2026-03-17
+        00:00:00","subProdName":"INR / 10000 IDR","displayTime":"2026-03-17 13:00:00","rate":54.409300,"comments":""}]'
+  recorded_at: Fri, 21 Mar 2026 08:00:00 GMT
+recorded_with: VCR 6.3.1
