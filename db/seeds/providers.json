@@ -295,5 +295,14 @@
     "terms_url": null,
     "publish_time": 16,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BCU",
+    "name": "Central Bank of Uruguay",
+    "description": "Official exchange rates published by the Banco Central del Uruguay (BCU). Rates are provided in UYU against major currencies.",
+    "data_url": "https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones",
+    "terms_url": "https://www.bcu.gub.uy/Paginas/Condiciones-de-uso.aspx",
+    "publish_time": 15,
+    "publish_days": "1-5"
   }
 ]

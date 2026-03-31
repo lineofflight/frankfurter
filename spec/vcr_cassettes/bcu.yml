@@ -1,0 +1,1852 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>2225</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:00 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1751'
+      Set-Cookie:
+      - JSESSIONID=3CFC1435BB9A27040A08A43EA35ACF9D; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>2225</Moneda>\n\t\t\t\t\t\t<Nombre>DLS.
+        USA BILLETE</Nombre>\n\t\t\t\t\t\t<CodigoISO>DLS.</CodigoISO>\n\t\t\t\t\t\t<Emisor>ESTADOS
+        UNIDOS</Emisor>\n\t\t\t\t\t\t<TCC>40.560000</TCC>\n\t\t\t\t\t\t<TCV>40.560000</TCV>\n\t\t\t\t\t\t<ArbAct>1.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>2225</Moneda>\n\t\t\t\t\t\t<Nombre>DLS.
+        USA BILLETE</Nombre>\n\t\t\t\t\t\t<CodigoISO>DLS.</CodigoISO>\n\t\t\t\t\t\t<Emisor>ESTADOS
+        UNIDOS</Emisor>\n\t\t\t\t\t\t<TCC>40.626000</TCC>\n\t\t\t\t\t\t<TCV>40.626000</TCV>\n\t\t\t\t\t\t<ArbAct>1.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>2225</Moneda>\n\t\t\t\t\t\t<Nombre>DLS.
+        USA BILLETE</Nombre>\n\t\t\t\t\t\t<CodigoISO>DLS.</CodigoISO>\n\t\t\t\t\t\t<Emisor>ESTADOS
+        UNIDOS</Emisor>\n\t\t\t\t\t\t<TCC>40.480000</TCC>\n\t\t\t\t\t\t<TCV>40.480000</TCV>\n\t\t\t\t\t\t<ArbAct>1.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1111</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:00 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1730'
+      Set-Cookie:
+      - JSESSIONID=AB887D12158606C375ACF2356D791CBF; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1111</Moneda>\n\t\t\t\t\t\t<Nombre>EURO</Nombre>\n\t\t\t\t\t\t<CodigoISO>EURO</CodigoISO>\n\t\t\t\t\t\t<Emisor>UNION
+        MONET.EUROPEA</Emisor>\n\t\t\t\t\t\t<TCC>46.696728</TCC>\n\t\t\t\t\t\t<TCV>46.696728</TCV>\n\t\t\t\t\t\t<ArbAct>1.151300</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1111</Moneda>\n\t\t\t\t\t\t<Nombre>EURO</Nombre>\n\t\t\t\t\t\t<CodigoISO>EURO</CodigoISO>\n\t\t\t\t\t\t<Emisor>UNION
+        MONET.EUROPEA</Emisor>\n\t\t\t\t\t\t<TCC>46.557396</TCC>\n\t\t\t\t\t\t<TCV>46.557396</TCV>\n\t\t\t\t\t\t<ArbAct>1.146000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1111</Moneda>\n\t\t\t\t\t\t<Nombre>EURO</Nombre>\n\t\t\t\t\t\t<CodigoISO>EURO</CodigoISO>\n\t\t\t\t\t\t<Emisor>UNION
+        MONET.EUROPEA</Emisor>\n\t\t\t\t\t\t<TCC>46.734160</TCC>\n\t\t\t\t\t\t<TCV>46.734160</TCV>\n\t\t\t\t\t\t<ArbAct>1.154500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1000</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:00 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1682'
+      Set-Cookie:
+      - JSESSIONID=8949F8AF796FC258C947451B66D7DA21; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1000</Moneda>\n\t\t\t\t\t\t<Nombre>REAL</Nombre>\n\t\t\t\t\t\t<CodigoISO>BRL</CodigoISO>\n\t\t\t\t\t\t<Emisor>BRASIL</Emisor>\n\t\t\t\t\t\t<TCC>7.736914</TCC>\n\t\t\t\t\t\t<TCV>7.736914</TCV>\n\t\t\t\t\t\t<ArbAct>5.242400</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1000</Moneda>\n\t\t\t\t\t\t<Nombre>REAL</Nombre>\n\t\t\t\t\t\t<CodigoISO>BRL</CodigoISO>\n\t\t\t\t\t\t<Emisor>BRASIL</Emisor>\n\t\t\t\t\t\t<TCC>7.737549</TCC>\n\t\t\t\t\t\t<TCV>7.737549</TCV>\n\t\t\t\t\t\t<ArbAct>5.250500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1000</Moneda>\n\t\t\t\t\t\t<Nombre>REAL</Nombre>\n\t\t\t\t\t\t<CodigoISO>BRL</CodigoISO>\n\t\t\t\t\t\t<Emisor>BRASIL</Emisor>\n\t\t\t\t\t\t<TCC>7.799164</TCC>\n\t\t\t\t\t\t<TCV>7.799164</TCV>\n\t\t\t\t\t\t<ArbAct>5.190300</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>0500</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:00 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1727'
+      Set-Cookie:
+      - JSESSIONID=D11B2E4BB88FE26673975EBA4589AA37; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        ARGENTINO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ARS</CodigoISO>\n\t\t\t\t\t\t<Emisor>ARGENTINA</Emisor>\n\t\t\t\t\t\t<TCC>0.029321</TCC>\n\t\t\t\t\t\t<TCV>0.029321</TCV>\n\t\t\t\t\t\t<ArbAct>1383.294200</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        ARGENTINO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ARS</CodigoISO>\n\t\t\t\t\t\t<Emisor>ARGENTINA</Emisor>\n\t\t\t\t\t\t<TCC>0.029086</TCC>\n\t\t\t\t\t\t<TCV>0.029086</TCV>\n\t\t\t\t\t\t<ArbAct>1396.765100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        ARGENTINO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ARS</CodigoISO>\n\t\t\t\t\t\t<Emisor>ARGENTINA</Emisor>\n\t\t\t\t\t\t<TCC>0.029309</TCC>\n\t\t\t\t\t\t<TCV>0.029309</TCV>\n\t\t\t\t\t\t<ArbAct>1381.125500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>2309</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:00 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1724'
+      Set-Cookie:
+      - JSESSIONID=7B7C9B6296228DB51953E6852FD1D0BB; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>2309</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        CANADIENSE</Nombre>\n\t\t\t\t\t\t<CodigoISO>CAD</CodigoISO>\n\t\t\t\t\t\t<Emisor>CANADA</Emisor>\n\t\t\t\t\t\t<TCC>29.207172</TCC>\n\t\t\t\t\t\t<TCV>29.207172</TCV>\n\t\t\t\t\t\t<ArbAct>1.388700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>2309</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        CANADIENSE</Nombre>\n\t\t\t\t\t\t<CodigoISO>CAD</CodigoISO>\n\t\t\t\t\t\t<Emisor>CANADA</Emisor>\n\t\t\t\t\t\t<TCC>29.172770</TCC>\n\t\t\t\t\t\t<TCV>29.172770</TCV>\n\t\t\t\t\t\t<ArbAct>1.392600</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>2309</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        CANADIENSE</Nombre>\n\t\t\t\t\t\t<CodigoISO>CAD</CodigoISO>\n\t\t\t\t\t\t<Emisor>CANADA</Emisor>\n\t\t\t\t\t\t<TCC>29.049157</TCC>\n\t\t\t\t\t\t<TCV>29.049157</TCV>\n\t\t\t\t\t\t<ArbAct>1.393500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1300</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1709'
+      Set-Cookie:
+      - JSESSIONID=D92606F90201D70AEEA5606381EF2CED; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1300</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        CHILENO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CLP</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHILE</Emisor>\n\t\t\t\t\t\t<TCC>0.043983</TCC>\n\t\t\t\t\t\t<TCV>0.043983</TCV>\n\t\t\t\t\t\t<ArbAct>922.180000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1300</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        CHILENO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CLP</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHILE</Emisor>\n\t\t\t\t\t\t<TCC>0.043560</TCC>\n\t\t\t\t\t\t<TCV>0.043560</TCV>\n\t\t\t\t\t\t<ArbAct>932.650000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1300</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        CHILENO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CLP</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHILE</Emisor>\n\t\t\t\t\t\t<TCC>0.043729</TCC>\n\t\t\t\t\t\t<TCV>0.043729</TCV>\n\t\t\t\t\t\t<ArbAct>925.700000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:00 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4150</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1706'
+      Set-Cookie:
+      - JSESSIONID=EA91CE143A0C526204366E6449916005; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4150</Moneda>\n\t\t\t\t\t\t<Nombre>YUAN
+        RENMIMBI</Nombre>\n\t\t\t\t\t\t<CodigoISO>CNY</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHINA</Emisor>\n\t\t\t\t\t\t<TCC>5.870604</TCC>\n\t\t\t\t\t\t<TCV>5.870604</TCV>\n\t\t\t\t\t\t<ArbAct>6.909000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4150</Moneda>\n\t\t\t\t\t\t<Nombre>YUAN
+        RENMIMBI</Nombre>\n\t\t\t\t\t\t<CodigoISO>CNY</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHINA</Emisor>\n\t\t\t\t\t\t<TCC>5.877519</TCC>\n\t\t\t\t\t\t<TCV>5.877519</TCV>\n\t\t\t\t\t\t<ArbAct>6.912100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4150</Moneda>\n\t\t\t\t\t\t<Nombre>YUAN
+        RENMIMBI</Nombre>\n\t\t\t\t\t\t<CodigoISO>CNY</CodigoISO>\n\t\t\t\t\t\t<Emisor>CHINA</Emisor>\n\t\t\t\t\t\t<TCC>5.874670</TCC>\n\t\t\t\t\t\t<TCV>5.874670</TCV>\n\t\t\t\t\t\t<ArbAct>6.890600</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:01 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5500</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1730'
+      Set-Cookie:
+      - JSESSIONID=DA52C38DEAE01DBF9B3393BE40811156; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        COLOMBIANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>COP</CodigoISO>\n\t\t\t\t\t\t<Emisor>COLOMBIA</Emisor>\n\t\t\t\t\t\t<TCC>0.011069</TCC>\n\t\t\t\t\t\t<TCV>0.011069</TCV>\n\t\t\t\t\t\t<ArbAct>3664.400000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        COLOMBIANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>COP</CodigoISO>\n\t\t\t\t\t\t<Emisor>COLOMBIA</Emisor>\n\t\t\t\t\t\t<TCC>0.011067</TCC>\n\t\t\t\t\t\t<TCV>0.011067</TCV>\n\t\t\t\t\t\t<ArbAct>3670.800000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5500</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        COLOMBIANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>COP</CodigoISO>\n\t\t\t\t\t\t<Emisor>COLOMBIA</Emisor>\n\t\t\t\t\t\t<TCC>0.011025</TCC>\n\t\t\t\t\t\t<TCV>0.011025</TCV>\n\t\t\t\t\t\t<ArbAct>3671.500000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:01 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1800</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1718'
+      Set-Cookie:
+      - JSESSIONID=3E0B12F44D7F04D1591035FEA987142F; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        DANESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>DKK</CodigoISO>\n\t\t\t\t\t\t<Emisor>DINAMARCA</Emisor>\n\t\t\t\t\t\t<TCC>6.249230</TCC>\n\t\t\t\t\t\t<TCV>6.249230</TCV>\n\t\t\t\t\t\t<ArbAct>6.490400</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        DANESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>DKK</CodigoISO>\n\t\t\t\t\t\t<Emisor>DINAMARCA</Emisor>\n\t\t\t\t\t\t<TCC>6.231268</TCC>\n\t\t\t\t\t\t<TCV>6.231268</TCV>\n\t\t\t\t\t\t<ArbAct>6.519700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        DANESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>DKK</CodigoISO>\n\t\t\t\t\t\t<Emisor>DINAMARCA</Emisor>\n\t\t\t\t\t\t<TCC>6.255989</TCC>\n\t\t\t\t\t\t<TCV>6.255989</TCV>\n\t\t\t\t\t\t<ArbAct>6.470600</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:01 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5100</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1724'
+      Set-Cookie:
+      - JSESSIONID=BCA4EF3EC9BE7BD3002E61A1DCD6EFC0; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5100</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        HONG KONG</Nombre>\n\t\t\t\t\t\t<CodigoISO>HKD</CodigoISO>\n\t\t\t\t\t\t<Emisor>HONG
+        KONG</Emisor>\n\t\t\t\t\t\t<TCC>5.178159</TCC>\n\t\t\t\t\t\t<TCV>5.178159</TCV>\n\t\t\t\t\t\t<ArbAct>7.832900</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5100</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        HONG KONG</Nombre>\n\t\t\t\t\t\t<CodigoISO>HKD</CodigoISO>\n\t\t\t\t\t\t<Emisor>HONG
+        KONG</Emisor>\n\t\t\t\t\t\t<TCC>5.184533</TCC>\n\t\t\t\t\t\t<TCV>5.184533</TCV>\n\t\t\t\t\t\t<ArbAct>7.836000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5100</Moneda>\n\t\t\t\t\t\t<Nombre>DOLAR
+        HONG KONG</Nombre>\n\t\t\t\t\t\t<CodigoISO>HKD</CodigoISO>\n\t\t\t\t\t\t<Emisor>HONG
+        KONG</Emisor>\n\t\t\t\t\t\t<TCC>5.163924</TCC>\n\t\t\t\t\t\t<TCV>5.163924</TCV>\n\t\t\t\t\t\t<ArbAct>7.839000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:01 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4300</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:01 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1721'
+      Set-Cookie:
+      - JSESSIONID=F3CF3758E0988EF6581F3921952C283F; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4300</Moneda>\n\t\t\t\t\t\t<Nombre>FORINT
+        HUNGARO</Nombre>\n\t\t\t\t\t\t<CodigoISO>HUF</CodigoISO>\n\t\t\t\t\t\t<Emisor>HUNGRIA</Emisor>\n\t\t\t\t\t\t<TCC>0.119972</TCC>\n\t\t\t\t\t\t<TCV>0.119972</TCV>\n\t\t\t\t\t\t<ArbAct>338.080000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4300</Moneda>\n\t\t\t\t\t\t<Nombre>FORINT
+        HUNGARO</Nombre>\n\t\t\t\t\t\t<CodigoISO>HUF</CodigoISO>\n\t\t\t\t\t\t<Emisor>HUNGRIA</Emisor>\n\t\t\t\t\t\t<TCC>0.119986</TCC>\n\t\t\t\t\t\t<TCV>0.119986</TCV>\n\t\t\t\t\t\t<ArbAct>338.590000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4300</Moneda>\n\t\t\t\t\t\t<Nombre>FORINT
+        HUNGARO</Nombre>\n\t\t\t\t\t\t<CodigoISO>HUF</CodigoISO>\n\t\t\t\t\t\t<Emisor>HUNGRIA</Emisor>\n\t\t\t\t\t\t<TCC>0.121719</TCC>\n\t\t\t\t\t\t<TCV>0.121719</TCV>\n\t\t\t\t\t\t<ArbAct>332.570000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:01 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5700</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:02 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1703'
+      Set-Cookie:
+      - JSESSIONID=3FA560078232BA4D45723E6DEC2A2783; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5700</Moneda>\n\t\t\t\t\t\t<Nombre>RUPIA
+        INDIA</Nombre>\n\t\t\t\t\t\t<CodigoISO>INR</CodigoISO>\n\t\t\t\t\t\t<Emisor>INDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.427803</TCC>\n\t\t\t\t\t\t<TCV>0.427803</TCV>\n\t\t\t\t\t\t<ArbAct>94.810000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5700</Moneda>\n\t\t\t\t\t\t<Nombre>RUPIA
+        INDIA</Nombre>\n\t\t\t\t\t\t<CodigoISO>INR</CodigoISO>\n\t\t\t\t\t\t<Emisor>INDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.428477</TCC>\n\t\t\t\t\t\t<TCV>0.428477</TCV>\n\t\t\t\t\t\t<ArbAct>94.815000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5700</Moneda>\n\t\t\t\t\t\t<Nombre>RUPIA
+        INDIA</Nombre>\n\t\t\t\t\t\t<CodigoISO>INR</CodigoISO>\n\t\t\t\t\t\t<Emisor>INDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.426937</TCC>\n\t\t\t\t\t\t<TCV>0.426937</TCV>\n\t\t\t\t\t\t<ArbAct>94.815000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:02 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>2700</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:02 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1742'
+      Set-Cookie:
+      - JSESSIONID=EF1065479EEE32E8DA82C13857BB5CC0; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOlNPQVAtRU5WPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VudmVsb3BlLyIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM6U09BUC1FTkM9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW5jb2RpbmcvIiB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIj4KCTxTT0FQLUVOVjpCb2R5PgoJCTx3c2JjdWNvdGl6YWNpb25lcy5FeGVjdXRlUmVzcG9uc2UgeG1sbnM9IkNvdGl6YSI+CgkJCTxTYWxpZGEgeG1sbnM9IkNvdGl6YSI+CgkJCQk8cmVzcHVlc3Rhc3RhdHVzPgoJCQkJCTxzdGF0dXM+MTwvc3RhdHVzPgoJCQkJCTxjb2RpZ29lcnJvcj4wPC9jb2RpZ29lcnJvcj4KCQkJCQk8bWVuc2FqZS8+CgkJCQk8L3Jlc3B1ZXN0YXN0YXR1cz4KCQkJCTxkYXRvc2NvdGl6YWNpb25lcz4KCQkJCQk8ZGF0b3Njb3RpemFjaW9uZXMuZGF0byB4bWxucz0iQ290aXphIj4KCQkJCQkJPEZlY2hhPjIwMjYtMDMtMjc8L0ZlY2hhPgoJCQkJCQk8TW9uZWRhPjI3MDA8L01vbmVkYT4KCQkJCQkJPE5vbWJyZT5MSUJSQSBFU1RFUkxJTkE8L05vbWJyZT4KCQkJCQkJPENvZGlnb0lTTz5HQlA8L0NvZGlnb0lTTz4KCQkJCQkJPEVtaXNvcj5HUkFOIEJSRVRBw5FBPC9FbWlzb3I+CgkJCQkJCTxUQ0M+NTMuODE5MDY0PC9UQ0M+CgkJCQkJCTxUQ1Y+NTMuODE5MDY0PC9UQ1Y+CgkJCQkJCTxBcmJBY3Q+MS4zMjY5MDA8L0FyYkFjdD4KCQkJCQkJPEZvcm1hQXJiaXRyYXI+MTwvRm9ybWFBcmJpdHJhcj4KCQkJCQk8L2RhdG9zY290aXphY2lvbmVzLmRhdG8+CgkJCQkJPGRhdG9zY290aXphY2lvbmVzLmRhdG8geG1sbnM9IkNvdGl6YSI+CgkJCQkJCTxGZWNoYT4yMDI2LTAzLTMwPC9GZWNoYT4KCQkJCQkJPE1vbmVkYT4yNzAwPC9Nb25lZGE+CgkJCQkJCTxOb21icmU+TElCUkEgRVNURVJMSU5BPC9Ob21icmU+CgkJCQkJCTxDb2RpZ29JU08+R0JQPC9Db2RpZ29JU08+CgkJCQkJCTxFbWlzb3I+R1JBTiBCUkVUQcORQTwvRW1pc29yPgoJCQkJCQk8VENDPjUzLjU2MTMxODwvVENDPgoJCQkJCQk8VENWPjUzLjU2MTMxODwvVENWPgoJCQkJCQk8QXJiQWN0PjEuMzE4NDAwPC9BcmJBY3Q+CgkJCQkJCTxGb3JtYUFyYml0cmFyPjE8L0Zvcm1hQXJiaXRyYXI+CgkJCQkJPC9kYXRvc2NvdGl6YWNpb25lcy5kYXRvPgoJCQkJCTxkYXRvc2NvdGl6YWNpb25lcy5kYXRvIHhtbG5zPSJDb3RpemEiPgoJCQkJCQk8RmVjaGE+MjAyNi0wMy0zMTwvRmVjaGE+CgkJCQkJCTxNb25lZGE+MjcwMDwvTW9uZWRhPgoJCQkJCQk8Tm9tYnJlPkxJQlJBIEVTVEVSTElOQTwvTm9tYnJlPgoJCQkJCQk8Q29kaWdvSVNPPkdCUDwvQ29kaWdvSVNPPgoJCQkJCQk8RW1pc29yPkdSQU4gQlJFVEHDkUE8L0VtaXNvcj4KCQkJCQkJPFRDQz41My41NTA5OTI8L1RDQz4KCQkJCQkJPFRDVj41My41NTA5OTI8L1RDVj4KCQkJCQkJPEFyYkFjdD4xLjMyMjkwMDwvQXJiQWN0PgoJCQkJCQk8Rm9ybWFBcmJpdHJhcj4xPC9Gb3JtYUFyYml0cmFyPgoJCQkJCTwvZGF0b3Njb3RpemFjaW9uZXMuZGF0bz4KCQkJCTwvZGF0b3Njb3RpemFjaW9uZXM+CgkJCTwvU2FsaWRhPgoJCTwvd3NiY3Vjb3RpemFjaW9uZXMuRXhlY3V0ZVJlc3BvbnNlPgoJPC9TT0FQLUVOVjpCb2R5Pgo8L1NPQVAtRU5WOkVudmVsb3BlPgo=
+  recorded_at: Tue, 31 Mar 2026 21:28:02 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4900</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:02 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1730'
+      Set-Cookie:
+      - JSESSIONID=14200EA44C24A0FDA3FC16CC9C245BFA; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4900</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        ISLANDESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>ISK</CodigoISO>\n\t\t\t\t\t\t<Emisor>ISLANDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.325600</TCC>\n\t\t\t\t\t\t<TCV>0.325600</TCV>\n\t\t\t\t\t\t<ArbAct>124.570000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4900</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        ISLANDESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>ISK</CodigoISO>\n\t\t\t\t\t\t<Emisor>ISLANDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.324722</TCC>\n\t\t\t\t\t\t<TCV>0.324722</TCV>\n\t\t\t\t\t\t<ArbAct>125.110000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4900</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        ISLANDESA</Nombre>\n\t\t\t\t\t\t<CodigoISO>ISK</CodigoISO>\n\t\t\t\t\t\t<Emisor>ISLANDIA</Emisor>\n\t\t\t\t\t\t<TCC>0.325350</TCC>\n\t\t\t\t\t\t<TCV>0.325350</TCV>\n\t\t\t\t\t\t<ArbAct>124.420000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:02 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>3600</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:02 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1682'
+      Set-Cookie:
+      - JSESSIONID=07F7AE637C64126F64D032EF8690B11F; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>3600</Moneda>\n\t\t\t\t\t\t<Nombre>YEN</Nombre>\n\t\t\t\t\t\t<CodigoISO>JPY</CodigoISO>\n\t\t\t\t\t\t<Emisor>JAPON</Emisor>\n\t\t\t\t\t\t<TCC>0.253120</TCC>\n\t\t\t\t\t\t<TCV>0.253120</TCV>\n\t\t\t\t\t\t<ArbAct>160.240000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>3600</Moneda>\n\t\t\t\t\t\t<Nombre>YEN</Nombre>\n\t\t\t\t\t\t<CodigoISO>JPY</CodigoISO>\n\t\t\t\t\t\t<Emisor>JAPON</Emisor>\n\t\t\t\t\t\t<TCC>0.254517</TCC>\n\t\t\t\t\t\t<TCV>0.254517</TCV>\n\t\t\t\t\t\t<ArbAct>159.620000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>3600</Moneda>\n\t\t\t\t\t\t<Nombre>YEN</Nombre>\n\t\t\t\t\t\t<CodigoISO>JPY</CodigoISO>\n\t\t\t\t\t\t<Emisor>JAPON</Emisor>\n\t\t\t\t\t\t<TCC>0.254783</TCC>\n\t\t\t\t\t\t<TCV>0.254783</TCV>\n\t\t\t\t\t\t<ArbAct>158.880000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:02 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5300</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:02 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1685'
+      Set-Cookie:
+      - JSESSIONID=1C2194A7318781BED606D6F51983C1F4; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5300</Moneda>\n\t\t\t\t\t\t<Nombre>WON</Nombre>\n\t\t\t\t\t\t<CodigoISO>KRW</CodigoISO>\n\t\t\t\t\t\t<Emisor>KOREA</Emisor>\n\t\t\t\t\t\t<TCC>0.026870</TCC>\n\t\t\t\t\t\t<TCV>0.026870</TCV>\n\t\t\t\t\t\t<ArbAct>1509.500000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5300</Moneda>\n\t\t\t\t\t\t<Nombre>WON</Nombre>\n\t\t\t\t\t\t<CodigoISO>KRW</CodigoISO>\n\t\t\t\t\t\t<Emisor>KOREA</Emisor>\n\t\t\t\t\t\t<TCC>0.026770</TCC>\n\t\t\t\t\t\t<TCV>0.026770</TCV>\n\t\t\t\t\t\t<ArbAct>1517.600000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5300</Moneda>\n\t\t\t\t\t\t<Nombre>WON</Nombre>\n\t\t\t\t\t\t<CodigoISO>KRW</CodigoISO>\n\t\t\t\t\t\t<Emisor>KOREA</Emisor>\n\t\t\t\t\t\t<TCC>0.026702</TCC>\n\t\t\t\t\t\t<TCV>0.026702</TCV>\n\t\t\t\t\t\t<ArbAct>1516.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:02 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5600</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:03 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1721'
+      Set-Cookie:
+      - JSESSIONID=AFB98F4B397D62843B97A5E55A850DB1; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5600</Moneda>\n\t\t\t\t\t\t<Nombre>RINGGIT
+        MALAYO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MYR</CodigoISO>\n\t\t\t\t\t\t<Emisor>MALASIA</Emisor>\n\t\t\t\t\t\t<TCC>10.117236</TCC>\n\t\t\t\t\t\t<TCV>10.117236</TCV>\n\t\t\t\t\t\t<ArbAct>4.009000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5600</Moneda>\n\t\t\t\t\t\t<Nombre>RINGGIT
+        MALAYO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MYR</CodigoISO>\n\t\t\t\t\t\t<Emisor>MALASIA</Emisor>\n\t\t\t\t\t\t<TCC>10.085899</TCC>\n\t\t\t\t\t\t<TCV>10.085899</TCV>\n\t\t\t\t\t\t<ArbAct>4.028000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5600</Moneda>\n\t\t\t\t\t\t<Nombre>RINGGIT
+        MALAYO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MYR</CodigoISO>\n\t\t\t\t\t\t<Emisor>MALASIA</Emisor>\n\t\t\t\t\t\t<TCC>10.001235</TCC>\n\t\t\t\t\t\t<TCV>10.001235</TCV>\n\t\t\t\t\t\t<ArbAct>4.047500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4200</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:03 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1712'
+      Set-Cookie:
+      - JSESSIONID=031E8F7B763871836B61E662C368AD4E; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4200</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        MEXICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MXN</CodigoISO>\n\t\t\t\t\t\t<Emisor>MEXICO</Emisor>\n\t\t\t\t\t\t<TCC>2.238596</TCC>\n\t\t\t\t\t\t<TCV>2.238596</TCV>\n\t\t\t\t\t\t<ArbAct>18.118500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4200</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        MEXICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MXN</CodigoISO>\n\t\t\t\t\t\t<Emisor>MEXICO</Emisor>\n\t\t\t\t\t\t<TCC>2.242461</TCC>\n\t\t\t\t\t\t<TCV>2.242461</TCV>\n\t\t\t\t\t\t<ArbAct>18.116700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4200</Moneda>\n\t\t\t\t\t\t<Nombre>PESO
+        MEXICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>MXN</CodigoISO>\n\t\t\t\t\t\t<Emisor>MEXICO</Emisor>\n\t\t\t\t\t\t<TCC>2.255907</TCC>\n\t\t\t\t\t\t<TCV>2.255907</TCV>\n\t\t\t\t\t\t<ArbAct>17.944000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4600</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:03 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1715'
+      Set-Cookie:
+      - JSESSIONID=F64165A37B664E28E8577DC7A8071833; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4600</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        NORUEGA</Nombre>\n\t\t\t\t\t\t<CodigoISO>NOK</CodigoISO>\n\t\t\t\t\t\t<Emisor>NORUEGA</Emisor>\n\t\t\t\t\t\t<TCC>4.159531</TCC>\n\t\t\t\t\t\t<TCV>4.159531</TCV>\n\t\t\t\t\t\t<ArbAct>9.751100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4600</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        NORUEGA</Nombre>\n\t\t\t\t\t\t<CodigoISO>NOK</CodigoISO>\n\t\t\t\t\t\t<Emisor>NORUEGA</Emisor>\n\t\t\t\t\t\t<TCC>4.163993</TCC>\n\t\t\t\t\t\t<TCV>4.163993</TCV>\n\t\t\t\t\t\t<ArbAct>9.756500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4600</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        NORUEGA</Nombre>\n\t\t\t\t\t\t<CodigoISO>NOK</CodigoISO>\n\t\t\t\t\t\t<Emisor>NORUEGA</Emisor>\n\t\t\t\t\t\t<TCC>4.173196</TCC>\n\t\t\t\t\t\t<TCV>4.173196</TCV>\n\t\t\t\t\t\t<ArbAct>9.700000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1490</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:03 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1748'
+      Set-Cookie:
+      - JSESSIONID=AF737AF26702E78F6C841114D04849E2; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1490</Moneda>\n\t\t\t\t\t\t<Nombre>DOL.
+        NEOZELANDES</Nombre>\n\t\t\t\t\t\t<CodigoISO>NZD</CodigoISO>\n\t\t\t\t\t\t<Emisor>NUEVA
+        ZELANDIA</Emisor>\n\t\t\t\t\t\t<TCC>23.289552</TCC>\n\t\t\t\t\t\t<TCV>23.289552</TCV>\n\t\t\t\t\t\t<ArbAct>0.574200</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1490</Moneda>\n\t\t\t\t\t\t<Nombre>DOL.
+        NEOZELANDES</Nombre>\n\t\t\t\t\t\t<CodigoISO>NZD</CodigoISO>\n\t\t\t\t\t\t<Emisor>NUEVA
+        ZELANDIA</Emisor>\n\t\t\t\t\t\t<TCC>23.225884</TCC>\n\t\t\t\t\t\t<TCV>23.225884</TCV>\n\t\t\t\t\t\t<ArbAct>0.571700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1490</Moneda>\n\t\t\t\t\t\t<Nombre>DOL.
+        NEOZELANDES</Nombre>\n\t\t\t\t\t\t<CodigoISO>NZD</CodigoISO>\n\t\t\t\t\t\t<Emisor>NUEVA
+        ZELANDIA</Emisor>\n\t\t\t\t\t\t<TCC>23.231472</TCC>\n\t\t\t\t\t\t<TCV>23.231472</TCV>\n\t\t\t\t\t\t<ArbAct>0.573900</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>1</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4800</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:03 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1706'
+      Set-Cookie:
+      - JSESSIONID=51E077B3A8861A7FE5F950734A31A1AF; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4800</Moneda>\n\t\t\t\t\t\t<Nombre>GUARANI</Nombre>\n\t\t\t\t\t\t<CodigoISO>PYG</CodigoISO>\n\t\t\t\t\t\t<Emisor>PARAGUAY</Emisor>\n\t\t\t\t\t\t<TCC>0.006259</TCC>\n\t\t\t\t\t\t<TCV>0.006259</TCV>\n\t\t\t\t\t\t<ArbAct>6480.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4800</Moneda>\n\t\t\t\t\t\t<Nombre>GUARANI</Nombre>\n\t\t\t\t\t\t<CodigoISO>PYG</CodigoISO>\n\t\t\t\t\t\t<Emisor>PARAGUAY</Emisor>\n\t\t\t\t\t\t<TCC>0.006289</TCC>\n\t\t\t\t\t\t<TCV>0.006289</TCV>\n\t\t\t\t\t\t<ArbAct>6460.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4800</Moneda>\n\t\t\t\t\t\t<Nombre>GUARANI</Nombre>\n\t\t\t\t\t\t<CodigoISO>PYG</CodigoISO>\n\t\t\t\t\t\t<Emisor>PARAGUAY</Emisor>\n\t\t\t\t\t\t<TCC>0.006261</TCC>\n\t\t\t\t\t\t<TCV>0.006261</TCV>\n\t\t\t\t\t\t<ArbAct>6465.000000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4000</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1715'
+      Set-Cookie:
+      - JSESSIONID=29C27E82A772EB5ABDB7227413D8FFAD; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4000</Moneda>\n\t\t\t\t\t\t<Nombre>NVO.SOL
+        PERUANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>PEN</CodigoISO>\n\t\t\t\t\t\t<Emisor>PERU</Emisor>\n\t\t\t\t\t\t<TCC>11.648143</TCC>\n\t\t\t\t\t\t<TCV>11.648143</TCV>\n\t\t\t\t\t\t<ArbAct>3.482100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4000</Moneda>\n\t\t\t\t\t\t<Nombre>NVO.SOL
+        PERUANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>PEN</CodigoISO>\n\t\t\t\t\t\t<Emisor>PERU</Emisor>\n\t\t\t\t\t\t<TCC>11.613733</TCC>\n\t\t\t\t\t\t<TCV>11.613733</TCV>\n\t\t\t\t\t\t<ArbAct>3.498100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4000</Moneda>\n\t\t\t\t\t\t<Nombre>NVO.SOL
+        PERUANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>PEN</CodigoISO>\n\t\t\t\t\t\t<Emisor>PERU</Emisor>\n\t\t\t\t\t\t<TCC>11.665370</TCC>\n\t\t\t\t\t\t<TCV>11.665370</TCV>\n\t\t\t\t\t\t<ArbAct>3.470100</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:03 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5400</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1685'
+      Set-Cookie:
+      - JSESSIONID=5B86902F1DCE895941FD512B20967655; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5400</Moneda>\n\t\t\t\t\t\t<Nombre>RUBLO</Nombre>\n\t\t\t\t\t\t<CodigoISO>RUB</CodigoISO>\n\t\t\t\t\t\t<Emisor>RUSIA</Emisor>\n\t\t\t\t\t\t<TCC>0.494832</TCC>\n\t\t\t\t\t\t<TCV>0.494832</TCV>\n\t\t\t\t\t\t<ArbAct>81.967213</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5400</Moneda>\n\t\t\t\t\t\t<Nombre>RUBLO</Nombre>\n\t\t\t\t\t\t<CodigoISO>RUB</CodigoISO>\n\t\t\t\t\t\t<Emisor>RUSIA</Emisor>\n\t\t\t\t\t\t<TCC>0.496856</TCC>\n\t\t\t\t\t\t<TCV>0.496856</TCV>\n\t\t\t\t\t\t<ArbAct>81.766149</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5400</Moneda>\n\t\t\t\t\t\t<Nombre>RUBLO</Nombre>\n\t\t\t\t\t\t<CodigoISO>RUB</CodigoISO>\n\t\t\t\t\t\t<Emisor>RUSIA</Emisor>\n\t\t\t\t\t\t<TCC>0.495880</TCC>\n\t\t\t\t\t\t<TCV>0.495880</TCV>\n\t\t\t\t\t\t<ArbAct>81.632653</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:04 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>1620</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1730'
+      Set-Cookie:
+      - JSESSIONID=7C6E178759D7028B8D1E62D862AD2A5C; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>1620</Moneda>\n\t\t\t\t\t\t<Nombre>RAND
+        SUDAFRICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ZAR</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUDAFRICA</Emisor>\n\t\t\t\t\t\t<TCC>2.367195</TCC>\n\t\t\t\t\t\t<TCV>2.367195</TCV>\n\t\t\t\t\t\t<ArbAct>17.134200</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>1620</Moneda>\n\t\t\t\t\t\t<Nombre>RAND
+        SUDAFRICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ZAR</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUDAFRICA</Emisor>\n\t\t\t\t\t\t<TCC>2.365484</TCC>\n\t\t\t\t\t\t<TCV>2.365484</TCV>\n\t\t\t\t\t\t<ArbAct>17.174500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>1620</Moneda>\n\t\t\t\t\t\t<Nombre>RAND
+        SUDAFRICANO</Nombre>\n\t\t\t\t\t\t<CodigoISO>ZAR</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUDAFRICA</Emisor>\n\t\t\t\t\t\t<TCC>2.387778</TCC>\n\t\t\t\t\t\t<TCV>2.387778</TCV>\n\t\t\t\t\t\t<ArbAct>16.953000</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:04 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5800</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1706'
+      Set-Cookie:
+      - JSESSIONID=CBC92DDBD69F51BC3E724BE93B4B6F65; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        SUECA</Nombre>\n\t\t\t\t\t\t<CodigoISO>SEK</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUECIA</Emisor>\n\t\t\t\t\t\t<TCC>4.282818</TCC>\n\t\t\t\t\t\t<TCV>4.282818</TCV>\n\t\t\t\t\t\t<ArbAct>9.470400</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        SUECA</Nombre>\n\t\t\t\t\t\t<CodigoISO>SEK</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUECIA</Emisor>\n\t\t\t\t\t\t<TCC>4.249937</TCC>\n\t\t\t\t\t\t<TCV>4.249937</TCV>\n\t\t\t\t\t\t<ArbAct>9.559200</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5800</Moneda>\n\t\t\t\t\t\t<Nombre>CORONA
+        SUECA</Nombre>\n\t\t\t\t\t\t<CodigoISO>SEK</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUECIA</Emisor>\n\t\t\t\t\t\t<TCC>4.269727</TCC>\n\t\t\t\t\t\t<TCV>4.269727</TCV>\n\t\t\t\t\t\t<ArbAct>9.480700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:04 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>5900</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1709'
+      Set-Cookie:
+      - JSESSIONID=B0C5D7A99AFE0EDF028F8CAE85015595; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>5900</Moneda>\n\t\t\t\t\t\t<Nombre>FRANCO
+        SUIZO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CHF</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUIZA</Emisor>\n\t\t\t\t\t\t<TCC>50.788881</TCC>\n\t\t\t\t\t\t<TCV>50.788881</TCV>\n\t\t\t\t\t\t<ArbAct>0.798600</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>5900</Moneda>\n\t\t\t\t\t\t<Nombre>FRANCO
+        SUIZO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CHF</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUIZA</Emisor>\n\t\t\t\t\t\t<TCC>50.788849</TCC>\n\t\t\t\t\t\t<TCV>50.788849</TCV>\n\t\t\t\t\t\t<ArbAct>0.799900</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>5900</Moneda>\n\t\t\t\t\t\t<Nombre>FRANCO
+        SUIZO</Nombre>\n\t\t\t\t\t\t<CodigoISO>CHF</CodigoISO>\n\t\t\t\t\t\t<Emisor>SUIZA</Emisor>\n\t\t\t\t\t\t<TCC>50.574713</TCC>\n\t\t\t\t\t\t<TCV>50.574713</TCV>\n\t\t\t\t\t\t<ArbAct>0.800400</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:04 GMT
+- request:
+    method: post
+    uri: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                           xmlns:cot="Cotiza">
+           <soapenv:Header />
+           <soapenv:Body>
+              <cot:wsbcucotizaciones.Execute>
+                 <cot:Entrada>
+                    <cot:Moneda>
+                       <cot:item>4400</cot:item>
+                    </cot:Moneda>
+                    <cot:FechaDesde>2026-03-27</cot:FechaDesde>
+                    <cot:FechaHasta>2026-03-31</cot:FechaHasta>
+                    <cot:Grupo>0</cot:Grupo>
+                 </cot:Entrada>
+              </cot:wsbcucotizaciones.Execute>
+           </soapenv:Body>
+        </soapenv:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cotizaciones.bcu.gub.uy
+      Content-Type:
+      - text/xml; charset=utf-8
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Oracle-iPlanet-Web-Server/7.0
+      Date:
+      - Tue, 31 Mar 2026 21:28:04 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Last-Modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Type:
+      - text/xml;charset=utf-8
+      Content-Length:
+      - '1706'
+      Set-Cookie:
+      - JSESSIONID=2901D3055C6B3FD42963245DC6BB41C4; Path=/wscotizaciones; Secure;
+        HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"
+        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n\t<SOAP-ENV:Body>\n\t\t<wsbcucotizaciones.ExecuteResponse
+        xmlns=\"Cotiza\">\n\t\t\t<Salida xmlns=\"Cotiza\">\n\t\t\t\t<respuestastatus>\n\t\t\t\t\t<status>1</status>\n\t\t\t\t\t<codigoerror>0</codigoerror>\n\t\t\t\t\t<mensaje/>\n\t\t\t\t</respuestastatus>\n\t\t\t\t<datoscotizaciones>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-27</Fecha>\n\t\t\t\t\t\t<Moneda>4400</Moneda>\n\t\t\t\t\t\t<Nombre>LIRA
+        TURCA</Nombre>\n\t\t\t\t\t\t<CodigoISO>TRY</CodigoISO>\n\t\t\t\t\t\t<Emisor>TURQUIA</Emisor>\n\t\t\t\t\t\t<TCC>0.912338</TCC>\n\t\t\t\t\t\t<TCV>0.912338</TCV>\n\t\t\t\t\t\t<ArbAct>44.457200</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-30</Fecha>\n\t\t\t\t\t\t<Moneda>4400</Moneda>\n\t\t\t\t\t\t<Nombre>LIRA
+        TURCA</Nombre>\n\t\t\t\t\t\t<CodigoISO>TRY</CodigoISO>\n\t\t\t\t\t\t<Emisor>TURQUIA</Emisor>\n\t\t\t\t\t\t<TCC>0.913936</TCC>\n\t\t\t\t\t\t<TCV>0.913936</TCV>\n\t\t\t\t\t\t<ArbAct>44.451700</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t\t<datoscotizaciones.dato
+        xmlns=\"Cotiza\">\n\t\t\t\t\t\t<Fecha>2026-03-31</Fecha>\n\t\t\t\t\t\t<Moneda>4400</Moneda>\n\t\t\t\t\t\t<Nombre>LIRA
+        TURCA</Nombre>\n\t\t\t\t\t\t<CodigoISO>TRY</CodigoISO>\n\t\t\t\t\t\t<Emisor>TURQUIA</Emisor>\n\t\t\t\t\t\t<TCC>0.910881</TCC>\n\t\t\t\t\t\t<TCV>0.910881</TCV>\n\t\t\t\t\t\t<ArbAct>44.440500</ArbAct>\n\t\t\t\t\t\t<FormaArbitrar>0</FormaArbitrar>\n\t\t\t\t\t</datoscotizaciones.dato>\n\t\t\t\t</datoscotizaciones>\n\t\t\t</Salida>\n\t\t</wsbcucotizaciones.ExecuteResponse>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>\n"
+  recorded_at: Tue, 31 Mar 2026 21:28:04 GMT
+recorded_with: VCR 6.4.0
