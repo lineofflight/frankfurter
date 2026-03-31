@@ -19,6 +19,8 @@ VCR.configure do |c|
   c.filter_sensitive_data("<FRED_API_KEY>") { ENV["FRED_API_KEY"] } if ENV["FRED_API_KEY"]
   c.filter_sensitive_data("<BAM_API_KEY>") { ENV["BAM_API_KEY"] } if ENV["BAM_API_KEY"]
   c.filter_sensitive_data("<BANXICO_API_KEY>") { ENV["BANXICO_API_KEY"] } if ENV["BANXICO_API_KEY"]
+  c.filter_sensitive_data("<BCCH_USER>") { ENV["BCCH_USER"] } if ENV["BCCH_USER"]
+  c.filter_sensitive_data("<BCCH_PASS>") { ENV["BCCH_PASS"] } if ENV["BCCH_PASS"]
 end
 
 module Minitest
