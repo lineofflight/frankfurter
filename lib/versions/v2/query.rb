@@ -164,6 +164,14 @@ module Versions
           yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
         end
 
+        if peg_for_base && (!quotes || quotes.include?(peg_for_base.base))
+          anchor_date = blended.map { |r| r[:date] }.max
+          if anchor_date && !emitted_quotes.include?(peg_for_base.base)
+            emitted_quotes << peg_for_base.base
+            yield({ date: anchor_date.to_s, base:, quote: peg_for_base.base, rate: round(1.0 / peg_for_base.rate) })
+          end
+        end
+
         expand_pegs(blended, emitted_quotes, &block)
       end
 

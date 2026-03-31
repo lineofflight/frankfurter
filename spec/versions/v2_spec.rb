@@ -410,6 +410,24 @@ describe Versions::V2 do
     _(eur["rate"]).must_be_kind_of(Float)
   end
 
+  it "returns anchor currency as quote when base is pegged" do
+    get "/rate/GGP/GBP"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("GGP")
+    _(json["quote"]).must_equal("GBP")
+    _(json["rate"]).must_equal(1.0)
+  end
+
+  it "returns anchor currency with non-unity peg rate" do
+    get "/rate/ANG/USD"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("ANG")
+    _(json["quote"]).must_equal("USD")
+    _(json["rate"]).must_be_close_to(1.0 / 1.79, 0.001)
+  end
+
   it "resolves pegged base with providers filter" do
     get "/rates?base=BMD&providers=ecb"
 
