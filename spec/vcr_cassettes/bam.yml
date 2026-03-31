@@ -1,0 +1,144 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement?date=2026-03-25T12:30:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.centralbankofmorocco.ma
+      Ocp-Apim-Subscription-Key:
+      - "<BAM_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - ARRAffinity=3b13ece7e0f3c09a90939daeaed59824c94907a7f26aeebdcab6fa7b282a2eca;Path=/;HttpOnly;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      - ARRAffinitySameSite=3b13ece7e0f3c09a90939daeaed59824c94907a7f26aeebdcab6fa7b282a2eca;Path=/;HttpOnly;SameSite=None;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      Request-Context:
+      - appId=cid-v1:b7181f7e-57e3-4ab8-853c-66c3408e0857
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Date:
+      - Mon, 30 Mar 2026 22:34:40 GMT
+      Content-Length:
+      - '2409'
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"date":"2026-03-25T12:30:00","libDevise":"NOK","moyen":95.938,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"SEK","moyen":100.06,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"DKK","moyen":144.61,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"SAR","moyen":2.4839,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"JPY","moyen":5.862,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"AUD","moyen":6.4942,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"DZD","moyen":0.7032,"uniteDevise":10},{"date":"2026-03-25T12:30:00","libDevise":"CNY","moyen":1.3507,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"GBP","moyen":12.48,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"GIP","moyen":12.48,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"EUR","moyen":10.8057,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"ZAR","moyen":0.5512,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"TND","moyen":3.1904,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"AED","moyen":2.537,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"QAR","moyen":2.5556,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"CAD","moyen":6.7584,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"BRL","moyen":1.7808,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"MRO","moyen":23.55,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"LYD","moyen":1.888,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"RUB","moyen":0.1152,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"XOF","moyen":1.6473,"uniteDevise":100},{"date":"2026-03-25T12:30:00","libDevise":"INR","moyen":0.0992,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"KWD","moyen":30.409,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"OMR","moyen":24.206,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"JOD","moyen":13.146,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"BHD","moyen":24.607,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"CHF","moyen":11.796,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"EGP","moyen":0.1771,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"USD","moyen":9.3189,"uniteDevise":1},{"date":"2026-03-25T12:30:00","libDevise":"TRY","moyen":0.2101,"uniteDevise":1}]'
+  recorded_at: Mon, 30 Mar 2026 22:34:41 GMT
+- request:
+    method: get
+    uri: https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement?date=2026-03-26T12:30:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.centralbankofmorocco.ma
+      Ocp-Apim-Subscription-Key:
+      - "<BAM_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - ARRAffinity=a6bca26d75cb3f6eb8480aef2c4becff3739380f22f50a9a616e3f019c59f22a;Path=/;HttpOnly;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      - ARRAffinitySameSite=a6bca26d75cb3f6eb8480aef2c4becff3739380f22f50a9a616e3f019c59f22a;Path=/;HttpOnly;SameSite=None;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      Request-Context:
+      - appId=cid-v1:b7181f7e-57e3-4ab8-853c-66c3408e0857
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Date:
+      - Mon, 30 Mar 2026 22:34:56 GMT
+      Content-Length:
+      - '4663'
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"date":"2026-03-26T12:30:00","libDevise":"USD","moyen":9.3261,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"MRO","moyen":23.569,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"LYD","moyen":1.8921,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"GIP","moyen":12.452,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"CHF","moyen":11.765,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"QAR","moyen":2.558,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"SEK","moyen":99.505,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"RUB","moyen":0.1134,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"INR","moyen":0.0992,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"OMR","moyen":24.224,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"DKK","moyen":144.18,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"NOK","moyen":96.443,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"XOF","moyen":1.6423,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"TRY","moyen":0.2102,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"KWD","moyen":30.345,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"EUR","moyen":10.7729,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"AUD","moyen":6.4685,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"ZAR","moyen":0.5476,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"AED","moyen":2.539,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"BRL","moyen":1.7839,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"JOD","moyen":13.159,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"CNY","moyen":1.3505,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"BHD","moyen":24.657,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"SAR","moyen":2.4859,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"JPY","moyen":5.8475,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"DZD","moyen":0.7024,"uniteDevise":10},{"date":"2026-03-26T12:30:00","libDevise":"TND","moyen":3.1825,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"EGP","moyen":0.1771,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"CAD","moyen":6.7434,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"GBP","moyen":12.452,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"EUR","moyen":10.7729,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"CAD","moyen":6.7434,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"GBP","moyen":12.452,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"DKK","moyen":144.18,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"SEK","moyen":99.505,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"CHF","moyen":11.765,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"JPY","moyen":5.8475,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"KWD","moyen":30.345,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"SAR","moyen":2.4859,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"AED","moyen":2.539,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"CNY","moyen":1.3505,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"JOD","moyen":13.159,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"ZAR","moyen":0.5476,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"AUD","moyen":6.4685,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"XOF","moyen":1.6423,"uniteDevise":100},{"date":"2026-03-26T12:30:00","libDevise":"EGP","moyen":0.1771,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"RUB","moyen":0.1134,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"INR","moyen":0.0992,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"TRY","moyen":0.2102,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"OMR","moyen":24.224,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"GIP","moyen":12.452,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"QAR","moyen":2.558,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"BHD","moyen":24.657,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"BRL","moyen":1.7839,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"TND","moyen":3.1825,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"DZD","moyen":0.7024,"uniteDevise":10},{"date":"2026-03-26T12:30:00","libDevise":"LYD","moyen":1.8921,"uniteDevise":1},{"date":"2026-03-26T12:30:00","libDevise":"NOK","moyen":96.443,"uniteDevise":100}]'
+  recorded_at: Mon, 30 Mar 2026 22:34:56 GMT
+- request:
+    method: get
+    uri: https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement?date=2026-03-27T12:30:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.centralbankofmorocco.ma
+      Ocp-Apim-Subscription-Key:
+      - "<BAM_API_KEY>"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - ARRAffinity=dda7cc642ba144fdde0f733487b67dff0c9b2936e73343c7dd02b7a470b55af5;Path=/;HttpOnly;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      - ARRAffinitySameSite=dda7cc642ba144fdde0f733487b67dff0c9b2936e73343c7dd02b7a470b55af5;Path=/;HttpOnly;SameSite=None;Secure;Domain=extcoursbkamapi.azurewebsites.net
+      Request-Context:
+      - appId=cid-v1:b7181f7e-57e3-4ab8-853c-66c3408e0857
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Date:
+      - Mon, 30 Mar 2026 22:35:11 GMT
+      Content-Length:
+      - '2411'
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"date":"2026-03-27T12:30:00","libDevise":"KWD","moyen":30.318,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"SAR","moyen":2.4874,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"AUD","moyen":6.4302,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"CHF","moyen":11.715,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"RUB","moyen":0.1149,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"LYD","moyen":1.8953,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"DKK","moyen":143.93,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"EGP","moyen":0.177,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"JPY","moyen":5.8367,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"GIP","moyen":12.42,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"DZD","moyen":0.7014,"uniteDevise":10},{"date":"2026-03-27T12:30:00","libDevise":"CNY","moyen":1.3504,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"OMR","moyen":24.247,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"BHD","moyen":24.67,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"ZAR","moyen":0.5449,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"BRL","moyen":1.7798,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"QAR","moyen":2.5598,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"AED","moyen":2.5412,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"TRY","moyen":0.2099,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"NOK","moyen":96.319,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"USD","moyen":9.3341,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"JOD","moyen":13.173,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"SEK","moyen":98.911,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"EUR","moyen":10.7547,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"TND","moyen":3.1811,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"XOF","moyen":1.6395,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"GBP","moyen":12.42,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"MRO","moyen":23.589,"uniteDevise":100},{"date":"2026-03-27T12:30:00","libDevise":"INR","moyen":0.0985,"uniteDevise":1},{"date":"2026-03-27T12:30:00","libDevise":"CAD","moyen":6.7369,"uniteDevise":1}]'
+  recorded_at: Mon, 30 Mar 2026 22:35:11 GMT
+recorded_with: VCR 6.4.0

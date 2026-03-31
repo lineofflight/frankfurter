@@ -223,5 +223,14 @@
     "terms_url": null,
     "publish_time": 8,
     "publish_days": "0-6"
+  },
+  {
+    "key": "BAM",
+    "name": "Bank Al-Maghrib",
+    "description": "Daily mid-market rates for 30 currencies against the Moroccan dirham",
+    "data_url": "https://apihelpdesk.centralbankofmorocco.ma/apis",
+    "terms_url": null,
+    "publish_time": 12,
+    "publish_days": "1-5"
   }
 ]
