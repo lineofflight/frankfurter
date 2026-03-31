@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bankofengland.co.uk/boeapps/database/_iadb-fromshowcolumns.asp?CSVF=TN&Datefrom=17/Mar/2026&Dateto=20/Mar/2026&SeriesCodes=XUDLUSS,XUDLERS,XUDLJYS,XUDLCDS,XUDLSFS,XUDLADS,XUDLNDS,XUDLNKS,XUDLSKS,XUDLDKS,XUDLHDS,XUDLSGS,XUDLSRS,XUDLZRS,XUDLTWS,XUDLBK25,XUDLBK33,XUDLBK47,XUDLBK78,XUDLBK83,XUDLBK87,XUDLBK89,XUDLBK93,XUDLBK95,XUDLBK97,XUDLZOS4&UsingCodes=Y&csv.x=yes
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bankofengland.co.uk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/csv
+      Server:
+      - Microsoft-IIS/10.0
+      Content-Disposition:
+      - attachment;filename=results.csv
+      X-Powered-By:
+      - ASP.NET
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - private, max-age=15
+      Expires:
+      - Tue, 31 Mar 2026 10:04:22 GMT
+      Date:
+      - Tue, 31 Mar 2026 10:04:07 GMT
+      Content-Length:
+      - '1062'
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - ASPSESSIONIDAGDCBBCT=CCEDIDMBIGAHIELKAPLEOCMO; secure; path=/
+      Server-Timing:
+      - ak_p; desc="1774951447216_34864925_1151635424_63818_7164_23_25_-";dur=1
+      - cdn-cache; desc=MISS
+      - edge; dur=20
+      - origin; dur=619
+    body:
+      encoding: UTF-8
+      string: "DATE,XUDLUSS,XUDLERS,XUDLJYS,XUDLCDS,XUDLSFS,XUDLADS,XUDLNDS,XUDLNKS,XUDLSKS,XUDLDKS,XUDLHDS,XUDLSGS,XUDLSRS,XUDLZRS,XUDLTWS,XUDLBK25,XUDLBK33,XUDLBK47,XUDLBK78,XUDLBK83,XUDLBK87,XUDLBK89,XUDLBK93,XUDLBK95,XUDLBK97,XUDLZOS4\r\n17
+        Mar 2026,1.3343,1.1577,212.1937,1.829,1.0484,1.8794,2.2781,12.8023,12.3878,8.651,10.4564,1.704,5.0103,22.2645,42.5442,28.3025,450.2329,4.933,4.1357,5.2365,43.1513,9.1865,1986.5526,58.9829,123.2486,5.8963\r\n18
+        Mar 2026,1.3323,1.1572,212.4739,1.8248,1.0514,1.8826,2.2816,12.7608,12.4523,8.6468,10.4398,1.7051,5.0015,22.4084,42.5467,28.3163,453.5645,4.94,4.1298,5.2178,43.5046,9.1752,1998.788,58.9079,123.7347,5.8927\r\n19
+        Mar 2026,1.3359,1.1602,211.3327,1.8333,1.0586,1.8988,2.2908,12.7399,12.4979,8.6683,10.4648,1.7112,5.0155,22.5645,42.6299,28.4019,455.6221,4.9661,4.1776,5.2628,43.871,9.2163,1997.0302,59.2057,124.4544,5.9136\r\n20
+        Mar 2026,1.3302,1.1523,211.833,1.8266,1.0496,1.8914,2.278,12.742,12.4529,8.6102,10.4187,1.7057,4.9944,22.6685,42.5861,28.2397,452.5303,4.9323,4.1357,5.2401,43.7486,9.1865,2000.9579,58.9231,124.6849,5.8721\r\n"
+  recorded_at: Tue, 31 Mar 2026 10:04:07 GMT
+recorded_with: VCR 6.4.0
