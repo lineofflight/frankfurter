@@ -277,5 +277,14 @@
     "terms_url": "https://www.bankofengland.co.uk/legal",
     "publish_time": 16,
     "publish_days": "1-5"
+  },
+  {
+    "key": "BANXICO",
+    "name": "Banco de México",
+    "description": "Daily FIX exchange rates for 5 currencies against the Mexican peso",
+    "data_url": "https://www.banxico.org.mx/SieAPIRest/service/v1/",
+    "terms_url": "https://www.banxico.org.mx/footer-en/terms-and-conditions.html",
+    "publish_time": 18,
+    "publish_days": "1-5"
   }
 ]

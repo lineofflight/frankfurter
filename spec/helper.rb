@@ -18,6 +18,7 @@ VCR.configure do |c|
   c.filter_sensitive_data("<TCMB_API_KEY>") { ENV["TCMB_API_KEY"] } if ENV["TCMB_API_KEY"]
   c.filter_sensitive_data("<FRED_API_KEY>") { ENV["FRED_API_KEY"] } if ENV["FRED_API_KEY"]
   c.filter_sensitive_data("<BAM_API_KEY>") { ENV["BAM_API_KEY"] } if ENV["BAM_API_KEY"]
+  c.filter_sensitive_data("<BANXICO_API_KEY>") { ENV["BANXICO_API_KEY"] } if ENV["BANXICO_API_KEY"]
 end
 
 module Minitest
