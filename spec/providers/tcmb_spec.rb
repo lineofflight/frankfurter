@@ -7,14 +7,8 @@ module Providers
   describe TCMB do
     let(:provider) { TCMB.new }
 
-    it "returns empty without API key" do
-      original = ENV["TCMB_API_KEY"]
-      ENV.delete("TCMB_API_KEY")
-
-      _(provider.fetch.dataset).must_be(:empty?)
-      _(provider.fetch(since: Date.today - 7).dataset).must_be(:empty?)
-    ensure
-      ENV["TCMB_API_KEY"] = original
+    it "requires an API key" do
+      _(TCMB.api_key?).must_equal(true)
     end
 
     describe "with API key" do

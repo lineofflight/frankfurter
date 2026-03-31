@@ -41,11 +41,11 @@ module Providers
     class << self
       def key = "FRED"
       def name = "Federal Reserve"
+      def api_key? = true
+      def api_key = ENV["FRED_API_KEY"]
     end
 
     def fetch(since: nil, upto: nil)
-      return no_key unless api_key
-
       @dataset = []
       params = {}
       params[:observation_start] = since.to_s if since
@@ -59,15 +59,6 @@ module Providers
     end
 
     private
-
-    def api_key
-      ENV["FRED_API_KEY"]
-    end
-
-    def no_key
-      @dataset = []
-      self
-    end
 
     def fetch_series(series_id, quote, series_base, **params)
       url = URI(API_URL)

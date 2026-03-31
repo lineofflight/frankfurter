@@ -32,8 +32,15 @@ module Providers
       def key = raise(NotImplementedError)
       def name = raise(NotImplementedError)
       def earliest_date = nil
+      def api_key? = false
+      def api_key = raise(NotImplementedError)
 
       def backfill(range: nil)
+        if api_key? && !api_key
+          Log.info("#{key}: skipping (no API key)")
+          return
+        end
+
         since = Rate.where(provider: key).max(:date)
         since = Date.parse(since.to_s) if since
         return if since && since >= Date.today
@@ -75,6 +82,7 @@ module Providers
 
     def key = self.class.key
     def name = self.class.name
+    def api_key = self.class.api_key
 
     def fetch(since: nil, upto: nil)
       raise NotImplementedError

@@ -50,11 +50,11 @@ module Providers
     class << self
       def key = "TCMB"
       def name = "Central Bank of Turkey"
+      def api_key? = true
+      def api_key = ENV["TCMB_API_KEY"]
     end
 
     def fetch(since: nil, upto: nil)
-      return no_key unless api_key
-
       start_date = since || EARLIEST_DATE
       start_date = Date.parse(start_date.to_s)
       end_date = Date.today
@@ -68,15 +68,6 @@ module Providers
     end
 
     private
-
-    def api_key
-      ENV["TCMB_API_KEY"]
-    end
-
-    def no_key
-      @dataset = []
-      self
-    end
 
     def fetch_rates(start_date, end_date)
       url = URI("#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
