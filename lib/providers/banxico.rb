@@ -45,7 +45,7 @@ module Providers
 
       @dataset = parse(response.body)
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError, OpenSSL::SSL::SSLError
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError, OpenSSL::SSL::SSLError, JSON::ParserError
       @dataset = []
       self
     end
