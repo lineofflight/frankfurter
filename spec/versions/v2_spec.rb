@@ -330,4 +330,50 @@ describe Versions::V2 do
     _(ecb["end_date"]).wont_be_nil
     _(ecb["currencies"]).must_include("USD")
   end
+
+  it "expands pegged currencies in rates" do
+    get "/rates?base=EUR"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("BMD")
+  end
+
+  it "derives correct rate for pegged currency" do
+    get "/rates?base=EUR"
+
+    usd = json.find { |r| r["quote"] == "USD" }
+    bmd = json.find { |r| r["quote"] == "BMD" }
+
+    _(bmd["rate"]).must_equal(usd["rate"])
+  end
+
+  it "derives correct rate for non-1:1 peg" do
+    get "/rates?base=EUR"
+
+    usd = json.find { |r| r["quote"] == "USD" }
+    ang = json.find { |r| r["quote"] == "ANG" }
+
+    expected = (usd["rate"] * 1.79)
+
+    _(ang["rate"]).must_be_close_to(expected, 0.01)
+  end
+
+  it "expands GBP-pegged currencies" do
+    get "/rates?base=EUR"
+
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("FKP")
+    _(quotes).must_include("GGP")
+  end
+
+  it "expands INR-pegged currencies" do
+    get "/rates?base=EUR"
+
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_include("BTN")
+  end
 end

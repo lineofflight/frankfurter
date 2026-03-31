@@ -4,6 +4,7 @@ require "digest"
 require "rate"
 require "roundable"
 require "blender"
+require "peg"
 
 module Versions
   class V2 < Roda
@@ -140,11 +141,41 @@ module Versions
         end
       end
 
-      def emit_blended(rows)
-        Blender.new(rows, base:).blend.each do |r|
+      def emit_blended(rows, &block)
+        blended = Blender.new(rows, base:).blend
+
+        emitted_quotes = Set.new
+        blended.each do |r|
           next if quotes && !quotes.include?(r[:quote])
 
+          emitted_quotes << r[:quote]
           yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
+        end
+
+        expand_pegs(blended, emitted_quotes, &block)
+      end
+
+      def expand_pegs(blended, emitted_quotes)
+        return if providers
+
+        Peg.all.each do |peg|
+          next if emitted_quotes.include?(peg.quote)
+          next if quotes && !quotes.include?(peg.quote)
+
+          date = blended.first&.dig(:date)
+          next unless date
+          next if date < peg.since
+
+          if peg.base == base
+            rate = peg.rate
+          else
+            anchor = blended.find { |r| r[:quote] == peg.base }
+            next unless anchor
+
+            rate = anchor[:rate] * peg.rate
+          end
+
+          yield({ date: date.to_s, base:, quote: peg.quote, rate: round(rate) })
         end
       end
 
