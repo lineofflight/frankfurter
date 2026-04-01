@@ -89,8 +89,8 @@ module Providers
       raise NotImplementedError
     end
 
-    # Precious metals and IMF instruments — recognised by Money gem but not currencies
-    EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
+    # IMF instruments — recognised by Money gem but not currencies
+    EXCLUDED_QUOTES = ["XDR"].freeze
 
     def import
       @dataset = dataset.reject do |r|
