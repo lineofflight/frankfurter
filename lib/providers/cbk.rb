@@ -17,17 +17,28 @@ module Providers
       "STG POUND" => "GBP",
       "EURO" => "EUR",
       "JAPANESE YEN" => "JPY",
+      "JPY" => "JPY",
       "SWISS FRANC" => "CHF",
+      "S FRANC" => "CHF",
       "CAN DOLLAR" => "CAD",
+      "CAN $" => "CAD",
       "AUSTRALIAN DOLLAR" => "AUD",
+      "AUSTRALIAN $" => "AUD",
       "INDIAN RUPEE" => "INR",
+      "IND RUPEE" => "INR",
       "SWEDISH KRONA" => "SEK",
+      "SW KRONER" => "SEK",
       "NORWEGIAN KRONE" => "NOK",
+      "NOR KRONER" => "NOK",
+      "DAN KRONER" => "DKK",
       "CHINESE YUAN" => "CNY",
       "S. AFRICAN RAND" => "ZAR",
       "SA RAND" => "ZAR",
       "AE DIRHAM" => "AED",
       "UAE DIRHAM" => "AED",
+      "HONGKONG DOLLAR" => "HKD",
+      "SINGAPORE DOLLAR" => "SGD",
+      "SAUDI RIYAL" => "SAR",
       "USHS" => "UGX",
       "TSHS" => "TZS",
       "RWF" => "RWF",
@@ -86,11 +97,15 @@ module Providers
       return unless date_str && currency_name
 
       date = Date.strptime(date_str.strip, "%d/%m/%Y")
-      iso = resolve_currency(currency_name.strip)
+      iso, cross_rate = resolve_currency(currency_name.strip)
       return unless iso
 
+      units = parse_units(currency_name)
       rate_value = Float(rest[0])
       return if rate_value.zero?
+
+      rate_value /= units if units > 1
+      rate_value = 1.0 / rate_value if cross_rate
 
       { provider: key, date:, base: iso, quote: "KES", rate: rate_value }
     rescue ArgumentError, TypeError
@@ -100,14 +115,22 @@ module Providers
     def resolve_currency(name)
       upname = name.upcase
 
-      # Check for East African cross-rate patterns like "KEN SHILLING / USHS"
-      if upname.include?("KEN SHILLING /")
+      # Check for East African cross-rate patterns like "KES / USHS" or "KEN SHILLING / USHS"
+      if upname.match?(%r{KE[SN][\s/]|KEN SHILLING\s*/})
         suffix = upname.split("/").last.strip
-        return CURRENCY_MAP[suffix]
+        iso = CURRENCY_MAP[suffix]
+        return [iso, true] if iso
       end
 
-      # Direct match
-      CURRENCY_MAP[upname] || CURRENCY_MAP.find { |k, _| upname.include?(k) }&.last
+      # Strip unit markers like "(100)" before matching
+      clean = upname.sub(/\s*\(\d+\)\s*$/, "")
+      iso = CURRENCY_MAP[clean] || CURRENCY_MAP.find { |k, _| clean.include?(k) }&.last
+      [iso, false]
+    end
+
+    def parse_units(name)
+      match = name.match(/\((\d+)\)\s*$/)
+      match ? Integer(match[1]) : 1
     end
   end
 end
