@@ -65,6 +65,9 @@ module Providers
         rate_value = Float(item["tipoCotizacion"])
         next if rate_value.zero?
 
+        multiplier = extract_multiplier(item["descripcion"])
+        rate_value /= multiplier if multiplier > 1
+
         { provider: key, date:, base: code, quote: "ARS", rate: rate_value }
       rescue ArgumentError, TypeError
         nil
@@ -72,6 +75,19 @@ module Providers
     end
 
     private
+
+    # BCRA quotes some low-value currencies per N units, indicated in the
+    # descripcion field, e.g. "DONG VIETNAM (C/1.000 UNIDADES)".
+    # Extract the multiplier so we can normalize to per-1-unit rates.
+    def extract_multiplier(descripcion)
+      return 1 unless descripcion
+
+      match = descripcion.match(%r{C/([\d.]+)\s*UNIDADES}i)
+      return 1 unless match
+
+      # BCRA uses period as thousands separator (e.g. "1.000" = 1000)
+      Integer(match[1].delete("."))
+    end
 
     def fetch_date(date)
       url = URI("#{BASE_URL}?fecha=#{date.strftime("%Y-%m-%d")}")

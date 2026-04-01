@@ -44,6 +44,24 @@ module Providers
       _(records.first[:rate]).must_equal(1075.0)
     end
 
+    it "normalizes rates quoted per 1000 units" do
+      records = provider.parse({
+        "results" => {
+          "fecha" => "2026-03-20",
+          "detalle" => [{
+            "codigoMoneda" => "VND",
+            "descripcion" => "DONG VIETNAM (C/1.000 UNIDADES)",
+            "tipoPase" => 0.038036,
+            "tipoCotizacion" => "53.04096500",
+          }],
+        },
+      })
+
+      _(records.length).must_equal(1)
+      _(records.first[:base]).must_equal("VND")
+      _(records.first[:rate]).must_be_close_to(0.05304, 0.001)
+    end
+
     it "skips excluded codes" do
       records = provider.parse({
         "results" => {
