@@ -71,15 +71,11 @@ module Providers
         _(cache_purged).must_equal(false)
       end
 
-      it "flags outlier rates" do
-        date = Date.today - 60
-        35.times do |i|
+      it "flags outlier rates via consensus" do
+        # Seed other providers with normal rates on today
+        ["P1", "P2", "P3"].each do |p|
           Rate.unfiltered.insert(
-            date: date + i,
-            provider: "TEST",
-            base: "EUR",
-            quote: "USD",
-            rate: 1.1 + (i % 5) * 0.01,
+            date: Date.today, provider: p, base: "EUR", quote: "USD", rate: 1.10,
           )
         end
 
@@ -92,14 +88,9 @@ module Providers
       end
 
       it "does not flag normal rates" do
-        date = Date.today - 60
-        35.times do |i|
+        ["P1", "P2", "P3"].each do |p|
           Rate.unfiltered.insert(
-            date: date + i,
-            provider: "TEST",
-            base: "EUR",
-            quote: "USD",
-            rate: 1.1 + (i % 5) * 0.01,
+            date: Date.today, provider: p, base: "EUR", quote: "USD", rate: 1.10,
           )
         end
 
@@ -111,21 +102,15 @@ module Providers
         _(record[:outlier]).must_equal(false)
       end
 
-      it "skips detection when fewer than 30 records exist" do
-        5.times do |i|
-          Rate.unfiltered.insert(
-            date: Date.today - 10 + i,
-            provider: "TEST",
-            base: "EUR",
-            quote: "USD",
-            rate: 1.1,
-          )
-        end
+      it "skips detection with fewer than 3 providers" do
+        Rate.unfiltered.insert(
+          date: Date.today, provider: "P1", base: "EUR", quote: "KES", rate: 1.10,
+        )
 
-        wild = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 999.0 }]
+        wild = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "KES", rate: 999.0 }]
         klass.new(dataset: wild).import
 
-        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
+        record = Rate.unfiltered.where(provider: "TEST", date: Date.today, quote: "KES").first
 
         _(record[:outlier]).must_equal(false)
       end

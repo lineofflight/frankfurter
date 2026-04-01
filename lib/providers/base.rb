@@ -3,7 +3,7 @@
 require "cache"
 require "log"
 require "money/currency"
-require "outlier"
+require "consensus"
 require "provider"
 require "rate"
 
@@ -116,11 +116,8 @@ module Providers
     private
 
     def detect_outliers
-      triples = dataset.map { |r| [r[:provider], r[:base], r[:quote]] }.uniq
-      dates = dataset.map { |r| r[:date] }
-
-      triples.each do |provider, base, quote|
-        Outlier.detect(provider:, base:, quote:, dates:, exclude_dates: dates, apply: true)
+      dataset.map { |r| r[:date] }.uniq.each do |date|
+        Consensus.flag(date)
       end
     end
   end
