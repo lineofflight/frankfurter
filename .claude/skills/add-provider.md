@@ -47,6 +47,8 @@ Follow the pattern in `spec/providers/boi_spec.rb` or `spec/providers/bccr_spec.
 
 VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first live test run. Pin dates in tests — never use `Date.today` with VCR. **Never hand-craft or fabricate cassettes** — they must be recorded from a live API response. Use narrow date ranges in integration tests (3-5 days) to keep cassettes small and test runs fast.
 
+**Avoiding time bombs**: Always pass explicit `upto:` dates in tests, even when the provider defaults to `Date.today`. If `upto` is omitted, the fetch will reach into unrecorded months and hit VCR errors on the 1st of the next month. Similarly, avoid assertions with hardcoded bounds on date counts (e.g. `<= 13` months) that break at month boundaries.
+
 ### 3. Seed provider metadata — `db/seeds/providers.json`
 
 Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri).
