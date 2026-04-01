@@ -3,6 +3,7 @@
 require "cache"
 require "log"
 require "money/currency"
+require "outlier"
 require "provider"
 require "rate"
 
@@ -91,10 +92,6 @@ module Providers
     # Precious metals and IMF instruments — recognised by Money gem but not currencies
     EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
 
-    MIN_HISTORY = 30
-    STATS_WINDOW = 365
-    SIGMA_THRESHOLD = 5
-
     def import
       @dataset = dataset.reject do |r|
         [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) }
@@ -123,28 +120,7 @@ module Providers
       dates = dataset.map { |r| r[:date] }
 
       triples.each do |provider, base, quote|
-        rates = Rate.where(provider:, base:, quote:)
-          .order(Sequel.desc(:date)).limit(STATS_WINDOW).select_map(:rate)
-
-        next if rates.size < MIN_HISTORY
-
-        mean = rates.sum / rates.size.to_f
-        variance = rates.sum { |r| (r - mean)**2 } / rates.size.to_f
-        sd = Math.sqrt(variance)
-        next if sd.zero?
-
-        lower = mean - (SIGMA_THRESHOLD * sd)
-        upper = mean + (SIGMA_THRESHOLD * sd)
-
-        flagged = Rate.unfiltered
-          .where(provider:, base:, quote:, date: dates)
-          .exclude(rate: lower..upper)
-
-        flagged.select(:date, :rate).each do |row|
-          Log.info("#{key}: flagged outlier #{base}/#{quote} #{row[:rate]} on #{row[:date]} (mean: #{mean.round(4)}, stddev: #{sd.round(4)})")
-        end
-
-        flagged.update(outlier: true)
+        Outlier.detect(provider:, base:, quote:, dates:, exclude_dates: dates, apply: true)
       end
     end
   end
