@@ -152,4 +152,24 @@ describe Rate do
       _(dates).must_equal(dates.sort)
     end
   end
+
+  describe "outlier filtering" do
+    it "excludes outliers from queries by default" do
+      date = Fixtures.latest_date
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", rate: 999.0, provider: "ECB", outlier: true)
+
+      quotes = Rate.where(provider: "ECB", date:).map(:quote)
+
+      _(quotes).wont_include("XTS")
+    end
+
+    it "includes outliers when unfiltered" do
+      date = Fixtures.latest_date
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", rate: 999.0, provider: "ECB", outlier: true)
+
+      quotes = Rate.unfiltered.where(provider: "ECB", date:).map(:quote)
+
+      _(quotes).must_include("XTS")
+    end
+  end
 end
