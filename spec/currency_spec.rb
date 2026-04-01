@@ -66,6 +66,20 @@ describe Currency do
     _(Currency.find("usd")).wont_be_nil
   end
 
+  it "filters by providers" do
+    codes = Currency.with_providers(["ECB"]).map(&:iso_code)
+
+    _(codes).must_include("USD")
+    _(codes).must_include("EUR")
+    _(codes).wont_include("CAD")
+  end
+
+  it "excludes pegged currencies when filtering by providers" do
+    codes = Currency.with_providers(["ECB"]).map(&:iso_code)
+
+    _(codes).wont_include("BMD")
+  end
+
   it "includes pegged currencies in the list" do
     codes = Currency.all.map(&:iso_code)
 

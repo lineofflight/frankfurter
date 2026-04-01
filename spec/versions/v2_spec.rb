@@ -206,6 +206,17 @@ describe Versions::V2 do
     _(last_response.status).must_equal(404)
   end
 
+  it "filters currencies by provider" do
+    get "/currencies?providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    codes = json.map { |c| c["iso_code"] }
+
+    _(codes).must_include("USD")
+    _(codes).must_include("EUR")
+    _(codes).wont_include("BMD")
+  end
+
   it "includes base currencies in currencies list" do
     get "/currencies?scope=all"
     eur = json.find { |c| c["iso_code"] == "EUR" }

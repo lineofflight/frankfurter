@@ -106,8 +106,16 @@ module Versions
 
       r.on("currencies") do
         r.get do
-          ds = r.params["scope"] == "all" ? Currency : Currency.active
-          ds.map(&:to_h)
+          providers = r.params["providers"]&.upcase&.split(",")
+          currencies = if providers
+            Currency.with_providers(providers).all
+          elsif r.params["scope"] == "all"
+            Currency.all
+          else
+            Currency.active
+          end
+
+          currencies.map(&:to_h)
         end
       end
 

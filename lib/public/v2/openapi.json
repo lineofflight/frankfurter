@@ -135,7 +135,8 @@
             "description": "Set to 'all' to include legacy currencies",
             "required": false,
             "schema": { "type": "string", "enum": ["all"] }
-          }
+          },
+          { "$ref": "#/components/parameters/providers" }
         ],
         "responses": {
           "200": {

@@ -33,6 +33,14 @@ class Currency < Sequel::Model(
       cutoff = (Date.today - 30).to_s
       where { end_date >= cutoff }
     end
+
+    def with_providers(keys)
+      rates = Rate.where(provider: keys)
+      codes = rates.select(Sequel[:quote].as(:iso_code))
+        .union(rates.select(Sequel[:base].as(:iso_code)))
+        .from_self.select(:iso_code).distinct
+      where(iso_code: codes)
+    end
   end
 
   class << self
