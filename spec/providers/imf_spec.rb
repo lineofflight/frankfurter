@@ -54,6 +54,21 @@ module Providers
       _(jpy.first[:rate]).must_equal(156.4)
     end
 
+    it "parses KWD as direct quote (units per USD)" do
+      tsv = <<~TSV
+        Representative Exchange Rates for Selected Currencies for March 2026
+        Currency\tMarch 02, 2026
+        Kuwaiti dinar\t0.306600
+      TSV
+
+      records = provider.parse(tsv)
+      kwd = records.find { |r| r[:quote] == "KWD" || r[:base] == "KWD" }
+
+      _(kwd[:base]).must_equal("USD")
+      _(kwd[:quote]).must_equal("KWD")
+      _(kwd[:rate]).must_equal(0.3066)
+    end
+
     it "skips USD rows" do
       tsv = <<~TSV
         Representative Exchange Rates for Selected Currencies for January 2026

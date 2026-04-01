@@ -88,9 +88,6 @@ module Providers
       "zambian kwacha" => "ZMW",
     }.freeze
 
-    # Currencies marked with (1) in IMF data: quoted as USD per 1 foreign unit
-    USD_PER_UNIT = ["EUR", "GBP", "AUD", "NZD", "KWD", "BHD", "OMR", "BWP", "FJD", "JOD", "BBD", "BSD", "WST", "NAD"].to_set.freeze
-
     class << self
       def key = "IMF"
       def name = "International Monetary Fund"
@@ -156,7 +153,7 @@ module Providers
           rate = Float(cleaned)
           next if rate.zero?
 
-          if indirect || USD_PER_UNIT.include?(iso)
+          if indirect
             { provider: key, date:, base: iso, quote: "USD", rate: }
           else
             { provider: key, date:, base: "USD", quote: iso, rate: }
