@@ -7,6 +7,7 @@ task :outliers, [:mode] do |_t, args|
 
   apply = args[:mode] == "apply"
   min_history = 30
+  stats_window = 365
   sigma_threshold = 5
   total_flagged = 0
 
@@ -17,8 +18,11 @@ task :outliers, [:mode] do |_t, args|
     base = triple[:base]
     quote = triple[:quote]
 
-    rates = Rate.unfiltered.where(provider:, base:, quote:, outlier: false).select_map(:rate)
-    next if rates.size < min_history
+    scope = Rate.unfiltered.where(provider:, base:, quote:, outlier: false)
+    window_dates = scope.order(Sequel.desc(:date)).limit(stats_window).select_map(:date)
+    next if window_dates.size < min_history
+
+    rates = scope.where(date: window_dates).select_map(:rate)
 
     mean = rates.sum / rates.size.to_f
     variance = rates.sum { |r| (r - mean)**2 } / rates.size.to_f
@@ -29,7 +33,7 @@ task :outliers, [:mode] do |_t, args|
     upper = mean + (sigma_threshold * sd)
 
     flagged = Rate.unfiltered
-      .where(provider:, base:, quote:)
+      .where(provider:, base:, quote:, date: window_dates)
       .exclude(rate: lower..upper)
 
     flagged.select(:date, :rate).each do |row|

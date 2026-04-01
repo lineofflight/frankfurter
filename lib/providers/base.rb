@@ -92,6 +92,7 @@ module Providers
     EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
 
     MIN_HISTORY = 30
+    STATS_WINDOW = 365
     SIGMA_THRESHOLD = 5
 
     def import
@@ -122,7 +123,8 @@ module Providers
       dates = dataset.map { |r| r[:date] }
 
       triples.each do |provider, base, quote|
-        rates = Rate.where(provider:, base:, quote:).select_map(:rate)
+        rates = Rate.where(provider:, base:, quote:)
+          .order(Sequel.desc(:date)).limit(STATS_WINDOW).select_map(:rate)
 
         next if rates.size < MIN_HISTORY
 
