@@ -43,13 +43,17 @@ class Consensus
     self
   end
 
-  # Flags outlier providers and unflags any previously flagged providers that are now within consensus.
+  # Flags source rates for outlier pairs and unflags any previously flagged that are now within consensus.
   def flag
     DB.transaction do
       Rate.unfiltered.where(date: @date, outlier: true).update(outlier: false)
-      @outliers.map { |r| r[:provider] }.uniq.each do |provider|
-        Rate.unfiltered.where(provider:, date: @date).update(outlier: true)
-        Log.info("#{provider}: flagged outlier rates on #{@date}")
+      @outliers.each do |r|
+        quote = r[:quote]
+        provider = r[:provider]
+        Rate.unfiltered.where(provider:, date: @date)
+          .where(Sequel.lit("base = ? OR quote = ?", quote, quote))
+          .update(outlier: true)
+        Log.info("#{provider}: flagged #{quote} rates on #{@date}")
       end
     end
 

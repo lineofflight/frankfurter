@@ -113,6 +113,7 @@ describe Consensus do
     Consensus.flag(date)
 
     _(Rate.unfiltered.where(provider: "C", date:, quote: "AED").first[:outlier]).must_equal(true)
+    _(Rate.unfiltered.where(provider: "C", date:, quote: "USD").first[:outlier]).must_equal(false)
     _(Rate.unfiltered.where(provider: "A", date:, quote: "AED").first[:outlier]).must_equal(false)
   end
 end
