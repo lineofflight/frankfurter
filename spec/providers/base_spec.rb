@@ -70,6 +70,65 @@ module Providers
 
         _(cache_purged).must_equal(false)
       end
+
+      it "flags outlier rates" do
+        date = Date.today - 60
+        35.times do |i|
+          Rate.unfiltered.insert(
+            date: date + i,
+            provider: "TEST",
+            base: "EUR",
+            quote: "USD",
+            rate: 1.1 + (i % 5) * 0.01,
+          )
+        end
+
+        bad = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 999.0 }]
+        klass.new(dataset: bad).import
+
+        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
+
+        _(record[:outlier]).must_equal(true)
+      end
+
+      it "does not flag normal rates" do
+        date = Date.today - 60
+        35.times do |i|
+          Rate.unfiltered.insert(
+            date: date + i,
+            provider: "TEST",
+            base: "EUR",
+            quote: "USD",
+            rate: 1.1 + (i % 5) * 0.01,
+          )
+        end
+
+        normal = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.12 }]
+        klass.new(dataset: normal).import
+
+        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
+
+        _(record[:outlier]).must_equal(false)
+      end
+
+      it "skips detection when fewer than 30 records exist" do
+        5.times do |i|
+          Rate.unfiltered.insert(
+            date: Date.today - 10 + i,
+            provider: "TEST",
+            base: "EUR",
+            quote: "USD",
+            rate: 1.1,
+          )
+        end
+
+        wild = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 999.0 }]
+        klass.new(dataset: wild).import
+
+        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
+
+        _(record[:outlier]).must_equal(false)
+      end
     end
 
     describe ".backfill" do

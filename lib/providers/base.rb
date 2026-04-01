@@ -91,14 +91,18 @@ module Providers
     # Precious metals and IMF instruments — recognised by Money gem but not currencies
     EXCLUDED_QUOTES = ["XAU", "XAG", "XPT", "XPD", "XDR"].freeze
 
+    MIN_HISTORY = 30
+    SIGMA_THRESHOLD = 5
+
     def import
       @dataset = dataset.reject do |r|
         [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) }
       end
       before = DB["SELECT total_changes()"].single_value
-      Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
+      Rate.unfiltered.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = DB["SELECT total_changes()"].single_value - before
       Log.info("#{key}: imported #{inserted} rates")
+      detect_outliers if inserted > 0
       if inserted > 0
         DB.run("PRAGMA optimize")
         Log.info("#{key}: purged cache") if Cache.purge
@@ -109,6 +113,37 @@ module Providers
 
     def count
       dataset.size
+    end
+
+    private
+
+    def detect_outliers
+      triples = dataset.map { |r| [r[:provider], r[:base], r[:quote]] }.uniq
+      dates = dataset.map { |r| r[:date] }
+
+      triples.each do |provider, base, quote|
+        rates = Rate.where(provider:, base:, quote:).select_map(:rate)
+
+        next if rates.size < MIN_HISTORY
+
+        mean = rates.sum / rates.size.to_f
+        variance = rates.sum { |r| (r - mean)**2 } / rates.size.to_f
+        sd = Math.sqrt(variance)
+        next if sd.zero?
+
+        lower = mean - (SIGMA_THRESHOLD * sd)
+        upper = mean + (SIGMA_THRESHOLD * sd)
+
+        flagged = Rate.unfiltered
+          .where(provider:, base:, quote:, date: dates)
+          .exclude(rate: lower..upper)
+
+        flagged.select(:date, :rate).each do |row|
+          Log.info("#{key}: flagged outlier #{base}/#{quote} #{row[:rate]} on #{row[:date]} (mean: #{mean.round(4)}, stddev: #{sd.round(4)})")
+        end
+
+        flagged.update(outlier: true)
+      end
     end
   end
 end
