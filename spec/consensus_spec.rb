@@ -4,7 +4,7 @@ require_relative "helper"
 require "consensus"
 
 describe Consensus do
-  def seed_providers(date, quote: "USD", rates:)
+  def seed_rates(date, quote: "USD", rates:)
     rates.each do |provider, rate|
       Rate.unfiltered.insert(
         date:, provider:, base: "EUR", quote:, rate:,
@@ -13,7 +13,7 @@ describe Consensus do
   end
 
   it "flags a rate that deviates from consensus" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
     })
 
@@ -24,7 +24,7 @@ describe Consensus do
   end
 
   it "does not flag rates within consensus" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.12, "D" => 1.105,
     })
 
@@ -34,7 +34,7 @@ describe Consensus do
   end
 
   it "skips quotes with fewer than 4 providers" do
-    seed_providers(Date.today, quote: "XYZ", rates: { "A" => 1.10, "B" => 9.99, "C" => 1.11 })
+    seed_rates(Date.today, quote: "XYZ", rates: { "A" => 1.10, "B" => 9.99, "C" => 1.11 })
 
     Consensus.flag(Date.today)
 
@@ -42,7 +42,7 @@ describe Consensus do
   end
 
   it "flags outliers even when history contains existing extreme values" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 999.0,
     })
 
@@ -52,7 +52,7 @@ describe Consensus do
   end
 
   it "tolerates small fluctuations in low-volatility pairs" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 612.55, "B" => 612.50, "C" => 612.60, "D" => 610.40,
     })
 
@@ -62,7 +62,7 @@ describe Consensus do
   end
 
   it "does not update when using find" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
     })
 
@@ -73,7 +73,7 @@ describe Consensus do
   end
 
   it "returns outliers" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
     })
 
@@ -83,7 +83,7 @@ describe Consensus do
   end
 
   it "unflags rates that return to consensus" do
-    seed_providers(Date.today, rates: {
+    seed_rates(Date.today, rates: {
       "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
     })
     Consensus.flag(Date.today)
