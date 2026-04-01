@@ -41,7 +41,7 @@ module Providers
         next unless iso&.match?(/\A[A-Z]{3}\z/)
         next if iso == "MKD"
 
-        rate = Float(row["sreden"])
+        rate = Float(row["sreden"]) / Integer(row["nomin"])
         next if rate.zero?
 
         date = Date.strptime(row["datum"].split("T").first, "%Y-%m-%d")
