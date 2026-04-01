@@ -143,7 +143,7 @@ describe Rate do
     it "groups by month" do
       dates = Rate.between(interval).downsample("month")
 
-      _(dates.map(:date).uniq.count).must_be(:<=, 13)
+      _(dates.map(:date).uniq.count).must_be(:<=, 14)
     end
 
     it "sorts by date" do

@@ -21,20 +21,20 @@ module Providers
     end
 
     it "fetches rates" do
-      provider.fetch(since: Date.new(2026, 3, 1)).import
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31)).import
 
       _(count_unique_dates).must_be(:>, 1)
     end
 
     it "stores multiple currencies per date" do
-      provider.fetch(since: Date.new(2026, 3, 1)).import
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31)).import
       date = Rate.first.date
 
       _(Rate.where(date:).count).must_be(:>, 1)
     end
 
     it "normalizes rates by unit" do
-      provider.fetch(since: Date.new(2026, 3, 1)).import
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31)).import
       jpy_rate = Rate.where(base: "JPY").first
 
       _(jpy_rate).wont_be_nil
@@ -42,7 +42,7 @@ module Providers
     end
 
     it "imports net-new currencies" do
-      provider.fetch(since: Date.new(2026, 3, 1)).import
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31)).import
 
       ["BND", "EGP", "KHR", "MMK", "NPR"].each do |code|
         _(Rate.where(base: code).count).must_be(:>, 0, "expected #{code} rates")
@@ -57,7 +57,7 @@ module Providers
     end
 
     it "excludes SDR" do
-      provider.fetch(since: Date.new(2026, 3, 1)).import
+      provider.fetch(since: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31)).import
 
       _(Rate.where(base: "SDR").count).must_equal(0)
       _(Rate.where(quote: "SDR").count).must_equal(0)
