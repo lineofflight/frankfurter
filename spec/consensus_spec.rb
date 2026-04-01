@@ -25,7 +25,7 @@ describe Consensus do
 
   it "does not flag rates within consensus" do
     seed_providers(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.12,
+      "A" => 1.10, "B" => 1.11, "C" => 1.12, "D" => 1.105,
     })
 
     result = Consensus.flag(Date.today)
@@ -33,8 +33,8 @@ describe Consensus do
     _(result.outliers).must_be_empty
   end
 
-  it "skips quotes with fewer than 3 providers" do
-    seed_providers(Date.today, quote: "XYZ", rates: { "A" => 1.10, "B" => 9.99 })
+  it "skips quotes with fewer than 4 providers" do
+    seed_providers(Date.today, quote: "XYZ", rates: { "A" => 1.10, "B" => 9.99, "C" => 1.11 })
 
     Consensus.flag(Date.today)
 
@@ -100,13 +100,11 @@ describe Consensus do
   it "flags the BCEAO-style cross-rate error" do
     date = Date.today
 
-    # Provider A: EUR/USD and EUR/AED
-    Rate.unfiltered.insert(date:, provider: "A", base: "EUR", quote: "USD", rate: 1.17)
-    Rate.unfiltered.insert(date:, provider: "A", base: "EUR", quote: "AED", rate: 4.30)
-
-    # Provider B: EUR/USD and EUR/AED
-    Rate.unfiltered.insert(date:, provider: "B", base: "EUR", quote: "USD", rate: 1.17)
-    Rate.unfiltered.insert(date:, provider: "B", base: "EUR", quote: "AED", rate: 4.30)
+    # Providers A, B, D: EUR/USD and EUR/AED (correct)
+    ["A", "B", "D"].each do |p|
+      Rate.unfiltered.insert(date:, provider: p, base: "EUR", quote: "USD", rate: 1.17)
+      Rate.unfiltered.insert(date:, provider: p, base: "EUR", quote: "AED", rate: 4.30)
+    end
 
     # Provider C: EUR/USD and EUR/AED (bad — off by 6x, like BCEAO)
     Rate.unfiltered.insert(date:, provider: "C", base: "EUR", quote: "USD", rate: 1.17)

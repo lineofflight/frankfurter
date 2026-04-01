@@ -7,7 +7,7 @@ require "base_converter"
 # Cross-provider consensus outlier detection. For a given date, converts all providers' rates to a common base,
 # then compares each provider's value against the median. Rates that deviate significantly are flagged as outliers.
 class Consensus
-  MIN_PROVIDERS = 3
+  MIN_PROVIDERS = 4
   MULTIPLIER = 10
   MIN_DEVIATION = 0.05
   COMMON_BASE = "EUR"
