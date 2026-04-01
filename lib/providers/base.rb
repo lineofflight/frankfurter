@@ -3,7 +3,6 @@
 require "cache"
 require "log"
 require "money/currency"
-require "consensus"
 require "provider"
 require "rate"
 
@@ -24,10 +23,15 @@ module Providers
   end
 
   class Base
+    module SkipSleep
+      def sleep(*) = nil
+    end
+
     class << self
       def inherited(subclass)
         super
         Providers.all << subclass
+        subclass.prepend(SkipSleep) if ENV["APP_ENV"] == "test"
       end
 
       def key = raise(NotImplementedError)
@@ -97,10 +101,9 @@ module Providers
         [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) }
       end
       before = DB["SELECT total_changes()"].single_value
-      Rate.unfiltered.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
+      Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(dataset) unless dataset.empty?
       inserted = DB["SELECT total_changes()"].single_value - before
       Log.info("#{key}: imported #{inserted} rates")
-      detect_outliers if inserted > 0
       if inserted > 0
         DB.run("PRAGMA optimize")
         Log.info("#{key}: purged cache") if Cache.purge
@@ -111,14 +114,6 @@ module Providers
 
     def count
       dataset.size
-    end
-
-    private
-
-    def detect_outliers
-      dataset.map { |r| r[:date] }.uniq.each do |date|
-        Consensus.flag(date)
-      end
     end
   end
 end

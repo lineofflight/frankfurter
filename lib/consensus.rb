@@ -1,32 +1,27 @@
 # frozen_string_literal: true
 
-require "log"
-require "rate"
-require "base_converter"
-
-# Cross-provider consensus outlier detection. For a given date, converts all providers' rates to a common base,
-# then compares each provider's value against the median. Rates that deviate significantly are flagged as outliers.
+# Cross-provider consensus filter. Compares each provider's rebased rates against the median.
+# Rates that deviate significantly are identified as outliers.
 class Consensus
   MIN_PROVIDERS = 4
   MULTIPLIER = 10
   MIN_DEVIATION = 0.05
-  COMMON_BASE = "EUR"
 
   attr_reader :outliers
 
-  class << self
-    def find(date) = new(date).find
-    def flag(date) = new(date).find.flag
+  def initialize(rates)
+    @rates = rates
+    @outliers = Set.new
   end
 
-  def initialize(date)
-    @date = date
-    @outliers = []
-  end
-
-  # Compares each provider's rebased rates against the cross-provider median. Populates #outliers.
   def find
-    rates.group_by { |r| r[:quote] }.each do |_quote, group|
+    @found ||= filter
+  end
+
+  private
+
+  def filter
+    @rates.group_by { |r| r[:quote] }.each do |_quote, group|
       providers = group.map { |r| r[:provider] }.uniq
       next if providers.size < MIN_PROVIDERS
 
@@ -36,36 +31,13 @@ class Consensus
       threshold = [MULTIPLIER * mad, MIN_DEVIATION * med.abs].max
 
       group.each do |r|
-        @outliers << r if (r[:rate] - med).abs > threshold
+        if (r[:rate] - med).abs > threshold
+          @outliers << [r[:provider], r[:quote]]
+        end
       end
     end
 
-    self
-  end
-
-  # Flags source rates for outlier pairs and unflags any previously flagged that are now within consensus.
-  def flag
-    DB.transaction do
-      Rate.unfiltered.where(date: @date, outlier: true).update(outlier: false)
-      @outliers.each do |r|
-        quote = r[:quote]
-        provider = r[:provider]
-        Rate.unfiltered.where(provider:, date: @date)
-          .where(Sequel.lit("base = ? OR quote = ?", quote, quote))
-          .update(outlier: true)
-        Log.info("#{provider}: flagged #{quote} rates on #{@date}")
-      end
-    end
-
-    self
-  end
-
-  private
-
-  def rates
-    @rates ||= Rate.unfiltered.where(date: @date).all.group_by { |r| r[:provider] }.flat_map do |provider, rows|
-      BaseConverter.new(rows, base: COMMON_BASE).convert.map { |r| r.merge(provider:) }
-    end
+    @rates.reject { |r| @outliers.include?([r[:provider], r[:quote]]) }
   end
 
   def median(values)

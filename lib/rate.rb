@@ -2,7 +2,7 @@
 
 require "db"
 
-class Rate < Sequel::Model(DB[:rates].where(outlier: false))
+class Rate < Sequel::Model(:rates)
   dataset_module do
     def ecb
       where(provider: "ECB")

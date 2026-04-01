@@ -61,18 +61,6 @@ describe Blender do
     _(usd[:date]).must_equal(date)
   end
 
-  it "picks the most recent date regardless of input order" do
-    rates = [
-      { date: date - 1, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
-      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-    ]
-
-    result = Blender.new(rates, base: "EUR").blend
-    usd = result.find { |r| r[:quote] == "USD" }
-
-    _(usd[:date]).must_equal(date)
-  end
-
   it "discounts stale rates beyond the grace period" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
@@ -82,8 +70,23 @@ describe Blender do
     result = Blender.new(rates, base: "EUR").blend
     usd = result.find { |r| r[:quote] == "USD" }
 
-    # 7-day-old rate has weight ~0.135 vs 1.0 for today's rate, so result skews toward 1.08
     _(usd[:rate]).must_be_close_to(1.08, 0.02)
     _(usd[:date]).must_equal(date)
+  end
+
+  it "excludes outliers from the blend" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "A" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.09, provider: "B" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "C" },
+      { date: date, base: "EUR", quote: "USD", rate: 9.99, provider: "D" },
+    ]
+
+    blender = Blender.new(rates, base: "EUR")
+    result = blender.blend
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:rate]).must_be_close_to(1.083, 0.01)
+    _(blender.outliers).must_include(["D", "USD"])
   end
 end

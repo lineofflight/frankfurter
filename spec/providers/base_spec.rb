@@ -70,50 +70,6 @@ module Providers
 
         _(cache_purged).must_equal(false)
       end
-
-      it "flags outlier rates via consensus" do
-        # Seed other providers with normal rates on today
-        ["P1", "P2", "P3"].each do |p|
-          Rate.unfiltered.insert(
-            date: Date.today, provider: p, base: "EUR", quote: "USD", rate: 1.10,
-          )
-        end
-
-        bad = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 999.0 }]
-        klass.new(dataset: bad).import
-
-        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
-
-        _(record[:outlier]).must_equal(true)
-      end
-
-      it "does not flag normal rates" do
-        ["P1", "P2", "P3"].each do |p|
-          Rate.unfiltered.insert(
-            date: Date.today, provider: p, base: "EUR", quote: "USD", rate: 1.10,
-          )
-        end
-
-        normal = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "USD", rate: 1.12 }]
-        klass.new(dataset: normal).import
-
-        record = Rate.unfiltered.where(provider: "TEST", date: Date.today).first
-
-        _(record[:outlier]).must_equal(false)
-      end
-
-      it "skips detection with fewer than 3 providers" do
-        Rate.unfiltered.insert(
-          date: Date.today, provider: "P1", base: "EUR", quote: "KES", rate: 1.10,
-        )
-
-        wild = [{ date: Date.today, provider: "TEST", base: "EUR", quote: "KES", rate: 999.0 }]
-        klass.new(dataset: wild).import
-
-        record = Rate.unfiltered.where(provider: "TEST", date: Date.today, quote: "KES").first
-
-        _(record[:outlier]).must_equal(false)
-      end
     end
 
     describe ".backfill" do

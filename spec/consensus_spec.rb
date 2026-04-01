@@ -4,116 +4,63 @@ require_relative "helper"
 require "consensus"
 
 describe Consensus do
-  def seed_rates(date, quote: "USD", rates:)
-    rates.each do |provider, rate|
-      Rate.unfiltered.insert(
-        date:, provider:, base: "EUR", quote:, rate:,
-      )
+  def build_rates(quote: "USD", providers:)
+    providers.map do |provider, rate|
+      { date: Date.today, base: "EUR", quote:, rate:, provider: }
     end
   end
 
-  it "flags a rate that deviates from consensus" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
-    })
+  it "filters a rate that deviates from consensus" do
+    rates = build_rates(providers: { "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99 })
+    consensus = Consensus.new(rates)
+    result = consensus.find
 
-    Consensus.flag(Date.today)
-
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(true)
-    _(Rate.unfiltered.where(provider: "A", date: Date.today).first[:outlier]).must_equal(false)
+    _(result.none? { |r| r[:provider] == "D" }).must_equal(true)
+    _(consensus.outliers).must_include(["D", "USD"])
   end
 
-  it "does not flag rates within consensus" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.12, "D" => 1.105,
-    })
+  it "keeps all rates within consensus" do
+    rates = build_rates(providers: { "A" => 1.10, "B" => 1.11, "C" => 1.12, "D" => 1.105 })
+    consensus = Consensus.new(rates)
 
-    result = Consensus.flag(Date.today)
-
-    _(result.outliers).must_be_empty
+    _(consensus.find.size).must_equal(4)
+    _(consensus.outliers).must_be_empty
   end
 
   it "skips quotes with fewer than 4 providers" do
-    seed_rates(Date.today, quote: "XYZ", rates: { "A" => 1.10, "B" => 9.99, "C" => 1.11 })
+    rates = build_rates(providers: { "A" => 1.10, "B" => 9.99, "C" => 1.11 })
+    consensus = Consensus.new(rates)
 
-    Consensus.flag(Date.today)
-
-    _(Rate.unfiltered.where(provider: "B", date: Date.today, quote: "XYZ").first[:outlier]).must_equal(false)
-  end
-
-  it "flags outliers even when history contains existing extreme values" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 999.0,
-    })
-
-    Consensus.flag(Date.today)
-
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(true)
+    _(consensus.find.size).must_equal(3)
+    _(consensus.outliers).must_be_empty
   end
 
   it "tolerates small fluctuations in low-volatility pairs" do
-    seed_rates(Date.today, rates: {
-      "A" => 612.55, "B" => 612.50, "C" => 612.60, "D" => 610.40,
-    })
+    rates = build_rates(providers: { "A" => 612.55, "B" => 612.50, "C" => 612.60, "D" => 610.40 })
+    consensus = Consensus.new(rates)
 
-    Consensus.flag(Date.today)
+    consensus.find
 
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(false)
+    _(consensus.outliers).must_be_empty
   end
 
-  it "does not update when using find" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
-    })
+  it "filters per quote, not per provider" do
+    rates = [
+      { date: Date.today, base: "EUR", quote: "USD", rate: 1.17, provider: "A" },
+      { date: Date.today, base: "EUR", quote: "AED", rate: 4.30, provider: "A" },
+      { date: Date.today, base: "EUR", quote: "USD", rate: 1.17, provider: "B" },
+      { date: Date.today, base: "EUR", quote: "AED", rate: 4.30, provider: "B" },
+      { date: Date.today, base: "EUR", quote: "USD", rate: 1.17, provider: "C" },
+      { date: Date.today, base: "EUR", quote: "AED", rate: 25.8, provider: "C" },
+      { date: Date.today, base: "EUR", quote: "USD", rate: 1.17, provider: "D" },
+      { date: Date.today, base: "EUR", quote: "AED", rate: 4.30, provider: "D" },
+    ]
+    consensus = Consensus.new(rates)
+    result = consensus.find
 
-    result = Consensus.find(Date.today)
-
-    _(result.outliers).wont_be_empty
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(false)
-  end
-
-  it "returns outliers" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
-    })
-
-    result = Consensus.find(Date.today)
-
-    _(result.outliers.size).must_equal(1)
-  end
-
-  it "unflags rates that return to consensus" do
-    seed_rates(Date.today, rates: {
-      "A" => 1.10, "B" => 1.11, "C" => 1.10, "D" => 9.99,
-    })
-    Consensus.flag(Date.today)
-
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(true)
-
-    # Provider D corrects its rate
-    Rate.unfiltered.where(provider: "D", date: Date.today).update(rate: 1.105, outlier: true)
-    Consensus.flag(Date.today)
-
-    _(Rate.unfiltered.where(provider: "D", date: Date.today).first[:outlier]).must_equal(false)
-  end
-
-  it "flags the BCEAO-style cross-rate error" do
-    date = Date.today
-
-    # Providers A, B, D: EUR/USD and EUR/AED (correct)
-    ["A", "B", "D"].each do |p|
-      Rate.unfiltered.insert(date:, provider: p, base: "EUR", quote: "USD", rate: 1.17)
-      Rate.unfiltered.insert(date:, provider: p, base: "EUR", quote: "AED", rate: 4.30)
-    end
-
-    # Provider C: EUR/USD and EUR/AED (bad — off by 6x, like BCEAO)
-    Rate.unfiltered.insert(date:, provider: "C", base: "EUR", quote: "USD", rate: 1.17)
-    Rate.unfiltered.insert(date:, provider: "C", base: "EUR", quote: "AED", rate: 25.8)
-
-    Consensus.flag(date)
-
-    _(Rate.unfiltered.where(provider: "C", date:, quote: "AED").first[:outlier]).must_equal(true)
-    _(Rate.unfiltered.where(provider: "C", date:, quote: "USD").first[:outlier]).must_equal(false)
-    _(Rate.unfiltered.where(provider: "A", date:, quote: "AED").first[:outlier]).must_equal(false)
+    _(consensus.outliers).must_include(["C", "AED"])
+    _(consensus.outliers).wont_include(["C", "USD"])
+    _(result.any? { |r| r[:provider] == "C" && r[:quote] == "USD" }).must_equal(true)
+    _(result.none? { |r| r[:provider] == "C" && r[:quote] == "AED" }).must_equal(true)
   end
 end
