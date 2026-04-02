@@ -82,5 +82,19 @@ module Providers
 
       _(records).must_be_empty
     end
+
+    it "skips records with malformed dates" do
+      json = {
+        "rates" => [
+          { "validFor" => "not-a-date", "currencyCode" => "USD", "amount" => 1, "rate" => 22.5 },
+          { "validFor" => "2026-03-17", "currencyCode" => "EUR", "amount" => 1, "rate" => 24.4 },
+        ],
+      }
+
+      records = provider.parse(json)
+
+      _(records.length).must_equal(1)
+      _(records.first[:base]).must_equal("EUR")
+    end
   end
 end

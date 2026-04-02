@@ -9,17 +9,13 @@ module Providers
   # Czech National Bank. Publishes daily exchange rates for 30 currencies
   # against the Czech koruna (CZK) via a REST JSON API.
   class CNB < Base
-    URL = "https://api.cnb.cz/cnbapi/exrates/daily"
+    URL = "https://api.cnb.cz/cnbapi/exrates/daily-year"
     EARLIEST_DATE = Date.new(1991, 1, 1)
 
     class << self
       def key = "CNB"
       def name = "Czech National Bank"
       def earliest_date = EARLIEST_DATE
-
-      def backfill(range: 30)
-        super
-      end
     end
 
     def fetch(since: nil, upto: nil)
@@ -28,16 +24,11 @@ module Providers
       end_date = upto || Date.today
       @dataset = []
 
-      first = true
-      (start_date..end_date).each do |date|
-        next if date.saturday? || date.sunday?
-
-        sleep(0.2) unless first
-        first = false
-
-        @dataset.concat(fetch_date(date))
+      (start_date.year..end_date.year).each do |year|
+        @dataset.concat(fetch_year(year))
       end
 
+      @dataset.select! { |r| r[:date].between?(start_date, end_date) }
       self
     rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       @dataset ||= []
@@ -59,14 +50,16 @@ module Providers
 
         date = Date.parse(r["validFor"])
         { provider: key, date:, base: code, quote: "CZK", rate: rate / amount }
+      rescue ArgumentError, TypeError
+        nil
       end
     end
 
     private
 
-    def fetch_date(date)
+    def fetch_year(year)
       url = URI(URL)
-      url.query = URI.encode_www_form(date: date.strftime("%Y-%m-%d"), lang: "EN")
+      url.query = URI.encode_www_form(year: year, lang: "EN")
       response = Net::HTTP.get(url)
       parse(response)
     rescue Oj::ParseError
