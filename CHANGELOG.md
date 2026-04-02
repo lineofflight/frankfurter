@@ -7,22 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0-beta.1] - 2026-04-02
+
 ### Added
 
 - v2 API at `/v2/` endpoints with multi-provider blended exchange rates
-- 25 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, NBP.B, FRED, BNM, RBA, BCRA, CBK, BOJ, IMF, NBRM, BCEAO, BOI, BCCR, NB, NBG, HKMA, RB
-- 150+ currencies (up from ~30 in v1)
+- 35 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, NBP.B, FRED, BNM, RBA, BCRA, CBK, BOJ, BOJA, IMF, NBRM, BCEAO, BOI, BCCR, NB, NBG, HKMA, RB, BCB, BCCh, Banxico, BOE, FBIL, BANREP, SBI, CBC, BAM, BOT, Riksbank
+- Precious metal quotes (XAU, XAG, XPT, XPD)
+- Pegged currency expansion at query time
 - `/v2/rate/{base}/{quote}` endpoint for single currency pair lookups
 - `/v2/rate/{base}/{quote}/{date}` for historical single pair lookups
 - `/v2/providers` endpoint listing available data sources with date ranges and currency coverage
 - `/v2/currencies` endpoint with provider coverage per currency
-- `providers` parameter to scope rates to specific sources
+- `providers` parameter to scope rates and currencies to specific sources
 - `group` parameter to downsample time series (`week` or `month`)
+- CSV and NDJSON streaming output for rate endpoints
+- Outlier detection and filtering for rate quality
+- Recency-weighted blending
 - Strict parameter validation — unknown parameters return 422
 
 ### Fixed
 
 - Fixed rounding when amount is 1 and base is EUR (#173)
+- Fixed TCMB rate direction by switching to buy/sell series
+- Fixed CBK inverted cross rates and per-unit parsing
+- Fixed NBRM rate parsing for denominated currencies
+- Fixed BCRA dates with duplicate currency entries
+- Fixed BCEAO number format parsing
 
 ### Removed
 
@@ -46,5 +57,6 @@ The v1 API will remain available at `/v1/` endpoints. To migrate to `/v2`:
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.1...HEAD
+[2.0.0-beta.1]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...v2.0.0-beta.1
 [1.0.0]: https://github.com/lineofflight/frankfurter/releases/tag/v1.0.0

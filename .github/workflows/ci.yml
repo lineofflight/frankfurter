@@ -37,3 +37,45 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tag_names: true
+
+  release:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "version_number=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      - name: Check if prerelease
+        id: prerelease
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          if [[ "$VERSION" == *-* ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Extract changelog entry
+        id: changelog
+        run: |
+          VERSION_NUMBER="${{ steps.extract_version.outputs.version_number }}"
+          awk "/^## \[$VERSION_NUMBER\]/{flag=1;next}/^## \[/{flag=0}flag" CHANGELOG.md > release_notes.md
+          if [ -s release_notes.md ]; then
+            echo "Found changelog entry for version $VERSION_NUMBER"
+          else
+            echo "No specific changelog entry found, using default"
+            echo "Release ${{ steps.extract_version.outputs.version }}" > release_notes.md
+          fi
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          name: ${{ steps.extract_version.outputs.version }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: ${{ steps.prerelease.outputs.is_prerelease == 'true' }}
