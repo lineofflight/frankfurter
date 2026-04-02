@@ -16,7 +16,7 @@ describe Consensus do
     result = consensus.find
 
     _(result.none? { |r| r[:provider] == "D" }).must_equal(true)
-    _(consensus.outliers).must_include(["D", "USD"])
+    _(consensus.outliers.any? { |r| r[:provider] == "D" && r[:quote] == "USD" }).must_equal(true)
   end
 
   it "keeps all rates within consensus" do
@@ -58,8 +58,8 @@ describe Consensus do
     consensus = Consensus.new(rates)
     result = consensus.find
 
-    _(consensus.outliers).must_include(["C", "AED"])
-    _(consensus.outliers).wont_include(["C", "USD"])
+    _(consensus.outliers.any? { |r| r[:provider] == "C" && r[:quote] == "AED" }).must_equal(true)
+    _(consensus.outliers.none? { |r| r[:provider] == "C" && r[:quote] == "USD" }).must_equal(true)
     _(result.any? { |r| r[:provider] == "C" && r[:quote] == "USD" }).must_equal(true)
     _(result.none? { |r| r[:provider] == "C" && r[:quote] == "AED" }).must_equal(true)
   end

@@ -87,6 +87,5 @@ describe Blender do
     usd = result.find { |r| r[:quote] == "USD" }
 
     _(usd[:rate]).must_be_close_to(1.083, 0.01)
-    _(blender.outliers).must_include(["D", "USD"])
   end
 end

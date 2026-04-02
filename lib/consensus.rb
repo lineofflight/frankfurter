@@ -7,21 +7,26 @@ class Consensus
   MULTIPLIER = 10
   MIN_DEVIATION = 0.05
 
-  attr_reader :outliers
+  attr_reader :rates
 
   def initialize(rates)
     @rates = rates
-    @outliers = Set.new
   end
 
   def find
-    @found ||= filter
+    rates - outliers
+  end
+
+  def outliers
+    @outliers ||= find_outliers
   end
 
   private
 
-  def filter
-    @rates.group_by { |r| r[:quote] }.each do |_quote, group|
+  def find_outliers
+    flagged = Set.new
+
+    rates.group_by { |r| r[:quote] }.each_value do |group|
       providers = group.map { |r| r[:provider] }.uniq
       next if providers.size < MIN_PROVIDERS
 
@@ -32,12 +37,12 @@ class Consensus
 
       group.each do |r|
         if (r[:rate] - med).abs > threshold
-          @outliers << [r[:provider], r[:quote]]
+          flagged << [r[:provider], r[:quote]]
         end
       end
     end
 
-    @rates.reject { |r| @outliers.include?([r[:provider], r[:quote]]) }
+    rates.select { |r| flagged.include?([r[:provider], r[:quote]]) }
   end
 
   def median(values)
