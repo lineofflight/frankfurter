@@ -313,5 +313,14 @@
     "terms_url": null,
     "publish_time": 16,
     "publish_days": "1-5"
+  },
+  {
+    "key": "CNB",
+    "name": "Czech National Bank",
+    "description": "Daily exchange rates for 30 currencies against the Czech koruna",
+    "data_url": "https://api.cnb.cz/cnbapi/swagger-ui.html",
+    "terms_url": "https://www.cnb.cz/en/footer/general-terms-and-conditions/",
+    "publish_time": 13,
+    "publish_days": "1-5"
   }
 ]

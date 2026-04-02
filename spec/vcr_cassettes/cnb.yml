@@ -1,0 +1,213 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.cnb.cz/cnbapi/exrates/daily?date=2026-03-16&lang=EN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cnb.cz
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 20:37:09 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preloa                         d
+      X-Frame-Options:
+      - DENY
+      - SAMEORIGIN
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"rates":[{"validFor":"2026-03-16","order":52,"country":"Australia","currency":"dollar","amount":1,"currencyCode":"AUD","rate":15.018},{"validFor":"2026-03-16","order":52,"country":"Brazil","currency":"real","amount":1,"currencyCode":"BRL","rate":4.042},{"validFor":"2026-03-16","order":52,"country":"Canada","currency":"dollar","amount":1,"currencyCode":"CAD","rate":15.559},{"validFor":"2026-03-16","order":52,"country":"China","currency":"renminbi","amount":1,"currencyCode":"CNY","rate":3.087},{"validFor":"2026-03-16","order":52,"country":"Denmark","currency":"krone","amount":1,"currencyCode":"DKK","rate":3.270},{"validFor":"2026-03-16","order":52,"country":"EMU","currency":"euro","amount":1,"currencyCode":"EUR","rate":24.435},{"validFor":"2026-03-16","order":52,"country":"Hongkong","currency":"dollar","amount":1,"currencyCode":"HKD","rate":2.718},{"validFor":"2026-03-16","order":52,"country":"Hungary","currency":"forint","amount":100,"currencyCode":"HUF","rate":6.260},{"validFor":"2026-03-16","order":52,"country":"Iceland","currency":"krona","amount":100,"currencyCode":"ISK","rate":17.064},{"validFor":"2026-03-16","order":52,"country":"IMF","currency":"SDR","amount":1,"currencyCode":"XDR","rate":28.902},{"validFor":"2026-03-16","order":52,"country":"India","currency":"rupee","amount":100,"currencyCode":"INR","rate":23.063},{"validFor":"2026-03-16","order":52,"country":"Indonesia","currency":"rupiah","amount":1000,"currencyCode":"IDR","rate":1.253},{"validFor":"2026-03-16","order":52,"country":"Israel","currency":"new
+        shekel","amount":1,"currencyCode":"ILS","rate":6.832},{"validFor":"2026-03-16","order":52,"country":"Japan","currency":"yen","amount":100,"currencyCode":"JPY","rate":13.377},{"validFor":"2026-03-16","order":52,"country":"Malaysia","currency":"ringgit","amount":1,"currencyCode":"MYR","rate":5.415},{"validFor":"2026-03-16","order":52,"country":"Mexico","currency":"peso","amount":1,"currencyCode":"MXN","rate":1.197},{"validFor":"2026-03-16","order":52,"country":"New
+        Zealand","currency":"dollar","amount":1,"currencyCode":"NZD","rate":12.438},{"validFor":"2026-03-16","order":52,"country":"Norway","currency":"krone","amount":1,"currencyCode":"NOK","rate":2.191},{"validFor":"2026-03-16","order":52,"country":"Philippines","currency":"peso","amount":100,"currencyCode":"PHP","rate":35.630},{"validFor":"2026-03-16","order":52,"country":"Poland","currency":"zloty","amount":1,"currencyCode":"PLN","rate":5.725},{"validFor":"2026-03-16","order":52,"country":"Romania","currency":"leu","amount":1,"currencyCode":"RON","rate":4.796},{"validFor":"2026-03-16","order":52,"country":"Singapore","currency":"dollar","amount":1,"currencyCode":"SGD","rate":16.648},{"validFor":"2026-03-16","order":52,"country":"South
+        Africa","currency":"rand","amount":1,"currencyCode":"ZAR","rate":1.270},{"validFor":"2026-03-16","order":52,"country":"South
+        Korea","currency":"won","amount":100,"currencyCode":"KRW","rate":1.428},{"validFor":"2026-03-16","order":52,"country":"Sweden","currency":"krona","amount":1,"currencyCode":"SEK","rate":2.269},{"validFor":"2026-03-16","order":52,"country":"Switzerland","currency":"franc","amount":1,"currencyCode":"CHF","rate":27.022},{"validFor":"2026-03-16","order":52,"country":"Thailand","currency":"baht","amount":100,"currencyCode":"THB","rate":65.805},{"validFor":"2026-03-16","order":52,"country":"Turkey","currency":"lira","amount":100,"currencyCode":"TRY","rate":48.169},{"validFor":"2026-03-16","order":52,"country":"United
+        Kingdom","currency":"pound","amount":1,"currencyCode":"GBP","rate":28.280},{"validFor":"2026-03-16","order":52,"country":"USA","currency":"dollar","amount":1,"currencyCode":"USD","rate":21.284}]}'
+  recorded_at: Thu, 02 Apr 2026 20:37:10 GMT
+- request:
+    method: get
+    uri: https://api.cnb.cz/cnbapi/exrates/daily?date=2026-03-17&lang=EN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cnb.cz
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 20:37:09 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preloa                         d
+      X-Frame-Options:
+      - DENY
+      - SAMEORIGIN
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"rates":[{"validFor":"2026-03-17","order":53,"country":"Australia","currency":"dollar","amount":1,"currencyCode":"AUD","rate":15.057},{"validFor":"2026-03-17","order":53,"country":"Brazil","currency":"real","amount":1,"currencyCode":"BRL","rate":4.069},{"validFor":"2026-03-17","order":53,"country":"Canada","currency":"dollar","amount":1,"currencyCode":"CAD","rate":15.464},{"validFor":"2026-03-17","order":53,"country":"China","currency":"renminbi","amount":1,"currencyCode":"CNY","rate":3.077},{"validFor":"2026-03-17","order":53,"country":"Denmark","currency":"krone","amount":1,"currencyCode":"DKK","rate":3.270},{"validFor":"2026-03-17","order":53,"country":"EMU","currency":"euro","amount":1,"currencyCode":"EUR","rate":24.435},{"validFor":"2026-03-17","order":53,"country":"Hongkong","currency":"dollar","amount":1,"currencyCode":"HKD","rate":2.704},{"validFor":"2026-03-17","order":53,"country":"Hungary","currency":"forint","amount":100,"currencyCode":"HUF","rate":6.295},{"validFor":"2026-03-17","order":53,"country":"Iceland","currency":"krona","amount":100,"currencyCode":"ISK","rate":17.016},{"validFor":"2026-03-17","order":53,"country":"IMF","currency":"SDR","amount":1,"currencyCode":"XDR","rate":28.784},{"validFor":"2026-03-17","order":53,"country":"India","currency":"rupee","amount":100,"currencyCode":"INR","rate":22.940},{"validFor":"2026-03-17","order":53,"country":"Indonesia","currency":"rupiah","amount":1000,"currencyCode":"IDR","rate":1.248},{"validFor":"2026-03-17","order":53,"country":"Israel","currency":"new
+        shekel","amount":1,"currencyCode":"ILS","rate":6.842},{"validFor":"2026-03-17","order":53,"country":"Japan","currency":"yen","amount":100,"currencyCode":"JPY","rate":13.328},{"validFor":"2026-03-17","order":53,"country":"Malaysia","currency":"ringgit","amount":1,"currencyCode":"MYR","rate":5.407},{"validFor":"2026-03-17","order":53,"country":"Mexico","currency":"peso","amount":1,"currencyCode":"MXN","rate":1.199},{"validFor":"2026-03-17","order":53,"country":"New
+        Zealand","currency":"dollar","amount":1,"currencyCode":"NZD","rate":12.410},{"validFor":"2026-03-17","order":53,"country":"Norway","currency":"krone","amount":1,"currencyCode":"NOK","rate":2.206},{"validFor":"2026-03-17","order":53,"country":"Philippines","currency":"peso","amount":100,"currencyCode":"PHP","rate":35.578},{"validFor":"2026-03-17","order":53,"country":"Poland","currency":"zloty","amount":1,"currencyCode":"PLN","rate":5.738},{"validFor":"2026-03-17","order":53,"country":"Romania","currency":"leu","amount":1,"currencyCode":"RON","rate":4.799},{"validFor":"2026-03-17","order":53,"country":"Singapore","currency":"dollar","amount":1,"currencyCode":"SGD","rate":16.594},{"validFor":"2026-03-17","order":53,"country":"South
+        Africa","currency":"rand","amount":1,"currencyCode":"ZAR","rate":1.272},{"validFor":"2026-03-17","order":53,"country":"South
+        Korea","currency":"won","amount":100,"currencyCode":"KRW","rate":1.424},{"validFor":"2026-03-17","order":53,"country":"Sweden","currency":"krona","amount":1,"currencyCode":"SEK","rate":2.282},{"validFor":"2026-03-17","order":53,"country":"Switzerland","currency":"franc","amount":1,"currencyCode":"CHF","rate":26.947},{"validFor":"2026-03-17","order":53,"country":"Thailand","currency":"baht","amount":100,"currencyCode":"THB","rate":65.541},{"validFor":"2026-03-17","order":53,"country":"Turkey","currency":"lira","amount":100,"currencyCode":"TRY","rate":47.928},{"validFor":"2026-03-17","order":53,"country":"United
+        Kingdom","currency":"pound","amount":1,"currencyCode":"GBP","rate":28.279},{"validFor":"2026-03-17","order":53,"country":"USA","currency":"dollar","amount":1,"currencyCode":"USD","rate":21.186}]}'
+  recorded_at: Thu, 02 Apr 2026 20:37:10 GMT
+- request:
+    method: get
+    uri: https://api.cnb.cz/cnbapi/exrates/daily?date=2026-03-18&lang=EN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cnb.cz
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 20:37:09 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preloa                         d
+      X-Frame-Options:
+      - DENY
+      - SAMEORIGIN
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"rates":[{"validFor":"2026-03-18","order":54,"country":"Australia","currency":"dollar","amount":1,"currencyCode":"AUD","rate":15.003},{"validFor":"2026-03-18","order":54,"country":"Brazil","currency":"real","amount":1,"currencyCode":"BRL","rate":4.071},{"validFor":"2026-03-18","order":54,"country":"Canada","currency":"dollar","amount":1,"currencyCode":"CAD","rate":15.514},{"validFor":"2026-03-18","order":54,"country":"China","currency":"renminbi","amount":1,"currencyCode":"CNY","rate":3.096},{"validFor":"2026-03-18","order":54,"country":"Denmark","currency":"krone","amount":1,"currencyCode":"DKK","rate":3.274},{"validFor":"2026-03-18","order":54,"country":"EMU","currency":"euro","amount":1,"currencyCode":"EUR","rate":24.460},{"validFor":"2026-03-18","order":54,"country":"Hongkong","currency":"dollar","amount":1,"currencyCode":"HKD","rate":2.715},{"validFor":"2026-03-18","order":54,"country":"Hungary","currency":"forint","amount":100,"currencyCode":"HUF","rate":6.221},{"validFor":"2026-03-18","order":54,"country":"Iceland","currency":"krona","amount":100,"currencyCode":"ISK","rate":17.033},{"validFor":"2026-03-18","order":54,"country":"IMF","currency":"SDR","amount":1,"currencyCode":"XDR","rate":28.942},{"validFor":"2026-03-18","order":54,"country":"India","currency":"rupee","amount":100,"currencyCode":"INR","rate":22.899},{"validFor":"2026-03-18","order":54,"country":"Indonesia","currency":"rupiah","amount":1000,"currencyCode":"IDR","rate":1.253},{"validFor":"2026-03-18","order":54,"country":"Israel","currency":"new
+        shekel","amount":1,"currencyCode":"ILS","rate":6.855},{"validFor":"2026-03-18","order":54,"country":"Japan","currency":"yen","amount":100,"currencyCode":"JPY","rate":13.335},{"validFor":"2026-03-18","order":54,"country":"Malaysia","currency":"ringgit","amount":1,"currencyCode":"MYR","rate":5.433},{"validFor":"2026-03-18","order":54,"country":"Mexico","currency":"peso","amount":1,"currencyCode":"MXN","rate":1.199},{"validFor":"2026-03-18","order":54,"country":"New
+        Zealand","currency":"dollar","amount":1,"currencyCode":"NZD","rate":12.376},{"validFor":"2026-03-18","order":54,"country":"Norway","currency":"krone","amount":1,"currencyCode":"NOK","rate":2.221},{"validFor":"2026-03-18","order":54,"country":"Philippines","currency":"peso","amount":100,"currencyCode":"PHP","rate":35.475},{"validFor":"2026-03-18","order":54,"country":"Poland","currency":"zloty","amount":1,"currencyCode":"PLN","rate":5.726},{"validFor":"2026-03-18","order":54,"country":"Romania","currency":"leu","amount":1,"currencyCode":"RON","rate":4.801},{"validFor":"2026-03-18","order":54,"country":"Singapore","currency":"dollar","amount":1,"currencyCode":"SGD","rate":16.604},{"validFor":"2026-03-18","order":54,"country":"South
+        Africa","currency":"rand","amount":1,"currencyCode":"ZAR","rate":1.259},{"validFor":"2026-03-18","order":54,"country":"South
+        Korea","currency":"won","amount":100,"currencyCode":"KRW","rate":1.415},{"validFor":"2026-03-18","order":54,"country":"Sweden","currency":"krona","amount":1,"currencyCode":"SEK","rate":2.270},{"validFor":"2026-03-18","order":54,"country":"Switzerland","currency":"franc","amount":1,"currencyCode":"CHF","rate":26.963},{"validFor":"2026-03-18","order":54,"country":"Thailand","currency":"baht","amount":100,"currencyCode":"THB","rate":65.102},{"validFor":"2026-03-18","order":54,"country":"Turkey","currency":"lira","amount":100,"currencyCode":"TRY","rate":48.119},{"validFor":"2026-03-18","order":54,"country":"United
+        Kingdom","currency":"pound","amount":1,"currencyCode":"GBP","rate":28.318},{"validFor":"2026-03-18","order":54,"country":"USA","currency":"dollar","amount":1,"currencyCode":"USD","rate":21.278}]}'
+  recorded_at: Thu, 02 Apr 2026 20:37:10 GMT
+- request:
+    method: get
+    uri: https://api.cnb.cz/cnbapi/exrates/daily?date=2026-03-19&lang=EN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cnb.cz
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 20:37:09 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preloa                         d
+      X-Frame-Options:
+      - DENY
+      - SAMEORIGIN
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"rates":[{"validFor":"2026-03-19","order":55,"country":"Australia","currency":"dollar","amount":1,"currencyCode":"AUD","rate":14.930},{"validFor":"2026-03-19","order":55,"country":"Brazil","currency":"real","amount":1,"currencyCode":"BRL","rate":4.017},{"validFor":"2026-03-19","order":55,"country":"Canada","currency":"dollar","amount":1,"currencyCode":"CAD","rate":15.532},{"validFor":"2026-03-19","order":55,"country":"China","currency":"renminbi","amount":1,"currencyCode":"CNY","rate":3.091},{"validFor":"2026-03-19","order":55,"country":"Denmark","currency":"krone","amount":1,"currencyCode":"DKK","rate":3.280},{"validFor":"2026-03-19","order":55,"country":"EMU","currency":"euro","amount":1,"currencyCode":"EUR","rate":24.510},{"validFor":"2026-03-19","order":55,"country":"Hongkong","currency":"dollar","amount":1,"currencyCode":"HKD","rate":2.723},{"validFor":"2026-03-19","order":55,"country":"Hungary","currency":"forint","amount":100,"currencyCode":"HUF","rate":6.222},{"validFor":"2026-03-19","order":55,"country":"Iceland","currency":"krona","amount":100,"currencyCode":"ISK","rate":17.092},{"validFor":"2026-03-19","order":55,"country":"IMF","currency":"SDR","amount":1,"currencyCode":"XDR","rate":29.050},{"validFor":"2026-03-19","order":55,"country":"India","currency":"rupee","amount":100,"currencyCode":"INR","rate":22.860},{"validFor":"2026-03-19","order":55,"country":"Indonesia","currency":"rupiah","amount":1000,"currencyCode":"IDR","rate":1.256},{"validFor":"2026-03-19","order":55,"country":"Israel","currency":"new
+        shekel","amount":1,"currencyCode":"ILS","rate":6.809},{"validFor":"2026-03-19","order":55,"country":"Japan","currency":"yen","amount":100,"currencyCode":"JPY","rate":13.423},{"validFor":"2026-03-19","order":55,"country":"Malaysia","currency":"ringgit","amount":1,"currencyCode":"MYR","rate":5.413},{"validFor":"2026-03-19","order":55,"country":"Mexico","currency":"peso","amount":1,"currencyCode":"MXN","rate":1.188},{"validFor":"2026-03-19","order":55,"country":"New
+        Zealand","currency":"dollar","amount":1,"currencyCode":"NZD","rate":12.372},{"validFor":"2026-03-19","order":55,"country":"Norway","currency":"krone","amount":1,"currencyCode":"NOK","rate":2.229},{"validFor":"2026-03-19","order":55,"country":"Philippines","currency":"peso","amount":100,"currencyCode":"PHP","rate":35.452},{"validFor":"2026-03-19","order":55,"country":"Poland","currency":"zloty","amount":1,"currencyCode":"PLN","rate":5.719},{"validFor":"2026-03-19","order":55,"country":"Romania","currency":"leu","amount":1,"currencyCode":"RON","rate":4.808},{"validFor":"2026-03-19","order":55,"country":"Singapore","currency":"dollar","amount":1,"currencyCode":"SGD","rate":16.616},{"validFor":"2026-03-19","order":55,"country":"South
+        Africa","currency":"rand","amount":1,"currencyCode":"ZAR","rate":1.248},{"validFor":"2026-03-19","order":55,"country":"South
+        Korea","currency":"won","amount":100,"currencyCode":"KRW","rate":1.419},{"validFor":"2026-03-19","order":55,"country":"Sweden","currency":"krona","amount":1,"currencyCode":"SEK","rate":2.267},{"validFor":"2026-03-19","order":55,"country":"Switzerland","currency":"franc","amount":1,"currencyCode":"CHF","rate":26.867},{"validFor":"2026-03-19","order":55,"country":"Thailand","currency":"baht","amount":100,"currencyCode":"THB","rate":64.746},{"validFor":"2026-03-19","order":55,"country":"Turkey","currency":"lira","amount":100,"currencyCode":"TRY","rate":48.113},{"validFor":"2026-03-19","order":55,"country":"United
+        Kingdom","currency":"pound","amount":1,"currencyCode":"GBP","rate":28.357},{"validFor":"2026-03-19","order":55,"country":"USA","currency":"dollar","amount":1,"currencyCode":"USD","rate":21.324}]}'
+  recorded_at: Thu, 02 Apr 2026 20:37:10 GMT
+- request:
+    method: get
+    uri: https://api.cnb.cz/cnbapi/exrates/daily?date=2026-03-20&lang=EN
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.cnb.cz
+  response:
+    status:
+      code: 200
+      message: '200'
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 20:37:10 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preloa                         d
+      X-Frame-Options:
+      - DENY
+      - SAMEORIGIN
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"rates":[{"validFor":"2026-03-20","order":56,"country":"Australia","currency":"dollar","amount":1,"currencyCode":"AUD","rate":14.985},{"validFor":"2026-03-20","order":56,"country":"Brazil","currency":"real","amount":1,"currencyCode":"BRL","rate":4.031},{"validFor":"2026-03-20","order":56,"country":"Canada","currency":"dollar","amount":1,"currencyCode":"CAD","rate":15.465},{"validFor":"2026-03-20","order":56,"country":"China","currency":"renminbi","amount":1,"currencyCode":"CNY","rate":3.079},{"validFor":"2026-03-20","order":56,"country":"Denmark","currency":"krone","amount":1,"currencyCode":"DKK","rate":3.280},{"validFor":"2026-03-20","order":56,"country":"EMU","currency":"euro","amount":1,"currencyCode":"EUR","rate":24.505},{"validFor":"2026-03-20","order":56,"country":"Hongkong","currency":"dollar","amount":1,"currencyCode":"HKD","rate":2.706},{"validFor":"2026-03-20","order":56,"country":"Hungary","currency":"forint","amount":100,"currencyCode":"HUF","rate":6.244},{"validFor":"2026-03-20","order":56,"country":"Iceland","currency":"krona","amount":100,"currencyCode":"ISK","rate":17.041},{"validFor":"2026-03-20","order":56,"country":"IMF","currency":"SDR","amount":1,"currencyCode":"XDR","rate":28.807},{"validFor":"2026-03-20","order":56,"country":"India","currency":"rupee","amount":100,"currencyCode":"INR","rate":22.646},{"validFor":"2026-03-20","order":56,"country":"Indonesia","currency":"rupiah","amount":1000,"currencyCode":"IDR","rate":1.249},{"validFor":"2026-03-20","order":56,"country":"Israel","currency":"new
+        shekel","amount":1,"currencyCode":"ILS","rate":6.831},{"validFor":"2026-03-20","order":56,"country":"Japan","currency":"yen","amount":100,"currencyCode":"JPY","rate":13.353},{"validFor":"2026-03-20","order":56,"country":"Malaysia","currency":"ringgit","amount":1,"currencyCode":"MYR","rate":5.382},{"validFor":"2026-03-20","order":56,"country":"Mexico","currency":"peso","amount":1,"currencyCode":"MXN","rate":1.190},{"validFor":"2026-03-20","order":56,"country":"New
+        Zealand","currency":"dollar","amount":1,"currencyCode":"NZD","rate":12.421},{"validFor":"2026-03-20","order":56,"country":"Norway","currency":"krone","amount":1,"currencyCode":"NOK","rate":2.220},{"validFor":"2026-03-20","order":56,"country":"Philippines","currency":"peso","amount":100,"currencyCode":"PHP","rate":35.415},{"validFor":"2026-03-20","order":56,"country":"Poland","currency":"zloty","amount":1,"currencyCode":"PLN","rate":5.727},{"validFor":"2026-03-20","order":56,"country":"Romania","currency":"leu","amount":1,"currencyCode":"RON","rate":4.808},{"validFor":"2026-03-20","order":56,"country":"Singapore","currency":"dollar","amount":1,"currencyCode":"SGD","rate":16.565},{"validFor":"2026-03-20","order":56,"country":"South
+        Africa","currency":"rand","amount":1,"currencyCode":"ZAR","rate":1.254},{"validFor":"2026-03-20","order":56,"country":"South
+        Korea","currency":"won","amount":100,"currencyCode":"KRW","rate":1.413},{"validFor":"2026-03-20","order":56,"country":"Sweden","currency":"krona","amount":1,"currencyCode":"SEK","rate":2.271},{"validFor":"2026-03-20","order":56,"country":"Switzerland","currency":"franc","amount":1,"currencyCode":"CHF","rate":26.934},{"validFor":"2026-03-20","order":56,"country":"Thailand","currency":"baht","amount":100,"currencyCode":"THB","rate":64.734},{"validFor":"2026-03-20","order":56,"country":"Turkey","currency":"lira","amount":100,"currencyCode":"TRY","rate":47.854},{"validFor":"2026-03-20","order":56,"country":"United
+        Kingdom","currency":"pound","amount":1,"currencyCode":"GBP","rate":28.342},{"validFor":"2026-03-20","order":56,"country":"USA","currency":"dollar","amount":1,"currencyCode":"USD","rate":21.204}]}'
+  recorded_at: Thu, 02 Apr 2026 20:37:11 GMT
+recorded_with: VCR 6.4.0
