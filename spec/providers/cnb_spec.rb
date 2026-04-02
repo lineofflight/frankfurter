@@ -21,7 +21,7 @@ module Providers
     it "fetches rates with date range" do
       provider.fetch(since: Date.new(2026, 3, 16), upto: Date.new(2026, 3, 20)).import
 
-      _(count_unique_dates).must_be(:>=, 1)
+      _(count_unique_dates).must_be(:>=, 3)
     end
 
     it "stores multiple currencies per date" do
