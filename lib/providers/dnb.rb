@@ -51,6 +51,10 @@ module Providers
       def key = "DNB"
       def name = "Danmarks Nationalbank"
       def earliest_date = EARLIEST_DATE
+
+      def backfill(range: 365)
+        super
+      end
     end
 
     def fetch(since: nil, upto: nil)
@@ -76,7 +80,7 @@ module Providers
       response = Net::HTTP.post(uri, body, "Content-Type" => "application/json")
       @dataset = parse(response.body)
       self
-    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError, Oj::ParseError
+    rescue Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
       @dataset = []
       self
     end
