@@ -46,7 +46,7 @@ module Providers
 
     class << self
       def key = "BCU"
-      def name = "Central Bank of Uruguay"
+      def name = "Banco Central del Uruguay"
       def earliest_date = EARLIEST_DATE
 
       def backfill(range: 365)

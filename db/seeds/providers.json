@@ -334,7 +334,7 @@
   },
   {
     "key": "BCU",
-    "name": "Central Bank of Uruguay",
+    "name": "Banco Central del Uruguay",
     "description": "Daily exchange rates for 27 currencies against the Uruguayan peso",
     "data_url": "https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones",
     "terms_url": "https://www.bcu.gub.uy/Paginas/Condiciones-de-uso.aspx",
