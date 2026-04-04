@@ -322,5 +322,14 @@
     "terms_url": "https://www.cnb.cz/en/footer/general-terms-and-conditions/",
     "publish_time": 13,
     "publish_days": "1-5"
+  },
+  {
+    "key": "DNB",
+    "name": "Danmarks Nationalbank",
+    "description": "Daily exchange rates for 30 currencies against the Danish krone",
+    "data_url": "https://www.nationalbanken.dk/en/what-we-do/stable-prices-monetary-policy-and-the-danish-economy/exchange-rates",
+    "terms_url": null,
+    "publish_time": 8,
+    "publish_days": "1-5"
   }
 ]
