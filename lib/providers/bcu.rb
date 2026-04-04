@@ -8,7 +8,7 @@ require "providers/base"
 module Providers
   # Central Bank of Uruguay (Banco Central del Uruguay).
   # Fetches official exchange rates in UYU via SOAP web service.
-  # Rates are stored with base=quote_currency, quote=UYU.
+  # Rates are stored with base=foreign_currency, quote=UYU.
   class BCU < Base
     ENDPOINT = URI("https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones")
     EARLIEST_DATE = Date.new(2000, 1, 1)
@@ -19,8 +19,6 @@ module Providers
       "1111" => "EUR",  # EURO
       "1000" => "BRL",  # REAL
       "0500" => "ARS",  # PESO ARGENTINO
-      "0501" => "ARS",  # PESO ARG. BILLETE
-      "1001" => "BRL",  # REAL BILLETE
       "2309" => "CAD",  # DOLAR CANADIENSE
       "1300" => "CLP",  # PESO CHILENO
       "4150" => "CNY",  # YUAN RENMIMBI
@@ -62,7 +60,7 @@ module Providers
 
       @dataset = []
       currencies = CURRENCY_MAPPING.values.uniq
-      currencies.each_with_index do |iso_code, index|
+      currencies.each do |iso_code|
         body = soap_request(iso_code, start_date, end_date)
         response = Net::HTTP.start(ENDPOINT.host, ENDPOINT.port, use_ssl: true) do |http|
           req = Net::HTTP::Post.new(ENDPOINT)
@@ -70,8 +68,8 @@ module Providers
           req.body = body
           http.request(req)
         end
-        @dataset.concat(parse(response.body, iso_code))
-        sleep(0.1) unless index == currencies.size - 1  # Be polite to the API, but not after last request
+        @dataset.concat(parse(response.body))
+        sleep(1)
       end
 
       self
@@ -80,7 +78,7 @@ module Providers
       self
     end
 
-    def parse(xml, iso_code)
+    def parse(xml)
       doc = Ox.load(xml)
       doc.locate("*/datoscotizaciones.dato").filter_map do |dato|
         date_str = dato.locate("Fecha").first&.text

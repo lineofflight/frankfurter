@@ -105,7 +105,7 @@ module Providers
         </SOAP-ENV:Envelope>
       XML
 
-      records = provider.parse(xml, "USD")
+      records = provider.parse(xml)
 
       _(records.length).must_equal(2)
       _(records[0][:base]).must_equal("USD")
@@ -159,7 +159,7 @@ module Providers
         </SOAP-ENV:Envelope>
       XML
 
-      records = provider.parse(xml, "USD")
+      records = provider.parse(xml)
 
       _(records.length).must_equal(1)
       _(records.first[:base]).must_equal("USD")
@@ -196,7 +196,7 @@ module Providers
         </SOAP-ENV:Envelope>
       XML
 
-      records = provider.parse(xml, "USD")
+      records = provider.parse(xml)
 
       _(records.first[:rate]).must_equal(39.0)
     end
@@ -232,7 +232,7 @@ module Providers
         </SOAP-ENV:Envelope>
       XML
 
-      records = provider.parse(xml, "USD")
+      records = provider.parse(xml)
 
       _(records.length).must_equal(0)
     end
