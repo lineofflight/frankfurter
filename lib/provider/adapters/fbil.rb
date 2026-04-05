@@ -23,8 +23,7 @@ class Provider
         )
 
         response = Net::HTTP.get(url)
-        @dataset = parse(response)
-        @dataset
+        parse(response)
       end
 
       def parse(json)

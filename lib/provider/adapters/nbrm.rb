@@ -14,13 +14,13 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        @dataset = []
+        dataset = []
 
         each_chunk(after, end_date) do |chunk_start, chunk_end|
-          @dataset.concat(fetch_rates(chunk_start, chunk_end))
+          dataset.concat(fetch_rates(chunk_start, chunk_end))
         end
 
-        @dataset
+        dataset
       end
 
       def parse(json)

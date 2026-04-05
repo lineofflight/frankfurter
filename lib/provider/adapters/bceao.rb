@@ -47,7 +47,7 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        @dataset = []
+        dataset = []
 
         first = true
         after.upto(end_date) do |date|
@@ -57,10 +57,10 @@ class Provider
           sleep(1) unless first
           first = false
 
-          @dataset.concat(fetch_date(date))
+          dataset.concat(fetch_date(date))
         end
 
-        @dataset
+        dataset
       end
 
       def parse(html, date:)

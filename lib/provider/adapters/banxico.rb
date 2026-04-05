@@ -41,7 +41,7 @@ class Provider
           http.request(request)
         end
 
-        @dataset = parse(response.body)
+        parse(response.body)
       end
 
       def parse(json)

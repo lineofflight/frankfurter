@@ -16,9 +16,9 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         csv = Net::HTTP.get(URI(CSV_URL))
-        @dataset = parse(csv)
-        @dataset = @dataset.select { |r| r[:date] >= after } if after
-        @dataset
+        dataset = parse(csv)
+        dataset = dataset.select { |r| r[:date] >= after } if after
+        dataset
       end
 
       def parse(csv)

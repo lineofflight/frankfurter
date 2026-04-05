@@ -12,7 +12,9 @@ class Provider
     class BOC < Adapter
       BASE_URL = "https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json"
       def fetch(after: nil, upto: nil)
-        @dataset = fetch_rates(start_date: after)
+        params = { start_date: after }
+        params[:end_date] = upto if upto
+        fetch_rates(**params)
       end
 
       def parse(json)

@@ -11,8 +11,16 @@ class Provider
     class NBU < Adapter
       URL = URI("https://bank.gov.ua/NBU_Exchange/exchange_site")
       def fetch(after: nil, upto: nil)
-        @dataset = fetch_rates(after, Date.today)
-        @dataset
+        url = URL.dup
+        url.query = URI.encode_www_form(
+          start: after.strftime("%Y%m%d"),
+          end: (upto || Date.today).strftime("%Y%m%d"),
+          sort: "exchangedate",
+          order: "asc",
+          json: "",
+        )
+
+        parse(Net::HTTP.get(url))
       end
 
       def parse(json)
@@ -31,21 +39,6 @@ class Provider
 
           { date:, base: iso, quote: "UAH", rate: rate / units }
         end
-      end
-
-      private
-
-      def fetch_rates(start_date, end_date)
-        url = URL.dup
-        url.query = URI.encode_www_form(
-          start: start_date.strftime("%Y%m%d"),
-          end: end_date.strftime("%Y%m%d"),
-          sort: "exchangedate",
-          order: "asc",
-          json: "",
-        )
-
-        parse(Net::HTTP.get(url))
       end
     end
   end

@@ -14,8 +14,9 @@ class Provider
       DYNAMIC_URL = URI("https://www.cbr.ru/scripts/XML_dynamic.asp")
       def fetch(after: nil, upto: nil)
         currencies = fetch_currency_list
-        @dataset = currencies.flat_map do |id, code, nominal|
-          fetch_dynamic(id, code, nominal, after, Date.today)
+        end_date = upto || Date.today
+        currencies.flat_map do |id, code, nominal|
+          fetch_dynamic(id, code, nominal, after, end_date)
         end
       end
 

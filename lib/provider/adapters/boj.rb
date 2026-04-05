@@ -35,7 +35,7 @@ class Provider
 
         response = Net::HTTP.get(url)
         raw = parse(response)
-        @dataset = raw.select { |r| r[:date].between?(effective_after, effective_upto) }
+        raw.select { |r| r[:date].between?(effective_after, effective_upto) }
       end
 
       def parse(json)

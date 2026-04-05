@@ -20,13 +20,13 @@ class Provider
         params[:endPeriod] = upto.to_s if upto
         url.query = URI.encode_www_form(params)
 
-        @dataset = []
+        dataset = []
         stream_csv(url) do |row|
           record = parse_row(row)
-          @dataset << record if record
+          dataset << record if record
         end
 
-        @dataset
+        dataset
       end
 
       def parse(csv)

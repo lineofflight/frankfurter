@@ -15,10 +15,9 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         currencies = current_currencies
-        @dataset = currencies.flat_map do |cur_id, iso, scale|
-          chunked_dynamics(cur_id, iso, scale, after, Date.today)
+        currencies.flat_map do |cur_id, iso, scale|
+          chunked_dynamics(cur_id, iso, scale, after, upto || Date.today)
         end
-        @dataset
       end
 
       private

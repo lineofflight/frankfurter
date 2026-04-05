@@ -50,7 +50,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
 
-        @dataset = []
+        dataset = []
         currencies = CURRENCY_MAPPING.values.uniq
         currencies.each do |iso_code|
           body = soap_request(iso_code, after, end_date)
@@ -60,11 +60,11 @@ class Provider
             req.body = body
             http.request(req)
           end
-          @dataset.concat(parse(response.body))
+          dataset.concat(parse(response.body))
           sleep(1)
         end
 
-        @dataset
+        dataset
       end
 
       def parse(xml)

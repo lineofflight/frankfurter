@@ -40,12 +40,12 @@ class Provider
       }.freeze
 
       def fetch(after: nil, upto: nil)
-        @dataset = fetch_table
+        dataset = fetch_table
 
-        @dataset = @dataset.select { |r| r[:date] >= after } if after
-        @dataset = @dataset.select { |r| r[:date] <= upto } if upto
+        dataset = dataset.select { |r| r[:date] >= after } if after
+        dataset = dataset.select { |r| r[:date] <= upto } if upto
 
-        @dataset
+        dataset
       end
 
       def parse(json)

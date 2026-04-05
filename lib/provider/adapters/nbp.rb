@@ -13,16 +13,16 @@ class Provider
       TABLE_A_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
       TABLE_B_URL = "https://api.nbp.pl/api/exchangerates/tables/B"
       def fetch(after: nil, upto: nil)
-        end_date = Date.today
-        @dataset = []
+        end_date = upto || Date.today
+        dataset = []
 
         [TABLE_A_URL, TABLE_B_URL].each do |table_url|
           each_chunk(after, end_date) do |chunk_start, chunk_end|
-            @dataset.concat(fetch_rates(table_url, chunk_start, chunk_end))
+            dataset.concat(fetch_rates(table_url, chunk_start, chunk_end))
           end
         end
 
-        @dataset
+        dataset
       end
 
       def parse(json)

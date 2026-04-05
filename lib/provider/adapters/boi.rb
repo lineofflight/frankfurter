@@ -22,7 +22,7 @@ class Provider
         )
 
         response = Net::HTTP.get(url)
-        @dataset = parse(response)
+        parse(response)
       end
 
       def parse(csv)

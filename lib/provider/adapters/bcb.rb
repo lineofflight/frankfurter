@@ -16,16 +16,16 @@ class Provider
       CURRENCIES = ["AUD", "CAD", "CHF", "DKK", "EUR", "GBP", "JPY", "NOK", "SEK", "USD"].freeze
 
       def fetch(after: nil, upto: nil)
-        @dataset = []
+        dataset = []
         date_from = Date.parse(after.to_s)
         date_upto = Date.parse((upto || Date.today).to_s)
 
         CURRENCIES.each do |currency|
           sleep(0.2)
-          @dataset.concat(fetch_currency(currency, date_from, date_upto))
+          dataset.concat(fetch_currency(currency, date_from, date_upto))
         end
 
-        @dataset
+        dataset
       end
 
       def parse(json, currency)

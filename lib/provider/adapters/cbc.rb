@@ -43,7 +43,7 @@ class Provider
         data = JSON.parse(response)
         rows = data.dig("data", "dataSets") || []
 
-        @dataset = parse(rows, after, end_date)
+        parse(rows, after, end_date)
       end
 
       def parse(rows, start_date = nil, end_date = nil)

@@ -25,7 +25,7 @@ class Provider
           http.request(Net::HTTP::Get.new(uri))
         end
 
-        @dataset = parse(response.body)
+        parse(response.body)
       end
 
       def parse(json)

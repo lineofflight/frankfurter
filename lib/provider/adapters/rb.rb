@@ -20,7 +20,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         uri = URI("#{BASE_URL}/#{after}/#{upto || Date.today}")
         response = Net::HTTP.get(uri)
-        @dataset = parse(response)
+        parse(response)
       end
 
       def parse(json)

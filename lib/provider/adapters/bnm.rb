@@ -18,7 +18,7 @@ class Provider
         start_date = Date.parse(after.to_s)
         end_date = upto || Date.today
         currencies = fetch_currencies
-        @dataset = currencies.flat_map { |code| fetch_currency(code, start_date, end_date) }
+        currencies.flat_map { |code| fetch_currency(code, start_date, end_date) }
       end
 
       private

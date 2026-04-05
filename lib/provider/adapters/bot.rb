@@ -25,7 +25,7 @@ class Provider
           "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
         })
 
-        @dataset = parse(response.body)
+        parse(response.body)
       end
 
       def parse(html)

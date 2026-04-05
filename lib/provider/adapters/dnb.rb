@@ -67,7 +67,7 @@ class Provider
 
         uri = URI(URL)
         response = Net::HTTP.post(uri, body, "Content-Type" => "application/json")
-        @dataset = parse(response.body)
+        parse(response.body)
       end
 
       def parse(csv)

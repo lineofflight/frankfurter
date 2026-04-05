@@ -13,13 +13,13 @@ class Provider
       URL = "https://api.cnb.cz/cnbapi/exrates/daily-year"
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        @dataset = []
+        dataset = []
 
         (after.year..end_date.year).each do |year|
-          @dataset.concat(fetch_year(year))
+          dataset.concat(fetch_year(year))
         end
 
-        @dataset.select! { |r| r[:date].between?(after, end_date) }
+        dataset.select! { |r| r[:date].between?(after, end_date) }
       end
 
       def parse(json)

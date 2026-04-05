@@ -15,38 +15,10 @@ class Provider
       PRECIOUS_METALS = ["XAU", "XAG"].freeze
 
       def fetch(after: nil, upto: nil)
-        @dataset = chunked_range(after, Date.today, currency_codes)
-      end
-
-      private
-
-      def latest_rates
-        response = request("ExchangeRatesLatest", <<~XML)
-          <ExchangeRatesLatest xmlns="http://www.cba.am/" />
-        XML
-
-        result = response.locate("soap:Envelope/soap:Body/ExchangeRatesLatestResponse/ExchangeRatesLatestResult").first
-        return [] unless result
-
-        current_date = result.locate("CurrentDate").first
-        return [] unless current_date
-
-        date = Date.parse(current_date.text)
-        result.locate("Rates/ExchangeRate").filter_map do |node|
-          iso = node.locate("ISO").first&.text
-          next unless iso
-
-          { date:, base: iso, quote: "AMD", rate: extract_rate(node) }
-        end
-      end
-
-      def currency_codes
-        latest_rates.map { |r| r[:base] }.join(",")
-      end
-
-      def chunked_range(start_date, end_date, iso_codes)
+        end_date = upto || Date.today
+        iso_codes = current_currency_codes
         records = []
-        chunk_start = start_date
+        chunk_start = after
 
         while chunk_start <= end_date
           chunk_end = [chunk_start + CHUNK_SIZE - 1, end_date].min
@@ -55,6 +27,21 @@ class Provider
         end
 
         records
+      end
+
+      private
+
+      def current_currency_codes
+        response = request("ExchangeRatesLatest", <<~XML)
+          <ExchangeRatesLatest xmlns="http://www.cba.am/" />
+        XML
+
+        result = response.locate("soap:Envelope/soap:Body/ExchangeRatesLatestResponse/ExchangeRatesLatestResult").first
+        return "" unless result
+
+        result.locate("Rates/ExchangeRate").filter_map do |node|
+          node.locate("ISO").first&.text
+        end.join(",")
       end
 
       def range(start_date, end_date, iso_codes)

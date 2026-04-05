@@ -92,18 +92,18 @@ class Provider
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
 
-        @dataset = []
+        dataset = []
         cursor = Date.new(after.year, after.month, 1)
 
         while cursor <= end_date
           last_day = Date.new(cursor.year, cursor.month, -1)
           tsv = fetch_month(last_day)
-          @dataset.concat(parse(tsv))
+          dataset.concat(parse(tsv))
           cursor >>= 1
         end
 
-        @dataset = @dataset.select { |r| r[:date] >= after } if after
-        @dataset
+        dataset = dataset.select { |r| r[:date] >= after } if after
+        dataset
       end
 
       def parse(tsv)

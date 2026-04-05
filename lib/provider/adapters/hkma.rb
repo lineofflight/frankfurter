@@ -44,8 +44,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
 
-        @dataset = fetch_pages(after, end_date)
-        @dataset
+        fetch_pages(after, end_date)
       end
 
       def parse(records)

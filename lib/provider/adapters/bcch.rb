@@ -30,17 +30,17 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        @dataset = []
+        dataset = []
         params = {}
         params[:firstdate] = after.to_s if after
         params[:lastdate] = (upto || Date.today).to_s if after
 
         SERIES.each do |series_id, base|
           sleep(0.2)
-          @dataset.concat(fetch_series(series_id, base, **params))
+          dataset.concat(fetch_series(series_id, base, **params))
         end
 
-        @dataset
+        dataset
       end
 
       def parse(json, base)

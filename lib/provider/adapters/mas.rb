@@ -47,17 +47,17 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        @dataset = []
+        dataset = []
 
         each_year(after, end_date) do |start_month, start_year, end_month, end_year|
           csv = download_csv(start_month, start_year, end_month, end_year)
-          @dataset.concat(parse(csv))
+          dataset.concat(parse(csv))
           sleep(1)
         end
 
-        @dataset.select! { |r| r[:date] >= after } if after
-        @dataset.select! { |r| r[:date] <= end_date }
-        @dataset
+        dataset.select! { |r| r[:date] >= after } if after
+        dataset.select! { |r| r[:date] <= end_date }
+        dataset
       end
 
       def parse(csv)

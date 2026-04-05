@@ -12,7 +12,7 @@ class Provider
       URL = "https://nbg.gov.ge/gw/api/ct/monetarypolicy/currencies/"
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        @dataset = []
+        dataset = []
 
         first = true
         (after..end_date).each do |date|
@@ -21,10 +21,10 @@ class Provider
           sleep(0.2) unless first
           first = false
 
-          @dataset.concat(fetch_date(date))
+          dataset.concat(fetch_date(date))
         end
 
-        @dataset
+        dataset
       end
 
       def parse(json)

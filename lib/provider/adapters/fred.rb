@@ -44,16 +44,16 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        @dataset = []
+        dataset = []
         params = {}
         params[:observation_start] = after.to_s if after
 
         SERIES.each do |series_id, (quote, series_base)|
           sleep(0.2)
-          @dataset.concat(fetch_series(series_id, quote, series_base, **params))
+          dataset.concat(fetch_series(series_id, quote, series_base, **params))
         end
 
-        @dataset
+        dataset
       end
 
       private

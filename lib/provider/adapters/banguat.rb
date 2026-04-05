@@ -26,7 +26,7 @@ class Provider
           http.request(req)
         end
 
-        @dataset = parse(response.body)
+        parse(response.body)
       end
 
       def parse(xml)

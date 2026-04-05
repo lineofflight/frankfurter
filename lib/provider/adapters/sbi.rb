@@ -64,7 +64,7 @@ class Provider
         xml9 = fetch_group(after, end_date, 9)
         xml7 = fetch_group(after, end_date, 7)
 
-        @dataset = parse(xml9, GROUP9_CURRENCIES) + parse(xml7, GROUP7_CURRENCIES)
+        parse(xml9, GROUP9_CURRENCIES) + parse(xml7, GROUP7_CURRENCIES)
       end
 
       def parse(xml, currency_map = GROUP9_CURRENCIES.merge(GROUP7_CURRENCIES))
