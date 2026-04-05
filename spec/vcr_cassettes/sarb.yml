@@ -1,0 +1,949 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCX135D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:09 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Rand per US Dollar","Description":"Weighted
+        average of the banks'' daily rates at approximately 10:30 am. Weights are
+        based on the banks'' foreign exchange transactions.","Value":17.1302,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Rand
+        per US Dollar","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":17.0435,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Rand
+        per US Dollar","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":16.8643,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Rand
+        per US Dollar","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":16.9333,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:09 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCZ001D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:09 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Rand per British Pound","Description":"Weighted
+        average of the banks'' daily rates at approximately 10:30 am. Weights are
+        based on the banks'' foreign exchange transactions.","Value":22.8173,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Rand
+        per British Pound","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":22.7334,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Rand
+        per British Pound","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":22.6345,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Rand
+        per British Pound","Description":"Weighted average of the banks'' daily rates
+        at approximately 10:30 am. Weights are based on the banks'' foreign exchange
+        transactions.","Value":22.7008,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:10 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCZ002D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:11 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Rand per Euro","Description":"Weighted
+        average of the banks'' daily rates at approximately 10:30 am. Weights are
+        based on the banks'' foreign exchange transactions.","Value":19.7408,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Rand
+        per Euro","Description":"Weighted average of the banks'' daily rates at approximately
+        10:30 am. Weights are based on the banks'' foreign exchange transactions.","Value":19.6903,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Rand
+        per Euro","Description":"Weighted average of the banks'' daily rates at approximately
+        10:30 am. Weights are based on the banks'' foreign exchange transactions.","Value":19.5863,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Rand
+        per Euro","Description":"Weighted average of the banks'' daily rates at approximately
+        10:30 am. Weights are based on the banks'' foreign exchange transactions.","Value":19.6299,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:10 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB080D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:11 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Australia: Dollar per
+        Rand","Description":"Weighted average of the banks daily rates at approximately
+        10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.0847,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Australia:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0846,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Australia:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0849,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Australia:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0847,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:11 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB051D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:12 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Botswana: Pula per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.8008,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Botswana:
+        Pula per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.8026,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Botswana:
+        Pula per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.8062,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Botswana:
+        Pula per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.8035,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:12 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB036D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:12 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Brazil: Real per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.3057,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Brazil:
+        Real per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3067,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Brazil:
+        Real per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3103,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Brazil:
+        Real per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3090,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:13 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB031D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:13 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Canada: Dollar per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.0808,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Canada:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0812,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Canada:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0817,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Canada:
+        Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.0812,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:13 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB121D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:13 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"China: Yuan per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.4034,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"China:
+        Yuan per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.4051,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"China:
+        Yuan per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.4090,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"China:
+        Yuan per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.4068,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:14 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB003D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:15 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Denmark: Krone per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.3785,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Denmark:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3795,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Denmark:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3815,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Denmark:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.3806,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:15 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB122D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:16 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Hong Kong: Dollar per
+        Rand","Description":"Weighted average of the banks daily rates at approximately
+        10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.4573,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Hong
+        Kong: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.4590,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Hong
+        Kong: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.4637,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Hong
+        Kong: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.4626,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:16 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB123D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:16 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"India: Rupee per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":5.5297,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"India:
+        Rupee per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":5.5231,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"India:
+        Rupee per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":5.5688,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"India:
+        Rupee per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":5.5400,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:16 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB094D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:17 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Israel: Shekel per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.1837,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Israel:
+        Shekel per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1835,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Israel:
+        Shekel per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1847,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Israel:
+        Shekel per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1843,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:17 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB120D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:18 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Japan: Yen per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":9.3324,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Japan:
+        Yen per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":9.3581,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Japan:
+        Yen per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":9.4160,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Japan:
+        Yen per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":9.3617,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:18 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB059D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:18 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Kenya: Schilling per
+        Rand","Description":"Kenyan Schilling against the rand","Value":7.5890,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Kenya:
+        Schilling per Rand","Description":"Kenyan Schilling against the rand","Value":7.6100,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Kenya:
+        Schilling per Rand","Description":"Kenyan Schilling against the rand","Value":7.6849,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Kenya:
+        Schilling per Rand","Description":"Kenyan Schilling against the rand","Value":7.6595,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:19 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB063D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:20 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Malawi: Kwacha per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":101.2256,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Malawi:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":101.7404,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Malawi:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":102.8211,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Malawi:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":102.4023,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:20 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB081D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:20 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"New Zealand: Dollar
+        per Rand","Description":"Weighted average of the banks daily rates at approximately
+        10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.1011,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"New
+        Zealand: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1014,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"New
+        Zealand: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1017,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"New
+        Zealand: Dollar per Rand","Description":"Weighted average of the banks daily
+        rates at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":0.1013,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:20 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB013D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:21 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Norway: Krone per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.5645,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Norway:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5687,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Norway:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5757,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Norway:
+        Krone per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5743,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:21 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB015D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:21 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Sweden: Krona per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":0.5503,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Sweden:
+        Krona per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5504,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Sweden:
+        Krona per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5513,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Sweden:
+        Krona per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.5516,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:22 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB016D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:23 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Switzerland: Franc per
+        Rand","Description":"Weighted average of the banks daily rates at approximately
+        10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.0465,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Switzerland:
+        Franc per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.0465,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Switzerland:
+        Franc per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.0468,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Switzerland:
+        Franc per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":0.0465,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:23 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB126D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:23 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Taiwan: NT Dollar per
+        Rand","Description":"Weighted average of the banks daily rates at approximately
+        10:30 am. Weights are based on the banks foreign exchange transactions.","Value":1.8664,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Taiwan:
+        NT Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.8751,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Taiwan:
+        NT Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.8945,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Taiwan:
+        NT Dollar per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.8898,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:24 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB115D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:25 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Thailand: Baht per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":1.9188,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Thailand:
+        Baht per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":1.9271,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Thailand:
+        Baht per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":1.9346,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Thailand:
+        Baht per Rand","Description":"Weighted average of the banks daily rates at
+        approximately 10:30 am. Weights are based on the banks foreign exchange transactions.","Value":1.9255,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:24 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB071D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:25 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"Zambia: Kwacha per Rand","Description":"Weighted
+        average of the banks daily rates at approximately 10:30 am. Weights are based
+        on the banks foreign exchange transactions.","Value":1.1048,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"Zambia:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.0987,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"Zambia:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.1252,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"Zambia:
+        Kwacha per Rand","Description":"Weighted average of the banks daily rates
+        at approximately 10:30 am. Weights are based on the banks foreign exchange
+        transactions.","Value":1.1235,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:25 GMT
+- request:
+    method: get
+    uri: https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations/EXCB118D/2026-03-23T00:00:00/2026-03-27T00:00:00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - custom.resbank.co.za
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 05 Apr 2026 00:34:26 GMT
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"Period":"2026-03-27T00:00:00","Timeseries":"South Korea: Won per
+        Rand","Description":"Weighted average of daily rates at approximately 10:30
+        am.","Value":87.9759,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-26T00:00:00","Timeseries":"South
+        Korea: Won per Rand","Description":"Weighted average of daily rates at approximately
+        10:30 am.","Value":88.3183,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-25T00:00:00","Timeseries":"South
+        Korea: Won per Rand","Description":"Weighted average of daily rates at approximately
+        10:30 am.","Value":88.8493,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"},{"Period":"2026-03-24T00:00:00","Timeseries":"South
+        Korea: Won per Rand","Description":"Weighted average of daily rates at approximately
+        10:30 am.","Value":88.3794,"FormatNumber":"0.0000","FormatDate":"yyyy-MM-dd"}]'
+  recorded_at: Sun, 05 Apr 2026 00:34:26 GMT
+recorded_with: VCR 6.4.0
