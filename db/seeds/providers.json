@@ -290,6 +290,16 @@
     "coverage_start": "1993-01-05"
   },
   {
+    "key": "SARB",
+    "name": "South African Reserve Bank",
+    "description": "Daily weighted-average exchange rates for 24 currencies against the South African rand",
+    "data_url": "https://custom.resbank.co.za/SarbWebApi/WebIndicators/HistoricalExchangeRatesDaily",
+    "terms_url": null,
+    "publish_time": 9,
+    "publish_days": "1-5",
+    "coverage_start": "2000-01-01"
+  },
+  {
     "key": "SBI",
     "name": "Seðlabanki Íslands",
     "description": "Daily exchange rates for 30+ currencies against the Icelandic króna",
