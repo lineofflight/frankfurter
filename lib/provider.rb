@@ -47,6 +47,7 @@ class Provider < Sequel::Model(:providers)
       log("imported #{inserted} rates")
       next if inserted.zero?
 
+      Cache.purge
       db.run("PRAGMA optimize")
     end
   rescue Adapters::Adapter::ApiKeyMissing

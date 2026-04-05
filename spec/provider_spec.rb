@@ -102,6 +102,17 @@ describe Provider do
       _(Rate.where(provider: provider.key, quote: "XDR").count).must_equal(0)
     end
 
+    it "purges cache when new rates are inserted" do
+      cache_purged = false
+      Cache.stub(:purge, -> { cache_purged = true }) do
+        provider.stub(:adapter, adapter) do
+          provider.backfill
+        end
+      end
+
+      _(cache_purged).must_equal(true)
+    end
+
     it "does not purge cache when no new rates are inserted" do
       provider.stub(:adapter, adapter) do
         provider.backfill
