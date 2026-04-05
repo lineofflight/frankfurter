@@ -388,5 +388,15 @@
     "publish_time": 15,
     "publish_days": "1-5",
     "coverage_start": "2000-01-01"
+  },
+  {
+    "key": "MAS",
+    "name": "Monetary Authority of Singapore",
+    "description": "Daily exchange rates for 20 currencies against the Singapore dollar",
+    "data_url": "https://eservices.mas.gov.sg/statistics/msb/ExchangeRates.aspx",
+    "terms_url": null,
+    "publish_time": 10,
+    "publish_days": "1-5",
+    "coverage_start": "1988-01-01"
   }
 ]
