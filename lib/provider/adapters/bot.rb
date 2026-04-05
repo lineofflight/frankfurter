@@ -17,7 +17,7 @@ class Provider
 
       class << self
         def api_key = ENV["BOT_API_KEY"] || raise(ApiKeyMissing)
-        def backfill_range = 365
+        def backfill_range = 90
       end
 
       def fetch(after: nil, upto: nil)
