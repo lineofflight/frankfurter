@@ -30,6 +30,7 @@ class Provider < Sequel::Model(:providers)
   end
 
   def last_synced
+    # There seems to be no Sequel-level way to make the aggregate auto-cast.
     date = Rate.where(provider: key).max(:date)
     Date.parse(date) if date
   end
