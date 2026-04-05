@@ -8,8 +8,8 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # South African Reserve Bank. Publishes daily weighted-average exchange rates
-    # for 24 currencies against the South African rand. Mixed quoting: USD, GBP, EUR
-    # are quoted as foreign currency per ZAR; others are quoted as ZAR per foreign currency.
+    # for 24 currencies. USD, GBP, EUR are quoted as ZAR per foreign unit (foreign
+    # base); all others as foreign per ZAR (ZAR base).
     class SARB < Adapter
       BASE_URL = "https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations"
 
@@ -45,8 +45,8 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         @dataset = []
-        start_date = after&.strftime("%Y-%m-%dT00:00:00")
-        end_date = (upto || Date.today).strftime("%Y-%m-%dT00:00:00")
+        start_date = after.to_s
+        end_date = (upto || Date.today).to_s
 
         SERIES.each do |code, (base, quote)|
           sleep(0.2)
@@ -77,9 +77,6 @@ class Provider
         url = URI("#{BASE_URL}/#{code}/#{start_date}/#{end_date}")
         response = Net::HTTP.get(url)
         parse(response, base:, quote:)
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Oj::ParseError => e
-        warn("SARB #{code}: #{e.message}")
-        []
       end
     end
   end
