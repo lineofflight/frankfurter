@@ -15,7 +15,7 @@ class Provider
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
 
       class << self
-        def backfill_range = 90
+        def backfill_range = 30
       end
 
       def fetch(after: nil, upto: nil)
@@ -25,6 +25,7 @@ class Provider
           "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
         })
 
+        sleep(2)
         parse(response.body)
       end
 
