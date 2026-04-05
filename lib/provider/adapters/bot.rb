@@ -17,7 +17,7 @@ class Provider
 
       class << self
         def api_key = ENV["BOT_API_KEY"] || raise(ApiKeyMissing)
-        def backfill_range = 90
+        def backfill_range = 30 # API enforces max 31-day period per request
       end
 
       def fetch(after: nil, upto: nil)

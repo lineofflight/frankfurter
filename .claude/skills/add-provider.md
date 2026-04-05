@@ -64,3 +64,5 @@ APP_ENV=test bundle exec rake rubocop                 # No lint issues
 bundle exec rake db:seed                              # Provider appears in seed data
 bundle exec rake backfill[<key>]                      # Live backfill works
 ```
+
+**Dry-run the backfill before shipping.** VCR tests only cover narrow date ranges. A real backfill exercises chunked iteration, API rate limits, and date range constraints that specs won't catch. Test at least one full `backfill_range` chunk against the live API to confirm the adapter works end-to-end — especially to verify the API's maximum allowed date range matches your `backfill_range` setting.
