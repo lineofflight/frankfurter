@@ -21,6 +21,7 @@ docker run -d -p 8080:8080 \
   -e DATABASE_URL=sqlite:///app/data/frankfurter.sqlite3 \
   -e FRED_API_KEY=your_key \
   -e TCMB_API_KEY=your_key \
+  -e BOT_API_KEY=your_key \
   -v ./data:/app/data \
   --pull always \
   lineofflight/frankfurter
@@ -28,10 +29,11 @@ docker run -d -p 8080:8080 \
 
 Without a mounted volume, the database is ephemeral and some endpoints may return empty data until their initial backfill completes.
 
-Two data providers require API keys. Both are free and optional:
+Some data providers require API keys. All are free and optional:
 
 - `FRED_API_KEY` — Federal Reserve data. Register at [fred.stlouisfed.org](https://fred.stlouisfed.org/docs/api/api_key.html).
 - `TCMB_API_KEY` — Turkish Central Bank data. Register at [evds3.tcmb.gov.tr](https://evds3.tcmb.gov.tr).
+- `BOT_API_KEY` — Bank of Thailand data. Register at [portal.api.bot.or.th](https://portal.api.bot.or.th).
 
 ## Contributing
 

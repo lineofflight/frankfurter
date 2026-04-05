@@ -260,6 +260,16 @@
     "coverage_start": "1993-01-04"
   },
   {
+    "key": "BOT",
+    "name": "Bank of Thailand",
+    "description": "Daily average commercial bank exchange rates for 19 currencies against the Thai baht",
+    "data_url": "https://www.bot.or.th/en/statistics/exchange-rate.html",
+    "terms_url": null,
+    "publish_time": 11,
+    "publish_days": "1-5",
+    "coverage_start": "2002-01-02"
+  },
+  {
     "key": "BOTA",
     "name": "Bank of Tanzania",
     "description": "Daily exchange rates for 35+ currencies against the Tanzanian shilling",
