@@ -13,7 +13,7 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 - **Read the API docs** — understand pagination, date filtering, and rate limiting. Some APIs require specific params for date ranges (e.g., HKMA needs `choose=end_of_day` for `from`/`to` to work). Getting this right avoids downloading the entire dataset on every request.
 - Confirm the base currency and available quote currencies
 - Check the publish schedule (timezone, frequency, days of week)
-- Determine the earliest available date for historical data
+- Determine the earliest available date for historical data (goes in `coverage_start` in providers.json)
 
 ## Implementation Checklist
 
@@ -23,20 +23,19 @@ Inherit from `Provider::Adapters::Adapter`. See any existing adapter for the pat
 
 Required:
 - `fetch(after: nil, upto: nil)` — fetches from the source API, returns an array of records
-- `parse(data)` — separate method for unit-testable parsing logic
 - Each record: `{ date:, base:, quote:, rate: }` (no `provider:` — the Provider model stamps that during import)
 
 Optional class methods (inside `class << self`):
-- `earliest_date` — earliest date for historical data
-- `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call)
-- `api_key? = true` / `api_key = ENV["X_API_KEY"]` — if the API requires authentication
+- `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call). The base class `fetch_each` uses this to iterate in windows.
+- `def api_key = ENV["X_API_KEY"] || raise(ApiKeyMissing)` — if the API requires authentication. Provider#backfill rescues `ApiKeyMissing` and skips unconfigured providers.
 
 Notes:
 - Adapters have **no `key` or `name`** — Provider model owns identity. The adapter class name must match the provider key (e.g., `Provider::Adapters::ECB` for key `"ECB"`).
 - The `base` and `quote` in each record are determined by the data, not a class method
+- `parse` is a convention (not enforced by the base class) — most adapters define a `parse` method for unit-testable parsing, called from `fetch`
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
 - **Do not rescue errors** — let HTTP errors, timeouts, parse failures, and other exceptions bubble up. The scheduler handles retries; swallowing errors silently hides broken providers.
-- **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill_range` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. See `lib/provider/adapters/nbg.rb` for a working example.
+- **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill_range` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. The base class `fetch_each` handles the iteration loop. See `lib/provider/adapters/nbg.rb` for a working example.
 
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`
 
@@ -53,7 +52,7 @@ VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first liv
 
 ### 3. Seed provider metadata — `db/seeds/providers.json`
 
-Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri).
+Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri), `coverage_start` (earliest date for historical data, or null if unknown).
 
 The adapter class is auto-discovered from `lib/provider/adapters/` — no need to edit any wiring files.
 

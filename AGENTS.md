@@ -20,7 +20,7 @@ lib/
 ├── provider.rb               # Provider model: identity, backfill, import
 ├── provider/
 │   ├── adapters/
-│   │   ├── adapter.rb        # Abstract adapter: fetch, parse interface
+│   │   ├── adapter.rb        # Abstract adapter: fetch interface, chunked iteration
 │   │   └── <key>.rb          # One adapter per provider (auto-discovered)
 │   └── adapters.rb           # Auto-requires all adapters
 ├── rate.rb                   # Rate model with query scopes
@@ -41,25 +41,24 @@ lib/
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
 db/seeds/
-    └── providers.json        # Provider metadata (key, name, description, urls)
+    └── providers.json        # Provider metadata (key, name, description, urls, schedule, coverage)
 ```
 
 ## Key Components
 
 ### Adapters (lib/provider/adapters/)
-- `Provider::Adapters::Adapter`: Abstract base class — `fetch`, `parse` interface, `SkipSleep` for tests
+- `Provider::Adapters::Adapter`: Abstract base class — `fetch` interface, `fetch_each` for chunked iteration, sleep no-op in test env
 - Adapters are pure data extraction: they know how to talk to an external API and parse its response
 - No identity — adapters have no `key` or `name`. Provider model owns identity.
-- Optional class methods: `earliest_date`, `backfill_range`, `api_key?`/`api_key`
+- Optional class methods: `def backfill_range = N`, `def api_key = ENV[...] || raise(ApiKeyMissing)`
 - Auto-discovered from `lib/provider/adapters/` via loader
 
 ### Models
 - `Rate`: Sequel model on `rates` table. Scopes: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
 - `Currency`: Virtual model backed by UNION query over rates. Derives currencies, date ranges from data.
 - `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers.json`). Static cache.
-  - `#adapter_class`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
-  - `#backfill`: incremental backfill — queries last stored date, delegates fetch to adapter, imports records
-  - `#import(records)`: filters excluded quotes, stamps `provider: key`, upserts to DB, purges cache
+  - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
+  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB
 
 ### API (lib/app.rb)
 - V1 at `/v1/*` — frozen legacy, ECB-only
@@ -83,10 +82,11 @@ SQLite database with `rates` and `providers` tables.
 - Unique index on `(provider, date, base, quote)`
 
 ### providers
-- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`
+- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`, `coverage_start`
 - Seeded from `db/seeds/providers.json`
 - `publish_time`: UTC hour when the provider typically publishes new rates
 - `publish_days`: cron-style day range (e.g. "1-5" for Mon-Fri, "0-4" for Sun-Thu)
+- `coverage_start`: earliest date for historical data (used as backfill starting point)
 
 ## Testing
 

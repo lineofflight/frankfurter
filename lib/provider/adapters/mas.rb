@@ -41,7 +41,6 @@ class Provider
       }.freeze
 
       class << self
-        def earliest_date = Date.new(1988, 1, 1)
         def backfill_range = 365
       end
 
