@@ -398,5 +398,15 @@
     "publish_time": 10,
     "publish_days": "1-5",
     "coverage_start": "1988-01-01"
+  },
+  {
+    "key": "BI",
+    "name": "Bank Indonesia",
+    "description": "Daily transaction rates for 26 currencies against the Indonesian rupiah",
+    "data_url": "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx",
+    "terms_url": null,
+    "publish_time": 10,
+    "publish_days": "1-5",
+    "coverage_start": null
   }
 ]
