@@ -12,7 +12,7 @@ class Provider
       URL = URI("https://api.cba.am/exchangerates.asmx")
       CHUNK_SIZE = 365
       TROY_OUNCE_GRAMS = 31.1035
-      PRECIOUS_METALS = %w[XAU XAG].freeze
+      PRECIOUS_METALS = ["XAU", "XAG"].freeze
 
       def fetch(after: nil, upto: nil)
         @dataset = chunked_range(after, Date.today, currency_codes)
@@ -104,7 +104,7 @@ class Provider
         iso = node.locate("ISO").first&.text
         amount = Integer(node.locate("Amount").first.text)
         rate = Float(node.locate("Rate").first.text)
-        rate = rate * TROY_OUNCE_GRAMS if PRECIOUS_METALS.include?(iso)
+        rate *= TROY_OUNCE_GRAMS if PRECIOUS_METALS.include?(iso)
         rate / amount
       end
     end
