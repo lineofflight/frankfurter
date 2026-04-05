@@ -10,6 +10,9 @@ module Log
       end
     end
 
+    def debug(message) = logger.debug(message)
     def info(message) = logger.info(message)
+    def warn(message) = logger.warn(message)
+    def error(message) = logger.error(message)
   end
 end

@@ -47,7 +47,7 @@ class Provider
       COLUMNS = SERIES.to_h { |code, series| [series.tr(".", "_"), code] }.freeze
 
       class << self
-        def api_key = ENV["TCMB_API_KEY"] || raise(ApiKeyMissing)
+        def api_key = ENV["TCMB_API_KEY"] || raise(Adapter::ApiKeyMissing)
         def backfill_range = 730
       end
 

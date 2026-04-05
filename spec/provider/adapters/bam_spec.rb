@@ -71,6 +71,16 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      it "falls back to buy/sell average when moyen is absent" do
+        json = <<~JSON
+          [{"date": "1999-01-04T14:00:00", "libDevise": "USD", "achat": 9.2125, "vente": 9.2679, "uniteDevise": 1}]
+        JSON
+        records = adapter.parse(json)
+
+        _(records.length).must_equal(1)
+        _(records.first[:rate]).must_be_close_to(9.2402, 0.0001)
+      end
+
       it "handles empty response" do
         records = adapter.parse("[]")
 

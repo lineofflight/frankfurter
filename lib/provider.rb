@@ -36,7 +36,7 @@ class Provider < Sequel::Model(:providers)
   end
 
   def backfill(after: last_synced || coverage_start)
-    log("backfilling from #{after || "start"}")
+    Log.info("#{key}: backfilling from #{after || "start"}")
     adapter.fetch_each(after:) do |records|
       records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) } }
       records.each { |r| r[:provider] = key }
@@ -45,19 +45,15 @@ class Provider < Sequel::Model(:providers)
       Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
       inserted = db.get(Sequel.lit("total_changes()")) - before
 
-      log("imported #{inserted} rates")
+      Log.info("#{key}: inserted #{inserted} rates")
       next if inserted.zero?
 
       Cache.purge
       db.run("PRAGMA optimize")
     end
   rescue Adapters::Adapter::ApiKeyMissing
-    log("skipping (not configured)")
-  end
-
-  private
-
-  def log(message)
-    Log.info("#{key}: #{message}")
+    Log.warn("#{key}: no api key, skipping")
+  rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout, SocketError => e
+    Log.error("#{key}: #{e.class}")
   end
 end

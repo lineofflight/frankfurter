@@ -7,7 +7,7 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank Negara Malaysia daily exchange rates. Data available from 2021-01-04.
+    # Bank Negara Malaysia daily exchange rates. Data available from 2006-01-03.
     # Historical rates are fetched per-currency per-month.
     class BNM < Adapter
       BASE_URL = "https://api.bnm.gov.my/public/exchange-rate"
@@ -56,6 +56,8 @@ class Provider
 
             records << { date:, base: code, quote: "MYR", rate: mid / unit }
           end
+
+          sleep(1)
         end
         records
       end

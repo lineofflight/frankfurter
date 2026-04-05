@@ -23,7 +23,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["BANXICO_API_KEY"] || raise(ApiKeyMissing)
+        def api_key = ENV["BANXICO_API_KEY"] || raise(Adapter::ApiKeyMissing)
       end
 
       def fetch(after: nil, upto: nil)
@@ -56,8 +56,9 @@ class Provider
             value = obs["dato"]&.tr(",", "")
             next unless value
 
-            rate = Float(value)
-            next if rate.zero?
+            # Skip "N/E" (not available) values
+            rate = Float(value, exception: false)
+            next unless rate&.positive?
 
             date = Date.strptime(obs["fecha"], "%d/%m/%Y")
             { date:, base:, quote: "MXN", rate: }

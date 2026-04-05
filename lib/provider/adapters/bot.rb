@@ -16,7 +16,7 @@ class Provider
       BASE_URL = "https://gateway.api.bot.or.th/Stat-ExchangeRate/v2/DAILY_AVG_EXG_RATE/"
 
       class << self
-        def api_key = ENV["BOT_API_KEY"] || raise(ApiKeyMissing)
+        def api_key = ENV["BOT_API_KEY"] || raise(Adapter::ApiKeyMissing)
         def backfill_range = 30 # API enforces max 31-day period per request
       end
 

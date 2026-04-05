@@ -41,7 +41,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["FRED_API_KEY"] || raise(ApiKeyMissing)
+        def api_key = ENV["FRED_API_KEY"] || raise(Adapter::ApiKeyMissing)
       end
 
       def fetch(after: nil, upto: nil)

@@ -45,8 +45,12 @@ class Provider
 
       def fetch_rates(table_url, start_date, end_date)
         url = URI("#{table_url}/#{start_date}/#{end_date}/?format=json")
-        response = Net::HTTP.get(url)
-        parse(response)
+        response = Net::HTTP.get_response(url)
+
+        # This happens if the date range includes no working days
+        return [] if response.is_a?(Net::HTTPNotFound)
+
+        parse(response.body)
       end
 
       # NBP API limits queries to 93 days per request

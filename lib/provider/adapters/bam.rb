@@ -8,29 +8,23 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # Bank Al-Maghrib. Publishes daily mid-market rates for ~30 currencies against MAD.
+    # Older data (pre-2016) lacks a mid-rate field; the adapter averages buy/sell.
     class BAM < Adapter
       URL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement"
       class << self
-        def api_key = ENV["BAM_API_KEY"] || raise(ApiKeyMissing)
+        def api_key = ENV["BAM_API_KEY"] || raise(Adapter::ApiKeyMissing)
 
-        def backfill_range = 30
+        def backfill_range = 7
       end
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        dataset = []
 
-        first = true
-        (after..end_date).each do |date|
+        (after..end_date).each_with_object([]) do |date, dataset|
           next if date.saturday? || date.sunday?
-
-          sleep(15) unless first
-          first = false
 
           dataset.concat(fetch_date(date))
         end
-
-        dataset
       end
 
       def parse(json)
@@ -42,11 +36,11 @@ class Provider
           next unless code&.match?(/\A[A-Z]{3}\z/)
 
           date = Date.parse(record["date"])
-          moyen = record["moyen"].to_f
+          mid = record["moyen"]&.to_f || ((record["achat"].to_f + record["vente"].to_f) / 2).round(4)
           unite = record["uniteDevise"].to_f
-          next if moyen.zero? || unite.zero?
+          next if mid.zero? || unite.zero?
 
-          { date:, base: code, quote: "MAD", rate: moyen / unite }
+          { date:, base: code, quote: "MAD", rate: mid / unite }
         end
       end
 
@@ -57,8 +51,18 @@ class Provider
         uri.query = URI.encode_www_form(date: "#{date.strftime("%Y-%m-%d")}T12:30:00")
         request = Net::HTTP::Get.new(uri)
         request["Ocp-Apim-Subscription-Key"] = self.class.api_key
-        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
-        parse(response.body)
+
+        loop do
+          response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
+
+          if response.is_a?(Net::HTTPTooManyRequests)
+            sleep(response["retry-after"].to_i)
+          else
+            sleep(1)
+            response.value
+            return parse(response.body)
+          end
+        end
       end
     end
   end

@@ -7,11 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe BCB do
       let(:adapter) { BCB.new }
-
-      before do
-        VCR.insert_cassette("bcb")
-      end
-
+      before { VCR.insert_cassette("bcb") }
       after { VCR.eject_cassette }
 
       it "fetches rates since a date" do

@@ -79,7 +79,7 @@ class Provider < Sequel::Model(:providers)
           _(rates[0][:rate]).must_be_close_to(17_123.45)
         end
 
-        it "raises on invalid values" do
+        it "skips invalid values" do
           json = {
             bmx: {
               series: [
@@ -91,7 +91,7 @@ class Provider < Sequel::Model(:providers)
             },
           }.to_json
 
-          _(-> { adapter.parse(json) }).must_raise(ArgumentError)
+          _(adapter.parse(json)).must_be_empty
         end
       end
     end
