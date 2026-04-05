@@ -48,22 +48,13 @@ class Provider
 
       class << self
         def api_key = ENV["TCMB_API_KEY"] || raise(ApiKeyMissing)
+        def backfill_range = 730
       end
 
       def fetch(after: nil, upto: nil)
+        start_date = after || Date.new(2012, 1, 2)
         end_date = upto || Date.today
-        dataset = []
 
-        each_chunk(after, end_date) do |chunk_start, chunk_end|
-          dataset.concat(fetch_rates(chunk_start, chunk_end))
-        end
-
-        dataset
-      end
-
-      private
-
-      def fetch_rates(start_date, end_date)
         url = URI("#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
           "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
           "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
@@ -96,18 +87,6 @@ class Provider
 
             { date:, base: currency, quote: "TRY", rate: rate.round(4) }
           end
-        end
-      end
-
-      def each_chunk(start_date, end_date)
-        current = start_date
-        first = true
-        while current <= end_date
-          sleep(1) unless first
-          first = false
-          chunk_end = [current >> 24, end_date].min
-          yield current, chunk_end
-          current = chunk_end + 1
         end
       end
     end
