@@ -127,7 +127,7 @@
     "terms_url": null,
     "publish_time": 4,
     "publish_days": "1-5",
-    "coverage_start": "2021-01-04"
+    "coverage_start": "2006-01-03"
   },
   {
     "key": "RBA",
@@ -137,7 +137,7 @@
     "terms_url": "https://www.rba.gov.au/copyright/",
     "publish_time": 5,
     "publish_days": "1-5",
-    "coverage_start": null
+    "coverage_start": "2023-01-03"
   },
   {
     "key": "BCRA",
@@ -267,7 +267,7 @@
     "terms_url": null,
     "publish_time": 8,
     "publish_days": "0-6",
-    "coverage_start": "2015-01-01"
+    "coverage_start": "1999-07-01"
   },
   {
     "key": "BAM",
@@ -277,7 +277,7 @@
     "terms_url": null,
     "publish_time": 12,
     "publish_days": "1-5",
-    "coverage_start": "2016-01-04"
+    "coverage_start": "1999-01-04"
   },
   {
     "key": "CBC",
