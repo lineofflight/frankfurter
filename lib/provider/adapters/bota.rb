@@ -10,7 +10,7 @@ class Provider
     # Bank of Tanzania. Publishes daily exchange rates for 35+ currencies
     # against the Tanzanian shilling (TZS). Uses the Mean column (midpoint
     # of buy/sell). Publishes 7 days a week.
-    class BOT < Adapter
+    class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
 

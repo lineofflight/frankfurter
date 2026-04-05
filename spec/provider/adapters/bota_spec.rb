@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 require_relative "../../helper"
-require "provider/adapters/bot"
+require "provider/adapters/bota"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    describe BOT do
+    describe BOTA do
       before do
-        VCR.insert_cassette("bot", match_requests_on: [:method, :host])
+        VCR.insert_cassette("bota", match_requests_on: [:method, :host])
       end
 
       after { VCR.eject_cassette }
 
-      let(:adapter) { BOT.new }
+      let(:adapter) { BOTA.new }
 
       it "fetches rates with date range" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 24), upto: Date.new(2026, 3, 28))
