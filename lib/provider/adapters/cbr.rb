@@ -1,0 +1,67 @@
+# frozen_string_literal: true
+
+require "net/http"
+require "ox"
+
+require "provider/adapters/adapter"
+
+class Provider
+  module Adapters
+    # Bank of Russia. Publishes daily rates for ~54 currencies against RUB.
+    # Uses XML_daily for currency list and XML_dynamic for historical date ranges.
+    class CBR < Adapter
+      DAILY_URL = URI("https://www.cbr.ru/scripts/XML_daily.asp")
+      DYNAMIC_URL = URI("https://www.cbr.ru/scripts/XML_dynamic.asp")
+      def fetch(after: nil, upto: nil)
+        currencies = fetch_currency_list
+        @dataset = currencies.flat_map do |id, code, nominal|
+          fetch_dynamic(id, code, nominal, after, Date.today)
+        end
+      end
+
+      private
+
+      def fetch_currency_list
+        doc = Ox.load(Net::HTTP.get(DAILY_URL))
+        doc.locate("ValCurs/Valute").filter_map do |v|
+          code = v.locate("CharCode").first&.text
+          next unless code && !code.empty?
+
+          id = v[:ID]
+          nominal = v.locate("Nominal").first&.text.to_i
+          [id, code, nominal]
+        end
+      end
+
+      def fetch_dynamic(valute_id, code, nominal, start_date, end_date)
+        url = DYNAMIC_URL.dup
+        url.query = URI.encode_www_form(
+          date_req1: start_date.strftime("%d/%m/%Y"),
+          date_req2: end_date.strftime("%d/%m/%Y"),
+          VAL_NM_RQ: valute_id,
+        )
+
+        Ox.load(Net::HTTP.get(url)).locate("ValCurs/Record").filter_map do |row|
+          date = Date.strptime(row[:Date], "%d.%m.%Y")
+          next if date.saturday? || date.sunday?
+
+          rate = extract_rate(row)
+          next unless rate
+
+          { date:, base: code, quote: "RUB", rate: }
+        end
+      end
+
+      def extract_rate(node)
+        vunit = node.locate("VunitRate").first
+        return Float(vunit.text.tr(",", ".")) if vunit&.text && !vunit.text.empty?
+
+        value = node.locate("Value").first
+        return unless value&.text
+
+        nominal = node.locate("Nominal").first&.text.to_i
+        Float(value.text.tr(",", ".")) / nominal
+      end
+    end
+  end
+end

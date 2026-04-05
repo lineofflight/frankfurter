@@ -3,19 +3,20 @@
 
 require "rufus-scheduler"
 require_relative "../boot"
-require "providers"
+require "provider"
+require "provider/adapters"
 
 dry_run = ARGV.include?("--dry-run")
 
 scheduler = Rufus::Scheduler.new unless dry_run
 
-# Backfill enabled providers on startup (staggered to avoid thundering herd)
-Providers.enabled.each_with_index do |provider, i|
+# Backfill all providers on startup (staggered to avoid thundering herd)
+Provider.all.each_with_index do |provider, i|
   if dry_run
     puts "startup: backfill[#{provider.key.downcase}] (after #{i * 2}s)"
   else
     scheduler.in("#{i * 2}s") do
-      system("bundle exec rake backfill[#{provider.key.downcase}]")
+      provider.backfill
     end
   end
 end
@@ -31,7 +32,7 @@ Provider.all.each do |provider|
     puts "cron: #{cron} backfill[#{provider.key.downcase}]"
   else
     scheduler.cron(cron, overlap: false) do
-      system("bundle exec rake backfill[#{provider.key.downcase}]")
+      provider.backfill
     end
   end
 end

@@ -1,0 +1,48 @@
+# frozen_string_literal: true
+
+require "json"
+require "net/http"
+
+require "provider/adapters/adapter"
+
+class Provider
+  module Adapters
+    # Bank of Canada daily indicative rates. Current series starts 2017-01-03.
+    # Legacy noon rates (2007-2017) are available under the LEGACY_NOON_RATES group with ~65 currencies.
+    class BOC < Adapter
+      BASE_URL = "https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json"
+      def fetch(after: nil, upto: nil)
+        @dataset = fetch_rates(start_date: after)
+      end
+
+      def parse(json)
+        data = json.is_a?(String) ? JSON.parse(json) : json
+
+        data["observations"].flat_map do |obs|
+          date = Date.parse(obs["d"])
+          extract_rates(obs).map do |foreign, rate|
+            { date:, base: foreign, quote: "CAD", rate: }
+          end
+        end
+      end
+
+      private
+
+      def fetch_rates(**params)
+        url = URI(BASE_URL)
+        url.query = URI.encode_www_form(params)
+
+        parse(Net::HTTP.get(url))
+      end
+
+      def extract_rates(observation)
+        observation.each_with_object({}) do |(series, data), rates|
+          next unless series.start_with?("FX")
+
+          iso = series.delete_prefix("FX").delete_suffix("CAD")
+          rates[iso] = Float(data["v"])
+        end
+      end
+    end
+  end
+end

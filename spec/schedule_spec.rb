@@ -2,6 +2,7 @@
 
 require_relative "helper"
 require "fugit"
+require "provider/adapters"
 
 describe "bin/schedule --dry-run" do
   let(:output) do
@@ -11,9 +12,11 @@ describe "bin/schedule --dry-run" do
   let(:startup_lines) { output.lines.select { |l| l.start_with?("startup:") } }
   let(:cron_lines) { output.lines.select { |l| l.start_with?("cron:") } }
 
+  let(:enabled_count) { Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) } }
+
   it "schedules all enabled providers for startup and cron" do
-    _(startup_lines.size).must_equal(Providers.enabled.size)
-    _(cron_lines.size).must_equal(Providers.enabled.size)
+    _(startup_lines.size).must_equal(enabled_count)
+    _(cron_lines.size).must_equal(enabled_count)
   end
 
   it "generates valid cron expressions" do

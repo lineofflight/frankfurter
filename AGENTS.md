@@ -17,13 +17,14 @@ lib/
 ├── app.rb                    # Main Roda app — mounts v1 and v2
 ├── cache.rb                  # Cloudflare cache purge
 ├── currency.rb               # Currency virtual model (UNION over rates)
-├── provider.rb               # Provider model (Sequel, static cache)
+├── provider.rb               # Provider model: identity, backfill, import
+├── provider/
+│   ├── adapters/
+│   │   ├── adapter.rb        # Abstract adapter: fetch, parse interface
+│   │   └── <key>.rb          # One adapter per provider (auto-discovered)
+│   └── adapters.rb           # Auto-requires all adapters
 ├── rate.rb                   # Rate model with query scopes
 ├── db.rb                     # Database configuration
-├── providers.rb              # Auto-requires all providers from providers/
-├── providers/
-│   ├── base.rb               # Provider interface: fetch, import, backfill
-│   └── <key>.rb              # One file per provider (auto-discovered)
 ├── versions/
 │   ├── v1.rb                 # Legacy API (ECB-only, frozen)
 │   ├── v1/                   # V1 internals (quotes, rounding, currency names)
@@ -45,18 +46,20 @@ db/seeds/
 
 ## Key Components
 
-### Providers (lib/providers/)
-- `Providers::Base`: Shared interface — `key`, `base`, `fetch`, `import`, `backfill`
-- `key`, `name` are class methods; instance methods delegate
-- `fetch(since: nil, upto: nil)`: fetches rate data from the source API
-- `self.backfill(range:)`: queries DB for last stored date, fetches forward, imports. `range:` enables chunked requests for APIs with result limits.
-- `import`: writes to DB via upsert, filters excluded quotes (precious metals, SDR), purges Cloudflare cache
-- All providers auto-register via `inherited` hook into `Providers.all`
+### Adapters (lib/provider/adapters/)
+- `Provider::Adapters::Adapter`: Abstract base class — `fetch`, `parse` interface, `SkipSleep` for tests
+- Adapters are pure data extraction: they know how to talk to an external API and parse its response
+- No identity — adapters have no `key` or `name`. Provider model owns identity.
+- Optional class methods: `earliest_date`, `backfill_range`, `api_key?`/`api_key`
+- Auto-discovered from `lib/provider/adapters/` via loader
 
 ### Models
 - `Rate`: Sequel model on `rates` table. Scopes: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
 - `Currency`: Virtual model backed by UNION query over rates. Derives currencies, date ranges from data.
 - `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers.json`). Static cache.
+  - `#adapter_class`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
+  - `#backfill`: incremental backfill — queries last stored date, delegates fetch to adapter, imports records
+  - `#import(records)`: filters excluded quotes, stamps `provider: key`, upserts to DB, purges cache
 
 ### API (lib/app.rb)
 - V1 at `/v1/*` — frozen legacy, ECB-only
@@ -65,6 +68,7 @@ db/seeds/
 - OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
 
 ### Scheduler (bin/schedule)
+- Calls `provider.backfill` directly on Provider model instances
 - Staggers startup backfill for all providers (2s apart)
 - Cron schedules derived from `publish_time` and `publish_days` in the providers table
 - Convention: poll every 30 min for 3 hours starting at `publish_time`

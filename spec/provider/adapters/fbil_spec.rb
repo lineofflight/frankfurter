@@ -1,0 +1,132 @@
+# frozen_string_literal: true
+
+require_relative "../../helper"
+require "provider/adapters/fbil"
+
+class Provider < Sequel::Model(:providers)
+  module Adapters
+    describe FBIL do
+      before do
+        VCR.insert_cassette("fbil", match_requests_on: [:method, :host, :path])
+      end
+
+      after { VCR.eject_cassette }
+
+      let(:adapter) { FBIL.new }
+
+      it "fetches rates" do
+        dataset = adapter.fetch(after: Date.new(2026, 3, 17), upto: Date.new(2026, 3, 21))
+
+        dates = dataset.map { |r| r[:date] }.uniq
+        currencies = dataset.map { |r| r[:base] }.uniq.sort
+
+        _(dates.length).must_equal(3)
+        _(currencies).must_include("USD")
+        _(currencies).must_include("EUR")
+        _(currencies.length).must_equal(6)
+      end
+
+      it "parses JSON with correct base and quote" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => "INR / 1 USD",
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => 92.457,
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.length).must_equal(1)
+        _(records.first[:base]).must_equal("USD")
+        _(records.first[:quote]).must_equal("INR")
+        _(records.first[:rate]).must_equal(92.457)
+        _(records.first[:date]).must_equal(Date.new(2026, 3, 17))
+      end
+
+      it "adjusts rate by unit multiplier for JPY" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => "INR / 100 JPY",
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => 57.99,
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.first[:base]).must_equal("JPY")
+        _(records.first[:rate]).must_be_close_to(0.5799, 0.0001)
+      end
+
+      it "adjusts rate by unit multiplier for IDR" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => "INR / 10000 IDR",
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => 54.4093,
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.first[:base]).must_equal("IDR")
+        _(records.first[:rate]).must_be_close_to(0.00544093, 0.00000001)
+      end
+
+      it "skips records with zero rate" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => "INR / 1 USD",
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => 0.0,
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records).must_be_empty
+      end
+
+      it "skips records with missing subProdName" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => nil,
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => 92.457,
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records).must_be_empty
+      end
+
+      it "skips records with non-numeric rate" do
+        json = [
+          {
+            "processRunDate" => "2026-03-17 00:00:00",
+            "subProdName" => "INR / 1 USD",
+            "displayTime" => "2026-03-17 13:00:00",
+            "rate" => "N/A",
+            "comments" => "",
+          },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records).must_be_empty
+      end
+    end
+  end
+end

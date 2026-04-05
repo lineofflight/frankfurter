@@ -4,7 +4,6 @@ require "csv"
 require "currency"
 require "oj"
 require "provider"
-require "providers"
 require "roda"
 require "versions/v2/query"
 
