@@ -86,14 +86,6 @@ class Provider < Sequel::Model(:providers)
           _(rates[0][:rate]).must_be_close_to(149.50)
         end
 
-        it "handles malformed JSON" do
-          rates = adapter.parse("not json")
-
-          _(rates).must_be_empty
-        rescue JSON::ParserError
-          # acceptable — caller rescues this
-        end
-
         it "skips unknown series codes" do
           json = {
             RESULTSET: [

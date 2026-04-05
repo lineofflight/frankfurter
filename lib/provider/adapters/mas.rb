@@ -88,12 +88,10 @@ class Provider
             value = row[col_index]&.strip
             next if value.nil? || value.empty?
 
-            rate = Float(value)
-            next if rate.zero?
+            rate = Float(value, exception: false)
+            next unless rate&.positive?
 
             records << { date:, base: meta[:code], quote: "SGD", rate: rate / meta[:unit] }
-          rescue ArgumentError
-            next
           end
         end
 
