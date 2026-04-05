@@ -22,7 +22,7 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 Inherit from `Provider::Adapters::Adapter`. See any existing adapter for the pattern (e.g. `lib/provider/adapters/boi.rb`).
 
 Required:
-- `fetch(since: nil, upto: nil)` — fetches from the source API, populates `@dataset`
+- `fetch(after: nil, upto: nil)` — fetches from the source API, returns an array of records
 - `parse(data)` — separate method for unit-testable parsing logic
 - Each record: `{ date:, base:, quote:, rate: }` (no `provider:` — the Provider model stamps that during import)
 
@@ -43,7 +43,7 @@ Notes:
 Follow the pattern in `spec/provider/adapters/boi_spec.rb` or `spec/provider/adapters/bccr_spec.rb`:
 
 - VCR cassette setup in `before`/`after` blocks
-- Integration test: `adapter.fetch(since:, upto:)` then `Provider[key: "X"].import(adapter.dataset)`, assert rates were stored
+- Integration test: `adapter.fetch(after:, upto:)`, assert dataset is non-empty and has expected structure
 - Parse unit tests: call `parse` directly with inline fixture data
 - Test edge cases: unit multipliers, empty values, invalid data
 

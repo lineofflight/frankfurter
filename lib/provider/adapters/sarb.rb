@@ -44,16 +44,13 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        @dataset = []
         start_date = after.to_s
         end_date = (upto || Date.today).to_s
 
-        SERIES.each do |code, (base, quote)|
+        SERIES.flat_map do |code, (base, quote)|
           sleep(0.2)
-          @dataset.concat(fetch_series(code, start_date, end_date, base:, quote:))
+          fetch_series(code, start_date, end_date, base:, quote:)
         end
-
-        @dataset
       end
 
       def parse(json, base:, quote:)
