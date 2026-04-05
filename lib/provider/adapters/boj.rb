@@ -9,6 +9,7 @@ class Provider
   module Adapters
     # Bank of Japan. Fetches daily spot exchange rates for USD/JPY and EUR/USD
     # from the Tokyo market via the BOJ Statistics API. No authentication required.
+    # Only 2 pairs — this is the full extent of what BOJ publishes via this API.
     class BOJ < Adapter
       API_URL = "https://www.stat-search.boj.or.jp/api/v1/getDataCode"
 

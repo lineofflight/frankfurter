@@ -10,6 +10,7 @@ class Provider
     # Federal Reserve Economic Data (FRED). Publishes daily H.10 exchange rates.
     # Most series are quoted as foreign currency per USD. A few (AUD, EUR, GBP, NZD)
     # are quoted as USD per foreign currency and stored with the foreign currency as base.
+    # The H.10 is a curated policy publication — these are all the series available.
     class FRED < Adapter
       API_URL = "https://api.stlouisfed.org/fred/series/observations"
 

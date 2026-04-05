@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- BI (Bank Indonesia) provider
+- BOT (Bank of Thailand) provider
+- CNB (Czech National Bank) provider
+- DNB (Danmarks Nationalbank) provider
+- MAS (Monetary Authority of Singapore) provider
+- SARB (South African Reserve Bank) provider
+- BCU (Banco Central del Uruguay) provider
+
+### Changed
+
+- Renamed Bank of Tanzania provider key from BOT to BOTA
+- Extended historical coverage: BAM to 1999, BNM to 2006, BOTA to 1999, RBA to 2023
+- Refactored provider/adapter separation
+
+### Fixed
+
+- CDN cache now purges after importing new rates
+- ReDoS in BCEAO HTML parser
+- CBA precious metal rates (per-gram to per-troy-ounce)
+
 ## [2.0.0-beta.1] - 2026-04-02
 
 ### Added

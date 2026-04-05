@@ -7,6 +7,7 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # Bank of Botswana. Publishes daily rates for ~7 currencies against BWP.
+    # The CSV export only contains these columns.
     class BOB < Adapter
       CSV_URL = URI("https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv")
 
