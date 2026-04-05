@@ -35,7 +35,7 @@ Notes:
 - Adapters have **no `key` or `name`** — Provider model owns identity. The adapter class name must match the provider key (e.g., `Provider::Adapters::ECB` for key `"ECB"`).
 - The `base` and `quote` in each record are determined by the data, not a class method
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
-- Rescue network errors (`Net::OpenTimeout`, `Net::ReadTimeout`, `Socket::ResolutionError`) and return `self` with empty dataset. Add provider-specific errors as needed (e.g., `Oj::ParseError`, `OpenSSL::SSLError`).
+- **Do not rescue errors** — let HTTP errors, timeouts, parse failures, and other exceptions bubble up. The scheduler handles retries; swallowing errors silently hides broken providers.
 - **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill_range` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. See `lib/provider/adapters/nbg.rb` for a working example.
 
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`
