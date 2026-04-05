@@ -15,19 +15,28 @@ Frankfurter is a free and open-source currency data API built with Ruby that tra
 ```
 lib/
 ├── app.rb                    # Main Roda app — mounts v1 and v2
+├── base_conversion.rb        # Rebases rates from any base to a common base
+├── blender.rb                # Blends multi-provider rates: rebase → consensus → weighted average
 ├── cache.rb                  # Cloudflare cache purge
+├── consensus.rb              # Cross-provider outlier detection (MAD-based)
 ├── currency.rb               # Currency virtual model (UNION over rates)
-├── provider.rb               # Provider model: identity, backfill, import
+├── db.rb                     # Database configuration
+├── log.rb                    # Shared logger
+├── peg.rb                    # Currency peg definitions (from db/seeds/pegs.json)
+├── provider.rb               # Provider model: identity, backfill
 ├── provider/
 │   ├── adapters/
 │   │   ├── adapter.rb        # Abstract adapter: fetch interface, chunked iteration
 │   │   └── <key>.rb          # One adapter per provider (auto-discovered)
 │   └── adapters.rb           # Auto-requires all adapters
 ├── rate.rb                   # Rate model with query scopes
-├── db.rb                     # Database configuration
+├── roundable.rb              # Currency-aware decimal rounding
+├── weighted_average.rb       # Recency-weighted averaging with exponential decay
+├── scheduler/
+│   └── daemon.rb             # Forks and monitors the scheduler process
 ├── versions/
 │   ├── v1.rb                 # Legacy API (ECB-only, frozen)
-│   ├── v1/                   # V1 internals (quotes, rounding, currency names)
+│   ├── v1/                   # V1 internals (quotes, query, rounding, currency names)
 │   ├── v2.rb                 # Multi-provider API
 │   └── v2/
 │       └── query.rb          # V2 query builder (blending, filtering)
@@ -35,12 +44,17 @@ lib/
 │   ├── v1/openapi.json       # V1 OpenAPI spec
 │   └── v2/openapi.json       # V2 OpenAPI spec
 └── tasks/
+    ├── consensus.rake        # Consensus scan across providers
     ├── db.rake               # Database migrations and setup
-    └── providers.rake         # Dynamic backfill task for all providers
+    ├── default.rake          # Default task (lint + test)
+    ├── providers.rake        # Dynamic backfill task for all providers
+    ├── rubocop.rake          # Linter task
+    └── test.rake             # Test suite task
 
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
 db/seeds/
+    ├── pegs.json             # Currency peg definitions
     └── providers.json        # Provider metadata (key, name, description, urls, schedule, coverage)
 ```
 
@@ -59,6 +73,13 @@ db/seeds/
 - `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers.json`). Static cache.
   - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
   - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB
+- `Peg`: Value object for currency pegs (from `db/seeds/pegs.json`)
+
+### Blending Pipeline
+- `Blender`: orchestrates rebase → consensus → weighted average
+- `BaseConversion`: rebases rates from each provider's native base to a common base via inversion or cross rates
+- `Consensus`: MAD-based outlier detection — flags rates that deviate significantly from the cross-provider median
+- `WeightedAverage`: recency-weighted averaging with exponential decay past a grace period
 
 ### API (lib/app.rb)
 - V1 at `/v1/*` — frozen legacy, ECB-only
