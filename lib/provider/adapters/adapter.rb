@@ -16,14 +16,22 @@ class Provider < Sequel::Model(:providers)
         def fetch_each(after: nil)
           return if after && after >= Date.today
 
+          retries = 0
           loop do
             upto = after + backfill_range - 1 if after && backfill_range
             upto = nil if upto && upto >= Date.today
             records = new.fetch(after:, upto:)
             yield records if records.any?
+            retries = 0
             break unless upto
 
             after = upto + 1
+          rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout
+            retries += 1
+            raise if retries > 5
+
+            sleep(2**retries)
+            retry
           end
         end
       end
