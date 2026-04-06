@@ -148,8 +148,8 @@ module Versions
         .order(:provider, :currency).all
         .group_by(&:provider).transform_values { |rows| rows.map { |r| r[:currency] }.uniq.sort }
 
-      Provider.all.sort_by(&:key).map do |provider|
-        range = date_ranges[provider.key] || {}
+      Provider.all.sort_by(&:key).filter_map do |provider|
+        range = date_ranges[provider.key] or next
         {
           key: provider.key,
           name: provider.name,

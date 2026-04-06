@@ -362,6 +362,14 @@ describe Versions::V2 do
     _(ecb["currencies"]).must_include("USD")
   end
 
+  it "excludes providers without rates" do
+    get "/providers"
+
+    keys = json.map { |p| p["key"] }
+    without_rates = (Provider.all.map(&:key) - Rate.distinct.select_map(:provider)).sample
+    _(keys).wont_include(without_rates)
+  end
+
   it "expands pegged currencies in rates" do
     get "/rates?base=EUR"
 
