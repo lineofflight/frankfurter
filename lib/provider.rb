@@ -48,8 +48,15 @@ class Provider < Sequel::Model(:providers)
   end
 
   def backfill(after: last_synced || coverage_start)
+    if after && after >= Date.today
+      Log.info("#{key}: up to date")
+      return
+    end
+
     Log.info("#{key}: backfilling from #{after || "start"}")
+    fetched = false
     adapter.fetch_each(after:) do |records|
+      fetched = true
       records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) } }
       records.each { |r| r[:provider] = key }
 
@@ -71,6 +78,7 @@ class Provider < Sequel::Model(:providers)
       Cache.purge
       db.run("PRAGMA optimize")
     end
+    Log.info("#{key}: fetched no records") unless fetched
   rescue Adapters::Adapter::ApiKeyMissing
     Log.warn("#{key}: no api key, skipping")
   rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout, SocketError => e
