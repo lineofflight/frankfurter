@@ -144,7 +144,7 @@
   },
   {
     "key": "BNR",
-    "name": "National Bank of Romania",
+    "name": "Banca Națională a României",
     "description": "Daily reference rates against the Romanian leu",
     "pivot_currency": "RON",
     "data_url": "https://www.bnr.ro/Exchange-rates-702.aspx",
@@ -166,7 +166,7 @@
   },
   {
     "key": "NBM",
-    "name": "National Bank of Moldova",
+    "name": "Banca Națională a Moldovei",
     "description": "Daily exchange rates against the Moldovan leu",
     "pivot_currency": "MDL",
     "data_url": "https://www.bnm.md/en/official_exchange_rates",

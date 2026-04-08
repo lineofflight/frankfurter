@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "helper"
+require "currency"
 require "provider"
 require "provider/adapters/adapter"
 

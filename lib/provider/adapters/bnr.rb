@@ -40,7 +40,9 @@ class Provider
             next unless currency&.match?(/\A[A-Z]{3}\z/)
 
             multiplier = rate_node[:multiplier]&.to_i || 1
-            rate_value = Float(rate_node.text)
+            rate_value = Float(rate_node.text, exception: false)
+            next unless rate_value
+
             rate_value /= multiplier if multiplier > 1
             next if rate_value.zero?
 

@@ -5,6 +5,14 @@ class Provider < Sequel::Model(:providers)
     class Adapter
       class ApiKeyMissing < StandardError; end
 
+      TRANSIENT_ERRORS = [
+        Errno::ECONNRESET,
+        Errno::EPIPE,
+        Net::OpenTimeout,
+        Net::ReadTimeout,
+        SocketError,
+      ].freeze
+
       class << self
         def inherited(subclass)
           super
@@ -26,7 +34,7 @@ class Provider < Sequel::Model(:providers)
             break unless upto
 
             after = upto + 1
-          rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout
+          rescue *TRANSIENT_ERRORS
             retries += 1
             raise if retries > 5
 

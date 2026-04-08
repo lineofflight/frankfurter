@@ -81,7 +81,7 @@ class Provider < Sequel::Model(:providers)
     Log.info("#{key}: fetched no records") unless fetched
   rescue Adapters::Adapter::ApiKeyMissing
     Log.warn("#{key}: no api key, skipping")
-  rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout, SocketError => e
+  rescue *Adapters::Adapter::TRANSIENT_ERRORS => e
     Log.error("#{key}: #{e.class}")
   end
 
