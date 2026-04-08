@@ -13,7 +13,7 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 - **Read the API docs** — understand pagination, date filtering, and rate limiting. Some APIs require specific params for date ranges (e.g., HKMA needs `choose=end_of_day` for `from`/`to` to work). Getting this right avoids downloading the entire dataset on every request.
 - Confirm the base currency and available quote currencies
 - Check the publish schedule (timezone, frequency, days of week)
-- Determine the earliest available date for historical data (goes in `coverage_start` in providers.json)
+- Determine the earliest available date for historical data (goes in `coverage_start` in the seed file)
 
 ## Implementation Checklist
 
@@ -50,9 +50,9 @@ VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first liv
 
 **Avoiding time bombs**: Always pass explicit `upto:` dates in tests, even when the provider defaults to `Date.today`. If `upto` is omitted, the fetch will reach into unrecorded months and hit VCR errors on the 1st of the next month. Similarly, avoid assertions with hardcoded bounds on date counts (e.g. `<= 13` months) that break at month boundaries.
 
-### 3. Seed provider metadata — `db/seeds/providers.json`
+### 3. Seed provider metadata — `db/seeds/providers/<key>.json`
 
-Add an entry with: `key`, `name`, `description`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri), `coverage_start` (earliest date for historical data, or null if unknown).
+Create a single JSON file (not an array) with: `key`, `name`, `description`, `pivot_currency`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri), `coverage_start` (earliest date for historical data, or null if unknown). Each provider has its own file — no shared file to conflict on.
 
 The adapter class is auto-discovered from `lib/provider/adapters/` — no need to edit any wiring files.
 

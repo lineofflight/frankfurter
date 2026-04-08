@@ -19,7 +19,8 @@ lib/
 ├── blender.rb                # Blends multi-provider rates: rebase → consensus → weighted average
 ├── cache.rb                  # Cloudflare cache purge
 ├── consensus.rb              # Cross-provider outlier detection (MAD-based)
-├── currency.rb               # Currency virtual model (UNION over rates)
+├── currency.rb               # Currency model (materialized from rates)
+├── currency_coverage.rb      # CurrencyCoverage model (provider-currency join)
 ├── db.rb                     # Database configuration
 ├── log.rb                    # Shared logger
 ├── peg.rb                    # Currency peg definitions (from db/seeds/pegs.json)
@@ -39,7 +40,7 @@ lib/
 │   ├── v1/                   # V1 internals (quotes, query, rounding, currency names)
 │   ├── v2.rb                 # Multi-provider API
 │   └── v2/
-│       └── query.rb          # V2 query builder (blending, filtering)
+│       └── rate_query.rb     # V2 rate query builder (blending, filtering)
 ├── public/
 │   ├── v1/openapi.json       # V1 OpenAPI spec
 │   └── v2/openapi.json       # V2 OpenAPI spec
@@ -55,7 +56,7 @@ spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
 db/seeds/
     ├── pegs.json             # Currency peg definitions
-    └── providers.json        # Provider metadata (key, name, description, urls, schedule, coverage)
+    └── providers/            # One JSON file per provider (e.g. ecb.json, boi.json)
 ```
 
 ## Key Components
@@ -69,10 +70,13 @@ db/seeds/
 
 ### Models
 - `Rate`: Sequel model on `rates` table. Scopes: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
-- `Currency`: Virtual model backed by UNION query over rates. Derives currencies, date ranges from data.
-- `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers.json`). Static cache.
+- `Currency`: Sequel model on `currencies` table. Materialized from rates during backfill. Tracks global date ranges per currency.
+- `CurrencyCoverage`: Join model on `currency_coverages` table. One row per (provider, currency) with per-provider date ranges. Belongs to Provider and Currency.
+- `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers/*.json`). Static cache.
   - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
-  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB
+  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB, refreshes currency summaries
+  - `#start_date`, `#end_date`: derived from currency coverages
+  - `many_to_many :currencies` through `currency_coverages`
 - `Peg`: Value object for currency pegs (from `db/seeds/pegs.json`)
 
 ### Blending Pipeline
@@ -96,18 +100,27 @@ db/seeds/
 
 ## Database
 
-SQLite database with `rates` and `providers` tables.
+SQLite database with `rates`, `providers`, `currencies`, and `currency_coverages` tables.
 
 ### rates
 - `date`, `base`, `quote`, `rate`, `provider`
 - Unique index on `(provider, date, base, quote)`
 
 ### providers
-- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`, `coverage_start`
-- Seeded from `db/seeds/providers.json`
+- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`, `coverage_start`, `pivot_currency`
+- Seeded from `db/seeds/providers/*.json`
 - `publish_time`: UTC hour when the provider typically publishes new rates
 - `publish_days`: cron-style day range (e.g. "1-5" for Mon-Fri, "0-4" for Sun-Thu)
 - `coverage_start`: earliest date for historical data (used as backfill starting point)
+
+### currencies
+- `iso_code` (PK), `start_date`, `end_date`
+- Global date range per currency, materialized during backfill
+
+### currency_coverages
+- `provider_key`, `iso_code`, `start_date`, `end_date`
+- PK `(provider_key, iso_code)`
+- Per-provider date range per currency, materialized during backfill
 
 ## Testing
 
