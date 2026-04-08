@@ -6,7 +6,7 @@ module Log
   class << self
     def logger
       @logger ||= ::Logger.new($stdout).tap do |l|
-        l.level = ::Logger::WARN if ENV["APP_ENV"] == "test"
+        l.level = ::Logger::ERROR if ENV["APP_ENV"] == "test"
       end
     end
 
