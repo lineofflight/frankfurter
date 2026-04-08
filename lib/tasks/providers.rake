@@ -10,6 +10,21 @@ task :backfill, [:provider] do |_t, args|
     abort "Unknown provider: #{args[:provider]}" unless provider
     provider.backfill
   else
-    Provider.map { |provider| Thread.new { provider.backfill } }.each(&:join)
+    queue = Queue.new
+    providers = Provider.to_a.shuffle
+    providers.each { |provider| queue << provider }
+
+    worker_count = [providers.size, DB.pool.max_size].min
+
+    Array.new(worker_count) do
+      Thread.new do
+        loop do
+          provider = queue.pop(true)
+          provider.backfill
+        rescue ThreadError
+          break
+        end
+      end
+    end.each(&:join)
   end
 end
