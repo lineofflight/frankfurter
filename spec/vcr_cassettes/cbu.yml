@@ -1,0 +1,624 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cbu.uz/en/arkhiv-kursov-valyut/json/all/2026-04-01/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cbu.uz
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 08 Apr 2026 13:43:28 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      X-Powered-Cms:
+      - Bitrix Site Manager (c8adcaa7ec7e7ae69696ea11d0fec79f)
+      Set-Cookie:
+      - PHPSESSID=tQZkvKK9s3gES40meCMlPZWUH0b1pPnf; path=/; domain=cbu.uz; secure;
+        HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '[{"id":69,"Code":"840","Ccy":"USD","CcyNm_RU":"\u0414\u043e\u043b\u043b\u0430\u0440
+        \u0421\u0428\u0410","CcyNm_UZ":"AQSH dollari","CcyNm_UZC":"\u0410\u049a\u0428
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"US Dollar","Nominal":"1","Rate":"12194.21","Diff":"-16.5","Date":"01.04.2026"},{"id":21,"Code":"978","Ccy":"EUR","CcyNm_RU":"\u0415\u0432\u0440\u043e","CcyNm_UZ":"EVRO","CcyNm_UZC":"E\u0412\u0420\u041e","CcyNm_EN":"Euro","Nominal":"1","Rate":"13984.32","Diff":"-51.89","Date":"01.04.2026"},{"id":57,"Code":"643","Ccy":"RUB","CcyNm_RU":"\u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Rossiya rubli","CcyNm_UZC":"\u0420\u043e\u0441\u0441\u0438\u044f
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Russian Ruble","Nominal":"1","Rate":"149.97","Diff":"-0.39","Date":"01.04.2026"},{"id":22,"Code":"826","Ccy":"GBP","CcyNm_RU":"\u0424\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u043e\u0432","CcyNm_UZ":"Angliya
+        funt sterlingi","CcyNm_UZC":"\u0410\u043d\u0433\u043b\u0438\u044f \u0444\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u0438","CcyNm_EN":"Pound
+        Sterling","Nominal":"1","Rate":"16113.43","Diff":"-48.67","Date":"01.04.2026"},{"id":33,"Code":"392","Ccy":"JPY","CcyNm_RU":"\u0418\u0435\u043d\u0430","CcyNm_UZ":"Yaponiya
+        iyenasi","CcyNm_UZC":"\u042f\u043f\u043e\u043d\u0438\u044f \u0438\u0435\u043d\u0430\u0441\u0438","CcyNm_EN":"Japan
+        Yen","Nominal":"1","Rate":"76.38","Diff":"-0.13","Date":"01.04.2026"},{"id":6,"Code":"944","Ccy":"AZN","CcyNm_RU":"\u0410\u0437\u0435\u0440\u0431\u0430\u0439\u0434\u0436\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Ozarbayjon manati","CcyNm_UZC":"\u041e\u0437\u0430\u0440\u0431\u0430\u0439\u0436\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Azerbaijan Manat","Nominal":"1","Rate":"7173.06","Diff":"-9.71","Date":"01.04.2026"},{"id":7,"Code":"050","Ccy":"BDT","CcyNm_RU":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448\u0441\u043a\u0430\u044f
+        \u0442\u0430\u043a\u0430","CcyNm_UZ":"Bangladesh takasi","CcyNm_UZC":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448
+        \u0442\u0430\u043a\u0430\u0441\u0438","CcyNm_EN":"Bangladesh Taka","Nominal":"1","Rate":"99.38","Diff":"0.11","Date":"01.04.2026"},{"id":8,"Code":"975","Ccy":"BGN","CcyNm_RU":"\u0411\u043e\u043b\u0433\u0430\u0440\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0432","CcyNm_UZ":"Bolgariya levi","CcyNm_UZC":"\u0411\u043e\u043b\u0433\u0430\u0440\u0438\u044f
+        \u043b\u0435\u0432\u0438","CcyNm_EN":"Bulgarian Lev","Nominal":"1","Rate":"7323.85","Diff":"-9.91","Date":"01.04.2026"},{"id":9,"Code":"048","Ccy":"BHD","CcyNm_RU":"\u0411\u0430\u0445\u0440\u0435\u0439\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Bahrayn dinori","CcyNm_UZC":"\u0411\u0430\u04b3\u0440\u0430\u0439\u043d
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Bahraini Dinar","Nominal":"1","Rate":"32345.38","Diff":"7.69","Date":"01.04.2026"},{"id":10,"Code":"096","Ccy":"BND","CcyNm_RU":"\u0411\u0440\u0443\u043d\u0435\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Bruney dollari","CcyNm_UZC":"\u0411\u0440\u0443\u043d\u0435\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Brunei Dollar","Nominal":"1","Rate":"9448.48","Diff":"-18.65","Date":"01.04.2026"},{"id":11,"Code":"986","Ccy":"BRL","CcyNm_RU":"\u0411\u0440\u0430\u0437\u0438\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0440\u0435\u0430\u043b","CcyNm_UZ":"Braziliya reali","CcyNm_UZC":"\u0411\u0440\u0430\u0437\u0438\u043b\u0438\u044f
+        \u0440\u0435\u0430\u043b\u0438","CcyNm_EN":"Brazilian Real","Nominal":"1","Rate":"2322.09","Diff":"-8.33","Date":"01.04.2026"},{"id":12,"Code":"933","Ccy":"BYN","CcyNm_RU":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Belorus rubli","CcyNm_UZC":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Belarusian Ruble","Nominal":"1","Rate":"4100.41","Diff":"-2.38","Date":"01.04.2026"},{"id":13,"Code":"124","Ccy":"CAD","CcyNm_RU":"\u041a\u0430\u043d\u0430\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Kanada dollari","CcyNm_UZC":"\u041a\u0430\u043d\u0430\u0434\u0430
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Canadian Dollar","Nominal":"1","Rate":"8745.76","Diff":"-29.45","Date":"01.04.2026"},{"id":14,"Code":"756","Ccy":"CHF","CcyNm_RU":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0444\u0440\u0430\u043d\u043a","CcyNm_UZ":"Shveytsariya franki","CcyNm_UZC":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f
+        \u0444\u0440\u0430\u043d\u043a\u0438","CcyNm_EN":"Swiss Franc","Nominal":"1","Rate":"15233.24","Diff":"-37.78","Date":"01.04.2026"},{"id":15,"Code":"156","Ccy":"CNY","CcyNm_RU":"\u042e\u0430\u043d\u044c
+        \u0440\u0435\u043d\u043c\u0438\u043d\u0431\u0438","CcyNm_UZ":"Xitoy yuani","CcyNm_UZC":"\u0425\u0438\u0442\u043e\u0439
+        \u044e\u0430\u043d\u0438","CcyNm_EN":"Yuan Renminbi","Nominal":"1","Rate":"1765.33","Diff":"-1.65","Date":"01.04.2026"},{"id":16,"Code":"192","Ccy":"CUP","CcyNm_RU":"\u041a\u0443\u0431\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Kuba pesosi","CcyNm_UZC":"\u041a\u0443\u0431\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Cuban Peso","Nominal":"1","Rate":"508.09","Diff":"-0.69","Date":"01.04.2026"},{"id":17,"Code":"203","Ccy":"CZK","CcyNm_RU":"\u0427\u0435\u0448\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Chexiya kronasi","CcyNm_UZC":"\u0427\u0435\u0445\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Czech Koruna","Nominal":"1","Rate":"570.22","Diff":"-1.74","Date":"01.04.2026"},{"id":18,"Code":"208","Ccy":"DKK","CcyNm_RU":"\u0414\u0430\u0442\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Daniya kronasi","CcyNm_UZC":"\u0414\u0430\u043d\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Danish Krone","Nominal":"1","Rate":"1871.83","Diff":"-6.45","Date":"01.04.2026"},{"id":19,"Code":"012","Ccy":"DZD","CcyNm_RU":"\u0410\u043b\u0436\u0438\u0440\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Jazoir dinori","CcyNm_UZC":"\u0416\u0430\u0437\u043e\u0438\u0440
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Algerian Dinar","Nominal":"1","Rate":"91.44","Diff":"-0.22","Date":"01.04.2026"},{"id":20,"Code":"818","Ccy":"EGP","CcyNm_RU":"\u0415\u0433\u0438\u043f\u0435\u0442\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Misr funti","CcyNm_UZC":"\u041c\u0438\u0441\u0440
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Egyptian Pound","Nominal":"1","Rate":"223.28","Diff":"-1.91","Date":"01.04.2026"},{"id":2,"Code":"971","Ccy":"AFN","CcyNm_RU":"\u0410\u0444\u0433\u0430\u043d\u0438","CcyNm_UZ":"Afg\u2018oniston
+        afg\u2018onisi","CcyNm_UZC":"\u0410\u0444\u0493\u043e\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0430\u0444\u0493\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"AF Afghani","Nominal":"1","Rate":"187.98","Diff":"-2.57","Date":"01.04.2026"},{"id":4,"Code":"032","Ccy":"ARS","CcyNm_RU":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Argentina pesosi","CcyNm_UZC":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Argentine Peso","Nominal":"1","Rate":"8.72","Diff":"-0.09","Date":"01.04.2026"},{"id":23,"Code":"981","Ccy":"GEL","CcyNm_RU":"\u0413\u0440\u0443\u0437\u0438\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0430\u0440\u0438","CcyNm_UZ":"Gruziya larisi","CcyNm_UZC":"\u0413\u0440\u0443\u0437\u0438\u044f
+        \u043b\u0430\u0440\u0438\u0441\u0438","CcyNm_EN":"Georgian Lari","Nominal":"1","Rate":"4526.77","Diff":"-12.53","Date":"01.04.2026"},{"id":24,"Code":"344","Ccy":"HKD","CcyNm_RU":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Gongkong dollari","CcyNm_UZC":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Hong Kong Dollar","Nominal":"1","Rate":"1555.44","Diff":"-3.1","Date":"01.04.2026"},{"id":25,"Code":"348","Ccy":"HUF","CcyNm_RU":"\u0412\u0435\u043d\u0433\u0435\u0440\u0441\u043a\u0438\u0439
+        \u0444\u043e\u0440\u0438\u043d\u0442","CcyNm_UZ":"Vengriya forinti","CcyNm_UZC":"\u0412\u0435\u043d\u0433\u0440\u0438\u044f
+        \u0444\u043e\u0440\u0438\u043d\u0442\u0438","CcyNm_EN":"Hungarian Forint","Nominal":"1","Rate":"36.20","Diff":"0.22","Date":"01.04.2026"},{"id":26,"Code":"360","Ccy":"IDR","CcyNm_RU":"\u0420\u0443\u043f\u0438\u044f","CcyNm_UZ":"Indoneziya
+        rupiyasi","CcyNm_UZC":"\u0418\u043d\u0434\u043e\u043d\u0435\u0437\u0438\u044f
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Rupiah","Nominal":"10","Rate":"7.18","Diff":"-0.01","Date":"01.04.2026"},{"id":27,"Code":"376","Ccy":"ILS","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0438\u0437\u0440\u0430\u0438\u043b\u044c\u0441\u043a\u0438\u0439 \u0448\u0435\u043a\u0435\u043b\u044c","CcyNm_UZ":"Isroil
+        shekeli","CcyNm_UZC":"\u0418\u0441\u0440\u043e\u0438\u043b \u0448\u0435\u043a\u0435\u043b\u0438","CcyNm_EN":"New
+        Israeli Sheqel","Nominal":"1","Rate":"3844.45","Diff":"-18.84","Date":"01.04.2026"},{"id":28,"Code":"356","Ccy":"INR","CcyNm_RU":"\u0418\u043d\u0434\u0438\u0439\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Hindiston rupiyasi","CcyNm_UZC":"\u04b2\u0438\u043d\u0434\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Indian Rupee","Nominal":"1","Rate":"129.72","Diff":"1.03","Date":"01.04.2026"},{"id":29,"Code":"368","Ccy":"IQD","CcyNm_RU":"\u0418\u0440\u0430\u043a\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iroq dinori","CcyNm_UZC":"\u0418\u0440\u043e\u049b
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Iraqi Dinar","Nominal":"1","Rate":"9.31","Diff":"-0.01","Date":"01.04.2026"},{"id":30,"Code":"364","Ccy":"IRR","CcyNm_RU":"\u0418\u0440\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Eron riali","CcyNm_UZC":"\u042d\u0440\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Iranian Rial","Nominal":"10","Rate":"0.09","Diff":"0","Date":"01.04.2026"},{"id":31,"Code":"352","Ccy":"ISK","CcyNm_RU":"\u0418\u0441\u043b\u0430\u043d\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Islandiya kronasi","CcyNm_UZC":"\u0418\u0441\u043b\u0430\u043d\u0434\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Iceland Krona","Nominal":"1","Rate":"97.53","Diff":"-0.21","Date":"01.04.2026"},{"id":32,"Code":"400","Ccy":"JOD","CcyNm_RU":"\u0418\u043e\u0440\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iordaniya dinori","CcyNm_UZC":"\u0418\u043e\u0440\u0434\u0430\u043d\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Jordanian Dinar","Nominal":"1","Rate":"17199.17","Diff":"-23.27","Date":"01.04.2026"},{"id":5,"Code":"036","Ccy":"AUD","CcyNm_RU":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Avstraliya dollari","CcyNm_UZC":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u044f
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Australian Dollar","Nominal":"1","Rate":"8360.35","Diff":"-12.53","Date":"01.04.2026"},{"id":34,"Code":"417","Ccy":"KGS","CcyNm_RU":"\u041a\u0438\u0440\u0433\u0438\u0437\u0441\u043a\u0438\u0439
+        \u0441\u043e\u043c","CcyNm_UZ":"Qirg\u2018iz somi","CcyNm_UZC":"\u049a\u0438\u0440\u0493\u0438\u0437
+        \u0441\u043e\u043c\u0438","CcyNm_EN":"Kyrgyzstan Som","Nominal":"1","Rate":"139.40","Diff":"-0.19","Date":"01.04.2026"},{"id":35,"Code":"116","Ccy":"KHR","CcyNm_RU":"\u0420\u0438\u0435\u043b\u044c","CcyNm_UZ":"Kambodja
+        riyeli","CcyNm_UZC":"\u041a\u0430\u043c\u0431\u043e\u0434\u0436\u0430 \u0440\u0438\u0435\u043b\u0438","CcyNm_EN":"Riel","Nominal":"1","Rate":"3.05","Diff":"0","Date":"01.04.2026"},{"id":36,"Code":"410","Ccy":"KRW","CcyNm_RU":"\u0412\u043e\u043d\u0430
+        \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u041a\u043e\u0440\u0435\u044f","CcyNm_UZ":"Koreya
+        Respublikasi voni","CcyNm_UZC":"\u041a\u043e\u0440\u0435\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0441\u0438
+        \u0432\u043e\u043d\u0438","CcyNm_EN":"The Korean Republic Won","Nominal":"1","Rate":"7.97","Diff":"-0.09","Date":"01.04.2026"},{"id":37,"Code":"414","Ccy":"KWD","CcyNm_RU":"\u041a\u0443\u0432\u0435\u0439\u0442\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Quvayt dinori","CcyNm_UZC":"\u049a\u0443\u0432\u0430\u0439\u0442
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Kuwaiti Dinar","Nominal":"1","Rate":"39720.55","Diff":"-53.75","Date":"01.04.2026"},{"id":38,"Code":"398","Ccy":"KZT","CcyNm_RU":"\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0442\u0435\u043d\u0433\u0435","CcyNm_UZ":"Qozog\u2018iston tengesi","CcyNm_UZC":"\u049a\u043e\u0437\u043e\u0493\u0438\u0441\u0442\u043e\u043d
+        \u0442\u0435\u043d\u0433\u0435\u0441\u0438","CcyNm_EN":"Kazakhstan Tenge","Nominal":"1","Rate":"25.53","Diff":"0.14","Date":"01.04.2026"},{"id":39,"Code":"418","Ccy":"LAK","CcyNm_RU":"\u041b\u0430\u043e\u0441\u0441\u043a\u0438\u0439
+        \u043a\u0438\u043f","CcyNm_UZ":"Laos kipisi","CcyNm_UZC":"\u041b\u0430\u043e\u0441
+        \u043a\u0438\u043f\u0438\u0441\u0438","CcyNm_EN":"Lao Kip","Nominal":"1","Rate":"0.55","Diff":"-0.01","Date":"01.04.2026"},{"id":40,"Code":"422","Ccy":"LBP","CcyNm_RU":"\u041b\u0438\u0432\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Livan funti","CcyNm_UZC":"\u041b\u0438\u0432\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Lebanese Pound","Nominal":"1","Rate":"0.14","Diff":"0","Date":"01.04.2026"},{"id":41,"Code":"434","Ccy":"LYD","CcyNm_RU":"\u041b\u0438\u0432\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Liviya dinori","CcyNm_UZC":"\u041b\u0438\u0432\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Libyan Dinar","Nominal":"1","Rate":"1902.91","Diff":"-5.79","Date":"01.04.2026"},{"id":42,"Code":"504","Ccy":"MAD","CcyNm_RU":"\u041c\u0430\u0440\u043e\u043a\u043a\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u0440\u0445\u0430\u043c","CcyNm_UZ":"Marokash dirhami","CcyNm_UZC":"\u041c\u0430\u0440\u043e\u043a\u0430\u0448
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"Moroccan Dirham","Nominal":"1","Rate":"1299.47","Diff":"-4.47","Date":"01.04.2026"},{"id":43,"Code":"498","Ccy":"MDL","CcyNm_RU":"\u041c\u043e\u043b\u0434\u0430\u0432\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Moldaviya leyi","CcyNm_UZC":"\u041c\u043e\u043b\u0434\u0430\u0432\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Moldovan Leu","Nominal":"1","Rate":"688.55","Diff":"-4.26","Date":"01.04.2026"},{"id":44,"Code":"104","Ccy":"MMK","CcyNm_RU":"\u041c\u044c\u044f\u043d\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043a\u044c\u044f\u0442","CcyNm_UZ":"Myanma kyati","CcyNm_UZC":"\u041c\u044c\u044f\u043d\u043c\u0430
+        \u043a\u044c\u044f\u0442\u0438","CcyNm_EN":"Kyat","Nominal":"1","Rate":"5.81","Diff":"0","Date":"01.04.2026"},{"id":45,"Code":"496","Ccy":"MNT","CcyNm_RU":"\u041c\u043e\u043d\u0433\u043e\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0442\u0443\u0433p\u0438\u043a","CcyNm_UZ":"Mongoliya tugriki","CcyNm_UZC":"\u041c\u043e\u043d\u0433\u043e\u043b\u0438\u044f
+        \u0442\u0443\u0433\u0440\u0438\u043a\u0438","CcyNm_EN":"Tugrik","Nominal":"1","Rate":"3.41","Diff":"-0.01","Date":"01.04.2026"},{"id":46,"Code":"484","Ccy":"MXN","CcyNm_RU":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Meksika pesosi","CcyNm_UZC":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Mexican Peso","Nominal":"1","Rate":"674.26","Diff":"-1.25","Date":"01.04.2026"},{"id":47,"Code":"458","Ccy":"MYR","CcyNm_RU":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442","CcyNm_UZ":"Malayziya ringgiti","CcyNm_UZC":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u044f
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442\u0438","CcyNm_EN":"Malaysian Ringgit","Nominal":"1","Rate":"3011.66","Diff":"-19.8","Date":"01.04.2026"},{"id":48,"Code":"578","Ccy":"NOK","CcyNm_RU":"\u041d\u043e\u0440\u0432\u0435\u0436\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Norvegiya kronasi","CcyNm_UZC":"\u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Norwegian Krone","Nominal":"1","Rate":"1246.43","Diff":"-0.58","Date":"01.04.2026"},{"id":49,"Code":"554","Ccy":"NZD","CcyNm_RU":"\u041d\u043e\u0432\u043e\u0437\u0435\u043b\u0430\u043d\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Yangi Zelandiya dollari","CcyNm_UZC":"\u042f\u043d\u0433\u0438
+        \u0417\u0435\u043b\u0430\u043d\u0434\u0438\u044f \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"New
+        Zealand Dollar","Nominal":"1","Rate":"6959.24","Diff":"-26.51","Date":"01.04.2026"},{"id":50,"Code":"512","Ccy":"OMR","CcyNm_RU":"\u041e\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Ummon riali","CcyNm_UZC":"\u0423\u043c\u043c\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Rial Omani","Nominal":"1","Rate":"31673.27","Diff":"-42.86","Date":"01.04.2026"},{"id":51,"Code":"608","Ccy":"PHP","CcyNm_RU":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Filippin pesosi","CcyNm_UZC":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Philippine Piso","Nominal":"1","Rate":"200.84","Diff":"-0.16","Date":"01.04.2026"},{"id":52,"Code":"586","Ccy":"PKR","CcyNm_RU":"\u041f\u0430\u043a\u0438\u0441\u0442\u0430\u043d\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Pokiston rupiyasi","CcyNm_UZC":"\u041f\u043e\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Pakistan Rupee","Nominal":"1","Rate":"43.69","Diff":"-0.06","Date":"01.04.2026"},{"id":53,"Code":"985","Ccy":"PLN","CcyNm_RU":"\u0417\u043b\u043e\u0442\u044b\u0439","CcyNm_UZ":"Polsha
+        zlotiysi","CcyNm_UZC":"\u041f\u043e\u043b\u044c\u0448\u0430 \u0437\u043b\u043e\u0442\u0438\u0439\u0441\u0438","CcyNm_EN":"Polish
+        Zloty","Nominal":"1","Rate":"3258.74","Diff":"-14.73","Date":"01.04.2026"},{"id":54,"Code":"634","Ccy":"QAR","CcyNm_RU":"\u041a\u0430\u0442\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Qatar riali","CcyNm_UZC":"\u049a\u0430\u0442\u0430\u0440
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Qatari Rial","Nominal":"1","Rate":"3345.46","Diff":"-4.53","Date":"01.04.2026"},{"id":55,"Code":"946","Ccy":"RON","CcyNm_RU":"\u0420\u0443\u043c\u044b\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Ruminiya leyi","CcyNm_UZC":"\u0420\u0443\u043c\u0438\u043d\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Romanian Leu","Nominal":"1","Rate":"2742.61","Diff":"-10.28","Date":"01.04.2026"},{"id":56,"Code":"941","Ccy":"RSD","CcyNm_RU":"\u0421\u0435\u0440\u0431\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Serbiya dinori","CcyNm_UZC":"\u0421\u0435\u0440\u0431\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Serbian Dinar","Nominal":"1","Rate":"119.10","Diff":"-0.43","Date":"01.04.2026"},{"id":3,"Code":"051","Ccy":"AMD","CcyNm_RU":"\u0410\u0440\u043c\u044f\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0440\u0430\u043c","CcyNm_UZ":"Armaniston drami","CcyNm_UZC":"\u0410\u0440\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0434\u0440\u0430\u043c\u0438","CcyNm_EN":"Armenian Dram","Nominal":"1","Rate":"32.30","Diff":"-0.07","Date":"01.04.2026"},{"id":58,"Code":"682","Ccy":"SAR","CcyNm_RU":"\u0421\u0430\u0443\u0434\u043e\u0432\u0441\u043a\u0438\u0439
+        \u0440\u0438\u044f\u043b","CcyNm_UZ":"Saudiya\u00a0Arabistoni\u00a0riali","CcyNm_UZC":"\u0421\u0430\u0443\u0434\u0438\u044f\u00a0\u0410\u0440\u0430\u0431\u0438\u0441\u0442\u043e\u043d\u0438\u00a0\u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Saudi
+        Riyal","Nominal":"1","Rate":"3249.88","Diff":"-3.97","Date":"01.04.2026"},{"id":59,"Code":"938","Ccy":"SDG","CcyNm_RU":"\u0421\u0443\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Sudan funti","CcyNm_UZC":"\u0421\u0443\u0434\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Sudanese Pound","Nominal":"1","Rate":"20.32","Diff":"-0.03","Date":"01.04.2026"},{"id":60,"Code":"752","Ccy":"SEK","CcyNm_RU":"\u0428\u0432\u0435\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Shvetsiya kronasi","CcyNm_UZC":"\u0428\u0432\u0435\u0446\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Swedish Krona","Nominal":"1","Rate":"1275.96","Diff":"-10.42","Date":"01.04.2026"},{"id":61,"Code":"702","Ccy":"SGD","CcyNm_RU":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Singapur dollari","CcyNm_UZC":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Singapore Dollar","Nominal":"1","Rate":"9448.48","Diff":"-18.65","Date":"01.04.2026"},{"id":62,"Code":"760","Ccy":"SYP","CcyNm_RU":"\u0421\u0438\u0440\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Suriya funti","CcyNm_UZC":"\u0421\u0443\u0440\u0438\u044f
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Syrian Pound","Nominal":"1","Rate":"105.56","Diff":"-0.16","Date":"01.04.2026"},{"id":63,"Code":"764","Ccy":"THB","CcyNm_RU":"\u0411\u0430\u0442","CcyNm_UZ":"Tailand
+        bati","CcyNm_UZC":"\u0422\u0430\u0438\u043b\u0430\u043d\u0434 \u0431\u0430\u0442\u0438","CcyNm_EN":"Baht","Nominal":"1","Rate":"369.80","Diff":"-1.85","Date":"01.04.2026"},{"id":64,"Code":"972","Ccy":"TJS","CcyNm_RU":"\u0421\u043e\u043c\u043e\u043d\u0438","CcyNm_UZ":"Tojikiston
+        somonisi","CcyNm_UZC":"\u0422\u043e\u0436\u0438\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0441\u043e\u043c\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"Tajikistan Somoni","Nominal":"1","Rate":"1272.88","Diff":"-1.06","Date":"01.04.2026"},{"id":65,"Code":"934","Ccy":"TMT","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0442\u0443\u0440\u043a\u043c\u0435\u043d\u0441\u043a\u0438\u0439 \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Turkmaniston
+        manati","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Turkmenistan New Manat","Nominal":"1","Rate":"4037.68","Diff":"108.25","Date":"01.04.2026"},{"id":66,"Code":"788","Ccy":"TND","CcyNm_RU":"\u0422\u0443\u043d\u0438\u0441\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Tunis dinori","CcyNm_UZC":"\u0422\u0443\u043d\u0438\u0441
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Tunisian Dinar","Nominal":"1","Rate":"4154.76","Diff":"-6.19","Date":"01.04.2026"},{"id":67,"Code":"949","Ccy":"TRY","CcyNm_RU":"\u0422\u0443\u0440\u0435\u0446\u043a\u0430\u044f
+        \u043b\u0438\u0440\u0430","CcyNm_UZ":"Turkiya lirasi","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u0438\u044f
+        \u043b\u0438\u0440\u0430\u0441\u0438","CcyNm_EN":"Turkish Lira","Nominal":"1","Rate":"274.42","Diff":"-0.16","Date":"01.04.2026"},{"id":68,"Code":"980","Ccy":"UAH","CcyNm_RU":"\u0413\u0440\u0438\u0432\u043d\u0430","CcyNm_UZ":"Ukraina
+        grivnasi","CcyNm_UZC":"\u0423\u043a\u0440\u0430\u0438\u043d\u0430 \u0433\u0440\u0438\u0432\u043d\u0430\u0441\u0438","CcyNm_EN":"Ukrainian
+        Hryvnia","Nominal":"1","Rate":"277.58","Diff":"-1.18","Date":"01.04.2026"},{"id":1,"Code":"784","Ccy":"AED","CcyNm_RU":"\u0414\u0438\u0440\u0445\u0430\u043c
+        \u041e\u0410\u042d","CcyNm_UZ":"BAA dirhami","CcyNm_UZC":"\u0411\u0410\u0410
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"UAE Dirham","Nominal":"1","Rate":"3320.32","Diff":"-4.4","Date":"01.04.2026"},{"id":70,"Code":"858","Ccy":"UYU","CcyNm_RU":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Urugvay pesosi","CcyNm_UZC":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Peso Uruguayo","Nominal":"1","Rate":"300.54","Diff":"0.01","Date":"01.04.2026"},{"id":71,"Code":"928","Ccy":"VES","CcyNm_RU":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440","CcyNm_UZ":"Venesuela bolivari","CcyNm_UZC":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u0430
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440\u0438","CcyNm_EN":"Bol\u00edvar","Nominal":"1","Rate":"25.77","Diff":"-0.33","Date":"01.04.2026"},{"id":72,"Code":"704","Ccy":"VND","CcyNm_RU":"\u0414\u043e\u043d\u0433","CcyNm_UZ":"Vetnam
+        dongi","CcyNm_UZC":"\u0412\u044c\u0435\u0442\u043d\u0430\u043c \u0434\u043e\u043d\u0433\u0438","CcyNm_EN":"Dong","Nominal":"10","Rate":"4.63","Diff":"-0.01","Date":"01.04.2026"},{"id":73,"Code":"960","Ccy":"XDR","CcyNm_RU":"\u0421\u0414\u0420","CcyNm_UZ":"SDR","CcyNm_UZC":"\u0421\u0414\u0420","CcyNm_EN":"SDR","Nominal":"1","Rate":"16557.42","Diff":"-33.22","Date":"01.04.2026"},{"id":74,"Code":"886","Ccy":"YER","CcyNm_RU":"\u0419\u0435\u043c\u0435\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Yaman riali","CcyNm_UZC":"\u042f\u043c\u0430\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Yemeni Rial","Nominal":"1","Rate":"51.12","Diff":"-0.06","Date":"01.04.2026"},{"id":75,"Code":"710","Ccy":"ZAR","CcyNm_RU":"\u0420\u044d\u043d\u0434","CcyNm_UZ":"Janubiy
+        Afrika randi","CcyNm_UZC":"\u0416\u0430\u043d\u0443\u0431\u0438\u0439 \u0410\u0444\u0440\u0438\u043a\u0430
+        \u0440\u0430\u043d\u0434\u0438","CcyNm_EN":"Rand","Nominal":"1","Rate":"711.46","Diff":"0.45","Date":"01.04.2026"}]'
+  recorded_at: Wed, 08 Apr 2026 13:43:28 GMT
+- request:
+    method: get
+    uri: https://cbu.uz/en/arkhiv-kursov-valyut/json/all/2026-04-02/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cbu.uz
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 08 Apr 2026 13:43:31 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      X-Powered-Cms:
+      - Bitrix Site Manager (c8adcaa7ec7e7ae69696ea11d0fec79f)
+      Set-Cookie:
+      - PHPSESSID=PSkfJra7DxUcBCMtRY5sELMjeQgb0AXB; path=/; domain=cbu.uz; secure;
+        HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '[{"id":69,"Code":"840","Ccy":"USD","CcyNm_RU":"\u0414\u043e\u043b\u043b\u0430\u0440
+        \u0421\u0428\u0410","CcyNm_UZ":"AQSH dollari","CcyNm_UZC":"\u0410\u049a\u0428
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"US Dollar","Nominal":"1","Rate":"12142.10","Diff":"-52.11","Date":"02.04.2026"},{"id":21,"Code":"978","Ccy":"EUR","CcyNm_RU":"\u0415\u0432\u0440\u043e","CcyNm_UZ":"EVRO","CcyNm_UZC":"E\u0412\u0420\u041e","CcyNm_EN":"Euro","Nominal":"1","Rate":"14079.98","Diff":"95.66","Date":"02.04.2026"},{"id":57,"Code":"643","Ccy":"RUB","CcyNm_RU":"\u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Rossiya rubli","CcyNm_UZC":"\u0420\u043e\u0441\u0441\u0438\u044f
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Russian Ruble","Nominal":"1","Rate":"150.53","Diff":"0.56","Date":"02.04.2026"},{"id":22,"Code":"826","Ccy":"GBP","CcyNm_RU":"\u0424\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u043e\u0432","CcyNm_UZ":"Angliya
+        funt sterlingi","CcyNm_UZC":"\u0410\u043d\u0433\u043b\u0438\u044f \u0444\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u0438","CcyNm_EN":"Pound
+        Sterling","Nominal":"1","Rate":"16140.49","Diff":"27.06","Date":"02.04.2026"},{"id":33,"Code":"392","Ccy":"JPY","CcyNm_RU":"\u0418\u0435\u043d\u0430","CcyNm_UZ":"Yaponiya
+        iyenasi","CcyNm_UZC":"\u042f\u043f\u043e\u043d\u0438\u044f \u0438\u0435\u043d\u0430\u0441\u0438","CcyNm_EN":"Japan
+        Yen","Nominal":"1","Rate":"76.50","Diff":"0.12","Date":"02.04.2026"},{"id":6,"Code":"944","Ccy":"AZN","CcyNm_RU":"\u0410\u0437\u0435\u0440\u0431\u0430\u0439\u0434\u0436\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Ozarbayjon manati","CcyNm_UZC":"\u041e\u0437\u0430\u0440\u0431\u0430\u0439\u0436\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Azerbaijan Manat","Nominal":"1","Rate":"7142.41","Diff":"-30.65","Date":"02.04.2026"},{"id":7,"Code":"050","Ccy":"BDT","CcyNm_RU":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448\u0441\u043a\u0430\u044f
+        \u0442\u0430\u043a\u0430","CcyNm_UZ":"Bangladesh takasi","CcyNm_UZC":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448
+        \u0442\u0430\u043a\u0430\u0441\u0438","CcyNm_EN":"Bangladesh Taka","Nominal":"1","Rate":"98.72","Diff":"-0.66","Date":"02.04.2026"},{"id":8,"Code":"975","Ccy":"BGN","CcyNm_RU":"\u0411\u043e\u043b\u0433\u0430\u0440\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0432","CcyNm_UZ":"Bolgariya levi","CcyNm_UZC":"\u0411\u043e\u043b\u0433\u0430\u0440\u0438\u044f
+        \u043b\u0435\u0432\u0438","CcyNm_EN":"Bulgarian Lev","Nominal":"1","Rate":"7292.55","Diff":"-31.3","Date":"02.04.2026"},{"id":9,"Code":"048","Ccy":"BHD","CcyNm_RU":"\u0411\u0430\u0445\u0440\u0435\u0439\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Bahrayn dinori","CcyNm_UZC":"\u0411\u0430\u04b3\u0440\u0430\u0439\u043d
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Bahraini Dinar","Nominal":"1","Rate":"32155.99","Diff":"-189.39","Date":"02.04.2026"},{"id":10,"Code":"096","Ccy":"BND","CcyNm_RU":"\u0411\u0440\u0443\u043d\u0435\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Bruney dollari","CcyNm_UZC":"\u0411\u0440\u0443\u043d\u0435\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Brunei Dollar","Nominal":"1","Rate":"9464.57","Diff":"16.09","Date":"02.04.2026"},{"id":11,"Code":"986","Ccy":"BRL","CcyNm_RU":"\u0411\u0440\u0430\u0437\u0438\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0440\u0435\u0430\u043b","CcyNm_UZ":"Braziliya reali","CcyNm_UZC":"\u0411\u0440\u0430\u0437\u0438\u043b\u0438\u044f
+        \u0440\u0435\u0430\u043b\u0438","CcyNm_EN":"Brazilian Real","Nominal":"1","Rate":"2344.67","Diff":"22.58","Date":"02.04.2026"},{"id":12,"Code":"933","Ccy":"BYN","CcyNm_RU":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Belorus rubli","CcyNm_UZC":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Belarusian Ruble","Nominal":"1","Rate":"4082.89","Diff":"-17.52","Date":"02.04.2026"},{"id":13,"Code":"124","Ccy":"CAD","CcyNm_RU":"\u041a\u0430\u043d\u0430\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Kanada dollari","CcyNm_UZC":"\u041a\u0430\u043d\u0430\u0434\u0430
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Canadian Dollar","Nominal":"1","Rate":"8741.61","Diff":"-4.15","Date":"02.04.2026"},{"id":14,"Code":"756","Ccy":"CHF","CcyNm_RU":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0444\u0440\u0430\u043d\u043a","CcyNm_UZ":"Shveytsariya franki","CcyNm_UZC":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f
+        \u0444\u0440\u0430\u043d\u043a\u0438","CcyNm_EN":"Swiss Franc","Nominal":"1","Rate":"15309.67","Diff":"76.43","Date":"02.04.2026"},{"id":15,"Code":"156","Ccy":"CNY","CcyNm_RU":"\u042e\u0430\u043d\u044c
+        \u0440\u0435\u043d\u043c\u0438\u043d\u0431\u0438","CcyNm_UZ":"Xitoy yuani","CcyNm_UZC":"\u0425\u0438\u0442\u043e\u0439
+        \u044e\u0430\u043d\u0438","CcyNm_EN":"Yuan Renminbi","Nominal":"1","Rate":"1766.20","Diff":"0.87","Date":"02.04.2026"},{"id":16,"Code":"192","Ccy":"CUP","CcyNm_RU":"\u041a\u0443\u0431\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Kuba pesosi","CcyNm_UZC":"\u041a\u0443\u0431\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Cuban Peso","Nominal":"1","Rate":"505.92","Diff":"-2.17","Date":"02.04.2026"},{"id":17,"Code":"203","Ccy":"CZK","CcyNm_RU":"\u0427\u0435\u0448\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Chexiya kronasi","CcyNm_UZC":"\u0427\u0435\u0445\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Czech Koruna","Nominal":"1","Rate":"574.28","Diff":"4.06","Date":"02.04.2026"},{"id":18,"Code":"208","Ccy":"DKK","CcyNm_RU":"\u0414\u0430\u0442\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Daniya kronasi","CcyNm_UZC":"\u0414\u0430\u043d\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Danish Krone","Nominal":"1","Rate":"1884.13","Diff":"12.3","Date":"02.04.2026"},{"id":19,"Code":"012","Ccy":"DZD","CcyNm_RU":"\u0410\u043b\u0436\u0438\u0440\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Jazoir dinori","CcyNm_UZC":"\u0416\u0430\u0437\u043e\u0438\u0440
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Algerian Dinar","Nominal":"1","Rate":"91.45","Diff":"0.01","Date":"02.04.2026"},{"id":20,"Code":"818","Ccy":"EGP","CcyNm_RU":"\u0415\u0433\u0438\u043f\u0435\u0442\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Misr funti","CcyNm_UZC":"\u041c\u0438\u0441\u0440
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Egyptian Pound","Nominal":"1","Rate":"227.08","Diff":"3.8","Date":"02.04.2026"},{"id":2,"Code":"971","Ccy":"AFN","CcyNm_RU":"\u0410\u0444\u0433\u0430\u043d\u0438","CcyNm_UZ":"Afg\u2018oniston
+        afg\u2018onisi","CcyNm_UZC":"\u0410\u0444\u0493\u043e\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0430\u0444\u0493\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"AF Afghani","Nominal":"1","Rate":"186.34","Diff":"-1.64","Date":"02.04.2026"},{"id":4,"Code":"032","Ccy":"ARS","CcyNm_RU":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Argentina pesosi","CcyNm_UZC":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Argentine Peso","Nominal":"1","Rate":"8.78","Diff":"0.06","Date":"02.04.2026"},{"id":23,"Code":"981","Ccy":"GEL","CcyNm_RU":"\u0413\u0440\u0443\u0437\u0438\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0430\u0440\u0438","CcyNm_UZ":"Gruziya larisi","CcyNm_UZC":"\u0413\u0440\u0443\u0437\u0438\u044f
+        \u043b\u0430\u0440\u0438\u0441\u0438","CcyNm_EN":"Georgian Lari","Nominal":"1","Rate":"4508.76","Diff":"-18.01","Date":"02.04.2026"},{"id":24,"Code":"344","Ccy":"HKD","CcyNm_RU":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Gongkong dollari","CcyNm_UZC":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Hong Kong Dollar","Nominal":"1","Rate":"1549.11","Diff":"-6.33","Date":"02.04.2026"},{"id":25,"Code":"348","Ccy":"HUF","CcyNm_RU":"\u0412\u0435\u043d\u0433\u0435\u0440\u0441\u043a\u0438\u0439
+        \u0444\u043e\u0440\u0438\u043d\u0442","CcyNm_UZ":"Vengriya forinti","CcyNm_UZC":"\u0412\u0435\u043d\u0433\u0440\u0438\u044f
+        \u0444\u043e\u0440\u0438\u043d\u0442\u0438","CcyNm_EN":"Hungarian Forint","Nominal":"1","Rate":"36.82","Diff":"0.62","Date":"02.04.2026"},{"id":26,"Code":"360","Ccy":"IDR","CcyNm_RU":"\u0420\u0443\u043f\u0438\u044f","CcyNm_UZ":"Indoneziya
+        rupiyasi","CcyNm_UZC":"\u0418\u043d\u0434\u043e\u043d\u0435\u0437\u0438\u044f
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Rupiah","Nominal":"10","Rate":"7.15","Diff":"-0.03","Date":"02.04.2026"},{"id":27,"Code":"376","Ccy":"ILS","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0438\u0437\u0440\u0430\u0438\u043b\u044c\u0441\u043a\u0438\u0439 \u0448\u0435\u043a\u0435\u043b\u044c","CcyNm_UZ":"Isroil
+        shekeli","CcyNm_UZC":"\u0418\u0441\u0440\u043e\u0438\u043b \u0448\u0435\u043a\u0435\u043b\u0438","CcyNm_EN":"New
+        Israeli Sheqel","Nominal":"1","Rate":"3874.93","Diff":"30.48","Date":"02.04.2026"},{"id":28,"Code":"356","Ccy":"INR","CcyNm_RU":"\u0418\u043d\u0434\u0438\u0439\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Hindiston rupiyasi","CcyNm_UZC":"\u04b2\u0438\u043d\u0434\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Indian Rupee","Nominal":"1","Rate":"130.09","Diff":"0.37","Date":"02.04.2026"},{"id":29,"Code":"368","Ccy":"IQD","CcyNm_RU":"\u0418\u0440\u0430\u043a\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iroq dinori","CcyNm_UZC":"\u0418\u0440\u043e\u049b
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Iraqi Dinar","Nominal":"1","Rate":"9.27","Diff":"-0.04","Date":"02.04.2026"},{"id":30,"Code":"364","Ccy":"IRR","CcyNm_RU":"\u0418\u0440\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Eron riali","CcyNm_UZC":"\u042d\u0440\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Iranian Rial","Nominal":"10","Rate":"0.09","Diff":"0","Date":"02.04.2026"},{"id":31,"Code":"352","Ccy":"ISK","CcyNm_RU":"\u0418\u0441\u043b\u0430\u043d\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Islandiya kronasi","CcyNm_UZC":"\u0418\u0441\u043b\u0430\u043d\u0434\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Iceland Krona","Nominal":"1","Rate":"98.04","Diff":"0.51","Date":"02.04.2026"},{"id":32,"Code":"400","Ccy":"JOD","CcyNm_RU":"\u0418\u043e\u0440\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iordaniya dinori","CcyNm_UZC":"\u0418\u043e\u0440\u0434\u0430\u043d\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Jordanian Dinar","Nominal":"1","Rate":"17125.67","Diff":"-73.5","Date":"02.04.2026"},{"id":5,"Code":"036","Ccy":"AUD","CcyNm_RU":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Avstraliya dollari","CcyNm_UZC":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u044f
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Australian Dollar","Nominal":"1","Rate":"8429.05","Diff":"68.7","Date":"02.04.2026"},{"id":34,"Code":"417","Ccy":"KGS","CcyNm_RU":"\u041a\u0438\u0440\u0433\u0438\u0437\u0441\u043a\u0438\u0439
+        \u0441\u043e\u043c","CcyNm_UZ":"Qirg\u2018iz somi","CcyNm_UZC":"\u049a\u0438\u0440\u0493\u0438\u0437
+        \u0441\u043e\u043c\u0438","CcyNm_EN":"Kyrgyzstan Som","Nominal":"1","Rate":"138.80","Diff":"-0.6","Date":"02.04.2026"},{"id":35,"Code":"116","Ccy":"KHR","CcyNm_RU":"\u0420\u0438\u0435\u043b\u044c","CcyNm_UZ":"Kambodja
+        riyeli","CcyNm_UZC":"\u041a\u0430\u043c\u0431\u043e\u0434\u0436\u0430 \u0440\u0438\u0435\u043b\u0438","CcyNm_EN":"Riel","Nominal":"1","Rate":"3.03","Diff":"-0.02","Date":"02.04.2026"},{"id":36,"Code":"410","Ccy":"KRW","CcyNm_RU":"\u0412\u043e\u043d\u0430
+        \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u041a\u043e\u0440\u0435\u044f","CcyNm_UZ":"Koreya
+        Respublikasi voni","CcyNm_UZC":"\u041a\u043e\u0440\u0435\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0441\u0438
+        \u0432\u043e\u043d\u0438","CcyNm_EN":"The Korean Republic Won","Nominal":"1","Rate":"8.06","Diff":"0.09","Date":"02.04.2026"},{"id":37,"Code":"414","Ccy":"KWD","CcyNm_RU":"\u041a\u0443\u0432\u0435\u0439\u0442\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Quvayt dinori","CcyNm_UZC":"\u049a\u0443\u0432\u0430\u0439\u0442
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Kuwaiti Dinar","Nominal":"1","Rate":"39576.60","Diff":"-143.95","Date":"02.04.2026"},{"id":38,"Code":"398","Ccy":"KZT","CcyNm_RU":"\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0442\u0435\u043d\u0433\u0435","CcyNm_UZ":"Qozog\u2018iston tengesi","CcyNm_UZC":"\u049a\u043e\u0437\u043e\u0493\u0438\u0441\u0442\u043e\u043d
+        \u0442\u0435\u043d\u0433\u0435\u0441\u0438","CcyNm_EN":"Kazakhstan Tenge","Nominal":"1","Rate":"25.55","Diff":"0.02","Date":"02.04.2026"},{"id":39,"Code":"418","Ccy":"LAK","CcyNm_RU":"\u041b\u0430\u043e\u0441\u0441\u043a\u0438\u0439
+        \u043a\u0438\u043f","CcyNm_UZ":"Laos kipisi","CcyNm_UZC":"\u041b\u0430\u043e\u0441
+        \u043a\u0438\u043f\u0438\u0441\u0438","CcyNm_EN":"Lao Kip","Nominal":"1","Rate":"0.55","Diff":"0","Date":"02.04.2026"},{"id":40,"Code":"422","Ccy":"LBP","CcyNm_RU":"\u041b\u0438\u0432\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Livan funti","CcyNm_UZC":"\u041b\u0438\u0432\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Lebanese Pound","Nominal":"1","Rate":"0.14","Diff":"0","Date":"02.04.2026"},{"id":41,"Code":"434","Ccy":"LYD","CcyNm_RU":"\u041b\u0438\u0432\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Liviya dinori","CcyNm_UZC":"\u041b\u0438\u0432\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Libyan Dinar","Nominal":"1","Rate":"1903.57","Diff":"0.66","Date":"02.04.2026"},{"id":42,"Code":"504","Ccy":"MAD","CcyNm_RU":"\u041c\u0430\u0440\u043e\u043a\u043a\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u0440\u0445\u0430\u043c","CcyNm_UZ":"Marokash dirhami","CcyNm_UZC":"\u041c\u0430\u0440\u043e\u043a\u0430\u0448
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"Moroccan Dirham","Nominal":"1","Rate":"1301.25","Diff":"1.78","Date":"02.04.2026"},{"id":43,"Code":"498","Ccy":"MDL","CcyNm_RU":"\u041c\u043e\u043b\u0434\u0430\u0432\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Moldaviya leyi","CcyNm_UZC":"\u041c\u043e\u043b\u0434\u0430\u0432\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Moldovan Leu","Nominal":"1","Rate":"689.30","Diff":"0.75","Date":"02.04.2026"},{"id":44,"Code":"104","Ccy":"MMK","CcyNm_RU":"\u041c\u044c\u044f\u043d\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043a\u044c\u044f\u0442","CcyNm_UZ":"Myanma kyati","CcyNm_UZC":"\u041c\u044c\u044f\u043d\u043c\u0430
+        \u043a\u044c\u044f\u0442\u0438","CcyNm_EN":"Kyat","Nominal":"1","Rate":"5.78","Diff":"-0.03","Date":"02.04.2026"},{"id":45,"Code":"496","Ccy":"MNT","CcyNm_RU":"\u041c\u043e\u043d\u0433\u043e\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0442\u0443\u0433p\u0438\u043a","CcyNm_UZ":"Mongoliya tugriki","CcyNm_UZC":"\u041c\u043e\u043d\u0433\u043e\u043b\u0438\u044f
+        \u0442\u0443\u0433\u0440\u0438\u043a\u0438","CcyNm_EN":"Tugrik","Nominal":"1","Rate":"3.40","Diff":"-0.01","Date":"02.04.2026"},{"id":46,"Code":"484","Ccy":"MXN","CcyNm_RU":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Meksika pesosi","CcyNm_UZC":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Mexican Peso","Nominal":"1","Rate":"679.77","Diff":"5.51","Date":"02.04.2026"},{"id":47,"Code":"458","Ccy":"MYR","CcyNm_RU":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442","CcyNm_UZ":"Malayziya ringgiti","CcyNm_UZC":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u044f
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442\u0438","CcyNm_EN":"Malaysian Ringgit","Nominal":"1","Rate":"3015.17","Diff":"3.51","Date":"02.04.2026"},{"id":48,"Code":"578","Ccy":"NOK","CcyNm_RU":"\u041d\u043e\u0440\u0432\u0435\u0436\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Norvegiya kronasi","CcyNm_UZC":"\u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Norwegian Krone","Nominal":"1","Rate":"1257.31","Diff":"10.88","Date":"02.04.2026"},{"id":49,"Code":"554","Ccy":"NZD","CcyNm_RU":"\u041d\u043e\u0432\u043e\u0437\u0435\u043b\u0430\u043d\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Yangi Zelandiya dollari","CcyNm_UZC":"\u042f\u043d\u0433\u0438
+        \u0417\u0435\u043b\u0430\u043d\u0434\u0438\u044f \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"New
+        Zealand Dollar","Nominal":"1","Rate":"7002.35","Diff":"43.11","Date":"02.04.2026"},{"id":50,"Code":"512","Ccy":"OMR","CcyNm_RU":"\u041e\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Ummon riali","CcyNm_UZC":"\u0423\u043c\u043c\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Rial Omani","Nominal":"1","Rate":"31537.92","Diff":"-135.35","Date":"02.04.2026"},{"id":51,"Code":"608","Ccy":"PHP","CcyNm_RU":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Filippin pesosi","CcyNm_UZC":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Philippine Piso","Nominal":"1","Rate":"201.78","Diff":"0.94","Date":"02.04.2026"},{"id":52,"Code":"586","Ccy":"PKR","CcyNm_RU":"\u041f\u0430\u043a\u0438\u0441\u0442\u0430\u043d\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Pokiston rupiyasi","CcyNm_UZC":"\u041f\u043e\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Pakistan Rupee","Nominal":"1","Rate":"43.52","Diff":"-0.17","Date":"02.04.2026"},{"id":53,"Code":"985","Ccy":"PLN","CcyNm_RU":"\u0417\u043b\u043e\u0442\u044b\u0439","CcyNm_UZ":"Polsha
+        zlotiysi","CcyNm_UZC":"\u041f\u043e\u043b\u044c\u0448\u0430 \u0437\u043b\u043e\u0442\u0438\u0439\u0441\u0438","CcyNm_EN":"Polish
+        Zloty","Nominal":"1","Rate":"3286.89","Diff":"28.15","Date":"02.04.2026"},{"id":54,"Code":"634","Ccy":"QAR","CcyNm_RU":"\u041a\u0430\u0442\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Qatar riali","CcyNm_UZC":"\u049a\u0430\u0442\u0430\u0440
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Qatari Rial","Nominal":"1","Rate":"3330.25","Diff":"-15.21","Date":"02.04.2026"},{"id":55,"Code":"946","Ccy":"RON","CcyNm_RU":"\u0420\u0443\u043c\u044b\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Ruminiya leyi","CcyNm_UZC":"\u0420\u0443\u043c\u0438\u043d\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Romanian Leu","Nominal":"1","Rate":"2761.45","Diff":"18.84","Date":"02.04.2026"},{"id":56,"Code":"941","Ccy":"RSD","CcyNm_RU":"\u0421\u0435\u0440\u0431\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Serbiya dinori","CcyNm_UZC":"\u0421\u0435\u0440\u0431\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Serbian Dinar","Nominal":"1","Rate":"119.92","Diff":"0.82","Date":"02.04.2026"},{"id":3,"Code":"051","Ccy":"AMD","CcyNm_RU":"\u0410\u0440\u043c\u044f\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0440\u0430\u043c","CcyNm_UZ":"Armaniston drami","CcyNm_UZC":"\u0410\u0440\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0434\u0440\u0430\u043c\u0438","CcyNm_EN":"Armenian Dram","Nominal":"1","Rate":"32.23","Diff":"-0.07","Date":"02.04.2026"},{"id":58,"Code":"682","Ccy":"SAR","CcyNm_RU":"\u0421\u0430\u0443\u0434\u043e\u0432\u0441\u043a\u0438\u0439
+        \u0440\u0438\u044f\u043b","CcyNm_UZ":"Saudiya\u00a0Arabistoni\u00a0riali","CcyNm_UZC":"\u0421\u0430\u0443\u0434\u0438\u044f\u00a0\u0410\u0440\u0430\u0431\u0438\u0441\u0442\u043e\u043d\u0438\u00a0\u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Saudi
+        Riyal","Nominal":"1","Rate":"3235.22","Diff":"-14.66","Date":"02.04.2026"},{"id":59,"Code":"938","Ccy":"SDG","CcyNm_RU":"\u0421\u0443\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Sudan funti","CcyNm_UZC":"\u0421\u0443\u0434\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Sudanese Pound","Nominal":"1","Rate":"20.23","Diff":"-0.09","Date":"02.04.2026"},{"id":60,"Code":"752","Ccy":"SEK","CcyNm_RU":"\u0428\u0432\u0435\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Shvetsiya kronasi","CcyNm_UZC":"\u0428\u0432\u0435\u0446\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Swedish Krona","Nominal":"1","Rate":"1292.55","Diff":"16.59","Date":"02.04.2026"},{"id":61,"Code":"702","Ccy":"SGD","CcyNm_RU":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Singapur dollari","CcyNm_UZC":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Singapore Dollar","Nominal":"1","Rate":"9464.57","Diff":"16.09","Date":"02.04.2026"},{"id":62,"Code":"760","Ccy":"SYP","CcyNm_RU":"\u0421\u0438\u0440\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Suriya funti","CcyNm_UZC":"\u0421\u0443\u0440\u0438\u044f
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Syrian Pound","Nominal":"1","Rate":"105.13","Diff":"-0.43","Date":"02.04.2026"},{"id":63,"Code":"764","Ccy":"THB","CcyNm_RU":"\u0411\u0430\u0442","CcyNm_UZ":"Tailand
+        bati","CcyNm_UZC":"\u0422\u0430\u0438\u043b\u0430\u043d\u0434 \u0431\u0430\u0442\u0438","CcyNm_EN":"Baht","Nominal":"1","Rate":"372.80","Diff":"3","Date":"02.04.2026"},{"id":64,"Code":"972","Ccy":"TJS","CcyNm_RU":"\u0421\u043e\u043c\u043e\u043d\u0438","CcyNm_UZ":"Tojikiston
+        somonisi","CcyNm_UZC":"\u0422\u043e\u0436\u0438\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0441\u043e\u043c\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"Tajikistan Somoni","Nominal":"1","Rate":"1266.78","Diff":"-6.1","Date":"02.04.2026"},{"id":65,"Code":"934","Ccy":"TMT","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0442\u0443\u0440\u043a\u043c\u0435\u043d\u0441\u043a\u0438\u0439 \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Turkmaniston
+        manati","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Turkmenistan New Manat","Nominal":"1","Rate":"3469.17","Diff":"-568.51","Date":"02.04.2026"},{"id":66,"Code":"788","Ccy":"TND","CcyNm_RU":"\u0422\u0443\u043d\u0438\u0441\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Tunis dinori","CcyNm_UZC":"\u0422\u0443\u043d\u0438\u0441
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Tunisian Dinar","Nominal":"1","Rate":"4158.54","Diff":"3.78","Date":"02.04.2026"},{"id":67,"Code":"949","Ccy":"TRY","CcyNm_RU":"\u0422\u0443\u0440\u0435\u0446\u043a\u0430\u044f
+        \u043b\u0438\u0440\u0430","CcyNm_UZ":"Turkiya lirasi","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u0438\u044f
+        \u043b\u0438\u0440\u0430\u0441\u0438","CcyNm_EN":"Turkish Lira","Nominal":"1","Rate":"272.98","Diff":"-1.44","Date":"02.04.2026"},{"id":68,"Code":"980","Ccy":"UAH","CcyNm_RU":"\u0413\u0440\u0438\u0432\u043d\u0430","CcyNm_UZ":"Ukraina
+        grivnasi","CcyNm_UZC":"\u0423\u043a\u0440\u0430\u0438\u043d\u0430 \u0433\u0440\u0438\u0432\u043d\u0430\u0441\u0438","CcyNm_EN":"Ukrainian
+        Hryvnia","Nominal":"1","Rate":"277.42","Diff":"-0.16","Date":"02.04.2026"},{"id":1,"Code":"784","Ccy":"AED","CcyNm_RU":"\u0414\u0438\u0440\u0445\u0430\u043c
+        \u041e\u0410\u042d","CcyNm_UZ":"BAA dirhami","CcyNm_UZC":"\u0411\u0410\u0410
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"UAE Dirham","Nominal":"1","Rate":"3306.13","Diff":"-14.19","Date":"02.04.2026"},{"id":70,"Code":"858","Ccy":"UYU","CcyNm_RU":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Urugvay pesosi","CcyNm_UZC":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Peso Uruguayo","Nominal":"1","Rate":"298.74","Diff":"-1.8","Date":"02.04.2026"},{"id":71,"Code":"928","Ccy":"VES","CcyNm_RU":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440","CcyNm_UZ":"Venesuela bolivari","CcyNm_UZC":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u0430
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440\u0438","CcyNm_EN":"Bol\u00edvar","Nominal":"1","Rate":"25.65","Diff":"-0.12","Date":"02.04.2026"},{"id":72,"Code":"704","Ccy":"VND","CcyNm_RU":"\u0414\u043e\u043d\u0433","CcyNm_UZ":"Vetnam
+        dongi","CcyNm_UZC":"\u0412\u044c\u0435\u0442\u043d\u0430\u043c \u0434\u043e\u043d\u0433\u0438","CcyNm_EN":"Dong","Nominal":"10","Rate":"4.61","Diff":"-0.02","Date":"02.04.2026"},{"id":73,"Code":"960","Ccy":"XDR","CcyNm_RU":"\u0421\u0414\u0420","CcyNm_UZ":"SDR","CcyNm_UZC":"\u0421\u0414\u0420","CcyNm_EN":"SDR","Nominal":"1","Rate":"16469.42","Diff":"-88","Date":"02.04.2026"},{"id":74,"Code":"886","Ccy":"YER","CcyNm_RU":"\u0419\u0435\u043c\u0435\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Yaman riali","CcyNm_UZC":"\u042f\u043c\u0430\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Yemeni Rial","Nominal":"1","Rate":"50.90","Diff":"-0.22","Date":"02.04.2026"},{"id":75,"Code":"710","Ccy":"ZAR","CcyNm_RU":"\u0420\u044d\u043d\u0434","CcyNm_UZ":"Janubiy
+        Afrika randi","CcyNm_UZC":"\u0416\u0430\u043d\u0443\u0431\u0438\u0439 \u0410\u0444\u0440\u0438\u043a\u0430
+        \u0440\u0430\u043d\u0434\u0438","CcyNm_EN":"Rand","Nominal":"1","Rate":"722.15","Diff":"10.69","Date":"02.04.2026"}]'
+  recorded_at: Wed, 08 Apr 2026 13:43:31 GMT
+- request:
+    method: get
+    uri: https://cbu.uz/en/arkhiv-kursov-valyut/json/all/2026-04-03/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - cbu.uz
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 08 Apr 2026 13:43:35 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      X-Powered-Cms:
+      - Bitrix Site Manager (c8adcaa7ec7e7ae69696ea11d0fec79f)
+      Set-Cookie:
+      - PHPSESSID=0WLl7ZfU76Q3ArZaYo4n41wcsU1hEatB; path=/; domain=cbu.uz; secure;
+        HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self';
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: '[{"id":69,"Code":"840","Ccy":"USD","CcyNm_RU":"\u0414\u043e\u043b\u043b\u0430\u0440
+        \u0421\u0428\u0410","CcyNm_UZ":"AQSH dollari","CcyNm_UZC":"\u0410\u049a\u0428
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"US Dollar","Nominal":"1","Rate":"12149.84","Diff":"7.74","Date":"03.04.2026"},{"id":21,"Code":"978","Ccy":"EUR","CcyNm_RU":"\u0415\u0432\u0440\u043e","CcyNm_UZ":"EVRO","CcyNm_UZC":"E\u0412\u0420\u041e","CcyNm_EN":"Euro","Nominal":"1","Rate":"14003.91","Diff":"-76.07","Date":"03.04.2026"},{"id":57,"Code":"643","Ccy":"RUB","CcyNm_RU":"\u0420\u043e\u0441\u0441\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Rossiya rubli","CcyNm_UZC":"\u0420\u043e\u0441\u0441\u0438\u044f
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Russian Ruble","Nominal":"1","Rate":"151.10","Diff":"0.57","Date":"03.04.2026"},{"id":22,"Code":"826","Ccy":"GBP","CcyNm_RU":"\u0424\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u043e\u0432","CcyNm_UZ":"Angliya
+        funt sterlingi","CcyNm_UZC":"\u0410\u043d\u0433\u043b\u0438\u044f \u0444\u0443\u043d\u0442
+        \u0441\u0442\u0435\u0440\u043b\u0438\u043d\u0433\u0438","CcyNm_EN":"Pound
+        Sterling","Nominal":"1","Rate":"16040.22","Diff":"-100.27","Date":"03.04.2026"},{"id":33,"Code":"392","Ccy":"JPY","CcyNm_RU":"\u0418\u0435\u043d\u0430","CcyNm_UZ":"Yaponiya
+        iyenasi","CcyNm_UZC":"\u042f\u043f\u043e\u043d\u0438\u044f \u0438\u0435\u043d\u0430\u0441\u0438","CcyNm_EN":"Japan
+        Yen","Nominal":"1","Rate":"76.14","Diff":"-0.36","Date":"03.04.2026"},{"id":6,"Code":"944","Ccy":"AZN","CcyNm_RU":"\u0410\u0437\u0435\u0440\u0431\u0430\u0439\u0434\u0436\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Ozarbayjon manati","CcyNm_UZC":"\u041e\u0437\u0430\u0440\u0431\u0430\u0439\u0436\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Azerbaijan Manat","Nominal":"1","Rate":"7146.96","Diff":"4.55","Date":"03.04.2026"},{"id":7,"Code":"050","Ccy":"BDT","CcyNm_RU":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448\u0441\u043a\u0430\u044f
+        \u0442\u0430\u043a\u0430","CcyNm_UZ":"Bangladesh takasi","CcyNm_UZC":"\u0411\u0430\u043d\u0433\u043b\u0430\u0434\u0435\u0448
+        \u0442\u0430\u043a\u0430\u0441\u0438","CcyNm_EN":"Bangladesh Taka","Nominal":"1","Rate":"99.02","Diff":"0.3","Date":"03.04.2026"},{"id":8,"Code":"975","Ccy":"BGN","CcyNm_RU":"\u0411\u043e\u043b\u0433\u0430\u0440\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0432","CcyNm_UZ":"Bolgariya levi","CcyNm_UZC":"\u0411\u043e\u043b\u0433\u0430\u0440\u0438\u044f
+        \u043b\u0435\u0432\u0438","CcyNm_EN":"Bulgarian Lev","Nominal":"1","Rate":"7297.20","Diff":"4.65","Date":"03.04.2026"},{"id":9,"Code":"048","Ccy":"BHD","CcyNm_RU":"\u0411\u0430\u0445\u0440\u0435\u0439\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Bahrayn dinori","CcyNm_UZC":"\u0411\u0430\u04b3\u0440\u0430\u0439\u043d
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Bahraini Dinar","Nominal":"1","Rate":"32176.48","Diff":"20.49","Date":"03.04.2026"},{"id":10,"Code":"096","Ccy":"BND","CcyNm_RU":"\u0411\u0440\u0443\u043d\u0435\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Bruney dollari","CcyNm_UZC":"\u0411\u0440\u0443\u043d\u0435\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Brunei Dollar","Nominal":"1","Rate":"9441.17","Diff":"-23.4","Date":"03.04.2026"},{"id":11,"Code":"986","Ccy":"BRL","CcyNm_RU":"\u0411\u0440\u0430\u0437\u0438\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0440\u0435\u0430\u043b","CcyNm_UZ":"Braziliya reali","CcyNm_UZC":"\u0411\u0440\u0430\u0437\u0438\u043b\u0438\u044f
+        \u0440\u0435\u0430\u043b\u0438","CcyNm_EN":"Brazilian Real","Nominal":"1","Rate":"2356.86","Diff":"12.19","Date":"03.04.2026"},{"id":12,"Code":"933","Ccy":"BYN","CcyNm_RU":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441\u0441\u043a\u0438\u0439
+        \u0440\u0443\u0431\u043b\u044c","CcyNm_UZ":"Belorus rubli","CcyNm_UZC":"\u0411\u0435\u043b\u043e\u0440\u0443\u0441
+        \u0440\u0443\u0431\u043b\u0438","CcyNm_EN":"Belarusian Ruble","Nominal":"1","Rate":"4089.75","Diff":"6.86","Date":"03.04.2026"},{"id":13,"Code":"124","Ccy":"CAD","CcyNm_RU":"\u041a\u0430\u043d\u0430\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Kanada dollari","CcyNm_UZC":"\u041a\u0430\u043d\u0430\u0434\u0430
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Canadian Dollar","Nominal":"1","Rate":"8729.59","Diff":"-12.02","Date":"03.04.2026"},{"id":14,"Code":"756","Ccy":"CHF","CcyNm_RU":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0444\u0440\u0430\u043d\u043a","CcyNm_UZ":"Shveytsariya franki","CcyNm_UZC":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f
+        \u0444\u0440\u0430\u043d\u043a\u0438","CcyNm_EN":"Swiss Franc","Nominal":"1","Rate":"15191.10","Diff":"-118.57","Date":"03.04.2026"},{"id":15,"Code":"156","Ccy":"CNY","CcyNm_RU":"\u042e\u0430\u043d\u044c
+        \u0440\u0435\u043d\u043c\u0438\u043d\u0431\u0438","CcyNm_UZ":"Xitoy yuani","CcyNm_UZC":"\u0425\u0438\u0442\u043e\u0439
+        \u044e\u0430\u043d\u0438","CcyNm_EN":"Yuan Renminbi","Nominal":"1","Rate":"1762.20","Diff":"-4","Date":"03.04.2026"},{"id":16,"Code":"192","Ccy":"CUP","CcyNm_RU":"\u041a\u0443\u0431\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Kuba pesosi","CcyNm_UZC":"\u041a\u0443\u0431\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Cuban Peso","Nominal":"1","Rate":"506.24","Diff":"0.32","Date":"03.04.2026"},{"id":17,"Code":"203","Ccy":"CZK","CcyNm_RU":"\u0427\u0435\u0448\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Chexiya kronasi","CcyNm_UZC":"\u0427\u0435\u0445\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Czech Koruna","Nominal":"1","Rate":"570.79","Diff":"-3.49","Date":"03.04.2026"},{"id":18,"Code":"208","Ccy":"DKK","CcyNm_RU":"\u0414\u0430\u0442\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Daniya kronasi","CcyNm_UZC":"\u0414\u0430\u043d\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Danish Krone","Nominal":"1","Rate":"1874.19","Diff":"-9.94","Date":"03.04.2026"},{"id":19,"Code":"012","Ccy":"DZD","CcyNm_RU":"\u0410\u043b\u0436\u0438\u0440\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Jazoir dinori","CcyNm_UZC":"\u0416\u0430\u0437\u043e\u0438\u0440
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Algerian Dinar","Nominal":"1","Rate":"91.41","Diff":"-0.04","Date":"03.04.2026"},{"id":20,"Code":"818","Ccy":"EGP","CcyNm_RU":"\u0415\u0433\u0438\u043f\u0435\u0442\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Misr funti","CcyNm_UZC":"\u041c\u0438\u0441\u0440
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Egyptian Pound","Nominal":"1","Rate":"223.55","Diff":"-3.53","Date":"03.04.2026"},{"id":2,"Code":"971","Ccy":"AFN","CcyNm_RU":"\u0410\u0444\u0433\u0430\u043d\u0438","CcyNm_UZ":"Afg\u2018oniston
+        afg\u2018onisi","CcyNm_UZC":"\u0410\u0444\u0493\u043e\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0430\u0444\u0493\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"AF Afghani","Nominal":"1","Rate":"186.60","Diff":"0.26","Date":"03.04.2026"},{"id":4,"Code":"032","Ccy":"ARS","CcyNm_RU":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Argentina pesosi","CcyNm_UZC":"\u0410\u0440\u0433\u0435\u043d\u0442\u0438\u043d\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Argentine Peso","Nominal":"1","Rate":"8.73","Diff":"-0.05","Date":"03.04.2026"},{"id":23,"Code":"981","Ccy":"GEL","CcyNm_RU":"\u0413\u0440\u0443\u0437\u0438\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0430\u0440\u0438","CcyNm_UZ":"Gruziya larisi","CcyNm_UZC":"\u0413\u0440\u0443\u0437\u0438\u044f
+        \u043b\u0430\u0440\u0438\u0441\u0438","CcyNm_EN":"Georgian Lari","Nominal":"1","Rate":"4512.31","Diff":"3.55","Date":"03.04.2026"},{"id":24,"Code":"344","Ccy":"HKD","CcyNm_RU":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Gongkong dollari","CcyNm_UZC":"\u0413\u043e\u043d\u0433\u043a\u043e\u043d\u0433
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Hong Kong Dollar","Nominal":"1","Rate":"1550.02","Diff":"0.91","Date":"03.04.2026"},{"id":25,"Code":"348","Ccy":"HUF","CcyNm_RU":"\u0412\u0435\u043d\u0433\u0435\u0440\u0441\u043a\u0438\u0439
+        \u0444\u043e\u0440\u0438\u043d\u0442","CcyNm_UZ":"Vengriya forinti","CcyNm_UZC":"\u0412\u0435\u043d\u0433\u0440\u0438\u044f
+        \u0444\u043e\u0440\u0438\u043d\u0442\u0438","CcyNm_EN":"Hungarian Forint","Nominal":"1","Rate":"36.51","Diff":"-0.31","Date":"03.04.2026"},{"id":26,"Code":"360","Ccy":"IDR","CcyNm_RU":"\u0420\u0443\u043f\u0438\u044f","CcyNm_UZ":"Indoneziya
+        rupiyasi","CcyNm_UZC":"\u0418\u043d\u0434\u043e\u043d\u0435\u0437\u0438\u044f
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Rupiah","Nominal":"10","Rate":"7.15","Diff":"0","Date":"03.04.2026"},{"id":27,"Code":"376","Ccy":"ILS","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0438\u0437\u0440\u0430\u0438\u043b\u044c\u0441\u043a\u0438\u0439 \u0448\u0435\u043a\u0435\u043b\u044c","CcyNm_UZ":"Isroil
+        shekeli","CcyNm_UZC":"\u0418\u0441\u0440\u043e\u0438\u043b \u0448\u0435\u043a\u0435\u043b\u0438","CcyNm_EN":"New
+        Israeli Sheqel","Nominal":"1","Rate":"3865.19","Diff":"-9.74","Date":"03.04.2026"},{"id":28,"Code":"356","Ccy":"INR","CcyNm_RU":"\u0418\u043d\u0434\u0438\u0439\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Hindiston rupiyasi","CcyNm_UZC":"\u04b2\u0438\u043d\u0434\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Indian Rupee","Nominal":"1","Rate":"130.49","Diff":"0.4","Date":"03.04.2026"},{"id":29,"Code":"368","Ccy":"IQD","CcyNm_RU":"\u0418\u0440\u0430\u043a\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iroq dinori","CcyNm_UZC":"\u0418\u0440\u043e\u049b
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Iraqi Dinar","Nominal":"1","Rate":"9.27","Diff":"0","Date":"03.04.2026"},{"id":30,"Code":"364","Ccy":"IRR","CcyNm_RU":"\u0418\u0440\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Eron riali","CcyNm_UZC":"\u042d\u0440\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Iranian Rial","Nominal":"10","Rate":"0.09","Diff":"0","Date":"03.04.2026"},{"id":31,"Code":"352","Ccy":"ISK","CcyNm_RU":"\u0418\u0441\u043b\u0430\u043d\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Islandiya kronasi","CcyNm_UZC":"\u0418\u0441\u043b\u0430\u043d\u0434\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Iceland Krona","Nominal":"1","Rate":"96.99","Diff":"-1.05","Date":"03.04.2026"},{"id":32,"Code":"400","Ccy":"JOD","CcyNm_RU":"\u0418\u043e\u0440\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Iordaniya dinori","CcyNm_UZC":"\u0418\u043e\u0440\u0434\u0430\u043d\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Jordanian Dinar","Nominal":"1","Rate":"17136.59","Diff":"10.92","Date":"03.04.2026"},{"id":5,"Code":"036","Ccy":"AUD","CcyNm_RU":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Avstraliya dollari","CcyNm_UZC":"\u0410\u0432\u0441\u0442\u0440\u0430\u043b\u0438\u044f
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Australian Dollar","Nominal":"1","Rate":"8354.23","Diff":"-74.82","Date":"03.04.2026"},{"id":34,"Code":"417","Ccy":"KGS","CcyNm_RU":"\u041a\u0438\u0440\u0433\u0438\u0437\u0441\u043a\u0438\u0439
+        \u0441\u043e\u043c","CcyNm_UZ":"Qirg\u2018iz somi","CcyNm_UZC":"\u049a\u0438\u0440\u0493\u0438\u0437
+        \u0441\u043e\u043c\u0438","CcyNm_EN":"Kyrgyzstan Som","Nominal":"1","Rate":"138.89","Diff":"0.09","Date":"03.04.2026"},{"id":35,"Code":"116","Ccy":"KHR","CcyNm_RU":"\u0420\u0438\u0435\u043b\u044c","CcyNm_UZ":"Kambodja
+        riyeli","CcyNm_UZC":"\u041a\u0430\u043c\u0431\u043e\u0434\u0436\u0430 \u0440\u0438\u0435\u043b\u0438","CcyNm_EN":"Riel","Nominal":"1","Rate":"3.04","Diff":"0.01","Date":"03.04.2026"},{"id":36,"Code":"410","Ccy":"KRW","CcyNm_RU":"\u0412\u043e\u043d\u0430
+        \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0438 \u041a\u043e\u0440\u0435\u044f","CcyNm_UZ":"Koreya
+        Respublikasi voni","CcyNm_UZC":"\u041a\u043e\u0440\u0435\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0441\u0438
+        \u0432\u043e\u043d\u0438","CcyNm_EN":"The Korean Republic Won","Nominal":"1","Rate":"8.03","Diff":"-0.03","Date":"03.04.2026"},{"id":37,"Code":"414","Ccy":"KWD","CcyNm_RU":"\u041a\u0443\u0432\u0435\u0439\u0442\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Quvayt dinori","CcyNm_UZC":"\u049a\u0443\u0432\u0430\u0439\u0442
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Kuwaiti Dinar","Nominal":"1","Rate":"39588.92","Diff":"12.32","Date":"03.04.2026"},{"id":38,"Code":"398","Ccy":"KZT","CcyNm_RU":"\u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0442\u0435\u043d\u0433\u0435","CcyNm_UZ":"Qozog\u2018iston tengesi","CcyNm_UZC":"\u049a\u043e\u0437\u043e\u0493\u0438\u0441\u0442\u043e\u043d
+        \u0442\u0435\u043d\u0433\u0435\u0441\u0438","CcyNm_EN":"Kazakhstan Tenge","Nominal":"1","Rate":"25.69","Diff":"0.14","Date":"03.04.2026"},{"id":39,"Code":"418","Ccy":"LAK","CcyNm_RU":"\u041b\u0430\u043e\u0441\u0441\u043a\u0438\u0439
+        \u043a\u0438\u043f","CcyNm_UZ":"Laos kipisi","CcyNm_UZC":"\u041b\u0430\u043e\u0441
+        \u043a\u0438\u043f\u0438\u0441\u0438","CcyNm_EN":"Lao Kip","Nominal":"1","Rate":"0.55","Diff":"0","Date":"03.04.2026"},{"id":40,"Code":"422","Ccy":"LBP","CcyNm_RU":"\u041b\u0438\u0432\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Livan funti","CcyNm_UZC":"\u041b\u0438\u0432\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Lebanese Pound","Nominal":"1","Rate":"0.14","Diff":"0","Date":"03.04.2026"},{"id":41,"Code":"434","Ccy":"LYD","CcyNm_RU":"\u041b\u0438\u0432\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Liviya dinori","CcyNm_UZC":"\u041b\u0438\u0432\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Libyan Dinar","Nominal":"1","Rate":"1899.81","Diff":"-3.76","Date":"03.04.2026"},{"id":42,"Code":"504","Ccy":"MAD","CcyNm_RU":"\u041c\u0430\u0440\u043e\u043a\u043a\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0438\u0440\u0445\u0430\u043c","CcyNm_UZ":"Marokash dirhami","CcyNm_UZC":"\u041c\u0430\u0440\u043e\u043a\u0430\u0448
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"Moroccan Dirham","Nominal":"1","Rate":"1296.74","Diff":"-4.51","Date":"03.04.2026"},{"id":43,"Code":"498","Ccy":"MDL","CcyNm_RU":"\u041c\u043e\u043b\u0434\u0430\u0432\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Moldaviya leyi","CcyNm_UZC":"\u041c\u043e\u043b\u0434\u0430\u0432\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Moldovan Leu","Nominal":"1","Rate":"690.53","Diff":"1.23","Date":"03.04.2026"},{"id":44,"Code":"104","Ccy":"MMK","CcyNm_RU":"\u041c\u044c\u044f\u043d\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u043a\u044c\u044f\u0442","CcyNm_UZ":"Myanma kyati","CcyNm_UZC":"\u041c\u044c\u044f\u043d\u043c\u0430
+        \u043a\u044c\u044f\u0442\u0438","CcyNm_EN":"Kyat","Nominal":"1","Rate":"5.79","Diff":"0.01","Date":"03.04.2026"},{"id":45,"Code":"496","Ccy":"MNT","CcyNm_RU":"\u041c\u043e\u043d\u0433\u043e\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0442\u0443\u0433p\u0438\u043a","CcyNm_UZ":"Mongoliya tugriki","CcyNm_UZC":"\u041c\u043e\u043d\u0433\u043e\u043b\u0438\u044f
+        \u0442\u0443\u0433\u0440\u0438\u043a\u0438","CcyNm_EN":"Tugrik","Nominal":"1","Rate":"3.40","Diff":"0","Date":"03.04.2026"},{"id":46,"Code":"484","Ccy":"MXN","CcyNm_RU":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Meksika pesosi","CcyNm_UZC":"\u041c\u0435\u043a\u0441\u0438\u043a\u0430
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Mexican Peso","Nominal":"1","Rate":"677.73","Diff":"-2.04","Date":"03.04.2026"},{"id":47,"Code":"458","Ccy":"MYR","CcyNm_RU":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442","CcyNm_UZ":"Malayziya ringgiti","CcyNm_UZC":"\u041c\u0430\u043b\u0430\u0439\u0437\u0438\u044f
+        \u0440\u0438\u043d\u0433\u0433\u0438\u0442\u0438","CcyNm_EN":"Malaysian Ringgit","Nominal":"1","Rate":"3008.13","Diff":"-7.04","Date":"03.04.2026"},{"id":48,"Code":"578","Ccy":"NOK","CcyNm_RU":"\u041d\u043e\u0440\u0432\u0435\u0436\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Norvegiya kronasi","CcyNm_UZC":"\u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Norwegian Krone","Nominal":"1","Rate":"1248.07","Diff":"-9.24","Date":"03.04.2026"},{"id":49,"Code":"554","Ccy":"NZD","CcyNm_RU":"\u041d\u043e\u0432\u043e\u0437\u0435\u043b\u0430\u043d\u0434\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Yangi Zelandiya dollari","CcyNm_UZC":"\u042f\u043d\u0433\u0438
+        \u0417\u0435\u043b\u0430\u043d\u0434\u0438\u044f \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"New
+        Zealand Dollar","Nominal":"1","Rate":"6944.85","Diff":"-57.5","Date":"03.04.2026"},{"id":50,"Code":"512","Ccy":"OMR","CcyNm_RU":"\u041e\u043c\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Ummon riali","CcyNm_UZC":"\u0423\u043c\u043c\u043e\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Rial Omani","Nominal":"1","Rate":"31558.03","Diff":"20.11","Date":"03.04.2026"},{"id":51,"Code":"608","Ccy":"PHP","CcyNm_RU":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Filippin pesosi","CcyNm_UZC":"\u0424\u0438\u043b\u0438\u043f\u043f\u0438\u043d
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Philippine Piso","Nominal":"1","Rate":"200.30","Diff":"-1.48","Date":"03.04.2026"},{"id":52,"Code":"586","Ccy":"PKR","CcyNm_RU":"\u041f\u0430\u043a\u0438\u0441\u0442\u0430\u043d\u0441\u043a\u0430\u044f
+        \u0440\u0443\u043f\u0438\u044f","CcyNm_UZ":"Pokiston rupiyasi","CcyNm_UZC":"\u041f\u043e\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0440\u0443\u043f\u0438\u044f\u0441\u0438","CcyNm_EN":"Pakistan Rupee","Nominal":"1","Rate":"43.54","Diff":"0.02","Date":"03.04.2026"},{"id":53,"Code":"985","Ccy":"PLN","CcyNm_RU":"\u0417\u043b\u043e\u0442\u044b\u0439","CcyNm_UZ":"Polsha
+        zlotiysi","CcyNm_UZC":"\u041f\u043e\u043b\u044c\u0448\u0430 \u0437\u043b\u043e\u0442\u0438\u0439\u0441\u0438","CcyNm_EN":"Polish
+        Zloty","Nominal":"1","Rate":"3265.47","Diff":"-21.42","Date":"03.04.2026"},{"id":54,"Code":"634","Ccy":"QAR","CcyNm_RU":"\u041a\u0430\u0442\u0430\u0440\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Qatar riali","CcyNm_UZC":"\u049a\u0430\u0442\u0430\u0440
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Qatari Rial","Nominal":"1","Rate":"3332.38","Diff":"2.13","Date":"03.04.2026"},{"id":55,"Code":"946","Ccy":"RON","CcyNm_RU":"\u0420\u0443\u043c\u044b\u043d\u0441\u043a\u0438\u0439
+        \u043b\u0435\u0439","CcyNm_UZ":"Ruminiya leyi","CcyNm_UZC":"\u0420\u0443\u043c\u0438\u043d\u0438\u044f
+        \u043b\u0435\u0439\u0438","CcyNm_EN":"Romanian Leu","Nominal":"1","Rate":"2746.47","Diff":"-14.98","Date":"03.04.2026"},{"id":56,"Code":"941","Ccy":"RSD","CcyNm_RU":"\u0421\u0435\u0440\u0431\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Serbiya dinori","CcyNm_UZC":"\u0421\u0435\u0440\u0431\u0438\u044f
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Serbian Dinar","Nominal":"1","Rate":"119.29","Diff":"-0.63","Date":"03.04.2026"},{"id":3,"Code":"051","Ccy":"AMD","CcyNm_RU":"\u0410\u0440\u043c\u044f\u043d\u0441\u043a\u0438\u0439
+        \u0434\u0440\u0430\u043c","CcyNm_UZ":"Armaniston drami","CcyNm_UZC":"\u0410\u0440\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u0434\u0440\u0430\u043c\u0438","CcyNm_EN":"Armenian Dram","Nominal":"1","Rate":"32.27","Diff":"0.04","Date":"03.04.2026"},{"id":58,"Code":"682","Ccy":"SAR","CcyNm_RU":"\u0421\u0430\u0443\u0434\u043e\u0432\u0441\u043a\u0438\u0439
+        \u0440\u0438\u044f\u043b","CcyNm_UZ":"Saudiya\u00a0Arabistoni\u00a0riali","CcyNm_UZC":"\u0421\u0430\u0443\u0434\u0438\u044f\u00a0\u0410\u0440\u0430\u0431\u0438\u0441\u0442\u043e\u043d\u0438\u00a0\u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Saudi
+        Riyal","Nominal":"1","Rate":"3236.25","Diff":"1.03","Date":"03.04.2026"},{"id":59,"Code":"938","Ccy":"SDG","CcyNm_RU":"\u0421\u0443\u0434\u0430\u043d\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Sudan funti","CcyNm_UZC":"\u0421\u0443\u0434\u0430\u043d
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Sudanese Pound","Nominal":"1","Rate":"20.24","Diff":"0.01","Date":"03.04.2026"},{"id":60,"Code":"752","Ccy":"SEK","CcyNm_RU":"\u0428\u0432\u0435\u0434\u0441\u043a\u0430\u044f
+        \u043a\u0440\u043e\u043d\u0430","CcyNm_UZ":"Shvetsiya kronasi","CcyNm_UZC":"\u0428\u0432\u0435\u0446\u0438\u044f
+        \u043a\u0440\u043e\u043d\u0430\u0441\u0438","CcyNm_EN":"Swedish Krona","Nominal":"1","Rate":"1279.40","Diff":"-13.15","Date":"03.04.2026"},{"id":61,"Code":"702","Ccy":"SGD","CcyNm_RU":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440\u0441\u043a\u0438\u0439
+        \u0434\u043e\u043b\u043b\u0430\u0440","CcyNm_UZ":"Singapur dollari","CcyNm_UZC":"\u0421\u0438\u043d\u0433\u0430\u043f\u0443\u0440
+        \u0434\u043e\u043b\u043b\u0430\u0440\u0438","CcyNm_EN":"Singapore Dollar","Nominal":"1","Rate":"9441.17","Diff":"-23.4","Date":"03.04.2026"},{"id":62,"Code":"760","Ccy":"SYP","CcyNm_RU":"\u0421\u0438\u0440\u0438\u0439\u0441\u043a\u0438\u0439
+        \u0444\u0443\u043d\u0442","CcyNm_UZ":"Suriya funti","CcyNm_UZC":"\u0421\u0443\u0440\u0438\u044f
+        \u0444\u0443\u043d\u0442\u0438","CcyNm_EN":"Syrian Pound","Nominal":"1","Rate":"105.18","Diff":"0.05","Date":"03.04.2026"},{"id":63,"Code":"764","Ccy":"THB","CcyNm_RU":"\u0411\u0430\u0442","CcyNm_UZ":"Tailand
+        bati","CcyNm_UZC":"\u0422\u0430\u0438\u043b\u0430\u043d\u0434 \u0431\u0430\u0442\u0438","CcyNm_EN":"Baht","Nominal":"1","Rate":"370.82","Diff":"-1.98","Date":"03.04.2026"},{"id":64,"Code":"972","Ccy":"TJS","CcyNm_RU":"\u0421\u043e\u043c\u043e\u043d\u0438","CcyNm_UZ":"Tojikiston
+        somonisi","CcyNm_UZC":"\u0422\u043e\u0436\u0438\u043a\u0438\u0441\u0442\u043e\u043d
+        \u0441\u043e\u043c\u043e\u043d\u0438\u0441\u0438","CcyNm_EN":"Tajikistan Somoni","Nominal":"1","Rate":"1270.57","Diff":"3.79","Date":"03.04.2026"},{"id":65,"Code":"934","Ccy":"TMT","CcyNm_RU":"\u041d\u043e\u0432\u044b\u0439
+        \u0442\u0443\u0440\u043a\u043c\u0435\u043d\u0441\u043a\u0438\u0439 \u043c\u0430\u043d\u0430\u0442","CcyNm_UZ":"Turkmaniston
+        manati","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u043c\u0430\u043d\u0438\u0441\u0442\u043e\u043d
+        \u043c\u0430\u043d\u0430\u0442\u0438","CcyNm_EN":"Turkmenistan New Manat","Nominal":"1","Rate":"3471.38","Diff":"2.21","Date":"03.04.2026"},{"id":66,"Code":"788","Ccy":"TND","CcyNm_RU":"\u0422\u0443\u043d\u0438\u0441\u0441\u043a\u0438\u0439
+        \u0434\u0438\u043d\u0430\u0440","CcyNm_UZ":"Tunis dinori","CcyNm_UZC":"\u0422\u0443\u043d\u0438\u0441
+        \u0434\u0438\u043d\u043e\u0440\u0438","CcyNm_EN":"Tunisian Dinar","Nominal":"1","Rate":"4168.61","Diff":"10.07","Date":"03.04.2026"},{"id":67,"Code":"949","Ccy":"TRY","CcyNm_RU":"\u0422\u0443\u0440\u0435\u0446\u043a\u0430\u044f
+        \u043b\u0438\u0440\u0430","CcyNm_UZ":"Turkiya lirasi","CcyNm_UZC":"\u0422\u0443\u0440\u043a\u0438\u044f
+        \u043b\u0438\u0440\u0430\u0441\u0438","CcyNm_EN":"Turkish Lira","Nominal":"1","Rate":"273.04","Diff":"0.06","Date":"03.04.2026"},{"id":68,"Code":"980","Ccy":"UAH","CcyNm_RU":"\u0413\u0440\u0438\u0432\u043d\u0430","CcyNm_UZ":"Ukraina
+        grivnasi","CcyNm_UZC":"\u0423\u043a\u0440\u0430\u0438\u043d\u0430 \u0433\u0440\u0438\u0432\u043d\u0430\u0441\u0438","CcyNm_EN":"Ukrainian
+        Hryvnia","Nominal":"1","Rate":"277.11","Diff":"-0.31","Date":"03.04.2026"},{"id":1,"Code":"784","Ccy":"AED","CcyNm_RU":"\u0414\u0438\u0440\u0445\u0430\u043c
+        \u041e\u0410\u042d","CcyNm_UZ":"BAA dirhami","CcyNm_UZC":"\u0411\u0410\u0410
+        \u0434\u0438\u0440\u04b3\u0430\u043c\u0438","CcyNm_EN":"UAE Dirham","Nominal":"1","Rate":"3308.15","Diff":"2.02","Date":"03.04.2026"},{"id":70,"Code":"858","Ccy":"UYU","CcyNm_RU":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439\u0441\u043a\u043e\u0435
+        \u043f\u0435\u0441\u043e","CcyNm_UZ":"Urugvay pesosi","CcyNm_UZC":"\u0423\u0440\u0443\u0433\u0432\u0430\u0439
+        \u043f\u0435\u0441\u043e\u0441\u0438","CcyNm_EN":"Peso Uruguayo","Nominal":"1","Rate":"300.03","Diff":"1.29","Date":"03.04.2026"},{"id":71,"Code":"928","Ccy":"VES","CcyNm_RU":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u044c\u0441\u043a\u0438\u0439
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440","CcyNm_UZ":"Venesuela bolivari","CcyNm_UZC":"\u0412\u0435\u043d\u0435\u0441\u0443\u044d\u043b\u0430
+        \u0431\u043e\u043b\u0438\u0432\u0430\u0440\u0438","CcyNm_EN":"Bol\u00edvar","Nominal":"1","Rate":"25.66","Diff":"0.01","Date":"03.04.2026"},{"id":72,"Code":"704","Ccy":"VND","CcyNm_RU":"\u0414\u043e\u043d\u0433","CcyNm_UZ":"Vetnam
+        dongi","CcyNm_UZC":"\u0412\u044c\u0435\u0442\u043d\u0430\u043c \u0434\u043e\u043d\u0433\u0438","CcyNm_EN":"Dong","Nominal":"10","Rate":"4.61","Diff":"0","Date":"03.04.2026"},{"id":73,"Code":"960","Ccy":"XDR","CcyNm_RU":"\u0421\u0414\u0420","CcyNm_UZ":"SDR","CcyNm_UZC":"\u0421\u0414\u0420","CcyNm_EN":"SDR","Nominal":"1","Rate":"16572.76","Diff":"103.34","Date":"03.04.2026"},{"id":74,"Code":"886","Ccy":"YER","CcyNm_RU":"\u0419\u0435\u043c\u0435\u043d\u0441\u043a\u0438\u0439
+        \u0440\u0438\u0430\u043b","CcyNm_UZ":"Yaman riali","CcyNm_UZC":"\u042f\u043c\u0430\u043d
+        \u0440\u0438\u0430\u043b\u0438","CcyNm_EN":"Yemeni Rial","Nominal":"1","Rate":"50.93","Diff":"0.03","Date":"03.04.2026"},{"id":75,"Code":"710","Ccy":"ZAR","CcyNm_RU":"\u0420\u044d\u043d\u0434","CcyNm_UZ":"Janubiy
+        Afrika randi","CcyNm_UZC":"\u0416\u0430\u043d\u0443\u0431\u0438\u0439 \u0410\u0444\u0440\u0438\u043a\u0430
+        \u0440\u0430\u043d\u0434\u0438","CcyNm_EN":"Rand","Nominal":"1","Rate":"716.04","Diff":"-6.11","Date":"03.04.2026"}]'
+  recorded_at: Wed, 08 Apr 2026 13:43:35 GMT
+recorded_with: VCR 6.4.0
