@@ -1,0 +1,11 @@
+{
+  "key": "BCU",
+  "name": "Banco Central del Uruguay",
+  "description": "Daily exchange rates against the Uruguayan peso",
+  "pivot_currency": "UYU",
+  "data_url": "https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones",
+  "terms_url": "https://www.bcu.gub.uy/Paginas/Condiciones-de-uso.aspx",
+  "publish_time": 15,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-01"
+}

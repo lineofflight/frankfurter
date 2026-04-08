@@ -1,0 +1,11 @@
+{
+  "key": "SARB",
+  "name": "South African Reserve Bank",
+  "description": "Daily weighted-average exchange rates against the South African rand",
+  "pivot_currency": "ZAR",
+  "data_url": "https://custom.resbank.co.za/SarbWebApi/WebIndicators/HistoricalExchangeRatesDaily",
+  "terms_url": null,
+  "publish_time": 9,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-01"
+}

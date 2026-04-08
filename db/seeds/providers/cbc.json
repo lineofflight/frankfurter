@@ -1,0 +1,11 @@
+{
+  "key": "CBC",
+  "name": "Central Bank of the Republic of China (Taiwan)",
+  "description": "Daily interbank spot rates against the US dollar",
+  "pivot_currency": "USD",
+  "data_url": "https://www.cbc.gov.tw/en/lp-4237-2.html",
+  "terms_url": null,
+  "publish_time": 8,
+  "publish_days": "1-5",
+  "coverage_start": "1993-01-05"
+}

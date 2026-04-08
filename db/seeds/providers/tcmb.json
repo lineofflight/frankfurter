@@ -1,0 +1,11 @@
+{
+  "key": "TCMB",
+  "name": "Türkiye Cumhuriyet Merkez Bankası",
+  "description": "Daily cross rates against the Turkish lira",
+  "pivot_currency": "TRY",
+  "data_url": "https://evds2.tcmb.gov.tr/",
+  "terms_url": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/Other/Disclaimer",
+  "publish_time": 12,
+  "publish_days": "1-5",
+  "coverage_start": "1996-04-16"
+}

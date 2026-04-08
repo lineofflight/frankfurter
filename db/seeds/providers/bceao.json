@@ -1,0 +1,11 @@
+{
+  "key": "BCEAO",
+  "name": "Banque Centrale des Etats de l'Afrique de l'Ouest",
+  "description": "Daily reference rates against the West African CFA franc",
+  "pivot_currency": "XOF",
+  "data_url": "https://www.bceao.int/fr/cours/cours-de-reference-des-principales-devises-contre-Franc-CFA",
+  "terms_url": "https://www.bceao.int/fr/mentions-legales",
+  "publish_time": 10,
+  "publish_days": "0-5",
+  "coverage_start": "2014-01-02"
+}

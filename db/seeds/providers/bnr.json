@@ -1,0 +1,11 @@
+{
+  "key": "BNR",
+  "name": "Banca Națională a României",
+  "description": "Daily reference rates against the Romanian leu",
+  "pivot_currency": "RON",
+  "data_url": "https://www.bnr.ro/Exchange-rates-702.aspx",
+  "terms_url": null,
+  "publish_time": 11,
+  "publish_days": "1-5",
+  "coverage_start": "2005-01-03"
+}

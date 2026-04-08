@@ -1,0 +1,11 @@
+{
+  "key": "BOE",
+  "name": "Bank of England",
+  "description": "Daily spot exchange rates against the British pound",
+  "pivot_currency": "GBP",
+  "data_url": "https://www.bankofengland.co.uk/boeapps/database/Rates.asp?into=GBP",
+  "terms_url": "https://www.bankofengland.co.uk/legal",
+  "publish_time": 16,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-04"
+}

@@ -1,0 +1,11 @@
+{
+  "key": "NB",
+  "name": "Norges Bank",
+  "description": "Daily exchange rates against the Norwegian krone",
+  "pivot_currency": "NOK",
+  "data_url": "https://data.norges-bank.no/",
+  "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",
+  "publish_time": 13,
+  "publish_days": "1-5",
+  "coverage_start": "1999-01-04"
+}

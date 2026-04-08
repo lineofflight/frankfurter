@@ -1,0 +1,11 @@
+{
+  "key": "BNM",
+  "name": "Bank Negara Malaysia",
+  "description": "Daily exchange rates against the Malaysian ringgit",
+  "pivot_currency": "MYR",
+  "data_url": "https://www.bnm.gov.my/exchange-rates",
+  "terms_url": null,
+  "publish_time": 4,
+  "publish_days": "1-5",
+  "coverage_start": "2006-01-03"
+}

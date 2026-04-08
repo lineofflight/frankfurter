@@ -1,0 +1,11 @@
+{
+  "key": "BCCR",
+  "name": "Banco Central de Costa Rica",
+  "description": "Daily reference exchange rate against the Costa Rican colon",
+  "pivot_currency": "CRC",
+  "data_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/Contenedor/6",
+  "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso",
+  "publish_time": 18,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-03"
+}

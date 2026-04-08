@@ -1,0 +1,11 @@
+{
+  "key": "MNB",
+  "name": "Magyar Nemzeti Bank",
+  "description": "Daily exchange rates against the Hungarian forint",
+  "pivot_currency": "HUF",
+  "data_url": "https://www.mnb.hu/en/monetary-policy/the-mpc/exchange-rates",
+  "terms_url": null,
+  "publish_time": 10,
+  "publish_days": "1-5",
+  "coverage_start": "1999-01-04"
+}

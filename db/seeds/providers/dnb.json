@@ -1,0 +1,11 @@
+{
+  "key": "DNB",
+  "name": "Danmarks Nationalbank",
+  "description": "Daily exchange rates against the Danish krone",
+  "pivot_currency": "DKK",
+  "data_url": "https://www.nationalbanken.dk/en/what-we-do/stable-prices-monetary-policy-and-the-danish-economy/exchange-rates",
+  "terms_url": null,
+  "publish_time": 8,
+  "publish_days": "1-5",
+  "coverage_start": "1977-01-03"
+}

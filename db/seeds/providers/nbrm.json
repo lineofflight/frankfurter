@@ -1,0 +1,11 @@
+{
+  "key": "NBRM",
+  "name": "Narodna Banka na Republika Severna Makedonija",
+  "description": "Daily mid-market rates against the Macedonian denar",
+  "pivot_currency": "MKD",
+  "data_url": "https://www.nbrm.mk",
+  "terms_url": null,
+  "publish_time": 10,
+  "publish_days": "1-5",
+  "coverage_start": "1993-01-01"
+}

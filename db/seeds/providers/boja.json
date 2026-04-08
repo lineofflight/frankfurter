@@ -1,0 +1,11 @@
+{
+  "key": "BOJA",
+  "name": "Bank of Jamaica",
+  "description": "Daily counter rates against the Jamaican dollar",
+  "pivot_currency": "JMD",
+  "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
+  "terms_url": "https://boj.org.jm/disclaimer/",
+  "publish_time": 18,
+  "publish_days": "1-5",
+  "coverage_start": "2006-01-03"
+}

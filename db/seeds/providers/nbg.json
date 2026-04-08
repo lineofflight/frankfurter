@@ -1,0 +1,11 @@
+{
+  "key": "NBG",
+  "name": "National Bank of Georgia",
+  "description": "Daily official exchange rates against the Georgian lari",
+  "pivot_currency": "GEL",
+  "data_url": "https://nbg.gov.ge/en/monetary-policy/currency",
+  "terms_url": null,
+  "publish_time": 8,
+  "publish_days": "1-5",
+  "coverage_start": "1995-10-14"
+}

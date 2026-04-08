@@ -1,0 +1,11 @@
+{
+  "key": "BCRA",
+  "name": "Banco Central de la República Argentina",
+  "description": "Daily official exchange rates against the Argentine peso",
+  "pivot_currency": "ARS",
+  "data_url": "https://www.bcra.gob.ar/en/monetary-and-financial-statistics/exchange-statistics/",
+  "terms_url": "https://www.bcra.gob.ar/aviso-legal/",
+  "publish_time": 16,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-03"
+}

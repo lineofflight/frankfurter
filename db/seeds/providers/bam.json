@@ -1,0 +1,11 @@
+{
+  "key": "BAM",
+  "name": "Bank Al-Maghrib",
+  "description": "Daily mid-market rates against the Moroccan dirham",
+  "pivot_currency": "MAD",
+  "data_url": "https://apihelpdesk.centralbankofmorocco.ma/apis",
+  "terms_url": null,
+  "publish_time": 12,
+  "publish_days": "1-5",
+  "coverage_start": "1999-01-04"
+}

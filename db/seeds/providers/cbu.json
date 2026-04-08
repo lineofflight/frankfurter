@@ -1,0 +1,11 @@
+{
+  "key": "CBU",
+  "name": "Central Bank of Uzbekistan",
+  "description": "Daily exchange rates against the Uzbekistani som",
+  "pivot_currency": "UZS",
+  "data_url": "https://cbu.uz/en/arkhiv-kursov-valyut/json/",
+  "terms_url": null,
+  "publish_time": 8,
+  "publish_days": "1-5",
+  "coverage_start": "1994-07-01"
+}

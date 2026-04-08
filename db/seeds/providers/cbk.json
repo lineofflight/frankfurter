@@ -1,0 +1,11 @@
+{
+  "key": "CBK",
+  "name": "Central Bank of Kenya",
+  "description": "Daily exchange rates against the Kenyan shilling",
+  "pivot_currency": "KES",
+  "data_url": "https://www.centralbank.go.ke/forex/",
+  "terms_url": null,
+  "publish_time": 8,
+  "publish_days": "1-5",
+  "coverage_start": "2003-09-12"
+}

@@ -1,0 +1,11 @@
+{
+  "key": "ECB",
+  "name": "European Central Bank",
+  "description": "Daily reference rates against the euro",
+  "pivot_currency": "EUR",
+  "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+  "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+  "publish_time": 15,
+  "publish_days": "1-5",
+  "coverage_start": "1999-01-04"
+}

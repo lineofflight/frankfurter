@@ -1,0 +1,11 @@
+{
+  "key": "BCB",
+  "name": "Banco Central do Brasil",
+  "description": "Daily PTAX closing exchange rates against the Brazilian real",
+  "pivot_currency": "BRL",
+  "data_url": "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/",
+  "terms_url": null,
+  "publish_time": 19,
+  "publish_days": "1-5",
+  "coverage_start": "2000-01-01"
+}

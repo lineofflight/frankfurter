@@ -1,0 +1,11 @@
+{
+  "key": "NBP",
+  "name": "Narodowy Bank Polski",
+  "description": "Daily mid-market rates (Table A) and weekly rates (Table B) against the Polish zloty",
+  "pivot_currency": "PLN",
+  "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
+  "terms_url": null,
+  "publish_time": 11,
+  "publish_days": "1-5",
+  "coverage_start": "2002-01-02"
+}

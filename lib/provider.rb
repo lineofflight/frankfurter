@@ -21,8 +21,8 @@ class Provider < Sequel::Model(:providers)
 
   class << self
     def seed
-      path = File.expand_path("../db/seeds/providers.json", __dir__)
-      data = JSON.parse(File.read(path))
+      dir = File.expand_path("../db/seeds/providers", __dir__)
+      data = Dir["#{dir}/*.json"].sort.map { |f| JSON.parse(File.read(f)) }
       dataset.delete
       dataset.multi_insert(data)
       load_cache
