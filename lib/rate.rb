@@ -35,8 +35,11 @@ class Rate < Sequel::Model(:rates)
         .order(:date, :quote)
     end
 
-    def only(*quotes)
-      where(quote: quotes)
+    def only(*currencies)
+      pivot_currency = Sequel[:providers][:pivot_currency]
+      join(:providers, key: :provider)
+        .where(Sequel.|({ base: pivot_currency, quote: currencies }, { quote: pivot_currency, base: currencies }))
+        .select_all(:rates)
     end
 
     def downsample(precision)

@@ -119,11 +119,27 @@ describe Rate do
   end
 
   describe ".only" do
-    it "filters symbols" do
-      iso_codes = ["CAD", "USD"]
-      data = Rate.where(provider: "ECB").latest(Fixtures.latest_date).only(*iso_codes).all
+    it "returns only rate pairs involving the given currencies" do
+      currencies = ["CAD", "USD"]
+      data = Rate.latest(Fixtures.latest_date).only(*currencies).all
 
-      _(data.map(&:quote).sort).must_equal(iso_codes)
+      data.each do |r|
+        _([r.base, r.quote].any? { |c| currencies.include?(c) }).must_equal(true)
+      end
+    end
+
+    it "includes rates from providers where currency appears as base" do
+      data = Rate.latest(Fixtures.latest_date).only("USD", "EUR").all
+      providers = data.map(&:provider).uniq
+
+      _(providers).must_include("BOC")
+    end
+
+    it "includes providers whose rates span both sides of the pair" do
+      data = Rate.latest(Fixtures.latest_date).only("JPY", "EUR").all
+      providers = data.map(&:provider).uniq
+
+      _(providers).must_include("BOJ")
     end
 
     it "returns nothing if no matches" do

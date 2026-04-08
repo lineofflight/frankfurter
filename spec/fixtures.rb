@@ -25,6 +25,12 @@ module Fixtures
       base: "CAD",
       quotes: { "USD" => 0.74, "EUR" => 0.68, "GBP" => 0.58, "JPY" => 109.0 },
     },
+    "BOJ" => {
+      mixed: [
+        { base: "EUR", quote: "USD", rate: 1.08 },
+        { base: "USD", quote: "JPY", rate: 155.0 },
+      ],
+    },
   }.freeze
 
   # Number of business days to generate (~2 years covers downsampling and range tests)
@@ -69,9 +75,15 @@ module Fixtures
 
       BASE_RATES.each do |provider, config|
         days.each do |date|
-          config[:quotes].each do |quote, rate|
-            jitter = 1.0 + (date.jd % 100 - 50) * 0.001 # deterministic jitter from date
-            records << { provider:, date:, base: config[:base], quote:, rate: (rate * jitter).round(4) }
+          jitter = 1.0 + (date.jd % 100 - 50) * 0.001 # deterministic jitter from date
+          if config[:mixed]
+            config[:mixed].each do |pair|
+              records << { provider:, date:, base: pair[:base], quote: pair[:quote], rate: (pair[:rate] * jitter).round(4) }
+            end
+          else
+            config[:quotes].each do |quote, rate|
+              records << { provider:, date:, base: config[:base], quote:, rate: (rate * jitter).round(4) }
+            end
           end
         end
       end
