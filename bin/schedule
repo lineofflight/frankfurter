@@ -8,14 +8,14 @@ require "provider/adapters"
 
 dry_run = ARGV.include?("--dry-run")
 
-scheduler = Rufus::Scheduler.new unless dry_run
+scheduler = Rufus::Scheduler.new(max_work_threads: DB.pool.max_size) unless dry_run
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
-Provider.all.each_with_index do |provider, i|
+Provider.all.each do |provider|
   if dry_run
-    puts "startup: backfill[#{provider.key.downcase}] (after #{i * 2}s)"
+    puts "startup: backfill[#{provider.key.downcase}]"
   else
-    scheduler.in("#{i * 2}s") do
+    scheduler.in("0s") do
       provider.backfill
     end
   end
