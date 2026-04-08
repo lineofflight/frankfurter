@@ -10,6 +10,7 @@ class Provider < Sequel::Model(:providers)
         Errno::EPIPE,
         Net::OpenTimeout,
         Net::ReadTimeout,
+        OpenSSL::SSL::SSLError,
         SocketError,
       ].freeze
 
