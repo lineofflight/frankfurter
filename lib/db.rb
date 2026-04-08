@@ -12,9 +12,18 @@ unless url.start_with?("sqlite")
   abort "Frankfurter now uses SQLite. Remove DATABASE_URL or set it to a sqlite URL."
 end
 
-DB = Sequel.connect(url)
-DB.run("PRAGMA journal_mode=WAL")
-DB.run("PRAGMA busy_timeout=5000")
-DB.run("PRAGMA synchronous=NORMAL")
-DB.run("PRAGMA mmap_size=134217728")
-DB.run("PRAGMA journal_size_limit=27103364")
+busy_timeout_ms = Integer(ENV.fetch("SQLITE_BUSY_TIMEOUT", 60_000))
+max_connections = Integer(ENV.fetch("DB_MAX_CONNECTIONS", 8))
+connect_sqls = [
+  "PRAGMA journal_mode=WAL",
+  "PRAGMA synchronous=NORMAL",
+  "PRAGMA mmap_size=134217728",
+  "PRAGMA journal_size_limit=27103364",
+].freeze
+
+DB = Sequel.connect(
+  url,
+  after_connect: proc { |conn| conn.busy_handler_timeout = busy_timeout_ms },
+  connect_sqls:,
+  max_connections:,
+)
