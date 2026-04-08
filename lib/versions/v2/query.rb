@@ -13,6 +13,9 @@ module Versions
 
       class ValidationError < StandardError; end
 
+      CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
+      DEFAULT_CHUNK_MONTHS = 3
+
       def initialize(params)
         @params = params
         validate!
@@ -25,19 +28,16 @@ module Versions
       def each(&block)
         return to_enum(:each) unless block
 
-        ds = Rate.dataset
-        ds = ds.where(provider: providers) if providers
-
         if date_scope.is_a?(Range)
-          each_quarter(date_scope) do |chunk_range|
-            chunk_ds = ds.where(date: chunk_range)
-            chunk_ds = chunk_ds.downsample(group) if group
-            chunk_ds.order(:date, :quote).all.group_by { |r| r[:date] }.each do |_, rows|
+          each_chunk(date_scope) do |chunk_range|
+            chunk = dataset.where(date: chunk_range)
+            chunk = chunk.downsample(group) if group
+            chunk.order(:date, :quote).all.group_by { |r| r[:date] }.each do |_, rows|
               emit_blended(rows, &block)
             end
           end
         else
-          emit_blended(ds.latest(date_scope).all, &block)
+          emit_blended(dataset.latest(date_scope).all, &block)
         end
       end
 
@@ -53,24 +53,37 @@ module Versions
 
       def max_date
         if date_scope.is_a?(Range)
-          ds = Rate.dataset
-          ds = ds.where(provider: providers) if providers
-          ds.where(date: date_scope).max(:date)
+          dataset.where(date: date_scope).max(:date)
         else
-          to_a.map { |r| r[:date] }.max
+          dataset.latest(date_scope).max(:date)
         end
+      end
+
+      def dataset
+        ds = Rate.dataset
+        ds = ds.where(provider: providers) if providers
+        if quotes
+          currencies = Set.new(quotes)
+          currencies << effective_base
+          quotes.each { |q| (peg = Peg.find(q)) && currencies << peg.base }
+          ds = ds.only(*currencies)
+        end
+
+        ds
       end
 
       def base
         @params[:base]&.upcase || "EUR"
       end
 
-      def peg_for_base
-        @peg_for_base ||= Peg.find(base)
+      def base_peg
+        return @base_peg if defined?(@base_peg)
+
+        @base_peg = Peg.find(base)
       end
 
       def effective_base
-        peg_for_base ? peg_for_base.base : base
+        base_peg&.base || base
       end
 
       def quotes
@@ -152,8 +165,8 @@ module Versions
       def emit_blended(rows, &block)
         blended = Blender.new(rows, base: effective_base).blend
 
-        if peg_for_base
-          blended = blended.map { |r| r.merge(rate: r[:rate] / peg_for_base.rate, base:) }
+        if base_peg
+          blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
         end
 
         emitted_quotes = Set.new
@@ -164,11 +177,11 @@ module Versions
           yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
         end
 
-        if peg_for_base && (!quotes || quotes.include?(peg_for_base.base))
+        if base_peg && (!quotes || quotes.include?(base_peg.base))
           anchor_date = blended.map { |r| r[:date] }.max
-          if anchor_date && !emitted_quotes.include?(peg_for_base.base)
-            emitted_quotes << peg_for_base.base
-            yield({ date: anchor_date.to_s, base:, quote: peg_for_base.base, rate: round(1.0 / peg_for_base.rate) })
+          if anchor_date && !emitted_quotes.include?(base_peg.base)
+            emitted_quotes << base_peg.base
+            yield({ date: anchor_date.to_s, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) })
           end
         end
 
@@ -189,7 +202,7 @@ module Versions
 
           if peg.base == effective_base
             date = reference_date
-            rate = peg.rate / (peg_for_base&.rate || 1.0)
+            rate = peg.rate / (base_peg&.rate || 1.0)
           else
             anchor = blended.find { |r| r[:quote] == peg.base }
             next unless anchor
@@ -202,12 +215,13 @@ module Versions
         end
       end
 
-      def each_quarter(range)
+      def each_chunk(range)
+        months = CHUNK_MONTHS.fetch(group, DEFAULT_CHUNK_MONTHS)
         cursor = range.begin
         while cursor <= range.end
-          quarter_end = [(cursor >> 3) - 1, range.end].min
-          yield cursor..quarter_end
-          cursor = quarter_end + 1
+          chunk_end = [(cursor >> months) - 1, range.end].min
+          yield cursor..chunk_end
+          cursor = chunk_end + 1
         end
       end
     end

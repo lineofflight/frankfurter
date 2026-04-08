@@ -367,6 +367,7 @@ describe Versions::V2 do
 
     keys = json.map { |p| p["key"] }
     without_rates = (Provider.all.map(&:key) - Rate.distinct.select_map(:provider)).sample
+
     _(keys).wont_include(without_rates)
   end
 
