@@ -1,0 +1,140 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://www.mnb.hu/arfolyamok.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                       xmlns:web="http://www.mnb.hu/webservices/">
+          <soap:Body>
+            <web:GetExchangeRates>
+              <web:startDate>2025-03-24</web:startDate>
+        <web:endDate>2025-03-28</web:endDate>
+        <web:currencyNames>AUD,BRL,CAD,CHF,CNY,CZK,DKK,EUR,GBP,HKD,IDR,ILS,INR,ISK,JPY,KRW,MXN,MYR,NOK,NZD,PHP,PLN,RON,RSD,RUB,SEK,SGD,THB,TRY,UAH,USD,ZAR</web:currencyNames>
+            </web:GetExchangeRates>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetExchangeRates
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Frame-Options:
+      - sameorigin
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      Date:
+      - Wed, 08 Apr 2026 13:50:12 GMT
+      Content-Length:
+      - '8580'
+    body:
+      encoding: UTF-8
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetExchangeRatesResponse
+        xmlns="http://www.mnb.hu/webservices/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><GetExchangeRatesResult>&lt;MNBExchangeRates&gt;&lt;Day
+        date="2025-03-28"&gt;&lt;Rate unit="1" curr="AUD"&gt;235,26&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="BRL"&gt;65,09&lt;/Rate&gt;&lt;Rate unit="1" curr="CAD"&gt;260,85&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CHF"&gt;423,43&lt;/Rate&gt;&lt;Rate unit="1" curr="CNY"&gt;51,46&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CZK"&gt;16,13&lt;/Rate&gt;&lt;Rate unit="1" curr="DKK"&gt;53,96&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="EUR"&gt;402,61&lt;/Rate&gt;&lt;Rate unit="1" curr="GBP"&gt;484,00&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="HKD"&gt;48,04&lt;/Rate&gt;&lt;Rate unit="100" curr="IDR"&gt;2,26&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ILS"&gt;101,47&lt;/Rate&gt;&lt;Rate unit="1" curr="INR"&gt;4,37&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ISK"&gt;2,82&lt;/Rate&gt;&lt;Rate unit="100" curr="JPY"&gt;248,17&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="KRW"&gt;25,45&lt;/Rate&gt;&lt;Rate unit="1" curr="MXN"&gt;18,43&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="MYR"&gt;84,22&lt;/Rate&gt;&lt;Rate unit="1" curr="NOK"&gt;35,57&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="NZD"&gt;213,73&lt;/Rate&gt;&lt;Rate unit="1" curr="PHP"&gt;6,51&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="PLN"&gt;96,28&lt;/Rate&gt;&lt;Rate unit="1" curr="RON"&gt;80,88&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RSD"&gt;3,44&lt;/Rate&gt;&lt;Rate unit="1" curr="RUB"&gt;4,46&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="SEK"&gt;37,16&lt;/Rate&gt;&lt;Rate unit="1" curr="SGD"&gt;278,56&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="THB"&gt;11,00&lt;/Rate&gt;&lt;Rate unit="1" curr="TRY"&gt;9,83&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="UAH"&gt;9,01&lt;/Rate&gt;&lt;Rate unit="1" curr="USD"&gt;373,72&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ZAR"&gt;20,59&lt;/Rate&gt;&lt;/Day&gt;&lt;Day date="2025-03-27"&gt;&lt;Rate
+        unit="1" curr="AUD"&gt;234,49&lt;/Rate&gt;&lt;Rate unit="1" curr="BRL"&gt;64,83&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CAD"&gt;260,24&lt;/Rate&gt;&lt;Rate unit="1" curr="CHF"&gt;420,45&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CNY"&gt;51,17&lt;/Rate&gt;&lt;Rate unit="1" curr="CZK"&gt;16,07&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="DKK"&gt;53,68&lt;/Rate&gt;&lt;Rate unit="1" curr="EUR"&gt;400,47&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="GBP"&gt;480,40&lt;/Rate&gt;&lt;Rate unit="1" curr="HKD"&gt;47,81&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="IDR"&gt;2,25&lt;/Rate&gt;&lt;Rate unit="1" curr="ILS"&gt;100,77&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="INR"&gt;4,33&lt;/Rate&gt;&lt;Rate unit="1" curr="ISK"&gt;2,81&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="JPY"&gt;246,34&lt;/Rate&gt;&lt;Rate unit="100" curr="KRW"&gt;25,37&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="MXN"&gt;18,43&lt;/Rate&gt;&lt;Rate unit="1" curr="MYR"&gt;83,90&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="NOK"&gt;35,23&lt;/Rate&gt;&lt;Rate unit="1" curr="NZD"&gt;213,45&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="PHP"&gt;6,47&lt;/Rate&gt;&lt;Rate unit="1" curr="PLN"&gt;95,55&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RON"&gt;80,45&lt;/Rate&gt;&lt;Rate unit="1" curr="RSD"&gt;3,42&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RUB"&gt;4,44&lt;/Rate&gt;&lt;Rate unit="1" curr="SEK"&gt;36,93&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="SGD"&gt;277,48&lt;/Rate&gt;&lt;Rate unit="1" curr="THB"&gt;10,97&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="TRY"&gt;9,79&lt;/Rate&gt;&lt;Rate unit="1" curr="UAH"&gt;8,97&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="USD"&gt;371,80&lt;/Rate&gt;&lt;Rate unit="1" curr="ZAR"&gt;20,38&lt;/Rate&gt;&lt;/Day&gt;&lt;Day
+        date="2025-03-26"&gt;&lt;Rate unit="1" curr="AUD"&gt;234,49&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="BRL"&gt;65,05&lt;/Rate&gt;&lt;Rate unit="1" curr="CAD"&gt;260,14&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CHF"&gt;419,60&lt;/Rate&gt;&lt;Rate unit="1" curr="CNY"&gt;51,04&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CZK"&gt;16,07&lt;/Rate&gt;&lt;Rate unit="1" curr="DKK"&gt;53,66&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="EUR"&gt;400,28&lt;/Rate&gt;&lt;Rate unit="1" curr="GBP"&gt;478,67&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="HKD"&gt;47,69&lt;/Rate&gt;&lt;Rate unit="100" curr="IDR"&gt;2,24&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ILS"&gt;101,00&lt;/Rate&gt;&lt;Rate unit="1" curr="INR"&gt;4,33&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ISK"&gt;2,78&lt;/Rate&gt;&lt;Rate unit="100" curr="JPY"&gt;247,00&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="KRW"&gt;25,32&lt;/Rate&gt;&lt;Rate unit="1" curr="MXN"&gt;18,45&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="MYR"&gt;83,71&lt;/Rate&gt;&lt;Rate unit="1" curr="NOK"&gt;35,33&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="NZD"&gt;213,51&lt;/Rate&gt;&lt;Rate unit="1" curr="PHP"&gt;6,43&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="PLN"&gt;96,02&lt;/Rate&gt;&lt;Rate unit="1" curr="RON"&gt;80,44&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RSD"&gt;3,41&lt;/Rate&gt;&lt;Rate unit="1" curr="RUB"&gt;4,40&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="SEK"&gt;36,93&lt;/Rate&gt;&lt;Rate unit="1" curr="SGD"&gt;277,21&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="THB"&gt;10,91&lt;/Rate&gt;&lt;Rate unit="1" curr="TRY"&gt;9,77&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="UAH"&gt;8,92&lt;/Rate&gt;&lt;Rate unit="1" curr="USD"&gt;370,80&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ZAR"&gt;20,32&lt;/Rate&gt;&lt;/Day&gt;&lt;Day date="2025-03-25"&gt;&lt;Rate
+        unit="1" curr="AUD"&gt;232,68&lt;/Rate&gt;&lt;Rate unit="1" curr="BRL"&gt;64,12&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CAD"&gt;257,99&lt;/Rate&gt;&lt;Rate unit="1" curr="CHF"&gt;418,00&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CNY"&gt;50,86&lt;/Rate&gt;&lt;Rate unit="1" curr="CZK"&gt;16,03&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="DKK"&gt;53,48&lt;/Rate&gt;&lt;Rate unit="1" curr="EUR"&gt;398,94&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="GBP"&gt;477,66&lt;/Rate&gt;&lt;Rate unit="1" curr="HKD"&gt;47,50&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="IDR"&gt;2,23&lt;/Rate&gt;&lt;Rate unit="1" curr="ILS"&gt;100,52&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="INR"&gt;4,31&lt;/Rate&gt;&lt;Rate unit="1" curr="ISK"&gt;2,77&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="JPY"&gt;245,44&lt;/Rate&gt;&lt;Rate unit="100" curr="KRW"&gt;25,17&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="MXN"&gt;18,45&lt;/Rate&gt;&lt;Rate unit="1" curr="MYR"&gt;83,27&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="NOK"&gt;35,15&lt;/Rate&gt;&lt;Rate unit="1" curr="NZD"&gt;211,48&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="PHP"&gt;6,42&lt;/Rate&gt;&lt;Rate unit="1" curr="PLN"&gt;95,76&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RON"&gt;80,18&lt;/Rate&gt;&lt;Rate unit="1" curr="RSD"&gt;3,40&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RUB"&gt;4,37&lt;/Rate&gt;&lt;Rate unit="1" curr="SEK"&gt;36,74&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="SGD"&gt;276,14&lt;/Rate&gt;&lt;Rate unit="1" curr="THB"&gt;10,88&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="TRY"&gt;9,74&lt;/Rate&gt;&lt;Rate unit="1" curr="UAH"&gt;8,85&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="USD"&gt;369,39&lt;/Rate&gt;&lt;Rate unit="1" curr="ZAR"&gt;20,28&lt;/Rate&gt;&lt;/Day&gt;&lt;Day
+        date="2025-03-24"&gt;&lt;Rate unit="1" curr="AUD"&gt;231,48&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="BRL"&gt;64,16&lt;/Rate&gt;&lt;Rate unit="1" curr="CAD"&gt;256,52&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CHF"&gt;416,87&lt;/Rate&gt;&lt;Rate unit="1" curr="CNY"&gt;50,67&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="CZK"&gt;15,97&lt;/Rate&gt;&lt;Rate unit="1" curr="DKK"&gt;53,42&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="EUR"&gt;398,44&lt;/Rate&gt;&lt;Rate unit="1" curr="GBP"&gt;476,45&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="HKD"&gt;47,29&lt;/Rate&gt;&lt;Rate unit="100" curr="IDR"&gt;2,22&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ILS"&gt;98,95&lt;/Rate&gt;&lt;Rate unit="1" curr="INR"&gt;4,29&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ISK"&gt;2,76&lt;/Rate&gt;&lt;Rate unit="100" curr="JPY"&gt;245,77&lt;/Rate&gt;&lt;Rate
+        unit="100" curr="KRW"&gt;25,06&lt;/Rate&gt;&lt;Rate unit="1" curr="MXN"&gt;18,21&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="MYR"&gt;82,90&lt;/Rate&gt;&lt;Rate unit="1" curr="NOK"&gt;35,00&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="NZD"&gt;211,08&lt;/Rate&gt;&lt;Rate unit="1" curr="PHP"&gt;6,41&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="PLN"&gt;95,23&lt;/Rate&gt;&lt;Rate unit="1" curr="RON"&gt;80,06&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="RSD"&gt;3,40&lt;/Rate&gt;&lt;Rate unit="1" curr="RUB"&gt;4,40&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="SEK"&gt;36,40&lt;/Rate&gt;&lt;Rate unit="1" curr="SGD"&gt;274,92&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="THB"&gt;10,85&lt;/Rate&gt;&lt;Rate unit="1" curr="TRY"&gt;9,71&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="UAH"&gt;8,82&lt;/Rate&gt;&lt;Rate unit="1" curr="USD"&gt;367,60&lt;/Rate&gt;&lt;Rate
+        unit="1" curr="ZAR"&gt;20,23&lt;/Rate&gt;&lt;/Day&gt;&lt;/MNBExchangeRates&gt;</GetExchangeRatesResult></GetExchangeRatesResponse></s:Body></s:Envelope>
+  recorded_at: Wed, 08 Apr 2026 13:50:13 GMT
+recorded_with: VCR 6.4.0
