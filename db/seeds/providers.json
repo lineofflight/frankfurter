@@ -165,6 +165,17 @@
     "coverage_start": "2006-01-03"
   },
   {
+    "key": "NBM",
+    "name": "National Bank of Moldova",
+    "description": "Daily exchange rates against the Moldovan leu",
+    "pivot_currency": "MDL",
+    "data_url": "https://www.bnm.md/en/official_exchange_rates",
+    "terms_url": null,
+    "publish_time": 10,
+    "publish_days": "1-5",
+    "coverage_start": "1999-01-04"
+  },
+  {
     "key": "RBA",
     "name": "Reserve Bank of Australia",
     "description": "Daily exchange rates against the Australian dollar",
