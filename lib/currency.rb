@@ -31,8 +31,7 @@ class Currency < Sequel::Model(:currencies)
     end
 
     def active
-      cutoff = (Date.today - 30).to_s
-      merge_pegged(dataset.active.all).select { |c| c.end_date.to_s >= cutoff }
+      merge_pegged(super.all)
     end
 
     def map(&block)
