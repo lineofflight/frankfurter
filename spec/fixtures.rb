@@ -44,6 +44,7 @@ module Fixtures
         Rate.dataset.multi_insert(batch)
       end
       rebuild_rollups!
+      rebuild_currencies!
     end
 
     # The most recent business day in the fixture (useful for tests)
@@ -89,6 +90,36 @@ module Fixtures
         db[:rates].select(month_bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
           .group(:provider, :base, :quote, month_bucket),
       )
+    end
+
+    def rebuild_currencies!
+      db = Sequel::Model.db
+
+      db[:currencies].delete
+      db.run(<<~SQL)
+        INSERT INTO currencies (iso_code, start_date, end_date)
+        SELECT iso_code, MIN(start_date), MAX(end_date)
+        FROM (
+          SELECT quote AS iso_code, MIN(date) AS start_date, MAX(date) AS end_date
+          FROM rates GROUP BY quote
+          UNION ALL
+          SELECT base AS iso_code, MIN(date) AS start_date, MAX(date) AS end_date
+          FROM rates GROUP BY base
+        )
+        GROUP BY iso_code
+        ORDER BY iso_code
+      SQL
+
+      db[:currency_coverages].delete
+      db.run(<<~SQL)
+        INSERT INTO currency_coverages (provider_key, iso_code)
+        SELECT provider, iso_code FROM (
+          SELECT DISTINCT provider, quote AS iso_code FROM rates
+          UNION
+          SELECT DISTINCT provider, base AS iso_code FROM rates
+        )
+        ORDER BY provider, iso_code
+      SQL
     end
 
     def generate_rates

@@ -12,6 +12,33 @@ describe Currency do
       { provider: "BOC", date: Date.today, base: "CAD", quote: "USD", rate: 0.74 },
       { provider: "ECB", date: Date.today - 365, base: "EUR", quote: "SEK", rate: 11.0 },
     ])
+
+    db = Sequel::Model.db
+    db[:currencies].delete
+    db.run(<<~SQL)
+      INSERT OR REPLACE INTO currencies (iso_code, start_date, end_date)
+      SELECT iso_code, MIN(start_date), MAX(end_date)
+      FROM (
+        SELECT quote AS iso_code, MIN(date) AS start_date, MAX(date) AS end_date
+        FROM rates GROUP BY quote
+        UNION ALL
+        SELECT base AS iso_code, MIN(date) AS start_date, MAX(date) AS end_date
+        FROM rates GROUP BY base
+      )
+      GROUP BY iso_code
+      ORDER BY iso_code
+    SQL
+
+    db[:currency_coverages].delete
+    db.run(<<~SQL)
+      INSERT OR REPLACE INTO currency_coverages (provider_key, iso_code)
+      SELECT provider, iso_code FROM (
+        SELECT DISTINCT provider, quote AS iso_code FROM rates
+        UNION
+        SELECT DISTINCT provider, base AS iso_code FROM rates
+      )
+      ORDER BY provider, iso_code
+    SQL
   end
 
   it "lists all currencies" do

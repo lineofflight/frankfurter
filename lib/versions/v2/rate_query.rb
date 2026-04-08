@@ -11,7 +11,7 @@ require "peg"
 
 module Versions
   class V2 < Roda
-    class Query
+    class RateQuery
       include Roundable
 
       class ValidationError < StandardError; end

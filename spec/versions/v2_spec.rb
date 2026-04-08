@@ -320,7 +320,7 @@ describe Versions::V2 do
   end
 
   it "iterates over range results" do
-    query = Versions::V2::Query.new("from" => range_start, "to" => range_end)
+    query = Versions::V2::RateQuery.new("from" => range_start, "to" => range_end)
     records = []
     query.each { |r| records << r }
 

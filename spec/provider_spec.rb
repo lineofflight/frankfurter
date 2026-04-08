@@ -170,6 +170,19 @@ describe Provider do
       _(fetched_params[-1][:upto]).must_be_nil
     end
 
+    it "refreshes currencies and currency coverages" do
+      Currency.dataset.delete
+      CurrencyCoverage.dataset.delete
+
+      provider.stub(:adapter, adapter) do
+        provider.backfill
+      end
+
+      _(CurrencyCoverage.where(provider_key: provider.key).count).must_be(:>, 0)
+      _(Currency.where(iso_code: "USD").count).must_equal(1)
+      _(Currency.where(iso_code: "EUR").count).must_equal(1)
+    end
+
     it "skips when api key is required but missing" do
       gated_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|

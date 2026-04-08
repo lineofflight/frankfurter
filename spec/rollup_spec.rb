@@ -4,7 +4,7 @@ require_relative "helper"
 require "provider"
 require "weekly_rate"
 require "monthly_rate"
-require "versions/v2/query"
+require "versions/v2/rate_query"
 
 describe "Rollup tables" do
   describe "parity with downsample" do
@@ -142,7 +142,7 @@ describe "Rollup tables" do
       # A 20-day range starting mid-month should include both months
       start_date = Fixtures.latest_date - 20
       end_date = Fixtures.latest_date
-      query = Versions::V2::Query.new(from: start_date.to_s, to: end_date.to_s, group: "month")
+      query = Versions::V2::RateQuery.new(from: start_date.to_s, to: end_date.to_s, group: "month")
       dates = query.to_a.map { |r| r[:date] }.uniq
 
       _(dates.size).must_be(:>=, 2, "expected at least 2 monthly buckets for a cross-month range")
@@ -151,7 +151,7 @@ describe "Rollup tables" do
     it "weekly grouped query includes partial first-week bucket" do
       start_date = Fixtures.latest_date - 20
       end_date = Fixtures.latest_date
-      query = Versions::V2::Query.new(from: start_date.to_s, to: end_date.to_s, group: "week")
+      query = Versions::V2::RateQuery.new(from: start_date.to_s, to: end_date.to_s, group: "week")
       dates = query.to_a.map { |r| r[:date] }.uniq
 
       _(dates.size).must_be(:>=, 3, "expected at least 3 weekly buckets for a 20-day range")
@@ -160,13 +160,13 @@ describe "Rollup tables" do
 
   describe "single-date grouped query" do
     it "group=month with single date does not raise" do
-      query = Versions::V2::Query.new(date: Fixtures.latest_date.to_s, group: "month")
+      query = Versions::V2::RateQuery.new(date: Fixtures.latest_date.to_s, group: "month")
 
       _(query.to_a).wont_be_empty
     end
 
     it "group=week with single date does not raise" do
-      query = Versions::V2::Query.new(date: Fixtures.latest_date.to_s, group: "week")
+      query = Versions::V2::RateQuery.new(date: Fixtures.latest_date.to_s, group: "week")
 
       _(query.to_a).wont_be_empty
     end
@@ -176,7 +176,7 @@ describe "Rollup tables" do
     it "derives cache key from raw rates, not rollup bucket_date" do
       start_date = (Fixtures.latest_date - 30).to_s
       end_date = Fixtures.latest_date.to_s
-      query_before = Versions::V2::Query.new(from: start_date, to: end_date, group: "month")
+      query_before = Versions::V2::RateQuery.new(from: start_date, to: end_date, group: "month")
       key_before = query_before.cache_key
 
       # Insert a new rate on the existing latest date and refresh rollups;
@@ -186,7 +186,7 @@ describe "Rollup tables" do
       )
       Provider.find(key: "ECB").send(:refresh_rollups, [Fixtures.latest_date])
 
-      query_after = Versions::V2::Query.new(from: start_date, to: end_date, group: "month")
+      query_after = Versions::V2::RateQuery.new(from: start_date, to: end_date, group: "month")
       key_after = query_after.cache_key
 
       _(key_before).must_equal(key_after, "cache key derives from raw max date, stays stable when rollup content changes within same day")

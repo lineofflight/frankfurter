@@ -5,7 +5,7 @@ require "currency"
 require "oj"
 require "provider"
 require "roda"
-require "versions/v2/query"
+require "versions/v2/rate_query"
 
 module Versions
   class V2 < Roda
@@ -25,7 +25,7 @@ module Versions
 
     plugin :error_handler do |error|
       status = case error
-      when Query::ValidationError then 422
+      when RateQuery::ValidationError then 422
       else 500
       end
       request.halt(status, { status:, message: error.message })
@@ -36,7 +36,7 @@ module Versions
 
       r.on("rates") do
         r.get do
-          query = Query.new(r.params)
+          query = RateQuery.new(r.params)
           r.etag(query.cache_key)
 
           r.csv do
@@ -87,7 +87,7 @@ module Versions
       r.on("rate", String, String) do |base_currency, quote_currency|
         r.get do
           params = r.params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
-          query = Query.new(params)
+          query = RateQuery.new(params)
           result = query.to_a.first || r.halt(404)
 
           result
@@ -105,16 +105,7 @@ module Versions
 
       r.on("currencies") do
         r.get do
-          providers = r.params["providers"]&.upcase&.split(",")
-          currencies = if providers
-            Currency.with_providers(providers).all
-          elsif r.params["scope"] == "all"
-            Currency.all
-          else
-            Currency.active
-          end
-
-          currencies.map(&:to_h)
+          currencies(r.params)
         end
       end
 
@@ -139,26 +130,32 @@ module Versions
       end
     end
 
-    def providers
-      date_ranges = Rate.group(:provider)
-        .select { [provider, min(date).as(start_date), max(date).as(end_date)] }
-        .to_h { |r| [r[:provider], { start_date: r[:start_date].to_s, end_date: r[:end_date].to_s }] }
-      currencies = Rate.select(:provider, Sequel[:quote].as(:currency)).distinct
-        .union(Rate.select(:provider, Sequel[:base].as(:currency)).distinct)
-        .order(:provider, :currency).all
-        .group_by(&:provider).transform_values { |rows| rows.map { |r| r[:currency] }.uniq.sort }
+    def currencies(params)
+      provider_keys = params["providers"]&.upcase&.split(",")
+      records = if provider_keys
+        Currency.with_providers(provider_keys).all
+      elsif params["scope"] == "all"
+        Currency.all
+      else
+        Currency.active
+      end
 
-      Provider.all.sort_by(&:key).filter_map do |provider|
-        range = date_ranges[provider.key] or next
+      records.map(&:to_h)
+    end
+
+    def providers
+      Provider.eager(:currencies).all.sort_by(&:key).filter_map do |provider|
+        next if provider.currencies.empty?
+
         {
           key: provider.key,
           name: provider.name,
           description: provider.description,
           data_url: provider.data_url,
           terms_url: provider.terms_url,
-          start_date: range[:start_date],
-          end_date: range[:end_date],
-          currencies: currencies[provider.key] || [],
+          start_date: provider.start_date,
+          end_date: provider.end_date,
+          currencies: provider.currencies.map(&:iso_code).sort,
         }
       end
     end
