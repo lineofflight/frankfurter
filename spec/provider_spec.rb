@@ -184,6 +184,19 @@ describe Provider do
       _(Currency.where(iso_code: "EUR").count).must_equal(1)
     end
 
+    it "stores per-provider date ranges in coverages" do
+      CurrencyCoverage.dataset.delete
+
+      provider.stub(:adapter, adapter) do
+        provider.backfill
+      end
+
+      coverage = CurrencyCoverage.where(provider_key: provider.key, iso_code: "USD").first
+
+      _(coverage.start_date.to_s).must_equal(import_date.to_s)
+      _(coverage.end_date.to_s).must_equal(import_date.to_s)
+    end
+
     it "skips when api key is required but missing" do
       gated_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|

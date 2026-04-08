@@ -34,11 +34,11 @@ class Provider < Sequel::Model(:providers)
   end
 
   def start_date
-    currencies.map { |c| c.start_date.to_s }.min
+    currency_coverages.map { |c| c.start_date.to_s }.min
   end
 
   def end_date
-    currencies.map { |c| c.end_date.to_s }.max
+    currency_coverages.map { |c| c.end_date.to_s }.max
   end
 
   def last_synced
@@ -93,16 +93,19 @@ class Provider < Sequel::Model(:providers)
   end
 
   def refresh_currency_summaries(iso_codes)
-    # Upsert currency coverages — pairs known from data, no query needed
-    pairs = iso_codes.map { |c| { provider_key: key, iso_code: c } }
-    CurrencyCoverage.dataset.insert_conflict.multi_insert(pairs)
-
-    # Upsert currencies — scoped MIN/MAX per affected iso_code
     iso_codes.each do |code|
-      dates = db[:rates].where(Sequel.|({ quote: code }, { base: code }))
+      dates = db[:rates].where(provider: key)
+        .where(Sequel.|({ quote: code }, { base: code }))
         .select { [min(date).as(start_date), max(date).as(end_date)] }.first # rubocop:disable Performance/Detect
       next unless dates
 
+      # Upsert coverage with per-provider date range
+      db[:currency_coverages].insert_conflict(target: [:provider_key, :iso_code], update: {
+        start_date: Sequel.function(:min, Sequel[:currency_coverages][:start_date], dates[:start_date]),
+        end_date: Sequel.function(:max, Sequel[:currency_coverages][:end_date], dates[:end_date]),
+      }).insert(provider_key: key, iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
+
+      # Upsert global currency date range
       db[:currencies].insert_conflict(target: :iso_code, update: {
         start_date: Sequel.function(:min, Sequel[:currencies][:start_date], dates[:start_date]),
         end_date: Sequel.function(:max, Sequel[:currencies][:end_date], dates[:end_date]),

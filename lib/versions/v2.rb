@@ -144,8 +144,8 @@ module Versions
     end
 
     def providers
-      Provider.eager(:currencies).all.sort_by(&:key).filter_map do |provider|
-        next if provider.currencies.empty?
+      Provider.eager(:currency_coverages).all.sort_by(&:key).filter_map do |provider|
+        next if provider.currency_coverages.empty?
 
         {
           key: provider.key,
@@ -155,7 +155,7 @@ module Versions
           terms_url: provider.terms_url,
           start_date: provider.start_date,
           end_date: provider.end_date,
-          currencies: provider.currencies.map(&:iso_code).sort,
+          currencies: provider.currency_coverages.map(&:iso_code).sort,
         }
       end
     end

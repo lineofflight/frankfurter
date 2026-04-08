@@ -31,12 +31,14 @@ describe Currency do
 
     db[:currency_coverages].delete
     db.run(<<~SQL)
-      INSERT OR REPLACE INTO currency_coverages (provider_key, iso_code)
-      SELECT provider, iso_code FROM (
-        SELECT DISTINCT provider, quote AS iso_code FROM rates
-        UNION
-        SELECT DISTINCT provider, base AS iso_code FROM rates
+      INSERT OR REPLACE INTO currency_coverages (provider_key, iso_code, start_date, end_date)
+      SELECT provider, iso_code, MIN(date), MAX(date)
+      FROM (
+        SELECT provider, quote AS iso_code, date FROM rates
+        UNION ALL
+        SELECT provider, base AS iso_code, date FROM rates
       )
+      GROUP BY provider, iso_code
       ORDER BY provider, iso_code
     SQL
   end
