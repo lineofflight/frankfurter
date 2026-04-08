@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "bucket"
 require "cache"
 require "db"
 require "json"
@@ -41,9 +42,13 @@ class Provider < Sequel::Model(:providers)
       records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) } }
       records.each { |r| r[:provider] = key }
 
-      before = db.get(Sequel.lit("total_changes()"))
-      Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
-      inserted = db.get(Sequel.lit("total_changes()")) - before
+      inserted = db.transaction do
+        before = db.get(Sequel.lit("total_changes()"))
+        Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
+        count = db.get(Sequel.lit("total_changes()")) - before
+        refresh_rollups(records.map { |r| r[:date] }.uniq) if count > 0
+        count
+      end
 
       Log.info("#{key}: inserted #{inserted} rates")
       next if inserted.zero?
@@ -55,5 +60,32 @@ class Provider < Sequel::Model(:providers)
     Log.warn("#{key}: no api key, skipping")
   rescue Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout, SocketError => e
     Log.error("#{key}: #{e.class}")
+  end
+
+  private
+
+  def refresh_rollups(dates)
+    refresh_rollup(:weekly_rates, Bucket.week, dates)
+    refresh_rollup(:monthly_rates, Bucket.month, dates)
+  end
+
+  def refresh_rollup(table, bucket_expr, dates)
+    buckets = db[:rates]
+      .where(provider: key, date: dates)
+      .select_map(bucket_expr)
+      .uniq
+
+    return if buckets.empty?
+
+    db[table].where(provider: key, bucket_date: buckets).delete
+
+    db[table].insert(
+      [:bucket_date, :provider, :base, :quote, :rate],
+      db[:rates]
+        .where(provider: key)
+        .where(bucket_expr => buckets)
+        .select(bucket_expr, :provider, :base, :quote, Sequel.function(:avg, :rate))
+        .group(:provider, :base, :quote, bucket_expr),
+    )
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "roda"
+
 module Versions
   class V1 < Roda
     class Query

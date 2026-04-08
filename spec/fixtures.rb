@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "bucket"
 require "rate"
 
 # Generates realistic test data for ECB and BOC providers.
@@ -42,6 +43,7 @@ module Fixtures
       generate_rates.each_slice(1000) do |batch|
         Rate.dataset.multi_insert(batch)
       end
+      rebuild_rollups!
     end
 
     # The most recent business day in the fixture (useful for tests)
@@ -68,6 +70,26 @@ module Fixtures
     end
 
     private
+
+    def rebuild_rollups!
+      db = Sequel::Model.db
+
+      db[:weekly_rates].delete
+      week_bucket = Bucket.week
+      db[:weekly_rates].insert(
+        [:bucket_date, :provider, :base, :quote, :rate],
+        db[:rates].select(week_bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
+          .group(:provider, :base, :quote, week_bucket),
+      )
+
+      db[:monthly_rates].delete
+      month_bucket = Bucket.month
+      db[:monthly_rates].insert(
+        [:bucket_date, :provider, :base, :quote, :rate],
+        db[:rates].select(month_bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
+          .group(:provider, :base, :quote, month_bucket),
+      )
+    end
 
     def generate_rates
       days = business_days

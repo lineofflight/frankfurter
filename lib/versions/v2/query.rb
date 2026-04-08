@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 require "digest"
+require "roda"
 require "rate"
+require "weekly_rate"
+require "monthly_rate"
 require "roundable"
 require "blender"
 require "peg"
@@ -30,14 +33,18 @@ module Versions
 
         if date_scope.is_a?(Range)
           each_chunk(date_scope) do |chunk_range|
-            chunk = dataset.where(date: chunk_range)
-            chunk = chunk.downsample(group) if group
-            chunk.order(:date, :quote).all.group_by { |r| r[:date] }.each do |_, rows|
-              emit_blended(rows, &block)
+            ds = range_dataset
+            date_col = ds.model.date_column
+            chunk = ds.between(chunk_range)
+            chunk = chunk.downsample(group) if group && !rollup?
+            rows = chunk.all
+            normalize_dates!(rows, date_col) if date_col != :date
+            rows.group_by { |r| r[:date] }.each do |_, group_rows|
+              emit_blended(group_rows, &block)
             end
           end
         else
-          emit_blended(dataset.latest(date_scope).all, &block)
+          emit_blended(raw_dataset.latest(date_scope).all, &block)
         end
       end
 
@@ -52,15 +59,26 @@ module Versions
       private
 
       def max_date
+        ds = raw_dataset
         if date_scope.is_a?(Range)
-          dataset.where(date: date_scope).max(:date)
+          ds.where(date: date_scope).max(:date)
         else
-          dataset.latest(date_scope).max(:date)
+          ds.latest(date_scope).max(:date)
         end
       end
 
-      def dataset
-        ds = Rate.dataset
+      def rollup?
+        range? && ["week", "month"].include?(group)
+      end
+
+      def rollup_model
+        case group
+        when "week" then WeeklyRate
+        when "month" then MonthlyRate
+        end
+      end
+
+      def apply_filters(ds)
         ds = ds.where(provider: providers) if providers
         if quotes
           currencies = Set.new(quotes)
@@ -68,8 +86,15 @@ module Versions
           quotes.each { |q| (peg = Peg.find(q)) && currencies << peg.base }
           ds = ds.only(*currencies)
         end
-
         ds
+      end
+
+      def raw_dataset
+        apply_filters(Rate.dataset)
+      end
+
+      def range_dataset
+        apply_filters(rollup? ? rollup_model.dataset : Rate.dataset)
       end
 
       def base
@@ -213,6 +238,10 @@ module Versions
 
           yield({ date: date.to_s, base:, quote: peg.quote, rate: round(rate) })
         end
+      end
+
+      def normalize_dates!(rows, date_col)
+        rows.each { |r| r.values[:date] = r.values.delete(date_col) }
       end
 
       def each_chunk(range)

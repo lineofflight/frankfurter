@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
+require "bucket"
 require "db"
+require "rate_scopes"
 
 class Rate < Sequel::Model(:rates)
-  dataset_module do
-    def ecb
-      where(provider: "ECB")
-    end
+  include RateScopes
 
+  class << self
+    def date_column = :date
+  end
+
+  dataset_module do
     # Per-currency latest with a 14-day staleness window.
     #
     # Each provider contributes its most recent rate for each currency pair.
@@ -22,36 +26,8 @@ class Rate < Sequel::Model(:rates)
       where(Sequel.lit("(provider, base, quote, date) IN (SELECT provider, base, quote, max_date FROM (?) AS ld)", latest_dates))
     end
 
-    def between(interval)
-      return where(false) if interval.begin > Date.today
-
-      nearest = Sequel.function(
-        :coalesce,
-        select(:date).where(Sequel[:date] <= interval.begin).order(Sequel.desc(:date)).limit(1),
-        interval.begin,
-      )
-      where(Sequel[:date] >= nearest)
-        .where(Sequel[:date] <= interval.end)
-        .order(:date, :quote)
-    end
-
-    def only(*currencies)
-      pivot_currency = Sequel[:providers][:pivot_currency]
-      join(:providers, key: :provider)
-        .where(Sequel.|({ base: pivot_currency, quote: currencies }, { quote: pivot_currency, base: currencies }))
-        .select_all(:rates)
-    end
-
     def downsample(precision)
-      sampler = case precision.to_s
-      when "week"
-        week_num = Sequel.cast(Sequel.function(:strftime, "%W", :date), Integer)
-        day_offset = Sequel.join(["+", week_num * 7, " days"])
-        year_start = Sequel.function(:strftime, "%Y-01-01", :date)
-        Sequel.function(:date, Sequel.function(:strftime, "%Y-%m-%d", year_start, day_offset))
-      when "month"
-        Sequel.function(:strftime, "%Y-%m-01", :date)
-      end
+      sampler = Bucket.expression(precision)
 
       select(:base, :provider, :quote)
         .select_append { avg(rate).as(rate) }
