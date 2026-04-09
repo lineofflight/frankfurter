@@ -1,0 +1,11 @@
+{
+  "key": "LB",
+  "name": "Lietuvos Bankas",
+  "country_code": "LT",
+  "pivot_currency": "LTL",
+  "data_url": "https://www.lb.lt/webservices/FxRates/FxRates.asmx",
+  "terms_url": null,
+  "publish_time": 12,
+  "publish_days": "1-5",
+  "coverage_start": "1994-04-01"
+}

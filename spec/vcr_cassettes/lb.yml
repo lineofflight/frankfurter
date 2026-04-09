@@ -1,0 +1,966 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=2014-12-29&tp=LT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 20:28:18 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEy8FQucvDQ4BW; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 10 Apr 2026 19:28:18 GMT
+      Content-Security-Policy:
+      - frame-ancestors 'self' monetos.lb.lt coins.lb.lt *.cv.lt *.cvonline.lt;
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BwUjELBP9qmEgaht7usd0LnVvqwYBUFZ37Utt8IsJ%2F4Q4yVAu4bFqNoEIwd8coCxZY3qkNUtdalf%2BOuHqbzzWfubi88vE%2FtK66Cbc7g%2BOgdWT6ERFT0a%2FNpf1HHc1lHBUc0ZgYlYhQ%3D%3D"}]}'
+      Cf-Ray:
+      - 9e9c41e75cb51489-AMS
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.6881</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AED</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.8611</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AFN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4689</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ALL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.1387</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3025</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ARS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2918</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.5999</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7681</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BAM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6214</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BDT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7652</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BGN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4896</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BHD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5835</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0865</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BOB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0592</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BRL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4314</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8688</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6398</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CLP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5377</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CNY</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2127</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>COP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2512</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5909</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DJF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6404</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2371</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DZD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9493</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EGP</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3992</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ETB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4528</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EUR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.3999</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.4917</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0168</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GNF</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6399</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HKD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5043</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HRK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1004</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2660</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IDR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3131</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.2152</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ILS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4518</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>INR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IQD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0442</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IRR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2291</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ISK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9616</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JOD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3499</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1254</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KES</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.7944</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5612</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KRW</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6487</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5506</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8664</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LBP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1515</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1436</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MAD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7992</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0840</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MGA</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.0738</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MYR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.6072</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MKD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5076</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MNT</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9290</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MXN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.3004</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.8085</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1836</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NZD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8238</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PAB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.5061</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PEN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3172</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PHP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8103</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.1013</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.7545</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>QAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.7226</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RON</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8471</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RSD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.1039</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.5240</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6271</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1341</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5820</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SYP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.5804</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>THB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.4010</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.9063</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5118</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TND</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2190</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TRY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.8939</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TWD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.6533</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7753</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAH</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1756</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UYU</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8238</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1677</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VEF</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3205</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VND</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2535</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XAF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.1028</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2462</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XOF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4419</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ZAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 09 Apr 2026 20:28:18 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=2014-12-30&tp=LT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 20:28:18 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEy8FQucvDQ4BW; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 10 Apr 2026 19:28:18 GMT
+      Content-Security-Policy:
+      - frame-ancestors 'self' monetos.lb.lt coins.lb.lt *.cv.lt *.cvonline.lt;
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=1ES5X16zqxoXh4XtjhrqhVWncRwqwCxdnP1P%2FEvghU7wEqb2%2F86ixPPYj8abAPcSFsYQGMTKDrUmkNp45%2FhQ76PS3N9YScyS4Q9AXLlKlTklSf6NTqhemsHZF9mKqAijIJp0aOhoCQ%3D%3D"}]}'
+      Cf-Ray:
+      - 9e9c41e94ad10a58-AMS
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.6881</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AED</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.8611</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AFN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4689</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ALL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.1387</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3025</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ARS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2973</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.5999</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7681</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BAM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6214</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BDT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7589</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BGN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4896</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BHD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5671</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0865</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BOB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0592</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BRL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4296</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8588</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6398</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CLP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5378</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CNY</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2127</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>COP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2405</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5909</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DJF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6247</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2371</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DZD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9493</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EGP</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3992</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ETB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4528</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EUR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.3958</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.4917</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0168</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GNF</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6399</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HKD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4887</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HRK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2660</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IDR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3131</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.2152</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ILS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4518</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>INR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IQD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0442</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IRR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2232</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ISK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9616</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JOD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3464</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1254</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KES</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.7944</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5612</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KRW</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6487</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5472</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8664</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LBP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1515</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1436</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MAD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8061</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0840</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MGA</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.0738</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MYR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.6072</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MKD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5076</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MNT</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9290</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MXN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.3004</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.7719</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1836</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NZD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8238</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PAB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.5061</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PEN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3172</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PHP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8103</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.9488</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.7545</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>QAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.6974</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RON</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8471</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RSD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.9857</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.5240</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6174</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1341</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5820</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SYP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.5804</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>THB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.4010</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.9063</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5118</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TND</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2149</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TRY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.8939</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TWD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.6533</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7851</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAH</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1756</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UYU</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8238</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1677</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VEF</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3205</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VND</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2535</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XAF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0919</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2462</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XOF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4419</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ZAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 09 Apr 2026 20:28:18 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=2014-12-31&tp=LT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 20:28:19 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEys4w7BZqfifv; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 10 Apr 2026 19:28:19 GMT
+      Content-Security-Policy:
+      - frame-ancestors 'self' monetos.lb.lt coins.lb.lt *.cv.lt *.cvonline.lt;
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2BDe5aIeT4PaZO%2Bqb%2Ftof%2FyZWO2lCx1JlLV6HG78iv5vwNz7tY9%2FYBp4H%2BoLCimlnaXQpdQjPs8lEjZ60cX4UDO%2Fsyn%2BrfZR0TPesj3cnmwqYCtv9zFe3BD0eLnYpizCdN4TpwUajbQ%3D%3D"}]}'
+      Cf-Ray:
+      - 9e9c41eb09f85c37-AMS
+    body:
+      encoding: ASCII-8BIT
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.6881</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AED</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.8611</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AFN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4689</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ALL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.1387</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3025</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ARS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3138</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.5999</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7681</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BAM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6214</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BDT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7654</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BGN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4896</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BHD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4056</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0865</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BOB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0592</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BRL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.44</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8702</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6398</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CLP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5718</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CNY</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2127</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>COP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2463</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5909</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DJF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6379</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2371</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DZD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9493</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EGP</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3992</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ETB</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4528</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EUR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4080</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.4917</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0168</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GNF</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6399</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HKD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5073</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HRK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0965</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2660</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IDR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3131</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.2152</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ILS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4518</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>INR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IQD</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0442</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IRR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2334</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ISK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9616</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JOD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3698</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1254</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KES</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.7944</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5612</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KRW</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6487</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5554</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8664</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LBP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1515</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.1436</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MAD</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8179</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0840</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MGA</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.0738</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MYR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.6072</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MKD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5076</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MNT</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9290</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MXN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.3004</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.7991</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1836</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NZD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8238</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PAB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.5061</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PEN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3172</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PHP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8103</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.0454</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.7545</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>QAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.7156</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RON</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8471</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RSD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.0251</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.5240</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.6246</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1341</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5820</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SYP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.5804</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>THB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.4010</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJS</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.9063</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5118</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TND</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.2230</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TRY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.8939</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TWD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.6533</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7945</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAH</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1756</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UYU</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8387</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1677</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.4878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VEF</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3205</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VND</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2535</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XAF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.1124</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2462</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XOF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>2014-12-31</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4419</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ZAR</Ccy>\r\n      <Amt>10</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 09 Apr 2026 20:28:19 GMT
+recorded_with: VCR 6.4.0
