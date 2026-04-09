@@ -44,7 +44,14 @@ class Currency < Sequel::Model(:currencies)
       db_record = where(iso_code: code).first
 
       if db_record
-        db_record.instance_variable_set(:@peg, peg) if peg
+        if peg
+          db_record.instance_variable_set(:@peg, peg)
+          anchor = where(iso_code: peg.base).first
+          if anchor
+            peg_start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max.to_s
+            db_record.start_date = peg_start if peg_start < db_record.start_date.to_s
+          end
+        end
         db_record
       elsif peg
         anchor = where(iso_code: peg.base).first
@@ -63,6 +70,11 @@ class Currency < Sequel::Model(:currencies)
         existing = anchors[peg.quote]
         if existing
           existing.instance_variable_set(:@peg, peg)
+          anchor = anchors[peg.base]
+          if anchor
+            peg_start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max.to_s
+            existing.start_date = peg_start if peg_start < existing.start_date.to_s
+          end
           nil
         else
           anchor = anchors[peg.base]

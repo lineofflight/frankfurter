@@ -132,6 +132,40 @@ describe Currency do
     _(bmd.start_date.to_s).must_be(:>=, usd.start_date.to_s)
   end
 
+  it "extends start_date back to peg start when provider data is newer" do
+    # AED is pegged to USD since 1997-11-02. Insert provider data starting
+    # much later, but anchor (USD) data going back further.
+    db = Sequel::Model.db
+    Rate.multi_insert([
+      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
+      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
+    ])
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02", end_date: Date.today.to_s)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+
+    aed = Currency.find("AED")
+
+    _(aed.start_date.to_s).must_equal("1997-11-02")
+    _(aed.peg).wont_be_nil
+    _(aed.providers).must_include("TCMB")
+  end
+
+  it "extends start_date in currency list for pegged currencies with provider data" do
+    db = Sequel::Model.db
+    Rate.multi_insert([
+      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
+      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
+    ])
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02", end_date: Date.today.to_s)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+
+    aed = Currency.all.find { |c| c.iso_code == "AED" }
+
+    _(aed.start_date.to_s).must_equal("1997-11-02")
+  end
+
   it "formats pegged currency to hash" do
     bmd = Currency.find("BMD")
 
