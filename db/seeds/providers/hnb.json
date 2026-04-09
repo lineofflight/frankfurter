@@ -2,10 +2,10 @@
   "key": "HNB",
   "name": "Hrvatska Narodna Banka",
   "country_code": "HR",
-  "pivot_currency": "HRK",
+  "pivot_currency": "EUR",
   "data_url": "https://api.hnb.hr/",
   "terms_url": null,
   "publish_time": 12,
   "publish_days": "1-5",
-  "coverage_start": "1994-05-30"
+  "coverage_start": "2023-01-02"
 }
