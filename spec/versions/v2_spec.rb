@@ -367,7 +367,7 @@ describe Versions::V2 do
 
     ecb = json.find { |p| p["key"] == "ECB" }
 
-    _(ecb["rate_type"]).must_equal("reference")
+    _(ecb["rate_type"]).must_equal("reference rate")
     _(ecb["pivot_currency"]).must_equal("EUR")
     _(ecb["country_code"]).must_equal("EU")
     _(ecb).wont_include("description")
