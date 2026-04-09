@@ -41,13 +41,16 @@ class Currency < Sequel::Model(:currencies)
     def find(code)
       code = code.upcase
       peg = Peg.find(code)
-      if peg
+      db_record = where(iso_code: code).first
+
+      if db_record
+        db_record.instance_variable_set(:@peg, peg) if peg
+        db_record
+      elsif peg
         anchor = where(iso_code: peg.base).first
         return unless anchor
 
         new_pegged(peg, anchor)
-      else
-        where(iso_code: code).first
       end
     end
 
@@ -57,10 +60,16 @@ class Currency < Sequel::Model(:currencies)
       anchors = db_currencies.to_h { |c| [c.iso_code, c] }
 
       pegged = Peg.all.filter_map do |peg|
-        anchor = anchors[peg.base]
-        next unless anchor
+        existing = anchors[peg.quote]
+        if existing
+          existing.instance_variable_set(:@peg, peg)
+          nil
+        else
+          anchor = anchors[peg.base]
+          next unless anchor
 
-        new_pegged(peg, anchor)
+          new_pegged(peg, anchor)
+        end
       end
 
       (db_currencies + pegged).sort_by(&:iso_code)
@@ -98,10 +107,8 @@ class Currency < Sequel::Model(:currencies)
   end
 
   def to_h_with_providers
-    if peg
-      to_h.merge(peg: { base: peg.base, rate: peg.rate, authority: peg.authority })
-    else
-      to_h.merge(providers: providers)
-    end
+    h = to_h.merge(providers: providers)
+    h[:peg] = { base: peg.base, rate: peg.rate, authority: peg.authority } if peg
+    h
   end
 end

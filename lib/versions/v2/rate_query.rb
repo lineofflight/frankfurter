@@ -7,6 +7,7 @@ require "weekly_rate"
 require "monthly_rate"
 require "roundable"
 require "blender"
+require "money/currency"
 require "peg"
 
 module Versions

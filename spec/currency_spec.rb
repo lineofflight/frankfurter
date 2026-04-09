@@ -141,22 +141,29 @@ describe Currency do
     _(bmd.to_h[:end_date]).wont_be_nil
   end
 
-  it "includes peg metadata in detail hash" do
-    bmd = Currency.find("BMD")
-    h = bmd.to_h_with_providers
+  it "returns peg metadata for pegged currencies" do
+    h = Currency.find("BMD").to_h_with_providers
 
-    _(h[:peg]).wont_be_nil
     _(h[:peg][:base]).must_equal("USD")
     _(h[:peg][:rate]).must_equal(1.0)
     _(h[:peg][:authority]).must_equal("Bermuda Monetary Authority")
-    _(h).wont_include(:providers)
   end
 
-  it "returns providers for non-pegged currency detail" do
-    usd = Currency.find("USD")
-    h = usd.to_h_with_providers
+  it "returns providers for pegged currencies" do
+    h = Currency.find("BMD").to_h_with_providers
 
     _(h[:providers]).must_be_kind_of(Array)
+  end
+
+  it "returns providers for non-pegged currencies" do
+    h = Currency.find("USD").to_h_with_providers
+
+    _(h[:providers]).must_be_kind_of(Array)
+  end
+
+  it "does not return peg metadata for non-pegged currencies" do
+    h = Currency.find("USD").to_h_with_providers
+
     _(h).wont_include(:peg)
   end
 end

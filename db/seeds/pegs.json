@@ -56,6 +56,54 @@
     "source": "https://en.wikipedia.org/wiki/Bhutanese_ngultrum"
   },
   {
+    "quote": "AED",
+    "base": "USD",
+    "rate": 3.6725,
+    "since": "1997-11-02",
+    "authority": "Central Bank of the UAE",
+    "source": "https://www.centralbank.ae/en/our-operations/currency-operations/exchange-rates"
+  },
+  {
+    "quote": "SAR",
+    "base": "USD",
+    "rate": 3.75,
+    "since": "1986-06-01",
+    "authority": "Saudi Central Bank",
+    "source": "https://www.sama.gov.sa/en-US/MonetaryPolicy/Pages/ExchangeRatePolicy.aspx"
+  },
+  {
+    "quote": "BHD",
+    "base": "USD",
+    "rate": 0.376,
+    "since": "2001-01-01",
+    "authority": "Central Bank of Bahrain",
+    "source": "https://www.cbb.gov.bh/monetary-policy/"
+  },
+  {
+    "quote": "QAR",
+    "base": "USD",
+    "rate": 3.64,
+    "since": "2001-07-09",
+    "authority": "Qatar Central Bank",
+    "source": "https://en.wikipedia.org/wiki/Qatari_riyal"
+  },
+  {
+    "quote": "OMR",
+    "base": "USD",
+    "rate": 0.3845,
+    "since": "1986-01-01",
+    "authority": "Central Bank of Oman",
+    "source": "https://en.wikipedia.org/wiki/Omani_rial"
+  },
+  {
+    "quote": "JOD",
+    "base": "USD",
+    "rate": 0.709,
+    "since": "1995-10-23",
+    "authority": "Central Bank of Jordan",
+    "source": "https://www.cbj.gov.jo/Pages/viewpage.aspx?pageID=65"
+  },
+  {
     "quote": "ANG",
     "base": "USD",
     "rate": 1.79,

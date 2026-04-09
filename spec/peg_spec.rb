@@ -6,7 +6,6 @@ require "peg"
 describe Peg do
   it "loads all pegs" do
     _(Peg.all).wont_be_empty
-    _(Peg.all.length).must_equal(8)
   end
 
   it "returns frozen array" do

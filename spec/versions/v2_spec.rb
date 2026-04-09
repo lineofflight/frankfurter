@@ -477,7 +477,13 @@ describe Versions::V2 do
     _(json["peg"]["base"]).must_equal("USD")
     _(json["peg"]["rate"]).must_equal(1.0)
     _(json["peg"]["authority"]).must_equal("Bermuda Monetary Authority")
-    _(json).wont_include("providers")
+  end
+
+  it "always includes providers for pegged currency detail" do
+    get "/currency/bmd"
+
+    _(last_response).must_be(:ok?)
+    _(json["providers"]).must_be_kind_of(Array)
   end
 
   it "returns providers for non-pegged currency detail" do

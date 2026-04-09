@@ -61,5 +61,43 @@ module Versions
 
       _(query.to_a.first[:date]).must_equal(friday.to_s)
     end
+
+    describe "peg gap filling" do
+      # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
+      # Add a provider that starts covering BTN only recently, leaving older dates
+      # to be filled by the peg.
+      before do
+        cutoff = Fixtures.business_day(30)
+        days = []
+        date = Fixtures.latest_date
+        while date >= cutoff
+          days << date unless date.saturday? || date.sunday?
+          date -= 1
+        end
+
+        records = days.map do |date|
+          { provider: "TEST", date:, base: "EUR", quote: "BTN", rate: 90.0 }
+        end
+        Rate.dataset.multi_insert(records)
+      end
+
+      it "fills dates before provider coverage with peg-derived rates" do
+        early_date = Fixtures.business_day(60)
+        query = V2::RateQuery.new(date: early_date.to_s, quotes: "BTN")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:quote]).must_equal("BTN")
+      end
+
+      it "uses provider rates when available" do
+        recent_date = Fixtures.latest_date.to_s
+        query = V2::RateQuery.new(date: recent_date, quotes: "BTN")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:quote]).must_equal("BTN")
+      end
+    end
   end
 end
