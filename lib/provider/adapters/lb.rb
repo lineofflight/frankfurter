@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
-require "rexml/document"
+require "ox"
 
 require "provider/adapters/adapter"
 
@@ -13,7 +13,6 @@ class Provider
     class LB < Adapter
       BASE_URL = "https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates"
       EUR_ADOPTION = Date.new(2015, 1, 1)
-      NAMESPACE = "http://www.lb.lt/WebServices/FxRates"
 
       class << self
         def backfill_range = 30
@@ -37,41 +36,36 @@ class Provider
       end
 
       def parse(xml)
-        doc = REXML::Document.new(xml)
-        records = []
+        doc = Ox.load(xml)
 
-        doc.each_element("//FxRate") do |fx_rate|
-          amounts = fx_rate.get_elements("CcyAmt")
+        doc.locate("*/FxRate").filter_map do |fx_rate|
+          amounts = fx_rate.locate("CcyAmt")
           next unless amounts.size == 2
 
-          first_ccy = amounts[0].get_text("Ccy")&.to_s
-          first_amt = amounts[0].get_text("Amt")&.to_s
-          second_ccy = amounts[1].get_text("Ccy")&.to_s
-          second_amt = amounts[1].get_text("Amt")&.to_s
-          date_str = fx_rate.get_text("Dt")&.to_s
+          first_ccy = amounts[0].locate("Ccy/^String").first
+          first_amt = amounts[0].locate("Amt/^String").first
+          second_ccy = amounts[1].locate("Ccy/^String").first
+          second_amt = amounts[1].locate("Amt/^String").first
+          date_str = fx_rate.locate("Dt/^String").first
 
           next unless first_ccy && first_amt && second_ccy && second_amt && date_str
 
           date = Date.parse(date_str)
-          tp = fx_rate.get_text("Tp")&.to_s
+          tp = fx_rate.locate("Tp/^String").first
 
           if tp == "LT"
-            # Pre-EUR: first is LTL amount, second is foreign currency quantity
             quote_amt = Float(first_amt)
             base_quantity = Float(second_amt)
             next if quote_amt.zero? || base_quantity.zero?
 
-            records << { date:, base: second_ccy, quote: "LTL", rate: quote_amt / base_quantity }
+            { date:, base: second_ccy, quote: "LTL", rate: quote_amt / base_quantity }
           else
-            # Post-EUR (EU): first is EUR=1, second is foreign currency rate
             rate = Float(second_amt)
             next if rate.zero?
 
-            records << { date:, base: "EUR", quote: second_ccy, rate: }
+            { date:, base: "EUR", quote: second_ccy, rate: }
           end
         end
-
-        records
       end
 
       private
