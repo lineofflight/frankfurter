@@ -2,7 +2,7 @@
   "key": "FBIL",
   "name": "Financial Benchmarks India",
   "country_code": "IN",
-  "rate_type": "reference",
+  "rate_type": "reference rate",
   "pivot_currency": "INR",
   "data_url": "https://www.fbil.org.in/#/refrates",
   "terms_url": "https://www.fbil.org.in/#/termsandcondition",

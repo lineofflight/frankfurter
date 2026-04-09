@@ -2,7 +2,7 @@
   "key": "CBA",
   "name": "Central Bank of Armenia",
   "country_code": "AM",
-  "rate_type": "average",
+  "rate_type": "average rate",
   "pivot_currency": "AMD",
   "data_url": "https://www.cba.am/en/SitePage/ExchangeArchive.aspx",
   "terms_url": null,

@@ -2,7 +2,7 @@
   "key": "BOI",
   "name": "Bank of Israel",
   "country_code": "IL",
-  "rate_type": "representative",
+  "rate_type": "representative rate",
   "pivot_currency": "ILS",
   "data_url": "https://www.boi.org.il/en/economic-roles/statistics/foreign-exchange-market/exchange-rates/",
   "terms_url": "https://www.boi.org.il/en/terms-of-use",

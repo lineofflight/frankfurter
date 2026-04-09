@@ -2,7 +2,7 @@
   "key": "NBK",
   "name": "National Bank of Kazakhstan",
   "country_code": "KZ",
-  "rate_type": "official (market)",
+  "rate_type": "official (market) rate",
   "pivot_currency": "KZT",
   "data_url": "https://nationalbank.kz/en/exchangerates/ezhednevnye-oficialnye-rynochnye-kursy-valyut",
   "terms_url": null,

@@ -1,7 +1,7 @@
 {
   "key": "IMF",
   "name": "International Monetary Fund",
-  "rate_type": "representative",
+  "rate_type": "representative rate",
   "pivot_currency": "USD",
   "data_url": "https://www.imf.org/external/np/fin/ert/GUI/Pages/CountryDataBase.aspx",
   "terms_url": "https://www.imf.org/en/about/copyright-and-terms",

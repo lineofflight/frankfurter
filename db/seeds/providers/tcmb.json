@@ -2,7 +2,7 @@
   "key": "TCMB",
   "name": "Türkiye Cumhuriyet Merkez Bankası",
   "country_code": "TR",
-  "rate_type": "indicative",
+  "rate_type": "indicative rate",
   "pivot_currency": "TRY",
   "data_url": "https://evds2.tcmb.gov.tr/",
   "terms_url": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/Other/Disclaimer",

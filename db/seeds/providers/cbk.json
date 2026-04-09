@@ -2,7 +2,7 @@
   "key": "CBK",
   "name": "Central Bank of Kenya",
   "country_code": "KE",
-  "rate_type": "indicative",
+  "rate_type": "indicative rate",
   "pivot_currency": "KES",
   "data_url": "https://www.centralbank.go.ke/forex/",
   "terms_url": null,

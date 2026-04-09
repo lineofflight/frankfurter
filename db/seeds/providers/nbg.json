@@ -2,7 +2,7 @@
   "key": "NBG",
   "name": "National Bank of Georgia",
   "country_code": "GE",
-  "rate_type": "official",
+  "rate_type": "official rate",
   "pivot_currency": "GEL",
   "data_url": "https://nbg.gov.ge/en/monetary-policy/currency",
   "terms_url": null,

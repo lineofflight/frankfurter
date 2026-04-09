@@ -2,7 +2,7 @@
   "key": "NB",
   "name": "Norges Bank",
   "country_code": "NO",
-  "rate_type": "middle",
+  "rate_type": "middle rate",
   "pivot_currency": "NOK",
   "data_url": "https://data.norges-bank.no/",
   "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",

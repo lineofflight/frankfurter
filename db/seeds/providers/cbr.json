@@ -2,7 +2,7 @@
   "key": "CBR",
   "name": "Central Bank of Russia",
   "country_code": "RU",
-  "rate_type": "official",
+  "rate_type": "official rate",
   "pivot_currency": "RUB",
   "data_url": "https://www.cbr.ru/eng/currency_base/daily/",
   "terms_url": "https://www.cbr.ru/eng/user_agreement/",

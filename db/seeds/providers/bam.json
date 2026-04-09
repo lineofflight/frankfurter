@@ -2,7 +2,7 @@
   "key": "BAM",
   "name": "Bank Al-Maghrib",
   "country_code": "MA",
-  "rate_type": "transfer",
+  "rate_type": "transfer rate",
   "pivot_currency": "MAD",
   "data_url": "https://apihelpdesk.centralbankofmorocco.ma/apis",
   "terms_url": null,

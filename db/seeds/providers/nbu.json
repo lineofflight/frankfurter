@@ -2,7 +2,7 @@
   "key": "NBU",
   "name": "Natsionalnyi Bank Ukrainy",
   "country_code": "UA",
-  "rate_type": "official",
+  "rate_type": "official rate",
   "pivot_currency": "UAH",
   "data_url": "https://bank.gov.ua/en/markets/exchangerates",
   "terms_url": "https://bank.gov.ua/en/useterms",

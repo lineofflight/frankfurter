@@ -2,7 +2,7 @@
   "key": "NBP",
   "name": "Narodowy Bank Polski",
   "country_code": "PL",
-  "rate_type": "average",
+  "rate_type": "average rate",
   "pivot_currency": "PLN",
   "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
   "terms_url": null,

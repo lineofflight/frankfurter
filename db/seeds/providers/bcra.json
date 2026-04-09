@@ -2,7 +2,7 @@
   "key": "BCRA",
   "name": "Banco Central de la República Argentina",
   "country_code": "AR",
-  "rate_type": "reference",
+  "rate_type": "reference rate",
   "pivot_currency": "ARS",
   "data_url": "https://www.bcra.gob.ar/en/monetary-and-financial-statistics/exchange-statistics/",
   "terms_url": "https://www.bcra.gob.ar/aviso-legal/",

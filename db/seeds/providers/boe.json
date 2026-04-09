@@ -2,7 +2,7 @@
   "key": "BOE",
   "name": "Bank of England",
   "country_code": "GB",
-  "rate_type": "spot",
+  "rate_type": "spot rate",
   "pivot_currency": "GBP",
   "data_url": "https://www.bankofengland.co.uk/boeapps/database/Rates.asp?into=GBP",
   "terms_url": "https://www.bankofengland.co.uk/legal",

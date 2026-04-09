@@ -2,7 +2,7 @@
   "key": "ECB",
   "name": "European Central Bank",
   "country_code": "EU",
-  "rate_type": "reference",
+  "rate_type": "reference rate",
   "pivot_currency": "EUR",
   "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
   "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",

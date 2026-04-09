@@ -2,7 +2,7 @@
   "key": "NBM",
   "name": "Banca Națională a Moldovei",
   "country_code": "MD",
-  "rate_type": "official",
+  "rate_type": "official rate",
   "pivot_currency": "MDL",
   "data_url": "https://www.bnm.md/en/official_exchange_rates",
   "terms_url": null,

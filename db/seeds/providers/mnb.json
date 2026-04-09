@@ -2,7 +2,7 @@
   "key": "MNB",
   "name": "Magyar Nemzeti Bank",
   "country_code": "HU",
-  "rate_type": "official",
+  "rate_type": "official rate",
   "pivot_currency": "HUF",
   "data_url": "https://www.mnb.hu/en/monetary-policy/the-mpc/exchange-rates",
   "terms_url": null,

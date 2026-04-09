@@ -2,7 +2,7 @@
   "key": "BOJA",
   "name": "Bank of Jamaica",
   "country_code": "JM",
-  "rate_type": "counter",
+  "rate_type": "counter rate",
   "pivot_currency": "JMD",
   "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
   "terms_url": "https://boj.org.jm/disclaimer/",
