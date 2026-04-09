@@ -1,7 +1,8 @@
 {
   "key": "BANXICO",
   "name": "Banco de México",
-  "description": "Daily FIX exchange rates against the Mexican peso",
+  "country_code": "MX",
+  "rate_type": "FIX",
   "pivot_currency": "MXN",
   "data_url": "https://www.banxico.org.mx/SieAPIRest/service/v1/",
   "terms_url": "https://www.banxico.org.mx/footer-en/terms-and-conditions.html",

@@ -1,7 +1,8 @@
 {
   "key": "BOE",
   "name": "Bank of England",
-  "description": "Daily spot exchange rates against the British pound",
+  "country_code": "GB",
+  "rate_type": "spot",
   "pivot_currency": "GBP",
   "data_url": "https://www.bankofengland.co.uk/boeapps/database/Rates.asp?into=GBP",
   "terms_url": "https://www.bankofengland.co.uk/legal",

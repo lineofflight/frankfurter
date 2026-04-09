@@ -362,6 +362,17 @@ describe Versions::V2 do
     _(ecb["currencies"]).must_include("USD")
   end
 
+  it "returns structured provider metadata" do
+    get "/providers"
+
+    ecb = json.find { |p| p["key"] == "ECB" }
+
+    _(ecb["rate_type"]).must_equal("reference")
+    _(ecb["pivot_currency"]).must_equal("EUR")
+    _(ecb["country_code"]).must_equal("EU")
+    _(ecb).wont_include("description")
+  end
+
   it "excludes providers without rates" do
     get "/providers"
 

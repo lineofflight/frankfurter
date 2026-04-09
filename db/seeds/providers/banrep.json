@@ -1,7 +1,8 @@
 {
   "key": "BANREP",
   "name": "Banco de la República",
-  "description": "Daily representative market exchange rate against the Colombian peso",
+  "country_code": "CO",
+  "rate_type": "representative market",
   "pivot_currency": "COP",
   "data_url": "https://www.banrep.gov.co/es/estadisticas/trm",
   "terms_url": null,

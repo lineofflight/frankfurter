@@ -150,7 +150,9 @@ module Versions
         {
           key: provider.key,
           name: provider.name,
-          description: provider.description,
+          country_code: provider.country_code,
+          rate_type: provider.rate_type,
+          pivot_currency: provider.pivot_currency,
           data_url: provider.data_url,
           terms_url: provider.terms_url,
           start_date: provider.start_date,

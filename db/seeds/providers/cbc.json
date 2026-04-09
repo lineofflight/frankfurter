@@ -1,7 +1,8 @@
 {
   "key": "CBC",
   "name": "Central Bank of the Republic of China (Taiwan)",
-  "description": "Daily interbank spot rates against the US dollar",
+  "country_code": "TW",
+  "rate_type": "interbank spot market closing",
   "pivot_currency": "USD",
   "data_url": "https://www.cbc.gov.tw/en/lp-4237-2.html",
   "terms_url": null,

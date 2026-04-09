@@ -1,7 +1,8 @@
 {
   "key": "BOI",
   "name": "Bank of Israel",
-  "description": "Daily representative exchange rates against the Israeli new shekel",
+  "country_code": "IL",
+  "rate_type": "representative",
   "pivot_currency": "ILS",
   "data_url": "https://www.boi.org.il/en/economic-roles/statistics/foreign-exchange-market/exchange-rates/",
   "terms_url": "https://www.boi.org.il/en/terms-of-use",

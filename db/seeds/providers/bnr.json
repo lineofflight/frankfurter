@@ -1,7 +1,8 @@
 {
   "key": "BNR",
   "name": "Banca Națională a României",
-  "description": "Daily reference rates against the Romanian leu",
+  "country_code": "RO",
+  "rate_type": "reference",
   "pivot_currency": "RON",
   "data_url": "https://www.bnr.ro/Exchange-rates-702.aspx",
   "terms_url": null,

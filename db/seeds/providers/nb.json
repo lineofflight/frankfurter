@@ -1,7 +1,8 @@
 {
   "key": "NB",
   "name": "Norges Bank",
-  "description": "Daily exchange rates against the Norwegian krone",
+  "country_code": "NO",
+  "rate_type": "middle",
   "pivot_currency": "NOK",
   "data_url": "https://data.norges-bank.no/",
   "terms_url": "https://www.norges-bank.no/en/topics/Statistics/disclaimer/",

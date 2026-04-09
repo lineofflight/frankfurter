@@ -1,7 +1,8 @@
 {
   "key": "BOJ",
   "name": "Bank of Japan",
-  "description": "Daily spot exchange rates from the Tokyo market",
+  "country_code": "JP",
+  "rate_type": "Tokyo market interbank",
   "pivot_currency": "USD",
   "data_url": "https://www.stat-search.boj.or.jp/index_en.html",
   "terms_url": "https://www.stat-search.boj.or.jp/info/api_notice_en.pdf",

@@ -1,7 +1,8 @@
 {
   "key": "CBA",
   "name": "Central Bank of Armenia",
-  "description": "Daily rates against the Armenian dram",
+  "country_code": "AM",
+  "rate_type": "average",
   "pivot_currency": "AMD",
   "data_url": "https://www.cba.am/en/SitePage/ExchangeArchive.aspx",
   "terms_url": null,

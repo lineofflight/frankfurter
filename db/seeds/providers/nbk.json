@@ -1,7 +1,8 @@
 {
   "key": "NBK",
   "name": "National Bank of Kazakhstan",
-  "description": "Daily official exchange rates against the Kazakhstani tenge",
+  "country_code": "KZ",
+  "rate_type": "official (market)",
   "pivot_currency": "KZT",
   "data_url": "https://nationalbank.kz/en/exchangerates/ezhednevnye-oficialnye-rynochnye-kursy-valyut",
   "terms_url": null,

@@ -1,7 +1,8 @@
 {
   "key": "BOJA",
   "name": "Bank of Jamaica",
-  "description": "Daily counter rates against the Jamaican dollar",
+  "country_code": "JM",
+  "rate_type": "counter",
   "pivot_currency": "JMD",
   "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
   "terms_url": "https://boj.org.jm/disclaimer/",

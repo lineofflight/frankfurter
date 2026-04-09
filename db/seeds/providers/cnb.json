@@ -1,7 +1,8 @@
 {
   "key": "CNB",
   "name": "Czech National Bank",
-  "description": "Daily exchange rates against the Czech koruna",
+  "country_code": "CZ",
+  "rate_type": "exchange rate fixing",
   "pivot_currency": "CZK",
   "data_url": "https://api.cnb.cz/cnbapi/swagger-ui.html",
   "terms_url": "https://www.cnb.cz/en/footer/general-terms-and-conditions/",

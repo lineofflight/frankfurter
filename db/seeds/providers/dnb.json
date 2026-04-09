@@ -1,7 +1,8 @@
 {
   "key": "DNB",
   "name": "Danmarks Nationalbank",
-  "description": "Daily exchange rates against the Danish krone",
+  "country_code": "DK",
+  "rate_type": "indicative",
   "pivot_currency": "DKK",
   "data_url": "https://www.nationalbanken.dk/en/what-we-do/stable-prices-monetary-policy-and-the-danish-economy/exchange-rates",
   "terms_url": null,

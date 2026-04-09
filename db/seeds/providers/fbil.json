@@ -1,7 +1,8 @@
 {
   "key": "FBIL",
   "name": "Financial Benchmarks India",
-  "description": "Daily reference exchange rates against the Indian rupee",
+  "country_code": "IN",
+  "rate_type": "reference",
   "pivot_currency": "INR",
   "data_url": "https://www.fbil.org.in/#/refrates",
   "terms_url": "https://www.fbil.org.in/#/termsandcondition",

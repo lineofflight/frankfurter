@@ -1,7 +1,8 @@
 {
   "key": "BOT",
   "name": "Bank of Thailand",
-  "description": "Daily average commercial bank exchange rates against the Thai baht",
+  "country_code": "TH",
+  "rate_type": "commercial bank",
   "pivot_currency": "THB",
   "data_url": "https://www.bot.or.th/en/statistics/exchange-rate.html",
   "terms_url": null,

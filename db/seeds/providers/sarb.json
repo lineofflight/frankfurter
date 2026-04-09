@@ -1,7 +1,8 @@
 {
   "key": "SARB",
   "name": "South African Reserve Bank",
-  "description": "Daily weighted-average exchange rates against the South African rand",
+  "country_code": "ZA",
+  "rate_type": "weighted average",
   "pivot_currency": "ZAR",
   "data_url": "https://custom.resbank.co.za/SarbWebApi/WebIndicators/HistoricalExchangeRatesDaily",
   "terms_url": null,

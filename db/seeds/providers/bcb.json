@@ -1,7 +1,8 @@
 {
   "key": "BCB",
   "name": "Banco Central do Brasil",
-  "description": "Daily PTAX closing exchange rates against the Brazilian real",
+  "country_code": "BR",
+  "rate_type": "PTAX closing",
   "pivot_currency": "BRL",
   "data_url": "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/",
   "terms_url": null,

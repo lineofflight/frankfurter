@@ -1,7 +1,8 @@
 {
   "key": "CBR",
   "name": "Central Bank of Russia",
-  "description": "Daily official rates against the Russian ruble",
+  "country_code": "RU",
+  "rate_type": "official",
   "pivot_currency": "RUB",
   "data_url": "https://www.cbr.ru/eng/currency_base/daily/",
   "terms_url": "https://www.cbr.ru/eng/user_agreement/",

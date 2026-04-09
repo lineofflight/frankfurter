@@ -1,7 +1,7 @@
 {
   "key": "RBA",
   "name": "Reserve Bank of Australia",
-  "description": "Daily exchange rates against the Australian dollar",
+  "country_code": "AU",
   "pivot_currency": "AUD",
   "data_url": "https://www.rba.gov.au/statistics/frequency/exchange-rates.html",
   "terms_url": "https://www.rba.gov.au/copyright/",

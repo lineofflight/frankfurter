@@ -1,7 +1,7 @@
 {
   "key": "BOB",
   "name": "Bank of Botswana",
-  "description": "Daily rates against the Botswana pula",
+  "country_code": "BW",
   "pivot_currency": "BWP",
   "data_url": "https://www.bankofbotswana.bw/exchange-rates",
   "terms_url": "https://www.bankofbotswana.bw/content/disclaimer",

@@ -1,7 +1,8 @@
 {
   "key": "NBU",
   "name": "Natsionalnyi Bank Ukrainy",
-  "description": "Daily official rates against the hryvnia",
+  "country_code": "UA",
+  "rate_type": "official",
   "pivot_currency": "UAH",
   "data_url": "https://bank.gov.ua/en/markets/exchangerates",
   "terms_url": "https://bank.gov.ua/en/useterms",

@@ -1,7 +1,7 @@
 {
   "key": "BDI",
   "name": "Banca d'Italia",
-  "description": "Daily exchange rates against the euro",
+  "country_code": "IT",
   "pivot_currency": "EUR",
   "data_url": "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/",
   "terms_url": null,

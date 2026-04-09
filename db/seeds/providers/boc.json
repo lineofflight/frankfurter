@@ -1,7 +1,8 @@
 {
   "key": "BOC",
   "name": "Bank of Canada",
-  "description": "Daily indicative exchange rates against the Canadian dollar",
+  "country_code": "CA",
+  "rate_type": "indicative",
   "pivot_currency": "CAD",
   "data_url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
   "terms_url": "https://www.bankofcanada.ca/terms/",

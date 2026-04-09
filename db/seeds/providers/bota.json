@@ -1,7 +1,8 @@
 {
   "key": "BOTA",
   "name": "Bank of Tanzania",
-  "description": "Daily exchange rates against the Tanzanian shilling",
+  "country_code": "TZ",
+  "rate_type": "indicative",
   "pivot_currency": "TZS",
   "data_url": "https://www.bot.go.tz/exchangerate/excrates",
   "terms_url": null,

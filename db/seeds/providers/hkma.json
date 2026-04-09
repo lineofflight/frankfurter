@@ -1,7 +1,7 @@
 {
   "key": "HKMA",
   "name": "Hong Kong Monetary Authority",
-  "description": "Daily exchange rates against the Hong Kong dollar",
+  "country_code": "HK",
   "pivot_currency": "HKD",
   "data_url": "https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/daily-monetary-statistics/",
   "terms_url": "https://www.hkma.gov.hk/eng/disclaimer/",

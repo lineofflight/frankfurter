@@ -1,7 +1,8 @@
 {
   "key": "FRED",
   "name": "Federal Reserve Bank of St. Louis",
-  "description": "Federal Reserve H.10 weekly exchange rates against the US dollar",
+  "country_code": "US",
+  "rate_type": "H.10",
   "pivot_currency": "USD",
   "data_url": "https://www.federalreserve.gov/releases/h10/",
   "terms_url": "https://fred.stlouisfed.org/legal/",

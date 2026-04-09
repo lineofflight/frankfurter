@@ -1,7 +1,7 @@
 {
   "key": "NBRM",
   "name": "Narodna Banka na Republika Severna Makedonija",
-  "description": "Daily mid-market rates against the Macedonian denar",
+  "country_code": "MK",
   "pivot_currency": "MKD",
   "data_url": "https://www.nbrm.mk",
   "terms_url": null,

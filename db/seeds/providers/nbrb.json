@@ -1,7 +1,8 @@
 {
   "key": "NBRB",
   "name": "Natsyyanalny Bank Respubliki Belarus",
-  "description": "Daily official rates against the Belarusian ruble",
+  "country_code": "BY",
+  "rate_type": "official",
   "pivot_currency": "BYN",
   "data_url": "https://www.nbrb.by/engl/statistics/rates/ratesdaily.asp",
   "terms_url": null,

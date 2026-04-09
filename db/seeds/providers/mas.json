@@ -1,7 +1,7 @@
 {
   "key": "MAS",
   "name": "Monetary Authority of Singapore",
-  "description": "Daily exchange rates against the Singapore dollar",
+  "country_code": "SG",
   "pivot_currency": "SGD",
   "data_url": "https://eservices.mas.gov.sg/statistics/msb/ExchangeRates.aspx",
   "terms_url": null,

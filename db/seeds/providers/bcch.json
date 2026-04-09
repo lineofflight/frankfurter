@@ -1,7 +1,8 @@
 {
   "key": "BCCH",
   "name": "Banco Central de Chile",
-  "description": "Daily exchange rates against the Chilean peso",
+  "country_code": "CL",
+  "rate_type": "observed",
   "pivot_currency": "CLP",
   "data_url": "https://si3.bcentral.cl/Siete/es/Siete/API",
   "terms_url": null,

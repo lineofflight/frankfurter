@@ -1,7 +1,7 @@
 {
   "key": "BCU",
   "name": "Banco Central del Uruguay",
-  "description": "Daily exchange rates against the Uruguayan peso",
+  "country_code": "UY",
   "pivot_currency": "UYU",
   "data_url": "https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones",
   "terms_url": "https://www.bcu.gub.uy/Paginas/Condiciones-de-uso.aspx",

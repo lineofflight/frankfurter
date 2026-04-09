@@ -1,7 +1,8 @@
 {
   "key": "TCMB",
   "name": "Türkiye Cumhuriyet Merkez Bankası",
-  "description": "Daily cross rates against the Turkish lira",
+  "country_code": "TR",
+  "rate_type": "indicative",
   "pivot_currency": "TRY",
   "data_url": "https://evds2.tcmb.gov.tr/",
   "terms_url": "https://www.tcmb.gov.tr/wps/wcm/connect/EN/TCMB+EN/Bottom+Menu/Other/Disclaimer",

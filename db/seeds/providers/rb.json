@@ -1,7 +1,8 @@
 {
   "key": "RB",
   "name": "Sveriges Riksbank",
-  "description": "Daily exchange rates against the Swedish krona",
+  "country_code": "SE",
+  "rate_type": "indicative",
   "pivot_currency": "SEK",
   "data_url": "https://www.riksbank.se/en-gb/statistics/",
   "terms_url": "https://www.riksbank.se/en-gb/about-the-website/terms-of-use/",

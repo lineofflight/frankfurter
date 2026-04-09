@@ -1,7 +1,8 @@
 {
   "key": "BI",
   "name": "Bank Indonesia",
-  "description": "Daily transaction rates against the Indonesian rupiah",
+  "country_code": "ID",
+  "rate_type": "transaction",
   "pivot_currency": "IDR",
   "data_url": "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx",
   "terms_url": null,

@@ -172,7 +172,7 @@
                   "items": { "$ref": "#/components/schemas/Provider" }
                 },
                 "example": [
-                  { "key": "ECB", "name": "European Central Bank", "description": "Daily reference rates against the euro.", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
+                  { "key": "ECB", "name": "European Central Bank", "country_code": "EU", "rate_type": "reference", "pivot_currency": "EUR", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
                 ]
               }
             }
@@ -326,7 +326,9 @@
         "properties": {
           "key": { "type": "string", "description": "Provider identifier" },
           "name": { "type": "string", "description": "Full provider name" },
-          "description": { "type": ["string", "null"], "description": "Brief description of the data source" },
+          "country_code": { "type": ["string", "null"], "description": "ISO 3166-1 alpha-2 country code" },
+          "rate_type": { "type": ["string", "null"], "description": "Official rate type as used by the source" },
+          "pivot_currency": { "type": ["string", "null"], "description": "Base currency for published rates" },
           "data_url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
           "terms_url": { "type": ["string", "null"], "format": "uri", "description": "Link to terms of use" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },

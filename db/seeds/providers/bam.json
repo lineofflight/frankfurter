@@ -1,7 +1,8 @@
 {
   "key": "BAM",
   "name": "Bank Al-Maghrib",
-  "description": "Daily mid-market rates against the Moroccan dirham",
+  "country_code": "MA",
+  "rate_type": "transfer",
   "pivot_currency": "MAD",
   "data_url": "https://apihelpdesk.centralbankofmorocco.ma/apis",
   "terms_url": null,
