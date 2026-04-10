@@ -48,6 +48,16 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 4, 1))
       end
 
+      it "skips malformed dates" do
+        payload = [
+          { "date" => "2020-06.25", "rates" => [{ "currency" => { "iso3" => "USD", "unit" => 1 }, "buy" => "133.5", "sell" => "134.0" }] },
+        ]
+
+        records = adapter.parse(payload)
+
+        _(records).must_be_empty
+      end
+
       it "normalizes rates by unit" do
         payload = [
           {
