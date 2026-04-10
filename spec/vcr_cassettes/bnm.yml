@@ -2,1402 +2,974 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate?session=0900
+    uri: https://www.bnm.md/en/official_exchange_rates?date=06.04.2026&get_xml=1
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - www.bnm.md
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Fri, 20 Mar 2026 10:44:55 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '4252'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"698689823f9283d0dcd51fb9cf4d32e310e29cfa-gzip"'
+      - Wed, 08 Apr 2026 13:49:10 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/7.4.33
       Expires:
-      - Sun, 19 Apr 2026 10:44:55 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
+      - Wed, 08 Apr 2026 20:49:10 GMT
+      Cache-Control:
+      - public, max-age=25200
+      Content-Type:
+      - text/xml; charset=utf-8
       Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521c504e5fbc8b67db69fe4207016a3f7106416c630ca52e3bb4daf63fc2a37bfd5426ee9b857e337447fa4e468776902768fe77fb9b9b92ab54570d719186a457b;
-        Path=/; Domain=.api.bnm.gov.my
+      - cookiesession1=678A3E0F04F1BAD49B28F71475A187EE;Expires=Thu, 08 Apr 2027 13:49:06
+        GMT;Path=/;HttpOnly
+      Content-Length:
+      - '6943'
     body:
-      encoding: ASCII-8BIT
-      string: '{"data":[{"currency_code":"INR","unit":100,"rate":{"date":"2026-03-19","buying_rate":4.2199999999999998,"selling_rate":4.2289000000000003,"middle_rate":4.2244000000000002}},{"currency_code":"SDR","unit":1,"rate":{"date":"2026-03-19","buying_rate":null,"selling_rate":null,"middle_rate":5.3537999999999997}},{"currency_code":"SAR","unit":100,"rate":{"date":"2026-03-19","buying_rate":104.5973,"selling_rate":104.76819999999999,"middle_rate":104.6828}},{"currency_code":"PKR","unit":100,"rate":{"date":"2026-03-19","buying_rate":1.4037999999999999,"selling_rate":1.4097,"middle_rate":1.4067000000000001}},{"currency_code":"PHP","unit":100,"rate":{"date":"2026-03-19","buying_rate":6.5765000000000002,"selling_rate":6.5968,"middle_rate":6.5865999999999998}},{"currency_code":"NZD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.2839,"selling_rate":2.2881999999999998,"middle_rate":2.2860999999999998}},{"currency_code":"NPR","unit":100,"rate":{"date":"2026-03-19","buying_rate":2.6494,"selling_rate":2.6537000000000002,"middle_rate":2.6516000000000002}},{"currency_code":"MMK","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.18759999999999999,"selling_rate":0.18779999999999999,"middle_rate":0.18770000000000001}},{"currency_code":"KRW","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.26190000000000002,"selling_rate":0.26240000000000002,"middle_rate":0.2621}},{"currency_code":"KHR","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.097000000000000003,"selling_rate":0.098199999999999996,"middle_rate":0.097600000000000006}},{"currency_code":"JPY","unit":100,"rate":{"date":"2026-03-19","buying_rate":2.4575999999999998,"selling_rate":2.4615,"middle_rate":2.4596}},{"currency_code":"SGD","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.0615000000000001,"selling_rate":3.0676000000000001,"middle_rate":3.0646}},{"currency_code":"IDR","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.023099999999999999,"selling_rate":0.023199999999999998,"middle_rate":0.023099999999999999}},{"currency_code":"HKD","unit":100,"rate":{"date":"2026-03-19","buying_rate":50.104599999999998,"selling_rate":50.183700000000002,"middle_rate":50.144199999999998}},{"currency_code":"GBP","unit":1,"rate":{"date":"2026-03-19","buying_rate":5.2161999999999997,"selling_rate":5.2262000000000004,"middle_rate":5.2211999999999996}},{"currency_code":"EUR","unit":1,"rate":{"date":"2026-03-19","buying_rate":4.5053999999999998,"selling_rate":4.5130999999999997,"middle_rate":4.5092999999999996}},{"currency_code":"EGP","unit":1,"rate":{"date":"2026-03-19","buying_rate":0.0751,"selling_rate":0.075399999999999995,"middle_rate":0.075200000000000003}},{"currency_code":"CNY","unit":1,"rate":{"date":"2026-03-19","buying_rate":0.57140000000000002,"selling_rate":0.57230000000000003,"middle_rate":0.57179999999999997}},{"currency_code":"CHF","unit":1,"rate":{"date":"2026-03-19","buying_rate":4.9570999999999996,"selling_rate":4.9664999999999999,"middle_rate":4.9618000000000002}},{"currency_code":"CAD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.8618000000000001,"selling_rate":2.867,"middle_rate":2.8643999999999998}},{"currency_code":"BND","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.0615000000000001,"selling_rate":3.0676000000000001,"middle_rate":3.0646}},{"currency_code":"AUD","unit":1,"rate":{"date":"2026-03-19","buying_rate":2.7662,"selling_rate":2.7711999999999999,"middle_rate":2.7686999999999999}},{"currency_code":"AED","unit":100,"rate":{"date":"2026-03-19","buying_rate":106.9037,"selling_rate":107.1108,"middle_rate":107.0072}},{"currency_code":"VND","unit":100,"rate":{"date":"2026-03-19","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.0149}},{"currency_code":"USD","unit":1,"rate":{"date":"2026-03-19","buying_rate":3.927,"selling_rate":3.9329999999999998,"middle_rate":3.9300000000000002}},{"currency_code":"TWD","unit":100,"rate":{"date":"2026-03-19","buying_rate":12.252700000000001,"selling_rate":12.2829,"middle_rate":12.267799999999999}},{"currency_code":"THB","unit":100,"rate":{"date":"2026-03-19","buying_rate":11.965299999999999,"selling_rate":11.989000000000001,"middle_rate":11.9771}}],"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":27}}'
-  recorded_at: Fri, 20 Mar 2026 10:44:55 GMT
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <ValCurs Date="06.04.2026" name="Official exchange rate">
+          <Valute ID="47">
+            <NumCode>978</NumCode>
+            <CharCode>EUR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Euro</Name>
+            <Value>20.2754</Value>
+          </Valute>
+          <Valute ID="44">
+            <NumCode>840</NumCode>
+            <CharCode>USD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>US Dollar</Name>
+            <Value>17.6124</Value>
+          </Valute>
+          <Valute ID="36">
+            <NumCode>643</NumCode>
+            <CharCode>RUB</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Russian Ruble</Name>
+            <Value>0.2197</Value>
+          </Valute>
+          <Valute ID="35">
+            <NumCode>946</NumCode>
+            <CharCode>RON</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Romanian Leu</Name>
+            <Value>3.9771</Value>
+          </Valute>
+          <Valute ID="43">
+            <NumCode>980</NumCode>
+            <CharCode>UAH</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Ukraine Hryvnia</Name>
+            <Value>0.4022</Value>
+          </Valute>
+          <Valute ID="61">
+            <NumCode>784</NumCode>
+            <CharCode>AED</CharCode>
+            <Nominal>1</Nominal>
+            <Name>U.A.E. Dirham</Name>
+            <Value>4.7951</Value>
+          </Valute>
+          <Valute ID="64">
+            <NumCode>008</NumCode>
+            <CharCode>ALL</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Albanian lek</Name>
+            <Value>2.1172</Value>
+          </Valute>
+          <Valute ID="1">
+            <NumCode>051</NumCode>
+            <CharCode>AMD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Armenian Dram</Name>
+            <Value>0.4654</Value>
+          </Valute>
+          <Valute ID="3">
+            <NumCode>036</NumCode>
+            <CharCode>AUD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Australian Dollar</Name>
+            <Value>12.0909</Value>
+          </Valute>
+          <Valute ID="4">
+            <NumCode>944</NumCode>
+            <CharCode>AZN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Azerbaijanian Manat</Name>
+            <Value>10.3306</Value>
+          </Valute>
+          <Valute ID="50">
+            <NumCode>933</NumCode>
+            <CharCode>BYN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Belarussian Ruble</Name>
+            <Value>5.9820</Value>
+          </Valute>
+          <Valute ID="8">
+            <NumCode>124</NumCode>
+            <CharCode>CAD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Canadian Dollar</Name>
+            <Value>12.6464</Value>
+          </Valute>
+          <Valute ID="9">
+            <NumCode>756</NumCode>
+            <CharCode>CHF</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swiss Franc</Name>
+            <Value>21.9962</Value>
+          </Valute>
+          <Valute ID="54">
+            <NumCode>156</NumCode>
+            <CharCode>CNY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Chinese yuan renminbi</Name>
+            <Value>2.5535</Value>
+          </Valute>
+          <Valute ID="10">
+            <NumCode>203</NumCode>
+            <CharCode>CZK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Czech Koruna</Name>
+            <Value>0.8267</Value>
+          </Valute>
+          <Valute ID="12">
+            <NumCode>208</NumCode>
+            <CharCode>DKK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Danish Krone</Name>
+            <Value>2.7135</Value>
+          </Valute>
+          <Valute ID="17">
+            <NumCode>826</NumCode>
+            <CharCode>GBP</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Pound Sterling</Name>
+            <Value>23.2279</Value>
+          </Valute>
+          <Valute ID="18">
+            <NumCode>981</NumCode>
+            <CharCode>GEL</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Georgian Lar</Name>
+            <Value>6.5377</Value>
+          </Valute>
+          <Valute ID="63">
+            <NumCode>344</NumCode>
+            <CharCode>HKD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Hong Kong dollar</Name>
+            <Value>2.2472</Value>
+          </Valute>
+          <Valute ID="21">
+            <NumCode>348</NumCode>
+            <CharCode>HUF</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Hungarian Forint</Name>
+            <Value>5.2807</Value>
+          </Valute>
+          <Valute ID="49">
+            <NumCode>376</NumCode>
+            <CharCode>ILS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Shekel Israelit</Name>
+            <Value>5.5862</Value>
+          </Valute>
+          <Valute ID="65">
+            <NumCode>356</NumCode>
+            <CharCode>INR</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Indian rupee</Name>
+            <Value>1.8914</Value>
+          </Valute>
+          <Valute ID="23">
+            <NumCode>352</NumCode>
+            <CharCode>ISK</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Iceland Krona</Name>
+            <Value>1.4048</Value>
+          </Valute>
+          <Valute ID="25">
+            <NumCode>392</NumCode>
+            <CharCode>JPY</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Japanese Yen</Name>
+            <Value>11.0318</Value>
+          </Valute>
+          <Valute ID="26">
+            <NumCode>417</NumCode>
+            <CharCode>KGS</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kyrgyzstan Som</Name>
+            <Value>2.0087</Value>
+          </Valute>
+          <Valute ID="66">
+            <NumCode>410</NumCode>
+            <CharCode>KRW</CharCode>
+            <Nominal>100</Nominal>
+            <Name>South Korean won</Name>
+            <Value>1.1613</Value>
+          </Valute>
+          <Valute ID="59">
+            <NumCode>414</NumCode>
+            <CharCode>KWD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Kuwaiti Dinar</Name>
+            <Value>56.9054</Value>
+          </Valute>
+          <Valute ID="27">
+            <NumCode>398</NumCode>
+            <CharCode>KZT</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kazakhstan Tenge</Name>
+            <Value>0.3739</Value>
+          </Valute>
+          <Valute ID="62">
+            <NumCode>807</NumCode>
+            <CharCode>MKD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Macedonian denar</Name>
+            <Value>3.2924</Value>
+          </Valute>
+          <Valute ID="56">
+            <NumCode>458</NumCode>
+            <CharCode>MYR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Malaysian Ringgit</Name>
+            <Value>4.3595</Value>
+          </Valute>
+          <Valute ID="32">
+            <NumCode>578</NumCode>
+            <CharCode>NOK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Norwegian Krone</Name>
+            <Value>1.8058</Value>
+          </Valute>
+          <Valute ID="53">
+            <NumCode>554</NumCode>
+            <CharCode>NZD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>New Zealand Dollar</Name>
+            <Value>10.0478</Value>
+          </Valute>
+          <Valute ID="33">
+            <NumCode>985</NumCode>
+            <CharCode>PLN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Polish Zloty</Name>
+            <Value>4.7317</Value>
+          </Valute>
+          <Valute ID="48">
+            <NumCode>941</NumCode>
+            <CharCode>RSD</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Serbian Dinar</Name>
+            <Value>17.2726</Value>
+          </Valute>
+          <Valute ID="37">
+            <NumCode>752</NumCode>
+            <CharCode>SEK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swedish Krona</Name>
+            <Value>1.8528</Value>
+          </Valute>
+          <Valute ID="51">
+            <NumCode>972</NumCode>
+            <CharCode>TJS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Tajikistan Somoni</Name>
+            <Value>1.8447</Value>
+          </Valute>
+          <Valute ID="60">
+            <NumCode>934</NumCode>
+            <CharCode>TMT</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkmenistan Manat</Name>
+            <Value>5.0175</Value>
+          </Valute>
+          <Valute ID="42">
+            <NumCode>949</NumCode>
+            <CharCode>TRY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkish Lira</Name>
+            <Value>0.3937</Value>
+          </Valute>
+          <Valute ID="45">
+            <NumCode>860</NumCode>
+            <CharCode>UZS</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Uzbekistan Sum</Name>
+            <Value>0.1442</Value>
+          </Valute>
+          <Valute ID="46">
+            <NumCode>960</NumCode>
+            <CharCode>XDR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Special Drawing Rights</Name>
+            <Value>23.9652</Value>
+          </Valute>
+        </ValCurs>
+  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
 - request:
     method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/INR/year/2026/month/3?session=0900
+    uri: https://www.bnm.md/en/official_exchange_rates?date=07.04.2026&get_xml=1
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - www.bnm.md
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Fri, 20 Mar 2026 10:44:57 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1756'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"3efa674180a869d3777970f249e4d55441ff71c2-gzip"'
+      - Wed, 08 Apr 2026 13:49:10 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/7.4.33
       Expires:
-      - Sun, 19 Apr 2026 10:44:57 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
+      - Wed, 08 Apr 2026 20:49:10 GMT
+      Cache-Control:
+      - public, max-age=25200
+      Content-Type:
+      - text/xml; charset=utf-8
       Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521d489990fecb4ada4e953deb33e14f7b7cde00ed4e4bb7dd8982e41394384f206213f85df960344af215aecf93a1426cbc1353c9f229ace5fb94385463238186f;
-        Path=/; Domain=.api.bnm.gov.my
+      - cookiesession1=678A3E0F0199BAFA8217E5B19D47F88A;Expires=Thu, 08 Apr 2027 13:49:06
+        GMT;Path=/;HttpOnly
+      Content-Length:
+      - '6943'
     body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"INR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":4.2916999999999996,"selling_rate":4.3010999999999999,"middle_rate":4.2964000000000002},{"date":"2026-03-03","buying_rate":4.2872000000000003,"selling_rate":4.2942,"middle_rate":4.2907000000000002},{"date":"2026-03-04","buying_rate":4.2840999999999996,"selling_rate":4.2931999999999997,"middle_rate":4.2887000000000004},{"date":"2026-03-05","buying_rate":4.2625999999999999,"selling_rate":4.2694999999999999,"middle_rate":4.2660999999999998},{"date":"2026-03-06","buying_rate":4.2944000000000004,"selling_rate":4.3048000000000002,"middle_rate":4.2995999999999999},{"date":"2026-03-09","buying_rate":4.3127000000000004,"selling_rate":4.3208000000000002,"middle_rate":4.3167},{"date":"2026-03-10","buying_rate":4.2742000000000004,"selling_rate":4.282,"middle_rate":4.2781000000000002},{"date":"2026-03-11","buying_rate":4.2662000000000004,"selling_rate":4.2721,"middle_rate":4.2691999999999997},{"date":"2026-03-12","buying_rate":4.2529000000000003,"selling_rate":4.2609000000000004,"middle_rate":4.2568999999999999},{"date":"2026-03-13","buying_rate":4.2507000000000001,"selling_rate":4.258,"middle_rate":4.2542999999999997},{"date":"2026-03-16","buying_rate":4.2476000000000003,"selling_rate":4.2546999999999997,"middle_rate":4.2511000000000001},{"date":"2026-03-17","buying_rate":4.2523,"selling_rate":4.2591999999999999,"middle_rate":4.2557},{"date":"2026-03-18","buying_rate":4.2287999999999997,"selling_rate":4.2336,"middle_rate":4.2312000000000003},{"date":"2026-03-19","buying_rate":4.2199999999999998,"selling_rate":4.2289000000000003,"middle_rate":4.2244000000000002}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:44:57 GMT
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <ValCurs Date="07.04.2026" name="Official exchange rate">
+          <Valute ID="47">
+            <NumCode>978</NumCode>
+            <CharCode>EUR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Euro</Name>
+            <Value>20.2457</Value>
+          </Valute>
+          <Valute ID="44">
+            <NumCode>840</NumCode>
+            <CharCode>USD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>US Dollar</Name>
+            <Value>17.5303</Value>
+          </Valute>
+          <Valute ID="36">
+            <NumCode>643</NumCode>
+            <CharCode>RUB</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Russian Ruble</Name>
+            <Value>0.2224</Value>
+          </Valute>
+          <Valute ID="35">
+            <NumCode>946</NumCode>
+            <CharCode>RON</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Romanian Leu</Name>
+            <Value>3.9727</Value>
+          </Valute>
+          <Valute ID="43">
+            <NumCode>980</NumCode>
+            <CharCode>UAH</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Ukraine Hryvnia</Name>
+            <Value>0.4018</Value>
+          </Valute>
+          <Valute ID="61">
+            <NumCode>784</NumCode>
+            <CharCode>AED</CharCode>
+            <Nominal>1</Nominal>
+            <Name>U.A.E. Dirham</Name>
+            <Value>4.7725</Value>
+          </Valute>
+          <Valute ID="64">
+            <NumCode>008</NumCode>
+            <CharCode>ALL</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Albanian lek</Name>
+            <Value>2.1121</Value>
+          </Valute>
+          <Valute ID="1">
+            <NumCode>051</NumCode>
+            <CharCode>AMD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Armenian Dram</Name>
+            <Value>0.4655</Value>
+          </Valute>
+          <Valute ID="3">
+            <NumCode>036</NumCode>
+            <CharCode>AUD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Australian Dollar</Name>
+            <Value>12.1449</Value>
+          </Valute>
+          <Valute ID="4">
+            <NumCode>944</NumCode>
+            <CharCode>AZN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Azerbaijanian Manat</Name>
+            <Value>10.3116</Value>
+          </Valute>
+          <Valute ID="50">
+            <NumCode>933</NumCode>
+            <CharCode>BYN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Belarussian Ruble</Name>
+            <Value>5.9943</Value>
+          </Valute>
+          <Valute ID="8">
+            <NumCode>124</NumCode>
+            <CharCode>CAD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Canadian Dollar</Name>
+            <Value>12.5900</Value>
+          </Valute>
+          <Valute ID="9">
+            <NumCode>756</NumCode>
+            <CharCode>CHF</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swiss Franc</Name>
+            <Value>21.9747</Value>
+          </Valute>
+          <Valute ID="54">
+            <NumCode>156</NumCode>
+            <CharCode>CNY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Chinese yuan renminbi</Name>
+            <Value>2.5485</Value>
+          </Valute>
+          <Valute ID="10">
+            <NumCode>203</NumCode>
+            <CharCode>CZK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Czech Koruna</Name>
+            <Value>0.8264</Value>
+          </Valute>
+          <Valute ID="12">
+            <NumCode>208</NumCode>
+            <CharCode>DKK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Danish Krone</Name>
+            <Value>2.7093</Value>
+          </Valute>
+          <Valute ID="17">
+            <NumCode>826</NumCode>
+            <CharCode>GBP</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Pound Sterling</Name>
+            <Value>23.2205</Value>
+          </Valute>
+          <Valute ID="18">
+            <NumCode>981</NumCode>
+            <CharCode>GEL</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Georgian Lar</Name>
+            <Value>6.5120</Value>
+          </Valute>
+          <Valute ID="63">
+            <NumCode>344</NumCode>
+            <CharCode>HKD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Hong Kong dollar</Name>
+            <Value>2.2368</Value>
+          </Valute>
+          <Valute ID="21">
+            <NumCode>348</NumCode>
+            <CharCode>HUF</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Hungarian Forint</Name>
+            <Value>5.2882</Value>
+          </Valute>
+          <Valute ID="49">
+            <NumCode>376</NumCode>
+            <CharCode>ILS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Shekel Israelit</Name>
+            <Value>5.5825</Value>
+          </Valute>
+          <Valute ID="65">
+            <NumCode>356</NumCode>
+            <CharCode>INR</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Indian rupee</Name>
+            <Value>1.8839</Value>
+          </Valute>
+          <Valute ID="23">
+            <NumCode>352</NumCode>
+            <CharCode>ISK</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Iceland Krona</Name>
+            <Value>1.4034</Value>
+          </Valute>
+          <Valute ID="25">
+            <NumCode>392</NumCode>
+            <CharCode>JPY</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Japanese Yen</Name>
+            <Value>10.9938</Value>
+          </Valute>
+          <Valute ID="26">
+            <NumCode>417</NumCode>
+            <CharCode>KGS</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kyrgyzstan Som</Name>
+            <Value>2.0104</Value>
+          </Valute>
+          <Valute ID="66">
+            <NumCode>410</NumCode>
+            <CharCode>KRW</CharCode>
+            <Nominal>100</Nominal>
+            <Name>South Korean won</Name>
+            <Value>1.1655</Value>
+          </Valute>
+          <Valute ID="59">
+            <NumCode>414</NumCode>
+            <CharCode>KWD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Kuwaiti Dinar</Name>
+            <Value>56.6551</Value>
+          </Valute>
+          <Valute ID="27">
+            <NumCode>398</NumCode>
+            <CharCode>KZT</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kazakhstan Tenge</Name>
+            <Value>0.3766</Value>
+          </Valute>
+          <Valute ID="62">
+            <NumCode>807</NumCode>
+            <CharCode>MKD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Macedonian denar</Name>
+            <Value>3.2866</Value>
+          </Valute>
+          <Valute ID="56">
+            <NumCode>458</NumCode>
+            <CharCode>MYR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Malaysian Ringgit</Name>
+            <Value>4.3525</Value>
+          </Valute>
+          <Valute ID="32">
+            <NumCode>578</NumCode>
+            <CharCode>NOK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Norwegian Krone</Name>
+            <Value>1.8005</Value>
+          </Valute>
+          <Valute ID="53">
+            <NumCode>554</NumCode>
+            <CharCode>NZD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>New Zealand Dollar</Name>
+            <Value>10.0273</Value>
+          </Valute>
+          <Valute ID="33">
+            <NumCode>985</NumCode>
+            <CharCode>PLN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Polish Zloty</Name>
+            <Value>4.7439</Value>
+          </Valute>
+          <Valute ID="48">
+            <NumCode>941</NumCode>
+            <CharCode>RSD</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Serbian Dinar</Name>
+            <Value>17.2443</Value>
+          </Valute>
+          <Valute ID="37">
+            <NumCode>752</NumCode>
+            <CharCode>SEK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swedish Krona</Name>
+            <Value>1.8620</Value>
+          </Valute>
+          <Valute ID="51">
+            <NumCode>972</NumCode>
+            <CharCode>TJS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Tajikistan Somoni</Name>
+            <Value>1.8423</Value>
+          </Valute>
+          <Valute ID="60">
+            <NumCode>934</NumCode>
+            <CharCode>TMT</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkmenistan Manat</Name>
+            <Value>5.0084</Value>
+          </Valute>
+          <Valute ID="42">
+            <NumCode>949</NumCode>
+            <CharCode>TRY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkish Lira</Name>
+            <Value>0.3927</Value>
+          </Valute>
+          <Valute ID="45">
+            <NumCode>860</NumCode>
+            <CharCode>UZS</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Uzbekistan Sum</Name>
+            <Value>0.1443</Value>
+          </Valute>
+          <Valute ID="46">
+            <NumCode>960</NumCode>
+            <CharCode>XDR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Special Drawing Rights</Name>
+            <Value>23.8609</Value>
+          </Valute>
+        </ValCurs>
+  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
 - request:
     method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/SDR/year/2026/month/3?session=0900
+    uri: https://www.bnm.md/en/official_exchange_rates?date=08.04.2026&get_xml=1
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
       User-Agent:
       - Ruby
+      Host:
+      - www.bnm.md
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Fri, 20 Mar 2026 10:44:59 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1448'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"9f41251346f09c1891c27e10ba5d5a7e44e740bb-gzip"'
+      - Wed, 08 Apr 2026 13:49:10 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/7.4.33
       Expires:
-      - Sun, 19 Apr 2026 10:44:59 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be4252131f486ea553f8e2e3392450135e8334cd77eb6946ad5509176deffa0e6fd83000c7f731e21c90922441240eac34e071e7b33659384c5ad49f847276f2879e12c;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"SDR","unit":1,"rate":[{"date":"2026-03-02","buying_rate":null,"selling_rate":null,"middle_rate":5.3795000000000002},{"date":"2026-03-03","buying_rate":null,"selling_rate":null,"middle_rate":5.3876999999999997},{"date":"2026-03-04","buying_rate":null,"selling_rate":null,"middle_rate":5.3799000000000001},{"date":"2026-03-05","buying_rate":null,"selling_rate":null,"middle_rate":5.3699000000000003},{"date":"2026-03-06","buying_rate":null,"selling_rate":null,"middle_rate":5.3868999999999998},{"date":"2026-03-09","buying_rate":null,"selling_rate":null,"middle_rate":5.4055},{"date":"2026-03-10","buying_rate":null,"selling_rate":null,"middle_rate":5.3686999999999996},{"date":"2026-03-11","buying_rate":null,"selling_rate":null,"middle_rate":5.3634000000000004},{"date":"2026-03-12","buying_rate":null,"selling_rate":null,"middle_rate":5.3596000000000004},{"date":"2026-03-13","buying_rate":null,"selling_rate":null,"middle_rate":5.3585000000000003},{"date":"2026-03-16","buying_rate":null,"selling_rate":null,"middle_rate":5.3422000000000001},{"date":"2026-03-17","buying_rate":null,"selling_rate":null,"middle_rate":5.3367000000000004},{"date":"2026-03-18","buying_rate":null,"selling_rate":null,"middle_rate":5.3182999999999998},{"date":"2026-03-19","buying_rate":null,"selling_rate":null,"middle_rate":5.3537999999999997}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:44:59 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/SAR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:01 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1594'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
+      - Wed, 08 Apr 2026 20:49:10 GMT
       Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"73ce2a78da9a716a739fee85b7e220eb55d5056a-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:00 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425211b49211c828e98ba66697c38161eaf375444286dbe8ea8efbe2303bf7d0ca2805ebe64bf8c74d9c3cdc502ef20778618fcf6f61a9babd8c695c656d9d448fe15;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"SAR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":104.23050000000001,"selling_rate":104.4044,"middle_rate":104.3175},{"date":"2026-03-03","buying_rate":104.63509999999999,"selling_rate":104.8507,"middle_rate":104.74290000000001},{"date":"2026-03-04","buying_rate":105.02760000000001,"selling_rate":105.25749999999999,"middle_rate":105.1426},{"date":"2026-03-05","buying_rate":104.6323,"selling_rate":104.80880000000001,"middle_rate":104.7206},{"date":"2026-03-06","buying_rate":105.0206,"selling_rate":105.27719999999999,"middle_rate":105.1489},{"date":"2026-03-09","buying_rate":105.63760000000001,"selling_rate":105.8353,"middle_rate":105.7364},{"date":"2026-03-10","buying_rate":104.9435,"selling_rate":105.0823,"middle_rate":105.0129},{"date":"2026-03-11","buying_rate":104.46250000000001,"selling_rate":104.6236,"middle_rate":104.54300000000001},{"date":"2026-03-12","buying_rate":104.5381,"selling_rate":104.7302,"middle_rate":104.6341},{"date":"2026-03-13","buying_rate":104.6657,"selling_rate":104.81570000000001,"middle_rate":104.7407},{"date":"2026-03-16","buying_rate":104.76949999999999,"selling_rate":104.9041,"middle_rate":104.8368},{"date":"2026-03-17","buying_rate":104.5941,"selling_rate":104.75960000000001,"middle_rate":104.6769},{"date":"2026-03-18","buying_rate":104.0718,"selling_rate":104.18389999999999,"middle_rate":104.12779999999999},{"date":"2026-03-19","buying_rate":104.5973,"selling_rate":104.76819999999999,"middle_rate":104.6828}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:01 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/PKR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:02 GMT
+      - public, max-age=25200
       Content-Type:
-      - application/json
-      Content-Length:
-      - '1660'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"c499595537e9825700c162ab5017270f175f4f17-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:02 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
+      - text/xml; charset=utf-8
       Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521e36b5ddd3df71ea2877dcf2c808164e915fad0fb8d1bb5cbac7195b6697a7bd8ba89b7a3f311ee4489855cb6bcb9e5ea4b25ab48abc483c5913545e27fd62560;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"PKR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":1.3976999999999999,"selling_rate":1.4036,"middle_rate":1.4006000000000001},{"date":"2026-03-03","buying_rate":1.4038999999999999,"selling_rate":1.4085000000000001,"middle_rate":1.4061999999999999},{"date":"2026-03-04","buying_rate":1.4091,"selling_rate":1.4157999999999999,"middle_rate":1.4124000000000001},{"date":"2026-03-05","buying_rate":1.4046000000000001,"selling_rate":1.4097999999999999,"middle_rate":1.4072},{"date":"2026-03-06","buying_rate":1.4099999999999999,"selling_rate":1.4155,"middle_rate":1.4127000000000001},{"date":"2026-03-09","buying_rate":1.4168000000000001,"selling_rate":1.4237,"middle_rate":1.4201999999999999},{"date":"2026-03-10","buying_rate":1.4078999999999999,"selling_rate":1.4137,"middle_rate":1.4108000000000001},{"date":"2026-03-11","buying_rate":1.4011,"selling_rate":1.4074,"middle_rate":1.4041999999999999},{"date":"2026-03-12","buying_rate":1.4013,"selling_rate":1.4084000000000001,"middle_rate":1.4048},{"date":"2026-03-13","buying_rate":1.4049,"selling_rate":1.4097,"middle_rate":1.4073},{"date":"2026-03-16","buying_rate":1.4060999999999999,"selling_rate":1.411,"middle_rate":1.4086000000000001},{"date":"2026-03-17","buying_rate":1.4037999999999999,"selling_rate":1.409,"middle_rate":1.4064000000000001},{"date":"2026-03-18","buying_rate":1.3982000000000001,"selling_rate":1.4021999999999999,"middle_rate":1.4001999999999999},{"date":"2026-03-19","buying_rate":1.4037999999999999,"selling_rate":1.4097,"middle_rate":1.4067000000000001}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:03 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/PHP/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:05 GMT
-      Content-Type:
-      - application/json
+      - cookiesession1=678A3E0FE8143BC4B9D24A4277F7BDEE;Expires=Thu, 08 Apr 2027 13:49:07
+        GMT;Path=/;HttpOnly
       Content-Length:
-      - '1782'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"74138d2b5cfdf763b0831f9071296c269e039df9-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:04 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425218cac3a1a28c7cc5bd9574708d73b38c10bc7c539b37a1e12c61131170bb64a1105e00d113095b7411def2573e03aa651f1bcd0c30a942c44649bd59c0a829acb;
-        Path=/; Domain=.api.bnm.gov.my
+      - '6942'
     body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"PHP","unit":100,"rate":[{"date":"2026-03-02","buying_rate":6.7709999999999999,"selling_rate":6.7950999999999997,"middle_rate":6.7831000000000001},{"date":"2026-03-03","buying_rate":6.7420999999999998,"selling_rate":6.7632000000000003,"middle_rate":6.7526000000000002},{"date":"2026-03-04","buying_rate":6.7401,"selling_rate":6.7645999999999997,"middle_rate":6.7523999999999997},{"date":"2026-03-05","buying_rate":6.7079000000000004,"selling_rate":6.7289000000000003,"middle_rate":6.7183999999999999},{"date":"2026-03-06","buying_rate":6.7192999999999996,"selling_rate":6.7419000000000002,"middle_rate":6.7305999999999999},{"date":"2026-03-09","buying_rate":6.7134,"selling_rate":6.7310999999999996,"middle_rate":6.7222},{"date":"2026-03-10","buying_rate":6.6277999999999997,"selling_rate":6.6466000000000003,"middle_rate":6.6372},{"date":"2026-03-11","buying_rate":6.6505000000000001,"selling_rate":6.6695000000000002,"middle_rate":6.6600000000000001},{"date":"2026-03-12","buying_rate":6.6196000000000002,"selling_rate":6.6348000000000003,"middle_rate":6.6272000000000002},{"date":"2026-03-13","buying_rate":6.6014999999999997,"selling_rate":6.6231,"middle_rate":6.6123000000000003},{"date":"2026-03-16","buying_rate":6.5716000000000001,"selling_rate":6.5919999999999996,"middle_rate":6.5818000000000003},{"date":"2026-03-17","buying_rate":6.5518000000000001,"selling_rate":6.5720000000000001,"middle_rate":6.5618999999999996},{"date":"2026-03-18","buying_rate":6.5381999999999998,"selling_rate":6.5551000000000004,"middle_rate":6.5465999999999998},{"date":"2026-03-19","buying_rate":6.5765000000000002,"selling_rate":6.5968,"middle_rate":6.5865999999999998}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:05 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/NZD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:06 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1720'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"da23a3ba8931471ece4a25d394cd1d7717d5fa38-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:06 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be4252104ce70dc6444bd6034bd224aaf2a4524cd352a37be5bfaa8327067808a918b98bc9e6913062bba84b3d127c417262a0cffa6b9cadd5d83454536f30f710a2518;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"NZD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":2.3342999999999998,"selling_rate":2.3397999999999999,"middle_rate":2.3370000000000002},{"date":"2026-03-03","buying_rate":2.3348,"selling_rate":2.3395999999999999,"middle_rate":2.3372000000000002},{"date":"2026-03-04","buying_rate":2.3163,"selling_rate":2.3222,"middle_rate":2.3193000000000001},{"date":"2026-03-05","buying_rate":2.3348,"selling_rate":2.3395999999999999,"middle_rate":2.3372000000000002},{"date":"2026-03-06","buying_rate":2.3287,"selling_rate":2.3340999999999998,"middle_rate":2.3313999999999999},{"date":"2026-03-09","buying_rate":2.3214999999999999,"selling_rate":2.3260000000000001,"middle_rate":2.3237999999999999},{"date":"2026-03-10","buying_rate":2.3344999999999998,"selling_rate":2.3378000000000001,"middle_rate":2.3361000000000001},{"date":"2026-03-11","buying_rate":2.3243999999999998,"selling_rate":2.3277000000000001,"middle_rate":2.3260000000000001},{"date":"2026-03-12","buying_rate":2.3161,"selling_rate":2.3214999999999999,"middle_rate":2.3188},{"date":"2026-03-13","buying_rate":2.2991000000000001,"selling_rate":2.3028,"middle_rate":2.3008999999999999},{"date":"2026-03-16","buying_rate":2.2812999999999999,"selling_rate":2.2848000000000002,"middle_rate":2.2831000000000001},{"date":"2026-03-17","buying_rate":2.2942,"selling_rate":2.2985000000000002,"middle_rate":2.2963},{"date":"2026-03-18","buying_rate":2.2888999999999999,"selling_rate":2.2924000000000002,"middle_rate":2.2907000000000002},{"date":"2026-03-19","buying_rate":2.2839,"selling_rate":2.2881999999999998,"middle_rate":2.2860999999999998}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:07 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/NPR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:08 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1770'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"983c9419abda00b5ffec358652e8f2cceb970985-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:08 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521e99e328ac3c4b8ef93be3c15d25f4990cf8074b913943a2f2ea62623780d90c2e25bf6be01da4ac201bd34ef9ed7b48cd52f3dcf88a2be6ca9b3bfd42d6a3256;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"NPR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":2.6858,"selling_rate":2.6903000000000001,"middle_rate":2.6880999999999999},{"date":"2026-03-03","buying_rate":2.6836000000000002,"selling_rate":2.6880999999999999,"middle_rate":2.6858},{"date":"2026-03-04","buying_rate":2.6932,"selling_rate":2.6989999999999998,"middle_rate":2.6960999999999999},{"date":"2026-03-05","buying_rate":2.6638000000000002,"selling_rate":2.6682000000000001,"middle_rate":2.6659999999999999},{"date":"2026-03-06","buying_rate":2.6899999999999999,"selling_rate":2.6951000000000001,"middle_rate":2.6926000000000001},{"date":"2026-03-09","buying_rate":2.7010000000000001,"selling_rate":2.7061000000000002,"middle_rate":2.7035},{"date":"2026-03-10","buying_rate":2.6667999999999998,"selling_rate":2.6705999999999999,"middle_rate":2.6686999999999999},{"date":"2026-03-11","buying_rate":2.6692,"selling_rate":2.6726999999999999,"middle_rate":2.6709999999999998},{"date":"2026-03-12","buying_rate":2.6636000000000002,"selling_rate":2.6686999999999999,"middle_rate":2.6661999999999999},{"date":"2026-03-13","buying_rate":2.6627000000000001,"selling_rate":2.6663999999999999,"middle_rate":2.6646000000000001},{"date":"2026-03-16","buying_rate":2.6577999999999999,"selling_rate":2.6606999999999998,"middle_rate":2.6593},{"date":"2026-03-17","buying_rate":2.6539999999999999,"selling_rate":2.6583999999999999,"middle_rate":2.6562000000000001},{"date":"2026-03-18","buying_rate":2.6438999999999999,"selling_rate":2.6469999999999998,"middle_rate":2.6455000000000002},{"date":"2026-03-19","buying_rate":2.6494,"selling_rate":2.6537000000000002,"middle_rate":2.6516000000000002}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:08 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/MMK/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:10 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1712'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"9146f2dcbbeb3385e4488b04762f8ef76a30c407-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:10 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425218f33c0c82f148122395feaf5755779a700054c711f45cd1472791a56add9e5ffe71d0b7a84c0bf0ec4af5b07473c32a6c1c44ac10635c669e5efa9c78dc0c82f;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"MMK","unit":100,"rate":[{"date":"2026-03-02","buying_rate":0.1867,"selling_rate":0.187,"middle_rate":0.18690000000000001},{"date":"2026-03-03","buying_rate":0.18759999999999999,"selling_rate":0.18790000000000001,"middle_rate":0.18779999999999999},{"date":"2026-03-04","buying_rate":0.1883,"selling_rate":0.18870000000000001,"middle_rate":0.1885},{"date":"2026-03-05","buying_rate":0.18759999999999999,"selling_rate":0.18790000000000001,"middle_rate":0.18779999999999999},{"date":"2026-03-06","buying_rate":0.1883,"selling_rate":0.18870000000000001,"middle_rate":0.1885},{"date":"2026-03-09","buying_rate":0.18940000000000001,"selling_rate":0.18970000000000001,"middle_rate":0.1895},{"date":"2026-03-10","buying_rate":0.18820000000000001,"selling_rate":0.18840000000000001,"middle_rate":0.1883},{"date":"2026-03-11","buying_rate":0.18729999999999999,"selling_rate":0.1875,"middle_rate":0.18740000000000001},{"date":"2026-03-12","buying_rate":0.18740000000000001,"selling_rate":0.18770000000000001,"middle_rate":0.1875},{"date":"2026-03-13","buying_rate":0.18759999999999999,"selling_rate":0.18779999999999999,"middle_rate":0.18770000000000001},{"date":"2026-03-16","buying_rate":0.18779999999999999,"selling_rate":0.188,"middle_rate":0.18790000000000001},{"date":"2026-03-17","buying_rate":0.1875,"selling_rate":0.18779999999999999,"middle_rate":0.18759999999999999},{"date":"2026-03-18","buying_rate":0.1867,"selling_rate":0.18679999999999999,"middle_rate":0.1867},{"date":"2026-03-19","buying_rate":0.18759999999999999,"selling_rate":0.18779999999999999,"middle_rate":0.18770000000000001}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:10 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/KRW/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:11 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1844'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"2434ccb7fc377d1941654f2c521fcda203e1fbdb-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:11 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425212bbdbda2200c5da2a431bcffcb2fa8d32b4e49ede60abc6a0d7bf78fa9db27f06c4a3ed6b35e6085282cdb6df0b83ca009dcfc8b0fdc3e86a8f88e7237a55e28;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"KRW","unit":100,"rate":[{"date":"2026-03-02","buying_rate":0.26869999999999999,"selling_rate":0.26929999999999998,"middle_rate":0.26900000000000002},{"date":"2026-03-03","buying_rate":0.26819999999999999,"selling_rate":0.26860000000000001,"middle_rate":0.26840000000000003},{"date":"2026-03-04","buying_rate":0.2666,"selling_rate":0.26719999999999999,"middle_rate":0.26690000000000003},{"date":"2026-03-05","buying_rate":0.26900000000000002,"selling_rate":0.26950000000000002,"middle_rate":0.26919999999999999},{"date":"2026-03-06","buying_rate":0.26669999999999999,"selling_rate":0.26729999999999998,"middle_rate":0.26700000000000002},{"date":"2026-03-09","buying_rate":0.26519999999999999,"selling_rate":0.26579999999999998,"middle_rate":0.26550000000000001},{"date":"2026-03-10","buying_rate":0.26790000000000003,"selling_rate":0.26840000000000003,"middle_rate":0.26819999999999999},{"date":"2026-03-11","buying_rate":0.26700000000000002,"selling_rate":0.26740000000000003,"middle_rate":0.26719999999999999},{"date":"2026-03-12","buying_rate":0.26529999999999998,"selling_rate":0.26579999999999998,"middle_rate":0.26550000000000001},{"date":"2026-03-13","buying_rate":0.2636,"selling_rate":0.26400000000000001,"middle_rate":0.26379999999999998},{"date":"2026-03-16","buying_rate":0.26329999999999998,"selling_rate":0.26369999999999999,"middle_rate":0.26350000000000001},{"date":"2026-03-17","buying_rate":0.26290000000000002,"selling_rate":0.26340000000000002,"middle_rate":0.26319999999999999},{"date":"2026-03-18","buying_rate":0.26269999999999999,"selling_rate":0.2631,"middle_rate":0.26290000000000002},{"date":"2026-03-19","buying_rate":0.26190000000000002,"selling_rate":0.26240000000000002,"middle_rate":0.2621}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:12 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/KHR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:14 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1882'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"3be1374ea6d588d45b1fa7dcb2a0842a2c180bca-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:13 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521145aa4600c8be15bbc662f0ee3f5f22ad14c0c48e7083a4cf11d1b05d72ba69d881613d9faae478136e8d19fea3be5a3305d593ee46da28b8b0285c4ce61ef28;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"KHR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":0.096600000000000005,"selling_rate":0.097900000000000001,"middle_rate":0.097199999999999995},{"date":"2026-03-03","buying_rate":0.097000000000000003,"selling_rate":0.098299999999999998,"middle_rate":0.097699999999999995},{"date":"2026-03-04","buying_rate":0.0974,"selling_rate":0.098699999999999996,"middle_rate":0.098000000000000004},{"date":"2026-03-05","buying_rate":0.097000000000000003,"selling_rate":0.098299999999999998,"middle_rate":0.097699999999999995},{"date":"2026-03-06","buying_rate":0.0974,"selling_rate":0.098699999999999996,"middle_rate":0.098000000000000004},{"date":"2026-03-09","buying_rate":0.098000000000000004,"selling_rate":0.099199999999999997,"middle_rate":0.098599999999999993},{"date":"2026-03-10","buying_rate":0.097299999999999998,"selling_rate":0.098500000000000004,"middle_rate":0.097900000000000001},{"date":"2026-03-11","buying_rate":0.096699999999999994,"selling_rate":0.097900000000000001,"middle_rate":0.097299999999999998},{"date":"2026-03-12","buying_rate":0.0969,"selling_rate":0.098100000000000007,"middle_rate":0.097500000000000003},{"date":"2026-03-13","buying_rate":0.097000000000000003,"selling_rate":0.098199999999999996,"middle_rate":0.097600000000000006},{"date":"2026-03-16","buying_rate":0.097100000000000006,"selling_rate":0.098299999999999998,"middle_rate":0.097699999999999995},{"date":"2026-03-17","buying_rate":0.0969,"selling_rate":0.098199999999999996,"middle_rate":0.097500000000000003},{"date":"2026-03-18","buying_rate":0.096500000000000002,"selling_rate":0.097699999999999995,"middle_rate":0.097100000000000006},{"date":"2026-03-19","buying_rate":0.097000000000000003,"selling_rate":0.098199999999999996,"middle_rate":0.097600000000000006}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:14 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/JPY/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:15 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1660'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"cc835dac5a84ce539590a072f5c6b110688709bc-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:15 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521954319201f65acf74fc94e800745a582de9c22ef1b182abf56afb52d3ff71b16162a4b27723f2bdc576f462cece8b6cc1094e27e8bc8342c1f501f377ea1ef11;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"JPY","unit":100,"rate":[{"date":"2026-03-02","buying_rate":2.4998,"selling_rate":2.504,"middle_rate":2.5019},{"date":"2026-03-03","buying_rate":2.4940000000000002,"selling_rate":2.4981,"middle_rate":2.496},{"date":"2026-03-04","buying_rate":2.5021,"selling_rate":2.5074999999999998,"middle_rate":2.5047999999999999},{"date":"2026-03-05","buying_rate":2.5085999999999999,"selling_rate":2.5125999999999999,"middle_rate":2.5106000000000002},{"date":"2026-03-06","buying_rate":2.5036999999999998,"selling_rate":2.5089000000000001,"middle_rate":2.5063},{"date":"2026-03-09","buying_rate":2.4990999999999999,"selling_rate":2.5036,"middle_rate":2.5013000000000001},{"date":"2026-03-10","buying_rate":2.4996999999999998,"selling_rate":2.5034999999999998,"middle_rate":2.5015999999999998},{"date":"2026-03-11","buying_rate":2.4784999999999999,"selling_rate":2.4817999999999998,"middle_rate":2.4802},{"date":"2026-03-12","buying_rate":2.4674999999999998,"selling_rate":2.4722,"middle_rate":2.4698000000000002},{"date":"2026-03-13","buying_rate":2.4689000000000001,"selling_rate":2.4722,"middle_rate":2.4704999999999999},{"date":"2026-03-16","buying_rate":2.4681000000000002,"selling_rate":2.4708000000000001,"middle_rate":2.4695},{"date":"2026-03-17","buying_rate":2.4634,"selling_rate":2.4676999999999998,"middle_rate":2.4655999999999998},{"date":"2026-03-18","buying_rate":2.4565999999999999,"selling_rate":2.4594,"middle_rate":2.4580000000000002},{"date":"2026-03-19","buying_rate":2.4575999999999998,"selling_rate":2.4615,"middle_rate":2.4596}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:16 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/SGD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:17 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1718'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"22c159841c7d32d7a715639cdfb4f842d1e6ffcd-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:17 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521c03e90aafcabe686a86806e258affd7395bcad3dfcaf6c19ffffee9a9bccaa4734df34b4dc461d6e27d7b6f7e212e80a5c213cd8ace8ce41686b0f6e9c28de67;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"SGD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":3.0823999999999998,"selling_rate":3.0891000000000002,"middle_rate":3.0857000000000001},{"date":"2026-03-03","buying_rate":3.0849000000000002,"selling_rate":3.0916000000000001,"middle_rate":3.0882000000000001},{"date":"2026-03-04","buying_rate":3.0840000000000001,"selling_rate":3.0920000000000001,"middle_rate":3.0880000000000001},{"date":"2026-03-05","buying_rate":3.0834000000000001,"selling_rate":3.0884,"middle_rate":3.0859000000000001},{"date":"2026-03-06","buying_rate":3.081,"selling_rate":3.0884,"middle_rate":3.0847000000000002},{"date":"2026-03-09","buying_rate":3.0851000000000002,"selling_rate":3.0924999999999998,"middle_rate":3.0888},{"date":"2026-03-10","buying_rate":3.089,"selling_rate":3.0945999999999998,"middle_rate":3.0918000000000001},{"date":"2026-03-11","buying_rate":3.0798999999999999,"selling_rate":3.0859999999999999,"middle_rate":3.0829},{"date":"2026-03-12","buying_rate":3.0752000000000002,"selling_rate":3.0825999999999998,"middle_rate":3.0789},{"date":"2026-03-13","buying_rate":3.0720999999999998,"selling_rate":3.0777000000000001,"middle_rate":3.0749},{"date":"2026-03-16","buying_rate":3.0682999999999998,"selling_rate":3.0733000000000001,"middle_rate":3.0708000000000002},{"date":"2026-03-17","buying_rate":3.0688,"selling_rate":3.0749,"middle_rate":3.0718999999999999},{"date":"2026-03-18","buying_rate":3.0605000000000002,"selling_rate":3.0651000000000002,"middle_rate":3.0628000000000002},{"date":"2026-03-19","buying_rate":3.0615000000000001,"selling_rate":3.0676000000000001,"middle_rate":3.0646}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:17 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/IDR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:19 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1865'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"8013e4dd808202b4e79f37c75a7ca0d6e41864c9-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:19 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be4252195bcfa558a0f0bda7a514b7207111468c39942a8187014fa68a3b1027e4d5c69f5e55c8aae872e3020f1e5b9e147f6b45bdf9b882251184c3f49d53e65eff1ad;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"IDR","unit":100,"rate":[{"date":"2026-03-02","buying_rate":0.023300000000000001,"selling_rate":0.023400000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-03","buying_rate":0.023300000000000001,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-04","buying_rate":0.023400000000000001,"selling_rate":0.023400000000000001,"middle_rate":0.023400000000000001},{"date":"2026-03-05","buying_rate":0.023300000000000001,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-06","buying_rate":0.023400000000000001,"selling_rate":0.023400000000000001,"middle_rate":0.023400000000000001},{"date":"2026-03-09","buying_rate":0.023400000000000001,"selling_rate":0.0235,"middle_rate":0.0235},{"date":"2026-03-10","buying_rate":0.023300000000000001,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-11","buying_rate":0.023300000000000001,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-12","buying_rate":0.023199999999999998,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-13","buying_rate":0.023300000000000001,"selling_rate":0.023300000000000001,"middle_rate":0.023300000000000001},{"date":"2026-03-16","buying_rate":0.023199999999999998,"selling_rate":0.023199999999999998,"middle_rate":0.023199999999999998},{"date":"2026-03-17","buying_rate":0.023099999999999999,"selling_rate":0.023099999999999999,"middle_rate":0.023099999999999999},{"date":"2026-03-18","buying_rate":0.023,"selling_rate":0.023,"middle_rate":0.023},{"date":"2026-03-19","buying_rate":0.023099999999999999,"selling_rate":0.023199999999999998,"middle_rate":0.023099999999999999}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:19 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/HKD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:21 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1810'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"572aafd47514137dd01c693de29bdb49b4755147-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:21 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521984f0ebbaf9c77f8d0224a5da7f9fa0e760afbba0f8fbec92f6925d0c099e61b7635c5e9c21bc62a8c3d78531390e6ce6abe1d593137ce11b5b67ffc88c76559;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"HKD","unit":100,"rate":[{"date":"2026-03-02","buying_rate":49.988500000000002,"selling_rate":50.069699999999997,"middle_rate":50.0291},{"date":"2026-03-03","buying_rate":50.217300000000002,"selling_rate":50.297899999999998,"middle_rate":50.257599999999996},{"date":"2026-03-04","buying_rate":50.511299999999999,"selling_rate":50.614400000000003,"middle_rate":50.562800000000003},{"date":"2026-03-05","buying_rate":50.237900000000003,"selling_rate":50.315300000000001,"middle_rate":50.276600000000002},{"date":"2026-03-06","buying_rate":50.413600000000002,"selling_rate":50.504399999999997,"middle_rate":50.459000000000003},{"date":"2026-03-09","buying_rate":50.739699999999999,"selling_rate":50.833799999999997,"middle_rate":50.786700000000003},{"date":"2026-03-10","buying_rate":50.370100000000001,"selling_rate":50.441800000000001,"middle_rate":50.405900000000003},{"date":"2026-03-11","buying_rate":50.109299999999998,"selling_rate":50.1738,"middle_rate":50.141500000000001},{"date":"2026-03-12","buying_rate":50.131599999999999,"selling_rate":50.226900000000001,"middle_rate":50.179200000000002},{"date":"2026-03-13","buying_rate":50.182699999999997,"selling_rate":50.2485,"middle_rate":50.215600000000002},{"date":"2026-03-16","buying_rate":50.226700000000001,"selling_rate":50.282299999999999,"middle_rate":50.2545},{"date":"2026-03-17","buying_rate":50.127699999999997,"selling_rate":50.205599999999997,"middle_rate":50.166699999999999},{"date":"2026-03-18","buying_rate":49.859699999999997,"selling_rate":49.911999999999999,"middle_rate":49.885800000000003},{"date":"2026-03-19","buying_rate":50.104599999999998,"selling_rate":50.183700000000002,"middle_rate":50.144199999999998}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:21 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/GBP/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:23 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1756'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"2043500244a3025304eca9387723e2a224946261-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:23 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521270ee3bbabba208cdef1bf9498677131466959d5b98bf606d31400de843474c25446a3970dc217b8559df342d956822cf7dc9c00a29a43c6fd0079dcf1c3f8c5;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"GBP","unit":1,"rate":[{"date":"2026-03-02","buying_rate":5.2503000000000002,"selling_rate":5.2610999999999999,"middle_rate":5.2557},{"date":"2026-03-03","buying_rate":5.2674000000000003,"selling_rate":5.2770999999999999,"middle_rate":5.2723000000000004},{"date":"2026-03-04","buying_rate":5.2538999999999998,"selling_rate":5.2660999999999998,"middle_rate":5.2599999999999998},{"date":"2026-03-05","buying_rate":5.2565,"selling_rate":5.2660999999999998,"middle_rate":5.2613000000000003},{"date":"2026-03-06","buying_rate":5.2671000000000001,"selling_rate":5.2779999999999996,"middle_rate":5.2725},{"date":"2026-03-09","buying_rate":5.2723000000000004,"selling_rate":5.2843,"middle_rate":5.2782999999999998},{"date":"2026-03-10","buying_rate":5.2926000000000002,"selling_rate":5.3009000000000004,"middle_rate":5.2967000000000004},{"date":"2026-03-11","buying_rate":5.2651000000000003,"selling_rate":5.2737999999999996,"middle_rate":5.2694999999999999},{"date":"2026-03-12","buying_rate":5.2489999999999997,"selling_rate":5.2603,"middle_rate":5.2545999999999999},{"date":"2026-03-13","buying_rate":5.2485999999999997,"selling_rate":5.2565,"middle_rate":5.2525000000000004},{"date":"2026-03-16","buying_rate":5.2141999999999999,"selling_rate":5.2214999999999998,"middle_rate":5.2179000000000002},{"date":"2026-03-17","buying_rate":5.2199,"selling_rate":5.2305999999999999,"middle_rate":5.2252000000000001},{"date":"2026-03-18","buying_rate":5.2172000000000001,"selling_rate":5.2241,"middle_rate":5.2206000000000001},{"date":"2026-03-19","buying_rate":5.2161999999999997,"selling_rate":5.2262000000000004,"middle_rate":5.2211999999999996}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:23 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/EUR/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:25 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1792'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"0099f4c9b659ccd0fc91ee9d497e11c464483b53-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:25 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521683b1c21cbcc0ffc880480ef088445dd4463bc2e77cd425484caecde3bd3a48265a083c058c83e8f1c01c7d378ca44b7de709129fd37a459a76b776f7d84ec48;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"EUR","unit":1,"rate":[{"date":"2026-03-02","buying_rate":4.6044,"selling_rate":4.6130000000000004,"middle_rate":4.6086999999999998},{"date":"2026-03-03","buying_rate":4.5933999999999999,"selling_rate":4.6007999999999996,"middle_rate":4.5971000000000002},{"date":"2026-03-04","buying_rate":4.5688000000000004,"selling_rate":4.5796000000000001,"middle_rate":4.5742000000000003},{"date":"2026-03-05","buying_rate":4.5742000000000003,"selling_rate":4.5815000000000001,"middle_rate":4.5777999999999999},{"date":"2026-03-06","buying_rate":4.5777999999999999,"selling_rate":4.5867000000000004,"middle_rate":4.5823},{"date":"2026-03-09","buying_rate":4.5656999999999996,"selling_rate":4.5753000000000004,"middle_rate":4.5705},{"date":"2026-03-10","buying_rate":4.5803000000000003,"selling_rate":4.5872000000000002,"middle_rate":4.5837000000000003},{"date":"2026-03-11","buying_rate":4.5553999999999997,"selling_rate":4.5616000000000003,"middle_rate":4.5585000000000004},{"date":"2026-03-12","buying_rate":4.5286999999999997,"selling_rate":4.5380000000000003,"middle_rate":4.5332999999999997},{"date":"2026-03-13","buying_rate":4.5262000000000002,"selling_rate":4.5324,"middle_rate":4.5293000000000001},{"date":"2026-03-16","buying_rate":4.5037000000000003,"selling_rate":4.5091000000000001,"middle_rate":4.5064000000000002},{"date":"2026-03-17","buying_rate":4.5106000000000002,"selling_rate":4.5179,"middle_rate":4.5143000000000004},{"date":"2026-03-18","buying_rate":4.5067000000000004,"selling_rate":4.5117000000000003,"middle_rate":4.5091999999999999},{"date":"2026-03-19","buying_rate":4.5053999999999998,"selling_rate":4.5130999999999997,"middle_rate":4.5092999999999996}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:25 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/EGP/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:27 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1866'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"5a6770d460e67b9af37a78c3e96df8d65b3bac92-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:26 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521386b047ad71c852bc8333341eb65b83a8f78fd9517a68f9af20bfcc07398b79175d62457762809fd147fb5042c8543847c9ac1cd2eba4a3a5056bc8396d9d88c;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"EGP","unit":1,"rate":[{"date":"2026-03-02","buying_rate":0.080100000000000005,"selling_rate":0.080399999999999999,"middle_rate":0.080299999999999996},{"date":"2026-03-03","buying_rate":0.079699999999999993,"selling_rate":0.080000000000000002,"middle_rate":0.079899999999999999},{"date":"2026-03-04","buying_rate":0.079000000000000001,"selling_rate":0.079299999999999995,"middle_rate":0.079100000000000004},{"date":"2026-03-05","buying_rate":0.078200000000000006,"selling_rate":0.0785,"middle_rate":0.078299999999999995},{"date":"2026-03-06","buying_rate":0.078600000000000003,"selling_rate":0.078899999999999998,"middle_rate":0.078799999999999995},{"date":"2026-03-09","buying_rate":0.075999999999999998,"selling_rate":0.076300000000000007,"middle_rate":0.076100000000000001},{"date":"2026-03-10","buying_rate":0.0746,"selling_rate":0.074800000000000005,"middle_rate":0.074700000000000003},{"date":"2026-03-11","buying_rate":0.075300000000000006,"selling_rate":0.075600000000000001,"middle_rate":0.075499999999999998},{"date":"2026-03-12","buying_rate":0.075600000000000001,"selling_rate":0.075800000000000006,"middle_rate":0.075700000000000003},{"date":"2026-03-13","buying_rate":0.074999999999999997,"selling_rate":0.075200000000000003,"middle_rate":0.0751},{"date":"2026-03-16","buying_rate":0.074800000000000005,"selling_rate":0.074999999999999997,"middle_rate":0.074899999999999994},{"date":"2026-03-17","buying_rate":0.074800000000000005,"selling_rate":0.0751,"middle_rate":0.074899999999999994},{"date":"2026-03-18","buying_rate":0.074700000000000003,"selling_rate":0.074899999999999994,"middle_rate":0.074800000000000005},{"date":"2026-03-19","buying_rate":0.0751,"selling_rate":0.075399999999999995,"middle_rate":0.075200000000000003}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:27 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/CNY/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:28 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1842'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"a73e11d36fd4b70ae4ed2705e447495d8cf11052-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:28 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425210872c5a22d9670bf928c64693cd647a79b14efff2afa97edb778ef4c681b8b9b3eeec3f8a088de367108c82ab33fbdc5dfd29669f052684051b8e751279c4cd0;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"CNY","unit":1,"rate":[{"date":"2026-03-02","buying_rate":0.57010000000000005,"selling_rate":0.57099999999999995,"middle_rate":0.5706},{"date":"2026-03-03","buying_rate":0.57069999999999999,"selling_rate":0.5716,"middle_rate":0.57120000000000004},{"date":"2026-03-04","buying_rate":0.57120000000000004,"selling_rate":0.57250000000000001,"middle_rate":0.57189999999999996},{"date":"2026-03-05","buying_rate":0.56950000000000001,"selling_rate":0.57040000000000002,"middle_rate":0.56989999999999996},{"date":"2026-03-06","buying_rate":0.57210000000000005,"selling_rate":0.57320000000000004,"middle_rate":0.57269999999999999},{"date":"2026-03-09","buying_rate":0.57479999999999998,"selling_rate":0.57589999999999997,"middle_rate":0.57540000000000002},{"date":"2026-03-10","buying_rate":0.57040000000000002,"selling_rate":0.57120000000000004,"middle_rate":0.57079999999999997},{"date":"2026-03-11","buying_rate":0.57010000000000005,"selling_rate":0.57089999999999996,"middle_rate":0.57050000000000001},{"date":"2026-03-12","buying_rate":0.57130000000000003,"selling_rate":0.57240000000000002,"middle_rate":0.57189999999999996},{"date":"2026-03-13","buying_rate":0.57179999999999997,"selling_rate":0.5726,"middle_rate":0.57220000000000004},{"date":"2026-03-16","buying_rate":0.57010000000000005,"selling_rate":0.57079999999999997,"middle_rate":0.57040000000000002},{"date":"2026-03-17","buying_rate":0.56910000000000005,"selling_rate":0.57010000000000005,"middle_rate":0.5696},{"date":"2026-03-18","buying_rate":0.56740000000000002,"selling_rate":0.56810000000000005,"middle_rate":0.56769999999999998},{"date":"2026-03-19","buying_rate":0.57140000000000002,"selling_rate":0.57230000000000003,"middle_rate":0.57179999999999997}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:29 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/CHF/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:30 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1816'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"0e602909f435cee17c5978fc115a69b388e61240-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:30 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521217245997712b87b848f32b536fe4d47146fda8bc54d12ac9e3a52181ce117e54da1d17bc8c383371da65dda292bf9812e3ea6c6be0a9e581ad85bf70eaed378;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"CHF","unit":1,"rate":[{"date":"2026-03-02","buying_rate":5.0838999999999999,"selling_rate":5.0956000000000001,"middle_rate":5.0898000000000003},{"date":"2026-03-03","buying_rate":5.0385,"selling_rate":5.0514000000000001,"middle_rate":5.0449000000000002},{"date":"2026-03-04","buying_rate":5.0382999999999996,"selling_rate":5.0511999999999997,"middle_rate":5.0446999999999997},{"date":"2026-03-05","buying_rate":5.0442999999999998,"selling_rate":5.0552999999999999,"middle_rate":5.0498000000000003},{"date":"2026-03-06","buying_rate":5.0487000000000002,"selling_rate":5.0602,"middle_rate":5.0544000000000002},{"date":"2026-03-09","buying_rate":5.0702999999999996,"selling_rate":5.0819000000000001,"middle_rate":5.0761000000000003},{"date":"2026-03-10","buying_rate":5.0688000000000004,"selling_rate":5.0772000000000004,"middle_rate":5.0730000000000004},{"date":"2026-03-11","buying_rate":5.0353000000000003,"selling_rate":5.0442999999999998,"middle_rate":5.0397999999999996},{"date":"2026-03-12","buying_rate":5.0185000000000004,"selling_rate":5.0327000000000002,"middle_rate":5.0255999999999998},{"date":"2026-03-13","buying_rate":5.0019,"selling_rate":5.0114999999999998,"middle_rate":5.0067000000000004},{"date":"2026-03-16","buying_rate":4.9816000000000003,"selling_rate":4.9892000000000003,"middle_rate":4.9854000000000003},{"date":"2026-03-17","buying_rate":4.9771999999999998,"selling_rate":4.9873000000000003,"middle_rate":4.9821999999999997},{"date":"2026-03-18","buying_rate":4.9757999999999996,"selling_rate":4.9828000000000001,"middle_rate":4.9793000000000003},{"date":"2026-03-19","buying_rate":4.9570999999999996,"selling_rate":4.9664999999999999,"middle_rate":4.9618000000000002}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:31 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/CAD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:32 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1729'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"2ad18ef9976c9311820a7292bf5caede744262f9-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:32 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521a7cb1b1d5f7447b09c7fab28d9a5c861407e085d324f62da5df0f1e0c6cc07f77566e5e6db3728e21e37b38099e052d87edeb9d93d90a768dce447be1a526d46;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"CAD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":2.8632,"selling_rate":2.8683999999999998,"middle_rate":2.8658000000000001},{"date":"2026-03-03","buying_rate":2.8732000000000002,"selling_rate":2.8778000000000001,"middle_rate":2.8755000000000002},{"date":"2026-03-04","buying_rate":2.8809,"selling_rate":2.887,"middle_rate":2.8839999999999999},{"date":"2026-03-05","buying_rate":2.8803999999999998,"selling_rate":2.8856000000000002,"middle_rate":2.883},{"date":"2026-03-06","buying_rate":2.8851,"selling_rate":2.8912,"middle_rate":2.8881000000000001},{"date":"2026-03-09","buying_rate":2.9154,"selling_rate":2.9209999999999998,"middle_rate":2.9182000000000001},{"date":"2026-03-10","buying_rate":2.8982999999999999,"selling_rate":2.9030999999999998,"middle_rate":2.9007000000000001},{"date":"2026-03-11","buying_rate":2.8868999999999998,"selling_rate":2.8917000000000002,"middle_rate":2.8893},{"date":"2026-03-12","buying_rate":2.8866999999999998,"selling_rate":2.8929,"middle_rate":2.8898000000000001},{"date":"2026-03-13","buying_rate":2.8822999999999999,"selling_rate":2.8866000000000001,"middle_rate":2.8845000000000001},{"date":"2026-03-16","buying_rate":2.8683999999999998,"selling_rate":2.8715000000000002,"middle_rate":2.8700000000000001},{"date":"2026-03-17","buying_rate":2.8673000000000002,"selling_rate":2.8725000000000001,"middle_rate":2.8698999999999999},{"date":"2026-03-18","buying_rate":2.8536000000000001,"selling_rate":2.8574000000000002,"middle_rate":2.8555000000000001},{"date":"2026-03-19","buying_rate":2.8618000000000001,"selling_rate":2.867,"middle_rate":2.8643999999999998}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:32 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/BND/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:34 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1731'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"453932421911062096c4f71891ba6970cbed42b5-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:34 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425219ddcc548e5fe23fd0f8859e3a20164d47239de5b568a05b745457a2e385c552882e0a1f5e162bff195a7a92e9237d3e246be82bc52d6f85bc8f41267165fb960;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"BND","unit":1,"rate":[{"date":"2026-03-02","buying_rate":3.0823999999999998,"selling_rate":3.0891000000000002,"middle_rate":3.0857000000000001},{"date":"2026-03-03","buying_rate":3.0849000000000002,"selling_rate":3.0916000000000001,"middle_rate":3.0882000000000001},{"date":"2026-03-04","buying_rate":3.0840000000000001,"selling_rate":3.0920000000000001,"middle_rate":3.0880000000000001},{"date":"2026-03-05","buying_rate":3.0834000000000001,"selling_rate":3.0884,"middle_rate":3.0859000000000001},{"date":"2026-03-06","buying_rate":3.081,"selling_rate":3.0884,"middle_rate":3.0847000000000002},{"date":"2026-03-09","buying_rate":3.0855999999999999,"selling_rate":3.0922999999999998,"middle_rate":3.0889000000000002},{"date":"2026-03-10","buying_rate":3.0899999999999999,"selling_rate":3.0941000000000001,"middle_rate":3.0920000000000001},{"date":"2026-03-11","buying_rate":3.0798999999999999,"selling_rate":3.0859999999999999,"middle_rate":3.0829},{"date":"2026-03-12","buying_rate":3.0752000000000002,"selling_rate":3.0823999999999998,"middle_rate":3.0788000000000002},{"date":"2026-03-13","buying_rate":3.0720999999999998,"selling_rate":3.0777000000000001,"middle_rate":3.0749},{"date":"2026-03-16","buying_rate":3.0691999999999999,"selling_rate":3.0726,"middle_rate":3.0709},{"date":"2026-03-17","buying_rate":3.0688,"selling_rate":3.0749,"middle_rate":3.0718999999999999},{"date":"2026-03-18","buying_rate":3.0605000000000002,"selling_rate":3.0651000000000002,"middle_rate":3.0628000000000002},{"date":"2026-03-19","buying_rate":3.0615000000000001,"selling_rate":3.0676000000000001,"middle_rate":3.0646}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:34 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/AUD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:36 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1743'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"242f36aaffebe56f341cd6e00616e0bfbc3f28dc-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:36 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521cbefeb0fb8dd351f792d3a82af4eda270ccb0404c4bc20bc4e925e03a3de3c14ab89b94431c294c6d146aeef09acc30506b4072e0789d32bdef0d8e154859643;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"AUD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":2.7690999999999999,"selling_rate":2.7757000000000001,"middle_rate":2.7724000000000002},{"date":"2026-03-03","buying_rate":2.7881,"selling_rate":2.7947000000000002,"middle_rate":2.7913999999999999},{"date":"2026-03-04","buying_rate":2.7625999999999999,"selling_rate":2.7705000000000002,"middle_rate":2.7665000000000002},{"date":"2026-03-05","buying_rate":2.7826,"selling_rate":2.7871999999999999,"middle_rate":2.7848999999999999},{"date":"2026-03-06","buying_rate":2.7679999999999998,"selling_rate":2.7736999999999998,"middle_rate":2.7707999999999999},{"date":"2026-03-09","buying_rate":2.7599999999999998,"selling_rate":2.7673000000000001,"middle_rate":2.7637},{"date":"2026-03-10","buying_rate":2.7852000000000001,"selling_rate":2.7894999999999999,"middle_rate":2.7873000000000001},{"date":"2026-03-11","buying_rate":2.7953000000000001,"selling_rate":2.7995999999999999,"middle_rate":2.7974999999999999},{"date":"2026-03-12","buying_rate":2.8022,"selling_rate":2.8096000000000001,"middle_rate":2.8058999999999998},{"date":"2026-03-13","buying_rate":2.7822,"selling_rate":2.7865000000000002,"middle_rate":2.7844000000000002},{"date":"2026-03-16","buying_rate":2.7570999999999999,"selling_rate":2.7623000000000002,"middle_rate":2.7597},{"date":"2026-03-17","buying_rate":2.7713999999999999,"selling_rate":2.7765,"middle_rate":2.774},{"date":"2026-03-18","buying_rate":2.7766000000000002,"selling_rate":2.7810000000000001,"middle_rate":2.7787999999999999},{"date":"2026-03-19","buying_rate":2.7662,"selling_rate":2.7711999999999999,"middle_rate":2.7686999999999999}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:36 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/AED/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:38 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1572'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"5644675f4e9b6088f4819054178829f7cde7654d-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:38 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=440bc140be049eda405f7b45a96a4f18; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521f396a79ea731578916cf54486e7ac67ec62b6cb7c2aebe26567664418cf51cc880c41de3ca396b351fc9c9d1ed212ccfc9a1a8ed4ddc4775ef66053b493d7487;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"AED","unit":100,"rate":[{"date":"2026-03-02","buying_rate":106.43219999999999,"selling_rate":106.6391,"middle_rate":106.5356},{"date":"2026-03-03","buying_rate":106.93380000000001,"selling_rate":107.1409,"middle_rate":107.03740000000001},{"date":"2026-03-04","buying_rate":107.30329999999999,"selling_rate":107.56489999999999,"middle_rate":107.4341},{"date":"2026-03-05","buying_rate":106.93089999999999,"selling_rate":107.13800000000001,"middle_rate":107.03449999999999},{"date":"2026-03-06","buying_rate":107.3305,"selling_rate":107.56489999999999,"middle_rate":107.4477},{"date":"2026-03-09","buying_rate":107.947,"selling_rate":108.1434,"middle_rate":108.04519999999999},{"date":"2026-03-10","buying_rate":107.2576,"selling_rate":107.4376,"middle_rate":107.3476},{"date":"2026-03-11","buying_rate":106.7433,"selling_rate":106.923,"middle_rate":106.8331},{"date":"2026-03-12","buying_rate":106.7948,"selling_rate":107.0291,"middle_rate":106.9119},{"date":"2026-03-13","buying_rate":106.9164,"selling_rate":107.0962,"middle_rate":107.0063},{"date":"2026-03-16","buying_rate":107.0485,"selling_rate":107.16330000000001,"middle_rate":107.10590000000001},{"date":"2026-03-17","buying_rate":106.8492,"selling_rate":107.05629999999999,"middle_rate":106.9528},{"date":"2026-03-18","buying_rate":106.3865,"selling_rate":106.53879999999999,"middle_rate":106.4627},{"date":"2026-03-19","buying_rate":106.9037,"selling_rate":107.1108,"middle_rate":107.0072}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:38 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/VND/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:40 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1784'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"2803d2c6447e5260abf722f1af68f2887761d29b-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:40 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=aacd9294b2b261280f88699bc8911bba; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425213e00a9bae39dbbb944c011d81ed57f953cf40a1342c53eb6e8989c019aa88e04273a969cadc5e045471f895a76c79b77fc0a6aba5b5464755051995895242f3b;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"VND","unit":100,"rate":[{"date":"2026-03-02","buying_rate":0.014999999999999999,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-03","buying_rate":0.014999999999999999,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-04","buying_rate":0.014999999999999999,"selling_rate":0.015100000000000001,"middle_rate":0.015100000000000001},{"date":"2026-03-05","buying_rate":0.014999999999999999,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-06","buying_rate":0.014999999999999999,"selling_rate":0.015100000000000001,"middle_rate":0.015100000000000001},{"date":"2026-03-09","buying_rate":0.015100000000000001,"selling_rate":0.0152,"middle_rate":0.015100000000000001},{"date":"2026-03-10","buying_rate":0.014999999999999999,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-11","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-12","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-13","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-16","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.014999999999999999},{"date":"2026-03-17","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.0149},{"date":"2026-03-18","buying_rate":0.014800000000000001,"selling_rate":0.0149,"middle_rate":0.0149},{"date":"2026-03-19","buying_rate":0.0149,"selling_rate":0.014999999999999999,"middle_rate":0.0149}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:41 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/USD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:42 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1774'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"092ab27615bc4dfcb4ee73486c3168e3612d5bd5-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:42 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be425214f16017fdedbb83f3a4be7944ef6c8cfd756760f42d20db029a60cecdb684cefe435cb203daf0c6c7603432d68e63ae0326e96c39dae7ba5288de535afcba90c;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"USD","unit":1,"rate":[{"date":"2026-03-02","buying_rate":3.9100000000000001,"selling_rate":3.9159999999999999,"middle_rate":3.9129999999999998},{"date":"2026-03-03","buying_rate":3.9279999999999999,"selling_rate":3.9340000000000002,"middle_rate":3.931},{"date":"2026-03-04","buying_rate":3.9420000000000002,"selling_rate":3.9500000000000002,"middle_rate":3.9460000000000002},{"date":"2026-03-05","buying_rate":3.9279999999999999,"selling_rate":3.9340000000000002,"middle_rate":3.931},{"date":"2026-03-06","buying_rate":3.9430000000000001,"selling_rate":3.9500000000000002,"middle_rate":3.9464999999999999},{"date":"2026-03-09","buying_rate":3.9649999999999999,"selling_rate":3.972,"middle_rate":3.9685000000000001},{"date":"2026-03-10","buying_rate":3.9399999999999999,"selling_rate":3.9449999999999998,"middle_rate":3.9424999999999999},{"date":"2026-03-11","buying_rate":3.9209999999999998,"selling_rate":3.9260000000000002,"middle_rate":3.9235000000000002},{"date":"2026-03-12","buying_rate":3.923,"selling_rate":3.9300000000000002,"middle_rate":3.9264999999999999},{"date":"2026-03-13","buying_rate":3.9279999999999999,"selling_rate":3.9329999999999998,"middle_rate":3.9304999999999999},{"date":"2026-03-16","buying_rate":3.9319999999999999,"selling_rate":3.9359999999999999,"middle_rate":3.9340000000000002},{"date":"2026-03-17","buying_rate":3.9249999999999998,"selling_rate":3.931,"middle_rate":3.9279999999999999},{"date":"2026-03-18","buying_rate":3.9079999999999999,"selling_rate":3.9119999999999999,"middle_rate":3.9100000000000001},{"date":"2026-03-19","buying_rate":3.927,"selling_rate":3.9329999999999998,"middle_rate":3.9300000000000002}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:42 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/TWD/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:44 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1599'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"c51b0ac65a181bb2e28289f911a30ae872efefc1-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:44 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=5c836c044684aeb6bb12f7c0bb259880; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be42521d1ddd7e6696b84fe5a91ffbfc00dbffcfad8a1be821825a2e87b4439b1f457297f5d702ebe68f7dff85dd9572075400685de8e7875ebd66225bb5103f169a0e3;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"TWD","unit":100,"rate":[{"date":"2026-03-02","buying_rate":12.4542,"selling_rate":12.485300000000001,"middle_rate":12.4697},{"date":"2026-03-03","buying_rate":12.4194,"selling_rate":12.450200000000001,"middle_rate":12.434799999999999},{"date":"2026-03-04","buying_rate":12.4251,"selling_rate":12.4621,"middle_rate":12.4436},{"date":"2026-03-05","buying_rate":12.4064,"selling_rate":12.437200000000001,"middle_rate":12.421799999999999},{"date":"2026-03-06","buying_rate":12.4033,"selling_rate":12.4331,"middle_rate":12.418200000000001},{"date":"2026-03-09","buying_rate":12.444699999999999,"selling_rate":12.478400000000001,"middle_rate":12.461499999999999},{"date":"2026-03-10","buying_rate":12.3713,"selling_rate":12.3986,"middle_rate":12.385},{"date":"2026-03-11","buying_rate":12.3391,"selling_rate":12.3665,"middle_rate":12.3528},{"date":"2026-03-12","buying_rate":12.3024,"selling_rate":12.336,"middle_rate":12.3192},{"date":"2026-03-13","buying_rate":12.303800000000001,"selling_rate":12.331099999999999,"middle_rate":12.317500000000001},{"date":"2026-03-16","buying_rate":12.2431,"selling_rate":12.259399999999999,"middle_rate":12.251300000000001},{"date":"2026-03-17","buying_rate":12.239599999999999,"selling_rate":12.2698,"middle_rate":12.2547},{"date":"2026-03-18","buying_rate":12.2408,"selling_rate":12.264900000000001,"middle_rate":12.252800000000001},{"date":"2026-03-19","buying_rate":12.252700000000001,"selling_rate":12.2829,"middle_rate":12.267799999999999}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:44 GMT
-- request:
-    method: get
-    uri: https://api.bnm.gov.my/public/exchange-rate/THB/year/2026/month/3?session=0900
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.BNM.API.v1+json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 20 Mar 2026 10:45:46 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '1598'
-      Strict-Transport-Security:
-      - max-age=63072000; includeSubDomains
-      Cache-Control:
-      - no-cache, private, max-age=2592000
-      Etag:
-      - '"f505f43878e4f747ba26ebd025a6a1c053223193-gzip"'
-      Expires:
-      - Sun, 19 Apr 2026 10:45:46 GMT
-      Vary:
-      - Accept-Encoding,User-Agent
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      Set-Cookie:
-      - 6faa1a9cb04f644c6b76dd2d6810bb5a=bf725342e5cda8b153445d9210a8b8c8; path=/;
-        HttpOnly; Secure; SameSite=None
-      - TS01efcbd3=012be4252108b9067e915e9e073c6c4d2929b8c2b7d1de96542848854dc259d55906d49a75efdbdf77f8222d960eaddb3dab1da6932bda2f1ac374337a5ae0ed404c6925f0;
-        Path=/; Domain=.api.bnm.gov.my
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":{"currency_code":"THB","unit":100,"rate":[{"date":"2026-03-02","buying_rate":12.523999999999999,"selling_rate":12.551299999999999,"middle_rate":12.537699999999999},{"date":"2026-03-03","buying_rate":12.515499999999999,"selling_rate":12.538600000000001,"middle_rate":12.527100000000001},{"date":"2026-03-04","buying_rate":12.4451,"selling_rate":12.4763,"middle_rate":12.460699999999999},{"date":"2026-03-05","buying_rate":12.4619,"selling_rate":12.488899999999999,"middle_rate":12.4754},{"date":"2026-03-06","buying_rate":12.411099999999999,"selling_rate":12.439,"middle_rate":12.425000000000001},{"date":"2026-03-09","buying_rate":12.329000000000001,"selling_rate":12.3584,"middle_rate":12.3437},{"date":"2026-03-10","buying_rate":12.4329,"selling_rate":12.4527,"middle_rate":12.4428},{"date":"2026-03-11","buying_rate":12.4267,"selling_rate":12.4544,"middle_rate":12.4406},{"date":"2026-03-12","buying_rate":12.294,"selling_rate":12.3217,"middle_rate":12.3078},{"date":"2026-03-13","buying_rate":12.2272,"selling_rate":12.2485,"middle_rate":12.2379},{"date":"2026-03-16","buying_rate":12.142200000000001,"selling_rate":12.165800000000001,"middle_rate":12.154},{"date":"2026-03-17","buying_rate":12.0974,"selling_rate":12.1196,"middle_rate":12.108499999999999},{"date":"2026-03-18","buying_rate":12.076599999999999,"selling_rate":12.096500000000001,"middle_rate":12.086600000000001},{"date":"2026-03-19","buying_rate":11.965299999999999,"selling_rate":11.989000000000001,"middle_rate":11.9771}]},"meta":{"quote":"rm","session":"0900","last_updated":"2026-03-19
-        23:01:22","total_result":14}}'
-  recorded_at: Fri, 20 Mar 2026 10:45:46 GMT
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <ValCurs Date="08.04.2026" name="Official exchange rate">
+          <Valute ID="47">
+            <NumCode>978</NumCode>
+            <CharCode>EUR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Euro</Name>
+            <Value>20.1703</Value>
+          </Valute>
+          <Valute ID="44">
+            <NumCode>840</NumCode>
+            <CharCode>USD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>US Dollar</Name>
+            <Value>17.4597</Value>
+          </Valute>
+          <Valute ID="36">
+            <NumCode>643</NumCode>
+            <CharCode>RUB</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Russian Ruble</Name>
+            <Value>0.2215</Value>
+          </Valute>
+          <Valute ID="35">
+            <NumCode>946</NumCode>
+            <CharCode>RON</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Romanian Leu</Name>
+            <Value>3.9585</Value>
+          </Valute>
+          <Valute ID="43">
+            <NumCode>980</NumCode>
+            <CharCode>UAH</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Ukraine Hryvnia</Name>
+            <Value>0.4013</Value>
+          </Valute>
+          <Valute ID="61">
+            <NumCode>784</NumCode>
+            <CharCode>AED</CharCode>
+            <Nominal>1</Nominal>
+            <Name>U.A.E. Dirham</Name>
+            <Value>4.7534</Value>
+          </Valute>
+          <Valute ID="64">
+            <NumCode>008</NumCode>
+            <CharCode>ALL</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Albanian lek</Name>
+            <Value>2.1049</Value>
+          </Valute>
+          <Valute ID="1">
+            <NumCode>051</NumCode>
+            <CharCode>AMD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Armenian Dram</Name>
+            <Value>0.4636</Value>
+          </Valute>
+          <Valute ID="3">
+            <NumCode>036</NumCode>
+            <CharCode>AUD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Australian Dollar</Name>
+            <Value>12.0978</Value>
+          </Valute>
+          <Valute ID="4">
+            <NumCode>944</NumCode>
+            <CharCode>AZN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Azerbaijanian Manat</Name>
+            <Value>10.2718</Value>
+          </Valute>
+          <Valute ID="50">
+            <NumCode>933</NumCode>
+            <CharCode>BYN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Belarussian Ruble</Name>
+            <Value>5.9755</Value>
+          </Valute>
+          <Valute ID="8">
+            <NumCode>124</NumCode>
+            <CharCode>CAD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Canadian Dollar</Name>
+            <Value>12.5416</Value>
+          </Valute>
+          <Valute ID="9">
+            <NumCode>756</NumCode>
+            <CharCode>CHF</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swiss Franc</Name>
+            <Value>21.8300</Value>
+          </Valute>
+          <Valute ID="54">
+            <NumCode>156</NumCode>
+            <CharCode>CNY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Chinese yuan renminbi</Name>
+            <Value>2.5435</Value>
+          </Valute>
+          <Valute ID="10">
+            <NumCode>203</NumCode>
+            <CharCode>CZK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Czech Koruna</Name>
+            <Value>0.8224</Value>
+          </Valute>
+          <Valute ID="12">
+            <NumCode>208</NumCode>
+            <CharCode>DKK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Danish Krone</Name>
+            <Value>2.6992</Value>
+          </Valute>
+          <Valute ID="17">
+            <NumCode>826</NumCode>
+            <CharCode>GBP</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Pound Sterling</Name>
+            <Value>23.1191</Value>
+          </Valute>
+          <Valute ID="18">
+            <NumCode>981</NumCode>
+            <CharCode>GEL</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Georgian Lar</Name>
+            <Value>6.4874</Value>
+          </Valute>
+          <Valute ID="63">
+            <NumCode>344</NumCode>
+            <CharCode>HKD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Hong Kong dollar</Name>
+            <Value>2.2282</Value>
+          </Valute>
+          <Valute ID="21">
+            <NumCode>348</NumCode>
+            <CharCode>HUF</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Hungarian Forint</Name>
+            <Value>5.2922</Value>
+          </Valute>
+          <Valute ID="49">
+            <NumCode>376</NumCode>
+            <CharCode>ILS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Shekel Israelit</Name>
+            <Value>5.5505</Value>
+          </Valute>
+          <Valute ID="65">
+            <NumCode>356</NumCode>
+            <CharCode>INR</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Indian rupee</Name>
+            <Value>1.8779</Value>
+          </Valute>
+          <Valute ID="23">
+            <NumCode>352</NumCode>
+            <CharCode>ISK</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Iceland Krona</Name>
+            <Value>1.4027</Value>
+          </Valute>
+          <Valute ID="25">
+            <NumCode>392</NumCode>
+            <CharCode>JPY</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Japanese Yen</Name>
+            <Value>10.9277</Value>
+          </Valute>
+          <Valute ID="26">
+            <NumCode>417</NumCode>
+            <CharCode>KGS</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kyrgyzstan Som</Name>
+            <Value>1.9970</Value>
+          </Valute>
+          <Valute ID="66">
+            <NumCode>410</NumCode>
+            <CharCode>KRW</CharCode>
+            <Nominal>100</Nominal>
+            <Name>South Korean won</Name>
+            <Value>1.1642</Value>
+          </Valute>
+          <Valute ID="59">
+            <NumCode>414</NumCode>
+            <CharCode>KWD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Kuwaiti Dinar</Name>
+            <Value>56.3495</Value>
+          </Valute>
+          <Valute ID="27">
+            <NumCode>398</NumCode>
+            <CharCode>KZT</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Kazakhstan Tenge</Name>
+            <Value>0.3754</Value>
+          </Valute>
+          <Valute ID="62">
+            <NumCode>807</NumCode>
+            <CharCode>MKD</CharCode>
+            <Nominal>10</Nominal>
+            <Name>Macedonian denar</Name>
+            <Value>3.2726</Value>
+          </Valute>
+          <Valute ID="56">
+            <NumCode>458</NumCode>
+            <CharCode>MYR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Malaysian Ringgit</Name>
+            <Value>4.3327</Value>
+          </Valute>
+          <Valute ID="32">
+            <NumCode>578</NumCode>
+            <CharCode>NOK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Norwegian Krone</Name>
+            <Value>1.7989</Value>
+          </Valute>
+          <Valute ID="53">
+            <NumCode>554</NumCode>
+            <CharCode>NZD</CharCode>
+            <Nominal>1</Nominal>
+            <Name>New Zealand Dollar</Name>
+            <Value>9.9589</Value>
+          </Valute>
+          <Valute ID="33">
+            <NumCode>985</NumCode>
+            <CharCode>PLN</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Polish Zloty</Name>
+            <Value>4.7220</Value>
+          </Valute>
+          <Valute ID="48">
+            <NumCode>941</NumCode>
+            <CharCode>RSD</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Serbian Dinar</Name>
+            <Value>17.1812</Value>
+          </Valute>
+          <Valute ID="37">
+            <NumCode>752</NumCode>
+            <CharCode>SEK</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Swedish Krona</Name>
+            <Value>1.8328</Value>
+          </Valute>
+          <Valute ID="51">
+            <NumCode>972</NumCode>
+            <CharCode>TJS</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Tajikistan Somoni</Name>
+            <Value>1.8354</Value>
+          </Valute>
+          <Valute ID="60">
+            <NumCode>934</NumCode>
+            <CharCode>TMT</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkmenistan Manat</Name>
+            <Value>4.9885</Value>
+          </Valute>
+          <Valute ID="42">
+            <NumCode>949</NumCode>
+            <CharCode>TRY</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Turkish Lira</Name>
+            <Value>0.3910</Value>
+          </Valute>
+          <Valute ID="45">
+            <NumCode>860</NumCode>
+            <CharCode>UZS</CharCode>
+            <Nominal>100</Nominal>
+            <Name>Uzbekistan Sum</Name>
+            <Value>0.1436</Value>
+          </Valute>
+          <Valute ID="46">
+            <NumCode>960</NumCode>
+            <CharCode>XDR</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Special Drawing Rights</Name>
+            <Value>23.7680</Value>
+          </Valute>
+        </ValCurs>
+  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
 recorded_with: VCR 6.4.0
