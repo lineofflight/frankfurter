@@ -57,15 +57,15 @@ class Provider
           rates.filter_map do |entry|
             iso = entry.dig("currency", "iso3")
             unit = Integer(entry.dig("currency", "unit") || 1)
-            buy = Float(entry["buy"])
-            sell = Float(entry["sell"])
-            mid = (buy + sell) / 2.0
+            buy_str = entry["buy"]
+            sell_str = entry["sell"]
+            next unless buy_str&.match?(/\A[\d.]+\z/) && sell_str&.match?(/\A[\d.]+\z/)
+
+            mid = (Float(buy_str) + Float(sell_str)) / 2.0
             rate = mid / unit
             next if rate.zero?
 
             { date:, base: iso, quote: "NPR", rate: }
-          rescue ArgumentError
-            next
           end
         end
       end
