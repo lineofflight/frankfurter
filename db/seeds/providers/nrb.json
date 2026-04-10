@@ -1,0 +1,12 @@
+{
+  "key": "NRB",
+  "name": "Nepal Rastra Bank",
+  "country_code": "NP",
+  "rate_type": "reference rate",
+  "pivot_currency": "NPR",
+  "data_url": "https://www.nrb.org.np/api/forex/v1/rates",
+  "terms_url": null,
+  "publish_time": 6,
+  "publish_days": "0-6",
+  "coverage_start": "2010-01-01"
+}
