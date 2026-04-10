@@ -1,6 +1,7 @@
 .bundle
 coverage
 pkg
+tmp
 *.sqlite3*
 .claude/**/*.local*
 docs
