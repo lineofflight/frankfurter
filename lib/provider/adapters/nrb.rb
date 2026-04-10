@@ -64,6 +64,8 @@ class Provider
             next if rate.zero?
 
             { date:, base: iso, quote: "NPR", rate: }
+          rescue ArgumentError
+            next
           end
         end
       end
