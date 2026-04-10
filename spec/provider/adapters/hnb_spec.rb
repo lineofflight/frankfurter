@@ -18,7 +18,7 @@ class Provider < Sequel::Model(:providers)
         dataset = adapter.fetch(after: Date.new(2023, 1, 2), upto: Date.new(2023, 1, 6))
 
         _(dataset).wont_be_empty
-        _(dataset.first[:quote]).must_equal("EUR")
+        _(dataset.first[:base]).must_equal("EUR")
       end
 
       it "fetches multiple currencies per date" do
@@ -41,8 +41,8 @@ class Provider < Sequel::Model(:providers)
         records = adapter.parse(json)
 
         _(records.length).must_equal(1)
-        _(records.first[:base]).must_equal("USD")
-        _(records.first[:quote]).must_equal("EUR")
+        _(records.first[:base]).must_equal("EUR")
+        _(records.first[:quote]).must_equal("USD")
         _(records.first[:rate]).must_be_close_to(1.0662, 0.0001)
         _(records.first[:date]).must_equal(Date.new(2023, 1, 2))
       end

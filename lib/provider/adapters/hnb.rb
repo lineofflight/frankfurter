@@ -39,7 +39,7 @@ class Provider
           next if rate_value.zero?
 
           date = Date.parse(date_str)
-          { date:, base: currency, quote: "EUR", rate: rate_value }
+          { date:, base: "EUR", quote: currency, rate: rate_value }
         end
       end
     end
