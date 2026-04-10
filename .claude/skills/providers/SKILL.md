@@ -66,3 +66,30 @@ bundle exec rake backfill[<key>]                      # Live backfill works
 ```
 
 **Dry-run the backfill before shipping.** VCR tests only cover narrow date ranges. A real backfill exercises chunked iteration, API rate limits, and date range constraints that specs won't catch. Test at least one full `backfill_range` chunk against the live API to confirm the adapter works end-to-end — especially to verify the API's maximum allowed date range matches your `backfill_range` setting.
+
+### 5. Sanity-check rates
+
+After backfill, compare the new provider's rates against an independent source to catch direction bugs (base/quote swapped), unit errors (per-100 not normalized), or stale data.
+
+**Quick check — cross-reference with ECB rates in the local DB:**
+
+```ruby
+# In a console or one-liner: compare a sample of the new provider's rates against ECB
+new_rates = Rate.where(provider: "<KEY>").where(date: Date.today - 7..Date.today).all
+ecb_rates = Rate.where(provider: "ECB").where(date: Date.today - 7..Date.today).all
+# Rebase both to EUR and compare overlapping quotes
+```
+
+**External check — use the `wise-api` skill** to compare against Wise mid-market rates. Sample a few major currency pairs (EUR/USD, EUR/GBP, EUR/JPY) and check deviation:
+
+| Deviation | Assessment |
+|-----------|-----------|
+| < 0.5% | Good — normal institutional vs real-time spread |
+| 0.5-1% | Acceptable for less-liquid pairs |
+| > 1% | Investigate — possible direction or unit error |
+| > 5% | Almost certainly a bug (e.g. base/quote inverted) |
+
+**What to look for:**
+- Rates that are the reciprocal of expected (base/quote swapped) — this was the HNB bug
+- Rates that are 10x or 100x off (unit multiplier not normalized)
+- Rates that match another provider exactly but on wrong dates (date parsing bug)
