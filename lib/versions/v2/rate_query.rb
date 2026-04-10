@@ -195,32 +195,35 @@ module Versions
           blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
         end
 
+        records = []
         emitted_quotes = Set.new
         blended.each do |r|
           next if quotes && !quotes.include?(r[:quote])
 
           emitted_quotes << r[:quote]
-          yield({ date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) })
+          records << { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))
           anchor_date = blended.map { |r| r[:date] }.max
           if anchor_date && !emitted_quotes.include?(base_peg.base)
             emitted_quotes << base_peg.base
-            yield({ date: anchor_date.to_s, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) })
+            records << { date: anchor_date.to_s, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) }
           end
         end
 
-        expand_pegs(blended, emitted_quotes, &block)
+        records.concat(pegs(blended, emitted_quotes))
+        records.sort_by! { |r| r[:quote] }
+        records.each(&block)
       end
 
-      def expand_pegs(blended, emitted_quotes)
-        return if providers
+      def pegs(blended, emitted_quotes)
+        return [] if providers
 
         reference_date = blended.map { |r| r[:date] }.max
-        return unless reference_date
+        return [] unless reference_date
 
-        Peg.all.each do |peg|
+        Peg.all.filter_map do |peg|
           next if peg.quote == base
           next if emitted_quotes.include?(peg.quote)
           next if quotes && !quotes.include?(peg.quote)
@@ -237,7 +240,7 @@ module Versions
             rate = anchor[:rate] * peg.rate
           end
 
-          yield({ date: date.to_s, base:, quote: peg.quote, rate: round(rate) })
+          { date: date.to_s, base:, quote: peg.quote, rate: round(rate) }
         end
       end
 

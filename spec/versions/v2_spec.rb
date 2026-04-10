@@ -329,6 +329,15 @@ describe Versions::V2 do
     _(records.first).must_include(:rate)
   end
 
+  it "returns rates in alphabetical order by quote" do
+    get "/rates"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+
+    _(quotes).must_equal(quotes.sort)
+  end
+
   it "excludes pegged currencies when providers filter is set" do
     get "/rates?providers=ecb"
 
