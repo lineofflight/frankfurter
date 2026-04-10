@@ -51,7 +51,11 @@ class Provider
         return [] unless payload.is_a?(Array)
 
         payload.flat_map do |day|
-          date = Date.parse(day["date"]) rescue (next [])
+          begin
+            date = Date.parse(day["date"])
+          rescue Date::Error
+            next []
+          end
           rates = day["rates"] || []
 
           rates.filter_map do |entry|
