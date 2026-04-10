@@ -67,9 +67,9 @@ bundle exec rake backfill[<key>]                      # Live backfill works
 
 **Dry-run the backfill before shipping.** VCR tests only cover narrow date ranges. A real backfill exercises chunked iteration, API rate limits, and date range constraints that specs won't catch. Test at least one full `backfill_range` chunk against the live API to confirm the adapter works end-to-end — especially to verify the API's maximum allowed date range matches your `backfill_range` setting.
 
-### 5. Sanity-check rates
+### 5. Sanity-check rates (before deploy)
 
-After backfill, compare the new provider's rates against an independent source to catch direction bugs (base/quote swapped), unit errors (per-100 not normalized), or stale data.
+After local backfill, compare the new provider's rates against an independent source **before pushing or deploying**. This catches direction bugs (base/quote swapped), unit errors (per-100 not normalized), or stale data before they reach production.
 
 **Quick check — cross-reference with ECB rates in the local DB:**
 

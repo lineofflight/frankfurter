@@ -82,6 +82,20 @@ Deviation: `abs(frankfurter - wise) / wise * 100`
 | > 0.5%   | Investigate — stale data or provider outlier             |
 | > 1.0%   | Likely data issue — check individual provider rates      |
 
+## Currency support
+
+Not all currencies work as `source`. Exotic currencies (MMK, NPR, KGS, etc.) often return `400 Bad Request` when used as source. **Always use a major currency (EUR, USD, GBP) as `source` and put the exotic currency in `target`.**
+
+```bash
+# WRONG — will 400:
+curl -s -H "Authorization: Bearer $WISE_API_KEY" \
+  'https://api.wise.com/v1/rates?source=MMK&target=USD'
+
+# RIGHT:
+curl -s -H "Authorization: Bearer $WISE_API_KEY" \
+  'https://api.wise.com/v1/rates?source=USD&target=MMK'
+```
+
 ## Notes
 
 - Wise rates are real-time; Frankfurter rates are daily institutional snapshots. Some spread is normal.
