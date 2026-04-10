@@ -17,7 +17,7 @@ task "rollups:rebuild", [:provider] do |_t, args|
 end
 
 def rebuild_rollups(source, provider = nil)
-  scope = provider ? {provider:} : {}
+  scope = provider ? { provider: } : {}
   label = provider || "all"
 
   DB.transaction do
@@ -37,6 +37,6 @@ def rebuild_rollups(source, provider = nil)
     )
 
     Log.info("#{label}: rebuilt #{DB[:weekly_rates].where(scope).count} weekly, " \
-             "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")
+      "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")
   end
 end
