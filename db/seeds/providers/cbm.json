@@ -1,0 +1,12 @@
+{
+  "key": "CBM",
+  "name": "Central Bank of Myanmar",
+  "country_code": "MM",
+  "rate_type": "reference rate",
+  "pivot_currency": "MMK",
+  "data_url": "https://forex.cbm.gov.mm/api/latest",
+  "terms_url": null,
+  "publish_time": 4,
+  "publish_days": "1-5",
+  "coverage_start": null
+}

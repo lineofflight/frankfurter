@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://forex.cbm.gov.mm/api/latest
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - forex.cbm.gov.mm
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 09 Apr 2026 04:00:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"info":"Central Bank of Myanmar","description":"Official Website of
+        Central Bank of Myanmar","timestamp":"1775721600","rates":{"USD":"2100.00","IDR":"12.29","KHR":"52.51","SGD":"1647.25","NZD":"1225.67","LKR":"6.66","CZK":"100.44","JPY":"1321.88","VND":"7.98","PHP":"35.16","KRW":"141.81","BRL":"411.70","HKD":"268.05","RSD":"20.87","MYR":"527.17","CAD":"1515.75","GBP":"2812.53","SEK":"225.47","NOK":"219.79","ILS":"679.41","DKK":"327.81","AUD":"1477.56","RUB":"26.82","KWD":"6851.55","INR":"22.65","BND":"1647.25","EUR":"2449.65","ZAR":"127.57","NPR":"14.16","CNY":"307.26","CHF":"2654.20","THB":"65.55","PKR":"7.53","KES":"16.27","BDT":"17.05","EGP":"39.44","SAR":"559.60","LAK":"9.52"}}'
+  recorded_at: Wed, 09 Apr 2026 04:00:00 GMT
+recorded_with: VCR 6.3.1
