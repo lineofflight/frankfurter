@@ -57,11 +57,11 @@ class Provider
           rates.filter_map do |entry|
             iso = entry.dig("currency", "iso3")
             unit = Integer(entry.dig("currency", "unit") || 1)
-            buy_str = entry["buy"]
-            sell_str = entry["sell"]
-            next unless buy_str&.match?(/\A[\d.]+\z/) && sell_str&.match?(/\A[\d.]+\z/)
+            buy = entry["buy"]
+            sell = entry["sell"]
+            next unless buy && sell
 
-            mid = (Float(buy_str) + Float(sell_str)) / 2.0
+            mid = (Float(buy) + Float(sell)) / 2.0
             rate = mid / unit
             next if rate.zero?
 
