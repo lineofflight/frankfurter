@@ -212,19 +212,18 @@ module Versions
           end
         end
 
-        collect_pegs(blended, emitted_quotes, records)
-
+        records.concat(pegs(blended, emitted_quotes))
         records.sort_by! { |r| r[:quote] }
         records.each(&block)
       end
 
-      def collect_pegs(blended, emitted_quotes, records)
-        return if providers
+      def pegs(blended, emitted_quotes)
+        return [] if providers
 
         reference_date = blended.map { |r| r[:date] }.max
-        return unless reference_date
+        return [] unless reference_date
 
-        Peg.all.each do |peg|
+        Peg.all.filter_map do |peg|
           next if peg.quote == base
           next if emitted_quotes.include?(peg.quote)
           next if quotes && !quotes.include?(peg.quote)
@@ -241,7 +240,7 @@ module Versions
             rate = anchor[:rate] * peg.rate
           end
 
-          records << { date: date.to_s, base:, quote: peg.quote, rate: round(rate) }
+          { date: date.to_s, base:, quote: peg.quote, rate: round(rate) }
         end
       end
 
