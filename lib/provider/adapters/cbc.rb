@@ -17,7 +17,7 @@ class Provider
       # Column index => [quote, base]
       # Most rates are quoted as foreign currency per 1 USD (quote=X, base=USD).
       # GBP, AUD, EUR are quoted as USD per 1 unit (quote=USD, base=X).
-      # Discontinued currencies (DEM, FRF, NLG) are excluded.
+      # Columns 15-17 (DEM, FRF, NLG) contain historical data pre-2002.
       COLUMNS = {
         1 => ["TWD", "USD"],
         2 => ["JPY", "USD"],
@@ -33,6 +33,9 @@ class Provider
         12 => ["MYR", "USD"],
         13 => ["PHP", "USD"],
         14 => ["USD", "EUR"],
+        15 => ["DEM", "USD"],
+        16 => ["FRF", "USD"],
+        17 => ["NLG", "USD"],
         18 => ["VND", "USD"],
       }.freeze
 

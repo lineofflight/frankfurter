@@ -163,6 +163,47 @@ class Provider < Sequel::Model(:providers)
         _(records.none? { |r| r[:quote] == "VND" }).must_equal(true)
       end
 
+      it "parses historical currency columns (DEM, FRF, NLG)" do
+        rows = [
+          [
+            "19930105",
+            "25.405",
+            "125.25",
+            "1.5499",
+            "7.7427",
+            "788.2",
+            "1.2766",
+            "1.6560",
+            "7.7200",
+            "0.6732",
+            "2048.0",
+            "25.550",
+            "2.5908",
+            "-",
+            "-",
+            "1.6255",
+            "5.5425",
+            "1.8258",
+            "-",
+          ],
+        ]
+
+        records = adapter.parse(rows)
+        dem = records.find { |r| r[:quote] == "DEM" }
+        frf = records.find { |r| r[:quote] == "FRF" }
+        nlg = records.find { |r| r[:quote] == "NLG" }
+
+        _(dem).wont_be_nil
+        _(dem[:base]).must_equal("USD")
+        _(dem[:rate]).must_equal(1.6255)
+        _(frf).wont_be_nil
+        _(frf[:base]).must_equal("USD")
+        _(frf[:rate]).must_equal(5.5425)
+        _(nlg).wont_be_nil
+        _(nlg[:base]).must_equal("USD")
+        _(nlg[:rate]).must_equal(1.8258)
+      end
+
       it "filters by date range" do
         rows = [
           ["20260201", "32.500", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
