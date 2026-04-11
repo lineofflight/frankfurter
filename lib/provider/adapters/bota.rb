@@ -12,7 +12,7 @@ class Provider
     # of buy/sell). Publishes 7 days a week.
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
-      EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
+      EXCLUDED_CURRENCIES = ["GOLD", "MZM", "ZWD", "CUC"].freeze
 
       class << self
         def backfill_range = 30
