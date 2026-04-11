@@ -44,6 +44,20 @@ class Provider
         "INR",
         "ILS",
         "ISK",
+        "ATS",
+        "BEF",
+        "DEM",
+        "ESP",
+        "FIM",
+        "FRF",
+        "GRD",
+        "IEP",
+        "ITL",
+        "NLG",
+        "PTE",
+        "SIT",
+        "ROL",
+        "TRL",
       ].freeze
 
       def fetch(after: nil, upto: nil)
