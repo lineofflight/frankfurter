@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                       xmlns:tns="http://servicios.bcn.gob.ni/">
+          <soap:Body>
+            <tns:RecuperaTC_Mes>
+              <tns:Ano>2026</tns:Ano>
+              <tns:Mes>3</tns:Mes>
+            </tns:RecuperaTC_Mes>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - '"http://servicios.bcn.gob.ni/RecuperaTC_Mes"'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - servicios.bcn.gob.ni
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><RecuperaTC_MesResponse
+        xmlns="http://servicios.bcn.gob.ni/"><RecuperaTC_MesResult><Detalle_TC xmlns=""><Tc><Fecha>2026-03-16</Fecha><Valor>36.6243</Valor><Ano>2026</Ano><Mes>3</Mes><Dia>16</Dia></Tc><Tc><Fecha>2026-03-17</Fecha><Valor>36.6243</Valor><Ano>2026</Ano><Mes>3</Mes><Dia>17</Dia></Tc><Tc><Fecha>2026-03-18</Fecha><Valor>36.6243</Valor><Ano>2026</Ano><Mes>3</Mes><Dia>18</Dia></Tc><Tc><Fecha>2026-03-19</Fecha><Valor>36.6243</Valor><Ano>2026</Ano><Mes>3</Mes><Dia>19</Dia></Tc><Tc><Fecha>2026-03-20</Fecha><Valor>36.6243</Valor><Ano>2026</Ano><Mes>3</Mes><Dia>20</Dia></Tc></Detalle_TC></RecuperaTC_MesResult></RecuperaTC_MesResponse></soap:Body></soap:Envelope>'
+  recorded_at: Mon, 24 Mar 2026 18:00:00 GMT
+recorded_with: VCR 6.3.1

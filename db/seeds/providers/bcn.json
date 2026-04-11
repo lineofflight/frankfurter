@@ -1,0 +1,12 @@
+{
+  "key": "BCN",
+  "name": "Banco Central de Nicaragua",
+  "country_code": "NI",
+  "rate_type": "reference rate",
+  "pivot_currency": "NIO",
+  "data_url": "https://www.bcn.gob.ni/estadisticas/mercados_cambiarios/tipo_cambio/cordoba_dolar",
+  "terms_url": null,
+  "publish_time": 14,
+  "publish_days": "1-5",
+  "coverage_start": "2012-01-01"
+}
