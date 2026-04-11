@@ -27,7 +27,7 @@ Required:
 
 Optional class methods (inside `class << self`):
 - `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call). The base class `fetch_each` uses this to iterate in windows.
-- `def api_key = ENV["X_API_KEY"] || raise(ApiKeyMissing)` — if the API requires authentication. Provider#backfill rescues `ApiKeyMissing` and skips unconfigured providers.
+- `def api_key = ENV["X_API_KEY"] || raise(Unavailable, "no API key")` — if the API requires authentication. This is not a blocker — implement the adapter regardless. It activates when the key is configured at deploy time.
 
 Notes:
 - Adapters have **no `key` or `name`** — Provider model owns identity. The adapter class name must match the provider key (e.g., `Provider::Adapters::ECB` for key `"ECB"`).
