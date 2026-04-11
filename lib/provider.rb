@@ -79,8 +79,8 @@ class Provider < Sequel::Model(:providers)
       db.run("PRAGMA optimize")
     end
     Log.info("#{key}: fetched no records") unless fetched
-  rescue Adapters::Adapter::ApiKeyMissing
-    Log.warn("#{key}: no api key, skipping")
+  rescue Adapters::Adapter::Unavailable => e
+    Log.warn("#{key}: #{e.message}, skipping")
   rescue *Adapters::Adapter::TRANSIENT_ERRORS => e
     Log.error("#{key}: #{e.class}")
   end

@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_ENV: test
+      OPENSSL_CONF: config/openssl_legacy.cnf
       TCMB_API_KEY: test
       FRED_API_KEY: test
     steps:

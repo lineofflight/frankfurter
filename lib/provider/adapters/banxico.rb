@@ -23,7 +23,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["BANXICO_API_KEY"] || raise(Adapter::ApiKeyMissing)
+        def api_key = ENV["BANXICO_API_KEY"] || raise(Adapter::Unavailable, "no API key")
       end
 
       def fetch(after: nil, upto: nil)

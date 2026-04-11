@@ -26,7 +26,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["BCCH_USER"] || raise(Adapter::ApiKeyMissing)
+        def api_key = ENV["BCCH_USER"] || raise(Adapter::Unavailable, "no API key")
       end
 
       def fetch(after: nil, upto: nil)

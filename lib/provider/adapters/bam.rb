@@ -12,7 +12,7 @@ class Provider
     class BAM < Adapter
       URL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement"
       class << self
-        def api_key = ENV["BAM_API_KEY"] || raise(Adapter::ApiKeyMissing)
+        def api_key = ENV["BAM_API_KEY"] || raise(Adapter::Unavailable, "no API key")
 
         def backfill_range = 7
       end

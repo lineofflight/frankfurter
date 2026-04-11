@@ -17,6 +17,8 @@ class Provider < Sequel::Model(:providers)
       let(:adapter) { BCN.new }
 
       it "fetches rates" do
+        skip "legacy TLS not configured" unless ENV["OPENSSL_CONF"]
+
         dataset = adapter.fetch(after: Date.new(2026, 3, 16), upto: Date.new(2026, 3, 20))
 
         _(dataset).wont_be_empty
@@ -26,6 +28,8 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "filters dates to requested range" do
+        skip "legacy TLS not configured" unless ENV["OPENSSL_CONF"]
+
         dataset = adapter.fetch(after: Date.new(2026, 3, 17), upto: Date.new(2026, 3, 19))
 
         dates = dataset.map { |r| r[:date] }

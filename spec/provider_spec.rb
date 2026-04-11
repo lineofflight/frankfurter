@@ -200,7 +200,7 @@ describe Provider do
     it "skips when api key is required but missing" do
       gated_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
-          raise Provider::Adapters::Adapter::ApiKeyMissing
+          raise Provider::Adapters::Adapter::Unavailable, "no API key"
         end
       end
 

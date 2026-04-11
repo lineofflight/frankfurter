@@ -3,7 +3,8 @@
 class Provider < Sequel::Model(:providers)
   module Adapters
     class Adapter
-      class ApiKeyMissing < StandardError; end
+      class Unavailable < StandardError
+      end
 
       TRANSIENT_ERRORS = [
         Errno::ECONNRESET,
