@@ -1,0 +1,17 @@
+[
+  { "iso_code": "DEM", "name": "Deutsche Mark", "symbol": "DM", "subunit_to_unit": 100, "iso_numeric": "276" },
+  { "iso_code": "FRF", "name": "French Franc", "symbol": "F", "subunit_to_unit": 100, "iso_numeric": "250" },
+  { "iso_code": "ITL", "name": "Italian Lira", "symbol": "₤", "subunit_to_unit": 1, "iso_numeric": "380" },
+  { "iso_code": "ESP", "name": "Spanish Peseta", "symbol": "₧", "subunit_to_unit": 100, "iso_numeric": "724" },
+  { "iso_code": "NLG", "name": "Dutch Guilder", "symbol": "ƒ", "subunit_to_unit": 100, "iso_numeric": "528" },
+  { "iso_code": "ATS", "name": "Austrian Schilling", "symbol": "öS", "subunit_to_unit": 100, "iso_numeric": "040" },
+  { "iso_code": "BEF", "name": "Belgian Franc", "symbol": "BF", "subunit_to_unit": 100, "iso_numeric": "056" },
+  { "iso_code": "FIM", "name": "Finnish Markka", "symbol": "mk", "subunit_to_unit": 100, "iso_numeric": "246" },
+  { "iso_code": "GRD", "name": "Greek Drachma", "symbol": "₯", "subunit_to_unit": 100, "iso_numeric": "300" },
+  { "iso_code": "IEP", "name": "Irish Pound", "symbol": "IR£", "subunit_to_unit": 100, "iso_numeric": "372" },
+  { "iso_code": "PTE", "name": "Portuguese Escudo", "symbol": "$", "subunit_to_unit": 100, "iso_numeric": "620" },
+  { "iso_code": "LUF", "name": "Luxembourg Franc", "symbol": "F", "subunit_to_unit": 100, "iso_numeric": "442" },
+  { "iso_code": "SIT", "name": "Slovenian Tolar", "symbol": "SIT", "subunit_to_unit": 100, "iso_numeric": "705" },
+  { "iso_code": "TRL", "name": "Turkish Lira (old)", "symbol": "₤", "subunit_to_unit": 1, "iso_numeric": "792" },
+  { "iso_code": "ROL", "name": "Romanian Leu (old)", "symbol": "L", "subunit_to_unit": 100, "iso_numeric": "642" }
+]
