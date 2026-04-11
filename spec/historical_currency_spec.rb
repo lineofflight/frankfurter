@@ -9,7 +9,8 @@ describe "Historical currencies" do
 
     seeds.each do |entry|
       currency = Money::Currency.find(entry["iso_code"])
-      _(currency).wont_be_nil "#{entry["iso_code"]} not registered"
+
+      _(currency).wont_be_nil("#{entry["iso_code"]} not registered")
       _(currency.name).must_equal(entry["name"])
     end
   end

@@ -173,6 +173,19 @@ rake backfill[ecb]   # Backfill a single provider
 
 See [.claude/skills/providers/SKILL.md](.claude/skills/providers/SKILL.md) for the full checklist and workflow.
 
+## Historical Currencies
+
+Pre-euro and pre-redenomination ISO 4217 codes are registered from
+`db/seeds/historical_currencies.json` at boot via `Money::Currency.register`.
+To add more historical codes, add entries to the seed file. When adding a new
+provider, check whether it serves historical currencies and note them in coverage
+research. To pick up previously-dropped records, re-backfill the provider from
+its `coverage_start`:
+
+```ruby
+Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
+```
+
 ## Development Notes
 
 - Ruby (see `Gemfile`)
