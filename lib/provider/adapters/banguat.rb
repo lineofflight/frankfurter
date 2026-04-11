@@ -7,10 +7,12 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco de Guatemala. Publishes daily reference exchange rates for GTQ/USD
-    # via a SOAP web service. The rate is GTQ per 1 USD, so base=USD, quote=GTQ.
-    # NOTE: Currently disabled — the SOAP endpoint rejects connections from
-    # certain datacenter IP ranges during TLS handshake.
+    # Banco de Guatemala. Publishes daily reference exchange rates for GTQ/USD via a SOAP web service. The rate is GTQ
+    # per 1 USD, so base=USD, quote=GTQ.
+    #
+    # NOTE: Currently disabled in production. Local requests succeed, but requests from the production server are reset
+    # by Banguat's edge before TLS handshake completion or a normal HTTP response. This appears to be an egress-network
+    # or source-IP policy issue rather than a Ruby/OpenSSL bug.
     class Banguat < Adapter
       ENDPOINT = URI("https://www.banguat.gob.gt/variables/ws/TipoCambio.asmx")
       class << self
