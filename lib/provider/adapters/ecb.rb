@@ -43,7 +43,10 @@ class Provider
         quote = row["CURRENCY"]
         return unless quote&.match?(/\A[A-Z]{3}\z/)
 
-        rate = Float(row["OBS_VALUE"])
+        value = row["OBS_VALUE"]
+        return unless value
+
+        rate = Float(value)
         date = Date.parse(row["TIME_PERIOD"])
 
         { date:, base: "EUR", quote:, rate: }
