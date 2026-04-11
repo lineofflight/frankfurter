@@ -48,7 +48,7 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 3, 24))
       end
 
-      it "excludes GOLD and defunct currencies but includes ATS and NLG" do
+      it "excludes GOLD and defunct currencies" do
         html = <<~HTML
           <html><body>
           <table><tbody>
@@ -69,13 +69,13 @@ class Provider < Sequel::Model(:providers)
 
         _(currencies).must_include("USD")
         _(currencies).must_include("EUR")
-        _(currencies).must_include("ATS")
-        _(currencies).must_include("NLG")
         _(currencies).wont_include("GOLD")
+        _(currencies).wont_include("ATS")
+        _(currencies).wont_include("NLG")
         _(currencies).wont_include("MZM")
         _(currencies).wont_include("ZWD")
         _(currencies).wont_include("CUC")
-        _(records.length).must_equal(4)
+        _(records.length).must_equal(2)
       end
 
       it "handles rates with commas in numbers" do
