@@ -7,12 +7,14 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banca d'Italia. Publishes daily exchange rates for 150+ currencies
-    # against the euro via the "terze valute" (third currencies) portal.
-    # Uses the dailyRates endpoint with currencyIsoCode=EUR to get all
-    # currencies quoted against EUR for a single date.
+    # Banca d'Italia. Publishes daily exchange rates for 150+ currencies against the euro via the "terze valute"
+    # (third currencies) portal. Uses the dailyRates endpoint with currencyIsoCode=EUR to get all currencies quoted
+    # against EUR for a single date.
     class BDI < Adapter
       URL = "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates"
+
+      # The KPW/EUR rates the API returns (~2.5-3.2) are useless. Exclude to polluting data.
+      EXCLUDED_CURRENCIES = ["KPW"].freeze
 
       class << self
         def backfill_range = 30
@@ -41,6 +43,7 @@ class Provider
         rows.filter_map do |row|
           code = row["ISO Code"]
           next unless code&.match?(/\A[A-Z]{3}\z/)
+          next if EXCLUDED_CURRENCIES.include?(code)
 
           rate_str = row["Rate"]
           next if rate_str.nil? || rate_str.strip == "N.A."
