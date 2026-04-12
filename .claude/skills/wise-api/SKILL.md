@@ -37,7 +37,7 @@ curl -s -H "Authorization: Bearer $WISE_API_KEY" \
 | Param    | Description                                    | Example                          |
 |----------|------------------------------------------------|----------------------------------|
 | `source` | Source currency (required)                      | `EUR`                            |
-| `target` | Target currency/currencies (required)           | `USD` or `USD,GBP,JPY`          |
+| `target` | Target currency/currencies (omit for all)       | `USD` or `USD,GBP,JPY`          |
 | `time`   | Single historical timestamp (ISO 8601)          | `2025-06-15T12:00:00`           |
 | `from`   | Period start (date or timestamp)                | `2025-06-01`                     |
 | `to`     | Period end (date or timestamp, tz offset ok)    | `2025-06-30T23:59:59+0100`      |
@@ -101,3 +101,4 @@ curl -s -H "Authorization: Bearer $WISE_API_KEY" \
 - Wise rates are real-time; Frankfurter rates are daily institutional snapshots. Some spread is normal.
 - For historical comparison, use `time` param with the date you're checking, not `from`/`to`.
 - This is for internal validation only, Wise is NOT a Frankfurter provider.
+- API docs: https://docs.wise.com/api-reference/rate
