@@ -3,7 +3,7 @@
   "name": "Banca d'Italia",
   "country_code": "IT",
   "pivot_currency": "EUR",
-  "data_url": "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/",
+  "data_url": "https://tassidicambio.bancaditalia.it/",
   "terms_url": null,
   "publish_time": 16,
   "publish_days": "1-5",
