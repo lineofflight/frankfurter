@@ -201,7 +201,8 @@ module Versions
           next if quotes && !quotes.include?(r[:quote])
 
           emitted_quotes << r[:quote]
-          records << { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          rate = snap_peg_rate(r[:quote]) || r[:rate]
+          records << { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(rate) }
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))
@@ -242,6 +243,15 @@ module Versions
 
           { date: date.to_s, base:, quote: peg.quote, rate: round(rate) }
         end
+      end
+
+      def snap_peg_rate(quote)
+        return if providers
+
+        peg = Peg.find(quote)
+        return unless peg && peg.base == effective_base
+
+        peg.rate / (base_peg ? base_peg.rate : 1.0)
       end
 
       def normalize_dates!(rows, date_col)

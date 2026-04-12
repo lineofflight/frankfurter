@@ -62,6 +62,40 @@ module Versions
       _(query.to_a.first[:date]).must_equal(friday.to_s)
     end
 
+    describe "with pegged currencies" do
+      # AED is pegged to USD at exactly 3.6725. When a provider reports EUR/AED
+      # and we query base=USD, the blender computes USD/AED via EUR cross rates,
+      # introducing rounding noise. The rate should snap to the exact peg value.
+      before do
+        date = Fixtures.latest_date
+        # ECB has EUR/USD in fixtures; add EUR/AED and EUR/SAR so the blender
+        # computes cross rates (e.g. EUR/AED ÷ EUR/USD), introducing rounding noise.
+        Rate.dataset.multi_insert([
+          { provider: "ECB", date:, base: "EUR", quote: "AED", rate: 3.97 },
+          { provider: "ECB", date:, base: "EUR", quote: "SAR", rate: 4.05 },
+        ])
+      end
+
+      it "snaps to exact peg rate when base matches peg anchor" do
+        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, base: "USD", quotes: "AED")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:rate]).must_equal(3.6725)
+      end
+
+      it "snaps cross-peg rates between two pegged currencies" do
+        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, base: "AED", quotes: "SAR")
+        results = query.to_a
+
+        _(results).wont_be_empty
+
+        expected = 3.75 / 3.6725
+
+        _(results.first[:rate]).must_be_close_to(expected, 0.0001)
+      end
+    end
+
     describe "peg gap filling" do
       # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
       # Add a provider that starts covering BTN only recently, leaving older dates
