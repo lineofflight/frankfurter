@@ -7,27 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0-beta.2] - 2026-04-14
+
 ### Added
 
-- BI (Bank Indonesia) provider
-- BOT (Bank of Thailand) provider
-- CNB (Czech National Bank) provider
-- DNB (Danmarks Nationalbank) provider
-- MAS (Monetary Authority of Singapore) provider
-- SARB (South African Reserve Bank) provider
-- BCU (Banco Central del Uruguay) provider
+- 15 new providers: BCN, BCU, BDI, BI, BNR, BOT, CBM, CBU, CNB, DNB, HNB, LB, MAS, MNB, NBK, NRB, SARB — bringing the total to 52
+- Historical currency support — pre-euro and pre-redenomination codes (DEM, FRF, NLG, CYP, etc.) now available where providers serve them
+- Peg metadata on `/v2/currencies` — pegged currencies show their anchor and fixed rate
+- `rate_type` and `country_code` fields on `/v2/providers`
 
 ### Changed
 
 - Renamed Bank of Tanzania provider key from BOT to BOTA
-- Extended historical coverage: BAM to 1999, BNM to 2006, BOTA to 1999, RBA to 2023
-- Refactored provider/adapter separation
+- Renamed National Bank of Moldova provider key from NBM to BNM
+- Replaced `description` with `rate_type` and `country_code` on `/v2/providers`
+- Pegged currency rates now snap to their exact peg rate
+- Extended historical coverage for several providers
 
 ### Fixed
 
 - CDN cache now purges after importing new rates
-- ReDoS in BCEAO HTML parser
-- CBA precious metal rates (per-gram to per-troy-ounce)
+- V2 rates now sorted by quote for deterministic output (#304)
+- Various adapter parsing and rate direction fixes (HNB, ECB, NRB, CBA)
 
 ## [2.0.0-beta.1] - 2026-04-02
 
@@ -79,6 +80,7 @@ The v1 API will remain available at `/v1/` endpoints. To migrate to `/v2`:
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.1...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.2...HEAD
+[2.0.0-beta.2]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.1...v2.0.0-beta.2
 [2.0.0-beta.1]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...v2.0.0-beta.1
 [1.0.0]: https://github.com/lineofflight/frankfurter/releases/tag/v1.0.0
