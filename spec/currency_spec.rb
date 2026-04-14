@@ -166,6 +166,31 @@ describe Currency do
     _(aed.start_date.to_s).must_equal("1997-11-02")
   end
 
+  it "extends end_date for pegged currency with stale provider data" do
+    db = Sequel::Model.db
+    # ANG is pegged to USD. Insert a stale ANG row (end_date in the past)
+    # but USD is current. The peg should extend ANG's end_date to match USD.
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "ANG", start_date: "1999-01-04", end_date: "2025-03-28")
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "BDI", iso_code: "ANG", start_date: "1999-01-04", end_date: "2025-03-28")
+
+    usd = Currency.find("USD")
+
+    # find
+    ang = Currency.find("ANG")
+
+    _(ang.end_date.to_s).must_equal(usd.end_date.to_s)
+
+    # all (scope=all)
+    ang_all = Currency.all.find { |c| c.iso_code == "ANG" }
+
+    _(ang_all.end_date.to_s).must_equal(usd.end_date.to_s)
+
+    # active
+    ang_active = Currency.active.find { |c| c.iso_code == "ANG" }
+
+    _(ang_active.end_date.to_s).must_equal(usd.end_date.to_s)
+  end
+
   it "formats pegged currency to hash" do
     bmd = Currency.find("BMD")
 

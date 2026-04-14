@@ -44,14 +44,7 @@ class Currency < Sequel::Model(:currencies)
       db_record = where(iso_code: code).first
 
       if db_record
-        if peg
-          db_record.instance_variable_set(:@peg, peg)
-          anchor = where(iso_code: peg.base).first
-          if anchor
-            peg_start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max.to_s
-            db_record.start_date = peg_start if peg_start < db_record.start_date.to_s
-          end
-        end
+        apply_peg(db_record, peg, where(iso_code: peg.base).first) if peg
         db_record
       elsif peg
         anchor = where(iso_code: peg.base).first
@@ -69,12 +62,7 @@ class Currency < Sequel::Model(:currencies)
       pegged = Peg.all.filter_map do |peg|
         existing = anchors[peg.quote]
         if existing
-          existing.instance_variable_set(:@peg, peg)
-          anchor = anchors[peg.base]
-          if anchor
-            peg_start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max.to_s
-            existing.start_date = peg_start if peg_start < existing.start_date.to_s
-          end
+          apply_peg(existing, peg, anchors[peg.base])
           nil
         else
           anchor = anchors[peg.base]
@@ -87,10 +75,18 @@ class Currency < Sequel::Model(:currencies)
       (db_currencies + pegged).sort_by(&:iso_code)
     end
 
+    def apply_peg(record, peg, anchor)
+      record.instance_variable_set(:@peg, peg)
+      return unless anchor
+
+      peg_start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max.to_s
+      record.start_date = peg_start if peg_start < record.start_date.to_s
+      record.end_date = anchor.end_date if anchor.end_date.to_s > record.end_date.to_s
+    end
+
     def new_pegged(peg, anchor)
-      start = [peg.since, Date.parse(anchor.start_date.to_s)].compact.max
-      c = new(iso_code: peg.quote, start_date: start, end_date: anchor.end_date)
-      c.instance_variable_set(:@peg, peg)
+      c = new(iso_code: peg.quote, start_date: anchor.start_date, end_date: anchor.end_date)
+      apply_peg(c, peg, anchor)
       c
     end
   end
