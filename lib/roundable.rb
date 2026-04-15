@@ -9,25 +9,19 @@
 #
 # https://en.wikipedia.org/wiki/Exchange_rate#Quotations
 module Roundable
-  def round(value, precision: nil)
-    decimal_places = roundable_decimal_places(value)
-    decimal_places = [decimal_places, precision].max if precision
-    Float(format("%<value>.#{decimal_places}f", value:))
-  end
-
-  def roundable_decimal_places(value)
+  def round(value)
     if value > 5000
-      0
+      value.round
     elsif value > 80
-      2
+      Float(format("%<value>.2f", value:))
     elsif value > 20
-      3
+      Float(format("%<value>.3f", value:))
     elsif value > 1
-      4
+      Float(format("%<value>.4f", value:))
     elsif value > 0.0001
-      5
+      Float(format("%<value>.5f", value:))
     else
-      6
+      Float(format("%<value>.6f", value:))
     end
   end
 end

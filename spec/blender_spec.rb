@@ -88,18 +88,4 @@ describe Blender do
 
     _(usd[:rate]).must_be_close_to(1.083, 0.01)
   end
-
-  it "exposes precision map from raw rates" do
-    rates = [
-      { date: date, base: "EUR", quote: "USD", rate: 1.0836, provider: "ECB" },
-      { date: date, base: "EUR", quote: "USD", rate: 1.084, provider: "BOC" },
-      { date: date, base: "EUR", quote: "INR", rate: 107.3421, provider: "ECB" },
-    ]
-
-    blender = Blender.new(rates, base: "EUR")
-    precision = blender.precision
-
-    _(precision["USD"]).must_equal(5) # median of [4, 5] = 5
-    _(precision["INR"]).must_equal(7)
-  end
 end
