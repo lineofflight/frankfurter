@@ -37,12 +37,19 @@ module Versions
           each_chunk(date_scope) do |chunk_range|
             ds = range_dataset
             date_col = ds.model.date_column
-            chunk = ds.between(chunk_range)
-            chunk = chunk.downsample(group) if group && !rollup?
-            rows = chunk.all
-            normalize_dates!(rows, date_col) if date_col != :date
-            rows.group_by { |r| r[:date] }.each do |_, group_rows|
-              emit_blended(group_rows, &block)
+
+            if rollup?
+              rows = ds.between(chunk_range).all
+              normalize_dates!(rows, date_col) if date_col != :date
+              rows.group_by { |r| r[:date] }.each do |_, group_rows|
+                emit_blended(group_rows, &block)
+              end
+            else
+              expanded = (chunk_range.begin - CarryForward::RANGE_LOOKBACK_DAYS)..chunk_range.end
+              rows = ds.between(expanded).naked.all
+              CarryForward.enrich(rows, range: chunk_range).each_value do |group_rows|
+                emit_blended(group_rows, &block)
+              end
             end
           end
         else

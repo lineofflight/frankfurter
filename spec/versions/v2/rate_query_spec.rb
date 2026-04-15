@@ -96,6 +96,44 @@ module Versions
       end
     end
 
+    describe "range carry-forward" do
+      # Insert Friday data from 5 providers + Saturday data from 1 weekend provider.
+      # Verify carry-forward gives Saturday enough providers for consensus.
+      before do
+        friday = Fixtures.preceding_friday(Fixtures.recent_sunday)
+        saturday = friday + 1
+        @friday = friday
+        @saturday = saturday
+
+        providers = ["ECB", "BOC", "BOJ", "FRED", "TCMB"]
+        providers.each do |p|
+          Rate.dataset.insert(date: friday, base: "EUR", quote: "XTS", rate: 1.10, provider: p)
+        end
+        Rate.dataset.insert(date: saturday, base: "EUR", quote: "XTS", rate: 1.11, provider: "BNM")
+      end
+
+      it "carries forward weekday providers into weekend blends" do
+        query = V2::RateQuery.new(from: @friday.to_s, to: @saturday.to_s)
+        results = query.to_a
+
+        saturday_results = results.select { |r| r[:date] == @saturday.to_s && r[:quote] == "XTS" }
+
+        _(saturday_results).wont_be_empty
+      end
+
+      it "does not carry forward beyond the lookback window" do
+        old_date = @saturday - 10
+        Rate.dataset.insert(date: old_date, base: "EUR", quote: "XTS", rate: 9.99, provider: "SARB")
+
+        query = V2::RateQuery.new(from: @friday.to_s, to: @saturday.to_s)
+        results = query.to_a
+
+        saturday_results = results.select { |r| r[:date] == @saturday.to_s && r[:quote] == "XTS" }
+        # Rate should be close to 1.10-1.11, not skewed by 9.99
+        _(saturday_results.first[:rate]).must_be_close_to(1.10, 0.05)
+      end
+    end
+
     describe "peg gap filling" do
       # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
       # Add a provider that starts covering BTN only recently, leaving older dates
