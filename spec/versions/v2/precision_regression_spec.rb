@@ -16,7 +16,7 @@ describe "Precision regression" do
   # Trailing zeros are significant here — if round(value, dp) equals value,
   # the value has at least dp effective decimal places.
   def effective_dp(roundable, value)
-    heuristic_dp = roundable.roundable_dp(value)
+    heuristic_dp = roundable.roundable_decimal_places(value)
     # Count dp from serialized form (JSON drops trailing zeros)
     serialized_dp = value.to_s.split(".").last&.length || 0
     # If the value naturally terminates before heuristic_dp (trailing zeros),
@@ -39,7 +39,7 @@ describe "Precision regression" do
     rates.each do |record|
       value = record["rate"]
       output_dp = effective_dp(roundable, value)
-      heuristic_dp = roundable.roundable_dp(value)
+      heuristic_dp = roundable.roundable_decimal_places(value)
 
       _(output_dp).must_be(
         :>=,
@@ -60,7 +60,7 @@ describe "Precision regression" do
     rates.each do |record|
       value = record["rate"]
       output_dp = effective_dp(roundable, value)
-      heuristic_dp = roundable.roundable_dp(value)
+      heuristic_dp = roundable.roundable_decimal_places(value)
 
       _(output_dp).must_be(
         :>=,

@@ -10,12 +10,12 @@
 # https://en.wikipedia.org/wiki/Exchange_rate#Quotations
 module Roundable
   def round(value, precision: nil)
-    dp = roundable_dp(value)
-    dp = [dp, precision].max if precision
-    Float(format("%<value>.#{dp}f", value:))
+    decimal_places = roundable_decimal_places(value)
+    decimal_places = [decimal_places, precision].max if precision
+    Float(format("%<value>.#{decimal_places}f", value:))
   end
 
-  def roundable_dp(value)
+  def roundable_decimal_places(value)
     if value > 5000
       0
     elsif value > 80

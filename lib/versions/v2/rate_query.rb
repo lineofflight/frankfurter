@@ -217,8 +217,8 @@ module Versions
 
           emitted_quotes << r[:quote]
           rate = snap_peg_rate(r[:quote]) || r[:rate]
-          dp = derive_dp(sig_digits, r[:quote], rate)
-          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate, precision: dp) }
+          decimal_places = derive_decimal_places(sig_digits, r[:quote], rate)
+          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate, precision: decimal_places) }
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))
@@ -269,7 +269,7 @@ module Versions
         peg.rate / (base_peg ? base_peg.rate : 1.0)
       end
 
-      def derive_dp(sig_digits, quote, value)
+      def derive_decimal_places(sig_digits, quote, value)
         sd = sig_digits[quote]
         return unless sd
 
