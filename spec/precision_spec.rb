@@ -35,6 +35,7 @@ describe Precision do
       ]
 
       result = Precision.derive(rates)
+
       _(result["INR"]).must_equal(5) # median of [4, 7, 5] = 5
     end
 
@@ -44,6 +45,7 @@ describe Precision do
       ]
 
       result = Precision.derive(rates)
+
       _(result["USD"]).must_equal(5)
     end
 
@@ -54,6 +56,7 @@ describe Precision do
       ]
 
       result = Precision.derive(rates)
+
       _(result["CHF"]).must_equal(4) # median of [4, 4] = 4
     end
   end

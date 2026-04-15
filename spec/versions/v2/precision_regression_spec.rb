@@ -32,6 +32,7 @@ describe "Precision regression" do
     roundable = Object.new.extend(Roundable)
 
     get "/rates"
+
     assert_predicate last_response, :ok?
 
     rates = JSON.parse(last_response.body)
@@ -39,8 +40,12 @@ describe "Precision regression" do
       value = record["rate"]
       output_dp = effective_dp(roundable, value)
       heuristic_dp = roundable.roundable_dp(value)
-      _(output_dp).must_be :>=, heuristic_dp,
-        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}"
+
+      _(output_dp).must_be(
+        :>=,
+        heuristic_dp,
+        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}",
+      )
     end
   end
 
@@ -48,6 +53,7 @@ describe "Precision regression" do
     roundable = Object.new.extend(Roundable)
 
     get "/rates?providers=ecb"
+
     assert_predicate last_response, :ok?
 
     rates = JSON.parse(last_response.body)
@@ -55,8 +61,12 @@ describe "Precision regression" do
       value = record["rate"]
       output_dp = effective_dp(roundable, value)
       heuristic_dp = roundable.roundable_dp(value)
-      _(output_dp).must_be :>=, heuristic_dp,
-        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}"
+
+      _(output_dp).must_be(
+        :>=,
+        heuristic_dp,
+        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}",
+      )
     end
   end
 end

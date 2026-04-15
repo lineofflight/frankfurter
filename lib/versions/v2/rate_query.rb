@@ -271,7 +271,7 @@ module Versions
 
       def derive_dp(sig_digits, quote, value)
         sd = sig_digits[quote]
-        return nil unless sd
+        return unless sd
 
         Precision.decimal_places(sd, value)
       end
