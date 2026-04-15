@@ -4,11 +4,11 @@ module Precision
   class << self
     def significant_digits(value)
       str = value.to_s
-      str = str.sub(/^-/, "")       # ignore sign
-      str = str.sub(/\.0$/, "")     # strip trailing .0 for integer-like floats
-      str = str.sub(/^0+\./, ".")   # strip leading zeros before decimal
-      str = str.delete(".")         # remove decimal point
-      str = str.sub(/^0+/, "")      # strip leading zeros (from 0.00xxx)
+      str = str.sub(/^-/, "")
+      str = str.sub(/\.0$/, "")
+      str = str.sub(/^0+\./, ".")
+      str = str.delete(".")
+      str = str.sub(/^0+/, "")
       str.length
     end
 
