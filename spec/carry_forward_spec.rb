@@ -16,6 +16,7 @@ describe CarryForward do
 
       _(result.size).must_equal(2)
       ecb = result.find { |r| r[:provider] == "ECB" }
+
       _(ecb[:date]).must_equal(Date.new(2024, 1, 5))
       _(ecb[:rate]).must_equal(1.08)
     end
