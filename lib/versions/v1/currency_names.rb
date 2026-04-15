@@ -10,7 +10,7 @@ module Versions
       def cache_key
         return if currencies.empty?
 
-        Digest::MD5.hexdigest(currencies.first.date.to_s)
+        Digest::MD5.hexdigest(currencies.first[:date].to_s)
       end
 
       def formatted
@@ -24,7 +24,7 @@ module Versions
       private
 
       def iso_codes
-        currencies.map(&:quote).append("EUR").sort
+        currencies.map { |c| c[:quote] }.append("EUR").sort
       end
 
       def currencies
@@ -32,7 +32,11 @@ module Versions
       end
 
       def find_currencies
-        Rate.where(provider: "ECB").latest.all
+        require "carry_forward"
+
+        today = Date.today
+        rows = Rate.where(provider: "ECB").where(date: (today - 14)..today).naked.all
+        CarryForward.latest(rows, date: today)
       end
     end
   end

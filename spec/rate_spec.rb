@@ -2,51 +2,56 @@
 
 require_relative "helper"
 require "rate"
+require "carry_forward"
 
 describe Rate do
-  describe ".latest" do
+  describe CarryForward, ".latest" do
     it "returns latest available rates on given date" do
       date = Fixtures.latest_date
-      data = Rate.latest(date)
+      rows = Rate.where(date: (date - 14)..date).naked.all
+      data = CarryForward.latest(rows, date:)
 
-      _(data.to_a.sample.date).must_equal(date)
+      _(data.sample[:date]).must_equal(date)
     end
 
     it "snaps to nearest prior date when requested date has no rates" do
       sunday = Fixtures.recent_sunday
       friday = Fixtures.preceding_friday(sunday)
-      data = Rate.where(provider: "ECB").latest(sunday)
+      rows = Rate.where(provider: "ECB", date: (sunday - 14)..sunday).naked.all
+      data = CarryForward.latest(rows, date: sunday)
 
-      _(data.map(&:date).uniq).must_equal([friday])
+      _(data.map { |r| r[:date] }.uniq).must_equal([friday])
     end
 
     it "includes each provider's most recent date" do
-      data = Rate.latest(Fixtures.latest_date)
-      providers = data.map(&:provider).uniq.sort
+      date = Fixtures.latest_date
+      rows = Rate.where(date: (date - 14)..date).naked.all
+      data = CarryForward.latest(rows, date:)
+      providers = data.map { |r| r[:provider] }.uniq.sort
 
       _(providers).must_include("ECB")
       _(providers).must_include("BOC")
     end
 
-    it "excludes providers more than 14 days behind the global max" do
+    it "excludes providers more than 14 days behind the target" do
       date = Fixtures.latest_date
       Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
-      Rate.dataset.insert(date: date - 21, base: "EUR", quote: "XTS", rate: 1.07, provider: "STALE")
 
-      data = Rate.latest(date)
-      providers = data.map(&:provider).uniq
+      rows = Rate.where(date: (date - 14)..date).naked.all
+      data = CarryForward.latest(rows, date:)
+      providers = data.map { |r| r[:provider] }.uniq
 
       _(providers).must_include("ECB")
       _(providers).wont_include("STALE")
     end
 
-    it "includes providers within 14 days of the global max" do
+    it "includes providers within 14 days of the target" do
       date = Fixtures.latest_date
       Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
-      Rate.dataset.insert(date: date - 17, base: "USD", quote: "XTS", rate: 0.91, provider: "FRED")
 
-      data = Rate.latest(date)
-      providers = data.map(&:provider).uniq
+      rows = Rate.where(date: (date - 14)..date).naked.all
+      data = CarryForward.latest(rows, date:)
+      providers = data.map { |r| r[:provider] }.uniq
 
       _(providers).must_include("ECB")
       _(providers).must_include("FRED")
@@ -57,22 +62,31 @@ describe Rate do
       older_date = date - 3
       Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", rate: 0.05, provider: "ECB")
 
-      data = Rate.latest(date).all
-      quotes = data.select { |r| r.provider == "ECB" }.map(&:quote)
+      rows = Rate.where(date: (date - 14)..date).naked.all
+      data = CarryForward.latest(rows, date:)
+      quotes = data.select { |r| r[:provider] == "ECB" }.map { |r| r[:quote] }
 
       _(quotes).must_include("PLN")
     end
 
     it "returns nothing if date predates dataset" do
-      _(Rate.latest(Date.parse("1901-01-01"))).must_be_empty
+      date = Date.parse("1901-01-01")
+      rows = Rate.where(date: (date - 14)..date).naked.all
+
+      _(CarryForward.latest(rows, date:)).must_be_empty
     end
 
     it "returns latest rates when client date is ahead of server" do
       future_date = Date.today + 1
-      data = Rate.latest(future_date)
+      rows = Rate.where(date: (future_date - 14)..future_date).naked.all
+      data = CarryForward.latest(rows, date: future_date)
 
       _(data).wont_be_empty
-      _(data.map(:date).uniq.sort).must_equal(Rate.latest.map(:date).uniq.sort)
+
+      today_rows = Rate.where(date: (Date.today - 14)..Date.today).naked.all
+      today_data = CarryForward.latest(today_rows, date: Date.today)
+
+      _(data.map { |r| r[:date] }.uniq.sort).must_equal(today_data.map { |r| r[:date] }.uniq.sort)
     end
   end
 
@@ -121,7 +135,8 @@ describe Rate do
   describe ".only" do
     it "returns only rate pairs involving the given currencies" do
       currencies = ["CAD", "USD"]
-      data = Rate.latest(Fixtures.latest_date).only(*currencies).all
+      date = Fixtures.latest_date
+      data = Rate.where(date: (date - 14)..date).only(*currencies).all
 
       data.each do |r|
         _([r.base, r.quote].any? { |c| currencies.include?(c) }).must_equal(true)
@@ -129,14 +144,16 @@ describe Rate do
     end
 
     it "includes rates from providers where currency appears as base" do
-      data = Rate.latest(Fixtures.latest_date).only("USD", "EUR").all
+      date = Fixtures.latest_date
+      data = Rate.where(date: (date - 14)..date).only("USD", "EUR").all
       providers = data.map(&:provider).uniq
 
       _(providers).must_include("BOC")
     end
 
     it "includes providers whose rates span both sides of the pair" do
-      data = Rate.latest(Fixtures.latest_date).only("JPY", "EUR").all
+      date = Fixtures.latest_date
+      data = Rate.where(date: (date - 14)..date).only("JPY", "EUR").all
       providers = data.map(&:provider).uniq
 
       _(providers).must_include("BOJ")

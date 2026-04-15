@@ -96,6 +96,23 @@ module Versions
       end
     end
 
+    it "uses target date for carried-forward quotes" do
+      # Fixtures have ECB/BOC/BOJ on business days only. On Saturday, carry-forward brings in Friday's rates.
+      # Without the target_date fix, quotes only present via carry-forward get Friday's date in the Saturday
+      # blend, producing duplicate (date, quote) pairs. Add a Saturday row from BOC so Saturday becomes a
+      # target date.
+      friday = Fixtures.preceding_friday(Fixtures.recent_sunday)
+      saturday = friday + 1
+      Rate.dataset.insert(date: saturday, base: "CAD", quote: "USD", rate: 0.74, provider: "BOC")
+
+      query = V2::RateQuery.new(from: friday.to_s, to: saturday.to_s)
+      results = query.to_a
+
+      pairs = results.map { |r| [r[:date], r[:quote]] }
+
+      _(pairs).must_equal(pairs.uniq)
+    end
+
     describe "peg gap filling" do
       # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
       # Add a provider that starts covering BTN only recently, leaving older dates
