@@ -24,6 +24,10 @@ describe Precision do
     it "counts digits in a high-precision rate" do
       _(Precision.significant_digits(107.3421)).must_equal(7)
     end
+
+    it "handles values Ruby serializes in scientific notation" do
+      _(Precision.significant_digits(0.0000655)).must_equal(3)
+    end
   end
 
   describe ".derive" do

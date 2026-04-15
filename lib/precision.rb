@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require "bigdecimal"
+
 module Precision
   class << self
     def significant_digits(value)
-      str = value.to_s
+      str = BigDecimal(value.to_s).to_s("F")
       str = str.sub(/^-/, "")
       str = str.sub(/\.0$/, "")
       str = str.sub(/^0+\./, ".")
