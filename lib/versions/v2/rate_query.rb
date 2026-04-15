@@ -47,8 +47,8 @@ module Versions
             else
               expanded = (chunk_range.begin - CarryForward::RANGE_LOOKBACK_DAYS)..chunk_range.end
               rows = ds.between(expanded).naked.all
-              CarryForward.enrich(rows, range: chunk_range).each_value do |group_rows|
-                emit_blended(group_rows, &block)
+              CarryForward.enrich(rows, range: chunk_range).each do |target_date, group_rows|
+                emit_blended(group_rows, target_date:, &block)
               end
             end
           end
@@ -198,12 +198,14 @@ module Versions
         end
       end
 
-      def emit_blended(rows, &block)
+      def emit_blended(rows, target_date: nil, &block)
         blended = Blender.new(rows, base: effective_base).blend
 
         if base_peg
           blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
         end
+
+        output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s
 
         records = []
         emitted_quotes = Set.new
@@ -212,27 +214,28 @@ module Versions
 
           emitted_quotes << r[:quote]
           rate = snap_peg_rate(r[:quote]) || r[:rate]
-          records << { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(rate) }
+          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))
-          anchor_date = blended.map { |r| r[:date] }.max
-          if anchor_date && !emitted_quotes.include?(base_peg.base)
+          if output_date && !emitted_quotes.include?(base_peg.base)
             emitted_quotes << base_peg.base
-            records << { date: anchor_date.to_s, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) }
+            records << { date: output_date, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) }
           end
         end
 
-        records.concat(pegs(blended, emitted_quotes))
+        records.concat(pegs(blended, emitted_quotes, output_date))
         records.sort_by! { |r| r[:quote] }
         records.each(&block)
       end
 
-      def pegs(blended, emitted_quotes)
+      def pegs(blended, emitted_quotes, output_date)
         return [] if providers
 
         reference_date = blended.map { |r| r[:date] }.max
         return [] unless reference_date
+
+        date_str = output_date || reference_date.to_s
 
         Peg.all.filter_map do |peg|
           next if peg.quote == base
@@ -241,17 +244,15 @@ module Versions
           next if reference_date < peg.since
 
           if peg.base == effective_base
-            date = reference_date
             rate = peg.rate / (base_peg&.rate || 1.0)
           else
             anchor = blended.find { |r| r[:quote] == peg.base }
             next unless anchor
 
-            date = anchor[:date]
             rate = anchor[:rate] * peg.rate
           end
 
-          { date: date.to_s, base:, quote: peg.quote, rate: round(rate) }
+          { date: date_str, base:, quote: peg.quote, rate: round(rate) }
         end
       end
 
