@@ -15,17 +15,17 @@ describe "Precision regression" do
   # places the value would have when formatted at the heuristic precision.
   # Trailing zeros are significant here — if round(value, dp) equals value,
   # the value has at least dp effective decimal places.
-  def effective_dp(roundable, value)
-    heuristic_dp = roundable.roundable_decimal_places(value)
+  def effective_decimal_places(roundable, value)
+    heuristic_decimal_places = roundable.roundable_decimal_places(value)
     # Count dp from serialized form (JSON drops trailing zeros)
-    serialized_dp = value.to_s.split(".").last&.length || 0
-    # If the value naturally terminates before heuristic_dp (trailing zeros),
-    # serialized_dp < heuristic_dp is acceptable — the value is exact.
-    # Check this by seeing if re-rounding at heuristic_dp changes the value.
-    formatted = format("%.#{heuristic_dp}f", value)
+    serialized_decimal_places = value.to_s.split(".").last&.length || 0
+    # If the value naturally terminates before heuristic_decimal_places (trailing zeros),
+    # serialized_decimal_places < heuristic_decimal_places is acceptable — the value is exact.
+    # Check this by seeing if re-rounding at heuristic_decimal_places changes the value.
+    formatted = format("%.#{heuristic_decimal_places}f", value)
     value_at_heuristic = formatted.to_f
     # If value equals its heuristic-rounded form, trailing zeros are the cause
-    (value - value_at_heuristic).abs < Float::EPSILON ? heuristic_dp : serialized_dp
+    (value - value_at_heuristic).abs < Float::EPSILON ? heuristic_decimal_places : serialized_decimal_places
   end
 
   it "does not reduce decimal places for any currency" do
@@ -38,13 +38,13 @@ describe "Precision regression" do
     rates = JSON.parse(last_response.body)
     rates.each do |record|
       value = record["rate"]
-      output_dp = effective_dp(roundable, value)
-      heuristic_dp = roundable.roundable_decimal_places(value)
+      output_decimal_places = effective_decimal_places(roundable, value)
+      heuristic_decimal_places = roundable.roundable_decimal_places(value)
 
-      _(output_dp).must_be(
+      _(output_decimal_places).must_be(
         :>=,
-        heuristic_dp,
-        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}",
+        heuristic_decimal_places,
+        "#{record["quote"]} rate #{value} has #{output_decimal_places} effective dp, expected >= #{heuristic_decimal_places}",
       )
     end
   end
@@ -59,13 +59,13 @@ describe "Precision regression" do
     rates = JSON.parse(last_response.body)
     rates.each do |record|
       value = record["rate"]
-      output_dp = effective_dp(roundable, value)
-      heuristic_dp = roundable.roundable_decimal_places(value)
+      output_decimal_places = effective_decimal_places(roundable, value)
+      heuristic_decimal_places = roundable.roundable_decimal_places(value)
 
-      _(output_dp).must_be(
+      _(output_decimal_places).must_be(
         :>=,
-        heuristic_dp,
-        "#{record["quote"]} rate #{value} has #{output_dp} effective dp, expected >= #{heuristic_dp}",
+        heuristic_decimal_places,
+        "#{record["quote"]} rate #{value} has #{output_decimal_places} effective dp, expected >= #{heuristic_decimal_places}",
       )
     end
   end
