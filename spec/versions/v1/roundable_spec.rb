@@ -32,4 +32,18 @@ describe Roundable do
   it "rounds values below 0.0001 to six decimal places" do
     _(round(0.0000655)).must_equal(0.000066)
   end
+
+  it "uses precision when it exceeds the heuristic" do
+    # INR ~107: heuristic gives 2 dp, precision 4 should win
+    _(round(107.3421, precision: 4)).must_equal(107.3421)
+  end
+
+  it "uses heuristic when it exceeds precision" do
+    # USD ~1.08: heuristic gives 4 dp, precision 2 should lose
+    _(round(1.0836, precision: 2)).must_equal(1.0836)
+  end
+
+  it "ignores nil precision" do
+    _(round(107.3421, precision: nil)).must_equal(107.34)
+  end
 end

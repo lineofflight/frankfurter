@@ -8,6 +8,7 @@ require "monthly_rate"
 require "roundable"
 require "blender"
 require "carry_forward"
+require "precision"
 require "money/currency"
 require "peg"
 
@@ -199,7 +200,9 @@ module Versions
       end
 
       def emit_blended(rows, target_date: nil, &block)
-        blended = Blender.new(rows, base: effective_base).blend
+        blender = Blender.new(rows, base: effective_base)
+        blended = blender.blend
+        sig_digits = rollup? ? {} : blender.precision
 
         if base_peg
           blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
@@ -214,7 +217,8 @@ module Versions
 
           emitted_quotes << r[:quote]
           rate = snap_peg_rate(r[:quote]) || r[:rate]
-          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
+          decimal_places = derive_decimal_places(sig_digits, r[:quote], rate)
+          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate, precision: decimal_places) }
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))
@@ -263,6 +267,13 @@ module Versions
         return unless peg && peg.base == effective_base
 
         peg.rate / (base_peg ? base_peg.rate : 1.0)
+      end
+
+      def derive_decimal_places(sig_digits, quote, value)
+        sd = sig_digits[quote]
+        return unless sd
+
+        Precision.decimal_places(sd, value)
       end
 
       def normalize_dates!(rows, date_col)
