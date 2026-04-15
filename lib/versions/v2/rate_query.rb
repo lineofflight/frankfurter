@@ -202,7 +202,7 @@ module Versions
       def emit_blended(rows, target_date: nil, &block)
         blender = Blender.new(rows, base: effective_base)
         blended = blender.blend
-        sig_digits = blender.precision
+        sig_digits = rollup? ? {} : blender.precision
 
         if base_peg
           blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
