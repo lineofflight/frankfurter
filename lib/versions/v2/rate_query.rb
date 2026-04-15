@@ -7,6 +7,7 @@ require "weekly_rate"
 require "monthly_rate"
 require "roundable"
 require "blender"
+require "carry_forward"
 require "money/currency"
 require "peg"
 
@@ -45,7 +46,9 @@ module Versions
             end
           end
         else
-          emit_blended(raw_dataset.latest(date_scope).all, &block)
+          window = raw_dataset.where(date: (date_scope - CarryForward::LATEST_LOOKBACK_DAYS)..date_scope)
+          rows = CarryForward.latest(window.naked.all, date: date_scope)
+          emit_blended(rows, &block)
         end
       end
 
@@ -64,7 +67,7 @@ module Versions
         if date_scope.is_a?(Range)
           ds.where(date: date_scope).max(:date)
         else
-          ds.latest(date_scope).max(:date)
+          ds.where(date: (date_scope - CarryForward::LATEST_LOOKBACK_DAYS)..date_scope).max(:date)
         end
       end
 

@@ -26,11 +26,13 @@ module Versions
 
         def fetch_data
           require "rate"
+          require "carry_forward"
 
-          scope = Rate.where(provider: "ECB").latest(date)
+          date_val = date || Date.today
+          scope = Rate.where(provider: "ECB").where(date: (date_val - 14)..date_val)
           scope = scope.only(*(symbols + [base])) if symbols
 
-          scope.naked
+          CarryForward.latest(scope.naked.all, date: date_val)
         end
       end
     end
