@@ -16,7 +16,7 @@ class Provider
 
         first = true
         (after..end_date).each do |date|
-          next if date.saturday? || date.sunday?
+          next if date.sunday?
 
           sleep(0.2) unless first
           first = false

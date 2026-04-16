@@ -6,7 +6,7 @@
   "pivot_currency": "BRL",
   "data_url": "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/",
   "terms_url": null,
-  "publish_time": 19,
+  "publish_time": 16,
   "publish_days": "1-5",
   "coverage_start": "2000-01-01"
 }
