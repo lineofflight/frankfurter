@@ -29,6 +29,10 @@ class Provider
       SDMX_URL = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D..DEM.AA.AC.000"
       TITLE_MULTIPLIER = %r{/\s*([\d\s]+?)\s+[A-Z]{3}\s*=}
 
+      class << self
+        def backfill_range = 1826 # ~5 years per chunk to avoid ~200 MB single-fetch responses
+      end
+
       # Per-currency multiplier batch sizes from the BBK_TITLE field of each series in
       # the BBEX3 D..DEM.AA.AC.000 dataflow (e.g. "100 ATS = x DEM", "1000 ITL = x DEM").
       # Values are invariant across the 1948-1998 AA series — verified against the
