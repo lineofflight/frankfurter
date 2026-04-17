@@ -14,6 +14,10 @@ class Provider
       SESSION = "0900"
       HEADERS = { "Accept" => "application/vnd.BNM.API.v1+json" }.freeze
 
+      class << self
+        def backfill_range = 30
+      end
+
       def fetch(after: nil, upto: nil)
         start_date = Date.parse(after.to_s)
         end_date = upto || Date.today
