@@ -29,6 +29,10 @@ class Provider
       SDMX_URL = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D..DEM.AA.AC.000"
       TITLE_MULTIPLIER = %r{/\s*([\d\s]+?)\s+[A-Z]{3}\s*=}
 
+      # Per-currency multiplier batch sizes from the BBK_TITLE field of each series in
+      # the BBEX3 D..DEM.AA.AC.000 dataflow (e.g. "100 ATS = x DEM", "1000 ITL = x DEM").
+      # Values are invariant across the 1948-1998 AA series — verified against the
+      # recorded VCR cassette and validated at runtime by parse_title_multiplier.
       MULTIPLIERS = {
         "ATS" => 100,
         "BEF" => 100,
@@ -87,7 +91,8 @@ class Provider
 
         title_multiplier = parse_title_multiplier(row["BBK_TITLE"])
         if title_multiplier && title_multiplier != multiplier
-          raise "BBK: title multiplier mismatch for #{code}: table=#{multiplier}, title=#{title_multiplier}"
+          raise "BBK: title multiplier mismatch for #{code} on #{row["TIME_PERIOD"]}: " \
+            "table=#{multiplier}, title=#{title_multiplier} (title: #{row["BBK_TITLE"].inspect})"
         end
 
         rate = Float(value) / multiplier
