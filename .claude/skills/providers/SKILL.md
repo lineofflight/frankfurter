@@ -24,6 +24,10 @@ Inherit from `Provider::Adapters::Adapter`. See any existing adapter for the pat
 Required:
 - `fetch(after: nil, upto: nil)` — fetches from the source API, returns an array of records
 - Each record: `{ date:, base:, quote:, rate: }` (no `provider:` — the Provider model stamps that during import)
+- **Rate direction**: match the provider's native convention. `pivot_currency` may appear as either `base` or `quote` depending on the source — don't invert.
+  - ECB publishes `1 EUR = X foreign`, pivot EUR goes in `base` (see `lib/provider/adapters/ecb.rb`).
+  - NBG and BBK publish `1 foreign = X pivot`, pivot goes in `quote` (see `lib/provider/adapters/nbg.rb` and `lib/provider/adapters/bbk.rb`).
+  - Store what the provider returns. Inverting in the adapter invites direction bugs and diverges from the blender's expectations.
 
 Optional class methods (inside `class << self`):
 - `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call). The base class `fetch_each` uses this to iterate in windows.
@@ -90,6 +94,6 @@ ecb_rates = Rate.where(provider: "ECB").where(date: Date.today - 7..Date.today).
 | > 5% | Almost certainly a bug (e.g. base/quote inverted) |
 
 **What to look for:**
-- Rates that are the reciprocal of expected (base/quote swapped) — this was the HNB bug
+- Rates that are the reciprocal of expected (base/quote swapped) — this was the HNB bug — see 'Rate direction' principle above
 - Rates that are 10x or 100x off (unit multiplier not normalized)
 - Rates that match another provider exactly but on wrong dates (date parsing bug)
