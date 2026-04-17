@@ -1,66 +1,73 @@
 # frozen_string_literal: true
 
+require "json"
 require "net/http"
-require "ox"
 
 require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banca Națională a Moldovei (BNM). Publishes daily rates for 30+ currencies against MDL.
-    # Date-parameterized XML endpoint, one request per day.
+    # Bank Negara Malaysia daily exchange rates. Data available from 2006-01-03.
+    # Historical rates are fetched per-currency per-month.
     class BNM < Adapter
-      URL = "https://www.bnm.md/en/official_exchange_rates"
-
-      class << self
-        def backfill_range = 30
-      end
+      BASE_URL = "https://api.bnm.gov.my/public/exchange-rate"
+      SESSION = "0900"
+      HEADERS = { "Accept" => "application/vnd.BNM.API.v1+json" }.freeze
 
       def fetch(after: nil, upto: nil)
+        start_date = Date.parse(after.to_s)
         end_date = upto || Date.today
-        dataset = []
-
-        first = true
-        (after..end_date).each do |date|
-          next if date.saturday? || date.sunday?
-
-          sleep(0.5) unless first
-          first = false
-
-          dataset.concat(fetch_date(date))
-        end
-
-        dataset
-      end
-
-      def parse(xml)
-        doc = Ox.load(xml)
-        val_curs = doc.locate("ValCurs").first
-        return [] unless val_curs
-
-        date_str = val_curs[:Date]
-        return [] unless date_str
-
-        date = Date.strptime(date_str, "%d.%m.%Y")
-
-        val_curs.locate("Valute").filter_map do |v|
-          code = v.locate("CharCode").first&.text
-          next unless code&.match?(/\A[A-Z]{3}\z/)
-
-          nominal = v.locate("Nominal").first&.text.to_f
-          value = v.locate("Value").first&.text.to_f
-          next if value.zero? || nominal.zero?
-
-          { date:, base: code, quote: "MDL", rate: value / nominal }
-        end
+        currencies = fetch_currencies
+        currencies.flat_map { |code| fetch_currency(code, start_date, end_date) }
       end
 
       private
 
-      def fetch_date(date)
-        url = URI(URL)
-        url.query = URI.encode_www_form(get_xml: 1, date: date.strftime("%d.%m.%Y"))
-        parse(Net::HTTP.get(url))
+      def fetch_currencies
+        uri = URI("#{BASE_URL}?session=#{SESSION}")
+        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+          http.get("#{uri.path}?#{uri.query}", HEADERS)
+        end
+        data = JSON.parse(response.body)
+        data["data"].map { |item| item["currency_code"] }
+      end
+
+      def fetch_currency(code, start_date, end_date)
+        records = []
+        each_month(start_date, end_date) do |year, month|
+          uri = URI("#{BASE_URL}/#{code}/year/#{year}/month/#{month}?session=#{SESSION}")
+          response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+            http.get("#{uri.path}?#{uri.query}", HEADERS)
+          end
+          data = JSON.parse(response.body)
+          currency_data = data["data"]
+          next if currency_data.nil? || currency_data.is_a?(Array)
+
+          unit = currency_data["unit"] || 1
+          rates = currency_data["rate"]
+          rates = [rates] unless rates.is_a?(Array)
+
+          rates.each do |rate|
+            mid = rate["middle_rate"]
+            next unless mid
+
+            date = Date.parse(rate["date"])
+            next if date > end_date
+
+            records << { date:, base: code, quote: "MYR", rate: mid / unit }
+          end
+
+          sleep(1)
+        end
+        records
+      end
+
+      def each_month(start_date, end_date)
+        date = Date.new(start_date.year, start_date.month, 1)
+        while date <= end_date
+          yield date.year, date.month
+          date = date.next_month
+        end
       end
     end
   end

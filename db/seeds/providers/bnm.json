@@ -1,12 +1,11 @@
 {
   "key": "BNM",
-  "name": "Banca Națională a Moldovei",
-  "country_code": "MD",
-  "rate_type": "official rate",
-  "pivot_currency": "MDL",
-  "data_url": "https://www.bnm.md/en/official_exchange_rates",
+  "name": "Bank Negara Malaysia",
+  "country_code": "MY",
+  "pivot_currency": "MYR",
+  "data_url": "https://www.bnm.gov.my/exchange-rates",
   "terms_url": null,
-  "publish_time": 13,
+  "publish_time": 4,
   "publish_days": "1-5",
-  "coverage_start": "1999-01-04"
+  "coverage_start": "2006-01-03"
 }
