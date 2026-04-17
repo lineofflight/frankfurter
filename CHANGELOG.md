@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Deutsche Bundesbank (BBK) as historical provider — daily pre-euro Frankfurt fixings for 18 currencies, 1948-06-21 through 1998-12-30
+
 ### Fixed
 
 - Restored Bank Negara Malaysia (BNM) provider that was inadvertently removed when the National Bank of Moldova key was renamed to BNM. Moldova's key is now NBM again.

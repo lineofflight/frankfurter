@@ -13,10 +13,13 @@ describe "bin/schedule --dry-run" do
   let(:cron_lines) { output.lines.select { |l| l.start_with?("cron:") } }
 
   let(:enabled_count) { Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) } }
+  let(:scheduled_count) do
+    Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) && p.publish_time && p.publish_days }
+  end
 
-  it "schedules all enabled providers for startup and cron" do
+  it "schedules all enabled providers for startup and only configured providers for cron" do
     _(startup_lines.size).must_equal(enabled_count)
-    _(cron_lines.size).must_equal(enabled_count)
+    _(cron_lines.size).must_equal(scheduled_count)
   end
 
   it "generates valid cron expressions" do
