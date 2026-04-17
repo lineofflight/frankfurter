@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Restored Bank Negara Malaysia (BNM) provider that was inadvertently removed when the National Bank of Moldova key was renamed to BNM. Moldova's key is now NBM again.
+
 ## [2.0.0-beta.2] - 2026-04-14
 
 ### Added
@@ -19,7 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Renamed Bank of Tanzania provider key from BOT to BOTA
-- Renamed National Bank of Moldova provider key from NBM to BNM
 - Replaced `description` with `rate_type` and `country_code` on `/v2/providers`
 - Pegged currency rates now snap to their exact peg rate
 - Extended historical coverage for several providers
