@@ -13,16 +13,42 @@ class Provider
     # Post-1999 BBK data mirrors ECB and is intentionally excluded by the hardcoded
     # SERIES_TYPE=AA filter in SDMX_URL.
     #
-    # The SDMX-CSV response is semicolon-delimited. Rates are quoted per unit batch
-    # (e.g. "100 ATS = x DEM", "1 000 ITL = x DEM", "1 USD = x DEM"); the multiplier is
-    # only embedded in the free-text BBK_TITLE column (BBK_UNIT_MULT is always 0 for
-    # this dataflow), so we parse it out and normalize to "1 quote = rate DEM".
+    # The SDMX-CSV response is semicolon-delimited. Rates are published per unit batch
+    # (e.g. "100 ATS = x DEM", "1 000 ITL = x DEM", "1 USD = x DEM") — the multiplier is
+    # only embedded in the free-text BBK_TITLE column (BBK_UNIT_MULT is always 0 for this
+    # dataflow). We hardcode a per-currency multiplier table (MULTIPLIERS) as the source
+    # of truth and keep the regex parse (TITLE_MULTIPLIER) as a runtime guard that raises
+    # if the published title ever contradicts the table.
+    #
+    # Records are returned in BBK's native direction — foreign currency as base, DEM as
+    # quote — matching the convention used by other pivot-in-quote adapters (e.g. NBG).
     #
     # Attribution required: "Quelle: Deutsche Bundesbank" / "Source: Deutsche Bundesbank".
     # Terms: https://www.bundesbank.de/de/startseite/benutzerhinweise/nutzungsbedingungen-fuer-den-allgemeinen-gebrauch-der-website-763554
     class BBK < Adapter
       SDMX_URL = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D..DEM.AA.AC.000"
       TITLE_MULTIPLIER = %r{/\s*([\d\s]+?)\s+[A-Z]{3}\s*=}
+
+      MULTIPLIERS = {
+        "ATS" => 100,
+        "BEF" => 100,
+        "CAD" => 1,
+        "CHF" => 100,
+        "DKK" => 100,
+        "ESP" => 100,
+        "FIM" => 100,
+        "FRF" => 100,
+        "GBP" => 1,
+        "IEP" => 1,
+        "ITL" => 1000,
+        "JPY" => 100,
+        "LUF" => 100,
+        "NLG" => 100,
+        "NOK" => 100,
+        "PTE" => 100,
+        "SEK" => 100,
+        "USD" => 1,
+      }.freeze
 
       def fetch(after: nil, upto: nil)
         url = URI(SDMX_URL)
@@ -49,23 +75,32 @@ class Provider
         return unless row["BBK_STD_FREQ"] == "D"
         return unless row["BBK_ERX_PARTNER_CURRENCY"] == "DEM"
 
-        quote = row["BBK_STD_CURRENCY"]
-        return unless quote&.match?(/\A[A-Z]{3}\z/)
+        code = row["BBK_STD_CURRENCY"]
+        return unless code&.match?(/\A[A-Z]{3}\z/)
 
         value = row["OBS_VALUE"]
         return if value.nil? || value.strip.empty? || value.strip == "."
 
-        rate = Float(value) / multiplier(row["BBK_TITLE"])
+        multiplier = MULTIPLIERS.fetch(code) do
+          raise "BBK: unknown multiplier for #{code}"
+        end
+
+        title_multiplier = parse_title_multiplier(row["BBK_TITLE"])
+        if title_multiplier && title_multiplier != multiplier
+          raise "BBK: title multiplier mismatch for #{code}: table=#{multiplier}, title=#{title_multiplier}"
+        end
+
+        rate = Float(value) / multiplier
         date = Date.parse(row["TIME_PERIOD"])
 
-        { date:, base: "DEM", quote:, rate: }
+        { date:, base: code, quote: "DEM", rate: }
       end
 
-      def multiplier(title)
-        return 1 unless title
+      def parse_title_multiplier(title)
+        return unless title
 
         match = title.match(TITLE_MULTIPLIER)
-        return 1 unless match
+        return unless match
 
         Integer(match[1].gsub(/\s+/, ""))
       end
