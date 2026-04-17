@@ -14,9 +14,16 @@ Base: `https://api.wise.com/v1/rates`
 ### Current rates
 
 ```bash
+# Single pair
 curl -s -H "Authorization: Bearer $WISE_API_KEY" \
-  'https://api.wise.com/v1/rates?source=EUR&target=USD,GBP,JPY' | jq
+  'https://api.wise.com/v1/rates?source=EUR&target=USD' | jq
+
+# All targets for a source (omit target entirely)
+curl -s -H "Authorization: Bearer $WISE_API_KEY" \
+  'https://api.wise.com/v1/rates?source=EUR' | jq
 ```
+
+**`target` only accepts a single currency.** Comma-separated lists (`target=USD,GBP,JPY`) return `400 Bad Request`. For multiple pairs from the same source, **omit `target` to get all ~163 currencies in one call** and filter the response locally. Loop per-pair only as a last resort.
 
 ### Historical rate at a specific time
 
@@ -37,7 +44,7 @@ curl -s -H "Authorization: Bearer $WISE_API_KEY" \
 | Param    | Description                                    | Example                          |
 |----------|------------------------------------------------|----------------------------------|
 | `source` | Source currency (required)                      | `EUR`                            |
-| `target` | Target currency/currencies (omit for all)       | `USD` or `USD,GBP,JPY`          |
+| `target` | Single target currency (omit for all)           | `USD`                            |
 | `time`   | Single historical timestamp (ISO 8601)          | `2025-06-15T12:00:00`           |
 | `from`   | Period start (date or timestamp)                | `2025-06-01`                     |
 | `to`     | Period end (date or timestamp, tz offset ok)    | `2025-06-30T23:59:59+0100`      |
@@ -65,12 +72,13 @@ Always returns an array. Historical series returns one entry per group interval.
 ## Comparing with Frankfurter
 
 ```bash
-# Frankfurter blended
+# Frankfurter blended (multi-target OK here)
 curl -s 'http://localhost:8080/v2/rates?base=EUR&quotes=USD,GBP,JPY' | jq
 
-# Wise current
+# Wise current: one call for all targets, filter locally
 curl -s -H "Authorization: Bearer $WISE_API_KEY" \
-  'https://api.wise.com/v1/rates?source=EUR&target=USD,GBP,JPY' | jq
+  'https://api.wise.com/v1/rates?source=EUR' \
+  | jq '.[] | select(.target | IN("USD","GBP","JPY"))'
 ```
 
 Deviation: `abs(frankfurter - wise) / wise * 100`
