@@ -1,0 +1,12 @@
+{
+  "key": "BBK",
+  "name": "Deutsche Bundesbank",
+  "country_code": "DE",
+  "rate_type": "historical Frankfurt fixing",
+  "pivot_currency": "DEM",
+  "data_url": "https://www.bundesbank.de/dynamic/action/en/statistics/time-series-databases/time-series-databases/745582/745582",
+  "terms_url": "https://www.bundesbank.de/de/startseite/benutzerhinweise/nutzungsbedingungen-fuer-den-allgemeinen-gebrauch-der-website-763554",
+  "publish_time": null,
+  "publish_days": null,
+  "coverage_start": "1948-06-21"
+}
