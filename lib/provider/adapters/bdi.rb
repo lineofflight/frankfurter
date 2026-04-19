@@ -13,9 +13,6 @@ class Provider
     class BDI < Adapter
       URL = "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates"
 
-      # The KPW/EUR rates the API returns (~2.5-3.2) are useless. Exclude to polluting data.
-      EXCLUDED_CURRENCIES = ["KPW"].freeze
-
       class << self
         def backfill_range = 30
       end
@@ -43,7 +40,6 @@ class Provider
         rows.filter_map do |row|
           code = row["ISO Code"]
           next unless code&.match?(/\A[A-Z]{3}\z/)
-          next if EXCLUDED_CURRENCIES.include?(code)
 
           rate_str = row["Rate"]
           next if rate_str.nil? || rate_str.strip == "N.A."
