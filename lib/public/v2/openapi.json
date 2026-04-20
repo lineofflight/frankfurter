@@ -333,6 +333,11 @@
           "terms_url": { "type": ["string", "null"], "format": "uri", "description": "Link to terms of use" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
+          "publishes_missed": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Expected publish days elapsed since end_date, excluding end_date and today. Null when the provider has no scheduled cadence."
+          },
           "currencies": {
             "type": "array",
             "items": { "type": "string" },
