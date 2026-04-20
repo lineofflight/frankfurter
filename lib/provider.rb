@@ -47,6 +47,22 @@ class Provider < Sequel::Model(:providers)
     Date.parse(date) if date
   end
 
+  def publishes_missed(reference_date: Date.today)
+    return unless publish_days
+
+    last = end_date
+    return 0 unless last
+
+    wdays = parse_publish_days(publish_days)
+    date = Date.parse(last) + 1
+    count = 0
+    while date < reference_date
+      count += 1 if wdays.include?(date.wday)
+      date += 1
+    end
+    count
+  end
+
   def backfill(after: last_synced || coverage_start)
     if after && after >= Date.today
       Log.info("#{key}: up to date")
@@ -86,6 +102,15 @@ class Provider < Sequel::Model(:providers)
   end
 
   private
+
+  def parse_publish_days(spec)
+    if spec.include?("-")
+      from, to = spec.split("-").map(&:to_i)
+      (from..to).to_a
+    else
+      [spec.to_i]
+    end
+  end
 
   def refresh_rollups(dates)
     refresh_rollup(:weekly_rates, Bucket.week, dates)

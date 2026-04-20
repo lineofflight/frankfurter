@@ -157,6 +157,7 @@ module Versions
           terms_url: provider.terms_url,
           start_date: provider.start_date,
           end_date: provider.end_date,
+          publishes_missed: provider.publishes_missed,
           currencies: provider.currency_coverages.map(&:iso_code).sort,
         }
       end

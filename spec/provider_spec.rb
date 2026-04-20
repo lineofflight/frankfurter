@@ -32,6 +32,77 @@ describe Provider do
     end
   end
 
+  describe "#publishes_missed" do
+    let(:mon_fri) do
+      Provider.new do |p|
+        p.key = "EXAMPLE"
+        p.name = "Example"
+        p.publish_days = "1-5"
+      end
+    end
+
+    it "returns nil when publish_days is nil" do
+      provider = build_provider(publish_days: nil)
+
+      provider.stub(:end_date, "2026-04-01") do
+        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_be_nil
+      end
+    end
+
+    it "returns 0 when end_date is nil" do
+      mon_fri.stub(:end_date, nil) do
+        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+      end
+    end
+
+    it "returns 0 when end_date is yesterday and no publish days have elapsed" do
+      # Friday 2026-04-17, reference Monday 2026-04-20: (Fri, Mon) contains only Sat/Sun.
+      mon_fri.stub(:end_date, "2026-04-17") do
+        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+      end
+    end
+
+    it "counts weekdays missed between end_date and reference" do
+      # Last update Monday 2026-04-13, reference Friday 2026-04-17: Tue, Wed, Thu = 3 missed.
+      mon_fri.stub(:end_date, "2026-04-13") do
+        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
+      end
+    end
+
+    it "ignores weekends for Mon-Fri providers" do
+      # (2026-04-10 Fri, 2026-04-20 Mon): Mon-Fri 13-17 = 5 weekdays (18-19 weekend, 11-12 weekend).
+      mon_fri.stub(:end_date, "2026-04-10") do
+        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(5)
+      end
+    end
+
+    it "counts every day for providers publishing 0-6" do
+      provider = build_provider(publish_days: "0-6")
+
+      # (2026-04-10, 2026-04-20) = 9 days
+      provider.stub(:end_date, "2026-04-10") do
+        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(9)
+      end
+    end
+
+    it "counts only Mondays for weekly providers" do
+      weekly = build_provider(publish_days: "1")
+
+      # End_date Mon 2026-04-06, reference Fri 2026-04-24: Mondays in (6, 24) are 13, 20 = 2.
+      weekly.stub(:end_date, "2026-04-06") do
+        _(weekly.publishes_missed(reference_date: Date.new(2026, 4, 24))).must_equal(2)
+      end
+    end
+
+    def build_provider(publish_days:)
+      Provider.new do |p|
+        p.key = "EXAMPLE"
+        p.name = "Example"
+        p.publish_days = publish_days
+      end
+    end
+  end
+
   describe "#backfill" do
     let(:provider) { Provider[key: "BCB"].dup }
     let(:fetched_params) { [] }

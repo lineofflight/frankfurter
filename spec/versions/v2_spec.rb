@@ -382,6 +382,16 @@ describe Versions::V2 do
     _(ecb).wont_include("description")
   end
 
+  it "includes publishes_missed per provider" do
+    get "/providers"
+
+    ecb = json.find { |p| p["key"] == "ECB" }
+
+    _(ecb).must_include("publishes_missed")
+    _(ecb["publishes_missed"]).must_be_kind_of(Integer)
+    _(ecb["publishes_missed"]).must_be(:>=, 0)
+  end
+
   it "excludes providers without rates" do
     get "/providers"
 
