@@ -111,6 +111,7 @@ module Versions
 
       r.is("providers") do
         r.get do
+          response.cache_control(public: true, max_age: 3600)
           providers
         end
       end
