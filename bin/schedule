@@ -21,17 +21,14 @@ Provider.all.shuffle.each do |provider|
   end
 end
 
-# Schedule each provider based on its publish window
+# Schedule each provider based on its publish_schedule cron expression.
 Provider.all.each do |provider|
-  next unless provider.publish_time && provider.publish_days
-
-  hours = [provider.publish_time, provider.publish_time + 1, provider.publish_time + 2].map { |h| h % 24 }
-  cron = "*/30 #{hours.join(",")} * * #{provider.publish_days}"
+  next unless provider.publish_schedule
 
   if dry_run
-    puts "cron: #{cron} backfill[#{provider.key.downcase}]"
+    puts "cron: #{provider.publish_schedule} backfill[#{provider.key.downcase}]"
   else
-    scheduler.cron(cron, overlap: false) do
+    scheduler.cron(provider.publish_schedule, overlap: false) do
       provider.backfill
     end
   end
