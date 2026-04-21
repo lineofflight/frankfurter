@@ -16,18 +16,23 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { IMF.new }
 
-      it "fetches rates" do
+      it "fetches rates across both Currency blocks in the TSV response" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
+        dates = dataset.map { |r| r[:date] }.uniq
 
-        _(dataset).wont_be_empty
+        _(dates).must_include(Date.new(2026, 3, 17))
+        _(dates.size).must_be(:>, 11)
       end
 
-      it "fetches multiple currencies per date" do
+      it "fetches multiple currencies per date without duplicating records" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
         dates = dataset.map { |r| r[:date] }.uniq
         sample = dataset.select { |r| r[:date] == dates.first }
 
         _(sample.size).must_be(:>, 1)
+
+        keys = dataset.map { |r| [r[:date], r[:base], r[:quote]] }
+        _(keys.size).must_equal(keys.uniq.size)
       end
 
       it "parses indirect quotes with (1) suffix" do
