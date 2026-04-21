@@ -64,72 +64,168 @@ describe Provider do
   end
 
   describe "#publishes_missed" do
-    let(:mon_fri) do
+    def build_provider(schedule, cadence: "daily")
       Provider.new do |p|
         p.key = "EXAMPLE"
         p.name = "Example"
-        p.publish_days = "1-5"
+        p.publish_schedule = schedule
+        p.publish_cadence = cadence if schedule
       end
     end
 
-    it "returns nil when publish_days is nil" do
-      provider = build_provider(publish_days: nil)
+    it "returns nil when publish_schedule is nil" do
+      provider = build_provider(nil, cadence: nil)
 
       provider.stub(:end_date, "2026-04-01") do
         _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_be_nil
       end
     end
 
-    it "returns 0 when end_date is nil" do
-      mon_fri.stub(:end_date, nil) do
-        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+    it "returns nil when end_date is nil" do
+      provider = build_provider("*/30 14-16 * * 1-5")
+
+      provider.stub(:end_date, nil) do
+        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_be_nil
       end
     end
 
-    it "returns 0 when end_date is yesterday and no publish days have elapsed" do
-      # Friday 2026-04-17, reference Monday 2026-04-20: (Fri, Mon) contains only Sat/Sun.
-      mon_fri.stub(:end_date, "2026-04-17") do
-        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+    it "raises ArgumentError when publish_cadence is unrecognised" do
+      bad = build_provider("*/30 14-16 * * 1-5", cadence: "biweekly")
+
+      bad.stub(:end_date, "2026-04-01") do
+        _ { bad.publishes_missed(reference_date: Date.new(2026, 4, 20)) }.must_raise(ArgumentError)
       end
     end
 
-    it "counts weekdays missed between end_date and reference" do
-      # Last update Monday 2026-04-13, reference Friday 2026-04-17: Tue, Wed, Thu = 3 missed.
-      mon_fri.stub(:end_date, "2026-04-13") do
-        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
+    describe "with daily cadence, Mon-Fri publishing (ECB-style)" do
+      let(:mon_fri) { build_provider("*/30 14-16 * * 1-5") }
+
+      it "returns 0 when end_date is Friday and reference is the following Monday" do
+        # Fri 2026-04-17 to Mon 2026-04-20 exclusive: only Sat 18 and Sun 19 sit between — neither is a publish day.
+        mon_fri.stub(:end_date, "2026-04-17") do
+          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+        end
+      end
+
+      it "counts weekdays missed between end_date and reference" do
+        # Last update Mon 2026-04-13, reference Fri 2026-04-17 exclusive: Tue 14, Wed 15, Thu 16 = 3.
+        mon_fri.stub(:end_date, "2026-04-13") do
+          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
+        end
+      end
+
+      it "ignores weekends" do
+        # Fri 2026-04-10 exclusive to Mon 2026-04-20 exclusive: Mon-Fri 13,14,15,16,17 = 5.
+        mon_fri.stub(:end_date, "2026-04-10") do
+          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(5)
+        end
       end
     end
 
-    it "ignores weekends for Mon-Fri providers" do
-      # (2026-04-10 Fri, 2026-04-20 Mon): Mon-Fri 13-17 = 5 weekdays (18-19 weekend, 11-12 weekend).
-      mon_fri.stub(:end_date, "2026-04-10") do
-        _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(5)
+    describe "with daily cadence, seven-day publishing" do
+      let(:daily) { build_provider("*/30 14-16 * * *") }
+
+      it "counts every day between end_date and reference" do
+        # (2026-04-10, 2026-04-20) exclusive = 9 days.
+        daily.stub(:end_date, "2026-04-10") do
+          _(daily.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(9)
+        end
       end
     end
 
-    it "counts every day for providers publishing 0-6" do
-      provider = build_provider(publish_days: "0-6")
+    describe "with daily cadence, Mondays-only cron" do
+      let(:mondays) { build_provider("*/30 21-23 * * 1") }
 
-      # (2026-04-10, 2026-04-20) = 9 days
-      provider.stub(:end_date, "2026-04-10") do
-        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(9)
+      it "counts only Mondays between end_date and reference" do
+        # Mon 2026-04-06 exclusive to Fri 2026-04-24 exclusive: Mondays are 13, 20 = 2.
+        mondays.stub(:end_date, "2026-04-06") do
+          _(mondays.publishes_missed(reference_date: Date.new(2026, 4, 24))).must_equal(2)
+        end
       end
     end
 
-    it "counts only Mondays for weekly providers" do
-      weekly = build_provider(publish_days: "1")
+    describe "with weekly cadence (FRED-style, Monday publishing covers prior ISO week)" do
+      let(:fred) { build_provider("*/30 21-23 * * 1", cadence: "weekly") }
 
-      # End_date Mon 2026-04-06, reference Fri 2026-04-24: Mondays in (6, 24) are 13, 20 = 2.
-      weekly.stub(:end_date, "2026-04-06") do
-        _(weekly.publishes_missed(reference_date: Date.new(2026, 4, 24))).must_equal(2)
+      it "returns 0 when end_date is in the week FRED's last batch covered" do
+        # Today 2026-04-21 (Tue). Last Monday fire Apr 20 covers prior ISO week Apr 13-19.
+        # end_date = 2026-04-19 → same ISO week bucket as Apr 13 → 0 missed.
+        fred.stub(:end_date, "2026-04-19") do
+          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(0)
+        end
+      end
+
+      it "returns 0 when end_date's ISO week matches expected coverage bucket" do
+        # end_date = Saturday 2026-04-18 (same ISO week as Apr 13-19). Still 0 missed.
+        fred.stub(:end_date, "2026-04-18") do
+          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(0)
+        end
+      end
+
+      it "returns 1 when end_date is one ISO week behind expected" do
+        # end_date in week Apr 6-12; expected = week Apr 13-19 → 1 missed.
+        fred.stub(:end_date, "2026-04-12") do
+          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(1)
+        end
+      end
+
+      it "returns 0 on Sunday before Monday batch arrives (expected is 2 weeks ago)" do
+        # Today Sun 2026-04-19. Last Mon fire Apr 13 covers prior week Apr 6-12.
+        # end_date = Apr 12 (covered) → 0.
+        fred.stub(:end_date, "2026-04-12") do
+          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 19))).must_equal(0)
+        end
+      end
+
+      it "reports 1 missed on Monday morning when prior week's batch did not arrive" do
+        # Today Mon 2026-04-20 (FRED's first publish day of this ISO week).
+        # end_date Sun 2026-04-12 = end of ISO week Apr 6-12; expected = ISO week Apr 13-19 → 1 missed.
+        fred.stub(:end_date, "2026-04-12") do
+          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(1)
+        end
       end
     end
 
-    def build_provider(publish_days:)
-      Provider.new do |p|
-        p.key = "EXAMPLE"
-        p.name = "Example"
-        p.publish_days = publish_days
+    describe "with monthly cadence (HKMA-style, day-of-month publishing covers prior month)" do
+      let(:hkma) { build_provider("*/30 1-10 3-12 * *", cadence: "monthly") }
+
+      it "returns 0 when current with March data and today is past April's window" do
+        hkma.stub(:end_date, "2026-03-31") do
+          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+        end
+      end
+
+      it "returns 0 when current with March data and today is before April's window" do
+        hkma.stub(:end_date, "2026-03-31") do
+          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 2))).must_equal(0)
+        end
+      end
+
+      it "returns 0 when last business day is not last calendar day (March 30 edge)" do
+        # Nov 30 2025 was a Sunday; last HKMA date was Nov 29. Should still count as Nov covered.
+        hkma.stub(:end_date, "2025-11-29") do
+          _(hkma.publishes_missed(reference_date: Date.new(2025, 12, 15))).must_equal(0)
+        end
+      end
+
+      it "returns 1 when April batch did not arrive and today is past May's window" do
+        hkma.stub(:end_date, "2026-03-31") do
+          _(hkma.publishes_missed(reference_date: Date.new(2026, 5, 15))).must_equal(1)
+        end
+      end
+
+      it "returns 2 when two monthly batches are missed" do
+        hkma.stub(:end_date, "2026-01-31") do
+          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(2)
+        end
+      end
+
+      it "reports 1 missed on the first publish day of the window when prior month did not arrive" do
+        # Today Apr 3 = first day of HKMA's publish window (DOM 3-12).
+        # end_date Feb 28; expected = March → 1 missed.
+        hkma.stub(:end_date, "2026-02-28") do
+          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 3))).must_equal(1)
+        end
       end
     end
   end

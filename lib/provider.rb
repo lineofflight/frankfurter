@@ -3,6 +3,7 @@
 require "bucket"
 require "cache"
 require "db"
+require "fugit"
 require "json"
 require "log"
 require "money/currency"
@@ -48,19 +49,22 @@ class Provider < Sequel::Model(:providers)
   end
 
   def publishes_missed(reference_date: Date.today)
-    return unless publish_days
+    return unless publish_schedule
+    return unless end_date
 
-    last = end_date
-    return 0 unless last
+    cron = Fugit::Cron.parse(publish_schedule)
+    last_date = Date.parse(end_date)
 
-    wdays = parse_publish_days(publish_days)
-    date = Date.parse(last) + 1
-    count = 0
-    while date < reference_date
-      count += 1 if wdays.include?(date.wday)
-      date += 1
+    case publish_cadence
+    when "daily"
+      count_fire_days(cron, last_date, reference_date)
+    when "weekly"
+      count_missed_buckets(cron, last_date, reference_date, :week)
+    when "monthly"
+      count_missed_buckets(cron, last_date, reference_date, :month)
+    else
+      raise ArgumentError, "#{key}: unknown publish_cadence #{publish_cadence.inspect}"
     end
-    count
   end
 
   def backfill(after: last_synced || coverage_start)
@@ -103,13 +107,52 @@ class Provider < Sequel::Model(:providers)
 
   private
 
-  def parse_publish_days(spec)
-    if spec.include?("-")
-      from, to = spec.split("-").map(&:to_i)
-      (from..to).to_a
-    else
-      [spec.to_i]
+  def count_fire_days(cron, last_date, reference_date)
+    count = 0
+    ((last_date + 1)..(reference_date - 1)).each do |date|
+      count += 1 if cron_fires_on?(cron, date)
     end
+    count
+  end
+
+  def cron_fires_on?(cron, date)
+    start = Time.utc(date.year, date.month, date.day) - 1
+    eod = Time.utc(date.year, date.month, date.day, 23, 59, 59).to_i
+    cron.next_time(start).to_i <= eod
+  end
+
+  def count_missed_buckets(cron, last_date, reference_date, granularity)
+    today_utc = Time.utc(reference_date.year, reference_date.month, reference_date.day, 23, 59, 59)
+    prev_fire = cron.previous_time(today_utc)
+    return 0 unless prev_fire
+
+    prev_fire_date = Date.new(prev_fire.year, prev_fire.month, prev_fire.day)
+    expected_data_end = bucket_start(prev_fire_date, granularity) - 1
+    expected_bucket = bucket_start(expected_data_end, granularity)
+    our_bucket = bucket_start(last_date, granularity)
+    return 0 if our_bucket >= expected_bucket
+
+    count_buckets_between(our_bucket, expected_bucket, granularity)
+  end
+
+  def bucket_start(date, granularity)
+    case granularity
+    when :week  then date - (date.cwday - 1)
+    when :month then Date.new(date.year, date.month, 1)
+    end
+  end
+
+  def count_buckets_between(from_bucket, to_bucket, granularity)
+    count = 0
+    cursor = from_bucket
+    while cursor < to_bucket
+      cursor = case granularity
+      when :week  then cursor + 7
+      when :month then cursor.next_month
+      end
+      count += 1
+    end
+    count
   end
 
   def refresh_rollups(dates)
