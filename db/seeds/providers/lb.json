@@ -5,7 +5,7 @@
   "pivot_currency": "LTL",
   "data_url": "https://www.lb.lt/webservices/FxRates/FxRates.asmx",
   "terms_url": null,
-  "publish_time": 14,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 14-16 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1994-04-01"
 }

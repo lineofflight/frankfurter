@@ -6,7 +6,7 @@
   "pivot_currency": "BYN",
   "data_url": "https://www.nbrb.by/engl/statistics/rates/ratesdaily.asp",
   "terms_url": null,
-  "publish_time": 9,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 9-11 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2016-07-01"
 }

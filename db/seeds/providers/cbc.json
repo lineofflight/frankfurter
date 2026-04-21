@@ -6,7 +6,7 @@
   "pivot_currency": "USD",
   "data_url": "https://www.cbc.gov.tw/en/lp-4237-2.html",
   "terms_url": null,
-  "publish_time": 8,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1993-01-05"
 }

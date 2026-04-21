@@ -6,7 +6,7 @@
   "pivot_currency": "MXN",
   "data_url": "https://www.banxico.org.mx/SieAPIRest/service/v1/",
   "terms_url": "https://www.banxico.org.mx/footer-en/terms-and-conditions.html",
-  "publish_time": 18,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 18-20 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1991-11-12"
 }

@@ -6,7 +6,7 @@
   "pivot_currency": "CLP",
   "data_url": "https://si3.bcentral.cl/Siete/es/Siete/API",
   "terms_url": null,
-  "publish_time": 16,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 16-18 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1990-01-02"
 }

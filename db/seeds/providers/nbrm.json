@@ -5,7 +5,7 @@
   "pivot_currency": "MKD",
   "data_url": "https://www.nbrm.mk",
   "terms_url": null,
-  "publish_time": 10,
-  "publish_days": "0-6",
+  "publish_schedule": "*/30 10-12 * * *",
+  "publish_cadence": "daily",
   "coverage_start": "1993-01-01"
 }

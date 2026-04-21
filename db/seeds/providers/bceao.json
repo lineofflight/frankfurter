@@ -5,7 +5,7 @@
   "pivot_currency": "XOF",
   "data_url": "https://www.bceao.int/fr/cours/cours-de-reference-des-principales-devises-contre-Franc-CFA",
   "terms_url": "https://www.bceao.int/fr/mentions-legales",
-  "publish_time": 10,
-  "publish_days": "0-5",
+  "publish_schedule": "*/30 10-12 * * 0-5",
+  "publish_cadence": "daily",
   "coverage_start": "2014-01-02"
 }

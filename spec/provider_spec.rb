@@ -17,6 +17,26 @@ describe Provider do
       _(columns).wont_include(:publish_time)
       _(columns).wont_include(:publish_days)
     end
+
+    it "seeds every provider with publish_schedule, publish_cadence, and valid cron" do
+      require "fugit"
+      dir = File.expand_path("../db/seeds/providers", __dir__)
+      Dir["#{dir}/*.json"].each do |path|
+        data = JSON.parse(File.read(path))
+
+        _(data).must_include("publish_schedule")
+        _(data).must_include("publish_cadence")
+        _(data).wont_include("publish_time")
+        _(data).wont_include("publish_days")
+        _([nil, "daily", "weekly", "monthly"]).must_include(data["publish_cadence"])
+        _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
+        next if data["publish_schedule"].nil?
+
+        parsed = Fugit::Cron.parse(data["publish_schedule"])
+
+        _(parsed).wont_be_nil("#{File.basename(path)}: invalid cron #{data["publish_schedule"].inspect}")
+      end
+    end
   end
 
   describe "#adapter" do
