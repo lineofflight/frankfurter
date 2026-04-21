@@ -8,6 +8,17 @@ require "provider/adapters/adapter"
 describe Provider do
   let(:provider) { Provider.first }
 
+  describe "schema" do
+    let(:columns) { Provider.db.schema(:providers).map(&:first) }
+
+    it "has publish_schedule, publish_cadence, and no publish_time or publish_days" do
+      _(columns).must_include(:publish_schedule)
+      _(columns).must_include(:publish_cadence)
+      _(columns).wont_include(:publish_time)
+      _(columns).wont_include(:publish_days)
+    end
+  end
+
   describe "#adapter" do
     it "finds adapter by key" do
       stub_adapter = Class.new(Provider::Adapters::Adapter)
