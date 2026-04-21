@@ -139,8 +139,8 @@ describe "Rollup tables" do
 
   describe "boundary bucket inclusion" do
     it "monthly grouped query includes partial first-month bucket" do
-      # A 20-day range starting mid-month should include both months
-      start_date = Fixtures.latest_date - 20
+      # A 40-day range is guaranteed to cross at least one month boundary
+      start_date = Fixtures.latest_date - 40
       end_date = Fixtures.latest_date
       query = Versions::V2::RateQuery.new(from: start_date.to_s, to: end_date.to_s, group: "month")
       dates = query.to_a.map { |r| r[:date] }.uniq

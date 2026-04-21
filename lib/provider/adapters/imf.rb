@@ -109,34 +109,31 @@ class Provider
       def parse(tsv)
         return [] if tsv.nil? || tsv.strip.empty?
 
-        lines = tsv.lines.map(&:chomp)
+        records = []
+        dates = nil
 
-        # Find header row with dates
-        header_index = lines.index { |l| l.start_with?("Currency") }
-        return [] unless header_index
-
-        # Parse dates from header columns
-        headers = lines[header_index].split("\t")
-        dates = headers[1..].map do |h|
-          Date.parse(h.strip)
-        end
-
-        # Each subsequent row is a currency with rates across dates
-        lines[(header_index + 1)..].flat_map do |line|
+        tsv.each_line(chomp: true) do |line|
           next if line.strip.empty?
+
+          if line.start_with?("Currency\t")
+            headers = line.split("\t")
+            dates = headers[1..].map { |h| Date.parse(h.strip) }
+            next
+          end
+
+          next unless dates
 
           cols = line.split("\t")
           currency_name = cols[0]&.strip
           next unless currency_name
 
-          # Check for (1) suffix indicating USD-per-unit quote
           indirect = currency_name.end_with?("(1)")
           clean_name = currency_name.delete_suffix("(1)").strip.downcase
           iso = CURRENCY_MAP[clean_name]
           next unless iso
           next if iso == "USD"
 
-          cols[1..].zip(dates).filter_map do |value, date|
+          cols[1..].zip(dates).each do |value, date|
             next unless date
 
             cleaned = value&.tr(",", "")&.gsub(/[^0-9.\-]/, "")
@@ -145,13 +142,15 @@ class Provider
             rate = Float(cleaned)
             next if rate.zero?
 
-            if indirect
+            records << if indirect
               { date:, base: iso, quote: "USD", rate: }
             else
               { date:, base: "USD", quote: iso, rate: }
             end
           end
-        end.compact
+        end
+
+        records
       end
 
       private

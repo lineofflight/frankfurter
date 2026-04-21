@@ -16,18 +16,24 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { IMF.new }
 
-      it "fetches rates" do
+      it "fetches rates across both Currency blocks in the TSV response" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
+        dates = dataset.map { |r| r[:date] }.uniq
 
-        _(dataset).wont_be_empty
+        _(dates).must_include(Date.new(2026, 3, 17))
+        _(dates.size).must_be(:>, 11)
       end
 
-      it "fetches multiple currencies per date" do
+      it "fetches multiple currencies per date without duplicating records" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
         dates = dataset.map { |r| r[:date] }.uniq
         sample = dataset.select { |r| r[:date] == dates.first }
 
         _(sample.size).must_be(:>, 1)
+
+        keys = dataset.map { |r| [r[:date], r[:base], r[:quote]] }
+
+        _(keys.size).must_equal(keys.uniq.size)
       end
 
       it "parses indirect quotes with (1) suffix" do
@@ -77,6 +83,47 @@ class Provider < Sequel::Model(:providers)
         records = adapter.parse(tsv)
 
         _(records.none? { |r| r[:base] == "USD" && r[:quote] == "USD" }).must_equal(true)
+      end
+
+      it "parses Continued blocks with their own date header" do
+        tsv = <<~TSV
+          Representative Exchange Rates for Selected Currencies for March 2026
+          Currency\tMarch 02, 2026\tMarch 03, 2026
+          Chinese yuan\t6.882900\t6.897100
+          U.S. dollar\t1.000000\t1.000000
+
+          Representative Exchange Rates for Selected Currencies for March 2026 Continued
+
+          Currency\tMarch 17, 2026\tMarch 18, 2026
+          Chinese yuan\t6.888300\t6.875600
+          U.S. dollar\t1.000000\t1.000000
+        TSV
+
+        records = adapter.parse(tsv)
+        cny = records.select { |r| r[:quote] == "CNY" }.sort_by { |r| r[:date] }
+
+        _(cny.map { |r| r[:date] }).must_equal([
+          Date.new(2026, 3, 2),
+          Date.new(2026, 3, 3),
+          Date.new(2026, 3, 17),
+          Date.new(2026, 3, 18),
+        ])
+        _(cny.find { |r| r[:date] == Date.new(2026, 3, 17) }[:rate]).must_equal(6.8883)
+      end
+
+      it "does not emit duplicate (date, base, quote) records across blocks" do
+        tsv = <<~TSV
+          Currency\tMarch 02, 2026\tMarch 03, 2026
+          Chinese yuan\t6.882900\t6.897100
+
+          Currency\tMarch 17, 2026\tMarch 18, 2026
+          Chinese yuan\t6.888300\t6.875600
+        TSV
+
+        records = adapter.parse(tsv)
+        keys = records.map { |r| [r[:date], r[:base], r[:quote]] }
+
+        _(keys.size).must_equal(keys.uniq.size)
       end
     end
   end
