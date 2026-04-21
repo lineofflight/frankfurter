@@ -94,8 +94,8 @@ db/seeds/
 ### Scheduler (bin/schedule)
 - Calls `provider.backfill` directly on Provider model instances
 - Staggers startup backfill for all providers (2s apart)
-- Cron schedules derived from `publish_time` and `publish_days` in the providers table
-- Convention: poll every 30 min for 3 hours starting at `publish_time`
+- Cron schedule read from `publish_schedule` in the providers table (5-field cron; `null` for historical-only providers)
+- Convention: poll every 30 min across a 3-hour window starting at the publish hour (encoded directly in the cron expression, e.g. `*/30 14-16 * * 1-5` for ECB)
 - Backfill is incremental: fetches only from the last stored date forward
 
 ## Database
@@ -107,10 +107,10 @@ SQLite database with `rates`, `providers`, `currencies`, and `currency_coverages
 - Unique index on `(provider, date, base, quote)`
 
 ### providers
-- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_time`, `publish_days`, `coverage_start`, `pivot_currency`
+- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_schedule`, `publish_cadence`, `coverage_start`, `pivot_currency`
 - Seeded from `db/seeds/providers/*.json`
-- `publish_time`: UTC hour when the provider typically publishes new rates
-- `publish_days`: cron-style day range (e.g. "1-5" for Mon-Fri, "0-4" for Sun-Thu)
+- `publish_schedule`: 5-field cron expression (minute hour day-of-month month day-of-week) in UTC, or `null` for historical-only providers. Convention: `*/30 H-H+2 * * D` where H is the publish hour and D is the day-of-week range, giving a 3-hour polling window.
+- `publish_cadence`: one of `daily`, `weekly`, `monthly`, or `null` for historical-only providers. Dispatches `publishes_missed` to the right algorithm (per-fire-day count for daily; ISO-week bucket for weekly; year-month bucket for monthly).
 - `coverage_start`: earliest date for historical data (used as backfill starting point)
 
 ### currencies
