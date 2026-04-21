@@ -32,6 +32,7 @@ class Provider < Sequel::Model(:providers)
         _(sample.size).must_be(:>, 1)
 
         keys = dataset.map { |r| [r[:date], r[:base], r[:quote]] }
+
         _(keys.size).must_equal(keys.uniq.size)
       end
 
