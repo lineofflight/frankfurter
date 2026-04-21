@@ -112,7 +112,7 @@ class Provider
         records = []
         dates = nil
 
-        tsv.lines.map(&:chomp).each do |line|
+        tsv.each_line(chomp: true) do |line|
           next if line.strip.empty?
 
           if line.start_with?("Currency\t")
