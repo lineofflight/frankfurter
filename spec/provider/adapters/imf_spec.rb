@@ -78,6 +78,47 @@ class Provider < Sequel::Model(:providers)
 
         _(records.none? { |r| r[:base] == "USD" && r[:quote] == "USD" }).must_equal(true)
       end
+
+      it "parses Continued blocks with their own date header" do
+        tsv = <<~TSV
+          Representative Exchange Rates for Selected Currencies for March 2026
+          Currency\tMarch 02, 2026\tMarch 03, 2026
+          Chinese yuan\t6.882900\t6.897100
+          U.S. dollar\t1.000000\t1.000000
+
+          Representative Exchange Rates for Selected Currencies for March 2026 Continued
+
+          Currency\tMarch 17, 2026\tMarch 18, 2026
+          Chinese yuan\t6.888300\t6.875600
+          U.S. dollar\t1.000000\t1.000000
+        TSV
+
+        records = adapter.parse(tsv)
+        cny = records.select { |r| r[:quote] == "CNY" }.sort_by { |r| r[:date] }
+
+        _(cny.map { |r| r[:date] }).must_equal([
+          Date.new(2026, 3, 2),
+          Date.new(2026, 3, 3),
+          Date.new(2026, 3, 17),
+          Date.new(2026, 3, 18),
+        ])
+        _(cny.find { |r| r[:date] == Date.new(2026, 3, 17) }[:rate]).must_equal(6.8883)
+      end
+
+      it "does not emit duplicate (date, base, quote) records across blocks" do
+        tsv = <<~TSV
+          Currency\tMarch 02, 2026\tMarch 03, 2026
+          Chinese yuan\t6.882900\t6.897100
+
+          Currency\tMarch 17, 2026\tMarch 18, 2026
+          Chinese yuan\t6.888300\t6.875600
+        TSV
+
+        records = adapter.parse(tsv)
+        keys = records.map { |r| [r[:date], r[:base], r[:quote]] }
+
+        _(keys.size).must_equal(keys.uniq.size)
+      end
     end
   end
 end
