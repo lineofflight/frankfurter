@@ -6,7 +6,7 @@
   "pivot_currency": "KES",
   "data_url": "https://www.centralbank.go.ke/forex/",
   "terms_url": null,
-  "publish_time": 8,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2003-09-12"
 }

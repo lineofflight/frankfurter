@@ -5,7 +5,7 @@
   "pivot_currency": "EUR",
   "data_url": "https://api.hnb.hr/",
   "terms_url": null,
-  "publish_time": 12,
-  "publish_days": "0-6",
+  "publish_schedule": "*/30 12-14 * * *",
+  "publish_cadence": "daily",
   "coverage_start": "2023-01-02"
 }

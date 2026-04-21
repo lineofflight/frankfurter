@@ -6,7 +6,7 @@
   "pivot_currency": "IDR",
   "data_url": "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx",
   "terms_url": null,
-  "publish_time": 1,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 1-3 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2024-01-02"
 }

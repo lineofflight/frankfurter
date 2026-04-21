@@ -5,7 +5,7 @@
   "pivot_currency": "USD",
   "data_url": "https://www.imf.org/external/np/fin/ert/GUI/Pages/CountryDataBase.aspx",
   "terms_url": "https://www.imf.org/en/about/copyright-and-terms",
-  "publish_time": 18,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 18-20 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2003-04-01"
 }

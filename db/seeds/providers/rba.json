@@ -5,7 +5,7 @@
   "pivot_currency": "AUD",
   "data_url": "https://www.rba.gov.au/statistics/frequency/exchange-rates.html",
   "terms_url": "https://www.rba.gov.au/copyright/",
-  "publish_time": 5,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 5-7 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2023-01-03"
 }

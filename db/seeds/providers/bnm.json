@@ -5,7 +5,7 @@
   "pivot_currency": "MYR",
   "data_url": "https://www.bnm.gov.my/exchange-rates",
   "terms_url": null,
-  "publish_time": 4,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 4-6 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2006-01-03"
 }

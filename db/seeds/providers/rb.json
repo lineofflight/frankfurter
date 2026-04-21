@@ -6,7 +6,7 @@
   "pivot_currency": "SEK",
   "data_url": "https://www.riksbank.se/en-gb/statistics/",
   "terms_url": "https://www.riksbank.se/en-gb/about-the-website/terms-of-use/",
-  "publish_time": 15,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 15-17 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1993-01-04"
 }

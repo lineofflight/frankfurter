@@ -5,7 +5,7 @@
   "pivot_currency": "UZS",
   "data_url": "https://cbu.uz/en/arkhiv-kursov-valyut/json/",
   "terms_url": null,
-  "publish_time": 8,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1994-07-01"
 }

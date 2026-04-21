@@ -336,7 +336,7 @@
           "publishes_missed": {
             "type": ["integer", "null"],
             "minimum": 0,
-            "description": "Expected publish days elapsed since end_date, excluding end_date and today. Null when the provider has no scheduled cadence."
+            "description": "Number of expected publishes missed since end_date. For daily providers, counts scheduled publish days strictly between end_date and today. For weekly and monthly providers, counts ISO weeks or calendar months between the latest imported bucket and the bucket whose publish window has already started. Null when the provider has no scheduled cadence or no imported data."
           },
           "currencies": {
             "type": "array",

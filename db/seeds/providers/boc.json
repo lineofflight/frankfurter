@@ -6,7 +6,7 @@
   "pivot_currency": "CAD",
   "data_url": "https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/",
   "terms_url": "https://www.bankofcanada.ca/terms/",
-  "publish_time": 20,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 20-22 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2017-01-03"
 }

@@ -56,7 +56,7 @@ VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first liv
 
 ### 3. Seed provider metadata — `db/seeds/providers/<key>.json`
 
-Create a single JSON file (not an array) with: `key`, `name`, `description`, `pivot_currency`, `data_url`, `terms_url` (nullable), `publish_time` (UTC hour), `publish_days` (cron-style day range, e.g. "1-5" for Mon-Fri), `coverage_start` (earliest date for historical data, or null if unknown). Each provider has its own file — no shared file to conflict on.
+Create a single JSON file (not an array) with: `key`, `name`, `description`, `pivot_currency`, `data_url`, `terms_url` (nullable), `publish_schedule` (5-field cron expression in UTC, e.g. `"*/30 14-16 * * 1-5"` for daily Mon-Fri with a 3-hour polling window starting at 14:00 UTC; `null` for providers without a recurring cadence), `publish_cadence` (one of `"daily"`, `"weekly"`, `"monthly"`, or `null` for historical-only providers; dispatches `publishes_missed` to the right algorithm — per-fire-day count for daily, ISO-week bucket for weekly, year-month bucket for monthly), `coverage_start` (earliest date for historical data, or null if unknown). Each provider has its own file — no shared file to conflict on.
 
 The adapter class is auto-discovered from `lib/provider/adapters/` — no need to edit any wiring files.
 

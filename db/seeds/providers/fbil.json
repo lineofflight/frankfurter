@@ -6,7 +6,7 @@
   "pivot_currency": "INR",
   "data_url": "https://www.fbil.org.in/#/refrates",
   "terms_url": "https://www.fbil.org.in/#/termsandcondition",
-  "publish_time": 8,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2018-07-10"
 }

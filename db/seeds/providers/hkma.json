@@ -5,7 +5,7 @@
   "pivot_currency": "HKD",
   "data_url": "https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/daily-monetary-statistics/",
   "terms_url": "https://www.hkma.gov.hk/eng/disclaimer/",
-  "publish_time": 11,
-  "publish_days": "1-6",
+  "publish_schedule": "*/30 1-10 3-12 * *",
+  "publish_cadence": "monthly",
   "coverage_start": "1981-01-02"
 }

@@ -6,7 +6,7 @@
   "pivot_currency": "USD",
   "data_url": "https://www.federalreserve.gov/releases/h10/",
   "terms_url": "https://fred.stlouisfed.org/legal/",
-  "publish_time": 21,
-  "publish_days": "1",
+  "publish_schedule": "*/30 21-23 * * 1",
+  "publish_cadence": "weekly",
   "coverage_start": null
 }

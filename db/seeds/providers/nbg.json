@@ -6,7 +6,7 @@
   "pivot_currency": "GEL",
   "data_url": "https://nbg.gov.ge/en/monetary-policy/currency",
   "terms_url": null,
-  "publish_time": 8,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1995-10-14"
 }

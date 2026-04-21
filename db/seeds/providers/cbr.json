@@ -6,7 +6,7 @@
   "pivot_currency": "RUB",
   "data_url": "https://www.cbr.ru/eng/currency_base/daily/",
   "terms_url": "https://www.cbr.ru/eng/user_agreement/",
-  "publish_time": 9,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 9-11 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "1999-01-04"
 }

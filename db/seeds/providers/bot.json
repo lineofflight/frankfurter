@@ -6,7 +6,7 @@
   "pivot_currency": "THB",
   "data_url": "https://www.bot.or.th/en/statistics/exchange-rate.html",
   "terms_url": null,
-  "publish_time": 11,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 11-13 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": "2002-01-02"
 }

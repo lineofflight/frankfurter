@@ -6,7 +6,7 @@
   "pivot_currency": "MMK",
   "data_url": "https://forex.cbm.gov.mm/api/latest",
   "terms_url": null,
-  "publish_time": 4,
-  "publish_days": "1-5",
+  "publish_schedule": "*/30 4-6 * * 1-5",
+  "publish_cadence": "daily",
   "coverage_start": null
 }
