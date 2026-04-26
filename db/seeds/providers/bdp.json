@@ -1,0 +1,12 @@
+{
+  "key": "BDP",
+  "name": "Banco de Portugal",
+  "country_code": "PT",
+  "rate_type": "historical reference",
+  "pivot_currency": "PTE",
+  "data_url": "https://bpstat.bportugal.pt/",
+  "terms_url": null,
+  "publish_schedule": null,
+  "publish_cadence": null,
+  "coverage_start": "1987-01-02"
+}

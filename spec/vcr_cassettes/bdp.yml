@@ -1,0 +1,304 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?dim_cats=40:4263&lang=EN&obs_since=1998-12-28&obs_to=1998-12-31&page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bpstat.bportugal.pt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 26 Apr 2026 23:33:03 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      - Accept-Encoding
+      X-Throttle:
+      - '1000'
+      Allow:
+      - GET, HEAD, OPTIONS
+      Cache-Control:
+      - max-age=1800
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - same-origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      X-Request-Id:
+      - 565729b7b00f7fc4606c72952246cd23
+      X-Host:
+      - bpstat.bportugal.pt
+      Content-Security-Policy:
+      - frame-ancestors *.bportugal.pt *.linkedin.com *.facebook.com cipdata.cip.org.pt
+        statflix.efrontlearning.com
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Encoding,Content-Type,DNT,Origin,User-Agent,X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      X-Cache:
+      - MISS
+      Strict-Transport-Security:
+      - max-age=31536000;includeSubDomains
+      Content-Security-Policy-Report-Only:
+      - script-src 'unsafe-inline' 'unsafe-eval'; connect-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=Ym5.G24eK0TrUqY9bvJ_ANwG_.itDoSGKhea.Ygcxs8-1777246382.8917081-1.0.1.1-FemSBzRq7nDcEhvCdTyLtgNJV2Kpse8sCz3RKtt29.dtg357BSy_j6jF9PW6z.rikbKZ3YFrAEzyjAPIpdHVGgYIdn1aj0Z9x7RSAIdALfo3JDX.7iHS_LOrlrZ0e_rdPOYa5b8VgnWb.48uIGOvelqiwt_3VNi7DKNDg32bL.tSTm2d5DWm3nwUvG3xg7ez;
+        report-to cf-csp-endpoint
+      Report-To:
+      - '{"group":"cf-csp-endpoint","max_age":86400,"endpoints":[{"url":"https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=Ym5.G24eK0TrUqY9bvJ_ANwG_.itDoSGKhea.Ygcxs8-1777246382.8917081-1.0.1.1-FemSBzRq7nDcEhvCdTyLtgNJV2Kpse8sCz3RKtt29.dtg357BSy_j6jF9PW6z.rikbKZ3YFrAEzyjAPIpdHVGgYIdn1aj0Z9x7RSAIdALfo3JDX.7iHS_LOrlrZ0e_rdPOYa5b8VgnWb.48uIGOvelqiwt_3VNi7DKNDg32bL.tSTm2d5DWm3nwUvG3xg7ez"}]}'
+      Last-Modified:
+      - Sun, 26 Apr 2026 23:33:03 GMT
+      Cf-Cache-Status:
+      - MISS
+      Set-Cookie:
+      - __cf_bm=WzjZWPuB5Qj1Dl.kWE57Pvw0tXyjQuI3AzPzkRVZI68-1777246382.8917081-1.0.1.1-4KnWL8ZXHQktY1AV.T5uEa5Kr4_YH5mmbfd74ChEN2W8sn2i7Qjk7WqWm865XE5xSvHdv.2vziC.EFpFcFPQVidyw0HlRZ2UkRC6k0WxsLvHprF8eTB56bBXaHQLmSMq;
+        HttpOnly; Secure; Path=/; Domain=bportugal.pt; Expires=Mon, 27 Apr 2026 00:03:03
+        GMT
+      - _cfuvid=Q2CzonI.dBRw1cAvnfXexdiJZ8cLhgxctvqKC8ruP98-1777246382.8917081-1.0.1.1-du7czDCEbQA3JvsTP7H4LxTe_BSDn8nPkosuzCJFgQM;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=bportugal.pt
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9f2963e51d84ecb3-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"version":"2.0","label":"Counterparty currency; Reference currency;
+        Source; Flows, stocks and prices; Metrics; Periodicity; Unit of measure","id":["12","13","18","19","29","40","70","reference_date"],"size":[11,1,1,1,1,1,1,4],"extension":{"num_series":705,"obs_updated_at":"2026-04-24T15:30:00Z","series":[{"id":180121,"label":"US,
+        Dollars (USD) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":826},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180121&lang=EN"},{"id":180122,"label":"ECU
+        - Banco do Portugal (ECU) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":2777},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180122&lang=EN"},{"id":180123,"label":"United
+        Kingdom, Pounds (GBP) against Escudo - daily","dimension_category":[{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":824},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180123&lang=EN"},{"id":180124,"label":"Sweden,
+        Kronor (SEK) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":814},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180124&lang=EN"},{"id":180125,"label":"Switzerland,
+        Francs (CHF) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":815},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180125&lang=EN"},{"id":180126,"label":"Spain,
+        Pesetas (ESP) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":809},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180126&lang=EN"},{"id":180127,"label":"South
+        Africa, Rand (ZAR) against Escudo - daily","dimension_category":[{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":807},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180127&lang=EN"},{"id":180128,"label":"Norway,
+        Krone (NOK) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":788},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180128&lang=EN"},{"id":180129,"label":"Ireland,
+        Pounds (IEP) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":754},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180129&lang=EN"},{"id":180130,"label":"Italy,
+        Liras (ITL) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":756},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180130&lang=EN"}],"next_page":"https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?lang=EN&page=2&dim_cats=40%3A4263&obs_since=1998-12-28&obs_to=1998-12-31"},"value":[172.392,171.755,171.036,171.829,288.532,288.186,286.14,284.188,125.287,125.616,125.171,124.694,22.513,22.556,22.69,22.599,21.365,21.249,21.293,21.13,201.43,201.324,200.991,200.482,90.998,90.993,90.982,90.975,254.645,254.629,254.596,254.56,0.10353,0.10355,0.10354,0.10354,1.205,1.2051,1.205,1.2049,29.269,29.143,29.036,29.272],"status":["F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F"],"dimension":{"12":{"label":"Counterparty
+        currency","category":{"index":["826","824","815","788","814","2777","783","754","756","809","807"],"label":{"754":"Ireland,
+        Pounds","756":"Italy, Liras","783":"The Netherlands, Guilder","788":"Norway,
+        Krone","807":"South Africa, Rand","809":"Spain, Pesetas","814":"Sweden, Kronor","815":"Switzerland,
+        Francs","824":"United Kingdom, Pounds","826":"United States of America, Dollars","2777":"European
+        Currency Unit - Banco de Portugal"}}},"13":{"label":"Reference currency","category":{"index":["794"],"label":{"794":"Portuguese
+        Escudo"}}},"18":{"label":"Source","category":{"index":["35"],"label":{"35":"Banco
+        de Portugal"}}},"19":{"label":"Flows, stocks and prices","category":{"index":["14"],"label":{"14":"Prices"}}},"40":{"label":"Periodicity","category":{"index":["4263"],"label":{"4263":"Daily"}}},"70":{"label":"Unit
+        of measure","category":{"index":["3337"],"label":{"3337":"Portuguese Escudo"}}},"reference_date":{"label":"Date","category":{"index":["1998-12-28","1998-12-29","1998-12-30","1998-12-31"]}},"29":{"label":"Metrics","category":{"index":["3609"],"label":{"3609":"Value"}}}},"class":"dataset","href":"https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?lang=EN&page=1&dim_cats=40%3A4263&obs_since=1998-12-28&obs_to=1998-12-31","source":"Bank
+        of Portugal","role":{"time":["reference_date"],"metric":["29"],"geo":[]}}'
+  recorded_at: Sun, 26 Apr 2026 23:33:03 GMT
+- request:
+    method: get
+    uri: https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?dim_cats=40:4263&lang=EN&obs_since=1998-12-28&obs_to=1998-12-31&page=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bpstat.bportugal.pt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 26 Apr 2026 23:33:03 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      - Accept-Encoding
+      X-Throttle:
+      - '999'
+      Allow:
+      - GET, HEAD, OPTIONS
+      Cache-Control:
+      - max-age=1800
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - same-origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      X-Request-Id:
+      - a8fe25a21404a44465073e9b80aa20fd; L2JycHguanBnCg==
+      X-Host:
+      - bpstat.bportugal.pt
+      Content-Security-Policy:
+      - frame-ancestors *.bportugal.pt *.linkedin.com *.facebook.com cipdata.cip.org.pt
+        statflix.efrontlearning.com
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Encoding,Content-Type,DNT,Origin,User-Agent,X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      X-Cache:
+      - MISS
+      Strict-Transport-Security:
+      - max-age=31536000;includeSubDomains
+      Age:
+      - '1074'
+      Last-Modified:
+      - Sun, 26 Apr 2026 23:15:08 GMT
+      Cf-Cache-Status:
+      - HIT
+      Set-Cookie:
+      - __cf_bm=tB.Gob9DqmEcI3_x.ZMWf9vhNfKYn5rHxWzdzr9vMz0-1777246383.1838834-1.0.1.1-xGiwjXFw6JxfzYMw6PyuaiZ6DdtX1JZthS4Kb_yNzrl9ZNrhyoQHl3yIizXi_ftFE932E.5XJ_OfKFehXWwf2lqUVVw0.jg2QiGkepV..FLPf2_9cZnxu8l1bR92EsVd;
+        HttpOnly; Secure; Path=/; Domain=bportugal.pt; Expires=Mon, 27 Apr 2026 00:03:03
+        GMT
+      - _cfuvid=lZs_QdOUpedmdmlEgQ4dACx69O8gcai2juWjvo0zhY8-1777246383.1838834-1.0.1.1-PgGcl_7uIgHCZGzPRy1lp0KL4myIaj6KbKB774N.eaY;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=bportugal.pt
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9f2963e6edfffffd-AMS
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"version":"2.0","label":"Counterparty currency; Reference currency;
+        Source; Flows, stocks and prices; Metrics; Periodicity; Unit of measure","id":["12","13","18","19","29","40","70","reference_date"],"size":[11,1,1,1,1,1,1,4],"extension":{"num_series":705,"obs_updated_at":"2026-04-24T15:30:00Z","series":[{"id":180131,"label":"Netherlands,
+        Guilder (NLG) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":783},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180131&lang=EN"},{"id":180132,"label":"Macau,
+        Patacas (MOP) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":771},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180132&lang=EN"},{"id":180133,"label":"Japan,
+        Yen (JPY) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":758},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180133&lang=EN"},{"id":180134,"label":"Denmark,
+        Kroner (DKK) against Escudo - daily","dimension_category":[{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":731},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180134&lang=EN"},{"id":180135,"label":"France,
+        Francs (FRF) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":738},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180135&lang=EN"},{"id":180136,"label":"Germany,
+        Deutsche Mark (DEM) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":739},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180136&lang=EN"},{"id":180137,"label":"Greece,
+        Drachma (GRD) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":741},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180137&lang=EN"},{"id":180138,"label":"Canada,
+        Dollars (CAD) against Escudo - daily","dimension_category":[{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":719},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180138&lang=EN"},{"id":180139,"label":"Finland,
+        Markka (FIM) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":737},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180139&lang=EN"},{"id":180140,"label":"Cabo
+        Verde, Escudo (CVE) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":720},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180140&lang=EN"}],"next_page":"https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?lang=EN&page=3&dim_cats=40%3A4263&obs_since=1998-12-28&obs_to=1998-12-31"},"value":[1.4821,1.4889,1.4842,1.5097,26.949,26.935,26.919,26.915,111.17,110.931,110.31,111.001,0.60978,0.61047,0.6084,0.60809,1.8182,1.8182,1.8182,1.8182,90.998,90.993,90.982,90.975,4.9708,4.9707,4.9701,4.9698,30.576,30.573,30.568,30.563,102.535,102.528,102.515,102.505,33.726,33.721,33.721,33.719,21.607,21.526,21.433,21.535],"status":["F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F"],"dimension":{"12":{"label":"Counterparty
+        currency","category":{"index":["758","731","719","741","720","783","714","738","739","737","771"],"label":{"714":"Belgium,
+        Francs","719":"Canada, Dollars","720":"Cabo Verde, Escudo","731":"Denmark,
+        Kroner","737":"Finland, Markka","738":"France, Francs","739":"Germany, Deutsche
+        Mark","741":"Greece, Drachma","758":"Japan, Yen","771":"Macau, Patacas","783":"The
+        Netherlands, Guilder"}}},"13":{"label":"Reference currency","category":{"index":["794"],"label":{"794":"Portuguese
+        Escudo"}}},"18":{"label":"Source","category":{"index":["35"],"label":{"35":"Banco
+        de Portugal"}}},"19":{"label":"Flows, stocks and prices","category":{"index":["14"],"label":{"14":"Prices"}}},"40":{"label":"Periodicity","category":{"index":["4263"],"label":{"4263":"Daily"}}},"70":{"label":"Unit
+        of measure","category":{"index":["3337"],"label":{"3337":"Portuguese Escudo"}}},"reference_date":{"label":"Date","category":{"index":["1998-12-28","1998-12-29","1998-12-30","1998-12-31"]}},"29":{"label":"Metrics","category":{"index":["3609"],"label":{"3609":"Value"}}}},"class":"dataset","href":"https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?lang=EN&page=2&dim_cats=40%3A4263&obs_since=1998-12-28&obs_to=1998-12-31","source":"Bank
+        of Portugal","role":{"time":["reference_date"],"metric":["29"],"geo":[]}}'
+  recorded_at: Sun, 26 Apr 2026 23:33:03 GMT
+- request:
+    method: get
+    uri: https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?dim_cats=40:4263&lang=EN&obs_since=1998-12-28&obs_to=1998-12-31&page=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - bpstat.bportugal.pt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 26 Apr 2026 23:33:03 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept
+      - Accept-Encoding
+      X-Throttle:
+      - '1000'
+      Allow:
+      - GET, HEAD, OPTIONS
+      Cache-Control:
+      - max-age=1800
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - same-origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      X-Request-Id:
+      - 5b4985729b8e429b3634ea10b8d8a00b
+      X-Host:
+      - bpstat.bportugal.pt
+      Content-Security-Policy:
+      - frame-ancestors *.bportugal.pt *.linkedin.com *.facebook.com cipdata.cip.org.pt
+        statflix.efrontlearning.com
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Encoding,Content-Type,DNT,Origin,User-Agent,X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET, HEAD, OPTIONS
+      X-Cache:
+      - MISS
+      Strict-Transport-Security:
+      - max-age=31536000;includeSubDomains
+      Age:
+      - '1074'
+      Last-Modified:
+      - Sun, 26 Apr 2026 23:15:08 GMT
+      Cf-Cache-Status:
+      - HIT
+      Set-Cookie:
+      - __cf_bm=pTC8ooFIH7uvMsyhwcWtikY4YI4CJhrirR8QVDfxm3k-1777246383.2817142-1.0.1.1-6BQkD8v5bt0f6UxDW6qw5euA.X_0WIwProY6UyDqLw51JcQ5u9XhM44uvBJ4BlqFyUtFMkuxMp2m4BZgH27eXXSVmkGYAMR0vqXvhdwjlsSlvkIYNvocZCmP7DtkdVZ5;
+        HttpOnly; Secure; Path=/; Domain=bportugal.pt; Expires=Mon, 27 Apr 2026 00:03:03
+        GMT
+      - _cfuvid=MZl8BcbB65uktf0C5Lv.0EXV1q_RWgAluJCKehSeBR8-1777246383.2817142-1.0.1.1-y3gC_weLR570xt95PH0akRpBQ9S7_rLqM5p5TpOCUOs;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=bportugal.pt
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9f2963e788133c9b-CDG
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"version":"2.0","label":"Counterparty currency; Reference currency;
+        Source; Flows, stocks and prices; Metrics; Periodicity; Unit of measure","id":["12","13","18","19","29","40","70","reference_date"],"size":[4,1,1,1,1,1,1,4],"extension":{"num_series":705,"obs_updated_at":"2026-04-24T15:30:00Z","series":[{"id":180141,"label":"Belgium,
+        Francs (BEF) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":714},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180141&lang=EN"},{"id":180142,"label":"Austria,
+        Schilling (ATS) against Escudo - daily","dimension_category":[{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":12,"category_id":711},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":29,"category_id":3609}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180142&lang=EN"},{"id":180182,"label":"Australia,
+        Dollars (AUD) against Escudo - daily","dimension_category":[{"dimension_id":12,"category_id":710},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337},{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180182&lang=EN"},{"id":180183,"label":"Brazil
+        Real (BRL) against Escudo - daily","dimension_category":[{"dimension_id":13,"category_id":794},{"dimension_id":40,"category_id":4263},{"dimension_id":12,"category_id":846},{"dimension_id":29,"category_id":3609},{"dimension_id":19,"category_id":14},{"dimension_id":18,"category_id":35},{"dimension_id":70,"category_id":3337}],"href":"https://bpstat.bportugal.pt/data/v1/series/?series_ids=180183&lang=EN"}]},"value":[142.768,142.181,141.586,142.254,104.814,104.977,104.931,105.555,4.9708,4.9707,4.9701,4.9698,14.574,14.573,14.571,14.57],"status":["F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F"],"dimension":{"12":{"label":"Counterparty
+        currency","category":{"index":["846","710","714","711"],"label":{"710":"Australia,
+        Dollars","711":"Austria, Schilling","714":"Belgium, Francs","846":"Brazil
+        Real"}}},"13":{"label":"Reference currency","category":{"index":["794"],"label":{"794":"Portuguese
+        Escudo"}}},"18":{"label":"Source","category":{"index":["35"],"label":{"35":"Banco
+        de Portugal"}}},"19":{"label":"Flows, stocks and prices","category":{"index":["14"],"label":{"14":"Prices"}}},"40":{"label":"Periodicity","category":{"index":["4263"],"label":{"4263":"Daily"}}},"70":{"label":"Unit
+        of measure","category":{"index":["3337"],"label":{"3337":"Portuguese Escudo"}}},"reference_date":{"label":"Date","category":{"index":["1998-12-28","1998-12-29","1998-12-30","1998-12-31"]}},"29":{"label":"Metrics","category":{"index":["3609"],"label":{"3609":"Value"}}}},"class":"dataset","href":"https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/?lang=EN&page=3&dim_cats=40%3A4263&obs_since=1998-12-28&obs_to=1998-12-31","source":"Bank
+        of Portugal","role":{"time":["reference_date"],"metric":["29"],"geo":[]}}'
+  recorded_at: Sun, 26 Apr 2026 23:33:03 GMT
+recorded_with: VCR 6.4.0
