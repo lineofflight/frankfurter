@@ -21,19 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 08 Apr 2026 13:49:10 GMT
+      - Sun, 26 Apr 2026 22:52:54 GMT
       Server:
       - Apache
       X-Powered-By:
       - PHP/7.4.33
       Expires:
-      - Wed, 08 Apr 2026 20:49:10 GMT
+      - Mon, 27 Apr 2026 05:52:54 GMT
       Cache-Control:
       - public, max-age=25200
       Content-Type:
       - text/xml; charset=utf-8
       Set-Cookie:
-      - cookiesession1=678A3E0F04F1BAD49B28F71475A187EE;Expires=Thu, 08 Apr 2027 13:49:06
+      - cookiesession1=678A3E0F5AA4E46C38DCC4709236F494;Expires=Mon, 26 Apr 2027 22:52:49
         GMT;Path=/;HttpOnly
       Content-Length:
       - '6943'
@@ -323,7 +323,85 @@ http_interactions:
             <Value>23.9652</Value>
           </Valute>
         </ValCurs>
-  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
+  recorded_at: Sun, 26 Apr 2026 22:52:54 GMT
+- request:
+    method: get
+    uri: https://www.bnm.md/en/official_metal_rates?date=06.04.2026&get_xml=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bnm.md
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2026 22:52:54 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Connection:
+      - keep-alive
+      X-Drupal-Cache:
+      - MISS
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - '"1777243974-1"'
+      Vary:
+      - Accept-Encoding
+      - Cookie
+      Expires:
+      - Sun, 03 May 2026 22:52:54 GMT
+      Cache-Control:
+      - public, max-age=604800
+      Last-Modified:
+      - Sun, 26 Apr 2026 22:52:54 GMT
+      X-Xss-Protection:
+      - 1; mode = block
+      Content-Security-Policy:
+      - default-src 'self' www.google-analytics.com analytics.google.com www.google.md
+        stats.g.doubleclick.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com
+        www.gstatic.com www.google-analytics.com www.googletagmanager.com; style-src
+        'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com
+        cdn.jsdelivr.net; frame-src 'self' www.google.com www.youtube.com www.facebook.com
+        yc.bnm.md
+      Set-Cookie:
+      - cookiesession1=678A3E11DF0AD4C247A8F549CA128FD8;Expires=Mon, 26 Apr 2027 22:52:49
+        GMT;Path=/;HttpOnly
+      Content-Length:
+      - '448'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <MetalPrice Date="06.04.2026" name="The price of precious metals">
+          <Metal ID="">
+            <NumCode>961</NumCode>
+            <CharCode>XAG</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram silver</Name>
+            <Value>40.1963</Value>
+          </Metal>
+          <Metal ID="">
+            <NumCode>959</NumCode>
+            <CharCode>XAU</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram gold</Name>
+            <Value>2617.7179</Value>
+          </Metal>
+        </MetalPrice>
+  recorded_at: Sun, 26 Apr 2026 22:52:54 GMT
 - request:
     method: get
     uri: https://www.bnm.md/en/official_exchange_rates?date=07.04.2026&get_xml=1
@@ -345,19 +423,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 08 Apr 2026 13:49:10 GMT
+      - Sun, 26 Apr 2026 22:52:54 GMT
       Server:
       - Apache
       X-Powered-By:
       - PHP/7.4.33
       Expires:
-      - Wed, 08 Apr 2026 20:49:10 GMT
+      - Mon, 27 Apr 2026 05:52:54 GMT
       Cache-Control:
       - public, max-age=25200
       Content-Type:
       - text/xml; charset=utf-8
       Set-Cookie:
-      - cookiesession1=678A3E0F0199BAFA8217E5B19D47F88A;Expires=Thu, 08 Apr 2027 13:49:06
+      - cookiesession1=678A3E0FA0FCD76E21E847F72E74008B;Expires=Mon, 26 Apr 2027 22:52:49
         GMT;Path=/;HttpOnly
       Content-Length:
       - '6943'
@@ -647,7 +725,85 @@ http_interactions:
             <Value>23.8609</Value>
           </Valute>
         </ValCurs>
-  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
+  recorded_at: Sun, 26 Apr 2026 22:52:54 GMT
+- request:
+    method: get
+    uri: https://www.bnm.md/en/official_metal_rates?date=07.04.2026&get_xml=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bnm.md
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2026 22:52:54 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Connection:
+      - keep-alive
+      X-Drupal-Cache:
+      - MISS
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - '"1777243974-1"'
+      Vary:
+      - Accept-Encoding
+      - Cookie
+      Expires:
+      - Sun, 03 May 2026 22:52:54 GMT
+      Cache-Control:
+      - public, max-age=604800
+      Last-Modified:
+      - Sun, 26 Apr 2026 22:52:54 GMT
+      X-Xss-Protection:
+      - 1; mode = block
+      Content-Security-Policy:
+      - default-src 'self' www.google-analytics.com analytics.google.com www.google.md
+        stats.g.doubleclick.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com
+        www.gstatic.com www.google-analytics.com www.googletagmanager.com; style-src
+        'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com
+        cdn.jsdelivr.net; frame-src 'self' www.google.com www.youtube.com www.facebook.com
+        yc.bnm.md
+      Set-Cookie:
+      - cookiesession1=678A3E113B537FBB3D2B44F284430C20;Expires=Mon, 26 Apr 2027 22:52:49
+        GMT;Path=/;HttpOnly
+      Content-Length:
+      - '448'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <MetalPrice Date="07.04.2026" name="The price of precious metals">
+          <Metal ID="">
+            <NumCode>961</NumCode>
+            <CharCode>XAG</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram silver</Name>
+            <Value>41.2972</Value>
+          </Metal>
+          <Metal ID="">
+            <NumCode>959</NumCode>
+            <CharCode>XAU</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram gold</Name>
+            <Value>2643.8254</Value>
+          </Metal>
+        </MetalPrice>
+  recorded_at: Sun, 26 Apr 2026 22:52:54 GMT
 - request:
     method: get
     uri: https://www.bnm.md/en/official_exchange_rates?date=08.04.2026&get_xml=1
@@ -669,19 +825,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 08 Apr 2026 13:49:10 GMT
+      - Sun, 26 Apr 2026 22:52:55 GMT
       Server:
       - Apache
       X-Powered-By:
       - PHP/7.4.33
       Expires:
-      - Wed, 08 Apr 2026 20:49:10 GMT
+      - Mon, 27 Apr 2026 05:52:55 GMT
       Cache-Control:
       - public, max-age=25200
       Content-Type:
       - text/xml; charset=utf-8
       Set-Cookie:
-      - cookiesession1=678A3E0FE8143BC4B9D24A4277F7BDEE;Expires=Thu, 08 Apr 2027 13:49:07
+      - cookiesession1=678A3E0FA265ABB83DA7BB80A5C8C2E6;Expires=Mon, 26 Apr 2027 22:52:50
         GMT;Path=/;HttpOnly
       Content-Length:
       - '6942'
@@ -971,5 +1127,83 @@ http_interactions:
             <Value>23.7680</Value>
           </Valute>
         </ValCurs>
-  recorded_at: Wed, 08 Apr 2026 13:49:10 GMT
+  recorded_at: Sun, 26 Apr 2026 22:52:55 GMT
+- request:
+    method: get
+    uri: https://www.bnm.md/en/official_metal_rates?date=08.04.2026&get_xml=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.bnm.md
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 26 Apr 2026 22:52:55 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Connection:
+      - keep-alive
+      X-Drupal-Cache:
+      - MISS
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - '"1777243975-1"'
+      Vary:
+      - Accept-Encoding
+      - Cookie
+      Expires:
+      - Sun, 03 May 2026 22:52:55 GMT
+      Cache-Control:
+      - public, max-age=604800
+      Last-Modified:
+      - Sun, 26 Apr 2026 22:52:55 GMT
+      X-Xss-Protection:
+      - 1; mode = block
+      Content-Security-Policy:
+      - default-src 'self' www.google-analytics.com analytics.google.com www.google.md
+        stats.g.doubleclick.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com
+        www.gstatic.com www.google-analytics.com www.googletagmanager.com; style-src
+        'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com
+        cdn.jsdelivr.net; frame-src 'self' www.google.com www.youtube.com www.facebook.com
+        yc.bnm.md
+      Set-Cookie:
+      - cookiesession1=678A3E11DF00559CBB4B94EC6F16199A;Expires=Mon, 26 Apr 2027 22:52:50
+        GMT;Path=/;HttpOnly
+      Content-Length:
+      - '448'
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <MetalPrice Date="08.04.2026" name="The price of precious metals">
+          <Metal ID="">
+            <NumCode>961</NumCode>
+            <CharCode>XAG</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram silver</Name>
+            <Value>40.4746</Value>
+          </Metal>
+          <Metal ID="">
+            <NumCode>959</NumCode>
+            <CharCode>XAU</CharCode>
+            <Nominal>1</Nominal>
+            <Name>Gram gold</Name>
+            <Value>2612.3455</Value>
+          </Metal>
+        </MetalPrice>
+  recorded_at: Sun, 26 Apr 2026 22:52:55 GMT
 recorded_with: VCR 6.4.0
