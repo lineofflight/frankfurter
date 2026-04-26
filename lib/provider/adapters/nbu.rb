@@ -10,6 +10,11 @@ class Provider
     # National Bank of Ukraine. Publishes daily rates for ~45 currencies against UAH.
     class NBU < Adapter
       URL = URI("https://bank.gov.ua/NBU_Exchange/exchange_site")
+
+      class << self
+        def backfill_range = 365
+      end
+
       def fetch(after: nil, upto: nil)
         url = URL.dup
         url.query = URI.encode_www_form(
