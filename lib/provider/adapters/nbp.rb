@@ -19,13 +19,9 @@ class Provider
         end_date = upto || Date.today
         dataset = []
 
-        [TABLE_A_URL, TABLE_B_URL].each do |table_url|
-          each_chunk(after, end_date) do |chunk_start, chunk_end|
-            dataset.concat(fetch_rates(table_url, chunk_start, chunk_end))
-          end
-        end
-
         each_chunk(after, end_date) do |chunk_start, chunk_end|
+          dataset.concat(fetch_rates(TABLE_A_URL, chunk_start, chunk_end))
+          dataset.concat(fetch_rates(TABLE_B_URL, chunk_start, chunk_end))
           dataset.concat(fetch_gold(chunk_start, chunk_end))
         end
 
@@ -68,6 +64,7 @@ class Provider
         # This happens if the date range includes no working days
         return [] if response.is_a?(Net::HTTPNotFound)
 
+        response.value
         parse(response.body)
       end
 
@@ -78,6 +75,7 @@ class Provider
         # This happens if the date range includes no working days
         return [] if response.is_a?(Net::HTTPNotFound)
 
+        response.value
         parse_gold(response.body)
       end
 
