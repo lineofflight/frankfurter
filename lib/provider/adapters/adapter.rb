@@ -6,6 +6,11 @@ class Provider < Sequel::Model(:providers)
       class Unavailable < StandardError
       end
 
+      # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose
+      # source publishes precious-metal rates per gram multiply by this to
+      # convert into the per-ounce convention used across the app.
+      GRAMS_PER_TROY_OUNCE = 31.1034768
+
       TRANSIENT_ERRORS = [
         Errno::ECONNRESET,
         Errno::EPIPE,

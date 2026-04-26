@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe BNR do
       before do
-        VCR.insert_cassette("bnr", match_requests_on: [:method, :host])
+        VCR.insert_cassette("bnr", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }
@@ -88,13 +88,16 @@ class Provider < Sequel::Model(:providers)
         records = adapter.parse(xml)
         xau = records.find { |r| r[:base] == "XAU" }
 
-        _(xau[:rate]).must_be_close_to(656.3566 * 31.1034768, 0.0001)
+        _(xau[:rate]).must_be_close_to(656.3566 * Adapter::GRAMS_PER_TROY_OUNCE, 0.0001)
       end
 
       it "covers earlier dates in the current year via the yearly archive" do
         dataset = adapter.fetch(after: Date.new(2026, 1, 4), upto: Date.new(2026, 1, 10))
+        dates = dataset.map { |r| r[:date] }
 
-        _(dataset).wont_be_empty
+        _(dates).wont_be_empty
+        _(dates.min).must_be(:<=, Date.new(2026, 1, 10))
+        _(dates.min).must_be(:>=, Date.new(2026, 1, 5))
       end
     end
   end

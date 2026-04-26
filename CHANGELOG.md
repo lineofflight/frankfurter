@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Restored Bank Negara Malaysia (BNM) provider that was inadvertently removed when the National Bank of Moldova key was renamed to BNM. Moldova's key is now NBM again.
-- BNR (National Bank of Romania) XAU rate is now normalized to RON per troy ounce. BNR publishes XAU as RON per gram, but ISO 4217 defines XAU as one troy ounce — the unmistakenly-low values were skewing blended XAU rates by ~31×. (#323)
+- BNR (National Bank of Romania) XAU rate is now normalized to RON per troy ounce. BNR publishes XAU as RON per gram, but ISO 4217 defines XAU as one troy ounce — the mistakenly low values were skewing blended XAU rates by ~31×. (#323)
 - BNR backfill now reads the yearly XML archive for the current year instead of the 10-day rolling feed. The 10-day feed left a permanent gap whenever a fresh backfill or scheduler outage spanned more than 10 days; the yearly archive covers all published cubes for the year and is a strict superset of the 10-day window.
 
 ## [2.0.0-beta.2] - 2026-04-14

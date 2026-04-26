@@ -13,8 +13,6 @@ class Provider
     # window over the same data, so we always use the yearly archive.
     class BNR < Adapter
       BASE_URL = "https://www.bnr.ro"
-      # BNR publishes XAU as RON per gram; ISO 4217 defines XAU as 1 troy ounce.
-      GRAMS_PER_TROY_OUNCE = 31.1034768
 
       class << self
         def backfill_range = 365
