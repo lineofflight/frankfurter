@@ -31,8 +31,9 @@ class Provider
 
           sleep(0.5) unless first
           first = false
-
           dataset.concat(fetch_date(date))
+
+          sleep(0.5)
           dataset.concat(fetch_metals_date(date))
         end
 
