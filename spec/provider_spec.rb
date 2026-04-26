@@ -284,7 +284,7 @@ describe Provider do
       _(Rate.where(provider: provider.key, quote: "SDR").count).must_equal(0)
     end
 
-    it "excludes XDR" do
+    it "ingests XDR" do
       xdr_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
@@ -298,7 +298,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "XDR").count).must_equal(0)
+      _(Rate.where(provider: provider.key, quote: "XDR").count).must_equal(1)
     end
 
     it "purges cache when new rates are inserted" do

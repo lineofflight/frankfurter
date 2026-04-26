@@ -18,8 +18,6 @@ class Provider < Sequel::Model(:providers)
   one_to_many :currency_coverages, key: :provider_key
   many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
 
-  EXCLUDED_QUOTES = ["XDR"].freeze
-
   class << self
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
@@ -77,7 +75,7 @@ class Provider < Sequel::Model(:providers)
     fetched = false
     adapter.fetch_each(after:) do |records|
       fetched = true
-      records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) || EXCLUDED_QUOTES.include?(c) } }
+      records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) } }
       records.each { |r| r[:provider] = key }
 
       inserted = db.transaction do
