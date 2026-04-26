@@ -17,12 +17,16 @@ lib/
 ├── app.rb                    # Main Roda app — mounts v1 and v2
 ├── base_conversion.rb        # Rebases rates from any base to a common base
 ├── blender.rb                # Blends multi-provider rates: rebase → consensus → weighted average
+├── bucket.rb                 # Shared SQL bucket expressions for weekly/monthly aggregation
 ├── cache.rb                  # Cloudflare cache purge
+├── carry_forward.rb          # Carries forward most recent provider rate within a lookback window
 ├── consensus.rb              # Cross-provider outlier detection (MAD-based)
 ├── currency.rb               # Currency model (materialized from rates)
 ├── currency_coverage.rb      # CurrencyCoverage model (provider-currency join)
 ├── db.rb                     # Database configuration
+├── historical_currency.rb    # Registers historical ISO 4217 codes via Money::Currency
 ├── log.rb                    # Shared logger
+├── monthly_rate.rb           # MonthlyRate model on monthly_rates rollup table
 ├── peg.rb                    # Currency peg definitions (from db/seeds/pegs.json)
 ├── provider.rb               # Provider model: identity, backfill
 ├── provider/
@@ -30,8 +34,10 @@ lib/
 │   │   ├── adapter.rb        # Abstract adapter: fetch interface, chunked iteration
 │   │   └── <key>.rb          # One adapter per provider (auto-discovered)
 │   └── adapters.rb           # Auto-requires all adapters
-├── rate.rb                   # Rate model with query scopes
+├── rate.rb                   # Rate model on rates table
+├── rate_scopes.rb            # Shared dataset scopes for rate tables (rates, weekly, monthly)
 ├── roundable.rb              # Currency-aware decimal rounding
+├── weekly_rate.rb            # WeeklyRate model on weekly_rates rollup table
 ├── weighted_average.rb       # Recency-weighted averaging with exponential decay
 ├── scheduler/
 │   └── daemon.rb             # Forks and monitors the scheduler process
@@ -42,6 +48,7 @@ lib/
 │   └── v2/
 │       └── rate_query.rb     # V2 rate query builder (blending, filtering)
 ├── public/
+│   ├── root.json             # Root index document
 │   ├── v1/openapi.json       # V1 OpenAPI spec
 │   └── v2/openapi.json       # V2 OpenAPI spec
 └── tasks/
@@ -49,6 +56,7 @@ lib/
     ├── db.rake               # Database migrations and setup
     ├── default.rake          # Default task (lint + test)
     ├── providers.rake        # Dynamic backfill task for all providers
+    ├── rollups.rake          # Rebuild weekly/monthly rollup tables
     ├── rubocop.rake          # Linter task
     └── test.rake             # Test suite task
 
@@ -69,7 +77,8 @@ db/seeds/
 - Auto-discovered from `lib/provider/adapters/` via loader
 
 ### Models
-- `Rate`: Sequel model on `rates` table. Scopes: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
+- `Rate`: Sequel model on `rates` table. Scopes via `RateScopes`: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
+- `WeeklyRate`, `MonthlyRate`: Rollup models on `weekly_rates` / `monthly_rates`, share scopes via `RateScopes`
 - `Currency`: Sequel model on `currencies` table. Materialized from rates during backfill. Tracks global date ranges per currency.
 - `CurrencyCoverage`: Join model on `currency_coverages` table. One row per (provider, currency) with per-provider date ranges. Belongs to Provider and Currency.
 - `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers/*.json`). Static cache.
@@ -100,14 +109,18 @@ db/seeds/
 
 ## Database
 
-SQLite database with `rates`, `providers`, `currencies`, and `currency_coverages` tables.
+SQLite database with `rates`, `weekly_rates`, `monthly_rates`, `providers`, `currencies`, and `currency_coverages` tables.
 
 ### rates
 - `date`, `base`, `quote`, `rate`, `provider`
 - Unique index on `(provider, date, base, quote)`
 
+### weekly_rates, monthly_rates
+- Pre-aggregated rollups keyed by `bucket_date` (Monday for weekly, first-of-month for monthly)
+- Rebuilt by `rake rollups:rebuild` and refreshed during backfill
+
 ### providers
-- `key`, `name`, `description`, `data_url`, `terms_url`, `publish_schedule`, `publish_cadence`, `coverage_start`, `pivot_currency`
+- `key`, `name`, `rate_type`, `country_code`, `data_url`, `terms_url`, `publish_schedule`, `publish_cadence`, `coverage_start`, `pivot_currency`
 - Seeded from `db/seeds/providers/*.json`
 - `publish_schedule`: 5-field cron expression (minute hour day-of-month month day-of-week) in UTC, or `null` for historical-only providers. Convention: `*/30 H-H+2 * * D` where H is the publish hour and D is the day-of-week range, giving a 3-hour polling window.
 - `publish_cadence`: one of `daily`, `weekly`, `monthly`, or `null` for historical-only providers. Dispatches `publishes_missed` to the right algorithm (per-fire-day count for daily; ISO-week bucket for weekly; year-month bucket for monthly).
@@ -162,11 +175,13 @@ BCN's endpoint only supports TLS 1.0, which OpenSSL 3.5+ disables by default. Se
 ## Rake Tasks
 
 ```bash
-rake db:setup        # Run migrations and seed providers
-rake db:migrate      # Run database migrations
-rake db:seed         # Seed provider metadata
-rake backfill        # Backfill all providers (threaded, incremental)
-rake backfill[ecb]   # Backfill a single provider
+rake db:setup           # Run migrations and seed providers
+rake db:migrate         # Run database migrations
+rake db:seed            # Seed provider metadata
+rake backfill           # Backfill all providers (threaded, incremental)
+rake backfill[ecb]      # Backfill a single provider
+rake rollups:rebuild    # Rebuild weekly and monthly rollups
+rake rollups:rebuild[ecb] # Rebuild rollups for a single provider
 ```
 
 ## Adding a New Provider
@@ -192,6 +207,10 @@ Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
 - Linting: RuboCop with Shopify style guide (120-char line length)
 - Migrations in `db/migrate/`
 - Update `CHANGELOG.md` for changes that directly impact user experience
+
+## Handling Data
+
+Relay what providers publish. Don't editorialize.
 
 ## API Endpoints
 
