@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Deutsche Bundesbank (BBK) as historical provider — daily pre-euro Frankfurt fixings for 18 currencies, 1948-06-21 through 1998-12-30
+- Bank of Russia (CBR) precious-metal reference prices — daily XAU, XAG, XPT and XPD against RUB, available from 2008-07-01. CBR is the first source for platinum and palladium beyond the National Bank of Ukraine.
 
 ### Fixed
 
