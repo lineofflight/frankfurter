@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe NBM do
       before do
-        VCR.insert_cassette("nbm", match_requests_on: [:method, :host])
+        VCR.insert_cassette("nbm", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }
@@ -23,7 +23,7 @@ class Provider < Sequel::Model(:providers)
       it "fetches multiple currencies per date" do
         dataset = adapter.fetch(after: Date.new(2026, 4, 6), upto: Date.new(2026, 4, 8))
         dates = dataset.map { |r| r[:date] }.uniq
-        sample = dataset.select { |r| r[:date] == dates.first }
+        sample = dataset.select { |r| r[:date] == dates.first && r[:base] != "XAU" && r[:base] != "XAG" }
 
         _(sample.size).must_be(:>, 1)
       end
@@ -34,6 +34,64 @@ class Provider < Sequel::Model(:providers)
 
         _(usd).wont_be_nil
         _(usd[:rate]).must_be(:>, 10)
+      end
+
+      it "fetches XAU and XAG against MDL" do
+        dataset = adapter.fetch(after: Date.new(2026, 4, 6), upto: Date.new(2026, 4, 8))
+        metals = dataset.select { |r| NBM::METAL_CODES.include?(r[:base]) }
+        bases = metals.map { |r| r[:base] }.uniq
+
+        _(bases).must_include("XAU")
+        _(bases).must_include("XAG")
+        metals.each { |r| _(r[:quote]).must_equal("MDL") }
+      end
+
+      it "normalizes metal rates from MDL-per-gram to MDL-per-troy-ounce" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <MetalPrice Date="24.04.2026" name="The price of precious metals">
+            <Metal ID="">
+              <NumCode>961</NumCode>
+              <CharCode>XAG</CharCode>
+              <Nominal>1</Nominal>
+              <Name>Gram silver</Name>
+              <Value>41.5550</Value>
+            </Metal>
+            <Metal ID="">
+              <NumCode>959</NumCode>
+              <CharCode>XAU</CharCode>
+              <Nominal>1</Nominal>
+              <Name>Gram gold</Name>
+              <Value>2619.6183</Value>
+            </Metal>
+          </MetalPrice>
+        XML
+
+        records = adapter.parse_metals(xml)
+        xau = records.find { |r| r[:base] == "XAU" }
+        xag = records.find { |r| r[:base] == "XAG" }
+
+        _(records.size).must_equal(2)
+        _(xau[:rate]).must_be_close_to(2619.6183 * Adapter::GRAMS_PER_TROY_OUNCE, 0.0001)
+        _(xag[:rate]).must_be_close_to(41.5550 * Adapter::GRAMS_PER_TROY_OUNCE, 0.0001)
+        _(xau[:quote]).must_equal("MDL")
+      end
+
+      it "skips weekend metal records" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <MetalPrice Date="25.04.2026" name="The price of precious metals">
+            <Metal ID="">
+              <NumCode>959</NumCode>
+              <CharCode>XAU</CharCode>
+              <Nominal>1</Nominal>
+              <Name>Gram gold</Name>
+              <Value>2619.6183</Value>
+            </Metal>
+          </MetalPrice>
+        XML
+
+        _(adapter.parse_metals(xml)).must_be_empty
       end
 
       it "parses XML correctly" do
