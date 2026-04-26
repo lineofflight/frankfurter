@@ -71,6 +71,31 @@ class Provider < Sequel::Model(:providers)
         _(dates).must_include(Date.new(2026, 4, 3))
         dates.each { |d| _(d).must_be(:>, Date.new(2026, 4, 1)) }
       end
+
+      it "normalizes XAU from RON-per-gram to RON-per-troy-ounce" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="utf-8"?>
+          <DataSet xmlns="http://www.bnr.ro/xsd">
+            <Header><Publisher>BNR</Publisher></Header>
+            <Body>
+              <Cube date="2026-04-24">
+                <Rate currency="XAU">656.3566</Rate>
+              </Cube>
+            </Body>
+          </DataSet>
+        XML
+
+        records = adapter.parse(xml)
+        xau = records.find { |r| r[:base] == "XAU" }
+
+        _(xau[:rate]).must_be_close_to(656.3566 * 31.1034768, 0.0001)
+      end
+
+      it "covers earlier dates in the current year via the yearly archive" do
+        dataset = adapter.fetch(after: Date.new(2026, 1, 4), upto: Date.new(2026, 1, 10))
+
+        _(dataset).wont_be_empty
+      end
     end
   end
 end

@@ -8,11 +8,13 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # National Bank of Romania. Publishes daily reference rates for ~35
-    # currencies against the Romanian leu (RON). Current rates via the 10-day
-    # XML feed; historical data via yearly XML archives back to 2005.
+    # currencies against the Romanian leu (RON). Yearly XML archives back to
+    # 2005 are kept current within the year. The 10-day feed is a redundant
+    # window over the same data, so we always use the yearly archive.
     class BNR < Adapter
       BASE_URL = "https://www.bnr.ro"
-      CURRENT_URL = URI("#{BASE_URL}/nbrfxrates10days.xml")
+      # BNR publishes XAU as RON per gram; ISO 4217 defines XAU as 1 troy ounce.
+      GRAMS_PER_TROY_OUNCE = 31.1034768
 
       class << self
         def backfill_range = 365
@@ -44,6 +46,7 @@ class Provider
             next unless rate_value
 
             rate_value /= multiplier if multiplier > 1
+            rate_value *= GRAMS_PER_TROY_OUNCE if currency == "XAU"
             next if rate_value.zero?
 
             { date:, base: currency, quote: "RON", rate: rate_value }
@@ -54,13 +57,7 @@ class Provider
       private
 
       def fetch_year(year)
-        url = if year >= Date.today.year
-          CURRENT_URL
-        else
-          URI("#{BASE_URL}/files/xml/years/nbrfxrates#{year}.xml")
-        end
-
-        parse(Net::HTTP.get(url))
+        parse(Net::HTTP.get(URI("#{BASE_URL}/files/xml/years/nbrfxrates#{year}.xml")))
       end
     end
   end
