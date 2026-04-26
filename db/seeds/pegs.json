@@ -110,5 +110,21 @@
     "since": "1971-12-18",
     "authority": "Centrale Bank van Curaçao en Sint Maarten",
     "source": "https://en.wikipedia.org/wiki/Netherlands_Antillean_guilder"
+  },
+  {
+    "quote": "MOP",
+    "base": "HKD",
+    "rate": 1.03,
+    "since": "1983-01-01",
+    "authority": "Autoridade Monetária de Macau",
+    "source": "https://en.wikipedia.org/wiki/Macanese_pataca"
+  },
+  {
+    "quote": "CVE",
+    "base": "EUR",
+    "rate": 110.265,
+    "since": "1999-01-01",
+    "authority": "Banco de Cabo Verde",
+    "source": "https://en.wikipedia.org/wiki/Cape_Verdean_escudo"
   }
 ]
