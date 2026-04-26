@@ -24,10 +24,10 @@ class Provider
         "4" => "XPD",
       }.freeze
 
-      def fetch(after: nil, upto: nil)
+      def fetch(after:, upto: nil)
         end_date = upto || Date.today
         currencies = fetch_currency_list
-        fx = currencies.flat_map { |id, code, nominal| fetch_dynamic(id, code, nominal, after, end_date) }
+        fx = currencies.flat_map { |id, code| fetch_dynamic(id, code, after, end_date) }
         fx + fetch_metals(after, end_date)
       end
 
@@ -67,13 +67,11 @@ class Provider
           code = v.locate("CharCode").first&.text
           next unless code && !code.empty?
 
-          id = v[:ID]
-          nominal = v.locate("Nominal").first&.text.to_i
-          [id, code, nominal]
+          [v[:ID], code]
         end
       end
 
-      def fetch_dynamic(valute_id, code, nominal, start_date, end_date)
+      def fetch_dynamic(valute_id, code, start_date, end_date)
         url = DYNAMIC_URL.dup
         url.query = URI.encode_www_form(
           date_req1: start_date.strftime("%d/%m/%Y"),
