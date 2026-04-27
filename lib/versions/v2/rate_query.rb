@@ -230,7 +230,7 @@ module Versions
           next if quotes && !quotes.include?(r[:quote])
 
           emitted_quotes << r[:quote]
-          snapped = snap_peg_rate(r[:quote])
+          snapped = snap_peg_rate(r[:quote], blended)
           rate = snapped || r[:rate]
           record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
           record[:providers] = r[:providers] if expand_providers? && !snapped && r[:providers]
@@ -276,13 +276,20 @@ module Versions
         end
       end
 
-      def snap_peg_rate(quote)
+      def snap_peg_rate(quote, blended)
         return if providers
 
         peg = Peg.find(quote)
-        return unless peg && peg.base == effective_base
+        return unless peg
 
-        peg.rate / (base_peg ? base_peg.rate : 1.0)
+        if peg.base == effective_base
+          peg.rate / (base_peg ? base_peg.rate : 1.0)
+        else
+          bridge = blended.find { |r| r[:quote] == peg.base }
+          return unless bridge
+
+          bridge[:rate] * peg.rate
+        end
       end
 
       def normalize_dates!(rows, date_col)
