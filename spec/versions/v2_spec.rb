@@ -165,6 +165,36 @@ describe Versions::V2 do
     _(rows.length).must_be(:>, 1)
   end
 
+  it "expands providers when requested" do
+    get "/rates?expand=providers&quotes=USD"
+
+    _(last_response).must_be(:ok?)
+    json = Oj.load(last_response.body)
+
+    _(json).wont_be_empty
+    _(json.first["providers"]).must_be_kind_of(Array)
+    _(json.first["providers"]).wont_be_empty
+  end
+
+  it "pipe-delimits providers in CSV when expand=providers" do
+    from = (Fixtures.latest_date - 7).to_s
+    to = Fixtures.latest_date.to_s
+    get "/rates.csv?expand=providers&quotes=USD&from=#{from}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    rows = CSV.parse(last_response.body, headers: true)
+
+    _(rows.headers).must_equal(["date", "base", "quote", "rate", "providers"])
+    _(rows.first["providers"]).wont_be_nil
+    _(rows.first["providers"]).must_match(/[A-Z]+/)
+  end
+
+  it "rejects unknown expand value" do
+    get "/rates?expand=foo"
+
+    _(last_response.status).must_equal(422)
+  end
+
   it "returns 406 for CSV on unsupported endpoints" do
     get "/currencies.csv"
 

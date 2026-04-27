@@ -64,7 +64,11 @@ module Versions
       end
 
       def cache_key
-        Digest::MD5.hexdigest(max_date.to_s)
+        Digest::MD5.hexdigest([max_date, expand].join("|"))
+      end
+
+      def expand_providers?
+        expand&.include?("providers") || false
       end
 
       private
@@ -134,6 +138,10 @@ module Versions
         @params[:group]&.downcase
       end
 
+      def expand
+        @params[:expand]&.downcase&.split(",")
+      end
+
       def date
         parse_date(@params[:date])
       end
@@ -154,13 +162,15 @@ module Versions
         nil
       end
 
-      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group"].freeze
+      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
+      ALLOWED_EXPANSIONS = ["providers"].freeze
 
       def validate!
         validate_params!
         validate_dates!
         validate_conflicting_params!
         validate_group!
+        validate_expand!
         validate_currencies!
       end
 
@@ -179,6 +189,13 @@ module Versions
 
       def validate_group!
         raise ValidationError, "invalid group" if group && !["week", "month"].include?(group)
+      end
+
+      def validate_expand!
+        return unless expand
+
+        unknown = expand - ALLOWED_EXPANSIONS
+        raise ValidationError, "invalid expand: #{unknown.join(",")}" if unknown.any?
       end
 
       def validate_currencies!
@@ -213,8 +230,11 @@ module Versions
           next if quotes && !quotes.include?(r[:quote])
 
           emitted_quotes << r[:quote]
-          rate = snap_peg_rate(r[:quote]) || r[:rate]
-          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
+          snapped = snap_peg_rate(r[:quote])
+          rate = snapped || r[:rate]
+          record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
+          record[:providers] = r[:providers] if expand_providers? && !snapped && r[:providers]
+          records << record
         end
 
         if base_peg && (!quotes || quotes.include?(base_peg.base))

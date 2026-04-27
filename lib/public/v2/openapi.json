@@ -30,7 +30,8 @@
           { "$ref": "#/components/parameters/base" },
           { "$ref": "#/components/parameters/quotes" },
           { "$ref": "#/components/parameters/providers" },
-          { "$ref": "#/components/parameters/group" }
+          { "$ref": "#/components/parameters/group" },
+          { "$ref": "#/components/parameters/expand" }
         ],
         "responses": {
           "200": {
@@ -257,6 +258,17 @@
           "enum": ["week", "month"],
           "example": "month"
         }
+      },
+      "expand": {
+        "name": "expand",
+        "in": "query",
+        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of provider keys whose rates contributed to the blended value. Omitted on rows derived from currency pegs.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["providers"],
+          "example": "providers"
+        }
       }
     },
     "schemas": {
@@ -280,6 +292,11 @@
             "type": "number",
             "description": "Exchange rate value",
             "exclusiveMinimum": 0
+          },
+          "providers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Provider keys whose rates contributed to this blended value. Present only when `expand=providers` is set, and absent on rows derived from a currency peg."
           }
         },
         "required": ["date", "base", "quote", "rate"]

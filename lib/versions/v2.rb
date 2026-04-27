@@ -42,18 +42,15 @@ module Versions
           r.csv do
             if query.range?
               response["Content-Type"] = "text/csv"
+              headers = csv_headers(query)
               stream do |out|
-                first = true
+                out << CSV.generate_line(headers)
                 query.each do |record|
-                  if first
-                    out << CSV.generate_line(record.keys)
-                    first = false
-                  end
-                  out << CSV.generate_line(record.values)
+                  out << CSV.generate_line(headers.map { |k| csv_value(record[k]) })
                 end
               end
             else
-              to_csv(query.to_a)
+              to_csv(query.to_a, query)
             end
           end
 
@@ -124,11 +121,23 @@ module Versions
       accept.include?("application/x-ndjson")
     end
 
-    def to_csv(records)
+    def to_csv(records, query = nil)
       CSV.generate do |csv|
-        csv << records.first.keys unless records.empty?
-        records.each { |r| csv << r.values }
+        return csv.string if records.empty?
+
+        headers = query ? csv_headers(query) : records.first.keys
+        csv << headers
+        records.each { |r| csv << headers.map { |k| csv_value(r[k]) } }
       end
+    end
+
+    def csv_headers(query)
+      base = [:date, :base, :quote, :rate]
+      query.expand_providers? ? base + [:providers] : base
+    end
+
+    def csv_value(value)
+      value.is_a?(Array) ? value.join("|") : value
     end
 
     def currencies(params)

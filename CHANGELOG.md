@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `expand=providers` query parameter on `/v2/rates` — adds a `providers` array to each record listing the provider keys whose rates contributed to the blended value. Field is omitted on rows derived from a currency peg, where no provider rate is used. (#323)
 - IMF Special Drawing Rights (XDR) is no longer filtered out of provider backfills. Several providers (NB, SBI, BCRA, etc.) publish XDR rates that were silently dropped; they now flow through like any other ISO 4217 quote. Re-backfill from `coverage_start` to ingest previously-dropped rows. (#333)
 - Deutsche Bundesbank (BBK) as historical provider — daily pre-euro Frankfurt fixings for 18 currencies, 1948-06-21 through 1998-12-30
 - Bank of Russia (CBR) precious-metal reference prices — daily XAU, XAG, XPT and XPD against RUB, available from 2008-07-01. CBR is the first source for platinum and palladium beyond the National Bank of Ukraine.

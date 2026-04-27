@@ -20,7 +20,8 @@ class WeightedAverage
       weighted = group.map { |r| [r, recency_weight(reference_date - r[:date])] }
       total_weight = weighted.sum(&:last)
       rate = weighted.sum { |r, w| r[:rate] * w } / total_weight
-      group.max_by { |r| r[:date] }.merge(rate:)
+      providers = group.map { |r| r[:provider] }.uniq.sort
+      group.max_by { |r| r[:date] }.merge(rate:, providers:)
     end
   end
 

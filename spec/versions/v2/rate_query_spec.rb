@@ -113,6 +113,52 @@ module Versions
       _(pairs).must_equal(pairs.uniq)
     end
 
+    describe "with expand=providers" do
+      it "is omitted by default" do
+        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, quotes: "USD")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first.key?(:providers)).must_equal(false)
+      end
+
+      it "adds providers list to blended rows" do
+        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, quotes: "USD", expand: "providers")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:providers]).must_be_kind_of(Array)
+        _(results.first[:providers]).wont_be_empty
+      end
+
+      it "omits providers field on peg-snapped rows" do
+        date = Fixtures.latest_date
+        Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "AED", rate: 3.97)
+
+        query = V2::RateQuery.new(date: date.to_s, base: "USD", quotes: "AED", expand: "providers")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:rate]).must_equal(3.6725)
+        _(results.first.key?(:providers)).must_equal(false)
+      end
+
+      it "works with rollup queries" do
+        range_start = (Fixtures.latest_date - 90).to_s
+        range_end = Fixtures.latest_date.to_s
+        query = V2::RateQuery.new(from: range_start, to: range_end, group: "week", quotes: "USD", expand: "providers")
+        results = query.to_a
+
+        _(results).wont_be_empty
+        _(results.first[:providers]).must_be_kind_of(Array)
+        _(results.first[:providers]).wont_be_empty
+      end
+
+      it "raises on unknown expand value" do
+        _ { V2::RateQuery.new(expand: "weights") }.must_raise(V2::RateQuery::ValidationError)
+      end
+    end
+
     describe "peg gap filling" do
       # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
       # Add a provider that starts covering BTN only recently, leaving older dates
