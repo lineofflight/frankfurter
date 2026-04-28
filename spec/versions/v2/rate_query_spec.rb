@@ -62,21 +62,35 @@ module Versions
       _(query.to_a.first[:date]).must_equal(friday.to_s)
     end
 
-    it "uses target date for carried-forward quotes" do
-      # Fixtures have ECB/BOC/BOJ on business days only. On Saturday, carry-forward brings in Friday's rates.
-      # Without the target_date fix, quotes only present via carry-forward get Friday's date in the Saturday
-      # blend, producing duplicate (date, quote) pairs. Add a Saturday row from BOC so Saturday becomes a
-      # target date.
-      friday = Fixtures.preceding_friday(Fixtures.recent_sunday)
-      saturday = friday + 1
-      Rate.dataset.insert(date: saturday, base: "CAD", quote: "USD", rate: 0.74, provider: "BOC")
+    it "stamps each row with its own observation date on latest path" do
+      # Carry-forward on the latest path should report each pair's actual observation date,
+      # not flatten everything to the batch max.
+      stale_date = Fixtures.latest_date - 5
+      Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
 
-      query = V2::RateQuery.new(from: friday.to_s, to: saturday.to_s)
+      query = V2::RateQuery.new(date: Fixtures.latest_date.to_s)
       results = query.to_a
 
-      pairs = results.map { |r| [r[:date], r[:quote]] }
+      ron = results.find { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+      usd = results.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
 
-      _(pairs).must_equal(pairs.uniq)
+      _(ron[:date]).must_equal(stale_date.to_s)
+      _(usd[:date]).must_equal(Fixtures.latest_date.to_s)
+    end
+
+    it "does not carry forward in range queries" do
+      # A pair published only on a single date inside the range should appear once on that date,
+      # not be carried forward into subsequent days.
+      from = Fixtures.latest_date - 6
+      to = Fixtures.latest_date
+      stale_date = Fixtures.latest_date - 5
+      Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+
+      query = V2::RateQuery.new(from: from.to_s, to: to.to_s)
+      ron_rows = query.to_a.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+
+      _(ron_rows.size).must_equal(1)
+      _(ron_rows.first[:date]).must_equal(stale_date.to_s)
     end
 
     describe "with expand=providers" do

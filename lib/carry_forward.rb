@@ -1,51 +1,46 @@
 # frozen_string_literal: true
 
-# Carries forward each provider's most recent rate within a lookback window. Used for single-date
-# queries (latest) and range query enrichment.
-module CarryForward
-  LATEST_LOOKBACK_DAYS = 14
-  RANGE_LOOKBACK_DAYS = 5
+# Produces a snapshot of rates as of a target date by carrying forward each provider's most recent
+# rate within a lookback window. Used for single-date and latest queries; range queries do not
+# carry forward.
+class CarryForward
+  LOOKBACK_DAYS = 14
 
   class << self
-    # Returns the most recent rate per (provider, base, quote) on or before the target date, within
-    # the lookback window.
-    def latest(rows, date:, lookback: LATEST_LOOKBACK_DAYS)
-      cutoff = date - lookback
-      best = {}
+    def apply(rows, date:, lookback: LOOKBACK_DAYS)
+      new(rows, date:, lookback:).apply
+    end
+  end
 
-      rows.each do |row|
-        d = row[:date]
-        next unless d&.between?(cutoff, date)
+  attr_reader :rows, :date, :lookback
 
-        key = [row[:provider], row[:base], row[:quote]]
-        best[key] = row if !best[key] || d > best[key][:date]
-      end
+  def initialize(rows, date:, lookback:)
+    @rows = rows
+    @date = date
+    @lookback = lookback
+  end
 
-      best.values
+  def apply
+    best = {}
+    eligible_rows.each do |row|
+      key = key_for(row)
+      best[key] = row if !best[key] || row[:date] > best[key][:date]
     end
 
-    # Enriches each date in the target range with carried-forward rates. Returns { date => [rows] }
-    # where each date's rows include both same-day rates and each provider's most recent rate within
-    # the lookback window. Carried-forward rows keep their original dates so WeightedAverage can
-    # discount them by staleness.
-    def enrich(rows, range:, lookback: RANGE_LOOKBACK_DAYS)
-      by_date = rows.group_by { |r| r[:date] }
-      target_dates = by_date.keys.select { |d| range.cover?(d) }.sort
+    best.values
+  end
 
-      index = {}
-      rows.each do |row|
-        key = [row[:provider], row[:base], row[:quote]]
-        (index[key] ||= []) << row
-      end
-      index.each_value { |v| v.sort_by! { |r| r[:date] }.reverse! }
+  private
 
-      target_dates.to_h do |date|
-        cutoff = date - lookback
-        group = index.filter_map do |_, dated_rows|
-          dated_rows.find { |r| r[:date].between?(cutoff, date) }
-        end
-        [date, group]
-      end
-    end
+  def cutoff
+    @cutoff ||= date - lookback
+  end
+
+  def eligible_rows
+    rows.select { |r| r[:date].between?(cutoff, date) }
+  end
+
+  def key_for(row)
+    [row[:provider], row[:base], row[:quote]]
   end
 end

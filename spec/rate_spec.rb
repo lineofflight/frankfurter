@@ -5,20 +5,20 @@ require "rate"
 require "carry_forward"
 
 describe Rate do
-  describe CarryForward, ".latest" do
+  describe CarryForward, ".apply" do
     it "returns latest available rates on given date" do
       date = Fixtures.latest_date
       rows = Rate.where(date: (date - 14)..date).naked.all
-      data = CarryForward.latest(rows, date:)
+      data = CarryForward.apply(rows, date:)
 
-      _(data.sample[:date]).must_equal(date)
+      _(data.map { |r| r[:date] }.max).must_equal(date)
     end
 
     it "snaps to nearest prior date when requested date has no rates" do
       sunday = Fixtures.recent_sunday
       friday = Fixtures.preceding_friday(sunday)
       rows = Rate.where(provider: "ECB", date: (sunday - 14)..sunday).naked.all
-      data = CarryForward.latest(rows, date: sunday)
+      data = CarryForward.apply(rows, date: sunday)
 
       _(data.map { |r| r[:date] }.uniq).must_equal([friday])
     end
@@ -26,7 +26,7 @@ describe Rate do
     it "includes each provider's most recent date" do
       date = Fixtures.latest_date
       rows = Rate.where(date: (date - 14)..date).naked.all
-      data = CarryForward.latest(rows, date:)
+      data = CarryForward.apply(rows, date:)
       providers = data.map { |r| r[:provider] }.uniq.sort
 
       _(providers).must_include("ECB")
@@ -38,7 +38,7 @@ describe Rate do
       Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
-      data = CarryForward.latest(rows, date:)
+      data = CarryForward.apply(rows, date:)
       providers = data.map { |r| r[:provider] }.uniq
 
       _(providers).must_include("ECB")
@@ -50,7 +50,7 @@ describe Rate do
       Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
-      data = CarryForward.latest(rows, date:)
+      data = CarryForward.apply(rows, date:)
       providers = data.map { |r| r[:provider] }.uniq
 
       _(providers).must_include("ECB")
@@ -63,7 +63,7 @@ describe Rate do
       Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", rate: 0.05, provider: "ECB")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
-      data = CarryForward.latest(rows, date:)
+      data = CarryForward.apply(rows, date:)
       quotes = data.select { |r| r[:provider] == "ECB" }.map { |r| r[:quote] }
 
       _(quotes).must_include("PLN")
@@ -73,18 +73,18 @@ describe Rate do
       date = Date.parse("1901-01-01")
       rows = Rate.where(date: (date - 14)..date).naked.all
 
-      _(CarryForward.latest(rows, date:)).must_be_empty
+      _(CarryForward.apply(rows, date:)).must_be_empty
     end
 
     it "returns latest rates when client date is ahead of server" do
       future_date = Date.today + 1
       rows = Rate.where(date: (future_date - 14)..future_date).naked.all
-      data = CarryForward.latest(rows, date: future_date)
+      data = CarryForward.apply(rows, date: future_date)
 
       _(data).wont_be_empty
 
       today_rows = Rate.where(date: (Date.today - 14)..Date.today).naked.all
-      today_data = CarryForward.latest(today_rows, date: Date.today)
+      today_data = CarryForward.apply(today_rows, date: Date.today)
 
       _(data.map { |r| r[:date] }.uniq.sort).must_equal(today_data.map { |r| r[:date] }.uniq.sort)
     end
