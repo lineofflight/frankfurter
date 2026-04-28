@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "digest"
+require "set"
+
 require "roda"
 require "rate"
 require "weekly_rate"
@@ -10,6 +12,7 @@ require "blender"
 require "carry_forward"
 require "money/currency"
 require "peg"
+require "peg_anchor"
 
 module Versions
   class V2 < Roda
@@ -64,7 +67,11 @@ module Versions
       end
 
       def cache_key
-        Digest::MD5.hexdigest(max_date.to_s)
+        Digest::MD5.hexdigest([max_date, expand].join("|"))
+      end
+
+      def expand_providers?
+        expand&.include?("providers") || false
       end
 
       private
@@ -134,6 +141,10 @@ module Versions
         @params[:group]&.downcase
       end
 
+      def expand
+        @params[:expand]&.downcase&.split(",")
+      end
+
       def date
         parse_date(@params[:date])
       end
@@ -154,13 +165,15 @@ module Versions
         nil
       end
 
-      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group"].freeze
+      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
+      ALLOWED_EXPANSIONS = ["providers"].freeze
 
       def validate!
         validate_params!
         validate_dates!
         validate_conflicting_params!
         validate_group!
+        validate_expand!
         validate_currencies!
       end
 
@@ -181,6 +194,13 @@ module Versions
         raise ValidationError, "invalid group" if group && !["week", "month"].include?(group)
       end
 
+      def validate_expand!
+        return unless expand
+
+        unknown = expand - ALLOWED_EXPANSIONS
+        raise ValidationError, "invalid expand: #{unknown.join(",")}" if unknown.any?
+      end
+
       def validate_currencies!
         invalid = []
         invalid << base if @params[:base] && !Money::Currency.find(base)
@@ -199,70 +219,22 @@ module Versions
       end
 
       def emit_blended(rows, target_date: nil, &block)
-        blended = Blender.new(rows, base: effective_base).blend
-
-        if base_peg
-          blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
-        end
+        blended = Blender.new(rows, base: providers ? base : effective_base).blend
+        blended = PegAnchor.apply(blended, base: base, base_peg: base_peg) unless providers
+        return if blended.empty?
 
         output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s
 
-        records = []
-        emitted_quotes = Set.new
-        blended.each do |r|
+        records = blended.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
 
-          emitted_quotes << r[:quote]
-          rate = snap_peg_rate(r[:quote]) || r[:rate]
-          records << { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
+          record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          record[:providers] = r[:providers] if expand_providers? && r[:providers]
+          record
         end
 
-        if base_peg && (!quotes || quotes.include?(base_peg.base))
-          if output_date && !emitted_quotes.include?(base_peg.base)
-            emitted_quotes << base_peg.base
-            records << { date: output_date, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) }
-          end
-        end
-
-        records.concat(pegs(blended, emitted_quotes, output_date))
         records.sort_by! { |r| r[:quote] }
         records.each(&block)
-      end
-
-      def pegs(blended, emitted_quotes, output_date)
-        return [] if providers
-
-        reference_date = blended.map { |r| r[:date] }.max
-        return [] unless reference_date
-
-        date_str = output_date || reference_date.to_s
-
-        Peg.all.filter_map do |peg|
-          next if peg.quote == base
-          next if emitted_quotes.include?(peg.quote)
-          next if quotes && !quotes.include?(peg.quote)
-          next if reference_date < peg.since
-
-          if peg.base == effective_base
-            rate = peg.rate / (base_peg&.rate || 1.0)
-          else
-            anchor = blended.find { |r| r[:quote] == peg.base }
-            next unless anchor
-
-            rate = anchor[:rate] * peg.rate
-          end
-
-          { date: date_str, base:, quote: peg.quote, rate: round(rate) }
-        end
-      end
-
-      def snap_peg_rate(quote)
-        return if providers
-
-        peg = Peg.find(quote)
-        return unless peg && peg.base == effective_base
-
-        peg.rate / (base_peg ? base_peg.rate : 1.0)
       end
 
       def normalize_dates!(rows, date_col)

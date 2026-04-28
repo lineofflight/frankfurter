@@ -13,7 +13,7 @@
     "rate": 1.0,
     "since": "1966-02-14",
     "authority": "Falkland Islands Government",
-    "source": "https://en.wikipedia.org/wiki/Falkland_Islands_pound"
+    "source": "https://falklands.gov.fk/finance/currency"
   },
   {
     "quote": "SHP",
@@ -53,7 +53,7 @@
     "rate": 1.0,
     "since": "1974-01-01",
     "authority": "Royal Monetary Authority of Bhutan",
-    "source": "https://en.wikipedia.org/wiki/Bhutanese_ngultrum"
+    "source": "https://www.rma.org.bt/mpolicy/"
   },
   {
     "quote": "AED",
@@ -85,7 +85,7 @@
     "rate": 3.64,
     "since": "2001-07-09",
     "authority": "Qatar Central Bank",
-    "source": "https://en.wikipedia.org/wiki/Qatari_riyal"
+    "source": "https://www.qcb.gov.qa/Documents/BankInstructions/EN/01-02.pdf"
   },
   {
     "quote": "OMR",
@@ -93,7 +93,7 @@
     "rate": 0.3845,
     "since": "1986-01-01",
     "authority": "Central Bank of Oman",
-    "source": "https://en.wikipedia.org/wiki/Omani_rial"
+    "source": "https://cbo.gov.om/Pages/FixedPeg.aspx"
   },
   {
     "quote": "JOD",
@@ -109,7 +109,7 @@
     "rate": 1.79,
     "since": "1971-12-18",
     "authority": "Centrale Bank van Curaçao en Sint Maarten",
-    "source": "https://en.wikipedia.org/wiki/Netherlands_Antillean_guilder"
+    "source": "https://www.centralbank.cw/faq/monetary-foreign-exchange-policy"
   },
   {
     "quote": "MOP",
@@ -117,7 +117,7 @@
     "rate": 1.03,
     "since": "1983-01-01",
     "authority": "Autoridade Monetária de Macau",
-    "source": "https://en.wikipedia.org/wiki/Macanese_pataca"
+    "source": "https://www.amcm.gov.mo/en/about-amcm/history/the-pataca"
   },
   {
     "quote": "CVE",
@@ -125,6 +125,6 @@
     "rate": 110.265,
     "since": "1999-01-01",
     "authority": "Banco de Cabo Verde",
-    "source": "https://en.wikipedia.org/wiki/Cape_Verdean_escudo"
+    "source": "https://www.bcv.cv/pt/Supervisao/Consumidores/Servi%C3%A7os%20ao%20P%C3%BAblico/perguntasrespostasfrequentes/mercadocambial/Paginas/MercadoCambial.aspx"
   }
 ]

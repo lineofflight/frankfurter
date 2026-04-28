@@ -53,4 +53,17 @@ describe WeightedAverage do
 
     _(usd[:rate]).must_be_close_to(1.08, 0.02)
   end
+
+  it "exposes contributing providers per output row, sorted and unique" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
+      { date: date - 1, base: "EUR", quote: "USD", rate: 1.09, provider: "BOC" },
+    ]
+
+    result = WeightedAverage.new(rates).calculate
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:providers]).must_equal(["BOC", "ECB"])
+  end
 end
