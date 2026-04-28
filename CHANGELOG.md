@@ -9,24 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `expand=providers` query parameter on `/v2/rates` — adds a `providers` array to each record listing the provider keys whose rates contributed to the blended value. Field is omitted on rows derived from a currency peg, where no provider rate is used. (#323)
+- 2 new providers: BBK, NBM.
+- `expand=providers` query parameter on `/v2/rates`. (#323)
 
 ### Changed
 
-- Cross-base requests for pegged quotes are now anchored through the peg's base. For example, `?base=EUR&quotes=AED` previously returned the blended `EUR/AED` rate from providers; it now returns `blended(EUR/USD) × peg(USD/AED)`. The numerical difference is small (basis points) but removes spurious provider-disagreement noise on quantities that are mathematically pinned by the issuing authority. (#323)
-- Pegs are now treated as a source of rate data alongside providers. When `?providers=` filters the source set, pegs are excluded along with all other unlisted sources. Requests like `?base=BMD&providers=ecb` (where ECB does not publish BMD) now return empty rather than synthesizing rates from the peg. Default behavior (no `providers=`) is unchanged. (#323)
-- IMF Special Drawing Rights (XDR) is no longer filtered out of provider backfills. Several providers (NB, SBI, BCRA, etc.) publish XDR rates that were silently dropped; they now flow through like any other ISO 4217 quote. Re-backfill from `coverage_start` to ingest previously-dropped rows. (#333)
-- `/v2/rates` responses now stamp every row with its actual observation date rather than a flattened reporting date. On the latest and single-date paths, a pair carried forward from an earlier date now reports that earlier date. Range queries no longer carry forward at all: each pair appears on the days it actually published, with its own date. Pairs that didn't publish during the range are absent rather than projected. Mixed-cadence providers (e.g. weekly publishers) appear at their actual publication frequency. (#338)
-- Deutsche Bundesbank (BBK) as historical provider — daily pre-euro Frankfurt fixings for 18 currencies, 1948-06-21 through 1998-12-30
-- Bank of Russia (CBR) precious-metal reference prices — daily XAU, XAG, XPT and XPD against RUB, available from 2008-07-01. CBR is the first source for platinum and palladium beyond the National Bank of Ukraine.
-- National Bank of Moldova (NBM) precious-metal reference prices — daily XAU and XAG against MDL, available from 2012-01-02. Brings XAG to four providers (CBA, NBU, CBR, NBM), clearing the consensus threshold for silver.
-- National Bank of Poland (NBP) gold reference price — daily XAU against PLN from NBP's own gold fixing. Brings XAU coverage to six providers (BNR, CBA, NBU, CBR, NBM, NBP) for additional median stability.
+- Cross-base requests for pegged quotes are now anchored through the peg's base. (#323)
+- Pegs are treated as a source alongside providers; `?providers=` excludes them along with other unlisted sources. (#323)
+- IMF Special Drawing Rights (XDR) flows through provider backfills. (#333)
+- `/v2/rates` rows are stamped with their actual observation date. Range queries no longer carry forward. (#338)
+- Extended precious-metal coverage from CBR and NBP.
 
 ### Fixed
 
-- Restored Bank Negara Malaysia (BNM) provider that was inadvertently removed when the National Bank of Moldova key was renamed to BNM. Moldova's key is now NBM again.
-- BNR (National Bank of Romania) XAU rate is now normalized to RON per troy ounce. BNR publishes XAU as RON per gram, but ISO 4217 defines XAU as one troy ounce — the mistakenly low values were skewing blended XAU rates by ~31×. (#323)
-- BNR backfill now reads the yearly XML archive for the current year instead of the 10-day rolling feed. The 10-day feed left a permanent gap whenever a fresh backfill or scheduler outage spanned more than 10 days; the yearly archive covers all published cubes for the year and is a strict superset of the 10-day window.
+- Restored Bank Negara Malaysia (BNM) provider. Moldova's key is now NBM.
+- BNR XAU rate is normalized to RON per troy ounce. (#323)
+- BNR backfill reads the yearly XML archive instead of the 10-day rolling feed.
 
 ## [2.0.0-beta.2] - 2026-04-14
 
