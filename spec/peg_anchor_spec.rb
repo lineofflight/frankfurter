@@ -113,33 +113,6 @@ describe PegAnchor do
     end
   end
 
-  describe "anchor_quotes: false" do
-    it "passes through provider rates without peg substitution" do
-      rates = [
-        { date:, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-        { date:, base: "EUR", quote: "AED", rate: 99.0, provider: "ECB" },
-      ]
-
-      result = PegAnchor.new(rates, base: "USD", anchor_quotes: false).blend
-      aed = result.find { |r| r[:quote] == "AED" }
-
-      # peg would substitute 3.6725; provider passthrough keeps the inverted 99.0 (1/99.0 actually,
-      # since EUR/AED inverts to USD/AED when rebased — let's just check it's nowhere near peg)
-      _(aed[:rate]).wont_be_close_to(3.6725, 0.5)
-    end
-
-    it "skips synthesis of peg-only currencies" do
-      rates = [
-        { date:, base: "EUR", quote: "GBP", rate: 0.86, provider: "ECB" },
-      ]
-
-      result = PegAnchor.new(rates, base: "EUR", anchor_quotes: false).blend
-      fkp = result.find { |r| r[:quote] == "FKP" }
-
-      _(fkp).must_be_nil
-    end
-  end
-
   describe "empty input" do
     it "returns an empty array when no rates are provided" do
       result = PegAnchor.new([], base: "EUR").blend

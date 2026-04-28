@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Cross-base requests for pegged quotes are now anchored through the peg's base. For example, `?base=EUR&quotes=AED` previously returned the blended `EUR/AED` rate from providers; it now returns `blended(EUR/USD) × peg(USD/AED)`. The numerical difference is small (basis points) but removes spurious provider-disagreement noise on quantities that are mathematically pinned by the issuing authority. (#323)
+- Pegs are now treated as a source of rate data alongside providers. When `?providers=` filters the source set, pegs are excluded along with all other unlisted sources. Requests like `?base=BMD&providers=ecb` (where ECB does not publish BMD) now return empty rather than synthesizing rates from the peg. Default behavior (no `providers=`) is unchanged. (#323)
 - IMF Special Drawing Rights (XDR) is no longer filtered out of provider backfills. Several providers (NB, SBI, BCRA, etc.) publish XDR rates that were silently dropped; they now flow through like any other ISO 4217 quote. Re-backfill from `coverage_start` to ingest previously-dropped rows. (#333)
 - Deutsche Bundesbank (BBK) as historical provider — daily pre-euro Frankfurt fixings for 18 currencies, 1948-06-21 through 1998-12-30
 - Bank of Russia (CBR) precious-metal reference prices — daily XAU, XAG, XPT and XPD against RUB, available from 2008-07-01. CBR is the first source for platinum and palladium beyond the National Bank of Ukraine.

@@ -6,6 +6,11 @@ require "peg"
 # Peg-aware rate computation. Wraps Blender to apply peg substitutions and synthesize
 # rows for pegged currencies that providers do not cover.
 #
+# Pegs are treated as a source of rate data alongside providers. They contribute when the
+# caller has not restricted the source set (no ?providers= filter). When a caller scopes
+# to specific providers, peg behavior is bypassed at the call site by using Blender directly
+# rather than this class.
+#
 # Three peg interactions are handled here:
 #
 #   1. The request's base may itself be pegged (e.g. base=AED). Internally the blend runs
@@ -17,22 +22,17 @@ require "peg"
 #
 # Rows that came from a peg (rather than from a provider blend) carry no :providers key.
 # This is the signal for callers (e.g. expand=providers) to omit provenance.
-#
-# When `anchor_quotes: false`, peg substitution and synthesis are skipped — the caller
-# is asking for raw provider data (e.g. ?providers=ecb). Unit conversion still runs so
-# results are expressed in the user's chosen base.
 class PegAnchor
-  def initialize(rows, base:, anchor_quotes: true)
+  def initialize(rows, base:)
     @rows = rows
     @base = base
-    @anchor_quotes = anchor_quotes
   end
 
   def blend
     return [] if blended.empty?
 
-    rows = @anchor_quotes ? blended.map { |r| anchor_quote(r) } : blended.dup
-    rows.concat(synthesized_pegs(rows)) if @anchor_quotes
+    rows = blended.map { |r| anchor_quote(r) }
+    rows.concat(synthesized_pegs(rows))
     rows = scale_to_user_base(rows)
     rows.concat(base_peg_row(rows))
     rows

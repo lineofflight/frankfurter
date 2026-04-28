@@ -6,6 +6,7 @@ require "rate"
 require "weekly_rate"
 require "monthly_rate"
 require "roundable"
+require "blender"
 require "carry_forward"
 require "money/currency"
 require "peg"
@@ -216,7 +217,11 @@ module Versions
       end
 
       def emit_blended(rows, target_date: nil, &block)
-        blended = PegAnchor.new(rows, base: base, anchor_quotes: !providers).blend
+        blended = if providers
+          Blender.new(rows, base: base).blend
+        else
+          PegAnchor.new(rows, base: base).blend
+        end
         return if blended.empty?
 
         output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s

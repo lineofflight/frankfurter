@@ -508,12 +508,13 @@ describe Versions::V2 do
     _(json["rate"]).must_be_close_to(1.0 / 1.79, 0.001)
   end
 
-  it "resolves pegged base with providers filter" do
+  it "excludes pegs when providers filter is set" do
+    # BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate data, so
+    # scoping ?providers= to ECB excludes pegs along with all other unlisted sources.
     get "/rates?base=BMD&providers=ecb"
 
     _(last_response).must_be(:ok?)
-    _(json).wont_be_empty
-    _(json.first["base"]).must_equal("BMD")
+    _(json).must_be_empty
   end
 
   it "includes pegged currencies in currencies list" do
