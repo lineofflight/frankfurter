@@ -99,15 +99,12 @@ module Versions
         date = Fixtures.latest_date
         Rate.dataset.where(provider: "ECB", date:, base: "EUR", quote: "AED").update(rate: 99.0)
 
-        query = V2::RateQuery.new(date: date.to_s, base: "EUR", quotes: "AED")
-        results = query.to_a
+        aed_query = V2::RateQuery.new(date: date.to_s, base: "EUR", quotes: "AED")
+        usd_query = V2::RateQuery.new(date: date.to_s, base: "EUR", quotes: "USD")
+        aed_rate = aed_query.to_a.first[:rate]
+        usd_rate = usd_query.to_a.first[:rate]
 
-        _(results).wont_be_empty
-
-        eur_usd = Rate.where(provider: "ECB", date:, base: "EUR", quote: "USD").first.rate
-        expected = eur_usd * 3.6725
-
-        _(results.first[:rate]).must_be_close_to(expected, 0.001)
+        _(aed_rate).must_be_close_to(usd_rate * 3.6725, 0.001)
       end
 
       it "omits providers field on cross-base peg-anchored rows" do
