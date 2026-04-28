@@ -11,7 +11,7 @@ describe Rate do
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
 
-      _(data.sample[:date]).must_equal(date)
+      _(data.map { |r| r[:date] }.max).must_equal(date)
     end
 
     it "snaps to nearest prior date when requested date has no rates" do

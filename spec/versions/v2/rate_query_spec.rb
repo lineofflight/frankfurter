@@ -71,8 +71,8 @@ module Versions
       query = V2::RateQuery.new(date: Fixtures.latest_date.to_s)
       results = query.to_a
 
-      ron = results.find { |r| r[:quote] == "RON" }
-      usd = results.find { |r| r[:quote] == "USD" }
+      ron = results.find { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+      usd = results.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
 
       _(ron[:date]).must_equal(stale_date.to_s)
       _(usd[:date]).must_equal(Fixtures.latest_date.to_s)
@@ -87,7 +87,7 @@ module Versions
       Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
 
       query = V2::RateQuery.new(from: from.to_s, to: to.to_s)
-      ron_rows = query.to_a.select { |r| r[:quote] == "RON" }
+      ron_rows = query.to_a.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }
 
       _(ron_rows.size).must_equal(1)
       _(ron_rows.first[:date]).must_equal(stale_date.to_s)
