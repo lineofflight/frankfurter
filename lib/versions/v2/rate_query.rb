@@ -6,10 +6,10 @@ require "rate"
 require "weekly_rate"
 require "monthly_rate"
 require "roundable"
-require "blender"
 require "carry_forward"
 require "money/currency"
 require "peg"
+require "peg_anchor"
 
 module Versions
   class V2 < Roda
@@ -216,80 +216,21 @@ module Versions
       end
 
       def emit_blended(rows, target_date: nil, &block)
-        blended = Blender.new(rows, base: effective_base).blend
-
-        if base_peg
-          blended = blended.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base:) }
-        end
+        blended = PegAnchor.new(rows, base: base, anchor_quotes: !providers).blend
+        return if blended.empty?
 
         output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s
 
-        records = []
-        emitted_quotes = Set.new
-        blended.each do |r|
+        records = blended.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
 
-          emitted_quotes << r[:quote]
-          snapped = snap_peg_rate(r[:quote], blended)
-          rate = snapped || r[:rate]
-          record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(rate) }
-          record[:providers] = r[:providers] if expand_providers? && !snapped && r[:providers]
-          records << record
+          record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          record[:providers] = r[:providers] if expand_providers? && r[:providers]
+          record
         end
 
-        if base_peg && (!quotes || quotes.include?(base_peg.base))
-          if output_date && !emitted_quotes.include?(base_peg.base)
-            emitted_quotes << base_peg.base
-            records << { date: output_date, base:, quote: base_peg.base, rate: round(1.0 / base_peg.rate) }
-          end
-        end
-
-        records.concat(pegs(blended, emitted_quotes, output_date))
         records.sort_by! { |r| r[:quote] }
         records.each(&block)
-      end
-
-      def pegs(blended, emitted_quotes, output_date)
-        return [] if providers
-
-        reference_date = blended.map { |r| r[:date] }.max
-        return [] unless reference_date
-
-        date_str = output_date || reference_date.to_s
-
-        Peg.all.filter_map do |peg|
-          next if peg.quote == base
-          next if emitted_quotes.include?(peg.quote)
-          next if quotes && !quotes.include?(peg.quote)
-          next if reference_date < peg.since
-
-          if peg.base == effective_base
-            rate = peg.rate / (base_peg&.rate || 1.0)
-          else
-            anchor = blended.find { |r| r[:quote] == peg.base }
-            next unless anchor
-
-            rate = anchor[:rate] * peg.rate
-          end
-
-          { date: date_str, base:, quote: peg.quote, rate: round(rate) }
-        end
-      end
-
-      def snap_peg_rate(quote, blended)
-        return if providers
-
-        peg = Peg.find(quote)
-        return unless peg
-
-        if peg.base == effective_base
-          peg.rate / (base_peg ? base_peg.rate : 1.0)
-        else
-          bridge = blended.find { |r| r[:quote] == peg.base }
-          return unless bridge
-
-          bridge[:rate] * peg.rate
-        end
       end
 
       def normalize_dates!(rows, date_col)
