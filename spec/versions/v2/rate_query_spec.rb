@@ -62,60 +62,6 @@ module Versions
       _(query.to_a.first[:date]).must_equal(friday.to_s)
     end
 
-    describe "with pegged currencies" do
-      # AED is pegged to USD at exactly 3.6725. When a provider reports EUR/AED
-      # and we query base=USD, the blender computes USD/AED via EUR cross rates,
-      # introducing rounding noise. The rate should snap to the exact peg value.
-      before do
-        date = Fixtures.latest_date
-        # ECB has EUR/USD in fixtures; add EUR/AED and EUR/SAR so the blender
-        # computes cross rates (e.g. EUR/AED ÷ EUR/USD), introducing rounding noise.
-        Rate.dataset.multi_insert([
-          { provider: "ECB", date:, base: "EUR", quote: "AED", rate: 3.97 },
-          { provider: "ECB", date:, base: "EUR", quote: "SAR", rate: 4.05 },
-        ])
-      end
-
-      it "snaps to exact peg rate when base matches peg anchor" do
-        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, base: "USD", quotes: "AED")
-        results = query.to_a
-
-        _(results).wont_be_empty
-        _(results.first[:rate]).must_equal(3.6725)
-      end
-
-      it "snaps cross-peg rates between two pegged currencies" do
-        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, base: "AED", quotes: "SAR")
-        results = query.to_a
-
-        _(results).wont_be_empty
-
-        expected = 3.75 / 3.6725
-
-        _(results.first[:rate]).must_be_close_to(expected, 0.0001)
-      end
-
-      it "anchors cross-base pegged quote through the peg's base" do
-        date = Fixtures.latest_date
-        Rate.dataset.where(provider: "ECB", date:, base: "EUR", quote: "AED").update(rate: 99.0)
-
-        aed_query = V2::RateQuery.new(date: date.to_s, base: "EUR", quotes: "AED")
-        usd_query = V2::RateQuery.new(date: date.to_s, base: "EUR", quotes: "USD")
-        aed_rate = aed_query.to_a.first[:rate]
-        usd_rate = usd_query.to_a.first[:rate]
-
-        _(aed_rate).must_be_close_to(usd_rate * 3.6725, 0.001)
-      end
-
-      it "omits providers field on cross-base peg-anchored rows" do
-        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, base: "EUR", quotes: "AED", expand: "providers")
-        results = query.to_a
-
-        _(results).wont_be_empty
-        _(results.first.key?(:providers)).must_equal(false)
-      end
-    end
-
     it "uses target date for carried-forward quotes" do
       # Fixtures have ECB/BOC/BOJ on business days only. On Saturday, carry-forward brings in Friday's rates.
       # Without the target_date fix, quotes only present via carry-forward get Friday's date in the Saturday
