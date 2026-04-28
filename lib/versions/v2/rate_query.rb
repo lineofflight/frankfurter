@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "digest"
+require "set"
+
 require "roda"
 require "rate"
 require "weekly_rate"

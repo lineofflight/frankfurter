@@ -65,13 +65,14 @@ If you discover an entry that doesn't meet the bar (a de facto peg slipped in), 
 
 ## How Pegs Are Used
 
-Three places in the system consume `pegs.json`:
+Pegs are treated as a source of rate data alongside providers. They contribute when the caller has not restricted the source set via `?providers=`. Two places in the codebase consume `pegs.json`:
 
 1. **`Currency.find` / `Currency.all`** (lib/currency.rb) — synthesizes a currency record for pegged currencies that have no provider coverage of their own (e.g., FKP). Without a peg, these would not appear in `/v2/currencies`.
-2. **`RateQuery#snap_peg_rate`** (lib/versions/v2/rate_query.rb) — when a request's effective base matches a peg's base, the peg rate is substituted for the blended rate. This is the override case for matched-base requests.
-3. **`RateQuery#pegs`** — for pegged currencies that providers do not cover at all, derives a rate from the anchor currency.
+2. **`PegAnchor`** (lib/peg_anchor.rb) — wraps `Blender` and applies all peg behavior in one place. It substitutes the peg rate for pegged quotes (matched-base or cross-base via the peg's base as a bridge), synthesizes rows for pegged currencies that providers do not cover, and rebases output to the user's base when the request base is itself pegged.
 
-Pegs do **not** currently override blended provider rates in cross-base cases (e.g., `?base=EUR&quotes=AED`). This produces the AED jitter described in issue #323. Extending the override is tracked separately and is contingent on this policy being clear.
+Cross-base requests like `?base=EUR&quotes=AED` are anchored through the peg's base: the result is `blended(EUR/USD) × peg(USD→AED)` rather than `blended(EUR/AED)`. This removes provider-disagreement noise on quantities the issuing authority has fixed.
+
+When the caller scopes via `?providers=`, `RateQuery` bypasses `PegAnchor` and uses `Blender` directly. Pegs are excluded along with all other unlisted sources, so requests like `?base=BMD&providers=ecb` (where ECB does not publish BMD) return empty rather than synthesizing peg-derived rates.
 
 ## Why the Bar Matters
 
