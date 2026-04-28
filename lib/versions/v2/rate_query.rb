@@ -219,11 +219,8 @@ module Versions
       end
 
       def emit_blended(rows, target_date: nil, &block)
-        blended = if providers
-          Blender.new(rows, base: base).blend
-        else
-          PegAnchor.new(rows, base: base).blend
-        end
+        blended = Blender.new(rows, base: providers ? base : effective_base).blend
+        blended = PegAnchor.apply(blended, base: base, base_peg: base_peg) unless providers
         return if blended.empty?
 
         output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s
