@@ -21,6 +21,8 @@ module Versions
 
       class ValidationError < StandardError; end
 
+      ALLOWED_EXPANSIONS = ["providers"].freeze
+      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
       CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
       DEFAULT_CHUNK_MONTHS = 3
 
@@ -41,23 +43,15 @@ module Versions
             ds = range_dataset
             date_col = ds.model.date_column
 
-            if rollup?
-              rows = ds.between(chunk_range).all
-              normalize_dates!(rows, date_col) if date_col != :date
-              rows.group_by { |r| r[:date] }.each do |_, group_rows|
-                emit_blended(group_rows, &block)
-              end
-            else
-              expanded = (chunk_range.begin - CarryForward::RANGE_LOOKBACK_DAYS)..chunk_range.end
-              rows = ds.between(expanded).naked.all
-              CarryForward.enrich(rows, range: chunk_range).each do |target_date, group_rows|
-                emit_blended(group_rows, target_date:, &block)
-              end
+            rows = ds.between(chunk_range).all
+            normalize_dates!(rows, date_col) if date_col != :date
+            rows.group_by { |r| r[:date] }.each do |_, group_rows|
+              emit_blended(group_rows, &block)
             end
           end
         else
-          window = raw_dataset.where(date: (date_scope - CarryForward::LATEST_LOOKBACK_DAYS)..date_scope)
-          rows = CarryForward.latest(window.naked.all, date: date_scope)
+          window = raw_dataset.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope)
+          rows = CarryForward.apply(window.naked.all, date: date_scope)
           emit_blended(rows, &block)
         end
       end
@@ -81,7 +75,7 @@ module Versions
         if date_scope.is_a?(Range)
           ds.where(date: date_scope).max(:date)
         else
-          ds.where(date: (date_scope - CarryForward::LATEST_LOOKBACK_DAYS)..date_scope).max(:date)
+          ds.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope).max(:date)
         end
       end
 
@@ -165,9 +159,6 @@ module Versions
         nil
       end
 
-      ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
-      ALLOWED_EXPANSIONS = ["providers"].freeze
-
       def validate!
         validate_params!
         validate_dates!
@@ -218,17 +209,15 @@ module Versions
         end
       end
 
-      def emit_blended(rows, target_date: nil, &block)
+      def emit_blended(rows, &block)
         blended = Blender.new(rows, base: providers ? base : effective_base).blend
         blended = PegAnchor.apply(blended, base: base, base_peg: base_peg) unless providers
         return if blended.empty?
 
-        output_date = (target_date || blended.map { |r| r[:date] }.max)&.to_s
-
         records = blended.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
 
-          record = { date: output_date, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          record = { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
           record[:providers] = r[:providers] if expand_providers? && r[:providers]
           record
         end

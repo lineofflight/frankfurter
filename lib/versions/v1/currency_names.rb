@@ -36,7 +36,7 @@ module Versions
 
         today = Date.today
         rows = Rate.where(provider: "ECB").where(date: (today - 14)..today).naked.all
-        CarryForward.latest(rows, date: today)
+        CarryForward.apply(rows, date: today)
       end
     end
   end
