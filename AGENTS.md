@@ -24,7 +24,7 @@ lib/
 ├── currency.rb               # Currency model (materialized from rates)
 ├── currency_coverage.rb      # CurrencyCoverage model (provider-currency join)
 ├── db.rb                     # Database configuration
-├── historical_currency.rb    # Registers historical ISO 4217 codes via Money::Currency
+├── currency_patches.rb       # Patches Money::Currency: registers historical codes, fixes mangled names
 ├── log.rb                    # Shared logger
 ├── monthly_rate.rb           # MonthlyRate model on monthly_rates rollup table
 ├── peg.rb                    # Currency peg definitions (from db/seeds/pegs.json)
@@ -188,14 +188,19 @@ rake rollups:rebuild[ecb] # Rebuild rollups for a single provider
 
 See [.claude/skills/providers/SKILL.md](.claude/skills/providers/SKILL.md) for the full checklist and workflow.
 
-## Historical Currencies
+## Currency Patches
 
-Pre-euro and pre-redenomination ISO 4217 codes are registered from
-`db/seeds/historical_currencies.json` at boot via `Money::Currency.register`.
-To add more historical codes, add entries to the seed file. When adding a new
-provider, check whether it serves historical currencies and note them in coverage
-research. To pick up previously-dropped records, re-backfill the provider from
-its `coverage_start`:
+`db/seeds/currency_patches.json` patches `Money::Currency` at boot via
+`lib/currency_patches.rb`. Two purposes:
+
+- Register historical ISO 4217 codes (pre-euro, pre-redenomination) the gem
+  doesn't include — full entry with `name`, `symbol`, `subunit_to_unit`, `iso_numeric`.
+- Override mangled names on existing entries (e.g. `Cfa` → `CFA`) — partial
+  entry with just `iso_code` and `name`; existing fields are preserved via merge.
+
+When adding a new provider, check whether it serves historical currencies and
+note them in coverage research. To pick up previously-dropped records,
+re-backfill the provider from its `coverage_start`:
 
 ```ruby
 Provider["key"].backfill(after: Date.new(YYYY, 1, 1))

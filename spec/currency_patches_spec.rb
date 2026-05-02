@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require_relative "helper"
-require "historical_currency"
+require "currency_patches"
 
-describe "Historical currencies" do
-  it "registers all historical currencies with the Money gem" do
-    seeds = JSON.parse(File.read(File.expand_path("../db/seeds/historical_currencies.json", __dir__)))
+describe "Currency patches" do
+  it "applies all patches to the Money gem" do
+    seeds = JSON.parse(File.read(File.expand_path("../db/seeds/currency_patches.json", __dir__)))
 
     seeds.each do |entry|
       currency = Money::Currency.find(entry["iso_code"])

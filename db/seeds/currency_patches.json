@@ -15,5 +15,8 @@
   { "iso_code": "SIT", "name": "Slovenian Tolar", "symbol": "SIT", "subunit_to_unit": 100, "iso_numeric": "705" },
   { "iso_code": "TRL", "name": "Turkish Lira (old)", "symbol": "₤", "subunit_to_unit": 1, "iso_numeric": "792" },
   { "iso_code": "ROL", "name": "Romanian Leu (old)", "symbol": "L", "subunit_to_unit": 100, "iso_numeric": "642" },
-  { "iso_code": "XEU", "name": "European Currency Unit", "symbol": "₠", "subunit_to_unit": 100, "iso_numeric": "954" }
+  { "iso_code": "XEU", "name": "European Currency Unit", "symbol": "₠", "subunit_to_unit": 100, "iso_numeric": "954" },
+  { "iso_code": "XAF", "name": "Central African CFA Franc" },
+  { "iso_code": "XOF", "name": "West African CFA Franc" },
+  { "iso_code": "XPF", "name": "CFP Franc" }
 ]
