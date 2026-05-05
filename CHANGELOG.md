@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cross-base requests for pegged quotes are now anchored through the peg's base. (#323)
 - Pegs are treated as a source alongside providers; `?providers=` excludes them along with other unlisted sources. (#323)
 - IMF Special Drawing Rights (XDR) flows through provider backfills. (#333)
+- IMF adapter now also fetches SDR cross rates as a primary XDR source. (#335)
 - `/v2/rates` rows are stamped with their actual observation date. Range queries no longer carry forward. (#338)
 - Extended precious-metal coverage from CBR and NBP.
 

@@ -97,8 +97,8 @@ class Provider
 
         while cursor <= end_date
           last_day = Date.new(cursor.year, cursor.month, -1)
-          tsv = fetch_month(last_day)
-          dataset.concat(parse(tsv))
+          dataset.concat(parse(fetch_month(last_day, "REP")))
+          dataset.concat(parse_sdrcv(fetch_month(last_day, "SDRCV")))
           cursor >>= 1
         end
 
@@ -107,6 +107,34 @@ class Provider
       end
 
       def parse(tsv)
+        parse_rows(tsv) do |currency_name, rate, date|
+          indirect = currency_name.end_with?("(1)")
+          clean_name = currency_name.delete_suffix("(1)").strip.downcase
+          iso = CURRENCY_MAP[clean_name]
+          next unless iso
+          next if iso == "USD"
+
+          if indirect
+            { date:, base: iso, quote: "USD", rate: }
+          else
+            { date:, base: "USD", quote: iso, rate: }
+          end
+        end
+      end
+
+      # SDR cross rates: "SDRs per Currency unit" — natively base=currency, quote=XDR.
+      def parse_sdrcv(tsv)
+        parse_rows(tsv) do |currency_name, rate, date|
+          iso = CURRENCY_MAP[currency_name.downcase]
+          next unless iso
+
+          { date:, base: iso, quote: "XDR", rate: }
+        end
+      end
+
+      private
+
+      def parse_rows(tsv)
         return [] if tsv.nil? || tsv.strip.empty?
 
         records = []
@@ -127,12 +155,6 @@ class Provider
           currency_name = cols[0]&.strip
           next unless currency_name
 
-          indirect = currency_name.end_with?("(1)")
-          clean_name = currency_name.delete_suffix("(1)").strip.downcase
-          iso = CURRENCY_MAP[clean_name]
-          next unless iso
-          next if iso == "USD"
-
           cols[1..].zip(dates).each do |value, date|
             next unless date
 
@@ -142,24 +164,19 @@ class Provider
             rate = Float(cleaned)
             next if rate.zero?
 
-            records << if indirect
-              { date:, base: iso, quote: "USD", rate: }
-            else
-              { date:, base: "USD", quote: iso, rate: }
-            end
+            record = yield(currency_name, rate, date)
+            records << record if record
           end
         end
 
         records
       end
 
-      private
-
-      def fetch_month(last_day)
+      def fetch_month(last_day, report_type)
         url = URI(BASE_URL)
         url.query = URI.encode_www_form(
           SelectDate: last_day.to_s,
-          reportType: "REP",
+          reportType: report_type,
           tsvflag: "Y",
         )
 
