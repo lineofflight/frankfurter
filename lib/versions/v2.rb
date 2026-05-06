@@ -28,8 +28,12 @@ module Versions
       when RateQuery::ValidationError then 422
       else 500
       end
-      response.headers["Cache-Control"] = "no-store"
       request.halt(status, { status:, message: error.message })
+    end
+
+    plugin :hooks
+    after do
+      response.headers["Cache-Control"] = "no-store" if response.status && response.status >= 400
     end
 
     route do |r|

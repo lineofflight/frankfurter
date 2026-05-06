@@ -161,6 +161,20 @@ describe Versions::V2 do
     _(last_response.headers["Cache-Control"]).must_equal("no-store")
   end
 
+  it "does not cache 404 responses" do
+    get "/currency/xyz"
+
+    _(last_response.status).must_equal(404)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
+  it "does not cache 406 responses" do
+    get "/currencies.csv"
+
+    _(last_response.status).must_equal(406)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
   it "routes deterministic errors in range queries through error_handler" do
     bad_query = Object.new
     def bad_query.range? = true
