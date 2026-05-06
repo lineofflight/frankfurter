@@ -128,6 +128,14 @@
     "source": "https://www.amcm.gov.mo/en/about-amcm/history/the-pataca"
   },
   {
+    "quote": "BAM",
+    "base": "EUR",
+    "rate": 1.95583,
+    "since": "1997-08-11",
+    "authority": "Central Bank of Bosnia and Herzegovina",
+    "source": "https://www.cbbh.ba/Content/Read/13"
+  },
+  {
     "quote": "CVE",
     "base": "EUR",
     "rate": 110.265,
