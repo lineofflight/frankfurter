@@ -1,6 +1,6 @@
 # Frankfurter
 
-Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from 20+ institutional sources (central banks, the IMF, the Federal Reserve, etc.).
+Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from 50+ institutional sources (central banks, the IMF, the Federal Reserve, etc.).
 
 ## Architecture
 
