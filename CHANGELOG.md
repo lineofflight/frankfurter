@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 2 new providers: BBK, NBM.
 - `expand=providers` query parameter on `/v2/rates`. (#323)
+- BND/SGD par peg under the Brunei-Singapore Currency Interchangeability Agreement. (#342)
 
 ### Changed
 

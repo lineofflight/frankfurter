@@ -8,6 +8,14 @@
     "source": "https://en.wikipedia.org/wiki/Bermudian_dollar"
   },
   {
+    "quote": "BND",
+    "base": "SGD",
+    "rate": 1.0,
+    "since": "1967-06-12",
+    "authority": "Brunei Darussalam Central Bank",
+    "source": "https://www.bdcb.gov.bn/monetary-policy/monetary-policy-framework"
+  },
+  {
     "quote": "FKP",
     "base": "GBP",
     "rate": 1.0,
