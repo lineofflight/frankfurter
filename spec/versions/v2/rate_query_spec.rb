@@ -177,6 +177,22 @@ module Versions
       end
     end
 
+    describe "#scale_for_pegged_base" do
+      it "drops the base->base row that PegAnchor synthesizes for the user's pegged base" do
+        date = Date.parse("2024-01-15")
+        query = V2::RateQuery.new(base: "AED")
+        rows = [
+          { date:, base: "USD", quote: "EUR", rate: 0.93 },
+          { date:, base: "USD", quote: "AED", rate: 3.6725 },
+        ]
+
+        result = query.send(:scale_for_pegged_base, rows)
+
+        _(result.find { |r| r[:quote] == "AED" }).must_be_nil
+        _(result.find { |r| r[:quote] == "USD" }[:rate]).must_be_close_to(1.0 / 3.6725)
+      end
+    end
+
     describe "?providers= with pegged base" do
       it "returns empty (peg layer is bypassed when source set is restricted)" do
         recent_date = Fixtures.latest_date.to_s

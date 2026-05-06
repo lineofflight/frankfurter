@@ -257,7 +257,11 @@ module Versions
         return rows unless base_peg
         return [] if rows.empty?
 
-        scaled = rows.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base: base) }
+        scaled = rows.filter_map do |r|
+          next if r[:quote] == base
+
+          r.merge(rate: r[:rate] / base_peg.rate, base: base)
+        end
         unless scaled.any? { |r| r[:quote] == base_peg.base }
           ref = scaled.map { |r| r[:date] }.max
           scaled << { date: ref, base: base, quote: base_peg.base, rate: 1.0 / base_peg.rate }
