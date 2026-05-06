@@ -186,7 +186,7 @@ rake rollups:rebuild[ecb] # Rebuild rollups for a single provider
 
 ## Adding a New Provider
 
-See [.claude/skills/providers/SKILL.md](.claude/skills/providers/SKILL.md) for the full checklist and workflow.
+See [.agents/skills/implementing-providers/SKILL.md](.agents/skills/implementing-providers/SKILL.md) for the full checklist and workflow.
 
 ## Currency Patches
 
