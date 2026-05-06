@@ -31,11 +31,6 @@ module Versions
       request.halt(status, { status:, message: error.message })
     end
 
-    plugin :hooks
-    after do
-      response.headers["Cache-Control"] = "no-store" if response.status && response.status >= 400
-    end
-
     route do |r|
       response.cache_control(public: true, max_age: 86400)
 
