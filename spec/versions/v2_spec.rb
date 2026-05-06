@@ -154,6 +154,46 @@ describe Versions::V2 do
     _(json["message"]).must_include("unknown parameter")
   end
 
+  it "does not cache error responses" do
+    get "/rates?date=not-a-date"
+
+    _(last_response.status).must_equal(422)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
+  it "does not cache 404 responses" do
+    get "/currency/xyz"
+
+    _(last_response.status).must_equal(404)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
+  it "does not cache 406 responses" do
+    get "/currencies.csv"
+
+    _(last_response.status).must_equal(406)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
+  it "routes deterministic errors in range queries through error_handler" do
+    bad_query = Object.new
+    def bad_query.range? = true
+    def bad_query.cache_key = "x"
+
+    def bad_query.each
+      return to_enum(:each) unless block_given?
+
+      raise "boom"
+    end
+
+    Versions::V2::RateQuery.stub(:new, bad_query) do
+      get "/rates?from=#{range_start}&to=#{range_end}"
+    end
+
+    _(last_response.status).must_equal(500)
+    _(last_response.headers["Cache-Control"]).must_equal("no-store")
+  end
+
   it "returns rates as CSV" do
     get "/rates.csv"
 
