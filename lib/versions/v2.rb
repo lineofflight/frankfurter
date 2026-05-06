@@ -28,6 +28,7 @@ module Versions
       when RateQuery::ValidationError then 422
       else 500
       end
+      response.headers["Cache-Control"] = "no-store"
       request.halt(status, { status:, message: error.message })
     end
 
@@ -41,12 +42,16 @@ module Versions
 
           r.csv do
             if query.range?
+              first, rest = eager_split(query)
               response["Content-Type"] = "text/csv"
               headers = csv_headers(query)
               stream do |out|
                 out << CSV.generate_line(headers)
-                query.each do |record|
-                  out << CSV.generate_line(headers.map { |k| csv_value(record[k]) })
+                if first
+                  out << CSV.generate_line(headers.map { |k| csv_value(first[k]) })
+                  rest.each do |record|
+                    out << CSV.generate_line(headers.map { |k| csv_value(record[k]) })
+                  end
                 end
               end
             else
@@ -55,23 +60,30 @@ module Versions
           end
 
           if ndjson?(r)
+            first, rest = eager_split(query)
             response["Vary"] = "Accept"
             response["Content-Type"] = "application/x-ndjson"
             stream do |out|
-              query.each do |record|
-                out << Oj.dump(record, mode: :compat)
+              if first
+                out << Oj.dump(first, mode: :compat)
                 out << "\n"
+                rest.each do |record|
+                  out << Oj.dump(record, mode: :compat)
+                  out << "\n"
+                end
               end
             end
           elsif query.range?
+            first, rest = eager_split(query)
             response["Content-Type"] = "application/json; charset=utf-8"
             stream do |out|
               out << "["
-              first = true
-              query.each do |record|
-                out << "," unless first
-                out << Oj.dump(record, mode: :compat)
-                first = false
+              if first
+                out << Oj.dump(first, mode: :compat)
+                rest.each do |record|
+                  out << ","
+                  out << Oj.dump(record, mode: :compat)
+                end
               end
               out << "]"
             end
@@ -115,6 +127,16 @@ module Versions
     end
 
     private
+
+    # Pull the first record before streaming so deterministic data errors raise
+    # in the route block (caught by error_handler) instead of mid-stream after
+    # response headers — including Cache-Control — have been flushed.
+    def eager_split(query)
+      enum = query.each
+      [enum.next, enum]
+    rescue StopIteration
+      [nil, [].each]
+    end
 
     def ndjson?(request)
       accept = request.env["HTTP_ACCEPT"] || ""

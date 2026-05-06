@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Error responses are no longer cacheable. Streaming range queries surface deterministic errors before headers fly so failures don't get pinned at the edge.
 - Restored Bank Negara Malaysia (BNM) provider. Moldova's key is now NBM.
 - BNR XAU rate is normalized to RON per troy ounce. (#323)
 - BNR backfill reads the yearly XML archive instead of the 10-day rolling feed.
