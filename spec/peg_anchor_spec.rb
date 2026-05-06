@@ -13,7 +13,7 @@ describe PegAnchor do
         { date:, base: "USD", quote: "AED", rate: 3.67, providers: ["ECB"] },
       ]
 
-      result = PegAnchor.apply(blended, base: "USD", base_peg: nil)
+      result = PegAnchor.apply(blended, base: "USD")
       aed = result.find { |r| r[:quote] == "AED" }
 
       _(aed[:rate]).must_equal(3.6725)
@@ -24,7 +24,7 @@ describe PegAnchor do
         { date:, base: "USD", quote: "AED", rate: 3.67, providers: ["ECB"] },
       ]
 
-      result = PegAnchor.apply(blended, base: "USD", base_peg: nil)
+      result = PegAnchor.apply(blended, base: "USD")
       aed = result.find { |r| r[:quote] == "AED" }
 
       _(aed.key?(:providers)).must_equal(false)
@@ -38,37 +38,10 @@ describe PegAnchor do
         { date:, base: "EUR", quote: "AED", rate: 4.04, providers: ["ECB"] },
       ]
 
-      result = PegAnchor.apply(blended, base: "EUR", base_peg: nil)
+      result = PegAnchor.apply(blended, base: "EUR")
       aed = result.find { |r| r[:quote] == "AED" }
 
       _(aed[:rate]).must_be_close_to(1.10 * 3.6725, 0.0001)
-    end
-  end
-
-  describe "peg-to-peg cross rates" do
-    it "computes pure peg cross-rate when both base and quote are pegged" do
-      blended = [
-        { date:, base: "USD", quote: "EUR", rate: 0.91, providers: ["ECB"] },
-      ]
-
-      result = PegAnchor.apply(blended, base: "AED", base_peg: Peg.find("AED"))
-      sar = result.find { |r| r[:quote] == "SAR" }
-
-      _(sar[:rate]).must_be_close_to(3.75 / 3.6725, 0.0001)
-    end
-  end
-
-  describe "base_peg row" do
-    it "injects the peg base row when request base is pegged" do
-      blended = [
-        { date:, base: "USD", quote: "EUR", rate: 0.91, providers: ["ECB"] },
-      ]
-
-      result = PegAnchor.apply(blended, base: "AED", base_peg: Peg.find("AED"))
-      usd = result.find { |r| r[:quote] == "USD" }
-
-      _(usd[:rate]).must_be_close_to(1.0 / 3.6725, 0.0001)
-      _(usd.key?(:providers)).must_equal(false)
     end
   end
 
@@ -78,7 +51,7 @@ describe PegAnchor do
         { date:, base: "EUR", quote: "GBP", rate: 0.86, providers: ["ECB"] },
       ]
 
-      result = PegAnchor.apply(blended, base: "EUR", base_peg: nil)
+      result = PegAnchor.apply(blended, base: "EUR")
       fkp = result.find { |r| r[:quote] == "FKP" }
 
       _(fkp).wont_be_nil
@@ -92,7 +65,7 @@ describe PegAnchor do
         { date: old_date, base: "EUR", quote: "GBP", rate: 0.86, providers: ["ECB"] },
       ]
 
-      result = PegAnchor.apply(blended, base: "EUR", base_peg: nil)
+      result = PegAnchor.apply(blended, base: "EUR")
       fkp = result.find { |r| r[:quote] == "FKP" }
 
       _(fkp).must_be_nil
@@ -101,7 +74,7 @@ describe PegAnchor do
 
   describe "empty input" do
     it "returns an empty array when no rates are provided" do
-      result = PegAnchor.apply([], base: "EUR", base_peg: nil)
+      result = PegAnchor.apply([], base: "EUR")
 
       _(result).must_equal([])
     end
