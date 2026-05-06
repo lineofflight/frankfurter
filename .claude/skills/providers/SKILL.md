@@ -97,3 +97,13 @@ ecb_rates = Rate.where(provider: "ECB").where(date: Date.today - 7..Date.today).
 - Rates that are the reciprocal of expected (base/quote swapped) — this was the HNB bug — see 'Rate direction' principle above
 - Rates that are 10x or 100x off (unit multiplier not normalized)
 - Rates that match another provider exactly but on wrong dates (date parsing bug)
+
+## Extending an existing adapter
+
+When you widen an existing adapter to emit new record shapes (a new currency, a new pair, a new report block), `Provider#backfill` resumes from `last_synced` — so already-synced environments only fetch the new shape from the current date forward. To populate history, hand-backfill once at deploy:
+
+```ruby
+Provider["KEY"].backfill(after: Date.new(YYYY, M, D))
+```
+
+A fresh DB doesn't need this — it starts from `coverage_start`.

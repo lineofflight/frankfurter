@@ -76,6 +76,16 @@ describe BaseConversion do
     _(usd[:rate]).must_equal(1.10)
   end
 
+  it "raises when a provider produces ambiguous bridges to the same quote" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.16, provider: "IMF" },
+      { date: date, base: "USD", quote: "XDR", rate: 0.73, provider: "IMF" },
+      { date: date, base: "EUR", quote: "XDR", rate: 0.85, provider: "IMF" },
+    ]
+
+    _ { BaseConversion.new(rates, base: "EUR").convert }.must_raise(RuntimeError)
+  end
+
   it "bridges within the same provider only" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },

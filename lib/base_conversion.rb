@@ -10,7 +10,15 @@ class BaseConversion
 
   def convert
     rates.group_by { |r| r[:provider] }.flat_map do |provider, group|
-      convert_group(group).map { |r| r.merge(provider:) }
+      converted = convert_group(group).map { |r| r.merge(provider:) }
+      seen = {}
+      converted.each do |r|
+        key = [r[:date], r[:quote]]
+        raise "ambiguous bridge: #{provider} produced #{key.inspect} twice" if seen[key]
+
+        seen[key] = true
+      end
+      converted
     end
   end
 
