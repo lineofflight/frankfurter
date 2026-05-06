@@ -36,6 +36,23 @@ describe App do
     _(json["message"]).must_equal("not found")
   end
 
+  describe "error responses are not cached" do
+    [
+      ["root 404", "/nonexistent", 404],
+      ["v1 404", "/v1/1000-01-01", 404],
+      ["v2 422", "/v2/rates?date=not-a-date", 422],
+      ["v2 404", "/v2/currency/xyz", 404],
+      ["v2 406", "/v2/currencies.csv", 406],
+    ].each do |label, path, status|
+      it "sets Cache-Control: no-store on #{label}" do
+        get path
+
+        _(last_response.status).must_equal(status)
+        _(last_response.headers["cache-control"]).must_equal("no-store")
+      end
+    end
+  end
+
   it "routes /v1 to V1 handler" do
     get "/v1/latest"
 
