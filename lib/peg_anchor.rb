@@ -6,7 +6,8 @@ require "peg"
 
 # Peg-aware post-processing of blended rates. Substitutes peg rates for pegged quotes and synthesises rows for
 # pegged currencies that providers do not cover. Operates on a single-base set; rebasing to the user's base is the
-# caller's responsibility (in V2 this is RateQuery#derive).
+# caller's responsibility (in V2 this happens in RateQuery — `derive` on the pivot path or `scale_for_pegged_base`
+# on the fast path).
 #
 # Pegs are treated as a source of rate data alongside providers. They contribute when the caller has not restricted
 # the source set (no ?providers= filter). When a caller scopes to specific providers, peg behavior is bypassed at the

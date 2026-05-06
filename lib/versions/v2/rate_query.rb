@@ -233,6 +233,8 @@ module Versions
       end
 
       def fast_path_blend(rows)
+        return [] if providers && base_peg
+
         blended = Blender.new(rows, base: effective_base).blend
         blended = PegAnchor.apply(blended, base: effective_base) unless providers
         scale_for_pegged_base(blended)

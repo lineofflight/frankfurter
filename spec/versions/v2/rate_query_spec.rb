@@ -177,6 +177,15 @@ module Versions
       end
     end
 
+    describe "?providers= with pegged base" do
+      it "returns empty (peg layer is bypassed when source set is restricted)" do
+        recent_date = Fixtures.latest_date.to_s
+        query = V2::RateQuery.new(date: recent_date, providers: "ECB", base: "AED", quotes: "USD")
+
+        _(query.to_a).must_be_empty
+      end
+    end
+
     describe "#derive" do
       let(:date) { Date.parse("2024-01-15") }
 
