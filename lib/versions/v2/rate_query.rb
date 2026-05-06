@@ -25,6 +25,7 @@ module Versions
       ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
       CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
       DEFAULT_CHUNK_MONTHS = 3
+      PIVOT = "USD"
 
       def initialize(params)
         @params = params
@@ -95,6 +96,7 @@ module Versions
         if quotes
           currencies = Set.new(quotes)
           currencies << effective_base
+          currencies << PIVOT
           quotes.each { |q| (peg = Peg.find(q)) && currencies << peg.base }
           ds = ds.only(*currencies)
         end
@@ -210,8 +212,12 @@ module Versions
       end
 
       def emit_blended(rows, &block)
-        blended = Blender.new(rows, base: providers ? base : effective_base).blend
-        blended = PegAnchor.apply(blended, base: base, base_peg: base_peg) unless providers
+        blended = if fast_path?(rows)
+          fast_path_blend(rows)
+        else
+          pivot_path_blend(rows)
+        end
+
         return if blended.empty?
 
         records = blended.filter_map do |r|
@@ -226,6 +232,37 @@ module Versions
         records.each(&block)
       end
 
+      def fast_path_blend(rows)
+        blended = Blender.new(rows, base: effective_base).blend
+        blended = PegAnchor.apply(blended, base: effective_base) unless providers
+        scale_for_pegged_base(blended)
+      end
+
+      def pivot_path_blend(rows)
+        blended = Blender.new(rows, base: PIVOT).blend
+        blended = PegAnchor.apply(blended, base: PIVOT) unless providers
+        return [] if blended.empty?
+        return blended if base == PIVOT
+
+        derive(blended, target: base)
+      end
+
+      # Fast-path counterpart to derive: when the request base is pegged but every input row already lives in the
+      # peg's base (effective_base), the blend stays in effective_base. We then scale the rows to the user's base by
+      # 1/peg.rate and append a base->peg.base row. Mirrors the legacy PegAnchor#scale_to_user_base + base_peg_row,
+      # confined to the fast path; the pivot path's `derive` already yields rows in the requested base.
+      def scale_for_pegged_base(rows)
+        return rows unless base_peg
+        return [] if rows.empty?
+
+        scaled = rows.map { |r| r.merge(rate: r[:rate] / base_peg.rate, base: base) }
+        unless scaled.any? { |r| r[:quote] == base_peg.base }
+          ref = scaled.map { |r| r[:date] }.max
+          scaled << { date: ref, base: base, quote: base_peg.base, rate: 1.0 / base_peg.rate }
+        end
+        scaled
+      end
+
       def normalize_dates!(rows, date_col)
         rows.each { |r| r.values[:date] = r.values.delete(date_col) }
       end
@@ -238,6 +275,35 @@ module Versions
           yield cursor..chunk_end
           cursor = chunk_end + 1
         end
+      end
+
+      # True iff every input row already has effective_base as its :base. In that case there is nothing to
+      # cross-convert, so the blend can run directly in user's base without round-tripping through PIVOT.
+      def fast_path?(rows)
+        rows.all? { |r| r[:base] == effective_base }
+      end
+
+      # Given rows blended in PIVOT (one per :quote), return rows rebased to `target` by division. Appends a
+      # `target -> PIVOT` row. Rows whose quote is `target` are dropped (no base->base row). Returns [] if
+      # `target` is not present in the input (no path to derive).
+      def derive(rows, target:)
+        return [] if rows.empty?
+
+        pivot_to_target = rows.find { |r| r[:quote] == target }
+        return [] unless pivot_to_target
+
+        derived = rows.filter_map do |r|
+          next if r[:quote] == target
+
+          r.merge(base: target, rate: r[:rate] / pivot_to_target[:rate])
+        end
+
+        derived << pivot_to_target.merge(
+          base: target,
+          quote: pivot_to_target[:base],
+          rate: 1.0 / pivot_to_target[:rate],
+        )
+        derived
       end
     end
   end

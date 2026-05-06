@@ -176,5 +176,107 @@ module Versions
         _(results.first[:quote]).must_equal("BTN")
       end
     end
+
+    describe "#derive" do
+      let(:date) { Date.parse("2024-01-15") }
+
+      def call_derive(rows, target:)
+        V2::RateQuery.allocate.send(:derive, rows, target: target)
+      end
+
+      it "returns [] when target is not in input" do
+        rows = [{ date:, base: "USD", quote: "EUR", rate: 0.93 }]
+
+        _(call_derive(rows, target: "GBP")).must_equal([])
+      end
+
+      it "returns [] when input is empty" do
+        _(call_derive([], target: "GBP")).must_equal([])
+      end
+
+      it "rebases each row to target by division and appends target->pivot row" do
+        rows = [
+          { date:, base: "USD", quote: "EUR", rate: 0.93, providers: ["ECB"] },
+          { date:, base: "USD", quote: "GBP", rate: 0.79, providers: ["ECB"] },
+        ]
+
+        result = call_derive(rows, target: "EUR")
+        gbp = result.find { |r| r[:quote] == "GBP" }
+        usd = result.find { |r| r[:quote] == "USD" }
+
+        _(gbp[:base]).must_equal("EUR")
+        _(gbp[:rate]).must_be_close_to(0.79 / 0.93)
+        _(usd[:base]).must_equal("EUR")
+        _(usd[:rate]).must_be_close_to(1.0 / 0.93)
+      end
+
+      it "drops the target row from output (no base->base row)" do
+        rows = [
+          { date:, base: "USD", quote: "EUR", rate: 0.93 },
+          { date:, base: "USD", quote: "GBP", rate: 0.79 },
+        ]
+
+        result = call_derive(rows, target: "EUR")
+
+        _(result.find { |r| r[:quote] == "EUR" }).must_be_nil
+      end
+
+      it "produces exact reciprocals between any two non-pivot quotes" do
+        rows = [
+          { date:, base: "USD", quote: "EUR", rate: 0.93 },
+          { date:, base: "USD", quote: "GBP", rate: 0.79 },
+        ]
+
+        eur_view = call_derive(rows, target: "EUR")
+        gbp_view = call_derive(rows, target: "GBP")
+        eur_to_gbp = eur_view.find { |r| r[:quote] == "GBP" }[:rate]
+        gbp_to_eur = gbp_view.find { |r| r[:quote] == "EUR" }[:rate]
+
+        _(eur_to_gbp * gbp_to_eur).must_be_close_to(1.0, 1e-12)
+      end
+    end
+
+    describe "#fast_path?" do
+      let(:date) { Date.parse("2024-01-15") }
+
+      def call_fast_path(query, rows)
+        query.send(:fast_path?, rows)
+      end
+
+      it "is true when every row's :base equals effective_base" do
+        query = V2::RateQuery.new(base: "EUR")
+        rows = [
+          { date:, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+          { date:, base: "EUR", quote: "GBP", rate: 0.86, provider: "ECB" },
+        ]
+
+        _(call_fast_path(query, rows)).must_equal(true)
+      end
+
+      it "is false when any row has a different :base" do
+        query = V2::RateQuery.new(base: "EUR")
+        rows = [
+          { date:, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+          { date:, base: "CAD", quote: "USD", rate: 0.74, provider: "BOC" },
+        ]
+
+        _(call_fast_path(query, rows)).must_equal(false)
+      end
+
+      it "uses the peg's base as effective_base for a pegged request base" do
+        query = V2::RateQuery.new(base: "AED")
+        rows = [
+          { date:, base: "USD", quote: "EUR", rate: 0.93, provider: "ECB" },
+        ]
+
+        _(call_fast_path(query, rows)).must_equal(true)
+      end
+
+      it "is true on empty input (vacuous)" do
+        query = V2::RateQuery.new(base: "EUR")
+
+        _(call_fast_path(query, [])).must_equal(true)
+      end
+    end
   end
 end

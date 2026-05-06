@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - BNR XAU rate is normalized to RON per troy ounce. (#323)
 - BNR backfill reads the yearly XML archive instead of the 10-day rolling feed.
 - Corrected mangled acronyms in CFA franc currency names (XAF, XOF, XPF).
+- `/v2/rates` is now derived from a USD-anchored blend, so reciprocals (`A→B × B→A`) and cross-rate triangles round to 1.0. Multi-provider non-USD-base queries may shift in the 4th–5th decimal as a result. (#343)
 
 ## [2.0.0-beta.2] - 2026-04-14
 
