@@ -122,11 +122,13 @@ class Provider
         end
       end
 
-      # SDR cross rates: "SDRs per Currency unit" — natively base=currency, quote=XDR.
+      # SDR cross rates: "SDRs per Currency unit" — only emit USD/XDR. Other pairs
+      # in this report are derived by IMF from the rep series and would create
+      # ambiguous bridges in BaseConversion if retained.
       def parse_sdrcv(tsv)
         parse_rows(tsv) do |currency_name, rate, date|
           iso = CURRENCY_MAP[currency_name.downcase]
-          next unless iso
+          next unless iso == "USD"
 
           { date:, base: iso, quote: "XDR", rate: }
         end

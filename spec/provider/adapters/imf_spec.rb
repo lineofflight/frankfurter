@@ -126,16 +126,15 @@ class Provider < Sequel::Model(:providers)
         _(keys.size).must_equal(keys.uniq.size)
       end
 
-      it "fetches SDR cross rates alongside representative rates" do
+      it "emits SDR cross rates only as USD/XDR" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
         sdr = dataset.select { |r| r[:quote] == "XDR" }
 
         _(sdr).wont_be_empty
-        _(sdr.map { |r| r[:base] }.uniq).must_include("EUR")
-        _(sdr.map { |r| r[:base] }.uniq).must_include("USD")
+        _(sdr.map { |r| r[:base] }.uniq).must_equal(["USD"])
       end
 
-      it "parses SDR cross rates as base=currency, quote=XDR" do
+      it "parses USD/XDR from SDR cross rates and ignores other currencies" do
         tsv = <<~TSV
           SDRs per Currency unit for April 2026
           Currency\tApril 01, 2026\tApril 02, 2026
@@ -146,12 +145,10 @@ class Provider < Sequel::Model(:providers)
 
         records = adapter.parse_sdrcv(tsv)
 
-        eur = records.find { |r| r[:base] == "EUR" && r[:date] == Date.new(2026, 4, 1) }
+        _(records.map { |r| r[:base] }.uniq).must_equal(["USD"])
+        _(records.size).must_equal(2)
 
-        _(eur[:quote]).must_equal("XDR")
-        _(eur[:rate]).must_equal(0.85079)
-
-        usd = records.find { |r| r[:base] == "USD" && r[:date] == Date.new(2026, 4, 1) }
+        usd = records.find { |r| r[:date] == Date.new(2026, 4, 1) }
 
         _(usd[:quote]).must_equal("XDR")
         _(usd[:rate]).must_equal(0.7331240)
@@ -161,7 +158,7 @@ class Provider < Sequel::Model(:providers)
         tsv = <<~TSV
           SDRs per Currency unit for April 2026
           Currency\tApril 01, 2026\tApril 02, 2026
-          Euro\tNA\t0.8483160000
+          U.S. dollar\tNA\t0.7360660000
         TSV
 
         records = adapter.parse_sdrcv(tsv)
