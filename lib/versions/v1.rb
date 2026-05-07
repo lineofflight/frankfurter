@@ -10,6 +10,13 @@ require "versions/v1/quote/interval"
 
 module Versions
   class V1 < Roda
+    ROOT_PAYLOAD = {
+      version: "v1",
+      status: "frozen",
+      openapi: "/v1/openapi.json",
+      docs: "https://frankfurter.dev",
+    }.freeze
+
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
@@ -24,6 +31,9 @@ module Versions
 
     route do |r|
       response.cache_control(public: true, max_age: 86400)
+
+      r.is { ROOT_PAYLOAD }
+      r.root { ROOT_PAYLOAD }
 
       r.is(/latest|current/) do
         r.params["date"] = Date.today.to_s

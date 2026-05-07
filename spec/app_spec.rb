@@ -15,6 +15,35 @@ describe App do
 
     _(last_response).must_be(:ok?)
     _(headers["Cache-Control"]).must_equal("public, max-age=86400")
+    json = Oj.load(last_response.body)
+
+    _(json["name"]).must_equal("Frankfurter")
+    _(json["versions"]["v1"]["openapi"]).must_equal("/v1/openapi.json")
+    _(json["versions"]["v1"]["status"]).must_equal("frozen")
+    _(json["versions"]["v2"]["openapi"]).must_equal("/v2/openapi.json")
+    _(json["versions"]["v2"]["status"]).must_equal("current")
+  end
+
+  it "serves v1 root" do
+    get "/v1"
+
+    _(last_response).must_be(:ok?)
+    json = Oj.load(last_response.body)
+
+    _(json["version"]).must_equal("v1")
+    _(json["status"]).must_equal("frozen")
+    _(json["openapi"]).must_equal("/v1/openapi.json")
+  end
+
+  it "serves v2 root" do
+    get "/v2"
+
+    _(last_response).must_be(:ok?)
+    json = Oj.load(last_response.body)
+
+    _(json["version"]).must_equal("v2")
+    _(json["status"]).must_equal("current")
+    _(json["openapi"]).must_equal("/v2/openapi.json")
   end
 
   it "serves static files" do

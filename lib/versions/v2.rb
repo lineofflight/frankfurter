@@ -9,6 +9,13 @@ require "versions/v2/rate_query"
 
 module Versions
   class V2 < Roda
+    ROOT_PAYLOAD = {
+      version: "v2",
+      status: "current",
+      openapi: "/v2/openapi.json",
+      docs: "https://frankfurter.dev",
+    }.freeze
+
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
@@ -33,6 +40,9 @@ module Versions
 
     route do |r|
       response.cache_control(public: true, max_age: 86400)
+
+      r.is { ROOT_PAYLOAD }
+      r.root { ROOT_PAYLOAD }
 
       r.on("rates") do
         r.get do

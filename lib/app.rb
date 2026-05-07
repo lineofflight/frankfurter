@@ -39,6 +39,10 @@ class App < Roda
 
       {
         name: "Frankfurter",
+        versions: {
+          v1: { base: "/v1", openapi: "/v1/openapi.json", status: "frozen" },
+          v2: { base: "/v2", openapi: "/v2/openapi.json", status: "current" },
+        },
         docs: "https://frankfurter.dev",
         source: "https://github.com/lineofflight/frankfurter",
       }
