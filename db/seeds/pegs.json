@@ -142,5 +142,21 @@
     "since": "1999-01-01",
     "authority": "Banco de Cabo Verde",
     "source": "https://www.bcv.cv/pt/Supervisao/Consumidores/Servi%C3%A7os%20ao%20P%C3%BAblico/perguntasrespostasfrequentes/mercadocambial/Paginas/MercadoCambial.aspx"
+  },
+  {
+    "quote": "XAF",
+    "base": "EUR",
+    "rate": 655.957,
+    "since": "1999-01-01",
+    "authority": "Banque des États de l'Afrique Centrale",
+    "source": "https://en.wikipedia.org/wiki/Central_African_CFA_franc"
+  },
+  {
+    "quote": "XOF",
+    "base": "EUR",
+    "rate": 655.957,
+    "since": "1999-01-01",
+    "authority": "Banque Centrale des États de l'Afrique de l'Ouest",
+    "source": "https://en.wikipedia.org/wiki/West_African_CFA_franc"
   }
 ]
