@@ -21,8 +21,9 @@ require "peg"
 #      the peg's base as a bridge (cross-base).
 #   2. A peg's quote may not be covered by any provider. A row is synthesized from the peg's anchor.
 #
-# Rows that came from a peg (rather than from a provider blend) carry no :providers key. This is the signal for
-# callers (e.g. expand=providers) to omit provenance.
+# Synthesized rows (a peg's quote that no provider covers) carry no :providers key. Anchored rows (a quote that
+# providers do cover, but where the peg overrides the blended rate) keep their providers list with every entry
+# marked excluded — the peg, not the providers, defined the final rate.
 class PegAnchor
   class << self
     def apply(rows, base:)
@@ -62,7 +63,9 @@ class PegAnchor
       bridge[:rate] * peg.rate
     end
 
-    row.merge(rate: rate).tap { |h| h.delete(:providers) }
+    overridden = row.merge(rate: rate)
+    overridden[:providers] = row[:providers].map { |p| p.merge(excluded: true) } if row[:providers]
+    overridden
   end
 
   def synthesized_pegs(rows)

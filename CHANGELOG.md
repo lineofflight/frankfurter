@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking:** `expand=providers` on `/v2/rates` now returns each provider's individual rate. The `providers` field changes from `["ECB", "BOC"]` to `[{ "key": "ECB", "rate": 0.92 }, { "key": "BOC", "rate": 0.93 }]`. Outliers and peg-overridden providers are flagged with `excluded: true` instead of being hidden. CSV format changes from `ECB|BOC` to `ECB:0.92|BOC:0.93`, with `*` suffix on excluded entries.
 - Cross-base requests for pegged quotes are now anchored through the peg's base. (#323)
 - Pegs are treated as a source alongside providers; `?providers=` excludes them along with other unlisted sources. (#323)
 - IMF Special Drawing Rights (XDR) flows through provider backfills. (#333)

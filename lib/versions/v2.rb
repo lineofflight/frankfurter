@@ -168,7 +168,9 @@ module Versions
     end
 
     def csv_value(value)
-      value.is_a?(Array) ? value.join("|") : value
+      return value unless value.is_a?(Array)
+
+      value.map { |p| p[:excluded] ? "#{p[:key]}:#{p[:rate]}*" : "#{p[:key]}:#{p[:rate]}" }.join("|")
     end
 
     def currencies(params)

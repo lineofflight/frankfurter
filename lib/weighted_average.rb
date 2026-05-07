@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # Recency-weighted averaging of rebased exchange rates. Rates within the grace period carry full weight.
-# Beyond it, weight decays exponentially so stale rates contribute less without a hard cutoff.
+# Beyond it, weight decays exponentially so stale rates contribute less without a hard cutoff. Rates marked
+# `excluded: true` (e.g. consensus outliers) are surfaced in the providers list but do not contribute to the rate.
 class WeightedAverage
   DECAY_GRACE_DAYS = 3
   DECAY_RATE = 0.5
@@ -16,12 +17,25 @@ class WeightedAverage
     reference_date = @rates.map { |r| r[:date] }.max
     return [] unless reference_date
 
-    @rates.group_by { |r| r[:quote] }.sort.map do |_, group|
-      weighted = group.map { |r| [r, recency_weight(reference_date - r[:date])] }
+    @rates.group_by { |r| r[:quote] }.sort.filter_map do |_, group|
+      contributors = group.reject { |r| r[:excluded] }
+      next if contributors.empty?
+
+      weighted = contributors.map { |r| [r, recency_weight(reference_date - r[:date])] }
       total_weight = weighted.sum(&:last)
       rate = weighted.sum { |r, w| r[:rate] * w } / total_weight
-      providers = group.map { |r| r[:provider] }.uniq.sort
-      group.max_by { |r| r[:date] }.merge(rate:, providers:)
+
+      providers = group
+        .group_by { |r| r[:provider] }
+        .map do |key, rows|
+          latest = rows.max_by { |r| r[:date] }
+          entry = { key: key, rate: latest[:rate] }
+          entry[:excluded] = true if latest[:excluded]
+          entry
+        end
+        .sort_by { |p| p[:key] }
+
+      contributors.max_by { |r| r[:date] }.merge(rate:, providers:)
     end
   end
 

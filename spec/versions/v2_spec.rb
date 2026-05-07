@@ -190,11 +190,17 @@ describe Versions::V2 do
     json = Oj.load(last_response.body)
 
     _(json).wont_be_empty
-    _(json.first["providers"]).must_be_kind_of(Array)
-    _(json.first["providers"]).wont_be_empty
+    providers = json.first["providers"]
+
+    _(providers).must_be_kind_of(Array)
+    _(providers).wont_be_empty
+    _(providers.first).must_be_kind_of(Hash)
+    _(providers.first.keys.sort).must_equal(["key", "rate"])
+    _(providers.first["key"]).must_be_kind_of(String)
+    _(providers.first["rate"]).must_be_kind_of(Numeric)
   end
 
-  it "pipe-delimits providers in CSV when expand=providers" do
+  it "pipe-delimits providers as KEY:RATE in CSV when expand=providers" do
     from = (Fixtures.latest_date - 7).to_s
     to = Fixtures.latest_date.to_s
     get "/rates.csv?expand=providers&quotes=USD&from=#{from}&to=#{to}"
@@ -204,7 +210,7 @@ describe Versions::V2 do
 
     _(rows.headers).must_equal(["date", "base", "quote", "rate", "providers"])
     _(rows.first["providers"]).wont_be_nil
-    _(rows.first["providers"]).must_match(/[A-Z]+/)
+    _(rows.first["providers"]).must_match(/\A[A-Z]+:[\d.]+\*?(\|[A-Z]+:[\d.]+\*?)*\z/)
   end
 
   it "rejects unknown expand value" do

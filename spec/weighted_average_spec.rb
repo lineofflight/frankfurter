@@ -54,7 +54,22 @@ describe WeightedAverage do
     _(usd[:rate]).must_be_close_to(1.08, 0.02)
   end
 
-  it "exposes contributing providers per output row, sorted and unique" do
+  it "exposes contributing providers with their individual rates, sorted by key" do
+    rates = [
+      { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
+    ]
+
+    result = WeightedAverage.new(rates).calculate
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:providers]).must_equal([
+      { key: "BOC", rate: 1.10 },
+      { key: "ECB", rate: 1.08 },
+    ])
+  end
+
+  it "picks the most recent rate per provider when a provider contributes multiple dates" do
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
       { date: date, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
@@ -64,6 +79,9 @@ describe WeightedAverage do
     result = WeightedAverage.new(rates).calculate
     usd = result.find { |r| r[:quote] == "USD" }
 
-    _(usd[:providers]).must_equal(["BOC", "ECB"])
+    _(usd[:providers]).must_equal([
+      { key: "BOC", rate: 1.10 },
+      { key: "ECB", rate: 1.08 },
+    ])
   end
 end

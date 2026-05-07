@@ -224,7 +224,13 @@ module Versions
           next if quotes && !quotes.include?(r[:quote])
 
           record = { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
-          record[:providers] = r[:providers] if expand_providers? && r[:providers]
+          if expand_providers? && r[:providers]
+            record[:providers] = r[:providers].map do |p|
+              entry = { key: p[:key], rate: round(p[:rate]) }
+              entry[:excluded] = true if p[:excluded]
+              entry
+            end
+          end
           record
         end
 
@@ -260,7 +266,7 @@ module Versions
         scaled = rows.filter_map do |r|
           next if r[:quote] == base
 
-          r.merge(rate: r[:rate] / base_peg.rate, base: base)
+          rebase_row(r, base: base) { |x| x / base_peg.rate }
         end
         unless scaled.any? { |r| r[:quote] == base_peg.base }
           ref = scaled.map { |r| r[:date] }.max
@@ -298,18 +304,26 @@ module Versions
         pivot_to_target = rows.find { |r| r[:quote] == target }
         return [] unless pivot_to_target
 
+        target_rate = pivot_to_target[:rate]
         derived = rows.filter_map do |r|
           next if r[:quote] == target
 
-          r.merge(base: target, rate: r[:rate] / pivot_to_target[:rate])
+          rebase_row(r, base: target) { |x| x / target_rate }
         end
 
-        derived << pivot_to_target.merge(
-          base: target,
-          quote: pivot_to_target[:base],
-          rate: 1.0 / pivot_to_target[:rate],
-        )
+        derived << rebase_row(pivot_to_target, base: target, quote: pivot_to_target[:base]) { |x| 1.0 / x }
         derived
+      end
+
+      # Apply the same transform to a row's :rate and to each provider's :rate (when present). Other row fields
+      # can be overridden via keyword args (e.g. base:, quote:). Used to rebase blended rows together with the
+      # per-provider rates that produced them, so the providers list stays consistent with the row's base.
+      def rebase_row(row, **overrides)
+        new_row = row.merge(**overrides, rate: yield(row[:rate]))
+        if row[:providers]
+          new_row[:providers] = row[:providers].map { |p| p.merge(rate: yield(p[:rate])) }
+        end
+        new_row
       end
     end
   end

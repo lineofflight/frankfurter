@@ -102,16 +102,22 @@ module Versions
         _(results.first.key?(:providers)).must_equal(false)
       end
 
-      it "adds providers list to blended rows" do
+      it "adds providers list to blended rows as {key, rate} objects" do
         query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, quotes: "USD", expand: "providers")
         results = query.to_a
 
         _(results).wont_be_empty
-        _(results.first[:providers]).must_be_kind_of(Array)
-        _(results.first[:providers]).wont_be_empty
+        providers = results.first[:providers]
+
+        _(providers).must_be_kind_of(Array)
+        _(providers).wont_be_empty
+        _(providers.first).must_be_kind_of(Hash)
+        _(providers.first.keys.sort).must_equal([:key, :rate])
+        _(providers.first[:key]).must_be_kind_of(String)
+        _(providers.first[:rate]).must_be_kind_of(Numeric)
       end
 
-      it "omits providers field on peg-snapped rows" do
+      it "marks all providers excluded on peg-snapped rows" do
         date = Fixtures.latest_date
         Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "AED", rate: 3.97)
 
@@ -120,7 +126,10 @@ module Versions
 
         _(results).wont_be_empty
         _(results.first[:rate]).must_equal(3.6725)
-        _(results.first.key?(:providers)).must_equal(false)
+        providers = results.first[:providers]
+
+        _(providers).wont_be_empty
+        _(providers.all? { |p| p[:excluded] == true }).must_equal(true)
       end
 
       it "works with rollup queries" do
@@ -130,8 +139,11 @@ module Versions
         results = query.to_a
 
         _(results).wont_be_empty
-        _(results.first[:providers]).must_be_kind_of(Array)
-        _(results.first[:providers]).wont_be_empty
+        providers = results.first[:providers]
+
+        _(providers).must_be_kind_of(Array)
+        _(providers).wont_be_empty
+        _(providers.first.keys.sort).must_equal([:key, :rate])
       end
 
       it "raises on unknown expand value" do
@@ -221,8 +233,8 @@ module Versions
 
       it "rebases each row to target by division and appends target->pivot row" do
         rows = [
-          { date:, base: "USD", quote: "EUR", rate: 0.93, providers: ["ECB"] },
-          { date:, base: "USD", quote: "GBP", rate: 0.79, providers: ["ECB"] },
+          { date:, base: "USD", quote: "EUR", rate: 0.93, providers: [{ key: "ECB", rate: 0.93 }] },
+          { date:, base: "USD", quote: "GBP", rate: 0.79, providers: [{ key: "ECB", rate: 0.79 }] },
         ]
 
         result = call_derive(rows, target: "EUR")
@@ -231,8 +243,10 @@ module Versions
 
         _(gbp[:base]).must_equal("EUR")
         _(gbp[:rate]).must_be_close_to(0.79 / 0.93)
+        _(gbp[:providers].first[:rate]).must_be_close_to(0.79 / 0.93)
         _(usd[:base]).must_equal("EUR")
         _(usd[:rate]).must_be_close_to(1.0 / 0.93)
+        _(usd[:providers].first[:rate]).must_be_close_to(1.0 / 0.93)
       end
 
       it "drops the target row from output (no base->base row)" do
