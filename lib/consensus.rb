@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "set"
+
 # Cross-provider consensus filter. Compares each provider's rebased rates against the median.
 # Rates that deviate significantly are identified as outliers.
 class Consensus
