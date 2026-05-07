@@ -21,7 +21,18 @@ class Consensus
     @outliers ||= find_outliers
   end
 
+  def annotated
+    flagged = outlier_pairs
+    rates.map do |r|
+      flagged.include?([r[:provider], r[:quote]]) ? r.merge(excluded: true) : r
+    end
+  end
+
   private
+
+  def outlier_pairs
+    @outlier_pairs ||= outliers.map { |r| [r[:provider], r[:quote]] }.to_set
+  end
 
   def find_outliers
     flagged = Set.new

@@ -10,7 +10,7 @@ describe PegAnchor do
   describe "matched-base peg substitution" do
     it "uses the peg rate when request base matches the peg's base" do
       blended = [
-        { date:, base: "USD", quote: "AED", rate: 3.67, providers: ["ECB"] },
+        { date:, base: "USD", quote: "AED", rate: 3.67, providers: [{ key: "ECB", rate: 0.0 }] },
       ]
 
       result = PegAnchor.apply(blended, base: "USD")
@@ -19,23 +19,23 @@ describe PegAnchor do
       _(aed[:rate]).must_equal(3.6725)
     end
 
-    it "omits providers field on peg-substituted rows" do
+    it "preserves providers on peg-substituted rows, marking all excluded" do
       blended = [
-        { date:, base: "USD", quote: "AED", rate: 3.67, providers: ["ECB"] },
+        { date:, base: "USD", quote: "AED", rate: 3.67, providers: [{ key: "ECB", rate: 3.67 }] },
       ]
 
       result = PegAnchor.apply(blended, base: "USD")
       aed = result.find { |r| r[:quote] == "AED" }
 
-      _(aed.key?(:providers)).must_equal(false)
+      _(aed[:providers]).must_equal([{ key: "ECB", rate: 3.67, excluded: true }])
     end
   end
 
   describe "cross-base peg substitution" do
     it "anchors cross-base pegged quote through the peg's base" do
       blended = [
-        { date:, base: "EUR", quote: "USD", rate: 1.10, providers: ["ECB"] },
-        { date:, base: "EUR", quote: "AED", rate: 4.04, providers: ["ECB"] },
+        { date:, base: "EUR", quote: "USD", rate: 1.10, providers: [{ key: "ECB", rate: 0.0 }] },
+        { date:, base: "EUR", quote: "AED", rate: 4.04, providers: [{ key: "ECB", rate: 0.0 }] },
       ]
 
       result = PegAnchor.apply(blended, base: "EUR")
@@ -48,7 +48,7 @@ describe PegAnchor do
   describe "synthesis of peg-only currencies" do
     it "synthesizes rows for currencies providers do not cover" do
       blended = [
-        { date:, base: "EUR", quote: "GBP", rate: 0.86, providers: ["ECB"] },
+        { date:, base: "EUR", quote: "GBP", rate: 0.86, providers: [{ key: "ECB", rate: 0.86 }] },
       ]
 
       result = PegAnchor.apply(blended, base: "EUR")
@@ -62,7 +62,7 @@ describe PegAnchor do
     it "skips synthesized rows before peg start date" do
       old_date = Date.parse("1900-01-01")
       blended = [
-        { date: old_date, base: "EUR", quote: "GBP", rate: 0.86, providers: ["ECB"] },
+        { date: old_date, base: "EUR", quote: "GBP", rate: 0.86, providers: [{ key: "ECB", rate: 0.0 }] },
       ]
 
       result = PegAnchor.apply(blended, base: "EUR")

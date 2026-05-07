@@ -262,7 +262,7 @@
       "expand": {
         "name": "expand",
         "in": "query",
-        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of provider keys whose rates contributed to the blended value. Omitted on rows derived from currency pegs.",
+        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of `{ key, rate }` objects per record showing each provider's individual rate. Outliers excluded from the blend (and providers whose rate was overridden by a currency peg) are flagged with `excluded: true`. The field is omitted on synthesized peg rows where no provider published the quote. In CSV output, the `providers` column is encoded as `KEY:RATE` pairs joined by `|`, with a trailing `*` on excluded entries (e.g. `ECB:0.92|FED:1.50*`).",
         "required": false,
         "schema": {
           "type": "string",
@@ -295,8 +295,16 @@
           },
           "providers": {
             "type": "array",
-            "items": { "type": "string" },
-            "description": "Provider keys whose rates contributed to this blended value. Present only when `expand=providers` is set, and absent on rows derived from a currency peg."
+            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. Omitted on synthesized peg rows where no provider published the quote.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": { "type": "string", "description": "Provider key" },
+                "rate": { "type": "number", "exclusiveMinimum": 0, "description": "Provider's rate, rebased to the row's base" },
+                "excluded": { "type": "boolean", "description": "Present and true when this entry did not contribute to the blended rate" }
+              },
+              "required": ["key", "rate"]
+            }
           }
         },
         "required": ["date", "base", "quote", "rate"]

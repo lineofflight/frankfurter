@@ -15,7 +15,7 @@ class Blender
   end
 
   def blend
-    WeightedAverage.new(consensus.find).calculate
+    WeightedAverage.new(consensus.annotated).calculate
   end
 
   def outliers
