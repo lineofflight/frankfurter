@@ -27,7 +27,7 @@ lib/
 ├── currency_patches.rb       # Patches Money::Currency: registers historical codes, fixes mangled names
 ├── log.rb                    # Shared logger
 ├── monthly_rate.rb           # MonthlyRate model on monthly_rates rollup table
-├── peg.rb                    # Currency peg definitions (from db/seeds/pegs.json)
+├── peg.rb                    # Currency peg definitions (from db/seeds/pegs/*.json)
 ├── provider.rb               # Provider model: identity, backfill
 ├── provider/
 │   ├── adapters/
@@ -63,7 +63,7 @@ lib/
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
 db/seeds/
-    ├── pegs.json             # Currency peg definitions
+    ├── pegs/                 # One JSON file per peg (e.g. aed.json, bam.json)
     └── providers/            # One JSON file per provider (e.g. ecb.json, boi.json)
 ```
 
@@ -86,7 +86,7 @@ db/seeds/
   - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB, refreshes currency summaries
   - `#start_date`, `#end_date`: derived from currency coverages
   - `many_to_many :currencies` through `currency_coverages`
-- `Peg`: Value object for currency pegs (from `db/seeds/pegs.json`)
+- `Peg`: Value object for currency pegs (from `db/seeds/pegs/*.json`)
 
 ### Blending Pipeline
 - `Blender`: orchestrates rebase → consensus → weighted average
