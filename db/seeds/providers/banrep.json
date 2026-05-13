@@ -4,7 +4,7 @@
   "country_code": "CO",
   "rate_type": "representative market",
   "pivot_currency": "COP",
-  "data_url": "https://www.banrep.gov.co/es/estadisticas/trm",
+  "data_url": "https://www.datos.gov.co/Econom-a-y-Finanzas/Tasa-de-Cambio-Representativa-del-Mercado-TRM/32sa-8pi3/about_data",
   "terms_url": null,
   "publish_schedule": "*/30 23,0,1 * * 1-5",
   "publish_cadence": "daily",
