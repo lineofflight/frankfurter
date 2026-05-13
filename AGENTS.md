@@ -4,11 +4,12 @@ Frankfurter is a free and open-source currency data API built with Ruby that tra
 
 ## Architecture
 
-- Roda web framework with Rack middleware
-- SQLite with Sequel ORM (WAL mode)
+- Roda
+- SQLite with Sequel
 - Unicorn
-- Rufus scheduler for background data updates
-- Cloudflare CDN with cache purge on import
+- Rufus scheduler
+- Foreman
+- Cloudflare CDN
 
 ## Project Structure
 
@@ -39,8 +40,6 @@ lib/
 ├── roundable.rb              # Currency-aware decimal rounding
 ├── weekly_rate.rb            # WeeklyRate model on weekly_rates rollup table
 ├── weighted_average.rb       # Recency-weighted averaging with exponential decay
-├── scheduler/
-│   └── daemon.rb             # Forks and monitors the scheduler process
 ├── versions/
 │   ├── v1.rb                 # Legacy API (ECB-only, frozen)
 │   ├── v1/                   # V1 internals (quotes, query, rounding, currency names)
@@ -101,6 +100,7 @@ db/seeds/
 - OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
 
 ### Scheduler (bin/schedule)
+- Runs as its own process, started by foreman alongside the web server (see `Procfile`)
 - Calls `provider.backfill` directly on Provider model instances
 - Staggers startup backfill for all providers (2s apart)
 - Cron schedule read from `publish_schedule` in the providers table (5-field cron; `null` for historical-only providers)
@@ -160,7 +160,8 @@ Separate SQLite databases per environment (`APP_ENV`): test, development, produc
 bundle install                          # Install dependencies
 bundle exec rake db:setup               # Run migrations and seed providers
 bundle exec rake backfill               # Backfill all providers (takes a while)
-bundle exec unicorn                     # Start server on port 8080
+bundle exec unicorn -c config/unicorn.rb # Start web server on port 8080
+bundle exec foreman start               # Start web + scheduler together (mirrors prod)
 ```
 
 Or with Docker:

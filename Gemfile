@@ -5,6 +5,7 @@ source "https://rubygems.org"
 ruby file: "mise.toml"
 
 gem "csv"
+gem "foreman"
 gem "irb"
 gem "logger"
 gem "money"
