@@ -1,5 +1,4 @@
 .bundle
-coverage
 pkg
 tmp
 *.sqlite3*
