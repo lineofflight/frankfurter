@@ -5,6 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     bigdecimal (4.0.1)
+    cgi (0.5.1)
     concurrent-ruby (1.3.6)
     crack (1.0.1)
       bigdecimal
@@ -169,6 +170,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  cgi
   csv
   foreman
   irb
@@ -198,7 +200,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-  ruby 3.4.9
+  ruby 4.0.3
 
 BUNDLED WITH
   4.0.3
