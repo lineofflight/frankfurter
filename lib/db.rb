@@ -13,7 +13,7 @@ unless url.start_with?("sqlite")
 end
 
 busy_timeout_ms = Integer(ENV.fetch("SQLITE_BUSY_TIMEOUT", 60_000))
-max_connections = Integer(ENV.fetch("DB_MAX_CONNECTIONS", 8))
+max_connections = Integer(ENV.fetch("MAX_THREADS", 5))
 connect_sqls = [
   "PRAGMA journal_mode=WAL",
   "PRAGMA synchronous=NORMAL",

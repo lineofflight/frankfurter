@@ -22,10 +22,11 @@ RUN gem install bundler && \
 COPY --chown=frankfurter:frankfurter . .
 
 ENV APP_ENV=production
+ENV PORT=8080
 
 USER frankfurter
 
 HEALTHCHECK --interval=2s --timeout=4s --start-period=3s --retries=15 \
-    CMD curl -f "http://localhost:8080" || exit 1
+    CMD curl -f "http://localhost:${PORT:-8080}" || exit 1
 
 CMD ["sh", "-c", "bundle exec rake db:setup && exec bundle exec foreman start"]

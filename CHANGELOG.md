@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IMF adapter now also fetches SDR cross rates as a primary XDR source. (#335)
 - `/v2/rates` rows are stamped with their actual observation date. Range queries no longer carry forward. (#338)
 - Extended precious-metal coverage from CBR and NBP.
+- Dropped undocumented `DB_MAX_CONNECTIONS` env var. Sequel pool size now follows `MAX_THREADS` (default 5).
 
 ### Fixed
 
