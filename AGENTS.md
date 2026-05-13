@@ -80,7 +80,7 @@ db/seeds/
 - `WeeklyRate`, `MonthlyRate`: Rollup models on `weekly_rates` / `monthly_rates`, share scopes via `RateScopes`
 - `Currency`: Sequel model on `currencies` table. Materialized from rates during backfill. Tracks global date ranges per currency.
 - `CurrencyCoverage`: Join model on `currency_coverages` table. One row per (provider, currency) with per-provider date ranges. Belongs to Provider and Currency.
-- `Provider`: Sequel model on `providers` table (seeded from `db/seeds/providers/*.json`). Static cache.
+- `Provider`: Sequel model on `providers` table. Static config-as-data: seeded from `db/seeds/providers/*.json` on every container start so provider metadata always tracks the image.
   - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
   - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB, refreshes currency summaries
   - `#start_date`, `#end_date`: derived from currency coverages
