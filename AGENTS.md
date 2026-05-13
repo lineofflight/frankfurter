@@ -6,7 +6,7 @@ Frankfurter is a free and open-source currency data API built with Ruby that tra
 
 - Roda
 - SQLite with Sequel
-- Unicorn
+- Puma
 - Rufus scheduler
 - Foreman
 - Cloudflare CDN
