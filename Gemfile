@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby file: "mise.toml"
 
+gem "cgi"
 gem "csv"
 gem "foreman"
 gem "irb"
