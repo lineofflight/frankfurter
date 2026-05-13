@@ -19,6 +19,8 @@ class Provider < Sequel::Model(:providers)
   many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
 
   class << self
+    # Provider metadata is config-as-data — JSON files in db/seeds/providers are the source of truth. Re-seeding on
+    # every boot syncs changes from the image (new providers, updated schedules) without manual intervention.
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
       data = Dir["#{dir}/*.json"].sort.map { |f| JSON.parse(File.read(f)) }

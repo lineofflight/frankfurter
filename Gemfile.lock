@@ -15,6 +15,8 @@ GEM
     erb (6.0.4)
     et-orbi (1.4.0)
       tzinfo
+    foreman (0.90.0)
+      thor (~> 1.4)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -138,6 +140,7 @@ GEM
     sqlite3 (2.9.2-x86_64-linux-gnu)
     sqlite3 (2.9.2-x86_64-linux-musl)
     stringio (3.2.0)
+    thor (1.5.0)
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -169,6 +172,7 @@ PLATFORMS
 
 DEPENDENCIES
   csv
+  foreman
   irb
   logger
   minitest
