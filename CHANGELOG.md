@@ -5,96 +5,38 @@ All notable changes to the Frankfurter API will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2026-05-18
 
-### Added
-
-- 2 new providers: BBK, NBM.
-- `expand=providers` query parameter on `/v2/rates`. (#323)
-- BND/SGD par peg under the Brunei-Singapore Currency Interchangeability Agreement. (#342)
-
-### Changed
-
-- **Breaking:** `expand=providers` on `/v2/rates` now returns each provider's individual rate. The `providers` field changes from `["ECB", "BOC"]` to `[{ "key": "ECB", "rate": 0.92 }, { "key": "BOC", "rate": 0.93 }]`. Outliers and peg-overridden providers are flagged with `excluded: true` instead of being hidden. CSV format changes from `ECB|BOC` to `ECB:0.92|BOC:0.93`, with `*` suffix on excluded entries.
-- Cross-base requests for pegged quotes are now anchored through the peg's base. (#323)
-- Pegs are treated as a source alongside providers; `?providers=` excludes them along with other unlisted sources. (#323)
-- IMF Special Drawing Rights (XDR) flows through provider backfills. (#333)
-- IMF adapter now also fetches SDR cross rates as a primary XDR source. (#335)
-- `/v2/rates` rows are stamped with their actual observation date. Range queries no longer carry forward. (#338)
-- Extended precious-metal coverage from CBR and NBP.
-- Dropped undocumented `DB_MAX_CONNECTIONS` env var. Sequel pool size now follows `MAX_THREADS` (default 5).
-
-### Fixed
-
-- Error responses are no longer cacheable. Streaming range queries surface deterministic errors before headers fly so failures don't get pinned at the edge.
-- Restored Bank Negara Malaysia (BNM) provider. Moldova's key is now NBM.
-- BNR XAU rate is normalized to RON per troy ounce. (#323)
-- BNR backfill reads the yearly XML archive instead of the 10-day rolling feed.
-- Corrected mangled acronyms in CFA franc currency names (XAF, XOF, XPF).
-- `/v2/rates` is now derived from a USD-anchored blend, so reciprocals (`A→B × B→A`) and cross-rate triangles round to 1.0. Multi-provider non-USD-base queries may shift in the 4th–5th decimal as a result. (#343)
-
-## [2.0.0-beta.2] - 2026-04-14
-
-### Added
-
-- 15 new providers: BCN, BCU, BDI, BI, BNR, BOT, CBM, CBU, CNB, DNB, HNB, LB, MAS, MNB, NBK, NRB, SARB — bringing the total to 52
-- Historical currency support — pre-euro and pre-redenomination codes (DEM, FRF, NLG, CYP, etc.) now available where providers serve them
-- Peg metadata on `/v2/currencies` — pegged currencies show their anchor and fixed rate
-- `rate_type` and `country_code` fields on `/v2/providers`
-
-### Changed
-
-- Renamed Bank of Tanzania provider key from BOT to BOTA
-- Replaced `description` with `rate_type` and `country_code` on `/v2/providers`
-- Pegged currency rates now snap to their exact peg rate
-- Extended historical coverage for several providers
-
-### Fixed
-
-- CDN cache now purges after importing new rates
-- V2 rates now sorted by quote for deterministic output (#304)
-- Various adapter parsing and rate direction fixes (HNB, ECB, NRB, CBA)
-
-## [2.0.0-beta.1] - 2026-04-02
-
-### Added
-
-- v2 API at `/v2/` endpoints with multi-provider blended exchange rates
-- 35 data providers: ECB, BOC, TCMB, NBU, CBA, NBRB, BOB, CBR, NBP, NBP.B, FRED, BNM, RBA, BCRA, CBK, BOJ, BOJA, IMF, NBRM, BCEAO, BOI, BCCR, NB, NBG, HKMA, RB, BCB, BCCh, Banxico, BOE, FBIL, BANREP, SBI, CBC, BAM, BOT, Riksbank
-- Precious metal quotes (XAU, XAG, XPT, XPD)
-- Pegged currency expansion at query time
-- `/v2/rate/{base}/{quote}` endpoint for single currency pair lookups
-- `/v2/rate/{base}/{quote}/{date}` for historical single pair lookups
-- `/v2/providers` endpoint listing available data sources with date ranges and currency coverage
-- `/v2/currencies` endpoint with provider coverage per currency
-- `providers` parameter to scope rates and currencies to specific sources
-- `group` parameter to downsample time series (`week` or `month`)
-- CSV and NDJSON streaming output for rate endpoints
-- Outlier detection and filtering for rate quality
-- Recency-weighted blending
-- Strict parameter validation — unknown parameters return 422
-
-### Fixed
-
-- Fixed rounding when amount is 1 and base is EUR (#173)
-- Fixed TCMB rate direction by switching to buy/sell series
-- Fixed CBK inverted cross rates and per-unit parsing
-- Fixed NBRM rate parsing for denominated currencies
-- Fixed BCRA dates with duplicate currency entries
-- Fixed BCEAO number format parsing
-
-### Removed
-
-- Removed JSONP
+New multi-provider API at `/v2/`. The v1 API is unchanged and remains available indefinitely at `/v1/`.
 
 ### Migrating from v1
 
-The v1 API will remain available at `/v1/` endpoints. To migrate to `/v2`:
-
 - Change your base URL from `/v1/latest` to `/v2/rates`.
-- Update response parsing: rates are now an array of `{"date", "base", "quote", "rate"}` objects instead of `{"base", "date", "rates": {"USD": 1.23}}`.
+- Rates are now an array of `{"date", "base", "quote", "rate"}` objects instead of `{"base", "date", "rates": {"USD": 1.23}}`.
 - The `symbols` parameter is renamed to `quotes`.
-- The `from` and `to` parameters are now used for date ranges in v2.
+- `from` and `to` are used for date ranges.
+- JSONP is not supported in v2.
+
+### Added
+
+- `/v2/rates` — blended exchange rates from 50+ institutional providers, derived from a USD-anchored blend so reciprocals and cross-rate triangles round to 1.0. Non-USD-base queries may differ from a single provider in the 4th to 5th decimal. (#343)
+- `/v2/rate/{base}/{quote}` and `/v2/rate/{base}/{quote}/{date}` — single pair, latest or historical.
+- `/v2/providers` — data sources with date ranges, currency coverage, `rate_type`, and `country_code`.
+- `/v2/currencies` — provider coverage per currency, including peg metadata (anchor and fixed rate).
+- Precious metal quotes (XAU, XAG, XPT, XPD).
+- IMF Special Drawing Rights (XDR), including SDR cross rates as a primary source. (#333, #335)
+- Historical currency support — pre-euro and pre-redenomination codes (DEM, FRF, NLG, CYP, etc.) where providers serve them.
+- Pegged currency expansion at query time; pegged rates snap to the exact peg, and cross-base requests for pegged quotes are anchored through the peg's base. Pegs act as a source, so `?providers=` excludes them along with other unlisted sources. (#323)
+- `expand=providers` on `/v2/rates` — each provider's individual rate as `[{ "key", "rate" }]`; excluded providers (outliers, peg overrides) are flagged `excluded: true`. CSV form `ECB:0.92|BOC:0.93`, `*`-suffixed when excluded. (#323)
+- `providers` parameter to scope rates and currencies to specific sources.
+- `group` parameter to downsample time series (`week` or `month`).
+- CSV and NDJSON streaming output.
+- Outlier detection and recency-weighted blending.
+- Rows are stamped with their actual observation date; range queries do not carry forward. (#338)
+- Strict parameter validation — unknown parameters return 422.
+- Error responses are not cacheable, including streaming range queries.
+
+_Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/frankfurter/releases/tag/v2.0.0-beta.1) and [v2.0.0-beta.2](https://github.com/lineofflight/frankfurter/releases/tag/v2.0.0-beta.2) release notes._
 
 ## [1.0.0] - 2024-12-04
 
@@ -105,7 +47,5 @@ The v1 API will remain available at `/v1/` endpoints. To migrate to `/v2`:
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.2...HEAD
-[2.0.0-beta.2]: https://github.com/lineofflight/frankfurter/compare/v2.0.0-beta.1...v2.0.0-beta.2
-[2.0.0-beta.1]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...v2.0.0-beta.1
+[2.0.0]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/lineofflight/frankfurter/releases/tag/v1.0.0
