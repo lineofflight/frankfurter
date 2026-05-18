@@ -140,9 +140,17 @@ module Versions
     # Pull the first record before streaming so deterministic data errors raise
     # in the route block (caught by error_handler) instead of mid-stream after
     # response headers — including Cache-Control — have been flushed.
+    #
+    # `rest` continues draining the same fiber-backed enumerator via #next;
+    # iterating the enumerator with #each instead would restart it from the
+    # beginning and re-emit the already-consumed first record.
     def eager_split(query)
       enum = query.each
-      [enum.next, enum]
+      first = enum.next
+      rest = Enumerator.new do |y|
+        loop { y << enum.next }
+      end
+      [first, rest]
     rescue StopIteration
       [nil, [].each]
     end

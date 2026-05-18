@@ -5,6 +5,12 @@ All notable changes to the Frankfurter API will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- `/v2/rates` date-range queries no longer duplicate the first row of the response.
+
 ## [2.0.0] - 2026-05-18
 
 New multi-provider API at `/v2/`. The v1 API is unchanged and remains available indefinitely at `/v1/`.
