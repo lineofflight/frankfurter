@@ -5,6 +5,12 @@ All notable changes to the Frankfurter API will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- `/v2/rates` date-range queries no longer duplicate the first row of the response.
+
 ## [2.0.0] - 2026-05-18
 
 New multi-provider API at `/v2/`. The v1 API is unchanged and remains available indefinitely at `/v1/`.
@@ -47,5 +53,6 @@ _Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/fr
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.0.0...HEAD
 [2.0.0]: https://github.com/lineofflight/frankfurter/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/lineofflight/frankfurter/releases/tag/v1.0.0

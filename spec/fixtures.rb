@@ -70,6 +70,12 @@ module Fixtures
       date
     end
 
+    # A Monday in the fixture: the first publication day after a weekend gap
+    # (mirrors the production "first publish after a holiday" scenario).
+    def gap_boundary_monday(days_ago = 60)
+      business_days.find { |d| d.monday? && d <= Date.today - days_ago }
+    end
+
     private
 
     def rebuild_rollups!

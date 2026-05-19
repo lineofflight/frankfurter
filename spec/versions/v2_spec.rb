@@ -59,6 +59,58 @@ describe Versions::V2 do
     _(dates.length).must_be(:>, 1)
   end
 
+  it "does not duplicate the first row of a range query" do
+    from = Fixtures.business_day(60).to_s
+    to = Fixtures.business_day(56).to_s
+    get "/rates?base=EUR&quotes=USD&providers=ecb&from=#{from}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    pairs = json.map { |r| [r["date"], r["base"], r["quote"]] }
+
+    _(pairs).must_equal(pairs.uniq)
+  end
+
+  it "does not duplicate the start date when the range opens on a gap boundary" do
+    monday = Fixtures.gap_boundary_monday
+    to = (monday + 2).to_s
+    get "/rates?base=EUR&quotes=USD&providers=ecb&from=#{monday}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    starts = json.select { |r| r["date"] == monday.to_s && r["quote"] == "USD" }
+
+    _(starts.length).must_equal(1)
+  end
+
+  it "does not duplicate the first row of an NDJSON range query" do
+    from = Fixtures.business_day(60).to_s
+    to = Fixtures.business_day(56).to_s
+    get(
+      "/rates?base=EUR&quotes=USD&providers=ecb&from=#{from}&to=#{to}",
+      {},
+      { "HTTP_ACCEPT" => "application/x-ndjson" },
+    )
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("application/x-ndjson")
+    rows = last_response.body.split("\n").reject(&:empty?).map { |line| Oj.load(line) }
+    pairs = rows.map { |r| [r["date"], r["base"], r["quote"]] }
+
+    _(pairs).must_equal(pairs.uniq)
+  end
+
+  it "does not duplicate the first row of a CSV range query" do
+    from = Fixtures.business_day(60).to_s
+    to = Fixtures.business_day(56).to_s
+    get "/rates.csv?base=EUR&quotes=USD&providers=ecb&from=#{from}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    _(last_response.content_type).must_include("text/csv")
+    rows = CSV.parse(last_response.body, headers: true)
+    pairs = rows.map { |r| [r["date"], r["base"], r["quote"]] }
+
+    _(pairs).must_equal(pairs.uniq)
+  end
+
   it "rebases to a different currency" do
     get "/rates?base=USD"
 
