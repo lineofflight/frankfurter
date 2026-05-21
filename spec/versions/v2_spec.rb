@@ -59,6 +59,31 @@ describe Versions::V2 do
     _(dates.length).must_be(:>, 1)
   end
 
+  it "orders range query rows by date when carry-forward surfaces older quotes" do
+    from = Fixtures.business_day(40)
+    to = Fixtures.business_day(36)
+    Rate.where(provider: "ECB", quote: "USD", date: from..to).delete
+
+    get "/rates?providers=ecb&quotes=USD,GBP&from=#{from}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    dates = json.map { |r| r["date"] }
+    usd_row = json.find { |r| r["quote"] == "USD" }
+
+    _(usd_row).wont_be_nil
+    _(usd_row["date"]).must_be(:<, from.to_s)
+    _(dates).must_equal(dates.sort)
+  end
+
+  it "orders weekly rollup rows by date" do
+    get "/rates?from=#{year_start}&to=#{year_end}&group=week"
+
+    _(last_response).must_be(:ok?)
+    dates = json.map { |r| r["date"] }
+
+    _(dates).must_equal(dates.sort)
+  end
+
   it "does not duplicate the first row of a range query" do
     from = Fixtures.business_day(60).to_s
     to = Fixtures.business_day(56).to_s
