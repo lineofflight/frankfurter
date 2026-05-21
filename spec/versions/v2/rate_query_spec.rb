@@ -54,43 +54,114 @@ module Versions
       _(error.message).must_include("BAR")
     end
 
-    it "snaps to nearest business day" do
-      sunday = Fixtures.recent_sunday
-      friday = Fixtures.preceding_friday(sunday)
-      query = V2::RateQuery.new(date: sunday.to_s)
+    describe "single-day queries" do
+      it "snap each pair to its most recent publication when the requested date is silent" do
+        sunday = Fixtures.recent_sunday
+        friday = Fixtures.preceding_friday(sunday)
+        query = V2::RateQuery.new(date: sunday.to_s)
 
-      _(query.to_a.first[:date]).must_equal(friday.to_s)
+        _(query.to_a.first[:date]).must_equal(friday.to_s)
+      end
+
+      it "stamp each row with its pair's actual observation date" do
+        stale_date = Fixtures.latest_date - 5
+        Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+
+        query = V2::RateQuery.new(date: Fixtures.latest_date.to_s)
+        results = query.to_a
+
+        ron = results.find { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+        usd = results.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
+
+        _(ron[:date]).must_equal(stale_date.to_s)
+        _(usd[:date]).must_equal(Fixtures.latest_date.to_s)
+      end
     end
 
-    it "stamps each row with its own observation date on latest path" do
-      # Carry-forward on the latest path should report each pair's actual observation date,
-      # not flatten everything to the batch max.
-      stale_date = Fixtures.latest_date - 5
-      Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+    describe "range queries" do
+      let(:monday) { Fixtures.gap_boundary_monday }
 
-      query = V2::RateQuery.new(date: Fixtures.latest_date.to_s)
-      results = query.to_a
+      it "emit rows for a pair only on days that pair was actually published" do
+        friday_before = monday - 3
+        saturday = monday - 2
+        sunday = monday - 1
+        friday_after = monday + 4
 
-      ron = results.find { |r| r[:base] == "EUR" && r[:quote] == "RON" }
-      usd = results.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
+        Rate.dataset.insert(date: monday, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
 
-      _(ron[:date]).must_equal(stale_date.to_s)
-      _(usd[:date]).must_equal(Fixtures.latest_date.to_s)
+        query = V2::RateQuery.new(from: friday_before.to_s, to: friday_after.to_s)
+        results = query.to_a
+
+        dates = results.map { |r| r[:date] }
+
+        _(dates).wont_include(saturday.to_s)
+        _(dates).wont_include(sunday.to_s)
+
+        ron_rows = results.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+
+        _(ron_rows.size).must_equal(1)
+        _(ron_rows.first[:date]).must_equal(monday.to_s)
+      end
+
+      it "surface a silent pair's most recent publication via carry-forward" do
+        range_end = monday + 5
+        pre_range_date = monday - 5
+        in_range_date = monday + 2
+        Rate.dataset.insert(date: pre_range_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+        Rate.dataset.insert(date: in_range_date, base: "EUR", quote: "RON", rate: 4.95, provider: "ECB")
+
+        query = V2::RateQuery.new(from: monday.to_s, to: range_end.to_s)
+        ron_dates = query.to_a.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }.map { |r| r[:date] }.sort
+
+        _(ron_dates).must_equal([pre_range_date.to_s, in_range_date.to_s])
+      end
+
+      it "snap back to the most recent prior active day when the range starts globally silent" do
+        prior_friday = monday - 3
+        saturday = monday - 2
+        sunday = monday - 1
+
+        partial_dates = V2::RateQuery.new(from: sunday.to_s, to: monday.to_s, quotes: "USD").to_a
+          .map { |r| r[:date] }.uniq.sort
+
+        _(partial_dates).must_include(prior_friday.to_s)
+        _(partial_dates).must_include(monday.to_s)
+
+        fully_silent_dates = V2::RateQuery.new(from: saturday.to_s, to: sunday.to_s, quotes: "USD").to_a
+          .map { |r| r[:date] }.uniq
+
+        _(fully_silent_dates).must_equal([prior_friday.to_s])
+      end
+
+      it "carry forward silent providers into the blend" do
+        date = Fixtures.latest_date
+        Rate.dataset.where(provider: "BOC", date: date).delete
+
+        with_boc = V2::RateQuery.new(from: (date - 3).to_s, to: date.to_s, quotes: "USD").to_a
+        Rate.dataset.where(provider: "BOC").delete
+        without_boc = V2::RateQuery.new(from: (date - 3).to_s, to: date.to_s, quotes: "USD").to_a
+
+        with_row = with_boc.find { |r| r[:date] == date.to_s }
+        without_row = without_boc.find { |r| r[:date] == date.to_s }
+
+        _(with_row).wont_be_nil
+        _(without_row).wont_be_nil
+        _(with_row[:rate]).wont_equal(without_row[:rate])
+      end
     end
 
-    it "does not carry forward in range queries" do
-      # A pair published only on a single date inside the range should appear once on that date,
-      # not be carried forward into subsequent days.
-      from = Fixtures.latest_date - 6
-      to = Fixtures.latest_date
-      stale_date = Fixtures.latest_date - 5
-      Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+    it "returns the same rates for a date whether queried individually or in a range" do
+      date = Fixtures.latest_date
+      Rate.dataset.where(provider: "BOC", date: date).delete
 
-      query = V2::RateQuery.new(from: from.to_s, to: to.to_s)
-      ron_rows = query.to_a.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }
+      single = V2::RateQuery.new(date: date.to_s, quotes: "USD").to_a
+      range = V2::RateQuery.new(from: (date - 3).to_s, to: date.to_s, quotes: "USD").to_a
+        .select { |r| r[:date] == date.to_s }
 
-      _(ron_rows.size).must_equal(1)
-      _(ron_rows.first[:date]).must_equal(stale_date.to_s)
+      _(single).wont_be_empty
+      _(range).wont_be_empty
+
+      _(range.first[:rate]).must_equal(single.first[:rate])
     end
 
     describe "with expand=providers" do

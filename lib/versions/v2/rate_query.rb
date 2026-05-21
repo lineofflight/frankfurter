@@ -40,15 +40,10 @@ module Versions
         return to_enum(:each) unless block
 
         if date_scope.is_a?(Range)
-          each_chunk(date_scope) do |chunk_range|
-            ds = range_dataset
-            date_col = ds.model.date_column
-
-            rows = ds.between(chunk_range).all
-            normalize_dates!(rows, date_col) if date_col != :date
-            rows.group_by { |r| r[:date] }.each do |_, group_rows|
-              emit_blended(group_rows, &block)
-            end
+          if rollup?
+            each_rollup_range(&block)
+          else
+            each_daily_range(&block)
           end
         else
           window = raw_dataset.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope)
@@ -77,6 +72,44 @@ module Versions
           ds.where(date: date_scope).max(:date)
         else
           ds.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope).max(:date)
+        end
+      end
+
+      def each_rollup_range(&block)
+        each_chunk(date_scope) do |chunk_range|
+          ds = range_dataset
+          date_col = ds.model.date_column
+
+          rows = ds.between(chunk_range).all
+          normalize_dates!(rows, date_col) if date_col != :date
+          rows.group_by { |r| r[:date] }.each do |_, group_rows|
+            emit_blended(group_rows, &block)
+          end
+        end
+      end
+
+      # Dedupe on (quote, observation_date) so a pair whose contributor set hasn't changed doesn't reappear.
+      # When the range start is silent, the most recent prior active day is included so the response still shows
+      # the most recent data — mirrors Rate.between (#71).
+      def each_daily_range
+        seen = Set.new
+        each_chunk(date_scope) do |chunk_range|
+          lookback_start = chunk_range.begin - CarryForward::LOOKBACK_DAYS
+          rows = raw_dataset.where(date: lookback_start..chunk_range.end).naked.all
+          all_dates = rows.map { |r| r[:date] }.uniq
+          snap_back = all_dates.select { |d| d < chunk_range.begin }.max unless all_dates.include?(chunk_range.begin)
+          in_range = all_dates.select { |d| chunk_range.cover?(d) }.sort
+          active_days = [snap_back, *in_range].compact
+          active_days.each do |day|
+            contributors = CarryForward.apply(rows, date: day)
+            emit_blended(contributors) do |record|
+              key = [record[:quote], record[:date]]
+              next if seen.include?(key)
+
+              seen << key
+              yield record
+            end
+          end
         end
       end
 
