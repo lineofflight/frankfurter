@@ -82,7 +82,7 @@ module Versions
 
           rows = ds.between(chunk_range).all
           normalize_dates!(rows, date_col) if date_col != :date
-          rows.group_by { |r| r[:date] }.each do |_, group_rows|
+          rows.group_by { |r| r[:date] }.sort_by(&:first).each do |_, group_rows|
             emit_blended(group_rows, &block)
           end
         end
@@ -268,7 +268,7 @@ module Versions
           record
         end
 
-        records.sort_by! { |r| r[:quote] }
+        records.sort_by! { |r| [r[:date], r[:quote]] }
         records.each(&block)
       end
 
