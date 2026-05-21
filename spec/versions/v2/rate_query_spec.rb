@@ -164,6 +164,18 @@ module Versions
       _(range.first[:rate]).must_equal(single.first[:rate])
     end
 
+    it "returns the same rates for a date with providers scope" do
+      date = Fixtures.latest_date
+      single = V2::RateQuery.new(date: date.to_s, providers: "ECB", quotes: "USD").to_a
+      range = V2::RateQuery.new(from: (date - 3).to_s, to: date.to_s, providers: "ECB", quotes: "USD").to_a
+        .select { |r| r[:date] == date.to_s }
+
+      _(single).wont_be_empty
+      _(range).wont_be_empty
+
+      _(range.first[:rate]).must_equal(single.first[:rate])
+    end
+
     describe "with expand=providers" do
       it "is omitted by default" do
         query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, quotes: "USD")
