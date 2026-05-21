@@ -88,20 +88,21 @@ module Versions
         end
       end
 
+      # When the range start is silent, anchor CF on it as well so the response surfaces the most recent prior
+      # data — same blend ?date=chunk_range.begin would produce (mirrors Rate.between's snap-back, #71).
       # Dedupe on (quote, observation_date) so a pair whose contributor set hasn't changed doesn't reappear.
-      # When the range start is silent, the most recent prior active day is included so the response still shows
-      # the most recent data — mirrors Rate.between (#71).
       def each_daily_range
         seen = Set.new
         each_chunk(date_scope) do |chunk_range|
           lookback_start = chunk_range.begin - CarryForward::LOOKBACK_DAYS
           rows = raw_dataset.where(date: lookback_start..chunk_range.end).naked.all
           all_dates = rows.map { |r| r[:date] }.uniq
-          snap_back = all_dates.select { |d| d < chunk_range.begin }.max unless all_dates.include?(chunk_range.begin)
-          in_range = all_dates.select { |d| chunk_range.cover?(d) }.sort
-          active_days = [snap_back, *in_range].compact
-          active_days.each do |day|
-            contributors = CarryForward.apply(rows, date: day)
+          anchors = all_dates.select { |d| chunk_range.cover?(d) }.sort
+          anchors.unshift(chunk_range.begin) unless all_dates.include?(chunk_range.begin)
+          anchors.each do |anchor|
+            contributors = CarryForward.apply(rows, date: anchor)
+            next if contributors.empty?
+
             emit_blended(contributors) do |record|
               key = [record[:quote], record[:date]]
               next if seen.include?(key)
