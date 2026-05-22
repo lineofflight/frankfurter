@@ -1,0 +1,12 @@
+{
+  "key": "Mongolbank",
+  "name": "Bank of Mongolia",
+  "country_code": "MN",
+  "rate_type": "statutory reference rate",
+  "pivot_currency": "MNT",
+  "data_url": "https://www.mongolbank.mn/en/currency-rate-movement",
+  "terms_url": null,
+  "publish_schedule": "*/30 2-4 * * *",
+  "publish_cadence": "daily",
+  "coverage_start": "2001-01-02"
+}
