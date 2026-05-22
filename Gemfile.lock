@@ -124,6 +124,7 @@ GEM
     rubocop-shopify (2.18.0)
       rubocop (~> 1.62)
     ruby-progressbar (1.13.0)
+    rubyzip (3.3.0)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
     sequel (5.104.0)
@@ -192,6 +193,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-sequel
   rubocop-shopify
+  rubyzip
   rufus-scheduler
   sequel
   skooma
