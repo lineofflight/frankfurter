@@ -1,0 +1,12 @@
+{
+  "key": "BCP",
+  "name": "Banco Central del Paraguay",
+  "country_code": "PY",
+  "rate_type": "interbank reference rate",
+  "pivot_currency": "PYG",
+  "data_url": "https://www.bcp.gov.py/webapps/web/cotizacion/monedas",
+  "terms_url": null,
+  "publish_schedule": "*/30 19-21 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2001-01-01"
+}
