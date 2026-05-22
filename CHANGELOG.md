@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Banco Nacional de Angola (BNA) as a data provider. Daily reference rates for ~70 currencies against AOA from 2000-01-01.
 - Central Bank of Iraq (CBI) as a new data provider. Publishes daily Iraqi dinar (IQD) reference rates against ~16 currencies, 2009-present.
+- Bank of Algeria (BoA) as a data provider. Publishes a daily DZD reference rate (cours moyen) against 17 currencies, with history back to 2000-01-03. The consolidated archive refreshes roughly monthly, so rates can lag by up to ~3 weeks.
 - Banque des Etats de l'Afrique Centrale (BEAC) as a provider. Publishes daily indicative rates for 13 pairs against the CFA Franc BEAC (XAF), including EUR/XAF at the fixed peg of 655.957. Live homepage snapshot only; historical attestation via Wayback is a follow-up. (#379)
 - Maldives Monetary Authority (MMA) as a provider for USD/MVR reference rates, with daily coverage from 2011-04-21.
 
