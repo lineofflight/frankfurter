@@ -1,0 +1,192 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.nbe.gov.et/api/filter-exchange-rates?date=2026-05-18
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.nbe.gov.et
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 May 2026 12:50:36 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, private
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '59'
+      Access-Control-Allow-Origin:
+      - "*"
+      Upgrade:
+      - h2,h2c
+      Connection:
+      - Upgrade
+      Vary:
+      - Accept-Encoding,User-Agent
+      Content-Length:
+      - '4787'
+      Content-Type:
+      - application/json
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"message":"OK","status":200,"data":[{"id":"01krwrntc5qsfps1a0fkff8yfr","currency_id":"01hccadrapzdjbbxb2pgdgfkbp","buying":"0.9915","selling":"1.0014","date":"2026-05-18","weighted_average":"0.9965","currency":{"id":"01hccadrapzdjbbxb2pgdgfkbp","name":"JAPANESE
+        YEN","code":"JPY"}},{"id":"01krwrntegw1mj4nmmwqgzcm7t","currency_id":"01hccadraxrgm2gyc039fnt6dd","buying":"513.1418","selling":"518.2732","date":"2026-05-18","weighted_average":"515.7075","currency":{"id":"01hccadraxrgm2gyc039fnt6dd","name":"KUWAITI
+        DINAR","code":"KWD"}},{"id":"01krwrnte7hzk36d4zff687fak","currency_id":"01hccadraw6qj2h560vdnzvv07","buying":"23.0856","selling":"23.3165","date":"2026-05-18","weighted_average":"23.2011","currency":{"id":"01hccadraw6qj2h560vdnzvv07","name":"CHINESE
+        YUAN","code":"CNY"}},{"id":"01krwrntdzhbkgdfv5ckaett71","currency_id":"01hccadraw6qj2h560vdnzvv06","buying":"9.4398","selling":"9.5342","date":"2026-05-18","weighted_average":"9.487","currency":{"id":"01hccadraw6qj2h560vdnzvv06","name":"SOUTH
+        AFRICAN RAND","code":"ZAR"}},{"id":"01krwrntdqx6fmfbkm2e1t1c0g","currency_id":"01hccadravryrxerw8h7rrjeqs","buying":"215.7626","selling":"217.9202","date":"2026-05-18","weighted_average":"216.8414","currency":{"id":"01hccadravryrxerw8h7rrjeqs","name":"SDR","code":"XDR"}},{"id":"01krwrntdgmkm02qykg2g98sbv","currency_id":"01hccadratqj2hq49k86vr0nyy","buying":"182.8236","selling":"184.6518","date":"2026-05-18","weighted_average":"183.7377","currency":{"id":"01hccadratqj2hq49k86vr0nyy","name":"EURO","code":"EUR"}},{"id":"01krwrntd8fy2hcd89bvb4emec","currency_id":"01hccadrasnh4xq05xxqfaah9b","buying":"42.8038","selling":"43.2319","date":"2026-05-18","weighted_average":"43.0179","currency":{"id":"01hccadrasnh4xq05xxqfaah9b","name":"UAE
+        DIRHAM","code":"AED"}},{"id":"01krwrntcytwabe4ph2wxvwsw3","currency_id":"01hccadrasnh4xq05xxqfaah9a","buying":"41.897","selling":"42.316","date":"2026-05-18","weighted_average":"42.1065","currency":{"id":"01hccadrasnh4xq05xxqfaah9a","name":"SAUDI
+        RIYAL","code":"SAR"}},{"id":"01krwrntcmqf7tr48emrymqp5x","currency_id":"01hccadrarzxbt9gfyk2cxb5vn","buying":"112.4802","selling":"113.605","date":"2026-05-18","weighted_average":"113.0426","currency":{"id":"01hccadrarzxbt9gfyk2cxb5vn","name":"AUSTRALIAN
+        DOLLAR","code":"AUD"}},{"id":"01krwrntcdwrb8hjwnrzf8dfk0","currency_id":"01hccadraq98pvxp1nsh044w6t","buying":"114.297","selling":"115.44","date":"2026-05-18","weighted_average":"114.8685","currency":{"id":"01hccadraq98pvxp1nsh044w6t","name":"CANADIAN
+        DOLLAR","code":"CAD"}},{"id":"01krwrnt9xyrdhmh7pnhkhyk9k","currency_id":"01hccadrabmb0fb757f4d09v9g","buying":"157.227","selling":"158.7993","date":"2026-05-18","weighted_average":"157.227","currency":{"id":"01hccadrabmb0fb757f4d09v9g","name":"US
+        DOLLAR","code":"USD"}},{"id":"01krwrntbym4x3g2srwswy0yad","currency_id":"01hccadranckd8vetw7ca8ef28","buying":"1.2136","selling":"1.25","date":"2026-05-18","weighted_average":"1.2318","currency":{"id":"01hccadranckd8vetw7ca8ef28","name":"KENYAN
+        SHILLING","code":"KES"}},{"id":"01krwrntbjav91752my1h0v5qf","currency_id":"01hccadramc36zh3208fscxd5h","buying":"1.6382","selling":"1.6546","date":"2026-05-18","weighted_average":"1.6464","currency":{"id":"01hccadramc36zh3208fscxd5h","name":"INDIAN
+        RUPEE","code":"INR"}},{"id":"01krwrntb9c81w28qbh4cy976e","currency_id":"01hccadrak2aacqe0k4b7dvfqp","buying":"0.8806","selling":"0.907","date":"2026-05-18","weighted_average":"0.8938","currency":{"id":"01hccadrak2aacqe0k4b7dvfqp","name":"DJIBOUTI
+        FRANC","code":"DJF"}},{"id":"01krwrntb2zq8yxw8rqq50yzfe","currency_id":"01hccadrahmapvgqe52mex068a","buying":"24.4616","selling":"24.7062","date":"2026-05-18","weighted_average":"24.5839","currency":{"id":"01hccadrahmapvgqe52mex068a","name":"DANISH
+        KNRONER","code":"DKK"}},{"id":"01krwrntav8nng89707hvx0h2d","currency_id":"01hccadrayy2a6t7cdx0tt1czv","buying":"16.8581","selling":"17.0267","date":"2026-05-18","weighted_average":"16.9424","currency":{"id":"01hccadrayy2a6t7cdx0tt1czv","name":"NORWEGIAN
+        KRONE","code":"NOK"}},{"id":"01krwrntakxagvb628gcwg0z1b","currency_id":"01hccadragtwvf1xa9qcfadn41","buying":"16.6459","selling":"16.8123","date":"2026-05-18","weighted_average":"16.7291","currency":{"id":"01hccadragtwvf1xa9qcfadn41","name":"SWIDISH
+        KNRONER","code":"SEK"}},{"id":"01krwrntadpsgcpsrj2z1e2nda","currency_id":"01hccadraf1dnr88nrw8n2yh3d","buying":"199.8564","selling":"201.8549","date":"2026-05-18","weighted_average":"200.8557","currency":{"id":"01hccadraf1dnr88nrw8n2yh3d","name":"SWISS
+        FRANC","code":"CHF"}},{"id":"01krwrnta5htngc8b2w1ppjw7a","currency_id":"01hccadrae4tmhz5kqtkhq2rr3","buying":"209.9924","selling":"212.0923","date":"2026-05-18","weighted_average":"211.0424","currency":{"id":"01hccadrae4tmhz5kqtkhq2rr3","name":"POUND
+        STERLING","code":"GBP"}}]}'
+  recorded_at: Fri, 22 May 2026 12:50:37 GMT
+- request:
+    method: get
+    uri: https://api.nbe.gov.et/api/filter-exchange-rates?date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.nbe.gov.et
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 May 2026 12:50:37 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, private
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '58'
+      Access-Control-Allow-Origin:
+      - "*"
+      Upgrade:
+      - h2,h2c
+      Connection:
+      - Upgrade
+      Vary:
+      - Accept-Encoding,User-Agent
+      Content-Length:
+      - '4795'
+      Content-Type:
+      - application/json
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"message":"OK","status":200,"data":[{"id":"01krza2bvcjwncnjp9jnys3b44","currency_id":"01hccadrapzdjbbxb2pgdgfkbp","buying":"0.9894","selling":"0.9993","date":"2026-05-19","weighted_average":"0.9944","currency":{"id":"01hccadrapzdjbbxb2pgdgfkbp","name":"JAPANESE
+        YEN","code":"JPY"}},{"id":"01krza2bx0bfvytsmhdmwx4bvf","currency_id":"01hccadraxrgm2gyc039fnt6dd","buying":"512.5252","selling":"517.6505","date":"2026-05-19","weighted_average":"515.0879","currency":{"id":"01hccadraxrgm2gyc039fnt6dd","name":"KUWAITI
+        DINAR","code":"KWD"}},{"id":"01krza2bww1hq3brhadzj5rzps","currency_id":"01hccadraw6qj2h560vdnzvv07","buying":"23.1262","selling":"23.3574","date":"2026-05-19","weighted_average":"23.2418","currency":{"id":"01hccadraw6qj2h560vdnzvv07","name":"CHINESE
+        YUAN","code":"CNY"}},{"id":"01krza2bwqg2ydhy6qj8yq21jm","currency_id":"01hccadraw6qj2h560vdnzvv06","buying":"9.4208","selling":"9.515","date":"2026-05-19","weighted_average":"9.4679","currency":{"id":"01hccadraw6qj2h560vdnzvv06","name":"SOUTH
+        AFRICAN RAND","code":"ZAR"}},{"id":"01krza2bwjzw1wfn0jyc5x89da","currency_id":"01hccadravryrxerw8h7rrjeqs","buying":"215.1917","selling":"217.3436","date":"2026-05-19","weighted_average":"216.2677","currency":{"id":"01hccadravryrxerw8h7rrjeqs","name":"SDR","code":"XDR"}},{"id":"01krza2bwc0tdde5z8nc4brd35","currency_id":"01hccadratqj2hq49k86vr0nyy","buying":"182.8886","selling":"184.7175","date":"2026-05-19","weighted_average":"183.8031","currency":{"id":"01hccadratqj2hq49k86vr0nyy","name":"EURO","code":"EUR"}},{"id":"01krza2bw61rfy3bjf3c25j2xn","currency_id":"01hccadrasnh4xq05xxqfaah9b","buying":"42.8154","selling":"43.2435","date":"2026-05-19","weighted_average":"43.0295","currency":{"id":"01hccadrasnh4xq05xxqfaah9b","name":"UAE
+        DIRHAM","code":"AED"}},{"id":"01krza2bvy5yd5729nns40f6hh","currency_id":"01hccadrasnh4xq05xxqfaah9a","buying":"41.9039","selling":"42.3229","date":"2026-05-19","weighted_average":"42.1134","currency":{"id":"01hccadrasnh4xq05xxqfaah9a","name":"SAUDI
+        RIYAL","code":"SAR"}},{"id":"01krza2bvqpfc7gbz3ta7hhwyb","currency_id":"01hccadrarzxbt9gfyk2cxb5vn","buying":"112.4319","selling":"113.5562","date":"2026-05-19","weighted_average":"112.9941","currency":{"id":"01hccadrarzxbt9gfyk2cxb5vn","name":"AUSTRALIAN
+        DOLLAR","code":"AUD"}},{"id":"01krza2bvh5yxvs03jd3xfv4yz","currency_id":"01hccadraq98pvxp1nsh044w6t","buying":"114.4277","selling":"115.572","date":"2026-05-19","weighted_average":"114.9999","currency":{"id":"01hccadraq98pvxp1nsh044w6t","name":"CANADIAN
+        DOLLAR","code":"CAD"}},{"id":"01krza2bsxsred4bkmgbxfa344","currency_id":"01hccadrabmb0fb757f4d09v9g","buying":"157.2694","selling":"158.8421","date":"2026-05-19","weighted_average":"157.2694","currency":{"id":"01hccadrabmb0fb757f4d09v9g","name":"US
+        DOLLAR","code":"USD"}},{"id":"01krza2bv7dbybstxbqmb8zwcr","currency_id":"01hccadranckd8vetw7ca8ef28","buying":"1.2126","selling":"1.2489","date":"2026-05-19","weighted_average":"1.2308","currency":{"id":"01hccadranckd8vetw7ca8ef28","name":"KENYAN
+        SHILLING","code":"KES"}},{"id":"01krza2bv0fzwd3bxnz6s8jbc4","currency_id":"01hccadramc36zh3208fscxd5h","buying":"1.6322","selling":"1.6485","date":"2026-05-19","weighted_average":"1.6404","currency":{"id":"01hccadramc36zh3208fscxd5h","name":"INDIAN
+        RUPEE","code":"INR"}},{"id":"01krza2btrdk9g5ky772gvx241","currency_id":"01hccadrak2aacqe0k4b7dvfqp","buying":"0.8808","selling":"0.9072","date":"2026-05-19","weighted_average":"0.894","currency":{"id":"01hccadrak2aacqe0k4b7dvfqp","name":"DJIBOUTI
+        FRANC","code":"DJF"}},{"id":"01krza2bthkh98jmkj09qme90v","currency_id":"01hccadrahmapvgqe52mex068a","buying":"24.4693","selling":"24.714","date":"2026-05-19","weighted_average":"24.5917","currency":{"id":"01hccadrahmapvgqe52mex068a","name":"DANISH
+        KNRONER","code":"DKK"}},{"id":"01krza2btdhgswvny88pbbyde5","currency_id":"01hccadrayy2a6t7cdx0tt1czv","buying":"16.9293","selling":"17.0985","date":"2026-05-19","weighted_average":"17.0139","currency":{"id":"01hccadrayy2a6t7cdx0tt1czv","name":"NORWEGIAN
+        KRONE","code":"NOK"}},{"id":"01krza2bt95w0nntx0wp436nze","currency_id":"01hccadragtwvf1xa9qcfadn41","buying":"16.6701","selling":"16.8368","date":"2026-05-19","weighted_average":"16.7535","currency":{"id":"01hccadragtwvf1xa9qcfadn41","name":"SWIDISH
+        KNRONER","code":"SEK"}},{"id":"01krza2bt5dgw8pfw7g3qj4gct","currency_id":"01hccadraf1dnr88nrw8n2yh3d","buying":"200.0628","selling":"202.0635","date":"2026-05-19","weighted_average":"201.0632","currency":{"id":"01hccadraf1dnr88nrw8n2yh3d","name":"SWISS
+        FRANC","code":"CHF"}},{"id":"01krza2bt1tfr63bbyfn52t43t","currency_id":"01hccadrae4tmhz5kqtkhq2rr3","buying":"209.9704","selling":"212.0701","date":"2026-05-19","weighted_average":"211.0203","currency":{"id":"01hccadrae4tmhz5kqtkhq2rr3","name":"POUND
+        STERLING","code":"GBP"}}]}'
+  recorded_at: Fri, 22 May 2026 12:50:38 GMT
+- request:
+    method: get
+    uri: https://api.nbe.gov.et/api/filter-exchange-rates?date=2026-05-20
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.nbe.gov.et
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 May 2026 12:50:38 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, private
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '57'
+      Access-Control-Allow-Origin:
+      - "*"
+      Upgrade:
+      - h2,h2c
+      Connection:
+      - Upgrade
+      Vary:
+      - Accept-Encoding,User-Agent
+      Content-Length:
+      - '4795'
+      Content-Type:
+      - application/json
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"message":"OK","status":200,"data":[{"id":"01ks1vzsjepp3x7nv8ma432zwg","currency_id":"01hccadrapzdjbbxb2pgdgfkbp","buying":"0.9902","selling":"1.0001","date":"2026-05-20","weighted_average":"0.9952","currency":{"id":"01hccadrapzdjbbxb2pgdgfkbp","name":"JAPANESE
+        YEN","code":"JPY"}},{"id":"01ks1vzsm2zvvygcf5yzhb85pr","currency_id":"01hccadraxrgm2gyc039fnt6dd","buying":"513.5665","selling":"518.7021","date":"2026-05-20","weighted_average":"516.1343","currency":{"id":"01hccadraxrgm2gyc039fnt6dd","name":"KUWAITI
+        DINAR","code":"KWD"}},{"id":"01ks1vzskxkzvq1tpc8rkyhff6","currency_id":"01hccadraw6qj2h560vdnzvv07","buying":"23.1547","selling":"23.3863","date":"2026-05-20","weighted_average":"23.2705","currency":{"id":"01hccadraw6qj2h560vdnzvv07","name":"CHINESE
+        YUAN","code":"CNY"}},{"id":"01ks1vzskrfj4pj0yfye5pgnab","currency_id":"01hccadraw6qj2h560vdnzvv06","buying":"9.4764","selling":"9.5712","date":"2026-05-20","weighted_average":"9.5238","currency":{"id":"01hccadraw6qj2h560vdnzvv06","name":"SOUTH
+        AFRICAN RAND","code":"ZAR"}},{"id":"01ks1vzskkd0hmxj85sz74whn5","currency_id":"01hccadravryrxerw8h7rrjeqs","buying":"215.6289","selling":"217.7852","date":"2026-05-20","weighted_average":"216.7071","currency":{"id":"01hccadravryrxerw8h7rrjeqs","name":"SDR","code":"XDR"}},{"id":"01ks1vzskezkb0yftd6nv1m9zw","currency_id":"01hccadratqj2hq49k86vr0nyy","buying":"183.1183","selling":"184.9495","date":"2026-05-20","weighted_average":"184.0339","currency":{"id":"01hccadratqj2hq49k86vr0nyy","name":"EURO","code":"EUR"}},{"id":"01ks1vzsk94scjrt6b8qq4csw5","currency_id":"01hccadrasnh4xq05xxqfaah9b","buying":"42.9012","selling":"43.3302","date":"2026-05-20","weighted_average":"43.1157","currency":{"id":"01hccadrasnh4xq05xxqfaah9b","name":"UAE
+        DIRHAM","code":"AED"}},{"id":"01ks1vzsk3w49pmqxqg8k6teht","currency_id":"01hccadrasnh4xq05xxqfaah9a","buying":"41.9912","selling":"42.4111","date":"2026-05-20","weighted_average":"42.2012","currency":{"id":"01hccadrasnh4xq05xxqfaah9a","name":"SAUDI
+        RIYAL","code":"SAR"}},{"id":"01ks1vzsjxz018gpg6gjy2p909","currency_id":"01hccadrarzxbt9gfyk2cxb5vn","buying":"112.093","selling":"113.2139","date":"2026-05-20","weighted_average":"112.6535","currency":{"id":"01hccadrarzxbt9gfyk2cxb5vn","name":"AUSTRALIAN
+        DOLLAR","code":"AUD"}},{"id":"01ks1vzsjp9bxjz7mkbak66h7r","currency_id":"01hccadraq98pvxp1nsh044w6t","buying":"114.5019","selling":"115.6469","date":"2026-05-20","weighted_average":"115.0744","currency":{"id":"01hccadraq98pvxp1nsh044w6t","name":"CANADIAN
+        DOLLAR","code":"CAD"}},{"id":"01ks1vzsgerg20ehgen6qpgkgp","currency_id":"01hccadrabmb0fb757f4d09v9g","buying":"157.5889","selling":"159.1648","date":"2026-05-20","weighted_average":"157.5889","currency":{"id":"01hccadrabmb0fb757f4d09v9g","name":"US
+        DOLLAR","code":"USD"}},{"id":"01ks1vzsj72rhb83f67kswwxcm","currency_id":"01hccadranckd8vetw7ca8ef28","buying":"1.2122","selling":"1.2486","date":"2026-05-20","weighted_average":"1.2304","currency":{"id":"01hccadranckd8vetw7ca8ef28","name":"KENYAN
+        SHILLING","code":"KES"}},{"id":"01ks1vzsj05f1g67a06phqnv3x","currency_id":"01hccadramc36zh3208fscxd5h","buying":"1.6332","selling":"1.6495","date":"2026-05-20","weighted_average":"1.6414","currency":{"id":"01hccadramc36zh3208fscxd5h","name":"INDIAN
+        RUPEE","code":"INR"}},{"id":"01ks1vzshswkm2q97192mz0jk5","currency_id":"01hccadrak2aacqe0k4b7dvfqp","buying":"0.8826","selling":"0.9091","date":"2026-05-20","weighted_average":"0.8959","currency":{"id":"01hccadrak2aacqe0k4b7dvfqp","name":"DJIBOUTI
+        FRANC","code":"DJF"}},{"id":"01ks1vzshjcedgpyw6m943hfb3","currency_id":"01hccadrahmapvgqe52mex068a","buying":"24.503","selling":"24.7481","date":"2026-05-20","weighted_average":"24.6256","currency":{"id":"01hccadrahmapvgqe52mex068a","name":"DANISH
+        KNRONER","code":"DKK"}},{"id":"01ks1vzshbdyffjfck84r7s7sa","currency_id":"01hccadrayy2a6t7cdx0tt1czv","buying":"16.9852","selling":"17.1551","date":"2026-05-20","weighted_average":"17.0702","currency":{"id":"01hccadrayy2a6t7cdx0tt1czv","name":"NORWEGIAN
+        KRONE","code":"NOK"}},{"id":"01ks1vzsh432qgz1dqwf05kvfc","currency_id":"01hccadragtwvf1xa9qcfadn41","buying":"16.7512","selling":"16.9187","date":"2026-05-20","weighted_average":"16.835","currency":{"id":"01hccadragtwvf1xa9qcfadn41","name":"SWIDISH
+        KNRONER","code":"SEK"}},{"id":"01ks1vzsgxjg8tbpk9h52dkz3w","currency_id":"01hccadraf1dnr88nrw8n2yh3d","buying":"200.1892","selling":"202.191","date":"2026-05-20","weighted_average":"201.1901","currency":{"id":"01hccadraf1dnr88nrw8n2yh3d","name":"SWISS
+        FRANC","code":"CHF"}},{"id":"01ks1vzsgpzm2veehrtqm63dan","currency_id":"01hccadrae4tmhz5kqtkhq2rr3","buying":"211.0588","selling":"213.1694","date":"2026-05-20","weighted_average":"212.1141","currency":{"id":"01hccadrae4tmhz5kqtkhq2rr3","name":"POUND
+        STERLING","code":"GBP"}}]}'
+  recorded_at: Fri, 22 May 2026 12:50:39 GMT
+recorded_with: VCR 6.4.0
