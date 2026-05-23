@@ -23,9 +23,10 @@ class Provider
     # troy ounce, which matches the in-app convention, so no conversion.
     # SDR is dropped because it is a composite unit; Money does not register it.
     #
-    # The latest endpoint only carries the current day. Historical data lives in
-    # per-year XLSX archives that vary in naming and internal layout across the
-    # 1994-present range and is not yet ingested — see issue #371 follow-up.
+    # The page exposes only the latest daily and weekly publications, not full
+    # history. Historical data lives in per-year XLSX archives that vary in
+    # naming and internal layout across the 1994-present range and is not yet
+    # ingested. See issue #371 follow-up.
     class BSh < Adapter
       URL = "https://www.bankofalbania.org/Markets/Official_exchange_rate/"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
@@ -91,7 +92,15 @@ class Provider
         http.read_timeout = 60
         req = Net::HTTP::Get.new(uri)
         req["User-Agent"] = USER_AGENT
-        http.request(req).body
+        response = http.request(req)
+        unless response.is_a?(Net::HTTPSuccess)
+          raise Adapter::Unavailable, "unexpected response #{response.code}"
+        end
+
+        body = response.body
+        raise Adapter::Unavailable, "empty response body" if body.nil? || body.empty?
+
+        body
       end
 
       def parse_table(table, date)
