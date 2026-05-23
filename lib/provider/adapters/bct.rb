@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
+require "nokogiri"
 
 require "provider/adapters/adapter"
 
@@ -32,8 +33,6 @@ class Provider
       REFERER = "https://www.bct.gov.tn/bct/siteprod/cours_archive.jsp"
 
       DATE_RE = %r{Journée du\s*(\d{2})/(\d{2})/(\d{4})}
-      ROW_RE = %r{<tr>(.*?)</tr>}mi
-      CELL_RE = %r{<td[^>]*>(.*?)</td>}mi
       SIGLE_RE = /\A([A-Z]{3})\z/
       NUMBER_RE = /[\d.,]+/
 
@@ -62,13 +61,15 @@ class Provider
         echoed = extract_echoed_date(html)
         return [] unless echoed == date
 
+        doc = Nokogiri::HTML.parse(html)
+
         # Keep only the first interbank table; the second table is for manual exchange.
-        table = html.split(/<!--\s*2eme module/i, 2).first
+        table = doc.at_css("table")
         return [] unless table
 
         records = []
-        table.scan(ROW_RE) do |row_html,|
-          cells = row_html.scan(CELL_RE).flatten.map { |c| strip_tags(c) }
+        table.css("tr").each do |row|
+          cells = row.css("td").map { |c| c.text.strip }
           next if cells.length < 4
 
           _name, sigle, unit_str, value_str = cells
@@ -122,10 +123,6 @@ class Provider
         Date.new(year.to_i, month.to_i, day.to_i)
       rescue Date::Error
         nil
-      end
-
-      def strip_tags(text)
-        text.gsub(/<[^>]+>/, "").gsub("&nbsp;", " ").strip
       end
 
       def parse_number(str)
