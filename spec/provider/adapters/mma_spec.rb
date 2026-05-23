@@ -28,7 +28,7 @@ class Provider < Sequel::Model(:providers)
         dataset = adapter.fetch(after: Date.new(2026, 5, 14), upto: Date.new(2026, 5, 21))
         dates = dataset.map { |r| r[:date] }
 
-        _(dates.min).must_be(:>, Date.new(2026, 5, 14))
+        _(dates.min).must_be(:>=, Date.new(2026, 5, 14))
         _(dates.max).must_be(:<=, Date.new(2026, 5, 21))
       end
 
@@ -72,6 +72,18 @@ class Provider < Sequel::Model(:providers)
 
         _(records.length).must_equal(1)
         _(records.first[:date]).must_equal(Date.new(2026, 5, 20))
+      end
+
+      it "deduplicates rows with the same date" do
+        records = adapter.parse([
+          { "Date" => "21 May 2026", "Rate" => "15.42" },
+          { "Date" => "21 May 2026", "Rate" => "15.50" },
+          { "Date" => "20 May 2026", "Rate" => "15.41" },
+        ])
+
+        _(records.length).must_equal(2)
+        _(records.first[:date]).must_equal(Date.new(2026, 5, 21))
+        _(records.first[:rate]).must_equal(15.42)
       end
     end
   end
