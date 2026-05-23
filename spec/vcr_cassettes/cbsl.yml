@@ -1,0 +1,829 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates.php
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.cbsl.gov.lk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Content-Length:
+      - '18273'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 May 2026 12:58:18 GMT
+      Set-Cookie:
+      - AWSALB=4BKuGd2juBTAdSz9Gty8TH4emP7P8z8h7YzKRbMOX/ffSo7+BlluYS/fxh/jX4oOoQ9SUbzXiRT/Wzgz5nRXK6ng9MyzdXShYekAG+N3gl7SLI9Sbrf9fJsqrK/8;
+        Expires=Fri, 29 May 2026 12:58:18 GMT; Path=/
+      - AWSALBCORS=4BKuGd2juBTAdSz9Gty8TH4emP7P8z8h7YzKRbMOX/ffSo7+BlluYS/fxh/jX4oOoQ9SUbzXiRT/Wzgz5nRXK6ng9MyzdXShYekAG+N3gl7SLI9Sbrf9fJsqrK/8;
+        Expires=Fri, 29 May 2026 12:58:18 GMT; Path=/; SameSite=None
+      Server:
+      - Apache
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 974cf949b2620b8e0ad40b141c958290.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - AMS58-P6
+      X-Amz-Cf-Id:
+      - cMne-KMxNThnNkzOWz7uRYai5xCJjw4OWjrhpGZuJRuorJP7v1-CFQ==
+    body:
+      encoding: ASCII-8BIT
+      string: "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <title>Exchange
+        Rates</title>\r\n  <meta charset=\"utf-8\">\r\n  <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1\">\r\n  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\r\n
+        \ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>\r\n
+        \ <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\r\n
+        \ <script type=\"text/javascript\" src=\"./javascript/zebra_datepicker.js\"></script>\r\n
+        \ <script type=\"text/javascript\" src=\"./javascript/iframeResizer.contentWindow.min.js\"></script>\r\n
+        \ <link rel=\"stylesheet\" href=\"./css/default.css\" type=\"text/css\">\r\n</head>\r\n<body
+        onload=\"setDefault()\">\r\n\r\n<div class=\"container-fluid\">\r\n\r\n\r\n
+        \   <div class=\"col-sm-12\">\r\n<form class=\"form-horizontal\" action=\"exrates_results.php\"
+        method=\"post\" name=\"lookupForm\"  id=\"lookupForm\" onsubmit=\"window.focus();
+        return checkValidArray();\" role=\"form\">\r\n\t<fieldset>\r\n        <legend>Specific
+        Date or Range</legend>\r\n        <input name=\"lookupPage\" value=\"lookup_daily_exchange_rates.php\"
+        type=\"hidden\">\r\n\t    <input name=\"startRange\" value=\"2006-11-11\"
+        type=\"hidden\">\r\n                <div class=\"col-sm-offset-2 col-sm-10\">\r\n
+        \           <div class=\"radio\">\r\n                    <input id=\"rangeType_dates\"
+        id=\"rangeType\" name=\"rangeType\" value=\"dates\" checked=\"checked\" type=\"radio\"
+        onchange=\"getSpecificValue(this.value)\">\r\n                \r\n<div class=\"form-inline\">\r\n
+        \   <div class=\"form-group\">\r\n        <label class=\"control-label\">Start
+        (or single date) </label>\r\n        <div class=\"input-group\">\r\n        \t<input
+        class=\"datepicker\" type=\"text\" id=\"txtStart\" name=\"txtStart\" value=\"2026-05-22\">\r\n
+        \      </div>\r\n        <label class=\"control-label\">to</label>\r\n        <div
+        class=\"input-group\">\r\n        \t<input class=\"datepicker\" type=\"text\"
+        \ id=\"txtEnd\" name=\"txtEnd\" value=\"2026-05-22\">\r\n        </div>\r\n
+        \   </div>\r\n</div>\r\n<p class=\"small text-muted\">Date Format: yyyy-mm-dd</p>\r\n
+        \           </div>\r\n            <div id=\"errordiv\" class=\"text-danger
+        form-group\" style=\"display: none;\"></div>\r\n            <div class=\"radio\">\r\n
+        \               <div class=\"form-group\">\r\n                    <label for=\"rangeType_range\">\r\n
+        \                       <input id=\"rangeType_range\" name=\"rangeType\" value=\"range\"
+        type=\"radio\" onchange=\"getQuickDate(this.value)\">Quick Date:\r\n                    </label>\r\n
+        \               </div>\r\n                <div class=\"form-inline\">\r\n
+        \                   <div class=\"form-group\">\r\n                        <span>Latest</span>\r\n
+        \                       <select id=\"rangeValue\" name=\"rangeValue\" onchange=\"setQuickValueRange()\"
+        class=\"form-control\" disabled>\r\n                            <option value=\"1\"
+        selected=\"selected\">1 day</option>\r\n                            <option
+        value=\"7\">7 days</option>\r\n                            <option value=\"14\">14
+        days</option>\r\n                            <option value=\"21\">21 days</option>\r\n
+        \                           <option value=\"30\">30 days</option>\r\n                            <option
+        value=\"60\">60 days</option>\r\n                        </select>\r\n                        <span>for
+        daily series.</span>\r\n                    </div>\r\n                </div>\r\n
+        \           </div>\r\n        </div>\r\n\t</fieldset>\r\n\t<p>&nbsp;</p>\r\n\t<fieldset>\r\n
+        \       <legend>Daily Indicative Exchange Rates</legend>\r\n        <div class=\"form-group\">\r\n
+        \   \t\n<div class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label
+        for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"AUD~Australian Dollar\"
+        id=\"chk_cur[]\"  type=\"checkbox\"> Australian Dollar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"BHD~Bahrain Dinar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Bahrain Dinar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"BDT~Bangladesh
+        Taka\" id=\"chk_cur[]\"  type=\"checkbox\"> Bangladesh Taka</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"BRL~Brazil Real\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Brazil Real</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"BND~Brunei
+        Dollar\" id=\"chk_cur[]\"  type=\"checkbox\"> Brunei Dollar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"CAD~Canadian Dollar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Canadian Dollar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"CNH~Chinese
+        Yuan (Offshore)\" id=\"chk_cur[]\"  type=\"checkbox\"> Chinese Yuan (Offshore)</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"CNY~Chinese Yuan (Renminbi)\" id=\"chk_cur[]\"
+        \ type=\"checkbox\"> Chinese Yuan (Renminbi)</label></div></div><div class=\"col-sm-offset-2
+        col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\"
+        value=\"CZK~Czechoslovak Koruna\" id=\"chk_cur[]\"  type=\"checkbox\"> Czechoslovak
+        Koruna</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label
+        for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"DKK~Danish Kroner\" id=\"chk_cur[]\"
+        \ type=\"checkbox\"> Danish Kroner</label></div></div><div class=\"col-sm-offset-2
+        col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\"
+        value=\"EGP~Egypt Pound\" id=\"chk_cur[]\"  type=\"checkbox\"> Egypt Pound</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"EUR~Euro\" id=\"chk_cur[]\"  type=\"checkbox\"
+        checked> Euro</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"GHS~Ghana
+        Cedi\" id=\"chk_cur[]\"  type=\"checkbox\"> Ghana Cedi</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"XAU~Gold (per Troy oz.)\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Gold (per Troy oz.)</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"HKD~Hong
+        Kong Dollar\" id=\"chk_cur[]\"  type=\"checkbox\"> Hong Kong Dollar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"HUF~Hungary Forint\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Hungary Forint</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"INR~Indian
+        Rupee\" id=\"chk_cur[]\"  type=\"checkbox\"> Indian Rupee</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"IDR~Indonesian Rupiah\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Indonesian Rupiah</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"IRR~Iran
+        Rial\" id=\"chk_cur[]\"  type=\"checkbox\"> Iran Rial</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"JPY~Japanese Yen\" id=\"chk_cur[]\"  type=\"checkbox\"
+        checked> Japanese Yen</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"JOD~Jordan
+        Dinar\" id=\"chk_cur[]\"  type=\"checkbox\"> Jordan Dinar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"KES~Kenya Shillings\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Kenya Shillings</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"KRW~Korean
+        Won\" id=\"chk_cur[]\"  type=\"checkbox\"> Korean Won</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"KWD~Kuwait Dinar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Kuwait Dinar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"MOP~Macau
+        Pataca\" id=\"chk_cur[]\"  type=\"checkbox\"> Macau Pataca</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"MYR~Malaysia  Ringgit\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Malaysia  Ringgit</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"MVR~Maldivian
+        Rufiya\" id=\"chk_cur[]\"  type=\"checkbox\"> Maldivian Rufiya</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"MUR~Mauritius Rupee\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Mauritius Rupee</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"MMK~Myanmar
+        \ Kyat\" id=\"chk_cur[]\"  type=\"checkbox\"> Myanmar  Kyat</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"NPR~Nepal Rupee\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Nepal Rupee</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"RON~New
+        Romania Leu\" id=\"chk_cur[]\"  type=\"checkbox\"> New Romania Leu</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"NZD~New Zealand Dollar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        New Zealand Dollar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"NGN~Nigeria
+        Naira\" id=\"chk_cur[]\"  type=\"checkbox\"> Nigeria Naira</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"NOK~Norwegian Kroner\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Norwegian Kroner</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"OMR~Oman
+        Rial\" id=\"chk_cur[]\"  type=\"checkbox\"> Oman Rial</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"PKR~Pakistan Rupee\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Pakistan Rupee</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"PGK~Papua
+        New Guinea Kina\" id=\"chk_cur[]\"  type=\"checkbox\"> Papua New Guinea Kina</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"PHP~Philippines Peso\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Philippines Peso</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"PLN~Poland
+        Zloty\" id=\"chk_cur[]\"  type=\"checkbox\"> Poland Zloty</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"QAR~Qatar Riyal\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Qatar Riyal</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"RUB~Russia
+        Rouble\" id=\"chk_cur[]\"  type=\"checkbox\"> Russia Rouble</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"SAR~Saudi Arabian Riyal\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Saudi Arabian Riyal</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"SCR~Seychelles
+        Rupee\" id=\"chk_cur[]\"  type=\"checkbox\"> Seychelles Rupee</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"SGD~Singapore Dollar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Singapore Dollar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"SBD~Solomon
+        Island Dollar\" id=\"chk_cur[]\"  type=\"checkbox\"> Solomon Island Dollar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"ZAR~South African Rand\" id=\"chk_cur[]\"  type=\"checkbox\">
+        South African Rand</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"GBP~Sterling
+        Pound\" id=\"chk_cur[]\"  type=\"checkbox\"> Sterling Pound</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"SEK~Swedish Kroner\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Swedish Kroner</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"CHF~Swiss
+        Franc\" id=\"chk_cur[]\"  type=\"checkbox\"> Swiss Franc</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"TWD~Taiwan Dollar\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Taiwan Dollar</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"THB~Thailand
+        Baht\" id=\"chk_cur[]\"  type=\"checkbox\"> Thailand Baht</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"AED~UAE  Dirham\" id=\"chk_cur[]\"  type=\"checkbox\">
+        UAE  Dirham</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"USD~US
+        Dollar\" id=\"chk_cur[]\"  type=\"checkbox\" checked> US Dollar</label></div></div><div
+        class=\"col-sm-offset-2 col-sm-10\"><div class=\"checkbox\"><label for=\"IEXE0101\"><input
+        name=\"chk_cur[]\" value=\"VND~Vietnam Dong\" id=\"chk_cur[]\"  type=\"checkbox\">
+        Vietnam Dong</label></div></div><div class=\"col-sm-offset-2 col-sm-10\"><div
+        class=\"checkbox\"><label for=\"IEXE0101\"><input name=\"chk_cur[]\" value=\"ZMW~Zambia
+        Kwacha (New)\" id=\"chk_cur[]\"  type=\"checkbox\"> Zambia Kwacha (New)</label></div></div>
+        \                   \r\n        </div>\r\n        <div class=\"form-group\">\r\n
+        \           <div class=\"col-sm-offset-2 col-sm-10\">\r\n                <button
+        class=\"btn btn-default\" value=\"Select All\" name=\"select_button\" type=\"button\"
+        onclick=\"selectAll(document.lookupForm['chk_cur[]'])\">Select All</button>\r\n
+        \               <button class=\"btn btn-default\" value=\"Clear\" name=\"clear_button\"
+        type=\"button\" onclick=\"deselectAll(document.lookupForm['chk_cur[]'])\">Clear</button>\r\n
+        \               <button class=\"btn btn-primary\" type=\"submit\" value=\"Submit\"
+        name=\"submit_button\">Submit</button>\r\n                <!--a href=\"./exrates_results.php\"
+        class=\"btn btn-primary\">Submit</a-->\r\n            </div>\r\n        </div>\r\n
+        \   </fieldset>\r\n</form>\r\n    </div>\r\n  </div>\r\n\r\n<script>\r\n\t$(document).ready(function()
+        {\r\n\r\n    // assuming the controls you want to attach the plugin to\r\n
+        \   // have the \"datepicker\" class set\r\n    $('input.datepicker').Zebra_DatePicker();\r\n\r\n});\r\n\t\r\nfunction
+        getSpecificValue() {\r\n    document.getElementById(\"rangeValue\").disabled
+        = true;\r\n    //document.getElementById(\"txtStart\").disabled = false;\r\n
+        \   //document.getElementById(\"txtEnd\").disabled = false;\r\n    \r\n    document.getElementById(\"txtStart\").value
+        = formatDate(new Date());\r\n    document.getElementById(\"txtEnd\").value
+        = formatDate(new Date());\r\n    \r\n    document.getElementById(\"rangeValue\").value
+        = 1;\r\n}\r\n\r\nfunction getQuickDate() {\r\n    document.getElementById(\"rangeValue\").disabled
+        = false;\r\n    //document.getElementById(\"txtStart\").readonly = \"readonly\";\r\n
+        \   //document.getElementById(\"txtEnd\").readonly = \"readonly\";\r\n    \r\n
+        \   document.getElementById(\"txtStart\").value = formatDate(new Date());\r\n
+        \   document.getElementById(\"txtEnd\").value = formatDate(new Date());\r\n}\r\n\r\nfunction
+        selectAll(chk) {\r\n\tfor (i = 0; i < chk.length; i++){\r\n\tchk[i].checked
+        = true ;\r\n  }\r\n  //alert(chk.length);\r\n}\r\n\r\nfunction deselectAll(chk)
+        {\r\n\tfor (i = 0; i < chk.length; i++){\r\n\tchk[i].checked = false ;\r\n
+        \ }\r\n  //alert(chk.length);\r\n}\r\n\r\nfunction formatDate(date) {\r\n
+        \   var d = new Date(date),\r\n        month = '' + (d.getMonth() + 1),\r\n
+        \       day = '' + d.getDate(),\r\n        year = d.getFullYear();\r\n\r\n
+        \   if (month.length < 2) month = '0' + month;\r\n    if (day.length < 2)
+        day = '0' + day;\r\n\r\n    return [year, month, day].join('-');\r\n}\r\n\r\nfunction
+        setDefault()\r\n{\r\n\tdocument.getElementById(\"rangeType_dates\").checked
+        = true;\r\n\tdocument.getElementById(\"rangeValue\").value = 1;\r\n\tdocument.getElementById(\"txtStart\").value
+        = formatDate(new Date());\r\n    document.getElementById(\"txtEnd\").value
+        = formatDate(new Date());\r\n}\r\n\r\nfunction setQuickValueRange()\r\n{\r\n\tvar
+        rangeSelect = document.getElementById(\"rangeValue\");\r\n\tvar selectedRange
+        = rangeSelect.options[rangeSelect.selectedIndex].value;\r\n\t//alert(selectedRange);\r\n\tvar
+        now = new Date();\r\n\tif (selectedRange == 1)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value
+        = formatDate(now.setDate(now.getDate() - 0));\r\n\t}\r\n\telse if (selectedRange
+        == 7)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value = formatDate(now.setDate(now.getDate()
+        - 6));\r\n\t}\r\n\telse if (selectedRange == 14)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value
+        = formatDate(now.setDate(now.getDate() - 13));\r\n\t}\r\n\telse if (selectedRange
+        == 21)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value = formatDate(now.setDate(now.getDate()
+        - 20));\r\n\t}\r\n\telse if (selectedRange == 30)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value
+        = formatDate(now.setDate(now.getDate() - 29));\r\n\t}\r\n\telse if (selectedRange
+        == 60)\r\n\t{\r\n\t\tdocument.getElementById(\"txtStart\").value = formatDate(now.setDate(now.getDate()
+        - 59));\r\n\t}\r\n    document.getElementById(\"txtEnd\").value = formatDate(new
+        Date());\r\n}\r\n</script>\r\n</body>\r\n</html>\r\n"
+  recorded_at: Fri, 22 May 2026 12:58:18 GMT
+- request:
+    method: post
+    uri: https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates_results.php
+    body:
+      encoding: US-ASCII
+      string: lookupPage=lookup_daily_exchange_rates.php&rangeType=dates&txtStart=2025-05-15&txtEnd=2025-05-19&chk_cur%5B%5D=AUD%7EAustralian+Dollar&chk_cur%5B%5D=BHD%7EBahrain+Dinar&chk_cur%5B%5D=BDT%7EBangladesh+Taka&chk_cur%5B%5D=BRL%7EBrazil+Real&chk_cur%5B%5D=BND%7EBrunei+Dollar&chk_cur%5B%5D=CAD%7ECanadian+Dollar&chk_cur%5B%5D=CNH%7EChinese+Yuan+%28Offshore%29&chk_cur%5B%5D=CNY%7EChinese+Yuan+%28Renminbi%29&chk_cur%5B%5D=CZK%7ECzechoslovak+Koruna&chk_cur%5B%5D=DKK%7EDanish+Kroner&chk_cur%5B%5D=EGP%7EEgypt+Pound&chk_cur%5B%5D=EUR%7EEuro&chk_cur%5B%5D=GHS%7EGhana+Cedi&chk_cur%5B%5D=XAU%7EGold+%28per+Troy+oz.%29&chk_cur%5B%5D=HKD%7EHong+Kong+Dollar&chk_cur%5B%5D=HUF%7EHungary+Forint&chk_cur%5B%5D=INR%7EIndian+Rupee&chk_cur%5B%5D=IDR%7EIndonesian+Rupiah&chk_cur%5B%5D=IRR%7EIran+Rial&chk_cur%5B%5D=JPY%7EJapanese+Yen&chk_cur%5B%5D=JOD%7EJordan+Dinar&chk_cur%5B%5D=KES%7EKenya+Shillings&chk_cur%5B%5D=KRW%7EKorean+Won&chk_cur%5B%5D=KWD%7EKuwait+Dinar&chk_cur%5B%5D=MOP%7EMacau+Pataca&chk_cur%5B%5D=MYR%7EMalaysia++Ringgit&chk_cur%5B%5D=MVR%7EMaldivian+Rufiya&chk_cur%5B%5D=MUR%7EMauritius+Rupee&chk_cur%5B%5D=MMK%7EMyanmar++Kyat&chk_cur%5B%5D=NPR%7ENepal+Rupee&chk_cur%5B%5D=RON%7ENew+Romania+Leu&chk_cur%5B%5D=NZD%7ENew+Zealand+Dollar&chk_cur%5B%5D=NGN%7ENigeria+Naira&chk_cur%5B%5D=NOK%7ENorwegian+Kroner&chk_cur%5B%5D=OMR%7EOman+Rial&chk_cur%5B%5D=PKR%7EPakistan+Rupee&chk_cur%5B%5D=PGK%7EPapua+New+Guinea+Kina&chk_cur%5B%5D=PHP%7EPhilippines+Peso&chk_cur%5B%5D=PLN%7EPoland+Zloty&chk_cur%5B%5D=QAR%7EQatar+Riyal&chk_cur%5B%5D=RUB%7ERussia+Rouble&chk_cur%5B%5D=SAR%7ESaudi+Arabian+Riyal&chk_cur%5B%5D=SCR%7ESeychelles+Rupee&chk_cur%5B%5D=SGD%7ESingapore+Dollar&chk_cur%5B%5D=SBD%7ESolomon+Island+Dollar&chk_cur%5B%5D=ZAR%7ESouth+African+Rand&chk_cur%5B%5D=GBP%7ESterling+Pound&chk_cur%5B%5D=SEK%7ESwedish+Kroner&chk_cur%5B%5D=CHF%7ESwiss+Franc&chk_cur%5B%5D=TWD%7ETaiwan+Dollar&chk_cur%5B%5D=THB%7EThailand+Baht&chk_cur%5B%5D=AED%7EUAE++Dirham&chk_cur%5B%5D=USD%7EUS+Dollar&chk_cur%5B%5D=VND%7EVietnam+Dong&chk_cur%5B%5D=ZMW%7EZambia+Kwacha+%28New%29&submit_button=Submit
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.cbsl.gov.lk
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Content-Length:
+      - '38377'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 May 2026 12:58:18 GMT
+      Set-Cookie:
+      - AWSALB=gqPKKrNd6kv8WH6S3AwwCVU/XI2HDAHbSC4m+Qzv8V9U72HwEy2F4XoXjDm9hoPlCqIKBngNkr9Rth+e8Em+TKYekJL5dVTa0GDd8tnDogUg3Ly5XBcsG2BX/gac;
+        Expires=Fri, 29 May 2026 12:58:18 GMT; Path=/
+      - AWSALBCORS=gqPKKrNd6kv8WH6S3AwwCVU/XI2HDAHbSC4m+Qzv8V9U72HwEy2F4XoXjDm9hoPlCqIKBngNkr9Rth+e8Em+TKYekJL5dVTa0GDd8tnDogUg3Ly5XBcsG2BX/gac;
+        Expires=Fri, 29 May 2026 12:58:18 GMT; Path=/; SameSite=None
+      - PHPSESSID=gsptogpb93vdta5lm2uc0ka981; path=/
+      Server:
+      - Apache
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 3a5e4105e7e14b13dcdcd3f0d9062fa0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - AMS58-P6
+      X-Amz-Cf-Id:
+      - 1U4O_6dU_r7r7fPMUvYxGjXiY2aCnwF-Y2OFQxGpXHwI4RvaUNZCbA==
+    body:
+      encoding: ASCII-8BIT
+      string: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>Exchnage Rates</title>\n
+        \ <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1\">\n  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\n
+        \ <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\"></script>\n
+        \ <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n
+        \ <script type=\"text/javascript\" src=\"javascript/zebra_datepicker.js\"></script>\n
+        \ <script type=\"text/javascript\" src=\"./javascript/iframeResizer.contentWindow.min.js\"></script>\n
+        \ <link rel=\"stylesheet\" href=\"css/default.css\" type=\"text/css\">\n  <style>\n
+        \ \t.btn-link{\n\t  border:none;\n\t  outline:none;\n\t  background:none;\n\t
+        \ cursor:pointer;\n\t  color:#0FA7F8;\n\t  padding:0;\n\t  text-decoration:underline;\n\t
+        \ font-family:inherit;\n\t  font-size:inherit;\n\t  text-decoration: none;\n\t}\n
+        \ </style>\n</head>\n<body>\n<form name=\"form\" action=\"\" method=\"post\">\n<input
+        id=\"startDate\" name=\"startDate\" type=\"hidden\" >\n<input id=\"endDate\"
+        name=\"endDate\" type=\"hidden\" >\n<div class=\"container\">\n\n<div class=\"row\">\n\n\n</div><p></p><span
+        class=\"export\">\nView or save this data in:\t\n  <!--button class=\"btn-link\"
+        type=\"submit\" value=\"xml\" name=\"btnXML\">XML</button>,--> \n \t<button
+        class=\"btn-link\" type=\"submit\" value=\"csv\" name=\"btnCSV\">CSV</button>\n\t</span>\n\n<h2>View
+        data for the past: </h2><ul class=\"quick_dates\">\n<li><button class=\"btn-link\"
+        type=\"submit\" value=\"Submit\" name=\"submit_button\" onclick=\"setDateValues_1week();\">1
+        Week</button></li>\n<li><button class=\"btn-link\" type=\"submit\" value=\"Submit\"
+        name=\"submit_button\" onclick=\"setDateValues_2week();\">2 Week</button></li>\n<li><button
+        class=\"btn-link\" type=\"submit\" value=\"Submit\" name=\"submit_button\"
+        onclick=\"setDateValues_1month();\">1 Month</button></li>\n<li><button class=\"btn-link\"
+        type=\"submit\" value=\"Submit\" name=\"submit_button\" onclick=\"setDateValues_3months();\">3
+        Months</button></li>\n<li><button class=\"btn-link\" type=\"submit\" value=\"Submit\"
+        name=\"submit_button\" onclick=\"setDateValues_6months();\">6 Months</button></li>\n<li><button
+        class=\"btn-link\" type=\"submit\" value=\"Submit\" name=\"submit_button\"
+        onclick=\"setDateValues_1year();\">1 Year</button></li>\n</ul><p></p>\n\n<h2
+        id=\"LOOKUPS_IEXE0101\"> Australian Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  AUD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  AUD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 191.8850 </td><td> 0.0052 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 191.2256 </td><td> 0.0052 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 192.2666 </td><td> 0.0052 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Bahrain Dinar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  BHD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  BHD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 792.6693 </td><td> 0.0013 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 791.8565 </td><td> 0.0013 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 792.2804 </td><td> 0.0013 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Bangladesh Taka </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  BDT  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  BDT </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 2.4594 </td><td> 0.4066 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 2.4569 </td><td> 0.407 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 2.4584 </td><td> 0.4068 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Brazil Real </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  BRL  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  BRL </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 52.7595 </td><td> 0.019 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 52.5356 </td><td> 0.019 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 52.9789 </td><td> 0.0189 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Brunei Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  BND  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  BND </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 230.1864 </td><td> 0.0043 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 230.4119 </td><td> 0.0043 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 229.8232 </td><td> 0.0044 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Canadian Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  CAD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  CAD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 213.9906 </td><td> 0.0047 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 213.9474 </td><td> 0.0047 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 213.8156 </td><td> 0.0047 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Chinese Yuan (Offshore) </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  CNH  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  CNH </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 41.4180 </td><td> 0.0241 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 41.4623 </td><td> 0.0241 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 41.4068 </td><td> 0.0242 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Chinese Yuan (Renminbi) </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  CNY  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  CNY </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 41.4074 </td><td> 0.0242 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 41.4465 </td><td> 0.0241 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 41.3915 </td><td> 0.0242 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Czechoslovak Koruna </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  CZK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  CZK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 13.4432 </td><td> 0.0744 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 13.4117 </td><td> 0.0746 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 13.4059 </td><td> 0.0746 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Danish Kroner </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  DKK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  DKK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 44.8054 </td><td> 0.0223 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 44.8351 </td><td> 0.0223 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 44.7968 </td><td> 0.0223 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Egypt Pound </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  EGP  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  EGP </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 5.9644 </td><td> 0.1677 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 5.9523 </td><td> 0.168 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 5.9276 </td><td> 0.1687 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Euro </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  EUR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  EUR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 334.3159 </td><td> 0.003 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 334.4656 </td><td> 0.003 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 334.2487 </td><td> 0.003 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Ghana Cedi </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  GHS  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  GHS </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 24.2940 </td><td> 0.0412 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 23.9767 </td><td> 0.0417 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 24.0879 </td><td> 0.0415 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Gold (per Troy oz.) </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  XAU  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  XAU </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 963884.9136 </td><td> 0 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 962211.4861 </td><td> 0 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 945076.6125 </td><td> 0 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Hong Kong Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  HKD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  HKD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 38.2111 </td><td> 0.0262 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 38.2272 </td><td> 0.0262 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 38.2560 </td><td> 0.0261 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Hungary Forint </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  HUF  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  HUF </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.8303 </td><td> 1.2044 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.8309 </td><td> 1.2035 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.8288 </td><td> 1.2066 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Indian Rupee </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  INR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  INR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 3.4961 </td><td> 0.286 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 3.4950 </td><td> 0.2861 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 3.4996 </td><td> 0.2857 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Indonesian Rupiah </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  IDR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  IDR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.0181 </td><td> 55.2486 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.0182 </td><td> 54.9451 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.0180 </td><td> 55.5556 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Iran Rial </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  IRR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  IRR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.0071 </td><td> 140.8451 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.0071 </td><td> 140.8451 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.0071 </td><td> 140.8451 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Japanese Yen </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  JPY  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  JPY </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 2.0596 </td><td> 0.4855 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 2.0549 </td><td> 0.4866 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 2.0417 </td><td> 0.4898 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Jordan Dinar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  JOD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  JOD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 421.4619 </td><td> 0.0024 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 421.0298 </td><td> 0.0024 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 421.2831 </td><td> 0.0024 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Kenya Shillings </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  KES  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  KES </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 2.3119 </td><td> 0.4325 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 2.3096 </td><td> 0.433 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 2.3109 </td><td> 0.4327 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Korean Won </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  KRW  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  KRW </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.2136 </td><td> 4.6816 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.2138 </td><td> 4.6773 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.2132 </td><td> 4.6904 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Kuwait Dinar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  KWD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  KWD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 972.7416 </td><td> 0.001 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 971.5861 </td><td> 0.001 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 971.1907 </td><td> 0.001 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Macau Pataca </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  MOP  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  MOP </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 37.0786 </td><td> 0.027 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 37.0958 </td><td> 0.027 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 37.1228 </td><td> 0.0269 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Malaysia  Ringgit </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  MYR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  MYR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 69.3390 </td><td> 0.0144 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 69.9414 </td><td> 0.0143 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 69.5679 </td><td> 0.0144 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Maldivian Rufiya </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  MVR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  MVR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 19.3284 </td><td> 0.0517 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 19.3085 </td><td> 0.0518 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 19.3202 </td><td> 0.0518 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Mauritius Rupee </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  MUR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  MUR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 6.4805 </td><td> 0.1543 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 6.5063 </td><td> 0.1537 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 6.5074 </td><td> 0.1537 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Myanmar  Kyat </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  MMK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  MMK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.1423 </td><td> 7.0274 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.1421 </td><td> 7.0373 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.1422 </td><td> 7.0323 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Nepal Rupee </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  NPR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  NPR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 2.1841 </td><td> 0.4579 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 2.1807 </td><td> 0.4586 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 2.1892 </td><td> 0.4568 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> New Romania Leu </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  RON  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  RON </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 66.2991 </td><td> 0.0151 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 65.5037 </td><td> 0.0153 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 65.5072 </td><td> 0.0153 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> New Zealand Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  NZD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  NZD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 176.2719 </td><td> 0.0057 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 175.3448 </td><td> 0.0057 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 176.3613 </td><td> 0.0057 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Nigeria Naira </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  NGN  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  NGN </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.1859 </td><td> 5.3792 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.1865 </td><td> 5.3619 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.1866 </td><td> 5.3591 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Norwegian Kroner </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  NOK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  NOK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 28.7672 </td><td> 0.0348 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 28.6874 </td><td> 0.0349 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 28.7435 </td><td> 0.0348 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Oman Rial </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  OMR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  OMR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 776.1972 </td><td> 0.0013 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 775.4013 </td><td> 0.0013 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 775.8577 </td><td> 0.0013 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Pakistan Rupee </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  PKR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  PKR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 1.0606 </td><td> 0.9429 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 1.0595 </td><td> 0.9438 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 1.0601 </td><td> 0.9433 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Papua New Guinea Kina </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  PGK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  PGK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 71.9102 </td><td> 0.0139 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 72.9857 </td><td> 0.0137 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 73.0296 </td><td> 0.0137 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Philippines Peso </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  PHP  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  PHP </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 5.3554 </td><td> 0.1867 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 5.3692 </td><td> 0.1862 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 5.3539 </td><td> 0.1868 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Poland Zloty </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  PLN  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  PLN </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 78.1026 </td><td> 0.0128 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 78.7335 </td><td> 0.0127 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 78.9975 </td><td> 0.0127 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Qatar Riyal </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  QAR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  QAR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 81.9843 </td><td> 0.0122 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 81.8845 </td><td> 0.0122 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 81.9473 </td><td> 0.0122 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Russia Rouble </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  RUB  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  RUB </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 3.6891 </td><td> 0.2711 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 3.7314 </td><td> 0.268 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 3.7162 </td><td> 0.2691 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Saudi Arabian Riyal </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  SAR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  SAR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 79.6674 </td><td> 0.0126 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 79.5857 </td><td> 0.0126 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 79.6336 </td><td> 0.0126 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Seychelles Rupee </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  SCR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  SCR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 21.0181 </td><td> 0.0476 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 20.9966 </td><td> 0.0476 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 19.9502 </td><td> 0.0501 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Singapore Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  SGD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  SGD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 230.1864 </td><td> 0.0043 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 230.4119 </td><td> 0.0043 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 229.8232 </td><td> 0.0044 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Solomon Island Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  SBD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  SBD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 35.0811 </td><td> 0.0285 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 35.0451 </td><td> 0.0285 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 36.2012 </td><td> 0.0276 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> South African Rand </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  ZAR  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  ZAR </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 16.5611 </td><td> 0.0604 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 16.5635 </td><td> 0.0604 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 16.3612 </td><td> 0.0611 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Sterling Pound </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  GBP  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  GBP </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 397.5305 </td><td> 0.0025 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 397.3319 </td><td> 0.0025 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 396.4956 </td><td> 0.0025 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Swedish Kroner </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  SEK  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  SEK </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 30.5859 </td><td> 0.0327 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 30.7210 </td><td> 0.0326 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 30.6773 </td><td> 0.0326 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Swiss Franc </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  CHF  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  CHF </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 357.8855 </td><td> 0.0028 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 358.2479 </td><td> 0.0028 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 355.6677 </td><td> 0.0028 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Taiwan Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  TWD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  TWD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 9.9080 </td><td> 0.1009 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 9.9173 </td><td> 0.1008 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 9.8930 </td><td> 0.1011 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Thailand Baht </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  THB  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  THB </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 8.9991 </td><td> 0.1111 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 9.0075 </td><td> 0.111 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 8.9281 </td><td> 0.112 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> UAE  Dirham </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  AED  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  AED </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 81.3615 </td><td> 0.0123 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 81.2693 </td><td> 0.0123 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 81.3193 </td><td> 0.0123 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> US Dollar </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  USD  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  USD </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 298.8165 </td><td> 0.0033 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 298.5101 </td><td> 0.0033 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 298.6897 </td><td> 0.0033 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Vietnam Dong </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  VND  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  VND </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 0.0115 </td><td> 86.9565 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 0.0115 </td><td> 86.9565 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 0.0115 </td><td> 86.9565 </td></tr></tbody></table><h2
+        id=\"LOOKUPS_IEXE0101\"> Zambia Kwacha (New) </h2><div class=\"table-responsive\"></div><div
+        class=\"table-responsive\"><table class=\"table table-bordered table-striped
+        table-hover rates sortable series\"><thead><tr class=\"odd\">\t<th class=\"header
+        headerSortDown\">Date</th>\t<th class=\"header\">1  ZMW  -&gt; LKR</th>\t<th
+        class=\"header\">1 LKR -&gt;  ZMW </th></tr></thead><tbody><tr class=\"odd\"><td>
+        2025-05-19 </td><td> 11.1176 </td><td> 0.0899 </td></tr><tr class=\"odd\"><td>
+        2025-05-16 </td><td> 11.1906 </td><td> 0.0894 </td></tr><tr class=\"odd\"><td>
+        2025-05-15 </td><td> 11.2184 </td><td> 0.0891 </td></tr></tbody></table></div></div></div>\n
+        \       </div>\n    </div>\n</div>\n\n</div> <!-- Closes Main Container div
+        -->\n\n<script>\n\t$(document).ready(function() {\n\n    // assuming the controls
+        you want to attach the plugin to\n    // have the \"datepicker\" class set\n
+        \   $('input.datepicker').Zebra_DatePicker();\n\n});\n\nfunction formatDate(date)
+        {\n    var d = new Date(date),\n        month = '' + (d.getMonth() + 1),\n
+        \       day = '' + d.getDate(),\n        year = d.getFullYear();\n\n    if
+        (month.length < 2) month = '0' + month;\n    if (day.length < 2) day = '0'
+        + day;\n\n    return [year, month, day].join('-');\n}\n\nfunction setDateValues_1week()\n{\n\tvar
+        now = new Date();\n\tdocument.getElementById(\"startDate\").value = formatDate(now.setDate(now.getDate()
+        - 6));\n    document.getElementById(\"endDate\").value = formatDate(new Date());\n
+        \   //alert(document.getElementById(\"startDate\").value);\n}\n\nfunction
+        setDateValues_2week()\n{\n\tvar now = new Date();\n\tdocument.getElementById(\"startDate\").value
+        = formatDate(now.setDate(now.getDate() - 13));\n    document.getElementById(\"endDate\").value
+        = formatDate(new Date());\n    //alert(document.getElementById(\"startDate\").value);\n}\n\nfunction
+        setDateValues_1month()\n{\n\tvar now = new Date();\n\tdocument.getElementById(\"startDate\").value
+        = formatDate(now.setDate(now.getDate() - 29));\n    document.getElementById(\"endDate\").value
+        = formatDate(new Date());\n    //alert(document.getElementById(\"startDate\").value);\n}\n\nfunction
+        setDateValues_3months()\n{\n\tvar now = new Date();\n\tdocument.getElementById(\"startDate\").value
+        = formatDate(now.setDate(now.getDate() - 89));\n    document.getElementById(\"endDate\").value
+        = formatDate(new Date());\n    //alert(document.getElementById(\"startDate\").value);\n}\n\nfunction
+        setDateValues_6months()\n{\n\tvar now = new Date();\n\tdocument.getElementById(\"startDate\").value
+        = formatDate(now.setDate(now.getDate() - 179));\n    document.getElementById(\"endDate\").value
+        = formatDate(new Date());\n    //alert(document.getElementById(\"startDate\").value);\n}\n\nfunction
+        setDateValues_1year()\n{\n\tvar now = new Date();\n\tdocument.getElementById(\"startDate\").value
+        = formatDate(now.setDate(now.getDate() - 364));\n    document.getElementById(\"endDate\").value
+        = formatDate(new Date());\n    //alert(document.getElementById(\"startDate\").value);\n}\n</script>\n</form>\n</body>\n</html>\n"
+  recorded_at: Fri, 22 May 2026 12:58:19 GMT
+recorded_with: VCR 6.4.0
