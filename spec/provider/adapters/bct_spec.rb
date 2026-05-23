@@ -20,6 +20,10 @@ class Provider < Sequel::Model(:providers)
         dataset = adapter.fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 20))
 
         _(dataset).wont_be_empty
+
+        dates = dataset.map { |r| r[:date] }.uniq.sort
+
+        _(dates).must_equal([Date.new(2026, 5, 18), Date.new(2026, 5, 19), Date.new(2026, 5, 20)])
       end
 
       it "stores foreign currency as base and TND as quote" do
