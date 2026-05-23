@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
+require "nokogiri"
 
 require "provider/adapters/adapter"
 
@@ -29,11 +30,9 @@ class Provider
       URL = "https://www.bankofalbania.org/Markets/Official_exchange_rate/"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
-      # Each table block on the page begins with a "Last update: DD.MM.YYYY"
-      # marker followed by a <TABLE> element.
-      TABLE_BLOCK = %r{Last update:.*?<b>(\d{2}\.\d{2}\.\d{4})</b>.*?<TABLE\b(.*?)</TABLE>}mi
-      ROW = %r{<TR\b[^>]*>(.*?)</TR>}mi
-      CELL = %r{<TD\b[^>]*>(.*?)</TD>}mi
+      # Date format used in the "Last update: DD.MM.YYYY" markers preceding
+      # each table.
+      DATE_PATTERN = /\A\d{2}\.\d{2}\.\d{4}\z/
 
       # Quotes published per N units in the source. Divide by N to normalise to
       # a per-1-unit rate.
@@ -52,19 +51,30 @@ class Provider
       end
 
       def parse(html)
+        doc = Nokogiri::HTML.parse(html)
         records = []
         seen = {}
+        current_date = nil
 
-        html.scan(TABLE_BLOCK) do |date_str, table_body|
-          date = Date.strptime(date_str, "%d.%m.%Y")
-          parse_table(table_body, date).each do |record|
-            key = [record[:date], record[:base], record[:quote]]
-            # The bid/ask USD/EUR table repeats the daily fix date. Keep the
-            # first (mid-rate) record per date+pair.
-            next if seen[key]
+        # Walk the document in order. Each table is preceded by a "Last update"
+        # block containing a <b>DD.MM.YYYY</b> marker. Track the most recent
+        # date we have seen and apply it to the next table.
+        doc.traverse do |node|
+          next unless node.element?
 
-            seen[key] = true
-            records << record
+          if node.name == "b"
+            text = node.text.strip
+            current_date = Date.strptime(text, "%d.%m.%Y") if DATE_PATTERN.match?(text)
+          elsif node.name == "table" && current_date
+            parse_table(node, current_date).each do |record|
+              key = [record[:date], record[:base], record[:quote]]
+              # The bid/ask USD/EUR table repeats the daily fix date. Keep the
+              # first (mid-rate) record per date+pair.
+              next if seen[key]
+
+              seen[key] = true
+              records << record
+            end
           end
         end
 
@@ -84,14 +94,15 @@ class Provider
         http.request(req).body
       end
 
-      def parse_table(body, date)
-        body.scan(ROW).filter_map do |row_html,|
-          parse_row(row_html, date)
+      def parse_table(table, date)
+        # Skip <thead> rows so column headers are not parsed as data.
+        table.xpath(".//tr[not(ancestor::thead)]").filter_map do |row|
+          parse_row(row, date)
         end
       end
 
-      def parse_row(row_html, date)
-        cells = row_html.scan(CELL).flatten.map { |c| strip_html(c) }
+      def parse_row(row, date)
+        cells = row.xpath("./td|./th").map { |c| c.text.strip }
         return if cells.length < 3
 
         code = cells[1]
@@ -103,10 +114,6 @@ class Provider
 
         multiplier = UNIT_MULTIPLIERS[code] || 1
         { date:, base: code, quote: "ALL", rate: value / multiplier }
-      end
-
-      def strip_html(str)
-        str.gsub(/<[^>]+>/, "").gsub("&nbsp;", " ").strip
       end
     end
   end
