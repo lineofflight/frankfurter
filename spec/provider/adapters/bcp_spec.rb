@@ -64,6 +64,7 @@ class Provider < Sequel::Model(:providers)
 
         _(records.length).must_equal(2)
         first = records.find { |r| r[:date] == Date.new(2024, 1, 1) }
+
         _(first[:base]).must_equal("USD")
         _(first[:quote]).must_equal("PYG")
         _(first[:rate]).must_be_close_to(7271.63, 0.001)

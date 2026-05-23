@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
+require "nokogiri"
 
 require "provider/adapters/adapter"
 
@@ -20,9 +21,31 @@ class Provider
       # Currencies have varying historical depth — USD/EUR back to 2001, most
       # others from ~2012, some later — so empty cells are expected on older years.
       CURRENCIES = [
-        "USD", "EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "BRL", "ARS",
-        "CLP", "MXN", "UYU", "COP", "BOB", "NZD", "ZAR", "SEK", "DKK", "NOK",
-        "AED", "PEN", "SGD", "TWD", "XAU"
+        "USD",
+        "EUR",
+        "GBP",
+        "JPY",
+        "CHF",
+        "CAD",
+        "AUD",
+        "CNY",
+        "BRL",
+        "ARS",
+        "CLP",
+        "MXN",
+        "UYU",
+        "COP",
+        "BOB",
+        "NZD",
+        "ZAR",
+        "SEK",
+        "DKK",
+        "NOK",
+        "AED",
+        "PEN",
+        "SGD",
+        "TWD",
+        "XAU",
       ].freeze
 
       class << self
@@ -48,21 +71,20 @@ class Provider
       end
 
       def parse(html, year:, currency:)
-        body = html[%r{<tbody>(.*?)</tbody>}mi, 1]
-        return [] unless body
-
+        doc = Nokogiri::HTML.parse(html)
         records = []
-        body.scan(%r{<tr[^>]*>(.*?)</tr>}mi) do |row_html,|
-          day_match = row_html[%r{<th[^>]*>\s*(\d{1,2})\s*</th>}mi]
-          next unless day_match
 
-          day = Regexp.last_match(1).to_i
-          cells = row_html.scan(%r{<td[^>]*>(.*?)</td>}mi).flatten.map(&:strip)
+        doc.css("tbody tr").each do |row|
+          day_text = row.at_css("th")&.text&.strip
+          next unless day_text&.match?(/\A\d{1,2}\z/)
+
+          day = day_text.to_i
+          cells = row.css("td")
           next if cells.length < 12
 
           cells.first(12).each_with_index do |cell, index|
             month = index + 1
-            value = parse_value(cell)
+            value = parse_value(cell.text)
             next unless value
 
             date = safe_date(year, month, day)
@@ -95,12 +117,12 @@ class Provider
       end
 
       def parse_value(cell)
-        text = cell.gsub(/<[^>]+>/, "").strip
+        text = cell.strip
         return if text.empty? || text == "ND"
 
         normalized = text.delete(".").tr(",", ".")
         value = Float(normalized, exception: false)
-        return unless value && value.positive?
+        return unless value&.positive?
 
         value
       end
