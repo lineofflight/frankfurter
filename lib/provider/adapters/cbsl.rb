@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
+require "nokogiri"
 
 require "provider/adapters/adapter"
 
@@ -37,10 +38,21 @@ class Provider
       end
 
       def parse(html)
+        doc = Nokogiri::HTML.parse(html)
         records = []
 
-        html.scan(%r{<th[^>]*>\s*1\s+([A-Z]{3})\s+-&gt;\s+LKR\s*</th>.*?<tbody>(.*?)</tbody>}m) do |code, body|
-          body.scan(%r{<tr[^>]*>\s*<td>\s*(\d{4}-\d{2}-\d{2})\s*</td>\s*<td>\s*([\d.]+)\s*</td>}) do |date_str, rate_str|
+        doc.css("table").each do |table|
+          code = currency_code(table)
+          next unless code
+
+          table.css("tbody tr").each do |row|
+            cells = row.css("td")
+            next if cells.length < 2
+
+            date_str = cells[0].text.strip
+            rate_str = cells[1].text.strip
+            next unless date_str.match?(/\A\d{4}-\d{2}-\d{2}\z/)
+
             rate = Float(rate_str, exception: false)
             next unless rate&.positive?
 
@@ -53,10 +65,19 @@ class Provider
 
       private
 
+      def currency_code(table)
+        table.css("thead th").each do |th|
+          match = th.text.match(/\A\s*1\s+([A-Z]{3})\s+->\s+LKR\s*\z/)
+          return match[1] if match
+        end
+        nil
+      end
+
       def fetch_currencies
         response = Net::HTTP.get_response(FORM_PAGE)
         response.value
-        response.body.scan(/name="chk_cur\[\]" value="([^"]+)"/).flatten
+        doc = Nokogiri::HTML.parse(response.body)
+        doc.css('input[name="chk_cur[]"]').filter_map { |input| input["value"] }
       end
 
       def post_request(after, upto, currencies)
