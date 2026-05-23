@@ -1,0 +1,12 @@
+{
+  "key": "SBP",
+  "name": "State Bank of Pakistan",
+  "country_code": "PK",
+  "rate_type": "daily average banks' floating rate",
+  "pivot_currency": "PKR",
+  "data_url": "https://www.sbp.org.pk/ecodata/BFER_Daily.xlsx",
+  "terms_url": null,
+  "publish_schedule": "*/30 5-15 15-28 * *",
+  "publish_cadence": "monthly",
+  "coverage_start": "2013-07-02"
+}
