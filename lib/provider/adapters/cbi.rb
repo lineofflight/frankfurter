@@ -2,7 +2,9 @@
 
 require "date"
 require "net/http"
-require "zlib"
+require "nokogiri"
+require "ox"
+require "zip"
 
 require "provider/adapters/adapter"
 
@@ -19,8 +21,8 @@ class Provider
     # or USD-only and redundant for our IQD-pivoted shape.
     #
     # File URLs (e.g. file-177909880482668.xlsx) rotate when CBI re-uploads,
-    # so the adapter scrapes page/144 each fetch and picks the second .xlsx
-    # link (the multi-currency daily file).
+    # so the adapter scrapes page/144 each fetch and picks the .xlsx link whose
+    # anchor text mentions gold (the multi-currency daily file).
     #
     # The XLSX file uses one sheet per calendar year (2009-present). The
     # column layout has evolved over time: 2-column Buy/Sell groups in
@@ -45,6 +47,13 @@ class Provider
         "Gold" => "XAU",
       }.freeze
 
+      # Arabic for "gold" appears only in the multi-currency daily file's link text.
+      # USD-only and historical archive links don't mention gold, giving us a stable
+      # selector that survives re-ordering or new files added to the page.
+      GOLD_MARKER = "الذهب"
+
+      RELS_NS = { "r" => "http://schemas.openxmlformats.org/package/2006/relationships" }.freeze
+
       def fetch(after: nil, upto: nil)
         page = http_get(URI(PAGE_URL))
         url = discover_file_url(page)
@@ -57,22 +66,24 @@ class Provider
       end
 
       def parse(xlsx)
-        reader = ZipReader.new(xlsx)
-        shared_strings = parse_shared_strings(reader.read("xl/sharedStrings.xml"))
-        workbook = reader.read("xl/workbook.xml")
-        rels = reader.read("xl/_rels/workbook.xml.rels")
-
         records = []
-        sheet_names(workbook).each do |name, rid|
-          year = Integer(name.strip, exception: false)
-          next unless year
 
-          target = rels[/Id="#{rid}"[^>]*?Target="([^"]+)"/, 1]
-          next unless target
+        Zip::File.open_buffer(xlsx) do |zip|
+          shared_strings = read_shared_strings(zip)
+          sheet_targets = read_sheet_targets(zip)
 
-          sheet_xml = reader.read("xl/#{target}")
-          records.concat(parse_sheet(sheet_xml, shared_strings, year))
+          sheet_targets.each do |name, target|
+            year = Integer(name.strip, exception: false)
+            next unless year
+
+            entry = zip.find_entry("xl/#{target}")
+            next unless entry
+
+            sheet_xml = entry.get_input_stream.read
+            records.concat(parse_sheet(sheet_xml, shared_strings, year))
+          end
         end
+
         records
       end
 
@@ -93,20 +104,19 @@ class Provider
         response.body
       end
 
-      # Arabic for "gold" appears only in the multi-currency daily file's link text.
-      # USD-only and historical archive links don't mention gold, giving us a stable
-      # selector that survives re-ordering or new files added to the page.
-      GOLD_MARKER = "الذهب"
-
       def discover_file_url(page)
-        html = page.dup.force_encoding(Encoding::UTF_8)
-        anchors = html.scan(%r{<a\s+href="(https?://[^"]+\.xlsx)"[^>]*>(.*?)</a>}m)
-        raise "CBI: no XLSX links found on page/144" if anchors.empty?
+        doc = Nokogiri::HTML.parse(page)
 
-        match = anchors.find { |_, label| label.include?(GOLD_MARKER) }
+        xlsx_anchors = doc.css("a").select do |a|
+          href = a["href"]
+          href&.match?(%r{\Ahttps?://.+\.xlsx\z})
+        end
+        raise "CBI: no XLSX links found on page/144" if xlsx_anchors.empty?
+
+        match = xlsx_anchors.find { |a| a.text.include?(GOLD_MARKER) }
         raise "CBI: could not find multi-currency daily XLSX on page/144" unless match
 
-        match.first
+        match["href"]
       end
 
       def parse_sheet(xml, shared_strings, year)
@@ -205,8 +215,10 @@ class Provider
         # Examples seen: "Jan. 2009", "Feb.2009", "Jan,2009", "Jan. 2026"
         return unless label.is_a?(String)
 
-        match = label.match(/\A\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\.?\s*[,\s]?\s*\d{4}/i)
+        stripped = label.strip
+        match = stripped.match(/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[.,\s]/i)
         return unless match
+        return unless stripped.match?(/\d{4}\z/)
 
         {
           "jan" => 1,
@@ -230,41 +242,114 @@ class Provider
         nil
       end
 
-      def sheet_names(workbook_xml)
-        workbook_xml.scan(/<sheet\s+name="([^"]+)"\s+sheetId="[^"]*"\s+r:id="([^"]+)"/).to_a
+      def read_shared_strings(zip)
+        entry = zip.find_entry("xl/sharedStrings.xml")
+        return [] unless entry
+
+        doc = Ox.load(entry.get_input_stream.read, mode: :generic, effort: :tolerant)
+        root = doc.respond_to?(:nodes) ? doc.nodes.find { |n| n.respond_to?(:value) && n.value == "sst" } : nil
+        return [] unless root
+
+        root.nodes.map { |si| collect_text(si) }
       end
 
-      def parse_shared_strings(xml)
-        xml.scan(%r{<si\b[^>]*>(.*?)</si>}m).map do |inner,|
-          text = inner.scan(%r{<t\b[^>]*>([^<]*)</t>}m).join
-          text.gsub("&amp;", "&").gsub("&lt;", "<").gsub("&gt;", ">").gsub("&quot;", '"').gsub("&apos;", "'")
+      def read_sheet_targets(zip)
+        workbook_xml = zip.find_entry("xl/workbook.xml").get_input_stream.read
+        rels_xml = zip.find_entry("xl/_rels/workbook.xml.rels").get_input_stream.read
+
+        rels = {}
+        Nokogiri::XML.parse(rels_xml).xpath("//r:Relationship", RELS_NS).each do |node|
+          rels[node["Id"]] = node["Target"]
+        end
+
+        workbook_doc = Ox.load(workbook_xml, mode: :generic, effort: :tolerant)
+        sheets = []
+        each_element(workbook_doc) do |node|
+          next unless node.respond_to?(:value) && node.value == "sheet"
+
+          name = node["name"]
+          rid = node["r:id"] || node["id"]
+          next unless name && rid
+
+          target = rels[rid]
+          sheets << [name, target] if target
+        end
+        sheets
+      end
+
+      def each_element(node, &block)
+        return unless node.respond_to?(:nodes) && node.nodes
+
+        node.nodes.each do |child|
+          next unless child.respond_to?(:value)
+
+          yield(child)
+          each_element(child, &block)
         end
       end
 
+      def collect_text(node)
+        return "" unless node.respond_to?(:nodes) && node.nodes
+
+        node.nodes.map do |child|
+          if child.is_a?(String)
+            ""
+          elsif child.respond_to?(:value) && child.value == "t"
+            child.nodes.first.to_s
+          elsif child.respond_to?(:value) && child.value == "r"
+            collect_text(child)
+          else
+            ""
+          end
+        end.join
+      end
+
       def parse_rows(xml, shared_strings)
+        doc = Ox.load(xml, mode: :generic, effort: :tolerant)
+        sheet_data = nil
+        each_element(doc) do |node|
+          if node.respond_to?(:value) && node.value == "sheetData"
+            sheet_data = node
+            break
+          end
+        end
+        return [] unless sheet_data
+
         rows = []
-        xml.scan(%r{<row\b([^>]*)>(.*?)</row>}m).each do |attrs, content|
-          r = attrs[/\br="(\d+)"/, 1].to_i
+        sheet_data.nodes.each do |row_node|
+          next unless row_node.respond_to?(:value) && row_node.value == "row"
+
+          r = row_node["r"].to_i
           cells = {}
-          content.scan(%r{<c\b([^/]*?)(?:/>|>(.*?)</c>)}m).each do |cell_attrs, body|
-            ref = cell_attrs[/\br="([A-Z]+\d+)"/, 1]
-            next unless ref
+          row_node.nodes.each do |cell|
+            next unless cell.respond_to?(:value) && cell.value == "c"
+
+            ref = cell["r"]
+            next unless ref&.match?(/\A[A-Z]+\d+\z/)
 
             col = ref[/\A[A-Z]+/]
-            t = cell_attrs[/\bt="([^"]+)"/, 1]
-
-            v = nil
-            if body
-              v = body[%r{<v>([^<]*)</v>}, 1]
-              v ||= body[%r{<is><t[^>]*>([^<]*)</t></is>}, 1] if t == "inlineStr"
-            end
-            next unless v
-
-            cells[col] = t == "s" ? shared_strings[v.to_i] : v
+            t = cell["t"]
+            value = extract_cell_value(cell, t, shared_strings)
+            cells[col] = value unless value.nil?
           end
           rows << { r: r, cells: cells }
         end
         rows
+      end
+
+      def extract_cell_value(cell, t, shared_strings)
+        if t == "inlineStr"
+          is_node = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "is" }
+          return unless is_node
+
+          collect_text(is_node)
+        else
+          v_node = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "v" }
+          return unless v_node
+
+          raw = v_node.nodes.first.to_s
+          t == "s" ? shared_strings[raw.to_i] : raw
+        end
       end
 
       def col_to_num(col)
@@ -281,61 +366,6 @@ class Provider
           n /= 26
         end
         col
-      end
-
-      # Minimal ZIP reader (XLSX is a ZIP container of XML files). Uses
-      # zlib's raw inflate; rubyzip would pull in another gem for trivial work.
-      class ZipReader
-        LOCAL_HEADER_SIG = 0x04034b50
-        CENTRAL_DIR_SIG = 0x02014b50
-        EOCD_SIG = "\x50\x4b\x05\x06".b
-
-        def initialize(data)
-          @data = data.dup.force_encoding(Encoding::BINARY)
-          @entries = read_central_directory
-        end
-
-        def read(name)
-          entry = @entries.fetch(name) { raise "ZipReader: entry not found: #{name}" }
-          sig, _ver, _flags, method, _mtime, _mdate, _crc, _csize, _usize, fname_len, extra_len =
-            @data[entry[:offset], 30].unpack("VvvvvvVVVvv")
-          raise "ZipReader: bad local header for #{name}" unless sig == LOCAL_HEADER_SIG
-
-          start = entry[:offset] + 30 + fname_len + extra_len
-          compressed = @data[start, entry[:csize]]
-
-          case method
-          when 0 then compressed
-          when 8 then Zlib::Inflate.new(-Zlib::MAX_WBITS).inflate(compressed)
-          else raise "ZipReader: unsupported compression #{method}"
-          end
-        end
-
-        private
-
-        def read_central_directory
-          eocd = @data.rindex(EOCD_SIG)
-          raise "ZipReader: no EOCD record" unless eocd
-
-          cd_entries, _cd_size, cd_offset = @data[eocd + 10, 12].unpack("vVV")
-          entries = {}
-          pos = cd_offset
-          cd_entries.times do
-            unpacked = @data[pos, 46].unpack("VvvvvvvVVVvvvvvVV")
-            sig = unpacked[0]
-            csize = unpacked[8]
-            fname_len = unpacked[10]
-            extra_len = unpacked[11]
-            comment_len = unpacked[12]
-            local_offset = unpacked[16]
-            raise "ZipReader: bad central directory entry" unless sig == CENTRAL_DIR_SIG
-
-            name = @data[pos + 46, fname_len].force_encoding(Encoding::UTF_8)
-            entries[name] = { offset: local_offset, csize: csize }
-            pos += 46 + fname_len + extra_len + comment_len
-          end
-          entries
-        end
       end
     end
   end
