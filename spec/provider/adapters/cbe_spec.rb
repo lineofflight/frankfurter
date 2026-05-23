@@ -2,7 +2,6 @@
 
 require_relative "../../helper"
 require "provider/adapters/cbe"
-require "stringio"
 require "zip"
 
 class Provider < Sequel::Model(:providers)

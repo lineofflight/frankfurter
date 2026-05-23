@@ -57,6 +57,33 @@ class Provider
 
       class << self
         def backfill_range = 30
+
+        # Override the base fetch_each to reuse a single adapter instance across
+        # batches. The default implementation calls `new.fetch` per chunk, which
+        # would throw away the WAF session cookie/token between batches and
+        # would also defeat the inter-batch pacing below.
+        def fetch_each(after: nil)
+          return if after && after >= Date.today
+
+          adapter = new
+          retries = 0
+          loop do
+            upto = after + backfill_range - 1 if after && backfill_range
+            upto = nil if upto && upto >= Date.today
+            records = adapter.fetch(after:, upto:)
+            yield records if records.any?
+            retries = 0
+            break unless upto
+
+            after = upto + 1
+          rescue *TRANSIENT_ERRORS
+            retries += 1
+            raise if retries > 5
+
+            sleep(2**retries)
+            retry
+          end
+        end
       end
 
       def fetch(after: nil, upto: nil)
@@ -66,6 +93,7 @@ class Provider
 
         sleep(1) if @session
         ensure_session
+        @session = true
         xlsx = post_historical(start_date, end_date)
 
         parse(xlsx)
@@ -117,7 +145,7 @@ class Provider
         response.value
 
         match = response.body.match(TOKEN_PATTERN)
-        raise "CBE: token not found on historical-data page" unless match
+        raise Unavailable, "CBE: token not found on historical-data page" unless match
 
         @token = match[1]
         @cookie = extract_cookies(response)
@@ -152,7 +180,7 @@ class Provider
       end
 
       def extract_cookies(response)
-        response.get_fields("set-cookie").map { |c| c.split(";").first }.join("; ")
+        response.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
       end
 
       def read_xlsx(body)
