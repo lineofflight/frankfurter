@@ -1,0 +1,12 @@
+{
+  "key": "BSh",
+  "name": "Bank of Albania",
+  "country_code": "AL",
+  "rate_type": "official rate",
+  "pivot_currency": "ALL",
+  "data_url": "https://www.bankofalbania.org/Markets/Official_exchange_rate/",
+  "terms_url": null,
+  "publish_schedule": "*/30 10-12 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1994-01-01"
+}
