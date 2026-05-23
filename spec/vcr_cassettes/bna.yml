@@ -50,7 +50,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:06 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=AED&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=AED&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -100,7 +100,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:06 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ALL&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ALL&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -148,7 +148,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:07 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ARS&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ARS&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -198,7 +198,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:08 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=AUD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=AUD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -248,7 +248,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:09 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BGN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BGN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -298,7 +298,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:10 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BMD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BMD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -348,7 +348,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:11 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BOB&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BOB&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -398,7 +398,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:12 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BRL&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BRL&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -448,7 +448,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:13 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BSD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BSD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -498,7 +498,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:13 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=BWP&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BWP&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -548,7 +548,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:14 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CAD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CAD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -598,7 +598,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:15 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CDF&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CDF&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -648,7 +648,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:16 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CHF&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CHF&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -698,7 +698,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:17 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CNY&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CNY&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -748,7 +748,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:18 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CRC&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CRC&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -798,7 +798,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:19 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CUP&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CUP&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -848,7 +848,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:20 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CVE&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CVE&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -898,7 +898,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:21 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=CZK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CZK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -948,7 +948,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:22 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=DKK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=DKK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -998,7 +998,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:22 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=EEK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EEK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1048,7 +1048,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:23 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=EGP&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EGP&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1098,7 +1098,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:24 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ETB&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ETB&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1148,7 +1148,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:24 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=EUR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EUR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1198,7 +1198,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:25 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=GBP&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=GBP&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1248,7 +1248,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:26 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=HKD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HKD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1298,7 +1298,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:27 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=HRK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HRK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1348,7 +1348,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:28 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=HUF&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HUF&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1398,7 +1398,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:29 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=IDR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=IDR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1448,7 +1448,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:30 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ILS&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ILS&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1498,7 +1498,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:31 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=INR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=INR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1548,7 +1548,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:32 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=IQD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=IQD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1598,7 +1598,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:32 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=JMD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=JMD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1648,7 +1648,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:33 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=JPY&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=JPY&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1698,7 +1698,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:34 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=KES&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KES&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1748,7 +1748,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:35 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=KRW&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KRW&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1798,7 +1798,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:36 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=KWD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KWD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1848,7 +1848,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:36 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=KZT&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KZT&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1898,7 +1898,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:37 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=LBP&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LBP&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1948,7 +1948,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:38 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=LKR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LKR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -1998,7 +1998,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:39 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=LSL&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LSL&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2048,7 +2048,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:40 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=MAD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MAD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2098,7 +2098,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:41 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=MXN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MXN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2148,7 +2148,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:42 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=MYR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MYR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2198,7 +2198,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:43 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=MZN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MZN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2248,7 +2248,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:43 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=NAD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NAD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2298,7 +2298,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:44 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=NGN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NGN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2348,7 +2348,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:45 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=NOK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NOK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2398,7 +2398,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:47 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=NZD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NZD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2448,7 +2448,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:47 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=PEN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PEN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2498,7 +2498,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:48 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=PKR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PKR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2548,7 +2548,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:49 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=PLN&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PLN&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2598,7 +2598,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:50 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=QAR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=QAR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2648,7 +2648,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:51 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=RON&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=RON&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2698,7 +2698,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:52 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=RUB&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=RUB&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2748,7 +2748,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:53 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=SAR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SAR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2798,7 +2798,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:54 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=SDG&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SDG&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2847,7 +2847,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:54 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=SEK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SEK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2897,7 +2897,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:55 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=SGD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SGD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2947,7 +2947,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:56 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=STD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=STD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -2997,7 +2997,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:57 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=THB&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=THB&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3047,7 +3047,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:58 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=TTD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TTD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3097,7 +3097,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:58 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=TWD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TWD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3147,7 +3147,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:15:59 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=TZS&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TZS&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3197,7 +3197,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:04 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=UAH&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=UAH&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3247,7 +3247,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:05 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=USD&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=USD&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3297,7 +3297,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:05 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=VEF&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=VEF&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3347,7 +3347,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:06 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=VND&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=VND&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3397,7 +3397,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:07 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=XAF&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=XAF&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3447,7 +3447,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:08 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ZAR&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ZAR&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''
@@ -3497,7 +3497,7 @@ http_interactions:
   recorded_at: Fri, 22 May 2026 13:16:09 GMT
 - request:
     method: get
-    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-19&moeda=ZMK&tipocambio=M
+    uri: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ZMK&tipocambio=M
     body:
       encoding: US-ASCII
       string: ''

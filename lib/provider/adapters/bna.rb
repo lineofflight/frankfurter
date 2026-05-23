@@ -41,7 +41,7 @@ class Provider
       EXCLUDED_CODES = ["XDRUSD", "XAU"].freeze
 
       def fetch(after: nil, upto: nil)
-        start_date = after ? after + 1 : Date.new(2000, 1, 1)
+        start_date = after || Date.new(2000, 1, 1)
         end_date = upto || Date.today
         return [] if start_date > end_date
 
