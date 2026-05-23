@@ -1,0 +1,822 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.nbt.tj/en/kurs/export_xml.php?date=2026-05-18&export=xmlout
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.nbt.tj
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 22 May 2026 13:41:41 GMT
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '5018'
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      P3p:
+      - policyref="/bitrix/p3p.xml", CP="NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS
+        UNI COM NAV INT DEM STA"
+      X-Powered-Cms:
+      - Bitrix Site Manager (bcb617a7178c20f1a827d352fd7bef2b)
+      Set-Cookie:
+      - PHPSESSID=G13D1n4XTqdf79FWVNj8W6Nat0sY2qWd; path=/; domain=nbt.tj; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <ValCurs Date="2026-05-18" name="Foreign Currency Market">
+        <Valute ID="840">
+           <CharCode>USD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>US Dollar</Name>
+           <Value>9.3450</Value>
+        </Valute>
+        <Valute ID="978">
+           <CharCode>EUR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>EURO</Name>
+           <Value>10.8757</Value>
+        </Valute>
+        <Valute ID="156">
+           <CharCode>CNY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Chinese Yuan</Name>
+           <Value>1.3724</Value>
+        </Valute>
+        <Valute ID="756">
+           <CharCode>CHF</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swiss Frank</Name>
+           <Value>11.8923</Value>
+        </Valute>
+        <Valute ID="810">
+           <CharCode>RUB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Russian Ruble</Name>
+           <Value>0.1277</Value>
+        </Valute>
+        <Valute ID="860">
+           <CharCode>UZS</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Uzbekistan Sum</Name>
+           <Value>0.0780</Value>
+        </Valute>
+        <Valute ID="417">
+           <CharCode>KGS</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kyrgyzstan Som</Name>
+           <Value>1.0686</Value>
+        </Valute>
+        <Valute ID="398">
+           <CharCode>KZT</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kazakhstan Tenge</Name>
+           <Value>0.1971</Value>
+        </Valute>
+        <Valute ID="933">
+           <CharCode>BYN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Belarusian Ruble</Name>
+           <Value>3.3657</Value>
+        </Valute>
+        <Valute ID="364">
+           <CharCode>IRR</CharCode>
+           <Nominal>1000</Nominal>
+           <Name>Iranian Rial</Name>
+           <Value>0.0071</Value>
+        </Valute>
+        <Valute ID="971">
+           <CharCode>AFN</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Afghanian Afghani</Name>
+           <Value>1.4654</Value>
+        </Valute>
+        <Valute ID="586">
+           <CharCode>PKR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Pakistan Rupee</Name>
+           <Value>0.3354</Value>
+        </Valute>
+        <Valute ID="949">
+           <CharCode>TRY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Turkish Lira</Name>
+           <Value>0.2052</Value>
+        </Valute>
+        <Valute ID="934">
+           <CharCode>TMT</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Turkmenistan Manat</Name>
+           <Value>2.6700</Value>
+        </Valute>
+        <Valute ID="826">
+           <CharCode>GBP</CharCode>
+           <Nominal>1</Nominal>
+           <Name>British Pound Sterling</Name>
+           <Value>12.4933</Value>
+        </Valute>
+        <Valute ID="36">
+           <CharCode>AUD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Australian Dollar</Name>
+           <Value>6.6882</Value>
+        </Valute>
+        <Valute ID="208">
+           <CharCode>DKK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Danish Krone</Name>
+           <Value>1.4551</Value>
+        </Valute>
+        <Valute ID="352">
+           <CharCode>ISK</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Iceland Krona</Name>
+           <Value>0.7565</Value>
+        </Valute>
+        <Valute ID="124">
+           <CharCode>CAD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Canadian Dollar</Name>
+           <Value>6.7964</Value>
+        </Valute>
+        <Valute ID="414">
+           <CharCode>KWD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Kuwaiti Dinar</Name>
+           <Value>30.4993</Value>
+        </Valute>
+        <Valute ID="578">
+           <CharCode>NOK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Norwegian Krone</Name>
+           <Value>1.0032</Value>
+        </Valute>
+        <Valute ID="702">
+           <CharCode>SGD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Singapore Dollar</Name>
+           <Value>7.3031</Value>
+        </Valute>
+        <Valute ID="752">
+           <CharCode>SEK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swedish Krona</Name>
+           <Value>0.9903</Value>
+        </Valute>
+        <Valute ID="392">
+           <CharCode>JPY</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Japanese Yen</Name>
+           <Value>0.5894</Value>
+        </Valute>
+        <Valute ID="944">
+           <CharCode>AZN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Azeri Manat</Name>
+           <Value>5.4971</Value>
+        </Valute>
+        <Valute ID="51">
+           <CharCode>AMD</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Armenian Dram</Name>
+           <Value>2.5340</Value>
+        </Valute>
+        <Valute ID="981">
+           <CharCode>GEL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Georgian Lari</Name>
+           <Value>3.4867</Value>
+        </Valute>
+        <Valute ID="498">
+           <CharCode>MDL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Moldovan Leu</Name>
+           <Value>0.5430</Value>
+        </Valute>
+        <Valute ID="980">
+           <CharCode>UAH</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Ukrainian Grivna</Name>
+           <Value>0.2117</Value>
+        </Valute>
+        <Valute ID="784">
+           <CharCode>AED</CharCode>
+           <Nominal>1</Nominal>
+           <Name>UAE Dirham</Name>
+           <Value>2.5442</Value>
+        </Valute>
+        <Valute ID="682">
+           <CharCode>SAR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Saudi Arabian Riyal</Name>
+           <Value>2.4903</Value>
+        </Valute>
+        <Valute ID="356">
+           <CharCode>INR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Indian Rupee</Name>
+           <Value>0.9737</Value>
+        </Valute>
+        <Valute ID="985">
+           <CharCode>PLN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Poland Zloty</Name>
+           <Value>2.5606</Value>
+        </Valute>
+        <Valute ID="458">
+           <CharCode>MYR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Malaysian Ringgit</Name>
+           <Value>2.3628</Value>
+        </Valute>
+        <Valute ID="764">
+           <CharCode>THB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Thai Baht</Name>
+           <Value>0.2862</Value>
+        </Valute>
+        <Valute ID="410">
+           <CharCode>KRW</CharCode>
+           <Nominal>100</Nominal>
+           <Name>South Korean won</Name>
+           <Value>0.6224</Value>
+        </Valute>
+        </ValCurs>
+  recorded_at: Fri, 22 May 2026 13:41:41 GMT
+- request:
+    method: get
+    uri: https://www.nbt.tj/en/kurs/export_xml.php?date=2026-05-19&export=xmlout
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.nbt.tj
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 22 May 2026 13:41:42 GMT
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '5018'
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      P3p:
+      - policyref="/bitrix/p3p.xml", CP="NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS
+        UNI COM NAV INT DEM STA"
+      X-Powered-Cms:
+      - Bitrix Site Manager (bcb617a7178c20f1a827d352fd7bef2b)
+      Set-Cookie:
+      - PHPSESSID=KxyXvlxxPO4CPz2iG5WQbc44MNLSgbW5; path=/; domain=nbt.tj; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <ValCurs Date="2026-05-19" name="Foreign Currency Market">
+        <Valute ID="840">
+           <CharCode>USD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>US Dollar</Name>
+           <Value>9.3371</Value>
+        </Valute>
+        <Valute ID="978">
+           <CharCode>EUR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>EURO</Name>
+           <Value>10.8600</Value>
+        </Valute>
+        <Valute ID="156">
+           <CharCode>CNY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Chinese Yuan</Name>
+           <Value>1.3721</Value>
+        </Valute>
+        <Valute ID="756">
+           <CharCode>CHF</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swiss Frank</Name>
+           <Value>11.8702</Value>
+        </Valute>
+        <Valute ID="810">
+           <CharCode>RUB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Russian Ruble</Name>
+           <Value>0.1289</Value>
+        </Valute>
+        <Valute ID="860">
+           <CharCode>UZS</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Uzbekistan Sum</Name>
+           <Value>0.0777</Value>
+        </Valute>
+        <Valute ID="417">
+           <CharCode>KGS</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kyrgyzstan Som</Name>
+           <Value>1.0677</Value>
+        </Valute>
+        <Valute ID="398">
+           <CharCode>KZT</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kazakhstan Tenge</Name>
+           <Value>0.1986</Value>
+        </Valute>
+        <Valute ID="933">
+           <CharCode>BYN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Belarusian Ruble</Name>
+           <Value>3.3961</Value>
+        </Valute>
+        <Valute ID="364">
+           <CharCode>IRR</CharCode>
+           <Nominal>1000</Nominal>
+           <Name>Iranian Rial</Name>
+           <Value>0.0071</Value>
+        </Valute>
+        <Valute ID="971">
+           <CharCode>AFN</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Afghanian Afghani</Name>
+           <Value>1.4642</Value>
+        </Valute>
+        <Valute ID="586">
+           <CharCode>PKR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Pakistan Rupee</Name>
+           <Value>0.3351</Value>
+        </Valute>
+        <Valute ID="949">
+           <CharCode>TRY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Turkish Lira</Name>
+           <Value>0.2048</Value>
+        </Valute>
+        <Valute ID="934">
+           <CharCode>TMT</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Turkmenistan Manat</Name>
+           <Value>2.6677</Value>
+        </Valute>
+        <Valute ID="826">
+           <CharCode>GBP</CharCode>
+           <Nominal>1</Nominal>
+           <Name>British Pound Sterling</Name>
+           <Value>12.4716</Value>
+        </Valute>
+        <Valute ID="36">
+           <CharCode>AUD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Australian Dollar</Name>
+           <Value>6.6779</Value>
+        </Valute>
+        <Valute ID="208">
+           <CharCode>DKK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Danish Krone</Name>
+           <Value>1.4528</Value>
+        </Valute>
+        <Valute ID="352">
+           <CharCode>ISK</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Iceland Krona</Name>
+           <Value>0.7565</Value>
+        </Valute>
+        <Valute ID="124">
+           <CharCode>CAD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Canadian Dollar</Name>
+           <Value>6.7886</Value>
+        </Valute>
+        <Valute ID="414">
+           <CharCode>KWD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Kuwaiti Dinar</Name>
+           <Value>30.4289</Value>
+        </Valute>
+        <Valute ID="578">
+           <CharCode>NOK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Norwegian Krone</Name>
+           <Value>1.0056</Value>
+        </Valute>
+        <Valute ID="702">
+           <CharCode>SGD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Singapore Dollar</Name>
+           <Value>7.2918</Value>
+        </Valute>
+        <Valute ID="752">
+           <CharCode>SEK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swedish Krona</Name>
+           <Value>0.9897</Value>
+        </Valute>
+        <Valute ID="392">
+           <CharCode>JPY</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Japanese Yen</Name>
+           <Value>0.5874</Value>
+        </Valute>
+        <Valute ID="944">
+           <CharCode>AZN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Azeri Manat</Name>
+           <Value>5.4924</Value>
+        </Valute>
+        <Valute ID="51">
+           <CharCode>AMD</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Armenian Dram</Name>
+           <Value>2.5357</Value>
+        </Valute>
+        <Valute ID="981">
+           <CharCode>GEL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Georgian Lari</Name>
+           <Value>3.4854</Value>
+        </Valute>
+        <Valute ID="498">
+           <CharCode>MDL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Moldovan Leu</Name>
+           <Value>0.5397</Value>
+        </Valute>
+        <Valute ID="980">
+           <CharCode>UAH</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Ukrainian Grivna</Name>
+           <Value>0.2115</Value>
+        </Valute>
+        <Valute ID="784">
+           <CharCode>AED</CharCode>
+           <Nominal>1</Nominal>
+           <Name>UAE Dirham</Name>
+           <Value>2.5420</Value>
+        </Valute>
+        <Valute ID="682">
+           <CharCode>SAR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Saudi Arabian Riyal</Name>
+           <Value>2.4878</Value>
+        </Valute>
+        <Valute ID="356">
+           <CharCode>INR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Indian Rupee</Name>
+           <Value>0.9690</Value>
+        </Valute>
+        <Valute ID="985">
+           <CharCode>PLN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Poland Zloty</Name>
+           <Value>2.5554</Value>
+        </Valute>
+        <Valute ID="458">
+           <CharCode>MYR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Malaysian Ringgit</Name>
+           <Value>2.3460</Value>
+        </Valute>
+        <Valute ID="764">
+           <CharCode>THB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Thai Baht</Name>
+           <Value>0.2855</Value>
+        </Valute>
+        <Valute ID="410">
+           <CharCode>KRW</CharCode>
+           <Nominal>100</Nominal>
+           <Name>South Korean won</Name>
+           <Value>0.6217</Value>
+        </Valute>
+        </ValCurs>
+  recorded_at: Fri, 22 May 2026 13:41:42 GMT
+- request:
+    method: get
+    uri: https://www.nbt.tj/en/kurs/export_xml.php?date=2026-05-20&export=xmlout
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.nbt.tj
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 22 May 2026 13:41:43 GMT
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Content-Length:
+      - '5018'
+      Connection:
+      - keep-alive
+      Vary:
+      - HTTPS
+      P3p:
+      - policyref="/bitrix/p3p.xml", CP="NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS
+        UNI COM NAV INT DEM STA"
+      X-Powered-Cms:
+      - Bitrix Site Manager (bcb617a7178c20f1a827d352fd7bef2b)
+      Set-Cookie:
+      - PHPSESSID=dhNCkjIL7qv6hSm6uWOXynKXYx87bMSI; path=/; domain=nbt.tj; HttpOnly
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8" ?>
+        <ValCurs Date="2026-05-20" name="Foreign Currency Market">
+        <Valute ID="840">
+           <CharCode>USD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>US Dollar</Name>
+           <Value>9.3288</Value>
+        </Valute>
+        <Valute ID="978">
+           <CharCode>EUR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>EURO</Name>
+           <Value>10.8429</Value>
+        </Valute>
+        <Valute ID="156">
+           <CharCode>CNY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Chinese Yuan</Name>
+           <Value>1.3701</Value>
+        </Valute>
+        <Valute ID="756">
+           <CharCode>CHF</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swiss Frank</Name>
+           <Value>11.8491</Value>
+        </Valute>
+        <Valute ID="810">
+           <CharCode>RUB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Russian Ruble</Name>
+           <Value>0.1308</Value>
+        </Valute>
+        <Valute ID="860">
+           <CharCode>UZS</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Uzbekistan Sum</Name>
+           <Value>0.0774</Value>
+        </Valute>
+        <Valute ID="417">
+           <CharCode>KGS</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kyrgyzstan Som</Name>
+           <Value>1.0668</Value>
+        </Valute>
+        <Valute ID="398">
+           <CharCode>KZT</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Kazakhstan Tenge</Name>
+           <Value>0.1977</Value>
+        </Valute>
+        <Valute ID="933">
+           <CharCode>BYN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Belarusian Ruble</Name>
+           <Value>3.4359</Value>
+        </Valute>
+        <Valute ID="364">
+           <CharCode>IRR</CharCode>
+           <Nominal>1000</Nominal>
+           <Name>Iranian Rial</Name>
+           <Value>0.0071</Value>
+        </Valute>
+        <Valute ID="971">
+           <CharCode>AFN</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Afghanian Afghani</Name>
+           <Value>1.4558</Value>
+        </Valute>
+        <Valute ID="586">
+           <CharCode>PKR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Pakistan Rupee</Name>
+           <Value>0.3344</Value>
+        </Valute>
+        <Valute ID="949">
+           <CharCode>TRY</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Turkish Lira</Name>
+           <Value>0.2047</Value>
+        </Valute>
+        <Valute ID="934">
+           <CharCode>TMT</CharCode>
+           <Nominal>1</Nominal>
+           <Name>New Turkmenistan Manat</Name>
+           <Value>2.6654</Value>
+        </Valute>
+        <Valute ID="826">
+           <CharCode>GBP</CharCode>
+           <Nominal>1</Nominal>
+           <Name>British Pound Sterling</Name>
+           <Value>12.5109</Value>
+        </Valute>
+        <Valute ID="36">
+           <CharCode>AUD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Australian Dollar</Name>
+           <Value>6.6440</Value>
+        </Valute>
+        <Valute ID="208">
+           <CharCode>DKK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Danish Krone</Name>
+           <Value>1.4507</Value>
+        </Valute>
+        <Valute ID="352">
+           <CharCode>ISK</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Iceland Krona</Name>
+           <Value>0.7552</Value>
+        </Valute>
+        <Valute ID="124">
+           <CharCode>CAD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Canadian Dollar</Name>
+           <Value>6.7870</Value>
+        </Valute>
+        <Valute ID="414">
+           <CharCode>KWD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Kuwaiti Dinar</Name>
+           <Value>30.4018</Value>
+        </Valute>
+        <Valute ID="578">
+           <CharCode>NOK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Norwegian Krone</Name>
+           <Value>1.0069</Value>
+        </Valute>
+        <Valute ID="702">
+           <CharCode>SGD</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Singapore Dollar</Name>
+           <Value>7.2802</Value>
+        </Valute>
+        <Valute ID="752">
+           <CharCode>SEK</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Swedish Krona</Name>
+           <Value>0.9933</Value>
+        </Valute>
+        <Valute ID="392">
+           <CharCode>JPY</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Japanese Yen</Name>
+           <Value>0.5862</Value>
+        </Valute>
+        <Valute ID="944">
+           <CharCode>AZN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Azeri Manat</Name>
+           <Value>5.4875</Value>
+        </Valute>
+        <Valute ID="51">
+           <CharCode>AMD</CharCode>
+           <Nominal>100</Nominal>
+           <Name>Armenian Dram</Name>
+           <Value>2.5347</Value>
+        </Valute>
+        <Valute ID="981">
+           <CharCode>GEL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Georgian Lari</Name>
+           <Value>3.4843</Value>
+        </Valute>
+        <Valute ID="498">
+           <CharCode>MDL</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Moldovan Leu</Name>
+           <Value>0.5389</Value>
+        </Valute>
+        <Valute ID="980">
+           <CharCode>UAH</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Ukrainian Grivna</Name>
+           <Value>0.2113</Value>
+        </Valute>
+        <Valute ID="784">
+           <CharCode>AED</CharCode>
+           <Nominal>1</Nominal>
+           <Name>UAE Dirham</Name>
+           <Value>2.5398</Value>
+        </Valute>
+        <Valute ID="682">
+           <CharCode>SAR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Saudi Arabian Riyal</Name>
+           <Value>2.4859</Value>
+        </Valute>
+        <Valute ID="356">
+           <CharCode>INR</CharCode>
+           <Nominal>10</Nominal>
+           <Name>Indian Rupee</Name>
+           <Value>0.9663</Value>
+        </Valute>
+        <Valute ID="985">
+           <CharCode>PLN</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Poland Zloty</Name>
+           <Value>2.5545</Value>
+        </Valute>
+        <Valute ID="458">
+           <CharCode>MYR</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Malaysian Ringgit</Name>
+           <Value>2.3439</Value>
+        </Valute>
+        <Valute ID="764">
+           <CharCode>THB</CharCode>
+           <Nominal>1</Nominal>
+           <Name>Thai Baht</Name>
+           <Value>0.2856</Value>
+        </Valute>
+        <Valute ID="410">
+           <CharCode>KRW</CharCode>
+           <Nominal>100</Nominal>
+           <Name>South Korean won</Name>
+           <Value>0.6183</Value>
+        </Valute>
+        </ValCurs>
+  recorded_at: Fri, 22 May 2026 13:41:43 GMT
+recorded_with: VCR 6.4.0
