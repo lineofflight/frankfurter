@@ -1,0 +1,12 @@
+{
+  "key": "NBC",
+  "name": "National Bank of Cambodia",
+  "country_code": "KH",
+  "rate_type": "official rate",
+  "pivot_currency": "KHR",
+  "data_url": "https://www.nbc.gov.kh/english/economic_research/exchange_rate.php",
+  "terms_url": null,
+  "publish_schedule": "*/30 9-11 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2008-01-14"
+}
