@@ -35,11 +35,7 @@ class Provider
         end_date = upto || Date.today
         dataset = []
 
-        first = true
         (after..end_date).each do |date|
-          sleep(0.2) unless first
-          first = false
-
           dataset.concat(fetch_date(date))
         end
 
@@ -77,6 +73,7 @@ class Provider
       private
 
       def fetch_date(date)
+        sleep(0.2)
         url = URI(URL)
         url.query = URI.encode_www_form(date: date.strftime("%Y-%m-%d"), export: "xmlout")
         response = Net::HTTP.get(url)

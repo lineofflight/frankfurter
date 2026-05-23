@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe NBT do
       before do
-        VCR.insert_cassette("nbt", match_requests_on: [:method, :host])
+        VCR.insert_cassette("nbt", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }
