@@ -38,7 +38,8 @@ class Provider
       end
 
       def parse(xml)
-        xml = xml.dup.force_encoding(Encoding::WINDOWS_1251).encode(Encoding::UTF_8)
+        xml = xml.dup.force_encoding(Encoding::WINDOWS_1251)
+          .encode(Encoding::UTF_8, invalid: :replace, undef: :replace, replace: "")
         root = Ox.load(xml).locate("CurrencyRates").first
         return [] unless root
 

@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe NBKR do
       before do
-        VCR.insert_cassette("nbkr", match_requests_on: [:method, :uri])
+        VCR.insert_cassette("nbkr", match_requests_on: [:method, :uri], allow_playback_repeats: true)
       end
 
       after { VCR.eject_cassette }
@@ -93,16 +93,9 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "filters records by after and upto" do
-        xml = <<~XML
-          <?xml version="1.0" encoding="windows-1251" ?>
-          <CurrencyRates Name="Daily Exchange Rates" Date="23.05.2026">
-            <Currency ISOCode="USD"><Nominal>1</Nominal><Value>87,4500</Value></Currency>
-          </CurrencyRates>
-        XML
-
-        records = adapter.parse(xml)
-
-        _(records.first[:date]).must_equal(Date.new(2026, 5, 23))
+        _(adapter.fetch(after: Date.new(2026, 5, 24))).must_be_empty
+        _(adapter.fetch(upto: Date.new(2026, 5, 22))).must_be_empty
+        _(adapter.fetch(after: Date.new(2026, 5, 23), upto: Date.new(2026, 5, 23))).wont_be_empty
       end
     end
   end
