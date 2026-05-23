@@ -15,6 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Banque des Etats de l'Afrique Centrale (BEAC) as a provider. Publishes daily indicative rates for 13 pairs against the CFA Franc BEAC (XAF), including EUR/XAF at the fixed peg of 655.957. Live homepage snapshot only; historical attestation via Wayback is a follow-up. (#379)
 - Central Bank of Egypt (CBE) provider: daily EGP rates against 18 currencies from 2024-03-01 onward, with buy/sell coerced to mid. (#366)
 - Maldives Monetary Authority (MMA) as a provider for USD/MVR reference rates, with daily coverage from 2011-04-21.
+- Banco Central del Paraguay (BCP) as a data provider. Weighted-average interbank reference rates against the Paraguayan guaraní (PYG); USD/EUR back to 2001, most others from around 2012.
+- State Bank of Pakistan (SBP) as a data provider. Daily Average Banks' Floating Exchange Rates against the Pakistani rupee (PKR), 2013-07-02 to present. Published as monthly snapshots that trail by up to ~3 weeks.
+- Central Bank of Sri Lanka (CBSL) as a data provider. Daily indicative rates for 55 currencies (including XAU per troy ounce) against the Sri Lankan rupee (LKR), from 2011-01-20.
+- National Bank of Cambodia (NBC) as a data provider. Daily reference rates for ~29 currencies against the Cambodian riel (KHR), from 2008-01-14.
+- Banque Centrale de Tunisie (BCT) as a data provider. Daily interbank reference rates for 20 currencies against the Tunisian dinar (TND), from 2004-12-23.
+- National Bank of Tajikistan (NBT) as a data provider. Daily rates for ~36 currencies against the Tajikistani somoni (TJS), back to 2001-01-01.
+- National Bank of the Kyrgyz Republic (NBKR) as a data provider. Daily rates for 5 majors (USD, EUR, RUB, KZT, CNY) and weekly rates for ~35 other currencies against the Kyrgyz som (KGS), with carry-forward filling gaps between weekly publications. Forward-only from 2026-05-15.
+- Bank of Albania (BSh) as a data provider. Daily fix for ~16 currencies and a weekly minor-currency fix (HUF, RUB, CZK, MKD) against the Albanian lek (ALL), back to 1994-01-01.
+- Bank of Mongolia (Mongolbank) as a data provider. Daily statutory reference rates for 38 currencies plus XAU and XAG against MNT, back to 2001-01-02.
+- Central Bank of Nigeria (CBN) as a data provider. Daily official rates against the Nigerian naira (NGN) using the mid of buy/sell, from 2001-12-10.
+- National Bank of Ethiopia (NBE) as a data provider. Daily weighted-average rates for 18 currencies against the Ethiopian birr (ETB) from 2024-10-01, skipping the July to September 2024 float-transition gap.
 
 ### Fixed
 
