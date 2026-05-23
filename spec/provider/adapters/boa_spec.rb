@@ -62,6 +62,12 @@ class Provider < Sequel::Model(:providers)
         _(usd).wont_be_nil
         _(usd[:rate]).must_be_close_to(132.5, 5.0)
       end
+
+      it "raises Unavailable when the archive link is missing from the hub page" do
+        adapter.stub(:http_get, "<html><body>no link here</body></html>") do
+          _ { adapter.fetch }.must_raise(Adapter::Unavailable)
+        end
+      end
     end
   end
 end

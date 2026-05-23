@@ -45,8 +45,8 @@ class Provider
       EXCEL_EPOCH = Date.new(1899, 12, 30)
       JPY_UNITS = 100
 
-      # The workbook sheet name "EURO - DZD" uses the legacy three-letter abbreviation
-      # for the euro. Map it back to the ISO 4217 code.
+      # Map non-ISO sheet labels back to ISO 4217 codes. The workbook uses "EURO"
+      # in place of "EUR".
       SHEET_NAME_OVERRIDES = {
         "EURO" => "EUR",
       }.freeze
@@ -93,7 +93,7 @@ class Provider
       def locate_archive_url
         body = http_get(URI(HUB_URL))
         match = body.match(ARCHIVE_LINK)
-        raise "BoA: archive XLSX link not found on #{HUB_URL}" unless match
+        raise Unavailable, "BoA: archive XLSX link not found on #{HUB_URL}" unless match
 
         match[1]
       end
