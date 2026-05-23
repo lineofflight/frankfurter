@@ -39,12 +39,8 @@ class Provider < Sequel::Model(:providers)
         end_date = upto || Date.today
         dataset = []
 
-        first = true
         after.upto(end_date) do |date|
           next if date.sunday?
-
-          sleep(0.5) unless first
-          first = false
 
           dataset.concat(fetch_date(date))
         end
@@ -101,6 +97,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       def fetch_date(date)
+        sleep(0.5)
         page, cookies = load_page
         token = extract_token(page)
         raise "NBC: CSRF token not found on landing page" unless token
