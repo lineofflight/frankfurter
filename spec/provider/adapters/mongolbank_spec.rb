@@ -5,16 +5,20 @@ require "provider/adapters/mongolbank"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    describe Mongolbank do
+    describe MONGOLBANK do
       before do
-        VCR.insert_cassette("mongolbank", match_requests_on: [:method, :host], allow_playback_repeats: true)
+        VCR.insert_cassette(
+          "mongolbank",
+          match_requests_on: [:method, :host, :path],
+          allow_playback_repeats: true,
+        )
       end
 
       after do
         VCR.eject_cassette
       end
 
-      let(:adapter) { Mongolbank.new }
+      let(:adapter) { MONGOLBANK.new }
 
       it "fetches rates" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 22))

@@ -35,7 +35,7 @@ class Provider
     #
     # XAU and XAG are stored per troy ounce in MNT, as published (no per-gram
     # conversion). E.g. XAU=16,172,267.24 MNT/oz on 2026-05-22.
-    class Mongolbank < Adapter
+    class MONGOLBANK < Adapter
       ENDPOINT = URI("https://www.mongolbank.mn/en/currency-rate-movement/data")
       EXCLUDED_QUOTES = ["SDR", "KPW"].freeze
 
@@ -60,6 +60,8 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
+        return [] unless data.is_a?(Hash)
+
         rows = data["data"]
         return [] unless rows.is_a?(Array)
 
