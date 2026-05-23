@@ -50,6 +50,8 @@ class Provider
         date = Date.new(date_match[3].to_i, date_match[2].to_i, date_match[1].to_i)
 
         html.scan(DOCUMENT_PATTERN).filter_map do |base, quote, buy_str, sell_str|
+          next unless quote == "XAF"
+
           buy = parse_rate(buy_str)
           sell = parse_rate(sell_str)
           next if buy.nil? || sell.nil? || buy.zero? || sell.zero?

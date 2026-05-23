@@ -83,6 +83,19 @@ class Provider < Sequel::Model(:providers)
 
         _(records).must_be_empty
       end
+
+      it "skips rows whose quote is not XAF" do
+        html = <<~HTML
+          <span class="code_valeur">USD/EUR</span>
+          <div id="middle">0.92</div>
+          <div id="right">0.93</div>
+          <p>Date de valeur : 22/05/2026</p>
+        HTML
+
+        records = adapter.parse(html)
+
+        _(records).must_be_empty
+      end
     end
   end
 end
