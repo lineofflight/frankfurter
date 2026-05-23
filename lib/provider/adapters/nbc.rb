@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
+require "nokogiri"
 
 require "provider/adapters/adapter"
 
@@ -25,18 +26,8 @@ class Provider < Sequel::Model(:providers)
     class NBC < Adapter
       BASE_URL = "https://www.nbc.gov.kh/english/economic_research/exchange_rate.php"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
-      TOKEN_PATTERN = /name="tk"\s+value="([^"]+)"/
-      ROW_PATTERN = %r{
-        <tr[^>]*>\s*
-          <td[^>]*>([^<]+)</td>\s*                  # currency name
-          <td[^>]*>([A-Z]{3})/KHR</td>\s*           # symbol code
-          <td[^>]*>(\d+)</td>\s*                    # unit
-          <td[^>]*>([\d.,]+)</td>\s*                # bid
-          <td[^>]*>([\d.,]+)</td>\s*                # ask
-          <td[^>]*>([\d.,]+)</td>\s*                # average
-        \s*</tr>
-      }x
-      OER_PATTERN = %r{<font[^>]*>(\d+)</font>\s*KHR\s*/\s*USD}i
+      SYMBOL_PATTERN = %r{\A([A-Z]{3})/KHR\z}
+      OER_PATTERN = /\A(\d+)\z/
       EXCLUDED_QUOTES = ["SDR"].freeze
 
       class << self
@@ -64,29 +55,46 @@ class Provider < Sequel::Model(:providers)
       def parse(html, date:)
         return [] unless html.include?("<table") && !empty_response?(html)
 
-        records = html.scan(ROW_PATTERN).filter_map do |row|
-          _name, code, unit_str, _bid, _ask, average_str = row
+        doc = Nokogiri::HTML.parse(html)
+
+        records = doc.css("tr").filter_map do |row|
+          cells = row.css("td")
+          next if cells.length < 6
+
+          code = cells[1].text.strip[SYMBOL_PATTERN, 1]
+          next unless code
           next if EXCLUDED_QUOTES.include?(code)
 
-          unit = Integer(unit_str)
-          next if unit.zero?
+          unit = Integer(cells[2].text.strip, exception: false)
+          next unless unit&.nonzero?
 
-          average = Float(average_str.delete(","))
-          next if average.zero?
+          average = Float(cells[5].text.strip.delete(","), exception: false)
+          next unless average&.nonzero?
 
           { date:, base: code, quote: "KHR", rate: average / unit }
         end
 
-        oer = html[OER_PATTERN, 1]
-        if oer
-          rate = Float(oer)
-          records << { date:, base: "USD", quote: "KHR", rate: } if rate.nonzero?
-        end
+        oer_rate = extract_oer(doc)
+        records << { date:, base: "USD", quote: "KHR", rate: oer_rate } if oer_rate
 
         records
       end
 
       private
+
+      def extract_oer(doc)
+        doc.css("font").each do |font|
+          parent_text = font.parent&.text.to_s
+          next unless parent_text.include?("KHR") && parent_text.include?("USD")
+
+          digits = font.text.strip[OER_PATTERN, 1]
+          next unless digits
+
+          rate = Float(digits)
+          return rate if rate.nonzero?
+        end
+        nil
+      end
 
       def empty_response?(html)
         html.include?("There is no data available")
@@ -94,11 +102,17 @@ class Provider < Sequel::Model(:providers)
 
       def fetch_date(date)
         page, cookies = load_page
-        token = page[TOKEN_PATTERN, 1]
+        token = extract_token(page)
         raise "NBC: CSRF token not found on landing page" unless token
 
         body = post_date(date:, token:, cookies:)
         parse(body, date:)
+      end
+
+      def extract_token(html)
+        doc = Nokogiri::HTML.parse(html)
+        input = doc.at_css("input[name='tk']")
+        input&.[]("value")
       end
 
       def load_page
