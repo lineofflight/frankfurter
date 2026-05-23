@@ -1,0 +1,12 @@
+{
+  "key": "NBE",
+  "name": "National Bank of Ethiopia",
+  "country_code": "ET",
+  "rate_type": "weighted average",
+  "pivot_currency": "ETB",
+  "data_url": "https://nbe.gov.et/exchange-rate/",
+  "terms_url": null,
+  "publish_schedule": "*/30 10-12 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2024-10-01"
+}
