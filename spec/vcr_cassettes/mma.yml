@@ -1,0 +1,2135 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.mma.gov.mv/JSON/referencerates.json?v=20260521
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.mma.gov.mv
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 22 May 2026 12:50:37 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '160639'
+      Connection:
+      - keep-alive
+      Last-Modified:
+      - Thu, 21 May 2026 03:45:02 GMT
+      Etag:
+      - '"6a0e7fbe-2737f"'
+      Accept-Ranges:
+      - bytes
+      Strict-Transport-Security:
+      - max-age=63072000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=()
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Content-Security-Policy:
+      - 'default-src ''self''; script-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        https://www.google-analytics.com https://www.googletagmanager.com; style-src
+        ''self'' ''unsafe-inline'' https:; img-src ''self'' data: blob: https:; font-src
+        ''self'' data: https:; connect-src ''self'' https://www.google-analytics.com
+        https://database.mma.gov.mv https://rates.mma.gov.mv; frame-src ''self'' https://database.mma.gov.mv;
+        frame-ancestors ''self''; base-uri ''self''; form-action ''self'' https:;'
+    body:
+      encoding: UTF-8
+      string: '[{"Date": "21 May 2026", "Rate": "15.42"}, {"Date": "20 May 2026",
+        "Rate": "15.42"}, {"Date": "19 May 2026", "Rate": "15.42"}, {"Date": "18 May
+        2026", "Rate": "15.42"}, {"Date": "17 May 2026", "Rate": "15.42"}, {"Date":
+        "14 May 2026", "Rate": "15.42"}, {"Date": "13 May 2026", "Rate": "15.42"},
+        {"Date": "12 May 2026", "Rate": "15.42"}, {"Date": "11 May 2026", "Rate":
+        "15.42"}, {"Date": "10 May 2026", "Rate": "15.42"}, {"Date": "07 May 2026",
+        "Rate": "15.42"}, {"Date": "06 May 2026", "Rate": "15.42"}, {"Date": "05 May
+        2026", "Rate": "15.42"}, {"Date": "04 May 2026", "Rate": "15.42"}, {"Date":
+        "03 May 2026", "Rate": "15.42"}, {"Date": "30 April 2026", "Rate": "15.42"},
+        {"Date": "29 April 2026", "Rate": "15.42"}, {"Date": "28 April 2026", "Rate":
+        "15.42"}, {"Date": "27 April 2026", "Rate": "15.42"}, {"Date": "26 April 2026",
+        "Rate": "15.42"}, {"Date": "23 April 2026", "Rate": "15.42"}, {"Date": "22
+        April 2026", "Rate": "15.42"}, {"Date": "21 April 2026", "Rate": "15.42"},
+        {"Date": "20 April 2026", "Rate": "15.42"}, {"Date": "19 April 2026", "Rate":
+        "15.42"}, {"Date": "16 April 2026", "Rate": "15.42"}, {"Date": "15 April 2026",
+        "Rate": "15.42"}, {"Date": "14 April 2026", "Rate": "15.42"}, {"Date": "13
+        April 2026", "Rate": "15.42"}, {"Date": "12 April 2026", "Rate": "15.42"},
+        {"Date": "09 April 2026", "Rate": "15.42"}, {"Date": "08 April 2026", "Rate":
+        "15.42"}, {"Date": "07 April 2026", "Rate": "15.42"}, {"Date": "02 April 2026",
+        "Rate": "15.42"}, {"Date": "01 April 2026", "Rate": "15.42"}, {"Date": "31
+        March 2026", "Rate": "15.42"}, {"Date": "30 March 2026", "Rate": "15.42"},
+        {"Date": "29 March 2026", "Rate": "15.42"}, {"Date": "26 March 2026", "Rate":
+        "15.42"}, {"Date": "25 March 2026", "Rate": "15.42"}, {"Date": "24 March 2026",
+        "Rate": "15.42"}, {"Date": "23 March 2026", "Rate": "15.42"}, {"Date": "18
+        March 2026", "Rate": "15.42"}, {"Date": "11 March 2026", "Rate": "15.42"},
+        {"Date": "08 March 2026", "Rate": "15.42"}, {"Date": "05 March 2026", "Rate":
+        "15.42"}, {"Date": "04 March 2026", "Rate": "15.42"}, {"Date": "03 March 2026",
+        "Rate": "15.42"}, {"Date": "02 March 2026", "Rate": "15.42"}, {"Date": "01
+        March 2026", "Rate": "15.42"}, {"Date": "26 February 2026", "Rate": "15.42"},
+        {"Date": "25 February 2026", "Rate": "15.42"}, {"Date": "24 February 2026",
+        "Rate": "15.42"}, {"Date": "23 February 2026", "Rate": "15.42"}, {"Date":
+        "22 February 2026", "Rate": "15.42"}, {"Date": "19 February 2026", "Rate":
+        "15.42"}, {"Date": "17 February 2026", "Rate": "15.42"}, {"Date": "16 February
+        2026", "Rate": "15.42"}, {"Date": "15 February 2026", "Rate": "15.42"}, {"Date":
+        "12 February 2026", "Rate": "15.42"}, {"Date": "11 February 2026", "Rate":
+        "15.42"}, {"Date": "10 February 2026", "Rate": "15.42"}, {"Date": "09 February
+        2026", "Rate": "15.42"}, {"Date": "08 February 2026", "Rate": "15.42"}, {"Date":
+        "04 February 2026", "Rate": "15.42"}, {"Date": "03 February 2026", "Rate":
+        "15.42"}, {"Date": "02 February 2026", "Rate": "15.42"}, {"Date": "01 February
+        2026", "Rate": "15.42"}, {"Date": "29 January 2026", "Rate": "15.42"}, {"Date":
+        "28 January 2026", "Rate": "15.42"}, {"Date": "27 January 2026", "Rate": "15.42"},
+        {"Date": "26 January 2026", "Rate": "15.42"}, {"Date": "25 January 2026",
+        "Rate": "15.42"}, {"Date": "22 January 2026", "Rate": "15.42"}, {"Date": "21
+        January 2026", "Rate": "15.42"}, {"Date": "20 January 2026", "Rate": "15.42"},
+        {"Date": "19 January 2026", "Rate": "15.42"}, {"Date": "18 January 2026",
+        "Rate": "15.42"}, {"Date": "15 January 2026", "Rate": "15.42"}, {"Date": "14
+        January 2026", "Rate": "15.42"}, {"Date": "13 January 2026", "Rate": "15.42"},
+        {"Date": "12 January 2026", "Rate": "15.42"}, {"Date": "11 January 2026",
+        "Rate": "15.42"}, {"Date": "08 January 2026", "Rate": "15.40"}, {"Date": "07
+        January 2026", "Rate": "15.42"}, {"Date": "06 January 2026", "Rate": "15.42"},
+        {"Date": "05 January 2026", "Rate": "15.42"}, {"Date": "04 January 2026",
+        "Rate": "15.42"}, {"Date": "30 December 2025", "Rate": "15.42"}, {"Date":
+        "29 December 2025", "Rate": "15.42"}, {"Date": "28 December 2025", "Rate":
+        "15.42"}, {"Date": "25 December 2025", "Rate": "15.42"}, {"Date": "24 December
+        2025", "Rate": "15.42"}, {"Date": "23 December 2025", "Rate": "15.42"}, {"Date":
+        "22 December 2025", "Rate": "15.42"}, {"Date": "21 December 2025", "Rate":
+        "15.42"}, {"Date": "18 December 2025", "Rate": "15.41"}, {"Date": "17 December
+        2025", "Rate": "15.39"}, {"Date": "16 December 2025", "Rate": "15.42"}, {"Date":
+        "15 December 2025", "Rate": "15.41"}, {"Date": "14 December 2025", "Rate":
+        "15.42"}, {"Date": "11 December 2025", "Rate": "15.42"}, {"Date": "10 December
+        2025", "Rate": "15.42"}, {"Date": "09 December 2025", "Rate": "15.42"}, {"Date":
+        "08 December 2025", "Rate": "15.41"}, {"Date": "07 December 2025", "Rate":
+        "15.42"}, {"Date": "04 December 2025", "Rate": "15.42"}, {"Date": "03 December
+        2025", "Rate": "15.42"}, {"Date": "02 December 2025", "Rate": "15.42"}, {"Date":
+        "01 December 2025", "Rate": "15.42"}, {"Date": "30 November 2025", "Rate":
+        "15.42"}, {"Date": "27 November 2025", "Rate": "15.42"}, {"Date": "26 November
+        2025", "Rate": "15.42"}, {"Date": "25 November 2025", "Rate": "15.42"}, {"Date":
+        "24 November 2025", "Rate": "15.42"}, {"Date": "23 November 2025", "Rate":
+        "15.42"}, {"Date": "20 November 2025", "Rate": "15.42"}, {"Date": "19 November
+        2025", "Rate": "15.42"}, {"Date": "18 November 2025", "Rate": "15.42"}, {"Date":
+        "17 November 2025", "Rate": "15.41"}, {"Date": "16 November 2025", "Rate":
+        "15.42"}, {"Date": "13 November 2025", "Rate": "15.42"}, {"Date": "12 November
+        2025", "Rate": "15.42"}, {"Date": "10 November 2025", "Rate": "15.42"}, {"Date":
+        "09 November 2025", "Rate": "15.40"}, {"Date": "06 November 2025", "Rate":
+        "15.42"}, {"Date": "05 November 2025", "Rate": "15.42"}, {"Date": "04 November
+        2025", "Rate": "15.42"}, {"Date": "30 October 2025", "Rate": "15.42"}, {"Date":
+        "29 October 2025", "Rate": "15.42"}, {"Date": "28 October 2025", "Rate": "15.42"},
+        {"Date": "27 October 2025", "Rate": "15.42"}, {"Date": "26 October 2025",
+        "Rate": "15.42"}, {"Date": "23 October 2025", "Rate": "15.42"}, {"Date": "22
+        October 2025", "Rate": "15.42"}, {"Date": "21 October 2025", "Rate": "15.42"},
+        {"Date": "20 October 2025", "Rate": "15.42"}, {"Date": "19 October 2025",
+        "Rate": "15.42"}, {"Date": "16 October 2025", "Rate": "15.42"}, {"Date": "15
+        October 2025", "Rate": "15.42"}, {"Date": "14 October 2025", "Rate": "15.42"},
+        {"Date": "13 October 2025", "Rate": "15.42"}, {"Date": "12 October 2025",
+        "Rate": "15.42"}, {"Date": "09 October 2025", "Rate": "15.42"}, {"Date": "08
+        October 2025", "Rate": "15.42"}, {"Date": "07 October 2025", "Rate": "15.42"},
+        {"Date": "06 October 2025", "Rate": "15.40"}, {"Date": "05 October 2025",
+        "Rate": "15.42"}, {"Date": "02 October 2025", "Rate": "15.42"}, {"Date": "01
+        October 2025", "Rate": "15.42"}, {"Date": "30 September 2025", "Rate": "15.42"},
+        {"Date": "29 September 2025", "Rate": "15.42"}, {"Date": "28 September 2025",
+        "Rate": "15.42"}, {"Date": "25 September 2025", "Rate": "15.42"}, {"Date":
+        "23 September 2025", "Rate": "15.42"}, {"Date": "22 September 2025", "Rate":
+        "15.42"}, {"Date": "21 September 2025", "Rate": "15.42"}, {"Date": "18 September
+        2025", "Rate": "15.42"}, {"Date": "17 September 2025", "Rate": "15.42"}, {"Date":
+        "16 September 2025", "Rate": "15.42"}, {"Date": "15 September 2025", "Rate":
+        "15.42"}, {"Date": "14 September 2025", "Rate": "15.42"}, {"Date": "11 September
+        2025", "Rate": "15.41"}, {"Date": "10 September 2025", "Rate": "15.42"}, {"Date":
+        "09 September 2025", "Rate": "15.41"}, {"Date": "08 September 2025", "Rate":
+        "15.42"}, {"Date": "07 September 2025", "Rate": "15.42"}, {"Date": "03 September
+        2025", "Rate": "15.42"}, {"Date": "02 September 2025", "Rate": "15.42"}, {"Date":
+        "01 September 2025", "Rate": "15.42"}, {"Date": "31 August 2025", "Rate":
+        "15.42"}, {"Date": "28 August 2025", "Rate": "15.42"}, {"Date": "27 August
+        2025", "Rate": "15.42"}, {"Date": "26 August 2025", "Rate": "15.42"}, {"Date":
+        "25 August 2025", "Rate": "15.41"}, {"Date": "21 August 2025", "Rate": "15.42"},
+        {"Date": "20 August 2025", "Rate": "15.42"}, {"Date": "19 August 2025", "Rate":
+        "15.42"}, {"Date": "18 August 2025", "Rate": "15.42"}, {"Date": "17 August
+        2025", "Rate": "15.42"}, {"Date": "14 August 2025", "Rate": "15.42"}, {"Date":
+        "13 August 2025", "Rate": "15.42"}, {"Date": "12 August 2025", "Rate": "15.42"},
+        {"Date": "11 August 2025", "Rate": "15.42"}, {"Date": "10 August 2025", "Rate":
+        "15.42"}, {"Date": "07 August 2025", "Rate": "15.42"}, {"Date": "06 August
+        2025", "Rate": "15.42"}, {"Date": "05 August 2025", "Rate": "15.42"}, {"Date":
+        "04 August 2025", "Rate": "15.42"}, {"Date": "03 August 2025", "Rate": "15.42"},
+        {"Date": "31 July 2025", "Rate": "15.42"}, {"Date": "30 July 2025", "Rate":
+        "15.42"}, {"Date": "29 July 2025", "Rate": "15.42"}, {"Date": "24 July 2025",
+        "Rate": "15.42"}, {"Date": "23 July 2025", "Rate": "15.42"}, {"Date": "22
+        July 2025", "Rate": "15.42"}, {"Date": "21 July 2025", "Rate": "15.40"}, {"Date":
+        "20 July 2025", "Rate": "15.42"}, {"Date": "17 July 2025", "Rate": "15.41"},
+        {"Date": "16 July 2025", "Rate": "15.42"}, {"Date": "15 July 2025", "Rate":
+        "15.42"}, {"Date": "14 July 2025", "Rate": "15.42"}, {"Date": "13 July 2025",
+        "Rate": "15.42"}, {"Date": "10 July 2025", "Rate": "15.42"}, {"Date": "09
+        July 2025", "Rate": "15.42"}, {"Date": "08 July 2025", "Rate": "15.42"}, {"Date":
+        "07 July 2025", "Rate": "15.39"}, {"Date": "06 July 2025", "Rate": "15.42"},
+        {"Date": "03 July 2025", "Rate": "15.42"}, {"Date": "02 July 2025", "Rate":
+        "15.42"}, {"Date": "01 July 2025", "Rate": "15.42"}, {"Date": "30 June 2025",
+        "Rate": "15.42"}, {"Date": "29 June 2025", "Rate": "15.42"}, {"Date": "25
+        June 2025", "Rate": "15.42"}, {"Date": "24 June 2025", "Rate": "15.42"}, {"Date":
+        "23 June 2025", "Rate": "15.41"}, {"Date": "22 June 2025", "Rate": "15.41"},
+        {"Date": "19 June 2025", "Rate": "15.41"}, {"Date": "18 June 2025", "Rate":
+        "15.42"}, {"Date": "17 June 2025", "Rate": "15.42"}, {"Date": "16 June 2025",
+        "Rate": "15.42"}, {"Date": "15 June 2025", "Rate": "15.42"}, {"Date": "12
+        June 2025", "Rate": "15.42"}, {"Date": "11 June 2025", "Rate": "15.39"}, {"Date":
+        "10 June 2025", "Rate": "15.42"}, {"Date": "04 June 2025", "Rate": "15.42"},
+        {"Date": "03 June 2025", "Rate": "15.42"}, {"Date": "02 June 2025", "Rate":
+        "15.42"}, {"Date": "01 June 2025", "Rate": "15.42"}, {"Date": "29 May 2025",
+        "Rate": "15.42"}, {"Date": "28 May 2025", "Rate": "15.42"}, {"Date": "27 May
+        2025", "Rate": "15.42"}, {"Date": "26 May 2025", "Rate": "15.41"}, {"Date":
+        "25 May 2025", "Rate": "15.41"}, {"Date": "22 May 2025", "Rate": "15.42"},
+        {"Date": "21 May 2025", "Rate": "15.42"}, {"Date": "20 May 2025", "Rate":
+        "15.41"}, {"Date": "19 May 2025", "Rate": "15.40"}, {"Date": "18 May 2025",
+        "Rate": "15.41"}, {"Date": "15 May 2025", "Rate": "15.41"}, {"Date": "14 May
+        2025", "Rate": "15.41"}, {"Date": "13 May 2025", "Rate": "15.41"}, {"Date":
+        "12 May 2025", "Rate": "15.42"}, {"Date": "11 May 2025", "Rate": "15.42"},
+        {"Date": "08 May 2025", "Rate": "15.42"}, {"Date": "07 May 2025", "Rate":
+        "15.41"}, {"Date": "06 May 2025", "Rate": "15.41"}, {"Date": "05 May 2025",
+        "Rate": "15.40"}, {"Date": "04 May 2025", "Rate": "15.41"}, {"Date": "30 April
+        2025", "Rate": "15.42"}, {"Date": "29 April 2025", "Rate": "15.42"}, {"Date":
+        "28 April 2025", "Rate": "15.41"}, {"Date": "27 April 2025", "Rate": "15.41"},
+        {"Date": "24 April 2025", "Rate": "15.39"}, {"Date": "23 April 2025", "Rate":
+        "15.42"}, {"Date": "22 April 2025", "Rate": "15.41"}, {"Date": "21 April 2025",
+        "Rate": "15.42"}, {"Date": "20 April 2025", "Rate": "15.41"}, {"Date": "17
+        April 2025", "Rate": "15.41"}, {"Date": "16 April 2025", "Rate": "15.41"},
+        {"Date": "15 April 2025", "Rate": "15.41"}, {"Date": "14 April 2025", "Rate":
+        "15.39"}, {"Date": "13 April 2025", "Rate": "15.42"}, {"Date": "10 April 2025",
+        "Rate": "15.41"}, {"Date": "09 April 2025", "Rate": "15.42"}, {"Date": "08
+        April 2025", "Rate": "15.41"}, {"Date": "07 April 2025", "Rate": "15.41"},
+        {"Date": "06 April 2025", "Rate": "15.42"}, {"Date": "29 March 2025", "Rate":
+        "15.42"}, {"Date": "27 March 2025", "Rate": "15.41"}, {"Date": "20 March 2025",
+        "Rate": "15.42"}, {"Date": "19 March 2025", "Rate": "15.41"}, {"Date": "18
+        March 2025", "Rate": "15.42"}, {"Date": "17 March 2025", "Rate": "15.41"},
+        {"Date": "16 March 2025", "Rate": "15.41"}, {"Date": "13 March 2025", "Rate":
+        "15.41"}, {"Date": "12 March 2025", "Rate": "15.42"}, {"Date": "11 March 2025",
+        "Rate": "15.41"}, {"Date": "10 March 2025", "Rate": "15.37"}, {"Date": "09
+        March 2025", "Rate": "15.42"}, {"Date": "06 March 2025", "Rate": "15.41"},
+        {"Date": "05 March 2025", "Rate": "15.42"}, {"Date": "04 March 2025", "Rate":
+        "15.41"}, {"Date": "03 March 2025", "Rate": "15.42"}, {"Date": "27 February
+        2025", "Rate": "15.41"}, {"Date": "26 February 2025", "Rate": "15.42"}, {"Date":
+        "25 February 2025", "Rate": "15.41"}, {"Date": "24 February 2025", "Rate":
+        "15.41"}, {"Date": "23 February 2025", "Rate": "15.41"}, {"Date": "20 February
+        2025", "Rate": "15.41"}, {"Date": "19 February 2025", "Rate": "15.41"}, {"Date":
+        "18 February 2025", "Rate": "15.41"}, {"Date": "17 February 2025", "Rate":
+        "15.41"}, {"Date": "16 February 2025", "Rate": "15.41"}, {"Date": "13 February
+        2025", "Rate": "15.41"}, {"Date": "12 February 2025", "Rate": "15.42"}, {"Date":
+        "11 February 2025", "Rate": "15.41"}, {"Date": "10 February 2025", "Rate":
+        "15.39"}, {"Date": "09 February 2025", "Rate": "15.40"}, {"Date": "05 February
+        2025", "Rate": "15.40"}, {"Date": "04 February 2025", "Rate": "15.41"}, {"Date":
+        "03 February 2025", "Rate": "15.41"}, {"Date": "02 February 2025", "Rate":
+        "15.41"}, {"Date": "30 January 2025", "Rate": "15.42"}, {"Date": "29 January
+        2025", "Rate": "15.42"}, {"Date": "28 January 2025", "Rate": "15.41"}, {"Date":
+        "27 January 2025", "Rate": "15.42"}, {"Date": "26 January 2025", "Rate": "15.41"},
+        {"Date": "23 January 2025", "Rate": "15.41"}, {"Date": "22 January 2025",
+        "Rate": "15.41"}, {"Date": "21 January 2025", "Rate": "15.41"}, {"Date": "20
+        January 2025", "Rate": "15.40"}, {"Date": "19 January 2025", "Rate": "15.41"},
+        {"Date": "16 January 2025", "Rate": "15.42"}, {"Date": "15 January 2025",
+        "Rate": "15.41"}, {"Date": "14 January 2025", "Rate": "15.41"}, {"Date": "13
+        January 2025", "Rate": "15.40"}, {"Date": "12 January 2025", "Rate": "15.41"},
+        {"Date": "09 January 2025", "Rate": "15.40"}, {"Date": "08 January 2025",
+        "Rate": "15.40"}, {"Date": "07 January 2025", "Rate": "15.41"}, {"Date": "06
+        January 2025", "Rate": "15.40"}, {"Date": "05 January 2025", "Rate": "15.40"},
+        {"Date": "30 December 2024", "Rate": "15.42"}, {"Date": "29 December 2024",
+        "Rate": "15.40"}, {"Date": "26 December 2024", "Rate": "15.41"}, {"Date":
+        "25 December 2024", "Rate": "15.41"}, {"Date": "24 December 2024", "Rate":
+        "15.41"}, {"Date": "23 December 2024", "Rate": "15.39"}, {"Date": "22 December
+        2024", "Rate": "15.38"}, {"Date": "19 December 2024", "Rate": "15.39"}, {"Date":
+        "18 December 2024", "Rate": "15.41"}, {"Date": "17 December 2024", "Rate":
+        "15.41"}, {"Date": "16 December 2024", "Rate": "15.31"}, {"Date": "15 December
+        2024", "Rate": "15.37"}, {"Date": "12 December 2024", "Rate": "15.41"}, {"Date":
+        "11 December 2024", "Rate": "15.40"}, {"Date": "10 December 2024", "Rate":
+        "15.42"}, {"Date": "09 December 2024", "Rate": "15.40"}, {"Date": "08 December
+        2024", "Rate": "15.37"}, {"Date": "05 December 2024", "Rate": "15.42"}, {"Date":
+        "04 December 2024", "Rate": "15.42"}, {"Date": "03 December 2024", "Rate":
+        "15.42"}, {"Date": "02 December 2024", "Rate": "15.41"}, {"Date": "01 December
+        2024", "Rate": "15.40"}, {"Date": "28 November 2024", "Rate": "15.39"}, {"Date":
+        "27 November 2024", "Rate": "15.38"}, {"Date": "26 November 2024", "Rate":
+        "15.41"}, {"Date": "25 November 2024", "Rate": "15.27"}, {"Date": "24 November
+        2024", "Rate": "15.39"}, {"Date": "21 November 2024", "Rate": "15.38"}, {"Date":
+        "20 November 2024", "Rate": "15.41"}, {"Date": "19 November 2024", "Rate":
+        "15.41"}, {"Date": "18 November 2024", "Rate": "15.39"}, {"Date": "17 November
+        2024", "Rate": "15.40"}, {"Date": "14 November 2024", "Rate": "15.42"}, {"Date":
+        "13 November 2024", "Rate": "15.35"}, {"Date": "12 November 2024", "Rate":
+        "15.40"}, {"Date": "07 November 2024", "Rate": "15.39"}, {"Date": "06 November
+        2024", "Rate": "15.41"}, {"Date": "05 November 2024", "Rate": "15.36"}, {"Date":
+        "04 November 2024", "Rate": "15.41"}, {"Date": "31 October 2024", "Rate":
+        "15.41"}, {"Date": "30 October 2024", "Rate": "15.34"}, {"Date": "29 October
+        2024", "Rate": "15.42"}, {"Date": "28 October 2024", "Rate": "15.35"}, {"Date":
+        "27 October 2024", "Rate": "15.39"}, {"Date": "24 October 2024", "Rate": "15.40"},
+        {"Date": "23 October 2024", "Rate": "15.41"}, {"Date": "22 October 2024",
+        "Rate": "15.42"}, {"Date": "21 October 2024", "Rate": "15.42"}, {"Date": "20
+        October 2024", "Rate": "15.40"}, {"Date": "17 October 2024", "Rate": "15.41"},
+        {"Date": "16 October 2024", "Rate": "15.39"}, {"Date": "15 October 2024",
+        "Rate": "15.41"}, {"Date": "14 October 2024", "Rate": "15.40"}, {"Date": "13
+        October 2024", "Rate": "15.40"}, {"Date": "10 October 2024", "Rate": "15.39"},
+        {"Date": "09 October 2024", "Rate": "15.38"}, {"Date": "08 October 2024",
+        "Rate": "15.41"}, {"Date": "07 October 2024", "Rate": "15.42"}, {"Date": "06
+        October 2024", "Rate": "15.41"}, {"Date": "03 October 2024", "Rate": "15.41"},
+        {"Date": "02 October 2024", "Rate": "15.40"}, {"Date": "01 October 2024",
+        "Rate": "15.41"}, {"Date": "30 September 2024", "Rate": "15.38"}, {"Date":
+        "29 September 2024", "Rate": "15.39"}, {"Date": "26 September 2024", "Rate":
+        "15.26"}, {"Date": "25 September 2024", "Rate": "15.38"}, {"Date": "24 September
+        2024", "Rate": "15.41"}, {"Date": "23 September 2024", "Rate": "15.38"}, {"Date":
+        "22 September 2024", "Rate": "15.41"}, {"Date": "19 September 2024", "Rate":
+        "15.38"}, {"Date": "18 September 2024", "Rate": "15.42"}, {"Date": "17 September
+        2024", "Rate": "15.38"}, {"Date": "16 September 2024", "Rate": "15.36"}, {"Date":
+        "12 September 2024", "Rate": "15.41"}, {"Date": "11 September 2024", "Rate":
+        "15.38"}, {"Date": "10 September 2024", "Rate": "15.41"}, {"Date": "09 September
+        2024", "Rate": "15.36"}, {"Date": "08 September 2024", "Rate": "15.41"}, {"Date":
+        "03 September 2024", "Rate": "15.41"}, {"Date": "02 September 2024", "Rate":
+        "15.40"}, {"Date": "01 September 2024", "Rate": "15.41"}, {"Date": "29 August
+        2024", "Rate": "15.41"}, {"Date": "28 August 2024", "Rate": "15.40"}, {"Date":
+        "27 August 2024", "Rate": "15.41"}, {"Date": "26 August 2024", "Rate": "15.28"},
+        {"Date": "25 August 2024", "Rate": "15.39"}, {"Date": "22 August 2024", "Rate":
+        "15.37"}, {"Date": "21 August 2024", "Rate": "15.39"}, {"Date": "20 August
+        2024", "Rate": "15.41"}, {"Date": "19 August 2024", "Rate": "15.40"}, {"Date":
+        "18 August 2024", "Rate": "15.38"}, {"Date": "15 August 2024", "Rate": "15.36"},
+        {"Date": "14 August 2024", "Rate": "15.41"}, {"Date": "13 August 2024", "Rate":
+        "15.41"}, {"Date": "12 August 2024", "Rate": "15.40"}, {"Date": "11 August
+        2024", "Rate": "15.38"}, {"Date": "08 August 2024", "Rate": "15.35"}, {"Date":
+        "07 August 2024", "Rate": "15.36"}, {"Date": "06 August 2024", "Rate": "15.39"},
+        {"Date": "05 August 2024", "Rate": "15.33"}, {"Date": "04 August 2024", "Rate":
+        "15.36"}, {"Date": "01 August 2024", "Rate": "15.41"}, {"Date": "31 July 2024",
+        "Rate": "15.41"}, {"Date": "30 July 2024", "Rate": "15.41"}, {"Date": "29
+        July 2024", "Rate": "15.39"}, {"Date": "28 July 2024", "Rate": "15.40"}, {"Date":
+        "25 July 2024", "Rate": "15.39"}, {"Date": "24 July 2024", "Rate": "15.42"},
+        {"Date": "23 July 2024", "Rate": "15.41"}, {"Date": "22 July 2024", "Rate":
+        "15.36"}, {"Date": "21 July 2024", "Rate": "15.40"}, {"Date": "18 July 2024",
+        "Rate": "15.34"}, {"Date": "17 July 2024", "Rate": "15.41"}, {"Date": "16
+        July 2024", "Rate": "15.40"}, {"Date": "15 July 2024", "Rate": "15.37"}, {"Date":
+        "14 July 2024", "Rate": "15.35"}, {"Date": "11 July 2024", "Rate": "15.38"},
+        {"Date": "10 July 2024", "Rate": "15.41"}, {"Date": "09 July 2024", "Rate":
+        "15.36"}, {"Date": "08 July 2024", "Rate": "15.38"}, {"Date": "04 July 2024",
+        "Rate": "15.39"}, {"Date": "03 July 2024", "Rate": "15.32"}, {"Date": "02
+        July 2024", "Rate": "15.42"}, {"Date": "01 July 2024", "Rate": "15.41"}, {"Date":
+        "30 June 2024", "Rate": "15.42"}, {"Date": "27 June 2024", "Rate": "15.41"},
+        {"Date": "26 June 2024", "Rate": "15.40"}, {"Date": "25 June 2024", "Rate":
+        "15.42"}, {"Date": "24 June 2024", "Rate": "15.38"}, {"Date": "23 June 2024",
+        "Rate": "15.39"}, {"Date": "18 June 2024", "Rate": "15.38"}, {"Date": "13
+        June 2024", "Rate": "15.39"}, {"Date": "12 June 2024", "Rate": "15.40"}, {"Date":
+        "11 June 2024", "Rate": "15.41"}, {"Date": "10 June 2024", "Rate": "15.38"},
+        {"Date": "09 June 2024", "Rate": "15.41"}, {"Date": "06 June 2024", "Rate":
+        "15.37"}, {"Date": "05 June 2024", "Rate": "15.41"}, {"Date": "04 June 2024",
+        "Rate": "15.41"}, {"Date": "03 June 2024", "Rate": "15.37"}, {"Date": "02
+        June 2024", "Rate": "15.40"}, {"Date": "30 May 2024", "Rate": "15.40"}, {"Date":
+        "29 May 2024", "Rate": "15.36"}, {"Date": "28 May 2024", "Rate": "15.40"},
+        {"Date": "27 May 2024", "Rate": "15.40"}, {"Date": "26 May 2024", "Rate":
+        "15.35"}, {"Date": "23 May 2024", "Rate": "15.41"}, {"Date": "22 May 2024",
+        "Rate": "15.36"}, {"Date": "21 May 2024", "Rate": "15.41"}, {"Date": "20 May
+        2024", "Rate": "15.38"}, {"Date": "19 May 2024", "Rate": "15.38"}, {"Date":
+        "16 May 2024", "Rate": "15.40"}, {"Date": "15 May 2024", "Rate": "15.38"},
+        {"Date": "14 May 2024", "Rate": "15.41"}, {"Date": "13 May 2024", "Rate":
+        "15.40"}, {"Date": "12 May 2024", "Rate": "15.41"}, {"Date": "09 May 2024",
+        "Rate": "15.35"}, {"Date": "08 May 2024", "Rate": "15.39"}, {"Date": "07 May
+        2024", "Rate": "15.42"}, {"Date": "06 May 2024", "Rate": "15.40"}, {"Date":
+        "05 May 2024", "Rate": "15.40"}, {"Date": "02 May 2024", "Rate": "15.41"},
+        {"Date": "30 April 2024", "Rate": "15.41"}, {"Date": "29 April 2024", "Rate":
+        "15.35"}, {"Date": "28 April 2024", "Rate": "15.37"}, {"Date": "25 April 2024",
+        "Rate": "15.41"}, {"Date": "24 April 2024", "Rate": "15.38"}, {"Date": "23
+        April 2024", "Rate": "15.41"}, {"Date": "18 April 2024", "Rate": "15.37"},
+        {"Date": "17 April 2024", "Rate": "15.40"}, {"Date": "16 April 2024", "Rate":
+        "15.41"}, {"Date": "15 April 2024", "Rate": "15.40"}, {"Date": "14 April 2024",
+        "Rate": "15.41"}, {"Date": "08 April 2024", "Rate": "15.37"}, {"Date": "07
+        April 2024", "Rate": "15.42"}, {"Date": "01 April 2024", "Rate": "15.42"},
+        {"Date": "31 March 2024", "Rate": "15.41"}, {"Date": "28 March 2024", "Rate":
+        "15.37"}, {"Date": "27 March 2024", "Rate": "15.34"}, {"Date": "26 March 2024",
+        "Rate": "15.42"}, {"Date": "25 March 2024", "Rate": "15.42"}, {"Date": "24
+        March 2024", "Rate": "15.40"}, {"Date": "21 March 2024", "Rate": "15.38"},
+        {"Date": "20 March 2024", "Rate": "15.39"}, {"Date": "19 March 2024", "Rate":
+        "15.42"}, {"Date": "18 March 2024", "Rate": "15.38"}, {"Date": "17 March 2024",
+        "Rate": "15.35"}, {"Date": "14 March 2024", "Rate": "15.37"}, {"Date": "13
+        March 2024", "Rate": "15.40"}, {"Date": "12 March 2024", "Rate": "15.32"},
+        {"Date": "10 March 2024", "Rate": "15.37"}, {"Date": "07 March 2024", "Rate":
+        "15.35"}, {"Date": "06 March 2024", "Rate": "15.39"}, {"Date": "05 March 2024",
+        "Rate": "15.41"}, {"Date": "04 March 2024", "Rate": "15.39"}, {"Date": "03
+        March 2024", "Rate": "15.38"}, {"Date": "29 February 2024", "Rate": "15.41"},
+        {"Date": "28 February 2024", "Rate": "15.40"}, {"Date": "27 February 2024",
+        "Rate": "15.41"}, {"Date": "26 February 2024", "Rate": "15.36"}, {"Date":
+        "25 February 2024", "Rate": "15.40"}, {"Date": "22 February 2024", "Rate":
+        "15.38"}, {"Date": "21 February 2024", "Rate": "15.38"}, {"Date": "20 February
+        2024", "Rate": "15.41"}, {"Date": "19 February 2024", "Rate": "15.36"}, {"Date":
+        "18 February 2024", "Rate": "15.39"}, {"Date": "15 February 2024", "Rate":
+        "15.38"}, {"Date": "14 February 2024", "Rate": "15.38"}, {"Date": "13 February
+        2024", "Rate": "15.42"}, {"Date": "12 February 2024", "Rate": "15.41"}, {"Date":
+        "11 February 2024", "Rate": "15.39"}, {"Date": "08 February 2024", "Rate":
+        "15.36"}, {"Date": "07 February 2024", "Rate": "15.38"}, {"Date": "06 February
+        2024", "Rate": "15.41"}, {"Date": "05 February 2024", "Rate": "15.39"}, {"Date":
+        "04 February 2024", "Rate": "15.41"}, {"Date": "01 February 2024", "Rate":
+        "15.37"}, {"Date": "31 January 2024", "Rate": "15.39"}, {"Date": "30 January
+        2024", "Rate": "15.42"}, {"Date": "29 January 2024", "Rate": "15.38"}, {"Date":
+        "28 January 2024", "Rate": "15.39"}, {"Date": "25 January 2024", "Rate": "15.34"},
+        {"Date": "24 January 2024", "Rate": "15.34"}, {"Date": "23 January 2024",
+        "Rate": "15.41"}, {"Date": "22 January 2024", "Rate": "15.37"}, {"Date": "21
+        January 2024", "Rate": "15.35"}, {"Date": "18 January 2024", "Rate": "15.36"},
+        {"Date": "17 January 2024", "Rate": "15.40"}, {"Date": "16 January 2024",
+        "Rate": "15.42"}, {"Date": "15 January 2024", "Rate": "15.34"}, {"Date": "14
+        January 2024", "Rate": "15.39"}, {"Date": "11 January 2024", "Rate": "15.40"},
+        {"Date": "10 January 2024", "Rate": "15.38"}, {"Date": "09 January 2024",
+        "Rate": "15.41"}, {"Date": "08 January 2024", "Rate": "15.39"}, {"Date": "07
+        January 2024", "Rate": "15.38"}, {"Date": "04 January 2024", "Rate": "15.41"},
+        {"Date": "03 January 2024", "Rate": "15.40"}, {"Date": "02 January 2024",
+        "Rate": "15.42"}, {"Date": "28 December 2023", "Rate": "15.40"}, {"Date":
+        "27 December 2023", "Rate": "15.40"}, {"Date": "26 December 2023", "Rate":
+        "15.41"}, {"Date": "25 December 2023", "Rate": "15.39"}, {"Date": "24 December
+        2023", "Rate": "15.39"}, {"Date": "21 December 2023", "Rate": "15.39"}, {"Date":
+        "20 December 2023", "Rate": "15.32"}, {"Date": "19 December 2023", "Rate":
+        "15.41"}, {"Date": "18 December 2023", "Rate": "15.40"}, {"Date": "17 December
+        2023", "Rate": "15.39"}, {"Date": "14 December 2023", "Rate": "15.37"}, {"Date":
+        "13 December 2023", "Rate": "15.38"}, {"Date": "12 December 2023", "Rate":
+        "15.41"}, {"Date": "11 December 2023", "Rate": "15.39"}, {"Date": "10 December
+        2023", "Rate": "15.41"}, {"Date": "07 December 2023", "Rate": "15.41"}, {"Date":
+        "06 December 2023", "Rate": "15.41"}, {"Date": "05 December 2023", "Rate":
+        "15.41"}, {"Date": "04 December 2023", "Rate": "15.40"}, {"Date": "03 December
+        2023", "Rate": "15.40"}, {"Date": "30 November 2023", "Rate": "15.39"}, {"Date":
+        "29 November 2023", "Rate": "15.41"}, {"Date": "28 November 2023", "Rate":
+        "15.40"}, {"Date": "27 November 2023", "Rate": "15.34"}, {"Date": "26 November
+        2023", "Rate": "15.34"}, {"Date": "23 November 2023", "Rate": "15.40"}, {"Date":
+        "22 November 2023", "Rate": "15.38"}, {"Date": "21 November 2023", "Rate":
+        "15.41"}, {"Date": "20 November 2023", "Rate": "15.37"}, {"Date": "19 November
+        2023", "Rate": "15.38"}, {"Date": "16 November 2023", "Rate": "15.37"}, {"Date":
+        "15 November 2023", "Rate": "15.38"}, {"Date": "14 November 2023", "Rate":
+        "15.41"}, {"Date": "13 November 2023", "Rate": "15.39"}, {"Date": "12 November
+        2023", "Rate": "15.39"}, {"Date": "09 November 2023", "Rate": "15.38"}, {"Date":
+        "08 November 2023", "Rate": "15.37"}, {"Date": "07 November 2023", "Rate":
+        "15.41"}, {"Date": "06 November 2023", "Rate": "15.33"}, {"Date": "05 November
+        2023", "Rate": "15.39"}, {"Date": "02 November 2023", "Rate": "15.39"}, {"Date":
+        "01 November 2023", "Rate": "15.39"}, {"Date": "31 October 2023", "Rate":
+        "15.41"}, {"Date": "30 October 2023", "Rate": "15.36"}, {"Date": "29 October
+        2023", "Rate": "15.35"}, {"Date": "26 October 2023", "Rate": "15.39"}, {"Date":
+        "25 October 2023", "Rate": "15.39"}, {"Date": "24 October 2023", "Rate": "15.42"},
+        {"Date": "23 October 2023", "Rate": "15.35"}, {"Date": "22 October 2023",
+        "Rate": "15.40"}, {"Date": "19 October 2023", "Rate": "15.39"}, {"Date": "18
+        October 2023", "Rate": "15.41"}, {"Date": "16 October 2023", "Rate": "15.40"},
+        {"Date": "15 October 2023", "Rate": "15.37"}, {"Date": "12 October 2023",
+        "Rate": "15.34"}, {"Date": "11 October 2023", "Rate": "15.34"}, {"Date": "10
+        October 2023", "Rate": "15.41"}, {"Date": "09 October 2023", "Rate": "15.35"},
+        {"Date": "08 October 2023", "Rate": "15.39"}, {"Date": "05 October 2023",
+        "Rate": "15.42"}, {"Date": "04 October 2023", "Rate": "15.41"}, {"Date": "03
+        October 2023", "Rate": "15.39"}, {"Date": "02 October 2023", "Rate": "15.39"},
+        {"Date": "26 September 2023", "Rate": "15.42"}, {"Date": "25 September 2023",
+        "Rate": "15.37"}, {"Date": "24 September 2023", "Rate": "15.35"}, {"Date":
+        "21 September 2023", "Rate": "15.37"}, {"Date": "20 September 2023", "Rate":
+        "15.40"}, {"Date": "19 September 2023", "Rate": "15.42"}, {"Date": "18 September
+        2023", "Rate": "15.37"}, {"Date": "17 September 2023", "Rate": "15.40"}, {"Date":
+        "14 September 2023", "Rate": "15.41"}, {"Date": "13 September 2023", "Rate":
+        "15.37"}, {"Date": "12 September 2023", "Rate": "15.38"}, {"Date": "07 September
+        2023", "Rate": "15.38"}, {"Date": "06 September 2023", "Rate": "15.35"}, {"Date":
+        "05 September 2023", "Rate": "15.41"}, {"Date": "04 September 2023", "Rate":
+        "15.42"}, {"Date": "03 September 2023", "Rate": "15.40"}, {"Date": "31 August
+        2023", "Rate": "15.41"}, {"Date": "30 August 2023", "Rate": "15.33"}, {"Date":
+        "29 August 2023", "Rate": "15.42"}, {"Date": "28 August 2023", "Rate": "15.40"},
+        {"Date": "27 August 2023", "Rate": "15.41"}, {"Date": "24 August 2023", "Rate":
+        "15.38"}, {"Date": "23 August 2023", "Rate": "15.34"}, {"Date": "22 August
+        2023", "Rate": "15.40"}, {"Date": "21 August 2023", "Rate": "15.33"}, {"Date":
+        "20 August 2023", "Rate": "15.34"}, {"Date": "17 August 2023", "Rate": "15.38"},
+        {"Date": "16 August 2023", "Rate": "15.38"}, {"Date": "15 August 2023", "Rate":
+        "15.41"}, {"Date": "14 August 2023", "Rate": "15.40"}, {"Date": "13 August
+        2023", "Rate": "15.41"}, {"Date": "10 August 2023", "Rate": "15.39"}, {"Date":
+        "09 August 2023", "Rate": "15.39"}, {"Date": "08 August 2023", "Rate": "15.42"},
+        {"Date": "07 August 2023", "Rate": "15.40"}, {"Date": "06 August 2023", "Rate":
+        "15.41"}, {"Date": "03 August 2023", "Rate": "15.38"}, {"Date": "02 August
+        2023", "Rate": "15.40"}, {"Date": "01 August 2023", "Rate": "15.41"}, {"Date":
+        "31 July 2023", "Rate": "15.37"}, {"Date": "30 July 2023", "Rate": "15.42"},
+        {"Date": "25 July 2023", "Rate": "15.41"}, {"Date": "24 July 2023", "Rate":
+        "15.39"}, {"Date": "23 July 2023", "Rate": "15.41"}, {"Date": "20 July 2023",
+        "Rate": "15.41"}, {"Date": "18 July 2023", "Rate": "15.41"}, {"Date": "17
+        July 2023", "Rate": "15.38"}, {"Date": "16 July 2023", "Rate": "15.40"}, {"Date":
+        "13 July 2023", "Rate": "15.40"}, {"Date": "12 July 2023", "Rate": "15.42"},
+        {"Date": "11 July 2023", "Rate": "15.42"}, {"Date": "10 July 2023", "Rate":
+        "15.34"}, {"Date": "09 July 2023", "Rate": "15.40"}, {"Date": "06 July 2023",
+        "Rate": "15.39"}, {"Date": "05 July 2023", "Rate": "15.34"}, {"Date": "04
+        July 2023", "Rate": "15.41"}, {"Date": "03 July 2023", "Rate": "15.39"}, {"Date":
+        "02 July 2023", "Rate": "15.40"}, {"Date": "26 June 2023", "Rate": "15.38"},
+        {"Date": "22 June 2023", "Rate": "15.41"}, {"Date": "21 June 2023", "Rate":
+        "15.41"}, {"Date": "20 June 2023", "Rate": "15.42"}, {"Date": "19 June 2023",
+        "Rate": "15.40"}, {"Date": "18 June 2023", "Rate": "15.40"}, {"Date": "15
+        June 2023", "Rate": "15.40"}, {"Date": "14 June 2023", "Rate": "15.39"}, {"Date":
+        "13 June 2023", "Rate": "15.41"}, {"Date": "12 June 2023", "Rate": "15.32"},
+        {"Date": "11 June 2023", "Rate": "15.39"}, {"Date": "08 June 2023", "Rate":
+        "15.37"}, {"Date": "07 June 2023", "Rate": "15.40"}, {"Date": "06 June 2023",
+        "Rate": "15.41"}, {"Date": "05 June 2023", "Rate": "15.42"}, {"Date": "04
+        June 2023", "Rate": "15.40"}, {"Date": "01 June 2023", "Rate": "15.37"}, {"Date":
+        "31 May 2023", "Rate": "15.40"}, {"Date": "30 May 2023", "Rate": "15.41"},
+        {"Date": "29 May 2023", "Rate": "15.41"}, {"Date": "28 May 2023", "Rate":
+        "15.36"}, {"Date": "25 May 2023", "Rate": "15.34"}, {"Date": "24 May 2023",
+        "Rate": "15.36"}, {"Date": "23 May 2023", "Rate": "15.40"}, {"Date": "22 May
+        2023", "Rate": "15.32"}, {"Date": "21 May 2023", "Rate": "15.34"}, {"Date":
+        "18 May 2023", "Rate": "15.41"}, {"Date": "17 May 2023", "Rate": "15.35"},
+        {"Date": "16 May 2023", "Rate": "15.41"}, {"Date": "15 May 2023", "Rate":
+        "15.38"}, {"Date": "14 May 2023", "Rate": "15.39"}, {"Date": "11 May 2023",
+        "Rate": "15.39"}, {"Date": "10 May 2023", "Rate": "15.37"}, {"Date": "09 May
+        2023", "Rate": "15.39"}, {"Date": "08 May 2023", "Rate": "15.38"}, {"Date":
+        "07 May 2023", "Rate": "15.33"}, {"Date": "04 May 2023", "Rate": "15.40"},
+        {"Date": "03 May 2023", "Rate": "15.40"}, {"Date": "02 May 2023", "Rate":
+        "15.39"}, {"Date": "30 April 2023", "Rate": "15.31"}, {"Date": "27 April 2023",
+        "Rate": "15.39"}, {"Date": "26 April 2023", "Rate": "15.40"}, {"Date": "25
+        April 2023", "Rate": "15.36"}, {"Date": "24 April 2023", "Rate": "15.35"},
+        {"Date": "20 April 2023", "Rate": "15.35"}, {"Date": "19 April 2023", "Rate":
+        "15.40"}, {"Date": "18 April 2023", "Rate": "15.41"}, {"Date": "17 April 2023",
+        "Rate": "15.42"}, {"Date": "16 April 2023", "Rate": "15.41"}, {"Date": "13
+        April 2023", "Rate": "15.40"}, {"Date": "12 April 2023", "Rate": "15.38"},
+        {"Date": "11 April 2023", "Rate": "15.42"}, {"Date": "10 April 2023", "Rate":
+        "15.40"}, {"Date": "09 April 2023", "Rate": "15.38"}, {"Date": "06 April 2023",
+        "Rate": "15.36"}, {"Date": "05 April 2023", "Rate": "15.38"}, {"Date": "04
+        April 2023", "Rate": "15.41"}, {"Date": "03 April 2023", "Rate": "15.41"},
+        {"Date": "02 April 2023", "Rate": "15.39"}, {"Date": "30 March 2023", "Rate":
+        "15.39"}, {"Date": "29 March 2023", "Rate": "15.40"}, {"Date": "28 March 2023",
+        "Rate": "15.41"}, {"Date": "27 March 2023", "Rate": "15.42"}, {"Date": "26
+        March 2023", "Rate": "15.39"}, {"Date": "22 March 2023", "Rate": "15.38"},
+        {"Date": "21 March 2023", "Rate": "15.41"}, {"Date": "20 March 2023", "Rate":
+        "15.42"}, {"Date": "19 March 2023", "Rate": "15.39"}, {"Date": "16 March 2023",
+        "Rate": "15.40"}, {"Date": "15 March 2023", "Rate": "15.29"}, {"Date": "14
+        March 2023", "Rate": "15.39"}, {"Date": "13 March 2023", "Rate": "15.40"},
+        {"Date": "12 March 2023", "Rate": "15.32"}, {"Date": "09 March 2023", "Rate":
+        "15.41"}, {"Date": "08 March 2023", "Rate": "15.38"}, {"Date": "07 March 2023",
+        "Rate": "15.40"}, {"Date": "06 March 2023", "Rate": "15.40"}, {"Date": "05
+        March 2023", "Rate": "15.34"}, {"Date": "02 March 2023", "Rate": "15.40"},
+        {"Date": "01 March 2023", "Rate": "15.38"}, {"Date": "28 February 2023", "Rate":
+        "15.40"}, {"Date": "27 February 2023", "Rate": "15.40"}, {"Date": "26 February
+        2023", "Rate": "15.34"}, {"Date": "23 February 2023", "Rate": "15.39"}, {"Date":
+        "22 February 2023", "Rate": "15.32"}, {"Date": "21 February 2023", "Rate":
+        "15.41"}, {"Date": "20 February 2023", "Rate": "15.38"}, {"Date": "19 February
+        2023", "Rate": "15.41"}, {"Date": "16 February 2023", "Rate": "15.36"}, {"Date":
+        "15 February 2023", "Rate": "15.38"}, {"Date": "14 February 2023", "Rate":
+        "15.41"}, {"Date": "13 February 2023", "Rate": "15.36"}, {"Date": "12 February
+        2023", "Rate": "15.35"}, {"Date": "09 February 2023", "Rate": "15.36"}, {"Date":
+        "08 February 2023", "Rate": "15.41"}, {"Date": "07 February 2023", "Rate":
+        "15.32"}, {"Date": "05 February 2023", "Rate": "15.41"}, {"Date": "02 February
+        2023", "Rate": "15.42"}, {"Date": "01 February 2023", "Rate": "15.41"}, {"Date":
+        "31 January 2023", "Rate": "15.40"}, {"Date": "30 January 2023", "Rate": "15.41"},
+        {"Date": "29 January 2023", "Rate": "15.35"}, {"Date": "26 January 2023",
+        "Rate": "15.35"}, {"Date": "25 January 2023", "Rate": "15.36"}, {"Date": "24
+        January 2023", "Rate": "15.42"}, {"Date": "23 January 2023", "Rate": "15.41"},
+        {"Date": "22 January 2023", "Rate": "15.40"}, {"Date": "19 January 2023",
+        "Rate": "15.40"}, {"Date": "18 January 2023", "Rate": "15.38"}, {"Date": "17
+        January 2023", "Rate": "15.40"}, {"Date": "16 January 2023", "Rate": "15.40"},
+        {"Date": "15 January 2023", "Rate": "15.34"}, {"Date": "12 January 2023",
+        "Rate": "15.36"}, {"Date": "11 January 2023", "Rate": "15.36"}, {"Date": "10
+        January 2023", "Rate": "15.39"}, {"Date": "09 January 2023", "Rate": "15.36"},
+        {"Date": "08 January 2023", "Rate": "15.32"}, {"Date": "05 January 2023",
+        "Rate": "15.33"}, {"Date": "04 January 2023", "Rate": "15.42"}, {"Date": "03
+        January 2023", "Rate": "15.41"}, {"Date": "02 January 2023", "Rate": "15.41"},
+        {"Date": "28 December 2022", "Rate": "15.40"}, {"Date": "27 December 2022",
+        "Rate": "15.41"}, {"Date": "26 December 2022", "Rate": "15.40"}, {"Date":
+        "25 December 2022", "Rate": "15.39"}, {"Date": "22 December 2022", "Rate":
+        "15.41"}, {"Date": "21 December 2022", "Rate": "15.32"}, {"Date": "20 December
+        2022", "Rate": "15.41"}, {"Date": "19 December 2022", "Rate": "15.41"}, {"Date":
+        "18 December 2022", "Rate": "15.39"}, {"Date": "15 December 2022", "Rate":
+        "15.41"}, {"Date": "14 December 2022", "Rate": "15.38"}, {"Date": "13 December
+        2022", "Rate": "15.41"}, {"Date": "12 December 2022", "Rate": "15.35"}, {"Date":
+        "11 December 2022", "Rate": "15.38"}, {"Date": "08 December 2022", "Rate":
+        "15.39"}, {"Date": "07 December 2022", "Rate": "15.36"}, {"Date": "06 December
+        2022", "Rate": "15.39"}, {"Date": "05 December 2022", "Rate": "15.39"}, {"Date":
+        "04 December 2022", "Rate": "15.41"}, {"Date": "01 December 2022", "Rate":
+        "15.37"}, {"Date": "30 November 2022", "Rate": "15.37"}, {"Date": "29 November
+        2022", "Rate": "15.41"}, {"Date": "28 November 2022", "Rate": "15.34"}, {"Date":
+        "27 November 2022", "Rate": "15.40"}, {"Date": "24 November 2022", "Rate":
+        "15.39"}, {"Date": "23 November 2022", "Rate": "15.39"}, {"Date": "22 November
+        2022", "Rate": "15.41"}, {"Date": "21 November 2022", "Rate": "15.37"}, {"Date":
+        "20 November 2022", "Rate": "15.40"}, {"Date": "17 November 2022", "Rate":
+        "15.38"}, {"Date": "16 November 2022", "Rate": "15.36"}, {"Date": "15 November
+        2022", "Rate": "15.42"}, {"Date": "14 November 2022", "Rate": "15.37"}, {"Date":
+        "13 November 2022", "Rate": "15.38"}, {"Date": "10 November 2022", "Rate":
+        "15.39"}, {"Date": "09 November 2022", "Rate": "15.25"}, {"Date": "08 November
+        2022", "Rate": "15.41"}, {"Date": "07 November 2022", "Rate": "15.37"}, {"Date":
+        "06 November 2022", "Rate": "15.42"}, {"Date": "02 November 2022", "Rate":
+        "15.41"}, {"Date": "01 November 2022", "Rate": "15.42"}, {"Date": "31 October
+        2022", "Rate": "15.40"}, {"Date": "30 October 2022", "Rate": "15.39"}, {"Date":
+        "26 October 2022", "Rate": "15.40"}, {"Date": "25 October 2022", "Rate": "15.41"},
+        {"Date": "24 October 2022", "Rate": "15.38"}, {"Date": "23 October 2022",
+        "Rate": "15.40"}, {"Date": "20 October 2022", "Rate": "15.38"}, {"Date": "19
+        October 2022", "Rate": "15.39"}, {"Date": "18 October 2022", "Rate": "15.41"},
+        {"Date": "17 October 2022", "Rate": "15.42"}, {"Date": "16 October 2022",
+        "Rate": "15.39"}, {"Date": "13 October 2022", "Rate": "15.36"}, {"Date": "12
+        October 2022", "Rate": "15.37"}, {"Date": "11 October 2022", "Rate": "15.41"},
+        {"Date": "10 October 2022", "Rate": "15.35"}, {"Date": "09 October 2022",
+        "Rate": "15.41"}, {"Date": "06 October 2022", "Rate": "15.41"}, {"Date": "05
+        October 2022", "Rate": "15.41"}, {"Date": "04 October 2022", "Rate": "15.39"},
+        {"Date": "02 October 2022", "Rate": "15.37"}, {"Date": "29 September 2022",
+        "Rate": "15.39"}, {"Date": "28 September 2022", "Rate": "15.41"}, {"Date":
+        "26 September 2022", "Rate": "15.31"}, {"Date": "25 September 2022", "Rate":
+        "15.35"}, {"Date": "22 September 2022", "Rate": "15.42"}, {"Date": "21 September
+        2022", "Rate": "15.37"}, {"Date": "20 September 2022", "Rate": "15.42"}, {"Date":
+        "19 September 2022", "Rate": "15.41"}, {"Date": "18 September 2022", "Rate":
+        "15.40"}, {"Date": "15 September 2022", "Rate": "15.42"}, {"Date": "14 September
+        2022", "Rate": "15.35"}, {"Date": "13 September 2022", "Rate": "15.40"}, {"Date":
+        "12 September 2022", "Rate": "15.38"}, {"Date": "11 September 2022", "Rate":
+        "15.32"}, {"Date": "08 September 2022", "Rate": "15.38"}, {"Date": "07 September
+        2022", "Rate": "15.32"}, {"Date": "06 September 2022", "Rate": "15.41"}, {"Date":
+        "05 September 2022", "Rate": "15.34"}, {"Date": "04 September 2022", "Rate":
+        "15.40"}, {"Date": "01 September 2022", "Rate": "15.40"}, {"Date": "31 August
+        2022", "Rate": "15.38"}, {"Date": "30 August 2022", "Rate": "15.39"}, {"Date":
+        "29 August 2022", "Rate": "15.41"}, {"Date": "28 August 2022", "Rate": "15.32"},
+        {"Date": "25 August 2022", "Rate": "15.41"}, {"Date": "24 August 2022", "Rate":
+        "15.40"}, {"Date": "23 August 2022", "Rate": "15.41"}, {"Date": "22 August
+        2022", "Rate": "15.39"}, {"Date": "21 August 2022", "Rate": "15.37"}, {"Date":
+        "18 August 2022", "Rate": "15.40"}, {"Date": "17 August 2022", "Rate": "15.41"},
+        {"Date": "16 August 2022", "Rate": "15.41"}, {"Date": "15 August 2022", "Rate":
+        "15.41"}, {"Date": "14 August 2022", "Rate": "15.35"}, {"Date": "11 August
+        2022", "Rate": "15.35"}, {"Date": "10 August 2022", "Rate": "15.31"}, {"Date":
+        "09 August 2022", "Rate": "15.41"}, {"Date": "08 August 2022", "Rate": "15.37"},
+        {"Date": "07 August 2022", "Rate": "15.40"}, {"Date": "04 August 2022", "Rate":
+        "15.37"}, {"Date": "03 August 2022", "Rate": "15.29"}, {"Date": "02 August
+        2022", "Rate": "15.42"}, {"Date": "01 August 2022", "Rate": "15.41"}, {"Date":
+        "31 July 2022", "Rate": "15.40"}, {"Date": "25 July 2022", "Rate": "15.36"},
+        {"Date": "24 July 2022", "Rate": "15.41"}, {"Date": "21 July 2022", "Rate":
+        "15.41"}, {"Date": "20 July 2022", "Rate": "15.40"}, {"Date": "19 July 2022",
+        "Rate": "15.42"}, {"Date": "18 July 2022", "Rate": "15.40"}, {"Date": "17
+        July 2022", "Rate": "15.39"}, {"Date": "07 July 2022", "Rate": "15.41"}, {"Date":
+        "06 July 2022", "Rate": "15.41"}, {"Date": "05 July 2022", "Rate": "15.41"},
+        {"Date": "04 July 2022", "Rate": "15.41"}, {"Date": "03 July 2022", "Rate":
+        "15.36"}, {"Date": "30 June 2022", "Rate": "15.41"}, {"Date": "29 June 2022",
+        "Rate": "15.41"}, {"Date": "28 June 2022", "Rate": "15.42"}, {"Date": "27
+        June 2022", "Rate": "15.42"}, {"Date": "26 June 2022", "Rate": "15.38"}, {"Date":
+        "23 June 2022", "Rate": "15.35"}, {"Date": "22 June 2022", "Rate": "15.36"},
+        {"Date": "21 June 2022", "Rate": "15.42"}, {"Date": "20 June 2022", "Rate":
+        "15.39"}, {"Date": "19 June 2022", "Rate": "15.38"}, {"Date": "16 June 2022",
+        "Rate": "15.40"}, {"Date": "15 June 2022", "Rate": "15.41"}, {"Date": "14
+        June 2022", "Rate": "15.40"}, {"Date": "13 June 2022", "Rate": "15.37"}, {"Date":
+        "12 June 2022", "Rate": "15.36"}, {"Date": "09 June 2022", "Rate": "15.41"},
+        {"Date": "08 June 2022", "Rate": "15.33"}, {"Date": "07 June 2022", "Rate":
+        "15.41"}, {"Date": "06 June 2022", "Rate": "15.40"}, {"Date": "05 June 2022",
+        "Rate": "15.41"}, {"Date": "02 June 2022", "Rate": "15.41"}, {"Date": "01
+        June 2022", "Rate": "15.41"}, {"Date": "31 May 2022", "Rate": "15.40"}, {"Date":
+        "30 May 2022", "Rate": "15.39"}, {"Date": "29 May 2022", "Rate": "15.34"},
+        {"Date": "26 May 2022", "Rate": "15.40"}, {"Date": "25 May 2022", "Rate":
+        "15.41"}, {"Date": "24 May 2022", "Rate": "15.40"}, {"Date": "23 May 2022",
+        "Rate": "15.33"}, {"Date": "22 May 2022", "Rate": "15.39"}, {"Date": "19 May
+        2022", "Rate": "15.38"}, {"Date": "18 May 2022", "Rate": "15.40"}, {"Date":
+        "17 May 2022", "Rate": "15.40"}, {"Date": "16 May 2022", "Rate": "15.41"},
+        {"Date": "15 May 2022", "Rate": "15.35"}, {"Date": "12 May 2022", "Rate":
+        "15.35"}, {"Date": "11 May 2022", "Rate": "15.35"}, {"Date": "10 May 2022",
+        "Rate": "15.41"}, {"Date": "09 May 2022", "Rate": "15.32"}, {"Date": "08 May
+        2022", "Rate": "15.41"}, {"Date": "30 April 2022", "Rate": "15.39"}, {"Date":
+        "28 April 2022", "Rate": "15.34"}, {"Date": "27 April 2022", "Rate": "15.39"},
+        {"Date": "26 April 2022", "Rate": "15.42"}, {"Date": "25 April 2022", "Rate":
+        "15.42"}, {"Date": "24 April 2022", "Rate": "15.38"}, {"Date": "21 April 2022",
+        "Rate": "15.38"}, {"Date": "20 April 2022", "Rate": "15.41"}, {"Date": "19
+        April 2022", "Rate": "15.41"}, {"Date": "18 April 2022", "Rate": "15.40"},
+        {"Date": "17 April 2022", "Rate": "15.40"}, {"Date": "14 April 2022", "Rate":
+        "15.38"}, {"Date": "13 April 2022", "Rate": "15.40"}, {"Date": "12 April 2022",
+        "Rate": "15.40"}, {"Date": "11 April 2022", "Rate": "15.39"}, {"Date": "10
+        April 2022", "Rate": "15.35"}, {"Date": "07 April 2022", "Rate": "15.39"},
+        {"Date": "06 April 2022", "Rate": "15.37"}, {"Date": "05 April 2022", "Rate":
+        "15.41"}, {"Date": "04 April 2022", "Rate": "15.41"}, {"Date": "03 April 2022",
+        "Rate": "15.39"}, {"Date": "31 March 2022", "Rate": "15.37"}, {"Date": "30
+        March 2022", "Rate": "15.41"}, {"Date": "29 March 2022", "Rate": "15.41"},
+        {"Date": "28 March 2022", "Rate": "15.37"}, {"Date": "27 March 2022", "Rate":
+        "15.39"}, {"Date": "24 March 2022", "Rate": "15.41"}, {"Date": "23 March 2022",
+        "Rate": "15.42"}, {"Date": "22 March 2022", "Rate": "15.41"}, {"Date": "21
+        March 2022", "Rate": "15.33"}, {"Date": "20 March 2022", "Rate": "15.40"},
+        {"Date": "17 March 2022", "Rate": "15.40"}, {"Date": "16 March 2022", "Rate":
+        "15.40"}, {"Date": "15 March 2022", "Rate": "15.41"}, {"Date": "14 March 2022",
+        "Rate": "15.35"}, {"Date": "13 March 2022", "Rate": "15.35"}, {"Date": "10
+        March 2022", "Rate": "15.37"}, {"Date": "09 March 2022", "Rate": "15.41"},
+        {"Date": "08 March 2022", "Rate": "15.40"}, {"Date": "07 March 2022", "Rate":
+        "15.42"}, {"Date": "06 March 2022", "Rate": "15.35"}, {"Date": "03 March 2022",
+        "Rate": "15.38"}, {"Date": "02 March 2022", "Rate": "15.42"}, {"Date": "01
+        March 2022", "Rate": "15.39"}, {"Date": "28 February 2022", "Rate": "15.40"},
+        {"Date": "27 February 2022", "Rate": "15.28"}, {"Date": "24 February 2022",
+        "Rate": "15.37"}, {"Date": "23 February 2022", "Rate": "15.38"}, {"Date":
+        "22 February 2022", "Rate": "15.41"}, {"Date": "21 February 2022", "Rate":
+        "15.39"}, {"Date": "20 February 2022", "Rate": "15.41"}, {"Date": "17 February
+        2022", "Rate": "15.38"}, {"Date": "16 February 2022", "Rate": "15.40"}, {"Date":
+        "15 February 2022", "Rate": "15.40"}, {"Date": "14 February 2022", "Rate":
+        "15.41"}, {"Date": "13 February 2022", "Rate": "15.33"}, {"Date": "10 February
+        2022", "Rate": "15.31"}, {"Date": "09 February 2022", "Rate": "15.36"}, {"Date":
+        "08 February 2022", "Rate": "15.41"}, {"Date": "07 February 2022", "Rate":
+        "15.41"}, {"Date": "06 February 2022", "Rate": "15.39"}, {"Date": "02 February
+        2022", "Rate": "15.40"}, {"Date": "01 February 2022", "Rate": "15.41"}, {"Date":
+        "31 January 2022", "Rate": "15.42"}, {"Date": "30 January 2022", "Rate": "15.36"},
+        {"Date": "27 January 2022", "Rate": "15.36"}, {"Date": "26 January 2022",
+        "Rate": "15.35"}, {"Date": "25 January 2022", "Rate": "15.41"}, {"Date": "24
+        January 2022", "Rate": "15.39"}, {"Date": "23 January 2022", "Rate": "15.42"},
+        {"Date": "20 January 2022", "Rate": "15.36"}, {"Date": "19 January 2022",
+        "Rate": "15.37"}, {"Date": "18 January 2022", "Rate": "15.42"}, {"Date": "17
+        January 2022", "Rate": "15.39"}, {"Date": "16 January 2022", "Rate": "15.41"},
+        {"Date": "13 January 2022", "Rate": "15.33"}, {"Date": "12 January 2022",
+        "Rate": "15.34"}, {"Date": "11 January 2022", "Rate": "15.41"}, {"Date": "10
+        January 2022", "Rate": "15.36"}, {"Date": "09 January 2022", "Rate": "15.38"},
+        {"Date": "06 January 2022", "Rate": "15.36"}, {"Date": "05 January 2022",
+        "Rate": "15.40"}, {"Date": "04 January 2022", "Rate": "15.40"}, {"Date": "03
+        January 2022", "Rate": "15.41"}, {"Date": "02 January 2022", "Rate": "15.41"},
+        {"Date": "29 December 2021", "Rate": "15.39"}, {"Date": "28 December 2021",
+        "Rate": "15.39"}, {"Date": "27 December 2021", "Rate": "15.41"}, {"Date":
+        "26 December 2021", "Rate": "15.32"}, {"Date": "23 December 2021", "Rate":
+        "15.40"}, {"Date": "22 December 2021", "Rate": "15.41"}, {"Date": "21 December
+        2021", "Rate": "15.42"}, {"Date": "20 December 2021", "Rate": "15.37"}, {"Date":
+        "19 December 2021", "Rate": "15.41"}, {"Date": "16 December 2021", "Rate":
+        "15.39"}, {"Date": "15 December 2021", "Rate": "15.41"}, {"Date": "14 December
+        2021", "Rate": "15.42"}, {"Date": "13 December 2021", "Rate": "15.40"}, {"Date":
+        "12 December 2021", "Rate": "15.39"}, {"Date": "09 December 2021", "Rate":
+        "15.35"}, {"Date": "08 December 2021", "Rate": "15.38"}, {"Date": "07 December
+        2021", "Rate": "15.41"}, {"Date": "06 December 2021", "Rate": "15.41"}, {"Date":
+        "05 December 2021", "Rate": "15.36"}, {"Date": "02 December 2021", "Rate":
+        "15.42"}, {"Date": "01 December 2021", "Rate": "15.41"}, {"Date": "30 November
+        2021", "Rate": "15.41"}, {"Date": "29 November 2021", "Rate": "15.37"}, {"Date":
+        "28 November 2021", "Rate": "15.41"}, {"Date": "25 November 2021", "Rate":
+        "15.40"}, {"Date": "24 November 2021", "Rate": "15.40"}, {"Date": "23 November
+        2021", "Rate": "15.41"}, {"Date": "22 November 2021", "Rate": "15.34"}, {"Date":
+        "21 November 2021", "Rate": "15.39"}, {"Date": "18 November 2021", "Rate":
+        "15.38"}, {"Date": "17 November 2021", "Rate": "15.37"}, {"Date": "16 November
+        2021", "Rate": "15.41"}, {"Date": "15 November 2021", "Rate": "15.36"}, {"Date":
+        "14 November 2021", "Rate": "15.38"}, {"Date": "10 November 2021", "Rate":
+        "15.41"}, {"Date": "09 November 2021", "Rate": "15.37"}, {"Date": "08 November
+        2021", "Rate": "15.37"}, {"Date": "04 November 2021", "Rate": "15.37"}, {"Date":
+        "02 November 2021", "Rate": "15.41"}, {"Date": "01 November 2021", "Rate":
+        "15.41"}, {"Date": "31 October 2021", "Rate": "15.41"}, {"Date": "28 October
+        2021", "Rate": "15.34"}, {"Date": "27 October 2021", "Rate": "15.39"}, {"Date":
+        "26 October 2021", "Rate": "15.41"}, {"Date": "25 October 2021", "Rate": "15.39"},
+        {"Date": "24 October 2021", "Rate": "15.36"}, {"Date": "21 October 2021",
+        "Rate": "15.40"}, {"Date": "20 October 2021", "Rate": "15.40"}, {"Date": "19
+        October 2021", "Rate": "15.41"}, {"Date": "17 October 2021", "Rate": "15.41"},
+        {"Date": "14 October 2021", "Rate": "15.37"}, {"Date": "13 October 2021",
+        "Rate": "15.40"}, {"Date": "12 October 2021", "Rate": "15.41"}, {"Date": "11
+        October 2021", "Rate": "15.40"}, {"Date": "10 October 2021", "Rate": "15.37"},
+        {"Date": "06 October 2021", "Rate": "15.40"}, {"Date": "05 October 2021",
+        "Rate": "15.42"}, {"Date": "04 October 2021", "Rate": "15.42"}, {"Date": "03
+        October 2021", "Rate": "15.41"}, {"Date": "30 September 2021", "Rate": "15.40"},
+        {"Date": "29 September 2021", "Rate": "15.38"}, {"Date": "28 September 2021",
+        "Rate": "15.42"}, {"Date": "27 September 2021", "Rate": "15.39"}, {"Date":
+        "26 September 2021", "Rate": "15.39"}, {"Date": "23 September 2021", "Rate":
+        "15.40"}, {"Date": "22 September 2021", "Rate": "15.42"}, {"Date": "21 September
+        2021", "Rate": "15.40"}, {"Date": "20 September 2021", "Rate": "15.39"}, {"Date":
+        "19 September 2021", "Rate": "15.32"}, {"Date": "16 September 2021", "Rate":
+        "15.39"}, {"Date": "15 September 2021", "Rate": "15.36"}, {"Date": "14 September
+        2021", "Rate": "15.40"}, {"Date": "13 September 2021", "Rate": "15.41"}, {"Date":
+        "12 September 2021", "Rate": "15.34"}, {"Date": "09 September 2021", "Rate":
+        "15.34"}, {"Date": "08 September 2021", "Rate": "15.40"}, {"Date": "07 September
+        2021", "Rate": "15.39"}, {"Date": "06 September 2021", "Rate": "15.28"}, {"Date":
+        "05 September 2021", "Rate": "15.31"}, {"Date": "02 September 2021", "Rate":
+        "15.35"}, {"Date": "01 September 2021", "Rate": "15.39"}, {"Date": "31 August
+        2021", "Rate": "15.41"}, {"Date": "30 August 2021", "Rate": "15.40"}, {"Date":
+        "29 August 2021", "Rate": "15.36"}, {"Date": "26 August 2021", "Rate": "15.28"},
+        {"Date": "25 August 2021", "Rate": "15.32"}, {"Date": "24 August 2021", "Rate":
+        "15.38"}, {"Date": "23 August 2021", "Rate": "15.41"}, {"Date": "22 August
+        2021", "Rate": "15.30"}, {"Date": "19 August 2021", "Rate": "15.37"}, {"Date":
+        "18 August 2021", "Rate": "15.38"}, {"Date": "17 August 2021", "Rate": "15.38"},
+        {"Date": "16 August 2021", "Rate": "15.40"}, {"Date": "15 August 2021", "Rate":
+        "15.31"}, {"Date": "12 August 2021", "Rate": "15.32"}, {"Date": "11 August
+        2021", "Rate": "15.40"}, {"Date": "10 August 2021", "Rate": "15.40"}, {"Date":
+        "08 August 2021", "Rate": "15.36"}, {"Date": "05 August 2021", "Rate": "15.39"},
+        {"Date": "04 August 2021", "Rate": "15.33"}, {"Date": "03 August 2021", "Rate":
+        "15.41"}, {"Date": "02 August 2021", "Rate": "15.40"}, {"Date": "01 August
+        2021", "Rate": "15.39"}, {"Date": "27 July 2021", "Rate": "15.42"}, {"Date":
+        "21 July 2021", "Rate": "15.33"}, {"Date": "15 July 2021", "Rate": "15.37"},
+        {"Date": "14 July 2021", "Rate": "15.35"}, {"Date": "13 July 2021", "Rate":
+        "15.35"}, {"Date": "12 July 2021", "Rate": "15.40"}, {"Date": "11 July 2021",
+        "Rate": "15.22"}, {"Date": "08 July 2021", "Rate": "15.40"}, {"Date": "07
+        July 2021", "Rate": "15.41"}, {"Date": "06 July 2021", "Rate": "15.41"}, {"Date":
+        "05 July 2021", "Rate": "15.40"}, {"Date": "04 July 2021", "Rate": "15.41"},
+        {"Date": "01 July 2021", "Rate": "15.40"}, {"Date": "29 June 2021", "Rate":
+        "15.32"}, {"Date": "28 June 2021", "Rate": "15.34"}, {"Date": "24 June 2021",
+        "Rate": "15.39"}, {"Date": "22 June 2021", "Rate": "15.35"}, {"Date": "21
+        June 2021", "Rate": "15.34"}, {"Date": "17 June 2021", "Rate": "15.39"}, {"Date":
+        "15 June 2021", "Rate": "15.39"}, {"Date": "14 June 2021", "Rate": "15.33"},
+        {"Date": "10 June 2021", "Rate": "15.37"}, {"Date": "08 June 2021", "Rate":
+        "15.37"}, {"Date": "07 June 2021", "Rate": "15.28"}, {"Date": "03 June 2021",
+        "Rate": "15.38"}, {"Date": "01 June 2021", "Rate": "15.40"}, {"Date": "31
+        May 2021", "Rate": "15.30"}, {"Date": "27 May 2021", "Rate": "15.41"}, {"Date":
+        "25 May 2021", "Rate": "15.36"}, {"Date": "24 May 2021", "Rate": "15.39"},
+        {"Date": "20 May 2021", "Rate": "15.40"}, {"Date": "18 May 2021", "Rate":
+        "15.34"}, {"Date": "17 May 2021", "Rate": "15.39"}, {"Date": "12 May 2021",
+        "Rate": "15.27"}, {"Date": "10 May 2021", "Rate": "15.35"}, {"Date": "05 May
+        2021", "Rate": "15.37"}, {"Date": "04 May 2021", "Rate": "15.41"}, {"Date":
+        "03 May 2021", "Rate": "15.38"}, {"Date": "02 May 2021", "Rate": "15.38"},
+        {"Date": "29 April 2021", "Rate": "15.34"}, {"Date": "28 April 2021", "Rate":
+        "15.34"}, {"Date": "27 April 2021", "Rate": "15.39"}, {"Date": "26 April 2021",
+        "Rate": "15.29"}, {"Date": "25 April 2021", "Rate": "15.34"}, {"Date": "22
+        April 2021", "Rate": "15.36"}, {"Date": "21 April 2021", "Rate": "15.36"},
+        {"Date": "20 April 2021", "Rate": "15.40"}, {"Date": "19 April 2021", "Rate":
+        "15.39"}, {"Date": "18 April 2021", "Rate": "15.40"}, {"Date": "15 April 2021",
+        "Rate": "15.31"}, {"Date": "14 April 2021", "Rate": "15.37"}, {"Date": "08
+        April 2021", "Rate": "15.35"}, {"Date": "07 April 2021", "Rate": "15.38"},
+        {"Date": "06 April 2021", "Rate": "15.40"}, {"Date": "05 April 2021", "Rate":
+        "15.37"}, {"Date": "04 April 2021", "Rate": "15.41"}, {"Date": "01 April 2021",
+        "Rate": "15.33"}, {"Date": "31 March 2021", "Rate": "15.35"}, {"Date": "30
+        March 2021", "Rate": "15.40"}, {"Date": "29 March 2021", "Rate": "15.36"},
+        {"Date": "28 March 2021", "Rate": "15.34"}, {"Date": "25 March 2021", "Rate":
+        "15.29"}, {"Date": "24 March 2021", "Rate": "15.35"}, {"Date": "23 March 2021",
+        "Rate": "15.41"}, {"Date": "22 March 2021", "Rate": "15.35"}, {"Date": "21
+        March 2021", "Rate": "15.41"}, {"Date": "18 March 2021", "Rate": "15.37"},
+        {"Date": "17 March 2021", "Rate": "15.36"}, {"Date": "16 March 2021", "Rate":
+        "15.39"}, {"Date": "15 March 2021", "Rate": "15.35"}, {"Date": "14 March 2021",
+        "Rate": "15.31"}, {"Date": "11 March 2021", "Rate": "15.31"}, {"Date": "10
+        March 2021", "Rate": "15.36"}, {"Date": "09 March 2021", "Rate": "15.40"},
+        {"Date": "08 March 2021", "Rate": "15.39"}, {"Date": "07 March 2021", "Rate":
+        "15.39"}, {"Date": "04 March 2021", "Rate": "15.39"}, {"Date": "03 March 2021",
+        "Rate": "15.40"}, {"Date": "02 March 2021", "Rate": "15.40"}, {"Date": "01
+        March 2021", "Rate": "15.39"}, {"Date": "28 February 2021", "Rate": "15.33"},
+        {"Date": "25 February 2021", "Rate": "15.38"}, {"Date": "24 February 2021",
+        "Rate": "15.41"}, {"Date": "23 February 2021", "Rate": "15.41"}, {"Date":
+        "22 February 2021", "Rate": "15.40"}, {"Date": "21 February 2021", "Rate":
+        "15.36"}, {"Date": "18 February 2021", "Rate": "15.39"}, {"Date": "17 February
+        2021", "Rate": "15.39"}, {"Date": "16 February 2021", "Rate": "15.41"}, {"Date":
+        "15 February 2021", "Rate": "15.35"}, {"Date": "14 February 2021", "Rate":
+        "15.40"}, {"Date": "11 February 2021", "Rate": "15.39"}, {"Date": "10 February
+        2021", "Rate": "15.41"}, {"Date": "09 February 2021", "Rate": "15.42"}, {"Date":
+        "09 February 2021", "Rate": "15.42"}, {"Date": "08 February 2021", "Rate":
+        "15.37"}, {"Date": "08 February 2021", "Rate": "15.37"}, {"Date": "07 February
+        2021", "Rate": "15.38"}, {"Date": "03 February 2021", "Rate": "15.30"}, {"Date":
+        "02 February 2021", "Rate": "15.42"}, {"Date": "01 February 2021", "Rate":
+        "15.38"}, {"Date": "31 January 2021", "Rate": "15.42"}, {"Date": "28 January
+        2021", "Rate": "15.35"}, {"Date": "27 January 2021", "Rate": "15.39"}, {"Date":
+        "26 January 2021", "Rate": "15.41"}, {"Date": "25 January 2021", "Rate": "15.36"},
+        {"Date": "24 January 2021", "Rate": "15.41"}, {"Date": "21 January 2021",
+        "Rate": "15.35"}, {"Date": "20 January 2021", "Rate": "15.39"}, {"Date": "19
+        January 2021", "Rate": "15.41"}, {"Date": "18 January 2021", "Rate": "15.31"},
+        {"Date": "17 January 2021", "Rate": "15.39"}, {"Date": "14 January 2021",
+        "Rate": "15.34"}, {"Date": "13 January 2021", "Rate": "15.37"}, {"Date": "12
+        January 2021", "Rate": "15.40"}, {"Date": "11 January 2021", "Rate": "15.22"},
+        {"Date": "10 January 2021", "Rate": "15.39"}, {"Date": "07 January 2021",
+        "Rate": "15.34"}, {"Date": "06 January 2021", "Rate": "15.40"}, {"Date": "05
+        January 2021", "Rate": "15.42"}, {"Date": "04 January 2021", "Rate": "15.38"},
+        {"Date": "03 January 2021", "Rate": "15.41"}, {"Date": "30 December 2020",
+        "Rate": "15.41"}, {"Date": "29 December 2020", "Rate": "15.39"}, {"Date":
+        "28 December 2020", "Rate": "15.40"}, {"Date": "27 December 2020", "Rate":
+        "15.32"}, {"Date": "24 December 2020", "Rate": "15.42"}, {"Date": "23 December
+        2020", "Rate": "15.39"}, {"Date": "22 December 2020", "Rate": "15.40"}, {"Date":
+        "21 December 2020", "Rate": "15.38"}, {"Date": "20 December 2020", "Rate":
+        "15.40"}, {"Date": "17 December 2020", "Rate": "15.38"}, {"Date": "16 December
+        2020", "Rate": "15.39"}, {"Date": "15 December 2020", "Rate": "15.42"}, {"Date":
+        "14 December 2020", "Rate": "15.40"}, {"Date": "13 December 2020", "Rate":
+        "15.40"}, {"Date": "10 December 2020", "Rate": "15.35"}, {"Date": "09 December
+        2020", "Rate": "15.41"}, {"Date": "08 December 2020", "Rate": "15.39"}, {"Date":
+        "07 December 2020", "Rate": "15.41"}, {"Date": "06 December 2020", "Rate":
+        "15.32"}, {"Date": "03 December 2020", "Rate": "15.41"}, {"Date": "02 December
+        2020", "Rate": "15.40"}, {"Date": "01 December 2020", "Rate": "15.41"}, {"Date":
+        "30 November 2020", "Rate": "15.36"}, {"Date": "29 November 2020", "Rate":
+        "15.40"}, {"Date": "26 November 2020", "Rate": "15.41"}, {"Date": "25 November
+        2020", "Rate": "15.42"}, {"Date": "24 November 2020", "Rate": "15.42"}, {"Date":
+        "23 November 2020", "Rate": "15.34"}, {"Date": "22 November 2020", "Rate":
+        "15.41"}, {"Date": "19 November 2020", "Rate": "15.39"}, {"Date": "18 November
+        2020", "Rate": "15.42"}, {"Date": "16 November 2020", "Rate": "15.41"}, {"Date":
+        "15 November 2020", "Rate": "15.40"}, {"Date": "10 November 2020", "Rate":
+        "15.42"}, {"Date": "09 November 2020", "Rate": "15.41"}, {"Date": "08 November
+        2020", "Rate": "15.40"}, {"Date": "05 November 2020", "Rate": "15.28"}, {"Date":
+        "04 November 2020", "Rate": "15.38"}, {"Date": "02 November 2020", "Rate":
+        "15.41"}, {"Date": "01 November 2020", "Rate": "15.29"}, {"Date": "28 October
+        2020", "Rate": "15.37"}, {"Date": "27 October 2020", "Rate": "15.42"}, {"Date":
+        "26 October 2020", "Rate": "15.34"}, {"Date": "25 October 2020", "Rate": "15.42"},
+        {"Date": "22 October 2020", "Rate": "15.38"}, {"Date": "21 October 2020",
+        "Rate": "15.42"}, {"Date": "20 October 2020", "Rate": "15.40"}, {"Date": "19
+        October 2020", "Rate": "15.37"}, {"Date": "15 October 2020", "Rate": "15.39"},
+        {"Date": "14 October 2020", "Rate": "15.40"}, {"Date": "13 October 2020",
+        "Rate": "15.39"}, {"Date": "12 October 2020", "Rate": "15.40"}, {"Date": "11
+        October 2020", "Rate": "15.32"}, {"Date": "08 October 2020", "Rate": "15.29"},
+        {"Date": "07 October 2020", "Rate": "15.39"}, {"Date": "06 October 2020",
+        "Rate": "15.41"}, {"Date": "05 October 2020", "Rate": "15.39"}, {"Date": "04
+        October 2020", "Rate": "15.34"}, {"Date": "01 October 2020", "Rate": "15.33"},
+        {"Date": "30 September 2020", "Rate": "15.40"}, {"Date": "29 September 2020",
+        "Rate": "15.42"}, {"Date": "28 September 2020", "Rate": "15.40"}, {"Date":
+        "27 September 2020", "Rate": "15.36"}, {"Date": "24 September 2020", "Rate":
+        "15.33"}, {"Date": "23 September 2020", "Rate": "15.37"}, {"Date": "22 September
+        2020", "Rate": "15.42"}, {"Date": "21 September 2020", "Rate": "15.38"}, {"Date":
+        "20 September 2020", "Rate": "15.42"}, {"Date": "17 September 2020", "Rate":
+        "15.36"}, {"Date": "16 September 2020", "Rate": "15.37"}, {"Date": "15 September
+        2020", "Rate": "15.42"}, {"Date": "14 September 2020", "Rate": "15.29"}, {"Date":
+        "13 September 2020", "Rate": "15.38"}, {"Date": "10 September 2020", "Rate":
+        "15.38"}, {"Date": "09 September 2020", "Rate": "15.38"}, {"Date": "08 September
+        2020", "Rate": "15.41"}, {"Date": "07 September 2020", "Rate": "15.39"}, {"Date":
+        "06 September 2020", "Rate": "15.35"}, {"Date": "03 September 2020", "Rate":
+        "15.41"}, {"Date": "02 September 2020", "Rate": "15.39"}, {"Date": "01 September
+        2020", "Rate": "15.41"}, {"Date": "31 August 2020", "Rate": "15.40"}, {"Date":
+        "30 August 2020", "Rate": "15.39"}, {"Date": "26 August 2020", "Rate": "15.37"},
+        {"Date": "25 August 2020", "Rate": "15.41"}, {"Date": "24 August 2020", "Rate":
+        "15.41"}, {"Date": "23 August 2020", "Rate": "15.35"}, {"Date": "19 August
+        2020", "Rate": "15.40"}, {"Date": "18 August 2020", "Rate": "15.39"}, {"Date":
+        "17 August 2020", "Rate": "15.38"}, {"Date": "16 August 2020", "Rate": "15.32"},
+        {"Date": "13 August 2020", "Rate": "15.35"}, {"Date": "12 August 2020", "Rate":
+        "15.39"}, {"Date": "11 August 2020", "Rate": "15.40"}, {"Date": "10 August
+        2020", "Rate": "15.36"}, {"Date": "09 August 2020", "Rate": "15.41"}, {"Date":
+        "04 August 2020", "Rate": "15.28"}, {"Date": "29 July 2020", "Rate": "15.41"},
+        {"Date": "23 July 2020", "Rate": "15.39"}, {"Date": "22 July 2020", "Rate":
+        "15.36"}, {"Date": "21 July 2020", "Rate": "15.40"}, {"Date": "20 July 2020",
+        "Rate": "15.38"}, {"Date": "19 July 2020", "Rate": "15.33"}, {"Date": "14
+        April 2020", "Rate": "15.41"}, {"Date": "13 April 2020", "Rate": "15.33"},
+        {"Date": "09 April 2020", "Rate": "15.39"}, {"Date": "07 April 2020", "Rate":
+        "15.41"}, {"Date": "06 April 2020", "Rate": "15.37"}, {"Date": "02 April 2020",
+        "Rate": "15.38"}, {"Date": "30 March 2020", "Rate": "15.31"}, {"Date": "26
+        March 2020", "Rate": "15.42"}, {"Date": "23 March 2020", "Rate": "15.38"},
+        {"Date": "19 March 2020", "Rate": "15.37"}, {"Date": "18 March 2020", "Rate":
+        "15.32"}, {"Date": "17 March 2020", "Rate": "15.40"}, {"Date": "16 March 2020",
+        "Rate": "15.36"}, {"Date": "15 March 2020", "Rate": "15.36"}, {"Date": "12
+        March 2020", "Rate": "15.38"}, {"Date": "11 March 2020", "Rate": "15.37"},
+        {"Date": "10 March 2020", "Rate": "15.39"}, {"Date": "09 March 2020", "Rate":
+        "15.37"}, {"Date": "08 March 2020", "Rate": "15.39"}, {"Date": "05 March 2020",
+        "Rate": "15.32"}, {"Date": "04 March 2020", "Rate": "15.38"}, {"Date": "03
+        March 2020", "Rate": "15.40"}, {"Date": "02 March 2020", "Rate": "15.38"},
+        {"Date": "01 March 2020", "Rate": "15.41"}, {"Date": "27 February 2020", "Rate":
+        "15.34"}, {"Date": "26 February 2020", "Rate": "15.34"}, {"Date": "25 February
+        2020", "Rate": "15.41"}, {"Date": "24 February 2020", "Rate": "15.38"}, {"Date":
+        "23 February 2020", "Rate": "15.38"}, {"Date": "20 February 2020", "Rate":
+        "15.37"}, {"Date": "19 February 2020", "Rate": "15.38"}, {"Date": "18 February
+        2020", "Rate": "15.40"}, {"Date": "17 February 2020", "Rate": "15.39"}, {"Date":
+        "16 February 2020", "Rate": "15.40"}, {"Date": "13 February 2020", "Rate":
+        "15.37"}, {"Date": "12 February 2020", "Rate": "15.34"}, {"Date": "11 February
+        2020", "Rate": "15.40"}, {"Date": "10 February 2020", "Rate": "15.27"}, {"Date":
+        "09 February 2020", "Rate": "15.37"}, {"Date": "06 February 2020", "Rate":
+        "15.35"}, {"Date": "05 February 2020", "Rate": "15.41"}, {"Date": "04 February
+        2020", "Rate": "15.39"}, {"Date": "02 February 2020", "Rate": "15.40"}, {"Date":
+        "30 January 2020", "Rate": "15.35"}, {"Date": "29 January 2020", "Rate": "15.38"},
+        {"Date": "28 January 2020", "Rate": "15.41"}, {"Date": "27 January 2020",
+        "Rate": "15.41"}, {"Date": "26 January 2020", "Rate": "15.40"}, {"Date": "23
+        January 2020", "Rate": "15.40"}, {"Date": "22 January 2020", "Rate": "15.38"},
+        {"Date": "21 January 2020", "Rate": "15.40"}, {"Date": "20 January 2020",
+        "Rate": "15.33"}, {"Date": "19 January 2020", "Rate": "15.37"}, {"Date": "16
+        January 2020", "Rate": "15.37"}, {"Date": "15 January 2020", "Rate": "15.37"},
+        {"Date": "14 January 2020", "Rate": "15.41"}, {"Date": "13 January 2020",
+        "Rate": "15.35"}, {"Date": "12 January 2020", "Rate": "15.37"}, {"Date": "09
+        January 2020", "Rate": "15.31"}, {"Date": "08 January 2020", "Rate": "15.34"},
+        {"Date": "07 January 2020", "Rate": "15.40"}, {"Date": "06 January 2020",
+        "Rate": "15.39"}, {"Date": "05 January 2020", "Rate": "15.41"}, {"Date": "30
+        December 2019", "Rate": "15.38"}, {"Date": "29 December 2019", "Rate": "15.36"},
+        {"Date": "26 December 2019", "Rate": "15.36"}, {"Date": "25 December 2019",
+        "Rate": "15.40"}, {"Date": "24 December 2019", "Rate": "15.42"}, {"Date":
+        "23 December 2019", "Rate": "15.38"}, {"Date": "22 December 2019", "Rate":
+        "15.41"}, {"Date": "19 December 2019", "Rate": "15.34"}, {"Date": "18 December
+        2019", "Rate": "15.40"}, {"Date": "17 December 2019", "Rate": "15.41"}, {"Date":
+        "16 December 2019", "Rate": "15.39"}, {"Date": "15 December 2019", "Rate":
+        "15.39"}, {"Date": "12 December 2019", "Rate": "15.39"}, {"Date": "11 December
+        2019", "Rate": "15.39"}, {"Date": "10 December 2019", "Rate": "15.38"}, {"Date":
+        "09 December 2019", "Rate": "15.37"}, {"Date": "08 December 2019", "Rate":
+        "15.42"}, {"Date": "05 December 2019", "Rate": "15.38"}, {"Date": "04 December
+        2019", "Rate": "15.40"}, {"Date": "03 December 2019", "Rate": "15.41"}, {"Date":
+        "02 December 2019", "Rate": "15.39"}, {"Date": "01 December 2019", "Rate":
+        "15.41"}, {"Date": "28 November 2019", "Rate": "15.38"}, {"Date": "27 November
+        2019", "Rate": "15.39"}, {"Date": "26 November 2019", "Rate": "15.41"}, {"Date":
+        "25 November 2019", "Rate": "15.37"}, {"Date": "24 November 2019", "Rate":
+        "15.38"}, {"Date": "21 November 2019", "Rate": "15.39"}, {"Date": "20 November
+        2019", "Rate": "15.39"}, {"Date": "19 November 2019", "Rate": "15.40"}, {"Date":
+        "18 November 2019", "Rate": "15.40"}, {"Date": "17 November 2019", "Rate":
+        "15.40"}, {"Date": "14 November 2019", "Rate": "15.40"}, {"Date": "13 November
+        2019", "Rate": "15.38"}, {"Date": "12 November 2019", "Rate": "15.40"}, {"Date":
+        "07 November 2019", "Rate": "15.32"}, {"Date": "06 November 2019", "Rate":
+        "15.40"}, {"Date": "05 November 2019", "Rate": "15.39"}, {"Date": "04 November
+        2019", "Rate": "15.39"}, {"Date": "31 October 2019", "Rate": "15.40"}, {"Date":
+        "30 October 2019", "Rate": "15.40"}, {"Date": "28 October 2019", "Rate": "15.39"},
+        {"Date": "27 October 2019", "Rate": "15.42"}, {"Date": "24 October 2019",
+        "Rate": "15.39"}, {"Date": "23 October 2019", "Rate": "15.38"}, {"Date": "22
+        October 2019", "Rate": "15.41"}, {"Date": "21 October 2019", "Rate": "15.41"},
+        {"Date": "20 October 2019", "Rate": "15.38"}, {"Date": "17 October 2019",
+        "Rate": "15.38"}, {"Date": "16 October 2019", "Rate": "15.39"}, {"Date": "15
+        October 2019", "Rate": "15.41"}, {"Date": "14 October 2019", "Rate": "15.34"},
+        {"Date": "13 October 2019", "Rate": "15.39"}, {"Date": "10 October 2019",
+        "Rate": "15.39"}, {"Date": "09 October 2019", "Rate": "15.39"}, {"Date": "08
+        October 2019", "Rate": "15.41"}, {"Date": "07 October 2019", "Rate": "15.35"},
+        {"Date": "06 October 2019", "Rate": "15.41"}, {"Date": "03 October 2019",
+        "Rate": "15.35"}, {"Date": "02 October 2019", "Rate": "15.40"}, {"Date": "01
+        October 2019", "Rate": "15.41"}, {"Date": "30 September 2019", "Rate": "15.37"},
+        {"Date": "29 September 2019", "Rate": "15.40"}, {"Date": "26 September 2019",
+        "Rate": "15.40"}, {"Date": "25 September 2019", "Rate": "15.39"}, {"Date":
+        "24 September 2019", "Rate": "15.41"}, {"Date": "23 September 2019", "Rate":
+        "15.40"}, {"Date": "22 September 2019", "Rate": "15.38"}, {"Date": "19 September
+        2019", "Rate": "15.34"}, {"Date": "18 September 2019", "Rate": "15.39"}, {"Date":
+        "17 September 2019", "Rate": "15.41"}, {"Date": "16 September 2019", "Rate":
+        "15.35"}, {"Date": "15 September 2019", "Rate": "15.40"}, {"Date": "12 September
+        2019", "Rate": "15.31"}, {"Date": "11 September 2019", "Rate": "15.37"}, {"Date":
+        "10 September 2019", "Rate": "15.40"}, {"Date": "09 September 2019", "Rate":
+        "15.40"}, {"Date": "08 September 2019", "Rate": "15.38"}, {"Date": "05 September
+        2019", "Rate": "15.40"}, {"Date": "04 September 2019", "Rate": "15.38"}, {"Date":
+        "03 September 2019", "Rate": "15.41"}, {"Date": "02 September 2019", "Rate":
+        "15.36"}, {"Date": "01 September 2019", "Rate": "15.41"}, {"Date": "29 August
+        2019", "Rate": "15.27"}, {"Date": "28 August 2019", "Rate": "15.38"}, {"Date":
+        "27 August 2019", "Rate": "15.40"}, {"Date": "26 August 2019", "Rate": "15.36"},
+        {"Date": "25 August 2019", "Rate": "15.35"}, {"Date": "22 August 2019", "Rate":
+        "15.34"}, {"Date": "21 August 2019", "Rate": "15.38"}, {"Date": "20 August
+        2019", "Rate": "15.41"}, {"Date": "19 August 2019", "Rate": "15.38"}, {"Date":
+        "18 August 2019", "Rate": "15.38"}, {"Date": "14 August 2019", "Rate": "15.39"},
+        {"Date": "08 August 2019", "Rate": "15.36"}, {"Date": "07 August 2019", "Rate":
+        "15.37"}, {"Date": "06 August 2019", "Rate": "15.40"}, {"Date": "05 August
+        2019", "Rate": "15.35"}, {"Date": "04 August 2019", "Rate": "15.39"}, {"Date":
+        "01 August 2019", "Rate": "15.38"}, {"Date": "31 July 2019", "Rate": "15.37"},
+        {"Date": "30 July 2019", "Rate": "15.36"}, {"Date": "29 July 2019", "Rate":
+        "15.36"}, {"Date": "25 July 2019", "Rate": "15.40"}, {"Date": "24 July 2019",
+        "Rate": "15.40"}, {"Date": "23 July 2019", "Rate": "15.41"}, {"Date": "22
+        July 2019", "Rate": "15.38"}, {"Date": "21 July 2019", "Rate": "15.39"}, {"Date":
+        "18 July 2019", "Rate": "15.39"}, {"Date": "17 July 2019", "Rate": "15.36"},
+        {"Date": "16 July 2019", "Rate": "15.41"}, {"Date": "15 July 2019", "Rate":
+        "15.33"}, {"Date": "14 July 2019", "Rate": "15.39"}, {"Date": "11 July 2019",
+        "Rate": "15.33"}, {"Date": "10 July 2019", "Rate": "15.37"}, {"Date": "09
+        July 2019", "Rate": "15.40"}, {"Date": "08 July 2019", "Rate": "15.36"}, {"Date":
+        "07 July 2019", "Rate": "15.41"}, {"Date": "04 July 2019", "Rate": "15.35"},
+        {"Date": "03 July 2019", "Rate": "15.40"}, {"Date": "02 July 2019", "Rate":
+        "15.41"}, {"Date": "01 July 2019", "Rate": "15.38"}, {"Date": "30 June 2019",
+        "Rate": "15.41"}, {"Date": "27 June 2019", "Rate": "15.40"}, {"Date": "26
+        June 2019", "Rate": "15.40"}, {"Date": "25 June 2019", "Rate": "15.41"}, {"Date":
+        "24 June 2019", "Rate": "15.36"}, {"Date": "23 June 2019", "Rate": "15.39"},
+        {"Date": "20 June 2019", "Rate": "15.39"}, {"Date": "19 June 2019", "Rate":
+        "15.38"}, {"Date": "18 June 2019", "Rate": "15.41"}, {"Date": "17 June 2019",
+        "Rate": "15.39"}, {"Date": "16 June 2019", "Rate": "15.36"}, {"Date": "13
+        June 2019", "Rate": "15.37"}, {"Date": "12 June 2019", "Rate": "15.38"}, {"Date":
+        "11 June 2019", "Rate": "15.40"}, {"Date": "10 June 2019", "Rate": "15.40"},
+        {"Date": "09 June 2019", "Rate": "15.42"}, {"Date": "03 June 2019", "Rate":
+        "15.40"}, {"Date": "02 June 2019", "Rate": "15.42"}, {"Date": "30 May 2019",
+        "Rate": "15.41"}, {"Date": "29 May 2019", "Rate": "15.38"}, {"Date": "28 May
+        2019", "Rate": "15.41"}, {"Date": "27 May 2019", "Rate": "15.39"}, {"Date":
+        "26 May 2019", "Rate": "15.41"}, {"Date": "23 May 2019", "Rate": "15.41"},
+        {"Date": "22 May 2019", "Rate": "15.39"}, {"Date": "21 May 2019", "Rate":
+        "15.41"}, {"Date": "20 May 2019", "Rate": "15.39"}, {"Date": "19 May 2019",
+        "Rate": "15.40"}, {"Date": "16 May 2019", "Rate": "15.37"}, {"Date": "15 May
+        2019", "Rate": "15.40"}, {"Date": "14 May 2019", "Rate": "15.41"}, {"Date":
+        "13 May 2019", "Rate": "15.37"}, {"Date": "12 May 2019", "Rate": "15.39"},
+        {"Date": "09 May 2019", "Rate": "15.40"}, {"Date": "08 May 2019", "Rate":
+        "15.39"}, {"Date": "07 May 2019", "Rate": "15.38"}, {"Date": "02 May 2019",
+        "Rate": "15.38"}, {"Date": "30 April 2019", "Rate": "15.41"}, {"Date": "29
+        April 2019", "Rate": "15.39"}, {"Date": "28 April 2019", "Rate": "15.42"},
+        {"Date": "25 April 2019", "Rate": "15.40"}, {"Date": "24 April 2019", "Rate":
+        "15.37"}, {"Date": "23 April 2019", "Rate": "15.41"}, {"Date": "22 April 2019",
+        "Rate": "15.39"}, {"Date": "21 April 2019", "Rate": "15.40"}, {"Date": "18
+        April 2019", "Rate": "15.37"}, {"Date": "17 April 2019", "Rate": "15.39"},
+        {"Date": "16 April 2019", "Rate": "15.41"}, {"Date": "15 April 2019", "Rate":
+        "15.33"}, {"Date": "14 April 2019", "Rate": "15.37"}, {"Date": "11 April 2019",
+        "Rate": "15.39"}, {"Date": "10 April 2019", "Rate": "15.40"}, {"Date": "09
+        April 2019", "Rate": "15.40"}, {"Date": "08 April 2019", "Rate": "15.39"},
+        {"Date": "04 April 2019", "Rate": "15.40"}, {"Date": "03 April 2019", "Rate":
+        "15.39"}, {"Date": "02 April 2019", "Rate": "15.40"}, {"Date": "01 April 2019",
+        "Rate": "15.41"}, {"Date": "31 March 2019", "Rate": "15.38"}, {"Date": "28
+        March 2019", "Rate": "15.39"}, {"Date": "27 March 2019", "Rate": "15.38"},
+        {"Date": "26 March 2019", "Rate": "15.41"}, {"Date": "25 March 2019", "Rate":
+        "15.27"}, {"Date": "24 March 2019", "Rate": "15.41"}, {"Date": "21 March 2019",
+        "Rate": "15.39"}, {"Date": "20 March 2019", "Rate": "15.40"}, {"Date": "19
+        March 2019", "Rate": "15.41"}, {"Date": "18 March 2019", "Rate": "15.36"},
+        {"Date": "17 March 2019", "Rate": "15.40"}, {"Date": "14 March 2019", "Rate":
+        "15.37"}, {"Date": "13 March 2019", "Rate": "15.37"}, {"Date": "12 March 2019",
+        "Rate": "15.39"}, {"Date": "11 March 2019", "Rate": "15.37"}, {"Date": "10
+        March 2019", "Rate": "15.35"}, {"Date": "07 March 2019", "Rate": "15.39"},
+        {"Date": "06 March 2019", "Rate": "15.37"}, {"Date": "05 March 2019", "Rate":
+        "15.41"}, {"Date": "04 March 2019", "Rate": "15.39"}, {"Date": "03 March 2019",
+        "Rate": "15.40"}, {"Date": "28 February 2019", "Rate": "15.39"}, {"Date":
+        "27 February 2019", "Rate": "15.36"}, {"Date": "26 February 2019", "Rate":
+        "15.41"}, {"Date": "25 February 2019", "Rate": "15.36"}, {"Date": "24 February
+        2019", "Rate": "15.39"}, {"Date": "21 February 2019", "Rate": "15.36"}, {"Date":
+        "20 February 2019", "Rate": "15.38"}, {"Date": "19 February 2019", "Rate":
+        "15.40"}, {"Date": "18 February 2019", "Rate": "15.37"}, {"Date": "17 February
+        2019", "Rate": "15.40"}, {"Date": "14 February 2019", "Rate": "15.39"}, {"Date":
+        "13 February 2019", "Rate": "15.37"}, {"Date": "12 February 2019", "Rate":
+        "15.40"}, {"Date": "11 February 2019", "Rate": "15.36"}, {"Date": "10 February
+        2019", "Rate": "15.36"}, {"Date": "06 February 2019", "Rate": "15.33"}, {"Date":
+        "05 February 2019", "Rate": "15.34"}, {"Date": "04 February 2019", "Rate":
+        "15.41"}, {"Date": "03 February 2019", "Rate": "15.37"}, {"Date": "31 January
+        2019", "Rate": "15.39"}, {"Date": "30 January 2019", "Rate": "15.35"}, {"Date":
+        "29 January 2019", "Rate": "15.38"}, {"Date": "28 January 2019", "Rate": "15.39"},
+        {"Date": "27 January 2019", "Rate": "15.40"}, {"Date": "24 January 2019",
+        "Rate": "15.36"}, {"Date": "23 January 2019", "Rate": "15.40"}, {"Date": "22
+        January 2019", "Rate": "15.39"}, {"Date": "21 January 2019", "Rate": "15.40"},
+        {"Date": "20 January 2019", "Rate": "15.40"}, {"Date": "17 January 2019",
+        "Rate": "15.40"}, {"Date": "16 January 2019", "Rate": "15.38"}, {"Date": "15
+        January 2019", "Rate": "15.39"}, {"Date": "14 January 2019", "Rate": "15.40"},
+        {"Date": "13 January 2019", "Rate": "15.31"}, {"Date": "10 January 2019",
+        "Rate": "15.38"}, {"Date": "09 January 2019", "Rate": "15.37"}, {"Date": "08
+        January 2019", "Rate": "15.41"}, {"Date": "07 January 2019", "Rate": "15.38"},
+        {"Date": "06 January 2019", "Rate": "15.36"}, {"Date": "03 January 2019",
+        "Rate": "15.41"}, {"Date": "02 January 2019", "Rate": "15.38"}, {"Date": "30
+        December 2018", "Rate": "15.41"}, {"Date": "27 December 2018", "Rate": "15.32"},
+        {"Date": "26 December 2018", "Rate": "15.39"}, {"Date": "25 December 2018",
+        "Rate": "15.41"}, {"Date": "24 December 2018", "Rate": "15.39"}, {"Date":
+        "23 December 2018", "Rate": "15.40"}, {"Date": "20 December 2018", "Rate":
+        "15.37"}, {"Date": "19 December 2018", "Rate": "15.38"}, {"Date": "18 December
+        2018", "Rate": "15.40"}, {"Date": "17 December 2018", "Rate": "15.40"}, {"Date":
+        "16 December 2018", "Rate": "15.40"}, {"Date": "13 December 2018", "Rate":
+        "15.33"}, {"Date": "12 December 2018", "Rate": "15.40"}, {"Date": "11 December
+        2018", "Rate": "15.36"}, {"Date": "10 December 2018", "Rate": "15.40"}, {"Date":
+        "06 December 2018", "Rate": "15.38"}, {"Date": "05 December 2018", "Rate":
+        "15.36"}, {"Date": "04 December 2018", "Rate": "15.40"}, {"Date": "03 December
+        2018", "Rate": "15.41"}, {"Date": "02 December 2018", "Rate": "15.39"}, {"Date":
+        "29 November 2018", "Rate": "15.41"}, {"Date": "28 November 2018", "Rate":
+        "15.39"}, {"Date": "27 November 2018", "Rate": "15.41"}, {"Date": "26 November
+        2018", "Rate": "15.35"}, {"Date": "25 November 2018", "Rate": "15.39"}, {"Date":
+        "22 November 2018", "Rate": "15.36"}, {"Date": "21 November 2018", "Rate":
+        "15.38"}, {"Date": "19 November 2018", "Rate": "15.39"}, {"Date": "15 November
+        2018", "Rate": "15.35"}, {"Date": "14 November 2018", "Rate": "15.41"}, {"Date":
+        "13 November 2018", "Rate": "15.41"}, {"Date": "12 November 2018", "Rate":
+        "15.36"}, {"Date": "08 November 2018", "Rate": "15.39"}, {"Date": "07 November
+        2018", "Rate": "15.39"}, {"Date": "06 November 2018", "Rate": "15.41"}, {"Date":
+        "05 November 2018", "Rate": "15.39"}, {"Date": "04 November 2018", "Rate":
+        "15.39"}, {"Date": "01 November 2018", "Rate": "15.41"}, {"Date": "31 October
+        2018", "Rate": "15.40"}, {"Date": "30 October 2018", "Rate": "15.42"}, {"Date":
+        "29 October 2018", "Rate": "15.40"}, {"Date": "28 October 2018", "Rate": "15.40"},
+        {"Date": "25 October 2018", "Rate": "15.39"}, {"Date": "24 October 2018",
+        "Rate": "15.38"}, {"Date": "23 October 2018", "Rate": "15.42"}, {"Date": "22
+        October 2018", "Rate": "15.37"}, {"Date": "21 October 2018", "Rate": "15.38"},
+        {"Date": "18 October 2018", "Rate": "15.39"}, {"Date": "17 October 2018",
+        "Rate": "15.40"}, {"Date": "16 October 2018", "Rate": "15.41"}, {"Date": "15
+        October 2018", "Rate": "15.39"}, {"Date": "14 October 2018", "Rate": "15.40"},
+        {"Date": "11 October 2018", "Rate": "15.39"}, {"Date": "10 October 2018",
+        "Rate": "15.38"}, {"Date": "09 October 2018", "Rate": "15.41"}, {"Date": "08
+        October 2018", "Rate": "15.38"}, {"Date": "07 October 2018", "Rate": "15.40"},
+        {"Date": "04 October 2018", "Rate": "15.37"}, {"Date": "03 October 2018",
+        "Rate": "15.40"}, {"Date": "02 October 2018", "Rate": "15.42"}, {"Date": "01
+        October 2018", "Rate": "15.39"}, {"Date": "30 September 2018", "Rate": "15.40"},
+        {"Date": "27 September 2018", "Rate": "15.38"}, {"Date": "26 September 2018",
+        "Rate": "15.42"}, {"Date": "25 September 2018", "Rate": "15.37"}, {"Date":
+        "24 September 2018", "Rate": "15.41"}, {"Date": "20 September 2018", "Rate":
+        "15.39"}, {"Date": "19 September 2018", "Rate": "15.41"}, {"Date": "17 September
+        2018", "Rate": "15.39"}, {"Date": "16 September 2018", "Rate": "15.40"}, {"Date":
+        "13 September 2018", "Rate": "15.41"}, {"Date": "12 September 2018", "Rate":
+        "15.42"}, {"Date": "10 September 2018", "Rate": "15.39"}, {"Date": "09 September
+        2018", "Rate": "15.40"}, {"Date": "06 September 2018", "Rate": "15.38"}, {"Date":
+        "05 September 2018", "Rate": "15.40"}, {"Date": "04 September 2018", "Rate":
+        "15.42"}, {"Date": "03 September 2018", "Rate": "15.39"}, {"Date": "02 September
+        2018", "Rate": "15.41"}, {"Date": "30 August 2018", "Rate": "15.41"}, {"Date":
+        "29 August 2018", "Rate": "15.39"}, {"Date": "28 August 2018", "Rate": "15.41"},
+        {"Date": "27 August 2018", "Rate": "15.36"}, {"Date": "26 August 2018", "Rate":
+        "15.40"}, {"Date": "22 August 2018", "Rate": "15.41"}, {"Date": "16 August
+        2018", "Rate": "15.37"}, {"Date": "15 August 2018", "Rate": "15.40"}, {"Date":
+        "14 August 2018", "Rate": "15.42"}, {"Date": "13 August 2018", "Rate": "15.39"},
+        {"Date": "12 August 2018", "Rate": "15.40"}, {"Date": "09 August 2018", "Rate":
+        "15.38"}, {"Date": "08 August 2018", "Rate": "15.39"}, {"Date": "07 August
+        2018", "Rate": "15.42"}, {"Date": "06 August 2018", "Rate": "15.37"}, {"Date":
+        "05 August 2018", "Rate": "15.40"}, {"Date": "02 August 2018", "Rate": "15.41"},
+        {"Date": "01 August 2018", "Rate": "15.42"}, {"Date": "31 July 2018", "Rate":
+        "15.41"}, {"Date": "30 July 2018", "Rate": "15.38"}, {"Date": "25 July 2018",
+        "Rate": "15.41"}, {"Date": "24 July 2018", "Rate": "15.42"}, {"Date": "23
+        July 2018", "Rate": "15.38"}, {"Date": "22 July 2018", "Rate": "15.41"}, {"Date":
+        "19 July 2018", "Rate": "15.41"}, {"Date": "18 July 2018", "Rate": "15.38"},
+        {"Date": "17 July 2018", "Rate": "15.41"}, {"Date": "16 July 2018", "Rate":
+        "15.40"}, {"Date": "15 July 2018", "Rate": "15.40"}, {"Date": "12 July 2018",
+        "Rate": "15.40"}, {"Date": "11 July 2018", "Rate": "15.40"}, {"Date": "10
+        July 2018", "Rate": "15.41"}, {"Date": "09 July 2018", "Rate": "15.40"}, {"Date":
+        "08 July 2018", "Rate": "15.40"}, {"Date": "05 July 2018", "Rate": "15.39"},
+        {"Date": "04 July 2018", "Rate": "15.40"}, {"Date": "03 July 2018", "Rate":
+        "15.42"}, {"Date": "02 July 2018", "Rate": "15.41"}, {"Date": "01 July 2018",
+        "Rate": "15.41"}, {"Date": "28 June 2018", "Rate": "15.40"}, {"Date": "27
+        June 2018", "Rate": "15.38"}, {"Date": "26 June 2018", "Rate": "15.42"}, {"Date":
+        "25 June 2018", "Rate": "15.40"}, {"Date": "24 June 2018", "Rate": "15.40"},
+        {"Date": "21 June 2018", "Rate": "15.39"}, {"Date": "20 June 2018", "Rate":
+        "15.41"}, {"Date": "19 June 2018", "Rate": "15.39"}, {"Date": "18 June 2018",
+        "Rate": "15.41"}, {"Date": "14 June 2018", "Rate": "15.37"}, {"Date": "13
+        June 2018", "Rate": "15.40"}, {"Date": "12 June 2018", "Rate": "15.41"}, {"Date":
+        "11 June 2018", "Rate": "15.38"}, {"Date": "10 June 2018", "Rate": "15.41"},
+        {"Date": "07 June 2018", "Rate": "15.39"}, {"Date": "06 June 2018", "Rate":
+        "15.40"}, {"Date": "05 June 2018", "Rate": "15.42"}, {"Date": "04 June 2018",
+        "Rate": "15.39"}, {"Date": "03 June 2018", "Rate": "15.41"}, {"Date": "31
+        May 2018", "Rate": "15.41"}, {"Date": "30 May 2018", "Rate": "15.41"}, {"Date":
+        "29 May 2018", "Rate": "15.41"}, {"Date": "28 May 2018", "Rate": "15.38"},
+        {"Date": "27 May 2018", "Rate": "15.40"}, {"Date": "24 May 2018", "Rate":
+        "15.37"}, {"Date": "23 May 2018", "Rate": "15.36"}, {"Date": "22 May 2018",
+        "Rate": "15.42"}, {"Date": "21 May 2018", "Rate": "15.39"}, {"Date": "20 May
+        2018", "Rate": "15.39"}, {"Date": "15 May 2018", "Rate": "15.41"}, {"Date":
+        "14 May 2018", "Rate": "15.37"}, {"Date": "13 May 2018", "Rate": "15.40"},
+        {"Date": "10 May 2018", "Rate": "15.40"}, {"Date": "09 May 2018", "Rate":
+        "15.35"}, {"Date": "08 May 2018", "Rate": "15.41"}, {"Date": "07 May 2018",
+        "Rate": "15.40"}, {"Date": "06 May 2018", "Rate": "15.37"}, {"Date": "03 May
+        2018", "Rate": "15.40"}, {"Date": "02 May 2018", "Rate": "15.42"}, {"Date":
+        "30 April 2018", "Rate": "15.36"}, {"Date": "29 April 2018", "Rate": "15.41"},
+        {"Date": "26 April 2018", "Rate": "15.39"}, {"Date": "25 April 2018", "Rate":
+        "15.39"}, {"Date": "24 April 2018", "Rate": "15.41"}, {"Date": "23 April 2018",
+        "Rate": "15.37"}, {"Date": "22 April 2018", "Rate": "15.40"}, {"Date": "19
+        April 2018", "Rate": "15.41"}, {"Date": "18 April 2018", "Rate": "15.40"},
+        {"Date": "17 April 2018", "Rate": "15.40"}, {"Date": "16 April 2018", "Rate":
+        "15.39"}, {"Date": "15 April 2018", "Rate": "15.40"}, {"Date": "12 April 2018",
+        "Rate": "15.36"}, {"Date": "11 April 2018", "Rate": "15.39"}, {"Date": "10
+        April 2018", "Rate": "15.42"}, {"Date": "09 April 2018", "Rate": "15.38"},
+        {"Date": "08 April 2018", "Rate": "15.41"}, {"Date": "05 April 2018", "Rate":
+        "15.37"}, {"Date": "04 April 2018", "Rate": "15.40"}, {"Date": "03 April 2018",
+        "Rate": "15.41"}, {"Date": "02 April 2018", "Rate": "15.38"}, {"Date": "01
+        April 2018", "Rate": "15.42"}, {"Date": "29 March 2018", "Rate": "15.41"},
+        {"Date": "28 March 2018", "Rate": "15.39"}, {"Date": "27 March 2018", "Rate":
+        "15.41"}, {"Date": "26 March 2018", "Rate": "15.41"}, {"Date": "25 March 2018",
+        "Rate": "15.40"}, {"Date": "22 March 2018", "Rate": "15.39"}, {"Date": "21
+        March 2018", "Rate": "15.40"}, {"Date": "20 March 2018", "Rate": "15.41"},
+        {"Date": "19 March 2018", "Rate": "15.40"}, {"Date": "18 March 2018", "Rate":
+        "15.36"}, {"Date": "15 March 2018", "Rate": "15.40"}, {"Date": "14 March 2018",
+        "Rate": "15.41"}, {"Date": "13 March 2018", "Rate": "15.41"}, {"Date": "12
+        March 2018", "Rate": "15.40"}, {"Date": "11 March 2018", "Rate": "15.40"},
+        {"Date": "08 March 2018", "Rate": "15.38"}, {"Date": "07 March 2018", "Rate":
+        "15.37"}, {"Date": "06 March 2018", "Rate": "15.41"}, {"Date": "05 March 2018",
+        "Rate": "15.36"}, {"Date": "04 March 2018", "Rate": "15.39"}, {"Date": "01
+        March 2018", "Rate": "15.41"}, {"Date": "28 February 2018", "Rate": "15.40"},
+        {"Date": "27 February 2018", "Rate": "15.41"}, {"Date": "26 February 2018",
+        "Rate": "15.41"}, {"Date": "25 February 2018", "Rate": "15.40"}, {"Date":
+        "22 February 2018", "Rate": "15.40"}, {"Date": "21 February 2018", "Rate":
+        "15.39"}, {"Date": "20 February 2018", "Rate": "15.41"}, {"Date": "19 February
+        2018", "Rate": "15.39"}, {"Date": "18 February 2018", "Rate": "15.39"}, {"Date":
+        "15 February 2018", "Rate": "15.39"}, {"Date": "14 February 2018", "Rate":
+        "15.38"}, {"Date": "13 February 2018", "Rate": "15.41"}, {"Date": "12 February
+        2018", "Rate": "15.32"}, {"Date": "11 February 2018", "Rate": "15.38"}, {"Date":
+        "08 February 2018", "Rate": "15.40"}, {"Date": "07 February 2018", "Rate":
+        "15.40"}, {"Date": "06 February 2018", "Rate": "15.41"}, {"Date": "05 February
+        2018", "Rate": "15.42"}, {"Date": "04 February 2018", "Rate": "15.41"}, {"Date":
+        "01 February 2018", "Rate": "15.39"}, {"Date": "31 January 2018", "Rate":
+        "15.40"}, {"Date": "30 January 2018", "Rate": "15.41"}, {"Date": "29 January
+        2018", "Rate": "15.41"}, {"Date": "28 January 2018", "Rate": "15.40"}, {"Date":
+        "25 January 2018", "Rate": "15.40"}, {"Date": "24 January 2018", "Rate": "15.40"},
+        {"Date": "23 January 2018", "Rate": "15.41"}, {"Date": "22 January 2018",
+        "Rate": "15.39"}, {"Date": "21 January 2018", "Rate": "15.36"}, {"Date": "18
+        January 2018", "Rate": "15.40"}, {"Date": "17 January 2018", "Rate": "15.41"},
+        {"Date": "16 January 2018", "Rate": "15.42"}, {"Date": "15 January 2018",
+        "Rate": "15.35"}, {"Date": "14 January 2018", "Rate": "15.40"}, {"Date": "11
+        January 2018", "Rate": "15.38"}, {"Date": "10 January 2018", "Rate": "15.41"},
+        {"Date": "09 January 2018", "Rate": "15.40"}, {"Date": "08 January 2018",
+        "Rate": "15.37"}, {"Date": "07 January 2018", "Rate": "15.32"}, {"Date": "04
+        January 2018", "Rate": "15.41"}, {"Date": "03 January 2018", "Rate": "15.40"},
+        {"Date": "02 January 2018", "Rate": "15.40"}, {"Date": "28 December 2017",
+        "Rate": "15.41"}, {"Date": "27 December 2017", "Rate": "15.41"}, {"Date":
+        "26 December 2017", "Rate": "15.41"}, {"Date": "25 December 2017", "Rate":
+        "15.40"}, {"Date": "24 December 2017", "Rate": "15.36"}, {"Date": "21 December
+        2017", "Rate": "15.40"}, {"Date": "19 December 2017", "Rate": "15.41"}, {"Date":
+        "18 December 2017", "Rate": "15.38"}, {"Date": "17 December 2017", "Rate":
+        "15.40"}, {"Date": "14 December 2017", "Rate": "15.39"}, {"Date": "13 December
+        2017", "Rate": "15.40"}, {"Date": "12 December 2017", "Rate": "15.41"}, {"Date":
+        "11 December 2017", "Rate": "15.40"}, {"Date": "10 December 2017", "Rate":
+        "15.39"}, {"Date": "07 December 2017", "Rate": "15.39"}, {"Date": "06 December
+        2017", "Rate": "15.40"}, {"Date": "05 December 2017", "Rate": "15.41"}, {"Date":
+        "04 December 2017", "Rate": "15.39"}, {"Date": "03 December 2017", "Rate":
+        "15.41"}, {"Date": "29 November 2017", "Rate": "15.40"}, {"Date": "28 November
+        2017", "Rate": "15.41"}, {"Date": "27 November 2017", "Rate": "15.39"}, {"Date":
+        "26 November 2017", "Rate": "15.40"}, {"Date": "23 November 2017", "Rate":
+        "15.39"}, {"Date": "22 November 2017", "Rate": "15.41"}, {"Date": "21 November
+        2017", "Rate": "15.38"}, {"Date": "20 November 2017", "Rate": "15.40"}, {"Date":
+        "16 November 2017", "Rate": "15.38"}, {"Date": "15 November 2017", "Rate":
+        "15.40"}, {"Date": "14 November 2017", "Rate": "15.41"}, {"Date": "13 November
+        2017", "Rate": "15.38"}, {"Date": "12 November 2017", "Rate": "15.40"}, {"Date":
+        "09 November 2017", "Rate": "15.39"}, {"Date": "08 November 2017", "Rate":
+        "15.39"}, {"Date": "07 November 2017", "Rate": "15.42"}, {"Date": "06 November
+        2017", "Rate": "15.39"}, {"Date": "05 November 2017", "Rate": "15.41"}, {"Date":
+        "02 November 2017", "Rate": "15.40"}, {"Date": "01 November 2017", "Rate":
+        "15.41"}, {"Date": "31 October 2017", "Rate": "15.42"}, {"Date": "30 October
+        2017", "Rate": "15.41"}, {"Date": "29 October 2017", "Rate": "15.40"}, {"Date":
+        "26 October 2017", "Rate": "15.38"}, {"Date": "25 October 2017", "Rate": "15.39"},
+        {"Date": "24 October 2017", "Rate": "15.41"}, {"Date": "23 October 2017",
+        "Rate": "15.37"}, {"Date": "22 October 2017", "Rate": "15.38"}, {"Date": "19
+        October 2017", "Rate": "15.38"}, {"Date": "18 October 2017", "Rate": "15.40"},
+        {"Date": "17 October 2017", "Rate": "15.41"}, {"Date": "16 October 2017",
+        "Rate": "15.41"}, {"Date": "15 October 2017", "Rate": "15.38"}, {"Date": "12
+        October 2017", "Rate": "15.37"}, {"Date": "11 October 2017", "Rate": "15.40"},
+        {"Date": "10 October 2017", "Rate": "15.41"}, {"Date": "09 October 2017",
+        "Rate": "15.37"}, {"Date": "08 October 2017", "Rate": "15.40"}, {"Date": "05
+        October 2017", "Rate": "15.40"}, {"Date": "04 October 2017", "Rate": "15.40"},
+        {"Date": "03 October 2017", "Rate": "15.41"}, {"Date": "02 October 2017",
+        "Rate": "15.39"}, {"Date": "01 October 2017", "Rate": "15.40"}, {"Date": "28
+        September 2017", "Rate": "15.41"}, {"Date": "27 September 2017", "Rate": "15.39"},
+        {"Date": "26 September 2017", "Rate": "15.41"}, {"Date": "25 September 2017",
+        "Rate": "15.41"}, {"Date": "24 September 2017", "Rate": "15.38"}, {"Date":
+        "20 September 2017", "Rate": "15.39"}, {"Date": "19 September 2017", "Rate":
+        "15.41"}, {"Date": "18 September 2017", "Rate": "15.40"}, {"Date": "17 September
+        2017", "Rate": "15.38"}, {"Date": "14 September 2017", "Rate": "15.40"}, {"Date":
+        "13 September 2017", "Rate": "15.35"}, {"Date": "12 September 2017", "Rate":
+        "15.41"}, {"Date": "11 September 2017", "Rate": "15.38"}, {"Date": "10 September
+        2017", "Rate": "15.39"}, {"Date": "07 September 2017", "Rate": "15.40"}, {"Date":
+        "06 September 2017", "Rate": "15.39"}, {"Date": "05 September 2017", "Rate":
+        "15.41"}, {"Date": "30 August 2017", "Rate": "15.42"}, {"Date": "29 August
+        2017", "Rate": "15.42"}, {"Date": "28 August 2017", "Rate": "15.39"}, {"Date":
+        "27 August 2017", "Rate": "15.39"}, {"Date": "24 August 2017", "Rate": "15.39"},
+        {"Date": "23 August 2017", "Rate": "15.41"}, {"Date": "22 August 2017", "Rate":
+        "15.41"}, {"Date": "21 August 2017", "Rate": "15.41"}, {"Date": "20 August
+        2017", "Rate": "15.38"}, {"Date": "17 August 2017", "Rate": "15.39"}, {"Date":
+        "16 August 2017", "Rate": "15.40"}, {"Date": "15 August 2017", "Rate": "15.41"},
+        {"Date": "14 August 2017", "Rate": "15.40"}, {"Date": "13 August 2017", "Rate":
+        "15.39"}, {"Date": "10 August 2017", "Rate": "15.39"}, {"Date": "09 August
+        2017", "Rate": "15.40"}, {"Date": "08 August 2017", "Rate": "15.41"}, {"Date":
+        "07 August 2017", "Rate": "15.40"}, {"Date": "06 August 2017", "Rate": "15.35"},
+        {"Date": "03 August 2017", "Rate": "15.39"}, {"Date": "02 August 2017", "Rate":
+        "15.40"}, {"Date": "01 August 2017", "Rate": "15.42"}, {"Date": "31 July 2017",
+        "Rate": "15.40"}, {"Date": "30 July 2017", "Rate": "15.40"}, {"Date": "25
+        July 2017", "Rate": "15.41"}, {"Date": "24 July 2017", "Rate": "15.40"}, {"Date":
+        "23 July 2017", "Rate": "15.40"}, {"Date": "20 July 2017", "Rate": "15.37"},
+        {"Date": "19 July 2017", "Rate": "15.41"}, {"Date": "18 July 2017", "Rate":
+        "15.42"}, {"Date": "17 July 2017", "Rate": "15.41"}, {"Date": "16 July 2017",
+        "Rate": "15.40"}, {"Date": "13 July 2017", "Rate": "15.39"}, {"Date": "12
+        July 2017", "Rate": "15.40"}, {"Date": "11 July 2017", "Rate": "15.41"}, {"Date":
+        "10 July 2017", "Rate": "15.39"}, {"Date": "09 July 2017", "Rate": "15.37"},
+        {"Date": "06 July 2017", "Rate": "15.35"}, {"Date": "05 July 2017", "Rate":
+        "15.39"}, {"Date": "04 July 2017", "Rate": "15.41"}, {"Date": "03 July 2017",
+        "Rate": "15.37"}, {"Date": "02 July 2017", "Rate": "15.40"}, {"Date": "28
+        June 2017", "Rate": "15.38"}, {"Date": "22 June 2017", "Rate": "15.40"}, {"Date":
+        "21 June 2017", "Rate": "15.39"}, {"Date": "20 June 2017", "Rate": "15.42"},
+        {"Date": "19 June 2017", "Rate": "15.33"}, {"Date": "18 June 2017", "Rate":
+        "15.39"}, {"Date": "15 June 2017", "Rate": "15.38"}, {"Date": "14 June 2017",
+        "Rate": "15.36"}, {"Date": "13 June 2017", "Rate": "15.41"}, {"Date": "12
+        June 2017", "Rate": "15.39"}, {"Date": "11 June 2017", "Rate": "15.39"}, {"Date":
+        "08 June 2017", "Rate": "15.40"}, {"Date": "07 June 2017", "Rate": "15.36"},
+        {"Date": "06 June 2017", "Rate": "15.41"}, {"Date": "05 June 2017", "Rate":
+        "15.38"}, {"Date": "04 June 2017", "Rate": "15.41"}, {"Date": "01 June 2017",
+        "Rate": "15.39"}, {"Date": "31 May 2017", "Rate": "15.40"}, {"Date": "30 May
+        2017", "Rate": "15.41"}, {"Date": "29 May 2017", "Rate": "15.41"}, {"Date":
+        "28 May 2017", "Rate": "15.39"}, {"Date": "25 May 2017", "Rate": "15.40"},
+        {"Date": "24 May 2017", "Rate": "15.39"}, {"Date": "23 May 2017", "Rate":
+        "15.41"}, {"Date": "22 May 2017", "Rate": "15.38"}, {"Date": "21 May 2017",
+        "Rate": "15.40"}, {"Date": "18 May 2017", "Rate": "15.40"}, {"Date": "17 May
+        2017", "Rate": "15.40"}, {"Date": "16 May 2017", "Rate": "15.40"}, {"Date":
+        "15 May 2017", "Rate": "15.36"}, {"Date": "14 May 2017", "Rate": "15.34"},
+        {"Date": "11 May 2017", "Rate": "15.38"}, {"Date": "10 May 2017", "Rate":
+        "15.41"}, {"Date": "09 May 2017", "Rate": "15.36"}, {"Date": "08 May 2017",
+        "Rate": "15.39"}, {"Date": "04 May 2017", "Rate": "15.40"}, {"Date": "03 May
+        2017", "Rate": "15.41"}, {"Date": "02 May 2017", "Rate": "15.41"}, {"Date":
+        "30 April 2017", "Rate": "15.39"}, {"Date": "27 April 2017", "Rate": "15.35"},
+        {"Date": "26 April 2017", "Rate": "15.39"}, {"Date": "25 April 2017", "Rate":
+        "15.41"}, {"Date": "24 April 2017", "Rate": "15.38"}, {"Date": "23 April 2017",
+        "Rate": "15.36"}, {"Date": "20 April 2017", "Rate": "15.37"}, {"Date": "19
+        April 2017", "Rate": "15.36"}, {"Date": "18 April 2017", "Rate": "15.41"},
+        {"Date": "17 April 2017", "Rate": "15.40"}, {"Date": "16 April 2017", "Rate":
+        "15.40"}, {"Date": "13 April 2017", "Rate": "15.39"}, {"Date": "12 April 2017",
+        "Rate": "15.40"}, {"Date": "11 April 2017", "Rate": "15.41"}, {"Date": "10
+        April 2017", "Rate": "15.38"}, {"Date": "09 April 2017", "Rate": "15.39"},
+        {"Date": "06 April 2017", "Rate": "15.29"}, {"Date": "05 April 2017", "Rate":
+        "15.38"}, {"Date": "04 April 2017", "Rate": "15.42"}, {"Date": "03 April 2017",
+        "Rate": "15.39"}, {"Date": "02 April 2017", "Rate": "15.41"}, {"Date": "30
+        March 2017", "Rate": "15.39"}, {"Date": "29 March 2017", "Rate": "15.38"},
+        {"Date": "28 March 2017", "Rate": "15.40"}, {"Date": "27 March 2017", "Rate":
+        "15.38"}, {"Date": "26 March 2017", "Rate": "15.33"}, {"Date": "23 March 2017",
+        "Rate": "15.39"}, {"Date": "22 March 2017", "Rate": "15.39"}, {"Date": "21
+        March 2017", "Rate": "15.41"}, {"Date": "20 March 2017", "Rate": "15.38"},
+        {"Date": "19 March 2017", "Rate": "15.36"}, {"Date": "16 March 2017", "Rate":
+        "15.40"}, {"Date": "15 March 2017", "Rate": "15.37"}, {"Date": "14 March 2017",
+        "Rate": "15.41"}, {"Date": "13 March 2017", "Rate": "15.33"}, {"Date": "12
+        March 2017", "Rate": "15.39"}, {"Date": "09 March 2017", "Rate": "15.31"},
+        {"Date": "08 March 2017", "Rate": "15.32"}, {"Date": "07 March 2017", "Rate":
+        "15.41"}, {"Date": "06 March 2017", "Rate": "15.40"}, {"Date": "05 March 2017",
+        "Rate": "15.37"}, {"Date": "02 March 2017", "Rate": "15.41"}, {"Date": "01
+        March 2017", "Rate": "15.39"}, {"Date": "28 February 2017", "Rate": "15.41"},
+        {"Date": "27 February 2017", "Rate": "15.39"}, {"Date": "26 February 2017",
+        "Rate": "15.41"}, {"Date": "23 February 2017", "Rate": "15.38"}, {"Date":
+        "22 February 2017", "Rate": "15.37"}, {"Date": "21 February 2017", "Rate":
+        "15.41"}, {"Date": "20 February 2017", "Rate": "15.37"}, {"Date": "19 February
+        2017", "Rate": "15.36"}, {"Date": "16 February 2017", "Rate": "15.38"}, {"Date":
+        "15 February 2017", "Rate": "15.34"}, {"Date": "14 February 2017", "Rate":
+        "15.39"}, {"Date": "13 February 2017", "Rate": "15.37"}, {"Date": "12 February
+        2017", "Rate": "15.33"}, {"Date": "09 February 2017", "Rate": "15.36"}, {"Date":
+        "08 February 2017", "Rate": "15.30"}, {"Date": "07 February 2017", "Rate":
+        "15.40"}, {"Date": "06 February 2017", "Rate": "15.32"}, {"Date": "05 February
+        2017", "Rate": "15.30"}, {"Date": "02 February 2017", "Rate": "15.35"}, {"Date":
+        "01 February 2017", "Rate": "15.38"}, {"Date": "31 January 2017", "Rate":
+        "15.42"}, {"Date": "30 January 2017", "Rate": "15.39"}, {"Date": "29 January
+        2017", "Rate": "15.42"}, {"Date": "26 January 2017", "Rate": "15.39"}, {"Date":
+        "25 January 2017", "Rate": "15.35"}, {"Date": "24 January 2017", "Rate": "15.39"},
+        {"Date": "23 January 2017", "Rate": "15.38"}, {"Date": "22 January 2017",
+        "Rate": "15.31"}, {"Date": "19 January 2017", "Rate": "15.33"}, {"Date": "18
+        January 2017", "Rate": "15.34"}, {"Date": "17 January 2017", "Rate": "15.41"},
+        {"Date": "16 January 2017", "Rate": "15.39"}, {"Date": "15 January 2017",
+        "Rate": "15.36"}, {"Date": "12 January 2017", "Rate": "15.39"}, {"Date": "11
+        January 2017", "Rate": "15.33"}, {"Date": "10 January 2017", "Rate": "15.39"},
+        {"Date": "09 January 2017", "Rate": "15.39"}, {"Date": "08 January 2017",
+        "Rate": "15.32"}, {"Date": "05 January 2017", "Rate": "15.35"}, {"Date": "04
+        January 2017", "Rate": "15.41"}, {"Date": "03 January 2017", "Rate": "15.39"},
+        {"Date": "02 January 2017", "Rate": "15.36"}, {"Date": "28 December 2016",
+        "Rate": "15.35"}, {"Date": "27 December 2016", "Rate": "15.41"}, {"Date":
+        "26 December 2016", "Rate": "15.34"}, {"Date": "25 December 2016", "Rate":
+        "15.36"}, {"Date": "22 December 2016", "Rate": "15.36"}, {"Date": "21 December
+        2016", "Rate": "15.35"}, {"Date": "20 December 2016", "Rate": "15.41"}, {"Date":
+        "19 December 2016", "Rate": "15.38"}, {"Date": "18 December 2016", "Rate":
+        "15.40"}, {"Date": "15 December 2016", "Rate": "15.37"}, {"Date": "14 December
+        2016", "Rate": "15.40"}, {"Date": "13 December 2016", "Rate": "15.37"}, {"Date":
+        "12 December 2016", "Rate": "15.35"}, {"Date": "08 December 2016", "Rate":
+        "15.40"}, {"Date": "07 December 2016", "Rate": "15.33"}, {"Date": "06 December
+        2016", "Rate": "15.41"}, {"Date": "05 December 2016", "Rate": "15.39"}, {"Date":
+        "04 December 2016", "Rate": "15.37"}, {"Date": "01 December 2016", "Rate":
+        "15.40"}, {"Date": "29 November 2016", "Rate": "15.41"}, {"Date": "28 November
+        2016", "Rate": "15.35"}, {"Date": "27 November 2016", "Rate": "15.39"}, {"Date":
+        "24 November 2016", "Rate": "15.40"}, {"Date": "23 November 2016", "Rate":
+        "15.40"}, {"Date": "22 November 2016", "Rate": "15.40"}, {"Date": "21 November
+        2016", "Rate": "15.37"}, {"Date": "20 November 2016", "Rate": "15.34"}, {"Date":
+        "17 November 2016", "Rate": "15.38"}, {"Date": "16 November 2016", "Rate":
+        "15.38"}, {"Date": "15 November 2016", "Rate": "15.40"}, {"Date": "14 November
+        2016", "Rate": "15.38"}, {"Date": "13 November 2016", "Rate": "15.34"}, {"Date":
+        "10 November 2016", "Rate": "15.34"}, {"Date": "09 November 2016", "Rate":
+        "15.38"}, {"Date": "08 November 2016", "Rate": "15.41"}, {"Date": "07 November
+        2016", "Rate": "15.36"}, {"Date": "06 November 2016", "Rate": "15.39"}, {"Date":
+        "02 November 2016", "Rate": "15.39"}, {"Date": "01 November 2016", "Rate":
+        "15.39"}, {"Date": "31 October 2016", "Rate": "15.35"}, {"Date": "30 October
+        2016", "Rate": "15.29"}, {"Date": "27 October 2016", "Rate": "15.39"}, {"Date":
+        "26 October 2016", "Rate": "15.39"}, {"Date": "25 October 2016", "Rate": "15.40"},
+        {"Date": "24 October 2016", "Rate": "15.35"}, {"Date": "23 October 2016",
+        "Rate": "15.34"}, {"Date": "20 October 2016", "Rate": "15.33"}, {"Date": "19
+        October 2016", "Rate": "15.35"}, {"Date": "18 October 2016", "Rate": "15.41"},
+        {"Date": "17 October 2016", "Rate": "15.39"}, {"Date": "16 October 2016",
+        "Rate": "15.36"}, {"Date": "13 October 2016", "Rate": "15.39"}, {"Date": "12
+        October 2016", "Rate": "15.32"}, {"Date": "11 October 2016", "Rate": "15.40"},
+        {"Date": "10 October 2016", "Rate": "15.38"}, {"Date": "09 October 2016",
+        "Rate": "15.36"}, {"Date": "06 October 2016", "Rate": "15.37"}, {"Date": "05
+        October 2016", "Rate": "15.41"}, {"Date": "04 October 2016", "Rate": "15.37"},
+        {"Date": "03 October 2016", "Rate": "15.39"}, {"Date": "29 September 2016",
+        "Rate": "15.37"}, {"Date": "28 September 2016", "Rate": "15.38"}, {"Date":
+        "27 September 2016", "Rate": "15.41"}, {"Date": "26 September 2016", "Rate":
+        "15.38"}, {"Date": "25 September 2016", "Rate": "15.39"}, {"Date": "22 September
+        2016", "Rate": "15.35"}, {"Date": "21 September 2016", "Rate": "15.33"}, {"Date":
+        "20 September 2016", "Rate": "15.41"}, {"Date": "19 September 2016", "Rate":
+        "15.40"}, {"Date": "18 September 2016", "Rate": "15.40"}, {"Date": "14 September
+        2016", "Rate": "15.37"}, {"Date": "08 September 2016", "Rate": "15.36"}, {"Date":
+        "07 September 2016", "Rate": "15.39"}, {"Date": "06 September 2016", "Rate":
+        "15.41"}, {"Date": "05 September 2016", "Rate": "15.37"}, {"Date": "04 September
+        2016", "Rate": "15.38"}, {"Date": "01 September 2016", "Rate": "15.36"}, {"Date":
+        "31 August 2016", "Rate": "15.38"}, {"Date": "30 August 2016", "Rate": "15.41"},
+        {"Date": "29 August 2016", "Rate": "15.39"}, {"Date": "28 August 2016", "Rate":
+        "15.35"}, {"Date": "25 August 2016", "Rate": "15.34"}, {"Date": "24 August
+        2016", "Rate": "15.36"}, {"Date": "23 August 2016", "Rate": "15.41"}, {"Date":
+        "22 August 2016", "Rate": "15.38"}, {"Date": "21 August 2016", "Rate": "15.37"},
+        {"Date": "18 August 2016", "Rate": "15.37"}, {"Date": "17 August 2016", "Rate":
+        "15.36"}, {"Date": "16 August 2016", "Rate": "15.41"}, {"Date": "15 August
+        2016", "Rate": "15.30"}, {"Date": "14 August 2016", "Rate": "15.38"}, {"Date":
+        "11 August 2016", "Rate": "15.35"}, {"Date": "10 August 2016", "Rate": "15.38"},
+        {"Date": "09 August 2016", "Rate": "15.41"}, {"Date": "08 August 2016", "Rate":
+        "15.37"}, {"Date": "07 August 2016", "Rate": "15.40"}, {"Date": "04 August
+        2016", "Rate": "15.38"}, {"Date": "03 August 2016", "Rate": "15.37"}, {"Date":
+        "02 August 2016", "Rate": "15.41"}, {"Date": "01 August 2016", "Rate": "15.37"},
+        {"Date": "31 July 2016", "Rate": "15.41"}, {"Date": "25 July 2016", "Rate":
+        "15.38"}, {"Date": "24 July 2016", "Rate": "15.38"}, {"Date": "21 July 2016",
+        "Rate": "15.35"}, {"Date": "20 July 2016", "Rate": "15.38"}, {"Date": "19
+        July 2016", "Rate": "15.41"}, {"Date": "18 July 2016", "Rate": "15.32"}, {"Date":
+        "17 July 2016", "Rate": "15.38"}, {"Date": "14 July 2016", "Rate": "15.33"},
+        {"Date": "13 July 2016", "Rate": "15.39"}, {"Date": "12 July 2016", "Rate":
+        "15.41"}, {"Date": "11 July 2016", "Rate": "15.36"}, {"Date": "10 July 2016",
+        "Rate": "15.39"}, {"Date": "05 July 2016", "Rate": "15.41"}, {"Date": "04
+        July 2016", "Rate": "15.36"}, {"Date": "03 July 2016", "Rate": "15.40"}, {"Date":
+        "30 June 2016", "Rate": "15.38"}, {"Date": "29 June 2016", "Rate": "15.28"},
+        {"Date": "28 June 2016", "Rate": "15.40"}, {"Date": "27 June 2016", "Rate":
+        "15.36"}, {"Date": "26 June 2016", "Rate": "15.35"}, {"Date": "23 June 2016",
+        "Rate": "15.39"}, {"Date": "22 June 2016", "Rate": "15.38"}, {"Date": "21
+        June 2016", "Rate": "15.41"}, {"Date": "20 June 2016", "Rate": "15.31"}, {"Date":
+        "19 June 2016", "Rate": "15.35"}, {"Date": "16 June 2016", "Rate": "15.37"},
+        {"Date": "15 June 2016", "Rate": "15.39"}, {"Date": "14 June 2016", "Rate":
+        "15.41"}, {"Date": "13 June 2016", "Rate": "15.33"}, {"Date": "12 June 2016",
+        "Rate": "15.37"}, {"Date": "09 June 2016", "Rate": "15.35"}, {"Date": "08
+        June 2016", "Rate": "15.40"}, {"Date": "07 June 2016", "Rate": "15.38"}, {"Date":
+        "05 June 2016", "Rate": "15.33"}, {"Date": "02 June 2016", "Rate": "15.38"},
+        {"Date": "01 June 2016", "Rate": "15.38"}, {"Date": "31 May 2016", "Rate":
+        "15.41"}, {"Date": "30 May 2016", "Rate": "15.37"}, {"Date": "29 May 2016",
+        "Rate": "15.35"}, {"Date": "26 May 2016", "Rate": "15.35"}, {"Date": "25 May
+        2016", "Rate": "15.35"}, {"Date": "24 May 2016", "Rate": "15.40"}, {"Date":
+        "23 May 2016", "Rate": "15.34"}, {"Date": "22 May 2016", "Rate": "15.36"},
+        {"Date": "19 May 2016", "Rate": "15.38"}, {"Date": "18 May 2016", "Rate":
+        "15.32"}, {"Date": "17 May 2016", "Rate": "15.41"}, {"Date": "16 May 2016",
+        "Rate": "15.34"}, {"Date": "15 May 2016", "Rate": "15.38"}, {"Date": "12 May
+        2016", "Rate": "15.37"}, {"Date": "11 May 2016", "Rate": "15.35"}, {"Date":
+        "10 May 2016", "Rate": "15.39"}, {"Date": "09 May 2016", "Rate": "15.35"},
+        {"Date": "08 May 2016", "Rate": "15.32"}, {"Date": "05 May 2016", "Rate":
+        "15.37"}, {"Date": "04 May 2016", "Rate": "15.40"}, {"Date": "03 May 2016",
+        "Rate": "15.41"}, {"Date": "02 May 2016", "Rate": "15.36"}, {"Date": "28 April
+        2016", "Rate": "15.31"}, {"Date": "27 April 2016", "Rate": "15.38"}, {"Date":
+        "26 April 2016", "Rate": "15.40"}, {"Date": "25 April 2016", "Rate": "15.38"},
+        {"Date": "24 April 2016", "Rate": "15.34"}, {"Date": "21 April 2016", "Rate":
+        "15.38"}, {"Date": "20 April 2016", "Rate": "15.38"}, {"Date": "19 April 2016",
+        "Rate": "15.40"}, {"Date": "18 April 2016", "Rate": "15.31"}, {"Date": "17
+        April 2016", "Rate": "15.36"}, {"Date": "14 April 2016", "Rate": "15.38"},
+        {"Date": "13 April 2016", "Rate": "15.37"}, {"Date": "12 April 2016", "Rate":
+        "15.39"}, {"Date": "11 April 2016", "Rate": "15.37"}, {"Date": "10 April 2016",
+        "Rate": "15.33"}, {"Date": "07 April 2016", "Rate": "15.34"}, {"Date": "06
+        April 2016", "Rate": "15.35"}, {"Date": "05 April 2016", "Rate": "15.41"},
+        {"Date": "04 April 2016", "Rate": "15.36"}, {"Date": "03 April 2016", "Rate":
+        "15.41"}, {"Date": "31 March 2016", "Rate": "15.35"}, {"Date": "30 March 2016",
+        "Rate": "15.34"}, {"Date": "29 March 2016", "Rate": "15.39"}, {"Date": "28
+        March 2016", "Rate": "15.33"}, {"Date": "27 March 2016", "Rate": "15.32"},
+        {"Date": "24 March 2016", "Rate": "15.30"}, {"Date": "23 March 2016", "Rate":
+        "15.36"}, {"Date": "22 March 2016", "Rate": "15.41"}, {"Date": "21 March 2016",
+        "Rate": "15.36"}, {"Date": "20 March 2016", "Rate": "15.37"}, {"Date": "17
+        March 2016", "Rate": "15.35"}, {"Date": "16 March 2016", "Rate": "15.34"},
+        {"Date": "15 March 2016", "Rate": "15.41"}, {"Date": "14 March 2016", "Rate":
+        "15.30"}, {"Date": "13 March 2016", "Rate": "15.39"}, {"Date": "10 March 2016",
+        "Rate": "15.38"}, {"Date": "09 March 2016", "Rate": "15.30"}, {"Date": "08
+        March 2016", "Rate": "15.40"}, {"Date": "07 March 2016", "Rate": "15.38"},
+        {"Date": "06 March 2016", "Rate": "15.34"}, {"Date": "03 March 2016", "Rate":
+        "15.33"}, {"Date": "02 March 2016", "Rate": "15.40"}, {"Date": "01 March 2016",
+        "Rate": "15.40"}, {"Date": "29 February 2016", "Rate": "15.33"}, {"Date":
+        "28 February 2016", "Rate": "15.35"}, {"Date": "25 February 2016", "Rate":
+        "15.38"}, {"Date": "24 February 2016", "Rate": "15.32"}, {"Date": "23 February
+        2016", "Rate": "15.41"}, {"Date": "22 February 2016", "Rate": "15.36"}, {"Date":
+        "21 February 2016", "Rate": "15.39"}, {"Date": "18 February 2016", "Rate":
+        "15.37"}, {"Date": "17 February 2016", "Rate": "15.38"}, {"Date": "16 February
+        2016", "Rate": "15.41"}, {"Date": "15 February 2016", "Rate": "15.38"}, {"Date":
+        "14 February 2016", "Rate": "15.39"}, {"Date": "11 February 2016", "Rate":
+        "15.36"}, {"Date": "10 February 2016", "Rate": "15.32"}, {"Date": "09 February
+        2016", "Rate": "15.41"}, {"Date": "08 February 2016", "Rate": "15.36"}, {"Date":
+        "07 February 2016", "Rate": "15.37"}, {"Date": "04 February 2016", "Rate":
+        "15.35"}, {"Date": "03 February 2016", "Rate": "15.41"}, {"Date": "02 February
+        2016", "Rate": "15.40"}, {"Date": "01 February 2016", "Rate": "15.41"}, {"Date":
+        "31 January 2016", "Rate": "15.35"}, {"Date": "28 January 2016", "Rate": "15.33"},
+        {"Date": "27 January 2016", "Rate": "15.39"}, {"Date": "26 January 2016",
+        "Rate": "15.40"}, {"Date": "25 January 2016", "Rate": "15.34"}, {"Date": "24
+        January 2016", "Rate": "15.36"}, {"Date": "21 January 2016", "Rate": "15.32"},
+        {"Date": "20 January 2016", "Rate": "15.36"}, {"Date": "19 January 2016",
+        "Rate": "15.41"}, {"Date": "18 January 2016", "Rate": "15.36"}, {"Date": "17
+        January 2016", "Rate": "15.37"}, {"Date": "14 January 2016", "Rate": "15.36"},
+        {"Date": "13 January 2016", "Rate": "15.40"}, {"Date": "11 January 2016",
+        "Rate": "15.35"}, {"Date": "10 January 2016", "Rate": "15.36"}, {"Date": "07
+        January 2016", "Rate": "15.37"}, {"Date": "06 January 2016", "Rate": "15.37"},
+        {"Date": "05 January 2016", "Rate": "15.40"}, {"Date": "04 January 2016",
+        "Rate": "15.37"}, {"Date": "03 January 2016", "Rate": "15.36"}, {"Date": "30
+        December 2015", "Rate": "15.41"}, {"Date": "29 December 2015", "Rate": "15.41"},
+        {"Date": "28 December 2015", "Rate": "15.37"}, {"Date": "27 December 2015",
+        "Rate": "15.37"}, {"Date": "24 December 2015", "Rate": "15.36"}, {"Date":
+        "22 December 2015", "Rate": "15.41"}, {"Date": "21 December 2015", "Rate":
+        "15.37"}, {"Date": "20 December 2015", "Rate": "15.37"}, {"Date": "17 December
+        2015", "Rate": "15.36"}, {"Date": "16 December 2015", "Rate": "15.40"}, {"Date":
+        "15 December 2015", "Rate": "15.39"}, {"Date": "14 December 2015", "Rate":
+        "15.33"}, {"Date": "13 December 2015", "Rate": "15.31"}, {"Date": "10 December
+        2015", "Rate": "15.35"}, {"Date": "09 December 2015", "Rate": "15.37"}, {"Date":
+        "08 December 2015", "Rate": "15.40"}, {"Date": "07 December 2015", "Rate":
+        "15.30"}, {"Date": "06 December 2015", "Rate": "15.36"}, {"Date": "03 December
+        2015", "Rate": "15.34"}, {"Date": "02 December 2015", "Rate": "15.39"}, {"Date":
+        "01 December 2015", "Rate": "15.41"}, {"Date": "30 November 2015", "Rate":
+        "15.33"}, {"Date": "29 November 2015", "Rate": "15.38"}, {"Date": "26 November
+        2015", "Rate": "15.38"}, {"Date": "25 November 2015", "Rate": "15.35"}, {"Date":
+        "24 November 2015", "Rate": "15.39"}, {"Date": "23 November 2015", "Rate":
+        "15.36"}, {"Date": "22 November 2015", "Rate": "15.32"}, {"Date": "19 November
+        2015", "Rate": "15.34"}, {"Date": "18 November 2015", "Rate": "15.36"}, {"Date":
+        "17 November 2015", "Rate": "15.40"}, {"Date": "16 November 2015", "Rate":
+        "15.39"}, {"Date": "15 November 2015", "Rate": "15.37"}, {"Date": "12 November
+        2015", "Rate": "15.37"}, {"Date": "10 November 2015", "Rate": "15.35"}, {"Date":
+        "09 November 2015", "Rate": "15.35"}, {"Date": "08 November 2015", "Rate":
+        "15.38"}, {"Date": "05 November 2015", "Rate": "15.34"}, {"Date": "04 November
+        2015", "Rate": "15.40"}, {"Date": "02 November 2015", "Rate": "15.39"}, {"Date":
+        "01 November 2015", "Rate": "15.34"}, {"Date": "29 October 2015", "Rate":
+        "15.29"}, {"Date": "28 October 2015", "Rate": "15.36"}, {"Date": "27 October
+        2015", "Rate": "15.39"}, {"Date": "26 October 2015", "Rate": "15.35"}, {"Date":
+        "25 October 2015", "Rate": "15.33"}, {"Date": "22 October 2015", "Rate": "15.36"},
+        {"Date": "21 October 2015", "Rate": "15.37"}, {"Date": "20 October 2015",
+        "Rate": "15.41"}, {"Date": "19 October 2015", "Rate": "15.40"}, {"Date": "18
+        October 2015", "Rate": "15.38"}, {"Date": "15 October 2015", "Rate": "15.33"},
+        {"Date": "13 October 2015", "Rate": "15.40"}, {"Date": "12 October 2015",
+        "Rate": "15.37"}, {"Date": "11 October 2015", "Rate": "15.35"}, {"Date": "08
+        October 2015", "Rate": "15.35"}, {"Date": "07 October 2015", "Rate": "15.36"},
+        {"Date": "06 October 2015", "Rate": "15.41"}, {"Date": "05 October 2015",
+        "Rate": "15.37"}, {"Date": "04 October 2015", "Rate": "15.37"}, {"Date": "01
+        October 2015", "Rate": "15.35"}, {"Date": "30 September 2015", "Rate": "15.39"},
+        {"Date": "29 September 2015", "Rate": "15.37"}, {"Date": "28 September 2015",
+        "Rate": "15.40"}, {"Date": "22 September 2015", "Rate": "15.35"}, {"Date":
+        "17 September 2015", "Rate": "15.34"}, {"Date": "16 September 2015", "Rate":
+        "15.36"}, {"Date": "15 September 2015", "Rate": "15.39"}, {"Date": "14 September
+        2015", "Rate": "15.33"}, {"Date": "13 September 2015", "Rate": "15.31"}, {"Date":
+        "10 September 2015", "Rate": "15.36"}, {"Date": "09 September 2015", "Rate":
+        "15.34"}, {"Date": "08 September 2015", "Rate": "15.39"}, {"Date": "07 September
+        2015", "Rate": "15.34"}, {"Date": "06 September 2015", "Rate": "15.32"}, {"Date":
+        "03 September 2015", "Rate": "15.38"}, {"Date": "02 September 2015", "Rate":
+        "15.39"}, {"Date": "01 September 2015", "Rate": "15.41"}, {"Date": "31 August
+        2015", "Rate": "15.34"}, {"Date": "30 August 2015", "Rate": "15.40"}, {"Date":
+        "27 August 2015", "Rate": "15.36"}, {"Date": "26 August 2015", "Rate": "15.38"},
+        {"Date": "25 August 2015", "Rate": "15.41"}, {"Date": "24 August 2015", "Rate":
+        "15.37"}, {"Date": "23 August 2015", "Rate": "15.37"}, {"Date": "20 August
+        2015", "Rate": "15.39"}, {"Date": "19 August 2015", "Rate": "15.39"}, {"Date":
+        "18 August 2015", "Rate": "15.40"}, {"Date": "17 August 2015", "Rate": "15.36"},
+        {"Date": "16 August 2015", "Rate": "15.36"}, {"Date": "13 August 2015", "Rate":
+        "15.38"}, {"Date": "12 August 2015", "Rate": "15.35"}, {"Date": "11 August
+        2015", "Rate": "15.39"}, {"Date": "10 August 2015", "Rate": "15.38"}, {"Date":
+        "09 August 2015", "Rate": "15.32"}, {"Date": "06 August 2015", "Rate": "15.39"},
+        {"Date": "05 August 2015", "Rate": "15.39"}, {"Date": "04 August 2015", "Rate":
+        "15.41"}, {"Date": "03 August 2015", "Rate": "15.40"}, {"Date": "02 August
+        2015", "Rate": "15.41"}, {"Date": "30 July 2015", "Rate": "15.38"}, {"Date":
+        "29 July 2015", "Rate": "15.36"}, {"Date": "23 July 2015", "Rate": "15.39"},
+        {"Date": "22 July 2015", "Rate": "15.41"}, {"Date": "21 July 2015", "Rate":
+        "15.37"}, {"Date": "20 July 2015", "Rate": "15.37"}, {"Date": "16 July 2015",
+        "Rate": "15.39"}, {"Date": "15 July 2015", "Rate": "15.36"}, {"Date": "14
+        July 2015", "Rate": "15.39"}, {"Date": "13 July 2015", "Rate": "15.36"}, {"Date":
+        "12 July 2015", "Rate": "15.34"}, {"Date": "09 July 2015", "Rate": "15.39"},
+        {"Date": "08 July 2015", "Rate": "15.31"}, {"Date": "07 July 2015", "Rate":
+        "15.39"}, {"Date": "06 July 2015", "Rate": "15.37"}, {"Date": "05 July 2015",
+        "Rate": "15.33"}, {"Date": "02 July 2015", "Rate": "15.40"}, {"Date": "01
+        July 2015", "Rate": "15.37"}, {"Date": "30 June 2015", "Rate": "15.41"}, {"Date":
+        "29 June 2015", "Rate": "15.33"}, {"Date": "28 June 2015", "Rate": "15.40"},
+        {"Date": "25 June 2015", "Rate": "15.39"}, {"Date": "24 June 2015", "Rate":
+        "15.35"}, {"Date": "23 June 2015", "Rate": "15.41"}, {"Date": "22 June 2015",
+        "Rate": "15.37"}, {"Date": "21 June 2015", "Rate": "15.38"}, {"Date": "17
+        June 2015", "Rate": "15.38"}, {"Date": "16 June 2015", "Rate": "15.39"}, {"Date":
+        "15 June 2015", "Rate": "15.40"}, {"Date": "14 June 2015", "Rate": "15.32"},
+        {"Date": "11 June 2015", "Rate": "15.39"}, {"Date": "10 June 2015", "Rate":
+        "15.37"}, {"Date": "09 June 2015", "Rate": "15.40"}, {"Date": "08 June 2015",
+        "Rate": "15.35"}, {"Date": "07 June 2015", "Rate": "15.36"}, {"Date": "04
+        June 2015", "Rate": "15.35"}, {"Date": "03 June 2015", "Rate": "15.37"}, {"Date":
+        "02 June 2015", "Rate": "15.40"}, {"Date": "01 June 2015", "Rate": "15.36"},
+        {"Date": "31 May 2015", "Rate": "15.36"}, {"Date": "28 May 2015", "Rate":
+        "15.37"}, {"Date": "27 May 2015", "Rate": "15.37"}, {"Date": "26 May 2015",
+        "Rate": "15.38"}, {"Date": "25 May 2015", "Rate": "15.29"}, {"Date": "24 May
+        2015", "Rate": "15.28"}, {"Date": "21 May 2015", "Rate": "15.37"}, {"Date":
+        "20 May 2015", "Rate": "15.37"}, {"Date": "19 May 2015", "Rate": "15.42"},
+        {"Date": "18 May 2015", "Rate": "15.37"}, {"Date": "17 May 2015", "Rate":
+        "15.39"}, {"Date": "14 May 2015", "Rate": "15.37"}, {"Date": "13 May 2015",
+        "Rate": "15.32"}, {"Date": "12 May 2015", "Rate": "15.39"}, {"Date": "11 May
+        2015", "Rate": "15.36"}, {"Date": "10 May 2015", "Rate": "15.33"}, {"Date":
+        "07 May 2015", "Rate": "15.37"}, {"Date": "06 May 2015", "Rate": "15.35"},
+        {"Date": "05 May 2015", "Rate": "15.41"}, {"Date": "04 May 2015", "Rate":
+        "15.36"}, {"Date": "03 May 2015", "Rate": "15.41"}, {"Date": "30 April 2015",
+        "Rate": "15.37"}, {"Date": "29 April 2015", "Rate": "15.40"}, {"Date": "28
+        April 2015", "Rate": "15.39"}, {"Date": "27 April 2015", "Rate": "15.39"},
+        {"Date": "26 April 2015", "Rate": "15.32"}, {"Date": "23 April 2015", "Rate":
+        "15.34"}, {"Date": "22 April 2015", "Rate": "15.38"}, {"Date": "21 April 2015",
+        "Rate": "15.41"}, {"Date": "20 April 2015", "Rate": "15.38"}, {"Date": "19
+        April 2015", "Rate": "15.38"}, {"Date": "16 April 2015", "Rate": "15.31"},
+        {"Date": "15 April 2015", "Rate": "15.33"}, {"Date": "14 April 2015", "Rate":
+        "15.41"}, {"Date": "13 April 2015", "Rate": "15.36"}, {"Date": "12 April 2015",
+        "Rate": "15.37"}, {"Date": "09 April 2015", "Rate": "15.39"}, {"Date": "08
+        April 2015", "Rate": "15.33"}, {"Date": "07 April 2015", "Rate": "15.40"},
+        {"Date": "06 April 2015", "Rate": "15.32"}, {"Date": "05 April 2015", "Rate":
+        "15.34"}, {"Date": "02 April 2015", "Rate": "15.37"}, {"Date": "01 April 2015",
+        "Rate": "15.40"}, {"Date": "31 March 2015", "Rate": "15.39"}, {"Date": "30
+        March 2015", "Rate": "15.35"}, {"Date": "29 March 2015", "Rate": "15.35"},
+        {"Date": "26 March 2015", "Rate": "15.38"}, {"Date": "25 March 2015", "Rate":
+        "15.40"}, {"Date": "24 March 2015", "Rate": "15.40"}, {"Date": "23 March 2015",
+        "Rate": "15.38"}, {"Date": "22 March 2015", "Rate": "15.36"}, {"Date": "19
+        March 2015", "Rate": "15.37"}, {"Date": "18 March 2015", "Rate": "15.38"},
+        {"Date": "17 March 2015", "Rate": "15.40"}, {"Date": "16 March 2015", "Rate":
+        "15.39"}, {"Date": "15 March 2015", "Rate": "15.36"}, {"Date": "12 March 2015",
+        "Rate": "15.37"}, {"Date": "11 March 2015", "Rate": "15.39"}, {"Date": "10
+        March 2015", "Rate": "15.40"}, {"Date": "09 March 2015", "Rate": "15.34"},
+        {"Date": "08 March 2015", "Rate": "15.34"}, {"Date": "05 March 2015", "Rate":
+        "15.33"}, {"Date": "04 March 2015", "Rate": "15.39"}, {"Date": "03 March 2015",
+        "Rate": "15.40"}, {"Date": "02 March 2015", "Rate": "15.38"}, {"Date": "01
+        March 2015", "Rate": "15.33"}, {"Date": "26 February 2015", "Rate": "15.35"},
+        {"Date": "25 February 2015", "Rate": "15.40"}, {"Date": "24 February 2015",
+        "Rate": "15.41"}, {"Date": "23 February 2015", "Rate": "15.35"}, {"Date":
+        "22 February 2015", "Rate": "15.38"}, {"Date": "19 February 2015", "Rate":
+        "15.31"}, {"Date": "18 February 2015", "Rate": "15.37"}, {"Date": "17 February
+        2015", "Rate": "15.41"}, {"Date": "16 February 2015", "Rate": "15.37"}, {"Date":
+        "15 February 2015", "Rate": "15.37"}, {"Date": "12 February 2015", "Rate":
+        "15.35"}, {"Date": "11 February 2015", "Rate": "15.36"}, {"Date": "10 February
+        2015", "Rate": "15.39"}, {"Date": "09 February 2015", "Rate": "15.35"}, {"Date":
+        "08 February 2015", "Rate": "15.33"}, {"Date": "05 February 2015", "Rate":
+        "15.35"}, {"Date": "04 February 2015", "Rate": "15.40"}, {"Date": "03 February
+        2015", "Rate": "15.41"}, {"Date": "02 February 2015", "Rate": "15.38"}, {"Date":
+        "01 February 2015", "Rate": "15.36"}, {"Date": "29 January 2015", "Rate":
+        "15.36"}, {"Date": "28 January 2015", "Rate": "15.37"}, {"Date": "27 January
+        2015", "Rate": "15.41"}, {"Date": "26 January 2015", "Rate": "15.37"}, {"Date":
+        "25 January 2015", "Rate": "15.37"}, {"Date": "22 January 2015", "Rate": "15.37"},
+        {"Date": "21 January 2015", "Rate": "15.37"}, {"Date": "20 January 2015",
+        "Rate": "15.40"}, {"Date": "19 January 2015", "Rate": "15.36"}, {"Date": "18
+        January 2015", "Rate": "15.34"}, {"Date": "15 January 2015", "Rate": "15.34"},
+        {"Date": "14 January 2015", "Rate": "15.34"}, {"Date": "13 January 2015",
+        "Rate": "15.41"}, {"Date": "12 January 2015", "Rate": "15.31"}, {"Date": "11
+        January 2015", "Rate": "15.37"}, {"Date": "08 January 2015", "Rate": "15.39"},
+        {"Date": "07 January 2015", "Rate": "15.35"}, {"Date": "06 January 2015",
+        "Rate": "15.40"}, {"Date": "05 January 2015", "Rate": "15.37"}, {"Date": "04
+        January 2015", "Rate": "15.40"}, {"Date": "30 December 2014", "Rate": "15.40"},
+        {"Date": "29 December 2014", "Rate": "15.35"}, {"Date": "28 December 2014",
+        "Rate": "15.35"}, {"Date": "25 December 2014", "Rate": "15.37"}, {"Date":
+        "24 December 2014", "Rate": "15.41"}, {"Date": "22 December 2014", "Rate":
+        "15.38"}, {"Date": "21 December 2014", "Rate": "15.39"}, {"Date": "18 December
+        2014", "Rate": "15.38"}, {"Date": "17 December 2014", "Rate": "15.38"}, {"Date":
+        "16 December 2014", "Rate": "15.41"}, {"Date": "15 December 2014", "Rate":
+        "15.38"}, {"Date": "14 December 2014", "Rate": "15.40"}, {"Date": "11 December
+        2014", "Rate": "15.41"}, {"Date": "10 December 2014", "Rate": "15.38"}, {"Date":
+        "09 December 2014", "Rate": "15.37"}, {"Date": "04 December 2014", "Rate":
+        "15.35"}, {"Date": "03 December 2014", "Rate": "15.37"}, {"Date": "02 December
+        2014", "Rate": "15.41"}, {"Date": "01 December 2014", "Rate": "15.40"}, {"Date":
+        "30 November 2014", "Rate": "15.39"}, {"Date": "27 November 2014", "Rate":
+        "15.34"}, {"Date": "26 November 2014", "Rate": "15.36"}, {"Date": "25 November
+        2014", "Rate": "15.41"}, {"Date": "24 November 2014", "Rate": "15.34"}, {"Date":
+        "23 November 2014", "Rate": "15.38"}, {"Date": "20 November 2014", "Rate":
+        "15.37"}, {"Date": "19 November 2014", "Rate": "15.36"}, {"Date": "18 November
+        2014", "Rate": "15.41"}, {"Date": "17 November 2014", "Rate": "15.38"}, {"Date":
+        "16 November 2014", "Rate": "15.38"}, {"Date": "13 November 2014", "Rate":
+        "15.39"}, {"Date": "12 November 2014", "Rate": "15.40"}, {"Date": "10 November
+        2014", "Rate": "15.36"}, {"Date": "09 November 2014", "Rate": "15.36"}, {"Date":
+        "06 November 2014", "Rate": "15.38"}, {"Date": "05 November 2014", "Rate":
+        "15.40"}, {"Date": "04 November 2014", "Rate": "15.38"}, {"Date": "02 November
+        2014", "Rate": "15.40"}, {"Date": "30 October 2014", "Rate": "15.37"}, {"Date":
+        "29 October 2014", "Rate": "15.33"}, {"Date": "28 October 2014", "Rate": "15.40"},
+        {"Date": "27 October 2014", "Rate": "15.37"}, {"Date": "26 October 2014",
+        "Rate": "15.34"}, {"Date": "23 October 2014", "Rate": "15.39"}, {"Date": "22
+        October 2014", "Rate": "15.39"}, {"Date": "21 October 2014", "Rate": "15.41"},
+        {"Date": "20 October 2014", "Rate": "15.36"}, {"Date": "19 October 2014",
+        "Rate": "15.37"}, {"Date": "16 October 2014", "Rate": "15.37"}, {"Date": "15
+        October 2014", "Rate": "15.38"}, {"Date": "14 October 2014", "Rate": "15.40"},
+        {"Date": "13 October 2014", "Rate": "15.35"}, {"Date": "12 October 2014",
+        "Rate": "15.35"}, {"Date": "09 October 2014", "Rate": "15.39"}, {"Date": "08
+        October 2014", "Rate": "15.41"}, {"Date": "02 October 2014", "Rate": "15.40"},
+        {"Date": "01 October 2014", "Rate": "15.39"}, {"Date": "30 September 2014",
+        "Rate": "15.39"}, {"Date": "29 September 2014", "Rate": "15.37"}, {"Date":
+        "28 September 2014", "Rate": "15.34"}, {"Date": "25 September 2014", "Rate":
+        "15.41"}, {"Date": "24 September 2014", "Rate": "15.38"}, {"Date": "23 September
+        2014", "Rate": "15.41"}, {"Date": "22 September 2014", "Rate": "15.36"}, {"Date":
+        "21 September 2014", "Rate": "15.39"}, {"Date": "18 September 2014", "Rate":
+        "15.38"}, {"Date": "17 September 2014", "Rate": "15.38"}, {"Date": "16 September
+        2014", "Rate": "15.40"}, {"Date": "15 September 2014", "Rate": "15.41"}, {"Date":
+        "14 September 2014", "Rate": "15.33"}, {"Date": "11 September 2014", "Rate":
+        "15.37"}, {"Date": "10 September 2014", "Rate": "15.37"}, {"Date": "09 September
+        2014", "Rate": "15.41"}, {"Date": "08 September 2014", "Rate": "15.36"}, {"Date":
+        "07 September 2014", "Rate": "15.36"}, {"Date": "04 September 2014", "Rate":
+        "15.38"}, {"Date": "03 September 2014", "Rate": "15.40"}, {"Date": "02 September
+        2014", "Rate": "15.36"}, {"Date": "01 September 2014", "Rate": "15.38"}, {"Date":
+        "31 August 2014", "Rate": "15.39"}, {"Date": "28 August 2014", "Rate": "15.32"},
+        {"Date": "27 August 2014", "Rate": "15.41"}, {"Date": "26 August 2014", "Rate":
+        "15.37"}, {"Date": "25 August 2014", "Rate": "15.40"}, {"Date": "24 August
+        2014", "Rate": "15.34"}, {"Date": "21 August 2014", "Rate": "15.33"}, {"Date":
+        "20 August 2014", "Rate": "15.42"}, {"Date": "19 August 2014", "Rate": "15.39"},
+        {"Date": "18 August 2014", "Rate": "15.36"}, {"Date": "17 August 2014", "Rate":
+        "15.40"}, {"Date": "14 August 2014", "Rate": "15.32"}, {"Date": "13 August
+        2014", "Rate": "15.41"}, {"Date": "12 August 2014", "Rate": "15.38"}, {"Date":
+        "11 August 2014", "Rate": "15.41"}, {"Date": "10 August 2014", "Rate": "15.37"},
+        {"Date": "07 August 2014", "Rate": "15.37"}, {"Date": "06 August 2014", "Rate":
+        "15.41"}, {"Date": "05 August 2014", "Rate": "15.39"}, {"Date": "04 August
+        2014", "Rate": "15.39"}, {"Date": "03 August 2014", "Rate": "15.40"}, {"Date":
+        "30 July 2014", "Rate": "15.39"}, {"Date": "24 July 2014", "Rate": "15.40"},
+        {"Date": "23 July 2014", "Rate": "15.41"}, {"Date": "22 July 2014", "Rate":
+        "15.39"}, {"Date": "21 July 2014", "Rate": "15.31"}, {"Date": "20 July 2014",
+        "Rate": "15.38"}, {"Date": "17 July 2014", "Rate": "15.39"}, {"Date": "16
+        July 2014", "Rate": "15.42"}, {"Date": "15 July 2014", "Rate": "15.41"}, {"Date":
+        "14 July 2014", "Rate": "15.36"}, {"Date": "13 July 2014", "Rate": "15.37"},
+        {"Date": "10 July 2014", "Rate": "15.40"}, {"Date": "09 July 2014", "Rate":
+        "15.41"}, {"Date": "08 July 2014", "Rate": "15.37"}, {"Date": "07 July 2014",
+        "Rate": "15.33"}, {"Date": "06 July 2014", "Rate": "15.35"}, {"Date": "03
+        July 2014", "Rate": "15.40"}, {"Date": "02 July 2014", "Rate": "15.42"}, {"Date":
+        "01 July 2014", "Rate": "15.41"}, {"Date": "30 June 2014", "Rate": "15.41"},
+        {"Date": "26 June 2014", "Rate": "15.41"}, {"Date": "25 June 2014", "Rate":
+        "15.42"}, {"Date": "24 June 2014", "Rate": "15.41"}, {"Date": "23 June 2014",
+        "Rate": "15.41"}, {"Date": "22 June 2014", "Rate": "15.37"}, {"Date": "19
+        June 2014", "Rate": "15.42"}, {"Date": "18 June 2014", "Rate": "15.42"}, {"Date":
+        "17 June 2014", "Rate": "15.39"}, {"Date": "16 June 2014", "Rate": "15.41"},
+        {"Date": "15 June 2014", "Rate": "15.41"}, {"Date": "12 June 2014", "Rate":
+        "15.41"}, {"Date": "11 June 2014", "Rate": "15.42"}, {"Date": "10 June 2014",
+        "Rate": "15.40"}, {"Date": "09 June 2014", "Rate": "15.40"}, {"Date": "08
+        June 2014", "Rate": "15.41"}, {"Date": "05 June 2014", "Rate": "15.39"}, {"Date":
+        "04 June 2014", "Rate": "15.41"}, {"Date": "03 June 2014", "Rate": "15.40"},
+        {"Date": "02 June 2014", "Rate": "15.41"}, {"Date": "01 June 2014", "Rate":
+        "15.42"}, {"Date": "29 May 2014", "Rate": "15.35"}, {"Date": "28 May 2014",
+        "Rate": "15.42"}, {"Date": "27 May 2014", "Rate": "15.41"}, {"Date": "26 May
+        2014", "Rate": "15.40"}, {"Date": "25 May 2014", "Rate": "15.34"}, {"Date":
+        "22 May 2014", "Rate": "15.36"}, {"Date": "21 May 2014", "Rate": "15.42"},
+        {"Date": "20 May 2014", "Rate": "15.42"}, {"Date": "19 May 2014", "Rate":
+        "15.40"}, {"Date": "18 May 2014", "Rate": "15.42"}, {"Date": "15 May 2014",
+        "Rate": "15.35"}, {"Date": "14 May 2014", "Rate": "15.42"}, {"Date": "13 May
+        2014", "Rate": "15.40"}, {"Date": "12 May 2014", "Rate": "15.38"}, {"Date":
+        "11 May 2014", "Rate": "15.31"}, {"Date": "08 May 2014", "Rate": "15.36"},
+        {"Date": "07 May 2014", "Rate": "15.39"}, {"Date": "06 May 2014", "Rate":
+        "15.32"}, {"Date": "05 May 2014", "Rate": "15.35"}, {"Date": "04 May 2014",
+        "Rate": "15.41"}, {"Date": "30 April 2014", "Rate": "15.41"}, {"Date": "29
+        April 2014", "Rate": "15.41"}, {"Date": "28 April 2014", "Rate": "15.36"},
+        {"Date": "27 April 2014", "Rate": "15.42"}, {"Date": "24 April 2014", "Rate":
+        "15.33"}, {"Date": "23 April 2014", "Rate": "15.41"}, {"Date": "22 April 2014",
+        "Rate": "15.36"}, {"Date": "21 April 2014", "Rate": "15.33"}, {"Date": "20
+        April 2014", "Rate": "15.40"}, {"Date": "17 April 2014", "Rate": "15.36"},
+        {"Date": "16 April 2014", "Rate": "15.41"}, {"Date": "15 April 2014", "Rate":
+        "15.40"}, {"Date": "14 April 2014", "Rate": "15.40"}, {"Date": "13 April 2014",
+        "Rate": "15.37"}, {"Date": "10 April 2014", "Rate": "15.33"}, {"Date": "09
+        April 2014", "Rate": "15.39"}, {"Date": "08 April 2014", "Rate": "15.36"},
+        {"Date": "07 April 2014", "Rate": "15.36"}, {"Date": "06 April 2014", "Rate":
+        "15.36"}, {"Date": "03 April 2014", "Rate": "15.36"}, {"Date": "02 April 2014",
+        "Rate": "15.41"}, {"Date": "01 April 2014", "Rate": "15.40"}, {"Date": "31
+        March 2014", "Rate": "15.40"}, {"Date": "30 March 2014", "Rate": "15.41"},
+        {"Date": "27 March 2014", "Rate": "15.39"}, {"Date": "26 March 2014", "Rate":
+        "15.42"}, {"Date": "25 March 2014", "Rate": "15.39"}, {"Date": "24 March 2014",
+        "Rate": "15.35"}, {"Date": "23 March 2014", "Rate": "15.41"}, {"Date": "20
+        March 2014", "Rate": "15.35"}, {"Date": "19 March 2014", "Rate": "15.41"},
+        {"Date": "18 March 2014", "Rate": "15.38"}, {"Date": "17 March 2014", "Rate":
+        "15.33"}, {"Date": "16 March 2014", "Rate": "15.37"}, {"Date": "13 March 2014",
+        "Rate": "15.40"}, {"Date": "12 March 2014", "Rate": "15.42"}, {"Date": "11
+        March 2014", "Rate": "15.37"}, {"Date": "10 March 2014", "Rate": "15.30"},
+        {"Date": "09 March 2014", "Rate": "15.35"}, {"Date": "06 March 2014", "Rate":
+        "15.34"}, {"Date": "05 March 2014", "Rate": "15.42"}, {"Date": "04 March 2014",
+        "Rate": "15.37"}, {"Date": "03 March 2014", "Rate": "15.35"}, {"Date": "02
+        March 2014", "Rate": "15.39"}, {"Date": "27 February 2014", "Rate": "15.41"},
+        {"Date": "26 February 2014", "Rate": "15.42"}, {"Date": "25 February 2014",
+        "Rate": "15.39"}, {"Date": "24 February 2014", "Rate": "15.30"}, {"Date":
+        "23 February 2014", "Rate": "15.39"}, {"Date": "20 February 2014", "Rate":
+        "15.36"}, {"Date": "19 February 2014", "Rate": "15.41"}, {"Date": "18 February
+        2014", "Rate": "15.36"}, {"Date": "17 February 2014", "Rate": "15.34"}, {"Date":
+        "16 February 2014", "Rate": "15.37"}, {"Date": "13 February 2014", "Rate":
+        "15.36"}, {"Date": "12 February 2014", "Rate": "15.41"}, {"Date": "11 February
+        2014", "Rate": "15.36"}, {"Date": "10 February 2014", "Rate": "15.34"}, {"Date":
+        "09 February 2014", "Rate": "15.30"}, {"Date": "06 February 2014", "Rate":
+        "15.39"}, {"Date": "05 February 2014", "Rate": "15.41"}, {"Date": "04 February
+        2014", "Rate": "15.36"}, {"Date": "03 February 2014", "Rate": "15.41"}, {"Date":
+        "30 January 2014", "Rate": "15.38"}, {"Date": "29 January 2014", "Rate": "15.41"},
+        {"Date": "28 January 2014", "Rate": "15.35"}, {"Date": "27 January 2014",
+        "Rate": "15.36"}, {"Date": "26 January 2014", "Rate": "15.33"}, {"Date": "23
+        January 2014", "Rate": "15.40"}, {"Date": "22 January 2014", "Rate": "15.41"},
+        {"Date": "21 January 2014", "Rate": "15.40"}, {"Date": "20 January 2014",
+        "Rate": "15.31"}, {"Date": "19 January 2014", "Rate": "15.39"}, {"Date": "16
+        January 2014", "Rate": "15.39"}, {"Date": "15 January 2014", "Rate": "15.41"},
+        {"Date": "14 January 2014", "Rate": "15.38"}, {"Date": "12 January 2014",
+        "Rate": "15.38"}, {"Date": "09 January 2014", "Rate": "15.29"}, {"Date": "08
+        January 2014", "Rate": "15.42"}, {"Date": "07 January 2014", "Rate": "15.37"},
+        {"Date": "06 January 2014", "Rate": "15.33"}, {"Date": "05 January 2014",
+        "Rate": "15.42"}, {"Date": "30 December 2013", "Rate": "15.41"}, {"Date":
+        "29 December 2013", "Rate": "15.36"}, {"Date": "26 December 2013", "Rate":
+        "15.36"}, {"Date": "25 December 2013", "Rate": "15.41"}, {"Date": "24 December
+        2013", "Rate": "15.38"}, {"Date": "23 December 2013", "Rate": "15.35"}, {"Date":
+        "22 December 2013", "Rate": "15.35"}, {"Date": "19 December 2013", "Rate":
+        "15.39"}, {"Date": "18 December 2013", "Rate": "15.41"}, {"Date": "17 December
+        2013", "Rate": "15.35"}, {"Date": "16 December 2013", "Rate": "15.36"}, {"Date":
+        "15 December 2013", "Rate": "15.39"}, {"Date": "12 December 2013", "Rate":
+        "15.34"}, {"Date": "11 December 2013", "Rate": "15.38"}, {"Date": "10 December
+        2013", "Rate": "15.27"}, {"Date": "09 December 2013", "Rate": "15.33"}, {"Date":
+        "08 December 2013", "Rate": "15.37"}, {"Date": "05 December 2013", "Rate":
+        "15.38"}, {"Date": "04 December 2013", "Rate": "15.42"}, {"Date": "03 December
+        2013", "Rate": "15.40"}, {"Date": "02 December 2013", "Rate": "15.38"}, {"Date":
+        "01 December 2013", "Rate": "15.39"}, {"Date": "28 November 2013", "Rate":
+        "15.40"}, {"Date": "27 November 2013", "Rate": "15.40"}, {"Date": "26 November
+        2013", "Rate": "15.34"}, {"Date": "25 November 2013", "Rate": "15.38"}, {"Date":
+        "24 November 2013", "Rate": "15.39"}, {"Date": "21 November 2013", "Rate":
+        "15.38"}, {"Date": "20 November 2013", "Rate": "15.42"}, {"Date": "19 November
+        2013", "Rate": "15.38"}, {"Date": "18 November 2013", "Rate": "15.39"}, {"Date":
+        "14 November 2013", "Rate": "15.38"}, {"Date": "13 November 2013", "Rate":
+        "15.29"}, {"Date": "12 November 2013", "Rate": "15.39"}, {"Date": "10 November
+        2013", "Rate": "15.38"}, {"Date": "07 November 2013", "Rate": "15.39"}, {"Date":
+        "06 November 2013", "Rate": "15.33"}, {"Date": "04 November 2013", "Rate":
+        "15.35"}, {"Date": "31 October 2013", "Rate": "15.39"}, {"Date": "30 October
+        2013", "Rate": "15.41"}, {"Date": "29 October 2013", "Rate": "15.39"}, {"Date":
+        "28 October 2013", "Rate": "15.35"}, {"Date": "27 October 2013", "Rate": "15.39"},
+        {"Date": "24 October 2013", "Rate": "15.40"}, {"Date": "23 October 2013",
+        "Rate": "15.34"}, {"Date": "22 October 2013", "Rate": "15.39"}, {"Date": "21
+        October 2013", "Rate": "15.34"}, {"Date": "20 October 2013", "Rate": "15.33"},
+        {"Date": "16 October 2013", "Rate": "15.27"}, {"Date": "10 October 2013",
+        "Rate": "15.37"}, {"Date": "09 October 2013", "Rate": "15.40"}, {"Date": "08
+        October 2013", "Rate": "15.35"}, {"Date": "07 October 2013", "Rate": "15.32"},
+        {"Date": "06 October 2013", "Rate": "15.39"}, {"Date": "03 October 2013",
+        "Rate": "15.35"}, {"Date": "02 October 2013", "Rate": "15.42"}, {"Date": "01
+        October 2013", "Rate": "15.39"}, {"Date": "30 September 2013", "Rate": "15.36"},
+        {"Date": "29 September 2013", "Rate": "15.40"}, {"Date": "26 September 2013",
+        "Rate": "15.41"}, {"Date": "25 September 2013", "Rate": "15.39"}, {"Date":
+        "24 September 2013", "Rate": "15.38"}, {"Date": "23 September 2013", "Rate":
+        "15.31"}, {"Date": "22 September 2013", "Rate": "15.37"}, {"Date": "19 September
+        2013", "Rate": "15.38"}, {"Date": "18 September 2013", "Rate": "15.41"}, {"Date":
+        "17 September 2013", "Rate": "15.37"}, {"Date": "16 September 2013", "Rate":
+        "15.32"}, {"Date": "15 September 2013", "Rate": "15.31"}, {"Date": "12 September
+        2013", "Rate": "15.38"}, {"Date": "11 September 2013", "Rate": "15.40"}, {"Date":
+        "10 September 2013", "Rate": "15.38"}, {"Date": "09 September 2013", "Rate":
+        "15.37"}, {"Date": "05 September 2013", "Rate": "15.29"}, {"Date": "04 September
+        2013", "Rate": "15.41"}, {"Date": "03 September 2013", "Rate": "15.37"}, {"Date":
+        "02 September 2013", "Rate": "15.36"}, {"Date": "01 September 2013", "Rate":
+        "15.41"}, {"Date": "29 August 2013", "Rate": "15.36"}, {"Date": "28 August
+        2013", "Rate": "15.41"}, {"Date": "27 August 2013", "Rate": "15.38"}, {"Date":
+        "26 August 2013", "Rate": "15.35"}, {"Date": "25 August 2013", "Rate": "15.35"},
+        {"Date": "22 August 2013", "Rate": "15.38"}, {"Date": "21 August 2013", "Rate":
+        "15.41"}, {"Date": "20 August 2013", "Rate": "15.38"}, {"Date": "19 August
+        2013", "Rate": "15.32"}, {"Date": "18 August 2013", "Rate": "15.37"}, {"Date":
+        "15 August 2013", "Rate": "15.30"}, {"Date": "14 August 2013", "Rate": "15.42"},
+        {"Date": "13 August 2013", "Rate": "15.39"}, {"Date": "12 August 2013", "Rate":
+        "15.34"}, {"Date": "11 August 2013", "Rate": "15.31"}, {"Date": "07 August
+        2013", "Rate": "15.40"}, {"Date": "06 August 2013", "Rate": "15.33"}, {"Date":
+        "05 August 2013", "Rate": "15.34"}, {"Date": "04 August 2013", "Rate": "15.36"},
+        {"Date": "01 August 2013", "Rate": "15.39"}, {"Date": "31 July 2013", "Rate":
+        "15.41"}, {"Date": "30 July 2013", "Rate": "15.40"}, {"Date": "29 July 2013",
+        "Rate": "15.38"}, {"Date": "28 July 2013", "Rate": "15.31"}, {"Date": "25
+        July 2013", "Rate": "15.37"}, {"Date": "24 July 2013", "Rate": "15.39"}, {"Date":
+        "23 July 2013", "Rate": "15.31"}, {"Date": "22 July 2013", "Rate": "15.36"},
+        {"Date": "21 July 2013", "Rate": "15.35"}, {"Date": "18 July 2013", "Rate":
+        "15.38"}, {"Date": "17 July 2013", "Rate": "15.41"}, {"Date": "16 July 2013",
+        "Rate": "15.36"}, {"Date": "15 July 2013", "Rate": "15.39"}, {"Date": "14
+        July 2013", "Rate": "15.41"}, {"Date": "11 July 2013", "Rate": "15.35"}, {"Date":
+        "10 July 2013", "Rate": "15.28"}, {"Date": "08 July 2013", "Rate": "15.34"},
+        {"Date": "07 July 2013", "Rate": "15.35"}, {"Date": "04 July 2013", "Rate":
+        "15.36"}, {"Date": "03 July 2013", "Rate": "15.41"}, {"Date": "02 July 2013",
+        "Rate": "15.39"}, {"Date": "01 July 2013", "Rate": "15.40"}, {"Date": "30
+        June 2013", "Rate": "15.39"}, {"Date": "27 June 2013", "Rate": "15.32"}, {"Date":
+        "26 June 2013", "Rate": "15.40"}, {"Date": "25 June 2013", "Rate": "15.35"},
+        {"Date": "24 June 2013", "Rate": "15.27"}, {"Date": "23 June 2013", "Rate":
+        "15.34"}, {"Date": "20 June 2013", "Rate": "15.37"}, {"Date": "19 June 2013",
+        "Rate": "15.41"}, {"Date": "18 June 2013", "Rate": "15.36"}, {"Date": "17
+        June 2013", "Rate": "15.37"}, {"Date": "16 June 2013", "Rate": "15.38"}, {"Date":
+        "13 June 2013", "Rate": "15.37"}, {"Date": "12 June 2013", "Rate": "15.41"},
+        {"Date": "11 June 2013", "Rate": "15.36"}, {"Date": "10 June 2013", "Rate":
+        "15.28"}, {"Date": "09 June 2013", "Rate": "15.35"}, {"Date": "06 June 2013",
+        "Rate": "15.27"}, {"Date": "05 June 2013", "Rate": "15.41"}, {"Date": "04
+        June 2013", "Rate": "15.38"}, {"Date": "03 June 2013", "Rate": "15.41"}, {"Date":
+        "02 June 2013", "Rate": "15.37"}, {"Date": "30 May 2013", "Rate": "15.40"},
+        {"Date": "29 May 2013", "Rate": "15.39"}, {"Date": "28 May 2013", "Rate":
+        "15.32"}, {"Date": "27 May 2013", "Rate": "15.36"}, {"Date": "26 May 2013",
+        "Rate": "15.38"}, {"Date": "23 May 2013", "Rate": "15.34"}, {"Date": "22 May
+        2013", "Rate": "15.42"}, {"Date": "21 May 2013", "Rate": "15.38"}, {"Date":
+        "20 May 2013", "Rate": "15.32"}, {"Date": "19 May 2013", "Rate": "15.34"},
+        {"Date": "16 May 2013", "Rate": "15.38"}, {"Date": "15 May 2013", "Rate":
+        "15.42"}, {"Date": "14 May 2013", "Rate": "15.37"}, {"Date": "13 May 2013",
+        "Rate": "15.32"}, {"Date": "12 May 2013", "Rate": "15.37"}, {"Date": "09 May
+        2013", "Rate": "15.29"}, {"Date": "08 May 2013", "Rate": "15.38"}, {"Date":
+        "07 May 2013", "Rate": "15.29"}, {"Date": "06 May 2013", "Rate": "15.29"},
+        {"Date": "05 May 2013", "Rate": "15.34"}, {"Date": "02 May 2013", "Rate":
+        "15.40"}, {"Date": "30 April 2013", "Rate": "15.36"}, {"Date": "29 April 2013",
+        "Rate": "15.40"}, {"Date": "28 April 2013", "Rate": "15.34"}, {"Date": "25
+        April 2013", "Rate": "15.38"}, {"Date": "24 April 2013", "Rate": "15.41"},
+        {"Date": "23 April 2013", "Rate": "15.35"}, {"Date": "22 April 2013", "Rate":
+        "15.38"}, {"Date": "21 April 2013", "Rate": "15.38"}, {"Date": "18 April 2013",
+        "Rate": "15.35"}, {"Date": "17 April 2013", "Rate": "15.42"}, {"Date": "16
+        April 2013", "Rate": "15.37"}, {"Date": "15 April 2013", "Rate": "15.38"},
+        {"Date": "14 April 2013", "Rate": "15.38"}, {"Date": "11 April 2013", "Rate":
+        "15.36"}, {"Date": "10 April 2013", "Rate": "15.39"}, {"Date": "09 April 2013",
+        "Rate": "15.33"}, {"Date": "08 April 2013", "Rate": "15.33"}, {"Date": "07
+        April 2013", "Rate": "15.37"}, {"Date": "04 April 2013", "Rate": "15.30"},
+        {"Date": "03 April 2013", "Rate": "15.41"}, {"Date": "02 April 2013", "Rate":
+        "15.37"}, {"Date": "01 April 2013", "Rate": "15.41"}, {"Date": "31 March 2013",
+        "Rate": "15.41"}, {"Date": "28 March 2013", "Rate": "15.36"}, {"Date": "27
+        March 2013", "Rate": "15.40"}, {"Date": "26 March 2013", "Rate": "15.35"},
+        {"Date": "25 March 2013", "Rate": "15.33"}, {"Date": "24 March 2013", "Rate":
+        "15.33"}, {"Date": "21 March 2013", "Rate": "15.33"}, {"Date": "20 March 2013",
+        "Rate": "15.41"}, {"Date": "19 March 2013", "Rate": "15.37"}, {"Date": "18
+        March 2013", "Rate": "15.33"}, {"Date": "17 March 2013", "Rate": "15.30"},
+        {"Date": "14 March 2013", "Rate": "15.38"}, {"Date": "13 March 2013", "Rate":
+        "15.39"}, {"Date": "12 March 2013", "Rate": "15.31"}, {"Date": "11 March 2013",
+        "Rate": "15.37"}, {"Date": "10 March 2013", "Rate": "15.38"}, {"Date": "07
+        March 2013", "Rate": "15.37"}, {"Date": "06 March 2013", "Rate": "15.40"},
+        {"Date": "05 March 2013", "Rate": "15.36"}, {"Date": "03 March 2013", "Rate":
+        "15.41"}, {"Date": "28 February 2013", "Rate": "15.40"}, {"Date": "27 February
+        2013", "Rate": "15.41"}, {"Date": "26 February 2013", "Rate": "15.39"}, {"Date":
+        "25 February 2013", "Rate": "15.38"}, {"Date": "24 February 2013", "Rate":
+        "15.35"}, {"Date": "21 February 2013", "Rate": "15.37"}, {"Date": "20 February
+        2013", "Rate": "15.41"}, {"Date": "19 February 2013", "Rate": "15.36"}, {"Date":
+        "18 February 2013", "Rate": "15.34"}, {"Date": "17 February 2013", "Rate":
+        "15.34"}, {"Date": "14 February 2013", "Rate": "15.41"}, {"Date": "13 February
+        2013", "Rate": "15.37"}, {"Date": "11 February 2013", "Rate": "15.34"}, {"Date":
+        "10 February 2013", "Rate": "15.32"}, {"Date": "07 February 2013", "Rate":
+        "15.36"}, {"Date": "06 February 2013", "Rate": "15.39"}, {"Date": "05 February
+        2013", "Rate": "15.33"}, {"Date": "04 February 2013", "Rate": "15.36"}, {"Date":
+        "03 February 2013", "Rate": "15.41"}, {"Date": "31 January 2013", "Rate":
+        "15.41"}, {"Date": "30 January 2013", "Rate": "15.41"}, {"Date": "29 January
+        2013", "Rate": "15.38"}, {"Date": "28 January 2013", "Rate": "15.33"}, {"Date":
+        "27 January 2013", "Rate": "15.37"}, {"Date": "23 January 2013", "Rate": "15.41"},
+        {"Date": "22 January 2013", "Rate": "15.39"}, {"Date": "21 January 2013",
+        "Rate": "15.38"}, {"Date": "20 January 2013", "Rate": "15.35"}, {"Date": "17
+        January 2013", "Rate": "15.36"}, {"Date": "16 January 2013", "Rate": "15.39"},
+        {"Date": "15 January 2013", "Rate": "15.34"}, {"Date": "14 January 2013",
+        "Rate": "15.34"}, {"Date": "10 January 2013", "Rate": "15.33"}, {"Date": "09
+        January 2013", "Rate": "15.39"}, {"Date": "08 January 2013", "Rate": "15.32"},
+        {"Date": "07 January 2013", "Rate": "15.35"}, {"Date": "06 January 2013",
+        "Rate": "15.32"}, {"Date": "03 January 2013", "Rate": "15.41"}, {"Date": "02
+        January 2013", "Rate": "15.40"}, {"Date": "30 December 2012", "Rate": "15.37"},
+        {"Date": "27 December 2012", "Rate": "15.39"}, {"Date": "26 December 2012",
+        "Rate": "15.41"}, {"Date": "25 December 2012", "Rate": "15.40"}, {"Date":
+        "24 December 2012", "Rate": "15.37"}, {"Date": "23 December 2012", "Rate":
+        "15.37"}, {"Date": "20 December 2012", "Rate": "15.30"}, {"Date": "19 December
+        2012", "Rate": "15.39"}, {"Date": "18 December 2012", "Rate": "15.32"}, {"Date":
+        "17 December 2012", "Rate": "15.31"}, {"Date": "16 December 2012", "Rate":
+        "15.39"}, {"Date": "13 December 2012", "Rate": "15.34"}, {"Date": "12 December
+        2012", "Rate": "15.38"}, {"Date": "11 December 2012", "Rate": "15.30"}, {"Date":
+        "10 December 2012", "Rate": "15.35"}, {"Date": "09 December 2012", "Rate":
+        "15.39"}, {"Date": "06 December 2012", "Rate": "15.36"}, {"Date": "05 December
+        2012", "Rate": "15.41"}, {"Date": "04 December 2012", "Rate": "15.38"}, {"Date":
+        "03 December 2012", "Rate": "15.31"}, {"Date": "02 December 2012", "Rate":
+        "15.40"}, {"Date": "29 November 2012", "Rate": "15.38"}, {"Date": "28 November
+        2012", "Rate": "15.41"}, {"Date": "27 November 2012", "Rate": "15.38"}, {"Date":
+        "26 November 2012", "Rate": "15.36"}, {"Date": "25 November 2012", "Rate":
+        "15.39"}, {"Date": "22 November 2012", "Rate": "15.35"}, {"Date": "21 November
+        2012", "Rate": "15.39"}, {"Date": "20 November 2012", "Rate": "15.31"}, {"Date":
+        "19 November 2012", "Rate": "15.36"}, {"Date": "18 November 2012", "Rate":
+        "15.32"}, {"Date": "14 November 2012", "Rate": "15.39"}, {"Date": "13 November
+        2012", "Rate": "15.33"}, {"Date": "12 November 2012", "Rate": "15.35"}, {"Date":
+        "08 November 2012", "Rate": "15.32"}, {"Date": "07 November 2012", "Rate":
+        "15.38"}, {"Date": "06 November 2012", "Rate": "15.30"}, {"Date": "05 November
+        2012", "Rate": "15.32"}, {"Date": "04 November 2012", "Rate": "15.37"}, {"Date":
+        "01 November 2012", "Rate": "15.41"}, {"Date": "31 October 2012", "Rate":
+        "15.37"}, {"Date": "30 October 2012", "Rate": "15.41"}, {"Date": "24 October
+        2012", "Rate": "15.41"}, {"Date": "23 October 2012", "Rate": "15.36"}, {"Date":
+        "22 October 2012", "Rate": "15.35"}, {"Date": "21 October 2012", "Rate": "15.32"},
+        {"Date": "18 October 2012", "Rate": "15.40"}, {"Date": "17 October 2012",
+        "Rate": "15.40"}, {"Date": "16 October 2012", "Rate": "15.33"}, {"Date": "15
+        October 2012", "Rate": "15.30"}, {"Date": "14 October 2012", "Rate": "15.30"},
+        {"Date": "11 October 2012", "Rate": "15.35"}, {"Date": "10 October 2012",
+        "Rate": "15.41"}, {"Date": "09 October 2012", "Rate": "15.38"}, {"Date": "08
+        October 2012", "Rate": "15.30"}, {"Date": "07 October 2012", "Rate": "15.34"},
+        {"Date": "04 October 2012", "Rate": "15.34"}, {"Date": "03 October 2012",
+        "Rate": "15.41"}, {"Date": "02 October 2012", "Rate": "15.38"}, {"Date": "01
+        October 2012", "Rate": "15.38"}, {"Date": "30 September 2012", "Rate": "15.41"},
+        {"Date": "27 September 2012", "Rate": "15.39"}, {"Date": "26 September 2012",
+        "Rate": "15.41"}, {"Date": "25 September 2012", "Rate": "15.38"}, {"Date":
+        "24 September 2012", "Rate": "15.36"}, {"Date": "23 September 2012", "Rate":
+        "15.33"}, {"Date": "20 September 2012", "Rate": "15.31"}, {"Date": "19 September
+        2012", "Rate": "15.40"}, {"Date": "18 September 2012", "Rate": "15.34"}, {"Date":
+        "17 September 2012", "Rate": "15.31"}, {"Date": "16 September 2012", "Rate":
+        "15.41"}, {"Date": "15 September 2012", "Rate": "15.37"}, {"Date": "13 September
+        2012", "Rate": "15.31"}, {"Date": "12 September 2012", "Rate": "15.41"}, {"Date":
+        "11 September 2012", "Rate": "15.35"}, {"Date": "10 September 2012", "Rate":
+        "15.31"}, {"Date": "09 September 2012", "Rate": "15.38"}, {"Date": "06 September
+        2012", "Rate": "15.35"}, {"Date": "05 September 2012", "Rate": "15.39"}, {"Date":
+        "04 September 2012", "Rate": "15.32"}, {"Date": "03 September 2012", "Rate":
+        "15.39"}, {"Date": "02 September 2012", "Rate": "15.40"}, {"Date": "01 September
+        2012", "Rate": "15.41"}, {"Date": "30 August 2012", "Rate": "15.41"}, {"Date":
+        "29 August 2012", "Rate": "15.40"}, {"Date": "28 August 2012", "Rate": "15.34"},
+        {"Date": "27 August 2012", "Rate": "15.37"}, {"Date": "26 August 2012", "Rate":
+        "15.37"}, {"Date": "22 August 2012", "Rate": "15.34"}, {"Date": "16 August
+        2012", "Rate": "15.38"}, {"Date": "15 August 2012", "Rate": "15.40"}, {"Date":
+        "14 August 2012", "Rate": "15.35"}, {"Date": "13 August 2012", "Rate": "15.37"},
+        {"Date": "12 August 2012", "Rate": "15.34"}, {"Date": "09 August 2012", "Rate":
+        "15.33"}, {"Date": "08 August 2012", "Rate": "15.41"}, {"Date": "07 August
+        2012", "Rate": "15.38"}, {"Date": "06 August 2012", "Rate": "15.27"}, {"Date":
+        "05 August 2012", "Rate": "15.30"}, {"Date": "02 August 2012", "Rate": "15.34"},
+        {"Date": "01 August 2012", "Rate": "15.41"}, {"Date": "31 July 2012", "Rate":
+        "15.37"}, {"Date": "30 July 2012", "Rate": "15.40"}, {"Date": "29 July 2012",
+        "Rate": "15.39"}, {"Date": "25 July 2012", "Rate": "15.41"}, {"Date": "24
+        July 2012", "Rate": "15.38"}, {"Date": "23 July 2012", "Rate": "15.32"}, {"Date":
+        "22 July 2012", "Rate": "15.33"}, {"Date": "19 July 2012", "Rate": "15.36"},
+        {"Date": "18 July 2012", "Rate": "15.41"}, {"Date": "17 July 2012", "Rate":
+        "15.36"}, {"Date": "16 July 2012", "Rate": "15.36"}, {"Date": "15 July 2012",
+        "Rate": "15.39"}, {"Date": "12 July 2012", "Rate": "15.40"}, {"Date": "11
+        July 2012", "Rate": "15.32"}, {"Date": "10 July 2012", "Rate": "15.30"}, {"Date":
+        "09 July 2012", "Rate": "15.35"}, {"Date": "08 July 2012", "Rate": "15.33"},
+        {"Date": "05 July 2012", "Rate": "15.38"}, {"Date": "04 July 2012", "Rate":
+        "15.29"}, {"Date": "03 July 2012", "Rate": "15.39"}, {"Date": "02 July 2012",
+        "Rate": "15.41"}, {"Date": "01 July 2012", "Rate": "15.34"}, {"Date": "28
+        June 2012", "Rate": "15.41"}, {"Date": "27 June 2012", "Rate": "15.38"}, {"Date":
+        "26 June 2012", "Rate": "15.36"}, {"Date": "25 June 2012", "Rate": "15.35"},
+        {"Date": "24 June 2012", "Rate": "15.33"}, {"Date": "21 June 2012", "Rate":
+        "15.41"}, {"Date": "20 June 2012", "Rate": "15.41"}, {"Date": "19 June 2012",
+        "Rate": "15.36"}, {"Date": "18 June 2012", "Rate": "15.38"}, {"Date": "17
+        June 2012", "Rate": "15.35"}, {"Date": "14 June 2012", "Rate": "15.33"}, {"Date":
+        "13 June 2012", "Rate": "15.41"}, {"Date": "12 June 2012", "Rate": "15.36"},
+        {"Date": "11 June 2012", "Rate": "15.36"}, {"Date": "10 June 2012", "Rate":
+        "15.39"}, {"Date": "07 June 2012", "Rate": "15.37"}, {"Date": "06 June 2012",
+        "Rate": "15.40"}, {"Date": "05 June 2012", "Rate": "15.38"}, {"Date": "04
+        June 2012", "Rate": "15.36"}, {"Date": "03 June 2012", "Rate": "15.35"}, {"Date":
+        "31 May 2012", "Rate": "15.40"}, {"Date": "30 May 2012", "Rate": "15.41"},
+        {"Date": "29 May 2012", "Rate": "15.38"}, {"Date": "28 May 2012", "Rate":
+        "15.38"}, {"Date": "27 May 2012", "Rate": "15.34"}, {"Date": "24 May 2012",
+        "Rate": "15.37"}, {"Date": "23 May 2012", "Rate": "15.42"}, {"Date": "22 May
+        2012", "Rate": "15.39"}, {"Date": "21 May 2012", "Rate": "15.34"}, {"Date":
+        "20 May 2012", "Rate": "15.38"}, {"Date": "17 May 2012", "Rate": "15.36"},
+        {"Date": "16 May 2012", "Rate": "15.41"}, {"Date": "15 May 2012", "Rate":
+        "15.40"}, {"Date": "14 May 2012", "Rate": "15.31"}, {"Date": "13 May 2012",
+        "Rate": "15.36"}, {"Date": "10 May 2012", "Rate": "15.30"}, {"Date": "09 May
+        2012", "Rate": "15.41"}, {"Date": "08 May 2012", "Rate": "15.35"}, {"Date":
+        "07 May 2012", "Rate": "15.32"}, {"Date": "06 May 2012", "Rate": "15.39"},
+        {"Date": "03 May 2012", "Rate": "15.40"}, {"Date": "02 May 2012", "Rate":
+        "15.38"}, {"Date": "30 April 2012", "Rate": "15.40"}, {"Date": "29 April 2012",
+        "Rate": "15.33"}, {"Date": "26 April 2012", "Rate": "15.34"}, {"Date": "25
+        April 2012", "Rate": "15.41"}, {"Date": "24 April 2012", "Rate": "15.33"},
+        {"Date": "23 April 2012", "Rate": "15.36"}, {"Date": "22 April 2012", "Rate":
+        "15.33"}, {"Date": "19 April 2012", "Rate": "15.40"}, {"Date": "18 April 2012",
+        "Rate": "15.40"}, {"Date": "17 April 2012", "Rate": "15.34"}, {"Date": "16
+        April 2012", "Rate": "15.37"}, {"Date": "15 April 2012", "Rate": "15.38"},
+        {"Date": "12 April 2012", "Rate": "15.35"}, {"Date": "11 April 2012", "Rate":
+        "15.41"}, {"Date": "10 April 2012", "Rate": "15.37"}, {"Date": "09 April 2012",
+        "Rate": "15.35"}, {"Date": "08 April 2012", "Rate": "15.35"}, {"Date": "05
+        April 2012", "Rate": "15.34"}, {"Date": "04 April 2012", "Rate": "15.41"},
+        {"Date": "03 April 2012", "Rate": "15.38"}, {"Date": "02 April 2012", "Rate":
+        "15.32"}, {"Date": "01 April 2012", "Rate": "15.40"}, {"Date": "29 March 2012",
+        "Rate": "15.41"}, {"Date": "28 March 2012", "Rate": "15.41"}, {"Date": "27
+        March 2012", "Rate": "15.36"}, {"Date": "26 March 2012", "Rate": "15.36"},
+        {"Date": "25 March 2012", "Rate": "15.38"}, {"Date": "22 March 2012", "Rate":
+        "15.37"}, {"Date": "21 March 2012", "Rate": "15.41"}, {"Date": "20 March 2012",
+        "Rate": "15.38"}, {"Date": "19 March 2012", "Rate": "15.36"}, {"Date": "18
+        March 2012", "Rate": "15.40"}, {"Date": "15 March 2012", "Rate": "15.36"},
+        {"Date": "14 March 2012", "Rate": "15.39"}, {"Date": "13 March 2012", "Rate":
+        "15.31"}, {"Date": "12 March 2012", "Rate": "15.35"}, {"Date": "11 March 2012",
+        "Rate": "15.37"}, {"Date": "08 March 2012", "Rate": "15.31"}, {"Date": "07
+        March 2012", "Rate": "15.40"}, {"Date": "06 March 2012", "Rate": "15.34"},
+        {"Date": "05 March 2012", "Rate": "15.37"}, {"Date": "04 March 2012", "Rate":
+        "15.38"}, {"Date": "29 February 2012", "Rate": "15.41"}, {"Date": "28 February
+        2012", "Rate": "15.38"}, {"Date": "27 February 2012", "Rate": "15.38"}, {"Date":
+        "23 February 2012", "Rate": "15.35"}, {"Date": "22 February 2012", "Rate":
+        "15.42"}, {"Date": "21 February 2012", "Rate": "15.38"}, {"Date": "20 February
+        2012", "Rate": "15.38"}, {"Date": "19 February 2012", "Rate": "15.37"}, {"Date":
+        "16 February 2012", "Rate": "15.38"}, {"Date": "15 February 2012", "Rate":
+        "15.41"}, {"Date": "14 February 2012", "Rate": "15.38"}, {"Date": "13 February
+        2012", "Rate": "15.38"}, {"Date": "12 February 2012", "Rate": "15.32"}, {"Date":
+        "09 February 2012", "Rate": "15.39"}, {"Date": "08 February 2012", "Rate":
+        "15.33"}, {"Date": "07 February 2012", "Rate": "15.30"}, {"Date": "06 February
+        2012", "Rate": "15.30"}, {"Date": "05 February 2012", "Rate": "15.37"}, {"Date":
+        "02 February 2012", "Rate": "15.40"}, {"Date": "01 February 2012", "Rate":
+        "15.41"}, {"Date": "31 January 2012", "Rate": "15.39"}, {"Date": "30 January
+        2012", "Rate": "15.38"}, {"Date": "29 January 2012", "Rate": "15.37"}, {"Date":
+        "26 January 2012", "Rate": "15.41"}, {"Date": "25 January 2012", "Rate": "15.37"},
+        {"Date": "23 January 2012", "Rate": "15.31"}, {"Date": "22 January 2012",
+        "Rate": "15.35"}, {"Date": "19 January 2012", "Rate": "15.37"}, {"Date": "18
+        January 2012", "Rate": "15.40"}, {"Date": "17 January 2012", "Rate": "15.38"},
+        {"Date": "16 January 2012", "Rate": "15.34"}, {"Date": "15 January 2012",
+        "Rate": "15.37"}, {"Date": "12 January 2012", "Rate": "15.39"}, {"Date": "11
+        January 2012", "Rate": "15.40"}, {"Date": "10 January 2012", "Rate": "15.36"},
+        {"Date": "09 January 2012", "Rate": "15.30"}, {"Date": "08 January 2012",
+        "Rate": "15.31"}, {"Date": "05 January 2012", "Rate": "15.37"}, {"Date": "04
+        January 2012", "Rate": "15.40"}, {"Date": "03 January 2012", "Rate": "15.34"},
+        {"Date": "02 January 2012", "Rate": "15.39"}, {"Date": "28 December 2011",
+        "Rate": "15.41"}, {"Date": "27 December 2011", "Rate": "15.38"}, {"Date":
+        "26 December 2011", "Rate": "15.35"}, {"Date": "25 December 2011", "Rate":
+        "15.38"}, {"Date": "22 December 2011", "Rate": "15.40"}, {"Date": "21 December
+        2011", "Rate": "15.40"}, {"Date": "20 December 2011", "Rate": "15.36"}, {"Date":
+        "19 December 2011", "Rate": "15.33"}, {"Date": "18 December 2011", "Rate":
+        "15.40"}, {"Date": "15 December 2011", "Rate": "15.36"}, {"Date": "14 December
+        2011", "Rate": "15.39"}, {"Date": "13 December 2011", "Rate": "15.32"}, {"Date":
+        "12 December 2011", "Rate": "15.32"}, {"Date": "11 December 2011", "Rate":
+        "15.36"}, {"Date": "08 December 2011", "Rate": "15.31"}, {"Date": "07 December
+        2011", "Rate": "15.41"}, {"Date": "06 December 2011", "Rate": "15.37"}, {"Date":
+        "05 December 2011", "Rate": "15.34"}, {"Date": "04 December 2011", "Rate":
+        "15.37"}, {"Date": "01 December 2011", "Rate": "15.38"}, {"Date": "30 November
+        2011", "Rate": "15.41"}, {"Date": "29 November 2011", "Rate": "15.38"}, {"Date":
+        "28 November 2011", "Rate": "15.40"}, {"Date": "27 November 2011", "Rate":
+        "15.37"}, {"Date": "24 November 2011", "Rate": "15.25"}, {"Date": "23 November
+        2011", "Rate": "15.41"}, {"Date": "22 November 2011", "Rate": "15.36"}, {"Date":
+        "21 November 2011", "Rate": "15.39"}, {"Date": "20 November 2011", "Rate":
+        "15.39"}, {"Date": "17 November 2011", "Rate": "15.37"}, {"Date": "16 November
+        2011", "Rate": "15.38"}, {"Date": "15 November 2011", "Rate": "15.31"}, {"Date":
+        "14 November 2011", "Rate": "15.34"}, {"Date": "10 November 2011", "Rate":
+        "15.32"}, {"Date": "09 November 2011", "Rate": "15.38"}, {"Date": "02 November
+        2011", "Rate": "15.41"}, {"Date": "01 November 2011", "Rate": "15.39"}, {"Date":
+        "31 October 2011", "Rate": "15.37"}, {"Date": "30 October 2011", "Rate": "15.39"},
+        {"Date": "27 October 2011", "Rate": "15.37"}, {"Date": "26 October 2011",
+        "Rate": "15.41"}, {"Date": "25 October 2011", "Rate": "15.35"}, {"Date": "24
+        October 2011", "Rate": "15.36"}, {"Date": "23 October 2011", "Rate": "15.35"},
+        {"Date": "20 October 2011", "Rate": "15.39"}, {"Date": "19 October 2011",
+        "Rate": "15.40"}, {"Date": "18 October 2011", "Rate": "15.33"}, {"Date": "17
+        October 2011", "Rate": "15.34"}, {"Date": "16 October 2011", "Rate": "15.40"},
+        {"Date": "13 October 2011", "Rate": "15.39"}, {"Date": "12 October 2011",
+        "Rate": "15.42"}, {"Date": "11 October 2011", "Rate": "15.37"}, {"Date": "10
+        October 2011", "Rate": "15.33"}, {"Date": "09 October 2011", "Rate": "15.38"},
+        {"Date": "06 October 2011", "Rate": "15.38"}, {"Date": "05 October 2011",
+        "Rate": "15.41"}, {"Date": "04 October 2011", "Rate": "15.36"}, {"Date": "03
+        October 2011", "Rate": "15.36"}, {"Date": "02 October 2011", "Rate": "15.39"},
+        {"Date": "29 September 2011", "Rate": "15.39"}, {"Date": "28 September 2011",
+        "Rate": "15.41"}, {"Date": "27 September 2011", "Rate": "15.40"}, {"Date":
+        "26 September 2011", "Rate": "15.38"}, {"Date": "25 September 2011", "Rate":
+        "15.36"}, {"Date": "22 September 2011", "Rate": "15.39"}, {"Date": "21 September
+        2011", "Rate": "15.42"}, {"Date": "20 September 2011", "Rate": "15.41"}, {"Date":
+        "19 September 2011", "Rate": "15.35"}, {"Date": "18 September 2011", "Rate":
+        "15.31"}, {"Date": "15 September 2011", "Rate": "15.38"}, {"Date": "14 September
+        2011", "Rate": "15.38"}, {"Date": "13 September 2011", "Rate": "15.35"}, {"Date":
+        "12 September 2011", "Rate": "15.38"}, {"Date": "11 September 2011", "Rate":
+        "15.40"}, {"Date": "08 September 2011", "Rate": "15.40"}, {"Date": "07 September
+        2011", "Rate": "15.34"}, {"Date": "06 September 2011", "Rate": "15.36"}, {"Date":
+        "05 September 2011", "Rate": "15.36"}, {"Date": "04 September 2011", "Rate":
+        "15.40"}, {"Date": "29 August 2011", "Rate": "15.37"}, {"Date": "28 August
+        2011", "Rate": "15.36"}, {"Date": "25 August 2011", "Rate": "15.40"}, {"Date":
+        "24 August 2011", "Rate": "15.41"}, {"Date": "23 August 2011", "Rate": "15.37"},
+        {"Date": "22 August 2011", "Rate": "15.32"}, {"Date": "21 August 2011", "Rate":
+        "15.35"}, {"Date": "18 August 2011", "Rate": "15.33"}, {"Date": "17 August
+        2011", "Rate": "15.39"}, {"Date": "16 August 2011", "Rate": "15.34"}, {"Date":
+        "15 August 2011", "Rate": "15.33"}, {"Date": "14 August 2011", "Rate": "15.36"},
+        {"Date": "11 August 2011", "Rate": "15.39"}, {"Date": "10 August 2011", "Rate":
+        "15.41"}, {"Date": "09 August 2011", "Rate": "15.33"}, {"Date": "08 August
+        2011", "Rate": "15.37"}, {"Date": "07 August 2011", "Rate": "15.35"}, {"Date":
+        "04 August 2011", "Rate": "15.41"}, {"Date": "03 August 2011", "Rate": "15.39"},
+        {"Date": "02 August 2011", "Rate": "15.36"}, {"Date": "31 July 2011", "Rate":
+        "15.38"}, {"Date": "28 July 2011", "Rate": "15.38"}, {"Date": "25 July 2011",
+        "Rate": "15.33"}, {"Date": "24 July 2011", "Rate": "15.41"}, {"Date": "21
+        July 2011", "Rate": "15.33"}, {"Date": "20 July 2011", "Rate": "15.40"}, {"Date":
+        "19 July 2011", "Rate": "15.35"}, {"Date": "18 July 2011", "Rate": "15.36"},
+        {"Date": "17 July 2011", "Rate": "15.35"}, {"Date": "14 July 2011", "Rate":
+        "15.34"}, {"Date": "13 July 2011", "Rate": "15.39"}, {"Date": "12 July 2011",
+        "Rate": "15.34"}, {"Date": "11 July 2011", "Rate": "15.31"}, {"Date": "10
+        July 2011", "Rate": "15.30"}, {"Date": "07 July 2011", "Rate": "15.32"}, {"Date":
+        "06 July 2011", "Rate": "15.37"}, {"Date": "05 July 2011", "Rate": "15.28"},
+        {"Date": "04 July 2011", "Rate": "15.32"}, {"Date": "03 July 2011", "Rate":
+        "15.38"}, {"Date": "30 June 2011", "Rate": "15.38"}, {"Date": "29 June 2011",
+        "Rate": "15.34"}, {"Date": "28 June 2011", "Rate": "15.41"}, {"Date": "27
+        June 2011", "Rate": "15.37"}, {"Date": "26 June 2011", "Rate": "15.39"}, {"Date":
+        "23 June 2011", "Rate": "15.34"}, {"Date": "22 June 2011", "Rate": "15.28"},
+        {"Date": "21 June 2011", "Rate": "15.35"}, {"Date": "20 June 2011", "Rate":
+        "15.28"}, {"Date": "19 June 2011", "Rate": "15.30"}, {"Date": "16 June 2011",
+        "Rate": "15.34"}, {"Date": "15 June 2011", "Rate": "15.33"}, {"Date": "14
+        June 2011", "Rate": "15.35"}, {"Date": "13 June 2011", "Rate": "15.26"}, {"Date":
+        "12 June 2011", "Rate": "15.42"}, {"Date": "09 June 2011", "Rate": "15.33"},
+        {"Date": "08 June 2011", "Rate": "15.36"}, {"Date": "07 June 2011", "Rate":
+        "15.32"}, {"Date": "06 June 2011", "Rate": "15.31"}, {"Date": "05 June 2011",
+        "Rate": "15.39"}, {"Date": "02 June 2011", "Rate": "15.32"}, {"Date": "01
+        June 2011", "Rate": "15.37"}, {"Date": "31 May 2011", "Rate": "15.33"}, {"Date":
+        "30 May 2011", "Rate": "15.33"}, {"Date": "29 May 2011", "Rate": "15.31"},
+        {"Date": "26 May 2011", "Rate": "15.36"}, {"Date": "25 May 2011", "Rate":
+        "15.27"}, {"Date": "24 May 2011", "Rate": "15.36"}, {"Date": "23 May 2011",
+        "Rate": "15.35"}, {"Date": "22 May 2011", "Rate": "15.30"}, {"Date": "19 May
+        2011", "Rate": "15.37"}, {"Date": "18 May 2011", "Rate": "15.21"}, {"Date":
+        "17 May 2011", "Rate": "15.35"}, {"Date": "16 May 2011", "Rate": "15.32"},
+        {"Date": "15 May 2011", "Rate": "15.29"}, {"Date": "12 May 2011", "Rate":
+        "15.29"}, {"Date": "11 May 2011", "Rate": "15.42"}, {"Date": "10 May 2011",
+        "Rate": "15.33"}, {"Date": "09 May 2011", "Rate": "15.27"}, {"Date": "08 May
+        2011", "Rate": "15.34"}, {"Date": "05 May 2011", "Rate": "15.42"}, {"Date":
+        "04 May 2011", "Rate": "15.33"}, {"Date": "03 May 2011", "Rate": "15.36"},
+        {"Date": "02 May 2011", "Rate": "15.33"}, {"Date": "28 April 2011", "Rate":
+        "15.03"}, {"Date": "27 April 2011", "Rate": "15.13"}, {"Date": "26 April 2011",
+        "Rate": "15.16"}, {"Date": "25 April 2011", "Rate": "15.28"}, {"Date": "24
+        April 2011", "Rate": "14.90"}, {"Date": "21 April 2011", "Rate": "14.75"}]'
+  recorded_at: Fri, 22 May 2026 12:50:38 GMT
+recorded_with: VCR 6.4.0
