@@ -48,6 +48,7 @@ class Provider < Sequel::Model(:providers)
 
         _(records.length).must_equal(6)
         usd = records.find { |r| r[:base] == "USD" }
+
         _(usd[:quote]).must_equal("VUV")
         _(usd[:rate]).must_be_close_to(116.28, 0.001)
         _(usd[:date]).must_equal(Date.new(2026, 5, 22))
