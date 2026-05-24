@@ -1,0 +1,12 @@
+{
+  "key": "CBS_WS",
+  "name": "Central Bank of Samoa",
+  "country_code": "WS",
+  "rate_type": "indicative reference rate",
+  "pivot_currency": "WST",
+  "data_url": "https://cbs.gov.ws/daily-exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 19-21 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2008-01-03"
+}
