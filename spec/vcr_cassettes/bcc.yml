@@ -1,0 +1,1004 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=AUD&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:21 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '91'
+      X-Ratelimit-Reset:
+      - '17'
+      Cache-Control:
+      - public, max-age=77199, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-AUD-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":17.1732,"tasaPublica":85.866,"tasaEspecial":359.2061},{"fecha":"2026-05-20","tasaOficial":17.0724,"tasaPublica":85.362,"tasaEspecial":360.65445},{"fecha":"2026-05-21","tasaOficial":17.166,"tasaPublica":85.83,"tasaEspecial":362.63175},{"fecha":"2026-05-22","tasaOficial":17.1828,"tasaPublica":85.914,"tasaEspecial":362.98665}]'
+  recorded_at: Sun, 24 May 2026 06:33:21 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=CAD&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:23 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '82'
+      X-Ratelimit-Reset:
+      - '15'
+      Cache-Control:
+      - public, max-age=77197, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-CAD-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":17.46217,"tasaPublica":87.31083,"tasaEspecial":365.25029},{"fecha":"2026-05-20","tasaOficial":17.45455,"tasaPublica":87.27273,"tasaEspecial":368.72727},{"fecha":"2026-05-21","tasaOficial":17.46344,"tasaPublica":87.31718,"tasaEspecial":368.91508},{"fecha":"2026-05-22","tasaOficial":17.41844,"tasaPublica":87.09221,"tasaEspecial":367.96458}]'
+  recorded_at: Sun, 24 May 2026 06:33:23 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=CHF&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '77'
+      X-Ratelimit-Reset:
+      - '14'
+      Cache-Control:
+      - public, max-age=77196, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-CHF-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":30.56935,"tasaPublica":152.84677,"tasaEspecial":639.40899},{"fecha":"2026-05-20","tasaOficial":30.43175,"tasaPublica":152.15875,"tasaEspecial":642.87073},{"fecha":"2026-05-21","tasaOficial":30.47619,"tasaPublica":152.38095,"tasaEspecial":643.80952},{"fecha":"2026-05-22","tasaOficial":30.51106,"tasaPublica":152.5553,"tasaEspecial":644.54615}]'
+  recorded_at: Sun, 24 May 2026 06:33:24 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=CNY&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '74'
+      X-Ratelimit-Reset:
+      - '13'
+      Cache-Control:
+      - public, max-age=77195, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-CNY-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":3.52928,"tasaPublica":17.64641,"tasaEspecial":73.82082},{"fecha":"2026-05-20","tasaOficial":3.52167,"tasaPublica":17.60835,"tasaEspecial":74.39526},{"fecha":"2026-05-21","tasaOficial":3.52871,"tasaPublica":17.64356,"tasaEspecial":74.54402},{"fecha":"2026-05-22","tasaOficial":3.52778,"tasaPublica":17.63889,"tasaEspecial":74.5243}]'
+  recorded_at: Sun, 24 May 2026 06:33:25 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=DKK&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '71'
+      X-Ratelimit-Reset:
+      - '12'
+      Cache-Control:
+      - public, max-age=77195, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-DKK-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":3.7396,"tasaPublica":18.698,"tasaEspecial":78.21995},{"fecha":"2026-05-20","tasaOficial":3.72926,"tasaPublica":18.64628,"tasaEspecial":78.78053},{"fecha":"2026-05-21","tasaOficial":3.73337,"tasaPublica":18.66687,"tasaEspecial":78.86754},{"fecha":"2026-05-22","tasaOficial":3.73192,"tasaPublica":18.65962,"tasaEspecial":78.83688}]'
+  recorded_at: Sun, 24 May 2026 06:33:26 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=EUR&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:29 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '60'
+      X-Ratelimit-Reset:
+      - '9'
+      Cache-Control:
+      - public, max-age=77191, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-EUR-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":27.9456,"tasaPublica":139.728,"tasaEspecial":584.5288},{"fecha":"2026-05-20","tasaOficial":27.8664,"tasaPublica":139.332,"tasaEspecial":588.6777},{"fecha":"2026-05-21","tasaOficial":27.894,"tasaPublica":139.47,"tasaEspecial":589.26075},{"fecha":"2026-05-22","tasaOficial":27.888,"tasaPublica":139.44,"tasaEspecial":589.134}]'
+  recorded_at: Sun, 24 May 2026 06:33:29 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=GBP&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '47'
+      X-Ratelimit-Reset:
+      - '8'
+      Cache-Control:
+      - public, max-age=77190, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-GBP-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":32.202,"tasaPublica":161.01,"tasaEspecial":673.5585},{"fecha":"2026-05-20","tasaOficial":32.1804,"tasaPublica":160.902,"tasaEspecial":679.81095},{"fecha":"2026-05-21","tasaOficial":32.2524,"tasaPublica":161.262,"tasaEspecial":681.33195},{"fecha":"2026-05-22","tasaOficial":32.2536,"tasaPublica":161.268,"tasaEspecial":681.3573}]'
+  recorded_at: Sun, 24 May 2026 06:33:30 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=JPY&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '269'
+      X-Ratelimit-Reset:
+      - '54'
+      Cache-Control:
+      - public, max-age=77190, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-JPY-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":6.62396,"tasaPublica":1.32479,"tasaEspecial":0.31668},{"fecha":"2026-05-20","tasaOficial":6.62229,"tasaPublica":1.32446,"tasaEspecial":0.31348},{"fecha":"2026-05-21","tasaOficial":6.62,"tasaPublica":1.324,"tasaEspecial":0.31337},{"fecha":"2026-05-22","tasaOficial":6.62375,"tasaPublica":1.32475,"tasaEspecial":0.31355}]'
+  recorded_at: Sun, 24 May 2026 06:33:31 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=MXN&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '261'
+      X-Ratelimit-Reset:
+      - '53'
+      Cache-Control:
+      - public, max-age=77189, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-MXN-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":1.3876,"tasaPublica":6.938,"tasaEspecial":29.02397},{"fecha":"2026-05-20","tasaOficial":1.37989,"tasaPublica":6.89947,"tasaEspecial":29.15024},{"fecha":"2026-05-21","tasaOficial":1.38753,"tasaPublica":6.93766,"tasaEspecial":29.31161},{"fecha":"2026-05-22","tasaOficial":1.38879,"tasaPublica":6.94394,"tasaEspecial":29.33816}]'
+  recorded_at: Sun, 24 May 2026 06:33:31 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=NOK&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '21'
+      X-Ratelimit-Reset:
+      - '5'
+      Cache-Control:
+      - public, max-age=77187, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-NOK-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":2.59069,"tasaPublica":12.95344,"tasaEspecial":54.18855},{"fecha":"2026-05-20","tasaOficial":2.58999,"tasaPublica":12.94994,"tasaEspecial":54.71351},{"fecha":"2026-05-21","tasaOficial":2.59157,"tasaPublica":12.95784,"tasaEspecial":54.74689},{"fecha":"2026-05-22","tasaOficial":2.59685,"tasaPublica":12.98427,"tasaEspecial":54.85855}]'
+  recorded_at: Sun, 24 May 2026 06:33:33 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=RUB&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '29'
+      X-Ratelimit-Reset:
+      - '4'
+      Cache-Control:
+      - public, max-age=77186, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-RUB-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":0.33122,"tasaPublica":1.65609,"tasaEspecial":6.92796},{"fecha":"2026-05-20","tasaOficial":0.33708,"tasaPublica":1.68539,"tasaEspecial":7.12079},{"fecha":"2026-05-21","tasaOficial":0.33562,"tasaPublica":1.67809,"tasaEspecial":7.08992},{"fecha":"2026-05-22","tasaOficial":0.33703,"tasaPublica":1.68516,"tasaEspecial":7.11979}]'
+  recorded_at: Sun, 24 May 2026 06:33:34 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=SEK&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '21'
+      X-Ratelimit-Reset:
+      - '4'
+      Cache-Control:
+      - public, max-age=77186, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-SEK-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":2.55232,"tasaPublica":12.76161,"tasaEspecial":53.38608},{"fecha":"2026-05-20","tasaOficial":2.5555,"tasaPublica":12.77751,"tasaEspecial":53.98499},{"fecha":"2026-05-21","tasaOficial":2.57111,"tasaPublica":12.85554,"tasaEspecial":54.31464},{"fecha":"2026-05-22","tasaOficial":2.57182,"tasaPublica":12.85912,"tasaEspecial":54.32977}]'
+  recorded_at: Sun, 24 May 2026 06:33:34 GMT
+- request:
+    method: get
+    uri: https://api.bc.gob.cu/v1/tasas-de-cambio/historico?codigoMoneda=USD&fechaFin=2026-05-22&fechaInicio=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.bc.gob.cu
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 24 May 2026 06:33:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      Origin-Agent-Cluster:
+      - "?1"
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      - max-age=63072000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      Permissions-Policy:
+      - geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=()
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type,Content-Disposition,Cache-Control,ETag,Last-Modified
+      X-Ratelimit-Limit:
+      - '300'
+      X-Ratelimit-Remaining:
+      - '224'
+      X-Ratelimit-Reset:
+      - '48'
+      Cache-Control:
+      - public, max-age=77184, stale-while-revalidate=21600
+      Etag:
+      - W/"tasas-1-1779602401026-historico-USD-2026-05-19-2026-05-22"
+      Last-Modified:
+      - Sun, 24 May 2026 06:00:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"fecha":"2026-05-19","tasaOficial":24,"tasaPublica":120,"tasaEspecial":502},{"fecha":"2026-05-20","tasaOficial":24,"tasaPublica":120,"tasaEspecial":507},{"fecha":"2026-05-21","tasaOficial":24,"tasaPublica":120,"tasaEspecial":507},{"fecha":"2026-05-22","tasaOficial":24,"tasaPublica":120,"tasaEspecial":507}]'
+  recorded_at: Sun, 24 May 2026 06:33:36 GMT
+recorded_with: VCR 6.4.0
