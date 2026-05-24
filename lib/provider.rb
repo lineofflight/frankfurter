@@ -8,6 +8,7 @@ require "json"
 require "log"
 require "money/currency"
 require "currency_coverage"
+require "currency_terminal_date"
 require "provider/adapters/adapter"
 require "rate"
 
@@ -78,6 +79,10 @@ class Provider < Sequel::Model(:providers)
     adapter.fetch_each(after:) do |records|
       fetched = true
       records.reject! { |r| [r[:base], r[:quote]].any? { |c| !Money::Currency.find(c) } }
+      records.reject! do |r|
+        date = r[:date].is_a?(Date) ? r[:date] : Date.parse(r[:date].to_s)
+        CurrencyTerminalDate.expired?(r[:base], date) || CurrencyTerminalDate.expired?(r[:quote], date)
+      end
       records.reject! { |r| r[:rate].nil? || r[:rate] <= 0 }
       records.each { |r| r[:provider] = key }
 

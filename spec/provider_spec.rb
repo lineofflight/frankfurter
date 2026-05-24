@@ -304,6 +304,48 @@ describe Provider do
       _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "JPY").count).must_equal(0)
     end
 
+    it "drops records dated on or after a defunct currency's terminal date" do
+      defunct_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            # BYR retired 2016-07-01 — these should be dropped
+            { date: Date.new(2016, 7, 1), base: "EUR", quote: "BYR", rate: 22000.0 },
+            { date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", rate: 0.00005 },
+            # Keep: before terminal date
+            { date: Date.new(2016, 6, 30), base: "EUR", quote: "BYR", rate: 22000.0 },
+            # Keep: unrelated record
+            { date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", rate: 1.1 },
+          ]
+        end
+      end
+
+      provider.stub(:adapter, defunct_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(0)
+      _(Rate.where(provider: provider.key, base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(0)
+      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
+      _(Rate.where(provider: provider.key, quote: "USD", date: Date.new(2016, 7, 1)).count).must_equal(1)
+    end
+
+    it "leaves records for codes not in the terminal-date table unchanged" do
+      neutral_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.new(2099, 1, 1), base: "EUR", quote: "GBP", rate: 0.85 },
+          ]
+        end
+      end
+
+      provider.stub(:adapter, neutral_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1)).count).must_equal(2)
+    end
+
     it "ingests XDR" do
       xdr_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|

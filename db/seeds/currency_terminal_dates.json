@@ -1,0 +1,70 @@
+[
+  {
+    "iso_code": "BGN",
+    "terminal_date": "2026-01-01",
+    "successor": "EUR",
+    "source": "https://www.consilium.europa.eu/en/press/press-releases/2025/07/08/bulgaria-ready-to-use-the-euro-from-1-january-2026-council-takes-final-steps/",
+    "note": "Bulgaria adopted the euro at 1.95583 BGN per EUR. Council Decision of 8 July 2025."
+  },
+  {
+    "iso_code": "BYR",
+    "terminal_date": "2016-07-01",
+    "successor": "BYN",
+    "ratio": 10000,
+    "source": "https://www.nbrb.by/engl/news/4565",
+    "note": "Redenomination of the Belarusian ruble effective 1 July 2016 per Presidential Edict No. 450 of 4 November 2015."
+  },
+  {
+    "iso_code": "EEK",
+    "terminal_date": "2011-01-01",
+    "successor": "EUR",
+    "source": "https://www.ecb.europa.eu/euro/changeover/estonia/html/index.en.html",
+    "note": "Estonia adopted the euro at 15.6466 EEK per EUR on 1 January 2011. Kroon ceased to be legal tender on 15 January 2011."
+  },
+  {
+    "iso_code": "HRK",
+    "terminal_date": "2023-01-01",
+    "successor": "EUR",
+    "source": "https://www.consilium.europa.eu/en/press/press-releases/2022/07/12/croatia-set-to-join-the-euro-area-on-1-january-2023-council-adopts-final-required-legal-acts/",
+    "note": "Croatia adopted the euro at 7.53450 HRK per EUR. Council Decision (EU) 2022/1211 of 12 July 2022."
+  },
+  {
+    "iso_code": "IEP",
+    "terminal_date": "2002-02-10",
+    "successor": "EUR",
+    "source": "https://en.wikipedia.org/wiki/Irish_pound",
+    "note": "Irish pound ceased to be legal tender after 9 February 2002. Euro became sole legal tender from 10 February 2002. Fixed at 0.787564 IEP per EUR."
+  },
+  {
+    "iso_code": "SLL",
+    "terminal_date": "2022-07-01",
+    "successor": "SLE",
+    "ratio": 1000,
+    "source": "https://www.fbnbanksierraleone.com/wp-content/uploads/2022/03/Curr_redenom_FAQs-final-2.pdf",
+    "note": "Bank of Sierra Leone redenominated the leone on 1 July 2022 at 1000 SLL = 1 SLE. Old leone remained legal tender during transition until 1 January 2024."
+  },
+  {
+    "iso_code": "STD",
+    "terminal_date": "2018-01-01",
+    "successor": "STN",
+    "ratio": 1000,
+    "source": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe_dobra",
+    "note": "Banco Central de São Tomé e Príncipe redenominated the dobra on 1 January 2018 at 1000 STD = 1 STN."
+  },
+  {
+    "iso_code": "VEF",
+    "terminal_date": "2018-08-20",
+    "successor": "VES",
+    "ratio": 100000,
+    "source": "https://en.wikipedia.org/wiki/Venezuelan_bol%C3%ADvar",
+    "note": "BCV redenominated to bolívar soberano on 20 August 2018 at 100000 VEF = 1 VES."
+  },
+  {
+    "iso_code": "ZMK",
+    "terminal_date": "2013-01-01",
+    "successor": "ZMW",
+    "ratio": 1000,
+    "source": "https://www.lusakatimes.com/2012/08/23/bank-zambia-sets-1st-january-2013-kwacha-rebasing/",
+    "note": "Bank of Zambia rebased the kwacha on 1 January 2013 at 1000 ZMK = 1 ZMW. Old kwacha remained legal tender until 30 June 2013."
+  }
+]

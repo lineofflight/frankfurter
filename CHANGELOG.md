@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `/v2/rates` date-range responses are now sorted by date. Rows where carry-forward surfaced an older quote previously appeared out of order.
 - `/v2/rates` no longer returns 500 errors for date/provider/quote combinations where an upstream provider published a zero rate (e.g. BNM's THB/MYR on certain 2006-2018 dates). Non-positive rates are now dropped on ingest.
+- Defunct ISO 4217 codes (BGN, BYR, EEK, HRK, IEP, SLL, STD, VEF, ZMK) are no longer ingested past their retirement or redenomination date. A few providers continued publishing stale records under the old codes; these are now dropped on ingest. Run `rake db:purge_obsolete` to clean up existing rows.
 
 ## [2.0.2] - 2026-05-21
 
