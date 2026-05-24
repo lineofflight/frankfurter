@@ -93,7 +93,7 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.1535, 0.0001)
       end
 
-      it "skips SDR" do
+      it "rewrites SDR to XDR" do
         html = <<~HTML
           <table>
             <tr>
@@ -108,7 +108,10 @@ class Provider < Sequel::Model(:providers)
         HTML
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
 
-        _(records).must_be_empty
+        _(records.length).must_equal(1)
+        _(records.first[:base]).must_equal("XDR")
+        _(records.first[:quote]).must_equal("KHR")
+        _(records.first[:rate]).must_be_close_to(5525.5, 0.0001)
       end
 
       it "extracts USD from the headline KHR/USD line" do

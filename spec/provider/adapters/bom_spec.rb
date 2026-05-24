@@ -71,16 +71,18 @@ class Provider < Sequel::Model(:providers)
         _(rates["KRW"]).must_equal(2.36)
       end
 
-      it "excludes SDR composite" do
+      it "rewrites SDR to XDR" do
         records = adapter.parse({
           "data" => [
             { "RATE_DATE" => "2026-05-22", "USD" => "3,576.42", "SDR" => "4,887.93" },
           ],
         })
-        bases = records.map { |r| r[:base] }
+        xdr = records.find { |r| r[:base] == "XDR" }
 
-        _(bases).wont_include("SDR")
-        _(bases).must_include("USD")
+        _(xdr).wont_be_nil
+        _(xdr[:rate]).must_equal(4887.93)
+        _(xdr[:quote]).must_equal("MNT")
+        _(records.map { |r| r[:base] }).wont_include("SDR")
       end
 
       it "stores XAU and XAG per troy ounce in MNT" do

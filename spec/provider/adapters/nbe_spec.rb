@@ -64,7 +64,7 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(185.9301, 0.0001)
       end
 
-      it "excludes XDR" do
+      it "passes XDR through" do
         json = <<~JSON
           {"success": true, "status": 200, "data": [
             {"buying": "218.207", "selling": "220.389", "date": "2026-05-21",
@@ -74,7 +74,10 @@ class Provider < Sequel::Model(:providers)
         JSON
         records = adapter.parse(json)
 
-        _(records).must_be_empty
+        _(records.length).must_equal(1)
+        _(records.first[:base]).must_equal("XDR")
+        _(records.first[:quote]).must_equal("ETB")
+        _(records.first[:rate]).must_be_close_to(219.298, 0.0001)
       end
 
       it "skips zero rates" do

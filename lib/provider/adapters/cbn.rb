@@ -16,7 +16,9 @@ class Provider
     #
     # Currency names arrive with whitespace variants and dual spellings (e.g.
     # "YEN"/"JAPANESE YEN", "POUND STERLING"/"POUNDS STERLING"). Names are
-    # normalized via NAME_TO_ISO. WAUA and SDR composite units are excluded.
+    # normalized via NAME_TO_ISO, which also maps SDR to its ISO 4217 code
+    # XDR. WAUA (West African Unit of Account) is not ISO 4217 and is
+    # therefore not mapped.
     #
     # Terms: https://www.cbn.gov.ng/Legal.html — redistribution permitted with
     # attribution, content may not be altered.
@@ -24,8 +26,8 @@ class Provider
       URL = "https://www.cbn.gov.ng/api/GetAllExchangeRates"
 
       # Normalized currency name (stripped + upcased) to ISO 4217 code.
-      # WAUA (West African Unit of Account) and SDR are composite units and
-      # are intentionally excluded.
+      # CBN's "SDR" label maps to XDR (the ISO 4217 code for Special
+      # Drawing Rights). WAUA is not ISO 4217 and is omitted.
       NAME_TO_ISO = {
         "CFA" => "XOF",
         "DANISH KRONA" => "DKK",
@@ -35,6 +37,7 @@ class Provider
         "POUND STERLING" => "GBP",
         "POUNDS STERLING" => "GBP",
         "RIYAL" => "SAR",
+        "SDR" => "XDR",
         "SOUTH AFRICAN RAND" => "ZAR",
         "SWISS FRANC" => "CHF",
         "UAE DIRHAM" => "AED",

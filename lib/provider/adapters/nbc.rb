@@ -22,13 +22,14 @@ class Provider < Sequel::Model(:providers)
     # Records are returned in NBC's native direction — foreign currency as base, KHR as
     # quote — matching the convention used by other pivot-in-quote adapters (e.g. NBG, BBK).
     #
-    # SDR is excluded (composite unit, not an ISO currency).
+    # SDR is published under the non-ISO label "SDR" and rewritten to XDR (the ISO 4217
+    # code for Special Drawing Rights) on emit.
     class NBC < Adapter
       BASE_URL = "https://www.nbc.gov.kh/english/economic_research/exchange_rate.php"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
       SYMBOL_PATTERN = %r{\A([A-Z]{3})/KHR\z}
       OER_PATTERN = /\A(\d+)\z/
-      EXCLUDED_QUOTES = ["SDR"].freeze
+      CODE_ALIASES = { "SDR" => "XDR" }.freeze
 
       class << self
         # Per-day endpoint with CSRF round-trip — keep chunks tiny.
@@ -59,7 +60,6 @@ class Provider < Sequel::Model(:providers)
 
           code = cells[1].text.strip[SYMBOL_PATTERN, 1]
           next unless code
-          next if EXCLUDED_QUOTES.include?(code)
 
           unit = Integer(cells[2].text.strip, exception: false)
           next unless unit&.nonzero?
@@ -67,7 +67,8 @@ class Provider < Sequel::Model(:providers)
           average = Float(cells[5].text.strip.delete(","), exception: false)
           next unless average&.nonzero?
 
-          { date:, base: code, quote: "KHR", rate: average / unit }
+          base = CODE_ALIASES.fetch(code, code)
+          { date:, base:, quote: "KHR", rate: average / unit }
         end
 
         oer_rate = extract_oer(doc)

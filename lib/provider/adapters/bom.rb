@@ -29,13 +29,14 @@ class Provider
     #   USD/VND ≈ 25,546 (real ≈ 25,000)
     #   USD/KRW ≈ 1,515 (real ≈ 1,400)
     #
-    # SDR is excluded: composite reserve asset, not an ISO 4217 currency.
+    # SDR is published under the non-ISO label "SDR" and rewritten to XDR
+    # (the ISO 4217 code for Special Drawing Rights) on emit.
     #
     # XAU and XAG are stored per troy ounce in MNT, as published (no per-gram
     # conversion). E.g. XAU=16,172,267.24 MNT/oz on 2026-05-22.
     class BOM < Adapter
       ENDPOINT = URI("https://www.mongolbank.mn/en/currency-rate-movement/data")
-      EXCLUDED_QUOTES = ["SDR"].freeze
+      CODE_ALIASES = { "SDR" => "XDR" }.freeze
 
       def fetch(after: nil, upto: nil)
         body = JSON.generate(
@@ -77,13 +78,13 @@ class Provider
         row.filter_map do |code, value|
           next if code == "RATE_DATE"
           next unless code.is_a?(String) && code.match?(/\A[A-Z]{3}\z/)
-          next if EXCLUDED_QUOTES.include?(code)
           next if value.nil? || value.to_s.strip.empty?
 
           rate = parse_rate(value)
           next if rate.nil? || rate.zero?
 
-          { date:, base: code, quote: "MNT", rate: }
+          base = CODE_ALIASES.fetch(code, code)
+          { date:, base:, quote: "MNT", rate: }
         end
       end
 
