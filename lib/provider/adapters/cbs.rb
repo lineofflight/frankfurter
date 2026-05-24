@@ -33,7 +33,7 @@ class Provider
     #
     # Page caveat: "indicative rates only but not for market use. Kindly refer
     # to the commercial banks for market exchange rates."
-    class CBS_WS < Adapter
+    class CBS < Adapter
       ARCHIVE_URL = "https://cbs.gov.ws/media/Historical-Daily%20-Rates-(2372).xlsx"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 

@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 require_relative "../../helper"
-require "provider/adapters/cbs_ws"
+require "provider/adapters/cbs"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    describe CBS_WS do
+    describe CBS do
       before do
-        VCR.insert_cassette("cbs_ws", match_requests_on: [:method, :host, :path])
+        VCR.insert_cassette("cbs", match_requests_on: [:method, :host, :path])
       end
 
       after do
         VCR.eject_cassette
       end
 
-      let(:adapter) { CBS_WS.new }
+      let(:adapter) { CBS.new }
 
       it "fetches rates from the archive workbook" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 1), upto: Date.new(2026, 5, 22))
@@ -66,11 +66,11 @@ class Provider < Sequel::Model(:providers)
 
       describe "#parse" do
         it "maps source column labels to ISO 4217 codes" do
-          _(CBS_WS::CURRENCIES["TALA/USD"]).must_equal("USD")
-          _(CBS_WS::CURRENCIES["TALA/EURO"]).must_equal("EUR")
-          _(CBS_WS::CURRENCIES["TALA/YEN"]).must_equal("JPY")
-          _(CBS_WS::CURRENCIES["TALA/CNY"]).must_equal("CNY")
-          _(CBS_WS::CURRENCIES["TALA/CNH"]).must_equal("CNH")
+          _(CBS::CURRENCIES["TALA/USD"]).must_equal("USD")
+          _(CBS::CURRENCIES["TALA/EURO"]).must_equal("EUR")
+          _(CBS::CURRENCIES["TALA/YEN"]).must_equal("JPY")
+          _(CBS::CURRENCIES["TALA/CNY"]).must_equal("CNY")
+          _(CBS::CURRENCIES["TALA/CNH"]).must_equal("CNH")
         end
       end
     end
