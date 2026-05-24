@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe BCC do
       before do
-        VCR.insert_cassette("bcc", match_requests_on: [:method, :host], allow_playback_repeats: true)
+        VCR.insert_cassette("bcc", match_requests_on: [:method, :uri], allow_playback_repeats: true)
       end
 
       after { VCR.eject_cassette }

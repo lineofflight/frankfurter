@@ -36,6 +36,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2025, 12, 19)
         end_date = upto || Date.today
+        return [] if start_date > end_date
 
         dataset = []
         first = true
