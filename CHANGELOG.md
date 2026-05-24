@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Mongolia (BOM) as a data provider. Daily statutory reference rates for 39 currencies plus XAU and XAG against MNT, back to 2001-01-02.
 - Central Bank of Nigeria (CBN) as a data provider. Daily official rates against the Nigerian naira (NGN) using the mid of buy/sell, from 2001-12-10.
 - National Bank of Ethiopia (NBE) as a data provider. Daily weighted-average rates for 18 currencies against the Ethiopian birr (ETB) from 2024-10-01, skipping the July to September 2024 float-transition gap.
-- National Reserve Bank of Tonga (NRBT) as a data provider. Daily MID rates for 12 currencies (AUD, CAD, CHF, EUR, FJD, GBP, JPY, NZD, SEK, SGD, USD, WST) against the Tongan paʻanga (TOP), from 2017-01-02.
+- National Reserve Bank of Tonga (NRBT) as a data provider. Daily MID rates for 12 currencies (AUD, CAD, CHF, EUR, FJD, GBP, JPY, NZD, SEK, SGD, USD, WST) against the Tongan paʻanga (TOP), from 2017-01-03.
 
 ### Changed
 

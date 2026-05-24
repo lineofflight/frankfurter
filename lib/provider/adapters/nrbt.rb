@@ -57,7 +57,6 @@ class Provider
         dataset = []
 
         Zip::File.open_buffer(StringIO.new(xlsx_data)) do |zip|
-          shared_strings = parse_shared_strings(zip.read("xl/sharedStrings.xml"))
           workbook = Ox.parse(zip.read("xl/workbook.xml"))
           rels = parse_rels(zip.read("xl/_rels/workbook.xml.rels"))
 
@@ -67,7 +66,7 @@ class Provider
             next unless target
 
             sheet_xml = zip.read("xl/#{target}")
-            dataset.concat(parse_sheet(sheet_xml, shared_strings, after: after, upto: upto))
+            dataset.concat(parse_sheet(sheet_xml, after: after, upto: upto))
           end
         end
 
@@ -93,15 +92,7 @@ class Provider
         end
       end
 
-      def parse_shared_strings(xml)
-        return [] unless xml
-
-        Ox.parse(xml).locate("*/si").map do |si|
-          si.locate("*/t").map { |t| t.text.to_s }.join
-        end
-      end
-
-      def parse_sheet(xml, _shared_strings, after:, upto:)
+      def parse_sheet(xml, after:, upto:)
         doc = Ox.parse(xml)
         records = []
 
