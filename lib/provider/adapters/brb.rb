@@ -61,9 +61,9 @@ class Provider
       }.freeze
 
       class << self
-        # Whole-archive fetch — archive only reaches back to 2024-09, so a single
-        # large window keeps the full backfill in one pass.
-        def backfill_range = 36_525
+        # Chunk the archive so partial progress survives an unparseable PDF — fetch_each
+        # upserts after every window. discover_pdfs re-walks the (small) index per chunk.
+        def backfill_range = 30
       end
 
       def fetch(after: nil, upto: nil)
