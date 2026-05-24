@@ -54,7 +54,7 @@ class Provider
 
         records.select! { |r| r[:date] > after } if after
         records.select! { |r| r[:date] <= end_date }
-        records.uniq! { |r| r[:date] }
+        records.uniq! { |r| [r[:date], r[:base], r[:quote]] }
         records.sort_by! { |r| r[:date] }
         records
       end
@@ -62,7 +62,7 @@ class Provider
       def parse(html)
         doc = Nokogiri::HTML.parse(html)
 
-        doc.css("tr").filter_map do |row|
+        doc.css(".view-content table tr").filter_map do |row|
           time = row.at_css("td.views-field-field-content-post-date time")
           buy_cell = row.at_css("td.views-field-field-buying-us")
           sell_cell = row.at_css("td.views-field-field-selling-us")

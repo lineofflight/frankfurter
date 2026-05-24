@@ -40,24 +40,26 @@ class Provider < Sequel::Model(:providers)
 
       it "parses rate rows and coerces buy/sell to mid" do
         html = <<~HTML
-          <table>
-            <tbody>
-              <tr>
-                <td class="views-field views-field-field-content-post-date">
-                  <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
-                </td>
-                <td class="views-field views-field-field-buying-us">L$182.0000/US$1.00</td>
-                <td class="views-field views-field-field-selling-us">L$184.0000/US$1.00</td>
-              </tr>
-              <tr>
-                <td class="views-field views-field-field-content-post-date">
-                  <time datetime="2026-05-20T12:00:00Z">Wednesday, May 20, 2026</time>
-                </td>
-                <td class="views-field views-field-field-buying-us">L$181.5000/US$1.00</td>
-                <td class="views-field views-field-field-selling-us">L$183.5000/US$1.00</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="view-content">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
+                  </td>
+                  <td class="views-field views-field-field-buying-us">L$182.0000/US$1.00</td>
+                  <td class="views-field views-field-field-selling-us">L$184.0000/US$1.00</td>
+                </tr>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-05-20T12:00:00Z">Wednesday, May 20, 2026</time>
+                  </td>
+                  <td class="views-field views-field-field-buying-us">L$181.5000/US$1.00</td>
+                  <td class="views-field views-field-field-selling-us">L$183.5000/US$1.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         HTML
 
         records = adapter.parse(html)
@@ -72,22 +74,24 @@ class Provider < Sequel::Model(:providers)
 
       it "skips rows missing rate cells" do
         html = <<~HTML
-          <table>
-            <tbody>
-              <tr>
-                <td class="views-field views-field-field-content-post-date">
-                  <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
-                </td>
-              </tr>
-              <tr>
-                <td class="views-field views-field-field-content-post-date">
-                  <time datetime="2026-05-20T12:00:00Z">Wednesday, May 20, 2026</time>
-                </td>
-                <td class="views-field views-field-field-buying-us">L$181.5000/US$1.00</td>
-                <td class="views-field views-field-field-selling-us">L$183.5000/US$1.00</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="view-content">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-05-20T12:00:00Z">Wednesday, May 20, 2026</time>
+                  </td>
+                  <td class="views-field views-field-field-buying-us">L$181.5000/US$1.00</td>
+                  <td class="views-field views-field-field-selling-us">L$183.5000/US$1.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         HTML
 
         records = adapter.parse(html)
@@ -98,17 +102,19 @@ class Provider < Sequel::Model(:providers)
 
       it "skips rows with unparseable rate values" do
         html = <<~HTML
-          <table>
-            <tbody>
-              <tr>
-                <td class="views-field views-field-field-content-post-date">
-                  <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
-                </td>
-                <td class="views-field views-field-field-buying-us">N/A</td>
-                <td class="views-field views-field-field-selling-us">N/A</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="view-content">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-05-21T12:00:00Z">Thursday, May 21, 2026</time>
+                  </td>
+                  <td class="views-field views-field-field-buying-us">N/A</td>
+                  <td class="views-field views-field-field-selling-us">N/A</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         HTML
 
         _(adapter.parse(html)).must_be_empty
