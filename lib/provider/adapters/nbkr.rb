@@ -38,7 +38,7 @@ class Provider
       DAILY_URL = URI("https://www.nbkr.kg/XML/daily.xml")
       WEEKLY_URL = URI("https://www.nbkr.kg/XML/weekly.xml")
       HISTORICAL_URL = "https://www.nbkr.kg/index1.jsp"
-      HISTORICAL_ROW = /<!--date-->([0-9.]+)<!--date-->.*?<!--value-->([0-9,]+)<!--value-->/m
+      HISTORICAL_ROW = /<!--date-->(\d{2}\.\d{2}\.\d{4})<!--date-->.*?<!--value-->(\d+(?:,\d+)?)<!--value-->/m
 
       # NBKR's historical page identifies each currency by an internal valuta_id and
       # publishes rates per Nominal units (foreign side of "Nominal foreign = X KGS").
@@ -172,12 +172,13 @@ class Provider
 
       private
 
-      def historical?(_after, upto)
-        # The live XML feed only ever returns NBKR's current snapshot, so it is the
-        # right choice when fetch_each leaves upto unset (the final loop iteration
-        # that catches us up to today). Any bounded historical window goes to the
-        # HTML scrape.
-        !upto.nil?
+      def historical?(after, upto)
+        # The historical scrape needs both endpoints of the window. Live XML covers
+        # the unbounded "catch up to today" case (upto unset or in the future); any
+        # bounded window strictly in the past goes to the HTML scrape.
+        return false if after.nil? || upto.nil?
+
+        upto < Date.today
       end
 
       def fetch_live
