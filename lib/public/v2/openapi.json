@@ -3,7 +3,7 @@
   "info": {
     "title": "Frankfurter API",
     "description": "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "license": {
       "name": "MIT",
       "url": "https://github.com/lineofflight/frankfurter/blob/main/LICENSE"
