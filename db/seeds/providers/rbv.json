@@ -1,0 +1,12 @@
+{
+  "key": "RBV",
+  "name": "Reserve Bank of Vanuatu",
+  "country_code": "VU",
+  "rate_type": "reference rate",
+  "pivot_currency": "VUV",
+  "data_url": "https://www.rbv.gov.vu/index.php/en/exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 21-23 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2025-08-26"
+}
