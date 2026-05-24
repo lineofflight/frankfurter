@@ -1,0 +1,803 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.rbm.mw/Statistics/ExchangeRatesFilter/
+    body:
+      encoding: US-ASCII
+      string: RateTypes=&StartDate=01%2F02%2F2024&EndDate=01%2F05%2F2024
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.rbm.mw
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private,no-cache, no-store
+      Pragma:
+      - no-cache
+      Content-Type:
+      - text/html; charset=utf-8
+      Expires:
+      - "-1"
+      Server:
+      - Microsoft-IIS/8.0
+      Set-Cookie:
+      - ASP.NET_SessionId=auaocjnl1l2xbp5duskwt4rr; path=/; secure; HttpOnly; SameSite=Lax
+      X-Aspnetmvc-Version:
+      - '5.2'
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Methods:
+      - GET
+      Date:
+      - Sun, 24 May 2026 06:42:24 GMT
+      Content-Length:
+      - '61346'
+    body:
+      encoding: UTF-8
+      string: "<div>\r\n    <h4>\r\n        Exchange Rates<span class=\"date pull-right\"
+        id=\"exchangeRateDate\">From 02-January-2024 to 05-January-2024 </span>\r\n
+        \   </h4>\r\n\r\n    <table id=\"exchange-rates\" class=\"table table-striped
+        table-bordered\" style=\"display: none\">\r\n        <thead style=\"background:
+        #E1E1E1\">\r\n            <tr>\r\n                <th>Currency</th>\r\n                <th>Buying</th>\r\n
+        \               <th>Middle</th>\r\n                <th>Selling</th>\r\n                <th>Date</th>\r\n
+        \           </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr>\r\n
+        \               <td>\r\n                    <strong>\r\n                        AED\r\n
+        \                   </strong>\r\n                </td>\r\n                <td>453.8538</td>\r\n
+        \               <td>458.3832</td>\r\n                <td>462.9125</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        AED\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>453.8785</td>\r\n                <td>458.4081</td>\r\n
+        \               <td>462.9377</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AED\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>453.8785</td>\r\n                <td>458.4081</td>\r\n
+        \               <td>462.9377</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AED\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>453.8785</td>\r\n                <td>458.4081</td>\r\n
+        \               <td>462.9377</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ARS\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2.0534</td>\r\n                <td>2.0739</td>\r\n                <td>2.0944</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ARS\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>2.0561</td>\r\n                <td>2.0766</td>\r\n
+        \               <td>2.0971</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ARS\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2.0562</td>\r\n                <td>2.0767</td>\r\n                <td>2.0972</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ARS\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>2.0616</td>\r\n                <td>2.0822</td>\r\n
+        \               <td>2.1028</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AUD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1116.7388</td>\r\n                <td>1127.8836</td>\r\n
+        \               <td>1139.0285</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AUD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1124.0441</td>\r\n                <td>1135.2619</td>\r\n
+        \               <td>1146.4796</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AUD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1127.5420</td>\r\n                <td>1138.7947</td>\r\n
+        \               <td>1150.0473</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       AUD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1139.8801</td>\r\n                <td>1151.2558</td>\r\n
+        \               <td>1162.6316</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       BWP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>123.3383</td>\r\n                <td>124.5692</td>\r\n
+        \               <td>125.8001</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       BWP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>123.5047</td>\r\n                <td>124.7372</td>\r\n
+        \               <td>125.9698</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       BWP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>125.1714</td>\r\n                <td>126.4206</td>\r\n
+        \               <td>127.6698</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       BWP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>125.3380</td>\r\n                <td>126.5889</td>\r\n
+        \               <td>127.8397</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CAD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1247.2743</td>\r\n                <td>1259.7218</td>\r\n
+        \               <td>1272.1694</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CAD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1249.6121</td>\r\n                <td>1262.0830</td>\r\n
+        \               <td>1274.5539</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CAD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1250.5497</td>\r\n                <td>1263.0299</td>\r\n
+        \               <td>1275.5102</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CAD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1259.3371</td>\r\n                <td>1271.9050</td>\r\n
+        \               <td>1284.4730</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CHF\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2018.0259</td>\r\n                <td>2038.1654</td>\r\n
+        \               <td>2058.3049</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CHF\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2020.8765</td>\r\n                <td>2041.0445</td>\r\n
+        \               <td>2061.2125</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CHF\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2022.0667</td>\r\n                <td>2042.2465</td>\r\n
+        \               <td>2062.4264</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CHF\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2034.7690</td>\r\n                <td>2055.0756</td>\r\n
+        \               <td>2075.3822</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CMD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CMD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CMD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CMD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CNY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>232.5695</td>\r\n                <td>234.8905</td>\r\n
+        \               <td>237.2115</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CNY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>232.9400</td>\r\n                <td>235.2647</td>\r\n
+        \               <td>237.5894</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CNY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>233.3216</td>\r\n                <td>235.6501</td>\r\n
+        \               <td>237.9786</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       CNY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>233.9865</td>\r\n                <td>236.3216</td>\r\n
+        \               <td>238.6568</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       DKK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>244.2564</td>\r\n                <td>246.6941</td>\r\n
+        \               <td>249.1317</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       DKK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>244.3352</td>\r\n                <td>246.7736</td>\r\n
+        \               <td>249.2120</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       DKK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>244.8881</td>\r\n                <td>247.3320</td>\r\n
+        \               <td>249.7759</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       DKK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>246.7041</td>\r\n                <td>249.1661</td>\r\n
+        \               <td>251.6282</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ETB\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>29.7495</td>\r\n                <td>30.0464</td>\r\n                <td>30.3433</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ETB\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>29.7495</td>\r\n                <td>30.0464</td>\r\n
+        \               <td>30.3433</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ETB\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>29.7495</td>\r\n                <td>30.0464</td>\r\n                <td>30.3433</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ETB\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>29.7647</td>\r\n                <td>30.0618</td>\r\n
+        \               <td>30.3588</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       EUR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1875.7042</td>\r\n                <td>1894.4234</td>\r\n
+        \               <td>1913.1426</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       EUR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1876.0476</td>\r\n                <td>1894.7702</td>\r\n
+        \               <td>1913.4928</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       EUR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1880.5111</td>\r\n                <td>1899.2782</td>\r\n
+        \               <td>1918.0454</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       EUR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1893.9016</td>\r\n                <td>1912.8024</td>\r\n
+        \               <td>1931.7032</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       GBP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2168.2358</td>\r\n                <td>2189.8744</td>\r\n
+        \               <td>2211.5130</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       GBP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2174.4160</td>\r\n                <td>2196.1163</td>\r\n
+        \               <td>2217.8166</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       GBP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2174.7594</td>\r\n                <td>2196.4631</td>\r\n
+        \               <td>2218.1668</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       GBP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2186.0898</td>\r\n                <td>2207.9066</td>\r\n
+        \               <td>2229.7234</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       HKD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>213.2899</td>\r\n                <td>215.4185</td>\r\n
+        \               <td>217.5471</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       HKD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>213.3527</td>\r\n                <td>215.4819</td>\r\n
+        \               <td>217.6111</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       HKD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>213.4401</td>\r\n                <td>215.5702</td>\r\n
+        \               <td>217.7003</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       HKD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>213.4893</td>\r\n                <td>215.6199</td>\r\n
+        \               <td>217.7505</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.1074</td>\r\n                <td>0.1084</td>\r\n                <td>0.1095</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        IDR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.1074</td>\r\n                <td>0.1085</td>\r\n
+        \               <td>0.1095</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.1077</td>\r\n                <td>0.1087</td>\r\n                <td>0.1098</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        IDR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.1078</td>\r\n                <td>0.1089</td>\r\n
+        \               <td>0.1100</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IEP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1189.8434</td>\r\n                <td>1201.7178</td>\r\n
+        \               <td>1213.5922</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IEP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1198.2262</td>\r\n                <td>1210.1843</td>\r\n
+        \               <td>1222.1423</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IEP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1200.9891</td>\r\n                <td>1212.9747</td>\r\n
+        \               <td>1224.9604</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       IEP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1201.4219</td>\r\n                <td>1213.4119</td>\r\n
+        \               <td>1225.4018</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       INR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>20.0052</td>\r\n                <td>20.2048</td>\r\n                <td>20.4045</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        INR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>20.0058</td>\r\n                <td>20.2054</td>\r\n
+        \               <td>20.4051</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       INR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>20.0081</td>\r\n                <td>20.2078</td>\r\n                <td>20.4074</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        INR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>20.0410</td>\r\n                <td>20.2410</td>\r\n
+        \               <td>20.4410</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       JPY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>11.4995</td>\r\n                <td>11.6142</td>\r\n                <td>11.7290</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        JPY\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>11.5995</td>\r\n                <td>11.7153</td>\r\n
+        \               <td>11.8310</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       JPY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>11.7351</td>\r\n                <td>11.8522</td>\r\n                <td>11.9693</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        JPY\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>11.7915</td>\r\n                <td>11.9092</td>\r\n
+        \               <td>12.0269</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KES\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>10.6026</td>\r\n                <td>10.7084</td>\r\n                <td>10.8142</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        KES\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>10.6161</td>\r\n                <td>10.7221</td>\r\n
+        \               <td>10.8280</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KES\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>10.6500</td>\r\n                <td>10.7563</td>\r\n                <td>10.8626</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        KES\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>10.6500</td>\r\n                <td>10.7563</td>\r\n
+        \               <td>10.8626</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KRW\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1.2659</td>\r\n                <td>1.2785</td>\r\n                <td>1.2911</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        KRW\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>1.2716</td>\r\n                <td>1.2843</td>\r\n
+        \               <td>1.2970</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KRW\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1.2757</td>\r\n                <td>1.2885</td>\r\n                <td>1.3012</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        KRW\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>1.2814</td>\r\n                <td>1.2942</td>\r\n
+        \               <td>1.3070</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KWD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5419.2113</td>\r\n                <td>5473.2940</td>\r\n
+        \               <td>5527.3767</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KWD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5422.3847</td>\r\n                <td>5476.4991</td>\r\n
+        \               <td>5530.6135</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KWD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5422.7376</td>\r\n                <td>5476.8555</td>\r\n
+        \               <td>5530.9734</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       KWD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5427.8589</td>\r\n                <td>5482.0279</td>\r\n
+        \               <td>5536.1969</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       LKR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5.1714</td>\r\n                <td>5.2230</td>\r\n                <td>5.2746</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        LKR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>5.1722</td>\r\n                <td>5.2238</td>\r\n
+        \               <td>5.2754</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       LKR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5.1875</td>\r\n                <td>5.2392</td>\r\n                <td>5.2910</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        LKR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>5.2004</td>\r\n                <td>5.2523</td>\r\n
+        \               <td>5.3042</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MGA\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.3664</td>\r\n                <td>0.3701</td>\r\n                <td>0.3737</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        MGA\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.3666</td>\r\n                <td>0.3702</td>\r\n
+        \               <td>0.3739</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MGA\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.3666</td>\r\n                <td>0.3702</td>\r\n                <td>0.3739</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        MGA\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.3666</td>\r\n                <td>0.3702</td>\r\n
+        \               <td>0.3739</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MYR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>358.6685</td>\r\n                <td>362.2480</td>\r\n
+        \               <td>365.8274</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MYR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>359.2096</td>\r\n                <td>362.7945</td>\r\n
+        \               <td>366.3793</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MYR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>359.9854</td>\r\n                <td>363.5780</td>\r\n
+        \               <td>367.1706</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MYR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>362.6880</td>\r\n                <td>366.3075</td>\r\n
+        \               <td>369.9271</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MZN\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>26.3515</td>\r\n                <td>26.6145</td>\r\n                <td>26.8775</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        MZN\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>26.3515</td>\r\n                <td>26.6145</td>\r\n
+        \               <td>26.8775</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       MZN\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>26.3515</td>\r\n                <td>26.6145</td>\r\n                <td>26.8775</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        MZN\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>26.3515</td>\r\n                <td>26.6145</td>\r\n
+        \               <td>26.8775</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NOK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>161.2301</td>\r\n                <td>162.8392</td>\r\n
+        \               <td>164.4482</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NOK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>161.3206</td>\r\n                <td>162.9306</td>\r\n
+        \               <td>164.5405</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NOK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>161.9398</td>\r\n                <td>163.5559</td>\r\n
+        \               <td>165.1720</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NOK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>163.8646</td>\r\n                <td>165.5000</td>\r\n
+        \               <td>167.1353</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NZD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1038.7216</td>\r\n                <td>1049.0878</td>\r\n
+        \               <td>1059.4541</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NZD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1044.0570</td>\r\n                <td>1054.4765</td>\r\n
+        \               <td>1064.8960</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NZD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1045.5634</td>\r\n                <td>1055.9979</td>\r\n
+        \               <td>1066.4325</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       NZD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1053.0279</td>\r\n                <td>1063.5370</td>\r\n
+        \               <td>1074.0460</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       PHP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>29.9234</td>\r\n                <td>30.2220</td>\r\n                <td>30.5206</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        PHP\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>29.9395</td>\r\n                <td>30.2383</td>\r\n
+        \               <td>30.5371</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       PHP\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>29.9988</td>\r\n                <td>30.2982</td>\r\n                <td>30.5976</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 02&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        PHP\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>30.0150</td>\r\n                <td>30.3145</td>\r\n
+        \               <td>30.6141</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       PKR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5.9209</td>\r\n                <td>5.9800</td>\r\n                <td>6.0391</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        PKR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>5.9230</td>\r\n                <td>5.9821</td>\r\n
+        \               <td>6.0412</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       PKR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>5.9272</td>\r\n                <td>5.9864</td>\r\n                <td>6.0455</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        PKR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>5.9314</td>\r\n                <td>5.9906</td>\r\n
+        \               <td>6.0498</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>444.4502</td>\r\n                <td>448.8857</td>\r\n
+        \               <td>453.3212</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>444.4620</td>\r\n                <td>448.8977</td>\r\n
+        \               <td>453.3333</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>444.4739</td>\r\n                <td>448.9097</td>\r\n
+        \               <td>453.3454</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>444.4739</td>\r\n                <td>448.9097</td>\r\n
+        \               <td>453.3454</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SEK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>162.1856</td>\r\n                <td>163.8042</td>\r\n
+        \               <td>165.4228</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SEK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>163.0487</td>\r\n                <td>164.6759</td>\r\n
+        \               <td>166.3031</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SEK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>163.5607</td>\r\n                <td>165.1930</td>\r\n
+        \               <td>166.8253</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SEK\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>165.0753</td>\r\n                <td>166.7228</td>\r\n
+        \               <td>168.3702</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SGD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1252.7115</td>\r\n                <td>1265.2133</td>\r\n
+        \               <td>1277.7151</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SGD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1253.9367</td>\r\n                <td>1266.4507</td>\r\n
+        \               <td>1278.9648</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SGD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1257.3420</td>\r\n                <td>1269.8901</td>\r\n
+        \               <td>1282.4381</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       SGD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1261.7204</td>\r\n                <td>1274.3121</td>\r\n
+        \               <td>1286.9038</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       THB\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>48.1854</td>\r\n                <td>48.6663</td>\r\n                <td>49.1472</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 04&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        THB\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>48.1993</td>\r\n                <td>48.6803</td>\r\n
+        \               <td>49.1614</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       THB\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>48.6922</td>\r\n                <td>49.1781</td>\r\n                <td>49.6640</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        THB\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>48.7777</td>\r\n                <td>49.2645</td>\r\n
+        \               <td>49.7512</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       TRY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>55.8691</td>\r\n                <td>56.4267</td>\r\n                <td>56.9843</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        TRY\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>55.9819</td>\r\n                <td>56.5406</td>\r\n
+        \               <td>57.0993</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       TRY\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>55.9845</td>\r\n                <td>56.5433</td>\r\n                <td>57.1020</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        TRY\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>56.1880</td>\r\n                <td>56.7487</td>\r\n
+        \               <td>57.3095</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       TZS\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.6640</td>\r\n                <td>0.6707</td>\r\n                <td>0.6773</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        TZS\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.6640</td>\r\n                <td>0.6707</td>\r\n
+        \               <td>0.6773</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       TZS\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>0.6640</td>\r\n                <td>0.6707</td>\r\n                <td>0.6773</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        TZS\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>0.6654</td>\r\n                <td>0.6720</td>\r\n
+        \               <td>0.6786</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       USD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       USD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       USD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       USD\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>1666.7326</td>\r\n                <td>1683.3663</td>\r\n
+        \               <td>1700.0000</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       XDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2226.9541</td>\r\n                <td>2249.1787</td>\r\n
+        \               <td>2271.4033</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       XDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2228.0377</td>\r\n                <td>2250.2731</td>\r\n
+        \               <td>2272.5085</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 05&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       XDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2232.1046</td>\r\n                <td>2254.3806</td>\r\n
+        \               <td>2276.6566</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 03&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       XDR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>2236.2044</td>\r\n                <td>2258.5213</td>\r\n
+        \               <td>2280.8382</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ZAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>91.7549</td>\r\n                <td>92.6706</td>\r\n                <td>93.5863</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ZAR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>91.7564</td>\r\n                <td>92.6721</td>\r\n
+        \               <td>93.5878</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ZAR\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>92.5913</td>\r\n                <td>93.5153</td>\r\n                <td>94.4393</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ZAR\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>93.8532</td>\r\n                <td>94.7898</td>\r\n
+        \               <td>95.7265</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ZMW\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>64.6647</td>\r\n                <td>65.3100</td>\r\n                <td>65.9554</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 05&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ZMW\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>64.7451</td>\r\n                <td>65.3912</td>\r\n
+        \               <td>66.0374</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 04&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \           <tr>\r\n                <td>\r\n                    <strong>\r\n
+        \                       ZMW\r\n                    </strong>\r\n                </td>\r\n
+        \               <td>64.8484</td>\r\n                <td>65.4955</td>\r\n                <td>66.1427</td>\r\n
+        \               <td style=\"color: #2670a2;\"><span style=''>Jan 03&nbsp;&nbsp;</span><span
+        style=''>2024</span></td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n
+        \                   <strong>\r\n                        ZMW\r\n                    </strong>\r\n
+        \               </td>\r\n                <td>64.9368</td>\r\n                <td>65.5848</td>\r\n
+        \               <td>66.2329</td>\r\n                <td style=\"color: #2670a2;\"><span
+        style=''>Jan 02&nbsp;&nbsp;</span><span style=''>2024</span></td>\r\n            </tr>\r\n
+        \       </tbody>\r\n    </table>\r\n    <h4 class=\"pull-right\">\r\n        <a
+        class=\"btn btn-success\" href=\"/Statistics/ExportData?contentType=ExchangeRates\">\r\n
+        \           <span><i class=\"fa fa-file-excel-o fa-lg\"></i>&nbsp; Export
+        to Excel</span>\r\n        </a>\r\n    </h4>\r\n</div>\r\n\r\n<script type=\"text/javascript\">\r\n
+        \   var onSuccess = function (data) {\r\n        $(\"#exchange-rates\").dataTable({\r\n
+        \           \"bAutoWidth\": false,\r\n            \"aLengthMenu\": false,\r\n
+        \           \"bLengthChange\": false,\r\n            \"bFilter\": false,\r\n
+        \           \"bInfo\": false,\r\n            \"pageLength\": 10,\r\n            \"columns\":
+        [\r\n                { \"width\": \"20%\" },\r\n                { \"width\":
+        \"20%\" },\r\n                { \"width\": \"20%\" },\r\n                {
+        \"width\": \"20%\" },\r\n                { \"width\": \"20%\" }\r\n            ]\r\n
+        \       });\r\n        $('#exchange-rates').show();\r\n    };\r\n\r\n    function
+        onFilterBegin() {\r\n        // Disable the button and hide the other image
+        here\r\n        // or you can hide the whole div like below\r\n        $('#loading').show();\r\n
+        \   }\r\n</script>"
+  recorded_at: Sun, 24 May 2026 06:42:33 GMT
+recorded_with: VCR 6.4.0

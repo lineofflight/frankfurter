@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reserve Bank of Fiji (RBF) as a data provider. Daily mid-rates against the Fijian dollar (FJD) for AUD, NZD, USD, EUR, JPY, GBP, CHF and XDR, back to 2001-01-02.
 - Da Afghanistan Bank (DAB) as a data provider. Daily indicative rates for 10 currencies (USD, EUR, GBP, CHF, INR, PKR, IRR, CNY, AED, SAR) against the Afghan afghani (AFN) using the transfer-mid, from 2019-03-31.
 - Central Bank of The Gambia (CBG) as a data provider. Indicative rates for 32 currencies against the Gambian dalasi (GMD); USD, EUR, and GBP go back to 2000-01-07, with weekly cadence through 2023 and business-daily from 2024-01 onward.
+- Reserve Bank of Malawi (RBM) as a data provider. Daily reference rates for ~38 currencies against the Malawian kwacha (MWK), from 2011-06-20.
 
 ### Changed
 
