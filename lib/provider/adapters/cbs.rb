@@ -1,0 +1,256 @@
+# frozen_string_literal: true
+
+require "net/http"
+require "ox"
+require "zip"
+
+require "provider/adapters/adapter"
+
+class Provider
+  module Adapters
+    # Central Bank of Samoa.
+    #
+    # Publishes the historical daily fix as a single XLSX workbook covering
+    # 2008-01-02 to the most recent business day. The workbook has one sheet
+    # per year ("2008" .. "2026"), and within each sheet twelve month sections
+    # stacked vertically. Each section opens with a month-name banner in column
+    # B, a header row of "DATE | TALA/USD | TALA/NZD | ..." beneath it, then
+    # one data row per business day with an Excel serial date in column B.
+    #
+    # Rates are published as "Units of Foreign Currency per ST1.00", i.e. one
+    # tala expressed in the quote currency (1 WST = 0.36847 USD). Records are
+    # emitted in that native direction — WST in `base`, foreign in `quote` —
+    # matching ECB's pivot-in-base orientation. The blender handles rebase.
+    #
+    # The "TALA/YEN" column maps to JPY and "TALA/EURO" to EUR. CNY and CNH
+    # (onshore vs offshore yuan) only appear in recent years; the workbook adds
+    # the CNH column around 2023.
+    #
+    # The bank also exposes a SvelteKit page (data_url) with the most recent
+    # fix embedded as an inline JS literal. We rely on the XLSX archive alone
+    # because it includes the current day's rate the same morning it goes live
+    # — the live page provides no extra coverage.
+    #
+    # Page caveat: "indicative rates only but not for market use. Kindly refer
+    # to the commercial banks for market exchange rates."
+    class CBS < Adapter
+      ARCHIVE_URL = "https://cbs.gov.ws/media/Historical-Daily%20-Rates-(2372).xlsx"
+      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
+
+      # Excel stores dates as days since this epoch (with the 1900 leap-year
+      # quirk baked into the offset).
+      EXCEL_EPOCH = Date.new(1899, 12, 30)
+
+      # The header row above each month section uses these labels in row 2,
+      # column C onward. Map each label to its ISO 4217 code.
+      CURRENCIES = {
+        "TALA/USD" => "USD",
+        "TALA/NZD" => "NZD",
+        "TALA/AUD" => "AUD",
+        "TALA/EURO" => "EUR",
+        "TALA/FJD" => "FJD",
+        "TALA/YEN" => "JPY",
+        "TALA/GBP" => "GBP",
+        "TALA/CNY" => "CNY",
+        "TALA/CNH" => "CNH",
+      }.freeze
+
+      MONTH_NAMES = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ].freeze
+
+      def fetch(after: nil, upto: nil)
+        records = parse(download(ARCHIVE_URL))
+        records = records.select { |r| r[:date] >= after } if after
+        records = records.select { |r| r[:date] <= upto } if upto
+        records
+      end
+
+      def parse(xlsx_bytes)
+        records = []
+
+        Zip::File.open_buffer(xlsx_bytes) do |zip|
+          strings = shared_strings(zip)
+          sheet_paths(zip).each do |path|
+            sheet_xml = zip.find_entry(path).get_input_stream.read
+            doc = Ox.load(sheet_xml, mode: :generic, effort: :tolerant)
+            sheet_data = find_sheet_data(doc)
+            next unless sheet_data
+
+            parse_sheet(sheet_data.nodes, strings, records)
+          end
+        end
+
+        records
+      end
+
+      private
+
+      # Walk all sheet*.xml files in the workbook. CBS uses one sheet per year,
+      # but the per-year ordering is not lexicographic (sheet1 holds 2008,
+      # sheet19 holds 2026), so we collect everything and let the date filter
+      # downstream sort it out.
+      def sheet_paths(zip)
+        zip.entries
+          .map(&:name)
+          .grep(%r{\Axl/worksheets/sheet\d+\.xml\z})
+          .sort
+      end
+
+      def find_sheet_data(node)
+        return node if node.respond_to?(:value) && node.value == "sheetData"
+        return unless node.respond_to?(:nodes)
+
+        node.nodes.each do |child|
+          found = find_sheet_data(child)
+          return found if found
+        end
+        nil
+      end
+
+      def parse_sheet(rows, strings, records)
+        column_map = {}
+
+        rows.each do |row|
+          first_label = string_cell(row, "B", strings)
+
+          if first_label == "DATE"
+            column_map = build_column_map(row, strings)
+            next
+          end
+
+          # Month banner row — skip but reset map so a malformed section
+          # cannot leak headers across months.
+          if first_label && MONTH_NAMES.include?(first_label.upcase)
+            column_map = {}
+            next
+          end
+
+          next if column_map.empty?
+
+          date = date_cell(row, "B")
+          next unless date
+
+          row.nodes.each do |cell|
+            ref = cell["r"]
+            next unless ref
+
+            column = ref.sub(/\d+\z/, "")
+            iso = column_map[column]
+            next unless iso
+
+            value = cell_numeric_value(cell)
+            next unless value
+
+            records << { date: date, base: "WST", quote: iso, rate: value }
+          end
+        end
+      end
+
+      def build_column_map(row, strings)
+        map = {}
+        row.nodes.each do |cell|
+          ref = cell["r"]
+          next unless ref
+
+          column = ref.sub(/\d+\z/, "")
+          next if column == "B"
+
+          label = cell_string_value(cell, strings)
+          next unless label
+
+          iso = CURRENCIES[label.upcase]
+          map[column] = iso if iso
+        end
+        map
+      end
+
+      def string_cell(row, column, strings)
+        cell = row.nodes.find { |c| c["r"]&.sub(/\d+\z/, "") == column }
+        return unless cell
+
+        cell_string_value(cell, strings)
+      end
+
+      def cell_string_value(cell, strings)
+        return unless cell["t"] == "s"
+
+        value = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "v" }
+        return unless value
+
+        strings[value.nodes.first.to_s.to_i]
+      end
+
+      def date_cell(row, column)
+        cell = row.nodes.find { |c| c["r"]&.sub(/\d+\z/, "") == column }
+        return unless cell
+        return if cell["t"] == "s"
+
+        value = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "v" }
+        return unless value
+
+        serial = value.nodes.first.to_s.to_f
+        return if serial <= 30_000 || serial >= 80_000
+
+        EXCEL_EPOCH + serial.to_i
+      end
+
+      def cell_numeric_value(cell)
+        return if cell["t"] == "s"
+
+        value = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "v" }
+        return unless value
+
+        text = value.nodes.first.to_s.strip
+        return if text.empty?
+
+        rate = Float(text, exception: false)
+        return unless rate&.positive?
+
+        rate
+      end
+
+      def shared_strings(zip)
+        entry = zip.find_entry("xl/sharedStrings.xml")
+        return [] unless entry
+
+        doc = Ox.load(entry.get_input_stream.read, mode: :generic, effort: :tolerant)
+        root = doc.nodes.first
+        return [] unless root
+
+        root.nodes.map do |si|
+          si.nodes.map { |t| t.nodes.first.to_s }.join
+        end
+      end
+
+      def download(url)
+        uri = URI(url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.open_timeout = 30
+        http.read_timeout = 120
+
+        request = Net::HTTP::Get.new(uri)
+        request["User-Agent"] = USER_AGENT
+        request["Accept"] =
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,*/*"
+
+        response = http.request(request)
+        response.value
+
+        response.body
+      end
+    end
+  end
+end

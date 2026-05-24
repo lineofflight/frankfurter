@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Central Bank of Nigeria (CBN) as a data provider. Daily official rates against the Nigerian naira (NGN) using the mid of buy/sell, from 2001-12-10.
 - National Bank of Ethiopia (NBE) as a data provider. Daily weighted-average rates for 18 currencies against the Ethiopian birr (ETB) from 2024-10-01, skipping the July to September 2024 float-transition gap.
 - National Reserve Bank of Tonga (NRBT) as a data provider. Daily MID rates for 12 currencies (AUD, CAD, CHF, EUR, FJD, GBP, JPY, NZD, SEK, SGD, USD, WST) against the Tongan paʻanga (TOP), from 2017-01-03.
+- Central Bank of Samoa (CBS) as a data provider. Daily indicative rates against the Samoan tala (WST) for nine quote currencies (USD, NZD, AUD, EUR, FJD, JPY, GBP, CNY onshore, CNH offshore) from 2008-01-03.
 
 ### Changed
 
