@@ -95,8 +95,8 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2024, 4, 30))
       end
 
-      it "includes XDR (SDR) among supported currencies" do
-        _(BCP::CURRENCIES).must_include("XDR")
+      it "excludes XDR (BCP's SDR endpoint returns no data)" do
+        _(BCP::CURRENCIES).wont_include("XDR")
       end
 
       # Builds a minimal year-matrix HTML with the cells specified. Cells outside

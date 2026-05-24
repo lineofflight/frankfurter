@@ -17,14 +17,12 @@ class Provider
       BASE_URL = "https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
-      # ISO 4217 → BCP's URL label, for currencies BCP serves under a
-      # non-ISO name. XDR (Special Drawing Rights) is published at
-      # ?moneda=SDR.
-      URL_ALIASES = { "XDR" => "SDR" }.freeze
-
       # Quote currencies on the daily snapshot. Currencies have varying
       # historical depth — USD/EUR back to 2001, most others from ~2012, some
       # later — so empty cells are expected on older years.
+      #
+      # SDR/XDR is omitted: BCP exposes ?moneda=SDR but the page returns 100%
+      # ND for every year (2001-present), so BCP doesn't actually publish it.
       CURRENCIES = [
         "USD",
         "EUR",
@@ -51,7 +49,6 @@ class Provider
         "SGD",
         "TWD",
         "XAU",
-        "XDR",
       ].freeze
 
       class << self
@@ -107,7 +104,7 @@ class Provider
 
       def fetch_year(year, currency)
         url = URI(BASE_URL)
-        url.query = URI.encode_www_form(anho: year, moneda: URL_ALIASES.fetch(currency, currency))
+        url.query = URI.encode_www_form(anho: year, moneda: currency)
         req = Net::HTTP::Get.new(url)
         req["User-Agent"] = USER_AGENT
 

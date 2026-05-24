@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- XDR (Special Drawing Rights, ISO 4217) is now passed through consistently. BOM, NBC, and CBN rewrite their non-ISO "SDR" label to XDR; BCP and NBE no longer drop XDR. CBI and IMF already emitted XDR.
+- XDR (Special Drawing Rights, ISO 4217) is now passed through consistently. BOM, NBC, and CBN rewrite their non-ISO "SDR" label to XDR; NBE no longer drops XDR. CBI and IMF already emitted XDR. BCP exposes an SDR endpoint but its page returns 100% ND, so BCP stays excluded.
 
 ### Fixed
 
