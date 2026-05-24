@@ -15,6 +15,17 @@ Checklist for adding a new exchange rate data provider. Each step references an 
 - Check the publish schedule (timezone, frequency, days of week)
 - Determine the earliest available date for historical data (goes in `coverage_start` in the seed file)
 
+### Go/no-go: does the provider backfill meaningfully?
+
+Before writing code, confirm the provider has a usable historical archive. If not, **don't implement it** — forward-only providers accumulate permanent gaps each year and the maintenance cost outweighs the value.
+
+Stop and skip the provider if either of these is true:
+
+- **Live page only, no historical endpoint.** Every year (or whenever the scheduler misses a window) leaves a permanent hole. Even a fresh deploy is forward-only from day one.
+- **Archive exists but lags badly.** An archive that's months behind the live page means anything between the last archive entry and "now" is permanently lost if we don't catch it live.
+
+If the provider has a real archive (downloadable history reaching back years, not just the current snapshot), proceed. Note `coverage_start` from the earliest archive date and continue with the checklist.
+
 ## Implementation Checklist
 
 ### 1. Adapter class — `lib/provider/adapters/<key>.rb`
