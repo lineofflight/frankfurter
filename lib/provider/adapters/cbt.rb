@@ -2,6 +2,7 @@
 
 require "net/http"
 require "ox"
+require "resolv"
 
 require "provider/adapters/adapter"
 
@@ -28,10 +29,17 @@ class Provider
     # browser UA. The site is occasionally unreachable from outside Turkmenistan;
     # transient SocketError/Timeout are retried by the base class.
     #
+    # The .tm ccTLD nameservers are unreliable from outside Turkmenistan, so the
+    # production server's default resolver fails to look up cbt.tm (Net::OpenTimeout).
+    # We resolve the host via public DNS (8.8.8.8, 1.1.1.1) and connect by IP while
+    # keeping the original hostname for the Host header, SNI, and cert verification.
+    #
     # Direction: provider publishes "N foreign = X TMT", so foreign currency goes in
     # base and TMT in quote, matching the pivot-in-quote convention used by NBG/NBT/BBK.
     class CBT < Adapter
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
+      PUBLIC_NAMESERVERS = ["8.8.8.8", "1.1.1.1"].freeze
+      HOST = "cbt.tm"
 
       class << self
         def backfill_range = 1
@@ -40,6 +48,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
         dataset = []
+        @host_ip = nil
 
         (after..end_date).each do |date|
           next if date.sunday?
@@ -91,18 +100,26 @@ class Provider
 
       def fetch_date(date)
         sleep(0.2)
-        uri = URI("https://cbt.tm/kurs/#{date.year}/#{date.strftime("%d%m%Y")}.xml")
+        uri = URI("https://#{HOST}/kurs/#{date.year}/#{date.strftime("%d%m%Y")}.xml")
         request = Net::HTTP::Get.new(uri)
         request["User-Agent"] = USER_AGENT
 
-        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 15, read_timeout: 30) do |http|
-          http.request(request)
-        end
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.open_timeout = 15
+        http.read_timeout = 30
+        http.ipaddr = host_ip
+
+        response = http.start { |conn| conn.request(request) }
 
         return [] if response.code == "404"
 
         response.value
         parse(response.body, expected_date: date)
+      end
+
+      def host_ip
+        @host_ip ||= Resolv::DNS.new(nameserver: PUBLIC_NAMESERVERS).getaddress(HOST).to_s
       end
     end
   end
