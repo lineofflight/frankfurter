@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reserve Bank of Malawi (RBM) as a data provider. Daily reference rates for ~38 currencies against the Malawian kwacha (MWK), from 2011-06-20.
 - Reserve Bank of Vanuatu (RBV) as a data provider. Daily reference rates for the VUV trade-weighted basket (USD, JPY, NZD, GBP, AUD, EUR) against the Vanuatu vatu (VUV) on business days, from 2025-08-26.
 - Banque de la Republique du Burundi (BRB) as a data provider. Daily official rates for 19 currencies against the Burundian franc (BIF), from 2024-09-02. Mid (Cours moyen jour) is extracted from the daily PDF bulletin; DTS is emitted as XDR.
+- TMT (Turkmenistani manat) as a hard peg to USD at 3.5, in place since the central bank's 2015-01-01 devaluation from 2.85.
 
 ### Changed
 
