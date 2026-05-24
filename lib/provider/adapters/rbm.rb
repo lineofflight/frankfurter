@@ -23,8 +23,11 @@ class Provider
     # directly instead of recomputing from buy/sell (issue #314).
     #
     # IEP (defunct Irish punt) and CMD (not a real ISO 4217 code) appear
-    # in the response; the Provider importer drops unknown codes via
-    # Money::Currency.find, so no adapter-side filtering is needed.
+    # in the response. CMD is unknown to Money::Currency and is dropped by
+    # Provider#backfill's default filter. IEP is registered via
+    # db/seeds/currency_patches.json (to support pre-euro Bundesbank data),
+    # so Money::Currency.find recognises it and Provider#backfill passes it
+    # through.
     class RBM < Adapter
       URL = "https://www.rbm.mw/Statistics/ExchangeRatesFilter/"
 

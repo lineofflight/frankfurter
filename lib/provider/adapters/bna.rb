@@ -35,9 +35,9 @@ class Provider
       LIST_PATH = "/get/lista/moedas"
       SERIES_PATH = "/get/evolucao/taxa/intervalo"
 
-      # Non-ISO composite series we ignore. Other historical codes BNA still
-      # publishes (EEK, HRK, STD, etc.) are left to Provider#backfill, which
-      # drops anything Money::Currency doesn't recognise.
+      # Non-ISO composite series we ignore. BNA still publishes other historical
+      # codes (EEK, HRK, STD, etc.); those are valid ISO 4217 codes recognised by
+      # Money::Currency, so Provider#backfill's default filter passes them through.
       EXCLUDED_CODES = ["XDRUSD", "XAU"].freeze
 
       def fetch(after: nil, upto: nil)
