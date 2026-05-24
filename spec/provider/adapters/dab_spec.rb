@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe DAB do
       before do
-        VCR.insert_cassette("dab", match_requests_on: [:method, :host])
+        VCR.insert_cassette("dab", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }

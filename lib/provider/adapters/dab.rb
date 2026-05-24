@@ -31,8 +31,8 @@ class Provider < Sequel::Model(:providers)
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Maps DAB row labels (after stripping currency symbols and whitespace)
-      # to ISO 4217 codes. "IRAN" is the "IRAN Toman" row; values get divided
-      # by 10 since 1 toman = 10 IRR.
+      # to ISO 4217 codes. "IRAN TOMAN" is the "IRAN Toman" row; values get
+      # divided by 10 since 1 toman = 10 IRR.
       LABEL_MAP = {
         "USD" => "USD",
         "EURO" => "EUR",
@@ -46,7 +46,7 @@ class Provider < Sequel::Model(:providers)
         "SAUDI RIYAL" => "SAR",
       }.freeze
 
-      TOMAN_PER_IRR = 10.0
+      IRR_PER_TOMAN = 10.0
 
       class << self
         # Per-day endpoint — chunk one day at a time.
@@ -84,7 +84,7 @@ class Provider < Sequel::Model(:providers)
           mid = (transfer_sell + transfer_buy) / 2.0
           next unless mid.positive?
 
-          rate = code == "IRR" ? mid / TOMAN_PER_IRR : mid
+          rate = code == "IRR" ? mid / IRR_PER_TOMAN : mid
           { date:, base: code, quote: "AFN", rate: }
         end
       end
