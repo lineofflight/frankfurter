@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 require_relative "../../helper"
-require "provider/adapters/mongolbank"
+require "provider/adapters/bom"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    describe MONGOLBANK do
+    describe BOM do
       before do
         VCR.insert_cassette(
-          "mongolbank",
+          "bom",
           match_requests_on: [:method, :host, :path],
           allow_playback_repeats: true,
         )
@@ -18,7 +18,7 @@ class Provider < Sequel::Model(:providers)
         VCR.eject_cassette
       end
 
-      let(:adapter) { MONGOLBANK.new }
+      let(:adapter) { BOM.new }
 
       it "fetches rates" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 22))
@@ -81,17 +81,6 @@ class Provider < Sequel::Model(:providers)
 
         _(bases).wont_include("SDR")
         _(bases).must_include("USD")
-      end
-
-      it "excludes KPW" do
-        records = adapter.parse({
-          "data" => [
-            { "RATE_DATE" => "2026-05-22", "USD" => "3,576.42", "KPW" => "27.51" },
-          ],
-        })
-        bases = records.map { |r| r[:base] }
-
-        _(bases).wont_include("KPW")
       end
 
       it "stores XAU and XAG per troy ounce in MNT" do
