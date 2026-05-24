@@ -1,0 +1,134 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.amcm.gov.mo/api/v1.0/cms/financial_info?Begin=20260518&End=20260522&QueryType=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.amcm.gov.mo
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:33:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - acw_tc=0a0e01da17796044137661716e008cdb856c224368cf2226197c85e2f85767;path=/;HttpOnly;Max-Age=1800
+      - aliyungf_tc=4e915ff53377816f8da66f490b9526559f0253f58bc23d31cc9ae7a0703c972d;
+        Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31536000
+      Ssr:
+      - 'off'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"OK","data":[{"id":228934,"date":"2026-05-22 00:00:00","currency":"AUD","unit":1.0,"usdMean":"5.7635","usdMeanValue":5.76350000,"bid":"0.7141"},{"id":228935,"date":"2026-05-22
+        00:00:00","currency":"CAD","unit":1.0,"usdMean":"5.8548","usdMeanValue":5.85480000,"bid":"1.3783"},{"id":228936,"date":"2026-05-22
+        00:00:00","currency":"CHF","unit":1.0,"usdMean":"10.2567","usdMeanValue":10.25670000,"bid":"0.7867"},{"id":228937,"date":"2026-05-22
+        00:00:00","currency":"CNY","unit":1.0,"usdMean":"1.1871","usdMeanValue":1.18710000,"bid":"679.76"},{"id":228938,"date":"2026-05-22
+        00:00:00","currency":"DKK","unit":1.0,"usdMean":"1.2544","usdMeanValue":1.25440000,"bid":"6.4336"},{"id":228939,"date":"2026-05-22
+        00:00:00","currency":"EUR","unit":1.0,"usdMean":"9.3731","usdMeanValue":9.37310000,"bid":"1.1613"},{"id":228940,"date":"2026-05-22
+        00:00:00","currency":"GBP","unit":1.0,"usdMean":"10.8350","usdMeanValue":10.83500000,"bid":"1.3424"},{"id":228941,"date":"2026-05-22
+        00:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"1.029"},{"id":228942,"date":"2026-05-22
+        00:00:00","currency":"JPY","unit":100.0,"usdMean":"5.0727","usdMeanValue":5.07270000,"bid":"159.09"},{"id":228943,"date":"2026-05-22
+        00:00:00","currency":"KRW","unit":100.0,"usdMean":"0.5400","usdMeanValue":0.54000000,"bid":"1507.5"},{"id":228951,"date":"2026-05-22
+        00:00:00","currency":"LIQ","unit":0.0,"usdMean":"0.0000","usdMeanValue":0.00000000,"bid":"1.85"},{"id":228944,"date":"2026-05-22
+        00:00:00","currency":"MYR","unit":1.0,"usdMean":"2.0380","usdMeanValue":2.03800000,"bid":"3.955"},{"id":228945,"date":"2026-05-22
+        00:00:00","currency":"NOK","unit":1.0,"usdMean":"0.8730","usdMeanValue":0.87300000,"bid":"9.2434"},{"id":228946,"date":"2026-05-22
+        00:00:00","currency":"NZD","unit":1.0,"usdMean":"4.7398","usdMeanValue":4.73980000,"bid":"0.5872"},{"id":228947,"date":"2026-05-22
+        00:00:00","currency":"SEK","unit":1.0,"usdMean":"0.8636","usdMeanValue":0.86360000,"bid":"9.3432"},{"id":228948,"date":"2026-05-22
+        00:00:00","currency":"SGD","unit":1.0,"usdMean":"6.3135","usdMeanValue":6.31350000,"bid":"1.2781"},{"id":228949,"date":"2026-05-22
+        00:00:00","currency":"TWD","unit":1.0,"usdMean":"0.2556","usdMeanValue":0.25560000,"bid":"31.557"},{"id":228950,"date":"2026-05-22
+        00:00:00","currency":"USD","unit":1.0,"usdMean":"8.0705","usdMeanValue":8.07050000,"bid":"7.8349"},{"id":228916,"date":"2026-05-21
+        00:00:00","currency":"AUD","unit":1.0,"usdMean":"5.7664","usdMeanValue":5.76640000,"bid":"0.7147"},{"id":228917,"date":"2026-05-21
+        00:00:00","currency":"CAD","unit":1.0,"usdMean":"5.8670","usdMeanValue":5.86700000,"bid":"1.3748"},{"id":228918,"date":"2026-05-21
+        00:00:00","currency":"CHF","unit":1.0,"usdMean":"10.2498","usdMeanValue":10.24980000,"bid":"0.7869"},{"id":228919,"date":"2026-05-21
+        00:00:00","currency":"CNY","unit":1.0,"usdMean":"1.1863","usdMeanValue":1.18630000,"bid":"679.94"},{"id":228920,"date":"2026-05-21
+        00:00:00","currency":"DKK","unit":1.0,"usdMean":"1.2553","usdMeanValue":1.25530000,"bid":"6.4261"},{"id":228921,"date":"2026-05-21
+        00:00:00","currency":"EUR","unit":1.0,"usdMean":"9.3808","usdMeanValue":9.38080000,"bid":"1.1628"},{"id":228922,"date":"2026-05-21
+        00:00:00","currency":"GBP","unit":1.0,"usdMean":"10.8398","usdMeanValue":10.83980000,"bid":"1.3435"},{"id":228923,"date":"2026-05-21
+        00:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"1.029"},{"id":228924,"date":"2026-05-21
+        00:00:00","currency":"JPY","unit":100.0,"usdMean":"5.0777","usdMeanValue":5.07770000,"bid":"158.85"},{"id":228925,"date":"2026-05-21
+        00:00:00","currency":"KRW","unit":100.0,"usdMean":"0.5400","usdMeanValue":0.54000000,"bid":"1499.7"},{"id":228933,"date":"2026-05-21
+        00:00:00","currency":"LIQ","unit":0.0,"usdMean":"0.0000","usdMeanValue":0.00000000,"bid":"1.75"},{"id":228926,"date":"2026-05-21
+        00:00:00","currency":"MYR","unit":1.0,"usdMean":"2.0377","usdMeanValue":2.03770000,"bid":"3.957"},{"id":228927,"date":"2026-05-21
+        00:00:00","currency":"NOK","unit":1.0,"usdMean":"0.8714","usdMeanValue":0.87140000,"bid":"9.2559"},{"id":228928,"date":"2026-05-21
+        00:00:00","currency":"NZD","unit":1.0,"usdMean":"4.7297","usdMeanValue":4.72970000,"bid":"0.5862"},{"id":228929,"date":"2026-05-21
+        00:00:00","currency":"SEK","unit":1.0,"usdMean":"0.8641","usdMeanValue":0.86410000,"bid":"9.3338"},{"id":228930,"date":"2026-05-21
+        00:00:00","currency":"SGD","unit":1.0,"usdMean":"6.3128","usdMeanValue":6.31280000,"bid":"1.2777"},{"id":228931,"date":"2026-05-21
+        00:00:00","currency":"TWD","unit":1.0,"usdMean":"0.2551","usdMeanValue":0.25510000,"bid":"31.619"},{"id":228932,"date":"2026-05-21
+        00:00:00","currency":"USD","unit":1.0,"usdMean":"8.0671","usdMeanValue":8.06710000,"bid":"7.8321"},{"id":228898,"date":"2026-05-20
+        00:00:00","currency":"AUD","unit":1.0,"usdMean":"5.7238","usdMeanValue":5.72380000,"bid":"0.7093"},{"id":228899,"date":"2026-05-20
+        00:00:00","currency":"CAD","unit":1.0,"usdMean":"5.8646","usdMeanValue":5.86460000,"bid":"1.3757"},{"id":228900,"date":"2026-05-20
+        00:00:00","currency":"CHF","unit":1.0,"usdMean":"10.2225","usdMeanValue":10.22250000,"bid":"0.7892"},{"id":228901,"date":"2026-05-20
+        00:00:00","currency":"CNY","unit":1.0,"usdMean":"1.1838","usdMeanValue":1.18380000,"bid":"681.58"},{"id":228902,"date":"2026-05-20
+        00:00:00","currency":"DKK","unit":1.0,"usdMean":"1.2527","usdMeanValue":1.25270000,"bid":"6.441"},{"id":228903,"date":"2026-05-20
+        00:00:00","currency":"EUR","unit":1.0,"usdMean":"9.3610","usdMeanValue":9.36100000,"bid":"1.16"},{"id":228904,"date":"2026-05-20
+        00:00:00","currency":"GBP","unit":1.0,"usdMean":"10.8041","usdMeanValue":10.80410000,"bid":"1.3389"},{"id":228905,"date":"2026-05-20
+        00:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"1.029"},{"id":228906,"date":"2026-05-20
+        00:00:00","currency":"JPY","unit":100.0,"usdMean":"5.0745","usdMeanValue":5.07450000,"bid":"159"},{"id":228907,"date":"2026-05-20
+        00:00:00","currency":"KRW","unit":100.0,"usdMean":"0.5300","usdMeanValue":0.53000000,"bid":"1511.2"},{"id":228915,"date":"2026-05-20
+        00:00:00","currency":"LIQ","unit":0.0,"usdMean":"0.0000","usdMeanValue":0.00000000,"bid":"1.65"},{"id":228908,"date":"2026-05-20
+        00:00:00","currency":"MYR","unit":1.0,"usdMean":"2.0266","usdMeanValue":2.02660000,"bid":"3.978"},{"id":228909,"date":"2026-05-20
+        00:00:00","currency":"NOK","unit":1.0,"usdMean":"0.8694","usdMeanValue":0.86940000,"bid":"9.2791"},{"id":228910,"date":"2026-05-20
+        00:00:00","currency":"NZD","unit":1.0,"usdMean":"4.6982","usdMeanValue":4.69820000,"bid":"0.5821"},{"id":228911,"date":"2026-05-20
+        00:00:00","currency":"SEK","unit":1.0,"usdMean":"0.8575","usdMeanValue":0.85750000,"bid":"9.4091"},{"id":228912,"date":"2026-05-20
+        00:00:00","currency":"SGD","unit":1.0,"usdMean":"6.2924","usdMeanValue":6.29240000,"bid":"1.2821"},{"id":228913,"date":"2026-05-20
+        00:00:00","currency":"TWD","unit":1.0,"usdMean":"0.2546","usdMeanValue":0.25460000,"bid":"31.682"},{"id":228914,"date":"2026-05-20
+        00:00:00","currency":"USD","unit":1.0,"usdMean":"8.0691","usdMeanValue":8.06910000,"bid":"7.8336"},{"id":228880,"date":"2026-05-19
+        00:00:00","currency":"AUD","unit":1.0,"usdMean":"5.7668","usdMeanValue":5.76680000,"bid":"0.7149"},{"id":228881,"date":"2026-05-19
+        00:00:00","currency":"CAD","unit":1.0,"usdMean":"5.8665","usdMeanValue":5.86650000,"bid":"1.3748"},{"id":228882,"date":"2026-05-19
+        00:00:00","currency":"CHF","unit":1.0,"usdMean":"10.2706","usdMeanValue":10.27060000,"bid":"0.7851"},{"id":228883,"date":"2026-05-19
+        00:00:00","currency":"CNY","unit":1.0,"usdMean":"1.1857","usdMeanValue":1.18570000,"bid":"680.2"},{"id":228884,"date":"2026-05-19
+        00:00:00","currency":"DKK","unit":1.0,"usdMean":"1.2568","usdMeanValue":1.25680000,"bid":"6.4171"},{"id":228885,"date":"2026-05-19
+        00:00:00","currency":"EUR","unit":1.0,"usdMean":"9.3919","usdMeanValue":9.39190000,"bid":"1.1644"},{"id":228886,"date":"2026-05-19
+        00:00:00","currency":"GBP","unit":1.0,"usdMean":"10.8227","usdMeanValue":10.82270000,"bid":"1.3416"},{"id":228887,"date":"2026-05-19
+        00:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"1.029"},{"id":228888,"date":"2026-05-19
+        00:00:00","currency":"JPY","unit":100.0,"usdMean":"5.0718","usdMeanValue":5.07180000,"bid":"159.02"},{"id":228889,"date":"2026-05-19
+        00:00:00","currency":"KRW","unit":100.0,"usdMean":"0.5400","usdMeanValue":0.54000000,"bid":"1499.7"},{"id":228897,"date":"2026-05-19
+        00:00:00","currency":"LIQ","unit":0.0,"usdMean":"0.0000","usdMeanValue":0.00000000,"bid":"1.75"},{"id":228890,"date":"2026-05-19
+        00:00:00","currency":"MYR","unit":1.0,"usdMean":"2.0293","usdMeanValue":2.02930000,"bid":"3.972"},{"id":228891,"date":"2026-05-19
+        00:00:00","currency":"NOK","unit":1.0,"usdMean":"0.8704","usdMeanValue":0.87040000,"bid":"9.2644"},{"id":228892,"date":"2026-05-19
+        00:00:00","currency":"NZD","unit":1.0,"usdMean":"4.7260","usdMeanValue":4.72600000,"bid":"0.5858"},{"id":228893,"date":"2026-05-19
+        00:00:00","currency":"SEK","unit":1.0,"usdMean":"0.8580","usdMeanValue":0.85800000,"bid":"9.3981"},{"id":228894,"date":"2026-05-19
+        00:00:00","currency":"SGD","unit":1.0,"usdMean":"6.3029","usdMeanValue":6.30290000,"bid":"1.2794"},{"id":228895,"date":"2026-05-19
+        00:00:00","currency":"TWD","unit":1.0,"usdMean":"0.2553","usdMeanValue":0.25530000,"bid":"31.579"},{"id":228896,"date":"2026-05-19
+        00:00:00","currency":"USD","unit":1.0,"usdMean":"8.0655","usdMeanValue":8.06550000,"bid":"7.8304"},{"id":228862,"date":"2026-05-18
+        00:00:00","currency":"AUD","unit":1.0,"usdMean":"5.7466","usdMeanValue":5.74660000,"bid":"0.7125"},{"id":228863,"date":"2026-05-18
+        00:00:00","currency":"CAD","unit":1.0,"usdMean":"5.8605","usdMeanValue":5.86050000,"bid":"1.3759"},{"id":228864,"date":"2026-05-18
+        00:00:00","currency":"CHF","unit":1.0,"usdMean":"10.2423","usdMeanValue":10.24230000,"bid":"0.7871"},{"id":228865,"date":"2026-05-18
+        00:00:00","currency":"CNY","unit":1.0,"usdMean":"1.1831","usdMeanValue":1.18310000,"bid":"681.57"},{"id":228866,"date":"2026-05-18
+        00:00:00","currency":"DKK","unit":1.0,"usdMean":"1.2531","usdMeanValue":1.25310000,"bid":"6.4352"},{"id":228867,"date":"2026-05-18
+        00:00:00","currency":"EUR","unit":1.0,"usdMean":"9.3647","usdMeanValue":9.36470000,"bid":"1.1611"},{"id":228868,"date":"2026-05-18
+        00:00:00","currency":"GBP","unit":1.0,"usdMean":"10.7332","usdMeanValue":10.73320000,"bid":"1.3309"},{"id":228869,"date":"2026-05-18
+        00:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"1.029"},{"id":228870,"date":"2026-05-18
+        00:00:00","currency":"JPY","unit":100.0,"usdMean":"5.0739","usdMeanValue":5.07390000,"bid":"158.93"},{"id":228871,"date":"2026-05-18
+        00:00:00","currency":"KRW","unit":100.0,"usdMean":"0.5400","usdMeanValue":0.54000000,"bid":"1503.2"},{"id":228879,"date":"2026-05-18
+        00:00:00","currency":"LIQ","unit":0.0,"usdMean":"0.0000","usdMeanValue":0.00000000,"bid":"1.95"},{"id":228872,"date":"2026-05-18
+        00:00:00","currency":"MYR","unit":1.0,"usdMean":"2.0282","usdMeanValue":2.02820000,"bid":"3.974"},{"id":228873,"date":"2026-05-18
+        00:00:00","currency":"NOK","unit":1.0,"usdMean":"0.8652","usdMeanValue":0.86520000,"bid":"9.3196"},{"id":228874,"date":"2026-05-18
+        00:00:00","currency":"NZD","unit":1.0,"usdMean":"4.6995","usdMeanValue":4.69950000,"bid":"0.5826"},{"id":228875,"date":"2026-05-18
+        00:00:00","currency":"SEK","unit":1.0,"usdMean":"0.8519","usdMeanValue":0.85190000,"bid":"9.4651"},{"id":228876,"date":"2026-05-18
+        00:00:00","currency":"SGD","unit":1.0,"usdMean":"6.2936","usdMeanValue":6.29360000,"bid":"1.2809"},{"id":228877,"date":"2026-05-18
+        00:00:00","currency":"TWD","unit":1.0,"usdMean":"0.2555","usdMeanValue":0.25550000,"bid":"31.552"},{"id":228878,"date":"2026-05-18
+        00:00:00","currency":"USD","unit":1.0,"usdMean":"8.0643","usdMeanValue":8.06430000,"bid":"7.8292"}],"code":0,"type":"Success"}'
+  recorded_at: Sun, 24 May 2026 06:33:34 GMT
+recorded_with: VCR 6.4.0

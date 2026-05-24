@@ -1,0 +1,12 @@
+{
+  "key": "AMCM",
+  "name": "Autoridade Monetária de Macau",
+  "country_code": "MO",
+  "rate_type": "interbank middle rate",
+  "pivot_currency": "MOP",
+  "data_url": "https://www.amcm.gov.mo/en/financial-information/interbank-midpoint",
+  "terms_url": null,
+  "publish_schedule": "*/30 3-5 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1986-01-02"
+}
