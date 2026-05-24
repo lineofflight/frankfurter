@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Central Bank of Samoa (CBS) as a data provider. Daily indicative rates against the Samoan tala (WST) for nine quote currencies (USD, NZD, AUD, EUR, FJD, JPY, GBP, CNY onshore, CNH offshore) from 2008-01-03.
 - Autoridade Monetária de Macau (AMCM) as a data provider. Daily interbank middle rates for 17 currencies against the Macanese pataca (MOP), with history back to 1986-01-02 plus pre-euro currencies through 2004.
 - Central Bank of Liberia (CBLLR) as a data provider. Daily indicative USD/LRD rates coerced to the mid of buy/sell, with history back to 2012-07-05.
+- Reserve Bank of Fiji (RBF) as a data provider. Daily mid-rates against the Fijian dollar (FJD) for AUD, NZD, USD, EUR, JPY, GBP, CHF and XDR, back to 2001-01-02.
 
 ### Changed
 
