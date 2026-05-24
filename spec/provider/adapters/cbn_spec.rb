@@ -36,13 +36,13 @@ class Provider < Sequel::Model(:providers)
         _(sample.size).must_be(:>, 5)
       end
 
-      it "excludes WAUA and SDR composite units" do
+      it "excludes WAUA but maps SDR to XDR" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 14), upto: Date.new(2026, 5, 21))
         bases = dataset.map { |r| r[:base] }.uniq
 
         _(bases).wont_include("WAUA")
         _(bases).wont_include("SDR")
-        _(bases).wont_include("XDR")
+        _(bases).must_include("XDR")
       end
 
       it "returns USD/NGN in a plausible range for May 2026" do
@@ -109,7 +109,7 @@ class Provider < Sequel::Model(:providers)
         _(records.map { |r| r[:base] }).must_equal(["EUR", "CHF"])
       end
 
-      it "excludes WAUA, SDR, and unknown currency names at parse time" do
+      it "excludes WAUA and unknown currency names at parse time, but maps SDR to XDR" do
         json = <<~JSON
           [
             {"id":1,"currency":"WAUA","ratedate":"2026-05-21","centralrate":"1876.66"},
@@ -122,7 +122,10 @@ class Provider < Sequel::Model(:providers)
 
         records = adapter.parse(json)
 
-        _(records.map { |r| r[:base] }).must_equal(["USD"])
+        _(records.map { |r| r[:base] }.sort).must_equal(["USD", "XDR"])
+        xdr = records.find { |r| r[:base] == "XDR" }
+
+        _(xdr[:rate]).must_equal(1884.04)
       end
 
       it "skips entries with missing or zero centralrate" do
