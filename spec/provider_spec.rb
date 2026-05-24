@@ -284,6 +284,26 @@ describe Provider do
       _(Rate.where(provider: provider.key, quote: "SDR").count).must_equal(0)
     end
 
+    it "excludes non-positive rates" do
+      bad_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.new(2099, 1, 1), base: "EUR", quote: "GBP", rate: 0.0 },
+            { date: Date.new(2099, 1, 1), base: "EUR", quote: "JPY", rate: -1.0 },
+          ]
+        end
+      end
+
+      provider.stub(:adapter, bad_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "USD").count).must_equal(1)
+      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "GBP").count).must_equal(0)
+      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "JPY").count).must_equal(0)
+    end
+
     it "ingests XDR" do
       xdr_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
