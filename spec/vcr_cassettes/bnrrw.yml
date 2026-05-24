@@ -1,0 +1,771 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=USD&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1fb-Wff/8UtCUNXBR3IFd4zG0Gw/eS8"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a518b3e9f63d1-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"USD","buying_rate":"1458.065","average_rate":"1463.065","selling_rate":"1468.065","post_date":"19-May-26"},{"currency_name":"USD","buying_rate":"1458.255","average_rate":"1463.255","selling_rate":"1468.255","post_date":"21-May-26"},{"currency_name":"USD","buying_rate":"1458.3525","average_rate":"1463.3525","selling_rate":"1468.3525","post_date":"22-May-26"},{"currency_name":"USD","buying_rate":"1458.1625","average_rate":"1463.1625","selling_rate":"1468.1625","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:07 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=EUR&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"219-rfCdS1B/QoHWnNvX3u1BAnDNwXY"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a518ea81aaebb-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"EUR","buying_rate":"1692.051765","average_rate":"1697.853765","selling_rate":"1703.655765","post_date":"20-May-26"},{"currency_name":"EUR","buying_rate":"1694.711048","average_rate":"1700.521798","selling_rate":"1706.332548","post_date":"21-May-26"},{"currency_name":"EUR","buying_rate":"1693.730593","average_rate":"1699.537594","selling_rate":"1705.344594","post_date":"22-May-26"},{"currency_name":"EUR","buying_rate":"1697.479273","average_rate":"1703.300273","selling_rate":"1709.121273","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:08 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=GBP&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"217-EF6yC9Bl68u3S5FBGbHAYVUReFA"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a5191dc19b49d-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"GBP","buying_rate":"1955.921295","average_rate":"1962.628544","selling_rate":"1969.335794","post_date":"19-May-26"},{"currency_name":"GBP","buying_rate":"1958.290639","average_rate":"1965.00514","selling_rate":"1971.71964","post_date":"21-May-26"},{"currency_name":"GBP","buying_rate":"1958.567407","average_rate":"1965.282408","selling_rate":"1971.997408","post_date":"22-May-26"},{"currency_name":"GBP","buying_rate":"1954.229383","average_rate":"1960.930383","selling_rate":"1967.631382","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:08 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=JPY&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:09 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1f5-P06R0zeyDaU8gBcLWHeVd2bamTc"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a519519984af5-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"JPY","buying_rate":"9.177675","average_rate":"9.209145","selling_rate":"9.240615","post_date":"20-May-26"},{"currency_name":"JPY","buying_rate":"9.173882","average_rate":"9.205337","selling_rate":"9.236792","post_date":"21-May-26"},{"currency_name":"JPY","buying_rate":"9.170121","average_rate":"9.201561","selling_rate":"9.233001","post_date":"22-May-26"},{"currency_name":"JPY","buying_rate":"9.174145","average_rate":"9.205605","selling_rate":"9.237065","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:09 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=CHF&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:09 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"216-brl0Q23uaAoXvyoJn9TinJat06s"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51984a4a83df-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"CHF","buying_rate":"1855.634855","average_rate":"1861.998202","selling_rate":"1868.361549","post_date":"19-May-26"},{"currency_name":"CHF","buying_rate":"1853.046918","average_rate":"1859.400563","selling_rate":"1865.754208","post_date":"21-May-26"},{"currency_name":"CHF","buying_rate":"1854.349163","average_rate":"1860.706848","selling_rate":"1867.064533","post_date":"22-May-26"},{"currency_name":"CHF","buying_rate":"1847.061","average_rate":"1853.394523","selling_rate":"1859.728045","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:09 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=CAD&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:10 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"219-vKBRjv6YkMHPNm4nn8FtAF+NfZA"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51999f0598f3-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"CAD","buying_rate":"1060.603771","average_rate":"1064.240796","selling_rate":"1067.877821","post_date":"19-May-26"},{"currency_name":"CAD","buying_rate":"1059.701513","average_rate":"1063.334971","selling_rate":"1066.968428","post_date":"21-May-26"},{"currency_name":"CAD","buying_rate":"1057.543274","average_rate":"1061.169089","selling_rate":"1064.794904","post_date":"22-May-26"},{"currency_name":"CAD","buying_rate":"1060.019249","average_rate":"1063.654027","selling_rate":"1067.288804","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:10 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=AUD&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:10 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"219-VtT7Kk+pxzbo0RW+tgT9XUczmPs"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a519ce84063f5-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"AUD","buying_rate":"1040.766797","average_rate":"1044.335797","selling_rate":"1047.904797","post_date":"19-May-26"},{"currency_name":"AUD","buying_rate":"1039.444164","average_rate":"1043.008164","selling_rate":"1046.572164","post_date":"21-May-26"},{"currency_name":"AUD","buying_rate":"1041.263685","average_rate":"1044.833685","selling_rate":"1048.403685","post_date":"22-May-26"},{"currency_name":"AUD","buying_rate":"1036.316089","average_rate":"1039.869589","selling_rate":"1043.423089","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:10 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=CNY&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:10 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20b-K9ZFDBAl+ifxLsuVVnQqfPP69yo"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a519e3a343c8b-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"CNY","buying_rate":"214.123872","average_rate":"214.858097","selling_rate":"215.592322","post_date":"20-May-26"},{"currency_name":"CNY","buying_rate":"214.411607","average_rate":"215.146772","selling_rate":"215.881937","post_date":"21-May-26"},{"currency_name":"CNY","buying_rate":"214.477715","average_rate":"215.213057","selling_rate":"215.9484","post_date":"22-May-26"},{"currency_name":"CNY","buying_rate":"214.366174","average_rate":"215.101279","selling_rate":"215.836384","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:10 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=INR&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:10 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1fd-seKDma+sgOOdwwy9JHddNI7sX0Y"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a519f8e2f77a1-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"INR","buying_rate":"15.129611","average_rate":"15.181494","selling_rate":"15.233376","post_date":"19-May-26"},{"currency_name":"INR","buying_rate":"15.173872","average_rate":"15.2259","selling_rate":"15.277927","post_date":"21-May-26"},{"currency_name":"INR","buying_rate":"15.17197","average_rate":"15.223988","selling_rate":"15.276005","post_date":"22-May-26"},{"currency_name":"INR","buying_rate":"15.057715","average_rate":"15.109348","selling_rate":"15.16098","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:10 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=ZAR&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:11 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"200-mrRMyne0zu6OpPQWsaNkcLaPh08"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51a2cd6a60b5-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"ZAR","buying_rate":"87.561906","average_rate":"87.862174","selling_rate":"88.162441","post_date":"19-May-26"},{"currency_name":"ZAR","buying_rate":"88.393585","average_rate":"88.696665","selling_rate":"88.999745","post_date":"21-May-26"},{"currency_name":"ZAR","buying_rate":"88.613873","average_rate":"88.917688","selling_rate":"89.221503","post_date":"22-May-26"},{"currency_name":"ZAR","buying_rate":"87.33883","average_rate":"87.638313","selling_rate":"87.937795","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:11 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=AED&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:11 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20c-Nv2umdG3zGMJoVMcY5nPhKnZCK0"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51a41f7279ad-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"AED","buying_rate":"397.001209","average_rate":"398.362607","selling_rate":"399.724004","post_date":"19-May-26"},{"currency_name":"AED","buying_rate":"397.052942","average_rate":"398.41434","selling_rate":"399.775737","post_date":"21-May-26"},{"currency_name":"AED","buying_rate":"397.084594","average_rate":"398.446009","selling_rate":"399.807424","post_date":"22-May-26"},{"currency_name":"AED","buying_rate":"396.989844","average_rate":"398.351112","selling_rate":"399.712379","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:11 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=SAR&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:11 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20d-UmM5Ywhhjo49ewsQIGqK3rtn+go"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51a57c4bae83-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"SAR","buying_rate":"388.563852","average_rate":"389.896227","selling_rate":"391.228602","post_date":"20-May-26"},{"currency_name":"SAR","buying_rate":"388.608917","average_rate":"389.941362","selling_rate":"391.273807","post_date":"21-May-26"},{"currency_name":"SAR","buying_rate":"388.604274","average_rate":"389.936614","selling_rate":"391.268954","post_date":"22-May-26"},{"currency_name":"SAR","buying_rate":"388.527664","average_rate":"389.860004","selling_rate":"391.192344","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:11 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=KES&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"201-+kT8bv+ce144fyaRqQ7ZStpXq1c"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51a6bb2bf667-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"KES","buying_rate":"11.277429","average_rate":"11.316099","selling_rate":"11.354769","post_date":"20-May-26"},{"currency_name":"KES","buying_rate":"11.260645","average_rate":"11.299255","selling_rate":"11.337865","post_date":"21-May-26"},{"currency_name":"KES","buying_rate":"11.243898","average_rate":"11.282448","selling_rate":"11.320998","post_date":"22-May-26"},{"currency_name":"KES","buying_rate":"11.276675","average_rate":"11.315345","selling_rate":"11.354015","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:12 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=UGX&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1f4-U+GSpLaoijwhBmoBznlskoHVBGI"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51a9ecb6532c-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"UGX","buying_rate":"0.387142","average_rate":"0.38847","selling_rate":"0.389797","post_date":"20-May-26"},{"currency_name":"UGX","buying_rate":"0.387167","average_rate":"0.388494","selling_rate":"0.389822","post_date":"21-May-26"},{"currency_name":"UGX","buying_rate":"0.385734","average_rate":"0.387057","selling_rate":"0.388379","post_date":"22-May-26"},{"currency_name":"UGX","buying_rate":"0.387116","average_rate":"0.388444","selling_rate":"0.389771","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:12 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=TZS&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1f4-OHCBkcPdopaAe+nSJcnbzpyXO9U"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51ab3c6c1ed8-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"TZS","buying_rate":"0.561355","average_rate":"0.56328","selling_rate":"0.565205","post_date":"19-May-26"},{"currency_name":"TZS","buying_rate":"0.558512","average_rate":"0.560427","selling_rate":"0.562342","post_date":"21-May-26"},{"currency_name":"TZS","buying_rate":"0.560007","average_rate":"0.561927","selling_rate":"0.563847","post_date":"22-May-26"},{"currency_name":"TZS","buying_rate":"0.558476","average_rate":"0.560391","selling_rate":"0.562306","post_date":"20-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:12 GMT
+- request:
+    method: get
+    uri: https://fxrates.bnr.rw/currency_history/?currency_name=BIF&end_date=2026-05-22&start_date=2026-05-19
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - fxrates.bnr.rw
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 May 2026 06:42:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1f3-kPu1zspgs7GEjzPCddMxZqDCDao"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a00a51ac8a6e4f22-LHR
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"currency_name":"BIF","buying_rate":"0.489214","average_rate":"0.490891","selling_rate":"0.492569","post_date":"20-May-26"},{"currency_name":"BIF","buying_rate":"0.489245","average_rate":"0.490922","selling_rate":"0.4926","post_date":"21-May-26"},{"currency_name":"BIF","buying_rate":"0.489277","average_rate":"0.490955","selling_rate":"0.492632","post_date":"22-May-26"},{"currency_name":"BIF","buying_rate":"0.489181","average_rate":"0.490858","selling_rate":"0.492536","post_date":"19-May-26"}]'
+  recorded_at: Sun, 24 May 2026 06:42:12 GMT
+recorded_with: VCR 6.4.0

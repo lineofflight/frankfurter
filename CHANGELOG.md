@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Central Bank of Turkmenistan (CBT) as a data provider. Daily official rates for ~45 currencies against the Turkmenistani manat (TMT) from 2020-04-17. USD/TMT has been pegged at 3.5 since 2015.
 - Banco Central de Cuba (BCC) as a data provider. Daily informal-market rates (tasaEspecial) for 13 currencies against the Cuban peso (CUP), including weekends, from 2025-12-19. The bank also publishes administered "official" and "retail" pegs, which we don't relay.
+- Banque Nationale du Rwanda (BNRRW) as a data provider. Daily reference rates for ~16 currencies against the Rwandan franc (RWF), back to 2012-01-02. The BNR key is taken by Banca Națională a României, so the Rwanda provider is keyed BNRRW.
 - Banco Nacional de Angola (BNA) as a data provider. Daily reference rates for ~70 currencies against AOA from 2000-01-01.
 - Central Bank of Iraq (CBI) as a new data provider. Publishes daily Iraqi dinar (IQD) reference rates against ~16 currencies, 2009-present.
 - Bank of Algeria (BoA) as a data provider. Publishes a daily DZD reference rate (cours moyen) against 17 currencies, with history back to 2000-01-03. The consolidated archive refreshes roughly monthly, so rates can lag by up to ~3 weeks.
