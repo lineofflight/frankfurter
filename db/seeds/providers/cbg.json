@@ -1,0 +1,12 @@
+{
+  "key": "CBG",
+  "name": "Central Bank of The Gambia",
+  "country_code": "GM",
+  "rate_type": "indicative rate",
+  "pivot_currency": "GMD",
+  "data_url": "https://www.cbg.gm/indicative-exchange-rates-latest",
+  "terms_url": null,
+  "publish_schedule": "*/30 11-13 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2000-01-07"
+}
