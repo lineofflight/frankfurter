@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - National Reserve Bank of Tonga (NRBT) as a data provider. Daily MID rates for 12 currencies (AUD, CAD, CHF, EUR, FJD, GBP, JPY, NZD, SEK, SGD, USD, WST) against the Tongan paʻanga (TOP), from 2017-01-03.
 - Central Bank of Samoa (CBS) as a data provider. Daily indicative rates against the Samoan tala (WST) for nine quote currencies (USD, NZD, AUD, EUR, FJD, JPY, GBP, CNY onshore, CNH offshore) from 2008-01-03.
 - Autoridade Monetária de Macau (AMCM) as a data provider. Daily interbank middle rates for 17 currencies against the Macanese pataca (MOP), with history back to 1986-01-02 plus pre-euro currencies through 2004.
+- Central Bank of Liberia (CBLLR) as a data provider. Daily indicative USD/LRD rates coerced to the mid of buy/sell, with history back to 2012-07-05.
 
 ### Changed
 
