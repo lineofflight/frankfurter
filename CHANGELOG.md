@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Central Bank of The Gambia (CBG) as a data provider. Indicative rates for 32 currencies against the Gambian dalasi (GMD); USD, EUR, and GBP go back to 2000-01-07, with weekly cadence through 2023 and business-daily from 2024-01 onward.
 - Reserve Bank of Malawi (RBM) as a data provider. Daily reference rates for ~38 currencies against the Malawian kwacha (MWK), from 2011-06-20.
 - Reserve Bank of Vanuatu (RBV) as a data provider. Daily reference rates for the VUV trade-weighted basket (USD, JPY, NZD, GBP, AUD, EUR) against the Vanuatu vatu (VUV) on business days, from 2025-08-26.
+- Banque de la Republique du Burundi (BRB) as a data provider. Daily official rates for 19 currencies against the Burundian franc (BIF), from 2024-09-02. Mid (Cours moyen jour) is extracted from the daily PDF bulletin; DTS is emitted as XDR.
 
 ### Changed
 
