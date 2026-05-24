@@ -1,0 +1,12 @@
+{
+  "key": "NRBT",
+  "name": "National Reserve Bank of Tonga",
+  "country_code": "TO",
+  "rate_type": "authorized persons' average daily exchange rate",
+  "pivot_currency": "TOP",
+  "data_url": "https://www.reservebank.to/index.php/financial-system/financial-markets/exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 4-6 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2017-01-02"
+}
