@@ -8,7 +8,7 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # Banque Nationale du Rwanda (BNRRW). Publishes daily reference exchange
-    # rates for ~15 currencies against the Rwandan franc (RWF) via a public
+    # rates for 16 currencies against the Rwandan franc (RWF) via a public
     # JSON API at fxrates.bnr.rw. Rates are quoted as RWF per 1 unit of the
     # foreign currency — pivot RWF goes in quote, foreign in base.
     #
