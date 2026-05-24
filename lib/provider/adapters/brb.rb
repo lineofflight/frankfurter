@@ -77,6 +77,8 @@ class Provider
           first = false
 
           pdf_data = http_get(URI(url))
+          next unless pdf_data.start_with?("%PDF")
+
           dataset.concat(parse(pdf_data, date))
         end
 

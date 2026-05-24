@@ -71,6 +71,35 @@ class Provider < Sequel::Model(:providers)
         _(kes).wont_be_nil
         _(kes[:rate]).must_be_close_to(23.06, 0.05)
       end
+
+      it "skips dates whose PDF body is empty or not a PDF" do
+        # Some archive dates return a zero-byte body. The adapter must treat the
+        # date as missing rather than letting PDF::Reader raise on bad input.
+        VCR.eject_cassette
+
+        index_body = <<~HTML
+          <a href="/sites/default/files/2026-05/Cours%20de%20change%20du%2021-05-2026.pdf">empty</a>
+        HTML
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, %r{https://www\.brb\.bi/en/affichagetoustauxchange})
+              .to_return(
+                { status: 200, body: index_body, headers: { "Content-Type" => "text/html; charset=UTF-8" } },
+                { status: 200, body: "", headers: { "Content-Type" => "text/html; charset=UTF-8" } },
+              )
+            WebMock.stub_request(:get, %r{/sites/default/files/2026-05/Cours%20de%20change%20du%2021-05-2026\.pdf})
+              .to_return(status: 200, body: "", headers: { "Content-Type" => "application/pdf" })
+
+            result = adapter.fetch(after: Date.new(2026, 5, 21), upto: Date.new(2026, 5, 21))
+
+            _(result).must_equal([])
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("brb", match_requests_on: [:method, :uri])
+        end
+      end
     end
   end
 end
