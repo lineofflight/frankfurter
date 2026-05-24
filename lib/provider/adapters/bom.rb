@@ -29,15 +29,13 @@ class Provider
     #   USD/VND ≈ 25,546 (real ≈ 25,000)
     #   USD/KRW ≈ 1,515 (real ≈ 1,400)
     #
-    # Excluded:
-    #   - SDR: composite reserve asset, not an ISO 4217 currency.
-    #   - KPW: per issue #384, sanctions / non-tradeable.
+    # SDR is excluded: composite reserve asset, not an ISO 4217 currency.
     #
     # XAU and XAG are stored per troy ounce in MNT, as published (no per-gram
     # conversion). E.g. XAU=16,172,267.24 MNT/oz on 2026-05-22.
-    class MONGOLBANK < Adapter
+    class BOM < Adapter
       ENDPOINT = URI("https://www.mongolbank.mn/en/currency-rate-movement/data")
-      EXCLUDED_QUOTES = ["SDR", "KPW"].freeze
+      EXCLUDED_QUOTES = ["SDR"].freeze
 
       def fetch(after: nil, upto: nil)
         body = JSON.generate(
