@@ -31,19 +31,17 @@ class Provider
         def backfill_range = 90
       end
 
-      def fetch(after: nil, upto: nil)
+      def fetch(after:, upto: nil)
+        end_date = upto || Date.today
         url = URI(URL)
         url.query = URI.encode_www_form(
           "QueryType" => "1",
-          "Begin" => (after || Date.new(1986, 1, 2)).strftime("%Y%m%d"),
-          "End" => (upto || Date.today).strftime("%Y%m%d"),
+          "Begin" => after.strftime("%Y%m%d"),
+          "End" => end_date.strftime("%Y%m%d"),
         )
 
         response = Net::HTTP.get(url)
-        records = parse(response)
-        records = records.select { |r| r[:date] >= after } if after
-        records = records.select { |r| r[:date] <= upto } if upto
-        records
+        parse(response).select { |r| r[:date].between?(after, end_date) }
       end
 
       def parse(json)
