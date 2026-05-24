@@ -59,6 +59,7 @@ class Provider < Sequel::Model(:providers)
 
         dates.each do |date|
           quotes = dataset.select { |r| r[:date] == date }.map { |r| r[:quote] }
+
           _(quotes).must_include("USD")
           _(quotes).must_include("EUR")
         end

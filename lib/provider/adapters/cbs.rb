@@ -56,8 +56,18 @@ class Provider
       }.freeze
 
       MONTH_NAMES = [
-        "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
       ].freeze
 
       def fetch(after: nil, upto: nil)
@@ -191,7 +201,7 @@ class Provider
         return unless value
 
         serial = value.nodes.first.to_s.to_f
-        return unless serial > 30_000 && serial < 80_000
+        return if serial <= 30_000 || serial >= 80_000
 
         EXCEL_EPOCH + serial.to_i
       end
