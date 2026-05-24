@@ -46,6 +46,7 @@ Optional class methods (inside `class << self`):
 
 Notes:
 - Adapters have **no `key` or `name`** — Provider model owns identity. The adapter class name must match the provider key (e.g., `Provider::Adapters::ECB` for key `"ECB"`).
+- **Keys never contain hyphens.** When the bare acronym would collide with another provider, smush in a country-code suffix instead of hyphenating. Hyphens break Ruby constant naming and complicate file paths.
 - The `base` and `quote` in each record are determined by the data, not a class method
 - `parse` is a convention (not enforced by the base class) — most adapters define a `parse` method for unit-testable parsing, called from `fetch`
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
