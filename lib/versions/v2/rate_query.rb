@@ -268,7 +268,14 @@ module Versions
           record
         end
 
-        records.sort_by! { |r| [r[:date], r[:quote]] }
+        # Range responses stream chunks in date order, so sort within each chunk by date then quote. The
+        # latest/single-date snapshot is one batch where carry-forward mixes observation dates, so sort by quote
+        # alone to keep it alphabetical (#360 regressed this by always sorting on date first).
+        if range?
+          records.sort_by! { |r| [r[:date], r[:quote]] }
+        else
+          records.sort_by! { |r| r[:quote] }
+        end
         records.each(&block)
       end
 

@@ -469,6 +469,21 @@ describe Versions::V2 do
     _(quotes).must_equal(quotes.sort)
   end
 
+  it "keeps the latest snapshot alphabetical when carry-forward surfaces an older-dated quote" do
+    latest = Fixtures.latest_date
+    Rate.where(quote: "SEK", date: latest).delete
+
+    get "/rates"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }
+    sek_row = json.find { |r| r["quote"] == "SEK" }
+
+    _(sek_row).wont_be_nil
+    _(sek_row["date"]).must_be(:<, latest.to_s)
+    _(quotes).must_equal(quotes.sort)
+  end
+
   it "excludes pegged currencies when providers filter is set" do
     get "/rates?providers=ecb"
 
