@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Latest `/v2/rates` responses are alphabetical by quote again. A quote carried forward from an earlier date (e.g. a stale or infrequently published currency) was sorted ahead of the rest by its older date, breaking the ordering. Range responses remain ordered by date.
+
 ## [2.1.0] - 2026-05-24
 
 ### Added
