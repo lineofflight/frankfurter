@@ -24,11 +24,14 @@ lib/
 ├── consensus.rb              # Cross-provider outlier detection (MAD-based)
 ├── currency.rb               # Currency model (materialized from rates)
 ├── currency_coverage.rb      # CurrencyCoverage model (provider-currency join)
+├── currency_terminal_date.rb # Terminal dates for defunct ISO codes; backfill drops stale records past changeover
 ├── db.rb                     # Database configuration
 ├── currency_patches.rb       # Patches Money::Currency: registers historical codes, fixes mangled names
 ├── log.rb                    # Shared logger
 ├── monthly_rate.rb           # MonthlyRate model on monthly_rates rollup table
+├── no_store_on_error.rb      # Rack middleware: stops CDNs/caches from holding error responses
 ├── peg.rb                    # Currency peg definitions (from db/seeds/pegs/*.json)
+├── peg_anchor.rb             # Peg-aware post-processing: substitutes peg rates, synthesises uncovered pegged quotes
 ├── provider.rb               # Provider model: identity, backfill
 ├── provider/
 │   ├── adapters/
@@ -42,12 +45,13 @@ lib/
 ├── weighted_average.rb       # Recency-weighted averaging with exponential decay
 ├── versions/
 │   ├── v1.rb                 # Legacy API (ECB-only, frozen)
-│   ├── v1/                   # V1 internals (quotes, query, rounding, currency names)
+│   ├── v1/                   # V1 internals (quotes, query, currency names)
 │   ├── v2.rb                 # Multi-provider API
 │   └── v2/
 │       └── rate_query.rb     # V2 rate query builder (blending, filtering)
 ├── public/
-│   ├── root.json             # Root index document
+│   ├── favicon.ico           # Served as a static file
+│   ├── robots.txt            # Served as a static file
 │   ├── v1/openapi.json       # V1 OpenAPI spec
 │   └── v2/openapi.json       # V2 OpenAPI spec
 └── tasks/
@@ -62,8 +66,10 @@ lib/
 spec/                         # Minitest test suite
 db/migrate/                   # Sequel migrations
 db/seeds/
-    ├── pegs/                 # One JSON file per peg (e.g. aed.json, bam.json)
-    └── providers/            # One JSON file per provider (e.g. ecb.json, boi.json)
+    ├── currency_patches.json        # Money::Currency patches (historical codes, name fixes)
+    ├── currency_terminal_dates.json # Terminal dates for defunct ISO codes
+    ├── pegs/                        # One JSON file per peg (e.g. aed.json, bam.json)
+    └── providers/                   # One JSON file per provider (e.g. ecb.json, boi.json)
 ```
 
 ## Key Components
@@ -96,7 +102,9 @@ db/seeds/
 ### API (lib/app.rb)
 - V1 at `/v1/*` — frozen legacy, ECB-only
 - V2 at `/v2/*` — multi-provider with blended rates
+- Root `/` returns an inline index document (name, versions, docs, source)
 - CORS enabled for all origins
+- `NoStoreOnError` middleware prevents CDNs/caches from holding error responses
 - OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
 
 ### Scheduler (bin/schedule)
@@ -160,7 +168,7 @@ Separate SQLite databases per environment (`APP_ENV`): test, development, produc
 bundle install                          # Install dependencies
 bundle exec rake db:setup               # Run migrations and seed providers
 bundle exec rake backfill               # Backfill all providers (takes a while)
-bundle exec unicorn -c config/unicorn.rb # Start web server on port 8080
+bundle exec puma -C config/puma.rb      # Start web server on port 8080
 bundle exec foreman start               # Start web + scheduler together (mirrors prod)
 ```
 
