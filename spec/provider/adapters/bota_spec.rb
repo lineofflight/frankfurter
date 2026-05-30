@@ -105,5 +105,19 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_equal(17.209)
       end
     end
+
+    describe "BOTA without an antiforgery token" do
+      before do
+        VCR.insert_cassette("bota_no_token", match_requests_on: [:method, :uri])
+      end
+
+      after { VCR.eject_cassette }
+
+      it "raises Unavailable instead of silently returning no rates" do
+        assert_raises(Adapter::Unavailable) do
+          BOTA.new.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 19))
+        end
+      end
+    end
   end
 end

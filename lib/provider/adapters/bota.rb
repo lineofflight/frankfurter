@@ -20,7 +20,7 @@ class Provider
       BASE_URL = "https://www.bot.go.tz"
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
-      TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]*)"/
+      TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/
 
       class << self
         def backfill_range = 30
@@ -31,8 +31,10 @@ class Provider
 
         Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") do |http|
           get = http.request(Net::HTTP::Get.new(uri))
+          get.value
           cookie = cookie_header(get)
           token = extract_token(get.body)
+          raise Unavailable, "BOTA: no antiforgery token" unless token
 
           post = Net::HTTP::Post.new(uri)
           post["Cookie"] = cookie if cookie
@@ -42,6 +44,7 @@ class Provider
             "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
           )
           response = http.request(post)
+          response.value
 
           sleep(2)
           parse(response.body)
