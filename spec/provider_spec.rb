@@ -228,6 +228,32 @@ describe Provider do
         end
       end
     end
+
+    describe "with monthly cadence on a daily weekday schedule (CBC-style)" do
+      # CBC polls a multi-currency open-data file refreshed in monthly batches
+      # in arrears: April's daily rows all land in early May. The schedule stays
+      # daily so the scheduler keeps polling and catches each batch promptly,
+      # but the cadence is monthly so the pre-batch lag is not counted as missed.
+      it "reports no missed publishes once the cadence is monthly" do
+        cbc = build_provider("*/30 8-10 * * 1-5", cadence: "monthly")
+
+        # end_date Apr 30, today late May: April is the latest expected bucket
+        # until the May batch is due, so nothing is missed.
+        cbc.stub(:end_date, "2026-04-30") do
+          _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_equal(0)
+        end
+      end
+
+      it "would report a large count under the old daily cadence" do
+        cbc = build_provider("*/30 8-10 * * 1-5", cadence: "daily")
+
+        # Same end_date and reference, but daily cadence counts every weekday
+        # since the last data date — the false pre-batch peak.
+        cbc.stub(:end_date, "2026-04-30") do
+          _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_be(:>=, 20)
+        end
+      end
+    end
   end
 
   describe "#backfill" do
