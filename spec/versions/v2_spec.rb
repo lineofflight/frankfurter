@@ -538,6 +538,15 @@ describe Versions::V2 do
     _(ecb["publishes_missed"]).must_be(:>=, 0)
   end
 
+  it "includes publish_cadence per provider" do
+    get "/providers"
+
+    ecb = json.find { |p| p["key"] == "ECB" }
+
+    _(ecb).must_include("publish_cadence")
+    _(ecb["publish_cadence"]).must_equal("daily")
+  end
+
   it "excludes providers without rates" do
     get "/providers"
 

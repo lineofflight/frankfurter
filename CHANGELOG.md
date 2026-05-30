@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `/v2/providers` now includes `publish_cadence` (`daily`, `weekly`, `monthly`, or `null`) for each provider. It gives the unit for `publishes_missed`, so consumers can tell whether a provider is one day, week, or month behind.
+
 ### Fixed
 
 - CBC no longer reports a false "missed publishes" count. Its multi-currency feed is refreshed in monthly batches in arrears, not daily, so it is now treated as a monthly publisher.
