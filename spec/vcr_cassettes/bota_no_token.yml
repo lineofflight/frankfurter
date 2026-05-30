@@ -1,0 +1,22 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bot.go.tz/ExchangeRate/previous_rates
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '<html><body><form method="post"></form></body></html>'
+    http_version: '1.1'
+  recorded_at: Thu, 01 Jan 2026 00:00:00 GMT
+recorded_with: VCR 6.4.0
