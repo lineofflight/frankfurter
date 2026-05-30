@@ -12,6 +12,14 @@ class Provider
     # 16:00 Taipei time (08:00 UTC). The API returns the full historical dataset
     # (no server-side date filtering); client-side filtering is applied.
     # Historical data available from 1993-01-05.
+    #
+    # This open-data file (BP01D01) regenerates nightly (meta.prepared updates
+    # daily) but its content is refreshed only in monthly batches in arrears
+    # (meta.last_updated): a month's daily rows all land early in the following
+    # month. The provider cadence is therefore "monthly", not "daily", so this
+    # multi-currency data inherently lags by about a month. CBC still publishes
+    # a live daily TWD/USD rate on its homepage, but no fresher multi-currency
+    # endpoint exists.
     class CBC < Adapter
       API_URL = "https://cpx.cbc.gov.tw/API/DataAPI/Get?FileName=BP01D01"
       # Column index => [quote, base]

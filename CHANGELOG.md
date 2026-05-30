@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- CBC no longer reports a false "missed publishes" count. Its multi-currency feed is refreshed in monthly batches in arrears, not daily, so it is now treated as a monthly publisher.
+
 ## [2.1.1] - 2026-05-29
 
 ### Fixed
