@@ -10,9 +10,17 @@ class Provider
     # Bank of Tanzania. Publishes daily exchange rates for 35+ currencies
     # against the Tanzanian shilling (TZS). Uses the Mean column (midpoint
     # of buy/sell). Publishes 7 days a week.
+    #
+    # The previous_rates endpoint is protected by ASP.NET MVC antiforgery
+    # validation: a POST must carry a __RequestVerificationToken both as a
+    # cookie and as a matching form field, or the server returns HTTP 500.
+    # fetch() first GETs the page to obtain the session cookie and scrape the
+    # hidden token field, then POSTs the date range with the cookie and token.
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
+      TOKEN_FIELD = "__RequestVerificationToken"
+      TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]*)"/
 
       class << self
         def backfill_range = 30
@@ -20,13 +28,24 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         uri = URI("#{BASE_URL}/ExchangeRate/previous_rates")
-        response = Net::HTTP.post_form(uri, {
-          "dateFrom" => after.strftime("%m/%d/%Y"),
-          "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
-        })
 
-        sleep(2)
-        parse(response.body)
+        Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") do |http|
+          get = http.request(Net::HTTP::Get.new(uri))
+          cookie = cookie_header(get)
+          token = extract_token(get.body)
+
+          post = Net::HTTP::Post.new(uri)
+          post["Cookie"] = cookie if cookie
+          post.set_form_data(
+            TOKEN_FIELD => token,
+            "dateFrom" => after.strftime("%m/%d/%Y"),
+            "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
+          )
+          response = http.request(post)
+
+          sleep(2)
+          parse(response.body)
+        end
       end
 
       def parse(html)
@@ -38,6 +57,18 @@ class Provider
       end
 
       private
+
+      def cookie_header(response)
+        cookies = response.get_fields("set-cookie")
+        return unless cookies
+
+        cookies.map { |c| c.split(";", 2).first }.join("; ")
+      end
+
+      def extract_token(html)
+        match = html.match(TOKEN_PATTERN)
+        match && match[1]
+      end
 
       def find_table_rows(node)
         return unless node.respond_to?(:nodes)

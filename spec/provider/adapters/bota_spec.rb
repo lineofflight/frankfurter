@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe BOTA do
       before do
-        VCR.insert_cassette("bota", match_requests_on: [:method, :host])
+        VCR.insert_cassette("bota", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }
@@ -15,17 +15,26 @@ class Provider < Sequel::Model(:providers)
       let(:adapter) { BOTA.new }
 
       it "fetches rates with date range" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 24), upto: Date.new(2026, 3, 28))
+        dataset = adapter.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 19))
 
         _(dataset).wont_be_empty
       end
 
       it "fetches multiple currencies per date" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 24), upto: Date.new(2026, 3, 28))
+        dataset = adapter.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 19))
         dates = dataset.map { |r| r[:date] }.uniq
         sample = dataset.select { |r| r[:date] == dates.first }
 
         _(sample.size).must_be(:>, 1)
+      end
+
+      it "performs the antiforgery token flow and returns rates for a known date" do
+        dataset = adapter.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 19))
+        usd = dataset.find { |r| r[:date] == Date.new(2026, 5, 19) && r[:base] == "USD" }
+
+        _(usd).wont_be_nil
+        _(usd[:quote]).must_equal("TZS")
+        _(usd[:rate]).must_equal(2602.0545)
       end
 
       it "parses HTML table with correct base and quote" do
