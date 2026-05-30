@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe NBRM do
       before do
-        VCR.insert_cassette("nbrm", match_requests_on: [:method, :host])
+        VCR.insert_cassette("nbrm", match_requests_on: [:method, :host], allow_playback_repeats: true)
       end
 
       after { VCR.eject_cassette }
@@ -15,13 +15,13 @@ class Provider < Sequel::Model(:providers)
       let(:adapter) { NBRM.new }
 
       it "fetches rates since a date" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 1))
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 5, 30))
 
         _(dataset).wont_be_empty
       end
 
       it "fetches multiple currencies per date" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 1))
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 5, 30))
         dates = dataset.map { |r| r[:date] }.uniq
         sample = dataset.select { |r| r[:date] == dates.first }
 
@@ -29,7 +29,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "excludes MKD to MKD" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 1))
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 5, 30))
 
         _(dataset.none? { |r| r[:base] == "MKD" && r[:quote] == "MKD" }).must_equal(true)
       end
