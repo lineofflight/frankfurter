@@ -33,10 +33,17 @@ class Provider
     # official USD/PHP mid. We emit that mid for USD rather than the buying or
     # selling T/T rates, sidestepping buy/sell direction issues (cf. issue #314).
     #
-    # The bulletin also lists SDR (USD-denominated, "$ X /SDR") and gold/silver
-    # (USD per ounce). Both are quoted against the dollar rather than the peso,
-    # so we skip them — emitting them as PHP quotes would be a unit/direction
-    # bug.
+    # The bulletin also lists an SDR rate ("SDR Rate: $ X /SDR") and gold/silver
+    # buying prices ("GOLD BUYING: $ X", "SILVER BUYING: $ X", a Reuters/LBMA
+    # passthrough). These are quoted against the dollar rather than the peso, so
+    # we emit them in their native USD direction instead of as PHP quotes:
+    #   - SDR  "$ X /SDR"   → 1 XDR = X USD → { base: "XDR", quote: "USD" }
+    #   - gold "GOLD ... $ X" (USD per troy ounce)   → { base: "XAU", quote: "USD" }
+    #   - silver "SILVER ... $ X" (USD per troy ounce) → { base: "XAG", quote: "USD" }
+    # Metals stay metal-in-base per troy ounce, matching the convention used by
+    # other metal adapters (CBSL, CBI, BOM). The figures are already per troy
+    # ounce, so no per-gram conversion. XDR is also published authoritatively by
+    # the IMF, so BSP's quote is a redundant cross-check.
     #
     # Coverage starts 2017-11-06: the SharePoint list reaches back to 2017-01-03,
     # but bulletins before 2017-11-06 are image-only scans with no extractable
@@ -53,6 +60,12 @@ class Provider
       # number or "N/A"); the last column is the peso equivalent.
       ROW_PATTERN = %r{\A\s*\d+\s+.+?\s+([A-Z]{3})\s+(?:N/A|[\d.,]+)\s+(?:N/A|[\d.,]+)\s+(N/A|[\d.,]+)\s*\z}
       REFERENCE_RATE_PATTERN = /BSP Reference Rate:\s*PHP\s+([\d.,]+)/
+
+      # USD-denominated extras: 1 SDR = X USD; gold/silver buying prices in USD
+      # per troy ounce. Each appears once per bulletin.
+      SDR_PATTERN = %r{SDR Rate:\s*\$\s*([\d.,]+)\s*/SDR}
+      GOLD_PATTERN = /GOLD BUYING:\s*\$\s*([\d.,]+)/
+      SILVER_PATTERN = /SILVER BUYING:\s*\$\s*([\d.,]+)/
 
       class << self
         # Each request fetches a single day's PDF, so chunk the archive to keep
@@ -110,10 +123,24 @@ class Provider
           records << { date: date, base: "USD", quote: "PHP", rate: usd } if usd.nonzero?
         end
 
+        # USD-denominated extras, emitted in their native direction.
+        add_usd_rate(records, date, "XDR", text[SDR_PATTERN, 1])
+        add_usd_rate(records, date, "XAU", text[GOLD_PATTERN, 1])
+        add_usd_rate(records, date, "XAG", text[SILVER_PATTERN, 1])
+
         records
       end
 
       private
+
+      # Append a USD-quoted record (base in USD per unit) when the value parses
+      # to a non-zero number.
+      def add_usd_rate(records, date, base, value)
+        return unless value
+
+        rate = Float(value.delete(","))
+        records << { date: date, base: base, quote: "USD", rate: rate } if rate.nonzero?
+      end
 
       # Enumerate the SharePoint list newest-first, collecting (date, pdf_url)
       # pairs whose bulletin date falls within [after, upto]. Stops paging once
