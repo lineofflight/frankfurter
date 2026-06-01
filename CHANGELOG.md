@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-06-01
+
 ### Added
 
 - Bangko Sentral ng Pilipinas (BSP) as a data provider. Daily Reference Exchange Rate Bulletin rates for ~32 currencies against the Philippine peso (PHP), from 2017-11-06. USD uses BSP's published reference rate (mid). The bulletin's USD-denominated SDR rate (XDR) and gold/silver buying prices (XAU/XAG per troy ounce) are also included, in their native USD direction.
@@ -121,7 +123,8 @@ _Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/fr
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/lineofflight/frankfurter/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/lineofflight/frankfurter/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/lineofflight/frankfurter/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/lineofflight/frankfurter/compare/v2.0.1...v2.0.2
