@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Bangko Sentral ng Pilipinas (BSP) as a data provider. Daily Reference Exchange Rate Bulletin rates for ~32 currencies against the Philippine peso (PHP), from 2017-11-06. USD uses BSP's published reference rate (mid).
 - `/v2/providers` now includes `publish_cadence` (`daily`, `weekly`, `monthly`, or `null`) for each provider. It gives the unit for `publishes_missed`, so consumers can tell whether a provider is one day, week, or month behind.
 
 ### Fixed
