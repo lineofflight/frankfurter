@@ -152,6 +152,7 @@ GEM
       rubocop (>= 1.72.1, < 2)
     rubocop-shopify (2.18.0)
       rubocop (~> 1.62)
+    ruby-ole (1.2.13.1)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     rubyzip (3.3.0)
@@ -162,6 +163,10 @@ GEM
     skooma (0.3.8)
       json_skooma (~> 0.2.5)
       zeitwerk (~> 2.6)
+    spreadsheet (1.3.5)
+      bigdecimal
+      logger
+      ruby-ole
     sqlite3 (2.9.4-aarch64-linux-gnu)
     sqlite3 (2.9.4-aarch64-linux-musl)
     sqlite3 (2.9.4-arm-linux-gnu)
@@ -230,6 +235,7 @@ DEPENDENCIES
   rufus-scheduler
   sequel
   skooma
+  spreadsheet
   sqlite3
   vcr
   webmock
