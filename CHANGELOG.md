@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Long `/v2/rates` time-series exports (including `.csv`) are now much faster. Each day in the range was being rebuilt by rescanning the entire window; a sliding window now reuses that work, cutting generation time for multi-year ranges by roughly 3x. Output is unchanged.
 - Time-series exports now send `stale-while-revalidate` and `stale-if-error` cache directives, so the edge keeps serving the last good export while it revalidates or if the origin errors, instead of returning a failure.
+- `/v2/rates` no longer returns a 500 for date ranges spanning December 2014, which previously broke full-history exports (every currency's history crosses that window). Banque du Liban changed its quote currency from the Lithuanian litas to the euro around Lithuania's 2015 euro adoption, leaving overlapping rows that reach the same currency two ways; these are now reconciled into one rate instead of failing the request.
 - Restored Central Bank of Samoa (CBS) rates, which had stopped updating after the source moved its workbook to a date-stamped filename that changes daily. The link is now read from the data page on each run instead of being hardcoded.
 
 ## [2.2.0] - 2026-06-01
