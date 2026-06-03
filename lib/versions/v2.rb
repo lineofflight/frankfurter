@@ -16,6 +16,11 @@ module Versions
       docs: "https://frankfurter.dev",
     }.freeze
 
+    # Rates change at most once a day. Beyond the 24h fresh window, let shared caches (Cloudflare)
+    # keep serving the last good export while they revalidate, and keep serving it if the origin
+    # errors — so a slow or failing build degrades to stale data at the edge instead of a 5xx.
+    RATES_CACHE_CONTROL = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
+
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
@@ -47,6 +52,7 @@ module Versions
       r.on("rates") do
         r.get do
           query = RateQuery.new(r.params)
+          response["Cache-Control"] = RATES_CACHE_CONTROL
           r.etag(query.cache_key)
 
           r.csv do

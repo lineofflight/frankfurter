@@ -4,10 +4,12 @@ require "rack/cors"
 require "roda"
 
 require "no_store_on_error"
+require "request_timeout"
 require "versions/v1"
 require "versions/v2"
 
 class App < Roda
+  use RequestTimeout
   use NoStoreOnError
   use Rack::Cors do
     allow do
