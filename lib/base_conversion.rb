@@ -11,18 +11,25 @@ class BaseConversion
   def convert
     rates.group_by { |r| r[:provider] }.flat_map do |provider, group|
       converted = convert_group(group).map { |r| r.merge(provider:) }
-      seen = {}
-      converted.each do |r|
-        key = [r[:date], r[:quote]]
-        raise "ambiguous bridge: #{provider} produced #{key.inspect} twice" if seen[key]
-
-        seen[key] = true
-      end
-      converted
+      reconcile(converted)
     end
   end
 
   private
+
+  # A provider can reach the same quote by more than one bridge during a pivot-currency transition
+  # (e.g. Banque du Liban quoting against both LTL and EUR around Lithuania's 2015 euro adoption).
+  # Collapse such duplicates into one averaged rate per quote rather than failing the query: a live
+  # 5xx is never the right answer to a provider quirk, and cross-provider consensus already guards
+  # against genuine outliers downstream.
+  def reconcile(rows)
+    rows.group_by { |r| [r[:date], r[:quote]] }.map do |_, group|
+      next group.first if group.size == 1
+
+      mean = group.sum { |r| r[:rate] } / group.size
+      group.first.merge(rate: mean)
+    end
+  end
 
   def convert_group(group)
     group.filter_map do |rate|
