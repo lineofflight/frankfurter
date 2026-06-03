@@ -39,7 +39,7 @@ module Versions
     end
 
     route do |r|
-      response.cache_control(public: true, max_age: 86400)
+      response["cache-control"] = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
 
       r.is { ROOT_PAYLOAD }
       r.root { ROOT_PAYLOAD }

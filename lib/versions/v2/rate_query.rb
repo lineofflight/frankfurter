@@ -99,8 +99,7 @@ module Versions
           all_dates = rows.map { |r| r[:date] }.uniq
           anchors = all_dates.select { |d| chunk_range.cover?(d) }.sort
           anchors.unshift(chunk_range.begin) unless all_dates.include?(chunk_range.begin)
-          anchors.each do |anchor|
-            contributors = CarryForward.apply(rows, date: anchor)
+          CarryForward.each_snapshot(rows, dates: anchors) do |_anchor, contributors|
             next if contributors.empty?
 
             emit_blended(contributors) do |record|

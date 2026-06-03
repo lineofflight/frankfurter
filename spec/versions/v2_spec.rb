@@ -224,6 +224,17 @@ describe Versions::V2 do
     _(last_response.headers["ETag"]).wont_be_nil
   end
 
+  it "lets caches serve stale rates on revalidation and origin errors" do
+    get "/rates?from=#{range_start}&to=#{range_end}"
+
+    cache_control = last_response.headers["Cache-Control"]
+
+    _(cache_control).must_include("public")
+    _(cache_control).must_include("max-age=86400")
+    _(cache_control).must_include("stale-while-revalidate")
+    _(cache_control).must_include("stale-if-error")
+  end
+
   it "returns 422 for unknown parameters" do
     get "/rates?provider=ecb"
 
