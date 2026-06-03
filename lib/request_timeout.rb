@@ -26,6 +26,7 @@ class RequestTimeout
     def each
       @body.each do |chunk|
         if Process.clock_gettime(Process::CLOCK_MONOTONIC) > @deadline
+          close
           raise Error, "request exceeded #{@seconds}s timeout"
         end
 

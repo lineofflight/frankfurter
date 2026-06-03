@@ -139,11 +139,11 @@ describe CarryForward do
       assert_matches_apply(rows, [Date.new(2024, 1, 15), Date.new(2024, 1, 10), Date.new(2024, 1, 12)])
     end
 
-    it "yields nothing for empty rows" do
+    it "yields each date with empty contributors when rows are empty" do
       yielded = false
       CarryForward.each_snapshot([], dates: [Date.new(2024, 1, 1)]) { |_, _| yielded = true }
 
-      _(yielded).must_equal(true) # still yields the date, with empty contributors
+      _(yielded).must_equal(true)
     end
   end
 end

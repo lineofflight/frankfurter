@@ -19,7 +19,7 @@ describe RequestTimeout do
       _(collected).must_equal(["a", "b", "c"])
     end
 
-    it "raises once the deadline passes mid-iteration" do
+    it "raises when the deadline has already passed" do
       body = RequestTimeout::TimedBody.new(["a", "b", "c"], deadline: clock(-1), seconds: 5)
 
       _ { body.each { |_| } }.must_raise(RequestTimeout::Error)

@@ -16,11 +16,6 @@ module Versions
       docs: "https://frankfurter.dev",
     }.freeze
 
-    # v2 data changes at most once a day. Beyond the 24h fresh window, let shared caches (Cloudflare)
-    # keep serving the last good response while they revalidate, and keep serving it if the origin
-    # errors — so a slow or failing build degrades to stale data at the edge instead of a 5xx.
-    CACHE_CONTROL = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
-
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
@@ -44,7 +39,7 @@ module Versions
     end
 
     route do |r|
-      response["cache-control"] = CACHE_CONTROL
+      response["cache-control"] = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
 
       r.is { ROOT_PAYLOAD }
       r.root { ROOT_PAYLOAD }
