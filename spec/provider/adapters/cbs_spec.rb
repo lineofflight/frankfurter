@@ -65,6 +65,25 @@ class Provider < Sequel::Model(:providers)
         end
       end
 
+      describe "#archive_url" do
+        it "resolves the date-stamped workbook link from the data page" do
+          html = <<~HTML
+            <ul class="downloads">
+              <li><a href="/media/Historical-Daily-Rates-June032026.xlsx">Historical rates</a></li>
+            </ul>
+          HTML
+
+          _(adapter.archive_url(html)).must_equal(
+            "https://cbs.gov.ws/media/Historical-Daily-Rates-June032026.xlsx",
+          )
+        end
+
+        it "raises when the page exposes no workbook link" do
+          _ { adapter.archive_url("<html><body>no link here</body></html>") }
+            .must_raise(Adapter::Unavailable)
+        end
+      end
+
       describe "#parse" do
         it "maps source column labels to ISO 4217 codes" do
           _(CBS::CURRENCIES["TALA/USD"]).must_equal("USD")

@@ -26,15 +26,16 @@ class Provider
     # (onshore vs offshore yuan) only appear in recent years; the workbook adds
     # the CNH column around 2023.
     #
-    # The bank also exposes a SvelteKit page (data_url) with the most recent
-    # fix embedded as an inline JS literal. We rely on the XLSX archive alone
-    # because it includes the current day's rate the same morning it goes live
-    # — the live page provides no extra coverage.
+    # The workbook lives behind a date-stamped filename that changes every day
+    # (e.g. "Historical-Daily-Rates-June032026.xlsx"), so the download link can't
+    # be hardcoded. We scrape the data page on each run for its current ".xlsx"
+    # link and follow it. The workbook itself is a complete archive, so a single
+    # incremental backfill catches up any gap left while the link was stale.
     #
     # Page caveat: "indicative rates only but not for market use. Kindly refer
     # to the commercial banks for market exchange rates."
     class CBS < Adapter
-      ARCHIVE_URL = "https://cbs.gov.ws/media/Historical-Daily%20-Rates-(2372).xlsx"
+      DATA_URL = "https://cbs.gov.ws/daily-exchange-rates"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Excel stores dates as days since this epoch (with the 1900 leap-year
@@ -71,10 +72,19 @@ class Provider
       ].freeze
 
       def fetch(after: nil, upto: nil)
-        records = parse(download(ARCHIVE_URL))
+        records = parse(download(archive_url(download(DATA_URL))))
         records = records.select { |r| r[:date] >= after } if after
         records = records.select { |r| r[:date] <= upto } if upto
         records
+      end
+
+      # Resolve the current workbook URL from the data page HTML. The link is a
+      # root-relative "/media/...xlsx" href whose filename embeds the date.
+      def archive_url(html)
+        path = html[/href=["']([^"']*\.xlsx)["']/i, 1]
+        raise Unavailable, "no workbook link on #{DATA_URL}" unless path
+
+        URI.join(DATA_URL, path).to_s
       end
 
       def parse(xlsx_bytes)

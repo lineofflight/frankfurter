@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Restored Central Bank of Samoa (CBS) rates, which had stopped updating after the source moved its workbook to a date-stamped filename that changes daily. The link is now read from the data page on each run instead of being hardcoded.
+
 ## [2.2.0] - 2026-06-01
 
 ### Added
