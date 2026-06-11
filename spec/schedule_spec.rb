@@ -3,6 +3,7 @@
 require_relative "helper"
 require "fugit"
 require "provider/adapters"
+require "tmpdir"
 
 describe "bin/schedule --dry-run" do
   let(:output) do
@@ -28,6 +29,28 @@ describe "bin/schedule --dry-run" do
       parsed = Fugit::Cron.parse(expression)
 
       _(parsed).wont_be_nil("Invalid cron: #{expression}")
+    end
+  end
+
+  it "schedules startup backfills with a numeric stagger" do
+    Dir.mktmpdir do |dir|
+      scheduler_stub = <<~RUBY
+        module Rufus
+          class Scheduler
+            def initialize(max_work_threads:); end
+            def in(delay); puts "startup: \#{delay}"; end
+            def cron(*) = nil
+            def join = nil
+          end
+        end
+      RUBY
+
+      File.write(File.join(dir, "rufus-scheduler.rb"), scheduler_stub)
+
+      output = %x(APP_ENV=test bundle exec ruby -I #{dir} bin/schedule 2>&1)
+
+      _($CHILD_STATUS.success?).must_equal(true, output)
+      _(output.lines.map(&:chomp).grep(/\Astartup: \d+s\z/)).wont_be_empty
     end
   end
 end

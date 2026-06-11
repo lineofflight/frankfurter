@@ -13,7 +13,7 @@ dry_run = ARGV.include?("--dry-run")
 scheduler = Rufus::Scheduler.new(max_work_threads: DB.pool.max_size) unless dry_run
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
-Provider.all.shuffle.each do |provider, index|
+Provider.all.shuffle.each_with_index do |provider, index|
   if dry_run
     puts "startup: backfill[#{provider.key.downcase}]"
   else

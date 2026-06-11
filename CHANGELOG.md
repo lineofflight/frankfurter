@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Docker containers no longer terminate on startup when the scheduler staggers provider backfills. (#514)
+
 ## [2.3.0] - 2026-06-11
 
 ### Added
