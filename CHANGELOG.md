@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-06-11
+
 ### Added
 
 - Banco Central de Bolivia (BCBO) now supports a daily multi-currency basket of ~50 currencies, plus daily reference prices for gold (XAU), silver (XAG), and SDR (XDR) from 2008-01-01 onwards. Historical USD/BOB rates prior to 2008 continue to be sourced from the yearly XLS archive.
+- Docker builds now support multi-architecture target platforms, building and publishing both `linux/amd64` and `linux/arm64` images to Docker Hub under a single manifest list. (#140)
 
 ### Fixed
 
@@ -134,7 +137,8 @@ _Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/fr
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/lineofflight/frankfurter/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/lineofflight/frankfurter/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/lineofflight/frankfurter/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/lineofflight/frankfurter/compare/v2.0.2...v2.1.0
