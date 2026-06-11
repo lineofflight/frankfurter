@@ -52,9 +52,19 @@ class Provider < Sequel::Model(:providers)
       describe "historical HTML scrape" do
         before do
           VCR.insert_cassette("nbkr_historical", match_requests_on: [:method, :uri], allow_playback_repeats: true)
+          @original_currencies = NBKR::CURRENCIES
+          NBKR.send(:remove_const, :CURRENCIES)
+          NBKR.const_set(:CURRENCIES, [
+            { id: 15, iso: "USD", nominal: 1 },
+            { id: 20, iso: "EUR", nominal: 1 },
+          ])
         end
 
-        after { VCR.eject_cassette }
+        after do
+          VCR.eject_cassette
+          NBKR.send(:remove_const, :CURRENCIES)
+          NBKR.const_set(:CURRENCIES, @original_currencies)
+        end
 
         # All HTTP-hitting historical tests share one window so the cassette
         # records the per-currency requests just once.

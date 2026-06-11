@@ -17,7 +17,7 @@ class Provider < Sequel::Model(:providers)
       let(:adapter) { BOJA.new }
 
       it "fetches rates" do
-        dataset = adapter.fetch(after: Date.new(2025, 1, 1))
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1))
 
         _(dataset).wont_be_empty
       end
