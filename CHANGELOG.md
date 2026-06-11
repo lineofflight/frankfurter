@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Banco Central de Bolivia (BCBO) now supports a daily multi-currency basket of ~50 currencies, plus daily reference prices for gold (XAU), silver (XAG), and SDR (XDR) from 2008-01-01 onwards. Historical USD/BOB rates prior to 2008 continue to be sourced from the yearly XLS archive.
+
 ### Fixed
 
 - Long `/v2/rates` time-series exports (including `.csv`) are now much faster. Each day in the range was being rebuilt by rescanning the entire window; a sliding window now reuses that work, cutting generation time for multi-year ranges by roughly 3x. Output is unchanged.

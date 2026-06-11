@@ -10,48 +10,39 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central de Bolivia — daily official rate ("tipo de cambio oficial")
-    # of the boliviano against the US dollar, published on business days.
+    # Banco Central de Bolivia.
     #
-    # The rate is stabilised: VENTA (sell) has sat at 6.96 and COMPRA (buy) at
-    # 6.86 since 2011, so the mid (6.91) repeats day after day. That is the
-    # value the bank publishes, so we relay it as-is.
+    # Daily official exchange rates of the boliviano (BOB) against the US dollar and
+    # ~50 other currencies, plus daily reference prices for gold, silver, and SDR.
     #
-    # Source: one legacy OLE2/BIFF .xls per calendar year at
-    # tiposDeCambioHistorico/xls.php?anio=YYYY. Each workbook holds a single
-    # sheet "COTIZACIONES OFICIALES <year>" laid out as a matrix: column A is
-    # the day of month (1..31), then twelve month blocks of two columns each
-    # (VENTA, COMPRA) for ENERO..DICIEMBRE. Trailing rows ("PROM" averages and
-    # the signature block) carry comma-decimal strings or text and are skipped
-    # because only numeric day rows feed records. Requests for anio < 2000
-    # silently fall back to the 2000 workbook, so 2000 is the earliest reliable
-    # year.
+    # The USD/BOB rate is stabilized: VENTA (sell) has sat at 6.96 and COMPRA (buy) at
+    # 6.86 since 2011, so the mid (6.91) repeats day after day.
     #
-    # The bank publishes buy/sell; we average them to a mid (issue #314), same
-    # as RBM and NRBT. Column header on the multi-currency table reads "TIPO DE
-    # CAMBIO EN Bs POR UNIDAD DE MONEDA EXTRANJERA" — bolivianos per one foreign
-    # unit — so foreign currency is the base and BOB the quote (pivot-in-quote),
-    # matching NBG/BBK. 1 USD = 6.91 BOB.
+    # Source:
+    # 1. Yearly archives (USD/BOB only) at tiposDeCambioHistorico/xls.php?anio=YYYY.
+    #    Used for historical data before 2008 (coverage starts 2000-01-01).
+    # 2. Daily multi-currency spreadsheets at
+    #    librerias/indicadores/otras/otras_imprimir2XLS.php?qdd=DD&qmm=MM&qaa=YYYY.
+    #    Used for all currencies and precious metals from 2008-01-01 onwards.
     #
-    # The bank also serves a daily multi-currency table (~50 currencies back to
-    # ~2008) at librerias/indicadores/otras/otras_imprimir2XLS.php?qdd=DD&qmm=MM
-    # &qaa=YYYY. Adding that basket is a follow-up; this adapter ships USD/BOB
-    # from the yearly archive, which reaches back to 2000 in far fewer requests.
+    # Rates are emitted in BCBO's native direction: foreign currency as base, BOB as
+    # quote (1 USD = 6.91 BOB), matching NBG/BBK.
+    # Metals (XAU, XAG) and SDR (XDR) are quoted against USD in the daily sheets:
+    #   - ORO (gold)   -> { base: "XAU", quote: "USD", rate: }
+    #   - PLATA (silver) -> { base: "XAG", quote: "USD", rate: }
+    #   - SDR (DEG)   -> { base: "XDR", quote: "USD", rate: }
     class BCBO < Adapter
       HOST = "https://www.bcb.gob.bo"
       YEAR_URL = "#{HOST}/tiposDeCambioHistorico/xls.php".freeze
+      DAILY_URL = "#{HOST}/librerias/indicadores/otras/otras_imprimir2XLS.php".freeze
       EARLIEST_YEAR = 2000
 
-      # Zero-based column of the VENTA (sell) cell for each month. COMPRA (buy)
-      # sits in the next column. January starts at column 1 (column 0 is the
-      # day), and each month occupies two columns.
       MONTH_SELL_COLUMNS = (1..12).to_h { |month| [month, (month - 1) * 2 + 1] }.freeze
 
       class << self
-        # One workbook per calendar year. A wide window keeps fetch_each to a
-        # handful of calls; fetch itself loops the calendar years in range and
-        # sleeps between year downloads.
-        def backfill_range = 3653
+        # Daily queries are used from 2008 onwards, so keep the backfill range small
+        # (30 days) to keep progress durable and avoid overloading the server.
+        def backfill_range = 30
       end
 
       def fetch(after: nil, upto: nil)
@@ -60,19 +51,39 @@ class Provider
         return [] if start_date > end_date
 
         dataset = []
-        first = true
-        (start_date.year..end_date.year).each do |year|
-          sleep(0.5) unless first
-          first = false
 
-          xls = download(year)
-          dataset.concat(parse(xls, year).select { |record| record[:date].between?(start_date, end_date) })
+        # 1. Historical USD/BOB from yearly files (before 2008)
+        pre_2008_end = [end_date, Date.new(2007, 12, 31)].min
+        if start_date <= pre_2008_end
+          first = true
+          (start_date.year..pre_2008_end.year).each do |year|
+            sleep(0.5) unless first
+            first = false
+
+            xls = download_year(year)
+            dataset.concat(parse_yearly(xls, year).select { |r| r[:date].between?(start_date, pre_2008_end) })
+          end
+        end
+
+        # 2. Multi-currency and metals from daily files (2008 onwards)
+        post_2008_start = [start_date, Date.new(2008, 1, 1)].max
+        if post_2008_start <= end_date
+          first = true
+          (post_2008_start..end_date).each do |date|
+            next if date.saturday? || date.sunday?
+
+            sleep(0.5) unless first
+            first = false
+
+            xls = download_daily(date)
+            dataset.concat(parse_daily(xls, date))
+          end
         end
 
         dataset
       end
 
-      def parse(xls_data, year)
+      def parse_yearly(xls_data, year)
         book = Spreadsheet.open(StringIO.new(xls_data.to_s))
         sheet = book.worksheets.first
         return [] unless sheet
@@ -101,12 +112,78 @@ class Provider
         records
       end
 
+      def parse_daily(xls_data, date)
+        book = Spreadsheet.open(StringIO.new(xls_data.to_s))
+        sheet = book.worksheets.first
+        return [] unless sheet
+
+        records = []
+        usd_rates = []
+
+        sheet.each do |row|
+          code_str = row[3].to_s.strip
+          next if code_str.empty?
+
+          if code_str == "USD./O.T.F."
+            metal_name = row[0].to_s.strip
+            base = case metal_name
+            when /ORO/i then "XAU"
+            when /PLATA/i then "XAG"
+            end
+            next unless base
+
+            rate_val = row[4].to_s.delete(",")
+            rate = Float(rate_val, exception: false)
+            next unless rate&.positive?
+
+            records << { date:, base:, quote: "USD", rate: }
+          elsif code_str == "USD/D.E.G."
+            rate_val = row[5].to_s.delete(",")
+            rate = Float(rate_val, exception: false)
+            next unless rate&.positive?
+
+            records << { date:, base: "XDR", quote: "USD", rate: }
+          elsif code_str == "USD.VENTA" || code_str == "USD.COMPRA"
+            rate_val = row[4].to_s.delete(",")
+            rate = Float(rate_val, exception: false)
+            usd_rates << rate if rate&.positive?
+          elsif code_str == "USD"
+            # Skip Ecuador's USD row to avoid duplicate USD/BOB rates
+            next
+          else
+            next unless code_str.match?(/\A[A-Z]{3}\z/)
+
+            rate_val = row[4].to_s.delete(",")
+            rate = Float(rate_val, exception: false)
+            next unless rate&.positive?
+
+            records << { date:, base: code_str, quote: "BOB", rate: }
+          end
+        end
+
+        if usd_rates.size == 2
+          mid_rate = usd_rates.sum / 2.0
+          records << { date:, base: "USD", quote: "BOB", rate: mid_rate }
+        end
+
+        records
+      end
+
       private
 
-      def download(year)
+      def download_year(year)
         uri = URI(YEAR_URL)
         uri.query = URI.encode_www_form(anio: year)
+        http_get(uri)
+      end
 
+      def download_daily(date)
+        uri = URI(DAILY_URL)
+        uri.query = URI.encode_www_form(qdd: date.day, qmm: date.month, qaa: date.year)
+        http_get(uri)
+      end
+
+      def http_get(uri)
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = (uri.scheme == "https")
         http.open_timeout = 30
