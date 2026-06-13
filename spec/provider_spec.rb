@@ -259,7 +259,7 @@ describe Provider do
   describe "#backfill" do
     let(:provider) { Provider[key: "BCB"].dup }
     let(:fetched_params) { [] }
-    let(:import_date) { Date.new(2099, 1, 1) }
+    let(:import_date) { Date.today }
 
     let(:adapter) do
       params = fetched_params
@@ -297,8 +297,8 @@ describe Provider do
       bad_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "SDR", rate: 1.5 },
+            { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.today, base: "EUR", quote: "SDR", rate: 1.5 },
           ]
         end
       end
@@ -314,9 +314,9 @@ describe Provider do
       bad_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "GBP", rate: 0.0 },
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "JPY", rate: -1.0 },
+            { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.today, base: "EUR", quote: "GBP", rate: 0.0 },
+            { date: Date.today, base: "EUR", quote: "JPY", rate: -1.0 },
           ]
         end
       end
@@ -325,9 +325,47 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "USD").count).must_equal(1)
-      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "GBP").count).must_equal(0)
-      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1), quote: "JPY").count).must_equal(0)
+      _(Rate.where(provider: provider.key, date: Date.today, quote: "USD").count).must_equal(1)
+      _(Rate.where(provider: provider.key, date: Date.today, quote: "GBP").count).must_equal(0)
+      _(Rate.where(provider: provider.key, date: Date.today, quote: "JPY").count).must_equal(0)
+    end
+
+    it "drops records dated implausibly far in the future" do
+      # A single stray future-dated row (source typo, or a pre-seeded spreadsheet
+      # row) must not be stored: it would hijack last_synced (= max date) and
+      # freeze incremental backfill behind an unreachable cursor.
+      future_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.today + 365, base: "EUR", quote: "GBP", rate: 0.85 },
+          ]
+        end
+      end
+
+      provider.stub(:adapter, future_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).count).must_equal(1)
+      _(Rate.where(provider: provider.key, quote: "GBP").count).must_equal(0)
+    end
+
+    it "keeps records dated within the near-future grace window" do
+      # Providers in far-eastern time zones (e.g. Tonga UTC+13) and forward
+      # value-date conventions legitimately publish a rate dated one day ahead
+      # of the UTC backfill clock; those must still be ingested.
+      near_future_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [{ date: Date.today + 1, base: "EUR", quote: "USD", rate: 1.1 }]
+        end
+      end
+
+      provider.stub(:adapter, near_future_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today + 1).count).must_equal(1)
     end
 
     it "drops records dated on or after a defunct currency's terminal date" do
@@ -359,8 +397,8 @@ describe Provider do
       neutral_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "GBP", rate: 0.85 },
+            { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.today, base: "EUR", quote: "GBP", rate: 0.85 },
           ]
         end
       end
@@ -369,15 +407,15 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, date: Date.new(2099, 1, 1)).count).must_equal(2)
+      _(Rate.where(provider: provider.key, date: Date.today).count).must_equal(2)
     end
 
     it "ingests XDR" do
       xdr_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "USD", rate: 1.1 },
-            { date: Date.new(2099, 1, 1), base: "EUR", quote: "XDR", rate: 0.8 },
+            { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+            { date: Date.today, base: "EUR", quote: "XDR", rate: 0.8 },
           ]
         end
       end

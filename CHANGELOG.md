@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Rates dated implausibly far in the future are no longer ingested. A stray upstream date was being stored as a provider's most recent rate, which silently froze that provider's incremental updates until the bogus date arrived; the National Reserve Bank of Tonga (NRBT) and Reserve Bank of Vanuatu (RBV) feeds were affected. Run `rake db:purge_invalid` to remove any such rows already stored.
+
 ## [2.3.1] - 2026-06-11
 
 ### Fixed
@@ -87,7 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `/v2/rates` date-range responses are now sorted by date. Rows where carry-forward surfaced an older quote previously appeared out of order.
 - `/v2/rates` no longer returns 500 errors for date/provider/quote combinations where an upstream provider published a zero rate (e.g. BNM's THB/MYR on certain 2006-2018 dates). Non-positive rates are now dropped on ingest.
-- Defunct ISO 4217 codes (BGN, BYR, EEK, HRK, IEP, SLL, STD, VEF, ZMK) are no longer ingested past their retirement or redenomination date. A few providers continued publishing stale records under the old codes; these are now dropped on ingest. Run `rake db:purge_obsolete` to clean up existing rows.
+- Defunct ISO 4217 codes (BGN, BYR, EEK, HRK, IEP, SLL, STD, VEF, ZMK) are no longer ingested past their retirement or redenomination date. A few providers continued publishing stale records under the old codes; these are now dropped on ingest. Run `rake db:purge_invalid` to clean up existing rows.
 
 ## [2.0.2] - 2026-05-21
 

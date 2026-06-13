@@ -23,14 +23,14 @@ namespace :db do
     Provider.seed
   end
 
-  desc "Purge rates for defunct currency codes past their terminal date"
-  task :purge_obsolete do
-    require "currency_terminal_date"
+  desc "Purge stored rates that violate ingest rules (future-dated and defunct-currency rows)"
+  task :purge_invalid do
+    require "rate_validation"
     require "db"
     require "log"
 
-    totals = CurrencyTerminalDate.purge(DB)
-    Log.info("purge_obsolete: deleted #{totals[:rates]} rates, " \
+    totals = RateValidation.purge(DB)
+    Log.info("purge_invalid: deleted #{totals[:rates]} rates, " \
       "#{totals[:weekly_rates]} weekly, #{totals[:monthly_rates]} monthly")
   end
 end
