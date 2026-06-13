@@ -1,68 +1,95 @@
 # frozen_string_literal: true
 
 require_relative "helper"
-require "currency_terminal_date"
+require "rate_validation"
 
-describe CurrencyTerminalDate do
-  it "loads all entries" do
-    _(CurrencyTerminalDate.all).wont_be_empty
-  end
+describe RateValidation do
+  describe ".reject!" do
+    it "drops unrecognised currency codes" do
+      records = [
+        { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+        { date: Date.today, base: "EUR", quote: "SDR", rate: 1.5 },
+      ]
 
-  it "returns a frozen array" do
-    _(CurrencyTerminalDate.all).must_be(:frozen?)
-  end
+      RateValidation.reject!(records)
 
-  it "parses every terminal_date as a Date" do
-    CurrencyTerminalDate.all.each do |entry|
-      _(entry.terminal_date).must_be_instance_of(Date)
+      _(records.map { |r| r[:quote] }).must_equal(["USD"])
     end
-  end
 
-  it "requires iso_code, terminal_date, and source" do
-    CurrencyTerminalDate.all.each do |entry|
-      _(entry.iso_code).wont_be_nil
-      _(entry.iso_code).must_match(/\A[A-Z]{3}\z/)
-      _(entry.source).wont_be_nil
-      _(entry.source).must_match(%r{\Ahttps?://})
+    it "drops non-positive rates" do
+      records = [
+        { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+        { date: Date.today, base: "EUR", quote: "GBP", rate: 0.0 },
+        { date: Date.today, base: "EUR", quote: "JPY", rate: -1.0 },
+      ]
+
+      RateValidation.reject!(records)
+
+      _(records.map { |r| r[:quote] }).must_equal(["USD"])
     end
-  end
 
-  it "covers the known defunct codes" do
-    codes = CurrencyTerminalDate.all.map(&:iso_code)
+    it "drops records beyond the future horizon but keeps the grace window" do
+      records = [
+        { date: Date.today + 1, base: "EUR", quote: "USD", rate: 1.1 },
+        { date: Date.today + 365, base: "EUR", quote: "GBP", rate: 0.85 },
+      ]
 
-    ["BGN", "BYR", "EEK", "HRK", "IEP", "SLL", "STD", "VEF", "ZMK"].each do |code|
-      _(codes).must_include(code)
+      RateValidation.reject!(records)
+
+      _(records.map { |r| r[:quote] }).must_equal(["USD"])
     end
-  end
 
-  it "looks up an entry by iso_code" do
-    entry = CurrencyTerminalDate.find("BYR")
+    it "drops records on or after a defunct currency's terminal date" do
+      records = [
+        { date: Date.new(2016, 7, 1), base: "EUR", quote: "BYR", rate: 22000.0 },
+        { date: Date.new(2016, 6, 30), base: "EUR", quote: "BYR", rate: 22000.0 },
+        { date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", rate: 1.1 },
+      ]
 
-    _(entry).wont_be_nil
-    _(entry.terminal_date).must_equal(Date.new(2016, 7, 1))
-    _(entry.successor).must_equal("BYN")
-    _(entry.ratio).must_equal(10000)
-  end
+      RateValidation.reject!(records)
 
-  it "returns nil for an unknown iso_code" do
-    _(CurrencyTerminalDate.find("USD")).must_be_nil
+      _(records.size).must_equal(2)
+      _(records.none? { |r| r[:quote] == "BYR" && r[:date] == Date.new(2016, 7, 1) }).must_equal(true)
+    end
+
+    it "accepts a string date" do
+      records = [{ date: (Date.today - 1).to_s, base: "EUR", quote: "USD", rate: 1.1 }]
+
+      RateValidation.reject!(records)
+
+      _(records.size).must_equal(1)
+    end
   end
 
   describe ".purge" do
     let(:db) { Sequel::Model.db }
 
-    it "deletes rates dated on or after the terminal date and keeps earlier rows" do
+    it "deletes future-dated rows across rate tables and keeps in-window rows" do
+      future = Date.today + 365
       db[:rates].multi_insert([
-        # BYR (terminal 2016-07-01) — these go
+        { provider: "TEST", date: future, base: "EUR", quote: "USD", rate: 1.1 },
+        { provider: "TEST", date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+      ])
+      db[:weekly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
+      db[:monthly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
+
+      RateValidation.purge(db)
+
+      _(db[:rates].where(date: future).count).must_equal(0)
+      _(db[:rates].where(date: Date.today).count).must_equal(1)
+      _(db[:weekly_rates].where(bucket_date: future).count).must_equal(0)
+      _(db[:monthly_rates].where(bucket_date: future).count).must_equal(0)
+    end
+
+    it "deletes rates on or after the terminal date and keeps earlier rows" do
+      db[:rates].multi_insert([
         { provider: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", rate: 22000.0 },
         { provider: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", rate: 0.00005 },
-        # BYR before terminal date — kept
         { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },
-        # Unrelated rate — kept
         { provider: "TEST", date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", rate: 1.1 },
       ])
 
-      totals = CurrencyTerminalDate.purge(db)
+      totals = RateValidation.purge(db)
 
       _(totals[:rates]).must_equal(2)
       _(db[:rates].where(quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(0)
@@ -81,7 +108,7 @@ describe CurrencyTerminalDate do
         { provider: "TEST", bucket_date: Date.new(2016, 6, 1), base: "USD", quote: "BYR", rate: 22000.0 },
       ])
 
-      totals = CurrencyTerminalDate.purge(db)
+      totals = RateValidation.purge(db)
 
       _(totals[:weekly_rates]).must_equal(1)
       _(totals[:monthly_rates]).must_equal(1)
@@ -104,7 +131,7 @@ describe CurrencyTerminalDate do
         end_date: "2017-01-01",
       )
 
-      CurrencyTerminalDate.purge(db)
+      RateValidation.purge(db)
 
       currency = db[:currencies].where(iso_code: "BYR").first
       coverage = db[:currency_coverages].where(iso_code: "BYR", provider_key: "TEST").first
@@ -131,28 +158,10 @@ describe CurrencyTerminalDate do
         end_date: "2017-01-01",
       )
 
-      CurrencyTerminalDate.purge(db)
+      RateValidation.purge(db)
 
       _(db[:currencies].where(iso_code: "BYR").count).must_equal(0)
       _(db[:currency_coverages].where(iso_code: "BYR").count).must_equal(0)
-    end
-  end
-
-  describe ".expired?" do
-    it "returns true for a date on the terminal date" do
-      _(CurrencyTerminalDate.expired?("BYR", Date.new(2016, 7, 1))).must_equal(true)
-    end
-
-    it "returns true for a date after the terminal date" do
-      _(CurrencyTerminalDate.expired?("BYR", Date.new(2017, 1, 1))).must_equal(true)
-    end
-
-    it "returns false for a date before the terminal date" do
-      _(CurrencyTerminalDate.expired?("BYR", Date.new(2016, 6, 30))).must_equal(false)
-    end
-
-    it "returns false for a code not in the table" do
-      _(CurrencyTerminalDate.expired?("USD", Date.new(2030, 1, 1))).must_equal(false)
     end
   end
 end

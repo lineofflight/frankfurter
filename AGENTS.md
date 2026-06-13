@@ -15,61 +15,62 @@ Frankfurter is a free and open-source currency data API built with Ruby that tra
 
 ```
 lib/
-├── app.rb                    # Main Roda app — mounts v1 and v2
-├── base_conversion.rb        # Rebases rates from any base to a common base
-├── blender.rb                # Blends multi-provider rates: rebase → consensus → weighted average
-├── bucket.rb                 # Shared SQL bucket expressions for weekly/monthly aggregation
-├── cache.rb                  # Cloudflare cache purge
-├── carry_forward.rb          # Carries forward most recent provider rate within a lookback window
-├── consensus.rb              # Cross-provider outlier detection (MAD-based)
-├── currency.rb               # Currency model (materialized from rates)
-├── currency_coverage.rb      # CurrencyCoverage model (provider-currency join)
-├── currency_terminal_date.rb # Terminal dates for defunct ISO codes; backfill drops stale records past changeover
-├── db.rb                     # Database configuration
-├── currency_patches.rb       # Patches Money::Currency: registers historical codes, fixes mangled names
-├── log.rb                    # Shared logger
-├── monthly_rate.rb           # MonthlyRate model on monthly_rates rollup table
-├── no_store_on_error.rb      # Rack middleware: stops CDNs/caches from holding error responses
-├── peg.rb                    # Currency peg definitions (from db/seeds/pegs/*.json)
-├── peg_anchor.rb             # Peg-aware post-processing: substitutes peg rates, synthesises uncovered pegged quotes
-├── provider.rb               # Provider model: identity, backfill
+├── app.rb                       # Main Roda app — mounts v1 and v2
+├── base_conversion.rb           # Rebases rates from any base to a common base
+├── blender.rb                   # Blends multi-provider rates: rebase → consensus → weighted average
+├── bucket.rb                    # Shared SQL bucket expressions for weekly/monthly aggregation
+├── cache.rb                     # Cloudflare cache purge
+├── carry_forward.rb             # Carries forward most recent provider rate within a lookback window
+├── consensus.rb                 # Cross-provider outlier detection (MAD-based)
+├── currency.rb                  # Currency model (materialized from rates)
+├── currency_coverage.rb         # CurrencyCoverage model (provider-currency join)
+├── defunct_currency.rb          # Defunct-currency registry: terminal dates for retired/redenominated ISO codes
+├── db.rb                        # Database configuration
+├── currency_patches.rb          # Patches Money::Currency: registers historical codes, fixes mangled names
+├── log.rb                       # Shared logger
+├── monthly_rate.rb              # MonthlyRate model on monthly_rates rollup table
+├── no_store_on_error.rb         # Rack middleware: stops CDNs/caches from holding error responses
+├── peg.rb                       # Currency peg definitions (from db/seeds/pegs/*.json)
+├── peg_anchor.rb                # Peg-aware post-processing: substitutes peg rates, synthesises uncovered pegged quotes
+├── provider.rb                  # Provider model: identity, backfill
 ├── provider/
 │   ├── adapters/
-│   │   ├── adapter.rb        # Abstract adapter: fetch interface, chunked iteration
-│   │   └── <key>.rb          # One adapter per provider (auto-discovered)
-│   └── adapters.rb           # Auto-requires all adapters
-├── rate.rb                   # Rate model on rates table
-├── rate_scopes.rb            # Shared dataset scopes for rate tables (rates, weekly, monthly)
-├── roundable.rb              # Currency-aware decimal rounding
-├── weekly_rate.rb            # WeeklyRate model on weekly_rates rollup table
-├── weighted_average.rb       # Recency-weighted averaging with exponential decay
+│   │   ├── adapter.rb           # Abstract adapter: fetch interface, chunked iteration
+│   │   └── <key>.rb             # One adapter per provider (auto-discovered)
+│   └── adapters.rb              # Auto-requires all adapters
+├── rate.rb                      # Rate model on rates table
+├── rate_scopes.rb               # Shared dataset scopes for rate tables (rates, weekly, monthly)
+├── rate_validation.rb           # Ingest-validation policy: drops invalid rows on ingest, purges stored ones
+├── roundable.rb                 # Currency-aware decimal rounding
+├── weekly_rate.rb               # WeeklyRate model on weekly_rates rollup table
+├── weighted_average.rb          # Recency-weighted averaging with exponential decay
 ├── versions/
-│   ├── v1.rb                 # Legacy API (ECB-only, frozen)
-│   ├── v1/                   # V1 internals (quotes, query, currency names)
-│   ├── v2.rb                 # Multi-provider API
+│   ├── v1.rb                    # Legacy API (ECB-only, frozen)
+│   ├── v1/                      # V1 internals (quotes, query, currency names)
+│   ├── v2.rb                    # Multi-provider API
 │   └── v2/
-│       └── rate_query.rb     # V2 rate query builder (blending, filtering)
+│       └── rate_query.rb        # V2 rate query builder (blending, filtering)
 ├── public/
-│   ├── favicon.ico           # Served as a static file
-│   ├── robots.txt            # Served as a static file
-│   ├── v1/openapi.json       # V1 OpenAPI spec
-│   └── v2/openapi.json       # V2 OpenAPI spec
+│   ├── favicon.ico              # Served as a static file
+│   ├── robots.txt               # Served as a static file
+│   ├── v1/openapi.json          # V1 OpenAPI spec
+│   └── v2/openapi.json          # V2 OpenAPI spec
 └── tasks/
-    ├── consensus.rake        # Consensus scan across providers
-    ├── db.rake               # Database migrations and setup
-    ├── default.rake          # Default task (lint + test)
-    ├── providers.rake        # Dynamic backfill task for all providers
-    ├── rollups.rake          # Rebuild weekly/monthly rollup tables
-    ├── rubocop.rake          # Linter task
-    └── test.rake             # Test suite task
+    ├── consensus.rake           # Consensus scan across providers
+    ├── db.rake                  # Database migrations and setup
+    ├── default.rake             # Default task (lint + test)
+    ├── providers.rake           # Dynamic backfill task for all providers
+    ├── rollups.rake             # Rebuild weekly/monthly rollup tables
+    ├── rubocop.rake             # Linter task
+    └── test.rake                # Test suite task
 
-spec/                         # Minitest test suite
-db/migrate/                   # Sequel migrations
+spec/                            # Minitest test suite
+db/migrate/                      # Sequel migrations
 db/seeds/
-    ├── currency_patches.json        # Money::Currency patches (historical codes, name fixes)
-    ├── currency_terminal_dates.json # Terminal dates for defunct ISO codes
-    ├── pegs/                        # One JSON file per peg (e.g. aed.json, bam.json)
-    └── providers/                   # One JSON file per provider (e.g. ecb.json, boi.json)
+    ├── currency_patches.json    # Money::Currency patches (historical codes, name fixes)
+    ├── defunct_currencies.json  # Defunct currencies: terminal dates for retired/redenominated ISO codes
+    ├── pegs/                    # One JSON file per peg (e.g. aed.json, bam.json)
+    └── providers/               # One JSON file per provider (e.g. ecb.json, boi.json)
 ```
 
 ## Key Components
