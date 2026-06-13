@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.2] - 2026-06-13
+
 ### Fixed
 
 - Rates dated implausibly far in the future are no longer ingested. A stray upstream date was being stored as a provider's most recent rate, which silently froze that provider's incremental updates until the bogus date arrived; the National Reserve Bank of Tonga (NRBT) and Reserve Bank of Vanuatu (RBV) feeds were affected. Run `rake db:purge_invalid` to remove any such rows already stored.
@@ -147,7 +149,8 @@ _Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/fr
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.1...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.2...HEAD
+[2.3.2]: https://github.com/lineofflight/frankfurter/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/lineofflight/frankfurter/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/lineofflight/frankfurter/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/lineofflight/frankfurter/compare/v2.1.1...v2.2.0
