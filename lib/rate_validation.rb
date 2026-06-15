@@ -4,6 +4,7 @@ require "date"
 require "money/currency"
 require "sequel"
 
+require "bucket"
 require "defunct_currency"
 
 # Ingest-validation policy for fetched rate records. Each rule answers one question — "is this row acceptable?" Rules
@@ -15,6 +16,9 @@ require "defunct_currency"
 # list; FutureDate is universal.
 module RateValidation
   RATE_TABLES = [:rates, :weekly_rates, :monthly_rates].freeze
+
+  # Bucket precision per rollup table; the daily `rates` table has none.
+  PRECISION = { weekly_rates: :week, monthly_rates: :month }.freeze
 
   # A currency code unknown to the Money::Currency registry.
   module UnknownCurrency
@@ -50,8 +54,22 @@ module RateValidation
         date > horizon
       end
 
-      def reject_scope(dataset, date_column)
-        dataset.where(Sequel[date_column] > horizon.to_s)
+      # Rollup buckets anchor to a fixed weekday (weekly) or the first of the month (monthly), so the live period's
+      # bucket can sit a few days ahead of the latest date it actually summarises. Comparing such a bucket against the
+      # raw daily horizon wrongly purges the current rollup; bucket the horizon to the table's precision so only buckets
+      # whose whole period is beyond the horizon are dropped.
+      def reject_scope(dataset, date_column, precision = nil)
+        dataset.where(Sequel[date_column] > horizon_bound(precision))
+      end
+
+      private
+
+      def horizon_bound(precision)
+        case precision
+        when :week then Bucket.week(horizon.to_s)
+        when :month then Bucket.month(horizon.to_s)
+        else horizon.to_s
+        end
       end
     end
   end
@@ -63,7 +81,9 @@ module RateValidation
         DefunctCurrency.expired?(record[:base], date) || DefunctCurrency.expired?(record[:quote], date)
       end
 
-      def reject_scope(dataset, date_column)
+      # Exact on daily rows; on rollups it compares the bucket anchor (not the period start), so the one week straddling
+      # a terminal date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
+      def reject_scope(dataset, date_column, _precision = nil)
         conditions = DefunctCurrency.all.map do |entry|
           Sequel.&(
             { date_column => entry.terminal_date.to_s.. },
@@ -102,9 +122,10 @@ module RateValidation
       db.transaction do
         RATE_TABLES.each do |table|
           date_column = table == :rates ? :date : :bucket_date
+          precision = PRECISION[table]
 
           PURGEABLE.each do |rule|
-            scope = rule.reject_scope(db[table], date_column)
+            scope = rule.reject_scope(db[table], date_column, precision)
             affected.concat(scope.select_map(:base), scope.select_map(:quote))
             totals[table] += scope.delete
           end

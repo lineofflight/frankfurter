@@ -75,10 +75,10 @@ describe RateValidation do
 
       RateValidation.purge(db)
 
-      _(db[:rates].where(date: future).count).must_equal(0)
-      _(db[:rates].where(date: Date.today).count).must_equal(1)
-      _(db[:weekly_rates].where(bucket_date: future).count).must_equal(0)
-      _(db[:monthly_rates].where(bucket_date: future).count).must_equal(0)
+      _(db[:rates].where(provider: "TEST", date: future).count).must_equal(0)
+      _(db[:rates].where(provider: "TEST", date: Date.today).count).must_equal(1)
+      _(db[:weekly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
+      _(db[:monthly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
     end
 
     it "deletes rates on or after the terminal date and keeps earlier rows" do
@@ -114,6 +114,28 @@ describe RateValidation do
       _(totals[:monthly_rates]).must_equal(1)
       _(db[:weekly_rates].where(quote: "BYR", bucket_date: Date.new(2016, 6, 27)).count).must_equal(1)
       _(db[:monthly_rates].where(quote: "BYR", bucket_date: Date.new(2016, 6, 1)).count).must_equal(1)
+    end
+
+    it "keeps the current period's rollup whose bucket anchor sits past the daily horizon" do
+      # Weekly/monthly buckets anchor to a fixed weekday / first of the month, so the live period's bucket can sit a few
+      # days ahead of the latest date it summarises. The daily future horizon must not purge it.
+      RateValidation::FutureDate.stub(:horizon, Date.new(2026, 6, 15)) do # a Monday
+        db[:weekly_rates].multi_insert([
+          { provider: "TEST", bucket_date: Date.new(2026, 6, 18), base: "EUR", quote: "USD", rate: 1.1 }, # current week
+          { provider: "TEST", bucket_date: Date.new(2026, 6, 25), base: "EUR", quote: "USD", rate: 1.1 }, # next week
+        ])
+        db[:monthly_rates].multi_insert([
+          { provider: "TEST", bucket_date: Date.new(2026, 6, 1), base: "EUR", quote: "USD", rate: 1.1 }, # current month
+          { provider: "TEST", bucket_date: Date.new(2026, 7, 1), base: "EUR", quote: "USD", rate: 1.1 }, # next month
+        ])
+
+        RateValidation.purge(db)
+
+        _(db[:weekly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 18)).count).must_equal(1)
+        _(db[:weekly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 25)).count).must_equal(0)
+        _(db[:monthly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 1)).count).must_equal(1)
+        _(db[:monthly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 7, 1)).count).must_equal(0)
+      end
     end
 
     it "refreshes currency summaries for affected codes" do
