@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pre-1999 euro rates sourced from Sveriges Riksbank (RB), which backfills its EUR series with the ECU, are now labelled with the ECU's ISO code (XEU) rather than EUR — matching how other providers (BdP, AMCM) report the same data.
+
 ## [2.3.2] - 2026-06-13
 
 ### Fixed
