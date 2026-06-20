@@ -6,6 +6,7 @@ require "sequel"
 
 require "bucket"
 require "defunct_currency"
+require "nascent_currency"
 
 # Ingest-validation policy for fetched rate records. Each rule answers one question — "is this row acceptable?" Rules
 # answer it for an in-memory record via `reject?`; the rules that can leave bad rows already stored also answer it as a
@@ -97,8 +98,31 @@ module RateValidation
     end
   end
 
-  RULES = [UnknownCurrency, NonPositiveRate, FutureDate, TerminalDate].freeze
-  PURGEABLE = [FutureDate, TerminalDate].freeze
+  # A row dated before a currency's inception date.
+  module InceptionDate
+    class << self
+      def reject?(record, date)
+        NascentCurrency.premature?(record[:base], date) || NascentCurrency.premature?(record[:quote], date)
+      end
+
+      # Exact on daily rows; on rollups it compares the bucket anchor (not the period end), so the one week straddling an
+      # inception date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
+      def reject_scope(dataset, date_column, _precision = nil)
+        conditions = NascentCurrency.all.map do |entry|
+          Sequel.&(
+            { date_column => ...entry.inception_date.to_s },
+            Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }),
+          )
+        end
+        return dataset.where(false) if conditions.empty?
+
+        dataset.where(Sequel.|(*conditions))
+      end
+    end
+  end
+
+  RULES = [UnknownCurrency, NonPositiveRate, FutureDate, TerminalDate, InceptionDate].freeze
+  PURGEABLE = [FutureDate, TerminalDate, InceptionDate].freeze
 
   class << self
     # Mutates `records`, dropping every row that any rule rejects.

@@ -52,6 +52,32 @@ describe RateValidation do
       _(records.none? { |r| r[:quote] == "BYR" && r[:date] == Date.new(2016, 7, 1) }).must_equal(true)
     end
 
+    it "drops EUR rates dated before the euro existed" do
+      # The euro came into existence on 1999-01-04 (first ECB reference date). The Riksbank backfills its EUR series
+      # with the ECU back to 1993; relaying those as EUR fabricates euro quotes for dates the euro did not exist.
+      records = [
+        { date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", rate: 0.10448 },
+        { date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", rate: 0.10500 },
+      ]
+
+      RateValidation.reject!(records)
+
+      _(records.map { |r| r[:date] }).must_equal([Date.new(1999, 1, 4)])
+    end
+
+    it "drops Austrian schilling rates on or after the euro changeover" do
+      # ATS was irrevocably fixed to the euro in 1999 and ceased to be legal tender on 2002-02-28. Providers keep
+      # publishing stale ATS reference rates years later (AMCM into 2004); they must be capped like IEP already is.
+      records = [
+        { date: Date.new(2002, 3, 1), base: "EUR", quote: "ATS", rate: 13.7603 },
+        { date: Date.new(2002, 2, 28), base: "EUR", quote: "ATS", rate: 13.7603 },
+      ]
+
+      RateValidation.reject!(records)
+
+      _(records.map { |r| r[:date] }).must_equal([Date.new(2002, 2, 28)])
+    end
+
     it "accepts a string date" do
       records = [{ date: (Date.today - 1).to_s, base: "EUR", quote: "USD", rate: 1.1 }]
 
@@ -96,6 +122,18 @@ describe RateValidation do
       _(db[:rates].where(base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(0)
       _(db[:rates].where(quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
       _(db[:rates].where(base: "EUR", date: Date.new(2016, 7, 1)).count).must_equal(1)
+    end
+
+    it "deletes EUR rates dated before the euro existed and keeps later rows" do
+      db[:rates].multi_insert([
+        { provider: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", rate: 0.10448 },
+        { provider: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", rate: 0.10500 },
+      ])
+
+      RateValidation.purge(db)
+
+      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1998, 12, 31)).count).must_equal(0)
+      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1999, 1, 4)).count).must_equal(1)
     end
 
     it "removes rollup rows past the terminal date" do
