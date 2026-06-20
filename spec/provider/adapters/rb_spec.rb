@@ -43,6 +43,19 @@ class Provider < Sequel::Model(:providers)
         _(records.last[:base]).must_equal("USD")
       end
 
+      it "relabels pre-1999 EUR observations as the ECU (XEU)" do
+        # The Riksbank backfills its EUR series with the ECU, which the euro succeeded 1:1 on 1999-01-04. Earlier
+        # observations are the ECU and must carry its ISO code (XEU), matching how BdP and AMCM label the same data.
+        json = [
+          { "seriesId" => "SEKEURPMI", "date" => "1998-12-30", "value" => 9.4685 },
+          { "seriesId" => "SEKEURPMI", "date" => "1999-01-04", "value" => 9.3060 },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["XEU", "EUR"])
+      end
+
       it "filters out SEKETT identity rate" do
         json = [
           { "seriesId" => "SEKETT", "date" => "2026-03-24", "value" => 1.0 },

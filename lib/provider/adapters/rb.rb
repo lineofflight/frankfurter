@@ -13,6 +13,12 @@ class Provider
     # The ByGroup endpoint has a max 1-year date range.
     class RB < Adapter
       BASE_URL = "https://api.riksbank.se/swea/v1/Observations/ByGroup/130"
+
+      # The euro succeeded the ECU 1:1 on its first quoting day, 1999-01-04. The Riksbank backfills its EUR series with
+      # ECU values before then; relabel those to the ECU's ISO code (XEU) so they stay out of the euro series, matching
+      # how the BdP and AMCM adapters label the same data.
+      EURO_INCEPTION = Date.new(1999, 1, 4)
+
       class << self
         def backfill_range = 365
       end
@@ -39,7 +45,10 @@ class Provider
           rate = Float(value)
           next if rate.zero?
 
-          { date: Date.parse(date_str), base: currency, quote: "SEK", rate: }
+          date = Date.parse(date_str)
+          currency = "XEU" if currency == "EUR" && date < EURO_INCEPTION
+
+          { date:, base: currency, quote: "SEK", rate: }
         end
       end
     end

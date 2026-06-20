@@ -30,7 +30,7 @@ describe DefunctCurrency do
   it "covers the known defunct codes" do
     codes = DefunctCurrency.all.map(&:iso_code)
 
-    ["BGN", "BYR", "EEK", "HRK", "IEP", "SLL", "STD", "VEF", "ZMK"].each do |code|
+    ["ATS", "BEF", "BGN", "BYR", "DEM", "EEK", "ESP", "FRF", "HRK", "IEP", "ITL", "NLG", "PTE", "SLL", "STD", "VEF", "ZMK"].each do |code|
       _(codes).must_include(code)
     end
   end

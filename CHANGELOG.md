@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pre-1999 euro rates sourced from Sveriges Riksbank (RB), which backfills its EUR series with the ECU, are now labelled with the ECU's ISO code (XEU) rather than EUR — matching how other providers (BdP, AMCM) report the same data.
+- Euro-denominated rates dated before the euro existed (1999-01-04) are no longer ingested, so euro crosses for legacy currencies (e.g. ATS/EUR, DEM/EUR) now correctly begin in 1999. The earlier history remains available against the ECU (XEU) and contemporaneous currencies such as USD and DEM. Run `rake db:purge_invalid` to remove any such rows already stored.
+- The euro-legacy currencies ATS, BEF, DEM, ESP, FRF, ITL, NLG, and PTE are now retired at their respective euro changeover dates (joining the Irish pound, IEP, already handled). Stale rates that some providers published for these currencies as late as 2004 are no longer ingested. Run `rake db:purge_invalid` to remove any such rows already stored.
+
 ## [2.3.2] - 2026-06-13
 
 ### Fixed
