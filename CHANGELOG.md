@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Restored Reserve Bank of Vanuatu (RBV) rates, which had silently stopped updating in late May. The source began serving a TLS certificate chain missing its intermediate, which Ruby (unlike some browsers) rejects; the intermediate is now bundled and supplied at request time, so the chain verifies without disabling certificate checks.
+- Restored Central Bank of Samoa (CBS) rates, which had stopped updating after the source changed its workbook filename to a space-separated form (e.g. `Historical Daily Rates-220626.xlsx`). The unescaped space raised a URI error on every run; the scraped link is now percent-encoded before download.
 - Pre-1999 euro rates sourced from Sveriges Riksbank (RB), which backfills its EUR series with the ECU, are now labelled with the ECU's ISO code (XEU) rather than EUR — matching how other providers (BdP, AMCM) report the same data.
 - Euro-denominated rates dated before the euro existed (1999-01-04) are no longer ingested, so euro crosses for legacy currencies (e.g. ATS/EUR, DEM/EUR) now correctly begin in 1999. The earlier history remains available against the ECU (XEU) and contemporaneous currencies such as USD and DEM. Run `rake db:purge_invalid` to remove any such rows already stored.
 - The euro-legacy currencies ATS, BEF, DEM, ESP, FRF, ITL, NLG, and PTE are now retired at their respective euro changeover dates (joining the Irish pound, IEP, already handled). Stale rates that some providers published for these currencies as late as 2004 are no longer ingested. Run `rake db:purge_invalid` to remove any such rows already stored.

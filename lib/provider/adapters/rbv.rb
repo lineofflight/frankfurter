@@ -3,6 +3,7 @@
 require "date"
 require "net/http"
 require "nokogiri"
+require "openssl"
 
 require "provider/adapters/adapter"
 
@@ -20,10 +21,17 @@ class Provider < Sequel::Model(:providers)
     #
     # Rates are VUV per 1 unit of foreign currency. JPY is published per single
     # unit (not per 100), so no normalization is needed.
+    #
+    # TLS quirk: www.rbv.gov.vu serves a malformed chain that omits its issuer,
+    # the Trustico RSA DV SSL CA 2 intermediate. Ruby's net/http rejects it
+    # because OpenSSL can't link the leaf to a trusted root. We bundle the
+    # intermediate at config/rbv_ca_bundle.pem and load it into the cert store
+    # at request time rather than disabling verification (same approach as BoA).
     class RBV < Adapter
       URL = "https://www.rbv.gov.vu/index.php/en/exchange-rates"
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
       PAGE_SIZE = 100_000
+      CA_BUNDLE = File.expand_path("../../../config/rbv_ca_bundle.pem", __dir__)
 
       QUOTE_COLUMNS = ["usd", "jpy", "nzd", "GBP", "aud", "eur"].freeze
 
@@ -70,6 +78,12 @@ class Provider < Sequel::Model(:providers)
 
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = uri.scheme == "https"
+        if http.use_ssl?
+          store = OpenSSL::X509::Store.new
+          store.set_default_paths
+          store.add_file(CA_BUNDLE)
+          http.cert_store = store
+        end
         http.open_timeout = 30
         http.read_timeout = 60
 
