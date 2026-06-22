@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.3] - 2026-06-22
+
 ### Fixed
 
 - Restored Reserve Bank of Vanuatu (RBV) rates, which had silently stopped updating in late May. The source began serving a TLS certificate chain missing its intermediate, which Ruby (unlike some browsers) rejects; the intermediate is now bundled and supplied at request time, so the chain verifies without disabling certificate checks.
@@ -14,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-1999 euro rates sourced from Sveriges Riksbank (RB), which backfills its EUR series with the ECU, are now labelled with the ECU's ISO code (XEU) rather than EUR — matching how other providers (BdP, AMCM) report the same data.
 - Euro-denominated rates dated before the euro existed (1999-01-04) are no longer ingested, so euro crosses for legacy currencies (e.g. ATS/EUR, DEM/EUR) now correctly begin in 1999. The earlier history remains available against the ECU (XEU) and contemporaneous currencies such as USD and DEM. Run `rake db:purge_invalid` to remove any such rows already stored.
 - The euro-legacy currencies ATS, BEF, DEM, ESP, FRF, ITL, NLG, and PTE are now retired at their respective euro changeover dates (joining the Irish pound, IEP, already handled). Stale rates that some providers published for these currencies as late as 2004 are no longer ingested. Run `rake db:purge_invalid` to remove any such rows already stored.
+- Weekly and monthly time-series no longer omit the current, in-progress period. The purge of future-dated rows compared each rollup's bucket date against the daily cutoff, so the live week's or month's bucket — which anchors to a past Monday or the first of the month — could be dropped; the cutoff is now applied per rollup period. (#521)
 
 ## [2.3.2] - 2026-06-13
 
@@ -157,7 +160,8 @@ _Pre-release history: see the [v2.0.0-beta.1](https://github.com/lineofflight/fr
 - Moved domain from <https://api.frankfurter.app> to <https://api.frankfurter.dev>. Former will continue serving the old
   unversioned paths.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.2...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.3...HEAD
+[2.3.3]: https://github.com/lineofflight/frankfurter/compare/v2.3.2...v2.3.3
 [2.3.2]: https://github.com/lineofflight/frankfurter/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/lineofflight/frankfurter/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/lineofflight/frankfurter/compare/v2.2.0...v2.3.0
