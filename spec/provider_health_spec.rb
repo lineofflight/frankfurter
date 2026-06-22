@@ -8,7 +8,13 @@ require_relative "../bin/provider_health"
 # at 1, monthly archives in arrears). See bin/provider_health.rb.
 describe "provider_health" do
   def provider(key, cadence, missed)
-    { "key" => key, "publish_cadence" => cadence, "publishes_missed" => missed, "end_date" => "2026-06-05" }
+    {
+      "key" => key,
+      "name" => "#{key} Bank",
+      "publish_cadence" => cadence,
+      "publishes_missed" => missed,
+      "end_date" => "2026-06-05",
+    }
   end
 
   describe "flagged" do
@@ -61,11 +67,18 @@ describe "provider_health" do
   end
 
   describe "render_body" do
-    it "tabulates each flagged provider and embeds the flagged-set marker" do
-      body = render_body([provider("NBC", "daily", 10)], "2026-06-22")
+    it "embeds a per-provider marker and the provider's stats" do
+      body = render_body(provider("NBC", "daily", 10), "2026-06-22")
 
-      _(body).must_include("<!-- flagged: NBC -->")
-      _(body).must_include("| NBC | daily | 2026-06-05 | 10 |")
+      _(body).must_include("<!-- provider-health: NBC -->")
+      _(body).must_include("NBC Bank")
+      _(body).must_include("| daily | 2026-06-05 | 10 |")
+    end
+
+    it "uses no em dash" do
+      body = render_body(provider("NBC", "daily", 10), "2026-06-22")
+
+      _(body).wont_include("—")
     end
   end
 end
