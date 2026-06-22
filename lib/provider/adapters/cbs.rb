@@ -79,12 +79,15 @@ class Provider
       end
 
       # Resolve the current workbook URL from the data page HTML. The link is a
-      # root-relative "/media/...xlsx" href whose filename embeds the date.
+      # root-relative "/media/...xlsx" href whose filename embeds the date. The
+      # filename scheme is not stable — it has shifted between hyphen- and
+      # space-separated forms — so percent-encode the path before joining;
+      # an unescaped space raises URI::InvalidURIError.
       def archive_url(html)
         path = html[/href=["']([^"']*\.xlsx)["']/i, 1]
         raise Unavailable, "no workbook link on #{DATA_URL}" unless path
 
-        URI.join(DATA_URL, path).to_s
+        URI.join(DATA_URL, URI::RFC2396_PARSER.escape(path)).to_s
       end
 
       def parse(xlsx_bytes)
