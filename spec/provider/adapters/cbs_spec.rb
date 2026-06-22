@@ -78,6 +78,18 @@ class Provider < Sequel::Model(:providers)
           )
         end
 
+        it "percent-encodes spaces in the workbook filename" do
+          html = <<~HTML
+            <ul class="downloads">
+              <li><a href="/media/Historical Daily Rates-220626.xlsx">Historical rates</a></li>
+            </ul>
+          HTML
+
+          _(adapter.archive_url(html)).must_equal(
+            "https://cbs.gov.ws/media/Historical%20Daily%20Rates-220626.xlsx",
+          )
+        end
+
         it "raises when the page exposes no workbook link" do
           _ { adapter.archive_url("<html><body>no link here</body></html>") }
             .must_raise(Adapter::Unavailable)
