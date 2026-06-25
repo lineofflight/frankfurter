@@ -253,13 +253,30 @@ module Versions
 
         return if blended.empty?
 
+        # Echo a single provider's own published digits, but only for native daily rows. Rollup buckets are
+        # time-averages, so their extra precision is synthetic and stays rounded.
+        passthrough_active = providers && providers.size == 1 && !rollup?
+        lookup = if passthrough_active
+          rows.to_h { |row| [[row[:base], row[:quote]], row[:rate]] }
+        else
+          {}
+        end
+
         records = blended.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
 
-          record = { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: round(r[:rate]) }
+          stored_rate = lookup[[r[:base], r[:quote]]]
+          rate = passthrough_active && stored_rate ? stored_rate : round(r[:rate])
+
+          record = { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: }
           if expand_providers? && r[:providers]
             record[:providers] = r[:providers].map do |p|
-              entry = { key: p[:key], rate: round(p[:rate]) }
+              p_rate = if passthrough_active && p[:key] == providers.first && stored_rate
+                stored_rate
+              else
+                round(p[:rate])
+              end
+              entry = { key: p[:key], rate: p_rate }
               entry[:excluded] = true if p[:excluded]
               entry
             end

@@ -20,6 +20,7 @@ module Fixtures
         "NOK" => 11.5,
         "PLN" => 4.3,
         "CZK" => 25.1,
+        "PHP" => 81.0193,
       },
     },
     "BOC" => {
