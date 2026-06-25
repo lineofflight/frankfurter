@@ -401,7 +401,7 @@ module Versions
       end
     end
 
-    describe "native-precision passthrough (issue #534)" do
+    describe "native-precision passthrough" do
       let(:native_row) do
         Rate.where(provider: "ECB", base: "EUR", quote: "PHP").all.find do |r|
           r[:rate].to_s.split(".").last.length > 2
@@ -413,6 +413,8 @@ module Versions
         query = V2::RateQuery.new(date: native_row[:date].to_s, providers: "ECB", base: "EUR", quotes: "PHP")
         results = query.to_a
 
+        # The stored value differs from what rounding would emit, so this proves the passthrough fired.
+        _(query.send(:round, native_row[:rate])).wont_equal(native_row[:rate])
         _(results.first[:rate]).must_equal(native_row[:rate])
       end
 
@@ -447,6 +449,7 @@ module Versions
         )
         results = query.to_a
 
+        _(query.send(:round, native_row[:rate])).wont_equal(native_row[:rate])
         _(results.first[:rate]).must_equal(native_row[:rate])
 
         provider_rate = results.first[:providers].find { |p| p[:key] == "ECB" }[:rate]
