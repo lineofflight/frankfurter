@@ -414,7 +414,7 @@ module Versions
         results = query.to_a
 
         # The stored value differs from what rounding would emit, so this proves the passthrough fired.
-        _(query.send(:round, native_row[:rate])).wont_equal(native_row[:rate])
+        _(query.round(native_row[:rate])).wont_equal(native_row[:rate])
         _(results.first[:rate]).must_equal(native_row[:rate])
       end
 
@@ -423,7 +423,7 @@ module Versions
         query = V2::RateQuery.new(date: native_row[:date].to_s, providers: "ECB", base: "PHP", quotes: "EUR")
         results = query.to_a
 
-        expected_rate = query.send(:round, 1.0 / native_row[:rate])
+        expected_rate = query.round(1.0 / native_row[:rate])
 
         _(results.first[:rate]).must_equal(expected_rate)
       end
@@ -435,7 +435,7 @@ module Versions
 
         rate = results.first[:rate]
 
-        _(rate).must_equal(query.send(:round, rate))
+        _(rate).must_equal(query.round(rate))
       end
 
       it "returns verbatim rate in expand=providers for single-provider native query" do
@@ -449,7 +449,7 @@ module Versions
         )
         results = query.to_a
 
-        _(query.send(:round, native_row[:rate])).wont_equal(native_row[:rate])
+        _(query.round(native_row[:rate])).wont_equal(native_row[:rate])
         _(results.first[:rate]).must_equal(native_row[:rate])
 
         provider_rate = results.first[:providers].find { |p| p[:key] == "ECB" }[:rate]
@@ -472,7 +472,7 @@ module Versions
 
         _(results).wont_be_empty
         results.each do |record|
-          _(record[:rate]).must_equal(query.send(:round, record[:rate]))
+          _(record[:rate]).must_equal(query.round(record[:rate]))
         end
       end
     end
