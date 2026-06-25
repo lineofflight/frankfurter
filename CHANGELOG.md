@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bangko Sentral ng Pilipinas (BSP) now contributes only its official USD/PHP Reference Rate. The rest of the daily bulletin was third-party data BSP reprints: a peso-equivalent table of ~32 currencies from LSEG (Refinitiv) closing prices, plus SDR (IMF) and gold/silver (LBMA) quotes. Those pairs are already covered with ample independent depth by official sources in the blend, and relaying them attributed correlated, internally inconsistent data to BSP (the table is anchored on a USD/PHP that differs from the Reference Rate). Blended rates are unaffected; single-provider BSP queries now return only USD/PHP. (#533)
+
 ## [2.3.4] - 2026-06-25
 
 ### Fixed

@@ -14,38 +14,20 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { BSP.new }
 
-      it "fetches rates quoted in PHP and USD" do
+      it "fetches only the BSP Reference Rate as USD over PHP" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 27), upto: Date.new(2026, 5, 29))
 
         _(dataset).wont_be_empty
-        _(dataset.map { |r| r[:quote] }.uniq.sort).must_equal(["PHP", "USD"])
+        _(dataset.map { |r| [r[:base], r[:quote]] }.uniq).must_equal([["USD", "PHP"]])
       end
 
-      it "covers the major quote currencies in the bulletin" do
-        dataset = adapter.fetch(after: Date.new(2026, 5, 29), upto: Date.new(2026, 5, 29))
-        bases = dataset.map { |r| r[:base] }.uniq.sort
-
-        _(bases).must_include("USD")
-        _(bases).must_include("EUR")
-        _(bases).must_include("JPY")
-        _(bases).must_include("GBP")
-      end
-
-      it "emits the BSP Reference Rate for USD, not the row's Reuters equivalent" do
+      it "emits the BSP Reference Rate, not the row's Reuters equivalent" do
         dataset = adapter.fetch(after: Date.new(2026, 5, 29), upto: Date.new(2026, 5, 29))
         usd = dataset.find { |r| r[:base] == "USD" }
 
         _(usd).wont_be_nil
         # BSP Reference Rate is 61.600; the USD row's peso equivalent is 61.6540.
         _(usd[:rate]).must_be_close_to(61.600, 0.001)
-      end
-
-      it "returns EUR/PHP in a plausible range" do
-        dataset = adapter.fetch(after: Date.new(2026, 5, 29), upto: Date.new(2026, 5, 29))
-        eur = dataset.find { |r| r[:base] == "EUR" }
-
-        _(eur).wont_be_nil
-        _(eur[:rate]).must_be_close_to(71.84, 0.5)
       end
 
       it "filters records by the requested date range" do
@@ -61,8 +43,6 @@ class Provider < Sequel::Model(:providers)
           <<~TEXT
              1 UNITED STATES                       DOLLAR             USD             0.858222     1.000000      61.6540
              2 JAPAN                               YEN                JPY             0.005390     0.006280       0.3872
-             9 BAHRAIN                             DINAR*             BHD             2.276752     2.652872    163.5602
-            10 KUWAIT                              DINAR              KWD                 N/A           N/A         N/A
             16 EUROPEAN MONETARY UNION             EURO               EUR             1.000000     1.165200      71.8392
                BSP Buying Rate (T/T)PHP            61.350      GOLD BUYING:   $      4,495.00
                BSP Selling Rate (T/TPHP            61.850      SILVER BUYING: $         75.80
@@ -71,79 +51,39 @@ class Provider < Sequel::Model(:providers)
           TEXT
         end
 
-        it "parses a normal row as foreign base over PHP quote" do
+        it "emits only the BSP Reference Rate as USD over PHP" do
           records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          jpy = records.find { |r| r[:base] == "JPY" }
 
-          _(jpy).must_equal(date: Date.new(2026, 5, 29), base: "JPY", quote: "PHP", rate: 0.3872)
+          _(records).must_equal([{ date: Date.new(2026, 5, 29), base: "USD", quote: "PHP", rate: 61.600 }])
         end
 
-        it "uses the symbol column even when the unit name carries an asterisk" do
+        it "does not relay the LSEG currency table" do
           records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          bhd = records.find { |r| r[:base] == "BHD" }
+          bases = records.map { |r| r[:base] }
 
-          _(bhd[:rate]).must_be_close_to(163.5602, 0.0001)
+          _(bases).wont_include("JPY")
+          _(bases).wont_include("EUR")
         end
 
-        it "skips rows whose peso equivalent is N/A" do
+        it "does not relay the SDR or metals passthroughs" do
           records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
+          bases = records.map { |r| r[:base] }
 
-          _(records.map { |r| r[:base] }).wont_include("KWD")
-        end
-
-        it "emits USD from the BSP Reference Rate line, not the row equivalent" do
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          usd = records.find { |r| r[:base] == "USD" }
-
-          _(usd[:rate]).must_be_close_to(61.600, 0.001)
+          _(bases).wont_include("XDR")
+          _(bases).wont_include("XAU")
+          _(bases).wont_include("XAG")
         end
 
         it "does not emit the USD row's own Reuters peso equivalent" do
           records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          usd_rates = records.select { |r| r[:base] == "USD" }.map { |r| r[:rate] }
 
-          _(usd_rates).wont_include(61.6540)
+          _(records.map { |r| r[:rate] }).wont_include(61.6540)
         end
 
-        it "emits the SDR rate as XDR over USD in its native direction" do
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          xdr = records.find { |r| r[:base] == "XDR" }
+        it "returns nothing when the Reference Rate line is absent" do
+          records = adapter.parse_text("no reference rate in this text", Date.new(2026, 5, 29))
 
-          _(xdr).must_equal(date: Date.new(2026, 5, 29), base: "XDR", quote: "USD", rate: 1.36668)
-        end
-
-        it "emits gold as XAU per troy ounce over USD" do
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          xau = records.find { |r| r[:base] == "XAU" }
-
-          _(xau).must_equal(date: Date.new(2026, 5, 29), base: "XAU", quote: "USD", rate: 4495.0)
-        end
-
-        it "emits silver as XAG per troy ounce over USD" do
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          xag = records.find { |r| r[:base] == "XAG" }
-
-          _(xag).must_equal(date: Date.new(2026, 5, 29), base: "XAG", quote: "USD", rate: 75.80)
-        end
-
-        it "quotes XDR, XAU, and XAG in USD rather than PHP" do
-          extras = ["XDR", "XAU", "XAG"]
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          usd_denominated = records.select { |r| extras.include?(r[:base]) }
-
-          _(usd_denominated.size).must_equal(3)
-          _(usd_denominated.map { |r| r[:quote] }.uniq).must_equal(["USD"])
-        end
-
-        it "still emits the 30 PHP rows alongside the USD-denominated extras" do
-          records = adapter.parse_text(bulletin, Date.new(2026, 5, 29))
-          php_bases = records.select { |r| r[:quote] == "PHP" }.map { |r| r[:base] }
-
-          _(php_bases).must_include("JPY")
-          _(php_bases).must_include("EUR")
-          _(php_bases).must_include("BHD")
-          # USD comes from the BSP Reference Rate line, also PHP-quoted.
-          _(php_bases).must_include("USD")
+          _(records).must_be_empty
         end
       end
     end
