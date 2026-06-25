@@ -400,5 +400,81 @@ module Versions
         _(call_fast_path(query, [])).must_equal(true)
       end
     end
+
+    describe "native-precision passthrough" do
+      let(:native_row) do
+        Rate.where(provider: "ECB", base: "EUR", quote: "PHP").all.find do |r|
+          r[:rate].to_s.split(".").last.length > 2
+        end
+      end
+
+      it "returns the verbatim stored rate for single-provider query on native-direction pair" do
+        _(native_row).wont_be_nil
+        query = V2::RateQuery.new(date: native_row[:date].to_s, providers: "ECB", base: "EUR", quotes: "PHP")
+        results = query.to_a
+
+        # The stored value differs from what rounding would emit, so this proves the passthrough fired.
+        _(query.round(native_row[:rate])).wont_equal(native_row[:rate])
+        _(results.first[:rate]).must_equal(native_row[:rate])
+      end
+
+      it "still rounds for a single-provider query on reciprocal direction" do
+        _(native_row).wont_be_nil
+        query = V2::RateQuery.new(date: native_row[:date].to_s, providers: "ECB", base: "PHP", quotes: "EUR")
+        results = query.to_a
+
+        expected_rate = query.round(1.0 / native_row[:rate])
+
+        _(results.first[:rate]).must_equal(expected_rate)
+      end
+
+      it "still rounds for multi-provider or blended queries" do
+        _(native_row).wont_be_nil
+        query = V2::RateQuery.new(date: native_row[:date].to_s, base: "EUR", quotes: "PHP")
+        results = query.to_a
+
+        rate = results.first[:rate]
+
+        _(rate).must_equal(query.round(rate))
+      end
+
+      it "returns verbatim rate in expand=providers for single-provider native query" do
+        _(native_row).wont_be_nil
+        query = V2::RateQuery.new(
+          date: native_row[:date].to_s,
+          providers: "ECB",
+          base: "EUR",
+          quotes: "PHP",
+          expand: "providers",
+        )
+        results = query.to_a
+
+        _(query.round(native_row[:rate])).wont_equal(native_row[:rate])
+        _(results.first[:rate]).must_equal(native_row[:rate])
+
+        provider_rate = results.first[:providers].find { |p| p[:key] == "ECB" }[:rate]
+
+        _(provider_rate).must_equal(native_row[:rate])
+      end
+
+      it "still rounds rollup (averaged) rates even for a single provider" do
+        range_start = (Fixtures.latest_date - 90).to_s
+        range_end = Fixtures.latest_date.to_s
+        query = V2::RateQuery.new(
+          from: range_start,
+          to: range_end,
+          group: "week",
+          providers: "ECB",
+          base: "EUR",
+          quotes: "PHP",
+        )
+        results = query.to_a
+
+        _(results).wont_be_empty
+        results.each do |record|
+          _(record[:rate]).must_equal(query.round(record[:rate]))
+        end
+      end
+    end
   end
 end

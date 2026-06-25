@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Single-provider V2 queries now preserve the source's own precision for rates it publishes directly. Responses were previously rounded to standard FX magnitude bands, which trimmed the extra decimals a few providers carry on high-magnitude pairs (for example, BSP's GBP/PHP and CHF/PHP). Blended rates and derived cross-rates are still rounded, since their additional digits are an artefact of averaging or conversion. (#534)
+
 ## [2.3.3] - 2026-06-22
 
 ### Fixed
