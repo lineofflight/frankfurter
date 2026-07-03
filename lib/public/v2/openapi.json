@@ -22,7 +22,7 @@
       "get": {
         "operationId": "getRates",
         "summary": "Get exchange rates",
-        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair.",
+        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record.",
         "parameters": [
           { "$ref": "#/components/parameters/date" },
           { "$ref": "#/components/parameters/from" },
@@ -43,8 +43,9 @@
                   "items": { "$ref": "#/components/schemas/Rate" }
                 },
                 "example": [
-                  { "date": "2024-01-15", "base": "EUR", "quote": "USD", "rate": 1.089 },
-                  { "date": "2024-01-15", "base": "EUR", "quote": "GBP", "rate": 0.8623 }
+                  { "date": "2024-01-15", "base": "EUR", "quote": "EUR", "rate": 1.0 },
+                  { "date": "2024-01-15", "base": "EUR", "quote": "GBP", "rate": 0.8623 },
+                  { "date": "2024-01-15", "base": "EUR", "quote": "USD", "rate": 1.089 }
                 ]
               },
               "application/x-ndjson": {
@@ -65,7 +66,7 @@
       "get": {
         "operationId": "getRate",
         "summary": "Get a single exchange rate pair",
-        "description": "Returns the blended exchange rate for a single currency pair. Without a date param, returns the latest rate.",
+        "description": "Returns the blended exchange rate for a single currency pair. Without a date param, returns the latest rate. A same-currency pair returns the identity rate of 1.",
         "parameters": [
           {
             "name": "base",
