@@ -284,6 +284,14 @@ module Versions
           record
         end
 
+        # Synthesize the base's identity rate (#538), subject to the quotes filter like any other row. Anchored
+        # to the newest visible record so its date never leaks a hidden pivot row the quotes filter dropped;
+        # when the filter leaves no other rows, fall back to the blend's reference date.
+        if (!quotes || quotes.include?(base)) && records.none? { |r| r[:quote] == base }
+          ref = records.map { |r| r[:date] }.max || blended.map { |r| r[:date] }.max.to_s
+          records << { date: ref, base: base, quote: base, rate: 1.0 }
+        end
+
         # Range responses stream chunks in date order, so sort within each chunk by date then quote. The
         # latest/single-date snapshot is one batch where carry-forward mixes observation dates, so sort by quote
         # alone to keep it alphabetical (#360 regressed this by always sorting on date first).

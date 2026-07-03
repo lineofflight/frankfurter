@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- V2 rate responses now include an identity record for the base currency (base equals quote, rate 1), so clients can index or iterate over currencies without special-casing the base. The record obeys the `quotes` filter like any other row: it appears by default and when the base is listed in `quotes`, and is omitted when `quotes` excludes the base. Same-currency pairs like `/v2/rate/USD/USD` now return 1 instead of 404. (#538)
+
 ## [2.3.5] - 2026-06-25
 
 ### Changed

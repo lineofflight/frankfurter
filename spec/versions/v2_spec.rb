@@ -167,6 +167,89 @@ describe Versions::V2 do
     _(quotes).must_equal(["GBP", "USD"])
   end
 
+  it "includes the identity rate for the base" do
+    get "/rates"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    identity = json.find { |r| r["quote"] == "EUR" }
+
+    _(identity).wont_be_nil
+    _(identity["base"]).must_equal("EUR")
+    _(identity["rate"]).must_equal(1.0)
+    _(identity["date"]).must_equal(json.map { |r| r["date"] }.max)
+  end
+
+  it "includes the identity rate when base is in quotes" do
+    get "/rates?quotes=EUR,USD"
+
+    _(last_response).must_be(:ok?)
+    quotes = json.map { |r| r["quote"] }.uniq.sort
+
+    _(quotes).must_equal(["EUR", "USD"])
+    _(json.find { |r| r["quote"] == "EUR" }["rate"]).must_equal(1.0)
+  end
+
+  it "includes the identity rate per date in range queries" do
+    from = Fixtures.business_day(60)
+    to = Fixtures.business_day(56)
+    get "/rates?providers=ecb&quotes=EUR,USD&from=#{from}&to=#{to}"
+
+    _(last_response).must_be(:ok?)
+    usd_dates = json.select { |r| r["quote"] == "USD" }.map { |r| r["date"] }
+    eur_rows = json.select { |r| r["quote"] == "EUR" }
+
+    _(eur_rows.map { |r| r["date"] }).must_equal(usd_dates)
+    _(eur_rows.map { |r| r["rate"] }.uniq).must_equal([1.0])
+  end
+
+  it "anchors the identity rate to visible rows, not hidden pivot data" do
+    latest = Fixtures.latest_date
+    Rate.where(quote: "GBP", date: latest).delete
+
+    get "/rates?quotes=EUR,GBP"
+
+    _(last_response).must_be(:ok?)
+    gbp = json.find { |r| r["quote"] == "GBP" }
+    eur = json.find { |r| r["quote"] == "EUR" }
+
+    _(gbp["date"]).must_be(:<, latest.to_s)
+    _(eur["date"]).must_equal(gbp["date"])
+  end
+
+  it "includes the identity rate for a pegged base" do
+    get "/rates?base=BMD"
+
+    _(last_response).must_be(:ok?)
+    identity = json.find { |r| r["quote"] == "BMD" }
+
+    _(identity).wont_be_nil
+    _(identity["base"]).must_equal("BMD")
+    _(identity["rate"]).must_equal(1.0)
+  end
+
+  it "omits providers on the identity rate when expanded" do
+    get "/rates?expand=providers&quotes=EUR,USD"
+
+    _(last_response).must_be(:ok?)
+    eur = json.find { |r| r["quote"] == "EUR" }
+    usd = json.find { |r| r["quote"] == "USD" }
+
+    _(eur).wont_be_nil
+    _(eur).wont_include("providers")
+    _(usd["providers"]).must_be_kind_of(Array)
+  end
+
+  it "returns the identity rate for a same-currency pair" do
+    get "/rate/USD/USD"
+
+    _(last_response).must_be(:ok?)
+    _(json["base"]).must_equal("USD")
+    _(json["quote"]).must_equal("USD")
+    _(json["rate"]).must_equal(1.0)
+    _(json["date"]).wont_be_nil
+  end
+
   it "filters by provider" do
     get "/rates?providers=ecb"
 
