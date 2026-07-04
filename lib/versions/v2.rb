@@ -16,6 +16,8 @@ module Versions
       docs: "https://frankfurter.dev",
     }.freeze
 
+    DEFAULT_CACHE_CONTROL = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
+
     plugin :json,
       content_type: "application/json; charset=utf-8",
       serializer: ->(o) { Oj.dump(o, mode: :compat) }
@@ -39,7 +41,7 @@ module Versions
     end
 
     route do |r|
-      response["cache-control"] = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
+      response["cache-control"] = DEFAULT_CACHE_CONTROL
 
       r.is { ROOT_PAYLOAD }
       r.root { ROOT_PAYLOAD }
@@ -144,7 +146,7 @@ module Versions
     # max-age at the rollover and drop stale-while-revalidate so the first request after midnight
     # revalidates instead of being served yesterday's snapshot.
     def cache_control_for(query)
-      return response["cache-control"] unless query.date_relative?
+      return DEFAULT_CACHE_CONTROL unless query.date_relative?
 
       "public, max-age=#{seconds_to_utc_midnight}, stale-if-error=86400"
     end
