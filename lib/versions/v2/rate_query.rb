@@ -56,6 +56,12 @@ module Versions
         date_scope.is_a?(Range)
       end
 
+      # True when the date scope anchors on Date.today (latest or open-ended range), so the response
+      # changes at UTC midnight even if no new data arrives.
+      def date_relative?
+        !date && !(start_date && end_date)
+      end
+
       def cache_key
         Digest::MD5.hexdigest([max_date, expand].join("|"))
       end
