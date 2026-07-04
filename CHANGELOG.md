@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Date-relative V2 responses (latest, or `from` without `to`) now expire from CDN caches at UTC midnight instead of after 24 hours. Previously a cached "latest" response could disagree with a freshly computed open-ended range for the same data after the UTC date rolled over, since cache purges only fire when new data arrives. (#541)
+
 ### Added
 
 - V2 rate responses now include an identity record for the base currency (base equals quote, rate 1), so clients can index or iterate over currencies without special-casing the base. The record obeys the `quotes` filter like any other row: it appears by default and when the base is listed in `quotes`, and is omitted when `quotes` excludes the base. Same-currency pairs like `/v2/rate/USD/USD` now return 1 instead of 404. (#538)

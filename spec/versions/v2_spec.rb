@@ -24,6 +24,11 @@ describe Versions::V2 do
   let(:year_start) { (Fixtures.latest_date - 365).to_s }
   let(:year_end) { Fixtures.latest_date.to_s }
 
+  def seconds_to_utc_midnight
+    now = Time.now.utc
+    (Time.utc(now.year, now.month, now.day) + 86400 - now).ceil
+  end
+
   it "returns latest rates" do
     get "/rates"
 
@@ -316,6 +321,30 @@ describe Versions::V2 do
     _(cache_control).must_include("max-age=86400")
     _(cache_control).must_include("stale-while-revalidate")
     _(cache_control).must_include("stale-if-error")
+  end
+
+  it "expires date-relative responses at next UTC midnight" do
+    ["/rates", "/rates?from=#{range_start}", "/rates?to=#{range_end}"].each do |path|
+      before = seconds_to_utc_midnight
+      get path
+      after = seconds_to_utc_midnight
+
+      cache_control = last_response.headers["Cache-Control"]
+
+      _(cache_control).must_include("public")
+      _(cache_control).must_include("stale-if-error")
+      _(cache_control).wont_include("stale-while-revalidate")
+      max_age = cache_control[/max-age=(\d+)/, 1].to_i
+
+      _(max_age).must_be(:<=, before)
+      _(max_age).must_be(:>=, after)
+    end
+  end
+
+  it "keeps the fixed max-age for explicit-date queries" do
+    get "/rates?date=#{historical_date}"
+
+    _(last_response.headers["Cache-Control"]).must_include("max-age=86400")
   end
 
   it "returns 422 for unknown parameters" do

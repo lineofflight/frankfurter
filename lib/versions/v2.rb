@@ -47,6 +47,7 @@ module Versions
       r.on("rates") do
         r.get do
           query = RateQuery.new(r.params)
+          response["cache-control"] = cache_control_for(query)
           r.etag(query.cache_key)
 
           r.csv do
@@ -106,6 +107,7 @@ module Versions
         r.get do
           params = r.params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
           query = RateQuery.new(params)
+          response["cache-control"] = cache_control_for(query)
           result = query.to_a.first || r.halt(404)
 
           result
@@ -136,6 +138,21 @@ module Versions
     end
 
     private
+
+    # Date-relative queries anchor on Date.today, so their responses go stale at UTC midnight even when no
+    # new data arrives (and no purge fires) — e.g. forward-dated provider rates entering scope (#541). Cap
+    # max-age at the rollover and drop stale-while-revalidate so the first request after midnight
+    # revalidates instead of being served yesterday's snapshot.
+    def cache_control_for(query)
+      return response["cache-control"] unless query.date_relative?
+
+      "public, max-age=#{seconds_to_utc_midnight}, stale-if-error=86400"
+    end
+
+    def seconds_to_utc_midnight
+      now = Time.now.utc
+      (Time.utc(now.year, now.month, now.day) + 86400 - now).ceil
+    end
 
     # Pull the first record before streaming so deterministic data errors raise
     # in the route block (caught by error_handler) instead of mid-stream after
