@@ -101,10 +101,10 @@ describe Blender do
     usd = result.find { |r| r[:quote] == "USD" }
 
     _(usd[:providers]).must_equal([
-      { key: "A", rate: 1.08 },
-      { key: "B", rate: 1.09 },
-      { key: "C", rate: 1.08 },
-      { key: "D", rate: 9.99, excluded: true },
+      { key: "A", date: date, rate: 1.08 },
+      { key: "B", date: date, rate: 1.09 },
+      { key: "C", date: date, rate: 1.08 },
+      { key: "D", date: date, rate: 9.99, excluded: true },
     ])
   end
 end

@@ -25,6 +25,7 @@ module Versions
       ALLOWED_PARAMS = ["base", "quotes", "providers", "date", "from", "to", "group", "expand"].freeze
       CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
       DEFAULT_CHUNK_MONTHS = 3
+      LATEST_FUTURE_DAYS = 1
       PIVOT = "USD"
 
       def initialize(params)
@@ -56,7 +57,7 @@ module Versions
         date_scope.is_a?(Range)
       end
 
-      # True when the date scope anchors on Date.today (latest or open-ended range), so the response
+      # True when the date scope anchors on the service clock (latest or open-ended range), so the response
       # changes at UTC midnight even if no new data arrives.
       def date_relative?
         !date && !(start_date && end_date)
@@ -246,7 +247,7 @@ module Versions
         elsif start_date
           start_date..(end_date || Date.today)
         else
-          Date.today
+          Date.today + LATEST_FUTURE_DAYS
         end
       end
 
@@ -282,7 +283,7 @@ module Versions
               else
                 round(p[:rate])
               end
-              entry = { key: p[:key], rate: p_rate }
+              entry = { key: p[:key], date: p[:date].to_s, rate: p_rate }
               entry[:excluded] = true if p[:excluded]
               entry
             end

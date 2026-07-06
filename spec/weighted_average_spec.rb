@@ -64,8 +64,8 @@ describe WeightedAverage do
     usd = result.find { |r| r[:quote] == "USD" }
 
     _(usd[:providers]).must_equal([
-      { key: "BOC", rate: 1.10 },
-      { key: "ECB", rate: 1.08 },
+      { key: "BOC", date: date, rate: 1.10 },
+      { key: "ECB", date: date, rate: 1.08 },
     ])
   end
 
@@ -80,8 +80,8 @@ describe WeightedAverage do
     usd = result.find { |r| r[:quote] == "USD" }
 
     _(usd[:providers]).must_equal([
-      { key: "BOC", rate: 1.10 },
-      { key: "ECB", rate: 1.08 },
+      { key: "BOC", date: date, rate: 1.10 },
+      { key: "ECB", date: date, rate: 1.08 },
     ])
   end
 end

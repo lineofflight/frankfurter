@@ -29,7 +29,7 @@ class WeightedAverage
         .group_by { |r| r[:provider] }
         .map do |key, rows|
           latest = rows.max_by { |r| r[:date] }
-          entry = { key: key, rate: latest[:rate] }
+          entry = { key: key, date: latest[:date], rate: latest[:rate] }
           entry[:excluded] = true if latest[:excluded]
           entry
         end

@@ -395,8 +395,9 @@ describe Versions::V2 do
     _(providers).must_be_kind_of(Array)
     _(providers).wont_be_empty
     _(providers.first).must_be_kind_of(Hash)
-    _(providers.first.keys.sort).must_equal(["key", "rate"])
+    _(providers.first.keys.sort).must_equal(["date", "key", "rate"])
     _(providers.first["key"]).must_be_kind_of(String)
+    _(providers.first["date"]).must_be_kind_of(String)
     _(providers.first["rate"]).must_be_kind_of(Numeric)
   end
 

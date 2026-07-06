@@ -263,7 +263,7 @@
       "expand": {
         "name": "expand",
         "in": "query",
-        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of `{ key, rate }` objects per record showing each provider's individual rate. Outliers excluded from the blend (and providers whose rate was overridden by a currency peg) are flagged with `excluded: true`. The field is omitted on synthesized peg rows where no provider published the quote. In CSV output, the `providers` column is encoded as `KEY:RATE` pairs joined by `|`, with a trailing `*` on excluded entries (e.g. `ECB:0.92|FED:1.50*`).",
+        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of `{ key, date, rate }` objects per record showing each provider's individual observation date and rate. Outliers excluded from the blend (and providers whose rate was overridden by a currency peg) are flagged with `excluded: true`. The field is omitted on synthesized peg rows where no provider published the quote. In CSV output, the `providers` column is encoded as `KEY:RATE` pairs joined by `|`, with a trailing `*` on excluded entries (e.g. `ECB:0.92|FED:1.50*`).",
         "required": false,
         "schema": {
           "type": "string",
@@ -296,15 +296,16 @@
           },
           "providers": {
             "type": "array",
-            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. Omitted on synthesized peg rows where no provider published the quote.",
+            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's observation date and published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. Omitted on synthesized peg rows where no provider published the quote.",
             "items": {
               "type": "object",
               "properties": {
                 "key": { "type": "string", "description": "Provider key" },
+                "date": { "type": "string", "format": "date", "description": "Provider observation date used for this entry" },
                 "rate": { "type": "number", "exclusiveMinimum": 0, "description": "Provider's rate, rebased to the row's base" },
                 "excluded": { "type": "boolean", "description": "Present and true when this entry did not contribute to the blended rate" }
               },
-              "required": ["key", "rate"]
+              "required": ["key", "date", "rate"]
             }
           }
         },

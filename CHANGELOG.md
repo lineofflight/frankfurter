@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- V2 latest rates now consider legitimate provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as they are published instead of appearing only after the UTC date rolls over. Explicit date and range queries keep their requested date boundaries.
+
 ### Fixed
 
 - Date-relative V2 responses (latest, or `from` without `to`) now expire from CDN caches at UTC midnight instead of after 24 hours. Previously a cached "latest" response could disagree with a freshly computed open-ended range for the same data after the UTC date rolled over, since cache purges only fire when new data arrives. (#541)
 
 ### Added
 
+- V2 `expand=providers` entries now include each provider's observation `date` alongside its key and rate.
 - V2 rate responses now include an identity record for the base currency (base equals quote, rate 1), so clients can index or iterate over currencies without special-casing the base. The record obeys the `quotes` filter like any other row: it appears by default and when the base is listed in `quotes`, and is omitted when `quotes` excludes the base. Same-currency pairs like `/v2/rate/USD/USD` now return 1 instead of 404. (#538)
 
 ## [2.3.5] - 2026-06-25

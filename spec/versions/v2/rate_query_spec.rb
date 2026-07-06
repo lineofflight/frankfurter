@@ -55,6 +55,36 @@ module Versions
     end
 
     describe "single-day queries" do
+      it "includes next-day provider observations in the implicit latest snapshot" do
+        tomorrow = Date.today + 1
+        day_after = Date.today + 2
+
+        Rate.where(provider: "ECB", base: "EUR", quote: "USD", date: [tomorrow, day_after]).delete
+        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", rate: 9.99, provider: "ECB")
+        Rate.dataset.insert(date: day_after, base: "EUR", quote: "USD", rate: 8.88, provider: "ECB")
+
+        query = V2::RateQuery.new(providers: "ECB", quotes: "USD")
+        usd = query.to_a.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
+
+        _(usd).wont_be_nil
+        _(usd[:date]).must_equal(tomorrow.to_s)
+        _(usd[:rate]).must_equal(9.99)
+      end
+
+      it "keeps explicit dates and open-ended ranges bounded by today" do
+        today = Date.today
+        tomorrow = today + 1
+
+        Rate.where(provider: "ECB", base: "EUR", quote: "USD", date: tomorrow).delete
+        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", rate: 9.99, provider: "ECB")
+
+        explicit = V2::RateQuery.new(date: today.to_s, providers: "ECB", quotes: "USD").to_a
+        open_range = V2::RateQuery.new(from: today.to_s, providers: "ECB", quotes: "USD").to_a
+
+        _(explicit.map { |r| r[:date] }).wont_include(tomorrow.to_s)
+        _(open_range.map { |r| r[:date] }).wont_include(tomorrow.to_s)
+      end
+
       it "snap each pair to its most recent publication when the requested date is silent" do
         sunday = Fixtures.recent_sunday
         friday = Fixtures.preceding_friday(sunday)
@@ -185,7 +215,7 @@ module Versions
         _(results.first.key?(:providers)).must_equal(false)
       end
 
-      it "adds providers list to blended rows as {key, rate} objects" do
+      it "adds providers list to blended rows as {key, date, rate} objects" do
         query = V2::RateQuery.new(date: Fixtures.latest_date.to_s, quotes: "USD", expand: "providers")
         results = query.to_a
 
@@ -195,8 +225,9 @@ module Versions
         _(providers).must_be_kind_of(Array)
         _(providers).wont_be_empty
         _(providers.first).must_be_kind_of(Hash)
-        _(providers.first.keys.sort).must_equal([:key, :rate])
+        _(providers.first.keys.sort).must_equal([:date, :key, :rate])
         _(providers.first[:key]).must_be_kind_of(String)
+        _(providers.first[:date]).must_be_kind_of(String)
         _(providers.first[:rate]).must_be_kind_of(Numeric)
       end
 
@@ -213,6 +244,7 @@ module Versions
 
         _(providers).wont_be_empty
         _(providers.all? { |p| p[:excluded] == true }).must_equal(true)
+        _(providers.all? { |p| p[:date] }).must_equal(true)
       end
 
       it "works with rollup queries" do
@@ -226,7 +258,7 @@ module Versions
 
         _(providers).must_be_kind_of(Array)
         _(providers).wont_be_empty
-        _(providers.first.keys.sort).must_equal([:key, :rate])
+        _(providers.first.keys.sort).must_equal([:date, :key, :rate])
       end
 
       it "raises on unknown expand value" do
