@@ -17,6 +17,8 @@ class WeightedAverage
     reference_date = @rates.map { |r| r[:date] }.max
     return [] unless reference_date
 
+    reference_date = [reference_date, Date.today].min
+
     @rates.group_by { |r| r[:quote] }.sort.filter_map do |_, group|
       contributors = group.reject { |r| r[:excluded] }
       next if contributors.empty?

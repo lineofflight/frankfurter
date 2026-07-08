@@ -84,4 +84,17 @@ describe WeightedAverage do
       { key: "ECB", date: date, rate: 1.08 },
     ])
   end
+
+  it "does not decay rates prematurely when future-dated rates are present" do
+    rates = [
+      { date: Date.today + 1, base: "EUR", quote: "GEL", rate: 3.0, provider: "NBG" },
+      { date: Date.today, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: Date.today - 3, base: "EUR", quote: "USD", rate: 1.10, provider: "BOC" },
+    ]
+
+    result = WeightedAverage.new(rates).calculate
+    usd = result.find { |r| r[:quote] == "USD" }
+
+    _(usd[:rate]).must_be_close_to(1.09, 0.0001)
+  end
 end
