@@ -47,7 +47,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "fetches daily multi-currency and metals over a post-2008 date range" do
-        dataset = adapter.fetch(after: Date.new(2026, 6, 10), upto: Date.new(2026, 6, 11))
+        dataset = adapter.fetch(after: Date.new(2026, 7, 13), upto: Date.new(2026, 7, 14))
 
         _(dataset).wont_be_empty
         bases = dataset.map { |r| r[:base] }.uniq
@@ -141,6 +141,33 @@ class Provider < Sequel::Model(:providers)
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "XAG", quote: "USD", rate: 63.73 })
 
         _(records.find { |r| r[:base] == "USD" && r[:rate] == 6.86 }).must_be_nil
+      end
+
+      it "parses daily files in the current 2026-07 layout" do
+        xls = build_daily_xls({
+          11 => ["Pais / Concepto", "Moneda", "Codigo", "Tipo de Cambio Oficial (TCO) (Bs/USD)"],
+          12 => ["ESTADOS UNIDOS", "DOLAR", "USD", "10.5"],
+          15 => ["Pais / Region", "Moneda", "Codigo", "TIPO DE CAMBIO EN Bs POR UNIDAD", "TIPO CAMBIO EN M.E."],
+          16 => ["UNION EUROPEA", "EURO", "EUR", "11.95314", "0.87843"],
+          17 => ["JAPON", "YEN", "JPY", "0.06464", "162.44"],
+          40 => ["BOLIVIA (UFV)", "UNIDAD DE FOMENTO DE VIVIENDA", "Bs/UFV", "3.30736"],
+          44 => ["ORO", "ONZA TROY ORO", "", "3999.28"],
+          45 => ["PLATA", "ONZA TROY PLATA", "", "57.4583"],
+          49 => ["BOLIVIA", "DERECHO ESPECIAL DE GIRO", "", "1.35904"],
+          53 => ["SOFR (Secured Overnight Financing Rate)*", "", "", "", "0.0355"],
+        })
+
+        records = adapter.parse_daily(xls, Date.new(2026, 7, 14))
+
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "USD", quote: "BOB", rate: 10.5 })
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "EUR", quote: "BOB", rate: 11.95314 })
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "JPY", quote: "BOB", rate: 0.06464 })
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAU", quote: "USD", rate: 3999.28 })
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAG", quote: "USD", rate: 57.4583 })
+        _(records).must_include({ date: Date.new(2026, 7, 14), base: "XDR", quote: "USD", rate: 1.35904 })
+        # UFV (Bs/UFV) and SOFR are not currency rates and must be skipped.
+        _(records.map { |r| r[:base] }).wont_include("UFV")
+        _(records.none? { |r| r[:rate] == 0.0355 }).must_equal(true)
       end
     end
   end
