@@ -26,11 +26,12 @@ class Provider
     #    librerias/indicadores/otras/otras_imprimir2XLS.php?qdd=DD&qmm=MM&qaa=YYYY.
     #    Used for all currencies and precious metals from 2008-01-01 onwards.
     #
-    # The daily sheet exists in two layouts; `parse_daily` detects and dispatches:
-    #   - Legacy (through ~2026-06): currency marker in column 3, rate in column 4/5,
-    #     USD split across USD.VENTA / USD.COMPRA rows averaged to a mid.
-    #   - Current (2026-07 onward): ISO code in column 2, rate in column 3, USD carried
-    #     as a single official rate (TCO), metals/SDR in their own labelled blocks.
+    # The daily sheet exists in two layouts; `parse_daily` detects and dispatches
+    # (column numbers below are 0-based row indices, i.e. row[n]):
+    #   - Legacy (through ~2026-06): currency marker in row[3], rate in row[4] (row[5]
+    #     for SDR), USD split across USD.VENTA / USD.COMPRA rows averaged to a mid.
+    #   - Current (2026-07 onward): ISO code in row[2], rate in row[3], USD carried as
+    #     a single official rate (TCO), metals/SDR in their own labelled blocks.
     #
     # Rates are emitted in BCBO's native direction: foreign currency as base, BOB as
     # quote (1 USD = X BOB), matching NBG/BBK.

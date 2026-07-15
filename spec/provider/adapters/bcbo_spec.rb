@@ -165,8 +165,10 @@ class Provider < Sequel::Model(:providers)
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAU", quote: "USD", rate: 3999.28 })
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAG", quote: "USD", rate: 57.4583 })
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XDR", quote: "USD", rate: 1.35904 })
-        # UFV (Bs/UFV) and SOFR are not currency rates and must be skipped.
-        _(records.map { |r| r[:base] }).wont_include("UFV")
+        # UFV (code "Bs/UFV") and SOFR are not currency rates and must be skipped.
+        # Assert their values never leak into records: a base check would pass even
+        # if the UFV row were emitted, since it would be keyed "Bs/UFV", not "UFV".
+        _(records.none? { |r| r[:rate] == 3.30736 }).must_equal(true)
         _(records.none? { |r| r[:rate] == 0.0355 }).must_equal(true)
       end
     end
