@@ -15,8 +15,9 @@ class Provider
     # Daily official exchange rates of the boliviano (BOB) against the US dollar and
     # ~50 other currencies, plus daily reference prices for gold, silver, and SDR.
     #
-    # The USD/BOB rate is stabilized: VENTA (sell) has sat at 6.96 and COMPRA (buy) at
-    # 6.86 since 2011, so the mid (6.91) repeats day after day.
+    # The USD/BOB rate held a stabilized peg (VENTA 6.96 / COMPRA 6.86, mid 6.91) from
+    # 2011 until mid-2026, when Bolivia repriced the boliviano and the source replaced
+    # its daily-sheet layout. The single official rate (TCO) is now published directly.
     #
     # Source:
     # 1. Yearly archives (USD/BOB only) at tiposDeCambioHistorico/xls.php?anio=YYYY.
@@ -25,8 +26,15 @@ class Provider
     #    librerias/indicadores/otras/otras_imprimir2XLS.php?qdd=DD&qmm=MM&qaa=YYYY.
     #    Used for all currencies and precious metals from 2008-01-01 onwards.
     #
+    # The daily sheet exists in two layouts; `parse_daily` detects and dispatches
+    # (column numbers below are 0-based row indices, i.e. row[n]):
+    #   - Legacy (through ~2026-06): currency marker in row[3], rate in row[4] (row[5]
+    #     for SDR), USD split across USD.VENTA / USD.COMPRA rows averaged to a mid.
+    #   - Current (2026-07 onward): ISO code in row[2], rate in row[3], USD carried as
+    #     a single official rate (TCO), metals/SDR in their own labelled blocks.
+    #
     # Rates are emitted in BCBO's native direction: foreign currency as base, BOB as
-    # quote (1 USD = 6.91 BOB), matching NBG/BBK.
+    # quote (1 USD = X BOB), matching NBG/BBK.
     # Metals (XAU, XAG) and SDR (XDR) are quoted against USD in the daily sheets:
     #   - ORO (gold)   -> { base: "XAU", quote: "USD", rate: }
     #   - PLATA (silver) -> { base: "XAG", quote: "USD", rate: }
@@ -117,10 +125,59 @@ class Provider
         sheet = book.worksheets.first
         return [] unless sheet
 
+        rows = []
+        sheet.each { |row| rows << row }
+
+        # The current layout carries ISO codes in column 2; the legacy layout leaves
+        # that column blank and puts its markers in column 3.
+        if rows.any? { |row| row[2].to_s.strip.match?(/\A[A-Z]{3}\z/) }
+          parse_daily_current(rows, date)
+        else
+          parse_daily_legacy(rows, date)
+        end
+      end
+
+      private
+
+      # Current layout (2026-07 onward). USD's official rate (Bs/USD) and every listed
+      # currency (Bs per foreign unit) share one shape: ISO code in column 2, rate in
+      # column 3. Metals and SDR sit in their own blocks with the value in column 3.
+      def parse_daily_current(rows, date)
+        records = []
+
+        rows.each do |row|
+          concept = row[0].to_s.strip
+          moneda = row[1].to_s.strip
+          code = row[2].to_s.strip
+
+          if code.match?(/\A[A-Z]{3}\z/)
+            rate = parse_rate(row[3])
+            records << { date:, base: code, quote: "BOB", rate: } if rate&.positive?
+          elsif moneda.match?(/DERECHO ESPECIAL DE GIRO/i)
+            rate = parse_rate(row[3])
+            records << { date:, base: "XDR", quote: "USD", rate: } if rate&.positive?
+          else
+            base = case concept
+            when /\AORO\z/i then "XAU"
+            when /\APLATA\z/i then "XAG"
+            end
+            next unless base
+
+            rate = parse_rate(row[3])
+            records << { date:, base:, quote: "USD", rate: } if rate&.positive?
+          end
+        end
+
+        records
+      end
+
+      # Legacy layout (through ~2026-06). Currency marker in column 3, rate in column
+      # 4/5, USD split across USD.VENTA / USD.COMPRA rows averaged to a mid.
+      def parse_daily_legacy(rows, date)
         records = []
         usd_rates = []
 
-        sheet.each do |row|
+        rows.each do |row|
           code_str = row[3].to_s.strip
           next if code_str.empty?
 
@@ -132,20 +189,17 @@ class Provider
             end
             next unless base
 
-            rate_val = row[4].to_s.delete(",")
-            rate = Float(rate_val, exception: false)
+            rate = parse_rate(row[4])
             next unless rate&.positive?
 
             records << { date:, base:, quote: "USD", rate: }
           elsif code_str == "USD/D.E.G."
-            rate_val = row[5].to_s.delete(",")
-            rate = Float(rate_val, exception: false)
+            rate = parse_rate(row[5])
             next unless rate&.positive?
 
             records << { date:, base: "XDR", quote: "USD", rate: }
           elsif code_str == "USD.VENTA" || code_str == "USD.COMPRA"
-            rate_val = row[4].to_s.delete(",")
-            rate = Float(rate_val, exception: false)
+            rate = parse_rate(row[4])
             usd_rates << rate if rate&.positive?
           elsif code_str == "USD"
             # Skip Ecuador's USD row to avoid duplicate USD/BOB rates
@@ -153,8 +207,7 @@ class Provider
           else
             next unless code_str.match?(/\A[A-Z]{3}\z/)
 
-            rate_val = row[4].to_s.delete(",")
-            rate = Float(rate_val, exception: false)
+            rate = parse_rate(row[4])
             next unless rate&.positive?
 
             records << { date:, base: code_str, quote: "BOB", rate: }
@@ -169,7 +222,11 @@ class Provider
         records
       end
 
-      private
+      def parse_rate(cell)
+        return cell.to_f if cell.is_a?(Numeric)
+
+        Float(cell.to_s.delete(",").strip, exception: false)
+      end
 
       def download_year(year)
         uri = URI(YEAR_URL)
