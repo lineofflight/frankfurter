@@ -5,10 +5,14 @@
 #
 # Fetches the live /v2/providers feed and flags any provider whose
 # `publishes_missed` exceeds a cadence-specific threshold, then keeps one
-# GitHub issue per stale provider (label: provider-health). The point is to
-# surface silent freezes: a provider whose feed breaks (TLS chain, source
-# change, geo-block) fails every scheduled backfill but logs nothing a human
-# sees.
+# GitHub issue per stale provider. The point is to surface silent freezes: a
+# provider whose feed breaks (TLS chain, source change, geo-block) fails every
+# scheduled backfill but logs nothing a human sees.
+#
+# Issues carry two labels: `provider` (the umbrella every provider issue shares,
+# human-filed or auto) and `health` (bot-owned; the discriminator used to find
+# the rolling issues this script manages). `health` must never be applied by
+# hand, or this script could match and edit a human's issue.
 #
 # `publishes_missed` is already cadence-aware in its unit (missed fire-days for
 # daily, missed week/month buckets for weekly/monthly), computed server-side, so
@@ -30,7 +34,10 @@ require "date"
 
 API = ENV.fetch("API", "https://api.frankfurter.dev/v2/providers")
 REPO = ENV.fetch("REPO", "lineofflight/frankfurter")
-LABEL = "provider-health"
+# `health` is bot-owned and used to find the issues this script manages, so the
+# search filters on it alone; both labels are applied on create.
+HEALTH_LABEL = "health"
+PROVIDER_LABEL = "provider"
 
 # Flag only well past normal lag. See the calibration in the PR that introduced
 # this for why these values.
@@ -58,6 +65,9 @@ def flagged(providers)
     .sort_by { |provider| -(provider["publishes_missed"] || 0) }
 end
 
+# A stable internal identifier embedded in each issue body, deliberately kept as
+# `provider-health` (not renamed with the label) so already-open issues stay
+# matchable. It is what pins an issue to its provider, independent of labels.
 def marker(key)
   "<!-- provider-health: #{key} -->"
 end
@@ -82,7 +92,7 @@ def gh(*args)
   output
 end
 
-# Open provider-health issues keyed by the provider they track.
+# Open health issues keyed by the provider they track.
 def open_issues_by_key
   json = gh(
     "issue",
@@ -92,7 +102,7 @@ def open_issues_by_key
     "--state",
     "open",
     "--label",
-    LABEL,
+    HEALTH_LABEL,
     "--json",
     "number,body",
     "--limit",
@@ -122,7 +132,20 @@ def main
     if number
       gh("issue", "edit", number.to_s, "--repo", REPO, "--body", body)
     else
-      gh("issue", "create", "--repo", REPO, "--label", LABEL, "--title", "Stale provider: #{provider["key"]}", "--body", body)
+      gh(
+        "issue",
+        "create",
+        "--repo",
+        REPO,
+        "--label",
+        PROVIDER_LABEL,
+        "--label",
+        HEALTH_LABEL,
+        "--title",
+        "Stale provider: #{provider["key"]}",
+        "--body",
+        body,
+      )
     end
   end
 

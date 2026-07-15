@@ -2,7 +2,7 @@ name: Provider health
 
 # Daily audit for silently-frozen providers. Reads the live /v2/providers feed,
 # flags any provider whose publishes_missed exceeds its cadence threshold, and
-# upserts a single rolling issue (label: provider-health). See bin/provider_health.rb.
+# upserts a single rolling issue (labels: provider + health). See bin/provider_health.rb.
 
 on:
   schedule:
