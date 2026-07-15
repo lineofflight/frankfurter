@@ -434,9 +434,15 @@ module Versions
     end
 
     describe "native-precision passthrough" do
+      include Roundable
+
+      # Pick a stored rate whose native precision exceeds what magnitude-based
+      # rounding would emit (round(rate) != rate). Selecting merely by decimal
+      # count is not a valid witness: a value like 79.966 sits in the 3-decimal
+      # band, so rounding is a no-op and cannot distinguish passthrough.
       let(:native_row) do
         Rate.where(provider: "ECB", base: "EUR", quote: "PHP").all.find do |r|
-          r[:rate].to_s.split(".").last.length > 2
+          round(r[:rate]) != r[:rate]
         end
       end
 
