@@ -154,6 +154,29 @@ class Provider < Sequel::Model(:providers)
 
         _(records).must_be_empty
       end
+
+      # The CDN returns HTTP 500 for the default Net::HTTP "Ruby" User-Agent, which
+      # silently yields an empty dataset. Guard the header so that regression is caught.
+      it "sends a non-library User-Agent" do
+        captured_user_agent = nil
+        VCR.eject_cassette
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:post, /www\.bct\.gov\.tn/).to_return do |request|
+              captured_user_agent = request.headers["User-Agent"]
+              { status: 200, body: "" }
+            end
+
+            adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20))
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("bct", match_requests_on: [:method, :host], allow_playback_repeats: true)
+        end
+
+        _(captured_user_agent).must_equal(BCT::USER_AGENT)
+      end
     end
   end
 end

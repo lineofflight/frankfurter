@@ -31,6 +31,9 @@ class Provider
     class BCT < Adapter
       URL = "https://www.bct.gov.tn/bct/siteprod/cours_archiv.jsp"
       REFERER = "https://www.bct.gov.tn/bct/siteprod/cours_archive.jsp"
+      # The CDN began returning HTTP 500 for the default Net::HTTP "Ruby" User-Agent
+      # in mid-2026; a non-library User-Agent is required.
+      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       DATE_RE = %r{Journée du\s*(\d{2})/(\d{2})/(\d{4})}
       SIGLE_RE = /\A([A-Z]{3})\z/
@@ -96,6 +99,7 @@ class Provider
 
         req = Net::HTTP::Post.new(uri)
         req["Referer"] = REFERER
+        req["User-Agent"] = USER_AGENT
         req["Content-Type"] = "application/x-www-form-urlencoded"
         req.body = URI.encode_www_form(input: date.strftime("%Y-%m-%d"), langue: "_AN")
 

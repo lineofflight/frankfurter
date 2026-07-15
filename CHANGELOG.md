@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Restored Banque Centrale de Tunisie (BCT) rates, which stopped updating in early July 2026 after the source's CDN began returning HTTP 500 for the default library User-Agent. Requests now send a non-library User-Agent, matching the workaround already used for other CDN-fronted providers. (#548)
 - Date-relative V2 responses (latest, or `from` without `to`) now expire from CDN caches at UTC midnight instead of after 24 hours. Previously a cached "latest" response could disagree with a freshly computed open-ended range for the same data after the UTC date rolled over, since cache purges only fire when new data arrives. (#541)
 
 ### Added
