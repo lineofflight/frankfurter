@@ -1,5 +1,5 @@
 # --- Build stage: compile gems with the full toolchain ---
-FROM ruby:4.0.5-slim AS builder
+FROM ruby:4.0.6-slim AS builder
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -17,7 +17,7 @@ RUN gem install bundler && \
     bundle install
 
 # --- Runtime stage: only what the app needs to run ---
-FROM ruby:4.0.5-slim
+FROM ruby:4.0.6-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
