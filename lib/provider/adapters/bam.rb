@@ -59,8 +59,7 @@ class Provider
             sleep(response["retry-after"].to_i)
           else
             sleep(1)
-            response.value
-            return parse(response.body)
+            return parse(check!(response, "BAM #{date}").body)
           end
         end
       end
