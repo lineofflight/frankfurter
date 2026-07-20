@@ -28,7 +28,7 @@ class Provider
           http.request(req)
         end
 
-        parse(response.body)
+        parse(check!(response, "Banguat").body)
       end
 
       def parse(xml)

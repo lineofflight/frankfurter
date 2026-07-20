@@ -60,7 +60,7 @@ class Provider
             req.body = body
             http.request(req)
           end
-          dataset.concat(parse(response.body))
+          dataset.concat(parse(check!(response, "BCU #{iso_code}").body))
           sleep(1)
         end
 

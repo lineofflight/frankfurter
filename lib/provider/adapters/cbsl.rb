@@ -74,8 +74,7 @@ class Provider
       end
 
       def fetch_currencies
-        response = Net::HTTP.get_response(FORM_PAGE)
-        response.value
+        response = check!(Net::HTTP.get_response(FORM_PAGE), "CBSL form page")
         doc = Nokogiri::HTML.parse(response.body)
         doc.css('input[name="chk_cur[]"]').filter_map { |input| input["value"] }
       end
@@ -99,7 +98,7 @@ class Provider
         req["Content-Type"] = "application/x-www-form-urlencoded"
         req.body = URI.encode_www_form(form)
 
-        http.request(req).body
+        check!(http.request(req), "CBSL #{after}..#{upto}").body
       end
     end
   end

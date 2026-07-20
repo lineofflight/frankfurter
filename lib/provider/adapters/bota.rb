@@ -30,8 +30,7 @@ class Provider
         uri = URI("#{BASE_URL}/ExchangeRate/previous_rates")
 
         Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") do |http|
-          get = http.request(Net::HTTP::Get.new(uri))
-          get.value
+          get = check!(http.request(Net::HTTP::Get.new(uri)), "BOTA form page")
           cookie = cookie_header(get)
           token = extract_token(get.body)
           raise Unavailable, "BOTA: no antiforgery token" unless token
@@ -43,8 +42,7 @@ class Provider
             "dateFrom" => after.strftime("%m/%d/%Y"),
             "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
           )
-          response = http.request(post)
-          response.value
+          response = check!(http.request(post), "BOTA #{after}..#{upto || Date.today}")
 
           sleep(2)
           parse(response.body)

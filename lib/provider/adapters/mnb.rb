@@ -88,7 +88,7 @@ class Provider
         req["Content-Type"] = "text/xml; charset=utf-8"
         req["SOAPAction"] = "http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/#{operation}"
         req.body = body
-        http.request(req)
+        check!(http.request(req), "MNB #{operation}")
       end
 
       def extract_result(response, tag)

@@ -80,7 +80,7 @@ class Provider
           http.request(request)
         end
 
-        parse(response.body)
+        parse(check!(response, "CBK table #{table_id}").body)
       end
 
       def parse_row(row)

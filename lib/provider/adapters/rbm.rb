@@ -101,7 +101,7 @@ class Provider
           EndDate: end_date.strftime("%m/%d/%Y"),
         )
 
-        http.request(req).body.to_s
+        check!(http.request(req), "RBM #{start_date}..#{end_date}").body.to_s
       end
 
       def parse_number(str)
