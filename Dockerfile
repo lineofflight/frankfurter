@@ -41,7 +41,7 @@ ENV PORT=8080
 
 USER frankfurter
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f "http://localhost:${PORT:-8080}" || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=300s --retries=3 \
+    CMD exec curl -f --max-time 9 "http://localhost:${PORT:-8080}"
 
 CMD ["sh", "-c", "bundle exec rake db:setup && exec bundle exec foreman start"]
