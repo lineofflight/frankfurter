@@ -175,7 +175,7 @@ bundle exec foreman start               # Start web + scheduler together (mirror
 
 Or with Docker:
 ```bash
-docker run -d -p 80:8080 lineofflight/frankfurter
+docker run -d --init -p 80:8080 lineofflight/frankfurter
 ```
 
 ### Legacy TLS

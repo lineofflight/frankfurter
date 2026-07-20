@@ -11,13 +11,13 @@ The public API runs at <https://api.frankfurter.dev>. If you prefer to host your
 The quickest way to get started:
 
 ```bash
-docker run -d -p 8080:8080 lineofflight/frankfurter
+docker run -d --init -p 8080:8080 lineofflight/frankfurter
 ```
 
 For production, mount a volume to persist the SQLite database across container restarts and set any optional API keys:
 
 ```bash
-docker run -d -p 8080:8080 \
+docker run -d --init -p 8080:8080 \
   -e DATABASE_URL=sqlite:///app/data/frankfurter.sqlite3 \
   -e BAM_API_KEY=your_key \
   -e BANXICO_API_KEY=your_key \
