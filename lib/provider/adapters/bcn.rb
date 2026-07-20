@@ -73,7 +73,7 @@ class Provider
           http.request(req)
         end
 
-        response.body
+        check!(response, "BCN #{year}-#{format("%02d", month)}").body
       end
 
       def check_tls_support!

@@ -76,7 +76,7 @@ class Provider < Sequel::Model(:providers)
         http.read_timeout = 60
         req = Net::HTTP::Get.new(uri)
         req["User-Agent"] = USER_AGENT
-        resp = http.request(req)
+        resp = check!(http.request(req), "BI landing page")
         @cookies = resp.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
         resp.body
       end
@@ -104,7 +104,7 @@ class Provider < Sequel::Model(:providers)
         req["Content-Type"] = "application/x-www-form-urlencoded"
         req.body = URI.encode_www_form(form)
 
-        http.request(req).body
+        check!(http.request(req), "BI #{currency}").body
       end
 
       def extract_prefix(html)

@@ -54,6 +54,18 @@ class Provider < Sequel::Model(:providers)
       def fetch(after: nil, upto: nil)
         raise NotImplementedError
       end
+
+      private
+
+      # An error response carries no rate data, so handing its body to a parser yields an empty
+      # array — indistinguishable from a genuine no-data day. Incremental backfill then moves
+      # last_synced past the date and never revisits it, minting a permanent hole. Raise instead:
+      # the run aborts and the next tick retries the date.
+      def check!(response, context = nil)
+        return response if response.is_a?(Net::HTTPSuccess)
+
+        raise Unavailable, ["HTTP #{response.code}", context].compact.join(" on ")
+      end
     end
   end
 end

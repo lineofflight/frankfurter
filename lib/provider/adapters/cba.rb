@@ -75,16 +75,16 @@ class Provider
           </soap:Envelope>
         XML
 
-        Ox.load(
-          Net::HTTP.post(
-            URL,
-            xml,
-            {
-              "Content-Type" => "text/xml; charset=utf-8",
-              "SOAPAction" => "\"http://www.cba.am/#{action}\"",
-            },
-          ).body,
+        response = Net::HTTP.post(
+          URL,
+          xml,
+          {
+            "Content-Type" => "text/xml; charset=utf-8",
+            "SOAPAction" => "\"http://www.cba.am/#{action}\"",
+          },
         )
+
+        Ox.load(check!(response, "CBA #{action}").body)
       end
 
       def extract_rate(node)

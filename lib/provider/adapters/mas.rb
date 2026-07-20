@@ -107,7 +107,7 @@ class Provider
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
 
-        get_response = http.get(uri.request_uri)
+        get_response = check!(http.get(uri.request_uri), "MAS form page")
         cookies = extract_cookies(get_response)
         tokens = extract_tokens(get_response.body)
 
@@ -129,8 +129,7 @@ class Provider
         post["Cookie"] = cookies
         post.set_form_data(form_data)
 
-        response = http.request(post)
-        response.body
+        check!(http.request(post), "MAS #{start_year}-#{start_month}..#{end_year}-#{end_month}").body
       end
 
       def extract_cookies(response)

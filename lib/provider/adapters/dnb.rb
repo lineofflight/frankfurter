@@ -81,7 +81,7 @@ class Provider
 
         uri = URI(URL)
         response = Net::HTTP.post(uri, body, "Content-Type" => "application/json")
-        parse(response.body)
+        parse(check!(response, "DNB #{tid}").body)
       end
 
       def parse(csv)

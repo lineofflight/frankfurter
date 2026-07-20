@@ -149,6 +149,43 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      # A WAF 403 carries no rate table, so parsing it would look identical to a holiday and
+      # mint a permanent hole once last_synced moved past the date. Raise instead.
+      it "raises when the POST is blocked" do
+        VCR.eject_cassette
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, /www\.nbc\.gov\.kh/)
+              .to_return(status: 200, body: "<input name='tk' value='abc'>")
+            WebMock.stub_request(:post, /www\.nbc\.gov\.kh/)
+              .to_return(status: 403, body: "<html><body>Request blocked</body></html>")
+
+            _(-> { adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20)) })
+              .must_raise(Adapter::Unavailable)
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("nbc", match_requests_on: [:method, :host])
+        end
+      end
+
+      it "raises when the landing page is blocked" do
+        VCR.eject_cassette
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, /www\.nbc\.gov\.kh/).to_return(status: 403, body: "blocked")
+
+            _(-> { adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20)) })
+              .must_raise(Adapter::Unavailable)
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("nbc", match_requests_on: [:method, :host])
+        end
+      end
+
       it "skips Sundays in the date range" do
         # 2026-05-17 is a Sunday — should be skipped without raising even if the API would error.
         dataset = adapter.fetch(after: Date.new(2026, 5, 17), upto: Date.new(2026, 5, 17))

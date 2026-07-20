@@ -97,14 +97,14 @@ class Provider < Sequel::Model(:providers)
         html.include?("There is no data available")
       end
 
+      # CloudFront's WAF intermittently 403s the POST; check! keeps that from parsing as a holiday.
       def fetch_date(date)
         sleep(0.5)
         page, cookies = load_page
         token = extract_token(page)
-        raise "NBC: CSRF token not found on landing page" unless token
+        raise Unavailable, "NBC: CSRF token not found on landing page" unless token
 
-        body = post_date(date:, token:, cookies:)
-        parse(body, date:)
+        parse(check!(post_date(date:, token:, cookies:), "NBC #{date}").body, date:)
       end
 
       def extract_token(html)
@@ -118,7 +118,7 @@ class Provider < Sequel::Model(:providers)
         http = build_http(uri)
         req = Net::HTTP::Get.new(uri)
         req["User-Agent"] = USER_AGENT
-        resp = http.request(req)
+        resp = check!(http.request(req), "NBC landing page")
         cookies = resp.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
         [resp.body, cookies]
       end
@@ -136,7 +136,7 @@ class Provider < Sequel::Model(:providers)
           "tk" => token,
           "view" => "View",
         )
-        http.request(req).body
+        http.request(req)
       end
 
       def build_http(uri)

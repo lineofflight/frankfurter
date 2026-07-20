@@ -51,7 +51,7 @@ class Provider
           http.request(req)
         end
 
-        records = parse(response.body)
+        records = parse(check!(response, "BOM").body)
         records = records.select { |r| r[:date] >= after } if after
         records = records.select { |r| r[:date] <= upto } if upto
         records

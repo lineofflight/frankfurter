@@ -103,7 +103,7 @@ class Provider
         req["Content-Type"] = "application/x-www-form-urlencoded"
         req.body = URI.encode_www_form(input: date.strftime("%Y-%m-%d"), langue: "_AN")
 
-        response = http.request(req)
+        response = check!(http.request(req), "BCT #{date}")
         parse(decode(response), date:)
       end
 

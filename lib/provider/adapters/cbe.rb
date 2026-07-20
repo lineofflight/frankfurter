@@ -142,7 +142,7 @@ class Provider
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
           http.request(Net::HTTP::Get.new(uri, "User-Agent" => USER_AGENT))
         end
-        response.value
+        check!(response, "CBE historical page")
 
         match = response.body.match(TOKEN_PATTERN)
         raise Unavailable, "CBE: token not found on historical-data page" unless match
@@ -174,9 +174,8 @@ class Provider
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
           http.request(request)
         end
-        response.value
 
-        response.body
+        check!(response, "CBE #{start_date}..#{end_date}").body
       end
 
       def extract_cookies(response)

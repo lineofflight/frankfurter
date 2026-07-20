@@ -72,13 +72,13 @@ class Provider
           http.request(request)
         end
 
-        parse(response.body)
+        parse(check!(response, "BOJA table").body)
       end
 
       def fetch_nonce
         uri = URI(PAGE_URL)
-        response = Net::HTTP.get(uri)
-        match = response.match(NONCE_PATTERN)
+        response = check!(Net::HTTP.get_response(uri), "BOJA nonce page")
+        match = response.body.match(NONCE_PATTERN)
         match&.captures&.first
       end
 
