@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Relaxed the Docker image healthcheck (2s probes, 4s timeout), which under load could kill timed-out probes and, with foreman as PID 1 reaping the orphans, restart the container in a loop. Self-hosted deployments should also pass `--init` to `docker run`. (#556)
 - Restored Banque Centrale de Tunisie (BCT) rates, which stopped updating in early July 2026 after the source's CDN began returning HTTP 500 for the default library User-Agent. Requests now send a non-library User-Agent, matching the workaround already used for other CDN-fronted providers. (#548)
 - Banco Central de Bolivia (BCBO) ingestion resumes after the source replaced its daily-sheet layout in mid-2026 (ISO code moved to a new column, the USD VENTA/COMPRA split collapsed into a single official rate, metals and SDR moved into their own blocks). The adapter now detects and parses both the current and legacy layouts, so historical daily data remains re-backfillable. BOB rates reflect Bolivia's mid-2026 repricing of the boliviano off its long-standing peg. (#547)
 - Date-relative V2 responses (latest, or `from` without `to`) now expire from CDN caches at UTC midnight instead of after 24 hours. Previously a cached "latest" response could disagree with a freshly computed open-ended range for the same data after the UTC date rolled over, since cache purges only fire when new data arrives. (#541)
