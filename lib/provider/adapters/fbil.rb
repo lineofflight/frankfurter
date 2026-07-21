@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -15,14 +14,12 @@ class Provider
     class FBIL < Adapter
       BASE_URL = "https://www.fbil.org.in/wasdm/refrates/fetchfiltered"
       def fetch(after: nil, upto: nil)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           "fromDate" => after.to_s,
           "toDate" => (upto || Date.today).to_s,
           "authenticated" => "false",
-        )
+        }).to_s
 
-        response = Net::HTTP.get(url)
         parse(response)
       end
 

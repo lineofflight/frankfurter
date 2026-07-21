@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -47,7 +46,7 @@ class Provider
       COLUMNS = SERIES.to_h { |code, series| [series.tr(".", "_"), code] }.freeze
 
       class << self
-        def api_key = ENV["TCMB_API_KEY"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["TCMB_API_KEY"] || raise("no API key")
         def backfill_range = 730
       end
 
@@ -55,12 +54,12 @@ class Provider
         start_date = after || Date.new(2012, 1, 2)
         end_date = upto || Date.today
 
-        url = URI("#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
+        url = "#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
           "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
           "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
-          "&type=json&frequency=1")
+          "&type=json&frequency=1"
 
-        response = Net::HTTP.get(url, "key" => self.class.api_key)
+        response = http.headers("key" => self.class.api_key).get(url).to_s
         data = JSON.parse(response)
         items = data["items"] || []
 

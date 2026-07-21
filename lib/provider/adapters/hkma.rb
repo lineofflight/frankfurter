@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -82,8 +81,7 @@ class Provider
       end
 
       def fetch_page(start_date, end_date, offset)
-        uri = URI(BASE_URL)
-        uri.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           "choose" => "end_of_day",
           "from" => start_date.to_s,
           "to" => end_date.to_s,
@@ -91,8 +89,7 @@ class Provider
           "offset" => offset,
           "sortby" => "end_of_day",
           "sortorder" => "desc",
-        )
-        response = Net::HTTP.get(uri)
+        }).to_s
         data = JSON.parse(response)
         data.dig("result", "records") || []
       end

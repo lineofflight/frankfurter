@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -55,7 +54,7 @@ class Provider
       private
 
       def fetch_year(year)
-        parse(Net::HTTP.get(URI("#{BASE_URL}/files/xml/years/nbrfxrates#{year}.xml")))
+        parse(http.get("#{BASE_URL}/files/xml/years/nbrfxrates#{year}.xml").to_s)
       end
     end
   end

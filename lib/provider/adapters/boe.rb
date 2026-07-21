@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -45,17 +44,15 @@ class Provider
       }.freeze
 
       def fetch(after: nil, upto: nil)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           "csv.x" => "yes",
           "SeriesCodes" => SERIES.keys.join(","),
           "UsingCodes" => "Y",
           "CSVF" => "TN",
           "Datefrom" => after.strftime("%d/%b/%Y"),
           "Dateto" => (upto || Date.today).strftime("%d/%b/%Y"),
-        )
+        }).to_s
 
-        response = Net::HTTP.get(url)
         parse(response)
       end
 

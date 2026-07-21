@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -14,18 +13,13 @@ class Provider
     class BANREP < Adapter
       BASE_URL = "https://www.datos.gov.co/resource/32sa-8pi3.json"
       def fetch(after: nil, upto: nil)
-        uri = URI(BASE_URL)
-        uri.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           "$where" => "vigenciadesde>='#{after}T00:00:00.000' AND vigenciadesde<='#{upto || Date.today}T00:00:00.000'",
           "$limit" => 50_000,
           "$order" => "vigenciadesde ASC",
-        )
+        }).to_s
 
-        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 15, read_timeout: 30) do |http|
-          http.request(Net::HTTP::Get.new(uri))
-        end
-
-        parse(response.body)
+        parse(response)
       end
 
       def parse(json)

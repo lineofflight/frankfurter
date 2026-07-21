@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -89,14 +88,12 @@ class Provider
       private
 
       def fetch_currency(currency, start_date, end_date)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           currency_name: currency,
           start_date: start_date.strftime("%Y-%m-%d"),
           end_date: end_date.strftime("%Y-%m-%d"),
-        )
+        }).to_s
 
-        response = Net::HTTP.get(url)
         parse(response)
       end
     end

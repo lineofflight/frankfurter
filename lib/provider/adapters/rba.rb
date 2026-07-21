@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -15,7 +14,7 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        csv = Net::HTTP.get(URI(CSV_URL))
+        csv = http.get(CSV_URL).to_s
         dataset = parse(csv)
         dataset = dataset.select { |r| r[:date] >= after } if after
         dataset

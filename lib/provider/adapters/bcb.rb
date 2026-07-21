@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -57,8 +56,7 @@ class Provider
           "$format=json",
         ].join("&")
 
-        url = URI("#{API_URL}?#{query}")
-        response = Net::HTTP.get(url)
+        response = http.get("#{API_URL}?#{query}").to_s
         parse(response, currency)
       end
     end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -24,15 +23,12 @@ class Provider
 
         loop do
           sleep(0.5) if page > 1
-          url = URI(BASE_URL)
-          url.query = URI.encode_www_form(
+          response = http.get(BASE_URL, params: {
             from: after.to_s,
             to: end_date.to_s,
             page: page,
             per_page: 100,
-          )
-
-          response = Net::HTTP.get(url)
+          }).to_s
           data = JSON.parse(response)
           payload = data.dig("data", "payload") || []
           dataset.concat(parse(payload))

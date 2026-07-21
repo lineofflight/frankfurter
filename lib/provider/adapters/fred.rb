@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -41,7 +40,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["FRED_API_KEY"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["FRED_API_KEY"] || raise("no API key")
       end
 
       def fetch(after: nil, upto: nil)
@@ -60,15 +59,12 @@ class Provider
       private
 
       def fetch_series(series_id, quote, series_base, **params)
-        url = URI(API_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(API_URL, params: {
           series_id: series_id,
           api_key: self.class.api_key,
           file_type: "json",
           **params,
-        )
-
-        response = Net::HTTP.get(url)
+        }).to_s
         data = JSON.parse(response)
 
         (data["observations"] || []).filter_map do |obs|

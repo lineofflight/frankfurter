@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -44,14 +43,11 @@ class Provider
       private
 
       def fetch_rates(start_date, end_date)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           StartDate: start_date.strftime("%d.%m.%Y"),
           EndDate: end_date.strftime("%d.%m.%Y"),
           format: "json",
-        )
-
-        response = Net::HTTP.get(url)
+        }).to_s
         parse(response)
       end
 

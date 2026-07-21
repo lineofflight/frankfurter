@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -37,7 +36,7 @@ class Provider
       end
 
       def current_currencies
-        data = Oj.load(Net::HTTP.get(URI("#{RATES_URL}?periodicity=0")), mode: :strict)
+        data = Oj.load(http.get(RATES_URL, params: { periodicity: 0 }).to_s, mode: :strict)
         data.map { |row| [row.fetch("Cur_ID"), row.fetch("Cur_Abbreviation"), Integer(row.fetch("Cur_Scale"))] }
       end
 
@@ -55,9 +54,11 @@ class Provider
       end
 
       def fetch_dynamics(cur_id, iso, scale, start_date, end_date)
-        url = URI("#{RATES_URL}/dynamics/#{cur_id}")
-        url.query = URI.encode_www_form(startDate: start_date.to_s, endDate: end_date.to_s)
-        data = Oj.load(Net::HTTP.get(url), mode: :strict)
+        response = http.get("#{RATES_URL}/dynamics/#{cur_id}", params: {
+          startDate: start_date.to_s,
+          endDate: end_date.to_s,
+        }).to_s
+        data = Oj.load(response, mode: :strict)
         return [] unless data.is_a?(Array)
 
         data.filter_map do |row|

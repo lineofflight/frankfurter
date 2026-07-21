@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -99,15 +98,12 @@ class Provider
       private
 
       def fetch_group(start_date, end_date, group_id)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        http.get(BASE_URL, params: {
           "DagsFra" => start_date.to_s,
           "DagsTil" => end_date.to_s,
           "GroupID" => group_id,
           "Type" => "xml",
-        )
-
-        Net::HTTP.get(url)
+        }).to_s
       end
 
       def parse_date(str)

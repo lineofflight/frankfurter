@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
-
 require "provider/adapters/adapter"
 
 class Provider
@@ -175,14 +173,11 @@ class Provider
       end
 
       def fetch_month(last_day, report_type)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        http.get(BASE_URL, params: {
           SelectDate: last_day.to_s,
           reportType: report_type,
           tsvflag: "Y",
-        )
-
-        Net::HTTP.get(url)
+        }).to_s
       end
     end
   end

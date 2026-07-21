@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -33,14 +32,12 @@ class Provider
 
       def fetch(after:, upto: nil)
         end_date = upto || Date.today
-        url = URI(URL)
-        url.query = URI.encode_www_form(
+        response = http.get(URL, params: {
           "QueryType" => "1",
           "Begin" => after.strftime("%Y%m%d"),
           "End" => end_date.strftime("%Y%m%d"),
-        )
+        }).to_s
 
-        response = Net::HTTP.get(url)
         parse(response).select { |r| r[:date].between?(after, end_date) }
       end
 

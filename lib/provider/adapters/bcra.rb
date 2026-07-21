@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -78,8 +77,7 @@ class Provider
       end
 
       def fetch_date(date)
-        url = URI("#{BASE_URL}?fecha=#{date.strftime("%Y-%m-%d")}")
-        response = Net::HTTP.get(url)
+        response = http.get(BASE_URL, params: { fecha: date.strftime("%Y-%m-%d") }).to_s
         parse(response)
       end
     end

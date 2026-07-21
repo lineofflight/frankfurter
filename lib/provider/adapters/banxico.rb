@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -23,25 +22,19 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["BANXICO_API_KEY"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["BANXICO_API_KEY"] || raise("no API key")
       end
 
       def fetch(after: nil, upto: nil)
         ids = SERIES.keys.join(",")
         url = if after
           end_date = upto || Date.today
-          URI("#{BASE_URL}/#{ids}/datos/#{after}/#{end_date}")
+          "#{BASE_URL}/#{ids}/datos/#{after}/#{end_date}"
         else
-          URI("#{BASE_URL}/#{ids}/datos")
+          "#{BASE_URL}/#{ids}/datos"
         end
 
-        response = Net::HTTP.start(url.host, url.port, use_ssl: true) do |http|
-          request = Net::HTTP::Get.new(url)
-          request["Bmx-Token"] = self.class.api_key
-          http.request(request)
-        end
-
-        parse(response.body)
+        parse(fetch_series(url))
       end
 
       def parse(json)
@@ -64,6 +57,12 @@ class Provider
             { date:, base:, quote: "MXN", rate: }
           end
         end
+      end
+
+      private
+
+      def fetch_series(url)
+        http.headers("Bmx-Token" => self.class.api_key).get(url).to_s
       end
     end
   end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -18,13 +17,11 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        url = URI(BASE_URL)
         params = {}
         params["datum-primjene-od"] = after.to_s if after
         params["datum-primjene-do"] = (upto || Date.today).to_s if after || upto
-        url.query = URI.encode_www_form(params) unless params.empty?
 
-        parse(Net::HTTP.get(url))
+        parse(http.get(BASE_URL, params:).to_s)
       end
 
       def parse(json)

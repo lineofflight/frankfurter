@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -54,8 +53,7 @@ class Provider
       private
 
       def fetch_date(date)
-        url = URI("#{URL}#{date.strftime("%Y-%m-%d")}/")
-        response = Net::HTTP.get(url)
+        response = http.get("#{URL}#{date.strftime("%Y-%m-%d")}/").to_s
         parse(response)
       end
     end
