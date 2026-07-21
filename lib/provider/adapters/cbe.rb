@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 require "zip"
 
@@ -138,22 +137,17 @@ class Provider
       def ensure_session
         return if @token && @cookie
 
-        uri = URI(HISTORICAL_URL)
-        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          http.request(Net::HTTP::Get.new(uri, "User-Agent" => USER_AGENT))
-        end
-        check!(response, "CBE historical page")
+        response = http.headers("User-Agent" => USER_AGENT).get(HISTORICAL_URL)
 
-        match = response.body.match(TOKEN_PATTERN)
-        raise Unavailable, "CBE: token not found on historical-data page" unless match
+        match = response.to_s.match(TOKEN_PATTERN)
+        raise "CBE: token not found on historical-data page" unless match
 
         @token = match[1]
         @cookie = extract_cookies(response)
       end
 
       def post_historical(start_date, end_date)
-        uri = URI(API_URL)
-        params = [
+        pairs = [
           ["__RequestVerificationToken", @token],
           ["DataSourceId", DATA_SOURCE_ID],
           ["FallbackUrl", FALLBACK_URL],
@@ -164,22 +158,20 @@ class Provider
           ["SubmitAction", "2"],
         ]
 
-        request = Net::HTTP::Post.new(uri)
-        request["User-Agent"] = USER_AGENT
-        request["Cookie"] = @cookie
-        request["Referer"] = HISTORICAL_URL
-        request["Origin"] = "https://www.cbe.org.eg"
-        request.set_form_data(params)
-
-        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          http.request(request)
-        end
-
-        check!(response, "CBE #{start_date}..#{end_date}").body
+        http
+          .headers(
+            "User-Agent" => USER_AGENT,
+            "Content-Type" => "application/x-www-form-urlencoded",
+            "Cookie" => @cookie,
+            "Referer" => HISTORICAL_URL,
+            "Origin" => "https://www.cbe.org.eg",
+          )
+          .post(API_URL, body: URI.encode_www_form(pairs))
+          .to_s
       end
 
       def extract_cookies(response)
-        response.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
+        response.headers.get("Set-Cookie").map { |c| c.split(";").first }.join("; ")
       end
 
       def read_xlsx(body)
