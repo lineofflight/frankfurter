@@ -187,23 +187,26 @@ class Provider
       def fetch_historical(after, upto)
         dataset = []
 
-        # NBKR's endpoint rate-limits new TLS handshakes and starts dropping
-        # connections after ~20 fresh sessions in quick succession; the sleep
-        # between requests keeps the per-currency loop under that threshold.
+        # NBKR's endpoint starts dropping connections after ~20 fresh TLS
+        # sessions in quick succession, so this loop reuses one persistent
+        # connection across all ~60 per-currency requests instead of opening
+        # a new one each time. The sleep between requests adds further
+        # pacing on top of that.
+        client = http.persistent(HISTORICAL_URL)
         first = true
         CURRENCIES.each do |currency|
           sleep(0.5) unless first
           first = false
 
-          html = fetch_historical_currency(currency[:id], after, upto)
+          html = fetch_historical_currency(client, currency[:id], after, upto)
           dataset.concat(parse_historical(html, iso: currency[:iso], nominal: currency[:nominal]))
         end
 
         dataset
       end
 
-      def fetch_historical_currency(id, after, upto)
-        http.get(HISTORICAL_URL, params: {
+      def fetch_historical_currency(client, id, after, upto)
+        client.get(HISTORICAL_URL, params: {
           item: 1562,
           lang: "ENG",
           valuta_id: id,
