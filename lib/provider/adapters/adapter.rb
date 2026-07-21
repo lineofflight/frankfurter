@@ -1,9 +1,33 @@
 # frozen_string_literal: true
 
+require "http"
+
 class Provider < Sequel::Model(:providers)
   module Adapters
     class Adapter
       class Unavailable < StandardError
+      end
+
+      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)"
+
+      # Raises on any response that is not 2xx. Stricter than http.rb's built-in
+      # raise_error feature (>= 400 only): a redirect from a moved or retired page
+      # must fail loudly, not parse as an empty day. 429 passes through so the
+      # client's retriable layer can honor Retry-After; exhaustion raises
+      # HTTP::OutOfRetriesError, so no 429 reaches an adapter either.
+      class EnsureSuccess < HTTP::Feature
+        def initialize(ignore: [])
+          super()
+          @ignore = ignore
+        end
+
+        def wrap_response(response)
+          return response if response.status.success? || @ignore.include?(response.code)
+
+          raise HTTP::StatusError, response
+        end
+
+        HTTP::Options.register_feature(:ensure_success, self)
       end
 
       # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose
@@ -66,6 +90,16 @@ class Provider < Sequel::Model(:providers)
 
         raise Unavailable, ["HTTP #{response.code}", context].compact.join(" on ")
       end
+
+      def http
+        @http ||= HTTP
+          .use(ensure_success: { ignore: [429] })
+          .retriable(retry_statuses: [429])
+          .timeout(connect: 10, read: read_timeout)
+          .headers("User-Agent" => USER_AGENT)
+      end
+
+      def read_timeout = 60
     end
   end
 end
