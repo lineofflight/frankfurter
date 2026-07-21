@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
+require "uri"
 require "zip"
 
 require "provider/adapters/adapter"
@@ -36,7 +36,6 @@ class Provider
     # to the commercial banks for market exchange rates."
     class CBS < Adapter
       DATA_URL = "https://cbs.gov.ws/daily-exchange-rates"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Excel stores dates as days since this epoch (with the 1900 leap-year
       # quirk baked into the offset).
@@ -85,7 +84,7 @@ class Provider
       # an unescaped space raises URI::InvalidURIError.
       def archive_url(html)
         path = html[/href=["']([^"']*\.xlsx)["']/i, 1]
-        raise Unavailable, "no workbook link on #{DATA_URL}" unless path
+        raise "no workbook link on #{DATA_URL}" unless path
 
         URI.join(DATA_URL, URI::RFC2396_PARSER.escape(path)).to_s
       end
@@ -248,22 +247,10 @@ class Provider
       end
 
       def download(url)
-        uri = URI(url)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        request = Net::HTTP::Get.new(uri)
-        request["User-Agent"] = USER_AGENT
-        request["Accept"] =
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,*/*"
-
-        response = http.request(request)
-        response.value
-
-        response.body
+        http.get(url).to_s
       end
+
+      def read_timeout = 120
     end
   end
 end

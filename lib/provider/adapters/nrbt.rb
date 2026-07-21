@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "openssl"
 require "ox"
 require "stringio"
-require "uri"
 require "zip"
 
 require "provider/adapters/adapter"
@@ -49,7 +47,7 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        xlsx_data = download(URI(DATA_URL))
+        xlsx_data = download(DATA_URL)
         parse(xlsx_data, after: after, upto: upto)
       end
 
@@ -75,16 +73,11 @@ class Provider
 
       private
 
-      def download(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        response = http.get(uri.request_uri)
-        response.value
-        response.body
+      def download(url)
+        http.get(url).to_s
       end
+
+      def read_timeout = 120
 
       def parse_rels(xml)
         Ox.parse(xml).locate("*/Relationship").to_h do |rel|

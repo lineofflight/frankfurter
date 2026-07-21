@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "nokogiri"
 require "openssl"
 
@@ -29,7 +28,6 @@ class Provider < Sequel::Model(:providers)
     # at request time rather than disabling verification (same approach as BoA).
     class RBV < Adapter
       URL = "https://www.rbv.gov.vu/index.php/en/exchange-rates"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
       PAGE_SIZE = 100_000
       CA_BUNDLE = File.expand_path("../../../config/rbv_ca_bundle.pem", __dir__)
 
@@ -72,28 +70,21 @@ class Provider < Sequel::Model(:providers)
         nil
       end
 
+      # www.rbv.gov.vu serves a malformed chain that omits its issuer (the Trustico
+      # RSA DV SSL CA 2 intermediate), so the default trust store can't build a
+      # chain to a root. We augment it with the bundled intermediate instead of
+      # disabling verification.
       def http_get
-        uri = URI(URL)
-        uri.query = URI.encode_www_form(limit1: PAGE_SIZE)
+        http.get(URL, params: { limit1: PAGE_SIZE }, ssl_context: ssl_context).to_s
+      end
 
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme == "https"
-        if http.use_ssl?
+      def ssl_context
+        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
           store = OpenSSL::X509::Store.new
           store.set_default_paths
           store.add_file(CA_BUNDLE)
-          http.cert_store = store
+          ctx.set_params(cert_store: store)
         end
-        http.open_timeout = 30
-        http.read_timeout = 60
-
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Accept"] = "text/html"
-
-        response = http.request(req)
-        response.value
-        response.body
       end
     end
   end

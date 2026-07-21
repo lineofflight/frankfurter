@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 require "zip"
 
@@ -28,7 +27,6 @@ class Provider
     class SBP < Adapter
       CURRENT_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily.xlsx"
       ARCHIVE_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily_Arch.xlsx"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Excel stores dates as the number of days since this epoch (with the 1900-leap-year
       # quirk baked into the offset — 1899-12-30 sidesteps it for dates after 1900-03-01).
@@ -128,22 +126,10 @@ class Provider
       private
 
       def download(url)
-        uri = URI(url)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        request = Net::HTTP::Get.new(uri)
-        request["User-Agent"] = USER_AGENT
-        request["Accept"] =
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,*/*"
-
-        response = http.request(request)
-        response.value
-
-        response.body
+        http.get(url).to_s
       end
+
+      def read_timeout = 120
 
       def shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")

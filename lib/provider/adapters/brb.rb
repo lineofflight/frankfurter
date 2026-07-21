@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "pdf-reader"
 require "stringio"
-require "uri"
 
 require "provider/adapters/adapter"
 
@@ -76,7 +74,7 @@ class Provider
           sleep(0.5) unless first
           first = false
 
-          pdf_data = http_get(URI(url))
+          pdf_data = http.get(url).to_s
           next unless pdf_data.start_with?("%PDF")
 
           dataset.concat(parse(pdf_data, date))
@@ -135,10 +133,9 @@ class Provider
       end
 
       def fetch_index_page(page)
-        url = URI(INDEX_URL)
-        url.query = URI.encode_www_form(page: page) if page.positive?
+        params = { page: page } if page.positive?
 
-        body = http_get(url)
+        body = http.get(INDEX_URL, params: params).to_s
         body.force_encoding(Encoding::UTF_8) if body.encoding != Encoding::UTF_8
 
         body.scan(PDF_HREF).map do |href, day, month, year|
@@ -146,16 +143,7 @@ class Provider
         end.uniq { |date, _| date }
       end
 
-      def http_get(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        response = http.get(uri.request_uri)
-        response.value
-        response.body
-      end
+      def read_timeout = 120
     end
   end
 end

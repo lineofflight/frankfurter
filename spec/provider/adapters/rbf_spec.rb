@@ -53,9 +53,9 @@ class Provider < Sequel::Model(:providers)
         _(dates.max).must_be(:<=, Date.new(2026, 5, 21))
       end
 
-      it "raises Unavailable when the XLSX link is missing from the hub page" do
-        adapter.stub(:http_get, "<html><body>no link here</body></html>") do
-          _ { adapter.fetch }.must_raise(Adapter::Unavailable)
+      it "raises when the XLSX link is missing from the hub page" do
+        adapter.stub(:download, "<html><body>no link here</body></html>") do
+          assert_raises(RuntimeError) { adapter.fetch }
         end
       end
     end

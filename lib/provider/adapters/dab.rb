@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -28,7 +27,6 @@ class Provider < Sequel::Model(:providers)
     # other pivot-in-quote adapters (NBG, BBK).
     class DAB < Adapter
       BASE_URL = "https://www.dab.gov.af/exchange-rates"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Maps DAB row labels (after stripping currency symbols and whitespace)
       # to ISO 4217 codes. "IRAN TOMAN" is the "IRAN Toman" row; values get
@@ -111,22 +109,7 @@ class Provider < Sequel::Model(:providers)
 
       def fetch_date(date)
         sleep(0.5)
-        uri = URI(BASE_URL)
-        uri.query = URI.encode_www_form(field_date_value: date.strftime("%Y-%m-%d"))
-
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme == "https"
-        http.open_timeout = 30
-        http.read_timeout = 60
-
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Accept"] = "text/html"
-
-        response = http.request(req)
-        response.value
-
-        parse(response.body, date:)
+        parse(http.get(BASE_URL, params: { field_date_value: date.strftime("%Y-%m-%d") }).to_s, date:)
       end
     end
   end

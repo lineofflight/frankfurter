@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -59,16 +58,11 @@ class Provider
       }.freeze
 
       def fetch(after: nil, upto: nil)
-        url = URI(SDMX_URL)
         params = { format: "sdmx_csv" }
         params[:startPeriod] = after.to_s if after
         params[:endPeriod] = upto.to_s if upto
-        url.query = URI.encode_www_form(params)
 
-        response = Net::HTTP.get_response(url)
-        response.value
-
-        parse(response.body)
+        parse(http.get(SDMX_URL, params: params).to_s)
       end
 
       def parse(csv)

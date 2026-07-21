@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "nokogiri"
 require "ox"
 require "zip"
@@ -35,8 +34,6 @@ class Provider
     # other pivot-in-quote adapters (NBG, BBK).
     class CBI < Adapter
       PAGE_URL = "https://cbi.iq/page/144"
-      USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " \
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
       # Currency code aliases for labels CBI uses that aren't ISO 4217.
       # SDR (CBI's label) maps to XDR (ISO 4217 code for Special Drawing Rights).
@@ -55,9 +52,9 @@ class Provider
       RELS_NS = { "r" => "http://schemas.openxmlformats.org/package/2006/relationships" }.freeze
 
       def fetch(after: nil, upto: nil)
-        page = http_get(URI(PAGE_URL))
+        page = http.get(PAGE_URL).to_s
         url = discover_file_url(page)
-        xlsx = http_get(URI(url))
+        xlsx = http.get(url).to_s
 
         records = parse(xlsx)
         records.select! { |r| r[:date] > after } if after
@@ -89,20 +86,7 @@ class Provider
 
       private
 
-      def http_get(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme == "https"
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Accept"] = "*/*"
-
-        response = http.request(req)
-        response.value
-        response.body
-      end
+      def read_timeout = 120
 
       def discover_file_url(page)
         doc = Nokogiri::HTML.parse(page)
