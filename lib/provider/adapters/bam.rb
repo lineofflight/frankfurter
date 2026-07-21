@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -12,7 +11,7 @@ class Provider
     class BAM < Adapter
       URL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement"
       class << self
-        def api_key = ENV["BAM_API_KEY"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["BAM_API_KEY"] || raise("no API key")
 
         def backfill_range = 7
       end
@@ -47,21 +46,12 @@ class Provider
       private
 
       def fetch_date(date)
-        uri = URI(URL)
-        uri.query = URI.encode_www_form(date: "#{date.strftime("%Y-%m-%d")}T12:30:00")
-        request = Net::HTTP::Get.new(uri)
-        request["Ocp-Apim-Subscription-Key"] = self.class.api_key
+        response = http
+          .headers("Ocp-Apim-Subscription-Key" => self.class.api_key)
+          .get(URL, params: { date: "#{date.strftime("%Y-%m-%d")}T12:30:00" })
 
-        loop do
-          response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
-
-          if response.is_a?(Net::HTTPTooManyRequests)
-            sleep(response["retry-after"].to_i)
-          else
-            sleep(1)
-            return parse(check!(response, "BAM #{date}").body)
-          end
-        end
+        sleep(1)
+        parse(response.to_s)
       end
     end
   end
