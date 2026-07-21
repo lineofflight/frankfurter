@@ -61,26 +61,23 @@ class Provider
         # batches. The default implementation calls `new.fetch` per chunk, which
         # would throw away the WAF session cookie/token between batches and
         # would also defeat the inter-batch pacing below.
+        #
+        # No transient-error rescue here: the base client already retries transport
+        # errors internally (retriable, 5 tries). Anything else (e.g. an
+        # HTTP::StatusError from the WAF) propagates so Provider#backfill logs and
+        # skips it; the next tick resumes from last_synced.
         def fetch_each(after: nil)
           return if after && after >= Date.today
 
           adapter = new
-          retries = 0
           loop do
             upto = after + backfill_range - 1 if after && backfill_range
             upto = nil if upto && upto >= Date.today
             records = adapter.fetch(after:, upto:)
             yield records if records.any?
-            retries = 0
             break unless upto
 
             after = upto + 1
-          rescue *TRANSIENT_ERRORS
-            retries += 1
-            raise if retries > 5
-
-            sleep(2**retries)
-            retry
           end
         end
       end

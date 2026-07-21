@@ -27,12 +27,18 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        get = http.get(FORM_URL)
+        # ASP.NET MVC antiforgery validation ties the token to the TCP connection that
+        # issued it: a GET and POST over separate one-shot connections gets a 500 even
+        # with a matching cookie + token. Use a persistent client so both requests share
+        # one connection, chained off the base client so ensure_success, retries,
+        # timeouts, and the User-Agent carry over.
+        client = http.persistent(BASE_URL)
+        get = client.get(FORM_URL)
         cookie = cookie_header(get)
         token = extract_token(get.to_s)
         raise "BOTA: no antiforgery token" unless token
 
-        response = http
+        response = client
           .headers("Cookie" => cookie)
           .post(
             FORM_URL,
