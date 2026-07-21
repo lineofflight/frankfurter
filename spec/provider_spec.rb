@@ -534,5 +534,19 @@ describe Provider do
 
       _(Rate.where(provider: provider.key, date: import_date).count).must_equal(0)
     end
+
+    it "contains any adapter error" do
+      error_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          raise "boom"
+        end
+      end
+
+      provider.stub(:adapter, error_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, date: import_date).count).must_equal(0)
+    end
   end
 end
