@@ -53,6 +53,21 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 4, 25))
         _(records.first[:rate]).must_be_close_to(407.18 * Adapter::GRAMS_PER_TROY_OUNCE, 0.0001)
       end
+
+      it "treats 404 as a no-data window" do
+        VCR.eject_cassette
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, /api\.nbp\.pl/).to_return(status: 404)
+
+            assert_empty(adapter.fetch(after: Date.today - 3, upto: Date.today))
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("nbp", match_requests_on: [:method, :uri])
+        end
+      end
     end
   end
 end
