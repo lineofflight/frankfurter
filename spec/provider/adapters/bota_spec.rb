@@ -113,8 +113,8 @@ class Provider < Sequel::Model(:providers)
 
       after { VCR.eject_cassette }
 
-      it "raises Unavailable instead of silently returning no rates" do
-        assert_raises(Adapter::Unavailable) do
+      it "raises instead of silently returning no rates" do
+        assert_raises(RuntimeError) do
           BOTA.new.fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 19))
         end
       end

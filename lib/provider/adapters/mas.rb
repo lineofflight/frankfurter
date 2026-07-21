@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -101,15 +100,10 @@ class Provider
       private
 
       def download_csv(start_month, start_year, end_month, end_year)
-        uri = URI(URL)
-
         # Step 1: GET page to extract ASP.NET tokens and cookies
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-
-        get_response = check!(http.get(uri.request_uri), "MAS form page")
-        cookies = extract_cookies(get_response)
-        tokens = extract_tokens(get_response.body)
+        get = http.get(URL)
+        cookies = extract_cookies(get)
+        tokens = extract_tokens(get.to_s)
 
         # Step 2: POST to download CSV
         form_data = tokens.merge(
@@ -125,19 +119,14 @@ class Provider
         3.times { |i| form_data["ctl00$ContentPlaceHolder1$EndOfPeriodPerUnitCheckBoxList$#{i}"] = "on" }
         18.times { |i| form_data["ctl00$ContentPlaceHolder1$EndOfPeriodPer100UnitsCheckBoxList$#{i}"] = "on" }
 
-        post = Net::HTTP::Post.new(uri.request_uri)
-        post["Cookie"] = cookies
-        post.set_form_data(form_data)
-
-        check!(http.request(post), "MAS #{start_year}-#{start_month}..#{end_year}-#{end_month}").body
+        http
+          .headers("Cookie" => cookies)
+          .post(URL, form: form_data)
+          .to_s
       end
 
       def extract_cookies(response)
-        cookies = []
-        response.get_fields("set-cookie")&.each do |cookie|
-          cookies << cookie.split(";").first
-        end
-        cookies.join("; ")
+        response.headers.get("Set-Cookie").map { |c| c.split(";").first }.join("; ")
       end
 
       def extract_tokens(html)

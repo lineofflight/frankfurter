@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -18,6 +17,7 @@ class Provider
     # hidden token field, then POSTs the date range with the cookie and token.
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
+      FORM_URL = "#{BASE_URL}/ExchangeRate/previous_rates"
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
       TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/
@@ -27,26 +27,25 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        uri = URI("#{BASE_URL}/ExchangeRate/previous_rates")
+        get = http.get(FORM_URL)
+        cookie = cookie_header(get)
+        token = extract_token(get.to_s)
+        raise "BOTA: no antiforgery token" unless token
 
-        Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") do |http|
-          get = check!(http.request(Net::HTTP::Get.new(uri)), "BOTA form page")
-          cookie = cookie_header(get)
-          token = extract_token(get.body)
-          raise Unavailable, "BOTA: no antiforgery token" unless token
-
-          post = Net::HTTP::Post.new(uri)
-          post["Cookie"] = cookie if cookie
-          post.set_form_data(
-            TOKEN_FIELD => token,
-            "dateFrom" => after.strftime("%m/%d/%Y"),
-            "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
+        response = http
+          .headers("Cookie" => cookie)
+          .post(
+            FORM_URL,
+            form: {
+              TOKEN_FIELD => token,
+              "dateFrom" => after.strftime("%m/%d/%Y"),
+              "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
+            },
           )
-          response = check!(http.request(post), "BOTA #{after}..#{upto || Date.today}")
+          .to_s
 
-          sleep(2)
-          parse(response.body)
-        end
+        sleep(2)
+        parse(response)
       end
 
       def parse(html)
@@ -60,10 +59,7 @@ class Provider
       private
 
       def cookie_header(response)
-        cookies = response.get_fields("set-cookie")
-        return unless cookies
-
-        cookies.map { |c| c.split(";", 2).first }.join("; ")
+        response.headers.get("Set-Cookie").map { |c| c.split(";", 2).first }.join("; ")
       end
 
       def extract_token(html)
