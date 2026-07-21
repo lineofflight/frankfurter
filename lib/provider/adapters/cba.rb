@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -75,16 +74,13 @@ class Provider
           </soap:Envelope>
         XML
 
-        response = Net::HTTP.post(
-          URL,
-          xml,
-          {
-            "Content-Type" => "text/xml; charset=utf-8",
-            "SOAPAction" => "\"http://www.cba.am/#{action}\"",
-          },
-        )
+        headers = {
+          "Content-Type" => "text/xml; charset=utf-8",
+          "SOAPAction" => "\"http://www.cba.am/#{action}\"",
+        }
+        response = http.post(URL, body: xml, headers:)
 
-        Ox.load(check!(response, "CBA #{action}").body)
+        Ox.load(response.to_s)
       end
 
       def extract_rate(node)

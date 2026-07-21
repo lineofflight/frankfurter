@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -79,9 +78,8 @@ class Provider
           mode: :compat,
         )
 
-        uri = URI(URL)
-        response = Net::HTTP.post(uri, body, "Content-Type" => "application/json")
-        parse(check!(response, "DNB #{tid}").body)
+        response = http.post(URL, body:, headers: { "Content-Type" => "application/json" })
+        parse(response.to_s)
       end
 
       def parse(csv)

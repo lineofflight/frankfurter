@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -91,19 +90,10 @@ class Provider
       private
 
       def fetch_date(date)
-        uri = URI(URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
+        form = { input: date.strftime("%Y-%m-%d"), langue: "_AN" }
+        headers = { "Referer" => REFERER, "User-Agent" => USER_AGENT }
 
-        req = Net::HTTP::Post.new(uri)
-        req["Referer"] = REFERER
-        req["User-Agent"] = USER_AGENT
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(input: date.strftime("%Y-%m-%d"), langue: "_AN")
-
-        response = check!(http.request(req), "BCT #{date}")
+        response = http.post(URL, form:, headers:)
         parse(decode(response), date:)
       end
 

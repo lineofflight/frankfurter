@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -64,8 +63,8 @@ class Provider
           XML
         end
 
-        response = post(body, "GetExchangeRates")
-        extract_result(response, "GetExchangeRatesResult")
+        xml = post(body, "GetExchangeRates")
+        extract_result(xml, "GetExchangeRatesResult")
       end
 
       def soap_envelope(operation)
@@ -83,16 +82,15 @@ class Provider
       end
 
       def post(body, operation)
-        http = Net::HTTP.new(ENDPOINT.host, ENDPOINT.port)
-        req = Net::HTTP::Post.new(ENDPOINT.path)
-        req["Content-Type"] = "text/xml; charset=utf-8"
-        req["SOAPAction"] = "http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/#{operation}"
-        req.body = body
-        check!(http.request(req), "MNB #{operation}")
+        headers = {
+          "Content-Type" => "text/xml; charset=utf-8",
+          "SOAPAction" => "http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/#{operation}",
+        }
+        http.post(ENDPOINT, body:, headers:).to_s
       end
 
-      def extract_result(response, tag)
-        doc = Ox.load(response.body)
+      def extract_result(xml, tag)
+        doc = Ox.load(xml)
         node = doc.locate("*/#{tag}").first
         node&.text || ""
       end

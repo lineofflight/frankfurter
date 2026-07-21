@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -87,21 +86,13 @@ class Provider
       private
 
       def post_range(start_date, end_date)
-        uri = URI(URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        req = Net::HTTP::Post.new(uri)
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(
+        form = {
           RateTypes: "",
           StartDate: start_date.strftime("%m/%d/%Y"),
           EndDate: end_date.strftime("%m/%d/%Y"),
-        )
+        }
 
-        check!(http.request(req), "RBM #{start_date}..#{end_date}").body.to_s
+        http.post(URL, form:).to_s
       end
 
       def parse_number(str)
@@ -125,6 +116,8 @@ class Provider
       rescue Date::Error
         nil
       end
+
+      def read_timeout = 120
     end
   end
 end

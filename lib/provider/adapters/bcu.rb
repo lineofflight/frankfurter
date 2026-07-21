@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -54,13 +53,8 @@ class Provider
         currencies = CURRENCY_MAPPING.values.uniq
         currencies.each do |iso_code|
           body = soap_request(iso_code, after, end_date)
-          response = Net::HTTP.start(ENDPOINT.host, ENDPOINT.port, use_ssl: true) do |http|
-            req = Net::HTTP::Post.new(ENDPOINT)
-            req["Content-Type"] = "text/xml; charset=utf-8"
-            req.body = body
-            http.request(req)
-          end
-          dataset.concat(parse(check!(response, "BCU #{iso_code}").body))
+          response = http.post(ENDPOINT, body:, headers: { "Content-Type" => "text/xml; charset=utf-8" })
+          dataset.concat(parse(response.to_s))
           sleep(1)
         end
 

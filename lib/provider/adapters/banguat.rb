@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -21,14 +20,9 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         body = soap_request(after, upto || Date.today)
-        response = Net::HTTP.start(ENDPOINT.host, ENDPOINT.port, use_ssl: true) do |http|
-          req = Net::HTTP::Post.new(ENDPOINT)
-          req["Content-Type"] = "text/xml; charset=utf-8"
-          req.body = body
-          http.request(req)
-        end
+        response = http.post(ENDPOINT, body:, headers: { "Content-Type" => "text/xml; charset=utf-8" })
 
-        parse(check!(response, "Banguat").body)
+        parse(response.to_s)
       end
 
       def parse(xml)
