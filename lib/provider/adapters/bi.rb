@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
-
 require "provider/adapters/adapter"
 
 class Provider < Sequel::Model(:providers)
@@ -12,7 +10,6 @@ class Provider < Sequel::Model(:providers)
     # Rates are buy/sell; we compute the mid-rate as (sell + buy) / 2.
     class BI < Adapter
       BASE_URL = "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       class << self
         def backfill_range = 90
@@ -69,25 +66,12 @@ class Provider < Sequel::Model(:providers)
       private
 
       def load_page
-        uri = URI(BASE_URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        resp = check!(http.request(req), "BI landing page")
-        @cookies = resp.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
-        resp.body
+        response = http.get(BASE_URL)
+        @cookies = response.headers.get("Set-Cookie").map { |c| c.split(";").first }.join("; ")
+        response.to_s
       end
 
       def search(prefix:, tokens:, cookies:, currency:, from_str:, to_str:)
-        uri = URI(BASE_URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
-
         form = sharepoint_fields(tokens).merge(
           "#{prefix}$ddlmatauang1" => currency,
           "#{prefix}$txtFrom" => from_str,
@@ -97,14 +81,10 @@ class Provider < Sequel::Model(:providers)
           "#{prefix}$hidSourceID" => "#{prefix.tr("$", "_")}_btnSearch1",
         )
 
-        req = Net::HTTP::Post.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Cookie"] = cookies
-        req["Referer"] = BASE_URL
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(form)
-
-        check!(http.request(req), "BI #{currency}").body
+        http
+          .headers("Cookie" => cookies, "Referer" => BASE_URL)
+          .post(BASE_URL, form:)
+          .to_s
       end
 
       def extract_prefix(html)

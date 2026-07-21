@@ -162,7 +162,7 @@ class Provider < Sequel::Model(:providers)
               .to_return(status: 403, body: "<html><body>Request blocked</body></html>")
 
             _(-> { adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20)) })
-              .must_raise(Adapter::Unavailable)
+              .must_raise(HTTP::StatusError)
           end
         ensure
           WebMock.reset!
@@ -178,7 +178,7 @@ class Provider < Sequel::Model(:providers)
             WebMock.stub_request(:get, /www\.nbc\.gov\.kh/).to_return(status: 403, body: "blocked")
 
             _(-> { adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20)) })
-              .must_raise(Adapter::Unavailable)
+              .must_raise(HTTP::StatusError)
           end
         ensure
           WebMock.reset!
