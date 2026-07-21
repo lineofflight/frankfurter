@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -52,35 +51,30 @@ class Provider
       end
 
       def stream_csv(url)
-        uri = URI(url)
-        Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          request = Net::HTTP::Get.new(uri)
-          http.request(request) do |response|
-            headers = nil
-            buffer = +""
+        response = http.get(url)
+        headers = nil
+        buffer = +""
 
-            response.read_body do |chunk|
-              buffer << chunk
-              while (line_end = buffer.index("\n"))
-                line = buffer.slice!(0..line_end)
-                if headers.nil?
-                  headers = CSV.parse_line(line, liberal_parsing: true)
-                else
-                  values = CSV.parse_line(line, liberal_parsing: true)
-                  next unless values
+        response.body.each do |chunk|
+          buffer << chunk
+          while (line_end = buffer.index("\n"))
+            line = buffer.slice!(0..line_end)
+            if headers.nil?
+              headers = CSV.parse_line(line, liberal_parsing: true)
+            else
+              values = CSV.parse_line(line, liberal_parsing: true)
+              next unless values
 
-                  row = CSV::Row.new(headers, values)
-                  yield row
-                end
-              end
-            end
-
-            # Process remaining buffer
-            if headers && !buffer.empty?
-              values = CSV.parse_line(buffer, liberal_parsing: true)
-              yield CSV::Row.new(headers, values) if values
+              row = CSV::Row.new(headers, values)
+              yield row
             end
           end
+        end
+
+        # Process remaining buffer
+        if headers && !buffer.empty?
+          values = CSV.parse_line(buffer, liberal_parsing: true)
+          yield CSV::Row.new(headers, values) if values
         end
       end
     end
