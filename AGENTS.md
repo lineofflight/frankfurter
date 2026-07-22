@@ -76,10 +76,10 @@ db/seeds/
 ## Key Components
 
 ### Adapters (lib/provider/adapters/)
-- `Provider::Adapters::Adapter`: Abstract base class — `fetch` interface, `fetch_each` for chunked iteration, sleep no-op in test env
+- `Provider::Adapters::Adapter`: Abstract base class — `fetch` interface, `fetch_each` for chunked iteration, shared `http` client (http.rb, retries 429s, ensures non-2xx raises `HTTP::StatusError`), sleep no-op in test env
 - Adapters are pure data extraction: they know how to talk to an external API and parse its response
 - No identity — adapters have no `key` or `name`. Provider model owns identity.
-- Optional class methods: `def backfill_range = N`, `def api_key = ENV[...] || raise(ApiKeyMissing)`
+- Optional class methods: `def backfill_range = N`, `def api_key = ENV[...] || raise("no API key")`
 - Auto-discovered from `lib/provider/adapters/` via loader
 
 ### Models

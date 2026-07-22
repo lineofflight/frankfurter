@@ -5,9 +5,6 @@ require "http"
 class Provider < Sequel::Model(:providers)
   module Adapters
     class Adapter
-      class Unavailable < StandardError
-      end
-
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)"
 
       # Raises on any response that is not 2xx. Stricter than http.rb's built-in
@@ -35,15 +32,6 @@ class Provider < Sequel::Model(:providers)
       # convert into the per-ounce convention used across the app.
       GRAMS_PER_TROY_OUNCE = 31.1034768
 
-      TRANSIENT_ERRORS = [
-        Errno::ECONNRESET,
-        Errno::EPIPE,
-        Net::OpenTimeout,
-        Net::ReadTimeout,
-        OpenSSL::SSL::SSLError,
-        SocketError,
-      ].freeze
-
       class << self
         def inherited(subclass)
           super
@@ -55,22 +43,14 @@ class Provider < Sequel::Model(:providers)
         def fetch_each(after: nil)
           return if after && after >= Date.today
 
-          retries = 0
           loop do
             upto = after + backfill_range - 1 if after && backfill_range
             upto = nil if upto && upto >= Date.today
             records = new.fetch(after:, upto:)
             yield records if records.any?
-            retries = 0
             break unless upto
 
             after = upto + 1
-          rescue *TRANSIENT_ERRORS
-            retries += 1
-            raise if retries > 5
-
-            sleep(2**retries)
-            retry
           end
         end
       end
@@ -80,16 +60,6 @@ class Provider < Sequel::Model(:providers)
       end
 
       private
-
-      # An error response carries no rate data, so handing its body to a parser yields an empty
-      # array — indistinguishable from a genuine no-data day. Incremental backfill then moves
-      # last_synced past the date and never revisits it, minting a permanent hole. Raise instead:
-      # the run aborts and the next tick retries the date.
-      def check!(response, context = nil)
-        return response if response.is_a?(Net::HTTPSuccess)
-
-        raise Unavailable, ["HTTP #{response.code}", context].compact.join(" on ")
-      end
 
       def http
         @http ||= HTTP

@@ -521,20 +521,6 @@ describe Provider do
       _(coverage.end_date.to_s).must_equal(import_date.to_s)
     end
 
-    it "skips when api key is required but missing" do
-      gated_adapter = Class.new(Provider::Adapters::Adapter) do
-        define_method(:fetch) do |**|
-          raise Provider::Adapters::Adapter::Unavailable, "no API key"
-        end
-      end
-
-      provider.stub(:adapter, gated_adapter) do
-        provider.backfill
-      end
-
-      _(Rate.where(provider: provider.key, date: import_date).count).must_equal(0)
-    end
-
     it "contains any adapter error" do
       error_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
