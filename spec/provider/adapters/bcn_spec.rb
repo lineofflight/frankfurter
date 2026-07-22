@@ -106,6 +106,35 @@ class Provider < Sequel::Model(:providers)
 
         _(records).must_be_empty
       end
+
+      it "builds a legacy TLS context that still verifies the peer" do
+        ctx = adapter.send(:legacy_tls_context)
+
+        _(ctx.verify_mode).must_equal(OpenSSL::SSL::VERIFY_PEER)
+        _(ctx.verify_hostname).must_equal(true)
+        _(ctx.security_level).must_equal(0)
+      end
+
+      it "sets the minimum TLS version after restoring peer verification" do
+        # OpenSSL::SSL::SSLContext exposes min_version= but no min_version reader,
+        # so we spy on the setter instead of reading the value back.
+        real_ctx = OpenSSL::SSL::SSLContext.new
+        calls = []
+        real_ctx.define_singleton_method(:set_params) do |*args|
+          calls << :set_params
+          super(*args)
+        end
+        real_ctx.define_singleton_method(:min_version=) do |version|
+          calls << [:min_version=, version]
+          super(version)
+        end
+
+        OpenSSL::SSL::SSLContext.stub(:new, real_ctx) do
+          adapter.send(:legacy_tls_context)
+        end
+
+        _(calls).must_equal([:set_params, [:min_version=, OpenSSL::SSL::TLS1_VERSION]])
+      end
     end
   end
 end

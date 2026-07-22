@@ -69,6 +69,8 @@ class Provider
 
       def legacy_tls_context
         OpenSSL::SSL::SSLContext.new.tap do |ctx|
+          # set_params restores VERIFY_PEER and hostname verification, which a bare context omits.
+          ctx.set_params
           ctx.min_version = OpenSSL::SSL::TLS1_VERSION
           ctx.security_level = 0
         end
