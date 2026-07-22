@@ -76,6 +76,35 @@ describe BaseConversion do
     _(usd[:rate]).must_equal(1.10)
   end
 
+  it "cross-converts when the bridge quotes the requested base directly" do
+    mixed = [
+      { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "FRED" },
+      { date: date, base: "USD", quote: "EUR", rate: 0.91, provider: "FRED" },
+    ]
+
+    result = BaseConversion.new(mixed, base: "EUR").convert
+    jpy = result.find { |r| r[:quote] == "JPY" }
+
+    _(jpy[:rate]).must_be_close_to(150.0 / 0.91)
+  end
+
+  it "bridges through the first matching row when a pair repeats across dates" do
+    monday = Date.parse("2024-01-15")
+    tuesday = Date.parse("2024-01-16")
+    mixed = [
+      { date: monday, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
+      { date: tuesday, base: "EUR", quote: "USD", rate: 1.10, provider: "ECB" },
+      { date: tuesday, base: "GBP", quote: "USD", rate: 1.27, provider: "ECB" },
+    ]
+
+    result = BaseConversion.new(mixed, base: "EUR").convert
+    gbp = result.find { |r| r[:quote] == "GBP" }
+
+    # Carry-forward snapshots can mix observation dates within a group; the bridge
+    # resolves to the first matching row in group order, as Array#find did.
+    _(gbp[:rate]).must_be_close_to(1.08 / 1.27)
+  end
+
   it "collapses two bridges to the same quote into one averaged rate" do
     # A provider can reach the same quote two ways during a pivot-currency transition (e.g. Banque du
     # Liban quoting against LTL and EUR around Lithuania's 2015 euro adoption). Collapse the duplicates
