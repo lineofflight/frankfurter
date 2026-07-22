@@ -249,7 +249,6 @@ class Provider
       def download(url)
         http.get(url).to_s
       end
-
     end
   end
 end

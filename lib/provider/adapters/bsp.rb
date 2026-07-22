@@ -140,7 +140,6 @@ class Provider
       rescue ArgumentError
         nil
       end
-
     end
   end
 end

@@ -129,7 +129,6 @@ class Provider
         http.get(url).to_s
       end
 
-
       def shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")
         return [] unless entry

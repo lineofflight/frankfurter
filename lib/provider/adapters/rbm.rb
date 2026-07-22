@@ -116,7 +116,6 @@ class Provider
       rescue Date::Error
         nil
       end
-
     end
   end
 end

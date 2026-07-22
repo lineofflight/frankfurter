@@ -86,7 +86,6 @@ class Provider
 
       private
 
-
       def discover_file_url(page)
         doc = Nokogiri::HTML.parse(page)
 

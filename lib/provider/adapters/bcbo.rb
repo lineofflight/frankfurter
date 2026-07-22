@@ -234,7 +234,6 @@ class Provider
         http.get(DAILY_URL, params: { qdd: date.day, qmm: date.month, qaa: date.year }).to_s
       end
 
-
       def build_date(year, month, day)
         Date.new(year, month, day)
       rescue Date::Error

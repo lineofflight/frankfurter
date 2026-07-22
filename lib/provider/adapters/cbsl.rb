@@ -89,7 +89,6 @@ class Provider
 
         http.post(ENDPOINT, form:).to_s
       end
-
     end
   end
 end

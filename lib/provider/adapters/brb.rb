@@ -142,7 +142,6 @@ class Provider
           [Date.new(Integer(year, 10), Integer(month, 10), Integer(day, 10)), "#{HOST}#{href}"]
         end.uniq { |date, _| date }
       end
-
     end
   end
 end

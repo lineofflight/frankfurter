@@ -77,7 +77,6 @@ class Provider
         http.get(url).to_s
       end
 
-
       def parse_rels(xml)
         Ox.parse(xml).locate("*/Relationship").to_h do |rel|
           [rel["Id"], rel["Target"]]
