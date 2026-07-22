@@ -55,5 +55,15 @@ describe RequestTimeout do
       # seconds: 0 means the deadline is already in the past by the time we iterate.
       _ { body.each { |_| } }.must_raise(RequestTimeout::Error)
     end
+
+    it "passes error responses through unwrapped so a downstream 503 survives the deadline" do
+      app = ->(_env) { [503, {}, ["too slow"]] }
+
+      _, _, body = RequestTimeout.new(app, seconds: 0).call({})
+      chunks = []
+      body.each { |chunk| chunks << chunk }
+
+      _(chunks).must_equal(["too slow"])
+    end
   end
 end

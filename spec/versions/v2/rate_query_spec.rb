@@ -54,6 +54,131 @@ module Versions
       _(error.message).must_include("BAR")
     end
 
+    describe "deadline enforcement" do
+      let(:range_start) { (Fixtures.latest_date - 30).to_s }
+      let(:range_end) { Fixtures.latest_date.to_s }
+
+      it "raises between chunks of a daily range when the deadline has passed" do
+        query = V2::RateQuery.new({ from: range_start, to: range_end }, 0)
+
+        _ { query.to_a }.must_raise(RequestTimeout::Error)
+      end
+
+      it "raises between chunks of a rollup range when the deadline has passed" do
+        query = V2::RateQuery.new({ from: range_start, to: range_end, group: "month" }, 0)
+
+        _ { query.to_a }.must_raise(RequestTimeout::Error)
+      end
+
+      it "does not bound single-date queries" do
+        query = V2::RateQuery.new({ date: range_end, quotes: "USD" }, 0)
+
+        _(query.to_a).wont_be_empty
+      end
+
+      it "completes ranges within the deadline" do
+        query = V2::RateQuery.new({ from: range_start, to: range_end }, 1000)
+
+        _(query.to_a).wont_be_empty
+      end
+
+      # Pins the check inside the chunk loop: a regression that hoists it to the loop entry would
+      # check once for the whole range and let a long compute run past its deadline.
+      it "checks the deadline before every chunk of a multi-chunk range" do
+        query = V2::RateQuery.new(from: (Fixtures.latest_date - 200).to_s, to: Fixtures.latest_date.to_s)
+        checks = 0
+        query.stub(:check_deadline!, -> { checks += 1 }) do
+          query.to_a
+        end
+
+        _(checks).must_be(:>, 1)
+      end
+
+      it "serves the current chunk but stops the range when the deadline expires mid-compute" do
+        query = V2::RateQuery.new(from: (Fixtures.latest_date - 200).to_s, to: Fixtures.latest_date.to_s)
+        emitted = []
+
+        error = _ do
+          query.each do |record|
+            emitted << record
+            # Expire the deadline while the first chunk streams; the check between chunks must trip.
+            query.instance_variable_set(:@deadline, 0)
+          end
+        end.must_raise(RequestTimeout::Error)
+
+        _(error.message).must_include("timeout")
+        _(emitted).wont_be_empty
+      end
+    end
+
+    describe "interim daily range cap" do
+      # Validation is date arithmetic only, so fixed dates keep these deterministic.
+      let(:cap_end) { "2026-01-15" }
+      let(:at_cap_start) { "2021-01-15" }
+      let(:over_cap_start) { "2021-01-14" }
+
+      it "rejects daily ranges longer than 5 years without a quotes filter" do
+        error = _ { V2::RateQuery.new(from: over_cap_start, to: cap_end) }
+          .must_raise(V2::RateQuery::ValidationError)
+
+        _(error.message).must_include("quotes=")
+        _(error.message).must_include("group=week or group=month")
+        _(error.message).must_include("split the range")
+      end
+
+      it "rejects open-ended daily ranges reaching back more than 5 years" do
+        from = (Date.today << 61).to_s
+
+        _ { V2::RateQuery.new(from: from) }.must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "rejects long ranges when quotes lists more than 5 currencies" do
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,GBP,JPY,CHF,SEK,NOK") }
+          .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "counts distinct currencies, not raw quotes entries" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,USD,GBP,GBP,JPY,JPY")
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "counts a future to= only up to today" do
+        query = V2::RateQuery.new(from: (Date.today << 12).to_s, to: (Date.today >> 120).to_s)
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "rejects a long past range regardless of a future to=" do
+        _ { V2::RateQuery.new(from: (Date.today << 61).to_s, to: (Date.today >> 120).to_s) }
+          .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "allows long ranges when quotes lists 5 or fewer currencies" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,GBP,JPY,CHF,SEK")
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "allows long ranges at weekly or monthly granularity" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, group: "month")
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "allows daily ranges of exactly 5 years" do
+        query = V2::RateQuery.new(from: at_cap_start, to: cap_end)
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "does not cap single-date or latest queries" do
+        query = V2::RateQuery.new(date: "2001-01-15")
+
+        _(query.range?).must_equal(false)
+      end
+    end
+
     describe "single-day queries" do
       it "includes next-day provider observations in the implicit latest snapshot" do
         tomorrow = Date.today + 1

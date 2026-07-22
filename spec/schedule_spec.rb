@@ -40,6 +40,7 @@ describe "bin/schedule --dry-run" do
             def initialize(max_work_threads:); end
             def in(delay); puts "startup: \#{delay}"; end
             def cron(*) = nil
+            def every(*) = nil
             def join = nil
           end
         end
