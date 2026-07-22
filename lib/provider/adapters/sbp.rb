@@ -21,12 +21,13 @@ class Provider
     # SBP publishes finalized monthly snapshots roughly three weeks after the month ends,
     # so the most recent observation typically trails other providers by up to a month.
     #
-    # Cloudflare blocks plain-curl requests; a browser User-Agent header is required.
-    # The site footer reads "Copyright (c) 2020. All Rights Reserved." There is no
-    # explicit terms-of-use page (sbp.org.pk/disclaim.htm and /about/copyright.htm 404).
+    # The bank retired the old /ecodata/ tree in a mid-2026 site restructure (the old
+    # URLs now serve the homepage as a 200); the same workbooks live on under
+    # /assets/document/, linked from sbp.org.pk/economic-data. There is still no
+    # explicit terms-of-use page.
     class SBP < Adapter
-      CURRENT_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily.xlsx"
-      ARCHIVE_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily_Arch.xlsx"
+      CURRENT_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily.xlsx"
+      ARCHIVE_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily_Arch.xlsx"
 
       # Excel stores dates as the number of days since this epoch (with the 1900-leap-year
       # quirk baked into the offset — 1899-12-30 sidesteps it for dates after 1900-03-01).
