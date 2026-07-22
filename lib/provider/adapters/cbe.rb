@@ -62,10 +62,9 @@ class Provider
         # would throw away the WAF session cookie/token between batches and
         # would also defeat the inter-batch pacing below.
         #
-        # No transient-error rescue here: the base client already retries transport
-        # errors internally (retriable, 5 tries). Anything else (e.g. an
-        # HTTP::StatusError from the WAF) propagates so Provider#backfill logs and
-        # skips it; the next tick resumes from last_synced.
+        # No transient-error rescue here: the base client already retries transport errors internally (retriable, 5
+        # tries). Anything else (e.g. an HTTP::StatusError from the WAF) propagates so Provider#backfill logs and skips
+        # it; the next tick resumes from last_synced.
         def fetch_each(after: nil)
           return if after && after >= Date.today
 

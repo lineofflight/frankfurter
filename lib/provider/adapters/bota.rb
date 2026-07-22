@@ -27,12 +27,10 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        # Persistent mode is kept as exact parity with the old single-connection
-        # Net::HTTP flow against a demonstrably flaky endpoint, not because the
-        # antiforgery token is tied to the TCP connection (separate connections
-        # work fine; live verification traced the earlier 500s to endpoint
-        # flakiness that also hit the old code). Chained off the base client so
-        # ensure_success, retries, timeouts, and the User-Agent carry over.
+        # Persistent mode is kept as exact parity with the old single-connection Net::HTTP flow against a demonstrably
+        # flaky endpoint, not because the antiforgery token is tied to the TCP connection (separate connections work
+        # fine; live verification traced the earlier 500s to endpoint flakiness that also hit the old code). Chained off
+        # the base client so ensure_success, retries, timeouts, and the User-Agent carry over.
         http.persistent(BASE_URL) do |client|
           get = client.get(FORM_URL)
           cookie = cookie_header(get)

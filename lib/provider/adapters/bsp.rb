@@ -101,8 +101,8 @@ class Provider
           "&$expand=AttachmentFiles&$select=Id,Title,AttachmentFiles"
 
         loop do
-          # SharePoint's REST API returns Atom/XML by default; the verbose OData
-          # Accept header is required to get JSON back.
+          # SharePoint's REST API returns Atom/XML by default; the verbose OData Accept header is required to get JSON
+          # back.
           body = http.get(url, headers: { "Accept" => "application/json;odata=verbose" }).to_s
           payload = JSON.parse(body)
           results = payload.dig("d", "results") || []

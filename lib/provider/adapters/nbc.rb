@@ -95,8 +95,8 @@ class Provider < Sequel::Model(:providers)
         html.include?("There is no data available")
       end
 
-      # CloudFront's WAF intermittently 403s the POST; the client raises instead of a
-      # response body that would parse as an empty (holiday) day.
+      # CloudFront's WAF intermittently 403s the POST; the client raises instead of a response body that would parse as
+      # an empty (holiday) day.
       def fetch_date(date)
         sleep(0.5)
         page, cookies = load_page

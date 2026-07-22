@@ -187,11 +187,9 @@ class Provider
       def fetch_historical(after, upto)
         dataset = []
 
-        # NBKR's endpoint starts dropping connections after ~20 fresh TLS
-        # sessions in quick succession, so this loop reuses one persistent
-        # connection across all ~60 per-currency requests instead of opening
-        # a new one each time. The sleep between requests adds further
-        # pacing on top of that.
+        # NBKR's endpoint starts dropping connections after ~20 fresh TLS sessions in quick succession, so this loop
+        # reuses one persistent connection across all ~60 per-currency requests instead of opening a new one each time.
+        # The sleep between requests adds further pacing on top of that.
         http.persistent(HISTORICAL_URL) do |client|
           first = true
           CURRENCIES.each do |currency|

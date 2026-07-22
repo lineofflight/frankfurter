@@ -20,10 +20,9 @@ class Provider
     # the adapter scrapes the donnees-historiques hub for the current link rather than
     # hardcoding a path.
     #
-    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the
-    # default trust store can't build a chain to a root. We bundle the DigiCert
-    # intermediate at config/boa_ca_bundle.pem and pass it via an explicit
-    # ssl_context on each http.rb request instead of disabling verification.
+    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to
+    # a root. We bundle the DigiCert intermediate at config/boa_ca_bundle.pem and pass it via an explicit ssl_context on
+    # each http.rb request instead of disabling verification.
     #
     # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and
     # contains two columns: Excel serial dates in column A, "1 CCY = X DZD" rates
@@ -96,9 +95,8 @@ class Provider
         match[1]
       end
 
-      # bank-of-algeria.dz serves only its leaf certificate, so the default trust store
-      # can't build a chain to a root. We augment it with the DigiCert intermediate
-      # instead of disabling verification.
+      # bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to a root.
+      # We augment it with the DigiCert intermediate instead of disabling verification.
       def download(url)
         http.get(url, ssl_context: ssl_context).to_s
       end
