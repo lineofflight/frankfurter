@@ -81,10 +81,12 @@ class Provider
       # official USD/PHP mid. Everything else in the PDF is a third-party
       # passthrough we deliberately skip (see the class comment).
       def parse_text(text, date)
-        reference_rate = text[REFERENCE_RATE_PATTERN, 1]
         # Image-only scans (pre-2017-11-06 bulletins) have no text layer and
         # legitimately yield nothing; see class comment.
-        return [] unless reference_rate
+        return [] if text.strip.empty?
+
+        reference_rate = text[REFERENCE_RATE_PATTERN, 1]
+        raise "BSP: Reference Rate line missing from bulletin text for #{date}" unless reference_rate
 
         usd = Float(reference_rate.delete(","))
         # Never relay a placeholder 0.00; drop the day instead.

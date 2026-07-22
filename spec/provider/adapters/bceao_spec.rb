@@ -60,6 +60,14 @@ class Provider < Sequel::Model(:providers)
 
         _(records).must_be_empty
       end
+
+      it "raises when the response has neither table nor day header" do
+        error = assert_raises(RuntimeError) do
+          adapter.parse("<html>Maintenance</html>", date: Date.new(2026, 3, 23))
+        end
+
+        _(error.message).must_match(/neither rates table nor day header/)
+      end
     end
   end
 end

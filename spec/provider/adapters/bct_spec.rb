@@ -155,6 +155,14 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      it "raises when the response is undated without the error notice" do
+        error = assert_raises(RuntimeError) do
+          adapter.parse("<html>Maintenance</html>", date: Date.new(2026, 5, 20))
+        end
+
+        _(error.message).must_match(/no dated rates page/)
+      end
+
       # The CDN returns HTTP 500 for the default Net::HTTP "Ruby" User-Agent. The base
       # client already sends a non-library User-Agent, so guard the header here to
       # catch a regression.
@@ -166,7 +174,7 @@ class Provider < Sequel::Model(:providers)
           VCR.turned_off do
             WebMock.stub_request(:post, /www\.bct\.gov\.tn/).to_return do |request|
               captured_user_agent = request.headers["User-Agent"]
-              { status: 200, body: "" }
+              { status: 200, body: "Exhausted Resultset" }
             end
 
             adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20))

@@ -119,7 +119,33 @@ class Provider < Sequel::Model(:providers)
 
       it "skips series whose label has no parenthesised ISO code" do
         # BdP labels usually carry a code, but if a series ever omits it we should
-        # drop it cleanly rather than emit malformed records.
+        # drop that series cleanly rather than emit malformed records.
+        json = {
+          "value" => [42.0, 180.5],
+          "extension" => {
+            "series" => [
+              {
+                "label" => "Some unlabelled series against Escudo - daily",
+                "dimension_category" => [{ "dimension_id" => 12, "category_id" => 999 }],
+              },
+              {
+                "label" => "Exchange rate of Escudo against US dollar (USD) - daily",
+                "dimension_category" => [{ "dimension_id" => 12, "category_id" => 1 }],
+              },
+            ],
+          },
+          "dimension" => {
+            "12" => { "category" => { "index" => ["999", "1"] } },
+            "reference_date" => { "category" => { "index" => ["1998-01-02"] } },
+          },
+        }
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["USD"])
+      end
+
+      it "raises when no series label is recognizable" do
         json = {
           "value" => [42.0],
           "extension" => {
@@ -136,7 +162,9 @@ class Provider < Sequel::Model(:providers)
           },
         }
 
-        _(adapter.parse(json)).must_be_empty
+        error = assert_raises(RuntimeError) { adapter.parse(json) }
+
+        _(error.message).must_match(/no recognizable currency series/)
       end
 
       it "returns an empty dataset when the response has no series" do

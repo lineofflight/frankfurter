@@ -80,10 +80,18 @@ class Provider < Sequel::Model(:providers)
           _(records.map { |r| r[:rate] }).wont_include(61.6540)
         end
 
-        it "returns nothing when the Reference Rate line is absent" do
-          records = adapter.parse_text("no reference rate in this text", Date.new(2026, 5, 29))
+        it "returns nothing for image-only scans with no text layer" do
+          records = adapter.parse_text("  \n ", Date.new(2016, 5, 29))
 
           _(records).must_be_empty
+        end
+
+        it "raises when nonblank text lacks the Reference Rate line" do
+          error = assert_raises(RuntimeError) do
+            adapter.parse_text("no reference rate in this text", Date.new(2026, 5, 29))
+          end
+
+          _(error.message).must_match(/Reference Rate line missing/)
         end
       end
     end

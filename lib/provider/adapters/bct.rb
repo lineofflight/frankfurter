@@ -58,7 +58,14 @@ class Provider
 
       def parse(html, date:)
         echoed = extract_echoed_date(html)
-        # No-data days silently fall back to a nearby trading day or an undated "Exhausted Resultset" page
+        unless echoed
+          # No-data days can serve an undated "Exhausted Resultset" error page
+          return [] if html.include?("Exhausted Resultset")
+
+          raise "BCT: no dated rates page in response for #{date}"
+        end
+
+        # No-data days otherwise silently fall back to a nearby trading day; drop the mismatched page
         return [] unless echoed == date
 
         doc = Nokogiri::HTML.parse(html)

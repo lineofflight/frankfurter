@@ -37,10 +37,15 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        detalle = data.dig("results", "detalle")
-        fecha = data.dig("results", "fecha")
+        results = data["results"]
+        raise "BCRA: results envelope missing from response" unless results.is_a?(Hash)
+
+        detalle = results["detalle"]
+        raise "BCRA: detalle missing from results envelope" unless detalle.is_a?(Array)
+
+        fecha = results["fecha"]
         # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
-        return [] unless detalle && fecha
+        return [] unless fecha
 
         # Skip the entire date if any currency code appears more than once
         codes = detalle.filter_map { |item| item["codigoMoneda"]&.strip }

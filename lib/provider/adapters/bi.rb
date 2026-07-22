@@ -42,8 +42,13 @@ class Provider < Sequel::Model(:providers)
 
       def parse(html, currency:)
         table = html[%r{gvSearchResult2"[^>]*>(.*?)</table>}mi, 1]
-        # No-result searches render no gvSearchResult2 table at all (observed for weekend-only windows)
-        return [] unless table
+        unless table
+          # No-result searches re-render the page without a gvSearchResult2 table (observed for
+          # weekend-only windows); the search web part is still present in those re-renders.
+          return [] if html.include?("btnSearch1")
+
+          raise "BI: neither results table nor search form in response for #{currency.strip}"
+        end
 
         records = []
         table.scan(%r{<tr[^>]*>(.*?)</tr>}mi) do |row_html,|
