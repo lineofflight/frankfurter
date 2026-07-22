@@ -69,7 +69,7 @@ The base class provides a private `http` method (an `HTTP::Client` from the `htt
   end
   ```
 - **Semantic failures** (the response is 200 but doesn't contain what the adapter expects: a missing download link, an empty workbook) raise `RuntimeError` with a message that names the provider and what went wrong, e.g. `raise "no workbook link on #{DATA_URL}"` (see `lib/provider/adapters/cbs.rb`).
-- **Big downloads**: override `def read_timeout = 120` (private, instance-level) when a source serves a large file slowly. The default is 60s.
+- **Timeouts**: the shared client sets connect 10s, write 60s, read 120s. The read deadline is per socket read (it resets on every chunk), so slow-but-steady downloads never trip it; only a server silent for over two minutes does. No per-adapter tuning.
 - **Exotic patterns**: reach for these only when a provider needs them:
   - Legacy TLS: pass a per-request `ssl_context` (see `lib/provider/adapters/bcn.rb`, `boa.rb`, `rbv.rb`).
   - `http.persistent(BASE_URL) { |client| ... }` for endpoints that misbehave across separate connections, or where you want exact parity with a legacy single-connection flow (see `lib/provider/adapters/bota.rb`).

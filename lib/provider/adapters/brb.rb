@@ -143,7 +143,6 @@ class Provider
         end.uniq { |date, _| date }
       end
 
-      def read_timeout = 120
     end
   end
 end

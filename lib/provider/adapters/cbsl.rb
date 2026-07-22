@@ -90,7 +90,6 @@ class Provider
         http.post(ENDPOINT, form:).to_s
       end
 
-      def read_timeout = 120
     end
   end
 end

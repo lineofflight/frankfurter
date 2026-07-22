@@ -117,7 +117,6 @@ class Provider
         nil
       end
 
-      def read_timeout = 120
     end
   end
 end

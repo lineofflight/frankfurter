@@ -86,7 +86,6 @@ class Provider
 
       private
 
-      def read_timeout = 120
 
       def discover_file_url(page)
         doc = Nokogiri::HTML.parse(page)

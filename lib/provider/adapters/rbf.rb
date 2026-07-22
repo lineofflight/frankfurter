@@ -126,7 +126,6 @@ class Provider
         http.get(url).to_s
       end
 
-      def read_timeout = 120
 
       def shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")

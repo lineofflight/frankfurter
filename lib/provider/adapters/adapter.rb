@@ -63,11 +63,9 @@ class Provider < Sequel::Model(:providers)
         @http ||= HTTP
           .use(ensure_success: { ignore: [429] })
           .retriable(retry_statuses: [429])
-          .timeout(connect: 10, write: 60, read: read_timeout)
+          .timeout(connect: 10, write: 60, read: 120)
           .headers("User-Agent" => USER_AGENT)
       end
-
-      def read_timeout = 60
     end
   end
 end
