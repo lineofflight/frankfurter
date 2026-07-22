@@ -7,6 +7,10 @@ class Provider < Sequel::Model(:providers)
     class Adapter
       USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)"
 
+      # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose source publishes precious-metal rates per
+      # gram multiply by this to convert into the per-ounce convention used across the app.
+      GRAMS_PER_TROY_OUNCE = 31.1034768
+
       # Raises on any response that is not 2xx. Stricter than http.rb's built-in raise_error feature (>= 400 only): a
       # redirect from a moved or retired page must fail loudly, not parse as an empty day. 429 passes through so the
       # client's retriable layer can honor Retry-After; exhaustion raises HTTP::OutOfRetriesError, so no 429 reaches an
@@ -25,11 +29,6 @@ class Provider < Sequel::Model(:providers)
 
         HTTP::Options.register_feature(:ensure_success, self)
       end
-
-      # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose
-      # source publishes precious-metal rates per gram multiply by this to
-      # convert into the per-ounce convention used across the app.
-      GRAMS_PER_TROY_OUNCE = 31.1034768
 
       class << self
         def inherited(subclass)
