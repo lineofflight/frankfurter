@@ -22,10 +22,10 @@ class Provider < Sequel::Model(:providers)
     # unit (not per 100), so no normalization is needed.
     #
     # TLS quirk: www.rbv.gov.vu serves a malformed chain that omits its issuer,
-    # the Trustico RSA DV SSL CA 2 intermediate. Ruby's net/http rejects it
-    # because OpenSSL can't link the leaf to a trusted root. We bundle the
-    # intermediate at config/rbv_ca_bundle.pem and load it into the cert store
-    # at request time rather than disabling verification (same approach as BoA).
+    # the Trustico RSA DV SSL CA 2 intermediate, so the default trust store
+    # can't build a chain to a root. We bundle the intermediate at
+    # config/rbv_ca_bundle.pem and pass it via an explicit ssl_context on each
+    # http.rb request rather than disabling verification (same approach as BoA).
     class RBV < Adapter
       URL = "https://www.rbv.gov.vu/index.php/en/exchange-rates"
       PAGE_SIZE = 100_000

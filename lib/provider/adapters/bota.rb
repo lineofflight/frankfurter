@@ -27,31 +27,33 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        # ASP.NET MVC antiforgery validation ties the token to the TCP connection that
-        # issued it: a GET and POST over separate one-shot connections gets a 500 even
-        # with a matching cookie + token. Use a persistent client so both requests share
-        # one connection, chained off the base client so ensure_success, retries,
-        # timeouts, and the User-Agent carry over.
-        client = http.persistent(BASE_URL)
-        get = client.get(FORM_URL)
-        cookie = cookie_header(get)
-        token = extract_token(get.to_s)
-        raise "BOTA: no antiforgery token" unless token
+        # Persistent mode is kept as exact parity with the old single-connection
+        # Net::HTTP flow against a demonstrably flaky endpoint, not because the
+        # antiforgery token is tied to the TCP connection (separate connections
+        # work fine; live verification traced the earlier 500s to endpoint
+        # flakiness that also hit the old code). Chained off the base client so
+        # ensure_success, retries, timeouts, and the User-Agent carry over.
+        http.persistent(BASE_URL) do |client|
+          get = client.get(FORM_URL)
+          cookie = cookie_header(get)
+          token = extract_token(get.to_s)
+          raise "BOTA: no antiforgery token" unless token
 
-        response = client
-          .headers("Cookie" => cookie)
-          .post(
-            FORM_URL,
-            form: {
-              TOKEN_FIELD => token,
-              "dateFrom" => after.strftime("%m/%d/%Y"),
-              "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
-            },
-          )
-          .to_s
+          response = client
+            .headers("Cookie" => cookie)
+            .post(
+              FORM_URL,
+              form: {
+                TOKEN_FIELD => token,
+                "dateFrom" => after.strftime("%m/%d/%Y"),
+                "dateTo" => (upto || Date.today).strftime("%m/%d/%Y"),
+              },
+            )
+            .to_s
 
-        sleep(2)
-        parse(response)
+          sleep(2)
+          parse(response)
+        end
       end
 
       def parse(html)

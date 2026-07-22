@@ -192,14 +192,15 @@ class Provider
         # connection across all ~60 per-currency requests instead of opening
         # a new one each time. The sleep between requests adds further
         # pacing on top of that.
-        client = http.persistent(HISTORICAL_URL)
-        first = true
-        CURRENCIES.each do |currency|
-          sleep(0.5) unless first
-          first = false
+        http.persistent(HISTORICAL_URL) do |client|
+          first = true
+          CURRENCIES.each do |currency|
+            sleep(0.5) unless first
+            first = false
 
-          html = fetch_historical_currency(client, currency[:id], after, upto)
-          dataset.concat(parse_historical(html, iso: currency[:iso], nominal: currency[:nominal]))
+            html = fetch_historical_currency(client, currency[:id], after, upto)
+            dataset.concat(parse_historical(html, iso: currency[:iso], nominal: currency[:nominal]))
+          end
         end
 
         dataset

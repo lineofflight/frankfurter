@@ -68,11 +68,11 @@ The base class provides a private `http` method (an `HTTP::Client` from the `htt
     []
   end
   ```
-- **Semantic failures** (the response is 200 but doesn't contain what the adapter expects (a missing download link), an empty workbook) raise `RuntimeError` with a message that names the provider and what went wrong, e.g. `raise "no workbook link on #{DATA_URL}"` (see `lib/provider/adapters/cbs.rb`).
+- **Semantic failures** (the response is 200 but doesn't contain what the adapter expects: a missing download link, an empty workbook) raise `RuntimeError` with a message that names the provider and what went wrong, e.g. `raise "no workbook link on #{DATA_URL}"` (see `lib/provider/adapters/cbs.rb`).
 - **Big downloads**: override `def read_timeout = 120` (private, instance-level) when a source serves a large file slowly. The default is 60s.
 - **Exotic patterns**: reach for these only when a provider needs them:
   - Legacy TLS: pass a per-request `ssl_context` (see `lib/provider/adapters/bcn.rb`, `boa.rb`, `rbv.rb`).
-  - Session-affinity endpoints (e.g. ASP.NET antiforgery tokens tied to a TCP connection): `http.persistent(BASE_URL)` keeps a GET/POST pair on one connection (see `lib/provider/adapters/bota.rb`).
+  - `http.persistent(BASE_URL) { |client| ... }` for endpoints that misbehave across separate connections, or where you want exact parity with a legacy single-connection flow (see `lib/provider/adapters/bota.rb`).
   - Cookie-based login legs: read `response.headers.get("Set-Cookie")` off the first response and forward it on the next request (see `lib/provider/adapters/cbe.rb`, `mas.rb`, `bi.rb`, `nbc.rb`).
 
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`

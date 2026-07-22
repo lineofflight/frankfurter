@@ -20,10 +20,10 @@ class Provider
     # the adapter scrapes the donnees-historiques hub for the current link rather than
     # hardcoding a path.
     #
-    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate. Ruby's net/http
-    # rejects the chain because OpenSSL can't link the leaf to a trusted root. We
-    # bundle the DigiCert intermediate at config/boa_ca_bundle.pem and load it into
-    # the cert store at request time instead of disabling verification.
+    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the
+    # default trust store can't build a chain to a root. We bundle the DigiCert
+    # intermediate at config/boa_ca_bundle.pem and pass it via an explicit
+    # ssl_context on each http.rb request instead of disabling verification.
     #
     # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and
     # contains two columns: Excel serial dates in column A, "1 CCY = X DZD" rates

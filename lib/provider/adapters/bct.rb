@@ -30,9 +30,6 @@ class Provider
     class BCT < Adapter
       URL = "https://www.bct.gov.tn/bct/siteprod/cours_archiv.jsp"
       REFERER = "https://www.bct.gov.tn/bct/siteprod/cours_archive.jsp"
-      # The CDN began returning HTTP 500 for the default Net::HTTP "Ruby" User-Agent
-      # in mid-2026; a non-library User-Agent is required.
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       DATE_RE = %r{Journée du\s*(\d{2})/(\d{2})/(\d{4})}
       SIGLE_RE = /\A([A-Z]{3})\z/
@@ -91,7 +88,7 @@ class Provider
 
       def fetch_date(date)
         form = { input: date.strftime("%Y-%m-%d"), langue: "_AN" }
-        headers = { "Referer" => REFERER, "User-Agent" => USER_AGENT }
+        headers = { "Referer" => REFERER }
 
         response = http.post(URL, form:, headers:)
         parse(decode(response), date:)
