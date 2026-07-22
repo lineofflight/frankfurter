@@ -106,6 +106,12 @@ class Provider < Sequel::Model(:providers)
 
         _(error.message).must_match(/undated results/)
       end
+
+      it "raises when fecha is false rather than null" do
+        error = assert_raises(RuntimeError) { adapter.parse({ "results" => { "fecha" => false, "detalle" => [] } }) }
+
+        _(error.message).must_match(/undated results/)
+      end
     end
   end
 end

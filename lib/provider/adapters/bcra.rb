@@ -46,7 +46,7 @@ class Provider
         fecha = results["fecha"]
         unless fecha
           # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
-          return [] if results.key?("fecha") && detalle.empty?
+          return [] if results.key?("fecha") && fecha.nil? && detalle.empty?
 
           raise "BCRA: undated results that do not match the holiday shape"
         end
