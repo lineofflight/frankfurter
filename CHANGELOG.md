@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Cross-rate conversion during blending now resolves bridge rates through a per-group hash index instead of rescanning the group per row. Long-range multi-provider queries spend the bulk of their time in this path; a full-history export runs about 25% faster, which matters most right after a CDN cache purge when heavy exports all recompute at once.
 - Provider HTTP errors no longer record silent no-data days; every non-2xx response now fails the fetch loudly and is retried on the next scheduled run.
 - Adapter parsers no longer convert alien 200 responses (a maintenance page, a homepage standing in for a retired file, a restructured API) into silent no-data days. An audit of all 81 defensive empty returns across 48 provider adapters converted structural guards (a missing rates table, JSON envelope, or workbook sheet) into loud failures that abort the run for retry, and narrowed the legitimately-empty cases (holiday pages, image-only scans, empty-year responses) to observed no-data markers, each documented in place and verified against live provider responses. (#563)
 - V2 latest rates now consider legitimate provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as they are published instead of appearing only after the UTC date rolls over. Explicit date and range queries keep their requested date boundaries.
