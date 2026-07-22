@@ -64,8 +64,8 @@ class Provider
         num_dates = date_index.size
         if num_dates.zero?
           # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat
-          # body: no values and no series alongside the empty date index
-          return [] if values.empty? && data.dig("extension", "series") == []
+          # body: an explicit empty value array and series list alongside the empty date index
+          return [] if data["value"] == [] && data.dig("extension", "series") == []
 
           raise "BDP: dateless JSON-stat response is not the observed empty shape"
         end

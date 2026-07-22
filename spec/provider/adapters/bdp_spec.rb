@@ -181,6 +181,14 @@ class Provider < Sequel::Model(:providers)
         _(error.message).must_match(/not the observed empty shape/)
       end
 
+      it "raises when a dateless response omits the value array" do
+        json = { "extension" => { "series" => [] }, "dimension" => {} }
+
+        error = assert_raises(RuntimeError) { adapter.parse(json) }
+
+        _(error.message).must_match(/not the observed empty shape/)
+      end
+
       it "fetches rates for a historical date range" do
         dataset = adapter.fetch(after: Date.new(1998, 12, 28), upto: Date.new(1998, 12, 31))
 

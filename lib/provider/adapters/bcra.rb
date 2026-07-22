@@ -46,9 +46,9 @@ class Provider
         fecha = results["fecha"]
         unless fecha
           # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
-          return [] if detalle.empty?
+          return [] if results.key?("fecha") && detalle.empty?
 
-          raise "BCRA: undated results with nonempty detalle"
+          raise "BCRA: undated results that do not match the holiday shape"
         end
 
         # Skip the entire date if any currency code appears more than once
