@@ -92,6 +92,14 @@ class Provider < Sequel::Model(:providers)
 
         _(error.message).must_match(/detalle missing/)
       end
+
+      it "raises when detalle is nonempty but fecha is null" do
+        error = assert_raises(RuntimeError) do
+          adapter.parse({ "results" => { "fecha" => nil, "detalle" => [{ "codigoMoneda" => "USD" }] } })
+        end
+
+        _(error.message).must_match(/undated results/)
+      end
     end
   end
 end

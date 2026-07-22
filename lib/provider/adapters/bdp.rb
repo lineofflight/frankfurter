@@ -62,8 +62,13 @@ class Provider
         date_index = data.dig("dimension", "reference_date", "category", "index") || []
         values = data["value"] || []
         num_dates = date_index.size
-        # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat body
-        return [] if num_dates.zero?
+        if num_dates.zero?
+          # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat
+          # body: no values and no series alongside the empty date index
+          return [] if values.empty? && data.dig("extension", "series") == []
+
+          raise "BDP: dateless JSON-stat response is not the observed empty shape"
+        end
         raise "BDP: no recognizable currency series in JSON-stat response" if codes.empty?
 
         records = []

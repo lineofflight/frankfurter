@@ -44,8 +44,12 @@ class Provider
         raise "BCRA: detalle missing from results envelope" unless detalle.is_a?(Array)
 
         fecha = results["fecha"]
-        # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
-        return [] unless fecha
+        unless fecha
+          # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
+          return [] if detalle.empty?
+
+          raise "BCRA: undated results with nonempty detalle"
+        end
 
         # Skip the entire date if any currency code appears more than once
         codes = detalle.filter_map { |item| item["codigoMoneda"]&.strip }
