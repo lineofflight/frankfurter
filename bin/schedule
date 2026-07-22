@@ -5,12 +5,16 @@ $stdout.sync = true
 
 require "rufus-scheduler"
 require_relative "../boot"
+require "cache"
 require "provider"
 require "provider/adapters"
 
 dry_run = ARGV.include?("--dry-run")
 
 scheduler = Rufus::Scheduler.new(max_work_threads: DB.pool.max_size) unless dry_run
+
+# Trailing edge of the purge debounce: flush a purge the backfills coalesced once its window expires.
+scheduler.every("60s") { Cache.purge_pending } unless dry_run
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
 Provider.all.shuffle.each_with_index do |provider, index|

@@ -65,6 +65,29 @@ describe App do
     _(json["message"]).must_equal("not found")
   end
 
+  # Through the full middleware stack: the RequestTimeout middleware must not swallow a 503 the
+  # query generated after its own (later-starting) deadline expired.
+  it "delivers a v2 deadline 503 through the middleware stack" do
+    slow_query = Object.new
+    def slow_query.range? = true
+    def slow_query.date_relative? = false
+    def slow_query.cache_key = "x"
+
+    def slow_query.each
+      return to_enum(:each) unless block_given?
+
+      raise RequestTimeout::Error, "request exceeded 90s timeout"
+    end
+
+    Versions::V2::RateQuery.stub(:new, slow_query) do
+      get "/v2/rates?from=2024-01-01&to=2024-02-01"
+    end
+
+    _(last_response.status).must_equal(503)
+    _(last_response.headers["cache-control"]).must_equal("no-store")
+    _(Oj.load(last_response.body)["message"]).must_include("timeout")
+  end
+
   describe "error responses are not cached" do
     [
       ["root 404", "/nonexistent", 404],

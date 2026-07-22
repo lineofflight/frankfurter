@@ -22,7 +22,7 @@
       "get": {
         "operationId": "getRates",
         "summary": "Get exchange rates",
-        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record.",
+        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record. Interim limit: date ranges spanning more than 5 years at daily granularity return 422 unless `quotes` narrows the response to at most 5 currencies; either filter with `quotes`, aggregate with `group=week` or `group=month`, or split the range into shorter requests. The cap is interim and will be lifted for plain daily ranges once blended rates are materialized (tracked in issue 570).",
         "parameters": [
           { "$ref": "#/components/parameters/date" },
           { "$ref": "#/components/parameters/from" },
@@ -58,7 +58,8 @@
             }
           },
           "422": { "$ref": "#/components/responses/UnprocessableEntity" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
         }
       }
     },
@@ -94,7 +95,8 @@
             }
           },
           "422": { "$ref": "#/components/responses/UnprocessableEntity" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
         }
       }
     },
@@ -395,6 +397,19 @@
       },
       "NotFound": {
         "description": "No data found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "The request deadline expired before the response could be computed. Retry with a narrower request: filter with quotes, aggregate with group, or split the range into shorter requests.",
         "content": {
           "application/json": {
             "schema": {

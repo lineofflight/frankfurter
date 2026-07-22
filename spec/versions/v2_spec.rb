@@ -354,6 +354,44 @@ describe Versions::V2 do
     _(json["message"]).must_include("unknown parameter")
   end
 
+  it "returns 422 for unfiltered daily ranges longer than 5 years" do
+    get "/rates?from=2000-01-01"
+
+    _(last_response.status).must_equal(422)
+    assert_conform_schema(422)
+    _(json["message"]).must_include("quotes=")
+    _(json["message"]).must_include("group=week or group=month")
+    _(json["message"]).must_include("split the range")
+  end
+
+  it "serves daily ranges longer than 5 years with a small quotes filter" do
+    get "/rates?from=2020-01-01&to=#{Fixtures.latest_date}&quotes=USD"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+  end
+
+  it "returns 503 when the deadline expires before streaming starts" do
+    slow_query = Object.new
+    def slow_query.range? = true
+    def slow_query.date_relative? = false
+    def slow_query.cache_key = "x"
+
+    def slow_query.each
+      return to_enum(:each) unless block_given?
+
+      raise RequestTimeout::Error, "request exceeded 90s timeout"
+    end
+
+    Versions::V2::RateQuery.stub(:new, slow_query) do
+      get "/rates?from=#{range_start}&to=#{range_end}"
+    end
+
+    _(last_response.status).must_equal(503)
+    assert_conform_schema(503)
+    _(json["message"]).must_include("timeout")
+  end
+
   it "routes deterministic errors in range queries through error_handler" do
     bad_query = Object.new
     def bad_query.range? = true

@@ -5,6 +5,7 @@ require "set"
 
 require "roda"
 require "rate"
+require "request_timeout"
 require "weekly_rate"
 require "monthly_rate"
 require "roundable"
@@ -26,10 +27,18 @@ module Versions
       CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
       DEFAULT_CHUNK_MONTHS = 3
       LATEST_FUTURE_DAYS = 1
+      # Interim cap pending materialized blends (#570): daily-granularity ranges recompute the blend per
+      # date, and past 5 years unfiltered the compute outlives both the request timeout and Cloudflare's
+      # origin ceiling, so the response can never complete or cache. Cost scales with days x quotes, so a
+      # small quotes filter exempts a long range.
+      MAX_DAILY_RANGE_YEARS = 5
+      MAX_DAILY_RANGE_QUOTES = 5
       PIVOT = "USD"
 
-      def initialize(params)
+      def initialize(params, timeout = RequestTimeout::DEFAULT_SECONDS)
         @params = params
+        @timeout = timeout
+        @deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
         validate!
       end
 
@@ -208,6 +217,7 @@ module Versions
         validate_group!
         validate_expand!
         validate_currencies!
+        validate_range_cost!
       end
 
       def validate_params!
@@ -239,6 +249,17 @@ module Versions
         invalid << base if @params[:base] && !Money::Currency.find(base)
         invalid.concat(quotes.reject { |q| Money::Currency.find(q) }) if quotes
         raise ValidationError, "invalid currency: #{invalid.join(",")}" if invalid.any?
+      end
+
+      def validate_range_cost!
+        return unless range? && !rollup?
+        return if quotes && quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
+        # Cost follows computable days, so a `to` in the future counts only up to today.
+        return if [date_scope.end, Date.today].min <= (date_scope.begin >> (MAX_DAILY_RANGE_YEARS * 12))
+
+        raise ValidationError, "date range exceeds #{MAX_DAILY_RANGE_YEARS} years at daily granularity; " \
+          "filter with quotes= (#{MAX_DAILY_RANGE_QUOTES} currencies or fewer), " \
+          "aggregate with group=week or group=month, or split the range into shorter requests"
       end
 
       def date_scope
@@ -351,14 +372,24 @@ module Versions
         rows.each { |r| r.values[:date] = r.values.delete(date_col) }
       end
 
+      # Enforces the request deadline where the compute actually happens: Puma pulls streamed chunks into
+      # its own buffer as fast as the app yields, so the middleware's between-chunk check cannot bound a
+      # doomed or abandoned range compute. Checking here stops it at the deadline server-side (#569).
       def each_chunk(range)
         months = CHUNK_MONTHS.fetch(group, DEFAULT_CHUNK_MONTHS)
         cursor = range.begin
         while cursor <= range.end
+          check_deadline!
           chunk_end = [(cursor >> months) - 1, range.end].min
           yield cursor..chunk_end
           cursor = chunk_end + 1
         end
+      end
+
+      def check_deadline!
+        return if Process.clock_gettime(Process::CLOCK_MONOTONIC) < @deadline
+
+        raise RequestTimeout::Error, "request exceeded #{@timeout}s timeout"
       end
 
       # True iff every input row already has effective_base as its :base. In that case there is nothing to

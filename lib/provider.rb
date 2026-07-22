@@ -96,7 +96,7 @@ class Provider < Sequel::Model(:providers)
       Log.info("#{key}: inserted #{inserted} rates")
       next if inserted.zero?
 
-      Cache.purge
+      Cache.purge_debounced
       db.run("PRAGMA optimize")
     end
     Log.info("#{key}: fetched no records") unless fetched

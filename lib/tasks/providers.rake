@@ -2,6 +2,7 @@
 
 desc "Backfill rates from all providers (incremental from last stored date)"
 task :backfill, [:provider] do |_t, args|
+  require "cache"
   require "provider"
   require "provider/adapters"
 
@@ -27,4 +28,7 @@ task :backfill, [:provider] do |_t, args|
       end
     end.each(&:join)
   end
+
+  # The wave is over and the process is about to exit, so flush any purge the debounce deferred.
+  Cache.purge_pending(ignore_window: true)
 end

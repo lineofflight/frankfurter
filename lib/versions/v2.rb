@@ -4,6 +4,7 @@ require "csv"
 require "currency"
 require "oj"
 require "provider"
+require "request_timeout"
 require "roda"
 require "versions/v2/rate_query"
 
@@ -35,6 +36,7 @@ module Versions
     plugin :error_handler do |error|
       status = case error
       when RateQuery::ValidationError then 422
+      when RequestTimeout::Error then 503
       else 500
       end
       request.halt(status, { status:, message: error.message })
