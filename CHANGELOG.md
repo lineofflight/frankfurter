@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Provider HTTP errors no longer record silent no-data days; every non-2xx response now fails the fetch loudly and is retried on the next scheduled run.
 - V2 latest rates now consider legitimate provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as they are published instead of appearing only after the UTC date rolls over. Explicit date and range queries keep their requested date boundaries.
 
 ### Fixed

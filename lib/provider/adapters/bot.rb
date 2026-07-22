@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -16,23 +15,20 @@ class Provider
       BASE_URL = "https://gateway.api.bot.or.th/Stat-ExchangeRate/v2/DAILY_AVG_EXG_RATE/"
 
       class << self
-        def api_key = ENV["BOT_API_KEY"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["BOT_API_KEY"] || raise("no API key")
         def backfill_range = 30 # API enforces max 31-day period per request
       end
 
       def fetch(after: nil, upto: nil)
-        uri = URI(BASE_URL)
-        uri.query = URI.encode_www_form(
-          start_period: after.strftime("%Y-%m-%d"),
-          end_period: (upto || Date.today).strftime("%Y-%m-%d"),
-        )
-
-        response = Net::HTTP.get_response(uri, {
+        response = http.headers(
           "Authorization" => self.class.api_key,
           "Accept" => "application/json",
-        })
+        ).get(BASE_URL, params: {
+          start_period: after.strftime("%Y-%m-%d"),
+          end_period: (upto || Date.today).strftime("%Y-%m-%d"),
+        }).to_s
 
-        parse(response.body)
+        parse(response)
       end
 
       def parse(body)

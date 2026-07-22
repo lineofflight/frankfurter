@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "spreadsheet"
 require "stringio"
-require "uri"
 
 require "provider/adapters/adapter"
 
@@ -229,26 +227,11 @@ class Provider
       end
 
       def download_year(year)
-        uri = URI(YEAR_URL)
-        uri.query = URI.encode_www_form(anio: year)
-        http_get(uri)
+        http.get(YEAR_URL, params: { anio: year }).to_s
       end
 
       def download_daily(date)
-        uri = URI(DAILY_URL)
-        uri.query = URI.encode_www_form(qdd: date.day, qmm: date.month, qaa: date.year)
-        http_get(uri)
-      end
-
-      def http_get(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        response = http.get(uri.request_uri)
-        response.value
-        response.body
+        http.get(DAILY_URL, params: { qdd: date.day, qmm: date.month, qaa: date.year }).to_s
       end
 
       def build_date(year, month, day)

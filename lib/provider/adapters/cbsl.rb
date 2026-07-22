@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -74,8 +73,7 @@ class Provider
       end
 
       def fetch_currencies
-        response = check!(Net::HTTP.get_response(FORM_PAGE), "CBSL form page")
-        doc = Nokogiri::HTML.parse(response.body)
+        doc = Nokogiri::HTML.parse(http.get(FORM_PAGE).to_s)
         doc.css('input[name="chk_cur[]"]').filter_map { |input| input["value"] }
       end
 
@@ -89,16 +87,7 @@ class Provider
         currencies.each { |value| form << ["chk_cur[]", value] }
         form << ["submit_button", "Submit"]
 
-        http = Net::HTTP.new(ENDPOINT.host, ENDPOINT.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        req = Net::HTTP::Post.new(ENDPOINT)
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(form)
-
-        check!(http.request(req), "CBSL #{after}..#{upto}").body
+        http.post(ENDPOINT, form:).to_s
       end
     end
   end

@@ -100,10 +100,8 @@ class Provider < Sequel::Model(:providers)
       db.run("PRAGMA optimize")
     end
     Log.info("#{key}: fetched no records") unless fetched
-  rescue Adapters::Adapter::Unavailable => e
-    Log.warn("#{key}: #{e.message}, skipping")
-  rescue *Adapters::Adapter::TRANSIENT_ERRORS => e
-    Log.error("#{key}: #{e.class}")
+  rescue StandardError => e
+    Log.error("#{key}: #{e.class}: #{e.message}, skipping")
   end
 
   private

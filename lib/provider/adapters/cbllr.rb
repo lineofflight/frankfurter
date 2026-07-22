@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -28,7 +27,6 @@ class Provider
     # single-pair adapters (e.g. BANREP, BCCR, MMA).
     class CBLLR < Adapter
       BASE_URL = "https://www.cbl.org.lr/research/buying-selling-rates"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
       RATE_PATTERN = %r{L\$\s*([\d.]+)\s*/\s*US\$}
 
       # Hard ceiling to avoid runaway pagination if the markup ever changes.
@@ -94,21 +92,9 @@ class Provider
       end
 
       def fetch_page(page)
-        uri = URI(BASE_URL)
-        uri.query = URI.encode_www_form(page: page) if page > 0
+        params = { page: page } if page > 0
 
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
-
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Accept"] = "text/html"
-
-        response = http.request(req)
-        response.value
-        response.body
+        http.get(BASE_URL, params: params).to_s
       end
     end
   end

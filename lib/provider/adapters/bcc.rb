@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -66,13 +65,11 @@ class Provider
       private
 
       def fetch_currency(code, start_date, end_date)
-        url = URI(HISTORICO_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(HISTORICO_URL, params: {
           "fechaInicio" => start_date.to_s,
           "fechaFin" => end_date.to_s,
           "codigoMoneda" => code,
-        )
-        response = Net::HTTP.get(url)
+        }).to_s
         parse(response, code)
       end
     end

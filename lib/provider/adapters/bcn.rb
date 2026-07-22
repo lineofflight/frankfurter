@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -12,6 +11,7 @@ class Provider
     # The RecuperaTC_Mes method returns all daily rates for a given month.
     class BCN < Adapter
       ENDPOINT = URI("https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx")
+      SOAP_ACTION = '"http://servicios.bcn.gob.ni/RecuperaTC_Mes"'
 
       class << self
         def backfill_range = 30
@@ -57,28 +57,28 @@ class Provider
       private
 
       def fetch_month(year, month)
-        body = soap_envelope(year, month)
+        post_envelope(soap_envelope(year, month))
+      end
 
-        response = Net::HTTP.start(
-          ENDPOINT.host,
-          ENDPOINT.port,
-          use_ssl: true,
-          open_timeout: 15,
-          read_timeout: 30,
-        ) do |http|
-          req = Net::HTTP::Post.new(ENDPOINT)
-          req["Content-Type"] = "text/xml; charset=utf-8"
-          req["SOAPAction"] = '"http://servicios.bcn.gob.ni/RecuperaTC_Mes"'
-          req.body = body
-          http.request(req)
+      def post_envelope(envelope)
+        http
+          .headers("Content-Type" => "text/xml; charset=utf-8", "SOAPAction" => SOAP_ACTION)
+          .post(ENDPOINT, body: envelope, ssl_context: legacy_tls_context)
+          .to_s
+      end
+
+      def legacy_tls_context
+        OpenSSL::SSL::SSLContext.new.tap do |ctx|
+          # set_params restores VERIFY_PEER and hostname verification, which a bare context omits.
+          ctx.set_params
+          ctx.min_version = OpenSSL::SSL::TLS1_VERSION
+          ctx.security_level = 0
         end
-
-        check!(response, "BCN #{year}-#{format("%02d", month)}").body
       end
 
       def check_tls_support!
         ctx = OpenSSL::SSL::SSLContext.new
-        raise Unavailable, "legacy TLS required" if ctx.security_level > 0
+        raise "legacy TLS required" if ctx.security_level > 0
       end
 
       def soap_envelope(year, month)

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -72,15 +71,10 @@ class Provider
       private
 
       def fetch_table(table_id)
-        uri = URI("#{BASE_URL}?action=get_wdtable&table_id=#{table_id}")
-        request = Net::HTTP::Post.new(uri)
-        request.set_form_data("draw" => "1", "start" => "0", "length" => "-1")
+        uri = "#{BASE_URL}?action=get_wdtable&table_id=#{table_id}"
+        form = { "draw" => "1", "start" => "0", "length" => "-1" }
 
-        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-          http.request(request)
-        end
-
-        parse(check!(response, "CBK table #{table_id}").body)
+        parse(http.post(uri, form:).to_s)
       end
 
       def parse_row(row)

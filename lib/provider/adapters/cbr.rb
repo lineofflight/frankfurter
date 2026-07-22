@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -13,9 +12,9 @@ class Provider
     # Metals come from xml_metall in RUB per gram; values are normalized to
     # per troy ounce here.
     class CBR < Adapter
-      DAILY_URL = URI("https://www.cbr.ru/scripts/XML_daily.asp")
-      DYNAMIC_URL = URI("https://www.cbr.ru/scripts/XML_dynamic.asp")
-      METAL_URL = URI("https://www.cbr.ru/scripts/xml_metall.asp")
+      DAILY_URL = "https://www.cbr.ru/scripts/XML_daily.asp"
+      DYNAMIC_URL = "https://www.cbr.ru/scripts/XML_dynamic.asp"
+      METAL_URL = "https://www.cbr.ru/scripts/xml_metall.asp"
 
       METAL_CODES = {
         "1" => "XAU",
@@ -52,17 +51,16 @@ class Provider
       private
 
       def fetch_metals(start_date, end_date)
-        url = METAL_URL.dup
-        url.query = URI.encode_www_form(
+        response = http.get(METAL_URL, params: {
           date_req1: start_date.strftime("%d/%m/%Y"),
           date_req2: end_date.strftime("%d/%m/%Y"),
-        )
+        }).to_s
 
-        parse_metals(Net::HTTP.get(url))
+        parse_metals(response)
       end
 
       def fetch_currency_list
-        doc = Ox.load(Net::HTTP.get(DAILY_URL))
+        doc = Ox.load(http.get(DAILY_URL).to_s)
         doc.locate("ValCurs/Valute").filter_map do |v|
           code = v.locate("CharCode").first&.text
           next unless code && !code.empty?
@@ -72,14 +70,13 @@ class Provider
       end
 
       def fetch_dynamic(valute_id, code, start_date, end_date)
-        url = DYNAMIC_URL.dup
-        url.query = URI.encode_www_form(
+        response = http.get(DYNAMIC_URL, params: {
           date_req1: start_date.strftime("%d/%m/%Y"),
           date_req2: end_date.strftime("%d/%m/%Y"),
           VAL_NM_RQ: valute_id,
-        )
+        }).to_s
 
-        Ox.load(Net::HTTP.get(url)).locate("ValCurs/Record").filter_map do |row|
+        Ox.load(response).locate("ValCurs/Record").filter_map do |row|
           date = Date.strptime(row[:Date], "%d.%m.%Y")
           next if date.saturday? || date.sunday?
 

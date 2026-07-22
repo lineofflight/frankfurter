@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -28,22 +27,19 @@ class Provider
       private
 
       def fetch_currencies
-        uri = URI("#{BASE_URL}?session=#{SESSION}")
-        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          http.get("#{uri.path}?#{uri.query}", HEADERS)
-        end
-        data = JSON.parse(response.body)
+        response = http.headers(HEADERS).get(BASE_URL, params: { session: SESSION }).to_s
+        data = JSON.parse(response)
         data["data"].map { |item| item["currency_code"] }
       end
 
       def fetch_currency(code, start_date, end_date)
         records = []
         each_month(start_date, end_date) do |year, month|
-          uri = URI("#{BASE_URL}/#{code}/year/#{year}/month/#{month}?session=#{SESSION}")
-          response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-            http.get("#{uri.path}?#{uri.query}", HEADERS)
-          end
-          data = JSON.parse(response.body)
+          response = http.headers(HEADERS).get(
+            "#{BASE_URL}/#{code}/year/#{year}/month/#{month}",
+            params: { session: SESSION },
+          ).to_s
+          data = JSON.parse(response)
           currency_data = data["data"]
           next if currency_data.nil? || currency_data.is_a?(Array)
 

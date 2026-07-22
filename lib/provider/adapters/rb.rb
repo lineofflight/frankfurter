@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -24,8 +23,7 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        uri = URI("#{BASE_URL}/#{after}/#{upto || Date.today}")
-        response = Net::HTTP.get(uri)
+        response = http.get("#{BASE_URL}/#{after}/#{upto || Date.today}").to_s
         parse(response)
       end
 

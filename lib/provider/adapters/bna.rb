@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -76,7 +75,7 @@ class Provider
       private
 
       def currency_codes
-        json = Net::HTTP.get(URI("#{BASE_URL}#{LIST_PATH}"))
+        json = http.get("#{BASE_URL}#{LIST_PATH}").to_s
         data = Oj.load(json, mode: :strict)
         return [] unless data.is_a?(Hash) && data["genericResponse"].is_a?(Array)
 
@@ -91,14 +90,13 @@ class Provider
       end
 
       def fetch_currency(code, start_date, end_date)
-        url = URI("#{BASE_URL}#{SERIES_PATH}")
-        url.query = URI.encode_www_form(
+        response = http.get("#{BASE_URL}#{SERIES_PATH}", params: {
           datainicio: start_date.to_s,
           datafim: end_date.to_s,
           tipocambio: "M",
           moeda: code,
-        )
-        parse(Net::HTTP.get(url))
+        }).to_s
+        parse(response)
       end
     end
   end

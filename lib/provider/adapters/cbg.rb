@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -98,8 +97,7 @@ class Provider
       private
 
       def fetch_currency(code)
-        url = URI(BASE_URL + code)
-        response = Net::HTTP.get(url)
+        response = http.get(BASE_URL + code).to_s
         parse(response, code)
       end
     end

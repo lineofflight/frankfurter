@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -64,21 +63,15 @@ class Provider
         nonce = fetch_nonce
         return [] unless nonce
 
-        uri = URI("#{BASE_URL}?action=get_wdtable&table_id=#{TABLE_ID}")
-        request = Net::HTTP::Post.new(uri)
-        request.set_form_data("draw" => "1", "start" => "0", "length" => "-1", "wdtNonce" => nonce)
+        uri = "#{BASE_URL}?action=get_wdtable&table_id=#{TABLE_ID}"
+        form = { "draw" => "1", "start" => "0", "length" => "-1", "wdtNonce" => nonce }
 
-        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-          http.request(request)
-        end
-
-        parse(check!(response, "BOJA table").body)
+        parse(http.post(uri, form:).to_s)
       end
 
       def fetch_nonce
-        uri = URI(PAGE_URL)
-        response = check!(Net::HTTP.get_response(uri), "BOJA nonce page")
-        match = response.body.match(NONCE_PATTERN)
+        body = http.get(PAGE_URL).to_s
+        match = body.match(NONCE_PATTERN)
         match&.captures&.first
       end
 

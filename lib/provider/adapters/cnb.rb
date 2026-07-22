@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -43,10 +42,7 @@ class Provider
       private
 
       def fetch_year(year)
-        url = URI(URL)
-        url.query = URI.encode_www_form(year: year, lang: "EN")
-        response = Net::HTTP.get(url)
-        parse(response)
+        parse(http.get(URL, params: { year: year, lang: "EN" }).to_s)
       end
     end
   end

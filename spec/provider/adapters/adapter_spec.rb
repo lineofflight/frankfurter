@@ -60,6 +60,49 @@ class Provider < Sequel::Model(:providers)
           _(params[-1][:upto]).must_be_nil
         end
       end
+
+      describe "http client" do
+        let(:adapter) { Class.new(Provider::Adapters::Adapter).new }
+        let(:client) { adapter.send(:http) }
+        let(:url) { "https://example.test/rates" }
+
+        after { WebMock.reset! }
+
+        it "returns 2xx responses" do
+          WebMock.stub_request(:get, url).to_return(status: 200, body: "ok")
+
+          assert_equal("ok", client.get(url).to_s)
+        end
+
+        it "raises on 4xx" do
+          WebMock.stub_request(:get, url).to_return(status: 403, body: "<html>blocked</html>")
+
+          error = assert_raises(HTTP::StatusError) { client.get(url) }
+          assert_equal(403, error.response.code)
+        end
+
+        it "raises on 5xx" do
+          WebMock.stub_request(:get, url).to_return(status: 500)
+
+          assert_raises(HTTP::StatusError) { client.get(url) }
+        end
+
+        it "raises on 3xx so moved endpoints fail loudly" do
+          WebMock.stub_request(:get, url).to_return(status: 301, headers: { "Location" => "https://example.test/new" })
+
+          assert_raises(HTTP::StatusError) { client.get(url) }
+        end
+
+        it "identifies as Frankfurter" do
+          stub = WebMock.stub_request(:get, url)
+            .with(headers: { "User-Agent" => "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)" })
+            .to_return(status: 200, body: "ok")
+
+          client.get(url).to_s
+
+          WebMock.assert_requested(stub)
+        end
+      end
     end
   end
 end

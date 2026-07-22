@@ -42,7 +42,7 @@ Required:
 
 Optional class methods (inside `class << self`):
 - `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call). The base class `fetch_each` uses this to iterate in windows.
-- `def api_key = ENV["X_API_KEY"] || raise(Unavailable, "no API key")` — if the API requires authentication. This is not a blocker — implement the adapter regardless. It activates when the key is configured at deploy time.
+- `def api_key = ENV["X_API_KEY"] || raise("no API key")` — if the API requires authentication. This is not a blocker — implement the adapter regardless. It activates when the key is configured at deploy time.
 
 Notes:
 - Adapters have **no `key` or `name`** — Provider model owns identity. The adapter class name must match the provider key (e.g., `Provider::Adapters::ECB` for key `"ECB"`).
@@ -52,6 +52,28 @@ Notes:
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
 - **Do not rescue errors** — let HTTP errors, timeouts, parse failures, and other exceptions bubble up. The scheduler handles retries; swallowing errors silently hides broken providers.
 - **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill_range` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. The base class `fetch_each` handles the iteration loop. See `lib/provider/adapters/nbg.rb` for a working example.
+
+#### The `http` client
+
+The base class provides a private `http` method (an `HTTP::Client` from the `http` gem): call `http.get(url)` or `http.post(url, ...)` rather than reaching for `Net::HTTP` or another client. It's pre-configured with a `User-Agent`, connect/write/read timeouts, and retriable 429s (Retry-After is honored automatically, so adapters never need to handle rate limiting themselves).
+
+- **Non-2xx raises.** Any response outside the 2xx range raises `HTTP::StatusError`, including redirects to a moved or retired page. There's no silent empty-array fallback: a bad response must fail the fetch, not look like a genuine no-data day.
+- **Tolerate specific statuses at the call site**, not by rescuing broadly. See `lib/provider/adapters/nbp.rb`, which expects 404 for date ranges with no working days:
+  ```ruby
+  def fetch_rates(table_url, start_date, end_date)
+    parse(http.get("#{table_url}/#{start_date}/#{end_date}/?format=json").to_s)
+  rescue HTTP::StatusError => e
+    raise unless e.response.code == 404
+
+    []
+  end
+  ```
+- **Semantic failures** (the response is 200 but doesn't contain what the adapter expects: a missing download link, an empty workbook) raise `RuntimeError` with a message that names the provider and what went wrong, e.g. `raise "no workbook link on #{DATA_URL}"` (see `lib/provider/adapters/cbs.rb`).
+- **Timeouts**: the shared client sets connect 10s, write 60s, read 120s. The read deadline is per socket read (it resets on every chunk), so slow-but-steady downloads never trip it; only a server silent for over two minutes does. No per-adapter tuning.
+- **Exotic patterns**: reach for these only when a provider needs them:
+  - Legacy TLS: pass a per-request `ssl_context` (see `lib/provider/adapters/bcn.rb`, `boa.rb`, `rbv.rb`).
+  - `http.persistent(BASE_URL) { |client| ... }` for endpoints that misbehave across separate connections, or where you want exact parity with a legacy single-connection flow (see `lib/provider/adapters/bota.rb`).
+  - Cookie-based login legs: read `response.headers.get("Set-Cookie")` off the first response and forward it on the next request (see `lib/provider/adapters/cbe.rb`, `mas.rb`, `bi.rb`, `nbc.rb`).
 
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`
 

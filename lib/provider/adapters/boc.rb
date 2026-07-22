@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -31,10 +30,7 @@ class Provider
       private
 
       def fetch_rates(**params)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(params)
-
-        parse(Net::HTTP.get(url))
+        parse(http.get(BASE_URL, params:).to_s)
       end
 
       def extract_rates(observation)

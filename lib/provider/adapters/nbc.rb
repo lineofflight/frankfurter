@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -26,7 +25,6 @@ class Provider < Sequel::Model(:providers)
     # code for Special Drawing Rights) on emit.
     class NBC < Adapter
       BASE_URL = "https://www.nbc.gov.kh/english/economic_research/exchange_rate.php"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
       SYMBOL_PATTERN = %r{\A([A-Z]{3})/KHR\z}
       OER_PATTERN = /\A(\d+)\z/
       CODE_ALIASES = { "SDR" => "XDR" }.freeze
@@ -97,14 +95,15 @@ class Provider < Sequel::Model(:providers)
         html.include?("There is no data available")
       end
 
-      # CloudFront's WAF intermittently 403s the POST; check! keeps that from parsing as a holiday.
+      # CloudFront's WAF intermittently 403s the POST; the client raises instead of a response body that would parse as
+      # an empty (holiday) day.
       def fetch_date(date)
         sleep(0.5)
         page, cookies = load_page
         token = extract_token(page)
-        raise Unavailable, "NBC: CSRF token not found on landing page" unless token
+        raise "NBC: CSRF token not found on landing page" unless token
 
-        parse(check!(post_date(date:, token:, cookies:), "NBC #{date}").body, date:)
+        parse(post_date(date:, token:, cookies:).to_s, date:)
       end
 
       def extract_token(html)
@@ -114,37 +113,19 @@ class Provider < Sequel::Model(:providers)
       end
 
       def load_page
-        uri = URI(BASE_URL)
-        http = build_http(uri)
-        req = Net::HTTP::Get.new(uri)
-        req["User-Agent"] = USER_AGENT
-        resp = check!(http.request(req), "NBC landing page")
-        cookies = resp.get_fields("set-cookie")&.map { |c| c.split(";").first }&.join("; ") || ""
-        [resp.body, cookies]
+        response = http.get(BASE_URL)
+        cookies = response.headers.get("Set-Cookie").map { |c| c.split(";").first }.join("; ")
+        [response.to_s, cookies]
       end
 
       def post_date(date:, token:, cookies:)
-        uri = URI(BASE_URL)
-        http = build_http(uri)
-        req = Net::HTTP::Post.new(uri)
-        req["User-Agent"] = USER_AGENT
-        req["Cookie"] = cookies unless cookies.empty?
-        req["Referer"] = BASE_URL
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(
-          "exdate" => date.strftime("%Y-%m-%d"),
-          "tk" => token,
-          "view" => "View",
-        )
-        http.request(req)
-      end
+        headers = { "Referer" => BASE_URL }
+        headers["Cookie"] = cookies unless cookies.empty?
 
-      def build_http(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme == "https"
-        http.open_timeout = 30
-        http.read_timeout = 60
-        http
+        http.headers(headers).post(
+          BASE_URL,
+          form: { "exdate" => date.strftime("%Y-%m-%d"), "tk" => token, "view" => "View" },
+        )
       end
     end
   end

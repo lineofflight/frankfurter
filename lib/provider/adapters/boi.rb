@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -13,15 +12,13 @@ class Provider
     class BOI < Adapter
       BASE_URL = "https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow/BOI.STATISTICS/EXR/1.0/"
       def fetch(after: nil, upto: nil)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(BASE_URL, params: {
           "c[DATA_TYPE]" => "OF00",
           "startperiod" => after.to_s,
           "endperiod" => (upto || Date.today).to_s,
           "format" => "csv",
-        )
+        }).to_s
 
-        response = Net::HTTP.get(url)
         parse(response)
       end
 

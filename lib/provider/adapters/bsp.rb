@@ -2,10 +2,8 @@
 
 require "date"
 require "json"
-require "net/http"
 require "pdf-reader"
 require "stringio"
-require "uri"
 
 require "provider/adapters/adapter"
 
@@ -64,7 +62,7 @@ class Provider
           sleep(0.5) unless first
           first = false
 
-          pdf_data = http_get(URI("#{HOST}#{url}"))
+          pdf_data = http.get("#{HOST}#{url}").to_s
           next unless pdf_data.start_with?("%PDF")
 
           dataset.concat(parse(pdf_data, date))
@@ -103,7 +101,9 @@ class Provider
           "&$expand=AttachmentFiles&$select=Id,Title,AttachmentFiles"
 
         loop do
-          body = http_get(URI(url), accept: "application/json;odata=verbose")
+          # SharePoint's REST API returns Atom/XML by default; the verbose OData Accept header is required to get JSON
+          # back.
+          body = http.get(url, headers: { "Accept" => "application/json;odata=verbose" }).to_s
           payload = JSON.parse(body)
           results = payload.dig("d", "results") || []
           break if results.empty?
@@ -139,20 +139,6 @@ class Provider
         Date.strptime(title.to_s.strip, "%d%b%Y")
       rescue ArgumentError
         nil
-      end
-
-      def http_get(uri, accept: nil)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        request = Net::HTTP::Get.new(uri.request_uri)
-        request["Accept"] = accept if accept
-
-        response = http.request(request)
-        response.value
-        response.body
       end
     end
   end

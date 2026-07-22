@@ -1,24 +1,34 @@
 # frozen_string_literal: true
 
+require "http"
+
 class Provider < Sequel::Model(:providers)
   module Adapters
     class Adapter
-      class Unavailable < StandardError
-      end
+      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)"
 
-      # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose
-      # source publishes precious-metal rates per gram multiply by this to
-      # convert into the per-ounce convention used across the app.
+      # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose source publishes precious-metal rates per
+      # gram multiply by this to convert into the per-ounce convention used across the app.
       GRAMS_PER_TROY_OUNCE = 31.1034768
 
-      TRANSIENT_ERRORS = [
-        Errno::ECONNRESET,
-        Errno::EPIPE,
-        Net::OpenTimeout,
-        Net::ReadTimeout,
-        OpenSSL::SSL::SSLError,
-        SocketError,
-      ].freeze
+      # Raises on any response that is not 2xx. Stricter than http.rb's built-in raise_error feature (>= 400 only): a
+      # redirect from a moved or retired page must fail loudly, not parse as an empty day. 429 passes through so the
+      # client's retriable layer can honor Retry-After; exhaustion raises HTTP::OutOfRetriesError, so no 429 reaches an
+      # adapter either.
+      class EnsureSuccess < HTTP::Feature
+        def initialize(ignore: [])
+          super()
+          @ignore = ignore
+        end
+
+        def wrap_response(response)
+          return response if response.status.success? || @ignore.include?(response.code)
+
+          raise HTTP::StatusError, response
+        end
+
+        HTTP::Options.register_feature(:ensure_success, self)
+      end
 
       class << self
         def inherited(subclass)
@@ -31,22 +41,14 @@ class Provider < Sequel::Model(:providers)
         def fetch_each(after: nil)
           return if after && after >= Date.today
 
-          retries = 0
           loop do
             upto = after + backfill_range - 1 if after && backfill_range
             upto = nil if upto && upto >= Date.today
             records = new.fetch(after:, upto:)
             yield records if records.any?
-            retries = 0
             break unless upto
 
             after = upto + 1
-          rescue *TRANSIENT_ERRORS
-            retries += 1
-            raise if retries > 5
-
-            sleep(2**retries)
-            retry
           end
         end
       end
@@ -57,14 +59,12 @@ class Provider < Sequel::Model(:providers)
 
       private
 
-      # An error response carries no rate data, so handing its body to a parser yields an empty
-      # array — indistinguishable from a genuine no-data day. Incremental backfill then moves
-      # last_synced past the date and never revisits it, minting a permanent hole. Raise instead:
-      # the run aborts and the next tick retries the date.
-      def check!(response, context = nil)
-        return response if response.is_a?(Net::HTTPSuccess)
-
-        raise Unavailable, ["HTTP #{response.code}", context].compact.join(" on ")
+      def http
+        @http ||= HTTP
+          .use(ensure_success: { ignore: [429] })
+          .retriable(retry_statuses: [429])
+          .timeout(connect: 10, write: 60, read: 120)
+          .headers("User-Agent" => USER_AGENT)
       end
     end
   end

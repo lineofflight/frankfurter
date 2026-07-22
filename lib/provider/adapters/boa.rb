@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "openssl"
 require "ox"
 require "stringio"
-require "uri"
 require "zip"
 
 require "provider/adapters/adapter"
@@ -22,10 +20,9 @@ class Provider
     # the adapter scrapes the donnees-historiques hub for the current link rather than
     # hardcoding a path.
     #
-    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate. Ruby's net/http
-    # rejects the chain because OpenSSL can't link the leaf to a trusted root. We
-    # bundle the DigiCert intermediate at config/boa_ca_bundle.pem and load it into
-    # the cert store at request time instead of disabling verification.
+    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to
+    # a root. We bundle the DigiCert intermediate at config/boa_ca_bundle.pem and pass it via an explicit ssl_context on
+    # each http.rb request instead of disabling verification.
     #
     # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and
     # contains two columns: Excel serial dates in column A, "1 CCY = X DZD" rates
@@ -91,32 +88,26 @@ class Provider
       private
 
       def locate_archive_url
-        body = http_get(URI(HUB_URL))
+        body = download(HUB_URL)
         match = body.match(ARCHIVE_LINK)
-        raise Unavailable, "BoA: archive XLSX link not found on #{HUB_URL}" unless match
+        raise "BoA: archive XLSX link not found on #{HUB_URL}" unless match
 
         match[1]
       end
 
+      # bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to a root.
+      # We augment it with the DigiCert intermediate instead of disabling verification.
       def download(url)
-        http_get(URI(url))
+        http.get(url, ssl_context: ssl_context).to_s
       end
 
-      def http_get(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        if http.use_ssl?
+      def ssl_context
+        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
           store = OpenSSL::X509::Store.new
           store.set_default_paths
           store.add_file(CA_BUNDLE)
-          http.cert_store = store
+          ctx.set_params(cert_store: store)
         end
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        response = http.get(uri.request_uri)
-        response.value
-        response.body
       end
 
       def parse_rels(xml)

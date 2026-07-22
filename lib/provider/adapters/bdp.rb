@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -83,16 +82,12 @@ class Provider
       private
 
       def fetch_page(after, upto, page)
-        url = URI(DATASET_URL)
         params = [["lang", "EN"], ["page", page]]
         DIM_CATS.each { |dim| params << ["dim_cats", dim] }
         params << ["obs_since", after.to_s] if after
         params << ["obs_to", upto.to_s] if upto
-        url.query = URI.encode_www_form(params)
 
-        response = Net::HTTP.get_response(url)
-        response.value
-        JSON.parse(response.body)
+        JSON.parse(http.get(DATASET_URL, params: params).to_s)
       end
 
       def build_codes(data)

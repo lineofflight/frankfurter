@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -15,7 +14,6 @@ class Provider
     # XAU is published per troy ounce already.
     class BCP < Adapter
       BASE_URL = "https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica"
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       # Quote currencies on the daily snapshot. Currencies have varying
       # historical depth — USD/EUR back to 2001, most others from ~2012, some
@@ -103,20 +101,7 @@ class Provider
       private
 
       def fetch_year(year, currency)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(anho: year, moneda: currency)
-        req = Net::HTTP::Get.new(url)
-        req["User-Agent"] = USER_AGENT
-
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
-
-        response = http.request(req)
-        response.value
-
-        parse(response.body, year:, currency:)
+        parse(http.get(BASE_URL, params: { anho: year, moneda: currency }).to_s, year:, currency:)
       end
 
       def parse_value(cell)

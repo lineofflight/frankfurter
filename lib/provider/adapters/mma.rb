@@ -2,7 +2,6 @@
 
 require "date"
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -19,14 +18,9 @@ class Provider
       BASE_URL = "https://www.mma.gov.mv/JSON/referencerates.json"
 
       def fetch(after: nil, upto: nil)
-        url = URI(BASE_URL)
-        url.query = URI.encode_www_form(v: (upto || Date.today).strftime("%Y%m%d"))
+        response = http.get(BASE_URL, params: { v: (upto || Date.today).strftime("%Y%m%d") }).to_s
 
-        response = Net::HTTP.start(url.host, url.port, use_ssl: true, open_timeout: 15, read_timeout: 30) do |http|
-          http.request(Net::HTTP::Get.new(url))
-        end
-
-        records = parse(response.body)
+        records = parse(response)
         records = records.select { |r| r[:date] >= after } if after
         records = records.select { |r| r[:date] <= upto } if upto
         records

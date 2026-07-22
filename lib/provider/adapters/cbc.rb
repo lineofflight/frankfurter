@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -50,7 +49,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
 
-        response = Net::HTTP.get(URI(API_URL))
+        response = http.get(API_URL).to_s
         data = JSON.parse(response)
         rows = data.dig("data", "dataSets") || []
 

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "csv"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -59,13 +58,11 @@ class Provider
       private
 
       def fetch_date(date)
-        url = URI(URL)
-        url.query = URI.encode_www_form(
+        response = http.get(URL, params: {
           referenceDate: date.strftime("%Y-%m-%d"),
           currencyIsoCode: "EUR",
           lang: "en",
-        )
-        response = Net::HTTP.get(url)
+        }).to_s
         parse(response)
       end
     end

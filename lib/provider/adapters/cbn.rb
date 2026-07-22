@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -47,7 +46,7 @@ class Provider
       }.freeze
 
       def fetch(after: nil, upto: nil)
-        response = Net::HTTP.get(URI(URL))
+        response = http.get(URL).to_s
         records = parse(response)
 
         records = records.select { |r| r[:date] > after } if after

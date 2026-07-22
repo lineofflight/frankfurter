@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -43,15 +42,10 @@ class Provider
           startDate: (after || Date.new(2001, 1, 1)).to_s,
           endDate: (upto || Date.today).to_s,
         )
-        response = Net::HTTP.start(ENDPOINT.host, ENDPOINT.port, use_ssl: true) do |http|
-          req = Net::HTTP::Post.new(ENDPOINT.path)
-          req["Content-Type"] = "application/json"
-          req["Accept"] = "application/json"
-          req.body = body
-          http.request(req)
-        end
+        headers = { "Content-Type" => "application/json", "Accept" => "application/json" }
+        response = http.post(ENDPOINT, body:, headers:)
 
-        records = parse(check!(response, "BOM").body)
+        records = parse(response.to_s)
         records = records.select { |r| r[:date] >= after } if after
         records = records.select { |r| r[:date] <= upto } if upto
         records

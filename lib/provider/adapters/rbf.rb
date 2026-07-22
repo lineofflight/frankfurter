@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 require "date"
-require "net/http"
 require "ox"
 require "stringio"
-require "uri"
 require "zip"
 
 require "provider/adapters/adapter"
@@ -117,26 +115,15 @@ class Provider
       private
 
       def locate_archive_url
-        body = http_get(URI(HUB_URL))
+        body = download(HUB_URL)
         match = body.match(ARCHIVE_LINK)
-        raise Unavailable, "RBF: exchange-rates XLSX link not found on #{HUB_URL}" unless match
+        raise "RBF: exchange-rates XLSX link not found on #{HUB_URL}" unless match
 
         match[1]
       end
 
       def download(url)
-        http_get(URI(url))
-      end
-
-      def http_get(uri)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = (uri.scheme == "https")
-        http.open_timeout = 30
-        http.read_timeout = 120
-
-        response = http.get(uri.request_uri)
-        response.value
-        response.body
+        http.get(url).to_s
       end
 
       def shared_strings(zip)

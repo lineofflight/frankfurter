@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "nokogiri"
 
 require "provider/adapters/adapter"
@@ -31,9 +30,6 @@ class Provider
     class BCT < Adapter
       URL = "https://www.bct.gov.tn/bct/siteprod/cours_archiv.jsp"
       REFERER = "https://www.bct.gov.tn/bct/siteprod/cours_archive.jsp"
-      # The CDN began returning HTTP 500 for the default Net::HTTP "Ruby" User-Agent
-      # in mid-2026; a non-library User-Agent is required.
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)"
 
       DATE_RE = %r{Journée du\s*(\d{2})/(\d{2})/(\d{4})}
       SIGLE_RE = /\A([A-Z]{3})\z/
@@ -91,19 +87,10 @@ class Provider
       private
 
       def fetch_date(date)
-        uri = URI(URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
-        http.open_timeout = 30
-        http.read_timeout = 60
+        form = { input: date.strftime("%Y-%m-%d"), langue: "_AN" }
+        headers = { "Referer" => REFERER }
 
-        req = Net::HTTP::Post.new(uri)
-        req["Referer"] = REFERER
-        req["User-Agent"] = USER_AGENT
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(input: date.strftime("%Y-%m-%d"), langue: "_AN")
-
-        response = check!(http.request(req), "BCT #{date}")
+        response = http.post(URL, form:, headers:)
         parse(decode(response), date:)
       end
 

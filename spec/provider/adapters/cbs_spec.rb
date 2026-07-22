@@ -91,8 +91,7 @@ class Provider < Sequel::Model(:providers)
         end
 
         it "raises when the page exposes no workbook link" do
-          _ { adapter.archive_url("<html><body>no link here</body></html>") }
-            .must_raise(Adapter::Unavailable)
+          assert_raises(RuntimeError) { adapter.archive_url("<html><body>no link here</body></html>") }
         end
       end
 

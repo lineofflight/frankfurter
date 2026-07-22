@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -88,15 +87,11 @@ class Provider
       private
 
       def fetch_date(date)
-        url = URI(FX_URL)
-        url.query = URI.encode_www_form(get_xml: 1, date: date.strftime("%d.%m.%Y"))
-        parse(Net::HTTP.get(url))
+        parse(http.get(FX_URL, params: { get_xml: 1, date: date.strftime("%d.%m.%Y") }).to_s)
       end
 
       def fetch_metals_date(date)
-        url = URI(METAL_URL)
-        url.query = URI.encode_www_form(get_xml: 1, date: date.strftime("%d.%m.%Y"))
-        parse_metals(Net::HTTP.get(url))
+        parse_metals(http.get(METAL_URL, params: { get_xml: 1, date: date.strftime("%d.%m.%Y") }).to_s)
       end
     end
   end

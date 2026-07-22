@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -74,9 +73,7 @@ class Provider
 
       def fetch_date(date)
         sleep(0.2)
-        url = URI(URL)
-        url.query = URI.encode_www_form(date: date.strftime("%Y-%m-%d"), export: "xmlout")
-        response = Net::HTTP.get(url)
+        response = http.get(URL, params: { date: date.strftime("%Y-%m-%d"), export: "xmlout" }).to_s
         parse(response, expected_date: date)
       end
     end

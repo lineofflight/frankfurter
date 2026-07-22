@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -71,8 +70,7 @@ class Provider
       private
 
       def fetch_series(code, start_date, end_date, base:, quote:)
-        url = URI("#{BASE_URL}/#{code}/#{start_date}/#{end_date}")
-        response = Net::HTTP.get(url)
+        response = http.get("#{BASE_URL}/#{code}/#{start_date}/#{end_date}").to_s
         parse(response, base:, quote:)
       end
     end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -58,25 +57,21 @@ class Provider
       private
 
       def fetch_rates(table_url, start_date, end_date)
-        url = URI("#{table_url}/#{start_date}/#{end_date}/?format=json")
-        response = Net::HTTP.get_response(url)
-
+        parse(http.get("#{table_url}/#{start_date}/#{end_date}/?format=json").to_s)
+      rescue HTTP::StatusError => e
         # This happens if the date range includes no working days
-        return [] if response.is_a?(Net::HTTPNotFound)
+        raise unless e.response.code == 404
 
-        response.value
-        parse(response.body)
+        []
       end
 
       def fetch_gold(start_date, end_date)
-        url = URI("#{GOLD_URL}/#{start_date}/#{end_date}/?format=json")
-        response = Net::HTTP.get_response(url)
-
+        parse_gold(http.get("#{GOLD_URL}/#{start_date}/#{end_date}/?format=json").to_s)
+      rescue HTTP::StatusError => e
         # This happens if the date range includes no working days
-        return [] if response.is_a?(Net::HTTPNotFound)
+        raise unless e.response.code == 404
 
-        response.value
-        parse_gold(response.body)
+        []
       end
 
       # NBP API limits queries to 93 days per request

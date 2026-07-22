@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
-
 require "provider/adapters/adapter"
 
 class Provider
@@ -9,7 +7,7 @@ class Provider
     # Bank of Botswana. Publishes daily rates for ~7 currencies against BWP.
     # The CSV export only contains these columns.
     class BOB < Adapter
-      CSV_URL = URI("https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv")
+      CSV_URL = "https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv"
 
       # Columns in the CSV mapped to ISO currency codes
       COLUMNS = {
@@ -25,7 +23,7 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        records = parse(Net::HTTP.get(CSV_URL))
+        records = parse(http.get(CSV_URL).to_s)
         after ? records.select { |r| r[:date] >= Date.parse(after.to_s) } : records
       end
 

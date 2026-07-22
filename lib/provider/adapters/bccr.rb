@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -28,22 +27,14 @@ class Provider
       def fetch(after: nil, upto: nil)
         token = fetch_token
 
-        url = URI(DATA_URL)
-        url.query = URI.encode_www_form(
+        response = http.headers("token_csrf" => token, "Origin" => "https://sdd.bccr.fi.cr").get(DATA_URL, params: {
           "IdGrupoVariable" => GROUP_ID,
           "FechaInicio" => "#{after}T00:00:00",
           "FechaFin" => (upto || Date.today).to_s,
           "CantidadSeriesAMostrar" => 100,
-        )
+        }).to_s
 
-        response = Net::HTTP.start(url.host, url.port, use_ssl: true, open_timeout: 15, read_timeout: 30) do |http|
-          req = Net::HTTP::Get.new(url)
-          req["token_csrf"] = token
-          req["Origin"] = "https://sdd.bccr.fi.cr"
-          http.request(req)
-        end
-
-        parse(response.body)
+        parse(response)
       end
 
       def parse(json)
@@ -75,8 +66,7 @@ class Provider
       private
 
       def fetch_token
-        uri = URI(TOKEN_URL)
-        Net::HTTP.get(uri)
+        http.get(TOKEN_URL).to_s
       end
 
       def parse_date(date_str)

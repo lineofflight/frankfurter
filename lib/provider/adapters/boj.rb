@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -23,18 +22,14 @@ class Provider
         effective_after = after
         effective_upto = upto || Date.today
 
-        url = URI(API_URL)
-        params = {
+        response = http.get(API_URL, params: {
           format: "json",
           lang: "en",
           db: "FM08",
           code: SERIES.keys.join(","),
           startDate: effective_after.strftime("%Y%m"),
           endDate: effective_upto.strftime("%Y%m"),
-        }
-        url.query = URI.encode_www_form(params)
-
-        response = Net::HTTP.get(url)
+        }).to_s
         raw = parse(response)
         raw.select { |r| r[:date].between?(effective_after, effective_upto) }
       end

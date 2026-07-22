@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -15,8 +14,7 @@ class Provider
       BASE_URL = "https://forex.cbm.gov.mm/api/latest"
 
       def fetch(after: nil, upto: nil)
-        response = Net::HTTP.get(URI(BASE_URL))
-        parse(response)
+        parse(http.get(BASE_URL).to_s)
       end
 
       def parse(json)

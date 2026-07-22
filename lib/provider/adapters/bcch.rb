@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "json"
-require "net/http"
 
 require "provider/adapters/adapter"
 
@@ -26,7 +25,7 @@ class Provider
       }.freeze
 
       class << self
-        def api_key = ENV["BCCH_USER"] || raise(Adapter::Unavailable, "no API key")
+        def api_key = ENV["BCCH_USER"] || raise("no API key")
       end
 
       def fetch(after: nil, upto: nil)
@@ -64,16 +63,13 @@ class Provider
       private
 
       def fetch_series(series_id, base, **params)
-        url = URI(API_URL)
-        url.query = URI.encode_www_form(
+        response = http.get(API_URL, params: {
           user: ENV["BCCH_USER"],
           pass: ENV["BCCH_PASS"],
           function: "GetSeries",
           timeseries: series_id,
           **params,
-        )
-
-        response = Net::HTTP.get(url)
+        }).to_s
         parse(response, base)
       end
     end

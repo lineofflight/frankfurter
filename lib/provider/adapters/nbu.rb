@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "oj"
 
 require "provider/adapters/adapter"
@@ -9,23 +8,22 @@ class Provider
   module Adapters
     # National Bank of Ukraine. Publishes daily rates for ~45 currencies against UAH.
     class NBU < Adapter
-      URL = URI("https://bank.gov.ua/NBU_Exchange/exchange_site")
+      URL = "https://bank.gov.ua/NBU_Exchange/exchange_site"
 
       class << self
         def backfill_range = 365
       end
 
       def fetch(after: nil, upto: nil)
-        url = URL.dup
-        url.query = URI.encode_www_form(
+        response = http.get(URL, params: {
           start: after.strftime("%Y%m%d"),
           end: (upto || Date.today).strftime("%Y%m%d"),
           sort: "exchangedate",
           order: "asc",
           json: "",
-        )
+        }).to_s
 
-        parse(Net::HTTP.get(url))
+        parse(response)
       end
 
       def parse(json)

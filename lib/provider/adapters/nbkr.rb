@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "net/http"
 require "ox"
 
 require "provider/adapters/adapter"
@@ -35,8 +34,8 @@ class Provider
     # as quote (1 unit foreign = X KGS), matching the convention used by other
     # pivot-in-quote adapters (NBG, CBR, BBK).
     class NBKR < Adapter
-      DAILY_URL = URI("https://www.nbkr.kg/XML/daily.xml")
-      WEEKLY_URL = URI("https://www.nbkr.kg/XML/weekly.xml")
+      DAILY_URL = "https://www.nbkr.kg/XML/daily.xml"
+      WEEKLY_URL = "https://www.nbkr.kg/XML/weekly.xml"
       HISTORICAL_URL = "https://www.nbkr.kg/index1.jsp"
       HISTORICAL_ROW = /<!--date-->(\d{2}\.\d{2}\.\d{4})<!--date-->.*?<!--value-->(\d+(?:,\d+)?)<!--value-->/m
 
@@ -182,23 +181,22 @@ class Provider
       end
 
       def fetch_live
-        parse(Net::HTTP.get(DAILY_URL)) + parse(Net::HTTP.get(WEEKLY_URL))
+        parse(http.get(DAILY_URL).to_s) + parse(http.get(WEEKLY_URL).to_s)
       end
 
       def fetch_historical(after, upto)
         dataset = []
-        uri = URI(HISTORICAL_URL)
 
-        # Reuse a single HTTPS connection across the per-currency loop. NBKR's
-        # endpoint rate-limits new TLS handshakes and starts dropping connections
-        # after ~20 fresh sessions, so keep-alive is both polite and necessary.
-        Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 15, read_timeout: 30) do |http|
+        # NBKR's endpoint starts dropping connections after ~20 fresh TLS sessions in quick succession, so this loop
+        # reuses one persistent connection across all ~60 per-currency requests instead of opening a new one each time.
+        # The sleep between requests adds further pacing on top of that.
+        http.persistent(HISTORICAL_URL) do |client|
           first = true
           CURRENCIES.each do |currency|
             sleep(0.5) unless first
             first = false
 
-            html = fetch_historical_currency(http, uri.path, currency[:id], after, upto)
+            html = fetch_historical_currency(client, currency[:id], after, upto)
             dataset.concat(parse_historical(html, iso: currency[:iso], nominal: currency[:nominal]))
           end
         end
@@ -206,8 +204,8 @@ class Provider
         dataset
       end
 
-      def fetch_historical_currency(http, path, id, after, upto)
-        query = URI.encode_www_form(
+      def fetch_historical_currency(client, id, after, upto)
+        client.get(HISTORICAL_URL, params: {
           item: 1562,
           lang: "ENG",
           valuta_id: id,
@@ -217,8 +215,7 @@ class Provider
           end_day: upto.strftime("%d"),
           end_month: upto.strftime("%m"),
           end_year: upto.strftime("%Y"),
-        )
-        http.get("#{path}?#{query}").body
+        }).to_s
       end
     end
   end
