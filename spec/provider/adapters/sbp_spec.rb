@@ -45,7 +45,7 @@ class Provider < Sequel::Model(:providers)
         _(usd[:rate]).must_be(:<, 500)
       end
 
-      it "covers the 22 currencies listed by SBP" do
+      it "covers the 23 currencies listed by SBP" do
         dataset = adapter.fetch(after: Date.new(2026, 4, 1), upto: Date.new(2026, 4, 30))
         bases = dataset.map { |r| r[:base] }.uniq.sort
         expected = [
@@ -75,6 +75,14 @@ class Provider < Sequel::Model(:providers)
         ]
 
         expected.each { |iso| _(bases).must_include(iso) }
+      end
+
+      it "covers the period after the mid-2026 site restructure from the archive" do
+        dataset = adapter.fetch(after: Date.new(2026, 6, 1), upto: Date.new(2026, 6, 30))
+        dates = dataset.map { |r| r[:date] }
+
+        _(dates.min).must_equal(Date.new(2026, 6, 1))
+        _(dates.max).must_equal(Date.new(2026, 6, 30))
       end
 
       it "respects the after and upto bounds" do
