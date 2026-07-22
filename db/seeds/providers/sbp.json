@@ -4,8 +4,8 @@
   "country_code": "PK",
   "rate_type": "daily average banks' floating rate",
   "pivot_currency": "PKR",
-  "data_url": "https://www.sbp.org.pk/ecodata/BFER_Daily.xlsx",
-  "terms_url": null,
+  "data_url": "https://www.sbp.org.pk/assets/document/BFER_Daily.xlsx",
+  "terms_url": "https://www.sbp.org.pk/our-operations/disclaimer",
   "publish_schedule": "*/30 5-15 15-28 * *",
   "publish_cadence": "monthly",
   "coverage_start": "2013-07-02"

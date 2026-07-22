@@ -8,8 +8,8 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # State Bank of Pakistan. Publishes the "Daily Average Banks' Floating Exchange Rates"
-    # series as two XLSX workbooks — a rolling current-month file and a historical archive
-    # going back to 2013-07-02. Both files share the same wide layout: one row per foreign
+    # series as two XLSX workbooks — a current-month file and a historical archive going
+    # back to 2013-07-02. Both files share the same wide layout: one row per foreign
     # currency, one column per date, with cell values expressed as "Pak Rupees per Currency
     # Unit" (e.g. 1 USD = 279.35 PKR).
     #
@@ -21,12 +21,14 @@ class Provider
     # SBP publishes finalized monthly snapshots roughly three weeks after the month ends,
     # so the most recent observation typically trails other providers by up to a month.
     #
-    # Cloudflare blocks plain-curl requests; a browser User-Agent header is required.
-    # The site footer reads "Copyright (c) 2020. All Rights Reserved." There is no
-    # explicit terms-of-use page (sbp.org.pk/disclaim.htm and /about/copyright.htm 404).
+    # The bank retired the old /ecodata/ tree in a mid-2026 site restructure (the old
+    # URLs now serve the homepage as a 200); the same workbooks live on under
+    # /assets/document/, linked from sbp.org.pk/economic-data. Since the restructure the
+    # current-month file has lagged the archive (frozen at April while the archive runs
+    # through June), so the archive is treated as authoritative on overlap.
     class SBP < Adapter
-      CURRENT_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily.xlsx"
-      ARCHIVE_URL = "https://www.sbp.org.pk/ecodata/BFER_Daily_Arch.xlsx"
+      CURRENT_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily.xlsx"
+      ARCHIVE_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily_Arch.xlsx"
 
       # Excel stores dates as the number of days since this epoch (with the 1900-leap-year
       # quirk baked into the offset — 1899-12-30 sidesteps it for dates after 1900-03-01).
@@ -72,9 +74,11 @@ class Provider
       def fetch(after: nil, upto: nil)
         records = {}
 
-        # Archive first, current second — current entries overwrite archive on overlap
-        # so any same-day revisions in the rolling file win the dedupe.
-        [ARCHIVE_URL, CURRENT_URL].each do |url|
+        # Current first, archive second — archive entries overwrite current on overlap.
+        # The archive carries SBP's finalized monthly snapshots (and, post-restructure,
+        # updates while the current file sits stale); the current file only contributes
+        # dates the archive doesn't have yet.
+        [CURRENT_URL, ARCHIVE_URL].each do |url|
           parse(download(url)).each do |record|
             next if after && record[:date] < after
             next if upto && record[:date] > upto
