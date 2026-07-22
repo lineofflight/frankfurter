@@ -54,13 +54,14 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Hash)
+        raise "BDP: expected JSON-stat object from BPstat, got #{data.class}" unless data.is_a?(Hash)
 
         codes = build_codes(data)
         counterparty_index = data.dig("dimension", "12", "category", "index") || []
         date_index = data.dig("dimension", "reference_date", "category", "index") || []
         values = data["value"] || []
         num_dates = date_index.size
+        # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat body
         return [] if codes.empty? || num_dates.zero?
 
         records = []

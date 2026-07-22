@@ -40,7 +40,7 @@ class Provider
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
         entries = data.is_a?(Hash) ? data["data"] : nil
-        return [] unless entries.is_a?(Array)
+        raise "NBE: missing data array in response" unless entries.is_a?(Array)
 
         entries.filter_map do |entry|
           code = entry.dig("currency", "code")

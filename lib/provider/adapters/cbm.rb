@@ -21,7 +21,7 @@ class Provider
         data = json.is_a?(String) ? JSON.parse(json) : json
         timestamp = data["timestamp"]
         rates = data["rates"]
-        return [] unless timestamp && rates
+        raise "CBM: timestamp or rates missing from latest response" unless timestamp && rates
 
         date = Time.at(Integer(timestamp)).utc.to_date
 

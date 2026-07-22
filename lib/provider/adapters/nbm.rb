@@ -42,10 +42,10 @@ class Provider
       def parse(xml)
         doc = Ox.load(xml)
         val_curs = doc.locate("ValCurs").first
-        return [] unless val_curs
+        raise "NBM: ValCurs root missing from FX XML" unless val_curs
 
         date_str = val_curs[:Date]
-        return [] unless date_str
+        raise "NBM: Date attribute missing from ValCurs" unless date_str
 
         date = Date.strptime(date_str, "%d.%m.%Y")
 
@@ -64,12 +64,13 @@ class Provider
       def parse_metals(xml)
         doc = Ox.load(xml)
         metal_price = doc.locate("MetalPrice").first
-        return [] unless metal_price
+        raise "NBM: MetalPrice root missing from metals XML" unless metal_price
 
         date_str = metal_price[:Date]
-        return [] unless date_str
+        raise "NBM: Date attribute missing from MetalPrice" unless date_str
 
         date = Date.strptime(date_str, "%d.%m.%Y")
+        # NBM prices metals on weekends too; skip them to mirror the FX path.
         return [] if date.saturday? || date.sunday?
 
         metal_price.locate("Metal").filter_map do |m|

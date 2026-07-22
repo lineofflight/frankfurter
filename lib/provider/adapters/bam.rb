@@ -28,7 +28,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
-        return [] unless data.is_a?(Array)
+        raise "BAM: expected JSON array from #{URL}, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |record|
           code = record["libDevise"]

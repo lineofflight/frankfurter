@@ -120,10 +120,9 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
-      it "returns an empty array when no table is present" do
-        records = adapter.parse("<html><body>no data</body></html>")
-
-        _(records).must_be_empty
+      it "raises when no table is present" do
+        error = _(-> { adapter.parse("<html><body>no data</body></html>") }).must_raise(RuntimeError)
+        _(error.message).must_match(/rates table not found/)
       end
 
       it "returns an empty array when start_date is after upto" do

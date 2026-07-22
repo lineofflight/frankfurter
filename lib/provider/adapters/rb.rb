@@ -29,7 +29,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Array)
+        raise "RB: expected JSON array from SWEA ByGroup, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |obs|
           series_id = obs["seriesId"]

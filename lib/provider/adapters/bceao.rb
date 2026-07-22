@@ -62,6 +62,7 @@ class Provider
       end
 
       def parse(html, date:)
+        # Holidays return the day header with no rates table (observed 2026-01-01)
         return [] unless html.include?("<table")
 
         records = []

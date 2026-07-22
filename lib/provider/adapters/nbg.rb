@@ -28,7 +28,10 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
-        return [] unless data.is_a?(Array) && data.first
+        raise "NBG: expected JSON array" unless data.is_a?(Array)
+
+        # The API 200s with [] for dates without data (e.g. pre-coverage); carry-forward covers holidays.
+        return [] if data.empty?
 
         entry = data.first
         date = Date.parse(entry["date"])

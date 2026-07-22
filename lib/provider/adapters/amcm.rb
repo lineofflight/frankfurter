@@ -43,10 +43,10 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Hash)
+        raise "AMCM: expected JSON object from #{URL}, got #{data.class}" unless data.is_a?(Hash)
 
         rows = data["data"]
-        return [] unless rows.is_a?(Array)
+        raise "AMCM: response has no data array (message: #{data["message"].inspect})" unless rows.is_a?(Array)
 
         rows.filter_map do |row|
           code = row["currency"]

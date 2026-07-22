@@ -24,7 +24,7 @@ class Provider
 
       def parse(json)
         records = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless records.is_a?(Array)
+        raise "BANREP: expected JSON array from #{BASE_URL}, got #{records.class}" unless records.is_a?(Array)
 
         records.filter_map do |record|
           date_str = record["vigenciadesde"]

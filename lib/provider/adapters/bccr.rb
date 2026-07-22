@@ -41,10 +41,10 @@ class Provider
         data = json.is_a?(String) ? JSON.parse(json) : json
         columns = data["columnas"]
         indicators = data["indicadoresRaiz"]
-        return [] unless columns && indicators
+        raise "BCCR: response missing columnas/indicadoresRaiz envelope" unless columns && indicators
 
         sell = indicators.find { |i| i["idIndicador"] == SELL_INDICATOR }
-        return [] unless sell
+        raise "BCCR: sell indicator #{SELL_INDICATOR} missing from group #{GROUP_ID} response" unless sell
 
         series = sell["series"]
 

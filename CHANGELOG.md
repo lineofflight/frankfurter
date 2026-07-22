@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Provider HTTP errors no longer record silent no-data days; every non-2xx response now fails the fetch loudly and is retried on the next scheduled run.
+- Adapter parsers no longer convert alien 200 responses (a maintenance page, a homepage standing in for a retired file, a restructured API) into silent no-data days. An audit of all 81 defensive empty returns across 48 provider adapters converted 66 structural guards into loud failures that abort the run for retry, and documented the 15 legitimately-empty cases (holiday windows, image-only scans, inverted date windows) plus 6 narrow tolerances verified against live no-data responses. (#563)
 - V2 latest rates now consider legitimate provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as they are published instead of appearing only after the UTC date rolls over. Explicit date and range queries keep their requested date boundaries.
 
 ### Fixed

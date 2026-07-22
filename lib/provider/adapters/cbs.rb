@@ -235,11 +235,11 @@ class Provider
 
       def shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")
-        return [] unless entry
+        raise "CBS: xl/sharedStrings.xml missing from workbook" unless entry
 
         doc = Ox.load(entry.get_input_stream.read, mode: :generic, effort: :tolerant)
         root = doc.nodes.first
-        return [] unless root
+        raise "CBS: sharedStrings.xml has no root element" unless root
 
         root.nodes.map do |si|
           si.nodes.map { |t| t.nodes.first.to_s }.join

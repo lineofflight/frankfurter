@@ -65,7 +65,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
-        return [] unless data.is_a?(Array)
+        raise "BNRRW: expected JSON array from currency_history, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |entry|
           code = entry["currency_name"]

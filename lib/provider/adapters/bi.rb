@@ -42,6 +42,7 @@ class Provider < Sequel::Model(:providers)
 
       def parse(html, currency:)
         table = html[%r{gvSearchResult2"[^>]*>(.*?)</table>}mi, 1]
+        # No-result searches render no gvSearchResult2 table at all (observed for weekend-only windows)
         return [] unless table
 
         records = []

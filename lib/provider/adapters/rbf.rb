@@ -128,7 +128,7 @@ class Provider
 
       def shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")
-        return [] unless entry
+        raise "RBF: xl/sharedStrings.xml missing from workbook" unless entry
 
         Ox.parse(entry.get_input_stream.read).locate("sst/si").map do |si|
           si.locate("t").map(&:text).join

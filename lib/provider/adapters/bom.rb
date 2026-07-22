@@ -53,10 +53,10 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Hash)
+        raise "BOM: expected JSON object from movement endpoint, got #{data.class}" unless data.is_a?(Hash)
 
         rows = data["data"]
-        return [] unless rows.is_a?(Array)
+        raise "BOM: data array missing from movement response" unless rows.is_a?(Array)
 
         rows.flat_map { |row| parse_row(row) }
       end
@@ -65,7 +65,7 @@ class Provider
 
       def parse_row(row)
         date_str = row["RATE_DATE"]
-        return [] unless date_str
+        raise "BOM: row missing RATE_DATE" unless date_str
 
         date = Date.parse(date_str)
 

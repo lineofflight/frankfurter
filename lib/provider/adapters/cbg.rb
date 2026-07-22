@@ -78,7 +78,7 @@ class Provider
 
       def parse(json, code)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Array)
+        raise "CBG: expected JSON array for #{code}, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |entry|
           next unless entry.is_a?(Array) && entry.size == 2

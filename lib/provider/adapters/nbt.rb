@@ -44,12 +44,13 @@ class Provider
       def parse(xml, expected_date: nil)
         doc = Ox.load(xml)
         root = doc.locate("ValCurs").first
-        return [] unless root
+        raise "NBT: ValCurs root missing from XML snapshot" unless root
 
         date_attr = root[:Date]
-        return [] unless date_attr
+        raise "NBT: Date attribute missing from ValCurs" unless date_attr
 
         date = Date.parse(date_attr)
+        # Out-of-range requests silently return today's snapshot; drop responses dated differently than requested.
         return [] if expected_date && date != expected_date
 
         root.locate("Valute").filter_map do |valute|

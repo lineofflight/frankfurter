@@ -112,15 +112,15 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
-      it "handles empty response" do
+      it "raises when date is missing" do
         xml = <<~XML
           <?xml version="1.0" encoding="UTF-8"?>
           <rates>
           </rates>
         XML
-        records = adapter.parse(xml)
 
-        _(records).must_be_empty
+        error = _(-> { adapter.parse(xml) }).must_raise(RuntimeError)
+        _(error.message).must_match(/<date> missing/)
       end
     end
   end

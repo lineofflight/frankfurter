@@ -56,7 +56,7 @@ class Provider
 
       def parse(json)
         data = Oj.load(json, mode: :strict)
-        return [] unless data.is_a?(Array)
+        raise "CBN: expected JSON array from #{URL}" unless data.is_a?(Array)
 
         data.filter_map do |entry|
           name = entry["currency"].to_s.strip.upcase

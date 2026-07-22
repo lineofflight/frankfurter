@@ -87,10 +87,10 @@ class Provider < Sequel::Model(:providers)
         _(records.length).must_equal(1)
       end
 
-      it "handles empty CSV" do
-        records = adapter.parse("")
+      it "raises on CSV without the expected header" do
+        error = assert_raises(RuntimeError) { adapter.parse("") }
 
-        _(records).must_be_empty
+        _(error.message).must_match(/End of Period/)
       end
     end
   end

@@ -50,7 +50,7 @@ class Provider
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
         rows = data["data"]
-        return [] unless rows.is_a?(Array)
+        raise "BOJA: data array missing from WPDataTables response" unless rows.is_a?(Array)
 
         rows.filter_map do |row|
           parse_row(row)
@@ -61,7 +61,7 @@ class Provider
 
       def fetch_table
         nonce = fetch_nonce
-        return [] unless nonce
+        raise "BOJA: wdtNonce not found on counter-rates page" unless nonce
 
         uri = "#{BASE_URL}?action=get_wdtable&table_id=#{TABLE_ID}"
         form = { "draw" => "1", "start" => "0", "length" => "-1", "wdtNonce" => nonce }

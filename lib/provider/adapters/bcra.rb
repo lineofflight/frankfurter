@@ -39,6 +39,7 @@ class Provider
         data = json.is_a?(String) ? JSON.parse(json) : json
         detalle = data.dig("results", "detalle")
         fecha = data.dig("results", "fecha")
+        # Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200
         return [] unless detalle && fecha
 
         # Skip the entire date if any currency code appears more than once

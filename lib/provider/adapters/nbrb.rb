@@ -59,7 +59,7 @@ class Provider
           endDate: end_date.to_s,
         }).to_s
         data = Oj.load(response, mode: :strict)
-        return [] unless data.is_a?(Array)
+        raise "NBRB: expected JSON array from dynamics endpoint, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |row|
           date = Date.parse(row.fetch("Date"))

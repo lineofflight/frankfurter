@@ -54,6 +54,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = [after, Date.new(EARLIEST_YEAR, 1, 1)].compact.max
         end_date = upto || Date.today
+        # Empty window (e.g. clamped by the coverage floor): nothing to fetch
         return [] if start_date > end_date
 
         dataset = []
@@ -92,7 +93,7 @@ class Provider
       def parse_yearly(xls_data, year)
         book = Spreadsheet.open(StringIO.new(xls_data.to_s))
         sheet = book.worksheets.first
-        return [] unless sheet
+        raise "BCBO: yearly workbook for #{year} has no worksheet" unless sheet
 
         records = []
         sheet.each do |row|
@@ -121,7 +122,7 @@ class Provider
       def parse_daily(xls_data, date)
         book = Spreadsheet.open(StringIO.new(xls_data.to_s))
         sheet = book.worksheets.first
-        return [] unless sheet
+        raise "BCBO: daily workbook for #{date} has no worksheet" unless sheet
 
         rows = []
         sheet.each { |row| rows << row }

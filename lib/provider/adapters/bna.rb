@@ -42,6 +42,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2000, 1, 1)
         end_date = upto || Date.today
+        # Window sanity: a caller-supplied range can be empty
         return [] if start_date > end_date
 
         codes = currency_codes
@@ -57,7 +58,9 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
-        return [] unless data.is_a?(Hash) && data["success"] && data["genericResponse"].is_a?(Array)
+        unless data.is_a?(Hash) && data["success"] && data["genericResponse"].is_a?(Array)
+          raise "BNA: series request failed: #{data.is_a?(Hash) ? data["message"] : data.class}"
+        end
 
         data["genericResponse"].filter_map do |row|
           next unless row["tipoCambio"] == "M"
@@ -77,7 +80,9 @@ class Provider
       def currency_codes
         json = http.get("#{BASE_URL}#{LIST_PATH}").to_s
         data = Oj.load(json, mode: :strict)
-        return [] unless data.is_a?(Hash) && data["genericResponse"].is_a?(Array)
+        unless data.is_a?(Hash) && data["genericResponse"].is_a?(Array)
+          raise "BNA: currency list request failed: #{data.is_a?(Hash) ? data["message"] : data.class}"
+        end
 
         data["genericResponse"].filter_map do |row|
           code = row["codigoMoeda"]

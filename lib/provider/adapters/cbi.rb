@@ -104,7 +104,8 @@ class Provider
       def parse_sheet(xml, shared_strings, year)
         rows = parse_rows(xml, shared_strings)
         layout = detect_layout(rows)
-        return [] unless layout
+        return [] if rows.empty? # tolerate a not-yet-populated year sheet
+        raise "CBI: could not detect Buy/Sell layout on sheet #{year}" unless layout
 
         records = []
         current_month = nil
@@ -226,11 +227,11 @@ class Provider
 
       def read_shared_strings(zip)
         entry = zip.find_entry("xl/sharedStrings.xml")
-        return [] unless entry
+        raise "CBI: sharedStrings.xml missing from workbook" unless entry
 
         doc = Ox.load(entry.get_input_stream.read, mode: :generic, effort: :tolerant)
         root = doc.respond_to?(:nodes) ? doc.nodes.find { |n| n.respond_to?(:value) && n.value == "sst" } : nil
-        return [] unless root
+        raise "CBI: malformed sharedStrings.xml (no sst root)" unless root
 
         root.nodes.map { |si| collect_text(si) }
       end
@@ -295,7 +296,7 @@ class Provider
             break
           end
         end
-        return [] unless sheet_data
+        raise "CBI: sheetData missing from worksheet XML" unless sheet_data
 
         rows = []
         sheet_data.nodes.each do |row_node|

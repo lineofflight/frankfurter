@@ -28,7 +28,7 @@ class Provider
 
       def parse(json)
         records = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless records.is_a?(Array)
+        raise "MMA: expected JSON array of reference rates from #{BASE_URL}" unless records.is_a?(Array)
 
         seen = {}
         records.each do |record|

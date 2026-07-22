@@ -30,7 +30,7 @@ class Provider
             per_page: 100,
           }).to_s
           data = JSON.parse(response)
-          payload = data.dig("data", "payload") || []
+          payload = data.dig("data", "payload")
           dataset.concat(parse(payload))
 
           pagination = data["pagination"] || {}
@@ -44,7 +44,7 @@ class Provider
 
       def parse(payload)
         payload = JSON.parse(payload) if payload.is_a?(String)
-        return [] unless payload.is_a?(Array)
+        raise "NRB: expected payload array from forex API, got #{payload.class}" unless payload.is_a?(Array)
 
         payload.flat_map do |day|
           begin

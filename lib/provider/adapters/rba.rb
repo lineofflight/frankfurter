@@ -23,7 +23,7 @@ class Provider
       def parse(csv)
         lines = csv.encode("UTF-8", invalid: :replace, undef: :replace).lines
         units_line = lines.find { |l| l.start_with?("Units,") }
-        return [] unless units_line
+        raise "RBA: Units header row not found in F11.1 CSV" unless units_line
 
         currencies = CSV.parse_line(units_line)
         currencies.shift # remove "Units" label
