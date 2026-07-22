@@ -24,7 +24,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Array)
+        raise "NBRM: expected JSON array from GetExchangeRate, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |row|
           iso = row["oznaka"]&.strip

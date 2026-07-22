@@ -82,6 +82,12 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      it "returns empty for a year before its first fixing" do
+        records = adapter.parse({ "rates" => [] })
+
+        _(records).must_be_empty
+      end
+
       it "raises on malformed dates" do
         json = {
           "rates" => [

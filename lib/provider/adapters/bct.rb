@@ -58,13 +58,21 @@ class Provider
 
       def parse(html, date:)
         echoed = extract_echoed_date(html)
+        unless echoed
+          # No-data days can serve an undated "Exhausted Resultset" error page
+          return [] if html.include?("Exhausted Resultset")
+
+          raise "BCT: no dated rates page in response for #{date}"
+        end
+
+        # No-data days otherwise silently fall back to a nearby trading day; drop the mismatched page
         return [] unless echoed == date
 
         doc = Nokogiri::HTML.parse(html)
 
         # Keep only the first interbank table; the second table is for manual exchange.
         table = doc.at_css("table")
-        return [] unless table
+        raise "BCT: no rates table on page for #{date}" unless table
 
         records = []
         table.css("tr").each do |row|

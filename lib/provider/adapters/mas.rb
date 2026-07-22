@@ -61,11 +61,15 @@ class Provider
       def parse(csv)
         lines = csv.lines
         header_index = lines.index { |l| l.start_with?("End of Period") }
-        return [] unless header_index
+
+        # A window with no data yet (e.g. a new year before the first fixing) re-renders the page
+        # with a "No Results Found" panel.
+        return [] if csv.include?("No Results Found")
+        raise "MAS: no 'End of Period' header in CSV download" unless header_index
 
         header_line = lines[header_index]
         columns = parse_header(header_line)
-        return [] if columns.empty?
+        raise "MAS: no recognized currency columns in CSV header" if columns.empty?
 
         data_lines = lines[(header_index + 1)..]
         records = []

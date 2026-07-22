@@ -24,7 +24,10 @@ class Provider
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
         rates = data.is_a?(Hash) ? data["rates"] : nil
-        return [] unless rates.is_a?(Array) && !rates.empty?
+        raise "CNB: no rates array in daily-year response" unless rates.is_a?(Array)
+
+        # The API 200s with {"rates":[]} for a year before its first fixing (e.g. New Year's Day).
+        return [] if rates.empty?
 
         rates.filter_map do |r|
           code = r["currencyCode"]

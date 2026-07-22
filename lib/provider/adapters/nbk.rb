@@ -35,7 +35,7 @@ class Provider
       def parse(xml)
         doc = Ox.load(xml)
         date_text = doc.locate("rates/date").first&.text
-        return [] unless date_text
+        raise "NBK: <date> missing from rates XML at #{URL}" unless date_text
 
         date = Date.strptime(date_text, "%d.%m.%Y")
 

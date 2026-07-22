@@ -35,6 +35,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2025, 12, 19)
         end_date = upto || Date.today
+        # Window sanity: a caller-supplied range can be empty
         return [] if start_date > end_date
 
         dataset = []
@@ -49,7 +50,7 @@ class Provider
 
       def parse(json, code)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Array)
+        raise "BCC: expected JSON array from #{HISTORICO_URL}, got #{data.class}" unless data.is_a?(Array)
 
         data.filter_map do |entry|
           rate = entry["tasaEspecial"]

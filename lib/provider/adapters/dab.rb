@@ -65,7 +65,10 @@ class Provider < Sequel::Model(:providers)
       def parse(html, date:)
         doc = Nokogiri::HTML.parse(html)
         table = doc.at_css("div.table-responsive table.table-striped")
-        return [] unless table
+
+        # Holidays render "There were no results." instead of the rates table.
+        return [] if html.include?("There were no results")
+        raise "DAB: no rates table for #{date} at #{BASE_URL}" unless table
 
         table.css("tbody tr").filter_map do |row|
           cells = row.css("td")

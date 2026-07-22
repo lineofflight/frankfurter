@@ -61,7 +61,7 @@ class Provider
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
         rows = data["data"]
-        return [] unless rows.is_a?(Array)
+        raise "CBK: data array missing from WPDataTables response" unless rows.is_a?(Array)
 
         rows.filter_map do |row|
           parse_row(row)

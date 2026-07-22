@@ -55,6 +55,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2011, 6, 20)
         end_date = upto || Date.today
+        # Inverted window (caller already caught up); nothing to fetch.
         return [] if start_date > end_date
 
         html = post_range(start_date, end_date)
@@ -64,7 +65,7 @@ class Provider
       def parse(html)
         doc = Nokogiri::HTML.parse(html)
         table = doc.at_css("table#exchange-rates") || doc.at_css("table")
-        return [] unless table
+        raise "RBM: rates table not found in ExchangeRatesFilter response" unless table
 
         table.css("tr").filter_map do |row|
           cells = row.css("td")

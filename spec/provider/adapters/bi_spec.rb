@@ -62,10 +62,20 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_equal(19643.825)
       end
 
-      it "returns empty for missing table" do
-        records = adapter.parse("<html><body>No data</body></html>", currency: "USD  ")
+      it "returns empty when the search form renders without a results table" do
+        html = %(<html><body><input name="ctl00$PlaceHolderMain$g$btnSearch1"></body></html>)
+
+        records = adapter.parse(html, currency: "USD  ")
 
         _(records).must_be_empty
+      end
+
+      it "raises when the response has neither results table nor search form" do
+        error = assert_raises(RuntimeError) do
+          adapter.parse("<html><body>No data</body></html>", currency: "USD  ")
+        end
+
+        _(error.message).must_match(/neither results table nor search form/)
       end
     end
   end

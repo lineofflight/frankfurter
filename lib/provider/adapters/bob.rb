@@ -32,7 +32,7 @@ class Provider
         rows = csv.delete_prefix("\uFEFF").lines(chomp: true)
         headers = rows.shift&.split(",")
         date_index = headers&.index("Date")
-        return [] unless date_index
+        raise "BOB: Date column missing from exchange-rates.csv header" unless date_index
 
         column_indices = COLUMNS.each_with_object({}) do |(col, iso), map|
           idx = headers.index(col)

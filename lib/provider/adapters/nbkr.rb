@@ -132,10 +132,10 @@ class Provider
         xml = xml.dup.force_encoding(Encoding::WINDOWS_1251)
           .encode(Encoding::UTF_8, invalid: :replace, undef: :replace, replace: "")
         root = Ox.load(xml).locate("CurrencyRates").first
-        return [] unless root
+        raise "NBKR: CurrencyRates root missing from XML feed" unless root
 
         date_attr = root[:Date]
-        return [] unless date_attr
+        raise "NBKR: Date attribute missing from CurrencyRates feed" unless date_attr
 
         date = Date.strptime(date_attr, "%d.%m.%Y")
 

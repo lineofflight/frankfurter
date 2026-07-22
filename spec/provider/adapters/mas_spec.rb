@@ -87,10 +87,18 @@ class Provider < Sequel::Model(:providers)
         _(records.length).must_equal(1)
       end
 
-      it "handles empty CSV" do
-        records = adapter.parse("")
+      it "returns empty for a window with no results" do
+        html = "<html><div>No Results Found</div></html>"
+
+        records = adapter.parse(html)
 
         _(records).must_be_empty
+      end
+
+      it "raises on CSV without the expected header" do
+        error = assert_raises(RuntimeError) { adapter.parse("") }
+
+        _(error.message).must_match(/End of Period/)
       end
     end
   end

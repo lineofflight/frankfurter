@@ -84,6 +84,7 @@ class Provider
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2024, 3, 1)
         end_date = upto || Date.today
+        # Window sanity: nothing to fetch when the chunk starts after it ends.
         return [] if start_date > end_date
 
         sleep(1) if @session
@@ -96,7 +97,7 @@ class Provider
 
       def parse(xlsx)
         rows = read_xlsx(xlsx)
-        return [] if rows.empty?
+        raise "CBE: no data rows in historical-data XLSX" if rows.empty?
 
         rows.filter_map { |row| parse_row(row) }
       end
@@ -184,18 +185,18 @@ class Provider
             end
           end
         end
-        return [] unless sheet_xml
+        raise "CBE: sheet1.xml missing from XLSX export" unless sheet_xml
 
         shared_strings = parse_shared_strings(shared_strings_xml)
         parse_sheet(sheet_xml, shared_strings)
       end
 
       def parse_shared_strings(xml)
-        return [] unless xml
+        raise "CBE: sharedStrings.xml missing from XLSX export" unless xml
 
         doc = Ox.parse(xml)
         root = doc.is_a?(Ox::Document) ? doc.nodes.find { |n| n.is_a?(Ox::Element) } : doc
-        return [] unless root
+        raise "CBE: malformed sharedStrings.xml in XLSX export" unless root
 
         root.locate("si").map do |si|
           texts = si.locate("t").map { |t| t.text.to_s }
@@ -206,7 +207,7 @@ class Provider
       def parse_sheet(xml, shared_strings)
         doc = Ox.parse(xml)
         root = doc.is_a?(Ox::Document) ? doc.nodes.find { |n| n.is_a?(Ox::Element) } : doc
-        return [] unless root
+        raise "CBE: malformed worksheet XML in XLSX export" unless root
 
         rows = []
 

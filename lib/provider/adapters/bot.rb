@@ -33,7 +33,7 @@ class Provider
 
       def parse(body)
         data = JSON.parse(body).dig("result", "data", "data_detail")
-        return [] unless data
+        raise "BOT: data_detail missing from response" unless data
 
         data.filter_map do |record|
           mid = record["mid_rate"]

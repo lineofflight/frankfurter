@@ -88,6 +88,14 @@ class Provider < Sequel::Model(:providers)
         end
       end
 
+      describe "sheet parsing" do
+        it "tolerates a not-yet-populated year sheet" do
+          records = adapter.send(:parse_sheet, "<worksheet><sheetData/></worksheet>", [], 2027)
+
+          _(records).must_be_empty
+        end
+      end
+
       describe "month label parsing" do
         it "parses 'Jan. 2026'" do
           _(adapter.send(:month_from_label, "Jan. 2026")).must_equal(1)

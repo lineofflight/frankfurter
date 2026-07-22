@@ -135,7 +135,7 @@ class Provider
       private
 
       def parse_rows(tsv)
-        return [] if tsv.nil? || tsv.strip.empty?
+        raise "IMF: empty TSV response" if tsv.nil? || tsv.strip.empty?
 
         records = []
         dates = nil

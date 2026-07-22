@@ -48,7 +48,9 @@ class Provider < Sequel::Model(:providers)
       end
 
       def parse(html, date:)
-        return [] unless html.include?("<table") && !empty_response?(html)
+        # Holidays and Saturdays render "There is no data available." within the normal page chrome.
+        return [] if empty_response?(html)
+        raise "NBC: no rates table in response for #{date}" unless html.include?("<table")
 
         doc = Nokogiri::HTML.parse(html)
 

@@ -62,7 +62,12 @@ class Provider
       end
 
       def parse(html, date:)
-        return [] unless html.include?("<table")
+        unless html.include?("<table")
+          # Holidays render just the day header with no rates table (observed 2026-01-01)
+          return [] if html.include?("Cours des devises")
+
+          raise "BCEAO: neither rates table nor day header in response for #{date}"
+        end
 
         records = []
         html.scan(%r{<tr>[^<]*<td>([^<]*)</td>[^<]*<td>([\d.,]+)</td>[^<]*</tr>}) do |name, rate_str|

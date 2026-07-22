@@ -34,7 +34,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? Oj.load(json, mode: :strict) : json
-        return [] unless data.is_a?(Array)
+        raise "CBU: expected JSON array" unless data.is_a?(Array)
 
         data.filter_map do |row|
           code = row["Ccy"]

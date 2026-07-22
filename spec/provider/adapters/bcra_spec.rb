@@ -74,6 +74,44 @@ class Provider < Sequel::Model(:providers)
         _(records.length).must_equal(1)
         _(records.first[:base]).must_equal("USD")
       end
+
+      it "returns empty for the holiday no-data shape" do
+        records = adapter.parse({ "results" => { "fecha" => nil, "detalle" => [] } })
+
+        _(records).must_be_empty
+      end
+
+      it "raises when the results envelope is missing" do
+        error = assert_raises(RuntimeError) { adapter.parse({}) }
+
+        _(error.message).must_match(/results envelope missing/)
+      end
+
+      it "raises when detalle is missing from the envelope" do
+        error = assert_raises(RuntimeError) { adapter.parse({ "results" => { "fecha" => "2026-03-20" } }) }
+
+        _(error.message).must_match(/detalle missing/)
+      end
+
+      it "raises when detalle is nonempty but fecha is null" do
+        error = assert_raises(RuntimeError) do
+          adapter.parse({ "results" => { "fecha" => nil, "detalle" => [{ "codigoMoneda" => "USD" }] } })
+        end
+
+        _(error.message).must_match(/undated results/)
+      end
+
+      it "raises when the fecha key is absent entirely" do
+        error = assert_raises(RuntimeError) { adapter.parse({ "results" => { "detalle" => [] } }) }
+
+        _(error.message).must_match(/undated results/)
+      end
+
+      it "raises when fecha is false rather than null" do
+        error = assert_raises(RuntimeError) { adapter.parse({ "results" => { "fecha" => false, "detalle" => [] } }) }
+
+        _(error.message).must_match(/undated results/)
+      end
     end
   end
 end

@@ -48,10 +48,10 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:base]).must_equal("USD")
       end
 
-      it "returns empty array when data is missing" do
-        records = adapter.parse('{"info":"test"}')
+      it "raises when data is missing" do
+        error = assert_raises(RuntimeError) { adapter.parse('{"info":"test"}') }
 
-        _(records).must_be_empty
+        _(error.message).must_match(/CBM: timestamp or rates missing/)
       end
     end
   end

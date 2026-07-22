@@ -57,7 +57,7 @@ class Provider
       def parse(html)
         doc = Ox.load(html, mode: :generic, effort: :tolerant, smart: true)
         rows = find_table_rows(doc)
-        return [] unless rows
+        raise "BOTA: rates table not found in previous_rates response" unless rows
 
         rows.filter_map { |row| parse_row(row) }
       end

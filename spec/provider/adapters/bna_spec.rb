@@ -82,8 +82,10 @@ class Provider < Sequel::Model(:providers)
         _(adapter.parse('{"genericResponse":[],"success":true}')).must_be_empty
       end
 
-      it "handles unsuccessful response" do
-        _(adapter.parse('{"success":false,"message":"Erro"}')).must_be_empty
+      it "raises on unsuccessful response" do
+        error = assert_raises(RuntimeError) { adapter.parse('{"success":false,"message":"Erro"}') }
+
+        _(error.message).must_equal("BNA: series request failed: Erro")
       end
     end
   end

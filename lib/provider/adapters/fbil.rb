@@ -25,7 +25,7 @@ class Provider
 
       def parse(json)
         data = json.is_a?(String) ? JSON.parse(json) : json
-        return [] unless data.is_a?(Array)
+        raise "FBIL: expected JSON array of reference rates" unless data.is_a?(Array)
 
         data.filter_map do |record|
           sub_prod = record["subProdName"]
