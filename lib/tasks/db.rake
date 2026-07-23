@@ -25,12 +25,19 @@ namespace :db do
 
   desc "Purge stored rates that violate ingest rules (future-dated and defunct-currency rows)"
   task :purge_invalid do
-    require "rate_validation"
+    require "blended_rate"
+    require "cache"
     require "db"
     require "log"
+    require "rate_validation"
 
     totals = RateValidation.purge(DB)
     Log.info("purge_invalid: deleted #{totals[:rates]} rates, " \
       "#{totals[:weekly_rates]} weekly, #{totals[:monthly_rates]} monthly")
+    next if totals.values.sum.zero?
+
+    # Stored blends derived from the deleted rows are stale now; rebuild and drop cached responses.
+    BlendedRate.rebuild
+    Cache.purge
   end
 end

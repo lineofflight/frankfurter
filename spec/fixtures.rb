@@ -41,6 +41,7 @@ module Fixtures
   class << self
     def seed!
       Rate.dataset.delete
+      Sequel::Model.db[:blended_rates].delete
       generate_rates.each_slice(1000) do |batch|
         Rate.dataset.multi_insert(batch)
       end

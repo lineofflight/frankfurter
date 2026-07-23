@@ -438,6 +438,33 @@ describe Provider do
       _(cache_purged).must_equal(true)
     end
 
+    it "refreshes the materialized blend over the inserted window before purging" do
+      calls = []
+      windows = []
+      Cache.stub(:purge_debounced, -> { calls << :purge }) do
+        BlendedRate.stub(:refresh, ->(window) {
+          calls << :refresh
+          windows << window
+        }) do
+          provider.stub(:adapter, adapter) do
+            provider.backfill
+          end
+        end
+      end
+
+      _(calls).must_equal([:refresh, :purge])
+      _(windows.first.begin).must_equal(import_date)
+      _(windows.first.end).must_equal(import_date + CarryForward::LOOKBACK_DAYS)
+    end
+
+    it "writes blended rows for inserted dates" do
+      provider.stub(:adapter, adapter) do
+        provider.backfill
+      end
+
+      _(BlendedRate.where(date: import_date).count).must_be(:>, 0)
+    end
+
     it "does not request a cache purge when no new rates are inserted" do
       provider.stub(:adapter, adapter) do
         provider.backfill
