@@ -5,6 +5,7 @@ $stdout.sync = true
 
 require "rufus-scheduler"
 require_relative "../boot"
+require "blended_rate"
 require "cache"
 require "provider"
 require "provider/adapters"
@@ -15,6 +16,27 @@ scheduler = Rufus::Scheduler.new(max_work_threads: DB.pool.max_size) unless dry_
 
 # Trailing edge of the purge debounce: flush a purge the backfills coalesced once its window expires.
 scheduler.every("60s") { Cache.purge_pending } unless dry_run
+
+# Re-blend the trailing window at UTC midnight: a forward-dated observation blended earlier froze
+# that day's decay weights (WeightedAverage caps its reference date at today), so each new date
+# needs a recompute. Ingest accepts value dates up to two days ahead, hence through tomorrow (#570).
+# Purge after, so edges do not revalidate stale blends into a fresh day.
+scheduler.cron("0 0 * * *") do
+  BlendedRate.refresh((Date.today - 1)..(Date.today + 1))
+  Cache.purge_debounced
+end unless dry_run
+
+# Materialize the blend on installs that have never built it (first deploy of this feature, or a
+# self-hosted upgrade). Until it completes, plain ranges fall back to capped live compute; the
+# purge afterwards drops any responses cached off that fallback.
+unless dry_run
+  scheduler.in("30s") do
+    unless BlendedRate.ready?
+      BlendedRate.rebuild
+      Cache.purge_debounced
+    end
+  end
+end
 
 # Backfill all providers on startup (staggered to avoid thundering herd)
 Provider.all.shuffle.each_with_index do |provider, index|

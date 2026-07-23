@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "blended_rate"
 require "bucket"
 require "cache"
+require "carry_forward"
 require "db"
 require "fugit"
 require "json"
@@ -89,6 +91,12 @@ class Provider < Sequel::Model(:providers)
           affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq
           refresh_rollups(records.map { |r| r[:date] }.uniq)
           refresh_currency_summaries(affected_currencies)
+          # A late arrival at date d joins the carry-forward contributor set of anchors through
+          # d + LOOKBACK_DAYS, so those stored blends change too. Inside the transaction: the write
+          # lock serializes concurrent backfills' refreshes, and a failed refresh rolls back the
+          # insert so the next fetch re-ingests and retries.
+          dates = records.map { |r| r[:date] }
+          BlendedRate.refresh(dates.min..(dates.max + CarryForward::LOOKBACK_DAYS))
         end
         count
       end
@@ -96,6 +104,8 @@ class Provider < Sequel::Model(:providers)
       Log.info("#{key}: inserted #{inserted} rates")
       next if inserted.zero?
 
+      # Purge stays last: purging before the blend refresh commits would let the edge re-cache
+      # stale blends.
       Cache.purge_debounced
       db.run("PRAGMA optimize")
     end

@@ -111,14 +111,46 @@ module Versions
       end
     end
 
-    describe "interim daily range cap" do
+    describe "daily range cap for live-path shapes" do
       # Validation is date arithmetic only, so fixed dates keep these deterministic.
       let(:cap_end) { "2026-01-15" }
       let(:at_cap_start) { "2021-01-15" }
       let(:over_cap_start) { "2021-01-14" }
 
-      it "rejects daily ranges longer than 5 years without a quotes filter" do
-        error = _ { V2::RateQuery.new(from: over_cap_start, to: cap_end) }
+      it "allows plain daily ranges of any length once the table is ready" do
+        BlendedRate.rebuild
+
+        query = V2::RateQuery.new(from: "1999-01-04", to: cap_end)
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "allows long quotes-filtered ranges of any width once the table is ready" do
+        BlendedRate.rebuild
+
+        query = V2::RateQuery.new(from: "1999-01-04", to: cap_end, quotes: "USD,GBP,JPY,CHF,SEK,NOK")
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "keeps the cap on plain long ranges while the table is not ready, with no quotes exemption" do
+        _(BlendedRate.ready?).must_equal(false)
+
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end) }
+          .must_raise(V2::RateQuery::ValidationError)
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,GBP") }
+          .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "rejects long ranges naming more than 5 providers even with a small quotes list" do
+        providers = ["ECB", "BOC", "BOJ", "FED", "SNB", "BOE"].join(",")
+
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers:, quotes: "USD") }
+          .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "rejects expand=providers ranges longer than 5 years without a quotes filter" do
+        error = _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, expand: "providers") }
           .must_raise(V2::RateQuery::ValidationError)
 
         _(error.message).must_include("quotes=")
@@ -126,56 +158,116 @@ module Versions
         _(error.message).must_include("split the range")
       end
 
-      it "rejects open-ended daily ranges reaching back more than 5 years" do
-        from = (Date.today << 61).to_s
-
-        _ { V2::RateQuery.new(from: from) }.must_raise(V2::RateQuery::ValidationError)
+      it "rejects providers= ranges longer than 5 years without a quotes filter" do
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB") }
+          .must_raise(V2::RateQuery::ValidationError)
       end
 
-      it "rejects long ranges when quotes lists more than 5 currencies" do
-        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,GBP,JPY,CHF,SEK,NOK") }
+      it "rejects provider-unbounded expand=providers long ranges even with a small quotes list" do
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, expand: "providers", quotes: "USD") }
+          .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "allows expand=providers long ranges when providers= bounds the fetch and quotes is small" do
+        query = V2::RateQuery.new(
+          from: over_cap_start, to: cap_end, expand: "providers", providers: "ECB", quotes: "USD",
+        )
+
+        _(query.range?).must_equal(true)
+      end
+
+      it "rejects long capped ranges when quotes lists more than 5 currencies" do
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,GBP,JPY,CHF,SEK,NOK") }
           .must_raise(V2::RateQuery::ValidationError)
       end
 
       it "counts distinct currencies, not raw quotes entries" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,USD,GBP,GBP,JPY,JPY")
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,USD,GBP,GBP,JPY,JPY")
 
         _(query.range?).must_equal(true)
       end
 
       it "counts a future to= only up to today" do
-        query = V2::RateQuery.new(from: (Date.today << 12).to_s, to: (Date.today >> 120).to_s)
+        query = V2::RateQuery.new(from: (Date.today << 12).to_s, to: (Date.today >> 120).to_s, providers: "ECB")
 
         _(query.range?).must_equal(true)
       end
 
-      it "rejects a long past range regardless of a future to=" do
-        _ { V2::RateQuery.new(from: (Date.today << 61).to_s, to: (Date.today >> 120).to_s) }
+      it "rejects a long past capped range regardless of a future to=" do
+        _ { V2::RateQuery.new(from: (Date.today << 61).to_s, to: (Date.today >> 120).to_s, providers: "ECB") }
           .must_raise(V2::RateQuery::ValidationError)
       end
 
-      it "allows long ranges when quotes lists 5 or fewer currencies" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, quotes: "USD,GBP,JPY,CHF,SEK")
+      it "allows long capped ranges when quotes lists 5 or fewer currencies" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,GBP,JPY,CHF,SEK")
 
         _(query.range?).must_equal(true)
       end
 
-      it "allows long ranges at weekly or monthly granularity" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, group: "month")
+      it "allows long capped ranges at weekly or monthly granularity" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", group: "month")
 
         _(query.range?).must_equal(true)
       end
 
-      it "allows daily ranges of exactly 5 years" do
-        query = V2::RateQuery.new(from: at_cap_start, to: cap_end)
+      it "allows capped ranges of exactly 5 years" do
+        query = V2::RateQuery.new(from: at_cap_start, to: cap_end, providers: "ECB")
 
         _(query.range?).must_equal(true)
       end
 
       it "does not cap single-date or latest queries" do
-        query = V2::RateQuery.new(date: "2001-01-15")
+        query = V2::RateQuery.new(date: "2001-01-15", providers: "ECB")
 
         _(query.range?).must_equal(false)
+      end
+    end
+
+    describe "materialized blend dispatch" do
+      let(:from) { (Fixtures.latest_date - 10).to_s }
+      let(:to) { Fixtures.latest_date.to_s }
+
+      # Deleting recent raw rows after the rebuild makes the two paths distinguishable: only the
+      # table still knows those dates. The oldest rows stay, so ready? holds.
+      def delete_recent_raw_rows!
+        Rate.dataset.where(date: (Fixtures.latest_date - 10)..Fixtures.latest_date).delete
+      end
+
+      it "serves plain daily ranges from the table" do
+        BlendedRate.rebuild
+        delete_recent_raw_rows!
+
+        results = V2::RateQuery.new(from:, to:).to_a
+
+        _(results.map { |r| r[:date] }.max).must_equal(to)
+      end
+
+      it "keeps providers= and expand=providers ranges on the live path" do
+        BlendedRate.rebuild
+        delete_recent_raw_rows!
+
+        _(V2::RateQuery.new(from:, to:, providers: "ECB").to_a.map { |r| r[:date] }).wont_include(to)
+        _(V2::RateQuery.new(from:, to:, expand: "providers").to_a.map { |r| r[:date] }).wont_include(to)
+      end
+
+      it "falls back to the live path while the table is empty" do
+        _(BlendedRate.dataset.count).must_equal(0)
+
+        results = V2::RateQuery.new(from:, to:).to_a
+
+        _(results).wont_be_empty
+      end
+
+      it "falls back to the live path while the table is only partially refreshed" do
+        BlendedRate.refresh((Fixtures.latest_date - 2)..Fixtures.latest_date)
+
+        _(BlendedRate.dataset.count).must_be(:>, 0)
+        _(BlendedRate.ready?).must_equal(false)
+
+        early = Fixtures.business_day(200)
+        results = V2::RateQuery.new(from: (early - 5).to_s, to: early.to_s).to_a
+
+        _(results).wont_be_empty
       end
     end
 
@@ -449,6 +541,13 @@ module Versions
       it "returns empty (peg layer is bypassed when source set is restricted)" do
         recent_date = Fixtures.latest_date.to_s
         query = V2::RateQuery.new(date: recent_date, providers: "ECB", base: "AED", quotes: "USD")
+
+        _(query.to_a).must_be_empty
+      end
+
+      it "returns empty for ranges too, which always take the pivot path" do
+        to = Fixtures.latest_date
+        query = V2::RateQuery.new(from: (to - 5).to_s, to: to.to_s, providers: "ECB", base: "AED", quotes: "USD")
 
         _(query.to_a).must_be_empty
       end

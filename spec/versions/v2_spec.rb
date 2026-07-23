@@ -354,8 +354,8 @@ describe Versions::V2 do
     _(json["message"]).must_include("unknown parameter")
   end
 
-  it "returns 422 for unfiltered daily ranges longer than 5 years" do
-    get "/rates?from=2000-01-01"
+  it "returns 422 for expand=providers daily ranges longer than 5 years" do
+    get "/rates?from=2000-01-01&expand=providers"
 
     _(last_response.status).must_equal(422)
     assert_conform_schema(422)
@@ -364,8 +364,10 @@ describe Versions::V2 do
     _(json["message"]).must_include("split the range")
   end
 
-  it "serves daily ranges longer than 5 years with a small quotes filter" do
-    get "/rates?from=2020-01-01&to=#{Fixtures.latest_date}&quotes=USD"
+  it "serves plain daily ranges longer than 5 years without any quotes filter" do
+    BlendedRate.rebuild
+
+    get "/rates?from=2000-01-01"
 
     _(last_response).must_be(:ok?)
     _(json).wont_be_empty

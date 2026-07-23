@@ -22,7 +22,7 @@
       "get": {
         "operationId": "getRates",
         "summary": "Get exchange rates",
-        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record. Interim limit: date ranges spanning more than 5 years at daily granularity return 422 unless `quotes` narrows the response to at most 5 currencies; either filter with `quotes`, aggregate with `group=week` or `group=month`, or split the range into shorter requests. The cap is interim and will be lifted for plain daily ranges once blended rates are materialized (tracked in issue 570).",
+        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record. Daily date ranges of any length are served, including full history. Limit: requests using `providers` or `expand=providers` recompute the blend per date, so at daily granularity they return 422 for ranges longer than 5 years. With `providers` naming at most 5 providers, a `quotes` list of at most 5 currencies lifts the cap; without `providers`, `expand=providers` ranges compute every currency regardless of `quotes`, so aggregate with `group=week` or `group=month`, add `providers`, or split the range into shorter requests.",
         "parameters": [
           { "$ref": "#/components/parameters/date" },
           { "$ref": "#/components/parameters/from" },

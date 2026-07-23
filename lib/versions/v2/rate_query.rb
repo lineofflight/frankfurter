@@ -4,6 +4,7 @@ require "digest"
 require "set"
 
 require "roda"
+require "blended_rate"
 require "rate"
 require "request_timeout"
 require "weekly_rate"
@@ -27,13 +28,18 @@ module Versions
       CHUNK_MONTHS = { "week" => 21, "month" => 84 }.freeze
       DEFAULT_CHUNK_MONTHS = 3
       LATEST_FUTURE_DAYS = 1
-      # Interim cap pending materialized blends (#570): daily-granularity ranges recompute the blend per
-      # date, and past 5 years unfiltered the compute outlives both the request timeout and Cloudflare's
-      # origin ceiling, so the response can never complete or cache. Cost scales with days x quotes, so a
-      # small quotes filter exempts a long range.
+      # Residual cap for daily-range shapes the materialized blend cannot serve (providers= reads raw
+      # rows, expand=providers needs contributor metadata, and plain ranges fall back to live compute
+      # until the table is ready): those recompute the blend per date, and past 5 years unfiltered the
+      # compute outlives the request timeout and Cloudflare's origin ceiling.
       MAX_DAILY_RANGE_YEARS = 5
       MAX_DAILY_RANGE_QUOTES = 5
+      MAX_DAILY_RANGE_PROVIDERS = 5
       PIVOT = "USD"
+
+      # Parity harness only: forces the live compute path so the materialized table can be compared
+      # against it byte for byte.
+      attr_writer :force_live
 
       def initialize(params, timeout = RequestTimeout::DEFAULT_SECONDS)
         @params = params
@@ -52,6 +58,8 @@ module Versions
         if date_scope.is_a?(Range)
           if rollup?
             each_rollup_range(&block)
+          elsif blended_table?
+            each_blended_range(&block)
           else
             each_daily_range(&block)
           end
@@ -104,6 +112,46 @@ module Versions
         end
       end
 
+      # Plain daily ranges are served from the materialized blend: providers= needs raw rows and
+      # expand=providers needs contributor metadata the table does not store, so both stay live. Falls
+      # back to the live path until the table covers full history, so a deploy before blend:rebuild
+      # (or an incremental refresh landing first) stays correct.
+      def blended_table?
+        !@force_live && !providers && !expand_providers? && BlendedRate.ready?
+      end
+
+      # Mirrors each_daily_range on materialized rows: per-quote carry-forward reconstructs each anchor's
+      # batch (a snap-back echo keeps a silent quote visible), then emit applies derive, the quotes
+      # filter, the identity row, and rounding. Stored rows are canonical anchor-date values, so a
+      # snap-back row equals the value a range anchored at the row's own date would produce (#570).
+      def each_blended_range
+        seen = Set.new
+        each_chunk(date_scope) do |chunk_range|
+          lookback_start = chunk_range.begin - CarryForward::LOOKBACK_DAYS
+          rows = BlendedRate.dataset.where(date: lookback_start..chunk_range.end).naked.all
+          rows.each { |r| r[:base] = PIVOT }
+          all_dates = rows.map { |r| r[:date] }.uniq
+          anchors = all_dates.select { |d| chunk_range.cover?(d) }.sort
+          anchors.unshift(chunk_range.begin) unless all_dates.include?(chunk_range.begin)
+          CarryForward.each_snapshot(rows, dates: anchors) do |_anchor, contributors|
+            next if contributors.empty?
+
+            blended = base == PIVOT ? contributors : derive(contributors, target: base)
+            emit_records(blended, contributors) do |record|
+              key = [record[:quote], record[:date]]
+              next if seen.include?(key)
+
+              seen << key
+              yield record
+            end
+          end
+        end
+
+        # A rebuild that started mid-request deleted the table under our chunked reads. Failing the
+        # response keeps the truncation out of caches; a retry lands on the capped live fallback.
+        raise "materialized blend rebuilt mid-request" unless BlendedRate.ready?
+      end
+
       # When the range start is silent, anchor CF on it as well so the response surfaces the most recent prior
       # data — same blend ?date=chunk_range.begin would produce (mirrors Rate.between's snap-back, #71).
       # Dedupe on (quote, observation_date) so a pair whose contributor set hasn't changed doesn't reappear.
@@ -140,16 +188,12 @@ module Versions
         end
       end
 
+      # quotes= is a post-blend row filter (applied in emit_records), never a fetch filter: narrowing
+      # the fetch changed blended values whenever a contributor row failed the seeded-pivot test (LB's
+      # post-euro rows, BCBO's USD-quoted metals), so a filtered request disagreed with an unfiltered
+      # one about the same pair. The blend is computed from the full row set everywhere (#570).
       def apply_filters(ds)
-        ds = ds.where(provider: providers) if providers
-        if quotes
-          currencies = Set.new(quotes)
-          currencies << effective_base
-          currencies << PIVOT
-          quotes.each { |q| (peg = Peg.find(q)) && currencies << peg.base }
-          ds = ds.only(*currencies)
-        end
-        ds
+        providers ? ds.where(provider: providers) : ds
       end
 
       def raw_dataset
@@ -253,7 +297,16 @@ module Versions
 
       def validate_range_cost!
         return unless range? && !rollup?
-        return if quotes && quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
+        return if !providers && !expand_providers? && BlendedRate.ready?
+
+        # A SHORT provider list bounds the fetch, so a small quotes list on top stays cheap; naming
+        # every provider reproduces the unbounded workload, hence the provider-count bound. Nothing
+        # else bounds work anymore: quotes= filters rows only, after blending, so neither a
+        # provider-unbounded expand=providers range nor a plain range on the not-ready live fallback
+        # gets a quotes exemption.
+        if providers && quotes
+          return if providers.uniq.size <= MAX_DAILY_RANGE_PROVIDERS && quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
+        end
         # Cost follows computable days, so a `to` in the future counts only up to today.
         return if [date_scope.end, Date.today].min <= (date_scope.begin >> (MAX_DAILY_RANGE_YEARS * 12))
 
@@ -272,13 +325,22 @@ module Versions
         end
       end
 
+      # Range batches always blend via the pivot path: emit_blended used to pick a frame per batch
+      # (fast path when every contributor row already carried the requested base), and a different
+      # frame is not just different floats, since consensus and weighting see differently shaped
+      # numbers. A USD table cannot reproduce those batches, so ranges canonicalize on the pivot
+      # frame; the fast path remains for latest and single-date, which stay live anyway (#570).
       def emit_blended(rows, &block)
-        blended = if fast_path?(rows)
+        blended = if !range? && fast_path?(rows)
           fast_path_blend(rows)
         else
           pivot_path_blend(rows)
         end
 
+        emit_records(blended, rows, &block)
+      end
+
+      def emit_records(blended, rows, &block)
         return if blended.empty?
 
         # Echo a single provider's own published digits, but only for native daily rows. Rollup buckets are
@@ -340,6 +402,11 @@ module Versions
       end
 
       def pivot_path_blend(rows)
+        # Restricting the source set bypasses the peg layer entirely, so a pegged request base has
+        # no anchor to rebase through; mirror the fast path's refusal instead of answering from
+        # whatever the named providers happen to publish.
+        return [] if providers && base_peg
+
         blended = Blender.new(rows, base: PIVOT).blend
         blended = PegAnchor.apply(blended, base: PIVOT) unless providers
         return [] if blended.empty?

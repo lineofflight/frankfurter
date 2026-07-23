@@ -17,9 +17,11 @@ Frankfurter is a free and open-source currency data API built with Ruby that tra
 lib/
 ├── app.rb                       # Main Roda app — mounts v1 and v2
 ├── base_conversion.rb           # Rebases rates from any base to a common base
+├── blend_parity.rb              # Parity harness: replays query shapes through table and live paths
+├── blended_rate.rb              # BlendedRate model: materialized pivot-frame blend, refresh/rebuild
 ├── blender.rb                   # Blends multi-provider rates: rebase → consensus → weighted average
 ├── bucket.rb                    # Shared SQL bucket expressions for weekly/monthly aggregation
-├── cache.rb                     # Cloudflare cache purge
+├── cache.rb                     # Cloudflare cache purge, debounced with a trailing edge
 ├── carry_forward.rb             # Carries forward most recent provider rate within a lookback window
 ├── consensus.rb                 # Cross-provider outlier detection (MAD-based)
 ├── currency.rb                  # Currency model (materialized from rates)
@@ -56,6 +58,8 @@ lib/
 │   ├── v1/openapi.json          # V1 OpenAPI spec
 │   └── v2/openapi.json          # V2 OpenAPI spec
 └── tasks/
+    ├── blend.rake               # Rebuild/verify the materialized blend
+    ├── cache.rake               # Manual CDN purge
     ├── consensus.rake           # Consensus scan across providers
     ├── db.rake                  # Database migrations and setup
     ├── default.rake             # Default task (lint + test)
@@ -112,6 +116,8 @@ db/seeds/
 - Runs as its own process, started by foreman alongside the web server (see `Procfile`)
 - Calls `provider.backfill` directly on Provider model instances
 - Staggers startup backfill for all providers (2s apart)
+- Flushes pending debounced cache purges on a 60s tick (trailing edge)
+- Re-blends the trailing two days at UTC midnight so next-day observations pick up fresh decay weights
 - Cron schedule read from `publish_schedule` in the providers table (5-field cron; `null` for historical-only providers)
 - Convention: poll every 30 min across a 3-hour window starting at the publish hour (encoded directly in the cron expression, e.g. `*/30 14-16 * * 1-5` for ECB)
 - Backfill is incremental: fetches only from the last stored date forward
@@ -119,6 +125,12 @@ db/seeds/
 ## Database
 
 SQLite database with `rates`, `weekly_rates`, `monthly_rates`, `providers`, `currencies`, and `currency_coverages` tables.
+
+### blended_rates
+- `date`, `quote`, `rate` with PK `(quote, date)`; base is implicitly USD, the blend pivot
+- Materialized blend, sparse: one row per (quote, date) where the contributor set changed, each the canonical anchor-date value
+- Refreshed during backfill over `[min_inserted, max_inserted + 14]`; rebuilt by `rake blend:rebuild` (required whenever blend/consensus/peg/currency-patch code or seeds change)
+- Serves plain daily ranges in V2 (no `providers=`, no `expand=providers`); live path is the fallback while empty
 
 ### rates
 - `date`, `base`, `quote`, `rate`, `provider`
@@ -190,6 +202,9 @@ rake db:migrate         # Run database migrations
 rake db:seed            # Seed provider metadata
 rake backfill           # Backfill all providers (threaded, incremental)
 rake backfill[ecb]      # Backfill a single provider
+rake blend:rebuild      # Rebuild the materialized blend from scratch
+rake blend:parity       # Replay query shapes through table and live paths, compare bytes
+rake cache:purge        # Purge the CDN cache manually
 rake rollups:rebuild    # Rebuild weekly and monthly rollups
 rake rollups:rebuild[ecb] # Rebuild rollups for a single provider
 ```
