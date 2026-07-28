@@ -1,5 +1,7 @@
 # Frankfurter
 
+[![Plumber Score](https://score.getplumber.io/github.com/lineofflight/frankfurter.svg)](https://score.getplumber.io/github.com/lineofflight/frankfurter)
+
 [Frankfurter](https://frankfurter.dev) is an open-source currency data API that tracks daily exchange rates from institutional sources.
 
 ## Deployment
