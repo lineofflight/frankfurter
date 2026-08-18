@@ -4,7 +4,7 @@ require_relative "helper"
 require "consensus"
 
 describe Consensus do
-  def build_rates(quote: "USD", providers:)
+  def build_rates(providers:, quote: "USD")
     providers.map do |provider, rate|
       { date: Date.today, base: "EUR", quote:, rate:, provider: }
     end

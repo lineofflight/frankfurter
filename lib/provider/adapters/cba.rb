@@ -52,8 +52,10 @@ class Provider
           </ExchangeRatesByDateRangeByISO>
         XML
 
+        path = "soap:Envelope/soap:Body/ExchangeRatesByDateRangeByISOResponse/" \
+               "ExchangeRatesByDateRangeByISOResult/diffgr:diffgram/DocumentElement/ExchangeRatesByRange"
         response
-          .locate("soap:Envelope/soap:Body/ExchangeRatesByDateRangeByISOResponse/ExchangeRatesByDateRangeByISOResult/diffgr:diffgram/DocumentElement/ExchangeRatesByRange")
+          .locate(path)
           .filter_map do |row|
             iso = row.locate("ISO").first&.text
             next unless iso

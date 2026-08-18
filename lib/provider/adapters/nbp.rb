@@ -6,10 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies
-    # and weekly mid-market rates (Table B) for ~150 additional currencies against PLN,
-    # plus a daily gold reference price. Gold values come in PLN per gram and are
-    # normalized here to per troy ounce.
+    # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies and weekly mid-market rates
+    # (Table B) for ~150 additional currencies against PLN, plus a daily gold reference price. Gold values come in PLN
+    # per gram and are normalized here to per troy ounce.
     class NBP < Adapter
       TABLE_A_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
       TABLE_B_URL = "https://api.nbp.pl/api/exchangerates/tables/B"

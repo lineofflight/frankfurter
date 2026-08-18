@@ -10,39 +10,32 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Reserve Bank of Tonga — "Authorized Persons' Average Daily Exchange Rates"
-    # published as a single rolling XLSX covering 2017-01 to present in five biennial
-    # sheets ("2017 to 2018", "2019 to 2020", ..., "2025 to 2026"). Each sheet has
-    # the same column layout: one date column (Excel serial in column A) followed by
-    # three blocks of twelve quote currencies — BUY (B-M), MID (O-Z), and SELL
-    # (AB-AM), with column N and AA as visual spacers. Quote currencies, in the order
-    # they appear in each block: AUD, EUR, FJD, GBP, JPY, NZD, USD, WST, CHF, CAD,
-    # SEK, SGD.
+    # National Reserve Bank of Tonga — "Authorized Persons' Average Daily Exchange Rates" published as a single rolling
+    # XLSX covering 2017-01 to present in five biennial sheets ("2017 to 2018", "2019 to 2020", ..., "2025 to 2026").
+    # Each sheet has the same column layout: one date column (Excel serial in column A) followed by three blocks of
+    # twelve quote currencies — BUY (B-M), MID (O-Z), and SELL (AB-AM), with column N and AA as visual spacers. Quote
+    # currencies, in the order they appear in each block: AUD, EUR, FJD, GBP, JPY, NZD, USD, WST, CHF, CAD, SEK, SGD.
     #
-    # Rates are published as "1 TOP = X foreign" — TOP is the base, foreign is the
-    # quote. This matches the ECB convention (pivot in base). We emit MID directly
-    # per the issue #314 pattern of preferring a published mid over reconstructing
-    # it from buy/sell.
+    # Rates are published as "1 TOP = X foreign" — TOP is the base, foreign is the quote. This matches the ECB
+    # convention (pivot in base). We emit MID directly per the issue
+    # #314 pattern of preferring a published mid over reconstructing it from buy/sell.
     #
-    # Holidays and bank closures are flagged inline as shared strings in the rate
-    # cells (e.g. "Public Holiday: ANZAC Day"); those rows have no numeric values
-    # and are skipped.
+    # Holidays and bank closures are flagged inline as shared strings in the rate cells (e.g. "Public Holiday: ANZAC
+    # Day"); those rows have no numeric values and are skipped.
     class NRBT < Adapter
       DATA_URL = "https://www.reservebank.to/data/docs/fmarkets/exrates/average_daily_exchange_rates.xlsx"
       EXCEL_EPOCH = Date.new(1899, 12, 30)
 
-      # Twelve quote currencies in column order. The same sequence is repeated three
-      # times across the BUY / MID / SELL blocks.
+      # Twelve quote currencies in column order. The same sequence is repeated three times across the BUY / MID / SELL
+      # blocks.
       QUOTE_CURRENCIES = ["AUD", "EUR", "FJD", "GBP", "JPY", "NZD", "USD", "WST", "CHF", "CAD", "SEK", "SGD"].freeze
 
-      # Column indexes (zero-based) of each MID rate. Columns A=0, B=1 ... M=12 hold
-      # the date + BUY block; N=13 is a spacer; O=14 ... Z=25 hold MID; AA=26 is a
-      # spacer; AB=27 ... AM=38 hold SELL.
+      # Column indexes (zero-based) of each MID rate. Columns A=0, B=1 ... M=12 hold the date + BUY block; N=13 is a
+      # spacer; O=14 ... Z=25 hold MID; AA=26 is a spacer; AB=27 ... AM=38 hold SELL.
       MID_COLUMN_RANGE = 14..25
 
       class << self
-        # Whole-archive fetch — a single XLSX holds the full history. Large range
-        # keeps it in one fetch.
+        # Whole-archive fetch — a single XLSX holds the full history. Large range keeps it in one fetch.
         def backfill_range = 36_525
       end
 
@@ -104,7 +97,7 @@ class Provider
             text = v_node.text
             next if text.nil? || text.empty?
 
-            if col_index == 0
+            if col_index.zero?
               # Date cell — numeric only; shared-string headers in column A are skipped.
               next if cell_type == "s"
 
@@ -143,7 +136,7 @@ class Provider
 
       # Convert spreadsheet column letters (A, B, ..., Z, AA, AB, ...) to zero-based index.
       def column_index(letters)
-        letters.each_char.reduce(0) { |acc, ch| acc * 26 + (ch.ord - "A".ord + 1) } - 1
+        letters.each_char.reduce(0) { |acc, ch| (acc * 26) + (ch.ord - "A".ord + 1) } - 1
       end
     end
   end

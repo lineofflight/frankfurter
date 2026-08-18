@@ -9,34 +9,27 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Iraq (CBI). Publishes daily reference exchange rates for
-    # the Iraqi dinar (IQD) against ~16 currencies plus gold via an XLSX file
-    # linked from page/144 on cbi.iq.
+    # Central Bank of Iraq (CBI). Publishes daily reference exchange rates for the Iraqi dinar (IQD) against ~16
+    # currencies plus gold via an XLSX file linked from page/144 on cbi.iq.
     #
-    # The page hosts three XLSX files (USD-only, multi-currency daily, and a
-    # 1995-present historical archive of foreign currencies against USD). We
-    # consume the multi-currency daily file: it gives us IQD-pivoted rates back
-    # to 2009 for all currencies CBI publishes. The other two are USD-pivoted
-    # or USD-only and redundant for our IQD-pivoted shape.
+    # The page hosts three XLSX files (USD-only, multi-currency daily, and a 1995-present historical archive of foreign
+    # currencies against USD). We consume the multi-currency daily file: it gives us IQD-pivoted rates back to 2009 for
+    # all currencies CBI publishes. The other two are USD-pivoted or USD-only and redundant for our IQD-pivoted shape.
     #
-    # File URLs (e.g. file-177909880482668.xlsx) rotate when CBI re-uploads,
-    # so the adapter scrapes page/144 each fetch and picks the .xlsx link whose
-    # anchor text mentions gold (the multi-currency daily file).
+    # File URLs (e.g. file-177909880482668.xlsx) rotate when CBI re-uploads, so the adapter scrapes page/144 each fetch
+    # and picks the .xlsx link whose anchor text mentions gold (the multi-currency daily file).
     #
-    # The XLSX file uses one sheet per calendar year (2009-present). The
-    # column layout has evolved over time: 2-column Buy/Sell groups in
-    # 2009-2024, and 3-column Buy/Sell/Sell2 groups in 2025+. CBI publishes
-    # buy and sell prices; we coerce to mid via the average of buy and sell
-    # and ignore the secondary sell column where present.
+    # The XLSX file uses one sheet per calendar year (2009-present). The column layout has evolved over time: 2-column
+    # Buy/Sell groups in 2009-2024, and 3-column Buy/Sell/Sell2 groups in 2025+. CBI publishes buy and sell prices; we
+    # coerce to mid via the average of buy and sell and ignore the secondary sell column where present.
     #
-    # Rates are returned in CBI's native direction: foreign currency as base,
-    # IQD as quote (e.g. 1 USD = ~1310 IQD), matching the convention used by
-    # other pivot-in-quote adapters (NBG, BBK).
+    # Rates are returned in CBI's native direction: foreign currency as base, IQD as quote (e.g. 1 USD = ~1310 IQD),
+    # matching the convention used by other pivot-in-quote adapters (NBG, BBK).
     class CBI < Adapter
       PAGE_URL = "https://cbi.iq/page/144"
 
-      # Currency code aliases for labels CBI uses that aren't ISO 4217.
-      # SDR (CBI's label) maps to XDR (ISO 4217 code for Special Drawing Rights).
+      # Currency code aliases for labels CBI uses that aren't ISO 4217. SDR (CBI's label) maps to XDR (ISO 4217 code for
+      # Special Drawing Rights).
       CODE_ALIASES = {
         "S.FR" => "CHF",
         "UAE" => "AED",
@@ -44,9 +37,8 @@ class Provider
         "Gold" => "XAU",
       }.freeze
 
-      # Arabic for "gold" appears only in the multi-currency daily file's link text.
-      # USD-only and historical archive links don't mention gold, giving us a stable
-      # selector that survives re-ordering or new files added to the page.
+      # Arabic for "gold" appears only in the multi-currency daily file's link text. USD-only and historical archive
+      # links don't mention gold, giving us a stable selector that survives re-ordering or new files added to the page.
       GOLD_MARKER = "الذهب"
 
       RELS_NS = { "r" => "http://schemas.openxmlformats.org/package/2006/relationships" }.freeze
@@ -162,9 +154,8 @@ class Provider
       end
 
       def find_currency_code(header_rows, buy_col, sell_col)
-        # Search header rows for currency code text at columns near the buy/sell group.
-        # Headers can land on the buy col (e.g. 2009 layout) or any nearby col
-        # (2025-2026 layout where merged headers can land on the middle col).
+        # Search header rows for currency code text at columns near the buy/sell group. Headers can land on the buy col
+        # (e.g. 2009 layout) or any nearby col (2025-2026 layout where merged headers can land on the middle col).
         buy_n = col_to_num(buy_col)
         sell_n = col_to_num(sell_col)
         search_cols = (buy_n..(sell_n + 1)).to_a.map { |n| num_to_col(n) }
@@ -183,9 +174,8 @@ class Provider
       end
 
       def extract_code(text)
-        # ISO 4217 codes appear at the end of headers ("Saudi Arabian Riyal SAR")
-        # or alone in cells ("USD", "S.FR", "Gold"). Aliased non-ISO labels
-        # (S.FR, UAE, SDR, Gold) get rewritten to their ISO 4217 equivalents.
+        # ISO 4217 codes appear at the end of headers ("Saudi Arabian Riyal SAR") or alone in cells ("USD", "S.FR",
+        # "Gold"). Aliased non-ISO labels (S.FR, UAE, SDR, Gold) get rewritten to their ISO 4217 equivalents.
         return CODE_ALIASES[text.strip] if CODE_ALIASES.key?(text.strip)
 
         token = text.scan(/\b([A-Z]{3,4}|S\.FR)\b/).map(&:first).last
@@ -260,14 +250,14 @@ class Provider
         sheets
       end
 
-      def each_element(node, &block)
+      def each_element(node, &)
         return unless node.respond_to?(:nodes) && node.nodes
 
         node.nodes.each do |child|
           next unless child.respond_to?(:value)
 
           yield(child)
-          each_element(child, &block)
+          each_element(child, &)
         end
       end
 
@@ -275,9 +265,7 @@ class Provider
         return "" unless node.respond_to?(:nodes) && node.nodes
 
         node.nodes.map do |child|
-          if child.is_a?(String)
-            ""
-          elsif child.respond_to?(:value) && child.value == "t"
+          if child.respond_to?(:value) && child.value == "t"
             child.nodes.first.to_s
           elsif child.respond_to?(:value) && child.value == "r"
             collect_text(child)
@@ -311,8 +299,8 @@ class Provider
             next unless ref&.match?(/\A[A-Z]+\d+\z/)
 
             col = ref[/\A[A-Z]+/]
-            t = cell["t"]
-            value = extract_cell_value(cell, t, shared_strings)
+            type = cell["t"]
+            value = extract_cell_value(cell, type, shared_strings)
             cells[col] = value unless value.nil?
           end
           rows << { r: r, cells: cells }
@@ -320,8 +308,8 @@ class Provider
         rows
       end
 
-      def extract_cell_value(cell, t, shared_strings)
-        if t == "inlineStr"
+      def extract_cell_value(cell, type, shared_strings)
+        if type == "inlineStr"
           is_node = cell.nodes.find { |n| n.respond_to?(:value) && n.value == "is" }
           return unless is_node
 
@@ -331,22 +319,22 @@ class Provider
           return unless v_node
 
           raw = v_node.nodes.first.to_s
-          t == "s" ? shared_strings[raw.to_i] : raw
+          type == "s" ? shared_strings[raw.to_i] : raw
         end
       end
 
       def col_to_num(col)
-        n = 0
-        col.each_byte { |b| n = n * 26 + (b - 64) }
-        n
+        num = 0
+        col.each_byte { |b| num = (num * 26) + (b - 64) }
+        num
       end
 
-      def num_to_col(n)
+      def num_to_col(num)
         col = +""
-        while n > 0
-          n -= 1
-          col.prepend((65 + n % 26).chr)
-          n /= 26
+        while num.positive?
+          num -= 1
+          col.prepend((65 + (num % 26)).chr)
+          num /= 26
         end
         col
       end

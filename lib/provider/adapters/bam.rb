@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank Al-Maghrib. Publishes daily mid-market rates for ~30 currencies against MAD.
-    # Older data (pre-2016) lacks a mid-rate field; the adapter averages buy/sell.
+    # Bank Al-Maghrib. Publishes daily mid-market rates for ~30 currencies against MAD. Older data (pre-2016) lacks a
+    # mid-rate field; the adapter averages buy/sell.
     class BAM < Adapter
       URL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement"
       class << self

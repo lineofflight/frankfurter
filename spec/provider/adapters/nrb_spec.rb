@@ -33,8 +33,10 @@ class Provider < Sequel::Model(:providers)
           {
             "date" => "2026-04-01",
             "rates" => [
-              { "currency" => { "iso3" => "USD", "name" => "U.S. Dollar", "unit" => 1 }, "buy" => "151.44", "sell" => "152.04" },
-              { "currency" => { "iso3" => "EUR", "name" => "European Euro", "unit" => 1 }, "buy" => "173.69", "sell" => "174.38" },
+              { "currency" => { "iso3" => "USD", "name" => "U.S. Dollar", "unit" => 1 }, "buy" => "151.44",
+                "sell" => "152.04", },
+              { "currency" => { "iso3" => "EUR", "name" => "European Euro", "unit" => 1 }, "buy" => "173.69",
+                "sell" => "174.38", },
             ],
           },
         ]
@@ -50,7 +52,8 @@ class Provider < Sequel::Model(:providers)
 
       it "skips malformed dates" do
         payload = [
-          { "date" => "2020-06.25", "rates" => [{ "currency" => { "iso3" => "USD", "unit" => 1 }, "buy" => "133.5", "sell" => "134.0" }] },
+          { "date" => "2020-06.25",
+            "rates" => [{ "currency" => { "iso3" => "USD", "unit" => 1 }, "buy" => "133.5", "sell" => "134.0" }], },
         ]
 
         records = adapter.parse(payload)
@@ -63,8 +66,10 @@ class Provider < Sequel::Model(:providers)
           {
             "date" => "2026-04-01",
             "rates" => [
-              { "currency" => { "iso3" => "JPY", "name" => "Japanese Yen", "unit" => 10 }, "buy" => "9.49", "sell" => "9.53" },
-              { "currency" => { "iso3" => "KRW", "name" => "South Korean Won", "unit" => 100 }, "buy" => "9.92", "sell" => "9.96" },
+              { "currency" => { "iso3" => "JPY", "name" => "Japanese Yen", "unit" => 10 }, "buy" => "9.49",
+                "sell" => "9.53", },
+              { "currency" => { "iso3" => "KRW", "name" => "South Korean Won", "unit" => 100 }, "buy" => "9.92",
+                "sell" => "9.96", },
             ],
           },
         ]

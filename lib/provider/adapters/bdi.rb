@@ -6,9 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banca d'Italia. Publishes daily exchange rates for 150+ currencies against the euro via the "terze valute"
-    # (third currencies) portal. Uses the dailyRates endpoint with currencyIsoCode=EUR to get all currencies quoted
-    # against EUR for a single date.
+    # Banca d'Italia. Publishes daily exchange rates for 150+ currencies against the euro via the "terze valute" (third
+    # currencies) portal. Uses the dailyRates endpoint with currencyIsoCode=EUR to get all currencies quoted against EUR
+    # for a single date.
     class BDI < Adapter
       URL = "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates"
 
@@ -62,7 +62,7 @@ class Provider
           referenceDate: date.strftime("%Y-%m-%d"),
           currencyIsoCode: "EUR",
           lang: "en",
-        }).to_s
+        },).to_s
         parse(response)
       end
     end

@@ -6,18 +6,16 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Tanzania. Publishes daily exchange rates for 35+ currencies
-    # against the Tanzanian shilling (TZS). Uses the Mean column (midpoint
-    # of buy/sell). Publishes 7 days a week.
+    # Bank of Tanzania. Publishes daily exchange rates for 35+ currencies against the Tanzanian shilling (TZS). Uses the
+    # Mean column (midpoint of buy/sell). Publishes 7 days a week.
     #
-    # The previous_rates endpoint is protected by ASP.NET MVC antiforgery
-    # validation: a POST must carry a __RequestVerificationToken both as a
-    # cookie and as a matching form field, or the server returns HTTP 500.
-    # fetch() first GETs the page to obtain the session cookie and scrape the
-    # hidden token field, then POSTs the date range with the cookie and token.
+    # The previous_rates endpoint is protected by ASP.NET MVC antiforgery validation: a POST must carry a
+    # __RequestVerificationToken both as a cookie and as a matching form field, or the server returns HTTP
+    # 500. fetch() first GETs the page to obtain the session cookie and scrape
+    # the hidden token field, then POSTs the date range with the cookie and token.
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
-      FORM_URL = "#{BASE_URL}/ExchangeRate/previous_rates"
+      FORM_URL = "#{BASE_URL}/ExchangeRate/previous_rates".freeze
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
       TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/

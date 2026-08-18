@@ -6,22 +6,18 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Autoridade Monetária de Macau (AMCM). Publishes daily interbank middle
-    # exchange rates against the Macanese pataca (MOP) for 17 active foreign
-    # currencies plus historical pre-euro entries.
+    # Autoridade Monetária de Macau (AMCM). Publishes daily interbank middle exchange rates against the Macanese pataca
+    # (MOP) for 17 active foreign currencies plus historical pre-euro entries.
     #
-    # The endpoint accepts Begin/End in YYYYMMDD format. The API caps each
-    # response at roughly four calendar months of data, so backfill chunks in
-    # 90-day windows.
+    # The endpoint accepts Begin/End in YYYYMMDD format. The API caps each response at roughly four calendar months of
+    # data, so backfill chunks in 90-day windows.
     #
-    # Direction: provider publishes "1 foreign = X MOP" via the `usdMean`
-    # field (despite the name), so foreign currency goes in base and MOP in
-    # quote. The `unit` field gives the unit multiplier — JPY and KRW are
-    # quoted per 100 units, so the per-unit rate is `usdMean / unit`.
+    # Direction: provider publishes "1 foreign = X MOP" via the `usdMean` field (despite the name), so foreign currency
+    # goes in base and MOP in quote. The `unit` field gives the unit multiplier — JPY and KRW are quoted per 100 units,
+    # so the per-unit rate is `usdMean / unit`.
     #
-    # ECU (the European Currency Unit, published 1987-1998) is rewritten to
-    # XEU, the corresponding ISO 4217 code. LIQ is a non-currency liquidity
-    # indicator and is dropped downstream by Money::Currency.find.
+    # ECU (the European Currency Unit, published 1987-1998) is rewritten to XEU, the corresponding ISO 4217 code. LIQ is
+    # a non-currency liquidity indicator and is dropped downstream by Money::Currency.find.
     class AMCM < Adapter
       URL = "https://www.amcm.gov.mo/api/v1.0/cms/financial_info"
       CODE_ALIASES = { "ECU" => "XEU" }.freeze
@@ -36,7 +32,7 @@ class Provider
           "QueryType" => "1",
           "Begin" => after.strftime("%Y%m%d"),
           "End" => end_date.strftime("%Y%m%d"),
-        }).to_s
+        },).to_s
 
         parse(response).select { |r| r[:date].between?(after, end_date) }
       end

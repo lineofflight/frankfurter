@@ -6,10 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Moldova (Banca Națională a Moldovei). Publishes daily rates for
-    # 30+ currencies against MDL, plus daily reference prices for gold and silver.
-    # Date-parameterized XML endpoints, one request per day. Metals come from
-    # official_metal_rates in MDL per gram; values are normalized to per troy ounce here.
+    # National Bank of Moldova (Banca Națională a Moldovei). Publishes daily rates for 30+ currencies against MDL, plus
+    # daily reference prices for gold and silver. Date-parameterized XML endpoints, one request per day. Metals come
+    # from official_metal_rates in MDL per gram; values are normalized to per troy ounce here.
     class NBM < Adapter
       FX_URL = "https://www.bnm.md/en/official_exchange_rates"
       METAL_URL = "https://www.bnm.md/en/official_metal_rates"

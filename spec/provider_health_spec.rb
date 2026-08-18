@@ -3,9 +3,8 @@
 require_relative "helper"
 require_relative "../bin/provider_health"
 
-# Locks the staleness calibration: thresholds must catch genuinely-frozen feeds
-# (e.g. NBC at 10 missed) while tolerating normal lag (FBIL holidays at 4, T+1
-# at 1, monthly archives in arrears). See bin/provider_health.rb.
+# Locks the staleness calibration: thresholds must catch genuinely-frozen feeds (e.g. NBC at 10 missed) while tolerating
+# normal lag (FBIL holidays at 4, T+1 at 1, monthly archives in arrears). See bin/provider_health.rb.
 describe "provider_health" do
   def provider(key, cadence, missed)
     {

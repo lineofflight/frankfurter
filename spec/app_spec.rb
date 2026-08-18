@@ -65,8 +65,8 @@ describe App do
     _(json["message"]).must_equal("not found")
   end
 
-  # Through the full middleware stack: the RequestTimeout middleware must not swallow a 503 the
-  # query generated after its own (later-starting) deadline expired.
+  # Through the full middleware stack: the RequestTimeout middleware must not swallow a 503 the query generated after
+  # its own (later-starting) deadline expired.
   it "delivers a v2 deadline 503 through the middleware stack" do
     slow_query = Object.new
     def slow_query.range? = true

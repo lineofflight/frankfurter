@@ -4,10 +4,10 @@ require_relative "helper"
 require "blend_parity"
 require "blended_rate"
 
-# Merge-blocking parity gate for the materialized blend (#570). The live pipeline is the oracle:
-# both paths must serve byte-identical responses across generated shapes, with exactly two declared
-# behavior changes, each asserted rather than ignored. If a third divergence class appears here,
-# stop and rethink the design instead of widening the carve-outs.
+# Merge-blocking parity gate for the materialized blend (#570). The live pipeline is the oracle: both paths must serve
+# byte-identical responses across generated shapes, with exactly two declared behavior changes, each asserted rather
+# than ignored. If a third divergence class appears here, stop and rethink the design instead of widening the
+# carve-outs.
 describe "blend parity" do
   def query(params, force_live: false)
     q = Versions::V2::RateQuery.new(params)
@@ -23,10 +23,10 @@ describe "blend parity" do
     _(report.shapes).must_be(:>, 30)
   end
 
-  # The explain machinery itself needs exercising in CI: fixture shapes are usually byte-identical,
-  # so without an engineered divergence a broken verifier would only ever surface against the full
-  # prod copy. The aging scenario from the carve-out spec below drives a genuine snap-back
-  # divergence through explain_divergence, and a tampered table row must be rejected.
+  # The explain machinery itself needs exercising in CI: fixture shapes are usually byte-identical, so without an
+  # engineered divergence a broken verifier would only ever surface against the full prod copy. The aging scenario from
+  # the carve-out spec below drives a genuine snap-back divergence through explain_divergence, and a tampered table row
+  # must be rejected.
   it "verifies engineered divergences and rejects tampered table values" do
     observed = Fixtures.business_day(40)
     stale = observed - 10
@@ -59,10 +59,9 @@ describe "blend parity" do
     _(tampered_reason).wont_be_nil
   end
 
-  # Carve-out 1: a snap-back row serves the canonical anchor-date value. Live computes the range
-  # start's snapshot at the range-start anchor, so a contributor that ages out of the carry-forward
-  # lookback between its observation date and the range start changes the live value; the table keeps
-  # the value blended at the row's own date.
+  # Carve-out 1: a snap-back row serves the canonical anchor-date value. Live computes the range start's snapshot at the
+  # range-start anchor, so a contributor that ages out of the carry-forward lookback between its observation date and
+  # the range start changes the live value; the table keeps the value blended at the row's own date.
   it "serves the canonical anchor-date value for snap-back rows" do
     observed = Fixtures.business_day(40)
     stale = observed - 10
@@ -77,8 +76,8 @@ describe "blend parity" do
     ])
     BlendedRate.rebuild
 
-    # Asserted in the pivot frame: derive divides a whole batch by the base's rate at the
-    # range-start anchor on both paths, so only the pivot-frame value isolates the carve-out.
+    # Asserted in the pivot frame: derive divides a whole batch by the base's rate at the range-start anchor on both
+    # paths, so only the pivot-frame value isolates the carve-out.
     params = { from: range_start.to_s, to: (range_start + 2).to_s, quotes: "MXN", base: "USD" }
     table_row = query(params).to_a.find { |r| r[:quote] == "MXN" }
     live_row = query(params, force_live: true).to_a.find { |r| r[:quote] == "MXN" }
@@ -91,9 +90,9 @@ describe "blend parity" do
     _(table_row[:rate]).must_equal(canonical_row[:rate])
   end
 
-  # Carve-out 1, existence variant: an observation the consensus filter masked at its own date's
-  # anchor has no canonical value. Live can surface it retroactively once the masking cohort ages
-  # out of the carry-forward lookback; the table never serves it.
+  # Carve-out 1, existence variant: an observation the consensus filter masked at its own date's anchor has no canonical
+  # value. Live can surface it retroactively once the masking cohort ages out of the carry-forward lookback; the table
+  # never serves it.
   it "omits rows that were consensus-masked at their own anchor" do
     d0 = Fixtures.business_day(40)
     d1 = d0 + 9
@@ -109,8 +108,8 @@ describe "blend parity" do
         { provider:, date: d0, base: "EUR", quote: "USD", rate: 1.08 },
       ]
     end
-    # X's observation at d1 is an outlier while the cohort is in the lookback; once the cohort ages
-    # out, X is alone, below the consensus minimum, and its masked observation would emerge.
+    # X's observation at d1 is an outlier while the cohort is in the lookback; once the cohort ages out, X is alone,
+    # below the consensus minimum, and its masked observation would emerge.
     rows << { provider: "X", date: d1, base: "EUR", quote: "ZAR", rate: 99.0 }
     rows << { provider: "X", date: d1, base: "EUR", quote: "USD", rate: 1.08 }
     Rate.dataset.multi_insert(rows)
@@ -131,9 +130,9 @@ describe "blend parity" do
     _(own_anchor.map { |r| r[:date] }).wont_include(d1.to_s)
   end
 
-  # Carve-out 2: range batches always blend via the pivot path. A batch whose contributor rows all
-  # share the requested base used to blend directly in that base; consensus and weighting see
-  # differently shaped numbers there, so the output legitimately differs from the pivot-frame value.
+  # Carve-out 2: range batches always blend via the pivot path. A batch whose contributor rows all share the requested
+  # base used to blend directly in that base; consensus and weighting see differently shaped numbers there, so the
+  # output legitimately differs from the pivot-frame value.
   it "blends range batches in the pivot frame even when every contributor shares the base" do
     era_start = Fixtures.business_day(100)
     era_end = Fixtures.business_day(80)

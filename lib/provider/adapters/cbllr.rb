@@ -7,30 +7,26 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Liberia (CBL). Publishes a daily indicative exchange rate
-    # for the US dollar against the Liberian dollar (LRD) on a Drupal-rendered
-    # HTML page. CBL is the only national authority quoting LRD; Liberia
-    # operates a dollarized economy alongside the local currency.
+    # Central Bank of Liberia (CBL). Publishes a daily indicative exchange rate for the US dollar against the Liberian
+    # dollar (LRD) on a Drupal-rendered HTML page. CBL is the only national authority quoting LRD; Liberia operates a
+    # dollarized economy alongside the local currency.
     #
-    # The bare acronym "CBL" already collides with the Central Bank of Libya
-    # (#394, declined), so the adapter key smushes in the country code: CBLLR.
+    # The bare acronym "CBL" already collides with the Central Bank of Libya (#394, declined), so the adapter key
+    # smushes in the country code: CBLLR.
     #
-    # The page lists ~14 entries per page sorted newest-first, with a ?page=N
-    # 0-indexed pager reaching back to 2012-07-05. The full archive is ~105
-    # pages. The adapter walks pages newest-first and stops once it sees a row
-    # older than the requested `after`, so incremental fetches usually touch
-    # just one page.
+    # The page lists ~14 entries per page sorted newest-first, with a ?page=N 0-indexed pager reaching back to
+    # 2012-07-05. The full archive is ~105 pages. The adapter walks pages newest-first and stops once it sees a row
+    # older than the requested `after`, so incremental fetches usually touch just one page.
     #
-    # CBL publishes buy and sell prices ("L$X/US$1.00"); we coerce to the mid
-    # (issue #314). Rates are returned in CBL's native direction — USD as base,
-    # LRD as quote — matching the convention used by other USD-pivoted
-    # single-pair adapters (e.g. BANREP, BCCR, MMA).
+    # CBL publishes buy and sell prices ("L$X/US$1.00"); we coerce to the mid (issue
+    # #314). Rates are returned in CBL's native direction — USD as base, LRD
+    # as quote — matching the convention used by other USD-pivoted single-pair adapters (e.g. BANREP, BCCR, MMA).
     class CBLLR < Adapter
       BASE_URL = "https://www.cbl.org.lr/research/buying-selling-rates"
       RATE_PATTERN = %r{L\$\s*([\d.]+)\s*/\s*US\$}
 
-      # Hard ceiling to avoid runaway pagination if the markup ever changes.
-      # The full archive is ~105 pages today; 500 gives years of headroom.
+      # Hard ceiling to avoid runaway pagination if the markup ever changes. The full archive is ~105 pages today; 500
+      # gives years of headroom.
       MAX_PAGES = 500
 
       def fetch(after: nil, upto: nil)
@@ -92,7 +88,7 @@ class Provider
       end
 
       def fetch_page(page)
-        params = { page: page } if page > 0
+        params = { page: page } if page.positive?
 
         http.get(BASE_URL, params: params).to_s
       end

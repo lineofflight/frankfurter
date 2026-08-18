@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "oj"
-require "set"
 
 require "blended_rate"
 require "currency"
@@ -24,7 +23,7 @@ class BlendParity
 
     def to_s
       lines = ["blend:parity: #{shapes} shapes compared, " \
-        "#{snapback_rows} snap-back rows verified canonical, #{failures.size} failures"]
+               "#{snapback_rows} snap-back rows verified canonical, #{failures.size} failures"]
       failures.first(10).each { |f| lines << "  FAIL #{f[:shape].inspect}: #{f[:reason]}" }
       lines.join("\n")
     end
@@ -91,8 +90,8 @@ class BlendParity
   #
   # Returns [verified_row_count, nil] on success, [0, reason] on failure.
   def explain_divergence(shape, table, live)
-    table_keys = table.map { |r| r.values_at(:date, :quote) }.to_set
-    live_keys = live.map { |r| r.values_at(:date, :quote) }.to_set
+    table_keys = table.to_set { |r| r.values_at(:date, :quote) }
+    live_keys = live.to_set { |r| r.values_at(:date, :quote) }
     verified = 0
 
     live.reject { |r| table_keys.include?(r.values_at(:date, :quote)) }.each do |r|
@@ -100,7 +99,7 @@ class BlendParity
       # re-surface older superseded rows mid-range when a consensus flip reveals them. Those, like masked emergences,
       # have no place in the canonical sequence.
       superseded = r[:date] < shape[:from] &&
-        table.any? { |t| t[:quote] == r[:quote] && t[:date] > r[:date] && t[:date] < shape[:from] }
+                   table.any? { |t| t[:quote] == r[:quote] && t[:date] > r[:date] && t[:date] < shape[:from] }
       if superseded || canonical_rate(shape, r).nil?
         verified += 1
         next
@@ -121,13 +120,14 @@ class BlendParity
     common_live = live.select { |r| table_keys.include?(r.values_at(:date, :quote)) }
     common_table.zip(common_live) do |t, l|
       if t.values_at(:date, :base, :quote) != l.values_at(:date, :base, :quote)
-        return [0, "record keys diverge at #{t.values_at(:date, :base, :quote)} vs #{l.values_at(:date, :base, :quote)}"]
+        return [0,
+                "record keys diverge at #{t.values_at(:date, :base, :quote)} vs #{l.values_at(:date, :base, :quote)}",]
       end
       next if t[:rate] == l[:rate]
 
       unless pivot_pair_canonical?(shape, t)
         reason = "rate mismatch for #{t[:quote]} on #{t[:date]} where the table value is not " \
-          "canonical: table #{t[:rate]}, live #{l[:rate]}"
+                 "canonical: table #{t[:rate]}, live #{l[:rate]}"
         return [0, reason]
       end
 
@@ -141,10 +141,10 @@ class BlendParity
     # A derived base->PIVOT row carries the reciprocal of the base's rate, so its canonicality is the base currency's;
     # the pivot frame has no PIVOT-quoted row to probe directly.
     probe = if record[:quote] == BlendedRate::PIVOT
-      { date: record[:date], quote: (shape[:base] || "EUR").to_s.upcase }
-    else
-      record
-    end
+              { date: record[:date], quote: (shape[:base] || "EUR").to_s.upcase }
+            else
+              record
+            end
     table_pivot = pivot_frame_rate(shape, probe, from: shape[:from], to: shape[:to], force_live: false)
     canonical = canonical_rate(shape, probe)
     !canonical.nil? && table_pivot == canonical
@@ -160,7 +160,7 @@ class BlendParity
   # blended value is emitted undivided. Memoized per resulting query, since a full-history shape with several divergent
   # records would otherwise replay per record.
   def pivot_frame_rate(shape, record, from:, to:, force_live:)
-    params = shape.reject { |k, _| [:from, :to, :base].include?(k) }.merge(base: BlendedRate::PIVOT)
+    params = shape.except(:from, :to, :base).merge(base: BlendedRate::PIVOT)
     params[:quotes] = [params[:quotes], record[:quote]].compact.join(",") if params[:quotes]
     params = params.merge(from:, to:).compact
 
@@ -184,7 +184,7 @@ class BlendParity
 
   def adversarial_shapes
     saturday = coverage.end - ((coverage.end.wday + 1) % 7)
-    mid = coverage.begin + coverage_days / 2
+    mid = coverage.begin + (coverage_days / 2)
     [
       { from: coverage.begin.to_s },
       { from: coverage.begin.to_s, quotes: "USD,GBP,JPY" },
@@ -200,12 +200,12 @@ class BlendParity
   def random_shape
     roll = @rng.rand
     span = if roll < 0.75
-      @rng.rand(1..[60, coverage_days].min)
-    elsif roll < 0.98
-      @rng.rand([61, coverage_days].min..[730, coverage_days].min)
-    else
-      @rng.rand([731, coverage_days].min..[2200, coverage_days].min)
-    end
+             @rng.rand(1..[60, coverage_days].min)
+           elsif roll < 0.98
+             @rng.rand([61, coverage_days].min..[730, coverage_days].min)
+           else
+             @rng.rand([731, coverage_days].min..[2200, coverage_days].min)
+           end
     from = coverage.begin + @rng.rand(0..[coverage_days - span, 0].max)
 
     shape = { from: from.to_s, to: (from + span).to_s }

@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Jamaica daily counter rates in JMD.
-    # Fetches from a WPDataTables endpoint (table_id=134), which requires a nonce extracted from the page HTML.
+    # Bank of Jamaica daily counter rates in JMD. Fetches from a WPDataTables endpoint (table_id=134), which requires a
+    # nonce extracted from the page HTML.
     class BOJA < Adapter
       PAGE_URL = "https://boj.org.jm/market/foreign-exchange/counter-rates/"
       BASE_URL = "https://boj.org.jm/wp-admin/admin-ajax.php"

@@ -7,9 +7,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Danmarks Nationalbank. Publishes daily exchange rates for 30 currencies
-    # against the Danish krone (DKK) via Statistics Denmark's Statbank API.
-    # Rates are quoted as DKK per 100 units of foreign currency.
+    # Danmarks Nationalbank. Publishes daily exchange rates for 30 currencies against the Danish krone (DKK) via
+    # Statistics Denmark's Statbank API. Rates are quoted as DKK per 100 units of foreign currency.
     class DNB < Adapter
       URL = "https://api.statbank.dk/v1/data"
       CURRENCIES = [

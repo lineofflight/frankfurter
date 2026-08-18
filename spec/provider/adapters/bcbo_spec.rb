@@ -9,7 +9,8 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe BCBO do
       before do
-        VCR.insert_cassette("bcbo", record: :new_episodes, match_requests_on: [:method, :uri], allow_playback_repeats: true)
+        VCR.insert_cassette("bcbo", record: :new_episodes, match_requests_on: [:method, :uri],
+                                    allow_playback_repeats: true,)
       end
 
       after { VCR.eject_cassette }
@@ -140,7 +141,7 @@ class Provider < Sequel::Model(:providers)
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "XAU", quote: "USD", rate: 4082.56 })
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "XAG", quote: "USD", rate: 63.73 })
 
-        _(records.find { |r| r[:base] == "USD" && r[:rate] == 6.86 }).must_be_nil
+        _(records.find { |r| r[:base] == "USD" && r[:rate] == 6.86 }).must_be_nil # rubocop:disable Lint/FloatComparison
       end
 
       it "parses daily files in the current 2026-07 layout" do
@@ -165,11 +166,13 @@ class Provider < Sequel::Model(:providers)
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAU", quote: "USD", rate: 3999.28 })
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XAG", quote: "USD", rate: 57.4583 })
         _(records).must_include({ date: Date.new(2026, 7, 14), base: "XDR", quote: "USD", rate: 1.35904 })
-        # UFV (code "Bs/UFV") and SOFR are not currency rates and must be skipped.
-        # Assert their values never leak into records: a base check would pass even
-        # if the UFV row were emitted, since it would be keyed "Bs/UFV", not "UFV".
+        # UFV (code "Bs/UFV") and SOFR are not currency rates and must be skipped. Assert their values never leak into
+        # records: a base check would pass even if the UFV row were emitted, since it would be keyed "Bs/UFV", not
+        # "UFV".
+        # rubocop:disable Lint/FloatComparison
         _(records.none? { |r| r[:rate] == 3.30736 }).must_equal(true)
         _(records.none? { |r| r[:rate] == 0.0355 }).must_equal(true)
+        # rubocop:enable Lint/FloatComparison
       end
     end
   end

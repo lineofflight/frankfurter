@@ -26,7 +26,7 @@ class Provider < Sequel::Model(:providers)
     # every boot syncs changes from the image (new providers, updated schedules) without manual intervention.
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
-      data = Dir["#{dir}/*.json"].sort.map { |f| JSON.parse(File.read(f)) }
+      data = Dir["#{dir}/*.json"].map { |f| JSON.parse(File.read(f)) }
       dataset.delete
       dataset.multi_insert(data)
       load_cache
@@ -87,14 +87,13 @@ class Provider < Sequel::Model(:providers)
         before = db.get(Sequel.lit("total_changes()"))
         Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
         count = db.get(Sequel.lit("total_changes()")) - before
-        if count > 0
+        if count.positive?
           affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq
           refresh_rollups(records.map { |r| r[:date] }.uniq)
           refresh_currency_summaries(affected_currencies)
-          # A late arrival at date d joins the carry-forward contributor set of anchors through
-          # d + LOOKBACK_DAYS, so those stored blends change too. Inside the transaction: the write
-          # lock serializes concurrent backfills' refreshes, and a failed refresh rolls back the
-          # insert so the next fetch re-ingests and retries.
+          # A late arrival at date d joins the carry-forward contributor set of anchors through d + LOOKBACK_DAYS, so
+          # those stored blends change too. Inside the transaction: the write lock serializes concurrent backfills'
+          # refreshes, and a failed refresh rolls back the insert so the next fetch re-ingests and retries.
           dates = records.map { |r| r[:date] }
           BlendedRate.refresh(dates.min..(dates.max + CarryForward::LOOKBACK_DAYS))
         end
@@ -104,8 +103,7 @@ class Provider < Sequel::Model(:providers)
       Log.info("#{key}: inserted #{inserted} rates")
       next if inserted.zero?
 
-      # Purge stays last: purging before the blend refresh commits would let the edge re-cache
-      # stale blends.
+      # Purge stays last: purging before the blend refresh commits would let the edge re-cache stale blends.
       Cache.purge_debounced
       db.run("PRAGMA optimize")
     end
@@ -156,9 +154,9 @@ class Provider < Sequel::Model(:providers)
     cursor = from_bucket
     while cursor < to_bucket
       cursor = case granularity
-      when :week  then cursor + 7
-      when :month then cursor.next_month
-      end
+               when :week  then cursor + 7
+               when :month then cursor.next_month
+               end
       count += 1
     end
     count
@@ -180,13 +178,13 @@ class Provider < Sequel::Model(:providers)
       db[:currency_coverages].insert_conflict(target: [:provider_key, :iso_code], update: {
         start_date: Sequel.function(:min, Sequel[:currency_coverages][:start_date], dates[:start_date]),
         end_date: Sequel.function(:max, Sequel[:currency_coverages][:end_date], dates[:end_date]),
-      }).insert(provider_key: key, iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
+      },).insert(provider_key: key, iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
 
       # Upsert global currency date range
       db[:currencies].insert_conflict(target: :iso_code, update: {
         start_date: Sequel.function(:min, Sequel[:currencies][:start_date], dates[:start_date]),
         end_date: Sequel.function(:max, Sequel[:currencies][:end_date], dates[:end_date]),
-      }).insert(iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
+      },).insert(iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
     end
   end
 

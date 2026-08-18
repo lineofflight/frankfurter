@@ -133,16 +133,19 @@ describe Currency do
   end
 
   it "extends start_date back to peg start when provider data is newer" do
-    # AED is pegged to USD since 1997-11-02. Insert provider data starting
-    # much later, but anchor (USD) data going back further.
+    # AED is pegged to USD since 1997-11-02. Insert provider data starting much later, but anchor (USD) data going back
+    # further.
     db = Sequel::Model.db
     Rate.multi_insert([
       { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
       { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
     ])
-    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02", end_date: Date.today.to_s)
-    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
+                                                     end_date: Date.today.to_s,)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s,
+                                                     end_date: Date.today.to_s,)
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED",
+                                                             start_date: Date.today.to_s, end_date: Date.today.to_s,)
 
     aed = Currency.find("AED")
 
@@ -157,9 +160,12 @@ describe Currency do
       { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
       { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
     ])
-    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02", end_date: Date.today.to_s)
-    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED", start_date: Date.today.to_s, end_date: Date.today.to_s)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
+                                                     end_date: Date.today.to_s,)
+    db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s,
+                                                     end_date: Date.today.to_s,)
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED",
+                                                             start_date: Date.today.to_s, end_date: Date.today.to_s,)
 
     aed = Currency.all.find { |c| c.iso_code == "AED" }
 
@@ -168,10 +174,11 @@ describe Currency do
 
   it "extends end_date for pegged currency with stale provider data" do
     db = Sequel::Model.db
-    # ANG is pegged to USD. Insert a stale ANG row (end_date in the past)
-    # but USD is current. The peg should extend ANG's end_date to match USD.
+    # ANG is pegged to USD. Insert a stale ANG row (end_date in the past) but USD is current. The peg should extend
+    # ANG's end_date to match USD.
     db[:currencies].insert_conflict(:replace).insert(iso_code: "ANG", start_date: "1999-01-04", end_date: "2025-03-28")
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "BDI", iso_code: "ANG", start_date: "1999-01-04", end_date: "2025-03-28")
+    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "BDI", iso_code: "ANG",
+                                                             start_date: "1999-01-04", end_date: "2025-03-28",)
 
     usd = Currency.find("USD")
 

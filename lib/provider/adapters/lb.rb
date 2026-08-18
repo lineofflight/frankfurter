@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Lithuania (Lietuvos Bankas). Publishes daily exchange rates for
-    # ~88 currencies. Pre-2015 rates are quoted against LTL (Lithuanian litas);
-    # post-2015 rates are EUR-based (ECB rates republished after euro adoption).
+    # Bank of Lithuania (Lietuvos Bankas). Publishes daily exchange rates for ~88 currencies. Pre-2015 rates are quoted
+    # against LTL (Lithuanian litas); post-2015 rates are EUR-based (ECB rates republished after euro adoption).
     class LB < Adapter
       BASE_URL = "https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates"
       EUR_ADOPTION = Date.new(2015, 1, 1)

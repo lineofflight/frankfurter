@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # South African Reserve Bank. Publishes daily weighted-average exchange rates
-    # for 24 currencies. USD, GBP, EUR are quoted as ZAR per foreign unit (foreign
-    # base); all others as foreign per ZAR (ZAR base).
+    # South African Reserve Bank. Publishes daily weighted-average exchange rates for 24 currencies. USD, GBP, EUR are
+    # quoted as ZAR per foreign unit (foreign base); all others as foreign per ZAR (ZAR base).
     class SARB < Adapter
       BASE_URL = "https://custom.resbank.co.za/SarbWebApi/WebIndicators/Shared/GetTimeseriesObservations"
 

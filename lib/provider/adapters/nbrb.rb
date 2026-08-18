@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of the Republic of Belarus. Publishes daily rates for ~30 currencies against BYN.
-    # BYN was redenominated on 2016-07-01; earlier data uses different currency IDs.
+    # National Bank of the Republic of Belarus. Publishes daily rates for ~30 currencies against BYN. BYN was
+    # redenominated on 2016-07-01; earlier data uses different currency IDs.
     class NBRB < Adapter
       RATES_URL = "https://api.nbrb.by/exrates/rates"
       CHUNK_DAYS = 365
@@ -57,7 +57,7 @@ class Provider
         response = http.get("#{RATES_URL}/dynamics/#{cur_id}", params: {
           startDate: start_date.to_s,
           endDate: end_date.to_s,
-        }).to_s
+        },).to_s
         data = Oj.load(response, mode: :strict)
         raise "NBRB: expected JSON array from dynamics endpoint, got #{data.class}" unless data.is_a?(Array)
 

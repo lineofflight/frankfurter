@@ -6,21 +6,19 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Tajikistan. Publishes daily rates for ~36 currencies against TJS,
-    # back to 2001-01-01. Snapshot endpoint returns one date per request and carries
-    # forward the most recent trading-day rate on weekends and holidays.
+    # National Bank of Tajikistan. Publishes daily rates for ~36 currencies against TJS, back to 2001-01-01. Snapshot
+    # endpoint returns one date per request and carries forward the most recent trading-day rate on weekends and
+    # holidays.
     #
-    # The Valute ID attribute is unreliable for historical records (e.g. ID 810
-    # appears with CharCode RUB after originally tagging the Soviet rouble SUR).
-    # Trust CharCode for ISO mapping. Nominal may be 10, 100, or 1000 for
+    # The Valute ID attribute is unreliable for historical records (e.g. ID 810 appears with CharCode RUB after
+    # originally tagging the Soviet rouble SUR). Trust CharCode for ISO mapping. Nominal may be 10, 100, or 1000 for
     # low-value currencies; divide Value by Nominal to normalize to per-unit.
     #
-    # Out-of-range requests (before 2001 or beyond today) silently return today's
-    # snapshot, so we verify the response's Date attribute matches the request
-    # before keeping the records.
+    # Out-of-range requests (before 2001 or beyond today) silently return today's snapshot, so we verify the response's
+    # Date attribute matches the request before keeping the records.
     #
-    # Records are returned in NBT's native direction — foreign currency as base,
-    # TJS as quote — matching other pivot-in-quote adapters (e.g. NBG, BBK).
+    # Records are returned in NBT's native direction — foreign currency as base, TJS as quote — matching other
+    # pivot-in-quote adapters (e.g. NBG, BBK).
     #
     # Attribution required: reference to www.nbt.tj per the site footer.
     class NBT < Adapter

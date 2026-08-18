@@ -6,14 +6,13 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Myanmar. Publishes daily reference exchange rates for 37
-    # currencies against the Myanmar kyat (MMK) via a public JSON API. Rates are
-    # expressed as MMK per 1 unit of foreign currency. No historical API is
-    # available — only the latest rates are fetched.
+    # Central Bank of Myanmar. Publishes daily reference exchange rates for 37 currencies against the Myanmar kyat (MMK)
+    # via a public JSON API. Rates are expressed as MMK per 1 unit of foreign currency. No historical API is available —
+    # only the latest rates are fetched.
     class CBM < Adapter
       BASE_URL = "https://forex.cbm.gov.mm/api/latest"
 
-      def fetch(after: nil, upto: nil)
+      def fetch(**)
         parse(http.get(BASE_URL).to_s)
       end
 

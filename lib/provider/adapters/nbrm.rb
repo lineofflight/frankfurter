@@ -47,7 +47,7 @@ class Provider
           StartDate: start_date.strftime("%d.%m.%Y"),
           EndDate: end_date.strftime("%d.%m.%Y"),
           format: "json",
-        }).to_s
+        },).to_s
         parse(response)
       end
 

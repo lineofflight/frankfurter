@@ -3,25 +3,20 @@
 
 # Provider health monitor.
 #
-# Fetches the live /v2/providers feed and flags any provider whose
-# `publishes_missed` exceeds a cadence-specific threshold, then keeps one
-# GitHub issue per stale provider. The point is to surface silent freezes: a
-# provider whose feed breaks (TLS chain, source change, geo-block) fails every
-# scheduled backfill but logs nothing a human sees.
+# Fetches the live /v2/providers feed and flags any provider whose `publishes_missed` exceeds a cadence-specific
+# threshold, then keeps one GitHub issue per stale provider. The point is to surface silent freezes: a provider whose
+# feed breaks (TLS chain, source change, geo-block) fails every scheduled backfill but logs nothing a human sees.
 #
-# Issues carry two labels: `provider` (the umbrella every provider issue shares,
-# human-filed or auto) and `health` (bot-owned; the discriminator used to find
-# the rolling issues this script manages). `health` must never be applied by
+# Issues carry two labels: `provider` (the umbrella every provider issue shares, human-filed or auto) and `health`
+# (bot-owned; the discriminator used to find the rolling issues this script manages). `health` must never be applied by
 # hand, or this script could match and edit a human's issue.
 #
-# `publishes_missed` is already cadence-aware in its unit (missed fire-days for
-# daily, missed week/month buckets for weekly/monthly), computed server-side, so
-# this script only thresholds it. Thresholds sit above normal lag: daily absorbs
-# holiday clusters and T+1 publishing; monthly absorbs in-arrears archives.
+# `publishes_missed` is already cadence-aware in its unit (missed fire-days for daily, missed week/month buckets for
+# weekly/monthly), computed server-side, so this script only thresholds it. Thresholds sit above normal lag: daily
+# absorbs holiday clusters and T+1 publishing; monthly absorbs in-arrears archives.
 #
-# Each run, per flagged provider: create an issue if none is open, otherwise
-# refresh its body (so the missed count stays current) without commenting. When
-# a provider recovers, its issue is commented and closed. Creation is the only
+# Each run, per flagged provider: create an issue if none is open, otherwise refresh its body (so the missed count stays
+# current) without commenting. When a provider recovers, its issue is commented and closed. Creation is the only
 # notification; an ongoing freeze stays quiet.
 #
 # Run with DRY_RUN=1 to print the decision and bodies without touching issues.
@@ -34,13 +29,12 @@ require "date"
 
 API = ENV.fetch("API", "https://api.frankfurter.dev/v2/providers")
 REPO = ENV.fetch("REPO", "lineofflight/frankfurter")
-# `health` is bot-owned and used to find the issues this script manages, so the
-# search filters on it alone; both labels are applied on create.
+# `health` is bot-owned and used to find the issues this script manages, so the search filters on it alone; both labels
+# are applied on create.
 HEALTH_LABEL = "health"
 PROVIDER_LABEL = "provider"
 
-# Flag only well past normal lag. See the calibration in the PR that introduced
-# this for why these values.
+# Flag only well past normal lag. See the calibration in the PR that introduced this for why these values.
 THRESHOLDS = { "daily" => 8, "weekly" => 2, "monthly" => 2 }.freeze
 
 def fetch_providers
@@ -57,17 +51,15 @@ def fetch_providers
 end
 
 def flagged(providers)
-  providers
-    .select do |provider|
-      threshold = THRESHOLDS[provider["publish_cadence"]]
-      threshold && (provider["publishes_missed"] || 0) >= threshold
-    end
-    .sort_by { |provider| -(provider["publishes_missed"] || 0) }
+  flagged_providers = providers.select do |provider|
+    threshold = THRESHOLDS[provider["publish_cadence"]]
+    threshold && (provider["publishes_missed"] || 0) >= threshold
+  end
+  flagged_providers.sort_by { |provider| -(provider["publishes_missed"] || 0) }
 end
 
-# A stable internal identifier embedded in each issue body, deliberately kept as
-# `provider-health` (not renamed with the label) so already-open issues stay
-# matchable. It is what pins an issue to its provider, independent of labels.
+# A stable internal identifier embedded in each issue body, deliberately kept as `provider-health` (not renamed with the
+# label) so already-open issues stay matchable. It is what pins an issue to its provider, independent of labels.
 def marker(key)
   "<!-- provider-health: #{key} -->"
 end

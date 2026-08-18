@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# Recency-weighted averaging of rebased exchange rates. Rates within the grace period carry full weight.
-# Beyond it, weight decays exponentially so stale rates contribute less without a hard cutoff. Rates marked
-# `excluded: true` (e.g. consensus outliers) are surfaced in the providers list but do not contribute to the rate.
+# Recency-weighted averaging of rebased exchange rates. Rates within the grace period carry full weight. Beyond it,
+# weight decays exponentially so stale rates contribute less without a hard cutoff. Rates marked `excluded: true` (e.g.
+# consensus outliers) are surfaced in the providers list but do not contribute to the rate.
 class WeightedAverage
   DECAY_GRACE_DAYS = 3
   DECAY_RATE = 0.5
@@ -35,7 +35,7 @@ class WeightedAverage
           entry[:excluded] = true if latest[:excluded]
           entry
         end
-        .sort_by { |p| p[:key] }
+      providers = providers.sort_by { |p| p[:key] }
 
       contributors.max_by { |r| r[:date] }.merge(rate:, providers:)
     end

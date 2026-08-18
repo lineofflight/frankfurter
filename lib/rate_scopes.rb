@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Shared dataset scopes for rate tables (rates, weekly_rates, monthly_rates).
-# Parameterized by date column name and table name.
+# Shared dataset scopes for rate tables (rates, weekly_rates, monthly_rates). Parameterized by date column name and
+# table name.
 module RateScopes
   class << self
     def included(mod)

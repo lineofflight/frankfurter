@@ -52,7 +52,7 @@ class Provider < Sequel::Model(:providers)
             end
           end
 
-          chunked_klass.fetch_each(after:) { |_| }
+          chunked_klass.fetch_each(after:) { nil }
 
           _(params.length).must_equal(4)
           _(params[0][:after]).must_equal(after)

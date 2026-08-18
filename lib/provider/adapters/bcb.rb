@@ -6,12 +6,11 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central do Brasil. Fetches daily PTAX closing exchange rates for 10
-    # currencies against the Brazilian real (BRL) via the PTAX OData API.
-    # The PTAX system only publishes these 10 currencies.
+    # Banco Central do Brasil. Fetches daily PTAX closing exchange rates for 10 currencies against the Brazilian real
+    # (BRL) via the PTAX OData API. The PTAX system only publishes these 10 currencies.
     class BCB < Adapter
       API_URL = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/" \
-        "CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)"
+                "CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)"
 
       CURRENCIES = ["AUD", "CAD", "CHF", "DKK", "EUR", "GBP", "JPY", "NOK", "SEK", "USD"].freeze
 

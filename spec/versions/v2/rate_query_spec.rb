@@ -82,8 +82,8 @@ module Versions
         _(query.to_a).wont_be_empty
       end
 
-      # Pins the check inside the chunk loop: a regression that hoists it to the loop entry would
-      # check once for the whole range and let a long compute run past its deadline.
+      # Pins the check inside the chunk loop: a regression that hoists it to the loop entry would check once for the
+      # whole range and let a long compute run past its deadline.
       it "checks the deadline before every chunk of a multi-chunk range" do
         query = V2::RateQuery.new(from: (Fixtures.latest_date - 200).to_s, to: Fixtures.latest_date.to_s)
         checks = 0
@@ -182,7 +182,8 @@ module Versions
       end
 
       it "counts distinct currencies, not raw quotes entries" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,USD,GBP,GBP,JPY,JPY")
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB",
+                                  quotes: "USD,USD,GBP,GBP,JPY,JPY",)
 
         _(query.range?).must_equal(true)
       end
@@ -227,8 +228,8 @@ module Versions
       let(:from) { (Fixtures.latest_date - 10).to_s }
       let(:to) { Fixtures.latest_date.to_s }
 
-      # Deleting recent raw rows after the rebuild makes the two paths distinguishable: only the
-      # table still knows those dates. The oldest rows stay, so ready? holds.
+      # Deleting recent raw rows after the rebuild makes the two paths distinguishable: only the table still knows those
+      # dates. The oldest rows stay, so ready? holds.
       def delete_recent_raw_rows!
         Rate.dataset.where(date: (Fixtures.latest_date - 10)..Fixtures.latest_date).delete
       end
@@ -274,8 +275,7 @@ module Versions
     describe "materialized blend dispatch for latest and single-date" do
       include Roundable
 
-      # Tampering a stored row makes the two paths distinguishable: only the table knows the
-      # tampered value.
+      # Tampering a stored row makes the two paths distinguishable: only the table knows the tampered value.
       def tamper!(quote, date, rate)
         BlendedRate.where(quote:, date:).update(rate:)
       end
@@ -321,8 +321,8 @@ module Versions
         _(V2::RateQuery.new(quotes: "GBP").to_a).wont_be_empty
       end
 
-      # The correction #573 exists for: a carried-forward row freezes at the value blended on its
-      # own observation date instead of drifting as later days re-decay it against the batch clock.
+      # The correction #573 exists for: a carried-forward row freezes at the value blended on its own observation date
+      # instead of drifting as later days re-decay it against the batch clock.
       it "serves canonical anchor-date values for carried-forward quotes" do
         ecb_last = Fixtures.business_day(8)
         boc_last = Fixtures.business_day(4)
@@ -370,9 +370,8 @@ module Versions
     end
 
     describe "pivot-frame canonicalization" do
-      # Latest used to blend a single-frame batch directly in the requested base (the fast path)
-      # while the same shape as a range blended through the pivot, so the two disagreed about the
-      # same data. One frame everywhere (#573).
+      # Latest used to blend a single-frame batch directly in the requested base (the fast path) while the same shape as
+      # a range blended through the pivot, so the two disagreed about the same data. One frame everywhere (#573).
       it "blends single-frame live batches through the pivot like ranges" do
         date = Fixtures.latest_date
         Rate.dataset.delete
@@ -602,9 +601,8 @@ module Versions
     end
 
     describe "peg gap filling" do
-      # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR.
-      # Add a provider that starts covering BTN only recently, leaving older dates
-      # to be filled by the peg.
+      # BTN is pegged 1:1 to INR (since 1974). Fixtures have ECB providing INR. Add a provider that starts covering BTN
+      # only recently, leaving older dates to be filled by the peg.
       before do
         cutoff = Fixtures.business_day(30)
         days = []
@@ -719,10 +717,9 @@ module Versions
     describe "native-precision passthrough" do
       include Roundable
 
-      # Pick a stored rate whose native precision exceeds what magnitude-based
-      # rounding would emit (round(rate) != rate). Selecting merely by decimal
-      # count is not a valid witness: a value like 79.966 sits in the 3-decimal
-      # band, so rounding is a no-op and cannot distinguish passthrough.
+      # Pick a stored rate whose native precision exceeds what magnitude-based rounding would emit (round(rate) !=
+      # rate). Selecting merely by decimal count is not a valid witness: a value like 79.966 sits in the 3-decimal band,
+      # so rounding is a no-op and cannot distinguish passthrough.
       let(:native_row) do
         Rate.where(provider: "ECB", base: "EUR", quote: "PHP").all.find do |r|
           round(r[:rate]) != r[:rate]

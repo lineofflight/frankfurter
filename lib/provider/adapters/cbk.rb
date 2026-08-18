@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Kenya daily exchange rates in KES.
-    # Fetches from two WPDataTables endpoints: table 32 (2003-2024) and table 193 (2024+).
+    # Central Bank of Kenya daily exchange rates in KES. Fetches from two WPDataTables endpoints: table 32 (2003-2024)
+    # and table 193 (2024+).
     class CBK < Adapter
       BASE_URL = "https://www.centralbank.go.ke/wp-admin/admin-ajax.php"
       CURRENCY_MAP = {

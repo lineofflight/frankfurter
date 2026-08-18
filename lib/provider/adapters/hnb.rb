@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Croatian National Bank. Fetches daily mid exchange rates (EUR-based)
-    # via the v3 API. Historical HRK rates (pre-2023) are no longer available
-    # as the v2 API was frozen after Croatia adopted the euro.
+    # Croatian National Bank. Fetches daily mid exchange rates (EUR-based) via the v3 API. Historical HRK rates
+    # (pre-2023) are no longer available as the v2 API was frozen after Croatia adopted the euro.
     class HNB < Adapter
       BASE_URL = "https://api.hnb.hr/tecajn-eur/v3"
 

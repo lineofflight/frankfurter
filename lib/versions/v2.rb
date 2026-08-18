@@ -20,11 +20,11 @@ module Versions
     DEFAULT_CACHE_CONTROL = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
 
     plugin :json,
-      content_type: "application/json; charset=utf-8",
-      serializer: ->(o) { Oj.dump(o, mode: :compat) }
+           content_type: "application/json; charset=utf-8",
+           serializer: ->(o) { Oj.dump(o, mode: :compat) }
 
     plugin :type_routing,
-      types: { csv: "text/csv" }
+           types: { csv: "text/csv" }
 
     plugin :streaming
     plugin :caching
@@ -35,10 +35,10 @@ module Versions
 
     plugin :error_handler do |error|
       status = case error
-      when RateQuery::ValidationError then 422
-      when RequestTimeout::Error then 503
-      else 500
-      end
+               when RateQuery::ValidationError then 422
+               when RequestTimeout::Error then 503
+               else 500
+               end
       request.halt(status, { status:, message: error.message })
     end
 
@@ -143,10 +143,10 @@ module Versions
 
     private
 
-    # Date-relative queries anchor on Date.today, so their responses go stale at UTC midnight even when no
-    # new data arrives (and no purge fires) — e.g. forward-dated provider rates entering scope (#541). Cap
-    # max-age at the rollover and drop stale-while-revalidate so the first request after midnight
-    # revalidates instead of being served yesterday's snapshot.
+    # Date-relative queries anchor on Date.today, so their responses go stale at UTC midnight even when no new data
+    # arrives (and no purge fires) — e.g. forward-dated provider rates entering scope (#541). Cap max-age at the
+    # rollover and drop stale-while-revalidate so the first request after midnight revalidates instead of being served
+    # yesterday's snapshot.
     def cache_control_for(query)
       return DEFAULT_CACHE_CONTROL unless query.date_relative?
 
@@ -158,13 +158,12 @@ module Versions
       (Time.utc(now.year, now.month, now.day) + 86400 - now).ceil
     end
 
-    # Pull the first record before streaming so deterministic data errors raise
-    # in the route block (caught by error_handler) instead of mid-stream after
-    # response headers — including Cache-Control — have been flushed.
+    # Pull the first record before streaming so deterministic data errors raise in the route block (caught by
+    # error_handler) instead of mid-stream after response headers — including Cache-Control — have been flushed.
     #
-    # `rest` continues draining the same fiber-backed enumerator via #next;
-    # iterating the enumerator with #each instead would restart it from the
-    # beginning and re-emit the already-consumed first record.
+    # `rest` continues draining the same fiber-backed enumerator via #next; iterating the enumerator with
+    # #each instead would restart it from the beginning and re-emit the
+    # already-consumed first record.
     def eager_split(query)
       enum = query.each
       first = enum.next
@@ -205,12 +204,12 @@ module Versions
     def currencies(params)
       provider_keys = params["providers"]&.upcase&.split(",")
       records = if provider_keys
-        Currency.with_providers(provider_keys).all
-      elsif params["scope"] == "all"
-        Currency.all
-      else
-        Currency.active
-      end
+                  Currency.with_providers(provider_keys).all
+                elsif params["scope"] == "all"
+                  Currency.all
+                else
+                  Currency.active
+                end
 
       records.map(&:to_h)
     end

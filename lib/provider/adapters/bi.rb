@@ -4,10 +4,9 @@ require "provider/adapters/adapter"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    # Bank Indonesia.
-    # Fetches daily transaction exchange rates for 26 currencies against the Indonesian rupiah (IDR).
-    # The page is SharePoint-based; we POST a search per currency and parse the HTML result table.
-    # Rates are buy/sell; we compute the mid-rate as (sell + buy) / 2.
+    # Bank Indonesia. Fetches daily transaction exchange rates for 26 currencies against the Indonesian rupiah (IDR).
+    # The page is SharePoint-based; we POST a search per currency and parse the HTML result table. Rates are buy/sell;
+    # we compute the mid-rate as (sell + buy) / 2.
     class BI < Adapter
       BASE_URL = "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx"
 
@@ -43,8 +42,8 @@ class Provider < Sequel::Model(:providers)
       def parse(html, currency:)
         table = html[%r{gvSearchResult2"[^>]*>(.*?)</table>}mi, 1]
         unless table
-          # No-result searches re-render the page without a gvSearchResult2 table (observed for
-          # weekend-only windows); the search web part is still present in those re-renders.
+          # No-result searches re-render the page without a gvSearchResult2 table (observed for weekend-only windows);
+          # the search web part is still present in those re-renders.
           return [] if html.include?("btnSearch1")
 
           raise "BI: neither results table nor search form in response for #{currency.strip}"

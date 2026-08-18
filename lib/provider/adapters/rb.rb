@@ -6,10 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Sveriges Riksbank. Fetches daily exchange rates for ~29 currencies
-    # against the Swedish krona (SEK) via the SWEA API. Uses the ByGroup
-    # endpoint (group 130) to fetch all currency series in a single request.
-    # The ByGroup endpoint has a max 1-year date range.
+    # Sveriges Riksbank. Fetches daily exchange rates for ~29 currencies against the Swedish krona (SEK) via the SWEA
+    # API. Uses the ByGroup endpoint (group 130) to fetch all currency series in a single request. The ByGroup endpoint
+    # has a max 1-year date range.
     class RB < Adapter
       BASE_URL = "https://api.riksbank.se/swea/v1/Observations/ByGroup/130"
 

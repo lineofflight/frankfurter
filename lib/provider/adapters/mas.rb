@@ -6,15 +6,14 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Monetary Authority of Singapore. Publishes daily exchange rates for 20
-    # currencies against the Singapore dollar (SGD) via a statistics page that
-    # serves CSV downloads. Rates are quoted as SGD per unit (or per 100 units)
-    # of foreign currency. Data available from 1988.
+    # Monetary Authority of Singapore. Publishes daily exchange rates for 20 currencies against the Singapore dollar
+    # (SGD) via a statistics page that serves CSV downloads. Rates are quoted as SGD per unit (or per 100 units) of
+    # foreign currency. Data available from 1988.
     class MAS < Adapter
       URL = "https://eservices.mas.gov.sg/statistics/msb/ExchangeRates.aspx"
 
-      # Column header patterns mapped to ISO currency codes and units.
-      # Per-unit currencies have unit=1, per-100-unit currencies have unit=100.
+      # Column header patterns mapped to ISO currency codes and units. Per-unit currencies have unit=1, per-100-unit
+      # currencies have unit=100.
       COLUMNS = {
         "Euro" => { code: "EUR", unit: 1 },
         "Pound Sterling" => { code: "GBP", unit: 1 },
@@ -37,6 +36,21 @@ class Provider
         "Thai Baht" => { code: "THB", unit: 100 },
         "UAE Dirham" => { code: "AED", unit: 100 },
         "Vietnamese Dong" => { code: "VND", unit: 100 },
+      }.freeze
+
+      MONTHS = {
+        "Jan" => 1,
+        "Feb" => 2,
+        "Mar" => 3,
+        "Apr" => 4,
+        "May" => 5,
+        "Jun" => 6,
+        "Jul" => 7,
+        "Aug" => 8,
+        "Sep" => 9,
+        "Oct" => 10,
+        "Nov" => 11,
+        "Dec" => 12,
       }.freeze
 
       class << self
@@ -62,8 +76,8 @@ class Provider
         lines = csv.lines
         header_index = lines.index { |l| l.start_with?("End of Period") }
 
-        # A window with no data yet (e.g. a new year before the first fixing) re-renders the page
-        # with a "No Results Found" panel.
+        # A window with no data yet (e.g. a new year before the first fixing) re-renders the page with a "No Results
+        # Found" panel.
         return [] if csv.include?("No Results Found")
         raise "MAS: no 'End of Period' header in CSV download" unless header_index
 
@@ -157,21 +171,6 @@ class Provider
         end
         columns
       end
-
-      MONTHS = {
-        "Jan" => 1,
-        "Feb" => 2,
-        "Mar" => 3,
-        "Apr" => 4,
-        "May" => 5,
-        "Jun" => 6,
-        "Jul" => 7,
-        "Aug" => 8,
-        "Sep" => 9,
-        "Oct" => 10,
-        "Nov" => 11,
-        "Dec" => 12,
-      }.freeze
 
       def parse_month(str)
         MONTHS[str]

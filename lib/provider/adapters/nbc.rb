@@ -6,23 +6,22 @@ require "provider/adapters/adapter"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
-    # National Bank of Cambodia. Publishes daily reference rates for ~29 currencies against
-    # the Cambodian riel (KHR), Mon-Fri ~16:30 Asia/Phnom Penh.
+    # National Bank of Cambodia. Publishes daily reference rates for ~29 currencies against the Cambodian riel (KHR),
+    # Mon-Fri ~16:30 Asia/Phnom Penh.
     #
-    # The page is form-based: a GET returns a hidden CSRF token (tk) and sets a session
-    # cookie; a POST with `exdate`, `tk`, `view=View` returns that date's HTML table. The
-    # token rotates per request, so every historical fetch is a GET-then-POST round trip.
+    # The page is form-based: a GET returns a hidden CSRF token (tk) and sets a session cookie; a POST with `exdate`,
+    # `tk`, `view=View` returns that date's HTML table. The token rotates per request, so every historical fetch is a
+    # GET-then-POST round trip.
     #
-    # Rates are quoted as `<CCY>/KHR` with a unit multiplier (1, 100, 1000) and bid/ask/average
-    # columns. We use the published `average` column as the mid and divide by the unit to
-    # normalize to per-1 rates. The cross-rate table omits USD; we read the headline
-    # "KHR / USD" official exchange rate separately.
+    # Rates are quoted as `<CCY>/KHR` with a unit multiplier (1, 100, 1000) and bid/ask/average columns. We use the
+    # published `average` column as the mid and divide by the unit to normalize to per-1 rates. The cross-rate table
+    # omits USD; we read the headline "KHR / USD" official exchange rate separately.
     #
-    # Records are returned in NBC's native direction — foreign currency as base, KHR as
-    # quote — matching the convention used by other pivot-in-quote adapters (e.g. NBG, BBK).
+    # Records are returned in NBC's native direction — foreign currency as base, KHR as quote — matching the convention
+    # used by other pivot-in-quote adapters (e.g. NBG, BBK).
     #
-    # SDR is published under the non-ISO label "SDR" and rewritten to XDR (the ISO 4217
-    # code for Special Drawing Rights) on emit.
+    # SDR is published under the non-ISO label "SDR" and rewritten to XDR (the ISO 4217 code for Special Drawing Rights)
+    # on emit.
     class NBC < Adapter
       BASE_URL = "https://www.nbc.gov.kh/english/economic_research/exchange_rate.php"
       SYMBOL_PATTERN = %r{\A([A-Z]{3})/KHR\z}

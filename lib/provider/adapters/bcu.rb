@@ -6,8 +6,7 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Uruguay (Banco Central del Uruguay).
-    # Fetches official exchange rates in UYU via SOAP web service.
+    # Central Bank of Uruguay (Banco Central del Uruguay). Fetches official exchange rates in UYU via SOAP web service.
     # Rates are stored with base=foreign_currency, quote=UYU.
     class BCU < Adapter
       ENDPOINT = URI("https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones")

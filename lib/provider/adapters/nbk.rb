@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Kazakhstan. Publishes daily rates for ~38 currencies against KZT.
-    # Uses an XML endpoint that supports historical queries via date parameter.
+    # National Bank of Kazakhstan. Publishes daily rates for ~38 currencies against KZT. Uses an XML endpoint that
+    # supports historical queries via date parameter.
     class NBK < Adapter
       URL = "https://nationalbank.kz/rss/get_rates.cfm"
 

@@ -7,7 +7,7 @@ require "tmpdir"
 
 describe "bin/schedule --dry-run" do
   let(:output) do
-    %x(APP_ENV=test bundle exec ruby bin/schedule --dry-run 2>&1)
+    `APP_ENV=test bundle exec ruby bin/schedule --dry-run 2>&1`
   end
 
   let(:startup_lines) { output.lines.select { |l| l.start_with?("startup:") } }
@@ -48,7 +48,7 @@ describe "bin/schedule --dry-run" do
 
       File.write(File.join(dir, "rufus-scheduler.rb"), scheduler_stub)
 
-      output = %x(APP_ENV=test bundle exec ruby -I #{dir} bin/schedule 2>&1)
+      output = `APP_ENV=test bundle exec ruby -I #{dir} bin/schedule 2>&1`
 
       _($CHILD_STATUS.success?).must_equal(true, output)
       _(output.lines.map(&:chomp).grep(/\Astartup: \d+s\z/)).wont_be_empty

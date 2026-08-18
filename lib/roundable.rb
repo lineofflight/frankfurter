@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-# To paraphrase Wikipedia, most currency pairs are quoted to four decimal
-# places. An exception to this is exchange rates with a value of less than
-# 1.000, which are quoted to five or six decimal places. Exchange rates
-# greater than around 20 are usually quoted to three decimal places and
-# exchange rates greater than 80 are quoted to two decimal places.
+# To paraphrase Wikipedia, most currency pairs are quoted to four decimal places. An exception to this is exchange rates
+# with a value of less than 1.000, which are quoted to five or six decimal places. Exchange rates greater than around 20
+# are usually quoted to three decimal places and exchange rates greater than 80 are quoted to two decimal places.
 # Currencies over 5000 are usually quoted with no decimal places.
 #
 # https://en.wikipedia.org/wiki/Exchange_rate#Quotations

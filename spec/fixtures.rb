@@ -3,8 +3,7 @@
 require "bucket"
 require "rate"
 
-# Generates realistic test data for ECB and BOC providers.
-# All dates are relative to today so tests never go stale.
+# Generates realistic test data for ECB and BOC providers. All dates are relative to today so tests never go stale.
 module Fixtures
   BASE_RATES = {
     "ECB" => {
@@ -72,8 +71,8 @@ module Fixtures
       date
     end
 
-    # A Monday in the fixture: the first publication day after a weekend gap
-    # (mirrors the production "first publish after a holiday" scenario).
+    # A Monday in the fixture: the first publication day after a weekend gap (mirrors the production "first publish
+    # after a holiday" scenario).
     def gap_boundary_monday(days_ago = 60)
       business_days.find { |d| d.monday? && d <= Date.today - days_ago }
     end
@@ -138,10 +137,11 @@ module Fixtures
 
       BASE_RATES.each do |provider, config|
         days.each do |date|
-          jitter = 1.0 + (date.jd % 100 - 50) * 0.001 # deterministic jitter from date
+          jitter = 1.0 + (((date.jd % 100) - 50) * 0.001) # deterministic jitter from date
           if config[:mixed]
             config[:mixed].each do |pair|
-              records << { provider:, date:, base: pair[:base], quote: pair[:quote], rate: (pair[:rate] * jitter).round(4) }
+              records << { provider:, date:, base: pair[:base], quote: pair[:quote],
+                           rate: (pair[:rate] * jitter).round(4), }
             end
           else
             config[:quotes].each do |quote, rate|

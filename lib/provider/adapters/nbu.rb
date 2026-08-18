@@ -21,7 +21,7 @@ class Provider
           sort: "exchangedate",
           order: "asc",
           json: "",
-        }).to_s
+        },).to_s
 
         parse(response)
       end

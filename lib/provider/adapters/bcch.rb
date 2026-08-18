@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central de Chile. Fetches daily exchange rates for 8 currencies
-    # against the Chilean peso (CLP) via the BDE REST API. Requires registered
-    # credentials (email + password) passed as query parameters.
+    # Banco Central de Chile. Fetches daily exchange rates for 8 currencies against the Chilean peso (CLP) via the BDE
+    # REST API. Requires registered credentials (email + password) passed as query parameters.
     class BCCH < Adapter
       API_URL = "https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx"
 
@@ -69,7 +68,7 @@ class Provider
           function: "GetSeries",
           timeseries: series_id,
           **params,
-        }).to_s
+        },).to_s
         parse(response, base)
       end
     end

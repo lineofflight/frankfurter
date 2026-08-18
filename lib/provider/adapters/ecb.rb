@@ -73,10 +73,10 @@ class Provider
         end
 
         # Process remaining buffer
-        if headers && !buffer.empty?
-          values = CSV.parse_line(buffer, liberal_parsing: true)
-          yield CSV::Row.new(headers, values) if values
-        end
+        return unless headers && !buffer.empty?
+
+        values = CSV.parse_line(buffer, liberal_parsing: true)
+        yield CSV::Row.new(headers, values) if values
       end
     end
   end

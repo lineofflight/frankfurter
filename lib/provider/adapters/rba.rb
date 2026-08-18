@@ -10,10 +10,7 @@ class Provider
       CSV_URL = "https://www.rba.gov.au/statistics/tables/csv/f11.1-data.csv"
       METADATA_ROWS = 11
 
-      class << self
-      end
-
-      def fetch(after: nil, upto: nil)
+      def fetch(after: nil, **)
         csv = http.get(CSV_URL).to_s
         dataset = parse(csv)
         dataset = dataset.select { |r| r[:date] >= after } if after

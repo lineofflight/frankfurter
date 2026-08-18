@@ -6,17 +6,16 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Thailand. Fetches daily average commercial bank exchange rates
-    # for 19 currencies against the Thai baht (THB). Uses mid_rate (midpoint
-    # of buying transfer and selling). Some currencies are quoted per 100 or
-    # 1,000 units — the adapter normalises to per-unit rates.
-    # Requires BOT_API_KEY environment variable.
+    # Bank of Thailand. Fetches daily average commercial bank exchange rates for 19 currencies against the Thai baht
+    # (THB). Uses mid_rate (midpoint of buying transfer and selling). Some currencies are quoted per 100 or 1,000 units
+    # — the adapter normalises to per-unit rates. Requires BOT_API_KEY environment variable.
     class BOT < Adapter
       BASE_URL = "https://gateway.api.bot.or.th/Stat-ExchangeRate/v2/DAILY_AVG_EXG_RATE/"
 
       class << self
         def api_key = ENV["BOT_API_KEY"] || raise("no API key")
-        def backfill_range = 30 # API enforces max 31-day period per request
+        # API enforces max 31-day period per request
+        def backfill_range = 30
       end
 
       def fetch(after: nil, upto: nil)
@@ -26,7 +25,7 @@ class Provider
         ).get(BASE_URL, params: {
           start_period: after.strftime("%Y-%m-%d"),
           end_period: (upto || Date.today).strftime("%Y-%m-%d"),
-        }).to_s
+        },).to_s
 
         parse(response)
       end

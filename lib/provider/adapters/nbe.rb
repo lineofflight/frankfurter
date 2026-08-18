@@ -6,13 +6,12 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Ethiopia. Publishes daily reference exchange rates for 18 currencies
-    # against the Ethiopian birr (ETB) on weekdays. The API returns buying, selling, and
-    # weighted_average per currency for a given date. We use weighted_average as the mid.
+    # National Bank of Ethiopia. Publishes daily reference exchange rates for 18 currencies against the Ethiopian birr
+    # (ETB) on weekdays. The API returns buying, selling, and weighted_average per currency for a given date. We use
+    # weighted_average as the mid.
     #
-    # XDR (Special Drawing Rights) is published under its ISO 4217 code and passes through
-    # untouched. Coverage starts 2024-10-01 to skip the July to September 2024
-    # float-transition gap.
+    # XDR (Special Drawing Rights) is published under its ISO 4217 code and passes through untouched. Coverage starts
+    # 2024-10-01 to skip the July to September 2024 float-transition gap.
     class NBE < Adapter
       URL = "https://api.nbe.gov.et/api/filter-exchange-rates"
 

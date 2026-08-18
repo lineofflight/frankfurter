@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Canada daily indicative rates. Current series starts 2017-01-03.
-    # Legacy noon rates (2007-2017) are available under the LEGACY_NOON_RATES group with ~65 currencies.
+    # Bank of Canada daily indicative rates. Current series starts 2017-01-03. Legacy noon rates (2007-2017) are
+    # available under the LEGACY_NOON_RATES group with ~65 currencies.
     class BOC < Adapter
       BASE_URL = "https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json"
       def fetch(after: nil, upto: nil)

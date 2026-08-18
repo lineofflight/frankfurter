@@ -6,18 +6,16 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Magyar Nemzeti Bank. Publishes daily exchange rates for 30+ currencies
-    # against the Hungarian forint (HUF) via a SOAP/XML web service.
-    # Rates use unit multipliers (e.g. 100 JPY = X HUF) and Hungarian decimal format (comma).
-    # SOAP endpoint: http://www.mnb.hu/arfolyamok.asmx
-    # WSDL: http://www.mnb.hu/arfolyamok.asmx?WSDL
+    # Magyar Nemzeti Bank. Publishes daily exchange rates for 30+ currencies against the Hungarian forint (HUF) via a
+    # SOAP/XML web service. Rates use unit multipliers (e.g. 100 JPY = X HUF) and Hungarian decimal format (comma). SOAP
+    # endpoint: http://www.mnb.hu/arfolyamok.asmx WSDL: http://www.mnb.hu/arfolyamok.asmx?WSDL
     class MNB < Adapter
       ENDPOINT = URI("http://www.mnb.hu/arfolyamok.asmx")
 
-      # Active currencies as of 2026. The GetExchangeRates operation requires
-      # explicit currency names — an empty list returns empty days.
+      # Active currencies as of 2026. The GetExchangeRates operation requires explicit currency names — an empty list
+      # returns empty days.
       CURRENCIES = "AUD,BRL,CAD,CHF,CNY,CZK,DKK,EUR,GBP,HKD,IDR,ILS,INR,ISK,JPY,KRW," \
-        "MXN,MYR,NOK,NZD,PHP,PLN,RON,RSD,RUB,SEK,SGD,THB,TRY,UAH,USD,ZAR"
+                   "MXN,MYR,NOK,NZD,PHP,PLN,RON,RSD,RUB,SEK,SGD,THB,TRY,UAH,USD,ZAR"
 
       CHUNK_DAYS = 365
 

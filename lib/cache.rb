@@ -2,8 +2,7 @@
 
 require "net/http"
 
-# Purges the CDN cache after data imports. Currently supports Cloudflare.
-# No-ops when credentials are not configured.
+# Purges the CDN cache after data imports. Currently supports Cloudflare. No-ops when credentials are not configured.
 class Cache
   DEBOUNCE_SECONDS = Integer(ENV.fetch("CACHE_PURGE_DEBOUNCE_SECONDS", 300))
 
@@ -16,10 +15,10 @@ class Cache
       new.purge
     end
 
-    # Leading edge of the purge debounce (#568): with ~50 providers publishing daily, a purge per
-    # provider insert dumps the whole CDN cache many times a day, and a deploy's startup backfill
-    # fires a burst of purges within minutes. The first insert of a quiet window purges immediately;
-    # later inserts coalesce into a pending purge for purge_pending to flush.
+    # Leading edge of the purge debounce (#568): with ~50 providers publishing daily, a purge per provider insert dumps
+    # the whole CDN cache many times a day, and a deploy's startup backfill fires a burst of purges within minutes. The
+    # first insert of a quiet window purges immediately; later inserts coalesce into a pending purge for purge_pending
+    # to flush.
     def purge_debounced
       fire = @mutex.synchronize do
         if window_open?
@@ -33,10 +32,10 @@ class Cache
       attempt_purge if fire
     end
 
-    # Trailing edge: flushes the coalesced purge once the window has expired, so the last insert of a
-    # backfill wave always becomes visible. Driven externally (the scheduler's tick, or the end of a
-    # rake backfill with ignore_window since the wave is over and the process is about to exit); safe
-    # to call at any cadence. A failed purge is re-marked pending, so a later call retries it.
+    # Trailing edge: flushes the coalesced purge once the window has expired, so the last insert of a backfill wave
+    # always becomes visible. Driven externally (the scheduler's tick, or the end of a rake backfill with ignore_window
+    # since the wave is over and the process is about to exit); safe to call at any cadence. A failed purge is re-marked
+    # pending, so a later call retries it.
     def purge_pending(ignore_window: false)
       fire = @mutex.synchronize do
         next false unless @pending && (ignore_window || !window_open?)
@@ -49,8 +48,8 @@ class Cache
 
     private
 
-    # The window opens when a purge attempt starts, not when it completes, so callers arriving while
-    # the HTTP call is in flight coalesce into pending instead of firing concurrently.
+    # The window opens when a purge attempt starts, not when it completes, so callers arriving while the HTTP call is in
+    # flight coalesce into pending instead of firing concurrently.
     def open_window!
       @pending = false
       @last_purge_at = monotonic

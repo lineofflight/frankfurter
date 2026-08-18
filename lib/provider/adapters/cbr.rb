@@ -6,11 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Russia. Publishes daily rates for ~54 currencies against RUB,
-    # plus daily reference prices for gold, silver, platinum and palladium.
-    # FX uses XML_daily for the currency list and XML_dynamic for date ranges.
-    # Metals come from xml_metall in RUB per gram; values are normalized to
-    # per troy ounce here.
+    # Bank of Russia. Publishes daily rates for ~54 currencies against RUB, plus daily reference prices for gold,
+    # silver, platinum and palladium. FX uses XML_daily for the currency list and XML_dynamic for date ranges. Metals
+    # come from xml_metall in RUB per gram; values are normalized to per troy ounce here.
     class CBR < Adapter
       DAILY_URL = "https://www.cbr.ru/scripts/XML_daily.asp"
       DYNAMIC_URL = "https://www.cbr.ru/scripts/XML_dynamic.asp"
@@ -54,7 +52,7 @@ class Provider
         response = http.get(METAL_URL, params: {
           date_req1: start_date.strftime("%d/%m/%Y"),
           date_req2: end_date.strftime("%d/%m/%Y"),
-        }).to_s
+        },).to_s
 
         parse_metals(response)
       end
@@ -74,7 +72,7 @@ class Provider
           date_req1: start_date.strftime("%d/%m/%Y"),
           date_req2: end_date.strftime("%d/%m/%Y"),
           VAL_NM_RQ: valute_id,
-        }).to_s
+        },).to_s
 
         Ox.load(response).locate("ValCurs/Record").filter_map do |row|
           date = Date.strptime(row[:Date], "%d.%m.%Y")

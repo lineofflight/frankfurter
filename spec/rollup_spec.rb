@@ -179,8 +179,8 @@ describe "Rollup tables" do
       query_before = Versions::V2::RateQuery.new(from: start_date, to: end_date, group: "month")
       key_before = query_before.cache_key
 
-      # Insert a new rate on the existing latest date and refresh rollups;
-      # the raw max date is unchanged so the cache key should be stable
+      # Insert a new rate on the existing latest date and refresh rollups; the raw max date is unchanged so the cache
+      # key should be stable
       Rate.dataset.insert(
         date: Fixtures.latest_date, base: "EUR", quote: "XTS", rate: 42.0, provider: "ECB",
       )
@@ -188,8 +188,9 @@ describe "Rollup tables" do
 
       query_after = Versions::V2::RateQuery.new(from: start_date, to: end_date, group: "month")
       key_after = query_after.cache_key
+      msg = "cache key derives from raw max date, stays stable when rollup content changes within same day"
 
-      _(key_before).must_equal(key_after, "cache key derives from raw max date, stays stable when rollup content changes within same day")
+      _(key_before).must_equal(key_after, msg)
     end
   end
 end

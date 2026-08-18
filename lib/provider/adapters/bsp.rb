@@ -9,36 +9,28 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bangko Sentral ng Pilipinas, the daily Reference Exchange Rate Bulletin
-    # (RERB), published every business day (Mon-Fri, no weekends or Philippine
-    # holidays). Each bulletin is a single PDF.
+    # Bangko Sentral ng Pilipinas, the daily Reference Exchange Rate Bulletin (RERB), published every business day
+    # (Mon-Fri, no weekends or Philippine holidays). Each bulletin is a single PDF.
     #
-    # We relay one figure from it: the "BSP Reference Rate", BSP's own official
-    # USD/PHP mid (1 USD = X PHP). It is the only rate in the bulletin BSP
-    # actually computes.
+    # We relay one figure from it: the "BSP Reference Rate", BSP's own official USD/PHP mid (1 USD = X PHP). It is the
+    # only rate in the bulletin BSP actually computes.
     #
-    # The rest of the bulletin is third-party data BSP reprints, which we do not
-    # relay: a "PHIL. PESO EQUIVALENT" table of ~32 currencies sourced from LSEG
-    # (Refinitiv) closing prices, plus an SDR rate (IMF) and gold/silver buying
-    # prices (LBMA). Each is already covered with ample independent depth by
-    # official sources elsewhere in the blend (PHP crosses by 20+ central banks,
-    # XDR by the IMF and ~24 others, gold and silver by 5 to 10 metal providers),
-    # so BSP's reprints would add a correlated, internally inconsistent input
-    # rather than an independent one. The peso table is anchored on LSEG's
-    # USD/PHP, which differs from the Reference Rate we publish. See #533.
+    # The rest of the bulletin is third-party data BSP reprints, which we do not relay: a "PHIL. PESO EQUIVALENT" table
+    # of ~32 currencies sourced from LSEG (Refinitiv) closing prices, plus an SDR rate (IMF) and gold/silver buying
+    # prices (LBMA). Each is already covered with ample independent depth by official sources elsewhere in the blend
+    # (PHP crosses by 20+ central banks, XDR by the IMF and ~24 others, gold and silver by 5 to 10 metal providers), so
+    # BSP's reprints would add a correlated, internally inconsistent input rather than an independent one. The peso
+    # table is anchored on LSEG's USD/PHP, which differs from the Reference Rate we publish. See
+    # #533.
     #
-    # The bulletins live in a SharePoint list named "RERB", exposed without
-    # authentication via the SharePoint REST API. Each list item carries a Title
-    # holding the bulletin date as DDMMMYYYY (e.g. "29May2026") and an attachment,
-    # the PDF, reachable at its ServerRelativeUrl. We enumerate the list (newest
-    # first), collect items whose date falls in the requested window, fetch each
-    # PDF, and read the Reference Rate line with pdf-reader.
+    # The bulletins live in a SharePoint list named "RERB", exposed without authentication via the SharePoint REST API.
+    # Each list item carries a Title holding the bulletin date as DDMMMYYYY (e.g. "29May2026") and an attachment, the
+    # PDF, reachable at its ServerRelativeUrl. We enumerate the list (newest first), collect items whose date falls in
+    # the requested window, fetch each PDF, and read the Reference Rate line with pdf-reader.
     #
-    # Coverage starts 2017-11-06: the SharePoint list reaches back to 2017-01-03,
-    # but bulletins before 2017-11-06 are image-only scans with no extractable
-    # text layer. The adapter fetches them harmlessly (empty text yields no
-    # records) but cannot parse them, so coverage_start is pinned to the first
-    # text-backed bulletin.
+    # Coverage starts 2017-11-06: the SharePoint list reaches back to 2017-01-03, but bulletins before 2017-11-06 are
+    # image-only scans with no extractable text layer. The adapter fetches them harmlessly (empty text yields no
+    # records) but cannot parse them, so coverage_start is pinned to the first text-backed bulletin.
     class BSP < Adapter
       HOST = "https://www.bsp.gov.ph"
       LIST_URL = "#{HOST}/_api/web/lists/getByTitle('RERB')/items".freeze
@@ -47,8 +39,8 @@ class Provider
       REFERENCE_RATE_PATTERN = /BSP Reference Rate:\s*PHP\s+([\d.,]+)/
 
       class << self
-        # Each request fetches a single day's PDF, so chunk the archive to keep
-        # progress durable. fetch_each upserts after every window.
+        # Each request fetches a single day's PDF, so chunk the archive to keep progress durable. fetch_each upserts
+        # after every window.
         def backfill_range = 30
       end
 
@@ -77,12 +69,11 @@ class Provider
         parse_text(text, date)
       end
 
-      # The bulletin's only BSP-computed figure is the Reference Rate, its
-      # official USD/PHP mid. Everything else in the PDF is a third-party
-      # passthrough we deliberately skip (see the class comment).
+      # The bulletin's only BSP-computed figure is the Reference Rate, its official USD/PHP mid. Everything else in the
+      # PDF is a third-party passthrough we deliberately skip (see the class comment).
       def parse_text(text, date)
-        # Image-only scans (pre-2017-11-06 bulletins) have no text layer and
-        # legitimately yield nothing; see class comment.
+        # Image-only scans (pre-2017-11-06 bulletins) have no text layer and legitimately yield nothing; see class
+        # comment.
         return [] if text.strip.empty?
 
         reference_rate = text[REFERENCE_RATE_PATTERN, 1]
@@ -97,13 +88,12 @@ class Provider
 
       private
 
-      # Enumerate the SharePoint list newest-first, collecting (date, pdf_url)
-      # pairs whose bulletin date falls within [after, upto]. Stops paging once
-      # an item predates the requested window.
+      # Enumerate the SharePoint list newest-first, collecting (date, pdf_url) pairs whose bulletin date falls within
+      # [after, upto]. Stops paging once an item predates the requested window.
       def discover_pdfs(after, upto)
         entries = {}
         url = "#{LIST_URL}?$top=#{PAGE_SIZE}&$orderby=Id+desc" \
-          "&$expand=AttachmentFiles&$select=Id,Title,AttachmentFiles"
+              "&$expand=AttachmentFiles&$select=Id,Title,AttachmentFiles"
 
         loop do
           # SharePoint's REST API returns Atom/XML by default; the verbose OData Accept header is required to get JSON

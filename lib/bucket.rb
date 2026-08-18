@@ -2,8 +2,8 @@
 
 require "sequel"
 
-# Shared SQL bucket expressions for weekly and monthly aggregation.
-# Used by Rate#downsample, rollup migrations, and rollup refresh.
+# Shared SQL bucket expressions for weekly and monthly aggregation. Used by Rate#downsample, rollup migrations, and
+# rollup refresh.
 module Bucket
   class << self
     def week(date_column = :date)

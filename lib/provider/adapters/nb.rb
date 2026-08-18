@@ -44,7 +44,7 @@ class Provider
 
         rate = Float(row["OBS_VALUE"])
         unit_mult = Integer(row["UNIT_MULT"] || "0")
-        rate /= 10**unit_mult if unit_mult > 0
+        rate /= 10**unit_mult if unit_mult.positive?
         date = Date.parse(row["TIME_PERIOD"])
 
         { date:, base:, quote: "NOK", rate: }
@@ -72,10 +72,10 @@ class Provider
         end
 
         # Process remaining buffer
-        if headers && !buffer.empty?
-          values = CSV.parse_line(buffer, liberal_parsing: true)
-          yield CSV::Row.new(headers, values) if values
-        end
+        return unless headers && !buffer.empty?
+
+        values = CSV.parse_line(buffer, liberal_parsing: true)
+        yield CSV::Row.new(headers, values) if values
       end
     end
   end

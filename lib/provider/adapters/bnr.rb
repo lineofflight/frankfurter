@@ -6,10 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # National Bank of Romania. Publishes daily reference rates for ~35
-    # currencies against the Romanian leu (RON). Yearly XML archives back to
-    # 2005 are kept current within the year. The 10-day feed is a redundant
-    # window over the same data, so we always use the yearly archive.
+    # National Bank of Romania. Publishes daily reference rates for ~35 currencies against the Romanian leu (RON).
+    # Yearly XML archives back to 2005 are kept current within the year. The 10-day feed is a redundant window over the
+    # same data, so we always use the yearly archive.
     class BNR < Adapter
       BASE_URL = "https://www.bnr.ro"
 
@@ -21,10 +20,10 @@ class Provider
         end_date = upto || Date.today
 
         records = if after.nil? || after.year == end_date.year
-          fetch_year(after&.year || end_date.year)
-        else
-          (after.year..end_date.year).flat_map { |year| fetch_year(year) }
-        end
+                    fetch_year(after&.year || end_date.year)
+                  else
+                    (after.year..end_date.year).flat_map { |year| fetch_year(year) }
+                  end
 
         records.select { |r| (after.nil? || r[:date] > after) && r[:date] <= end_date }
       end

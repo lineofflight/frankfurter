@@ -7,13 +7,11 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Maldives Monetary Authority. Publishes a single rolling JSON file with
-    # the daily reference rate of the rufiyaa against the US dollar. The
-    # rufiyaa is USD-pegged within a crawling band, so MMA only publishes the
-    # one pair (USD/MVR). The file always returns the full history, so we
-    # filter client-side by `after`. The feed occasionally emits duplicate
-    # entries for the same date (e.g. "08/09 February 2021"); we keep the
-    # first occurrence per (date, base, quote) so upserts stay deterministic.
+    # Maldives Monetary Authority. Publishes a single rolling JSON file with the daily reference rate of the rufiyaa
+    # against the US dollar. The rufiyaa is USD-pegged within a crawling band, so MMA only publishes the one pair
+    # (USD/MVR). The file always returns the full history, so we filter client-side by `after`. The feed occasionally
+    # emits duplicate entries for the same date (e.g. "08/09 February 2021"); we keep the first occurrence per (date,
+    # base, quote) so upserts stay deterministic.
     class MMA < Adapter
       BASE_URL = "https://www.mma.gov.mv/JSON/referencerates.json"
 

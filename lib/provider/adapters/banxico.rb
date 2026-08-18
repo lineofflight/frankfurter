@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco de México. Fetches daily FIX and reference exchange rates for 5
-    # currencies against the Mexican peso (MXN) via the SIE REST API.
-    # Supports batched series queries and date range filtering.
+    # Banco de México. Fetches daily FIX and reference exchange rates for 5 currencies against the Mexican peso (MXN)
+    # via the SIE REST API. Supports batched series queries and date range filtering.
     class BANXICO < Adapter
       BASE_URL = "https://www.banxico.org.mx/SieAPIRest/service/v1/series"
 
@@ -28,11 +27,11 @@ class Provider
       def fetch(after: nil, upto: nil)
         ids = SERIES.keys.join(",")
         url = if after
-          end_date = upto || Date.today
-          "#{BASE_URL}/#{ids}/datos/#{after}/#{end_date}"
-        else
-          "#{BASE_URL}/#{ids}/datos"
-        end
+                end_date = upto || Date.today
+                "#{BASE_URL}/#{ids}/datos/#{after}/#{end_date}"
+              else
+                "#{BASE_URL}/#{ids}/datos"
+              end
 
         parse(fetch_series(url))
       end

@@ -37,6 +37,6 @@ def rebuild_rollups(source, provider = nil)
     )
 
     Log.info("#{label}: rebuilt #{DB[:weekly_rates].where(scope).count} weekly, " \
-      "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")
+             "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")
   end
 end

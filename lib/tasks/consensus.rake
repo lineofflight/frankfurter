@@ -40,7 +40,7 @@ def scan_dates(from, to)
   end
 
   counts.sort_by(&:last).reverse_each do |combo, count|
-    Log.info(format("%-25s %d", combo, count))
+    Log.info(format("%<combo>-25s %<count>d", combo:, count:))
   end
 
   Log.info("Total: #{total} outliers across #{dates.size} dates")

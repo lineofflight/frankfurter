@@ -798,8 +798,8 @@ describe Versions::V2 do
   end
 
   it "excludes pegs when providers filter is set" do
-    # BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate data, so
-    # scoping ?providers= to ECB excludes pegs along with all other unlisted sources.
+    # BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate data, so scoping ?providers= to ECB
+    # excludes pegs along with all other unlisted sources.
     get "/rates?base=BMD&providers=ecb"
 
     _(last_response).must_be(:ok?)

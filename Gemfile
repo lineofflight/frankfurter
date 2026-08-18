@@ -20,9 +20,9 @@ gem "rack-cors"
 gem "rake"
 gem "roda"
 gem "rubyzip"
-gem "spreadsheet"
 gem "rufus-scheduler"
 gem "sequel"
+gem "spreadsheet"
 gem "sqlite3"
 
 group :development, :test do
@@ -38,7 +38,7 @@ group :test do
   gem "minitest-focus"
   gem "minitest-mock"
   gem "rack-test"
-  gem "vcr"
   gem "skooma"
+  gem "vcr"
   gem "webmock"
 end

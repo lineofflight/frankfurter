@@ -6,29 +6,25 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central de Cuba. Publishes daily exchange rates against CUP for 13
-    # currencies via a JSON REST API.
+    # Banco Central de Cuba. Publishes daily exchange rates against CUP for 13 currencies via a JSON REST API.
     #
     # The bank publishes three parallel series:
     #   * tasaOficial — Segment I, official rate (USD pegged at 24 CUP)
     #   * tasaPublica — Segment II, retail bank rate (USD = 120 CUP)
     #   * tasaEspecial — Segment III, informal/MLC market rate, the only float
     #
-    # We relay tasaEspecial as the headline series. It tracks the de facto
-    # parallel market and is the only one that moves day to day. The other two
-    # series are administered pegs published for legal/accounting purposes; we
-    # don't emit them.
+    # We relay tasaEspecial as the headline series. It tracks the de facto parallel market and is the only one that
+    # moves day to day. The other two series are administered pegs published for legal/accounting purposes; we don't
+    # emit them.
     #
-    # The /historico endpoint accepts arbitrarily wide date ranges in a single
-    # request but only one currency at a time (codigoMoneda is required), so
-    # we iterate the 13 currencies and hit the endpoint once each per backfill
-    # window.
+    # The /historico endpoint accepts arbitrarily wide date ranges in a single request but only one currency at a time
+    # (codigoMoneda is required), so we iterate the 13 currencies and hit the endpoint once each per backfill window.
     #
-    # Native convention: 1 foreign = X CUP. Base = foreign, quote = CUP. JPY
-    # is reported per-unit (e.g. 0.31 CUP per 1 JPY), no multiplier needed.
+    # Native convention: 1 foreign = X CUP. Base = foreign, quote = CUP. JPY is reported per-unit (e.g. 0.31 CUP per 1
+    # JPY), no multiplier needed.
     class BCC < Adapter
       BASE_URL = "https://api.bc.gob.cu/v1/tasas-de-cambio"
-      HISTORICO_URL = "#{BASE_URL}/historico"
+      HISTORICO_URL = "#{BASE_URL}/historico".freeze
 
       CURRENCIES = ["AUD", "CAD", "CHF", "CNY", "DKK", "EUR", "GBP", "JPY", "MXN", "NOK", "RUB", "SEK", "USD"].freeze
 
@@ -70,7 +66,7 @@ class Provider
           "fechaInicio" => start_date.to_s,
           "fechaFin" => end_date.to_s,
           "codigoMoneda" => code,
-        }).to_s
+        },).to_s
         parse(response, code)
       end
     end

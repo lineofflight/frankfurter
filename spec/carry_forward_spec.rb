@@ -69,10 +69,9 @@ describe CarryForward do
   end
 
   describe ".each_snapshot" do
-    # each_snapshot is a sliding-window optimization of calling .apply once per anchor date.
-    # It must yield, for each date, the identical contributor set that .apply produces — .apply
-    # is the trusted oracle. Contributors are compared as sets (keyed by provider/base/quote)
-    # because downstream blending is order-independent.
+    # each_snapshot is a sliding-window optimization of calling .apply once per anchor date. It must yield, for each
+    # date, the identical contributor set that .apply produces — .apply is the trusted oracle. Contributors are compared
+    # as sets (keyed by provider/base/quote) because downstream blending is order-independent.
     def normalize(rows)
       rows.map { |r| [r[:provider], r[:base], r[:quote], r[:date], r[:rate]] }.sort
     end
@@ -95,9 +94,9 @@ describe CarryForward do
       base_dates.each_with_index do |date, i|
         next if date.saturday? || date.sunday? # weekend gaps, like production
 
-        rows << { date:, provider: "ECB", base: "EUR", quote: "USD", rate: 1.08 + i * 0.001 }
-        rows << { date:, provider: "ECB", base: "EUR", quote: "GBP", rate: 0.86 + i * 0.001 }
-        rows << { date:, provider: "BOC", base: "CAD", quote: "USD", rate: 0.74 + i * 0.001 }
+        rows << { date:, provider: "ECB", base: "EUR", quote: "USD", rate: 1.08 + (i * 0.001) }
+        rows << { date:, provider: "ECB", base: "EUR", quote: "GBP", rate: 0.86 + (i * 0.001) }
+        rows << { date:, provider: "BOC", base: "CAD", quote: "USD", rate: 0.74 + (i * 0.001) }
       end
 
       anchors = ((Date.new(2024, 1, 1))..(Date.new(2024, 2, 20))).to_a

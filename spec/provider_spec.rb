@@ -148,8 +148,8 @@ describe Provider do
       let(:fred) { build_provider("*/30 21-23 * * 1", cadence: "weekly") }
 
       it "returns 0 when end_date is in the week FRED's last batch covered" do
-        # Today 2026-04-21 (Tue). Last Monday fire Apr 20 covers prior ISO week Apr 13-19.
-        # end_date = 2026-04-19 → same ISO week bucket as Apr 13 → 0 missed.
+        # Today 2026-04-21 (Tue). Last Monday fire Apr 20 covers prior ISO week Apr 13-19. end_date = 2026-04-19 → same
+        # ISO week bucket as Apr 13 → 0 missed.
         fred.stub(:end_date, "2026-04-19") do
           _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(0)
         end
@@ -170,16 +170,15 @@ describe Provider do
       end
 
       it "returns 0 on Sunday before Monday batch arrives (expected is 2 weeks ago)" do
-        # Today Sun 2026-04-19. Last Mon fire Apr 13 covers prior week Apr 6-12.
-        # end_date = Apr 12 (covered) → 0.
+        # Today Sun 2026-04-19. Last Mon fire Apr 13 covers prior week Apr 6-12. end_date = Apr 12 (covered) → 0.
         fred.stub(:end_date, "2026-04-12") do
           _(fred.publishes_missed(reference_date: Date.new(2026, 4, 19))).must_equal(0)
         end
       end
 
       it "reports 1 missed on Monday morning when prior week's batch did not arrive" do
-        # Today Mon 2026-04-20 (FRED's first publish day of this ISO week).
-        # end_date Sun 2026-04-12 = end of ISO week Apr 6-12; expected = ISO week Apr 13-19 → 1 missed.
+        # Today Mon 2026-04-20 (FRED's first publish day of this ISO week). end_date Sun 2026-04-12 = end of ISO week
+        # Apr 6-12; expected = ISO week Apr 13-19 → 1 missed.
         fred.stub(:end_date, "2026-04-12") do
           _(fred.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(1)
         end
@@ -221,8 +220,7 @@ describe Provider do
       end
 
       it "reports 1 missed on the first publish day of the window when prior month did not arrive" do
-        # Today Apr 3 = first day of HKMA's publish window (DOM 3-12).
-        # end_date Feb 28; expected = March → 1 missed.
+        # Today Apr 3 = first day of HKMA's publish window (DOM 3-12). end_date Feb 28; expected = March → 1 missed.
         hkma.stub(:end_date, "2026-02-28") do
           _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 3))).must_equal(1)
         end
@@ -230,15 +228,14 @@ describe Provider do
     end
 
     describe "with monthly cadence on a daily weekday schedule (CBC-style)" do
-      # CBC polls a multi-currency open-data file refreshed in monthly batches
-      # in arrears: April's daily rows all land in early May. The schedule stays
-      # daily so the scheduler keeps polling and catches each batch promptly,
-      # but the cadence is monthly so the pre-batch lag is not counted as missed.
+      # CBC polls a multi-currency open-data file refreshed in monthly batches in arrears: April's daily rows all land
+      # in early May. The schedule stays daily so the scheduler keeps polling and catches each batch promptly, but the
+      # cadence is monthly so the pre-batch lag is not counted as missed.
       it "reports no missed publishes once the cadence is monthly" do
         cbc = build_provider("*/30 8-10 * * 1-5", cadence: "monthly")
 
-        # end_date Apr 30, today late May: April is the latest expected bucket
-        # until the May batch is due, so nothing is missed.
+        # end_date Apr 30, today late May: April is the latest expected bucket until the May batch is due, so nothing is
+        # missed.
         cbc.stub(:end_date, "2026-04-30") do
           _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_equal(0)
         end
@@ -247,8 +244,8 @@ describe Provider do
       it "would report a large count under the old daily cadence" do
         cbc = build_provider("*/30 8-10 * * 1-5", cadence: "daily")
 
-        # Same end_date and reference, but daily cadence counts every weekday
-        # since the last data date — the false pre-batch peak.
+        # Same end_date and reference, but daily cadence counts every weekday since the last data date — the false
+        # pre-batch peak.
         cbc.stub(:end_date, "2026-04-30") do
           _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_be(:>=, 20)
         end
@@ -331,9 +328,8 @@ describe Provider do
     end
 
     it "drops records dated implausibly far in the future" do
-      # A single stray future-dated row (source typo, or a pre-seeded spreadsheet
-      # row) must not be stored: it would hijack last_synced (= max date) and
-      # freeze incremental backfill behind an unreachable cursor.
+      # A single stray future-dated row (source typo, or a pre-seeded spreadsheet row) must not be stored: it would
+      # hijack last_synced (= max date) and freeze incremental backfill behind an unreachable cursor.
       future_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
@@ -352,9 +348,8 @@ describe Provider do
     end
 
     it "keeps records dated within the near-future grace window" do
-      # Providers in far-eastern time zones (e.g. Tonga UTC+13) and forward
-      # value-date conventions legitimately publish a rate dated one day ahead
-      # of the UTC backfill clock; those must still be ingested.
+      # Providers in far-eastern time zones (e.g. Tonga UTC+13) and forward value-date conventions legitimately publish
+      # a rate dated one day ahead of the UTC backfill clock; those must still be ingested.
       near_future_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [{ date: Date.today + 1, base: "EUR", quote: "USD", rate: 1.1 }]
@@ -442,10 +437,10 @@ describe Provider do
       calls = []
       windows = []
       Cache.stub(:purge_debounced, -> { calls << :purge }) do
-        BlendedRate.stub(:refresh, ->(window) {
+        BlendedRate.stub(:refresh, lambda { |window|
           calls << :refresh
           windows << window
-        }) do
+        },) do
           provider.stub(:adapter, adapter) do
             provider.backfill
           end

@@ -72,7 +72,8 @@ class Provider < Sequel::Model(:providers)
 
         _(records.length).must_equal(17)
         _(records.map { |r| r[:base] }.sort).must_equal(
-          ["AUD", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "INR", "JPY", "KRW", "MYR", "PHP", "SGD", "THB", "TWD", "USD", "ZAR"],
+          ["AUD", "CAD", "CHF", "CNY", "EUR", "GBP", "IDR", "INR", "JPY", "KRW", "MYR", "PHP", "SGD", "THB", "TWD",
+           "USD", "ZAR",],
         )
       end
 

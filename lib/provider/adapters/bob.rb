@@ -4,8 +4,7 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Botswana. Publishes daily rates for ~7 currencies against BWP.
-    # The CSV export only contains these columns.
+    # Bank of Botswana. Publishes daily rates for ~7 currencies against BWP. The CSV export only contains these columns.
     class BOB < Adapter
       CSV_URL = "https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv"
 
@@ -19,10 +18,7 @@ class Provider
         "ZAR" => "ZAR",
       }.freeze
 
-      class << self
-      end
-
-      def fetch(after: nil, upto: nil)
+      def fetch(after: nil, **)
         records = parse(http.get(CSV_URL).to_s)
         after ? records.select { |r| r[:date] >= Date.parse(after.to_s) } : records
       end
@@ -39,7 +35,7 @@ class Provider
           map[iso] = idx if idx
         end
 
-        rows.filter_map do |line|
+        records = rows.filter_map do |line|
           values = line.delete('"').split(",")
           date = Date.strptime(values[date_index].strip, "%d %b %Y")
           rates = column_indices.filter_map do |iso, idx|
@@ -52,7 +48,8 @@ class Provider
             { date:, base: "BWP", quote: iso, rate: }
           end
           rates.empty? ? nil : rates
-        end.flatten.sort_by { |r| r[:date] }
+        end
+        records.flatten.sort_by { |r| r[:date] }
       end
     end
   end

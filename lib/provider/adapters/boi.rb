@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Israel. Fetches daily representative exchange rates for 14
-    # currencies against the Israeli new shekel (ILS) via the SDMX API.
-    # Supports date range queries and full historical backfill.
+    # Bank of Israel. Fetches daily representative exchange rates for 14 currencies against the Israeli new shekel (ILS)
+    # via the SDMX API. Supports date range queries and full historical backfill.
     class BOI < Adapter
       BASE_URL = "https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow/BOI.STATISTICS/EXR/1.0/"
       def fetch(after: nil, upto: nil)
@@ -17,7 +16,7 @@ class Provider
           "startperiod" => after.to_s,
           "endperiod" => (upto || Date.today).to_s,
           "format" => "csv",
-        }).to_s
+        },).to_s
 
         parse(response)
       end

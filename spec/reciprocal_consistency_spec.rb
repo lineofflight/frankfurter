@@ -9,8 +9,8 @@ require "versions/v2"
 #   - cross-rate transitivity: rate(A,B) * rate(B,C) * rate(C,A) == 1 (rounded)
 #   - pegged-base anchor: pegged base requests resolve to the peg, not provider noise
 #
-# The reciprocal and transitivity tests fail on `main` for non-USD bases — they're the
-# defining checks of the fix. The pegged-base test passes today; it's a regression guard.
+# The reciprocal and transitivity tests fail on `main` for non-USD bases — they're the defining checks of the fix. The
+# pegged-base test passes today; it's a regression guard.
 describe "V2 reciprocal consistency" do
   include Rack::Test::Methods
 

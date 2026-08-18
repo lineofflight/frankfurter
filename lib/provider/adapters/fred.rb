@@ -6,10 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Federal Reserve Economic Data (FRED). Publishes daily H.10 exchange rates.
-    # Most series are quoted as foreign currency per USD. A few (AUD, EUR, GBP, NZD)
-    # are quoted as USD per foreign currency and stored with the foreign currency as base.
-    # The H.10 is a curated policy publication — these are all the series available.
+    # Federal Reserve Economic Data (FRED). Publishes daily H.10 exchange rates. Most series are quoted as foreign
+    # currency per USD. A few (AUD, EUR, GBP, NZD) are quoted as USD per foreign currency and stored with the foreign
+    # currency as base. The H.10 is a curated policy publication — these are all the series available.
     class FRED < Adapter
       API_URL = "https://api.stlouisfed.org/fred/series/observations"
 
@@ -43,7 +42,7 @@ class Provider
         def api_key = ENV["FRED_API_KEY"] || raise("no API key")
       end
 
-      def fetch(after: nil, upto: nil)
+      def fetch(after: nil, **)
         dataset = []
         params = {}
         params[:observation_start] = after.to_s if after
@@ -64,7 +63,7 @@ class Provider
           api_key: self.class.api_key,
           file_type: "json",
           **params,
-        }).to_s
+        },).to_s
         data = JSON.parse(response)
 
         (data["observations"] || []).filter_map do |obs|

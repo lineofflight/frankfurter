@@ -6,14 +6,12 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of England (BOE). Fetches daily spot exchange rates for 26 currencies
-    # against the British pound from the Statistical Interactive Database.
-    # The CSV API returns pivoted data with series codes as column headers.
-    # Historical data available from 2000-01-04.
+    # Bank of England (BOE). Fetches daily spot exchange rates for 26 currencies against the British pound from the
+    # Statistical Interactive Database. The CSV API returns pivoted data with series codes as column headers. Historical
+    # data available from 2000-01-04.
     class BOE < Adapter
       BASE_URL = "https://www.bankofengland.co.uk/boeapps/database/_iadb-fromshowcolumns.asp"
-      # BOE series code => ISO 4217 currency code
-      # Rates are "foreign currency per 1 GBP"
+      # BOE series code => ISO 4217 currency code Rates are "foreign currency per 1 GBP"
       SERIES = {
         "XUDLUSS" => "USD",
         "XUDLERS" => "EUR",
@@ -51,7 +49,7 @@ class Provider
           "CSVF" => "TN",
           "Datefrom" => after.strftime("%d/%b/%Y"),
           "Dateto" => (upto || Date.today).strftime("%d/%b/%Y"),
-        }).to_s
+        },).to_s
 
         parse(response)
       end

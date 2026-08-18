@@ -100,15 +100,15 @@ describe BaseConversion do
     result = BaseConversion.new(mixed, base: "EUR").convert
     gbp = result.find { |r| r[:quote] == "GBP" }
 
-    # Carry-forward snapshots can mix observation dates within a group; the bridge
-    # resolves to the first matching row in group order, as Array#find did.
+    # Carry-forward snapshots can mix observation dates within a group; the bridge resolves to the first matching row in
+    # group order, as Array#find did.
     _(gbp[:rate]).must_be_close_to(1.08 / 1.27)
   end
 
   it "collapses two bridges to the same quote into one averaged rate" do
-    # A provider can reach the same quote two ways during a pivot-currency transition (e.g. Banque du
-    # Liban quoting against LTL and EUR around Lithuania's 2015 euro adoption). Collapse the duplicates
-    # into one rate rather than failing the whole query.
+    # A provider can reach the same quote two ways during a pivot-currency transition (e.g. Banque du Liban quoting
+    # against LTL and EUR around Lithuania's 2015 euro adoption). Collapse the duplicates into one rate rather than
+    # failing the whole query.
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.16, provider: "IMF" },
       { date: date, base: "USD", quote: "XDR", rate: 0.73, provider: "IMF" },
@@ -119,12 +119,12 @@ describe BaseConversion do
     usd = result.select { |r| r[:quote] == "USD" }
 
     _(usd.length).must_equal(1)
-    _(usd.first[:rate]).must_be_close_to((1.16 + 0.85 / 0.73) / 2.0)
+    _(usd.first[:rate]).must_be_close_to((1.16 + (0.85 / 0.73)) / 2.0)
   end
 
   it "collapses divergent bridges too, rather than failing the query" do
-    # Transition-window rollups can average the two pivots over different day-subsets, so the bridges
-    # need not agree to rounding. A 5xx is never the right response to that, so collapse regardless.
+    # Transition-window rollups can average the two pivots over different day-subsets, so the bridges need not agree to
+    # rounding. A 5xx is never the right response to that, so collapse regardless.
     rates = [
       { date: date, base: "EUR", quote: "USD", rate: 1.16, provider: "IMF" },
       { date: date, base: "USD", quote: "XDR", rate: 0.73, provider: "IMF" },
@@ -135,7 +135,7 @@ describe BaseConversion do
     usd = result.select { |r| r[:quote] == "USD" }
 
     _(usd.length).must_equal(1)
-    _(usd.first[:rate]).must_be_close_to((1.16 + 1.50 / 0.73) / 2.0)
+    _(usd.first[:rate]).must_be_close_to((1.16 + (1.50 / 0.73)) / 2.0)
   end
 
   it "bridges within the same provider only" do

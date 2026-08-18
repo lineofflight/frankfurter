@@ -45,9 +45,8 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "skips holiday rows where rate cells hold flag text" do
-        # 2025-01-01 is "Public Holiday: New Year's Day" — the rate cells contain
-        # a shared-string label rather than numeric MID values, so the date is
-        # absent from the output.
+        # 2025-01-01 is "Public Holiday: New Year's Day" — the rate cells contain a shared-string label rather than
+        # numeric MID values, so the date is absent from the output.
         dataset = adapter.fetch(after: Date.new(2024, 12, 30), upto: Date.new(2025, 1, 3))
 
         _(dataset.map { |r| r[:date] }.uniq).wont_include(Date.new(2025, 1, 1))

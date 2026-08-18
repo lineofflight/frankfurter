@@ -7,29 +7,29 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Egypt. Publishes daily buy/sell rates against EGP for 18 currencies via an XLSX
-    # download from the historical-data page. The page requires a session cookie + anti-forgery token
-    # scraped from the HTML form; both are reused across batches within a single backfill.
+    # Central Bank of Egypt. Publishes daily buy/sell rates against EGP for 18 currencies via an XLSX download from the
+    # historical-data page. The page requires a session cookie + anti-forgery token scraped from the HTML form; both are
+    # reused across batches within a single backfill.
     #
-    # The XLSX response has four columns: Date (Excel serial), Currency (full English name),
-    # Buy, Sell. We coerce buy/sell to mid = (buy + sell) / 2 (issue #314 pattern). JPY is quoted
-    # per 100 units in CBE data ("Japanese Yen 100" option) and is divided by 100.
+    # The XLSX response has four columns: Date (Excel serial), Currency (full English name), Buy, Sell. We coerce
+    # buy/sell to mid = (buy + sell) / 2 (issue #314 pattern). JPY is quoted per 100 units in CBE data ("Japanese Yen
+    # 100" option) and is divided by 100.
     #
-    # CBE publishes "1 foreign = X EGP" (e.g. 1 USD = 52 EGP), so foreign is the base and EGP the
-    # quote. Matches the pivot-in-quote convention used by NBG and BBK.
+    # CBE publishes "1 foreign = X EGP" (e.g. 1 USD = 52 EGP), so foreign is the base and EGP the quote. Matches the
+    # pivot-in-quote convention used by NBG and BBK.
     #
-    # The site sits behind an F5 BIG-IP ASM WAF; we keep backfill_range small (30 days) and pause
-    # one second between batches to stay under the rate-limit threshold.
+    # The site sits behind an F5 BIG-IP ASM WAF; we keep backfill_range small (30 days) and pause one second between
+    # batches to stay under the rate-limit threshold.
     #
-    # Attribution required: per CBE disclaimer, the Central Bank of Egypt must be cited as the
-    # source when information is distributed or reproduced.
+    # Attribution required: per CBE disclaimer, the Central Bank of Egypt must be cited as the source when information
+    # is distributed or reproduced.
     class CBE < Adapter
       HISTORICAL_URL = "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates/historical-data"
       API_URL = "https://www.cbe.org.eg/api/statistics/GetHistoricalData"
       DATA_SOURCE_ID = "19CFFDDBFF494350A5E9C6A4397FC7DF"
       FALLBACK_URL = "/en/economic-research/statistics/cbe-exchange-rates/historical-data"
       USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " \
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
       TOKEN_PATTERN = /name="__RequestVerificationToken"[^>]*value="([^"]+)"/
 
       # CBE returns rates per currency name; map to ISO codes. JPY is quoted per 100 units.
@@ -57,10 +57,9 @@ class Provider
       class << self
         def backfill_range = 30
 
-        # Override the base fetch_each to reuse a single adapter instance across
-        # batches. The default implementation calls `new.fetch` per chunk, which
-        # would throw away the WAF session cookie/token between batches and
-        # would also defeat the inter-batch pacing below.
+        # Override the base fetch_each to reuse a single adapter instance across batches. The default implementation
+        # calls `new.fetch` per chunk, which would throw away the WAF session cookie/token between batches and would
+        # also defeat the inter-batch pacing below.
         #
         # No transient-error rescue here: the base client already retries transport errors internally (retriable, 5
         # tries). Anything else (e.g. an HTTP::StatusError from the WAF) propagates so Provider#backfill logs and skips

@@ -6,10 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco de la República Colombia. Publishes the daily TRM (Tasa
-    # Representativa del Mercado) — the representative market exchange rate
-    # for the US dollar against the Colombian peso — via the Socrata Open
-    # Data API on datos.gov.co.
+    # Banco de la República Colombia. Publishes the daily TRM (Tasa Representativa del Mercado) — the representative
+    # market exchange rate for the US dollar against the Colombian peso — via the Socrata Open Data API on datos.gov.co.
     class BANREP < Adapter
       BASE_URL = "https://www.datos.gov.co/resource/32sa-8pi3.json"
       def fetch(after: nil, upto: nil)
@@ -17,7 +15,7 @@ class Provider
           "$where" => "vigenciadesde>='#{after}T00:00:00.000' AND vigenciadesde<='#{upto || Date.today}T00:00:00.000'",
           "$limit" => 50_000,
           "$order" => "vigenciadesde ASC",
-        }).to_s
+        },).to_s
 
         parse(response)
       end

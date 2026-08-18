@@ -6,27 +6,22 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Nigeria. Publishes daily official exchange rates against
-    # the Nigerian naira. One JSON request returns the full historical dataset
-    # (2001-12-10 to present), which we fetch once and filter by date in memory.
+    # Central Bank of Nigeria. Publishes daily official exchange rates against the Nigerian naira. One JSON request
+    # returns the full historical dataset (2001-12-10 to present), which we fetch once and filter by date in memory.
     #
-    # Rates use the centralrate field (mid of buy/sell). NGN is the pivot
-    # currency, stored in the quote position; foreign currency is the base.
+    # Rates use the centralrate field (mid of buy/sell). NGN is the pivot currency, stored in the quote position;
+    # foreign currency is the base.
     #
-    # Currency names arrive with whitespace variants and dual spellings (e.g.
-    # "YEN"/"JAPANESE YEN", "POUND STERLING"/"POUNDS STERLING"). Names are
-    # normalized via NAME_TO_ISO, which also maps SDR to its ISO 4217 code
-    # XDR. WAUA (West African Unit of Account) is not ISO 4217 and is
-    # therefore not mapped.
+    # Currency names arrive with whitespace variants and dual spellings (e.g. "YEN"/"JAPANESE YEN", "POUND
+    # STERLING"/"POUNDS STERLING"). Names are normalized via NAME_TO_ISO, which also maps SDR to its ISO 4217 code XDR.
+    # WAUA (West African Unit of Account) is not ISO 4217 and is therefore not mapped.
     #
-    # Terms: https://www.cbn.gov.ng/Legal.html — redistribution permitted with
-    # attribution, content may not be altered.
+    # Terms: https://www.cbn.gov.ng/Legal.html — redistribution permitted with attribution, content may not be altered.
     class CBN < Adapter
       URL = "https://www.cbn.gov.ng/api/GetAllExchangeRates"
 
-      # Normalized currency name (stripped + upcased) to ISO 4217 code.
-      # CBN's "SDR" label maps to XDR (the ISO 4217 code for Special
-      # Drawing Rights). WAUA is not ISO 4217 and is omitted.
+      # Normalized currency name (stripped + upcased) to ISO 4217 code. CBN's "SDR" label maps to XDR (the ISO 4217 code
+      # for Special Drawing Rights). WAUA is not ISO 4217 and is omitted.
       NAME_TO_ISO = {
         "CFA" => "XOF",
         "DANISH KRONA" => "DKK",

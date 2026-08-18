@@ -57,7 +57,7 @@ class Provider < Sequel::Model(:providers)
           NBKR.const_set(:CURRENCIES, [
             { id: 15, iso: "USD", nominal: 1 },
             { id: 20, iso: "EUR", nominal: 1 },
-          ])
+          ],)
         end
 
         after do
@@ -66,8 +66,8 @@ class Provider < Sequel::Model(:providers)
           NBKR.const_set(:CURRENCIES, @original_currencies)
         end
 
-        # All HTTP-hitting historical tests share one window so the cassette
-        # records the per-currency requests just once.
+        # All HTTP-hitting historical tests share one window so the cassette records the per-currency requests just
+        # once.
         let(:after) { Date.new(2005, 6, 1) }
         let(:upto) { Date.new(2005, 6, 30) }
 

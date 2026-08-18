@@ -6,21 +6,18 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central del Paraguay (BCP). Publishes the "tipo de cambio referencial
-    # interbancario", a weighted average of interbank spot operations, on business
-    # days against the Paraguayan guaraní (PYG). The historical endpoint returns
-    # a 12-month x 31-day matrix per (year, currency); ND cells mark non-trading
-    # days. Rates are PYG-per-foreign — pivot PYG goes in quote, foreign in base.
-    # XAU is published per troy ounce already.
+    # Banco Central del Paraguay (BCP). Publishes the "tipo de cambio referencial interbancario", a weighted average of
+    # interbank spot operations, on business days against the Paraguayan guaraní (PYG). The historical endpoint returns
+    # a 12-month x 31-day matrix per (year, currency); ND cells mark non-trading days. Rates are PYG-per-foreign — pivot
+    # PYG goes in quote, foreign in base. XAU is published per troy ounce already.
     class BCP < Adapter
       BASE_URL = "https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica"
 
-      # Quote currencies on the daily snapshot. Currencies have varying
-      # historical depth — USD/EUR back to 2001, most others from ~2012, some
-      # later — so empty cells are expected on older years.
+      # Quote currencies on the daily snapshot. Currencies have varying historical depth — USD/EUR back to 2001, most
+      # others from ~2012, some later — so empty cells are expected on older years.
       #
-      # SDR/XDR is omitted: BCP exposes ?moneda=SDR but the page returns 100%
-      # ND for every year (2001-present), so BCP doesn't actually publish it.
+      # SDR/XDR is omitted: BCP exposes ?moneda=SDR but the page returns 100% ND for every year (2001-present), so BCP
+      # doesn't actually publish it.
       CURRENCIES = [
         "USD",
         "EUR",

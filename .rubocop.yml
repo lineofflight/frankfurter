@@ -57,18 +57,21 @@ Style/NumericLiterals:
 Style/Documentation:
   Enabled: false
 
+Style/MapIntoArray:
+  Enabled: false
+
 # Custom Cops
 Style/CommentFill:
   Enabled: true
   Max: 120
 
-# Metrics (Disabled / Tuned)
+# Metrics (Disabled)
 Metrics/AbcSize:
-  Max: 26.0
+  Enabled: false
 Metrics/BlockLength:
-  AllowedMethods: ['describe', 'route']
+  Enabled: false
 Metrics/MethodLength:
-  Max: 15
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/ModuleLength:

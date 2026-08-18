@@ -6,14 +6,14 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central de Costa Rica (BCCR). Fetches the daily reference exchange
-    # rate for the US dollar against the Costa Rican colón via the SDDE API.
-    # The API returns a pivoted table (dates as columns) with a maximum of 100
-    # date columns per request, so backfill is chunked in 90-day periods.
+    # Banco Central de Costa Rica (BCCR). Fetches the daily reference exchange rate for the US dollar against the Costa
+    # Rican colón via the SDDE API. The API returns a pivoted table (dates as columns) with a maximum of 100 date
+    # columns per request, so backfill is chunked in 90-day periods.
     class BCCR < Adapter
       BASE_URL = "https://apim.bccr.fi.cr/SDDE/api"
-      TOKEN_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno.ServiciosUsuario.API/Token/GenereCSRF"
-      DATA_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno.GrupoVariables.API/CuadroGrupoVariables/ObtenerDatosCuadro"
+      TOKEN_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno.ServiciosUsuario.API/Token/GenereCSRF".freeze
+      DATA_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno." \
+                 "GrupoVariables.API/CuadroGrupoVariables/ObtenerDatosCuadro".freeze
       # IdGrupoVariable=1 is the USD buy/sell reference rate group
       GROUP_ID = 1
 
@@ -32,7 +32,7 @@ class Provider
           "FechaInicio" => "#{after}T00:00:00",
           "FechaFin" => (upto || Date.today).to_s,
           "CantidadSeriesAMostrar" => 100,
-        }).to_s
+        },).to_s
 
         parse(response)
       end

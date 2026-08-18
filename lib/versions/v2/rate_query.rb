@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "digest"
-require "set"
 
 require "roda"
 require "blended_rate"
@@ -49,7 +48,7 @@ module Versions
       end
 
       def to_a
-        @rates ||= [].tap { |a| each { |r| a << r } }
+        @to_a ||= [].tap { |a| each { |r| a << r } }
       end
 
       def each(&block)
@@ -101,7 +100,7 @@ module Versions
         end
       end
 
-      def each_rollup_range(&block)
+      def each_rollup_range(&)
         each_chunk(date_scope) do |chunk_range|
           ds = range_dataset
           date_col = ds.model.date_column
@@ -109,7 +108,7 @@ module Versions
           rows = ds.between(chunk_range).all
           normalize_dates!(rows, date_col) if date_col != :date
           rows.group_by { |r| r[:date] }.sort_by(&:first).each do |_, group_rows|
-            emit_blended(group_rows, &block)
+            emit_blended(group_rows, &)
           end
         end
       end
@@ -158,13 +157,13 @@ module Versions
       # the carry-forward lookback is the canonical anchor-date value, so a dated row means the same thing here as in a
       # range instead of re-decaying against the asking day (#573). Derive, the quotes filter, the identity row, and
       # rounding still happen in emit.
-      def each_blended_snapshot(&block)
+      def each_blended_snapshot(&)
         lookback_start = date_scope - CarryForward::LOOKBACK_DAYS
         rows = BlendedRate.dataset.where(date: lookback_start..date_scope).naked.all
         rows.each { |r| r[:base] = PIVOT }
         snapshot = CarryForward.apply(rows, date: date_scope)
         blended = base == PIVOT ? snapshot : derive(snapshot, target: base)
-        emit_records(blended, snapshot, &block)
+        emit_records(blended, snapshot, &)
 
         # See each_blended_range: a rebuild that started mid-request wiped the table under our read.
         raise "materialized blend rebuilt mid-request" unless BlendedRate.ready?
@@ -210,8 +209,8 @@ module Versions
       # blended values whenever a contributor row failed the seeded-pivot test (LB's post-euro rows, BCBO's USD-quoted
       # metals), so a filtered request disagreed with an unfiltered one about the same pair. The blend is computed from
       # the full row set everywhere (#570).
-      def apply_filters(ds)
-        providers ? ds.where(provider: providers) : ds
+      def apply_filters(dataset)
+        providers ? dataset.where(provider: providers) : dataset
       end
 
       def raw_dataset
@@ -284,7 +283,9 @@ module Versions
       end
 
       def validate_dates!
-        raise ValidationError, "invalid date" if [:date, :from, :to].any? { |key| @params[key] && !parse_date(@params[key]) }
+        raise ValidationError, "invalid date" if [:date, :from, :to].any? do |key|
+          @params[key] && !parse_date(@params[key])
+        end
       end
 
       def validate_conflicting_params!
@@ -317,15 +318,17 @@ module Versions
         # reproduces the unbounded workload, hence the provider-count bound. Nothing else bounds work anymore: quotes=
         # filters rows only, after blending, so neither a provider-unbounded expand=providers range nor a plain range on
         # the not-ready live fallback gets a quotes exemption.
-        if providers && quotes
-          return if providers.uniq.size <= MAX_DAILY_RANGE_PROVIDERS && quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
+        if providers && quotes &&
+           providers.uniq.size <= MAX_DAILY_RANGE_PROVIDERS &&
+           quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
+          return
         end
         # Cost follows computable days, so a `to` in the future counts only up to today.
         return if [date_scope.end, Date.today].min <= (date_scope.begin >> (MAX_DAILY_RANGE_YEARS * 12))
 
         raise ValidationError, "date range exceeds #{MAX_DAILY_RANGE_YEARS} years at daily granularity; " \
-          "filter with quotes= (#{MAX_DAILY_RANGE_QUOTES} currencies or fewer), " \
-          "aggregate with group=week or group=month, or split the range into shorter requests"
+                               "filter with quotes= (#{MAX_DAILY_RANGE_QUOTES} currencies or fewer), " \
+                               "aggregate with group=week or group=month, or split the range into shorter requests"
       end
 
       def date_scope
@@ -343,21 +346,21 @@ module Versions
       # consensus and weighting see differently shaped numbers. Ranges canonicalized on the pivot with the
       # materialization (#570); latest and single-date followed when they moved to the table (#573), so the live
       # fallback matches it here.
-      def emit_blended(rows, &block)
-        emit_records(pivot_path_blend(rows), rows, &block)
+      def emit_blended(rows, &)
+        emit_records(pivot_path_blend(rows), rows, &)
       end
 
-      def emit_records(blended, rows, &block)
+      def emit_records(blended, rows, &)
         return if blended.empty?
 
         # Echo a single provider's own published digits, but only for native daily rows. Rollup buckets are
         # time-averages, so their extra precision is synthetic and stays rounded.
         passthrough_active = providers && providers.size == 1 && !rollup?
         lookup = if passthrough_active
-          rows.to_h { |row| [[row[:base], row[:quote]], row[:rate]] }
-        else
-          {}
-        end
+                   rows.to_h { |row| [[row[:base], row[:quote]], row[:rate]] }
+                 else
+                   {}
+                 end
 
         records = blended.filter_map do |r|
           next if quotes && !quotes.include?(r[:quote])
@@ -369,10 +372,10 @@ module Versions
           if expand_providers? && r[:providers]
             record[:providers] = r[:providers].map do |p|
               p_rate = if passthrough_active && p[:key] == providers.first && stored_rate
-                stored_rate
-              else
-                round(p[:rate])
-              end
+                         stored_rate
+                       else
+                         round(p[:rate])
+                       end
               entry = { key: p[:key], date: p[:date].to_s, rate: p_rate }
               entry[:excluded] = true if p[:excluded]
               entry
@@ -397,7 +400,7 @@ module Versions
         else
           records.sort_by! { |r| r[:quote] }
         end
-        records.each(&block)
+        records.each(&)
       end
 
       def pivot_path_blend(rows)

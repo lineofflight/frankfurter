@@ -6,24 +6,22 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banque Nationale du Rwanda (BNRRW). Publishes daily reference exchange
-    # rates for 16 currencies against the Rwandan franc (RWF) via a public
-    # JSON API at fxrates.bnr.rw. Rates are quoted as RWF per 1 unit of the
-    # foreign currency — pivot RWF goes in quote, foreign in base.
+    # Banque Nationale du Rwanda (BNRRW). Publishes daily reference exchange rates for 16 currencies against the Rwandan
+    # franc (RWF) via a public JSON API at fxrates.bnr.rw. Rates are quoted as RWF per 1 unit of the foreign currency —
+    # pivot RWF goes in quote, foreign in base.
     #
-    # The endpoint serves one currency per request, so a full backfill iterates
-    # the hard-coded currency list against chunked date windows. buying_rate /
-    # average_rate / selling_rate are published; we take average_rate as the
-    # mid per issue #314. Some historical values are quoted with thousands
-    # commas (e.g. "1,253.60") while recent values are not — both are handled.
+    # The endpoint serves one currency per request, so a full backfill iterates the hard-coded currency list against
+    # chunked date windows. buying_rate / average_rate / selling_rate are published; we take average_rate as the mid per
+    # issue
+    # #314. Some historical values are quoted with thousands commas (e.g. "1,253.60")
+    # while recent values are not — both are handled.
     #
-    # Key BNR is taken by Banca Națională a României, so this provider is
-    # keyed BNRRW.
+    # Key BNR is taken by Banca Națională a României, so this provider is keyed BNRRW.
     class BNRRW < Adapter
       BASE_URL = "https://fxrates.bnr.rw/currency_history/"
 
-      # Quote currencies served by BNRRW. Verified live 2026-05-24 against the
-      # currency_history endpoint. SDR returns no data so it's omitted.
+      # Quote currencies served by BNRRW. Verified live 2026-05-24 against the currency_history endpoint. SDR returns no
+      # data so it's omitted.
       CURRENCIES = [
         "USD",
         "EUR",
@@ -92,7 +90,7 @@ class Provider
           currency_name: currency,
           start_date: start_date.strftime("%Y-%m-%d"),
           end_date: end_date.strftime("%Y-%m-%d"),
-        }).to_s
+        },).to_s
 
         parse(response)
       end

@@ -6,9 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Japan. Fetches daily spot exchange rates for USD/JPY and EUR/USD
-    # from the Tokyo market via the BOJ Statistics API. No authentication required.
-    # Only 2 pairs — this is the full extent of what BOJ publishes via this API.
+    # Bank of Japan. Fetches daily spot exchange rates for USD/JPY and EUR/USD from the Tokyo market via the BOJ
+    # Statistics API. No authentication required. Only 2 pairs — this is the full extent of what BOJ publishes via this
+    # API.
     class BOJ < Adapter
       API_URL = "https://www.stat-search.boj.or.jp/api/v1/getDataCode"
 
@@ -29,7 +29,7 @@ class Provider
           code: SERIES.keys.join(","),
           startDate: effective_after.strftime("%Y%m"),
           endDate: effective_upto.strftime("%Y%m"),
-        }).to_s
+        },).to_s
         raw = parse(response)
         raw.select { |r| r[:date].between?(effective_after, effective_upto) }
       end
@@ -42,7 +42,7 @@ class Provider
           meta = SERIES[series["SERIES_CODE"]]
           next [] unless meta
 
-          values_data = series.dig("VALUES") || {}
+          values_data = series["VALUES"] || {}
           dates = values_data["SURVEY_DATES"] || []
           rates = values_data["VALUES"] || []
 

@@ -118,8 +118,8 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "skips series whose label has no parenthesised ISO code" do
-        # BdP labels usually carry a code, but if a series ever omits it we should
-        # drop that series cleanly rather than emit malformed records.
+        # BdP labels usually carry a code, but if a series ever omits it we should drop that series cleanly rather than
+        # emit malformed records.
         json = {
           "value" => [42.0, 180.5],
           "extension" => {

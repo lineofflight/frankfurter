@@ -105,8 +105,8 @@ module RateValidation
         NascentCurrency.premature?(record[:base], date) || NascentCurrency.premature?(record[:quote], date)
       end
 
-      # Exact on daily rows; on rollups it compares the bucket anchor (not the period end), so the one week straddling an
-      # inception date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
+      # Exact on daily rows; on rollups it compares the bucket anchor (not the period end), so the one week straddling
+      # an inception date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
       def reject_scope(dataset, date_column, _precision = nil)
         conditions = NascentCurrency.all.map do |entry|
           Sequel.&(

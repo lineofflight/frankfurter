@@ -6,23 +6,21 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco de Portugal — pre-euro daily PTE reference rates from BPstat (JSON-stat 2.0).
-    # Coverage 1987-01-02 through 1998-12-31, when PTE was replaced by EUR.
+    # Banco de Portugal — pre-euro daily PTE reference rates from BPstat (JSON-stat 2.0). Coverage 1987-01-02 through
+    # 1998-12-31, when PTE was replaced by EUR.
     #
-    # Direction: foreign currency in base, PTE in quote (1 foreign = X PTE), matching
-    # the convention used by other pivot-in-quote adapters (e.g. NBG, BBK).
+    # Direction: foreign currency in base, PTE in quote (1 foreign = X PTE), matching the convention used by other
+    # pivot-in-quote adapters (e.g. NBG, BBK).
     #
-    # The dim_cats filter restricts to BdP-authored, PTE-referenced, daily series.
-    # Post-1999 EUR-quoted PTE series are sourced from LSEG (redistribution-restricted)
-    # and are structurally excluded by source=BdP, not by date. Post-1999 BdP-authored
-    # EUR rates would mirror ECB and are also excluded by reference=PTE.
+    # The dim_cats filter restricts to BdP-authored, PTE-referenced, daily series. Post-1999 EUR-quoted PTE series are
+    # sourced from LSEG (redistribution-restricted) and are structurally excluded by source=BdP, not by date. Post-1999
+    # BdP-authored EUR rates would mirror ECB and are also excluded by reference=PTE.
     class BDP < Adapter
       DATASET_URL = "https://bpstat.bportugal.pt/data/v1/domains/29/datasets/" \
-        "23e0cdd56bddb4ad3016a9c3ad63a539/"
+                    "23e0cdd56bddb4ad3016a9c3ad63a539/"
 
-      # reference=PTE (794), source=Banco de Portugal (35), periodicity=daily (4263).
-      # Re-included on every page request: the API's next_page URL drops some of these,
-      # which causes the result set to bleed in non-BdP-sourced rows.
+      # reference=PTE (794), source=Banco de Portugal (35), periodicity=daily (4263). Re-included on every page request:
+      # the API's next_page URL drops some of these, which causes the result set to bleed in non-BdP-sourced rows.
       DIM_CATS = ["13:794", "18:35", "40:4263"].freeze
 
       # Series labels carry the ISO code in parens, e.g. "US, Dollars (USD) against Escudo - daily".
@@ -32,7 +30,8 @@ class Provider
       CODE_REMAP = { "ECU" => "XEU" }.freeze
 
       class << self
-        def backfill_range = 1826 # ~5 years per chunk
+        # ~5 years per chunk
+        def backfill_range = 1826
       end
 
       def fetch(after: nil, upto: nil)
@@ -63,8 +62,8 @@ class Provider
         values = data["value"] || []
         num_dates = date_index.size
         if num_dates.zero?
-          # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat
-          # body: an explicit empty value array and series list alongside the empty date index
+          # Dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat body: an explicit empty value
+          # array and series list alongside the empty date index
           return [] if data["value"] == [] && data.dig("extension", "series") == []
 
           raise "BDP: dateless JSON-stat response is not the observed empty shape"
@@ -77,7 +76,7 @@ class Provider
           next unless code
 
           date_index.each_with_index do |date_str, j|
-            value = values[i * num_dates + j]
+            value = values[(i * num_dates) + j]
             next if value.nil?
 
             records << { date: Date.parse(date_str), base: code, quote: "PTE", rate: Float(value) }

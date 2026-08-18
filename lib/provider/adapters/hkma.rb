@@ -6,14 +6,12 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Hong Kong Monetary Authority. Publishes daily HKD exchange rates for 17
-    # currencies via a public JSON API. Rates are expressed as HKD per 1 unit
-    # of foreign currency (base = foreign currency, quote = HKD). Data is
-    # published monthly with approximately a 1-month lag.
-    # Historical data available from 1981-01-02.
+    # Hong Kong Monetary Authority. Publishes daily HKD exchange rates for 17 currencies via a public JSON API. Rates
+    # are expressed as HKD per 1 unit of foreign currency (base = foreign currency, quote = HKD). Data is published
+    # monthly with approximately a 1-month lag. Historical data available from 1981-01-02.
     class HKMA < Adapter
       BASE_URL = "https://api.hkma.gov.hk/public/market-data-and-statistics/" \
-        "monthly-statistical-bulletin/er-ir/er-eeri-daily"
+                 "monthly-statistical-bulletin/er-ir/er-eeri-daily"
       PAGE_SIZE = 100
 
       CURRENCY_FIELDS = [
@@ -89,7 +87,7 @@ class Provider
           "offset" => offset,
           "sortby" => "end_of_day",
           "sortorder" => "desc",
-        }).to_s
+        },).to_s
         data = JSON.parse(response)
         data.dig("result", "records") || []
       end

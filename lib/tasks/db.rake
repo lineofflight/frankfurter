@@ -33,7 +33,7 @@ namespace :db do
 
     totals = RateValidation.purge(DB)
     Log.info("purge_invalid: deleted #{totals[:rates]} rates, " \
-      "#{totals[:weekly_rates]} weekly, #{totals[:monthly_rates]} monthly")
+             "#{totals[:weekly_rates]} weekly, #{totals[:monthly_rates]} monthly")
     next if totals.values.sum.zero?
 
     # Stored blends derived from the deleted rows are stale now; rebuild and drop cached responses.

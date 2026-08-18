@@ -22,7 +22,7 @@ describe RequestTimeout do
     it "raises when the deadline has already passed" do
       body = RequestTimeout::TimedBody.new(["a", "b", "c"], deadline: clock(-1), seconds: 5)
 
-      _ { body.each { |_| } }.must_raise(RequestTimeout::Error)
+      _ { body.each { nil } }.must_raise(RequestTimeout::Error)
     end
 
     it "delegates close to the wrapped body" do
@@ -53,7 +53,7 @@ describe RequestTimeout do
       _, _, body = RequestTimeout.new(app, seconds: 0).call({})
 
       # seconds: 0 means the deadline is already in the past by the time we iterate.
-      _ { body.each { |_| } }.must_raise(RequestTimeout::Error)
+      _ { body.each { nil } }.must_raise(RequestTimeout::Error)
     end
 
     it "passes error responses through unwrapped so a downstream 503 survives the deadline" do

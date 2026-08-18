@@ -6,14 +6,12 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Seðlabanki Íslands (Central Bank of Iceland). Publishes daily reference
-    # exchange rates for 30+ currencies against the Icelandic króna (ISK).
-    # Two GroupIDs are needed: 9 (official reference, 10 currencies from 1981)
-    # and 7 (registered mid-rate, 22 currencies from 2006).
+    # Seðlabanki Íslands (Central Bank of Iceland). Publishes daily reference exchange rates for 30+ currencies against
+    # the Icelandic króna (ISK). Two GroupIDs are needed: 9 (official reference, 10 currencies from 1981) and 7
+    # (registered mid-rate, 22 currencies from 2006).
     class SBI < Adapter
       BASE_URL = "https://sedlabanki.is/xmltimeseries/Default.aspx"
-      # TimeSeries ID to ISO currency code mapping
-      # GroupID=9 (official reference rates)
+      # TimeSeries ID to ISO currency code mapping GroupID=9 (official reference rates)
       GROUP9_CURRENCIES = {
         "4055" => "USD",
         "4061" => "DKK",
@@ -103,12 +101,12 @@ class Provider
           "DagsTil" => end_date.to_s,
           "GroupID" => group_id,
           "Type" => "xml",
-        }).to_s
+        },).to_s
       end
 
       def parse_date(str)
         # Format: "M/D/YYYY 12:00:00 AM"
-        date_part = str.split(" ").first
+        date_part = str.split.first
         month, day, year = date_part.split("/").map(&:to_i)
         Date.new(year, month, day)
       end

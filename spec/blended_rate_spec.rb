@@ -63,8 +63,8 @@ describe BlendedRate do
       before_target = BlendedRate.first(quote: "EUR", date: date).rate
       before_outside = BlendedRate.first(quote: "EUR", date: Fixtures.business_day(30)).rate
 
-      # A late arrival shifts the contributor set for EUR at this anchor. Close enough to the
-      # consensus that the outlier filter keeps it.
+      # A late arrival shifts the contributor set for EUR at this anchor. Close enough to the consensus that the outlier
+      # filter keeps it.
       Rate.dataset.insert(provider: "T1", date: date, base: "EUR", quote: "USD", rate: 1.10)
       BlendedRate.refresh(date..(date + CarryForward::LOOKBACK_DAYS))
 

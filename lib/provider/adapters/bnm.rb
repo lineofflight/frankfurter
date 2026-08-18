@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank Negara Malaysia daily exchange rates. Data available from 2006-01-03.
-    # Historical rates are fetched per-currency per-month.
+    # Bank Negara Malaysia daily exchange rates. Data available from 2006-01-03. Historical rates are fetched
+    # per-currency per-month.
     class BNM < Adapter
       BASE_URL = "https://api.bnm.gov.my/public/exchange-rate"
       SESSION = "0900"

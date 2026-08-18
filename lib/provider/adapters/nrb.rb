@@ -6,9 +6,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Nepal Rastra Bank. Publishes daily buy/sell rates for 22 currencies
-    # against NPR. Mid-market rate computed as average of buy and sell.
-    # Rates with unit > 1 (e.g. JPY per 10) are normalized by dividing by unit.
+    # Nepal Rastra Bank. Publishes daily buy/sell rates for 22 currencies against NPR. Mid-market rate computed as
+    # average of buy and sell. Rates with unit
+    # > 1 (e.g. JPY per 10) are normalized by dividing by unit.
     class NRB < Adapter
       BASE_URL = "https://www.nrb.org.np/api/forex/v1/rates"
 
@@ -28,7 +28,7 @@ class Provider
             to: end_date.to_s,
             page: page,
             per_page: 100,
-          }).to_s
+          },).to_s
           data = JSON.parse(response)
           payload = data.dig("data", "payload")
           dataset.concat(parse(payload))

@@ -17,11 +17,10 @@ class BaseConversion
 
   private
 
-  # A provider can reach the same quote by more than one bridge during a pivot-currency transition
-  # (e.g. Banque du Liban quoting against both LTL and EUR around Lithuania's 2015 euro adoption).
-  # Collapse such duplicates into one averaged rate per date and quote rather than failing the query:
-  # a live 5xx is never the right answer to a provider quirk, and cross-provider consensus already
-  # guards against genuine outliers downstream.
+  # A provider can reach the same quote by more than one bridge during a pivot-currency transition (e.g. Banque du Liban
+  # quoting against both LTL and EUR around Lithuania's 2015 euro adoption). Collapse such duplicates into one averaged
+  # rate per date and quote rather than failing the query: a live 5xx is never the right answer to a provider quirk, and
+  # cross-provider consensus already guards against genuine outliers downstream.
   def reconcile(rows)
     rows.group_by { |r| [r[:date], r[:quote]] }.map do |_, group|
       next group.first if group.size == 1
@@ -32,8 +31,8 @@ class BaseConversion
   end
 
   def convert_group(group)
-    # Index rows by [base, quote] once so cross_convert resolves bridges in O(1) instead of
-    # rescanning the group per row; keep the first occurrence to match Array#find semantics.
+    # Index rows by [base, quote] once so cross_convert resolves bridges in O(1) instead of rescanning the group per
+    # row; keep the first occurrence to match Array#find semantics.
     index = {}
     group.each { |r| index[[r[:base], r[:quote]]] ||= r }
 

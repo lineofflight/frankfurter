@@ -18,8 +18,8 @@ module Versions
     }.freeze
 
     plugin :json,
-      content_type: "application/json; charset=utf-8",
-      serializer: ->(o) { Oj.dump(o, mode: :compat) }
+           content_type: "application/json; charset=utf-8",
+           serializer: ->(o) { Oj.dump(o, mode: :compat) }
 
     plugin :caching
     plugin :indifferent_params

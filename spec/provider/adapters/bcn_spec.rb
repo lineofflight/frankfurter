@@ -116,8 +116,8 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "sets the minimum TLS version after restoring peer verification" do
-        # OpenSSL::SSL::SSLContext exposes min_version= but no min_version reader,
-        # so we spy on the setter instead of reading the value back.
+        # OpenSSL::SSL::SSLContext exposes min_version= but no min_version reader, so we spy on the setter instead of
+        # reading the value back.
         real_ctx = OpenSSL::SSL::SSLContext.new
         calls = []
         real_ctx.define_singleton_method(:set_params) do |*args|

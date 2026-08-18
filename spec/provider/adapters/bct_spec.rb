@@ -163,9 +163,8 @@ class Provider < Sequel::Model(:providers)
         _(error.message).must_match(/no dated rates page/)
       end
 
-      # The CDN returns HTTP 500 for the default Net::HTTP "Ruby" User-Agent. The base
-      # client already sends a non-library User-Agent, so guard the header here to
-      # catch a regression.
+      # The CDN returns HTTP 500 for the default Net::HTTP "Ruby" User-Agent. The base client already sends a
+      # non-library User-Agent, so guard the header here to catch a regression.
       it "sends the base client's User-Agent" do
         captured_user_agent = nil
         VCR.eject_cassette

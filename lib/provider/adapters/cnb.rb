@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Czech National Bank. Publishes daily exchange rates for 30 currencies
-    # against the Czech koruna (CZK) via a REST JSON API.
+    # Czech National Bank. Publishes daily exchange rates for 30 currencies against the Czech koruna (CZK) via a REST
+    # JSON API.
     class CNB < Adapter
       URL = "https://api.cnb.cz/cnbapi/exrates/daily-year"
       def fetch(after: nil, upto: nil)

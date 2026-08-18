@@ -4,9 +4,9 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of West African States (Banque Centrale des Etats de l'Afrique de l'Ouest).
-    # Fetches daily reference exchange rates for 27 currencies against the CFA Franc (XOF).
-    # The API only accepts a single date per request, so we iterate day by day skipping weekends.
+    # Central Bank of West African States (Banque Centrale des Etats de l'Afrique de l'Ouest). Fetches daily reference
+    # exchange rates for 27 currencies against the CFA Franc (XOF). The API only accepts a single date per request, so
+    # we iterate day by day skipping weekends.
     class BCEAO < Adapter
       BASE_URL = "https://www.bceao.int/fr/cours/get_all_reference_by_date"
       CURRENCY_MAP = {
@@ -75,13 +75,13 @@ class Provider
           iso = CURRENCY_MAP[name]
           next unless iso
 
-          # Rates normally use French format (period=thousands, comma=decimal).
-          # Fall back to English format if no comma is present.
+          # Rates normally use French format (period=thousands, comma=decimal). Fall back to English format if no comma
+          # is present.
           rate_value = if rate_str.include?(",")
-            Float(rate_str.delete(".").tr(",", "."))
-          else
-            Float(rate_str)
-          end
+                         Float(rate_str.delete(".").tr(",", "."))
+                       else
+                         Float(rate_str)
+                       end
           next if rate_value.zero?
 
           records << { date:, base: iso, quote: "XOF", rate: rate_value }

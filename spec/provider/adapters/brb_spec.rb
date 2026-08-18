@@ -73,8 +73,8 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "skips dates whose PDF body is empty or not a PDF" do
-        # Some archive dates return a zero-byte body. The adapter must treat the
-        # date as missing rather than letting PDF::Reader raise on bad input.
+        # Some archive dates return a zero-byte body. The adapter must treat the date as missing rather than letting
+        # PDF::Reader raise on bad input.
         VCR.eject_cassette
 
         index_body = <<~HTML

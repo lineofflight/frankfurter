@@ -6,8 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Uzbekistan. Publishes daily rates for 20+ currencies against UZS.
-    # Per-day JSON endpoint at https://cbu.uz/en/arkhiv-kursov-valyut/json/all/{YYYY-MM-DD}/
+    # Central Bank of Uzbekistan. Publishes daily rates for 20+ currencies against UZS. Per-day JSON endpoint at
+    # https://cbu.uz/en/arkhiv-kursov-valyut/json/all/{YYYY-MM-DD}/
     class CBU < Adapter
       URL = "https://cbu.uz/en/arkhiv-kursov-valyut/json/all/"
 

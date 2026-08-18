@@ -6,15 +6,13 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of the Republic of Turkey.
-    # Uses EVDS3 bulk API with buying (A) and selling (S) rates in TRY.
-    # Each currency's mid-market rate is derived from the average of buy/sell.
-    # Requires TCMB_API_KEY environment variable.
+    # Central Bank of the Republic of Turkey. Uses EVDS3 bulk API with buying (A) and selling (S) rates in TRY. Each
+    # currency's mid-market rate is derived from the average of buy/sell. Requires TCMB_API_KEY environment variable.
     class TCMB < Adapter
       EVDS_URL = "https://evds3.tcmb.gov.tr/igmevdsms-dis"
-      # Buy/sell rates in TRY for each currency. Hardcoded because the EVDS3 catalog API doesn't expose
-      # a clean list and the series rarely change.
-      # Browse: https://evds3.tcmb.gov.tr > Exchange Rates > Indicative Exchange Rates
+      # Buy/sell rates in TRY for each currency. Hardcoded because the EVDS3 catalog API doesn't expose a clean list and
+      # the series rarely change. Browse: https://evds3.tcmb.gov.tr
+      # > Exchange Rates > Indicative Exchange Rates
       CURRENCIES = [
         "AED",
         "AUD",
@@ -55,9 +53,9 @@ class Provider
         end_date = upto || Date.today
 
         url = "#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
-          "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
-          "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
-          "&type=json&frequency=1"
+              "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
+              "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
+              "&type=json&frequency=1"
 
         response = http.headers("key" => self.class.api_key).get(url).to_s
         data = JSON.parse(response)
@@ -74,8 +72,8 @@ class Provider
             raw[code] = Float(value)
           end
 
-          # Mid of buying and selling for each currency → X→TRY rate
-          # JPY is quoted per 100 units in TCMB data (confirmed via series metadata)
+          # Mid of buying and selling for each currency → X→TRY rate JPY is quoted per 100 units in TCMB data (confirmed
+          # via series metadata)
           CURRENCIES.filter_map do |currency|
             buy = raw["#{currency}_BUY"]
             sell = raw["#{currency}_SELL"]

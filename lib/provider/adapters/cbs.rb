@@ -10,39 +10,33 @@ class Provider
   module Adapters
     # Central Bank of Samoa.
     #
-    # Publishes the historical daily fix as a single XLSX workbook covering
-    # 2008-01-02 to the most recent business day. The workbook has one sheet
-    # per year ("2008" .. "2026"), and within each sheet twelve month sections
-    # stacked vertically. Each section opens with a month-name banner in column
-    # B, a header row of "DATE | TALA/USD | TALA/NZD | ..." beneath it, then
-    # one data row per business day with an Excel serial date in column B.
+    # Publishes the historical daily fix as a single XLSX workbook covering 2008-01-02 to the most recent business day.
+    # The workbook has one sheet per year ("2008" .. "2026"), and within each sheet twelve month sections stacked
+    # vertically. Each section opens with a month-name banner in column B, a header row of "DATE | TALA/USD | TALA/NZD |
+    # ..." beneath it, then one data row per business day with an Excel serial date in column B.
     #
-    # Rates are published as "Units of Foreign Currency per ST1.00", i.e. one
-    # tala expressed in the quote currency (1 WST = 0.36847 USD). Records are
-    # emitted in that native direction — WST in `base`, foreign in `quote` —
-    # matching ECB's pivot-in-base orientation. The blender handles rebase.
+    # Rates are published as "Units of Foreign Currency per ST1.00", i.e. one tala expressed in the quote currency (1
+    # WST = 0.36847 USD). Records are emitted in that native direction — WST in `base`, foreign in `quote` — matching
+    # ECB's pivot-in-base orientation. The blender handles rebase.
     #
-    # The "TALA/YEN" column maps to JPY and "TALA/EURO" to EUR. CNY and CNH
-    # (onshore vs offshore yuan) only appear in recent years; the workbook adds
-    # the CNH column around 2023.
+    # The "TALA/YEN" column maps to JPY and "TALA/EURO" to EUR. CNY and CNH (onshore vs offshore yuan) only appear in
+    # recent years; the workbook adds the CNH column around 2023.
     #
-    # The workbook lives behind a date-stamped filename that changes every day
-    # (e.g. "Historical-Daily-Rates-June032026.xlsx"), so the download link can't
-    # be hardcoded. We scrape the data page on each run for its current ".xlsx"
-    # link and follow it. The workbook itself is a complete archive, so a single
+    # The workbook lives behind a date-stamped filename that changes every day (e.g.
+    # "Historical-Daily-Rates-June032026.xlsx"), so the download link can't be hardcoded. We scrape the data page on
+    # each run for its current ".xlsx" link and follow it. The workbook itself is a complete archive, so a single
     # incremental backfill catches up any gap left while the link was stale.
     #
-    # Page caveat: "indicative rates only but not for market use. Kindly refer
-    # to the commercial banks for market exchange rates."
+    # Page caveat: "indicative rates only but not for market use. Kindly refer to the commercial banks for market
+    # exchange rates."
     class CBS < Adapter
       DATA_URL = "https://cbs.gov.ws/daily-exchange-rates"
 
-      # Excel stores dates as days since this epoch (with the 1900 leap-year
-      # quirk baked into the offset).
+      # Excel stores dates as days since this epoch (with the 1900 leap-year quirk baked into the offset).
       EXCEL_EPOCH = Date.new(1899, 12, 30)
 
-      # The header row above each month section uses these labels in row 2,
-      # column C onward. Map each label to its ISO 4217 code.
+      # The header row above each month section uses these labels in row 2, column C onward. Map each label to its ISO
+      # 4217 code.
       CURRENCIES = {
         "TALA/USD" => "USD",
         "TALA/NZD" => "NZD",
@@ -77,11 +71,10 @@ class Provider
         records
       end
 
-      # Resolve the current workbook URL from the data page HTML. The link is a
-      # root-relative "/media/...xlsx" href whose filename embeds the date. The
-      # filename scheme is not stable — it has shifted between hyphen- and
-      # space-separated forms — so percent-encode the path before joining;
-      # an unescaped space raises URI::InvalidURIError.
+      # Resolve the current workbook URL from the data page HTML. The link is a root-relative "/media/...xlsx" href
+      # whose filename embeds the date. The filename scheme is not stable — it has shifted between hyphen- and
+      # space-separated forms — so percent-encode the path before joining; an unescaped space raises
+      # URI::InvalidURIError.
       def archive_url(html)
         path = html[/href=["']([^"']*\.xlsx)["']/i, 1]
         raise "no workbook link on #{DATA_URL}" unless path
@@ -109,9 +102,8 @@ class Provider
 
       private
 
-      # Walk all sheet*.xml files in the workbook. CBS uses one sheet per year,
-      # but the per-year ordering is not lexicographic (sheet1 holds 2008,
-      # sheet19 holds 2026), so we collect everything and let the date filter
+      # Walk all sheet*.xml files in the workbook. CBS uses one sheet per year, but the per-year ordering is not
+      # lexicographic (sheet1 holds 2008, sheet19 holds 2026), so we collect everything and let the date filter
       # downstream sort it out.
       def sheet_paths(zip)
         zip.entries
@@ -142,8 +134,7 @@ class Provider
             next
           end
 
-          # Month banner row — skip but reset map so a malformed section
-          # cannot leak headers across months.
+          # Month banner row — skip but reset map so a malformed section cannot leak headers across months.
           if first_label && MONTH_NAMES.include?(first_label.upcase)
             column_map = {}
             next

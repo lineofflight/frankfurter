@@ -58,7 +58,7 @@ class Provider < Sequel::Model(:providers)
           { day: 1, month: 1, value: "7.271,63" },
           { day: 2, month: 1, value: "ND" },
           { day: 3, month: 1, value: "7.281,04" },
-        ])
+        ],)
 
         records = adapter.parse(html, year: 2024, currency: "USD")
 
@@ -74,7 +74,7 @@ class Provider < Sequel::Model(:providers)
         html = build_year_html("EUR", 2024, [
           { day: 1, month: 2, value: "ND" },
           { day: 2, month: 2, value: "7.264,14" },
-        ])
+        ],)
 
         records = adapter.parse(html, year: 2024, currency: "EUR")
 
@@ -87,7 +87,7 @@ class Provider < Sequel::Model(:providers)
         html = build_year_html("USD", 2024, [
           { day: 30, month: 2, value: "7.500,00" },
           { day: 30, month: 4, value: "7.500,25" },
-        ])
+        ],)
 
         records = adapter.parse(html, year: 2024, currency: "USD")
 
@@ -99,8 +99,8 @@ class Provider < Sequel::Model(:providers)
         _(BCP::CURRENCIES).wont_include("XDR")
       end
 
-      # Builds a minimal year-matrix HTML with the cells specified. Cells outside
-      # the list default to ND. Mirrors the structure of the real BCP table.
+      # Builds a minimal year-matrix HTML with the cells specified. Cells outside the list default to ND. Mirrors the
+      # structure of the real BCP table.
       def build_year_html(currency, year, cells)
         rows = (1..31).map do |day|
           tds = (1..12).map do |month|

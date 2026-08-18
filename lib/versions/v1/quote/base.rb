@@ -31,7 +31,7 @@ module Versions
         end
 
         def should_round?
-          amount != 1.0 || must_rebase?
+          amount != 1.0 || must_rebase? # rubocop:disable Lint/FloatComparison
         end
 
         def formatted

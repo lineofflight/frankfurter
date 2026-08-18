@@ -149,8 +149,8 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
-      # A WAF 403 carries no rate table, so parsing it would look identical to a holiday and
-      # mint a permanent hole once last_synced moved past the date. Raise instead.
+      # A WAF 403 carries no rate table, so parsing it would look identical to a holiday and mint a permanent hole once
+      # last_synced moved past the date. Raise instead.
       it "raises when the POST is blocked" do
         VCR.eject_cassette
 

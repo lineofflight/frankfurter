@@ -4,8 +4,8 @@ require "currency_coverage"
 require "money/currency"
 require "peg"
 
-# Model backed by the materialized currencies table. Populated incrementally
-# during Provider#backfill. Derives one row per currency with date range.
+# Model backed by the materialized currencies table. Populated incrementally during Provider#backfill. Derives one row
+# per currency with date range.
 class Currency < Sequel::Model(:currencies)
   unrestrict_primary_key
 
@@ -34,8 +34,8 @@ class Currency < Sequel::Model(:currencies)
       merge_pegged(super.all)
     end
 
-    def map(&block)
-      all.map(&block)
+    def map(&)
+      all.map(&)
     end
 
     def find(code)

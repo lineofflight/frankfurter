@@ -10,31 +10,27 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Algeria — daily reference rate (cours moyen) against DZD for 17 quote
-    # currencies. The full series is published as a single consolidated XLSX with one
-    # sheet per quote currency. The archive is refreshed roughly once a month, so
-    # rates typically lag by up to ~3 weeks. The latest day is also published as a
-    # daily PDF (one per business day) — parsing the PDF is out of scope here.
+    # Bank of Algeria — daily reference rate (cours moyen) against DZD for 17 quote currencies. The full series is
+    # published as a single consolidated XLSX with one sheet per quote currency. The archive is refreshed roughly once a
+    # month, so rates typically lag by up to ~3 weeks. The latest day is also published as a daily PDF (one per business
+    # day) — parsing the PDF is out of scope here.
     #
-    # The XLSX URL embeds the publication year and month under /stoodroa/YYYY/MM/, so
-    # the adapter scrapes the donnees-historiques hub for the current link rather than
-    # hardcoding a path.
+    # The XLSX URL embeds the publication year and month under /stoodroa/YYYY/MM/, so the adapter scrapes the
+    # donnees-historiques hub for the current link rather than hardcoding a path.
     #
     # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to
     # a root. We bundle the DigiCert intermediate at config/boa_ca_bundle.pem and pass it via an explicit ssl_context on
     # each http.rb request instead of disabling verification.
     #
-    # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and
-    # contains two columns: Excel serial dates in column A, "1 CCY = X DZD" rates
-    # in column B. We emit records with the foreign currency as base and DZD as
+    # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and contains two columns: Excel serial
+    # dates in column A, "1 CCY = X DZD" rates in column B. We emit records with the foreign currency as base and DZD as
     # quote. JPY is published per 100, normalised here.
     #
-    # MRO is the legacy Mauritanian ouguiya (replaced by MRU in 2018). The Money gem
-    # already recognises it, so no patch is needed.
+    # MRO is the legacy Mauritanian ouguiya (replaced by MRU in 2018). The Money gem already recognises it, so no patch
+    # is needed.
     #
-    # Records are returned in BoA's native direction — foreign currency as base, DZD
-    # as quote — matching the convention used by other pivot-in-quote adapters
-    # (e.g. NBG, BBK).
+    # Records are returned in BoA's native direction — foreign currency as base, DZD as quote — matching the convention
+    # used by other pivot-in-quote adapters (e.g. NBG, BBK).
     class BOA < Adapter
       HUB_URL = "https://www.bank-of-algeria.dz/donnees-historiques/"
       ARCHIVE_LINK = %r{href="(https://www\.bank-of-algeria\.dz/stoodroa/\d{4}/\d{2}/Cotation-DZD-[^"]+\.xlsx)"}
@@ -42,16 +38,14 @@ class Provider
       EXCEL_EPOCH = Date.new(1899, 12, 30)
       JPY_UNITS = 100
 
-      # Map non-ISO sheet labels back to ISO 4217 codes. The workbook uses "EURO"
-      # in place of "EUR".
+      # Map non-ISO sheet labels back to ISO 4217 codes. The workbook uses "EURO" in place of "EUR".
       SHEET_NAME_OVERRIDES = {
         "EURO" => "EUR",
       }.freeze
 
       class << self
-        # Whole-archive fetch — backfill rebuilds the full series each time the
-        # consolidated XLSX is refreshed (roughly monthly). Large range keeps it
-        # in a single fetch.
+        # Whole-archive fetch — backfill rebuilds the full series each time the consolidated XLSX is refreshed (roughly
+        # monthly). Large range keeps it in a single fetch.
         def backfill_range = 36_525
       end
 

@@ -6,11 +6,10 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Financial Benchmarks India (FBIL). Publishes daily reference exchange rates
-    # for major currencies against the Indian rupee via a public JSON API.
-    # Rates are expressed as INR per N units of foreign currency, where N is
-    # extracted from the subProdName field (e.g. "INR / 100 JPY" means per 100).
-    # Historical data available from 2018-07-10.
+    # Financial Benchmarks India (FBIL). Publishes daily reference exchange rates for major currencies against the
+    # Indian rupee via a public JSON API. Rates are expressed as INR per N units of foreign currency, where N is
+    # extracted from the subProdName field (e.g. "INR / 100 JPY" means per 100). Historical data available from
+    # 2018-07-10.
     class FBIL < Adapter
       BASE_URL = "https://www.fbil.org.in/wasdm/refrates/fetchfiltered"
       def fetch(after: nil, upto: nil)
@@ -18,7 +17,7 @@ class Provider
           "fromDate" => after.to_s,
           "toDate" => (upto || Date.today).to_s,
           "authenticated" => "false",
-        }).to_s
+        },).to_s
 
         parse(response)
       end

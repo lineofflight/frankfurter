@@ -23,11 +23,12 @@ describe RuboCop::Cop::Style::CommentFill do
     inspect_source(source)
 
     assert_equal 1, cop.offenses.size
-    assert_equal "Comment line wraps early; first word of next line fits within 120 characters.", cop.offenses.first.message
+    assert_equal "Comment line wraps early; first word of next line fits within 120 characters.",
+                 cop.offenses.first.message
   end
 
   it "does not flag comment line when next word exceeds line limit" do
-    prefix = "# " + "a" * 115
+    prefix = "# #{"a" * 115}"
     source = <<~RUBY
       #{prefix}
       # word
@@ -57,6 +58,16 @@ describe RuboCop::Cop::Style::CommentFill do
     source = <<~RUBY
       # Outer comment that wraps
         # inner comment indented further
+    RUBY
+    inspect_source(source)
+
+    assert_empty cop.offenses
+  end
+
+  it "ignores inline comments after code" do
+    source = <<~RUBY
+      "2225" => "USD", # DLS. USA BILLETE
+      "1111" => "EUR", # EURO
     RUBY
     inspect_source(source)
 

@@ -4,9 +4,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # International Monetary Fund representative exchange rates.
-    # Daily rates for 50+ currencies. Most rates are foreign currency per USD;
-    # currencies marked with (1) are USD per foreign unit.
+    # International Monetary Fund representative exchange rates. Daily rates for 50+ currencies. Most rates are foreign
+    # currency per USD; currencies marked with (1) are USD per foreign unit.
     class IMF < Adapter
       BASE_URL = "https://www.imf.org/external/np/fin/data/rms_mth.aspx"
 
@@ -120,9 +119,8 @@ class Provider
         end
       end
 
-      # SDR cross rates: "SDRs per Currency unit" — only emit USD/XDR. Other pairs
-      # in this report are derived by IMF from the rep series and would create
-      # ambiguous bridges in BaseConversion if retained.
+      # SDR cross rates: "SDRs per Currency unit" — only emit USD/XDR. Other pairs in this report are derived by IMF
+      # from the rep series and would create ambiguous bridges in BaseConversion if retained.
       def parse_sdrcv(tsv)
         parse_rows(tsv) do |currency_name, rate, date|
           iso = CURRENCY_MAP[currency_name.downcase]
@@ -158,7 +156,7 @@ class Provider
           cols[1..].zip(dates).each do |value, date|
             next unless date
 
-            cleaned = value&.tr(",", "")&.gsub(/[^0-9.\-]/, "")
+            cleaned = value&.tr(",", "")&.gsub(/[^0-9.-]/, "")
             next if cleaned.nil? || cleaned.empty?
 
             rate = Float(cleaned)
@@ -177,7 +175,7 @@ class Provider
           SelectDate: last_day.to_s,
           reportType: report_type,
           tsvflag: "Y",
-        }).to_s
+        },).to_s
       end
     end
   end

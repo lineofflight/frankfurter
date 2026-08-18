@@ -28,6 +28,7 @@ module RuboCop
         private
 
         def check_comment_pair(comment, next_comment, max_length)
+          return unless full_line_comment?(comment) && full_line_comment?(next_comment)
           return if comment.loc.column != next_comment.loc.column
 
           text1 = comment.text
@@ -47,6 +48,11 @@ module RuboCop
           add_offense(comment, message: format(MSG, max: max_length)) do |corrector|
             autocorrect_comment_pair(corrector, comment, next_comment, first_word)
           end
+        end
+
+        def full_line_comment?(comment)
+          line = processed_source.lines[comment.loc.line - 1]
+          line[0...comment.loc.column].strip.empty?
         end
 
         def excluded_comment?(text)

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require "set"
-
-# Cross-provider consensus filter. Compares each provider's rebased rates against the median.
-# Rates that deviate significantly are identified as outliers.
+# Cross-provider consensus filter. Compares each provider's rebased rates against the median. Rates that deviate
+# significantly are identified as outliers.
 class Consensus
   MIN_PROVIDERS = 4
   MULTIPLIER = 10
@@ -33,7 +31,7 @@ class Consensus
   private
 
   def outlier_pairs
-    @outlier_pairs ||= outliers.map { |r| [r[:provider], r[:quote]] }.to_set
+    @outlier_pairs ||= outliers.to_set { |r| [r[:provider], r[:quote]] }
   end
 
   def find_outliers

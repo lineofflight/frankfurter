@@ -4,8 +4,8 @@ require "base_conversion"
 require "consensus"
 require "weighted_average"
 
-# Blends exchange rates from multiple providers into a single set. Rebases each provider to a common base,
-# filters outliers via cross-provider consensus, then computes a recency-weighted average.
+# Blends exchange rates from multiple providers into a single set. Rebases each provider to a common base, filters
+# outliers via cross-provider consensus, then computes a recency-weighted average.
 class Blender
   attr_reader :rates, :base
 

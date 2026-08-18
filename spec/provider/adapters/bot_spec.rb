@@ -41,9 +41,12 @@ class Provider < Sequel::Model(:providers)
           result: {
             data: {
               data_detail: [
-                { period: "2026-04-03", currency_id: "JPY", currency_name_eng: "JAPAN : YEN (100 YEN) (JPY)", mid_rate: "20.4832000" },
-                { period: "2026-04-03", currency_id: "IDR", currency_name_eng: "INDONESIA : RUPIAH (1,000 RUPIAH) (IDR)", mid_rate: "1.9296000" },
-                { period: "2026-04-03", currency_id: "USD", currency_name_eng: "USA : DOLLAR (USD)", mid_rate: "32.6448000" },
+                { period: "2026-04-03", currency_id: "JPY", currency_name_eng: "JAPAN : YEN (100 YEN) (JPY)",
+                  mid_rate: "20.4832000", },
+                { period: "2026-04-03", currency_id: "IDR",
+                  currency_name_eng: "INDONESIA : RUPIAH (1,000 RUPIAH) (IDR)", mid_rate: "1.9296000", },
+                { period: "2026-04-03", currency_id: "USD", currency_name_eng: "USA : DOLLAR (USD)",
+                  mid_rate: "32.6448000", },
               ],
             },
           },

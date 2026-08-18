@@ -6,33 +6,29 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Bank of Mongolia. Publishes daily statutory reference rates in MNT for 38 currencies
-    # plus XAU and XAG. Mandate set by the Law on Currency Regulation, Article 5(2):
-    # rates are the official reference for customs, tax, and accounting in Mongolia.
+    # Bank of Mongolia. Publishes daily statutory reference rates in MNT for 38 currencies plus XAU and XAG. Mandate set
+    # by the Law on Currency Regulation, Article 5(2): rates are the official reference for customs, tax, and accounting
+    # in Mongolia.
     #
-    # The movement endpoint returns the entire archive (2001-01-02 onward) in one
-    # ~5 MB JSON response regardless of the requested date range, so we fetch once
-    # and slice client-side. No chunking (no backfill_range).
+    # The movement endpoint returns the entire archive (2001-01-02 onward) in one ~5 MB JSON response regardless of the
+    # requested date range, so we fetch once and slice client-side. No chunking (no backfill_range).
     #
-    # Direction: provider publishes "1 foreign = X MNT", so foreign currency goes
-    # in base and MNT in quote.
+    # Direction: provider publishes "1 foreign = X MNT", so foreign currency goes in base and MNT in quote.
     #
     # Rates are strings with comma thousand-separators (e.g. "3,576.42").
     #
-    # All quotes are per 1 unit of the foreign currency. High-denomination
-    # currencies show as small fractions (e.g. IDR=0.20 MNT, VND=0.14 MNT,
-    # KRW=2.36 MNT on 2026-05-22), which is mathematically consistent with the
-    # other pairs on the same day — no per-100 or per-1000 normalization needed.
-    # Sanity check vs USD=3576.42 MNT on 2026-05-22:
+    # All quotes are per 1 unit of the foreign currency. High-denomination currencies show as small fractions (e.g.
+    # IDR=0.20 MNT, VND=0.14 MNT, KRW=2.36 MNT on 2026-05-22), which is mathematically consistent with the other pairs
+    # on the same day — no per-100 or per-1000 normalization needed. Sanity check vs USD=3576.42 MNT on 2026-05-22:
     #   USD/IDR ≈ 17,882 (real ≈ 16,000)
     #   USD/VND ≈ 25,546 (real ≈ 25,000)
     #   USD/KRW ≈ 1,515 (real ≈ 1,400)
     #
-    # SDR is published under the non-ISO label "SDR" and rewritten to XDR
-    # (the ISO 4217 code for Special Drawing Rights) on emit.
+    # SDR is published under the non-ISO label "SDR" and rewritten to XDR (the ISO 4217 code for Special Drawing Rights)
+    # on emit.
     #
-    # XAU and XAG are stored per troy ounce in MNT, as published (no per-gram
-    # conversion). E.g. XAU=16,172,267.24 MNT/oz on 2026-05-22.
+    # XAU and XAG are stored per troy ounce in MNT, as published (no per-gram conversion). E.g. XAU=16,172,267.24 MNT/oz
+    # on 2026-05-22.
     class BOM < Adapter
       ENDPOINT = URI("https://www.mongolbank.mn/en/currency-rate-movement/data")
       CODE_ALIASES = { "SDR" => "XDR" }.freeze

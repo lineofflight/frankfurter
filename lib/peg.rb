@@ -7,7 +7,7 @@ Peg = Data.define(:quote, :base, :rate, :since, :authority, :source) do
     def all
       @all ||= begin
         dir = File.expand_path("../db/seeds/pegs", __dir__)
-        Dir["#{dir}/*.json"].sort.map do |f|
+        Dir["#{dir}/*.json"].map do |f|
           h = JSON.parse(File.read(f))
           new(
             quote: h["quote"],

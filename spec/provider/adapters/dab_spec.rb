@@ -112,8 +112,7 @@ class Provider < Sequel::Model(:providers)
         _(records.length).must_equal(1)
         _(records.first[:base]).must_equal("IRR")
         _(records.first[:quote]).must_equal("AFN")
-        # Transfer mid for Toman: (0.0008 + 0.0004) / 2 = 0.0006
-        # IRR = Toman / 10 = 0.00006
+        # Transfer mid for Toman: (0.0008 + 0.0004) / 2 = 0.0006 IRR = Toman / 10 = 0.00006
         _(records.first[:rate]).must_be_close_to(0.00006, 1e-7)
       end
 

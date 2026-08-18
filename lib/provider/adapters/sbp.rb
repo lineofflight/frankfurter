@@ -7,37 +7,34 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # State Bank of Pakistan. Publishes the "Daily Average Banks' Floating Exchange Rates"
-    # series as two XLSX workbooks — a current-month file and a historical archive going
-    # back to 2013-07-02. Both files share the same wide layout: one row per foreign
-    # currency, one column per date, with cell values expressed as "Pak Rupees per Currency
-    # Unit" (e.g. 1 USD = 279.35 PKR).
+    # State Bank of Pakistan. Publishes the "Daily Average Banks' Floating Exchange Rates" series as two XLSX workbooks
+    # — a current-month file and a historical archive going back to 2013-07-02. Both files share the same wide layout:
+    # one row per foreign currency, one column per date, with cell values expressed as "Pak Rupees per Currency Unit"
+    # (e.g. 1 USD = 279.35 PKR).
     #
-    # Because PKR sits in the denominator of every quoted rate, the source's native
-    # direction is "foreign currency as base, PKR as quote". Records are emitted with that
-    # same orientation — matching the pivot-in-quote pattern used by NBG, BBK, and friends.
-    # The blender handles rebase to a common pivot.
+    # Because PKR sits in the denominator of every quoted rate, the source's native direction is "foreign currency as
+    # base, PKR as quote". Records are emitted with that same orientation — matching the pivot-in-quote pattern used by
+    # NBG, BBK, and friends. The blender handles rebase to a common pivot.
     #
-    # SBP publishes finalized monthly snapshots roughly three weeks after the month ends,
-    # so the most recent observation typically trails other providers by up to a month.
+    # SBP publishes finalized monthly snapshots roughly three weeks after the month ends, so the most recent observation
+    # typically trails other providers by up to a month.
     #
-    # The bank retired the old /ecodata/ tree in a mid-2026 site restructure (the old
-    # URLs now serve the homepage as a 200); the same workbooks live on under
-    # /assets/document/, linked from sbp.org.pk/economic-data. Since the restructure the
-    # current-month file has lagged the archive (frozen at April while the archive runs
-    # through June), so the archive is treated as authoritative on overlap.
+    # The bank retired the old /ecodata/ tree in a mid-2026 site restructure (the old URLs now serve the homepage as a
+    # 200); the same workbooks live on under /assets/document/, linked from sbp.org.pk/economic-data. Since the
+    # restructure the current-month file has lagged the archive (frozen at April while the archive runs through June),
+    # so the archive is treated as authoritative on overlap.
     class SBP < Adapter
       CURRENT_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily.xlsx"
       ARCHIVE_URL = "https://www.sbp.org.pk/assets/document/BFER_Daily_Arch.xlsx"
 
-      # Excel stores dates as the number of days since this epoch (with the 1900-leap-year
-      # quirk baked into the offset — 1899-12-30 sidesteps it for dates after 1900-03-01).
+      # Excel stores dates as the number of days since this epoch (with the 1900-leap-year quirk baked into the offset —
+      # 1899-12-30 sidesteps it for dates after 1900-03-01).
       EXCEL_EPOCH = Date.new(1899, 12, 30)
 
-      # Map the source's currency-name labels (column B in each currency row) to ISO codes.
-      # Two label variants per currency are common between the current and archive workbooks
-      # ("Singaporian Dollar" vs "Singapore Dollar", "Japnese Yen" vs "Japanese Yen", etc.).
-      # We normalize whitespace/punctuation/case before lookup, so register both spellings.
+      # Map the source's currency-name labels (column B in each currency row) to ISO codes. Two label variants per
+      # currency are common between the current and archive workbooks ("Singaporian Dollar" vs "Singapore Dollar",
+      # "Japnese Yen" vs "Japanese Yen", etc.). We normalize whitespace/punctuation/case before lookup, so register both
+      # spellings.
       CURRENCIES = {
         "australian dollar" => "AUD",
         "bahraini dinar" => "BHD",
@@ -74,10 +71,9 @@ class Provider
       def fetch(after: nil, upto: nil)
         records = {}
 
-        # Current first, archive second — archive entries overwrite current on overlap.
-        # The archive carries SBP's finalized monthly snapshots (and, post-restructure,
-        # updates while the current file sits stale); the current file only contributes
-        # dates the archive doesn't have yet.
+        # Current first, archive second — archive entries overwrite current on overlap. The archive carries SBP's
+        # finalized monthly snapshots (and, post-restructure, updates while the current file sits stale); the current
+        # file only contributes dates the archive doesn't have yet.
         [CURRENT_URL, ARCHIVE_URL].each do |url|
           parse(download(url)).each do |record|
             next if after && record[:date] < after
@@ -146,10 +142,9 @@ class Provider
         end
       end
 
-      # The date header row is identified structurally: it contains many inline numeric
-      # cells whose value is a plausible Excel serial date (post-1980, pre-2100). This
-      # lets us cope with SBP shifting metadata rows around between workbook revisions
-      # without hardcoding row numbers.
+      # The date header row is identified structurally: it contains many inline numeric cells whose value is a plausible
+      # Excel serial date (post-1980, pre-2100). This lets us cope with SBP shifting metadata rows around between
+      # workbook revisions without hardcoding row numbers.
       def extract_date_map(rows)
         rows.each do |row|
           serials = row.nodes.filter_map do |cell|

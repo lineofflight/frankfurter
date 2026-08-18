@@ -6,9 +6,8 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Banco Central de Nicaragua. Publishes the daily official exchange rate
-    # for the US dollar against the Nicaraguan córdoba via a SOAP web service.
-    # The RecuperaTC_Mes method returns all daily rates for a given month.
+    # Banco Central de Nicaragua. Publishes the daily official exchange rate for the US dollar against the Nicaraguan
+    # córdoba via a SOAP web service. The RecuperaTC_Mes method returns all daily rates for a given month.
     class BCN < Adapter
       ENDPOINT = URI("https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx")
       SOAP_ACTION = '"http://servicios.bcn.gob.ni/RecuperaTC_Mes"'
@@ -78,7 +77,7 @@ class Provider
 
       def check_tls_support!
         ctx = OpenSSL::SSL::SSLContext.new
-        raise "legacy TLS required" if ctx.security_level > 0
+        raise "legacy TLS required" if ctx.security_level.positive?
       end
 
       def soap_envelope(year, month)

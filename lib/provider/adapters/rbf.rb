@@ -9,23 +9,19 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Reserve Bank of Fiji. Publishes the daily mid-rate series "8.8 Exchange
-    # Rates Daily" as a single rolling XLSX (~580 KB, ~6,400 daily rows) covering
-    # 2001-01-02 to present. Eight quote currencies: SDR, STG (GBP), YEN (JPY),
+    # Reserve Bank of Fiji. Publishes the daily mid-rate series "8.8 Exchange Rates Daily" as a single rolling XLSX
+    # (~580 KB, ~6,400 daily rows) covering 2001-01-02 to present. Eight quote currencies: SDR, STG (GBP), YEN (JPY),
     # CHF, EURO (EUR), A$ (AUD), NZ$ (NZD), US$ (USD).
     #
-    # The XLSX URL embeds the publication year/month under /wp-content/uploads/
-    # YYYY/MM/, so the adapter scrapes the economic-and-financial-statistics hub
-    # for the current link rather than hardcoding a path.
+    # The XLSX URL embeds the publication year/month under /wp-content/uploads/ YYYY/MM/, so the adapter scrapes the
+    # economic-and-financial-statistics hub for the current link rather than hardcoding a path.
     #
-    # Header reads "RBF Mid-Rate Per Fiji Dollar", so each row records "1 FJD =
-    # X foreign". Records are emitted with FJD as base and the foreign currency
-    # as quote, matching the pivot-in-base convention used by ECB. SDR is
-    # relabelled to its ISO 4217 code XDR on emit.
+    # Header reads "RBF Mid-Rate Per Fiji Dollar", so each row records "1 FJD = X foreign". Records are emitted with FJD
+    # as base and the foreign currency as quote, matching the pivot-in-base convention used by ECB. SDR is relabelled to
+    # its ISO 4217 code XDR on emit.
     #
-    # USD is set at 09:00 Fiji time (UTC+12) each business day; cross rates are
-    # derived from that fix. No explicit terms-of-use page; the site footer
-    # carries a liability disclaimer only.
+    # USD is set at 09:00 Fiji time (UTC+12) each business day; cross rates are derived from that fix. No explicit
+    # terms-of-use page; the site footer carries a liability disclaimer only.
     class RBF < Adapter
       HUB_URL = "https://www.rbf.gov.fj/statistics/economic-and-financial-statistics/"
       ARCHIVE_LINK = %r{href="(https://www\.rbf\.gov\.fj/wp-content/uploads/\d{4}/\d{2}/8\.8-Exchange-Rates-Daily[^"]*\.xlsx)"}
@@ -44,8 +40,7 @@ class Provider
       }.freeze
 
       class << self
-        # The full series ships as a single workbook refreshed daily, so a
-        # large range keeps the fetch in one download.
+        # The full series ships as a single workbook refreshed daily, so a large range keeps the fetch in one download.
         def backfill_range = 36_525
       end
 
@@ -135,9 +130,8 @@ class Provider
         end
       end
 
-      # The header row carries shared-string labels for the eight currency
-      # columns. We resolve each cell's string index to its label and map it
-      # to an ISO code via CURRENCIES.
+      # The header row carries shared-string labels for the eight currency columns. We resolve each cell's string index
+      # to its label and map it to an ISO code via CURRENCIES.
       def extract_column_map(row, strings)
         map = {}
 

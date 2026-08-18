@@ -2,8 +2,7 @@
 
 Sequel.migration do
   up do
-    # Delete NBP.B rows that overlap with NBP (pre-2004 when both tables
-    # carried EUR, USD, etc.)
+    # Delete NBP.B rows that overlap with NBP (pre-2004 when both tables carried EUR, USD, etc.)
     run <<~SQL
       DELETE FROM rates
       WHERE provider = 'NBP.B'

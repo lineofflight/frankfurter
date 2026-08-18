@@ -6,25 +6,20 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of the Republic of China (Taiwan). Publishes daily interbank
-    # spot rates for 15+ currencies against the US dollar. Rates are captured at
-    # 16:00 Taipei time (08:00 UTC). The API returns the full historical dataset
-    # (no server-side date filtering); client-side filtering is applied.
-    # Historical data available from 1993-01-05.
+    # Central Bank of the Republic of China (Taiwan). Publishes daily interbank spot rates for 15+ currencies against
+    # the US dollar. Rates are captured at 16:00 Taipei time (08:00 UTC). The API returns the full historical dataset
+    # (no server-side date filtering); client-side filtering is applied. Historical data available from 1993-01-05.
     #
-    # This open-data file (BP01D01) regenerates nightly (meta.prepared updates
-    # daily) but its content is refreshed only in monthly batches in arrears
-    # (meta.last_updated): a month's daily rows all land early in the following
-    # month. The provider cadence is therefore "monthly", not "daily", so this
-    # multi-currency data inherently lags by about a month. CBC still publishes
-    # a live daily TWD/USD rate on its homepage, but no fresher multi-currency
-    # endpoint exists.
+    # This open-data file (BP01D01) regenerates nightly (meta.prepared updates daily) but its content is refreshed only
+    # in monthly batches in arrears (meta.last_updated): a month's daily rows all land early in the following month. The
+    # provider cadence is therefore "monthly", not "daily", so this multi-currency data inherently lags by about a
+    # month. CBC still publishes a live daily TWD/USD rate on its homepage, but no fresher multi-currency endpoint
+    # exists.
     class CBC < Adapter
       API_URL = "https://cpx.cbc.gov.tw/API/DataAPI/Get?FileName=BP01D01"
-      # Column index => [quote, base]
-      # Most rates are quoted as foreign currency per 1 USD (quote=X, base=USD).
-      # GBP, AUD, EUR are quoted as USD per 1 unit (quote=USD, base=X).
-      # Columns 15-17 (DEM, FRF, NLG) contain historical data pre-2002.
+      # Column index => [quote, base] Most rates are quoted as foreign currency per 1 USD (quote=X, base=USD). GBP, AUD,
+      # EUR are quoted as USD per 1 unit (quote=USD, base=X). Columns 15-17 (DEM, FRF, NLG) contain historical data
+      # pre-2002.
       COLUMNS = {
         1 => ["TWD", "USD"],
         2 => ["JPY", "USD"],
