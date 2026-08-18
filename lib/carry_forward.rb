@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-# Produces a snapshot of rates as of a target date by carrying forward each provider's most recent
-# rate within a lookback window. Used for single-date and latest queries; range queries do not
-# carry forward.
+# Produces a snapshot of rates as of a target date by carrying forward each key's most recent rate within a lookback
+# window. Snapshots power latest and single-date queries and each anchor of a range, on raw and stored rows alike.
 class CarryForward
   LOOKBACK_DAYS = 14
 
@@ -11,11 +10,11 @@ class CarryForward
       new(rows, date:, lookback:).apply
     end
 
-    # Sliding-window equivalent of calling .apply once per anchor date, for the common case where
-    # many ascending anchors share the same row set (range queries). Rows are grouped by key once;
-    # a per-key cursor advances monotonically as anchors increase, so the whole set isn't rescanned
-    # for every anchor. Yields [date, contributors] for each date — contributors is the identical
-    # set .apply(rows, date:) would return (verified against it as an oracle in the specs).
+    # Sliding-window equivalent of calling .apply once per anchor date, for the common case where many ascending anchors
+    # share the same row set (range queries). Rows are grouped by key once; a per-key cursor advances monotonically as
+    # anchors increase, so the whole set isn't rescanned for every anchor. Yields [date, contributors] for each date —
+    # contributors is the identical set .apply(rows, date:) would return (verified against it as an oracle in the
+    # specs).
     def each_snapshot(rows, dates:, lookback: LOOKBACK_DAYS)
       return to_enum(:each_snapshot, rows, dates:, lookback:) unless block_given?
 
