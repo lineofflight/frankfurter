@@ -271,6 +271,124 @@ module Versions
       end
     end
 
+    describe "materialized blend dispatch for latest and single-date" do
+      include Roundable
+
+      # Tampering a stored row makes the two paths distinguishable: only the table knows the
+      # tampered value.
+      def tamper!(quote, date, rate)
+        BlendedRate.where(quote:, date:).update(rate:)
+      end
+
+      it "serves latest from the table" do
+        BlendedRate.rebuild
+        tamper!("GBP", Fixtures.latest_date, 999.0)
+
+        gbp = V2::RateQuery.new(base: "USD", quotes: "GBP").to_a.find { |r| r[:quote] == "GBP" }
+
+        _(gbp[:rate]).must_equal(999.0)
+        _(gbp[:date]).must_equal(Fixtures.latest_date.to_s)
+      end
+
+      it "serves explicit single dates from the table" do
+        BlendedRate.rebuild
+        date = Fixtures.business_day(30)
+        tamper!("GBP", date, 999.0)
+
+        gbp = V2::RateQuery.new(base: "USD", quotes: "GBP", date: date.to_s).to_a.find { |r| r[:quote] == "GBP" }
+
+        _(gbp[:rate]).must_equal(999.0)
+      end
+
+      it "keeps providers= and expand=providers latest on the live path" do
+        BlendedRate.rebuild
+        tamper!("GBP", Fixtures.latest_date, 999.0)
+
+        with_providers = V2::RateQuery.new(base: "USD", quotes: "GBP", providers: "ECB,BOC").to_a
+
+        _(with_providers.map { |r| r[:rate] }).wont_include(999.0)
+
+        expanded = V2::RateQuery.new(base: "USD", quotes: "GBP", expand: "providers").to_a
+        gbp = expanded.find { |r| r[:quote] == "GBP" }
+
+        _(gbp[:rate]).wont_equal(999.0)
+        _(gbp[:providers]).wont_be_nil
+      end
+
+      it "falls back to the live path while the table is not ready" do
+        _(BlendedRate.dataset.count).must_equal(0)
+
+        _(V2::RateQuery.new(quotes: "GBP").to_a).wont_be_empty
+      end
+
+      # The correction #573 exists for: a carried-forward row freezes at the value blended on its
+      # own observation date instead of drifting as later days re-decay it against the batch clock.
+      it "serves canonical anchor-date values for carried-forward quotes" do
+        ecb_last = Fixtures.business_day(8)
+        boc_last = Fixtures.business_day(4)
+        Rate.where(provider: "ECB", quote: "GBP").where { date > ecb_last }.delete
+        Rate.where(provider: "BOC", quote: "GBP").where { date > boc_last }.delete
+        BlendedRate.rebuild
+
+        canonical = BlendedRate.first(quote: "GBP", date: boc_last).rate
+        table = V2::RateQuery.new(base: "USD", quotes: "GBP").to_a.find { |r| r[:quote] == "GBP" }
+
+        _(table[:date]).must_equal(boc_last.to_s)
+        _(table[:rate]).must_equal(round(canonical))
+
+        live_query = V2::RateQuery.new(base: "USD", quotes: "GBP")
+        live_query.force_live = true
+        live = live_query.to_a.find { |r| r[:quote] == "GBP" }
+
+        _(live[:date]).must_equal(boc_last.to_s)
+        _(live[:rate]).wont_equal(table[:rate])
+      end
+
+      it "serves pegged request bases from the table via derive" do
+        BlendedRate.rebuild
+        tamper!("GBP", Fixtures.latest_date, 999.0)
+        peg = Peg.find("AED")
+
+        results = V2::RateQuery.new(base: "AED", quotes: "GBP,USD").to_a
+        gbp = results.find { |r| r[:quote] == "GBP" }
+        usd = results.find { |r| r[:quote] == "USD" }
+
+        _(gbp[:rate]).must_equal(round(999.0 / peg.rate))
+        _(usd[:rate]).must_equal(round(1 / peg.rate))
+      end
+
+      it "fails the response when a rebuild wipes the table mid-read" do
+        BlendedRate.rebuild
+        query = V2::RateQuery.new(base: "USD", quotes: "GBP")
+
+        ready_calls = 0
+
+        BlendedRate.stub(:ready?, -> { (ready_calls += 1) == 1 }) do
+          _ { query.to_a }.must_raise(RuntimeError)
+        end
+      end
+    end
+
+    describe "pivot-frame canonicalization" do
+      # Latest used to blend a single-frame batch directly in the requested base (the fast path)
+      # while the same shape as a range blended through the pivot, so the two disagreed about the
+      # same data. One frame everywhere (#573).
+      it "blends single-frame live batches through the pivot like ranges" do
+        date = Fixtures.latest_date
+        Rate.dataset.delete
+        [["AAA", 1.10, 0.90], ["BBB", 1.20, 0.80]].each do |provider, usd, gbp|
+          Rate.dataset.insert(date:, base: "EUR", quote: "USD", rate: usd, provider:)
+          Rate.dataset.insert(date:, base: "EUR", quote: "GBP", rate: gbp, provider:)
+        end
+
+        shape = { base: "EUR", quotes: "GBP", providers: "AAA,BBB" }
+        latest = V2::RateQuery.new(shape).to_a.find { |r| r[:quote] == "GBP" }
+        range = V2::RateQuery.new(shape.merge(from: date.to_s, to: date.to_s)).to_a.find { |r| r[:quote] == "GBP" }
+
+        _(latest[:rate]).must_equal(range[:rate])
+      end
+    end
+
     describe "single-day queries" do
       it "includes next-day provider observations in the implicit latest snapshot" do
         tomorrow = Date.today + 1
@@ -521,22 +639,6 @@ module Versions
       end
     end
 
-    describe "#scale_for_pegged_base" do
-      it "drops the base->base row that PegAnchor synthesizes for the user's pegged base" do
-        date = Date.parse("2024-01-15")
-        query = V2::RateQuery.new(base: "AED")
-        rows = [
-          { date:, base: "USD", quote: "EUR", rate: 0.93 },
-          { date:, base: "USD", quote: "AED", rate: 3.6725 },
-        ]
-
-        result = query.send(:scale_for_pegged_base, rows)
-
-        _(result.find { |r| r[:quote] == "AED" }).must_be_nil
-        _(result.find { |r| r[:quote] == "USD" }[:rate]).must_be_close_to(1.0 / 3.6725)
-      end
-    end
-
     describe "?providers= with pegged base" do
       it "returns empty (peg layer is bypassed when source set is restricted)" do
         recent_date = Fixtures.latest_date.to_s
@@ -611,49 +713,6 @@ module Versions
         gbp_to_eur = gbp_view.find { |r| r[:quote] == "EUR" }[:rate]
 
         _(eur_to_gbp * gbp_to_eur).must_be_close_to(1.0, 1e-12)
-      end
-    end
-
-    describe "#fast_path?" do
-      let(:date) { Date.parse("2024-01-15") }
-
-      def call_fast_path(query, rows)
-        query.send(:fast_path?, rows)
-      end
-
-      it "is true when every row's :base equals effective_base" do
-        query = V2::RateQuery.new(base: "EUR")
-        rows = [
-          { date:, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-          { date:, base: "EUR", quote: "GBP", rate: 0.86, provider: "ECB" },
-        ]
-
-        _(call_fast_path(query, rows)).must_equal(true)
-      end
-
-      it "is false when any row has a different :base" do
-        query = V2::RateQuery.new(base: "EUR")
-        rows = [
-          { date:, base: "EUR", quote: "USD", rate: 1.08, provider: "ECB" },
-          { date:, base: "CAD", quote: "USD", rate: 0.74, provider: "BOC" },
-        ]
-
-        _(call_fast_path(query, rows)).must_equal(false)
-      end
-
-      it "uses the peg's base as effective_base for a pegged request base" do
-        query = V2::RateQuery.new(base: "AED")
-        rows = [
-          { date:, base: "USD", quote: "EUR", rate: 0.93, provider: "ECB" },
-        ]
-
-        _(call_fast_path(query, rows)).must_equal(true)
-      end
-
-      it "is true on empty input (vacuous)" do
-        query = V2::RateQuery.new(base: "EUR")
-
-        _(call_fast_path(query, [])).must_equal(true)
       end
     end
 

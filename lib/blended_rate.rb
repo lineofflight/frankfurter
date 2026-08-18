@@ -6,15 +6,15 @@ require "db"
 require "peg_anchor"
 require "rate"
 
-# Materialized blend (#570): the deduped blended series in pivot base, one row per (quote, date)
-# where the contributor set changed, everything up to and including peg anchoring. The table is the
-# response for plain daily ranges; per-request work that remains is derive to the requested base,
-# quotes filtering, the identity row, and rounding.
+# Materialized blend (#570): the deduped blended series in pivot base, one row per (quote, date) where the contributor
+# set changed, everything up to and including peg anchoring. The table is the response for every plain shape, whether
+# latest, single-date, or daily range (#573); per-request work that remains is derive to the requested base, quotes
+# filtering, the identity row, and rounding.
 #
-# Each stored row is the canonical anchor-date value: the blend computed at the anchor equal to the
-# row's own observation date. Later anchors can re-emit the same (quote, date) with different floats
-# as other contributors age out of the carry-forward lookback; those echoes are never stored, which
-# is what keeps a stored row a pure function of its contributor rows.
+# Each stored row is the canonical anchor-date value: the blend computed at the anchor equal to the row's own
+# observation date. Later anchors can re-emit the same (quote, date) with different floats as other contributors age out
+# of the carry-forward lookback; those echoes are never stored, which is what keeps a stored row a pure function of its
+# contributor rows.
 class BlendedRate < Sequel::Model(:blended_rates)
   PIVOT = "USD"
   CHUNK_MONTHS = 3
@@ -22,15 +22,15 @@ class BlendedRate < Sequel::Model(:blended_rates)
   unrestrict_primary_key
 
   class << self
-    # Recomputes stored blends for every anchor date in the window. Mirrors the live pipeline
-    # verbatim: same fetch shape, CarryForward.each_snapshot, Blender, PegAnchor, same ordering.
-    # A reimplementation would break float parity with the live path, which the parity spec guards.
+    # Recomputes stored blends for every anchor date in the window. Mirrors the live pipeline verbatim: same fetch
+    # shape, CarryForward.each_snapshot, Blender, PegAnchor, same ordering. A reimplementation would break float parity
+    # with the live path, which the parity spec guards.
     def refresh(window)
       chunks(window).each { |chunk| refresh_chunk(chunk) }
     end
 
-    # Newest-first, so ready? (coverage of the oldest rate date) flips only when the final chunk
-    # lands and a rebuild in progress never looks complete.
+    # Newest-first, so ready? (coverage of the oldest rate date) flips only when the final chunk lands and a rebuild in
+    # progress never looks complete.
     def rebuild
       dataset.delete
       first = Rate.dataset.min(:date)
@@ -41,9 +41,8 @@ class BlendedRate < Sequel::Model(:blended_rates)
       end
     end
 
-    # The table serves reads only once it covers full history: an incremental refresh makes it
-    # non-empty long before blend:rebuild has run, and serving a partial table would silently
-    # truncate historical ranges.
+    # The table serves reads only once it covers full history: an incremental refresh makes it non-empty long before
+    # blend:rebuild has run, and serving a partial table would silently truncate historical ranges.
     def ready?
       first_rate = Rate.dataset.min(:date)
       !first_rate.nil? && dataset.min(:date) == first_rate
@@ -62,9 +61,9 @@ class BlendedRate < Sequel::Model(:blended_rates)
       result
     end
 
-    # BEGIN IMMEDIATE serializes the fetch, compute, and write against other writers, so a refresh
-    # never commits blends computed from a snapshot another backfill has since changed. Inside a
-    # backfill's transaction it simply joins, since that transaction already holds the write lock.
+    # BEGIN IMMEDIATE serializes the fetch, compute, and write against other writers, so a refresh never commits blends
+    # computed from a snapshot another backfill has since changed. Inside a backfill's transaction it simply joins,
+    # since that transaction already holds the write lock.
     def refresh_chunk(chunk)
       db.transaction(**(db.in_transaction? ? {} : { mode: :immediate })) do
         lookback_start = chunk.begin - CarryForward::LOOKBACK_DAYS

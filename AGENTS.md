@@ -130,7 +130,7 @@ SQLite database with `rates`, `weekly_rates`, `monthly_rates`, `providers`, `cur
 - `date`, `quote`, `rate` with PK `(quote, date)`; base is implicitly USD, the blend pivot
 - Materialized blend, sparse: one row per (quote, date) where the contributor set changed, each the canonical anchor-date value
 - Refreshed during backfill over `[min_inserted, max_inserted + 14]`; rebuilt by `rake blend:rebuild` (required whenever blend/consensus/peg/currency-patch code or seeds change)
-- Serves plain daily ranges in V2 (no `providers=`, no `expand=providers`); live path is the fallback while empty
+- Serves all plain V2 shapes, latest and single-date included (no `providers=`, no `expand=providers`); live path is the fallback while empty
 
 ### rates
 - `date`, `base`, `quote`, `rate`, `provider`
