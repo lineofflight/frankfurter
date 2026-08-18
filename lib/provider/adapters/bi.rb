@@ -59,7 +59,7 @@ class Provider < Sequel::Model(:providers)
           buy = Float(buy_str.delete(","), exception: false)
           next unless sell && buy && sell.positive? && buy.positive?
 
-          mid = (sell + buy) / 2.0
+          mid = midpoint(sell, buy)
           date = Date.parse(date_str)
 
           records << { date:, base: currency.strip, quote: "IDR", rate: mid.round(4) }

@@ -12,6 +12,7 @@ require "money/currency"
 require "currency_coverage"
 require "provider/adapters/adapter"
 require "rate"
+require "rate_precision"
 require "rate_validation"
 
 class Provider < Sequel::Model(:providers)
@@ -81,7 +82,10 @@ class Provider < Sequel::Model(:providers)
     adapter.fetch_each(after:) do |records|
       fetched = true
       RateValidation.reject!(records)
-      records.each { |r| r[:provider] = key }
+      records.each do |r|
+        r[:provider] = key
+        r[:rate] = RatePrecision.normalize(r[:rate])
+      end
 
       inserted = db.transaction do
         before = db.get(Sequel.lit("total_changes()"))

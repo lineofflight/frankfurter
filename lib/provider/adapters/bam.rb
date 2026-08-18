@@ -35,7 +35,7 @@ class Provider
           next unless code&.match?(/\A[A-Z]{3}\z/)
 
           date = Date.parse(record["date"])
-          mid = record["moyen"]&.to_f || ((record["achat"].to_f + record["vente"].to_f) / 2).round(4)
+          mid = record["moyen"]&.to_f || midpoint(record["achat"].to_f, record["vente"].to_f)
           unite = record["uniteDevise"].to_f
           next if mid.zero? || unite.zero?
 

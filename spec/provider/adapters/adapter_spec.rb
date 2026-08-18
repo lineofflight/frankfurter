@@ -61,6 +61,27 @@ class Provider < Sequel::Model(:providers)
         end
       end
 
+      describe "#midpoint" do
+        let(:adapter) { Class.new(Adapter).new }
+
+        it "returns the exact mid of two published prices" do
+          _(adapter.send(:midpoint, 181.5264, 181.76)).must_equal(181.6432)
+        end
+
+        it "carries at most one decimal beyond its inputs" do
+          _(adapter.send(:midpoint, 1.1, 1.3)).must_equal(1.2)
+          _(adapter.send(:midpoint, 0.0001234, 0.0001236)).must_equal(0.0001235)
+        end
+
+        it "returns the price itself when both sides agree" do
+          _(adapter.send(:midpoint, 3.14, 3.14)).must_equal(3.14)
+        end
+
+        it "accepts prices still in string form" do
+          _(adapter.send(:midpoint, "181.5264", "181.76")).must_equal(181.6432)
+        end
+      end
+
       describe "http client" do
         let(:adapter) { Class.new(Provider::Adapters::Adapter).new }
         let(:client) { adapter.send(:http) }

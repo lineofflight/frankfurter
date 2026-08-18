@@ -327,6 +327,41 @@ describe Provider do
       _(Rate.where(provider: provider.key, date: Date.today, quote: "JPY").count).must_equal(0)
     end
 
+    it "strips float noise from synthesized rates on the way in" do
+      # An adapter that coerces buy/sell to a mid, or rescales per unit, hands over the raw result of float
+      # arithmetic. Single-provider responses echo stored digits verbatim, so noise stored here reaches the API
+      # (#579).
+      noisy_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.today, base: "EUR", quote: "USD", rate: (181.5264 + 181.76) / 2.0 },
+            { date: Date.today, base: "EUR", quote: "GBP", rate: 744.92 / 100.0 },
+          ]
+        end
+      end
+
+      provider.stub(:adapter, noisy_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(181.6432)
+      _(Rate.where(provider: provider.key, quote: "GBP", date: Date.today).first.rate).must_equal(7.4492)
+    end
+
+    it "keeps every digit a provider actually publishes" do
+      precise_adapter = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [{ date: Date.today, base: "EUR", quote: "USD", rate: 0.0001234567891 }]
+        end
+      end
+
+      provider.stub(:adapter, precise_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(0.0001234567891)
+    end
+
     it "drops records dated implausibly far in the future" do
       # A single stray future-dated row (source typo, or a pre-seeded spreadsheet row) must not be stored: it would
       # hijack last_synced (= max date) and freeze incremental backfill behind an unreachable cursor.

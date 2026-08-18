@@ -94,7 +94,7 @@ class Provider
         b = Float(buy)
         return s if b.zero?
 
-        (s + b) / 2.0
+        midpoint(s, b)
       end
 
       def resolve_currency(name)

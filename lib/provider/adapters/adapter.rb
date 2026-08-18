@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "bigdecimal"
 require "http"
 
 class Provider < Sequel::Model(:providers)
@@ -58,6 +59,15 @@ class Provider < Sequel::Model(:providers)
       end
 
       private
+
+      # Many sources publish a buy and a sell price rather than a reference rate, so the mid is our own synthesis and has
+      # no published digits of its own to echo. Computing it in binary floats leaves noise at the bottom:
+      # (181.5264 + 181.76) / 2.0 => 181.64319999999998. Halving a terminating decimal always terminates, so decimal
+      # arithmetic gives the mid exactly: one digit deeper than its inputs, and nothing beyond. RatePrecision is the
+      # backstop at ingest; this keeps the value right at the source.
+      def midpoint(buy, sell)
+        ((BigDecimal(buy.to_s) + BigDecimal(sell.to_s)) / 2).to_f
+      end
 
       def http
         @http ||= HTTP

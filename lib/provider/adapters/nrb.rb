@@ -61,7 +61,7 @@ class Provider
             sell = entry["sell"]
             next unless buy && sell
 
-            mid = (Float(buy) + Float(sell)) / 2.0
+            mid = midpoint(Float(buy), Float(sell))
             rate = mid / unit
             next if rate.zero?
 
