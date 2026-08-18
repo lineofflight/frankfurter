@@ -1,13 +1,85 @@
-inherit_gem:
-  rubocop-shopify: rubocop.yml
-
-inherit_from: ".rubocop_todo.yml"
-
 plugins:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rake
   - rubocop-sequel
 
+require:
+  - ./rubocop/cop/comment_fill.rb
+
 AllCops:
   NewCops: enable
+
+# Aesthetic Configuration (Shopify heritage)
+Layout/LineLength:
+  Max: 120
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Expressiveness Vetoes
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# Custom Cops
+Style/CommentFill:
+  Enabled: true
+  Max: 120
+
+# Metrics (Disabled / Tuned)
+Metrics/AbcSize:
+  Max: 26.0
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'route']
+Metrics/MethodLength:
+  Max: 15
+Metrics/ClassLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+
+Minitest:
+  Include:
+    - '**/*_spec.rb'

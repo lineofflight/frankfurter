@@ -30,7 +30,6 @@ group :development, :test do
   gem "rubocop-performance"
   gem "rubocop-rake"
   gem "rubocop-sequel"
-  gem "rubocop-shopify"
 end
 
 group :test do

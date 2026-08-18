@@ -157,8 +157,6 @@ GEM
     rubocop-sequel (0.4.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2)
-    rubocop-shopify (2.18.0)
-      rubocop (~> 1.62)
     ruby-ole (1.2.13.1)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
@@ -239,7 +237,6 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rake
   rubocop-sequel
-  rubocop-shopify
   rubyzip
   rufus-scheduler
   sequel
