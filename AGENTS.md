@@ -2,6 +2,43 @@
 
 Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from 50+ institutional sources (central banks, the IMF, the Federal Reserve, etc.).
 
+## Before You Write Code
+
+Several agents work in this repo at once. Assume you are not alone.
+
+**Do your work in a git worktree, not in the primary checkout.** The primary
+checkout is shared ground. Two agents editing it at the same time lose each
+other's work: one stages the other's files, or checks the branch out from under
+them mid-task. This has happened repeatedly.
+
+Check before your first edit. The branch reported at session start is a snapshot
+and goes stale:
+
+```bash
+git rev-parse --abbrev-ref HEAD    # the live branch
+git status --short                 # files you never touched mean someone else is here
+for p in $(pgrep -x claude); do lsof -a -p $p -d cwd -Fn 2>/dev/null | sed -n 's/^n//p'; done | sort | uniq -c
+```
+
+Then take a worktree. Use the native `EnterWorktree` tool if your harness has one,
+otherwise:
+
+```bash
+git fetch origin
+git worktree add .claude/worktrees/<slug> -b <branch> origin/main
+cp -R .zed .claude/worktrees/<slug>/.zed   # gitignored, so a fresh worktree comes up bare
+```
+
+Worktrees live under `.claude/worktrees/` (gitignored), never as siblings of the
+checkout. Branch off `origin/main`, not local `main`, which may be stale or may
+belong to another agent. A stacked local branch is often already upstream as a
+squash merge, so `origin/main` is the right base even when local commits look
+unmerged.
+
+**Exceptions.** Read-only work needs no worktree. Neither does a single edit you
+will commit within the minute, provided `git status` is clean and no other agent
+is live here. Everything else gets a worktree.
+
 ## Architecture
 
 - Roda
@@ -239,6 +276,33 @@ Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
 - Linting: RuboCop with Shopify style guide (120-char line length)
 - Migrations in `db/migrate/`
 - Update `CHANGELOG.md` for changes that directly impact user experience
+
+### Recovering from a shared tree
+
+See [Before You Write Code](#before-you-write-code) for the rule. This is what to
+do once it has already gone wrong.
+
+**You are sharing a working tree.** The tell is `git status` listing files you
+never touched, with mtimes from minutes ago. Do not commit the mixed tree and do
+not bare-stash. Stash only your own paths with
+`git stash push -m "wip" -- <your files>`, confirm the other agent's files
+survived, then take a fresh worktree and pop there.
+
+**The checkout was moved onto someone else's branch.** Save your work with
+`git diff > /tmp/mine.patch`, `git checkout --` your files to hand the tree back
+clean, then worktree off `origin/main` and `git apply --3way`. Expect a
+`CHANGELOG.md` conflict, since their entry is on their branch and not on main.
+
+**A red test suite may not be yours.** Concurrent `rake spec` runs raise
+`SQLite3::BusyException` and produce phantom failures. Rerun once, alone, before
+believing a failure.
+
+**Removing a worktree.** Do it from outside the worktree. Your shell's working
+directory is pinned to it, so deleting the one you are standing in strands the
+session. `ExitWorktree` refuses to remove a worktree entered by `path`; use
+`action: "keep"` and then `git worktree remove`. After a squash merge
+`git branch -d` refuses. Diff the branch against main to confirm the content
+landed, then use `-D`.
 
 ## Handling Data
 
