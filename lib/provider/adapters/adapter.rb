@@ -73,12 +73,15 @@ class Provider < Sequel::Model(:providers)
         ((BigDecimal(buy.to_s) + BigDecimal(sell.to_s)) / 2).to_f
       end
 
+      # http.rb sends no Accept header of its own, and a request without one is a bot fingerprint some WAFs reject.
+      # CBE's did, silently: HTTP 200 with a "Request Rejected" body, so nothing raised and the feed just went stale
+      # (#576). `*/*` means what the absent header already meant, and adapters needing a specific type override it.
       def http
         @http ||= HTTP
           .use(ensure_success: { ignore: [429] })
           .retriable(retry_statuses: [429])
           .timeout(connect: 10, write: 60, read: 120)
-          .headers("User-Agent" => USER_AGENT)
+          .headers("User-Agent" => USER_AGENT, "Accept" => "*/*")
       end
     end
   end
