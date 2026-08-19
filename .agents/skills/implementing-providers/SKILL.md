@@ -39,6 +39,8 @@ Required:
   - ECB publishes `1 EUR = X foreign`, pivot EUR goes in `base` (see `lib/provider/adapters/ecb.rb`).
   - NBG and BBK publish `1 foreign = X pivot`, pivot goes in `quote` (see `lib/provider/adapters/nbg.rb` and `lib/provider/adapters/bbk.rb`).
   - Store what the provider returns. Inverting in the adapter invites direction bugs and diverges from the blender's expectations.
+  - **Direction is per row, not per provider.** A single feed may mix both orientations, and that is fine: record each row as published rather than normalizing the odd ones to match the majority. SARB quotes USD, GBP and EUR as ZAR-per-foreign but everything else as foreign-per-ZAR; CBK publishes KES-per-foreign except for its East African cross rates; FRED and CBC carry a per-series `[quote, base]` map. `BaseConversion` inverts and cross-converts at query time, and `RateScopes` matches the pivot on either side, so nothing downstream needs a uniform orientation.
+  - Normalizing costs real precision. `1/x` almost never terminates, so inverting at ingest turns an exact published figure into a repeating decimal and stores it. It also defeats the passthrough contract in `RateQuery#emit_records`, which echoes stored digits for pairs the provider published and rounds everything else: the stored orientation *is* the provenance, so a computed reciprocal stored as a row inherits echo privileges it has not earned.
 
 Optional class methods (inside `class << self`):
 - `backfill_range = N` — if the API needs chunked requests (e.g. max 100 results per call). The base class `fetch_each` uses this to iterate in windows.
