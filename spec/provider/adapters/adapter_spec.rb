@@ -114,6 +114,16 @@ class Provider < Sequel::Model(:providers)
           assert_raises(HTTP::StatusError) { client.get(url) }
         end
 
+        it "sends an Accept header, whose absence some WAFs read as a bot" do
+          stub = WebMock.stub_request(:get, url)
+            .with(headers: { "Accept" => "*/*" })
+            .to_return(status: 200, body: "ok")
+
+          client.get(url).to_s
+
+          WebMock.assert_requested(stub)
+        end
+
         it "identifies as Frankfurter" do
           stub = WebMock.stub_request(:get, url)
             .with(headers: { "User-Agent" => "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)" })
