@@ -17,9 +17,20 @@ updates:
       - "hakanensari"
     schedule:
       interval: "weekly"
+  # Actions are pinned by SHA, so every patch and minor now opens a PR instead
+  # of landing silently behind a floating tag. Group them into one weekly PR,
+  # and hold a release for a week before proposing it: auto-merge approves
+  # non-major bumps unattended, and tag-hijack compromises are usually caught
+  # within days.
   - package-ecosystem: "github-actions"
     directory: "/"
     assignees:
       - "hakanensari"
     schedule:
       interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
