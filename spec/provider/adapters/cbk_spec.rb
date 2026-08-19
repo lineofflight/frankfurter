@@ -55,11 +55,11 @@ class Provider < Sequel::Model(:providers)
         })
 
         _(records.length).must_equal(2)
-        _(records[0][:base]).must_equal("UGX")
-        _(records[1][:base]).must_equal("TZS")
+        _(records[0][:quote]).must_equal("UGX")
+        _(records[1][:quote]).must_equal("TZS")
       end
 
-      it "inverts East African cross rates" do
+      it "records East African cross rates as published, with KES as base" do
         records = adapter.parse({
           "data" => [
             ["20/03/2026", "KES / TSHS", "21.6800"],
@@ -69,18 +69,18 @@ class Provider < Sequel::Model(:providers)
         })
 
         _(records.length).must_equal(3)
-        # 1 KES = 21.68 TZS means 1 TZS = 1/21.68 KES
-        _(records[0][:base]).must_equal("TZS")
-        _(records[0][:quote]).must_equal("KES")
-        _(records[0][:rate]).must_be_close_to(1.0 / 21.68, 0.0001)
+        # 1 KES = 21.68 TZS is stored as published, not as its reciprocal
+        _(records[0][:base]).must_equal("KES")
+        _(records[0][:quote]).must_equal("TZS")
+        _(records[0][:rate]).must_equal(21.68)
 
-        _(records[1][:base]).must_equal("UGX")
-        _(records[1][:quote]).must_equal("KES")
-        _(records[1][:rate]).must_be_close_to(1.0 / 27.5, 0.0001)
+        _(records[1][:base]).must_equal("KES")
+        _(records[1][:quote]).must_equal("UGX")
+        _(records[1][:rate]).must_equal(27.5)
 
-        _(records[2][:base]).must_equal("RWF")
-        _(records[2][:quote]).must_equal("KES")
-        _(records[2][:rate]).must_be_close_to(1.0 / 8.5, 0.0001)
+        _(records[2][:base]).must_equal("KES")
+        _(records[2][:quote]).must_equal("RWF")
+        _(records[2][:rate]).must_equal(8.5)
       end
 
       it "divides rates by unit marker parsed from currency name" do

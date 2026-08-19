@@ -7,7 +7,8 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # Central Bank of Kenya daily exchange rates in KES. Fetches from two WPDataTables endpoints: table 32 (2003-2024)
-    # and table 193 (2024+).
+    # and table 193 (2024+). Most rows are quoted as KES per foreign unit (foreign base); the East African cross rates
+    # ("KES / USHS" and friends) are quoted as foreign per KES (KES base). Both are recorded as published.
     class CBK < Adapter
       BASE_URL = "https://www.centralbank.go.ke/wp-admin/admin-ajax.php"
       CURRENCY_MAP = {
@@ -90,9 +91,11 @@ class Provider
         return if rate_value.zero?
 
         rate_value /= units if units > 1
-        rate_value = 1.0 / rate_value if cross_rate
 
-        { date:, base: iso, quote: "KES", rate: rate_value }
+        # Cross-rate rows are published foreign-per-KES; the rest are KES-per-foreign. Record each as published.
+        base, quote = cross_rate ? ["KES", iso] : [iso, "KES"]
+
+        { date:, base:, quote:, rate: rate_value }
       end
 
       def resolve_currency(name)
