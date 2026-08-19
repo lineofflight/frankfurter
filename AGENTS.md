@@ -132,7 +132,8 @@ db/seeds/
 - `CurrencyCoverage`: Join model on `currency_coverages` table. One row per (provider, currency) with per-provider date ranges. Belongs to Provider and Currency.
 - `Provider`: Sequel model on `providers` table. Static config-as-data: seeded from `db/seeds/providers/*.json` on every container start so provider metadata always tracks the image.
   - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
-  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, upserts to DB, refreshes currency summaries
+  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, inserts to DB, refreshes currency summaries
+    - The insert is `ON CONFLICT DO NOTHING`, not an upsert: a row already stored for `(provider, date, base, quote)` is never rewritten. A fix that changes the *value* of stored rows therefore does nothing on re-backfill, and does it silently, since the rollup, currency-summary and blend refreshes are all gated on a positive insert count. Delete the provider's rows from `rates`, `weekly_rates` and `monthly_rates` first, then backfill from `coverage_start`. Rollups rebuild themselves from the new inserts; `blended_rates` refreshes on insert only and never on delete, so a change that moves pairs across the unique index also needs `rake blend:rebuild`. Verify with `rake blend:parity`, ideally against a baseline taken before the change.
   - `#start_date`, `#end_date`: derived from currency coverages
   - `many_to_many :currencies` through `currency_coverages`
 - `Peg`: Value object for currency pegs (from `db/seeds/pegs/*.json`)
