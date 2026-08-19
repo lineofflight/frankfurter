@@ -4,7 +4,7 @@
   "country_code": "RO",
   "rate_type": "reference rate",
   "pivot_currency": "RON",
-  "data_url": "https://www.bnr.ro/Exchange-rates-702.aspx",
+  "data_url": "https://www.bnr.ro/en/561-exchange-rates",
   "terms_url": null,
   "publish_schedule": "*/30 11-13 * * 1-5",
   "publish_cadence": "daily",
