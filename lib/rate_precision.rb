@@ -23,7 +23,7 @@ require "sequel"
 module RatePrecision
   DIGITS = 12
 
-  FORMAT = "%.#{DIGITS}g"
+  FORMAT = "%.#{DIGITS}g".freeze
 
   class << self
     def normalize(rate)

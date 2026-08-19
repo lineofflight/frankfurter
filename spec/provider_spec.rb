@@ -328,9 +328,8 @@ describe Provider do
     end
 
     it "strips float noise from synthesized rates on the way in" do
-      # An adapter that coerces buy/sell to a mid, or rescales per unit, hands over the raw result of float
-      # arithmetic. Single-provider responses echo stored digits verbatim, so noise stored here reaches the API
-      # (#579).
+      # An adapter that coerces buy/sell to a mid, or rescales per unit, hands over the raw result of float arithmetic.
+      # Single-provider responses echo stored digits verbatim, so noise stored here reaches the API (#579).
       noisy_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
