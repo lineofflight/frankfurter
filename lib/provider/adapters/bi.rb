@@ -62,7 +62,7 @@ class Provider < Sequel::Model(:providers)
           mid = midpoint(sell, buy)
           date = Date.parse(date_str)
 
-          records << { date:, base: currency.strip, quote: "IDR", rate: mid.round(4) }
+          records << { date:, base: currency.strip, quote: "IDR", rate: mid }
         end
 
         records
