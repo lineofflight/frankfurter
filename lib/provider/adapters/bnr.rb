@@ -8,9 +8,10 @@ class Provider
   module Adapters
     # National Bank of Romania. Publishes daily reference rates for ~35 currencies against the Romanian leu (RON).
     # Yearly XML archives back to 2005 are kept current within the year. The 10-day feed is a redundant window over the
-    # same data, so we always use the yearly archive.
+    # same data, so we always use the yearly archive. The feeds live on curs.bnr.ro; the paths under www redirect to the
+    # homepage since the August 2026 site relaunch.
     class BNR < Adapter
-      BASE_URL = "https://www.bnr.ro"
+      BASE_URL = "https://curs.bnr.ro"
 
       class << self
         def backfill_range = 365
