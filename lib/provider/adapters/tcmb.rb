@@ -72,8 +72,8 @@ class Provider
             raw[code] = Float(value)
           end
 
-          # Mid of buying and selling for each currency → X→TRY rate JPY is quoted per 100 units in TCMB data (confirmed
-          # via series metadata)
+          # Mid of buying and selling for each currency → X→TRY rate. JPY is quoted per 100 units in TCMB data
+          # (confirmed via series metadata).
           CURRENCIES.filter_map do |currency|
             buy = raw["#{currency}_BUY"]
             sell = raw["#{currency}_SELL"]
@@ -82,7 +82,7 @@ class Provider
             rate = midpoint(buy, sell)
             rate /= 100.0 if currency == "JPY"
 
-            { date:, base: currency, quote: "TRY", rate: rate.round(4) }
+            { date:, base: currency, quote: "TRY", rate: }
           end
         end
       end
