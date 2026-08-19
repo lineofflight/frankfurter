@@ -79,7 +79,7 @@ class Provider
             sell = raw["#{currency}_SELL"]
             next unless buy && sell
 
-            rate = (buy + sell) / 2
+            rate = midpoint(buy, sell)
             rate /= 100.0 if currency == "JPY"
 
             { date:, base: currency, quote: "TRY", rate: rate.round(4) }

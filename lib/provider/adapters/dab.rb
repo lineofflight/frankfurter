@@ -76,7 +76,7 @@ class Provider < Sequel::Model(:providers)
           transfer_buy = parse_decimal(cells[4].text)
           next unless transfer_sell && transfer_buy
 
-          mid = (transfer_sell + transfer_buy) / 2.0
+          mid = midpoint(transfer_sell, transfer_buy)
           next unless mid.positive?
 
           rate = code == "IRR" ? mid / IRR_PER_TOMAN : mid

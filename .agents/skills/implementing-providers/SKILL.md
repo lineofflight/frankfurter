@@ -50,6 +50,7 @@ Notes:
 - The `base` and `quote` in each record are determined by the data, not a class method
 - `parse` is a convention (not enforced by the base class) — most adapters define a `parse` method for unit-testable parsing, called from `fetch`
 - Handle unit multipliers (per-100, per-1000) by dividing to normalize to per-1-unit rates. Guard against zero units before dividing.
+- If the source publishes buy and sell prices instead of a reference rate, coerce them with the base class's `midpoint(buy, sell)`, not `(buy + sell) / 2.0`. The mid is our own synthesis, so it has no published digits to echo, and float arithmetic leaves noise in the low ones that single-provider responses show verbatim (#579).
 - **Do not rescue errors** — let HTTP errors, timeouts, parse failures, and other exceptions bubble up. The scheduler handles retries; swallowing errors silently hides broken providers.
 - **Per-day APIs**: Some APIs only return rates for a single date per request. A full backfill from e.g. 2000 means ~6,800 requests. Use `backfill_range` to chunk into small windows (e.g. 30 days) and add a `sleep` between requests to be polite. The base class `fetch_each` handles the iteration loop. See `lib/provider/adapters/nbg.rb` for a working example.
 

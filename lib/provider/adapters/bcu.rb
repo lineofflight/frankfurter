@@ -82,8 +82,7 @@ class Provider
           tcv = Float(tcv_str)
           next if tcc.zero? || tcv.zero?
 
-          # Calculate midpoint rate
-          rate = (tcc + tcv) / 2.0
+          rate = midpoint(tcc, tcv)
 
           { date:, base: base_currency, quote: "UYU", rate: }
         end

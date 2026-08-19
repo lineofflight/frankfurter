@@ -115,7 +115,7 @@ class Provider
         sell = row[:sell]
         return if buy.nil? || sell.nil?
 
-        mid = (buy + sell) / 2.0
+        mid = midpoint(buy, sell)
         return if mid.zero?
 
         rate = mid / units

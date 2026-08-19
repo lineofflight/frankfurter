@@ -71,7 +71,7 @@ class Provider
           sell = extract_rate(sell_cell.text)
           next unless buy && sell
 
-          mid = (buy + sell) / 2.0
+          mid = midpoint(buy, sell)
           next unless mid.positive?
 
           { date:, base: "USD", quote: "LRD", rate: mid }

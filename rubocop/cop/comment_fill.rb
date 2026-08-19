@@ -2,6 +2,11 @@
 
 require "rubocop"
 
+# Worktrees live inside the repo (.claude/worktrees), and RuboCop infers the project root from the outermost Gemfile
+# going up, so from a worktree it treats the parent checkout as the root. It then loads both .rubocop.yml files and
+# requires this file once per copy. Bail on the second load rather than redefining the cop.
+return if defined?(RuboCop::Cop::Style::CommentFill)
+
 module RuboCop
   module Cop
     module Style

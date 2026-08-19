@@ -41,6 +41,7 @@ lib/
 │   │   └── <key>.rb             # One adapter per provider (auto-discovered)
 │   └── adapters.rb              # Auto-requires all adapters
 ├── rate.rb                      # Rate model on rates table
+├── rate_precision.rb            # Ingest-precision policy: strips binary float noise from synthesized rates
 ├── rate_scopes.rb               # Shared dataset scopes for rate tables (rates, weekly, monthly)
 ├── rate_validation.rb           # Ingest-validation policy: drops invalid rows on ingest, purges stored ones
 ├── roundable.rb                 # Currency-aware decimal rounding
@@ -81,6 +82,7 @@ db/seeds/
 
 ### Adapters (lib/provider/adapters/)
 - `Provider::Adapters::Adapter`: Abstract base class — `fetch` interface, `fetch_each` for chunked iteration, shared `http` client (http.rb, retries 429s, ensures non-2xx raises `HTTP::StatusError`), sleep no-op in test env
+- `midpoint(buy, sell)`: exact decimal mid for sources that publish buy/sell instead of a reference rate. Use it instead of `(buy + sell) / 2.0`, which leaves float noise in the low digits
 - Adapters are pure data extraction: they know how to talk to an external API and parse its response
 - No identity — adapters have no `key` or `name`. Provider model owns identity.
 - Optional class methods: `def backfill_range = N`, `def api_key = ENV[...] || raise("no API key")`

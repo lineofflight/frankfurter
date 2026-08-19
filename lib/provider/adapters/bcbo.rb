@@ -111,7 +111,7 @@ class Provider
             date = build_date(year, month, day)
             next unless date
 
-            records << { date:, base: "USD", quote: "BOB", rate: (sell + buy) / 2.0 }
+            records << { date:, base: "USD", quote: "BOB", rate: midpoint(sell, buy) }
           end
         end
 
@@ -213,7 +213,7 @@ class Provider
         end
 
         if usd_rates.size == 2
-          mid_rate = usd_rates.sum / 2.0
+          mid_rate = midpoint(*usd_rates)
           records << { date:, base: "USD", quote: "BOB", rate: mid_rate }
         end
 

@@ -72,6 +72,29 @@ class Provider < Sequel::Model(:providers)
         _(records.last[:rate]).must_equal(182.5)
       end
 
+      it "computes the mid exactly, without float noise" do
+        # The pair that surfaced #579: (181.5264 + 181.76) / 2.0 => 181.64319999999998 in binary floats.
+        html = <<~HTML
+          <div class="view-content">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="views-field views-field-field-content-post-date">
+                    <time datetime="2026-08-11T12:00:00Z">Tuesday, August 11, 2026</time>
+                  </td>
+                  <td class="views-field views-field-field-buying-us">L$181.5264/US$1.00</td>
+                  <td class="views-field views-field-field-selling-us">L$181.7600/US$1.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        HTML
+
+        records = adapter.parse(html)
+
+        _(records.first[:rate]).must_equal(181.6432)
+      end
+
       it "skips rows missing rate cells" do
         html = <<~HTML
           <div class="view-content">

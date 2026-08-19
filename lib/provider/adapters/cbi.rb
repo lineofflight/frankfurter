@@ -120,7 +120,7 @@ class Provider
             sell = Float(row[:cells][sell_col].to_s, exception: false)
             next unless buy && sell && buy.positive? && sell.positive?
 
-            mid = (buy + sell) / 2.0
+            mid = midpoint(buy, sell)
             records << { date:, base: code, quote: "IQD", rate: mid }
           end
         end
