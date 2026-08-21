@@ -584,10 +584,14 @@ describe Provider do
         end
       end
 
-      provider.stub(:adapter, error_adapter) do
-        provider.backfill
+      logged = nil
+      Log.stub(:error, ->(message) { logged = message }) do
+        provider.stub(:adapter, error_adapter) do
+          provider.backfill
+        end
       end
 
+      _(logged).must_equal("#{provider.key}: RuntimeError: boom, skipping")
       _(Rate.where(provider: provider.key, date: import_date).count).must_equal(0)
     end
   end
