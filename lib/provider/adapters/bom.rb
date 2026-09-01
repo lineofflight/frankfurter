@@ -11,7 +11,8 @@ class Provider
     # in Mongolia.
     #
     # The movement endpoint returns the entire archive (2001-01-02 onward) in one ~5 MB JSON response regardless of the
-    # requested date range, so we fetch once and slice client-side. No chunking (no backfill_range).
+    # requested date range, so we fetch once and slice client-side. No chunking (no backfill_range). The archive is
+    # refreshed in arrears in periodic batches (every few weeks), so publish_cadence is monthly.
     #
     # Direction: provider publishes "1 foreign = X MNT", so foreign currency goes in base and MNT in quote.
     #
