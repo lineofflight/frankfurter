@@ -107,7 +107,7 @@ describe "Rollup tables" do
         data = WeeklyRate.ecb.only("USD", "GBP").all
 
         data.each do |r|
-          _([r.base, r.quote].any? { |c| ["USD", "GBP"].include?(c) }).must_equal(true)
+          _([r.base, r.quote].intersect?(["USD", "GBP"])).must_equal(true)
         end
       end
     end
