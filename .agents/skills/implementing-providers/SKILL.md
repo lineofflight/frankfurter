@@ -96,6 +96,32 @@ The base class provides a private `http` method (an `HTTP::Client` from the `htt
   - `http.persistent(BASE_URL) { |client| ... }` for endpoints that misbehave across separate connections, or where you want exact parity with a legacy single-connection flow (see `lib/provider/adapters/bota.rb`).
   - Cookie-based login legs: read `response.headers.get("Set-Cookie")` off the first response and forward it on the next request (see `lib/provider/adapters/cbe.rb`, `mas.rb`, `bi.rb`, `nbc.rb`).
 
+#### Redenominated and relabelled currencies
+
+Archives often label a currency's whole history with its current ISO code. Before trusting a code, dump one file per year and look for a 1000x-plus jump in a value at a known redenomination date. Two flavours, handled differently:
+
+- **Restated series.** The source converted old values into the successor unit. ECB and TCMB publish pre-2005 TRY as TRL divided by a million, so 2004 reads `EUR/TRY 1.829`. Relay as published: it is what the issuing bank itself reports, and the series is continuous.
+- **Relabelled only.** The values are the predecessor's magnitudes under the successor code. CBAR's 2005-12-30 file quotes `1 USD = 4593 "AZN"`, old manat; LB's AZN series is the same. Map the code back to the predecessor by date in the adapter with a `PREDECESSORS` table (see `lib/provider/adapters/cbar.rb`, `lb.rb`):
+  ```ruby
+  PREDECESSORS = { "AZN" => ["AZM", Date.new(2006, 1, 9)] }.freeze
+  ```
+  Key each entry on the *source's* switch date, which can trail the official one (LB kept quoting old manat until 2006-01-09), and verify it against the rows either side. Check the nominal at the same time: CBAR's TRL rows say Nominal 1 but price 1000 TRL.
+
+Two more things the relabel needs:
+
+- `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
+- Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in place with a migration (see `db/migrate/027_relabel_lb_old_manat.rb`), which runs itself at container start. No re-backfill: the values were right, only the code was wrong. The migration has four parts, because three tables derive from `rates`:
+  1. `UPDATE rates` scoped to provider, code and date range.
+  2. Rollups: delete the provider's `weekly_rates` and `monthly_rates` for both codes and re-insert from `rates` with `Bucket.week` / `Bucket.month`, the way `Provider#refresh_rollup` does. A bucket straddling the cutover holds both codes.
+  3. Summaries: `currencies` and `currency_coverages` only ever widen on insert, so recompute both codes from `rates`.
+  4. Blend: `blended_rates` refreshes on insert only. Where the provider was the *sole* contributor for the code, `UPDATE` the quote; the stored value is a pure function of those rows and a recompute gives the same bytes. Where other providers already quote the successor, `BlendedRate.refresh` the window plus the 14-day carry-forward lookback past the provider's last old-unit row. Check contributor sets with `SELECT provider, MIN(date) FROM rates WHERE base = ? OR quote = ? GROUP BY provider`.
+
+  Verify against a prod backup: apply the migration to a copy, recompute the blend from scratch over the affected years on a second copy, and diff `blended_rates`. Zero rows either way, or the migration is wrong.
+
+`db/seeds/nascent_currencies.json` is not the tool for this. It rejects every row dated before a currency's inception, restated series included, so it is reserved for the euro, where no pre-1999 series is wanted from anyone.
+
+Non-ISO labels (`SDR` for XDR) go through an `ALIASES` map rather than the predecessor table.
+
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`
 
 Follow the pattern in `spec/provider/adapters/boi_spec.rb` or `spec/provider/adapters/bccr_spec.rb`:

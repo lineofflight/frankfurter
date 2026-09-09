@@ -5,12 +5,5 @@
     "predecessor": "XEU",
     "source": "https://en.wikipedia.org/wiki/Euro",
     "note": "The euro came into existence on 1 January 1999 and was first quoted on 4 January 1999, succeeding the ECU (XEU) at 1:1. Euro-denominated quotes dated earlier are the ECU."
-  },
-  {
-    "iso_code": "AZN",
-    "inception_date": "2006-01-01",
-    "predecessor": "AZM",
-    "source": "https://www.cbar.az/currencies/04.01.2006.xml",
-    "note": "The new manat replaced the old manat (AZM) at 5000:1 on 1 January 2006. CBAR's archive relabels old-manat bulletins as AZN (1 USD = 4593 on 2005-12-30, 0.9184 on 2006-01-03), and the Bank of Lithuania does the same. Quotes dated earlier are old manat."
   }
 ]
