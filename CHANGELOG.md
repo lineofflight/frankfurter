@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Bank of Zambia (BOZ) as a data provider. Daily average buy/sell midpoints for USD, GBP, EUR and ZAR against the Zambian kwacha (ZMW), from 2006-01-12. Rows before the 2013 rebasing are stored as old kwacha (ZMK). (#389)
 - Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. Daily official bulletin rates for ~40 currencies and four precious metals against the Azerbaijani manat (AZN), from 1993-11-25. Bulletins before the 2006 redenomination are stored as old manat (AZM). (#606)
 - China Foreign Exchange Trade System (CFETS) as a data provider, publishing the daily RMB central parity rate for 25 pairs against CNY since 2006. (#605)
 
