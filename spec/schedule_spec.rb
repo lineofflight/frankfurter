@@ -18,12 +18,10 @@ describe "bin/schedule --dry-run" do
     Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) && p.publish_schedule }
   end
 
-  it "schedules all enabled providers for startup and only configured providers for cron" do
+  it "schedules enabled providers at startup and configured providers with valid cron expressions" do
     _(startup_lines.size).must_equal(enabled_count)
     _(cron_lines.size).must_equal(scheduled_count)
-  end
 
-  it "generates valid cron expressions" do
     cron_lines.each do |line|
       expression = line.match(/cron: (.+) backfill\[/)[1]
       parsed = Fugit::Cron.parse(expression)
