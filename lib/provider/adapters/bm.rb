@@ -5,6 +5,7 @@ require "cgi"
 require "date"
 require "pdf-reader"
 require "stringio"
+require "uri"
 
 require "provider/adapters/adapter"
 
@@ -183,7 +184,8 @@ class Provider
         body.force_encoding(Encoding::UTF_8) if body.encoding != Encoding::UTF_8
 
         body.scan(PDF_HREF).map do |href, day, month, year|
-          [Date.new(Integer(year, 10), Integer(month, 10), Integer(day, 10)), "#{HOST}#{CGI.unescapeHTML(href)}"]
+          escaped_path = URI::RFC2396_PARSER.escape(CGI.unescapeHTML(href))
+          [Date.new(Integer(year, 10), Integer(month, 10), Integer(day, 10)), URI.join(HOST, escaped_path).to_s]
         end
       end
     end
