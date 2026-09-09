@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require "date"
 require "nokogiri"
+require "openssl"
 
 require "provider/adapters/adapter"
 
@@ -14,7 +16,7 @@ class Provider
     # ExchangeRates.xls. The "All" currency option ignores the date fields and returns only the latest snapshot, so a
     # date range has to be requested one currency at a time: a fetch is one GET for the tokens and currency list
     # followed by one POST per currency. Any range works in a single request (seven years came back in one go), so there
-    # is no backfill_range and a full backfill is fifty requests.
+    # is no backfill_range and a full backfill is 49 requests: one GET plus 48 POSTs.
     #
     # Rates are OMR per unit of foreign currency (1 USD = 0.3845 OMR), so foreign goes in base and OMR in quote,
     # matching the pivot-in-quote convention of NBG and BBK. Buy and sell are coerced to a mid via midpoint. A date can

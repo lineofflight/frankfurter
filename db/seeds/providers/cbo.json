@@ -5,7 +5,7 @@
   "rate_type": "indicative rate",
   "pivot_currency": "OMR",
   "data_url": "https://cbo.gov.om/Pages/DFESearch.aspx",
-  "terms_url": null,
+  "terms_url": "https://cbo.gov.om/Pages/Disclaimer.aspx",
   "publish_schedule": "*/30 6-8 * * 0-4",
   "publish_cadence": "daily",
   "coverage_start": "2017-10-15"
