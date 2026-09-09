@@ -7,7 +7,7 @@ class Provider < Sequel::Model(:providers)
   module Adapters
     describe CBSSC do
       before do
-        VCR.insert_cassette("cbssc", match_requests_on: [:method, :host, :path])
+        VCR.insert_cassette("cbssc", match_requests_on: [:method, :uri])
       end
 
       after { VCR.eject_cassette }
