@@ -57,6 +57,31 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2014, 12, 30))
       end
 
+      it "restores the old manat code before the 2006 redenomination" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="utf-8"?>
+          <FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>2005-12-30</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>0.63014</Amt></CcyAmt>
+              <CcyAmt><Ccy>AZN</Ccy><Amt>1000</Amt></CcyAmt>
+            </FxRate>
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>2006-01-09</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>3.1077</Amt></CcyAmt>
+              <CcyAmt><Ccy>AZN</Ccy><Amt>1</Amt></CcyAmt>
+            </FxRate>
+          </FxRates>
+        XML
+
+        records = adapter.parse(xml)
+
+        _(records.map { |r| r[:base] }).must_equal(["AZM", "AZN"])
+        _(records.first[:rate]).must_be_close_to(0.00063014, 1e-9)
+      end
+
       it "parses EU-type XML with correct base and quote" do
         xml = <<~XML
           <?xml version="1.0" encoding="utf-8"?>

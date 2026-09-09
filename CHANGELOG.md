@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Azerbaijani manat (AZN) no longer reports history back to 1994. The Bank of Lithuania (LB) labels old-manat quotes as AZN, so AZN is now registered as coming into being on 2006-01-01: earlier rows are rejected on ingest and purged, and LB's pre-2006 rows are re-ingested as old manat (AZM).
+
 - Restored Central Bank of Egypt (CBE) rates, stalled since 2026-07-22 after the bank's WAF began rejecting requests without an Accept header. Adapters now send `Accept: */*` by default. (#576)
 - Restored Banca Națională a României (BNR) rates, stalled since 2026-08-05 after the bank relaunched its site and moved the XML feeds to curs.bnr.ro. (#580)
 - Central Bank of Kenya (CBK) East African cross rates (UGX, TZS, RWF, BIF) are now stored as published instead of inverted at ingest, which had turned exact published figures into false precision in single-provider responses (`24.0657` became `0.0343951103911`). A migration drops the inverted rows and a re-backfill restores them. Blended rates are unaffected. (#585)
