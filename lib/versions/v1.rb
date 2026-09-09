@@ -12,10 +12,38 @@ module Versions
   class V1 < Roda
     ROOT_PAYLOAD = {
       version: "v1",
-      status: "frozen",
+      status: "deprecated",
       openapi: "/v1/openapi.json",
-      docs: "https://frankfurter.dev",
+      docs: "https://frankfurter.dev/v1/",
     }.freeze
+
+    # Wrap the full app so static files, preflight requests, and errors also carry the headers.
+    class Deprecation
+      def initialize(app)
+        @app = app
+      end
+
+      def call(env)
+        path = env["PATH_INFO"]
+        return @app.call(env) unless path == "/v1" || path.start_with?("/v1/")
+
+        successor = case path
+                    when "/v1", "/v1/" then "/v2"
+                    when "/v1/currencies" then "/v2/currencies"
+                    when "/v1/openapi.json" then "/v2/openapi.json"
+                    else "/v2/rates"
+                    end
+
+        status, headers, body = @app.call(env)
+        link = %(<https://api.frankfurter.dev#{successor}>; rel="successor-version")
+        headers = headers.merge(
+          "deprecation" => "@1779103800", # V2 release: 2026-05-18 11:30 UTC (RFC 9745 structured date).
+          "link" => [headers["link"], link].compact.join(", "),
+        )
+
+        [status, headers, body]
+      end
+    end
 
     plugin :json,
            content_type: "application/json; charset=utf-8",
