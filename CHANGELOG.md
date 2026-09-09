@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Central Bank of Kuwait (CBKKW) as a data provider. Daily reference rates for ~135 currencies against the Kuwaiti dinar (KWD), majors from 2008-01-02 and most others from 2017-06-18. (#447)
 - Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. Daily official bulletin rates for ~40 currencies and four precious metals against the Azerbaijani manat (AZN), from 1993-11-25. Bulletins before the 2006 redenomination are stored as old manat (AZM). (#606)
 - Central Bank of Trinidad and Tobago (CBTT) as a data provider. Daily weighted average dealer rates for 8 currencies against the Trinidad and Tobago dollar (TTD), from 1991-01-31. (#378)
+- Centrale Bank van Suriname (CBvS) as a data provider. Daily indicative quotes against the Surinamese dollar (SRD) for USD, EUR, GBP, CNY and seven Caribbean and South American currencies, parsed from the bank's PDF notices back to 2009-09-01. Where the bank publishes several fixings a day, the closing one is used. (#426)
 - China Foreign Exchange Trade System (CFETS) as a data provider, publishing the daily RMB central parity rate for 25 pairs against CNY since 2006. (#605)
 
 ### Changed
