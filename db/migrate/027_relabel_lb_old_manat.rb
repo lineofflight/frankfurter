@@ -65,7 +65,13 @@ Sequel.migration do
       from(:currencies).insert(iso_code: code, start_date: global[:start_date], end_date: global[:end_date])
     end
 
-    from(:blended_rates).where(quote: "AZN").where { date < Date.new(2006, 1, 2) }.update(quote: "AZM")
+    existing_azm = from(:blended_rates).where(quote: "AZM").select_map(:date)
+    from(:blended_rates)
+      .where(quote: "AZN")
+      .where { date < Date.new(2006, 1, 2) }
+      .exclude(date: existing_azm)
+      .update(quote: "AZM")
+    from(:blended_rates).where(quote: "AZN").where { date < Date.new(2006, 1, 2) }.delete
     BlendedRate.refresh(Date.new(2006, 1, 2)..Date.new(2006, 1, 31))
   end
 
