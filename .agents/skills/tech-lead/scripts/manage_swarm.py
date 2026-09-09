@@ -14,7 +14,7 @@ import sys
 import time
 
 REPO = "lineofflight/frankfurter"
-REPO_DIR = "/Users/hakanensari/code/frankfurter"
+REPO_DIR = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip()
 
 
 def run_cmd(cmd, cwd=REPO_DIR, capture=True, check=False):
