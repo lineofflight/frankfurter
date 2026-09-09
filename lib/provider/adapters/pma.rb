@@ -44,9 +44,10 @@ class Provider
       def parse(xlsx)
         strings, sheet = read_workbook(xlsx)
         doc = Ox.load(sheet, mode: :generic, effort: :tolerant)
-        rows = locate(doc, "sheetData")&.nodes || []
+        sheet_data = locate(doc, "sheetData")
+        raise "PMA: sheetData missing from export workbook" unless sheet_data
 
-        rows.filter_map do |row|
+        sheet_data.nodes.filter_map do |row|
           cells = row.nodes.to_h { |cell| [cell["r"].to_s.sub(/\d+\z/, ""), cell_value(cell, strings)] }
           parse_row(cells["A"], cells["B"], cells["E"])
         end
@@ -107,11 +108,11 @@ class Provider
       end
 
       def shared_strings(xml)
-        return [] unless xml
+        raise "PMA: sharedStrings.xml missing from export workbook" unless xml
 
         doc = Ox.load(xml, mode: :generic, effort: :tolerant)
-        root = doc.nodes.find { |n| n.is_a?(Ox::Element) }
-        return [] unless root
+        root = doc.is_a?(Ox::Document) ? doc.nodes.find { |n| n.is_a?(Ox::Element) } : doc
+        raise "PMA: sharedStrings.xml has no root element" unless root
 
         root.nodes.map { |si| si.locate("t").map { |t| t.nodes.first.to_s }.join }
       end

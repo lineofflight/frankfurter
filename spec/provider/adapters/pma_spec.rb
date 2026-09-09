@@ -86,6 +86,28 @@ class Provider < Sequel::Model(:providers)
           _(records).must_be_empty
         end
 
+        it "raises when the sheet has no sheetData" do
+          xlsx = Zip::OutputStream.write_buffer do |zip|
+            zip.put_next_entry("xl/worksheets/sheet1.xml")
+            zip.write("<worksheet><dimension ref=\"A1\"/></worksheet>")
+            zip.put_next_entry("xl/sharedStrings.xml")
+            zip.write("<sst></sst>")
+          end.string
+
+          error = _ { adapter.parse(xlsx) }.must_raise(RuntimeError)
+          _(error.message).must_include("sheetData")
+        end
+
+        it "raises when the shared strings part is missing" do
+          xlsx = Zip::OutputStream.write_buffer do |zip|
+            zip.put_next_entry("xl/worksheets/sheet1.xml")
+            zip.write("<worksheet><sheetData/></worksheet>")
+          end.string
+
+          error = _ { adapter.parse(xlsx) }.must_raise(RuntimeError)
+          _(error.message).must_include("sharedStrings")
+        end
+
         it "raises when the workbook has no sheet" do
           empty = Zip::OutputStream.write_buffer { |zip| zip.put_next_entry("[Content_Types].xml") }.string
 
