@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Banco Central de Reserva del Perú (BCRP) as a data provider. Daily banking-system closing rate (SBS buy/sell coerced to mid) for USD against the Peruvian sol (PEN), from 1997-01-02. (#607)
 - V2 `expand=providers` entries now include each provider's observation `date` alongside its key and rate.
 - V2 rate responses now include an identity record for the base currency (base equals quote, rate 1), which obeys the `quotes` filter like any other row. Same-currency pairs like `/v2/rate/USD/USD` return 1 instead of 404. (#538)
 
