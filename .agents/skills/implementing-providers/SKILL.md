@@ -26,6 +26,24 @@ Stop and skip the provider if either of these is true:
 
 If the provider has a real archive (downloadable history reaching back years, not just the current snapshot), proceed. Note `coverage_start` from the earliest archive date and continue with the checklist.
 
+### Licence: when terms block a provider
+
+Find the source's terms or legal page and record it as `terms_url` (null if there is none). Read it. A licence blocks a provider only when it explicitly forbids what Frankfurter does: free redistribution of published official rates, with attribution, by a non-commercial open-source service.
+
+**Proceed** on any of these:
+
+- Attribution-only terms.
+- Non-commercial-only clauses. Frankfurter has no paid tier and no API key, so "may be used for non-commercial purposes with acknowledgement" describes us rather than excludes us.
+- Generic "no reproduction or distribution without written permission" boilerplate. Nearly every state-affiliated site carries it; it is aimed at commercial resale of market data, and a published reference rate is an official announcement, not a data product.
+
+In the last case, ship with attribution and send a short courtesy notice to the institution's general contact: who we are, what we republish, and that we will remove it on request. Do not hold the PR on a reply. Quote the clause in the PR's License section so the call is on record.
+
+**Stop** only when the terms single out what we do (free or non-commercial redistribution, aggregators, APIs, automated access) or when the institution has already asked us to stop.
+
+A takedown request is handled like any other provider loss: remove the adapter, seed, cassette and rows, and note it on the provider's issue.
+
+Decided on #608 (CFETS, September 2026). The May 2026 licence closures (#435, #454 and the family they list) predate this rule and should be re-triaged against it.
+
 ## Implementation Checklist
 
 ### 1. Adapter class — `lib/provider/adapters/<key>.rb`
