@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "date"
+
 require "bucket"
 
 # The Bank of Lithuania labels its old-manat series as AZN without restating the values: 1 "AZN" = 0.00063 LTL on
@@ -23,7 +25,7 @@ Sequel.migration do
     # do not exist yet on a fresh database.
     require "blended_rate"
 
-    cutover = "2006-01-09"
+    cutover = Date.new(2006, 1, 9)
     codes = ["AZN", "AZM"]
 
     from(:rates).where(provider: "LB", base: "AZN").where { date < cutover }.update(base: "AZM")
@@ -63,7 +65,7 @@ Sequel.migration do
       from(:currencies).insert(iso_code: code, start_date: global[:start_date], end_date: global[:end_date])
     end
 
-    from(:blended_rates).where(quote: "AZN").where { date < "2006-01-02" }.update(quote: "AZM")
+    from(:blended_rates).where(quote: "AZN").where { date < Date.new(2006, 1, 2) }.update(quote: "AZM")
     BlendedRate.refresh(Date.new(2006, 1, 2)..Date.new(2006, 1, 31))
   end
 
