@@ -12,6 +12,14 @@ class Provider
       BASE_URL = "https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates"
       EUR_ADOPTION = Date.new(2015, 1, 1)
 
+      # LB labels a redenominated currency's whole history with its current code without restating the values: the
+      # 2005-12-30 bulletin quotes 1 "AZN" = 0.00063 LTL, old manat. Each entry maps the current code to its predecessor
+      # and the first date LB's values switch to the successor, which can trail the official date: the manat was
+      # redenominated on 2006-01-01, but LB kept quoting old manat through 2006-01-06 and jumped 5000x on 2006-01-09.
+      PREDECESSORS = {
+        "AZN" => ["AZM", Date.new(2006, 1, 9)],
+      }.freeze
+
       class << self
         def backfill_range = 30
       end
@@ -56,7 +64,7 @@ class Provider
             base_quantity = Float(second_amt)
             next if quote_amt.zero? || base_quantity.zero?
 
-            { date:, base: second_ccy, quote: "LTL", rate: quote_amt / base_quantity }
+            { date:, base: historical_code(second_ccy, date), quote: "LTL", rate: quote_amt / base_quantity }
           else
             rate = Float(second_amt)
             next if rate.zero?
@@ -67,6 +75,11 @@ class Provider
       end
 
       private
+
+      def historical_code(code, date)
+        predecessor, cutover = PREDECESSORS[code]
+        predecessor && date < cutover ? predecessor : code
+      end
 
       def fetch_date(date)
         tp = date < EUR_ADOPTION ? "LT" : "EU"
