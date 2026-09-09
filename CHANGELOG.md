@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-09-09
+
 ### Added
 
 - Bank of Zambia (BOZ) as a data provider. (#389)
@@ -201,7 +203,8 @@ New multi-provider API at `/v2/`. The v1 API is unchanged and remains available 
 - Migrated database storage from PostgreSQL to SQLite.
 - Moved domain to <https://api.frankfurter.dev>.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.3.5...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/lineofflight/frankfurter/compare/v2.3.5...v2.4.0
 [2.3.5]: https://github.com/lineofflight/frankfurter/compare/v2.3.4...v2.3.5
 [2.3.4]: https://github.com/lineofflight/frankfurter/compare/v2.3.3...v2.3.4
 [2.3.3]: https://github.com/lineofflight/frankfurter/compare/v2.3.2...v2.3.3
