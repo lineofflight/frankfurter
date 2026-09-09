@@ -27,7 +27,7 @@ When dispatching parallel tasks (e.g. implementing multiple providers concurrent
 ## 2. Git Worktree & Push Refspec Mechanics
 
 ### The Refspec Mismatch Pitfall
-Herdr and Claude worktrees commonly create local branches with a `worktree-` prefix (e.g. `worktree-cbo`), while the remote branch is named without it (e.g. `cbo-provider`).
+Multi-agent harnesses commonly create local branches with a `worktree-` prefix (e.g. `worktree-cbo`), while the remote branch is named without it (e.g. `cbo-provider`).
 Running a bare `git push --force-with-lease` fails silently with git exit code 128:
 ```
 fatal: The upstream branch of your current branch does not match the name of your current branch.
