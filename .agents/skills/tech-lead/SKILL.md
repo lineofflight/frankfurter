@@ -1,26 +1,25 @@
 ---
 name: tech-lead
-description: Use when orchestrating multiple agents across worktrees or Herdr tabs, managing PR pipelines, handling Copilot review threads, resolving merge conflicts across shared files, and migrating databases safely.
+description: Use when orchestrating multiple agents across worktrees, managing PR pipelines, handling Copilot review threads, resolving merge conflicts across shared files, and migrating databases safely.
 ---
 
 # Tech Lead: Swarm Orchestration & Delivery
 
 Techniques and patterns for directing parallel AI agent swarms, managing git worktree mechanics, resolving cascading PR conflicts, interacting with GitHub review bots, and safely migrating unique-constraint databases.
 
-## 1. Multi-Agent Swarm Orchestration in Herdr
+## 1. Parallel Agent Worktree Orchestration
 
 When dispatching parallel tasks (e.g. implementing multiple providers concurrently):
 
 ### Lifecycle
 1. **Isolated Worktrees**: Every agent gets its own git worktree branched from `origin/main`. Never let agents share the primary checkout.
-2. **Dedicated Herdr Tab**: Launch each agent in its own tab with `HERDR_ENV=1` and an assigned name (e.g. `herdr tab create --name "386-bm"`).
-3. **Continuous Monitoring**: Track agent state with `herdr agent list` and `herdr agent read <name> --source recent-unwrapped --lines 30`.
+2. **Dedicated Workspace**: Run each agent in its own isolated worktree and session.
+3. **Continuous Monitoring**: Track agent progress via git branch commits, PR status, and CI checks.
 4. **Immediate Cleanup**: Once a PR is squash-merged, immediately prune the workspace:
    ```bash
    git worktree unlock .claude/worktrees/<name>
    git worktree remove --force .claude/worktrees/<name>
-   git branch -D worktree-<name>
-   herdr tab close <workspace_id>:<tab_id>
+   git branch -D <branch>
    ```
 
 ---
