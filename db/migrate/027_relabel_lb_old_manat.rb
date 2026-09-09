@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "blended_rate"
 require "bucket"
 
 # The Bank of Lithuania labels its old-manat series as AZN without restating the values: 1 "AZN" = 0.00063 LTL on
@@ -20,6 +19,10 @@ require "bucket"
 #   is recomputed, with the carry-forward lookback past LB's last old-manat row.
 Sequel.migration do
   up do
+    # Loaded here, not at the top: the migrator loads every file before running any, and the models bind to tables that
+    # do not exist yet on a fresh database.
+    require "blended_rate"
+
     cutover = "2006-01-09"
     codes = ["AZN", "AZM"]
 
