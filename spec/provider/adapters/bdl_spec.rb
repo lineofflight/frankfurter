@@ -16,12 +16,16 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { BDL.new }
 
-      # Builds a minimal OLE2/BIFF .xls matching the BdL layout: Period | Currency | Bid | Ask | Mid, newest first.
-      def build_xls(rows, name: "Daily Exchange Rates 2024")
+      # Builds a minimal OLE2/BIFF .xls matching the BdL layout: one sheet per year, each with a header row and then
+      # Period | Currency | Bid | Ask | Mid rows, newest first. Pass a Hash of sheet name to rows for multiple sheets.
+      def build_xls(sheets)
+        sheets = { "Daily Exchange Rates 2024" => sheets } if sheets.is_a?(Array)
         book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(name:)
-        sheet.row(0).replace(["Period", "Currency", "Bid", "Ask", "Mid"])
-        rows.each_with_index { |values, index| sheet.row(index + 1).replace(values) }
+        sheets.each do |name, rows|
+          sheet = book.create_worksheet(name:)
+          sheet.row(0).replace(["Period", "Currency", "Bid", "Ask", "Mid"])
+          rows.each_with_index { |values, index| sheet.row(index + 1).replace(values) }
+        end
         io = StringIO.new
         book.write(io)
         io.string
@@ -56,13 +60,22 @@ class Provider < Sequel::Model(:providers)
         _(usd[:rate]).must_equal(89_500.0)
       end
 
-      it "reaches back across sheets to the start of the 2024 archive" do
-        dataset = adapter.fetch(after: Date.new(2024, 1, 2), upto: Date.new(2024, 1, 3))
-        usd = dataset.find { |r| r[:base] == "USD" && r[:date] == Date.new(2024, 1, 2) }
+      it "reads every sheet in the workbook and filters across them" do
+        xls = build_xls({
+          "Daily Exchange Rates  2025" => [[Date.new(2025, 1, 2), "USD", 89_500.0, 89_500.0, 89_500.0]],
+          "Daily Exchange Rates 2024" => [
+            [Date.new(2024, 12, 30), "USD", 89_500.0, 89_500.0, 89_500.0],
+            [Date.new(2024, 1, 2), "USD", 14_935.0, 15_065.0, 15_000.0],
+          ],
+        })
 
-        _(usd).wont_be_nil
-        # Pre-step rows carry a bid/ask spread; the published mid is 15,000.
-        _(usd[:rate]).must_equal(15_000.0)
+        _(adapter.parse(xls).map { |r| [r[:date], r[:rate]] }).must_equal([
+          [Date.new(2025, 1, 2), 89_500.0],
+          [Date.new(2024, 12, 30), 89_500.0],
+          [Date.new(2024, 1, 2), 15_000.0],
+        ])
+        _(adapter.parse(xls, after: Date.new(2024, 12, 1), upto: Date.new(2025, 1, 1)).map { |r| r[:date] })
+          .must_equal([Date.new(2024, 12, 30)])
       end
 
       it "parses the published mid rather than recomputing it from bid and ask" do
@@ -88,6 +101,16 @@ class Provider < Sequel::Model(:providers)
         ])
 
         _(adapter.parse(xls).size).must_equal(1)
+      end
+
+      it "raises when the same day and currency carry different mids" do
+        xls = build_xls([
+          [Date.new(2025, 11, 17), "USD", 89_500.0, 89_500.0, 89_500.0],
+          [Date.new(2025, 11, 17), "USD", 89_600.0, 89_600.0, 89_600.0],
+        ])
+
+        error = _ { adapter.parse(xls) }.must_raise(RuntimeError)
+        _(error.message).must_include("USD 2025-11-17")
       end
 
       it "raises on a non-OLE2 payload" do

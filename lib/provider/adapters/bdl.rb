@@ -37,10 +37,14 @@ class Provider
         book = Spreadsheet.open(StringIO.new(xls_data.to_s))
         raise "BDL: workbook has no worksheets" if book.worksheets.empty?
 
-        records = book.worksheets.flat_map { |sheet| parse_sheet(sheet, after:, upto:) }
+        records = book.worksheets.flat_map { |sheet| parse_sheet(sheet, after:, upto:) }.uniq
 
-        # The file occasionally repeats a day verbatim (2025-11-17 appears twice in the 2025 sheet).
-        records.uniq { |r| [r[:date], r[:base]] }
+        # The file occasionally repeats a day verbatim (2025-11-17 appears twice in the 2025 sheet). A repeat with a
+        # different mid is a conflict we cannot resolve by row order, so fail loudly rather than pick one.
+        conflicts = records.group_by { |r| [r[:date], r[:base]] }.select { |_, rows| rows.size > 1 }
+        raise "BDL: conflicting rates for #{conflicts.keys.map { |d, b| "#{b} #{d}" }.join(", ")}" if conflicts.any?
+
+        records
       end
 
       private
