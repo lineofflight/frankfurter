@@ -61,6 +61,19 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      it "restores the old ruble code before CBU's first new-ruble bulletin" do
+        json = <<~JSON
+          [
+            {"id":1,"Code":"810","Ccy":"RUB","CcyNm_EN":"Russian Ruble","Nominal":"1000","Rate":"13.46","Diff":"0","Date":"30.12.1997"},
+            {"id":1,"Code":"643","Ccy":"RUB","CcyNm_EN":"Russian Ruble","Nominal":"1","Rate":"13.48","Diff":"0","Date":"06.01.1998"}
+          ]
+        JSON
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["RUR", "RUB"])
+        _(records.first[:rate]).must_be_close_to(0.01346, 1e-9)
+      end
+
       it "skips invalid currency codes" do
         json = <<~JSON
           [{"id":1,"Code":"999","Ccy":"XX","CcyNm_EN":"Invalid","Nominal":"1","Rate":"1.5","Diff":"0","Date":"01.04.2026"}]

@@ -27,6 +27,18 @@ class Provider < Sequel::Model(:providers)
 
         _(sample.size).must_be(:>, 1)
       end
+
+      it "restores the Tajikistani ruble code before the 2000 somoni" do
+        json = [
+          { "exchangedate" => "01.09.2000", "cc" => "TJS", "units" => 1000, "rate" => 2.7776 },
+          { "exchangedate" => "02.12.2002", "cc" => "TJS", "units" => 1, "rate" => 1.805263 },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["TJR", "TJS"])
+        _(records.first[:rate]).must_be_close_to(0.0027776, 1e-9)
+      end
     end
   end
 end

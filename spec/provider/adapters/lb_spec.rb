@@ -82,6 +82,31 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.00063014, 1e-9)
       end
 
+      it "restores the old Turkmen manat code before the 2009 redenomination" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="utf-8"?>
+          <FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>2008-12-31</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>1.7354</Amt></CcyAmt>
+              <CcyAmt><Ccy>TMT</Ccy><Amt>10000</Amt></CcyAmt>
+            </FxRate>
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>2009-01-01</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>8.6770</Amt></CcyAmt>
+              <CcyAmt><Ccy>TMT</Ccy><Amt>10</Amt></CcyAmt>
+            </FxRate>
+          </FxRates>
+        XML
+
+        records = adapter.parse(xml)
+
+        _(records.map { |r| r[:base] }).must_equal(["TMM", "TMT"])
+        _(records.first[:rate]).must_be_close_to(0.00017354, 1e-9)
+      end
+
       it "parses EU-type XML with correct base and quote" do
         xml = <<~XML
           <?xml version="1.0" encoding="utf-8"?>

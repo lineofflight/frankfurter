@@ -82,11 +82,6 @@ class Provider
 
       private
 
-      def historical_code(code, date)
-        predecessor, cutover = PREDECESSORS[code]
-        predecessor && date < cutover ? predecessor : code
-      end
-
       def text(node, name)
         node.locate(name).first&.text.to_s.strip
       end

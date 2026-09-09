@@ -56,6 +56,17 @@ class Provider < Sequel::Model(:providers)
         _(records.map { |r| r[:base] }).must_equal(["XEU", "EUR"])
       end
 
+      it "relabels pre-1998 RUB observations as the old ruble (RUR)" do
+        json = [
+          { "seriesId" => "SEKRUBPMI", "date" => "1997-12-30", "value" => 0.0013 },
+          { "seriesId" => "SEKRUBPMI", "date" => "1998-01-02", "value" => 1.326 },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["RUR", "RUB"])
+      end
+
       it "filters out SEKETT identity rate" do
         json = [
           { "seriesId" => "SEKETT", "date" => "2026-03-24", "value" => 1.0 },

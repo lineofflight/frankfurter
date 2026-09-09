@@ -12,10 +12,14 @@ class Provider
     class RB < Adapter
       BASE_URL = "https://api.riksbank.se/swea/v1/Observations/ByGroup/130"
 
-      # The euro succeeded the ECU 1:1 on its first quoting day, 1999-01-04. The Riksbank backfills its EUR series with
-      # ECU values before then; relabel those to the ECU's ISO code (XEU) so they stay out of the euro series, matching
-      # how the BdP and AMCM adapters label the same data.
-      EURO_INCEPTION = Date.new(1999, 1, 4)
+      # The Riksbank backfills a successor's series with its predecessor's values. The euro succeeded the ECU 1:1 on its
+      # first quoting day, 1999-01-04; earlier EUR observations are the ECU (XEU), matching how the BdP and AMCM
+      # adapters label the same data. The RUB series is not restated across the 1998 redenomination: 0.0013 SEK on
+      # 1997-12-30, 1.326 on 1998-01-02, so earlier rows are old ruble (RUR).
+      PREDECESSORS = {
+        "EUR" => ["XEU", Date.new(1999, 1, 4)],
+        "RUB" => ["RUR", Date.new(1998, 1, 1)],
+      }.freeze
 
       class << self
         def backfill_range = 365
@@ -43,9 +47,8 @@ class Provider
           next if rate.zero?
 
           date = Date.parse(date_str)
-          currency = "XEU" if currency == "EUR" && date < EURO_INCEPTION
 
-          { date:, base: currency, quote: "SEK", rate: }
+          { date:, base: historical_code(currency, date), quote: "SEK", rate: }
         end
       end
     end

@@ -67,6 +67,22 @@ class Provider < Sequel::Model(:providers)
           _(rates).must_be_empty
         end
 
+        it "restores the cruzeiro real code before the 1994 Real Plan" do
+          json = {
+            Codigo: 0,
+            Series: {
+              Obs: [
+                { indexDateString: "30-06-1994", value: "0.16", statusCode: "OK" },
+                { indexDateString: "01-07-1994", value: "418.34", statusCode: "OK" },
+              ],
+            },
+          }.to_json
+
+          rates = adapter.parse(json, "BRL")
+
+          _(rates.map { |r| r[:base] }).must_equal(["BRR", "BRL"])
+        end
+
         it "handles comma-formatted numbers" do
           json = {
             Codigo: 0,
