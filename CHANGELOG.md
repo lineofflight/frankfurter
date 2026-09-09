@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Azerbaijani manat (AZN) no longer reports history back to 1994. The Bank of Lithuania (LB) labels its old-manat quotes as AZN through 2006-01-06; those rows are now stored as old manat (AZM). A migration relabels the stored rows.
+- Six more currencies no longer report predecessor values under their current code: Turkmenistani manat (TMT) from LB before 2009, Zambian kwacha (ZMW) from SARB before 2013, Russian ruble (RUB) from the Riksbank and CBU before 1998, Brazilian real (BRL) from BCCH before July 1994, and Tajikistani somoni (TJS) from CBR and NBU before November 2000. Those rows are now stored under the predecessor codes (TMM, ZMK, RUR, BRR, TJR), and the blended series for the affected years are recomputed. (#623)
 
 - Restored Central Bank of Egypt (CBE) rates, stalled since 2026-07-22 after the bank's WAF began rejecting requests without an Accept header. Adapters now send `Accept: */*` by default. (#576)
 - Restored Banca Națională a României (BNR) rates, stalled since 2026-08-05 after the bank relaunched its site and moved the XML feeds to curs.bnr.ro. (#580)

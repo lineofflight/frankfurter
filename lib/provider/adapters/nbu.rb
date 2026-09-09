@@ -10,6 +10,12 @@ class Provider
     class NBU < Adapter
       URL = "https://bank.gov.ua/NBU_Exchange/exchange_site"
 
+      # The TJS series starts in 1999 under the Tajikistani ruble, which the somoni replaced at 1000:1 on 2000-10-30,
+      # and is not restated: 1000 "TJS" = 2.78 UAH on 2000-09-01 against 1 TJS = 1.81 in 2002. Earlier rows are TJR.
+      PREDECESSORS = {
+        "TJS" => ["TJR", Date.new(2000, 10, 30)],
+      }.freeze
+
       class << self
         def backfill_range = 365
       end
@@ -40,7 +46,7 @@ class Provider
           rate = row.fetch("rate").to_f
           next if rate.zero? || units.zero?
 
-          { date:, base: iso, quote: "UAH", rate: rate / units }
+          { date:, base: historical_code(iso, date), quote: "UAH", rate: rate / units }
         end
       end
     end

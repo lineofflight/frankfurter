@@ -37,6 +37,12 @@ class Provider
         "EXCB118D" => ["ZAR", "KRW"],
       }.freeze
 
+      # The kwacha series runs under ZMW from 2000 without restating the 2013 rebasing: 612.34 per rand on 2012-12-31,
+      # 0.6188 on 2013-01-02. Rows before the rebasing are old kwacha.
+      PREDECESSORS = {
+        "ZMW" => ["ZMK", Date.new(2013, 1, 1)],
+      }.freeze
+
       class << self
         def backfill_range = 365
       end
@@ -62,7 +68,7 @@ class Provider
           next if rate.zero?
 
           date = Date.parse(obs["Period"])
-          { date:, base:, quote:, rate: }
+          { date:, base: historical_code(base, date), quote: historical_code(quote, date), rate: }
         end
       end
 

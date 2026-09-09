@@ -11,6 +11,13 @@ class Provider
     class CBU < Adapter
       URL = "https://cbu.uz/en/arkhiv-kursov-valyut/json/all/"
 
+      # The RUB series is not restated across the 1998 redenomination: 1000 "RUB" = 13.46 UZS in the 1997-12-30
+      # bulletin, 1 RUB = 13.48 in the next one on 1998-01-06, CBU's first new-ruble bulletin. Earlier rows are old
+      # ruble (RUR).
+      PREDECESSORS = {
+        "RUB" => ["RUR", Date.new(1998, 1, 6)],
+      }.freeze
+
       class << self
         def backfill_range = 30
       end
@@ -46,7 +53,7 @@ class Provider
 
           date = Date.strptime(row["Date"], "%d.%m.%Y")
 
-          { date:, base: code, quote: "UZS", rate: rate / nominal }
+          { date:, base: historical_code(code, date), quote: "UZS", rate: rate / nominal }
         end
       end
 

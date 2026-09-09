@@ -48,6 +48,22 @@ class Provider < Sequel::Model(:providers)
         metals.each { |r| _(r[:quote]).must_equal("RUB") }
       end
 
+      it "restores the Tajikistani ruble code before the 2000 somoni" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="windows-1251"?>
+          <ValCurs ID="R01670" DateRange1="01.09.2000" DateRange2="01.11.2000" name="Foreign Currency Market Dynamic">
+            <Record Date="01.09.2000" Id="R01670"><Nominal>1000</Nominal><Value>14,1700</Value></Record>
+            <Record Date="01.11.2000" Id="R01670"><Nominal>1</Nominal><Value>12,6500</Value></Record>
+          </ValCurs>
+        XML
+
+        records = adapter.parse_dynamic(xml, "TJS")
+
+        _(records.map { |r| r[:base] }).must_equal(["TJR", "TJS"])
+        _(records.first[:rate]).must_be_close_to(0.01417, 1e-9)
+        _(records.last[:rate]).must_be_close_to(12.65, 1e-9)
+      end
+
       it "normalizes metal rates from RUB-per-gram to RUB-per-troy-ounce" do
         xml = <<~XML
           <?xml version="1.0" encoding="windows-1251"?>

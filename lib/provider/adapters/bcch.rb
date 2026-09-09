@@ -23,6 +23,12 @@ class Provider
         "F072.CLP.BRL.N.O.D" => "BRL",
       }.freeze
 
+      # The BRL series starts in January 1994 under the cruzeiro real, six months before the real existed, and is not
+      # restated: 0.16 CLP on 1994-06-30, 418.34 on 1994-07-01. Rows before the Real Plan are cruzeiro real (BRR).
+      PREDECESSORS = {
+        "BRL" => ["BRR", Date.new(1994, 7, 1)],
+      }.freeze
+
       class << self
         def api_key = ENV["BCCH_USER"] || raise("no API key")
       end
@@ -55,7 +61,7 @@ class Provider
           next if rate.zero?
 
           date = Date.strptime(obs["indexDateString"], "%d-%m-%Y")
-          { date:, base:, quote: "CLP", rate: }
+          { date:, base: historical_code(base, date), quote: "CLP", rate: }
         end
       end
 

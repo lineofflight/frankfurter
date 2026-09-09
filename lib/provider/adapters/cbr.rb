@@ -21,11 +21,30 @@ class Provider
         "4" => "XPD",
       }.freeze
 
+      # XML_dynamic serves a currency's whole history under its current code. The TJS series is not restated across the
+      # 2000-10-30 introduction of the somoni: 1000 "TJS" = 13.54 RUB on 2000-10-01, 1 TJS = 12.65 on 2000-11-01.
+      # Earlier rows are Tajikistani ruble (TJR).
+      PREDECESSORS = {
+        "TJS" => ["TJR", Date.new(2000, 10, 30)],
+      }.freeze
+
       def fetch(after:, upto: nil)
         end_date = upto || Date.today
         currencies = fetch_currency_list
         fx = currencies.flat_map { |id, code| fetch_dynamic(id, code, after, end_date) }
         fx + fetch_metals(after, end_date)
+      end
+
+      def parse_dynamic(xml, code)
+        Ox.load(xml).locate("ValCurs/Record").filter_map do |row|
+          date = Date.strptime(row[:Date], "%d.%m.%Y")
+          next if date.saturday? || date.sunday?
+
+          rate = extract_rate(row)
+          next unless rate
+
+          { date:, base: historical_code(code, date), quote: "RUB", rate: }
+        end
       end
 
       def parse_metals(xml)
@@ -74,15 +93,7 @@ class Provider
           VAL_NM_RQ: valute_id,
         },).to_s
 
-        Ox.load(response).locate("ValCurs/Record").filter_map do |row|
-          date = Date.strptime(row[:Date], "%d.%m.%Y")
-          next if date.saturday? || date.sunday?
-
-          rate = extract_rate(row)
-          next unless rate
-
-          { date:, base: code, quote: "RUB", rate: }
-        end
+        parse_dynamic(response, code)
       end
 
       def extract_rate(node)

@@ -12,6 +12,12 @@ class Provider < Sequel::Model(:providers)
       # gram multiply by this to convert into the per-ounce convention used across the app.
       GRAMS_PER_TROY_OUNCE = 31.1034768
 
+      # Sources often label a redenominated currency's whole history with its current ISO code without restating the
+      # values, so the old rows carry the predecessor's magnitudes under the successor's code. An adapter that sees this
+      # overrides PREDECESSORS, mapping the current code to its predecessor and the first date the source's values are
+      # in the successor unit, which can trail the official date. historical_code applies the map per row.
+      PREDECESSORS = {}.freeze
+
       # Raises on any response that is not 2xx. Stricter than http.rb's built-in raise_error feature (>= 400 only): a
       # redirect from a moved or retired page must fail loudly, not parse as an empty day. 429 passes through so the
       # client's retriable layer can honor Retry-After; exhaustion raises HTTP::OutOfRetriesError, so no 429 reaches an
@@ -59,6 +65,11 @@ class Provider < Sequel::Model(:providers)
       end
 
       private
+
+      def historical_code(code, date)
+        predecessor, cutover = self.class::PREDECESSORS[code]
+        predecessor && date < cutover ? predecessor : code
+      end
 
       # Many sources publish a buy and a sell price rather than a reference rate, so the mid is our own synthesis, with
       # no published digits of its own to echo. Binary floats leave noise at the bottom of it, because the error is in

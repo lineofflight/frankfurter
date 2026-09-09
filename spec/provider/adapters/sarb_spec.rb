@@ -40,6 +40,15 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 3, 24))
       end
 
+      it "restores the old kwacha code before the 2013 rebasing" do
+        json = '[{"Period":"2013-01-02T00:00:00","Value":0.6188},{"Period":"2012-12-31T00:00:00","Value":612.3404}]'
+
+        records = adapter.parse(json, base: "ZAR", quote: "ZMW")
+
+        _(records.map { |r| r[:quote] }).must_equal(["ZMW", "ZMK"])
+        _(records.map { |r| r[:base] }.uniq).must_equal(["ZAR"])
+      end
+
       it "skips zero values" do
         json = '[{"Period":"2026-03-24T00:00:00","Value":0}]'
 
