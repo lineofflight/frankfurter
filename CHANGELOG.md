@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Central Bank of Kuwait (CBKKW) as a data provider. Daily reference rates for ~135 currencies against the Kuwaiti dinar (KWD), majors from 2008-01-02 and most others from 2017-06-18. (#447)
 - Banque du Liban (BdL) as a data provider. Daily official rates for USD, EUR, GBP, JPY, CHF, AUD and CAD against the Lebanese pound (LBP), from 2024-01-02. (#381)
 - Central Bank of Seychelles (CBSSC) as a data provider. Daily consolidated mid rates of authorised dealers for USD, EUR and GBP against the Seychellois rupee (SCR), from 2000-01-04. (#404)
+- Central Bank of Oman (CBO) as a data provider. Daily buy/sell mid rates for 44 currencies, gold, silver and platinum per ounce, and the SDR against the Omani rial (OMR), from 2017-10-15. (#448)
 - Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. Daily official bulletin rates for ~40 currencies and four precious metals against the Azerbaijani manat (AZN), from 1993-11-25. Bulletins before the 2006 redenomination are stored as old manat (AZM). (#606)
 - Central Bank of Trinidad and Tobago (CBTT) as a data provider. Daily weighted average dealer rates for 8 currencies against the Trinidad and Tobago dollar (TTD), from 1991-01-31. (#378)
 - China Foreign Exchange Trade System (CFETS) as a data provider, publishing the daily RMB central parity rate for 25 pairs against CNY since 2006. (#605)
