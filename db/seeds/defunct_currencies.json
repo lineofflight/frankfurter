@@ -31,6 +31,13 @@
     "note": "Redenomination of the Belarusian ruble effective 1 July 2016 per Presidential Edict No. 450 of 4 November 2015."
   },
   {
+    "iso_code": "CUC",
+    "terminal_date": "2021-01-01",
+    "successor": "CUP",
+    "source": "https://en.wikipedia.org/wiki/Cuban_convertible_peso",
+    "note": "Cuba unified its dual currency on 1 January 2021, withdrawing the convertible peso at 1 CUC = 24 CUP. BCV keeps listing CUC at USD parity."
+  },
+  {
     "iso_code": "DEM",
     "terminal_date": "2002-01-01",
     "successor": "EUR",
