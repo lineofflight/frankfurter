@@ -9,6 +9,7 @@ require "versions/v1"
 require "versions/v2"
 
 class App < Roda
+  use Versions::V1::Deprecation
   use RequestTimeout
   use NoStoreOnError
   use Rack::Cors do

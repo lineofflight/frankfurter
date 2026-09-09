@@ -31,8 +31,94 @@ describe App do
     json = Oj.load(last_response.body)
 
     _(json["version"]).must_equal("v1")
-    _(json["status"]).must_equal("frozen")
+    _(json["status"]).must_equal("deprecated")
     _(json["openapi"]).must_equal("/v1/openapi.json")
+    _(json["docs"]).must_equal("https://frankfurter.dev/v1/")
+  end
+
+  describe "v1 deprecation headers" do
+    [
+      ["/v1", "/v2", 200],
+      ["/v1/", "/v2", 200],
+      ["/v1/currencies", "/v2/currencies", 200],
+      ["/v1/latest", "/v2/rates", 200],
+      ["/v1/current", "/v2/rates", 200],
+      ["/v1/latest?from=USD&to=GBP&amount=2", "/v2/rates", 200],
+      ["/v1/#{Fixtures.business_day(30)}", "/v2/rates", 200],
+      ["/v1/#{Fixtures.business_day(30)}..#{Fixtures.latest_date}", "/v2/rates", 200],
+      ["/v1/#{Fixtures.business_day(30)}..", "/v2/rates", 200],
+      ["/v1/openapi.json", "/v2/openapi.json", 200],
+      ["/v1/nonexistent", "/v2/rates", 404],
+      ["/v1/1000-01-01", "/v2/rates", 404],
+      ["/v1/latest?amount=invalid", "/v2/rates", 422],
+    ].each do |path, successor, status|
+      it "links #{path} to its successor" do
+        get path
+
+        _(last_response.status).must_equal(status)
+        _(headers["Deprecation"]).must_equal("@1779103800")
+        _(headers["Link"]).must_equal(%(<https://api.frankfurter.dev#{successor}>; rel="successor-version"))
+      end
+    end
+
+    it "includes headers on HEAD responses" do
+      [
+        ["/v1", "/v2", 200],
+        ["/v1/", "/v2", 404],
+        ["/v1/currencies", "/v2/currencies", 200],
+        ["/v1/latest", "/v2/rates", 200],
+        ["/v1/openapi.json", "/v2/openapi.json", 200],
+      ].each do |path, successor, status|
+        head path
+
+        _(last_response.status).must_equal(status)
+        _(last_response.headers["Deprecation"]).must_equal("@1779103800")
+        _(last_response["Link"]).must_equal(%(<https://api.frankfurter.dev#{successor}>; rel="successor-version"))
+      end
+    end
+
+    it "includes headers on conditional responses" do
+      [
+        ["/v1/currencies", "/v2/currencies"],
+        ["/v1/latest", "/v2/rates"],
+        ["/v1/current", "/v2/rates"],
+        ["/v1/#{Fixtures.business_day(30)}", "/v2/rates"],
+        ["/v1/#{Fixtures.business_day(30)}..", "/v2/rates"],
+      ].each do |path, successor|
+        get path
+        get path, {}, "HTTP_IF_NONE_MATCH" => last_response.headers["ETag"]
+
+        _(last_response.status).must_equal(304)
+        _(last_response.body).must_be_empty
+        _(last_response.headers["Deprecation"]).must_equal("@1779103800")
+        _(last_response["Link"]).must_equal(%(<https://api.frankfurter.dev#{successor}>; rel="successor-version"))
+      end
+    end
+
+    it "includes headers on CORS preflight responses" do
+      [
+        ["/v1", "/v2"],
+        ["/v1/currencies", "/v2/currencies"],
+        ["/v1/latest", "/v2/rates"],
+        ["/v1/openapi.json", "/v2/openapi.json"],
+      ].each do |path, successor|
+        options path, {}, "HTTP_ORIGIN" => "https://example.com", "HTTP_ACCESS_CONTROL_REQUEST_METHOD" => "GET"
+
+        _(last_response).must_be(:ok?)
+        _(last_response.headers["Access-Control-Allow-Origin"]).must_equal("*")
+        _(last_response.headers["Deprecation"]).must_equal("@1779103800")
+        _(last_response["Link"]).must_equal(%(<https://api.frankfurter.dev#{successor}>; rel="successor-version"))
+      end
+    end
+
+    it "does not deprecate other routes" do
+      ["/", "/v2", "/v2/currencies", "/v2/rates", "/v2/openapi.json", "/v10/latest", "/nonexistent"].each do |path|
+        get path
+
+        _(last_response.headers["Deprecation"]).must_be_nil
+        _(last_response.headers["Link"]).must_be_nil
+      end
+    end
   end
 
   it "serves v2 root" do
