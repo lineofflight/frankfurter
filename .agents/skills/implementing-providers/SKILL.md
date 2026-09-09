@@ -96,6 +96,24 @@ The base class provides a private `http` method (an `HTTP::Client` from the `htt
   - `http.persistent(BASE_URL) { |client| ... }` for endpoints that misbehave across separate connections, or where you want exact parity with a legacy single-connection flow (see `lib/provider/adapters/bota.rb`).
   - Cookie-based login legs: read `response.headers.get("Set-Cookie")` off the first response and forward it on the next request (see `lib/provider/adapters/cbe.rb`, `mas.rb`, `bi.rb`, `nbc.rb`).
 
+#### Redenominated and relabelled currencies
+
+Archives often label a currency's whole history with its current ISO code. Before trusting a code, dump one file per year and look for a 1000x-plus jump in a value at a known redenomination date. Two flavours, handled differently:
+
+- **Restated series.** The source converted old values into the successor unit. ECB and TCMB publish pre-2005 TRY as TRL divided by a million, so 2004 reads `EUR/TRY 1.829`. Relay as published: it is what the issuing bank itself reports, and the series is continuous.
+- **Relabelled only.** The values are the predecessor's magnitudes under the successor code. CBAR's 2005-12-30 file quotes `1 USD = 4593 "AZN"`, old manat; LB's AZN series is the same. Map the code back to the predecessor by date in the adapter with a `PREDECESSORS` table (see `lib/provider/adapters/cbar.rb`, `lb.rb`):
+  ```ruby
+  PREDECESSORS = { "AZN" => ["AZM", Date.new(2006, 1, 9)] }.freeze
+  ```
+  Key each entry on the *source's* switch date, which can trail the official one (LB kept quoting old manat until 2006-01-09), and verify it against the rows either side. Check the nominal at the same time: CBAR's TRL rows say Nominal 1 but price 1000 TRL.
+
+Two registries back this up:
+
+- `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
+- `db/seeds/nascent_currencies.json` records when a successor came into being. Once listed, rows dated earlier are rejected on ingest and `rake db:purge_invalid` clears stored ones. Add the successor only for the relabelled flavour: a guard would throw away restated series that other providers publish legitimately.
+
+Non-ISO labels (`SDR` for XDR) go through an `ALIASES` map rather than the predecessor table.
+
 ### 2. Tests — `spec/provider/adapters/<key>_spec.rb`
 
 Follow the pattern in `spec/provider/adapters/boi_spec.rb` or `spec/provider/adapters/bccr_spec.rb`:
