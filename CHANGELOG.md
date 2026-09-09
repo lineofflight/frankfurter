@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. Daily official bulletin rates for ~40 currencies and four precious metals against the Azerbaijani manat (AZN), from 1993-11-25. Bulletins before the 2006 redenomination are stored as old manat (AZM). (#606)
+
 ### Changed
 
 - V2 rates now carry one canonical value per dated row: latest, single-date, and range responses agree by construction. Previously the same row could read differently depending on the request shape: when it was asked, where a range started, or which base or `quotes` filter applied. Range queries combining `providers=` with a pegged base now return empty, matching single-date behavior. (#570, #573)
