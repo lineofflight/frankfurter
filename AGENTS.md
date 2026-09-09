@@ -278,6 +278,20 @@ Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
 - Migrations in `db/migrate/`
 - Update `CHANGELOG.md` for changes that directly impact user experience
 
+### Git Commits
+
+- Write in the imperative mood, present tense ("Add provider", "Fix rounding").
+- Keep subject lines under 72 characters.
+- Body explains the rationale and non-obvious context, keeping sentences tight.
+- Reference issues on the final line (`closes #123`).
+
+### Changelog (`CHANGELOG.md`)
+
+- **Audience**: API consumers only. Omit internal plumbing (CI, Docker, refactors, scraper error handling).
+- **Brevity**: One concise sentence per entry. Do not list currency baskets, date ranges, or implementation minutiae.
+- **Sections**: Group strictly under Keep a Changelog headers (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`). Never duplicate headers.
+- **Citations**: Suffix entries with bare issue or PR numbers in parentheses (`(#123)`). Do not format them as markdown links.
+
 ### Recovering from a shared tree
 
 See [Before You Write Code](#before-you-write-code) for the rule. This is what to
