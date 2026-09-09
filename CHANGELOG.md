@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - China Foreign Exchange Trade System (CFETS) as a data provider, publishing the daily RMB central parity rate for 25 pairs against CNY since 2006. (#605)
 - Palestine Monetary Authority (PMA) as a data provider. Daily mid rates for 25 pairs, the currencies circulating in Palestine (ILS, JOD, USD) plus USD crosses for the majors, the Gulf currencies, gold and silver, from 2020-09-01. (#454)
 - Banque Centrale du Congo (BCCCD) as a data provider. Daily indicative mid rates for 21 currencies against the Congolese franc (CDF), with ten majors daily from 2020-10-12 and the rest of the basket, including the African neighbours (AOA, BIF, RWF, TZS, UGX, XAF, ZMW), weekly from 2021-02-24 and daily from late August 2025. (#398)
+- Banco de Mocambique (BM) as a data provider. Daily reference rates for 19 currencies against the Mozambican metical (MZN), parsed from the bank's PDF bulletins, from 2018-01-02. (#386)
 
 ### Changed
 
