@@ -29,6 +29,19 @@ describe PegAnchor do
 
       _(aed[:providers]).must_equal([{ key: "ECB", rate: 3.67, excluded: true }])
     end
+
+    it "leaves blended rates untouched before the peg start date" do
+      old_date = Date.parse("2014-06-02")
+      blended = [
+        { date: old_date, base: "USD", quote: "TMT", rate: 2.85, providers: [{ key: "CBR", rate: 2.85 }] },
+      ]
+
+      result = PegAnchor.apply(blended, base: "USD")
+      tmt = result.find { |r| r[:quote] == "TMT" }
+
+      _(tmt[:rate]).must_equal(2.85)
+      _(tmt[:providers]).must_equal([{ key: "CBR", rate: 2.85 }])
+    end
   end
 
   describe "cross-base peg substitution" do

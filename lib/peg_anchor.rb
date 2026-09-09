@@ -51,6 +51,7 @@ class PegAnchor
   def anchor_quote(row)
     peg = Peg.find(row[:quote])
     return row unless peg
+    return row if row[:date] < peg.since
 
     rate = if peg.base == @base
              peg.rate
