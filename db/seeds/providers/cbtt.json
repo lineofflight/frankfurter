@@ -1,0 +1,12 @@
+{
+  "key": "CBTT",
+  "name": "Central Bank of Trinidad and Tobago",
+  "country_code": "TT",
+  "rate_type": "weighted average",
+  "pivot_currency": "TTD",
+  "data_url": "https://www.central-bank.org.tt/statistics/data-centre/",
+  "terms_url": "https://www.central-bank.org.tt/copyright-notice/",
+  "publish_schedule": "*/30 21-23 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1991-01-31"
+}
