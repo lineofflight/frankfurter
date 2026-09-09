@@ -1,0 +1,286 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.bcc.cd/marche-des-changes/cours-de-change
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Rsc:
+      - '1'
+      Connection:
+      - close
+      Host:
+      - www.bcc.cd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 09 Sep 2026 12:55:02 GMT
+      Content-Type:
+      - text/x-component
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Cache-Control:
+      - no-store, must-revalidate
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Vary:
+      - rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+      Content-Security-Policy:
+      - 'default-src ''self''; img-src ''self'' data: blob: https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro https:; script-src ''self'' ''unsafe-inline''
+        https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src
+        ''self'' ''unsafe-inline''; font-src ''self'' data:; connect-src ''self''
+        http://localhost:9000 https://*.r2.dev https://cloudflareinsights.com https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro; media-src ''self'' data: https:;
+        frame-src ''self'' https://challenges.cloudflare.com https://www.google.com
+        https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com
+        https://resources.bcc.cd https://resources.pulsarinteractive.pro; frame-ancestors
+        ''none''; base-uri ''self''; form-action ''self''; object-src ''none''; upgrade-insecure-requests'
+      Permissions-Policy:
+      - camera=(), microphone=(), geolocation=(), interest-cohort=()
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      X-Opennext:
+      - '1'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a386584dea82feb8-AMS
+    body:
+      encoding: ASCII-8BIT
+      string: '0:["$","div",null,{"content":{"history":{"USD":[{"date":"2026-09-01","buy":2212.52,"average":2263.57,"sell":2314.62,"unit":1},{"date":"2026-09-02","buy":2212.94,"average":2264,"sell":2315.06,"unit":1},{"date":"2026-09-03","buy":2212.75,"average":2263.8,"sell":2314.85,"unit":1},{"date":"2026-09-04","buy":2210.79,"average":2261.8,"sell":2312.81,"unit":1}],"EUR":[{"date":"2026-09-01","buy":2566.23,"average":2625.44,"sell":2684.65,"unit":1},{"date":"2026-09-02","buy":2566.89,"average":2626.12,"sell":2685.34,"unit":1},{"date":"2026-09-03","buy":2561.8,"average":2620.91,"sell":2680.02,"unit":1},{"date":"2026-09-04","buy":2566.53,"average":2625.75,"sell":2684.97,"unit":1}],"GBP":[{"date":"2026-09-01","buy":2997.24,"average":3066.39,"sell":3135.55,"unit":1},{"date":"2026-09-02","buy":2995.43,"average":3064.55,"sell":3133.66,"unit":1},{"date":"2026-09-03","buy":2989.55,"average":3058.53,"sell":3127.5,"unit":1},{"date":"2026-09-04","buy":2984.55,"average":3053.41,"sell":3122.27,"unit":1}],"CNY":[{"date":"2026-09-01","buy":329.24,"average":336.84,"sell":344.43,"unit":1},{"date":"2026-09-02","buy":329.34,"average":336.94,"sell":344.54,"unit":1},{"date":"2026-09-03","buy":329.16,"average":336.76,"sell":344.35,"unit":1},{"date":"2026-09-04","buy":329.3,"average":336.9,"sell":344.49,"unit":1}],"CHF":[{"date":"2026-09-01","buy":2737.33,"average":2800.49,"sell":2863.65,"unit":1},{"date":"2026-09-02","buy":2732.25,"average":2795.3,"sell":2858.34,"unit":1},{"date":"2026-09-03","buy":2721.31,"average":2784.1,"sell":2846.89,"unit":1},{"date":"2026-09-04","buy":2732.66,"average":2795.71,"sell":2858.76,"unit":1}],"JPY":[{"date":"2026-09-01","buy":13.86,"average":14.18,"sell":14.5,"unit":1},{"date":"2026-09-02","buy":13.83,"average":14.15,"sell":14.47,"unit":1},{"date":"2026-09-03","buy":13.86,"average":14.18,"sell":14.5,"unit":1},{"date":"2026-09-04","buy":14.07,"average":14.4,"sell":14.72,"unit":1}],"CAD":[{"date":"2026-09-01","buy":1591.98,"average":1628.71,"sell":1665.45,"unit":1},{"date":"2026-09-02","buy":1595.69,"average":1632.51,"sell":1669.33,"unit":1},{"date":"2026-09-03","buy":1589,"average":1625.67,"sell":1662.33,"unit":1},{"date":"2026-09-04","buy":1599.74,"average":1636.65,"sell":1673.56,"unit":1}],"AUD":[{"date":"2026-09-01","buy":1584.15,"average":1620.7,"sell":1657.25,"unit":1},{"date":"2026-09-02","buy":1583.97,"average":1620.52,"sell":1657.06,"unit":1},{"date":"2026-09-03","buy":1581.15,"average":1617.63,"sell":1654.11,"unit":1},{"date":"2026-09-04","buy":1586.01,"average":1622.6,"sell":1659.2,"unit":1}],"AED":[{"date":"2026-09-01","buy":602.46,"average":616.36,"sell":630.26,"unit":1},{"date":"2026-09-02","buy":602.85,"average":616.76,"sell":630.67,"unit":1},{"date":"2026-09-03","buy":602.52,"average":616.42,"sell":630.32,"unit":1},{"date":"2026-09-04","buy":602.37,"average":616.27,"sell":630.17,"unit":1}],"AOA":[{"date":"2026-09-01","buy":2.42,"average":2.48,"sell":2.54,"unit":1},{"date":"2026-09-02","buy":2.41,"average":2.47,"sell":2.53,"unit":1},{"date":"2026-09-03","buy":2.41,"average":2.47,"sell":2.53,"unit":1},{"date":"2026-09-04","buy":2.41,"average":2.47,"sell":2.53,"unit":1}],"BIF":[{"date":"2026-09-01","buy":0.74,"average":0.75,"sell":0.77,"unit":1},{"date":"2026-09-02","buy":0.74,"average":0.76,"sell":0.77,"unit":1},{"date":"2026-09-03","buy":0.74,"average":0.76,"sell":0.77,"unit":1},{"date":"2026-09-04","buy":0.74,"average":0.76,"sell":0.77,"unit":1}],"INR":[{"date":"2026-09-01","buy":23.24,"average":23.78,"sell":24.31,"unit":1},{"date":"2026-09-02","buy":23.34,"average":23.88,"sell":24.42,"unit":1},{"date":"2026-09-03","buy":23.31,"average":23.85,"sell":24.39,"unit":1},{"date":"2026-09-04","buy":23.42,"average":23.96,"sell":24.5,"unit":1}],"KWD":[{"date":"2026-09-01","buy":7160.93,"average":7326.16,"sell":7491.38,"unit":1},{"date":"2026-09-02","buy":7162.09,"average":7327.34,"sell":7492.59,"unit":1},{"date":"2026-09-03","buy":7154.74,"average":7319.82,"sell":7484.9,"unit":1},{"date":"2026-09-04","buy":7158.53,"average":7323.7,"sell":7488.87,"unit":1}],"RWF":[{"date":"2026-09-01","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-02","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-03","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-04","buy":1.5,"average":1.54,"sell":1.57,"unit":1}],"SAR":[{"date":"2026-09-01","buy":590.01,"average":603.62,"sell":617.23,"unit":1},{"date":"2026-09-02","buy":590.38,"average":604.01,"sell":617.63,"unit":1},{"date":"2026-09-03","buy":590.06,"average":603.68,"sell":617.29,"unit":1},{"date":"2026-09-04","buy":589.95,"average":603.57,"sell":617.18,"unit":1}],"TZS":[{"date":"2026-09-01","buy":0.84,"average":0.85,"sell":0.87,"unit":1},{"date":"2026-09-02","buy":0.84,"average":0.86,"sell":0.87,"unit":1},{"date":"2026-09-03","buy":0.83,"average":0.85,"sell":0.87,"unit":1},{"date":"2026-09-04","buy":0.84,"average":0.86,"sell":0.87,"unit":1}],"UGX":[{"date":"2026-09-01","buy":0.58,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-02","buy":0.59,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-03","buy":0.59,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-04","buy":0.59,"average":0.6,"sell":0.61,"unit":1}],"XAF":[{"date":"2026-09-01","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-02","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-03","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-04","buy":3.91,"average":4,"sell":4.09,"unit":1}],"XDR":[{"date":"2026-09-01","buy":3034.05,"average":3104.06,"sell":3174.06,"unit":1},{"date":"2026-09-02","buy":3030.7,"average":3100.63,"sell":3170.55,"unit":1},{"date":"2026-09-03","buy":3027.98,"average":3097.85,"sell":3167.71,"unit":1},{"date":"2026-09-04","buy":3024.94,"average":3094.74,"sell":3164.53,"unit":1}],"ZAR":[{"date":"2026-09-01","buy":137.23,"average":140.39,"sell":143.56,"unit":1},{"date":"2026-09-02","buy":137.23,"average":140.39,"sell":143.56,"unit":1},{"date":"2026-09-03","buy":137.09,"average":140.26,"sell":143.42,"unit":1},{"date":"2026-09-04","buy":137.57,"average":140.74,"sell":143.92,"unit":1}],"ZMW":[{"date":"2026-09-01","buy":116.45,"average":119.14,"sell":121.83,"unit":1},{"date":"2026-09-02","buy":115.54,"average":118.21,"sell":120.87,"unit":1},{"date":"2026-09-03","buy":115.89,"average":118.56,"sell":121.24,"unit":1},{"date":"2026-09-04","buy":115.74,"average":118.41,"sell":121.08,"unit":1}]}},"chart":{"history":{"USD":[{"date":"2026-09-01","buy":2212.52,"average":2263.57,"sell":2314.62,"unit":1},{"date":"2026-09-02","buy":2212.94,"average":2264,"sell":2315.06,"unit":1},{"date":"2026-09-03","buy":2212.75,"average":2263.8,"sell":2314.85,"unit":1},{"date":"2026-09-04","buy":2210.79,"average":2261.8,"sell":2312.81,"unit":1}],"EUR":[{"date":"2026-09-01","buy":2566.23,"average":2625.44,"sell":2684.65,"unit":1},{"date":"2026-09-02","buy":2566.89,"average":2626.12,"sell":2685.34,"unit":1},{"date":"2026-09-03","buy":2561.8,"average":2620.91,"sell":2680.02,"unit":1},{"date":"2026-09-04","buy":2566.53,"average":2625.75,"sell":2684.97,"unit":1}],"GBP":[{"date":"2026-09-01","buy":2997.24,"average":3066.39,"sell":3135.55,"unit":1},{"date":"2026-09-02","buy":2995.43,"average":3064.55,"sell":3133.66,"unit":1},{"date":"2026-09-03","buy":2989.55,"average":3058.53,"sell":3127.5,"unit":1},{"date":"2026-09-04","buy":2984.55,"average":3053.41,"sell":3122.27,"unit":1}],"CNY":[{"date":"2026-09-01","buy":329.24,"average":336.84,"sell":344.43,"unit":1},{"date":"2026-09-02","buy":329.34,"average":336.94,"sell":344.54,"unit":1},{"date":"2026-09-03","buy":329.16,"average":336.76,"sell":344.35,"unit":1},{"date":"2026-09-04","buy":329.3,"average":336.9,"sell":344.49,"unit":1}],"CHF":[{"date":"2026-09-01","buy":2737.33,"average":2800.49,"sell":2863.65,"unit":1},{"date":"2026-09-02","buy":2732.25,"average":2795.3,"sell":2858.34,"unit":1},{"date":"2026-09-03","buy":2721.31,"average":2784.1,"sell":2846.89,"unit":1},{"date":"2026-09-04","buy":2732.66,"average":2795.71,"sell":2858.76,"unit":1}],"JPY":[{"date":"2026-09-01","buy":13.86,"average":14.18,"sell":14.5,"unit":1},{"date":"2026-09-02","buy":13.83,"average":14.15,"sell":14.47,"unit":1},{"date":"2026-09-03","buy":13.86,"average":14.18,"sell":14.5,"unit":1},{"date":"2026-09-04","buy":14.07,"average":14.4,"sell":14.72,"unit":1}],"CAD":[{"date":"2026-09-01","buy":1591.98,"average":1628.71,"sell":1665.45,"unit":1},{"date":"2026-09-02","buy":1595.69,"average":1632.51,"sell":1669.33,"unit":1},{"date":"2026-09-03","buy":1589,"average":1625.67,"sell":1662.33,"unit":1},{"date":"2026-09-04","buy":1599.74,"average":1636.65,"sell":1673.56,"unit":1}],"AUD":[{"date":"2026-09-01","buy":1584.15,"average":1620.7,"sell":1657.25,"unit":1},{"date":"2026-09-02","buy":1583.97,"average":1620.52,"sell":1657.06,"unit":1},{"date":"2026-09-03","buy":1581.15,"average":1617.63,"sell":1654.11,"unit":1},{"date":"2026-09-04","buy":1586.01,"average":1622.6,"sell":1659.2,"unit":1}],"AED":[{"date":"2026-09-01","buy":602.46,"average":616.36,"sell":630.26,"unit":1},{"date":"2026-09-02","buy":602.85,"average":616.76,"sell":630.67,"unit":1},{"date":"2026-09-03","buy":602.52,"average":616.42,"sell":630.32,"unit":1},{"date":"2026-09-04","buy":602.37,"average":616.27,"sell":630.17,"unit":1}],"AOA":[{"date":"2026-09-01","buy":2.42,"average":2.48,"sell":2.54,"unit":1},{"date":"2026-09-02","buy":2.41,"average":2.47,"sell":2.53,"unit":1},{"date":"2026-09-03","buy":2.41,"average":2.47,"sell":2.53,"unit":1},{"date":"2026-09-04","buy":2.41,"average":2.47,"sell":2.53,"unit":1}],"BIF":[{"date":"2026-09-01","buy":0.74,"average":0.75,"sell":0.77,"unit":1},{"date":"2026-09-02","buy":0.74,"average":0.76,"sell":0.77,"unit":1},{"date":"2026-09-03","buy":0.74,"average":0.76,"sell":0.77,"unit":1},{"date":"2026-09-04","buy":0.74,"average":0.76,"sell":0.77,"unit":1}],"INR":[{"date":"2026-09-01","buy":23.24,"average":23.78,"sell":24.31,"unit":1},{"date":"2026-09-02","buy":23.34,"average":23.88,"sell":24.42,"unit":1},{"date":"2026-09-03","buy":23.31,"average":23.85,"sell":24.39,"unit":1},{"date":"2026-09-04","buy":23.42,"average":23.96,"sell":24.5,"unit":1}],"KWD":[{"date":"2026-09-01","buy":7160.93,"average":7326.16,"sell":7491.38,"unit":1},{"date":"2026-09-02","buy":7162.09,"average":7327.34,"sell":7492.59,"unit":1},{"date":"2026-09-03","buy":7154.74,"average":7319.82,"sell":7484.9,"unit":1},{"date":"2026-09-04","buy":7158.53,"average":7323.7,"sell":7488.87,"unit":1}],"RWF":[{"date":"2026-09-01","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-02","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-03","buy":1.5,"average":1.54,"sell":1.57,"unit":1},{"date":"2026-09-04","buy":1.5,"average":1.54,"sell":1.57,"unit":1}],"SAR":[{"date":"2026-09-01","buy":590.01,"average":603.62,"sell":617.23,"unit":1},{"date":"2026-09-02","buy":590.38,"average":604.01,"sell":617.63,"unit":1},{"date":"2026-09-03","buy":590.06,"average":603.68,"sell":617.29,"unit":1},{"date":"2026-09-04","buy":589.95,"average":603.57,"sell":617.18,"unit":1}],"TZS":[{"date":"2026-09-01","buy":0.84,"average":0.85,"sell":0.87,"unit":1},{"date":"2026-09-02","buy":0.84,"average":0.86,"sell":0.87,"unit":1},{"date":"2026-09-03","buy":0.83,"average":0.85,"sell":0.87,"unit":1},{"date":"2026-09-04","buy":0.84,"average":0.86,"sell":0.87,"unit":1}],"UGX":[{"date":"2026-09-01","buy":0.58,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-02","buy":0.59,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-03","buy":0.59,"average":0.6,"sell":0.61,"unit":1},{"date":"2026-09-04","buy":0.59,"average":0.6,"sell":0.61,"unit":1}],"XAF":[{"date":"2026-09-01","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-02","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-03","buy":3.91,"average":4,"sell":4.09,"unit":1},{"date":"2026-09-04","buy":3.91,"average":4,"sell":4.09,"unit":1}],"XDR":[{"date":"2026-09-01","buy":3034.05,"average":3104.06,"sell":3174.06,"unit":1},{"date":"2026-09-02","buy":3030.7,"average":3100.63,"sell":3170.55,"unit":1},{"date":"2026-09-03","buy":3027.98,"average":3097.85,"sell":3167.71,"unit":1},{"date":"2026-09-04","buy":3024.94,"average":3094.74,"sell":3164.53,"unit":1}],"ZAR":[{"date":"2026-09-01","buy":137.23,"average":140.39,"sell":143.56,"unit":1},{"date":"2026-09-02","buy":137.23,"average":140.39,"sell":143.56,"unit":1},{"date":"2026-09-03","buy":137.09,"average":140.26,"sell":143.42,"unit":1},{"date":"2026-09-04","buy":137.57,"average":140.74,"sell":143.92,"unit":1}],"ZMW":[{"date":"2026-09-01","buy":116.45,"average":119.14,"sell":121.83,"unit":1},{"date":"2026-09-02","buy":115.54,"average":118.21,"sell":120.87,"unit":1},{"date":"2026-09-03","buy":115.89,"average":118.56,"sell":121.24,"unit":1},{"date":"2026-09-04","buy":115.74,"average":118.41,"sell":121.08,"unit":1}]}}}]
+
+        '
+  recorded_at: Wed, 09 Sep 2026 12:55:03 GMT
+- request:
+    method: get
+    uri: https://www.bcc.cd/marche-des-changes/cours-de-change/2026-09-02
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.bcc.cd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 09 Sep 2026 12:55:04 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Cache-Control:
+      - no-store, must-revalidate
+      Link:
+      - </_next/static/media/68180864d7f93f02-s.p.woff2>; rel=preload; as="font";
+        crossorigin=""; type="font/woff2", </_next/static/media/986db6912e5fb43a-s.p.woff2>;
+        rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/css/cd397d5a325c5269.css>;
+        rel=preload; as="style", </_next/static/css/0c1c2addcd4606ac.css>; rel=preload;
+        as="style"
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Vary:
+      - rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+      Content-Security-Policy:
+      - 'default-src ''self''; img-src ''self'' data: blob: https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro https:; script-src ''self'' ''unsafe-inline''
+        https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src
+        ''self'' ''unsafe-inline''; font-src ''self'' data:; connect-src ''self''
+        http://localhost:9000 https://*.r2.dev https://cloudflareinsights.com https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro; media-src ''self'' data: https:;
+        frame-src ''self'' https://challenges.cloudflare.com https://www.google.com
+        https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com
+        https://resources.bcc.cd https://resources.pulsarinteractive.pro; frame-ancestors
+        ''none''; base-uri ''self''; form-action ''self''; object-src ''none''; upgrade-insecure-requests'
+      Permissions-Policy:
+      - camera=(), microphone=(), geolocation=(), interest-cohort=()
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      X-Opennext:
+      - '1'
+      X-Powered-By:
+      - Next.js
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a38658551db297c4-AMS
+    body:
+      encoding: UTF-8
+      string: <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"/><title>Cours
+        de change</title></head><body><article><dl class="mb-6 mt-2 divide-y divide-slate-100
+        border-y border-slate-100"><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">USD
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">2264</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">EUR (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">2626.12</dd></div><div class="py-3.5
+        first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em]
+        text-[#6B7A99] md:text-sm">GBP (cours moyen)</dt><dd class="mt-2 text-base
+        font-medium leading-relaxed text-[#005CA9] md:text-lg tabular-nums">3064.55</dd></div><div
+        class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold
+        uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">CHF (cours moyen)</dt><dd
+        class="mt-2 text-base font-medium leading-relaxed text-[#005CA9] md:text-lg
+        tabular-nums">2795.3</dd></div><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">ZAR
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">140.39</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">CNY (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">336.94</dd></div><div class="py-3.5
+        first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em]
+        text-[#6B7A99] md:text-sm">JPY (cours moyen)</dt><dd class="mt-2 text-base
+        font-medium leading-relaxed text-[#005CA9] md:text-lg tabular-nums">14.15</dd></div><div
+        class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold
+        uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">CAD (cours moyen)</dt><dd
+        class="mt-2 text-base font-medium leading-relaxed text-[#005CA9] md:text-lg
+        tabular-nums">1632.51</dd></div><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">AUD
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">1620.52</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">XAF (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">4</dd></div></dl></article></body></html>
+  recorded_at: Wed, 09 Sep 2026 12:55:04 GMT
+- request:
+    method: get
+    uri: https://www.bcc.cd/marche-des-changes/cours-de-change/2026-09-03
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.bcc.cd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 09 Sep 2026 12:55:06 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Cache-Control:
+      - no-store, must-revalidate
+      Link:
+      - </_next/static/media/68180864d7f93f02-s.p.woff2>; rel=preload; as="font";
+        crossorigin=""; type="font/woff2", </_next/static/media/986db6912e5fb43a-s.p.woff2>;
+        rel=preload; as="font"; crossorigin=""; type="font/woff2", </_next/static/css/cd397d5a325c5269.css>;
+        rel=preload; as="style", </_next/static/css/0c1c2addcd4606ac.css>; rel=preload;
+        as="style"
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+      Vary:
+      - rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+      Content-Security-Policy:
+      - 'default-src ''self''; img-src ''self'' data: blob: https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro https:; script-src ''self'' ''unsafe-inline''
+        https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src
+        ''self'' ''unsafe-inline''; font-src ''self'' data:; connect-src ''self''
+        http://localhost:9000 https://*.r2.dev https://cloudflareinsights.com https://resources.bcc.cd
+        https://resources.pulsarinteractive.pro; media-src ''self'' data: https:;
+        frame-src ''self'' https://challenges.cloudflare.com https://www.google.com
+        https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com
+        https://resources.bcc.cd https://resources.pulsarinteractive.pro; frame-ancestors
+        ''none''; base-uri ''self''; form-action ''self''; object-src ''none''; upgrade-insecure-requests'
+      Permissions-Policy:
+      - camera=(), microphone=(), geolocation=(), interest-cohort=()
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      X-Opennext:
+      - '1'
+      X-Powered-By:
+      - Next.js
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a3865860e8efa657-AMS
+    body:
+      encoding: UTF-8
+      string: <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"/><title>Cours
+        de change</title></head><body><article><dl class="mb-6 mt-2 divide-y divide-slate-100
+        border-y border-slate-100"><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">USD
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">2263.8</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">EUR (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">2620.91</dd></div><div class="py-3.5
+        first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em]
+        text-[#6B7A99] md:text-sm">GBP (cours moyen)</dt><dd class="mt-2 text-base
+        font-medium leading-relaxed text-[#005CA9] md:text-lg tabular-nums">3058.53</dd></div><div
+        class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold
+        uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">CHF (cours moyen)</dt><dd
+        class="mt-2 text-base font-medium leading-relaxed text-[#005CA9] md:text-lg
+        tabular-nums">2784.1</dd></div><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">ZAR
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">140.26</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">CNY (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">336.76</dd></div><div class="py-3.5
+        first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em]
+        text-[#6B7A99] md:text-sm">JPY (cours moyen)</dt><dd class="mt-2 text-base
+        font-medium leading-relaxed text-[#005CA9] md:text-lg tabular-nums">14.18</dd></div><div
+        class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt class="text-xs font-semibold
+        uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">CAD (cours moyen)</dt><dd
+        class="mt-2 text-base font-medium leading-relaxed text-[#005CA9] md:text-lg
+        tabular-nums">1625.67</dd></div><div class="py-3.5 first:pt-4 last:pb-4 md:py-4"><dt
+        class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99] md:text-sm">AUD
+        (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed text-[#005CA9]
+        md:text-lg tabular-nums">1617.63</dd></div><div class="py-3.5 first:pt-4 last:pb-4
+        md:py-4"><dt class="text-xs font-semibold uppercase tracking-[0.08em] text-[#6B7A99]
+        md:text-sm">XAF (cours moyen)</dt><dd class="mt-2 text-base font-medium leading-relaxed
+        text-[#005CA9] md:text-lg tabular-nums">4</dd></div></dl></article></body></html>
+  recorded_at: Wed, 09 Sep 2026 12:55:06 GMT
+recorded_with: VCR 6.4.0
