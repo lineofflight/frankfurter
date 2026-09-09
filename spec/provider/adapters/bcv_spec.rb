@@ -71,6 +71,22 @@ class Provider < Sequel::Model(:providers)
         end
       end
 
+      it "stops paging once a page adds no new workbooks and names the quarter it never found" do
+        html = '<a href="/sites/default/files/EstadisticasGeneral/2_1_2c26_smc.xls">III Trim 2026</a>'
+        pages = []
+        download = lambda { |_url, params = {}|
+          pages << params[:page]
+          html
+        }
+
+        adapter.stub(:download, download) do
+          error = _ { adapter.fetch(after: Date.new(2022, 1, 3), upto: Date.new(2022, 1, 7)) }.must_raise(RuntimeError)
+
+          _(error.message).must_match(/no workbook for 2021Q4/)
+        end
+        _(pages).must_equal([0, 1])
+      end
+
       it "returns nothing before the 2021 redenomination without fetching" do
         _(adapter.fetch(after: Date.new(2020, 4, 1), upto: Date.new(2021, 9, 30))).must_be_empty
       end

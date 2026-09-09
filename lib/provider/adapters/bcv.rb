@@ -94,13 +94,14 @@ class Provider
 
       private
 
-      # Walk the statistics page, newest quarters first, until every wanted quarter has a link or a page comes back
-      # without any.
+      # Walk the statistics page, newest quarters first, until every wanted quarter has a link or a page adds none. An
+      # out-of-range page comes back empty today; a pager that repeated its last page instead would add nothing new, so
+      # either shape ends the walk.
       def workbook_urls(wanted)
         urls = {}
         (0..).each do |page|
           links = workbook_links(download(DATA_URL, page:))
-          break if links.empty?
+          break if (links.keys - urls.keys).empty?
 
           urls = links.merge(urls)
           break if (wanted - urls.keys).empty?
