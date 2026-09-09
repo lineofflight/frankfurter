@@ -9,51 +9,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Bank of Zambia (BOZ) as a data provider. Daily average buy/sell midpoints for USD, GBP, EUR and ZAR against the Zambian kwacha (ZMW), from 2006-01-12. Rows before the 2013 rebasing are stored as old kwacha (ZMK). (#389)
-- Central Bank of Kuwait (CBKKW) as a data provider. Daily reference rates for ~135 currencies against the Kuwaiti dinar (KWD), majors from 2008-01-02 and most others from 2017-06-18. (#447)
-- Banque du Liban (BdL) as a data provider. Daily official rates for USD, EUR, GBP, JPY, CHF, AUD and CAD against the Lebanese pound (LBP), from 2024-01-02. (#381)
-- Central Bank of Seychelles (CBSSC) as a data provider. Daily consolidated mid rates of authorised dealers for USD, EUR and GBP against the Seychellois rupee (SCR), from 2000-01-04. (#404)
-- Central Bank of Oman (CBO) as a data provider. Daily buy/sell mid rates for 44 currencies, gold, silver and platinum per ounce, and the SDR against the Omani rial (OMR), from 2017-10-15. (#448)
-- Banco Central de Venezuela (BCV) as a data provider. Daily reference rates for around 20 currencies against the bolívar (VES), from 2021-10-04, the first value date after the 1,000,000:1 redenomination. (#435)
-- Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. Daily official bulletin rates for ~40 currencies and four precious metals against the Azerbaijani manat (AZN), from 1993-11-25. Bulletins before the 2006 redenomination are stored as old manat (AZM). (#606)
-- Central Bank of Trinidad and Tobago (CBTT) as a data provider. Daily weighted average dealer rates for 8 currencies against the Trinidad and Tobago dollar (TTD), from 1991-01-31. (#378)
-- Centrale Bank van Suriname (CBvS) as a data provider. Daily indicative quotes against the Surinamese dollar (SRD) for USD, EUR, GBP, CNY and seven Caribbean and South American currencies, parsed from the bank's PDF notices back to 2009-09-01. Where the bank publishes several fixings a day, the closing one is used. (#426)
-- China Foreign Exchange Trade System (CFETS) as a data provider, publishing the daily RMB central parity rate for 25 pairs against CNY since 2006. (#605)
-- Palestine Monetary Authority (PMA) as a data provider. Daily mid rates for 25 pairs, the currencies circulating in Palestine (ILS, JOD, USD) plus USD crosses for the majors, the Gulf currencies, gold and silver, from 2020-09-01. (#454)
-- Banque Centrale du Congo (BCCCD) as a data provider. Daily indicative mid rates for 21 currencies against the Congolese franc (CDF), with ten majors daily from 2020-10-12 and the rest of the basket, including the African neighbours (AOA, BIF, RWF, TZS, UGX, XAF, ZMW), weekly from 2021-02-24 and daily from late August 2025. (#398)
-- Banco de Mocambique (BM) as a data provider. Daily reference rates for 19 currencies against the Mozambican metical (MZN), parsed from the bank's PDF bulletins, from 2018-01-02. (#386)
+- Bank of Zambia (BOZ) as a data provider. (#389)
+- Central Bank of Kuwait (CBKKW) as a data provider. (#447)
+- Banque du Liban (BdL) as a data provider. (#381)
+- Central Bank of Seychelles (CBSSC) as a data provider. (#404)
+- Central Bank of Oman (CBO) as a data provider. (#448)
+- Banco Central de Venezuela (BCV) as a data provider. (#435)
+- Central Bank of the Republic of Azerbaijan (CBAR) as a data provider. (#606)
+- Central Bank of Trinidad and Tobago (CBTT) as a data provider. (#378)
+- Centrale Bank van Suriname (CBvS) as a data provider. (#426)
+- China Foreign Exchange Trade System (CFETS) as a data provider. (#605)
+- Palestine Monetary Authority (PMA) as a data provider. (#454)
+- Banque Centrale du Congo (BCCCD) as a data provider. (#398)
+- Banco de Moçambique (BM) as a data provider. (#386)
+- Banco Central de Reserva del Perú (BCRP) as a data provider. (#607)
+- V1 responses now include RFC 9745 `Deprecation` and `Link` headers pointing to their V2 successors.
+- V2 `expand=providers` entries now include each provider's observation `date` alongside its key and rate.
+- V2 rate responses now include an identity record for the base currency (base equals quote, rate 1). (#538)
 
 ### Changed
 
-- V2 rates now carry one canonical value per dated row: latest, single-date, and range responses agree by construction. Previously the same row could read differently depending on the request shape: when it was asked, where a range started, or which base or `quotes` filter applied. Range queries combining `providers=` with a pegged base now return empty, matching single-date behavior. (#570, #573)
 - V2 daily date ranges of any length, including full history, are now served in seconds from a precomputed blend, lifting the interim 5-year cap. The cap remains for `providers=` and `expand=providers` ranges, which still compute live. (#569, #570)
-- V2 range requests that exceed the request deadline now return 503 instead of computing indefinitely without delivering a response. (#569)
+- V2 latest rates now include provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as published. Explicit date and range queries keep their requested boundaries.
 - CDN cache purges are debounced to one per five-minute window, so freshly published rates may take a few minutes longer to appear. (#568)
-- V2 latest rates now include provider observations dated one day ahead of the service date, so next-day official rates are visible as soon as they are published. Explicit date and range queries keep their requested boundaries.
 
 ### Fixed
 
-- Azerbaijani manat (AZN) no longer reports history back to 1994. The Bank of Lithuania (LB) labels its old-manat quotes as AZN through 2006-01-06; those rows are now stored as old manat (AZM). A migration relabels the stored rows.
-- Six more currencies no longer report predecessor values under their current code: Turkmenistani manat (TMT) from LB before 2009, Zambian kwacha (ZMW) from SARB before 2013, Russian ruble (RUB) from the Riksbank and CBU before 1998, Brazilian real (BRL) from BCCH before July 1994, and Tajikistani somoni (TJS) from CBR and NBU before November 2000. Those rows are now stored under the predecessor codes (TMM, ZMK, RUR, BRR, TJR), and the blended series for the affected years are recomputed. (#623)
-
+- V2 rates now carry one canonical value per dated row: latest, single-date, and range responses agree by construction. Range queries combining `providers=` with a pegged base now return empty, matching single-date behavior. (#570, #573)
+- V2 range requests that exceed the request deadline now return 503 instead of computing indefinitely. (#569)
+- Relabelled predecessor currencies stored under successor codes: AZN (LB), TMT (LB), ZMW (SARB), RUB (RB, CBU), BRL (BCCH), and TJS (CBR, NBU). Stored rows now carry their historical predecessor codes (AZM, TMM, ZMK, RUR, BRR, TJR), and the affected blend windows are recomputed. (#621, #623, #624)
 - Restored Central Bank of Egypt (CBE) rates, stalled since 2026-07-22 after the bank's WAF began rejecting requests without an Accept header. Adapters now send `Accept: */*` by default. (#576)
 - Restored Banca Națională a României (BNR) rates, stalled since 2026-08-05 after the bank relaunched its site and moved the XML feeds to curs.bnr.ro. (#580)
-- Central Bank of Kenya (CBK) East African cross rates (UGX, TZS, RWF, BIF) are now stored as published instead of inverted at ingest, which had turned exact published figures into false precision in single-provider responses (`24.0657` became `0.0343951103911`). A migration drops the inverted rows and a re-backfill restores them. Blended rates are unaffected. (#585)
-- Single-provider V2 responses no longer show binary float noise in the low digits (e.g. `181.64319999999998` where the source's buy and sell average to exactly `181.6432`). Adapter-synthesized values are now rounded to twelve significant digits on ingest, and a migration cleans already-stored rows. Blended and grouped responses were never affected. (#579)
-- Recovered the precision Turkish central bank (TCMB) rates lost to a four-decimal round at ingest, which left low-magnitude pairs like pre-redenomination JPY/TRY with as little as one significant digit. Bank Indonesia (BI) loses the same rounding, and TCMB history is re-backfilled to recover the lost digits. (#584)
+- Central Bank of Kenya (CBK) East African cross rates (UGX, TZS, RWF, BIF) are now stored as published instead of inverted at ingest, which had turned exact published figures into false precision in single-provider responses. A migration drops the inverted rows and a re-backfill restores them. Blended rates are unaffected. (#585)
+- Single-provider V2 responses no longer show binary float noise in the low digits. Adapter-synthesized values are now rounded to twelve significant digits on ingest, and a migration cleans already-stored rows. (#579)
+- Recovered the precision Turkish central bank (TCMB) and Bank Indonesia (BI) rates lost to a four-decimal round at ingest. (#584)
 - Restored State Bank of Pakistan (SBP) rates, stalled since late May 2026 after a site restructure moved the source workbooks. (#564)
-- Fixed the Docker healthcheck restarting the container in a loop under load. Passing `--init` to `docker run` remains recommended. (#556)
-- Provider fetches that hit an error page or a restructured response now fail and retry on the next scheduled run, instead of recording silent no-data days that left permanent gaps. (#555, #563)
+- Fixed the Docker healthcheck restarting the container in a loop under load. (#556)
+- Provider fetches that hit an error page or a restructured response now fail and retry on the next scheduled run instead of recording silent no-data days that left permanent gaps. (#555, #563)
 - Restored Banque Centrale de Tunisie (BCT) rates, stalled since early July 2026 after the source's CDN began rejecting the default library User-Agent. (#548)
 - Banco Central de Bolivia (BCBO) ingestion resumes after the source replaced its daily-sheet layout in mid-2026. BOB rates reflect Bolivia's repricing of the boliviano off its long-standing peg. (#547)
 - Date-relative V2 responses (latest, or `from` without `to`) now expire from CDN caches at UTC midnight instead of after 24 hours, so a cached "latest" cannot disagree with a fresh range after the date rolls over. (#541)
-
-### Added
-
-- Banco Central de Reserva del Perú (BCRP) as a data provider. Daily banking-system closing rate (SBS buy/sell coerced to mid) for USD against the Peruvian sol (PEN), from 1997-01-02. (#607)
-- V1 responses now include RFC 9745 `Deprecation` and `Link` headers pointing to their V2 successors. The V1 root reports `status: "deprecated"` and links to the legacy documentation; rate and currency payloads are unchanged.
-- V2 `expand=providers` entries now include each provider's observation `date` alongside its key and rate.
-- V2 rate responses now include an identity record for the base currency (base equals quote, rate 1), which obeys the `quotes` filter like any other row. Same-currency pairs like `/v2/rate/USD/USD` return 1 instead of 404. (#538)
 
 ## [2.3.5] - 2026-06-25
 
