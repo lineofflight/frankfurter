@@ -31,15 +31,6 @@ describe NascentCurrency do
     _(NascentCurrency.all.map(&:iso_code)).must_include("EUR")
   end
 
-  it "covers the new manat" do
-    entry = NascentCurrency.find("AZN")
-
-    _(entry.inception_date).must_equal(Date.new(2006, 1, 1))
-    _(entry.predecessor).must_equal("AZM")
-    _(NascentCurrency.premature?("AZN", Date.new(2005, 12, 30))).must_equal(true)
-    _(NascentCurrency.premature?("AZN", Date.new(2006, 1, 1))).must_equal(false)
-  end
-
   it "looks up an entry by iso_code" do
     entry = NascentCurrency.find("EUR")
 

@@ -107,10 +107,12 @@ Archives often label a currency's whole history with its current ISO code. Befor
   ```
   Key each entry on the *source's* switch date, which can trail the official one (LB kept quoting old manat until 2006-01-09), and verify it against the rows either side. Check the nominal at the same time: CBAR's TRL rows say Nominal 1 but price 1000 TRL.
 
-Two registries back this up:
+Two more things the relabel needs:
 
 - `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
-- `db/seeds/nascent_currencies.json` records when a successor came into being. Once listed, rows dated earlier are rejected on ingest and `rake db:purge_invalid` clears stored ones. Add the successor only for the relabelled flavour: a guard would throw away restated series that other providers publish legitimately.
+- Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in a migration scoped to the provider, code and date range, and rebuild the rollups, currency summaries and blend rows derived from them (see `db/migrate/027_relabel_lb_old_manat.rb`). No re-backfill needed: the values were right, only the code was wrong.
+
+`db/seeds/nascent_currencies.json` is not the tool for this. It rejects every row dated before a currency's inception, restated series included, so it is reserved for the euro, where no pre-1999 series is wanted from anyone.
 
 Non-ISO labels (`SDR` for XDR) go through an `ALIASES` map rather than the predecessor table.
 
