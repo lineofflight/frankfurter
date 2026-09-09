@@ -1,26 +1,25 @@
 ---
 name: tech-lead
-description: Use when orchestrating multiple agents across worktrees or Herdr tabs, managing PR pipelines, handling Copilot review threads, resolving merge conflicts across shared files, and deploying safely.
+description: Use when orchestrating multiple agents across worktrees, managing PR pipelines, handling Copilot review threads, resolving merge conflicts across shared files, and migrating databases safely.
 ---
 
 # Tech Lead: Swarm Orchestration & Delivery
 
-Techniques and patterns for directing parallel AI agent swarms, managing git worktree mechanics, resolving cascading PR conflicts, interacting with GitHub review bots, safely migrating production databases, and deploying.
+Techniques and patterns for directing parallel AI agent swarms, managing git worktree mechanics, resolving cascading PR conflicts, interacting with GitHub review bots, and safely migrating unique-constraint databases.
 
-## 1. Multi-Agent Swarm Orchestration in Herdr
+## 1. Parallel Agent Worktree Orchestration
 
 When dispatching parallel tasks (e.g. implementing multiple providers concurrently):
 
 ### Lifecycle
 1. **Isolated Worktrees**: Every agent gets its own git worktree branched from `origin/main`. Never let agents share the primary checkout.
-2. **Dedicated Herdr Tab**: Launch each agent in its own tab with `HERDR_ENV=1` and an assigned name (e.g. `herdr tab create --name "386-bm"`).
-3. **Continuous Monitoring**: Track agent state with `herdr agent list` and `herdr agent read <name> --source recent-unwrapped --lines 30`.
+2. **Dedicated Workspace**: Run each agent in its own isolated worktree and session.
+3. **Continuous Monitoring**: Track agent progress via git branch commits, PR status, and CI checks.
 4. **Immediate Cleanup**: Once a PR is squash-merged, immediately prune the workspace:
    ```bash
    git worktree unlock .claude/worktrees/<name>
    git worktree remove --force .claude/worktrees/<name>
-   git branch -D worktree-<name>
-   herdr tab close <workspace_id>:<tab_id>
+   git branch -D <branch>
    ```
 
 ---
@@ -138,39 +137,14 @@ When relabelling a currency (e.g. updating old-currency rows to a new ISO code):
   BlendedRate.refresh(cutover..window_end)
   ```
 
-### Staging Verification Against Production Backups
-Before deploying migrations that modify rates or blend history:
-1. Copy the latest production backup:
+### Verification Before Release
+Before merging migrations that modify rates or blend history:
+1. Run migrations against a local copy or test database to confirm zero errors and correct schema state:
    ```bash
-   ssh frank 'cp /home/deploy/frankfurter/data/frankfurter.sqlite3 /home/deploy/frankfurter/data/test_migration.sqlite3'
+   APP_ENV=test bundle exec rake db:migrate
    ```
-2. Execute migration inside a throwaway container against the test database:
+2. Verify table integrity, unique constraint adherence, and parity:
    ```bash
-   ssh frank "docker run --rm -v /home/deploy/frankfurter/data:/data \
-     -e DATABASE_URL=sqlite:///data/test_migration.sqlite3 -w /app \
-     lineofflight/frankfurter bundle exec rake db:migrate"
+   APP_ENV=test bundle exec rake blend:parity
    ```
-3. Verify exit code 0 and table row counts before deploying to the live container.
 
----
-
-## 6. Deployment & Release Protocol
-
-1. **Verify Main CI & Docker Build**:
-   ```bash
-   gh run list --branch main --limit 1
-   ```
-   Confirm both `test` and `publish` completed successfully.
-2. **Deploy Container**:
-   ```bash
-   ssh frank 'frankfurter/deploy'
-   ```
-3. **Inspect Logs & Health**:
-   ```bash
-   ssh frank 'docker logs --tail 30 frankfurter'
-   ```
-   Confirm migrations ran and `bundle exec foreman start` booted Puma and Rufus scheduler.
-4. **Sanity Check Live Endpoint**:
-   ```bash
-   curl -s 'https://api.frankfurter.dev/v2/rates?quotes=USD,GBP,JPY'
-   ```
