@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Nicaraguan córdoba (NIO) peg at 36.6243 per US dollar. (#604)
+
+### Removed
+
+- Banco Central de Nicaragua (BCN) as a data provider; NIO is now served from its peg. (#604)
+
 ### Fixed
 
 - Peg rates no longer override provider rates for dates before the peg took effect. (#603)

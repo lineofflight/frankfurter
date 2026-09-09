@@ -13,7 +13,7 @@ Compare parsed records before and after: every retained record must match the
 original recording. Run the existing suite without weakening its assertions:
 
 ```sh
-APP_ENV=test OPENSSL_CONF=config/openssl_legacy.cnf bundle exec rake
+APP_ENV=test bundle exec rake
 ```
 
 The September 2026 workbook sweep retained:
