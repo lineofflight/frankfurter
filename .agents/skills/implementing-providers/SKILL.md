@@ -110,7 +110,13 @@ Archives often label a currency's whole history with its current ISO code. Befor
 Two more things the relabel needs:
 
 - `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
-- Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in a migration scoped to the provider, code and date range, and rebuild the rollups, currency summaries and blend rows derived from them (see `db/migrate/027_relabel_lb_old_manat.rb`). No re-backfill needed: the values were right, only the code was wrong.
+- Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in place with a migration (see `db/migrate/027_relabel_lb_old_manat.rb`), which runs itself at container start. No re-backfill: the values were right, only the code was wrong. The migration has four parts, because three tables derive from `rates`:
+  1. `UPDATE rates` scoped to provider, code and date range.
+  2. Rollups: delete the provider's `weekly_rates` and `monthly_rates` for both codes and re-insert from `rates` with `Bucket.week` / `Bucket.month`, the way `Provider#refresh_rollup` does. A bucket straddling the cutover holds both codes.
+  3. Summaries: `currencies` and `currency_coverages` only ever widen on insert, so recompute both codes from `rates`.
+  4. Blend: `blended_rates` refreshes on insert only. Where the provider was the *sole* contributor for the code, `UPDATE` the quote; the stored value is a pure function of those rows and a recompute gives the same bytes. Where other providers already quote the successor, `BlendedRate.refresh` the window plus the 14-day carry-forward lookback past the provider's last old-unit row. Check contributor sets with `SELECT provider, MIN(date) FROM rates WHERE base = ? OR quote = ? GROUP BY provider`.
+
+  Verify against a prod backup: apply the migration to a copy, recompute the blend from scratch over the affected years on a second copy, and diff `blended_rates`. Zero rows either way, or the migration is wrong.
 
 `db/seeds/nascent_currencies.json` is not the tool for this. It rejects every row dated before a currency's inception, restated series included, so it is reserved for the euro, where no pre-1999 series is wanted from anyone.
 
