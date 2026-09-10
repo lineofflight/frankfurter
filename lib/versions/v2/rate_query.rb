@@ -73,8 +73,8 @@ module Versions
         elsif blended_table?
           each_blended_snapshot(&block)
         else
-          window = raw_dataset.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope)
-          rows = CarryForward.apply(window.naked.all, date: date_scope)
+          window = raw_dataset.where(date: (date_scope - lookback)..date_scope)
+          rows = CarryForward.apply(window.naked.all, date: date_scope, lookback:)
           emit_blended(rows, &block)
         end
       end
@@ -123,7 +123,7 @@ module Versions
         if date_scope.is_a?(Range)
           ds.where(date: date_scope).max(:date)
         else
-          ds.where(date: (date_scope - CarryForward::LOOKBACK_DAYS)..date_scope).max(:date)
+          ds.where(date: (date_scope - lookback)..date_scope).max(:date)
         end
       end
 
@@ -207,12 +207,12 @@ module Versions
         acquire_slot!
         seen = Set.new
         each_chunk(date_scope) do |chunk_range|
-          lookback_start = chunk_range.begin - CarryForward::LOOKBACK_DAYS
+          lookback_start = chunk_range.begin - lookback
           rows = raw_dataset.where(date: lookback_start..chunk_range.end).naked.all
           all_dates = rows.map { |r| r[:date] }.uniq
           anchors = all_dates.select { |d| chunk_range.cover?(d) }.sort
           anchors.unshift(chunk_range.begin) unless all_dates.include?(chunk_range.begin)
-          CarryForward.each_snapshot(rows, dates: anchors) do |_anchor, contributors|
+          CarryForward.each_snapshot(rows, dates: anchors, lookback:) do |_anchor, contributors|
             next if contributors.empty?
 
             emit_blended(contributors) do |record|
@@ -244,7 +244,14 @@ module Versions
       # metals), so a filtered request disagreed with an unfiltered one about the same pair. The blend is computed from
       # the full row set everywhere (#570).
       def apply_filters(dataset)
-        providers ? dataset.where(provider: providers) : dataset
+        providers ? dataset.where(provider: providers) : dataset.blendable
+      end
+
+      # Carry-forward window: the named providers' own, else the blend's (#646).
+      def lookback
+        return CarryForward::LOOKBACK_DAYS unless providers
+
+        providers.filter_map { |k| Provider[k]&.lookback_days }.max || CarryForward::LOOKBACK_DAYS
       end
 
       def raw_dataset

@@ -187,9 +187,12 @@ module RateValidation
             )
           end
 
+        # The catalogue is defined by blending providers only, as in Provider#refresh_currency_summaries (#646).
+        require "provider"
         db[:currencies].where(iso_code: code).delete
         global = db[:currency_coverages]
           .where(iso_code: code)
+          .exclude(provider_key: Provider.non_blending_keys)
           .select(
             Sequel.function(:min, :start_date).as(:start_date),
             Sequel.function(:max, :end_date).as(:end_date),

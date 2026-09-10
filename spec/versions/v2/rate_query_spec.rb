@@ -1,10 +1,75 @@
 # frozen_string_literal: true
 
 require_relative "../../helper"
+require "monthly_rate"
 require "versions/v2/rate_query"
 
 module Versions
   describe V2::RateQuery do
+    describe "provider frequency" do
+      let(:date) { Fixtures.latest_date }
+
+      def with_monthly_provider(rows_on:)
+        Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
+        Provider.load_cache
+        Rate.dataset.multi_insert([
+          { provider: "TST", date: rows_on, base: "EUR", quote: "USD", rate: 9.0 },
+          { provider: "TST", date: rows_on, base: "EUR", quote: "GBP", rate: 8.0 },
+        ])
+        MonthlyRate.dataset.insert(
+          bucket_date: Date.new(rows_on.year, rows_on.month, 1), provider: "TST", base: "EUR", quote: "USD", rate: 9.0,
+        )
+        yield
+      ensure
+        # The around-hook rollback runs after this ensure, so drop the row before reloading the static cache.
+        Provider.dataset.where(key: "TST").delete
+        Provider.load_cache
+      end
+
+      it "keeps a monthly provider out of the unfiltered blend" do
+        with_monthly_provider(rows_on: date) do
+          record = V2::RateQuery.new(base: "EUR", quotes: "USD", date: date.to_s, expand: "providers").to_a.first
+
+          _(record[:providers].map { |p| p[:key] }).wont_include("TST")
+          _(record[:rate]).must_be(:<, 5)
+        end
+      end
+
+      it "keeps a monthly provider out of rollups" do
+        with_monthly_provider(rows_on: date) do
+          from = (date << 2).to_s
+          records = V2::RateQuery.new(base: "EUR", quotes: "USD", from:, to: date.to_s, group: "month",
+                                      expand: "providers",).to_a
+
+          _(records.flat_map { |r| r[:providers].map { |p| p[:key] } }.uniq).wont_include("TST")
+        end
+      end
+
+      it "keeps a monthly provider out of the materialized blend" do
+        with_monthly_provider(rows_on: date) do
+          BlendedRate.rebuild
+          rate = BlendedRate.where(quote: "GBP").order(Sequel.desc(:date)).first[:rate]
+
+          _(rate).must_be(:<, 5)
+        end
+      end
+
+      it "serves a monthly provider's 40-day-old value when asked for it by name" do
+        with_monthly_provider(rows_on: date - 40) do
+          record = V2::RateQuery.new(providers: "TST", base: "EUR", quotes: "USD", date: date.to_s).to_a.first
+
+          _(record[:rate]).must_equal(9.0)
+          _(record[:date]).must_equal((date - 40).to_s)
+        end
+      end
+
+      it "still forgets a daily provider after two weeks" do
+        record = V2::RateQuery.new(providers: "ECB", base: "EUR", quotes: "USD", date: (date + 30).to_s).to_a
+
+        _(record).must_be_empty
+      end
+    end
+
     describe "single-provider path" do
       let(:date) { Fixtures.latest_date }
       let(:stored) { Rate.where(provider: "ECB", date:).to_h { |r| [[r.base, r.quote], r.rate] } }

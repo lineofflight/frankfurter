@@ -33,10 +33,10 @@ class BlendedRate < Sequel::Model(:blended_rates)
     # progress never looks complete.
     def rebuild
       dataset.delete
-      first = Rate.dataset.min(:date)
+      first = Rate.blendable.min(:date)
       return unless first
 
-      chunks(Date.parse(first)..Date.parse(Rate.dataset.max(:date))).reverse_each do |chunk|
+      chunks(Date.parse(first)..Date.parse(Rate.blendable.max(:date))).reverse_each do |chunk|
         refresh_chunk(chunk)
       end
     end
@@ -44,7 +44,7 @@ class BlendedRate < Sequel::Model(:blended_rates)
     # The table serves reads only once it covers full history: an incremental refresh makes it non-empty long before
     # blend:rebuild has run, and serving a partial table would silently truncate historical ranges.
     def ready?
-      first_rate = Rate.dataset.min(:date)
+      first_rate = Rate.blendable.min(:date)
       !first_rate.nil? && dataset.min(:date) == first_rate
     end
 
@@ -67,7 +67,7 @@ class BlendedRate < Sequel::Model(:blended_rates)
     def refresh_chunk(chunk)
       db.transaction(**(db.in_transaction? ? {} : { mode: :immediate })) do
         lookback_start = chunk.begin - CarryForward::LOOKBACK_DAYS
-        rows = Rate.dataset.where(date: lookback_start..chunk.end).naked.all
+        rows = Rate.blendable.where(date: lookback_start..chunk.end).naked.all
         anchors = rows.map { |r| r[:date] }.uniq.select { |d| chunk.cover?(d) }.sort
 
         buffer = []

@@ -912,6 +912,14 @@ describe Versions::V2 do
     _(json).wont_include("peg")
   end
 
+  it "reports each provider's frequency" do
+    get "/providers"
+
+    _(last_response).must_be(:ok?)
+    _(json.map { |p| p["frequency"] }.uniq).must_equal(["daily"])
+    assert_conform_schema(200)
+  end
+
   describe "provider routes" do
     # /<key>/<path> is an alias of /<path>?providers=<key>: same bytes, same headers.
     def assert_alias(path, query = "", env = {})
