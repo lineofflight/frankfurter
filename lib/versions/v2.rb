@@ -30,6 +30,7 @@ module Versions
     plugin :caching
     plugin :indifferent_params
     plugin :halt
+    plugin :pass
     plugin :status_handler
     status_handler(404) { { status: 404, message: "not found" } }
 
@@ -49,73 +50,32 @@ module Versions
       r.root { ROOT_PAYLOAD }
 
       r.on("rates") do
-        r.get do
-          query = RateQuery.new(r.params)
-          response["cache-control"] = cache_control_for(query)
-          r.etag(query.cache_key)
-
-          r.csv do
-            if query.range?
-              first, rest = eager_split(query)
-              response["Content-Type"] = "text/csv"
-              headers = csv_headers(query)
-              stream do |out|
-                out << CSV.generate_line(headers)
-                if first
-                  out << CSV.generate_line(headers.map { |k| csv_value(first[k]) })
-                  rest.each do |record|
-                    out << CSV.generate_line(headers.map { |k| csv_value(record[k]) })
-                  end
-                end
-              end
-            else
-              to_csv(query.to_a, query)
-            end
-          end
-
-          if ndjson?(r)
-            first, rest = eager_split(query)
-            response["Vary"] = "Accept"
-            response["Content-Type"] = "application/x-ndjson"
-            stream do |out|
-              if first
-                out << Oj.dump(first, mode: :compat)
-                out << "\n"
-                rest.each do |record|
-                  out << Oj.dump(record, mode: :compat)
-                  out << "\n"
-                end
-              end
-            end
-          elsif query.range?
-            first, rest = eager_split(query)
-            response["Content-Type"] = "application/json; charset=utf-8"
-            stream do |out|
-              out << "["
-              if first
-                out << Oj.dump(first, mode: :compat)
-                rest.each do |record|
-                  out << ","
-                  out << Oj.dump(record, mode: :compat)
-                end
-              end
-              out << "]"
-            end
-          else
-            query.to_a
-          end
-        end
+        r.get { rates_response(r.params) }
       end
 
       r.on("rate", String, String) do |base_currency, quote_currency|
-        r.get do
-          params = r.params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
-          query = RateQuery.new(params)
-          response["cache-control"] = cache_control_for(query)
-          result = query.to_a.first || r.halt(404)
+        r.get { rate_response(r.params, base_currency, quote_currency) }
+      end
 
-          result
+      # /<key>/rates and /<key>/rate/<base>/<quote> alias /rates?providers=<key> byte for byte (#643): one code path, so
+      # single-provider behaviour cannot drift between the two URLs.
+      r.on(String) do |key|
+        provider = Provider[key.upcase] || r.pass
+        if r.params.key?("providers")
+          raise RateQuery::ValidationError, "providers is implied by the route; drop the parameter"
         end
+
+        params = r.params.merge("providers" => provider.key)
+
+        r.on("rates") do
+          r.get { rates_response(params) }
+        end
+
+        r.on("rate", String, String) do |base_currency, quote_currency|
+          r.get { rate_response(params, base_currency, quote_currency) }
+        end
+
+        r.csv { r.halt(406) }
       end
 
       r.csv { r.halt(406) }
@@ -142,6 +102,70 @@ module Versions
     end
 
     private
+
+    def rates_response(params)
+      query = RateQuery.new(params)
+      response["cache-control"] = cache_control_for(query)
+      request.etag(query.cache_key)
+
+      request.csv do
+        if query.range?
+          first, rest = eager_split(query)
+          response["Content-Type"] = "text/csv"
+          headers = csv_headers(query)
+          stream do |out|
+            out << CSV.generate_line(headers)
+            if first
+              out << CSV.generate_line(headers.map { |k| csv_value(first[k]) })
+              rest.each do |record|
+                out << CSV.generate_line(headers.map { |k| csv_value(record[k]) })
+              end
+            end
+          end
+        else
+          to_csv(query.to_a, query)
+        end
+      end
+
+      if ndjson?(request)
+        first, rest = eager_split(query)
+        response["Vary"] = "Accept"
+        response["Content-Type"] = "application/x-ndjson"
+        stream do |out|
+          if first
+            out << Oj.dump(first, mode: :compat)
+            out << "\n"
+            rest.each do |record|
+              out << Oj.dump(record, mode: :compat)
+              out << "\n"
+            end
+          end
+        end
+      elsif query.range?
+        first, rest = eager_split(query)
+        response["Content-Type"] = "application/json; charset=utf-8"
+        stream do |out|
+          out << "["
+          if first
+            out << Oj.dump(first, mode: :compat)
+            rest.each do |record|
+              out << ","
+              out << Oj.dump(record, mode: :compat)
+            end
+          end
+          out << "]"
+        end
+      else
+        query.to_a
+      end
+    end
+
+    def rate_response(params, base_currency, quote_currency)
+      params = params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
+      query = RateQuery.new(params)
+      response["cache-control"] = cache_control_for(query)
+      query.to_a.first || request.halt(404)
+    end
 
     # Date-relative queries anchor on Date.today, so their responses go stale at UTC midnight even when no new data
     # arrives (and no purge fires) — e.g. forward-dated provider rates entering scope (#541). Cap max-age at the

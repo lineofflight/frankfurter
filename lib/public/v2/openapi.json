@@ -100,6 +100,132 @@
         }
       }
     },
+    "/{provider}/rates": {
+      "get": {
+        "operationId": "getProviderRates",
+        "summary": "Get a provider's exchange rates",
+        "description": "Returns one provider's rates as published, unblended. Identical to `/rates?providers={provider}`: same parameters, same records, same limits. Native-base records carry the provider's published digits; other bases are derived. Sending `providers` here returns 422. Unknown provider returns 404.",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": {
+              "type": "string",
+              "example": "ECB"
+            }
+          },
+          { "$ref": "#/components/parameters/date" },
+          { "$ref": "#/components/parameters/from" },
+          { "$ref": "#/components/parameters/to" },
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/group" },
+          { "$ref": "#/components/parameters/expand" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Rate" }
+                },
+                "example": [
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "EUR",
+                    "rate": 1.0
+                  },
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "GBP",
+                    "rate": 0.8623
+                  },
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "USD",
+                    "rate": 1.089
+                  }
+                ]
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "NDJSON stream of Rate objects, one JSON object per line"
+                },
+                "example": "{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"USD\", \"rate\": 1.089 }\n{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"GBP\", \"rate\": 0.8623 }\n"
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/{provider}/rate/{base}/{quote}": {
+      "get": {
+        "operationId": "getProviderRate",
+        "summary": "Get a single pair from a provider",
+        "description": "Returns one provider's rate for a single currency pair. Identical to `/rate/{base}/{quote}?providers={provider}`. Returns 404 when the provider does not publish the pair.",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": {
+              "type": "string",
+              "example": "ECB"
+            }
+          },
+          {
+            "name": "base",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "EUR"
+            }
+          },
+          {
+            "name": "quote",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            }
+          },
+          { "$ref": "#/components/parameters/date" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rate",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Rate" },
+                "example": {
+                  "date": "2026-03-25",
+                  "base": "EUR",
+                  "quote": "USD",
+                  "rate": 1.1568
+                }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
     "/currency/{code}": {
       "get": {
         "operationId": "getCurrency",
