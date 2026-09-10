@@ -169,6 +169,13 @@ module Versions
         _(query.range?).must_equal(true)
       end
 
+      it "allows a single provider any range with more than 5 quotes" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB",
+                                  quotes: "USD,GBP,JPY,CHF,SEK,NOK",)
+
+        _(query.range?).must_equal(true)
+      end
+
       it "rejects provider-unbounded expand=providers long ranges even with a small quotes list" do
         _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, expand: "providers", quotes: "USD") }
           .must_raise(V2::RateQuery::ValidationError)
@@ -176,7 +183,7 @@ module Versions
 
       it "allows expand=providers long ranges when providers= bounds the fetch and quotes is small" do
         query = V2::RateQuery.new(
-          from: over_cap_start, to: cap_end, expand: "providers", providers: "ECB", quotes: "USD",
+          from: over_cap_start, to: cap_end, expand: "providers", providers: "ECB,BOC", quotes: "USD",
         )
 
         _(query.range?).must_equal(true)
@@ -188,14 +195,14 @@ module Versions
       end
 
       it "counts distinct currencies, not raw quotes entries" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB",
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB,BOC",
                                   quotes: "USD,USD,GBP,GBP,JPY,JPY",)
 
         _(query.range?).must_equal(true)
       end
 
       it "counts a future to= only up to today" do
-        query = V2::RateQuery.new(from: (Date.today << 12).to_s, to: (Date.today >> 120).to_s, providers: "ECB")
+        query = V2::RateQuery.new(from: (Date.today << 12).to_s, to: (Date.today >> 120).to_s, providers: "ECB,BOC")
 
         _(query.range?).must_equal(true)
       end
@@ -206,19 +213,20 @@ module Versions
       end
 
       it "allows long capped ranges when quotes lists 5 or fewer currencies" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,GBP,JPY,CHF,SEK")
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB,BOC",
+                                  quotes: "USD,GBP,JPY,CHF,SEK",)
 
         _(query.range?).must_equal(true)
       end
 
       it "allows long capped ranges at weekly or monthly granularity" do
-        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", group: "month")
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB,BOC", group: "month")
 
         _(query.range?).must_equal(true)
       end
 
       it "allows capped ranges of exactly 5 years" do
-        query = V2::RateQuery.new(from: at_cap_start, to: cap_end, providers: "ECB")
+        query = V2::RateQuery.new(from: at_cap_start, to: cap_end, providers: "ECB,BOC")
 
         _(query.range?).must_equal(true)
       end
