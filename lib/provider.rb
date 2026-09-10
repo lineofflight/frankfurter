@@ -39,8 +39,12 @@ class Provider < Sequel::Model(:providers)
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
       data = Dir["#{dir}/*.json"].map { |f| JSON.parse(File.read(f)) }
+      # multi_insert takes its column list from the first row, so a key only some files carry (frequency) would be
+      # dropped from the rest. Normalise every row to the union of keys first.
+      keys = data.flat_map(&:keys).uniq
+      rows = data.map { |d| keys.to_h { |k| [k, d.fetch(k) { k == "frequency" ? "daily" : nil }] } }
       dataset.delete
-      dataset.multi_insert(data)
+      dataset.multi_insert(rows)
       load_cache
     end
   end

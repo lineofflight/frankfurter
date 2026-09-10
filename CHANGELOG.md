@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Provider `frequency` seeded from JSON was reset to daily on every start, so UST was blended and served with a two-week carry-forward. (#656)
+
 ## [2.5.0] - 2026-09-10
 
 ### Added

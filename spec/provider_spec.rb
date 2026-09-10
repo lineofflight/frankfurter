@@ -64,6 +64,16 @@ describe Provider do
     end
   end
 
+  describe ".seed" do
+    it "keeps a key only some seed files carry" do
+      Provider.seed
+
+      _(Provider["UST"].frequency).must_equal("quarterly")
+      _(Provider["ECB"].frequency).must_equal("daily")
+      _(Provider.non_blending_keys).must_include("UST")
+    end
+  end
+
   describe "#frequency" do
     it "defaults to daily, blends, and carries forward two weeks" do
       provider = Provider.new { |p| p.key = "EXAMPLE" }
@@ -87,7 +97,7 @@ describe Provider do
       Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
       Provider.load_cache
 
-      _(Provider.non_blending_keys).must_equal(["TST"])
+      _(Provider.non_blending_keys).must_include("TST")
     ensure
       Provider.dataset.where(key: "TST").delete
       Provider.load_cache
