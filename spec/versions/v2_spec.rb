@@ -921,13 +921,13 @@ describe Versions::V2 do
   end
 
   describe "provider routes" do
-    # /<key>/<path> is an alias of /<path>?providers=<key>: same bytes, same headers.
+    # /providers/<key>/<path> is an alias of /<path>?providers=<key>: same bytes, same headers.
     def assert_alias(path, query = "", env = {})
       headers = ["Content-Type", "cache-control", "ETag", "Vary"]
       sep = query.empty? ? "" : "&"
       get("/#{path}?providers=ecb#{sep}#{query}", {}, env)
       canonical = last_response
-      get(query.empty? ? "/ecb/#{path}" : "/ecb/#{path}?#{query}", {}, env)
+      get(query.empty? ? "/providers/ecb/#{path}" : "/providers/ecb/#{path}?#{query}", {}, env)
 
       _(last_response.status).must_equal(canonical.status)
       _(last_response.body).must_equal(canonical.body)
@@ -981,29 +981,45 @@ describe Versions::V2 do
       _(json["date"]).must_equal(historical_date)
     end
 
+    it "serves a single provider entry" do
+      get "/providers"
+      entry = Oj.load(last_response.body).find { |p| p["key"] == "ECB" }
+      get "/providers/ecb"
+
+      _(last_response).must_be(:ok?)
+      _(Oj.load(last_response.body)).must_equal(entry)
+      assert_conform_schema(200)
+    end
+
+    it "returns 404 for an unknown provider entry" do
+      get "/providers/nope"
+
+      _(last_response.status).must_equal(404)
+    end
+
     it "is case-insensitive on the provider key" do
-      get "/ecb/rates"
+      get "/providers/ecb/rates"
       lower = last_response.body
-      get "/ECB/rates"
+      get "/providers/ECB/rates"
 
       _(last_response.body).must_equal(lower)
     end
 
     it "returns 404 for an unknown provider" do
-      get "/nope/rates"
+      get "/providers/nope/rates"
 
       _(last_response.status).must_equal(404)
       assert_conform_schema(404)
     end
 
     it "returns 404 for a pair the provider cannot derive" do
-      get "/boc/rate/CAD/SEK"
+      get "/providers/boc/rate/CAD/SEK"
 
       _(last_response.status).must_equal(404)
     end
 
     it "rejects a providers param" do
-      get "/ecb/rates?providers=boc"
+      get "/providers/ecb/rates?providers=boc"
 
       _(last_response.status).must_equal(422)
       _(json["message"]).must_include("providers")

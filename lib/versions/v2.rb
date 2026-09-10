@@ -31,7 +31,6 @@ module Versions
     plugin :caching
     plugin :indifferent_params
     plugin :halt
-    plugin :pass
     plugin :status_handler
     status_handler(404) { { status: 404, message: "not found" } }
 
@@ -61,25 +60,41 @@ module Versions
         r.get { rate_response(r.params, base_currency, quote_currency) }
       end
 
-      # /<key>/rates and /<key>/rate/<base>/<quote> alias /rates?providers=<key> byte for byte (#643): one code path, so
-      # single-provider behaviour cannot drift between the two URLs.
-      r.on(String) do |key|
-        provider = Provider[key.upcase] || r.pass
-        if r.params.key?("providers")
-          raise RateQuery::ValidationError, "providers is implied by the route; drop the parameter"
+      r.on("providers") do
+        r.is do
+          r.get do
+            response.cache_control(public: true, max_age: 3600)
+            providers
+          end
         end
 
-        params = r.params.merge("providers" => provider.key)
+        # /providers/<key>/rates and /providers/<key>/rate/<base>/<quote> alias /rates?providers=<key> byte for byte
+        # (#643): one code path, so single-provider behaviour cannot drift between the two URLs.
+        r.on(String) do |key|
+          provider = Provider[key.upcase] || r.halt(404)
+          if r.params.key?("providers")
+            raise RateQuery::ValidationError, "providers is implied by the route; drop the parameter"
+          end
 
-        r.on("rates") do
-          r.get { rates_response(params) }
+          params = r.params.merge("providers" => provider.key)
+
+          r.is do
+            r.get do
+              response.cache_control(public: true, max_age: 3600)
+              provider_entry(provider) || r.halt(404)
+            end
+          end
+
+          r.on("rates") do
+            r.get { rates_response(params) }
+          end
+
+          r.on("rate", String, String) do |base_currency, quote_currency|
+            r.get { rate_response(params, base_currency, quote_currency) }
+          end
+
+          r.csv { r.halt(406) }
         end
-
-        r.on("rate", String, String) do |base_currency, quote_currency|
-          r.get { rate_response(params, base_currency, quote_currency) }
-        end
-
-        r.csv { r.halt(406) }
       end
 
       r.csv { r.halt(406) }
@@ -94,13 +109,6 @@ module Versions
       r.on("currencies") do
         r.get do
           currencies(r.params)
-        end
-      end
-
-      r.is("providers") do
-        r.get do
-          response.cache_control(public: true, max_age: 3600)
-          providers
         end
       end
     end
@@ -250,25 +258,27 @@ module Versions
     end
 
     def providers
-      Provider.eager(:currency_coverages).all.sort_by(&:key).filter_map do |provider|
-        next if provider.currency_coverages.empty?
+      Provider.eager(:currency_coverages).all.sort_by(&:key).filter_map { |provider| provider_entry(provider) }
+    end
 
-        {
-          key: provider.key,
-          name: provider.name,
-          country_code: provider.country_code,
-          rate_type: provider.rate_type,
-          pivot_currency: provider.pivot_currency,
-          data_url: provider.data_url,
-          terms_url: provider.terms_url,
-          start_date: provider.start_date,
-          end_date: provider.end_date,
-          publish_cadence: provider.publish_cadence,
-          frequency: provider.frequency,
-          publishes_missed: provider.publishes_missed,
-          currencies: provider.currency_coverages.map(&:iso_code).sort,
-        }
-      end
+    def provider_entry(provider)
+      return if provider.currency_coverages.empty?
+
+      {
+        key: provider.key,
+        name: provider.name,
+        country_code: provider.country_code,
+        rate_type: provider.rate_type,
+        pivot_currency: provider.pivot_currency,
+        data_url: provider.data_url,
+        terms_url: provider.terms_url,
+        start_date: provider.start_date,
+        end_date: provider.end_date,
+        publish_cadence: provider.publish_cadence,
+        frequency: provider.frequency,
+        publishes_missed: provider.publishes_missed,
+        currencies: provider.currency_coverages.map(&:iso_code).sort,
+      }
     end
   end
 end
