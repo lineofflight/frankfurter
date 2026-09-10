@@ -6,13 +6,6 @@ require "provider"
 require "provider/adapters/adapter"
 
 describe Provider do
-  it "never uses a key that shadows a V2 route" do
-    reserved = ["rates", "rate", "currency", "currencies", "providers"]
-    clashes = Provider.all.map { |p| p.key.downcase } & reserved
-
-    _(clashes).must_be_empty
-  end
-
   let(:provider) { Provider.first }
 
   describe "schema" do

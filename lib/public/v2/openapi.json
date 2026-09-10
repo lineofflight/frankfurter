@@ -100,7 +100,34 @@
         }
       }
     },
-    "/{provider}/rates": {
+    "/providers/{provider}": {
+      "get": {
+        "operationId": "getProvider",
+        "summary": "Get a provider",
+        "description": "One entry from `/providers`, by key (case-insensitive).",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": { "type": "string", "example": "ECB" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provider",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/providers/{provider}/rates": {
       "get": {
         "operationId": "getProviderRates",
         "summary": "Get a provider's exchange rates",
@@ -169,7 +196,7 @@
         }
       }
     },
-    "/{provider}/rate/{base}/{quote}": {
+    "/providers/{provider}/rate/{base}/{quote}": {
       "get": {
         "operationId": "getProviderRate",
         "summary": "Get a single pair from a provider",
