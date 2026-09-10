@@ -35,7 +35,8 @@ describe Provider do
         _(data).must_include("publish_cadence")
         _(data).wont_include("publish_time")
         _(data).wont_include("publish_days")
-        _([nil, "daily", "weekly", "monthly"]).must_include(data["publish_cadence"])
+        _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["publish_cadence"])
+        _([nil, "daily", "monthly", "quarterly"]).must_include(data["frequency"])
         _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
         next if data["publish_schedule"].nil?
 
@@ -67,6 +68,36 @@ describe Provider do
       Provider.all.each do |provider|
         _(Provider::Adapters.const_defined?(provider.key)).must_equal(true)
       end
+    end
+  end
+
+  describe "#frequency" do
+    it "defaults to daily, blends, and carries forward two weeks" do
+      provider = Provider.new { |p| p.key = "EXAMPLE" }
+
+      _(provider.frequency).must_equal("daily")
+      _(provider.blends?).must_equal(true)
+      _(provider.lookback_days).must_equal(14)
+    end
+
+    it "keeps monthly and quarterly values out of the blend and carries them across their period" do
+      monthly = Provider.new { |p| p.frequency = "monthly" }
+      quarterly = Provider.new { |p| p.frequency = "quarterly" }
+
+      _(monthly.blends?).must_equal(false)
+      _(monthly.lookback_days).must_equal(45)
+      _(quarterly.blends?).must_equal(false)
+      _(quarterly.lookback_days).must_equal(120)
+    end
+
+    it "lists the keys of providers that do not blend" do
+      Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
+      Provider.load_cache
+
+      _(Provider.non_blending_keys).must_equal(["TST"])
+    ensure
+      Provider.dataset.where(key: "TST").delete
+      Provider.load_cache
     end
   end
 
@@ -230,6 +261,22 @@ describe Provider do
         # Today Apr 3 = first day of HKMA's publish window (DOM 3-12). end_date Feb 28; expected = March → 1 missed.
         hkma.stub(:end_date, "2026-02-28") do
           _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 3))).must_equal(1)
+        end
+      end
+    end
+
+    describe "with quarterly cadence (Treasury-style, fires early in the quarter)" do
+      let(:ust) { build_provider("0 12 1-10 1,4,7,10 *", cadence: "quarterly") }
+
+      it "returns 0 when the latest quarter-end is the last one due" do
+        ust.stub(:end_date, "2026-03-31") do
+          _(ust.publishes_missed(reference_date: Date.new(2026, 5, 20))).must_equal(0)
+        end
+      end
+
+      it "counts each quarter missed once its window has started" do
+        ust.stub(:end_date, "2025-09-30") do
+          _(ust.publishes_missed(reference_date: Date.new(2026, 5, 20))).must_equal(2)
         end
       end
     end

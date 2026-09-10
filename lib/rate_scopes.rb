@@ -14,6 +14,12 @@ module RateScopes
       where(provider: "ECB")
     end
 
+    # Rows eligible for the blend: every provider whose values stand for a day (#646).
+    def blendable
+      keys = Provider.non_blending_keys
+      keys.empty? ? self : exclude(provider: keys)
+    end
+
     def between(interval)
       col = model.date_column
       return where(false) if interval.begin > Date.today

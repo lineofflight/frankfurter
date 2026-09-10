@@ -264,6 +264,7 @@ module Versions
           start_date: provider.start_date,
           end_date: provider.end_date,
           publish_cadence: provider.publish_cadence,
+          frequency: provider.frequency,
           publishes_missed: provider.publishes_missed,
           currencies: provider.currency_coverages.map(&:iso_code).sort,
         }

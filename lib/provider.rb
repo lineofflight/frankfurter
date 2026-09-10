@@ -22,7 +22,18 @@ class Provider < Sequel::Model(:providers)
   one_to_many :currency_coverages, key: :provider_key
   many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
 
+  # Carry-forward window per observation frequency (#646). A daily value goes stale in two weeks; a monthly or quarterly
+  # value stands for its whole period plus the lag before the next one lands.
+  LOOKBACK_DAYS = { "daily" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
+
   class << self
+    # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
+    # catalogue: dated on the first day of their period rather than the day observed, they are stale on entry, and the
+    # recency decay cannot see that.
+    def non_blending_keys
+      all.reject(&:blends?).map(&:key)
+    end
+
     # Provider metadata is config-as-data — JSON files in db/seeds/providers are the source of truth. Re-seeding on
     # every boot syncs changes from the image (new providers, updated schedules) without manual intervention.
     def seed
@@ -36,6 +47,18 @@ class Provider < Sequel::Model(:providers)
 
   def adapter
     Adapters.const_get(key)
+  end
+
+  def frequency
+    super || "daily"
+  end
+
+  def blends?
+    frequency == "daily"
+  end
+
+  def lookback_days
+    LOOKBACK_DAYS.fetch(frequency)
   end
 
   def start_date
@@ -66,6 +89,8 @@ class Provider < Sequel::Model(:providers)
       count_missed_buckets(cron, last_date, reference_date, :week)
     when "monthly"
       count_missed_buckets(cron, last_date, reference_date, :month)
+    when "quarterly"
+      count_missed_buckets(cron, last_date, reference_date, :quarter)
     else
       raise ArgumentError, "#{key}: unknown publish_cadence #{publish_cadence.inspect}"
     end
@@ -150,6 +175,7 @@ class Provider < Sequel::Model(:providers)
     case granularity
     when :week  then date - (date.cwday - 1)
     when :month then Date.new(date.year, date.month, 1)
+    when :quarter then Date.new(date.year, (((date.month - 1) / 3) * 3) + 1, 1)
     end
   end
 
@@ -160,6 +186,7 @@ class Provider < Sequel::Model(:providers)
       cursor = case granularity
                when :week  then cursor + 7
                when :month then cursor.next_month
+               when :quarter then cursor >> 3
                end
       count += 1
     end
@@ -184,7 +211,10 @@ class Provider < Sequel::Model(:providers)
         end_date: Sequel.function(:max, Sequel[:currency_coverages][:end_date], dates[:end_date]),
       },).insert(provider_key: key, iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
 
-      # Upsert global currency date range
+      next unless blends?
+
+      # Upsert global currency date range. Only blending providers define the catalogue: a monthly or quarterly provider
+      # covering a currency nobody observes daily would promise a blended rate the blend cannot give.
       db[:currencies].insert_conflict(target: :iso_code, update: {
         start_date: Sequel.function(:min, Sequel[:currencies][:start_date], dates[:start_date]),
         end_date: Sequel.function(:max, Sequel[:currencies][:end_date], dates[:end_date]),
