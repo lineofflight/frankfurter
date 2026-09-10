@@ -6,8 +6,9 @@ require "provider/adapters"
 require "tmpdir"
 
 describe "bin/schedule --dry-run" do
+  let(:db_url) { DB.opts[:uri] || ENV["DATABASE_URL"] || "sqlite://#{Dir.pwd}/db/frankfurter_test.sqlite3" }
   let(:output) do
-    `APP_ENV=test bundle exec ruby bin/schedule --dry-run 2>&1`
+    `DATABASE_URL=#{db_url} APP_ENV=test bundle exec ruby bin/schedule --dry-run 2>&1`
   end
 
   let(:startup_lines) { output.lines.select { |l| l.start_with?("startup:") } }
@@ -46,7 +47,7 @@ describe "bin/schedule --dry-run" do
 
       File.write(File.join(dir, "rufus-scheduler.rb"), scheduler_stub)
 
-      output = `APP_ENV=test bundle exec ruby -I #{dir} bin/schedule 2>&1`
+      output = `DATABASE_URL=#{db_url} APP_ENV=test bundle exec ruby -I #{dir} bin/schedule 2>&1`
 
       _($CHILD_STATUS.success?).must_equal(true, output)
       _(output.lines.map(&:chomp).grep(/\Astartup: \d+s\z/)).wont_be_empty

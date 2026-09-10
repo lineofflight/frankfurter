@@ -38,6 +38,7 @@ group :test do
   gem "minitest-around"
   gem "minitest-focus"
   gem "minitest-mock"
+  gem "parallel_tests"
   gem "rack-test"
   gem "skooma"
   gem "vcr"

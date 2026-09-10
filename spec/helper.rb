@@ -11,6 +11,7 @@ require "minitest/around/spec"
 require "minitest/focus"
 require "vcr"
 require "webmock"
+require "parallel_tests/test/runtime_logger" if ENV.key?("TEST_ENV_NUMBER")
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/vcr_cassettes"

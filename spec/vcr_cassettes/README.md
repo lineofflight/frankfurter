@@ -25,6 +25,17 @@ The September 2026 workbook sweep retained:
 | CBSSC archive | 29 | All 3 currencies, first fixing, missing fixing, date bounds; live response unchanged |
 | CBS | 90 | All 9 currencies, month headers, date bounds |
 | BDL | 77 | All 7 currencies and 3 sheets, duplicate rows, rate change, date bounds |
+| CBC | 45 | All published currencies, 3 dates, date bounds |
+| BCP | 46 | All currencies, 4 dates, date bounds |
+| CBKKW | 104 | Over 100 unique base currencies, date bounds |
+| CBO | 44 | 41 currencies on single date, USD over 4 dates, precious metals, date bounds |
+| BI | 40 | 10 currencies across 4 dates, date bounds |
+| BRB | 38 | 19 currencies across 2 business days, date bounds |
+| NBRM | 35 | Date bounds, headline currencies |
+| BM | 40 | Foreign base, MZN quote, date bounds |
+| CBG | 36 | Headline currencies, date bounds |
+| RBV | 35 | Value dates, date bounds |
+| BOJA | 42 | Headline currencies, date bounds |
 
 Other existing cassettes may exceed the limit. Profile with
 `bundle exec rake spec TESTOPTS=--verbose` before choosing the next ones to trim.

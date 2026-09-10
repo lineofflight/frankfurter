@@ -4,7 +4,9 @@ require "sequel"
 
 url = ENV.fetch("DATABASE_URL") do
   env = ENV["APP_ENV"]
-  db_name = env ? "frankfurter_#{env}" : "frankfurter"
+  worker = ENV["TEST_ENV_NUMBER"]
+  suffix = worker && !worker.empty? ? "_#{worker}" : ""
+  db_name = env ? "frankfurter_#{env}#{suffix}" : "frankfurter"
   "sqlite://#{Dir.pwd}/db/#{db_name}.sqlite3"
 end
 
