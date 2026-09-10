@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-09-10
+
 ### Added
 
 - U.S. Department of the Treasury (UST) as a data provider: quarterly reporting rates of exchange since 2001, served by provider only. (#647)
@@ -17,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Daily ranges filtered to a single provider are no longer capped at 5 years. (#644)
+- Single-provider rates in a non-native base are now crossed through the provider's own base instead of USD, so pairs the provider never bridged to USD are no longer dropped. (#645)
 - Daily ranges computed live (`providers=`, `expand=providers`, or before the precomputed blend is ready) are limited to a few at a time; excess requests get an immediate 503 with a `Retry-After` header instead of queueing. (#650)
 
 ### Removed
@@ -223,7 +226,8 @@ New multi-provider API at `/v2/`. The v1 API is unchanged and remains available 
 - Migrated database storage from PostgreSQL to SQLite.
 - Moved domain to <https://api.frankfurter.dev>.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.5.0...HEAD
+[2.5.0]: https://github.com/lineofflight/frankfurter/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/lineofflight/frankfurter/compare/v2.3.5...v2.4.0
 [2.3.5]: https://github.com/lineofflight/frankfurter/compare/v2.3.4...v2.3.5
 [2.3.4]: https://github.com/lineofflight/frankfurter/compare/v2.3.3...v2.3.4
