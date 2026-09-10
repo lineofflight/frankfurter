@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- U.S. Department of the Treasury (UST) as a data provider: quarterly reporting rates of exchange since 2001, served by provider only. (#647)
 - `frequency` on `/v2/providers`: the period each observation stands for (daily, monthly, quarterly). Providers coarser than daily never enter the blend and carry forward across their period when queried by name. (#646)
 - Per-provider routes: `/v2/{provider}/rates` and `/v2/{provider}/rate/{base}/{quote}` serve one provider's rates as published, identical to the `providers=` filter. (#643)
 - Nicaraguan córdoba (NIO) peg at 36.6243 per US dollar. (#604)
