@@ -409,11 +409,12 @@ module Versions
       end
 
       def pivot_path_blend(rows)
-        # Restricting the source set bypasses the peg layer entirely, so a pegged request base has no anchor to rebase
-        # through; mirror the fast path's refusal instead of answering from whatever the named providers happen to
-        # publish.
-        return [] if providers && base_peg
+        # One provider is that provider's own view, pegged base or not: its cross is the answer the caller asked for.
         return single_provider_blend(rows) if providers && providers.uniq.size == 1
+        # Restricting the source set to several providers bypasses the peg layer entirely, so a pegged request base has
+        # no anchor to rebase through; mirror the fast path's refusal instead of answering from whatever the named
+        # providers happen to publish.
+        return [] if providers && base_peg
 
         blended = Blender.new(rows, base: PIVOT).blend
         blended = PegAnchor.apply(blended, base: PIVOT) unless providers

@@ -51,6 +51,19 @@ module Versions
         _(records.first[:rate]).must_equal(query_round("EUR", 1 / 1.2043))
       end
 
+      it "serves a pegged base from the provider's own rates" do
+        Rate.dataset.multi_insert([
+          { provider: "TST", date:, base: "EUR", quote: "AED", rate: 4.0 },
+          { provider: "TST", date:, base: "EUR", quote: "USD", rate: 1.09 },
+        ])
+
+        records = V2::RateQuery.new(providers: "TST", base: "AED", date: date.to_s).to_a
+        by_quote = records.to_h { |r| [r[:quote], r[:rate]] }
+
+        _(by_quote["USD"]).must_equal(query_round("USD", 1.09 / 4.0))
+        _(by_quote["EUR"]).must_equal(query_round("EUR", 1 / 4.0))
+      end
+
       it "still expands providers" do
         record = V2::RateQuery.new(providers: "ECB", base: "GBP", quotes: "JPY", date: date.to_s, expand: "providers")
           .to_a.first
@@ -722,16 +735,16 @@ module Versions
     end
 
     describe "?providers= with pegged base" do
-      it "returns empty (peg layer is bypassed when source set is restricted)" do
+      it "returns empty (peg layer is bypassed when the source set is several providers)" do
         recent_date = Fixtures.latest_date.to_s
-        query = V2::RateQuery.new(date: recent_date, providers: "ECB", base: "AED", quotes: "USD")
+        query = V2::RateQuery.new(date: recent_date, providers: "ECB,BOC", base: "AED", quotes: "USD")
 
         _(query.to_a).must_be_empty
       end
 
       it "returns empty for ranges too, which always take the pivot path" do
         to = Fixtures.latest_date
-        query = V2::RateQuery.new(from: (to - 5).to_s, to: to.to_s, providers: "ECB", base: "AED", quotes: "USD")
+        query = V2::RateQuery.new(from: (to - 5).to_s, to: to.to_s, providers: "ECB,BOC", base: "AED", quotes: "USD")
 
         _(query.to_a).must_be_empty
       end
