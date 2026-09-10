@@ -176,6 +176,25 @@ describe RateValidation do
       end
     end
 
+    it "keeps a currency only a non-daily provider covers out of the catalogue after a purge" do
+      db[:providers].insert(key: "TST", name: "Test", frequency: "monthly")
+      Provider.load_cache
+      db[:rates].multi_insert([
+        { provider: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },
+        { provider: "TST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", rate: 22000.0 },
+      ])
+      db[:currencies].where(iso_code: "BYR").delete
+      db[:currency_coverages].where(iso_code: "BYR").delete
+
+      RateValidation.purge(db)
+
+      _(db[:currencies].where(iso_code: "BYR").first).must_be_nil
+      _(db[:currency_coverages].where(iso_code: "BYR", provider_key: "TST").first).wont_be_nil
+    ensure
+      db[:providers].where(key: "TST").delete
+      Provider.load_cache
+    end
+
     it "refreshes currency summaries for affected codes" do
       db[:rates].multi_insert([
         { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },

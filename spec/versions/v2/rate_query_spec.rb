@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../helper"
+require "monthly_rate"
 require "versions/v2/rate_query"
 
 module Versions
@@ -15,6 +16,9 @@ module Versions
           { provider: "TST", date: rows_on, base: "EUR", quote: "USD", rate: 9.0 },
           { provider: "TST", date: rows_on, base: "EUR", quote: "GBP", rate: 8.0 },
         ])
+        MonthlyRate.dataset.insert(
+          bucket_date: Date.new(rows_on.year, rows_on.month, 1), provider: "TST", base: "EUR", quote: "USD", rate: 9.0,
+        )
         yield
       ensure
         # The around-hook rollback runs after this ensure, so drop the row before reloading the static cache.

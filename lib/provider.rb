@@ -28,8 +28,8 @@ class Provider < Sequel::Model(:providers)
 
   class << self
     # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
-    # catalogue: dated on the first day of their period rather than the day observed, they are stale on entry, and the
-    # recency decay cannot see that.
+    # catalogue: a value that stands for a month or a quarter is observed once and served for the whole period, so on
+    # most days it is weeks stale, and the recency decay, which counts from the row date, cannot see that.
     def non_blending_keys
       all.reject(&:blends?).map(&:key)
     end
