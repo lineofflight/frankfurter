@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - FILTERED
+      - "<BOT_API_KEY>"
       Accept:
       - application/json
       Accept-Encoding:
