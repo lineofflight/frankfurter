@@ -843,4 +843,94 @@ describe Versions::V2 do
     _(json["providers"]).must_be_kind_of(Array)
     _(json).wont_include("peg")
   end
+
+  describe "provider routes" do
+    # /<key>/<path> is an alias of /<path>?providers=<key>: same bytes, same headers.
+    def assert_alias(path, query = "", env = {})
+      headers = ["Content-Type", "cache-control", "ETag", "Vary"]
+      sep = query.empty? ? "" : "&"
+      get("/#{path}?providers=ecb#{sep}#{query}", {}, env)
+      canonical = last_response
+      get(query.empty? ? "/ecb/#{path}" : "/ecb/#{path}?#{query}", {}, env)
+
+      _(last_response.status).must_equal(canonical.status)
+      _(last_response.body).must_equal(canonical.body)
+      _(last_response.headers.to_h.slice(*headers)).must_equal(canonical.headers.to_h.slice(*headers))
+    end
+
+    it "serves latest rates" do
+      assert_alias("rates")
+      _(last_response).must_be(:ok?)
+      assert_conform_schema(200)
+    end
+
+    it "serves a specific date" do
+      assert_alias("rates", "date=#{historical_date}")
+      assert_conform_schema(200)
+    end
+
+    it "serves a date range" do
+      assert_alias("rates", "from=#{range_start}&to=#{range_end}")
+      assert_conform_schema(200)
+    end
+
+    it "rebases and filters quotes" do
+      assert_alias("rates", "base=USD&quotes=EUR,GBP")
+      assert_conform_schema(200)
+    end
+
+    it "serves weekly rollups" do
+      assert_alias("rates", "from=#{year_start}&to=#{year_end}&group=week")
+      assert_conform_schema(200)
+    end
+
+    it "serves CSV" do
+      assert_alias("rates.csv", "from=#{range_start}&to=#{range_end}")
+      _(last_response.content_type).must_include("text/csv")
+    end
+
+    it "serves NDJSON" do
+      assert_alias("rates", "from=#{range_start}&to=#{range_end}", { "HTTP_ACCEPT" => "application/x-ndjson" })
+      _(last_response.content_type).must_include("application/x-ndjson")
+    end
+
+    it "serves a single pair" do
+      assert_alias("rate/EUR/USD")
+      _(json["base"]).must_equal("EUR")
+      assert_conform_schema(200)
+    end
+
+    it "serves a single pair on a date" do
+      assert_alias("rate/EUR/USD", "date=#{historical_date}")
+      _(json["date"]).must_equal(historical_date)
+    end
+
+    it "is case-insensitive on the provider key" do
+      get "/ecb/rates"
+      lower = last_response.body
+      get "/ECB/rates"
+
+      _(last_response.body).must_equal(lower)
+    end
+
+    it "returns 404 for an unknown provider" do
+      get "/nope/rates"
+
+      _(last_response.status).must_equal(404)
+      assert_conform_schema(404)
+    end
+
+    it "returns 404 for a pair the provider cannot derive" do
+      get "/boc/rate/CAD/SEK"
+
+      _(last_response.status).must_equal(404)
+    end
+
+    it "rejects a providers param" do
+      get "/ecb/rates?providers=boc"
+
+      _(last_response.status).must_equal(422)
+      _(json["message"]).must_include("providers")
+    end
+  end
 end
