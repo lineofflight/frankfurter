@@ -14,8 +14,12 @@ module RateScopes
       where(provider: "ECB")
     end
 
-    # Rows eligible for the blend: every provider whose values stand for a day (#646).
+    # Rows eligible for the blend: every provider whose values stand for a day (#646). Loaded lazily and guarded on the
+    # column, because migration 028 recomputes the blend on a fresh database before 029 adds frequency.
     def blendable
+      require "provider"
+      return self unless Provider.columns.include?(:frequency)
+
       keys = Provider.non_blending_keys
       keys.empty? ? self : exclude(provider: keys)
     end
