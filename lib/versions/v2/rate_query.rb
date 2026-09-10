@@ -314,6 +314,11 @@ module Versions
         return unless range? && !rollup?
         return if !providers && !expand_providers? && BlendedRate.ready?
 
+        # One provider is a fetch plus a one-contributor blend per date, not a cross-provider recompute: measured in
+        # prod at 7s for five years of the largest provider (BDI, 173 quotes), so full history stays inside the request
+        # deadline (#644).
+        return if providers && providers.uniq.size == 1
+
         # A SHORT provider list bounds the fetch, so a small quotes list on top stays cheap; naming every provider
         # reproduces the unbounded workload, hence the provider-count bound. Nothing else bounds work anymore: quotes=
         # filters rows only, after blending, so neither a provider-unbounded expand=providers range nor a plain range on

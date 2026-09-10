@@ -159,8 +159,14 @@ module Versions
       end
 
       it "rejects providers= ranges longer than 5 years without a quotes filter" do
-        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB") }
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB,BOC") }
           .must_raise(V2::RateQuery::ValidationError)
+      end
+
+      it "allows a single provider any range without a quotes filter" do
+        query = V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB")
+
+        _(query.range?).must_equal(true)
       end
 
       it "rejects provider-unbounded expand=providers long ranges even with a small quotes list" do
@@ -177,7 +183,7 @@ module Versions
       end
 
       it "rejects long capped ranges when quotes lists more than 5 currencies" do
-        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB", quotes: "USD,GBP,JPY,CHF,SEK,NOK") }
+        _ { V2::RateQuery.new(from: over_cap_start, to: cap_end, providers: "ECB,BOC", quotes: "USD,GBP,JPY,CHF,SEK,NOK") }
           .must_raise(V2::RateQuery::ValidationError)
       end
 
@@ -195,7 +201,7 @@ module Versions
       end
 
       it "rejects a long past capped range regardless of a future to=" do
-        _ { V2::RateQuery.new(from: (Date.today << 61).to_s, to: (Date.today >> 120).to_s, providers: "ECB") }
+        _ { V2::RateQuery.new(from: (Date.today << 61).to_s, to: (Date.today >> 120).to_s, providers: "ECB,BOC") }
           .must_raise(V2::RateQuery::ValidationError)
       end
 

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Per-provider routes: `/v2/{provider}/rates` and `/v2/{provider}/rate/{base}/{quote}` serve one provider's rates as published, identical to the `providers=` filter. (#643)
+- Daily ranges filtered to a single provider are no longer capped at 5 years. (#644)
 - Nicaraguan córdoba (NIO) peg at 36.6243 per US dollar. (#604)
 
 ### Removed
