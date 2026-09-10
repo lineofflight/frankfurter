@@ -364,6 +364,20 @@ describe Versions::V2 do
     _(json["message"]).must_include("split the range")
   end
 
+  it "serves single-provider daily ranges longer than 5 years" do
+    get "/rates?from=2000-01-01&providers=ecb"
+
+    _(last_response).must_be(:ok?)
+    _(json).wont_be_empty
+  end
+
+  it "keeps the cap for multi-provider daily ranges longer than 5 years" do
+    get "/rates?from=2000-01-01&providers=ecb,boc"
+
+    _(last_response.status).must_equal(422)
+    _(json["message"]).must_include("quotes=")
+  end
+
   it "serves plain daily ranges longer than 5 years without any quotes filter" do
     BlendedRate.rebuild
 
