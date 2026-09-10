@@ -10,7 +10,6 @@ require "minitest/mock"
 require "minitest/around/spec"
 require "minitest/focus"
 require "vcr"
-require "http/cookie"
 require "webmock"
 
 VCR.configure do |c|

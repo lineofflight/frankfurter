@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "bigdecimal"
+require "http/cookie"
 require "http"
 
 class Provider < Sequel::Model(:providers)
