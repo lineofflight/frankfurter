@@ -230,10 +230,6 @@ Or with Docker:
 docker run -d --init -p 80:8080 lineofflight/frankfurter
 ```
 
-### Legacy TLS
-
-BCN's endpoint only supports TLS 1.0, which OpenSSL 3.5+ disables by default. Set `OPENSSL_CONF=config/openssl_legacy.cnf` to enable it. Without this, BCN skips backfill with "legacy TLS required, skipping".
-
 ## Rake Tasks
 
 ```bash
