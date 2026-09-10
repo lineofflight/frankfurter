@@ -216,6 +216,7 @@ DEPENDENCIES
   foreman
   http
   irb
+  json
   logger
   minitest
   minitest-around
