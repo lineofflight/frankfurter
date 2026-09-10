@@ -920,7 +920,7 @@ describe Versions::V2 do
       assert_conform_schema(404)
     end
 
-    it "returns 404 for a pair the provider does not publish" do
+    it "returns 404 for a pair the provider cannot derive" do
       get "/boc/rate/CAD/SEK"
 
       _(last_response.status).must_equal(404)

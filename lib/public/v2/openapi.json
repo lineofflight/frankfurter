@@ -173,7 +173,7 @@
       "get": {
         "operationId": "getProviderRate",
         "summary": "Get a single pair from a provider",
-        "description": "Returns one provider's rate for a single currency pair. Identical to `/rate/{base}/{quote}?providers={provider}`. Returns 404 when the provider does not publish the pair.",
+        "description": "Returns one provider's rate for a single currency pair. Identical to `/rate/{base}/{quote}?providers={provider}`. The pair may be published directly or derived from the provider's own rates for both currencies. Returns 404 when the provider has no data for either currency on the date.",
         "parameters": [
           {
             "name": "provider",
