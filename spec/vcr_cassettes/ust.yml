@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange?fields=record_date,effective_date,country_currency_desc,exchange_rate&filter=record_date:gte:2026-02-01&page%5Bnumber%5D=1&page%5Bsize%5D=10000&sort=record_date
+    uri: https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange?fields=record_date,effective_date,country_currency_desc,exchange_rate&filter=record_date:gte:2026-02-28&page%5Bnumber%5D=1&page%5Bsize%5D=10000&sort=record_date
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 10 Sep 2026 11:37:21 GMT
+      - Thu, 10 Sep 2026 11:47:53 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -39,9 +39,9 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Set-Cookie:
-      - BIGipServer~api.fiscaldata.treasury.gov~main~myPool=!Vrmia4Dev2ubDsKqlXfilVl8VU3xwlHxLXTzNQToQcG1zjXBVfWKuk64kHldVcKn7mEjZpvTDvz8yQ==;
+      - BIGipServer~api.fiscaldata.treasury.gov~main~myPool=!4fQHK+vQ7vQpkUCqlXfilVl8VU3xwqLbTO31xM30T0VfTUe3+QYrelt/2k3X96emlknL1g8+0SPymQ==;
         path=/; Httponly; Secure
-      - cookiesession1=678A3E0ED2E2710304B3C514D44B1710;Expires=Fri, 10 Sep 2027 11:37:21
+      - cookiesession1=678A3E0ED25AD01A38DB5F72D2EAA7B9;Expires=Fri, 10 Sep 2027 11:47:53
         GMT;Path=/;HttpOnly
     body:
       encoding: UTF-8
@@ -150,5 +150,5 @@ http_interactions:
         Kwacha","exchange_rate":"18.0"},{"record_date":"2026-06-30","effective_date":"2026-06-30","country_currency_desc":"Zimbabwe-Gold","exchange_rate":"25.833"}],"meta":{"count":341,"labels":{"record_date":"Record
         Date","effective_date":"Effective Date","country_currency_desc":"Country -
         Currency Description","exchange_rate":"Exchange Rate"},"dataTypes":{"record_date":"DATE","effective_date":"DATE","country_currency_desc":"STRING","exchange_rate":"NUMBER"},"dataFormats":{"record_date":"YYYY-MM-DD","effective_date":"YYYY-MM-DD","country_currency_desc":"String","exchange_rate":"10.2"},"total-count":341,"total-pages":1},"links":{"self":"&page%5Bnumber%5D=1&page%5Bsize%5D=10000","first":"&page%5Bnumber%5D=1&page%5Bsize%5D=10000","prev":null,"next":null,"last":"&page%5Bnumber%5D=1&page%5Bsize%5D=10000"}}'
-  recorded_at: Thu, 10 Sep 2026 11:37:21 GMT
+  recorded_at: Thu, 10 Sep 2026 11:47:53 GMT
 recorded_with: VCR 6.4.0

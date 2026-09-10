@@ -138,7 +138,7 @@ class Provider
         "Mali-Cfa Franc" => "XOF",
         "Maltese-Lira" => [["MTL", nil, "2008-01-01"]],
         "Mauritania-First Ouguiya" => "MRO",
-        "Mauritania-Ouguiya" => [["MRO", nil, "2018-06-01"], ["MRU", "2018-06-01", nil]],
+        "Mauritania-Ouguiya" => [["MRO", nil, "2018-06-30"], ["MRU", "2018-06-30", nil]],
         "Mauritius-Rupee" => "MUR",
         "Mexico-Peso" => "MXN",
         "Moldova-Leu" => "MDL",
@@ -228,17 +228,20 @@ class Provider
 
       def fetch(after: nil, upto: nil)
         upto ||= Date.today
-        records = []
+        rows = []
         page = 1
         loop do
           body = JSON.parse(http.get(API_URL, params: query(after, page)).to_s)
-          records.concat(parse(body["data"]))
+          rows.concat(body["data"])
           break if page >= Integer(body.dig("meta", "total-pages") || 1)
 
           page += 1
         end
 
-        records.select { |r| (after.nil? || r[:date] > after) && r[:date] <= upto }
+        # Parse once over every page, so a record date straddling a page boundary still collapses to one row per pair.
+        # The lower bound is inclusive: a fresh backfill starts on coverage_start, and a re-fetch from last_synced picks
+        # up amendments effective that day; the insert is conflict-free, so replaying a day costs nothing.
+        parse(rows).select { |r| (after.nil? || r[:date] >= after) && r[:date] <= upto }
       end
 
       # One record per (date, quote): amendments carry their own effective date, and when two labels reach the same pair

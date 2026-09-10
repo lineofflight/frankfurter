@@ -14,8 +14,8 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { UST.new }
 
-      it "fetches a quarter's rates dated on their effective dates" do
-        dataset = adapter.fetch(after: Date.new(2026, 6, 1), upto: Date.new(2026, 8, 31))
+      it "fetches a quarter's rates dated on their effective dates, from the start date inclusive" do
+        dataset = adapter.fetch(after: Date.new(2026, 6, 30), upto: Date.new(2026, 8, 31))
         dates = dataset.map { |r| r[:date] }.uniq.sort
 
         _(dataset.size).must_be(:>, 100)
@@ -24,7 +24,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "keeps mid-quarter amendments as their own rows" do
-        dataset = adapter.fetch(after: Date.new(2026, 6, 1), upto: Date.new(2026, 8, 31))
+        dataset = adapter.fetch(after: Date.new(2026, 6, 30), upto: Date.new(2026, 8, 31))
         krw = dataset.select { |r| r[:quote] == "KRW" }.sort_by { |r| r[:date] }
 
         _(krw.map { |r| r[:date] }).must_equal([Date.new(2026, 6, 30), Date.new(2026, 8, 31)])
@@ -32,7 +32,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "emits one row per pair and date" do
-        dataset = adapter.fetch(after: Date.new(2026, 6, 1), upto: Date.new(2026, 8, 31))
+        dataset = adapter.fetch(after: Date.new(2026, 6, 30), upto: Date.new(2026, 8, 31))
         keys = dataset.map { |r| [r[:date], r[:quote]] }
 
         _(keys.uniq.size).must_equal(keys.size)
