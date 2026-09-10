@@ -1,6 +1,6 @@
 # Frankfurter
 
-[Frankfurter](https://frankfurter.dev) is an open-source currency data API that tracks daily exchange rates from institutional sources.
+[Frankfurter](https://frankfurter.dev) is an open-source currency data API that tracks daily exchange rates from central banks and official sources.
 
 ## Deployment
 
