@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Daily ranges filtered to a single provider are no longer capped at 5 years. (#644)
-- Single-provider rates in a non-native base are now crossed through the provider's own base instead of USD, so pairs the provider never bridged to USD are no longer dropped. (#645)
+- Daily ranges computed live (`providers=`, `expand=providers`, or before the precomputed blend is ready) are limited to a few at a time; excess requests get an immediate 503 with a `Retry-After` header instead of queueing. (#650)
 
 ### Removed
 

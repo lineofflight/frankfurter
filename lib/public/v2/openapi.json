@@ -535,7 +535,13 @@
         }
       },
       "ServiceUnavailable": {
-        "description": "The request deadline expired before the response could be computed. Retry with a narrower request: filter with quotes, aggregate with group, or split the range into shorter requests.",
+        "description": "The request deadline expired before the response could be computed, or the worker process is already running its limit of concurrent live daily-range computes (any daily range served live: with providers, with expand=providers, or before the precomputed blend is ready). In the second case a Retry-After header says how many seconds to wait before retrying. Otherwise retry with a narrower request: filter with quotes, aggregate with group, or split the range into shorter requests.",
+        "headers": {
+          "Retry-After": {
+            "description": "Seconds to wait before retrying. Sent when the server is at its limit of concurrent daily range computes.",
+            "schema": { "type": "integer" }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {

@@ -4,6 +4,7 @@ require "digest"
 
 require "roda"
 require "blended_rate"
+require "heavy_slots"
 require "rate"
 require "request_timeout"
 require "weekly_rate"
@@ -35,6 +36,13 @@ module Versions
       MAX_DAILY_RANGE_QUOTES = 5
       MAX_DAILY_RANGE_PROVIDERS = 5
       PIVOT = "USD"
+      HEAVY_SLOTS = HeavySlots.new
+
+      class << self
+        # One counter per process so every request a Puma worker serves draws on the same cap; tests swap in a smaller
+        # one.
+        def heavy_slots = HEAVY_SLOTS
+      end
 
       # Parity harness only: forces the live compute path so the materialized table can be compared against it byte for
       # byte.
@@ -89,7 +97,26 @@ module Versions
         expand&.include?("providers") || false
       end
 
+      # Returns the heavy slot this query holds, if any. Idempotent on purpose: each_daily_range's ensure returns it
+      # after a drained or failed enumeration, and the route's stream callback returns it when a client disconnects
+      # mid-stream and strands the enumerator fiber, whose ensure never runs.
+      def release_slot
+        slots = @heavy_slot
+        @heavy_slot = nil
+        slots&.release
+      end
+
       private
+
+      def acquire_slot!
+        slots = self.class.heavy_slots
+        unless slots.try_acquire
+          raise HeavySlots::Busy,
+                "too many range computes in progress; retry after #{HeavySlots::RETRY_AFTER_SECONDS}s"
+        end
+
+        @heavy_slot = slots
+      end
 
       def max_date
         ds = raw_dataset
@@ -172,7 +199,12 @@ module Versions
       # When the range start is silent, anchor CF on it as well so the response surfaces the most recent prior data —
       # same blend ?date=chunk_range.begin would produce (mirrors Rate.between's snap-back, #71). Dedupe on (quote,
       # observation_date) so a pair whose contributor set hasn't changed doesn't reappear.
+      #
+      # This is the heavy path: the shapes validate_range_cost! bounds (providers=, expand=providers, and the not-ready
+      # fallback) recompute the blend per date, so it draws on the process-wide slot cap and releases the slot however
+      # the enumeration ends (#650). Table-served ranges, rollups, latest and single dates never come through here.
       def each_daily_range
+        acquire_slot!
         seen = Set.new
         each_chunk(date_scope) do |chunk_range|
           lookback_start = chunk_range.begin - CarryForward::LOOKBACK_DAYS
@@ -192,6 +224,8 @@ module Versions
             end
           end
         end
+      ensure
+        release_slot
       end
 
       def rollup?

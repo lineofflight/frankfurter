@@ -408,6 +408,60 @@ describe Versions::V2 do
     _(json["message"]).must_include("timeout")
   end
 
+  describe "heavy compute slots" do
+    let(:slots) { HeavySlots.new(1) }
+    let(:heavy_path) { "/rates?providers=ecb&from=#{range_start}&to=#{range_end}" }
+
+    it "returns 503 with Retry-After when every slot is held" do
+      slots.try_acquire
+      Versions::V2::RateQuery.stub(:heavy_slots, slots) do
+        get heavy_path
+      end
+
+      _(last_response.status).must_equal(503)
+      assert_conform_schema(503)
+      _(last_response.headers["Retry-After"]).must_equal("30")
+      _(last_response.headers["Content-Type"]).must_include("application/json")
+      _(json["status"]).must_equal(503)
+      _(json["message"]).must_include("retry")
+    end
+
+    it "serves the range and returns the slot when the stream drains" do
+      Versions::V2::RateQuery.stub(:heavy_slots, slots) do
+        get heavy_path
+      end
+
+      _(last_response).must_be(:ok?)
+      _(json).wont_be_empty
+      _(slots.held).must_equal(0)
+    end
+
+    # Puma closes the body when a client disconnects mid-stream. The enumerator fiber behind the stream is stranded and
+    # never runs its ensure, so the stream's close callback has to return the slot.
+    it "returns the slot when the client disconnects mid-stream" do
+      Versions::V2::RateQuery.stub(:heavy_slots, slots) do
+        _status, _headers, body = app.call(Rack::MockRequest.env_for(heavy_path))
+
+        _(slots.held).must_equal(1)
+
+        body.close
+
+        _(slots.held).must_equal(0)
+      end
+    end
+
+    it "does not touch the slots for table-served ranges" do
+      BlendedRate.rebuild
+      slots.try_acquire
+      Versions::V2::RateQuery.stub(:heavy_slots, slots) do
+        get "/rates?from=#{range_start}&to=#{range_end}"
+      end
+
+      _(last_response).must_be(:ok?)
+      _(json).wont_be_empty
+    end
+  end
+
   it "routes deterministic errors in range queries through error_handler" do
     bad_query = Object.new
     def bad_query.range? = true

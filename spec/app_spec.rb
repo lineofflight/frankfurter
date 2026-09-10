@@ -174,6 +174,18 @@ describe App do
     _(Oj.load(last_response.body)["message"]).must_include("timeout")
   end
 
+  it "does not cache a 503 from the heavy compute cap" do
+    slots = HeavySlots.new(1)
+    slots.try_acquire
+    Versions::V2::RateQuery.stub(:heavy_slots, slots) do
+      get "/v2/rates?providers=ecb&from=#{Fixtures.business_day(60)}&to=#{Fixtures.latest_date}"
+    end
+
+    _(last_response.status).must_equal(503)
+    _(last_response.headers["cache-control"]).must_equal("no-store")
+    _(last_response.headers["retry-after"]).must_equal("30")
+  end
+
   describe "error responses are not cached" do
     [
       ["root 404", "/nonexistent", 404],

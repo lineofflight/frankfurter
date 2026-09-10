@@ -2,6 +2,7 @@
 
 require "csv"
 require "currency"
+require "heavy_slots"
 require "oj"
 require "provider"
 require "request_timeout"
@@ -38,6 +39,9 @@ module Versions
       status = case error
                when RateQuery::ValidationError then 422
                when RequestTimeout::Error then 503
+               when HeavySlots::Busy
+                 response["retry-after"] = HeavySlots::RETRY_AFTER_SECONDS.to_s
+                 503
                else 500
                end
       request.halt(status, { status:, message: error.message })
@@ -113,7 +117,7 @@ module Versions
           first, rest = eager_split(query)
           response["Content-Type"] = "text/csv"
           headers = csv_headers(query)
-          stream do |out|
+          stream_query(query) do |out|
             out << CSV.generate_line(headers)
             if first
               out << CSV.generate_line(headers.map { |k| csv_value(first[k]) })
@@ -131,7 +135,7 @@ module Versions
         first, rest = eager_split(query)
         response["Vary"] = "Accept"
         response["Content-Type"] = "application/x-ndjson"
-        stream do |out|
+        stream_query(query) do |out|
           if first
             out << Oj.dump(first, mode: :compat)
             out << "\n"
@@ -144,7 +148,7 @@ module Versions
       elsif query.range?
         first, rest = eager_split(query)
         response["Content-Type"] = "application/json; charset=utf-8"
-        stream do |out|
+        stream_query(query) do |out|
           out << "["
           if first
             out << Oj.dump(first, mode: :compat)
@@ -197,6 +201,13 @@ module Versions
       [first, rest]
     rescue StopIteration
       [nil, [].each]
+    end
+
+    # A heavy range holds a compute slot for as long as its enumerator runs. The fiber behind eager_split never runs its
+    # ensure once abandoned, so a client that disconnects mid-stream would strand the slot; Roda closes the stream body
+    # on every exit (drained, raised, or closed by the server), and the callback returns the slot there (#650).
+    def stream_query(query, &)
+      stream(callback: -> { query.release_slot }, &)
     end
 
     def ndjson?(request)
