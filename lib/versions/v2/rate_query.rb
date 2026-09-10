@@ -413,6 +413,7 @@ module Versions
         # through; mirror the fast path's refusal instead of answering from whatever the named providers happen to
         # publish.
         return [] if providers && base_peg
+        return single_provider_blend(rows) if providers && providers.uniq.size == 1
 
         blended = Blender.new(rows, base: PIVOT).blend
         blended = PegAnchor.apply(blended, base: PIVOT) unless providers
@@ -420,6 +421,22 @@ module Versions
         return blended if base == PIVOT
 
         derive(blended, target: base)
+      end
+
+      # One provider has nothing to blend against, so its rows skip the pivot frame: the request base is reached by one
+      # hop through the provider's own base rather than a round trip through USD. That keeps rows the provider never
+      # bridged to USD, and derives each pair from two rows instead of four (#645). The contributor entry mirrors the
+      # row so expand=providers keeps its shape.
+      def single_provider_blend(rows)
+        # Rollup chunks arrive as model instances; the daily paths as naked hashes. BaseConversion wants hashes.
+        rows = rows.map { |r| r.is_a?(Sequel::Model) ? r.values : r }
+        converted = BaseConversion.new(rows, base:).convert
+        # A provider mid-transition between pivot currencies (LB around Lithuania's euro adoption) reaches one quote
+        # through two bridges dated differently: the carried-forward old-base row and the new-base row. One record per
+        # pair, and the newer observation wins, as everywhere else carry-forward applies.
+        converted.group_by { |r| r[:quote] }.map { |_, group| group.max_by { |r| r[:date] } }.map do |r|
+          r.except(:provider).merge(providers: [{ key: r[:provider], date: r[:date], rate: r[:rate] }])
+        end
       end
 
       def normalize_dates!(rows, date_col)

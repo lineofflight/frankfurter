@@ -5,6 +5,76 @@ require "versions/v2/rate_query"
 
 module Versions
   describe V2::RateQuery do
+    describe "single-provider path" do
+      let(:date) { Fixtures.latest_date }
+      let(:stored) { Rate.where(provider: "ECB", date:).to_h { |r| [[r.base, r.quote], r.rate] } }
+
+      it "echoes the provider's published digits in its native base" do
+        records = V2::RateQuery.new(providers: "ECB", base: "EUR", date: date.to_s).to_a.reject { |r| r[:quote] == "EUR" }
+
+        _(records.size).must_equal(stored.size)
+        records.each { |r| _(r[:rate]).must_equal(stored[["EUR", r[:quote]]]) }
+      end
+
+      it "crosses a non-native base through the provider's own base in one division" do
+        record = V2::RateQuery.new(providers: "ECB", base: "GBP", quotes: "JPY", date: date.to_s).to_a.first
+
+        _(record[:rate]).must_equal(query_round("JPY", stored[["EUR", "JPY"]] / stored[["EUR", "GBP"]]))
+      end
+
+      it "keeps rows the provider cannot bridge to USD" do
+        Rate.dataset.multi_insert([
+          { provider: "TST", date:, base: "EUR", quote: "GBP", rate: 0.86 },
+          { provider: "TST", date:, base: "EUR", quote: "JPY", rate: 160.0 },
+        ])
+
+        records = V2::RateQuery.new(providers: "TST", base: "GBP", date: date.to_s).to_a
+        by_quote = records.to_h { |r| [r[:quote], r[:rate]] }
+
+        _(by_quote.keys.sort).must_equal(["EUR", "GBP", "JPY"])
+        _(by_quote["JPY"]).must_equal(query_round("JPY", 160.0 / 0.86))
+        _(by_quote["EUR"]).must_equal(query_round("EUR", 1 / 0.86))
+        _(by_quote["GBP"]).must_equal(1.0)
+      end
+
+      it "keeps one record per pair when an older base still bridges the quote" do
+        Rate.dataset.multi_insert([
+          { provider: "TST", date: date - 1, base: "USD", quote: "LTL", rate: 2.8387 },
+          { provider: "TST", date: date - 1, base: "EUR", quote: "LTL", rate: 3.4528 },
+          { provider: "TST", date:, base: "EUR", quote: "USD", rate: 1.2043 },
+        ])
+
+        records = V2::RateQuery.new(providers: "TST", base: "USD", quotes: "EUR", date: date.to_s).to_a
+
+        _(records.size).must_equal(1)
+        _(records.first[:date]).must_equal(date.to_s)
+        _(records.first[:rate]).must_equal(query_round("EUR", 1 / 1.2043))
+      end
+
+      it "still expands providers" do
+        record = V2::RateQuery.new(providers: "ECB", base: "GBP", quotes: "JPY", date: date.to_s, expand: "providers")
+          .to_a.first
+
+        _(record[:providers].size).must_equal(1)
+        _(record[:providers].first[:key]).must_equal("ECB")
+        _(record[:providers].first[:date]).must_equal(date.to_s)
+        _(record[:providers].first[:rate]).must_equal(record[:rate])
+      end
+
+      it "emits one record per published date across a non-native range" do
+        from = Fixtures.business_day(5)
+        records = V2::RateQuery.new(providers: "ECB", base: "GBP", quotes: "JPY", from: from.to_s, to: date.to_s).to_a
+
+        published = Rate.where(provider: "ECB", date: from..date).select_map(:date).uniq.size
+
+        _(records.map { |r| r[:date] }.uniq.size).must_equal(published)
+      end
+
+      def query_round(_quote, value)
+        V2::RateQuery.new({}).send(:round, value)
+      end
+    end
+
     it "raises on invalid date" do
       _ { V2::RateQuery.new(date: "not-a-date") }.must_raise(V2::RateQuery::ValidationError)
     end
