@@ -194,6 +194,109 @@ module Versions
       end
     end
 
+    describe "heavy compute slots" do
+      let(:range_start) { (Fixtures.latest_date - 200).to_s }
+      let(:range_end) { Fixtures.latest_date.to_s }
+      let(:slots) { HeavySlots.new(1) }
+
+      # providers= keeps the range on the live path regardless of the materialized table.
+      def heavy_query(**params)
+        V2::RateQuery.new(providers: "ECB", from: range_start, to: range_end, **params)
+      end
+
+      def with_slots(&)
+        V2::RateQuery.stub(:heavy_slots, slots, &)
+      end
+
+      it "refuses a heavy range while every slot is held and admits one once it is released" do
+        with_slots do
+          paused = heavy_query.each
+          paused.next
+
+          _(slots.held).must_equal(1)
+          _ { heavy_query.to_a }.must_raise(HeavySlots::Busy)
+
+          loop { paused.next }
+
+          _(slots.held).must_equal(0)
+          _(heavy_query.to_a).wont_be_empty
+        end
+      end
+
+      it "fails fast with a message that names the retry delay" do
+        with_slots do
+          slots.try_acquire
+          error = _ { heavy_query.to_a }.must_raise(HeavySlots::Busy)
+
+          _(error.message).must_include(HeavySlots::RETRY_AFTER_SECONDS.to_s)
+        end
+      end
+
+      it "releases the slot after a complete enumeration" do
+        with_slots do
+          _(heavy_query.to_a).wont_be_empty
+          _(slots.held).must_equal(0)
+        end
+      end
+
+      it "releases the slot when the deadline expires mid-compute" do
+        with_slots do
+          query = heavy_query
+
+          _ do
+            query.each { query.instance_variable_set(:@deadline, 0) }
+          end.must_raise(RequestTimeout::Error)
+
+          _(slots.held).must_equal(0)
+        end
+      end
+
+      it "releases the slot when the compute raises" do
+        with_slots do
+          query = heavy_query
+
+          query.stub(:emit_blended, ->(*) { raise "boom" }) do
+            _ { query.to_a }.must_raise(RuntimeError)
+          end
+
+          _(slots.held).must_equal(0)
+        end
+      end
+
+      # An enumerator abandoned mid-stream (client disconnect) never runs its ensure, so the route returns the slot
+      # through release_slot; a second call must be a no-op.
+      it "releases an abandoned enumeration's slot on release_slot, once" do
+        with_slots do
+          query = heavy_query
+          query.each.next
+
+          _(slots.held).must_equal(1)
+
+          query.release_slot
+          query.release_slot
+
+          _(slots.held).must_equal(0)
+        end
+      end
+
+      it "leaves cheap shapes untouched while every slot is held" do
+        BlendedRate.rebuild
+        with_slots do
+          slots.try_acquire
+
+          _(V2::RateQuery.new(from: range_start, to: range_end).to_a).wont_be_empty
+          _(V2::RateQuery.new(from: range_start, to: range_end, group: "week").to_a).wont_be_empty
+          _(V2::RateQuery.new(from: range_start, to: range_end, group: "month", providers: "ECB").to_a)
+            .wont_be_empty
+          _(V2::RateQuery.new({}).to_a).wont_be_empty
+          _(V2::RateQuery.new(providers: "ECB").to_a).wont_be_empty
+          _(V2::RateQuery.new(date: range_end).to_a).wont_be_empty
+          _(V2::RateQuery.new(date: range_end, expand: "providers").to_a).wont_be_empty
+          _(slots.held).must_equal(1)
+        end
+      end
+    end
+
     describe "daily range cap for live-path shapes" do
       # Validation is date arithmetic only, so fixed dates keep these deterministic.
       let(:cap_end) { "2026-01-15" }
