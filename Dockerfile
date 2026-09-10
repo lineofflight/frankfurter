@@ -2,6 +2,7 @@
 FROM ruby:4.0.6-slim AS builder
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     build-essential \
     libyaml-dev && \
@@ -20,6 +21,7 @@ RUN gem install bundler && \
 FROM ruby:4.0.6-slim
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     curl \
     libyaml-0-2 && \
