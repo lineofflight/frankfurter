@@ -1,0 +1,13 @@
+{
+  "key": "UST",
+  "name": "U.S. Department of the Treasury",
+  "country_code": "US",
+  "rate_type": "reporting rate",
+  "pivot_currency": "USD",
+  "data_url": "https://fiscaldata.treasury.gov/datasets/treasury-reporting-rates-exchange/treasury-reporting-rates-of-exchange",
+  "terms_url": "https://fiscaldata.treasury.gov/api-documentation/#license-and-authorization",
+  "publish_schedule": "*/30 13-15 * * 1-5",
+  "publish_cadence": "quarterly",
+  "frequency": "quarterly",
+  "coverage_start": "2001-03-31"
+}
