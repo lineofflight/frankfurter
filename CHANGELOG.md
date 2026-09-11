@@ -9,40 +9,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- HM Revenue & Customs (HMRC) as a data provider: monthly customs rates since 2021, served by provider only. (#172)
+- HM Revenue & Customs (HMRC) as a data provider. (#172)
 
 ### Fixed
 
-- UST's leone rates for May to July 2022, dropped around the redenomination, are served again. (#666)
+- UST leone rates around the 2022 redenomination. (#666)
 
 ## [2.5.1] - 2026-09-10
 
 ### Fixed
 
-- Provider `frequency` seeded from JSON was reset to daily on every start, so UST was blended and served with a two-week carry-forward. (#656)
+- UST entered the blend because `frequency` reset to daily on every start. (#656)
 
 ## [2.5.0] - 2026-09-10
 
 ### Added
 
-- U.S. Department of the Treasury (UST) as a data provider: quarterly reporting rates of exchange since 2001, served by provider only. (#647)
-- `frequency` on `/v2/providers`: the period each observation stands for (daily, monthly, quarterly). Providers coarser than daily never enter the blend and carry forward across their period when queried by name. (#646)
-- Per-provider routes: `/v2/providers/{provider}`, `/v2/providers/{provider}/rates` and `/v2/providers/{provider}/rate/{base}/{quote}` serve one provider's entry and its rates as published, identical to the `providers=` filter. (#643)
-- Nicaraguan córdoba (NIO) peg at 36.6243 per US dollar. (#604)
+- U.S. Department of the Treasury (UST) as a data provider. (#647)
+- `frequency` on `/v2/providers`. (#646)
+- Per-provider routes under `/v2/providers/{provider}`. (#643)
+- Nicaraguan córdoba (NIO) peg. (#604)
 
 ### Changed
 
-- Daily ranges filtered to a single provider are no longer capped at 5 years. (#644)
-- Single-provider rates in a non-native base are now crossed through the provider's own base instead of USD, so pairs the provider never bridged to USD are no longer dropped. (#645)
-- Daily ranges computed live (`providers=`, `expand=providers`, or before the precomputed blend is ready) are limited to a few at a time; excess requests get an immediate 503 with a `Retry-After` header instead of queueing. (#650)
+- No 5-year cap on single-provider daily ranges. (#644)
+- Single-provider rates cross through the provider's own base. (#645)
+- Live daily ranges are throttled; excess requests get a 503 with `Retry-After`. (#650)
 
 ### Removed
 
-- Banco Central de Nicaragua (BCN) as a data provider; NIO is now served from its peg. (#604)
+- Banco Central de Nicaragua (BCN) as a data provider. (#604)
 
 ### Fixed
 
-- Peg rates no longer override provider rates for dates before the peg took effect. (#603)
+- Peg rates no longer override provider rates before the peg took effect. (#603)
 
 ## [2.4.0] - 2026-09-09
 
