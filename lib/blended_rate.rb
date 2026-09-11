@@ -56,13 +56,10 @@ class BlendedRate < Sequel::Model(:blended_rates)
           Sequel.function(:min, :date).as(:min),
           Sequel.function(:max, :date).as(:max),
         ).first
+        next unless bounds[:min]
 
-        if bounds && bounds[:min]
-          active_window = Date.parse(bounds[:min])..Date.parse(bounds[:max])
-          dataset.exclude(date: active_window).delete
-        else
-          dataset.delete
-        end
+        active_window = Date.parse(bounds[:min])..Date.parse(bounds[:max])
+        dataset.exclude(date: active_window).delete
       end
     end
 
