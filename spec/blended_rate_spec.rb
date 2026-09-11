@@ -50,6 +50,7 @@ describe BlendedRate do
       BlendedRate.define_singleton_method(:refresh_chunk) do |chunk|
         observed_ready_states << BlendedRate.ready?
         original_refresh_chunk.call(chunk)
+        observed_ready_states << BlendedRate.ready?
       end
 
       begin
@@ -57,6 +58,30 @@ describe BlendedRate do
 
         _(observed_ready_states).wont_be_empty
         _(observed_ready_states.all?(true)).must_equal(true)
+      ensure
+        BlendedRate.define_singleton_method(:refresh_chunk, original_refresh_chunk)
+      end
+    end
+
+    it "prunes stale leading rows upfront so readiness is maintained after a range shrink" do
+      BlendedRate.rebuild
+      first_date = Date.parse(Rate.blendable.min(:date))
+      stale_early = first_date - 10
+      BlendedRate.dataset.insert(date: stale_early, quote: "EUR", rate: 1.0)
+
+      observed_initial_readiness = nil
+      original_refresh_chunk = BlendedRate.method(:refresh_chunk)
+      BlendedRate.define_singleton_method(:refresh_chunk) do |chunk|
+        observed_initial_readiness ||= BlendedRate.ready?
+        original_refresh_chunk.call(chunk)
+      end
+
+      begin
+        BlendedRate.rebuild
+
+        _(observed_initial_readiness).must_equal(true)
+        _(BlendedRate.ready?).must_equal(true)
+        _(BlendedRate.where(date: stale_early).count).must_equal(0)
       ensure
         BlendedRate.define_singleton_method(:refresh_chunk, original_refresh_chunk)
       end

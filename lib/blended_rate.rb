@@ -30,23 +30,40 @@ class BlendedRate < Sequel::Model(:blended_rates)
     end
 
     # Rebuilds in place newest-first: existing chunks remain readable throughout the run so ready? stays true and
-    # requests never fall back to live compute. Chunks replace themselves transactionally; a final sweep prunes rows
-    # outside the active date range.
+    # requests never fall back to live compute. Stale leading rows are pruned upfront under an immediate transaction so
+    # an active-range shrink preserves readiness immediately. Chunks replace themselves transactionally, and a final
+    # immediate sweep re-checks bounds to prune rows outside the active date range without racing concurrent backfills.
     def rebuild
-      first = Rate.blendable.min(:date)
-      unless first
-        dataset.delete
-        return
+      window = db.transaction(mode: :immediate) do
+        first = Rate.blendable.min(:date)
+        if first
+          min = Date.parse(first)
+          dataset.where { date < min }.delete
+          min..Date.parse(Rate.blendable.max(:date))
+        else
+          dataset.delete
+          nil
+        end
       end
+      return unless window
 
-      min_date = Date.parse(first)
-      max_date = Date.parse(Rate.blendable.max(:date))
-
-      chunks(min_date..max_date).reverse_each do |chunk|
+      chunks(window).reverse_each do |chunk|
         refresh_chunk(chunk)
       end
 
-      dataset.exclude(date: min_date..max_date).delete
+      db.transaction(mode: :immediate) do
+        bounds = Rate.blendable.select(
+          Sequel.function(:min, :date).as(:min),
+          Sequel.function(:max, :date).as(:max),
+        ).first
+
+        if bounds && bounds[:min]
+          active_window = Date.parse(bounds[:min])..Date.parse(bounds[:max])
+          dataset.exclude(date: active_window).delete
+        else
+          dataset.delete
+        end
+      end
     end
 
     # The table serves reads only once it covers full history: an incremental refresh makes it non-empty long before
