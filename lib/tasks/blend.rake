@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-desc "Rebuild the materialized blend from scratch"
+desc "Rebuild the materialized blend in place"
 task "blend:rebuild" do
   require "blended_rate"
   require "cache"

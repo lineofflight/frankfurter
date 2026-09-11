@@ -39,6 +39,113 @@ describe BlendedRate do
 
       _(BlendedRate.where(quote: "MXN").select_order_map(:date)).must_equal([d1, d2])
     end
+
+    it "rebuilds in place so ready? remains true throughout" do
+      BlendedRate.rebuild
+
+      _(BlendedRate.ready?).must_equal(true)
+
+      observed_ready_states = []
+      original_refresh_chunk = BlendedRate.method(:refresh_chunk)
+      BlendedRate.define_singleton_method(:refresh_chunk) do |chunk|
+        observed_ready_states << BlendedRate.ready?
+        original_refresh_chunk.call(chunk)
+        observed_ready_states << BlendedRate.ready?
+      end
+
+      begin
+        BlendedRate.rebuild
+
+        _(observed_ready_states).wont_be_empty
+        _(observed_ready_states.all?(true)).must_equal(true)
+      ensure
+        BlendedRate.define_singleton_method(:refresh_chunk, original_refresh_chunk)
+      end
+    end
+
+    it "prunes stale leading rows upfront so readiness is maintained after a range shrink" do
+      BlendedRate.rebuild
+      first_date = Date.parse(Rate.blendable.min(:date))
+      stale_early = first_date - 10
+      BlendedRate.dataset.insert(date: stale_early, quote: "EUR", rate: 1.0)
+
+      observed_initial_readiness = nil
+      original_refresh_chunk = BlendedRate.method(:refresh_chunk)
+      BlendedRate.define_singleton_method(:refresh_chunk) do |chunk|
+        observed_initial_readiness ||= BlendedRate.ready?
+        original_refresh_chunk.call(chunk)
+      end
+
+      begin
+        BlendedRate.rebuild
+
+        _(observed_initial_readiness).must_equal(true)
+        _(BlendedRate.ready?).must_equal(true)
+        _(BlendedRate.where(date: stale_early).count).must_equal(0)
+      ensure
+        BlendedRate.define_singleton_method(:refresh_chunk, original_refresh_chunk)
+      end
+    end
+
+    it "prunes rows at exact day boundaries outside the active rate range" do
+      BlendedRate.rebuild
+      first_date = Date.parse(Rate.blendable.min(:date))
+      last_date = Date.parse(Rate.blendable.max(:date))
+
+      stale_prev = first_date - 1
+      stale_next = last_date + 1
+      BlendedRate.dataset.multi_insert([
+        { date: stale_prev, quote: "EUR", rate: 1.0 },
+        { date: stale_next, quote: "EUR", rate: 1.0 },
+      ])
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.where(date: stale_prev).count).must_equal(0)
+      _(BlendedRate.where(date: stale_next).count).must_equal(0)
+      _(BlendedRate.where(date: first_date).count).must_be(:>, 0)
+      _(BlendedRate.where(date: last_date).count).must_be(:>, 0)
+    end
+
+    it "prunes contracted boundary dates when historical edge rates are deleted" do
+      BlendedRate.rebuild
+      old_first = Rate.blendable.min(:date)
+      old_last = Rate.blendable.max(:date)
+
+      Rate.dataset.where(date: [old_first, old_last]).delete
+      new_first = Rate.blendable.min(:date)
+      new_last = Rate.blendable.max(:date)
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.where(date: old_first).count).must_equal(0)
+      _(BlendedRate.where(date: old_last).count).must_equal(0)
+      _(BlendedRate.min(:date)).must_equal(new_first)
+      _(BlendedRate.max(:date)).must_equal(new_last)
+      _(BlendedRate.ready?).must_equal(true)
+    end
+
+    it "handles a single-date active range where min_date equals max_date" do
+      single_date = Fixtures.latest_date
+      Rate.dataset.exclude(date: single_date).delete
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.dataset.count).must_be(:>, 0)
+      _(BlendedRate.min(:date)).must_equal(single_date.to_s)
+      _(BlendedRate.max(:date)).must_equal(single_date.to_s)
+      _(BlendedRate.ready?).must_equal(true)
+    end
+
+    it "clears the table if there are no blendable rates" do
+      BlendedRate.rebuild
+      Rate.dataset.delete
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.dataset.count).must_equal(0)
+      _(BlendedRate.ready?).must_equal(false)
+    end
   end
 
   describe ".ready?" do
