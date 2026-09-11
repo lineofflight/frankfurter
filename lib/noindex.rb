@@ -3,9 +3,9 @@
 # Rack middleware that tells search engines not to index API responses. Google had crawled hundreds of rate URLs it then
 # declined to index; the header makes that explicit. It says nothing about crawling, so user-driven fetchers
 # (Claude-User, ChatGPT-User, Perplexity-User) and plain HTTP clients are unaffected, unlike a robots.txt Disallow,
-# which some of them honour. The OpenAPI specs stay indexable as the machine-readable entry point.
+# which some of them honour. The index documents and OpenAPI specs stay indexable as entry points; rate data does not.
 class Noindex
-  EXEMPT = ["/v1/openapi.json", "/v2/openapi.json"].freeze
+  EXEMPT = ["/", "/v1", "/v2", "/v1/openapi.json", "/v2/openapi.json"].freeze
 
   def initialize(app)
     @app = app

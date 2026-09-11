@@ -142,7 +142,7 @@ describe App do
   end
 
   describe "search engine indexing" do
-    ["/", "/robots.txt", "/v1/latest", "/v2/rates", "/v2/currencies", "/nonexistent"].each do |path|
+    ["/robots.txt", "/v1/latest", "/v2/rates", "/v2/currencies", "/nonexistent"].each do |path|
       it "sets X-Robots-Tag: noindex on #{path}" do
         get path
 
@@ -150,7 +150,7 @@ describe App do
       end
     end
 
-    ["/v1/openapi.json", "/v2/openapi.json"].each do |path|
+    ["/", "/v1", "/v2", "/v1/openapi.json", "/v2/openapi.json"].each do |path|
       it "leaves #{path} indexable" do
         get path
 
