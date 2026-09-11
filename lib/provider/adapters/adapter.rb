@@ -46,6 +46,16 @@ class Provider < Sequel::Model(:providers)
 
         def backfill_range = nil
 
+        # True for a source that may replace an already-published value in place (HMRC can correct a monthly customs
+        # rate mid-month). Backfill is insert-only, so such a correction would otherwise pass unnoticed; flagging the
+        # adapter makes backfill compare fetched rows against stored ones and warn on drift.
+        def revises? = false
+
+        # How many days ahead of the fetch a row may legitimately be dated. Most sources publish for today or the next
+        # business day, which the universal grace window covers; a source that publishes a rate before its period starts
+        # (HMRC: the coming month's customs rates) declares the lead so validation keeps the rows.
+        def lead_days = 0
+
         def fetch_each(after: nil)
           return if after && after >= Date.today
 

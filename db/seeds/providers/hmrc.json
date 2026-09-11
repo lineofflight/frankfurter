@@ -6,7 +6,7 @@
   "pivot_currency": "GBP",
   "data_url": "https://www.trade-tariff.service.gov.uk/exchange_rates/monthly",
   "terms_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
-  "publish_schedule": "*/30 11-13 * * 1-5",
+  "publish_schedule": "*/30 11-13 15-28 * *",
   "publish_cadence": "monthly",
   "frequency": "monthly",
   "coverage_start": "2021-01-01"

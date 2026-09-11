@@ -110,11 +110,12 @@ class Provider < Sequel::Model(:providers)
     fetched = false
     adapter.fetch_each(after:) do |records|
       fetched = true
-      RateValidation.reject!(records)
+      RateValidation.reject!(records, lead_days: adapter.lead_days)
       records.each do |r|
         r[:provider] = key
         r[:rate] = RatePrecision.normalize(r[:rate])
       end
+      warn_revisions(records) if adapter.revises?
 
       inserted = db.transaction do
         before = db.get(Sequel.lit("total_changes()"))
@@ -146,6 +147,23 @@ class Provider < Sequel::Model(:providers)
   end
 
   private
+
+  # Insert-only backfill never rewrites a stored row, so a source that revises a published value in place leaves us
+  # holding the old one. Report the drift; the fix is the documented delete-and-refetch.
+  def warn_revisions(records)
+    stored = Rate.where(provider: key, date: records.map { |r| r[:date] }.uniq).as_hash([:date, :base, :quote], :rate)
+    drifted = records.filter_map do |r|
+      value = stored[[r[:date], r[:base], r[:quote]]]
+      [r, value] if value && value != r[:rate]
+    end
+    return if drifted.empty?
+
+    detail = drifted.first(5).map do |r, value|
+      "#{r[:date]} #{r[:base]}/#{r[:quote]} stored #{value} fetched #{r[:rate]}"
+    end
+    noun = drifted.size == 1 ? "1 stored rate differs" : "#{drifted.size} stored rates differ"
+    Log.warn("#{key}: #{noun} from source: #{detail.join(", ")}")
+  end
 
   def count_fire_days(cron, last_date, reference_date)
     count = 0

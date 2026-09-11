@@ -480,4 +480,60 @@ http_interactions:
         Zambia,Kwacha,ZMW,25.5323,01/09/2026,30/09/2026
         Zimbabwe,Zimbabwe Gold,ZWG,36.2052,01/09/2026,30/09/2026
   recorded_at: Fri, 11 Sep 2026 08:01:24 GMT
+- request:
+    method: get
+    uri: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2026-10.csv
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.trade-tariff.service.gov.uk
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '35'
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"detail":"not found"}]}'
+  recorded_at: Fri, 11 Sep 2026 08:36:51 GMT
+- request:
+    method: get
+    uri: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2020-12.csv
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.trade-tariff.service.gov.uk
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '35'
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"detail":"not found"}]}'
+  recorded_at: Fri, 11 Sep 2026 08:36:51 GMT
 recorded_with: VCR 6.4.0

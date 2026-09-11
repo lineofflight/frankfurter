@@ -347,6 +347,60 @@ describe Provider do
       _(Rate.where(provider: provider.key, date: import_date).count).must_equal(1)
     end
 
+    describe "when the adapter revises published values in place" do
+      # HMRC may correct a monthly customs rate mid-month. If the correction replaces the row in its file rather than
+      # adding one with a later start date, insert-only backfill keeps the stale figure. Surface the drift.
+      let(:revising_adapter) { Class.new(adapter) { def self.revises? = true } }
+
+      before do
+        Rate.create(provider: provider.key, date: import_date, base: "EUR", quote: "USD", rate: 1.0)
+      end
+
+      it "warns when a fetched value differs from the stored row" do
+        logged = nil
+        Log.stub(:warn, ->(message) { logged = message }) do
+          provider.stub(:adapter, revising_adapter) { provider.backfill(after: import_date - 1) }
+        end
+
+        _(logged).must_include("#{provider.key}: 1 stored rate differs from source")
+        _(logged).must_include("#{import_date} EUR/USD stored 1.0 fetched 1.1")
+      end
+
+      it "keeps the stored value" do
+        Log.stub(:warn, ->(_) {}) do
+          provider.stub(:adapter, revising_adapter) { provider.backfill(after: import_date - 1) }
+        end
+
+        _(Rate.where(provider: provider.key, date: import_date, quote: "USD").first.rate).must_equal(1.0)
+      end
+
+      it "stays quiet for an adapter that does not revise" do
+        logged = nil
+        Log.stub(:warn, ->(message) { logged = message }) do
+          provider.stub(:adapter, adapter) { provider.backfill(after: import_date - 1) }
+        end
+
+        _(logged).must_be_nil
+      end
+    end
+
+    it "keeps a forward-dated row for an adapter with a publication lead" do
+      ahead = Date.today + 14
+      leading_adapter = Class.new(Provider::Adapters::Adapter) do
+        def self.lead_days = 31
+
+        define_method(:fetch) do |**|
+          [{ date: ahead, base: "EUR", quote: "USD", rate: 1.1 }]
+        end
+      end
+
+      provider.stub(:adapter, leading_adapter) do
+        provider.backfill
+      end
+
+      _(Rate.where(provider: provider.key, date: ahead).count).must_equal(1)
+    end
+
     it "excludes unrecognised currency codes" do
       bad_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
