@@ -29,16 +29,24 @@ class BlendedRate < Sequel::Model(:blended_rates)
       chunks(window).each { |chunk| refresh_chunk(chunk) }
     end
 
-    # Newest-first, so ready? (coverage of the oldest rate date) flips only when the final chunk lands and a rebuild in
-    # progress never looks complete.
+    # Rebuilds in place newest-first: existing chunks remain readable throughout the run so ready? stays true and
+    # requests never fall back to live compute. Chunks replace themselves transactionally; a final sweep prunes rows
+    # outside the active date range.
     def rebuild
-      dataset.delete
       first = Rate.blendable.min(:date)
-      return unless first
+      unless first
+        dataset.delete
+        return
+      end
 
-      chunks(Date.parse(first)..Date.parse(Rate.blendable.max(:date))).reverse_each do |chunk|
+      min_date = Date.parse(first)
+      max_date = Date.parse(Rate.blendable.max(:date))
+
+      chunks(min_date..max_date).reverse_each do |chunk|
         refresh_chunk(chunk)
       end
+
+      dataset.exclude(date: min_date..max_date).delete
     end
 
     # The table serves reads only once it covers full history: an incremental refresh makes it non-empty long before

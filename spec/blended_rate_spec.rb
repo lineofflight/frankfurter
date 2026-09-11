@@ -39,6 +39,56 @@ describe BlendedRate do
 
       _(BlendedRate.where(quote: "MXN").select_order_map(:date)).must_equal([d1, d2])
     end
+
+    it "rebuilds in place so ready? remains true throughout" do
+      BlendedRate.rebuild
+
+      _(BlendedRate.ready?).must_equal(true)
+
+      observed_ready_states = []
+      original_refresh_chunk = BlendedRate.method(:refresh_chunk)
+      BlendedRate.define_singleton_method(:refresh_chunk) do |chunk|
+        observed_ready_states << BlendedRate.ready?
+        original_refresh_chunk.call(chunk)
+      end
+
+      begin
+        BlendedRate.rebuild
+
+        _(observed_ready_states).wont_be_empty
+        _(observed_ready_states.all?(true)).must_equal(true)
+      ensure
+        BlendedRate.define_singleton_method(:refresh_chunk, original_refresh_chunk)
+      end
+    end
+
+    it "prunes rows outside the active rate range" do
+      BlendedRate.rebuild
+      first_date = Date.parse(Rate.blendable.min(:date))
+      last_date = Date.parse(Rate.blendable.max(:date))
+
+      stale_early = first_date - 10
+      stale_late = last_date + 10
+      BlendedRate.dataset.multi_insert([
+        { date: stale_early, quote: "EUR", rate: 1.0 },
+        { date: stale_late, quote: "EUR", rate: 1.0 },
+      ])
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.where(date: stale_early).count).must_equal(0)
+      _(BlendedRate.where(date: stale_late).count).must_equal(0)
+    end
+
+    it "clears the table if there are no blendable rates" do
+      BlendedRate.rebuild
+      Rate.dataset.delete
+
+      BlendedRate.rebuild
+
+      _(BlendedRate.dataset.count).must_equal(0)
+      _(BlendedRate.ready?).must_equal(false)
+    end
   end
 
   describe ".ready?" do
