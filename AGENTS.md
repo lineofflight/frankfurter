@@ -284,9 +284,32 @@ Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
 ### Changelog (`CHANGELOG.md`)
 
 - **Audience**: API consumers only. Omit internal plumbing (CI, Docker, refactors, scraper error handling).
-- **Brevity**: One concise sentence per entry. Do not list currency baskets, date ranges, or implementation minutiae.
-- **Sections**: Group strictly under Keep a Changelog headers (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`). Never duplicate headers.
-- **Citations**: Suffix entries with bare issue or PR numbers in parentheses (`(#123)`). Do not format them as markdown links.
+- **Length**: a few words, one line. Name what changed, not why or how. No causes, no mechanisms, no "so that".
+  No currency baskets, date ranges, thresholds or implementation detail.
+- **Providers**: `- <Full name> (<KEY>) as a data provider. (#n)` for added and removed, nothing more. Frequency,
+  coverage start and route are documented elsewhere.
+- **Same cycle**: a fix or change to something still under `Unreleased` is part of that entry, not a new one.
+- **Sections**: Keep a Changelog headers only (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`). Never
+  duplicate a header.
+- **Citations**: bare issue or PR number in parentheses, `(#123)`, never a markdown link.
+
+Too long:
+
+```
+- HMRC rates for the coming month are available as soon as HMRC publishes them, dated the 1st they take effect.
+- UST's leone rates for May to July 2022, dropped around the redenomination, are served again. (#666)
+- Per-provider routes: `/v2/providers/{provider}`, `/v2/providers/{provider}/rates` and
+  `/v2/providers/{provider}/rate/{base}/{quote}` serve one provider's entry and its rates as published. (#643)
+```
+
+Right:
+
+```
+- UST leone rates around the 2022 redenomination. (#666)
+- Per-provider routes under `/v2/providers/{provider}`. (#643)
+```
+
+(The first line above gets no entry at all: HMRC was added in the same cycle.)
 
 ### Recovering from a shared tree
 
