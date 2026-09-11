@@ -174,7 +174,7 @@ class Provider
         "Senegal-Cfa Franc" => "XOF",
         "Serbia-Dinar" => "RSD",
         "Seychelles-Rupee" => "SCR",
-        "Sierra Leone-Leone" => [["SLL", nil, "2022-04-01"], ["SLE", "2022-09-01", nil]],
+        "Sierra Leone-Leone" => [["SLL", nil, "2022-07-01"], ["SLE", "2022-07-01", nil]],
         "Singapore-Dollar" => "SGD",
         "Slovak-Korun" => [["SKK", nil, "2009-01-01"]],
         "Slovenia-Tolars" => [["SIT", nil, "2007-01-01"]],

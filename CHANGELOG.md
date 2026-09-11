@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - HMRC's November 2022 Sierra Leone rate, an old-leone value labelled SLE, is no longer served under the new code.
+- UST's leone rates for May to July 2022, dropped around the redenomination, are served again. (#666)
 
 ## [2.5.1] - 2026-09-10
 

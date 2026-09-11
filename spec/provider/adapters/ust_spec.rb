@@ -79,6 +79,16 @@ class Provider < Sequel::Model(:providers)
           _(after.first[:quote]).must_equal("MRU")
         end
 
+        it "keeps every leone row through the 2022 redenomination" do
+          # Treasury switched unit with a mid-quarter amendment: old leone through 2022-06-30, new leone from the
+          # 2022-07-15 amendment. Both sides are real rows.
+          june = adapter.parse([row("Sierra Leone-Leone", "13175.0", record: "2022-06-30")])
+          amended = adapter.parse([row("Sierra Leone-Leone", "13.62", record: "2022-06-30", effective: "2022-07-15")])
+
+          _(june.first[:quote]).must_equal("SLL")
+          _(amended.first[:quote]).must_equal("SLE")
+        end
+
         it "dates amendments on their effective date" do
           records = adapter.parse([row("Korea-Won", "1367.46", record: "2026-06-30", effective: "2026-08-31")])
 
