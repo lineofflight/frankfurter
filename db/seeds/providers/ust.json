@@ -2,7 +2,7 @@
   "key": "UST",
   "name": "U.S. Department of the Treasury",
   "country_code": "US",
-  "rate_type": "reporting rate",
+  "rate_type": "quarterly reporting rate",
   "pivot_currency": "USD",
   "data_url": "https://fiscaldata.treasury.gov/datasets/treasury-reporting-rates-exchange/treasury-reporting-rates-of-exchange",
   "terms_url": "https://fiscaldata.treasury.gov/api-documentation/#license-and-authorization",
