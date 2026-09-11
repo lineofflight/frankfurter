@@ -141,6 +141,25 @@ describe App do
     end
   end
 
+  describe "search engine indexing" do
+    ["/", "/robots.txt", "/v1/latest", "/v2/rates", "/v2/currencies", "/nonexistent"].each do |path|
+      it "sets X-Robots-Tag: noindex on #{path}" do
+        get path
+
+        _(headers["x-robots-tag"]).must_equal("noindex")
+      end
+    end
+
+    ["/v1/openapi.json", "/v2/openapi.json"].each do |path|
+      it "leaves #{path} indexable" do
+        get path
+
+        _(last_response).must_be(:ok?)
+        _(headers["x-robots-tag"]).must_be_nil
+      end
+    end
+  end
+
   it "returns JSON for 404" do
     get "/nonexistent"
 
