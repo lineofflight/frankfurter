@@ -37,6 +37,14 @@ class Provider
         "Gold" => "XAU",
       }.freeze
 
+      MONTH_INDEX = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+        .each_with_index
+        .to_h { |m, i| [m, i + 1] }
+        .freeze
+
+      # CBI wrote "Spet.YYYY" throughout 2016-2024 before switching to "Sept" in 2025.
+      MONTH_REGEX = /\A\*?\s*(Jan|Feb|Mar|Apr|May|June?|July?|Aug|Sept?|Spet|Oct|Nov|Dec)[a-z]*[.,\s]*(?:\d{4})?\z/i
+
       # Arabic for "gold" appears only in the multi-currency daily file's link text. USD-only and historical archive
       # links don't mention gold, giving us a stable selector that survives re-ordering or new files added to the page.
       GOLD_MARKER = "الذهب"
@@ -185,28 +193,19 @@ class Provider
       end
 
       def month_from_label(label)
-        # Examples seen: "Jan. 2009", "Feb.2009", "Jan,2009", "Jan. 2026"
         return unless label.is_a?(String)
 
         stripped = label.strip
-        match = stripped.match(/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[.,\s]/i)
-        return unless match
-        return unless stripped.match?(/\d{4}\z/)
 
-        {
-          "jan" => 1,
-          "feb" => 2,
-          "mar" => 3,
-          "apr" => 4,
-          "may" => 5,
-          "jun" => 6,
-          "jul" => 7,
-          "aug" => 8,
-          "sep" => 9,
-          "oct" => 10,
-          "nov" => 11,
-          "dec" => 12,
-        }[match[1].downcase[0, 3]]
+        if (serial = Integer(stripped, exception: false)) && serial >= 30000
+          return (Date.new(1899, 12, 30) + serial).month
+        end
+
+        match = stripped.match(MONTH_REGEX)
+        return unless match
+
+        token = match[1].downcase.sub("spet", "sep")[0, 3]
+        MONTH_INDEX[token]
       end
 
       def safe_date(year, month, day)
