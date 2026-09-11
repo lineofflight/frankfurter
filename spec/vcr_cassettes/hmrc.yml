@@ -1,0 +1,483 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2026-8.csv
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.trade-tariff.service.gov.uk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/csv; charset=utf-8
+      Content-Length:
+      - '8583'
+      Connection:
+      - close
+      Date:
+      - Fri, 11 Sep 2026 06:02:01 GMT
+      X-Runtime:
+      - '0.063678'
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'; frame-ancestors 'none'
+      Etag:
+      - W/"27cdda8c8c1a30840ecd9616ab30cc65"
+      Last-Modified:
+      - Fri, 11 Sep 2026 05:00:15 GMT
+      Content-Disposition:
+      - attachment; filename=exrates-monthly-0826.csv
+      Content-Transfer-Encoding:
+      - binary
+      Link:
+      - <https://api-docs.trade-tariff.service.gov.uk/llms.txt>; rel="describedby"
+      X-Path-Transformed:
+      - ''
+      X-Request-Id:
+      - 91b351de-1809-48b4-84a1-bac19a4b611a
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 5ca3eb318b3d637b6c83037daa75f174.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - AMS58-P1
+      X-Amz-Cf-Id:
+      - XuhAkqxM82xCF5TPaGRRq5-Wmxyr9rwLGAgPHfATS5UemgexeyE2VQ==
+      Age:
+      - '7163'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+    body:
+      encoding: UTF-8
+      string: |
+        Country/Territories,Currency,Currency Code,Currency Units per £1,Start date,End date
+        Abu Dhabi,Dirham,AED,4.9091,01/08/2026,31/08/2026
+        Albania,Lek,ALL,109.7955,01/08/2026,31/08/2026
+        Algeria,Dinar,DZD,177.9594,01/08/2026,31/08/2026
+        Angola,Readj Kwanza,AOA,1224.3306,01/08/2026,31/08/2026
+        Antigua,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        Argentina,Peso,ARS,1975.2991,01/08/2026,31/08/2026
+        Armenia,Dram,AMD,488.5373,01/08/2026,31/08/2026
+        Aruba,Florin,AWG,2.3927,01/08/2026,31/08/2026
+        Australia,Dollar,AUD,1.9112,01/08/2026,31/08/2026
+        Azerbaijan,New Manat,AZN,2.2724,01/08/2026,31/08/2026
+        Bahamas,Dollar,BSD,1.3367,01/08/2026,31/08/2026
+        Bahrain,Dinar,BHD,0.5026,01/08/2026,31/08/2026
+        Bangladesh,Taka,BDT,164.9731,01/08/2026,31/08/2026
+        Barbados,Dollar,BBD,2.6734,01/08/2026,31/08/2026
+        Belarus,Rouble,BYN,3.8578,01/08/2026,31/08/2026
+        Belize,Dollar,BZD,2.6915,01/08/2026,31/08/2026
+        Benin,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Bermuda,Dollar (US),BMD,1.3367,01/08/2026,31/08/2026
+        Bhutan,Ngultrum,BTN,129.0145,01/08/2026,31/08/2026
+        Bolivia,Boliviano,BOB,14.4494,01/08/2026,31/08/2026
+        Bosnia- Herzegovinia,Marka,BAM,2.2920,01/08/2026,31/08/2026
+        Botswana,Pula,BWP,18.2092,01/08/2026,31/08/2026
+        Brazil,Real,BRL,6.7858,01/08/2026,31/08/2026
+        Brunei,Dollar,BND,1.7262,01/08/2026,31/08/2026
+        Burkina Faso,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Burundi,Franc,BIF,3987.4698,01/08/2026,31/08/2026
+        Cambodia,Riel,KHR,5399.6005,01/08/2026,31/08/2026
+        Cameroon Republic,CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Canada,Dollar,CAD,1.8835,01/08/2026,31/08/2026
+        Cape Verde Islands,Escudo,CVE,129.2260,01/08/2026,31/08/2026
+        Cayman Islands,Dollar,KYD,1.1117,01/08/2026,31/08/2026
+        Central African Republic,CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Chad,CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Chile,Peso,CLP,1250.6398,01/08/2026,31/08/2026
+        China,Yuan,CNY,9.0479,01/08/2026,31/08/2026
+        Colombia,Peso,COP,4314.3386,01/08/2026,31/08/2026
+        Comoros,Franc,KMF,576.5395,01/08/2026,31/08/2026
+        Congo (Brazaville),CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Congo (DemRep),Congo Fr,CDF,3083.1421,01/08/2026,31/08/2026
+        Costa Rica,Colon,CRC,606.4354,01/08/2026,31/08/2026
+        Cote d'Ivoire,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Cuba,Peso,CUP,32.0872,01/08/2026,31/08/2026
+        Czech Republic,Koruna,CZK,28.3253,01/08/2026,31/08/2026
+        Denmark,Krone,DKK,8.7609,01/08/2026,31/08/2026
+        Djibouti,Franc,DJF,238.0030,01/08/2026,31/08/2026
+        Dominica,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        Dominican Republic,Peso,DOP,77.7899,01/08/2026,31/08/2026
+        Dubai,Dirham,AED,4.9091,01/08/2026,31/08/2026
+        Egypt,Pound,EGP,68.6327,01/08/2026,31/08/2026
+        El Salvador,Colon,SVC,11.6963,01/08/2026,31/08/2026
+        Equatorial Guinea,CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Eritrea,Nakfa,ERN,20.0508,01/08/2026,31/08/2026
+        Eswatini,Lilangeni,SZL,22.0219,01/08/2026,31/08/2026
+        Ethiopia,Birr,ETB,215.7325,01/08/2026,31/08/2026
+        Eurozone,Euro,EUR,1.1719,01/08/2026,31/08/2026
+        Fiji Islands,Dollar,FJD,2.9874,01/08/2026,31/08/2026
+        Fr. Polynesia,CFP Franc,XPF,139.8455,01/08/2026,31/08/2026
+        Gabon,CFA Franc,XAF,768.7193,01/08/2026,31/08/2026
+        Gambia,Dalasi,GMD,98.7774,01/08/2026,31/08/2026
+        Georgia,Lari,GEL,3.5045,01/08/2026,31/08/2026
+        Ghana,Cedi,GHS,15.5267,01/08/2026,31/08/2026
+        Grenada,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        Guatemala,Quetzal,GTQ,10.1958,01/08/2026,31/08/2026
+        Guinea Bissau,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Guinea Republic,Franc,GNF,11726.9754,01/08/2026,31/08/2026
+        Guyana,Dollar,GYD,279.6097,01/08/2026,31/08/2026
+        Haiti,Gourde,HTG,174.7475,01/08/2026,31/08/2026
+        Honduras,Lempira,HNL,35.7968,01/08/2026,31/08/2026
+        Hong Kong,Dollar,HKD,10.4805,01/08/2026,31/08/2026
+        Hungary,Forint,HUF,426.6463,01/08/2026,31/08/2026
+        Iceland,Krona,ISK,167.5923,01/08/2026,31/08/2026
+        India,Rupee,INR,129.0145,01/08/2026,31/08/2026
+        Indonesia,Rupiah,IDR,23940.4179,01/08/2026,31/08/2026
+        Iraq,Dinar,IQD,1751.2405,01/08/2026,31/08/2026
+        Israel,Shekel,ILS,4.0939,01/08/2026,31/08/2026
+        Jamaica,Dollar,JMD,212.1160,01/08/2026,31/08/2026
+        Japan,Yen,JPY,217.9907,01/08/2026,31/08/2026
+        Jordan,Dinar,JOD,0.9477,01/08/2026,31/08/2026
+        Kazakhstan,Tenge,KZT,624.7684,01/08/2026,31/08/2026
+        Kenya,Schilling,KES,172.9979,01/08/2026,31/08/2026
+        Kuwait,Dinar,KWD,0.4145,01/08/2026,31/08/2026
+        Kyrgyz Republic,Som,KGS,116.8827,01/08/2026,31/08/2026
+        Lao People's Dem Rep,Kip,LAK,30210.7962,01/08/2026,31/08/2026
+        Lebanon,Pound,LBP,119912.1356,01/08/2026,31/08/2026
+        Lesotho,Loti,LSL,22.0219,01/08/2026,31/08/2026
+        Liberia,Dollar,LRD,241.9123,01/08/2026,31/08/2026
+        Libya,Dinar,LYD,8.5770,01/08/2026,31/08/2026
+        Macao,Pataca,MOP,10.7949,01/08/2026,31/08/2026
+        Macedonia,Denar,MKD,72.1754,01/08/2026,31/08/2026
+        Madagascar,Malagasy Ariary,MGA,5702.5645,01/08/2026,31/08/2026
+        Malawi,Kwacha,MWK,2317.8777,01/08/2026,31/08/2026
+        Malaysia,Ringgit,MYR,5.4633,01/08/2026,31/08/2026
+        Maldive Islands,Rufiyaa,MVR,20.6650,01/08/2026,31/08/2026
+        Mali Republic,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Mauritania,Ouguiya,MRU,53.3836,01/08/2026,31/08/2026
+        Mauritius,Rupee,MUR,63.1965,01/08/2026,31/08/2026
+        Mexico,Mexican Peso,MXN,23.2925,01/08/2026,31/08/2026
+        Moldova,Leu,MDL,23.5148,01/08/2026,31/08/2026
+        Mongolia,Tugrik,MNT,4799.6502,01/08/2026,31/08/2026
+        Montserrat,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        Morocco,Dirham,MAD,12.5477,01/08/2026,31/08/2026
+        Mozambique,Metical,MZN,85.3111,01/08/2026,31/08/2026
+        Myanmar,Kyat,MMK,2806.6019,01/08/2026,31/08/2026
+        Nepal,Rupee,NPR,206.5199,01/08/2026,31/08/2026
+        New Caledonia,CFP Franc,XPF,139.8455,01/08/2026,31/08/2026
+        New Zealand,Dollar,NZD,2.2978,01/08/2026,31/08/2026
+        Nicaragua,Gold Cordoba,NIO,49.1887,01/08/2026,31/08/2026
+        Niger Republic,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Nigeria,Naira,NGN,1838.2793,01/08/2026,31/08/2026
+        Norway,Norwegian Krone,NOK,12.8322,01/08/2026,31/08/2026
+        Oman,Rial,OMR,0.5141,01/08/2026,31/08/2026
+        Pakistan,Rupee,PKR,371.3406,01/08/2026,31/08/2026
+        Panama,Balboa,PAB,1.3367,01/08/2026,31/08/2026
+        Papua New Guinea,Kina,PGK,5.9800,01/08/2026,31/08/2026
+        Paraguay,Guarani,PYG,8093.9309,01/08/2026,31/08/2026
+        Peru,New Sol,PEN,4.5467,01/08/2026,31/08/2026
+        Philippines,Peso,PHP,82.5755,01/08/2026,31/08/2026
+        Poland,Zloty,PLN,5.0757,01/08/2026,31/08/2026
+        Qatar,Riyal,QAR,4.8657,01/08/2026,31/08/2026
+        Romania,New Leu,RON,6.1387,01/08/2026,31/08/2026
+        Russia,Rouble,RUB,105.0552,01/08/2026,31/08/2026
+        Rwanda,Franc,RWF,1966.3449,01/08/2026,31/08/2026
+        Saudi Arabia,Riyal,SAR,5.0127,01/08/2026,31/08/2026
+        Senegal,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Serbia,Dinar,RSD,137.5785,01/08/2026,31/08/2026
+        Seychelles,Rupee,SCR,18.7582,01/08/2026,31/08/2026
+        Sierra Leone,Leone,SLE,30.6308,01/08/2026,31/08/2026
+        Singapore,Dollar,SGD,1.7262,01/08/2026,31/08/2026
+        Soloman Islands,Dollar,SBD,10.7861,01/08/2026,31/08/2026
+        Somali Republic,Schilling,SOS,763.0606,01/08/2026,31/08/2026
+        South Africa,Rand,ZAR,22.0219,01/08/2026,31/08/2026
+        South Korea,Won,KRW,1979.0292,01/08/2026,31/08/2026
+        Sri Lanka,Rupee,LKR,449.5212,01/08/2026,31/08/2026
+        St Christopher & Anguilla,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        St Lucia,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        St Vincent,E Caribbean Dollar,XCD,3.6196,01/08/2026,31/08/2026
+        Sudan Republic,Pound,SDG,802.2719,01/08/2026,31/08/2026
+        Surinam,Dollar,SRD,50.4674,01/08/2026,31/08/2026
+        Sweden,Krona,SEK,12.9869,01/08/2026,31/08/2026
+        Switzerland,Franc,CHF,1.0863,01/08/2026,31/08/2026
+        Taiwan,Dollar,TWD,43.3972,01/08/2026,31/08/2026
+        Tanzania,Schilling,TZS,3528.7398,01/08/2026,31/08/2026
+        Thailand,Baht,THB,45.2030,01/08/2026,31/08/2026
+        Togo Republic,CFA Franc,XOF,768.7193,01/08/2026,31/08/2026
+        Tonga Islands,Pa'anga (AUS),TOP,3.2194,01/08/2026,31/08/2026
+        Trinidad/Tobago,Dollar,TTD,9.0721,01/08/2026,31/08/2026
+        Tunisia,Dinar,TND,3.9407,01/08/2026,31/08/2026
+        Turkey,Turkish  Lira,TRY,63.1095,01/08/2026,31/08/2026
+        Turkmenistan,New Manat,TMT,4.6756,01/08/2026,31/08/2026
+        UAE,Dirham,AED,4.9091,01/08/2026,31/08/2026
+        USA,Dollar,USD,1.3367,01/08/2026,31/08/2026
+        Uganda,Schilling,UGX,4995.2411,01/08/2026,31/08/2026
+        Ukraine,Hryvnia,UAH,59.9097,01/08/2026,31/08/2026
+        Uruguay,Peso,UYU,53.6316,01/08/2026,31/08/2026
+        Uzbekistan,Sum,UZS,16045.3862,01/08/2026,31/08/2026
+        Vanuatu,Vatu,VUV,159.1429,01/08/2026,31/08/2026
+        Venezuela,Venezuelan Bolivar,VES,984.1686,01/08/2026,31/08/2026
+        Vietnam,Dong,VND,35216.6818,01/08/2026,31/08/2026
+        Wallis & Futuna Islands,CFP Franc,XPF,139.8455,01/08/2026,31/08/2026
+        Western Samoa,Tala,WST,3.6653,01/08/2026,31/08/2026
+        Yemen (Rep of),Rial,YER,318.1262,01/08/2026,31/08/2026
+        Zambia,Kwacha,ZMW,24.5976,01/08/2026,31/08/2026
+        Zimbabwe,Zimbabwe Gold,ZWG,35.8198,01/08/2026,31/08/2026
+  recorded_at: Fri, 11 Sep 2026 08:01:24 GMT
+- request:
+    method: get
+    uri: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2026-9.csv
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.trade-tariff.service.gov.uk
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/csv; charset=utf-8
+      Content-Length:
+      - '8585'
+      Connection:
+      - close
+      Date:
+      - Fri, 11 Sep 2026 06:02:01 GMT
+      X-Runtime:
+      - '0.058435'
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'; frame-ancestors 'none'
+      Etag:
+      - W/"27cdda8c8c1a30840ecd9616ab30cc65"
+      Last-Modified:
+      - Fri, 11 Sep 2026 05:00:15 GMT
+      Content-Disposition:
+      - attachment; filename=exrates-monthly-0926.csv
+      Content-Transfer-Encoding:
+      - binary
+      Link:
+      - <https://api-docs.trade-tariff.service.gov.uk/llms.txt>; rel="describedby"
+      X-Path-Transformed:
+      - ''
+      X-Request-Id:
+      - a57e7c64-3683-453b-88b5-cb3f2935158a
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 1e22254f0abea6547aaa07a03d921130.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - AMS58-P1
+      X-Amz-Cf-Id:
+      - GyEZCJDMh_MzifTIkpIMQqQrF44LMyQp5kH9J80Rj1W4bp0hpanw9w==
+      Age:
+      - '7163'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+    body:
+      encoding: UTF-8
+      string: |
+        Country/Territories,Currency,Currency Code,Currency Units per £1,Start date,End date
+        Abu Dhabi,Dirham,AED,4.9776,01/09/2026,30/09/2026
+        Albania,Lek,ALL,108.1569,01/09/2026,30/09/2026
+        Algeria,Dinar,DZD,180.0686,01/09/2026,30/09/2026
+        Angola,Readj Kwanza,AOA,1240.6639,01/09/2026,30/09/2026
+        Antigua,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        Argentina,Peso,ARS,2025.5735,01/09/2026,30/09/2026
+        Armenia,Dram,AMD,493.4029,01/09/2026,30/09/2026
+        Aruba,Florin,AWG,2.4261,01/09/2026,30/09/2026
+        Australia,Dollar,AUD,1.9159,01/09/2026,30/09/2026
+        Azerbaijan,New Manat,AZN,2.3042,01/09/2026,30/09/2026
+        Bahamas,Dollar,BSD,1.3554,01/09/2026,30/09/2026
+        Bahrain,Dinar,BHD,0.5096,01/09/2026,30/09/2026
+        Bangladesh,Taka,BDT,165.8545,01/09/2026,30/09/2026
+        Barbados,Dollar,BBD,2.7108,01/09/2026,30/09/2026
+        Belarus,Rouble,BYN,4.1213,01/09/2026,30/09/2026
+        Belize,Dollar,BZD,2.7293,01/09/2026,30/09/2026
+        Benin,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Bermuda,Dollar (US),BMD,1.3554,01/09/2026,30/09/2026
+        Bhutan,Ngultrum,BTN,129.7270,01/09/2026,30/09/2026
+        Bolivia,Boliviano,BOB,15.6612,01/09/2026,30/09/2026
+        Bosnia- Herzegovinia,Marka,BAM,2.2846,01/09/2026,30/09/2026
+        Botswana,Pula,BWP,18.2396,01/09/2026,30/09/2026
+        Brazil,Real,BRL,7.0695,01/09/2026,30/09/2026
+        Brunei,Dollar,BND,1.7300,01/09/2026,30/09/2026
+        Burkina Faso,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Burundi,Franc,BIF,4050.5706,01/09/2026,30/09/2026
+        Cambodia,Riel,KHR,5480.8904,01/09/2026,30/09/2026
+        Cameroon Republic,CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Canada,Dollar,CAD,1.8805,01/09/2026,30/09/2026
+        Cape Verde Islands,Escudo,CVE,128.8046,01/09/2026,30/09/2026
+        Cayman Islands,Dollar,KYD,1.1240,01/09/2026,30/09/2026
+        Central African Republic,CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Chad,CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Chile,Peso,CLP,1255.6630,01/09/2026,30/09/2026
+        China,Yuan,CNY,9.1360,01/09/2026,30/09/2026
+        Colombia,Peso,COP,4201.0874,01/09/2026,30/09/2026
+        Comoros,Franc,KMF,574.6595,01/09/2026,30/09/2026
+        Congo (Brazaville),CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Congo (DemRep),Congo Fr,CDF,3102.6266,01/09/2026,30/09/2026
+        Costa Rica,Colon,CRC,607.1712,01/09/2026,30/09/2026
+        Cote d'Ivoire,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Cuba,Peso,CUP,32.5173,01/09/2026,30/09/2026
+        Czech Republic,Koruna,CZK,28.2302,01/09/2026,30/09/2026
+        Denmark,Krone,DKK,8.7326,01/09/2026,30/09/2026
+        Djibouti,Franc,DJF,241.4481,01/09/2026,30/09/2026
+        Dominica,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        Dominican Republic,Peso,DOP,79.6004,01/09/2026,30/09/2026
+        Dubai,Dirham,AED,4.9776,01/09/2026,30/09/2026
+        Egypt,Pound,EGP,68.7116,01/09/2026,30/09/2026
+        El Salvador,Colon,SVC,11.8596,01/09/2026,30/09/2026
+        Equatorial Guinea,CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Eritrea,Nakfa,ERN,20.3307,01/09/2026,30/09/2026
+        Eswatini,Lilangeni,SZL,22.0287,01/09/2026,30/09/2026
+        Ethiopia,Birr,ETB,220.2568,01/09/2026,30/09/2026
+        Eurozone,Euro,EUR,1.1681,01/09/2026,30/09/2026
+        Fiji Islands,Dollar,FJD,2.9957,01/09/2026,30/09/2026
+        Fr. Polynesia,CFP Franc,XPF,139.3895,01/09/2026,30/09/2026
+        Gabon,CFA Franc,XAF,766.2127,01/09/2026,30/09/2026
+        Gambia,Dalasi,GMD,101.1439,01/09/2026,30/09/2026
+        Georgia,Lari,GEL,3.5331,01/09/2026,30/09/2026
+        Ghana,Cedi,GHS,15.0251,01/09/2026,30/09/2026
+        Grenada,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        Guatemala,Quetzal,GTQ,10.3397,01/09/2026,30/09/2026
+        Guinea Bissau,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Guinea Republic,Franc,GNF,11928.8192,01/09/2026,30/09/2026
+        Guyana,Dollar,GYD,283.4944,01/09/2026,30/09/2026
+        Haiti,Gourde,HTG,178.0068,01/09/2026,30/09/2026
+        Honduras,Lempira,HNL,36.3521,01/09/2026,30/09/2026
+        Hong Kong,Dollar,HKD,10.6284,01/09/2026,30/09/2026
+        Hungary,Forint,HUF,426.0650,01/09/2026,30/09/2026
+        Iceland,Krona,ISK,166.1086,01/09/2026,30/09/2026
+        India,Rupee,INR,129.7270,01/09/2026,30/09/2026
+        Indonesia,Rupiah,IDR,24169.7051,01/09/2026,30/09/2026
+        Iraq,Dinar,IQD,1775.9198,01/09/2026,30/09/2026
+        Israel,Shekel,ILS,4.0501,01/09/2026,30/09/2026
+        Jamaica,Dollar,JMD,214.0123,01/09/2026,30/09/2026
+        Japan,Yen,JPY,215.6954,01/09/2026,30/09/2026
+        Jordan,Dinar,JOD,0.9610,01/09/2026,30/09/2026
+        Kazakhstan,Tenge,KZT,625.7246,01/09/2026,30/09/2026
+        Kenya,Schilling,KES,175.4718,01/09/2026,30/09/2026
+        Kuwait,Dinar,KWD,0.4182,01/09/2026,30/09/2026
+        Kyrgyz Republic,Som,KGS,119.0482,01/09/2026,30/09/2026
+        Lao People's Dem Rep,Kip,LAK,30446.0981,01/09/2026,30/09/2026
+        Lebanon,Pound,LBP,121724.8360,01/09/2026,30/09/2026
+        Lesotho,Loti,LSL,22.0287,01/09/2026,30/09/2026
+        Liberia,Dollar,LRD,246.0725,01/09/2026,30/09/2026
+        Libya,Dinar,LYD,8.6289,01/09/2026,30/09/2026
+        Macao,Pataca,MOP,10.9472,01/09/2026,30/09/2026
+        Macedonia,Denar,MKD,72.0013,01/09/2026,30/09/2026
+        Madagascar,Malagasy Ariary,MGA,5840.9738,01/09/2026,30/09/2026
+        Malawi,Kwacha,MWK,2349.8064,01/09/2026,30/09/2026
+        Malaysia,Ringgit,MYR,5.5008,01/09/2026,30/09/2026
+        Maldive Islands,Rufiyaa,MVR,20.9532,01/09/2026,30/09/2026
+        Mali Republic,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Mauritania,Ouguiya,MRU,54.2669,01/09/2026,30/09/2026
+        Mauritius,Rupee,MUR,63.6726,01/09/2026,30/09/2026
+        Mexico,Mexican Peso,MXN,23.0987,01/09/2026,30/09/2026
+        Moldova,Leu,MDL,23.3497,01/09/2026,30/09/2026
+        Mongolia,Tugrik,MNT,4875.1363,01/09/2026,30/09/2026
+        Montserrat,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        Morocco,Dirham,MAD,12.5896,01/09/2026,30/09/2026
+        Mozambique,Metical,MZN,86.5331,01/09/2026,30/09/2026
+        Myanmar,Kyat,MMK,2845.7081,01/09/2026,30/09/2026
+        Nepal,Rupee,NPR,207.6605,01/09/2026,30/09/2026
+        New Caledonia,CFP Franc,XPF,139.3895,01/09/2026,30/09/2026
+        New Zealand,Dollar,NZD,2.3055,01/09/2026,30/09/2026
+        Nicaragua,Gold Cordoba,NIO,49.8543,01/09/2026,30/09/2026
+        Niger Republic,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Nigeria,Naira,NGN,1830.4122,01/09/2026,30/09/2026
+        Norway,Norwegian Krone,NOK,12.7462,01/09/2026,30/09/2026
+        Oman,Rial,OMR,0.5217,01/09/2026,30/09/2026
+        Pakistan,Rupee,PKR,376.2728,01/09/2026,30/09/2026
+        Panama,Balboa,PAB,1.3554,01/09/2026,30/09/2026
+        Papua New Guinea,Kina,PGK,5.9612,01/09/2026,30/09/2026
+        Paraguay,Guarani,PYG,8160.1641,01/09/2026,30/09/2026
+        Peru,New Sol,PEN,4.5712,01/09/2026,30/09/2026
+        Philippines,Peso,PHP,83.7925,01/09/2026,30/09/2026
+        Poland,Zloty,PLN,5.0537,01/09/2026,30/09/2026
+        Qatar,Riyal,QAR,4.9336,01/09/2026,30/09/2026
+        Romania,New Leu,RON,6.1288,01/09/2026,30/09/2026
+        Russia,Rouble,RUB,115.2881,01/09/2026,30/09/2026
+        Rwanda,Franc,RWF,1994.6250,01/09/2026,30/09/2026
+        Saudi Arabia,Riyal,SAR,5.0827,01/09/2026,30/09/2026
+        Senegal,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Serbia,Dinar,RSD,137.1078,01/09/2026,30/09/2026
+        Seychelles,Rupee,SCR,19.2823,01/09/2026,30/09/2026
+        Sierra Leone,Leone,SLE,31.0248,01/09/2026,30/09/2026
+        Singapore,Dollar,SGD,1.7300,01/09/2026,30/09/2026
+        Soloman Islands,Dollar,SBD,10.8761,01/09/2026,30/09/2026
+        Somali Republic,Schilling,SOS,773.4709,01/09/2026,30/09/2026
+        South Africa,Rand,ZAR,22.0287,01/09/2026,30/09/2026
+        South Korea,Won,KRW,1887.0789,01/09/2026,30/09/2026
+        Sri Lanka,Rupee,LKR,448.6733,01/09/2026,30/09/2026
+        St Christopher & Anguilla,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        St Lucia,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        St Vincent,E Caribbean Dollar,XCD,3.6684,01/09/2026,30/09/2026
+        Sudan Republic,Pound,SDG,813.5488,01/09/2026,30/09/2026
+        Surinam,Dollar,SRD,51.6194,01/09/2026,30/09/2026
+        Sweden,Krona,SEK,12.8983,01/09/2026,30/09/2026
+        Switzerland,Franc,CHF,1.0982,01/09/2026,30/09/2026
+        Taiwan,Dollar,TWD,43.3111,01/09/2026,30/09/2026
+        Tanzania,Schilling,TZS,3581.2446,01/09/2026,30/09/2026
+        Thailand,Baht,THB,44.8240,01/09/2026,30/09/2026
+        Togo Republic,CFA Franc,XOF,766.2127,01/09/2026,30/09/2026
+        Tonga Islands,Pa'anga (AUS),TOP,3.2409,01/09/2026,30/09/2026
+        Trinidad/Tobago,Dollar,TTD,9.1771,01/09/2026,30/09/2026
+        Tunisia,Dinar,TND,3.9463,01/09/2026,30/09/2026
+        Turkey,Turkish  Lira,TRY,64.9640,01/09/2026,30/09/2026
+        Turkmenistan,New Manat,TMT,4.7410,01/09/2026,30/09/2026
+        UAE,Dirham,AED,4.9776,01/09/2026,30/09/2026
+        USA,Dollar,USD,1.3554,01/09/2026,30/09/2026
+        Uganda,Schilling,UGX,5051.4607,01/09/2026,30/09/2026
+        Ukraine,Hryvnia,UAH,60.5970,01/09/2026,30/09/2026
+        Uruguay,Peso,UYU,54.3855,01/09/2026,30/09/2026
+        Uzbekistan,Sum,UZS,15979.5357,01/09/2026,30/09/2026
+        Vanuatu,Vatu,VUV,160.2301,01/09/2026,30/09/2026
+        Venezuela,Venezuelan Bolivar,VES,1047.3299,01/09/2026,30/09/2026
+        Vietnam,Dong,VND,35479.8977,01/09/2026,30/09/2026
+        Wallis & Futuna Islands,CFP Franc,XPF,139.3895,01/09/2026,30/09/2026
+        Western Samoa,Tala,WST,3.6811,01/09/2026,30/09/2026
+        Yemen (Rep of),Rial,YER,321.3495,01/09/2026,30/09/2026
+        Zambia,Kwacha,ZMW,25.5323,01/09/2026,30/09/2026
+        Zimbabwe,Zimbabwe Gold,ZWG,36.2052,01/09/2026,30/09/2026
+  recorded_at: Fri, 11 Sep 2026 08:01:24 GMT
+recorded_with: VCR 6.4.0

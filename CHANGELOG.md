@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- HM Revenue & Customs (HMRC) as a data provider: monthly customs rates since 2021, served by provider only. (#172)
+
 ## [2.5.1] - 2026-09-10
 
 ### Fixed
