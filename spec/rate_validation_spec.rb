@@ -39,6 +39,14 @@ describe RateValidation do
       _(records.map { |r| r[:quote] }).must_equal(["USD"])
     end
 
+    it "keeps a row dated within the adapter's publication lead" do
+      records = [{ date: Date.today + 14, base: "GBP", quote: "USD", rate: 1.3 }]
+
+      RateValidation.reject!(records, lead_days: 31)
+
+      _(records.size).must_equal(1)
+    end
+
     it "drops records on or after a defunct currency's terminal date" do
       records = [
         { date: Date.new(2016, 7, 1), base: "EUR", quote: "BYR", rate: 22000.0 },
@@ -105,6 +113,27 @@ describe RateValidation do
       _(db[:rates].where(provider: "TEST", date: Date.today).count).must_equal(1)
       _(db[:weekly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
       _(db[:monthly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
+    end
+
+    it "keeps forward-dated rows from a provider that publishes ahead" do
+      today = Date.new(2026, 9, 11)
+      ahead = today + 14
+      bucket = Bucket.month((today >> 1).to_s)
+      db[:rates].multi_insert([
+        { provider: "HMRC", date: ahead, base: "GBP", quote: "USD", rate: 1.3 },
+        { provider: "TEST", date: ahead, base: "EUR", quote: "USD", rate: 1.1 },
+      ])
+      db[:monthly_rates].multi_insert([
+        { provider: "HMRC", bucket_date: bucket, base: "GBP", quote: "USD", rate: 1.3 },
+        { provider: "TEST", bucket_date: bucket, base: "EUR", quote: "USD", rate: 1.1 },
+      ])
+
+      Date.stub(:today, today) { RateValidation.purge(db) }
+
+      ours = ["HMRC", "TEST"]
+
+      _(db[:rates].where(date: ahead, provider: ours).select_map(:provider)).must_equal(["HMRC"])
+      _(db[:monthly_rates].where(bucket_date: bucket, provider: ours).select_map(:provider)).must_equal(["HMRC"])
     end
 
     it "deletes rates on or after the terminal date and keeps earlier rows" do

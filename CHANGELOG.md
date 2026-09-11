@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - HM Revenue & Customs (HMRC) as a data provider: monthly customs rates since 2021, served by provider only. (#172)
 
+### Changed
+
+- HMRC rates for the coming month are available as soon as HMRC publishes them, dated the 1st they take effect.
+
+### Fixed
+
+- HMRC's November 2022 Sierra Leone rate, an old-leone value labelled SLE, is no longer served under the new code.
+
 ## [2.5.1] - 2026-09-10
 
 ### Fixed
