@@ -101,8 +101,30 @@ class Provider < Sequel::Model(:providers)
           _(adapter.send(:month_from_label, "Jan. 2026")).must_equal(1)
         end
 
+        it "parses 'Jan.' without a year" do
+          _(adapter.send(:month_from_label, "Jan.")).must_equal(1)
+        end
+
         it "parses 'Feb.2026'" do
           _(adapter.send(:month_from_label, "Feb.2026")).must_equal(2)
+        end
+
+        it "parses '*Mar. 2020' with footnote marker" do
+          _(adapter.send(:month_from_label, "*Mar. 2020")).must_equal(3)
+        end
+
+        it "parses Excel date serials like 40299 (May 2010)" do
+          _(adapter.send(:month_from_label, "40299")).must_equal(5)
+        end
+
+        it "parses 'June 2013' and 'July 2009'" do
+          _(adapter.send(:month_from_label, "June 2013")).must_equal(6)
+          _(adapter.send(:month_from_label, "July 2009")).must_equal(7)
+        end
+
+        it "parses 'Sept.2026' and historical 'Spet.2016' typo" do
+          _(adapter.send(:month_from_label, "Sept.2026")).must_equal(9)
+          _(adapter.send(:month_from_label, "Spet.2016")).must_equal(9)
         end
 
         it "parses 'Dec, 2009'" do
