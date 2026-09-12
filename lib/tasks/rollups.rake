@@ -17,14 +17,18 @@ task "rollups:rebuild", [:provider] do |_t, args|
   else
     rebuild_rollups(DB[:rates])
   end
-  Cache.purge
 end
 
 def rebuild_rollups(source, provider = nil)
   scope = provider ? { provider: } : {}
   label = provider || "all"
+  models = [BlendedWeeklyRate, BlendedMonthlyRate]
+  affected = {}
 
-  DB.transaction(savepoint: true) do
+  DB.transaction(savepoint: true, **(DB.in_transaction? ? {} : { mode: :immediate })) do
+    models.each do |model|
+      affected[model] = model.source.blendable.where(scope).select(:bucket_date).distinct.select_map(:bucket_date)
+    end
     DB[:weekly_rates].where(scope).delete
     DB[:monthly_rates].where(scope).delete
 
@@ -40,10 +44,22 @@ def rebuild_rollups(source, provider = nil)
         .group(:provider, :base, :quote, Bucket.month),
     )
 
-    BlendedWeeklyRate.rebuild
-    BlendedMonthlyRate.rebuild
+    models.each do |model|
+      dates = model.source.blendable.where(scope).select(:bucket_date).distinct.select_map(:bucket_date)
+      affected[model] |= dates
+      # Include buckets removed by the rebuild, and invalidate before releasing the source write lock.
+      model.dataset.where(bucket_date: affected[model]).delete
+    end
 
     Log.info("#{label}: rebuilt #{DB[:weekly_rates].where(scope).count} weekly, " \
              "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")
+  end
+
+  # Refill bounded batches after releasing the source transaction. Failures leave only affected buckets on the live
+  # fallback, and cache invalidation still runs because the source changes have committed.
+  begin
+    affected.each { |model, dates| model.refresh(dates) unless dates.empty? }
+  ensure
+    Cache.purge
   end
 end

@@ -16,14 +16,22 @@ require "versions/v2/rate_query"
 # canonical from aged. Any other byte difference is a failure. The second declared change, pivot-frame canonicalization
 # of range batches, lives in emit_blended itself and so is exercised by the byte comparison on both paths.
 class BlendParity
-  Report = Struct.new(:shapes, :snapback_rows, :failures, keyword_init: true) do
+  Report = Struct.new(:shapes, :snapback_rows, :failures, :grouped_coverage, :incomplete, keyword_init: true) do
     def passed?
-      failures.empty?
+      failures.empty? && incomplete.empty?
     end
 
     def to_s
       lines = ["blend:parity: #{shapes} shapes compared, " \
                "#{snapback_rows} snap-back rows verified canonical, #{failures.size} failures"]
+      grouped_coverage.each do |group, counts|
+        lines << "  #{group}: #{counts[:materialized]} materialized chunks compared, " \
+                 "#{counts[:fallback]} live fallback chunks unverified, #{counts[:empty]} empty chunks"
+      end
+      unless incomplete.empty?
+        lines << "  INCOMPLETE: #{incomplete.size} coverage gaps; fallback includes legitimately empty USD blends"
+        incomplete.first(10).each { |entry| lines << "    #{entry[:shape].inspect}: #{entry[:reason]}" }
+      end
       failures.first(10).each { |f| lines << "  FAIL #{f[:shape].inspect}: #{f[:reason]}" }
       lines.join("\n")
     end
@@ -46,39 +54,59 @@ class BlendParity
   def run
     failures = []
     snapback_rows = 0
+    incomplete = []
+    grouped_coverage = ["week", "month"].to_h do |group|
+      [group, { materialized: 0, fallback: 0, empty: 0 }]
+    end
 
     shapes = adversarial_shapes.flat_map do |shape|
       [shape, shape.merge(group: "week"), shape.merge(group: "month")]
     end + Array.new(@samples) { random_shape }
     shapes.each do |shape|
-      table = records(shape, force_live: false)
-      live = records(shape, force_live: true)
-      next if Oj.dump(table, mode: :compat) == Oj.dump(live, mode: :compat)
+      # Both replays and canonical probes see the same source and materialized rows during concurrent ingestion.
+      DB.transaction do
+        @pivot_frame_cache.clear
+        counts = {}
+        table = records(shape, force_live: false, coverage: counts)
+        live = records(shape, force_live: true)
+        if shape[:group]
+          counts.each { |kind, count| grouped_coverage[shape[:group]][kind] += count }
+          if counts[:fallback].positive?
+            incomplete << { shape:, reason: "#{counts[:fallback]} chunks compared live versus live" }
+          end
+        end
+        next if Oj.dump(table, mode: :compat) == Oj.dump(live, mode: :compat)
 
-      if shape[:group]
-        failures << { shape:, reason: "grouped response bytes differ" }
-        next
+        if shape[:group]
+          failures << { shape:, reason: "grouped response bytes differ" }
+          next
+        end
+
+        verified, reason = explain_divergence(shape, table, live)
+        if reason
+          failures << { shape:, reason: }
+        else
+          snapback_rows += verified
+        end
       end
-
-      verified, reason = explain_divergence(shape, table, live)
-      if reason
-        failures << { shape:, reason: }
-      else
-        snapback_rows += verified
+    end
+    grouped_coverage.each do |group, counts|
+      if counts[:materialized].zero?
+        incomplete << { shape: { group: }, reason: "no nonempty materialized chunks compared" }
       end
     end
 
-    Report.new(shapes: shapes.size, snapback_rows:, failures:)
+    Report.new(shapes: shapes.size, snapback_rows:, failures:, grouped_coverage:, incomplete:)
   end
 
   private
 
-  def records(shape, force_live:)
+  def records(shape, force_live:, coverage: nil)
     # No deadline: the forced-live replay of a full-history shape legitimately outlives the request timeout; bounding it
     # would abort the harness, not a client request.
     query = Versions::V2::RateQuery.new(shape, Float::INFINITY)
     query.force_live = force_live
-    query.to_a
+    query.to_a.tap { coverage&.merge!(query.rollup_coverage) }
   end
 
   # A divergent shape passes only when every difference traces to the canonical-anchor-date rule:

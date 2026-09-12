@@ -109,6 +109,8 @@ Archives often label a currency's whole history with its current ISO code. Befor
 
 Two more things the relabel needs:
 
+Current databases also have `blended_weekly_rates` and `blended_monthly_rates`. For new repair migrations, invalidate complete affected grouped buckets in the same transaction as provider rollup changes, including old bucket dates that disappear. Startup population or a subsequent `rake blend:rebuild` fills the gaps. Insert-driven refresh cannot repair omitted dates. Follow `AGENTS.md`'s "Replacing provider history" procedure for delete-and-refetch repairs; do not delete only the three provider tables.
+
 - `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
 - Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in place with a migration (see `db/migrate/027_relabel_lb_old_manat.rb`), which runs itself at container start. No re-backfill: the values were right, only the code was wrong. The migration has four parts, because three tables derive from `rates`:
   1. `UPDATE rates` scoped to provider, code and date range.

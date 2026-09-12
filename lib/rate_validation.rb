@@ -156,15 +156,17 @@ module RateValidation
       RULES.any? { |rule| rule.reject?(record, date, lead_days:) }
     end
 
-    # Retroactively delete already-stored rows that a purgeable rule rejects, then rebuild the currency and coverage
-    # summaries for affected codes. Returns per-table deletion counts.
+    # Delete rejected source rows and repair affected provider buckets from surviving dailies, then rebuild summaries.
+    # Returns counts rejected by each table's purge rules; replacing a provider bucket does not add to those counts.
     def purge(db)
       require "rate"
+      require "provider"
 
       totals = RATE_TABLES.to_h { |table| [table, 0] }
       affected = []
+      repairs = PRECISION.keys.to_h { |table| [table, {}] }
 
-      db.transaction do
+      db.transaction(savepoint: true, **(db.in_transaction? ? {} : { mode: :immediate })) do
         RATE_TABLES.each do |table|
           date_column = table == :rates ? :date : :bucket_date
           precision = PRECISION[table]
@@ -172,18 +174,19 @@ module RateValidation
           PURGEABLE.each do |rule|
             scope = rule.reject_scope(db[table], date_column, precision)
             affected.concat(scope.select_map(:base), scope.select_map(:quote))
+            if precision
+              scope.select(:provider, :bucket_date).distinct.each do |row|
+                (repairs[table][row[:provider]] ||= []) << row[:bucket_date]
+              end
+            else
+              capture_rollup_repairs(scope, repairs)
+            end
             totals[table] += scope.delete
           end
         end
 
-        unless affected.empty?
-          rebuild_summaries(db, affected.uniq)
-          # Invalidate in the source transaction: bucket presence alone cannot detect stale values after a purge. The
-          # task rebuilds afterwards; requests fall back to live grouped compute in the meantime.
-          [:blended_weekly_rates, :blended_monthly_rates].each do |table|
-            db[table].delete if db.table_exists?(table)
-          end
-        end
+        repair_rollups(db, repairs)
+        rebuild_summaries(db, affected.uniq) unless affected.empty?
       end
 
       totals
@@ -193,6 +196,37 @@ module RateValidation
 
     def normalize_date(value)
       value.is_a?(Date) ? value : Date.parse(value.to_s)
+    end
+
+    def capture_rollup_repairs(scope, repairs)
+      PRECISION.each do |table, precision|
+        bucket = Bucket.expression(precision).as(:bucket_date)
+        scope.select(:provider, bucket).distinct.each do |row|
+          (repairs[table][row[:provider]] ||= []) << row[:bucket_date]
+        end
+      end
+    end
+
+    def repair_rollups(db, repairs)
+      repairs.each do |table, providers|
+        bucket = Bucket.expression(PRECISION.fetch(table))
+        providers.each do |provider, dates|
+          dates.uniq!
+          # Captured dates drive deletion even when no daily rows survive. Repair after the coarse rollup purge so a
+          # valid observation in a bucket straddling inception is not deleted again based only on its bucket anchor.
+          db[table].where(provider:, bucket_date: dates).delete
+          db[table].insert(
+            [:bucket_date, :provider, :base, :quote, :rate],
+            db[:rates].where(provider:).where(bucket => dates)
+              .select(bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
+              .group(:provider, :base, :quote, bucket),
+          )
+          blended_table = :"blended_#{table}"
+          if !Provider.non_blending_keys.include?(provider) && db.table_exists?(blended_table)
+            db[blended_table].where(bucket_date: dates).delete
+          end
+        end
+      end
     end
 
     def rebuild_summaries(db, iso_codes)

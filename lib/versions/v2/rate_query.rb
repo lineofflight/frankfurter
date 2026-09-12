@@ -49,8 +49,10 @@ module Versions
       # Parity harness only: forces the live compute path so the materialized table can be compared against it byte for
       # byte.
       attr_writer :force_live
+      attr_reader :rollup_coverage
 
       def initialize(params, timeout = RequestTimeout::DEFAULT_SECONDS)
+        @rollup_coverage = { materialized: 0, fallback: 0, empty: 0 }
         @params = params
         @timeout = timeout
         @deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
@@ -134,6 +136,7 @@ module Versions
           unless @force_live || providers || expand_providers?
             stored = blended_rollup_model.read(chunk_range)
             if stored
+              @rollup_coverage[stored.empty? ? :empty : :materialized] += 1
               stored.group_by { |row| row[:date] }.each_value do |rows|
                 blended = base == PIVOT ? rows : derive(rows, target: base)
                 emit_records(blended, rows, &)
@@ -142,6 +145,7 @@ module Versions
             end
           end
 
+          @rollup_coverage[:fallback] += 1
           ds = range_dataset
           date_col = ds.model.date_column
 

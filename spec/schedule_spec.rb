@@ -56,20 +56,82 @@ describe "bin/schedule --dry-run" do
 end
 
 describe "Grouped blend startup" do
-  it "builds grouped tables even when the daily blend is already ready" do
+  before do
     require "rufus-scheduler"
     require "blended_weekly_rate"
     require "blended_monthly_rate"
     BlendedRate.rebuild
-    timers = []
+    @timers = []
+    timers = @timers
     scheduler = Object.new
-    scheduler.define_singleton_method(:in) { |delay, &block| timers << [delay, block] }
-    [:every, :cron, :join].each { |method| scheduler.define_singleton_method(method) { |*| nil } }
+    [:in, :every].each do |method|
+      scheduler.define_singleton_method(method) do |delay, **options, &block|
+        timers << { method:, delay:, options:, block: }
+      end
+    end
+    [:cron, :join].each { |method| scheduler.define_singleton_method(method) { |*| nil } }
 
     Rufus::Scheduler.stub(:new, scheduler) { load File.expand_path("../bin/schedule", __dir__) }
-    Cache.stub(:purge_debounced, nil) { timers.find { |delay, _| delay == "30s" }.last.call }
+    @job = Struct.new(:cancelled) do
+      def unschedule = self.cancelled = true
+    end.new(false)
+  end
+
+  def population_timer
+    timer = @timers.find { |entry| entry[:method] == :every && entry[:options][:first_in] == "30s" }
+
+    _(timer).wont_be_nil("population must retry independently of provider startup timers")
+    _(timer[:options][:overlap]).must_equal(false)
+    timer[:block]
+  end
+
+  it "builds grouped tables even when the daily blend is already ready" do
+    Cache.stub(:purge_debounced, nil) { population_timer.call(@job) }
 
     _(BlendedWeeklyRate.ready?).must_equal(true)
     _(BlendedMonthlyRate.ready?).must_equal(true)
+    _(@job.cancelled).must_equal(true)
+  end
+
+  it "retries a failed population and stops only after both grouped builds finish" do
+    timer = population_timer
+    Cache.stub(:purge_debounced, nil) do
+      BlendedMonthlyRate.stub(:populate, -> { raise Sequel::DatabaseError, "database is busy" }) do
+        _ { timer.call(@job) }.must_raise(Sequel::DatabaseError)
+      end
+      _(@job.cancelled).must_equal(false)
+      _(BlendedWeeklyRate.ready?).must_equal(true)
+      _(BlendedMonthlyRate.dataset.empty?).must_equal(true)
+
+      timer.call(@job)
+    end
+
+    _(@job.cancelled).must_equal(true)
+    _(BlendedMonthlyRate.ready?).must_equal(true)
+  end
+
+  it "purges when a daily rebuild becomes ready before its final cleanup fails" do
+    timer = population_timer
+    ready = false
+    purges = 0
+    Cache.stub(:purge_debounced, -> { purges += 1 }) do
+      BlendedRate.stub(:ready?, -> { ready }) do
+        BlendedRate.stub(:rebuild, lambda {
+          ready = true
+          raise Sequel::DatabaseError, "final cleanup failed"
+        },) do
+          _ { timer.call(@job) }.must_raise(Sequel::DatabaseError)
+        end
+
+        _(purges).must_equal(1)
+        _(@job.cancelled).must_equal(false)
+        BlendedWeeklyRate.stub(:populate, 0) do
+          BlendedMonthlyRate.stub(:populate, 0) { timer.call(@job) }
+        end
+      end
+    end
+
+    _(purges).must_equal(1)
+    _(@job.cancelled).must_equal(true)
   end
 end
