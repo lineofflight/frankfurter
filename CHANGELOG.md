@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - UST leone rates around the 2022 redenomination. (#666)
 
+### Removed
+
+- Banco Central de Reserva del Perú (BCRP) as a data provider. (#607)
+
 ## [2.5.1] - 2026-09-10
 
 ### Fixed

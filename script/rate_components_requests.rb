@@ -19,14 +19,13 @@ paths = [
   "/v2/rates?base=USD&quotes=EUR,GBP&from=2009-08-01&to=2009-08-31&expand=providers",
   "/v2/currencies", "/v2/providers",
 ]
-["cbe", "cbtt", "boja", "boz", "tcmb", "cbo", "cbllr", "bcrp", "dab", "cbi", "bam", "bcbo", "bi", "bcu", "bm", "cbvs",
+["cbe", "cbtt", "boja", "boz", "tcmb", "cbo", "cbllr", "dab", "cbi", "bam", "bcbo", "bi", "bcu", "bm", "cbvs",
  "nrb",].each do |provider|
   paths << "/v2/providers/#{provider}/rates"
 end
 {
   "cbi" => ["XDR", "IQD", "2009-08-01", "2009-08-31"],
   "boz" => ["USD", "ZMK", "2010-01-01", "2010-12-31"],
-  "bcrp" => ["USD", "PEN", "2009-01-01", "2009-12-31"],
   "tcmb" => ["JPY", "TRY", "2026-03-01", "2026-03-22"],
   "cbvs" => ["GYD", "SRD", "2026-09-07", "2026-09-08"],
 }.each do |provider, (base, quote, from, to)|
