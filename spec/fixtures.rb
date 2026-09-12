@@ -42,7 +42,7 @@ module Fixtures
     def seed!
       Provider.seed
       Rate.dataset.delete
-      Sequel::Model.db[:blended_rates].delete
+      [:blended_rates, :blended_weekly_rates, :blended_monthly_rates].each { |table| Sequel::Model.db[table].delete }
       generate_rates.each_slice(1000) do |batch|
         Rate.dataset.multi_insert(batch)
       end

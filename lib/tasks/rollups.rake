@@ -3,6 +3,9 @@
 desc "Rebuild weekly and monthly rollups (all or one provider)"
 task "rollups:rebuild", [:provider] do |_t, args|
   require "bucket"
+  require "blended_weekly_rate"
+  require "blended_monthly_rate"
+  require "cache"
   require "db"
   require "log"
   require "provider"
@@ -14,13 +17,14 @@ task "rollups:rebuild", [:provider] do |_t, args|
   else
     rebuild_rollups(DB[:rates])
   end
+  Cache.purge
 end
 
 def rebuild_rollups(source, provider = nil)
   scope = provider ? { provider: } : {}
   label = provider || "all"
 
-  DB.transaction do
+  DB.transaction(savepoint: true) do
     DB[:weekly_rates].where(scope).delete
     DB[:monthly_rates].where(scope).delete
 
@@ -35,6 +39,9 @@ def rebuild_rollups(source, provider = nil)
       source.select(Bucket.month, :provider, :base, :quote, Sequel.function(:avg, :rate))
         .group(:provider, :base, :quote, Bucket.month),
     )
+
+    BlendedWeeklyRate.rebuild
+    BlendedMonthlyRate.rebuild
 
     Log.info("#{label}: rebuilt #{DB[:weekly_rates].where(scope).count} weekly, " \
              "#{DB[:monthly_rates].where(scope).count} monthly rollup rows")

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - HM Revenue & Customs (HMRC) as a data provider. (#172)
 
+### Changed
+
+- Faster weekly and monthly rate queries.
+
 ### Fixed
 
 - UST leone rates around the 2022 redenomination. (#666)
