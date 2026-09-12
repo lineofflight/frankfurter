@@ -43,6 +43,13 @@ describe "Grouped maintenance writer lock" do
         end
       end
       DB.loggers << logger
+      recompute = BlendedWeeklyRate.method(:refresh)
+      BlendedWeeklyRate.define_singleton_method(:refresh) do |dates|
+        abort "source rollups were not committed before recomputation" if writer[:weekly_rates].empty?
+        # This second connection can write only after the source transaction released its lock.
+        writer[:rates].insert(row.merge(date: Date.new(2024, 1, 2)))
+        recompute.call(dates)
+      end
       rebuild_rollups(DB[:rates].where(provider: "ECB"), "ECB")
       abort "source read was not protected by the writer lock" unless attempted && blocked
       abort "missing grouped output" if BlendedWeeklyRate.empty?

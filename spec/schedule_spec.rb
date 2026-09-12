@@ -109,4 +109,29 @@ describe "Grouped blend startup" do
     _(@job.cancelled).must_equal(true)
     _(BlendedMonthlyRate.ready?).must_equal(true)
   end
+
+  it "purges when a daily rebuild becomes ready before its final cleanup fails" do
+    timer = population_timer
+    ready = false
+    purges = 0
+    Cache.stub(:purge_debounced, -> { purges += 1 }) do
+      BlendedRate.stub(:ready?, -> { ready }) do
+        BlendedRate.stub(:rebuild, lambda {
+          ready = true
+          raise Sequel::DatabaseError, "final cleanup failed"
+        },) do
+          _ { timer.call(@job) }.must_raise(Sequel::DatabaseError)
+        end
+
+        _(purges).must_equal(1)
+        _(@job.cancelled).must_equal(false)
+        BlendedWeeklyRate.stub(:populate, 0) do
+          BlendedMonthlyRate.stub(:populate, 0) { timer.call(@job) }
+        end
+      end
+    end
+
+    _(purges).must_equal(1)
+    _(@job.cancelled).must_equal(true)
+  end
 end

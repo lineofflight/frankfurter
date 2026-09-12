@@ -37,8 +37,12 @@ end
 unless dry_run
   scheduler.every("5m", first_in: "30s", overlap: false) do |job|
     unless BlendedRate.ready?
-      BlendedRate.rebuild
-      Cache.purge_debounced
+      begin
+        BlendedRate.rebuild
+      ensure
+        # A late failure can leave committed materialization ready, causing the retry to skip this rebuild.
+        Cache.purge_debounced
+      end
     end
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
       Cache.purge_debounced if model.populate.positive?
