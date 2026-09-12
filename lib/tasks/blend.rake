@@ -17,7 +17,7 @@ task "blend:rebuild" do
   Cache.purge
 end
 
-desc "Replay query shapes through the table and live paths and compare bytes"
+desc "Compare table and live response bytes and require grouped materialized coverage"
 task "blend:parity", [:samples] do |_t, args|
   require "blend_parity"
 
@@ -26,5 +26,5 @@ task "blend:parity", [:samples] do |_t, args|
 
   report = BlendParity.run(samples:)
   puts report
-  abort "parity failed" unless report.passed?
+  abort "parity failed or incomplete; see coverage above" unless report.passed?
 end
