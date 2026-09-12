@@ -176,7 +176,14 @@ module RateValidation
           end
         end
 
-        rebuild_summaries(db, affected.uniq) unless affected.empty?
+        unless affected.empty?
+          rebuild_summaries(db, affected.uniq)
+          # Invalidate in the source transaction: bucket presence alone cannot detect stale values after a purge. The
+          # task rebuilds afterwards; requests fall back to live grouped compute in the meantime.
+          [:blended_weekly_rates, :blended_monthly_rates].each do |table|
+            db[table].delete if db.table_exists?(table)
+          end
+        end
       end
 
       totals

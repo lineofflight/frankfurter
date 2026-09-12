@@ -6,6 +6,8 @@ $stdout.sync = true
 require "rufus-scheduler"
 require_relative "../boot"
 require "blended_rate"
+require "blended_weekly_rate"
+require "blended_monthly_rate"
 require "cache"
 require "provider"
 require "provider/adapters"
@@ -36,6 +38,9 @@ unless dry_run
     unless BlendedRate.ready?
       BlendedRate.rebuild
       Cache.purge_debounced
+    end
+    [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
+      Cache.purge_debounced if model.populate.positive?
     end
   end
 end

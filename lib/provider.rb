@@ -117,7 +117,7 @@ class Provider < Sequel::Model(:providers)
       end
       warn_revisions(records) if adapter.revises?
 
-      inserted = db.transaction do
+      inserted = db.transaction(savepoint: true) do
         before = db.get(Sequel.lit("total_changes()"))
         Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
         count = db.get(Sequel.lit("total_changes()")) - before
@@ -216,8 +216,13 @@ class Provider < Sequel::Model(:providers)
   end
 
   def refresh_rollups(dates)
-    refresh_rollup(:weekly_rates, Bucket.week, dates)
-    refresh_rollup(:monthly_rates, Bucket.month, dates)
+    require "blended_weekly_rate"
+    require "blended_monthly_rate"
+
+    weeks = refresh_rollup(:weekly_rates, Bucket.week, dates)
+    months = refresh_rollup(:monthly_rates, Bucket.month, dates)
+    BlendedWeeklyRate.refresh(weeks)
+    BlendedMonthlyRate.refresh(months)
   end
 
   def refresh_currency_summaries(iso_codes)
@@ -250,7 +255,7 @@ class Provider < Sequel::Model(:providers)
       .select_map(bucket_expr)
       .uniq
 
-    return if buckets.empty?
+    return [] if buckets.empty?
 
     db[table].where(provider: key, bucket_date: buckets).delete
 
@@ -262,5 +267,6 @@ class Provider < Sequel::Model(:providers)
         .select(bucket_expr, :provider, :base, :quote, Sequel.function(:avg, :rate))
         .group(:provider, :base, :quote, bucket_expr),
     )
+    buckets
   end
 end

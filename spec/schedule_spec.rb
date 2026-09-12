@@ -54,3 +54,22 @@ describe "bin/schedule --dry-run" do
     end
   end
 end
+
+describe "Grouped blend startup" do
+  it "builds grouped tables even when the daily blend is already ready" do
+    require "rufus-scheduler"
+    require "blended_weekly_rate"
+    require "blended_monthly_rate"
+    BlendedRate.rebuild
+    timers = []
+    scheduler = Object.new
+    scheduler.define_singleton_method(:in) { |delay, &block| timers << [delay, block] }
+    [:every, :cron, :join].each { |method| scheduler.define_singleton_method(method) { |*| nil } }
+
+    Rufus::Scheduler.stub(:new, scheduler) { load File.expand_path("../bin/schedule", __dir__) }
+    Cache.stub(:purge_debounced, nil) { timers.find { |delay, _| delay == "30s" }.last.call }
+
+    _(BlendedWeeklyRate.ready?).must_equal(true)
+    _(BlendedMonthlyRate.ready?).must_equal(true)
+  end
+end

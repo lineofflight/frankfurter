@@ -4,6 +4,8 @@ require "digest"
 
 require "roda"
 require "blended_rate"
+require "blended_weekly_rate"
+require "blended_monthly_rate"
 require "heavy_slots"
 require "rate"
 require "request_timeout"
@@ -129,6 +131,17 @@ module Versions
 
       def each_rollup_range(&)
         each_chunk(date_scope) do |chunk_range|
+          unless @force_live || providers || expand_providers?
+            stored = blended_rollup_model.read(chunk_range)
+            if stored
+              stored.group_by { |row| row[:date] }.each_value do |rows|
+                blended = base == PIVOT ? rows : derive(rows, target: base)
+                emit_records(blended, rows, &)
+              end
+              next
+            end
+          end
+
           ds = range_dataset
           date_col = ds.model.date_column
 
@@ -230,6 +243,10 @@ module Versions
 
       def rollup?
         range? && ["week", "month"].include?(group)
+      end
+
+      def blended_rollup_model
+        group == "week" ? BlendedWeeklyRate : BlendedMonthlyRate
       end
 
       def rollup_model

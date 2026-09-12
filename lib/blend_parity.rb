@@ -47,11 +47,18 @@ class BlendParity
     failures = []
     snapback_rows = 0
 
-    shapes = adversarial_shapes + Array.new(@samples) { random_shape }
+    shapes = adversarial_shapes.flat_map do |shape|
+      [shape, shape.merge(group: "week"), shape.merge(group: "month")]
+    end + Array.new(@samples) { random_shape }
     shapes.each do |shape|
       table = records(shape, force_live: false)
       live = records(shape, force_live: true)
       next if Oj.dump(table, mode: :compat) == Oj.dump(live, mode: :compat)
+
+      if shape[:group]
+        failures << { shape:, reason: "grouped response bytes differ" }
+        next
+      end
 
       verified, reason = explain_divergence(shape, table, live)
       if reason
@@ -211,6 +218,7 @@ class BlendParity
     shape = { from: from.to_s, to: (from + span).to_s }
     shape[:base] = POPULAR_BASES.sample(random: @rng) if @rng.rand < 0.5
     shape[:quotes] = quote_pool.sample(@rng.rand(1..6), random: @rng).join(",") if @rng.rand < 0.5
+    shape[:group] = ["week", "month"].sample(random: @rng) if @rng.rand < 0.5
     shape
   end
 
