@@ -7,6 +7,7 @@ require "sqlite3"
 require "json"
 
 baseline, candidate, *sources = ARGV
+materialized_tables = [:weekly_rates, :monthly_rates, :blended_rates, :blended_weekly_rates, :blended_monthly_rates]
 abort "Usage: ruby script/compare_rate_components.rb BASELINE CANDIDATE COMPONENTS.jsonl [...]" if sources.empty?
 abort "Baseline and candidate must differ" if File.realpath(baseline) == File.realpath(candidate)
 connection = SQLite3::Database.new(candidate)
@@ -71,7 +72,7 @@ report[:rate_differences] = connection.get_first_value(<<~SQL)
     ON r.provider = b.provider AND r.date = b.date AND r.base = b.base AND r.quote = b.quote
   WHERE b.provider IS NULL OR r.rate IS NOT b.rate
 SQL
-[:weekly_rates, :monthly_rates, :blended_rates].each do |table|
+materialized_tables.each do |table|
   count = connection.get_first_value("SELECT COUNT(*) FROM #{table}")
   baseline_count = connection.get_first_value("SELECT COUNT(*) FROM baseline.#{table}")
   differences = connection.get_first_value(<<~SQL)
@@ -83,7 +84,7 @@ puts JSON.pretty_generate(report)
 abort "Calculation parity failed" unless report[:calculation_differences].zero?
 snapshot_matches = report[:rate_differences].zero? && report[:rate_count] == report[:baseline_rate_count]
 abort "Snapshot parity failed" unless snapshot_matches
-materialized_match = [:weekly_rates, :monthly_rates, :blended_rates].all? do |table|
+materialized_match = materialized_tables.all? do |table|
   report[table][:differences].zero? && report[table][:count] == report[table][:baseline_count]
 end
 abort "Materialized table parity failed" unless materialized_match

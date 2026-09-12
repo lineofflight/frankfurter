@@ -23,6 +23,11 @@ APP_ENV=test LIVE_PROVIDERS=CBI,BCRP,BOZ bundle exec ruby \
 Obtain a consistent production snapshot with SQLite's backup API and keep an
 untouched baseline. Migrate a separate local copy, then compare/enrich it:
 
+The baseline must include migration 030 and populated `blended_weekly_rates`
+and `blended_monthly_rates`. For older snapshots, prepare those tables on a
+local copy using main before making the baseline and candidate copies.
+The candidate then applies migration 031 for rate components.
+
 ```sh
 DATABASE_URL=sqlite:///absolute/path/candidate.sqlite3 bundle exec rake db:migrate
 bundle exec ruby script/compare_rate_components.rb \
@@ -32,7 +37,7 @@ bundle exec ruby script/compare_rate_components.rb \
 
 The comparison script writes only the candidate, leaving source mismatches
 and missing observations untouched. It compares every effective raw rate and
-the existing materialized tables against the baseline. It does not rebuild
+all 5 materialized rate tables against the baseline. It does not rebuild
 the entire blend or recover discarded components for all providers.
 
 Run `script/rate_components_requests.rb` once per snapshot using

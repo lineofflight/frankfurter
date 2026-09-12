@@ -128,7 +128,7 @@ describe "Grouped blend ingestion" do
     date = @date
     @adapter = Class.new(Provider::Adapters::Adapter) do
       define_method(:fetch) do |**|
-        [{ date:, base: "EUR", quote: "USD", rate: 1.3 }]
+        [{ date:, base: "EUR", quote: "USD", rate: 1.3, mid: nil, bid: 1.2, ask: 1.4 }]
       end
     end
   end
@@ -154,6 +154,13 @@ describe "Grouped blend ingestion" do
     end
 
     _(purged).must_equal(true)
+    stored = Rate.where(provider: @provider.key, date: @date, base: "EUR", quote: "USD")
+
+    _(stored.get([:mid, :bid, :ask, :rate])).must_equal([nil, 1.2, 1.4, 1.3])
+    [WeeklyRate, MonthlyRate].zip(buckets).each do |model, bucket|
+      _(model.where(provider: @provider.key, bucket_date: bucket, base: "EUR", quote: "USD").get(:rate))
+        .must_equal(1.3)
+    end
     models.zip(buckets, before).each do |model, bucket, prior|
       _(model.dataset.exclude(bucket_date: bucket).order(:bucket_date, :quote).all.map(&:values)).must_equal(prior)
     end
