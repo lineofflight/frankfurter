@@ -129,7 +129,7 @@ class Provider
             next unless buy && sell && buy.positive? && sell.positive?
 
             mid = midpoint(buy, sell)
-            records << { date:, base: code, quote: "IQD", rate: mid }
+            records << { date:, base: code, quote: "IQD", rate: mid, **prices(bid: buy, ask: sell) }
           end
         end
         records

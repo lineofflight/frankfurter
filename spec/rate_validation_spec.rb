@@ -101,8 +101,8 @@ describe RateValidation do
     it "deletes future-dated rows across rate tables and keeps in-window rows" do
       future = Date.today + 365
       db[:rates].multi_insert([
-        { provider: "TEST", date: future, base: "EUR", quote: "USD", rate: 1.1 },
-        { provider: "TEST", date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
+        { provider: "TEST", date: future, base: "EUR", quote: "USD", mid: 1.1 },
+        { provider: "TEST", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
       ])
       db[:weekly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
       db[:monthly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
@@ -120,8 +120,8 @@ describe RateValidation do
       ahead = today + 14
       bucket = Bucket.month((today >> 1).to_s)
       db[:rates].multi_insert([
-        { provider: "HMRC", date: ahead, base: "GBP", quote: "USD", rate: 1.3 },
-        { provider: "TEST", date: ahead, base: "EUR", quote: "USD", rate: 1.1 },
+        { provider: "HMRC", date: ahead, base: "GBP", quote: "USD", mid: 1.3 },
+        { provider: "TEST", date: ahead, base: "EUR", quote: "USD", mid: 1.1 },
       ])
       db[:monthly_rates].multi_insert([
         { provider: "HMRC", bucket_date: bucket, base: "GBP", quote: "USD", rate: 1.3 },
@@ -138,10 +138,10 @@ describe RateValidation do
 
     it "deletes rates on or after the terminal date and keeps earlier rows" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", rate: 0.00005 },
-        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TEST", date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", rate: 1.1 },
+        { provider: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", mid: 0.00005 },
+        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TEST", date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", mid: 1.1 },
       ])
 
       totals = RateValidation.purge(db)
@@ -155,8 +155,8 @@ describe RateValidation do
 
     it "deletes EUR rates dated before the euro existed and keeps later rows" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", rate: 0.10448 },
-        { provider: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", rate: 0.10500 },
+        { provider: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", mid: 0.10448 },
+        { provider: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", mid: 0.10500 },
       ])
 
       RateValidation.purge(db)
@@ -209,8 +209,8 @@ describe RateValidation do
       db[:providers].insert(key: "TST", name: "Test", frequency: "monthly")
       Provider.load_cache
       db[:rates].multi_insert([
-        { provider: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", rate: 22000.0 },
+        { provider: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currency_coverages].where(iso_code: "BYR").delete
@@ -226,8 +226,8 @@ describe RateValidation do
 
     it "refreshes currency summaries for affected codes" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TEST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", rate: 22000.0 },
+        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TEST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currencies].insert(iso_code: "BYR", start_date: "2016-06-30", end_date: "2017-01-01")
@@ -254,7 +254,7 @@ describe RateValidation do
         date: Date.new(2017, 1, 1),
         base: "USD",
         quote: "BYR",
-        rate: 22000.0,
+        mid: 22000.0,
       )
       db[:currencies].where(iso_code: "BYR").delete
       db[:currencies].insert(iso_code: "BYR", start_date: "2017-01-01", end_date: "2017-01-01")

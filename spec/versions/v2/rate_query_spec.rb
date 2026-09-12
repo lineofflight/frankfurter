@@ -13,8 +13,8 @@ module Versions
         Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
         Provider.load_cache
         Rate.dataset.multi_insert([
-          { provider: "TST", date: rows_on, base: "EUR", quote: "USD", rate: 9.0 },
-          { provider: "TST", date: rows_on, base: "EUR", quote: "GBP", rate: 8.0 },
+          { provider: "TST", date: rows_on, base: "EUR", quote: "USD", mid: 9.0 },
+          { provider: "TST", date: rows_on, base: "EUR", quote: "GBP", mid: 8.0 },
         ])
         MonthlyRate.dataset.insert(
           bucket_date: Date.new(rows_on.year, rows_on.month, 1), provider: "TST", base: "EUR", quote: "USD", rate: 9.0,
@@ -89,8 +89,8 @@ module Versions
 
       it "keeps rows the provider cannot bridge to USD" do
         Rate.dataset.multi_insert([
-          { provider: "TST", date:, base: "EUR", quote: "GBP", rate: 0.86 },
-          { provider: "TST", date:, base: "EUR", quote: "JPY", rate: 160.0 },
+          { provider: "TST", date:, base: "EUR", quote: "GBP", mid: 0.86 },
+          { provider: "TST", date:, base: "EUR", quote: "JPY", mid: 160.0 },
         ])
 
         records = V2::RateQuery.new(providers: "TST", base: "GBP", date: date.to_s).to_a
@@ -104,9 +104,9 @@ module Versions
 
       it "keeps one record per pair when an older base still bridges the quote" do
         Rate.dataset.multi_insert([
-          { provider: "TST", date: date - 1, base: "USD", quote: "LTL", rate: 2.8387 },
-          { provider: "TST", date: date - 1, base: "EUR", quote: "LTL", rate: 3.4528 },
-          { provider: "TST", date:, base: "EUR", quote: "USD", rate: 1.2043 },
+          { provider: "TST", date: date - 1, base: "USD", quote: "LTL", mid: 2.8387 },
+          { provider: "TST", date: date - 1, base: "EUR", quote: "LTL", mid: 3.4528 },
+          { provider: "TST", date:, base: "EUR", quote: "USD", mid: 1.2043 },
         ])
 
         records = V2::RateQuery.new(providers: "TST", base: "USD", quotes: "EUR", date: date.to_s).to_a
@@ -118,8 +118,8 @@ module Versions
 
       it "serves a pegged base from the provider's own rates" do
         Rate.dataset.multi_insert([
-          { provider: "TST", date:, base: "EUR", quote: "AED", rate: 4.0 },
-          { provider: "TST", date:, base: "EUR", quote: "USD", rate: 1.09 },
+          { provider: "TST", date:, base: "EUR", quote: "AED", mid: 4.0 },
+          { provider: "TST", date:, base: "EUR", quote: "USD", mid: 1.09 },
         ])
 
         records = V2::RateQuery.new(providers: "TST", base: "AED", date: date.to_s).to_a
@@ -641,8 +641,8 @@ module Versions
         date = Fixtures.latest_date
         Rate.dataset.delete
         [["AAA", 1.10, 0.90], ["BBB", 1.20, 0.80]].each do |provider, usd, gbp|
-          Rate.dataset.insert(date:, base: "EUR", quote: "USD", rate: usd, provider:)
-          Rate.dataset.insert(date:, base: "EUR", quote: "GBP", rate: gbp, provider:)
+          Rate.dataset.insert(date:, base: "EUR", quote: "USD", mid: usd, provider:)
+          Rate.dataset.insert(date:, base: "EUR", quote: "GBP", mid: gbp, provider:)
         end
 
         shape = { base: "EUR", quotes: "GBP", providers: "AAA,BBB" }
@@ -659,8 +659,8 @@ module Versions
         day_after = Date.today + 2
 
         Rate.where(provider: "ECB", base: "EUR", quote: "USD", date: [tomorrow, day_after]).delete
-        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", rate: 9.99, provider: "ECB")
-        Rate.dataset.insert(date: day_after, base: "EUR", quote: "USD", rate: 8.88, provider: "ECB")
+        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", mid: 9.99, provider: "ECB")
+        Rate.dataset.insert(date: day_after, base: "EUR", quote: "USD", mid: 8.88, provider: "ECB")
 
         query = V2::RateQuery.new(providers: "ECB", quotes: "USD")
         usd = query.to_a.find { |r| r[:base] == "EUR" && r[:quote] == "USD" }
@@ -675,7 +675,7 @@ module Versions
         tomorrow = today + 1
 
         Rate.where(provider: "ECB", base: "EUR", quote: "USD", date: tomorrow).delete
-        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", rate: 9.99, provider: "ECB")
+        Rate.dataset.insert(date: tomorrow, base: "EUR", quote: "USD", mid: 9.99, provider: "ECB")
 
         explicit = V2::RateQuery.new(date: today.to_s, providers: "ECB", quotes: "USD").to_a
         open_range = V2::RateQuery.new(from: today.to_s, providers: "ECB", quotes: "USD").to_a
@@ -694,7 +694,7 @@ module Versions
 
       it "stamp each row with its pair's actual observation date" do
         stale_date = Fixtures.latest_date - 5
-        Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+        Rate.dataset.insert(date: stale_date, base: "EUR", quote: "RON", mid: 4.97, provider: "ECB")
 
         query = V2::RateQuery.new(date: Fixtures.latest_date.to_s)
         results = query.to_a
@@ -716,7 +716,7 @@ module Versions
         sunday = monday - 1
         friday_after = monday + 4
 
-        Rate.dataset.insert(date: monday, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
+        Rate.dataset.insert(date: monday, base: "EUR", quote: "RON", mid: 4.97, provider: "ECB")
 
         query = V2::RateQuery.new(from: friday_before.to_s, to: friday_after.to_s)
         results = query.to_a
@@ -736,8 +736,8 @@ module Versions
         range_end = monday + 5
         pre_range_date = monday - 5
         in_range_date = monday + 2
-        Rate.dataset.insert(date: pre_range_date, base: "EUR", quote: "RON", rate: 4.97, provider: "ECB")
-        Rate.dataset.insert(date: in_range_date, base: "EUR", quote: "RON", rate: 4.95, provider: "ECB")
+        Rate.dataset.insert(date: pre_range_date, base: "EUR", quote: "RON", mid: 4.97, provider: "ECB")
+        Rate.dataset.insert(date: in_range_date, base: "EUR", quote: "RON", mid: 4.95, provider: "ECB")
 
         query = V2::RateQuery.new(from: monday.to_s, to: range_end.to_s)
         ron_dates = query.to_a.select { |r| r[:base] == "EUR" && r[:quote] == "RON" }.map { |r| r[:date] }.sort
@@ -832,7 +832,7 @@ module Versions
 
       it "marks all providers excluded on peg-snapped rows" do
         date = Fixtures.latest_date
-        Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "AED", rate: 3.97)
+        Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "AED", mid: 3.97)
 
         query = V2::RateQuery.new(date: date.to_s, base: "USD", quotes: "AED", expand: "providers")
         results = query.to_a
@@ -878,7 +878,7 @@ module Versions
         end
 
         records = days.map do |date|
-          { provider: "TEST", date:, base: "EUR", quote: "BTN", rate: 90.0 }
+          { provider: "TEST", date:, base: "EUR", quote: "BTN", mid: 90.0 }
         end
         Rate.dataset.multi_insert(records)
       end

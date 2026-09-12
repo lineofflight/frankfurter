@@ -24,10 +24,10 @@ describe "blend parity carve-outs" do
     stale = observed - 10
     range_start = observed + 12
     Rate.dataset.multi_insert([
-      { provider: "T1", date: observed, base: "EUR", quote: "MXN", rate: 20.0 },
-      { provider: "T1", date: observed, base: "EUR", quote: "USD", rate: 1.2 },
-      { provider: "T2", date: stale, base: "EUR", quote: "MXN", rate: 40.0 },
-      { provider: "T2", date: stale, base: "EUR", quote: "USD", rate: 1.2 },
+      { provider: "T1", date: observed, base: "EUR", quote: "MXN", mid: 20.0 },
+      { provider: "T1", date: observed, base: "EUR", quote: "USD", mid: 1.2 },
+      { provider: "T2", date: stale, base: "EUR", quote: "MXN", mid: 40.0 },
+      { provider: "T2", date: stale, base: "EUR", quote: "USD", mid: 1.2 },
     ])
     BlendedRate.rebuild
 
@@ -61,10 +61,10 @@ describe "blend parity carve-outs" do
 
     # Each fake provider carries its own EUR to USD bridge so the pivot rebase can use its rows.
     Rate.dataset.multi_insert([
-      { provider: "T1", date: observed, base: "EUR", quote: "MXN", rate: 20.0 },
-      { provider: "T1", date: observed, base: "EUR", quote: "USD", rate: 1.2 },
-      { provider: "T2", date: stale, base: "EUR", quote: "MXN", rate: 40.0 },
-      { provider: "T2", date: stale, base: "EUR", quote: "USD", rate: 1.2 },
+      { provider: "T1", date: observed, base: "EUR", quote: "MXN", mid: 20.0 },
+      { provider: "T1", date: observed, base: "EUR", quote: "USD", mid: 1.2 },
+      { provider: "T2", date: stale, base: "EUR", quote: "MXN", mid: 40.0 },
+      { provider: "T2", date: stale, base: "EUR", quote: "USD", mid: 1.2 },
     ])
     BlendedRate.rebuild
 
@@ -96,14 +96,14 @@ describe "blend parity carve-outs" do
     ]
     rows = cohort.flat_map do |provider, rate|
       [
-        { provider:, date: d0, base: "EUR", quote: "ZAR", rate: },
-        { provider:, date: d0, base: "EUR", quote: "USD", rate: 1.08 },
+        { provider:, date: d0, base: "EUR", quote: "ZAR", mid: rate },
+        { provider:, date: d0, base: "EUR", quote: "USD", mid: 1.08 },
       ]
     end
     # X's observation at d1 is an outlier while the cohort is in the lookback; once the cohort ages out, X is alone,
     # below the consensus minimum, and its masked observation would emerge.
-    rows << { provider: "X", date: d1, base: "EUR", quote: "ZAR", rate: 99.0 }
-    rows << { provider: "X", date: d1, base: "EUR", quote: "USD", rate: 1.08 }
+    rows << { provider: "X", date: d1, base: "EUR", quote: "ZAR", mid: 99.0 }
+    rows << { provider: "X", date: d1, base: "EUR", quote: "USD", mid: 1.08 }
     Rate.dataset.multi_insert(rows)
     BlendedRate.rebuild
 
@@ -133,8 +133,8 @@ describe "blend parity carve-outs" do
     Rate.dataset.multi_insert(
       [era_start, era_end].map do |date|
         [
-          { provider: "T3", date:, base: "EUR", quote: "GBP", rate: 0.95 },
-          { provider: "T3", date:, base: "EUR", quote: "USD", rate: 1.30 },
+          { provider: "T3", date:, base: "EUR", quote: "GBP", mid: 0.95 },
+          { provider: "T3", date:, base: "EUR", quote: "USD", mid: 1.30 },
         ]
       end.flatten,
     )

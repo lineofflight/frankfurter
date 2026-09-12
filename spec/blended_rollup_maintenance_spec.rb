@@ -25,7 +25,7 @@ describe "Grouped blend maintenance" do
   it "refreshes grouped values when provider rollups are rebuilt" do
     BlendedWeeklyRate.rebuild
     BlendedMonthlyRate.rebuild
-    Rate.where(provider: "ECB", quote: "USD").update(rate: 1.3)
+    Rate.where(provider: "ECB", quote: "USD").update(mid: 1.3)
     invoke_task("rollups:rebuild", "ecb")
 
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
@@ -38,7 +38,7 @@ describe "Grouped blend maintenance" do
 
   it "invalidates grouped values in the same transaction as an invalid-data purge" do
     date = Date.today + 500
-    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", rate: 1.2)
+    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", mid: 1.2)
     Provider["ECB"].send(:refresh_rollups, [date])
 
     _(BlendedWeeklyRate.dataset.count).must_be(:>, 0)
@@ -52,7 +52,7 @@ describe "Grouped blend maintenance" do
 
   it "repopulates grouped tables after the purge task" do
     date = Date.today + 500
-    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", rate: 1.2)
+    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", mid: 1.2)
     Provider["ECB"].send(:refresh_rollups, [date])
     invoke_task("db:purge_invalid")
 

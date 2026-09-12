@@ -43,7 +43,7 @@ class Provider
             buy, sell = values[2 * i, 2]
             next if buy == "n.d." || sell == "n.d."
 
-            { date:, base: currency, quote: "PEN", rate: midpoint(buy, sell) }
+            { date:, base: currency, quote: "PEN", rate: midpoint(buy, sell), **prices(bid: buy, ask: sell) }
           end
         end
       end

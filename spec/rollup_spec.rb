@@ -57,7 +57,7 @@ describe "Rollup tables" do
       WeeklyRate.where(provider: "ECB")
         .order(Sequel.desc(:bucket_date)).first
 
-      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", rate: 42.0, provider: "ECB")
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 42.0, provider: "ECB")
       provider.send(:refresh_rollups, [date])
 
       week_row = WeeklyRate.where(provider: "ECB", quote: "XTS").first
@@ -75,7 +75,7 @@ describe "Rollup tables" do
       provider = Provider.find(key: "ECB")
       date = Fixtures.latest_date
 
-      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", rate: 99.0, provider: "ECB")
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 99.0, provider: "ECB")
       provider.send(:refresh_rollups, [date])
 
       month_row = MonthlyRate.where(provider: "ECB", quote: "XTS").first
@@ -182,7 +182,7 @@ describe "Rollup tables" do
       # Insert a new rate on the existing latest date and refresh rollups; the raw max date is unchanged so the cache
       # key should be stable
       Rate.dataset.insert(
-        date: Fixtures.latest_date, base: "EUR", quote: "XTS", rate: 42.0, provider: "ECB",
+        date: Fixtures.latest_date, base: "EUR", quote: "XTS", mid: 42.0, provider: "ECB",
       )
       Provider.find(key: "ECB").send(:refresh_rollups, [Fixtures.latest_date])
 

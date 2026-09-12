@@ -7,10 +7,10 @@ describe Currency do
   before do
     Rate.dataset.delete
     Rate.multi_insert([
-      { provider: "ECB", date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
-      { provider: "ECB", date: Date.today, base: "EUR", quote: "GBP", rate: 0.85 },
-      { provider: "BOC", date: Date.today, base: "CAD", quote: "USD", rate: 0.74 },
-      { provider: "ECB", date: Date.today - 365, base: "EUR", quote: "SEK", rate: 11.0 },
+      { provider: "ECB", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
+      { provider: "ECB", date: Date.today, base: "EUR", quote: "GBP", mid: 0.85 },
+      { provider: "BOC", date: Date.today, base: "CAD", quote: "USD", mid: 0.74 },
+      { provider: "ECB", date: Date.today - 365, base: "EUR", quote: "SEK", mid: 11.0 },
     ])
 
     db = Sequel::Model.db
@@ -137,8 +137,8 @@ describe Currency do
     # further.
     db = Sequel::Model.db
     Rate.multi_insert([
-      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
-      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
+      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
+      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
     ])
     db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
                                                      end_date: Date.today.to_s,)
@@ -157,8 +157,8 @@ describe Currency do
   it "extends start_date in currency list for pegged currencies with provider data" do
     db = Sequel::Model.db
     Rate.multi_insert([
-      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", rate: 1.0 },
-      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", rate: 3.6725 },
+      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
+      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
     ])
     db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
                                                      end_date: Date.today.to_s,)

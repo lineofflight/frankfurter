@@ -82,7 +82,8 @@ class Provider
             rate = midpoint(buy, sell)
             rate /= 100.0 if currency == "JPY"
 
-            { date:, base: currency, quote: "TRY", rate: }
+            { date:, base: currency, quote: "TRY", rate:,
+              **prices(bid: buy, ask: sell, unit: currency == "JPY" ? 100 : 1), }
           end
         end
       end

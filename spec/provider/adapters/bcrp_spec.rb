@@ -41,7 +41,8 @@ class Provider < Sequel::Model(:providers)
         it "parses two-digit years across the century" do
           records = adapter.parse('{"periods":[{"name":"02.Jan.97","values":["2.599","2.614"]}]}')
 
-          _(records).must_equal([{ date: Date.new(1997, 1, 2), base: "USD", quote: "PEN", rate: 2.6065 }])
+          _(records).must_equal([{ date: Date.new(1997, 1, 2), base: "USD", quote: "PEN", rate: 2.6065, bid: 2.599,
+                                   ask: 2.614, mid: nil, }])
         end
 
         it "skips a pair missing either side" do

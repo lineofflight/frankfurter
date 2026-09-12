@@ -3,6 +3,7 @@
 require "bigdecimal"
 require "http/cookie"
 require "http"
+require "rate_components"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
@@ -92,7 +93,15 @@ class Provider < Sequel::Model(:providers)
       # exactly: one digit deeper than its inputs, and nothing beyond. RatePrecision is the backstop at ingest; this
       # keeps the value right at the source.
       def midpoint(buy, sell)
-        ((BigDecimal(buy.to_s) + BigDecimal(sell.to_s)) / 2).to_f
+        RateComponents.midpoint(buy, sell)
+      end
+
+      # Preserve the published components in the same per-unit direction as the rate. The existing rate calculation
+      # remains the compatibility oracle while the SQL resolver is evaluated against recorded and historical data.
+      def prices(bid:, ask:, mid: nil, unit: 1)
+        { bid:, ask:, mid: }.transform_values do |value|
+          (BigDecimal(value.to_s) / unit).to_f unless value.nil?
+        end
       end
 
       # http.rb sends no Accept header of its own, and a request without one is a bot fingerprint some WAFs reject.

@@ -29,10 +29,10 @@ describe BlendedRate do
       d2 = Fixtures.business_day(20)
       # The fake provider carries its own EUR to USD bridge so the pivot rebase can use its rows.
       Rate.dataset.multi_insert([
-        { provider: "T1", date: d1, base: "EUR", quote: "MXN", rate: 20.0 },
-        { provider: "T1", date: d1, base: "EUR", quote: "USD", rate: 1.2 },
-        { provider: "T1", date: d2, base: "EUR", quote: "MXN", rate: 21.0 },
-        { provider: "T1", date: d2, base: "EUR", quote: "USD", rate: 1.2 },
+        { provider: "T1", date: d1, base: "EUR", quote: "MXN", mid: 20.0 },
+        { provider: "T1", date: d1, base: "EUR", quote: "USD", mid: 1.2 },
+        { provider: "T1", date: d2, base: "EUR", quote: "MXN", mid: 21.0 },
+        { provider: "T1", date: d2, base: "EUR", quote: "USD", mid: 1.2 },
       ])
 
       BlendedRate.rebuild
@@ -172,7 +172,7 @@ describe BlendedRate do
 
       # A late arrival shifts the contributor set for EUR at this anchor. Close enough to the consensus that the outlier
       # filter keeps it.
-      Rate.dataset.insert(provider: "T1", date: date, base: "EUR", quote: "USD", rate: 1.10)
+      Rate.dataset.insert(provider: "T1", date: date, base: "EUR", quote: "USD", mid: 1.10)
       BlendedRate.refresh(date..(date + CarryForward::LOOKBACK_DAYS))
 
       _(BlendedRate.first(quote: "EUR", date: date).rate).wont_equal(before_target)

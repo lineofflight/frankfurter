@@ -39,7 +39,8 @@ class Provider
           unite = record["uniteDevise"].to_f
           next if mid.zero? || unite.zero?
 
-          { date:, base: code, quote: "MAD", rate: mid / unite }
+          { date:, base: code, quote: "MAD", rate: mid / unite,
+            **prices(bid: record["achat"], ask: record["vente"], mid: record["moyen"], unit: unite), }
         end
       end
 

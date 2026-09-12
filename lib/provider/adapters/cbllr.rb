@@ -74,7 +74,7 @@ class Provider
           mid = midpoint(buy, sell)
           next unless mid.positive?
 
-          { date:, base: "USD", quote: "LRD", rate: mid }
+          { date:, base: "USD", quote: "LRD", rate: mid, **prices(bid: buy, ask: sell) }
         end
       end
 
