@@ -16,7 +16,7 @@ The default run replays VCR cassettes without network access. To compare live
 historical responses from the providers used in this experiment:
 
 ```sh
-APP_ENV=test LIVE_PROVIDERS=CBI,BCRP,BOZ bundle exec ruby \
+APP_ENV=test LIVE_PROVIDERS=CBI,BOZ bundle exec ruby \
   script/rate_components_parity.rb tmp/rate-parity/live-components.jsonl
 ```
 
