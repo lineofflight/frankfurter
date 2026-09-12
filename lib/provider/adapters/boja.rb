@@ -86,7 +86,7 @@ class Provider
         rate_value = compute_mid(sell_rate, buy_rate)
         return unless rate_value && !rate_value.zero?
 
-        { date:, base: iso, quote: "JMD", rate: rate_value }
+        { date:, base: iso, quote: "JMD", rate: rate_value, **prices(bid: buy_rate, ask: sell_rate) }
       end
 
       def compute_mid(sell, buy)

@@ -135,7 +135,8 @@ class Provider < Sequel::Model(:providers)
 
         records = adapter.parse_daily(xls, Date.new(2026, 6, 11))
 
-        _(records).must_include({ date: Date.new(2026, 6, 11), base: "USD", quote: "BOB", rate: 6.91 })
+        _(records).must_include({ date: Date.new(2026, 6, 11), base: "USD", quote: "BOB", rate: 6.91,
+                                  bid: 6.86, ask: 6.96, mid: nil, })
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "EUR", quote: "BOB", rate: 7.91 })
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "XDR", quote: "USD", rate: 1.36 })
         _(records).must_include({ date: Date.new(2026, 6, 11), base: "XAU", quote: "USD", rate: 4082.56 })

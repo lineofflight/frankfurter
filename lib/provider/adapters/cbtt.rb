@@ -51,7 +51,7 @@ class Provider
             rate = midpoint(buy, sell)
             next if rate.zero?
 
-            { date:, base:, quote: "TTD", rate: }
+            { date:, base:, quote: "TTD", rate:, **prices(bid: buy, ask: sell) }
           end
         end
       end

@@ -353,7 +353,7 @@ describe Provider do
       let(:revising_adapter) { Class.new(adapter) { def self.revises? = true } }
 
       before do
-        Rate.create(provider: provider.key, date: import_date, base: "EUR", quote: "USD", rate: 1.0)
+        Rate.create(provider: provider.key, date: import_date, base: "EUR", quote: "USD", mid: 1.0)
       end
 
       it "warns when a fetched value differs from the stored row" do
@@ -622,7 +622,7 @@ describe Provider do
 
     it "skips when already up to date" do
       Rate.dataset.insert(
-        date: Date.today, provider: provider.key, base: "EUR", quote: "USD", rate: 1.1,
+        date: Date.today, provider: provider.key, base: "EUR", quote: "USD", mid: 1.1,
       )
 
       called = false
@@ -643,7 +643,7 @@ describe Provider do
     it "chunks when adapter has backfill_range" do
       since = Date.today - 90
       Rate.dataset.insert(
-        date: since, provider: provider.key, base: "EUR", quote: "USD", rate: 1.0,
+        date: since, provider: provider.key, base: "EUR", quote: "USD", mid: 1.0,
       )
 
       ranged_adapter = Class.new(adapter) do

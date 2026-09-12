@@ -65,7 +65,7 @@ class Provider
             rate = mid / unit
             next if rate.zero?
 
-            { date:, base: iso, quote: "NPR", rate: }
+            { date:, base: iso, quote: "NPR", rate:, **prices(bid: buy, ask: sell, unit:) }
           end
         end
       end

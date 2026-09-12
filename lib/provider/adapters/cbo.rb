@@ -79,11 +79,11 @@ class Provider
           key = [published.to_date, code]
           next if latest[key] && latest[key][:published] > published
 
-          latest[key] = { published:, rate: midpoint(buy, sell) }
+          latest[key] = { published:, rate: midpoint(buy, sell), **prices(bid: buy, ask: sell) }
         end
 
         latest.map do |(date, code), row|
-          { date:, base: code, quote: "OMR", rate: row[:rate] }
+          { date:, base: code, quote: "OMR", **row.except(:published) }
         end
       end
 

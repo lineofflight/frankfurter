@@ -12,6 +12,7 @@ require "money/currency"
 require "currency_coverage"
 require "provider/adapters/adapter"
 require "rate"
+require "rate_components"
 require "rate_precision"
 require "rate_validation"
 
@@ -119,7 +120,8 @@ class Provider < Sequel::Model(:providers)
 
       inserted = db.transaction(savepoint: true) do
         before = db.get(Sequel.lit("total_changes()"))
-        Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote]).multi_insert(records)
+        Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote])
+          .multi_insert(records.map { |record| RateComponents.attributes(record) })
         count = db.get(Sequel.lit("total_changes()")) - before
         if count.positive?
           affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq

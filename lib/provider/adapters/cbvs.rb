@@ -133,7 +133,8 @@ class Provider
         rate = (BigDecimal(rate.to_s) / unit).to_f unless unit == 1
         return if rate.zero?
 
-        { date:, base: match[2], quote: "SRD", rate: }
+        { date:, base: match[2], quote: "SRD", rate:,
+          **prices(bid: number(match[4]), ask: number(match[5]), unit:), }
       end
 
       # Dutch notation ("1.073,45") from 2014; a bare dot ("3.250") is the decimal separator in 2013.

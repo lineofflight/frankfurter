@@ -80,7 +80,8 @@ class Provider < Sequel::Model(:providers)
           next unless mid.positive?
 
           rate = code == "IRR" ? mid / IRR_PER_TOMAN : mid
-          { date:, base: code, quote: "AFN", rate: }
+          { date:, base: code, quote: "AFN", rate:,
+            **prices(bid: transfer_buy, ask: transfer_sell, unit: code == "IRR" ? IRR_PER_TOMAN : 1), }
         end
       end
 

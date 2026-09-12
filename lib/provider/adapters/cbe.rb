@@ -120,7 +120,7 @@ class Provider
 
         rate = mid / units
 
-        { date:, base: iso, quote: "EGP", rate: }
+        { date:, base: iso, quote: "EGP", rate:, **prices(bid: buy, ask: sell, unit: units) }
       end
 
       def excel_serial_to_date(serial)

@@ -111,7 +111,7 @@ class Provider
             date = build_date(year, month, day)
             next unless date
 
-            records << { date:, base: "USD", quote: "BOB", rate: midpoint(sell, buy) }
+            records << { date:, base: "USD", quote: "BOB", rate: midpoint(sell, buy), **prices(bid: buy, ask: sell) }
           end
         end
 
@@ -172,7 +172,7 @@ class Provider
       # USD.COMPRA rows averaged to a mid.
       def parse_daily_legacy(rows, date)
         records = []
-        usd_rates = []
+        usd_rates = {}
 
         rows.each do |row|
           code_str = row[3].to_s.strip
@@ -198,7 +198,7 @@ class Provider
             records << { date:, base: "XDR", quote: "USD", rate: }
           when "USD.VENTA", "USD.COMPRA"
             rate = parse_rate(row[4])
-            usd_rates << rate if rate&.positive?
+            usd_rates[code_str] = rate if rate&.positive?
           when "USD"
             # Skip Ecuador's USD row to avoid duplicate USD/BOB rates
             next
@@ -213,8 +213,9 @@ class Provider
         end
 
         if usd_rates.size == 2
-          mid_rate = midpoint(*usd_rates)
-          records << { date:, base: "USD", quote: "BOB", rate: mid_rate }
+          mid_rate = midpoint(*usd_rates.values)
+          records << { date:, base: "USD", quote: "BOB", rate: mid_rate,
+                       **prices(bid: usd_rates["USD.COMPRA"], ask: usd_rates["USD.VENTA"]), }
         end
 
         records

@@ -51,7 +51,8 @@ class Provider < Sequel::Model(:providers)
         ROWS
 
         _(records.length).must_equal(2)
-        _(records.first).must_equal({ date: Date.new(2026, 6, 1), base: "USD", quote: "OMR", rate: 0.3845 })
+        _(records.first).must_equal({ date: Date.new(2026, 6, 1), base: "USD", quote: "OMR", rate: 0.3845, bid: 0.384,
+                                      ask: 0.385, mid: nil, })
       end
 
       it "keeps the latest intraday revision per date" do

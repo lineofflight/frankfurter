@@ -77,8 +77,8 @@ class Provider < Sequel::Model(:providers)
           _(fixing[:date]).must_equal(Date.new(2009, 9, 1))
           _(fixing[:time]).must_be_nil
           _(fixing[:records]).must_equal([
-            { date: Date.new(2009, 9, 1), base: "USD", quote: "SRD", rate: 2.745 },
-            { date: Date.new(2009, 9, 1), base: "GYD", quote: "SRD", rate: 0.0133 },
+            { date: Date.new(2009, 9, 1), base: "USD", quote: "SRD", rate: 2.745, bid: 2.71, ask: 2.78, mid: nil },
+            { date: Date.new(2009, 9, 1), base: "GYD", quote: "SRD", rate: 0.0133, bid: 0.0129, ask: 0.0137, mid: nil },
           ])
         end
 

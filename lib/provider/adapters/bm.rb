@@ -118,7 +118,8 @@ class Provider
           rate /= units if units > 1
           next if rate.zero?
 
-          records << { date: date, base: code, quote: "MZN", rate: rate }
+          records << { date: date, base: code, quote: "MZN", rate: rate,
+                       **prices(bid: number(buy), ask: number(sell), mid: mid && number(mid), unit: units), }
         end
 
         records

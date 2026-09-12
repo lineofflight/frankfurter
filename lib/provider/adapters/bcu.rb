@@ -84,7 +84,7 @@ class Provider
 
           rate = midpoint(tcc, tcv)
 
-          { date:, base: base_currency, quote: "UYU", rate: }
+          { date:, base: base_currency, quote: "UYU", rate:, **prices(bid: tcc, ask: tcv) }
         end
       end
 

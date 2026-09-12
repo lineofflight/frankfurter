@@ -143,11 +143,11 @@ module Fixtures
           if config[:mixed]
             config[:mixed].each do |pair|
               records << { provider:, date:, base: pair[:base], quote: pair[:quote],
-                           rate: (pair[:rate] * jitter).round(4), }
+                           mid: (pair[:rate] * jitter).round(4), }
             end
           else
             config[:quotes].each do |quote, rate|
-              records << { provider:, date:, base: config[:base], quote:, rate: (rate * jitter).round(4) }
+              records << { provider:, date:, base: config[:base], quote:, mid: (rate * jitter).round(4) }
             end
           end
         end

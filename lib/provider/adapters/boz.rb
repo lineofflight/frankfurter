@@ -133,7 +133,7 @@ class Provider
             sell = numeric_cell(row, sell_column)
             next unless buy && sell
 
-            records << { date: date, base: iso, quote: quote, rate: midpoint(buy, sell) }
+            records << { date: date, base: iso, quote: quote, rate: midpoint(buy, sell), **prices(bid: buy, ask: sell) }
           end
         end
 

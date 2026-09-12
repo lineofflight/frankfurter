@@ -35,7 +35,7 @@ describe Rate do
 
     it "excludes providers more than 14 days behind the target" do
       date = Fixtures.latest_date
-      Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", rate: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", mid: 1.08, provider: "STALE")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
@@ -47,7 +47,7 @@ describe Rate do
 
     it "includes providers within 14 days of the target" do
       date = Fixtures.latest_date
-      Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", rate: 0.92, provider: "FRED")
+      Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", mid: 0.92, provider: "FRED")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
@@ -60,7 +60,7 @@ describe Rate do
     it "includes rates from different dates within the same provider" do
       date = Fixtures.latest_date
       older_date = date - 3
-      Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", rate: 0.05, provider: "ECB")
+      Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", mid: 0.05, provider: "ECB")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
