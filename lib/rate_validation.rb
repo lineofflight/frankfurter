@@ -160,6 +160,7 @@ module RateValidation
     # summaries for affected codes. Returns per-table deletion counts.
     def purge(db)
       require "rate"
+      require "provider"
 
       totals = RATE_TABLES.to_h { |table| [table, 0] }
       affected = []
@@ -172,18 +173,18 @@ module RateValidation
           PURGEABLE.each do |rule|
             scope = rule.reject_scope(db[table], date_column, precision)
             affected.concat(scope.select_map(:base), scope.select_map(:quote))
+            blended_table = :"blended_#{table}"
+            if precision && db.table_exists?(blended_table)
+              # Only changed eligible provider buckets become stale. Keep unrelated materialized history available, and
+              # invalidate before deleting source rows so requests cannot observe a stale blend after commit.
+              dates = scope.exclude(provider: Provider.non_blending_keys).select(:bucket_date)
+              db[blended_table].where(bucket_date: dates).delete
+            end
             totals[table] += scope.delete
           end
         end
 
-        unless affected.empty?
-          rebuild_summaries(db, affected.uniq)
-          # Invalidate in the source transaction: bucket presence alone cannot detect stale values after a purge. The
-          # task rebuilds afterwards; requests fall back to live grouped compute in the meantime.
-          [:blended_weekly_rates, :blended_monthly_rates].each do |table|
-            db[table].delete if db.table_exists?(table)
-          end
-        end
+        rebuild_summaries(db, affected.uniq) unless affected.empty?
       end
 
       totals

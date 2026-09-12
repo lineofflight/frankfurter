@@ -116,6 +116,54 @@ end
       end.must_raise(RuntimeError)
       _(@model.dataset.order(:bucket_date, :quote).all.map(&:values)).must_equal(before)
     end
+
+    it "restores stored rows when insertion fails after deleting the old bucket" do
+      @model.rebuild
+      before = @model.dataset.order(:bucket_date, :quote).all.map(&:values)
+      source.dataset.where(quote: "CHF").update(rate: 9.0)
+      deleted = false
+      model = @model
+      date = @date
+      failing = @model.dataset.with_extend(Module.new do
+        define_method(:multi_insert) do |*|
+          deleted = model.where(bucket_date: date).empty?
+          raise "failed insert"
+        end
+      end)
+
+      @model.stub(:dataset, -> { failing }) do
+        _ { @model.refresh([@date]) }.must_raise(RuntimeError)
+      end
+
+      _(deleted).must_equal(true)
+      _(@model.dataset.order(:bucket_date, :quote).all.map(&:values)).must_equal(before)
+    end
+
+    it "bounds source reads even when a caller refreshes decades at once" do
+      source.dataset.delete
+      dates = Array.new(205) { |i| @date + (i * 7) }
+      dates.each do |date|
+        source.dataset.insert(bucket_date: date, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8)
+      end
+      sizes = []
+      logger = Object.new
+      table = source.table_name.to_s
+      logger.define_singleton_method(:info) do |sql|
+        return unless sql.include?("SELECT * FROM `#{table}`") && sql.include?("`bucket_date` IN")
+
+        sizes << sql.scan(/'\d{4}-\d{2}-\d{2}'/).size
+      end
+      DB.loggers << logger
+      begin
+        @model.refresh(dates)
+      ensure
+        DB.loggers.delete(logger)
+      end
+
+      _(sizes).wont_be_empty
+      _(sizes.max).must_be(:<=, BlendedRollup::BATCH_BUCKETS)
+      _(@model.where(quote: "EUR").count).must_equal(dates.size)
+    end
   end
 end
 
@@ -184,6 +232,59 @@ describe "Grouped blend ingestion" do
     _(Rate.where(provider: "BCB", date: @date).count).must_equal(0)
     _(WeeklyRate.dataset.count).must_equal(weekly)
     _(MonthlyRate.dataset.count).must_equal(monthly)
+    models.zip(before).each do |model, prior|
+      _(model.dataset.order(:bucket_date, :quote).all.map(&:values)).must_equal(prior)
+    end
+    _(purged).must_equal(false)
+  end
+
+  it "updates non-blending provider rollups without recomputing blended tables" do
+    provider = Provider["UST"].dup
+    called = false
+    refresh = ->(*) { called = true }
+    BlendedWeeklyRate.stub(:refresh, refresh) do
+      BlendedMonthlyRate.stub(:refresh, refresh) do
+        Cache.stub(:purge_debounced, nil) do
+          provider.stub(:adapter, @adapter) { provider.backfill(after: @date - 1) }
+        end
+      end
+    end
+
+    _(Rate.where(provider: "UST", date: @date).count).must_equal(1)
+    _(WeeklyRate.where(provider: "UST").count).must_be(:>, 0)
+    _(MonthlyRate.where(provider: "UST").count).must_be(:>, 0)
+    _(called).must_equal(false)
+  end
+
+  it "rolls back earlier grouped batches and source inserts when a later batch fails" do
+    models = [BlendedWeeklyRate, BlendedMonthlyRate]
+    before = models.map { |model| model.dataset.order(:bucket_date, :quote).all.map(&:values) }
+    source_counts = [WeeklyRate.count, MonthlyRate.count]
+    records = Array.new(101) do |i|
+      { date: Fixtures.latest_date - (i * 7), base: "EUR", quote: "USD", rate: 1.3 }
+    end
+    adapter = Class.new(Provider::Adapters::Adapter) do
+      define_method(:fetch) { |**| records }
+    end
+    batches = 0
+    refresh = BlendedWeeklyRate.method(:refresh_batch)
+    purged = false
+    Cache.stub(:purge_debounced, -> { purged = true }) do
+      BlendedWeeklyRate.stub(:refresh_batch, lambda { |dates|
+        batches += 1
+        raise "failed second batch" if batches == 2
+
+        refresh.call(dates)
+      },) do
+        Log.stub(:error, nil) do
+          @provider.stub(:adapter, adapter) { @provider.backfill(after: records.last[:date] - 1) }
+        end
+      end
+    end
+
+    _(batches).must_equal(2)
+    _(Rate.where(provider: "BCB").count).must_equal(0)
+    _([WeeklyRate.count, MonthlyRate.count]).must_equal(source_counts)
     models.zip(before).each do |model, prior|
       _(model.dataset.order(:bucket_date, :quote).all.map(&:values)).must_equal(prior)
     end

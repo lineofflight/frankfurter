@@ -133,7 +133,7 @@ db/seeds/
 - `Provider`: Sequel model on `providers` table. Static config-as-data: seeded from `db/seeds/providers/*.json` on every container start so provider metadata always tracks the image.
   - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
   - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, inserts to DB, refreshes currency summaries
-    - The insert is `ON CONFLICT DO NOTHING`, not an upsert: a row already stored for `(provider, date, base, quote)` is never rewritten. A fix that changes the *value* of stored rows therefore does nothing on re-backfill, and does it silently, since the rollup, currency-summary and blend refreshes are all gated on a positive insert count. Delete the provider's rows from `rates`, `weekly_rates` and `monthly_rates` first, then backfill from `coverage_start`. Rollups rebuild themselves from the new inserts; `blended_rates` refreshes on insert only and never on delete, so a change that moves pairs across the unique index also needs `rake blend:rebuild`. Verify with `rake blend:parity`, ideally against a baseline taken before the change.
+    - The insert is `ON CONFLICT DO NOTHING`, not an upsert: a row already stored for `(provider, date, base, quote)` is never rewritten. A value fix therefore does nothing on re-backfill unless the old source rows are deleted. Follow [Replacing provider history](#replacing-provider-history): all three blended tables need invalidation as part of the deletion. Insert-driven refresh alone cannot repair dates omitted by the replacement fetch. Verify with `rake blend:parity`, ideally against a baseline taken before the change.
   - `#start_date`, `#end_date`: derived from currency coverages
   - `many_to_many :currencies` through `currency_coverages`
 - `Peg`: Value object for currency pegs (from `db/seeds/pegs/*.json`)
@@ -176,8 +176,17 @@ SQLite database with `rates`, `weekly_rates`, `monthly_rates`, `providers`, `cur
 - `date`, `base`, `quote`, `rate`, `provider`
 - Unique index on `(provider, date, base, quote)`
 
+### blended_weekly_rates, blended_monthly_rates
+- `bucket_date`, `quote`, `rate`, PK `(quote, bucket_date)`; base is implicitly USD.
+- Store blends of complete eligible provider rollups, not averages of daily blended values.
+- Ingestion refreshes affected buckets atomically with source inserts, loading at most 100 buckets per batch.
+- Plain grouped queries read complete chunks from these tables; missing buckets cause live fallback. Provider-filtered and expanded queries remain live.
+- Startup fills missing buckets and retries failed population every 5 minutes until a successful run. Legitimately empty USD blends remain absent.
+- `rake blend:rebuild` rebuilds daily and both grouped tables. `rake rollups:rebuild` invalidates affected grouped buckets with its source writes, then refills them in bounded transactions.
+- `rake blend:parity` reports actual grouped coverage. Live fallback makes verification incomplete, even if bytes match, including the empty historical 1954-01-01 weekly bucket. Inspect coverage separately from byte mismatches; do not treat an incomplete report as a pass.
+
 ### weekly_rates, monthly_rates
-- Pre-aggregated rollups keyed by `bucket_date` (Monday for weekly, first-of-month for monthly)
+- Pre-aggregated rollups keyed by `bucket_date`; preserve the existing `Bucket.week` SQL expression (not ISO Monday), and first-of-month for monthly.
 - Rebuilt by `rake rollups:rebuild` and refreshed during backfill
 
 ### providers
@@ -216,6 +225,48 @@ Separate SQLite databases per environment (`APP_ENV`): test, development, produc
 - Test fixtures seed on suite load via `spec/helper.rb`
 
 ## Running Locally
+
+### Replacing provider history
+
+Deleting provider rows does not invalidate stored blends automatically. Grouped reads check bucket presence, so another provider can keep a bucket present while its stored blend still contains the deleted contributor. Invalidate the whole affected bucket, including every quote, in the same transaction as the source deletion. Daily materialization has no interior-gap readiness check, so invalidate its entire table for a blending provider.
+
+Keep API traffic and scheduled ingestion paused until replacement, rebuild and coverage verification finish. Daily readiness checks only the earliest date; incremental backfill can make it appear ready while replacement history is still incomplete.
+
+```ruby
+require "blended_rate"
+require "blended_weekly_rate"
+require "blended_monthly_rate"
+require "cache"
+require "provider"
+require "provider/adapters"
+
+provider = Provider["CBK"] # Provider being repaired
+provider.adapter # Resolve the adapter before deleting anything
+DB.transaction do
+  if provider.blends?
+    [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
+      old_dates = model.source.where(provider: provider.key).select(:bucket_date)
+      model.dataset.where(bucket_date: old_dates).delete
+    end
+    BlendedRate.dataset.delete
+  end
+  [Rate, WeeklyRate, MonthlyRate].each { |model| model.where(provider: provider.key).delete }
+end
+Cache.purge
+provider.backfill(after: provider.coverage_start)
+
+# Also repair buckets the replacement fetch omitted, using the surviving providers.
+begin
+  [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
+  BlendedRate.rebuild if provider.blends?
+ensure
+  Cache.purge
+end
+```
+
+Backfill logs and absorbs provider errors. Check its logs and restored coverage before declaring the repair complete. For scoped SQL relabels/deletions, capture both old and replacement bucket dates, invalidate them with the source changes, and rebuild afterwards. Changes to blend rules, peg seeds or provider eligibility require `rake blend:rebuild`, not missing-only population.
+
+### Local commands
 
 ```bash
 bundle install                          # Install dependencies

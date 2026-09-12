@@ -32,9 +32,10 @@ end
 
 # Materialize the blend on installs that have never built it (first deploy of this feature, or a self-hosted upgrade).
 # Until it completes, plain ranges fall back to capped live compute; the purge afterwards drops any responses cached off
-# that fallback.
+# that fallback. Retry after transient failures; Rufus logs the exception and keeps the recurring job scheduled.
+# Unschedule on successful population, including legitimately empty grouped buckets that cannot produce a USD blend.
 unless dry_run
-  scheduler.in("30s") do
+  scheduler.every("5m", first_in: "30s", overlap: false) do |job|
     unless BlendedRate.ready?
       BlendedRate.rebuild
       Cache.purge_debounced
@@ -42,6 +43,7 @@ unless dry_run
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
       Cache.purge_debounced if model.populate.positive?
     end
+    job.unschedule
   end
 end
 

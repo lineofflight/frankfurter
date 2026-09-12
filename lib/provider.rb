@@ -218,11 +218,15 @@ class Provider < Sequel::Model(:providers)
   end
 
   def refresh_rollups(dates)
+    # Older data migrations load Provider before migration 030 creates these tables. Require the grouped models only
+    # when backfill actually needs them; normal application startup always migrates before starting ingestion.
     require "blended_weekly_rate"
     require "blended_monthly_rate"
 
     weeks = refresh_rollup(:weekly_rates, Bucket.week, dates)
     months = refresh_rollup(:monthly_rates, Bucket.month, dates)
+    return unless blends?
+
     BlendedWeeklyRate.refresh(weeks)
     BlendedMonthlyRate.refresh(months)
   end

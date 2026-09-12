@@ -38,8 +38,13 @@ namespace :db do
              "#{totals[:weekly_rates]} weekly, #{totals[:monthly_rates]} monthly")
     next if totals.values.sum.zero?
 
-    # Stored blends derived from the deleted rows are stale now; rebuild and drop cached responses.
-    [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild)
-    Cache.purge
+    # Grouped invalidation is bucket-local. Repair those gaps before the slower daily rebuild, and purge even if a
+    # rebuild fails: the source deletion already committed and must not leave old responses cached.
+    begin
+      [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
+      BlendedRate.rebuild
+    ensure
+      Cache.purge
+    end
   end
 end
