@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Faster weekly and monthly rate queries.
+- Faster weekly and monthly rate queries. (#670)
 
 ### Fixed
 
