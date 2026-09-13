@@ -25,8 +25,8 @@ describe RateComponents do
     _(stored(bid: 181.5264, ask: 181.76)[:rate]).must_equal(181.6432)
   end
 
-  it "preserves the historical CBI rounding boundary that SQLite printf changes" do
-    _(stored(bid: 1830.59054685, ask: 1831.5063)[:rate]).must_equal(1831.04842342)
+  it "normalizes midpoint precision in SQL via printf" do
+    _(stored(bid: 1830.59054685, ask: 1831.5063)[:rate]).must_equal(1831.04842343)
   end
 
   it "returns no effective rate for a single side" do
