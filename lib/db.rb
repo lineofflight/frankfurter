@@ -28,7 +28,6 @@ DB = Sequel.connect(
   url,
   after_connect: proc do |conn|
     conn.busy_handler_timeout = busy_timeout_ms
-    RateComponents.register(conn)
   end,
   connect_sqls:,
   max_connections:,

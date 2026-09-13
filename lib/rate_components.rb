@@ -13,13 +13,6 @@ module RateComponents
       ((BigDecimal(bid.to_s) + BigDecimal(ask.to_s)) / 2).to_f
     end
 
-    def register(connection)
-      flags = SQLite3::Constants::TextRep::UTF8 | SQLite3::Constants::TextRep::DETERMINISTIC
-      connection.create_function("frankfurter_midpoint", 2, flags) do |function, bid, ask|
-        function.result = RatePrecision.normalize(midpoint(bid, ask))
-      end
-    end
-
     def attributes(record)
       mid = record.key?(:mid) ? record[:mid] : record[:rate]
       record.except(:rate).merge(mid: RatePrecision.normalize(mid), bid: record[:bid], ask: record[:ask])

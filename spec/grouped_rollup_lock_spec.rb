@@ -24,7 +24,6 @@ describe "Grouped maintenance writer lock" do
       DB[:rates].insert(row)
       writer = Sequel.connect(ENV.fetch("DATABASE_URL"), after_connect: proc { |connection|
         connection.busy_handler_timeout = 1
-        RateComponents.register(connection)
       })
       attempted = false
       blocked = false
