@@ -323,8 +323,9 @@ module Versions
 
       def parse_date(value)
         return unless value
+        return unless /\A\d{4}-\d{2}-\d{2}\z/.match?(value)
 
-        Date.parse(value)
+        Date.iso8601(value)
       rescue Date::Error
         nil
       end
