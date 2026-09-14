@@ -245,6 +245,10 @@ module Versions
     end
 
     def currencies(params)
+      if params.key?("scope") && params["scope"] != "all"
+        raise RateQuery::ValidationError, "invalid scope"
+      end
+
       provider_keys = params["providers"]&.upcase&.split(",")
       records = if provider_keys
                   Currency.with_providers(provider_keys).all

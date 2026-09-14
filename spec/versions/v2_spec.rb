@@ -568,6 +568,39 @@ describe Versions::V2 do
     _(usd["iso_numeric"]).must_equal("840")
   end
 
+  it "rejects unsupported currency scopes with or without a provider filter" do
+    ["invalid", "", "ALL", "active"].product([{}, { providers: "ecb" }]).each do |scope, params|
+      get "/currencies", params.merge(scope:)
+
+      assert_equal 422, last_response.status, "scope=#{scope.inspect}, params=#{params.inspect}"
+      _(Oj.load(last_response.body)).must_equal("status" => 422, "message" => "invalid scope")
+      assert_conform_response_schema(422)
+    end
+  end
+
+  it "returns active currencies when scope is omitted" do
+    Currency.create(iso_code: "DEM", start_date: "1999-01-04", end_date: "2001-12-31")
+
+    get "/currencies"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    codes = json.map { |c| c["iso_code"] }
+
+    _(codes).must_include("USD")
+    _(codes).wont_include("DEM")
+  end
+
+  it "includes legacy currencies with scope all" do
+    Currency.create(iso_code: "DEM", start_date: "1999-01-04", end_date: "2001-12-31")
+
+    get "/currencies?scope=all"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    _(json.map { |c| c["iso_code"] }).must_include("DEM")
+  end
+
   it "returns a single currency" do
     get "/currency/usd"
 
@@ -593,6 +626,17 @@ describe Versions::V2 do
     _(codes).must_include("USD")
     _(codes).must_include("EUR")
     _(codes).wont_include("BMD")
+  end
+
+  it "preserves provider filtering with scope all" do
+    get "/currencies?providers=ecb"
+    expected = last_response.body
+
+    get "/currencies?providers=ecb&scope=all"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    _(last_response.body).must_equal(expected)
   end
 
   it "includes base currencies in currencies list" do
