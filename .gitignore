@@ -3,4 +3,4 @@ pkg
 tmp
 *.sqlite3*
 docs
-.claude/worktrees
+.worktrees

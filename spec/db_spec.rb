@@ -27,5 +27,7 @@ describe "Database connection configuration" do
     output = `#{cmd}`
 
     _(output.strip).must_equal("custom.sqlite3")
+  ensure
+    FileUtils.rm_f(Dir.glob("custom.sqlite3*"))
   end
 end

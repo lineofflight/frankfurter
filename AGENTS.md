@@ -1,247 +1,44 @@
 # Frankfurter
 
-Frankfurter is a free and open-source currency data API built with Ruby that tracks reference exchange rates from 50+ institutional sources (central banks, the IMF, the Federal Reserve, etc.).
+Frankfurter is a currency data API tracking reference exchange rates from institutional sources. Built with Roda, SQLite (via Sequel), Puma, Rufus scheduler, and Cloudflare.
 
-## Before You Write Code
-
-Several agents work in this repo at once. Assume you are not alone.
-
-**Do your work in a git worktree, not in the primary checkout.** The primary
-checkout is shared ground. Two agents editing it at the same time lose each
-other's work: one stages the other's files, or checks the branch out from under
-them mid-task. This has happened repeatedly.
-
-Check before your first edit. The branch reported at session start is a snapshot
-and goes stale:
+## Commands
 
 ```bash
-git rev-parse --abbrev-ref HEAD    # the live branch
-git status --short                 # files you never touched mean someone else is here
-for p in $(pgrep -x claude); do lsof -a -p $p -d cwd -Fn 2>/dev/null | sed -n 's/^n//p'; done | sort | uniq -c
+# Test and lint
+APP_ENV=test bundle exec rake         # Lint and test suite
+APP_ENV=test bundle exec rake rubocop # Linter only
+APP_ENV=test bundle exec rake spec    # Test suite only (rerun once if SQLite3::BusyException occurs)
+
+# Database & Blends
+bundle exec rake db:setup             # Migrations + seed providers
+bundle exec rake backfill             # Backfill all providers (or backfill[key])
+bundle exec rake blend:rebuild        # Full rebuild of materialized blend tables
+bundle exec rake blend:parity         # Verify table vs live blend query parity
+bundle exec rake rollups:rebuild      # Rebuild weekly and monthly rollups
+
+# Local server
+bundle exec puma -C config/puma.rb    # Web server on :8080
+bundle exec foreman start             # Web + scheduler (mirrors prod)
 ```
 
-Then take a worktree. Use the native `EnterWorktree` tool if your harness has one,
-otherwise:
+Separate SQLite databases per environment (`APP_ENV`). Minitest suite with VCR/WebMock and transactional rollback.
 
-```bash
-git fetch origin
-git worktree add .claude/worktrees/<slug> -b <branch> origin/main
-cp -R .zed .claude/worktrees/<slug>/.zed   # gitignored, so a fresh worktree comes up bare
-```
+## Architecture & Blending
 
-Worktrees live under `.claude/worktrees/` (gitignored), never as siblings of the
-checkout. Branch off `origin/main`, not local `main`, which may be stale or may
-belong to another agent. A stacked local branch is often already upstream as a
-squash merge, so `origin/main` is the right base even when local commits look
-unmerged.
+- **Pipeline:** Native provider rates rebase to USD pivot (`BaseConversion`), outlier-screened (`Consensus`), recency-decay weighted (`WeightedAverage`), and peg-anchored (`PegAnchor`).
+- **Materialized Blends:** Sparse tables (`blended_rates`, `blended_weekly_rates`, `blended_monthly_rates`) store precomputed USD blends. Plain V2 queries hit these tables directly; missing buckets or filtered queries fall back to live computation.
+- **APIs:** Legacy V1 (ECB-only) and V2 (multi-provider/blended) mounted in `lib/app.rb`. OpenAPI specs at `lib/public/v1/openapi.json` and `lib/public/v2/openapi.json`.
+- **Provider Ingestion:** Scheduled in `bin/schedule` via cron expressions in `db/seeds/providers/*.json`. Adapters (`lib/provider/adapters/`) handle pure fetch and parse. Use `midpoint(buy, sell)` for bid/ask sources to avoid float noise.
+- **Currency Patches:** Historical currencies and name overrides are configured in `db/seeds/currency_patches.json` and loaded via `lib/currency_patches.rb`.
 
-**Exceptions.** Read-only work needs no worktree. Neither does a single edit you
-will commit within the minute, provided `git status` is clean and no other agent
-is live here. Everything else gets a worktree.
+## Replacing Provider History
 
-## Architecture
-
-- Roda
-- SQLite with Sequel
-- Puma
-- Rufus scheduler
-- Foreman
-- Cloudflare CDN
-
-## Project Structure
-
-```
-lib/
-├── app.rb                       # Main Roda app — mounts v1 and v2
-├── base_conversion.rb           # Rebases rates from any base to a common base
-├── blend_parity.rb              # Parity harness: replays query shapes through table and live paths
-├── blended_rate.rb              # BlendedRate model: materialized pivot-frame blend, refresh/rebuild
-├── blender.rb                   # Blends multi-provider rates: rebase → consensus → weighted average
-├── bucket.rb                    # Shared SQL bucket expressions for weekly/monthly aggregation
-├── cache.rb                     # Cloudflare cache purge, debounced with a trailing edge
-├── carry_forward.rb             # Carries forward most recent provider rate within a lookback window
-├── consensus.rb                 # Cross-provider outlier detection (MAD-based)
-├── currency.rb                  # Currency model (materialized from rates)
-├── currency_coverage.rb         # CurrencyCoverage model (provider-currency join)
-├── defunct_currency.rb          # Defunct-currency registry: terminal dates for retired/redenominated ISO codes
-├── db.rb                        # Database configuration
-├── currency_patches.rb          # Patches Money::Currency: registers historical codes, fixes mangled names
-├── log.rb                       # Shared logger
-├── monthly_rate.rb              # MonthlyRate model on monthly_rates rollup table
-├── no_store_on_error.rb         # Rack middleware: stops CDNs/caches from holding error responses
-├── peg.rb                       # Currency peg definitions (from db/seeds/pegs/*.json)
-├── peg_anchor.rb                # Peg-aware post-processing: substitutes peg rates, synthesises uncovered pegged quotes
-├── provider.rb                  # Provider model: identity, backfill
-├── provider/
-│   ├── adapters/
-│   │   ├── adapter.rb           # Abstract adapter: fetch interface, chunked iteration
-│   │   └── <key>.rb             # One adapter per provider (auto-discovered)
-│   └── adapters.rb              # Auto-requires all adapters
-├── rate.rb                      # Rate model on rates table
-├── rate_precision.rb            # Ingest-precision policy: strips binary float noise from synthesized rates
-├── rate_scopes.rb               # Shared dataset scopes for rate tables (rates, weekly, monthly)
-├── rate_validation.rb           # Ingest-validation policy: drops invalid rows on ingest, purges stored ones
-├── roundable.rb                 # Currency-aware decimal rounding
-├── weekly_rate.rb               # WeeklyRate model on weekly_rates rollup table
-├── weighted_average.rb          # Recency-weighted averaging with exponential decay
-├── versions/
-│   ├── v1.rb                    # Legacy API (ECB-only, frozen)
-│   ├── v1/                      # V1 internals (quotes, query, currency names)
-│   ├── v2.rb                    # Multi-provider API
-│   └── v2/
-│       └── rate_query.rb        # V2 rate query builder (blending, filtering)
-├── public/
-│   ├── favicon.ico              # Served as a static file
-│   ├── robots.txt               # Served as a static file
-│   ├── v1/openapi.json          # V1 OpenAPI spec
-│   └── v2/openapi.json          # V2 OpenAPI spec
-└── tasks/
-    ├── blend.rake               # Rebuild/verify the materialized blend
-    ├── cache.rake               # Manual CDN purge
-    ├── consensus.rake           # Consensus scan across providers
-    ├── db.rake                  # Database migrations and setup
-    ├── default.rake             # Default task (lint + test)
-    ├── providers.rake           # Dynamic backfill task for all providers
-    ├── rollups.rake             # Rebuild weekly/monthly rollup tables
-    ├── rubocop.rake             # Linter task
-    └── test.rake                # Test suite task
-
-spec/                            # Minitest test suite
-db/migrate/                      # Sequel migrations
-db/seeds/
-    ├── currency_patches.json    # Money::Currency patches (historical codes, name fixes)
-    ├── defunct_currencies.json  # Defunct currencies: terminal dates for retired/redenominated ISO codes
-    ├── pegs/                    # One JSON file per peg (e.g. aed.json, bam.json)
-    └── providers/               # One JSON file per provider (e.g. ecb.json, boi.json)
-```
-
-## Key Components
-
-### Adapters (lib/provider/adapters/)
-- `Provider::Adapters::Adapter`: Abstract base class — `fetch` interface, `fetch_each` for chunked iteration, shared `http` client (http.rb, retries 429s, ensures non-2xx raises `HTTP::StatusError`), sleep no-op in test env
-- `midpoint(buy, sell)`: exact decimal mid for sources that publish buy/sell instead of a reference rate. Use it instead of `(buy + sell) / 2.0`, which leaves float noise in the low digits
-- Adapters are pure data extraction: they know how to talk to an external API and parse its response
-- No identity — adapters have no `key` or `name`. Provider model owns identity.
-- Optional class methods: `def backfill_range = N`, `def api_key = ENV[...] || raise("no API key")`
-- Auto-discovered from `lib/provider/adapters/` via loader
-
-### Models
-- `Rate`: Sequel model on `rates` table. Scopes via `RateScopes`: `latest(date)`, `between(interval)`, `only(*quotes)`, `downsample(precision)`
-- `WeeklyRate`, `MonthlyRate`: Rollup models on `weekly_rates` / `monthly_rates`, share scopes via `RateScopes`
-- `Currency`: Sequel model on `currencies` table. Materialized from rates during backfill. Tracks global date ranges per currency.
-- `CurrencyCoverage`: Join model on `currency_coverages` table. One row per (provider, currency) with per-provider date ranges. Belongs to Provider and Currency.
-- `Provider`: Sequel model on `providers` table. Static config-as-data: seeded from `db/seeds/providers/*.json` on every container start so provider metadata always tracks the image.
-  - `#adapter`: finds adapter by convention (`Provider::Adapters.const_get(key)`)
-  - `#backfill`: incremental backfill — starts from `last_synced` or `coverage_start`, delegates to `adapter.fetch_each`, filters excluded quotes, stamps provider key, inserts to DB, refreshes currency summaries
-    - The insert is `ON CONFLICT DO NOTHING`, not an upsert: a row already stored for `(provider, date, base, quote)` is never rewritten. A value fix therefore does nothing on re-backfill unless the old source rows are deleted. Follow [Replacing provider history](#replacing-provider-history): all three blended tables need invalidation as part of the deletion. Insert-driven refresh alone cannot repair dates omitted by the replacement fetch. Verify with `rake blend:parity`, ideally against a baseline taken before the change.
-  - `#start_date`, `#end_date`: derived from currency coverages
-  - `many_to_many :currencies` through `currency_coverages`
-- `Peg`: Value object for currency pegs (from `db/seeds/pegs/*.json`)
-
-### Blending Pipeline
-- `Blender`: orchestrates rebase → consensus → weighted average
-- `BaseConversion`: rebases rates from each provider's native base to a common base via inversion or cross rates
-- `Consensus`: MAD-based outlier detection — flags rates that deviate significantly from the cross-provider median
-- `WeightedAverage`: recency-weighted averaging with exponential decay past a grace period
-
-### API (lib/app.rb)
-- V1 at `/v1/*` — frozen legacy, ECB-only
-- V2 at `/v2/*` — multi-provider with blended rates
-- Root `/` returns an inline index document (name, versions, docs, source)
-- CORS enabled for all origins
-- `NoStoreOnError` middleware prevents CDNs/caches from holding error responses
-- OpenAPI specs served as static files at `/v1/openapi.json` and `/v2/openapi.json`
-
-### Scheduler (bin/schedule)
-- Runs as its own process, started by foreman alongside the web server (see `Procfile`)
-- Calls `provider.backfill` directly on Provider model instances
-- Staggers startup backfill for all providers (2s apart)
-- Flushes pending debounced cache purges on a 60s tick (trailing edge)
-- Re-blends the trailing two days at UTC midnight so next-day observations pick up fresh decay weights
-- Cron schedule read from `publish_schedule` in the providers table (5-field cron; `null` for historical-only providers)
-- Convention: poll every 30 min across a 3-hour window starting at the publish hour (encoded directly in the cron expression, e.g. `*/30 14-16 * * 1-5` for ECB)
-- Backfill is incremental: fetches only from the last stored date forward
-
-## Database
-
-SQLite database with `rates`, `weekly_rates`, `monthly_rates`, `providers`, `currencies`, and `currency_coverages` tables.
-
-### blended_rates
-- `date`, `quote`, `rate` with PK `(quote, date)`; base is implicitly USD, the blend pivot
-- Materialized blend, sparse: one row per (quote, date) where the contributor set changed, each the canonical anchor-date value
-- Refreshed during backfill over `[min_inserted, max_inserted + 14]`; rebuilt by `rake blend:rebuild` (required whenever blend/consensus/peg/currency-patch code or seeds change)
-- Serves all plain V2 shapes, latest and single-date included (no `providers=`, no `expand=providers`); live path is the fallback while empty
-
-### rates
-- `date`, `base`, `quote`, `rate`, `provider`
-- Unique index on `(provider, date, base, quote)`
-
-### blended_weekly_rates, blended_monthly_rates
-- `bucket_date`, `quote`, `rate`, PK `(quote, bucket_date)`; base is implicitly USD.
-- Store blends of complete eligible provider rollups, not averages of daily blended values.
-- Ingestion refreshes affected buckets atomically with source inserts, loading at most 100 buckets per batch.
-- Plain grouped queries read complete chunks from these tables; missing buckets cause live fallback. Provider-filtered and expanded queries remain live.
-- Startup fills missing buckets and retries failed population every 5 minutes until a successful run. Legitimately empty USD blends remain absent.
-- `rake blend:rebuild` rebuilds daily and both grouped tables. `rake rollups:rebuild` invalidates affected grouped buckets with its source writes, then refills them in bounded transactions.
-- `rake blend:parity` reports actual grouped coverage. Live fallback makes verification incomplete, even if bytes match, including the empty historical 1954-01-01 weekly bucket. Inspect coverage separately from byte mismatches; do not treat an incomplete report as a pass.
-
-### weekly_rates, monthly_rates
-- Pre-aggregated rollups keyed by `bucket_date`; preserve the existing `Bucket.week` SQL expression (not ISO Monday), and first-of-month for monthly.
-- Rebuilt by `rake rollups:rebuild` and refreshed during backfill
-
-### providers
-- `key`, `name`, `rate_type`, `country_code`, `data_url`, `terms_url`, `publish_schedule`, `publish_cadence`, `coverage_start`, `pivot_currency`
-- Seeded from `db/seeds/providers/*.json`
-- `publish_schedule`: 5-field cron expression (minute hour day-of-month month day-of-week) in UTC, or `null` for historical-only providers. Convention: `*/30 H-H+2 * * D` where H is the publish hour and D is the day-of-week range, giving a 3-hour polling window.
-- `publish_cadence`: one of `daily`, `weekly`, `monthly`, or `null` for historical-only providers. Dispatches `publishes_missed` to the right algorithm (per-fire-day count for daily; ISO-week bucket for weekly; year-month bucket for monthly).
-- `coverage_start`: earliest date for historical data (used as backfill starting point)
-
-### currencies
-- `iso_code` (PK), `start_date`, `end_date`
-- Global date range per currency, materialized during backfill
-
-### currency_coverages
-- `provider_key`, `iso_code`, `start_date`, `end_date`
-- PK `(provider_key, iso_code)`
-- Per-provider date range per currency, materialized during backfill
-
-## Testing
-
-```bash
-APP_ENV=test bundle exec rake         # Run linter and test suite
-APP_ENV=test bundle exec rake rubocop # Run linter only
-APP_ENV=test bundle exec rake spec    # Run test suite only
-```
-
-Separate SQLite databases per environment (`APP_ENV`): test, development, production.
-
-### Test stack
-
-- Minitest
-- Rack::Test for HTTP testing
-- VCR + WebMock for HTTP recording/mocking
-- Minitest-focus for targeted test runs
-- Global transaction rollback via `Minitest::Spec#around`
-- Test fixtures seed on suite load via `spec/helper.rb`
-
-## Running Locally
-
-### Replacing provider history
-
-Deleting provider rows does not invalidate stored blends automatically. Grouped reads check bucket presence, so another provider can keep a bucket present while its stored blend still contains the deleted contributor. Invalidate the whole affected bucket, including every quote, in the same transaction as the source deletion. Daily materialization has no interior-gap readiness check, so invalidate its entire table for a blending provider.
-
-Keep API traffic and scheduled ingestion paused until replacement, rebuild and coverage verification finish. Daily readiness checks only the earliest date; incremental backfill can make it appear ready while replacement history is still incomplete.
+`rates` table inserts use `ON CONFLICT DO NOTHING`. Modifying historical rates requires deleting existing rows and explicitly invalidating downstream blends in the same transaction:
 
 ```ruby
-require "blended_rate"
-require "blended_weekly_rate"
-require "blended_monthly_rate"
-require "cache"
-require "provider"
-require "provider/adapters"
-
-provider = Provider["CBK"] # Provider being repaired
-provider.adapter # Resolve the adapter before deleting anything
+provider = Provider["CBK"]
+provider.adapter # Resolve before deleting
 DB.transaction do
   if provider.blends?
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
@@ -255,7 +52,6 @@ end
 Cache.purge
 provider.backfill(after: provider.coverage_start)
 
-# Also repair buckets the replacement fetch omitted, using the surviving providers.
 begin
   [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
   BlendedRate.rebuild if provider.blends?
@@ -264,154 +60,16 @@ ensure
 end
 ```
 
-Backfill logs and absorbs provider errors. Check its logs and restored coverage before declaring the repair complete. For scoped SQL relabels/deletions, capture both old and replacement bucket dates, invalidate them with the source changes, and rebuild afterwards. Changes to blend rules, peg seeds or provider eligibility require `rake blend:rebuild`, not missing-only population.
+Changes to blend rules, peg definitions, or provider eligibility require `rake blend:rebuild`.
 
-### Local commands
+## Conventions
 
-```bash
-bundle install                          # Install dependencies
-bundle exec rake db:setup               # Run migrations and seed providers
-bundle exec rake backfill               # Backfill all providers (takes a while)
-bundle exec puma -C config/puma.rb      # Start web server on port 8080
-bundle exec foreman start               # Start web + scheduler together (mirrors prod)
-```
-
-Or with Docker:
-```bash
-docker run -d --init -p 80:8080 lineofflight/frankfurter
-```
-
-## Rake Tasks
-
-```bash
-rake db:setup           # Run migrations and seed providers
-rake db:migrate         # Run database migrations
-rake db:seed            # Seed provider metadata
-rake backfill           # Backfill all providers (threaded, incremental)
-rake backfill[ecb]      # Backfill a single provider
-rake blend:rebuild      # Rebuild the materialized blend from scratch
-rake blend:parity       # Replay query shapes through table and live paths, compare bytes
-rake cache:purge        # Purge the CDN cache manually
-rake rollups:rebuild    # Rebuild weekly and monthly rollups
-rake rollups:rebuild[ecb] # Rebuild rollups for a single provider
-```
-
-## Adding a New Provider
-
-See [.agents/skills/implementing-providers/SKILL.md](.agents/skills/implementing-providers/SKILL.md) for the full checklist and workflow.
-
-## Currency Patches
-
-`db/seeds/currency_patches.json` patches `Money::Currency` at boot via
-`lib/currency_patches.rb`. Two purposes:
-
-- Register historical ISO 4217 codes (pre-euro, pre-redenomination) the gem
-  doesn't include — full entry with `name`, `symbol`, `subunit_to_unit`, `iso_numeric`.
-- Override mangled names on existing entries (e.g. `Cfa` → `CFA`) — partial
-  entry with just `iso_code` and `name`; existing fields are preserved via merge.
-
-When adding a new provider, check whether it serves historical currencies and
-note them in coverage research. To pick up previously-dropped records,
-re-backfill the provider from its `coverage_start`:
-
-```ruby
-Provider["key"].backfill(after: Date.new(YYYY, 1, 1))
-```
-
-## Development Notes
-
-- Ruby (see `Gemfile`)
-- Linting: RuboCop with Shopify style guide (120-char line length)
-- Migrations in `db/migrate/`
-- Update `CHANGELOG.md` for changes that directly impact user experience
-
-### Git Commits
-
-- Write in the imperative mood, present tense ("Add provider", "Fix rounding").
-- Keep subject lines under 72 characters.
-- Body explains the rationale and non-obvious context, keeping sentences tight.
-- Reference issues on the final line (`closes #123`).
-
-### Changelog (`CHANGELOG.md`)
-
-- **Audience**: API consumers only. Omit internal plumbing (CI, Docker, refactors, scraper error handling).
-- **Length**: a few words, one line. Name what changed, not why or how. No causes, no mechanisms, no "so that".
-  No currency baskets, date ranges, thresholds or implementation detail.
-- **Providers**: `- <Full name> (<KEY>) as a data provider. (#n)` for added and removed, nothing more. Frequency,
-  coverage start and route are documented elsewhere.
-- **Same cycle**: a fix or change to something still under `Unreleased` is part of that entry, not a new one.
-- **Sections**: Keep a Changelog headers only (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`). Never
-  duplicate a header.
-- **Citations**: bare issue or PR number in parentheses, `(#123)`, never a markdown link.
-
-Too long:
-
-```
-- HMRC rates for the coming month are available as soon as HMRC publishes them, dated the 1st they take effect.
-- UST's leone rates for May to July 2022, dropped around the redenomination, are served again. (#666)
-- Per-provider routes: `/v2/providers/{provider}`, `/v2/providers/{provider}/rates` and
-  `/v2/providers/{provider}/rate/{base}/{quote}` serve one provider's entry and its rates as published. (#643)
-```
-
-Right:
-
-```
-- UST leone rates around the 2022 redenomination. (#666)
-- Per-provider routes under `/v2/providers/{provider}`. (#643)
-```
-
-(The first line above gets no entry at all: HMRC was added in the same cycle.)
-
-### Recovering from a shared tree
-
-See [Before You Write Code](#before-you-write-code) for the rule. This is what to
-do once it has already gone wrong.
-
-**You are sharing a working tree.** The tell is `git status` listing files you
-never touched, with mtimes from minutes ago. Do not commit the mixed tree and do
-not bare-stash. Stash only your own paths with
-`git stash push -m "wip" -- <your files>`, confirm the other agent's files
-survived, then take a fresh worktree and pop there.
-
-**The checkout was moved onto someone else's branch.** Save your work with
-`git diff > /tmp/mine.patch`, `git checkout --` your files to hand the tree back
-clean, then worktree off `origin/main` and `git apply --3way`. Expect a
-`CHANGELOG.md` conflict, since their entry is on their branch and not on main.
-
-**A red test suite may not be yours.** Concurrent `rake spec` runs raise
-`SQLite3::BusyException` and produce phantom failures. Rerun once, alone, before
-believing a failure.
-
-**Removing a worktree.** Do it from outside the worktree. Your shell's working
-directory is pinned to it, so deleting the one you are standing in strands the
-session. `ExitWorktree` refuses to remove a worktree entered by `path`; use
-`action: "keep"` and then `git worktree remove`. After a squash merge
-`git branch -d` refuses. Diff the branch against main to confirm the content
-landed, then use `-D`.
-
-## Handling Data
-
-Relay what providers publish. Don't editorialize.
-
-## API Endpoints
-
-### V2 (lib/versions/v2.rb)
-
-Multi-provider API with blended rates. Full spec at `/v2/openapi.json`.
-
-```
-GET /v2/rates                                # latest blended rates
-GET /v2/rates?base=USD                       # rebased
-GET /v2/rates?quotes=USD,GBP                 # filtered
-GET /v2/rates?date=2024-01-15                # specific date
-GET /v2/rates?from=2024-01-01&to=2024-01-31  # date range
-GET /v2/rates?providers=ecb,tcmb             # filter by providers
-GET /v2/currencies                           # currencies with names and providers
-GET /v2/providers                            # available data providers
-```
-
-Response: normalized array of `{ date, base, quote, rate }` records.
-
-### V1 (lib/versions/v1.rb)
-
-Frozen legacy API, ECB-only. Full spec at `/v1/openapi.json`.
+- **Data integrity:** Relay what providers publish. Don't editorialize.
+- **Adding providers:** Follow [.agents/skills/implementing-providers/SKILL.md](.agents/skills/implementing-providers/SKILL.md).
+- **Git commits:** Imperative mood, present tense, under 72 characters. Put issue references on the final line (`closes #123`).
+- **Changelog (`CHANGELOG.md`):**
+  - Audience: API consumers only. Omit internal plumbing (CI, refactors, scraping fixes).
+  - Length: One line, a few words. Name what changed, never why or how.
+  - Providers: `- <Full name> (<KEY>) as a data provider. (#n)`.
+  - Sections: Keep a Changelog headers (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`). Never duplicate a header.
+  - Citations: Bare issue or PR number in parentheses: `(#123)`, never markdown links.
