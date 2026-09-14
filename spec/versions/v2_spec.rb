@@ -299,10 +299,25 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
-  it "returns 422 for invalid dates" do
-    get "/rates?date=not-a-date"
+  it "returns 422 for invalid date, from, and to values" do
+    invalid_dates = [
+      "04-01-1994", "2026-2-03", "2026-02-3", "20260203", "2026-02", "2026-02-03T12:00:00Z",
+      "2026-02-03junk", "2026-02-03\n", "", "not-a-date", "2026-02-30", "2026-02-29",
+    ]
+    ["date", "from", "to"].product(invalid_dates).each do |parameter, value|
+      get "/rates", parameter => value
 
-    _(last_response.status).must_equal(422)
+      assert_equal 422, last_response.status, "#{parameter}=#{value.inspect}"
+      _(Oj.load(last_response.body)["message"]).must_equal("invalid date")
+    end
+  end
+
+  it "accepts a valid leap day for snapshots and ranges" do
+    [{ date: "2000-02-29" }, { from: "2000-02-29", to: "2000-02-29" }].each do |params|
+      get "/rates", params
+
+      _(last_response.status).must_equal(200)
+    end
   end
 
   it "returns an ETag for range queries" do
