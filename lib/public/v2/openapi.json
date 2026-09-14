@@ -289,7 +289,7 @@
           {
             "name": "scope",
             "in": "query",
-            "description": "Set to 'all' to include legacy currencies",
+            "description": "Set to 'all' to include legacy currencies. Omit for the default list. Other values, including an empty string, return 422.",
             "required": false,
             "schema": { "type": "string", "enum": ["all"] }
           },
@@ -310,7 +310,8 @@
                 ]
               }
             }
-          }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
         }
       }
     },
