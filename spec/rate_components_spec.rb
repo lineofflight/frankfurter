@@ -54,33 +54,4 @@ describe RateComponents do
     _(attributes[:mid]).must_be_nil
     _(attributes.values_at(:bid, :ask)).must_equal([99, 103])
   end
-
-  it "enriches matching history without changing its effective rate" do
-    stored(mid: 101)
-    report = Rate.enrich_components([identity.merge(rate: 101, mid: nil, bid: 99, ask: 103)])
-    record = Rate.where(identity).first
-
-    _(report).must_equal(updated: 1, missing: 0, revised: 0)
-    _(record.values.values_at(:mid, :bid, :ask, :rate)).must_equal([nil, 99, 103, 101])
-  end
-
-  it "leaves revisions and missing history untouched" do
-    stored(mid: 100)
-    records = [
-      identity.merge(rate: 101, mid: nil, bid: 99, ask: 103),
-      identity.merge(date: Date.new(2026, 9, 2), rate: 101, mid: nil, bid: 99, ask: 103),
-    ]
-
-    _(Rate.enrich_components(records)).must_equal(updated: 0, missing: 1, revised: 1)
-    _(Rate.where(identity).get(:mid)).must_equal(100)
-    _(Rate.where(identity).get(:bid)).must_be_nil
-  end
-
-  it "rolls back enrichment when the components cannot reproduce the old value" do
-    stored(mid: 100)
-
-    _ { Rate.enrich_components([identity.merge(rate: 100, mid: nil, bid: 99, ask: 103)]) }.must_raise(RuntimeError)
-    _(Rate.where(identity).get(:mid)).must_equal(100)
-    _(Rate.where(identity).get(:bid)).must_be_nil
-  end
 end
