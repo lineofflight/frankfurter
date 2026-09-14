@@ -1,6 +1,6 @@
+*.sqlite3*
 .bundle
+.worktrees
+docs
 pkg
 tmp
-*.sqlite3*
-docs
-.worktrees

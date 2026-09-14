@@ -1,14 +1,15 @@
 ---
+name: evaluating-pegs
 description: Use when adding, evaluating, or removing an entry in db/seeds/pegs/, when the user mentions a pegged or fixed currency, or when an issue suggests we should "pin" or "lock" a currency to another. Also use when deciding whether to filter or override provider rates based on an assumed peg.
 ---
 
 # Pegs Policy
 
-The bar for entries in `db/seeds/pegs/`. The file is small, load-bearing, and easy to corrupt with well-meaning additions. This skill defines what qualifies and what doesn't.
+The bar for entries in `db/seeds/pegs/`. These definitions directly affect blend calculations, and this skill defines what qualifies and what doesn't.
 
 ## The Bar
 
-A currency belongs in `pegs.json` only if **all** of the following are true:
+A currency belongs in `db/seeds/pegs/` only if **all** of the following are true:
 
 1. **Officially asserted** by an issuing authority (central bank, monetary authority, currency board, or government).
 2. **Currently in force** — not historical. If a peg ended, remove the entry; don't keep it with a sunset date.
@@ -82,6 +83,6 @@ The bar exists so that anything in `db/seeds/pegs/` is defensible by appeal to a
 
 ## Reference: Currently Listed Pegs
 
-As of 2026-05, `db/seeds/pegs/` contains 20 entries. All are GCC dollar pegs, GBP-area dependencies, USD-area dependencies (Caribbean), or escudo/INR/HKD pegs with treaty backing. There are no de facto pegs in the file.
+All entries in `db/seeds/pegs/` are GCC dollar pegs, GBP-area dependencies, USD-area dependencies (Caribbean), or escudo/INR/HKD pegs with treaty backing. There are no de facto pegs in the directory.
 
 If you propose an addition, check that it fits one of these established categories or has a comparably strong source.

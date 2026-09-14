@@ -42,8 +42,6 @@ In the last case, ship with attribution and send a short courtesy notice to the 
 
 A takedown request is handled like any other provider loss: remove the adapter, seed, cassette and rows, and note it on the provider's issue.
 
-Decided on #608 (CFETS, September 2026). The May 2026 licence closures (#435, #454 and the family they list) predate this rule and should be re-triaged against it.
-
 ## Implementation Checklist
 
 ### 1. Adapter class — `lib/provider/adapters/<key>.rb`
@@ -177,7 +175,7 @@ ecb_rates = Rate.where(provider: "ECB").where(date: Date.today - 7..Date.today).
 | > 5% | Almost certainly a bug (e.g. base/quote inverted) |
 
 **What to look for:**
-- Rates that are the reciprocal of expected (base/quote swapped) — this was the HNB bug — see 'Rate direction' principle above
+- Rates that are the reciprocal of expected (base/quote swapped) — see 'Rate direction' principle above
 - Rates that are 10x or 100x off (unit multiplier not normalized)
 - Rates that match another provider exactly but on wrong dates (date parsing bug)
 
