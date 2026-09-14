@@ -17,16 +17,7 @@ Sequel.migration do
   end
 
   down do
-    run "ALTER TABLE rates DROP COLUMN rate"
-    run <<~SQL
-      ALTER TABLE rates ADD COLUMN rate REAL GENERATED ALWAYS AS (
-        COALESCE(mid,
-          CASE
-            WHEN provider = 'BOJA' AND bid = 0 THEN frankfurter_midpoint(ask, ask)
-            ELSE frankfurter_midpoint(bid, ask)
-          END
-        )
-      ) VIRTUAL
-    SQL
+    # Retain the SQL resolver: the legacy callback is no longer registered. Migration 031 can still roll back by copying
+    # the effective rates into mid before restoring the original rate column.
   end
 end
