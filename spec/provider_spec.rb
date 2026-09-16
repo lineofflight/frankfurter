@@ -93,6 +93,17 @@ describe Provider do
       _(quarterly.lookback_days).must_equal(120)
     end
 
+    it "widens the carry-forward window to the publish cadence when values arrive in arrears" do
+      in_arrears = Provider.new { |p| p.publish_cadence = "monthly" }
+      weekly = Provider.new { |p| p.publish_cadence = "weekly" }
+      unscheduled = Provider.new { |p| p.publish_cadence = nil }
+
+      _(in_arrears.blends?).must_equal(true)
+      _(in_arrears.lookback_days).must_equal(45)
+      _(weekly.lookback_days).must_equal(14)
+      _(unscheduled.lookback_days).must_equal(14)
+    end
+
     it "lists the keys of providers that do not blend" do
       Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
       Provider.load_cache

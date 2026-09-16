@@ -269,6 +269,29 @@ describe Versions::V2 do
     assert_conform_schema(200)
   end
 
+  # BOA observes a daily fixing but releases a month of them at once, so its newest row can be weeks old with nothing
+  # missed. BOE publishes every day, so a row that old means the feed has stalled.
+  it "carries a daily fixing published in arrears across the wait for the next batch" do
+    Rate.dataset.insert(provider: "BOA", date: Date.today - 20, base: "EUR", quote: "DZD", mid: 145.0)
+
+    get "/providers/boa/rates"
+
+    _(last_response).must_be(:ok?)
+    row = json.find { |r| r["quote"] == "DZD" }
+
+    _(row).wont_be_nil
+    _(row["date"]).must_equal((Date.today - 20).to_s)
+  end
+
+  it "still drops a daily publisher's row after two weeks" do
+    Rate.dataset.insert(provider: "BOE", date: Date.today - 20, base: "EUR", quote: "GBP", mid: 0.86)
+
+    get "/providers/boe/rates"
+
+    _(last_response).must_be(:ok?)
+    _(json).must_be_empty
+  end
+
   it "downsamples by week" do
     get "/rates?from=#{year_start}&to=#{year_end}&group=week"
 
