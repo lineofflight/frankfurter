@@ -1094,15 +1094,17 @@ describe Versions::V2 do
       "/providers/ecb/rates",
       "/providers/ecb/rate/EUR/USD",
     ].each do |path|
-      it "rejects #{path}/latest" do
+      it "rejects #{path}/latest and #{path}/" do
         get path
 
         _(last_response).must_be(:ok?)
 
-        get "#{path}/latest"
+        ["#{path}/latest", "#{path}/"].each do |extra|
+          get extra
 
-        _(last_response.status).must_equal(404)
-        _(json).must_equal("status" => 404, "message" => "not found")
+          _(last_response.status).must_equal(404)
+          _(json).must_equal("status" => 404, "message" => "not found")
+        end
       end
     end
   end
