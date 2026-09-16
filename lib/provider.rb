@@ -23,9 +23,9 @@ class Provider < Sequel::Model(:providers)
   one_to_many :currency_coverages, key: :provider_key
   many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
 
-  # Carry-forward window per observation frequency (#646). A daily value goes stale in two weeks; a monthly or quarterly
-  # value stands for its whole period plus the lag before the next one lands.
-  LOOKBACK_DAYS = { "daily" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
+  # Carry-forward window per observation frequency and publish cadence (#646). A daily value goes stale in two weeks; a
+  # monthly or quarterly value stands for its whole period plus the lag before the next one lands.
+  LOOKBACK_DAYS = { "daily" => 14, "weekly" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
 
   class << self
     # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
@@ -62,8 +62,11 @@ class Provider < Sequel::Model(:providers)
     frequency == "daily"
   end
 
+  # The wider of the frequency and cadence windows. A provider that releases a month of daily fixings in arrears has
+  # nothing newer than the last batch for weeks at a time, and the daily window alone would leave its latest query empty
+  # for most of every month.
   def lookback_days
-    LOOKBACK_DAYS.fetch(frequency)
+    [frequency, publish_cadence].compact.map { |key| LOOKBACK_DAYS.fetch(key) }.max
   end
 
   def start_date
