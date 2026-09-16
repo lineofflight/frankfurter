@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- 404 for trailing path segments in V2. (#684)
 - Validation of unsupported currency scopes in V2. (#678)
 - Strict YYYY-MM-DD date validation in V2. (#677)
 - UST leone rates around the 2022 redenomination. (#666)
