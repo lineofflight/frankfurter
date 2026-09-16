@@ -52,11 +52,11 @@ module Versions
       r.is { ROOT_PAYLOAD }
       r.root { ROOT_PAYLOAD }
 
-      r.on("rates") do
+      r.is("rates") do
         r.get { rates_response(r.params) }
       end
 
-      r.on("rate", String, String) do |base_currency, quote_currency|
+      r.is("rate", String, String) do |base_currency, quote_currency|
         r.get { rate_response(r.params, base_currency, quote_currency) }
       end
 
@@ -85,11 +85,11 @@ module Versions
             end
           end
 
-          r.on("rates") do
+          r.is("rates") do
             r.get { rates_response(params) }
           end
 
-          r.on("rate", String, String) do |base_currency, quote_currency|
+          r.is("rate", String, String) do |base_currency, quote_currency|
             r.get { rate_response(params, base_currency, quote_currency) }
           end
 
@@ -99,14 +99,14 @@ module Versions
 
       r.csv { r.halt(406) }
 
-      r.on("currency", String) do |code|
+      r.is("currency", String) do |code|
         r.get do
           found = Currency.find(code)
           found ? found.to_h_with_providers : request.halt(404)
         end
       end
 
-      r.on("currencies") do
+      r.is("currencies") do
         r.get do
           currencies(r.params)
         end

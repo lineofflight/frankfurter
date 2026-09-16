@@ -1084,4 +1084,26 @@ describe Versions::V2 do
       _(json["message"]).must_include("providers")
     end
   end
+
+  describe "trailing path segments" do
+    [
+      "/rates",
+      "/rate/EUR/USD",
+      "/currency/usd",
+      "/currencies",
+      "/providers/ecb/rates",
+      "/providers/ecb/rate/EUR/USD",
+    ].each do |path|
+      it "rejects #{path}/latest" do
+        get path
+
+        _(last_response).must_be(:ok?)
+
+        get "#{path}/latest"
+
+        _(last_response.status).must_equal(404)
+        _(json).must_equal("status" => 404, "message" => "not found")
+      end
+    end
+  end
 end
