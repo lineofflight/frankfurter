@@ -2,7 +2,6 @@
 
 require "date"
 require "nokogiri"
-require "openssl"
 
 require "provider/adapters/adapter"
 
@@ -19,14 +18,10 @@ class Provider < Sequel::Model(:providers)
     # Rates are VUV per 1 unit of foreign currency. JPY is published per single unit (not per 100), so no normalization
     # is needed.
     #
-    # TLS quirk: www.rbv.gov.vu serves a malformed chain that omits its issuer, the Trustico RSA DV SSL CA 2
-    # intermediate, so the default trust store can't build a chain to a root. We bundle the intermediate at
-    # config/rbv_ca_bundle.pem and pass it via an explicit ssl_context on each http.rb request rather than disabling
-    # verification (same approach as BoA).
+    # TLS quirk: www.rbv.gov.vu omits its Trustico intermediate; see config/ca_bundles.
     class RBV < Adapter
       URL = "https://www.rbv.gov.vu/index.php/en/exchange-rates"
       PAGE_SIZE = 100_000
-      CA_BUNDLE = File.expand_path("../../../config/rbv_ca_bundle.pem", __dir__)
 
       QUOTE_COLUMNS = ["usd", "jpy", "nzd", "GBP", "aud", "eur"].freeze
 
@@ -67,20 +62,8 @@ class Provider < Sequel::Model(:providers)
         nil
       end
 
-      # www.rbv.gov.vu serves a malformed chain that omits its issuer (the Trustico RSA DV SSL CA 2 intermediate), so
-      # the default trust store can't build a chain to a root. We augment it with the bundled intermediate instead of
-      # disabling verification.
       def http_get
-        http.get(URL, params: { limit1: PAGE_SIZE }, ssl_context: ssl_context).to_s
-      end
-
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
+        http.get(URL, params: { limit1: PAGE_SIZE }).to_s
       end
     end
   end

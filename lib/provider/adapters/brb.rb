@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "openssl"
 require "pdf-reader"
 require "stringio"
 
@@ -26,14 +25,10 @@ class Provider
     # Direction: foreign currency in base, BIF in quote (1 foreign = X BIF), matching the convention used by other
     # pivot-in-quote adapters (e.g. NBG, BBK).
     #
-    # TLS quirk: www.brb.bi serves only its leaf certificate, omitting the RapidSSL TLS RSA CA G1 intermediate, so the
-    # default trust store can't build a chain to a root. We bundle the intermediate at config/brb_ca_bundle.pem and pass
-    # it via an explicit ssl_context on each http.rb request rather than disabling verification (same approach as BoA
-    # and RBV).
+    # TLS quirk: www.brb.bi omits its RapidSSL intermediate; see config/ca_bundles.
     class BRB < Adapter
       HOST = "https://www.brb.bi"
       INDEX_URL = "#{HOST}/en/affichagetoustauxchange".freeze
-      CA_BUNDLE = File.expand_path("../../../config/brb_ca_bundle.pem", __dir__)
       PDF_HREF = %r{href="(/sites/default/files/\d{4}-\d{2}/
         Cours%20de%20change%20du%20(\d{2})-(\d{2})-(\d{4})[^"]*\.pdf)"}x
       ROW_PATTERN = /\A1\s+(.+?)\*?\s+([\d.,]+)\s+([\d.,]+)\s+([\d.,]+)\s*\z/
@@ -78,7 +73,7 @@ class Provider
           sleep(0.5) unless first
           first = false
 
-          pdf_data = http.get(url, ssl_context: ssl_context).to_s
+          pdf_data = http.get(url).to_s
           next unless pdf_data.start_with?("%PDF")
 
           dataset.concat(parse(pdf_data, date))
@@ -139,22 +134,13 @@ class Provider
       def fetch_index_page(page)
         params = { page: page } if page.positive?
 
-        body = http.get(INDEX_URL, params: params, ssl_context: ssl_context).to_s
+        body = http.get(INDEX_URL, params: params).to_s
         body.force_encoding(Encoding::UTF_8) if body.encoding != Encoding::UTF_8
 
         entries = body.scan(PDF_HREF).map do |href, day, month, year|
           [Date.new(Integer(year, 10), Integer(month, 10), Integer(day, 10)), "#{HOST}#{href}"]
         end
         entries.uniq { |date, _| date }
-      end
-
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
       end
     end
   end

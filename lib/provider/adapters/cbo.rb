@@ -2,7 +2,6 @@
 
 require "date"
 require "nokogiri"
-require "openssl"
 
 require "provider/adapters/adapter"
 
@@ -22,12 +21,9 @@ class Provider
     # matching the pivot-in-quote convention of NBG and BBK. Buy and sell are coerced to a mid via midpoint. A date can
     # carry several intraday rows when the bank revised its fixing; the latest timestamp wins.
     #
-    # TLS quirk: cbo.gov.om serves only its leaf certificate, so the default trust store can't build a chain to a root.
-    # We bundle the DigiCert intermediate at config/cbo_ca_bundle.pem and pass it via an explicit ssl_context on each
-    # request instead of disabling verification, as BOA does.
+    # TLS quirk: cbo.gov.om omits its DigiCert intermediate; see config/ca_bundles.
     class CBO < Adapter
       URL = "https://cbo.gov.om/Pages/DFESearch.aspx"
-      CA_BUNDLE = File.expand_path("../../../config/cbo_ca_bundle.pem", __dir__)
 
       TOKENS = ["__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION"].freeze
 
@@ -39,7 +35,7 @@ class Provider
         end_date = upto || Date.today
         return [] if start_date > end_date
 
-        page = http.get(URL, ssl_context:)
+        page = http.get(URL)
         cookies = extract_cookies(page)
         html = page.to_s
         tokens = extract_tokens(html)
@@ -54,7 +50,7 @@ class Provider
             "#{prefix}dateTo" => end_date.strftime("%d/%m/%Y"),
             "#{prefix}btnExport" => "",
           )
-          parse(http.headers("Cookie" => cookies).post(URL, form:, ssl_context:).to_s)
+          parse(http.headers("Cookie" => cookies).post(URL, form:).to_s)
         end
 
         records.select { |r| r[:date].between?(start_date, end_date) }
@@ -88,15 +84,6 @@ class Provider
       end
 
       private
-
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
-      end
 
       def number(text)
         Float(text.sub(VALUE_PREFIX, ""), exception: false)
