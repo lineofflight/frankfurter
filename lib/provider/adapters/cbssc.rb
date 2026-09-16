@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "oj"
-require "openssl"
 require "ox"
 require "zip"
 
@@ -26,13 +25,10 @@ class Provider
     # of the same figure (the CAR page, the archived feed) shows four decimals. Round to four so a day caught live and
     # the same day read from the workbook agree.
     #
-    # TLS quirk: www.cbs.sc serves only its leaf certificate, so the default trust store can't build a chain to a root.
-    # We bundle the Sectigo intermediate at config/cbssc_ca_bundle.pem and pass it via an explicit ssl_context on each
-    # request instead of disabling verification, as BOA does.
+    # TLS quirk: www.cbs.sc omits its Sectigo intermediate; see config/ca_bundles.
     class CBSSC < Adapter
       ARCHIVE_URL = "https://www.cbs.sc/Downloads/StaExcel/Exchange%20Rates-Daily.xlsx"
       LIVE_URL = "https://www.cbs.sc/Controller/MarketinfoController.jsp"
-      CA_BUNDLE = File.expand_path("../../../config/cbssc_ca_bundle.pem", __dir__)
 
       EXCEL_EPOCH = Date.new(1899, 12, 30)
 
@@ -82,16 +78,7 @@ class Provider
       private
 
       def download(url, **params)
-        http.get(url, params:, ssl_context:).to_s
-      end
-
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
+        http.get(url, params:).to_s
       end
 
       def sheet_paths(zip)

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "openssl"
 require "spreadsheet"
 require "stringio"
 require "uri"
@@ -36,15 +35,11 @@ class Provider
     # sheet, before and after, prices "VES". The first post-redenomination value date is 2021-10-04, and the series
     # starts there so the two scales never share a code.
     #
-    # TLS quirk: www.bcv.org.ve serves its leaf with a stale Sectigo intermediate that did not issue it, so the default
-    # trust store can't build a chain to a root. We bundle the intermediate the leaf actually names at
-    # config/bcv_ca_bundle.pem and pass it via an explicit ssl_context on each request rather than disabling
-    # verification.
+    # TLS quirk: www.bcv.org.ve sends a stale Sectigo intermediate that did not issue its leaf; see config/ca_bundles.
     #
     # Rates are emitted in BCV's native direction: foreign currency as base, VES as quote (1 USD = X VES).
     class BCV < Adapter
       DATA_URL = "https://www.bcv.org.ve/estadisticas/tipo-cambio-de-referencia-smc"
-      CA_BUNDLE = File.expand_path("../../../config/bcv_ca_bundle.pem", __dir__)
       QUARTER_LETTERS = ["a", "b", "c", "d"].freeze
       WORKBOOK_LINK = /href=["']([^"']*2_1_2([a-d])(\d{2})_smc[^"']*\.xls)["']/i
 
@@ -153,18 +148,7 @@ class Provider
       end
 
       def download(url, params = {})
-        http.get(url, params:, ssl_context:).to_s
-      end
-
-      # www.bcv.org.ve sends the wrong intermediate with its leaf, so the default trust store can't build a chain to a
-      # root. We augment it with the Sectigo intermediate the leaf names instead of disabling verification.
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
+        http.get(url, params:).to_s
       end
     end
   end

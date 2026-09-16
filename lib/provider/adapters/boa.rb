@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "date"
-require "openssl"
 require "ox"
 require "stringio"
 require "zip"
@@ -18,9 +17,7 @@ class Provider
     # The XLSX URL embeds the publication year and month under /stoodroa/YYYY/MM/, so the adapter scrapes the
     # donnees-historiques hub for the current link rather than hardcoding a path.
     #
-    # TLS quirk: bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to
-    # a root. We bundle the DigiCert intermediate at config/boa_ca_bundle.pem and pass it via an explicit ssl_context on
-    # each http.rb request instead of disabling verification.
+    # TLS quirk: bank-of-algeria.dz omits its DigiCert intermediate; see config/ca_bundles.
     #
     # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and contains two columns: Excel serial
     # dates in column A, "1 CCY = X DZD" rates in column B. We emit records with the foreign currency as base and DZD as
@@ -34,7 +31,6 @@ class Provider
     class BOA < Adapter
       HUB_URL = "https://www.bank-of-algeria.dz/donnees-historiques/"
       ARCHIVE_LINK = %r{href="(https://www\.bank-of-algeria\.dz/stoodroa/\d{4}/\d{2}/Cotation-DZD-[^"]+\.xlsx)"}
-      CA_BUNDLE = File.expand_path("../../../config/boa_ca_bundle.pem", __dir__)
       EXCEL_EPOCH = Date.new(1899, 12, 30)
       JPY_UNITS = 100
 
@@ -89,19 +85,8 @@ class Provider
         match[1]
       end
 
-      # bank-of-algeria.dz serves only its leaf certificate, so the default trust store can't build a chain to a root.
-      # We augment it with the DigiCert intermediate instead of disabling verification.
       def download(url)
-        http.get(url, ssl_context: ssl_context).to_s
-      end
-
-      def ssl_context
-        @ssl_context ||= OpenSSL::SSL::SSLContext.new.tap do |ctx|
-          store = OpenSSL::X509::Store.new
-          store.set_default_paths
-          store.add_file(CA_BUNDLE)
-          ctx.set_params(cert_store: store)
-        end
+        http.get(url).to_s
       end
 
       def parse_rels(xml)
