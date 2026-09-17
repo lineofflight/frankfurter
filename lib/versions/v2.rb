@@ -2,6 +2,7 @@
 
 require "csv"
 require "currency"
+require "currency_exclusion"
 require "heavy_slots"
 require "oj"
 require "provider"
@@ -262,11 +263,12 @@ module Versions
     end
 
     def providers
-      Provider.eager(:currency_coverages).all.sort_by(&:key).filter_map { |provider| provider_entry(provider) }
+      Provider.eager(:currency_coverages, :currency_exclusions).all.sort_by(&:key)
+        .filter_map { |provider| provider_entry(provider) }
     end
 
     def provider_entry(provider)
-      return if provider.currency_coverages.empty?
+      return if provider.currency_coverages.empty? && provider.currency_exclusions.empty?
 
       {
         key: provider.key,
@@ -282,6 +284,7 @@ module Versions
         frequency: provider.frequency,
         publishes_missed: provider.publishes_missed,
         currencies: provider.currency_coverages.map(&:iso_code).sort,
+        unknown_currencies: provider.unknown_currencies,
       }
     end
   end

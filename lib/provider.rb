@@ -66,6 +66,10 @@ class Provider < Sequel::Model(:providers)
     super
   end
 
+  def unknown_currencies
+    currency_exclusions.map(&:iso_code).reject { |code| Money::Currency.find(code) }.sort
+  end
+
   def adapter
     Adapters.const_get(key)
   end
@@ -86,11 +90,11 @@ class Provider < Sequel::Model(:providers)
   end
 
   def start_date
-    currency_coverages.map { |c| c.start_date.to_s }.min
+    (currency_coverages + currency_exclusions).map { |c| c.start_date.to_s }.min
   end
 
   def end_date
-    currency_coverages.map { |c| c.end_date.to_s }.max
+    (currency_coverages + currency_exclusions).map { |c| c.end_date.to_s }.max
   end
 
   def last_synced
