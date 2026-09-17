@@ -5,15 +5,16 @@ require "rate_validation"
 
 describe RateValidation do
   describe ".reject!" do
-    it "drops unrecognised currency codes" do
+    it "keeps unrecognised currency codes on either side" do
       records = [
         { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
         { date: Date.today, base: "EUR", quote: "SDR", rate: 1.5 },
+        { date: Date.today, base: "SDR", quote: "USD", rate: 1.2 },
       ]
 
       RateValidation.reject!(records)
 
-      _(records.map { |r| r[:quote] }).must_equal(["USD"])
+      _(records.map { |r| [r[:base], r[:quote]] }).must_equal([["EUR", "USD"], ["EUR", "SDR"], ["SDR", "USD"]])
     end
 
     it "drops non-positive rates" do
@@ -21,6 +22,7 @@ describe RateValidation do
         { date: Date.today, base: "EUR", quote: "USD", rate: 1.1 },
         { date: Date.today, base: "EUR", quote: "GBP", rate: 0.0 },
         { date: Date.today, base: "EUR", quote: "JPY", rate: -1.0 },
+        { date: Date.today, base: "EUR", quote: "CAD", rate: nil },
       ]
 
       RateValidation.reject!(records)
@@ -47,7 +49,7 @@ describe RateValidation do
       _(records.size).must_equal(1)
     end
 
-    it "drops records on or after a defunct currency's terminal date" do
+    it "keeps records on or after a defunct currency's terminal date" do
       records = [
         { date: Date.new(2016, 7, 1), base: "EUR", quote: "BYR", rate: 22000.0 },
         { date: Date.new(2016, 6, 30), base: "EUR", quote: "BYR", rate: 22000.0 },
@@ -56,11 +58,10 @@ describe RateValidation do
 
       RateValidation.reject!(records)
 
-      _(records.size).must_equal(2)
-      _(records.none? { |r| r[:quote] == "BYR" && r[:date] == Date.new(2016, 7, 1) }).must_equal(true)
+      _(records.size).must_equal(3)
     end
 
-    it "drops EUR rates dated before the euro existed" do
+    it "maps EUR quotes dated before the euro existed to XEU" do
       # The euro came into existence on 1999-01-04 (first ECB reference date). The Riksbank backfills its EUR series
       # with the ECU back to 1993; relaying those as EUR fabricates euro quotes for dates the euro did not exist.
       records = [
@@ -70,10 +71,31 @@ describe RateValidation do
 
       RateValidation.reject!(records)
 
-      _(records.map { |r| r[:date] }).must_equal([Date.new(1999, 1, 4)])
+      _(records.map { |r| r[:quote] }).must_equal(["XEU", "EUR"])
+      _(records.map { |r| r[:rate] }).must_equal([0.10448, 0.10500])
     end
 
-    it "drops Austrian schilling rates on or after the euro changeover" do
+    it "maps a premature base to its predecessor" do
+      records = [{ date: "1999-01-01", base: "EUR", quote: "USD", rate: 1.1 }]
+
+      RateValidation.reject!(records)
+
+      _(records).must_equal([{ date: "1999-01-01", base: "XEU", quote: "USD", rate: 1.1 }])
+    end
+
+    it "drops premature currencies without a known predecessor" do
+      entry = NascentCurrency.find("EUR").with(predecessor: nil)
+      records = [
+        { date: Date.new(1998, 12, 31), base: "EUR", quote: "USD", rate: 1.1 },
+        { date: Date.new(1998, 12, 31), base: "USD", quote: "EUR", rate: 0.9 },
+      ]
+
+      NascentCurrency.stub(:find, entry) { RateValidation.reject!(records) }
+
+      _(records).must_be_empty
+    end
+
+    it "keeps Austrian schilling rates on or after the euro changeover" do
       # ATS was irrevocably fixed to the euro in 1999 and ceased to be legal tender on 2002-02-28. Providers keep
       # publishing stale ATS reference rates years later (AMCM into 2004); they must be capped like IEP already is.
       records = [
@@ -83,7 +105,7 @@ describe RateValidation do
 
       RateValidation.reject!(records)
 
-      _(records.map { |r| r[:date] }).must_equal([Date.new(2002, 2, 28)])
+      _(records.size).must_equal(2)
     end
 
     it "accepts a string date" do
@@ -136,7 +158,7 @@ describe RateValidation do
       _(db[:monthly_rates].where(bucket_date: bucket, provider: ours).select_map(:provider)).must_equal(["HMRC"])
     end
 
-    it "deletes rates on or after the terminal date and keeps earlier rows" do
+    it "retains stored terminal-date rows on either side" do
       db[:rates].multi_insert([
         { provider: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", mid: 22000.0 },
         { provider: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", mid: 0.00005 },
@@ -146,14 +168,14 @@ describe RateValidation do
 
       totals = RateValidation.purge(db)
 
-      _(totals[:rates]).must_equal(2)
-      _(db[:rates].where(quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(0)
-      _(db[:rates].where(base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(0)
+      _(totals[:rates]).must_equal(0)
+      _(db[:rates].where(quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(1)
+      _(db[:rates].where(base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(1)
       _(db[:rates].where(quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
       _(db[:rates].where(base: "EUR", date: Date.new(2016, 7, 1)).count).must_equal(1)
     end
 
-    it "deletes EUR rates dated before the euro existed and keeps later rows" do
+    it "retains stored premature codes for explicit reingestion" do
       db[:rates].multi_insert([
         { provider: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", mid: 0.10448 },
         { provider: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", mid: 0.10500 },
@@ -161,11 +183,11 @@ describe RateValidation do
 
       RateValidation.purge(db)
 
-      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1998, 12, 31)).count).must_equal(0)
+      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1998, 12, 31)).count).must_equal(1)
       _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1999, 1, 4)).count).must_equal(1)
     end
 
-    it "removes rollup rows past the terminal date" do
+    it "retains provider rollup rows past the terminal date" do
       db[:weekly_rates].multi_insert([
         { provider: "TEST", bucket_date: Date.new(2016, 7, 4), base: "USD", quote: "BYR", rate: 22000.0 },
         { provider: "TEST", bucket_date: Date.new(2016, 6, 27), base: "USD", quote: "BYR", rate: 22000.0 },
@@ -177,8 +199,8 @@ describe RateValidation do
 
       totals = RateValidation.purge(db)
 
-      _(totals[:weekly_rates]).must_equal(1)
-      _(totals[:monthly_rates]).must_equal(1)
+      _(totals[:weekly_rates]).must_equal(0)
+      _(totals[:monthly_rates]).must_equal(0)
       _(db[:weekly_rates].where(quote: "BYR", bucket_date: Date.new(2016, 6, 27)).count).must_equal(1)
       _(db[:monthly_rates].where(quote: "BYR", bucket_date: Date.new(2016, 6, 1)).count).must_equal(1)
     end
@@ -210,7 +232,7 @@ describe RateValidation do
       Provider.load_cache
       db[:rates].multi_insert([
         { provider: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currency_coverages].where(iso_code: "BYR").delete
@@ -227,7 +249,7 @@ describe RateValidation do
     it "refreshes currency summaries for affected codes" do
       db[:rates].multi_insert([
         { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TEST", date: Date.new(2017, 1, 1), base: "USD", quote: "BYR", mid: 22000.0 },
+        { provider: "TEST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currencies].insert(iso_code: "BYR", start_date: "2016-06-30", end_date: "2017-01-01")
@@ -251,7 +273,7 @@ describe RateValidation do
     it "removes currency rows entirely when no surviving rates remain" do
       db[:rates].insert(
         provider: "TEST",
-        date: Date.new(2017, 1, 1),
+        date: Date.today + 365,
         base: "USD",
         quote: "BYR",
         mid: 22000.0,

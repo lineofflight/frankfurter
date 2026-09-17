@@ -149,9 +149,9 @@ end
       logger = Object.new
       table = source.table_name.to_s
       logger.define_singleton_method(:info) do |sql|
-        return unless sql.include?("SELECT * FROM `#{table}`") && sql.include?("`bucket_date` IN")
+        return unless sql.include?("FROM `#{table}`") && sql.include?("`bucket_date` IN")
 
-        sizes << sql.scan(/'\d{4}-\d{2}-\d{2}'/).size
+        sizes << sql[/`bucket_date` IN \(([^)]+)\)/, 1].scan(/'\d{4}-\d{2}-\d{2}'/).size
       end
       DB.loggers << logger
       begin
@@ -300,6 +300,13 @@ describe "Grouped read consistency" do
       writer = nil
       begin
         database.run("PRAGMA journal_mode=WAL")
+        database.create_table(:rates) do
+          Date :date
+          String :provider
+          String :base
+          String :quote
+          Float :rate
+        end
         database.create_table(:weekly_rates) do
           Date :bucket_date
           String :provider

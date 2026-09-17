@@ -10,6 +10,7 @@ require "json"
 require "log"
 require "money/currency"
 require "currency_coverage"
+require "currency_summary"
 require "provider/adapters/adapter"
 require "rate"
 require "rate_components"
@@ -21,6 +22,7 @@ class Provider < Sequel::Model(:providers)
 
   one_to_many :rates, key: :provider
   one_to_many :currency_coverages, key: :provider_key
+  one_to_many :currency_exclusions, key: :provider_key
   many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
 
   # Carry-forward window per observation frequency and publish cadence (#646). A daily value goes stale in two weeks; a
@@ -47,7 +49,21 @@ class Provider < Sequel::Model(:providers)
       dataset.delete
       dataset.multi_insert(rows)
       load_cache
+      return unless db.table_exists?(:currency_exclusions)
+
+      recognized = db[:currency_exclusions].select_map(:iso_code).uniq.select { |code| Money::Currency.find(code) }
+      return if recognized.empty?
+
+      counterparts = db[:rates].where(Sequel.|({ base: recognized }, { quote: recognized }))
+        .select(:base, :quote).distinct.all.flat_map(&:values)
+      CurrencySummary.refresh(db, recognized | counterparts)
     end
+  end
+
+  # Older migrations load Provider before the exclusions table exists.
+  def currency_exclusions(*)
+    require "currency_exclusion"
+    super
   end
 
   def adapter
@@ -235,27 +251,7 @@ class Provider < Sequel::Model(:providers)
   end
 
   def refresh_currency_summaries(iso_codes)
-    iso_codes.each do |code|
-      dates = db[:rates].where(provider: key)
-        .where(Sequel.|({ quote: code }, { base: code }))
-        .select { [min(date).as(start_date), max(date).as(end_date)] }.first # rubocop:disable Performance/Detect
-      next unless dates
-
-      # Upsert coverage with per-provider date range
-      db[:currency_coverages].insert_conflict(target: [:provider_key, :iso_code], update: {
-        start_date: Sequel.function(:min, Sequel[:currency_coverages][:start_date], dates[:start_date]),
-        end_date: Sequel.function(:max, Sequel[:currency_coverages][:end_date], dates[:end_date]),
-      },).insert(provider_key: key, iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
-
-      next unless blends?
-
-      # Upsert global currency date range. Only blending providers define the catalogue: a monthly or quarterly provider
-      # covering a currency nobody observes daily would promise a blended rate the blend cannot give.
-      db[:currencies].insert_conflict(target: :iso_code, update: {
-        start_date: Sequel.function(:min, Sequel[:currencies][:start_date], dates[:start_date]),
-        end_date: Sequel.function(:max, Sequel[:currencies][:end_date], dates[:end_date]),
-      },).insert(iso_code: code, start_date: dates[:start_date], end_date: dates[:end_date])
-    end
+    CurrencySummary.refresh(db, iso_codes, provider: key)
   end
 
   def refresh_rollup(table, bucket_expr, dates)

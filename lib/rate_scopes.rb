@@ -1,11 +1,55 @@
 # frozen_string_literal: true
 
+require "bucket"
+require "defunct_currency"
+require "money/currency"
+
 # Shared dataset scopes for rate tables (rates, weekly_rates, monthly_rates). Parameterized by date column name and
 # table name.
 module RateScopes
   class << self
     def included(mod)
       mod.dataset_module(ScopeMethods)
+    end
+
+    def named_currencies(dataset)
+      codes = Money::Currency.table.values.map { |entry| entry[:iso_code] }
+      dataset.where(base: codes, quote: codes)
+    end
+
+    def current_currencies(dataset, date_column = :date, precision: nil)
+      conditions = DefunctCurrency.all.map do |entry|
+        expired = if precision
+                    Sequel[date_column] > Bucket.expression(precision, (entry.terminal_date - 1).to_s)
+                  else
+                    Sequel[date_column] >= entry.terminal_date.to_s
+                  end
+        Sequel.&(expired, Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }))
+      end
+      conditions.empty? ? dataset : dataset.exclude(Sequel.|(*conditions))
+    end
+
+    # Provider rollups retain every observation. Only the bucket straddling a terminal date needs its eligible daily
+    # average recomputed; every other pair keeps its stored value, including its existing floating-point precision.
+    def eligible_rollups(dataset, precision)
+      table = dataset.model.table_name
+      boundaries = DefunctCurrency.all.map do |entry|
+        last_bucket = Bucket.expression(precision, (entry.terminal_date - 1).to_s)
+        Sequel.&(
+          { bucket_date: last_bucket },
+          { last_bucket => Bucket.expression(precision, entry.terminal_date.to_s) },
+          Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }),
+        )
+      end
+      return dataset if boundaries.empty?
+
+      observations = current_currencies(dataset.db[:rates])
+        .where([:provider, :base, :quote].to_h { |column| [column, Sequel[table][column]] })
+        .where(Bucket.expression(precision) => Sequel[table][:bucket_date])
+      boundary = Sequel.|(*boundaries)
+      value = Sequel.case({ boundary => observations.select(Sequel.function(:avg, :rate)) }, :rate).as(:rate)
+      dataset.where(Sequel.|(Sequel.~(boundary), observations.exists))
+        .select(:bucket_date, :provider, :base, :quote, value).from_self(alias: table)
     end
   end
 
@@ -14,14 +58,17 @@ module RateScopes
       where(provider: "ECB")
     end
 
-    # Rows eligible for the blend: every provider whose values stand for a day (#646). Loaded lazily and guarded on the
-    # column, because migration 028 recomputes the blend on a fresh database before 029 adds frequency.
+    # Provider frequency is guarded because migration 028 rebuilds before 029 adds the column.
     def blendable
       require "provider"
-      return self unless Provider.columns.include?(:frequency)
-
-      keys = Provider.non_blending_keys
-      keys.empty? ? self : exclude(provider: keys)
+      scope = RateScopes.named_currencies(self)
+      if Provider.columns.include?(:frequency)
+        keys = Provider.non_blending_keys
+        scope = scope.exclude(provider: keys) unless keys.empty?
+      end
+      precision = { weekly_rates: :week, monthly_rates: :month }[model.table_name]
+      scope = RateScopes.current_currencies(scope, model.date_column, precision:)
+      precision ? RateScopes.eligible_rollups(scope, precision) : scope
     end
 
     def between(interval)
