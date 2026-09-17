@@ -35,7 +35,7 @@ module Versions
         require "carry_forward"
 
         today = Date.today
-        rows = Rate.where(provider: "ECB").where(date: (today - 14)..today).naked.all
+        rows = Rate.blendable.where(provider: "ECB").where(date: (today - 14)..today).naked.all
         CarryForward.apply(rows, date: today)
       end
     end
