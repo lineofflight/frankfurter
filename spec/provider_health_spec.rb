@@ -65,6 +65,77 @@ describe "provider_health" do
     end
   end
 
+  describe "unknown currencies" do
+    it "flags an up-to-date provider with unknown codes" do
+      entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => ["ECS", "WAUA"])
+
+      _(flagged([entry])).must_equal([entry])
+    end
+
+    it "flags unknown codes from historical-only providers" do
+      entry = provider("BBK", nil, nil).merge("unknown_currencies" => ["ZZZ"])
+
+      _(flagged([entry])).must_equal([entry])
+    end
+
+    it "names codes and remediation without claiming the feed is stale" do
+      entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => ["ECS", "WAUA"])
+      body = render_body(entry, "2026-09-17")
+
+      _(body).must_include("CBKKW")
+      _(body).must_include("ECS")
+      _(body).must_include("WAUA")
+      _(body).must_include("currency_patches.json")
+      _(body).wont_include("has missed")
+    end
+
+    it "reports both staleness and unknown codes in one issue" do
+      entry = provider("CBKKW", "daily", 10).merge("unknown_currencies" => ["ECS"])
+      body = render_body(entry, "2026-09-17")
+
+      _(body).must_include("has missed")
+      _(body).must_include("ECS")
+    end
+  end
+
+  describe "issue lifecycle" do
+    def audit(entries, open_issues)
+      commands = []
+      stub(:fetch_providers, entries) do
+        stub(:open_issues_by_key, open_issues) do
+          stub(:gh, ->(*args) { commands << args }) { main }
+        end
+      end
+      commands
+    end
+
+    it "opens an issue naming the provider and unknown currency" do
+      entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => ["ECS"])
+      commands = audit([entry], {})
+
+      _(commands.size).must_equal(1)
+      _(commands.first.take(2)).must_equal(["issue", "create"])
+      _(commands.first.last).must_include("CBKKW")
+      _(commands.first.last).must_include("ECS")
+    end
+
+    it "keeps an existing issue open when publishing recovers but codes remain unknown" do
+      entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => ["ECS"])
+      commands = audit([entry], { "CBKKW" => 123 })
+
+      _(commands.map { |args| args.take(3) }).must_equal([["issue", "edit", "123"]])
+    end
+
+    it "closes the issue once publishing and currency checks both recover" do
+      entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => [])
+      commands = audit([entry], { "CBKKW" => 123 })
+
+      _(commands.map { |args| args.take(3) }).must_equal([
+        ["issue", "comment", "123"], ["issue", "close", "123"],
+      ])
+    end
+  end
+
   describe "render_body" do
     it "embeds a per-provider marker and the provider's stats" do
       body = render_body(provider("NBC", "daily", 10), "2026-06-22")

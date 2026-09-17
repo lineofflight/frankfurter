@@ -534,7 +534,12 @@
           "currencies": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "Currency codes covered by this provider"
+            "description": "Recognised currency codes within their valid date ranges covered by this provider"
+          },
+          "unknown_currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Published codes absent from the currency registry. Available through provider rates but excluded from blends and the currency catalogue."
           }
         },
         "required": ["key", "name", "currencies"]

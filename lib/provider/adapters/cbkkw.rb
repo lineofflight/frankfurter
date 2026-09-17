@@ -15,7 +15,7 @@ class Provider
     # rather than hard-coded. One POST per currency then returns an HTML fragment with a date-filtered table (dates
     # DD.MM.YYYY, working days Sun-Thu). The site sits behind F5 BIG-IP but serves plain requests without a cookie leg.
     # Majors run from 2008-01-02, most other currencies from 2017-06-18. Some retired codes (ECS, VEF, SLL) are still
-    # served; RateValidation drops them.
+    # served; provider routes retain them while blend and catalogue rules exclude unknown or expired codes.
     #
     # Licence: the CBK disclaimer (see terms_url) allows use "provided that they shall be properly credited to the CBK",
     # with written-permission boilerplate for everything else. Ships under the #611 rule with attribution and a courtesy

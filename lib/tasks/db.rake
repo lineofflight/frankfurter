@@ -23,7 +23,7 @@ namespace :db do
     Provider.seed
   end
 
-  desc "Purge stored rates that violate ingest rules (future-dated and defunct-currency rows)"
+  desc "Purge stored rates beyond each provider's future-date horizon"
   task :purge_invalid do
     require "blended_rate"
     require "blended_weekly_rate"

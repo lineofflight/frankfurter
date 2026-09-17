@@ -44,6 +44,23 @@ Some data providers require API keys. All are free and optional:
 
 ## Contributing
 
+### Restoring provider history
+
+Backfills are incremental by default. To re-fetch previously omitted quotes from each provider's `coverage_start`:
+
+```bash
+FULL=1 bundle exec rake backfill          # All providers
+FULL=1 bundle exec rake 'backfill[CBKKW]' # One provider
+```
+
+This inserts missing rows without replacing existing quotes. Per-day APIs can take days to finish. After the backfills
+finish, run `bundle exec rake blend:rebuild` to rebuild daily, weekly and monthly blends, then
+`bundle exec rake blend:parity` to check materialized results against live computation.
+
+Provider routes retain retired and unknown currency codes. Blends and the currency catalogue exclude unknown codes
+and observations on or after a currency's terminal date. Early successor labels are relabelled to their configured
+predecessor. Provider health reports unknown codes for registry updates.
+
 See [AGENTS.md](AGENTS.md) for development setup and guidelines.
 
 Built a library or tool with Frankfurter? Share it in [Show and Tell](https://github.com/lineofflight/frankfurter/discussions/categories/show-and-tell)
