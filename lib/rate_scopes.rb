@@ -13,11 +13,15 @@ module RateScopes
     end
 
     def named_currencies(dataset)
-      codes = Money::Currency.table.values.map { |entry| entry[:iso_code] }
+      codes = Money::Currency.table.keys.map { |code| code.to_s.upcase }
       dataset.where(base: codes, quote: codes)
     end
 
     def current_currencies(dataset, date_column = :date, precision: nil)
+      dataset.exclude(expired_currency_condition(date_column, precision:))
+    end
+
+    def expired_currency_condition(date_column = :date, precision: nil)
       conditions = DefunctCurrency.all.map do |entry|
         expired = if precision
                     Sequel[date_column] > Bucket.expression(precision, (entry.terminal_date - 1).to_s)
@@ -26,11 +30,11 @@ module RateScopes
                   end
         Sequel.&(expired, Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }))
       end
-      conditions.empty? ? dataset : dataset.exclude(Sequel.|(*conditions))
+      conditions.empty? ? false : Sequel.|(*conditions)
     end
 
-    # Provider rollups retain every observation. Only the bucket straddling a terminal date needs its eligible daily
-    # average recomputed; every other pair keeps its stored value, including its existing floating-point precision.
+    # Recompute a terminal-straddling pair only when expired daily observations contaminate its average. Keep stored
+    # precision for every unaffected pair, including boundary buckets whose daily history is incomplete or absent.
     def eligible_rollups(dataset, precision)
       table = dataset.model.table_name
       boundaries = DefunctCurrency.all.map do |entry|
@@ -43,12 +47,14 @@ module RateScopes
       end
       return dataset if boundaries.empty?
 
-      observations = current_currencies(dataset.db[:rates])
+      observations = dataset.db[:rates]
         .where([:provider, :base, :quote].to_h { |column| [column, Sequel[table][column]] })
         .where(Bucket.expression(precision) => Sequel[table][:bucket_date])
-      boundary = Sequel.|(*boundaries)
-      value = Sequel.case({ boundary => observations.select(Sequel.function(:avg, :rate)) }, :rate).as(:rate)
-      dataset.where(Sequel.|(Sequel.~(boundary), observations.exists))
+      expired = expired_currency_condition
+      contaminated = Sequel.&(Sequel.|(*boundaries), observations.where(expired).exists)
+      eligible = observations.exclude(expired)
+      value = Sequel.case({ contaminated => eligible.select(Sequel.function(:avg, :rate)) }, :rate).as(:rate)
+      dataset.where(Sequel.|(Sequel.~(contaminated), eligible.exists))
         .select(:bucket_date, :provider, :base, :quote, value).from_self(alias: table)
     end
   end

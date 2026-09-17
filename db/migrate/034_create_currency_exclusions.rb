@@ -11,7 +11,7 @@ Sequel.migration do
     end
 
     require "money/currency"
-    codes = Money::Currency.table.values.map { |entry| entry[:iso_code] }
+    codes = Money::Currency.table.keys.map { |code| code.to_s.upcase }
     unknown = self[:rates].exclude(base: codes).select(:provider, Sequel[:base].as(:iso_code), :date)
       .union(self[:rates].exclude(quote: codes).select(:provider, Sequel[:quote].as(:iso_code), :date), all: true)
     self[:currency_exclusions].insert(

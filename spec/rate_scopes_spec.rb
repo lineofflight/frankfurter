@@ -18,6 +18,22 @@ describe RateScopes do
     _(Rate.where(date: "2000-01-03").blendable.select_map([:base, :quote])).must_equal([["USD", "EUR"]])
   end
 
+  it "recognizes registered aliases on either side of daily and grouped observations" do
+    _(Money::Currency.find("GHC")).wont_be_nil
+    _(Money::Currency.table[:ghc][:iso_code]).must_equal("GHS")
+    pairs = [{ base: "USD", quote: "GHC" }, { base: "GHC", quote: "USD" }]
+    [Rate, WeeklyRate, MonthlyRate].each do |model|
+      value = model == Rate ? :mid : :rate
+      pairs.each do |pair|
+        model.dataset.insert(**pair, provider: "ECB", model.date_column => "2000-01-03", value => 3.0)
+      end
+
+      rows = model.where(model.date_column => "2000-01-03").blendable.order(:base).select_map([:base, :quote])
+
+      _(rows).must_equal([["GHC", "USD"], ["USD", "GHC"]])
+    end
+  end
+
   it "excludes observations on or after either currency's terminal date" do
     ["2016-06-30", "2016-07-01", "2016-07-02"].each do |date|
       Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "BYR", mid: 20000.0)
@@ -34,6 +50,27 @@ describe RateScopes do
   [[:week, BlendedWeeklyRate, "BYR", "2016-06-30", "2016-07-01"],
    [:month, BlendedMonthlyRate, "VEF", "2018-08-19", "2018-08-20"],].each do |precision, model, code, before, terminal|
     sides.each do |side|
+      it "preserves the stored #{precision} boundary #{side} average when daily observations are all eligible" do
+        pair = side == :base ? { base: code, quote: "USD" } : { base: "USD", quote: code }
+        bucket = DB.get(Bucket.expression(precision, before))
+        Rate.dataset.insert(**pair, provider: "ECB", date: before, mid: 15.123456789012)
+        model.source.dataset.insert(**pair, provider: "ECB", bucket_date: bucket, rate: 15.123456789011)
+
+        scope = model.source.blendable.where(**pair, provider: "ECB", bucket_date: bucket)
+
+        _(scope.get(:rate)).must_equal(15.123456789011)
+      end
+
+      it "preserves the stored #{precision} boundary #{side} average when no daily observations remain" do
+        pair = side == :base ? { base: code, quote: "USD" } : { base: "USD", quote: code }
+        bucket = DB.get(Bucket.expression(precision, before))
+        model.source.dataset.insert(**pair, provider: "ECB", bucket_date: bucket, rate: 15.123456789011)
+
+        scope = model.source.blendable.where(**pair, provider: "ECB", bucket_date: bucket)
+
+        _(scope.get(:rate)).must_equal(15.123456789011)
+      end
+
       it "keeps #{precision} blends identical when retained expired #{side} rows share a bucket" do
         pair = side == :base ? { base: code, quote: "USD" } : { base: "USD", quote: code }
         dates = [Date.parse(before), Date.parse(terminal)]

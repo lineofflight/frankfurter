@@ -14,6 +14,8 @@ describe "Currency exclusions migration" do
         { provider: "ECB", date: "2000-01-03", base: "USD", quote: "SDR", mid: 3.0 },
         { provider: "ECB", date: "2000-01-04", base: "SDR", quote: "EUR", mid: 0.3 },
         { provider: "BOC", date: "2000-01-05", base: "USD", quote: "EUR", mid: 0.9 },
+        { provider: "BOC", date: "2000-01-05", base: "USD", quote: "GHC", mid: 2.0 },
+        { provider: "BOC", date: "2000-01-05", base: "GHC", quote: "USD", mid: 0.5 },
       ])
       Sequel::Migrator.run(DB, "db/migrate")
       abort "missing exclusions table" unless DB.table_exists?(:currency_exclusions)
@@ -22,7 +24,7 @@ describe "Currency exclusions migration" do
       abort "wrong dates" unless rows.first.values_at(:start_date, :end_date).map(&:to_s) == ["2000-01-03", "2000-01-04"]
       Sequel::Migrator.run(DB, "db/migrate", target: 33)
       abort "rollback failed" if DB.table_exists?(:currency_exclusions)
-      abort "lost rates" unless DB[:rates].count == 3
+      abort "lost rates" unless DB[:rates].count == 5
       DB.disconnect
     RUBY
     Dir.mktmpdir do |dir|
