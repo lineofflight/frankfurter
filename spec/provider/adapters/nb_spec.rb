@@ -73,7 +73,7 @@ class Provider < Sequel::Model(:providers)
           B,USD,NOK,SP,2026-03-16,10.5432,0
         CSV
 
-        # parse keeps all rows; import filters non-currencies via Money::Currency
+        # Preserve the provider's index observations alongside its currency rates.
         records = adapter.parse(csv)
 
         _(records.length).must_equal(3)
