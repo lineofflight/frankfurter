@@ -87,7 +87,7 @@ class Provider < Sequel::Model(:providers)
           _(quotes).must_equal(["VES", "ZWG"])
         end
 
-        it "leaves the retired sucre code alone for validation to drop" do
+        it "leaves the retired sucre code alone" do
           csv = "#{header}Ecuador,Dollar,ECS,1.3554,01/09/2026,30/09/2026\n" \
                 "USA,Dollar,USD,1.3554,01/09/2026,30/09/2026\n"
           quotes = adapter.parse(csv).map { |r| r[:quote] }

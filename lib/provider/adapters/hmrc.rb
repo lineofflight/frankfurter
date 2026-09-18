@@ -17,7 +17,7 @@ class Provider
       COLUMNS = ["Currency Code", "Currency Units per £1", "Start date"].freeze
 
       # Labels HMRC uses that aren't ISO 4217 codes: VED for the bolívar (VES), ZIG for Zimbabwe Gold (ZWG). The retired
-      # sucre code ECS on Ecuador's row is left as is; validation drops it as unknown.
+      # sucre code ECS on Ecuador's row is left as published and excluded from blends by its terminal date.
       ALIASES = {
         "VED" => "VES",
         "ZIG" => "ZWG",

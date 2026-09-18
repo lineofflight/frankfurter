@@ -108,4 +108,22 @@ describe "Recognized currency exclusions" do
     _(DB[:currencies].where(iso_code: "EUR").get(:start_date).to_s).must_equal("2000-01-04")
     _(DB[:currencies].where(iso_code: "USD").get(:start_date).to_s).must_equal("2000-01-04")
   end
+
+  it "clears modern sucre exclusions without advertising coverage" do
+    DB[:rates].delete
+    DB[:currency_coverages].delete
+    DB[:currencies].delete
+    DB[:currency_exclusions].delete
+    DB[:rates].insert(provider: "CBKKW", date: "2026-09-17", base: "ECS", quote: "KWD", mid: 0.000012)
+    DB[:currency_exclusions].insert(
+      provider_key: "CBKKW", iso_code: "ECS", start_date: "2026-09-17", end_date: "2026-09-17",
+    )
+
+    Provider.seed
+
+    _(DB[:currency_exclusions].where(iso_code: "ECS").count).must_equal(0)
+    _(DB[:currency_coverages].where(iso_code: "ECS").count).must_equal(0)
+    _(DB[:currencies].where(iso_code: "ECS").count).must_equal(0)
+    _(Provider["CBKKW"].unknown_currencies).wont_include("ECS")
+  end
 end

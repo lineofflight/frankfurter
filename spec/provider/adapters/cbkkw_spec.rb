@@ -89,8 +89,10 @@ class Provider < Sequel::Model(:providers)
           .must_equal([Date.new(2026, 9, 6), Date.new(2026, 9, 7), Date.new(2026, 9, 8)])
 
         usd = dataset.find { |r| r[:base] == "USD" && r[:date] == Date.new(2026, 9, 8) }
+        ecs = dataset.find { |r| r[:base] == "ECS" && r[:date] == Date.new(2026, 9, 8) }
 
         _(usd[:rate]).must_equal(0.30665)
+        _(ecs[:rate]).must_equal(0.000012)
       end
     end
   end
