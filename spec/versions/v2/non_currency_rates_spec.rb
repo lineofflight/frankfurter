@@ -3,6 +3,7 @@
 require_relative "../../helper"
 require "rack/test"
 require "versions/v2"
+require "provider/adapters/rba"
 
 describe "Non-currency provider observations" do
   include Rack::Test::Methods
@@ -117,5 +118,46 @@ describe "Non-currency provider observations" do
     _(entry["unknown_currencies"]).must_equal(["ZZZ"])
     _(entry["currencies"] & ["I44", "TWI"]).must_be_empty
     _(Provider["ECB"].unknown_currencies).must_include("I44")
+  end
+
+  it "ingests RBA's index without changing currency conversions or stored blends" do
+    provider = Provider["RBA"]
+    Rate.dataset.insert(provider: "RBA", date: date - 3, base: "AUD", quote: "USD", mid: 0.7)
+    provider.send(:refresh_rollups, [date - 3])
+    models = [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate]
+    models.each(&:rebuild)
+    before = models.map { |model| model.dataset.order(*model.primary_key).naked.all }
+    queries = [nil, "RBA", "RBA,NB,ECB"].map do |providers|
+      { providers:, base: "USD", quotes: "AUD", date: date.to_s }.compact
+    end
+    rates = queries.map { |params| Versions::V2::RateQuery.new(params).to_a }
+
+    fetch = lambda do |**_, &block|
+      block.call([{ date:, base: "AUD", quote: "FXRTWI", rate: 61.4 }])
+    end
+    provider.adapter.stub(:fetch_each, fetch) do
+      Cache.stub(:purge_debounced, nil) { provider.backfill(after: date - 1) }
+    end
+
+    models.each_with_index do |model, i|
+      _(model.dataset.order(*model.primary_key).naked.all).must_equal(before[i])
+    end
+    queries.each_with_index do |params, i|
+      _(Versions::V2::RateQuery.new(params).to_a).must_equal(rates[i])
+    end
+
+    get "/providers/RBA/rate/AUD/FXRTWI", date: date.to_s
+
+    _(last_response.status).must_equal(200)
+    _(Oj.load(last_response.body)["rate"]).must_equal(61.4)
+
+    get "/rate/AUD/FXRTWI", providers: "NB,RBA", date: date.to_s
+
+    _(last_response.status).must_equal(422)
+    _(Provider["RBA"].unknown_currencies).must_be_empty
+    _(Currency.find("FXRTWI")).must_be_nil
+    [Rate, WeeklyRate, MonthlyRate].each do |model|
+      _(model.where(provider: "RBA", quote: "FXRTWI").count).must_equal(1)
+    end
   end
 end

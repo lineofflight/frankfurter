@@ -30,7 +30,7 @@ class Provider < Sequel::Model(:providers)
   LOOKBACK_DAYS = { "daily" => 14, "weekly" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
 
   # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts.
-  NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"] }.freeze
+  NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
 
   class << self
     # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
