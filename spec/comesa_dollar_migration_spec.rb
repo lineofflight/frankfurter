@@ -42,10 +42,14 @@ describe "COMESA Dollar migration" do
       date = Date.new(2024, 1, 2)
       week = DB.get(Bucket.week(date.to_s))
       month = DB.get(Bucket.month(date.to_s))
-      marker = ENV.fetch("CACHE_MARKER")
       require "cache"
-      Cache.define_singleton_method(:purge) { File.write(marker, "purged") }
+      Cache.define_singleton_method(:purge) { raise "Cloudflare unavailable" }
       load "lib/tasks/db.rake"
+      Rake::Task["db:setup"].invoke
+      Sequel::Migrator.check_current(DB, "db/migrate")
+
+      # A second startup must also succeed while blends await the scheduler and the cache service is unavailable.
+      Rake::Task.tasks.each(&:reenable)
       Rake::Task["db:setup"].invoke
 
       require "blended_rate"
@@ -61,7 +65,6 @@ describe "COMESA Dollar migration" do
       abort "daily blend stayed materialized" unless BlendedRate.empty?
       abort "weekly CMD bucket stayed materialized" unless BlendedWeeklyRate.where(bucket_date: week).empty?
       abort "monthly CMD bucket stayed materialized" unless BlendedMonthlyRate.where(bucket_date: month).empty?
-      abort "cache was not purged" unless File.read(marker) == "purged"
 
       BlendedRate.rebuild
       [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
@@ -72,7 +75,6 @@ describe "COMESA Dollar migration" do
     RUBY
 
     Dir.mktmpdir do |dir|
-      marker = File.join(dir, "cache-purged")
       environment = {
         "DATABASE_URL" => "sqlite://#{File.join(dir, "migration.sqlite3")}",
         "APP_ENV" => "test",
@@ -85,7 +87,7 @@ describe "COMESA Dollar migration" do
       _(status.success?).must_equal(true, output)
 
       output, status = Open3.capture2e(
-        environment.merge("CACHE_MARKER" => marker),
+        environment,
         RbConfig.ruby, "-Ilib", "-r./boot", "-e", repair,
       )
 
