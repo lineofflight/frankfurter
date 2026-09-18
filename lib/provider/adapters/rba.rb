@@ -9,6 +9,7 @@ class Provider
     class RBA < Adapter
       CSV_URL = "https://www.rba.gov.au/statistics/tables/csv/f11.1-data.csv"
       METADATA_ROWS = 11
+      ALIASES = { "SDR" => "XDR" }.freeze
 
       def fetch(after: nil, **)
         csv = http.get(CSV_URL).to_s
@@ -27,7 +28,8 @@ class Provider
 
         series_ids = CSV.parse_line(series_line).drop(1)
         codes = CSV.parse_line(units_line).drop(1).zip(series_ids).map do |unit, series|
-          unit == "Index" ? series : unit
+          code = unit == "Index" ? series : unit
+          ALIASES.fetch(code, code)
         end
 
         data_lines = lines.drop(METADATA_ROWS)

@@ -21,6 +21,30 @@ class Provider < Sequel::Model(:providers)
 
         _(dataset).wont_be_empty
         _(dataset.any? { |row| row[:quote] == "FXRTWI" }).must_equal(true)
+        _(dataset.any? { |row| row[:quote] == "XDR" }).must_equal(true)
+        _(dataset.any? { |row| row[:quote] == "SDR" }).must_equal(false)
+      end
+
+      it "normalizes SDR to XDR without changing the published observation" do
+        records = adapter.parse(<<~CSV)
+          F11.1  EXCHANGE RATES
+          Title,A$1=USD,A$1=SDR
+          Description,AUD/USD Exchange Rate,AUD/SDR Exchange Rate
+          Frequency,Daily,Daily
+          Type,Indicative,Indicative
+          Units,USD,SDR
+
+
+          Source,WM/Reuters,IMF
+          Publication date,20-Mar-2026,20-Mar-2026
+          Series ID,FXRUSD,FXRSDR
+          03-Jan-2023,0.6828,0.5131
+        CSV
+
+        _(records).must_equal([
+          { date: Date.new(2023, 1, 3), base: "AUD", quote: "USD", rate: 0.6828 },
+          { date: Date.new(2023, 1, 3), base: "AUD", quote: "XDR", rate: 0.5131 },
+        ])
       end
 
       it "preserves currency quotes and identifies the trade-weighted index by its source series" do
