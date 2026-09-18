@@ -38,6 +38,21 @@ describe "Provider currency routes" do
     _(Oj.load(last_response.body).first["rate"]).must_equal(2.3457)
   end
 
+  it "serves modern sucre observations only through provider routes" do
+    Rate.dataset.insert(provider: "CBKKW", date:, base: "ECS", quote: "KWD", mid: 0.000012)
+    Provider["CBKKW"].send(:refresh_rollups, [date])
+
+    get "/providers/CBKKW/rate/ECS/KWD"
+
+    _(last_response.status).must_equal(200)
+    _(Oj.load(last_response.body)["rate"]).must_equal(0.000012)
+    _([Rate, WeeklyRate, MonthlyRate].sum { |model| model.blendable.where(base: "ECS").count }).must_equal(0)
+
+    get "/rate/ECS/KWD"
+
+    _(last_response.status).must_equal(404)
+  end
+
   it "rejects unknown codes outside the selected provider's stored rows" do
     ["/rate/EUR/ZZZ", "/providers/BOC/rate/EUR/ZZZ", "/providers/ECB/rate/EUR/QQQ"].each do |path|
       get path

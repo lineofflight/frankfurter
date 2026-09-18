@@ -46,6 +46,16 @@ describe RateScopes do
     _(rows.select_map(:date).uniq).must_equal([Date.new(2016, 6, 30)])
   end
 
+  it "keeps the final sucre day and excludes its retirement date" do
+    ["2000-09-08", "2000-09-09"].each do |date|
+      Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "ECS", mid: 25000.0)
+    end
+
+    rows = Rate.where(quote: "ECS").blendable
+
+    _(rows.select_map(:date)).must_equal([Date.new(2000, 9, 8)])
+  end
+
   sides = [:base, :quote]
   [[:week, BlendedWeeklyRate, "BYR", "2016-06-30", "2016-07-01"],
    [:month, BlendedMonthlyRate, "VEF", "2018-08-19", "2018-08-20"],].each do |precision, model, code, before, terminal|

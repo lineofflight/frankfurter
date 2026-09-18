@@ -30,8 +30,8 @@ describe DefunctCurrency do
   it "covers the known defunct codes" do
     codes = DefunctCurrency.all.map(&:iso_code)
 
-    ["ATS", "BEF", "BGN", "BYR", "CUC", "DEM", "EEK", "ESP", "FRF", "HRK", "IEP", "ITL", "NLG", "PTE", "SLL", "STD",
-     "VEF", "ZMK",].each do |code|
+    ["ATS", "BEF", "BGN", "BYR", "CUC", "DEM", "ECS", "EEK", "ESP", "FRF", "HRK", "IEP", "ITL", "NLG", "PTE", "SLL",
+     "STD", "VEF", "ZMK",].each do |code|
       _(codes).must_include(code)
     end
   end
@@ -43,6 +43,14 @@ describe DefunctCurrency do
     _(entry.terminal_date).must_equal(Date.new(2016, 7, 1))
     _(entry.successor).must_equal("BYN")
     _(entry.ratio).must_equal(10000)
+  end
+
+  it "retires the Ecuadorian sucre after the 180-day withdrawal period" do
+    entry = DefunctCurrency.find("ECS")
+
+    _(entry.terminal_date).must_equal(Date.new(2000, 9, 9))
+    _(entry.successor).must_equal("USD")
+    _(entry.ratio).must_equal(25000)
   end
 
   it "returns nil for an unknown iso_code" do

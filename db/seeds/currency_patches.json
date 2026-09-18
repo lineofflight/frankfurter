@@ -18,6 +18,7 @@
   { "iso_code": "TRL", "name": "Turkish Lira (old)", "symbol": "₤", "subunit_to_unit": 1, "iso_numeric": "792" },
   { "iso_code": "ROL", "name": "Romanian Leu (old)", "symbol": "L", "subunit_to_unit": 100, "iso_numeric": "642" },
   { "iso_code": "BRR", "name": "Brazilian Cruzeiro Real", "symbol": "CR$", "subunit_to_unit": 100, "iso_numeric": "987" },
+  { "iso_code": "ECS", "name": "Ecuadorian Sucre", "symbol": "S/.", "subunit_to_unit": 100, "iso_numeric": "218" },
   { "iso_code": "TJR", "name": "Tajikistani Ruble", "symbol": "", "subunit_to_unit": 1, "iso_numeric": "762" },
   { "iso_code": "TMM", "name": "Turkmenistani Manat (old)" },
   { "iso_code": "ZMK", "name": "Zambian Kwacha (old)" },

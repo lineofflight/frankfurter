@@ -46,6 +46,14 @@
     "note": "Germany adopted the euro at 1.95583 DEM per EUR. The mark ceased to be legal tender on 31 December 2001; the euro became sole legal tender from 1 January 2002."
   },
   {
+    "iso_code": "ECS",
+    "terminal_date": "2000-09-09",
+    "successor": "USD",
+    "ratio": 25000,
+    "source": "https://www.bce.fin.ec/micrositio20dolarizacion/documentos/Ley-marzo-2000.pdf",
+    "note": "The law took effect on 13 March 2000 and gave the Central Bank 180 days to withdraw sucres. Counting that date as day one makes 8 September the final day and 9 September the terminal date."
+  },
+  {
     "iso_code": "EEK",
     "terminal_date": "2011-01-01",
     "successor": "EUR",
