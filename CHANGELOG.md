@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- COMESA Dollar (CMD) peg. (#706)
 - RBA trade-weighted index on provider routes. (#695)
 - COMESA Dollar (CMD). (#699)
 - HM Revenue & Customs (HMRC) as a data provider. (#172)
