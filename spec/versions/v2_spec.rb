@@ -607,6 +607,11 @@ describe Versions::V2 do
     _(json["name"]).must_equal("COMESA Dollar")
     _(json["iso_numeric"]).must_be_nil
     _(json["providers"]).must_equal(["RBM"])
+    _(json["peg"]).must_equal(
+      "base" => "USD",
+      "rate" => 1.0,
+      "authority" => "Common Market for Eastern and Southern Africa",
+    )
   end
 
   it "rejects unsupported currency scopes with or without a provider filter" do
