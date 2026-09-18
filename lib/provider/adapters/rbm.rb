@@ -19,9 +19,9 @@ class Provider
     # buy/sell (issue
     # #314).
     #
-    # IEP (defunct Irish punt) and CMD (not a real ISO 4217 code) appear in the response. Provider routes retain both.
-    # CMD is unknown to Money::Currency and excluded from the blend and catalogue; IEP is registered through
-    # db/seeds/currency_patches.json and subject to its terminal date when blended.
+    # IEP (defunct Irish punt) and CMD (the non-ISO COMESA Dollar accounting unit) appear in the response. Both are
+    # registered through db/seeds/currency_patches.json. CMD remains separately published even where its value matches
+    # USD; IEP is subject to its terminal date when blended.
     class RBM < Adapter
       URL = "https://www.rbm.mw/Statistics/ExchangeRatesFilter/"
 

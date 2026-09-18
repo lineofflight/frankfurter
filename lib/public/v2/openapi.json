@@ -439,11 +439,11 @@
           },
           "base": {
             "type": "string",
-            "description": "Base currency code"
+            "description": "Base currency or accounting unit code"
           },
           "quote": {
             "type": "string",
-            "description": "Quote currency code"
+            "description": "Quote currency or accounting unit code"
           },
           "rate": {
             "type": "number",
@@ -470,7 +470,7 @@
       "Currency": {
         "type": "object",
         "properties": {
-          "iso_code": { "type": "string", "description": "ISO 4217 currency code" },
+          "iso_code": { "type": "string", "description": "Currency or accounting unit code" },
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
@@ -482,7 +482,7 @@
       "CurrencyDetail": {
         "type": "object",
         "properties": {
-          "iso_code": { "type": "string", "description": "ISO 4217 currency code" },
+          "iso_code": { "type": "string", "description": "Currency or accounting unit code" },
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },

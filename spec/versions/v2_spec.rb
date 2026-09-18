@@ -591,6 +591,24 @@ describe Versions::V2 do
     _(usd["iso_numeric"]).must_equal("840")
   end
 
+  it "returns COMESA Dollar as a named accounting unit" do
+    date = Fixtures.latest_date
+    Rate.dataset.multi_insert([
+      { provider: "RBM", date:, base: "CMD", quote: "MWK", mid: 100.0 },
+      { provider: "RBM", date:, base: "USD", quote: "MWK", mid: 90.0 },
+    ])
+    Provider["RBM"].send(:refresh_currency_summaries, ["CMD", "MWK"])
+
+    get "/currency/cmd"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    _(json["iso_code"]).must_equal("CMD")
+    _(json["name"]).must_equal("COMESA Dollar")
+    _(json["iso_numeric"]).must_be_nil
+    _(json["providers"]).must_equal(["RBM"])
+  end
+
   it "rejects unsupported currency scopes with or without a provider filter" do
     ["invalid", "", "ALL", "active"].product([{}, { providers: "ecb" }]).each do |scope, params|
       get "/currencies", params.merge(scope:)
