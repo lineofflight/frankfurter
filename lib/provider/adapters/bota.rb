@@ -16,6 +16,7 @@ class Provider
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
       FORM_URL = "#{BASE_URL}/ExchangeRate/previous_rates".freeze
+      ALIASES = { "SDR" => "XDR" }.freeze
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
       TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/
@@ -93,6 +94,8 @@ class Provider
         currency = cell_text(cells[1])&.strip&.upcase
         return unless currency
         return if EXCLUDED_CURRENCIES.include?(currency)
+
+        currency = ALIASES.fetch(currency, currency)
 
         mean_str = cell_text(cells[4])
         date_str = cell_text(cells[5])
