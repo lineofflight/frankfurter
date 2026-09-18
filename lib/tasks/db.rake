@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 desc "Migrate and seed the database"
-task "db:setup" => ["db:migrate", "db:seed"]
+task "db:setup" => ["db:migrate", "db:seed"] do
+  require "blended_rate"
+  require "cache"
+
+  Cache.purge unless BlendedRate.ready?
+end
 
 namespace :db do
   desc "Run database migrations"

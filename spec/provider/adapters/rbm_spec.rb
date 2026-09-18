@@ -47,6 +47,18 @@ class Provider < Sequel::Model(:providers)
         end
       end
 
+      it "keeps CMD separate from USD" do
+        dataset = adapter.fetch(after: Date.new(2024, 1, 2), upto: Date.new(2024, 1, 2))
+
+        cmd = dataset.find { |r| r[:base] == "CMD" }
+        usd = dataset.find { |r| r[:base] == "USD" }
+
+        _(cmd).wont_be_nil
+        _(usd).wont_be_nil
+        _(cmd[:rate]).must_equal(1683.3663)
+        _(usd[:rate]).must_equal(1683.3663)
+      end
+
       it "parses currency code, middle rate, and date from a table row" do
         html = <<~HTML
           <table id="exchange-rates" class="table table-striped table-bordered">
