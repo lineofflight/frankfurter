@@ -398,7 +398,7 @@
       "providers": {
         "name": "providers",
         "in": "query",
-        "description": "Comma-separated list of data providers to include",
+        "description": "Comma-separated list of data providers to include. A single provider includes its stored non-currency series. Selecting multiple providers blends only registered currencies and accounting units.",
         "required": false,
         "schema": {
           "type": "string",
@@ -539,7 +539,7 @@
           "unknown_currencies": {
             "type": "array",
             "items": { "type": "string" },
-            "description": "Published codes absent from the currency registry. Available through provider rates but excluded from blends and the currency catalogue."
+            "description": "Unreviewed published codes absent from the currency registry. Available through single-provider rates but excluded from blends and the currency catalogue. Known non-currency series do not trigger this alert."
           }
         },
         "required": ["key", "name", "currencies"]

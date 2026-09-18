@@ -265,7 +265,10 @@ module Versions
       # metals), so a filtered request disagreed with an unfiltered one about the same pair. The blend is computed from
       # the full row set everywhere (#570).
       def apply_filters(dataset)
-        providers ? dataset.where(provider: providers) : dataset.blendable
+        return dataset.blendable unless providers
+
+        selected = dataset.where(provider: providers)
+        providers.uniq.size == 1 ? selected : RateScopes.named_currencies(selected)
       end
 
       # Carry-forward window: the named providers' own, else the blend's (#646).
@@ -375,7 +378,7 @@ module Versions
 
       def available_currency?(code)
         return true if Money::Currency.find(code)
-        return false unless providers
+        return false unless providers && providers.uniq.size == 1
 
         Rate.where(provider: providers).where(Sequel.|({ base: code }, { quote: code })).any?
       end

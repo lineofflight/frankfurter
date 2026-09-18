@@ -29,6 +29,9 @@ class Provider < Sequel::Model(:providers)
   # monthly or quarterly value stands for its whole period plus the lag before the next one lands.
   LOOKBACK_DAYS = { "daily" => 14, "weekly" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
 
+  # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts.
+  NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
+
   class << self
     # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
     # catalogue: a value that stands for a month or a quarter is observed once and served for the whole period, so on
@@ -67,7 +70,8 @@ class Provider < Sequel::Model(:providers)
   end
 
   def unknown_currencies
-    currency_exclusions.map(&:iso_code).reject { |code| Money::Currency.find(code) }.sort
+    codes = currency_exclusions.map(&:iso_code) - NON_CURRENCY_CODES.fetch(key, [])
+    codes.reject { |code| Money::Currency.find(code) }.sort
   end
 
   def adapter

@@ -20,9 +20,10 @@ class Provider < Sequel::Model(:providers)
         dataset = adapter.fetch(after: Date.new(2025, 1, 1))
 
         _(dataset).wont_be_empty
+        _(dataset.any? { |row| row[:quote] == "FXRTWI" }).must_equal(true)
       end
 
-      it "stores AUD as base and foreign currency as quote" do
+      it "preserves currency quotes and identifies the trade-weighted index by its source series" do
         records = adapter.parse(<<~CSV)
           F11.1  EXCHANGE RATES
           Title,A$1=USD,Trade-weighted Index May 1970 = 100,A$1=JPY
@@ -38,10 +39,11 @@ class Provider < Sequel::Model(:providers)
           03-Jan-2023,0.6828,61.40,88.48
         CSV
 
-        _(records.length).must_equal(2)
+        _(records.length).must_equal(3)
         _(records.first[:base]).must_equal("AUD")
         _(records.first[:quote]).must_equal("USD")
         _(records.first[:rate]).must_equal(0.6828)
+        _(records[1]).must_equal(date: Date.new(2023, 1, 3), base: "AUD", quote: "FXRTWI", rate: 61.4)
         _(records.last[:quote]).must_equal("JPY")
         _(records.last[:rate]).must_equal(88.48)
       end

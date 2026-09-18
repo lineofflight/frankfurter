@@ -22,8 +22,13 @@ class Provider
         units_line = lines.find { |l| l.start_with?("Units,") }
         raise "RBA: Units header row not found in F11.1 CSV" unless units_line
 
-        currencies = CSV.parse_line(units_line)
-        currencies.shift # remove "Units" label
+        series_line = lines.find { |l| l.start_with?("Series ID,") }
+        raise "RBA: Series ID header row not found in F11.1 CSV" unless series_line
+
+        series_ids = CSV.parse_line(series_line).drop(1)
+        codes = CSV.parse_line(units_line).drop(1).zip(series_ids).map do |unit, series|
+          unit == "Index" ? series : unit
+        end
 
         data_lines = lines.drop(METADATA_ROWS)
 
@@ -33,8 +38,8 @@ class Provider
 
           date = Date.parse(row.shift)
 
-          row.zip(currencies).filter_map do |value, iso|
-            next if iso.nil? || iso == "Index"
+          row.zip(codes).filter_map do |value, iso|
+            next if iso.nil?
             next if value.nil? || value.strip.empty?
 
             rate = Float(value)
