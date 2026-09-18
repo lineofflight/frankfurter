@@ -13,15 +13,7 @@ describe "BOTA SDR migration" do
       require "blended_weekly_rate"
       require "blended_monthly_rate"
       Provider.seed
-      class Cache
-        class << self
-          attr_accessor :purges
-          def purge
-            raise "purged before commit" if DB.in_transaction?
-            self.purges = (purges || 0) + 1
-          end
-        end
-      end
+      Cache.define_singleton_method(:purge) { raise IOError, "cache unavailable" }
     RUBY
     Dir.mktmpdir do |dir|
       env = { "DATABASE_URL" => "sqlite://#{File.join(dir, "migration.sqlite3")}", "APP_ENV" => "test" }
@@ -38,7 +30,7 @@ describe "BOTA SDR migration" do
     end
   end
 
-  it "preserves observations, repairs summaries and rebuilds every affected blend" do
+  it "completes setup with an unavailable cache and preserves repaired history through recovery" do
     run_migration_script(<<~'RUBY')
       rows = [
         { provider: "BOTA", date: "2026-01-01", base: "SDR", quote: "TZS", mid: 3607.4158 },
@@ -75,7 +67,10 @@ describe "BOTA SDR migration" do
       unaffected_bucket = DB[:rates].where(date: "2026-01-20").get(Bucket.week)
       unaffected = DB[:blended_weekly_rates].where(bucket_date: unaffected_bucket).all
       abort "missing unaffected fixture" if unaffected.empty?
-      Sequel::Migrator.run(DB, "db/migrate")
+      require "rake"
+      load "lib/tasks/db.rake"
+      Rake::Task["db:setup"].invoke
+      abort "migration incomplete" unless DB[:schema_info].get(:version) >= 36
       abort "changed native observations" unless DB[:rates].order(:provider, :date, :base, :quote).all == expected
       abort "still unknown SDR" if Provider["BOTA"].unknown_currencies.include?("SDR")
       abort "lost other provider exclusion" unless Provider["BOC"].unknown_currencies.include?("SDR")
@@ -94,7 +89,6 @@ describe "BOTA SDR migration" do
         abort "retained BOTA SDR rollup" unless model.source.where(provider: "BOTA", base: "SDR").empty?
       end
       abort "changed unrelated bucket" unless DB[:blended_weekly_rates].where(bucket_date: unaffected_bucket).all == unaffected
-      abort "cache not purged" unless Cache.purges == 1
       # Exercise the same recovery lifecycle as bin/schedule, then compare it with a clean full rebuild.
       BlendedRate.rebuild
       [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
@@ -131,7 +125,6 @@ describe "BOTA SDR migration" do
       abort "partial repair committed" unless DB[:rates].order(:date, :base).all == before
       abort "migration marked complete" unless DB[:schema_info].get(:version) == 35
       abort "invalidated blends after failure" unless DB[:blended_rates].count == 1
-      abort "purged after rollback" if Cache.purges
       DB.disconnect
     RUBY
   end
@@ -141,7 +134,6 @@ describe "BOTA SDR migration" do
       DB[:blended_rates].insert(date: "2026-01-01", quote: "TZS", rate: 2500)
       Sequel::Migrator.run(DB, "db/migrate")
       abort "unnecessary invalidation" unless DB[:blended_rates].count == 1
-      abort "unnecessary purge" if Cache.purges
       DB.disconnect
     RUBY
   end

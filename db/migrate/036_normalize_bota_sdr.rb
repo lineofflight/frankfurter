@@ -7,7 +7,6 @@ Sequel.migration do
     require "blended_rate"
     require "blended_weekly_rate"
     require "blended_monthly_rate"
-    require "cache"
     require "currency_summary"
 
     transaction do
@@ -64,7 +63,6 @@ Sequel.migration do
       # Daily readiness checks only the earliest date. Partial invalidation could serve an incomplete table, so clear it
       # entirely. The scheduler rebuilds daily history and populates missing grouped buckets after startup.
       from(:blended_rates).delete
-      after_commit { Cache.purge }
     end
   end
 
