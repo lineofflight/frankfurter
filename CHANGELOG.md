@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Historical and unknown currency quotes on provider routes. (#667)
 - 404 for trailing path segments in V2. (#684)
 - Validation of unsupported currency scopes in V2. (#678)
 - Strict YYYY-MM-DD date validation in V2. (#677)

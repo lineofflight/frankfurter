@@ -109,7 +109,7 @@ Two more things the relabel needs:
 
 Current databases also have `blended_weekly_rates` and `blended_monthly_rates`. For new repair migrations, invalidate complete affected grouped buckets in the same transaction as provider rollup changes, including old bucket dates that disappear. Startup population or a subsequent `rake blend:rebuild` fills the gaps. Insert-driven refresh cannot repair omitted dates. Follow `AGENTS.md`'s "Replacing provider history" procedure for delete-and-refetch repairs; do not delete only the three provider tables.
 
-- `db/seeds/currency_patches.json` must know the predecessor, or `RateValidation::UnknownCurrency` drops the rows silently. The Money gem lacks some (AZM, RUR); add a full entry.
+- `db/seeds/currency_patches.json` must know the predecessor for it to enter the blend and catalogue. Unknown codes are stored and served by provider routes, and provider health flags them. The Money gem lacks some historical codes (AZM, RUR); add a full entry.
 - Rows already stored under the wrong code stay put: the insert is `ON CONFLICT DO NOTHING` and the corrected rows have a different key. Relabel them in place with a migration (see `db/migrate/027_relabel_lb_old_manat.rb`), which runs itself at container start. No re-backfill: the values were right, only the code was wrong. The migration has four parts, because three tables derive from `rates`:
   1. `UPDATE rates` scoped to provider, code and date range.
   2. Rollups: delete the provider's `weekly_rates` and `monthly_rates` for both codes and re-insert from `rates` with `Bucket.week` / `Bucket.month`, the way `Provider#refresh_rollup` does. A bucket straddling the cutover holds both codes.
@@ -118,7 +118,7 @@ Current databases also have `blended_weekly_rates` and `blended_monthly_rates`. 
 
   Verify against a prod backup: apply the migration to a copy, recompute the blend from scratch over the affected years on a second copy, and diff `blended_rates`. Zero rows either way, or the migration is wrong.
 
-`db/seeds/nascent_currencies.json` is not the tool for this. It rejects every row dated before a currency's inception, restated series included, so it is reserved for the euro, where no pre-1999 series is wanted from anyone.
+`db/seeds/nascent_currencies.json` applies globally, including restated series, so it is reserved for universal relabels such as pre-1999 EUR to XEU. Before inception, ingestion uses the configured predecessor and drops the row only if none is known. Keep provider-specific switch dates in the adapter.
 
 Non-ISO labels (`SDR` for XDR) go through an `ALIASES` map rather than the predecessor table.
 

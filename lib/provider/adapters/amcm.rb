@@ -17,7 +17,7 @@ class Provider
     # so the per-unit rate is `usdMean / unit`.
     #
     # ECU (the European Currency Unit, published 1987-1998) is rewritten to XEU, the corresponding ISO 4217 code. LIQ is
-    # a non-currency liquidity indicator and is dropped downstream by Money::Currency.find.
+    # a non-currency liquidity indicator, retained for provider routes but excluded from the blend and catalogue.
     class AMCM < Adapter
       URL = "https://www.amcm.gov.mo/api/v1.0/cms/financial_info"
       CODE_ALIASES = { "ECU" => "XEU" }.freeze

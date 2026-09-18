@@ -368,9 +368,16 @@ module Versions
 
       def validate_currencies!
         invalid = []
-        invalid << base if @params[:base] && !Money::Currency.find(base)
-        invalid.concat(quotes.reject { |q| Money::Currency.find(q) }) if quotes
+        invalid << base if @params[:base] && !available_currency?(base)
+        invalid.concat(quotes.reject { |q| available_currency?(q) }) if quotes
         raise ValidationError, "invalid currency: #{invalid.join(",")}" if invalid.any?
+      end
+
+      def available_currency?(code)
+        return true if Money::Currency.find(code)
+        return false unless providers
+
+        Rate.where(provider: providers).where(Sequel.|({ base: code }, { quote: code })).any?
       end
 
       def validate_range_cost!

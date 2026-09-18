@@ -6,8 +6,8 @@ require "json"
 # A currency code that has been retired or redenominated, paired with the statutory date its rates stop being valid.
 # Pure data: the registry is a reactive safety net, not an exhaustive list of every defunct currency. A code only needs
 # an entry when it still lives in the Money::Currency registry (so the `find` filter waves it through) AND a provider
-# keeps publishing it past the changeover. The RateValidation::TerminalDate rule consults this; the universal
-# RateValidation::FutureDate rule needs no curated list.
+# keeps publishing it past the changeover. RateScopes uses these dates to keep those observations out of blends and
+# currency catalogues while retaining the provider's history.
 DefunctCurrency = Data.define(:iso_code, :terminal_date, :successor, :ratio, :source, :note) do
   # successor, ratio, and note are optional in the seed.
   def initialize(successor: nil, ratio: nil, note: nil, **) = super

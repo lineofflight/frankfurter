@@ -412,7 +412,7 @@ describe Provider do
       _(Rate.where(provider: provider.key, date: ahead).count).must_equal(1)
     end
 
-    it "excludes unrecognised currency codes" do
+    it "retains unrecognised currency codes" do
       bad_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
@@ -426,7 +426,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "SDR").count).must_equal(0)
+      _(Rate.where(provider: provider.key, quote: "SDR").count).must_equal(1)
     end
 
     it "excludes non-positive rates" do
@@ -519,11 +519,11 @@ describe Provider do
       _(Rate.where(provider: provider.key, quote: "USD", date: Date.today + 1).count).must_equal(1)
     end
 
-    it "drops records dated on or after a defunct currency's terminal date" do
+    it "retains records dated on or after a defunct currency's terminal date" do
       defunct_adapter = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) do |**|
           [
-            # BYR retired 2016-07-01 — these should be dropped
+            # Retain the source's observations after BYR retired on 2016-07-01.
             { date: Date.new(2016, 7, 1), base: "EUR", quote: "BYR", rate: 22000.0 },
             { date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", rate: 0.00005 },
             # Keep: before terminal date
@@ -538,8 +538,8 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(0)
-      _(Rate.where(provider: provider.key, base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(0)
+      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(1)
+      _(Rate.where(provider: provider.key, base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(1)
       _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
       _(Rate.where(provider: provider.key, quote: "USD", date: Date.new(2016, 7, 1)).count).must_equal(1)
     end

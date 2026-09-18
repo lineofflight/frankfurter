@@ -5,30 +5,17 @@ require "money/currency"
 require "sequel"
 
 require "bucket"
+require "currency_summary"
 require "defunct_currency"
 require "nascent_currency"
 
-# Ingest-validation policy for fetched rate records. Each rule answers one question — "is this row acceptable?" Rules
-# answer it for an in-memory record via `reject?`; the rules that can leave bad rows already stored also answer it as a
-# SQL filter via `reject_scope`, which `purge` applies retroactively. The purge machinery (iterate tables, collect
-# affected codes, delete, rebuild summaries) lives here once; a rule contributes only its predicate.
-#
-# Two date rules share the same shape (an upper bound on a row's date): TerminalDate is per-currency from a curated
-# list; FutureDate is universal.
+# Ingest policy keeps provider-published rows, rejecting invalid values and implausible future dates. Premature
+# successor codes are relabelled with their known predecessor; currency eligibility is applied when blending.
 module RateValidation
   RATE_TABLES = [:rates, :weekly_rates, :monthly_rates].freeze
 
   # Bucket precision per rollup table; the daily `rates` table has none.
   PRECISION = { weekly_rates: :week, monthly_rates: :month }.freeze
-
-  # A currency code unknown to the Money::Currency registry.
-  module UnknownCurrency
-    class << self
-      def reject?(record, _date, **)
-        !Money::Currency.find(record[:base]) || !Money::Currency.find(record[:quote])
-      end
-    end
-  end
 
   # A missing or non-positive rate.
   module NonPositiveRate
@@ -95,54 +82,8 @@ module RateValidation
     end
   end
 
-  # A row dated on or after a defunct currency's terminal date.
-  module TerminalDate
-    class << self
-      def reject?(record, date, **)
-        DefunctCurrency.expired?(record[:base], date) || DefunctCurrency.expired?(record[:quote], date)
-      end
-
-      # Exact on daily rows; on rollups it compares the bucket anchor (not the period start), so the one week straddling
-      # a terminal date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
-      def reject_scope(dataset, date_column, _precision = nil)
-        conditions = DefunctCurrency.all.map do |entry|
-          Sequel.&(
-            { date_column => entry.terminal_date.to_s.. },
-            Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }),
-          )
-        end
-        return dataset.where(false) if conditions.empty?
-
-        dataset.where(Sequel.|(*conditions))
-      end
-    end
-  end
-
-  # A row dated before a currency's inception date.
-  module InceptionDate
-    class << self
-      def reject?(record, date, **)
-        NascentCurrency.premature?(record[:base], date) || NascentCurrency.premature?(record[:quote], date)
-      end
-
-      # Exact on daily rows; on rollups it compares the bucket anchor (not the period end), so the one week straddling
-      # an inception date may be off by one. Harmless: rollup rebuild re-derives it from the exactly-filtered dailies.
-      def reject_scope(dataset, date_column, _precision = nil)
-        conditions = NascentCurrency.all.map do |entry|
-          Sequel.&(
-            { date_column => ...entry.inception_date.to_s },
-            Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }),
-          )
-        end
-        return dataset.where(false) if conditions.empty?
-
-        dataset.where(Sequel.|(*conditions))
-      end
-    end
-  end
-
-  RULES = [UnknownCurrency, NonPositiveRate, FutureDate, TerminalDate, InceptionDate].freeze
-  PURGEABLE = [FutureDate, TerminalDate, InceptionDate].freeze
+  RULES = [NonPositiveRate, FutureDate].freeze
+  PURGEABLE = [FutureDate].freeze
 
   class << self
     # Mutates `records`, dropping every row that any rule rejects. `lead_days` is the fetching adapter's publication
@@ -153,7 +94,16 @@ module RateValidation
 
     def rejected?(record, lead_days: 0)
       date = normalize_date(record[:date])
-      RULES.any? { |rule| rule.reject?(record, date, lead_days:) }
+      return true if RULES.any? { |rule| rule.reject?(record, date, lead_days:) }
+
+      [:base, :quote].each do |side|
+        entry = NascentCurrency.find(record[side])
+        next unless entry && date < entry.inception_date
+        return true unless entry.predecessor
+
+        record[side] = entry.predecessor
+      end
+      false
     end
 
     # Delete rejected source rows and repair affected provider buckets from surviving dailies, then rebuild summaries.
@@ -212,8 +162,8 @@ module RateValidation
         bucket = Bucket.expression(PRECISION.fetch(table))
         providers.each do |provider, dates|
           dates.uniq!
-          # Captured dates drive deletion even when no daily rows survive. Repair after the coarse rollup purge so a
-          # valid observation in a bucket straddling inception is not deleted again based only on its bucket anchor.
+          # Captured dates drive deletion even when no daily rows survive. Rebuild retained periods from the remaining
+          # observations after purging any wholly future buckets.
           db[table].where(provider:, bucket_date: dates).delete
           db[table].insert(
             [:bucket_date, :provider, :base, :quote, :rate],
@@ -230,44 +180,7 @@ module RateValidation
     end
 
     def rebuild_summaries(db, iso_codes)
-      iso_codes.each do |code|
-        db[:currency_coverages].where(iso_code: code).delete
-
-        db[:rates]
-          .where(Sequel.|({ base: code }, { quote: code }))
-          .group(:provider)
-          .select(
-            :provider,
-            Sequel.function(:min, :date).as(:start_date),
-            Sequel.function(:max, :date).as(:end_date),
-          ).each do |row|
-            db[:currency_coverages].insert(
-              provider_key: row[:provider],
-              iso_code: code,
-              start_date: row[:start_date],
-              end_date: row[:end_date],
-            )
-          end
-
-        # The catalogue is defined by blending providers only, as in Provider#refresh_currency_summaries (#646).
-        require "provider"
-        db[:currencies].where(iso_code: code).delete
-        global = db[:currency_coverages]
-          .where(iso_code: code)
-          .exclude(provider_key: Provider.non_blending_keys)
-          .select(
-            Sequel.function(:min, :start_date).as(:start_date),
-            Sequel.function(:max, :end_date).as(:end_date),
-          ).first
-
-        next unless global && global[:start_date]
-
-        db[:currencies].insert(
-          iso_code: code,
-          start_date: global[:start_date],
-          end_date: global[:end_date],
-        )
-      end
+      CurrencySummary.refresh(db, iso_codes)
     end
   end
 end

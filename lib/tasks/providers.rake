@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-desc "Backfill rates from all providers (incremental from last stored date)"
+desc "Backfill rates (incremental by default; FULL=1 starts from coverage_start)"
 task :backfill, [:provider] do |_t, args|
   require "cache"
   require "provider"
@@ -9,7 +9,7 @@ task :backfill, [:provider] do |_t, args|
   if args[:provider]
     provider = Provider.detect { |p| p.key.casecmp(args[:provider]).zero? }
     abort "Unknown provider: #{args[:provider]}" unless provider
-    provider.backfill
+    backfill_provider(provider)
   else
     queue = Queue.new
     providers = Provider.to_a.shuffle
@@ -21,7 +21,7 @@ task :backfill, [:provider] do |_t, args|
       Thread.new do
         loop do
           provider = queue.pop(true)
-          provider.backfill
+          backfill_provider(provider)
         rescue ThreadError
           break
         end
@@ -31,4 +31,12 @@ task :backfill, [:provider] do |_t, args|
 
   # The wave is over and the process is about to exit, so flush any purge the debounce deferred.
   Cache.purge_pending(ignore_window: true)
+end
+
+def backfill_provider(provider)
+  if ENV["FULL"] == "1"
+    provider.backfill(after: provider.coverage_start)
+  else
+    provider.backfill
+  end
 end
