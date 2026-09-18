@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Ecuadorian sucre metadata and retirement cutoff. (#697)
+- Bank of Tanzania Special Drawing Rights quotes as XDR. (#696)
 - Historical and unknown currency quotes on provider routes. (#667)
 - 404 for trailing path segments in V2. (#684)
 - Validation of unsupported currency scopes in V2. (#678)

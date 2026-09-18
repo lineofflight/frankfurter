@@ -57,6 +57,18 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 3, 24))
       end
 
+      it "normalizes SDR to XDR without changing the published observation" do
+        html = <<~HTML
+          <table><tbody>
+          <tr><td>35</td><td>SDR</td><td>3589.4684</td><td>3625.3631</td><td>3607.4158</td><td>18-Sep-26</td></tr>
+          </tbody></table>
+        HTML
+
+        _(adapter.parse(html)).must_equal([
+          { date: Date.new(2026, 9, 18), base: "XDR", quote: "TZS", rate: 3607.4158 },
+        ])
+      end
+
       it "excludes GOLD and defunct currencies" do
         html = <<~HTML
           <html><body>
