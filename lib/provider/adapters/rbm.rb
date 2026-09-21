@@ -42,6 +42,7 @@ class Provider
 
       CODE_RE = /\A[A-Z]{3}\z/
       DATE_RE = /\A([A-Z][a-z]{2})\s+(\d{1,2})\s+(\d{4})\z/
+      ALIASES = { "SDR" => "XDR" }.freeze
 
       class << self
         def backfill_range = 30
@@ -69,13 +70,15 @@ class Provider
           code = cells[0].text.strip
           next unless CODE_RE.match?(code)
 
+          iso = ALIASES.fetch(code, code)
+
           middle = parse_number(cells[2].text)
           next if middle.nil? || middle.zero?
 
           date = parse_date(cells[4].text)
           next unless date
 
-          { date:, base: code, quote: "MWK", rate: middle }
+          { date:, base: iso, quote: "MWK", rate: middle }
         end
       end
 

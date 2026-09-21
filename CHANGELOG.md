@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Reserve Bank of Malawi Special Drawing Rights quotes as XDR. (#708)
 - Bank Negara Malaysia Special Drawing Rights quotes as XDR. (#709)
 - Reserve Bank of Australia Special Drawing Rights quotes as XDR. (#704)
 - Non-currency series excluded from multi-provider blends. (#698)

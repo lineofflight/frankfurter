@@ -81,6 +81,26 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(1683.37, 0.001)
       end
 
+      it "normalizes SDR to XDR without changing the published observation" do
+        html = <<~HTML
+          <table id="exchange-rates">
+            <tr>
+              <td><strong>SDR</strong></td>
+              <td>2,200.0000</td>
+              <td>2,250.0000</td>
+              <td>2,300.0000</td>
+              <td><span>Jan 02&nbsp;&nbsp;</span><span>2024</span></td>
+            </tr>
+          </table>
+        HTML
+
+        records = adapter.parse(html)
+
+        _(records).must_equal([
+          { date: Date.new(2024, 1, 2), base: "XDR", quote: "MWK", rate: 2250.0 },
+        ])
+      end
+
       it "skips rows without a recognizable currency code" do
         html = <<~HTML
           <table id="exchange-rates">
