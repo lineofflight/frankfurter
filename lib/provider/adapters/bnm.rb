@@ -12,6 +12,7 @@ class Provider
       BASE_URL = "https://api.bnm.gov.my/public/exchange-rate"
       SESSION = "0900"
       HEADERS = { "Accept" => "application/vnd.BNM.API.v1+json" }.freeze
+      ALIASES = { "SDR" => "XDR" }.freeze
 
       class << self
         def backfill_range = 30
@@ -54,7 +55,7 @@ class Provider
             date = Date.parse(rate["date"])
             next if date > end_date
 
-            records << { date:, base: code, quote: "MYR", rate: mid / unit }
+            records << { date:, base: ALIASES.fetch(code, code), quote: "MYR", rate: mid / unit }
           end
 
           sleep(1)

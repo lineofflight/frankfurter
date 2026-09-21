@@ -30,6 +30,14 @@ class Provider < Sequel::Model(:providers)
         _(sample.size).must_be(:>, 1)
       end
 
+      it "normalizes SDR to XDR" do
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
+        bases = dataset.map { |r| r[:base] }.uniq
+
+        _(bases).must_include("XDR")
+        _(bases).wont_include("SDR")
+      end
+
       it "normalizes rates by unit" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 31))
         jpy = dataset.find { |r| r[:base] == "JPY" }
