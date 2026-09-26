@@ -103,6 +103,47 @@ describe Currency do
     _(codes).wont_include("CAD")
   end
 
+  it "includes a provider-only historical currency without widening the global catalogue" do
+    CurrencyCoverage.create(provider_key: "INFOREURO", iso_code: "ADP", start_date: "1994-03-01",
+                            end_date: "1998-01-01",)
+
+    currency = Currency.with_providers(["INFOREURO"]).first
+
+    _(currency&.iso_code).must_equal("ADP")
+    _(currency.to_h[:name]).must_equal("Andorran Peseta")
+    _(currency.start_date.to_s).must_equal("1994-03-01")
+    _(currency.end_date.to_s).must_equal("1998-01-01")
+    _(Currency.find("ADP")).must_be_nil
+    _(Currency.all.map(&:iso_code)).wont_include("ADP")
+    _(Currency.active.map(&:iso_code)).wont_include("ADP")
+  end
+
+  it "uses the selected provider's dates instead of global currency dates" do
+    CurrencyCoverage.create(provider_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01",
+                            end_date: "1998-01-01",)
+
+    currency = Currency.with_providers(["INFOREURO"]).first
+
+    _(currency.start_date.to_s).must_equal("1994-03-01")
+    _(currency.end_date.to_s).must_equal("1998-01-01")
+    _(Currency.find("USD").start_date.to_s).must_equal(Date.today.to_s)
+  end
+
+  it "merges dates only across selected providers without duplicating currencies" do
+    CurrencyCoverage.where(iso_code: "USD").delete
+    CurrencyCoverage.multi_insert([
+      { provider_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01", end_date: "1998-01-01" },
+      { provider_key: "ECB", iso_code: "USD", start_date: "1999-01-04", end_date: "2001-01-01" },
+      { provider_key: "BOC", iso_code: "USD", start_date: "1990-01-01", end_date: "2010-01-01" },
+    ])
+
+    currencies = Currency.with_providers(["INFOREURO", "ECB", "INFOREURO"]).where(iso_code: "USD").all
+
+    _(currencies.size).must_equal(1)
+    _(currencies.first.start_date.to_s).must_equal("1994-03-01")
+    _(currencies.first.end_date.to_s).must_equal("2001-01-01")
+  end
+
   it "excludes pegged currencies when filtering by providers" do
     codes = Currency.with_providers(["ECB"]).map(&:iso_code)
 

@@ -19,9 +19,11 @@ class Currency < Sequel::Model(:currencies)
     end
 
     def with_providers(keys)
-      iso_codes = CurrencyCoverage.where(provider_key: keys)
-        .select(:iso_code).distinct
-      where(iso_code: iso_codes)
+      coverage = CurrencyCoverage.where(provider_key: keys)
+        .group(:iso_code)
+        .select(:iso_code, Sequel.function(:min, :start_date).as(:start_date),
+                Sequel.function(:max, :end_date).as(:end_date),)
+      from(coverage.as(:currencies))
     end
   end
 
