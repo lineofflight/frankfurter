@@ -1,0 +1,12 @@
+{
+  "key": "BFM",
+  "name": "Banky Foiben'i Madagasikara",
+  "country_code": "MG",
+  "rate_type": "reference rate",
+  "pivot_currency": "MGA",
+  "data_url": "https://www.banky-foibe.mg/admin/wp-json/bfm/cours_devises",
+  "terms_url": "https://www.banky-foibe.mg/mentions-legales",
+  "publish_schedule": "0 10,13,16 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2018-01-02"
+}
