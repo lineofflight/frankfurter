@@ -449,4 +449,470 @@ http_interactions:
         DATAFLOW,FREQ,REF_AREA,CURRENCY,COLLECTION,TIME_PERIOD,OBS_VALUE,UNIT_MULT,DECIMALS,AVAILABILITY,TITLE,OBS_STATUS,OBS_PRE_BREAK,OBS_CONF
         BIS:WS_XRU(1.0),M,ZA,ZAR,E,1900-01,0.4107,0,6,A, Exchange rates against USD South Africa - South African Rand - Monthly - End of period,A,,F
   recorded_at: Sat, 26 Sep 2026 19:37:46 GMT
+- request:
+    method: get
+    uri: https://stats.bis.org/api/v2/data/dataflow/BIS/WS_XRU/1.0/M...E?c%5BTIME_PERIOD%5D=ge:2001-05%2Ble:2001-05
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/vnd.sdmx.data+csv;version=1.0.0
+      Connection:
+      - close
+      Host:
+      - stats.bis.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Set-Cookie:
+      - JSESSIONID=F8B1A5E7066BA2DB63CBA1D4C3D5091A; Path=/FusionEdgeServer; Secure;
+        HttpOnly
+      - c7433a849bcd78486014ee1ceaae0775=e85b226f8c186af7622219415db59c06; path=/;
+        HttpOnly; Secure; SameSite=None
+      Etag:
+      - 780e5a30-7cde-477d-8abf-741e08905faa
+      Content-Disposition:
+      - inline; filename="data.csv"
+      Content-Type:
+      - text/csv;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Sat, 26 Sep 2026 19:48:16 GMT
+      Cache-Control:
+      - private
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |
+        DATAFLOW,FREQ,REF_AREA,CURRENCY,COLLECTION,TIME_PERIOD,OBS_VALUE,UNIT_MULT,DECIMALS,AVAILABILITY,TITLE,OBS_STATUS,OBS_PRE_BREAK,OBS_CONF
+        BIS:WS_XRU(1.0),M,TW,TWD,E,2001-05,33.957547,0,6,A, Exchange rates against USD Chinese Taipei - New Taiwan dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LR,LRD,E,2001-05,51.5,0,6,A, Exchange rates against USD Liberia - Liberian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DM,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD Dominica - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LU,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Luxembourg - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JM,JMD,E,2001-05,45.7261,0,6,A, Exchange rates against USD Jamaica - Jamaican dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CD,CDF,E,2001-05,104.4199881839,0,10,A, Exchange rates against USD Democratic Republic of the Congo - Congolese franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LC,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD St Lucia - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MW,MWK,E,2001-05,75.8329,0,6,A, Exchange rates against USD Malawi - Malawi kwacha - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BE,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Belgium - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TT,TTD,E,2001-05,6.2365,0,6,A, Exchange rates against USD Trinidad and Tobago - Trinidad and Tobago dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LK,LKR,E,2001-05,92,0,6,A, Exchange rates against USD Sri Lanka - Sri Lanka rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PT,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Portugal - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CF,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Central African Republic - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MV,MVR,E,2001-05,11.77,0,6,A, Exchange rates against USD Maldives - Rufiyaa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BI,BIF,E,2001-05,894,0,6,A, Exchange rates against USD Burundi - Burundi franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TR,TRY,E,2001-05,1.1733490566038,0,16,A, Exchange rates against USD Türkiye - Turkish lira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BG,EUR,E,2001-05,1.173921,0,6,A, Exchange rates against USD Bulgaria - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MU,MUR,E,2001-05,28.8315,0,6,A, Exchange rates against USD Mauritius - Mauritius rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CR,CRC,E,2001-05,326.39,0,6,A, Exchange rates against USD Costa Rica - Costa Rica colon - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NE,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Niger - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BH,BHD,E,2001-05,0.376,0,6,A, Exchange rates against USD Bahrain - Bahraini dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TO,TOP,E,2001-05,2.123142,0,6,A, Exchange rates against USD Tonga - Pa'anga - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ES,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Spain - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MS,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD Montserrat - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CG,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Republic of Congo - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CV,CVE,E,2001-05,128.844,0,6,A, Exchange rates against USD Cabo Verde - Cabo Verde escudo - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TN,TND,E,2001-05,1.4984,0,6,A, Exchange rates against USD Tunisia - Tunisian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BB,BBD,E,2001-05,2,0,6,A, Exchange rates against USD Barbados - Barbados dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AW,AWG,E,2001-05,1.79,0,6,A, Exchange rates against USD Aruba - Aruban florin - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DE,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Germany - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CL,CLP,E,2001-05,610.53,0,6,A, Exchange rates against USD Chile - Chilean peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MR,MRO,E,2001-05,256.4,0,6,A, Exchange rates against USD Mauritania - Mauritanian ouguiya - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TM,TMT,E,2001-05,1.04,0,6,A, Exchange rates against USD Turkmenistan - Turkmenistan new manat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AU,AUD,E,2001-05,1.972524,0,6,A, Exchange rates against USD Australia - Australian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HN,HNL,E,2001-05,15.3872,0,6,A, Exchange rates against USD Honduras - Lempira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CN,CNY,E,2001-05,8.277005,0,6,A, Exchange rates against USD China - Renminbi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MO,MOP,E,2001-05,8.0333,0,6,A, Exchange rates against USD Macao SAR - Pataca - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NL,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Netherlands - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TJ,TJS,E,2001-05,2.35,0,6,A, Exchange rates against USD Tajikistan - Tajikistani Somoni - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BA,BAM,E,2001-05,2.286986,0,6,A, Exchange rates against USD Bosnia and Herzegovina - Bosnian convertible mark - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HK,HKD,E,2001-05,7.799764,0,6,A, Exchange rates against USD Hong Kong SAR - Hong Kong dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,WS,WST,E,2001-05,3.508772,0,6,A, Exchange rates against USD Samoa - Tala - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CO,COP,E,2001-05,2324.98,0,6,A, Exchange rates against USD Colombia - Colombian peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MN,MNT,E,2001-05,1095,0,6,A, Exchange rates against USD Mongolia - Tugrik - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DJ,DJF,E,2001-05,177.721,0,6,A, Exchange rates against USD Djibouti - Djibouti franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SK,EUR,E,2001-05,1.680794,0,6,A, Exchange rates against USD Slovakia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TH,THB,E,2001-05,45.382665,0,6,A, Exchange rates against USD Thailand - Baht - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BD,BDT,E,2001-05,57,0,6,A, Exchange rates against USD Bangladesh - Taka - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AZ,AZN,E,2001-05,0.9262,0,6,A, Exchange rates against USD Azerbaijan - Azerbaijan manat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ID,IDR,E,2001-05,11125.67217,0,6,A, Exchange rates against USD Indonesia - Rupiah - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GY,GYD,E,2001-05,186.75,0,6,A, Exchange rates against USD Guyana - Guyana dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,US,USD,E,2001-05,1,0,6,A, Exchange rates against USD United States - US dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GW,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Guinea-Bissau - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MM,MMK,E,2001-05,6.8429,0,6,A, Exchange rates against USD Myanmar - Kyat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DK,DKK,E,2001-05,8.791981,0,6,A, Exchange rates against USD Denmark - Danish krone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GT,GTQ,E,2001-05,7.762,0,6,A, Exchange rates against USD Guatemala - Guatemalan quetzal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SI,EUR,E,2001-05,1.070962,0,6,A, Exchange rates against USD Slovenia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BF,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Burkina Faso - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VN,VND,E,2001-05,14662,0,6,A, Exchange rates against USD Viet Nam - Dong - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MK,MKD,E,2001-05,71.2,0,6,A, Exchange rates against USD North Macedonia - Denar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RW,RWF,E,2001-05,439.0701,0,6,A, Exchange rates against USD Rwanda - Rwanda franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ME,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Montenegro - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KR,KRW,E,2001-05,1281.002358,0,6,A, Exchange rates against USD Korea - Won - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NO,NOK,E,2001-05,9.351415,0,6,A, Exchange rates against USD Norway - Norwegian krone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BW,BWP,E,2001-05,5.6274,0,6,A, Exchange rates against USD Botswana - Pula - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MT,EUR,E,2001-05,1.081456,0,6,A, Exchange rates against USD Malta - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VE,VEF,E,2001-05,0.716,0,6,A, Exchange rates against USD Venezuela - Bolivar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MG,MGA,E,2001-05,1371.12,0,6,A, Exchange rates against USD Madagascar - Malagasy ariary - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RU,RUB,E,2001-05,29.175708,0,6,A, Exchange rates against USD Russia - Russian rouble - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DO,DOP,E,2001-05,16.66,0,6,A, Exchange rates against USD Dominican Republic - Dominican peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BT,BTN,E,2001-05,46.99,0,6,A, Exchange rates against USD Bhutan - Ngultrum - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GN,GNF,E,2001-05,1947.286,0,6,A, Exchange rates against USD Guinea - Guinean franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RS,RSD,E,2001-05,69.4746,0,16,A, Exchange rates against USD Serbia - Serbian Dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DZ,DZD,E,2001-05,79.583962,0,6,A, Exchange rates against USD Algeria - Algerian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BZ,BZD,E,2001-05,2,0,6,A, Exchange rates against USD Belize - Belize dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GM,GMD,E,2001-05,15.1955,0,6,A, Exchange rates against USD The Gambia - Dalasi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RO,RON,E,2001-05,2.876415,0,6,A, Exchange rates against USD Romania - Romanian leu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KH,KHR,E,2001-05,3920,0,6,A, Exchange rates against USD Cambodia - Riel - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BY,BYN,E,2001-05,0.1358,0,6,A, Exchange rates against USD Belarus - Belarusian Ruble - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GH,GHS,E,2001-05,0.723586,0,6,A, Exchange rates against USD Ghana - Ghana cedi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,QA,QAR,E,2001-05,3.64,0,6,A, Exchange rates against USD Qatar - Qatari riyal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KG,KGS,E,2001-05,49.101,0,6,A, Exchange rates against USD Kyrgyz Republic - Som - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NA,NAD,E,2001-05,8.0235,0,6,A, Exchange rates against USD Namibia - Namibian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GE,GEL,E,2001-05,2.049,0,6,A, Exchange rates against USD Georgia - Lari - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TG,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Togo - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UG,UGX,E,2001-05,1784.64,0,6,A, Exchange rates against USD Uganda - Uganda shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PY,PYG,E,2001-05,3856.2,0,6,A, Exchange rates against USD Paraguay - Guarani - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KE,KES,E,2001-05,78.5233,0,6,A, Exchange rates against USD Kenya - Kenyan shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MZ,MZN,E,2001-05,20.60817,0,6,A, Exchange rates against USD Mozambique - Mozambique metical - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AI,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD Anguilla - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KN,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD St Kitts and Nevis - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CA,CAD,E,2001-05,1.550236,0,6,A, Exchange rates against USD Canada - Canadian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UA,UAH,E,2001-05,5.4152,0,6,A, Exchange rates against USD Ukraine - Hryvnia - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ET,ETB,E,2001-05,8.437,0,6,A, Exchange rates against USD Ethiopia - Ethiopian Birr - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JP,JPY,E,2001-05,119.103774,0,6,A, Exchange rates against USD Japan - Yen - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MY,MYR,E,2001-05,3.800472,0,6,A, Exchange rates against USD Malaysia - Malaysian ringgit - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TZ,TZS,E,2001-05,889.2,0,6,A, Exchange rates against USD Tanzania - Tanzanian shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LS,LSL,E,2001-05,8.0235,0,6,A, Exchange rates against USD Lesotho - Loti - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JO,JOD,E,2001-05,0.708999,0,6,A, Exchange rates against USD Jordan - Jordanian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MX,MXN,E,2001-05,9.176061,0,6,A, Exchange rates against USD Mexico - Mexican peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AN,ANG,E,2001-05,1.79,0,6,A, Exchange rates against USD Netherlands Antilles - Netherlands Antillean guilder - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZW,ZWL,E,2001-05,0.057051,0,6,A, Exchange rates against USD Zimbabwe - Zimbabwe Dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SL,SLL,E,2001-05,1.906745,0,6,A, Exchange rates against USD Sierra Leone - Leone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PK,PKR,E,2001-05,61.60005,0,6,A, Exchange rates against USD Pakistan - Pakistan rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,XM,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Euro area - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FM,USD,E,2001-05,1,0,6,A, Exchange rates against USD Micronesia - US dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AO,AOA,E,2001-05,19.62864,0,10,A, Exchange rates against USD Angola - Angolan Kwanza - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IS,ISK,E,2001-05,104.98,0,6,A, Exchange rates against USD Iceland - Icelandic krona - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZM,ZMW,E,2001-05,3.45744,0,6,A, Exchange rates against USD Zambia - Zambian Kwacha - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AE,AED,E,2001-05,3.6725,0,6,A, Exchange rates against USD United Arab Emirates - UAE dirham - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CY,EUR,E,2001-05,1.162111,0,6,A, Exchange rates against USD Cyprus - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LT,EUR,E,2001-05,1.158719,0,6,A, Exchange rates against USD Lithuania - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PH,PHP,E,2001-05,50.505896,0,6,A, Exchange rates against USD Philippines - Philippine peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AR,ARS,E,2001-05,0.9999528301887,0,16,A, Exchange rates against USD Argentina - Argentine peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IR,IRR,E,2001-05,1754.740736,0,6,A, Exchange rates against USD Iran - Iranian rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HU,HUF,E,2001-05,299.233491,0,6,A, Exchange rates against USD Hungary - Forint - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZA,ZAR,E,2001-05,8.001769,0,6,A, Exchange rates against USD South Africa - South African Rand - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SG,SGD,E,2001-05,1.80967,0,6,A, Exchange rates against USD Singapore - Singapore dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GR,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Greece - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PG,PGK,E,2001-05,3.305785,0,6,A, Exchange rates against USD Papua New Guinea - Kina - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GB,GBP,E,2001-05,0.704363,0,6,A, Exchange rates against USD United Kingdom - Pound (sterling) - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IQ,IQD,E,2001-05,1938.662266,0,6,A, Exchange rates against USD Iraq - Iraqi dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HT,HTG,E,2001-05,23.5197,0,6,A, Exchange rates against USD Haiti - Gourde - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CH,CHF,E,2001-05,1.79316,0,6,A, Exchange rates against USD Switzerland - Swiss franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,YE,YER,E,2001-05,167.3,0,6,A, Exchange rates against USD Yemen - Yemeni Rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SE,SEK,E,2001-05,10.760613,0,6,A, Exchange rates against USD Sweden - Swedish krona - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VC,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD St Vincent and the Grenadines - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KI,AUD,E,2001-05,1.960784,0,6,A, Exchange rates against USD Kiribati - Australian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LB,LBP,E,2001-05,1507.5,0,6,A, Exchange rates against USD Lebanon - Lebanese pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PE,PEN,E,2001-05,3.622,0,16,A, Exchange rates against USD Peru - Sol - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AG,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD Antigua and Barbuda - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IT,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Italy - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IN,INR,E,2001-05,47.008255,0,6,A, Exchange rates against USD India - Indian rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,XW,XDR,E,2001-05,0.79732,0,6,A, Exchange rates against USD World - Special drawing right - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SD,SDG,E,2001-05,2.574,0,6,A, Exchange rates against USD Sudan - Sudanese pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GD,XCD,E,2001-05,2.7,0,6,A, Exchange rates against USD Grenada - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BO,BOB,E,2001-05,6.56,0,6,A, Exchange rates against USD Bolivia - Boliviano - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LA,LAK,E,2001-05,8520,0,6,A, Exchange rates against USD Laos - Lao kip - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PA,PAB,E,2001-05,1,0,6,A, Exchange rates against USD Panama - Balboa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SM,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD San Marino - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IL,ILS,E,2001-05,4.135967,0,6,A, Exchange rates against USD Israel - New shekel - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SC,SCR,E,2001-05,5.6433,0,6,A, Exchange rates against USD Seychelles - Seychelles rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CZ,CZK,E,2001-05,40.324292,0,6,A, Exchange rates against USD Czechia - Czech koruna - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GA,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Gabon - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BN,BND,E,2001-05,1.8075,0,6,A, Exchange rates against USD Brunei - Brunei dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KZ,KZT,E,2001-05,146.1,0,6,A, Exchange rates against USD Kazakhstan - Tenge - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,OM,OMR,E,2001-05,0.3845,0,6,A, Exchange rates against USD Oman - Omani rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CI,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Côte d'Ivoire - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FI,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Finland - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SB,SBD,E,2001-05,5.252101,0,6,A, Exchange rates against USD Solomon Islands - Solomon Islands dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KY,KYD,E,2001-05,0.833333,0,6,A, Exchange rates against USD Cayman Islands - Cayman Islands dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NZ,NZD,E,2001-05,2.432547,0,6,A, Exchange rates against USD New Zealand - New Zealand dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BS,BSD,E,2001-05,1,0,6,A, Exchange rates against USD The Bahamas - Bahamian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AM,AMD,E,2001-05,556.23,0,6,A, Exchange rates against USD Armenia - Dram - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VU,VUV,E,2001-05,146.3,0,6,A, Exchange rates against USD Vanuatu - Vatu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SA,SAR,E,2001-05,3.7504,0,6,A, Exchange rates against USD Saudi Arabia - Saudi riyal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AT,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Austria - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BR,BRL,E,2001-05,2.3412735849057,0,16,A, Exchange rates against USD Brazil - Brazilian real - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KW,KWD,E,2001-05,0.30798,0,6,A, Exchange rates against USD Kuwait - Kuwaiti dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NP,NPR,E,2001-05,74.75,0,6,A, Exchange rates against USD Nepal - Nepalese rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HR,EUR,E,2001-05,1.146456,0,6,A, Exchange rates against USD Croatia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KM,KMF,E,2001-05,580.150649,0,6,A, Exchange rates against USD Comoros - Comorian franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GQ,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Equatorial Guinea - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NI,NIO,E,2001-05,13.3759,0,10,A, Exchange rates against USD Nicaragua - Cordoba - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SZ,SZL,E,2001-05,8.0235,0,6,A, Exchange rates against USD Eswatini - Lilangeni - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NG,NGN,E,2001-05,112.6,0,6,A, Exchange rates against USD Nigeria - Naira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SY,SYP,E,2001-05,11.225,0,6,A, Exchange rates against USD Syria - Syrian pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FR,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD France - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SV,SVC,E,2001-05,8.75,0,6,A, Exchange rates against USD El Salvador - El Salvador Colon - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ML,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Mali - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,WA,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Waemu - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UZ,UZS,E,2001-05,355.26,0,6,A, Exchange rates against USD Uzbekistan - Sum - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MD,MDL,E,2001-05,12.9592,0,6,A, Exchange rates against USD Moldova - Moldovan leu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SN,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Senegal - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,EG,EGP,E,2001-05,3.85,0,6,A, Exchange rates against USD Egypt - Egyptian pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ST,STD,E,2001-05,8968.84,0,6,A, Exchange rates against USD São Tomé and Príncipe - Sao Tome Dobra - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AL,ALL,E,2001-05,150.25,0,6,A, Exchange rates against USD Albania - Lek - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AF,AFN,E,2001-05,47.5048,0,6,A, Exchange rates against USD Afghanistan - Afghani - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UY,UYU,E,2001-05,13.1575,0,6,A, Exchange rates against USD Uruguay - Uruguayan peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MA,MAD,E,2001-05,11.914033,0,6,A, Exchange rates against USD Morocco - Moroccan dirham - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ER,ERN,E,2001-05,10.2,0,6,A, Exchange rates against USD Eritrea - Nakfa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LY,LYD,E,2001-05,0.561328,0,6,A, Exchange rates against USD Libya - Libyan dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TD,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Chad - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,EE,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Estonia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SR,SRD,E,2001-05,2.1785,0,6,A, Exchange rates against USD Suriname - Suriname dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BJ,XOF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Benin - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CM,XAF,E,2001-05,773.534198,0,6,A, Exchange rates against USD Cameroon - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IE,EUR,E,2001-05,1.179245,0,6,A, Exchange rates against USD Ireland - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LV,EUR,E,2001-05,0.902215,0,6,A, Exchange rates against USD Latvia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PL,PLN,E,2001-05,4.001179,0,6,A, Exchange rates against USD Poland - Zloty - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FJ,FJD,E,2001-05,2.2994,0,6,A, Exchange rates against USD Fiji - Fiji dollar - Monthly - End of period,A,,F
+  recorded_at: Sat, 26 Sep 2026 19:48:16 GMT
+- request:
+    method: get
+    uri: https://stats.bis.org/api/v2/data/dataflow/BIS/WS_XRU/1.0/M...E?c%5BTIME_PERIOD%5D=ge:2021-09%2Ble:2021-09
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/vnd.sdmx.data+csv;version=1.0.0
+      Connection:
+      - close
+      Host:
+      - stats.bis.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Set-Cookie:
+      - JSESSIONID=379B90321D38CBB5CA534E0CEAE323C8; Path=/FusionEdgeServer; Secure;
+        HttpOnly
+      - c7433a849bcd78486014ee1ceaae0775=e85b226f8c186af7622219415db59c06; path=/;
+        HttpOnly; Secure; SameSite=None
+      Etag:
+      - 98bf61c1-3f49-4413-b790-65e0a49ac074
+      Content-Disposition:
+      - inline; filename="data.csv"
+      Content-Type:
+      - text/csv;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Sat, 26 Sep 2026 19:48:16 GMT
+      Cache-Control:
+      - private
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |
+        DATAFLOW,FREQ,REF_AREA,CURRENCY,COLLECTION,TIME_PERIOD,OBS_VALUE,UNIT_MULT,DECIMALS,AVAILABILITY,TITLE,OBS_STATUS,OBS_PRE_BREAK,OBS_CONF
+        BIS:WS_XRU(1.0),M,TW,TWD,E,2021-09,27.84,0,6,A, Exchange rates against USD Chinese Taipei - New Taiwan dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LR,LRD,E,2021-09,170.9347,0,6,A, Exchange rates against USD Liberia - Liberian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DM,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD Dominica - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LU,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Luxembourg - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JM,JMD,E,2021-09,146.3464,0,6,A, Exchange rates against USD Jamaica - Jamaican dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CD,CDF,E,2021-09,1995.1101,0,10,A, Exchange rates against USD Democratic Republic of the Congo - Congolese franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LC,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD St Lucia - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MW,MWK,E,2021-09,822.165468,0,6,A, Exchange rates against USD Malawi - Malawi kwacha - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BE,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Belgium - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TT,TTD,E,2021-09,6.7466,0,6,A, Exchange rates against USD Trinidad and Tobago - Trinidad and Tobago dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LK,LKR,E,2021-09,199,0,6,A, Exchange rates against USD Sri Lanka - Sri Lanka rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PT,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Portugal - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CF,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Central African Republic - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MV,MVR,E,2021-09,15.4,0,6,A, Exchange rates against USD Maldives - Rufiyaa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BI,BIF,E,2021-09,1991.16,0,6,A, Exchange rates against USD Burundi - Burundi franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TR,TRY,E,2021-09,8.8937732101218,0,16,A, Exchange rates against USD Türkiye - Turkish lira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BG,EUR,E,2021-09,0.863619,0,6,A, Exchange rates against USD Bulgaria - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MU,MUR,E,2021-09,42.7681,0,6,A, Exchange rates against USD Mauritius - Mauritius rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CR,CRC,E,2021-09,626.475,0,6,A, Exchange rates against USD Costa Rica - Costa Rica colon - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NE,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Niger - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BH,BHD,E,2021-09,0.376,0,6,A, Exchange rates against USD Bahrain - Bahraini dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TO,TOP,E,2021-09,2.275831,0,6,A, Exchange rates against USD Tonga - Pa'anga - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ES,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Spain - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MS,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD Montserrat - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CG,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Republic of Congo - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CV,CVE,E,2021-09,94.616,0,6,A, Exchange rates against USD Cabo Verde - Cabo Verde escudo - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TN,TND,E,2021-09,2.8332,0,6,A, Exchange rates against USD Tunisia - Tunisian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BB,BBD,E,2021-09,2,0,6,A, Exchange rates against USD Barbados - Barbados dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AW,AWG,E,2021-09,1.79,0,6,A, Exchange rates against USD Aruba - Aruban florin - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DE,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Germany - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CL,CLP,E,2021-09,803.59,0,6,A, Exchange rates against USD Chile - Chilean peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MR,MRO,E,2021-09,361.2,0,6,A, Exchange rates against USD Mauritania - Mauritanian ouguiya - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TM,TMT,E,2021-09,3.5,0,6,A, Exchange rates against USD Turkmenistan - Turkmenistan new manat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AU,AUD,E,2021-09,1.390016,0,6,A, Exchange rates against USD Australia - Australian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HN,HNL,E,2021-09,24.0813,0,6,A, Exchange rates against USD Honduras - Lempira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CN,CNY,E,2021-09,6.46403,0,6,A, Exchange rates against USD China - Renminbi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MO,MOP,E,2021-09,8.0187,0,6,A, Exchange rates against USD Macao SAR - Pataca - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NL,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Netherlands - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TJ,TJS,E,2021-09,11.3095,0,6,A, Exchange rates against USD Tajikistan - Tajikistani Somoni - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BA,BAM,E,2021-09,1.678248,0,6,A, Exchange rates against USD Bosnia and Herzegovina - Bosnian convertible mark - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HK,HKD,E,2021-09,7.788583,0,6,A, Exchange rates against USD Hong Kong SAR - Hong Kong dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,WS,WST,E,2021-09,2.602811,0,6,A, Exchange rates against USD Samoa - Tala - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CO,COP,E,2021-09,3834.68,0,6,A, Exchange rates against USD Colombia - Colombian peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MN,MNT,E,2021-09,2849.2,0,6,A, Exchange rates against USD Mongolia - Tugrik - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DJ,DJF,E,2021-09,177.721,0,6,A, Exchange rates against USD Djibouti - Djibouti franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SK,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Slovakia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TH,THB,E,2021-09,33.884619,0,6,A, Exchange rates against USD Thailand - Baht - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BD,BDT,E,2021-09,85.5,0,6,A, Exchange rates against USD Bangladesh - Taka - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AZ,AZN,E,2021-09,1.7,0,6,A, Exchange rates against USD Azerbaijan - Azerbaijan manat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ID,IDR,E,2021-09,14312.142672,0,6,A, Exchange rates against USD Indonesia - Rupiah - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GY,GYD,E,2021-09,208.5,0,6,A, Exchange rates against USD Guyana - Guyana dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,US,USD,E,2021-09,1,0,6,A, Exchange rates against USD United States - US dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MM,MMK,E,2021-09,1921.6,0,6,A, Exchange rates against USD Myanmar - Kyat - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DK,DKK,E,2021-09,6.421971,0,6,A, Exchange rates against USD Denmark - Danish krone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GT,GTQ,E,2021-09,7.72938,0,6,A, Exchange rates against USD Guatemala - Guatemalan quetzal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SI,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Slovenia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BF,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Burkina Faso - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VN,VND,E,2021-09,23162,0,6,A, Exchange rates against USD Viet Nam - Dong - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MK,MKD,E,2021-09,52.94,0,6,A, Exchange rates against USD North Macedonia - Denar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RW,RWF,E,2021-09,997.531493,0,6,A, Exchange rates against USD Rwanda - Rwanda franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ME,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Montenegro - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KR,KRW,E,2021-09,1184.540979,0,6,A, Exchange rates against USD Korea - Won - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NO,NOK,E,2021-09,8.778824,0,6,A, Exchange rates against USD Norway - Norwegian krone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BW,BWP,E,2021-09,11.2973,0,6,A, Exchange rates against USD Botswana - Pula - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MT,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Malta - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VE,VEF,E,2021-09,4128271.016399,0,6,A, Exchange rates against USD Venezuela - Bolivar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MG,MGA,E,2021-09,3941.5,0,6,A, Exchange rates against USD Madagascar - Malagasy ariary - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RU,RUB,E,2021-09,72.837983,0,6,A, Exchange rates against USD Russia - Russian rouble - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DO,DOP,E,2021-09,56.4094,0,6,A, Exchange rates against USD Dominican Republic - Dominican peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BT,BTN,E,2021-09,74.2551,0,6,A, Exchange rates against USD Bhutan - Ngultrum - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RS,RSD,E,2021-09,101.292,0,16,A, Exchange rates against USD Serbia - Serbian Dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,DZ,DZD,E,2021-09,137.1705,0,6,A, Exchange rates against USD Algeria - Algerian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BZ,BZD,E,2021-09,2,0,6,A, Exchange rates against USD Belize - Belize dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GM,GMD,E,2021-09,51.55,0,6,A, Exchange rates against USD The Gambia - Dalasi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,RO,RON,E,2021-09,4.272821,0,6,A, Exchange rates against USD Romania - Romanian leu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KH,KHR,E,2021-09,4124.5,0,6,A, Exchange rates against USD Cambodia - Riel - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BY,BYN,E,2021-09,2.5083,0,6,A, Exchange rates against USD Belarus - Belarusian Ruble - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GH,GHS,E,2021-09,5.8863,0,6,A, Exchange rates against USD Ghana - Ghana cedi - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,QA,QAR,E,2021-09,3.64,0,6,A, Exchange rates against USD Qatar - Qatari riyal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KG,KGS,E,2021-09,84.7907,0,6,A, Exchange rates against USD Kyrgyz Republic - Som - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NA,NAD,E,2021-09,15.1314,0,6,A, Exchange rates against USD Namibia - Namibian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GE,GEL,E,2021-09,3.1228,0,6,A, Exchange rates against USD Georgia - Lari - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TG,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Togo - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UG,UGX,E,2021-09,3542.67,0,6,A, Exchange rates against USD Uganda - Uganda shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PY,PYG,E,2021-09,6907.23,0,6,A, Exchange rates against USD Paraguay - Guarani - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KE,KES,E,2021-09,110.485882,0,6,A, Exchange rates against USD Kenya - Kenyan shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MZ,MZN,E,2021-09,63.83,0,6,A, Exchange rates against USD Mozambique - Mozambique metical - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AI,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD Anguilla - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KN,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD St Kitts and Nevis - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CA,CAD,E,2021-09,1.273858,0,6,A, Exchange rates against USD Canada - Canadian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UA,UAH,E,2021-09,26.576,0,6,A, Exchange rates against USD Ukraine - Hryvnia - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ET,ETB,E,2021-09,46.1007,0,6,A, Exchange rates against USD Ethiopia - Ethiopian Birr - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JP,JPY,E,2021-09,111.987218,0,6,A, Exchange rates against USD Japan - Yen - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MY,MYR,E,2021-09,4.186458,0,6,A, Exchange rates against USD Malaysia - Malaysian ringgit - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TZ,TZS,E,2021-09,2296.902624,0,6,A, Exchange rates against USD Tanzania - Tanzanian shilling - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LS,LSL,E,2021-09,15.163761,0,6,A, Exchange rates against USD Lesotho - Loti - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,JO,JOD,E,2021-09,0.71,0,6,A, Exchange rates against USD Jordan - Jordanian dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MX,MXN,E,2021-09,20.506002,0,6,A, Exchange rates against USD Mexico - Mexican peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AN,ANG,E,2021-09,1.79,0,6,A, Exchange rates against USD Netherlands Antilles - Netherlands Antillean guilder - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZW,ZWL,E,2021-09,87.6653,0,6,A, Exchange rates against USD Zimbabwe - Zimbabwe Dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SL,SLL,E,2021-09,10.57098,0,6,A, Exchange rates against USD Sierra Leone - Leone - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PK,PKR,E,2021-09,170.66505,0,6,A, Exchange rates against USD Pakistan - Pakistan rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,XM,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Euro area - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FM,USD,E,2021-09,1,0,6,A, Exchange rates against USD Micronesia - US dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AO,AOA,E,2021-09,606.65005,0,10,A, Exchange rates against USD Angola - Angolan Kwanza - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IS,ISK,E,2021-09,130.32,0,6,A, Exchange rates against USD Iceland - Icelandic krona - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZM,ZMW,E,2021-09,16.796563,0,6,A, Exchange rates against USD Zambia - Zambian Kwacha - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AE,AED,E,2021-09,3.6725,0,6,A, Exchange rates against USD United Arab Emirates - UAE dirham - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CY,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Cyprus - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LT,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Lithuania - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PH,PHP,E,2021-09,51.011314,0,6,A, Exchange rates against USD Philippines - Philippine peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AR,ARS,E,2021-09,98.735,0,16,A, Exchange rates against USD Argentina - Argentine peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IR,IRR,E,2021-09,42000,0,6,A, Exchange rates against USD Iran - Iranian rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HU,HUF,E,2021-09,311.071768,0,6,A, Exchange rates against USD Hungary - Forint - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ZA,ZAR,E,2021-09,15.16789,0,6,A, Exchange rates against USD South Africa - South African Rand - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SG,SGD,E,2021-09,1.361085,0,6,A, Exchange rates against USD Singapore - Singapore dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GR,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Greece - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PG,PGK,E,2021-09,3.508772,0,6,A, Exchange rates against USD Papua New Guinea - Kina - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GB,GBP,E,2021-09,0.743182,0,6,A, Exchange rates against USD United Kingdom - Pound (sterling) - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IQ,IQD,E,2021-09,1450,0,6,A, Exchange rates against USD Iraq - Iraqi dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HT,HTG,E,2021-09,97.3918,0,6,A, Exchange rates against USD Haiti - Gourde - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CH,CHF,E,2021-09,0.935314,0,6,A, Exchange rates against USD Switzerland - Swiss franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,YE,YER,E,2021-09,1156,0,6,A, Exchange rates against USD Yemen - Yemeni Rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SE,SEK,E,2021-09,8.781674,0,6,A, Exchange rates against USD Sweden - Swedish krona - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VC,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD St Vincent and the Grenadines - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KI,AUD,E,2021-09,1.387732,0,6,A, Exchange rates against USD Kiribati - Australian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LB,LBP,E,2021-09,1507.5,0,6,A, Exchange rates against USD Lebanon - Lebanese pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PE,PEN,E,2021-09,4.134,0,16,A, Exchange rates against USD Peru - Sol - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AG,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD Antigua and Barbuda - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IT,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Italy - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IN,INR,E,2021-09,74.338544,0,6,A, Exchange rates against USD India - Indian rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,XW,XDR,E,2021-09,0.709788,0,6,A, Exchange rates against USD World - Special drawing right - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SD,SDG,E,2021-09,439.1062,0,6,A, Exchange rates against USD Sudan - Sudanese pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GD,XCD,E,2021-09,2.7,0,6,A, Exchange rates against USD Grenada - Eastern Caribbean dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BO,BOB,E,2021-09,6.91,0,6,A, Exchange rates against USD Bolivia - Boliviano - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LA,LAK,E,2021-09,9855,0,6,A, Exchange rates against USD Laos - Lao kip - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PA,PAB,E,2021-09,1,0,6,A, Exchange rates against USD Panama - Balboa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SM,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD San Marino - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IL,ILS,E,2021-09,3.22679,0,6,A, Exchange rates against USD Israel - New shekel - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SC,SCR,E,2021-09,14.682,0,6,A, Exchange rates against USD Seychelles - Seychelles rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CZ,CZK,E,2021-09,22.018309,0,6,A, Exchange rates against USD Czechia - Czech koruna - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GA,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Gabon - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BN,BND,E,2021-09,1.3611,0,6,A, Exchange rates against USD Brunei - Brunei dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KZ,KZT,E,2021-09,425.7,0,6,A, Exchange rates against USD Kazakhstan - Tenge - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,OM,OMR,E,2021-09,0.3845,0,6,A, Exchange rates against USD Oman - Omani rial - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CI,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Côte d'Ivoire - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FI,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Finland - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SB,SBD,E,2021-09,8.077544,0,6,A, Exchange rates against USD Solomon Islands - Solomon Islands dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KY,KYD,E,2021-09,0.833333,0,6,A, Exchange rates against USD Cayman Islands - Cayman Islands dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NZ,NZD,E,2021-09,1.455912,0,6,A, Exchange rates against USD New Zealand - New Zealand dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BS,BSD,E,2021-09,1,0,6,A, Exchange rates against USD The Bahamas - Bahamian dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AM,AMD,E,2021-09,484.2,0,6,A, Exchange rates against USD Armenia - Dram - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,VU,VUV,E,2021-09,112.35,0,6,A, Exchange rates against USD Vanuatu - Vatu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SA,SAR,E,2021-09,3.75,0,6,A, Exchange rates against USD Saudi Arabia - Saudi riyal - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AT,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Austria - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BR,BRL,E,2021-09,5.4090163226531,0,16,A, Exchange rates against USD Brazil - Brazilian real - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KW,KWD,E,2021-09,0.30165,0,6,A, Exchange rates against USD Kuwait - Kuwaiti dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NP,NPR,E,2021-09,117.59,0,6,A, Exchange rates against USD Nepal - Nepalese rupee - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,HR,EUR,E,2021-09,0.858406,0,6,A, Exchange rates against USD Croatia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,KM,KMF,E,2021-09,424.879307,0,6,A, Exchange rates against USD Comoros - Comorian franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,GQ,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Equatorial Guinea - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NI,NIO,E,2021-09,35.3441,0,10,A, Exchange rates against USD Nicaragua - Cordoba - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SZ,SZL,E,2021-09,15.163761,0,6,A, Exchange rates against USD Eswatini - Lilangeni - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,NG,NGN,E,2021-09,410.8,0,6,A, Exchange rates against USD Nigeria - Naira - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FR,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD France - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ML,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Mali - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,WA,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Waemu - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UZ,UZS,E,2021-09,10691.91,0,6,A, Exchange rates against USD Uzbekistan - Sum - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MD,MDL,E,2021-09,17.6627,0,6,A, Exchange rates against USD Moldova - Moldovan leu - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SN,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Senegal - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,EG,EGP,E,2021-09,15.66,0,6,A, Exchange rates against USD Egypt - Egyptian pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ST,STD,E,2021-09,20979.6,0,6,A, Exchange rates against USD São Tomé and Príncipe - Sao Tome Dobra - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,AL,ALL,E,2021-09,104.79,0,6,A, Exchange rates against USD Albania - Lek - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,UY,UYU,E,2021-09,42.94,0,6,A, Exchange rates against USD Uruguay - Uruguayan peso - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,MA,MAD,E,2021-09,9.0648,0,6,A, Exchange rates against USD Morocco - Moroccan dirham - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,ER,ERN,E,2021-09,15.075,0,6,A, Exchange rates against USD Eritrea - Nakfa - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SS,SSP,E,2021-09,401.4333,0,6,A, Exchange rates against USD South Sudan - South Sudanese pound - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LY,LYD,E,2021-09,4.5599,0,6,A, Exchange rates against USD Libya - Libyan dinar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,TD,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Chad - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,EE,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Estonia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,SR,SRD,E,2021-09,21.428,0,6,A, Exchange rates against USD Suriname - Suriname dollar - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,BJ,XOF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Benin - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,CM,XAF,E,2021-09,566.505743,0,6,A, Exchange rates against USD Cameroon - CFA franc - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,IE,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Ireland - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,LV,EUR,E,2021-09,0.863632,0,6,A, Exchange rates against USD Latvia - Euro - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,PL,PLN,E,2021-09,3.989723,0,6,A, Exchange rates against USD Poland - Zloty - Monthly - End of period,A,,F
+        BIS:WS_XRU(1.0),M,FJ,FJD,E,2021-09,2.1186,0,6,A, Exchange rates against USD Fiji - Fiji dollar - Monthly - End of period,A,,F
+  recorded_at: Sat, 26 Sep 2026 19:48:17 GMT
 recorded_with: VCR 6.4.0

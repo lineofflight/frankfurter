@@ -54,12 +54,13 @@ class Provider
           code = row["CURRENCY"]
           next if code == "USD" || (AREAS.key?(code) && row["REF_AREA"] != AREAS[code])
 
-          value = Float(row["OBS_VALUE"], exception: false)
+          value = BigDecimal(row["OBS_VALUE"].to_s, exception: false)
           next unless value&.positive? && value.finite?
 
           month = Date.strptime(row["TIME_PERIOD"], "%Y-%m")
           date = Date.new(month.year, month.month, -1)
-          rate = (BigDecimal(row["OBS_VALUE"]) * (10**Integer(row["UNIT_MULT"]))).to_f
+          # Keep source decimals through ingestion; Float values are rounded to 12 significant digits by RatePrecision.
+          rate = value * (10**Integer(row["UNIT_MULT"]))
           { date:, base: "USD", quote: currency(code, date), rate: }
         end
       end

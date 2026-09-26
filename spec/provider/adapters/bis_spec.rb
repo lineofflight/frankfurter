@@ -4,15 +4,34 @@ require_relative "../../helper"
 require "provider/adapters/bis"
 require "weekly_rate"
 require "monthly_rate"
+require "rack/test"
+require "versions/v2"
 
 class Provider
   module Adapters
     describe BIS do
+      include Rack::Test::Methods
+
+      let(:app) { Versions::V2.freeze }
       before { VCR.insert_cassette("bis", match_requests_on: [:method, :uri]) }
       after { VCR.eject_cassette }
 
       let(:adapter) { BIS.new }
       let(:header) { "FREQ,REF_AREA,CURRENCY,COLLECTION,TIME_PERIOD,OBS_VALUE,UNIT_MULT\n" }
+
+      [["2001-05-31", "CDF", 104.4199881839], ["2021-09-30", "VES", 4128271.016399]].each do |day, quote, rate|
+        it "preserves the published #{quote} digits through ingestion and the provider API" do
+          date = Date.parse(day)
+          records = adapter.fetch(after: date, upto: date).select { |r| r[:quote] == quote }
+          batch = ->(**, &block) { block.call(records) }
+          BIS.stub(:fetch_each, batch) { Provider["BIS"].backfill(after: date) }
+          get "/rates", providers: "BIS", date: day, base: "USD", quotes: quote
+
+          _(last_response).must_be(:ok?)
+          _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(rate)
+          _(Rate.where(provider: "BIS", date:, quote:).get(:rate)).must_equal(rate)
+        end
+      end
 
       it "fetches actual month-end observations in the requested window" do
         records = adapter.fetch(after: Date.new(2025, 1, 31), upto: Date.new(2025, 2, 1))
