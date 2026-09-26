@@ -674,6 +674,37 @@ describe Versions::V2 do
     _(codes).wont_include("BMD")
   end
 
+  it "lists a monthly provider's historical coverage without changing global catalogues" do
+    Rate.multi_insert([
+      { provider: "INFOREURO", date: "1994-03-01", base: "XEU", quote: "ADP", mid: 160.0 },
+      { provider: "INFOREURO", date: "1998-01-01", base: "XEU", quote: "ADP", mid: 165.092 },
+      { provider: "INFOREURO", date: "1999-01-01", base: "EUR", quote: "XYZ", mid: 2.0 },
+    ])
+    Provider["INFOREURO"].send(:refresh_currency_summaries, ["XEU", "ADP", "XYZ"])
+    get "/currencies?scope=all"
+    global_before = last_response.body
+
+    get "/currencies?providers=inforeuro"
+
+    _(last_response).must_be(:ok?)
+    assert_conform_schema(200)
+    _(json.map { |c| c["iso_code"] }.sort).must_equal(["ADP", "XEU"])
+    adp = json.find { |c| c["iso_code"] == "ADP" }
+
+    _(adp["start_date"]).must_equal("1994-03-01")
+    _(adp["end_date"]).must_equal("1998-01-01")
+    provider_body = last_response.body
+
+    get "/currencies?providers=inforeuro&scope=all"
+
+    _(last_response.body).must_equal(provider_body)
+
+    get "/currencies?scope=all"
+
+    _(last_response.body).must_equal(global_before)
+    _(Oj.load(last_response.body).map { |c| c["iso_code"] }).wont_include("ADP")
+  end
+
   it "preserves provider filtering with scope all" do
     get "/currencies?providers=ecb"
     expected = last_response.body
