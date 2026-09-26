@@ -12,6 +12,10 @@ class Provider
       PERIOD_URL = "https://www.cbbh.ba/CurrencyExchange/GetJsonForPeriod"
       DAILY_URL = "https://www.cbbh.ba/CurrencyExchange/GetJson"
       COVERAGE_START = Date.new(1998, 1, 6)
+      # Before 16 July 1998 the source labels ordinary peseta and ECU quotes as ESB/995 and XBA/955. Both codes change
+      # together to ESP/724 and XEU/954 while country, units, and magnitudes continue unchanged. The earlier values
+      # agree with peseta/DEM and the official ECU basket, not distinct funds-unit histories.
+      EARLY_ALIASES = { "ESB" => "ESP", "XBA" => "XEU" }.freeze
 
       class << self
         def backfill_range = 365
@@ -41,6 +45,7 @@ class Provider
             code = item["AlphaCode"]
             next unless code&.match?(/\A[A-Z]{3}\z/)
 
+            code = EARLY_ALIASES.fetch(code, code) if date < Date.new(1998, 7, 16)
             units = decimal(item["Units"])
             middle = decimal(item["Middle"])
             next unless units&.positive? && units.finite? && middle&.positive? && middle.finite?

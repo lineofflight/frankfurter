@@ -715,4 +715,228 @@ http_interactions:
         null\r\n    }\r\n  ],\r\n  \"Date\": \"2025-01-04T00:00:00\",\r\n  \"Comments\":
         [],\r\n  \"Number\": 2\r\n}"
   recorded_at: Sat, 26 Sep 2026 20:02:31 GMT
+- request:
+    method: get
+    uri: https://www.cbbh.ba/CurrencyExchange/GetJsonForPeriod?dateFrom=1998-07-14&dateTo=1998-07-16
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.cbbh.ba
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Sep 2026 20:11:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '11992'
+      Connection:
+      - close
+      Cache-Control:
+      - private
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - ASP.NET_SessionId=4g2vy1m4uhg225utpuwqcsbt; path=/; HttpOnly; SameSite=Lax
+      X-Aspnetmvc-Version:
+      - '5.2'
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a414eb101b0a9724-AMS
+    body:
+      encoding: UTF-8
+      string: "[\r\n  {\r\n    \"CurrencyExchangeItems\": [\r\n      {\r\n        \"Country\":
+        \"Australia\",\r\n        \"NumCode\": \"036\",\r\n        \"AlphaCode\":
+        \"AUD\",\r\n        \"Units\": \"1\",\r\n        \"Buy\": \"1.11740395\",\r\n
+        \       \"Middle\": \"1.12020446\",\r\n        \"Sell\": \"1.12300497\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Austria\",\r\n
+        \       \"NumCode\": \"040\",\r\n        \"AlphaCode\": \"ATS\",\r\n        \"Units\":
+        \"100\",\r\n        \"Buy\": \"14.17794328\",\r\n        \"Middle\": \"14.21347697\",\r\n
+        \       \"Sell\": \"14.24901066\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Belgia\",\r\n        \"NumCode\": \"056\",\r\n
+        \       \"AlphaCode\": \"BEF\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"4.83837391\",\r\n        \"Middle\": \"4.85050016\",\r\n        \"Sell\":
+        \"4.86262642\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Canada\",\r\n        \"NumCode\": \"124\",\r\n        \"AlphaCode\": \"CAD\",\r\n
+        \       \"Units\": \"1\",\r\n        \"Buy\": \"1.23300408\",\r\n        \"Middle\":
+        \"1.23609432\",\r\n        \"Sell\": \"1.23918455\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Dennmark\",\r\n        \"NumCode\":
+        \"208\",\r\n        \"AlphaCode\": \"DKK\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"26.18478619\",\r\n        \"Middle\": \"26.25041222\",\r\n
+        \       \"Sell\": \"26.31603825\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Finland\",\r\n        \"NumCode\": \"246\",\r\n
+        \       \"AlphaCode\": \"FIM\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"32.82418655\",\r\n        \"Middle\": \"32.90645268\",\r\n        \"Sell\":
+        \"32.98871881\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Француска\",\r\n        \"NumCode\": \"250\",\r\n        \"AlphaCode\":
+        \"FRF\",\r\n        \"Units\": \"100\",\r\n        \"Buy\": \"29.76765005\",\r\n
+        \       \"Middle\": \"29.84225569\",\r\n        \"Sell\": \"29.91686133\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Germany\",\r\n
+        \       \"NumCode\": \"280\",\r\n        \"AlphaCode\": \"DEM\",\r\n        \"Units\":
+        \"100\",\r\n        \"Buy\": \"100\",\r\n        \"Middle\": \"100\",\r\n
+        \       \"Sell\": \"100\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n
+        \       \"Country\": \"Greece\",\r\n        \"NumCode\": \"300\",\r\n        \"AlphaCode\":
+        \"GRD\",\r\n        \"Units\": \"100\",\r\n        \"Buy\": \"0.60034215\",\r\n
+        \       \"Middle\": \"0.60184676\",\r\n        \"Sell\": \"0.60335138\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Ireland\",\r\n
+        \       \"NumCode\": \"372\",\r\n        \"AlphaCode\": \"IEP\",\r\n        \"Units\":
+        \"1\",\r\n        \"Buy\": \"2.50879967\",\r\n        \"Middle\": \"2.51508739\",\r\n
+        \       \"Sell\": \"2.52137511\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Italia\",\r\n        \"NumCode\": \"380\",\r\n
+        \       \"AlphaCode\": \"ITL\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"0.10142767\",\r\n        \"Middle\": \"0.10168187\",\r\n        \"Sell\":
+        \"0.10193608\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Japan\",\r\n        \"NumCode\": \"392\",\r\n        \"AlphaCode\": \"JPY\",\r\n
+        \       \"Units\": \"100\",\r\n        \"Buy\": \"1.28566423\",\r\n        \"Middle\":
+        \"1.28888645\",\r\n        \"Sell\": \"1.29210866\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Netherlands\",\r\n        \"NumCode\":
+        \"528\",\r\n        \"AlphaCode\": \"NLG\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"88.49427009\",\r\n        \"Middle\": \"88.71606024\",\r\n
+        \       \"Sell\": \"88.93785039\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Norway\",\r\n        \"NumCode\": \"578\",\r\n
+        \       \"AlphaCode\": \"NOK\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"23.53121908\",\r\n        \"Middle\": \"23.59019457\",\r\n        \"Sell\":
+        \"23.64917006\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Portugal\",\r\n        \"NumCode\": \"620\",\r\n        \"AlphaCode\": \"PTE\",\r\n
+        \       \"Units\": \"100\",\r\n        \"Buy\": \"0.97589865\",\r\n        \"Middle\":
+        \"0.97834451\",\r\n        \"Sell\": \"0.98079037\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Slovenia\",\r\n        \"NumCode\":
+        \"705\",\r\n        \"AlphaCode\": \"SIT\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"1.0581373\",\r\n        \"Middle\": \"1.06078927\",\r\n
+        \       \"Sell\": \"1.06344124\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Sweden\",\r\n        \"NumCode\": \"752\",\r\n
+        \       \"AlphaCode\": \"SEK\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"22.46759921\",\r\n        \"Middle\": \"22.52390898\",\r\n        \"Sell\":
+        \"22.58021875\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Switzerland\",\r\n        \"NumCode\": \"756\",\r\n        \"AlphaCode\":
+        \"CHF\",\r\n        \"Units\": \"100\",\r\n        \"Buy\": \"118.07825382\",\r\n
+        \       \"Middle\": \"118.37418929\",\r\n        \"Sell\": \"118.67012477\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"G.Britain\",\r\n
+        \       \"NumCode\": \"826\",\r\n        \"AlphaCode\": \"GBP\",\r\n        \"Units\":
+        \"1\",\r\n        \"Buy\": \"2.96834925\",\r\n        \"Middle\": \"2.97578872\",\r\n
+        \       \"Sell\": \"2.98322819\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"USA\",\r\n        \"NumCode\": \"840\",\r\n
+        \       \"AlphaCode\": \"USD\",\r\n        \"Units\": \"1\",\r\n        \"Buy\":
+        \"1.81873516\",\r\n        \"Middle\": \"1.82329339\",\r\n        \"Sell\":
+        \"1.82785163\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Europ.Comunity\",\r\n        \"NumCode\": \"955\",\r\n        \"AlphaCode\":
+        \"XBA\",\r\n        \"Units\": \"1\",\r\n        \"Buy\": \"1.97246661\",\r\n
+        \       \"Middle\": \"1.97741014\",\r\n        \"Sell\": \"1.98235366\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Spain\",\r\n
+        \       \"NumCode\": \"995\",\r\n        \"AlphaCode\": \"ESB\",\r\n        \"Units\":
+        \"100\",\r\n        \"Buy\": \"1.1760127\",\r\n        \"Middle\": \"1.1789601\",\r\n
+        \       \"Sell\": \"1.1819075\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Kuwait\",\r\n        \"NumCode\": \"414\",\r\n
+        \       \"AlphaCode\": \"KWD\",\r\n        \"Units\": \"\",\r\n        \"Buy\":
+        \"\",\r\n        \"Middle\": \"\",\r\n        \"Sell\": \"\",\r\n        \"Star\":
+        null\r\n      }\r\n    ],\r\n    \"Date\": \"1998-07-14T00:00:00\",\r\n    \"Comments\":
+        [\r\n      \"1.  SDR (SPECIAL  DRAWING  RIGHTS) =USD      1.32406\",\r\n      \"2.
+        \ Hrvatska    KUNA  100       27.4816\",\r\n      \"Kursevi za KUNE primjenju
+        se za obra~un carina #  0\"\r\n    ],\r\n    \"Number\": 57\r\n  },\r\n  {\r\n
+        \   \"CurrencyExchangeItems\": [\r\n      {\r\n        \"Country\": \"Kuwait\",\r\n
+        \       \"NumCode\": \"414\",\r\n        \"AlphaCode\": \"KWD\",\r\n        \"Units\":
+        \"\",\r\n        \"Buy\": \"\",\r\n        \"Middle\": \"\",\r\n        \"Sell\":
+        \"\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Australia\",\r\n        \"NumCode\": \"036\",\r\n        \"AlphaCode\":
+        \"AUD\",\r\n        \"Units\": \"1\",\r\n        \"Buy\": \"1.10751838\",\r\n
+        \       \"Middle\": \"1.11029412\",\r\n        \"Sell\": \"1.11306985\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Austria\",\r\n
+        \       \"NumCode\": \"040\",\r\n        \"AlphaCode\": \"ATS\",\r\n        \"Units\":
+        \"100\",\r\n        \"Buy\": \"14.18014706\",\r\n        \"Middle\": \"14.21568627\",\r\n
+        \       \"Sell\": \"14.25122549\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Belgia\",\r\n        \"NumCode\": \"056\",\r\n
+        \       \"AlphaCode\": \"BEF\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"4.83751239\",\r\n        \"Middle\": \"4.84963648\",\r\n        \"Sell\":
+        \"4.86176058\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Canada\",\r\n        \"NumCode\": \"124\",\r\n        \"AlphaCode\": \"CAD\",\r\n
+        \       \"Units\": \"1\",\r\n        \"Buy\": \"1.2119603\",\r\n        \"Middle\":
+        \"1.2149978\",\r\n        \"Sell\": \"1.21803529\",\r\n        \"Star\": null\r\n
+        \     },\r\n      {\r\n        \"Country\": \"Dennmark\",\r\n        \"NumCode\":
+        \"208\",\r\n        \"AlphaCode\": \"DKK\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"26.17915565\",\r\n        \"Middle\": \"26.24476757\",\r\n
+        \       \"Sell\": \"26.31037949\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Finland\",\r\n        \"NumCode\": \"246\",\r\n
+        \       \"AlphaCode\": \"FIM\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"32.81596993\",\r\n        \"Middle\": \"32.89821547\",\r\n        \"Sell\":
+        \"32.980461\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Француска\",\r\n        \"NumCode\": \"250\",\r\n        \"AlphaCode\":
+        \"FRF\",\r\n        \"Units\": \"100\",\r\n        \"Buy\": \"29.78050644\",\r\n
+        \       \"Middle\": \"29.8551443\",\r\n        \"Sell\": \"29.92978217\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Germany\",\r\n
+        \       \"NumCode\": \"280\",\r\n        \"AlphaCode\": \"DEM\",\r\n        \"Units\":
+        \"100\",\r\n        \"Buy\": \"100\",\r\n        \"Middle\": \"100\",\r\n
+        \       \"Sell\": \"100\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n
+        \       \"Country\": \"Greece\",\r\n        \"NumCode\": \"300\",\r\n        \"AlphaCode\":
+        \"GRD\",\r\n        \"Units\": \"100\",\r\n        \"Buy\": \"0.60159865\",\r\n
+        \       \"Middle\": \"0.60310641\",\r\n        \"Sell\": \"0.60461418\",\r\n
+        \       \"Star\": null\r\n      },\r\n      {\r\n        \"Country\": \"Ireland\",\r\n
+        \       \"NumCode\": \"372\",\r\n        \"AlphaCode\": \"IEP\",\r\n        \"Units\":
+        \"1\",\r\n        \"Buy\": \"2.50822683\",\r\n        \"Middle\": \"2.51451311\",\r\n
+        \       \"Sell\": \"2.52079939\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Italia\",\r\n        \"NumCode\": \"380\",\r\n
+        \       \"AlphaCode\": \"ITL\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"0.10163995\",\r\n        \"Middle\": \"0.10189469\",\r\n        \"Sell\":
+        \"0.10214943\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Japan\",\r\n        \"NumCode\": \"392\",\r\n        \"AlphaCode\": \"JPY\",\r\n
+        \       \"Units\": \"100\",\r\n        \"Buy\": \"1.27187293\",\r\n        \"Middle\":
+        \"1.27506059\",\r\n        \"Sell\": \"1.27824824\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Netherlands\",\r\n        \"NumCode\":
+        \"528\",\r\n        \"AlphaCode\": \"NLG\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"88.48170026\",\r\n        \"Middle\": \"88.70345891\",\r\n
+        \       \"Sell\": \"88.92521756\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Norway\",\r\n        \"NumCode\": \"578\",\r\n
+        \       \"AlphaCode\": \"NOK\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"23.44037095\",\r\n        \"Middle\": \"23.49911875\",\r\n        \"Sell\":
+        \"23.55786655\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Portugal\",\r\n        \"NumCode\": \"620\",\r\n        \"AlphaCode\": \"PTE\",\r\n
+        \       \"Units\": \"100\",\r\n        \"Buy\": \"0.97519415\",\r\n        \"Middle\":
+        \"0.97763825\",\r\n        \"Sell\": \"0.98008234\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Slovenia\",\r\n        \"NumCode\":
+        \"705\",\r\n        \"AlphaCode\": \"SIT\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"1.05760492\",\r\n        \"Middle\": \"1.06025556\",\r\n
+        \       \"Sell\": \"1.0629062\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"Spain\",\r\n        \"NumCode\": \"724\",\r\n
+        \       \"AlphaCode\": \"ESP\",\r\n        \"Units\": \"100\",\r\n        \"Buy\":
+        \"1.17572703\",\r\n        \"Middle\": \"1.17867372\",\r\n        \"Sell\":
+        \"1.1816204\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"Sweden\",\r\n        \"NumCode\": \"752\",\r\n        \"AlphaCode\": \"SEK\",\r\n
+        \       \"Units\": \"100\",\r\n        \"Buy\": \"22.33606659\",\r\n        \"Middle\":
+        \"22.39204671\",\r\n        \"Sell\": \"22.44802682\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Switzerland\",\r\n        \"NumCode\":
+        \"756\",\r\n        \"AlphaCode\": \"CHF\",\r\n        \"Units\": \"100\",\r\n
+        \       \"Buy\": \"118.27594184\",\r\n        \"Middle\": \"118.57237277\",\r\n
+        \       \"Sell\": \"118.8688037\",\r\n        \"Star\": null\r\n      },\r\n
+        \     {\r\n        \"Country\": \"G.Britain\",\r\n        \"NumCode\": \"826\",\r\n
+        \       \"AlphaCode\": \"GBP\",\r\n        \"Units\": \"1\",\r\n        \"Buy\":
+        \"2.93684526\",\r\n        \"Middle\": \"2.94420577\",\r\n        \"Sell\":
+        \"2.95156629\",\r\n        \"Star\": null\r\n      },\r\n      {\r\n        \"Country\":
+        \"USA\",\r\n        \"NumCode\": \"840\",\r\n        \"AlphaCode\": \"USD\",\r\n
+        \       \"Units\": \"1\",\r\n        \"Buy\": \"1.79449459\",\r\n        \"Middle\":
+        \"1.79899207\",\r\n        \"Sell\": \"1.80348955\",\r\n        \"Star\":
+        null\r\n      },\r\n      {\r\n        \"Country\": \"Europ.Comunity\",\r\n
+        \       \"NumCode\": \"954\",\r\n        \"AlphaCode\": \"XEU\",\r\n        \"Units\":
+        \"1\",\r\n        \"Buy\": \"1.9699746\",\r\n        \"Middle\": \"1.97491187\",\r\n
+        \       \"Sell\": \"1.97984915\",\r\n        \"Star\": null\r\n      }\r\n
+        \   ],\r\n    \"Date\": \"1998-07-16T00:00:00\",\r\n    \"Comments\": [\r\n
+        \     \"1.  SDR (SPECIAL  DRAWING  RIGHTS) = USD      1.32525\",\r\n      \"2.
+        \ Hrvatska    KUNA         100       27.5391\",\r\n      \"3.  Jugoslovenski
+        DINAR  100       16.6667\",\r\n      \"Kursevi za KUNE I YU DINAR primjenju
+        se za obra~un carina #  0\"\r\n    ],\r\n    \"Number\": 58\r\n  }\r\n]"
+  recorded_at: Sat, 26 Sep 2026 20:11:31 GMT
 recorded_with: VCR 6.4.0

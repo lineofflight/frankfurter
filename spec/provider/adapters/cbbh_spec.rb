@@ -40,10 +40,29 @@ class Provider
         _(last_response).must_be(:ok?)
         _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(0.1421367521)
         _(rows.map { |r| r[:date] }.uniq).must_equal([Date.new(1998, 1, 6), Date.new(1998, 1, 8)])
-        _(rows.map { |r| r[:base] }).must_include("ESB")
-        _(rows.map { |r| r[:base] }).must_include("XBA")
+        _(rows.map { |r| r[:base] }).must_include("ESP")
+        _(rows.map { |r| r[:base] }).must_include("XEU")
         _(Provider["CBBH"].unknown_currencies).must_be_empty
-        _(Rate.where(provider: "CBBH", base: "ESB").blendable.count).must_equal(0)
+        _(Rate.where(provider: "CBBH", base: ["ESB", "XBA"]).count).must_equal(0)
+        get "/rates", providers: "CBBH", date: "1998-01-06", base: "ESP", quotes: "BAM"
+
+        _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(0.0118233618)
+        get "/rates", providers: "CBBH", date: "1998-01-06", base: "XEU", quotes: "BAM"
+
+        _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(1.97509972)
+      end
+
+      it "keeps peseta and ECU units continuous across the source label correction" do
+        rows = adapter.fetch(after: Date.new(1998, 7, 14), upto: Date.new(1998, 7, 16))
+        codes = ["ESP", "XEU", "ESB", "XBA"]
+        corrected = rows.select { |row| codes.include?(row[:base]) }
+
+        _(corrected.map { |r| [r[:date].to_s, r[:base], r[:rate]] }).must_equal([
+          ["1998-07-14", "XEU", BigDecimal("1.97741014")],
+          ["1998-07-14", "ESP", BigDecimal("0.011789601")],
+          ["1998-07-16", "ESP", BigDecimal("0.0117867372")],
+          ["1998-07-16", "XEU", BigDecimal("1.97491187")],
+        ])
       end
 
       it "confirms an empty Sunday-Monday range using the last actual list date" do
