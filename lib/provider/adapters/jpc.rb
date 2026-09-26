@@ -18,6 +18,7 @@ class Provider
       CURRENT_INDEX_START = Date.new(2008, 1, 1)
       PDF_HREF = /href=["']([^"']*kouji-rate(\d{8})-[^"']+\.pdf)["']/i
       NUMBER = /\A[\d,]+\.\d+\z/
+      CURRENCY_ALIASES = { "PLZ" => "PLN", "BGL" => "BGN", "SUR" => "RUB" }.freeze
 
       class << self
         def backfill_range = 91
@@ -80,9 +81,10 @@ class Provider
           rate = BigDecimal(value.text.delete(",")) / unit
           next unless rate.positive?
 
-          # The archive retains SUR for Russia's post-1998 ruble and YUN for the post-1994 dinar. ISO amendment 119
-          # replaces YUM with CSD effective February 2003; the source eventually adopts RSD in its own right.
-          base = "RUB" if base == "SUR"
+          # The archive retains PLZ/BGL/SUR labels for the redenominated PLN (1995), BGN (1999), and RUB (1998). Values
+          # already price the successor units. YUN prices the post-1994 dinar; ISO amendment 119 replaces YUM with CSD
+          # effective February 2003. The source eventually adopts RSD in its own right.
+          base = CURRENCY_ALIASES.fetch(base, base)
           base = date < Date.new(2003, 2, 1) ? "YUM" : "CSD" if base == "YUN"
           { date:, base:, quote: "JPY", rate: }
         end

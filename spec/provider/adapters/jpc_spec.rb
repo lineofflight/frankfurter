@@ -52,6 +52,14 @@ class Provider < Sequel::Model(:providers)
         _(rows.find { |r| r[:base] == "YUM" }&.fetch(:rate)).must_equal(1.97)
       end
 
+      it "identifies the redenominated zloty and lev behind stale archive labels" do
+        rows = adapter.fetch(after: Date.new(2002, 1, 6), upto: Date.new(2002, 1, 6))
+
+        _(rows.find { |r| r[:base] == "PLN" }&.fetch(:rate)).must_equal(BigDecimal("33.01"))
+        _(rows.find { |r| r[:base] == "BGN" }&.fetch(:rate)).must_equal(BigDecimal("60.17"))
+        _(rows.map { |r| r[:base] } & ["PLZ", "BGL"]).must_be_empty
+      end
+
       it "crosses the archive index boundary without dropping a week" do
         rows = adapter.fetch(after: Date.new(2007, 12, 30), upto: Date.new(2008, 1, 6))
 
