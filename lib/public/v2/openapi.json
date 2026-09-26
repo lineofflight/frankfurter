@@ -18,6 +18,30 @@
     }
   ],
   "paths": {
+    "/coverage": {
+      "get": {
+        "operationId": "getCoverage",
+        "summary": "Get queryable history coverage",
+        "description": "Returns the first and last eligible observation dates at which /rates with the same base, quotes and providers returns at least one record. Defaults to the EUR-based daily blended feed. Supplying providers selects their history, including non-daily observations. Null bounds mean no queryable pair. Bounds are request dates, not necessarily returned record dates: a carried quote can predate the bridge required to convert its base. Interior gaps are possible. Bounds do not extend beyond stored observation dates merely because carry-forward can answer later requests. With several quotes, at least one must be available. Only base, quotes and providers are accepted. Use start_date from this endpoint for a headline describing default rate history; provider and currency publication dates are not pair coverage.",
+        "parameters": [
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/providers" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coverage of the selected rate query",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Coverage" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
     "/rates": {
       "get": {
         "operationId": "getRates",
@@ -284,7 +308,7 @@
       "get": {
         "operationId": "getCurrencies",
         "summary": "Get available currencies",
-        "description": "Returns available currencies with their names and date ranges. By default, only active currencies are included.",
+        "description": "Returns available currencies with their names and publication date ranges. Without providers, the catalogue covers eligible daily sources plus pegged currencies; scope=all also includes historical currencies. With providers, it covers recognized currencies published by those sources, including period-only history. These dates do not guarantee a queryable base/quote pair; use /coverage with matching query filters. By default, only active currencies are included.",
         "parameters": [
           {
             "name": "scope",
@@ -319,7 +343,7 @@
       "get": {
         "operationId": "getProviders",
         "summary": "Get available data providers",
-        "description": "Returns available exchange rate data providers with their base currency.",
+        "description": "Returns available exchange rate data providers with their publication coverage. A provider start_date can predate the daily blend or the availability of a requested base or quote. Use /coverage for queryable history.",
         "responses": {
           "200": {
             "description": "Available providers",
@@ -467,6 +491,17 @@
         },
         "required": ["date", "base", "quote", "rate"]
       },
+      "Coverage": {
+        "type": "object",
+        "properties": {
+          "base": { "type": "string", "description": "Requested base currency, EUR by default" },
+          "quotes": { "type": ["array", "null"], "items": { "type": "string" }, "description": "Requested quotes, or null for all" },
+          "providers": { "type": ["array", "null"], "items": { "type": "string" }, "description": "Selected providers, or null for the default daily blend" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "First eligible observation date with a nonempty matching rates query" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Last eligible observation date with a nonempty matching rates query" }
+        },
+        "required": ["base", "quotes", "providers", "start_date", "end_date"]
+      },
       "Currency": {
         "type": "object",
         "properties": {
@@ -474,8 +509,8 @@
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
-          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
-          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" }
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date; use /coverage for queryable pairs" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date; use /coverage for queryable pairs" }
         },
         "required": ["iso_code", "name"]
       },
@@ -514,8 +549,8 @@
           "pivot_currency": { "type": ["string", "null"], "description": "Base currency for published rates" },
           "data_url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
           "terms_url": { "type": ["string", "null"], "format": "uri", "description": "Link to terms of use" },
-          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest available date" },
-          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest available date" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date; use /coverage for queryable pairs" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date; use /coverage for queryable pairs" },
           "publish_cadence": {
             "type": ["string", "null"],
             "enum": ["daily", "weekly", "monthly", "quarterly", null],
