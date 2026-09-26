@@ -106,6 +106,20 @@ class Provider
         _(adapter.parse('<div class="view-display-id-page"></div>')).must_be_empty
       end
 
+      it "raises when recorded historical content loses its table wrapper" do
+        params = {
+          "field_transaction_date_value[value][date]" => "04-01-2005",
+          "field_transaction_date_value_1[value][date]" => "04-01-2005",
+        }
+        html = HTTP.get(BOMU::URL, params:).to_s
+        doc = Nokogiri::HTML(html.delete("\0"))
+        wrapper = doc.at_css(".view-display-id-page > .view-content > .table-responsive")
+        wrapper.replace(wrapper.children)
+
+        error = _(-> { adapter.parse(doc.to_html) }).must_raise(RuntimeError)
+        _(error.message).must_match(/BOMU/)
+      end
+
       it "raises if the expected view is missing" do
         _(-> { adapter.parse("<html>Request rejected</html>") }).must_raise(RuntimeError)
       end

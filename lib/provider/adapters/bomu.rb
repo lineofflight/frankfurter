@@ -40,10 +40,15 @@ class Provider
         view = doc.at_css(".view-display-id-page")
         raise "BOMU: missing exchange-rate view" unless view
 
+        # Genuine empty date ranges omit the primary content block. A present but unrecognized table is a parse failure.
+        content = view.at_css("> .view-content")
+        return [] unless content
+
         # An attachment repeats the filtered rates and a sidebar shows today's quotes. Use only the primary table.
-        view.css("> .view-content > .table-responsive > table > tbody > tr.tblConso").filter_map do |row|
-          parse_row(row)
-        end
+        rows = content.css("> .table-responsive > table > tbody > tr.tblConso")
+        raise "BOMU: unrecognized exchange-rate table" if rows.empty?
+
+        rows.filter_map { |row| parse_row(row) }
       end
 
       private
