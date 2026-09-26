@@ -29,7 +29,7 @@ describe Provider do
         _(data).wont_include("publish_time")
         _(data).wont_include("publish_days")
         _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["publish_cadence"])
-        _([nil, "daily", "monthly", "quarterly"]).must_include(data["frequency"])
+        _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["frequency"])
         _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
         next if data["publish_schedule"].nil?
 
