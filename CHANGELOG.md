@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - European Commission (INFOREURO) as a data provider. (#713)
-
+- Bank for International Settlements (BIS) as a data provider. (#714)
 - COMESA Dollar (CMD) peg. (#706)
 - RBA trade-weighted index on provider routes. (#695)
 - COMESA Dollar (CMD). (#699)
