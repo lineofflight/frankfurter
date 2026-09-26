@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "digest"
+require "rate_coverage"
 
 require "roda"
 require "blended_rate"
@@ -22,6 +23,7 @@ module Versions
   class V2 < Roda
     class RateQuery
       include Roundable
+      include RateCoverage
 
       class ValidationError < StandardError; end
 
@@ -74,12 +76,8 @@ module Versions
           else
             each_daily_range(&block)
           end
-        elsif blended_table?
-          each_blended_snapshot(&block)
         else
-          window = raw_dataset.where(date: (date_scope - lookback)..date_scope)
-          rows = CarryForward.apply(window.naked.all, date: date_scope, lookback:)
-          emit_blended(rows, &block)
+          each_snapshot(date_scope, stored: blended_table?, &block)
         end
       end
 
@@ -201,16 +199,20 @@ module Versions
       # the carry-forward lookback is the canonical anchor-date value, so a dated row means the same thing here as in a
       # range instead of re-decaying against the asking day (#573). Derive, the quotes filter, the identity row, and
       # rounding still happen in emit.
-      def each_blended_snapshot(&)
-        lookback_start = date_scope - CarryForward::LOOKBACK_DAYS
-        rows = BlendedRate.dataset.where(date: lookback_start..date_scope).naked.all
-        rows.each { |r| r[:base] = PIVOT }
-        snapshot = CarryForward.apply(rows, date: date_scope)
-        blended = base == PIVOT ? snapshot : derive(snapshot, target: base)
-        emit_records(blended, snapshot, &)
+      def each_snapshot(date, stored:, &)
+        dataset = stored ? BlendedRate.dataset : raw_dataset
+        rows = dataset.where(date: (date - lookback)..date).naked.all
+        rows.each { |r| r[:base] = PIVOT } if stored
+        snapshot = CarryForward.apply(rows, date:, lookback:)
+        if stored
+          blended = base == PIVOT ? snapshot : derive(snapshot, target: base)
+          emit_records(blended, snapshot, &)
+        else
+          emit_blended(snapshot, &)
+        end
 
         # See each_blended_range: a rebuild that started mid-request wiped the table under our read.
-        raise "materialized blend rebuilt mid-request" unless BlendedRate.ready?
+        raise "materialized blend rebuilt mid-request" if stored && !BlendedRate.ready?
       end
 
       # When the range start is silent, anchor CF on it as well so the response surfaces the most recent prior data —
@@ -481,13 +483,17 @@ module Versions
         records.each(&)
       end
 
+      def provider_peg_base?
+        providers && providers.uniq.size > 1 && base_peg
+      end
+
       def pivot_path_blend(rows)
         # One provider is that provider's own view, pegged base or not: its cross is the answer the caller asked for.
         return single_provider_blend(rows) if providers && providers.uniq.size == 1
         # Restricting the source set to several providers bypasses the peg layer entirely, so a pegged request base has
         # no anchor to rebase through; mirror the fast path's refusal instead of answering from whatever the named
         # providers happen to publish.
-        return [] if providers && base_peg
+        return [] if provider_peg_base?
 
         blended = Blender.new(rows, base: PIVOT).blend
         blended = PegAnchor.apply(blended, base: PIVOT) unless providers
