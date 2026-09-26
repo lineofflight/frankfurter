@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Japan Customs (JPC) as a data provider. (#715)
 - Banky Foiben'i Madagasikara (BFM) as a data provider. (#400)
 - Bank of Mauritius (BOMU) as a data provider. (#370)
+- Central Bank of Bosnia and Herzegovina (CBBH) as a data provider. (#376)
 - European Commission (INFOREURO) as a data provider. (#713)
 - Bank for International Settlements (BIS) as a data provider. (#714)
 - COMESA Dollar (CMD) peg. (#706)

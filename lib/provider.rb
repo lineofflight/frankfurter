@@ -29,8 +29,9 @@ class Provider < Sequel::Model(:providers)
   # monthly or quarterly value stands for its whole period plus the lag before the next one lands.
   LOOKBACK_DAYS = { "daily" => 14, "weekly" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
 
-  # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts.
-  NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
+  # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts. CBBH
+  # retains ESB, the withdrawn convertible-peseta account funds code, in its historical source lists.
+  NON_CURRENCY_CODES = { "CBBH" => ["ESB"], "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
 
   class << self
     # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
