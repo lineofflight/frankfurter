@@ -62,6 +62,11 @@ end
 
 Changes to blend rules, peg definitions, or provider eligibility require `rake blend:rebuild`.
 
+## GitHub identity
+
+- Use the authenticated `gh` account for GitHub work. The maintainer approved `hakanensari` for the September 2026 provider rollout; do not block that work on `lineoffligbot` credentials.
+- Verify the account with `gh api user --jq .login`. Never print tokens or copy credentials into commands or logs.
+
 ## Conventions
 
 - **Data integrity:** Relay what providers publish. Don't editorialize.
