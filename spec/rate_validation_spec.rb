@@ -62,8 +62,8 @@ describe RateValidation do
     end
 
     it "maps EUR quotes dated before the euro existed to XEU" do
-      # The euro came into existence on 1999-01-04 (first ECB reference date). The Riksbank backfills its EUR series
-      # with the ECU back to 1993; relaying those as EUR fabricates euro quotes for dates the euro did not exist.
+      # The euro came into existence on 1999-01-01. The Riksbank backfills its EUR series with the ECU back to 1993;
+      # relaying those as EUR fabricates euro quotes for dates the euro did not exist.
       records = [
         { date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", rate: 0.10448 },
         { date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", rate: 0.10500 },
@@ -76,11 +76,19 @@ describe RateValidation do
     end
 
     it "maps a premature base to its predecessor" do
-      records = [{ date: "1999-01-01", base: "EUR", quote: "USD", rate: 1.1 }]
+      records = [{ date: "1998-12-31", base: "EUR", quote: "USD", rate: 1.1 }]
 
       RateValidation.reject!(records)
 
-      _(records).must_equal([{ date: "1999-01-01", base: "XEU", quote: "USD", rate: 1.1 }])
+      _(records).must_equal([{ date: "1998-12-31", base: "XEU", quote: "USD", rate: 1.1 }])
+    end
+
+    it "keeps accounting rates effective on the euro's first day" do
+      records = [{ date: "1999-01-01", base: "EUR", quote: "USD", rate: 1.16675 }]
+
+      RateValidation.reject!(records)
+
+      _(records).must_equal([{ date: "1999-01-01", base: "EUR", quote: "USD", rate: 1.16675 }])
     end
 
     it "drops premature currencies without a known predecessor" do
