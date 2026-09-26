@@ -616,6 +616,36 @@ describe Provider do
       _(BlendedRate.where(date: import_date).count).must_be(:>, 0)
     end
 
+    { "weekly" => "JPC", "monthly" => "BIS" }.each do |frequency, key|
+      describe "with #{frequency} observations" do
+        let(:provider) { Provider[key].dup }
+        let(:import_date) { Date.new(2025, 1, 31) }
+
+        it "imports source history and coverage without refreshing daily blends" do
+          refreshed = []
+          purged = false
+          BlendedRate.stub(:refresh, ->(window) { refreshed << window }) do
+            Cache.stub(:purge_debounced, -> { purged = true }) do
+              provider.stub(:adapter, adapter) { provider.backfill }
+            end
+          end
+
+          _(refreshed).must_be_empty
+          _(Rate.where(provider: key, date: import_date).first.rate).must_equal(1.1)
+          _(WeeklyRate.where(provider: key, bucket_date: "2025-01-29").first.rate).must_equal(1.1)
+          _(MonthlyRate.where(provider: key, bucket_date: "2025-01-01").first.rate).must_equal(1.1)
+          coverages = CurrencyCoverage.where(provider_key: key).order(:iso_code)
+
+          _(coverages.select_map(:iso_code).join(",")).must_equal("EUR,USD")
+          coverages.each do |coverage|
+            _(coverage.start_date).must_equal(import_date)
+            _(coverage.end_date).must_equal(import_date)
+          end
+          _(purged).must_equal(true)
+        end
+      end
+    end
+
     it "does not request a cache purge when no new rates are inserted" do
       provider.stub(:adapter, adapter) do
         provider.backfill
