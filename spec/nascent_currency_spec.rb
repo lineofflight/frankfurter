@@ -35,7 +35,7 @@ describe NascentCurrency do
     entry = NascentCurrency.find("EUR")
 
     _(entry).wont_be_nil
-    _(entry.inception_date).must_equal(Date.new(1999, 1, 4))
+    _(entry.inception_date).must_equal(Date.new(1999, 1, 1))
     _(entry.predecessor).must_equal("XEU")
   end
 
@@ -49,7 +49,7 @@ describe NascentCurrency do
     end
 
     it "returns false for a date on the inception date" do
-      _(NascentCurrency.premature?("EUR", Date.new(1999, 1, 4))).must_equal(false)
+      _(NascentCurrency.premature?("EUR", Date.new(1999, 1, 1))).must_equal(false)
     end
 
     it "returns false for a date after the inception date" do

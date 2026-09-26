@@ -26,5 +26,20 @@
   { "iso_code": "XAF", "name": "Central African CFA Franc" },
   { "iso_code": "XOF", "name": "West African CFA Franc" },
   { "iso_code": "XPF", "name": "CFP Franc" },
-  { "iso_code": "CMD", "name": "COMESA Dollar" }
+  { "iso_code": "CMD", "name": "COMESA Dollar" },
+  { "iso_code": "ADP", "name": "Andorran Peseta", "symbol": "ADP", "subunit_to_unit": 1, "iso_numeric": "020" },
+  { "iso_code": "AFA", "name": "Afghan Afghani (old)", "symbol": "AFA", "subunit_to_unit": 100, "iso_numeric": "004" },
+  { "iso_code": "AOR", "name": "Angolan Kwanza Reajustado", "symbol": "AOR", "subunit_to_unit": 100, "iso_numeric": "982" },
+  { "iso_code": "BGL", "name": "Bulgarian Lev (old)", "symbol": "BGL", "subunit_to_unit": 100, "iso_numeric": "100" },
+  { "iso_code": "BYB", "name": "Belarusian Ruble (1992–2000)", "symbol": "BYB", "subunit_to_unit": 100, "iso_numeric": "112" },
+  { "iso_code": "CSD", "name": "Serbian Dinar (old)", "symbol": "CSD", "subunit_to_unit": 100, "iso_numeric": "891" },
+  { "iso_code": "GWP", "name": "Guinea-Bissau Peso", "symbol": "GWP", "subunit_to_unit": 100, "iso_numeric": "624" },
+  { "iso_code": "MGF", "name": "Malagasy Franc", "symbol": "MGF", "subunit_to_unit": 1, "iso_numeric": "450" },
+  { "iso_code": "MZM", "name": "Mozambican Metical (old)", "symbol": "MZM", "subunit_to_unit": 100, "iso_numeric": "508" },
+  { "iso_code": "PLZ", "name": "Polish Zloty (old)", "symbol": "PLZ", "subunit_to_unit": 100, "iso_numeric": "616" },
+  { "iso_code": "SDD", "name": "Sudanese Dinar", "symbol": "SDD", "subunit_to_unit": 100, "iso_numeric": "736" },
+  { "iso_code": "SRG", "name": "Surinamese Guilder", "symbol": "SRG", "subunit_to_unit": 100, "iso_numeric": "740" },
+  { "iso_code": "VEB", "name": "Venezuelan Bolivar (old)", "symbol": "VEB", "subunit_to_unit": 100, "iso_numeric": "862" },
+  { "iso_code": "YUM", "name": "Yugoslav Dinar", "symbol": "YUM", "subunit_to_unit": 100, "iso_numeric": "891" },
+  { "iso_code": "ZRN", "name": "Zairean New Zaire", "symbol": "ZRN", "subunit_to_unit": 100, "iso_numeric": "180" }
 ]
