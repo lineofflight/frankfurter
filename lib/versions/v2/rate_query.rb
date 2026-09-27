@@ -99,6 +99,17 @@ module Versions
         expand&.include?("providers") || false
       end
 
+      # Names CSV downloads after the query so repeat exports don't pile up as rates (1).csv. Stripped to a safe set
+      # because providers= is not checked against known keys and lands in a response header.
+      def csv_filename
+        parts = []
+        parts << providers.first if providers&.uniq&.size == 1
+        parts << (quotes&.uniq&.size == 1 ? "#{base}-#{quotes.first}" : "#{base}-rates")
+        parts << (range? ? "#{date_scope.begin}_#{date_scope.end}" : date&.to_s || "latest")
+        parts << "#{group}ly" if rollup?
+        "#{parts.join("_")}.csv".delete("^A-Za-z0-9._-")
+      end
+
       # Returns the heavy slot this query holds, if any. Idempotent on purpose: each_daily_range's ensure returns it
       # after a drained or failed enumeration, and the route's stream callback returns it when a client disconnects
       # mid-stream and strands the enumerator fiber, whose ensure never runs.

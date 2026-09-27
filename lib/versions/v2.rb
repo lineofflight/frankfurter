@@ -132,6 +132,8 @@ module Versions
       request.etag(query.cache_key)
 
       request.csv do
+        # Browsers ignore <a download> on cross-origin links, so the header is what makes a linked CSV download.
+        response["Content-Disposition"] = %(attachment; filename="#{query.csv_filename}")
         if query.range?
           first, rest = eager_split(query)
           response["Content-Type"] = "text/csv"

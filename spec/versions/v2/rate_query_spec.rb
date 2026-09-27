@@ -1059,5 +1059,55 @@ module Versions
         end
       end
     end
+
+    describe "csv_filename" do
+      it "names latest rates after the base" do
+        _(V2::RateQuery.new({}).csv_filename).must_equal("EUR-rates_latest.csv")
+      end
+
+      it "names a single pair over a range" do
+        query = V2::RateQuery.new(base: "usd", quotes: "eur", from: "2024-01-01", to: "2024-12-31")
+
+        _(query.csv_filename).must_equal("USD-EUR_2024-01-01_2024-12-31.csv")
+      end
+
+      it "names several quotes after the base" do
+        query = V2::RateQuery.new(quotes: "USD,GBP", date: "2024-05-01")
+
+        _(query.csv_filename).must_equal("EUR-rates_2024-05-01.csv")
+      end
+
+      it "prefixes a single provider" do
+        query = V2::RateQuery.new(providers: "ecb", date: "2024-05-01")
+
+        _(query.csv_filename).must_equal("ECB_EUR-rates_2024-05-01.csv")
+      end
+
+      it "leaves several providers unprefixed" do
+        query = V2::RateQuery.new(providers: "ECB,BOC", date: "2024-05-01")
+
+        _(query.csv_filename).must_equal("EUR-rates_2024-05-01.csv")
+      end
+
+      it "ends an open range today" do
+        query = V2::RateQuery.new(from: "2024-01-01")
+
+        _(query.csv_filename).must_equal("EUR-rates_2024-01-01_#{Date.today}.csv")
+      end
+
+      it "suffixes rollups" do
+        weekly = V2::RateQuery.new(from: "2024-01-01", to: "2024-12-31", group: "week")
+        monthly = V2::RateQuery.new(from: "2024-01-01", to: "2024-12-31", group: "month")
+
+        _(weekly.csv_filename).must_equal("EUR-rates_2024-01-01_2024-12-31_weekly.csv")
+        _(monthly.csv_filename).must_equal("EUR-rates_2024-01-01_2024-12-31_monthly.csv")
+      end
+
+      it "strips header-unsafe characters from provider keys" do
+        query = V2::RateQuery.new(providers: %(x"; y), date: "2024-05-01")
+
+        _(query.csv_filename).must_equal("XY_EUR-rates_2024-05-01.csv")
+      end
+    end
   end
 end

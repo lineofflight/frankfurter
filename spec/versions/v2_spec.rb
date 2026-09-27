@@ -566,6 +566,25 @@ describe Versions::V2 do
     _(last_response.status).must_equal(422)
   end
 
+  it "serves CSV as an attachment named after the query" do
+    get "/rates.csv?quotes=USD&date=#{historical_date}"
+
+    _(last_response.headers["Content-Disposition"]).must_equal(%(attachment; filename="EUR-USD_#{historical_date}.csv"))
+  end
+
+  it "names streamed CSV ranges" do
+    get "/rates.csv?from=#{range_start}&to=#{range_end}"
+
+    _(last_response.headers["Content-Disposition"])
+      .must_equal(%(attachment; filename="EUR-rates_#{range_start}_#{range_end}.csv"))
+  end
+
+  it "does not attach JSON" do
+    get "/rates"
+
+    _(last_response.headers["Content-Disposition"]).must_be_nil
+  end
+
   it "returns 406 for CSV on unsupported endpoints" do
     get "/currencies.csv"
 
@@ -1059,7 +1078,7 @@ describe Versions::V2 do
   describe "provider routes" do
     # /providers/<key>/<path> is an alias of /<path>?providers=<key>: same bytes, same headers.
     def assert_alias(path, query = "", env = {})
-      headers = ["Content-Type", "cache-control", "ETag", "Vary"]
+      headers = ["Content-Type", "Content-Disposition", "cache-control", "ETag", "Vary"]
       sep = query.empty? ? "" : "&"
       get("/#{path}?providers=ecb#{sep}#{query}", {}, env)
       canonical = last_response
