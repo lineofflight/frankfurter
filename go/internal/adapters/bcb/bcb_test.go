@@ -100,6 +100,28 @@ func TestParseSkipsMissingRate(t *testing.T) {
 	}
 }
 
+func TestParseSkipsZeroRateAndShortDates(t *testing.T) {
+	rates, err := parse([]byte(`{"value":[`+
+		`{"cotacaoVenda":0,"dataHoraCotacao":"2026-03-02 13:09:26.433"},`+
+		`{"cotacaoVenda":5.2,"dataHoraCotacao":null},`+
+		`{"cotacaoVenda":5.2},`+
+		`{"cotacaoVenda":5.2,"dataHoraCotacao":" 2026-03 "},`+
+		`{"cotacaoVenda":5.3,"dataHoraCotacao":" 2026-03-05 13:09:26.433"}]}`), "USD")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Rate != 5.3 || !rates[0].Date.Equal(adapter.Date(2026, 3, 5)) {
+		t.Errorf("rates = %+v, want only the 2026-03-05 rate of 5.3", rates)
+	}
+}
+
+func TestParseRejectsBadDate(t *testing.T) {
+	_, err := parse([]byte(`{"value":[{"cotacaoVenda":5.2,"dataHoraCotacao":"2026-13-45 13:09"}]}`), "USD")
+	if err == nil {
+		t.Error("want an error for an invalid date")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 7))
