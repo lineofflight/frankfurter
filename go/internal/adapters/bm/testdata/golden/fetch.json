@@ -1,0 +1,526 @@
+{
+  "adapter": "BM",
+  "cassette": "bm",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 2), upto: Date.new(2026, 9, 4))",
+  "rows": [
+    {
+      "ask": 12.51,
+      "base": "BRL",
+      "bid": 12.27,
+      "date": "2026-09-02",
+      "mid": 12.39,
+      "quote": "MZN",
+      "rate": 12.39
+    },
+    {
+      "ask": 5.07,
+      "base": "BWP",
+      "bid": 4.97,
+      "date": "2026-09-02",
+      "mid": 5.02,
+      "quote": "MZN",
+      "rate": 5.02
+    },
+    {
+      "ask": 46.38,
+      "base": "CAD",
+      "bid": 45.47,
+      "date": "2026-09-02",
+      "mid": 45.93,
+      "quote": "MZN",
+      "rate": 45.93
+    },
+    {
+      "ask": 79.24,
+      "base": "CHF",
+      "bid": 77.68,
+      "date": "2026-09-02",
+      "mid": 78.46,
+      "quote": "MZN",
+      "rate": 78.46
+    },
+    {
+      "ask": 9.6,
+      "base": "CNH",
+      "bid": 9.41,
+      "date": "2026-09-02",
+      "mid": 9.51,
+      "quote": "MZN",
+      "rate": 9.51
+    },
+    {
+      "ask": 9.6,
+      "base": "CNY",
+      "bid": 9.41,
+      "date": "2026-09-02",
+      "mid": 9.51,
+      "quote": "MZN",
+      "rate": 9.51
+    },
+    {
+      "ask": 10.0,
+      "base": "DKK",
+      "bid": 9.8,
+      "date": "2026-09-02",
+      "mid": 9.9,
+      "quote": "MZN",
+      "rate": 9.9
+    },
+    {
+      "ask": 74.74,
+      "base": "EUR",
+      "bid": 73.27,
+      "date": "2026-09-02",
+      "mid": 74.01,
+      "quote": "MZN",
+      "rate": 74.01
+    },
+    {
+      "ask": 86.97,
+      "base": "GBP",
+      "bid": 85.26,
+      "date": "2026-09-02",
+      "mid": 86.12,
+      "quote": "MZN",
+      "rate": 86.12
+    },
+    {
+      "ask": 0.40449,
+      "base": "JPY",
+      "bid": 0.39653,
+      "date": "2026-09-02",
+      "mid": 0.40051,
+      "quote": "MZN",
+      "rate": 0.40051
+    },
+    {
+      "ask": 1.37,
+      "base": "MUR",
+      "bid": 1.34,
+      "date": "2026-09-02",
+      "mid": 1.36,
+      "quote": "MZN",
+      "rate": 1.36
+    },
+    {
+      "ask": 0.03759,
+      "base": "MWK",
+      "bid": 0.03685,
+      "date": "2026-09-02",
+      "mid": 0.03722,
+      "quote": "MZN",
+      "rate": 0.037219999999999996
+    },
+    {
+      "ask": 6.91,
+      "base": "NOK",
+      "bid": 6.77,
+      "date": "2026-09-02",
+      "mid": 6.84,
+      "quote": "MZN",
+      "rate": 6.84
+    },
+    {
+      "ask": 6.69,
+      "base": "SEK",
+      "bid": 6.56,
+      "date": "2026-09-02",
+      "mid": 6.63,
+      "quote": "MZN",
+      "rate": 6.63
+    },
+    {
+      "ask": 4.01,
+      "base": "SZL",
+      "bid": 3.93,
+      "date": "2026-09-02",
+      "mid": 3.97,
+      "quote": "MZN",
+      "rate": 3.97
+    },
+    {
+      "ask": 0.02449,
+      "base": "TZS",
+      "bid": 0.02401,
+      "date": "2026-09-02",
+      "mid": 0.02425,
+      "quote": "MZN",
+      "rate": 0.02425
+    },
+    {
+      "ask": 64.54,
+      "base": "USD",
+      "bid": 63.27,
+      "date": "2026-09-02",
+      "mid": 63.91,
+      "quote": "MZN",
+      "rate": 63.91
+    },
+    {
+      "ask": 4.01,
+      "base": "ZAR",
+      "bid": 3.93,
+      "date": "2026-09-02",
+      "mid": 3.97,
+      "quote": "MZN",
+      "rate": 3.97
+    },
+    {
+      "ask": 3.4,
+      "base": "ZMW",
+      "bid": 3.33,
+      "date": "2026-09-02",
+      "mid": 3.36,
+      "quote": "MZN",
+      "rate": 3.36
+    },
+    {
+      "ask": 12.69,
+      "base": "BRL",
+      "bid": 12.44,
+      "date": "2026-09-03",
+      "mid": 12.57,
+      "quote": "MZN",
+      "rate": 12.57
+    },
+    {
+      "ask": 5.1,
+      "base": "BWP",
+      "bid": 5.0,
+      "date": "2026-09-03",
+      "mid": 5.05,
+      "quote": "MZN",
+      "rate": 5.05
+    },
+    {
+      "ask": 46.81,
+      "base": "CAD",
+      "bid": 45.89,
+      "date": "2026-09-03",
+      "mid": 46.35,
+      "quote": "MZN",
+      "rate": 46.35
+    },
+    {
+      "ask": 79.99,
+      "base": "CHF",
+      "bid": 78.41,
+      "date": "2026-09-03",
+      "mid": 79.2,
+      "quote": "MZN",
+      "rate": 79.2
+    },
+    {
+      "ask": 9.61,
+      "base": "CNH",
+      "bid": 9.42,
+      "date": "2026-09-03",
+      "mid": 9.52,
+      "quote": "MZN",
+      "rate": 9.52
+    },
+    {
+      "ask": 9.61,
+      "base": "CNY",
+      "bid": 9.42,
+      "date": "2026-09-03",
+      "mid": 9.52,
+      "quote": "MZN",
+      "rate": 9.52
+    },
+    {
+      "ask": 10.04,
+      "base": "DKK",
+      "bid": 9.84,
+      "date": "2026-09-03",
+      "mid": 9.94,
+      "quote": "MZN",
+      "rate": 9.94
+    },
+    {
+      "ask": 75.06,
+      "base": "EUR",
+      "bid": 73.58,
+      "date": "2026-09-03",
+      "mid": 74.32,
+      "quote": "MZN",
+      "rate": 74.32
+    },
+    {
+      "ask": 87.23,
+      "base": "GBP",
+      "bid": 85.52,
+      "date": "2026-09-03",
+      "mid": 86.38,
+      "quote": "MZN",
+      "rate": 86.38
+    },
+    {
+      "ask": 0.41489,
+      "base": "JPY",
+      "bid": 0.40672,
+      "date": "2026-09-03",
+      "mid": 0.41081,
+      "quote": "MZN",
+      "rate": 0.41081
+    },
+    {
+      "ask": 1.38,
+      "base": "MUR",
+      "bid": 1.35,
+      "date": "2026-09-03",
+      "mid": 1.37,
+      "quote": "MZN",
+      "rate": 1.37
+    },
+    {
+      "ask": 0.03759,
+      "base": "MWK",
+      "bid": 0.03685,
+      "date": "2026-09-03",
+      "mid": 0.03722,
+      "quote": "MZN",
+      "rate": 0.037219999999999996
+    },
+    {
+      "ask": 6.94,
+      "base": "NOK",
+      "bid": 6.81,
+      "date": "2026-09-03",
+      "mid": 6.88,
+      "quote": "MZN",
+      "rate": 6.88
+    },
+    {
+      "ask": 6.76,
+      "base": "SEK",
+      "bid": 6.62,
+      "date": "2026-09-03",
+      "mid": 6.69,
+      "quote": "MZN",
+      "rate": 6.69
+    },
+    {
+      "ask": 4.04,
+      "base": "SZL",
+      "bid": 3.96,
+      "date": "2026-09-03",
+      "mid": 4.0,
+      "quote": "MZN",
+      "rate": 4.0
+    },
+    {
+      "ask": 0.02454,
+      "base": "TZS",
+      "bid": 0.02406,
+      "date": "2026-09-03",
+      "mid": 0.0243,
+      "quote": "MZN",
+      "rate": 0.024300000000000002
+    },
+    {
+      "ask": 64.54,
+      "base": "USD",
+      "bid": 63.27,
+      "date": "2026-09-03",
+      "mid": 63.91,
+      "quote": "MZN",
+      "rate": 63.91
+    },
+    {
+      "ask": 4.04,
+      "base": "ZAR",
+      "bid": 3.96,
+      "date": "2026-09-03",
+      "mid": 4.0,
+      "quote": "MZN",
+      "rate": 4.0
+    },
+    {
+      "ask": 3.38,
+      "base": "ZMW",
+      "bid": 3.31,
+      "date": "2026-09-03",
+      "mid": 3.35,
+      "quote": "MZN",
+      "rate": 3.35
+    },
+    {
+      "ask": 12.59,
+      "base": "BRL",
+      "bid": 12.34,
+      "date": "2026-09-04",
+      "mid": 12.47,
+      "quote": "MZN",
+      "rate": 12.47
+    },
+    {
+      "ask": 5.09,
+      "base": "BWP",
+      "bid": 4.99,
+      "date": "2026-09-04",
+      "mid": 5.04,
+      "quote": "MZN",
+      "rate": 5.04
+    },
+    {
+      "ask": 46.56,
+      "base": "CAD",
+      "bid": 45.64,
+      "date": "2026-09-04",
+      "mid": 46.1,
+      "quote": "MZN",
+      "rate": 46.1
+    },
+    {
+      "ask": 79.58,
+      "base": "CHF",
+      "bid": 78.01,
+      "date": "2026-09-04",
+      "mid": 78.8,
+      "quote": "MZN",
+      "rate": 78.8
+    },
+    {
+      "ask": 9.62,
+      "base": "CNH",
+      "bid": 9.43,
+      "date": "2026-09-04",
+      "mid": 9.53,
+      "quote": "MZN",
+      "rate": 9.53
+    },
+    {
+      "ask": 9.61,
+      "base": "CNY",
+      "bid": 9.43,
+      "date": "2026-09-04",
+      "mid": 9.52,
+      "quote": "MZN",
+      "rate": 9.52
+    },
+    {
+      "ask": 10.02,
+      "base": "DKK",
+      "bid": 9.82,
+      "date": "2026-09-04",
+      "mid": 9.92,
+      "quote": "MZN",
+      "rate": 9.92
+    },
+    {
+      "ask": 74.88,
+      "base": "EUR",
+      "bid": 73.41,
+      "date": "2026-09-04",
+      "mid": 74.15,
+      "quote": "MZN",
+      "rate": 74.15
+    },
+    {
+      "ask": 87.14,
+      "base": "GBP",
+      "bid": 85.43,
+      "date": "2026-09-04",
+      "mid": 86.29,
+      "quote": "MZN",
+      "rate": 86.29
+    },
+    {
+      "ask": 0.4142,
+      "base": "JPY",
+      "bid": 0.40605,
+      "date": "2026-09-04",
+      "mid": 0.41013,
+      "quote": "MZN",
+      "rate": 0.41013
+    },
+    {
+      "ask": 1.38,
+      "base": "MUR",
+      "bid": 1.36,
+      "date": "2026-09-04",
+      "mid": 1.37,
+      "quote": "MZN",
+      "rate": 1.37
+    },
+    {
+      "ask": 0.03759,
+      "base": "MWK",
+      "bid": 0.03685,
+      "date": "2026-09-04",
+      "mid": 0.03722,
+      "quote": "MZN",
+      "rate": 0.037219999999999996
+    },
+    {
+      "ask": 6.93,
+      "base": "NOK",
+      "bid": 6.79,
+      "date": "2026-09-04",
+      "mid": 6.86,
+      "quote": "MZN",
+      "rate": 6.86
+    },
+    {
+      "ask": 6.74,
+      "base": "SEK",
+      "bid": 6.61,
+      "date": "2026-09-04",
+      "mid": 6.68,
+      "quote": "MZN",
+      "rate": 6.68
+    },
+    {
+      "ask": 4.03,
+      "base": "SZL",
+      "bid": 3.95,
+      "date": "2026-09-04",
+      "mid": 3.99,
+      "quote": "MZN",
+      "rate": 3.99
+    },
+    {
+      "ask": 0.02449,
+      "base": "TZS",
+      "bid": 0.02401,
+      "date": "2026-09-04",
+      "mid": 0.02425,
+      "quote": "MZN",
+      "rate": 0.02425
+    },
+    {
+      "ask": 64.54,
+      "base": "USD",
+      "bid": 63.27,
+      "date": "2026-09-04",
+      "mid": 63.91,
+      "quote": "MZN",
+      "rate": 63.91
+    },
+    {
+      "ask": 4.03,
+      "base": "ZAR",
+      "bid": 3.95,
+      "date": "2026-09-04",
+      "mid": 3.99,
+      "quote": "MZN",
+      "rate": 3.99
+    },
+    {
+      "ask": 3.37,
+      "base": "ZMW",
+      "bid": 3.3,
+      "date": "2026-09-04",
+      "mid": 3.34,
+      "quote": "MZN",
+      "rate": 3.34
+    }
+  ]
+}
