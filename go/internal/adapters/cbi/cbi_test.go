@@ -1,10 +1,16 @@
 package cbi
 
 import (
+	"bytes"
 	"context"
+	"fmt"
 	"math"
+	"slices"
+	"strings"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -111,13 +117,120 @@ func TestExtractCode(t *testing.T) {
 	}
 }
 
-func TestParseSheetToleratesEmptyYear(t *testing.T) {
-	rates, err := parseSheet([]byte("<worksheet><sheetData/></worksheet>"), nil, 2027)
+// workbook builds an XLSX with one sheet per name, each filled row by row from A1.
+func workbook(t *testing.T, sheets map[string][][]any) []byte {
+	t.Helper()
+	f := excelize.NewFile()
+	defer f.Close()
+	for name, rows := range sheets {
+		if _, err := f.NewSheet(name); err != nil {
+			t.Fatal(err)
+		}
+		for i, row := range rows {
+			if err := f.SetSheetRow(name, fmt.Sprintf("A%d", i+1), &row); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	if err := f.DeleteSheet("Sheet1"); err != nil {
+		t.Fatal(err)
+	}
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
+		t.Fatal(err)
+	}
+	return buf.Bytes()
+}
+
+func TestParseTwoAndThreeColumnLayouts(t *testing.T) {
+	data := workbook(t, map[string][][]any{
+		"2009": {
+			{"", "USD", "", "Saudi Arabian Riyal SAR"},
+			{"Date", "Buy", "Sell", "Buy", "Sell"},
+			{"July 2009"},
+			{1, 1170, 1180, 310, 320},
+			{2, 0, 1180, "n/a", 320}, // zero and text cells are skipped
+			{31, 1171, 1181},
+		},
+		"2025": {
+			{"", "", "S.FR", "", "", "Gold"},
+			{"Date", "Buy", "Sell", "Sell 2", "Buy", "Sell", "Sell 2"},
+			{"Spet.2025"},
+			{"Average"},
+			{31, 1600, 1620, 1630, 100, 110, 120}, // no 31 September
+			{30, 1600, 1620, 1630, 100, 110, 120},
+		},
+		"Notes": {{"Buy", "Sell"}, {"x"}},
+	})
+	rates, err := parse(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	type key struct {
+		date, base string
+		rate       float64
+	}
+	var got []key
+	for _, r := range rates {
+		if r.Quote != "IQD" {
+			t.Errorf("quote = %q", r.Quote)
+		}
+		if r.Base == "XAU" && (r.Bid == nil || *r.Bid != 100 || r.Ask == nil || *r.Ask != 110) {
+			t.Errorf("XAU bid/ask = %v/%v, want 100/110 (Sell 2 ignored)", r.Bid, r.Ask)
+		}
+		got = append(got, key{r.Date.Format(time.DateOnly), r.Base, r.Rate})
+	}
+	want := []key{
+		{"2009-07-01", "SAR", 315},
+		{"2009-07-01", "USD", 1175},
+		{"2009-07-31", "USD", 1176},
+		{"2025-09-30", "CHF", 1610},
+		{"2025-09-30", "XAU", 105},
+	}
+	slices.SortFunc(got, func(a, b key) int { return strings.Compare(a.date+a.base, b.date+b.base) })
+	if !slices.Equal(got, want) {
+		t.Errorf("got %v\nwant %v", got, want)
+	}
+}
+
+func TestParseExcelDateSerialMonth(t *testing.T) {
+	data := workbook(t, map[string][][]any{
+		"2010": {
+			{"", "USD"},
+			{"", "Buy", "Sell"},
+			{40299}, // 2010-05-01
+			{3, 1170, 1180},
+		},
+	})
+	rates, err := parse(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2010, 5, 3)) {
+		t.Errorf("got %v, want one rate on 2010-05-03", rates)
+	}
+}
+
+func TestParseToleratesEmptyYear(t *testing.T) {
+	rates, err := parse(workbook(t, map[string][][]any{"2027": nil}))
 	if err != nil {
 		t.Fatal(err)
 	}
 	if len(rates) != 0 {
 		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
+
+func TestParseFailsWithoutBuySellLayout(t *testing.T) {
+	_, err := parse(workbook(t, map[string][][]any{"2026": {{"Date", "USD"}, {1, 1310}}}))
+	if err == nil {
+		t.Error("want an error when a year sheet has no Buy/Sell header")
+	}
+}
+
+func TestParseFailsOnNonWorkbook(t *testing.T) {
+	if _, err := parse([]byte("<html><body>Service unavailable</body></html>")); err == nil {
+		t.Error("want an error when the download is not a workbook")
 	}
 }
 
@@ -191,20 +304,5 @@ func TestStripKeepsNonASCIISpace(t *testing.T) {
 	}
 	if got := extractCode(" Gold\n"); got != "XAU" {
 		t.Errorf("extractCode = %q, want XAU", got)
-	}
-}
-
-// Ruby indexes shared strings with raw.to_i, so a negative index counts from the end.
-func TestCellValueNegativeSharedIndex(t *testing.T) {
-	doc, err := loadXML([]byte(`<c r="A1" t="s"><v>-1</v></c>`))
-	if err != nil {
-		t.Fatal(err)
-	}
-	c := doc.child("c")
-	if v := cellValue(c, []string{"a", "b"}); v == nil || *v != "b" {
-		t.Errorf("got %v, want b", v)
-	}
-	if v := cellValue(c, nil); v != nil {
-		t.Errorf("got %q, want nil", *v)
 	}
 }
