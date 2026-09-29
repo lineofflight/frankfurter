@@ -237,3 +237,26 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestDecodeTranscodesLatin1WhenNotUTF8(t *testing.T) {
+	if got := decode([]byte("Journ\xe9e du 20/05/2026")); got != "Journée du 20/05/2026" {
+		t.Errorf("latin-1 decode = %q", got)
+	}
+	if got := decode([]byte("Journée")); got != "Journée" {
+		t.Errorf("utf-8 decode = %q", got)
+	}
+}
+
+func TestParseSkipsZeroAndBlankRates(t *testing.T) {
+	html := `<h5>Journée du 20/05/2026</h5>
+<table>
+  <tr><td>A</td><td>USD</td><td>1</td><td>0,000</td></tr>
+  <tr><td>B</td><td>EUR</td><td>0</td><td>3,1</td></tr>
+  <tr><td>C</td><td>GBP</td><td>1</td><td>n/a</td></tr>
+  <tr><td>D</td><td>CHF</td><td>1</td><td>3,5</td></tr>
+</table>`
+	rates := mustParse(t, html, may20)
+	if len(rates) != 1 || rates[0].Base != "CHF" {
+		t.Errorf("rates = %v, want only CHF", rates)
+	}
+}
