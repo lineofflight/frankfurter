@@ -72,7 +72,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("token_csrf", string(token))
+	// http.rb sends token_csrf as Token-Csrf, which is what the API was recorded accepting.
+	req.Header.Set("Token-Csrf", string(token))
 	req.Header.Set("Origin", "https://sdd.bccr.fi.cr")
 	resp, err := a.Do(req)
 	if err != nil {
@@ -114,6 +115,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	}
 
 	var rates []adapter.Rate
+	if series == nil && len(t.Columns) > 1 {
+		return nil, fmt.Errorf("sell indicator %d has no series", sellIndicator)
+	}
 	// The first column holds the indicator names.
 	for _, col := range t.Columns[min(1, len(t.Columns)):] {
 		index := strings.TrimPrefix(col.Field, "serie")
@@ -122,11 +126,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			continue
 		}
 		// Titles look like "20 mar 2026"; Go matches month names case-insensitively.
-		date, err := time.Parse("02 Jan 2006", col.Title)
+		date, err := time.Parse("2 Jan 2006", col.Title)
 		if err != nil {
 			return nil, err
 		}
-		rate, err := strconv.ParseFloat(*value, 64)
+		rate, err := strconv.ParseFloat(strings.TrimSpace(*value), 64)
 		if err != nil {
 			return nil, fmt.Errorf("invalid rate %q on %s: %w", *value, col.Title, err)
 		}
