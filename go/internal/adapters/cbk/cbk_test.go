@@ -111,3 +111,60 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestFetchWindowIsInclusive(t *testing.T) {
+	a := New(vcrtest.Client(t, "cbk", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host), vcrtest.AllowPlaybackRepeats))
+	day := adapter.Date(2025, 1, 2)
+	rates, err := a.Fetch(context.Background(), day, day)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates on the after date")
+	}
+	for _, r := range rates {
+		if !r.Date.Equal(day) {
+			t.Errorf("got %+v", r)
+		}
+	}
+}
+
+func TestParseAcceptsUnpaddedDates(t *testing.T) {
+	rates := mustParse(t, `{"data": [["5/1/2020", "US DOLLAR", "101.5"], ["05/01/2020", "EURO", "113.2"]]}`)
+	if len(rates) != 2 {
+		t.Fatalf("got %d rates, want 2", len(rates))
+	}
+	for _, r := range rates {
+		if !r.Date.Equal(adapter.Date(2020, 1, 5)) {
+			t.Errorf("got %+v", r)
+		}
+	}
+}
+
+func TestParseCrossRateWithTrailingSlash(t *testing.T) {
+	r := mustParse(t, `{"data": [["20/03/2026", "KES / USHS /", "27.5"]]}`)[0]
+	if r.Base != "KES" || r.Quote != "UGX" {
+		t.Errorf("got %+v", r)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for _, data := range []string{
+		`{}`,
+		`{"data": [["20/03/2026", "US DOLLAR", "n/a"]]}`,
+		`{"data": [["20/03/2026", "US DOLLAR"]]}`,
+		`{"data": [["2026-03-20", "US DOLLAR", "129.5"]]}`,
+		`{"data": [["2026-03-20", "UNKNOWN", "1"]]}`,
+	} {
+		if _, err := parse([]byte(data)); err == nil {
+			t.Errorf("parse(%s) returned no error", data)
+		}
+	}
+}
+
+func TestParseSkipsZeroAndIncompleteRows(t *testing.T) {
+	rates := mustParse(t, `{"data": [["20/03/2026", "US DOLLAR", "0.0"], ["20/03/2026", null, "1"], ["20/03/2026"]]}`)
+	if len(rates) != 0 {
+		t.Errorf("got %+v", rates)
+	}
+}

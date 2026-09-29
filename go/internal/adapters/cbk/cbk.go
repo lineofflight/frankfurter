@@ -148,7 +148,8 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 		return adapter.Rate{}, false, fmt.Errorf("unexpected row %v", row)
 	}
 
-	date, err := time.Parse("02/01/2006", strings.TrimSpace(dateStr))
+	// Like Ruby's strptime("%d/%m/%Y"), accept days and months with or without a leading zero.
+	date, err := time.Parse("2/1/2006", strings.TrimSpace(dateStr))
 	if err != nil {
 		return adapter.Rate{}, false, err
 	}
@@ -199,7 +200,11 @@ func resolveCurrency(name string) (string, bool) {
 
 	// East African cross-rate patterns like "KES / USHS" or "KEN SHILLING / USHS".
 	if crossRate.MatchString(upper) {
+		// Ruby's split drops trailing empty fields, so "KES / USHS /" still ends in USHS.
 		parts := strings.Split(upper, "/")
+		for len(parts) > 1 && parts[len(parts)-1] == "" {
+			parts = parts[:len(parts)-1]
+		}
 		if code := lookup(strings.TrimSpace(parts[len(parts)-1])); code != "" {
 			return code, true
 		}
