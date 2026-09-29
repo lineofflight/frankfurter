@@ -1,0 +1,655 @@
+{
+  "adapter": "JPC",
+  "cassette": "jpc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2002, 1, 1), upto: Date.new(2002, 1, 6))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 35.66
+    },
+    {
+      "base": "ANG",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 73.17
+    },
+    {
+      "base": "ARS",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 131.04
+    },
+    {
+      "base": "ATS",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 8.36
+    },
+    {
+      "base": "AUD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 66.6
+    },
+    {
+      "base": "BBD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 65.49
+    },
+    {
+      "base": "BDT",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.3
+    },
+    {
+      "base": "BEF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.85
+    },
+    {
+      "base": "BGN",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 60.17
+    },
+    {
+      "base": "BHD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 347.4
+    },
+    {
+      "base": "BIF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.1539
+    },
+    {
+      "base": "BOB",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 21.58
+    },
+    {
+      "base": "BRL",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 56.28
+    },
+    {
+      "base": "CAD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 82.05
+    },
+    {
+      "base": "CHF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 77.39
+    },
+    {
+      "base": "CLP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.1881
+    },
+    {
+      "base": "CNY",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 15.83
+    },
+    {
+      "base": "COP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0568
+    },
+    {
+      "base": "CUP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 130.97
+    },
+    {
+      "base": "CYP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 203.65
+    },
+    {
+      "base": "CZK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 3.62
+    },
+    {
+      "base": "DEM",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 58.82
+    },
+    {
+      "base": "DKK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 15.46
+    },
+    {
+      "base": "DOP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 8.03
+    },
+    {
+      "base": "DZD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.71
+    },
+    {
+      "base": "EGP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 28.85
+    },
+    {
+      "base": "ESP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.6914
+    },
+    {
+      "base": "ETB",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 15.5
+    },
+    {
+      "base": "EUR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 115.04
+    },
+    {
+      "base": "FIM",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 19.35
+    },
+    {
+      "base": "FJD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 56.63
+    },
+    {
+      "base": "FRF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 17.54
+    },
+    {
+      "base": "GBP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 189.39
+    },
+    {
+      "base": "GHC",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0182
+    },
+    {
+      "base": "GRD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.3376
+    },
+    {
+      "base": "GTQ",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 16.57
+    },
+    {
+      "base": "GYD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.7256
+    },
+    {
+      "base": "HKD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 16.8
+    },
+    {
+      "base": "HUF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.4756
+    },
+    {
+      "base": "IDR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0129
+    },
+    {
+      "base": "IEP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 146.07
+    },
+    {
+      "base": "ILS",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 30.14
+    },
+    {
+      "base": "INR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.73
+    },
+    {
+      "base": "IQD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 421.26
+    },
+    {
+      "base": "IRR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0748
+    },
+    {
+      "base": "ISK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.29
+    },
+    {
+      "base": "ITL",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0594
+    },
+    {
+      "base": "JMD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.78
+    },
+    {
+      "base": "JOD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 184.46
+    },
+    {
+      "base": "KES",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.67
+    },
+    {
+      "base": "KPW",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 59.53
+    },
+    {
+      "base": "KRW",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.1003
+    },
+    {
+      "base": "KWD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 426.89
+    },
+    {
+      "base": "LBP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0865
+    },
+    {
+      "base": "LKR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.41
+    },
+    {
+      "base": "MAD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 11.41
+    },
+    {
+      "base": "MGF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0208
+    },
+    {
+      "base": "MMK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 19.43
+    },
+    {
+      "base": "MNT",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.1188
+    },
+    {
+      "base": "MOP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 16.26
+    },
+    {
+      "base": "MTL",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 291.09
+    },
+    {
+      "base": "MUR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 4.33
+    },
+    {
+      "base": "MWK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.98
+    },
+    {
+      "base": "MXN",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 14.09
+    },
+    {
+      "base": "MYR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 34.47
+    },
+    {
+      "base": "NGN",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.09
+    },
+    {
+      "base": "NLG",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 52.2
+    },
+    {
+      "base": "NOK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 14.4
+    },
+    {
+      "base": "NPR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.82
+    },
+    {
+      "base": "NZD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 54.49
+    },
+    {
+      "base": "OMR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 340.18
+    },
+    {
+      "base": "PEN",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 38.09
+    },
+    {
+      "base": "PGK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 34.97
+    },
+    {
+      "base": "PHP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.56
+    },
+    {
+      "base": "PKR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.16
+    },
+    {
+      "base": "PLN",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 33.01
+    },
+    {
+      "base": "PTE",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.5738
+    },
+    {
+      "base": "QAR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 35.99
+    },
+    {
+      "base": "ROL",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0042
+    },
+    {
+      "base": "RUB",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 4.34
+    },
+    {
+      "base": "SAR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 34.92
+    },
+    {
+      "base": "SBD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 23.61
+    },
+    {
+      "base": "SCR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 23.3
+    },
+    {
+      "base": "SEK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 12.11
+    },
+    {
+      "base": "SGD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 71.07
+    },
+    {
+      "base": "SIT",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.535
+    },
+    {
+      "base": "SKK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.72
+    },
+    {
+      "base": "SYP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.82
+    },
+    {
+      "base": "THB",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.98
+    },
+    {
+      "base": "TND",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 89.95
+    },
+    {
+      "base": "TOP",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 59.28
+    },
+    {
+      "base": "TRL",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0001
+    },
+    {
+      "base": "TTD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 21.47
+    },
+    {
+      "base": "TWD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 3.75
+    },
+    {
+      "base": "TZS",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.143
+    },
+    {
+      "base": "USD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 130.97
+    },
+    {
+      "base": "VEB",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.173
+    },
+    {
+      "base": "VND",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0087
+    },
+    {
+      "base": "VUV",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.9236
+    },
+    {
+      "base": "WST",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 36.76
+    },
+    {
+      "base": "XCD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 48.51
+    },
+    {
+      "base": "XOF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.1785
+    },
+    {
+      "base": "XPF",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.9819
+    },
+    {
+      "base": "YUM",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 1.97
+    },
+    {
+      "base": "ZAR",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 10.49
+    },
+    {
+      "base": "ZMK",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 0.0342
+    },
+    {
+      "base": "ZWD",
+      "date": "2002-01-06",
+      "quote": "JPY",
+      "rate": 2.37
+    }
+  ]
+}
