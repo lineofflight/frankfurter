@@ -2,10 +2,13 @@ package bota
 
 import (
 	"context"
+	"net/http"
 	"reflect"
 	"slices"
 	"strings"
 	"testing"
+
+	"gopkg.in/dnaeon/go-vcr.v4/pkg/cassette"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -161,4 +164,45 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+// The cassette records the form body and Cookie header Ruby sent; matching on both checks the token flow itself.
+func TestFetchSendsTokenFormAndCookie(t *testing.T) {
+	cookie := func(r *http.Request, _ []byte, rec cassette.Request) bool {
+		return r.Header.Get("Cookie") == rec.Headers.Get("Cookie")
+	}
+	a := New(vcrtest.Client(t, "bota", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI, vcrtest.Body, cookie)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 19), adapter.Date(2026, 5, 19))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates")
+	}
+}
+
+func TestParseWithoutTableFails(t *testing.T) {
+	if _, err := parse([]byte("<html><body><p>No rates</p></body></html>")); err == nil {
+		t.Fatal("want an error for a page without a rates table")
+	}
+}
+
+func TestParseSkipsShortRowsAndZeroRates(t *testing.T) {
+	rates := mustParse(t, `<table><tbody>
+<tr><td colspan="6">No data</td></tr>
+<tr><td>1</td><td>KES</td><td>0.00</td><td>0.00</td><td>0.00</td><td>24-Mar-26</td></tr>
+<tr><td>2</td><td>USD</td><td>2568.72</td><td>2594.41</td><td>2581.57</td><td>24-Mar-26</td></tr>
+</tbody></table>`)
+	if got := bases(rates); !reflect.DeepEqual(got, []string{"USD"}) {
+		t.Errorf("got %v, want [USD]", got)
+	}
+}
+
+func TestParseNonNumericMeanFails(t *testing.T) {
+	_, err := parse([]byte(`<table><tbody>
+<tr><td>1</td><td>USD</td><td>2568.72</td><td>2594.41</td><td>n/a</td><td>24-Mar-26</td></tr>
+</tbody></table>`))
+	if err == nil {
+		t.Fatal("want an error for a non-numeric mean, as Ruby's Float() raises")
+	}
 }
