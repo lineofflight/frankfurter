@@ -181,3 +181,14 @@ GET /v1/latest | If-None-Match: "a" , *
 GET /v1/latest?from=%FF
 GET /v1/latest?to=%FF,USD
 GET /v1/latest?amount=%FF
+GET /v1/0000-01-01
+GET /v1/0000-01-01..0000-02-01
+GET /v1/latest?from=EUR&amount=2
+GET /v1/latest?from=eur&to=USD
+GET /v1/latest?from=USD&to=USD,GBP
+GET /v1/latest?from=GBP&to=EUR,USD&amount=3
+GET /v1/{bday:100}..{bday:100}
+GET /v1/{bday:100}..{bday:99}?from=JPY
+GET /v1/latest?amount=4.9e-324
+GET /v1/latest?amount=1e-400
+GET /v1/latest?from=USD&amount=1e-10

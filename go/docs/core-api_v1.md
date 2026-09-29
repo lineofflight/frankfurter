@@ -43,8 +43,14 @@ SIGINT/SIGTERM. Puma's workers and threads have no counterpart; MAX_THREADS stil
   after the deadline survives. For v2's own deadline checks use `RequestDeadline(r)` (Ruby's RateQuery starts its
   clock at construction; the request start is the same moment for practical purposes).
 - **Helpers** in this package: `writeJSON(w, status, contentType, v)` (no HTML escaping, no trailing newline, as Oj),
-  `message{Status, Message}`, `etag(w, r, value) bool` (Roda's `r.etag`: strong tag, 304 to GET/HEAD, 412 otherwise,
-  `"*"` matches), `cacheOneDay`, `contentTypeJSON`, `(*Server).today()`.
+  `message{Status, Message}`, `etag(w, r, value) bool` (Roda's `r.etag`: strong tag; a matching If-None-Match gets
+  304 to GET/HEAD/OPTIONS/TRACE and 412 otherwise, `"*"` matching except on POST; a non-matching If-Match gets 412),
+  `cacheOneDay`, `contentTypeJSON`, `(*Server).today()`. Static files are served ahead of the mux for any path that
+  cleans to theirs (`staticRoute`), so v2 must not register them.
+- **Query strings.** `parseV1Params` follows Rack's `parse_nested_query` (nil for a bare key, bracketed keys nesting,
+  `ParameterTypeError` on conflicts). Roda's params_capturing parses the query before any matcher with arguments, so a
+  malformed query fails with 422 even on a path no route matches; check whether V2 behaves the same way before reusing
+  it (V2 may not use params_capturing).
 - **Heavy slots.** `Server.HeavySlots` is the stand-in for `RateQuery.heavy_slots`. Default it inside the v2 files
   (e.g. a package-level `heavyslots.New(heavyslots.DefaultMax)` used when the field is nil); app_spec's heavy-cap case
   sets the field to an exhausted `heavyslots.New(1)`.
@@ -78,7 +84,10 @@ recorded date, replays each request, and compares:
   400 the `message` text may differ but must be a non-empty string), text exactly, binary by hash. HEAD bodies are
   skipped (Roda leaves stripping them to Puma; Go's server strips them itself).
 
-`TestV1ResponsesMatchOpenAPI` also validates the Go responses to the corpus's v1 GETs against `v1/openapi.json`.
+`TestV1ResponsesMatchOpenAPI` also validates the Go responses to the corpus's v1 GETs against `v1/openapi.json`,
+skipping those where Ruby's own answer breaks the document (a tiny amount rounds rates to 0, under its
+`exclusiveMinimum`). `TestGoldenCoversCorpus` fails when the corpus and the golden file disagree, so a request added
+without regenerating cannot go unchecked.
 
 Corpus lines are `METHOD PATH [| Header: value]...`; date tokens `{today}`, `{tomorrow}`, `{latest}`, `{sunday}`,
 `{bday:N}`, `{ago:N}` expand in Ruby, and the golden file records the expanded path, so Go never recomputes dates. To
@@ -97,10 +106,17 @@ The database file must be a throwaway (the script migrates and reseeds it). The 
 the edge rows, as `blend_golden.rb` does. If v2 bodies need a looser comparison (CSV number formatting, say), extend
 `checkGolden` per content type rather than loosening the JSON rules.
 
-The v1 corpus (87 requests) covers the index, 404s, static files with HEAD/POST, every v1 route with amounts
-(`to_f` quirks), bases, symbols (empty, unknown, expired, EUR), circular pairs, bad escapes, conditional requests,
-CORS preflights (allowed and denied methods), carry-forward across the holiday and the lone series, open, closed,
-reversed, future and empty intervals, and invalid dates. All match Ruby.
+The v1 corpus (176 requests) covers the index, 404s, static files with HEAD/POST/OPTIONS/ranges and on uncleaned
+paths (`/robots.txt/`, `/v1//openapi.json`), every v1 route with amounts (`to_f` quirks, near-tie rounding, infinite
+and NaN results), bases, symbols (empty, unknown, expired, EUR), circular pairs, Rack query parsing (bad escapes, bare
+keys, nested keys and type conflicts, invalid UTF-8), conditional requests (If-None-Match and If-Match across
+methods), CORS preflights (allowed and denied methods), carry-forward across the holiday and the lone series, open,
+closed, reversed, future, year-0 and empty intervals, and invalid dates. All match Ruby.
+
+Verification found and fixed through the corpus: `rates.Round` rounded near ties differently from Ruby's `format`
+(now an emulation of Ruby's dtoa fast path in `internal/rates/dtoa.go`, checked on 800,000 values), bare and nested
+query keys, 422 on infinite or NaN rates, static files on uncleaned paths and OPTIONS caching, the If-Match and OPTIONS
+cases of `r.etag`, invalid UTF-8 in `from`/`to`, and a malformed query on an unmatched v1 path.
 
 ## Specs ported
 
@@ -126,12 +142,14 @@ versions/v1/roundable_spec (against `rates.Round`).
   `amount * nil` raises and V1's error handler answers 422. ECB always publishes a mid, so this never happens.
 - V1's error handler turns every exception into 422. Go answers 422 for request errors (amount, currency pair, dates,
   %-encoding, a query `date=` on an interval route) and 500 for database failures.
-- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body.
+- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body. Rack's type
+  conflicts are checked at the top level only (`a[b]=1&a[b][c]=2` parses in Go, fails in Ruby) and its parameter
+  count and depth limits are not enforced. `upcase` is Go's simple case mapping (Ruby maps `ß` to `SS`).
 - A success response whose body is first written after the deadline becomes a 500 JSON with `no-store` (Puma answers
   a raising body with a bare 500). JSON floats print shortest (`1` where Oj writes `1.0`); `Roundable` values over
   5000 are floats (Ruby returns Integers).
 - `net/http`'s ServeMux cleans paths (`/v1//latest` redirects) and decodes them before matching, where Roda matches
-  the raw PATH_INFO.
+  the raw PATH_INFO; the noindex and deprecation middleware also read the decoded path.
 - Static files carry no Last-Modified (embedded files have no mtime); ranges and conditional GETs still work.
 - `Cache` treats empty credentials as unconfigured (Ruby checks only for nil, so an empty env var would try to purge).
 

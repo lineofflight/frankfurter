@@ -138,6 +138,31 @@ func TestGoldenAPI(t *testing.T) {
 	}
 }
 
+// The golden file must answer the corpus as it stands: a request added without regenerating would go unchecked.
+func TestGoldenCoversCorpus(t *testing.T) {
+	data, err := os.ReadFile("testdata/corpus.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var corpus []string
+	for line := range strings.Lines(string(data)) {
+		line = strings.TrimRight(line, "\n")
+		if strings.TrimSpace(line) != "" && !strings.HasPrefix(line, "#") {
+			corpus = append(corpus, line)
+		}
+	}
+	responses := loadGoldenAPI(t).Responses
+	if len(responses) != len(corpus) {
+		t.Fatalf("golden file has %d responses, corpus %d requests; regenerate it (docs/core-api_v1.md)",
+			len(responses), len(corpus))
+	}
+	for i, r := range responses {
+		if r.Request != corpus[i] {
+			t.Fatalf("request %d: golden %q, corpus %q; regenerate the golden file", i, r.Request, corpus[i])
+		}
+	}
+}
+
 func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecorder) {
 	t.Helper()
 	label := want.Request
