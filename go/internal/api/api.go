@@ -17,6 +17,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/lineofflight/frankfurter/go/internal/heavyslots"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
@@ -29,6 +30,10 @@ type Server struct {
 
 	// Timeout is the request deadline (REQUEST_TIMEOUT_SECONDS, default 90s); defaults to DefaultTimeout.
 	Timeout time.Duration
+
+	// HeavySlots caps concurrent live range computes (v2's RateQuery.heavy_slots). The v2 routes own its default;
+	// tests set it to exhaust the cap.
+	HeavySlots *heavyslots.Slots
 }
 
 // versionRoutes register each API version's routes on the mux.
