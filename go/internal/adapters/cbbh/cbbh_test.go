@@ -234,6 +234,24 @@ func TestParseRaisesOnMalformedExport(t *testing.T) {
 	}
 }
 
+// Expectations come from BigDecimal(s, exception: false) in Ruby.
+func TestDecimalMatchesBigDecimal(t *testing.T) {
+	for s, want := range map[string]string{
+		"1,5": "3/2", " 1.5 ": "3/2", "5.": "5", ".5": "1/2", "1e3": "1000", "+2": "2", "1_000": "1000",
+		"0x10": "", "0b1": "", "0o7": "", "0x1p3": "", "1e": "", "1.5abc": "", "1/2": "", "1__0": "", "_1": "",
+		"": "", "NaN": "", "Infinity": "",
+	} {
+		r, ok := decimal(s)
+		got := ""
+		if ok {
+			got = r.RatString()
+		}
+		if got != want {
+			t.Errorf("decimal(%q) = %q, want %q", s, got, want)
+		}
+	}
+}
+
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file        string

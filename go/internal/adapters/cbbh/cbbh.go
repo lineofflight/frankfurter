@@ -210,7 +210,8 @@ func decimal(v any) (*big.Rat, bool) {
 		return nil, false
 	}
 	s = strings.TrimSpace(strings.ReplaceAll(s, ",", "."))
-	if s == "" || strings.Contains(s, "/") {
+	// Rat.SetString also takes fractions and 0x/0b/0o prefixes, which BigDecimal rejects.
+	if s == "" || strings.Trim(s, "0123456789+-._eE") != "" {
 		return nil, false
 	}
 	return new(big.Rat).SetString(s)
