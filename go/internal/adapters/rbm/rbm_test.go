@@ -2,7 +2,10 @@ package rbm
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"net/url"
 	"reflect"
 	"slices"
 	"strings"
@@ -186,4 +189,63 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type recorder struct{ reqs []*http.Request }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.reqs = append(r.reqs, req)
+	body := `<table id="exchange-rates"></table>`
+	return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchPostsRangeForm(t *testing.T) {
+	for _, tc := range []struct {
+		name        string
+		after, upto time.Time
+		start, end  string
+	}{
+		{"explicit", adapter.Date(2024, 1, 2), adapter.Date(2024, 1, 5), "01/02/2024", "01/05/2024"},
+		{"defaults", time.Time{}, time.Time{}, "06/20/2011", "03/04/2026"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := &recorder{}
+			a := New(&http.Client{Transport: rec})
+			a.Now = func() time.Time { return time.Date(2026, 3, 4, 12, 0, 0, 0, time.UTC) }
+			if _, err := a.Fetch(context.Background(), tc.after, tc.upto); err != nil {
+				t.Fatal(err)
+			}
+			if len(rec.reqs) != 1 {
+				t.Fatalf("got %d requests, want 1", len(rec.reqs))
+			}
+			req := rec.reqs[0]
+			if req.Method != http.MethodPost || req.URL.String() != endpoint {
+				t.Errorf("request = %s %s", req.Method, req.URL)
+			}
+			raw, _ := io.ReadAll(req.Body)
+			form, err := url.ParseQuery(string(raw))
+			if err != nil {
+				t.Fatal(err)
+			}
+			want := url.Values{"RateTypes": {""}, "StartDate": {tc.start}, "EndDate": {tc.end}}
+			if !reflect.DeepEqual(form, want) {
+				t.Errorf("form = %v, want %v", form, want)
+			}
+		})
+	}
+}
+
+func TestParseDate(t *testing.T) {
+	for in, want := range map[string]time.Time{
+		"Jan 02\u00a0\u00a02024": adapter.Date(2024, 1, 2),
+		" Dec  31 2023 ":         adapter.Date(2023, 12, 31),
+		"Feb 30 2024":            {},
+		"Foo 02 2024":            {},
+		"2024-01-02":             {},
+	} {
+		got, ok := parseDate(in)
+		if ok != !want.IsZero() || !got.Equal(want) {
+			t.Errorf("parseDate(%q) = %v, %v; want %v", in, got, ok, want)
+		}
+	}
 }
