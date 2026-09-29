@@ -9,6 +9,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"net/http"
 	"slices"
 	"sort"
@@ -98,7 +99,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if dateIndex >= len(values) {
 			return nil, fmt.Errorf("date missing in row %q", line)
 		}
-		date, err := time.Parse("2 Jan 2006", strings.TrimSpace(values[dateIndex]))
+		date, err := parseDate(strings.TrimSpace(values[dateIndex]))
 		if err != nil {
 			return nil, err
 		}
@@ -107,7 +108,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 				continue
 			}
 			rate, err := strconv.ParseFloat(strings.TrimSpace(values[c.idx]), 64)
-			if err != nil {
+			if err != nil || math.IsNaN(rate) || math.IsInf(rate, 0) {
 				return nil, fmt.Errorf("invalid rate %q for %s", values[c.idx], c.iso)
 			}
 			if rate == 0 {
@@ -118,4 +119,12 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	}
 	sort.SliceStable(rates, func(i, j int) bool { return rates[i].Date.Before(rates[j].Date) })
 	return rates, nil
+}
+
+// parseDate accepts abbreviated or full month names, as strptime's %b does.
+func parseDate(s string) (time.Time, error) {
+	if d, err := time.Parse("2 Jan 2006", s); err == nil {
+		return d, nil
+	}
+	return time.Parse("2 January 2006", s)
 }

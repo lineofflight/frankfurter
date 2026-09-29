@@ -77,6 +77,27 @@ func TestParseSkipsEmptyAndZeroValues(t *testing.T) {
 	}
 }
 
+func TestParseAcceptsFullMonthNames(t *testing.T) {
+	rates, err := parse([]byte("Date,USD\n\"1 March 2026\",0.0748\n\"02 mar 2026\",0.075\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 2 || !rates[0].Date.Equal(adapter.Date(2026, 3, 1)) || !rates[1].Date.Equal(adapter.Date(2026, 3, 2)) {
+		t.Errorf("got %+v", rates)
+	}
+}
+
+func TestParseRejectsInvalidValues(t *testing.T) {
+	for _, v := range []string{"NaN", "Inf", "abc", " "} {
+		if _, err := parse([]byte("Date,USD\n\"1 Mar 2026\"," + v + "\n")); err == nil {
+			t.Errorf("%q: want an error", v)
+		}
+	}
+	if _, err := parse([]byte("Date,USD\n\"1 Sept 2026\",0.07\n")); err == nil {
+		t.Error("want an error for a bad date")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file  string
