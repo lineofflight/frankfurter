@@ -97,7 +97,7 @@ func parse(items []map[string]any) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, item := range items {
 		tarih, _ := item["Tarih"].(string)
-		date, err := time.Parse("02-01-2006", tarih)
+		date, err := time.Parse("2-1-2006", tarih) // strptime %d-%m-%Y also takes unpadded fields
 		if err != nil {
 			return nil, err
 		}
