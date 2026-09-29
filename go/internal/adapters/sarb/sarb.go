@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 	"strings"
 	"time"
 
@@ -154,8 +153,8 @@ func value(raw json.RawMessage) (float64, bool, error) {
 		if s == "" {
 			return 0, false, nil
 		}
-		f, err := strconv.ParseFloat(s, 64)
-		if err != nil {
+		f, ok := adapter.ParseFloat(s)
+		if !ok {
 			return 0, false, fmt.Errorf("invalid value %q", v)
 		}
 		return f, true, nil

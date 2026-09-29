@@ -91,6 +91,27 @@ func TestParseSkipsZeroAndNullValues(t *testing.T) {
 	}
 }
 
+func TestParseStringValues(t *testing.T) {
+	rates, err := parse([]byte(`[{"Period":"2026-03-24T00:00:00","Value":" 18.5 "},{"Period":"2026-03-25T00:00:00","Value":"  "},{"Period":"2026-03-26","Value":"0"}]`), "USD", "ZAR")
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := adapter.Rate{Date: adapter.Date(2026, 3, 24), Base: "USD", Quote: "ZAR", Rate: 18.5}
+	if len(rates) != 1 || rates[0] != want {
+		t.Errorf("got %+v, want [%+v]", rates, want)
+	}
+}
+
+func TestParseRejectsInvalidValues(t *testing.T) {
+	for _, v := range []string{`"abc"`, `"NaN"`, `"Infinity"`, `true`} {
+		t.Run(v, func(t *testing.T) {
+			if _, err := parse([]byte(`[{"Period":"2026-03-24T00:00:00","Value":`+v+`}]`), "ZAR", "AUD"); err == nil {
+				t.Error("want error")
+			}
+		})
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 3, 23), adapter.Date(2026, 3, 27))
