@@ -131,7 +131,7 @@ func (c *v2Request) stream(q rateQuery, contentType, open, sep, close string, li
 	begin := func() {
 		c.w.Header().Set("Content-Type", contentType)
 		c.w.WriteHeader(http.StatusOK)
-		out = bufio.NewWriterSize(c.w, 32<<10)
+		out = bufio.NewWriterSize(c.w, 4<<10)
 		out.WriteString(open)
 	}
 	err := q.Each(c.ctx(), func(r ratequery.Record) error {
