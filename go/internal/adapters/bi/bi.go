@@ -29,7 +29,8 @@ var (
 	selectRe = regexp.MustCompile(`(?is)<select[^>]*ddlmatauang[^>]*>(.*?)</select>`)
 	optionRe = regexp.MustCompile(`<option[^>]*value="([^"]*)"`)
 
-	errNoTable = errors.New("neither results table nor search form in response")
+	errNoTable  = errors.New("neither results table nor search form in response")
+	errNoPrefix = errors.New("bi: search form field prefix not found on page")
 )
 
 func init() {
@@ -52,6 +53,9 @@ func (a *Adapter) BackfillRange() int { return 90 }
 // Fetch implements adapter.Adapter. As in Ruby, the search results are returned as is, not clipped to the window, and
 // after must be set.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
+	if after.IsZero() {
+		return nil, errors.New("bi: after is required")
+	}
 	if upto.IsZero() {
 		upto = a.Today()
 	}
@@ -76,6 +80,9 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 
 	var rates []adapter.Rate
 	for i, currency := range currencies(page) {
+		if prefix == "" {
+			return nil, errNoPrefix // Ruby fails on the nil prefix when building the first search
+		}
 		if i > 0 {
 			if err := a.Sleep(ctx, time.Second); err != nil {
 				return nil, err

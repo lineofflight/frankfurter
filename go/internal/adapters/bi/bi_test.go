@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"slices"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -125,6 +126,49 @@ func TestParseErrorsWithoutTableOrForm(t *testing.T) {
 	_, err := parse("<html><body>No data</body></html>", "USD  ")
 	if !errors.Is(err, errNoTable) {
 		t.Fatalf("err = %v, want %v", err, errNoTable)
+	}
+}
+
+type pageTransport string
+
+func (p pageTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	body := io.NopCloser(bytes.NewBufferString(string(p)))
+	return &http.Response{StatusCode: http.StatusOK, Header: http.Header{}, Body: body, Request: req}, nil
+}
+
+func TestFetchErrorsWithoutFormPrefix(t *testing.T) {
+	page := `<select name="x$ddlmatauang1"><option value="USD  ">USD</option></select>`
+	a := New(&http.Client{Transport: pageTransport(page)})
+	_, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 5))
+	if !errors.Is(err, errNoPrefix) {
+		t.Fatalf("err = %v, want %v", err, errNoPrefix)
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	a := New(&http.Client{Transport: pageTransport("")})
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 5)); err == nil {
+		t.Fatal("want error for zero after")
+	}
+}
+
+func TestParseErrorsOnUnparseableDate(t *testing.T) {
+	html := `<table id="foo_gvSearchResult2"><tr><td>1.00</td><td>2.00</td><td>1.00</td><td>not a date</td></tr></table>`
+	if _, err := parse(html, "USD  "); err == nil {
+		t.Fatal("want error for unparseable date")
+	}
+}
+
+func TestParseSkipsNonPositiveAndBlankPrices(t *testing.T) {
+	html := `<table id="foo_gvSearchResult2">
+<tr><td>1.00</td><td>0.00</td><td>1.00</td><td>5 Mar 2026</td></tr>
+<tr><td>1.00</td><td>-</td><td>1.00</td><td>5 Mar 2026</td></tr>
+<tr><td>1.00</td><td>2.00</td><td></td><td>5 Mar 2026</td></tr>
+<tr><td>1.00</td><td><span>2.00</span></td><td>1.00</td><td>05 March 2026</td></tr>
+</table>`
+	rates := mustParse(t, html, "USD  ")
+	if len(rates) != 1 || rates[0].Rate != 1.5 || !rates[0].Date.Equal(adapter.Date(2026, 3, 5)) {
+		t.Fatalf("got %+v, want one USD rate 1.5 on 2026-03-05", rates)
 	}
 }
 
