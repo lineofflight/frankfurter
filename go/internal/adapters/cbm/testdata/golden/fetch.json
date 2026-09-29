@@ -1,0 +1,241 @@
+{
+  "adapter": "CBM",
+  "cassette": "cbm",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1477.56
+    },
+    {
+      "base": "BDT",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 17.05
+    },
+    {
+      "base": "BND",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1647.25
+    },
+    {
+      "base": "BRL",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 411.7
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1515.75
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 2654.2
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 307.26
+    },
+    {
+      "base": "CZK",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 100.44
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 327.81
+    },
+    {
+      "base": "EGP",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 39.44
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 2449.65
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 2812.53
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 268.05
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 12.29
+    },
+    {
+      "base": "ILS",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 679.41
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 22.65
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1321.88
+    },
+    {
+      "base": "KES",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 16.27
+    },
+    {
+      "base": "KHR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 52.51
+    },
+    {
+      "base": "KRW",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 141.81
+    },
+    {
+      "base": "KWD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 6851.55
+    },
+    {
+      "base": "LAK",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 9.52
+    },
+    {
+      "base": "LKR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 6.66
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 527.17
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 219.79
+    },
+    {
+      "base": "NPR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 14.16
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1225.67
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 35.16
+    },
+    {
+      "base": "PKR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 7.53
+    },
+    {
+      "base": "RSD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 20.87
+    },
+    {
+      "base": "RUB",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 26.82
+    },
+    {
+      "base": "SAR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 559.6
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 225.47
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 1647.25
+    },
+    {
+      "base": "THB",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 65.55
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 2100.0
+    },
+    {
+      "base": "VND",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 7.98
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-04-09",
+      "quote": "MMK",
+      "rate": 127.57
+    }
+  ]
+}
