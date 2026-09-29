@@ -174,6 +174,35 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
+// The lower bound is inclusive, unlike adapter.Window.
+func TestParseKeepsRowsOnStartDate(t *testing.T) {
+	rates := mustParse(t, toRows(modernRow), adapter.Date(2026, 2, 1), adapter.Date(2026, 2, 1))
+	if len(rates) != 15 {
+		t.Errorf("got %d rates, want 15", len(rates))
+	}
+}
+
+func TestParseSkipsZeroAndMissingValues(t *testing.T) {
+	rows := [][]any{{"20260201", "0", nil, "0.0", 7.8}}
+	rates := mustParse(t, rows, time.Time{}, time.Time{})
+	want := adapter.Rate{Date: adapter.Date(2026, 2, 1), Base: "USD", Quote: "HKD", Rate: 7.8}
+	if len(rates) != 1 || rates[0] != want {
+		t.Errorf("got %+v, want [%+v]", rates, want)
+	}
+}
+
+func TestParseRejectsInvalidValue(t *testing.T) {
+	if _, err := parse([][]any{{"20260201", "n/a"}}, time.Time{}, time.Time{}); err == nil {
+		t.Error("want error for unparseable value")
+	}
+}
+
+func TestParseSkipsShortRows(t *testing.T) {
+	if rates := mustParse(t, [][]any{{"garbage"}, {}}, time.Time{}, time.Time{}); len(rates) != 0 {
+		t.Errorf("got %d rates, want 0", len(rates))
+	}
+}
+
 func TestGoldenOpenRange(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/all.json")
 	a := New(g.Client(t))
