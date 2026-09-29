@@ -2,6 +2,10 @@ package nbrb
 
 import (
 	"context"
+	"io"
+	"net/http"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -74,4 +78,37 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type recorder struct{ urls []string }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.urls = append(r.urls, req.URL.String())
+	body := `[]`
+	if req.URL.Path == "/exrates/rates" {
+		body = `[{"Cur_ID":431,"Cur_Abbreviation":"USD","Cur_Scale":1}]`
+	}
+	return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchChunksDynamicsByYear(t *testing.T) {
+	rec := &recorder{}
+	a := New(&http.Client{Transport: rec})
+	if _, err := a.Fetch(context.Background(), adapter.Date(2024, 1, 1), adapter.Date(2025, 2, 1)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{
+		"https://api.nbrb.by/exrates/rates?periodicity=0",
+		"https://api.nbrb.by/exrates/rates/dynamics/431?endDate=2024-12-30&startDate=2024-01-01",
+		"https://api.nbrb.by/exrates/rates/dynamics/431?endDate=2025-02-01&startDate=2024-12-31",
+	}
+	if !slices.Equal(rec.urls, want) {
+		t.Errorf("got %q, want %q", rec.urls, want)
+	}
+}
+
+func TestFetchRequiresStartDate(t *testing.T) {
+	if _, err := New(&http.Client{Transport: &recorder{}}).Fetch(context.Background(), time.Time{}, time.Time{}); err == nil {
+		t.Error("want an error without a start date")
+	}
 }
