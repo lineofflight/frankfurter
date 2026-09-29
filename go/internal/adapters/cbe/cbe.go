@@ -14,19 +14,18 @@
 package cbe
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -235,146 +234,40 @@ func excelDate(serial float64) time.Time {
 	return adapter.Date(1899, 12, 30).AddDate(0, 0, int(serial))
 }
 
+// readXLSX reads the first sheet's data rows: those with a numeric date in column A and at least four cells.
 func readXLSX(data []byte) ([]row, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
+	if err != nil {
+		return nil, fmt.Errorf("historical-data export is not an XLSX workbook: %w", err)
+	}
+	defer f.Close()
+	sheet := f.GetSheetList()[0]
+	cells, err := f.GetRows(sheet)
 	if err != nil {
 		return nil, err
 	}
-	var sheet, sharedStrings []byte
-	for _, f := range zr.File {
-		var dst *[]byte
-		switch f.Name {
-		case "xl/worksheets/sheet1.xml":
-			dst = &sheet
-		case "xl/sharedStrings.xml":
-			dst = &sharedStrings
-		default:
-			continue
+	// number returns the cell's value when it is stored as a number: nil for blanks and text, even numeric text.
+	number := func(r, c int) *float64 {
+		ref, _ := excelize.CoordinatesToCellName(c+1, r+1)
+		if t, err := f.GetCellType(sheet, ref); err != nil || (t != excelize.CellTypeUnset && t != excelize.CellTypeNumber) {
+			return nil
 		}
-		rc, err := f.Open()
+		v, err := strconv.ParseFloat(cells[r][c], 64)
 		if err != nil {
-			return nil, err
+			return nil
 		}
-		*dst, err = io.ReadAll(rc)
-		rc.Close()
-		if err != nil {
-			return nil, err
-		}
+		return &v
 	}
-	if sheet == nil {
-		return nil, errors.New("sheet1.xml missing from XLSX export")
-	}
-	strs, err := parseSharedStrings(sharedStrings)
-	if err != nil {
-		return nil, err
-	}
-	return parseSheet(sheet, strs)
-}
-
-func parseSharedStrings(data []byte) ([]string, error) {
-	if data == nil {
-		return nil, errors.New("sharedStrings.xml missing from XLSX export")
-	}
-	// Only direct <t> children, as Ox's locate("t") reads them; rich-text runs (<r><t>) are not joined.
-	var sst struct {
-		SI []struct {
-			T []string `xml:"t"`
-		} `xml:"si"`
-	}
-	if err := xml.Unmarshal(data, &sst); err != nil {
-		return nil, fmt.Errorf("malformed sharedStrings.xml in XLSX export: %w", err)
-	}
-	strs := make([]string, len(sst.SI))
-	for i, si := range sst.SI {
-		strs[i] = strings.Join(si.T, "")
-	}
-	return strs, nil
-}
-
-type cell struct {
-	T string   `xml:"t,attr"`
-	V []string `xml:"v"`
-}
-
-func parseSheet(data []byte, strs []string) ([]row, error) {
-	var ws struct {
-		Rows []struct {
-			C []cell `xml:"c"`
-		} `xml:"sheetData>row"`
-	}
-	if err := xml.Unmarshal(data, &ws); err != nil {
-		return nil, fmt.Errorf("malformed worksheet XML in XLSX export: %w", err)
-	}
-
 	var rows []row
-	for _, r := range ws.Rows {
-		if len(r.C) < 4 {
+	for i, c := range cells {
+		if len(c) < 4 {
 			continue
 		}
-		date, err := cellValue(r.C[0], strs)
-		if err != nil {
-			return nil, err
-		}
-		serial, ok := date.(float64)
-		if !ok {
+		serial := number(i, 0)
+		if serial == nil {
 			continue
 		}
-		cur, err := cellValue(r.C[1], strs)
-		if err != nil {
-			return nil, err
-		}
-		name, ok := cur.(string)
-		if !ok {
-			continue
-		}
-		buy, err := cellValue(r.C[2], strs)
-		if err != nil {
-			return nil, err
-		}
-		sell, err := cellValue(r.C[3], strs)
-		if err != nil {
-			return nil, err
-		}
-		rows = append(rows, row{serial: serial, currency: name, buy: number(buy), sell: number(sell)})
+		rows = append(rows, row{serial: *serial, currency: c[1], buy: number(i, 2), sell: number(i, 3)})
 	}
 	return rows, nil
-}
-
-func number(v any) *float64 {
-	if f, ok := v.(float64); ok {
-		return &f
-	}
-	return nil
-}
-
-// cellValue returns a cell's value as a string or float64, or nil when the cell has no value.
-func cellValue(c cell, strs []string) (any, error) {
-	if len(c.V) == 0 {
-		return nil, nil
-	}
-	raw := c.V[0]
-	switch c.T {
-	case "s":
-		// Base 0 reads prefixes, underscores and a leading-zero octal, as Ruby's Integer() does.
-		n, err := strconv.ParseInt(strings.TrimSpace(raw), 0, 0)
-		i := int(n)
-		if err != nil {
-			return nil, fmt.Errorf("invalid shared string index %q", raw)
-		}
-		if i < 0 {
-			i += len(strs) // Ruby's negative array index
-		}
-		if i < 0 || i >= len(strs) {
-			return nil, nil
-		}
-		return strs[i], nil
-	case "str", "inlineStr":
-		return raw, nil
-	default:
-		f, err := strconv.ParseFloat(strings.TrimSpace(raw), 64)
-		if err != nil {
-			return nil, fmt.Errorf("invalid numeric cell %q", raw)
-		}
-		return f, nil
-	}
 }

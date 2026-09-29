@@ -1,16 +1,16 @@
 package cbe
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"fmt"
 	"io"
 	"math"
 	"net/http"
 	"slices"
 	"strings"
 	"testing"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -23,62 +23,33 @@ type xlsxRow struct {
 	buy, sell float64
 }
 
-// buildXLSX writes a minimal export: shared strings are "", the four headers, then each currency name.
-func buildXLSX(t *testing.T, rows []xlsxRow) []byte {
+// buildWorkbook writes an export shaped like CBE's: a title row, a header row, then the data rows from row 3.
+func buildWorkbook(t *testing.T, rows [][]any) []byte {
 	t.Helper()
-	strs := []string{"", "Date", "Currency", "Buy", "Sell"}
-	for _, r := range rows {
-		if !slices.Contains(strs, r.name) {
-			strs = append(strs, r.name)
+	f := excelize.NewFile()
+	defer f.Close()
+	sh := f.GetSheetName(0)
+	all := append([][]any{{"CBE Exchange Rates"}, {"Date", "Currency", "Buy", "Sell"}}, rows...)
+	for i, r := range all {
+		ref, _ := excelize.CoordinatesToCellName(1, i+1)
+		if err := f.SetSheetRow(sh, ref, &r); err != nil {
+			t.Fatal(err)
 		}
 	}
-
-	var sheetRows strings.Builder
-	for i, r := range rows {
-		n := i + 3
-		fmt.Fprintf(&sheetRows,
-			`<row r="%[1]d"><c r="A%[1]d" s="4"><v>%[2]d</v></c><c r="B%[1]d" s="5" t="s"><v>%[3]d</v></c>`+
-				`<c r="C%[1]d" s="6"><v>%[4]v</v></c><c r="D%[1]d" s="6"><v>%[5]v</v></c></row>`+"\n",
-			n, r.serial, slices.Index(strs, r.name), r.buy, r.sell)
-	}
-	return buildRawXLSX(t, sheetRows.String(), strs)
-}
-
-// buildRawXLSX writes an export with the given data rows after the title and header rows.
-func buildRawXLSX(t *testing.T, sheetRows string, strs []string) []byte {
-	t.Helper()
-	sheet := `<?xml version="1.0" encoding="utf-8"?>
-<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-  <sheetData>
-    <row r="1"><c r="A1" s="2" t="s"><v>0</v></c></row>
-    <row r="2"><c r="A2" s="3" t="s"><v>1</v></c><c r="B2" s="3" t="s"><v>2</v></c><c r="C2" s="3" t="s"><v>3</v></c><c r="D2" s="3" t="s"><v>4</v></c></row>
-    ` + sheetRows + `
-  </sheetData>
-</worksheet>
-`
-	var items strings.Builder
-	for _, s := range strs {
-		items.WriteString("<si><t>" + s + "</t></si>")
-	}
-	sst := fmt.Sprintf(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="%[1]d" uniqueCount="%[1]d">%[2]s</sst>
-`, len(strs), items.String())
-
 	var buf bytes.Buffer
-	zw := zip.NewWriter(&buf)
-	for name, content := range map[string]string{"xl/worksheets/sheet1.xml": sheet, "xl/sharedStrings.xml": sst} {
-		w, err := zw.Create(name)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if _, err := w.Write([]byte(content)); err != nil {
-			t.Fatal(err)
-		}
-	}
-	if err := zw.Close(); err != nil {
+	if _, err := f.WriteTo(&buf); err != nil {
 		t.Fatal(err)
 	}
 	return buf.Bytes()
+}
+
+func buildXLSX(t *testing.T, rows []xlsxRow) []byte {
+	t.Helper()
+	var cells [][]any
+	for _, r := range rows {
+		cells = append(cells, []any{r.serial, r.name, r.buy, r.sell})
+	}
+	return buildWorkbook(t, cells)
 }
 
 func mustParse(t *testing.T, rows []xlsxRow) []adapter.Rate {
@@ -207,12 +178,13 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-func TestParseSkipsBlankAndZeroPrices(t *testing.T) {
-	strs := []string{"", "Date", "Currency", "Buy", "Sell", "US Dollar"}
-	rows := `<row r="3"><c r="A3"><v>46142</v></c><c r="B3" t="s"><v>5</v></c><c r="C3" t="str"><v>-</v></c><c r="D3"><v>50</v></c></row>
-<row r="4"><c r="A4"><v>46142</v></c><c r="B4" t="s"><v>5</v></c><c r="C4"/><c r="D4"><v>50</v></c></row>
-<row r="5"><c r="A5"><v>46142</v></c><c r="B5" t="s"><v>5</v></c><c r="C5"><v>0</v></c><c r="D5"><v>0</v></c></row>`
-	rates, err := parse(buildRawXLSX(t, rows, strs))
+func TestParseSkipsBlankTextAndZeroPrices(t *testing.T) {
+	rates, err := parse(buildWorkbook(t, [][]any{
+		{46142, "US Dollar", "-", 50},
+		{46142, "US Dollar", nil, 50},
+		{46142, "US Dollar", 0, 0},
+		{46142, "US Dollar", "50", 51}, // numeric text is not a price
+	}))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,22 +193,55 @@ func TestParseSkipsBlankAndZeroPrices(t *testing.T) {
 	}
 }
 
-func TestParseErrorsWithoutDataRows(t *testing.T) {
-	if _, err := parse(buildRawXLSX(t, "", []string{"", "Date", "Currency", "Buy", "Sell"})); err == nil {
-		t.Error("want an error for an export without data rows")
+func TestParseSkipsRowsWithoutNumericDate(t *testing.T) {
+	rates, err := parse(buildWorkbook(t, [][]any{
+		{"Total", "US Dollar", 50, 51},
+		{"46142", "US Dollar", 50, 51},
+		{46142, "US Dollar", 50},
+		{46142, "Euro", 60, 61},
+	}))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "EUR" {
+		t.Errorf("got %v, want one EUR rate", rates)
 	}
 }
 
-func TestParseReadsSharedStringIndexAsRubyInteger(t *testing.T) {
-	// Ruby's Integer("010") is 8.
-	strs := []string{"", "Date", "Currency", "Buy", "Sell", "a", "b", "c", "US Dollar", "Euro"}
-	rows := `<row r="3"><c r="A3"><v>46142</v></c><c r="B3" t="s"><v>010</v></c><c r="C3"><v>50</v></c><c r="D3"><v>51</v></c></row>`
-	rates, err := parse(buildRawXLSX(t, rows, strs))
+func TestParseReadsFirstSheetOnly(t *testing.T) {
+	f, err := excelize.OpenReader(bytes.NewReader(buildXLSX(t, []xlsxRow{{46142, "US Dollar", 50, 51}})))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	if _, err := f.NewSheet("Other"); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.SetSheetRow("Other", "A1", &[]any{46142, "Euro", 60, 61}); err != nil {
+		t.Fatal(err)
+	}
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(buf.Bytes())
 	if err != nil {
 		t.Fatal(err)
 	}
 	if len(rates) != 1 || rates[0].Base != "USD" {
 		t.Errorf("got %v, want one USD rate", rates)
+	}
+}
+
+func TestParseErrorsWithoutDataRows(t *testing.T) {
+	if _, err := parse(buildWorkbook(t, nil)); err == nil {
+		t.Error("want an error for an export without data rows")
+	}
+}
+
+func TestParseErrorsOnNonWorkbook(t *testing.T) {
+	if _, err := parse([]byte("<html><body>Request Rejected</body></html>")); err == nil {
+		t.Error("want an error for an HTML page instead of a workbook")
 	}
 }
 
