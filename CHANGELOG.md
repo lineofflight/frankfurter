@@ -7,11 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-09-30
+
 ### Added
 
 - CSV downloads named after the query.
 - Query-specific history coverage. (#730)
-
 - Japan Customs (JPC) as a data provider. (#715)
 - Banky Foiben'i Madagasikara (BFM) as a data provider. (#400)
 - Bank of Mauritius (BOMU) as a data provider. (#370)
@@ -25,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- National Bank of Moldova backfills on fresh installs, skipping days without metal prices. (#733)
 - Provider-filtered currency lists and coverage dates. (#728)
-
 - Reserve Bank of Malawi Special Drawing Rights quotes as XDR. (#708)
 - Bank Negara Malaysia Special Drawing Rights quotes as XDR. (#709)
 - Reserve Bank of Australia Special Drawing Rights quotes as XDR. (#704)
@@ -269,7 +270,8 @@ New multi-provider API at `/v2/`. The v1 API is unchanged and remains available 
 - Migrated database storage from PostgreSQL to SQLite.
 - Moved domain to <https://api.frankfurter.dev>.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.5.1...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.6.0...HEAD
+[2.6.0]: https://github.com/lineofflight/frankfurter/compare/v2.5.1...v2.6.0
 [2.5.1]: https://github.com/lineofflight/frankfurter/compare/v2.5.0...v2.5.1
 [2.5.0]: https://github.com/lineofflight/frankfurter/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/lineofflight/frankfurter/compare/v2.3.5...v2.4.0
