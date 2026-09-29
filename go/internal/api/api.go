@@ -46,14 +46,11 @@ func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{$}", s.root)
 	mux.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) { notFound(w, contentTypeJSON) })
-	for path, file := range staticFiles {
-		mux.Handle(path, static(file))
-	}
 	for _, register := range versionRoutes {
 		register(s, mux)
 	}
 
-	var h http.Handler = mux
+	h := staticRoute(mux)
 	h = cors(h)
 	h = noindex(h)
 	h = noStoreOnError(h)

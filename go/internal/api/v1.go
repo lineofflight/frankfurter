@@ -23,18 +23,39 @@ var v1RootPayload = struct {
 }{"v1", "deprecated", "/v1/openapi.json", "https://frankfurter.dev/v1/"}
 
 // Like Roda's r.is and r.root, the v1 routes answer any method, except /v1/ (r.root), which answers GET only.
+//
+// Roda's params_capturing parses the query string before trying each matcher with arguments, and every v1 route but
+// the index (r.is and r.root without arguments) has one. So any other v1 path, even one no route matches, fails with
+// 422 on a query Rack cannot parse.
 func (s *Server) routesV1(mux *http.ServeMux) {
 	mux.HandleFunc("/v1", s.v1Root)
 	mux.HandleFunc("/v1/{$}", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
-			notFound(w, contentTypeJSON)
+			v1Unmatched(w, r)
 			return
 		}
 		s.v1Root(w, r)
 	})
-	mux.HandleFunc("/v1/", func(w http.ResponseWriter, _ *http.Request) { notFound(w, contentTypeJSON) })
+	mux.HandleFunc("/v1/", v1Unmatched)
 	mux.HandleFunc("/v1/currencies", s.v1Currencies)
 	mux.HandleFunc("/v1/{spec}", s.v1Rates)
+}
+
+func v1Unmatched(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Cache-Control", cacheOneDay)
+	if _, _, ok := v1ParseQuery(w, r); ok {
+		notFound(w, contentTypeJSON)
+	}
+}
+
+// v1ParseQuery parses the query string, answering 422 when Rack could not.
+func v1ParseQuery(w http.ResponseWriter, r *http.Request) (v1Params, v1Nested, bool) {
+	params, nested, err := parseV1Params(r.URL.RawQuery)
+	if err != nil {
+		v1Error(w, err)
+		return nil, nil, false
+	}
+	return params, nested, true
 }
 
 func (s *Server) v1Root(w http.ResponseWriter, _ *http.Request) {
@@ -69,28 +90,35 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 	spec := r.PathValue("spec")
 	today := db.FormatDate(s.today())
 
-	params, err := parseV1Params(r.URL.RawQuery)
-	if err != nil {
-		v1Error(w, err)
+	params, nested, ok := v1ParseQuery(w, r)
+	if !ok {
 		return
 	}
+	var captures v1Params
 	interval := false
 	switch m := v1IntervalRe.FindStringSubmatch(spec); {
 	case v1LatestRe.MatchString(spec):
-		params["date"] = today
+		captures = v1Params{"date": today}
 	case v1DateRe.MatchString(spec):
-		params["date"] = spec
+		captures = v1Params{"date": spec}
 	case m != nil:
 		interval = true
-		params["start_date"], params["end_date"] = m[1], m[2]
+		captures = v1Params{"start_date": m[1], "end_date": m[2]}
 		if m[2] == "" {
-			params["end_date"] = today
+			captures["end_date"] = today
 		}
 	default:
 		notFound(w, contentTypeJSON)
 		return
 	}
-
+	for k, v := range captures {
+		params[k] = v
+		delete(nested, k)
+	}
+	if err := nested.check(params); err != nil {
+		v1Error(w, err)
+		return
+	}
 	query, err := buildV1Query(params)
 	if err != nil {
 		v1Error(w, err)
@@ -113,7 +141,10 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 		e := newV1EndOfDay(s.DB, query)
 		quote, formatted, cacheKey = &e.v1Quote, func() any { return e.Formatted() }, e.CacheKey
 	}
-	if _, err := quote.Perform(r.Context()); err != nil {
+	if _, err := quote.Perform(r.Context()); errors.Is(err, errNotFinite) {
+		v1Error(w, err)
+		return
+	} else if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -129,6 +160,9 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) v1Currencies(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", cacheOneDay)
+	if _, _, ok := v1ParseQuery(w, r); !ok {
+		return
+	}
 	names, err := loadV1CurrencyNames(r.Context(), s.DB, s.today())
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

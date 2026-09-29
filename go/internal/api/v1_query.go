@@ -2,6 +2,7 @@ package api
 
 import (
 	"errors"
+	"fmt"
 	"math"
 	"net/url"
 	"strconv"
@@ -11,29 +12,86 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// v1Params are a v1 request's parameters: the query string, with the route's captures written over it
+// v1Params are a v1 request's string parameters: the query string, with the route's captures written over it
 // (date, start_date, end_date), as Roda's indifferent params. A repeated key keeps its last value, as Rack does.
 type v1Params map[string]string
 
-// parseV1Params reads a raw query string the way Rack does: pairs split on '&' only, '+' as space, last value wins.
-func parseV1Params(raw string) (v1Params, error) {
-	p := v1Params{}
+// v1Nested are the keys Rack nested into an array ('[') or a hash ('{'): to[]=USD, from[x]=USD.
+type v1Nested map[string]byte
+
+// parseV1Params reads a raw query string the way Rack's parse_nested_query does: pairs split on '&' only, '+' as
+// space, last value wins. A key without '=' is nil in Rack, which every v1 parameter treats as absent, so it is
+// dropped. A bracketed key nests its value under the name before the bracket; mixing a string and a nested value, or
+// an array and a hash, under one name fails the parse (Rack's ParameterTypeError). Conflicts deeper inside a nested
+// value are not checked: no v1 parameter can use a nested value anyway.
+func parseV1Params(raw string) (v1Params, v1Nested, error) {
+	p, nested := v1Params{}, v1Nested{}
 	for pair := range strings.SplitSeq(raw, "&") {
 		if pair == "" {
 			continue
 		}
-		k, v, _ := strings.Cut(pair, "=")
+		k, v, hasValue := strings.Cut(pair, "=")
 		key, err := url.QueryUnescape(k)
 		if err != nil {
-			return nil, errors.New("invalid %-encoding (" + pair + ")")
+			return nil, nil, errors.New("invalid %-encoding (" + pair + ")")
 		}
 		val, err := url.QueryUnescape(v)
 		if err != nil {
-			return nil, errors.New("invalid %-encoding (" + pair + ")")
+			return nil, nil, errors.New("invalid %-encoding (" + pair + ")")
 		}
-		p[key] = val
+
+		name, after := key, ""
+		if len(key) > 1 {
+			if i := strings.IndexByte(key[1:], '['); i >= 0 {
+				name, after = key[:i+1], key[i+1:]
+			}
+		}
+		if after == "[" {
+			name, after = key, ""
+		}
+		if name == "" {
+			continue
+		}
+		if after == "" {
+			if hasValue {
+				p[name] = val
+			} else {
+				delete(p, name)
+			}
+			delete(nested, name)
+			continue
+		}
+
+		kind := byte('{')
+		if strings.HasPrefix(after, "[]") {
+			kind = '['
+		}
+		if _, isString := p[name]; isString || nested[name] != 0 && nested[name] != kind {
+			return nil, nil, fmt.Errorf("conflicting types for parameter %q", name)
+		}
+		nested[name] = kind
 	}
-	return p, nil
+	return p, nested, nil
+}
+
+// check fails a request whose parameters V1::Query would read as an array or a hash (Ruby raises calling to_f,
+// upcase or Date.parse on one): amount, the first given of from and base, the first given of to and symbols, and a
+// date the route did not overwrite.
+func (n v1Nested) check(p v1Params) error {
+	if n["amount"] != 0 || n["date"] != 0 {
+		return errInvalidParam
+	}
+	for _, keys := range [][2]string{{"from", "base"}, {"to", "symbols"}} {
+		for _, k := range keys {
+			if n[k] != 0 {
+				return errInvalidParam
+			}
+			if _, ok := p[k]; ok {
+				break
+			}
+		}
+	}
+	return nil
 }
 
 // v1Query is Versions::V1::Query: the validated request. Nil Symbols means none given; an empty slice is a given but
@@ -55,6 +113,7 @@ var (
 	errInvalidAmount = errors.New("invalid amount")
 	errBadPair       = errors.New("bad currency pair")
 	errInvalidDate   = errors.New("invalid date")
+	errInvalidParam  = errors.New("invalid parameter")
 )
 
 // buildV1Query is Query.build: it parses every parameter and rejects a conversion from a currency to itself.

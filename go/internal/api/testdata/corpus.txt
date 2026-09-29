@@ -101,3 +101,72 @@ GET /v1/{bday:30}..?date=2020-01-01
 GET /v1/{bday:30}..?date=garbage
 GET /v1/2000-01-01..2000-01-31
 GET /v1/{bday:30}.. | If-None-Match: *
+
+# v1 parameter edge cases: Rack's nil values, nested keys and type conflicts, repeated keys, to_f corners
+GET /v1/latest?amount
+GET /v1/latest?from
+GET /v1/latest?to
+GET /v1/latest?from&to=USD
+GET /v1/latest?to[]=USD
+GET /v1/latest?to%5B%5D=USD&to%5B%5D=GBP
+GET /v1/latest?amount[]=1
+GET /v1/latest?from[x]=USD
+GET /v1/latest?foo=1&foo[]=2
+GET /v1/latest?foo[]=1&foo=2
+GET /v1/latest?foo[]=1&foo[x]=2
+GET /v1/latest?foo[=1
+GET /v1/latest?[to]=USD
+GET /v1/latest?=x&&to=GBP
+GET /v1/latest?amount=1e400
+GET /v1/latest?amount=1&amount=2
+GET /v1/latest?to=USD;GBP
+GET /v1/latest?to=usd,,gbp
+GET /v1/latest?to=,USD
+GET /v1/latest?from=USD&base=GBP
+GET /v1/latest?from=&to=USD
+GET /v1/latest?base=
+GET /v1/latest?amount=.5
+GET /v1/latest?amount=5.
+GET /v1/latest?amount=1_000&from=USD
+GET /v1/latest?amount=%201.5
+GET /v1/latest?amount=1e
+GET /v1/latest?amount=Infinity
+GET /v1/latest?amount=0.00000001
+GET /v1/latest?amount=100000&from=USD
+GET /v1/latest?date=garbage
+GET /v1/latest?to=GBP+USD
+GET /v1/{bday:30}?date=2020-01-01
+GET /v1/{bday:30}..{bday:30}
+GET /v1/{bday:30}..?start_date=garbage&end_date=garbage
+GET /v1/{bday:30}..?to[]=USD
+GET /v1/9999-12-31
+GET /v1/9999-12-31..
+GET /v1/{latest}..9999-12-31
+GET /v1/LATEST
+GET /v1/latest.json
+GET /v1/currencies/
+GET /v1/{bday:30}..{bday:20}..
+PUT /v1/latest
+DELETE /v1/currencies
+HEAD /v1/latest | If-None-Match: *
+POST /v1/latest | If-None-Match: *
+OPTIONS /v1/latest | Origin: https://example.com
+OPTIONS /robots.txt | Origin: https://example.com | Access-Control-Request-Method: GET
+OPTIONS /robots.txt
+GET /robots.txt | Range: bytes=0-3
+GET /v1/openapi.json | Origin: https://example.com
+GET /favicon.ico?x=1
+GET /v1/openapi.json/
+GET /v1//openapi.json
+GET /nothing/../robots.txt
+GET /./favicon.ico
+GET /robots%2Etxt
+GET /v1/nonexistent?to=%zz
+GET /v1?to=%zz
+GET /v1/currencies?to[]=USD&to=GBP
+GET /v1/{bday:30}?from=USD&amount=0.000000001
+GET /v1/latest?from=USD&amount=1e308
+GET /v1/latest?amount=1e308
+GET /v1/{bday:30}..{bday:25}?amount=4
+GET /v1/{bday:30}..{bday:25}?amount=5&from=GBP
+GET /v1/{bday:30}?amount=7.5&from=CHF

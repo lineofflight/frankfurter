@@ -102,6 +102,17 @@ func TestV1ResponsesMatchOpenAPI(t *testing.T) {
 		if doc.Paths.Find(specPath).Get.Responses.Status(res.Code) == nil {
 			continue
 		}
+		// Where Ruby's own answer breaks the document (a tiny amount rounds rates to 0, below its exclusiveMinimum),
+		// Go matching Ruby is what TestGoldenAPI checks.
+		if c.Status == res.Code && c.JSON != nil {
+			ruby := httptest.NewRecorder()
+			ruby.Header().Set("Content-Type", c.Response["content-type"])
+			ruby.WriteHeader(c.Status)
+			ruby.Write(c.JSON)
+			if validateResponse(t, doc, specPath, req, ruby) != nil {
+				continue
+			}
+		}
 		if err := validateResponse(t, doc, specPath, req, res); err != nil {
 			t.Errorf("%s (%d): %v", c.Request, res.Code, err)
 		}

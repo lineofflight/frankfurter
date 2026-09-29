@@ -52,9 +52,13 @@ func (q *v1Quote) Perform(ctx context.Context) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	q.prepare(data)
+	if err := q.prepare(data); err != nil {
+		return false, err
+	}
 	if q.mustRebase() {
-		q.rebase()
+		if err := q.rebase(); err != nil {
+			return false, err
+		}
 	}
 	q.performed = true
 	return true, nil
@@ -69,22 +73,26 @@ func (q *v1Quote) NotFound() bool { return len(q.result.days) == 0 }
 
 // prepare scales each row by the amount, keyed by date and quote in the order rows arrive. A row whose stored
 // components resolve no rate is skipped (Ruby fails the request on the nil).
-func (q *v1Quote) prepare(data []rates.Row) {
+func (q *v1Quote) prepare(data []rates.Row) error {
 	for _, row := range data {
 		if math.IsNaN(row.Rate) {
 			continue
 		}
 		rate := q.Amount * row.Rate
 		if q.shouldRound() {
-			rate = rates.Round(rate)
+			var err error
+			if rate, err = v1Round(rate); err != nil {
+				return err
+			}
 		}
 		q.result.at(db.FormatDate(row.Date)).set(row.Quote, rate)
 	}
+	return nil
 }
 
 // rebase divides each date's rates by the new base's, adding the euro at the amount unless symbols leave it out. A
 // date without the base, or with nothing else, is dropped.
-func (q *v1Quote) rebase() {
+func (q *v1Quote) rebase() error {
 	var kept []*day
 	for _, day := range q.result.days {
 		if q.Symbols == nil || slices.Contains(q.Symbols, "EUR") {
@@ -96,11 +104,27 @@ func (q *v1Quote) rebase() {
 		}
 		sort.Slice(day.rates, func(i, j int) bool { return day.rates[i].quote < day.rates[j].quote })
 		for i := range day.rates {
-			day.rates[i].rate = rates.Round(q.Amount * day.rates[i].rate / divisor)
+			rate, err := v1Round(q.Amount * day.rates[i].rate / divisor)
+			if err != nil {
+				return err
+			}
+			day.rates[i].rate = rate
 		}
 		kept = append(kept, day)
 	}
 	q.result.days = kept
+	return nil
+}
+
+// errNotFinite is Ruby's Roundable#round failing on an infinite or NaN value (an amount like 1e400, or a rebase onto
+// a currency whose rate rounded to zero): Float#round and Float() raise, and V1 answers 422.
+var errNotFinite = errors.New("rate is not a finite number")
+
+func v1Round(x float64) (float64, error) {
+	if math.IsNaN(x) || math.IsInf(x, 0) {
+		return 0, errNotFinite
+	}
+	return rates.Round(x), nil
 }
 
 // dayRates is the result: rates per date, dates in first-seen order, as Ruby's insertion-ordered Hash.
