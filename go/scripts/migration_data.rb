@@ -39,7 +39,7 @@ end
     # these old schemas lack (Provider#frequency). Go clears blended_rates instead (core-ops.md); blended_rates is empty
     # here at that point either way, so stub the recompute out.
     require "blended_rate"
-    BlendedRate.define_singleton_method(:refresh) { |*| }
+    BlendedRate.define_singleton_method(:refresh) { |*| nil }
   end
   Sequel::IntegerMigrator.new(DB, dir, target: version).run
   next unless phases[version]
@@ -50,4 +50,4 @@ up = dump
 Sequel::IntegerMigrator.new(DB, dir, target: 8).run
 down = dump
 
-File.write(File.join(out, "ruby.json"), JSON.pretty_generate({ "up" => up, "down" => down }) + "\n")
+File.write(File.join(out, "ruby.json"), "#{JSON.pretty_generate({ "up" => up, "down" => down })}\n")

@@ -40,4 +40,4 @@ rescue Sequel::Error => e
   break
 end
 
-File.write(ARGV.fetch(0), JSON.pretty_generate("latest" => latest, "up" => up, "down" => down) + "\n")
+File.write(ARGV.fetch(0), "#{JSON.pretty_generate("latest" => latest, "up" => up, "down" => down)}\n")

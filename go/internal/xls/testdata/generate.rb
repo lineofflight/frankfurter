@@ -16,13 +16,13 @@ book = Spreadsheet::Workbook.new
 strings = book.create_worksheet(name: "Strings")
 100.times do |i|
   strings.row(i).replace([
-    "Row #{i} " + "abcdefghij" * (i % 7),
+    "Row #{i} " + ("abcdefghij" * (i % 7)),
     "Cotización #{i}",
-    "Курс #{i} " + "ж" * (i % 13),
+    "Курс #{i} " + ("ж" * (i % 13)),
     "Rate 💱 #{i}",
   ])
 end
-strings.row(100).replace(["Ж" + "a" * 5000]) # wide, then compressed once the Cyrillic falls in an earlier record
+strings.row(100).replace(["Ж#{"a" * 5000}"]) # wide, then compressed once the Cyrillic falls in an earlier record
 strings.row(101).replace(["é" * 5000])
 
 values = book.create_worksheet(name: "Año Курс")

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Writes the workbooks bcbo_spec.rb builds inline with the spreadsheet gem, so the Go tests read the same bytes.
-# From the repository root:
+# Writes the workbooks bcbo_spec.rb builds inline with the spreadsheet gem, so the Go tests read the same bytes. From
+# the repository root:
 #   APP_ENV=test mise exec -- bundle exec ruby go/internal/adapters/bcbo/testdata/fixtures/generate.rb
 
 require "spreadsheet"

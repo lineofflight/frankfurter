@@ -13,9 +13,9 @@
 #   --repeats           allow_playback_repeats: true
 #   --today YYYY-MM-DD  stub Date.today, as a spec's Date.stub(:today, ...) does
 #
-# Run from the repository root. It configures VCR and WebMock itself and never loads spec/helper.rb, which would
-# reseed the test database. APP_ENV=test is still required: it stubs adapter sleeps and points lib/db.rb at the test
-# database, which adapters only read.
+# Run from the repository root. It configures VCR and WebMock itself and never loads spec/helper.rb, which would reseed
+# the test database. APP_ENV=test is still required: it stubs adapter sleeps and points lib/db.rb at the test database,
+# which adapters only read.
 
 require "json"
 require "optparse"
@@ -43,7 +43,8 @@ require "provider/adapters/#{key.downcase}"
 
 # Credentials the recording replaced with placeholders. VCR swaps each placeholder back for the variable's value on
 # playback, so any value works as long as the adapter sends the same one.
-SECRETS = ["TCMB_API_KEY", "FRED_API_KEY", "BAM_API_KEY", "BANXICO_API_KEY", "BCCH_USER", "BCCH_PASS", "BOT_API_KEY"].freeze
+SECRETS = ["TCMB_API_KEY", "FRED_API_KEY", "BAM_API_KEY", "BANXICO_API_KEY", "BCCH_USER", "BCCH_PASS",
+           "BOT_API_KEY",].freeze
 
 VCR.configure do |c|
   c.cassette_library_dir = File.expand_path("../../spec/vcr_cassettes", __dir__)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Writes the .xls fixtures for bdl_test.go with the spreadsheet gem, exactly as bdl_spec.rb's build_xls builds them.
-# Go has no .xls writer, so the workbooks are generated once and committed. From the repository root:
+# Writes the .xls fixtures for bdl_test.go with the spreadsheet gem, exactly as bdl_spec.rb's build_xls builds them. Go
+# has no .xls writer, so the workbooks are generated once and committed. From the repository root:
 #
 #   APP_ENV=test mise exec -- bundle exec ruby go/internal/adapters/bdl/testdata/fixtures.rb
 

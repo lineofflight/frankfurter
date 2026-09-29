@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# Replays the API corpus through the Ruby app (Rack::MockRequest against App, full middleware stack) on the spec
-# fixture plus edge rows, and writes the database and every response as gzipped JSON for the Go parity test in
-# internal/api (TestGoldenAPI).
+# Replays the API corpus through the Ruby app (Rack::MockRequest against App, full middleware stack) on the spec fixture
+# plus edge rows, and writes the database and every response as gzipped JSON for the Go parity test in internal/api
+# (TestGoldenAPI).
 #
 #   DATABASE_URL=sqlite://<scratch>/api.sqlite3 APP_ENV=test \
 #     mise exec -- bundle exec ruby -Ilib -r./boot go/scripts/api_golden.rb 2026-09-29 \
@@ -49,8 +49,8 @@ Rate.where(provider: "ECB", date: Fixtures.business_day(100)).delete
 # An unknown code and an expired one on the latest day: raw v1 quotes include them, the v1 catalogue does not.
 insert("ECB", Fixtures.latest_date, "EUR", "ZZZ", mid: 2.0)
 insert("ECB", Fixtures.latest_date, "EUR", "SLL", mid: 2.0)
-# v2: a pegged quote a provider publishes (peg-snapped, contributors excluded), Norges Bank with an index next to
-# its currencies (kept out of blends and the catalogue), and a monthly provider (kept out of blends, served by name).
+# v2: a pegged quote a provider publishes (peg-snapped, contributors excluded), Norges Bank with an index next to its
+# currencies (kept out of blends and the catalogue), and a monthly provider (kept out of blends, served by name).
 insert("ECB", Fixtures.latest_date, "EUR", "AED", mid: 3.97)
 [Fixtures.latest_date, Fixtures.business_day(3)].each do |date|
   insert("NB", date, "USD", "NOK", mid: 10.0)

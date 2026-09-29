@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Writes the .xls fixtures for bcv_test.go with the spreadsheet gem, exactly as spec/provider/adapters/bcv_spec.rb builds
-# them in memory. Go has no .xls writer, so the workbooks are checked in. Regenerate from the repository root:
+# Writes the .xls fixtures for bcv_test.go with the spreadsheet gem, exactly as spec/provider/adapters/bcv_spec.rb
+# builds them in memory. Go has no .xls writer, so the workbooks are checked in. Regenerate from the repository root:
 #
 #   APP_ENV=test mise exec -- bundle exec ruby go/internal/adapters/bcv/testdata/xls/build.rb
 
@@ -35,16 +35,16 @@ write("ask", build_xls({
     [nil, "EUR", "Zona Euro", 1.16328, 1.1633, 951.63936288, 954.02442394],
     [nil, "USD", "E.U.A.", 1.0, 1.0, 818.0515455, 820.1018],
   ],
-}))
+}),)
 
 write("fecha_valor", build_xls({
   "07/09/2026" => [[nil, "USD", "E.U.A.", 1.0, 1.0, 812.654073, 814.6908]],
   "04/09/2026" => [[nil, "USD", "E.U.A.", 1.0, 1.0, 800.0, 802.0]],
-}))
+}),)
 
 write("mxp", build_xls({
   "09/09/2026" => [[nil, "MXP", "Mexico", 16.913, 16.9148, 48.36821057, 48.48943416]],
-}))
+}),)
 
 write("skips", build_xls({
   "09/09/2026" => [
@@ -54,7 +54,7 @@ write("skips", build_xls({
     [nil, ""],
     [nil, "(*) Tipo de Cambio de Referencia producto de las operaciones"],
   ],
-}))
+}),)
 
 book = Spreadsheet::Workbook.new
 sheet = book.create_worksheet(name: "09092026")

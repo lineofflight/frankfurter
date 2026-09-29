@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-# Dumps the Money gem's currency table, before Frankfurter's patches, for go/internal/currency. Keys are the gem's
-# table ids (upper-cased); an id may name an alias whose iso_code differs (GHC -> GHS). Regenerate after a money gem
-# upgrade:
+# Dumps the Money gem's currency table, before Frankfurter's patches, for go/internal/currency. Keys are the gem's table
+# ids (upper-cased); an id may name an alias whose iso_code differs (GHC -> GHS). Regenerate after a money gem upgrade:
 #
 #   APP_ENV=test mise exec -- bundle exec ruby go/scripts/dump_money.rb > go/internal/currency/money.json
 
