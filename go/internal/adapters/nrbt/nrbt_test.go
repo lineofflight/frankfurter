@@ -2,6 +2,7 @@ package nrbt
 
 import (
 	"context"
+	"encoding/xml"
 	"math"
 	"slices"
 	"testing"
@@ -122,6 +123,36 @@ func TestColumnIndex(t *testing.T) {
 		if got, ok := columnIndex(ref); !ok || got != want {
 			t.Errorf("columnIndex(%q) = %d, %v; want %d", ref, got, ok, want)
 		}
+	}
+}
+
+func TestParseSheetSkipsZeroBlankAndFlags(t *testing.T) {
+	// Serial 45659 is 2025-01-02; a float serial is truncated as Ruby's to_i does. BUY (B) and SELL (AB) are ignored.
+	data := `<worksheet><sheetData>
+<row><c r="A1" t="s"><v>0</v></c><c r="O1" t="s"><v>1</v></c></row>
+<row><c r="A2"><v>45659</v></c><c r="B2"><v>9.9</v></c><c r="O2"><v>0.6626</v></c><c r="P2"><v>0</v></c>
+<c r="Q2"><v></v></c><c r="R2" t="s"><v>3</v></c><c r="U2"><v>0.4106</v></c><c r="AB2"><v>8.8</v></c></row>
+<row><c r="A3"><v>45660.75</v></c><c r="Z3"><v>0.55</v></c></row>
+<row><c r="A4"><v>45661</v></c><c r="O4" t="s"><v>2</v></c></row>
+</sheetData></worksheet>`
+	var ws worksheet
+	if err := xml.Unmarshal([]byte(data), &ws); err != nil {
+		t.Fatal(err)
+	}
+	got := parseSheet(&ws, time.Time{}, time.Time{})
+	want := []adapter.Rate{
+		{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626},
+		{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "USD", Rate: 0.4106},
+		{Date: adapter.Date(2025, 1, 3), Base: "TOP", Quote: "SGD", Rate: 0.55},
+	}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %+v\nwant %+v", got, want)
+	}
+
+	// Both bounds are inclusive.
+	got = parseSheet(&ws, adapter.Date(2025, 1, 3), adapter.Date(2025, 1, 3))
+	if len(got) != 1 || !got[0].Date.Equal(adapter.Date(2025, 1, 3)) {
+		t.Errorf("windowed = %+v, want only 2025-01-03", got)
 	}
 }
 
