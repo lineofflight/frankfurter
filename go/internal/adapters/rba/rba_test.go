@@ -96,6 +96,42 @@ Series ID,FXRUSD,FXRTWI,FXRJY
 	}
 }
 
+const header = "F11.1  EXCHANGE RATES\nTitle,A$1=USD,A$1=JPY\nDescription,a,b\nFrequency,Daily,Daily\n" +
+	"Type,Indicative,Indicative\nUnits,USD,JPY\n\n\nSource,a,b\nPublication date,20-Mar-2026,20-Mar-2026\n" +
+	"Series ID,FXRUSD,FXRJY\n"
+
+func TestParseRejectsMalformedLine(t *testing.T) {
+	// Ruby's CSV.parse_line raises on a malformed data line rather than skipping it.
+	for _, line := range []string{`03-Jan-2023,0"6828,88.48`, `03-Jan-2023,"0.6828,88.48`} {
+		if _, err := parse([]byte(header + line + "\n")); err == nil {
+			t.Errorf("%s: want error", line)
+		}
+	}
+}
+
+func TestParseSkipsBlankValuesAndNonDateRows(t *testing.T) {
+	rates, err := parse([]byte(header + "03-Jan-2023, ,88.48\n\nNotes,x\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2023, 1, 3), Base: "AUD", Quote: "JPY", Rate: 88.48}}
+	if !reflect.DeepEqual(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseRequiresHeaderRows(t *testing.T) {
+	if _, err := parse([]byte("Series ID,FXRUSD\n")); err == nil {
+		t.Error("want error without a Units row")
+	}
+	if _, err := parse([]byte("Units,USD\n")); err == nil {
+		t.Error("want error without a Series ID row")
+	}
+	if _, err := parse([]byte(header + "03-Jan-2023,abc,88.48\n")); err == nil {
+		t.Error("want error for a non-numeric rate")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2025, 1, 1), adapter.Date(2026, 3, 20))

@@ -9,6 +9,7 @@ import (
 	"encoding/csv"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"regexp"
 	"strings"
@@ -66,11 +67,17 @@ func (a *Adapter) Fetch(ctx context.Context, after, _ time.Time) ([]adapter.Rate
 func parse(data []byte) ([]adapter.Rate, error) {
 	lines := strings.SplitAfter(strings.ToValidUTF8(string(data), "�"), "\n")
 
-	units := findLine(lines, "Units,")
+	units, err := findLine(lines, "Units,")
+	if err != nil {
+		return nil, err
+	}
 	if units == nil {
 		return nil, errors.New("units header row not found in F11.1 CSV")
 	}
-	series := findLine(lines, "Series ID,")
+	series, err := findLine(lines, "Series ID,")
+	if err != nil {
+		return nil, err
+	}
 	if series == nil {
 		return nil, errors.New("series ID header row not found in F11.1 CSV")
 	}
@@ -93,7 +100,10 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, line := range lines[min(metadataRows, len(lines)):] {
-		row := parseLine(line)
+		row, err := parseLine(line)
+		if err != nil {
+			return nil, err
+		}
 		if len(row) == 0 || !datePattern.MatchString(row[0]) {
 			continue
 		}
@@ -118,23 +128,22 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-func findLine(lines []string, prefix string) []string {
+func findLine(lines []string, prefix string) ([]string, error) {
 	for _, l := range lines {
 		if strings.HasPrefix(l, prefix) {
 			return parseLine(l)
 		}
 	}
-	return nil
+	return nil, nil
 }
 
-// parseLine is CSV.parse_line: one record, nil for a blank or malformed line.
-func parseLine(line string) []string {
+// parseLine is CSV.parse_line: one record, nil for a blank line, and an error for a malformed one.
+func parseLine(line string) ([]string, error) {
 	r := csv.NewReader(strings.NewReader(line))
 	r.FieldsPerRecord = -1
-	r.LazyQuotes = true
 	record, err := r.Read()
-	if err != nil {
-		return nil
+	if err == io.EOF {
+		return nil, nil
 	}
-	return record
+	return record, err
 }
