@@ -37,6 +37,7 @@ jobs:
           go-version-file: go/go.mod
           cache-dependency-path: go/go.sum
       - run: test -z "$(gofmt -l .)"
+      - run: go run ./scripts/commentwrap -l .
       - run: go vet ./...
       - run: go test ./...
 
