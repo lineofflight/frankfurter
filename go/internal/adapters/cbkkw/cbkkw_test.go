@@ -3,7 +3,11 @@ package cbkkw
 import (
 	"context"
 	"fmt"
+	"io"
 	"maps"
+	"net/http"
+	"net/url"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -154,4 +158,71 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchPostsDateWindowPerCurrency(t *testing.T) {
+	var forms []url.Values
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		body := `<input name="formId" value="127906" /><option value="USD:128735"><option value="EUR:128674">`
+		if r.Method == http.MethodPost {
+			if r.URL.String() != lookupURL {
+				t.Errorf("POST %s, want %s", r.URL, lookupURL)
+			}
+			if err := r.ParseForm(); err != nil {
+				t.Fatal(err)
+			}
+			forms = append(forms, r.PostForm)
+			body = fragment([2]string{"08.09.2026", "306.650"})
+		} else if r.URL.String() != formURL {
+			t.Errorf("GET %s, want %s", r.URL, formURL)
+		}
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+	})}
+
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2026, 9, 6), adapter.Date(2026, 9, 8))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []url.Values{
+		{"formId": {"127906"}, "selCurrency": {"USD:128735"}, "txtDateFrom": {"05/09/2026"}, "txtDateTo": {"08/09/2026"}},
+		{"formId": {"127906"}, "selCurrency": {"EUR:128674"}, "txtDateFrom": {"05/09/2026"}, "txtDateTo": {"08/09/2026"}},
+	}
+	if !reflect.DeepEqual(forms, want) {
+		t.Errorf("forms = %v, want %v", forms, want)
+	}
+	if len(rates) != 2 || rates[0].Base != "USD" || rates[1].Base != "EUR" {
+		t.Errorf("rates = %+v", rates)
+	}
+}
+
+func TestFetchEmptyWindowMakesNoRequests(t *testing.T) {
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		t.Errorf("unexpected request %s %s", r.Method, r.URL)
+		return nil, io.EOF
+	})}
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2026, 9, 9), adapter.Date(2026, 9, 8))
+	if err != nil || rates != nil {
+		t.Errorf("rates, err = %v, %v; want nil, nil", rates, err)
+	}
+}
+
+func TestParseFormFailsWithoutFormID(t *testing.T) {
+	if _, _, err := parseForm(`<option value="USD:128735">`); err == nil {
+		t.Error("want error")
+	}
+}
+
+func TestParseFormDuplicateCodeKeepsFirstPositionLastID(t *testing.T) {
+	_, currencies, err := parseForm(`<input name="formId" value="1" />
+<option value="USD:1"><option value="EUR:2"><option value="USD:3">`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []currency{{"USD", "3"}, {"EUR", "2"}}; !slices.Equal(currencies, want) {
+		t.Errorf("currencies = %v, want %v", currencies, want)
+	}
 }
