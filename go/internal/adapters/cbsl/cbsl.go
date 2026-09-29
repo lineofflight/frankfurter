@@ -117,12 +117,13 @@ func parse(html []byte) ([]adapter.Rate, error) {
 			if cells.Length() < 2 {
 				return true
 			}
-			dateText := strings.TrimSpace(cells.Eq(0).Text())
+			dateText := strip(cells.Eq(0).Text())
 			if !datePattern.MatchString(dateText) {
 				return true
 			}
-			rate, ok := adapter.ParseFloat(cells.Eq(1).Text())
-			if !ok || rate <= 0 {
+			rateText := strip(cells.Eq(1).Text())
+			rate, ok := adapter.ParseFloat(rateText)
+			if !ok || rate <= 0 || rateText != strings.TrimSpace(rateText) {
 				return true
 			}
 			date, err := time.Parse(time.DateOnly, dateText)
@@ -140,6 +141,10 @@ func parse(html []byte) ([]adapter.Rate, error) {
 	}
 	return rates, nil
 }
+
+// strip trims what Ruby's String#strip does: ASCII whitespace and NUL but not Unicode spaces, so a cell padded with
+// &nbsp; is rejected as in the Ruby adapter.
+func strip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
 func currencyCode(table *goquery.Selection) string {
 	code := ""

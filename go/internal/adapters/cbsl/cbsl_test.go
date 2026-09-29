@@ -2,8 +2,14 @@ package cbsl
 
 import (
 	"context"
+	"io"
+	"net/http"
+	"net/url"
+	"reflect"
 	"slices"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -172,4 +178,72 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseSkipsCellsPaddedWithNoBreakSpace(t *testing.T) {
+	html := `<table>
+  <thead><tr><th>Date</th><th>1 USD -&gt; LKR</th></tr></thead>
+  <tbody>
+    <tr><td>&nbsp;2025-05-19</td><td> 298.8165 </td></tr>
+    <tr><td> 2025-05-16 </td><td>298.5101&nbsp;</td></tr>
+    <tr><td> 2025-05-15 </td><td> 297.1 </td></tr>
+  </tbody>
+</table>
+`
+	rates, err := parse([]byte(html))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2025, 5, 15)) || rates[0].Rate != 297.1 {
+		t.Errorf("got %+v, want only the 2025-05-15 row", rates)
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchPostsFormWithCurrenciesAndDates(t *testing.T) {
+	var form url.Values
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		body := `<input name="chk_cur[]" value="USD~United States Dollar"><input name="chk_cur[]" value="EUR~Euro">`
+		if r.Method == http.MethodPost {
+			if r.URL.String() != "https://www.cbsl.gov.lk/cbsl_custom/exrates/exrates_results.php" {
+				t.Errorf("POST %s", r.URL)
+			}
+			if err := r.ParseForm(); err != nil {
+				t.Fatal(err)
+			}
+			form = r.PostForm
+			body = ""
+		}
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+	})}
+	a := New(client)
+	a.Now = func() time.Time { return time.Date(2025, 5, 19, 12, 0, 0, 0, time.UTC) }
+	if _, err := a.Fetch(context.Background(), time.Time{}, time.Time{}); err != nil {
+		t.Fatal(err)
+	}
+	want := url.Values{
+		"lookupPage":    {"lookup_daily_exchange_rates.php"},
+		"rangeType":     {"dates"},
+		"txtStart":      {""},
+		"txtEnd":        {"2025-05-19"},
+		"chk_cur[]":     {"USD~United States Dollar", "EUR~Euro"},
+		"submit_button": {"Submit"},
+	}
+	if !reflect.DeepEqual(form, want) {
+		t.Errorf("form = %v, want %v", form, want)
+	}
+}
+
+func TestParseErrorsOnImpossibleDate(t *testing.T) {
+	html := `<table>
+  <thead><tr><th>Date</th><th>1 USD -&gt; LKR</th></tr></thead>
+  <tbody><tr><td>2025-13-01</td><td>298.8165</td></tr></tbody>
+</table>
+`
+	if _, err := parse([]byte(html)); err == nil {
+		t.Error("want error for 2025-13-01")
+	}
 }
