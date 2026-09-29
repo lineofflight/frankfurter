@@ -2,9 +2,13 @@ package lb
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -201,6 +205,82 @@ func TestParseEmptyResponse(t *testing.T) {
 <FxRates xmlns="http://www.lb.lt/WebServices/FxRates" />`)
 	if len(rates) != 0 {
 		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
+
+func TestParseSkipsBlankFields(t *testing.T) {
+	rates := mustParse(t, `<?xml version="1.0" encoding="utf-8"?>
+<FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+  <FxRate>
+    <Tp>LT</Tp>
+    <Dt>2014-12-30</Dt>
+    <CcyAmt><Ccy>LTL</Ccy><Amt>7.6881</Amt></CcyAmt>
+    <CcyAmt><Ccy>AED</Ccy><Amt> </Amt></CcyAmt>
+  </FxRate>
+  <FxRate>
+    <Tp>LT</Tp>
+    <Dt>2014-12-30</Dt>
+    <CcyAmt><Ccy>LTL</Ccy><Amt>0</Amt></CcyAmt>
+    <CcyAmt><Ccy>AFN</Ccy><Amt>100</Amt></CcyAmt>
+  </FxRate>
+  <FxRate>
+    <Tp>EU</Tp>
+    <Dt>2025-03-17</Dt>
+    <CcyAmt><Ccy>EUR</Ccy><Amt>1</Amt></CcyAmt>
+  </FxRate>
+  <FxRate>
+    <Tp>EU</Tp>
+    <Dt>2025-03-17</Dt>
+    <CcyAmt><Ccy>EUR</Ccy><Amt>1</Amt></CcyAmt>
+    <CcyAmt><Ccy>USD</Ccy><Amt>1.09</Amt></CcyAmt>
+  </FxRate>
+</FxRates>`)
+	if len(rates) != 1 || rates[0].Quote != "USD" {
+		t.Errorf("rates = %+v, want only EUR/USD", rates)
+	}
+}
+
+func TestParseRejectsBadAmount(t *testing.T) {
+	_, err := parse([]byte(`<FxRates><FxRate><Tp>EU</Tp><Dt>2025-03-17</Dt>
+<CcyAmt><Ccy>EUR</Ccy><Amt>1</Amt></CcyAmt><CcyAmt><Ccy>USD</Ccy><Amt>n/a</Amt></CcyAmt></FxRate></FxRates>`))
+	if err == nil {
+		t.Error("want an error for a non-numeric amount")
+	}
+}
+
+type recorder struct{ reqs []*http.Request }
+
+func (rt *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	rt.reqs = append(rt.reqs, req)
+	body := io.NopCloser(strings.NewReader(`<FxRates/>`))
+	return &http.Response{StatusCode: http.StatusOK, Body: body, Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchRequestsEachWeekdayWithType(t *testing.T) {
+	rt := &recorder{}
+	a := New(&http.Client{Transport: rt})
+	// Wednesday 2014-12-31 through Monday 2015-01-05, crossing euro adoption and a weekend.
+	if _, err := a.Fetch(context.Background(), adapter.Date(2014, 12, 31), adapter.Date(2015, 1, 5)); err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, req := range rt.reqs {
+		if u := req.URL.Scheme + "://" + req.URL.Host + req.URL.Path; u != baseURL {
+			t.Errorf("url = %s", req.URL)
+		}
+		q := req.URL.Query()
+		got = append(got, q.Get("tp")+" "+q.Get("dt"))
+	}
+	want := []string{"LT 2014-12-31", "EU 2015-01-01", "EU 2015-01-02", "EU 2015-01-05"}
+	if !slices.Equal(got, want) {
+		t.Errorf("requests = %v, want %v", got, want)
+	}
+}
+
+func TestFetchNeedsStartDate(t *testing.T) {
+	a := New(&http.Client{Transport: &recorder{}})
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2015, 1, 5)); err == nil {
+		t.Error("want an error without a start date")
 	}
 }
 

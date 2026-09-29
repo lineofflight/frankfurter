@@ -112,7 +112,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			continue
 		}
 		first, second := fx.Amounts[0], fx.Amounts[1]
-		if first.Ccy == "" || first.Amt == "" || second.Ccy == "" || second.Amt == "" || fx.Dt == "" {
+		// Ox drops whitespace-only text, so Ruby sees such fields as missing.
+		if blank(first.Ccy) || blank(first.Amt) || blank(second.Ccy) || blank(second.Amt) || blank(fx.Dt) {
 			continue
 		}
 		date, err := time.Parse(time.DateOnly, strings.TrimSpace(fx.Dt))
@@ -152,6 +153,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	}
 	return rates, nil
 }
+
+func blank(s string) bool { return strings.TrimSpace(s) == "" }
 
 // parseAmount is Ruby's raising Float(s).
 func parseAmount(s string) (float64, error) {
