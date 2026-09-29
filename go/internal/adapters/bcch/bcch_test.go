@@ -108,3 +108,24 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseSkipsZeroValues(t *testing.T) {
+	rates, err := parse([]byte(`{"Codigo":0,"Series":{"Obs":[
+		{"indexDateString":"10-03-2026","value":"0","statusCode":"OK"},
+		{"indexDateString":"11-03-2026","value":"893.69","statusCode":"OK"}]}}`), "USD")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 3, 11)) {
+		t.Errorf("rates = %+v, want only 2026-03-11", rates)
+	}
+}
+
+// Ruby's Float() raises on an OK observation it cannot parse.
+func TestParseRejectsInvalidOKValue(t *testing.T) {
+	_, err := parse([]byte(`{"Codigo":0,"Series":{"Obs":[
+		{"indexDateString":"10-03-2026","value":"NaN","statusCode":"OK"}]}}`), "USD")
+	if err == nil {
+		t.Error("want error for unparseable OK value")
+	}
+}
