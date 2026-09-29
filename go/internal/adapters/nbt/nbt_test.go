@@ -183,6 +183,24 @@ func TestParseSkips(t *testing.T) {
 	}
 }
 
+func TestFetchRequiresAfter(t *testing.T) {
+	a := New(vcrtest.Client(t, "nbt", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 5, 20)); err == nil {
+		t.Fatal("want error for zero after")
+	}
+}
+
+func TestParseKeepsMatchingDateAndSkipsZeroNominal(t *testing.T) {
+	rates := mustParse(t, `<ValCurs Date="2026-05-20">
+<Valute><CharCode>USD</CharCode><Nominal>1</Nominal><Value>9.3288</Value></Valute>
+<Valute><CharCode>UZS</CharCode><Nominal>0</Nominal><Value>0.0774</Value></Valute>
+</ValCurs>`, adapter.Date(2026, 5, 20))
+
+	if len(rates) != 1 || rates[0].Base != "USD" {
+		t.Fatalf("got %+v, want only USD", rates)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))
