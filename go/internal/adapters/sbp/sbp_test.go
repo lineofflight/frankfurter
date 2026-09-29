@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/xuri/excelize/v2"
+
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
@@ -129,6 +131,30 @@ func TestParseMapsLabelSpellingVariants(t *testing.T) {
 		if got := currencies[label]; got != want {
 			t.Errorf("currencies[%q] = %q, want %q", label, got, want)
 		}
+	}
+}
+
+func TestParseSkipsStringCells(t *testing.T) {
+	f := excelize.NewFile()
+	for ref, v := range map[string]any{
+		"C2": 46113, "D2": 46114, "E2": 46115, "F2": "46116",
+		"B3": "U.S. Dollar", "C3": 280.5, "D3": "281", "F3": 282,
+	} {
+		if err := f.SetCellValue("Sheet1", ref, v); err != nil {
+			t.Fatal(err)
+		}
+	}
+	buf, err := f.WriteToBuffer()
+	if err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(buf.Bytes())
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 4, 1), Base: "USD", Quote: "PKR", Rate: 280.5}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %v, want %v", rates, want)
 	}
 }
 

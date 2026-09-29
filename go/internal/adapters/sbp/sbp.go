@@ -10,18 +10,16 @@
 package sbp
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
 	"errors"
-	"fmt"
-	"io"
 	"net/http"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -121,130 +119,82 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return out, nil
 }
 
-type cell struct {
-	Ref  string  `xml:"r,attr"`
-	Type string  `xml:"t,attr"`
-	V    *string `xml:"v"`
+// sheet wraps the first worksheet's raw cell values. Cell types are looked up lazily, since only a few cells per row
+// need them and Rows/GetRows do not expose them.
+type sheet struct {
+	f    *excelize.File
+	name string
+	rows [][]string
 }
 
-type row struct {
-	Cells []cell `xml:"c"`
+func (s sheet) cellType(r, c int) excelize.CellType {
+	ref, _ := excelize.CoordinatesToCellName(c+1, r+1)
+	t, _ := s.f.GetCellType(s.name, ref)
+	return t
 }
 
-type worksheet struct {
-	Rows []row `xml:"sheetData>row"`
+// isText reports whether a cell holds a string rather than a stored number. The old XML parser only saw <v>, which
+// shared strings index into and inline strings lack.
+func (s sheet) isText(r, c int) bool {
+	t := s.cellType(r, c)
+	return t == excelize.CellTypeSharedString || t == excelize.CellTypeInlineString
 }
-
-var trailingDigits = regexp.MustCompile(`\d+$`)
-
-func column(ref string) string { return trailingDigits.ReplaceAllString(ref, "") }
 
 func parse(data []byte) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
 		return nil, err
 	}
-	strs, err := sharedStrings(zr)
+	defer f.Close()
+	if _, ok := f.Pkg.Load("xl/sharedStrings.xml"); !ok {
+		return nil, errors.New("xl/sharedStrings.xml missing from workbook")
+	}
+	// Both workbooks hold a single worksheet (named Sheet1 in one, Sheet2 in the other), stored as sheet1.xml.
+	names := f.GetSheetList()
+	if len(names) == 0 {
+		return nil, errors.New("worksheet missing from workbook")
+	}
+	rows, err := f.GetRows(names[0])
 	if err != nil {
 		return nil, err
 	}
-	sheetXML, err := readEntry(zr, "xl/worksheets/sheet1.xml")
-	if err != nil {
-		return nil, err
-	}
-	if sheetXML == nil {
-		return nil, errors.New("xl/worksheets/sheet1.xml missing from workbook")
-	}
-	var ws worksheet
-	if err := xml.Unmarshal(sheetXML, &ws); err != nil {
-		return nil, err
-	}
+	s := sheet{f, names[0], rows}
 
-	dates := dateMap(ws.Rows)
+	dates := s.dateMap()
 	var rates []adapter.Rate
-	for _, rw := range ws.Rows {
-		label, ok := currencyLabel(rw, strs)
+	for r, rw := range rows {
+		iso, ok := currencies[normalizeLabel(s.currencyLabel(r))]
 		if !ok {
 			continue
 		}
-		iso, ok := currencies[normalizeLabel(label)]
-		if !ok {
-			continue
-		}
-		for _, c := range rw.Cells {
-			if c.Ref == "" {
-				continue
-			}
-			date, ok := dates[column(c.Ref)]
+		for c, v := range rw {
+			date, ok := dates[c]
 			if !ok {
 				continue
 			}
-			value, ok := numericValue(c)
-			if !ok {
+			rate, ok := adapter.ParseFloat(v)
+			if !ok || rate <= 0 || s.isText(r, c) {
 				continue
 			}
-			rates = append(rates, adapter.Rate{Date: date, Base: iso, Quote: "PKR", Rate: value})
+			rates = append(rates, adapter.Rate{Date: date, Base: iso, Quote: "PKR", Rate: rate})
 		}
 	}
 	return rates, nil
 }
 
-func readEntry(zr *zip.Reader, name string) ([]byte, error) {
-	for _, f := range zr.File {
-		if f.Name != name {
-			continue
-		}
-		rc, err := f.Open()
-		if err != nil {
-			return nil, err
-		}
-		defer rc.Close()
-		return io.ReadAll(rc)
-	}
-	return nil, nil
-}
-
-func sharedStrings(zr *zip.Reader) ([]string, error) {
-	data, err := readEntry(zr, "xl/sharedStrings.xml")
-	if err != nil {
-		return nil, err
-	}
-	if data == nil {
-		return nil, errors.New("xl/sharedStrings.xml missing from workbook")
-	}
-	var sst struct {
-		XMLName xml.Name
-		Items   []struct {
-			Parts []struct {
-				Text string `xml:",chardata"`
-			} `xml:",any"`
-		} `xml:"si"`
-	}
-	if err := xml.Unmarshal(data, &sst); err != nil {
-		return nil, fmt.Errorf("sharedStrings: %w", err)
-	}
-	out := make([]string, len(sst.Items))
-	for i, si := range sst.Items {
-		var b strings.Builder
-		for _, p := range si.Parts {
-			b.WriteString(p.Text)
-		}
-		out[i] = b.String()
-	}
-	return out, nil
+func isSerial(v string) bool {
+	n := toF(v)
+	return n > 30000 && n < 80000
 }
 
 // dateMap finds the date header row structurally: the first row with at least three numeric cells holding plausible
-// Excel serial dates (post-1980, pre-2100). SBP moves metadata rows around between revisions, so row numbers are not
-// fixed.
-func dateMap(rows []row) map[string]time.Time {
-	for _, rw := range rows {
+// Excel serial dates (post-1980, pre-2100), keyed by column index. SBP moves metadata rows around between revisions,
+// so row numbers are not fixed.
+func (s sheet) dateMap() map[int]time.Time {
+	for r, rw := range s.rows {
 		serials := 0
-		for _, c := range rw.Cells {
-			if c.Type == "s" || c.V == nil {
-				continue
-			}
-			if n := toF(*c.V); n > 30000 && n < 80000 {
+		for c, v := range rw {
+			if isSerial(v) && !s.isText(r, c) {
 				serials++
 			}
 		}
@@ -252,47 +202,27 @@ func dateMap(rows []row) map[string]time.Time {
 			continue
 		}
 
-		m := map[string]time.Time{}
-		for _, c := range rw.Cells {
-			if c.Type == "s" || c.Ref == "" || c.V == nil || *c.V == "" {
-				continue
+		m := map[int]time.Time{}
+		for c, v := range rw {
+			if isSerial(v) && !s.isText(r, c) {
+				m[c] = excelEpoch.AddDate(0, 0, toI(v))
 			}
-			if n := toF(*c.V); n <= 30000 || n >= 80000 {
-				continue
-			}
-			m[column(c.Ref)] = excelEpoch.AddDate(0, 0, toI(*c.V))
 		}
 		return m
 	}
-	return map[string]time.Time{}
+	return map[int]time.Time{}
 }
 
-func currencyLabel(rw row, strs []string) (string, bool) {
-	for _, c := range rw.Cells {
-		if !strings.HasPrefix(c.Ref, "B") || c.Type != "s" {
-			continue
+// currencyLabel returns the first shared-string cell whose reference starts with B, as the Ruby adapter's
+// start_with?("B") does (so BA, BB, ... also qualify when B itself is not a shared string).
+func (s sheet) currencyLabel(r int) string {
+	for c := range s.rows[r] {
+		name, _ := excelize.ColumnNumberToName(c + 1)
+		if strings.HasPrefix(name, "B") && s.cellType(r, c) == excelize.CellTypeSharedString {
+			return s.rows[r][c]
 		}
-		if c.V == nil {
-			return "", false
-		}
-		i := toI(*c.V)
-		if i < 0 || i >= len(strs) {
-			return "", false
-		}
-		return strs[i], true
 	}
-	return "", false
-}
-
-func numericValue(c cell) (float64, bool) {
-	if c.Type == "s" || c.V == nil {
-		return 0, false
-	}
-	rate, ok := adapter.ParseFloat(*c.V)
-	if !ok || rate <= 0 {
-		return 0, false
-	}
-	return rate, true
+	return ""
 }
 
 var whitespace = regexp.MustCompile(`[[:space:]\x{00a0}\x{2000}-\x{200a}\x{2028}\x{2029}\x{202f}\x{205f}\x{3000}\x{0085}]+`)
