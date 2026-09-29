@@ -213,7 +213,9 @@ Two dependencies were replaced mid-run:
    - differences in query encoding (`url.Values` escapes `$` and spaces where http.rb doesn't);
    - how redirects are handled;
    - TLS behaviour. `adapter.NewClient` sets `InsecureSkipVerify` and redoes full chain verification itself, to trust
-     the embedded intermediates. That is correct as written but security-sensitive, so it deserves a human review.
+     the embedded intermediates. A review after this report found that an IP-literal host reached verification with
+     no server name, which skips the hostname check. It now fails closed (d5ab0ff2), and tests cover both an untrusted
+     chain and an IP host. No provider is reached by IP.
 4. **Performance is unmeasured.** There are no benchmarks and no load test. Production needs a 240 s timeout for the
    cold 87 MB export under Ruby. How modernc's pure-Go SQLite and PDFium on wazero behave under that load and memory
    pressure is unknown.
