@@ -144,6 +144,19 @@ func TestWindow(t *testing.T) {
 	}
 }
 
+func TestParseFloat(t *testing.T) {
+	for in, want := range map[string]float64{"4181.69": 4181.69, " 5.0978\n": 5.0978, "0": 0, "-1.5": -1.5} {
+		if got, ok := adapter.ParseFloat(in); !ok || got != want {
+			t.Errorf("ParseFloat(%q) = %v, %v", in, got, ok)
+		}
+	}
+	for _, in := range []string{"", " ", "abc", "NaN", "Inf", "1,5"} {
+		if _, ok := adapter.ParseFloat(in); ok {
+			t.Errorf("ParseFloat(%q) accepted", in)
+		}
+	}
+}
+
 func TestParseDate(t *testing.T) {
 	got, err := adapter.ParseDate("26-Aug-25", "2 January 2006", "02-Jan-06")
 	if err != nil || !got.Equal(adapter.Date(2025, 8, 26)) {

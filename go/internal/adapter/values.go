@@ -2,8 +2,10 @@ package adapter
 
 import (
 	"fmt"
+	"math"
 	"math/big"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -21,6 +23,16 @@ func ParseDate(s string, layouts ...string) (time.Time, error) {
 		}
 	}
 	return time.Time{}, fmt.Errorf("unrecognised date %q", s)
+}
+
+// ParseFloat reads a number the way Ruby's Float(s, exception: false) does for the text sources publish: surrounding
+// whitespace is ignored, and empty text, NaN and infinities are rejected.
+func ParseFloat(s string) (float64, bool) {
+	f, err := strconv.ParseFloat(strings.TrimSpace(s), 64)
+	if err != nil || math.IsNaN(f) || math.IsInf(f, 0) {
+		return 0, false
+	}
+	return f, true
 }
 
 // Window keeps the rates dated after `after` (exclusive) through `upto` (inclusive), treating a zero bound as open.
