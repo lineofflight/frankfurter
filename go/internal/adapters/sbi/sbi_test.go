@@ -2,7 +2,12 @@ package sbi
 
 import (
 	"context"
+	"io"
+	"net/http"
+	"net/url"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -123,6 +128,72 @@ func TestParseSkips(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			if rates := mustParse(t, xml, group9); len(rates) != 0 {
 				t.Errorf("got %+v, want none", rates)
+			}
+		})
+	}
+}
+
+func TestParseSkipsWhitespaceValue(t *testing.T) {
+	rates := mustParse(t, `<Group ID="9"><TimeSeries ID="4055"><TimeSeriesData>
+<Entry><Date>3/24/2026 12:00:00 AM</Date><Value> </Value></Entry>
+<Entry><Date>3/25/2026 12:00:00 AM</Date><Value/></Entry>
+</TimeSeriesData></TimeSeries></Group>`, group9)
+	if len(rates) != 0 {
+		t.Errorf("got %+v, want none", rates)
+	}
+}
+
+// Ruby's Float() raises on text that isn't a finite number.
+func TestParseRejectsBadValue(t *testing.T) {
+	for _, v := range []string{"abc", "NaN", "Inf"} {
+		xml := `<Group ID="9"><TimeSeries ID="4055"><TimeSeriesData><Entry><Date>3/24/2026 12:00:00 AM</Date><Value>` +
+			v + `</Value></Entry></TimeSeriesData></TimeSeries></Group>`
+		if _, err := parse([]byte(xml), group9); err == nil {
+			t.Errorf("%s: want error", v)
+		}
+	}
+}
+
+type recorder struct{ urls []*url.URL }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.urls = append(r.urls, req.URL)
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(strings.NewReader(`<Group/>`)),
+		Header:     http.Header{},
+		Request:    req,
+	}, nil
+}
+
+func TestFetchRequests(t *testing.T) {
+	for _, tc := range []struct {
+		name     string
+		after    time.Time
+		wantFrom string
+	}{
+		{"bounded", adapter.Date(2026, 3, 24), "2026-03-24"},
+		{"open start", time.Time{}, ""},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			rec := &recorder{}
+			a := New(&http.Client{Transport: rec})
+			if _, err := a.Fetch(context.Background(), tc.after, adapter.Date(2026, 3, 28)); err != nil {
+				t.Fatal(err)
+			}
+			if len(rec.urls) != 2 {
+				t.Fatalf("got %d requests, want 2", len(rec.urls))
+			}
+			for i, group := range []string{"9", "7"} {
+				u := rec.urls[i]
+				if got := u.Scheme + "://" + u.Host + u.Path; got != baseURL {
+					t.Errorf("url %s", got)
+				}
+				q := u.Query()
+				if !q.Has("DagsFra") || q.Get("DagsFra") != tc.wantFrom || q.Get("DagsTil") != "2026-03-28" ||
+					q.Get("GroupID") != group || q.Get("Type") != "xml" {
+					t.Errorf("query %v", q)
+				}
 			}
 		})
 	}

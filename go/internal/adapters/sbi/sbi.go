@@ -138,13 +138,13 @@ func parse(data []byte, currencies map[string]string) ([]adapter.Rate, error) {
 			continue
 		}
 		for _, e := range ts.Entries {
-			// Ox gives a missing or empty element no text, and Ruby skips the entry.
-			if e.Date == "" || e.Value == "" {
+			// Ox gives a missing, empty or whitespace-only element no text, and Ruby skips the entry.
+			if strings.TrimSpace(e.Date) == "" || strings.TrimSpace(e.Value) == "" {
 				continue
 			}
-			rate, err := strconv.ParseFloat(strings.TrimSpace(e.Value), 64)
-			if err != nil {
-				return nil, err
+			rate, ok := adapter.ParseFloat(e.Value)
+			if !ok {
+				return nil, fmt.Errorf("bad rate %q", e.Value)
 			}
 			if rate == 0 {
 				continue
