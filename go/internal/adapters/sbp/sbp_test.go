@@ -132,6 +132,8 @@ func TestParseMapsLabelSpellingVariants(t *testing.T) {
 	}
 }
 
+// Recorded with: golden.rb sbp sbp method,host,path 'fetch(after: Date.new(Y, M, D), upto: Date.new(Y, M, D))', one
+// file per row below.
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file        string
