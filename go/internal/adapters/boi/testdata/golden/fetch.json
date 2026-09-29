@@ -1,0 +1,181 @@
+{
+  "adapter": "BOI",
+  "cassette": "boi",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 20))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 2.1767
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 2.2516
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 3.9022
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.4774
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.0589
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 3.5601
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 4.1812
+    },
+    {
+      "base": "JOD",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 4.3344
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.019710000000000002
+    },
+    {
+      "base": "LBP",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.000029999999999999997
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.3201
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.3303
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 3.073
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-02",
+      "quote": "ILS",
+      "rate": 0.1813
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 0.0588
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 3.544
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 4.1596
+    },
+    {
+      "base": "JOD",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 4.3329
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 0.01958
+    },
+    {
+      "base": "LBP",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 0.000029999999999999997
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "ILS",
+      "rate": 3.072
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 0.0589
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 3.5499
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 4.1667
+    },
+    {
+      "base": "JOD",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 4.3392
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 0.01966
+    },
+    {
+      "base": "LBP",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 0.000029999999999999997
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "ILS",
+      "rate": 3.077
+    }
+  ]
+}
