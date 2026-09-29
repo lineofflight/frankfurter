@@ -30,7 +30,9 @@ purge, and the server binary. `go test ./internal/api ./internal/cache` runs eve
 ### `cmd/server` (config.ru, config/puma.rb)
 
 Opens `db.DefaultPath()`, serves `(&api.Server{DB: conn}).Handler()` on PORT (default 8080), shuts down gracefully on
-SIGINT/SIGTERM. Puma's workers and threads have no counterpart; MAX_THREADS still sizes the pool in `db.Open`.
+SIGINT/SIGTERM. Puma's workers and threads have no counterpart. Requests run concurrently without a cap; `DB_POOL_SIZE`
+(default four per core, at least the 20 connections Ruby's four workers held) bounds the queries in flight. The
+Ruby app's `MAX_THREADS` is ignored.
 
 ## For the api_v2 step
 

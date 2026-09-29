@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -40,13 +41,13 @@ func ParseDate(s string) (time.Time, error) { return time.Parse(DateLayout, s) }
 // Open opens the SQLite database at path with the connection settings of the
 // Ruby app: WAL, NORMAL sync, a 128 MB mmap, a capped journal, and a busy
 // timeout (SQLITE_BUSY_TIMEOUT milliseconds, default 60000). The pool size
-// follows MAX_THREADS (default 5).
+// is DB_POOL_SIZE, or DefaultPoolSize.
 func Open(path string) (*sql.DB, error) {
 	busy, err := envInt("SQLITE_BUSY_TIMEOUT", 60_000)
 	if err != nil {
 		return nil, err
 	}
-	conns, err := envInt("MAX_THREADS", 5)
+	conns, err := envInt("DB_POOL_SIZE", DefaultPoolSize())
 	if err != nil {
 		return nil, err
 	}
@@ -103,6 +104,13 @@ func CreateSchema(ctx context.Context, db *sql.DB) error {
 	_, err := db.ExecContext(ctx, Schema)
 	return err
 }
+
+// DefaultPoolSize is four connections per core, and never fewer than the 20 the
+// Ruby app's four Puma workers of five threads held between them. In WAL mode
+// readers block neither each other nor the writer, so the pool bounds CPU and
+// memory rather than working around SQLite. The Ruby app's MAX_THREADS, a
+// per-worker thread count, has no meaning here.
+func DefaultPoolSize() int { return max(20, 4*runtime.GOMAXPROCS(0)) }
 
 func envInt(key string, fallback int) (int, error) {
 	raw := os.Getenv(key)

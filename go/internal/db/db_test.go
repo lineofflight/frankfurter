@@ -2,6 +2,8 @@ package db_test
 
 import (
 	"context"
+	"path/filepath"
+	"runtime"
 	"testing"
 	"time"
 
@@ -25,6 +27,42 @@ func TestOpenUsesWAL(t *testing.T) {
 	if timeout != 60_000 {
 		t.Errorf("busy_timeout = %d, want 60000", timeout)
 	}
+}
+
+func TestOpenSizesThePool(t *testing.T) {
+	pool := func(t *testing.T) int {
+		t.Helper()
+		conn, err := db.Open(filepath.Join(t.TempDir(), "pool.sqlite3"))
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer conn.Close()
+		return conn.Stats().MaxOpenConnections
+	}
+
+	t.Run("defaults to four per core, at least 20", func(t *testing.T) {
+		t.Setenv("DB_POOL_SIZE", "")
+		want := max(20, 4*runtime.GOMAXPROCS(0))
+		if got := pool(t); got != want || db.DefaultPoolSize() != want {
+			t.Fatalf("pool %d, DefaultPoolSize %d, want %d", got, db.DefaultPoolSize(), want)
+		}
+	})
+
+	t.Run("reads DB_POOL_SIZE", func(t *testing.T) {
+		t.Setenv("DB_POOL_SIZE", "7")
+		if got := pool(t); got != 7 {
+			t.Fatalf("pool %d, want 7", got)
+		}
+	})
+
+	// MAX_THREADS was Puma's per-worker thread count in the Ruby app.
+	t.Run("ignores MAX_THREADS", func(t *testing.T) {
+		t.Setenv("DB_POOL_SIZE", "")
+		t.Setenv("MAX_THREADS", "3")
+		if got := pool(t); got != db.DefaultPoolSize() {
+			t.Fatalf("pool %d, want %d", got, db.DefaultPoolSize())
+		}
+	})
 }
 
 func TestSchemaResolvesRateFromComponents(t *testing.T) {

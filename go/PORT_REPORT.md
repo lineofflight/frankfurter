@@ -250,8 +250,8 @@ Two dependencies were replaced mid-run:
    - a Go scheduler backfilling from live sources into its own database, with a daily row-level diff against Ruby's
      database for a week or two;
    - `frankfurter serve` on a side port, with `smokeparity` replaying sampled production request paths against both.
-3. Load-test the heavy paths (cold export, long daily ranges, `expand=providers`) against Puma, and tune `MAX_THREADS`
-   and the heavy slots.
+3. Load-test the heavy paths (cold export, long daily ranges, `expand=providers`) against Puma, and tune `DB_POOL_SIZE`
+   and the heavy slots (both now default from the core count; see `docs/core-api_v1.md`).
 4. Switch the Procfile, Dockerfile, deploy script and CI publish job to `frankfurter <command>`, keeping the last Ruby
    image as the rollback.
 5. After cutover, stop the double maintenance:

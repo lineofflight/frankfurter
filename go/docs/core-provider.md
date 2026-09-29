@@ -51,18 +51,20 @@ runs everything.
   method names: one blending type can implement both.
 - `Scheduler` (`New(workers, log)`, `In`, `Every`, `Cron`, `Run(ctx)`) is the rufus-scheduler subset: a worker cap,
   no-overlap skipping, `Job.Unschedule`, failures and panics logged with the job kept. Cron uses gronx in the local zone.
-  The binary sets the cap from `SCHEDULER_WORKERS` (default 16); `MAX_THREADS` (default 5) sizes the DB pool.
+  The binary sets the cap from `SCHEDULER_WORKERS` (default 16); `DB_POOL_SIZE` (default four per core, at least 20)
+  sizes the DB pool.
 - `DryRun(w, providers)` prints `startup: backfill[key]` and `cron: <expr> backfill[key]` lines.
 
 ### `internal/heavyslots` (lib/heavy_slots.rb)
 
-`New(limit)`, `TryAcquire`, `Release` (never below zero), `Held`, `Max`, `DefaultMax` (`MAX_HEAVY_COMPUTES`, default 2;
-an invalid value panics at startup like Ruby's `Integer()`), `ErrBusy`, `RetryAfterSeconds`. The API step uses it.
+`New(limit)`, `TryAcquire`, `Release` (never below zero), `Held`, `Max`, `DefaultMax` (`MAX_HEAVY_COMPUTES`, default
+one per core and at least 2, where Ruby's was 2 per Puma worker; an invalid value panics at startup like Ruby's
+`Integer()`), `ErrBusy`, `RetryAfterSeconds`. The API step uses it.
 
 ### Binaries
 
 - `cmd/schedule [--dry-run]`: bin/schedule. Runs up to `SCHEDULER_WORKERS` jobs at once (default 16), independent of
-  `MAX_THREADS`, which sizes the DB pool.
+  `DB_POOL_SIZE`, which sizes the DB pool.
 - `cmd/backfill [-full] [provider]`: `rake backfill[provider]`; `FULL=1` also works.
 - `cmd/providerhealth`: bin/provider_health.rb (API, REPO, DRY_RUN env as in Ruby). Its issue body matches Ruby byte
   for byte (`testdata/body.txt`).

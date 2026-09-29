@@ -37,8 +37,8 @@ Rake and Procfile names work as aliases. Logging is `applog.Setup()` (slog text 
 
 | Command | Ruby | Notes |
 |---|---|---|
-| `serve` (`web`) | Procfile web: puma + config.ru | PORT (default 8080); `(&api.Server{DB: conn}).Handler()`; graceful shutdown on SIGINT/SIGTERM. Puma workers and threads have no counterpart; MAX_THREADS sizes the DB pool. |
-| `schedule [-dry-run]` (`scheduler`) | Procfile scheduler: bin/schedule | `schedule.Setup` with the real `Ingester` (blend defaults to `Materialized`), `provider.Materialized` and one `cache.FromEnv()` shared by backfills and purge jobs. Up to SCHEDULER_WORKERS jobs at once (default 16), independent of MAX_THREADS, which sizes the DB pool. |
+| `serve` (`web`) | Procfile web: puma + config.ru | PORT (default 8080); `(&api.Server{DB: conn}).Handler()`; graceful shutdown on SIGINT/SIGTERM. Puma workers and threads have no counterpart; DB_POOL_SIZE (default four per core, at least 20) sizes the DB pool and MAX_THREADS is ignored. |
+| `schedule [-dry-run]` (`scheduler`) | Procfile scheduler: bin/schedule | `schedule.Setup` with the real `Ingester` (blend defaults to `Materialized`), `provider.Materialized` and one `cache.FromEnv()` shared by backfills and purge jobs. Up to SCHEDULER_WORKERS jobs at once (default 16), independent of DB_POOL_SIZE, which sizes the DB pool. |
 | `start` | Dockerfile CMD: `rake db:setup && foreman start` | setup, then serve and schedule in one process, each with its own DB pool (as two processes had); either stopping stops both. |
 | `migrate [-version N]` (`db:migrate`) | db:migrate, `VERSION=` | `migrate.To`. |
 | `seed` (`db:seed`) | db:seed | `rates.SeedProviders`. |

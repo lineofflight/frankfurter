@@ -22,8 +22,8 @@ import (
 
 // serve is config.ru under config/puma.rb: the API on PORT (default 8080) until
 // interrupted, then a graceful shutdown. Puma's worker processes and threads
-// have no counterpart; one process serves concurrently and MAX_THREADS still
-// sizes the database pool.
+// have no counterpart; one process serves concurrently and DB_POOL_SIZE sizes
+// the database pool.
 func serve(ctx context.Context, args []string, _ io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("serve", flag.ContinueOnError), args, 0); err != nil {
 		return err

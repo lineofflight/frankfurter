@@ -2,6 +2,7 @@ package heavyslots
 
 import (
 	"os"
+	"runtime"
 	"testing"
 )
 
@@ -39,7 +40,7 @@ func TestNeverCountsBelowZero(t *testing.T) {
 }
 
 func TestReadsTheCapFromTheEnvironment(t *testing.T) {
-	want := 2
+	want := max(2, runtime.GOMAXPROCS(0))
 	if _, ok := os.LookupEnv("MAX_HEAVY_COMPUTES"); ok {
 		want = defaultMax()
 	}

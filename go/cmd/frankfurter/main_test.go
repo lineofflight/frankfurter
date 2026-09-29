@@ -205,7 +205,7 @@ func TestSchedulerRunsMoreJobsThanPoolConnections(t *testing.T) {
 		jobs    int32
 	}{{"4", 4}, {"", 16}} {
 		t.Run(strconv.Itoa(int(tc.jobs)), func(t *testing.T) {
-			t.Setenv("MAX_THREADS", "1")
+			t.Setenv("DB_POOL_SIZE", "1")
 			t.Setenv("SCHEDULER_WORKERS", tc.workers)
 			if tc.workers == "" {
 				os.Unsetenv("SCHEDULER_WORKERS")

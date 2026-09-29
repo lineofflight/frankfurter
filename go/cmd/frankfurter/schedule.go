@@ -46,8 +46,8 @@ func scheduleOn(ctx context.Context, conn *sql.DB, stdout io.Writer, dryRun bool
 // newScheduler runs up to SCHEDULER_WORKERS jobs at once (default 16). Ruby
 // capped rufus at the pool size because its threads blocked on checkout and
 // the GVL made more useless; here a backfill mostly waits on its source, and
-// its writes queue on the Ingester's lock, so the cap is independent of
-// MAX_THREADS.
+// its writes queue on the Ingester's lock, so the cap is independent of the
+// pool size (DB_POOL_SIZE).
 func newScheduler() (*schedule.Scheduler, error) {
 	workers, err := envInt("SCHEDULER_WORKERS", 16)
 	if err != nil {
