@@ -133,6 +133,67 @@ func TestParseMetalsSkipsWeekends(t *testing.T) {
 	}
 }
 
+func TestParseDynamicMatchesRubyParsing(t *testing.T) {
+	xml := `<?xml version="1.0" encoding="windows-1251"?>
+<ValCurs>
+  <Record Date="2.3.2026"><Nominal>1</Nominal><Value>80,5</Value><VunitRate>81,25</VunitRate></Record>
+  <Record Date="03.03.2026"><Nominal> 10x</Nominal><Value> 12,5 </Value><VunitRate>  </VunitRate></Record>
+  <Record Date="04.03.2026"><Nominal>1</Nominal><Value></Value></Record>
+  <Record Date="07.03.2026"><Nominal>1</Nominal><Value>1</Value></Record>
+  <Record Date="05.03.2026"><Value>5</Value></Record>
+</ValCurs>
+`
+	records, err := parseDynamic([]byte(xml), "USD")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(records) != 3 {
+		t.Fatalf("got %+v, want 3 records", records)
+	}
+	if !records[0].Date.Equal(adapter.Date(2026, 3, 2)) || records[0].Rate != 81.25 {
+		t.Errorf("VunitRate row = %+v, want 2026-03-02 at 81.25", records[0])
+	}
+	if records[1].Rate != 1.25 {
+		t.Errorf("Value/Nominal row = %v, want 1.25", records[1].Rate)
+	}
+	if !math.IsInf(records[2].Rate, 1) {
+		t.Errorf("missing Nominal = %v, want +Inf as in Ruby", records[2].Rate)
+	}
+}
+
+func TestParseDynamicErrors(t *testing.T) {
+	for name, rec := range map[string]string{
+		"bad date":      `<Record Date="2026-03-02"><Nominal>1</Nominal><Value>1</Value></Record>`,
+		"bad value":     `<Record Date="02.03.2026"><Nominal>1</Nominal><Value>abc</Value></Record>`,
+		"bad vunitrate": `<Record Date="02.03.2026"><VunitRate>Inf</VunitRate></Record>`,
+	} {
+		if _, err := parseDynamic([]byte("<ValCurs>"+rec+"</ValCurs>"), "USD"); err == nil {
+			t.Errorf("%s: want error", name)
+		}
+	}
+}
+
+func TestParseMetalsSkipsUnknownAndBadBuy(t *testing.T) {
+	xml := `<?xml version="1.0" encoding="windows-1251"?>
+<Metall>
+  <Record Date="24.04.2026" Code="9"><Buy>1,0</Buy></Record>
+  <Record Date="24.04.2026" Code="1"><Buy></Buy></Record>
+  <Record Date="24.04.2026" Code="2"><Buy>abc</Buy></Record>
+  <Record Date="24.04.2026" Code="3"><Buy>0</Buy></Record>
+  <Record Date="24.04.2026" Code="4"></Record>
+  <Record Date="24.04.2026" Code="1"><Buy> 2,5 </Buy></Record>
+</Metall>
+`
+	records, err := parseMetals([]byte(xml))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(records) != 1 || records[0].Base != "XAU" || records[0].Rate != 2.5*adapter.GramsPerTroyOunce {
+		t.Errorf("got %+v, want one XAU row", records)
+	}
+}
+
+// Recorded with: golden.rb --repeats cbr cbr method,uri 'fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))'
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 5))

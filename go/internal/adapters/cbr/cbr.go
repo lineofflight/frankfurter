@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/xml"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -144,7 +145,7 @@ func parseDynamic(data []byte, code string) ([]adapter.Rate, error) {
 	}
 	var rates []adapter.Rate
 	for _, r := range doc.Records {
-		date, err := time.Parse("02.01.2006", r.Date)
+		date, err := time.Parse(dateLayout, r.Date)
 		if err != nil {
 			return nil, err
 		}
@@ -165,22 +166,44 @@ func parseDynamic(data []byte, code string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// extractRate prefers the per-unit VunitRate and falls back to Value divided by Nominal. Malformed numbers are
-// errors, as Ruby's Float() raises.
+// extractRate prefers the per-unit VunitRate and falls back to Value divided by Nominal. Whitespace-only text counts
+// as absent, as Ox drops it. Malformed numbers are errors, as Ruby's Float() raises.
 func extractRate(r record) (float64, bool, error) {
-	if r.VunitRate != nil && *r.VunitRate != "" {
-		v, err := strconv.ParseFloat(strings.ReplaceAll(*r.VunitRate, ",", "."), 64)
+	if r.VunitRate != nil && strings.TrimSpace(*r.VunitRate) != "" {
+		v, err := parseNumber(*r.VunitRate)
 		return v, err == nil, err
 	}
-	if r.Value == nil || *r.Value == "" {
+	if r.Value == nil || strings.TrimSpace(*r.Value) == "" {
 		return 0, false, nil
 	}
-	v, err := strconv.ParseFloat(strings.ReplaceAll(*r.Value, ",", "."), 64)
+	v, err := parseNumber(*r.Value)
 	if err != nil {
 		return 0, false, err
 	}
-	nominal, _ := strconv.Atoi(strings.TrimSpace(r.Nominal)) // Ruby's to_i: 0 when absent
-	return v / float64(nominal), true, nil
+	return v / float64(toI(r.Nominal)), true, nil
+}
+
+func parseNumber(s string) (float64, error) {
+	v, ok := adapter.ParseFloat(strings.ReplaceAll(s, ",", "."))
+	if !ok {
+		return 0, fmt.Errorf("cbr: invalid number %q", s)
+	}
+	return v, nil
+}
+
+// toI reads the leading integer the way Ruby's String#to_i does: 0 when absent, so a missing Nominal divides to Inf
+// as in Ruby.
+func toI(s string) int {
+	s = strings.TrimLeft(s, " \t\n\r\f\v")
+	end := 0
+	if end < len(s) && (s[end] == '+' || s[end] == '-') {
+		end++
+	}
+	for end < len(s) && s[end] >= '0' && s[end] <= '9' {
+		end++
+	}
+	n, _ := strconv.Atoi(s[:end])
+	return n
 }
 
 func parseMetals(data []byte) ([]adapter.Rate, error) {
@@ -200,7 +223,7 @@ func parseMetals(data []byte) ([]adapter.Rate, error) {
 		if !ok {
 			continue
 		}
-		date, err := time.Parse("02.01.2006", r.Date)
+		date, err := time.Parse(dateLayout, r.Date)
 		if err != nil {
 			return nil, err
 		}
@@ -215,6 +238,9 @@ func parseMetals(data []byte) ([]adapter.Rate, error) {
 	}
 	return rates, nil
 }
+
+// dateLayout matches Ruby's strptime("%d.%m.%Y"), which also takes one-digit days and months.
+const dateLayout = "2.1.2006"
 
 func weekend(d time.Time) bool {
 	return d.Weekday() == time.Saturday || d.Weekday() == time.Sunday
