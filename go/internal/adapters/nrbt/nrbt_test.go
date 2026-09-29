@@ -1,10 +1,13 @@
 package nrbt
 
 import (
+	"archive/zip"
 	"bytes"
 	"context"
 	"encoding/xml"
+	"io"
 	"math"
+	"regexp"
 	"slices"
 	"testing"
 	"time"
@@ -177,6 +180,73 @@ func TestParseSkipsNumericLookingStrings(t *testing.T) {
 		t.Fatal(err)
 	}
 	got, err := parse(buf.Bytes(), time.Time{}, time.Time{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626}}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %+v, want %+v", got, want)
+	}
+}
+
+func TestParseSkipsSheetWithoutRelationship(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	if _, err := f.NewSheet("Orphan"); err != nil {
+		t.Fatal(err)
+	}
+	for _, err := range []error{
+		f.SetCellInt("Sheet1", "A1", 45659),
+		f.SetCellFloat("Sheet1", "O1", 0.6626, -1, 64),
+		f.SetCellInt("Orphan", "A1", 45660),
+		f.SetCellFloat("Orphan", "O1", 0.7, -1, 64),
+	} {
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	var src bytes.Buffer
+	if err := f.Write(&src); err != nil {
+		t.Fatal(err)
+	}
+
+	// Drop the second sheet's workbook relationship, so its r:id resolves to nothing.
+	orphanRel := regexp.MustCompile(`<Relationship [^>]*Target="worksheets/sheet2\.xml"[^>]*>(</Relationship>)?`)
+	zr, err := zip.NewReader(bytes.NewReader(src.Bytes()), int64(src.Len()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var dst bytes.Buffer
+	zw := zip.NewWriter(&dst)
+	for _, zf := range zr.File {
+		r, err := zf.Open()
+		if err != nil {
+			t.Fatal(err)
+		}
+		data, err := io.ReadAll(r)
+		r.Close()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if zf.Name == "xl/_rels/workbook.xml.rels" {
+			if !orphanRel.Match(data) {
+				t.Fatalf("no sheet2 relationship in %s", data)
+			}
+			data = orphanRel.ReplaceAll(data, nil)
+		}
+		w, err := zw.Create(zf.Name)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := w.Write(data); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := zw.Close(); err != nil {
+		t.Fatal(err)
+	}
+
+	got, err := parse(dst.Bytes(), time.Time{}, time.Time{})
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -14,6 +14,7 @@ package nrbt
 import (
 	"bytes"
 	"context"
+	"errors"
 	"net/http"
 	"strconv"
 	"time"
@@ -87,6 +88,10 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, name := range f.GetSheetList() {
 		ws, err := readSheet(f, name)
+		// A sheet whose workbook relationship is missing has no data to read.
+		if errors.As(err, new(excelize.ErrSheetNotExist)) {
+			continue
+		}
 		if err != nil {
 			return nil, err
 		}
