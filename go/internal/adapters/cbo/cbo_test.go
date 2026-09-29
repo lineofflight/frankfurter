@@ -164,3 +164,23 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseLaterRowWinsTimestampTie(t *testing.T) {
+	records := mustParse(t, export(`
+<tr><td>EUR</td><td>6/5/2019 8:21:48 AM</td><td>Euro*</td><td>x</td><td>string;#0.40</td><td>string;#0.42</td></tr>
+<tr><td>EUR</td><td>06/05/2019 08:21:48 AM</td><td>Euro*</td><td>x</td><td>string;#0.50</td><td>string;#0.52</td></tr>
+`))
+	if len(records) != 1 {
+		t.Fatalf("got %d records, want 1", len(records))
+	}
+	if !records[0].Date.Equal(adapter.Date(2019, 5, 6)) || records[0].Rate != 0.51 {
+		t.Errorf("got %+v, want 2019-05-06 at 0.51", records[0])
+	}
+}
+
+func TestParseErrorsOnBadTimestamp(t *testing.T) {
+	_, err := parse(export(`<tr><td>USD</td><td>2026-06-01</td><td>x</td><td>x</td><td>string;#0.384</td><td>string;#0.385</td></tr>`))
+	if err == nil {
+		t.Error("want an error for an unparseable timestamp")
+	}
+}
