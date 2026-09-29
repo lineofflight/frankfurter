@@ -97,8 +97,9 @@ Corpus lines are `METHOD PATH [| Header: value]...`; date tokens `{today}`, `{to
 extend: append lines (v2 requests go in a new section), add edge rows to the script if needed (they change the data
 under every request, so rerun and review the whole diff), then regenerate:
 
+From the repository root, with `$SCRATCH` any scratch directory:
+
 ```sh
-cd /Users/hakanensari/code/frankfurter/.claude/worktrees/go-port
 DATABASE_URL=sqlite://$SCRATCH/api.sqlite3 APP_ENV=test \
   mise exec -- bundle exec ruby -Ilib -r./boot go/scripts/api_golden.rb 2026-09-29 \
   go/internal/api/testdata/corpus.txt go/internal/api/testdata/golden/api.json.gz

@@ -16,7 +16,7 @@ What joined the steps together, and the live-data check against the Ruby app.
 ## Smoke parity
 
 ```sh
-GO=/Users/hakanensari/.local/share/mise/installs/go/1.27.1/bin/go go/scripts/smoke_parity.sh [snapshot.sqlite3]
+go/scripts/smoke_parity.sh [snapshot.sqlite3]   # set GO=/path/to/go if go isn't on PATH
 ```
 
 The script copies the snapshot (default `db/frankfurter.sqlite3`, only ever read), brings the copy to the latest

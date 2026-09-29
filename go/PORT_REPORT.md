@@ -1,6 +1,6 @@
 # Go port report
 
-State of `go/` on branch `worktree-go-port` at 74f79a9e (278 commits ahead of `main`), checked on 2026-09-29.
+State of `go/` on branch `go-port` at 74f79a9e (278 commits ahead of `main`), checked on 2026-09-29.
 
 ## Verdict
 

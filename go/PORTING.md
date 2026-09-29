@@ -1,23 +1,23 @@
-# Porting Frankfurter to Go
+# Frankfurter in Go
 
-The Ruby app (repository root) is the reference implementation and stays untouched. Everything Go lives under `go/`,
-module `github.com/lineofflight/frankfurter/go`. Read this whole file before starting; then copy the exemplar adapters
-(`banrep` JSON, `bnr` XML, `rbv` HTML, `jpc` PDF), which follow it exactly.
+Everything Go lives under `go/`, module `github.com/lineofflight/frankfurter/go`. While both apps run, the Ruby app
+(repository root) is the reference implementation: Go must produce the same data. This guide covers the layout, the
+tooling, and the recipe for porting or changing an adapter; `docs/core-*.md` document the rest of the app area by
+area. The exemplar adapters (`banrep` JSON, `bnr` XML, `rbv` HTML, `jpc` PDF) follow it exactly.
 
-The target is idiomatic Go with the same data as Ruby: same rows (date, base, quote and every other field), rates equal
-within relative 1e-9, same validation, blending and rollup outcomes. Float formatting, JSON key order and error wording
-may differ.
+Same data means same rows (date, base, quote and every other field), rates equal within relative 1e-9, and the same
+validation, blending and rollup outcomes. Float formatting, JSON key order and error wording may differ.
 
 ## Layout
 
 ```
 go/
-  go.mod, go.sum            owned by the foundation step; nobody else edits them
   PORTING.md                this file
-  cmd/vcrconvert            Ruby VCR cassettes -> go-vcr cassettes (already run)
+  cmd/frankfurter           the binary: serve, schedule, migrate, backfill and the other tasks
+  cmd/vcrconvert            Ruby VCR cassettes -> go-vcr cassettes
   cmd/genadapters           writes internal/adapters/all/all.go
-  scripts/commit.sh         the only way to commit
   scripts/golden.rb         records Ruby adapter output for parity tests
+  scripts/commentwrap       wraps comments at 80 columns (CI runs it with -l)
   testdata/cassettes/       converted cassettes, same base names as spec/vcr_cassettes (banrep.yml -> banrep.yaml)
   docs/core-<step>.md       one per core step (see the last section)
   internal/
@@ -34,32 +34,21 @@ go/
 
 ## Tooling
 
-Go 1.27.1 lives at `/Users/hakanensari/.local/share/mise/installs/go/1.27.1/bin/go`. Put its directory on `PATH` and run
-from `go/`:
+`go/mise.toml` pins the Go version (`mise install`). Run from `go/`:
 
 ```sh
-export PATH=/Users/hakanensari/.local/share/mise/installs/go/1.27.1/bin:$PATH
-cd /Users/hakanensari/code/frankfurter/.claude/worktrees/go-port/go
-gofmt -l ./internal/adapters/xyz          # must print nothing
-go vet ./internal/adapters/xyz
-go test ./internal/adapters/xyz
+gofmt -l .                                # must print nothing
+go run ./scripts/commentwrap -l .         # must print nothing
+go vet ./...
+go test ./...
 ```
 
 Ruby runs from the repository root, always with `APP_ENV=test` (without it, spec helpers wipe the developer database).
-Ruby has no network and needs none. `go/scripts/golden.rb` is usually all the Ruby you need; to run one spec file:
+Replaying cassettes needs no network. `go/scripts/golden.rb` is usually all the Ruby you need; to run one spec file:
 
 ```sh
-cd /Users/hakanensari/code/frankfurter/.claude/worktrees/go-port
 APP_ENV=test mise exec -- bundle exec ruby spec/provider/adapters/xyz_spec.rb
 ```
-
-Spec files reseed the shared test database, so run single files, never the whole Ruby suite.
-
-Commit from the repository root with `go/scripts/commit.sh '<subject under 50 chars>' <paths...>`. It commits only the
-paths given, as the bot, and waits out other agents' index locks. Never `git add` the tree, stash, reset, checkout or
-restore anything, and never push. Use `/usr/bin/git` for read-only inspection.
-
-Scratch files go in the session scratchpad, not `/tmp` and not the repository.
 
 ## Adapter recipe
 
@@ -93,9 +82,9 @@ For provider key `XYZ` (lower case `xyz`):
 
 5. **Add the golden test**: load each golden file, fetch with the same arguments, `g.Check(t, rates)`.
 
-6. **Check**: `gofmt -l`, `go vet`, `go test` for your package, all clean.
+6. **Register** a new adapter with `go generate ./internal/adapters/all`.
 
-7. **Commit**: `go/scripts/commit.sh 'Port XYZ adapter' go/internal/adapters/xyz`
+7. **Check**: the commands under Tooling, all clean.
 
 ### Skeleton
 
@@ -271,30 +260,19 @@ and prints missing, extra and differing rows.
 
 ## Rules
 
-- Own only your package directory. Don't edit `go.mod`, `go.sum`, `internal/deps`, any shared package
-  (`internal/adapter`, `vcrtest`, `golden`, `pdftext`, `xls`, `db`), cassettes, or another adapter. Don't run `go mod
-  tidy` or `go get`. If a shared helper is missing, write a private one in your package and mention it in your summary.
-- Don't edit `internal/adapters/all/all.go`; the integrator regenerates it with `go generate ./internal/adapters/all`
-  once every adapter package builds.
+- One package per adapter. Helpers shared by several adapters belong in `internal/adapter`; one adapter's quirks stay in
+  its own package.
+- New third-party modules are pinned in `internal/deps` with a comment saying what they're for.
 - No `t.Skip` to dodge a failure, no loosened assertions, no hand-edited golden files. A golden mismatch is a bug in the
   port until proven otherwise.
-- Never edit files outside `go/`. The Ruby app is the reference, not a workspace.
-- Commit only through `go/scripts/commit.sh`, only your paths.
 
-## Reporting blockers
+## The rest of the app
 
-If something cannot be made to match (a library cannot read a file, Ruby behaviour depends on something unavailable),
-commit what passes, leave the failing test out rather than skipping it, and report in your final summary: the package,
-the failing `it`, the Ruby and Go outputs side by side, and what you tried. Don't paper over it in code.
+The same rules apply to the core packages (provider seeding and backfill, validation, precision, rollups, blending,
+currency catalogue, cache, API, scheduler), plus:
 
-## Core-domain steps
-
-Agents porting the rest of the app (provider seeding and backfill, validation, precision, rollups, blending, currency
-catalogue, cache, API, scheduler) follow the same rules, plus:
-
-- **Ownership.** Each step owns the packages it creates under `internal/` (or `cmd/` for binaries) and documents them in
-  `go/docs/core-<step>.md`: packages, exported API, which Ruby files and specs they port, and deliberate deviations.
-  Read the other steps' docs before depending on their packages; don't edit packages you don't own.
+- **Docs.** Each area documents its packages in `go/docs/core-<area>.md`: exported API, which Ruby files and specs they
+  port, and deliberate deviations.
 - **Errors.** Return errors, wrapped with context (`fmt.Errorf("refresh rollups: %w", err)`). Panic only on programmer
   error. Where Ruby rescues and logs (`Provider#backfill`), log and continue in the same place.
 - **Logging.** `log/slog` with key-value attributes (`slog.Info("inserted rates", "provider", key, "count", n)`). No
@@ -312,5 +290,4 @@ catalogue, cache, API, scheduler) follow the same rules, plus:
   times (fugit's `next_time`/`previous_time`).
 - **API.** `net/http` handlers. Validate responses in tests against `lib/public/v2/openapi.json` with
   `github.com/getkin/kin-openapi` (`openapi3filter.ValidateResponse`), as the Ruby specs do with skooma.
-- **Test fixtures.** `spec/fixtures.rb` generates data relative to today. The first core step that needs it ports it
-  into its own package and documents it.
+- **Test fixtures.** `internal/fixtures` ports `spec/fixtures.rb`, which generates data relative to today.
