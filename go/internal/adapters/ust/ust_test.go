@@ -2,8 +2,12 @@ package ust
 
 import (
 	"context"
+	"fmt"
+	"io"
+	"net/http"
 	"reflect"
 	"sort"
+	"strings"
 	"testing"
 	"time"
 
@@ -170,6 +174,79 @@ func TestMonthsBeforeClampsLikeRuby(t *testing.T) {
 		if got := monthsBefore(tc.in, 4); !got.Equal(tc.want) {
 			t.Errorf("monthsBefore(%v) = %v, want %v", tc.in, got, tc.want)
 		}
+	}
+}
+
+func TestParseRejectsBadDateEvenOnUnmappedLabel(t *testing.T) {
+	if _, err := parse([]row{rec("Cross Border-Euro", "0.877", "2026-06-30", "n/a")}); err == nil {
+		t.Error("want error for unparseable effective date")
+	}
+}
+
+func TestParseRejectsBadRate(t *testing.T) {
+	for _, rate := range []string{"", "abc", "NaN"} {
+		if _, err := parse([]row{rec("Norway-Krone", rate, "2026-06-30", "")}); err == nil {
+			t.Errorf("rate %q: want error", rate)
+		}
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) { return f(req) }
+
+// A record date split across two pages still collapses to one row per pair, and the lower bound is inclusive.
+func TestFetchPaginatesAndFiltersWindow(t *testing.T) {
+	pages := []string{
+		`{"data":[{"effective_date":"2026-06-30","country_currency_desc":"Togo-Cfa Franc","exchange_rate":"570.0"},
+			{"effective_date":"2026-03-31","country_currency_desc":"Norway-Krone","exchange_rate":"10.1"}],
+		  "meta":{"total-pages":2}}`,
+		`{"data":[{"effective_date":"2026-06-30","country_currency_desc":"Benin-Cfa Franc","exchange_rate":"571.5"},
+			{"effective_date":"2026-09-30","country_currency_desc":"Norway-Krone","exchange_rate":"9.8"}],
+		  "meta":{"total-pages":2}}`,
+	}
+	var queries []string
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		q := req.URL.Query()
+		queries = append(queries, fmt.Sprintf("%s %s %s", q.Get("page[number]"), q.Get("page[size]"), q.Get("filter")))
+		body := pages[len(queries)-1]
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(body)), Request: req}, nil
+	})}
+
+	got, err := New(client).Fetch(context.Background(), adapter.Date(2026, 6, 30), adapter.Date(2026, 8, 31))
+	if err != nil {
+		t.Fatal(err)
+	}
+	wantQueries := []string{"1 10000 record_date:gte:2026-02-28", "2 10000 record_date:gte:2026-02-28"}
+	if !reflect.DeepEqual(queries, wantQueries) {
+		t.Errorf("queries = %v, want %v", queries, wantQueries)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 6, 30), Base: "USD", Quote: "XOF", Rate: 571.5}}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %+v, want %+v", got, want)
+	}
+}
+
+func TestFetchWithoutAfterOmitsFilterAndStopsWithoutTotalPages(t *testing.T) {
+	var calls int
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		calls++
+		if _, ok := req.URL.Query()["filter"]; ok {
+			t.Errorf("unexpected filter in %s", req.URL)
+		}
+		body := `{"data":[{"effective_date":"2026-06-30","country_currency_desc":"Norway-Krone","exchange_rate":"9.916"}],"meta":{}}`
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(body)), Request: req}, nil
+	})}
+
+	got, err := New(client).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 8, 31))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if calls != 1 {
+		t.Errorf("calls = %d, want 1", calls)
+	}
+	if len(got) != 1 || got[0].Quote != "NOK" {
+		t.Errorf("got %+v, want one NOK row", got)
 	}
 }
 

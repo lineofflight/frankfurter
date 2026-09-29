@@ -129,21 +129,22 @@ func parse(rows []row) ([]adapter.Rate, error) {
 	var out []adapter.Rate
 	seen := map[key]slot{}
 	for _, r := range rows {
-		p, ok := priority[r.Label]
-		if !ok {
-			continue
-		}
+		// Ruby parses the date before looking up the label, so a bad date fails even on a label we drop.
 		date, err := time.Parse("2006-01-02", r.EffectiveDate)
 		if err != nil {
 			return nil, fmt.Errorf("effective date %q: %w", r.EffectiveDate, err)
+		}
+		p, ok := priority[r.Label]
+		if !ok {
+			continue
 		}
 		code := codeFor(currencies[p].spans, date)
 		if code == "" {
 			continue
 		}
-		rate, err := strconv.ParseFloat(r.ExchangeRate, 64)
-		if err != nil {
-			return nil, fmt.Errorf("exchange rate %q: %w", r.ExchangeRate, err)
+		rate, ok := adapter.ParseFloat(r.ExchangeRate)
+		if !ok {
+			return nil, fmt.Errorf("exchange rate %q is not a number", r.ExchangeRate)
 		}
 		rec := adapter.Rate{Date: date, Base: "USD", Quote: code, Rate: rate}
 		k := key{date, code}
