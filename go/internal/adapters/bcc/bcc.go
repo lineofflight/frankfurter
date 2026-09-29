@@ -90,6 +90,9 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	if err := json.Unmarshal(data, &entries); err != nil {
 		return nil, fmt.Errorf("expected JSON array from %s: %w", historicoURL, err)
 	}
+	if entries == nil { // a top-level null; "[]" decodes to an empty, non-nil slice
+		return nil, fmt.Errorf("expected JSON array from %s, got null", historicoURL)
+	}
 
 	var rates []adapter.Rate
 	for _, e := range entries {

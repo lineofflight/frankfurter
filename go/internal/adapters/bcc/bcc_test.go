@@ -81,3 +81,40 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseNumericStringRate(t *testing.T) {
+	rates, err := parse([]byte(`[{"fecha":"2026-05-22","tasaEspecial":"507.5"}]`), "USD")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Rate != 507.5 {
+		t.Errorf("rates = %+v, want one at 507.5", rates)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for name, body := range map[string]string{
+		"object":       `{"error":"bad"}`,
+		"null":         `null`,
+		"invalid rate": `[{"fecha":"2026-05-22","tasaEspecial":"n/a"}]`,
+		"boolean rate": `[{"fecha":"2026-05-22","tasaEspecial":true}]`,
+		"bad date":     `[{"fecha":"22/05/2026","tasaEspecial":507}]`,
+	} {
+		t.Run(name, func(t *testing.T) {
+			if _, err := parse([]byte(body), "USD"); err == nil {
+				t.Error("want error")
+			}
+		})
+	}
+}
+
+func TestFetchEmptyWindow(t *testing.T) {
+	a := New(vcrtest.Client(t, "bcc", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 23), adapter.Date(2026, 5, 22))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
