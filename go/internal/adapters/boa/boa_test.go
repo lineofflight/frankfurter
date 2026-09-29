@@ -2,8 +2,12 @@ package boa
 
 import (
 	"context"
+	"encoding/xml"
+	"io"
 	"math"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -108,10 +112,84 @@ func TestFetchUSDInPlausibleRange(t *testing.T) {
 	}
 }
 
-// The Ruby spec stubs download to return a hub page without the link; archiveURL is that step.
-func TestArchiveLinkMissingFromHub(t *testing.T) {
-	if _, err := archiveURL([]byte("<html><body>no link here</body></html>")); err == nil {
-		t.Fatal("want an error")
+type stubTransport string
+
+func (s stubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Header:     http.Header{},
+		Body:       io.NopCloser(strings.NewReader(string(s))),
+		Request:    req,
+	}, nil
+}
+
+// The Ruby spec stubs download to return a hub page without the link.
+func TestFetchFailsWhenArchiveLinkMissingFromHub(t *testing.T) {
+	a := New(&http.Client{Transport: stubTransport("<html><body>no link here</body></html>")})
+	_, err := a.Fetch(context.Background(), time.Time{}, time.Time{})
+	if err == nil || !strings.Contains(err.Error(), "archive XLSX link not found") {
+		t.Fatalf("err = %v, want archive link error", err)
+	}
+}
+
+func TestSheetCurrency(t *testing.T) {
+	for name, want := range map[string]string{
+		"USD - DZD":  "USD",
+		"EURO - DZD": "EUR",
+		"gbp/DZD":    "GBP",
+		" JPY-DZD":   "JPY",
+		"Feuil1":     "",
+		"":           "",
+		" - DZD":     "",
+	} {
+		got, ok := sheetCurrency(name)
+		if !ok {
+			got = ""
+		}
+		if got != want {
+			t.Errorf("sheetCurrency(%q) = %q, want %q", name, got, want)
+		}
+	}
+}
+
+func TestParseSheetSkipsHeadersBlanksAndZeros(t *testing.T) {
+	var ws worksheet
+	err := xml.Unmarshal([]byte(`<worksheet><sheetData>
+		<row><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c></row>
+		<row><c r="A2"><v>46140</v></c><c r="B2"><v>82.8</v></c></row>
+		<row><c r="A3"><v>46141.0</v></c><c r="B3"><v>0</v></c></row>
+		<row><c r="A4"><v>46142</v></c><c r="B4"><v></v></c></row>
+		<row><c r="A5"><v>46143</v></c></row>
+		<row><c r="A6"><v>46144.9</v></c><c r="B6"><v>83</v></c></row>
+		<row><c r="A7"><v>46145</v></c><c r="B7"><v>n/a</v></c></row>
+	</sheetData></worksheet>`), &ws)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := parseSheet(ws, "JPY", time.Time{}, time.Time{})
+	want := []adapter.Rate{
+		{Date: adapter.Date(2026, 4, 28), Base: "JPY", Quote: "DZD", Rate: 0.828},
+		{Date: adapter.Date(2026, 5, 2), Base: "JPY", Quote: "DZD", Rate: 0.83},
+	}
+	if !slices.Equal(got, want) {
+		t.Errorf("parseSheet = %v, want %v", got, want)
+	}
+}
+
+func TestParseSheetBoundsAreInclusive(t *testing.T) {
+	var ws worksheet
+	err := xml.Unmarshal([]byte(`<worksheet><sheetData>
+		<row><c r="A1"><v>46139</v></c><c r="B1"><v>1</v></c></row>
+		<row><c r="A2"><v>46140</v></c><c r="B2"><v>2</v></c></row>
+		<row><c r="A3"><v>46141</v></c><c r="B3"><v>3</v></c></row>
+		<row><c r="A4"><v>46142</v></c><c r="B4"><v>4</v></c></row>
+	</sheetData></worksheet>`), &ws)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := parseSheet(ws, "USD", adapter.Date(2026, 4, 28), adapter.Date(2026, 4, 29))
+	if len(got) != 2 || got[0].Rate != 2 || got[1].Rate != 3 {
+		t.Errorf("parseSheet = %v, want rates 2 and 3", got)
 	}
 }
 
