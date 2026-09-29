@@ -162,3 +162,26 @@ func TestGolden(t *testing.T) {
 		})
 	}
 }
+
+func TestParseSkipsUnusableLabelsAndMissingValues(t *testing.T) {
+	json := `{"data":{"head":["USD/CNY","CNY/100JPY","0JPY/CNY",7,"EUR/CNY"],"pageTotal":1},
+ "records":[{"date":"2026-09-08","values":["6.78","1.0","1.0","1.0"]}]}`
+	rates := mustParse(t, []byte(json))
+	if len(rates) != 1 || rates[0].Base != "USD" || rates[0].Rate != 6.78 {
+		t.Fatalf("got %+v, want only USD/CNY", rates)
+	}
+}
+
+func TestToIntMatchesRubyToI(t *testing.T) {
+	tests := []struct {
+		in   any
+		want int
+	}{
+		{float64(3), 3}, {"2", 2}, {" 2", 2}, {"+2", 2}, {"-2", -2}, {"2.5", 2}, {"3abc", 3}, {"", 0}, {"abc", 0}, {nil, 0},
+	}
+	for _, tt := range tests {
+		if got := toInt(tt.in); got != tt.want {
+			t.Errorf("toInt(%#v) = %d, want %d", tt.in, got, tt.want)
+		}
+	}
+}

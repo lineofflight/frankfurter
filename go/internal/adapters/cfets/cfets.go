@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -200,6 +201,14 @@ func toInt(v any) int {
 	case float64:
 		return int(v)
 	case string:
+		v = strings.TrimLeft(v, " \t\n\v\f\r")
+		sign := 1
+		if v != "" && (v[0] == '+' || v[0] == '-') {
+			if v[0] == '-' {
+				sign = -1
+			}
+			v = v[1:]
+		}
 		n := 0
 		for _, c := range v {
 			if c < '0' || c > '9' {
@@ -207,7 +216,7 @@ func toInt(v any) int {
 			}
 			n = n*10 + int(c-'0')
 		}
-		return n
+		return sign * n
 	}
 	return 0
 }
