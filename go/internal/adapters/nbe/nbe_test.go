@@ -143,3 +143,52 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+// Matching on the full URI pins the URL and the one date param per weekday; a weekend request would find no
+// interaction and fail.
+func TestFetchRequestsEachWeekdayByDate(t *testing.T) {
+	a := New(vcrtest.Client(t, "nbe", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 16), adapter.Date(2026, 5, 20))
+	if err != nil {
+		t.Fatal(err)
+	}
+	seen := map[string]bool{}
+	for _, r := range rates {
+		seen[r.Date.Format("2006-01-02")] = true
+	}
+	for _, d := range []string{"2026-05-18", "2026-05-19", "2026-05-20"} {
+		if !seen[d] {
+			t.Errorf("no rates on %s", d)
+		}
+	}
+	if len(seen) != 3 {
+		t.Errorf("got rates on %d dates, want 3", len(seen))
+	}
+}
+
+func TestFetchRejectsZeroAfter(t *testing.T) {
+	if _, err := New(nil).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 5, 20)); err == nil {
+		t.Error("want an error without a start date")
+	}
+}
+
+func TestParseRejectsBadDate(t *testing.T) {
+	_, err := parse([]byte(`{"data": [{"date": "soon", "weighted_average": "1.5", "currency": {"code": "USD"}}]}`))
+	if err == nil {
+		t.Error("want an error for an unparseable date")
+	}
+}
+
+func TestParseSkipsInvalidCodesAndBlankRates(t *testing.T) {
+	rates := mustParse(t, `{"data": [
+		{"date": "2026-05-21", "weighted_average": "1.5", "currency": {"code": "usd"}},
+		{"date": "2026-05-21", "weighted_average": "1.5", "currency": {"code": "USDX"}},
+		{"date": "2026-05-21", "weighted_average": "1.5"},
+		{"date": "2026-05-21", "weighted_average": "", "currency": {"code": "GBP"}},
+		{"date": "2026-05-21", "weighted_average": null, "currency": {"code": "JPY"}},
+		{"date": "2026-05-21", "weighted_average": 2.5, "currency": {"code": "EUR"}}
+	]}`)
+	if len(rates) != 1 || rates[0].Base != "EUR" || rates[0].Rate != 2.5 {
+		t.Errorf("got %+v, want only EUR at 2.5", rates)
+	}
+}
