@@ -72,11 +72,11 @@ func (q *v1Quote) shouldRound() bool { return q.Amount != 1 || q.mustRebase() }
 func (q *v1Quote) NotFound() bool { return len(q.result.days) == 0 }
 
 // prepare scales each row by the amount, keyed by date and quote in the order rows arrive. A row whose stored
-// components resolve no rate is skipped (Ruby fails the request on the nil).
+// components resolve no rate fails the request, as Ruby's amount * nil raises.
 func (q *v1Quote) prepare(data []rates.Row) error {
 	for _, row := range data {
 		if math.IsNaN(row.Rate) {
-			continue
+			return errNoRate
 		}
 		rate := q.Amount * row.Rate
 		if q.shouldRound() {
@@ -117,8 +117,12 @@ func (q *v1Quote) rebase() error {
 }
 
 // errNotFinite is Ruby's Roundable#round failing on an infinite or NaN value (an amount like 1e400, or a rebase onto
-// a currency whose rate rounded to zero): Float#round and Float() raise, and V1 answers 422.
-var errNotFinite = errors.New("rate is not a finite number")
+// a currency whose rate rounded to zero): Float#round and Float() raise. errNoRate is a stored row with no resolvable
+// rate (one side of a quote only). V1 answers 422 to both.
+var (
+	errNotFinite = errors.New("rate is not a finite number")
+	errNoRate    = errors.New("nil can't be coerced into Float")
+)
 
 func v1Round(x float64) (float64, error) {
 	if math.IsNaN(x) || math.IsInf(x, 0) {

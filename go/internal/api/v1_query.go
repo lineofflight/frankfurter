@@ -2,9 +2,7 @@ package api
 
 import (
 	"errors"
-	"fmt"
 	"math"
-	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -20,59 +18,26 @@ type v1Params map[string]string
 // v1Nested are the keys Rack nested into an array ('[') or a hash ('{'): to[]=USD, from[x]=USD.
 type v1Nested map[string]byte
 
-// parseV1Params reads a raw query string the way Rack's parse_nested_query does: pairs split on '&' only, '+' as
-// space, last value wins. A key without '=' is nil in Rack, which every v1 parameter treats as absent, so it is
-// dropped. A bracketed key nests its value under the name before the bracket; mixing a string and a nested value, or
-// an array and a hash, under one name fails the parse (Rack's ParameterTypeError). Conflicts deeper inside a nested
-// value are not checked: no v1 parameter can use a nested value anyway.
-func parseV1Params(raw string) (v1Params, v1Nested, error) {
-	p, nested := v1Params{}, v1Nested{}
-	for pair := range strings.SplitSeq(raw, "&") {
-		if pair == "" {
-			continue
-		}
-		k, v, hasValue := strings.Cut(pair, "=")
-		key, err := url.QueryUnescape(k)
-		if err != nil {
-			return nil, nil, errors.New("invalid %-encoding (" + pair + ")")
-		}
-		val, err := url.QueryUnescape(v)
-		if err != nil {
-			return nil, nil, errors.New("invalid %-encoding (" + pair + ")")
-		}
-
-		name, after := key, ""
-		if len(key) > 1 {
-			if i := strings.IndexByte(key[1:], '['); i >= 0 {
-				name, after = key[:i+1], key[i+1:]
-			}
-		}
-		if after == "[" {
-			name, after = key, ""
-		}
-		if name == "" {
-			continue
-		}
-		if after == "" {
-			if hasValue {
-				p[name] = val
-			} else {
-				delete(p, name)
-			}
-			delete(nested, name)
-			continue
-		}
-
-		kind := byte('{')
-		if strings.HasPrefix(after, "[]") {
-			kind = '['
-		}
-		if _, isString := p[name]; isString || nested[name] != 0 && nested[name] != kind {
-			return nil, nil, fmt.Errorf("conflicting types for parameter %q", name)
-		}
-		nested[name] = kind
+// parseV1Params reads a raw query string as Rack's parse_nested_query does (parseRackQuery) and splits its top level
+// into string parameters and the names holding nested values. A key without '=' is nil in Rack, which every v1
+// parameter treats as absent, so it is dropped.
+func parseV1Params(raw string) (v1Params, v1Nested, rackHash, error) {
+	query, err := parseRackQuery(raw)
+	if err != nil {
+		return nil, nil, nil, err
 	}
-	return p, nested, nil
+	p, nested := v1Params{}, v1Nested{}
+	for k, v := range query {
+		switch v := v.(type) {
+		case string:
+			p[k] = v
+		case *[]any:
+			nested[k] = '['
+		case rackHash:
+			nested[k] = '{'
+		}
+	}
+	return p, nested, query, nil
 }
 
 // check fails a request whose parameters V1::Query would read as an array or a hash (Ruby raises calling to_f,

@@ -47,10 +47,13 @@ SIGINT/SIGTERM. Puma's workers and threads have no counterpart; MAX_THREADS stil
   304 to GET/HEAD/OPTIONS/TRACE and 412 otherwise, `"*"` matching except on POST; a non-matching If-Match gets 412),
   `cacheOneDay`, `contentTypeJSON`, `(*Server).today()`. Static files are served ahead of the mux for any path that
   cleans to theirs (`staticRoute`), so v2 must not register them.
-- **Query strings.** `parseV1Params` follows Rack's `parse_nested_query` (nil for a bare key, bracketed keys nesting,
-  `ParameterTypeError` on conflicts). Roda's params_capturing parses the query before any matcher with arguments, so a
-  malformed query fails with 422 even on a path no route matches; check whether V2 behaves the same way before reusing
-  it (V2 may not use params_capturing).
+- **Query strings.** `parseRackQuery` (rack_query.go) is a port of Rack 3.2's `parse_nested_query` with the limits
+  Roda installs (depth 32, 4096 pairs, 4 MB): nil for a bare key, `*[]any` and `rackHash` for nested keys, an error on
+  type conflicts at any depth. `parseV1Params` splits its top level into v1's string parameters. Roda's
+  params_capturing parses the query before any matcher with arguments, so a malformed query fails with 422 even on a
+  path no route matches; check whether V2 behaves the same way before reusing it (V2 may not use params_capturing).
+  params_capturing also appends route captures to a `captures` query parameter (`v1Captures`): a string or hash there
+  is a 422, an array's elements replace the path's dates.
 - **Heavy slots.** `Server.HeavySlots` is the stand-in for `RateQuery.heavy_slots`. Default it inside the v2 files
   (e.g. a package-level `heavyslots.New(heavyslots.DefaultMax)` used when the field is nil); app_spec's heavy-cap case
   sets the field to an exhausted `heavyslots.New(1)`.
@@ -118,6 +121,13 @@ Verification found and fixed through the corpus: `rates.Round` rounded near ties
 query keys, 422 on infinite or NaN rates, static files on uncleaned paths and OPTIONS caching, the If-Match and OPTIONS
 cases of `r.etag`, invalid UTF-8 in `from`/`to`, and a malformed query on an unmatched v1 path.
 
+The second verification found, outside the corpus: type conflicts below the top level of the query and Rack's
+limits (now a full port, `parseRackQuery`), the `captures` query parameter params_capturing appends to, and a stored
+row without a rate (now a 422, as Ruby's `amount * nil` raises; it was skipped). The Ruby outcomes were recorded by
+running the same requests through `api_golden.rb` into a scratch file; `v1_captures_test.go` and `rack_query_test.go`
+hold them. The golden file was not regenerated in that pass, so fold the requests in `TestV1QueryCaptures` and
+`TestV1NestedQueryConflicts` into the corpus the next time it is.
+
 ## Specs ported
 
 app_spec (all but the v2 cases above), cache_spec, request_timeout_spec, edge_cases_spec, versions/v1_spec,
@@ -138,13 +148,11 @@ versions/v1/roundable_spec (against `rates.Round`).
 - The v1 quote SQL orders by date, base, quote explicitly (Ruby leaves order to SQLite's plan, which is the same
   index order). The order matters: an EndOfDay snapshot reports the first series' date, so a stale lone series that
   sorts first would set the response date, exactly as in Ruby (the golden edge rows exercise it).
-- A stored row with no resolvable rate (a single published side, NaN in Go) is skipped by v1; Ruby's
-  `amount * nil` raises and V1's error handler answers 422. ECB always publishes a mid, so this never happens.
+- A date that reaches Date.parse from a `captures[]` query value must be YYYY-MM-DD in Go; Ruby's Date.parse also
+  takes forms like `20200101` or `Jan 1 2020`. Only the route's own YYYY-MM-DD captures reach it otherwise.
 - V1's error handler turns every exception into 422. Go answers 422 for request errors (amount, currency pair, dates,
   %-encoding, a query `date=` on an interval route) and 500 for database failures.
-- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body. Rack's type
-  conflicts are checked at the top level only (`a[b]=1&a[b][c]=2` parses in Go, fails in Ruby) and its parameter
-  count and depth limits are not enforced. `upcase` is Go's simple case mapping (Ruby maps `ß` to `SS`).
+- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body. `upcase` is Go's simple case mapping (Ruby maps `ß` to `SS`).
 - A success response whose body is first written after the deadline becomes a 500 JSON with `no-store` (Puma answers
   a raising body with a bare 500). JSON floats print shortest (`1` where Oj writes `1.0`); `Roundable` values over
   5000 are floats (Ruby returns Integers).

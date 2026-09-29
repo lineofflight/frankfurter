@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"regexp"
+	"slices"
 	"strings"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
@@ -43,19 +44,58 @@ func (s *Server) routesV1(mux *http.ServeMux) {
 
 func v1Unmatched(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", cacheOneDay)
-	if _, _, ok := v1ParseQuery(w, r); ok {
+	if _, _, _, ok := v1ParseQuery(w, r); ok {
 		notFound(w, contentTypeJSON)
 	}
 }
 
 // v1ParseQuery parses the query string, answering 422 when Rack could not.
-func v1ParseQuery(w http.ResponseWriter, r *http.Request) (v1Params, v1Nested, bool) {
-	params, nested, err := parseV1Params(r.URL.RawQuery)
+func v1ParseQuery(w http.ResponseWriter, r *http.Request) (v1Params, v1Nested, rackHash, bool) {
+	params, nested, query, err := parseV1Params(r.URL.RawQuery)
 	if err != nil {
 		v1Error(w, err)
-		return nil, nil, false
+		return nil, nil, nil, false
 	}
-	return params, nested, true
+	return params, nested, query, true
+}
+
+// v1Captures is what Roda's params_capturing leaves in params["captures"] once a route matches: the route's captures
+// appended to whatever the query string put there. An array from the query keeps its elements first, so they stand in
+// for the path's dates (?captures[]=2020-01-02 on /v1/2020-01-01 quotes 2020-01-02). A string or a hash there fails
+// the append (String#concat takes no array, a Hash has no concat), so every matched route but the index answers 422.
+func v1Captures(query rackHash, route ...any) ([]any, error) {
+	switch c := query["captures"].(type) {
+	case nil:
+		return route, nil
+	case *[]any:
+		return append(slices.Clone(*c), route...), nil
+	}
+	return nil, errInvalidParam
+}
+
+// v1CapturedDates reads a date route's dates from its captures: the single date, or an interval's start and end (an
+// open interval ends today). A date that is not a string fails, as Date.parse raises on nil, arrays and hashes.
+func v1CapturedDates(query rackHash, today string, route ...any) (v1Params, error) {
+	caps, err := v1Captures(query, route...)
+	if err != nil {
+		return nil, err
+	}
+	first, ok := caps[0].(string)
+	if !ok {
+		return nil, errInvalidDate
+	}
+	if len(route) == 1 {
+		return v1Params{"date": first}, nil
+	}
+	out := v1Params{"start_date": first, "end_date": today}
+	switch end := caps[1].(type) {
+	case nil:
+	case string:
+		out["end_date"] = end
+	default:
+		return nil, errInvalidDate
+	}
+	return out, nil
 }
 
 func (s *Server) v1Root(w http.ResponseWriter, _ *http.Request) {
@@ -90,25 +130,34 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 	spec := r.PathValue("spec")
 	today := db.FormatDate(s.today())
 
-	params, nested, ok := v1ParseQuery(w, r)
+	params, nested, raw, ok := v1ParseQuery(w, r)
 	if !ok {
 		return
 	}
-	var captures v1Params
+	var (
+		captures v1Params
+		err      error
+	)
 	interval := false
 	switch m := v1IntervalRe.FindStringSubmatch(spec); {
 	case v1LatestRe.MatchString(spec):
+		_, err = v1Captures(raw)
 		captures = v1Params{"date": today}
 	case v1DateRe.MatchString(spec):
-		captures = v1Params{"date": spec}
+		captures, err = v1CapturedDates(raw, today, spec)
 	case m != nil:
 		interval = true
-		captures = v1Params{"start_date": m[1], "end_date": m[2]}
-		if m[2] == "" {
-			captures["end_date"] = today
+		var end any
+		if m[2] != "" {
+			end = m[2]
 		}
+		captures, err = v1CapturedDates(raw, today, m[1], end)
 	default:
 		notFound(w, contentTypeJSON)
+		return
+	}
+	if err != nil {
+		v1Error(w, err)
 		return
 	}
 	for k, v := range captures {
@@ -141,7 +190,7 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 		e := newV1EndOfDay(s.DB, query)
 		quote, formatted, cacheKey = &e.v1Quote, func() any { return e.Formatted() }, e.CacheKey
 	}
-	if _, err := quote.Perform(r.Context()); errors.Is(err, errNotFinite) {
+	if _, err := quote.Perform(r.Context()); errors.Is(err, errNotFinite) || errors.Is(err, errNoRate) {
 		v1Error(w, err)
 		return
 	} else if err != nil {
@@ -160,7 +209,12 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) v1Currencies(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", cacheOneDay)
-	if _, _, ok := v1ParseQuery(w, r); !ok {
+	_, _, query, ok := v1ParseQuery(w, r)
+	if !ok {
+		return
+	}
+	if _, err := v1Captures(query); err != nil {
+		v1Error(w, err)
 		return
 	}
 	names, err := loadV1CurrencyNames(r.Context(), s.DB, s.today())

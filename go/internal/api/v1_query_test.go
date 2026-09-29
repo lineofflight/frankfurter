@@ -153,7 +153,7 @@ func TestRubyToF(t *testing.T) {
 }
 
 func TestParseV1ParamsLastValueWins(t *testing.T) {
-	p, _, err := parseV1Params("to=USD&to=GBP&base=USD?callback=?&amount=1+0")
+	p, _, _, err := parseV1Params("to=USD&to=GBP&base=USD?callback=?&amount=1+0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,14 +161,14 @@ func TestParseV1ParamsLastValueWins(t *testing.T) {
 	if !reflect.DeepEqual(p, want) {
 		t.Fatalf("params = %v", p)
 	}
-	if _, _, err := parseV1Params("to=%zz"); err == nil {
+	if _, _, _, err := parseV1Params("to=%zz"); err == nil {
 		t.Fatal("want an error on a bad escape")
 	}
 }
 
 // Rack parses a key without '=' as nil, which V1::Query treats as absent, and nests bracketed keys.
 func TestParseV1ParamsLikeRack(t *testing.T) {
-	p, nested, err := parseV1Params("amount&from=USD&from&to[]=USD&base[x]=GBP&=x&foo[=1&[bar]=2")
+	p, nested, _, err := parseV1Params("amount&from=USD&from&to[]=USD&base[x]=GBP&=x&foo[=1&[bar]=2")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,12 +179,12 @@ func TestParseV1ParamsLikeRack(t *testing.T) {
 		t.Errorf("nested = %v", nested)
 	}
 	for _, raw := range []string{"foo=1&foo[]=2", "foo[]=1&foo[x]=2", "foo[x]=1&foo[]=2"} {
-		if _, _, err := parseV1Params(raw); err == nil {
+		if _, _, _, err := parseV1Params(raw); err == nil {
 			t.Errorf("%s: want a type conflict", raw)
 		}
 	}
 	for _, raw := range []string{"foo&foo[]=1", "foo[]=1&foo=2", "foo[]=1&foo[]=2", "foo[x]=1&foo[y]=2"} {
-		if _, _, err := parseV1Params(raw); err != nil {
+		if _, _, _, err := parseV1Params(raw); err != nil {
 			t.Errorf("%s: %v", raw, err)
 		}
 	}
@@ -205,7 +205,7 @@ func TestV1NestedCheck(t *testing.T) {
 		{"foo[]=1", false},
 	}
 	for _, c := range cases {
-		p, nested, err := parseV1Params(c.query)
+		p, nested, _, err := parseV1Params(c.query)
 		if err != nil {
 			t.Fatal(err)
 		}
