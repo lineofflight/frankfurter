@@ -112,6 +112,46 @@ func TestParseSkipsInvalidValues(t *testing.T) {
 	}
 }
 
+func TestParseDates(t *testing.T) {
+	rates, err := parse([]byte(`{"bmx": {"series": [
+		{"idSerie": "SF60632", "datos": [{"fecha": "05/03/2026", "dato": "13.1"}, {"fecha": "6/3/2026", "dato": "13.2"}]}
+	]}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 2 {
+		t.Fatalf("got %d rates, want 2", len(rates))
+	}
+	if !rates[0].Date.Equal(adapter.Date(2026, 3, 5)) || !rates[1].Date.Equal(adapter.Date(2026, 3, 6)) {
+		t.Errorf("dates = %s, %s, want 2026-03-05, 2026-03-06", rates[0].Date, rates[1].Date)
+	}
+	if rates[0].Base != "CAD" {
+		t.Errorf("base = %s, want CAD", rates[0].Base)
+	}
+}
+
+func TestParseRejectsInvalidDate(t *testing.T) {
+	_, err := parse([]byte(`{"bmx": {"series": [
+		{"idSerie": "SF43718", "datos": [{"fecha": "2026-03-15", "dato": "17.1"}]}
+	]}}`))
+	if err == nil {
+		t.Error("want an error for an invalid fecha")
+	}
+}
+
+func TestParseSkipsUnknownSeriesAndMissingValues(t *testing.T) {
+	rates, err := parse([]byte(`{"bmx": {"series": [
+		{"idSerie": "SF99999", "datos": [{"fecha": "15/03/2026", "dato": "1.5"}]},
+		{"idSerie": "SF43718", "datos": [{"fecha": "15/03/2026"}, {"fecha": "15/03/2026", "dato": "0"}, {"fecha": "15/03/2026", "dato": "-1"}]}
+	]}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
+
 func TestGolden(t *testing.T) {
 	vcrtest.SetSecrets(t)
 	g := golden.Load(t, "testdata/golden/fetch.json")

@@ -103,7 +103,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if !ok || rate <= 0 {
 				continue
 			}
-			date, err := time.Parse("02/01/2006", obs.Fecha)
+			// Unpadded layout, as Ruby's strptime("%d/%m/%Y") also takes one-digit days and months.
+			date, err := time.Parse("2/1/2006", obs.Fecha)
 			if err != nil {
 				return nil, fmt.Errorf("invalid fecha %q: %w", obs.Fecha, err)
 			}
