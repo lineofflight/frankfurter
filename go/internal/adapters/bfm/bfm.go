@@ -105,7 +105,7 @@ func (a *Adapter) post(ctx context.Context, form url.Values) ([]byte, error) {
 
 type payload struct {
 	Data struct {
-		Status json.Number `json:"status"`
+		Status any `json:"status"`
 		Data   struct {
 			CoursMid json.RawMessage `json:"coursMid"`
 		} `json:"data"`
@@ -118,7 +118,8 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	if err := json.Unmarshal(data, &p); err != nil {
 		return nil, fmt.Errorf("%w: %v", invalid, err)
 	}
-	if status, err := p.Data.Status.Float64(); err != nil || status != 200 {
+	// Only a JSON number counts: Ruby compares with the integer 200, so a quoted "200" fails.
+	if status, ok := p.Data.Status.(float64); !ok || status != 200 {
 		return nil, invalid
 	}
 	rows := bytes.TrimSpace(p.Data.Data.CoursMid)
@@ -163,9 +164,9 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-var cleaner = strings.NewReplacer(" ", "", " ", "", " ", "", ",", ".")
+var cleaner = strings.NewReplacer(" ", "", "\u00a0", "", "\u202f", "", ",", ".")
 
-// parseRate mirrors BigDecimal(value.to_s.delete("   ").tr(",", "."), exception: false) followed by the
+// parseRate mirrors BigDecimal(value.to_s.delete(" \u00a0\u202f").tr(",", "."), exception: false) followed by the
 // finite and positive checks. A null, boolean or nested value never parses.
 func parseRate(value any) (float64, bool) {
 	var s string

@@ -183,7 +183,7 @@ func TestParsePreservesLongPublishedDigits(t *testing.T) {
 func TestParseAcceptsNonbreakingGroupingSpacesWithoutRescalingYen(t *testing.T) {
 	// A raw literal keeps the published key order, which json.Marshal of a map would sort anyway.
 	body := []byte(`{"code":"cours-de-mid-en-ar-filter","data":{"status":200,"data":{"coursMid":` +
-		`{"2026-09-22":"1` + " " + `234,56","2026-09-23":"1` + " " + `234,57"}}}}`)
+		`{"2026-09-22":"1` + "\u00a0" + `234,56","2026-09-23":"1` + "\u202f" + `234,57"}}}}`)
 	rates, err := parse(body, "JPY")
 	if err != nil {
 		t.Fatal(err)
@@ -224,6 +224,8 @@ func TestParseRaisesOnSemanticErrorsOrMissingData(t *testing.T) {
 		[]byte(`{}`),
 		[]byte(`{"data":{"status":500,"data":{"coursMid":[]}}}`),
 		response(t, []string{"unexpected"}, nil),
+		response(t, nil, nil),
+		[]byte(`{"data":{"status":"200","data":{"coursMid":[]}}}`),
 	} {
 		if _, err := parse(body, "USD"); err == nil {
 			t.Errorf("parse(%s): want an error", body)
