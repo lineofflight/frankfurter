@@ -2,7 +2,12 @@ package cnb
 
 import (
 	"context"
+	"fmt"
+	"io"
 	"math"
+	"net/http"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -125,6 +130,68 @@ func TestParseRaisesOnMalformedDates(t *testing.T) {
 func TestParseRejectsMissingRates(t *testing.T) {
 	if _, err := parse([]byte(`{"error":true}`)); err == nil {
 		t.Error("want an error without a rates array")
+	}
+}
+
+func TestParseSkipsInvalidCodesAndZeroAmount(t *testing.T) {
+	rates, err := parse([]byte(`{"rates":[
+		{"validFor":"2026-03-17","currencyCode":"usd","amount":1,"rate":22.5},
+		{"validFor":"2026-03-17","currencyCode":"XDRX","amount":1,"rate":22.5},
+		{"validFor":"not-a-date","currencyCode":"EUR","amount":0,"rate":24.5},
+		{"validFor":"2026-03-17","currencyCode":"GBP","rate":29.1},
+		{"validFor":"2026-03-17","currencyCode":"JPY","amount":100,"rate":14.1}
+	]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "JPY" {
+		t.Errorf("got %+v, want only JPY", rates)
+	}
+}
+
+type roundTripper func(*http.Request) (*http.Response, error)
+
+func (f roundTripper) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsEachYear(t *testing.T) {
+	var requests []string
+	client := &http.Client{Transport: roundTripper(func(r *http.Request) (*http.Response, error) {
+		requests = append(requests, r.URL.String())
+		year := r.URL.Query().Get("year")
+		body := fmt.Sprintf(`{"rates":[
+			{"validFor":"%s-01-02","currencyCode":"USD","amount":1,"rate":22},
+			{"validFor":"%s-12-31","currencyCode":"USD","amount":1,"rate":23}
+		]}`, year, year)
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+	})}
+
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2024, 12, 31), adapter.Date(2026, 1, 2))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	wantRequests := []string{
+		baseURL + "?lang=EN&year=2024",
+		baseURL + "?lang=EN&year=2025",
+		baseURL + "?lang=EN&year=2026",
+	}
+	if !slices.Equal(requests, wantRequests) {
+		t.Errorf("requests = %v, want %v", requests, wantRequests)
+	}
+	var dates []string
+	for _, r := range rates {
+		dates = append(dates, r.Date.Format(time.DateOnly))
+	}
+	// Both bounds are inclusive.
+	want := []string{"2024-12-31", "2025-01-02", "2025-12-31", "2026-01-02"}
+	if !slices.Equal(dates, want) {
+		t.Errorf("dates = %v, want %v", dates, want)
+	}
+}
+
+func TestFetchNeedsStartDate(t *testing.T) {
+	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 1, 2)); err == nil {
+		t.Error("want an error without a start date")
 	}
 }
 
