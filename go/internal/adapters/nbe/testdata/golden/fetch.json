@@ -1,0 +1,355 @@
+{
+  "adapter": "NBE",
+  "cassette": "nbe",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 20))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 43.0179
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 113.0426
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 114.8685
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 200.8557
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 23.2011
+    },
+    {
+      "base": "DJF",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 0.8938
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 24.5839
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 183.7377
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 211.0424
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 1.6464
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 0.9965
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 1.2318
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 515.7075
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 16.9424
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 42.1065
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 16.7291
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 157.227
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 216.8414
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-18",
+      "quote": "ETB",
+      "rate": 9.487
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 43.0295
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 112.9941
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 114.9999
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 201.0632
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 23.2418
+    },
+    {
+      "base": "DJF",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 0.894
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 24.5917
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 183.8031
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 211.0203
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 1.6404
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 0.9944
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 1.2308
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 515.0879
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 17.0139
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 42.1134
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 16.7535
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 157.2694
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 216.2677
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-19",
+      "quote": "ETB",
+      "rate": 9.4679
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 43.1157
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 112.6535
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 115.0744
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 201.1901
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 23.2705
+    },
+    {
+      "base": "DJF",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 0.8959
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 24.6256
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 184.0339
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 212.1141
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 1.6414
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 0.9952
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 1.2304
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 516.1343
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 17.0702
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 42.2012
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 16.835
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 157.5889
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 216.7071
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-20",
+      "quote": "ETB",
+      "rate": 9.5238
+    }
+  ]
+}
