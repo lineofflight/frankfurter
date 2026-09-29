@@ -2,8 +2,12 @@ package nbg
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -100,4 +104,48 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsEachDayButSunday(t *testing.T) {
+	var got []string
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		got = append(got, r.URL.String())
+		return &http.Response{StatusCode: 200, Header: http.Header{},
+			Body: io.NopCloser(strings.NewReader(`[]`)), Request: r}, nil
+	})}
+	// 2026-03-07 is a Saturday.
+	if _, err := New(client).Fetch(context.Background(), adapter.Date(2026, 3, 7), adapter.Date(2026, 3, 9)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{baseURL + "?date=2026-03-07", baseURL + "?date=2026-03-09"}
+	if strings.Join(got, " ") != strings.Join(want, " ") {
+		t.Errorf("requests = %v, want %v", got, want)
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 4)); err == nil {
+		t.Error("want error for zero after")
+	}
+}
+
+func TestParseSkipsZeroQuantity(t *testing.T) {
+	rates := mustParse(t, `[{"date": "2026-03-02T00:00:00", "currencies": [
+  {"code": "USD", "quantity": 0, "rate": 2.7},
+  {"code": "EUR", "quantity": "1", "rate": "3.1"}
+]}]`)
+	if len(rates) != 1 || rates[0].Base != "EUR" || rates[0].Rate != 3.1 ||
+		!rates[0].Date.Equal(adapter.Date(2026, 3, 2)) {
+		t.Errorf("rates = %+v, want only EUR 3.1 on 2026-03-02", rates)
+	}
+}
+
+func TestParseRejectsNonArray(t *testing.T) {
+	if _, err := parse([]byte(`{"date": "2026-03-02"}`)); err == nil {
+		t.Error("want error for non-array JSON")
+	}
 }
