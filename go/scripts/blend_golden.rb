@@ -13,6 +13,10 @@
 #   1. rollups:rebuild (all providers) after seeding
 #   2. blend:rebuild
 #   3. rollups:rebuild[ecb] after ECB's GBP rates move 1%
+#   4. db:purge_invalid after rows beyond the future horizon are inserted and rolled up
+#
+# It also records the consensus scan of the seeded rates: the task's own total line, and per provider and quote counts
+# computed the same way (the task's combo labels are broken, see core-blend.md).
 
 require "date"
 require "json"
@@ -39,9 +43,11 @@ require "blended_weekly_rate"
 require "blended_monthly_rate"
 require "cache"
 require "rake"
-Cache.define_singleton_method(:purge) {}
+Cache.define_singleton_method(:purge) { nil }
 load "lib/tasks/rollups.rake"
 load "lib/tasks/blend.rake"
+load "lib/tasks/consensus.rake"
+load "lib/tasks/db.rake"
 
 Fixtures.seed!
 
@@ -65,6 +71,9 @@ d0 = Fixtures.business_day(80)
 end
 insert("X", d0 + 9, "EUR", "ZAR", mid: 99.0)
 insert("X", d0 + 9, "EUR", "USD", mid: 1.08)
+# Y deviates on the cohort's own date, so the per-date consensus scan flags it too.
+insert("Y", d0, "EUR", "ZAR", mid: 99.0)
+insert("Y", d0, "EUR", "USD", mid: 1.08)
 
 # Two bridges to the same quote, collapsed by BaseConversion#reconcile.
 [Fixtures.business_day(100), Fixtures.business_day(107)].each do |date|
@@ -108,23 +117,33 @@ end
 def grouped
   {
     weekly_rates: dump(:weekly_rates, [:bucket_date, :provider, :base, :quote, :rate],
-      [:bucket_date, :provider, :base, :quote],),
+                       [:bucket_date, :provider, :base, :quote],),
     monthly_rates: dump(:monthly_rates, [:bucket_date, :provider, :base, :quote, :rate],
-      [:bucket_date, :provider, :base, :quote],),
+                        [:bucket_date, :provider, :base, :quote],),
     blended_weekly_rates: dump(:blended_weekly_rates, [:bucket_date, :quote, :rate], [:bucket_date, :quote]),
     blended_monthly_rates: dump(:blended_monthly_rates, [:bucket_date, :quote, :rate], [:bucket_date, :quote]),
   }
 end
 
-def invoke(name, *args)
+def invoke(name, *)
   Rake::Task[name].reenable
-  Rake::Task[name].invoke(*args)
+  Rake::Task[name].invoke(*)
 end
 
 out = {
   today: TODAY.to_s,
   rates: dump(:rates, [:date, :provider, :base, :quote, :mid, :bid, :ask], [:date, :provider, :base, :quote]),
 }
+
+logged = []
+Log.define_singleton_method(:info) { |message| logged << message }
+scan_dates(Rate.min(:date), Rate.max(:date))
+counts = Hash.new(0)
+dates = Rate.select(:date).distinct.order(:date).select_map(:date)
+dates.each do |date|
+  Blender.new(Rate.where(date:).all, base: "EUR").outliers.each { |r| counts["#{r[:provider]} #{r[:quote]}"] += 1 }
+end
+out[:consensus] = { total_line: logged.last, counts:, dates: dates.size }
 
 invoke("rollups:rebuild")
 out[:rollups] = grouped
@@ -135,5 +154,22 @@ out[:blend] = grouped.merge(blended_rates: dump(:blended_rates, [:date, :quote, 
 Rate.where(provider: "ECB", quote: "GBP").update(mid: Sequel[:mid] * 1.01)
 invoke("rollups:rebuild", "ecb")
 out[:ecb] = grouped
+
+# Beyond the horizon (today + 2 plus any adapter lead): deleted by the purge, their rollup buckets repaired.
+future = [
+  ["T3", TODAY + 30, "EUR", "GEL", 3.1], ["T3", TODAY + 30, "EUR", "USD", 1.11],
+  ["ECB", TODAY + 10, "EUR", "GBP", 0.9], ["ECB", TODAY + 10, "EUR", "USD", 1.2],
+]
+future.each { |provider, date, base, quote, mid| insert(provider, date, base, quote, mid:) }
+out[:future] = future.map { |provider, date, base, quote, mid| [date.to_s, provider, base, quote, mid, nil, nil] }
+require "rate_validation"
+out[:leads] = RateValidation::FutureDate.send(:provider_leads)
+invoke("rollups:rebuild")
+invoke("db:purge_invalid")
+out[:purge_line] = logged.grep(/\Apurge_invalid:/).last
+out[:purge] = grouped.merge(
+  blended_rates: dump(:blended_rates, [:date, :quote, :rate], [:date, :quote]),
+  rates: dump(:rates, [:date, :provider, :base, :quote, :rate], [:date, :provider, :base, :quote]),
+)
 
 Zlib::GzipWriter.open(ARGV[1]) { |gz| gz.write(JSON.generate(out)) }

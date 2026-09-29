@@ -70,12 +70,21 @@ backfill.
 ## Golden check
 
 `go/scripts/blend_golden.rb` seeds the spec fixture with `Date.today` pinned (2026-09-29), adds edge rows (a
-contributor aging out of the lookback, a consensus-masked outlier, duplicate bridges, a quarterly non-blending
-provider, future-dated rows, a pegged quote with provider rows, bid/ask-only rows, a defunct currency across its
-terminal date, an unknown code), then runs `rollups:rebuild`, `blend:rebuild`, and `rollups:rebuild[ecb]` after moving
-ECB's GBP rates, dumping every rollup and blend table after each stage into `testdata/golden/tasks.json.gz`.
-`TestGoldenTasks` loads the same input rates into a fresh database and runs the Go tasks: all 7 tables at all 3 stages
-match Ruby row for row, every rate bit-identical (the test checks 1e-9 relative).
+contributor aging out of the lookback, a consensus-masked outlier, an outlier on its cohort's own date, duplicate
+bridges, a quarterly non-blending provider, future-dated rows, a pegged quote with provider rows, bid/ask-only rows, a
+defunct currency across its terminal date, an unknown code), then runs four stages, dumping every rollup and blend table
+after each into `testdata/golden/tasks.json.gz`:
+
+1. `rollups:rebuild`
+2. `blend:rebuild`
+3. `rollups:rebuild[ecb]` after ECB's GBP rates move 1%
+4. `db:purge_invalid` after rows beyond the future horizon are inserted and rolled up (this stage also dumps `rates`
+   and the task's totals line; Ruby's adapter leads are recorded, since the Go test registers no adapters)
+
+It also records the consensus scan of the seeded rates: the `consensus` task's own total line and the per provider and
+quote counts. `TestGoldenTasks` loads the same input rates into a fresh database and runs the Go tasks: every table at
+every stage matches Ruby row for row, every rate bit-identical (the test checks 1e-9 relative), and the consensus
+and purge totals agree.
 
 Regenerate (throwaway database in the scratchpad; the script migrates it in a child process, because an in-process
 migration defines `Provider` before its `frequency` column exists and Ruby then blends non-daily providers):
@@ -100,6 +109,9 @@ Ported in full: weighted_average_spec, consensus_spec, blender_spec, base_conver
   owns.
 - grouped_rollup_lock_spec: a second `*sql.DB` on the same file with a 100 ms busy timeout; its insert fails inside the
   source transaction and succeeds before the refill.
+- rate_scopes_spec's two cases that assert on the grouped blend tables ("keeps blends identical when retained expired
+  rows share a bucket", "omits pairs whose bucket contains only expired observations") also run here against the
+  tables themselves (`scope_test.go`); `internal/rates` checks them through the blend inputs.
 
 Partly ported, the rest needs the API step's `Versions::V2::RateQuery`:
 

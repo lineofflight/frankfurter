@@ -2,24 +2,40 @@ package blend
 
 import (
 	"compress/gzip"
+	"database/sql"
 	"encoding/json"
 	"fmt"
+	"maps"
 	"math"
 	"os"
 	"sort"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
 	"github.com/lineofflight/frankfurter/go/internal/dbtest"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// tasksGolden is what go/scripts/blend_golden.rb records: the Ruby tasks' input rates and the tables after each stage.
+// tasksGolden is what go/scripts/blend_golden.rb records: the Ruby tasks' input rates, the tables after each stage,
+// and the consensus scan of the input.
 type tasksGolden struct {
-	Today  string
-	Rates  [][]any
-	Stages map[string]map[string][][]any `json:"-"`
+	Today     string         `json:"today"`
+	Rates     [][]any        `json:"rates"`
+	Future    [][]any        `json:"future"` // inserted before the purge stage
+	Leads     map[string]int `json:"leads"`
+	PurgeLine string         `json:"purge_line"`
+	Consensus struct {
+		TotalLine string         `json:"total_line"`
+		Counts    map[string]int `json:"counts"`
+		Dates     int            `json:"dates"`
+	} `json:"consensus"`
+
+	Rollups map[string][][]any `json:"rollups"`
+	Blend   map[string][][]any `json:"blend"`
+	ECB     map[string][][]any `json:"ecb"`
+	Purge   map[string][][]any `json:"purge"`
 }
 
 func loadTasksGolden(t *testing.T) tasksGolden {
@@ -33,25 +49,26 @@ func loadTasksGolden(t *testing.T) tasksGolden {
 	if err != nil {
 		t.Fatal(err)
 	}
-	var raw map[string]json.RawMessage
-	if err := json.NewDecoder(zr).Decode(&raw); err != nil {
+	var g tasksGolden
+	if err := json.NewDecoder(zr).Decode(&g); err != nil {
 		t.Fatal(err)
-	}
-	g := tasksGolden{Stages: map[string]map[string][][]any{}}
-	if err := json.Unmarshal(raw["today"], &g.Today); err != nil {
-		t.Fatal(err)
-	}
-	if err := json.Unmarshal(raw["rates"], &g.Rates); err != nil {
-		t.Fatal(err)
-	}
-	for _, stage := range []string{"rollups", "blend", "ecb"} {
-		var tables map[string][][]any
-		if err := json.Unmarshal(raw[stage], &tables); err != nil {
-			t.Fatal(err)
-		}
-		g.Stages[stage] = tables
 	}
 	return g
+}
+
+func insertGoldenRates(t *testing.T, conn *sql.DB, rows [][]any) {
+	t.Helper()
+	if err := db.Immediate(ctx, conn, func(q db.Querier) error {
+		for _, r := range rows {
+			if _, err := q.ExecContext(ctx, "INSERT INTO rates (date, provider, base, quote, mid, bid, ask) VALUES "+
+				"(?, ?, ?, ?, ?, ?, ?)", r...); err != nil {
+				return err
+			}
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
 }
 
 // dumpTable reads table as rows of text keys and a trailing rate, ordered like the Ruby dump.
@@ -59,6 +76,8 @@ func dumpTable(t *testing.T, q db.Querier, table string) [][]any {
 	t.Helper()
 	cols := "bucket_date, provider, base, quote, rate"
 	switch {
+	case table == "rates":
+		cols = "date, provider, base, quote, rate"
 	case table == "blended_rates":
 		cols = "date, quote, rate"
 	case strings.HasPrefix(table, "blended_"):
@@ -88,6 +107,9 @@ func dumpTable(t *testing.T, q db.Querier, table string) [][]any {
 			row = append(row, k)
 		}
 		out = append(out, append(row, rate))
+	}
+	if err := rows.Err(); err != nil {
+		t.Fatal(err)
 	}
 	return out
 }
@@ -127,6 +149,9 @@ func compareTable(t *testing.T, label string, want, got [][]any) {
 
 func compareStage(t *testing.T, q db.Querier, stage string, want map[string][][]any) {
 	t.Helper()
+	if len(want) == 0 {
+		t.Fatalf("%s: stage missing from golden", stage)
+	}
 	for table, rows := range want {
 		if len(rows) == 0 {
 			t.Errorf("%s/%s: empty golden table", stage, table)
@@ -135,8 +160,9 @@ func compareStage(t *testing.T, q db.Querier, stage string, want map[string][][]
 	}
 }
 
-// TestGoldenTasks replays go/scripts/blend_golden.rb: rollups:rebuild, blend:rebuild, then rollups:rebuild[ecb]
-// after ECB's GBP rates move, and compares every table Ruby produced at each stage.
+// TestGoldenTasks replays go/scripts/blend_golden.rb: the consensus scan, rollups:rebuild, blend:rebuild,
+// rollups:rebuild[ecb] after ECB's GBP rates move, then db:purge_invalid after rows beyond the future horizon are
+// inserted and rolled up. It compares every table Ruby produced at each stage.
 func TestGoldenTasks(t *testing.T) {
 	g := loadTasksGolden(t)
 	today, err := db.ParseDate(g.Today)
@@ -147,31 +173,53 @@ func TestGoldenTasks(t *testing.T) {
 	if err := rates.SeedProviders(ctx, conn); err != nil {
 		t.Fatal(err)
 	}
-	if err := db.Immediate(ctx, conn, func(q db.Querier) error {
-		for _, r := range g.Rates {
-			if _, err := q.ExecContext(ctx, "INSERT INTO rates (date, provider, base, quote, mid, bid, ask) VALUES "+
-				"(?, ?, ?, ?, ?, ?, ?)", r...); err != nil {
-				return err
-			}
-		}
-		return nil
-	}); err != nil {
+	insertGoldenRates(t, conn, g.Rates)
+
+	report, err := ScanConsensus(ctx, conn, time.Time{}, time.Time{}, today)
+	if err != nil {
 		t.Fatal(err)
+	}
+	if line := fmt.Sprintf("Total: %d outliers across %d dates", report.Total, report.Dates); line != g.Consensus.TotalLine {
+		t.Errorf("consensus: %q, ruby %q", line, g.Consensus.TotalLine)
+	}
+	counts := map[string]int{}
+	for _, c := range report.Counts {
+		counts[c.Provider+" "+c.Quote] = c.Count
+	}
+	if len(g.Consensus.Counts) == 0 || !maps.Equal(counts, g.Consensus.Counts) || report.Dates != g.Consensus.Dates {
+		t.Errorf("consensus counts = %v over %d dates, ruby %v over %d", counts, report.Dates, g.Consensus.Counts,
+			g.Consensus.Dates)
 	}
 
 	if err := RebuildProviderRollups(ctx, conn, "", today); err != nil {
 		t.Fatal(err)
 	}
-	compareStage(t, conn, "rollups", g.Stages["rollups"])
+	compareStage(t, conn, "rollups", g.Rollups)
 
 	if err := RebuildAll(ctx, conn, today); err != nil {
 		t.Fatal(err)
 	}
-	compareStage(t, conn, "blend", g.Stages["blend"])
+	compareStage(t, conn, "blend", g.Blend)
 
 	exec(t, conn, "UPDATE rates SET mid = mid * 1.01 WHERE provider = 'ECB' AND quote = 'GBP'")
 	if err := RebuildProviderRollups(ctx, conn, "ecb", today); err != nil {
 		t.Fatal(err)
 	}
-	compareStage(t, conn, "ecb", g.Stages["ecb"])
+	compareStage(t, conn, "ecb", g.ECB)
+
+	// Ruby's leads come from its adapters; this package registers none, so take them from the golden file.
+	insertGoldenRates(t, conn, g.Future)
+	if err := RebuildProviderRollups(ctx, conn, "", today); err != nil {
+		t.Fatal(err)
+	}
+	totals, err := PurgeInvalid(ctx, conn, today, g.Leads)
+	if err != nil {
+		t.Fatal(err)
+	}
+	line := fmt.Sprintf("purge_invalid: deleted %d rates, %d weekly, %d monthly", totals.Rates, totals.Weekly,
+		totals.Monthly)
+	if line != g.PurgeLine || totals.Rates == 0 {
+		t.Errorf("purge: %q, ruby %q", line, g.PurgeLine)
+	}
+	compareStage(t, conn, "purge", g.Purge)
 }

@@ -232,3 +232,20 @@ func TestGroupedReadSingleDate(t *testing.T) {
 		}
 	}
 }
+
+// Not in the Ruby spec: a range with no source buckets needs nothing materialized, so BlendedRollup.read returns an
+// empty result rather than nil (which would send the request to the live path).
+func TestGroupedReadEmptyRange(t *testing.T) {
+	conn := fixtures.New(t)
+	start, end := time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC), time.Date(1900, 2, 1, 0, 0, 0, 0, time.UTC)
+	for _, r := range Rollups {
+		rebuild(t, conn, r)
+		rows, ok, err := r.Read(ctx, conn, start, end, today())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !ok || rows == nil || len(rows) != 0 {
+			t.Errorf("%s: rows %v, ok %v", r.Table, rows, ok)
+		}
+	}
+}
