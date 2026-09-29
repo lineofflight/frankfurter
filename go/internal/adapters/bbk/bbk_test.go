@@ -2,7 +2,9 @@ package bbk
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
 	"strings"
 	"testing"
 	"time"
@@ -141,6 +143,34 @@ func TestParseRejectsTitleMultiplierMismatch(t *testing.T) {
 		"BBK:BBEX3(1.0);D;USD;DEM;AA;AC;000;1998-12-30;1.6730;P1D;4;BBEX3.D.USD.DEM.AA.AC.000;DEM;0;Devisenkurse der Frankfurter Börse / 100 USD = ... DEM / Vereinigte Staaten;WEDE;;0.0;\n"))
 	if err == nil {
 		t.Error("want an error when the title contradicts the multiplier table")
+	}
+}
+
+func TestParseRejectsUnknownMultiplier(t *testing.T) {
+	_, err := parse([]byte(header +
+		"BBK:BBEX3(1.0);D;XYZ;DEM;AA;AC;000;1998-12-30;1.0;P1D;4;BBEX3.D.XYZ.DEM.AA.AC.000;DEM;0;Devisenkurse / 1 XYZ = ... DEM;WEDE;;0.0;\n"))
+	if err == nil || !strings.Contains(err.Error(), "unknown multiplier for XYZ") {
+		t.Errorf("err = %v, want unknown multiplier for XYZ", err)
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) { return f(req) }
+
+func TestFetchRequestsSDMXCSVForPeriod(t *testing.T) {
+	var got string
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		got = req.URL.String()
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(header)), Request: req}, nil
+	})}
+
+	if _, err := New(client).Fetch(context.Background(), adapter.Date(1998, 12, 21), adapter.Date(1998, 12, 30)); err != nil {
+		t.Fatal(err)
+	}
+	want := "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D..DEM.AA.AC.000?endPeriod=1998-12-30&format=sdmx_csv&startPeriod=1998-12-21"
+	if got != want {
+		t.Errorf("url = %s, want %s", got, want)
 	}
 }
 
