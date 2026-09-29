@@ -14,7 +14,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 	"time"
 
@@ -132,9 +131,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if text == "" {
 				continue
 			}
-			value, err := strconv.ParseFloat(text, 64)
-			if err != nil {
-				return nil, fmt.Errorf("invalid rate %q for %s: %w", text, s.code, err)
+			value, ok := adapter.ParseFloat(text)
+			if !ok {
+				return nil, fmt.Errorf("invalid rate %q for %s", text, s.code)
 			}
 			if value == 0 {
 				continue

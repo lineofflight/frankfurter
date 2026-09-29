@@ -98,6 +98,42 @@ func TestParseSkipsZeroRates(t *testing.T) {
 	}
 }
 
+func TestFetchQueryShape(t *testing.T) {
+	a := New(vcrtest.Client(t, "boe", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 17), adapter.Date(2026, 3, 20))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 104 {
+		t.Errorf("got %d rates, want 104", len(rates))
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	a := New(vcrtest.Client(t, "boe"))
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 20)); err == nil {
+		t.Error("want error for zero after")
+	}
+}
+
+func TestParseRejectsMalformedRates(t *testing.T) {
+	for _, rate := range []string{"abc", "NaN", "Inf"} {
+		if _, err := parse([]byte("DATE,XUDLUSS\n17 Mar 2026," + rate + "\n")); err == nil {
+			t.Errorf("rate %q: want error", rate)
+		}
+	}
+}
+
+func TestParseSkipsRowsWithoutDate(t *testing.T) {
+	rates, err := parse([]byte("DATE,XUDLUSS\n,1.3343\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %+v, want none", rates)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))
