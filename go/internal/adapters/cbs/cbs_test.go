@@ -212,6 +212,7 @@ func TestParseSections(t *testing.T) {
 		// Out-of-range serials and text labels are not dates.
 		{nil, 30000, 0.4},
 		{nil, "OTHER", 0.4},
+		{nil, "NaN", 0.4},
 		// A month banner resets the header map, so the next row has no columns.
 		{nil, "June"},
 		{nil, 46146.5, 0.4},

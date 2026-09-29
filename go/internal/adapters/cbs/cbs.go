@@ -19,7 +19,6 @@ import (
 	"net/url"
 	"regexp"
 	"slices"
-	"strconv"
 	"strings"
 	"time"
 
@@ -198,8 +197,8 @@ func columnMap(r []string) map[int]string {
 }
 
 func serialDate(s string) (time.Time, bool) {
-	serial, err := strconv.ParseFloat(strings.TrimSpace(s), 64)
-	if err != nil || serial <= 30_000 || serial >= 80_000 {
+	serial, ok := adapter.ParseFloat(s)
+	if !ok || serial <= 30_000 || serial >= 80_000 {
 		return time.Time{}, false
 	}
 	return excelEpoch.AddDate(0, 0, int(serial)), true
