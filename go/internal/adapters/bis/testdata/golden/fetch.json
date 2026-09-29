@@ -1,0 +1,823 @@
+{
+  "adapter": "BIS",
+  "cassette": "bis",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2025, 1, 31), upto: Date.new(2025, 2, 1))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AED",
+      "rate": 3.6725
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ALL",
+      "rate": 96.14
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AMD",
+      "rate": 397.35
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ANG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AOA",
+      "rate": 912.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ARS",
+      "rate": 1053.5
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AUD",
+      "rate": 1.607043
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AWG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "AZN",
+      "rate": 1.7
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BAM",
+      "rate": 1.880063
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BBD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BDT",
+      "rate": 121.925926
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BHD",
+      "rate": 0.376
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BIF",
+      "rate": 2920.13
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BND",
+      "rate": 1.3552
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BOB",
+      "rate": 6.91
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BRL",
+      "rate": 5.8382565188107
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BSD",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BTN",
+      "rate": 86.6414
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BWP",
+      "rate": 13.8805
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BYN",
+      "rate": 3.4134
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "BZD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CAD",
+      "rate": 1.446647
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CDF",
+      "rate": 2848.4772
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CHF",
+      "rate": 0.90917
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CLP",
+      "rate": 988.1
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CNY",
+      "rate": 7.251323
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "COP",
+      "rate": 4170.01
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CRC",
+      "rate": 508.535
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CVE",
+      "rate": 105.993
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "CZK",
+      "rate": 24.214375
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "DJF",
+      "rate": 177.721
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "DKK",
+      "rate": 7.17964
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "DOP",
+      "rate": 61.9789
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "DZD",
+      "rate": 135.1448
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "EGP",
+      "rate": 50.1883
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ERN",
+      "rate": 15.075
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ETB",
+      "rate": 126.3713
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "EUR",
+      "rate": 0.962186
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "FJD",
+      "rate": 2.3436
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GBP",
+      "rate": 0.804465
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GEL",
+      "rate": 2.8761
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GHS",
+      "rate": 15.3001
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GMD",
+      "rate": 70.301149
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GTQ",
+      "rate": 7.72817
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "GYD",
+      "rate": 208.5
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "HKD",
+      "rate": 7.792745
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "HNL",
+      "rate": 25.5063
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "HTG",
+      "rate": 130.1714
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "HUF",
+      "rate": 392.523814
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "IDR",
+      "rate": 16300.596555
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ILS",
+      "rate": 3.579236
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "INR",
+      "rate": 86.591456
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "IQD",
+      "rate": 1300.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ISK",
+      "rate": 141.15
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "JMD",
+      "rate": 157.02895
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "JOD",
+      "rate": 0.71
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "JPY",
+      "rate": 154.902338
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KES",
+      "rate": 129.2292
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KGS",
+      "rate": 87.45
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KHR",
+      "rate": 4025.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KMF",
+      "rate": 473.364524
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KRW",
+      "rate": 1449.648802
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KWD",
+      "rate": 0.30825
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KYD",
+      "rate": 0.833333
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "KZT",
+      "rate": 518.14
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LAK",
+      "rate": 20520.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LKR",
+      "rate": 297.8
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LRD",
+      "rate": 196.86
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LSL",
+      "rate": 18.63405
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "LYD",
+      "rate": 4.9108
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MAD",
+      "rate": 10.0377
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MDL",
+      "rate": 18.6764
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MGA",
+      "rate": 4672.15
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MKD",
+      "rate": 59.11
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MNT",
+      "rate": 3448.24
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MOP",
+      "rate": 8.0229
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MUR",
+      "rate": 46.8499
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MXN",
+      "rate": 20.664774
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MYR",
+      "rate": 4.455018
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "MZN",
+      "rate": 63.91
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NAD",
+      "rate": 18.54935
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NGN",
+      "rate": 1478.22
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NIO",
+      "rate": 36.6243
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NOK",
+      "rate": 11.293467
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NPR",
+      "rate": 137.55
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "NZD",
+      "rate": 1.769556
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "OMR",
+      "rate": 0.3845
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PAB",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PEN",
+      "rate": 3.7215
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PGK",
+      "rate": 4.009623
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PHP",
+      "rate": 58.387376
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PKR",
+      "rate": 278.9839
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PLN",
+      "rate": 4.05369
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "PYG",
+      "rate": 7873.86
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "QAR",
+      "rate": 3.64
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "RON",
+      "rate": 4.788511
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "RSD",
+      "rate": 112.7241
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "RUB",
+      "rate": 98.0062
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "RWF",
+      "rate": 1393.951802
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SAR",
+      "rate": 3.75
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SBD",
+      "rate": 8.496177
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SCR",
+      "rate": 14.848879
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SEK",
+      "rate": 11.040123
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SGD",
+      "rate": 1.355816
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SLE",
+      "rate": 22.6082
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SRD",
+      "rate": 35.2365
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SSP",
+      "rate": 4300.1857
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "STD",
+      "rate": 23550.9
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "SZL",
+      "rate": 18.63405
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "THB",
+      "rate": 33.594727
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TJS",
+      "rate": 10.9242
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TMT",
+      "rate": 3.5
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TND",
+      "rate": 3.1876
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TOP",
+      "rate": 2.434867
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TRY",
+      "rate": 35.856345617242
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TTD",
+      "rate": 6.7395
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TWD",
+      "rate": 32.85
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "TZS",
+      "rate": 2486.64
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "UAH",
+      "rate": 41.8242
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "UGX",
+      "rate": 3684.76
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "UYU",
+      "rate": 43.122
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "UZS",
+      "rate": 12957.01
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "VES",
+      "rate": 57.821684
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "VND",
+      "rate": 24325.0
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "VUV",
+      "rate": 123.3
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "WST",
+      "rate": 2.842524
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "XAF",
+      "rate": 631.152699
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "XCD",
+      "rate": 2.7
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "XDR",
+      "rate": 0.766971
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "XOF",
+      "rate": 631.152699
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ZAR",
+      "rate": 18.626768
+    },
+    {
+      "base": "USD",
+      "date": "2025-01-31",
+      "quote": "ZMW",
+      "rate": 28.041071
+    }
+  ]
+}
