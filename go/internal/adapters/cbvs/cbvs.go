@@ -276,21 +276,25 @@ func number(text string) (float64, error) {
 }
 
 // coverage is the span of dates a listed PDF covers; ok is false for a link that is not a rate notice.
-func coverage(href string) (span, bool) {
+// An impossible date in a daily filename is an error, as Ruby's Date.new raises on it.
+func coverage(href string) (span, bool, error) {
 	name := path.Base(href)
 	if m := dailyFile.FindStringSubmatch(name); m != nil {
 		date, ok := validDate(2000+atoi(m[1]), atoi(m[2]), atoi(m[3]))
-		return span{date, date}, ok
+		if !ok {
+			return span{}, false, fmt.Errorf("invalid date in %q", name)
+		}
+		return span{date, date}, true, nil
 	}
 	if m := monthlyFile.FindStringSubmatch(name); m != nil {
 		first := adapter.Date(atoi(m[2]), time.Month(slices.Index(months, strings.ToUpper(m[1]))+1), 1)
-		return span{first, first.AddDate(0, 1, -1)}, true
+		return span{first, first.AddDate(0, 1, -1)}, true, nil
 	}
 	if m := yearlyFile.FindStringSubmatch(name); m != nil {
 		year := atoi(m[1])
-		return span{adapter.Date(year, time.January, 1), adapter.Date(year, time.December, 31)}, true
+		return span{adapter.Date(year, time.January, 1), adapter.Date(year, time.December, 31)}, true, nil
 	}
-	return span{}, false
+	return span{}, false, nil
 }
 
 type listing struct {
@@ -320,7 +324,10 @@ func (a *Adapter) documents(ctx context.Context, after, upto time.Time) ([]strin
 	var dailyOrder []time.Time
 	daily := map[time.Time]listing{}
 	for _, href := range hrefs {
-		s, ok := coverage(href)
+		s, ok, err := coverage(href)
+		if err != nil {
+			return nil, err
+		}
 		if !ok {
 			continue
 		}

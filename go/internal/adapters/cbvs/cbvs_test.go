@@ -3,8 +3,11 @@ package cbvs
 import (
 	"context"
 	"errors"
+	"io"
+	"net/http"
 	"reflect"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -345,16 +348,80 @@ func TestCoverageClassifiesLinks(t *testing.T) {
 		{"/Wisselkoersen/ALL/Jaar_2015.pdf", adapter.Date(2015, 1, 1), adapter.Date(2015, 12, 31)},
 	}
 	for _, tt := range tests {
-		s, ok := coverage(tt.href)
-		if !ok || !s.begin.Equal(tt.begin) || !s.end.Equal(tt.end) {
+		s, ok, err := coverage(tt.href)
+		if err != nil || !ok || !s.begin.Equal(tt.begin) || !s.end.Equal(tt.end) {
 			t.Errorf("coverage(%q) = %v..%v (%v), want %v..%v", tt.href, s.begin, s.end, ok, tt.begin, tt.end)
 		}
 	}
 }
 
 func TestCoverageIgnoresOtherPDFs(t *testing.T) {
-	if s, ok := coverage("/pdf/Richtlijnen/Circulaire_dagelijkse_vaststelling_van_de_wisselkoersen.pdf"); ok {
-		t.Errorf("coverage = %v, want none", s)
+	if s, ok, err := coverage("/pdf/Richtlijnen/Circulaire_dagelijkse_vaststelling_van_de_wisselkoersen.pdf"); ok || err != nil {
+		t.Errorf("coverage = %v, %v, want none", s, err)
+	}
+}
+
+func TestCoverageRejectsImpossibleDailyDate(t *testing.T) {
+	if s, ok, err := coverage("/Wisselkoersen/2026/DO260231 15.00 uur.pdf"); err == nil {
+		t.Errorf("coverage = %v (%v), want error", s, ok)
+	}
+}
+
+func TestParsePageRejectsImpossibleDate(t *testing.T) {
+	text := `WISSELKOERSNOTERINGEN IN SRD
+31 FEBRUARI 2026 VASTGESTELD OMSTREEKS 15:00U
+U.S. DOLLAR (USD)   37,500   37,700   37,300   37,400
+`
+	if _, _, err := parsePage(text); err == nil {
+		t.Error("parsePage succeeded, want error")
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestDocumentsSelectsAndOrdersLinks(t *testing.T) {
+	body := `<a href="/images/Wisselkoersen/2026/DO260908 10.00 uur.pdf">
+<a href="/images/Wisselkoersen/2026/DO260908%2015.00%20uur.pdf">
+<a href="/images/Wisselkoersen/2026/DO260907 15.00 uur.pdf">
+<a href="/images/Wisselkoersen/2026/DO260909 15.00 uur.pdf">
+<a href="/images/Wisselkoersen/2026/Maandoverzichten/WK_AUGUSTUS_2026.pdf">
+<a href="/images/Wisselkoersen/2017/` + "\t" + `jaar_2017.pdf">
+<a href="/images/Wisselkoersen/2026/DO260801 15.00 uur.pdf">
+<a href="/pdf/Wisselkoersen/Circulaire.pdf">`
+	var got string
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		got = r.URL.String()
+		return &http.Response{StatusCode: 200, Header: http.Header{},
+			Body: io.NopCloser(strings.NewReader(body)), Request: r}, nil
+	})}
+
+	urls, err := New(client).documents(context.Background(), adapter.Date(2026, 8, 1), adapter.Date(2026, 9, 8))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != archiveURL {
+		t.Errorf("GET %s, want %s", got, archiveURL)
+	}
+	want := []string{
+		host + "/images/Wisselkoersen/2026/Maandoverzichten/WK_AUGUSTUS_2026.pdf",
+		host + "/images/Wisselkoersen/2026/DO260801%2015.00%20uur.pdf",
+		host + "/images/Wisselkoersen/2026/DO260907%2015.00%20uur.pdf",
+		host + "/images/Wisselkoersen/2026/DO260908%2015.00%20uur.pdf",
+	}
+	if !slices.Equal(urls, want) {
+		t.Errorf("urls = %q, want %q", urls, want)
+	}
+}
+
+func TestDocumentsFailsWithoutLinks(t *testing.T) {
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		return &http.Response{StatusCode: 200, Header: http.Header{},
+			Body: io.NopCloser(strings.NewReader("<html></html>")), Request: r}, nil
+	})}
+	if _, err := New(client).documents(context.Background(), time.Time{}, adapter.Date(2026, 9, 8)); err == nil {
+		t.Error("documents succeeded, want error")
 	}
 }
 
