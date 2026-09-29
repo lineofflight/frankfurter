@@ -2,6 +2,9 @@ package ecb
 
 import (
 	"context"
+	"io"
+	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -51,4 +54,47 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripper func(*http.Request) (*http.Response, error)
+
+func (f roundTripper) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+// No Ruby counterpart: the cassette matches on host only, so nothing else pins the query.
+func TestFetchRequestParams(t *testing.T) {
+	tests := []struct {
+		after, upto time.Time
+		want        string
+	}{
+		{time.Time{}, time.Time{}, "format=csvdata"},
+		{adapter.Date(2025, 1, 1), time.Time{}, "format=csvdata&startPeriod=2025-01-01"},
+		{adapter.Date(2025, 1, 1), adapter.Date(2025, 1, 31), "endPeriod=2025-01-31&format=csvdata&startPeriod=2025-01-01"},
+	}
+	for _, tt := range tests {
+		var got *http.Request
+		client := &http.Client{Transport: roundTripper(func(r *http.Request) (*http.Response, error) {
+			got = r
+			body := "FREQ,CURRENCY,TIME_PERIOD,OBS_VALUE\nD,USD,2025-01-02,1.0321\n"
+			return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+		})}
+		rates, err := New(client).Fetch(context.Background(), tt.after, tt.upto)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(rates) != 1 {
+			t.Errorf("got %d rates, want 1", len(rates))
+		}
+		if u := got.URL; u.Scheme+"://"+u.Host+u.Path != sdmxURL || u.RawQuery != tt.want {
+			t.Errorf("url = %s, want %s?%s", u, sdmxURL, tt.want)
+		}
+	}
+}
+
+// No Ruby counterpart: Float(value) and Date.parse raise on junk.
+func TestParseRejectsInvalidValues(t *testing.T) {
+	for _, row := range []string{"D,USD,2025-01-02,n/a", "D,USD,2025-01-02,NaN", "D,USD,not-a-date,1.03"} {
+		if _, err := parse([]byte("FREQ,CURRENCY,TIME_PERIOD,OBS_VALUE\n" + row)); err == nil {
+			t.Errorf("parse(%q) returned no error", row)
+		}
+	}
 }
