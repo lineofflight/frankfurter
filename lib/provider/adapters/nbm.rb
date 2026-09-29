@@ -90,8 +90,13 @@ class Provider
         parse(http.get(FX_URL, params: { get_xml: 1, date: date.strftime("%d.%m.%Y") }).to_s)
       end
 
+      # The metals endpoint answers 404 for dates before its coverage (e.g. 1999, 2010), so treat that as no metals.
       def fetch_metals_date(date)
-        parse_metals(http.get(METAL_URL, params: { get_xml: 1, date: date.strftime("%d.%m.%Y") }).to_s)
+        response = http.use(ensure_success: { ignore: [404, 429] })
+          .get(METAL_URL, params: { get_xml: 1, date: date.strftime("%d.%m.%Y") })
+        return [] if response.code == 404
+
+        parse_metals(response.to_s)
       end
     end
   end
