@@ -3,6 +3,7 @@ package boz
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"math"
 	"slices"
 	"testing"
@@ -165,6 +166,45 @@ func TestSkipsSharedStringNumbersAcrossRowGaps(t *testing.T) {
 		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
 	}
 	if want := []string{"2025-12-09 USD", "2025-12-10 GBP"}; !slices.Equal(got, want) {
+		t.Errorf("rates = %v, want %v", got, want)
+	}
+}
+
+// An inline string carries no <v>, so the Ruby adapter never read one as a date or rate. The stream writer stores
+// every string inline.
+func TestSkipsInlineStringNumbers(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	sw, err := f.NewStreamWriter(f.GetSheetName(0))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i, row := range [][]any{
+		{nil, "Dollar", nil, "Pound"},
+		{"Date", "Buy", "Sale", "Buy", "Sale"},
+		{46000, 19.1, 19.3, "25.1", 25.3},
+		{"46001", 19.2, 19.4, 25.2, 25.4},
+	} {
+		if err := sw.SetRow(fmt.Sprintf("B%d", i+3), row); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := sw.Flush(); err != nil {
+		t.Fatal(err)
+	}
+	var buf bytes.Buffer
+	if err := f.Write(&buf); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(buf.Bytes())
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+	}
+	if want := []string{"2025-12-09 USD"}; !slices.Equal(got, want) {
 		t.Errorf("rates = %v, want %v", got, want)
 	}
 }

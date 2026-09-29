@@ -291,7 +291,7 @@ func labelCells(cells []string) map[int]string {
 	return labels
 }
 
-// value returns the raw text at column index col, rejecting shared-string cells so a label never reads as a number.
+// value returns the raw text at column index col, rejecting string cells so a label never reads as a number.
 func (s *sheet) value(cells []string, n, col int) (string, bool) {
 	if col >= len(cells) || cells[col] == "" {
 		return "", false
@@ -301,7 +301,7 @@ func (s *sheet) value(cells []string, n, col int) (string, bool) {
 		return "", false
 	}
 	typ, err := s.f.GetCellType(s.name, ref)
-	if err != nil || typ == excelize.CellTypeSharedString {
+	if err != nil || typ == excelize.CellTypeSharedString || typ == excelize.CellTypeInlineString {
 		return "", false
 	}
 	return strings.TrimSpace(cells[col]), true
