@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -166,4 +167,93 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsEachWeekdayInclusive(t *testing.T) {
+	var got []string
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		got = append(got, r.Method+" "+r.URL.String())
+		body := `{"results": {"fecha": null, "detalle": []}}`
+		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: r}, nil
+	})}
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2026, 3, 13), adapter.Date(2026, 3, 17))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %d rates, want none", len(rates))
+	}
+	want := []string{
+		"GET " + baseURL + "?fecha=2026-03-13",
+		"GET " + baseURL + "?fecha=2026-03-16",
+		"GET " + baseURL + "?fecha=2026-03-17",
+	}
+	if strings.Join(got, "\n") != strings.Join(want, "\n") {
+		t.Errorf("requests =\n%s\nwant\n%s", strings.Join(got, "\n"), strings.Join(want, "\n"))
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 17)); err == nil {
+		t.Error("want error for zero after")
+	}
+}
+
+func TestParseRowFiltering(t *testing.T) {
+	rates, err := parse([]byte(`{"results": {"fecha": "2026-03-20", "detalle": [
+		{"descripcion": "NO CODE", "tipoCotizacion": "1.0"},
+		{"codigoMoneda": "ARS", "tipoCotizacion": "1.0"},
+		{"codigoMoneda": "EUR", "tipoCotizacion": "0.0000"},
+		{"codigoMoneda": " JPY ", "descripcion": "YEN (c/100 unidades)", "tipoCotizacion": 7.5},
+		{"codigoMoneda": "XXX", "descripcion": "OCTAL (C/010 UNIDADES)", "tipoCotizacion": "8"}
+	]}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{
+		{Date: adapter.Date(2026, 3, 20), Base: "JPY", Quote: "ARS", Rate: 0.075},
+		{Date: adapter.Date(2026, 3, 20), Base: "XXX", Quote: "ARS", Rate: 1},
+	}
+	if len(rates) != len(want) {
+		t.Fatalf("rates = %+v, want %+v", rates, want)
+	}
+	for i := range want {
+		if rates[i] != want[i] {
+			t.Errorf("rates[%d] = %+v, want %+v", i, rates[i], want[i])
+		}
+	}
+}
+
+func TestParseSkipsDateWithDuplicateCodes(t *testing.T) {
+	rates, err := parse([]byte(`{"results": {"fecha": "2026-03-20", "detalle": [
+		{"codigoMoneda": "USD", "tipoCotizacion": "1075"},
+		{"codigoMoneda": "EUR", "tipoCotizacion": "1200"},
+		{"codigoMoneda": "USD ", "tipoCotizacion": "1076"}
+	]}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
+
+func TestParseRejectsBadValues(t *testing.T) {
+	for name, row := range map[string]string{
+		"null rate":        `{"codigoMoneda": "USD"}`,
+		"text rate":        `{"codigoMoneda": "USD", "tipoCotizacion": "n/a"}`,
+		"bool rate":        `{"codigoMoneda": "USD", "tipoCotizacion": true}`,
+		"empty multiplier": `{"codigoMoneda": "USD", "descripcion": "X (C/. UNIDADES)", "tipoCotizacion": "1"}`,
+		"bad octal":        `{"codigoMoneda": "USD", "descripcion": "X (C/08 UNIDADES)", "tipoCotizacion": "1"}`,
+	} {
+		t.Run(name, func(t *testing.T) {
+			if _, err := parse([]byte(`{"results": {"fecha": "2026-03-20", "detalle": [` + row + `]}}`)); err == nil {
+				t.Error("want error")
+			}
+		})
+	}
 }
