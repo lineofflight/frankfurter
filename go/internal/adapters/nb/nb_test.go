@@ -2,8 +2,12 @@ package nb
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -96,6 +100,66 @@ B,USD,NOK,SP,2026-03-16,10.5432,0
 `)
 	if len(rates) != 3 {
 		t.Errorf("got %d rates, want 3", len(rates))
+	}
+}
+
+func TestParseSkipsBlankBaseAndDefaultsUnitMult(t *testing.T) {
+	// No UNIT_MULT column means no scaling; a row without BASE_CUR is dropped.
+	rates := mustParse(t, `FREQ,BASE_CUR,QUOTE_CUR,TENOR,TIME_PERIOD,OBS_VALUE
+B,,NOK,SP,2026-03-16,1.5
+B,SEK,NOK,SP,2026-03-16,0.9876
+`)
+	want := []adapter.Rate{{Date: adapter.Date(2026, 3, 16), Base: "SEK", Quote: "NOK", Rate: 0.9876}}
+	if len(rates) != 1 || rates[0] != want[0] {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseRejectsBadValues(t *testing.T) {
+	const header = "FREQ,BASE_CUR,QUOTE_CUR,TENOR,TIME_PERIOD,OBS_VALUE,UNIT_MULT\n"
+	for _, row := range []string{
+		"B,USD,NOK,SP,2026-03-16,,0",
+		"B,USD,NOK,SP,2026-03-16,NaN,0",
+		"B,USD,NOK,SP,2026-03-16,10.5,x",
+		"B,USD,NOK,SP,not-a-date,10.5,0",
+		"B,USD,NOK,SP,2026-03-16",
+	} {
+		if _, err := parse([]byte(header + row + "\n")); err == nil {
+			t.Errorf("want an error for %q", row)
+		}
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchSendsWindow(t *testing.T) {
+	tests := []struct {
+		name        string
+		after, upto time.Time
+		want        string
+	}{
+		{"bounded", adapter.Date(2026, 3, 16), adapter.Date(2026, 3, 24), "endPeriod=2026-03-24&format=csvdata&startPeriod=2026-03-16"},
+		{"open", time.Time{}, time.Time{}, "format=csvdata"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got *http.Request
+			a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+				got = r
+				return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader("")), Header: http.Header{}}, nil
+			})})
+			if _, err := a.Fetch(context.Background(), tt.after, tt.upto); err != nil {
+				t.Fatal(err)
+			}
+			if got.Method != http.MethodGet || got.URL.Host != "data.norges-bank.no" || got.URL.Path != "/api/data/EXR/B..NOK.SP" {
+				t.Errorf("request = %s %s", got.Method, got.URL)
+			}
+			if q := got.URL.Query().Encode(); q != tt.want {
+				t.Errorf("query = %s, want %s", q, tt.want)
+			}
+		})
 	}
 }
 
