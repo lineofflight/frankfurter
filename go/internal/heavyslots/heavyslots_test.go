@@ -2,7 +2,6 @@ package heavyslots
 
 import (
 	"os"
-	"strconv"
 	"testing"
 )
 
@@ -41,8 +40,8 @@ func TestNeverCountsBelowZero(t *testing.T) {
 
 func TestReadsTheCapFromTheEnvironment(t *testing.T) {
 	want := 2
-	if v, ok := os.LookupEnv("MAX_HEAVY_COMPUTES"); ok {
-		want, _ = strconv.Atoi(v)
+	if _, ok := os.LookupEnv("MAX_HEAVY_COMPUTES"); ok {
+		want = defaultMax()
 	}
 	if DefaultMax != want {
 		t.Fatalf("DefaultMax %d, want %d", DefaultMax, want)
@@ -50,6 +49,13 @@ func TestReadsTheCapFromTheEnvironment(t *testing.T) {
 	t.Setenv("MAX_HEAVY_COMPUTES", "5")
 	if got := defaultMax(); got != 5 {
 		t.Fatalf("defaultMax() = %d with MAX_HEAVY_COMPUTES=5", got)
+	}
+	// Ruby's Integer() accepts these too.
+	for s, want := range map[string]int{" 3 ": 3, "0x10": 16, "010": 8, "1_0": 10} {
+		t.Setenv("MAX_HEAVY_COMPUTES", s)
+		if got := defaultMax(); got != want {
+			t.Errorf("defaultMax() = %d with MAX_HEAVY_COMPUTES=%q, want %d", got, s, want)
+		}
 	}
 	if New(DefaultMax).Max() != DefaultMax {
 		t.Fatal("Max does not report the cap")

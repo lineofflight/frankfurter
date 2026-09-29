@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"sync"
 )
 
@@ -18,7 +19,8 @@ const RetryAfterSeconds = 30
 // ErrBusy reports that every slot is held.
 var ErrBusy = errors.New("heavy compute slots busy")
 
-// DefaultMax is MAX_HEAVY_COMPUTES, or 2. An unparseable value panics at startup, as Ruby's Integer() raises on load.
+// DefaultMax is MAX_HEAVY_COMPUTES, or 2. It parses like Ruby's Integer() (surrounding space, 0x/0o/0b/0 prefixes,
+// underscores), and an unparseable value panics at startup, as Integer() raises on load.
 var DefaultMax = defaultMax()
 
 func defaultMax() int {
@@ -26,11 +28,11 @@ func defaultMax() int {
 	if !ok {
 		return 2
 	}
-	n, err := strconv.Atoi(s)
+	n, err := strconv.ParseInt(strings.TrimSpace(s), 0, 0)
 	if err != nil {
 		panic(fmt.Sprintf("MAX_HEAVY_COMPUTES: %v", err))
 	}
-	return n
+	return int(n)
 }
 
 // Slots is a non-blocking counting semaphore.
