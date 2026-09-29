@@ -134,6 +134,54 @@ func TestFetchStopsPagingAndNamesMissingQuarter(t *testing.T) {
 	}
 }
 
+// Not in the Ruby spec: a missing link is a not-yet only for the current quarter, and after is inclusive.
+func TestFetchSkipsMissingCurrentQuarterOnly(t *testing.T) {
+	html := `<a href="/sites/default/files/EstadisticasGeneral/2_1_2c26_smc.xls">III Trim 2026</a>`
+	workbook, err := os.ReadFile("testdata/xls/fecha_valor.xls")
+	if err != nil {
+		t.Fatal(err)
+	}
+	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		body := []byte(html)
+		if strings.HasSuffix(req.URL.Path, ".xls") {
+			body = workbook
+		}
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(string(body))), Request: req}, nil
+	})}
+
+	for _, tc := range []struct {
+		name    string
+		today   time.Time
+		wantErr string
+	}{
+		{"current", adapter.Date(2026, 10, 1), ""},
+		{"past", adapter.Date(2027, 1, 5), "no workbook for 2026Q4"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			a := New(client)
+			a.Now = func() time.Time { return tc.today }
+			rates, err := a.Fetch(context.Background(), adapter.Date(2026, 9, 4), adapter.Date(2026, 10, 1))
+			if tc.wantErr != "" {
+				if err == nil || !strings.Contains(err.Error(), tc.wantErr) {
+					t.Errorf("err = %v, want %s", err, tc.wantErr)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			var dates []time.Time
+			for _, r := range rates {
+				dates = append(dates, r.Date)
+			}
+			want := []time.Time{adapter.Date(2026, 9, 7), adapter.Date(2026, 9, 4)}
+			if !slices.EqualFunc(dates, want, time.Time.Equal) {
+				t.Errorf("dates = %v, want %v", dates, want)
+			}
+		})
+	}
+}
+
 func TestFetchNothingBeforeRedenominationWithoutFetching(t *testing.T) {
 	client := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
 		t.Errorf("unexpected request to %s", req.URL)
