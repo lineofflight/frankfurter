@@ -23,7 +23,7 @@ const baseURL = "https://nationalbank.kz/rss/get_rates.cfm"
 
 var (
 	isoCode     = regexp.MustCompile(`^[A-Z]{3}$`)
-	floatPrefix = regexp.MustCompile(`^[-+]?\d+(\.\d+)?([eE][-+]?\d+)?`)
+	floatPrefix = regexp.MustCompile(`^[-+]?(\d+(_\d+)*)?(\.\d+(_\d+)*)?([eE][-+]?\d+)?`)
 )
 
 func init() {
@@ -97,7 +97,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	if doc.Date == nil {
 		return nil, errors.New("<date> missing from rates XML at " + baseURL)
 	}
-	date, err := time.Parse("02.01.2006", *doc.Date)
+	date, err := time.Parse("2.1.2006", *doc.Date)
 	if err != nil {
 		return nil, err
 	}
@@ -118,6 +118,6 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 // toF mirrors Ruby's String#to_f: it reads the leading number and yields 0 when there is none.
 func toF(s string) float64 {
-	f, _ := strconv.ParseFloat(floatPrefix.FindString(strings.TrimLeft(s, " \t\n\r\f\v")), 64)
+	f, _ := strconv.ParseFloat(strings.ReplaceAll(floatPrefix.FindString(strings.TrimLeft(s, " \t\n\r\f\v")), "_", ""), 64)
 	return f
 }

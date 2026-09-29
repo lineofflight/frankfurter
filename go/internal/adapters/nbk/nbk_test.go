@@ -133,8 +133,20 @@ func TestParseRaisesWhenDateMissing(t *testing.T) {
 	}
 }
 
+func TestParseUnpaddedDate(t *testing.T) {
+	rates, err := parse([]byte(`<rates><date>1.4.2026</date><item><title>USD</title><description>460.37</description><quant>1</quant></item></rates>`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 4, 1)) {
+		t.Errorf("got %v, want one rate on 2026-04-01", rates)
+	}
+}
+
 func TestToF(t *testing.T) {
-	for s, want := range map[string]float64{"460.37": 460.37, " 1": 1, "": 0, "abc": 0, "12abc": 12} {
+	for s, want := range map[string]float64{"460.37": 460.37, " 1": 1, "": 0, "abc": 0, "12abc": 12,
+		".5": 0.5, "1_000": 1000, "1.": 1, "1e5": 100000, " -3": -3, "1.5e": 1.5, "+.5e2": 50, "_1": 0, "1__0": 1,
+	} {
 		if got := toF(s); got != want {
 			t.Errorf("toF(%q) = %v, want %v", s, got, want)
 		}
