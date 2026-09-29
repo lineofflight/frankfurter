@@ -2,8 +2,11 @@ package nbkr
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -252,4 +255,78 @@ func TestGoldenHistorical(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+// recordingAdapter answers every request with an empty feed and records the requested paths.
+func recordingAdapter(paths *[]string) *Adapter {
+	a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		*paths = append(*paths, r.URL.Path)
+		body := `<CurrencyRates Date="23.05.2026"></CurrencyRates>`
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: r}, nil
+	})})
+	a.currencies = []currency{{15, "USD", 1}}
+	a.Now = func() time.Time { return time.Date(2026, 5, 23, 12, 0, 0, 0, time.UTC) }
+	return a
+}
+
+func TestFetchDispatchesByWindow(t *testing.T) {
+	today := adapter.Date(2026, 5, 23)
+	live := []string{"/XML/daily.xml", "/XML/weekly.xml"}
+	tests := []struct {
+		name        string
+		after, upto time.Time
+		want        []string
+	}{
+		{"open window", time.Time{}, time.Time{}, live},
+		{"after only", today.AddDate(0, 0, -10), time.Time{}, live},
+		{"upto only in past", time.Time{}, today.AddDate(0, 0, -1), live},
+		{"upto today", today.AddDate(0, 0, -10), today, live},
+		{"upto yesterday", today.AddDate(0, 0, -10), today.AddDate(0, 0, -1), []string{"/index1.jsp"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var paths []string
+			if _, err := recordingAdapter(&paths).Fetch(context.Background(), tt.after, tt.upto); err != nil {
+				t.Fatal(err)
+			}
+			if !slices.Equal(paths, tt.want) {
+				t.Errorf("paths = %v, want %v", paths, tt.want)
+			}
+		})
+	}
+}
+
+func TestParseErrorsWithoutDate(t *testing.T) {
+	if _, err := parse([]byte(`<CurrencyRates><Currency ISOCode="USD"><Nominal>1</Nominal><Value>87,45</Value></Currency></CurrencyRates>`)); err == nil {
+		t.Error("want error for missing Date attribute")
+	}
+}
+
+func TestParseErrorsWithoutRoot(t *testing.T) {
+	if _, err := parse([]byte(`<Other Date="23.05.2026"></Other>`)); err == nil {
+		t.Error("want error for missing CurrencyRates root")
+	}
+}
+
+func TestParseSkipsZeroOrMissingNominal(t *testing.T) {
+	rates, err := parse([]byte(`<CurrencyRates Date="23.05.2026">
+  <Currency ISOCode="USD"><Nominal>0</Nominal><Value>87,45</Value></Currency>
+  <Currency ISOCode="EUR"><Value>101,50</Value></Currency>
+</CurrencyRates>`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %v, want none", rates)
+	}
+}
+
+func TestParseHistoricalErrorsOnImpossibleDate(t *testing.T) {
+	if _, err := parseHistorical([]byte(`<!--date-->31.02.2005<!--date--><!--value-->40,1<!--value-->`), "USD", 1); err == nil {
+		t.Error("want error for 31.02.2005")
+	}
 }
