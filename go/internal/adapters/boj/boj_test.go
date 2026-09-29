@@ -2,7 +2,10 @@ package boj
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -116,4 +119,74 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type stubTransport struct {
+	body string
+	req  *http.Request
+}
+
+func (s *stubTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	s.req = req
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Header:     http.Header{},
+		Body:       io.NopCloser(strings.NewReader(s.body)),
+		Request:    req,
+	}, nil
+}
+
+func TestFetchQueryAndInclusiveWindow(t *testing.T) {
+	tr := &stubTransport{body: `{"RESULTSET": [
+		{"SERIES_CODE": "FXERD04", "VALUES": {"SURVEY_DATES": [20260227, 20260302, 20260310, 20260311], "VALUES": [150, 151, 152, 153]}}
+	]}`}
+	rates, err := New(&http.Client{Transport: tr}).Fetch(context.Background(), adapter.Date(2026, 3, 2), adapter.Date(2026, 3, 10))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	q := tr.req.URL.Query()
+	want := map[string]string{
+		"format": "json", "lang": "en", "db": "FM08", "code": "FXERD04,FXERD34",
+		"startDate": "202603", "endDate": "202603",
+	}
+	for k, v := range want {
+		if got := q.Get(k); got != v {
+			t.Errorf("%s = %q, want %q", k, got, v)
+		}
+	}
+	if got := tr.req.URL.Scheme + "://" + tr.req.URL.Host + tr.req.URL.Path; got != apiURL {
+		t.Errorf("url = %s, want %s", got, apiURL)
+	}
+
+	if len(rates) != 2 {
+		t.Fatalf("got %d rates, want 2", len(rates))
+	}
+	if !rates[0].Date.Equal(adapter.Date(2026, 3, 2)) || !rates[1].Date.Equal(adapter.Date(2026, 3, 10)) {
+		t.Errorf("dates = %v, %v; want 2026-03-02 and 2026-03-10", rates[0].Date, rates[1].Date)
+	}
+}
+
+func TestParseSkipsZeroAndAcceptsStrings(t *testing.T) {
+	rates, err := parse([]byte(`{"RESULTSET": [
+		{"SERIES_CODE": "FXERD04", "VALUES": {"SURVEY_DATES": [20260303, "20260304", 20260305], "VALUES": [0, "150.25", 0.0]}}
+	]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 {
+		t.Fatalf("got %d rates, want 1", len(rates))
+	}
+	if rates[0].Rate != 150.25 || !rates[0].Date.Equal(adapter.Date(2026, 3, 4)) {
+		t.Errorf("got %v on %v, want 150.25 on 2026-03-04", rates[0].Rate, rates[0].Date)
+	}
+}
+
+func TestParseRejectsInvalidValue(t *testing.T) {
+	_, err := parse([]byte(`{"RESULTSET": [
+		{"SERIES_CODE": "FXERD04", "VALUES": {"SURVEY_DATES": [20260303], "VALUES": ["n/a"]}}
+	]}`))
+	if err == nil {
+		t.Fatal("want error for unparseable value")
+	}
 }
