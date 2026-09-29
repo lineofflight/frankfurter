@@ -1,6 +1,8 @@
 package rbf
 
 import (
+	"archive/zip"
+	"bytes"
 	"context"
 	"io"
 	"net/http"
@@ -131,5 +133,59 @@ func TestGolden(t *testing.T) {
 			}
 			g.Check(t, rates)
 		})
+	}
+}
+
+func xlsx(t *testing.T, files map[string]string) []byte {
+	t.Helper()
+	var buf bytes.Buffer
+	zw := zip.NewWriter(&buf)
+	for name, body := range files {
+		w, err := zw.Create(name)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := io.WriteString(w, body); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := zw.Close(); err != nil {
+		t.Fatal(err)
+	}
+	return buf.Bytes()
+}
+
+// Covers header mapping with padded labels, fractional date serials, string cells in data rows, zero, negative and
+// blank rates, unmapped columns, rows without a date, and the inclusive after bound.
+func TestParseFiltersCells(t *testing.T) {
+	strs := `<sst><si><t>Date</t></si><si><t> US$ </t></si><si><t>EURO</t></si><si><t>XYZ</t></si><si><t>n/a</t></si></sst>`
+	sheet := `<worksheet><sheetData>
+<row><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c><c r="C1" t="s"><v>2</v></c><c r="D1" t="s"><v>3</v></c></row>
+<row><c r="A2"><v>46163</v></c><c r="B2"><v>0.43</v></c></row>
+<row><c r="A3"><v>46164.75</v></c><c r="B3"><v>0.44</v></c><c r="C3"><v>0</v></c><c r="D3"><v>9</v></c></row>
+<row><c r="A4"><v>46165</v></c><c r="B4" t="s"><v>4</v></c><c r="C4"><v></v></c></row>
+<row><c r="A5"><v>46166</v></c><c r="B5"><v>-1</v></c><c r="C5"><v>0.38</v></c></row>
+<row><c r="B6"><v>0.5</v></c></row>
+<row><c r="A7"><v>46167</v></c><c r="B7"><v>0.45</v></c></row>
+</sheetData></worksheet>`
+	data := xlsx(t, map[string]string{"xl/sharedStrings.xml": strs, "xl/worksheets/sheet1.xml": sheet})
+
+	rates, err := parse(data, adapter.Date(2026, 5, 22), adapter.Date(2026, 5, 24))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{
+		{Date: adapter.Date(2026, 5, 22), Base: "FJD", Quote: "USD", Rate: 0.44},
+		{Date: adapter.Date(2026, 5, 24), Base: "FJD", Quote: "EUR", Rate: 0.38},
+	}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseErrorsWithoutSharedStrings(t *testing.T) {
+	data := xlsx(t, map[string]string{"xl/worksheets/sheet1.xml": `<worksheet><sheetData/></worksheet>`})
+	if _, err := parse(data, time.Time{}, time.Time{}); err == nil {
+		t.Fatal("expected an error")
 	}
 }
