@@ -128,3 +128,24 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseAcceptsNumericValuesAndSkipsNonCodes(t *testing.T) {
+	rates := mustParse(t, `{"data": [{"RATE_DATE": "2026-05-22", "USD": 3576.42, "usd": "1", "USDX": "1", "EUR": null, "GBP": true}]}`)
+	want := []adapter.Rate{{Date: adapter.Date(2026, 5, 22), Base: "USD", Quote: "MNT", Rate: 3576.42}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for _, data := range []string{
+		`[]`,
+		`{"rows": []}`,
+		`{"data": [{"USD": "3,576.42"}]}`,
+		`{"data": [{"RATE_DATE": "", "USD": "3,576.42"}]}`,
+	} {
+		if _, err := parse([]byte(data)); err == nil {
+			t.Errorf("parse(%s) returned no error", data)
+		}
+	}
+}
