@@ -205,7 +205,7 @@ func parseRows(tsv string, row func(name string, rate float64, date time.Time) (
 		}
 
 		if strings.HasPrefix(line, "Currency\t") {
-			headers := strings.Split(line, "\t")[1:]
+			headers := splitTabs(line)[1:]
 			dates = make([]time.Time, len(headers))
 			for i, h := range headers {
 				d, err := adapter.ParseDate(strings.TrimSpace(h), "January 02, 2006", "January 2, 2006")
@@ -220,7 +220,7 @@ func parseRows(tsv string, row func(name string, rate float64, date time.Time) (
 			continue
 		}
 
-		cols := strings.Split(line, "\t")
+		cols := splitTabs(line)
 		name := strings.TrimSpace(cols[0])
 		for i, value := range cols[1:] {
 			if i >= len(dates) {
@@ -243,4 +243,14 @@ func parseRows(tsv string, row func(name string, rate float64, date time.Time) (
 		}
 	}
 	return rates, nil
+}
+
+// splitTabs splits like Ruby's String#split, dropping trailing empty fields, so a header ending in a tab doesn't
+// yield an empty date.
+func splitTabs(line string) []string {
+	fields := strings.Split(line, "\t")
+	for len(fields) > 1 && fields[len(fields)-1] == "" {
+		fields = fields[:len(fields)-1]
+	}
+	return fields
 }

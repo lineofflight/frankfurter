@@ -233,6 +233,15 @@ func TestParseSDRCVSkipsNA(t *testing.T) {
 	}
 }
 
+func TestParseTrailingTabInHeader(t *testing.T) {
+	rates := mustParse(t, parse, "Currency\tMarch 02, 2026\t\t\n"+
+		"Chinese yuan\t6.882900\t\n")
+
+	if len(rates) != 1 || rates[0].Quote != "CNY" || rates[0].Rate != 6.8829 {
+		t.Errorf("got %+v, want one USD/CNY 6.8829", rates)
+	}
+}
+
 func TestParseEmptyResponse(t *testing.T) {
 	if _, err := parse("  \n"); err == nil {
 		t.Error("want an error for an empty response")
