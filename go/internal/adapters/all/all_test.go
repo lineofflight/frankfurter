@@ -17,7 +17,7 @@ func TestRegisteredKeysAreSeededProviders(t *testing.T) {
 		t.Fatal("no adapters registered")
 	}
 	for _, key := range keys {
-		if _, err := os.Stat(filepath.Join("..", "..", "..", "..", "db", "seeds", "providers", key+".json")); err != nil {
+		if _, err := os.Stat(filepath.Join("..", "..", "..", "..", "db", "seeds", "providers", strings.ToLower(key)+".json")); err != nil {
 			t.Errorf("%s: no seed file: %v", key, err)
 		}
 		if _, err := os.Stat(filepath.Join("..", strings.ToLower(key))); err != nil {

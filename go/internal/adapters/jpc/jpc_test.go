@@ -152,7 +152,7 @@ func TestFetchWeekSpanningYears(t *testing.T) {
 }
 
 func TestWeeklyObservationsStayOutOfBlends(t *testing.T) {
-	data, err := os.ReadFile("../../../../db/seeds/providers/JPC.json")
+	data, err := os.ReadFile("../../../../db/seeds/providers/jpc.json")
 	if err != nil {
 		t.Fatal(err)
 	}
