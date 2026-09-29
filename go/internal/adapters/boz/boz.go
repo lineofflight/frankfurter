@@ -18,15 +18,12 @@
 package boz
 
 import (
-	"archive/zip"
 	"bytes"
 	"cmp"
 	"context"
 	"encoding/json"
-	"encoding/xml"
 	"errors"
 	"fmt"
-	"io"
 	"math/big"
 	"net/http"
 	"net/url"
@@ -34,6 +31,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -163,98 +162,63 @@ func workbookURL(data []byte) (string, error) {
 	return base.ResolveReference(ref).String(), nil
 }
 
-type cell struct {
-	Ref  string  `xml:"r,attr"`
-	Type string  `xml:"t,attr"`
-	V    *string `xml:"v"`
-}
-
-// value is the text of the cell's <v>, empty when it has none.
-func (c cell) value() string {
-	if c.V == nil {
-		return ""
-	}
-	return *c.V
-}
-
-// column is the cell reference without its row number ("C12" -> "C").
-func (c cell) column() string {
-	return strings.TrimRight(c.Ref, "0123456789")
-}
-
-type row struct {
-	Hidden string `xml:"hidden,attr"`
-	Cells  []cell `xml:"c"`
-}
-
-func (r row) find(column string) (cell, bool) {
-	for _, c := range r.Cells {
-		if c.Ref != "" && c.column() == column {
-			return c, true
-		}
-	}
-	return cell{}, false
-}
+// Raw values keep the stored serial dates and unformatted decimals rather than their display strings.
+var raw = excelize.Options{RawCellValue: true}
 
 func parse(data []byte) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data))
 	if err != nil {
 		return nil, err
 	}
-	strs, err := sharedStrings(zr)
+	defer f.Close()
+	s := &sheet{f: f, name: f.GetSheetName(0)}
+	rows, err := f.Rows(s.name)
 	if err != nil {
 		return nil, err
 	}
-	sheet, err := readEntry(zr, "xl/worksheets/sheet1.xml")
-	if err != nil {
-		return nil, err
-	}
-	var ws struct {
-		SheetData *struct {
-			Rows []row `xml:"row"`
-		} `xml:"sheetData"`
-	}
-	if err := xml.Unmarshal(sheet, &ws); err != nil {
-		return nil, err
-	}
-	if ws.SheetData == nil {
-		return nil, errors.New("no sheetData in workbook")
-	}
-	return parseSheet(ws.SheetData.Rows, strs)
+	defer rows.Close()
+	return s.parse(rows)
 }
 
-// parseSheet reads the two header rows that precede the data: the currency banner, whose labels sit over each
-// currency's Buy column, and the "Date | Buy | Sale" row that confirms the pairing. Columns are resolved from both, so
-// a reshuffled workbook fails loudly instead of pairing the wrong cells.
-func parseSheet(rows []row, strs []string) ([]adapter.Rate, error) {
-	banner := map[string]string{}
+type sheet struct {
+	f    *excelize.File
+	name string
+}
+
+// parse reads the two header rows that precede the data: the currency banner, whose labels sit over each currency's
+// Buy column, and the "Date | Buy | Sale" row that confirms the pairing. Columns are resolved from both, so a
+// reshuffled workbook fails loudly instead of pairing the wrong cells.
+func (s *sheet) parse(rows *excelize.Rows) ([]adapter.Rate, error) {
+	banner := map[int]string{}
 	var columns []pair
 	var rates []adapter.Rate
 
-	for _, r := range rows {
+	// The iterator yields every row number in turn, empty ones included, so n tracks the 1-based row.
+	for n := 1; rows.Next(); n++ {
+		cells, err := rows.Columns(raw)
+		if err != nil {
+			return nil, err
+		}
 		if columns == nil {
-			labels, err := stringCells(r, strs)
-			if err != nil {
-				return nil, err
-			}
-			if labels["B"] == "DATE" {
+			labels := labelCells(cells)
+			if labels[1] == "DATE" {
 				if columns, err = pairColumns(banner, labels); err != nil {
 					return nil, err
 				}
 			} else {
-				for column, label := range labels {
+				for col, label := range labels {
 					if iso, ok := currencies[label]; ok {
-						banner[column] = iso
+						banner[col] = iso
 					}
 				}
 			}
 			continue
 		}
 
-		if r.Hidden == "1" {
+		if rows.GetRowOpts().Hidden {
 			continue
 		}
-		date, ok := dateCell(r, "B")
+		date, ok := s.dateCell(cells, n, 1)
 		if !ok {
 			continue
 		}
@@ -264,11 +228,11 @@ func parseSheet(rows []row, strs []string) ([]adapter.Rate, error) {
 		}
 
 		for _, p := range columns {
-			buy, ok := numericCell(r, p.buy)
+			buy, ok := s.numericCell(cells, n, p.buy)
 			if !ok {
 				continue
 			}
-			sell, ok := numericCell(r, p.sell)
+			sell, ok := s.numericCell(cells, n, p.buy+1)
 			if !ok {
 				continue
 			}
@@ -282,6 +246,9 @@ func parseSheet(rows []row, strs []string) ([]adapter.Rate, error) {
 			})
 		}
 	}
+	if err := rows.Error(); err != nil {
+		return nil, err
+	}
 
 	if columns == nil {
 		return nil, errors.New("no header row in workbook")
@@ -289,63 +256,63 @@ func parseSheet(rows []row, strs []string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
+// pair holds a currency and the zero-based index of its Buy column; Sale sits immediately right of it.
 type pair struct {
-	iso, buy, sell string
+	iso string
+	buy int
 }
 
-func pairColumns(banner, labels map[string]string) ([]pair, error) {
+func pairColumns(banner, labels map[int]string) ([]pair, error) {
 	if len(banner) == 0 {
 		return nil, errors.New("no currency banner above the header row")
 	}
 	pairs := make([]pair, 0, len(banner))
 	for buy, iso := range banner {
-		sell := succ(buy)
-		if labels[buy] != "BUY" || labels[sell] != "SALE" {
-			return nil, fmt.Errorf("expected Buy/Sale under %s at %s/%s", iso, buy, sell)
+		if labels[buy] != "BUY" || labels[buy+1] != "SALE" {
+			b, _ := excelize.ColumnNumberToName(buy + 1)
+			s, _ := excelize.ColumnNumberToName(buy + 2)
+			return nil, fmt.Errorf("expected Buy/Sale under %s at %s/%s", iso, b, s)
 		}
-		pairs = append(pairs, pair{iso, buy, sell})
+		pairs = append(pairs, pair{iso, buy})
 	}
 	// Keep the sheet's left-to-right order, as Ruby's insertion-ordered hash does.
-	slices.SortFunc(pairs, func(a, b pair) int {
-		return cmp.Or(cmp.Compare(len(a.buy), len(b.buy)), strings.Compare(a.buy, b.buy))
-	})
+	slices.SortFunc(pairs, func(a, b pair) int { return cmp.Compare(a.buy, b.buy) })
 	return pairs, nil
 }
 
-// succ is Ruby's String#succ for column letters: "C" -> "D", "Z" -> "AA", "AZ" -> "BA".
-func succ(column string) string {
-	b := []byte(column)
-	for i := len(b) - 1; i >= 0; i-- {
-		if b[i] != 'Z' {
-			b[i]++
-			return string(b)
+// labelCells maps each non-empty cell's column index to its trimmed, upcased text.
+func labelCells(cells []string) map[int]string {
+	labels := map[int]string{}
+	for i, v := range cells {
+		if v != "" {
+			labels[i] = strings.ToUpper(strings.TrimSpace(v))
 		}
-		b[i] = 'A'
 	}
-	return "A" + string(b)
+	return labels
 }
 
-func stringCells(r row, strs []string) (map[string]string, error) {
-	labels := map[string]string{}
-	for _, c := range r.Cells {
-		if c.Ref == "" || c.Type != "s" || c.value() == "" {
-			continue
-		}
-		i, _ := strconv.Atoi(c.value())
-		if i < 0 || i >= len(strs) {
-			return nil, fmt.Errorf("shared string %d out of range at %s", i, c.Ref)
-		}
-		labels[c.column()] = strings.ToUpper(strings.TrimSpace(strs[i]))
+// value returns the raw text at column index col, rejecting shared-string cells so a label never reads as a number.
+func (s *sheet) value(cells []string, n, col int) (string, bool) {
+	if col >= len(cells) || cells[col] == "" {
+		return "", false
 	}
-	return labels, nil
+	ref, err := excelize.CoordinatesToCellName(col+1, n)
+	if err != nil {
+		return "", false
+	}
+	typ, err := s.f.GetCellType(s.name, ref)
+	if err != nil || typ == excelize.CellTypeSharedString {
+		return "", false
+	}
+	return strings.TrimSpace(cells[col]), true
 }
 
-func dateCell(r row, column string) (time.Time, bool) {
-	c, ok := r.find(column)
-	if !ok || c.Type == "s" || c.value() == "" {
+func (s *sheet) dateCell(cells []string, n, col int) (time.Time, bool) {
+	v, ok := s.value(cells, n, col)
+	if !ok {
 		return time.Time{}, false
 	}
-	serial, err := strconv.ParseFloat(strings.TrimSpace(c.value()), 64)
+	serial, err := strconv.ParseFloat(v, 64)
 	if err != nil || serial <= 30_000 || serial >= 80_000 {
 		return time.Time{}, false
 	}
@@ -354,12 +321,11 @@ func dateCell(r row, column string) (time.Time, bool) {
 
 // numericCell returns the stored text as an exact decimal, so the midpoint sees the published digits rather than a
 // float round-trip.
-func numericCell(r row, column string) (*big.Rat, bool) {
-	c, ok := r.find(column)
-	if !ok || c.Type == "s" {
+func (s *sheet) numericCell(cells []string, n, col int) (*big.Rat, bool) {
+	text, ok := s.value(cells, n, col)
+	if !ok {
 		return nil, false
 	}
-	text := strings.TrimSpace(c.value())
 	f, ok := adapter.ParseFloat(text)
 	if !ok || f <= 0 {
 		return nil, false
@@ -376,40 +342,4 @@ func midpoint(buy, sell *big.Rat) float64 {
 func ratFloat(r *big.Rat) float64 {
 	f, _ := r.Float64()
 	return f
-}
-
-func sharedStrings(zr *zip.Reader) ([]string, error) {
-	data, err := readEntry(zr, "xl/sharedStrings.xml")
-	if err != nil {
-		return nil, err
-	}
-	var sst struct {
-		Items []struct {
-			T    []string `xml:"t"`
-			Runs []struct {
-				T string `xml:"t"`
-			} `xml:"r"`
-		} `xml:"si"`
-	}
-	if err := xml.Unmarshal(data, &sst); err != nil {
-		return nil, err
-	}
-	strs := make([]string, len(sst.Items))
-	for i, si := range sst.Items {
-		s := strings.Join(si.T, "")
-		for _, run := range si.Runs {
-			s += run.T
-		}
-		strs[i] = s
-	}
-	return strs, nil
-}
-
-func readEntry(zr *zip.Reader, name string) ([]byte, error) {
-	f, err := zr.Open(name)
-	if err != nil {
-		return nil, fmt.Errorf("%s missing from workbook", name)
-	}
-	defer f.Close()
-	return io.ReadAll(f)
 }

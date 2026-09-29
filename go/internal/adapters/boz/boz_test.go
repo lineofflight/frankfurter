@@ -1,11 +1,14 @@
 package boz
 
 import (
+	"bytes"
 	"context"
 	"math"
 	"slices"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -131,6 +134,38 @@ func TestWorkbookURLErrors(t *testing.T) {
 				t.Error("want an error")
 			}
 		})
+	}
+}
+
+func TestSkipsSharedStringNumbersAcrossRowGaps(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	sh := f.GetSheetName(0)
+	for ref, v := range map[string]any{
+		"C3": "Dollar", "E3": "Pound",
+		"B4": "Date", "C4": "Buy", "D4": "Sale", "E4": "Buy", "F4": "Sale",
+		// Row 5 is absent; rows 6 and 9 hold data.
+		"B6": 46000, "C6": 19.1, "D6": 19.3, "E6": "25.1", "F6": 25.3,
+		"B9": 46001, "C9": "19.2", "D9": 19.4, "E9": 25.2, "F9": 25.4,
+	} {
+		if err := f.SetCellValue(sh, ref, v); err != nil {
+			t.Fatal(err)
+		}
+	}
+	var buf bytes.Buffer
+	if err := f.Write(&buf); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(buf.Bytes())
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+	}
+	if want := []string{"2025-12-09 USD", "2025-12-10 GBP"}; !slices.Equal(got, want) {
+		t.Errorf("rates = %v, want %v", got, want)
 	}
 }
 
