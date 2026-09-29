@@ -8,9 +8,9 @@ package hnb
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 	"time"
 
@@ -73,9 +73,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if r.Date == nil || r.Rate == nil || r.Currency == nil {
 			continue
 		}
-		value, err := strconv.ParseFloat(strings.ReplaceAll(*r.Rate, ",", "."), 64)
-		if err != nil {
-			return nil, err
+		value, ok := adapter.ParseFloat(strings.ReplaceAll(*r.Rate, ",", "."))
+		if !ok {
+			return nil, fmt.Errorf("hnb: bad rate %q", *r.Rate)
 		}
 		if value == 0 {
 			continue
