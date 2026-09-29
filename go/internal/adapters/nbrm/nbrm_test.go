@@ -2,7 +2,11 @@ package nbrm
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"net/url"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -96,4 +100,60 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type recorder []*url.URL
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	*r = append(*r, req.URL)
+	return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader("[]")), Request: req}, nil
+}
+
+func TestFetchRequestsInclusiveChunks(t *testing.T) {
+	var reqs recorder
+	a := New(&http.Client{Transport: &reqs})
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 1, 1), adapter.Date(2026, 5, 30)); err != nil {
+		t.Fatal(err)
+	}
+	want := [][2]string{{"01.01.2026", "31.03.2026"}, {"01.04.2026", "30.05.2026"}}
+	if len(reqs) != len(want) {
+		t.Fatalf("got %d requests, want %d", len(reqs), len(want))
+	}
+	for i, u := range reqs {
+		q := u.Query()
+		if u.Host != "www.nbrm.mk" || u.Path != "/KLServiceNOV/GetExchangeRate" || q.Get("format") != "json" ||
+			q.Get("StartDate") != want[i][0] || q.Get("EndDate") != want[i][1] {
+			t.Errorf("request %d = %s, want %s to %s", i, u, want[i][0], want[i][1])
+		}
+	}
+}
+
+func TestParseSkipsAndNumbers(t *testing.T) {
+	rates, err := parse([]byte(`[
+		{"oznaka": " USD ", "sreden": 57.2, "datum": "2026-03-01T00:00:00", "nomin": 1},
+		{"oznaka": "MKD", "sreden": "1", "datum": "2026-03-01T00:00:00", "nomin": "1"},
+		{"oznaka": "XDRX", "sreden": "80", "datum": "2026-03-01T00:00:00", "nomin": "1"},
+		{"oznaka": null, "sreden": "80", "datum": "2026-03-01T00:00:00", "nomin": "1"},
+		{"oznaka": "RSD", "sreden": "0", "datum": "2026-03-01T00:00:00", "nomin": "100"}
+	]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := adapter.Rate{Date: adapter.Date(2026, 3, 1), Base: "USD", Quote: "MKD", Rate: 57.2}
+	if len(rates) != 1 || rates[0] != want {
+		t.Errorf("got %+v, want only %+v", rates, want)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for name, body := range map[string]string{
+		"not an array": `{"error": "x"}`,
+		"bad sreden":   `[{"oznaka": "EUR", "sreden": "", "datum": "2026-03-01T00:00:00", "nomin": "1"}]`,
+		"bad nomin":    `[{"oznaka": "EUR", "sreden": "61.5", "datum": "2026-03-01T00:00:00", "nomin": "1.5"}]`,
+		"bad date":     `[{"oznaka": "EUR", "sreden": "61.5", "datum": "", "nomin": "1"}]`,
+	} {
+		if _, err := parse([]byte(body)); err == nil {
+			t.Errorf("%s: no error", name)
+		}
+	}
 }
