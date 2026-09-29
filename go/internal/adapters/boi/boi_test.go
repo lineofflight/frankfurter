@@ -3,6 +3,8 @@ package boi
 import (
 	"context"
 	"math"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -95,4 +97,33 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseSkipsIncompleteAndZeroRows(t *testing.T) {
+	rows := []string{
+		"RER_USD_ILS,D,,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2026-03-02,3.073,YP", // no base
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,,3.073,YP",        // no date
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2026-03-02,,YP",   // no value
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2026-03-02,0,YP",  // zero
+		"RER_EUR_ILS,D,EUR,ILS,ILS,OF00,BOI_MRKT,V,F,Y,,,2026-03-02,3.5,YP", // blank UNIT_MULT leaves rate as is
+	}
+	rates, err := parse([]byte(header + strings.Join(rows, "\n") + "\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 3, 2), Base: "EUR", Quote: "ILS", Rate: 3.5}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseRejectsBadNumbers(t *testing.T) {
+	for _, row := range []string{
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2026-03-02,n/a,YP",
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,x,,2026-03-02,3.073,YP",
+	} {
+		if _, err := parse([]byte(header + row + "\n")); err == nil {
+			t.Errorf("parse(%q) returned no error", row)
+		}
+	}
 }
