@@ -1,8 +1,8 @@
 package boa
 
 import (
+	"bytes"
 	"context"
-	"encoding/xml"
 	"io"
 	"math"
 	"net/http"
@@ -10,6 +10,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -152,44 +154,89 @@ func TestSheetCurrency(t *testing.T) {
 	}
 }
 
-func TestParseSheetSkipsHeadersBlanksAndZeros(t *testing.T) {
-	var ws worksheet
-	err := xml.Unmarshal([]byte(`<worksheet><sheetData>
-		<row><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c></row>
-		<row><c r="A2"><v>46140</v></c><c r="B2"><v>82.8</v></c></row>
-		<row><c r="A3"><v>46141.0</v></c><c r="B3"><v>0</v></c></row>
-		<row><c r="A4"><v>46142</v></c><c r="B4"><v></v></c></row>
-		<row><c r="A5"><v>46143</v></c></row>
-		<row><c r="A6"><v>46144.9</v></c><c r="B6"><v>83</v></c></row>
-		<row><c r="A7"><v>46145</v></c><c r="B7"><v>n/a</v></c></row>
-	</sheetData></worksheet>`), &ws)
+type sheet struct {
+	name string
+	rows [][]any
+}
+
+// workbook builds an XLSX with the given sheets in order, writing each row from column A. Go strings become shared
+// strings, numbers become numeric cells and nil becomes a cell with no value.
+func workbook(t *testing.T, sheets ...sheet) []byte {
+	t.Helper()
+	f := excelize.NewFile()
+	defer f.Close()
+	for i, s := range sheets {
+		if i == 0 {
+			if err := f.SetSheetName("Sheet1", s.name); err != nil {
+				t.Fatal(err)
+			}
+		} else if _, err := f.NewSheet(s.name); err != nil {
+			t.Fatal(err)
+		}
+		for r, row := range s.rows {
+			cell, err := excelize.CoordinatesToCellName(1, r+1)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := f.SetSheetRow(s.name, cell, &row); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
+		t.Fatal(err)
+	}
+	return buf.Bytes()
+}
+
+func parseWorkbook(t *testing.T, data []byte, after, upto time.Time) []adapter.Rate {
+	t.Helper()
+	rates, err := parse(data, after, upto)
 	if err != nil {
 		t.Fatal(err)
 	}
-	got := parseSheet(ws, "JPY", time.Time{}, time.Time{})
+	return rates
+}
+
+func TestParseSkipsHeadersBlanksAndZeros(t *testing.T) {
+	data := workbook(t,
+		sheet{"JPY - DZD", [][]any{
+			{"Date", "Cours"},
+			{46140, 82.8},
+			{46141.0, 0},
+			{46142, nil},
+			{46143},
+			{46144.9, 83},
+			{46145, "n/a"},
+		}},
+		// Sheets not named after a currency are ignored, numbers and all.
+		sheet{"Feuil1", [][]any{{46140, 99}}},
+	)
+	got := parseWorkbook(t, data, time.Time{}, time.Time{})
 	want := []adapter.Rate{
 		{Date: adapter.Date(2026, 4, 28), Base: "JPY", Quote: "DZD", Rate: 0.828},
 		{Date: adapter.Date(2026, 5, 2), Base: "JPY", Quote: "DZD", Rate: 0.83},
 	}
 	if !slices.Equal(got, want) {
-		t.Errorf("parseSheet = %v, want %v", got, want)
+		t.Errorf("parse = %v, want %v", got, want)
 	}
 }
 
-func TestParseSheetBoundsAreInclusive(t *testing.T) {
-	var ws worksheet
-	err := xml.Unmarshal([]byte(`<worksheet><sheetData>
-		<row><c r="A1"><v>46139</v></c><c r="B1"><v>1</v></c></row>
-		<row><c r="A2"><v>46140</v></c><c r="B2"><v>2</v></c></row>
-		<row><c r="A3"><v>46141</v></c><c r="B3"><v>3</v></c></row>
-		<row><c r="A4"><v>46142</v></c><c r="B4"><v>4</v></c></row>
-	</sheetData></worksheet>`), &ws)
-	if err != nil {
-		t.Fatal(err)
-	}
-	got := parseSheet(ws, "USD", adapter.Date(2026, 4, 28), adapter.Date(2026, 4, 29))
+func TestParseBoundsAreInclusive(t *testing.T) {
+	data := workbook(t, sheet{"USD - DZD", [][]any{{46139, 1}, {46140, 2}, {46141, 3}, {46142, 4}}})
+	got := parseWorkbook(t, data, adapter.Date(2026, 4, 28), adapter.Date(2026, 4, 29))
 	if len(got) != 2 || got[0].Rate != 2 || got[1].Rate != 3 {
-		t.Errorf("parseSheet = %v, want rates 2 and 3", got)
+		t.Errorf("parse = %v, want rates 2 and 3", got)
+	}
+}
+
+func TestParseSkipsNumericLookingStringCells(t *testing.T) {
+	data := workbook(t, sheet{"USD - DZD", [][]any{{"46140", 1.5}, {46141, "2.5"}, {46142, 3.5}}})
+	got := parseWorkbook(t, data, time.Time{}, time.Time{})
+	want := []adapter.Rate{{Date: adapter.Date(2026, 4, 30), Base: "USD", Quote: "DZD", Rate: 3.5}}
+	if !slices.Equal(got, want) {
+		t.Errorf("parse = %v, want %v", got, want)
 	}
 }
 

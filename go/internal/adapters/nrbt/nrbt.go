@@ -63,19 +63,18 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(body, after, upto)
 }
 
-// worksheet is the cell shape parseSheet reads: each cell's reference, type and raw value.
+// worksheet is the cell shape parseSheet reads: each cell's reference and raw value.
 type worksheet struct {
-	Rows []row `xml:"sheetData>row"`
+	Rows []row
 }
 
 type row struct {
-	Cells []cell `xml:"c"`
+	Cells []cell
 }
 
 type cell struct {
-	Ref  string  `xml:"r,attr"`
-	Type string  `xml:"t,attr"`
-	V    *string `xml:"v"`
+	Ref string
+	V   *string
 }
 
 func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
@@ -88,7 +87,7 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, name := range f.GetSheetList() {
 		ws, err := readSheet(f, name)
-		// A sheet whose workbook relationship is missing has no data to read.
+		// A sheet whose relationship does not resolve to a worksheet part has no data to read.
 		if errors.As(err, new(excelize.ErrSheetNotExist)) {
 			continue
 		}
@@ -140,8 +139,7 @@ func parseSheet(ws *worksheet, after, upto time.Time) []adapter.Rate {
 		serial, hasSerial := 0, false
 
 		for _, c := range row.Cells {
-			// Shared strings are headers in column A and holiday flags in the rate cells.
-			if c.Ref == "" || c.V == nil || *c.V == "" || c.Type == "s" {
+			if c.Ref == "" || c.V == nil || *c.V == "" {
 				continue
 			}
 			col, ok := columnIndex(c.Ref)

@@ -1,13 +1,9 @@
 package nrbt
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
-	"io"
 	"math"
-	"regexp"
 	"slices"
 	"testing"
 	"time"
@@ -132,20 +128,53 @@ func TestColumnIndex(t *testing.T) {
 	}
 }
 
-func TestParseSheetSkipsZeroBlankAndFlags(t *testing.T) {
-	// Serial 45659 is 2025-01-02; a float serial is truncated as Ruby's to_i does. BUY (B) and SELL (AB) are ignored.
-	data := `<worksheet><sheetData>
-<row><c r="A1" t="s"><v>0</v></c><c r="O1" t="s"><v>1</v></c></row>
-<row><c r="A2"><v>45659</v></c><c r="B2"><v>9.9</v></c><c r="O2"><v>0.6626</v></c><c r="P2"><v>0</v></c>
-<c r="Q2"><v></v></c><c r="R2" t="s"><v>3</v></c><c r="U2"><v>0.4106</v></c><c r="AB2"><v>8.8</v></c></row>
-<row><c r="A3"><v>45660.75</v></c><c r="Z3"><v>0.55</v></c></row>
-<row><c r="A4"><v>45661</v></c><c r="O4" t="s"><v>2</v></c></row>
-</sheetData></worksheet>`
-	var ws worksheet
-	if err := xml.Unmarshal([]byte(data), &ws); err != nil {
+// setCells writes values keyed by cell reference to sheet. Go strings become shared strings, numbers become numeric
+// cells and nil becomes a cell with no value.
+func setCells(t *testing.T, f *excelize.File, sheet string, cells map[string]any) {
+	t.Helper()
+	for ref, v := range cells {
+		if err := f.SetCellValue(sheet, ref, v); err != nil {
+			t.Fatal(err)
+		}
+	}
+}
+
+func write(t *testing.T, f *excelize.File) []byte {
+	t.Helper()
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
 		t.Fatal(err)
 	}
-	got := parseSheet(&ws, time.Time{}, time.Time{})
+	return buf.Bytes()
+}
+
+// workbook builds an XLSX whose only sheet holds cells.
+func workbook(t *testing.T, cells map[string]any) []byte {
+	t.Helper()
+	f := excelize.NewFile()
+	defer f.Close()
+	setCells(t, f, "Sheet1", cells)
+	return write(t, f)
+}
+
+func parseWorkbook(t *testing.T, data []byte, after, upto time.Time) []adapter.Rate {
+	t.Helper()
+	rates, err := parse(data, after, upto)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return rates
+}
+
+func TestParseSkipsZeroBlankAndFlags(t *testing.T) {
+	// Serial 45659 is 2025-01-02; a float serial is truncated as Ruby's to_i does. BUY (B) and SELL (AB) are ignored.
+	data := workbook(t, map[string]any{
+		"A1": "Date", "O1": "AUD",
+		"A2": 45659, "B2": 9.9, "O2": 0.6626, "P2": 0, "Q2": nil, "R2": "Public Holiday", "U2": 0.4106, "AB2": 8.8,
+		"A3": 45660.75, "Z3": 0.55,
+		"A4": 45661, "O4": "Public Holiday: ANZAC Day",
+	})
+	got := parseWorkbook(t, data, time.Time{}, time.Time{})
 	want := []adapter.Rate{
 		{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626},
 		{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "USD", Rate: 0.4106},
@@ -156,100 +185,39 @@ func TestParseSheetSkipsZeroBlankAndFlags(t *testing.T) {
 	}
 
 	// Both bounds are inclusive.
-	got = parseSheet(&ws, adapter.Date(2025, 1, 3), adapter.Date(2025, 1, 3))
+	got = parseWorkbook(t, data, adapter.Date(2025, 1, 3), adapter.Date(2025, 1, 3))
 	if len(got) != 1 || !got[0].Date.Equal(adapter.Date(2025, 1, 3)) {
 		t.Errorf("windowed = %+v, want only 2025-01-03", got)
 	}
 }
 
 func TestParseSkipsNumericLookingStrings(t *testing.T) {
-	f := excelize.NewFile()
-	defer f.Close()
-	for _, err := range []error{
-		f.SetCellStr("Sheet1", "A1", "45660"),
-		f.SetCellStr("Sheet1", "O1", "1.5"),
-		f.SetCellInt("Sheet1", "A2", 45659),
-		f.SetCellFloat("Sheet1", "O2", 0.6626, -1, 64),
-	} {
-		if err != nil {
-			t.Fatal(err)
-		}
-	}
-	var buf bytes.Buffer
-	if err := f.Write(&buf); err != nil {
-		t.Fatal(err)
-	}
-	got, err := parse(buf.Bytes(), time.Time{}, time.Time{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	data := workbook(t, map[string]any{"A1": "45660", "O1": "1.5", "A2": 45659, "O2": 0.6626})
+	got := parseWorkbook(t, data, time.Time{}, time.Time{})
 	want := []adapter.Rate{{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626}}
 	if !slices.Equal(got, want) {
 		t.Errorf("got %+v, want %+v", got, want)
 	}
 }
 
-func TestParseSkipsSheetWithoutRelationship(t *testing.T) {
+func TestParseSkipsUnresolvableSheet(t *testing.T) {
 	f := excelize.NewFile()
 	defer f.Close()
 	if _, err := f.NewSheet("Orphan"); err != nil {
 		t.Fatal(err)
 	}
-	for _, err := range []error{
-		f.SetCellInt("Sheet1", "A1", 45659),
-		f.SetCellFloat("Sheet1", "O1", 0.6626, -1, 64),
-		f.SetCellInt("Orphan", "A1", 45660),
-		f.SetCellFloat("Orphan", "O1", 0.7, -1, 64),
-	} {
-		if err != nil {
-			t.Fatal(err)
-		}
-	}
-	var src bytes.Buffer
-	if err := f.Write(&src); err != nil {
-		t.Fatal(err)
-	}
+	setCells(t, f, "Sheet1", map[string]any{"A1": 45659, "O1": 0.6626})
+	setCells(t, f, "Orphan", map[string]any{"A1": 45660, "O1": 0.7})
 
-	// Drop the second sheet's workbook relationship, so its r:id resolves to nothing.
-	orphanRel := regexp.MustCompile(`<Relationship [^>]*Target="worksheets/sheet2\.xml"[^>]*>(</Relationship>)?`)
-	zr, err := zip.NewReader(bytes.NewReader(src.Bytes()), int64(src.Len()))
-	if err != nil {
-		t.Fatal(err)
+	// Move the second sheet's part to a path no relationship targets: its data stays in the package, but the sheet
+	// name no longer resolves to it.
+	ws, ok := f.Sheet.LoadAndDelete("xl/worksheets/sheet2.xml")
+	if !ok {
+		t.Fatal("no sheet2 part")
 	}
-	var dst bytes.Buffer
-	zw := zip.NewWriter(&dst)
-	for _, zf := range zr.File {
-		r, err := zf.Open()
-		if err != nil {
-			t.Fatal(err)
-		}
-		data, err := io.ReadAll(r)
-		r.Close()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if zf.Name == "xl/_rels/workbook.xml.rels" {
-			if !orphanRel.Match(data) {
-				t.Fatalf("no sheet2 relationship in %s", data)
-			}
-			data = orphanRel.ReplaceAll(data, nil)
-		}
-		w, err := zw.Create(zf.Name)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if _, err := w.Write(data); err != nil {
-			t.Fatal(err)
-		}
-	}
-	if err := zw.Close(); err != nil {
-		t.Fatal(err)
-	}
+	f.Sheet.Store("xl/worksheets/orphan.xml", ws)
 
-	got, err := parse(dst.Bytes(), time.Time{}, time.Time{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	got := parseWorkbook(t, write(t, f), time.Time{}, time.Time{})
 	want := []adapter.Rate{{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626}}
 	if !slices.Equal(got, want) {
 		t.Errorf("got %+v, want %+v", got, want)
