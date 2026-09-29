@@ -2,7 +2,14 @@ package hkma
 
 import (
 	"context"
+	"encoding/json"
+	"io"
+	"net/http"
+	"net/url"
+	"reflect"
 	"slices"
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -128,4 +135,73 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+// pagedClient serves pages with the record counts in sizes, in order, and records each request's query.
+func pagedClient(sizes []int, queries *[]url.Values) *http.Client {
+	return &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		*queries = append(*queries, r.URL.Query())
+		records := make([]string, sizes[len(*queries)-1])
+		for i := range records {
+			records[i] = `{"end_of_day":"2026-02-27","usd":7.8}`
+		}
+		body := `{"result":{"records":[` + strings.Join(records, ",") + `]}}`
+		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: r}, nil
+	})}
+}
+
+func TestFetchPaginates(t *testing.T) {
+	var queries []url.Values
+	a := New(pagedClient([]int{100, 100, 3}, &queries))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 1, 1), adapter.Date(2026, 2, 28))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 203 {
+		t.Errorf("got %d rates, want 203", len(rates))
+	}
+	if len(queries) != 3 {
+		t.Fatalf("got %d requests, want 3", len(queries))
+	}
+	for i, q := range queries {
+		want := url.Values{
+			"choose": {"end_of_day"}, "from": {"2026-01-01"}, "to": {"2026-02-28"}, "pagesize": {"100"},
+			"offset": {strconv.Itoa(i * 100)}, "sortby": {"end_of_day"}, "sortorder": {"desc"},
+		}
+		if !reflect.DeepEqual(q, want) {
+			t.Errorf("request %d query = %v, want %v", i, q, want)
+		}
+	}
+}
+
+func TestFetchStopsOnEmptyPage(t *testing.T) {
+	var queries []url.Values
+	a := New(pagedClient([]int{100, 0}, &queries))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 1, 1), adapter.Date(2026, 2, 28))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 100 || len(queries) != 2 {
+		t.Errorf("got %d rates over %d requests, want 100 over 2", len(rates), len(queries))
+	}
+}
+
+func TestParseSkipsNonPositiveAndNonNumeric(t *testing.T) {
+	var records []map[string]any
+	raw := `[{"end_of_day":"2026-02-28","usd":7,"eur":0,"gbp":-1,"jpy":"0.05","cad":null}]`
+	if err := json.Unmarshal([]byte(raw), &records); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(records)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 2, 28), Base: "USD", Quote: "HKD", Rate: 7}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
 }
