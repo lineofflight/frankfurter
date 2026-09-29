@@ -11,13 +11,10 @@
 package cbs
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -27,6 +24,7 @@ import (
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
+	"github.com/xuri/excelize/v2"
 )
 
 const dataURL = "https://cbs.gov.ws/daily-exchange-rates"
@@ -52,11 +50,7 @@ var monthNames = []string{
 // Excel serial dates count days from this epoch, which absorbs the 1900 leap-year quirk.
 var excelEpoch = adapter.Date(1899, 12, 30)
 
-var (
-	linkPattern  = regexp.MustCompile(`(?i)href=["']([^"']*\.xlsx)["']`)
-	sheetPattern = regexp.MustCompile(`\Axl/worksheets/sheet\d+\.xml\z`)
-	rowDigits    = regexp.MustCompile(`\d+\z`)
-)
+var linkPattern = regexp.MustCompile(`(?i)href=["']([^"']*\.xlsx)["']`)
 
 func init() {
 	adapter.Register("CBS", func(c *http.Client) adapter.Adapter { return New(c) })
@@ -134,202 +128,79 @@ func escapeRFC2396(s string) string {
 	return b.String()
 }
 
-type worksheet struct {
-	Rows []row `xml:"sheetData>row"`
-}
-
-type row struct {
-	Cells []cell `xml:"c"`
-}
-
-type cell struct {
-	Ref   string  `xml:"r,attr"`
-	Type  string  `xml:"t,attr"`
-	Value *string `xml:"v"`
-}
-
-func (c cell) column() string { return rowDigits.ReplaceAllString(c.Ref, "") }
-
+// parse reads every sheet in the workbook. Sheets are not in chronological order; the date filter sorts it out.
 func parse(data []byte) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
 		return nil, err
 	}
-	strs, err := sharedStrings(zr)
-	if err != nil {
-		return nil, err
-	}
-
-	// One sheet per year, but sheet numbering is not chronological; the date filter sorts it out.
-	var sheets []*zip.File
-	for _, f := range zr.File {
-		if sheetPattern.MatchString(f.Name) {
-			sheets = append(sheets, f)
-		}
-	}
-	slices.SortFunc(sheets, func(a, b *zip.File) int { return strings.Compare(a.Name, b.Name) })
+	defer f.Close()
 
 	var rates []adapter.Rate
-	for _, f := range sheets {
-		body, err := readFile(f)
+	for _, sheet := range f.GetSheetList() {
+		rows, err := f.GetRows(sheet)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("%s: %w", sheet, err)
 		}
-		var ws worksheet
-		if err := xml.Unmarshal(body, &ws); err != nil {
-			return nil, fmt.Errorf("%s: %w", f.Name, err)
-		}
-		rates = parseSheet(ws.Rows, strs, rates)
+		rates = parseSheet(rows, rates)
+	}
+	if len(rates) == 0 {
+		return nil, errors.New("no rates in workbook")
 	}
 	return rates, nil
 }
 
-func parseSheet(rows []row, strs []string, rates []adapter.Rate) []adapter.Rate {
-	var columns map[string]string
+// parseSheet walks rows keyed on column B: a month banner, a DATE header, or an Excel serial date.
+func parseSheet(rows [][]string, rates []adapter.Rate) []adapter.Rate {
+	var columns map[int]string
 	for _, r := range rows {
-		label, ok := stringCell(r, "B", strs)
-		if ok && label == "DATE" {
-			columns = columnMap(r, strs)
+		var label string
+		if len(r) > 1 {
+			label = r[1]
+		}
+		if label == "DATE" {
+			columns = columnMap(r)
 			continue
 		}
 		// A month banner resets the map so a malformed section cannot leak headers across months.
-		if ok && slices.Contains(monthNames, strings.ToUpper(label)) {
+		if slices.Contains(monthNames, strings.ToUpper(label)) {
 			columns = nil
 			continue
 		}
 		if len(columns) == 0 {
 			continue
 		}
-		date, ok := dateCell(r, "B")
+		date, ok := serialDate(label)
 		if !ok {
 			continue
 		}
-		for _, c := range r.Cells {
-			if c.Ref == "" {
-				continue
-			}
-			iso, ok := columns[c.column()]
+		for i, v := range r {
+			iso, ok := columns[i]
 			if !ok {
 				continue
 			}
-			value, ok := numericValue(c)
-			if !ok {
-				continue
+			if value, ok := adapter.ParseFloat(v); ok && value > 0 {
+				rates = append(rates, adapter.Rate{Date: date, Base: "WST", Quote: iso, Rate: value})
 			}
-			rates = append(rates, adapter.Rate{Date: date, Base: "WST", Quote: iso, Rate: value})
 		}
 	}
 	return rates
 }
 
-func columnMap(r row, strs []string) map[string]string {
-	m := map[string]string{}
-	for _, c := range r.Cells {
-		if c.Ref == "" || c.column() == "B" {
-			continue
-		}
-		label, ok := stringValue(c, strs)
-		if !ok {
-			continue
-		}
-		if iso, ok := currencies[strings.ToUpper(label)]; ok {
-			m[c.column()] = iso
+func columnMap(r []string) map[int]string {
+	m := map[int]string{}
+	for i, label := range r {
+		if iso, ok := currencies[strings.ToUpper(label)]; ok && i != 1 {
+			m[i] = iso
 		}
 	}
 	return m
 }
 
-func findCell(r row, column string) (cell, bool) {
-	for _, c := range r.Cells {
-		if c.Ref != "" && c.column() == column {
-			return c, true
-		}
-	}
-	return cell{}, false
-}
-
-func stringCell(r row, column string, strs []string) (string, bool) {
-	c, ok := findCell(r, column)
-	if !ok {
-		return "", false
-	}
-	return stringValue(c, strs)
-}
-
-func stringValue(c cell, strs []string) (string, bool) {
-	if c.Type != "s" || c.Value == nil {
-		return "", false
-	}
-	i, err := strconv.Atoi(strings.TrimSpace(*c.Value))
-	if err != nil || i < 0 || i >= len(strs) {
-		return "", false
-	}
-	return strs[i], true
-}
-
-func dateCell(r row, column string) (time.Time, bool) {
-	c, ok := findCell(r, column)
-	if !ok || c.Type == "s" || c.Value == nil {
-		return time.Time{}, false
-	}
-	serial, err := strconv.ParseFloat(strings.TrimSpace(*c.Value), 64)
+func serialDate(s string) (time.Time, bool) {
+	serial, err := strconv.ParseFloat(strings.TrimSpace(s), 64)
 	if err != nil || serial <= 30_000 || serial >= 80_000 {
 		return time.Time{}, false
 	}
 	return excelEpoch.AddDate(0, 0, int(serial)), true
-}
-
-func numericValue(c cell) (float64, bool) {
-	if c.Type == "s" || c.Value == nil {
-		return 0, false
-	}
-	v, ok := adapter.ParseFloat(*c.Value)
-	if !ok || v <= 0 {
-		return 0, false
-	}
-	return v, true
-}
-
-// sharedStringTable reads plain and rich-text entries alike, joining a rich entry's runs.
-type sharedStringTable struct {
-	Items []struct {
-		Text string `xml:"t"`
-		Runs []struct {
-			Text string `xml:"t"`
-		} `xml:"r"`
-	} `xml:"si"`
-}
-
-func sharedStrings(zr *zip.Reader) ([]string, error) {
-	f, err := zr.Open("xl/sharedStrings.xml")
-	if err != nil {
-		return nil, errors.New("xl/sharedStrings.xml missing from workbook")
-	}
-	defer f.Close()
-	body, err := io.ReadAll(f)
-	if err != nil {
-		return nil, err
-	}
-	var sst sharedStringTable
-	if err := xml.Unmarshal(body, &sst); err != nil {
-		return nil, fmt.Errorf("sharedStrings.xml: %w", err)
-	}
-	strs := make([]string, len(sst.Items))
-	for i, si := range sst.Items {
-		text := si.Text
-		for _, r := range si.Runs {
-			text += r.Text
-		}
-		strs[i] = text
-	}
-	return strs, nil
-}
-
-func readFile(f *zip.File) ([]byte, error) {
-	rc, err := f.Open()
-	if err != nil {
-		return nil, err
-	}
-	defer rc.Close()
-	return io.ReadAll(rc)
 }
