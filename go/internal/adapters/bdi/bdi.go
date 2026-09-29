@@ -12,6 +12,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -121,19 +122,20 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if !isoCode.MatchString(code) {
 			continue
 		}
+		// Ruby's CSV reads an unquoted empty field as nil, which the adapter skips.
 		rateText, ok := field(rec, "Rate")
-		if !ok || strings.TrimSpace(rateText) == "N.A." {
+		if !ok || rateText == "" || strings.TrimSpace(rateText) == "N.A." {
 			continue
 		}
 		rate, err := strconv.ParseFloat(strings.TrimSpace(rateText), 64)
-		if err != nil {
+		if err != nil || math.IsNaN(rate) || math.IsInf(rate, 0) {
 			return nil, fmt.Errorf("invalid rate %q for %s", rateText, code)
 		}
 		if rate == 0 {
 			continue
 		}
 		dateText, ok := field(rec, "Reference date (CET)")
-		if !ok {
+		if !ok || dateText == "" {
 			continue
 		}
 		date, err := time.Parse("2006-01-02", strings.TrimSpace(dateText))

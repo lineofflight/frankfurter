@@ -64,6 +64,9 @@ func TestParseSkips(t *testing.T) {
 		"zero rates":             "UNITED STATES,Dollar,USD,001,0,Foreign currency amount for 1 Euro.,2026-02-10\n",
 		"invalid currency codes": "INVALID,Currency,XX,999,1.5,Foreign currency amount for 1 Euro.,2026-02-10\n",
 		"empty CSV":              "",
+		"empty rates":            "UNITED STATES,Dollar,USD,001,,Foreign currency amount for 1 Euro.,2026-02-10\n",
+		"empty dates":            "UNITED STATES,Dollar,USD,001,1.1894,Foreign currency amount for 1 Euro.,\n",
+		"missing columns":        "UNITED STATES,Dollar,USD,001\n",
 	} {
 		t.Run(name, func(t *testing.T) {
 			rates, err := parse([]byte(header + row))
@@ -84,4 +87,18 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseErrors(t *testing.T) {
+	for name, row := range map[string]string{
+		"bad rate": "UNITED STATES,Dollar,USD,001,abc,Foreign currency amount for 1 Euro.,2026-02-10\n",
+		"NaN rate": "UNITED STATES,Dollar,USD,001,NaN,Foreign currency amount for 1 Euro.,2026-02-10\n",
+		"bad date": "UNITED STATES,Dollar,USD,001,1.1894,Foreign currency amount for 1 Euro.,not a date\n",
+	} {
+		t.Run(name, func(t *testing.T) {
+			if _, err := parse([]byte(header + row)); err == nil {
+				t.Error("want error")
+			}
+		})
+	}
 }
