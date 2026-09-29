@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -88,7 +89,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if !ok {
 			return nil, fmt.Errorf("invalid date %v", dateRaw)
 		}
-		date, err := adapter.ParseDate(s, "02 January 2006", "2 January 2006", "02 Jan 2006", "2 Jan 2006")
+		date, err := parseDate(s)
 		if err != nil {
 			return nil, err
 		}
@@ -99,6 +100,16 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		rates = append(rates, adapter.Rate{Date: date, Base: "USD", Quote: "MVR", Rate: rate})
 	}
 	return rates, nil
+}
+
+// parseDate reads "21 May 2026". The feed has also emitted a day range such as "08/09 February 2021", which Ruby's
+// Date.parse reads as the second day, so we do the same.
+func parseDate(s string) (time.Time, error) {
+	s = strings.TrimSpace(s)
+	if day, rest, ok := strings.Cut(s, "/"); ok && day != "" && len(day) <= 2 && strings.Trim(day, "0123456789") == "" {
+		s = rest
+	}
+	return adapter.ParseDate(s, "2 January 2006", "2 Jan 2006")
 }
 
 // toFloat mirrors Ruby's strict Float(): numbers pass through, numeric strings parse, anything else is an error.
