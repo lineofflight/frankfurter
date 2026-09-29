@@ -1,8 +1,9 @@
-// Package cbm fetches rates from the Central Bank of Myanmar, which publishes daily reference rates for about 37
-// currencies as MMK per unit of foreign currency through a public JSON API.
+// Package cbm fetches rates from the Central Bank of Myanmar, which publishes
+// daily reference rates for about 37 currencies as MMK per unit of foreign
+// currency through a public JSON API.
 //
-// No historical API is available: only the latest rates are fetched, and Fetch ignores its bounds as the Ruby adapter
-// does.
+// No historical API is available: only the latest rates are fetched, and Fetch
+// ignores its bounds as the Ruby adapter does.
 package cbm
 
 import (
@@ -91,8 +92,8 @@ type pair struct {
 	value json.RawMessage
 }
 
-// timestamp mirrors Ruby's Integer(): a string must hold an integer, surrounding whitespace allowed, while a JSON
-// number is truncated.
+// timestamp mirrors Ruby's Integer(): a string must hold an integer,
+// surrounding whitespace allowed, while a JSON number is truncated.
 func timestamp(raw json.RawMessage) (int64, error) {
 	var s string
 	if json.Unmarshal(raw, &s) == nil {
@@ -109,8 +110,8 @@ func timestamp(raw json.RawMessage) (int64, error) {
 	return int64(f), nil
 }
 
-// orderedPairs decodes a JSON object keeping key order, as Ruby's Hash does, and rejects duplicate keys as Ruby's
-// JSON.parse does.
+// orderedPairs decodes a JSON object keeping key order, as Ruby's Hash does,
+// and rejects duplicate keys as Ruby's JSON.parse does.
 func orderedPairs(raw json.RawMessage) ([]pair, error) {
 	dec := json.NewDecoder(bytes.NewReader(raw))
 	if tok, err := dec.Token(); err != nil || tok != json.Delim('{') {
@@ -136,7 +137,8 @@ func orderedPairs(raw json.RawMessage) ([]pair, error) {
 	return pairs, nil
 }
 
-// isNull reports whether a field is absent or falsy, which Ruby's `unless timestamp && rates` rejects.
+// isNull reports whether a field is absent or falsy, which Ruby's `unless
+// timestamp && rates` rejects.
 func isNull(raw json.RawMessage) bool {
 	return len(raw) == 0 || string(raw) == "null" || string(raw) == "false"
 }

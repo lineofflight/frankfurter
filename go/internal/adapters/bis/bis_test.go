@@ -19,8 +19,9 @@ func newAdapter(t *testing.T) *Adapter {
 	return New(vcrtest.Client(t, "bis", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
 }
 
-// The Ruby spec also backfills these rows and reads them back through the provider API; storage and the API belong to
-// core, so this checks the adapter's half: the published digits come out of fetch intact.
+// The Ruby spec also backfills these rows and reads them back through the
+// provider API; storage and the API belong to core, so this checks the
+// adapter's half: the published digits come out of fetch intact.
 func TestPreservesPublishedDigits(t *testing.T) {
 	for _, tc := range []struct {
 		date  time.Time
@@ -89,7 +90,8 @@ func TestBackfillsEarliestEndPeriodObservation(t *testing.T) {
 	}
 }
 
-// stub stands in for the adapter with a canned Fetch, as the Ruby specs stub BIS.new and fetch.
+// stub stands in for the adapter with a canned Fetch, as the Ruby specs stub
+// BIS.new and fetch.
 type stub struct {
 	adapter.Base
 	fetch func(after, upto time.Time) []adapter.Rate
@@ -166,9 +168,10 @@ func TestYearBeforeClampsToMonthEnd(t *testing.T) {
 	}
 }
 
-// The Ruby spec inserts BIS rows into the rate tables and checks they are not blendable, then checks lookback_days and
-// publishes_missed. Those live in core; here the seed must mark BIS as a monthly, non-daily provider, which is what
-// keeps it out of blends, on a weekly publish schedule.
+// The Ruby spec inserts BIS rows into the rate tables and checks they are not
+// blendable, then checks lookback_days and publishes_missed. Those live in
+// core; here the seed must mark BIS as a monthly, non-daily provider, which is
+// what keeps it out of blends, on a weekly publish schedule.
 func TestKeepsEndPeriodObservationsOutOfBlends(t *testing.T) {
 	data, err := os.ReadFile("../../../../db/seeds/providers/bis.json")
 	if err != nil {

@@ -77,7 +77,8 @@ func TestFetchEmitsMidColumn(t *testing.T) {
 	if usd == nil {
 		t.Fatal("no USD rate")
 	}
-	// MID rate for 2025-01-02 is published as 0.4106 in column U (MID block, USD position).
+	// MID rate for 2025-01-02 is published as 0.4106 in column U (MID block,
+	// USD position).
 	if math.Abs(usd.Rate-0.4106) > 0.0001 {
 		t.Errorf("USD = %v, want 0.4106", usd.Rate)
 	}
@@ -91,7 +92,8 @@ func TestFetchFiltersByDateRange(t *testing.T) {
 }
 
 func TestFetchSkipsHolidayRows(t *testing.T) {
-	// 2025-01-01 is "Public Holiday: New Year's Day": the rate cells hold a shared-string label, not numbers.
+	// 2025-01-01 is "Public Holiday: New Year's Day": the rate cells hold a
+	// shared-string label, not numbers.
 	for _, r := range fetch(t, adapter.Date(2024, 12, 30), adapter.Date(2025, 1, 3)) {
 		if r.Date.Equal(adapter.Date(2025, 1, 1)) {
 			t.Fatalf("holiday row emitted: %+v", r)
@@ -128,8 +130,9 @@ func TestColumnIndex(t *testing.T) {
 	}
 }
 
-// setCells writes values keyed by cell reference to sheet. Go strings become shared strings, numbers become numeric
-// cells and nil becomes a cell with no value.
+// setCells writes values keyed by cell reference to sheet. Go strings become
+// shared strings, numbers become numeric cells and nil becomes a cell with no
+// value.
 func setCells(t *testing.T, f *excelize.File, sheet string, cells map[string]any) {
 	t.Helper()
 	for ref, v := range cells {
@@ -167,7 +170,8 @@ func parseWorkbook(t *testing.T, data []byte, after, upto time.Time) []adapter.R
 }
 
 func TestParseSkipsZeroBlankAndFlags(t *testing.T) {
-	// Serial 45659 is 2025-01-02; a float serial is truncated as Ruby's to_i does. BUY (B) and SELL (AB) are ignored.
+	// Serial 45659 is 2025-01-02; a float serial is truncated as Ruby's to_i
+	// does. BUY (B) and SELL (AB) are ignored.
 	data := workbook(t, map[string]any{
 		"A1": "Date", "O1": "AUD",
 		"A2": 45659, "B2": 9.9, "O2": 0.6626, "P2": 0, "Q2": nil, "R2": "Public Holiday", "U2": 0.4106, "AB2": 8.8,
@@ -209,8 +213,8 @@ func TestParseSkipsUnresolvableSheet(t *testing.T) {
 	setCells(t, f, "Sheet1", map[string]any{"A1": 45659, "O1": 0.6626})
 	setCells(t, f, "Orphan", map[string]any{"A1": 45660, "O1": 0.7})
 
-	// Move the second sheet's part to a path no relationship targets: its data stays in the package, but the sheet
-	// name no longer resolves to it.
+	// Move the second sheet's part to a path no relationship targets: its data
+	// stays in the package, but the sheet name no longer resolves to it.
 	ws, ok := f.Sheet.LoadAndDelete("xl/worksheets/sheet2.xml")
 	if !ok {
 		t.Fatal("no sheet2 part")

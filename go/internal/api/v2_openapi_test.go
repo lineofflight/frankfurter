@@ -12,8 +12,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/dbtest"
 )
 
-// v2SpecPath is the v2 document's path for a request path, or "" for paths it does not describe (extensions pick
-// other representations).
+// v2SpecPath is the v2 document's path for a request path, or "" for paths it
+// does not describe (extensions pick other representations).
 func v2SpecPath(path string) string {
 	rest, ok := strings.CutPrefix(path, "/v2/")
 	if !ok || strings.ContainsAny(rest, ".%") {
@@ -43,8 +43,8 @@ func v2SpecPath(path string) string {
 	return ""
 }
 
-// Every plain GET in the golden corpus that v2's document describes, answered by the Go handler, conforms to it,
-// as the Ruby specs check with skooma.
+// Every plain GET in the golden corpus that v2's document describes, answered
+// by the Go handler, conforms to it, as the Ruby specs check with skooma.
 func TestV2ResponsesMatchOpenAPI(t *testing.T) {
 	doc := loadSpec(t, "v2/openapi.json")
 	g := loadGoldenAPI(t)
@@ -76,7 +76,8 @@ func TestV2ResponsesMatchOpenAPI(t *testing.T) {
 		case strings.HasPrefix(ct, contentTypeCSV):
 			continue // CSV is not in the document
 		case strings.HasPrefix(ct, contentTypeNDJSON):
-			// The document types the stream as a string of Rate objects, one per line; check each line.
+			// The document types the stream as a string of Rate objects, one
+			// per line; check each line.
 			for i, line := range strings.Split(strings.TrimSuffix(res.Body.String(), "\n"), "\n") {
 				if line == "" {
 					continue

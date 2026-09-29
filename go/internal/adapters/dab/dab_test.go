@@ -148,7 +148,8 @@ func TestParseTomanToIRR(t *testing.T) {
 	if r.Base != "IRR" || r.Quote != "AFN" {
 		t.Errorf("pair = %s/%s, want IRR/AFN", r.Base, r.Quote)
 	}
-	// Transfer mid for Toman: (0.0008 + 0.0004) / 2 = 0.0006; per IRR that is 0.00006.
+	// Transfer mid for Toman: (0.0008 + 0.0004) / 2 = 0.0006; per IRR that is
+	// 0.00006.
 	if math.Abs(r.Rate-0.00006) > 1e-7 {
 		t.Errorf("rate = %v, want 0.00006", r.Rate)
 	}
@@ -215,7 +216,8 @@ func TestParseIgnoresUnknownLabels(t *testing.T) {
 	}
 }
 
-// Ruby's strip and \s cover ASCII whitespace only, so NBSP padding makes the Ruby adapter drop a row.
+// Ruby's strip and \s cover ASCII whitespace only, so NBSP padding makes the
+// Ruby adapter drop a row.
 func TestParseNBSPMatchesRubyStrip(t *testing.T) {
 	rates := mustParse(t, "<div class=\"table-responsive\"><table class=\"table table-striped\"><tbody>"+
 		"<tr><td>USD$</td><td>1</td><td>1</td><td>63.74 </td><td>63.64</td></tr>"+

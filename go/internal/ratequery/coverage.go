@@ -12,9 +12,11 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Coverage is a query's queryable history (RateCoverage): the first and last stored observation dates at which a
-// snapshot returns at least one requested record. The bounds do not promise an uninterrupted series, extend history by
-// carry-forward days, or confuse a carried quote's date with the arrival of its base bridge.
+// Coverage is a query's queryable history (RateCoverage): the first and last
+// stored observation dates at which a snapshot returns at least one requested
+// record. The bounds do not promise an uninterrupted series, extend history by
+// carry-forward days, or confuse a carried quote's date with the arrival of its
+// base bridge.
 type Coverage struct {
 	Base      string   `json:"base"`
 	Quotes    []string `json:"quotes"`
@@ -23,10 +25,12 @@ type Coverage struct {
 	EndDate   *string  `json:"end_date"`
 }
 
-// CoveragePageSize is how many candidate dates a boundary search reads at a time.
+// CoveragePageSize is how many candidate dates a boundary search reads at a
+// time.
 const CoveragePageSize = 64
 
-// History computes the query's coverage. Live coverage holds a heavy slot while it runs.
+// History computes the query's coverage. Live coverage holds a heavy slot while
+// it runs.
 func (q *Query) History(ctx context.Context) (Coverage, error) {
 	out := Coverage{Base: q.base, Quotes: q.quotes, Providers: q.providers}
 	stored, err := q.blendedTable(ctx)
@@ -60,10 +64,12 @@ func (q *Query) History(ctx context.Context) (Coverage, error) {
 	return out, nil
 }
 
-// coverageDates lists the candidate anchors: the stored dates of the query's raw rows (so live and stored bounds agree
-// when a publication yields only carried-forward output), pruned by EXISTS checks that only rule out impossible
-// snapshots. Merely overlapping currency date bounds say nothing about gaps, USD connectivity, or a single provider's
-// native cross; the snapshot decides.
+// coverageDates lists the candidate anchors: the stored dates of the query's
+// raw rows (so live and stored bounds agree when a publication yields only
+// carried-forward output), pruned by EXISTS checks that only rule out
+// impossible snapshots. Merely overlapping currency date bounds say nothing
+// about gaps, USD connectivity, or a single provider's native cross; the
+// snapshot decides.
 func (q *Query) coverageDates(ctx context.Context, stored bool) (rates.Query, error) {
 	raw, err := q.rawScope(ctx, rates.Daily)
 	if err != nil {
@@ -125,8 +131,9 @@ func currencyRows(ds rates.Query, codes []string) rates.Query {
 	return ds.Filter("(base IN " + list + ") OR (quote IN " + list + ")")
 }
 
-// coveragePresence is the condition that an anchor date lies within ds's stored range (extended by the lookback) and
-// has a ds row within the lookback before it. A ds with no rows rules out every anchor.
+// coveragePresence is the condition that an anchor date lies within ds's stored
+// range (extended by the lookback) and has a ds row within the lookback before
+// it. A ds with no rows rules out every anchor.
 func (q *Query) coveragePresence(ctx context.Context, ds rates.Query, alias string, lookback int) (string, error) {
 	if err := q.checkDeadline(); err != nil {
 		return "", err
@@ -157,8 +164,9 @@ func (q *Query) coveragePresence(ctx context.Context, ds rates.Query, alias stri
 		db.Lit("+"+n+" days") + ") AND EXISTS (" + exists.SQL() + ")", nil
 }
 
-// coverageBoundary searches dates from one end in keyset pages, so memory stays bounded and a century of interior
-// history is never computed just to describe its extent; each snapshot shares the rate deadline.
+// coverageBoundary searches dates from one end in keyset pages, so memory stays
+// bounded and a century of interior history is never computed just to describe
+// its extent; each snapshot shares the rate deadline.
 func (q *Query) coverageBoundary(ctx context.Context, dates rates.Query, stored, reverse bool) (*time.Time, error) {
 	order := "date"
 	if reverse {

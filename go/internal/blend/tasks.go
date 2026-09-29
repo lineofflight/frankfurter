@@ -22,9 +22,10 @@ func blends(ctx context.Context, q db.Querier, provider string) (bool, error) {
 	return !slices.Contains(nonBlending, provider), nil
 }
 
-// RefreshProviderRollups is Provider#refresh_rollups: it rebuilds provider's weekly and monthly buckets holding any of
-// dates and, when the provider blends, the grouped blends of those buckets. Backfill calls it inside its insert
-// transaction, so everything rolls back together.
+// RefreshProviderRollups is Provider#refresh_rollups: it rebuilds provider's
+// weekly and monthly buckets holding any of dates and, when the provider
+// blends, the grouped blends of those buckets. Backfill calls it inside its
+// insert transaction, so everything rolls back together.
 func RefreshProviderRollups(ctx context.Context, q db.Querier, provider string, dates []time.Time, today time.Time) error {
 	touched, err := rates.RefreshRollups(ctx, q, provider, dates)
 	if err != nil {
@@ -42,8 +43,9 @@ func RefreshProviderRollups(ctx context.Context, q db.Querier, provider string, 
 	return nil
 }
 
-// RebuildAll is the blend:rebuild task: it rebuilds the daily, weekly and monthly materialized blends in place.
-// Rebuilds change served values, so the caller must purge cached responses afterwards.
+// RebuildAll is the blend:rebuild task: it rebuilds the daily, weekly and
+// monthly materialized blends in place. Rebuilds change served values, so the
+// caller must purge cached responses afterwards.
 func RebuildAll(ctx context.Context, conn *sql.DB, today time.Time) error {
 	steps := []struct {
 		table   string
@@ -67,11 +69,14 @@ func RebuildAll(ctx context.Context, conn *sql.DB, today time.Time) error {
 	return nil
 }
 
-// RebuildProviderRollups is the rollups:rebuild task: it rebuilds the weekly and monthly provider rollups from the
-// daily rates, for one provider (matched case-insensitively) or all when provider is empty. The source rebuild and
-// the invalidation of affected grouped blends commit together; the grouped blends are refilled afterwards, outside
-// that transaction, so a refill failure leaves only the affected buckets on the live fallback. The caller must purge
-// the cache even when this returns an error, since the source changes may have committed.
+// RebuildProviderRollups is the rollups:rebuild task: it rebuilds the weekly
+// and monthly provider rollups from the daily rates, for one provider (matched
+// case-insensitively) or all when provider is empty. The source rebuild and the
+// invalidation of affected grouped blends commit together; the grouped blends
+// are refilled afterwards, outside that transaction, so a refill failure leaves
+// only the affected buckets on the live fallback. The caller must purge the
+// cache even when this returns an error, since the source changes may have
+// committed.
 func RebuildProviderRollups(ctx context.Context, conn *sql.DB, provider string, today time.Time) error {
 	scope, label := "1", "all"
 	if provider != "" {
@@ -118,7 +123,8 @@ func RebuildProviderRollups(ctx context.Context, conn *sql.DB, provider string, 
 			if err != nil {
 				return err
 			}
-			// Include buckets the rebuild removed, and invalidate before releasing the source write lock.
+			// Include buckets the rebuild removed, and invalidate before
+			// releasing the source write lock.
 			affected[r.Table] = uniq(append(affected[r.Table], dates...))
 			if _, err := q.ExecContext(ctx, "DELETE FROM "+r.Table+" WHERE bucket_date IN "+
 				db.LitList(affected[r.Table])); err != nil {
@@ -149,9 +155,11 @@ func RebuildProviderRollups(ctx context.Context, conn *sql.DB, provider string, 
 	return nil
 }
 
-// PurgeInvalid is the db:purge_invalid task: rates.Purge, then, when anything was deleted, the grouped blends are
-// repopulated (invalidation is bucket-local, so this is quick) before the slower daily rebuild. The caller must purge
-// the cache whenever the totals are non-zero, even if a rebuild failed: the deletion has committed.
+// PurgeInvalid is the db:purge_invalid task: rates.Purge, then, when anything
+// was deleted, the grouped blends are repopulated (invalidation is
+// bucket-local, so this is quick) before the slower daily rebuild. The caller
+// must purge the cache whenever the totals are non-zero, even if a rebuild
+// failed: the deletion has committed.
 func PurgeInvalid(ctx context.Context, conn *sql.DB, today time.Time, leads map[string]int) (rates.PurgeTotals, error) {
 	totals, err := rates.Purge(ctx, conn, today, leads)
 	if err != nil {
@@ -182,8 +190,9 @@ type ConsensusReport struct {
 	Dates  int
 }
 
-// ScanConsensus is the consensus task: for each date in [from, to] with rates, it blends that date's rows to EUR and
-// counts the outliers per provider and quote. A zero from or to means the first or last stored date (all history).
+// ScanConsensus is the consensus task: for each date in [from, to] with rates,
+// it blends that date's rows to EUR and counts the outliers per provider and
+// quote. A zero from or to means the first or last stored date (all history).
 // Results are logged as the task does and returned.
 func ScanConsensus(ctx context.Context, q db.Querier, from, to, today time.Time) (ConsensusReport, error) {
 	var report ConsensusReport
@@ -236,7 +245,8 @@ func ScanConsensus(ctx context.Context, q db.Querier, from, to, today time.Time)
 	return report, nil
 }
 
-// ScanRecentConsensus is the consensus:recent task: ScanConsensus over the last 365 days.
+// ScanRecentConsensus is the consensus:recent task: ScanConsensus over the last
+// 365 days.
 func ScanRecentConsensus(ctx context.Context, q db.Querier, today time.Time) (ConsensusReport, error) {
 	return ScanConsensus(ctx, q, today.AddDate(0, 0, -365), today, today)
 }

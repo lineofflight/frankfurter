@@ -1,8 +1,10 @@
-// Package boi fetches rates from the Bank of Israel, which publishes daily representative exchange rates for 14
-// currencies against the Israeli new shekel through its SDMX API. It supports date range queries and full historical
-// backfill.
+// Package boi fetches rates from the Bank of Israel, which publishes daily
+// representative exchange rates for 14 currencies against the Israeli new
+// shekel through its SDMX API. It supports date range queries and full
+// historical backfill.
 //
-// Like the Ruby adapter, Fetch passes the range to the API and returns every row it gets back without clipping.
+// Like the Ruby adapter, Fetch passes the range to the API and returns every
+// row it gets back without clipping.
 package boi
 
 import (
@@ -75,7 +77,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			col[name] = i
 		}
 	}
-	// field returns "" for a missing column or an empty cell, both nil in Ruby's CSV.
+	// field returns "" for a missing column or an empty cell, both nil in
+	// Ruby's CSV.
 	field := func(rec []string, name string) string {
 		i, ok := col[name]
 		if !ok || i >= len(rec) {

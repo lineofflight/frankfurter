@@ -1,10 +1,14 @@
-// Package ratequery is the v2 rate query (lib/versions/v2/rate_query.rb and lib/rate_coverage.rb): it validates a
-// request's parameters and yields the records of a latest, single-date, daily-range or grouped-range response, from the
-// materialized blends where they can answer and from a live blend of the stored rates where they cannot.
+// Package ratequery is the v2 rate query (lib/versions/v2/rate_query.rb and
+// lib/rate_coverage.rb): it validates a request's parameters and yields the
+// records of a latest, single-date, daily-range or grouped-range response, from
+// the materialized blends where they can answer and from a live blend of the
+// stored rates where they cannot.
 //
-// Every shape blends through the pivot currency (USD) and derives the requested base from it, so a range and a single
-// date agree about the same data. quotes= filters rows after blending, never the rows blended. A single provider
-// skips the pivot: its rows are rebased through its own base, and its native pairs echo its published digits.
+// Every shape blends through the pivot currency (USD) and derives the requested
+// base from it, so a range and a single date agree about the same data. quotes=
+// filters rows after blending, never the rows blended. A single provider skips
+// the pivot: its rows are rebased through its own base, and its native pairs
+// echo its published digits.
 package ratequery
 
 import (
@@ -35,16 +39,18 @@ const (
 	DefaultChunkMonths = 3
 	LatestFutureDays   = 1
 
-	// Residual cap for daily-range shapes the materialized blend cannot serve (providers= reads raw rows,
-	// expand=providers needs contributor metadata, and plain ranges fall back to live compute until the table is
-	// ready): those recompute the blend per date, and past 5 years unfiltered the compute outlives the request timeout
-	// and Cloudflare's origin ceiling.
+	// Residual cap for daily-range shapes the materialized blend cannot serve
+	// (providers= reads raw rows, expand=providers needs contributor metadata,
+	// and plain ranges fall back to live compute until the table is ready):
+	// those recompute the blend per date, and past 5 years unfiltered the
+	// compute outlives the request timeout and Cloudflare's origin ceiling.
 	MaxDailyRangeYears     = 5
 	MaxDailyRangeQuotes    = 5
 	MaxDailyRangeProviders = 5
 )
 
-// AllowedParams are the parameters a rate query takes; CoverageParams those /coverage takes.
+// AllowedParams are the parameters a rate query takes; CoverageParams those
+// /coverage takes.
 var (
 	AllowedParams     = []string{"base", "quotes", "providers", "date", "from", "to", "group", "expand"}
 	AllowedExpansions = []string{"providers"}
@@ -53,25 +59,29 @@ var (
 	chunkMonths = map[string]int{"week": 21, "month": 84}
 )
 
-// Params are a request's parameters as Rack parses the query string: a string, nil for a key given without a value
-// (which reads as absent), or a nested array or hash (which a query rejects as Ruby fails on it: an internal error).
+// Params are a request's parameters as Rack parses the query string: a string,
+// nil for a key given without a value (which reads as absent), or a nested
+// array or hash (which a query rejects as Ruby fails on it: an internal error).
 type Params map[string]any
 
-// ValidationError is RateQuery::ValidationError: the request is invalid (HTTP 422).
+// ValidationError is RateQuery::ValidationError: the request is invalid (HTTP
+// 422).
 type ValidationError struct{ Message string }
 
 func (e *ValidationError) Error() string { return e.Message }
 
 func invalid(format string, args ...any) error { return &ValidationError{fmt.Sprintf(format, args...)} }
 
-// DeadlineError is RequestTimeout::Error raised where the compute happens: the request outlived its deadline (503).
+// DeadlineError is RequestTimeout::Error raised where the compute happens: the
+// request outlived its deadline (503).
 type DeadlineError struct{ Timeout time.Duration }
 
 func (e *DeadlineError) Error() string {
 	return fmt.Sprintf("request exceeded %ds timeout", int(e.Timeout/time.Second))
 }
 
-// BusyError is HeavySlots::Busy: every heavy compute slot is held (503 with Retry-After).
+// BusyError is HeavySlots::Busy: every heavy compute slot is held (503 with
+// Retry-After).
 type BusyError struct{}
 
 func (BusyError) Error() string {
@@ -80,13 +90,15 @@ func (BusyError) Error() string {
 
 func (BusyError) Unwrap() error { return heavyslots.ErrBusy }
 
-// errParam is what Ruby raises on a parameter it cannot treat as a string: NoMethodError on a nested value,
-// ArgumentError on invalid UTF-8. Either is an internal error.
+// errParam is what Ruby raises on a parameter it cannot treat as a string:
+// NoMethodError on a nested value, ArgumentError on invalid UTF-8. Either is an
+// internal error.
 type errParam struct{ key, reason string }
 
 func (e *errParam) Error() string { return "parameter " + e.key + ": " + e.reason }
 
-// DefaultSlots is the process-wide cap every query draws on unless Options names another.
+// DefaultSlots is the process-wide cap every query draws on unless Options
+// names another.
 var DefaultSlots = heavyslots.New(heavyslots.DefaultMax)
 
 // Options are what a query takes from its surroundings.
@@ -119,7 +131,8 @@ type Query struct {
 	dateStr, fromStr, toStr string
 	hasDate, hasFrom, hasTo bool
 
-	// ForceLive makes every shape compute live (the parity harness compares it with the tables).
+	// ForceLive makes every shape compute live (the parity harness compares it
+	// with the tables).
 	ForceLive bool
 	// Coverage counts grouped chunks by how they were served.
 	Coverage RollupCoverage
@@ -142,8 +155,9 @@ var (
 	}
 )
 
-// New validates params and returns the query. Validation runs in Ruby's order, so the first failure reported is the
-// same: unknown parameters, dates, conflicting dates, group, expand, currencies, then the daily range cost.
+// New validates params and returns the query. Validation runs in Ruby's order,
+// so the first failure reported is the same: unknown parameters, dates,
+// conflicting dates, group, expand, currencies, then the daily range cost.
 func New(ctx context.Context, q db.Querier, params Params, opts Options) (*Query, error) {
 	if opts.Today.IsZero() {
 		opts.Today = rates.Today()
@@ -219,7 +233,8 @@ func (q *Query) parse(ctx context.Context, params Params) error {
 		}
 	}
 
-	// validate_currencies! reads base, then quotes; providers only when a code is not a known currency.
+	// validate_currencies! reads base, then quotes; providers only when a code
+	// is not a known currency.
 	base, ok, err := str(params, "base")
 	if err != nil {
 		return err
@@ -269,8 +284,8 @@ func (q *Query) parse(ctx context.Context, params Params) error {
 	return q.validateRangeCost(ctx)
 }
 
-// str reads a parameter as Ruby's string methods would: absent or nil is not given; anything but a valid UTF-8 string
-// fails.
+// str reads a parameter as Ruby's string methods would: absent or nil is not
+// given; anything but a valid UTF-8 string fails.
 func str(params Params, key string) (string, bool, error) {
 	v, ok := params[key]
 	if !ok || v == nil {
@@ -286,7 +301,8 @@ func str(params Params, key string) (string, bool, error) {
 	return s, true, nil
 }
 
-// rubySplit is Ruby's String#split(","): trailing empty fields are dropped, so "" gives an empty (non-nil) list.
+// rubySplit is Ruby's String#split(","): trailing empty fields are dropped, so
+// "" gives an empty (non-nil) list.
 func rubySplit(s string) []string {
 	parts := strings.Split(s, ",")
 	for len(parts) > 0 && parts[len(parts)-1] == "" {
@@ -297,8 +313,9 @@ func rubySplit(s string) []string {
 
 var dateRe = regexp.MustCompile(`^[0-9]{4}-[0-9]{2}-[0-9]{2}$`)
 
-// ParseDate is RateQuery#parse_date: YYYY-MM-DD naming a real day. Like Ruby's Date, days before the Gregorian
-// reform (1582-10-15) follow the Julian calendar, and the ten days the reform skipped do not exist.
+// ParseDate is RateQuery#parse_date: YYYY-MM-DD naming a real day. Like Ruby's
+// Date, days before the Gregorian reform (1582-10-15) follow the Julian
+// calendar, and the ten days the reform skipped do not exist.
 func ParseDate(s string) (time.Time, bool) {
 	if !dateRe.MatchString(s) {
 		return time.Time{}, false
@@ -330,8 +347,9 @@ func uniqCount(values []string) int {
 // single reports whether exactly one distinct provider is named.
 func (q *Query) single() bool { return q.providers != nil && uniqCount(q.providers) == 1 }
 
-// storedByProvider is the second half of available_currency?: with one provider named, a code it has stored counts
-// even when the Money gem does not know it (index labels, withdrawn codes).
+// storedByProvider is the second half of available_currency?: with one provider
+// named, a code it has stored counts even when the Money gem does not know it
+// (index labels, withdrawn codes).
 func (q *Query) storedByProvider(ctx context.Context, code string) (bool, error) {
 	if !q.single() {
 		return false, nil
@@ -358,21 +376,24 @@ func (q *Query) validateRangeCost(ctx context.Context) error {
 			return nil
 		}
 	}
-	// One provider is a fetch plus a one-contributor blend per date, not a cross-provider recompute: measured in
-	// prod at 7s for five years of the largest provider (BDI, 173 quotes), so full history stays inside the request
-	// deadline (#644).
+	// One provider is a fetch plus a one-contributor blend per date, not a
+	// cross-provider recompute: measured in prod at 7s for five years of the
+	// largest provider (BDI, 173 quotes), so full history stays inside the
+	// request deadline (#644).
 	if q.single() {
 		return nil
 	}
-	// A short provider list bounds the fetch, so a small quotes list on top stays cheap; naming every provider
-	// reproduces the unbounded workload, hence the provider-count bound. quotes= filters rows only, after blending,
-	// so neither a provider-unbounded expand=providers range nor a plain range on the not-ready live fallback gets a
-	// quotes exemption.
+	// A short provider list bounds the fetch, so a small quotes list on top
+	// stays cheap; naming every provider reproduces the unbounded workload,
+	// hence the provider-count bound. quotes= filters rows only, after
+	// blending, so neither a provider-unbounded expand=providers range nor a
+	// plain range on the not-ready live fallback gets a quotes exemption.
 	if q.providers != nil && q.quotes != nil && uniqCount(q.providers) <= MaxDailyRangeProviders &&
 		uniqCount(q.quotes) <= MaxDailyRangeQuotes {
 		return nil
 	}
-	// Cost follows computable days, so a `to` in the future counts only up to today.
+	// Cost follows computable days, so a `to` in the future counts only up to
+	// today.
 	start, end := q.rangeBounds()
 	if end.After(q.today) {
 		end = q.today
@@ -385,11 +406,13 @@ func (q *Query) validateRangeCost(ctx context.Context) error {
 		MaxDailyRangeYears, MaxDailyRangeQuotes)
 }
 
-// Range reports whether the query spans dates (from= given) rather than a single snapshot.
+// Range reports whether the query spans dates (from= given) rather than a
+// single snapshot.
 func (q *Query) Range() bool { return q.hasFrom && !q.hasDate }
 
-// DateRelative reports whether the date scope anchors on the service clock (latest or an open-ended range), so the
-// response changes at UTC midnight even if no new data arrives.
+// DateRelative reports whether the date scope anchors on the service clock
+// (latest or an open-ended range), so the response changes at UTC midnight even
+// if no new data arrives.
 func (q *Query) DateRelative() bool { return !q.hasDate && !(q.hasFrom && q.hasTo) }
 
 // ExpandProviders reports whether expand=providers asked for contributor lists.
@@ -406,7 +429,8 @@ func (q *Query) Providers() []string { return q.providers }
 
 func (q *Query) rollup() bool { return q.Range() && (q.group == "week" || q.group == "month") }
 
-// rangeBounds is the range date scope: from through to, or today when to is not given.
+// rangeBounds is the range date scope: from through to, or today when to is not
+// given.
 func (q *Query) rangeBounds() (time.Time, time.Time) {
 	end := q.today
 	if q.hasTo {
@@ -415,8 +439,8 @@ func (q *Query) rangeBounds() (time.Time, time.Time) {
 	return q.from, end
 }
 
-// snapshotDate is the single date scope: the given date, or tomorrow for latest (a provider's next-day publication
-// belongs in the latest snapshot).
+// snapshotDate is the single date scope: the given date, or tomorrow for latest
+// (a provider's next-day publication belongs in the latest snapshot).
 func (q *Query) snapshotDate() time.Time {
 	if q.hasDate {
 		return q.date
@@ -424,8 +448,9 @@ func (q *Query) snapshotDate() time.Time {
 	return q.today.AddDate(0, 0, LatestFutureDays)
 }
 
-// CSVFilename names CSV downloads after the query so repeat exports don't pile up as rates (1).csv. Stripped to a
-// safe set because providers= is not checked against known keys and lands in a response header.
+// CSVFilename names CSV downloads after the query so repeat exports don't pile
+// up as rates (1).csv. Stripped to a safe set because providers= is not checked
+// against known keys and lands in a response header.
 func (q *Query) CSVFilename() string {
 	var parts []string
 	if q.providers != nil && uniqCount(q.providers) == 1 {
@@ -460,8 +485,9 @@ func (q *Query) CSVFilename() string {
 	}, name)
 }
 
-// CacheKey is the ETag value: the newest stored date in scope and the expansions. The raw rates decide it, so a
-// rollup's content changing within a day leaves it stable.
+// CacheKey is the ETag value: the newest stored date in scope and the
+// expansions. The raw rates decide it, so a rollup's content changing within a
+// day leaves it stable.
 func (q *Query) CacheKey(ctx context.Context) (string, error) {
 	scope, err := q.rawScope(ctx, rates.Daily)
 	if err != nil {
@@ -496,7 +522,8 @@ func dateBetween(col string, start, end time.Time) string {
 	return col + " >= " + db.LitDate(start) + " AND " + col + " <= " + db.LitDate(end)
 }
 
-// load reads what the query needs from the providers table: the non-blending keys and the carry-forward window.
+// load reads what the query needs from the providers table: the non-blending
+// keys and the carry-forward window.
 func (q *Query) load(ctx context.Context) error {
 	if q.loaded {
 		return nil
@@ -531,8 +558,9 @@ func (q *Query) lookbackDays(ctx context.Context) (int, error) {
 	return q.lookback, nil
 }
 
-// rawScope is apply_filters on table t: the blendable rows, or with providers= just theirs (named currencies only
-// when several are named, since one provider's own labels are its view).
+// rawScope is apply_filters on table t: the blendable rows, or with providers=
+// just theirs (named currencies only when several are named, since one
+// provider's own labels are its view).
 func (q *Query) rawScope(ctx context.Context, t rates.Table) (rates.Query, error) {
 	if err := q.load(ctx); err != nil {
 		return rates.Query{}, err
@@ -547,10 +575,11 @@ func (q *Query) rawScope(ctx context.Context, t rates.Table) (rates.Query, error
 	return scope, nil
 }
 
-// blendedTable reports whether the materialized daily blend answers: plain shapes only, once it covers full history.
-// providers= needs raw rows and expand=providers needs contributor metadata the table does not store; until the
-// table is ready a deploy before blend:rebuild (or an incremental refresh landing first) stays correct on the live
-// path.
+// blendedTable reports whether the materialized daily blend answers: plain
+// shapes only, once it covers full history. providers= needs raw rows and
+// expand=providers needs contributor metadata the table does not store; until
+// the table is ready a deploy before blend:rebuild (or an incremental refresh
+// landing first) stays correct on the live path.
 func (q *Query) blendedTable(ctx context.Context) (bool, error) {
 	if q.ForceLive || q.providers != nil || q.ExpandProviders() {
 		return false, nil
@@ -558,8 +587,8 @@ func (q *Query) blendedTable(ctx context.Context) (bool, error) {
 	return dailyReady(ctx, q.db)
 }
 
-// checkDeadline enforces the request deadline where the compute happens, so a doomed or abandoned range stops at the
-// deadline server-side (#569).
+// checkDeadline enforces the request deadline where the compute happens, so a
+// doomed or abandoned range stops at the deadline server-side (#569).
 func (q *Query) checkDeadline() error {
 	if q.checkHook != nil {
 		q.checkHook()
@@ -582,8 +611,9 @@ func (q *Query) acquireSlot() error {
 	return nil
 }
 
-// ReleaseSlot returns the heavy slot the query holds, if any. It is idempotent: the heavy range returns it however
-// its enumeration ends, and a handler may return it again when a client goes away mid-stream.
+// ReleaseSlot returns the heavy slot the query holds, if any. It is idempotent:
+// the heavy range returns it however its enumeration ends, and a handler may
+// return it again when a client goes away mid-stream.
 func (q *Query) ReleaseSlot() {
 	slots := q.held
 	q.held = nil
@@ -592,7 +622,8 @@ func (q *Query) ReleaseSlot() {
 	}
 }
 
-// addMonths is Ruby's Date#>>: the same day n months on, clamped to the end of a shorter month.
+// addMonths is Ruby's Date#>>: the same day n months on, clamped to the end of
+// a shorter month.
 func addMonths(d time.Time, n int) time.Time {
 	y, m, day := d.Date()
 	first := time.Date(y, m+time.Month(n), 1, 0, 0, 0, 0, time.UTC)

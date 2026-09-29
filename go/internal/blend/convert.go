@@ -4,8 +4,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Convert is BaseConversion#convert: each provider's rows rebased to base, bridging only through that provider's own
-// rows. Rows a provider cannot bridge are dropped. Providers come out in order of first appearance.
+// Convert is BaseConversion#convert: each provider's rows rebased to base,
+// bridging only through that provider's own rows. Rows a provider cannot bridge
+// are dropped. Providers come out in order of first appearance.
 func Convert(rows []rates.Row, base string) []rates.Row {
 	var providers []string
 	groups := map[string][]rates.Row{}
@@ -62,10 +63,12 @@ type dateQuote struct {
 	quote string
 }
 
-// reconcile collapses rows a provider reached by more than one bridge into one averaged rate per date and quote. A
-// provider can reach the same quote two ways during a pivot-currency transition (Banque du Liban quoting against both
-// LTL and EUR around Lithuania's 2015 euro adoption); a failed query is never the right answer to that, and consensus
-// guards against genuine outliers downstream.
+// reconcile collapses rows a provider reached by more than one bridge into one
+// averaged rate per date and quote. A provider can reach the same quote two
+// ways during a pivot-currency transition (Banque du Liban quoting against both
+// LTL and EUR around Lithuania's 2015 euro adoption); a failed query is never
+// the right answer to that, and consensus guards against genuine outliers
+// downstream.
 func reconcile(rows []rates.Row) []rates.Row {
 	var keys []dateQuote
 	groups := map[dateQuote][]rates.Row{}

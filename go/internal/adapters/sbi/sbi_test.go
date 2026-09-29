@@ -93,8 +93,8 @@ func TestParseGroup7Currencies(t *testing.T) {
 	}
 }
 
-// TestParseSkips covers "skips entries with missing values", "skips entries with zero rates" and "skips unknown
-// TimeSeries IDs".
+// TestParseSkips covers "skips entries with missing values", "skips entries
+// with zero rates" and "skips unknown TimeSeries IDs".
 func TestParseSkips(t *testing.T) {
 	for name, xml := range map[string]string{
 		"missing values": `<?xml version="1.0" encoding="utf-8"?>

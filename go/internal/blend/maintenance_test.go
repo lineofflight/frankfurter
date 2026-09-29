@@ -1,8 +1,9 @@
 package blend
 
-// Ports spec/blended_rollup_maintenance_spec.rb and spec/grouped_rollup_lock_spec.rb. The rake tasks are
-// RebuildAll (blend:rebuild), RebuildProviderRollups (rollups:rebuild) and PurgeInvalid (db:purge_invalid); purging
-// the cache is their caller's job.
+// Ports spec/blended_rollup_maintenance_spec.rb and
+// spec/grouped_rollup_lock_spec.rb. The rake tasks are RebuildAll
+// (blend:rebuild), RebuildProviderRollups (rollups:rebuild) and PurgeInvalid
+// (db:purge_invalid); purging the cache is their caller's job.
 
 import (
 	"database/sql"
@@ -29,8 +30,8 @@ func refreshProvider(t *testing.T, q db.Querier, provider string, dates ...time.
 	}
 }
 
-// purgeAt is RateValidation.purge with the future-date horizon at horizon, for every provider (the fixture providers
-// declare no lead).
+// purgeAt is RateValidation.purge with the future-date horizon at horizon, for
+// every provider (the fixture providers declare no lead).
 func purgeAt(t *testing.T, conn *sql.DB, horizon time.Time) (rates.PurgeTotals, error) {
 	t.Helper()
 	return rates.Purge(ctx, conn, horizon.AddDate(0, 0, -rates.MaxFutureDrift), map[string]int{})
@@ -132,7 +133,8 @@ func TestRebuildProviderRollupsReleasesSourceTransactionFirst(t *testing.T) {
 			return nil
 		}
 		calls++
-		// Another connection sees only committed data: the rebuilt source rollups must already be there.
+		// Another connection sees only committed data: the rebuilt source
+		// rollups must already be there.
 		c, err := conn.Conn(ctx)
 		if err != nil {
 			return err
@@ -247,7 +249,8 @@ func TestPurgeInvalidRepairsGroupedBucketsWhenDailyRebuildFails(t *testing.T) {
 	if err == nil {
 		t.Fatal("no error")
 	}
-	// Non-zero totals alongside the error tell the caller to purge the cache anyway.
+	// Non-zero totals alongside the error tell the caller to purge the cache
+	// anyway.
 	if totals.Total() == 0 {
 		t.Error("totals lost")
 	}
@@ -403,8 +406,9 @@ func TestPurgeRollsBackWhenBucketRepairFails(t *testing.T) {
 	}
 }
 
-// grouped_rollup_lock_spec.rb: the source read runs under the writer lock, so a second connection's write is excluded
-// until the source transaction commits; the refill runs after it has, so the same write then succeeds.
+// grouped_rollup_lock_spec.rb: the source read runs under the writer lock, so a
+// second connection's write is excluded until the source transaction commits;
+// the refill runs after it has, so the same write then succeeds.
 func TestRebuildProviderRollupsExcludesConcurrentWrites(t *testing.T) {
 	t.Setenv("SQLITE_BUSY_TIMEOUT", "100")
 	conn := fixtures.New(t)

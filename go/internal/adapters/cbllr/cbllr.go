@@ -1,15 +1,17 @@
-// Package cbllr fetches rates from the Central Bank of Liberia (CBL), which publishes a daily indicative US dollar
-// rate against the Liberian dollar (LRD) on a Drupal-rendered HTML page.
+// Package cbllr fetches rates from the Central Bank of Liberia (CBL), which
+// publishes a daily indicative US dollar rate against the Liberian dollar (LRD)
+// on a Drupal-rendered HTML page.
 //
-// The bare acronym "CBL" already collides with the Central Bank of Libya (#394, declined), so the key adds the
-// country code: CBLLR.
+// The bare acronym "CBL" already collides with the Central Bank of Libya (#394,
+// declined), so the key adds the country code: CBLLR.
 //
-// The page lists ~14 entries newest-first, with a 0-indexed ?page=N pager reaching back to 2012-07-05 (~105 pages).
-// Fetch walks pages newest-first and stops once it sees a row on or before after, so incremental fetches usually
+// The page lists ~14 entries newest-first, with a 0-indexed ?page=N pager
+// reaching back to 2012-07-05 (~105 pages). Fetch walks pages newest-first and
+// stops once it sees a row on or before after, so incremental fetches usually
 // touch one page.
 //
-// CBL publishes buy and sell prices ("L$X/US$1.00"); we coerce to the mid (issue #314). Rates keep CBL's direction:
-// USD base, LRD quote.
+// CBL publishes buy and sell prices ("L$X/US$1.00"); we coerce to the mid
+// (issue #314). Rates keep CBL's direction: USD base, LRD quote.
 package cbllr
 
 import (
@@ -31,7 +33,8 @@ import (
 
 const baseURL = "https://www.cbl.org.lr/research/buying-selling-rates"
 
-// maxPages is a hard ceiling against runaway pagination if the markup changes; the archive is ~105 pages today.
+// maxPages is a hard ceiling against runaway pagination if the markup changes;
+// the archive is ~105 pages today.
 const maxPages = 500
 
 var ratePattern = regexp.MustCompile(`L\$\s*([\d.]+)\s*/\s*US\$`)
@@ -50,7 +53,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// Fetch implements adapter.Adapter. A zero upto means today. Rows come back oldest first.
+// Fetch implements adapter.Adapter. A zero upto means today. Rows come back
+// oldest first.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -159,8 +163,9 @@ func parse(html []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseDate takes the calendar date as written at the start of the timestamp (2026-05-21T12:00:00Z), as Ruby's
-// Date.parse does. Ruby raises on an unparseable date, so this is an error rather than a skip.
+// parseDate takes the calendar date as written at the start of the timestamp
+// (2026-05-21T12:00:00Z), as Ruby's Date.parse does. Ruby raises on an
+// unparseable date, so this is an error rather than a skip.
 func parseDate(s string) (time.Time, error) {
 	s = strings.TrimSpace(s)
 	if len(s) >= 10 {

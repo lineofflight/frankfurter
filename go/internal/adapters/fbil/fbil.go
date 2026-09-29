@@ -1,9 +1,11 @@
-// Package fbil fetches rates from Financial Benchmarks India, which publishes daily reference rates for major
-// currencies against the Indian rupee through a public JSON API.
+// Package fbil fetches rates from Financial Benchmarks India, which publishes
+// daily reference rates for major currencies against the Indian rupee through a
+// public JSON API.
 //
-// Rates are INR per N units of foreign currency, where N comes from the subProdName field ("INR / 100 JPY" means per
-// 100). History starts 2018-07-10. Like the Ruby adapter, Fetch passes the window to the API and does not clip the
-// response, so rows dated on after itself come back too.
+// Rates are INR per N units of foreign currency, where N comes from the
+// subProdName field ("INR / 100 JPY" means per 100). History starts 2018-07-10.
+// Like the Ruby adapter, Fetch passes the window to the API and does not clip
+// the response, so rows dated on after itself come back too.
 package fbil
 
 import (

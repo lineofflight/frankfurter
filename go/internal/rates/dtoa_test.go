@@ -2,9 +2,10 @@ package rates
 
 import "testing"
 
-// Expected values come from Ruby: Float(format("%.<n>f" or "%.<n>g", v)). The first four are near ties the old
-// shortest-decimal rule got wrong; an 800,000-value sweep of API-style products, noisy ties and random doubles matched
-// Ruby exactly.
+// Expected values come from Ruby: Float(format("%.<n>f" or "%.<n>g", v)). The
+// first four are near ties the old shortest-decimal rule got wrong; an
+// 800,000-value sweep of API-style products, noisy ties and random doubles
+// matched Ruby exactly.
 func TestFormatRoundNearTies(t *testing.T) {
 	cases := []struct {
 		v    float64

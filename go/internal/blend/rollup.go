@@ -12,9 +12,11 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Rollup is a materialized grouped blend (BlendedRollup): the blend of a provider rollup table's rows per bucket, not
-// an average of daily blends. Every bucket keeps its full input set and unrounded pivot values. Empty blends stay
-// empty: reads fall back for those buckets rather than manufacturing an identity row or choosing an older bucket.
+// Rollup is a materialized grouped blend (BlendedRollup): the blend of a
+// provider rollup table's rows per bucket, not an average of daily blends.
+// Every bucket keeps its full input set and unrounded pivot values. Empty
+// blends stay empty: reads fall back for those buckets rather than
+// manufacturing an identity row or choosing an older bucket.
 type Rollup struct {
 	Table  string      // blended_weekly_rates or blended_monthly_rates
 	Source rates.Table // the provider rollup it blends
@@ -28,12 +30,15 @@ var (
 	Rollups = []Rollup{Weekly, Monthly}
 )
 
-// BatchBuckets bounds how many buckets one refresh transaction (or savepoint) loads.
+// BatchBuckets bounds how many buckets one refresh transaction (or savepoint)
+// loads.
 const BatchBuckets = 100
 
-// Refresh recomputes the stored blends of buckets (stored date text) and returns how many rows it wrote. Callers
-// include whole-history adapter batches, so buckets load in bounded batches; inside an ingestion transaction each
-// batch joins it, so every source insert and grouped replacement still rolls back together on failure.
+// Refresh recomputes the stored blends of buckets (stored date text) and
+// returns how many rows it wrote. Callers include whole-history adapter
+// batches, so buckets load in bounded batches; inside an ingestion transaction
+// each batch joins it, so every source insert and grouped replacement still
+// rolls back together on failure.
 func (r Rollup) Refresh(ctx context.Context, q db.Querier, buckets []string, today time.Time) (int, error) {
 	buckets = uniq(buckets)
 	total := 0
@@ -89,7 +94,8 @@ func (r Rollup) refreshBatch(ctx context.Context, q db.Querier, buckets []string
 	return written, err
 }
 
-// Rebuild recomputes every bucket, newest first, then drops stored buckets whose source rows are gone.
+// Rebuild recomputes every bucket, newest first, then drops stored buckets
+// whose source rows are gone.
 func (r Rollup) Rebuild(ctx context.Context, q db.Querier, today time.Time) error {
 	scope, err := blendable(ctx, q, r.Source)
 	if err != nil {
@@ -118,9 +124,10 @@ func (r Rollup) missing(scope rates.Query) rates.Query {
 	return scope.Filter("NOT (bucket_date IN (SELECT bucket_date FROM " + r.Table + "))")
 }
 
-// Populate fills incomplete builds without rewriting covered history, and returns how many rows it wrote. Buckets
-// with a legitimately empty pivot blend stay missing forever and are retried each time; they write nothing, so a
-// zero return means nothing changed and no cache purge is needed.
+// Populate fills incomplete builds without rewriting covered history, and
+// returns how many rows it wrote. Buckets with a legitimately empty pivot blend
+// stay missing forever and are retried each time; they write nothing, so a zero
+// return means nothing changed and no cache purge is needed.
 func (r Rollup) Populate(ctx context.Context, q db.Querier, today time.Time) (int, error) {
 	scope, err := blendable(ctx, q, r.Source)
 	if err != nil {
@@ -148,11 +155,13 @@ func (r Rollup) Ready(ctx context.Context, q db.Querier) (bool, error) {
 	return false, err
 }
 
-// Read returns the stored blends (in the pivot base, ordered by bucket and quote) for the source buckets Between
-// selects over [start, end]. Source buckets decide snap-back, including buckets that produce no pivot blend. ok is
-// false when any of them has no stored row, so the caller falls back to live computation; a partial build still
-// serves complete ranges. Coverage and values come from one read snapshot, so concurrent ingestion or a rebuild never
-// mixes old coverage with new rows.
+// Read returns the stored blends (in the pivot base, ordered by bucket and
+// quote) for the source buckets Between selects over [start, end]. Source
+// buckets decide snap-back, including buckets that produce no pivot blend. ok
+// is false when any of them has no stored row, so the caller falls back to live
+// computation; a partial build still serves complete ranges. Coverage and
+// values come from one read snapshot, so concurrent ingestion or a rebuild
+// never mixes old coverage with new rows.
 func (r Rollup) Read(ctx context.Context, q db.Querier, start, end, today time.Time) (rows []currency.Blended, ok bool, err error) {
 	if conn, isDB := q.(*sql.DB); isDB {
 		tx, err := conn.BeginTx(ctx, nil)

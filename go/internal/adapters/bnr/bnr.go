@@ -1,8 +1,9 @@
-// Package bnr fetches rates from the National Bank of Romania, which publishes daily reference rates for about 35
-// currencies against the Romanian leu (RON).
+// Package bnr fetches rates from the National Bank of Romania, which publishes
+// daily reference rates for about 35 currencies against the Romanian leu (RON).
 //
-// Yearly XML archives back to 2005 are kept current within the year. The 10-day feed is a redundant window over the
-// same data, so we always use the yearly archive. The feeds live on curs.bnr.ro; the paths under www redirect to the
+// Yearly XML archives back to 2005 are kept current within the year. The 10-day
+// feed is a redundant window over the same data, so we always use the yearly
+// archive. The feeds live on curs.bnr.ro; the paths under www redirect to the
 // homepage since the August 2026 site relaunch.
 package bnr
 

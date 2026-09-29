@@ -1,7 +1,9 @@
-// Package cnb fetches rates from the Czech National Bank, which publishes daily exchange rates for about 30
-// currencies against the Czech koruna (CZK) through a REST JSON API.
+// Package cnb fetches rates from the Czech National Bank, which publishes daily
+// exchange rates for about 30 currencies against the Czech koruna (CZK) through
+// a REST JSON API.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does (Date#between?).
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does (Date#between?).
 package cnb
 
 import (
@@ -35,8 +37,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// Fetch implements adapter.Adapter. It requests one year at a time and keeps rows dated after through upto, both
-// inclusive.
+// Fetch implements adapter.Adapter. It requests one year at a time and keeps
+// rows dated after through upto, both inclusive.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")
@@ -79,7 +81,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		return nil, errors.New("no rates array in daily-year response")
 	}
 
-	// The API 200s with {"rates":[]} for a year before its first fixing (e.g. New Year's Day).
+	// The API 200s with {"rates":[]} for a year before its first fixing (e.g.
+	// New Year's Day).
 	var rates []adapter.Rate
 	for _, r := range *resp.Rates {
 		if !codePattern.MatchString(r.CurrencyCode) || r.Rate == 0 || r.Amount == 0 {

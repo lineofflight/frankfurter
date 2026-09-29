@@ -53,7 +53,8 @@ func TestFetchNumericRatesGreaterThanZero(t *testing.T) {
 	}
 }
 
-// Ruby looks each base up with Money::Currency.find; no Go currency catalogue exists yet, so check the ISO shape.
+// Ruby looks each base up with Money::Currency.find; no Go currency catalogue
+// exists yet, so check the ISO shape.
 func TestFetchISOCurrencyCodes(t *testing.T) {
 	iso := regexp.MustCompile(`^[A-Z]{3}$`)
 	for _, r := range fetch(t) {
@@ -157,7 +158,8 @@ func TestParseSkipsUYUSelfReference(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: Ox gives an empty element nil text, so Ruby skips the row instead of failing on Float("").
+// Not in the Ruby spec: Ox gives an empty element nil text, so Ruby skips the
+// row instead of failing on Float("").
 func TestParseSkipsBlankFields(t *testing.T) {
 	rates := mustParse(t, soap(
 		datoXML("2225", "DLS. USA BILLETE", "", "39.5"),

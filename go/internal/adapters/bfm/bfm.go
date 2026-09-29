@@ -1,8 +1,9 @@
-// Package bfm fetches rates from Banky Foiben'i Madagasikara, which publishes daily reference rates in ariary per
-// foreign unit.
+// Package bfm fetches rates from Banky Foiben'i Madagasikara, which publishes
+// daily reference rates in ariary per foreign unit.
 //
-// MID means the interbank FX market; coursMid is the reference, while coursMidMin/Max are daily extremes, not bid/ask
-// prices. Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// MID means the interbank FX market; coursMid is the reference, while
+// coursMidMin/Max are daily extremes, not bid/ask prices. Unlike most adapters,
+// Fetch treats after as inclusive, as the Ruby adapter does.
 package bfm
 
 import (
@@ -42,7 +43,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. The source is queried per currency in windows of at most a year.
+// Fetch implements adapter.Adapter. The source is queried per currency in
+// windows of at most a year.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	start, end := after, upto
 	if start.IsZero() {
@@ -118,7 +120,8 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	if err := json.Unmarshal(data, &p); err != nil {
 		return nil, fmt.Errorf("%w: %v", invalid, err)
 	}
-	// Only a JSON number counts: Ruby compares with the integer 200, so a quoted "200" fails.
+	// Only a JSON number counts: Ruby compares with the integer 200, so a
+	// quoted "200" fails.
 	if status, ok := p.Data.Status.(float64); !ok || status != 200 {
 		return nil, invalid
 	}
@@ -166,8 +169,9 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 
 var cleaner = strings.NewReplacer(" ", "", "\u00a0", "", "\u202f", "", ",", ".")
 
-// parseRate mirrors BigDecimal(value.to_s.delete(" \u00a0\u202f").tr(",", "."), exception: false) followed by the
-// finite and positive checks. A null, boolean or nested value never parses.
+// parseRate mirrors BigDecimal(value.to_s.delete(" \u00a0\u202f").tr(",", "."),
+// exception: false) followed by the finite and positive checks. A null, boolean
+// or nested value never parses.
 func parseRate(value any) (float64, bool) {
 	var s string
 	switch v := value.(type) {

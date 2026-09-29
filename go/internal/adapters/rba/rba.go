@@ -1,7 +1,8 @@
-// Package rba fetches rates from the Reserve Bank of Australia's F11.1 table, a CSV of daily AUD exchange rates and
-// the trade-weighted index.
+// Package rba fetches rates from the Reserve Bank of Australia's F11.1 table, a
+// CSV of daily AUD exchange rates and the trade-weighted index.
 //
-// As in Ruby, after is inclusive and upto is ignored: the CSV holds the whole current series.
+// As in Ruby, after is inclusive and upto is ignored: the CSV holds the whole
+// current series.
 package rba
 
 import (
@@ -82,7 +83,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		return nil, errors.New("series ID header row not found in F11.1 CSV")
 	}
 
-	// The trade-weighted index has "Index" as its unit, so its series ID stands in for a code.
+	// The trade-weighted index has "Index" as its unit, so its series ID stands
+	// in for a code.
 	codes := make([]string, len(units)-1)
 	for i, unit := range units[1:] {
 		code := unit
@@ -137,7 +139,8 @@ func findLine(lines []string, prefix string) ([]string, error) {
 	return nil, nil
 }
 
-// parseLine is CSV.parse_line: one record, nil for a blank line, and an error for a malformed one.
+// parseLine is CSV.parse_line: one record, nil for a blank line, and an error
+// for a malformed one.
 func parseLine(line string) ([]string, error) {
 	r := csv.NewReader(strings.NewReader(line))
 	r.FieldsPerRecord = -1

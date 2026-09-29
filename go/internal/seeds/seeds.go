@@ -1,8 +1,9 @@
-// Package seeds embeds the config-as-data JSON of db/seeds: provider metadata, currency pegs, defunct and nascent
-// currencies, and the Money gem patches.
+// Package seeds embeds the config-as-data JSON of db/seeds: provider metadata,
+// currency pegs, defunct and nascent currencies, and the Money gem patches.
 //
-// data/ is a copy of the repository's db/seeds (go:embed cannot reach outside the module). Refresh it with
-// `go generate ./internal/seeds` after editing db/seeds; TestDataMatchesRepository fails while the copies differ.
+// data/ is a copy of the repository's db/seeds (go:embed cannot reach outside
+// the module). Refresh it with `go generate ./internal/seeds` after editing
+// db/seeds; TestDataMatchesRepository fails while the copies differ.
 package seeds
 
 //go:generate sh -c "rm -rf data && cp -R ../../../db/seeds data"
@@ -31,8 +32,9 @@ func init() {
 	FS = sub
 }
 
-// Provider is one db/seeds/providers/*.json file. Empty strings stand for keys the file leaves out (stored as NULL);
-// Frequency defaults to "daily", as the providers table does.
+// Provider is one db/seeds/providers/*.json file. Empty strings stand for keys
+// the file leaves out (stored as NULL); Frequency defaults to "daily", as the
+// providers table does.
 type Provider struct {
 	Key             string `json:"key"`
 	Name            string `json:"name"`
@@ -165,8 +167,8 @@ func NascentCurrencies() ([]Nascent, error) {
 	return out, nil
 }
 
-// CurrencyPatch is one entry of currency_patches.json. Nil fields are absent from the entry, so merging keeps the Money
-// gem's value.
+// CurrencyPatch is one entry of currency_patches.json. Nil fields are absent
+// from the entry, so merging keeps the Money gem's value.
 type CurrencyPatch struct {
 	ISOCode       string  `json:"iso_code"`
 	Name          *string `json:"name"`
@@ -193,7 +195,8 @@ func decode(name string, v any) error {
 	return nil
 }
 
-// each calls fn with every *.json file in dir, sorted by name, as Ruby's Dir[] returns them.
+// each calls fn with every *.json file in dir, sorted by name, as Ruby's Dir[]
+// returns them.
 func each(dir string, fn func(name string, b []byte) error) error {
 	names, err := fs.Glob(FS, path.Join(dir, "*.json"))
 	if err != nil {

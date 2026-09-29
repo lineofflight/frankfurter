@@ -9,8 +9,9 @@ import (
 	"time"
 )
 
-// spec/request_timeout_spec.rb. TimedBody's chunks are the handler's writes. A deadline already in the past stands in
-// for Ruby's seconds: 0, which relies on the clock having moved by the time the body is read.
+// spec/request_timeout_spec.rb. TimedBody's chunks are the handler's writes. A
+// deadline already in the past stands in for Ruby's seconds: 0, which relies on
+// the clock having moved by the time the body is read.
 
 func serveTimed(t *testing.T, timeout time.Duration, h http.HandlerFunc) *httptest.ResponseRecorder {
 	t.Helper()
@@ -49,8 +50,10 @@ func TestTimedBodyRaisesWhenDeadlinePassed(t *testing.T) {
 	}
 }
 
-// Ruby's TimedBody#close delegates to the wrapped body so a raise mid-stream releases it. In Go the handler owns its
-// resources; what the wrapper must do mid-stream is abort the response, which net/http turns into a closed connection.
+// Ruby's TimedBody#close delegates to the wrapped body so a raise mid-stream
+// releases it. In Go the handler owns its resources; what the wrapper must do
+// mid-stream is abort the response, which net/http turns into a closed
+// connection.
 func TestTimedBodyAbortsMidStream(t *testing.T) {
 	now := time.Now()
 	tw := &timedWriter{ResponseWriter: httptest.NewRecorder(), deadline: now.Add(time.Second), timeout: time.Second,

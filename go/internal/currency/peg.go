@@ -39,8 +39,9 @@ type Contribution struct {
 	Excluded bool
 }
 
-// Blended is one blended rate: Quote units per one Base on Date. Providers is nil for a row no provider contributed
-// to (Ruby's row without a :providers key), such as a peg-synthesised one.
+// Blended is one blended rate: Quote units per one Base on Date. Providers is
+// nil for a row no provider contributed to (Ruby's row without a :providers
+// key), such as a peg-synthesised one.
 type Blended struct {
 	Date      time.Time
 	Base      string
@@ -49,10 +50,12 @@ type Blended struct {
 	Providers []Contribution
 }
 
-// AnchorPegs is PegAnchor.apply: peg-aware post-processing of blended rates that share one base.
+// AnchorPegs is PegAnchor.apply: peg-aware post-processing of blended rates
+// that share one base.
 //
-// Pegs are a source of rate data alongside providers, so callers apply this only when the source set is unrestricted
-// (no providers filter). Two interactions:
+// Pegs are a source of rate data alongside providers, so callers apply this
+// only when the source set is unrestricted (no providers filter). Two
+// interactions:
 //
 //  1. A blended quote may be pegged. From the peg's start its rate becomes the peg value, directly when base is the
 //     peg's base, or through the peg's base as a bridge. Its providers stay listed, all marked excluded: the peg, not

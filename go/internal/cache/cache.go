@@ -1,5 +1,5 @@
-// Package cache purges the CDN cache after data imports. Only Cloudflare is supported, and every call is a no-op when
-// its credentials are not configured.
+// Package cache purges the CDN cache after data imports. Only Cloudflare is
+// supported, and every call is a no-op when its credentials are not configured.
 package cache
 
 import (
@@ -17,8 +17,9 @@ import (
 // Endpoint is Cloudflare's API root.
 const Endpoint = "https://api.cloudflare.com/client/v4"
 
-// DefaultWindow is CACHE_PURGE_DEBOUNCE_SECONDS, or 300 seconds. It parses like Ruby's Integer() and panics at startup
-// on an invalid value, as Integer() raises on load.
+// DefaultWindow is CACHE_PURGE_DEBOUNCE_SECONDS, or 300 seconds. It parses like
+// Ruby's Integer() and panics at startup on an invalid value, as Integer()
+// raises on load.
 var DefaultWindow = defaultWindow()
 
 func defaultWindow() time.Duration {
@@ -33,8 +34,8 @@ func defaultWindow() time.Duration {
 	return time.Duration(n) * time.Second
 }
 
-// Cache purges one Cloudflare zone and debounces purges across the process. Share one Cache per process: the debounce
-// state lives on it.
+// Cache purges one Cloudflare zone and debounces purges across the process.
+// Share one Cache per process: the debounce state lives on it.
 type Cache struct {
 	ZoneID   string
 	APIToken string
@@ -51,12 +52,14 @@ type Cache struct {
 	lastPurge time.Time // when the last purge attempt started; zero before the first
 }
 
-// New returns a cache for the given zone and token. Empty values leave it unconfigured.
+// New returns a cache for the given zone and token. Empty values leave it
+// unconfigured.
 func New(zoneID, apiToken string) *Cache {
 	return &Cache{ZoneID: zoneID, APIToken: apiToken}
 }
 
-// FromEnv returns a cache configured from CLOUDFLARE_ZONE_ID and CLOUDFLARE_API_TOKEN.
+// FromEnv returns a cache configured from CLOUDFLARE_ZONE_ID and
+// CLOUDFLARE_API_TOKEN.
 func FromEnv() *Cache {
 	return New(os.Getenv("CLOUDFLARE_ZONE_ID"), os.Getenv("CLOUDFLARE_API_TOKEN"))
 }
@@ -64,8 +67,9 @@ func FromEnv() *Cache {
 // Configured reports whether both credentials are set.
 func (c *Cache) Configured() bool { return c.ZoneID != "" && c.APIToken != "" }
 
-// Purge empties the whole zone. It does nothing when unconfigured and returns an error on any non-2xx response, so a
-// rejected purge counts as a failure and stays pending for retry.
+// Purge empties the whole zone. It does nothing when unconfigured and returns
+// an error on any non-2xx response, so a rejected purge counts as a failure and
+// stays pending for retry.
 func (c *Cache) Purge(ctx context.Context) error {
 	if !c.Configured() {
 		return nil
@@ -97,10 +101,11 @@ func (c *Cache) Purge(ctx context.Context) error {
 	return nil
 }
 
-// PurgeDebounced is the leading edge of the purge debounce (#568): with ~50 providers publishing daily, a purge per
-// provider insert dumps the whole CDN cache many times a day, and a deploy's startup backfill fires a burst of purges
-// within minutes. The first insert of a quiet window purges immediately; later inserts coalesce into a pending purge
-// for PurgePending to flush.
+// PurgeDebounced is the leading edge of the purge debounce (#568): with ~50
+// providers publishing daily, a purge per provider insert dumps the whole CDN
+// cache many times a day, and a deploy's startup backfill fires a burst of
+// purges within minutes. The first insert of a quiet window purges immediately;
+// later inserts coalesce into a pending purge for PurgePending to flush.
 func (c *Cache) PurgeDebounced(ctx context.Context) error {
 	c.mu.Lock()
 	fire := !c.windowOpen()
@@ -116,13 +121,15 @@ func (c *Cache) PurgeDebounced(ctx context.Context) error {
 	return c.attempt(ctx)
 }
 
-// PurgePending is the trailing edge: it flushes the coalesced purge once the window has expired, so the last insert
-// of a backfill wave always becomes visible. The scheduler calls it every minute; it is safe at any cadence. A failed
-// purge is marked pending again, so a later call retries it.
+// PurgePending is the trailing edge: it flushes the coalesced purge once the
+// window has expired, so the last insert of a backfill wave always becomes
+// visible. The scheduler calls it every minute; it is safe at any cadence. A
+// failed purge is marked pending again, so a later call retries it.
 func (c *Cache) PurgePending(ctx context.Context) error { return c.flush(ctx, false) }
 
-// FlushPending flushes a pending purge regardless of the window (Ruby's purge_pending(ignore_window: true)): for the
-// end of a backfill run, when the wave is over and the process is about to exit.
+// FlushPending flushes a pending purge regardless of the window (Ruby's
+// purge_pending(ignore_window: true)): for the end of a backfill run, when the
+// wave is over and the process is about to exit.
 func (c *Cache) FlushPending(ctx context.Context) error { return c.flush(ctx, true) }
 
 func (c *Cache) flush(ctx context.Context, ignoreWindow bool) error {
@@ -138,8 +145,9 @@ func (c *Cache) flush(ctx context.Context, ignoreWindow bool) error {
 	return c.attempt(ctx)
 }
 
-// openWindow starts the window when a purge attempt starts, not when it completes, so callers arriving while the HTTP
-// call is in flight coalesce into pending instead of firing concurrently. Callers hold mu.
+// openWindow starts the window when a purge attempt starts, not when it
+// completes, so callers arriving while the HTTP call is in flight coalesce into
+// pending instead of firing concurrently. Callers hold mu.
 func (c *Cache) openWindow() {
 	c.pending = false
 	c.lastPurge = c.clock()

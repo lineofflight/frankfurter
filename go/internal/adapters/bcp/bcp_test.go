@@ -38,7 +38,8 @@ type cell struct {
 	value      string
 }
 
-// buildYearHTML mirrors the real BCP table: a 31-day x 12-month matrix, cells outside the list default to ND.
+// buildYearHTML mirrors the real BCP table: a 31-day x 12-month matrix, cells
+// outside the list default to ND.
 func buildYearHTML(currency string, year int, cells []cell) string {
 	var rows strings.Builder
 	for day := 1; day <= 31; day++ {

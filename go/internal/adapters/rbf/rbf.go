@@ -1,12 +1,15 @@
-// Package rbf fetches rates from the Reserve Bank of Fiji, which publishes the daily mid-rate series "8.8 Exchange
-// Rates Daily" as a single rolling XLSX covering 2001-01-02 to present. Eight quote currencies: SDR, STG (GBP), YEN
+// Package rbf fetches rates from the Reserve Bank of Fiji, which publishes the
+// daily mid-rate series "8.8 Exchange Rates Daily" as a single rolling XLSX
+// covering 2001-01-02 to present. Eight quote currencies: SDR, STG (GBP), YEN
 // (JPY), CHF, EURO (EUR), A$ (AUD), NZ$ (NZD), US$ (USD).
 //
-// The XLSX URL embeds the publication year/month under /wp-content/uploads/YYYY/MM/, so the adapter scrapes the
-// statistics hub for the current link rather than hardcoding a path.
+// The XLSX URL embeds the publication year/month under
+// /wp-content/uploads/YYYY/MM/, so the adapter scrapes the statistics hub for
+// the current link rather than hardcoding a path.
 //
-// The header reads "RBF Mid-Rate Per Fiji Dollar", so each row records "1 FJD = X foreign": rows have FJD as base and
-// the foreign currency as quote. SDR is relabelled to XDR.
+// The header reads "RBF Mid-Rate Per Fiji Dollar", so each row records "1 FJD =
+// X foreign": rows have FJD as base and the foreign currency as quote. SDR is
+// relabelled to XDR.
 //
 // As in Ruby, after is inclusive here: rows dated on after are kept.
 package rbf
@@ -59,8 +62,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. The full series ships as a single workbook refreshed daily, so a large
-// range keeps the fetch in one download.
+// BackfillRange implements adapter.Adapter. The full series ships as a single
+// workbook refreshed daily, so a large range keeps the fetch in one download.
 func (a *Adapter) BackfillRange() int { return 36525 }
 
 // Fetch implements adapter.Adapter.
@@ -145,7 +148,8 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// excelSerial reads a day serial as Ruby's Integer(text) || Float(text)&.to_i does.
+// excelSerial reads a day serial as Ruby's Integer(text) || Float(text)&.to_i
+// does.
 func excelSerial(text string) (int, bool) {
 	if n, err := strconv.Atoi(strings.TrimSpace(text)); err == nil {
 		return n, true
@@ -157,7 +161,8 @@ func excelSerial(text string) (int, bool) {
 	return int(math.Trunc(f)), true
 }
 
-// columnMap resolves the header row's labels to ISO codes, keyed by column index.
+// columnMap resolves the header row's labels to ISO codes, keyed by column
+// index.
 func columnMap(r []string) map[int]string {
 	m := map[int]string{}
 	for i, label := range r {

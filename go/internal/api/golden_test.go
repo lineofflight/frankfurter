@@ -23,10 +23,12 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/dbtest"
 )
 
-// The API golden check: go/scripts/api_golden.rb replays testdata/corpus.txt through the Ruby app and records the
-// database it ran on and every response. TestGoldenAPI loads the same tables into a fresh database, replays each
-// request through the Go handler with the same today, and compares status, the headers in goldenHeaders and the body
-// (JSON semantically: key order ignored, numbers within 1e-9 relative). See docs/core-api_v1.md.
+// The API golden check: go/scripts/api_golden.rb replays testdata/corpus.txt
+// through the Ruby app and records the database it ran on and every response.
+// TestGoldenAPI loads the same tables into a fresh database, replays each
+// request through the Go handler with the same today, and compares status, the
+// headers in goldenHeaders and the body (JSON semantically: key order ignored,
+// numbers within 1e-9 relative). See docs/core-api_v1.md.
 
 const goldenFile = "testdata/golden/api.json.gz"
 
@@ -55,7 +57,8 @@ type goldenAPI struct {
 	Responses []goldenResponse       `json:"responses"`
 }
 
-// goldenHeaders are compared by value, and by absence when Ruby sent none. Content-Type is skipped on empty bodies.
+// goldenHeaders are compared by value, and by absence when Ruby sent none.
+// Content-Type is skipped on empty bodies.
 var relativeCacheRe = regexp.MustCompile(`^public, max-age=\d+, stale-if-error=86400$`)
 
 var goldenHeaders = []string{
@@ -82,7 +85,8 @@ func loadGoldenAPI(t *testing.T) goldenAPI {
 	return g
 }
 
-// loadGoldenTables writes every recorded table into conn, replacing what the schema seeded.
+// loadGoldenTables writes every recorded table into conn, replacing what the
+// schema seeded.
 func loadGoldenTables(t *testing.T, conn *sql.DB, tables map[string]goldenTable) {
 	t.Helper()
 	ctx := context.Background()
@@ -142,7 +146,8 @@ func TestGoldenAPI(t *testing.T) {
 	}
 }
 
-// The golden file must answer the corpus as it stands: a request added without regenerating would go unchecked.
+// The golden file must answer the corpus as it stands: a request added without
+// regenerating would go unchecked.
 func TestGoldenCoversCorpus(t *testing.T) {
 	data, err := os.ReadFile("testdata/corpus.txt")
 	if err != nil {
@@ -184,7 +189,8 @@ func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecord
 			continue
 		}
 		got := strings.Join(gv, ", ")
-		// A date-relative v2 response lives until the next UTC midnight, counted from when it was served.
+		// A date-relative v2 response lives until the next UTC midnight,
+		// counted from when it was served.
 		if name == "cache-control" && relativeCacheRe.MatchString(rb) && relativeCacheRe.MatchString(got) {
 			continue
 		}
@@ -193,7 +199,8 @@ func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecord
 		}
 	}
 
-	// Go's server drops HEAD bodies itself; the recorder keeps them, and Roda leaves that to Puma.
+	// Go's server drops HEAD bodies itself; the recorder keeps them, and Roda
+	// leaves that to Puma.
 	if want.Method == http.MethodHead {
 		return
 	}
@@ -249,8 +256,9 @@ func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecord
 	}
 }
 
-// diffJSON lists the differences between Ruby's value (want) and Go's (got): object keys in any order, arrays in
-// order, numbers within 1e-9 relative. On error responses the message text may differ; it only has to be a string.
+// diffJSON lists the differences between Ruby's value (want) and Go's (got):
+// object keys in any order, arrays in order, numbers within 1e-9 relative. On
+// error responses the message text may differ; it only has to be a string.
 func diffJSON(path string, want, got any, errorBody bool) []string {
 	switch w := want.(type) {
 	case map[string]any:

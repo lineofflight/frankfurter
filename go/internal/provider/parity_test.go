@@ -8,8 +8,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// testdata/publishes_missed.json holds Ruby's Provider#publishes_missed for every seeded schedule and cadence over a
-// grid of end dates and reference offsets, recorded under UTC by go/scripts/publishes_missed.rb.
+// testdata/publishes_missed.json holds Ruby's Provider#publishes_missed for
+// every seeded schedule and cadence over a grid of end dates and reference
+// offsets, recorded under UTC by go/scripts/publishes_missed.rb.
 func TestPublishesMissedMatchesRuby(t *testing.T) {
 	b, err := os.ReadFile("testdata/publishes_missed.json")
 	if err != nil {

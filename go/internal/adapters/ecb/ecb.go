@@ -1,7 +1,8 @@
-// Package ecb fetches the European Central Bank's daily euro reference rates for about 30 currencies from its SDMX
-// data API.
+// Package ecb fetches the European Central Bank's daily euro reference rates
+// for about 30 currencies from its SDMX data API.
 //
-// The API filters by date itself: startPeriod is inclusive, so a row dated after is kept, as in Ruby.
+// The API filters by date itself: startPeriod is inclusive, so a row dated
+// after is kept, as in Ruby.
 package ecb
 
 import (

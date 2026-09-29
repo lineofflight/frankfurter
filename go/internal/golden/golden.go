@@ -1,5 +1,6 @@
-// Package golden checks a Go adapter against rows the Ruby adapter produced for the same cassette, as recorded by
-// go/scripts/golden.rb. See PORTING.md for the command that writes a golden file; never edit one by hand.
+// Package golden checks a Go adapter against rows the Ruby adapter produced for
+// the same cassette, as recorded by go/scripts/golden.rb. See PORTING.md for
+// the command that writes a golden file; never edit one by hand.
 package golden
 
 import (
@@ -20,7 +21,8 @@ import (
 // Tolerance is the relative difference allowed between a Ruby and a Go rate.
 const Tolerance = 1e-9
 
-// numeric are the fields compared within Tolerance; every other field must be equal.
+// numeric are the fields compared within Tolerance; every other field must be
+// equal.
 var numeric = map[string]bool{"rate": true, "bid": true, "ask": true, "mid": true}
 
 // File is one golden recording.
@@ -69,8 +71,8 @@ func (f File) Client(t testing.TB) *http.Client {
 	return vcrtest.Client(t, f.Cassette, opts...)
 }
 
-// Now returns a clock pinned to the file's --today, or nil when the Ruby run used the real date. Assign it to the
-// adapter's Base.Now.
+// Now returns a clock pinned to the file's --today, or nil when the Ruby run
+// used the real date. Assign it to the adapter's Base.Now.
 func (f File) Now(t testing.TB) func() time.Time {
 	t.Helper()
 	if f.Today == "" {
@@ -83,8 +85,8 @@ func (f File) Now(t testing.TB) func() time.Time {
 	return func() time.Time { return today.Add(12 * time.Hour) }
 }
 
-// Check fails the test unless got holds the same rows as the file: equal on every non-rate field, rates within
-// Tolerance, in any order.
+// Check fails the test unless got holds the same rows as the file: equal on
+// every non-rate field, rates within Tolerance, in any order.
 func (f File) Check(t testing.TB, got []adapter.Rate) {
 	t.Helper()
 	gotRows := make([]map[string]any, len(got))
@@ -112,7 +114,8 @@ func Row(r adapter.Rate) map[string]any {
 	return row
 }
 
-// Diff describes how got differs from want, or returns "" when they match. Rows pair up by their non-rate fields.
+// Diff describes how got differs from want, or returns "" when they match. Rows
+// pair up by their non-rate fields.
 func Diff(want, got []map[string]any) string {
 	wantBy, gotBy := group(want), group(got)
 	var keys []string
@@ -158,7 +161,8 @@ func Diff(want, got []map[string]any) string {
 	return fmt.Sprintf("want %d rows, got %d; %d problems:\n%s", len(want), len(got), problems, b.String())
 }
 
-// group buckets rows by their non-numeric fields, each bucket sorted by rate so duplicates pair up stably.
+// group buckets rows by their non-numeric fields, each bucket sorted by rate so
+// duplicates pair up stably.
 func group(rows []map[string]any) map[string][]map[string]any {
 	by := map[string][]map[string]any{}
 	for _, row := range rows {

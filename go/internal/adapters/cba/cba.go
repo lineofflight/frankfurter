@@ -1,8 +1,10 @@
-// Package cba fetches rates from the Central Bank of Armenia, which publishes daily rates for about 30 currencies
-// against the Armenian dram (AMD) through a SOAP service.
+// Package cba fetches rates from the Central Bank of Armenia, which publishes
+// daily rates for about 30 currencies against the Armenian dram (AMD) through a
+// SOAP service.
 //
-// The adapter asks for the latest rates to learn the current currency codes, then requests the range in chunks of up
-// to a year. Unlike most adapters, after is inclusive: the first chunk starts on it, as in the Ruby adapter.
+// The adapter asks for the latest rates to learn the current currency codes,
+// then requests the range in chunks of up to a year. Unlike most adapters,
+// after is inclusive: the first chunk starts on it, as in the Ruby adapter.
 package cba
 
 import (
@@ -110,7 +112,8 @@ func (a *Adapter) request(ctx context.Context, action, payload string) ([]byte, 
 	return resp.Body, nil
 }
 
-// parseCodes joins the ISO codes of the latest rates with commas, or returns "" when the response has no result.
+// parseCodes joins the ISO codes of the latest rates with commas, or returns ""
+// when the response has no result.
 func parseCodes(data []byte) (string, error) {
 	var doc struct {
 		Result *struct {

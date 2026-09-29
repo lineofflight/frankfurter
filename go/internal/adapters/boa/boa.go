@@ -1,16 +1,21 @@
-// Package boa fetches rates from the Bank of Algeria, which publishes a daily reference rate (cours moyen) against
-// DZD for 17 foreign currencies.
+// Package boa fetches rates from the Bank of Algeria, which publishes a daily
+// reference rate (cours moyen) against DZD for 17 foreign currencies.
 //
-// The full series is a single consolidated XLSX with one sheet per currency, refreshed roughly once a month, so rates
-// typically lag by up to about 3 weeks. The XLSX URL embeds the publication year and month under /stoodroa/YYYY/MM/,
-// so the adapter scrapes the donnees-historiques hub for the current link rather than hardcoding a path. The site
-// omits its DigiCert intermediate; see config/ca_bundles.
+// The full series is a single consolidated XLSX with one sheet per currency,
+// refreshed roughly once a month, so rates typically lag by up to about 3
+// weeks. The XLSX URL embeds the publication year and month under
+// /stoodroa/YYYY/MM/, so the adapter scrapes the donnees-historiques hub for
+// the current link rather than hardcoding a path. The site omits its DigiCert
+// intermediate; see config/ca_bundles.
 //
-// Each sheet is named "<CCY> - DZD" ("EURO" in place of "EUR") with Excel serial dates in column A and "1 CCY = X
-// DZD" rates in column B. Rows keep BoA's direction: foreign currency as base, DZD as quote. JPY is published per 100
-// and normalised here. MRO is the legacy Mauritanian ouguiya, kept as published.
+// Each sheet is named "<CCY> - DZD" ("EURO" in place of "EUR") with Excel
+// serial dates in column A and "1 CCY = X DZD" rates in column B. Rows keep
+// BoA's direction: foreign currency as base, DZD as quote. JPY is published per
+// 100 and normalised here. MRO is the legacy Mauritanian ouguiya, kept as
+// published.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package boa
 
 import (
@@ -55,8 +60,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter: each refresh of the consolidated XLSX rebuilds the whole series, so one
-// fetch covers it.
+// BackfillRange implements adapter.Adapter: each refresh of the consolidated
+// XLSX rebuilds the whole series, so one fetch covers it.
 func (a *Adapter) BackfillRange() int { return 36_525 }
 
 // Fetch implements adapter.Adapter.
@@ -106,7 +111,8 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 			if !ok {
 				continue
 			}
-			// Ruby ignores string cells, so a numeric-looking header does not count.
+			// Ruby ignores string cells, so a numeric-looking header does not
+			// count.
 			if isString(f, sheet, "A", i+1) || isString(f, sheet, "B", i+1) {
 				continue
 			}
@@ -132,7 +138,8 @@ func sheetCurrency(name string) (string, bool) {
 	return code, isoCode.MatchString(code)
 }
 
-// parseRow reads a raw-valued row: Excel serial date in column A, rate in column B.
+// parseRow reads a raw-valued row: Excel serial date in column A, rate in
+// column B.
 func parseRow(cols []string, base string, after, upto time.Time) (adapter.Rate, bool) {
 	if len(cols) < 2 || cols[0] == "" || cols[1] == "" {
 		return adapter.Rate{}, false
@@ -162,7 +169,8 @@ func parseRow(cols []string, base string, after, upto time.Time) (adapter.Rate, 
 	return adapter.Rate{Date: date, Base: base, Quote: "DZD", Rate: rate}, true
 }
 
-// parseSerial mirrors Integer(text, exception: false) || Float(text, exception: false)&.to_i.
+// parseSerial mirrors Integer(text, exception: false) || Float(text, exception:
+// false)&.to_i.
 func parseSerial(s string) (int, bool) {
 	if n, err := strconv.Atoi(strings.TrimSpace(s)); err == nil {
 		return n, true

@@ -114,7 +114,8 @@ func TestParseCoercesBuySellToMid(t *testing.T) {
 	}
 }
 
-// The pair that surfaced #579: (181.5264 + 181.76) / 2.0 => 181.64319999999998 in binary floats.
+// The pair that surfaced #579: (181.5264 + 181.76) / 2.0 => 181.64319999999998
+// in binary floats.
 func TestParseComputesMidExactly(t *testing.T) {
 	rates := mustParse(t, `<div class="view-content">
   <table>
@@ -219,7 +220,8 @@ func row(date, buy, sell string) string {
 		`<td class="views-field-field-selling-us">L$` + sell + `/US$1.00</td></tr>`
 }
 
-// Pages walk newest first until one reaches back to after; a date repeated across pages keeps the newer page's row.
+// Pages walk newest first until one reaches back to after; a date repeated
+// across pages keeps the newer page's row.
 func TestFetchPaginatesAndDedupes(t *testing.T) {
 	srv := &pageServer{pages: map[string]string{
 		"":  table(row("2026-05-21", "182", "184"), row("2026-05-20", "181", "183")),

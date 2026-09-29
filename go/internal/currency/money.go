@@ -1,8 +1,9 @@
-// Package currency holds the currency reference data: the Money gem's currency table with Frankfurter's patches,
-// defunct and nascent currencies, pegs and peg anchoring, and the currencies catalogue backed by the database.
+// Package currency holds the currency reference data: the Money gem's currency
+// table with Frankfurter's patches, defunct and nascent currencies, pegs and
+// peg anchoring, and the currencies catalogue backed by the database.
 //
-// It ports lib/currency_patches.rb, lib/defunct_currency.rb, lib/nascent_currency.rb, lib/peg.rb,
-// lib/peg_anchor.rb and lib/currency.rb.
+// It ports lib/currency_patches.rb, lib/defunct_currency.rb,
+// lib/nascent_currency.rb, lib/peg.rb, lib/peg_anchor.rb and lib/currency.rb.
 package currency
 
 import (
@@ -24,7 +25,8 @@ type Info struct {
 	SubunitToUnit int
 }
 
-// money.json is the Money gem's table before patches, dumped by go/scripts/dump_money.rb.
+// money.json is the Money gem's table before patches, dumped by
+// go/scripts/dump_money.rb.
 //
 //go:embed money.json
 var moneyJSON []byte
@@ -55,8 +57,8 @@ var table = sync.OnceValue(func() map[string]Info {
 	return t
 })
 
-// applyPatch mirrors currency_patches.rb: merge the patch over an existing entry (keeping what it leaves out), or
-// register it fresh.
+// applyPatch mirrors currency_patches.rb: merge the patch over an existing
+// entry (keeping what it leaves out), or register it fresh.
 func applyPatch(t map[string]Info, p seeds.CurrencyPatch) {
 	id := strings.ToUpper(p.ISOCode)
 	info := t[id]
@@ -76,7 +78,8 @@ func applyPatch(t map[string]Info, p seeds.CurrencyPatch) {
 	t[id] = info
 }
 
-// Find is Money::Currency.find: the entry for code, case-insensitively, including aliases.
+// Find is Money::Currency.find: the entry for code, case-insensitively,
+// including aliases.
 func Find(code string) (Info, bool) {
 	info, ok := table()[strings.ToUpper(code)]
 	return info, ok
@@ -98,5 +101,6 @@ var codes = sync.OnceValue(func() []string {
 	return out
 })
 
-// Codes returns every code the Money gem can name, aliases included, sorted. Callers must not modify it.
+// Codes returns every code the Money gem can name, aliases included, sorted.
+// Callers must not modify it.
 func Codes() []string { return codes() }

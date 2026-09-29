@@ -1,13 +1,17 @@
-// Package cbar fetches rates from the Central Bank of the Republic of Azerbaijan, which publishes a daily bulletin of
-// official rates for about 40 currencies and four precious metals against AZN, one XML file per calendar date at
-// https://www.cbar.az/currencies/DD.MM.YYYY.xml. The archive starts at the 26.11.1993 file, which carries the bulletin
-// of 1993-11-25; earlier URLs redirect.
+// Package cbar fetches rates from the Central Bank of the Republic of
+// Azerbaijan, which publishes a daily bulletin of official rates for about 40
+// currencies and four precious metals against AZN, one XML file per calendar
+// date at https://www.cbar.az/currencies/DD.MM.YYYY.xml. The archive starts at
+// the 26.11.1993 file, which carries the bulletin of 1993-11-25; earlier URLs
+// redirect.
 //
-// The file for a date carries the latest bulletin effective on or before it, stamped with its own Date attribute, so
-// weekend and holiday files repeat the previous bulletin. Rows are deduplicated on that attribute, not on the requested
-// date.
+// The file for a date carries the latest bulletin effective on or before it,
+// stamped with its own Date attribute, so weekend and holiday files repeat the
+// previous bulletin. Rows are deduplicated on that attribute, not on the
+// requested date.
 //
-// As in Ruby, Fetch walks every date from after through upto, both inclusive, and does not clip rows to the window.
+// As in Ruby, Fetch walks every date from after through upto, both inclusive,
+// and does not clip rows to the window.
 package cbar
 
 import (
@@ -26,10 +30,11 @@ import (
 
 const baseURL = "https://www.cbar.az/currencies/"
 
-// CBAR labels every row in the archive with the currency's current ISO code, including bulletins from before a
-// redenomination, without restating the values: the 2005-12-30 file quotes 1 USD = 4593 "AZN", old manat. Each entry
-// maps the current code to its predecessor and the first date the successor applies, so a row keeps the code of the
-// currency it actually prices.
+// CBAR labels every row in the archive with the currency's current ISO code,
+// including bulletins from before a redenomination, without restating the
+// values: the 2005-12-30 file quotes 1 USD = 4593 "AZN", old manat. Each entry
+// maps the current code to its predecessor and the first date the successor
+// applies, so a row keeps the code of the currency it actually prices.
 var predecessors = map[string]adapter.Predecessor{
 	"AZN": {Code: "AZM", Cutover: adapter.Date(2006, 1, 1)},
 	"BYN": {Code: "BYR", Cutover: adapter.Date(2016, 7, 1)},
@@ -38,8 +43,9 @@ var predecessors = map[string]adapter.Predecessor{
 	"TRY": {Code: "TRL", Cutover: adapter.Date(2005, 1, 1)},
 }
 
-// Old Turkish lira rows carry Nominal 1 but price 1000 TRL: the last 2004 bulletin quotes 3.61 and the first 2005
-// bulletin, after the 1,000,000:1 redenomination, 3635.15. NBKR publishes the same series per 1000.
+// Old Turkish lira rows carry Nominal 1 but price 1000 TRL: the last 2004
+// bulletin quotes 3.61 and the first 2005 bulletin, after the 1,000,000:1
+// redenomination, 3635.15. NBKR publishes the same series per 1000.
 var nominalOverrides = map[string]int{"TRL": 1000}
 
 // Labels CBAR uses that aren't ISO 4217 codes.
@@ -67,7 +73,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter: one request per day.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. Like Ruby, which cannot iterate a range from nil, it needs a start date.
+// Fetch implements adapter.Adapter. Like Ruby, which cannot iterate a range
+// from nil, it needs a start date.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")
@@ -136,7 +143,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			code = alias
 		}
 		base := adapter.HistoricalCode(predecessors, code, date)
-		// Metals are quoted per troy ounce ("1 t.u."); currencies per 1, 100 or 1000 units.
+		// Metals are quoted per troy ounce ("1 t.u."); currencies per 1, 100 or
+		// 1000 units.
 		nominal, _ := strconv.Atoi(digits.FindString(strings.TrimSpace(v.Nominal)))
 		if override, ok := nominalOverrides[base]; ok {
 			nominal *= override

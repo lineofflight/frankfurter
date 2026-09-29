@@ -13,7 +13,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/ratequery"
 )
 
-// rateQuery is what the rate routes need of a query; tests substitute their own.
+// rateQuery is what the rate routes need of a query; tests substitute their
+// own.
 type rateQuery interface {
 	Range() bool
 	DateRelative() bool
@@ -31,10 +32,12 @@ var newRateQuery = func(ctx context.Context, conn *sql.DB, params ratequery.Para
 // v2Now is the clock date-relative cache lifetimes count from.
 var v2Now = time.Now
 
-// cacheControlFor caps a date-relative query's lifetime at the next UTC midnight and drops stale-while-revalidate:
-// such responses anchor on today, so they go stale at the rollover even when no new data arrives (and no purge fires),
-// as when forward-dated provider rates enter scope (#541). The first request after midnight revalidates instead of
-// being served yesterday's snapshot.
+// cacheControlFor caps a date-relative query's lifetime at the next UTC
+// midnight and drops stale-while-revalidate: such responses anchor on today, so
+// they go stale at the rollover even when no new data arrives (and no purge
+// fires), as when forward-dated provider rates enter scope (#541). The first
+// request after midnight revalidates instead of being served yesterday's
+// snapshot.
 func cacheControlFor(q rateQuery) string {
 	if !q.DateRelative() {
 		return v2CacheControl
@@ -68,7 +71,8 @@ func (c *v2Request) rates(params ratequery.Params) {
 
 	if c.requestedType() == "csv" {
 		c.w.Header().Set("Content-Type", contentTypeCSV)
-		// Browsers ignore <a download> on cross-origin links, so the header is what makes a linked CSV download.
+		// Browsers ignore <a download> on cross-origin links, so the header is
+		// what makes a linked CSV download.
 		c.w.Header().Set("Content-Disposition", `attachment; filename="`+q.CSVFilename()+`"`)
 		headers := csvHeaders(q)
 		line := func(r ratequery.Record) ([]byte, error) { return csvRecord(headers, r), nil }
@@ -122,10 +126,11 @@ func collect(ctx context.Context, q rateQuery) ([]ratequery.Record, error) {
 	return out, err
 }
 
-// stream writes the query's records as they come: open, the records separated by sep, then close. Nothing is sent
-// before the first record, so a failure computing it (a validation-style data error, an expired deadline) is an
-// ordinary error response with its own headers, not a truncated 200. A failure after it aborts the connection, as Puma
-// does when a streamed body raises.
+// stream writes the query's records as they come: open, the records separated
+// by sep, then close. Nothing is sent before the first record, so a failure
+// computing it (a validation-style data error, an expired deadline) is an
+// ordinary error response with its own headers, not a truncated 200. A failure
+// after it aborts the connection, as Puma does when a streamed body raises.
 func (c *v2Request) stream(q rateQuery, contentType, open, sep, close string, line func(ratequery.Record) ([]byte, error)) {
 	var out *bufio.Writer
 	begin := func() {
@@ -199,8 +204,9 @@ func csvHeaders(q rateQuery) []string {
 	return headers
 }
 
-// csvRecord is a record's CSV line. Numbers print as Ruby prints them (1.0, 1.2e-05, 12345); providers as
-// KEY:RATE separated by pipes, with a trailing * on excluded ones.
+// csvRecord is a record's CSV line. Numbers print as Ruby prints them (1.0,
+// 1.2e-05, 12345); providers as KEY:RATE separated by pipes, with a trailing *
+// on excluded ones.
 func csvRecord(headers []string, r ratequery.Record) []byte {
 	fields := make([]*string, len(headers))
 	for i, h := range headers {
@@ -240,8 +246,9 @@ func csvLine(values []string) string {
 	return csvFields(fields)
 }
 
-// csvFields is Ruby's CSV.generate_line: a field is quoted when it holds a comma, a quote or a line break, or is an
-// empty string (nil stays an empty, unquoted field).
+// csvFields is Ruby's CSV.generate_line: a field is quoted when it holds a
+// comma, a quote or a line break, or is an empty string (nil stays an empty,
+// unquoted field).
 func csvFields(fields []*string) string {
 	var b strings.Builder
 	for i, f := range fields {

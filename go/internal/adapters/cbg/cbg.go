@@ -1,12 +1,16 @@
-// Package cbg fetches rates from the Central Bank of The Gambia, which publishes "Daily Valuation Rates": indicative
-// rates for 32 foreign currencies against the Gambian dalasi (GMD).
+// Package cbg fetches rates from the Central Bank of The Gambia, which
+// publishes "Daily Valuation Rates": indicative rates for 32 foreign currencies
+// against the Gambian dalasi (GMD).
 //
-// Each per-currency endpoint returns the entire archive as a [[epoch_ms, rate], ...] array, so Fetch requests every
-// currency and filters by date in memory. The archive reaches back to 2000-01-07 for USD/EUR/GBP; XOF starts 2005 and
-// the rest 2019-11-18. Cadence is weekly until 2023, business-daily from 2024; weekly gaps are preserved as published.
+// Each per-currency endpoint returns the entire archive as a [[epoch_ms, rate],
+// ...] array, so Fetch requests every currency and filters by date in memory.
+// The archive reaches back to 2000-01-07 for USD/EUR/GBP; XOF starts 2005 and
+// the rest 2019-11-18. Cadence is weekly until 2023, business-daily from 2024;
+// weekly gaps are preserved as published.
 //
-// CBG quotes "1 FOREIGN = X GMD", so the foreign currency is the base and GMD the quote. WAUA (West African Unit of
-// Account) is published but is not ISO 4217, so it is not requested. Rates come at two decimals, which floors
+// CBG quotes "1 FOREIGN = X GMD", so the foreign currency is the base and GMD
+// the quote. WAUA (West African Unit of Account) is published but is not ISO
+// 4217, so it is not requested. Rates come at two decimals, which floors
 // high-denomination currencies such as GNF to 0.01; that is what CBG publishes.
 package cbg
 
@@ -26,7 +30,8 @@ import (
 
 const baseURL = "https://www.cbg.gm/ajax/indicative-exchange-rates/"
 
-// currencies lists the CBG Daily Valuation Rates table, excluding the GMD pivot and the non-ISO WAUA composite.
+// currencies lists the CBG Daily Valuation Rates table, excluding the GMD pivot
+// and the non-ISO WAUA composite.
 var currencies = []string{
 	"USD", "EUR", "GBP", "CHF", "SEK", "CAD", "XOF", "NOK", "DKK", "SAR", "JPY", "AUD", "TWD", "LKR", "THB", "PHP",
 	"NZD", "AED", "KWD", "NGN", "HKD", "ZAR", "EGP", "CNY", "BRL", "INR", "GHS", "SLL", "TRY", "GNF", "XDR", "SGD",

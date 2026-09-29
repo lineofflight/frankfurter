@@ -14,7 +14,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
 )
 
-// The POST body carries a per-session anti-forgery token, so match on method and URI only.
+// The POST body carries a per-session anti-forgery token, so match on method
+// and URI only.
 func fetch(t *testing.T, after, upto time.Time) []adapter.Rate {
 	t.Helper()
 	a := New(vcrtest.Client(t, "pma", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI), vcrtest.AllowPlaybackRepeats))
@@ -156,7 +157,8 @@ func TestParseSkipsUnparseableRows(t *testing.T) {
 	}
 }
 
-// A session hiccup can serve an HTML page or nothing at all instead of the workbook.
+// A session hiccup can serve an HTML page or nothing at all instead of the
+// workbook.
 func TestParseErrors(t *testing.T) {
 	for name, data := range map[string][]byte{
 		"html error page": []byte("<!DOCTYPE html><html><body>Session expired</body></html>"),
@@ -180,7 +182,8 @@ func TestParseEmptyWorkbook(t *testing.T) {
 	}
 }
 
-// The export uses shared strings throughout, but numeric and rich-text cells read the same.
+// The export uses shared strings throughout, but numeric and rich-text cells
+// read the same.
 func TestParseNumericAndRichTextCells(t *testing.T) {
 	f := excelize.NewFile()
 	defer f.Close()
@@ -238,7 +241,8 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// workbook builds a workbook shaped like the export: every cell a string, data from row 2.
+// workbook builds a workbook shaped like the export: every cell a string, data
+// from row 2.
 func workbook(t *testing.T, rows [][]string) []byte {
 	t.Helper()
 	f := excelize.NewFile()

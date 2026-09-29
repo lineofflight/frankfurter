@@ -1,7 +1,9 @@
-// Package bnm fetches rates from Bank Negara Malaysia, which publishes daily ringgit rates for about 25 currencies.
-// Data is available from 2006-01-03. Historical rates are fetched per currency per month.
+// Package bnm fetches rates from Bank Negara Malaysia, which publishes daily
+// ringgit rates for about 25 currencies. Data is available from 2006-01-03.
+// Historical rates are fetched per currency per month.
 //
-// As in Ruby, after only picks the first month: rows earlier in that month are kept, and only upto clips.
+// As in Ruby, after only picks the first month: rows earlier in that month are
+// kept, and only upto clips.
 package bnm
 
 import (
@@ -40,7 +42,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. after is required, as Ruby's Date.parse(after.to_s) fails on nil.
+// Fetch implements adapter.Adapter. after is required, as Ruby's
+// Date.parse(after.to_s) fails on nil.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("after is required")
@@ -117,8 +120,8 @@ type rate struct {
 	Mid  *float64 `json:"middle_rate"`
 }
 
-// parseMonth parses one currency-month response. ok is false when data is missing or an array, which Ruby skips
-// without sleeping.
+// parseMonth parses one currency-month response. ok is false when data is
+// missing or an array, which Ruby skips without sleeping.
 func parseMonth(data []byte, code string, upto time.Time) (rates []adapter.Rate, ok bool, err error) {
 	var doc struct {
 		Data json.RawMessage `json:"data"`
@@ -140,7 +143,8 @@ func parseMonth(data []byte, code string, upto time.Time) (rates []adapter.Rate,
 	if cd.Unit != nil {
 		unit = *cd.Unit
 	}
-	// A month with one rate carries an object instead of a list. A missing or null rate fails, as in Ruby.
+	// A month with one rate carries an object instead of a list. A missing or
+	// null rate fails, as in Ruby.
 	var list []*rate
 	if len(cd.Rate) > 0 && cd.Rate[0] == '[' {
 		if err := json.Unmarshal(cd.Rate, &list); err != nil {

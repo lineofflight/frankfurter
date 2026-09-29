@@ -1,13 +1,16 @@
-// Package bom fetches rates from the Bank of Mongolia, which publishes daily statutory reference rates in MNT for 38
-// currencies plus XAU and XAG. They are the official reference for customs, tax and accounting in Mongolia (Law on
+// Package bom fetches rates from the Bank of Mongolia, which publishes daily
+// statutory reference rates in MNT for 38 currencies plus XAU and XAG. They are
+// the official reference for customs, tax and accounting in Mongolia (Law on
 // Currency Regulation, Article 5(2)).
 //
-// The movement endpoint returns the entire archive (2001-01-02 onward) in one ~5 MB JSON response regardless of the
-// requested range, so we fetch once and slice client-side. The archive is refreshed in arrears in periodic batches.
+// The movement endpoint returns the entire archive (2001-01-02 onward) in one
+// ~5 MB JSON response regardless of the requested range, so we fetch once and
+// slice client-side. The archive is refreshed in arrears in periodic batches.
 //
-// The source publishes "1 foreign = X MNT", so the foreign currency is the base. All quotes are per unit, so
-// high-denomination currencies show as small fractions (IDR=0.20 MNT) with no per-100 normalization. SDR is rewritten
-// to XDR. XAU and XAG stay per troy ounce, as published.
+// The source publishes "1 foreign = X MNT", so the foreign currency is the
+// base. All quotes are per unit, so high-denomination currencies show as small
+// fractions (IDR=0.20 MNT) with no per-100 normalization. SDR is rewritten to
+// XDR. XAU and XAG stay per troy ounce, as published.
 //
 // Unlike adapter.Window, after is inclusive, as in the Ruby adapter.
 package bom

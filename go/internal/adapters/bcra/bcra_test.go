@@ -19,10 +19,12 @@ func newAdapter(t *testing.T) *Adapter {
 	return New(vcrClient(t, "bcra"))
 }
 
-// vcrClient replays a cassette matched on method and host with repeats allowed, the way Ruby's VCR does: once every
-// match has played, VCR repeats the most recently used one, where go-vcr (behind vcrtest) repeats the first. The
-// difference decides which day's body the later weekdays get, so the golden parity test depends on it. vcrtest has
-// no option for this, so this wraps a no-repeat client and replays the last response itself.
+// vcrClient replays a cassette matched on method and host with repeats allowed,
+// the way Ruby's VCR does: once every match has played, VCR repeats the most
+// recently used one, where go-vcr (behind vcrtest) repeats the first. The
+// difference decides which day's body the later weekdays get, so the golden
+// parity test depends on it. vcrtest has no option for this, so this wraps a
+// no-repeat client and replays the last response itself.
 func vcrClient(t *testing.T, cassette string) *http.Client {
 	c := vcrtest.Client(t, cassette, vcrtest.MatchOn(vcrtest.Method, vcrtest.Host))
 	c.Transport = &lastUsed{next: c.Transport}

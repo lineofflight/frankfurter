@@ -103,8 +103,9 @@ func TestRejectKeepsDefunctCurrencyAfterTerminalDate(t *testing.T) {
 }
 
 func TestRejectMapsPreEuroQuotesToXEU(t *testing.T) {
-	// The euro came into existence on 1999-01-01. The Riksbank backfills its EUR series with the ECU back to 1993;
-	// relaying those as EUR fabricates euro quotes for dates the euro did not exist.
+	// The euro came into existence on 1999-01-01. The Riksbank backfills its
+	// EUR series with the ECU back to 1993; relaying those as EUR fabricates
+	// euro quotes for dates the euro did not exist.
 	got := rates.Reject([]adapter.Rate{
 		{Date: d(1998, 12, 31), Base: "SEK", Quote: "EUR", Rate: 0.10448},
 		{Date: d(1999, 1, 4), Base: "SEK", Quote: "EUR", Rate: 0.10500},
@@ -130,8 +131,10 @@ func TestRejectKeepsEurosFirstDay(t *testing.T) {
 }
 
 func TestRejectKeepsSchillingAfterChangeover(t *testing.T) {
-	// ATS was irrevocably fixed to the euro in 1999 and ceased to be legal tender on 2002-02-28. Providers keep
-	// publishing stale ATS reference rates years later (AMCM into 2004); they are kept at ingest and capped by scopes.
+	// ATS was irrevocably fixed to the euro in 1999 and ceased to be legal
+	// tender on 2002-02-28. Providers keep publishing stale ATS reference rates
+	// years later (AMCM into 2004); they are kept at ingest and capped by
+	// scopes.
 	got := rates.Reject([]adapter.Rate{
 		{Date: d(2002, 3, 1), Base: "EUR", Quote: "ATS", Rate: 13.7603},
 		{Date: d(2002, 2, 28), Base: "EUR", Quote: "ATS", Rate: 13.7603},
@@ -141,8 +144,8 @@ func TestRejectKeepsSchillingAfterChangeover(t *testing.T) {
 	}
 }
 
-// Ruby's "accepts a string date" has no Go counterpart, since adapter.Rate.Date is a time.Time; a recent date is
-// simply kept.
+// Ruby's "accepts a string date" has no Go counterpart, since adapter.Rate.Date
+// is a time.Time; a recent date is simply kept.
 func TestRejectKeepsRecentDate(t *testing.T) {
 	today := fixtures.Today()
 	if got := rates.Reject([]adapter.Rate{{Date: today.AddDate(0, 0, -1), Base: "EUR", Quote: "USD", Rate: 1.1}}, 0, today); len(got) != 1 {
@@ -243,7 +246,8 @@ func providersAt(t *testing.T, conn *sql.DB, query string, args ...any) []string
 	return out
 }
 
-// Not in the Ruby spec: repair_rollups clears the touched buckets' blends, but only for providers that blend.
+// Not in the Ruby spec: repair_rollups clears the touched buckets' blends, but
+// only for providers that blend.
 func TestPurgeClearsBlendedBucketsOfBlendingProviders(t *testing.T) {
 	conn := fixtures.New(t)
 	today := fixtures.Today()
@@ -326,8 +330,9 @@ func TestPurgeRetainsRollupsPastTerminalDate(t *testing.T) {
 }
 
 func TestPurgeKeepsCurrentPeriodRollup(t *testing.T) {
-	// Weekly and monthly buckets anchor to a fixed weekday or the first of the month, so the live period's bucket can
-	// sit a few days ahead of the latest date it summarises. The daily horizon must not purge it. Ruby stubs the
+	// Weekly and monthly buckets anchor to a fixed weekday or the first of the
+	// month, so the live period's bucket can sit a few days ahead of the latest
+	// date it summarises. The daily horizon must not purge it. Ruby stubs the
 	// horizon to Monday 2026-06-15; today is the horizon minus the drift.
 	conn := fixtures.New(t)
 	today := d(2026, 6, 15).AddDate(0, 0, -rates.MaxFutureDrift)

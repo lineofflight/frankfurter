@@ -1,9 +1,11 @@
-// Package cbr fetches rates from the Bank of Russia, which publishes daily rates for about 54 currencies against the
-// Russian ruble (RUB), plus daily reference prices for gold, silver, platinum and palladium.
+// Package cbr fetches rates from the Bank of Russia, which publishes daily
+// rates for about 54 currencies against the Russian ruble (RUB), plus daily
+// reference prices for gold, silver, platinum and palladium.
 //
-// FX uses XML_daily for the currency list and XML_dynamic for date ranges. Metals come from xml_metall in RUB per
-// gram; values are normalized to per troy ounce here. Rows are not clipped to the window: the endpoints take the date
-// range themselves.
+// FX uses XML_daily for the currency list and XML_dynamic for date ranges.
+// Metals come from xml_metall in RUB per gram; values are normalized to per
+// troy ounce here. Rows are not clipped to the window: the endpoints take the
+// date range themselves.
 package cbr
 
 import (
@@ -35,9 +37,10 @@ var metalCodes = map[string]string{
 	"4": "XPD",
 }
 
-// XML_dynamic serves a currency's whole history under its current code. The TJS series is not restated across the
-// 2000-10-30 introduction of the somoni: 1000 "TJS" = 13.54 RUB on 2000-10-01, 1 TJS = 12.65 on 2000-11-01. Earlier
-// rows are Tajikistani ruble (TJR).
+// XML_dynamic serves a currency's whole history under its current code. The TJS
+// series is not restated across the 2000-10-30 introduction of the somoni: 1000
+// "TJS" = 13.54 RUB on 2000-10-01, 1 TJS = 12.65 on 2000-11-01. Earlier rows
+// are Tajikistani ruble (TJR).
 var predecessors = map[string]adapter.Predecessor{
 	"TJS": {Code: "TJR", Cutover: adapter.Date(2000, 10, 30)},
 }
@@ -166,8 +169,9 @@ func parseDynamic(data []byte, code string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// extractRate prefers the per-unit VunitRate and falls back to Value divided by Nominal. Whitespace-only text counts
-// as absent, as Ox drops it. Malformed numbers are errors, as Ruby's Float() raises.
+// extractRate prefers the per-unit VunitRate and falls back to Value divided by
+// Nominal. Whitespace-only text counts as absent, as Ox drops it. Malformed
+// numbers are errors, as Ruby's Float() raises.
 func extractRate(r record) (float64, bool, error) {
 	if r.VunitRate != nil && strings.TrimSpace(*r.VunitRate) != "" {
 		v, err := parseNumber(*r.VunitRate)
@@ -191,8 +195,8 @@ func parseNumber(s string) (float64, error) {
 	return v, nil
 }
 
-// toI reads the leading integer the way Ruby's String#to_i does: 0 when absent, so a missing Nominal divides to Inf
-// as in Ruby.
+// toI reads the leading integer the way Ruby's String#to_i does: 0 when absent,
+// so a missing Nominal divides to Inf as in Ruby.
 func toI(s string) int {
 	s = strings.TrimLeft(s, " \t\n\r\f\v")
 	end := 0
@@ -239,7 +243,8 @@ func parseMetals(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// dateLayout matches Ruby's strptime("%d.%m.%Y"), which also takes one-digit days and months.
+// dateLayout matches Ruby's strptime("%d.%m.%Y"), which also takes one-digit
+// days and months.
 const dateLayout = "2.1.2006"
 
 func weekend(d time.Time) bool {

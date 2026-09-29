@@ -10,8 +10,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// The Ruby spec runs every case through the provider path (Provider#refresh_currency_summaries, scoped to ECB) and
-// the purge path (RateValidation.rebuild_summaries, unscoped).
+// The Ruby spec runs every case through the provider path
+// (Provider#refresh_currency_summaries, scoped to ECB) and the purge path
+// (RateValidation.rebuild_summaries, unscoped).
 var summaryPaths = []struct{ name, provider string }{{"provider", "ECB"}, {"purge", ""}}
 
 func emptySummaries(t *testing.T) *sql.DB {
@@ -176,8 +177,8 @@ func TestSeedClearsModernSucreExclusions(t *testing.T) {
 			t.Errorf("%s = %d", table, n)
 		}
 	}
-	// Provider#unknown_currencies lists CBKKW's exclusions the Money gem cannot name; ECS is named and no longer
-	// excluded.
+	// Provider#unknown_currencies lists CBKKW's exclusions the Money gem cannot
+	// name; ECS is named and no longer excluded.
 	if !currency.Named("ECS") {
 		t.Error("ECS is not named")
 	}

@@ -48,7 +48,8 @@ func row(name, symbol, unit, bid, ask, average string) string {
 </table>`
 }
 
-// stubClient answers like WebMock.stub_request: one canned response per method, anything else fails the test.
+// stubClient answers like WebMock.stub_request: one canned response per method,
+// anything else fails the test.
 func stubClient(t *testing.T, responses map[string]*http.Response) *http.Client {
 	t.Helper()
 	return &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
@@ -194,7 +195,8 @@ func TestFetchPostsForm(t *testing.T) {
 	var form string
 	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		if r.Method == http.MethodGet {
-			// An empty token is still posted, as Ruby only raises when the input or its value is missing.
+			// An empty token is still posted, as Ruby only raises when the
+			// input or its value is missing.
 			resp := response(200, "<input name='tk' value=''>")
 			resp.Header.Add("Set-Cookie", "sid=1; path=/")
 			resp.Header.Add("Set-Cookie", "cf=2; Secure")

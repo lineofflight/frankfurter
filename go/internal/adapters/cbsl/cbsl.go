@@ -1,13 +1,17 @@
-// Package cbsl fetches rates from the Central Bank of Sri Lanka, which publishes daily indicative exchange rates for 55
-// currencies (including XAU per troy ounce) against the Sri Lankan rupee (LKR). Indicative rates are derived at the
-// start of business (09:30 Colombo time, UTC+5:30) from world currency rates against the US dollar and the USD/LKR
-// spot rate.
+// Package cbsl fetches rates from the Central Bank of Sri Lanka, which
+// publishes daily indicative exchange rates for 55 currencies (including XAU
+// per troy ounce) against the Sri Lankan rupee (LKR). Indicative rates are
+// derived at the start of business (09:30 Colombo time, UTC+5:30) from world
+// currency rates against the US dollar and the USD/LKR spot rate.
 //
-// The endpoint is a PHP form handler that returns an HTML page with one table per selected currency. We POST all 55
-// currencies in one request and parse each table by associating the header (e.g. "1 USD -> LKR") with the data rows.
+// The endpoint is a PHP form handler that returns an HTML page with one table
+// per selected currency. We POST all 55 currencies in one request and parse
+// each table by associating the header (e.g. "1 USD -> LKR") with the data
+// rows.
 //
-// Rows keep CBSL's native direction: foreign currency as base, LKR as quote. The server applies the date range itself
-// (its start date is inclusive), so Fetch does not clip the rows, as the Ruby adapter does not.
+// Rows keep CBSL's native direction: foreign currency as base, LKR as quote.
+// The server applies the date range itself (its start date is inclusive), so
+// Fetch does not clip the rows, as the Ruby adapter does not.
 package cbsl
 
 import (
@@ -48,8 +52,9 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. The endpoint comfortably returns a year of all 55 currencies (~1 MB) in
-// under two seconds, so chunk the backfill yearly.
+// BackfillRange implements adapter.Adapter. The endpoint comfortably returns a
+// year of all 55 currencies (~1 MB) in under two seconds, so chunk the backfill
+// yearly.
 func (a *Adapter) BackfillRange() int { return 365 }
 
 // Fetch implements adapter.Adapter.
@@ -142,8 +147,9 @@ func parse(html []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// strip trims what Ruby's String#strip does: ASCII whitespace and NUL but not Unicode spaces, so a cell padded with
-// &nbsp; is rejected as in the Ruby adapter.
+// strip trims what Ruby's String#strip does: ASCII whitespace and NUL but not
+// Unicode spaces, so a cell padded with &nbsp; is rejected as in the Ruby
+// adapter.
 func strip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
 func currencyCode(table *goquery.Selection) string {

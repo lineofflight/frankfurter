@@ -1,7 +1,9 @@
-// Package cbu fetches rates from the Central Bank of Uzbekistan, which publishes daily rates for 20+ currencies
-// against UZS through a per-day JSON endpoint.
+// Package cbu fetches rates from the Central Bank of Uzbekistan, which
+// publishes daily rates for 20+ currencies against UZS through a per-day JSON
+// endpoint.
 //
-// Fetch treats after as inclusive, as the Ruby adapter's (after..end_date) range does.
+// Fetch treats after as inclusive, as the Ruby adapter's (after..end_date)
+// range does.
 package cbu
 
 import (
@@ -21,8 +23,9 @@ import (
 
 const baseURL = "https://cbu.uz/en/arkhiv-kursov-valyut/json/all/"
 
-// The RUB series is not restated across the 1998 redenomination: 1000 "RUB" = 13.46 UZS in the 1997-12-30 bulletin,
-// 1 RUB = 13.48 in the next one on 1998-01-06, CBU's first new-ruble bulletin. Earlier rows are old ruble (RUR).
+// The RUB series is not restated across the 1998 redenomination: 1000 "RUB" =
+// 13.46 UZS in the 1997-12-30 bulletin, 1 RUB = 13.48 in the next one on
+// 1998-01-06, CBU's first new-ruble bulletin. Earlier rows are old ruble (RUR).
 var predecessors = map[string]adapter.Predecessor{
 	"RUB": {Code: "RUR", Cutover: adapter.Date(1998, 1, 6)},
 }
@@ -81,7 +84,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// text accepts a JSON string or a bare number, as Ruby's Integer() and Float() do.
+// text accepts a JSON string or a bare number, as Ruby's Integer() and Float()
+// do.
 type text string
 
 func (t *text) UnmarshalJSON(b []byte) error {
@@ -111,7 +115,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if r.Ccy == nil || !codeRE.MatchString(*r.Ccy) {
 			continue
 		}
-		// Base 0 reads prefixes and a leading 0 as octal, as Ruby's Integer() does.
+		// Base 0 reads prefixes and a leading 0 as octal, as Ruby's Integer()
+		// does.
 		nominal, err := strconv.ParseInt(strings.TrimSpace(string(r.Nominal)), 0, 64)
 		if err != nil {
 			return nil, fmt.Errorf("invalid nominal %q", r.Nominal)

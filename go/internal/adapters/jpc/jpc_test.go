@@ -94,7 +94,8 @@ func TestFetchComingWeek(t *testing.T) {
 	}
 	wantDates(t, rates, adapter.Date(2026, 9, 27))
 
-	// What ingest validation keeps: positive rates dated within two days plus the lead of today.
+	// What ingest validation keeps: positive rates dated within two days plus
+	// the lead of today.
 	horizon := a.Today().AddDate(0, 0, 2+a.LeadDays())
 	kept := 0
 	for _, r := range rates {

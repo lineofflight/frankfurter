@@ -1,8 +1,9 @@
-// Package fixtures seeds test databases with realistic ECB, BOC and BOJ rates, as spec/fixtures.rb does. Every date is
-// relative to today so tests never go stale.
+// Package fixtures seeds test databases with realistic ECB, BOC and BOJ rates,
+// as spec/fixtures.rb does. Every date is relative to today so tests never go
+// stale.
 //
-// New(t) is the usual entry point: a fresh database per test, already seeded, the Go counterpart of spec/helper.rb's
-// seed plus per-test rollback.
+// New(t) is the usual entry point: a fresh database per test, already seeded,
+// the Go counterpart of spec/helper.rb's seed plus per-test rollback.
 package fixtures
 
 import (
@@ -20,8 +21,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// BusinessDays is how many weekdays of history the fixture holds, about two years: enough for downsampling and range
-// tests.
+// BusinessDays is how many weekdays of history the fixture holds, about two
+// years: enough for downsampling and range tests.
 const BusinessDays = 520
 
 type pair struct {
@@ -52,8 +53,8 @@ var baseRates = []providerRates{
 
 var today = sync.OnceValue(rates.Today)
 
-// Today is the date the fixture data is relative to, fixed at first use so a test run straddling midnight stays
-// consistent.
+// Today is the date the fixture data is relative to, fixed at first use so a
+// test run straddling midnight stays consistent.
 func Today() time.Time { return today() }
 
 var businessDays = sync.OnceValue(func() []time.Time {
@@ -69,7 +70,8 @@ var businessDays = sync.OnceValue(func() []time.Time {
 // LatestDate is the most recent business day in the fixture.
 func LatestDate() time.Time { return businessDays()[0] }
 
-// BusinessDay is a business day roughly daysAgo calendar days back, guaranteed to be in the fixture.
+// BusinessDay is a business day roughly daysAgo calendar days back, guaranteed
+// to be in the fixture.
 func BusinessDay(daysAgo int) time.Time {
 	limit := Today().AddDate(0, 0, -daysAgo)
 	for _, d := range businessDays() {
@@ -97,8 +99,9 @@ func PrecedingFriday(date time.Time) time.Time {
 	return date
 }
 
-// GapBoundaryMonday is a Monday in the fixture at least daysAgo days back (Ruby's default is 60): the first
-// publication after a weekend gap, mirroring the production first-publish-after-a-holiday case.
+// GapBoundaryMonday is a Monday in the fixture at least daysAgo days back
+// (Ruby's default is 60): the first publication after a weekend gap, mirroring
+// the production first-publish-after-a-holiday case.
 func GapBoundaryMonday(daysAgo int) time.Time {
 	limit := Today().AddDate(0, 0, -daysAgo)
 	for _, d := range businessDays() {
@@ -109,8 +112,9 @@ func GapBoundaryMonday(daysAgo int) time.Time {
 	return time.Time{}
 }
 
-// Seed is Fixtures.seed!: it seeds providers, replaces all rates and blends with the generated history, and rebuilds
-// the provider rollups, currencies and currency coverages from it.
+// Seed is Fixtures.seed!: it seeds providers, replaces all rates and blends
+// with the generated history, and rebuilds the provider rollups, currencies and
+// currency coverages from it.
 func Seed(ctx context.Context, conn *sql.DB) error {
 	if err := rates.SeedProviders(ctx, conn); err != nil {
 		return err
@@ -175,8 +179,9 @@ func julianDay(d time.Time) int {
 	return int(d.Unix()/86400) + 2440588
 }
 
-// roundHalfUp is Ruby's Float#round(ndigits) for small ndigits (round_half_up in numeric.c): round x*10^n, then
-// correct for the scaling error so the result is the correctly rounded decimal.
+// roundHalfUp is Ruby's Float#round(ndigits) for small ndigits (round_half_up
+// in numeric.c): round x*10^n, then correct for the scaling error so the result
+// is the correctly rounded decimal.
 func roundHalfUp(x float64, ndigits int) float64 {
 	s := math.Pow(10, float64(ndigits))
 	f := math.Round(x * s)
@@ -213,8 +218,9 @@ var template = sync.OnceValues(func() ([]byte, error) {
 	return os.ReadFile(snapshot)
 })
 
-// New returns a seeded database of the test's own, closed when the test ends. The fixture is generated once per test
-// binary and copied, so tests may change it freely and run in parallel.
+// New returns a seeded database of the test's own, closed when the test ends.
+// The fixture is generated once per test binary and copied, so tests may change
+// it freely and run in parallel.
 func New(t testing.TB) *sql.DB {
 	t.Helper()
 	data, err := template()

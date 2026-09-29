@@ -136,8 +136,8 @@ func pairFilter(base, quote, bucket string) string {
 		db.Lit(bucket)
 }
 
-// blendInputs is every blendable rollup row of a bucket: the whole input of that bucket's blend, so equal inputs
-// mean an identical materialised blend.
+// blendInputs is every blendable rollup row of a bucket: the whole input of
+// that bucket's blend, so equal inputs mean an identical materialised blend.
 func blendInputs(t *testing.T, conn *sql.DB, table rates.Table, bucket string) [][5]any {
 	t.Helper()
 	rows, err := conn.QueryContext(ctx, blendable(t, conn, table).Filter("bucket_date = "+db.Lit(bucket)).
@@ -184,8 +184,9 @@ func TestBlendableRollupBoundaries(t *testing.T) {
 				}
 			})
 
-			// Ruby compares the materialised blended rollup before and after; that table belongs to the blending
-			// step, so this compares the blend's whole input (every blendable row of the bucket) instead.
+			// Ruby compares the materialised blended rollup before and after;
+			// that table belongs to the blending step, so this compares the
+			// blend's whole input (every blendable row of the bucket) instead.
 			t.Run(fmt.Sprintf("keeps %s blends identical when retained expired %s rows share a bucket", p, side), func(t *testing.T) {
 				conn := fixtures.New(t)
 				exec(t, conn, "INSERT INTO rates (provider, date, base, quote, mid) VALUES ('ECB', ?, ?, ?, 15.123456789012)",
@@ -235,7 +236,8 @@ func TestBlendableRollupBoundaries(t *testing.T) {
 			if n := count(t, conn, c.table.Dataset().Filter(cond)); n != 1 {
 				t.Errorf("stored = %d", n)
 			}
-			// With no blendable input, the blended rollup has no row for the pair either.
+			// With no blendable input, the blended rollup has no row for the
+			// pair either.
 			if n := count(t, conn, blendable(t, conn, c.table).Filter(cond)); n != 0 {
 				t.Errorf("blendable = %d", n)
 			}

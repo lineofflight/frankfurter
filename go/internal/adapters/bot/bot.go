@@ -1,8 +1,10 @@
-// Package bot fetches rates from the Bank of Thailand, which publishes daily average commercial bank exchange rates
-// for 19 currencies against the Thai baht.
+// Package bot fetches rates from the Bank of Thailand, which publishes daily
+// average commercial bank exchange rates for 19 currencies against the Thai
+// baht.
 //
-// It uses mid_rate, the midpoint of buying transfer and selling. Some currencies are quoted per 100 or 1,000 units;
-// the adapter normalises them to per-unit rates. Requires BOT_API_KEY.
+// It uses mid_rate, the midpoint of buying transfer and selling. Some
+// currencies are quoted per 100 or 1,000 units; the adapter normalises them to
+// per-unit rates. Requires BOT_API_KEY.
 package bot
 
 import (
@@ -36,10 +38,12 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. The API allows at most 31 days per request.
+// BackfillRange implements adapter.Adapter. The API allows at most 31 days per
+// request.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. The API filters by period itself, so rows are not windowed again.
+// Fetch implements adapter.Adapter. The API filters by period itself, so rows
+// are not windowed again.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	key := os.Getenv("BOT_API_KEY")
 	if key == "" {
@@ -115,7 +119,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// midText renders mid_rate as Ruby's to_s would: empty for null or a missing field, the text of a string or number.
+// midText renders mid_rate as Ruby's to_s would: empty for null or a missing
+// field, the text of a string or number.
 func midText(raw json.RawMessage) string {
 	if len(raw) == 0 || string(raw) == "null" {
 		return ""

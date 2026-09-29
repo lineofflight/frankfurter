@@ -1,8 +1,11 @@
-// Package mas fetches rates from the Monetary Authority of Singapore, which publishes daily exchange rates for 21
-// currencies against the Singapore dollar through an ASP.NET statistics page that serves CSV downloads. Rates are
-// quoted as SGD per unit (or per 100 units) of foreign currency. Data is available from 1988.
+// Package mas fetches rates from the Monetary Authority of Singapore, which
+// publishes daily exchange rates for 21 currencies against the Singapore dollar
+// through an ASP.NET statistics page that serves CSV downloads. Rates are
+// quoted as SGD per unit (or per 100 units) of foreign currency. Data is
+// available from 1988.
 //
-// Fetch keeps rows dated on or after `after`, as the Ruby adapter does, rather than strictly after it.
+// Fetch keeps rows dated on or after `after`, as the Ruby adapter does, rather
+// than strictly after it.
 package mas
 
 import (
@@ -82,7 +85,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. It downloads one CSV per calendar year in the range.
+// Fetch implements adapter.Adapter. It downloads one CSV per calendar year in
+// the range.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")
@@ -124,7 +128,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return out, nil
 }
 
-// download reads the page for its ASP.NET tokens and cookies, then posts the form back to download the CSV.
+// download reads the page for its ASP.NET tokens and cookies, then posts the
+// form back to download the CSV.
 func (a *Adapter) download(ctx context.Context, startMonth, startYear, endMonth, endYear int) ([]byte, error) {
 	req, err := a.NewRequest(ctx, http.MethodGet, baseURL, nil)
 	if err != nil {
@@ -181,8 +186,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		}
 	}
 
-	// A window with no data yet (e.g. a new year before the first fixing) re-renders the page with a "No Results
-	// Found" panel.
+	// A window with no data yet (e.g. a new year before the first fixing)
+	// re-renders the page with a "No Results Found" panel.
 	if strings.Contains(text, "No Results Found") {
 		return nil, nil
 	}

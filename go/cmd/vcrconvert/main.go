@@ -1,10 +1,13 @@
-// Command vcrconvert converts the Ruby VCR cassettes in spec/vcr_cassettes into go-vcr v4 cassettes.
+// Command vcrconvert converts the Ruby VCR cassettes in spec/vcr_cassettes into
+// go-vcr v4 cassettes.
 //
 //	go run ./cmd/vcrconvert -in ../spec/vcr_cassettes -out testdata/cassettes
 //
-// Bodies are decoded the way Ruby's VCR decodes them on playback: Psych's !binary scalars are base64, and a plain
-// string is transcoded to its recorded encoding when that encoding is a single-byte one (ISO-8859-1). With -sums the
-// command instead prints the size and SHA-256 of every body as go-vcr loads it back, for comparison with Ruby.
+// Bodies are decoded the way Ruby's VCR decodes them on playback: Psych's
+// !binary scalars are base64, and a plain string is transcoded to its recorded
+// encoding when that encoding is a single-byte one (ISO-8859-1). With -sums the
+// command instead prints the size and SHA-256 of every body as go-vcr loads it
+// back, for comparison with Ruby.
 package main
 
 import (
@@ -82,8 +85,9 @@ func convert(path, outDir string) error {
 	return c.Save()
 }
 
-// marshal encodes a cassette byte for byte as yaml/v4 did when the committed cassettes were converted. The one
-// difference v3 shows on them is quoting strings that YAML 1.1 reads as booleans: v4 single-quotes 'off', v3 double.
+// marshal encodes a cassette byte for byte as yaml/v4 did when the committed
+// cassettes were converted. The one difference v3 shows on them is quoting
+// strings that YAML 1.1 reads as booleans: v4 single-quotes 'off', v3 double.
 func marshal(v any) ([]byte, error) {
 	var doc yaml.Node
 	if err := doc.Encode(v); err != nil {
@@ -183,14 +187,16 @@ func body(node *yaml.Node) (string, error) {
 		return "", nil
 	}
 	if str.Tag == "!binary" {
-		// Psych yields a binary string; re-encoding it to anything but binary fails in VCR, which then keeps the bytes.
+		// Psych yields a binary string; re-encoding it to anything but binary
+		// fails in VCR, which then keeps the bytes.
 		raw, err := base64.StdEncoding.DecodeString(strings.Join(strings.Fields(str.Value), ""))
 		return string(raw), err
 	}
 
 	switch strings.ToUpper(encoding) {
 	case "", "UTF-8", "US-ASCII", "ASCII-8BIT", "BINARY":
-		// Transcoding UTF-8 to US-ASCII either leaves the bytes alone or fails, and VCR keeps the bytes on failure.
+		// Transcoding UTF-8 to US-ASCII either leaves the bytes alone or fails,
+		// and VCR keeps the bytes on failure.
 		return str.Value, nil
 	case "ISO-8859-1":
 		return latin1(str.Value), nil
@@ -199,8 +205,8 @@ func body(node *yaml.Node) (string, error) {
 	}
 }
 
-// latin1 transcodes UTF-8 to ISO-8859-1, returning s unchanged when a rune has no Latin-1 form (as Ruby's
-// String#encode raises and VCR keeps the original).
+// latin1 transcodes UTF-8 to ISO-8859-1, returning s unchanged when a rune has
+// no Latin-1 form (as Ruby's String#encode raises and VCR keeps the original).
 func latin1(s string) string {
 	out := make([]byte, 0, len(s))
 	for _, r := range s {

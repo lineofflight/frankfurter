@@ -1,8 +1,9 @@
-// Package nbrm fetches rates from the National Bank of the Republic of North Macedonia, which publishes daily
-// mid-market rates for about 31 currencies against MKD.
+// Package nbrm fetches rates from the National Bank of the Republic of North
+// Macedonia, which publishes daily mid-market rates for about 31 currencies
+// against MKD.
 //
-// Fetch walks the range in 90-day chunks starting at after itself, so, as in Ruby, after is inclusive and rows are
-// not clipped to the window.
+// Fetch walks the range in 90-day chunks starting at after itself, so, as in
+// Ruby, after is inclusive and rows are not clipped to the window.
 package nbrm
 
 import (
@@ -142,7 +143,8 @@ func number(raw json.RawMessage) (float64, error) {
 	return 0, fmt.Errorf("not a number: %s", raw)
 }
 
-// integer is Ruby's Integer(x): a JSON number is truncated, a string must hold an integer.
+// integer is Ruby's Integer(x): a JSON number is truncated, a string must hold
+// an integer.
 func integer(raw json.RawMessage) (int64, error) {
 	var v any
 	if err := json.Unmarshal(raw, &v); err != nil {

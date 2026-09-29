@@ -78,8 +78,9 @@ func TestApplyEmptyInput(t *testing.T) {
 	}
 }
 
-// assertMatchesApply checks that EachSnapshot yields, for every date, the set CarryForward (the trusted oracle)
-// returns. Sets are compared because downstream blending is order-independent.
+// assertMatchesApply checks that EachSnapshot yields, for every date, the set
+// CarryForward (the trusted oracle) returns. Sets are compared because
+// downstream blending is order-independent.
 func assertMatchesApply(t *testing.T, rows []rates.Row, dates []time.Time, lookback int) {
 	t.Helper()
 	normalize := func(rows []rates.Row) []string {

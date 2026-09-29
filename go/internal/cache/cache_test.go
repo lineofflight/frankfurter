@@ -66,13 +66,15 @@ func TestSucceedsQuietlyOn2xx(t *testing.T) {
 	}
 }
 
-// debounced returns a cache whose purges run fn and whose clock the test advances by hand.
+// debounced returns a cache whose purges run fn and whose clock the test
+// advances by hand.
 func debounced(fn func() error) (*Cache, func()) {
 	now := time.Unix(1_000_000, 0)
 	c := &Cache{Window: 300 * time.Second}
 	c.now = func() time.Time { return now }
 	c.purge = func(context.Context) error { return fn() }
-	// Moves the clock past the window, so it reads as expired, as the Ruby spec rewinds @last_purge_at.
+	// Moves the clock past the window, so it reads as expired, as the Ruby spec
+	// rewinds @last_purge_at.
 	expire := func() { now = now.Add(c.Window) }
 	return c, expire
 }
@@ -186,7 +188,8 @@ func TestReMarksFailedFlushPending(t *testing.T) {
 	if err := c.PurgePending(ctx); !errors.Is(err, errTimeout) {
 		t.Fatalf("err = %v", err)
 	}
-	// The failed attempt opened a new window, so the retry waits for it to expire.
+	// The failed attempt opened a new window, so the retry waits for it to
+	// expire.
 	c.PurgePending(ctx)
 	if calls != 2 {
 		t.Fatalf("calls = %d", calls)

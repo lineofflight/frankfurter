@@ -1,18 +1,21 @@
-// Package pdftext extracts positioned text from PDFs the way the Ruby adapters see it through pdf-reader.
+// Package pdftext extracts positioned text from PDFs the way the Ruby adapters
+// see it through pdf-reader.
 //
-// Glyphs come from PDFium (compiled to WebAssembly, so no cgo), which copes with the encrypted and legacy-encoded
-// PDFs central banks publish. On top of them this package reproduces pdf-reader's post-processing, so a Go adapter
+// Glyphs come from PDFium (compiled to WebAssembly, so no cgo), which copes
+// with the encrypted and legacy-encoded PDFs central banks publish. On top of
+// them this package reproduces pdf-reader's post-processing, so a Go adapter
 // can port Ruby logic that leans on it unchanged:
 //
 //   - Page.Runs is pdf-reader's Page#runs: glyphs inside the crop box, zero-width and overlapping duplicates
 //     dropped, merged left to right into runs on the same line.
 //   - Page.Text is pdf-reader's Page#text: those runs laid out on a character grid.
 //
-// Coordinates are PDF user space: points, origin at the bottom left, y growing upwards. Rotated pages are not
-// supported.
+// Coordinates are PDF user space: points, origin at the bottom left, y growing
+// upwards. Rotated pages are not supported.
 //
-// Where pdf-reader could not decode a glyph (old Japanese fonts without Unicode maps), PDFium usually can, so Go may
-// read real text where Ruby read garbage. ISO codes and numbers come out the same.
+// Where pdf-reader could not decode a glyph (old Japanese fonts without Unicode
+// maps), PDFium usually can, so Go may read real text where Ruby read garbage.
+// ISO codes and numbers come out the same.
 package pdftext
 
 import (
@@ -83,7 +86,8 @@ func instance() (pdfium.Pdfium, error) {
 	return pool.GetInstance(5 * time.Minute)
 }
 
-// Pages reads every page of a PDF. Encrypted PDFs open with the empty user password.
+// Pages reads every page of a PDF. Encrypted PDFs open with the empty user
+// password.
 func Pages(data []byte) ([]Page, error) {
 	pdf, err := instance()
 	if err != nil {
@@ -111,7 +115,8 @@ func Pages(data []byte) ([]Page, error) {
 	return pages, nil
 }
 
-// Text is every page's Text joined with newlines, as reader.pages.map(&:text).join("\n").
+// Text is every page's Text joined with newlines, as
+// reader.pages.map(&:text).join("\n").
 func Text(data []byte) (string, error) {
 	pages, err := Pages(data)
 	if err != nil {
@@ -160,7 +165,8 @@ func mediaBox(pdf pdfium.Pdfium, page requests.Page) (Rect, error) {
 	if box, err := pdf.FPDFPage_GetMediaBox(&requests.FPDFPage_GetMediaBox{Page: page}); err == nil {
 		return Rect{float64(box.Left), float64(box.Bottom), float64(box.Right), float64(box.Top)}, nil
 	}
-	// No MediaBox on the page itself (it is inherited): fall back to the page size PDFium resolved.
+	// No MediaBox on the page itself (it is inherited): fall back to the page
+	// size PDFium resolved.
 	w, err := pdf.FPDF_GetPageWidthF(&requests.FPDF_GetPageWidthF{Page: page})
 	if err != nil {
 		return Rect{}, err
@@ -172,7 +178,8 @@ func mediaBox(pdf pdfium.Pdfium, page requests.Page) (Rect, error) {
 	return Rect{0, 0, float64(w.PageWidth), float64(h.PageHeight)}, nil
 }
 
-// readGlyphs returns one run per painted glyph, as pdf-reader's PageTextReceiver collects them.
+// readGlyphs returns one run per painted glyph, as pdf-reader's
+// PageTextReceiver collects them.
 func readGlyphs(pdf pdfium.Pdfium, page requests.Page) ([]Run, error) {
 	text, err := pdf.FPDFText_LoadPage(&requests.FPDFText_LoadPage{Page: page})
 	if err != nil {
@@ -221,8 +228,9 @@ func readGlyphs(pdf pdfium.Pdfium, page requests.Page) ([]Run, error) {
 		if err != nil {
 			return nil, err
 		}
-		// pdf-reader's font size is the em height in device space: the nominal size scaled by the text and
-		// graphics matrices. PDFium hands the matrix over in float32, so round its noise away.
+		// pdf-reader's font size is the em height in device space: the nominal
+		// size scaled by the text and graphics matrices. PDFium hands the
+		// matrix over in float32, so round its noise away.
 		effective := math.Abs(size.FontSize * float64(matrix.Matrix.B+matrix.Matrix.D))
 		glyphs = append(glyphs, Run{
 			X:        origin.X,

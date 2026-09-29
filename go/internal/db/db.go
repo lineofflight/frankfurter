@@ -1,9 +1,11 @@
 // Package db opens Frankfurter's SQLite database and holds its schema.
 //
-// Dates are stored as YYYY-MM-DD text, as the Ruby app (Sequel) writes them. The modernc driver parses text in
-// columns declared DATE into time.Time when scanning, so scan such columns into time.Time (UTC midnight), or select
-// them through a function such as date(col) or max(col) to get the text back. Bind dates as YYYY-MM-DD strings (see
-// FormatDate); a bound time.Time would be written in a different text format and break comparisons.
+// Dates are stored as YYYY-MM-DD text, as the Ruby app (Sequel) writes them.
+// The modernc driver parses text in columns declared DATE into time.Time when
+// scanning, so scan such columns into time.Time (UTC midnight), or select them
+// through a function such as date(col) or max(col) to get the text back. Bind
+// dates as YYYY-MM-DD strings (see FormatDate); a bound time.Time would be
+// written in a different text format and break comparisons.
 package db
 
 import (
@@ -35,9 +37,10 @@ func FormatDate(t time.Time) string { return t.Format(DateLayout) }
 // ParseDate parses a stored date into UTC midnight.
 func ParseDate(s string) (time.Time, error) { return time.Parse(DateLayout, s) }
 
-// Open opens the SQLite database at path with the connection settings of the Ruby app: WAL, NORMAL sync, a 128 MB
-// mmap, a capped journal, and a busy timeout (SQLITE_BUSY_TIMEOUT milliseconds, default 60000). The pool size follows
-// MAX_THREADS (default 5).
+// Open opens the SQLite database at path with the connection settings of the
+// Ruby app: WAL, NORMAL sync, a 128 MB mmap, a capped journal, and a busy
+// timeout (SQLITE_BUSY_TIMEOUT milliseconds, default 60000). The pool size
+// follows MAX_THREADS (default 5).
 func Open(path string) (*sql.DB, error) {
 	busy, err := envInt("SQLITE_BUSY_TIMEOUT", 60_000)
 	if err != nil {
@@ -70,8 +73,9 @@ func Open(path string) (*sql.DB, error) {
 	return db, nil
 }
 
-// DefaultPath mirrors lib/db.rb: DATABASE_URL (sqlite://path) wins; otherwise db/frankfurter[_APP_ENV][_TEST_ENV_NUMBER].sqlite3
-// under the working directory.
+// DefaultPath mirrors lib/db.rb: DATABASE_URL (sqlite://path) wins; otherwise
+// db/frankfurter[_APP_ENV][_TEST_ENV_NUMBER].sqlite3 under the working
+// directory.
 func DefaultPath() (string, error) {
 	if raw := os.Getenv("DATABASE_URL"); raw != "" {
 		path, ok := strings.CutPrefix(raw, "sqlite://")

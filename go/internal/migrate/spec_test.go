@@ -16,9 +16,11 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// The Ruby migration specs run each step in a child process against a scratch database; here each test gets its own
-// database file. Ruby's db:setup is Up plus the provider seed. The specs also stub Cache.purge to fail, to show setup
-// never needs the CDN; Go's migrations and seed have no cache dependency at all.
+// The Ruby migration specs run each step in a child process against a scratch
+// database; here each test gets its own database file. Ruby's db:setup is Up
+// plus the provider seed. The specs also stub Cache.purge to fail, to show
+// setup never needs the CDN; Go's migrations and seed have no cache dependency
+// at all.
 
 func setup(t *testing.T, conn *sql.DB) {
 	t.Helper()
@@ -267,7 +269,8 @@ func TestRateComponentMigrationsKeepRatesReadableThroughRollbackAndReapplication
 		if got := version(t, conn); got != v {
 			t.Fatalf("wrong migration version %d, want %d", got, v)
 		}
-		// A standalone connection must read the schema without application callbacks.
+		// A standalone connection must read the schema without application
+		// callbacks.
 		standalone, err := sql.Open("sqlite", path)
 		if err != nil {
 			t.Fatal(err)
@@ -357,8 +360,9 @@ func TestComesaDollarMigrationPromotesStoredRBMRates(t *testing.T) {
 	}
 }
 
-// sdrCase is one of the four SDR normalization specs (spec/{bota,rba,bnm,rbm}_sdr_migration_spec.rb), which differ
-// only in provider, home currency, starting version and data.
+// sdrCase is one of the four SDR normalization specs
+// (spec/{bota,rba,bnm,rbm}_sdr_migration_spec.rb), which differ only in
+// provider, home currency, starting version and data.
 type sdrCase struct {
 	provider, home string
 	from           int // the version before the provider's migration
@@ -444,7 +448,8 @@ var sdrCases = []sdrCase{
 	},
 }
 
-// sdrDatabase is run_migration_script's setup: a database migrated to c.from with providers seeded.
+// sdrDatabase is run_migration_script's setup: a database migrated to c.from
+// with providers seeded.
 func sdrDatabase(t *testing.T, c sdrCase) *sql.DB {
 	t.Helper()
 	conn, _ := empty(t)
@@ -462,7 +467,8 @@ func xdr(code string) string {
 	return code
 }
 
-// "completes setup with an unavailable cache and preserves repaired history through recovery"
+// "completes setup with an unavailable cache and preserves repaired history
+// through recovery"
 func TestSDRMigrationCompletesSetupAndPreservesRepairedHistory(t *testing.T) {
 	for _, c := range sdrCases {
 		t.Run(c.provider, func(t *testing.T) {
@@ -570,7 +576,8 @@ func TestSDRMigrationCompletesSetupAndPreservesRepairedHistory(t *testing.T) {
 				t.Fatalf("changed unrelated bucket: %v, want %v", got, unaffected)
 			}
 
-			// Exercise the same recovery lifecycle as bin/schedule, then compare it with a clean full rebuild.
+			// Exercise the same recovery lifecycle as bin/schedule, then
+			// compare it with a clean full rebuild.
 			if err := blend.RebuildDaily(ctx, conn, today); err != nil {
 				t.Fatal(err)
 			}
@@ -600,7 +607,8 @@ func TestSDRMigrationCompletesSetupAndPreservesRepairedHistory(t *testing.T) {
 				}
 			}
 
-			// Rollups average the merged daily history rather than averaging old SDR/XDR averages.
+			// Rollups average the merged daily history rather than averaging
+			// old SDR/XDR averages.
 			var want, got float64
 			if err := conn.QueryRow("SELECT avg(rate) FROM rates WHERE provider = ? AND base = ? AND quote = ?",
 				c.provider, c.merged[0], c.merged[1]).Scan(&want); err != nil {
@@ -617,7 +625,8 @@ func TestSDRMigrationCompletesSetupAndPreservesRepairedHistory(t *testing.T) {
 	}
 }
 
-// "rolls back conflicting native components even when their effective rates match"
+// "rolls back conflicting native components even when their effective rates
+// match"
 func TestSDRMigrationRollsBackConflictingComponents(t *testing.T) {
 	for _, c := range sdrCases {
 		t.Run(c.provider, func(t *testing.T) {

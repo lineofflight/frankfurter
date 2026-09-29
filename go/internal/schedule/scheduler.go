@@ -1,6 +1,8 @@
-// Package schedule is bin/schedule: the long-running process that backfills every provider at startup and again on
-// its publish_schedule, flushes debounced cache purges, re-blends the trailing window at midnight and materialises the
-// blend on installs that have never built it. Scheduler is the small part of rufus-scheduler it needs.
+// Package schedule is bin/schedule: the long-running process that backfills
+// every provider at startup and again on its publish_schedule, flushes
+// debounced cache purges, re-blends the trailing window at midnight and
+// materialises the blend on installs that have never built it. Scheduler is the
+// small part of rufus-scheduler it needs.
 package schedule
 
 import (
@@ -14,18 +16,21 @@ import (
 	"github.com/adhocore/gronx"
 )
 
-// Func is a job body. A job that has done its work for good calls job.Unschedule.
+// Func is a job body. A job that has done its work for good calls
+// job.Unschedule.
 type Func func(ctx context.Context, job *Job) error
 
 // Options tune Every and Cron jobs.
 type Options struct {
 	// FirstIn delays an Every job's first run; zero means one interval.
 	FirstIn time.Duration
-	// NoOverlap skips a run while the job's previous run is still going (rufus overlap: false).
+	// NoOverlap skips a run while the job's previous run is still going (rufus
+	// overlap: false).
 	NoOverlap bool
 }
 
-// Registrar is what Setup schedules jobs on. Scheduler is the real one; tests record.
+// Registrar is what Setup schedules jobs on. Scheduler is the real one; tests
+// record.
 type Registrar interface {
 	In(name string, delay time.Duration, fn Func)
 	Every(name string, interval time.Duration, opts Options, fn Func)
@@ -45,8 +50,9 @@ type Job struct {
 // Unschedule stops future runs. A run in progress finishes.
 func (j *Job) Unschedule() { j.unscheduled.Store(true) }
 
-// Scheduler runs jobs on timers, at most workers at a time (rufus max_work_threads). Jobs registered before Run start
-// with it. Failures are logged and the job stays scheduled, as rufus does.
+// Scheduler runs jobs on timers, at most workers at a time (rufus
+// max_work_threads). Jobs registered before Run start with it. Failures are
+// logged and the job stays scheduled, as rufus does.
 type Scheduler struct {
 	log     *slog.Logger
 	workers chan struct{}
@@ -87,7 +93,8 @@ func (s *Scheduler) Every(name string, interval time.Duration, opts Options, fn 
 	}})
 }
 
-// Cron runs fn at each fire time of a five-field cron expression, in the local time zone as rufus does.
+// Cron runs fn at each fire time of a five-field cron expression, in the local
+// time zone as rufus does.
 func (s *Scheduler) Cron(name, expr string, opts Options, fn Func) error {
 	if !gronx.IsValid(expr) {
 		return fmt.Errorf("%s: invalid cron %q", name, expr)
@@ -101,7 +108,8 @@ func (s *Scheduler) Cron(name, expr string, opts Options, fn Func) error {
 
 func (s *Scheduler) add(j *Job) { s.jobs = append(s.jobs, j) }
 
-// Run starts every registered job and blocks until ctx is done and running jobs have returned.
+// Run starts every registered job and blocks until ctx is done and running jobs
+// have returned.
 func (s *Scheduler) Run(ctx context.Context) {
 	var wg sync.WaitGroup
 	for _, j := range s.jobs {

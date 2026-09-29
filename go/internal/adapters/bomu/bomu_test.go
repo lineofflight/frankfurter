@@ -214,7 +214,8 @@ func TestParseSkipsIncompleteNonpositiveMalformed(t *testing.T) {
 	}
 }
 
-// Ruby's strip and Float leave a non-breaking space in place, so such a cell is not a number.
+// Ruby's strip and Float leave a non-breaking space in place, so such a cell is
+// not a number.
 func TestParseSkipsPriceWithNonBreakingSpace(t *testing.T) {
 	html := page(row(func(o *rowOpts) { o.buy = "28.9431&nbsp;" }), row(func(o *rowOpts) { o.sell = " 29.3634" }))
 

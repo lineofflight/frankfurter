@@ -79,8 +79,9 @@ func TestParseRaisesWithoutTableOrHeader(t *testing.T) {
 	}
 }
 
-// The golden file is recorded with method,uri matching. Under the spec's method,host with repeats, go-vcr replays the
-// first match for every day, where Ruby VCR prefers unused interactions; Ruby's output is identical either way.
+// The golden file is recorded with method,uri matching. Under the spec's
+// method,host with repeats, go-vcr replays the first match for every day, where
+// Ruby VCR prefers unused interactions; Ruby's output is identical either way.
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 3, 16), adapter.Date(2026, 3, 20))

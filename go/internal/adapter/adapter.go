@@ -1,8 +1,10 @@
-// Package adapter defines what a provider adapter is, the helpers every adapter shares, and the registry that maps
-// provider keys to adapters. It mirrors lib/provider/adapters/adapter.rb.
+// Package adapter defines what a provider adapter is, the helpers every adapter
+// shares, and the registry that maps provider keys to adapters. It mirrors
+// lib/provider/adapters/adapter.rb.
 //
-// An adapter is pure fetch and parse: it turns a date window into rate rows and never touches the database.
-// Validation, precision normalisation and storage belong to the caller.
+// An adapter is pure fetch and parse: it turns a date window into rate rows and
+// never touches the database. Validation, precision normalisation and storage
+// belong to the caller.
 package adapter
 
 import (
@@ -14,19 +16,21 @@ import (
 	"time"
 )
 
-// GramsPerTroyOunce converts per-gram precious-metal prices to the per-troy-ounce convention ISO 4217 uses for XAU,
-// XAG, XPT and XPD.
+// GramsPerTroyOunce converts per-gram precious-metal prices to the
+// per-troy-ounce convention ISO 4217 uses for XAU, XAG, XPT and XPD.
 const GramsPerTroyOunce = 31.1034768
 
-// Rate is one observation as a source publishes it: Quote units per one Base unit on Date.
+// Rate is one observation as a source publishes it: Quote units per one Base
+// unit on Date.
 type Rate struct {
 	Date  time.Time // UTC midnight
 	Base  string
 	Quote string
 	Rate  float64
 
-	// Published components, per one Base unit, when the source quotes a spread. Nil means not published. A zero is a
-	// real published value (BOJA publishes a zero bid on some days).
+	// Published components, per one Base unit, when the source quotes a spread.
+	// Nil means not published. A zero is a real published value (BOJA publishes
+	// a zero bid on some days).
 	Bid *float64
 	Ask *float64
 	Mid *float64
@@ -34,27 +38,34 @@ type Rate struct {
 
 // Adapter fetches rates from one provider.
 //
-// Fetch returns rows dated after `after` (exclusive) through `upto` (inclusive). A zero time leaves that side open:
-// zero `after` means from the start of what the source serves, zero `upto` means through the latest publication.
-// Individual adapters may clip further, as their Ruby counterparts do.
+// Fetch returns rows dated after `after` (exclusive) through `upto`
+// (inclusive). A zero time leaves that side open: zero `after` means from the
+// start of what the source serves, zero `upto` means through the latest
+// publication. Individual adapters may clip further, as their Ruby counterparts
+// do.
 //
-// Embed Base to get the defaults for the other methods and override the ones a provider needs.
+// Embed Base to get the defaults for the other methods and override the ones a
+// provider needs.
 type Adapter interface {
 	Fetch(ctx context.Context, after, upto time.Time) ([]Rate, error)
 
-	// BackfillRange is the window, in days, that FetchEach asks for per call. Zero fetches everything in one call.
+	// BackfillRange is the window, in days, that FetchEach asks for per call.
+	// Zero fetches everything in one call.
 	BackfillRange() int
 
-	// LeadDays is how many days ahead of today a row may legitimately be dated, beyond the universal grace window.
+	// LeadDays is how many days ahead of today a row may legitimately be dated,
+	// beyond the universal grace window.
 	LeadDays() int
 
-	// Revises reports whether the source may replace an already-published value in place, so backfill compares
-	// fetched rows against stored ones and warns on drift.
+	// Revises reports whether the source may replace an already-published value
+	// in place, so backfill compares fetched rows against stored ones and warns
+	// on drift.
 	Revises() bool
 }
 
-// FetchEach walks from after to today in BackfillRange windows, calling yield with each non-empty batch. The last
-// window is open-ended. It returns immediately when after is today or later.
+// FetchEach walks from after to today in BackfillRange windows, calling yield
+// with each non-empty batch. The last window is open-ended. It returns
+// immediately when after is today or later.
 func FetchEach(ctx context.Context, a Adapter, after, today time.Time, yield func([]Rate) error) error {
 	if !after.IsZero() && !after.Before(today) {
 		return nil
@@ -91,8 +102,9 @@ var (
 	registry = map[string]Constructor{}
 )
 
-// Register makes an adapter available under its provider key (upper case, as in db/seeds/providers). Adapter
-// packages call it from init. It panics on a duplicate key.
+// Register makes an adapter available under its provider key (upper case, as in
+// db/seeds/providers). Adapter packages call it from init. It panics on a
+// duplicate key.
 func Register(key string, c Constructor) {
 	mu.Lock()
 	defer mu.Unlock()

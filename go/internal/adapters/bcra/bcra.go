@@ -1,5 +1,6 @@
-// Package bcra fetches rates from the Central Bank of Argentina (Banco Central de la República Argentina), which
-// publishes official exchange rates in ARS. The API accepts a single date per request, so Fetch walks day by day,
+// Package bcra fetches rates from the Central Bank of Argentina (Banco Central
+// de la República Argentina), which publishes official exchange rates in ARS.
+// The API accepts a single date per request, so Fetch walks day by day,
 // skipping weekends.
 package bcra
 
@@ -21,11 +22,12 @@ import (
 
 const baseURL = "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones"
 
-// skipCodes holds the self-reference, internal reference, defunct and duplicate codes.
+// skipCodes holds the self-reference, internal reference, defunct and duplicate
+// codes.
 var skipCodes = []string{"ARS", "REF", "VEB", "MXP"}
 
-// BCRA quotes some low-value currencies per N units, as in "DONG VIETNAM (C/1.000 UNIDADES)", with a period as the
-// thousands separator.
+// BCRA quotes some low-value currencies per N units, as in "DONG VIETNAM
+// (C/1.000 UNIDADES)", with a period as the thousands separator.
 var multiplierPattern = regexp.MustCompile(`(?i)C/([\d.]+)\s*UNIDADES`)
 
 func init() {
@@ -45,8 +47,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 90 }
 
-// Fetch implements adapter.Adapter. Unlike most adapters it treats after as inclusive and requires it, as the Ruby
-// adapter does.
+// Fetch implements adapter.Adapter. Unlike most adapters it treats after as
+// inclusive and requires it, as the Ruby adapter does.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("after is required")
@@ -110,7 +112,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		}
 	}
 	if fecha == nil || fecha == false {
-		// Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP 200.
+		// Holidays return {"results":{"fecha":null,"detalle":[]}} with HTTP
+		// 200.
 		if hasFecha && fecha == nil && len(detalle) == 0 {
 			return nil, nil
 		}
@@ -170,7 +173,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toFloat mirrors Ruby's strict Float(): numbers pass through, strings must parse, anything else fails.
+// toFloat mirrors Ruby's strict Float(): numbers pass through, strings must
+// parse, anything else fails.
 func toFloat(v any) (float64, error) {
 	switch v := v.(type) {
 	case float64:

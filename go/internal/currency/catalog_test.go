@@ -14,7 +14,8 @@ import (
 
 var ctx = context.Background()
 
-// setup mirrors currency_spec's before block: four rates, and currencies and coverages derived from them.
+// setup mirrors currency_spec's before block: four rates, and currencies and
+// coverages derived from them.
 func setup(t *testing.T) *sql.DB {
 	t.Helper()
 	conn := fixtures.New(t)
@@ -267,8 +268,8 @@ func TestUsesLaterOfPegSinceAndAnchorStart(t *testing.T) {
 	}
 }
 
-// aedSetup is the shared arrange step of the two AED specs: AED pegged to USD since 1997-11-02, provider data only
-// today, but USD history back to 1990.
+// aedSetup is the shared arrange step of the two AED specs: AED pegged to USD
+// since 1997-11-02, provider data only today, but USD history back to 1990.
 func aedSetup(t *testing.T) *sql.DB {
 	conn := setup(t)
 	today := db.FormatDate(fixtures.Today())

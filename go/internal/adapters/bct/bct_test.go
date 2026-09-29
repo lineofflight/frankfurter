@@ -15,9 +15,10 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
 )
 
-// The Ruby spec allows playback repeats, but VCR still prefers unused interactions, so each day's POST gets its own
-// response. go-vcr's replayable mode always answers with the first match, so we replay play-once here, which gives
-// the same pairing for these three requests.
+// The Ruby spec allows playback repeats, but VCR still prefers unused
+// interactions, so each day's POST gets its own response. go-vcr's replayable
+// mode always answers with the first match, so we replay play-once here, which
+// gives the same pairing for these three requests.
 func newAdapter(t *testing.T) *Adapter {
 	t.Helper()
 	return New(vcrtest.Client(t, "bct", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host)))

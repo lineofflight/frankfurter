@@ -1,14 +1,18 @@
-// Package nrbt fetches rates from the National Reserve Bank of Tonga, which publishes "Authorized Persons' Average
-// Daily Exchange Rates" as a single rolling XLSX covering 2017-01 to present in biennial sheets.
+// Package nrbt fetches rates from the National Reserve Bank of Tonga, which
+// publishes "Authorized Persons' Average Daily Exchange Rates" as a single
+// rolling XLSX covering 2017-01 to present in biennial sheets.
 //
-// Each sheet has the same layout: an Excel serial date in column A, then three blocks of twelve quote currencies: BUY
-// (B-M), MID (O-Z) and SELL (AB-AM), with N and AA as spacers. Rates read "1 TOP = X foreign", so TOP is the base. We
-// emit the published MID rather than reconstructing it from buy and sell.
+// Each sheet has the same layout: an Excel serial date in column A, then three
+// blocks of twelve quote currencies: BUY (B-M), MID (O-Z) and SELL (AB-AM),
+// with N and AA as spacers. Rates read "1 TOP = X foreign", so TOP is the base.
+// We emit the published MID rather than reconstructing it from buy and sell.
 //
-// Holidays and closures are flagged inline as shared strings in the rate cells (e.g. "Public Holiday: ANZAC Day");
-// those rows have no numeric values and are skipped.
+// Holidays and closures are flagged inline as shared strings in the rate cells
+// (e.g. "Public Holiday: ANZAC Day"); those rows have no numeric values and are
+// skipped.
 //
-// Unlike adapter.Window, the date filter treats after as inclusive, as the Ruby adapter does.
+// Unlike adapter.Window, the date filter treats after as inclusive, as the Ruby
+// adapter does.
 package nrbt
 
 import (
@@ -26,7 +30,8 @@ import (
 
 const dataURL = "https://www.reservebank.to/data/docs/fmarkets/exrates/average_daily_exchange_rates.xlsx"
 
-// quoteCurrencies are in column order; the sequence repeats across the BUY, MID and SELL blocks.
+// quoteCurrencies are in column order; the sequence repeats across the BUY, MID
+// and SELL blocks.
 var quoteCurrencies = [12]string{"AUD", "EUR", "FJD", "GBP", "JPY", "NZD", "USD", "WST", "CHF", "CAD", "SEK", "SGD"}
 
 // Zero-based column indexes of the MID block (O through Z).
@@ -51,7 +56,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. A single XLSX holds the full history, so one window covers it.
+// BackfillRange implements adapter.Adapter. A single XLSX holds the full
+// history, so one window covers it.
 func (a *Adapter) BackfillRange() int { return 36525 }
 
 // Fetch implements adapter.Adapter.
@@ -63,7 +69,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(body, after, upto)
 }
 
-// worksheet is the cell shape parseSheet reads: each cell's reference and raw value.
+// worksheet is the cell shape parseSheet reads: each cell's reference and raw
+// value.
 type worksheet struct {
 	Rows []row
 }
@@ -87,7 +94,8 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, name := range f.GetSheetList() {
 		ws, err := readSheet(f, name)
-		// A sheet whose relationship does not resolve to a worksheet part has no data to read.
+		// A sheet whose relationship does not resolve to a worksheet part has
+		// no data to read.
 		if errors.As(err, new(excelize.ErrSheetNotExist)) {
 			continue
 		}
@@ -99,7 +107,8 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// readSheet loads a sheet's raw cell values. String cells (shared or inline) never carry rates, so they are dropped.
+// readSheet loads a sheet's raw cell values. String cells (shared or inline)
+// never carry rates, so they are dropped.
 func readSheet(f *excelize.File, name string) (*worksheet, error) {
 	rows, err := f.GetRows(name)
 	if err != nil {
@@ -115,7 +124,8 @@ func readSheet(f *excelize.File, name string) (*worksheet, error) {
 			if err != nil {
 				return nil, err
 			}
-			// Only a numeric-looking value needs its type checked: anything else fails to parse anyway.
+			// Only a numeric-looking value needs its type checked: anything
+			// else fails to parse anyway.
 			if _, ok := adapter.ParseFloat(v); ok {
 				typ, err := f.GetCellType(name, ref)
 				if err != nil {
@@ -180,7 +190,8 @@ func parseSheet(ws *worksheet, after, upto time.Time) []adapter.Rate {
 	return rates
 }
 
-// columnIndex converts the letters leading a cell reference (A, B, ..., Z, AA, ...) to a zero-based index.
+// columnIndex converts the letters leading a cell reference (A, B, ..., Z, AA,
+// ...) to a zero-based index.
 func columnIndex(ref string) (int, bool) {
 	n, i := 0, 0
 	for ; i < len(ref) && ref[i] >= 'A' && ref[i] <= 'Z'; i++ {

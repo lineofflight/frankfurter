@@ -1,6 +1,8 @@
-// Package hmrc fetches rates from HM Revenue & Customs (UK), which publishes monthly customs exchange rates for 150+
-// currencies against the British pound. Rates are published on the penultimate Thursday of every month and take effect
-// on the 1st of the following month. Frequency monthly, so these never blend (#172, #612, #646).
+// Package hmrc fetches rates from HM Revenue & Customs (UK), which publishes
+// monthly customs exchange rates for 150+ currencies against the British pound.
+// Rates are published on the penultimate Thursday of every month and take
+// effect on the 1st of the following month. Frequency monthly, so these never
+// blend (#172, #612, #646).
 //
 // Fetch treats after as inclusive, as the Ruby adapter does.
 package hmrc
@@ -26,15 +28,17 @@ var coverageStart = adapter.Date(2021, 1, 1)
 
 var columns = []string{"Currency Code", "Currency Units per £1", "Start date"}
 
-// Labels HMRC uses that aren't ISO 4217 codes: VED for the bolívar (VES), ZIG for Zimbabwe Gold (ZWG). The retired
-// sucre code ECS on Ecuador's row is left as published and excluded from blends by its terminal date.
+// Labels HMRC uses that aren't ISO 4217 codes: VED for the bolívar (VES), ZIG
+// for Zimbabwe Gold (ZWG). The retired sucre code ECS on Ecuador's row is left
+// as published and excluded from blends by its terminal date.
 var aliases = map[string]string{
 	"VED": "VES",
 	"ZIG": "ZWG",
 }
 
-// HMRC's November 2022 file labels an old-leone value (15631 per pound) as SLE. The new leone, ~24 per pound, only
-// appears in its files from March 2023, so earlier SLE rows price the old unit.
+// HMRC's November 2022 file labels an old-leone value (15631 per pound) as SLE.
+// The new leone, ~24 per pound, only appears in its files from March 2023, so
+// earlier SLE rows price the old unit.
 var predecessors = map[string]adapter.Predecessor{
 	"SLE": {Code: "SLL", Cutover: adapter.Date(2023, 3, 1)},
 }
@@ -56,12 +60,14 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Revises implements adapter.Adapter. HMRC may issue a corrected rate mid-month when a currency moves more than 5%.
-// Every file so far adds such a row with its own start date, which parse keeps as a second observation.
+// Revises implements adapter.Adapter. HMRC may issue a corrected rate mid-month
+// when a currency moves more than 5%. Every file so far adds such a row with
+// its own start date, which parse keeps as a second observation.
 func (a *Adapter) Revises() bool { return true }
 
-// LeadDays implements adapter.Adapter. Next month's file appears on the penultimate Thursday, so its rows sit up to two
-// weeks ahead; a month covers any slack.
+// LeadDays implements adapter.Adapter. Next month's file appears on the
+// penultimate Thursday, so its rows sit up to two weeks ahead; a month covers
+// any slack.
 func (a *Adapter) LeadDays() int { return 31 }
 
 // Fetch implements adapter.Adapter.
@@ -70,8 +76,10 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if start.IsZero() {
 		start = coverageStart
 	}
-	// HMRC publishes the coming month's file on the penultimate Thursday of this one. Look one month past the window so
-	// the rows dated the coming 1st are stored the day they appear rather than the first poll after they apply.
+	// HMRC publishes the coming month's file on the penultimate Thursday of
+	// this one. Look one month past the window so the rows dated the coming 1st
+	// are stored the day they appear rather than the first poll after they
+	// apply.
 	end := upto
 	if end.IsZero() {
 		end = firstOfMonth(a.Today()).AddDate(0, 1, 0)
@@ -96,7 +104,8 @@ func (a *Adapter) fetchMonth(ctx context.Context, month time.Time) ([]adapter.Ra
 	url := fmt.Sprintf("%s/monthly_csv_%d-%d.csv", baseURL, month.Year(), int(month.Month()))
 	body, err := a.Get(ctx, url, nil)
 	if err != nil {
-		// Only the coming month's file may be missing, until HMRC publishes it. Any other 404 is a moved endpoint.
+		// Only the coming month's file may be missing, until HMRC publishes it.
+		// Any other 404 is a moved endpoint.
 		var se *adapter.StatusError
 		if errors.As(err, &se) && se.StatusCode == http.StatusNotFound && month.After(a.Today()) {
 			return nil, nil
@@ -134,7 +143,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		return nil, fmt.Errorf("HMRC: CSV is missing columns %s", strings.Join(missing, ", "))
 	}
 
-	// Ruby's CSV reads a missing or empty field as nil, and the adapter skips rows lacking any of these.
+	// Ruby's CSV reads a missing or empty field as nil, and the adapter skips
+	// rows lacking any of these.
 	field := func(rec []string, name string) (string, bool) {
 		i := index[name]
 		if i >= len(rec) || rec[i] == "" {

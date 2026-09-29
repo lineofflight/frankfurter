@@ -1,14 +1,19 @@
-// Package ust fetches the U.S. Department of the Treasury reporting rates of exchange. Quarterly: one figure per
-// currency, foreign units per USD, effective from the quarter end for the following quarter's federal reporting, with
-// mid-quarter amendments carrying their own effective date. Frequency quarterly, so these never blend (#646, #647).
+// Package ust fetches the U.S. Department of the Treasury reporting rates of
+// exchange. Quarterly: one figure per currency, foreign units per USD,
+// effective from the quarter end for the following quarter's federal reporting,
+// with mid-quarter amendments carrying their own effective date. Frequency
+// quarterly, so these never blend (#646, #647).
 //
-// Rows are keyed by a "Country-Currency" label, not an ISO code, and the labels drift: a currency can appear under
-// several labels over the years, and a label can keep a predecessor's magnitudes past a redenomination. currencies
-// maps each label we relay to a code, with date bounds where a label's values change unit; anything unmapped is
-// dropped, and a label listed earlier wins when two map to the same pair on the same date.
+// Rows are keyed by a "Country-Currency" label, not an ISO code, and the labels
+// drift: a currency can appear under several labels over the years, and a label
+// can keep a predecessor's magnitudes past a redenomination. currencies maps
+// each label we relay to a code, with date bounds where a label's values change
+// unit; anything unmapped is dropped, and a label listed earlier wins when two
+// map to the same pair on the same date.
 //
-// Unlike most adapters, Fetch treats after as inclusive: a fresh backfill starts on coverage_start, and a re-fetch
-// from last_synced picks up amendments effective that day. The insert is conflict-free, so replaying a day is free.
+// Unlike most adapters, Fetch treats after as inclusive: a fresh backfill
+// starts on coverage_start, and a re-fetch from last_synced picks up amendments
+// effective that day. The insert is conflict-free, so replaying a day is free.
 package ust
 
 import (
@@ -26,7 +31,8 @@ import (
 const (
 	apiURL   = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange"
 	pageSize = 10000
-	// Amendments to a quarter land up to two months after its record date, under that record date.
+	// Amendments to a quarter land up to two months after its record date,
+	// under that record date.
 	amendmentWindowMonths = 4
 )
 
@@ -83,7 +89,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		}
 	}
 
-	// Parse once over every page, so a record date straddling a page boundary still collapses to one row per pair.
+	// Parse once over every page, so a record date straddling a page boundary
+	// still collapses to one row per pair.
 	rates, err := parse(rows)
 	if err != nil {
 		return nil, err
@@ -110,16 +117,17 @@ func query(after time.Time, n int) url.Values {
 	return q
 }
 
-// monthsBefore is Ruby's Date#<<: it clamps to the last day of the target month rather than overflowing into the
-// next, so 2026-06-30 << 4 is 2026-02-28.
+// monthsBefore is Ruby's Date#<<: it clamps to the last day of the target month
+// rather than overflowing into the next, so 2026-06-30 << 4 is 2026-02-28.
 func monthsBefore(d time.Time, months int) time.Time {
 	first := time.Date(d.Year(), d.Month()-time.Month(months), 1, 0, 0, 0, 0, time.UTC)
 	last := first.AddDate(0, 1, -1).Day()
 	return first.AddDate(0, 0, min(d.Day(), last)-1)
 }
 
-// parse returns one record per (date, quote): amendments carry their own effective date, and when two labels reach
-// the same pair on the same date the one listed first in currencies wins.
+// parse returns one record per (date, quote): amendments carry their own
+// effective date, and when two labels reach the same pair on the same date the
+// one listed first in currencies wins.
 func parse(rows []row) ([]adapter.Rate, error) {
 	type key struct {
 		date  time.Time
@@ -129,7 +137,8 @@ func parse(rows []row) ([]adapter.Rate, error) {
 	var out []adapter.Rate
 	seen := map[key]slot{}
 	for _, r := range rows {
-		// Ruby parses the date before looking up the label, so a bad date fails even on a label we drop.
+		// Ruby parses the date before looking up the label, so a bad date fails
+		// even on a label we drop.
 		date, err := time.Parse("2006-01-02", r.EffectiveDate)
 		if err != nil {
 			return nil, fmt.Errorf("effective date %q: %w", r.EffectiveDate, err)
@@ -161,7 +170,8 @@ func parse(rows []row) ([]adapter.Rate, error) {
 	return out, nil
 }
 
-// codeFor returns the code a label maps to on date, or "" when none of its spans covers it.
+// codeFor returns the code a label maps to on date, or "" when none of its
+// spans covers it.
 func codeFor(spans []span, date time.Time) string {
 	d := date.Format("2006-01-02")
 	for _, s := range spans {
@@ -176,8 +186,8 @@ func codeFor(spans []span, date time.Time) string {
 	return ""
 }
 
-// span maps a label to code from from (inclusive) until until (exclusive); an empty bound is open. Dates are
-// YYYY-MM-DD, so they compare as strings.
+// span maps a label to code from from (inclusive) until until (exclusive); an
+// empty bound is open. Dates are YYYY-MM-DD, so they compare as strings.
 type span struct {
 	code, from, until string
 }

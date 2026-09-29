@@ -20,9 +20,10 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// serve is config.ru under config/puma.rb: the API on PORT (default 8080) until interrupted, then a graceful
-// shutdown. Puma's worker processes and threads have no counterpart; one process serves concurrently and MAX_THREADS
-// still sizes the database pool.
+// serve is config.ru under config/puma.rb: the API on PORT (default 8080) until
+// interrupted, then a graceful shutdown. Puma's worker processes and threads
+// have no counterpart; one process serves concurrently and MAX_THREADS still
+// sizes the database pool.
 func serve(ctx context.Context, args []string, _ io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("serve", flag.ContinueOnError), args, 0); err != nil {
 		return err
@@ -66,9 +67,11 @@ func serveOn(ctx context.Context, conn *sql.DB, ln net.Listener) error {
 	return nil
 }
 
-// start is the container's command, `rake db:setup && foreman start`: set up the database, then run the web and
-// scheduler processes of the Procfile side by side until interrupted. Each gets its own connection pool, as the two
-// processes do in Ruby, so long backfill transactions never starve requests. When either stops, so does the other.
+// start is the container's command, `rake db:setup && foreman start`: set up
+// the database, then run the web and scheduler processes of the Procfile side
+// by side until interrupted. Each gets its own connection pool, as the two
+// processes do in Ruby, so long backfill transactions never starve requests.
+// When either stops, so does the other.
 func start(ctx context.Context, args []string, stdout io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("start", flag.ContinueOnError), args, 0); err != nil {
 		return err
@@ -106,7 +109,8 @@ func setupDB(ctx context.Context, conn *sql.DB) error {
 	return rates.SeedProviders(ctx, conn)
 }
 
-// healthcheck replaces the Dockerfile's `curl -f --max-time 9 http://localhost:$PORT`, since the image has no curl.
+// healthcheck replaces the Dockerfile's `curl -f --max-time 9
+// http://localhost:$PORT`, since the image has no curl.
 func healthcheck(ctx context.Context, args []string, _ io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("healthcheck", flag.ContinueOnError), args, 0); err != nil {
 		return err
@@ -132,7 +136,8 @@ func healthcheck(ctx context.Context, args []string, _ io.Writer) error {
 	return nil
 }
 
-// envInt reads an integer the way Ruby's Integer() does, or returns fallback when the variable is unset.
+// envInt reads an integer the way Ruby's Integer() does, or returns fallback
+// when the variable is unset.
 func envInt(key string, fallback int) (int, error) {
 	s, ok := os.LookupEnv(key)
 	if !ok {

@@ -1,6 +1,8 @@
-// Package cbssc fetches rates from the Central Bank of Seychelles, which publishes the Consolidated Average Rates of
-// Authorised Dealers: a daily buy, sell and mid rate for USD, EUR and GBP against the Seychellois rupee (SCR), expressed
-// as rupees per unit of foreign currency (1 USD = 14.6 SCR). The pivot sits in quote, as with NBG.
+// Package cbssc fetches rates from the Central Bank of Seychelles, which
+// publishes the Consolidated Average Rates of Authorised Dealers: a daily buy,
+// sell and mid rate for USD, EUR and GBP against the Seychellois rupee (SCR),
+// expressed as rupees per unit of foreign currency (1 USD = 14.6 SCR). The
+// pivot sits in quote, as with NBG.
 //
 // Two sources, both carrying the mid rate:
 //
@@ -11,11 +13,13 @@
 //   - The live CAR endpoint, which has only the current day. It runs ahead of the workbook by a day, so it fills the
 //     head of the series.
 //
-// The workbook stores the raw dealer average to full float precision (14.616577838181803) while every published view
-// of the same figure shows four decimals. Round to four so a day caught live and the same day read from the workbook
-// agree.
+// The workbook stores the raw dealer average to full float precision
+// (14.616577838181803) while every published view of the same figure shows four
+// decimals. Round to four so a day caught live and the same day read from the
+// workbook agree.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package cbssc
 
 import (
@@ -123,9 +127,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseSheet reads a currency sheet, which opens with a "Date | SCR/USD" header; rows beneath carry an Excel serial in
-// A and the mid in B. Sheets without such a header (the notes, the hidden yearly averages) emit nothing. A day with no
-// fixing holds a text placeholder in B instead of a number (GBP on 2020-04-09), which numericCell skips.
+// parseSheet reads a currency sheet, which opens with a "Date | SCR/USD"
+// header; rows beneath carry an Excel serial in A and the mid in B. Sheets
+// without such a header (the notes, the hidden yearly averages) emit nothing. A
+// day with no fixing holds a text placeholder in B instead of a number (GBP on
+// 2020-04-09), which numericCell skips.
 func parseSheet(f *excelize.File, sheet string, rates []adapter.Rate) ([]adapter.Rate, error) {
 	rows, err := f.GetRows(sheet, excelize.Options{RawCellValue: true})
 	if err != nil {
@@ -168,8 +174,8 @@ func cellType(f *excelize.File, sheet, ref string) excelize.CellType {
 	return t
 }
 
-// numericCell parses a stored number, rejecting strings that merely look numeric, as the Ruby adapter reads only the
-// <v> of non-shared-string cells.
+// numericCell parses a stored number, rejecting strings that merely look
+// numeric, as the Ruby adapter reads only the <v> of non-shared-string cells.
 func numericCell(f *excelize.File, sheet, ref, value string) (float64, bool) {
 	x, ok := adapter.ParseFloat(strings.TrimSpace(value))
 	if !ok {
@@ -230,7 +236,8 @@ func parseLive(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// round4 is Ruby's Float#round(4): round half up on x*10^4, corrected where the product lost precision.
+// round4 is Ruby's Float#round(4): round half up on x*10^4, corrected where the
+// product lost precision.
 func round4(x float64) float64 {
 	const s = 1e4
 	f := math.Round(x * s)

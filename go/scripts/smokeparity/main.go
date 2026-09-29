@@ -1,7 +1,9 @@
-// Command smokeparity sends a request corpus to the Ruby and Go servers and compares the answers: status, media type
-// and body, with JSON compared semantically (key order ignored, numbers within 1e-6 relative, error wording ignored),
-// NDJSON line by line and CSV field by field. Every Go v2 answer the OpenAPI document describes is also validated
-// against it. go/scripts/smoke_parity.sh starts the servers and runs it.
+// Command smokeparity sends a request corpus to the Ruby and Go servers and
+// compares the answers: status, media type and body, with JSON compared
+// semantically (key order ignored, numbers within 1e-6 relative, error wording
+// ignored), NDJSON line by line and CSV field by field. Every Go v2 answer the
+// OpenAPI document describes is also validated against it.
+// go/scripts/smoke_parity.sh starts the servers and runs it.
 //
 //	go run ./scripts/smokeparity -ruby http://localhost:9301 -go http://localhost:9302 \
 //	  -corpus scripts/smoke_corpus.txt -openapi ../lib/public/v2/openapi.json
@@ -262,8 +264,9 @@ func sameField(w, g string) bool {
 	return err1 == nil && err2 == nil && closeEnough(wf, gf)
 }
 
-// diffJSON compares Ruby's value (want) with Go's (got): object keys in any order, arrays in order, numbers within
-// tolerance. An error body's message only has to be a non-empty string.
+// diffJSON compares Ruby's value (want) with Go's (got): object keys in any
+// order, arrays in order, numbers within tolerance. An error body's message
+// only has to be a non-empty string.
 func diffJSON(path string, want, got any, errorBody bool) []string {
 	switch w := want.(type) {
 	case map[string]any:
@@ -354,8 +357,9 @@ func loadSpec(path string) (*openapi3.T, error) {
 	return doc, doc.Validate(context.Background(), openapi3.DisableExamplesValidation())
 }
 
-// validate checks a Go answer to a v2 GET against the document. It reports whether the response was checked:
-// undocumented paths, statuses and CSV are skipped.
+// validate checks a Go answer to a v2 GET against the document. It reports
+// whether the response was checked: undocumented paths, statuses and CSV are
+// skipped.
 func validate(doc *openapi3.T, r request, res response) (bool, error) {
 	path, query, _ := strings.Cut(r.path, "?")
 	specPath := v2SpecPath(path)
@@ -371,7 +375,8 @@ func validate(doc *openapi3.T, r request, res response) (bool, error) {
 	case "text/csv":
 		return false, nil
 	case "application/x-ndjson":
-		// The document types the stream as a string of Rate objects, one per line.
+		// The document types the stream as a string of Rate objects, one per
+		// line.
 		rate := doc.Components.Schemas["Rate"].Value
 		for i, line := range strings.Split(strings.TrimSuffix(string(res.body), "\n"), "\n") {
 			if line == "" {
@@ -404,8 +409,8 @@ func validate(doc *openapi3.T, r request, res response) (bool, error) {
 	})
 }
 
-// v2SpecPath is the document's path for a request path, or "" for paths it does not describe (an extension picks
-// another representation).
+// v2SpecPath is the document's path for a request path, or "" for paths it does
+// not describe (an extension picks another representation).
 func v2SpecPath(path string) string {
 	rest, ok := strings.CutPrefix(path, "/v2/")
 	if !ok || strings.ContainsAny(rest, ".%") {

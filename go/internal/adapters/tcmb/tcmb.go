@@ -1,9 +1,10 @@
-// Package tcmb fetches rates from the Central Bank of the Republic of Turkey, which publishes indicative buying and
-// selling rates in Turkish lira through its EVDS3 bulk API. Each currency's rate is the midpoint of buy and sell.
+// Package tcmb fetches rates from the Central Bank of the Republic of Turkey,
+// which publishes indicative buying and selling rates in Turkish lira through
+// its EVDS3 bulk API. Each currency's rate is the midpoint of buy and sell.
 // Requires the TCMB_API_KEY environment variable.
 //
-// Rows come back exactly as the API returns them for [after, upto]: like the Ruby adapter, Fetch does not clip the
-// start date, so after is inclusive here.
+// Rows come back exactly as the API returns them for [after, upto]: like the
+// Ruby adapter, Fetch does not clip the start date, so after is inclusive here.
 package tcmb
 
 import (
@@ -21,8 +22,9 @@ import (
 
 const evdsURL = "https://evds3.tcmb.gov.tr/igmevdsms-dis"
 
-// Hardcoded because the EVDS3 catalog API doesn't expose a clean list and the series rarely change. Browse:
-// https://evds3.tcmb.gov.tr > Exchange Rates > Indicative Exchange Rates
+// Hardcoded because the EVDS3 catalog API doesn't expose a clean list and the
+// series rarely change. Browse: https://evds3.tcmb.gov.tr > Exchange Rates >
+// Indicative Exchange Rates
 var currencies = []string{
 	"AED", "AUD", "AZN", "CAD", "CHF", "CNY", "DKK", "EUR", "GBP", "JPY", "KRW",
 	"KWD", "KZT", "NOK", "PKR", "QAR", "RON", "RUB", "SAR", "SEK", "USD",
@@ -83,7 +85,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(data.Items)
 }
 
-// seriesID is the EVDS series for a currency's buying (A) or selling (S) rate in TRY.
+// seriesID is the EVDS series for a currency's buying (A) or selling (S) rate
+// in TRY.
 func seriesID(currency, side string) string {
 	return "TP.DK." + currency + "." + side + ".YTL"
 }
@@ -114,7 +117,8 @@ func parse(items []map[string]any) ([]adapter.Rate, error) {
 				continue
 			}
 
-			// JPY is quoted per 100 units in TCMB data (confirmed via series metadata).
+			// JPY is quoted per 100 units in TCMB data (confirmed via series
+			// metadata).
 			unit := 1.0
 			if c == "JPY" {
 				unit = 100
@@ -132,7 +136,8 @@ func parse(items []map[string]any) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// value is Ruby's Float(v) on a JSON value: nil is absent, anything unparseable is an error.
+// value is Ruby's Float(v) on a JSON value: nil is absent, anything unparseable
+// is an error.
 func value(v any) (float64, bool, error) {
 	switch v := v.(type) {
 	case nil:

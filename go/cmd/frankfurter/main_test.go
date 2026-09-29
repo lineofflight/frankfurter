@@ -22,7 +22,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/seeds"
 )
 
-// scratchDB points DATABASE_URL at a new, empty database file and returns its path.
+// scratchDB points DATABASE_URL at a new, empty database file and returns its
+// path.
 func scratchDB(t *testing.T) string {
 	t.Helper()
 	path := filepath.Join(t.TempDir(), "frankfurter.sqlite3")
@@ -66,7 +67,8 @@ func schemaVersion(t *testing.T, path string) int {
 	return v
 }
 
-// purgeRecorder swaps in a configured cache whose purges hit a local server, and counts them.
+// purgeRecorder swaps in a configured cache whose purges hit a local server,
+// and counts them.
 func purgeRecorder(t *testing.T) (*atomic.Int32, func() *cache.Cache) {
 	t.Helper()
 	var hits atomic.Int32
@@ -103,8 +105,9 @@ func TestHelpAndUnknownCommands(t *testing.T) {
 	}
 }
 
-// db:setup migrates a new database to the latest version and seeds every provider; a second run (every container
-// start) is a no-op migration and a reseed.
+// db:setup migrates a new database to the latest version and seeds every
+// provider; a second run (every container start) is a no-op migration and a
+// reseed.
 func TestSetupMigratesAndSeeds(t *testing.T) {
 	path := scratchDB(t)
 	mustRun(t, "setup")
@@ -147,8 +150,8 @@ func TestMigrateHonoursVersion(t *testing.T) {
 	}
 }
 
-// The dry run reads the providers table named by DATABASE_URL and prints one startup line per provider and one cron
-// line per scheduled provider.
+// The dry run reads the providers table named by DATABASE_URL and prints one
+// startup line per provider and one cron line per scheduled provider.
 func TestDryRunReadsTheDatabase(t *testing.T) {
 	conn := fixtures.New(t)
 	path := filepath.Join(t.TempDir(), "copy.sqlite3")
@@ -177,8 +180,8 @@ func TestDryRunReadsTheDatabase(t *testing.T) {
 	}
 }
 
-// The scheduler's backfills and purge jobs share one cache, so the debounce spans them all, and the real blend is
-// wired in.
+// The scheduler's backfills and purge jobs share one cache, so the debounce
+// spans them all, and the real blend is wired in.
 func TestScheduleWiresBlendAndOneCache(t *testing.T) {
 	c := cache.New("", "")
 	deps := scheduleDeps(nil, nil, c)
@@ -190,8 +193,8 @@ func TestScheduleWiresBlendAndOneCache(t *testing.T) {
 	}
 }
 
-// debouncing is a backfill that inserts twice within one debounce window: the first purge fires, the second is
-// deferred.
+// debouncing is a backfill that inserts twice within one debounce window: the
+// first purge fires, the second is deferred.
 type debouncing struct{ c *cache.Cache }
 
 func (d debouncing) Backfill(ctx context.Context, _ provider.Provider) {
@@ -203,8 +206,9 @@ func (d debouncing) BackfillAfter(ctx context.Context, p provider.Provider, _ ti
 	d.Backfill(ctx, p)
 }
 
-// The backfill task ends by flushing the purge its debounce deferred, since the process is about to exit; an unknown
-// provider aborts before backfilling or purging.
+// The backfill task ends by flushing the purge its debounce deferred, since the
+// process is about to exit; an unknown provider aborts before backfilling or
+// purging.
 func TestBackfillFlushesTheDeferredPurge(t *testing.T) {
 	path := scratchDB(t)
 	mustRun(t, "setup")
@@ -230,8 +234,9 @@ func TestBackfillFlushesTheDeferredPurge(t *testing.T) {
 	}
 }
 
-// The maintenance tasks purge the CDN as their rake counterparts do: after blend and rollup rebuilds, after
-// purge_invalid only when it deleted something, and on cache:purge.
+// The maintenance tasks purge the CDN as their rake counterparts do: after
+// blend and rollup rebuilds, after purge_invalid only when it deleted
+// something, and on cache:purge.
 func TestTasksPurgeTheCache(t *testing.T) {
 	scratchDB(t)
 	mustRun(t, "setup")
@@ -277,7 +282,8 @@ func TestHealthcheck(t *testing.T) {
 	}
 }
 
-// db:purge_invalid purges the CDN once it has deleted something: a rate dated past ECB's future-date horizon.
+// db:purge_invalid purges the CDN once it has deleted something: a rate dated
+// past ECB's future-date horizon.
 func TestPurgeInvalidPurgesAfterDeleting(t *testing.T) {
 	path := scratchDB(t)
 	mustRun(t, "setup")
@@ -302,7 +308,8 @@ func TestPurgeInvalidPurgesAfterDeleting(t *testing.T) {
 	}
 }
 
-// serve answers the API root, which the container healthcheck polls, and shuts down cleanly when interrupted.
+// serve answers the API root, which the container healthcheck polls, and shuts
+// down cleanly when interrupted.
 func TestServeAnswersAndShutsDown(t *testing.T) {
 	path := scratchDB(t)
 	mustRun(t, "setup")
@@ -329,7 +336,8 @@ func TestServeAnswersAndShutsDown(t *testing.T) {
 	}
 }
 
-// blend:parity refuses to run before the daily blend is built, then passes on a rebuilt fixture database.
+// blend:parity refuses to run before the daily blend is built, then passes on a
+// rebuilt fixture database.
 func TestBlendParity(t *testing.T) {
 	path := scratchDB(t)
 	mustRun(t, "setup")

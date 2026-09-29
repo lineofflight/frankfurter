@@ -35,9 +35,11 @@ func loadSpec(t *testing.T, file string) *openapi3.T {
 	return doc
 }
 
-// validateResponse checks a response against the operation at specPath (a key of the document's paths), the way the
-// Ruby specs use skooma. The route is given rather than matched: v1's path templates put two variables in one segment
-// ("/{start_date}..{end_date}"), which kin-openapi's routers do not match.
+// validateResponse checks a response against the operation at specPath (a key
+// of the document's paths), the way the Ruby specs use skooma. The route is
+// given rather than matched: v1's path templates put two variables in one
+// segment ("/{start_date}..{end_date}"), which kin-openapi's routers do not
+// match.
 func validateResponse(t *testing.T, doc *openapi3.T, specPath string, req *http.Request, res *httptest.ResponseRecorder) error {
 	t.Helper()
 	item := doc.Paths.Find(specPath)
@@ -56,7 +58,8 @@ func validateResponse(t *testing.T, doc *openapi3.T, specPath string, req *http.
 	return openapi3filter.ValidateResponse(req.Context(), input)
 }
 
-// v1SpecPath is the v1 document's path for a request path, or "" for paths it does not describe.
+// v1SpecPath is the v1 document's path for a request path, or "" for paths it
+// does not describe.
 func v1SpecPath(path string) string {
 	spec, ok := strings.CutPrefix(path, "/v1/")
 	if !ok {
@@ -77,7 +80,8 @@ func v1SpecPath(path string) string {
 	return ""
 }
 
-// Every GET in the golden corpus that v1's document describes, answered by the Go handler, conforms to it.
+// Every GET in the golden corpus that v1's document describes, answered by the
+// Go handler, conforms to it.
 func TestV1ResponsesMatchOpenAPI(t *testing.T) {
 	doc := loadSpec(t, "v1/openapi.json")
 	g := loadGoldenAPI(t)
@@ -98,12 +102,14 @@ func TestV1ResponsesMatchOpenAPI(t *testing.T) {
 		req := httptest.NewRequest(c.Method, c.Path, nil)
 		res := httptest.NewRecorder()
 		h.ServeHTTP(res, req)
-		// v1's document lists 200 and 404 only; its 422s (as Ruby's) are undocumented.
+		// v1's document lists 200 and 404 only; its 422s (as Ruby's) are
+		// undocumented.
 		if doc.Paths.Find(specPath).Get.Responses.Status(res.Code) == nil {
 			continue
 		}
-		// Where Ruby's own answer breaks the document (a tiny amount rounds rates to 0, below its exclusiveMinimum),
-		// Go matching Ruby is what TestGoldenAPI checks.
+		// Where Ruby's own answer breaks the document (a tiny amount rounds
+		// rates to 0, below its exclusiveMinimum), Go matching Ruby is what
+		// TestGoldenAPI checks.
 		if c.Status == res.Code && c.JSON != nil {
 			ruby := httptest.NewRecorder()
 			ruby.Header().Set("Content-Type", c.Response["content-type"])

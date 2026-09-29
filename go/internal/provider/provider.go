@@ -1,5 +1,6 @@
-// Package provider is lib/provider.rb: the providers table as values, their publishing calendar, and backfill, which
-// drives a provider's registered adapter and stores what it returns.
+// Package provider is lib/provider.rb: the providers table as values, their
+// publishing calendar, and backfill, which drives a provider's registered
+// adapter and stores what it returns.
 package provider
 
 import (
@@ -14,15 +15,18 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// LookbackDays is the carry-forward window per observation frequency and publish cadence (#646). A daily value goes
-// stale in two weeks; a monthly or quarterly value stands for its whole period plus the lag before the next one lands.
+// LookbackDays is the carry-forward window per observation frequency and
+// publish cadence (#646). A daily value goes stale in two weeks; a monthly or
+// quarterly value stands for its whole period plus the lag before the next one
+// lands.
 var LookbackDays = map[string]int{"daily": 14, "weekly": 14, "monthly": 45, "quarterly": 120}
 
-// NonCurrencyCodes are reviewed non-currency labels. They stay available in provider history without triggering
-// unknown-currency alerts.
+// NonCurrencyCodes are reviewed non-currency labels. They stay available in
+// provider history without triggering unknown-currency alerts.
 var NonCurrencyCodes = map[string][]string{"NB": {"I44", "TWI"}, "RBA": {"FXRTWI"}}
 
-// Provider is one row of the providers table. Empty strings and a zero CoverageStart are NULL.
+// Provider is one row of the providers table. Empty strings and a zero
+// CoverageStart are NULL.
 type Provider struct {
 	Key             string
 	Name            string
@@ -45,11 +49,13 @@ func (p Provider) ObservationFrequency() string {
 	return p.Frequency
 }
 
-// Blends reports whether the provider's rows enter the blend and the currency catalogue: only daily observations do.
+// Blends reports whether the provider's rows enter the blend and the currency
+// catalogue: only daily observations do.
 func (p Provider) Blends() bool { return p.ObservationFrequency() == "daily" }
 
-// Lookback is the wider of the frequency and cadence windows. A provider that releases a month of daily fixings in
-// arrears has nothing newer than the last batch for weeks at a time, and the daily window alone would leave its latest
+// Lookback is the wider of the frequency and cadence windows. A provider that
+// releases a month of daily fixings in arrears has nothing newer than the last
+// batch for weeks at a time, and the daily window alone would leave its latest
 // query empty for most of every month.
 func (p Provider) Lookback() int {
 	days := LookbackDays[p.ObservationFrequency()]
@@ -109,8 +115,8 @@ func scan(row interface{ Scan(...any) error }) (Provider, error) {
 	return p, nil
 }
 
-// UnknownCurrencies lists the codes the provider publishes that the Money gem cannot name, less its reviewed
-// non-currency labels, sorted.
+// UnknownCurrencies lists the codes the provider publishes that the Money gem
+// cannot name, less its reviewed non-currency labels, sorted.
 func (p Provider) UnknownCurrencies(ctx context.Context, q db.Querier) ([]string, error) {
 	rows, err := q.QueryContext(ctx, "SELECT iso_code FROM currency_exclusions WHERE provider_key = ?", p.Key)
 	if err != nil {
@@ -131,14 +137,15 @@ func (p Provider) UnknownCurrencies(ctx context.Context, q db.Querier) ([]string
 	return codes, rows.Err()
 }
 
-// StartDate is the earliest start of the provider's coverages and exclusions, as stored text. ok is false when it
-// has neither. As in Ruby, a coverage with no start date reads as "" and so wins.
+// StartDate is the earliest start of the provider's coverages and exclusions,
+// as stored text. ok is false when it has neither. As in Ruby, a coverage with
+// no start date reads as "" and so wins.
 func (p Provider) StartDate(ctx context.Context, q db.Querier) (date string, ok bool, err error) {
 	return p.coverageBound(ctx, q, "min", "start_date")
 }
 
-// EndDate is the latest end of the provider's coverages and exclusions, as stored text. ok is false when it has
-// neither.
+// EndDate is the latest end of the provider's coverages and exclusions, as
+// stored text. ok is false when it has neither.
 func (p Provider) EndDate(ctx context.Context, q db.Querier) (date string, ok bool, err error) {
 	return p.coverageBound(ctx, q, "max", "end_date")
 }
@@ -151,7 +158,8 @@ func (p Provider) coverageBound(ctx context.Context, q db.Querier, agg, col stri
 	return s.String, s.Valid, err
 }
 
-// LastSynced is the date of the provider's newest stored rate, zero when it has none.
+// LastSynced is the date of the provider's newest stored rate, zero when it has
+// none.
 func (p Provider) LastSynced(ctx context.Context, q db.Querier) (time.Time, error) {
 	var s sql.NullString
 	if err := q.QueryRowContext(ctx, "SELECT max(date) FROM rates WHERE provider = ?", p.Key).Scan(&s); err != nil {
@@ -163,8 +171,9 @@ func (p Provider) LastSynced(ctx context.Context, q db.Querier) (time.Time, erro
 	return db.ParseDate(s.String)
 }
 
-// PublishesMissed counts the publications the provider's schedule says should have landed after its end date and
-// before reference (see MissedSince). ok is false when it has no schedule or no stored coverage.
+// PublishesMissed counts the publications the provider's schedule says should
+// have landed after its end date and before reference (see MissedSince). ok is
+// false when it has no schedule or no stored coverage.
 func (p Provider) PublishesMissed(ctx context.Context, q db.Querier, reference time.Time) (n int, ok bool, err error) {
 	if p.PublishSchedule == "" {
 		return 0, false, nil

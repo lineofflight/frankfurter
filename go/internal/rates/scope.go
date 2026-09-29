@@ -28,7 +28,8 @@ var (
 // Rollups are the provider rollup tables.
 var Rollups = []Table{Weekly, Monthly}
 
-// Query is a composable SELECT over a rate table, the counterpart of a Sequel dataset. Methods return modified copies.
+// Query is a composable SELECT over a rate table, the counterpart of a Sequel
+// dataset. Methods return modified copies.
 type Query struct {
 	Table  Table
 	From   string   // table name, or a subquery aliased to it
@@ -58,7 +59,8 @@ func (q Query) OrderBy(order string) Query {
 	return q
 }
 
-// Condition is the query's WHERE clause without the keyword, or "1" when it has none.
+// Condition is the query's WHERE clause without the keyword, or "1" when it has
+// none.
 func (q Query) Condition() string {
 	if len(q.Where) == 0 {
 		return "1"
@@ -87,14 +89,16 @@ func (q Query) SQL() string {
 	return b.String()
 }
 
-// NamedCondition keeps rows whose base and quote the Money gem can name (RateScopes.named_currencies).
+// NamedCondition keeps rows whose base and quote the Money gem can name
+// (RateScopes.named_currencies).
 func NamedCondition() string {
 	list := db.LitList(currency.Codes())
 	return "(base IN " + list + ") AND (quote IN " + list + ")"
 }
 
-// ExpiredCondition matches rows on or after either side's terminal date (RateScopes.expired_currency_condition).
-// Rollup buckets are expired when they start after the bucket holding the day before the terminal date, so the
+// ExpiredCondition matches rows on or after either side's terminal date
+// (RateScopes.expired_currency_condition). Rollup buckets are expired when they
+// start after the bucket holding the day before the terminal date, so the
 // boundary bucket survives.
 func ExpiredCondition(dateColumn string, p Precision) string {
 	entries := currency.DefunctCurrencies()
@@ -115,14 +119,17 @@ func ExpiredCondition(dateColumn string, p Precision) string {
 	return strings.Join(parts, " OR ")
 }
 
-// CurrentCondition keeps rows before either side's terminal date (RateScopes.current_currencies).
+// CurrentCondition keeps rows before either side's terminal date
+// (RateScopes.current_currencies).
 func CurrentCondition(dateColumn string, p Precision) string {
 	return "NOT (" + ExpiredCondition(dateColumn, p) + ")"
 }
 
-// NonBlendingKeys lists providers whose values stand for longer than a day (Provider.non_blending_keys). Their rows
-// never enter the blend or the currency catalogue: a value that stands for a month is served for the whole period, so
-// on most days it is weeks stale, and the recency decay, which counts from the row date, cannot see that.
+// NonBlendingKeys lists providers whose values stand for longer than a day
+// (Provider.non_blending_keys). Their rows never enter the blend or the
+// currency catalogue: a value that stands for a month is served for the whole
+// period, so on most days it is weeks stale, and the recency decay, which
+// counts from the row date, cannot see that.
 func NonBlendingKeys(ctx context.Context, q db.Querier) ([]string, error) {
 	rows, err := q.QueryContext(ctx,
 		"SELECT key FROM providers WHERE coalesce(frequency, 'daily') != 'daily' ORDER BY key")
@@ -141,8 +148,9 @@ func NonBlendingKeys(ctx context.Context, q db.Querier) ([]string, error) {
 	return keys, rows.Err()
 }
 
-// Blendable restricts t to rows that may enter a blend: named currencies, daily-frequency providers (all but
-// nonBlending), before any terminal date. Rollups also recompute terminal-straddling buckets (see eligibleRollups).
+// Blendable restricts t to rows that may enter a blend: named currencies,
+// daily-frequency providers (all but nonBlending), before any terminal date.
+// Rollups also recompute terminal-straddling buckets (see eligibleRollups).
 func (t Table) Blendable(nonBlending []string) Query {
 	q := t.Dataset().Filter(NamedCondition())
 	if len(nonBlending) > 0 {
@@ -155,9 +163,10 @@ func (t Table) Blendable(nonBlending []string) Query {
 	return eligibleRollups(q)
 }
 
-// eligibleRollups recomputes a terminal-straddling pair only when expired daily observations contaminate its
-// average. Stored precision stays for every unaffected pair, including boundary buckets whose daily history is
-// incomplete or absent.
+// eligibleRollups recomputes a terminal-straddling pair only when expired daily
+// observations contaminate its average. Stored precision stays for every
+// unaffected pair, including boundary buckets whose daily history is incomplete
+// or absent.
 func eligibleRollups(q Query) Query {
 	t := q.Table
 	entries := currency.DefunctCurrencies()
@@ -186,8 +195,9 @@ func eligibleRollups(q Query) Query {
 	return Query{Table: t, From: "(" + inner.SQL() + ") AS " + t.Name}
 }
 
-// Between restricts q to [start, end], widened back to the latest date on or before start so a range that opens on a
-// weekend or holiday starts from the last publication, and orders by date and quote. A start after today yields
+// Between restricts q to [start, end], widened back to the latest date on or
+// before start so a range that opens on a weekend or holiday starts from the
+// last publication, and orders by date and quote. A start after today yields
 // nothing.
 func (q Query) Between(start, end, today time.Time) Query {
 	col := q.Table.DateColumn
@@ -201,7 +211,8 @@ func (q Query) Between(start, end, today time.Time) Query {
 		OrderBy(col + ", quote")
 }
 
-// Only keeps pairs between a provider's pivot currency and one of currencies, on either side.
+// Only keeps pairs between a provider's pivot currency and one of currencies,
+// on either side.
 func (q Query) Only(currencies ...string) Query {
 	list := db.LitList(currencies)
 	q.From += " INNER JOIN providers ON (providers.key = " + q.Table.Name + ".provider)"
@@ -209,8 +220,8 @@ func (q Query) Only(currencies ...string) Query {
 		")) OR ((quote = providers.pivot_currency) AND (base IN " + list + "))")
 }
 
-// Downsample averages q's rows per provider, pair and bucket, as rows of base, provider, quote, rate and date (the
-// bucket, as text), ordered by date.
+// Downsample averages q's rows per provider, pair and bucket, as rows of base,
+// provider, quote, rate and date (the bucket, as text), ordered by date.
 func (q Query) Downsample(p Precision) string {
 	bucket := BucketSQL(p, q.Table.DateColumn)
 	return q.Columns("base, provider, quote, avg(rate) AS rate, "+bucket+" AS date").OrderBy("").SQL() +

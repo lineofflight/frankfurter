@@ -11,8 +11,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// v1CurrencyNames is Versions::V1::CurrencyNames: the euro plus every currency ECB quoted in the last 14 days, by name.
-// It reads blendable rows, so unnamed and expired codes stay out of the legacy catalogue.
+// v1CurrencyNames is Versions::V1::CurrencyNames: the euro plus every currency
+// ECB quoted in the last 14 days, by name. It reads blendable rows, so unnamed
+// and expired codes stay out of the legacy catalogue.
 type v1CurrencyNames struct {
 	rows []rates.Row
 }

@@ -13,21 +13,26 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// MaxFutureDrift is how far ahead of today a fetched rate may be dated. Genuine forward value dates (far-eastern time
-// zones, T+1 conventions) sit within a day or two; anything beyond is an upstream typo or a stray row. Storing it would
-// hijack last_synced (the max date) and freeze backfill behind an unreachable cursor. An adapter that publishes ahead
-// of its period (HMRC: next month's customs rates, this month) declares a lead, which extends the horizon by that much.
+// MaxFutureDrift is how far ahead of today a fetched rate may be dated. Genuine
+// forward value dates (far-eastern time zones, T+1 conventions) sit within a
+// day or two; anything beyond is an upstream typo or a stray row. Storing it
+// would hijack last_synced (the max date) and freeze backfill behind an
+// unreachable cursor. An adapter that publishes ahead of its period (HMRC: next
+// month's customs rates, this month) declares a lead, which extends the horizon
+// by that much.
 const MaxFutureDrift = 2
 
-// Horizon is the latest date a row may carry for an adapter with the given lead.
+// Horizon is the latest date a row may carry for an adapter with the given
+// lead.
 func Horizon(today time.Time, leadDays int) time.Time {
 	return today.AddDate(0, 0, MaxFutureDrift+leadDays)
 }
 
-// Reject is RateValidation.reject!: it keeps provider-published rows, dropping non-positive (or NaN) rates and dates
-// beyond the horizon, and relabels a code used before its currency existed with the known predecessor, dropping the
-// row when there is none. Currency eligibility is applied when blending, not here. It filters records in place and
-// returns the kept prefix.
+// Reject is RateValidation.reject!: it keeps provider-published rows, dropping
+// non-positive (or NaN) rates and dates beyond the horizon, and relabels a code
+// used before its currency existed with the known predecessor, dropping the row
+// when there is none. Currency eligibility is applied when blending, not here.
+// It filters records in place and returns the kept prefix.
 func Reject(records []adapter.Rate, leadDays int, today time.Time) []adapter.Rate {
 	return reject(records, leadDays, today, currency.FindNascent)
 }
@@ -58,8 +63,9 @@ func reject(records []adapter.Rate, leadDays int, today time.Time, nascent func(
 	return kept
 }
 
-// ProviderLeads maps each seeded provider whose registered adapter declares a lead to that lead. Providers without a
-// registered adapter (test fixtures, or adapters the binary does not import) have none.
+// ProviderLeads maps each seeded provider whose registered adapter declares a
+// lead to that lead. Providers without a registered adapter (test fixtures, or
+// adapters the binary does not import) have none.
 func ProviderLeads(ctx context.Context, q db.Querier) (map[string]int, error) {
 	rows, err := q.QueryContext(ctx, "SELECT key FROM providers")
 	if err != nil {
@@ -81,9 +87,11 @@ func ProviderLeads(ctx context.Context, q db.Querier) (map[string]int, error) {
 	return leads, rows.Err()
 }
 
-// futureScope is FutureDate.reject_scope: rows of t beyond the horizon, per provider lead. Rollup buckets anchor to a
-// fixed weekday or the first of the month, so the live period's bucket can sit a few days ahead of the latest date it
-// summarises; the horizon is bucketed to the table's precision so only buckets wholly beyond it go.
+// futureScope is FutureDate.reject_scope: rows of t beyond the horizon, per
+// provider lead. Rollup buckets anchor to a fixed weekday or the first of the
+// month, so the live period's bucket can sit a few days ahead of the latest
+// date it summarises; the horizon is bucketed to the table's precision so only
+// buckets wholly beyond it go.
 func futureScope(t Table, today time.Time, leads map[string]int) Query {
 	col := t.DateColumn
 	bound := func(lead int) string { return BucketSQL(t.Precision, db.LitDate(Horizon(today, lead))) }
@@ -102,7 +110,8 @@ func futureScope(t Table, today time.Time, leads map[string]int) Query {
 	return t.Dataset().Filter(cond)
 }
 
-// PurgeTotals counts the rows Purge rejected per table. Replacing a provider bucket does not add to them.
+// PurgeTotals counts the rows Purge rejected per table. Replacing a provider
+// bucket does not add to them.
 type PurgeTotals struct {
 	Rates, Weekly, Monthly int
 }
@@ -110,10 +119,11 @@ type PurgeTotals struct {
 // Total is the sum over tables.
 func (p PurgeTotals) Total() int { return p.Rates + p.Weekly + p.Monthly }
 
-// Purge is RateValidation.purge: it deletes stored rows beyond each provider's horizon from every rate table, rebuilds
-// the provider rollup buckets they touched from the surviving dailies (clearing those buckets' blends for blending
-// providers), and refreshes the currency summaries of every code involved, all in one immediate transaction. leads
-// comes from ProviderLeads.
+// Purge is RateValidation.purge: it deletes stored rows beyond each provider's
+// horizon from every rate table, rebuilds the provider rollup buckets they
+// touched from the surviving dailies (clearing those buckets' blends for
+// blending providers), and refreshes the currency summaries of every code
+// involved, all in one immediate transaction. leads comes from ProviderLeads.
 func Purge(ctx context.Context, conn *sql.DB, today time.Time, leads map[string]int) (PurgeTotals, error) {
 	var totals PurgeTotals
 	err := db.Immediate(ctx, conn, func(q db.Querier) error {
@@ -177,8 +187,8 @@ func purge(ctx context.Context, q db.Querier, today time.Time, leads map[string]
 		}
 		sort.Strings(keys)
 		for _, provider := range keys {
-			// Captured buckets drive deletion even when no daily rows survive; retained periods are rebuilt from the
-			// remaining observations.
+			// Captured buckets drive deletion even when no daily rows survive;
+			// retained periods are rebuilt from the remaining observations.
 			if err := rebuildBuckets(ctx, q, t, provider, providers[provider]); err != nil {
 				return totals, err
 			}
@@ -199,7 +209,8 @@ func purge(ctx context.Context, q db.Querier, today time.Time, leads map[string]
 	return totals, nil
 }
 
-// rebuildBuckets replaces provider's buckets in rollup t with averages of its daily rows.
+// rebuildBuckets replaces provider's buckets in rollup t with averages of its
+// daily rows.
 func rebuildBuckets(ctx context.Context, q db.Querier, t Table, provider string, buckets []string) error {
 	list := db.LitList(buckets)
 	if _, err := q.ExecContext(ctx, "DELETE FROM "+t.Name+" WHERE provider = ? AND bucket_date IN "+list,
@@ -216,7 +227,8 @@ func rebuildBuckets(ctx context.Context, q db.Querier, t Table, provider string,
 	return nil
 }
 
-// collect adds each (provider, bucket_date) row of query to into, once per bucket.
+// collect adds each (provider, bucket_date) row of query to into, once per
+// bucket.
 func collect(ctx context.Context, q db.Querier, query string, into map[string][]string) error {
 	rows, err := q.QueryContext(ctx, query)
 	if err != nil {

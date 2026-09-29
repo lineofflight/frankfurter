@@ -1,9 +1,11 @@
-// Package bcp fetches rates from Banco Central del Paraguay, which publishes the "tipo de cambio referencial
-// interbancario", a weighted average of interbank spot operations, on business days against the Paraguayan guaraní
+// Package bcp fetches rates from Banco Central del Paraguay, which publishes
+// the "tipo de cambio referencial interbancario", a weighted average of
+// interbank spot operations, on business days against the Paraguayan guaraní
 // (PYG).
 //
-// The historical endpoint returns a 12-month x 31-day matrix per (year, currency); ND cells mark non-trading days.
-// Rates are PYG per foreign unit, so PYG goes in quote and the foreign currency in base. XAU is published per troy
+// The historical endpoint returns a 12-month x 31-day matrix per (year,
+// currency); ND cells mark non-trading days. Rates are PYG per foreign unit, so
+// PYG goes in quote and the foreign currency in base. XAU is published per troy
 // ounce already.
 package bcp
 
@@ -24,11 +26,12 @@ import (
 
 const baseURL = "https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica"
 
-// currencies are the quote currencies on the daily snapshot. Historical depth varies (USD/EUR back to 2001, most
-// others from ~2012), so empty cells are expected on older years.
+// currencies are the quote currencies on the daily snapshot. Historical depth
+// varies (USD/EUR back to 2001, most others from ~2012), so empty cells are
+// expected on older years.
 //
-// SDR/XDR is omitted: BCP exposes ?moneda=SDR but the page returns 100% ND for every year, so BCP doesn't actually
-// publish it.
+// SDR/XDR is omitted: BCP exposes ?moneda=SDR but the page returns 100% ND for
+// every year, so BCP doesn't actually publish it.
 var currencies = []string{
 	"USD", "EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "BRL", "ARS", "CLP", "MXN", "UYU",
 	"COP", "BOB", "NZD", "ZAR", "SEK", "DKK", "NOK", "AED", "PEN", "SGD", "TWD", "XAU",
@@ -121,7 +124,8 @@ func parse(html []byte, year int, currency string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseValue reads a pt-BR number such as 7.271,63; ND, empty and non-positive cells yield false.
+// parseValue reads a pt-BR number such as 7.271,63; ND, empty and non-positive
+// cells yield false.
 func parseValue(text string) (float64, bool) {
 	text = strings.TrimSpace(text)
 	if text == "" || text == "ND" {

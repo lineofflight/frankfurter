@@ -86,7 +86,8 @@ func TestParseGoldNormalizesToTroyOunce(t *testing.T) {
 	}
 }
 
-// stub answers every request with status and an empty body, recording the URLs, as the Ruby spec's WebMock stub does.
+// stub answers every request with status and an empty body, recording the URLs,
+// as the Ruby spec's WebMock stub does.
 type stub struct {
 	status int
 	urls   []string

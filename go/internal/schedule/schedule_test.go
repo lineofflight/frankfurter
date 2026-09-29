@@ -223,7 +223,8 @@ func populationTimer(t *testing.T, b Blend, c Cache) Func {
 	return found.fn
 }
 
-// readyBlend is the real materialized blend over the spec fixture, with the daily blend already built.
+// readyBlend is the real materialized blend over the spec fixture, with the
+// daily blend already built.
 func readyBlend(t *testing.T) (*sql.DB, provider.Materialized) {
 	t.Helper()
 	conn := fixtures.New(t)

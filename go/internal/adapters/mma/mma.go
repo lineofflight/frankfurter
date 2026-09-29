@@ -1,10 +1,12 @@
-// Package mma fetches rates from the Maldives Monetary Authority, which publishes the daily reference rate of the
-// rufiyaa against the US dollar.
+// Package mma fetches rates from the Maldives Monetary Authority, which
+// publishes the daily reference rate of the rufiyaa against the US dollar.
 //
-// The rufiyaa is USD-pegged within a crawling band, so MMA only publishes the one pair (USD/MVR). The file always
-// returns the full history, so we filter client-side. Unlike most adapters, after is inclusive, as in the Ruby
-// adapter. The feed occasionally emits duplicate entries for the same date (e.g. "08/09 February 2021"); we keep the
-// first occurrence per date so upserts stay deterministic.
+// The rufiyaa is USD-pegged within a crawling band, so MMA only publishes the
+// one pair (USD/MVR). The file always returns the full history, so we filter
+// client-side. Unlike most adapters, after is inclusive, as in the Ruby
+// adapter. The feed occasionally emits duplicate entries for the same date
+// (e.g. "08/09 February 2021"); we keep the first occurrence per date so
+// upserts stay deterministic.
 package mma
 
 import (
@@ -102,8 +104,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseDate reads "21 May 2026". The feed has also emitted a day range such as "08/09 February 2021", which Ruby's
-// Date.parse reads as the second day, so we do the same.
+// parseDate reads "21 May 2026". The feed has also emitted a day range such as
+// "08/09 February 2021", which Ruby's Date.parse reads as the second day, so we
+// do the same.
 func parseDate(s string) (time.Time, error) {
 	s = strings.TrimSpace(s)
 	if day, rest, ok := strings.Cut(s, "/"); ok && day != "" && len(day) <= 2 && strings.Trim(day, "0123456789") == "" {
@@ -112,7 +115,8 @@ func parseDate(s string) (time.Time, error) {
 	return adapter.ParseDate(s, "2 January 2006", "2 Jan 2006")
 }
 
-// toFloat mirrors Ruby's strict Float(): numbers pass through, numeric strings parse, anything else is an error.
+// toFloat mirrors Ruby's strict Float(): numbers pass through, numeric strings
+// parse, anything else is an error.
 func toFloat(v any) (float64, error) {
 	switch v := v.(type) {
 	case float64:

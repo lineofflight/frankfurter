@@ -27,7 +27,8 @@ func open(t *testing.T, name string, index int) []Sheet {
 	return sheets
 }
 
-// The expected cells are what the spreadsheet gem reads from the same workbooks.
+// The expected cells are what the spreadsheet gem reads from the same
+// workbooks.
 func TestOpenTypesCellsLikeTheSpreadsheetGem(t *testing.T) {
 	tests := []struct {
 		cassette    string
@@ -49,8 +50,9 @@ func TestOpenTypesCellsLikeTheSpreadsheetGem(t *testing.T) {
 	}
 }
 
-// testdata/generate.rb writes the workbook with the gem and records what the gem reads back from it. Its shared
-// strings run across CONTINUE records, split mid-string, in both compressed and UTF-16 form.
+// testdata/generate.rb writes the workbook with the gem and records what the
+// gem reads back from it. Its shared strings run across CONTINUE records, split
+// mid-string, in both compressed and UTF-16 form.
 func TestOpenMatchesTheGemAcrossContinueRecords(t *testing.T) {
 	data, err := os.ReadFile("testdata/workbook.xls")
 	if err != nil {
@@ -133,7 +135,8 @@ func TestReadSSTFollowsTheContinueRules(t *testing.T) {
 	}
 }
 
-// The gem never writes LABEL records, error values or formulas, so these rows are built by hand.
+// The gem never writes LABEL records, error values or formulas, so these rows
+// are built by hand.
 func TestReadRowsRecordsTheGemDoesNotWrite(t *testing.T) {
 	wb := &workbook{}
 	cell := func(r, c int) []byte { return cat(u16(r), u16(c), u16(0)) }

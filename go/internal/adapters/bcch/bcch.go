@@ -1,8 +1,10 @@
-// Package bcch fetches rates from Banco Central de Chile, which publishes daily rates for 8 currencies against the
-// Chilean peso (CLP) through the BDE REST API. The API requires registered credentials (email and password, from
+// Package bcch fetches rates from Banco Central de Chile, which publishes daily
+// rates for 8 currencies against the Chilean peso (CLP) through the BDE REST
+// API. The API requires registered credentials (email and password, from
 // BCCH_USER and BCCH_PASS) passed as query parameters.
 //
-// Like the Ruby adapter, Fetch does not clip to the window: it returns whatever the API sends for the requested dates.
+// Like the Ruby adapter, Fetch does not clip to the window: it returns whatever
+// the API sends for the requested dates.
 package bcch
 
 import (
@@ -20,7 +22,8 @@ import (
 
 const apiURL = "https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx"
 
-// series pairs each series ID with its base currency, all quoted against CLP, in the order Ruby fetches them.
+// series pairs each series ID with its base currency, all quoted against CLP,
+// in the order Ruby fetches them.
 var series = []struct{ id, base string }{
 	{"F073.TCO.PRE.Z.D", "USD"},
 	{"F072.CLP.EUR.N.O.D", "EUR"},
@@ -32,8 +35,9 @@ var series = []struct{ id, base string }{
 	{"F072.CLP.BRL.N.O.D", "BRL"},
 }
 
-// The BRL series starts in January 1994 under the cruzeiro real, six months before the real existed, and is not
-// restated: 0.16 CLP on 1994-06-30, 418.34 on 1994-07-01. Rows before the Real Plan are cruzeiro real (BRR).
+// The BRL series starts in January 1994 under the cruzeiro real, six months
+// before the real existed, and is not restated: 0.16 CLP on 1994-06-30, 418.34
+// on 1994-07-01. Rows before the Real Plan are cruzeiro real (BRR).
 var predecessors = map[string]adapter.Predecessor{
 	"BRL": {Code: "BRR", Cutover: adapter.Date(1994, 7, 1)},
 }

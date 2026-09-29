@@ -1,8 +1,10 @@
-// Package inforeuro fetches the European Commission's monthly accounting rates: foreign units per EUR, or per ECU
-// (XEU) before January 1999. Each rate applies from the first of its month. These period observations never blend
+// Package inforeuro fetches the European Commission's monthly accounting rates:
+// foreign units per EUR, or per ECU (XEU) before January 1999. Each rate
+// applies from the first of its month. These period observations never blend
 // with daily reference rates.
 //
-// Unlike the common fetch contract, after is inclusive: a month whose first day equals after is fetched.
+// Unlike the common fetch contract, after is inclusive: a month whose first day
+// equals after is fetched.
 package inforeuro
 
 import (
@@ -25,7 +27,8 @@ var (
 	euroStart     = adapter.Date(1999, 1, 1)
 )
 
-// FRC is the source's Congolese-franc label from July 1998 through February 1999, before it adopts CDF.
+// FRC is the source's Congolese-franc label from July 1998 through February
+// 1999, before it adopts CDF.
 var aliases = map[string]string{"FRC": "CDF", "ZIG": "ZWG"}
 
 func init() {
@@ -109,8 +112,9 @@ func parse(data []byte, date time.Time) ([]adapter.Rate, error) {
 		if alias, ok := aliases[code]; ok {
 			quote = alias
 		}
-		// Only January and February 2000 use AOK, at the new kwanza's magnitude (~5.5 per EUR), after the million:1
-		// reform. March calls the same unit AOA; December 1999 still quotes AOR at 5,480,730 per EUR.
+		// Only January and February 2000 use AOK, at the new kwanza's magnitude
+		// (~5.5 per EUR), after the million:1 reform. March calls the same unit
+		// AOA; December 1999 still quotes AOR at 5,480,730 per EUR.
 		if code == "AOK" && !date.Before(adapter.Date(2000, 1, 1)) && date.Before(adapter.Date(2000, 3, 1)) {
 			quote = "AOA"
 		}
@@ -125,8 +129,9 @@ func parse(data []byte, date time.Time) ([]adapter.Rate, error) {
 		if value == nil || quote == base {
 			continue
 		}
-		// Ruby keeps the published decimal to preserve hyperinflation-era digits; parsing the JSON text directly
-		// gives the nearest float, the same value that decimal becomes once stored.
+		// Ruby keeps the published decimal to preserve hyperinflation-era
+		// digits; parsing the JSON text directly gives the nearest float, the
+		// same value that decimal becomes once stored.
 		rate, err := strconv.ParseFloat(value.String(), 64)
 		if err != nil {
 			return nil, fmt.Errorf("invalid value %s for %s: %w", value, code, err)

@@ -70,7 +70,8 @@ func TestEmitsXAUPerTroyOunce(t *testing.T) {
 	if len(xau) == 0 {
 		t.Fatal("no XAU rows")
 	}
-	// Per troy ounce is hundreds of thousands of LKR; per gram would be tens of thousands.
+	// Per troy ounce is hundreds of thousands of LKR; per gram would be tens of
+	// thousands.
 	if xau[0].Rate <= 100_000 {
 		t.Errorf("XAU rate = %v, want > 100000", xau[0].Rate)
 	}

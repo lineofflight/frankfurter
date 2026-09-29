@@ -1,8 +1,10 @@
-// Package lb fetches rates from the Bank of Lithuania (Lietuvos Bankas), which publishes daily exchange rates for about
-// 88 currencies. Pre-2015 rates are quoted against LTL (Lithuanian litas); post-2015 rates are EUR-based (ECB rates
-// republished after euro adoption).
+// Package lb fetches rates from the Bank of Lithuania (Lietuvos Bankas), which
+// publishes daily exchange rates for about 88 currencies. Pre-2015 rates are
+// quoted against LTL (Lithuanian litas); post-2015 rates are EUR-based (ECB
+// rates republished after euro adoption).
 //
-// Fetch requests one bulletin per weekday from after through upto, both inclusive, as the Ruby adapter does.
+// Fetch requests one bulletin per weekday from after through upto, both
+// inclusive, as the Ruby adapter does.
 package lb
 
 import (
@@ -22,11 +24,14 @@ const baseURL = "https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates"
 
 var eurAdoption = adapter.Date(2015, 1, 1)
 
-// LB labels a redenominated currency's whole history with its current code without restating the values: the
-// 2005-12-30 bulletin quotes 1 "AZN" = 0.00063 LTL, old manat. Each entry maps the current code to its predecessor and
-// the first date LB's values switch to the successor, which can trail the official date: the manat was redenominated on
-// 2006-01-01, but LB kept quoting old manat through 2006-01-06 and jumped 5000x on 2006-01-09. The Turkmen manat
-// switched on the official date: 10000 "TMT" = 1.7354 LTL on 2008-12-31, 10 TMT = 8.677 LTL on 2009-01-01.
+// LB labels a redenominated currency's whole history with its current code
+// without restating the values: the 2005-12-30 bulletin quotes 1 "AZN" =
+// 0.00063 LTL, old manat. Each entry maps the current code to its predecessor
+// and the first date LB's values switch to the successor, which can trail the
+// official date: the manat was redenominated on 2006-01-01, but LB kept quoting
+// old manat through 2006-01-06 and jumped 5000x on 2006-01-09. The Turkmen
+// manat switched on the official date: 10000 "TMT" = 1.7354 LTL on 2008-12-31,
+// 10 TMT = 8.677 LTL on 2009-01-01.
 var predecessors = map[string]adapter.Predecessor{
 	"AZN": {Code: "AZM", Cutover: adapter.Date(2006, 1, 9)},
 	"TMT": {Code: "TMM", Cutover: adapter.Date(2009, 1, 1)},
@@ -49,7 +54,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. An open after bound is an error, as iterating from nil raises in Ruby.
+// Fetch implements adapter.Adapter. An open after bound is an error, as
+// iterating from nil raises in Ruby.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")

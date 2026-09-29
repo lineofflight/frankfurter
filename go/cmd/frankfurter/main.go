@@ -1,10 +1,12 @@
-// Command frankfurter is the whole Frankfurter app in one binary: the API server and scheduler the Procfile runs, and
-// the maintenance tasks the Rakefile defines.
+// Command frankfurter is the whole Frankfurter app in one binary: the API
+// server and scheduler the Procfile runs, and the maintenance tasks the
+// Rakefile defines.
 //
 //	frankfurter <command> [flags] [args]
 //
-// Run it from the directory holding db/, or set DATABASE_URL=sqlite://path, exactly as the Ruby app. `frankfurter
-// help` lists the commands; the rake task names (db:migrate, blend:rebuild, ...) work as aliases.
+// Run it from the directory holding db/, or set DATABASE_URL=sqlite://path,
+// exactly as the Ruby app. `frankfurter help` lists the commands; the rake task
+// names (db:migrate, blend:rebuild, ...) work as aliases.
 package main
 
 import (
@@ -130,7 +132,8 @@ func usage(w io.Writer) {
 	tw.Flush()
 }
 
-// flags parses a command's flags and returns the remaining arguments, rejecting more than maxArgs of them.
+// flags parses a command's flags and returns the remaining arguments, rejecting
+// more than maxArgs of them.
 func flags(fs *flag.FlagSet, args []string, maxArgs int) ([]string, error) {
 	fs.SetOutput(io.Discard)
 	if err := fs.Parse(args); err != nil {
@@ -142,8 +145,8 @@ func flags(fs *flag.FlagSet, args []string, maxArgs int) ([]string, error) {
 	return fs.Args(), nil
 }
 
-// open opens the database lib/db.rb would: DATABASE_URL, or db/frankfurter[_APP_ENV].sqlite3 under the working
-// directory.
+// open opens the database lib/db.rb would: DATABASE_URL, or
+// db/frankfurter[_APP_ENV].sqlite3 under the working directory.
 func open() (*sql.DB, error) {
 	path, err := db.DefaultPath()
 	if err != nil {

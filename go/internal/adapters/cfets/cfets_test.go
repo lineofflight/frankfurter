@@ -137,7 +137,8 @@ func TestRaisesWhenEndpointRefusesQuery(t *testing.T) {
 	if err == nil {
 		t.Fatal("want error")
 	}
-	// Ruby prefixes the message with "CFETS"; in Go the caller adds the provider key, so check the flag message.
+	// Ruby prefixes the message with "CFETS"; in Go the caller adds the
+	// provider key, so check the flag message.
 	if want := "只提供一年历史数据查询及下载"; !strings.Contains(err.Error(), want) {
 		t.Fatalf("error %q does not include %q", err, want)
 	}

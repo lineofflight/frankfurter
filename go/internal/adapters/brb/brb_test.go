@@ -96,7 +96,8 @@ func TestFetchAsteriskCurrencies(t *testing.T) {
 	wantClose(t, fetchDay(t), "KES", 23.06, 0.05)
 }
 
-// stub replays WebMock's sequenced responses: each URL prefix serves its bodies in order, repeating the last.
+// stub replays WebMock's sequenced responses: each URL prefix serves its bodies
+// in order, repeating the last.
 type stub map[string][]string
 
 func (s stub) RoundTrip(req *http.Request) (*http.Response, error) {
@@ -123,8 +124,8 @@ type unmatched struct{ url string }
 func (e *unmatched) Error() string { return "unstubbed request " + e.url }
 
 func TestFetchSkipsNonPDFBodies(t *testing.T) {
-	// Some archive dates return a zero-byte body. The adapter must treat the date as missing rather than failing on
-	// bad input.
+	// Some archive dates return a zero-byte body. The adapter must treat the
+	// date as missing rather than failing on bad input.
 	index := `<a href="/sites/default/files/2026-05/Cours%20de%20change%20du%2021-05-2026.pdf">empty</a>` + "\n"
 	client := &http.Client{Transport: stub{
 		indexURL: {index, ""},
@@ -159,7 +160,8 @@ func TestGolden(t *testing.T) {
 }
 
 func TestFetchRejectsImpossibleLinkDate(t *testing.T) {
-	// Ruby's Date.new raises on 31-02; the port returns an error rather than normalising to March.
+	// Ruby's Date.new raises on 31-02; the port returns an error rather than
+	// normalising to March.
 	index := `<a href="/sites/default/files/2026-02/Cours%20de%20change%20du%2031-02-2026.pdf">bad</a>`
 	client := &http.Client{Transport: stub{indexURL: {index, ""}}}
 	if _, err := New(client).Fetch(context.Background(), adapter.Date(2026, 2, 1), adapter.Date(2026, 3, 31)); err == nil {

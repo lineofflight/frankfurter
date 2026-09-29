@@ -21,7 +21,8 @@ func newAdapter(t *testing.T) *Adapter {
 	return New(vcrtest.Client(t, "bcbo", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI), vcrtest.AllowPlaybackRepeats))
 }
 
-// fixture reads a workbook written by testdata/fixtures/generate.rb, the spec's build_xls and build_daily_xls.
+// fixture reads a workbook written by testdata/fixtures/generate.rb, the spec's
+// build_xls and build_daily_xls.
 func fixture(t *testing.T, name string) []byte {
 	t.Helper()
 	data, err := os.ReadFile("testdata/fixtures/" + name + ".xls")
@@ -195,8 +196,8 @@ func TestParseDailyCurrent(t *testing.T) {
 	mustInclude(t, rates, adapter.Rate{Date: date, Base: "XAG", Quote: "USD", Rate: 57.4583})
 	mustInclude(t, rates, adapter.Rate{Date: date, Base: "XDR", Quote: "USD", Rate: 1.35904})
 
-	// UFV (code "Bs/UFV") and SOFR are not currency rates. Check their values, since a UFV row would be keyed
-	// "Bs/UFV", not "UFV".
+	// UFV (code "Bs/UFV") and SOFR are not currency rates. Check their values,
+	// since a UFV row would be keyed "Bs/UFV", not "UFV".
 	for _, r := range rates {
 		if r.Rate == 3.30736 || r.Rate == 0.0355 {
 			t.Errorf("non-currency row leaked: %+v", r)
@@ -219,7 +220,8 @@ func (rt *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	}, nil
 }
 
-// Not covered by the Ruby spec: the request plan across the 2008 switch from yearly archives to daily sheets.
+// Not covered by the Ruby spec: the request plan across the 2008 switch from
+// yearly archives to daily sheets.
 func TestFetchRequestPlan(t *testing.T) {
 	rt := &recorder{bodies: map[string][]byte{
 		"/tiposDeCambioHistorico/xls.php":                     fixture(t, "yearly_months"),
@@ -239,7 +241,8 @@ func TestFetchRequestPlan(t *testing.T) {
 		t.Errorf("requests = %v, want %v", rt.urls, want)
 	}
 
-	// The yearly fixture carries 2 January and 2 March; only the latter is inside the window. Each daily sheet adds 6.
+	// The yearly fixture carries 2 January and 2 March; only the latter is
+	// inside the window. Each daily sheet adds 6.
 	if len(rates) != 1+5*6 {
 		t.Fatalf("got %d rates, want 31", len(rates))
 	}

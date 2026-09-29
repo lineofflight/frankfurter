@@ -17,7 +17,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Grouped blend ingestion (spec/blended_rollup_spec.rb) against the real backfill and the real materialized blend.
+// Grouped blend ingestion (spec/blended_rollup_spec.rb) against the real
+// backfill and the real materialized blend.
 
 func ingestionEnv(t *testing.T, key string, a adapter.Adapter) *env {
 	t.Helper()
@@ -36,7 +37,8 @@ func bidAskAdapter(date time.Time) *fakeAdapter {
 		Ask: adapter.Float(1.4)})
 }
 
-// tableSnapshot renders every row of table (optionally filtered) as text, in a stable order.
+// tableSnapshot renders every row of table (optionally filtered) as text, in a
+// stable order.
 func tableSnapshot(t *testing.T, q db.Querier, table, where string, args ...any) []string {
 	t.Helper()
 	query := "SELECT * FROM " + table
@@ -84,7 +86,8 @@ func bucketOf(t *testing.T, conn *sql.DB, p rates.Precision, date time.Time) str
 	return db.FormatDate(scalar[db.NullDate](t, conn, "SELECT "+rates.BucketSQL(p, db.LitDate(date))).Time)
 }
 
-// failInsertsInto makes inserts into table fail when the SQL condition when (which may refer to NEW) holds.
+// failInsertsInto makes inserts into table fail when the SQL condition when
+// (which may refer to NEW) holds.
 func failInsertsInto(t *testing.T, conn *sql.DB, table, when string) {
 	t.Helper()
 	if _, err := conn.Exec("CREATE TRIGGER fail_" + table + " BEFORE INSERT ON " + table + " WHEN " + when +
@@ -124,7 +127,8 @@ func TestIngestionRefreshesBothAffectedBucketsBeforePurgingAndLeavesOtherBuckets
 	purge := &purgeCheck{check: func() {
 		for _, r := range blend.Rollups {
 			stored := eurRate(r)
-			// The new provider changes the EUR blend in the bucket; compare to a fresh full-source refresh.
+			// The new provider changes the EUR blend in the bucket; compare to
+			// a fresh full-source refresh.
 			if _, err := r.Refresh(ctx, e.conn, []string{buckets[r.Table]}, e.today); err != nil {
 				t.Fatal(err)
 			}
@@ -231,7 +235,8 @@ func TestIngestionRollsBackEarlierGroupedBatchesAndSourceInsertsWhenALaterBatchF
 	for _, table := range []string{"weekly_rates", "monthly_rates", blend.Weekly.Table, blend.Monthly.Table} {
 		before[table] = tableSnapshot(t, e.conn, table, "")
 	}
-	// Buckets refresh oldest first, 100 to a batch, so the newest week is alone in the second batch.
+	// Buckets refresh oldest first, 100 to a batch, so the newest week is alone
+	// in the second batch.
 	newest := bucketOf(t, e.conn, rates.Week, fixtures.LatestDate())
 	failInsertsInto(t, e.conn, blend.Weekly.Table, "NEW.bucket_date = "+db.Lit(newest))
 	purge := &purgeCheck{}

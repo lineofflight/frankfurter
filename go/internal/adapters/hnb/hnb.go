@@ -1,8 +1,9 @@
-// Package hnb fetches rates from the Croatian National Bank, which publishes daily mid rates against the euro via its
-// v3 API.
+// Package hnb fetches rates from the Croatian National Bank, which publishes
+// daily mid rates against the euro via its v3 API.
 //
-// Historical HRK rates (pre-2023) are no longer available, as the v2 API was frozen after Croatia adopted the euro.
-// The API filters by date itself and its lower bound is inclusive, so rows dated on after come back too, as in Ruby.
+// Historical HRK rates (pre-2023) are no longer available, as the v2 API was
+// frozen after Croatia adopted the euro. The API filters by date itself and its
+// lower bound is inclusive, so rows dated on after come back too, as in Ruby.
 package hnb
 
 import (

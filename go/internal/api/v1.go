@@ -10,7 +10,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// Versions::V1: the frozen, deprecated API. Every rate comes from ECB, quoted against the euro unless rebased.
+// Versions::V1: the frozen, deprecated API. Every rate comes from ECB, quoted
+// against the euro unless rebased.
 
 func init() { registerVersion((*Server).routesV1) }
 
@@ -23,11 +24,13 @@ var v1RootPayload = struct {
 	Docs    string `json:"docs"`
 }{"v1", "deprecated", "/v1/openapi.json", "https://frankfurter.dev/v1/"}
 
-// Like Roda's r.is and r.root, the v1 routes answer any method, except /v1/ (r.root), which answers GET only.
+// Like Roda's r.is and r.root, the v1 routes answer any method, except /v1/
+// (r.root), which answers GET only.
 //
-// Roda's params_capturing parses the query string before trying each matcher with arguments, and every v1 route but
-// the index (r.is and r.root without arguments) has one. So any other v1 path, even one no route matches, fails with
-// 422 on a query Rack cannot parse.
+// Roda's params_capturing parses the query string before trying each matcher
+// with arguments, and every v1 route but the index (r.is and r.root without
+// arguments) has one. So any other v1 path, even one no route matches, fails
+// with 422 on a query Rack cannot parse.
 func (s *Server) routesV1(mux *http.ServeMux) {
 	mux.HandleFunc("/v1", v1Raw(s.v1Root))
 	mux.HandleFunc("/v1/{$}", v1Raw(func(w http.ResponseWriter, r *http.Request) {
@@ -42,8 +45,9 @@ func (s *Server) routesV1(mux *http.ServeMux) {
 	mux.HandleFunc("/v1/{spec}", v1Raw(s.v1Rates))
 }
 
-// v1Raw sends a path holding %-escapes where Roda would: it matches the raw PATH_INFO, so /v1/%6Catest is no v1
-// route and /v%31 is not under /v1 at all, although ServeMux decodes both to v1 paths.
+// v1Raw sends a path holding %-escapes where Roda would: it matches the raw
+// PATH_INFO, so /v1/%6Catest is no v1 route and /v%31 is not under /v1 at all,
+// although ServeMux decodes both to v1 paths.
 func v1Raw(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		raw := r.URL.EscapedPath()
@@ -75,10 +79,13 @@ func v1ParseQuery(w http.ResponseWriter, r *http.Request) (v1Params, v1Nested, r
 	return params, nested, query, true
 }
 
-// v1Captures is what Roda's params_capturing leaves in params["captures"] once a route matches: the route's captures
-// appended to whatever the query string put there. An array from the query keeps its elements first, so they stand in
-// for the path's dates (?captures[]=2020-01-02 on /v1/2020-01-01 quotes 2020-01-02). A string or a hash there fails
-// the append (String#concat takes no array, a Hash has no concat), so every matched route but the index answers 422.
+// v1Captures is what Roda's params_capturing leaves in params["captures"] once
+// a route matches: the route's captures appended to whatever the query string
+// put there. An array from the query keeps its elements first, so they stand in
+// for the path's dates (?captures[]=2020-01-02 on /v1/2020-01-01 quotes
+// 2020-01-02). A string or a hash there fails the append (String#concat takes
+// no array, a Hash has no concat), so every matched route but the index answers
+// 422.
 func v1Captures(query rackHash, route ...any) ([]any, error) {
 	switch c := query["captures"].(type) {
 	case nil:
@@ -89,8 +96,9 @@ func v1Captures(query rackHash, route ...any) ([]any, error) {
 	return nil, errInvalidParam
 }
 
-// v1CapturedDates reads a date route's dates from its captures: the single date, or an interval's start and end (an
-// open interval ends today). A date that is not a string fails, as Date.parse raises on nil, arrays and hashes.
+// v1CapturedDates reads a date route's dates from its captures: the single
+// date, or an interval's start and end (an open interval ends today). A date
+// that is not a string fails, as Date.parse raises on nil, arrays and hashes.
 func v1CapturedDates(query rackHash, today string, route ...any) (v1Params, error) {
 	caps, err := v1Captures(query, route...)
 	if err != nil {
@@ -119,14 +127,16 @@ func (s *Server) v1Root(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, contentTypeV1, v1RootPayload)
 }
 
-// v1NotFound is a quote that found nothing. A path no v1 route matches gets the app's own not found, as Roda's
-// not_found plugin answers the empty 404 that r.run returns.
+// v1NotFound is a quote that found nothing. A path no v1 route matches gets the
+// app's own not found, as Roda's not_found plugin answers the empty 404 that
+// r.run returns.
 func v1NotFound(w http.ResponseWriter) {
 	w.Header().Set("Cache-Control", cacheOneDay)
 	writeJSON(w, http.StatusNotFound, contentTypeV1, message{Message: "not found"})
 }
 
-// v1Error is V1's error handler: any failure to read the request is a 422 carrying its message.
+// v1Error is V1's error handler: any failure to read the request is a 422
+// carrying its message.
 func v1Error(w http.ResponseWriter, err error) {
 	writeJSON(w, http.StatusUnprocessableEntity, contentTypeV1, message{Message: err.Error()})
 }
@@ -139,8 +149,9 @@ var (
 	errNotInterval = errors.New("invalid date range")
 )
 
-// v1Rates serves /latest (or /current), /YYYY-MM-DD and /YYYY-MM-DD..[YYYY-MM-DD]. The route's dates overwrite any
-// date parameters in the query string; an open interval ends today.
+// v1Rates serves /latest (or /current), /YYYY-MM-DD and
+// /YYYY-MM-DD..[YYYY-MM-DD]. The route's dates overwrite any date parameters in
+// the query string; an open interval ends today.
 func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", cacheOneDay)
 	spec := r.PathValue("spec")
@@ -244,9 +255,10 @@ func (s *Server) v1Currencies(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, contentTypeV1, names.Formatted())
 }
 
-// etag sets a strong ETag and answers a conditional request as Roda's r.etag does: an If-None-Match that holds the tag
-// gets 304 (to GET, HEAD, OPTIONS and TRACE) or 412 (to other methods); an If-Match that does not hold it gets 412. A
-// POST never matches "*". It reports whether it answered.
+// etag sets a strong ETag and answers a conditional request as Roda's r.etag
+// does: an If-None-Match that holds the tag gets 304 (to GET, HEAD, OPTIONS and
+// TRACE) or 412 (to other methods); an If-Match that does not hold it gets 412.
+// A POST never matches "*". It reports whether it answered.
 func etag(w http.ResponseWriter, r *http.Request, value string) bool {
 	tag := `"` + value + `"`
 	w.Header().Set("ETag", tag)
@@ -267,8 +279,9 @@ func etag(w http.ResponseWriter, r *http.Request, value string) bool {
 	return false
 }
 
-// etagMatches is Roda's etag_matches?: "*" matches unless the request creates a resource; otherwise the list, split
-// on commas and the spaces around them, must hold the tag exactly.
+// etagMatches is Roda's etag_matches?: "*" matches unless the request creates a
+// resource; otherwise the list, split on commas and the spaces around them,
+// must hold the tag exactly.
 func etagMatches(list, tag string, newResource bool) bool {
 	if list == "*" {
 		return !newResource
@@ -304,8 +317,9 @@ func v1Successor(path string) (string, bool) {
 	return "/v2/rates", true
 }
 
-// v1Deprecation marks every v1 response deprecated and links its successor (RFC 9745 and RFC 8288). It wraps the whole
-// app, so static files, preflight requests and errors carry the headers too.
+// v1Deprecation marks every v1 response deprecated and links its successor (RFC
+// 9745 and RFC 8288). It wraps the whole app, so static files, preflight
+// requests and errors carry the headers too.
 func v1Deprecation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		successor, ok := v1Successor(r.URL.EscapedPath()) // Rack sees the raw path

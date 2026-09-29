@@ -170,8 +170,8 @@ func TestSkipsSharedStringNumbersAcrossRowGaps(t *testing.T) {
 	}
 }
 
-// An inline string carries no <v>, so the Ruby adapter never read one as a date or rate. The stream writer stores
-// every string inline.
+// An inline string carries no <v>, so the Ruby adapter never read one as a date
+// or rate. The stream writer stores every string inline.
 func TestSkipsInlineStringNumbers(t *testing.T) {
 	f := excelize.NewFile()
 	defer f.Close()

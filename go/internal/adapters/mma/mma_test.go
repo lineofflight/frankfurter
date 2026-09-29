@@ -109,7 +109,8 @@ func TestParseDeduplicatesSameDate(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: Date.parse's reading of the day ranges and loose spacing the feed has emitted.
+// Not in the Ruby spec: Date.parse's reading of the day ranges and loose
+// spacing the feed has emitted.
 func TestParseDateVariants(t *testing.T) {
 	for s, want := range map[string]time.Time{
 		"08/09 February 2021": adapter.Date(2021, 2, 9),
@@ -123,7 +124,8 @@ func TestParseDateVariants(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: the raise for a non-array payload and Float()'s raise on a malformed rate.
+// Not in the Ruby spec: the raise for a non-array payload and Float()'s raise
+// on a malformed rate.
 func TestParseErrors(t *testing.T) {
 	for _, data := range []string{`{"error": true}`, `[{"Date": "21 May 2026", "Rate": "n/a"}]`} {
 		if _, err := parse([]byte(data)); err == nil {

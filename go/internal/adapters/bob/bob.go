@@ -1,7 +1,9 @@
-// Package bob fetches rates from the Bank of Botswana, which publishes daily rates for about 7 currencies against BWP.
-// The CSV export only contains these columns.
+// Package bob fetches rates from the Bank of Botswana, which publishes daily
+// rates for about 7 currencies against BWP. The CSV export only contains these
+// columns.
 //
-// Fetch keeps rows dated on or after `after` (inclusive, as the Ruby adapter does) and ignores upto.
+// Fetch keeps rows dated on or after `after` (inclusive, as the Ruby adapter
+// does) and ignores upto.
 package bob
 
 import (
@@ -22,7 +24,8 @@ import (
 
 const csvURL = "https://www.bankofbotswana.bw/export/exchange-rates.csv?page&_format=csv"
 
-// columns maps CSV headers to ISO currency codes, in the order rows are emitted.
+// columns maps CSV headers to ISO currency codes, in the order rows are
+// emitted.
 var columns = []struct{ col, iso string }{
 	{"CHN", "CNY"},
 	{"EUR", "EUR"},

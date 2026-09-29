@@ -14,7 +14,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
 )
 
-// newAdapter pins today to the cassette's end date; Ruby's spec relies on host-only matching instead.
+// newAdapter pins today to the cassette's end date; Ruby's spec relies on
+// host-only matching instead.
 func newAdapter(t *testing.T) *Adapter {
 	a := New(vcrtest.Client(t, "nbu", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host)))
 	a.Now = func() time.Time { return time.Date(2026, 3, 16, 12, 0, 0, 0, time.UTC) }

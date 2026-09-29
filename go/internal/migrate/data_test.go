@@ -17,7 +17,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// tableDump is one table as go/scripts/migration_data.rb writes it: every row, ordered by every column.
+// tableDump is one table as go/scripts/migration_data.rb writes it: every row,
+// ordered by every column.
 type tableDump struct {
 	Columns []string `json:"columns"`
 	Rows    [][]any  `json:"rows"`
@@ -82,7 +83,8 @@ func dumpTables(t *testing.T, conn *sql.DB) map[string]tableDump {
 	return out
 }
 
-// sameValue compares a Go value with its JSON counterpart, numbers within 1e-9 relative.
+// sameValue compares a Go value with its JSON counterpart, numbers within 1e-9
+// relative.
 func sameValue(got, want any) bool {
 	if got == nil || want == nil {
 		return got == nil && want == nil
@@ -140,10 +142,11 @@ func compareDumps(t *testing.T, label string, got, want map[string]tableDump) {
 	}
 }
 
-// The data migrations leave the rows Sequel's migrator leaves. testdata/data/phase_vN.sql is loaded once the database
-// reaches version N (fixtures for the renames, deletions, merges, rollups, precision, relabels, SDR normalization and
-// exclusions); ruby.json is Ruby's dump after migrating up to the latest and after rolling back to 8
-// (go/scripts/migration_data.rb).
+// The data migrations leave the rows Sequel's migrator leaves.
+// testdata/data/phase_vN.sql is loaded once the database reaches version N
+// (fixtures for the renames, deletions, merges, rollups, precision, relabels,
+// SDR normalization and exclusions); ruby.json is Ruby's dump after migrating
+// up to the latest and after rolling back to 8 (go/scripts/migration_data.rb).
 func TestDataMigrationsMatchRuby(t *testing.T) {
 	dir := filepath.Join("testdata", "data")
 	raw, err := os.ReadFile(filepath.Join(dir, "ruby.json"))

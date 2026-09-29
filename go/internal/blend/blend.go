@@ -1,8 +1,10 @@
-// Package blend blends exchange rates from many providers into one series, and keeps the materialized blends
-// (blended_rates, blended_weekly_rates, blended_monthly_rates) in step with the rates they are computed from.
+// Package blend blends exchange rates from many providers into one series, and
+// keeps the materialized blends (blended_rates, blended_weekly_rates,
+// blended_monthly_rates) in step with the rates they are computed from.
 //
-// The pipeline is Blend: rebase each provider to a common base (Convert), flag cross-provider outliers (Annotate),
-// then take a recency-weighted average (WeightedAverage). Sums use Ruby's compensated Array#sum so values match the
+// The pipeline is Blend: rebase each provider to a common base (Convert), flag
+// cross-provider outliers (Annotate), then take a recency-weighted average
+// (WeightedAverage). Sums use Ruby's compensated Array#sum so values match the
 // Ruby app to the last bit wherever the inputs come in the same order.
 package blend
 
@@ -15,8 +17,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Blend is Blender#blend: rows rebased to base, outliers flagged, then averaged per quote with recency weights.
-// today caps the reference date, as Ruby's Date.today does.
+// Blend is Blender#blend: rows rebased to base, outliers flagged, then averaged
+// per quote with recency weights. today caps the reference date, as Ruby's
+// Date.today does.
 func Blend(rows []rates.Row, base string, today time.Time) []currency.Blended {
 	return WeightedAverage(Annotate(Convert(rows, base)), today)
 }
@@ -26,7 +29,8 @@ func Outliers(rows []rates.Row, base string) []rates.Row {
 	return ConsensusOutliers(Convert(rows, base))
 }
 
-// kbSum adds values the way Ruby's Array#sum adds floats: Kahan-Babuska compensated summation.
+// kbSum adds values the way Ruby's Array#sum adds floats: Kahan-Babuska
+// compensated summation.
 func kbSum(values []float64) float64 {
 	f, c := 0.0, 0.0
 	for _, x := range values {
@@ -57,15 +61,16 @@ func kbSum(values []float64) float64 {
 	return f + c
 }
 
-// Recency weighting: rates within the grace period carry full weight; beyond it, weight decays exponentially so stale
-// rates contribute less without a hard cutoff.
+// Recency weighting: rates within the grace period carry full weight; beyond
+// it, weight decays exponentially so stale rates contribute less without a hard
+// cutoff.
 const (
 	DecayGraceDays = 3
 	DecayRate      = 0.5
 )
 
-// Annotated is a rebased row with the consensus verdict. Excluded rows are listed among a blend's providers but do
-// not contribute to its rate.
+// Annotated is a rebased row with the consensus verdict. Excluded rows are
+// listed among a blend's providers but do not contribute to its rate.
 type Annotated struct {
 	rates.Row
 	Excluded bool
@@ -77,9 +82,11 @@ func recencyWeight(daysOld int) float64 {
 
 func days(from, to time.Time) int { return int(math.Round(to.Sub(from).Hours() / 24)) }
 
-// WeightedAverage is WeightedAverage#calculate: one blended row per quote, sorted by quote. Each takes the date,
-// base and quote of its newest contributor, the recency-weighted mean of the contributors' rates, and the latest row
-// of every provider (excluded ones included, marked) sorted by key. A quote whose rows are all excluded is dropped.
+// WeightedAverage is WeightedAverage#calculate: one blended row per quote,
+// sorted by quote. Each takes the date, base and quote of its newest
+// contributor, the recency-weighted mean of the contributors' rates, and the
+// latest row of every provider (excluded ones included, marked) sorted by key.
+// A quote whose rows are all excluded is dropped.
 func WeightedAverage(rows []Annotated, today time.Time) []currency.Blended {
 	if len(rows) == 0 {
 		return []currency.Blended{}

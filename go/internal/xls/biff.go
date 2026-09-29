@@ -12,7 +12,8 @@ import (
 	"github.com/richardlehane/mscfb"
 )
 
-// The BIFF8 records the reader uses. Everything else, formulas included, is skipped.
+// The BIFF8 records the reader uses. Everything else, formulas included, is
+// skipped.
 const (
 	recEOF        = 0x000A
 	recContinue   = 0x003C
@@ -56,7 +57,8 @@ type boundSheet struct {
 	pos  int // offset of the sheet's BOF in the Workbook stream
 }
 
-// workbookStream pulls the Workbook stream, which holds the BIFF records, out of the Compound File container.
+// workbookStream pulls the Workbook stream, which holds the BIFF records, out
+// of the Compound File container.
 func workbookStream(data []byte) ([]byte, error) {
 	doc, err := mscfb.New(bytes.NewReader(data))
 	if err != nil {
@@ -74,8 +76,8 @@ func workbookStream(data []byte) ([]byte, error) {
 	return nil, errors.New("no Workbook stream (not a BIFF8 workbook)")
 }
 
-// substream splits the records from the BOF at pos to its matching EOF, stepping over any nested substream such as an
-// embedded chart.
+// substream splits the records from the BOF at pos to its matching EOF,
+// stepping over any nested substream such as an embedded chart.
 func substream(stream []byte, pos int) ([]record, error) {
 	var recs []record
 	depth := 0
@@ -148,7 +150,8 @@ func readWorkbook(recs []record) (*workbook, error) {
 	return wb, nil
 }
 
-// readRows collects a worksheet's cells into rows. Blank cells count toward the row count but read as empty.
+// readRows collects a worksheet's cells into rows. Blank cells count toward the
+// row count but read as empty.
 func (wb *workbook) readRows(recs []record) ([]Row, error) {
 	var rows []Row
 	set := func(r, c int, cell Cell) {
@@ -218,7 +221,8 @@ func (wb *workbook) readRows(recs []record) ([]Row, error) {
 	return rows, nil
 }
 
-// rk decodes an RK number: a 30-bit signed integer or the top 30 bits of a float64, either one optionally divided by 100.
+// rk decodes an RK number: a 30-bit signed integer or the top 30 bits of a
+// float64, either one optionally divided by 100.
 func rk(v uint32) float64 {
 	var n float64
 	if v&2 != 0 {
@@ -247,8 +251,9 @@ func boolErr(value, isError byte) Cell {
 	return Cell{Kind: Error, String: code}
 }
 
-// unicodeString reads a string that sits whole in one record: a character count of lenSize bytes, a flags byte whose
-// low bit marks UTF-16 over compressed Latin-1, then the characters.
+// unicodeString reads a string that sits whole in one record: a character count
+// of lenSize bytes, a flags byte whose low bit marks UTF-16 over compressed
+// Latin-1, then the characters.
 func unicodeString(b []byte, lenSize int) (string, error) {
 	if len(b) < lenSize+1 {
 		return "", errTruncated
@@ -262,7 +267,8 @@ func unicodeString(b []byte, lenSize int) (string, error) {
 	return s, c.err
 }
 
-// readSST reads the shared string table, which runs on across CONTINUE records. See [MS-XLS] 2.4.265 and 2.5.293.
+// readSST reads the shared string table, which runs on across CONTINUE records.
+// See [MS-XLS] 2.4.265 and 2.5.293.
 func readSST(segs [][]byte) ([]string, error) {
 	c := &cursor{segs: segs}
 	c.bytes(4) // total string count, including repeats
@@ -328,8 +334,9 @@ func (c *cursor) advance() {
 	c.segs, c.pos = c.segs[1:], 0
 }
 
-// chars reads n characters, compressed (one Latin-1 byte each) or UTF-16. When the characters are split across a
-// CONTINUE, it begins with a fresh flags byte, since the rest may be stored the other way.
+// chars reads n characters, compressed (one Latin-1 byte each) or UTF-16. When
+// the characters are split across a CONTINUE, it begins with a fresh flags
+// byte, since the rest may be stored the other way.
 func (c *cursor) chars(n int, wide bool) string {
 	units := make([]uint16, 0, n)
 	for len(units) < n && c.err == nil {

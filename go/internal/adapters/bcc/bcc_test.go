@@ -54,7 +54,8 @@ func TestParseTasaEspecialAsHeadlineRate(t *testing.T) {
 	}
 }
 
-// One case per Ruby it: "skips entries with nil tasaEspecial", "skips zero rates", "handles empty response".
+// One case per Ruby it: "skips entries with nil tasaEspecial", "skips zero
+// rates", "handles empty response".
 func TestParseSkips(t *testing.T) {
 	for name, body := range map[string]string{
 		"nil tasaEspecial": `[{"fecha":"2026-05-22","tasaOficial":24,"tasaPublica":120,"tasaEspecial":null}]`,

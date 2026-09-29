@@ -40,8 +40,8 @@ func (a *v2App) coverage(kv ...string) map[string]any {
 	return a.object()
 }
 
-// assertBounds checks the coverage of params and that a snapshot at each bound returns records. An empty last means
-// the same as first; "-" means null.
+// assertBounds checks the coverage of params and that a snapshot at each bound
+// returns records. An empty last means the same as first; "-" means null.
 func (a *v2App) assertBounds(params []string, first string, last ...string) {
 	a.t.Helper()
 	end := first
@@ -90,7 +90,8 @@ func TestCoverageSeparatesDefaultBlendFromBISMonthlyHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Existing catalogues already distinguish publication sources, but not a query's base.
+	// Existing catalogues already distinguish publication sources, but not a
+	// query's base.
 	bis, err := currency.WithProviders(ctx, a.db, []string{"BIS"})
 	if err != nil {
 		t.Fatal(err)
@@ -268,8 +269,8 @@ func TestCoverageRejectsUnsupportedFiltersAndInvalidCurrencies(t *testing.T) {
 	}
 }
 
-// spec/reciprocal_consistency_spec.rb: contract tests for reciprocal consistency, cross-rate transitivity and
-// pegged-base anchoring.
+// spec/reciprocal_consistency_spec.rb: contract tests for reciprocal
+// consistency, cross-rate transitivity and pegged-base anchoring.
 
 func (a *v2App) rateFor(base, quote string) float64 {
 	a.t.Helper()
@@ -308,9 +309,10 @@ func TestPeggedBaseResolvesToPeg(t *testing.T) {
 	}
 }
 
-// spec/versions/v2/blended_rollups_spec.rb, "Grouped HTTP responses": grouped JSON, NDJSON and CSV stream the same
-// bytes (and ETag) from the stored blends as from the live blend. That the table served them is shown by tampering
-// with it afterwards, which the Ruby spec shows by stubbing the blender.
+// spec/versions/v2/blended_rollups_spec.rb, "Grouped HTTP responses": grouped
+// JSON, NDJSON and CSV stream the same bytes (and ETag) from the stored blends
+// as from the live blend. That the table served them is shown by tampering with
+// it afterwards, which the Ruby spec shows by stubbing the blender.
 func TestStreamsUnchangedGroupedResponsesFromStoredBlends(t *testing.T) {
 	for _, c := range []struct {
 		group string
@@ -359,8 +361,8 @@ func TestServesV2Root(t *testing.T) {
 	}
 }
 
-// Through the full middleware stack: the timeout middleware must not swallow a 503 the query generated after its own
-// (later-starting) deadline expired.
+// Through the full middleware stack: the timeout middleware must not swallow a
+// 503 the query generated after its own (later-starting) deadline expired.
 func TestDeliversV2Deadline503ThroughMiddleware(t *testing.T) {
 	a := newTestApp(t)
 	stubRateQuery(t, fakeQuery{each: func(func(ratequery.Record) error) error {

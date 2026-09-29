@@ -339,13 +339,15 @@ func TestPublishesMissed(t *testing.T) {
 		{"counts every day", daily, "daily", "2026-04-10", day(2026, 4, 20), 9},
 		// Daily cadence, Mondays only.
 		{"counts only Mondays", mondays, "daily", "2026-04-06", day(2026, 4, 24), 2},
-		// Weekly cadence (FRED-style): the Monday batch covers the prior ISO week.
+		// Weekly cadence (FRED-style): the Monday batch covers the prior ISO
+		// week.
 		{"weekly: end in the week the last batch covered", mondays, "weekly", "2026-04-19", day(2026, 4, 21), 0},
 		{"weekly: Saturday of the covered week", mondays, "weekly", "2026-04-18", day(2026, 4, 21), 0},
 		{"weekly: one ISO week behind", mondays, "weekly", "2026-04-12", day(2026, 4, 21), 1},
 		{"weekly: Sunday before the Monday batch", mondays, "weekly", "2026-04-12", day(2026, 4, 19), 0},
 		{"weekly: Monday morning without last week's batch", mondays, "weekly", "2026-04-12", day(2026, 4, 20), 1},
-		// Monthly cadence (HKMA-style): a day-of-month window covers the prior month.
+		// Monthly cadence (HKMA-style): a day-of-month window covers the prior
+		// month.
 		{"monthly: current, past the window", hkma, "monthly", "2026-03-31", day(2026, 4, 20), 0},
 		{"monthly: current, before the window", hkma, "monthly", "2026-03-31", day(2026, 4, 2), 0},
 		{"monthly: last business day is not the last calendar day", hkma, "monthly", "2025-11-29", day(2025, 12, 15), 0},

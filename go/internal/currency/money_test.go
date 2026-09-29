@@ -8,8 +8,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/seeds"
 )
 
-// testdata/patched.json is Ruby's table after boot applies the patches (go/scripts/dump_money.rb run after requiring
-// boot.rb).
+// testdata/patched.json is Ruby's table after boot applies the patches
+// (go/scripts/dump_money.rb run after requiring boot.rb).
 func TestTableMatchesPatchedRubyTable(t *testing.T) {
 	b, err := os.ReadFile("testdata/patched.json")
 	if err != nil {

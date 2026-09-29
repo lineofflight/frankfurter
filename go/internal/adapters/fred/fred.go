@@ -1,8 +1,9 @@
-// Package fred fetches rates from Federal Reserve Economic Data (FRED), which publishes the daily H.10 exchange
-// rates.
+// Package fred fetches rates from Federal Reserve Economic Data (FRED), which
+// publishes the daily H.10 exchange rates.
 //
-// Most series are quoted as foreign currency per USD. A few (AUD, EUR, GBP, NZD) are quoted as USD per foreign
-// currency and stored with the foreign currency as base. The H.10 is a curated policy publication; these are all the
+// Most series are quoted as foreign currency per USD. A few (AUD, EUR, GBP,
+// NZD) are quoted as USD per foreign currency and stored with the foreign
+// currency as base. The H.10 is a curated policy publication; these are all the
 // series available.
 package fred
 
@@ -64,8 +65,9 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// Fetch implements adapter.Adapter. Like the Ruby adapter, it asks FRED for observations from after onwards
-// (observation_start is inclusive) and ignores upto.
+// Fetch implements adapter.Adapter. Like the Ruby adapter, it asks FRED for
+// observations from after onwards (observation_start is inclusive) and ignores
+// upto.
 func (a *Adapter) Fetch(ctx context.Context, after, _ time.Time) ([]adapter.Rate, error) {
 	key := os.Getenv("FRED_API_KEY")
 	if key == "" {

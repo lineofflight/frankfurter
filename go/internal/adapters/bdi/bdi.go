@@ -1,8 +1,11 @@
-// Package bdi fetches rates from Banca d'Italia, which publishes daily rates for 150+ currencies against the euro via
-// the "terze valute" (third currencies) portal. The dailyRates endpoint with currencyIsoCode=EUR returns every
-// currency quoted against EUR for a single date, so Fetch makes one request per weekday.
+// Package bdi fetches rates from Banca d'Italia, which publishes daily rates
+// for 150+ currencies against the euro via the "terze valute" (third
+// currencies) portal. The dailyRates endpoint with currencyIsoCode=EUR returns
+// every currency quoted against EUR for a single date, so Fetch makes one
+// request per weekday.
 //
-// Unlike most adapters, Fetch includes the after date itself, as the Ruby adapter iterates after..upto inclusively.
+// Unlike most adapters, Fetch includes the after date itself, as the Ruby
+// adapter iterates after..upto inclusively.
 package bdi
 
 import (
@@ -122,7 +125,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if !isoCode.MatchString(code) {
 			continue
 		}
-		// Ruby's CSV reads an unquoted empty field as nil, which the adapter skips.
+		// Ruby's CSV reads an unquoted empty field as nil, which the adapter
+		// skips.
 		rateText, ok := field(rec, "Rate")
 		if !ok || rateText == "" || strings.TrimSpace(rateText) == "N.A." {
 			continue

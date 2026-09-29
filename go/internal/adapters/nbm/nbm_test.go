@@ -237,7 +237,8 @@ func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 func TestFetchRequestsWeekdaysInclusive(t *testing.T) {
 	rec := &recorder{}
 	a := New(&http.Client{Transport: rec})
-	// Friday 2026-04-10 through Monday 2026-04-13: after is inclusive, weekend skipped.
+	// Friday 2026-04-10 through Monday 2026-04-13: after is inclusive, weekend
+	// skipped.
 	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 4, 10), adapter.Date(2026, 4, 13)); err != nil {
 		t.Fatal(err)
 	}

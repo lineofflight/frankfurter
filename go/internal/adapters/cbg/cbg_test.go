@@ -139,7 +139,8 @@ func TestParseRejectsInvalidValues(t *testing.T) {
 }
 
 func TestParseTruncatesFloatEpoch(t *testing.T) {
-	// 2026-05-22T23:59:59.999Z as a float: Integer() truncates and /1000 floors, staying on the 22nd.
+	// 2026-05-22T23:59:59.999Z as a float: Integer() truncates and /1000
+	// floors, staying on the 22nd.
 	rates := mustParse(t, `[[1779494399999.9, 72.39]]`, "USD")
 	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 5, 22)) {
 		t.Errorf("got %+v, want date 2026-05-22", rates)

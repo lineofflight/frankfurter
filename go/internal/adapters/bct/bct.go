@@ -1,8 +1,10 @@
-// Package bct fetches rates from the Banque Centrale de Tunisie, which publishes daily interbank reference rates for 20
-// currencies against the Tunisian dinar (TND).
+// Package bct fetches rates from the Banque Centrale de Tunisie, which
+// publishes daily interbank reference rates for 20 currencies against the
+// Tunisian dinar (TND).
 //
-// The endpoint accepts a single date per POST and returns an HTML fragment with two tables: the interbank reference
-// rates and a manual-exchange table below. We parse only the first.
+// The endpoint accepts a single date per POST and returns an HTML fragment with
+// two tables: the interbank reference rates and a manual-exchange table below.
+// We parse only the first.
 //
 // Caveats:
 //   - The meta tag declares ISO-8859-1 but the bytes are UTF-8; we trust whichever decoding yields valid characters.
@@ -11,7 +13,8 @@
 //     back to a nearby trading day, so we check the echoed "Journée du DD/MM/YYYY" and otherwise drop the records.
 //   - The POST requires a Referer header.
 //
-// Fetch walks every weekday from after through upto, both inclusive, as the Ruby adapter does.
+// Fetch walks every weekday from after through upto, both inclusive, as the
+// Ruby adapter does.
 package bct
 
 import (
@@ -108,7 +111,8 @@ func (a *Adapter) fetchDate(ctx context.Context, date time.Time) ([]adapter.Rate
 	return parse(decode(resp.Body), date)
 }
 
-// decode returns the body as UTF-8, transcoding from ISO-8859-1 only when it isn't valid UTF-8.
+// decode returns the body as UTF-8, transcoding from ISO-8859-1 only when it
+// isn't valid UTF-8.
 func decode(body []byte) string {
 	if utf8.Valid(body) {
 		return string(body)
@@ -170,7 +174,8 @@ func echoedDate(html string) (time.Time, bool) {
 	return d, true
 }
 
-// parseNumber reads a French-format number: dot as thousands separator, comma as decimal.
+// parseNumber reads a French-format number: dot as thousands separator, comma
+// as decimal.
 func parseNumber(s string) (float64, bool) {
 	m := numberRE.FindString(strip(s))
 	if m == "" {
@@ -183,7 +188,8 @@ func parseNumber(s string) (float64, bool) {
 	return f, true
 }
 
-// strip trims the whitespace Ruby's String#strip removes, leaving non-breaking spaces alone.
+// strip trims the whitespace Ruby's String#strip removes, leaving non-breaking
+// spaces alone.
 func strip(s string) string {
 	return strings.Trim(s, " \t\n\v\f\r\x00")
 }

@@ -11,7 +11,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 )
 
-// testApp is the full app over a freshly seeded fixture database, as the Ruby specs' App.freeze with Fixtures.seed!.
+// testApp is the full app over a freshly seeded fixture database, as the Ruby
+// specs' App.freeze with Fixtures.seed!.
 type testApp struct {
 	t   *testing.T
 	db  *sql.DB

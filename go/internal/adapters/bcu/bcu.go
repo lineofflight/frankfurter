@@ -1,8 +1,10 @@
-// Package bcu fetches rates from the Central Bank of Uruguay (Banco Central del Uruguay), which publishes official
-// buying and selling rates in Uruguayan pesos (UYU) through a SOAP web service, one currency per request.
+// Package bcu fetches rates from the Central Bank of Uruguay (Banco Central del
+// Uruguay), which publishes official buying and selling rates in Uruguayan
+// pesos (UYU) through a SOAP web service, one currency per request.
 //
-// Rows are stored with base = foreign currency, quote = UYU. As in the Ruby adapter, the requested range starts at
-// after itself (inclusive) and the response is not clipped.
+// Rows are stored with base = foreign currency, quote = UYU. As in the Ruby
+// adapter, the requested range starts at after itself (inclusive) and the
+// response is not clipped.
 package bcu
 
 import (
@@ -79,7 +81,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. The service needs a start date; Ruby fails on a nil after too.
+// Fetch implements adapter.Adapter. The service needs a start date; Ruby fails
+// on a nil after too.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("start date required")
@@ -138,7 +141,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err := dec.DecodeElement(&d, &start); err != nil {
 			return nil, err
 		}
-		// Ox reads an empty element's text as nil, so Ruby skips blank fields rather than failing to parse them.
+		// Ox reads an empty element's text as nil, so Ruby skips blank fields
+		// rather than failing to parse them.
 		if blank(d.Fecha) || blank(d.Moneda) || blank(d.TCC) || blank(d.TCV) {
 			continue
 		}

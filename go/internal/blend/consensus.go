@@ -7,8 +7,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Consensus thresholds: a quote needs MinProviders distinct providers before any is judged. A rate is an outlier when
-// it sits further from the median than MADMultiplier median absolute deviations, and at least MinDeviation of the
+// Consensus thresholds: a quote needs MinProviders distinct providers before
+// any is judged. A rate is an outlier when it sits further from the median than
+// MADMultiplier median absolute deviations, and at least MinDeviation of the
 // median away.
 const (
 	MinProviders  = 4
@@ -18,8 +19,8 @@ const (
 
 type pairKey struct{ provider, quote string }
 
-// flagged compares each provider's rebased rates against the median of their quote and returns the provider and
-// quote pairs that deviate significantly.
+// flagged compares each provider's rebased rates against the median of their
+// quote and returns the provider and quote pairs that deviate significantly.
 func flagged(rows []rates.Row) map[pairKey]bool {
 	out := map[pairKey]bool{}
 	var quotes []string
@@ -66,7 +67,8 @@ func median(values []float64) float64 {
 	return sorted[len(sorted)/2]
 }
 
-// ConsensusOutliers is Consensus#outliers: every row whose provider and quote pair deviates from its quote's consensus.
+// ConsensusOutliers is Consensus#outliers: every row whose provider and quote
+// pair deviates from its quote's consensus.
 func ConsensusOutliers(rows []rates.Row) []rates.Row {
 	flags := flagged(rows)
 	var out []rates.Row

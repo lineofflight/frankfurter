@@ -1,8 +1,10 @@
-// Package nbk fetches rates from the National Bank of Kazakhstan, which publishes daily official rates for about 40
-// currencies against the Kazakhstani tenge (KZT).
+// Package nbk fetches rates from the National Bank of Kazakhstan, which
+// publishes daily official rates for about 40 currencies against the
+// Kazakhstani tenge (KZT).
 //
-// The RSS endpoint serves one date per request, so Fetch walks the weekdays one by one. As in Ruby, `after` is
-// inclusive: the walk starts on `after` itself. A zero `after` starts at `upto`.
+// The RSS endpoint serves one date per request, so Fetch walks the weekdays one
+// by one. As in Ruby, `after` is inclusive: the walk starts on `after` itself.
+// A zero `after` starts at `upto`.
 package nbk
 
 import (
@@ -40,7 +42,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter: one request per day, so keep windows short.
+// BackfillRange implements adapter.Adapter: one request per day, so keep
+// windows short.
 func (a *Adapter) BackfillRange() int { return 30 }
 
 // Fetch implements adapter.Adapter.
@@ -116,7 +119,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toF mirrors Ruby's String#to_f: it reads the leading number and yields 0 when there is none.
+// toF mirrors Ruby's String#to_f: it reads the leading number and yields 0 when
+// there is none.
 func toF(s string) float64 {
 	f, _ := strconv.ParseFloat(strings.ReplaceAll(floatPrefix.FindString(strings.TrimLeft(s, " \t\n\r\f\v")), "_", ""), 64)
 	return f

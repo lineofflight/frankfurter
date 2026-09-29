@@ -12,7 +12,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 )
 
-// spec/versions/v1_spec.rb, through the full app (the Ruby spec mounts Versions::V1 alone, at /).
+// spec/versions/v1_spec.rb, through the full app (the Ruby spec mounts
+// Versions::V1 alone, at /).
 
 func TestV1ReturnsLatestQuotes(t *testing.T) {
 	a := newTestApp(t)

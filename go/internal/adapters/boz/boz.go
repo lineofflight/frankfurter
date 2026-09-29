@@ -1,20 +1,27 @@
-// Package boz fetches rates from the Bank of Zambia, which publishes the daily average buy and sell rates of four
-// currencies in kwacha as one XLSX workbook carrying the whole series from 2006.
+// Package boz fetches rates from the Bank of Zambia, which publishes the daily
+// average buy and sell rates of four currencies in kwacha as one XLSX workbook
+// carrying the whole series from 2006.
 //
-// The workbook has one sheet: a currency banner in row 3 ("Dollar", "Pound", "Euro", "Rand"), a header row beneath it
-// ("Date | Buy | Sale | Buy | Sale ..."), then one data row per business day with an Excel serial date in column B and
-// a buy/sell pair per currency. Rates are kwacha per unit of foreign currency, so rows carry the foreign currency in
-// Base and the kwacha in Quote. Each rate is the midpoint of the published buy and sell.
+// The workbook has one sheet: a currency banner in row 3 ("Dollar", "Pound",
+// "Euro", "Rand"), a header row beneath it ("Date | Buy | Sale | Buy | Sale
+// ..."), then one data row per business day with an Excel serial date in column
+// B and a buy/sell pair per currency. Rates are kwacha per unit of foreign
+// currency, so rows carry the foreign currency in Base and the kwacha in Quote.
+// Each rate is the midpoint of the published buy and sell.
 //
-// The kwacha was rebased on 2013-01-01 at 1000 ZMK = 1 ZMW. The workbook does not restate earlier rows, so rows before
-// the changeover are labelled ZMK and everything after ZMW. The first seven rows (2006-01-03 to 2006-01-11) are hidden
-// and mostly hold placeholder text and stray formulas; hidden rows are skipped, so coverage starts on 2006-01-12.
+// The kwacha was rebased on 2013-01-01 at 1000 ZMK = 1 ZMW. The workbook does
+// not restate earlier rows, so rows before the changeover are labelled ZMK and
+// everything after ZMW. The first seven rows (2006-01-03 to 2006-01-11) are
+// hidden and mostly hold placeholder text and stray formulas; hidden rows are
+// skipped, so coverage starts on 2006-01-12.
 //
-// A new node is created on the site's Drupal JSON:API each business day, attached to a freshly uploaded copy of the
-// workbook under a changing filename, so we ask for the most recently created node with its file included and follow
-// the file URI.
+// A new node is created on the site's Drupal JSON:API each business day,
+// attached to a freshly uploaded copy of the workbook under a changing
+// filename, so we ask for the most recently created node with its file included
+// and follow the file URI.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package boz
 
 import (
@@ -49,7 +56,8 @@ var apiParams = url.Values{
 }
 
 var (
-	// Excel stores dates as days since this epoch (with the 1900 leap-year quirk baked into the offset).
+	// Excel stores dates as days since this epoch (with the 1900 leap-year
+	// quirk baked into the offset).
 	excelEpoch = adapter.Date(1899, 12, 30)
 
 	// First date the rebased kwacha applies. Earlier rows price the old kwacha.
@@ -110,8 +118,9 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return out, nil
 }
 
-// workbookURL resolves the workbook URL from the JSON:API listing: the first node's file relationship points into the
-// included array, whose entry carries the root-relative file URI.
+// workbookURL resolves the workbook URL from the JSON:API listing: the first
+// node's file relationship points into the included array, whose entry carries
+// the root-relative file URI.
 func workbookURL(data []byte) (string, error) {
 	var doc struct {
 		Data []struct {
@@ -162,7 +171,8 @@ func workbookURL(data []byte) (string, error) {
 	return base.ResolveReference(ref).String(), nil
 }
 
-// Raw values keep the stored serial dates and unformatted decimals rather than their display strings.
+// Raw values keep the stored serial dates and unformatted decimals rather than
+// their display strings.
 var raw = excelize.Options{RawCellValue: true}
 
 func parse(data []byte) ([]adapter.Rate, error) {
@@ -185,15 +195,17 @@ type sheet struct {
 	name string
 }
 
-// parse reads the two header rows that precede the data: the currency banner, whose labels sit over each currency's
-// Buy column, and the "Date | Buy | Sale" row that confirms the pairing. Columns are resolved from both, so a
+// parse reads the two header rows that precede the data: the currency banner,
+// whose labels sit over each currency's Buy column, and the "Date | Buy | Sale"
+// row that confirms the pairing. Columns are resolved from both, so a
 // reshuffled workbook fails loudly instead of pairing the wrong cells.
 func (s *sheet) parse(rows *excelize.Rows) ([]adapter.Rate, error) {
 	banner := map[int]string{}
 	var columns []pair
 	var rates []adapter.Rate
 
-	// The iterator yields every row number in turn, empty ones included, so n tracks the 1-based row.
+	// The iterator yields every row number in turn, empty ones included, so n
+	// tracks the 1-based row.
 	for n := 1; rows.Next(); n++ {
 		cells, err := rows.Columns(raw)
 		if err != nil {
@@ -256,7 +268,8 @@ func (s *sheet) parse(rows *excelize.Rows) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// pair holds a currency and the zero-based index of its Buy column; Sale sits immediately right of it.
+// pair holds a currency and the zero-based index of its Buy column; Sale sits
+// immediately right of it.
 type pair struct {
 	iso string
 	buy int
@@ -275,12 +288,14 @@ func pairColumns(banner, labels map[int]string) ([]pair, error) {
 		}
 		pairs = append(pairs, pair{iso, buy})
 	}
-	// Keep the sheet's left-to-right order, as Ruby's insertion-ordered hash does.
+	// Keep the sheet's left-to-right order, as Ruby's insertion-ordered hash
+	// does.
 	slices.SortFunc(pairs, func(a, b pair) int { return cmp.Compare(a.buy, b.buy) })
 	return pairs, nil
 }
 
-// labelCells maps each non-empty cell's column index to its trimmed, upcased text.
+// labelCells maps each non-empty cell's column index to its trimmed, upcased
+// text.
 func labelCells(cells []string) map[int]string {
 	labels := map[int]string{}
 	for i, v := range cells {
@@ -291,7 +306,8 @@ func labelCells(cells []string) map[int]string {
 	return labels
 }
 
-// value returns the raw text at column index col, rejecting string cells so a label never reads as a number.
+// value returns the raw text at column index col, rejecting string cells so a
+// label never reads as a number.
 func (s *sheet) value(cells []string, n, col int) (string, bool) {
 	if col >= len(cells) || cells[col] == "" {
 		return "", false
@@ -319,8 +335,8 @@ func (s *sheet) dateCell(cells []string, n, col int) (time.Time, bool) {
 	return excelEpoch.AddDate(0, 0, int(serial)), true
 }
 
-// numericCell returns the stored text as an exact decimal, so the midpoint sees the published digits rather than a
-// float round-trip.
+// numericCell returns the stored text as an exact decimal, so the midpoint sees
+// the published digits rather than a float round-trip.
 func (s *sheet) numericCell(cells []string, n, col int) (*big.Rat, bool) {
 	text, ok := s.value(cells, n, col)
 	if !ok {

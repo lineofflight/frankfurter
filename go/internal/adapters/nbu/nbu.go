@@ -1,5 +1,5 @@
-// Package nbu fetches rates from the National Bank of Ukraine, which publishes daily rates for about 45 currencies
-// against the hryvnia.
+// Package nbu fetches rates from the National Bank of Ukraine, which publishes
+// daily rates for about 45 currencies against the hryvnia.
 package nbu
 
 import (
@@ -19,8 +19,9 @@ import (
 
 const baseURL = "https://bank.gov.ua/NBU_Exchange/exchange_site"
 
-// The TJS series starts in 1999 under the Tajikistani ruble, which the somoni replaced at 1000:1 on 2000-10-30, and
-// is not restated: 1000 "TJS" = 2.78 UAH on 2000-09-01 against 1 TJS = 1.81 in 2002. Earlier rows are TJR.
+// The TJS series starts in 1999 under the Tajikistani ruble, which the somoni
+// replaced at 1000:1 on 2000-10-30, and is not restated: 1000 "TJS" = 2.78 UAH
+// on 2000-09-01 against 1 TJS = 1.81 in 2002. Earlier rows are TJR.
 var predecessors = map[string]adapter.Predecessor{
 	"TJS": {Code: "TJR", Cutover: adapter.Date(2000, 10, 30)},
 }
@@ -44,8 +45,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. Like the Ruby adapter, it returns what the server sends for the requested range
-// without clipping it further.
+// Fetch implements adapter.Adapter. Like the Ruby adapter, it returns what the
+// server sends for the requested range without clipping it further.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("start date required")
@@ -120,8 +121,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 var numericPrefix = regexp.MustCompile(`\A\s*[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?`)
 
-// toF mirrors Ruby's to_f on a JSON value: numbers convert, strings parse their leading number (0 if none), null is 0,
-// and anything else is an error, as to_f is undefined on it.
+// toF mirrors Ruby's to_f on a JSON value: numbers convert, strings parse their
+// leading number (0 if none), null is 0, and anything else is an error, as to_f
+// is undefined on it.
 func toF(raw json.RawMessage) (float64, error) {
 	var v any
 	if err := json.Unmarshal(raw, &v); err != nil {

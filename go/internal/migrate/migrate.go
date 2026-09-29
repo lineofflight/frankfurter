@@ -1,11 +1,14 @@
-// Package migrate ports db/migrate: the numbered schema and data migrations, applied through the same bookkeeping
-// table as Sequel's IntegerMigrator (schema_info, one row holding the current version). A database the Ruby app has
-// migrated opens here at its version, and one migrated here opens in Ruby the same way.
+// Package migrate ports db/migrate: the numbered schema and data migrations,
+// applied through the same bookkeeping table as Sequel's IntegerMigrator
+// (schema_info, one row holding the current version). A database the Ruby app
+// has migrated opens here at its version, and one migrated here opens in Ruby
+// the same way.
 //
-// The DDL is the SQL Sequel emitted for each migration on SQLite, so every version leaves the schema Ruby leaves
-// (testdata/schemas.json records it). Unlike Sequel on SQLite, which runs migrations outside transactions, each
-// migration and its version bump commit together in one BEGIN IMMEDIATE transaction: a failed migration leaves nothing
-// behind.
+// The DDL is the SQL Sequel emitted for each migration on SQLite, so every
+// version leaves the schema Ruby leaves (testdata/schemas.json records it).
+// Unlike Sequel on SQLite, which runs migrations outside transactions, each
+// migration and its version bump commit together in one BEGIN IMMEDIATE
+// transaction: a failed migration leaves nothing behind.
 package migrate
 
 import (
@@ -18,7 +21,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// Migration is one numbered file in db/migrate. A nil Down is a no-op, as in Sequel.
+// Migration is one numbered file in db/migrate. A nil Down is a no-op, as in
+// Sequel.
 type Migration struct {
 	Version  int
 	Name     string
@@ -31,10 +35,12 @@ var ErrIrreversible = errors.New("irreversible migration")
 // Latest is the newest migration's version.
 func Latest() int { return len(migrations) }
 
-// Migrations returns every migration in version order. Callers must not modify it.
+// Migrations returns every migration in version order. Callers must not modify
+// it.
 func Migrations() []Migration { return migrations }
 
-// Current returns the version recorded in schema_info, or 0 when the table is missing or empty.
+// Current returns the version recorded in schema_info, or 0 when the table is
+// missing or empty.
 func Current(ctx context.Context, q db.Querier) (int, error) {
 	var n int
 	err := q.QueryRowContext(ctx,
@@ -50,7 +56,8 @@ func Current(ctx context.Context, q db.Querier) (int, error) {
 	return int(v.Int64), err
 }
 
-// CheckCurrent returns an error unless the database is at the latest version (Sequel::Migrator.check_current).
+// CheckCurrent returns an error unless the database is at the latest version
+// (Sequel::Migrator.check_current).
 func CheckCurrent(ctx context.Context, q db.Querier) error {
 	v, err := Current(ctx, q)
 	if err != nil {
@@ -65,8 +72,9 @@ func CheckCurrent(ctx context.Context, q db.Querier) error {
 // Up migrates to the latest version.
 func Up(ctx context.Context, conn *sql.DB) error { return To(ctx, conn, Latest()) }
 
-// To migrates up or down to target (rake db:migrate VERSION=target). Each migration commits with its version bump; the
-// first failure stops the run, leaving the database at the last version that succeeded.
+// To migrates up or down to target (rake db:migrate VERSION=target). Each
+// migration commits with its version bump; the first failure stops the run,
+// leaving the database at the last version that succeeded.
 func To(ctx context.Context, conn *sql.DB, target int) error {
 	if target < 0 || target > Latest() {
 		return fmt.Errorf("migrate: no migration %d (latest is %d)", target, Latest())

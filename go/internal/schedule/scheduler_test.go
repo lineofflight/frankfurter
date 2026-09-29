@@ -48,7 +48,8 @@ func TestSchedulerStopsAnEveryJobThatUnschedulesItself(t *testing.T) {
 	}
 }
 
-// With NoOverlap a slow run makes the scheduler skip ticks instead of starting a second copy.
+// With NoOverlap a slow run makes the scheduler skip ticks instead of starting
+// a second copy.
 func TestSchedulerNeverOverlapsANoOverlapJob(t *testing.T) {
 	s := New(4, quiet)
 	var active, peak, runs atomic.Int32

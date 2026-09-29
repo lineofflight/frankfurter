@@ -145,7 +145,8 @@ func TestCarryForwardClientAheadOfServer(t *testing.T) {
 	}
 }
 
-// A stored row with a single published side resolves no rate; Ruby reads it back as nil.
+// A stored row with a single published side resolves no rate; Ruby reads it
+// back as nil.
 func TestSelectReadsUnresolvedRateAsNaN(t *testing.T) {
 	conn := fixtures.New(t)
 	exec(t, conn, "INSERT INTO rates (provider, date, base, quote, ask) VALUES ('TST', '2000-01-03', 'USD', 'GBP', 103)")
@@ -257,7 +258,8 @@ func TestBetweenFutureStart(t *testing.T) {
 	}
 }
 
-// only is Rate.where(date: (date - 14)..date).only(currencies...), as base, quote and provider.
+// only is Rate.where(date: (date - 14)..date).only(currencies...), as base,
+// quote and provider.
 func only(t *testing.T, conn *sql.DB, currencies ...string) [][3]string {
 	t.Helper()
 	date := fixtures.LatestDate()

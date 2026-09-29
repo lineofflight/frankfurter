@@ -11,15 +11,18 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// v1Params are a v1 request's string parameters: the query string, with the route's captures written over it
-// (date, start_date, end_date), as Roda's indifferent params. A repeated key keeps its last value, as Rack does.
+// v1Params are a v1 request's string parameters: the query string, with the
+// route's captures written over it (date, start_date, end_date), as Roda's
+// indifferent params. A repeated key keeps its last value, as Rack does.
 type v1Params map[string]string
 
-// v1Nested are the keys Rack nested into an array ('[') or a hash ('{'): to[]=USD, from[x]=USD.
+// v1Nested are the keys Rack nested into an array ('[') or a hash ('{'):
+// to[]=USD, from[x]=USD.
 type v1Nested map[string]byte
 
-// parseV1Params reads a raw query string as Rack's parse_nested_query does (parseRackQuery) and splits its top level
-// into string parameters and the names holding nested values. A key without '=' is nil in Rack, which every v1
+// parseV1Params reads a raw query string as Rack's parse_nested_query does
+// (parseRackQuery) and splits its top level into string parameters and the
+// names holding nested values. A key without '=' is nil in Rack, which every v1
 // parameter treats as absent, so it is dropped.
 func parseV1Params(raw string) (v1Params, v1Nested, rackHash, error) {
 	query, err := parseRackQuery(raw)
@@ -40,9 +43,10 @@ func parseV1Params(raw string) (v1Params, v1Nested, rackHash, error) {
 	return p, nested, query, nil
 }
 
-// check fails a request whose parameters V1::Query would read as an array or a hash (Ruby raises calling to_f,
-// upcase or Date.parse on one): amount, the first given of from and base, the first given of to and symbols, and a
-// date the route did not overwrite.
+// check fails a request whose parameters V1::Query would read as an array or a
+// hash (Ruby raises calling to_f, upcase or Date.parse on one): amount, the
+// first given of from and base, the first given of to and symbols, and a date
+// the route did not overwrite.
 func (n v1Nested) check(p v1Params) error {
 	if n["amount"] != 0 || n["date"] != 0 {
 		return errInvalidParam
@@ -60,8 +64,8 @@ func (n v1Nested) check(p v1Params) error {
 	return nil
 }
 
-// v1Query is Versions::V1::Query: the validated request. Nil Symbols means none given; an empty slice is a given but
-// empty list (to=), which matches nothing.
+// v1Query is Versions::V1::Query: the validated request. Nil Symbols means none
+// given; an empty slice is a given but empty list (to=), which matches nothing.
 type v1Query struct {
 	Amount    float64 // 0 when not given
 	HasAmount bool
@@ -84,7 +88,8 @@ var (
 	errInvalidEncoding = errors.New("invalid byte sequence in UTF-8")
 )
 
-// buildV1Query is Query.build: it parses every parameter and rejects a conversion from a currency to itself.
+// buildV1Query is Query.build: it parses every parameter and rejects a
+// conversion from a currency to itself.
 func buildV1Query(p v1Params) (v1Query, error) {
 	var q v1Query
 	if s, ok := p["amount"]; ok {
@@ -137,8 +142,9 @@ func (p v1Params) base() (string, bool) {
 	return "", false
 }
 
-// symbols is to, else symbols, upcased and split on commas as Ruby's String#split does (trailing empty fields
-// dropped, so an empty string gives an empty list).
+// symbols is to, else symbols, upcased and split on commas as Ruby's
+// String#split does (trailing empty fields dropped, so an empty string gives an
+// empty list).
 func (p v1Params) symbols() []string {
 	for _, k := range []string{"to", "symbols"} {
 		if v, ok := p[k]; ok {
@@ -155,8 +161,9 @@ func (p v1Params) symbols() []string {
 	return nil
 }
 
-// parseV1Date parses the YYYY-MM-DD dates the routes capture. Ruby's Date.parse accepts more, but only a query's own
-// date= on an interval route ever reaches it with anything else, and that request fails either way.
+// parseV1Date parses the YYYY-MM-DD dates the routes capture. Ruby's Date.parse
+// accepts more, but only a query's own date= on an interval route ever reaches
+// it with anything else, and that request fails either way.
 func parseV1Date(s string) (time.Time, error) {
 	d, err := db.ParseDate(s)
 	if err != nil {
@@ -165,8 +172,9 @@ func parseV1Date(s string) (time.Time, error) {
 	return d, nil
 }
 
-// rubyToF is Ruby's String#to_f: the longest leading decimal number, ignoring leading whitespace and single
-// underscores between digits; 0 when there is none. Out-of-range values overflow to infinity, as in Ruby.
+// rubyToF is Ruby's String#to_f: the longest leading decimal number, ignoring
+// leading whitespace and single underscores between digits; 0 when there is
+// none. Out-of-range values overflow to infinity, as in Ruby.
 func rubyToF(s string) float64 {
 	s = strings.TrimLeft(s, " \t\n\v\f\r")
 	var b strings.Builder

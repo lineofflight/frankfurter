@@ -18,8 +18,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// v2App is Versions::V2.freeze over a freshly seeded fixture: the v2 routes alone, without the app's middleware, as
-// the Ruby specs mount them.
+// v2App is Versions::V2.freeze over a freshly seeded fixture: the v2 routes
+// alone, without the app's middleware, as the Ruby specs mount them.
 type v2App struct {
 	t   *testing.T
 	s   *Server
@@ -38,7 +38,8 @@ func newV2App(t *testing.T) *v2App {
 	return &v2App{t: t, s: s, db: conn, h: mux}
 }
 
-// get requests a v2 path (relative to /v2, as the Ruby specs write them); headers are name, value pairs.
+// get requests a v2 path (relative to /v2, as the Ruby specs write them);
+// headers are name, value pairs.
 func (a *v2App) get(path string, headers ...string) *httptest.ResponseRecorder {
 	a.t.Helper()
 	a.req = httptest.NewRequest(http.MethodGet, "/v2"+path, nil)
@@ -50,7 +51,8 @@ func (a *v2App) get(path string, headers ...string) *httptest.ResponseRecorder {
 	return a.res
 }
 
-// getParams is Rack::Test's get(path, params): the parameters encoded into the query string.
+// getParams is Rack::Test's get(path, params): the parameters encoded into the
+// query string.
 func (a *v2App) getParams(path string, kv ...string) *httptest.ResponseRecorder {
 	a.t.Helper()
 	v := url.Values{}
@@ -103,7 +105,8 @@ var v2Doc = sync.OnceValues(func() (*openapi3.T, error) {
 	return doc, doc.Validate(context.Background())
 })
 
-// conform is skooma's assert_conform_schema: the last response matches the document for its route and status.
+// conform is skooma's assert_conform_schema: the last response matches the
+// document for its route and status.
 func (a *v2App) conform(status int) {
 	a.t.Helper()
 	a.status(status)

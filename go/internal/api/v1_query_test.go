@@ -9,8 +9,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
 
-// spec/versions/v1/query_spec.rb. Query.new(...).x without date parameters becomes the matching accessor on v1Params,
-// since buildV1Query also parses dates.
+// spec/versions/v1/query_spec.rb. Query.new(...).x without date parameters
+// becomes the matching accessor on v1Params, since buildV1Query also parses
+// dates.
 
 func TestQueryBuildsQuery(t *testing.T) {
 	q, err := buildV1Query(v1Params{"date": "2014-01-01"})
@@ -166,7 +167,8 @@ func TestParseV1ParamsLastValueWins(t *testing.T) {
 	}
 }
 
-// Rack parses a key without '=' as nil, which V1::Query treats as absent, and nests bracketed keys.
+// Rack parses a key without '=' as nil, which V1::Query treats as absent, and
+// nests bracketed keys.
 func TestParseV1ParamsLikeRack(t *testing.T) {
 	p, nested, _, err := parseV1Params("amount&from=USD&from&to[]=USD&base[x]=GBP&=x&foo[=1&[bar]=2")
 	if err != nil {

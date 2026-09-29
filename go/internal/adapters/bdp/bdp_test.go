@@ -17,9 +17,11 @@ import (
 	"gopkg.in/dnaeon/go-vcr.v4/pkg/cassette"
 )
 
-// webmockURI matches the way VCR matched this cassette under Ruby. WebMock normalizes the query into a hash, so the
-// three repeated dim_cats parameters were recorded (and matched) as the last one alone. vcrtest.URI compares every
-// value, which rejects the full request, so this matcher collapses repeated keys to their last value on both sides.
+// webmockURI matches the way VCR matched this cassette under Ruby. WebMock
+// normalizes the query into a hash, so the three repeated dim_cats parameters
+// were recorded (and matched) as the last one alone. vcrtest.URI compares every
+// value, which rejects the full request, so this matcher collapses repeated
+// keys to their last value on both sides.
 func webmockURI(r *http.Request, _ []byte, rec cassette.Request) bool {
 	u, err := url.Parse(rec.URL)
 	if err != nil {
@@ -154,7 +156,8 @@ func TestParseRemapsECUToXEU(t *testing.T) {
 }
 
 func TestParseSkipsSeriesWithoutISOCode(t *testing.T) {
-	// BdP labels usually carry a code; a series that omits it is dropped rather than emitted malformed.
+	// BdP labels usually carry a code; a series that omits it is dropped rather
+	// than emitted malformed.
 	rates := mustParse(t, `{
 		"value": [42.0, 180.5],
 		"extension": {"series": [
@@ -221,7 +224,8 @@ func TestFetchHistoricalRange(t *testing.T) {
 }
 
 func TestFetchMultipleCurrenciesFollowsPagination(t *testing.T) {
-	// Pagination across all source-filtered series must surface BEF/ATS (page 3) too.
+	// Pagination across all source-filtered series must surface BEF/ATS (page
+	// 3) too.
 	got := bases(fetchLate1998(t))
 	for _, want := range []string{"USD", "ATS"} {
 		if !slices.Contains(got, want) {
@@ -244,8 +248,9 @@ func TestFetchUSDPlausibleLate1998(t *testing.T) {
 
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
-	// g.Client would match with vcrtest.URI; replay with the recorded cassette and repeat setting under the
-	// WebMock-style URI matcher instead (see webmockURI).
+	// g.Client would match with vcrtest.URI; replay with the recorded cassette
+	// and repeat setting under the WebMock-style URI matcher instead (see
+	// webmockURI).
 	if !slices.Equal(g.MatchRequestsOn, []string{"method", "uri"}) {
 		t.Fatalf("golden recorded with %v, want method,uri", g.MatchRequestsOn)
 	}
@@ -257,7 +262,8 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// The cassette matcher collapses repeated dim_cats, so pin the full request shape here.
+// The cassette matcher collapses repeated dim_cats, so pin the full request
+// shape here.
 func TestQuery(t *testing.T) {
 	got := query(adapter.Date(1998, 12, 28), adapter.Date(1998, 12, 31), 2)
 	want := url.Values{

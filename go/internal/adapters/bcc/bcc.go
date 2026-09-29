@@ -1,16 +1,19 @@
-// Package bcc fetches rates from Banco Central de Cuba, which publishes daily exchange rates against CUP for 13
-// currencies through a JSON REST API.
+// Package bcc fetches rates from Banco Central de Cuba, which publishes daily
+// exchange rates against CUP for 13 currencies through a JSON REST API.
 //
-// The bank publishes three parallel series: tasaOficial (Segment I, USD pegged at 24 CUP), tasaPublica (Segment II,
-// retail bank rate, USD = 120 CUP) and tasaEspecial (Segment III, the informal/MLC market rate, the only float). We
-// relay tasaEspecial: it tracks the de facto parallel market and is the only one that moves day to day. The other two
-// are administered pegs published for legal and accounting purposes.
+// The bank publishes three parallel series: tasaOficial (Segment I, USD pegged
+// at 24 CUP), tasaPublica (Segment II, retail bank rate, USD = 120 CUP) and
+// tasaEspecial (Segment III, the informal/MLC market rate, the only float). We
+// relay tasaEspecial: it tracks the de facto parallel market and is the only
+// one that moves day to day. The other two are administered pegs published for
+// legal and accounting purposes.
 //
-// The /historico endpoint accepts arbitrarily wide date ranges but only one currency at a time, so each window makes
-// one request per currency. Rates are 1 foreign = X CUP; JPY is per unit.
+// The /historico endpoint accepts arbitrarily wide date ranges but only one
+// currency at a time, so each window makes one request per currency. Rates are
+// 1 foreign = X CUP; JPY is per unit.
 //
-// Like the Ruby adapter, Fetch sends after as the inclusive start date and does not clip the response, so rows dated
-// after itself are returned.
+// Like the Ruby adapter, Fetch sends after as the inclusive start date and does
+// not clip the response, so rows dated after itself are returned.
 package bcc
 
 import (
@@ -115,7 +118,8 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// number reads a JSON number or numeric string, as Ruby's Float() does, and fails on anything else.
+// number reads a JSON number or numeric string, as Ruby's Float() does, and
+// fails on anything else.
 func number(raw json.RawMessage) (float64, error) {
 	var s string
 	if json.Unmarshal(raw, &s) == nil {

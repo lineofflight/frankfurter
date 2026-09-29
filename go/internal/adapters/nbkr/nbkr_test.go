@@ -261,7 +261,8 @@ type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 
-// recordingAdapter answers every request with an empty feed and records the requested paths.
+// recordingAdapter answers every request with an empty feed and records the
+// requested paths.
 func recordingAdapter(paths *[]string) *Adapter {
 	a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		*paths = append(*paths, r.URL.Path)

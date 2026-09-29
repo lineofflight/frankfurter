@@ -7,7 +7,8 @@ import (
 	"testing"
 )
 
-// plainRack turns parsed values into what encoding/json decodes, for comparing with Rack's output.
+// plainRack turns parsed values into what encoding/json decodes, for comparing
+// with Rack's output.
 func plainRack(v any) any {
 	switch v := v.(type) {
 	case rackHash:
@@ -26,7 +27,8 @@ func plainRack(v any) any {
 	return v
 }
 
-// Expectations from Rack 3.2.7's parse_nested_query (the parser Roda installs, depth limit 32).
+// Expectations from Rack 3.2.7's parse_nested_query (the parser Roda installs,
+// depth limit 32).
 func TestParseRackQueryLikeRack(t *testing.T) {
 	for _, c := range []struct{ query, want string }{
 		{"a[]=1&a[][b]=2", `{"a":["1",{"b":"2"}]}`},

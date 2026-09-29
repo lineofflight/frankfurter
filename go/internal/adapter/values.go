@@ -9,13 +9,15 @@ import (
 	"time"
 )
 
-// Date returns the given calendar day as UTC midnight, the representation of every date in the port.
+// Date returns the given calendar day as UTC midnight, the representation of
+// every date in the port.
 func Date(year int, month time.Month, day int) time.Time {
 	return time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
 }
 
-// ParseDate parses s with the first layout that fits. Ruby's Date.parse guesses; Go needs the layouts a source
-// actually uses spelled out, e.g. ParseDate(s, "2 January 2006", "02-Jan-06").
+// ParseDate parses s with the first layout that fits. Ruby's Date.parse
+// guesses; Go needs the layouts a source actually uses spelled out, e.g.
+// ParseDate(s, "2 January 2006", "02-Jan-06").
 func ParseDate(s string, layouts ...string) (time.Time, error) {
 	for _, layout := range layouts {
 		if t, err := time.Parse(layout, s); err == nil {
@@ -25,8 +27,9 @@ func ParseDate(s string, layouts ...string) (time.Time, error) {
 	return time.Time{}, fmt.Errorf("unrecognised date %q", s)
 }
 
-// ParseFloat reads a number the way Ruby's Float(s, exception: false) does for the text sources publish: surrounding
-// whitespace is ignored, and empty text, NaN and infinities are rejected.
+// ParseFloat reads a number the way Ruby's Float(s, exception: false) does for
+// the text sources publish: surrounding whitespace is ignored, and empty text,
+// NaN and infinities are rejected.
 func ParseFloat(s string) (float64, bool) {
 	f, err := strconv.ParseFloat(strings.TrimSpace(s), 64)
 	if err != nil || math.IsNaN(f) || math.IsInf(f, 0) {
@@ -35,8 +38,8 @@ func ParseFloat(s string) (float64, bool) {
 	return f, true
 }
 
-// Window keeps the rates dated after `after` (exclusive) through `upto` (inclusive), treating a zero bound as open.
-// It filters in place.
+// Window keeps the rates dated after `after` (exclusive) through `upto`
+// (inclusive), treating a zero bound as open. It filters in place.
 func Window(rates []Rate, after, upto time.Time) []Rate {
 	kept := rates[:0]
 	for _, r := range rates {
@@ -48,16 +51,19 @@ func Window(rates []Rate, after, upto time.Time) []Rate {
 	return kept
 }
 
-// Predecessor names the code a source's rows carry under before a redenomination took effect in its values.
+// Predecessor names the code a source's rows carry under before a
+// redenomination took effect in its values.
 type Predecessor struct {
 	Code    string    // the predecessor's ISO code
 	Cutover time.Time // first date the source's values are in the successor unit
 }
 
-// HistoricalCode relabels code with its predecessor for rows dated before the cutover. Sources often label a
-// redenominated currency's whole history with its current code without restating the values, so the old rows carry the
-// predecessor's magnitudes under the successor's code. An adapter that sees this declares a map from current code to
-// Predecessor and passes every row's code through here.
+// HistoricalCode relabels code with its predecessor for rows dated before the
+// cutover. Sources often label a redenominated currency's whole history with
+// its current code without restating the values, so the old rows carry the
+// predecessor's magnitudes under the successor's code. An adapter that sees
+// this declares a map from current code to Predecessor and passes every row's
+// code through here.
 func HistoricalCode(predecessors map[string]Predecessor, code string, date time.Time) string {
 	if p, ok := predecessors[code]; ok && date.Before(p.Cutover) {
 		return p.Code
@@ -68,16 +74,19 @@ func HistoricalCode(predecessors map[string]Predecessor, code string, date time.
 // Float returns a pointer to v, for Rate's optional components.
 func Float(v float64) *float64 { return &v }
 
-// Midpoint is the exact decimal mean of two published prices, rounded once to the nearest float. Float arithmetic
-// leaves noise ((181.5264 + 181.76) / 2 = 181.64319999999998) because the operands are already inexact; halving a
-// terminating decimal always terminates, so decimal arithmetic gives the mid exactly.
+// Midpoint is the exact decimal mean of two published prices, rounded once to
+// the nearest float. Float arithmetic leaves noise ((181.5264 + 181.76) / 2 =
+// 181.64319999999998) because the operands are already inexact; halving a
+// terminating decimal always terminates, so decimal arithmetic gives the mid
+// exactly.
 func Midpoint(bid, ask float64) float64 {
 	sum := new(big.Rat).Add(decimal(bid), decimal(ask))
 	return ratFloat(sum.Quo(sum, big.NewRat(2, 1)))
 }
 
-// PerUnit divides a price quoted per `unit` foreign units (per 100 JPY, say) down to one unit, in decimal so that
-// 744.92 / 100 is 7.4492 and not 7.449199999999999.
+// PerUnit divides a price quoted per `unit` foreign units (per 100 JPY, say)
+// down to one unit, in decimal so that 744.92 / 100 is 7.4492 and not
+// 7.449199999999999.
 func PerUnit(price, unit float64) float64 {
 	if unit == 1 {
 		return price
@@ -85,8 +94,9 @@ func PerUnit(price, unit float64) float64 {
 	return ratFloat(new(big.Rat).Quo(decimal(price), decimal(unit)))
 }
 
-// decimal reads f as the shortest decimal that round-trips, as Ruby's BigDecimal(f.to_s) does. A value parsed from
-// published text of up to 15 significant digits comes back as exactly that text.
+// decimal reads f as the shortest decimal that round-trips, as Ruby's
+// BigDecimal(f.to_s) does. A value parsed from published text of up to 15
+// significant digits comes back as exactly that text.
 func decimal(f float64) *big.Rat {
 	r, ok := new(big.Rat).SetString(strconv.FormatFloat(f, 'g', -1, 64))
 	if !ok {

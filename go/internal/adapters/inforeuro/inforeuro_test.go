@@ -13,7 +13,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
 )
 
-// newAdapter pins today so the specs that rely on the real date stay deterministic.
+// newAdapter pins today so the specs that rely on the real date stay
+// deterministic.
 func newAdapter(t *testing.T, today time.Time) *Adapter {
 	a := New(vcrtest.Client(t, "inforeuro", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
 	a.Now = func() time.Time { return today.Add(12 * time.Hour) }
@@ -139,7 +140,8 @@ func TestFetchDoesNotRequestUnpublishedFutureMonths(t *testing.T) {
 	wantDates(t, rates, adapter.Date(2026, 9, 1))
 }
 
-// Ruby runs RateValidation.reject! first; it only relabels or drops rows, so the base per date is checked directly.
+// Ruby runs RateValidation.reject! first; it only relabels or drops rows, so
+// the base per date is checked directly.
 func TestFetchStepsIntoJanuaryAndChangesECUToEUR(t *testing.T) {
 	rates := fetch(t, newAdapter(t, today), adapter.Date(1998, 12, 1), adapter.Date(1999, 1, 1))
 
@@ -151,7 +153,8 @@ func TestFetchStepsIntoJanuaryAndChangesECUToEUR(t *testing.T) {
 	}
 }
 
-// Provider["INFOREURO"].blends? is false because the seed's frequency is not daily.
+// Provider["INFOREURO"].blends? is false because the seed's frequency is not
+// daily.
 func TestKeepsMonthlyObservationsOutOfBlends(t *testing.T) {
 	data, err := os.ReadFile("../../../../db/seeds/providers/inforeuro.json")
 	if err != nil {
@@ -168,8 +171,9 @@ func TestKeepsMonthlyObservationsOutOfBlends(t *testing.T) {
 	}
 }
 
-// Ruby backfills and reads the rate back through the API; ingestion and the API belong to core, so this checks that
-// the adapter hands over every published digit.
+// Ruby backfills and reads the rate back through the API; ingestion and the API
+// belong to core, so this checks that the adapter hands over every published
+// digit.
 func TestPreservesLongPublishedRates(t *testing.T) {
 	rates := fetch(t, newAdapter(t, adapter.Date(2019, 1, 2)), adapter.Date(2019, 1, 1), time.Time{})
 
@@ -268,7 +272,8 @@ func TestGolden(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: AOK keeps its label outside January and February 2000, and ECU-era rows drop an XEU quote.
+// Not in the Ruby spec: AOK keeps its label outside January and February 2000,
+// and ECU-era rows drop an XEU quote.
 func TestParseAOKWindowAndECUSelfQuote(t *testing.T) {
 	body := []byte(`[{"isoA3Code":"AOK","value":5.5},{"isoA3Code":"XEU","value":1},{"isoA3Code":"FRC","value":2.5}]`)
 	for _, tc := range []struct {

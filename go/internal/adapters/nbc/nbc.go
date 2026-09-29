@@ -1,16 +1,20 @@
-// Package nbc fetches rates from the National Bank of Cambodia, which publishes daily reference rates for ~29
-// currencies against the Cambodian riel (KHR), Mon-Fri ~16:30 Asia/Phnom Penh.
+// Package nbc fetches rates from the National Bank of Cambodia, which publishes
+// daily reference rates for ~29 currencies against the Cambodian riel (KHR),
+// Mon-Fri ~16:30 Asia/Phnom Penh.
 //
-// The page is form-based: a GET returns a hidden CSRF token (tk) and sets a session cookie; a POST with exdate, tk and
-// view=View returns that date's HTML table. The token rotates per request, so every historical fetch is a
+// The page is form-based: a GET returns a hidden CSRF token (tk) and sets a
+// session cookie; a POST with exdate, tk and view=View returns that date's HTML
+// table. The token rotates per request, so every historical fetch is a
 // GET-then-POST round trip.
 //
-// Rates are quoted as <CCY>/KHR with a unit multiplier (1, 100, 1000) and bid/ask/average columns. We use the
-// published average as the rate and divide by the unit. The cross-rate table omits USD; we read the headline
-// "KHR / USD" official exchange rate separately. Rows keep NBC's direction: foreign currency as base, KHR as quote.
-// SDR is rewritten to XDR.
+// Rates are quoted as <CCY>/KHR with a unit multiplier (1, 100, 1000) and
+// bid/ask/average columns. We use the published average as the rate and divide
+// by the unit. The cross-rate table omits USD; we read the headline "KHR / USD"
+// official exchange rate separately. Rows keep NBC's direction: foreign
+// currency as base, KHR as quote. SDR is rewritten to XDR.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does (after.upto(end_date)).
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does (after.upto(end_date)).
 package nbc
 
 import (
@@ -53,7 +57,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange keeps chunks tiny: the endpoint serves one day per CSRF round trip.
+// BackfillRange keeps chunks tiny: the endpoint serves one day per CSRF round
+// trip.
 func (a *Adapter) BackfillRange() int { return 1 }
 
 // Fetch implements adapter.Adapter.
@@ -79,8 +84,9 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// fetchDate returns an error on any non-2xx status: CloudFront's WAF intermittently 403s the POST, and that body
-// would otherwise parse as an empty (holiday) day.
+// fetchDate returns an error on any non-2xx status: CloudFront's WAF
+// intermittently 403s the POST, and that body would otherwise parse as an empty
+// (holiday) day.
 func (a *Adapter) fetchDate(ctx context.Context, date time.Time) ([]adapter.Rate, error) {
 	if err := a.Sleep(ctx, 500*time.Millisecond); err != nil {
 		return nil, err
@@ -119,7 +125,8 @@ func (a *Adapter) fetchDate(ctx context.Context, date time.Time) ([]adapter.Rate
 	return parse(resp.Body, date)
 }
 
-// extractToken reports whether the tk input carries a value attribute; an empty value is still posted, as in Ruby.
+// extractToken reports whether the tk input carries a value attribute; an empty
+// value is still posted, as in Ruby.
 func extractToken(html []byte) (string, bool, error) {
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
 	if err != nil {
@@ -130,7 +137,8 @@ func extractToken(html []byte) (string, bool, error) {
 }
 
 func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
-	// Holidays and Saturdays render "There is no data available." within the normal page chrome.
+	// Holidays and Saturdays render "There is no data available." within the
+	// normal page chrome.
 	if bytes.Contains(html, []byte("There is no data available")) {
 		return nil, nil
 	}
@@ -159,7 +167,8 @@ func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
 		if err != nil || unit == 0 {
 			return
 		}
-		// Not adapter.ParseFloat: its TrimSpace drops the &nbsp; that makes Ruby's Float reject a cell.
+		// Not adapter.ParseFloat: its TrimSpace drops the &nbsp; that makes
+		// Ruby's Float reject a cell.
 		average, err := strconv.ParseFloat(strings.ReplaceAll(cell(5), ",", ""), 64)
 		if err != nil || math.IsNaN(average) || math.IsInf(average, 0) || average == 0 {
 			return
@@ -177,7 +186,8 @@ func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// extractOER reads the headline "Official Exchange Rate : <font>4022</font> KHR / USD".
+// extractOER reads the headline "Official Exchange Rate : <font>4022</font> KHR
+// / USD".
 func extractOER(doc *goquery.Document) (float64, bool) {
 	var rate float64
 	var found bool
@@ -200,8 +210,8 @@ func extractOER(doc *goquery.Document) (float64, bool) {
 	return rate, found
 }
 
-// strip is Ruby's String#strip, which unlike strings.TrimSpace keeps non-breaking spaces (the page is full of
-// &nbsp;).
+// strip is Ruby's String#strip, which unlike strings.TrimSpace keeps
+// non-breaking spaces (the page is full of &nbsp;).
 func strip(s string) string {
 	return strings.Trim(s, " \t\n\v\f\r\x00")
 }

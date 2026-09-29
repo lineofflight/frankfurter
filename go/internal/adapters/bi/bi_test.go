@@ -21,10 +21,12 @@ const aedTable = `<table id="foo_gvSearchResult2">
 </table>
 `
 
-// vcrClient replays the bi cassette with VCR's allow_playback_repeats rule: unused matches play first, in order, and
-// once they run out the most recently used match repeats. vcrtest.AllowPlaybackRepeats (go-vcr) always replays the
-// first match instead, which would answer every currency search with the AED table. The cassette's three searches
-// are matched on method and host, so Ruby answers AED, AUD, then BND for every remaining currency.
+// vcrClient replays the bi cassette with VCR's allow_playback_repeats rule:
+// unused matches play first, in order, and once they run out the most recently
+// used match repeats. vcrtest.AllowPlaybackRepeats (go-vcr) always replays the
+// first match instead, which would answer every currency search with the AED
+// table. The cassette's three searches are matched on method and host, so Ruby
+// answers AED, AUD, then BND for every remaining currency.
 func vcrClient(t *testing.T) *http.Client {
 	t.Helper()
 	return &http.Client{Transport: &repeatLast{

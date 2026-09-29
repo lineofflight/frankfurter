@@ -141,7 +141,8 @@ type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 
-// pagedClient serves pages with the record counts in sizes, in order, and records each request's query.
+// pagedClient serves pages with the record counts in sizes, in order, and
+// records each request's query.
 func pagedClient(sizes []int, queries *[]url.Values) *http.Client {
 	return &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		*queries = append(*queries, r.URL.Query())

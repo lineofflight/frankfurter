@@ -1,5 +1,6 @@
-// Package deps pins every third-party module the port uses, so go mod tidy keeps them in go.mod before any package
-// imports them. See PORTING.md for which library serves which format. Only the go.mod owner edits this file.
+// Package deps pins every third-party module the port uses, so go mod tidy
+// keeps them in go.mod before any package imports them. See PORTING.md for
+// which library serves which format. Only the go.mod owner edits this file.
 package deps
 
 import (

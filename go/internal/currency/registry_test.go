@@ -13,8 +13,9 @@ var (
 	httpURL = regexp.MustCompile(`\Ahttps?://`)
 )
 
-// Ruby's "returns a frozen array" and "parses every date as a Date" hold by construction: the registries are
-// unexported slices behind accessors, and the dates are time.Time.
+// Ruby's "returns a frozen array" and "parses every date as a Date" hold by
+// construction: the registries are unexported slices behind accessors, and the
+// dates are time.Time.
 
 func TestDefunctLoadsAllEntries(t *testing.T) {
 	if len(DefunctCurrencies()) == 0 {

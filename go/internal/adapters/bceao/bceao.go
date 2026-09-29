@@ -1,8 +1,11 @@
-// Package bceao fetches rates from the Central Bank of West African States (Banque Centrale des Etats de l'Afrique de
-// l'Ouest), which publishes daily reference rates for 27 currencies against the CFA Franc (XOF). The API only accepts
-// a single date per request, so Fetch iterates day by day, skipping Saturdays.
+// Package bceao fetches rates from the Central Bank of West African States
+// (Banque Centrale des Etats de l'Afrique de l'Ouest), which publishes daily
+// reference rates for 27 currencies against the CFA Franc (XOF). The API only
+// accepts a single date per request, so Fetch iterates day by day, skipping
+// Saturdays.
 //
-// As in the Ruby adapter, after is inclusive: the first request is for after itself.
+// As in the Ruby adapter, after is inclusive: the first request is for after
+// itself.
 package bceao
 
 import (
@@ -109,7 +112,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 
 func parse(html string, date time.Time) ([]adapter.Rate, error) {
 	if !strings.Contains(html, "<table") {
-		// Holidays render just the day header with no rates table (observed 2026-01-01)
+		// Holidays render just the day header with no rates table (observed
+		// 2026-01-01)
 		if strings.Contains(html, "Cours des devises") {
 			return nil, nil
 		}
@@ -118,13 +122,14 @@ func parse(html string, date time.Time) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, m := range rowPattern.FindAllStringSubmatch(html, -1) {
-		// Trim what Ruby's String#strip trims: ASCII whitespace and NUL, not U+00A0.
+		// Trim what Ruby's String#strip trims: ASCII whitespace and NUL, not
+		// U+00A0.
 		iso, ok := currencies[strings.Trim(m[1], " \t\n\v\f\r\x00")]
 		if !ok {
 			continue
 		}
-		// Rates normally use French format (period=thousands, comma=decimal). Fall back to English format if no
-		// comma is present.
+		// Rates normally use French format (period=thousands, comma=decimal).
+		// Fall back to English format if no comma is present.
 		text := m[2]
 		if strings.Contains(text, ",") {
 			text = strings.ReplaceAll(strings.ReplaceAll(text, ".", ""), ",", ".")

@@ -1,8 +1,9 @@
-// Package cbbh fetches rates from the Central Bank of Bosnia and Herzegovina, which publishes middle rates as BAM per
-// foreign Units.
+// Package cbbh fetches rates from the Central Bank of Bosnia and Herzegovina,
+// which publishes middle rates as BAM per foreign Units.
 //
-// Lists are generally published Mon-Fri after 16:00 Sarajevo for the following day; their effective dates (usually
-// Tue-Sat) are kept. Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Lists are generally published Mon-Fri after 16:00 Sarajevo for the following
+// day; their effective dates (usually Tue-Sat) are kept. Unlike most adapters,
+// Fetch treats after as inclusive, as the Ruby adapter does.
 package cbbh
 
 import (
@@ -30,9 +31,11 @@ const (
 var (
 	coverageStart = adapter.Date(1998, 1, 6)
 
-	// Before 16 July 1998 the source labels ordinary peseta and ECU quotes as ESB/995 and XBA/955. Both codes change
-	// together to ESP/724 and XEU/954 while country, units, and magnitudes continue unchanged. The earlier values
-	// agree with peseta/DEM and the official ECU basket, not distinct funds-unit histories.
+	// Before 16 July 1998 the source labels ordinary peseta and ECU quotes as
+	// ESB/995 and XBA/955. Both codes change together to ESP/724 and XEU/954
+	// while country, units, and magnitudes continue unchanged. The earlier
+	// values agree with peseta/DEM and the official ECU basket, not distinct
+	// funds-unit histories.
 	earlyAliases  = map[string]string{"ESB": "ESP", "XBA": "XEU"}
 	aliasesCutoff = adapter.Date(1998, 7, 16)
 
@@ -56,7 +59,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. Rows dated from after (inclusive) through upto are returned.
+// Fetch implements adapter.Adapter. Rows dated from after (inclusive) through
+// upto are returned.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	start := after
 	if start.Before(coverageStart) {
@@ -111,8 +115,9 @@ func (a *Adapter) fetchPeriod(ctx context.Context, start, end time.Time) ([]byte
 	return resp.Body, nil
 }
 
-// confirmEmpty handles the period endpoint's generic export-error string, which it also returns for genuinely empty
-// Sun/Mon and holiday ranges. The range counts as empty only when the daily endpoint confirms its most recent actual
+// confirmEmpty handles the period endpoint's generic export-error string, which
+// it also returns for genuinely empty Sun/Mon and holiday ranges. The range
+// counts as empty only when the daily endpoint confirms its most recent actual
 // list precedes the window; otherwise it returns an error.
 func (a *Adapter) confirmEmpty(ctx context.Context, start, end time.Time) error {
 	body, err := a.Get(ctx, dailyURL, url.Values{"date": {end.Format("01/02/2006 00:00:00")}})
@@ -182,7 +187,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if !ok || middle.Sign() <= 0 {
 				continue
 			}
-			// Source Middle is not recomputed from Buy/Sell. Divide in exact decimal to preserve its digits.
+			// Source Middle is not recomputed from Buy/Sell. Divide in exact
+			// decimal to preserve its digits.
 			rate, _ := new(big.Rat).Quo(middle, units).Float64()
 			rates = append(rates, adapter.Rate{Date: date, Base: code, Quote: "BAM", Rate: rate})
 		}
@@ -197,8 +203,8 @@ func parseDate(s *string) (time.Time, error) {
 	return adapter.ParseDate(*s, "2006-01-02T15:04:05", time.DateOnly)
 }
 
-// decimal reads a value the way BigDecimal(value.to_s.tr(",", "."), exception: false) does, reporting false where
-// Ruby gets nil, NaN or infinity.
+// decimal reads a value the way BigDecimal(value.to_s.tr(",", "."), exception:
+// false) does, reporting false where Ruby gets nil, NaN or infinity.
 func decimal(v any) (*big.Rat, bool) {
 	var s string
 	switch v := v.(type) {
@@ -210,7 +216,8 @@ func decimal(v any) (*big.Rat, bool) {
 		return nil, false
 	}
 	s = strings.TrimSpace(strings.ReplaceAll(s, ",", "."))
-	// Rat.SetString also takes fractions and 0x/0b/0o prefixes, which BigDecimal rejects.
+	// Rat.SetString also takes fractions and 0x/0b/0o prefixes, which
+	// BigDecimal rejects.
 	if s == "" || strings.Trim(s, "0123456789+-._eE") != "" {
 		return nil, false
 	}

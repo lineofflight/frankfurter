@@ -1,9 +1,11 @@
-// Package hkma fetches rates from the Hong Kong Monetary Authority, which publishes daily HKD exchange rates for 17
-// currencies through a public JSON API.
+// Package hkma fetches rates from the Hong Kong Monetary Authority, which
+// publishes daily HKD exchange rates for 17 currencies through a public JSON
+// API.
 //
-// Rates are HKD per 1 unit of foreign currency (base = foreign currency, quote = HKD). Data is published monthly with
-// roughly a 1-month lag. History goes back to 1981-01-02. The API's from bound is inclusive and, as in Ruby, rows are
-// not clipped further, so a row dated on after is returned.
+// Rates are HKD per 1 unit of foreign currency (base = foreign currency, quote
+// = HKD). Data is published monthly with roughly a 1-month lag. History goes
+// back to 1981-01-02. The API's from bound is inclusive and, as in Ruby, rows
+// are not clipped further, so a row dated on after is returned.
 package hkma
 
 import (

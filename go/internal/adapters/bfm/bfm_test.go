@@ -167,8 +167,9 @@ func TestParseRelaysReferenceWithoutAveragingExtremes(t *testing.T) {
 	}
 }
 
-// The Ruby spec checks RateComponents.attributes keeps every digit as mid. Here rates are float64, so the check is
-// that the parsed rate is the nearest float to the published decimal.
+// The Ruby spec checks RateComponents.attributes keeps every digit as mid. Here
+// rates are float64, so the check is that the parsed rate is the nearest float
+// to the published decimal.
 func TestParsePreservesLongPublishedDigits(t *testing.T) {
 	rates, err := parse(response(t, map[string]string{"2026-09-23": "4 391,53123456789"}, nil), "USD")
 	if err != nil {
@@ -181,7 +182,8 @@ func TestParsePreservesLongPublishedDigits(t *testing.T) {
 }
 
 func TestParseAcceptsNonbreakingGroupingSpacesWithoutRescalingYen(t *testing.T) {
-	// A raw literal keeps the published key order, which json.Marshal of a map would sort anyway.
+	// A raw literal keeps the published key order, which json.Marshal of a map
+	// would sort anyway.
 	body := []byte(`{"code":"cours-de-mid-en-ar-filter","data":{"status":200,"data":{"coursMid":` +
 		`{"2026-09-22":"1` + "\u00a0" + `234,56","2026-09-23":"1` + "\u202f" + `234,57"}}}}`)
 	rates, err := parse(body, "JPY")

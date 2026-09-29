@@ -1,15 +1,18 @@
-// Package cbn fetches rates from the Central Bank of Nigeria, which publishes daily official exchange rates against the
-// Nigerian naira. One JSON request returns the full historical dataset (2001-12-10 to present), which is fetched once
-// and filtered by date in memory.
+// Package cbn fetches rates from the Central Bank of Nigeria, which publishes
+// daily official exchange rates against the Nigerian naira. One JSON request
+// returns the full historical dataset (2001-12-10 to present), which is fetched
+// once and filtered by date in memory.
 //
-// Rates use the centralrate field (mid of buy/sell). NGN is the pivot currency, stored in the quote position; the
-// foreign currency is the base.
+// Rates use the centralrate field (mid of buy/sell). NGN is the pivot currency,
+// stored in the quote position; the foreign currency is the base.
 //
-// Currency names arrive with whitespace variants and dual spellings ("YEN"/"JAPANESE YEN", "POUND
-// STERLING"/"POUNDS STERLING"), so they are normalized via nameToISO, which also maps SDR to XDR. WAUA (West African
-// Unit of Account) is not ISO 4217 and is therefore not mapped.
+// Currency names arrive with whitespace variants and dual spellings
+// ("YEN"/"JAPANESE YEN", "POUND STERLING"/"POUNDS STERLING"), so they are
+// normalized via nameToISO, which also maps SDR to XDR. WAUA (West African Unit
+// of Account) is not ISO 4217 and is therefore not mapped.
 //
-// Terms: https://www.cbn.gov.ng/Legal.html (redistribution permitted with attribution, content may not be altered).
+// Terms: https://www.cbn.gov.ng/Legal.html (redistribution permitted with
+// attribution, content may not be altered).
 package cbn
 
 import (
@@ -26,7 +29,8 @@ import (
 
 const baseURL = "https://www.cbn.gov.ng/api/GetAllExchangeRates"
 
-// nameToISO maps a normalized (trimmed, upper-cased) currency name to its ISO 4217 code.
+// nameToISO maps a normalized (trimmed, upper-cased) currency name to its ISO
+// 4217 code.
 var nameToISO = map[string]string{
 	"CFA":                "XOF",
 	"DANISH KRONA":       "DKK",
@@ -117,8 +121,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// strip is Ruby's String#strip: it trims ASCII whitespace and NUL but not Unicode spaces such as NBSP, so an
-// NBSP-padded name stays unmapped as it does in Ruby.
+// strip is Ruby's String#strip: it trims ASCII whitespace and NUL but not
+// Unicode spaces such as NBSP, so an NBSP-padded name stays unmapped as it does
+// in Ruby.
 func strip(s string) string {
 	return strings.Trim(s, " \t\n\v\f\r\x00")
 }

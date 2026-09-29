@@ -1,14 +1,19 @@
-// Package cbe fetches rates from the Central Bank of Egypt, which publishes daily buy/sell rates against EGP for 18
-// currencies via an XLSX download from its historical-data page.
+// Package cbe fetches rates from the Central Bank of Egypt, which publishes
+// daily buy/sell rates against EGP for 18 currencies via an XLSX download from
+// its historical-data page.
 //
-// The page requires a session cookie and anti-forgery token scraped from the HTML form; both are reused across
-// batches within a single backfill (FetchEach keeps one adapter instance). The site sits behind an F5 BIG-IP ASM WAF,
-// so the backfill range is small (30 days) and requests pause one second between batches.
+// The page requires a session cookie and anti-forgery token scraped from the
+// HTML form; both are reused across batches within a single backfill (FetchEach
+// keeps one adapter instance). The site sits behind an F5 BIG-IP ASM WAF, so
+// the backfill range is small (30 days) and requests pause one second between
+// batches.
 //
-// The XLSX has four columns: Date (Excel serial), Currency (full English name), Buy, Sell. The rate is the midpoint.
-// JPY is quoted per 100 units. CBE publishes "1 foreign = X EGP", so foreign is the base and EGP the quote.
+// The XLSX has four columns: Date (Excel serial), Currency (full English name),
+// Buy, Sell. The rate is the midpoint. JPY is quoted per 100 units. CBE
+// publishes "1 foreign = X EGP", so foreign is the base and EGP the quote.
 //
-// Fetch treats after as inclusive: it is sent as the export's start date and the result is not windowed.
+// Fetch treats after as inclusive: it is sent as the export's start date and
+// the result is not windowed.
 //
 // Attribution required: the Central Bank of Egypt must be cited as the source.
 package cbe
@@ -47,7 +52,8 @@ type currency struct {
 	units float64
 }
 
-// currencies maps CBE's currency names to ISO codes, in the order the form posts them.
+// currencies maps CBE's currency names to ISO codes, in the order the form
+// posts them.
 var currencies = []currency{
 	{"US Dollar", "USD", 1},
 	{"Euro", "EUR", 1},
@@ -120,7 +126,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 }
 
 func (a *Adapter) ensureSession(ctx context.Context) error {
-	// The cookie may be empty (no Set-Cookie); the token alone marks an established session, as in Ruby.
+	// The cookie may be empty (no Set-Cookie); the token alone marks an
+	// established session, as in Ruby.
 	if a.token != "" {
 		return nil
 	}
@@ -156,7 +163,8 @@ func (a *Adapter) postHistorical(ctx context.Context, start, end time.Time) ([]b
 	}
 	pairs = append(pairs, [2]string{"SubmitAction", "2"})
 
-	// Keep the form's field order, as URI.encode_www_form does; url.Values.Encode would sort it.
+	// Keep the form's field order, as URI.encode_www_form does;
+	// url.Values.Encode would sort it.
 	var form strings.Builder
 	for i, p := range pairs {
 		if i > 0 {
@@ -181,7 +189,8 @@ func (a *Adapter) postHistorical(ctx context.Context, start, end time.Time) ([]b
 	return resp.Body, nil
 }
 
-// row is one data row of the export. Buy and sell are nil when the cell is not numeric.
+// row is one data row of the export. Buy and sell are nil when the cell is not
+// numeric.
 type row struct {
 	serial    float64
 	currency  string
@@ -229,12 +238,14 @@ func indexCurrency(name string) int {
 	return -1
 }
 
-// excelDate converts an Excel serial. The epoch is 1899-12-30 (off by one for the fictional 1900-02-29).
+// excelDate converts an Excel serial. The epoch is 1899-12-30 (off by one for
+// the fictional 1900-02-29).
 func excelDate(serial float64) time.Time {
 	return adapter.Date(1899, 12, 30).AddDate(0, 0, int(serial))
 }
 
-// readXLSX reads the first sheet's data rows: those with a numeric date in column A and at least four cells.
+// readXLSX reads the first sheet's data rows: those with a numeric date in
+// column A and at least four cells.
 func readXLSX(data []byte) ([]row, error) {
 	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
@@ -246,7 +257,8 @@ func readXLSX(data []byte) ([]row, error) {
 	if err != nil {
 		return nil, err
 	}
-	// number returns the cell's value when it is stored as a number: nil for blanks and text, even numeric text.
+	// number returns the cell's value when it is stored as a number: nil for
+	// blanks and text, even numeric text.
 	number := func(r, c int) *float64 {
 		ref, _ := excelize.CoordinatesToCellName(c+1, r+1)
 		if t, err := f.GetCellType(sheet, ref); err != nil || (t != excelize.CellTypeUnset && t != excelize.CellTypeNumber) {

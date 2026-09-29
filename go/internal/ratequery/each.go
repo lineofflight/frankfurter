@@ -15,12 +15,14 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// errRebuilt fails a response whose materialized blend a rebuild deleted under its reads. Failing keeps the truncation
-// out of caches; a retry lands on the capped live fallback.
+// errRebuilt fails a response whose materialized blend a rebuild deleted under
+// its reads. Failing keeps the truncation out of caches; a retry lands on the
+// capped live fallback.
 var errRebuilt = errors.New("materialized blend rebuilt mid-request")
 
-// Each yields the query's records in response order: a range in date order (quotes alphabetical within a date), a
-// snapshot alphabetically by quote. It stops at the first error, from the query or from yield.
+// Each yields the query's records in response order: a range in date order
+// (quotes alphabetical within a date), a snapshot alphabetically by quote. It
+// stops at the first error, from the query or from yield.
 func (q *Query) Each(ctx context.Context, yield func(Record) error) error {
 	if !q.Range() {
 		stored, err := q.blendedTable(ctx)
@@ -53,8 +55,8 @@ func (q *Query) All(ctx context.Context) ([]Record, error) {
 	return out, err
 }
 
-// eachChunk walks [start, end] in chunks (3 months for daily ranges, 21 for weekly, 84 for monthly), checking the
-// deadline before every chunk.
+// eachChunk walks [start, end] in chunks (3 months for daily ranges, 21 for
+// weekly, 84 for monthly), checking the deadline before every chunk.
 func (q *Query) eachChunk(start, end time.Time, fn func(start, end time.Time) error) error {
 	months, ok := chunkMonths[q.group]
 	if !ok {
@@ -83,8 +85,9 @@ func (q *Query) rollupTables() (rates.Table, blend.Rollup) {
 	return rates.Monthly, blend.Monthly
 }
 
-// eachRollupRange serves a grouped range from the materialized grouped blend where a chunk is fully materialized,
-// and blends the provider rollups live otherwise (and always for providers= and expand=providers).
+// eachRollupRange serves a grouped range from the materialized grouped blend
+// where a chunk is fully materialized, and blends the provider rollups live
+// otherwise (and always for providers= and expand=providers).
 func (q *Query) eachRollupRange(ctx context.Context, start, end time.Time, yield func(Record) error) error {
 	table, model := q.rollupTables()
 	return q.eachChunk(start, end, func(cs, ce time.Time) error {
@@ -131,10 +134,12 @@ func (q *Query) eachRollupRange(ctx context.Context, start, end time.Time, yield
 	})
 }
 
-// eachBlendedRange mirrors eachDailyRange on materialized rows: per-quote carry-forward reconstructs each anchor's
-// batch (a snap-back echo keeps a silent quote visible), then emit derives the base, filters quotes, adds the identity
-// row and rounds. Stored rows are canonical anchor-date values, so a snap-back row equals the value a range anchored
-// at the row's own date would produce (#570).
+// eachBlendedRange mirrors eachDailyRange on materialized rows: per-quote
+// carry-forward reconstructs each anchor's batch (a snap-back echo keeps a
+// silent quote visible), then emit derives the base, filters quotes, adds the
+// identity row and rounds. Stored rows are canonical anchor-date values, so a
+// snap-back row equals the value a range anchored at the row's own date would
+// produce (#570).
 func (q *Query) eachBlendedRange(ctx context.Context, start, end time.Time, yield func(Record) error) error {
 	seen := map[[2]string]bool{}
 	err := q.eachChunk(start, end, func(cs, ce time.Time) error {
@@ -163,11 +168,14 @@ func (q *Query) eachBlendedRange(ctx context.Context, start, end time.Time, yiel
 	return nil
 }
 
-// eachDailyRange is the heavy path: the shapes validateRangeCost bounds (providers=, expand=providers and the
-// not-ready fallback) recompute the blend per date, so it draws on the process-wide slot cap and returns the slot
-// however the enumeration ends (#650). When the range start is silent, carry-forward anchors on it as well so the
-// response surfaces the most recent prior data, as ?date=start would (#71); records dedupe on quote and observation
-// date so a pair whose contributors have not changed does not reappear.
+// eachDailyRange is the heavy path: the shapes validateRangeCost bounds
+// (providers=, expand=providers and the not-ready fallback) recompute the blend
+// per date, so it draws on the process-wide slot cap and returns the slot
+// however the enumeration ends (#650). When the range start is silent,
+// carry-forward anchors on it as well so the response surfaces the most recent
+// prior data, as ?date=start would (#71); records dedupe on quote and
+// observation date so a pair whose contributors have not changed does not
+// reappear.
 func (q *Query) eachDailyRange(ctx context.Context, start, end time.Time, yield func(Record) error) error {
 	if err := q.acquireSlot(); err != nil {
 		return err
@@ -189,7 +197,8 @@ func (q *Query) eachDailyRange(ctx context.Context, start, end time.Time, yield 
 	})
 }
 
-// eachAnchor runs fn on the non-empty carry-forward snapshots at each date in [cs, ce] that has rows, plus cs itself.
+// eachAnchor runs fn on the non-empty carry-forward snapshots at each date in
+// [cs, ce] that has rows, plus cs itself.
 func (q *Query) eachAnchor(rows []rates.Row, cs, ce time.Time, lookback int, fn func([]rates.Row) error) error {
 	var anchors []time.Time
 	seen := map[int64]bool{}
@@ -222,8 +231,9 @@ func dedupe(seen map[[2]string]bool, yield func(Record) error) func(Record) erro
 	}
 }
 
-// eachSnapshot serves latest and single dates. From the table, the newest stored row per quote within the lookback
-// is the canonical anchor-date value, so a dated row means the same thing here as in a range instead of re-decaying
+// eachSnapshot serves latest and single dates. From the table, the newest
+// stored row per quote within the lookback is the canonical anchor-date value,
+// so a dated row means the same thing here as in a range instead of re-decaying
 // against the asking day (#573).
 func (q *Query) eachSnapshot(ctx context.Context, date time.Time, stored bool, yield func(Record) error) error {
 	lookback, err := q.lookbackDays(ctx)
@@ -269,7 +279,8 @@ func (q *Query) rawRows(ctx context.Context, start, end time.Time) ([]rates.Row,
 		Columns("date, base, quote, provider, rate").SQL())
 }
 
-// storedRows reads the materialized daily blend in [start, end], as pivot-based rows.
+// storedRows reads the materialized daily blend in [start, end], as pivot-based
+// rows.
 func (q *Query) storedRows(ctx context.Context, start, end time.Time) ([]rates.Row, error) {
 	return rates.Select(ctx, q.db, "SELECT date, '"+Pivot+"', quote, '', rate FROM blended_rates WHERE "+
 		dateBetween("date", start, end))
@@ -314,8 +325,9 @@ func groupBlendedByDate(rows []currency.Blended) [][]currency.Blended {
 	return groups
 }
 
-// emitBlended blends a batch through the pivot frame and emits it. A per-batch choice of frame used to make ranges and
-// snapshots disagree, since consensus and weighting see differently shaped numbers in each (#570, #573).
+// emitBlended blends a batch through the pivot frame and emits it. A per-batch
+// choice of frame used to make ranges and snapshots disagree, since consensus
+// and weighting see differently shaped numbers in each (#570, #573).
 func (q *Query) emitBlended(rows []rates.Row, yield func(Record) error) error {
 	if q.emitHook != nil {
 		if err := q.emitHook(); err != nil {
@@ -334,12 +346,13 @@ func (q *Query) providerPegBase() bool {
 }
 
 func (q *Query) pivotPathBlend(rows []rates.Row) []currency.Blended {
-	// One provider is that provider's own view, pegged base or not: its cross is the answer the caller asked for.
+	// One provider is that provider's own view, pegged base or not: its cross
+	// is the answer the caller asked for.
 	if q.single() {
 		return q.singleProviderBlend(rows)
 	}
-	// Restricting the source set to several providers bypasses the peg layer entirely, so a pegged request base has
-	// no anchor to rebase through.
+	// Restricting the source set to several providers bypasses the peg layer
+	// entirely, so a pegged request base has no anchor to rebase through.
 	if q.providerPegBase() {
 		return nil
 	}
@@ -353,10 +366,13 @@ func (q *Query) pivotPathBlend(rows []rates.Row) []currency.Blended {
 	return derive(blended, q.base)
 }
 
-// singleProviderBlend reaches the request base in one hop through the provider's own base rather than a round trip
-// through USD. That keeps rows the provider never bridged to USD, and derives each pair from two rows instead of four
-// (#645). A provider mid-transition between pivot currencies (LB around Lithuania's euro adoption) reaches one quote
-// through two bridges dated differently; the newer observation wins, as everywhere else carry-forward applies.
+// singleProviderBlend reaches the request base in one hop through the
+// provider's own base rather than a round trip through USD. That keeps rows the
+// provider never bridged to USD, and derives each pair from two rows instead of
+// four (#645). A provider mid-transition between pivot currencies (LB around
+// Lithuania's euro adoption) reaches one quote through two bridges dated
+// differently; the newer observation wins, as everywhere else carry-forward
+// applies.
 func (q *Query) singleProviderBlend(rows []rates.Row) []currency.Blended {
 	converted := blend.Convert(rows, q.base)
 	var order []string
@@ -381,14 +397,16 @@ func (q *Query) singleProviderBlend(rows []rates.Row) []currency.Blended {
 
 type pair struct{ base, quote string }
 
-// emitRecords turns blended rows into records: the quotes filter, rounding (or a single provider's own digits), the
-// contributor lists, the base's identity row, and response order. rows are the raw contributors, for the passthrough.
+// emitRecords turns blended rows into records: the quotes filter, rounding (or
+// a single provider's own digits), the contributor lists, the base's identity
+// row, and response order. rows are the raw contributors, for the passthrough.
 func (q *Query) emitRecords(blended []currency.Blended, rows []rates.Row, yield func(Record) error) error {
 	if len(blended) == 0 {
 		return nil
 	}
-	// Echo a single provider's own published digits, but only for native daily rows. Rollup buckets are
-	// time-averages, so their extra precision is synthetic and stays rounded.
+	// Echo a single provider's own published digits, but only for native daily
+	// rows. Rollup buckets are time-averages, so their extra precision is
+	// synthetic and stays rounded.
 	passthrough := q.providers != nil && len(q.providers) == 1 && !q.rollup()
 	lookup := map[pair]float64{}
 	if passthrough {
@@ -429,8 +447,9 @@ func (q *Query) emitRecords(blended []currency.Blended, rows []rates.Row, yield 
 		records = append(records, record)
 	}
 
-	// Synthesize the base's identity rate (#538), subject to the quotes filter like any other row. It takes the date
-	// of the newest visible record so it never leaks a hidden pivot row the quotes filter dropped; when the filter
+	// Synthesize the base's identity rate (#538), subject to the quotes filter
+	// like any other row. It takes the date of the newest visible record so it
+	// never leaks a hidden pivot row the quotes filter dropped; when the filter
 	// leaves no other rows, the blend's reference date.
 	if q.quotes == nil || slices.Contains(q.quotes, q.base) {
 		has := slices.ContainsFunc(records, func(r Record) bool { return r.Quote == q.base })
@@ -452,8 +471,10 @@ func (q *Query) emitRecords(blended []currency.Blended, rows []rates.Row, yield 
 		}
 	}
 
-	// Ranges stream chunks in date order, so records sort by date then quote within a chunk. A snapshot is one batch
-	// where carry-forward mixes observation dates, so it sorts by quote alone to stay alphabetical (#360).
+	// Ranges stream chunks in date order, so records sort by date then quote
+	// within a chunk. A snapshot is one batch where carry-forward mixes
+	// observation dates, so it sorts by quote alone to stay alphabetical
+	// (#360).
 	if q.Range() {
 		sort.Slice(records, func(i, j int) bool {
 			if records[i].Date != records[j].Date {
@@ -472,7 +493,8 @@ func (q *Query) emitRecords(blended []currency.Blended, rows []rates.Row, yield 
 	return nil
 }
 
-// round is Roundable#round. Ruby returns an Integer above 5000 and raises on NaN and infinities.
+// round is Roundable#round. Ruby returns an Integer above 5000 and raises on
+// NaN and infinities.
 func round(v float64) (Number, error) {
 	if math.IsNaN(v) || math.IsInf(v, 0) {
 		return Number{}, fmt.Errorf("cannot round %v", v)
@@ -483,8 +505,9 @@ func round(v float64) (Number, error) {
 	return Float(rates.Round(v)), nil
 }
 
-// derive rebases rows blended in the pivot (one per quote) to target by division, dropping the target's own row and
-// appending target -> pivot. It returns nothing when target is not among the quotes (no path to derive).
+// derive rebases rows blended in the pivot (one per quote) to target by
+// division, dropping the target's own row and appending target -> pivot. It
+// returns nothing when target is not among the quotes (no path to derive).
 func derive(rows []currency.Blended, target string) []currency.Blended {
 	if len(rows) == 0 {
 		return nil
@@ -505,8 +528,8 @@ func derive(rows []currency.Blended, target string) []currency.Blended {
 	return append(out, rebase(pivotToTarget, target, pivotToTarget.Base, func(x float64) float64 { return 1.0 / x }))
 }
 
-// rebase applies f to a row's rate and to each contributor's, so the providers list stays consistent with the row's
-// base.
+// rebase applies f to a row's rate and to each contributor's, so the providers
+// list stays consistent with the row's base.
 func rebase(r currency.Blended, base, quote string, f func(float64) float64) currency.Blended {
 	out := currency.Blended{Date: r.Date, Base: base, Quote: quote, Rate: f(r.Rate)}
 	if r.Providers != nil {

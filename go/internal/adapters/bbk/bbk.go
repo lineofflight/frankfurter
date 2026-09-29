@@ -1,17 +1,22 @@
-// Package bbk fetches the Deutsche Bundesbank's pre-1999 historical Frankfurt fixings (SERIES_TYPE=AA) from the BBEX3
-// dataflow: daily DEM-based rates, 1948-06-21 through 1998-12-30.
+// Package bbk fetches the Deutsche Bundesbank's pre-1999 historical Frankfurt
+// fixings (SERIES_TYPE=AA) from the BBEX3 dataflow: daily DEM-based rates,
+// 1948-06-21 through 1998-12-30.
 //
-// Post-1999 BBK data mirrors ECB and is intentionally excluded by the hardcoded SERIES_TYPE=AA filter in sdmxURL.
+// Post-1999 BBK data mirrors ECB and is intentionally excluded by the hardcoded
+// SERIES_TYPE=AA filter in sdmxURL.
 //
-// The SDMX-CSV response is semicolon-delimited. Rates are published per unit batch ("100 ATS = x DEM", "1 000 ITL = x
-// DEM"); the multiplier is only embedded in the free-text BBK_TITLE column (BBK_UNIT_MULT is always 0 for this
-// dataflow). The multipliers table is the source of truth, and the title is parsed as a guard that fails if the
-// published title ever contradicts it.
+// The SDMX-CSV response is semicolon-delimited. Rates are published per unit
+// batch ("100 ATS = x DEM", "1 000 ITL = x DEM"); the multiplier is only
+// embedded in the free-text BBK_TITLE column (BBK_UNIT_MULT is always 0 for
+// this dataflow). The multipliers table is the source of truth, and the title
+// is parsed as a guard that fails if the published title ever contradicts it.
 //
-// Records keep BBK's native direction: foreign currency as base, DEM as quote. Fetch returns whatever the API returns
-// for the requested period, without clipping.
+// Records keep BBK's native direction: foreign currency as base, DEM as quote.
+// Fetch returns whatever the API returns for the requested period, without
+// clipping.
 //
-// Attribution required: "Quelle: Deutsche Bundesbank" / "Source: Deutsche Bundesbank".
+// Attribution required: "Quelle: Deutsche Bundesbank" / "Source: Deutsche
+// Bundesbank".
 package bbk
 
 import (
@@ -39,8 +44,8 @@ var (
 	whitespace      = regexp.MustCompile(`\s+`)
 )
 
-// multipliers holds the per-currency batch sizes from each series' BBK_TITLE. They are invariant across the 1948-1998
-// AA series.
+// multipliers holds the per-currency batch sizes from each series' BBK_TITLE.
+// They are invariant across the 1948-1998 AA series.
 var multipliers = map[string]float64{
 	"ATS": 100, "BEF": 100, "CAD": 1, "CHF": 100, "DKK": 100, "ESP": 100,
 	"FIM": 100, "FRF": 100, "GBP": 1, "IEP": 1, "ITL": 1000, "JPY": 100,
@@ -61,7 +66,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange is about 5 years per chunk, to avoid ~200 MB single-fetch responses.
+// BackfillRange is about 5 years per chunk, to avoid ~200 MB single-fetch
+// responses.
 func (a *Adapter) BackfillRange() int { return 1826 }
 
 // Fetch implements adapter.Adapter.

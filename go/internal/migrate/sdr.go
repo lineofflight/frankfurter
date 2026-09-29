@@ -10,14 +10,17 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// normalizeSDR is 036 and 038-040: provider's adapter now emits XDR for the SDR it used to label SDR, and this
-// relabels what is stored. home is the provider's own currency, whose summary also changes.
+// normalizeSDR is 036 and 038-040: provider's adapter now emits XDR for the SDR
+// it used to label SDR, and this relabels what is stored. home is the
+// provider's own currency, whose summary also changes.
 //
-// Equal duplicates collapse; a pair that disagrees on any published component fails the migration, since picking a
-// winner needs source evidence. Rollups are rebuilt from the merged daily history, and the grouped blends of every
-// touched bucket (old buckets that disappear included) are dropped for the scheduler's populate job to refill. The
-// daily blend is cleared outright: its readiness checks only the earliest date, so a partial invalidation could serve
-// an incomplete table.
+// Equal duplicates collapse; a pair that disagrees on any published component
+// fails the migration, since picking a winner needs source evidence. Rollups
+// are rebuilt from the merged daily history, and the grouped blends of every
+// touched bucket (old buckets that disappear included) are dropped for the
+// scheduler's populate job to refill. The daily blend is cleared outright: its
+// readiness checks only the earliest date, so a partial invalidation could
+// serve an incomplete table.
 func normalizeSDR(provider, home string) func(context.Context, db.Querier) error {
 	return func(ctx context.Context, q db.Querier) error {
 		p := db.Lit(provider)
@@ -105,7 +108,8 @@ func sdrToXDR(code string) string {
 	return code
 }
 
-// normalizeRow moves one SDR row to XDR, or deletes it when an XDR row with the same components already exists.
+// normalizeRow moves one SDR row to XDR, or deletes it when an XDR row with the
+// same components already exists.
 func normalizeRow(ctx context.Context, q db.Querier, r storedRate) error {
 	base, quote := sdrToXDR(r.base), sdrToXDR(r.quote)
 	var existing storedRate
@@ -128,9 +132,11 @@ func normalizeRow(ctx context.Context, q db.Querier, r storedRate) error {
 	return err
 }
 
-// recognizeComesaDollar is 037. CMD was retained from RBM as an unknown code; registering the COMESA Dollar makes its
-// observations eligible for the catalogue and blends. The daily blend needs a full rebuild, so it is left empty for
-// the scheduler; grouped blends lose only the buckets whose RBM source includes CMD, for the populate job to repair.
+// recognizeComesaDollar is 037. CMD was retained from RBM as an unknown code;
+// registering the COMESA Dollar makes its observations eligible for the
+// catalogue and blends. The daily blend needs a full rebuild, so it is left
+// empty for the scheduler; grouped blends lose only the buckets whose RBM
+// source includes CMD, for the populate job to repair.
 func recognizeComesaDollar(ctx context.Context, q db.Querier) error {
 	cmd := "`provider` = 'RBM' AND " + either("CMD")
 	var found bool

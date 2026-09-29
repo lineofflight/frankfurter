@@ -144,8 +144,8 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// Matching on the full URI pins the URL and the one date param per weekday; a weekend request would find no
-// interaction and fail.
+// Matching on the full URI pins the URL and the one date param per weekday; a
+// weekend request would find no interaction and fail.
 func TestFetchRequestsEachWeekdayByDate(t *testing.T) {
 	a := New(vcrtest.Client(t, "nbe", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
 	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 16), adapter.Date(2026, 5, 20))

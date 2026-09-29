@@ -11,9 +11,10 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/seeds"
 )
 
-// SeedProviders is Provider.seed (the db:seed task): it replaces the providers table with db/seeds/providers, then
-// restores coverage for any excluded code the Money gem has since learned to name. Provider metadata is config as
-// data, so every boot reseeds.
+// SeedProviders is Provider.seed (the db:seed task): it replaces the providers
+// table with db/seeds/providers, then restores coverage for any excluded code
+// the Money gem has since learned to name. Provider metadata is config as data,
+// so every boot reseeds.
 func SeedProviders(ctx context.Context, conn *sql.DB) error {
 	providers, err := seeds.Providers()
 	if err != nil {
@@ -74,7 +75,8 @@ func null(s string) any {
 	return s
 }
 
-// Today is Ruby's Date.today: the local calendar date, as UTC midnight like every other date here.
+// Today is Ruby's Date.today: the local calendar date, as UTC midnight like
+// every other date here.
 func Today() time.Time {
 	y, m, d := time.Now().Date()
 	return time.Date(y, m, d, 0, 0, 0, 0, time.UTC)

@@ -1,6 +1,7 @@
-// Package jpc fetches Japan Customs' weekly exchange rates for customs valuation: JPY per 1 or 100 foreign units,
-// effective Sunday through Saturday. These weekly observations never blend with daily reference rates. The linked PDFs
-// form a continuous archive from January 2002.
+// Package jpc fetches Japan Customs' weekly exchange rates for customs
+// valuation: JPY per 1 or 100 foreign units, effective Sunday through Saturday.
+// These weekly observations never blend with daily reference rates. The linked
+// PDFs form a continuous archive from January 2002.
 package jpc
 
 import (
@@ -34,8 +35,8 @@ var (
 	number  = regexp.MustCompile(`^[\d,]+\.\d+$`)
 	isoCode = regexp.MustCompile(`^[A-Z]{3}$`)
 
-	// The archive retains PLZ/BGL/SUR labels for the redenominated PLN (1995), BGN (1999) and RUB (1998). Values
-	// already price the successor units.
+	// The archive retains PLZ/BGL/SUR labels for the redenominated PLN (1995),
+	// BGN (1999) and RUB (1998). Values already price the successor units.
 	aliases = map[string]string{"PLZ": "PLN", "BGL": "BGN", "SUR": "RUB"}
 )
 
@@ -56,7 +57,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 91 }
 
-// LeadDays implements adapter.Adapter: the next Sunday's table is published during the preceding week.
+// LeadDays implements adapter.Adapter: the next Sunday's table is published
+// during the preceding week.
 func (a *Adapter) LeadDays() int { return 7 }
 
 type report struct {
@@ -64,8 +66,8 @@ type report struct {
 	url  string
 }
 
-// Fetch implements adapter.Adapter. Unlike most adapters, `after` is inclusive: a report is kept when its effective
-// Sunday falls within after..upto.
+// Fetch implements adapter.Adapter. Unlike most adapters, `after` is inclusive:
+// a report is kept when its effective Sunday falls within after..upto.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	horizon := a.Today().AddDate(0, 0, a.LeadDays())
 	start := coverageStart
@@ -170,8 +172,9 @@ type pair struct {
 func parseRuns(pages [][]pdftext.Run, date time.Time) ([]adapter.Rate, error) {
 	day := date.Format(time.DateOnly)
 
-	// Older PDFs lack usable Japanese Unicode mappings. ISO codes and numbers remain readable, but flattened text can
-	// split a row across lines. Pair them by their PDF coordinates instead of interpreting garbled headers.
+	// Older PDFs lack usable Japanese Unicode mappings. ISO codes and numbers
+	// remain readable, but flattened text can split a row across lines. Pair
+	// them by their PDF coordinates instead of interpreting garbled headers.
 	var pairs []pair
 	for _, runs := range pages {
 		for _, code := range runs {
@@ -187,15 +190,17 @@ func parseRuns(pages [][]pdftext.Run, date time.Time) ([]adapter.Rate, error) {
 			if len(values) > 1 {
 				return nil, fmt.Errorf("multiple rates for %s on %s", code.Text, day)
 			}
-			// Some rows publish only an equivalence statement (e.g. BND equals SGD), not a numerical customs rate.
+			// Some rows publish only an equivalence statement (e.g. BND equals
+			// SGD), not a numerical customs rate.
 			if len(values) == 1 {
 				pairs = append(pairs, pair{code.Text, values[0]})
 			}
 		}
 	}
 
-	// The two numeric columns are right-aligned: the left is JPY per 1 unit, the right JPY per 100. Identify their
-	// right edges across all pages; layouts shift horizontally between historical editions.
+	// The two numeric columns are right-aligned: the left is JPY per 1 unit,
+	// the right JPY per 100. Identify their right edges across all pages;
+	// layouts shift horizontally between historical editions.
 	if len(pairs) == 0 {
 		return nil, fmt.Errorf("missing unit columns on %s", day)
 	}
@@ -232,7 +237,8 @@ func parseRuns(pages [][]pdftext.Run, date time.Time) ([]adapter.Rate, error) {
 		if alias, ok := aliases[base]; ok {
 			base = alias
 		}
-		// YUN prices the post-1994 dinar. The source eventually adopts RSD in its own right.
+		// YUN prices the post-1994 dinar. The source eventually adopts RSD in
+		// its own right.
 		if base == "YUN" {
 			base = "CSD"
 			if date.Before(csdCutover) {

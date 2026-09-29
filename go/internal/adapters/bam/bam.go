@@ -1,8 +1,10 @@
-// Package bam fetches rates from Bank Al-Maghrib, which publishes daily mid-market rates for about 30 currencies
-// against MAD, one request per business day.
+// Package bam fetches rates from Bank Al-Maghrib, which publishes daily
+// mid-market rates for about 30 currencies against MAD, one request per
+// business day.
 //
-// Older data (pre-2016) lacks a mid-rate field; the adapter averages buy/sell. As in Ruby, after is inclusive: every
-// weekday from after through upto is requested.
+// Older data (pre-2016) lacks a mid-rate field; the adapter averages buy/sell.
+// As in Ruby, after is inclusive: every weekday from after through upto is
+// requested.
 package bam
 
 import (
@@ -138,7 +140,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseDate keeps the calendar date of a timestamp like 2026-03-25T12:30:00, as Ruby's Date.parse does.
+// parseDate keeps the calendar date of a timestamp like 2026-03-25T12:30:00, as
+// Ruby's Date.parse does.
 func parseDate(s string) (time.Time, error) {
 	t, err := adapter.ParseDate(s, "2006-01-02T15:04:05", time.RFC3339, "2006-01-02")
 	if err != nil {

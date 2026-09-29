@@ -1,9 +1,11 @@
-// Package bccr fetches rates from Banco Central de Costa Rica (BCCR), which publishes the daily reference exchange
-// rate for the US dollar against the Costa Rican colón through the SDDE API.
+// Package bccr fetches rates from Banco Central de Costa Rica (BCCR), which
+// publishes the daily reference exchange rate for the US dollar against the
+// Costa Rican colón through the SDDE API.
 //
-// The API returns a pivoted table (dates as columns) with at most 100 date columns per request, so backfill is
-// chunked in 90-day periods. Like the Ruby adapter, Fetch returns whatever the table holds without clipping it to
-// the window.
+// The API returns a pivoted table (dates as columns) with at most 100 date
+// columns per request, so backfill is chunked in 90-day periods. Like the Ruby
+// adapter, Fetch returns whatever the table holds without clipping it to the
+// window.
 package bccr
 
 import (
@@ -72,7 +74,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if err != nil {
 		return nil, err
 	}
-	// http.rb sends token_csrf as Token-Csrf, which is what the API was recorded accepting.
+	// http.rb sends token_csrf as Token-Csrf, which is what the API was
+	// recorded accepting.
 	req.Header.Set("Token-Csrf", string(token))
 	req.Header.Set("Origin", "https://sdd.bccr.fi.cr")
 	resp, err := a.Do(req)
@@ -125,7 +128,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if value == nil || *value == "" {
 			continue
 		}
-		// Titles look like "20 mar 2026"; Go matches month names case-insensitively.
+		// Titles look like "20 mar 2026"; Go matches month names
+		// case-insensitively.
 		date, err := time.Parse("2 Jan 2006", col.Title)
 		if err != nil {
 			return nil, err

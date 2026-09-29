@@ -29,7 +29,8 @@ func params(kv ...string) Params {
 	return p
 }
 
-// newQuery is RateQuery.new(params) against conn, today pinned to the fixture's.
+// newQuery is RateQuery.new(params) against conn, today pinned to the
+// fixture's.
 func newQuery(t *testing.T, conn *sql.DB, kv ...string) *Query {
 	t.Helper()
 	q, err := New(ctx, conn, params(kv...), Options{Today: today()})

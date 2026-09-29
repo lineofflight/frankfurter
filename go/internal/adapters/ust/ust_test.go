@@ -144,8 +144,9 @@ func TestParseSwitchesCodeAtSourceSwitchDate(t *testing.T) {
 	}
 }
 
-// Treasury switched unit with a mid-quarter amendment: old leone through 2022-06-30, new leone from the 2022-07-15
-// amendment. Both sides are real rows.
+// Treasury switched unit with a mid-quarter amendment: old leone through
+// 2022-06-30, new leone from the 2022-07-15 amendment. Both sides are real
+// rows.
 func TestParseKeepsEveryLeoneRowThroughRedenomination(t *testing.T) {
 	june := mustParse(t, rec("Sierra Leone-Leone", "13175.0", "2022-06-30", ""))
 	amended := mustParse(t, rec("Sierra Leone-Leone", "13.62", "2022-06-30", "2022-07-15"))
@@ -195,7 +196,8 @@ type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) { return f(req) }
 
-// A record date split across two pages still collapses to one row per pair, and the lower bound is inclusive.
+// A record date split across two pages still collapses to one row per pair, and
+// the lower bound is inclusive.
 func TestFetchPaginatesAndFiltersWindow(t *testing.T) {
 	pages := []string{
 		`{"data":[{"effective_date":"2026-06-30","country_currency_desc":"Togo-Cfa Franc","exchange_rate":"570.0"},

@@ -1,9 +1,11 @@
-// Package boc fetches the Bank of Canada's daily indicative rates, quoted as CAD per unit of each foreign currency.
+// Package boc fetches the Bank of Canada's daily indicative rates, quoted as
+// CAD per unit of each foreign currency.
 //
-// The current series starts 2017-01-03. Legacy noon rates (2007-2017) are available under the LEGACY_NOON_RATES
-// group with ~65 currencies.
+// The current series starts 2017-01-03. Legacy noon rates (2007-2017) are
+// available under the LEGACY_NOON_RATES group with ~65 currencies.
 //
-// Like the Ruby adapter, Fetch passes after as the API's inclusive start_date and does not clip the response.
+// Like the Ruby adapter, Fetch passes after as the API's inclusive start_date
+// and does not clip the response.
 package boc
 
 import (

@@ -99,7 +99,8 @@ func TestFetchCoversQuotedCurrencies(t *testing.T) {
 func TestFetchTransferMidpointOfClosingFixing(t *testing.T) {
 	rates := fetch(t, adapter.Date(2026, 9, 8), adapter.Date(2026, 9, 8))
 
-	// 15:00 fixing: buy 37,803, sell 37,923. The 10:00 fixing that day had USD at 37,612 / 37,682.
+	// 15:00 fixing: buy 37,803, sell 37,923. The 10:00 fixing that day had USD
+	// at 37,612 / 37,682.
 	if got := find(t, rates, "USD").Rate; got != 37.863 {
 		t.Errorf("USD = %v, want 37.863", got)
 	}
@@ -113,8 +114,9 @@ func TestFetchNormalisesGYD(t *testing.T) {
 	}
 }
 
-// Ruby stubs PDF::Reader so one page raises MalformedPDFError. pdftext has no per-page failure (it fails the whole
-// document), so the equivalent is a page whose text extraction errors.
+// Ruby stubs PDF::Reader so one page raises MalformedPDFError. pdftext has no
+// per-page failure (it fails the whole document), so the equivalent is a page
+// whose text extraction errors.
 func TestParseSkipsUnextractablePage(t *testing.T) {
 	good := `                                     WISSELKOERSNOTERINGEN IN SRD
              18 JUNI 2025 VASTGESTELD OMSTREEKS 15:00U EN GELDIG TOT NADER ORDER

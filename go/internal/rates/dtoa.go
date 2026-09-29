@@ -6,14 +6,17 @@ import (
 	"strings"
 )
 
-// formatRound is Float(format("%.<n>g" or "%.<n>f", v)) as Ruby computes it: to n significant digits when sig is
-// set, else to n decimals.
+// formatRound is Float(format("%.<n>g" or "%.<n>f", v)) as Ruby computes it: to
+// n significant digits when sig is set, else to n decimals.
 //
-// Ruby's format rounds through its copy of David Gay's dtoa (missing/dtoa.c, mode 2 for %g, mode 3 for %f), and Ruby
-// patched its floating-point fast path: when the discarded tail lies within the fast path's error bound of one half,
-// it rounds half to even instead of deferring to exact arithmetic. So format("%.3f", 4.1409 * 5) is 20.704 although
-// the double is 20.704500000000003, and format("%.2f", 214.415) is 214.42 although the double lies just below
-// 214.415. Everything else is the exact binary value correctly rounded, as strconv does it.
+// Ruby's format rounds through its copy of David Gay's dtoa (missing/dtoa.c,
+// mode 2 for %g, mode 3 for %f), and Ruby patched its floating-point fast path:
+// when the discarded tail lies within the fast path's error bound of one half,
+// it rounds half to even instead of deferring to exact arithmetic. So
+// format("%.3f", 4.1409 * 5) is 20.704 although the double is
+// 20.704500000000003, and format("%.2f", 214.415) is 214.42 although the double
+// lies just below 214.415. Everything else is the exact binary value correctly
+// rounded, as strconv does it.
 func formatRound(v float64, sig bool, n int) float64 {
 	if v == 0 || math.IsNaN(v) || math.IsInf(v, 0) {
 		return v
@@ -49,16 +52,19 @@ const (
 	dtoaBletch   = 0x10
 )
 
-// dtoaQuick is dtoa's floating-point fast path for a positive, finite a, with Ruby's half-to-even patch. It returns
-// the rounded digits and decimal point (a ≈ 0.digits × 10^point), or false where dtoa falls back to exact arithmetic.
-// Explicit float64 conversions keep Go from fusing multiply-adds that the C code evaluates as separate operations.
+// dtoaQuick is dtoa's floating-point fast path for a positive, finite a, with
+// Ruby's half-to-even patch. It returns the rounded digits and decimal point (a
+// ≈ 0.digits × 10^point), or false where dtoa falls back to exact arithmetic.
+// Explicit float64 conversions keep Go from fusing multiply-adds that the C
+// code evaluates as separate operations.
 func dtoaQuick(a float64, sig bool, n int) ([]byte, int, bool) {
 	bits := math.Float64bits(a)
 	biased := int(bits >> 52 & 0x7ff)
 	if biased == 0 {
 		return nil, 0, false // subnormal
 	}
-	// dtoa's estimate of floor(log10(a)), exact for 0 <= k <= 22 and possibly one too high elsewhere (k_check).
+	// dtoa's estimate of floor(log10(a)), exact for 0 <= k <= 22 and possibly
+	// one too high elsewhere (k_check).
 	d2 := math.Float64frombits(bits&(1<<52-1) | 0x3ff<<52)
 	i := biased - 1023
 	ds := float64(float64((d2-1.5)*0.289529654602168)+0.1760912590558) + float64(float64(i)*0.301029995663981)
@@ -154,15 +160,17 @@ func dtoaQuick(a float64, sig bool, n int) ([]byte, int, bool) {
 			case l&1 != 0:
 				return bumpUp(digits, k+1) // Ruby's patch: a near tie rounds to even
 			}
-			// An even near tie: Ruby takes the exact path but never rounds the even digit up, which leaves these
-			// digits (the tail is too close to one half for the digits themselves to be in doubt).
+			// An even near tie: Ruby takes the exact path but never rounds the
+			// even digit up, which leaves these digits (the tail is too close
+			// to one half for the digits themselves to be in doubt).
 			return digits, k + 1, true
 		}
 		d *= 10
 	}
 }
 
-// bumpUp adds one to the last digit, carrying; all nines become 1 with the point moved up.
+// bumpUp adds one to the last digit, carrying; all nines become 1 with the
+// point moved up.
 func bumpUp(digits []byte, point int) ([]byte, int, bool) {
 	s := strings.TrimRight(string(digits), "9")
 	if s == "" {

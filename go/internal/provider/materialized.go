@@ -11,8 +11,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Materialized is the stored blend of internal/blend behind this package's Blend and internal/schedule's Blend. The
-// Tx methods join the caller's transaction; the others run their own on DB.
+// Materialized is the stored blend of internal/blend behind this package's
+// Blend and internal/schedule's Blend. The Tx methods join the caller's
+// transaction; the others run their own on DB.
 type Materialized struct {
 	DB *sql.DB
 
@@ -32,7 +33,8 @@ func (m Materialized) RefreshTx(ctx context.Context, q db.Querier, from, to time
 	return blend.RefreshDaily(ctx, q, from, to, m.today())
 }
 
-// RefreshRollupsTx implements Blend with BlendedWeeklyRate.refresh and BlendedMonthlyRate.refresh.
+// RefreshRollupsTx implements Blend with BlendedWeeklyRate.refresh and
+// BlendedMonthlyRate.refresh.
 func (m Materialized) RefreshRollupsTx(ctx context.Context, q db.Querier, buckets map[rates.Precision][]string) error {
 	for _, r := range blend.Rollups {
 		if _, err := r.Refresh(ctx, q, buckets[r.Source.Precision], m.today()); err != nil {
@@ -42,7 +44,8 @@ func (m Materialized) RefreshRollupsTx(ctx context.Context, q db.Querier, bucket
 	return nil
 }
 
-// Refresh recomputes the stored daily blends for [from, to] in their own transactions.
+// Refresh recomputes the stored daily blends for [from, to] in their own
+// transactions.
 func (m Materialized) Refresh(ctx context.Context, from, to time.Time) error {
 	return blend.RefreshDaily(ctx, m.DB, from, to, m.today())
 }
@@ -55,7 +58,8 @@ func (m Materialized) Rebuild(ctx context.Context) error {
 	return blend.RebuildDaily(ctx, m.DB, m.today())
 }
 
-// Populate is BlendedWeeklyRate.populate (rates.Week) or BlendedMonthlyRate.populate (rates.Month).
+// Populate is BlendedWeeklyRate.populate (rates.Week) or
+// BlendedMonthlyRate.populate (rates.Month).
 func (m Materialized) Populate(ctx context.Context, p rates.Precision) (int, error) {
 	for _, r := range blend.Rollups {
 		if r.Source.Precision == p {

@@ -53,7 +53,8 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 	}
 }
 
-// The golden replay matches on method and URI only, so this pins the SOAP envelopes (codes, date range) and actions.
+// The golden replay matches on method and URI only, so this pins the SOAP
+// envelopes (codes, date range) and actions.
 func TestFetchSendsRecordedRequests(t *testing.T) {
 	soapAction := func(r *http.Request, _ []byte, rec cassette.Request) bool {
 		return r.Header.Get("SOAPAction") == rec.Headers.Get("SOAPAction")

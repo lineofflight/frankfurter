@@ -5,8 +5,9 @@ import (
 	"testing"
 )
 
-// Rack::Cors edge cases, checked against the Ruby app: it tests Origin and Access-Control-Request-Method for presence,
-// not content, and refuses a preflight whose path holds a NUL byte.
+// Rack::Cors edge cases, checked against the Ruby app: it tests Origin and
+// Access-Control-Request-Method for presence, not content, and refuses a
+// preflight whose path holds a NUL byte.
 func TestCORSHeaderPresence(t *testing.T) {
 	a := newTestApp(t)
 

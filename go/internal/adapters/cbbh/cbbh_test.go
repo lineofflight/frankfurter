@@ -80,9 +80,10 @@ func TestFetchPublishedEffectiveDates(t *testing.T) {
 	}
 }
 
-// The Ruby spec also backfills through Provider and reads the rows back through the API. Core packages are not
-// available here, so the same values are asserted on the fetched rows. Its unknown_currencies check needs the
-// currency catalogue and is not ported.
+// The Ruby spec also backfills through Provider and reads the rows back through
+// the API. Core packages are not available here, so the same values are
+// asserted on the fetched rows. Its unknown_currencies check needs the currency
+// catalogue and is not ported.
 func TestFetchEarliestListsPreserveHistoricalUnits(t *testing.T) {
 	rates := fetch(t, New(newClient(t)), adapter.Date(1998, 1, 6), adapter.Date(1998, 1, 8))
 
@@ -132,8 +133,9 @@ func TestFetchConfirmsEmptySundayMondayRange(t *testing.T) {
 	}
 }
 
-// stubPeriod answers the period export for 2026-09-25 with the export-error string, as the Ruby spec's WebMock stub
-// does, and sends everything else to the cassette.
+// stubPeriod answers the period export for 2026-09-25 with the export-error
+// string, as the Ruby spec's WebMock stub does, and sends everything else to
+// the cassette.
 type stubPeriod struct{ next http.RoundTripper }
 
 func (s stubPeriod) RoundTrip(req *http.Request) (*http.Response, error) {

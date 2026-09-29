@@ -1,8 +1,10 @@
-// Package bcbo fetches Banco Central de Bolivia's daily official exchange rates of the boliviano (BOB) against the US
-// dollar and about 50 other currencies, plus daily reference prices for gold, silver and the SDR.
+// Package bcbo fetches Banco Central de Bolivia's daily official exchange rates
+// of the boliviano (BOB) against the US dollar and about 50 other currencies,
+// plus daily reference prices for gold, silver and the SDR.
 //
-// The USD/BOB rate held a stabilized peg (VENTA 6.96 / COMPRA 6.86, mid 6.91) from 2011 until mid-2026, when Bolivia
-// repriced the boliviano and the source replaced its daily-sheet layout. The single official rate (TCO) is now
+// The USD/BOB rate held a stabilized peg (VENTA 6.96 / COMPRA 6.86, mid 6.91)
+// from 2011 until mid-2026, when Bolivia repriced the boliviano and the source
+// replaced its daily-sheet layout. The single official rate (TCO) is now
 // published directly.
 //
 // Sources:
@@ -17,8 +19,8 @@
 //   - Current (2026-07 onward): ISO code in column 2, rate in column 3, USD carried as a single official rate (TCO),
 //     metals and SDR in their own labelled blocks.
 //
-// Rates keep BCBO's direction: foreign currency as base, BOB as quote. Gold (XAU), silver (XAG) and the SDR (XDR) are
-// quoted against USD.
+// Rates keep BCBO's direction: foreign currency as base, BOB as quote. Gold
+// (XAU), silver (XAG) and the SDR (XDR) are quoted against USD.
 package bcbo
 
 import (
@@ -64,11 +66,13 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. Daily queries are used from 2008 onwards, so a small range keeps progress
-// durable and avoids overloading the server.
+// BackfillRange implements adapter.Adapter. Daily queries are used from 2008
+// onwards, so a small range keeps progress durable and avoids overloading the
+// server.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. As in the Ruby adapter, `after` is inclusive: the window is after..upto.
+// Fetch implements adapter.Adapter. As in the Ruby adapter, `after` is
+// inclusive: the window is after..upto.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	start := coverageStart
 	if after.After(start) {
@@ -156,7 +160,8 @@ func firstSheet(data []byte) (xls.Sheet, error) {
 	return sheets[0], nil
 }
 
-// parseYearly reads a yearly archive: day of month in column 0, then a VENTA/COMPRA pair per month.
+// parseYearly reads a yearly archive: day of month in column 0, then a
+// VENTA/COMPRA pair per month.
 func parseYearly(data []byte, year int) ([]adapter.Rate, error) {
 	sheet, err := firstSheet(data)
 	if err != nil {
@@ -200,8 +205,9 @@ func parseYearly(data []byte, year int) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseDaily reads a daily sheet in either layout. The current layout carries ISO codes in column 2; the legacy layout
-// leaves that column blank and puts its markers in column 3.
+// parseDaily reads a daily sheet in either layout. The current layout carries
+// ISO codes in column 2; the legacy layout leaves that column blank and puts
+// its markers in column 3.
 func parseDaily(data []byte, date time.Time) ([]adapter.Rate, error) {
 	sheet, err := firstSheet(data)
 	if err != nil {
@@ -313,7 +319,8 @@ func parseRate(cell xls.Cell) (float64, bool) {
 	return adapter.ParseFloat(strings.ReplaceAll(cell.Text(), ",", ""))
 }
 
-// validDate builds a date, rejecting ones time.Date would normalize (30 February).
+// validDate builds a date, rejecting ones time.Date would normalize (30
+// February).
 func validDate(year int, month time.Month, day int) (time.Time, bool) {
 	d := adapter.Date(year, month, day)
 	return d, d.Month() == month && d.Day() == day

@@ -10,15 +10,17 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// The daily materialized blend (blended_rates, #570) is the deduped blended series in the pivot base: one row per
-// quote and date where the contributor set changed, peg anchoring included. It answers every plain request shape
-// (latest, single date, daily range); what remains per request is deriving the requested base, filtering quotes, the
-// identity row and rounding.
+// The daily materialized blend (blended_rates, #570) is the deduped blended
+// series in the pivot base: one row per quote and date where the contributor
+// set changed, peg anchoring included. It answers every plain request shape
+// (latest, single date, daily range); what remains per request is deriving the
+// requested base, filtering quotes, the identity row and rounding.
 //
-// Each stored row is the canonical anchor-date value: the blend computed at the anchor equal to the row's own
-// observation date. Later anchors can re-emit the same quote and date with different floats as other contributors age
-// out of the carry-forward lookback; those echoes are never stored, which keeps a stored row a pure function of its
-// contributor rows.
+// Each stored row is the canonical anchor-date value: the blend computed at the
+// anchor equal to the row's own observation date. Later anchors can re-emit the
+// same quote and date with different floats as other contributors age out of
+// the carry-forward lookback; those echoes are never stored, which keeps a
+// stored row a pure function of its contributor rows.
 
 // ChunkMonths is how many months RefreshDaily recomputes per transaction.
 const ChunkMonths = 3
@@ -38,8 +40,9 @@ func chunks(start, end time.Time) []span {
 	return out
 }
 
-// RefreshDaily is BlendedRate.refresh: it recomputes the stored blends of every anchor date in [start, end]. It
-// mirrors the live pipeline (same rows, EachSnapshot, Blend, AnchorPegs, same order) so stored values keep float
+// RefreshDaily is BlendedRate.refresh: it recomputes the stored blends of every
+// anchor date in [start, end]. It mirrors the live pipeline (same rows,
+// EachSnapshot, Blend, AnchorPegs, same order) so stored values keep float
 // parity with live computation.
 func RefreshDaily(ctx context.Context, q db.Querier, start, end, today time.Time) error {
 	for _, c := range chunks(start, end) {
@@ -50,9 +53,11 @@ func RefreshDaily(ctx context.Context, q db.Querier, start, end, today time.Time
 	return nil
 }
 
-// refreshChunk runs under BEGIN IMMEDIATE, which serializes the fetch, compute and write against other writers, so a
-// refresh never commits blends computed from a snapshot another backfill has since changed. Inside a backfill's
-// transaction it simply joins, since that transaction already holds the write lock.
+// refreshChunk runs under BEGIN IMMEDIATE, which serializes the fetch, compute
+// and write against other writers, so a refresh never commits blends computed
+// from a snapshot another backfill has since changed. Inside a backfill's
+// transaction it simply joins, since that transaction already holds the write
+// lock.
 func refreshChunk(ctx context.Context, q db.Querier, c span, today time.Time) error {
 	return within(ctx, q, false, func(q db.Querier) error {
 		scope, err := blendable(ctx, q, rates.Daily)
@@ -94,9 +99,11 @@ func refreshChunk(ctx context.Context, q db.Querier, c span, today time.Time) er
 	})
 }
 
-// RebuildDaily is BlendedRate.rebuild. It rebuilds in place, newest chunk first, so existing chunks stay readable
-// throughout and DailyReady stays true. Stale leading rows are pruned up front, so a shrunk active range keeps the
-// table ready at once; a final sweep prunes rows outside the active date range without racing concurrent backfills.
+// RebuildDaily is BlendedRate.rebuild. It rebuilds in place, newest chunk
+// first, so existing chunks stay readable throughout and DailyReady stays true.
+// Stale leading rows are pruned up front, so a shrunk active range keeps the
+// table ready at once; a final sweep prunes rows outside the active date range
+// without racing concurrent backfills.
 func RebuildDaily(ctx context.Context, q db.Querier, today time.Time) error {
 	var window *span
 	err := within(ctx, q, false, func(q db.Querier) error {
@@ -151,8 +158,9 @@ func RebuildDaily(ctx context.Context, q db.Querier, today time.Time) error {
 	})
 }
 
-// DailyReady is BlendedRate.ready?: the table serves reads only once it covers full history. An incremental refresh
-// makes it non-empty long before a rebuild has run, and serving a partial table would silently truncate historical
+// DailyReady is BlendedRate.ready?: the table serves reads only once it covers
+// full history. An incremental refresh makes it non-empty long before a rebuild
+// has run, and serving a partial table would silently truncate historical
 // ranges.
 func DailyReady(ctx context.Context, q db.Querier) (bool, error) {
 	scope, err := blendable(ctx, q, rates.Daily)

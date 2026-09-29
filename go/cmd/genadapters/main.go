@@ -1,5 +1,6 @@
-// Command genadapters writes internal/adapters/all/all.go, which blank-imports every adapter package so a binary
-// that imports "all" has every provider registered. Run it through go generate from the module root:
+// Command genadapters writes internal/adapters/all/all.go, which blank-imports
+// every adapter package so a binary that imports "all" has every provider
+// registered. Run it through go generate from the module root:
 //
 //	go generate ./internal/adapters/all
 package main

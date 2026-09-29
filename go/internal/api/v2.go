@@ -14,15 +14,16 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/ratequery"
 )
 
-// Versions::V2: the current API. Rates are blended across providers unless providers= names the sources.
+// Versions::V2: the current API. Rates are blended across providers unless
+// providers= names the sources.
 
 func init() { registerVersion((*Server).routesV2) }
 
 const (
 	contentTypeV2 = "application/json; charset=utf-8"
 
-	// v2CacheControl is every v2 response's default; date-relative rate queries and the provider and coverage
-	// endpoints override it.
+	// v2CacheControl is every v2 response's default; date-relative rate queries
+	// and the provider and coverage endpoints override it.
 	v2CacheControl    = "public, max-age=86400, stale-while-revalidate=86400, stale-if-error=86400"
 	v2CacheOneHour    = "public, max-age=3600"
 	contentTypeCSV    = "text/csv"
@@ -41,15 +42,16 @@ func (s *Server) routesV2(mux *http.ServeMux) {
 	mux.HandleFunc("/v2/", s.v2)
 }
 
-// v2Request is one request's routing state. Paths match raw, as Roda matches PATH_INFO: /v2/r%61tes is no route, and
-// captured segments are not decoded.
+// v2Request is one request's routing state. Paths match raw, as Roda matches
+// PATH_INFO: /v2/r%61tes is no route, and captured segments are not decoded.
 type v2Request struct {
 	s *Server
 	w http.ResponseWriter
 	r *http.Request
 
-	// Roda's type_routing: an extension (.json, .xml, .html, .csv) picks the response type and is dropped from the
-	// path; without one the Accept header picks it, when a route asks.
+	// Roda's type_routing: an extension (.json, .xml, .html, .csv) picks the
+	// response type and is dropped from the path; without one the Accept header
+	// picks it, when a route asks.
 	ext      string
 	accepted string
 	asked    bool
@@ -123,7 +125,8 @@ func (c *v2Request) route(path string) {
 	c.notFound()
 }
 
-// only runs serve for GET; a route matched by any other method answers 404, as Roda's r.is with r.get inside does.
+// only runs serve for GET; a route matched by any other method answers 404, as
+// Roda's r.is with r.get inside does.
 func (c *v2Request) only(get bool, serve func()) {
 	if !get {
 		c.notFound()
@@ -132,8 +135,9 @@ func (c *v2Request) only(get bool, serve func()) {
 	serve()
 }
 
-// twoSegments matches prefix followed by two segments and nothing else, as r.is(prefix, String, String) does. Roda's
-// String matcher captures an empty segment when a slash follows it (/rate//USD has base ""), but not at the end.
+// twoSegments matches prefix followed by two segments and nothing else, as
+// r.is(prefix, String, String) does. Roda's String matcher captures an empty
+// segment when a slash follows it (/rate//USD has base ""), but not at the end.
 func twoSegments(path, prefix string) (string, string, bool) {
 	rest, ok := strings.CutPrefix(path, prefix)
 	if !ok {
@@ -146,8 +150,8 @@ func twoSegments(path, prefix string) (string, string, bool) {
 	return a, b, true
 }
 
-// requestedType is type_routing's requested_type: the extension, else the first Accept entry naming a known type
-// (which adds Vary: Accept), else html.
+// requestedType is type_routing's requested_type: the extension, else the first
+// Accept entry naming a known type (which adds Vary: Accept), else html.
 func (c *v2Request) requestedType() string {
 	if c.ext != "" {
 		return c.ext
@@ -172,7 +176,8 @@ func (c *v2Request) requestedType() string {
 	return c.accepted
 }
 
-// query is Roda's r.params, parsed once. A query string Rack cannot parse fails the request.
+// query is Roda's r.params, parsed once. A query string Rack cannot parse fails
+// the request.
 func (c *v2Request) query() ratequery.Params {
 	if !c.parsed {
 		c.parsed = true
@@ -182,14 +187,16 @@ func (c *v2Request) query() ratequery.Params {
 	return c.params
 }
 
-// notFound is the status handler's 404: the response's headers are cleared first.
+// notFound is the status handler's 404: the response's headers are cleared
+// first.
 func (c *v2Request) notFound() {
 	clear(c.w.Header())
 	writeJSON(c.w, http.StatusNotFound, contentTypeV2, message{Status: http.StatusNotFound, Message: "not found"})
 }
 
-// fail is V2's error handler: validation fails with 422, an expired deadline or a full compute cap with 503 (the
-// latter with Retry-After), anything else with 500. The response starts over, as Roda reinitializes it.
+// fail is V2's error handler: validation fails with 422, an expired deadline or
+// a full compute cap with 503 (the latter with Retry-After), anything else with
+// 500. The response starts over, as Roda reinitializes it.
 func (c *v2Request) fail(err error) {
 	status := http.StatusInternalServerError
 	var (
@@ -251,9 +258,10 @@ func (c *v2Request) coverage() {
 	writeJSON(c.w, http.StatusOK, contentTypeV2, result)
 }
 
-// provider serves /providers and everything under it. /providers/<key>/rates and /providers/<key>/rate/<base>/<quote>
-// alias /rates?providers=<key> byte for byte (#643): one code path, so single-provider behaviour cannot drift between
-// the two URLs.
+// provider serves /providers and everything under it. /providers/<key>/rates
+// and /providers/<key>/rate/<base>/<quote> alias /rates?providers=<key> byte
+// for byte (#643): one code path, so single-provider behaviour cannot drift
+// between the two URLs.
 func (c *v2Request) provider(rest string) {
 	get := c.r.Method == http.MethodGet
 	if rest == "" {

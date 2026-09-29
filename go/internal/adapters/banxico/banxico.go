@@ -1,5 +1,6 @@
-// Package banxico fetches rates from Banco de México, which publishes daily FIX and reference exchange rates for 5
-// currencies against the Mexican peso (MXN) through the SIE REST API, one batched query for all series.
+// Package banxico fetches rates from Banco de México, which publishes daily FIX
+// and reference exchange rates for 5 currencies against the Mexican peso (MXN)
+// through the SIE REST API, one batched query for all series.
 package banxico
 
 import (
@@ -17,7 +18,8 @@ import (
 
 const baseURL = "https://www.banxico.org.mx/SieAPIRest/service/v1/series"
 
-// seriesIDs lists the series in request order; series maps each to its base currency, quoted against MXN.
+// seriesIDs lists the series in request order; series maps each to its base
+// currency, quoted against MXN.
 var (
 	seriesIDs = []string{"SF43718", "SF46410", "SF46407", "SF46406", "SF60632"}
 	series    = map[string]string{
@@ -43,7 +45,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// Fetch implements adapter.Adapter. With an open after it asks for the full series; the API does the date filtering.
+// Fetch implements adapter.Adapter. With an open after it asks for the full
+// series; the API does the date filtering.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	key := os.Getenv("BANXICO_API_KEY")
 	if key == "" {
@@ -103,7 +106,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if !ok || rate <= 0 {
 				continue
 			}
-			// Unpadded layout, as Ruby's strptime("%d/%m/%Y") also takes one-digit days and months.
+			// Unpadded layout, as Ruby's strptime("%d/%m/%Y") also takes
+			// one-digit days and months.
 			date, err := time.Parse("2/1/2006", obs.Fecha)
 			if err != nil {
 				return nil, fmt.Errorf("invalid fecha %q: %w", obs.Fecha, err)

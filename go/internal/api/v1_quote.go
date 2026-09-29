@@ -15,8 +15,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// v1Quote is Versions::V1::Quote::Base: ECB rates against the euro, scaled by an amount and rebased onto another
-// currency. v1EndOfDay and v1Interval supply the data and the response shape.
+// v1Quote is Versions::V1::Quote::Base: ECB rates against the euro, scaled by
+// an amount and rebased onto another currency. v1EndOfDay and v1Interval supply
+// the data and the response shape.
 type v1Quote struct {
 	Amount  float64 // defaults to 1
 	Base    string  // defaults to EUR
@@ -71,8 +72,9 @@ func (q *v1Quote) shouldRound() bool { return q.Amount != 1 || q.mustRebase() }
 // NotFound reports an empty result.
 func (q *v1Quote) NotFound() bool { return len(q.result.days) == 0 }
 
-// prepare scales each row by the amount, keyed by date and quote in the order rows arrive. A row whose stored
-// components resolve no rate fails the request, as Ruby's amount * nil raises.
+// prepare scales each row by the amount, keyed by date and quote in the order
+// rows arrive. A row whose stored components resolve no rate fails the request,
+// as Ruby's amount * nil raises.
 func (q *v1Quote) prepare(data []rates.Row) error {
 	for _, row := range data {
 		if math.IsNaN(row.Rate) {
@@ -90,8 +92,9 @@ func (q *v1Quote) prepare(data []rates.Row) error {
 	return nil
 }
 
-// rebase divides each date's rates by the new base's, adding the euro at the amount unless symbols leave it out. A
-// date without the base, or with nothing else, is dropped.
+// rebase divides each date's rates by the new base's, adding the euro at the
+// amount unless symbols leave it out. A date without the base, or with nothing
+// else, is dropped.
 func (q *v1Quote) rebase() error {
 	var kept []*day
 	for _, day := range q.result.days {
@@ -116,9 +119,10 @@ func (q *v1Quote) rebase() error {
 	return nil
 }
 
-// errNotFinite is Ruby's Roundable#round failing on an infinite or NaN value (an amount like 1e400, or a rebase onto
-// a currency whose rate rounded to zero): Float#round and Float() raise. errNoRate is a stored row with no resolvable
-// rate (one side of a quote only). V1 answers 422 to both.
+// errNotFinite is Ruby's Roundable#round failing on an infinite or NaN value
+// (an amount like 1e400, or a rebase onto a currency whose rate rounded to
+// zero): Float#round and Float() raise. errNoRate is a stored row with no
+// resolvable rate (one side of a quote only). V1 answers 422 to both.
 var (
 	errNotFinite = errors.New("rate is not a finite number")
 	errNoRate    = errors.New("nil can't be coerced into Float")
@@ -131,7 +135,8 @@ func v1Round(x float64) (float64, error) {
 	return rates.Round(x), nil
 }
 
-// dayRates is the result: rates per date, dates in first-seen order, as Ruby's insertion-ordered Hash.
+// dayRates is the result: rates per date, dates in first-seen order, as Ruby's
+// insertion-ordered Hash.
 type dayRates struct {
 	days  []*day
 	index map[string]*day
@@ -196,7 +201,8 @@ func md5Hex(s string) string {
 	return hex.EncodeToString(sum[:])
 }
 
-// ecbScope is ECB's stored rows, narrowed to the pairs of symbols plus the base when symbols are given.
+// ecbScope is ECB's stored rows, narrowed to the pairs of symbols plus the base
+// when symbols are given.
 func (q *v1Quote) ecbScope(base rates.Query) rates.Query {
 	if q.Symbols != nil {
 		base = base.Only(append(slices.Clone(q.Symbols), q.Base)...)
@@ -204,7 +210,8 @@ func (q *v1Quote) ecbScope(base rates.Query) rates.Query {
 	return base.Columns("rates.date, rates.base, rates.quote, rates.provider, rates.rate")
 }
 
-// v1EndOfDay is Quote::EndOfDay: the snapshot as of one date, carrying each rate forward up to 14 days.
+// v1EndOfDay is Quote::EndOfDay: the snapshot as of one date, carrying each
+// rate forward up to 14 days.
 type v1EndOfDay struct {
 	v1Quote
 	date time.Time
@@ -251,8 +258,8 @@ func (e *v1EndOfDay) CacheKey() string {
 	return md5Hex(e.result.days[0].date)
 }
 
-// v1Interval is Quote::Interval: every stored date in a range, the range widened back to the last publication on or
-// before its start.
+// v1Interval is Quote::Interval: every stored date in a range, the range
+// widened back to the last publication on or before its start.
 type v1Interval struct {
 	v1Quote
 	start, end time.Time
@@ -275,7 +282,8 @@ type v1IntervalBody struct {
 	Rates     map[string]map[string]float64 `json:"rates"`
 }
 
-// Formatted is the response: every date's rates, bounded by the first and last dates found.
+// Formatted is the response: every date's rates, bounded by the first and last
+// dates found.
 func (iv *v1Interval) Formatted() v1IntervalBody {
 	out := v1IntervalBody{Amount: iv.Amount, Base: iv.Base, Rates: map[string]map[string]float64{}}
 	days := iv.result.days

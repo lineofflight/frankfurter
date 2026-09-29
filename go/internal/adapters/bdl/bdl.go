@@ -1,16 +1,21 @@
-// Package bdl fetches rates from Banque du Liban, which publishes daily official rates of the Lebanese pound (LBP)
-// against seven currencies (USD, EUR, GBP, JPY, CHF, AUD, CAD).
+// Package bdl fetches rates from Banque du Liban, which publishes daily
+// official rates of the Lebanese pound (LBP) against seven currencies (USD,
+// EUR, GBP, JPY, CHF, AUD, CAD).
 //
-// They come as a single rolling XLS with one sheet per calendar year (current year and the two before it). Each sheet
-// has columns Period | Currency | Bid | Ask | Mid, newest row first, with Period as an Excel date cell. Rows before
-// the 2024-03-28 step to 89,500 carry a real bid/ask spread; since then bid, ask and mid coincide. We emit the
-// published Mid directly in both regimes, as "1 foreign = X LBP": foreign currency is the base, LBP the quote.
+// They come as a single rolling XLS with one sheet per calendar year (current
+// year and the two before it). Each sheet has columns Period | Currency | Bid |
+// Ask | Mid, newest row first, with Period as an Excel date cell. Rows before
+// the 2024-03-28 step to 89,500 carry a real bid/ask spread; since then bid,
+// ask and mid coincide. We emit the published Mid directly in both regimes, as
+// "1 foreign = X LBP": foreign currency is the base, LBP the quote.
 //
-// The workbook is the only archive: years drop off the file as it rolls forward, so anything older than the window
-// must already be stored. The site's HTML pages sit behind a Cloudflare JS challenge, but the XLS itself is served
+// The workbook is the only archive: years drop off the file as it rolls
+// forward, so anything older than the window must already be stored. The site's
+// HTML pages sit behind a Cloudflare JS challenge, but the XLS itself is served
 // plainly.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package bdl
 
 import (
@@ -44,7 +49,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter: a single XLS holds every year on offer, so one fetch covers it.
+// BackfillRange implements adapter.Adapter: a single XLS holds every year on
+// offer, so one fetch covers it.
 func (a *Adapter) BackfillRange() int { return 36_525 }
 
 // Fetch implements adapter.Adapter.
@@ -61,7 +67,8 @@ type key struct {
 	base string
 }
 
-// parse reads every sheet, keeping rows dated from after through upto, both inclusive; zero bounds are open.
+// parse reads every sheet, keeping rows dated from after through upto, both
+// inclusive; zero bounds are open.
 func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 	sheets, err := xls.Open(data)
 	if err != nil {
@@ -71,8 +78,9 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 		return nil, errors.New("workbook has no worksheets")
 	}
 
-	// The file occasionally repeats a day verbatim (2025-11-17 appears twice in the 2025 sheet). A repeat with a
-	// different mid is a conflict we cannot resolve by row order, so fail loudly rather than pick one.
+	// The file occasionally repeats a day verbatim (2025-11-17 appears twice in
+	// the 2025 sheet). A repeat with a different mid is a conflict we cannot
+	// resolve by row order, so fail loudly rather than pick one.
 	var rates []adapter.Rate
 	seen := map[key]float64{}
 	var conflicts []string

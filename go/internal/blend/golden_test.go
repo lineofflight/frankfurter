@@ -18,8 +18,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// tasksGolden is what go/scripts/blend_golden.rb records: the Ruby tasks' input rates, the tables after each stage,
-// and the consensus scan of the input.
+// tasksGolden is what go/scripts/blend_golden.rb records: the Ruby tasks' input
+// rates, the tables after each stage, and the consensus scan of the input.
 type tasksGolden struct {
 	Today     string         `json:"today"`
 	Rates     [][]any        `json:"rates"`
@@ -40,8 +40,9 @@ type tasksGolden struct {
 	Purge   map[string][][]any `json:"purge"`
 }
 
-// goldenRead is one BlendedRollup.read: rows nil when Ruby returned nil (fall back to live). With Dropped set, that
-// bucket was deleted first inside a rolled-back transaction.
+// goldenRead is one BlendedRollup.read: rows nil when Ruby returned nil (fall
+// back to live). With Dropped set, that bucket was deleted first inside a
+// rolled-back transaction.
 type goldenRead struct {
 	From    string  `json:"from"`
 	To      string  `json:"to"`
@@ -82,7 +83,8 @@ func insertGoldenRates(t *testing.T, conn *sql.DB, rows [][]any) {
 	}
 }
 
-// dumpTable reads table as rows of text keys and a trailing rate, ordered like the Ruby dump.
+// dumpTable reads table as rows of text keys and a trailing rate, ordered like
+// the Ruby dump.
 func dumpTable(t *testing.T, q db.Querier, table string) [][]any {
 	t.Helper()
 	cols := "bucket_date, provider, base, quote, rate"
@@ -125,7 +127,8 @@ func dumpTable(t *testing.T, q db.Querier, table string) [][]any {
 	return out
 }
 
-// compareTable pairs rows on every column but the last (the rate) and compares rates within 1e-9 relative.
+// compareTable pairs rows on every column but the last (the rate) and compares
+// rates within 1e-9 relative.
 func compareTable(t *testing.T, label string, want, got [][]any) {
 	t.Helper()
 	index := func(rows [][]any) map[string]float64 {
@@ -171,9 +174,10 @@ func compareStage(t *testing.T, q db.Querier, stage string, want map[string][][]
 	}
 }
 
-// TestGoldenTasks replays go/scripts/blend_golden.rb: the consensus scan, rollups:rebuild, blend:rebuild,
-// rollups:rebuild[ecb] after ECB's GBP rates move, then db:purge_invalid after rows beyond the future horizon are
-// inserted and rolled up. It compares every table Ruby produced at each stage.
+// TestGoldenTasks replays go/scripts/blend_golden.rb: the consensus scan,
+// rollups:rebuild, blend:rebuild, rollups:rebuild[ecb] after ECB's GBP rates
+// move, then db:purge_invalid after rows beyond the future horizon are inserted
+// and rolled up. It compares every table Ruby produced at each stage.
 func TestGoldenTasks(t *testing.T) {
 	g := loadTasksGolden(t)
 	today, err := db.ParseDate(g.Today)
@@ -219,7 +223,8 @@ func TestGoldenTasks(t *testing.T) {
 	}
 	compareStage(t, conn, "ecb", g.ECB)
 
-	// Ruby's leads come from its adapters; this package registers none, so take them from the golden file.
+	// Ruby's leads come from its adapters; this package registers none, so take
+	// them from the golden file.
 	insertGoldenRates(t, conn, g.Future)
 	if err := RebuildProviderRollups(ctx, conn, "", today); err != nil {
 		t.Fatal(err)
@@ -236,8 +241,9 @@ func TestGoldenTasks(t *testing.T) {
 	compareStage(t, conn, "purge", g.Purge)
 }
 
-// compareReads replays each recorded BlendedRollup.read through Rollup.Read: same fallback verdict, same rows in the
-// same order, rates within 1e-9 relative.
+// compareReads replays each recorded BlendedRollup.read through Rollup.Read:
+// same fallback verdict, same rows in the same order, rates within 1e-9
+// relative.
 func compareReads(t *testing.T, conn *sql.DB, reads map[string][]goldenRead, today time.Time) {
 	t.Helper()
 	for _, r := range Rollups {

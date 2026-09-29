@@ -1,7 +1,8 @@
 package blend
 
-// From spec/blend_parity_carveouts_spec.rb, at the table level. The query-level comparisons (table path versus live
-// path through RateQuery, BlendParity's explain_divergence, pivot-frame derive) need the API step's RateQuery.
+// From spec/blend_parity_carveouts_spec.rb, at the table level. The query-level
+// comparisons (table path versus live path through RateQuery, BlendParity's
+// explain_divergence, pivot-frame derive) need the API step's RateQuery.
 
 import (
 	"database/sql"
@@ -14,8 +15,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// liveBlend is the live pipeline at one anchor: the carry-forward snapshot of blendable rows, blended to the pivot and
-// peg-anchored, by quote.
+// liveBlend is the live pipeline at one anchor: the carry-forward snapshot of
+// blendable rows, blended to the pivot and peg-anchored, by quote.
 func liveBlend(t *testing.T, conn *sql.DB, anchor time.Time) map[string]currency.Blended {
 	t.Helper()
 	scope, err := blendable(ctx, conn, rates.Daily)
@@ -35,14 +36,15 @@ func liveBlend(t *testing.T, conn *sql.DB, anchor time.Time) map[string]currency
 	return out
 }
 
-// A stored row keeps the value blended at its own date, even after a contributor ages out of the lookback before a
-// later range start.
+// A stored row keeps the value blended at its own date, even after a
+// contributor ages out of the lookback before a later range start.
 func TestStoredRowsKeepCanonicalAnchorValue(t *testing.T) {
 	conn := fixtures.New(t)
 	observed := fixtures.BusinessDay(40)
 	stale := observed.AddDate(0, 0, -10)
 	rangeStart := observed.AddDate(0, 0, 12)
-	// Each fake provider carries its own EUR to USD bridge so the pivot rebase can use its rows.
+	// Each fake provider carries its own EUR to USD bridge so the pivot rebase
+	// can use its rows.
 	insertRates(t, conn,
 		[]any{"T1", day(observed), "EUR", "MXN", 20.0}, []any{"T1", day(observed), "EUR", "USD", 1.2},
 		[]any{"T2", day(stale), "EUR", "MXN", 40.0}, []any{"T2", day(stale), "EUR", "USD", 1.2})
@@ -63,8 +65,9 @@ func TestStoredRowsKeepCanonicalAnchorValue(t *testing.T) {
 	}
 }
 
-// An observation the consensus filter masked at its own anchor has no canonical value, so the table never stores it,
-// even though live snapshots surface it once the masking cohort ages out.
+// An observation the consensus filter masked at its own anchor has no canonical
+// value, so the table never stores it, even though live snapshots surface it
+// once the masking cohort ages out.
 func TestStoredRowsOmitConsensusMaskedObservations(t *testing.T) {
 	conn := fixtures.New(t)
 	d0 := fixtures.BusinessDay(40)

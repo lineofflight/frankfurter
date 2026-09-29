@@ -165,8 +165,9 @@ func TestParseHistoryNormalizesByUnitAndSkipsEmpty(t *testing.T) {
 	}
 }
 
-// Ruby stubs fetch_history and fetch_day; here a local server plays the landing page and 404s every dated page, which
-// fetchDay turns into the same empty body.
+// Ruby stubs fetch_history and fetch_day; here a local server plays the landing
+// page and 404s every dated page, which fetchDay turns into the same empty
+// body.
 func TestFetchLaterHistoryEntryWins(t *testing.T) {
 	payload := `"history":{"USD":[{"date":"2025-11-03","average":2193.4902,"unit":1},` +
 		`{"date":"2025-11-03","average":2261.1793,"unit":1}]}`

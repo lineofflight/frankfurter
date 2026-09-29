@@ -14,7 +14,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/ratequery"
 )
 
-// v2Currency is Currency#to_h; Providers and Peg are to_h_with_providers's additions.
+// v2Currency is Currency#to_h; Providers and Peg are to_h_with_providers's
+// additions.
 type v2Currency struct {
 	ISOCode    string    `json:"iso_code"`
 	ISONumeric *string   `json:"iso_numeric"`
@@ -164,7 +165,8 @@ func (c *v2Request) providers() {
 	writeJSON(c.w, http.StatusOK, contentTypeV2, out)
 }
 
-// providerEntry describes a provider that has stored any currency, known or not; nil otherwise.
+// providerEntry describes a provider that has stored any currency, known or
+// not; nil otherwise.
 func providerEntry(ctx context.Context, q db.Querier, p provider.Provider, today time.Time) (*v2Provider, error) {
 	rows, err := q.QueryContext(ctx,
 		"SELECT iso_code FROM currency_coverages WHERE provider_key = ? ORDER BY iso_code", p.Key)
@@ -221,6 +223,6 @@ func providerEntry(ctx context.Context, q db.Querier, p provider.Provider, today
 
 func validUTF8(s string) bool { return utf8.ValidString(s) }
 
-// errParamValue is what Ruby raises on a parameter it cannot treat as a string (a nested value, invalid UTF-8): an
-// internal error.
+// errParamValue is what Ruby raises on a parameter it cannot treat as a string
+// (a nested value, invalid UTF-8): an internal error.
 func errParamValue(key string) error { return fmt.Errorf("parameter %s is not a valid string", key) }

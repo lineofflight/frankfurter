@@ -1,18 +1,23 @@
-// Package bna fetches rates from Banco Nacional de Angola, which publishes daily reference rates for about 70
-// currencies against the Angolan kwanza (AOA), Mon-Fri from 2000-01-01 onwards.
+// Package bna fetches rates from Banco Nacional de Angola, which publishes
+// daily reference rates for about 70 currencies against the Angolan kwanza
+// (AOA), Mon-Fri from 2000-01-01 onwards.
 //
-// The time-series endpoint accepts a single currency per request, so we iterate the currency list and fetch each one
-// over the requested window. Query params must be lowercase (datainicio, datafim, tipocambio, moeda): mixed case
-// silently returns "datainicio 'null' inválida.". Each rate row carries tipoCambio in {B=venda/sell, G=compra/buy,
-// M=medio/mid}; we filter to mid via tipocambio=M.
+// The time-series endpoint accepts a single currency per request, so we iterate
+// the currency list and fetch each one over the requested window. Query params
+// must be lowercase (datainicio, datafim, tipocambio, moeda): mixed case
+// silently returns "datainicio 'null' inválida.". Each rate row carries
+// tipoCambio in {B=venda/sell, G=compra/buy, M=medio/mid}; we filter to mid via
+// tipocambio=M.
 //
-// XDRUSD is a non-ISO composite the API includes alongside real currencies. XAU is excluded too: BNA's series has
-// documented unit inconsistencies (mid-2024 rows alternate between AOA-per-ounce and USD-per-ounce in the same
-// column).
+// XDRUSD is a non-ISO composite the API includes alongside real currencies. XAU
+// is excluded too: BNA's series has documented unit inconsistencies (mid-2024
+// rows alternate between AOA-per-ounce and USD-per-ounce in the same column).
 //
-// Rates are published as 1 foreign = X AOA, so the foreign currency is the base and AOA the quote. The window is sent
-// to the API as is (after inclusive) and rows are not clipped afterwards, as in Ruby. Some series responses also carry
-// rows for other currencies; those are kept, duplicates included, as Ruby keeps them.
+// Rates are published as 1 foreign = X AOA, so the foreign currency is the base
+// and AOA the quote. The window is sent to the API as is (after inclusive) and
+// rows are not clipped afterwards, as in Ruby. Some series responses also carry
+// rows for other currencies; those are kept, duplicates included, as Ruby keeps
+// them.
 package bna
 
 import (
@@ -105,8 +110,8 @@ type row struct {
 	Currency *string `json:"codigoMoeda"`
 }
 
-// decode reads the {genericResponse: [...], success: bool} envelope. ok is false when the body is not an object or
-// genericResponse is not an array.
+// decode reads the {genericResponse: [...], success: bool} envelope. ok is
+// false when the body is not an object or genericResponse is not an array.
 func decode(data []byte) (fields map[string]json.RawMessage, rows []row, ok bool, err error) {
 	if err := json.Unmarshal(data, &fields); err != nil {
 		var probe any

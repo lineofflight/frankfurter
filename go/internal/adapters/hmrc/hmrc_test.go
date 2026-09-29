@@ -193,7 +193,8 @@ func TestParseRaisesOnMissingColumns(t *testing.T) {
 	}
 }
 
-// Ruby tags a charset-less body BINARY; Go has no encoding tags, so raw bytes are the only case.
+// Ruby tags a charset-less body BINARY; Go has no encoding tags, so raw bytes
+// are the only case.
 func TestParseBodyWithoutUTF8Tag(t *testing.T) {
 	if rates := mustParse(t, header+"USA,Dollar,USD,1.3554,01/09/2026,30/09/2026\n"); len(rates) != 1 {
 		t.Errorf("got %d rates, want 1", len(rates))
@@ -210,7 +211,8 @@ func TestParseDropsNonPositiveOrUnparseableRates(t *testing.T) {
 	}
 }
 
-// Ruby's CSV reads empty fields as nil, and parse skips rows missing a code, date or rate.
+// Ruby's CSV reads empty fields as nil, and parse skips rows missing a code,
+// date or rate.
 func TestParseSkipsRowsWithEmptyFields(t *testing.T) {
 	rates := mustParse(t, header+
 		"USA,Dollar,,1.3554,01/09/2026,30/09/2026\n"+

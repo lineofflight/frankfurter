@@ -70,7 +70,8 @@ func storedRate(t *testing.T, q db.Querier, r Rollup, bucket, quote string) floa
 	return queryFloat(t, q, "SELECT rate FROM "+r.Table+" WHERE bucket_date = ? AND quote = ?", bucket, quote)
 }
 
-// snapshot is model.dataset.order(:bucket_date, :quote).all.map(&:values), optionally filtered.
+// snapshot is model.dataset.order(:bucket_date, :quote).all.map(&:values),
+// optionally filtered.
 func snapshot(t *testing.T, q db.Querier, table, where string, args ...any) []string {
 	t.Helper()
 	if where == "" {
@@ -110,7 +111,8 @@ func insertSource(t *testing.T, q db.Querier, r Rollup, bucket, provider, base, 
 		bucket, provider, base, quote, rate)
 }
 
-// groupedSetup is the per-model before block: empty tables and three source rows on 2024-01-01.
+// groupedSetup is the per-model before block: empty tables and three source
+// rows on 2024-01-01.
 func groupedSetup(t *testing.T, r Rollup) *sql.DB {
 	conn := fixtures.New(t)
 	exec(t, conn, "DELETE FROM "+r.Source.Name)
@@ -289,7 +291,8 @@ func TestRollupRestoresRowsWhenInsertFailsAfterDelete(t *testing.T) {
 		rebuild(t, conn, r)
 		before := snapshot(t, conn, r.Table, "")
 		exec(t, conn, "UPDATE "+r.Source.Name+" SET rate = 9.0 WHERE quote = 'CHF'")
-		// The trigger reports whether the old bucket was already deleted when the insert arrived.
+		// The trigger reports whether the old bucket was already deleted when
+		// the insert arrived.
 		exec(t, conn, "CREATE TRIGGER fail_insert BEFORE INSERT ON "+r.Table+" BEGIN SELECT CASE WHEN (SELECT count(*) FROM "+
 			r.Table+" WHERE bucket_date = '"+jan1+"') = 0 THEN RAISE(ABORT, 'failed insert after delete') ELSE "+
 			"RAISE(ABORT, 'failed insert before delete') END; END")
@@ -328,8 +331,9 @@ func TestRollupBoundsSourceReads(t *testing.T) {
 	})
 }
 
-// Grouped blend ingestion. Provider#backfill belongs to the provider step; ingest reproduces the transaction it runs
-// per fetched batch, so these cases check that the grouped refreshes join it, fail it and roll back with it.
+// Grouped blend ingestion. Provider#backfill belongs to the provider step;
+// ingest reproduces the transaction it runs per fetched batch, so these cases
+// check that the grouped refreshes join it, fail it and roll back with it.
 func ingest(t *testing.T, conn *sql.DB, provider string, records []adapter.Rate, purge func()) error {
 	t.Helper()
 	inserted := 0
@@ -398,7 +402,8 @@ func TestIngestionRefreshesAffectedBucketsBeforePurge(t *testing.T) {
 	err := ingest(t, conn, "BCB", records, func() {
 		for _, r := range Rollups {
 			stored := storedRate(t, conn, r, buckets[r.Table], "EUR")
-			// The new provider changes the EUR blend in the bucket; compare to a fresh full-source refresh.
+			// The new provider changes the EUR blend in the bucket; compare to
+			// a fresh full-source refresh.
 			refresh(t, conn, r, buckets[r.Table])
 			if fresh := storedRate(t, conn, r, buckets[r.Table], "EUR"); fresh != stored {
 				t.Errorf("%s: stored %v, fresh %v", r.Table, stored, fresh)
@@ -554,7 +559,8 @@ func TestReadUsesOneSnapshot(t *testing.T) {
 			return
 		}
 		changed = true
-		// Another pooled connection commits a change between the coverage and value queries.
+		// Another pooled connection commits a change between the coverage and
+		// value queries.
 		if err := db.Immediate(ctx, conn, func(q db.Querier) error {
 			if _, err := q.ExecContext(ctx, "UPDATE weekly_rates SET rate = 0.9 WHERE bucket_date = ?", jan1); err != nil {
 				return err

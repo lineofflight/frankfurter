@@ -10,9 +10,10 @@ import (
 // defaultFontSize is pdf-reader's PageLayout::DEFAULT_FONT_SIZE.
 const defaultFontSize = 12
 
-// Text lays the page's runs out on a character grid, as pdf-reader's PageLayout#to_s: rows are the mean font size
-// tall and columns the median glyph width wide (plus 5%), each run is written at its grid position, and blank rows
-// above and below the text are trimmed.
+// Text lays the page's runs out on a character grid, as pdf-reader's
+// PageLayout#to_s: rows are the mean font size tall and columns the median
+// glyph width wide (plus 5%), each run is written at its grid position, and
+// blank rows above and below the text are trimmed.
 func (p Page) Text() string {
 	if len(p.Runs) == 0 {
 		return ""
@@ -83,8 +84,8 @@ func (p Page) Text() string {
 // rubySpace is what Ruby's strip and rstrip remove.
 const rubySpace = " \t\n\v\f\r\x00"
 
-// insert overwrites row from index onwards with text, growing the row if text runs past its end, as Ruby's
-// haystack[index, needle.length] = needle.
+// insert overwrites row from index onwards with text, growing the row if text
+// runs past its end, as Ruby's haystack[index, needle.length] = needle.
 func insert(row, text []rune, index int) []rune {
 	end := index + len(text)
 	if end > len(row) {

@@ -1,9 +1,10 @@
-// Package api serves Frankfurter's HTTP API (lib/app.rb): the index, static files and OpenAPI documents, and each API
-// version, behind the same middleware as the Ruby app (v1 deprecation headers, request timeout, no-store on errors,
+// Package api serves Frankfurter's HTTP API (lib/app.rb): the index, static
+// files and OpenAPI documents, and each API version, behind the same middleware
+// as the Ruby app (v1 deprecation headers, request timeout, no-store on errors,
 // noindex, CORS).
 //
-// Each version lives in its own files and adds its routes from init through registerVersion, so a new version never
-// edits this file.
+// Each version lives in its own files and adds its routes from init through
+// registerVersion, so a new version never edits this file.
 package api
 
 import (
@@ -22,18 +23,21 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Server holds what the handlers share. Build it with a DB and call Handler; zero fields take the defaults below.
+// Server holds what the handlers share. Build it with a DB and call Handler;
+// zero fields take the defaults below.
 type Server struct {
 	DB *sql.DB
 
 	// Today is Ruby's Date.today; defaults to rates.Today.
 	Today func() time.Time
 
-	// Timeout is the request deadline (REQUEST_TIMEOUT_SECONDS, default 90s); defaults to DefaultTimeout.
+	// Timeout is the request deadline (REQUEST_TIMEOUT_SECONDS, default 90s);
+	// defaults to DefaultTimeout.
 	Timeout time.Duration
 
-	// HeavySlots caps concurrent live range computes (v2's RateQuery.heavy_slots). The v2 routes own its default;
-	// tests set it to exhaust the cap.
+	// HeavySlots caps concurrent live range computes (v2's
+	// RateQuery.heavy_slots). The v2 routes own its default; tests set it to
+	// exhaust the cap.
 	HeavySlots *heavyslots.Slots
 }
 
@@ -42,7 +46,8 @@ var versionRoutes []func(s *Server, mux *http.ServeMux)
 
 func registerVersion(f func(s *Server, mux *http.ServeMux)) { versionRoutes = append(versionRoutes, f) }
 
-// Handler returns the app wrapped in its middleware, outermost first as lib/app.rb lists it.
+// Handler returns the app wrapped in its middleware, outermost first as
+// lib/app.rb lists it.
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/{$}", s.root)
@@ -60,8 +65,9 @@ func (s *Server) Handler() http.Handler {
 	return h
 }
 
-// rawPaths routes a path ServeMux would clean and redirect (/v1//latest) the way Roda, which matches the raw path,
-// does: v2 routes it itself, and nothing else matches, so it is a 404.
+// rawPaths routes a path ServeMux would clean and redirect (/v1//latest) the
+// way Roda, which matches the raw path, does: v2 routes it itself, and nothing
+// else matches, so it is a 404.
 func (s *Server) rawPaths(mux http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		p := r.URL.Path
@@ -94,8 +100,9 @@ func (s *Server) timeout() time.Duration {
 	return DefaultTimeout
 }
 
-// DefaultTimeout is REQUEST_TIMEOUT_SECONDS, or 90 seconds. It parses like Ruby's Integer() and panics at startup on
-// an invalid value, as Integer() raises on load.
+// DefaultTimeout is REQUEST_TIMEOUT_SECONDS, or 90 seconds. It parses like
+// Ruby's Integer() and panics at startup on an invalid value, as Integer()
+// raises on load.
 var DefaultTimeout = defaultTimeout()
 
 func defaultTimeout() time.Duration {
@@ -142,7 +149,8 @@ var rootPayload = struct {
 	Source: "https://github.com/lineofflight/frankfurter",
 }
 
-// root answers GET / only, as Roda's r.root does; other methods fall through to not found.
+// root answers GET / only, as Roda's r.root does; other methods fall through to
+// not found.
 func (s *Server) root(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		notFound(w, contentTypeJSON)

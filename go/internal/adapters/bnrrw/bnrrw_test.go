@@ -94,8 +94,8 @@ func TestParseThousandsCommas(t *testing.T) {
 	}
 }
 
-// Covers "skips entries with non-positive rates", "skips entries with missing average_rate" and "returns an empty
-// array for an empty response".
+// Covers "skips entries with non-positive rates", "skips entries with missing
+// average_rate" and "returns an empty array for an empty response".
 func TestParseSkips(t *testing.T) {
 	tests := map[string]string{
 		"non-positive rates":   `[{"currency_name":"USD","buying_rate":"0","average_rate":"0","selling_rate":"0","post_date":"22-May-26"}]`,

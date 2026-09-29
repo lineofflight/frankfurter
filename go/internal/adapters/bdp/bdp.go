@@ -1,11 +1,15 @@
-// Package bdp fetches rates from Banco de Portugal, which published pre-euro daily PTE reference rates, now served
-// by BPstat as JSON-stat 2.0. Coverage runs from 1987-01-02 through 1998-12-31, when the euro replaced the escudo.
+// Package bdp fetches rates from Banco de Portugal, which published pre-euro
+// daily PTE reference rates, now served by BPstat as JSON-stat 2.0. Coverage
+// runs from 1987-01-02 through 1998-12-31, when the euro replaced the escudo.
 //
-// Direction: foreign currency in base, PTE in quote (1 foreign = X PTE), like the other pivot-in-quote adapters.
+// Direction: foreign currency in base, PTE in quote (1 foreign = X PTE), like
+// the other pivot-in-quote adapters.
 //
-// The dim_cats filter restricts to BdP-authored, PTE-referenced, daily series. Post-1999 EUR-quoted PTE series are
-// sourced from LSEG (redistribution-restricted) and are structurally excluded by source=BdP, not by date. Post-1999
-// BdP-authored EUR rates would mirror ECB and are also excluded by reference=PTE.
+// The dim_cats filter restricts to BdP-authored, PTE-referenced, daily series.
+// Post-1999 EUR-quoted PTE series are sourced from LSEG
+// (redistribution-restricted) and are structurally excluded by source=BdP, not
+// by date. Post-1999 BdP-authored EUR rates would mirror ECB and are also
+// excluded by reference=PTE.
 package bdp
 
 import (
@@ -24,14 +28,18 @@ import (
 
 const datasetURL = "https://bpstat.bportugal.pt/data/v1/domains/29/datasets/23e0cdd56bddb4ad3016a9c3ad63a539/"
 
-// dimCats are reference=PTE (794), source=Banco de Portugal (35), periodicity=daily (4263). They go on every page
-// request: the API's next_page URL drops some of them, which lets non-BdP-sourced rows bleed into the result set.
+// dimCats are reference=PTE (794), source=Banco de Portugal (35),
+// periodicity=daily (4263). They go on every page request: the API's next_page
+// URL drops some of them, which lets non-BdP-sourced rows bleed into the result
+// set.
 var dimCats = []string{"13:794", "18:35", "40:4263"}
 
-// labelCode finds the ISO code in a series label, e.g. "US, Dollars (USD) against Escudo - daily".
+// labelCode finds the ISO code in a series label, e.g. "US, Dollars (USD)
+// against Escudo - daily".
 var labelCode = regexp.MustCompile(`\(([A-Z]{3})\)`)
 
-// codeRemap maps BdP's "ECU" to the ISO 4217 code for the European Currency Unit.
+// codeRemap maps BdP's "ECU" to the ISO 4217 code for the European Currency
+// Unit.
 var codeRemap = map[string]string{"ECU": "XEU"}
 
 func init() {
@@ -140,8 +148,9 @@ func (res *response) rates() ([]adapter.Rate, error) {
 		values = *res.Value
 	}
 	if len(dates) == 0 {
-		// The dataset ends 1998-12-31; later windows return a well-formed empty JSON-stat body: an explicit empty
-		// value array and series list alongside the empty date index.
+		// The dataset ends 1998-12-31; later windows return a well-formed empty
+		// JSON-stat body: an explicit empty value array and series list
+		// alongside the empty date index.
 		if res.Value != nil && len(values) == 0 && res.Extension != nil && res.Extension.Series != nil &&
 			len(*res.Extension.Series) == 0 {
 			return nil, nil
@@ -178,7 +187,8 @@ func (res *response) rates() ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// codes maps counterparty category ids to ISO codes taken from the series labels.
+// codes maps counterparty category ids to ISO codes taken from the series
+// labels.
 func (res *response) codes() map[string]string {
 	codes := map[string]string{}
 	if res.Extension == nil || res.Extension.Series == nil {

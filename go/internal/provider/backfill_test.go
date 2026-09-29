@@ -16,7 +16,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// fakeAdapter stands in for Class.new(Provider::Adapters::Adapter) in the Ruby spec.
+// fakeAdapter stands in for Class.new(Provider::Adapters::Adapter) in the Ruby
+// spec.
 type fakeAdapter struct {
 	fetch         func(after, upto time.Time) ([]adapter.Rate, error)
 	backfillRange int
@@ -41,7 +42,8 @@ func rate(date time.Time, base, quote string, r float64) adapter.Rate {
 	return adapter.Rate{Date: date, Base: base, Quote: quote, Rate: r}
 }
 
-// logRecorder is an slog.Handler that keeps every record with its attributes flattened to text.
+// logRecorder is an slog.Handler that keeps every record with its attributes
+// flattened to text.
 type logRecorder struct {
 	mu      *sync.Mutex
 	records *[]logged
@@ -187,7 +189,8 @@ func (e *env) rate(t *testing.T, where string, args ...any) float64 {
 
 func d(t time.Time) string { return db.FormatDate(t) }
 
-// defaultAdapter is the spec's `adapter`: one EUR/USD row at importDate, recording each fetch's window.
+// defaultAdapter is the spec's `adapter`: one EUR/USD row at importDate,
+// recording each fetch's window.
 func defaultAdapter(importDate time.Time, params *[][2]time.Time) *fakeAdapter {
 	return &fakeAdapter{fetch: func(after, upto time.Time) ([]adapter.Rate, error) {
 		if params != nil {

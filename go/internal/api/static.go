@@ -10,14 +10,16 @@ import (
 	"time"
 )
 
-// public is a copy of lib/public (go:embed cannot reach outside the module). Refresh it with go generate
-// ./internal/api; TestPublicMatchesRepository fails while the copies differ.
+// public is a copy of lib/public (go:embed cannot reach outside the module).
+// Refresh it with go generate ./internal/api; TestPublicMatchesRepository fails
+// while the copies differ.
 //
 //go:generate sh -c "rm -rf public && cp -R ../../../lib/public public"
 //go:embed public
 var public embed.FS
 
-// staticFiles maps each served path to its file under public, as the Roda static plugin lists them.
+// staticFiles maps each served path to its file under public, as the Roda
+// static plugin lists them.
 var staticFiles = map[string]string{
 	"/favicon.ico":     "favicon.ico",
 	"/robots.txt":      "robots.txt",
@@ -31,9 +33,10 @@ var staticTypes = map[string]string{
 	".json": "application/json",
 }
 
-// staticRoute serves a static file for any path that names it once cleaned as Rack's clean_path_info does
-// (/robots.txt/, /v1//openapi.json, /x/../favicon.ico): Rack::Static matches the cleaned path and Rack::Files serves
-// it. It runs ahead of the mux, which would redirect or 404 those paths.
+// staticRoute serves a static file for any path that names it once cleaned as
+// Rack's clean_path_info does (/robots.txt/, /v1//openapi.json,
+// /x/../favicon.ico): Rack::Static matches the cleaned path and Rack::Files
+// serves it. It runs ahead of the mux, which would redirect or 404 those paths.
 func staticRoute(next http.Handler) http.Handler {
 	handlers := map[string]http.Handler{}
 	for path, file := range staticFiles {
@@ -48,8 +51,9 @@ func staticRoute(next http.Handler) http.Handler {
 	})
 }
 
-// cleanPathInfo is Rack::Utils.clean_path_info: split on slashes and backslashes, drop empty and "." segments, let
-// ".." pop one, and rejoin under a leading slash.
+// cleanPathInfo is Rack::Utils.clean_path_info: split on slashes and
+// backslashes, drop empty and "." segments, let ".." pop one, and rejoin under
+// a leading slash.
 func cleanPathInfo(p string) string {
 	var clean []string
 	for _, part := range strings.FieldsFunc(p, func(r rune) bool { return r == '/' || r == '\\' }) {
@@ -66,8 +70,9 @@ func cleanPathInfo(p string) string {
 	return "/" + strings.Join(clean, "/")
 }
 
-// static serves one embedded file like Rack::Files behind Rack::Static's header rule: a day of public caching, GET and
-// HEAD (with conditional and range requests), an empty OPTIONS answer, and 405 for anything else.
+// static serves one embedded file like Rack::Files behind Rack::Static's header
+// rule: a day of public caching, GET and HEAD (with conditional and range
+// requests), an empty OPTIONS answer, and 405 for anything else.
 func static(file string) http.Handler {
 	data, err := fs.ReadFile(public, path.Join("public", file))
 	if err != nil {

@@ -1,5 +1,6 @@
-// Package nbkr fetches rates from the National Bank of the Kyrgyz Republic, which publishes daily rates for 5 major
-// currencies (USD, EUR, RUB, KZT, CNY) and weekly rates for about 35 others against the som (KGS).
+// Package nbkr fetches rates from the National Bank of the Kyrgyz Republic,
+// which publishes daily rates for 5 major currencies (USD, EUR, RUB, KZT, CNY)
+// and weekly rates for about 35 others against the som (KGS).
 //
 // Two tracks:
 //
@@ -9,9 +10,10 @@
 //     NBKR's internal valuta_id, for the requested window. Nominals are not in the response, so they live in
 //     defaultCurrencies alongside the ISO mapping taken from the landing page's <select> options.
 //
-// Fetch uses the XML feed when the window is open or reaches today, and the HTML scrape for bounded windows strictly
-// in the past. Rows keep NBKR's direction: foreign currency as base, KGS as quote. Unlike most adapters, after is
-// inclusive, as in the Ruby adapter.
+// Fetch uses the XML feed when the window is open or reaches today, and the
+// HTML scrape for bounded windows strictly in the past. Rows keep NBKR's
+// direction: foreign currency as base, KGS as quote. Unlike most adapters,
+// after is inclusive, as in the Ruby adapter.
 package nbkr
 
 import (
@@ -49,8 +51,9 @@ type currency struct {
 	nominal int
 }
 
-// NBKR's historical page identifies each currency by an internal valuta_id and publishes rates per nominal units.
-// Some currencies appear twice across a redenomination (BYR/BYN, RUR/RUB, AZM/AZN, TRL/TRY); each id covers its own
+// NBKR's historical page identifies each currency by an internal valuta_id and
+// publishes rates per nominal units. Some currencies appear twice across a
+// redenomination (BYR/BYN, RUR/RUB, AZM/AZN, TRL/TRY); each id covers its own
 // slice of history.
 var defaultCurrencies = []currency{
 	{15, "USD", 1}, {56, "AUD", 1}, {16, "ATS", 1}, {82, "AZN", 1}, {37, "AZM", 1000}, {17, "GBP", 1},
@@ -81,8 +84,9 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{Base: adapter.NewBase(client), currencies: defaultCurrencies}
 }
 
-// BackfillRange implements adapter.Adapter. Per-currency historical pages return up to about 366 rows, so one year
-// per chunk keeps each request bounded.
+// BackfillRange implements adapter.Adapter. Per-currency historical pages
+// return up to about 366 rows, so one year per chunk keeps each request
+// bounded.
 func (a *Adapter) BackfillRange() int { return 365 }
 
 // Fetch implements adapter.Adapter.
@@ -126,8 +130,9 @@ func (a *Adapter) fetchLive(ctx context.Context) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// fetchHistorical requests each currency's series in turn. NBKR drops connections after about 20 fresh TLS sessions
-// in quick succession; the client keeps one connection alive and the sleep paces the requests further.
+// fetchHistorical requests each currency's series in turn. NBKR drops
+// connections after about 20 fresh TLS sessions in quick succession; the client
+// keeps one connection alive and the sleep paces the requests further.
 func (a *Adapter) fetchHistorical(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for i, c := range a.currencies {
@@ -211,8 +216,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseHistorical reads the per-currency HTML series, whose cells are wrapped in <!--date--> and <!--value-->
-// comment markers.
+// parseHistorical reads the per-currency HTML series, whose cells are wrapped
+// in <!--date--> and <!--value--> comment markers.
 func parseHistorical(html []byte, iso string, nominal int) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, m := range historicalRow.FindAllSubmatch(html, -1) {

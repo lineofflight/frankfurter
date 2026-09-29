@@ -1,7 +1,9 @@
-// Package boj fetches rates from the Bank of Japan, which publishes daily Tokyo-market spot rates for USD/JPY and
-// EUR/USD through its Statistics API. No authentication is required, and these two pairs are all the API offers.
+// Package boj fetches rates from the Bank of Japan, which publishes daily
+// Tokyo-market spot rates for USD/JPY and EUR/USD through its Statistics API.
+// No authentication is required, and these two pairs are all the API offers.
 //
-// Unlike most adapters, Fetch includes rows dated on after itself, as the Ruby adapter's between? does.
+// Unlike most adapters, Fetch includes rows dated on after itself, as the Ruby
+// adapter's between? does.
 package boj
 
 import (

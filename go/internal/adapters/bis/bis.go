@@ -1,10 +1,13 @@
-// Package bis fetches the Bank for International Settlements' WS_XRU monthly end-of-period USD exchange rates.
+// Package bis fetches the Bank for International Settlements' WS_XRU monthly
+// end-of-period USD exchange rates.
 //
-// These are distinct from its monthly averages and daily series. Historical observations can be restated in successor
-// units; never reconstruct predecessor magnitudes. https://www.bis.org/statistics/xrusd/xrusd_doc.pdf documents the
-// national sources and historical adjustments.
+// These are distinct from its monthly averages and daily series. Historical
+// observations can be restated in successor units; never reconstruct
+// predecessor magnitudes. https://www.bis.org/statistics/xrusd/xrusd_doc.pdf
+// documents the national sources and historical adjustments.
 //
-// Fetch treats after as inclusive, as the Ruby adapter does (it selects dates between after and upto).
+// Fetch treats after as inclusive, as the Ruby adapter does (it selects dates
+// between after and upto).
 package bis
 
 import (
@@ -29,9 +32,11 @@ var (
 	coverageStart = adapter.Date(1900, 1, 1)
 	columns       = []string{"FREQ", "REF_AREA", "CURRENCY", "COLLECTION", "TIME_PERIOD", "OBS_VALUE", "UNIT_MULT"}
 
-	// National EUR series are synthetic legacy-currency histories and differ before euro adoption. XM is the actual
-	// euro-area/ECU series. The currency unions also have differing national histories (especially Guinea-Bissau's
-	// XOF series). Select a fixed representative area, not whichever row happens to arrive first.
+	// National EUR series are synthetic legacy-currency histories and differ
+	// before euro adoption. XM is the actual euro-area/ECU series. The currency
+	// unions also have differing national histories (especially Guinea-Bissau's
+	// XOF series). Select a fixed representative area, not whichever row
+	// happens to arrive first.
 	areas = map[string]string{"EUR": "XM", "AUD": "AU", "XOF": "WA", "XAF": "CM", "XCD": "AG"}
 )
 
@@ -55,10 +60,12 @@ func (a *Adapter) BackfillRange() int { return 3650 }
 // Revises implements adapter.Adapter.
 func (a *Adapter) Revises() bool { return true }
 
-// FetchEach replaces adapter.FetchEach for BIS, as the Ruby class overrides fetch_each.
+// FetchEach replaces adapter.FetchEach for BIS, as the Ruby class overrides
+// fetch_each.
 //
-// Major currencies arrive ahead of many IMF-sourced series. Provider resumes from the newest observation, so revisit a
-// year to catch late monthly rows and flag recent revisions. Older revisions need a manual backfill.
+// Major currencies arrive ahead of many IMF-sourced series. Provider resumes
+// from the newest observation, so revisit a year to catch late monthly rows and
+// flag recent revisions. Older revisions need a manual backfill.
 func (a *Adapter) FetchEach(ctx context.Context, after time.Time, yield func([]adapter.Rate) error) error {
 	return fetchEach(ctx, a, after, a.Today(), yield)
 }
@@ -76,7 +83,8 @@ func fetchEach(ctx context.Context, a adapter.Adapter, after, today time.Time, y
 	return adapter.FetchEach(ctx, a, after, today, yield)
 }
 
-// yearBefore is Ruby's date << 12: the same day a year earlier, clamped to the month's end (2024-02-29 -> 2023-02-28).
+// yearBefore is Ruby's date << 12: the same day a year earlier, clamped to the
+// month's end (2024-02-29 -> 2023-02-28).
 func yearBefore(d time.Time) time.Time {
 	prev := d.AddDate(-1, 0, 0)
 	if prev.Day() != d.Day() {
@@ -193,8 +201,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// decimal reads s as BigDecimal(s, exception: false) does for plain decimal text. NaN and infinities, which BigDecimal
-// parses but the adapter rejects as non-finite, fail here directly.
+// decimal reads s as BigDecimal(s, exception: false) does for plain decimal
+// text. NaN and infinities, which BigDecimal parses but the adapter rejects as
+// non-finite, fail here directly.
 func decimal(s string) (*big.Rat, bool) {
 	s = strings.TrimSpace(s)
 	if s == "" || strings.ContainsAny(s, "/xXbBoO") {
@@ -212,12 +221,15 @@ func abs(n int) int {
 
 func currency(code string, date time.Time) string {
 	switch {
-	// SLL is restated throughout in new-leone units (2017-12: 7.53696; 2022-06: 13.15315; 2022-07: 13.88).
+	// SLL is restated throughout in new-leone units (2017-12: 7.53696; 2022-06:
+	// 13.15315; 2022-07: 13.88).
 	case code == "SLL":
 		return "SLE"
-	// VEF stops in 2018-07 at 172368, then resumes in 2019-06 at 6550.047641 in soberano units. The 2021
-	// redenomination retains VES, matching BCV's own series. MRO and STD remain in genuine predecessor units even
-	// after retirement (2024-08 MRO: 396; 2026-06 STD: 21479.9), so their labels and values are preserved.
+	// VEF stops in 2018-07 at 172368, then resumes in 2019-06 at 6550.047641 in
+	// soberano units. The 2021 redenomination retains VES, matching BCV's own
+	// series. MRO and STD remain in genuine predecessor units even after
+	// retirement (2024-08 MRO: 396; 2026-06 STD: 21479.9), so their labels and
+	// values are preserved.
 	case code == "VEF" && !date.Before(adapter.Date(2019, 6, 1)):
 		return "VES"
 	case code == "EUR" && date.Before(adapter.Date(1999, 1, 1)):

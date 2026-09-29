@@ -13,7 +13,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 )
 
-// spec/app_spec.rb, except the cases that need the v2 routes (see docs/core-api_v1.md).
+// spec/app_spec.rb, except the cases that need the v2 routes (see
+// docs/core-api_v1.md).
 
 func TestServesRoot(t *testing.T) {
 	a := newTestApp(t)
@@ -231,8 +232,9 @@ func TestErrorResponsesAreNotCached(t *testing.T) {
 	}
 }
 
-// Roda matches the raw path, so paths ServeMux would clean are routed rather than redirected (checked against the
-// Ruby app): an empty segment is captured in v2, and matches nothing elsewhere.
+// Roda matches the raw path, so paths ServeMux would clean are routed rather
+// than redirected (checked against the Ruby app): an empty segment is captured
+// in v2, and matches nothing elsewhere.
 func TestRoutesUncleanPathsAsRoda(t *testing.T) {
 	a := newTestApp(t)
 	for path, status := range map[string]int{

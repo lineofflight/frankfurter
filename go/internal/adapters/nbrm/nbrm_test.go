@@ -91,9 +91,10 @@ func TestParseNormalizesNomin(t *testing.T) {
 
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
-	// Ruby VCR, with allow_playback_repeats, serves unused interactions before repeating one, so the two chunk
-	// requests got the two recorded responses. vcrtest's repeat mode always replays the first host match, so replay
-	// by exact URI instead, which picks the same interactions Ruby did.
+	// Ruby VCR, with allow_playback_repeats, serves unused interactions before
+	// repeating one, so the two chunk requests got the two recorded responses.
+	// vcrtest's repeat mode always replays the first host match, so replay by
+	// exact URI instead, which picks the same interactions Ruby did.
 	a := New(vcrtest.Client(t, "nbrm", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
 	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 5, 30))
 	if err != nil {

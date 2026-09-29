@@ -6,8 +6,9 @@ import (
 	"sort"
 )
 
-// runs applies pdf-reader's PageTextReceiver#runs pipeline to raw glyphs: keep those whose origin lies in the crop
-// box, drop zero-width and overlapping duplicates (text painted twice to fake bold), and merge the rest into runs.
+// runs applies pdf-reader's PageTextReceiver#runs pipeline to raw glyphs: keep
+// those whose origin lies in the crop box, drop zero-width and overlapping
+// duplicates (text painted twice to fake bold), and merge the rest into runs.
 func runs(glyphs []Run, crop Rect) []Run {
 	kept := glyphs[:0:0]
 	for _, g := range glyphs {
@@ -18,8 +19,8 @@ func runs(glyphs []Run, crop Rect) []Run {
 	return merge(withoutOverlaps(kept))
 }
 
-// withoutOverlaps is pdf-reader's OverlappingRunsFilter: a sweep over x that drops a run when an open run with the
-// same text covers at least half of it.
+// withoutOverlaps is pdf-reader's OverlappingRunsFilter: a sweep over x that
+// drops a run when an open run with the same text covers at least half of it.
 func withoutOverlaps(glyphs []Run) []Run {
 	type event struct {
 		x     float64
@@ -71,8 +72,8 @@ func overlapShare(a, b Run) float64 {
 	return dx * dy / ((a.EndX() - a.X) * (a.EndY() - a.Y))
 }
 
-// merge groups glyphs by truncated baseline, joins neighbours left to right, and returns the runs top to bottom,
-// then left to right.
+// merge groups glyphs by truncated baseline, joins neighbours left to right,
+// and returns the runs top to bottom, then left to right.
 func merge(glyphs []Run) []Run {
 	lines := map[int][]Run{}
 	var order []int
@@ -102,7 +103,8 @@ func merge(glyphs []Run) []Run {
 	return merged
 }
 
-// sortRuns orders runs as pdf-reader's TextRun#<=>: higher on the page first, then left to right.
+// sortRuns orders runs as pdf-reader's TextRun#<=>: higher on the page first,
+// then left to right.
 func sortRuns(rs []Run) {
 	sort.SliceStable(rs, func(i, j int) bool {
 		if rs[i].Y != rs[j].Y {

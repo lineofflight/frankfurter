@@ -1,8 +1,8 @@
-// Package nrb fetches rates from Nepal Rastra Bank, which publishes daily buy and sell rates for 22 currencies against
-// NPR through a paginated JSON API.
+// Package nrb fetches rates from Nepal Rastra Bank, which publishes daily buy
+// and sell rates for 22 currencies against NPR through a paginated JSON API.
 //
-// The rate is the midpoint of buy and sell. Currencies quoted per several units (JPY per 10, say) are divided down to
-// one unit.
+// The rate is the midpoint of buy and sell. Currencies quoted per several units
+// (JPY per 10, say) are divided down to one unit.
 package nrb
 
 import (
@@ -48,7 +48,8 @@ type response struct {
 	} `json:"pagination"`
 }
 
-// Fetch implements adapter.Adapter. The API filters by date itself, so rows are not clipped again.
+// Fetch implements adapter.Adapter. The API filters by date itself, so rows are
+// not clipped again.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -108,7 +109,8 @@ type entry struct {
 	Sell any `json:"sell"`
 }
 
-// parse reads the API's payload: an array of days, or a JSON string holding one.
+// parse reads the API's payload: an array of days, or a JSON string holding
+// one.
 func parse(payload []byte) ([]adapter.Rate, error) {
 	payload = bytes.TrimSpace(payload)
 	if len(payload) > 0 && payload[0] == '"' {

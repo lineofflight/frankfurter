@@ -1,16 +1,19 @@
-// Package bsp fetches Bangko Sentral ng Pilipinas' daily Reference Exchange Rate Bulletin (RERB), published every
-// business day as a single PDF.
+// Package bsp fetches Bangko Sentral ng Pilipinas' daily Reference Exchange
+// Rate Bulletin (RERB), published every business day as a single PDF.
 //
-// We relay one figure from it: the "BSP Reference Rate", BSP's own official USD/PHP mid (1 USD = X PHP). It is the
-// only rate in the bulletin BSP actually computes. The rest is third-party data BSP reprints (an LSEG peso table, the
-// IMF SDR rate, LBMA gold and silver), already covered by official sources elsewhere in the blend, so we skip it. The
-// peso table is anchored on LSEG's USD/PHP, which differs from the Reference Rate. See #533.
+// We relay one figure from it: the "BSP Reference Rate", BSP's own official
+// USD/PHP mid (1 USD = X PHP). It is the only rate in the bulletin BSP actually
+// computes. The rest is third-party data BSP reprints (an LSEG peso table, the
+// IMF SDR rate, LBMA gold and silver), already covered by official sources
+// elsewhere in the blend, so we skip it. The peso table is anchored on LSEG's
+// USD/PHP, which differs from the Reference Rate. See #533.
 //
-// The bulletins live in a SharePoint list named "RERB", exposed without authentication via the SharePoint REST API.
-// Each item's Title holds the bulletin date as DDMMMYYYY (e.g. "29May2026") and its attachment is the PDF.
+// The bulletins live in a SharePoint list named "RERB", exposed without
+// authentication via the SharePoint REST API. Each item's Title holds the
+// bulletin date as DDMMMYYYY (e.g. "29May2026") and its attachment is the PDF.
 //
-// Coverage starts 2017-11-06: earlier bulletins are image-only scans with no text layer. They fetch harmlessly and
-// yield no records.
+// Coverage starts 2017-11-06: earlier bulletins are image-only scans with no
+// text layer. They fetch harmlessly and yield no records.
 package bsp
 
 import (
@@ -50,7 +53,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. Each day is its own PDF, so small windows keep backfill progress durable.
+// BackfillRange implements adapter.Adapter. Each day is its own PDF, so small
+// windows keep backfill progress durable.
 func (a *Adapter) BackfillRange() int { return 30 }
 
 type entry struct {
@@ -58,7 +62,8 @@ type entry struct {
 	url  string
 }
 
-// Fetch implements adapter.Adapter. As in the Ruby adapter, `after` is inclusive: bulletins dated after..upto are kept.
+// Fetch implements adapter.Adapter. As in the Ruby adapter, `after` is
+// inclusive: bulletins dated after..upto are kept.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -105,8 +110,8 @@ type listPage struct {
 	} `json:"d"`
 }
 
-// discover walks the SharePoint list newest first, collecting bulletins dated within after..upto, and stops paging
-// once an item predates the window.
+// discover walks the SharePoint list newest first, collecting bulletins dated
+// within after..upto, and stops paging once an item predates the window.
 func (a *Adapter) discover(ctx context.Context, after, upto time.Time) ([]entry, error) {
 	var entries []entry
 	u := fmt.Sprintf("%s?$top=%d&$orderby=Id%%20desc&$expand=AttachmentFiles&$select=Id,Title,AttachmentFiles",
@@ -165,8 +170,8 @@ func (a *Adapter) discover(ctx context.Context, after, upto time.Time) ([]entry,
 	return entries, nil
 }
 
-// parseTitleDate reads a Title like "29May2026", as Ruby's Date.strptime(title, "%d%b%Y"), which also takes one-digit
-// days and full month names.
+// parseTitleDate reads a Title like "29May2026", as Ruby's Date.strptime(title,
+// "%d%b%Y"), which also takes one-digit days and full month names.
 func parseTitleDate(title string) (time.Time, bool) {
 	date, err := adapter.ParseDate(strings.TrimSpace(title), "2Jan2006", "2January2006")
 	return date, err == nil

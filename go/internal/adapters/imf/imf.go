@@ -1,8 +1,10 @@
-// Package imf fetches the International Monetary Fund's representative exchange rates: daily rates for 50+
-// currencies, mostly foreign currency per USD, with currencies marked (1) quoted as USD per foreign unit. It also
-// takes USD/XDR from the SDR cross-rate report.
+// Package imf fetches the International Monetary Fund's representative exchange
+// rates: daily rates for 50+ currencies, mostly foreign currency per USD, with
+// currencies marked (1) quoted as USD per foreign unit. It also takes USD/XDR
+// from the SDR cross-rate report.
 //
-// Fetch treats after as inclusive, as the Ruby adapter does, and walks calendar months from after's month.
+// Fetch treats after as inclusive, as the Ruby adapter does, and walks calendar
+// months from after's month.
 package imf
 
 import (
@@ -177,8 +179,9 @@ func parse(tsv string) ([]adapter.Rate, error) {
 	})
 }
 
-// parseSDRCV reads the "SDRs per Currency unit" report and keeps only USD/XDR. The other pairs are derived by the IMF
-// from the representative series and would create ambiguous bridges in base conversion.
+// parseSDRCV reads the "SDRs per Currency unit" report and keeps only USD/XDR.
+// The other pairs are derived by the IMF from the representative series and
+// would create ambiguous bridges in base conversion.
 func parseSDRCV(tsv string) ([]adapter.Rate, error) {
 	return parseRows(tsv, func(name string, rate float64, date time.Time) (adapter.Rate, bool) {
 		if currencies[strings.ToLower(name)] != "USD" {
@@ -190,7 +193,8 @@ func parseSDRCV(tsv string) ([]adapter.Rate, error) {
 
 var nonNumeric = regexp.MustCompile(`[^0-9.-]`)
 
-// parseRows walks every "Currency" block in the report; each block has its own date header.
+// parseRows walks every "Currency" block in the report; each block has its own
+// date header.
 func parseRows(tsv string, row func(name string, rate float64, date time.Time) (adapter.Rate, bool)) ([]adapter.Rate, error) {
 	if strings.TrimSpace(tsv) == "" {
 		return nil, errors.New("empty TSV response")
@@ -245,8 +249,8 @@ func parseRows(tsv string, row func(name string, rate float64, date time.Time) (
 	return rates, nil
 }
 
-// splitTabs splits like Ruby's String#split, dropping trailing empty fields, so a header ending in a tab doesn't
-// yield an empty date.
+// splitTabs splits like Ruby's String#split, dropping trailing empty fields, so
+// a header ending in a tab doesn't yield an empty date.
 func splitTabs(line string) []string {
 	fields := strings.Split(line, "\t")
 	for len(fields) > 1 && fields[len(fields)-1] == "" {

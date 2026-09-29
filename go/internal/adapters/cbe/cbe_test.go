@@ -23,7 +23,8 @@ type xlsxRow struct {
 	buy, sell float64
 }
 
-// buildWorkbook writes an export shaped like CBE's: a title row, a header row, then the data rows from row 3.
+// buildWorkbook writes an export shaped like CBE's: a title row, a header row,
+// then the data rows from row 3.
 func buildWorkbook(t *testing.T, rows [][]any) []byte {
 	t.Helper()
 	f := excelize.NewFile()
@@ -245,7 +246,8 @@ func TestParseErrorsOnNonWorkbook(t *testing.T) {
 	}
 }
 
-// fakeSite serves the historical-data page (with a token but no Set-Cookie) and the XLSX export.
+// fakeSite serves the historical-data page (with a token but no Set-Cookie) and
+// the XLSX export.
 type fakeSite struct {
 	xlsx  []byte
 	gets  int

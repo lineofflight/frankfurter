@@ -193,7 +193,8 @@ func TestParseMetalsSkipsUnknownAndBadBuy(t *testing.T) {
 	}
 }
 
-// Recorded with: golden.rb --repeats cbr cbr method,uri 'fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))'
+// Recorded with: golden.rb --repeats cbr cbr method,uri 'fetch(after:
+// Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))'
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 5))

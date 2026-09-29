@@ -259,7 +259,8 @@ func (rt *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 func TestFetchRequestsEachWeekdayWithType(t *testing.T) {
 	rt := &recorder{}
 	a := New(&http.Client{Transport: rt})
-	// Wednesday 2014-12-31 through Monday 2015-01-05, crossing euro adoption and a weekend.
+	// Wednesday 2014-12-31 through Monday 2015-01-05, crossing euro adoption
+	// and a weekend.
 	if _, err := a.Fetch(context.Background(), adapter.Date(2014, 12, 31), adapter.Date(2015, 1, 5)); err != nil {
 		t.Fatal(err)
 	}

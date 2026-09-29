@@ -9,9 +9,11 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// RefreshRollups is the provider half of Provider#refresh_rollups: for each rollup table it rebuilds provider's
-// buckets that contain any of dates from its daily rows, and returns the buckets touched per precision (bucket dates as
-// stored text). Refreshing the blended rollups for those buckets is the caller's job.
+// RefreshRollups is the provider half of Provider#refresh_rollups: for each
+// rollup table it rebuilds provider's buckets that contain any of dates from
+// its daily rows, and returns the buckets touched per precision (bucket dates
+// as stored text). Refreshing the blended rollups for those buckets is the
+// caller's job.
 func RefreshRollups(ctx context.Context, q db.Querier, provider string, dates []time.Time) (map[Precision][]string, error) {
 	touched := map[Precision][]string{}
 	if len(dates) == 0 {

@@ -1,8 +1,11 @@
-// Package nbp fetches rates from the National Bank of Poland, which publishes daily mid-market rates (Table A) for
-// about 32 currencies and weekly mid-market rates (Table B) for about 150 more against PLN, plus a daily gold reference
-// price. Gold comes in PLN per gram and is normalized to per troy ounce.
+// Package nbp fetches rates from the National Bank of Poland, which publishes
+// daily mid-market rates (Table A) for about 32 currencies and weekly
+// mid-market rates (Table B) for about 150 more against PLN, plus a daily gold
+// reference price. Gold comes in PLN per gram and is normalized to per troy
+// ounce.
 //
-// Unlike most adapters, Fetch treats after as inclusive: it is the first day of the first query, as in Ruby.
+// Unlike most adapters, Fetch treats after as inclusive: it is the first day of
+// the first query, as in Ruby.
 package nbp
 
 import (

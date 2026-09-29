@@ -1,8 +1,10 @@
-// Package mnb fetches rates from Magyar Nemzeti Bank, which publishes daily exchange rates for 30+ currencies against
-// the Hungarian forint (HUF) via a SOAP/XML web service.
+// Package mnb fetches rates from Magyar Nemzeti Bank, which publishes daily
+// exchange rates for 30+ currencies against the Hungarian forint (HUF) via a
+// SOAP/XML web service.
 //
-// Rates use unit multipliers (100 JPY = X HUF) and Hungarian decimal commas. Fetch returns every row the service
-// sends for the requested range, start date included, without further windowing, as the Ruby adapter does.
+// Rates use unit multipliers (100 JPY = X HUF) and Hungarian decimal commas.
+// Fetch returns every row the service sends for the requested range, start date
+// included, without further windowing, as the Ruby adapter does.
 package mnb
 
 import (
@@ -23,8 +25,8 @@ import (
 
 const endpoint = "http://www.mnb.hu/arfolyamok.asmx"
 
-// currencies are the active currencies as of 2026. GetExchangeRates requires explicit currency names; an empty list
-// returns empty days.
+// currencies are the active currencies as of 2026. GetExchangeRates requires
+// explicit currency names; an empty list returns empty days.
 const currencies = "AUD,BRL,CAD,CHF,CNY,CZK,DKK,EUR,GBP,HKD,IDR,ILS,INR,ISK,JPY,KRW," +
 	"MXN,MYR,NOK,NZD,PHP,PLN,RON,RSD,RUB,SEK,SGD,THB,TRY,UAH,USD,ZAR"
 
@@ -90,7 +92,8 @@ func envelope(operation, params string) string {
 `
 }
 
-// extractResult returns the text of the first element named tag, or "" when there is none.
+// extractResult returns the text of the first element named tag, or "" when
+// there is none.
 func extractResult(data []byte, tag string) (string, error) {
 	dec := xml.NewDecoder(bytes.NewReader(data))
 	for {
@@ -123,7 +126,8 @@ type exchangeRates struct {
 }
 
 func parse(data []byte) ([]adapter.Rate, error) {
-	// Ruby raises on an empty result (Ox.load("") is nil), so a response without one is an error, not an empty day.
+	// Ruby raises on an empty result (Ox.load("") is nil), so a response
+	// without one is an error, not an empty day.
 	if len(bytes.TrimSpace(data)) == 0 {
 		return nil, errors.New("mnb: empty GetExchangeRatesResult")
 	}
@@ -159,7 +163,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toI reads a leading integer the way Ruby's String#to_i does, returning 0 when there is none.
+// toI reads a leading integer the way Ruby's String#to_i does, returning 0 when
+// there is none.
 func toI(s string) int {
 	s = strings.TrimLeft(s, " \t\n\v\f\r")
 	end := 0

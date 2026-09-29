@@ -17,18 +17,24 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/heavyslots"
 )
 
-// BlendParity (lib/blend_parity.rb, the blend:parity task) replays table-eligible query shapes through the
-// materialized path and the live path and compares the serialized records. The live pipeline is the oracle.
+// BlendParity (lib/blend_parity.rb, the blend:parity task) replays
+// table-eligible query shapes through the materialized path and the live path
+// and compares the serialized records. The live pipeline is the oracle.
 //
-// One declared divergence is asserted rather than ignored (#570): snap-back rows serve the canonical anchor-date value,
-// so when a quote's contributor set changed between its observation date and the range start, the table row may
-// differ from what the live path computes at the range-start anchor. Canonicality is asserted in the pivot frame:
-// derive divides a whole batch by the base's rate at the range-start anchor (a batch property, identical on both paths
-// and pinned by the byte-equal fresh rows around it), so only the row's own pivot-frame value distinguishes canonical
-// from aged. Any other difference is a failure. The second declared change, pivot-frame canonicalization of range
-// batches, lives in emitBlended itself and so is exercised by the comparison on both paths.
+// One declared divergence is asserted rather than ignored (#570): snap-back
+// rows serve the canonical anchor-date value, so when a quote's contributor set
+// changed between its observation date and the range start, the table row may
+// differ from what the live path computes at the range-start anchor.
+// Canonicality is asserted in the pivot frame: derive divides a whole batch by
+// the base's rate at the range-start anchor (a batch property, identical on
+// both paths and pinned by the byte-equal fresh rows around it), so only the
+// row's own pivot-frame value distinguishes canonical from aged. Any other
+// difference is a failure. The second declared change, pivot-frame
+// canonicalization of range batches, lives in emitBlended itself and so is
+// exercised by the comparison on both paths.
 
-// Shape is a query shape: from, to, base, quotes, group (absent keys are not given).
+// Shape is a query shape: from, to, base, quotes, group (absent keys are not
+// given).
 type Shape map[string]string
 
 func (s Shape) String() string {
@@ -55,7 +61,8 @@ type ParityReport struct {
 	Incomplete      []ParityIssue
 }
 
-// Passed reports whether every shape matched and every grouped chunk was verified against the table.
+// Passed reports whether every shape matched and every grouped chunk was
+// verified against the table.
 func (r ParityReport) Passed() bool { return len(r.Failures) == 0 && len(r.Incomplete) == 0 }
 
 func (r ParityReport) String() string {
@@ -82,8 +89,9 @@ func (r ParityReport) String() string {
 // PopularBases are the bases random shapes draw from.
 var PopularBases = []string{"EUR", "USD", "GBP", "JPY", "CHF", "AED", "CAD", "TRY"}
 
-// Parity runs the comparison over the adversarial shapes (each also grouped by week and month) and samples random
-// ones drawn with seed. It needs stored rates; run it after the materialized blends are rebuilt.
+// Parity runs the comparison over the adversarial shapes (each also grouped by
+// week and month) and samples random ones drawn with seed. It needs stored
+// rates; run it after the materialized blends are rebuilt.
 func Parity(ctx context.Context, conn *sql.DB, samples int, seed uint64, today time.Time) (ParityReport, error) {
 	p := &parity{conn: conn, today: today, rng: rand.New(rand.NewPCG(seed, seed)),
 		slots: heavyslots.New(math.MaxInt)}
@@ -120,7 +128,8 @@ func (p *parity) run(ctx context.Context, samples int) (ParityReport, error) {
 	}
 
 	for _, shape := range shapes {
-		// Both replays and the canonical probes see the same source and materialized rows during concurrent ingestion.
+		// Both replays and the canonical probes see the same source and
+		// materialized rows during concurrent ingestion.
 		if err := p.inTx(ctx, func() error { return p.compare(ctx, shape, &report) }); err != nil {
 			return report, fmt.Errorf("blend parity %s: %w", shape, err)
 		}
@@ -195,8 +204,9 @@ func sameJSON(a, b []Record) (bool, error) {
 	return string(x) == string(y), err
 }
 
-// records runs a shape without a deadline: a forced-live replay of a full-history shape legitimately outlives the
-// request timeout, and bounding it would abort the harness, not a client request.
+// records runs a shape without a deadline: a forced-live replay of a
+// full-history shape legitimately outlives the request timeout, and bounding it
+// would abort the harness, not a client request.
 func (p *parity) records(ctx context.Context, shape Shape, forceLive bool, coverage *RollupCoverage) ([]Record, error) {
 	params := Params{}
 	for k, v := range shape {
@@ -218,7 +228,8 @@ type recordKey [2]string // date, quote
 
 func keyOf(r Record) recordKey { return recordKey{r.Date, r.Quote} }
 
-// explainDivergence passes a divergent shape only when every difference traces to the canonical anchor-date rule:
+// explainDivergence passes a divergent shape only when every difference traces
+// to the canonical anchor-date rule:
 //
 //   - A record only the live path emits must be a consensus-masked emergence (the live pipeline anchored at the
 //     record's own date yields no row of that date for the quote, so it has no canonical value) or superseded (live
@@ -312,8 +323,9 @@ func (p *parity) explainDivergence(ctx context.Context, shape Shape, table, live
 }
 
 func (p *parity) pivotPairCanonical(ctx context.Context, shape Shape, r Record) (bool, error) {
-	// A derived base->PIVOT row carries the reciprocal of the base's rate, so its canonicality is the base currency's;
-	// the pivot frame has no PIVOT-quoted row to probe directly.
+	// A derived base->PIVOT row carries the reciprocal of the base's rate, so
+	// its canonicality is the base currency's; the pivot frame has no
+	// PIVOT-quoted row to probe directly.
 	probe := r
 	if r.Quote == Pivot {
 		base := "EUR"
@@ -333,15 +345,16 @@ func (p *parity) pivotPairCanonical(ctx context.Context, shape Shape, r Record) 
 	return found && tableFound && tablePivot.Value == canonical.Value, nil
 }
 
-// canonicalRate is what a live range anchored at the record's own date computes, in the pivot frame so no derive
-// denominator muddies the comparison.
+// canonicalRate is what a live range anchored at the record's own date
+// computes, in the pivot frame so no derive denominator muddies the comparison.
 func (p *parity) canonicalRate(ctx context.Context, shape Shape, r Record) (Number, bool, error) {
 	return p.pivotFrameRate(ctx, shape, r, r.Date, r.Date, true)
 }
 
-// pivotFrameRate is the record's pivot-frame value over [from, to]: the original request based on the pivot so the
-// blend is emitted undivided. Memoized per resulting query, since a full-history shape with several divergent records
-// would otherwise replay per record.
+// pivotFrameRate is the record's pivot-frame value over [from, to]: the
+// original request based on the pivot so the blend is emitted undivided.
+// Memoized per resulting query, since a full-history shape with several
+// divergent records would otherwise replay per record.
 func (p *parity) pivotFrameRate(ctx context.Context, shape Shape, r Record, from, to string, forceLive bool) (Number, bool, error) {
 	params := Shape{"base": Pivot}
 	for k, v := range shape {

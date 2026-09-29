@@ -1,19 +1,25 @@
-// Package rbm fetches rates from the Reserve Bank of Malawi, which publishes daily buy/middle/sell rates against MWK
-// for about 38 currencies through an ASP.NET MVC site.
+// Package rbm fetches rates from the Reserve Bank of Malawi, which publishes
+// daily buy/middle/sell rates against MWK for about 38 currencies through an
+// ASP.NET MVC site.
 //
-// The historical endpoint is a POST form that accepts US-formatted StartDate / EndDate (MM/DD/YYYY) and an optional
-// RateTypes filter (omit to return all currencies). The response is an HTML page; each row carries the currency code
-// in <strong>, then three numeric cells (Buying, Middle, Selling) and a date cell ("Jan 02 2024" with a pair of
-// non-breaking spaces between the day and the year).
+// The historical endpoint is a POST form that accepts US-formatted StartDate /
+// EndDate (MM/DD/YYYY) and an optional RateTypes filter (omit to return all
+// currencies). The response is an HTML page; each row carries the currency code
+// in <strong>, then three numeric cells (Buying, Middle, Selling) and a date
+// cell ("Jan 02 2024" with a pair of non-breaking spaces between the day and
+// the year).
 //
-// RBM publishes "1 foreign = X MWK", so foreign is the base and MWK the quote. The source already publishes a middle
-// column, so we use that directly instead of recomputing from buy/sell (issue #314).
+// RBM publishes "1 foreign = X MWK", so foreign is the base and MWK the quote.
+// The source already publishes a middle column, so we use that directly instead
+// of recomputing from buy/sell (issue #314).
 //
-// IEP (defunct Irish punt) and CMD (the non-ISO COMESA Dollar accounting unit) appear in the response. Both are
-// registered through db/seeds/currency_patches.json. CMD remains separately published even where its value matches
-// USD; IEP is subject to its terminal date when blended.
+// IEP (defunct Irish punt) and CMD (the non-ISO COMESA Dollar accounting unit)
+// appear in the response. Both are registered through
+// db/seeds/currency_patches.json. CMD remains separately published even where
+// its value matches USD; IEP is subject to its terminal date when blended.
 //
-// Like Ruby, Fetch returns whatever the posted range yields without clipping, so rows dated on after are included.
+// Like Ruby, Fetch returns whatever the posted range yields without clipping,
+// so rows dated on after are included.
 package rbm
 
 import (

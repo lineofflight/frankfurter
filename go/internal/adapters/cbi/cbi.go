@@ -1,14 +1,18 @@
-// Package cbi fetches rates from the Central Bank of Iraq, which publishes daily reference buy and sell rates for the
-// Iraqi dinar (IQD) against about 16 currencies plus gold in an XLSX file linked from cbi.iq/page/144.
+// Package cbi fetches rates from the Central Bank of Iraq, which publishes
+// daily reference buy and sell rates for the Iraqi dinar (IQD) against about 16
+// currencies plus gold in an XLSX file linked from cbi.iq/page/144.
 //
-// The page hosts three XLSX files (USD-only, multi-currency daily, and a 1995-present archive of foreign currencies
-// against USD). We consume the multi-currency daily file: it gives IQD-pivoted rates back to 2009 for every currency
-// CBI publishes. File URLs rotate when CBI re-uploads, so each fetch scrapes the page and picks the .xlsx link whose
-// anchor text mentions gold.
+// The page hosts three XLSX files (USD-only, multi-currency daily, and a
+// 1995-present archive of foreign currencies against USD). We consume the
+// multi-currency daily file: it gives IQD-pivoted rates back to 2009 for every
+// currency CBI publishes. File URLs rotate when CBI re-uploads, so each fetch
+// scrapes the page and picks the .xlsx link whose anchor text mentions gold.
 //
-// The workbook has one sheet per calendar year. The column layout has evolved: 2-column Buy/Sell groups in 2009-2024
-// and 3-column Buy/Sell/Sell2 groups from 2025. Rows carry buy and sell as bid and ask with their mean as the rate, and
-// the secondary sell column is ignored. Rates keep CBI's direction: foreign currency as base, IQD as quote.
+// The workbook has one sheet per calendar year. The column layout has evolved:
+// 2-column Buy/Sell groups in 2009-2024 and 3-column Buy/Sell/Sell2 groups from
+// 2025. Rows carry buy and sell as bid and ask with their mean as the rate, and
+// the secondary sell column is ignored. Rates keep CBI's direction: foreign
+// currency as base, IQD as quote.
 package cbi
 
 import (
@@ -45,13 +49,15 @@ var monthIndex = map[string]time.Month{
 	"jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
 }
 
-// CBI wrote "Spet.YYYY" throughout 2016-2024 before switching to "Sept" in 2025.
+// CBI wrote "Spet.YYYY" throughout 2016-2024 before switching to "Sept" in
+// 2025.
 var monthRegex = regexp.MustCompile(`(?i)^\*?\s*(Jan|Feb|Mar|Apr|May|June?|July?|Aug|Sept?|Spet|Oct|Nov|Dec)[a-z]*[.,\s]*(?:\d{4})?$`)
 
 var xlsxHref = regexp.MustCompile(`^https?://.+\.xlsx$`)
 
-// goldMarker is Arabic for "gold". It appears only in the multi-currency daily file's link text, a selector that
-// survives re-ordering or new files added to the page.
+// goldMarker is Arabic for "gold". It appears only in the multi-currency daily
+// file's link text, a selector that survives re-ordering or new files added to
+// the page.
 const goldMarker = "الذهب"
 
 func init() {
@@ -215,7 +221,8 @@ func detectLayout(rows [][]string) ([]column, bool) {
 		if !strings.Contains(v, "Buy") {
 			continue
 		}
-		// The sell column is the next Sell label to the right, excluding "Sell 2".
+		// The sell column is the next Sell label to the right, excluding "Sell
+		// 2".
 		sell := -1
 		for c := buy + 1; c < len(labels); c++ {
 			if strings.Contains(labels[c], "Sell") && !strings.Contains(labels[c], "2") {
@@ -233,8 +240,10 @@ func detectLayout(rows [][]string) ([]column, bool) {
 	return layout, true
 }
 
-// findCurrencyCode searches the header rows for a currency code near the buy/sell group. Headers can land on the buy
-// column (2009 layout) or any nearby column (2025-2026, where merged headers can land on the middle column).
+// findCurrencyCode searches the header rows for a currency code near the
+// buy/sell group. Headers can land on the buy column (2009 layout) or any
+// nearby column (2025-2026, where merged headers can land on the middle
+// column).
 func findCurrencyCode(header [][]string, buy, sell int) string {
 	for _, row := range header {
 		for c := buy; c <= sell+1; c++ {
@@ -248,8 +257,9 @@ func findCurrencyCode(header [][]string, buy, sell int) string {
 	return ""
 }
 
-// extractCode finds an ISO 4217 code at the end of a header ("Saudi Arabian Riyal SAR") or alone in a cell ("USD",
-// "S.FR", "Gold"), rewriting CBI's aliases to ISO codes.
+// extractCode finds an ISO 4217 code at the end of a header ("Saudi Arabian
+// Riyal SAR") or alone in a cell ("USD", "S.FR", "Gold"), rewriting CBI's
+// aliases to ISO codes.
 func extractCode(text string) string {
 	if code, ok := codeAliases[rubyStrip(text)]; ok {
 		return code
@@ -264,8 +274,9 @@ func extractCode(text string) string {
 	return token
 }
 
-// lastCodeToken is Ruby's text.scan(/\b([A-Z]{3,4}|S\.FR)\b/).last. Ruby's \b treats any Unicode letter or digit as a
-// word character, where Go's regexp \b knows only ASCII, so the boundaries are checked by hand.
+// lastCodeToken is Ruby's text.scan(/\b([A-Z]{3,4}|S\.FR)\b/).last. Ruby's \b
+// treats any Unicode letter or digit as a word character, where Go's regexp \b
+// knows only ASCII, so the boundaries are checked by hand.
 func lastCodeToken(text string) string {
 	rs := []rune(text)
 	isWord := func(i int) bool {
@@ -322,11 +333,13 @@ func monthFromLabel(label string) (time.Month, bool) {
 	return month, ok
 }
 
-// rubyStrip is Ruby's String#strip, which leaves non-ASCII spaces such as U+00A0 alone, unlike strings.TrimSpace.
+// rubyStrip is Ruby's String#strip, which leaves non-ASCII spaces such as
+// U+00A0 alone, unlike strings.TrimSpace.
 func rubyStrip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
-// rubyInteger is Ruby's Integer(s, exception: false): surrounding whitespace, a sign, base prefixes, a leading-zero
-// octal and underscores between digits are accepted.
+// rubyInteger is Ruby's Integer(s, exception: false): surrounding whitespace, a
+// sign, base prefixes, a leading-zero octal and underscores between digits are
+// accepted.
 func rubyInteger(s string) (int64, bool) {
 	n, err := strconv.ParseInt(strings.Trim(s, " \t\n\v\f\r"), 0, 64)
 	return n, err == nil

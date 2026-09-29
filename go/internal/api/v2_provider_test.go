@@ -20,7 +20,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// refreshRollups is Provider#refresh_rollups: the provider rollups and, for blending providers, the grouped blends.
+// refreshRollups is Provider#refresh_rollups: the provider rollups and, for
+// blending providers, the grouped blends.
 func (a *v2App) refreshRollups(key string, dates ...time.Time) {
 	a.t.Helper()
 	if err := blend.RefreshProviderRollups(context.Background(), a.db, key, dates, fixtures.Today()); err != nil {

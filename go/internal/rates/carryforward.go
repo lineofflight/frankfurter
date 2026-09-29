@@ -10,7 +10,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// Row is a stored observation as read back: Quote units per one Base on Date from Provider.
+// Row is a stored observation as read back: Quote units per one Base on Date
+// from Provider.
 type Row struct {
 	Date     time.Time
 	Base     string
@@ -19,7 +20,8 @@ type Row struct {
 	Rate     float64 // NaN when the stored row resolves no rate (a single published side), Ruby's nil
 }
 
-// Select runs query, which must yield date, base, quote, provider and rate in that order, and scans the rows.
+// Select runs query, which must yield date, base, quote, provider and rate in
+// that order, and scans the rows.
 func Select(ctx context.Context, q db.Querier, query string, args ...any) ([]Row, error) {
 	rows, err := q.QueryContext(ctx, query, args...)
 	if err != nil {
@@ -50,9 +52,11 @@ type seriesKey struct{ provider, base, quote string }
 
 func keyOf(r Row) seriesKey { return seriesKey{r.Provider, r.Base, r.Quote} }
 
-// CarryForward is CarryForward.apply: the snapshot of rows as of date, keeping each provider and pair's most recent
-// row dated within lookback days on or before date. Snapshots power latest and single-date queries and each anchor
-// of a range. Rows come back in order of each series' first eligible appearance.
+// CarryForward is CarryForward.apply: the snapshot of rows as of date, keeping
+// each provider and pair's most recent row dated within lookback days on or
+// before date. Snapshots power latest and single-date queries and each anchor
+// of a range. Rows come back in order of each series' first eligible
+// appearance.
 func CarryForward(rows []Row, date time.Time, lookback int) []Row {
 	cutoff := date.AddDate(0, 0, -lookback)
 	index := map[seriesKey]int{}
@@ -73,8 +77,9 @@ func CarryForward(rows []Row, date time.Time, lookback int) []Row {
 	return best
 }
 
-// EachSnapshot is CarryForward.each_snapshot: CarryForward at every date in dates, ascending, sharing one pass over
-// rows. Each series keeps a cursor that only moves forward as the anchors increase.
+// EachSnapshot is CarryForward.each_snapshot: CarryForward at every date in
+// dates, ascending, sharing one pass over rows. Each series keeps a cursor that
+// only moves forward as the anchors increase.
 func EachSnapshot(rows []Row, dates []time.Time, lookback int, yield func(date time.Time, contributors []Row)) {
 	var order []seriesKey
 	groups := map[seriesKey][]Row{}

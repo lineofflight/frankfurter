@@ -127,7 +127,8 @@ func TestRebuildMaterializesPivotBlend(t *testing.T) {
 func TestRebuildStoresSparsely(t *testing.T) {
 	conn := fixtures.New(t)
 	d1, d2 := fixtures.BusinessDay(30), fixtures.BusinessDay(20)
-	// The fake provider carries its own EUR to USD bridge so the pivot rebase can use its rows.
+	// The fake provider carries its own EUR to USD bridge so the pivot rebase
+	// can use its rows.
 	insertRates(t, conn,
 		[]any{"T1", day(d1), "EUR", "MXN", 20.0}, []any{"T1", day(d1), "EUR", "USD", 1.2},
 		[]any{"T1", day(d2), "EUR", "MXN", 21.0}, []any{"T1", day(d2), "EUR", "USD", 1.2})
@@ -299,8 +300,8 @@ func TestRefreshRecomputesInsideWindowOnly(t *testing.T) {
 	eur := "SELECT rate FROM blended_rates WHERE quote = 'EUR' AND date = ?"
 	beforeTarget, beforeOutside := queryFloat(t, conn, eur, day(date)), queryFloat(t, conn, eur, outside)
 
-	// A late arrival shifts the contributor set for EUR at this anchor, close enough to the consensus that the outlier
-	// filter keeps it.
+	// A late arrival shifts the contributor set for EUR at this anchor, close
+	// enough to the consensus that the outlier filter keeps it.
 	insertRates(t, conn, []any{"T1", day(date), "EUR", "USD", 1.10})
 	if err := RefreshDaily(ctx, conn, date, date.AddDate(0, 0, rates.LookbackDays), today()); err != nil {
 		t.Fatal(err)

@@ -1,8 +1,9 @@
-// Package nbrb fetches rates from the National Bank of the Republic of Belarus, which publishes daily rates for
-// about 30 currencies against BYN.
+// Package nbrb fetches rates from the National Bank of the Republic of Belarus,
+// which publishes daily rates for about 30 currencies against BYN.
 //
-// BYN was redenominated on 2016-07-01; earlier data uses different currency IDs. Fetch lists today's currencies,
-// then asks the dynamics endpoint for each one in chunks of up to a year. Like the Ruby adapter, the range starts at
+// BYN was redenominated on 2016-07-01; earlier data uses different currency
+// IDs. Fetch lists today's currencies, then asks the dynamics endpoint for each
+// one in chunks of up to a year. Like the Ruby adapter, the range starts at
 // after inclusive.
 package nbrb
 

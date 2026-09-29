@@ -13,8 +13,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
 )
 
-// The Ruby spec allows playback repeats, but go-vcr's replayable mode returns the first match even when it has
-// been used, so the token interaction would also answer the data request (both match on method and host). Each
+// The Ruby spec allows playback repeats, but go-vcr's replayable mode returns
+// the first match even when it has been used, so the token interaction would
+// also answer the data request (both match on method and host). Each
 // interaction plays exactly once here, which is what VCR does in practice.
 func newAdapter(t *testing.T) *Adapter {
 	return New(vcrtest.Client(t, "bccr", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host)))
@@ -86,7 +87,8 @@ type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 
-// fakeAPI answers the token request with "tok" and the data request with body, recording the data request.
+// fakeAPI answers the token request with "tok" and the data request with body,
+// recording the data request.
 func fakeAPI(body string, got **http.Request) *Adapter {
 	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		resp := "tok"

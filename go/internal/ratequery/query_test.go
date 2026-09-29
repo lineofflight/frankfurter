@@ -19,7 +19,8 @@ import (
 
 // spec/versions/v2/rate_query_spec.rb
 
-// withMonthlyProvider adds TST, a monthly provider, with rows on rowsOn and a monthly rollup.
+// withMonthlyProvider adds TST, a monthly provider, with rows on rowsOn and a
+// monthly rollup.
 func withMonthlyProvider(t *testing.T, conn *sql.DB, rowsOn time.Time) {
 	t.Helper()
 	exec(t, conn, "INSERT INTO providers (key, name, frequency) VALUES ('TST', 'Test', 'monthly')")
@@ -282,8 +283,8 @@ func TestCompletesRangesWithinDeadline(t *testing.T) {
 	}
 }
 
-// Pins the check inside the chunk loop: a check hoisted to the loop entry would let a long compute run past its
-// deadline.
+// Pins the check inside the chunk loop: a check hoisted to the loop entry would
+// let a long compute run past its deadline.
 func TestChecksDeadlineBeforeEveryChunk(t *testing.T) {
 	conn := fixtures.New(t)
 	q := newQuery(t, conn, "from", d(latest().AddDate(0, 0, -200)), "to", d(latest()))
@@ -312,7 +313,8 @@ func TestStopsRangeWhenDeadlineExpiresMidCompute(t *testing.T) {
 	}
 }
 
-// Heavy compute slots. providers= keeps the range on the live path regardless of the materialized table.
+// Heavy compute slots. providers= keeps the range on the live path regardless
+// of the materialized table.
 
 func heavyQuery(t *testing.T, conn *sql.DB, slots *heavyslots.Slots) *Query {
 	t.Helper()
@@ -320,8 +322,9 @@ func heavyQuery(t *testing.T, conn *sql.DB, slots *heavyslots.Slots) *Query {
 		"from", d(latest().AddDate(0, 0, -200)), "to", d(latest()))
 }
 
-// paused runs q.Each in the background, stopped inside its first record until release is called. release(err) lets
-// it go on (nil) or abandons it (an error from yield, as a client that went away), and waits for it to finish.
+// paused runs q.Each in the background, stopped inside its first record until
+// release is called. release(err) lets it go on (nil) or abandons it (an error
+// from yield, as a client that went away), and waits for it to finish.
 func paused(t *testing.T, q *Query) (release func(error) error) {
 	t.Helper()
 	first := make(chan struct{})
@@ -412,8 +415,9 @@ func TestReleasesSlotWhenComputeRaises(t *testing.T) {
 	}
 }
 
-// An enumeration abandoned mid-stream (client disconnect) has its slot returned through ReleaseSlot; a second call
-// is a no-op, and so is the enumeration's own release when it unwinds.
+// An enumeration abandoned mid-stream (client disconnect) has its slot returned
+// through ReleaseSlot; a second call is a no-op, and so is the enumeration's
+// own release when it unwinds.
 func TestReleasesAbandonedEnumerationsSlotOnce(t *testing.T) {
 	conn := fixtures.New(t)
 	slots := heavyslots.New(2)
@@ -461,8 +465,8 @@ func TestLeavesCheapShapesUntouchedWhileSlotsHeld(t *testing.T) {
 	}
 }
 
-// The daily range cap for live-path shapes. Validation is date arithmetic only, so fixed dates keep these
-// deterministic.
+// The daily range cap for live-path shapes. Validation is date arithmetic only,
+// so fixed dates keep these deterministic.
 
 const (
 	capEnd       = "2026-01-15"
@@ -539,8 +543,9 @@ func TestRangeCapLiftsOnceTableIsReady(t *testing.T) {
 	}
 }
 
-// Materialized blend dispatch. Deleting recent raw rows after the rebuild makes the two paths distinguishable: only
-// the table still knows those dates. The oldest rows stay, so the table stays ready.
+// Materialized blend dispatch. Deleting recent raw rows after the rebuild makes
+// the two paths distinguishable: only the table still knows those dates. The
+// oldest rows stay, so the table stays ready.
 
 func deleteRecentRawRows(t *testing.T, conn *sql.DB) {
 	exec(t, conn, "DELETE FROM rates WHERE date >= ? AND date <= ?", d(latest().AddDate(0, 0, -10)), d(latest()))
@@ -592,7 +597,8 @@ func TestFallsBackToLiveWhileTablePartial(t *testing.T) {
 	}
 }
 
-// Materialized blend dispatch for latest and single dates. A tampered stored row makes the paths distinguishable.
+// Materialized blend dispatch for latest and single dates. A tampered stored
+// row makes the paths distinguishable.
 
 func tamper(t *testing.T, conn *sql.DB, quote string, date time.Time, rate float64) {
 	exec(t, conn, "UPDATE blended_rates SET rate = ? WHERE quote = ? AND date = ?", rate, quote, d(date))
@@ -641,8 +647,9 @@ func TestFallsBackToLiveSnapshotWhileNotReady(t *testing.T) {
 	}
 }
 
-// The correction #573 exists for: a carried-forward row freezes at the value blended on its own observation date
-// instead of drifting as later days re-decay it against the batch clock.
+// The correction #573 exists for: a carried-forward row freezes at the value
+// blended on its own observation date instead of drifting as later days
+// re-decay it against the batch clock.
 func TestServesCanonicalAnchorDateValuesForCarriedQuotes(t *testing.T) {
 	conn := fixtures.New(t)
 	ecbLast, bocLast := fixtures.BusinessDay(8), fixtures.BusinessDay(4)
@@ -697,8 +704,9 @@ func TestFailsWhenRebuildWipesTableMidRead(t *testing.T) {
 	}
 }
 
-// Latest used to blend a single-frame batch in the requested base while the same shape as a range blended through
-// the pivot, so the two disagreed about the same data. One frame everywhere (#573).
+// Latest used to blend a single-frame batch in the requested base while the
+// same shape as a range blended through the pivot, so the two disagreed about
+// the same data. One frame everywhere (#573).
 func TestBlendsSingleFrameLiveBatchesThroughPivot(t *testing.T) {
 	conn := fixtures.New(t)
 	date := latest()
@@ -924,8 +932,8 @@ func TestExpandRaisesOnUnknownValue(t *testing.T) {
 	invalidQuery(t, fixtures.New(t), "expand", "weights")
 }
 
-// Peg gap filling. BTN is pegged 1:1 to INR (since 1974), and ECB provides INR. TEST starts covering BTN recently,
-// leaving older dates to the peg.
+// Peg gap filling. BTN is pegged 1:1 to INR (since 1974), and ECB provides INR.
+// TEST starts covering BTN recently, leaving older dates to the peg.
 
 func withRecentBTN(t *testing.T) *sql.DB {
 	conn := fixtures.New(t)
@@ -1030,8 +1038,9 @@ func TestDeriveProducesExactReciprocals(t *testing.T) {
 	}
 }
 
-// Native-precision passthrough. The witness is a stored rate whose native precision exceeds what magnitude-based
-// rounding would emit, so rounding it would change it.
+// Native-precision passthrough. The witness is a stored rate whose native
+// precision exceeds what magnitude-based rounding would emit, so rounding it
+// would change it.
 
 func nativeRow(t *testing.T, conn *sql.DB) (time.Time, float64) {
 	t.Helper()

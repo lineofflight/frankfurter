@@ -1,15 +1,21 @@
-// Package cbkkw fetches rates from the Central Bank of Kuwait, which publishes daily reference rates for ~135
-// currencies against KWD, quoted in fils (one thousandth of a dinar) per unit of foreign currency: "KWD / US Dollar
-// 306.650" means 1 USD = 0.30665 KWD. Foreign is the base and KWD the quote; the fils figure is divided by 1000 here.
+// Package cbkkw fetches rates from the Central Bank of Kuwait, which publishes
+// daily reference rates for ~135 currencies against KWD, quoted in fils (one
+// thousandth of a dinar) per unit of foreign currency: "KWD / US Dollar
+// 306.650" means 1 USD = 0.30665 KWD. Foreign is the base and KWD the quote;
+// the fils figure is divided by 1000 here.
 //
-// The exchange-rates page carries a lookup form whose currency select pairs each ISO code with a CMS id
-// ("USD:128735"). The endpoint keys on the id, and a bare code returns nothing, so the list is scraped from the page
-// rather than hard-coded. One POST per currency then returns an HTML fragment with a date-filtered table (dates
-// DD.MM.YYYY, working days Sun-Thu). Majors run from 2008-01-02, most other currencies from 2017-06-18. Some retired
-// codes (ECS, VEF, SLL) are still served; blend and catalogue rules exclude them downstream.
+// The exchange-rates page carries a lookup form whose currency select pairs
+// each ISO code with a CMS id ("USD:128735"). The endpoint keys on the id, and
+// a bare code returns nothing, so the list is scraped from the page rather than
+// hard-coded. One POST per currency then returns an HTML fragment with a
+// date-filtered table (dates DD.MM.YYYY, working days Sun-Thu). Majors run from
+// 2008-01-02, most other currencies from 2017-06-18. Some retired codes (ECS,
+// VEF, SLL) are still served; blend and catalogue rules exclude them
+// downstream.
 //
-// As in Ruby, rows are not clipped locally. The lookup window starts the day before `after` and is exclusive of it,
-// so a row dated `after` itself is returned.
+// As in Ruby, rows are not clipped locally. The lookup window starts the day
+// before `after` and is exclusive of it, so a row dated `after` itself is
+// returned.
 package cbkkw
 
 import (
@@ -88,7 +94,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 				return nil, err
 			}
 		}
-		// txtDateFrom is exclusive and txtDateTo inclusive, so the window starts a day early.
+		// txtDateFrom is exclusive and txtDateTo inclusive, so the window
+		// starts a day early.
 		body, err := a.PostForm(ctx, lookupURL, url.Values{
 			"formId":      {formID},
 			"selCurrency": {c.code + ":" + c.id},
@@ -107,8 +114,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// parseForm returns the form id and the currencies in page order. A code listed twice keeps its first position and
-// its last id, as Ruby's Array#to_h does.
+// parseForm returns the form id and the currencies in page order. A code listed
+// twice keeps its first position and its last id, as Ruby's Array#to_h does.
 func parseForm(html string) (string, []currency, error) {
 	m := formIDPattern.FindStringSubmatch(html)
 	if m == nil {
@@ -131,8 +138,9 @@ func parseForm(html string) (string, []currency, error) {
 	return m[1], currencies, nil
 }
 
-// parse reads the lookup fragment for one currency. An empty table is a genuine no-data window (weekend, retired
-// code); a body without the fragment marker is a WAF or error page and fails.
+// parse reads the lookup fragment for one currency. An empty table is a genuine
+// no-data window (weekend, retired code); a body without the fragment marker is
+// a WAF or error page and fails.
 func parse(html, code string) ([]adapter.Rate, error) {
 	if !strings.Contains(html, fragmentMarker) {
 		return nil, fmt.Errorf("unexpected response for %s", code)

@@ -1,8 +1,9 @@
-// Package nbg fetches rates from the National Bank of Georgia, which publishes daily rates for 40+ currencies
-// against the Georgian lari (GEL).
+// Package nbg fetches rates from the National Bank of Georgia, which publishes
+// daily rates for 40+ currencies against the Georgian lari (GEL).
 //
-// The API is queried one date at a time, Sundays skipped. As in Ruby, after is inclusive, rows are not clipped to
-// the window, and each row carries the date the API reports, which can precede the requested one.
+// The API is queried one date at a time, Sundays skipped. As in Ruby, after is
+// inclusive, rows are not clipped to the window, and each row carries the date
+// the API reports, which can precede the requested one.
 package nbg
 
 import (
@@ -87,7 +88,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	if err := json.Unmarshal(data, &entries); err != nil {
 		return nil, errors.New("expected JSON array")
 	}
-	// The API 200s with [] for dates without data (e.g. pre-coverage); carry-forward covers holidays.
+	// The API 200s with [] for dates without data (e.g. pre-coverage);
+	// carry-forward covers holidays.
 	if len(entries) == 0 {
 		return nil, nil
 	}
@@ -113,8 +115,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toF approximates Ruby's to_f on a decoded JSON value: numbers pass through, numeric strings parse, anything else
-// is 0.
+// toF approximates Ruby's to_f on a decoded JSON value: numbers pass through,
+// numeric strings parse, anything else is 0.
 func toF(v any) float64 {
 	switch v := v.(type) {
 	case float64:

@@ -32,7 +32,8 @@ func fetchWeek(t *testing.T) []adapter.Rate {
 	return fetch(t, adapter.Date(2026, 8, 3), adapter.Date(2026, 8, 7))
 }
 
-// parseFixture parses a workbook written by testdata/xls/build.rb, which builds the same workbooks as the Ruby spec.
+// parseFixture parses a workbook written by testdata/xls/build.rb, which builds
+// the same workbooks as the Ruby spec.
 func parseFixture(t *testing.T, name string) ([]adapter.Rate, error) {
 	t.Helper()
 	data, err := os.ReadFile("testdata/xls/" + name + ".xls")
@@ -134,7 +135,8 @@ func TestFetchStopsPagingAndNamesMissingQuarter(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: a missing link is a not-yet only for the current quarter, and after is inclusive.
+// Not in the Ruby spec: a missing link is a not-yet only for the current
+// quarter, and after is inclusive.
 func TestFetchSkipsMissingCurrentQuarterOnly(t *testing.T) {
 	html := `<a href="/sites/default/files/EstadisticasGeneral/2_1_2c26_smc.xls">III Trim 2026</a>`
 	workbook, err := os.ReadFile("testdata/xls/fecha_valor.xls")

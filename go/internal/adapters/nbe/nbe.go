@@ -1,12 +1,15 @@
-// Package nbe fetches rates from the National Bank of Ethiopia, which publishes daily reference rates for 18
-// currencies against the Ethiopian birr (ETB) on weekdays. The API returns buying, selling and weighted_average per
-// currency for a given date; weighted_average is the mid.
+// Package nbe fetches rates from the National Bank of Ethiopia, which publishes
+// daily reference rates for 18 currencies against the Ethiopian birr (ETB) on
+// weekdays. The API returns buying, selling and weighted_average per currency
+// for a given date; weighted_average is the mid.
 //
-// XDR is published under its ISO 4217 code and passes through untouched. Coverage starts 2024-10-01 to skip the July
-// to September 2024 float-transition gap.
+// XDR is published under its ISO 4217 code and passes through untouched.
+// Coverage starts 2024-10-01 to skip the July to September 2024
+// float-transition gap.
 //
-// As in Ruby, Fetch requests every weekday from after through upto, both inclusive (one request per day), and returns
-// every row the API gives without further clipping.
+// As in Ruby, Fetch requests every weekday from after through upto, both
+// inclusive (one request per day), and returns every row the API gives without
+// further clipping.
 package nbe
 
 import (
@@ -42,7 +45,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 30 }
 
-// Fetch implements adapter.Adapter. A zero after is an error, as Ruby's nil..date range raises.
+// Fetch implements adapter.Adapter. A zero after is an error, as Ruby's
+// nil..date range raises.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")
@@ -119,7 +123,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 var leadingFloat = regexp.MustCompile(`^\s*[+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?`)
 
-// toF mirrors Ruby's to_f on a decoded JSON value: a string yields its leading number or 0, nil yields 0.
+// toF mirrors Ruby's to_f on a decoded JSON value: a string yields its leading
+// number or 0, nil yields 0.
 func toF(v any) float64 {
 	switch v := v.(type) {
 	case float64:

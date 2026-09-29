@@ -1,12 +1,16 @@
-// Package cbc fetches rates from the Central Bank of the Republic of China (Taiwan), which publishes daily interbank
-// spot rates for 15+ currencies against the US dollar, captured at 16:00 Taipei time. The API returns the full
-// historical dataset (from 1993-01-05) with no server-side date filtering, so rows are filtered here.
+// Package cbc fetches rates from the Central Bank of the Republic of China
+// (Taiwan), which publishes daily interbank spot rates for 15+ currencies
+// against the US dollar, captured at 16:00 Taipei time. The API returns the
+// full historical dataset (from 1993-01-05) with no server-side date filtering,
+// so rows are filtered here.
 //
-// The open-data file (BP01D01) regenerates nightly but its content is refreshed only in monthly batches in arrears: a
-// month's daily rows all land early in the following month. The provider cadence is therefore monthly, and this
+// The open-data file (BP01D01) regenerates nightly but its content is refreshed
+// only in monthly batches in arrears: a month's daily rows all land early in
+// the following month. The provider cadence is therefore monthly, and this
 // multi-currency data inherently lags by about a month.
 //
-// Unlike most adapters, the lower bound is inclusive: rows dated on `after` are kept, as the Ruby adapter does.
+// Unlike most adapters, the lower bound is inclusive: rows dated on `after` are
+// kept, as the Ruby adapter does.
 package cbc
 
 import (
@@ -21,8 +25,9 @@ import (
 
 const apiURL = "https://cpx.cbc.gov.tw/API/DataAPI/Get?FileName=BP01D01"
 
-// columns maps a row index to [quote, base]. Most rates are foreign currency per 1 USD; GBP, AUD and EUR are USD per
-// 1 unit. Columns 15-17 (DEM, FRF, NLG) hold pre-2002 data.
+// columns maps a row index to [quote, base]. Most rates are foreign currency
+// per 1 USD; GBP, AUD and EUR are USD per 1 unit. Columns 15-17 (DEM, FRF, NLG)
+// hold pre-2002 data.
 var columns = []struct {
 	index       int
 	quote, base string
@@ -89,7 +94,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(rows, after, upto)
 }
 
-// parse turns data rows into rates dated from start through end, both inclusive; a zero bound is open.
+// parse turns data rows into rates dated from start through end, both
+// inclusive; a zero bound is open.
 func parse(rows [][]any, start, end time.Time) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, row := range rows {

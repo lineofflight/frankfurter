@@ -159,8 +159,9 @@ type sheet struct {
 	rows [][]any
 }
 
-// workbook builds an XLSX with the given sheets in order, writing each row from column A. Go strings become shared
-// strings, numbers become numeric cells and nil becomes a cell with no value.
+// workbook builds an XLSX with the given sheets in order, writing each row from
+// column A. Go strings become shared strings, numbers become numeric cells and
+// nil becomes a cell with no value.
 func workbook(t *testing.T, sheets ...sheet) []byte {
 	t.Helper()
 	f := excelize.NewFile()

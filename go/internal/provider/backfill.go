@@ -16,28 +16,34 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Blend is the materialized blend (Materialized in production). Backfill calls it inside its write transaction, so
-// implementations must run on q and not open a transaction of their own.
+// Blend is the materialized blend (Materialized in production). Backfill calls
+// it inside its write transaction, so implementations must run on q and not
+// open a transaction of their own.
 type Blend interface {
-	// RefreshTx recomputes stored daily blends for every anchor date in [from, to] (BlendedRate.refresh).
+	// RefreshTx recomputes stored daily blends for every anchor date in [from,
+	// to] (BlendedRate.refresh).
 	RefreshTx(ctx context.Context, q db.Querier, from, to time.Time) error
-	// RefreshRollupsTx recomputes the blended weekly and monthly buckets that rates.RefreshRollups touched
-	// (BlendedWeeklyRate.refresh and BlendedMonthlyRate.refresh).
+	// RefreshRollupsTx recomputes the blended weekly and monthly buckets that
+	// rates.RefreshRollups touched (BlendedWeeklyRate.refresh and
+	// BlendedMonthlyRate.refresh).
 	RefreshRollupsTx(ctx context.Context, q db.Querier, buckets map[rates.Precision][]string) error
 }
 
 // Cache is the CDN cache, owned by the cache step.
 type Cache interface {
-	// PurgeDebounced is Cache.purge_debounced: purge now, or mark a purge pending inside the debounce window.
+	// PurgeDebounced is Cache.purge_debounced: purge now, or mark a purge
+	// pending inside the debounce window.
 	PurgeDebounced(ctx context.Context) error
 }
 
-// Ingester runs backfills: it fetches through each provider's registered adapter, validates and normalises the rows,
-// stores them and refreshes everything derived from them.
+// Ingester runs backfills: it fetches through each provider's registered
+// adapter, validates and normalises the rows, stores them and refreshes
+// everything derived from them.
 type Ingester struct {
 	DB *sql.DB
 
-	// Client is handed to registered adapter constructors. Nil means adapter.NewClient().
+	// Client is handed to registered adapter constructors. Nil means
+	// adapter.NewClient().
 	Client *http.Client
 
 	// Blend defaults to Materialized. Cache is skipped when nil.
@@ -50,7 +56,8 @@ type Ingester struct {
 	// Today defaults to rates.Today.
 	Today func() time.Time
 
-	// Adapter resolves a provider key to its adapter. Nil means the adapter registry; tests swap in fakes.
+	// Adapter resolves a provider key to its adapter. Nil means the adapter
+	// registry; tests swap in fakes.
 	Adapter func(key string) (adapter.Adapter, error)
 }
 
@@ -82,8 +89,9 @@ func (in *Ingester) adapter(key string) (adapter.Adapter, error) {
 	return Lookup(key, in.Client)
 }
 
-// Lookup builds the adapter registered under key with client (adapter.NewClient() when nil). The binary must import
-// internal/adapters/all for every adapter to be registered.
+// Lookup builds the adapter registered under key with client
+// (adapter.NewClient() when nil). The binary must import internal/adapters/all
+// for every adapter to be registered.
 func Lookup(key string, client *http.Client) (adapter.Adapter, error) {
 	build, ok := adapter.Lookup(key)
 	if !ok {
@@ -95,8 +103,9 @@ func Lookup(key string, client *http.Client) (adapter.Adapter, error) {
 	return build(client), nil
 }
 
-// Backfill is Provider#backfill with its default cursor: after the newest stored rate, or after coverage_start when
-// there is none, or from the source's start when neither exists.
+// Backfill is Provider#backfill with its default cursor: after the newest
+// stored rate, or after coverage_start when there is none, or from the source's
+// start when neither exists.
 func (in *Ingester) Backfill(ctx context.Context, p Provider) {
 	last, err := p.LastSynced(ctx, in.DB)
 	if err != nil {
@@ -109,8 +118,9 @@ func (in *Ingester) Backfill(ctx context.Context, p Provider) {
 	in.BackfillAfter(ctx, p, last)
 }
 
-// BackfillAfter fetches the provider's rows dated after `after` (zero: from the start) and stores them. Each fetched
-// batch commits on its own. Failures are logged and end the run, as in Ruby, which rescues and moves on to the next
+// BackfillAfter fetches the provider's rows dated after `after` (zero: from the
+// start) and stores them. Each fetched batch commits on its own. Failures are
+// logged and end the run, as in Ruby, which rescues and moves on to the next
 // provider.
 func (in *Ingester) BackfillAfter(ctx context.Context, p Provider, after time.Time) {
 	log := in.logger().With("provider", p.Key)
@@ -191,7 +201,8 @@ func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, re
 	if inserted == 0 {
 		return nil
 	}
-	// Purge stays last: purging before the blend refresh commits would let the edge re-cache stale blends.
+	// Purge stays last: purging before the blend refresh commits would let the
+	// edge re-cache stale blends.
 	if in.Cache != nil {
 		if err := in.Cache.PurgeDebounced(ctx); err != nil {
 			return fmt.Errorf("purge cache: %w", err)
@@ -201,8 +212,9 @@ func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, re
 	return err
 }
 
-// refresh rebuilds what the inserted records feed: provider rollups and, for blending providers, their blended
-// buckets, currency summaries, and the stored daily blend.
+// refresh rebuilds what the inserted records feed: provider rollups and, for
+// blending providers, their blended buckets, currency summaries, and the stored
+// daily blend.
 func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, records []adapter.Rate) error {
 	var dates []time.Time
 	var codes []string
@@ -232,9 +244,11 @@ func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, recor
 	if !p.Blends() {
 		return nil
 	}
-	// A late arrival at date d joins the carry-forward contributor set of anchors through d + LookbackDays, so those
-	// stored blends change too. Inside the transaction: the write lock serialises concurrent backfills' refreshes, and
-	// a failed refresh rolls back the insert so the next fetch re-ingests and retries.
+	// A late arrival at date d joins the carry-forward contributor set of
+	// anchors through d + LookbackDays, so those stored blends change too.
+	// Inside the transaction: the write lock serialises concurrent backfills'
+	// refreshes, and a failed refresh rolls back the insert so the next fetch
+	// re-ingests and retries.
 	first, last := slices.MinFunc(dates, time.Time.Compare), slices.MaxFunc(dates, time.Time.Compare)
 	if err := in.blend().RefreshTx(ctx, q, first, last.AddDate(0, 0, rates.LookbackDays)); err != nil {
 		return fmt.Errorf("refresh blend: %w", err)
@@ -242,8 +256,9 @@ func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, recor
 	return nil
 }
 
-// warnRevisions reports fetched rows whose stored value differs. Insert-only backfill never rewrites a stored row, so
-// a source that revises a published value in place leaves us holding the old one; the fix is the documented
+// warnRevisions reports fetched rows whose stored value differs. Insert-only
+// backfill never rewrites a stored row, so a source that revises a published
+// value in place leaves us holding the old one; the fix is the documented
 // delete-and-refetch.
 func (in *Ingester) warnRevisions(ctx context.Context, p Provider, records []adapter.Rate, log *slog.Logger) error {
 	if len(records) == 0 {

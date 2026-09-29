@@ -8,8 +8,9 @@ import (
 	"testing"
 )
 
-// testdata/ruby_format.txt holds Ruby's format("%.<d>f", v) ("f<d>" lines) and format("%.12g", v) ("g12" lines) for
-// random values, many of them decimal ties that the exact binary value rounds the other way.
+// testdata/ruby_format.txt holds Ruby's format("%.<d>f", v) ("f<d>" lines) and
+// format("%.12g", v) ("g12" lines) for random values, many of them decimal ties
+// that the exact binary value rounds the other way.
 func TestFormatRoundMatchesRuby(t *testing.T) {
 	f, err := os.Open("testdata/ruby_format.txt")
 	if err != nil {

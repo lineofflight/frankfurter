@@ -1,10 +1,13 @@
-// Package bota fetches rates from the Bank of Tanzania, which publishes daily exchange rates for 35+ currencies against
-// the Tanzanian shilling (TZS), 7 days a week. It uses the Mean column (midpoint of buy and sell).
+// Package bota fetches rates from the Bank of Tanzania, which publishes daily
+// exchange rates for 35+ currencies against the Tanzanian shilling (TZS), 7
+// days a week. It uses the Mean column (midpoint of buy and sell).
 //
-// The previous_rates endpoint is protected by ASP.NET MVC antiforgery validation: a POST must carry a
-// __RequestVerificationToken both as a cookie and as a matching form field, or the server returns HTTP 500. Fetch first
-// GETs the page to obtain the session cookie and scrape the hidden token field, then POSTs the date range with the
-// cookie and token. Rows are returned as published, not clipped to the window.
+// The previous_rates endpoint is protected by ASP.NET MVC antiforgery
+// validation: a POST must carry a __RequestVerificationToken both as a cookie
+// and as a matching form field, or the server returns HTTP 500. Fetch first
+// GETs the page to obtain the session cookie and scrape the hidden token field,
+// then POSTs the date range with the cookie and token. Rows are returned as
+// published, not clipped to the window.
 package bota
 
 import (

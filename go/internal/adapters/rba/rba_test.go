@@ -101,7 +101,8 @@ const header = "F11.1  EXCHANGE RATES\nTitle,A$1=USD,A$1=JPY\nDescription,a,b\nF
 	"Series ID,FXRUSD,FXRJY\n"
 
 func TestParseRejectsMalformedLine(t *testing.T) {
-	// Ruby's CSV.parse_line raises on a malformed data line rather than skipping it.
+	// Ruby's CSV.parse_line raises on a malformed data line rather than
+	// skipping it.
 	for _, line := range []string{`03-Jan-2023,0"6828,88.48`, `03-Jan-2023,"0.6828,88.48`} {
 		if _, err := parse([]byte(header + line + "\n")); err == nil {
 			t.Errorf("%s: want error", line)

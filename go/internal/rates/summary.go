@@ -8,10 +8,12 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// RefreshSummaries is CurrencySummary.refresh: it recomputes, per code, the provider coverage ranges and the
-// catalogue row from stored daily rates. Named, current observations define coverage; codes the Money gem cannot name
-// keep separate publication ranges in currency_exclusions, so provider health can report them without rescanning
-// history. The catalogue row spans the coverage of blending providers only. A non-empty provider limits the refresh
+// RefreshSummaries is CurrencySummary.refresh: it recomputes, per code, the
+// provider coverage ranges and the catalogue row from stored daily rates.
+// Named, current observations define coverage; codes the Money gem cannot name
+// keep separate publication ranges in currency_exclusions, so provider health
+// can report them without rescanning history. The catalogue row spans the
+// coverage of blending providers only. A non-empty provider limits the refresh
 // of coverage and exclusions to that provider's rows.
 func RefreshSummaries(ctx context.Context, q db.Querier, codes []string, provider string) error {
 	nonBlending, err := NonBlendingKeys(ctx, q)

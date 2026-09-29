@@ -1,6 +1,7 @@
-// Package banrep fetches rates from Banco de la República Colombia, which publishes the daily TRM (Tasa
-// Representativa del Mercado), the representative market rate of the US dollar in Colombian pesos, through the
-// Socrata Open Data API on datos.gov.co.
+// Package banrep fetches rates from Banco de la República Colombia, which
+// publishes the daily TRM (Tasa Representativa del Mercado), the representative
+// market rate of the US dollar in Colombian pesos, through the Socrata Open
+// Data API on datos.gov.co.
 package banrep
 
 import (
@@ -79,7 +80,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// day renders a date for the query, leaving an open bound empty as the Ruby string interpolation of nil does.
+// day renders a date for the query, leaving an open bound empty as the Ruby
+// string interpolation of nil does.
 func day(t time.Time) string {
 	if t.IsZero() {
 		return ""

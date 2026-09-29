@@ -1,9 +1,11 @@
-// Package nbm fetches rates from the National Bank of Moldova (Banca Națională a Moldovei), which publishes daily rates
-// for 30+ currencies against the Moldovan leu (MDL), plus daily reference prices for gold and silver.
+// Package nbm fetches rates from the National Bank of Moldova (Banca Națională
+// a Moldovei), which publishes daily rates for 30+ currencies against the
+// Moldovan leu (MDL), plus daily reference prices for gold and silver.
 //
-// Date-parameterized XML endpoints, one request per day. Metals come from official_metal_rates in MDL per gram; values
-// are normalized to per troy ounce here. As in the Ruby adapter, after is inclusive: every weekday from after through
-// upto is requested and no window is applied.
+// Date-parameterized XML endpoints, one request per day. Metals come from
+// official_metal_rates in MDL per gram; values are normalized to per troy ounce
+// here. As in the Ruby adapter, after is inclusive: every weekday from after
+// through upto is requested and no window is applied.
 package nbm
 
 import (
@@ -44,7 +46,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter: one request per day, so keep windows short.
+// BackfillRange implements adapter.Adapter: one request per day, so keep
+// windows short.
 func (a *Adapter) BackfillRange() int { return 30 }
 
 // Fetch implements adapter.Adapter.
@@ -103,7 +106,8 @@ type entry struct {
 	Value    *string `xml:"Value"`
 }
 
-// rate returns value per nominal, or false when the code is not wanted or either number is zero.
+// rate returns value per nominal, or false when the code is not wanted or
+// either number is zero.
 func (e entry) rate(valid func(string) bool) (string, float64, bool) {
 	if e.CharCode == nil {
 		return "", 0, false

@@ -1,8 +1,10 @@
-// Package bomu fetches rates from the Bank of Mauritius, which publishes daily averages of banks' indicative retail
-// transfer buy/sell rates, in MUR per foreign unit.
+// Package bomu fetches rates from the Bank of Mauritius, which publishes daily
+// averages of banks' indicative retail transfer buy/sell rates, in MUR per
+// foreign unit.
 //
-// Both date filters are required: omitting the end date asks Drupal for the entire remaining archive. Unlike most
-// adapters, Fetch keeps rows dated on `after` itself: both bounds are inclusive, as in the Ruby adapter.
+// Both date filters are required: omitting the end date asks Drupal for the
+// entire remaining archive. Unlike most adapters, Fetch keeps rows dated on
+// `after` itself: both bounds are inclusive, as in the Ruby adapter.
 package bomu
 
 import (
@@ -49,8 +51,9 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return backfillRange }
 
-// Fetch implements adapter.Adapter. It requests the range in chunks of backfillRange days and keeps rows dated from
-// after through upto, both inclusive.
+// Fetch implements adapter.Adapter. It requests the range in chunks of
+// backfillRange days and keeps rows dated from after through upto, both
+// inclusive.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	start, end := after, upto
 	if start.IsZero() {
@@ -96,7 +99,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 }
 
 func parse(html []byte) ([]adapter.Rate, error) {
-	// The live page contains a NUL in its navigation, which otherwise truncates Nokogiri's HTML parser.
+	// The live page contains a NUL in its navigation, which otherwise truncates
+	// Nokogiri's HTML parser.
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(bytes.ReplaceAll(html, []byte{0}, nil)))
 	if err != nil {
 		return nil, err
@@ -106,13 +110,15 @@ func parse(html []byte) ([]adapter.Rate, error) {
 		return nil, errors.New("missing exchange-rate view")
 	}
 
-	// Genuine empty date ranges omit the primary content block. A present but unrecognized table is a parse failure.
+	// Genuine empty date ranges omit the primary content block. A present but
+	// unrecognized table is a parse failure.
 	content := view.ChildrenFiltered(".view-content").First()
 	if content.Length() == 0 {
 		return nil, nil
 	}
 
-	// An attachment repeats the filtered rates and a sidebar shows today's quotes. Use only the primary table.
+	// An attachment repeats the filtered rates and a sidebar shows today's
+	// quotes. Use only the primary table.
 	rows := content.ChildrenFiltered(".table-responsive").ChildrenFiltered("table").
 		ChildrenFiltered("tbody").ChildrenFiltered("tr.tblConso")
 	if rows.Length() == 0 {
@@ -133,7 +139,8 @@ func parse(html []byte) ([]adapter.Rate, error) {
 }
 
 func parseRow(row *goquery.Selection) (adapter.Rate, bool, error) {
-	// Ruby's strip trims only ASCII whitespace, so a cell padded with a non-breaking space stays unparseable.
+	// Ruby's strip trims only ASCII whitespace, so a cell padded with a
+	// non-breaking space stays unparseable.
 	cell := func(class string) string { return strings.Trim(row.Find(class).First().Text(), " \t\n\v\f\r\x00") }
 	number := func(class string) (float64, bool) {
 		s := cell(class)

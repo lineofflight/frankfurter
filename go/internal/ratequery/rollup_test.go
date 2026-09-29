@@ -15,7 +15,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// spec/versions/v2/blended_rollups_spec.rb ("materialized responses") and the query-level cases of spec/rollup_spec.rb.
+// spec/versions/v2/blended_rollups_spec.rb ("materialized responses") and the
+// query-level cases of spec/rollup_spec.rb.
 
 // body is Oj.dump(RateQuery.new(params).to_a) with force_live set as given.
 func body(t *testing.T, conn *sql.DB, live bool, kv ...string) string {
@@ -29,7 +30,8 @@ func body(t *testing.T, conn *sql.DB, live bool, kv ...string) string {
 	return string(data)
 }
 
-// shapeWith is the spec's shape with overrides; an empty value drops the key, as compact does with nil.
+// shapeWith is the spec's shape with overrides; an empty value drops the key,
+// as compact does with nil.
 func shapeWith(group string, overrides ...string) []string {
 	m := map[string]string{
 		"base": "CHF", "quotes": "USD,EUR,GBP,JPY", "from": d(latest().AddDate(0, 0, -370)), "to": d(latest()), "group": group,
@@ -60,7 +62,8 @@ func rebuildRollup(t *testing.T, conn *sql.DB, model blend.Rollup) {
 	}
 }
 
-// forbidRead makes any materialized grouped read fail the test for the rest of it.
+// forbidRead makes any materialized grouped read fail the test for the rest of
+// it.
 func forbidRead(t *testing.T) {
 	orig := readRollup
 	readRollup = func(context.Context, blend.Rollup, db.Querier, time.Time, time.Time, time.Time) ([]currency.Blended, bool, error) {
@@ -259,8 +262,9 @@ func TestGroupedKeepsSnapshotsWithGroupOnDailyPath(t *testing.T) {
 	}
 }
 
-// Both spans cross their chunk sizes (21 months weekly, 84 monthly), with source dates on either side of the year
-// boundary. A sparse source may snap back to the same bucket in several successive chunks.
+// Both spans cross their chunk sizes (21 months weekly, 84 monthly), with
+// source dates on either side of the year boundary. A sparse source may snap
+// back to the same bucket in several successive chunks.
 func TestGroupedPreservesSourceBucketsAndDuplicatesAcrossChunks(t *testing.T) {
 	for _, c := range groupedCases {
 		t.Run(c.group, func(t *testing.T) {
@@ -314,7 +318,8 @@ func TestSingleDateGroupedQuery(t *testing.T) {
 	}
 }
 
-// The cache key derives from the raw max date, so it stays stable when rollup content changes within a day.
+// The cache key derives from the raw max date, so it stays stable when rollup
+// content changes within a day.
 func TestCacheKeyDerivesFromRawRates(t *testing.T) {
 	conn := fixtures.New(t)
 	shape := []string{"from", d(latest().AddDate(0, 0, -30)), "to", d(latest()), "group", "month"}

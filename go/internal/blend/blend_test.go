@@ -138,7 +138,8 @@ func TestWeightedAverageEmpty(t *testing.T) {
 }
 
 func TestKBSumMatchesRubyArraySum(t *testing.T) {
-	// [0.1] * 10 sums to exactly 1.0 in Ruby; naive addition gives 0.9999999999999999.
+	// [0.1] * 10 sums to exactly 1.0 in Ruby; naive addition gives
+	// 0.9999999999999999.
 	values := make([]float64, 10)
 	for i := range values {
 		values[i] = 0.1
@@ -371,8 +372,9 @@ func TestConvertBridgeQuotingBase(t *testing.T) {
 }
 
 func TestConvertBridgesThroughFirstMatchingRow(t *testing.T) {
-	// Carry-forward snapshots can mix observation dates within a group; the bridge resolves to the first matching row
-	// in group order, as Array#find did.
+	// Carry-forward snapshots can mix observation dates within a group; the
+	// bridge resolves to the first matching row in group order, as Array#find
+	// did.
 	tuesday := adapter.Date(2024, 1, 16)
 	got := Convert([]rates.Row{
 		row(jan15, "EUR", "USD", 1.08, "ECB"),

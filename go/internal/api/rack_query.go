@@ -7,21 +7,24 @@ import (
 	"strings"
 )
 
-// Limits of the query parser Roda installs (Rack::QueryParser's defaults, with the depth indifferent_params sets).
+// Limits of the query parser Roda installs (Rack::QueryParser's defaults, with
+// the depth indifferent_params sets).
 const (
 	rackDepthLimit    = 32
 	rackParamsLimit   = 4096
 	rackBytesizeLimit = 4 << 20
 )
 
-// rackHash is a query string parsed as Rack's parse_nested_query does. Values are strings, nil (a key without '='),
-// *[]any (a key ending in []) or nested rackHash values (a key with [name] parts).
+// rackHash is a query string parsed as Rack's parse_nested_query does. Values
+// are strings, nil (a key without '='), *[]any (a key ending in []) or nested
+// rackHash values (a key with [name] parts).
 type rackHash map[string]any
 
 var errRackTooDeep = errors.New("query nested too deep")
 
-// parseRackQuery is Rack::QueryParser#parse_nested_query with Roda's separator: pairs split on '&' (and the spaces
-// after it), '+' as space, a bad %-escape, a type conflict or a broken limit is an error.
+// parseRackQuery is Rack::QueryParser#parse_nested_query with Roda's separator:
+// pairs split on '&' (and the spaces after it), '+' as space, a bad %-escape, a
+// type conflict or a broken limit is an error.
 func parseRackQuery(raw string) (rackHash, error) {
 	params := rackHash{}
 	if raw == "" {
@@ -61,9 +64,9 @@ func parseRackQuery(raw string) (rackHash, error) {
 	return params, nil
 }
 
-// normalizeRackParams is Rack's _normalize_params: it files v under name, nesting on its [] and [key] parts. It
-// returns what the caller stores: params, a one-element array for a trailing [] below the top, or nil for an empty
-// key.
+// normalizeRackParams is Rack's _normalize_params: it files v under name,
+// nesting on its [] and [key] parts. It returns what the caller stores: params,
+// a one-element array for a trailing [] below the top, or nil for an empty key.
 func normalizeRackParams(params rackHash, name string, v any, depth int) (any, error) {
 	if depth >= rackDepthLimit {
 		return nil, errRackTooDeep
@@ -104,7 +107,8 @@ func normalizeRackParams(params rackHash, name string, v any, depth int) (any, e
 		}
 		*arr = append(*arr, v)
 	case strings.HasPrefix(after, "[]"):
-		// x[][y] puts a hash inside the array; any other tail nests as it stands.
+		// x[][y] puts a hash inside the array; any other tail nests as it
+		// stands.
 		child := after[2:]
 		if len(after) >= 4 && after[2] == '[' && strings.HasSuffix(after, "]") {
 			if c := after[3 : len(after)-1]; c != "" && !strings.ContainsAny(c, "[]") {
@@ -159,7 +163,8 @@ func rackArrayAt(params rackHash, k string) (*[]any, error) {
 	return arr, nil
 }
 
-// rackHasKey is Rack's params_hash_has_key?: whether the path of names in key (a[b][c]) already exists in h.
+// rackHasKey is Rack's params_hash_has_key?: whether the path of names in key
+// (a[b][c]) already exists in h.
 func rackHasKey(h rackHash, key string) bool {
 	if strings.Contains(key, "[]") {
 		return false

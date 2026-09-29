@@ -117,7 +117,8 @@ func TestExtractCode(t *testing.T) {
 	}
 }
 
-// workbook builds an XLSX with one sheet per name, each filled row by row from A1.
+// workbook builds an XLSX with one sheet per name, each filled row by row from
+// A1.
 func workbook(t *testing.T, sheets map[string][][]any) []byte {
 	t.Helper()
 	f := excelize.NewFile()
@@ -294,7 +295,8 @@ func TestGolden(t *testing.T) {
 	}
 }
 
-// Ruby's strip leaves U+00A0 in place, so "Gold " is not the Gold alias and " Jan." is not a month.
+// Ruby's strip leaves U+00A0 in place, so "Gold " is not the Gold alias and "
+// Jan." is not a month.
 func TestStripKeepsNonASCIISpace(t *testing.T) {
 	if got := extractCode("Gold "); got != "" {
 		t.Errorf("extractCode = %q, want no code", got)

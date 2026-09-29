@@ -1,8 +1,10 @@
-// Package bcb fetches rates from Banco Central do Brasil, which publishes daily PTAX closing rates for 10 currencies
-// against the Brazilian real through the PTAX OData API. PTAX only publishes these 10 currencies.
+// Package bcb fetches rates from Banco Central do Brasil, which publishes daily
+// PTAX closing rates for 10 currencies against the Brazilian real through the
+// PTAX OData API. PTAX only publishes these 10 currencies.
 //
-// Fetch passes after and upto straight to the API as the first and last quotation dates, so after is inclusive, as
-// in the Ruby adapter, and it must be set (Ruby raises on a nil after).
+// Fetch passes after and upto straight to the API as the first and last
+// quotation dates, so after is inclusive, as in the Ruby adapter, and it must
+// be set (Ruby raises on a nil after).
 package bcb
 
 import (
@@ -63,7 +65,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// query builds the OData query string by hand, with the literal quotes and escapes the API expects.
+// query builds the OData query string by hand, with the literal quotes and
+// escapes the API expects.
 func query(currency string, from, upto time.Time) string {
 	return strings.Join([]string{
 		fmt.Sprintf("@moeda='%s'", currency),

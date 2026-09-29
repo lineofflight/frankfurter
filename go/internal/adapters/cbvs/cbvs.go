@@ -1,22 +1,30 @@
-// Package cbvs fetches Centrale Bank van Suriname's indicative quotes in SRD for USD, EUR, GBP, CNY and seven
-// Caribbean and South American currencies, published as PDF notices ("wisselkoersnoteringen"). Each notice carries buy
-// and sell columns for transfers (wissels, cheques en overmakingen) and for banknotes; we take the midpoint of the
-// transfer pair. GYD is quoted per 100 and is normalised to a per-unit rate.
+// Package cbvs fetches Centrale Bank van Suriname's indicative quotes in SRD
+// for USD, EUR, GBP, CNY and seven Caribbean and South American currencies,
+// published as PDF notices ("wisselkoersnoteringen"). Each notice carries buy
+// and sell columns for transfers (wissels, cheques en overmakingen) and for
+// banknotes; we take the midpoint of the transfer pair. GYD is quoted per 100
+// and is normalised to a per-unit rate.
 //
-// The archive page lists one PDF per year for 2009-2023, one per month from 2024 and one per fixing for the current
-// month (three a day, at 10:00, 12:30 and 15:00 local). Fetch scrapes the page, classifies each link by the span it
-// covers and downloads only those overlapping the requested window. Yearly PDFs are large (up to 10 MB, 1500 pages)
-// and slow to parse, so history is fetched in a single pass rather than in chunks that would redownload the same file.
+// The archive page lists one PDF per year for 2009-2023, one per month from
+// 2024 and one per fixing for the current month (three a day, at 10:00, 12:30
+// and 15:00 local). Fetch scrapes the page, classifies each link by the span it
+// covers and downloads only those overlapping the requested window. Yearly PDFs
+// are large (up to 10 MB, 1500 pages) and slow to parse, so history is fetched
+// in a single pass rather than in chunks that would redownload the same file.
 //
-// One page per fixing, in the same text layout since 2009: a Dutch date line ("08 SEPTEMBER 2026", from 2021 with
-// "VASTGESTELD OMSTREEKS 15:00U"), then one row per currency with the ISO code in parentheses and four numbers. Pages
-// without a Dutch date line (gold-certificate valuations, an occasional English rendition of a notice, the sell-only
-// extended overview appended to the 2022 file) are skipped. 2013 uses a dot as the decimal separator; every other year
+// One page per fixing, in the same text layout since 2009: a Dutch date line
+// ("08 SEPTEMBER 2026", from 2021 with "VASTGESTELD OMSTREEKS 15:00U"), then
+// one row per currency with the ISO code in parentheses and four numbers. Pages
+// without a Dutch date line (gold-certificate valuations, an occasional English
+// rendition of a notice, the sell-only extended overview appended to the 2022
+// file) are skipped. 2013 uses a dot as the decimal separator; every other year
 // uses a comma.
 //
-// A day with several fixings yields the last one. For the current day that means waiting for the closing fixing:
-// storing the 10:00 quote would freeze it, since backfill never rewrites a stored row. In March 2021 the notice appended
-// USD and EUR quotes at the maximum selling rate below the main table; the main table comes first and wins.
+// A day with several fixings yields the last one. For the current day that
+// means waiting for the closing fixing: storing the 10:00 quote would freeze
+// it, since backfill never rewrites a stored row. In March 2021 the notice
+// appended USD and EUR quotes at the maximum selling rate below the main table;
+// the main table comes first and wins.
 //
 // Direction: foreign currency in base, SRD in quote (1 USD = X SRD).
 //
@@ -56,17 +64,20 @@ var (
 
 	pdfHref = regexp.MustCompile(`(?i)href="([^"]*/Wisselkoersen/[^"]*\.pdf)"`)
 
-	// Filename shapes on the archive page, one per generation. Daily: "DO260908 15.00 uur.pdf" (yymmdd, then the
-	// fixing time; "uu" typos occur). Monthly: "WK_JANUARI_2024.pdf" or "WisselkoersnoteringMaarti2025.pdf" (typos
-	// occur). Yearly: "Jaar_2010.pdf", "Jaar2014.pdf", "jaar-2009sep-dec.pdf", "Jaar_2023_WK.pdf".
+	// Filename shapes on the archive page, one per generation. Daily: "DO260908
+	// 15.00 uur.pdf" (yymmdd, then the fixing time; "uu" typos occur). Monthly:
+	// "WK_JANUARI_2024.pdf" or "WisselkoersnoteringMaarti2025.pdf" (typos
+	// occur). Yearly: "Jaar_2010.pdf", "Jaar2014.pdf", "jaar-2009sep-dec.pdf",
+	// "Jaar_2023_WK.pdf".
 	dailyFile   = regexp.MustCompile(`\ADO(\d{2})(\d{2})(\d{2})\b`)
 	monthlyFile = regexp.MustCompile(`(?i)(` + monthPattern + `)[A-Z]*?_?(\d{4})\.pdf\z`)
 	yearlyFile  = regexp.MustCompile(`(?i)JAAR[_ -]?(\d{4})`)
 
 	header = regexp.MustCompile(`(\d{1,2})\s+(` + monthPattern + `)\s+(\d{4})(?:\s+VASTGESTELD\s+OMSTREEKS\s+(\d{1,2})[.:](\d{2}))?`)
 
-	// "U.S. DOLLAR (USD)", "GUYANA DOLLAR (PER 100 GYD)", "GUYANA DOLLAR (GYD PER 100 )", "CHINESE YUAN RENMINBI (PER
-	// CNY)". A few rows lose the closing parenthesis to the text extraction.
+	// "U.S. DOLLAR (USD)", "GUYANA DOLLAR (PER 100 GYD)", "GUYANA DOLLAR (GYD
+	// PER 100 )", "CHINESE YUAN RENMINBI (PER CNY)". A few rows lose the
+	// closing parenthesis to the text extraction.
 	row = regexp.MustCompile(`\A[A-Z][A-Z .&]*?\s*\((?:PER\s+)?(?:(\d+)\s+)?([A-Z]{3})(?:\s+PER\s+(\d+))?\s*\)?\s+` +
 		`(\d[\d.,]*)\s+(\d[\d.,]*)\s+(\d[\d.,]*)\s+(\d[\d.,]*)\z`)
 )
@@ -132,8 +143,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// closing keeps the last fixing per date within the window, in the order given for ties. Today's date is held back
-// until its closing fixing is out.
+// closing keeps the last fixing per date within the window, in the order given
+// for ties. Today's date is held back until its closing fixing is out.
 func closing(fixings []fixing, after, upto, today time.Time) []fixing {
 	var order []time.Time
 	latest := map[time.Time]fixing{}
@@ -162,7 +173,8 @@ func closing(fixings []fixing, after, upto, today time.Time) []fixing {
 	return selected
 }
 
-// pageText extracts one page's text. It stands in for pdf-reader's page.text, which can raise on a malformed page.
+// pageText extracts one page's text. It stands in for pdf-reader's page.text,
+// which can raise on a malformed page.
 type pageText func() (string, error)
 
 // parse reads one fixing per notice page.
@@ -183,8 +195,9 @@ func parsePages(pages []pageText) ([]fixing, error) {
 	for _, page := range pages {
 		text, err := page()
 		if err != nil {
-			// One page of the June 2025 monthly file has an invalid font. The archive is static, so failing would
-			// block the provider at that file for good; the day keeps its other fixings.
+			// One page of the June 2025 monthly file has an invalid font. The
+			// archive is static, so failing would block the provider at that
+			// file for good; the day keeps its other fixings.
 			continue
 		}
 		f, ok, err := parsePage(text)
@@ -267,7 +280,8 @@ func record(line string, date time.Time) (adapter.Rate, bool, error) {
 	}, true, nil
 }
 
-// number reads Dutch notation ("1.073,45") from 2014; a bare dot ("3.250") is the decimal separator in 2013.
+// number reads Dutch notation ("1.073,45") from 2014; a bare dot ("3.250") is
+// the decimal separator in 2013.
 func number(text string) (float64, error) {
 	if strings.Contains(text, ",") {
 		text = strings.ReplaceAll(text, ".", "")
@@ -275,8 +289,9 @@ func number(text string) (float64, error) {
 	return strconv.ParseFloat(strings.ReplaceAll(text, ",", "."), 64)
 }
 
-// coverage is the span of dates a listed PDF covers; ok is false for a link that is not a rate notice.
-// An impossible date in a daily filename is an error, as Ruby's Date.new raises on it.
+// coverage is the span of dates a listed PDF covers; ok is false for a link
+// that is not a rate notice. An impossible date in a daily filename is an
+// error, as Ruby's Date.new raises on it.
 func coverage(href string) (span, bool, error) {
 	name := path.Base(href)
 	if m := dailyFile.FindStringSubmatch(name); m != nil {
@@ -302,8 +317,8 @@ type listing struct {
 	href string
 }
 
-// documents lists the archive links overlapping the window, oldest first. Of a day's several fixing PDFs only the
-// latest is fetched.
+// documents lists the archive links overlapping the window, oldest first. Of a
+// day's several fixing PDFs only the latest is fetched.
 func (a *Adapter) documents(ctx context.Context, after, upto time.Time) ([]string, error) {
 	body, err := a.Get(ctx, archiveURL, nil)
 	if err != nil {
@@ -368,7 +383,8 @@ func (a *Adapter) documents(ctx context.Context, after, upto time.Time) ([]strin
 	return urls, nil
 }
 
-// escape percent-encodes the characters URI::RFC2396_PARSER.escape treats as unsafe.
+// escape percent-encodes the characters URI::RFC2396_PARSER.escape treats as
+// unsafe.
 func escape(s string) string {
 	const safe = "-_.!~*'();/?:@&=+$,[]"
 	var b strings.Builder
@@ -383,7 +399,8 @@ func escape(s string) string {
 	return b.String()
 }
 
-// validDate builds a date, rejecting one Ruby's Date.new would reject rather than normalising it.
+// validDate builds a date, rejecting one Ruby's Date.new would reject rather
+// than normalising it.
 func validDate(year, month, day int) (time.Time, bool) {
 	d := adapter.Date(year, time.Month(month), day)
 	return d, d.Year() == year && int(d.Month()) == month && d.Day() == day

@@ -1,16 +1,20 @@
-// Package dab fetches rates from Da Afghanistan Bank, which publishes daily reference rates for the Afghan afghani
-// (AFN) against about 10 currencies on its exchange-rates page. Coverage starts 2019-03-31, and the page takes a
+// Package dab fetches rates from Da Afghanistan Bank, which publishes daily
+// reference rates for the Afghan afghani (AFN) against about 10 currencies on
+// its exchange-rates page. Coverage starts 2019-03-31, and the page takes a
 // field_date_value=YYYY-MM-DD query parameter for historical days.
 //
-// The page has two tables: a daily snapshot (which we consume) and a monthly average (which we ignore). Each has four
-// columns: Cash Sell/Buy and Transfer Sell/Buy. The rate is the transfer mid.
+// The page has two tables: a daily snapshot (which we consume) and a monthly
+// average (which we ignore). Each has four columns: Cash Sell/Buy and Transfer
+// Sell/Buy. The rate is the transfer mid.
 //
-// Row labels are descriptive ("USD$", "EURO€", "INDIAN Rs.", "IRAN Toman"); labelMap turns them into ISO codes.
-// "IRAN Toman" is a non-ISO unit equal to 10 IRR, so its values are divided by 10.
+// Row labels are descriptive ("USD$", "EURO€", "INDIAN Rs.", "IRAN Toman");
+// labelMap turns them into ISO codes. "IRAN Toman" is a non-ISO unit equal to
+// 10 IRR, so its values are divided by 10.
 //
 // Rates are in DAB's native direction: foreign currency as base, AFN as quote.
 //
-// Fetch treats after as inclusive: it requests every day from after through upto, as the Ruby adapter does.
+// Fetch treats after as inclusive: it requests every day from after through
+// upto, as the Ruby adapter does.
 package dab
 
 import (
@@ -36,7 +40,8 @@ const (
 	irrPerToman = 10.0
 )
 
-// labelMap maps row labels, after stripping currency symbols and normalizing whitespace and case, to ISO codes.
+// labelMap maps row labels, after stripping currency symbols and normalizing
+// whitespace and case, to ISO codes.
 var labelMap = map[string]string{
 	"USD":          "USD",
 	"EURO":         "EUR",
@@ -55,8 +60,9 @@ var (
 	whitespace = regexp.MustCompile(`[\t\n\v\f\r ]+`)
 )
 
-// rubyStrip trims what Ruby's String#strip does: ASCII whitespace and NUL, not Unicode spaces such as NBSP, so a
-// label or cell padded with one is dropped as the Ruby adapter drops it.
+// rubyStrip trims what Ruby's String#strip does: ASCII whitespace and NUL, not
+// Unicode spaces such as NBSP, so a label or cell padded with one is dropped as
+// the Ruby adapter drops it.
 func rubyStrip(s string) string {
 	return strings.Trim(s, " \t\n\v\f\r\x00")
 }
@@ -75,7 +81,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. The endpoint serves one day per request.
+// BackfillRange implements adapter.Adapter. The endpoint serves one day per
+// request.
 func (a *Adapter) BackfillRange() int { return 1 }
 
 // Fetch implements adapter.Adapter.
@@ -159,7 +166,8 @@ func normalizeLabel(text string) string {
 	return strings.ToUpper(rubyStrip(s))
 }
 
-// parseDecimal returns a positive number, or false for blank, malformed or non-positive text.
+// parseDecimal returns a positive number, or false for blank, malformed or
+// non-positive text.
 func parseDecimal(text string) (float64, bool) {
 	s := strings.ReplaceAll(rubyStrip(text), ",", "")
 	if s == "" {

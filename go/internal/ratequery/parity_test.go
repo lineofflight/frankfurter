@@ -31,8 +31,9 @@ func runParity(t *testing.T, conn *sql.DB, samples int, seed uint64) ParityRepor
 	return report
 }
 
-// Merge-blocking parity gate for the materialized blend (#570): both paths serve identical responses across generated
-// shapes, with exactly two declared behavior changes, each asserted rather than ignored.
+// Merge-blocking parity gate for the materialized blend (#570): both paths
+// serve identical responses across generated shapes, with exactly two declared
+// behavior changes, each asserted rather than ignored.
 func TestParityServesIdenticalResponsesFromTables(t *testing.T) {
 	conn := fixtures.New(t)
 	rebuildAll(t, conn)
@@ -161,8 +162,10 @@ func liveQuery(t *testing.T, conn *sql.DB, kv ...string) []Record {
 	return all(t, q)
 }
 
-// agingScenario: T2's MXN observation ages out of the carry-forward lookback between T1's observation date and the
-// range start, so the live snap-back at the range start drops it while the table keeps the value blended at T1's date.
+// agingScenario: T2's MXN observation ages out of the carry-forward lookback
+// between T1's observation date and the range start, so the live snap-back at
+// the range start drops it while the table keeps the value blended at T1's
+// date.
 func agingScenario(t *testing.T) (conn *sql.DB, observed, rangeStart string) {
 	conn = fixtures.New(t)
 	obs := fixtures.BusinessDay(40)
@@ -175,8 +178,9 @@ func agingScenario(t *testing.T) (conn *sql.DB, observed, rangeStart string) {
 	return conn, d(obs), d(obs.AddDate(0, 0, 12))
 }
 
-// The explain machinery needs exercising: fixture shapes are usually identical, so without an engineered divergence
-// a broken verifier would only surface against a production copy.
+// The explain machinery needs exercising: fixture shapes are usually identical,
+// so without an engineered divergence a broken verifier would only surface
+// against a production copy.
 func TestParityVerifiesEngineeredDivergencesAndRejectsTampering(t *testing.T) {
 	conn, observed, rangeStart := agingScenario(t)
 	start, _ := ParseDate(rangeStart)
@@ -215,7 +219,8 @@ func TestParityVerifiesEngineeredDivergencesAndRejectsTampering(t *testing.T) {
 	}
 }
 
-// Carve-out 1: a snap-back row serves the canonical anchor-date value, asserted in the pivot frame.
+// Carve-out 1: a snap-back row serves the canonical anchor-date value, asserted
+// in the pivot frame.
 func TestSnapBackRowsServeCanonicalAnchorDateValue(t *testing.T) {
 	conn, observed, rangeStart := agingScenario(t)
 	start, _ := ParseDate(rangeStart)
@@ -226,14 +231,16 @@ func TestSnapBackRowsServeCanonicalAnchorDateValue(t *testing.T) {
 	if tableRow.Date != observed {
 		t.Fatalf("table row dated %s", tableRow.Date)
 	}
-	// By the range start T2 has aged out of the lookback, so the live snap-back drops it.
+	// By the range start T2 has aged out of the lookback, so the live snap-back
+	// drops it.
 	if liveRow.Rate == canonical.Rate || tableRow.Rate != canonical.Rate {
 		t.Fatalf("table %v, live %v, canonical %v", tableRow.Rate, liveRow.Rate, canonical.Rate)
 	}
 }
 
-// Carve-out 1, existence variant: an observation the consensus filter masked at its own anchor has no canonical value.
-// Live can surface it once the masking cohort ages out of the lookback; the table never serves it.
+// Carve-out 1, existence variant: an observation the consensus filter masked at
+// its own anchor has no canonical value. Live can surface it once the masking
+// cohort ages out of the lookback; the table never serves it.
 func TestOmitsRowsConsensusMaskedAtTheirOwnAnchor(t *testing.T) {
 	conn := fixtures.New(t)
 	d0 := fixtures.BusinessDay(40)
@@ -269,8 +276,9 @@ func TestOmitsRowsConsensusMaskedAtTheirOwnAnchor(t *testing.T) {
 	}
 }
 
-// Carve-out 2: range batches always blend via the pivot. A batch whose rows all share the requested base used to blend
-// directly in that base, where consensus and weighting see differently shaped numbers.
+// Carve-out 2: range batches always blend via the pivot. A batch whose rows all
+// share the requested base used to blend directly in that base, where consensus
+// and weighting see differently shaped numbers.
 func TestBlendsRangeBatchesInPivotFrame(t *testing.T) {
 	conn := fixtures.New(t)
 	eraStart, eraEnd := fixtures.BusinessDay(100), fixtures.BusinessDay(80)
@@ -295,7 +303,8 @@ func TestBlendsRangeBatchesInPivotFrame(t *testing.T) {
 	}
 	fast := findBlended(currency.AnchorPegs(blend.Blend(contributors, "EUR", today()), "EUR"), "GBP")
 	pivot := findBlended(derive(currency.AnchorPegs(blend.Blend(contributors, "USD", today()), "USD"), "EUR"), "GBP")
-	// Precondition: the two frames genuinely disagree for this batch, beyond rounding.
+	// Precondition: the two frames genuinely disagree for this batch, beyond
+	// rounding.
 	if roundValue(pivot.Rate) == roundValue(fast.Rate) {
 		t.Fatalf("frames agree: %v", pivot.Rate)
 	}

@@ -320,8 +320,9 @@ func TestV2FiltersByProviders(t *testing.T) {
 	}
 }
 
-// BOA observes a daily fixing but releases a month of them at once, so its newest row can be weeks old with nothing
-// missed. BOE publishes every day, so a row that old means the feed has stalled.
+// BOA observes a daily fixing but releases a month of them at once, so its
+// newest row can be weeks old with nothing missed. BOE publishes every day, so
+// a row that old means the feed has stalled.
 func TestV2CarriesArrearsFixingAcrossTheWait(t *testing.T) {
 	a := newV2App(t)
 	date := db.FormatDate(fixtures.Today().AddDate(0, 0, -20))
@@ -567,7 +568,8 @@ func (w *goneWriter) Write(b []byte) (int, error) {
 	return w.ResponseRecorder.Write(b)
 }
 
-// A client that disconnects mid-stream stops the compute, and the slot comes back.
+// A client that disconnects mid-stream stops the compute, and the slot comes
+// back.
 func TestV2ReturnsSlotWhenClientDisconnectsMidStream(t *testing.T) {
 	a := newV2App(t)
 	slots := heavyslots.New(1)
@@ -1043,8 +1045,9 @@ func TestV2ReturnsAnchorAsQuoteForPeggedBase(t *testing.T) {
 	}
 }
 
-// BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate data, so scoping ?providers= to ECB
-// excludes pegs along with all other unlisted sources.
+// BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate
+// data, so scoping ?providers= to ECB excludes pegs along with all other
+// unlisted sources.
 func TestV2ExcludesPegsWithProvidersFilter(t *testing.T) {
 	a := newV2App(t)
 	a.get("/rates?base=BMD&providers=ecb")
@@ -1087,7 +1090,8 @@ func TestV2ReturnsPegMetadataForPeggedCurrency(t *testing.T) {
 	}
 }
 
-// Provider routes: /providers/<key>/<path> is an alias of /<path>?providers=<key>, same bytes and headers.
+// Provider routes: /providers/<key>/<path> is an alias of
+// /<path>?providers=<key>, same bytes and headers.
 
 func assertAlias(t *testing.T, a *v2App, path, query string, headers ...string) {
 	t.Helper()
@@ -1197,9 +1201,10 @@ func TestV2ProviderRoutesRejectProvidersParam(t *testing.T) {
 	}
 }
 
-// Roda's String matcher captures an empty segment followed by a slash, so /rate//USD reaches the query with base ""
-// (422) and /providers//rates looks up provider "" (404). The router is called directly; TestRoutesUncleanPathsAsRoda
-// checks the same paths through the whole app.
+// Roda's String matcher captures an empty segment followed by a slash, so
+// /rate//USD reaches the query with base "" (422) and /providers//rates looks
+// up provider "" (404). The router is called directly;
+// TestRoutesUncleanPathsAsRoda checks the same paths through the whole app.
 func TestV2CapturesEmptySegmentBeforeSlash(t *testing.T) {
 	a := newV2App(t)
 	for path, status := range map[string]int{"/rate//USD": 422, "/providers//rates": 404, "/rate/EUR/": 404} {

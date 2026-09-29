@@ -9,8 +9,9 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// Currency is a row of the materialised currencies table, which backfill maintains incrementally (see
-// rates.RefreshSummaries), widened by its peg when it has one.
+// Currency is a row of the materialised currencies table, which backfill
+// maintains incrementally (see rates.RefreshSummaries), widened by its peg when
+// it has one.
 type Currency struct {
 	ISOCode   string
 	StartDate time.Time
@@ -41,7 +42,8 @@ func All(ctx context.Context, q db.Querier) ([]Currency, error) {
 	return mergePegged(rows), nil
 }
 
-// Active lists currencies whose end date lies within ActiveDays of today, pegged ones merged in.
+// Active lists currencies whose end date lies within ActiveDays of today,
+// pegged ones merged in.
 func Active(ctx context.Context, q db.Querier, today time.Time) ([]Currency, error) {
 	cutoff := today.AddDate(0, 0, -ActiveDays)
 	rows, err := load(ctx, q, "SELECT iso_code, start_date, end_date FROM currencies WHERE end_date >= ?",
@@ -52,8 +54,8 @@ func Active(ctx context.Context, q db.Querier, today time.Time) ([]Currency, err
 	return mergePegged(rows), nil
 }
 
-// FindCurrency returns the currency with code, case-insensitively, or nil. A pegged currency no provider covers is derived
-// from its anchor.
+// FindCurrency returns the currency with code, case-insensitively, or nil. A
+// pegged currency no provider covers is derived from its anchor.
 func FindCurrency(ctx context.Context, q db.Querier, code string) (*Currency, error) {
 	code = strings.ToUpper(code)
 	record, err := one(ctx, q, code)
@@ -82,8 +84,8 @@ func FindCurrency(ctx context.Context, q db.Querier, code string) (*Currency, er
 	return &c, nil
 }
 
-// WithProviders lists the currencies the given providers cover, with dates merged across those providers only and no
-// pegs, sorted by code.
+// WithProviders lists the currencies the given providers cover, with dates
+// merged across those providers only and no pegs, sorted by code.
 func WithProviders(ctx context.Context, q db.Querier, keys []string) ([]Currency, error) {
 	return load(ctx, q, `SELECT iso_code, min(start_date), max(end_date) FROM currency_coverages
 		WHERE provider_key IN `+db.LitList(keys)+` GROUP BY iso_code ORDER BY iso_code`)
@@ -159,7 +161,8 @@ func mergePegged(stored []Currency) []Currency {
 	return all
 }
 
-// applyPeg widens record to its anchor's range from the peg's start: a peg holds wherever the anchor has rates.
+// applyPeg widens record to its anchor's range from the peg's start: a peg
+// holds wherever the anchor has rates.
 func applyPeg(record *Currency, peg Peg, anchor *Currency) {
 	record.Peg = &peg
 	if anchor == nil {

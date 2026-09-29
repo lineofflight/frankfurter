@@ -9,9 +9,11 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
 
-// MissedSince counts the publications due after endDate (a stored date) and before reference. The unit follows the
-// publish cadence: fire days of the schedule for daily, whole buckets for weekly, monthly and quarterly, where each
-// fire is taken to cover the bucket before the one it lands in. ok is false when the provider has no schedule.
+// MissedSince counts the publications due after endDate (a stored date) and
+// before reference. The unit follows the publish cadence: fire days of the
+// schedule for daily, whole buckets for weekly, monthly and quarterly, where
+// each fire is taken to cover the bucket before the one it lands in. ok is
+// false when the provider has no schedule.
 func (p Provider) MissedSince(endDate string, reference time.Time) (n int, ok bool, err error) {
 	if p.PublishSchedule == "" {
 		return 0, false, nil
@@ -33,7 +35,8 @@ func (p Provider) MissedSince(endDate string, reference time.Time) (n int, ok bo
 	}
 }
 
-// countFireDays counts the days strictly between last and reference on which the schedule fires (in UTC).
+// countFireDays counts the days strictly between last and reference on which
+// the schedule fires (in UTC).
 func countFireDays(expr string, last, reference time.Time) int {
 	n := 0
 	for d := last.AddDate(0, 0, 1); d.Before(reference); d = d.AddDate(0, 0, 1) {

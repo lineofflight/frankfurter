@@ -1,8 +1,10 @@
-// Package sbi fetches rates from Seðlabanki Íslands (Central Bank of Iceland), which publishes daily reference rates
-// for 30+ currencies against the Icelandic króna (ISK).
+// Package sbi fetches rates from Seðlabanki Íslands (Central Bank of Iceland),
+// which publishes daily reference rates for 30+ currencies against the
+// Icelandic króna (ISK).
 //
-// Two GroupIDs are needed: 9 (official reference, 10 currencies from 1981) and 7 (registered mid-rate, 22 currencies
-// from 2006). Rows are not clipped locally; the requested date range bounds them, as in Ruby.
+// Two GroupIDs are needed: 9 (official reference, 10 currencies from 1981) and
+// 7 (registered mid-rate, 22 currencies from 2006). Rows are not clipped
+// locally; the requested date range bounds them, as in Ruby.
 package sbi
 
 import (
@@ -138,7 +140,8 @@ func parse(data []byte, currencies map[string]string) ([]adapter.Rate, error) {
 			continue
 		}
 		for _, e := range ts.Entries {
-			// Ox gives a missing, empty or whitespace-only element no text, and Ruby skips the entry.
+			// Ox gives a missing, empty or whitespace-only element no text, and
+			// Ruby skips the entry.
 			if strings.TrimSpace(e.Date) == "" || strings.TrimSpace(e.Value) == "" {
 				continue
 			}

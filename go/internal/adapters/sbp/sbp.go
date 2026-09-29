@@ -1,12 +1,16 @@
-// Package sbp fetches rates from the State Bank of Pakistan, which publishes the "Daily Average Banks' Floating
-// Exchange Rates" series as two XLSX workbooks: a current-month file and a historical archive going back to
-// 2013-07-02. Both share one wide layout: a row per foreign currency, a column per date, values in Pak Rupees per
-// currency unit. Rows are emitted as foreign base, PKR quote.
+// Package sbp fetches rates from the State Bank of Pakistan, which publishes
+// the "Daily Average Banks' Floating Exchange Rates" series as two XLSX
+// workbooks: a current-month file and a historical archive going back to
+// 2013-07-02. Both share one wide layout: a row per foreign currency, a column
+// per date, values in Pak Rupees per currency unit. Rows are emitted as foreign
+// base, PKR quote.
 //
-// SBP publishes finalized monthly snapshots roughly three weeks after the month ends. Since a mid-2026 site
-// restructure the current-month file has lagged the archive, so the archive wins on overlap.
+// SBP publishes finalized monthly snapshots roughly three weeks after the month
+// ends. Since a mid-2026 site restructure the current-month file has lagged the
+// archive, so the archive wins on overlap.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package sbp
 
 import (
@@ -32,8 +36,9 @@ const (
 // excelEpoch sidesteps Excel's 1900 leap-year bug for dates after 1900-03-01.
 var excelEpoch = adapter.Date(1899, 12, 30)
 
-// currencies maps normalized currency-name labels (column B) to ISO codes. The current and archive workbooks spell
-// several names differently, so both spellings are registered.
+// currencies maps normalized currency-name labels (column B) to ISO codes. The
+// current and archive workbooks spell several names differently, so both
+// spellings are registered.
 var currencies = map[string]string{
 	"australian dollar":   "AUD",
 	"bahraini dinar":      "BHD",
@@ -90,7 +95,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	index := map[key]int{}
 	var out []adapter.Rate
 
-	// Current first, archive second, so archive rows overwrite current ones on overlap.
+	// Current first, archive second, so archive rows overwrite current ones on
+	// overlap.
 	for _, u := range []string{currentURL, archiveURL} {
 		body, err := a.Get(ctx, u, nil)
 		if err != nil {
@@ -119,8 +125,9 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return out, nil
 }
 
-// sheet wraps the first worksheet's raw cell values. Cell types are looked up lazily, since only a few cells per row
-// need them and Rows/GetRows do not expose them.
+// sheet wraps the first worksheet's raw cell values. Cell types are looked up
+// lazily, since only a few cells per row need them and Rows/GetRows do not
+// expose them.
 type sheet struct {
 	f    *excelize.File
 	name string
@@ -133,8 +140,9 @@ func (s sheet) cellType(r, c int) excelize.CellType {
 	return t
 }
 
-// isText reports whether a cell holds a string rather than a stored number. The old XML parser only saw <v>, which
-// shared strings index into and inline strings lack.
+// isText reports whether a cell holds a string rather than a stored number. The
+// old XML parser only saw <v>, which shared strings index into and inline
+// strings lack.
 func (s sheet) isText(r, c int) bool {
 	t := s.cellType(r, c)
 	return t == excelize.CellTypeSharedString || t == excelize.CellTypeInlineString
@@ -149,7 +157,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	if _, ok := f.Pkg.Load("xl/sharedStrings.xml"); !ok {
 		return nil, errors.New("xl/sharedStrings.xml missing from workbook")
 	}
-	// Both workbooks hold a single worksheet (named Sheet1 in one, Sheet2 in the other), stored as sheet1.xml.
+	// Both workbooks hold a single worksheet (named Sheet1 in one, Sheet2 in
+	// the other), stored as sheet1.xml.
 	names := f.GetSheetList()
 	if len(names) == 0 {
 		return nil, errors.New("worksheet missing from workbook")
@@ -187,9 +196,10 @@ func isSerial(v string) bool {
 	return n > 30000 && n < 80000
 }
 
-// dateMap finds the date header row structurally: the first row with at least three numeric cells holding plausible
-// Excel serial dates (post-1980, pre-2100), keyed by column index. SBP moves metadata rows around between revisions,
-// so row numbers are not fixed.
+// dateMap finds the date header row structurally: the first row with at least
+// three numeric cells holding plausible Excel serial dates (post-1980,
+// pre-2100), keyed by column index. SBP moves metadata rows around between
+// revisions, so row numbers are not fixed.
 func (s sheet) dateMap() map[int]time.Time {
 	for r, rw := range s.rows {
 		serials := 0
@@ -213,8 +223,9 @@ func (s sheet) dateMap() map[int]time.Time {
 	return map[int]time.Time{}
 }
 
-// currencyLabel returns the first shared-string cell whose reference starts with B, as the Ruby adapter's
-// start_with?("B") does (so BA, BB, ... also qualify when B itself is not a shared string).
+// currencyLabel returns the first shared-string cell whose reference starts
+// with B, as the Ruby adapter's start_with?("B") does (so BA, BB, ... also
+// qualify when B itself is not a shared string).
 func (s sheet) currencyLabel(r int) string {
 	for c := range s.rows[r] {
 		name, _ := excelize.ColumnNumberToName(c + 1)

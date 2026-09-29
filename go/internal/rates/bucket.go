@@ -1,9 +1,11 @@
-// Package rates is the rate domain over SQLite: the rate tables and their scopes, bucketing, ingest precision and
-// components, validation and purging, provider rollups, currency summaries, carry-forward snapshots, output
+// Package rates is the rate domain over SQLite: the rate tables and their
+// scopes, bucketing, ingest precision and components, validation and purging,
+// provider rollups, currency summaries, carry-forward snapshots, output
 // rounding, and provider seeding.
 //
-// Scopes are SQL text. Constants (currency codes, dates) are inlined as literals through db.Lit, so fragments compose
-// by concatenation the way Sequel datasets chain.
+// Scopes are SQL text. Constants (currency codes, dates) are inlined as
+// literals through db.Lit, so fragments compose by concatenation the way Sequel
+// datasets chain.
 package rates
 
 import (
@@ -21,18 +23,21 @@ const (
 	Month Precision = "month"
 )
 
-// WeekBucket is the SQL for the week bucket of a date expression: January 1 plus seven days per strftime %W week, so
-// days before the year's first Monday fall in a bucket dated January 1.
+// WeekBucket is the SQL for the week bucket of a date expression: January 1
+// plus seven days per strftime %W week, so days before the year's first Monday
+// fall in a bucket dated January 1.
 func WeekBucket(expr string) string {
 	return fmt.Sprintf("date(strftime('%%Y-%%m-%%d', strftime('%%Y-01-01', %s), ('+' || (CAST(strftime('%%W', %s) AS integer) * 7) || ' days')))", expr, expr)
 }
 
-// MonthBucket is the SQL for the month bucket of a date expression: its first day.
+// MonthBucket is the SQL for the month bucket of a date expression: its first
+// day.
 func MonthBucket(expr string) string {
 	return fmt.Sprintf("strftime('%%Y-%%m-01', %s)", expr)
 }
 
-// BucketSQL is Bucket.expression: the bucket of expr at precision p, or expr itself when daily.
+// BucketSQL is Bucket.expression: the bucket of expr at precision p, or expr
+// itself when daily.
 func BucketSQL(p Precision, expr string) string {
 	switch p {
 	case Week:

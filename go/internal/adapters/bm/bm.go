@@ -1,22 +1,30 @@
-// Package bm fetches Banco de Moçambique's daily reference rates against MZN for 19 currencies, published as one PDF
-// bulletin (~20 KB) per business day. USD/MZN is the bank's own 15:30 fixing from commercial-bank reporting; every
-// other row is that fixing crossed with the Reuters USD rate for the currency (issue #386).
+// Package bm fetches Banco de Moçambique's daily reference rates against MZN
+// for 19 currencies, published as one PDF bulletin (~20 KB) per business day.
+// USD/MZN is the bank's own 15:30 fixing from commercial-bank reporting; every
+// other row is that fixing crossed with the Reuters USD rate for the currency
+// (issue #386).
 //
-// There is no rate API. The Mercado Cambial page links one listing page per multi-year period
-// (/pt/tabelas-de-taxas-de-cambio-de-referencia-diarias/2026-2025/ and so on back to 2018), and each listing links
-// every bulletin in its period under an opaque media slug. We read the period slugs off the index, fetch only the
-// listings whose years overlap the requested window, collect (date, pdf_url) pairs from the DDMMYYYY suffix of each
-// filename, then fetch and parse each PDF.
+// There is no rate API. The Mercado Cambial page links one listing page per
+// multi-year period
+// (/pt/tabelas-de-taxas-de-cambio-de-referencia-diarias/2026-2025/ and so on
+// back to 2018), and each listing links every bulletin in its period under an
+// opaque media slug. We read the period slugs off the index, fetch only the
+// listings whose years overlap the requested window, collect (date, pdf_url)
+// pairs from the DDMMYYYY suffix of each filename, then fetch and parse each
+// PDF.
 //
-// The bulletin is a fixed-layout text table: country, currency, buy (COMPRA), sell (VENDA) and, since November 2020,
-// a published mid (MÉDIA). Rows are keyed on the country label because the currency label is unreliable: "Coroa" and
-// "Kwacha" each appear more than once, and the USD row sometimes drops its label altogether. The published mid is
-// emitted where present; older bulletins carry only buy and sell, so the mid is synthesised as the midpoint. Section
-// headings state the unit ("Meticais por Unidade" or "por 1000 Unidades"), and the per-1000 block (JPY, MWK, TZS) is
-// rescaled to per-unit.
+// The bulletin is a fixed-layout text table: country, currency, buy (COMPRA),
+// sell (VENDA) and, since November 2020, a published mid (MÉDIA). Rows are
+// keyed on the country label because the currency label is unreliable: "Coroa"
+// and "Kwacha" each appear more than once, and the USD row sometimes drops its
+// label altogether. The published mid is emitted where present; older bulletins
+// carry only buy and sell, so the mid is synthesised as the midpoint. Section
+// headings state the unit ("Meticais por Unidade" or "por 1000 Unidades"), and
+// the per-1000 block (JPY, MWK, TZS) is rescaled to per-unit.
 //
-// The Zimbabwe row is dropped: it has carried the same figure (about 167 MZN per 1000) since 2019, matching neither
-// ZWL nor its 2024 successor ZWG, so no ISO code can be assigned honestly.
+// The Zimbabwe row is dropped: it has carried the same figure (about 167 MZN
+// per 1000) since 2019, matching neither ZWL nor its 2024 successor ZWG, so no
+// ISO code can be assigned honestly.
 //
 // Direction: foreign currency in base, MZN in quote (1 foreign = X MZN).
 package bm
@@ -49,19 +57,21 @@ var (
 	listingHref = regexp.MustCompile(`href="(/pt/tabelas-de-taxas-de-cambio-de-referencia-diarias/(\d{4})-(\d{4})/)"`)
 	pdfHref     = regexp.MustCompile(`href="(/media/[^"/]+/[^"]*?(\d{2})(\d{2})(\d{4})\.pdf)"`)
 
-	// Section headings announce how many units of the foreign currency the row prices.
+	// Section headings announce how many units of the foreign currency the row
+	// prices.
 	unitsPattern = regexp.MustCompile(`(?i)Meticais por (?:(\d+) )?Unidade`)
-	// Country and currency labels, then buy, sell and (optionally) mid. Labels start with a letter so numbered
-	// section headings never match.
+	// Country and currency labels, then buy, sell and (optionally) mid. Labels
+	// start with a letter so numbered section headings never match.
 	rowPattern = regexp.MustCompile(`\A(\D.*?)\s+([\d.,]+)\s+([\d.,]+)(?:\s+([\d.,]+))?\z`)
-	// Rates live in sections 1 and 2; section 3 carries prime rate, SOFR and gold, which must not be read as rows.
+	// Rates live in sections 1 and 2; section 3 carries prime rate, SOFR and
+	// gold, which must not be read as rows.
 	endOfRates = regexp.MustCompile(`\A3\.\s+OUTRAS INFORMA`)
 
 	footnote    = regexp.MustCompile(`\(\w\)`)
 	columnBreak = regexp.MustCompile(`\s{2,}`)
 
-	// Maps the country label in the bulletin to the ISO 4217 code of its currency. Older bulletins call eSwatini by
-	// its former name.
+	// Maps the country label in the bulletin to the ISO 4217 code of its
+	// currency. Older bulletins call eSwatini by its former name.
 	countries = map[string]string{
 		"Estados Unidos": "USD",
 		"Àfrica do Sul":  "ZAR",
@@ -100,8 +110,9 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. Chunk the archive so partial progress survives an unparseable PDF;
-// every chunk re-reads the index and the (large) listing page, so keep chunks wide.
+// BackfillRange implements adapter.Adapter. Chunk the archive so partial
+// progress survives an unparseable PDF; every chunk re-reads the index and the
+// (large) listing page, so keep chunks wide.
 func (a *Adapter) BackfillRange() int { return 60 }
 
 type bulletin struct {
@@ -109,7 +120,8 @@ type bulletin struct {
 	url  string
 }
 
-// Fetch implements adapter.Adapter. Unlike most adapters, `after` is inclusive: a bulletin dated `after` is kept.
+// Fetch implements adapter.Adapter. Unlike most adapters, `after` is inclusive:
+// a bulletin dated `after` is kept.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -213,8 +225,9 @@ func parse(text string, date time.Time) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// country picks the country out of the label cell, which holds the country, a footnote marker like "(a)" on some
-// rows, then the currency name after a run of spaces. Only the country identifies the row.
+// country picks the country out of the label cell, which holds the country, a
+// footnote marker like "(a)" on some rows, then the currency name after a run
+// of spaces. Only the country identifies the row.
 func country(label string) string {
 	if loc := footnote.FindStringIndex(label); loc != nil {
 		label = label[:loc[0]] + label[loc[1]:]
@@ -226,7 +239,8 @@ func country(label string) string {
 	return columnBreak.Split(label, 2)[0]
 }
 
-// number reads a decimal-comma figure; a thousands dot never appears in a rate row but is harmless to drop.
+// number reads a decimal-comma figure; a thousands dot never appears in a rate
+// row but is harmless to drop.
 func number(text string) (float64, error) {
 	s := strings.ReplaceAll(strings.ReplaceAll(text, ".", ""), ",", ".")
 	f, err := strconv.ParseFloat(s, 64)
@@ -271,9 +285,10 @@ type period struct {
 	url         string
 }
 
-// listings returns the listing pages whose years overlap the window. Listing pages are named for the years they span
-// ("2026-2025", "2024-2022"). The newest is treated as open-ended so a window reaching into a year the bank has not
-// yet split off still finds the current listing.
+// listings returns the listing pages whose years overlap the window. Listing
+// pages are named for the years they span ("2026-2025", "2024-2022"). The
+// newest is treated as open-ended so a window reaching into a year the bank has
+// not yet split off still finds the current listing.
 func (a *Adapter) listings(ctx context.Context, after, upto time.Time) ([]string, error) {
 	body, err := a.Get(ctx, indexURL, nil)
 	if err != nil {
@@ -324,8 +339,8 @@ func (a *Adapter) listing(ctx context.Context, listingURL string) ([]bulletin, e
 	return bulletins, nil
 }
 
-// escape percent-encodes every byte outside RFC 2396's unreserved and reserved sets, as Ruby's
-// URI::RFC2396_PARSER.escape does.
+// escape percent-encodes every byte outside RFC 2396's unreserved and reserved
+// sets, as Ruby's URI::RFC2396_PARSER.escape does.
 func escape(s string) string {
 	var b strings.Builder
 	for i := 0; i < len(s); i++ {

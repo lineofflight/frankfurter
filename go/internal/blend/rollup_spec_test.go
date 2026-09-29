@@ -1,7 +1,8 @@
 package blend
 
-// Ports spec/rollup_spec.rb. Its RateQuery cases (boundary buckets, single-date grouped queries) are checked here at
-// the table level through Rollup.Read, which is what a grouped RateQuery serves from once the tables are ready; the
+// Ports spec/rollup_spec.rb. Its RateQuery cases (boundary buckets, single-date
+// grouped queries) are checked here at the table level through Rollup.Read,
+// which is what a grouped RateQuery serves from once the tables are ready; the
 // API step owns the query-level versions and the cache-key case.
 
 import (
@@ -233,8 +234,9 @@ func TestGroupedReadSingleDate(t *testing.T) {
 	}
 }
 
-// Not in the Ruby spec: a range with no source buckets needs nothing materialized, so BlendedRollup.read returns an
-// empty result rather than nil (which would send the request to the live path).
+// Not in the Ruby spec: a range with no source buckets needs nothing
+// materialized, so BlendedRollup.read returns an empty result rather than nil
+// (which would send the request to the live path).
 func TestGroupedReadEmptyRange(t *testing.T) {
 	conn := fixtures.New(t)
 	start, end := time.Date(1900, 1, 1, 0, 0, 0, 0, time.UTC), time.Date(1900, 2, 1, 0, 0, 0, 0, time.UTC)

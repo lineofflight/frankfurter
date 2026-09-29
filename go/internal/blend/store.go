@@ -11,7 +11,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Pivot is the base every materialized blend is stored in. Requests derive other bases from it.
+// Pivot is the base every materialized blend is stored in. Requests derive
+// other bases from it.
 const Pivot = "USD"
 
 // Test seams. Production leaves them as they are.
@@ -22,14 +23,17 @@ var (
 	beforeBatch = func(table string, buckets []string) error { return nil }
 	// between Read's coverage and value queries
 	afterRead = func() {}
-	// RebuildProviderRollups: inside the source transaction once affected buckets are read, and before each refill
+	// RebuildProviderRollups: inside the source transaction once affected
+	// buckets are read, and before each refill
 	afterSourceRead = func() {}
 	beforeRefill    = func(table string) {}
 )
 
-// within runs fn in q's transaction when q is one already (a *sql.Tx, or a *sql.Conn inside BEGIN), and otherwise in
-// a new BEGIN IMMEDIATE transaction, like Sequel's transaction(**(in_transaction? ? {} : { mode: :immediate })). With
-// savepoint, a joined run gets a savepoint of its own, so its failure undoes only its own writes.
+// within runs fn in q's transaction when q is one already (a *sql.Tx, or a
+// *sql.Conn inside BEGIN), and otherwise in a new BEGIN IMMEDIATE transaction,
+// like Sequel's transaction(**(in_transaction? ? {} : { mode: :immediate })).
+// With savepoint, a joined run gets a savepoint of its own, so its failure
+// undoes only its own writes.
 func within(ctx context.Context, q db.Querier, savepoint bool, fn func(db.Querier) error) error {
 	if conn, ok := q.(*sql.DB); ok {
 		return db.Immediate(ctx, conn, fn)
@@ -124,7 +128,8 @@ func blendable(ctx context.Context, q db.Querier, t rates.Table) (rates.Query, e
 	return t.Blendable(nonBlending), nil
 }
 
-// addMonths is Ruby's Date#>>: the same day n months on, clamped to the end of a shorter month.
+// addMonths is Ruby's Date#>>: the same day n months on, clamped to the end of
+// a shorter month.
 func addMonths(d time.Time, n int) time.Time {
 	y, m, day := d.Date()
 	first := time.Date(y, m+time.Month(n), 1, 0, 0, 0, 0, time.UTC)

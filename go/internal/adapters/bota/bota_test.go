@@ -166,7 +166,8 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// The cassette records the form body and Cookie header Ruby sent; matching on both checks the token flow itself.
+// The cassette records the form body and Cookie header Ruby sent; matching on
+// both checks the token flow itself.
 func TestFetchSendsTokenFormAndCookie(t *testing.T) {
 	cookie := func(r *http.Request, _ []byte, rec cassette.Request) bool {
 		return r.Header.Get("Cookie") == rec.Headers.Get("Cookie")

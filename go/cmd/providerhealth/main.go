@@ -1,18 +1,23 @@
-// Command providerhealth is bin/provider_health.rb, the provider health monitor.
+// Command providerhealth is bin/provider_health.rb, the provider health
+// monitor.
 //
-// It fetches the live /v2/providers feed and flags missed publishes or unknown currency codes, keeping one GitHub issue
-// per affected provider. This surfaces silent freezes and published labels that need a currency registry update.
+// It fetches the live /v2/providers feed and flags missed publishes or unknown
+// currency codes, keeping one GitHub issue per affected provider. This surfaces
+// silent freezes and published labels that need a currency registry update.
 //
-// Issues carry two labels: `provider` (the umbrella every provider issue shares, human-filed or auto) and `health`
-// (bot-owned; the discriminator used to find the rolling issues this command manages). `health` must never be applied
-// by hand, or this command could match and edit a human's issue.
+// Issues carry two labels: `provider` (the umbrella every provider issue
+// shares, human-filed or auto) and `health` (bot-owned; the discriminator used
+// to find the rolling issues this command manages). `health` must never be
+// applied by hand, or this command could match and edit a human's issue.
 //
-// `publishes_missed` is already cadence-aware in its unit (missed fire days for daily, missed buckets for weekly and
-// monthly), computed server-side, so this only thresholds it. Thresholds sit above normal lag: daily absorbs holiday
+// `publishes_missed` is already cadence-aware in its unit (missed fire days for
+// daily, missed buckets for weekly and monthly), computed server-side, so this
+// only thresholds it. Thresholds sit above normal lag: daily absorbs holiday
 // clusters and T+1 publishing; monthly absorbs in-arrears archives.
 //
-// Each run, per flagged provider: create an issue if none is open, otherwise refresh its body (so the missed count
-// stays current) without commenting. When all checks recover, its issue is commented and closed. Creation is the only
+// Each run, per flagged provider: create an issue if none is open, otherwise
+// refresh its body (so the missed count stays current) without commenting. When
+// all checks recover, its issue is commented and closed. Creation is the only
 // notification; an ongoing freeze stays quiet.
 //
 // Run with DRY_RUN=1 to print the decision and bodies without touching issues.
@@ -44,7 +49,8 @@ const (
 // thresholds flag only well past normal lag.
 var thresholds = map[string]int{"daily": 8, "weekly": 2, "monthly": 2}
 
-// Entry is one provider in the /v2/providers feed, reduced to what health checks read.
+// Entry is one provider in the /v2/providers feed, reduced to what health
+// checks read.
 type Entry struct {
 	Key               string   `json:"key"`
 	Name              string   `json:"name"`
@@ -66,7 +72,8 @@ func stale(e Entry) bool {
 	return ok && e.missed() >= threshold
 }
 
-// flagged keeps stale providers and those with unknown codes, most missed first.
+// flagged keeps stale providers and those with unknown codes, most missed
+// first.
 func flagged(entries []Entry) []Entry {
 	var out []Entry
 	for _, e := range entries {
@@ -78,8 +85,9 @@ func flagged(entries []Entry) []Entry {
 	return out
 }
 
-// marker is the stable identifier embedded in each issue body, deliberately kept as `provider-health` (not renamed
-// with the label) so already-open issues stay matchable. It pins an issue to its provider, independent of labels.
+// marker is the stable identifier embedded in each issue body, deliberately
+// kept as `provider-health` (not renamed with the label) so already-open issues
+// stay matchable. It pins an issue to its provider, independent of labels.
 func marker(key string) string { return "<!-- provider-health: " + key + " -->" }
 
 var markerRe = regexp.MustCompile(`<!-- provider-health: (\w+) -->`)
@@ -211,7 +219,8 @@ func openIssuesByKey(ctx context.Context, repo string) (map[string]int, error) {
 	return byKey, nil
 }
 
-// fetchProviders reads the feed, retrying network failures three times with exponential backoff.
+// fetchProviders reads the feed, retrying network failures three times with
+// exponential backoff.
 func fetchProviders(ctx context.Context, api string) ([]Entry, error) {
 	for attempt := 1; ; attempt++ {
 		entries, err := getProviders(ctx, api)

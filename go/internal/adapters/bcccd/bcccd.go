@@ -1,8 +1,10 @@
-// Package bcccd fetches rates from the Banque Centrale du Congo, which publishes a daily indicative mid ("cours
-// indicatif moyen") for a basket of currencies against the Congolese franc (CDF). The bare acronym "BCC" already names
-// Banco Central de Cuba, so the key smushes in the country code: BCCCD.
+// Package bcccd fetches rates from the Banque Centrale du Congo, which
+// publishes a daily indicative mid ("cours indicatif moyen") for a basket of
+// currencies against the Congolese franc (CDF). The bare acronym "BCC" already
+// names Banco Central de Cuba, so the key smushes in the country code: BCCCD.
 //
-// The site, a Next.js relaunch, exposes the fixing two ways and neither is complete on its own:
+// The site, a Next.js relaunch, exposes the fixing two ways and neither is
+// complete on its own:
 //
 //   - A dated page per publication day, /cours-de-change/YYYY-MM-DD, back to 2020-10-12. It renders the mid for ten
 //     majors as <dt>/<dd> pairs. Days without a fixing 404 (weekends never have one); a few early nodes 200 with no
@@ -11,11 +13,14 @@
 //     for the whole basket (21 codes today, the African neighbours among them), but only weekly before late August
 //     2025.
 //
-// A fetch reads both: dated pages for the daily majors, the landing page for everything else. Where the two overlap
-// they agree, and the dated page wins. The history occasionally lists a date twice with different values; the later
-// entry is the one the dated page shows, so later entries win within the history too.
+// A fetch reads both: dated pages for the daily majors, the landing page for
+// everything else. Where the two overlap they agree, and the dated page wins.
+// The history occasionally lists a date twice with different values; the later
+// entry is the one the dated page shows, so later entries win within the
+// history too.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package bcccd
 
 import (
@@ -42,7 +47,8 @@ var pageURL = "https://www.bcc.cd/marche-des-changes/cours-de-change"
 
 var (
 	midLabel = regexp.MustCompile(`^([A-Z]{3}) \(cours moyen\)$`)
-	// Each currency's history is an array of flat objects, so nothing inside it opens a bracket.
+	// Each currency's history is an array of flat objects, so nothing inside it
+	// opens a bracket.
 	history = regexp.MustCompile(`"history":\{((?:"[A-Z]{3}":\[[^\]]*\],?)+)\}`)
 )
 
@@ -144,8 +150,9 @@ func (a *Adapter) fetchDay(ctx context.Context, date time.Time) ([]byte, error) 
 	return resp.Body, nil
 }
 
-// fetchHistory sends the RSC header, which asks Next.js for the component payload alone, without the HTML shell that
-// splits the same JSON across script chunks.
+// fetchHistory sends the RSC header, which asks Next.js for the component
+// payload alone, without the HTML shell that splits the same JSON across script
+// chunks.
 func (a *Adapter) fetchHistory(ctx context.Context) ([]byte, error) {
 	req, err := a.NewRequest(ctx, http.MethodGet, pageURL, nil)
 	if err != nil {
@@ -222,8 +229,8 @@ func parseHistory(payload []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// decodeSeries decodes the history object in key order. A repeated code keeps its first position and its last
-// value, as a Ruby Hash does.
+// decodeSeries decodes the history object in key order. A repeated code keeps
+// its first position and its last value, as a Ruby Hash does.
 func decodeSeries(body []byte) ([]series, error) {
 	dec := json.NewDecoder(bytes.NewReader(slices.Concat([]byte("{"), body, []byte("}"))))
 	if _, err := dec.Token(); err != nil {

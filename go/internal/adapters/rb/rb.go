@@ -1,5 +1,6 @@
-// Package rb fetches rates from Sveriges Riksbank, which publishes daily exchange rates for about 29 currencies
-// against the Swedish krona through the SWEA API. The ByGroup endpoint (group 130) returns every currency series in
+// Package rb fetches rates from Sveriges Riksbank, which publishes daily
+// exchange rates for about 29 currencies against the Swedish krona through the
+// SWEA API. The ByGroup endpoint (group 130) returns every currency series in
 // one request, for at most a year at a time.
 package rb
 
@@ -16,10 +17,12 @@ import (
 
 const baseURL = "https://api.riksbank.se/swea/v1/Observations/ByGroup/130"
 
-// The Riksbank backfills a successor's series with its predecessor's values. The euro succeeded the ECU 1:1 on its
-// first quoting day, 1999-01-04; earlier EUR observations are the ECU (XEU), matching how the BdP and AMCM adapters
-// label the same data. The RUB series is not restated across the 1998 redenomination: 0.0013 SEK on 1997-12-30, 1.326
-// on 1998-01-02, so earlier rows are old ruble (RUR).
+// The Riksbank backfills a successor's series with its predecessor's values.
+// The euro succeeded the ECU 1:1 on its first quoting day, 1999-01-04; earlier
+// EUR observations are the ECU (XEU), matching how the BdP and AMCM adapters
+// label the same data. The RUB series is not restated across the 1998
+// redenomination: 0.0013 SEK on 1997-12-30, 1.326 on 1998-01-02, so earlier
+// rows are old ruble (RUR).
 var predecessors = map[string]adapter.Predecessor{
 	"EUR": {Code: "XEU", Cutover: adapter.Date(1999, 1, 4)},
 	"RUB": {Code: "RUR", Cutover: adapter.Date(1998, 1, 1)},
@@ -42,8 +45,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 365 }
 
-// Fetch implements adapter.Adapter. The API filters by date itself; as in Ruby, an open after leaves its path segment
-// empty.
+// Fetch implements adapter.Adapter. The API filters by date itself; as in Ruby,
+// an open after leaves its path segment empty.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -109,7 +112,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toFloat is Ruby's Float(value): numbers pass through, numeric strings parse, anything else is an error.
+// toFloat is Ruby's Float(value): numbers pass through, numeric strings parse,
+// anything else is an error.
 func toFloat(v any) (float64, error) {
 	switch v := v.(type) {
 	case float64:

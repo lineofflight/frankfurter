@@ -1,19 +1,26 @@
-// Package pma fetches rates from the Palestine Monetary Authority. Palestine has no currency of its own; the PMA
-// publishes daily buy, sell and mid rates for the currencies circulating in the territories (ILS, JOD, USD) plus USD
-// crosses for the majors, the Gulf currencies, gold and silver. 25 pairs, Sunday to Thursday, archive from 2020-09-01.
+// Package pma fetches rates from the Palestine Monetary Authority. Palestine
+// has no currency of its own; the PMA publishes daily buy, sell and mid rates
+// for the currencies circulating in the territories (ILS, JOD, USD) plus USD
+// crosses for the majors, the Gulf currencies, gold and silver. 25 pairs,
+// Sunday to Thursday, archive from 2020-09-01.
 //
-// The public site embeds a small export tool at wcur.pma.ps. A GET on the export URL sets a PHP session cookie and
-// renders a form whose hidden anti-forgery input has a per-session name and value; a POST with that input, the cookie
-// and a from/to range returns an XLSX with Date, Pair, Buy, Sell, Mid columns. The whole archive fits in one request
-// (about 1 MB), so there is no chunking.
+// The public site embeds a small export tool at wcur.pma.ps. A GET on the
+// export URL sets a PHP session cookie and renders a form whose hidden
+// anti-forgery input has a per-session name and value; a POST with that input,
+// the cookie and a from/to range returns an XLSX with Date, Pair, Buy, Sell,
+// Mid columns. The whole archive fits in one request (about 1 MB), so there is
+// no chunking.
 //
-// Every cell in the workbook is a shared string, dates as "YYYY/MM/DD" and numbers with thousands separators
-// ("89,446.50") and the odd stray space. We take the published mid rather than synthesizing one from buy and sell.
+// Every cell in the workbook is a shared string, dates as "YYYY/MM/DD" and
+// numbers with thousands separators ("89,446.50") and the odd stray space. We
+// take the published mid rather than synthesizing one from buy and sell.
 //
-// Direction is per pair, as labelled: "USD/ILS" is ILS per USD (USD in base), "GBP/USD" is USD per GBP (USD in quote),
-// and "JOD/ILS", "EUR/ILS", "EGP/ILS" do not touch the pivot at all.
+// Direction is per pair, as labelled: "USD/ILS" is ILS per USD (USD in base),
+// "GBP/USD" is USD per GBP (USD in quote), and "JOD/ILS", "EUR/ILS", "EGP/ILS"
+// do not touch the pivot at all.
 //
-// As in Ruby, after is passed to the export as "from", so it is inclusive, and rows are not clipped further.
+// As in Ruby, after is passed to the export as "from", so it is inclusive, and
+// rows are not clipped further.
 package pma
 
 import (

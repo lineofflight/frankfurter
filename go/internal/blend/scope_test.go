@@ -1,7 +1,8 @@
 package blend
 
-// The two spec/rate_scopes_spec.rb cases that assert on the grouped blend tables. internal/rates ports the rest and
-// checks these through the blend inputs; here they run against the materialized tables themselves.
+// The two spec/rate_scopes_spec.rb cases that assert on the grouped blend
+// tables. internal/rates ports the rest and checks these through the blend
+// inputs; here they run against the materialized tables themselves.
 
 import (
 	"fmt"

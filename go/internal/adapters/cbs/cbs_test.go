@@ -172,7 +172,8 @@ func TestGoldenArchive(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// workbook builds an XLSX with one sheet per entry, writing each row from column A.
+// workbook builds an XLSX with one sheet per entry, writing each row from
+// column A.
 func workbook(t *testing.T, sheets map[string][][]any) []byte {
 	t.Helper()
 	f := excelize.NewFile()

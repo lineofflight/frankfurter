@@ -1,10 +1,13 @@
-// Package cbk fetches rates from the Central Bank of Kenya, which publishes daily exchange rates in KES.
+// Package cbk fetches rates from the Central Bank of Kenya, which publishes
+// daily exchange rates in KES.
 //
-// Rates come from two WPDataTables endpoints: table 32 (2003-2024) and table 193 (2024+). Most rows are quoted as KES
-// per foreign unit (foreign base); the East African cross rates ("KES / USHS" and friends) are quoted as foreign per
+// Rates come from two WPDataTables endpoints: table 32 (2003-2024) and table
+// 193 (2024+). Most rows are quoted as KES per foreign unit (foreign base); the
+// East African cross rates ("KES / USHS" and friends) are quoted as foreign per
 // KES (KES base). Both are recorded as published.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package cbk
 
 import (
@@ -24,7 +27,8 @@ import (
 
 const baseURL = "https://www.centralbank.go.ke/wp-admin/admin-ajax.php"
 
-// currencies is ordered: names are matched by substring in this order when no exact match exists.
+// currencies is ordered: names are matched by substring in this order when no
+// exact match exists.
 var currencies = []struct{ name, code string }{
 	{"US DOLLAR", "USD"},
 	{"STG POUND", "GBP"},
@@ -148,7 +152,8 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 		return adapter.Rate{}, false, fmt.Errorf("unexpected row %v", row)
 	}
 
-	// Like Ruby's strptime("%d/%m/%Y"), accept days and months with or without a leading zero.
+	// Like Ruby's strptime("%d/%m/%Y"), accept days and months with or without
+	// a leading zero.
 	date, err := time.Parse("2/1/2006", strings.TrimSpace(dateStr))
 	if err != nil {
 		return adapter.Rate{}, false, err
@@ -198,9 +203,11 @@ func rateValue(rest []any) (float64, error) {
 func resolveCurrency(name string) (string, bool) {
 	upper := strings.ToUpper(name)
 
-	// East African cross-rate patterns like "KES / USHS" or "KEN SHILLING / USHS".
+	// East African cross-rate patterns like "KES / USHS" or "KEN SHILLING /
+	// USHS".
 	if crossRate.MatchString(upper) {
-		// Ruby's split drops trailing empty fields, so "KES / USHS /" still ends in USHS.
+		// Ruby's split drops trailing empty fields, so "KES / USHS /" still
+		// ends in USHS.
 		parts := strings.Split(upper, "/")
 		for len(parts) > 1 && parts[len(parts)-1] == "" {
 			parts = parts[:len(parts)-1]

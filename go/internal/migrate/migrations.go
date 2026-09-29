@@ -13,7 +13,8 @@ var (
 	monthBucket = rates.MonthBucket("`date`")
 )
 
-// rollupInsert averages rates matching where into table's buckets, as Provider#refresh_rollup does.
+// rollupInsert averages rates matching where into table's buckets, as
+// Provider#refresh_rollup does.
 func rollupInsert(table, bucket, where string) string {
 	if where != "" {
 		where = " WHERE " + where
@@ -74,7 +75,8 @@ var migrations = []Migration{
 		),
 	},
 	{Version: 8, Name: "merge_nbp_providers",
-		// Delete NBP.B rows that overlap with NBP (pre-2004 when both tables carried EUR, USD, etc.)
+		// Delete NBP.B rows that overlap with NBP (pre-2004 when both tables
+		// carried EUR, USD, etc.)
 		Up: sqlStep(
 			"DELETE FROM rates WHERE provider = 'NBP.B' AND (date, base, quote) IN (SELECT date, base, quote FROM rates WHERE provider = 'NBP')",
 			"UPDATE `rates` SET `provider` = 'NBP' WHERE (`provider` = 'NBP.B')",
@@ -193,7 +195,8 @@ end_date = (
 		Up: sqlStep(
 			"UPDATE `rates` SET `provider` = 'NBM' WHERE (`provider` = 'BNM')",
 			"UPDATE `currency_coverages` SET `provider_key` = 'NBM' WHERE (`provider_key` = 'BNM')",
-			// Clear stale NBM rollups from before the original rename, then re-key BNM.
+			// Clear stale NBM rollups from before the original rename, then
+			// re-key BNM.
 			"DELETE FROM `weekly_rates` WHERE (`provider` = 'NBM')",
 			"UPDATE `weekly_rates` SET `provider` = 'NBM' WHERE (`provider` = 'BNM')",
 			"DELETE FROM `monthly_rates` WHERE (`provider` = 'NBM')",
@@ -232,15 +235,18 @@ end_date = (
 		Down: sqlStep("DROP TABLE `blended_rates`"),
 	},
 	{Version: 25, Name: "strip_float_noise_from_rates",
-		// Rows stored before RatePrecision existed carry binary float noise from adapter arithmetic, which
-		// single-provider responses echo verbatim (issue #579); round in place rather than re-backfill. Rollups and
-		// blends are averages and round on output, so they are left alone. Irreversible: the digits were noise.
+		// Rows stored before RatePrecision existed carry binary float noise
+		// from adapter arithmetic, which single-provider responses echo
+		// verbatim (issue #579); round in place rather than re-backfill.
+		// Rollups and blends are averages and round on output, so they are left
+		// alone. Irreversible: the digits were noise.
 		Up: sqlStep("UPDATE `rates` SET `rate` = " + rates.PrecisionSQL("`rate`") + " WHERE (`rate` != " +
 			rates.PrecisionSQL("`rate`") + ")"),
 	},
 	{Version: 26, Name: "drop_inverted_cbk_cross_rates",
-		// CBK's four East African cross rates were inverted by the adapter; the orientation moved within the unique
-		// index, so the stale rows are deleted for a re-backfill to fetch the published values (issue #585).
+		// CBK's four East African cross rates were inverted by the adapter; the
+		// orientation moved within the unique index, so the stale rows are
+		// deleted for a re-backfill to fetch the published values (issue #585).
 		Up: sqlStep(
 			"DELETE FROM `rates` WHERE ((`provider` = 'CBK') AND (`base` IN ('UGX', 'TZS', 'RWF', 'BIF')) AND (`quote` = 'KES'))",
 			"DELETE FROM `weekly_rates` WHERE ((`provider` = 'CBK') AND (`base` IN ('UGX', 'TZS', 'RWF', 'BIF')) AND (`quote` = 'KES'))",
@@ -263,9 +269,11 @@ end_date = (
 		Down: sqlStep("DROP TABLE `blended_weekly_rates`", "DROP TABLE `blended_monthly_rates`"),
 	},
 	{Version: 31, Name: "retain_rate_components",
-		// Old rows keep their exact effective value as mid. Sequel's set_column_allow_null rebuilds the table, hence the
-		// backup copy. The generated rate calls frankfurter_midpoint, a function no longer registered: 033 replaces it
-		// with plain SQL, and SQLite only resolves the function when the column is read.
+		// Old rows keep their exact effective value as mid. Sequel's
+		// set_column_allow_null rebuilds the table, hence the backup copy. The
+		// generated rate calls frankfurter_midpoint, a function no longer
+		// registered: 033 replaces it with plain SQL, and SQLite only resolves
+		// the function when the column is read.
 		Up: sqlStep(
 			"ALTER TABLE rates RENAME COLUMN rate TO mid",
 			"ALTER TABLE `rates` RENAME TO `rates_backup0`",
@@ -305,12 +313,14 @@ end_date = (
 		),
 	},
 	{Version: 32, Name: "cover_grouped_source_dates",
-		// Coverage and snap-back reads select dates while excluding non-blending providers.
+		// Coverage and snap-back reads select dates while excluding
+		// non-blending providers.
 		Up:   sqlStep("CREATE INDEX `weekly_rates_bucket_date_provider_index` ON `weekly_rates` (`bucket_date`, `provider`)"),
 		Down: sqlStep("DROP INDEX `weekly_rates_bucket_date_provider_index`"),
 	},
 	{Version: 33, Name: "resolve_rate_midpoint_in_sql",
-		// Down keeps the SQL resolver: 031 can still roll back by copying effective rates into mid.
+		// Down keeps the SQL resolver: 031 can still roll back by copying
+		// effective rates into mid.
 		Up: sqlStep(
 			"ALTER TABLE rates DROP COLUMN rate",
 			`ALTER TABLE rates ADD COLUMN rate REAL GENERATED ALWAYS AS (
@@ -347,7 +357,8 @@ end_date = (
 	{Version: 40, Name: "normalize_rbm_sdr", Up: normalizeSDR("RBM", "MWK")},
 }
 
-// renameProvider re-keys a provider in each table (provider, or key/provider_key where the table names it so).
+// renameProvider re-keys a provider in each table (provider, or
+// key/provider_key where the table names it so).
 func renameProvider(from, to string, tables ...string) func(context.Context, db.Querier) error {
 	var statements []string
 	for _, t := range tables {
@@ -364,8 +375,8 @@ func renameProvider(from, to string, tables ...string) func(context.Context, db.
 	return sqlStep(statements...)
 }
 
-// createCurrencyExclusions indexes the codes Money cannot name that are already stored, per provider, with the
-// dates they span.
+// createCurrencyExclusions indexes the codes Money cannot name that are already
+// stored, per provider, with the dates they span.
 func createCurrencyExclusions(ctx context.Context, q db.Querier) error {
 	codes := db.LitList(currency.Codes())
 	return exec(ctx, q,

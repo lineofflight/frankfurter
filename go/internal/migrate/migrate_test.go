@@ -116,8 +116,9 @@ func TestMigrationsMirrorDbMigrate(t *testing.T) {
 	}
 }
 
-// Migrating up one version at a time, then down until the first irreversible migration, leaves exactly the schema
-// Sequel leaves at each version (testdata/schemas.json, recorded by go/scripts/migration_schemas.rb).
+// Migrating up one version at a time, then down until the first irreversible
+// migration, leaves exactly the schema Sequel leaves at each version
+// (testdata/schemas.json, recorded by go/scripts/migration_schemas.rb).
 func TestSchemaMatchesRubyAtEveryVersion(t *testing.T) {
 	data, err := os.ReadFile("testdata/schemas.json")
 	if err != nil {
@@ -166,8 +167,9 @@ func TestSchemaMatchesRubyAtEveryVersion(t *testing.T) {
 	}
 }
 
-// A migrated database has the schema internal/db embeds (dumped from the migrated Ruby database), and a database
-// created from that schema is current, so the migrator leaves it alone.
+// A migrated database has the schema internal/db embeds (dumped from the
+// migrated Ruby database), and a database created from that schema is current,
+// so the migrator leaves it alone.
 func TestLatestMatchesEmbeddedSchema(t *testing.T) {
 	ctx := context.Background()
 	migrated, _ := empty(t)
@@ -191,7 +193,8 @@ func TestLatestMatchesEmbeddedSchema(t *testing.T) {
 	}
 }
 
-// Below the irreversible merge, the first migrations roll back to an empty database.
+// Below the irreversible merge, the first migrations roll back to an empty
+// database.
 func TestEarlyMigrationsRollBackToEmpty(t *testing.T) {
 	conn, _ := empty(t)
 	migrateTo(t, conn, 7)

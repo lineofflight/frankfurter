@@ -6,10 +6,11 @@ import (
 	"testing"
 )
 
-// Behaviour the specs do not cover. Requests the golden corpus can express live there instead.
+// Behaviour the specs do not cover. Requests the golden corpus can express live
+// there instead.
 
-// A stored row with no resolvable rate (one side of a quote) fails the request, as Ruby's amount * nil raises; a
-// query that leaves the row out is unaffected.
+// A stored row with no resolvable rate (one side of a quote) fails the request,
+// as Ruby's amount * nil raises; a query that leaves the row out is unaffected.
 func TestV1RowWithoutRate(t *testing.T) {
 	a := newTestApp(t)
 	_, err := a.db.ExecContext(context.Background(),

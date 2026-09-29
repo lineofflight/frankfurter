@@ -1,12 +1,15 @@
-// Package banguat fetches rates from Banco de Guatemala, which publishes daily reference rates for GTQ per 1 USD via a
-// SOAP web service, so base=USD, quote=GTQ.
+// Package banguat fetches rates from Banco de Guatemala, which publishes daily
+// reference rates for GTQ per 1 USD via a SOAP web service, so base=USD,
+// quote=GTQ.
 //
-// Currently disabled in production: requests from the production server are reset by Banguat's edge before the TLS
-// handshake completes, which looks like an egress-network or source-IP policy. There is no provider seed, so the
+// Currently disabled in production: requests from the production server are
+// reset by Banguat's edge before the TLS handshake completes, which looks like
+// an egress-network or source-IP policy. There is no provider seed, so the
 // adapter does not register itself.
 //
-// As in Ruby, Fetch returns whatever the service sends for the requested range without clipping it: the service
-// includes the start date, so the row dated after is kept.
+// As in Ruby, Fetch returns whatever the service sends for the requested range
+// without clipping it: the service includes the start date, so the row dated
+// after is kept.
 package banguat
 
 import (

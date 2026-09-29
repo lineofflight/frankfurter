@@ -23,7 +23,8 @@ func fetch(t *testing.T, after, upto time.Time) []adapter.Rate {
 	return rates
 }
 
-// fixture reads a workbook written by testdata/fixtures.rb, the Go stand-in for the spec's build_xls.
+// fixture reads a workbook written by testdata/fixtures.rb, the Go stand-in for
+// the spec's build_xls.
 func fixture(t *testing.T, name string) []byte {
 	t.Helper()
 	data, err := os.ReadFile("testdata/fixtures/" + name + ".xls")

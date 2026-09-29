@@ -61,7 +61,8 @@ func TestPrecisionSQLStripsNoise(t *testing.T) {
 	}
 }
 
-// storedRate inserts one TST USD/GBP row with the given components and reads back its resolved rate and mid.
+// storedRate inserts one TST USD/GBP row with the given components and reads
+// back its resolved rate and mid.
 func storedRate(t *testing.T, provider string, mid, bid, ask any) (rate, storedMid sql.NullFloat64) {
 	t.Helper()
 	conn := dbtest.New(t)

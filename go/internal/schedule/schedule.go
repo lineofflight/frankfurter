@@ -12,23 +12,28 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Blend is the materialized blend, owned by the blending step. Each method runs its own transactions.
+// Blend is the materialized blend, owned by the blending step. Each method runs
+// its own transactions.
 type Blend interface {
-	// Refresh recomputes stored daily blends for [from, to] (BlendedRate.refresh).
+	// Refresh recomputes stored daily blends for [from, to]
+	// (BlendedRate.refresh).
 	Refresh(ctx context.Context, from, to time.Time) error
-	// Ready reports whether the daily blend covers full history (BlendedRate.ready?).
+	// Ready reports whether the daily blend covers full history
+	// (BlendedRate.ready?).
 	Ready(ctx context.Context) (bool, error)
 	// Rebuild rebuilds the daily blend (BlendedRate.rebuild).
 	Rebuild(ctx context.Context) error
-	// Populate fills the missing buckets of the blended rollup at precision rates.Week or rates.Month and returns how
-	// many rows it wrote (BlendedWeeklyRate.populate, BlendedMonthlyRate.populate).
+	// Populate fills the missing buckets of the blended rollup at precision
+	// rates.Week or rates.Month and returns how many rows it wrote
+	// (BlendedWeeklyRate.populate, BlendedMonthlyRate.populate).
 	Populate(ctx context.Context, p rates.Precision) (int, error)
 }
 
 // Cache is the CDN cache, owned by the cache step.
 type Cache interface {
 	PurgeDebounced(ctx context.Context) error
-	// PurgePending flushes a purge the debounce deferred once its window has expired (Cache.purge_pending).
+	// PurgePending flushes a purge the debounce deferred once its window has
+	// expired (Cache.purge_pending).
 	PurgePending(ctx context.Context) error
 }
 
@@ -57,17 +62,20 @@ func Setup(r Registrar, d Deps) error {
 	}
 
 	if d.Cache != nil {
-		// Trailing edge of the purge debounce: flush a purge the backfills coalesced once its window expires.
+		// Trailing edge of the purge debounce: flush a purge the backfills
+		// coalesced once its window expires.
 		r.Every("purge pending", time.Minute, Options{}, func(ctx context.Context, _ *Job) error {
 			return d.Cache.PurgePending(ctx)
 		})
 	}
 
 	if d.Blend != nil {
-		// Re-blend the trailing window at midnight: a forward-dated observation blended earlier froze that day's decay
-		// weights (the weighted average caps its reference date at today), so each new date needs a recompute. Ingest
-		// accepts value dates up to two days ahead, hence through tomorrow (#570). Purge after, so edges do not
-		// revalidate stale blends into a fresh day.
+		// Re-blend the trailing window at midnight: a forward-dated observation
+		// blended earlier froze that day's decay weights (the weighted average
+		// caps its reference date at today), so each new date needs a
+		// recompute. Ingest accepts value dates up to two days ahead, hence
+		// through tomorrow (#570). Purge after, so edges do not revalidate
+		// stale blends into a fresh day.
 		if err := r.Cron("midnight blend", "0 0 * * *", Options{}, func(ctx context.Context, _ *Job) error {
 			t := today()
 			if err := d.Blend.Refresh(ctx, t.AddDate(0, 0, -1), t.AddDate(0, 0, 1)); err != nil {
@@ -78,10 +86,11 @@ func Setup(r Registrar, d Deps) error {
 			return err
 		}
 
-		// Materialise the blend on installs that have never built it. Until it completes, plain ranges fall back to
-		// capped live compute; the purge afterwards drops responses cached off that fallback. Retries after transient
-		// failures and unschedules once populated, including legitimately empty buckets that cannot produce a USD
-		// blend.
+		// Materialise the blend on installs that have never built it. Until it
+		// completes, plain ranges fall back to capped live compute; the purge
+		// afterwards drops responses cached off that fallback. Retries after
+		// transient failures and unschedules once populated, including
+		// legitimately empty buckets that cannot produce a USD blend.
 		r.Every("populate blends", 5*time.Minute, Options{FirstIn: 30 * time.Second, NoOverlap: true},
 			func(ctx context.Context, job *Job) error { return populate(ctx, d.Blend, d.Cache, job) })
 	}
@@ -115,8 +124,9 @@ func populate(ctx context.Context, b Blend, c Cache, job *Job) error {
 	}
 	if !ready {
 		err := b.Rebuild(ctx)
-		// Purge even on failure: a late failure can leave a committed materialization ready, and the retry would then
-		// skip this rebuild and its purge.
+		// Purge even on failure: a late failure can leave a committed
+		// materialization ready, and the retry would then skip this rebuild and
+		// its purge.
 		if perr := purge(ctx, c); err == nil {
 			err = perr
 		}
@@ -156,7 +166,8 @@ func shuffled(d Deps) []provider.Provider {
 	return out
 }
 
-// DryRun prints what Setup would schedule for providers, as bin/schedule --dry-run does.
+// DryRun prints what Setup would schedule for providers, as bin/schedule
+// --dry-run does.
 func DryRun(w io.Writer, providers []provider.Provider) error {
 	d := Deps{Providers: providers}
 	for _, p := range shuffled(d) {

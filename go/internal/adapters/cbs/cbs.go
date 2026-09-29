@@ -1,13 +1,16 @@
-// Package cbs fetches rates from the Central Bank of Samoa, which publishes a daily fix as one XLSX archive
-// workbook covering 2008-01-02 to the latest business day.
+// Package cbs fetches rates from the Central Bank of Samoa, which publishes a
+// daily fix as one XLSX archive workbook covering 2008-01-02 to the latest
+// business day.
 //
-// The workbook has one sheet per year, each holding twelve month sections stacked vertically: a month-name banner in
-// column B, a "DATE | TALA/USD | TALA/NZD | ..." header row, then one row per business day with an Excel serial date
-// in column B. Rates are units of foreign currency per tala, so rows carry WST as base and the foreign currency as
-// quote.
+// The workbook has one sheet per year, each holding twelve month sections
+// stacked vertically: a month-name banner in column B, a "DATE | TALA/USD |
+// TALA/NZD | ..." header row, then one row per business day with an Excel
+// serial date in column B. Rates are units of foreign currency per tala, so
+// rows carry WST as base and the foreign currency as quote.
 //
-// The workbook's filename is date-stamped and changes daily, so each fetch scrapes the data page for its current
-// ".xlsx" link. Unlike most adapters, Fetch keeps rows dated on after (inclusive), as the Ruby adapter does.
+// The workbook's filename is date-stamped and changes daily, so each fetch
+// scrapes the data page for its current ".xlsx" link. Unlike most adapters,
+// Fetch keeps rows dated on after (inclusive), as the Ruby adapter does.
 package cbs
 
 import (
@@ -46,7 +49,8 @@ var monthNames = []string{
 	"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER",
 }
 
-// Excel serial dates count days from this epoch, which absorbs the 1900 leap-year quirk.
+// Excel serial dates count days from this epoch, which absorbs the 1900
+// leap-year quirk.
 var excelEpoch = adapter.Date(1899, 12, 30)
 
 var linkPattern = regexp.MustCompile(`(?i)href=["']([^"']*\.xlsx)["']`)
@@ -96,8 +100,9 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return out, nil
 }
 
-// archiveURL resolves the workbook link from the data page. The filename scheme has shifted between hyphen- and
-// space-separated forms, so the path is percent-encoded before joining.
+// archiveURL resolves the workbook link from the data page. The filename scheme
+// has shifted between hyphen- and space-separated forms, so the path is
+// percent-encoded before joining.
 func archiveURL(html string) (string, error) {
 	m := linkPattern.FindStringSubmatch(html)
 	if m == nil {
@@ -111,8 +116,8 @@ func archiveURL(html string) (string, error) {
 	return base.ResolveReference(ref).String(), nil
 }
 
-// escapeRFC2396 percent-encodes every byte outside RFC 2396's unreserved and reserved sets, like Ruby's
-// URI::RFC2396_PARSER.escape.
+// escapeRFC2396 percent-encodes every byte outside RFC 2396's unreserved and
+// reserved sets, like Ruby's URI::RFC2396_PARSER.escape.
 func escapeRFC2396(s string) string {
 	var b strings.Builder
 	for i := 0; i < len(s); i++ {
@@ -127,7 +132,8 @@ func escapeRFC2396(s string) string {
 	return b.String()
 }
 
-// parse reads every sheet in the workbook. Sheets are not in chronological order; the date filter sorts it out.
+// parse reads every sheet in the workbook. Sheets are not in chronological
+// order; the date filter sorts it out.
 func parse(data []byte) ([]adapter.Rate, error) {
 	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
@@ -149,7 +155,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// parseSheet walks rows keyed on column B: a month banner, a DATE header, or an Excel serial date.
+// parseSheet walks rows keyed on column B: a month banner, a DATE header, or an
+// Excel serial date.
 func parseSheet(rows [][]string, rates []adapter.Rate) []adapter.Rate {
 	var columns map[int]string
 	for _, r := range rows {
@@ -161,7 +168,8 @@ func parseSheet(rows [][]string, rates []adapter.Rate) []adapter.Rate {
 			columns = columnMap(r)
 			continue
 		}
-		// A month banner resets the map so a malformed section cannot leak headers across months.
+		// A month banner resets the map so a malformed section cannot leak
+		// headers across months.
 		if slices.Contains(monthNames, strings.ToUpper(label)) {
 			columns = nil
 			continue

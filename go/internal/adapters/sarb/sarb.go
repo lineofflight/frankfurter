@@ -1,8 +1,10 @@
-// Package sarb fetches rates from the South African Reserve Bank, which publishes daily weighted-average exchange rates
-// for 23 currencies. USD, GBP and EUR are quoted as ZAR per foreign unit (foreign base); all others as foreign per ZAR
-// (ZAR base).
+// Package sarb fetches rates from the South African Reserve Bank, which
+// publishes daily weighted-average exchange rates for 23 currencies. USD, GBP
+// and EUR are quoted as ZAR per foreign unit (foreign base); all others as
+// foreign per ZAR (ZAR base).
 //
-// The server clips to the requested range itself, so rows are returned as it sends them.
+// The server clips to the requested range itself, so rows are returned as it
+// sends them.
 package sarb
 
 import (
@@ -22,7 +24,8 @@ type series struct {
 	code, base, quote string
 }
 
-// Order matters: the cassette is matched on host alone, so requests replay in this order.
+// Order matters: the cassette is matched on host alone, so requests replay in
+// this order.
 var allSeries = []series{
 	{"EXCX135D", "USD", "ZAR"},
 	{"EXCZ001D", "GBP", "ZAR"},
@@ -49,8 +52,9 @@ var allSeries = []series{
 	{"EXCB118D", "ZAR", "KRW"},
 }
 
-// The kwacha series runs under ZMW from 2000 without restating the 2013 rebasing: 612.34 per rand on 2012-12-31,
-// 0.6188 on 2013-01-02. Rows before the rebasing are old kwacha.
+// The kwacha series runs under ZMW from 2000 without restating the 2013
+// rebasing: 612.34 per rand on 2012-12-31, 0.6188 on 2013-01-02. Rows before
+// the rebasing are old kwacha.
 var predecessors = map[string]adapter.Predecessor{
 	"ZMW": {Code: "ZMK", Cutover: adapter.Date(2013, 1, 1)},
 }
@@ -135,7 +139,8 @@ func parse(data []byte, base, quote string) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// value reads Value, a number or a numeric string. ok is false when it is missing, null or blank.
+// value reads Value, a number or a numeric string. ok is false when it is
+// missing, null or blank.
 func value(raw json.RawMessage) (float64, bool, error) {
 	var v any
 	if len(raw) > 0 {

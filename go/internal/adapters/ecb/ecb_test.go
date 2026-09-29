@@ -60,7 +60,8 @@ type roundTripper func(*http.Request) (*http.Response, error)
 
 func (f roundTripper) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 
-// No Ruby counterpart: the cassette matches on host only, so nothing else pins the query.
+// No Ruby counterpart: the cassette matches on host only, so nothing else pins
+// the query.
 func TestFetchRequestParams(t *testing.T) {
 	tests := []struct {
 		after, upto time.Time

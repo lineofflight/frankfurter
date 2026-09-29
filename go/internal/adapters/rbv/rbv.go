@@ -1,12 +1,16 @@
-// Package rbv fetches rates from the Reserve Bank of Vanuatu, which publishes daily reference rates against the
-// Vanuatu vatu (VUV) on business days, 08:30-09:00 Pacific/Efate: six quote currencies (USD, JPY, NZD, GBP, AUD,
+// Package rbv fetches rates from the Reserve Bank of Vanuatu, which publishes
+// daily reference rates against the Vanuatu vatu (VUV) on business days,
+// 08:30-09:00 Pacific/Efate: six quote currencies (USD, JPY, NZD, GBP, AUD,
 // EUR), the VUV trade-weighted basket.
 //
-// The exchange-rates page is a Joomla Fabrik list. A CSV export endpoint exists but is hard-capped at 100 rows per
-// call, so we scrape the HTML list directly with a limit1 query parameter large enough to return every row in one
-// response. Rows render the date as "DD Month YYYY" or "DD-Mon-YY" depending on age.
+// The exchange-rates page is a Joomla Fabrik list. A CSV export endpoint exists
+// but is hard-capped at 100 rows per call, so we scrape the HTML list directly
+// with a limit1 query parameter large enough to return every row in one
+// response. Rows render the date as "DD Month YYYY" or "DD-Mon-YY" depending on
+// age.
 //
-// Rates are VUV per unit of foreign currency. JPY is published per single unit, not per 100.
+// Rates are VUV per unit of foreign currency. JPY is published per single unit,
+// not per 100.
 //
 // www.rbv.gov.vu omits its Trustico intermediate; adapter.NewClient bundles it.
 package rbv
@@ -29,7 +33,8 @@ const (
 	pageSize = "100000"
 )
 
-// quoteColumns are the cell class suffixes, in page order; GBP's is upper case on the page.
+// quoteColumns are the cell class suffixes, in page order; GBP's is upper case
+// on the page.
 var quoteColumns = []string{"usd", "jpy", "nzd", "GBP", "aud", "eur"}
 
 var dateLayouts = []string{"2 January 2006", "2 Jan 2006", "2-Jan-06", "2-January-2006"}

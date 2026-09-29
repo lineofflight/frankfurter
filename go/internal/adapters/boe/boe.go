@@ -1,8 +1,10 @@
-// Package boe fetches rates from the Bank of England, which publishes daily spot rates for 26 currencies against the
-// British pound in its Statistical Interactive Database. Historical data is available from 2000-01-04.
+// Package boe fetches rates from the Bank of England, which publishes daily
+// spot rates for 26 currencies against the British pound in its Statistical
+// Interactive Database. Historical data is available from 2000-01-04.
 //
-// The CSV API returns pivoted data with series codes as column headers. Rates are foreign currency per 1 GBP.
-// Fetch passes both bounds to the source and returns what it sends back unclipped, so rows dated on after itself are
+// The CSV API returns pivoted data with series codes as column headers. Rates
+// are foreign currency per 1 GBP. Fetch passes both bounds to the source and
+// returns what it sends back unclipped, so rows dated on after itself are
 // included, as in Ruby.
 package boe
 
@@ -66,7 +68,8 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// Fetch implements adapter.Adapter. The source needs a start date, so after may not be open.
+// Fetch implements adapter.Adapter. The source needs a start date, so after may
+// not be open.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("after date required")

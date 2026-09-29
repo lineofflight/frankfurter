@@ -1,16 +1,21 @@
-// Package cbo fetches rates from the Central Bank of Oman, which publishes daily buying and selling rates against the
-// Omani rial (OMR) for 44 currencies, plus gold, silver and platinum per troy ounce and the SDR, via a SharePoint
-// WebForms search page. History reaches back to 2017-10-15.
+// Package cbo fetches rates from the Central Bank of Oman, which publishes
+// daily buying and selling rates against the Omani rial (OMR) for 44
+// currencies, plus gold, silver and platinum per troy ounce and the SDR, via a
+// SharePoint WebForms search page. History reaches back to 2017-10-15.
 //
-// The page's export button posts the form back with the ASP.NET VIEWSTATE and returns an HTML table dressed up as
-// ExchangeRates.xls. The "All" currency option ignores the date fields and returns only the latest snapshot, so a date
-// range has to be requested one currency at a time: a fetch is one GET for the tokens and currency list followed by
-// one POST per currency. Any range works in a single request, so there is no backfill range.
+// The page's export button posts the form back with the ASP.NET VIEWSTATE and
+// returns an HTML table dressed up as ExchangeRates.xls. The "All" currency
+// option ignores the date fields and returns only the latest snapshot, so a
+// date range has to be requested one currency at a time: a fetch is one GET for
+// the tokens and currency list followed by one POST per currency. Any range
+// works in a single request, so there is no backfill range.
 //
-// Rates are OMR per unit of foreign currency (1 USD = 0.3845 OMR), so foreign goes in base and OMR in quote. A date
-// can carry several intraday rows when the bank revised its fixing; the latest timestamp wins.
+// Rates are OMR per unit of foreign currency (1 USD = 0.3845 OMR), so foreign
+// goes in base and OMR in quote. A date can carry several intraday rows when
+// the bank revised its fixing; the latest timestamp wins.
 //
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter
+// does.
 package cbo
 
 import (
@@ -37,7 +42,8 @@ var (
 	// Cell values arrive as SharePoint-typed strings, e.g. "string;#0.3845".
 	valuePrefix = regexp.MustCompile(`\A[a-z]+;#`)
 
-	// The web part's control prefix carries a SharePoint-assigned GUID, so read it off the page rather than pin it.
+	// The web part's control prefix carries a SharePoint-assigned GUID, so read
+	// it off the page rather than pin it.
 	prefixPattern = regexp.MustCompile(`name="(ctl00\$[^"]*\$)ddCurrencyCodes"`)
 
 	firstDate = adapter.Date(2017, 10, 15)

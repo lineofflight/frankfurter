@@ -1,8 +1,9 @@
-// Package bi fetches rates from Bank Indonesia, which publishes daily transaction exchange rates for 26 currencies
-// against the Indonesian rupiah (IDR).
+// Package bi fetches rates from Bank Indonesia, which publishes daily
+// transaction exchange rates for 26 currencies against the Indonesian rupiah
+// (IDR).
 //
-// The page is SharePoint-based; we POST a search per currency and parse the HTML result table. Rates are buy/sell;
-// the mid-rate is (sell + buy) / 2.
+// The page is SharePoint-based; we POST a search per currency and parse the
+// HTML result table. Rates are buy/sell; the mid-rate is (sell + buy) / 2.
 package bi
 
 import (
@@ -50,8 +51,8 @@ func New(client *http.Client) *Adapter {
 // BackfillRange implements adapter.Adapter.
 func (a *Adapter) BackfillRange() int { return 90 }
 
-// Fetch implements adapter.Adapter. As in Ruby, the search results are returned as is, not clipped to the window, and
-// after must be set.
+// Fetch implements adapter.Adapter. As in Ruby, the search results are returned
+// as is, not clipped to the window, and after must be set.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if after.IsZero() {
 		return nil, errors.New("bi: after is required")
@@ -131,8 +132,9 @@ func parse(html, currency string) ([]adapter.Rate, error) {
 	base := strings.TrimSpace(currency)
 	m := tableRe.FindStringSubmatch(html)
 	if m == nil {
-		// No-result searches re-render the page without a gvSearchResult2 table (observed for weekend-only windows);
-		// the search web part is still present in those re-renders.
+		// No-result searches re-render the page without a gvSearchResult2 table
+		// (observed for weekend-only windows); the search web part is still
+		// present in those re-renders.
 		if strings.Contains(html, "btnSearch1") {
 			return nil, nil
 		}

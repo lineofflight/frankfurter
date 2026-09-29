@@ -1,7 +1,8 @@
 // Package boja fetches Bank of Jamaica daily counter rates in JMD.
 //
-// The rates come from a WPDataTables endpoint (table_id=134), which requires a nonce extracted from the page HTML.
-// Unlike most adapters, Fetch treats after as inclusive, as the Ruby adapter does.
+// The rates come from a WPDataTables endpoint (table_id=134), which requires a
+// nonce extracted from the page HTML. Unlike most adapters, Fetch treats after
+// as inclusive, as the Ruby adapter does.
 package boja
 
 import (
@@ -179,7 +180,8 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 
 func falsy(v any) bool { return v == nil || v == false }
 
-// rubyStrip trims what Ruby's String#strip trims: ASCII whitespace and NUL, not U+00A0.
+// rubyStrip trims what Ruby's String#strip trims: ASCII whitespace and NUL, not
+// U+00A0.
 func rubyStrip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
 // toFloat mirrors Ruby's Float(), which raises on nil and on malformed text.

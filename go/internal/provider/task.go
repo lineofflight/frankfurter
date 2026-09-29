@@ -15,8 +15,9 @@ type Backfiller interface {
 	BackfillAfter(ctx context.Context, p Provider, after time.Time)
 }
 
-// BackfillTask is the backfill rake task. With a name it backfills that provider (matched case-insensitively);
-// otherwise every provider, in random order, on up to workers goroutines. full starts each provider at its own
+// BackfillTask is the backfill rake task. With a name it backfills that
+// provider (matched case-insensitively); otherwise every provider, in random
+// order, on up to workers goroutines. full starts each provider at its own
 // coverage_start instead of after its newest stored rate.
 func BackfillTask(ctx context.Context, b Backfiller, providers []Provider, name string, full bool, workers int) error {
 	run := func(p Provider) {

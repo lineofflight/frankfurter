@@ -1,14 +1,18 @@
-// Package amcm fetches rates from the Autoridade Monetária de Macau (AMCM), which publishes daily interbank middle
-// exchange rates against the Macanese pataca (MOP) for 17 active foreign currencies plus historical pre-euro entries.
+// Package amcm fetches rates from the Autoridade Monetária de Macau (AMCM),
+// which publishes daily interbank middle exchange rates against the Macanese
+// pataca (MOP) for 17 active foreign currencies plus historical pre-euro
+// entries.
 //
-// The endpoint accepts Begin/End in YYYYMMDD format and caps each response at roughly four calendar months, so
-// backfill chunks in 90-day windows.
+// The endpoint accepts Begin/End in YYYYMMDD format and caps each response at
+// roughly four calendar months, so backfill chunks in 90-day windows.
 //
-// The usdMeanValue field, despite its name, is "1 foreign = X MOP", so the foreign currency is the base. The unit
-// field is the multiplier (JPY and KRW are quoted per 100 units). ECU is rewritten to XEU. LIQ, a non-currency
+// The usdMeanValue field, despite its name, is "1 foreign = X MOP", so the
+// foreign currency is the base. The unit field is the multiplier (JPY and KRW
+// are quoted per 100 units). ECU is rewritten to XEU. LIQ, a non-currency
 // liquidity indicator, has unit 0 and is skipped.
 //
-// Unlike most adapters, Fetch keeps rows dated on after itself, as the Ruby between?(after, end_date) does.
+// Unlike most adapters, Fetch keeps rows dated on after itself, as the Ruby
+// between?(after, end_date) does.
 package amcm
 
 import (
@@ -122,7 +126,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toF mirrors Ruby's to_f on a JSON value: numbers pass through, numeric strings parse, anything else is 0.
+// toF mirrors Ruby's to_f on a JSON value: numbers pass through, numeric
+// strings parse, anything else is 0.
 func toF(v any) float64 {
 	switch x := v.(type) {
 	case float64:

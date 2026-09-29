@@ -8,15 +8,17 @@ import (
 	"strings"
 )
 
-// Record is one row of a v2 rates response: Rate units of Quote per one Base, observed on Date.
+// Record is one row of a v2 rates response: Rate units of Quote per one Base,
+// observed on Date.
 type Record struct {
 	Date  string
 	Base  string
 	Quote string
 	Rate  Number
 
-	// Providers lists the contributors when expand=providers asked for them. HasProviders tells an empty list from
-	// none, as Ruby tells a record with providers: [] from one without the key.
+	// Providers lists the contributors when expand=providers asked for them.
+	// HasProviders tells an empty list from none, as Ruby tells a record with
+	// providers: [] from one without the key.
 	Providers    []Contribution
 	HasProviders bool
 }
@@ -29,8 +31,9 @@ type Contribution struct {
 	Excluded bool
 }
 
-// Number is a rate as Ruby holds it: a Float, or an Integer where Roundable rounds a value over 5000 to whole units.
-// The distinction shows only in CSV, where Ruby prints 1.0 but 12345.
+// Number is a rate as Ruby holds it: a Float, or an Integer where Roundable
+// rounds a value over 5000 to whole units. The distinction shows only in CSV,
+// where Ruby prints 1.0 but 12345.
 type Number struct {
 	Value float64
 	Int   bool
@@ -55,8 +58,9 @@ func (n Number) String() string {
 	return RubyFloat(n.Value)
 }
 
-// RubyFloat formats v as Ruby's Float#to_s: the shortest digits that round-trip, in fixed notation (always with a
-// fractional part) for magnitudes from 1e-4 up to 1e16, in exponent notation (1.0e-05, 1.2e+16) otherwise.
+// RubyFloat formats v as Ruby's Float#to_s: the shortest digits that
+// round-trip, in fixed notation (always with a fractional part) for magnitudes
+// from 1e-4 up to 1e16, in exponent notation (1.0e-05, 1.2e+16) otherwise.
 func RubyFloat(v float64) string {
 	switch {
 	case math.IsNaN(v):
@@ -109,7 +113,8 @@ func RubyFloat(v float64) string {
 	return sign + digits[:1] + "." + frac + "e" + expSign + es
 }
 
-// MarshalJSON writes the record with Ruby's key order: date, base, quote, rate, then providers when present.
+// MarshalJSON writes the record with Ruby's key order: date, base, quote, rate,
+// then providers when present.
 func (r Record) MarshalJSON() ([]byte, error) {
 	var b bytes.Buffer
 	b.WriteString(`{"date":`)

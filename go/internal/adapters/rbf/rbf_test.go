@@ -136,8 +136,9 @@ func TestGolden(t *testing.T) {
 	}
 }
 
-// xlsx builds a workbook shaped like RBF's: the rates on the first sheet under title rows, and an empty second sheet.
-// Each row is written from column A; nil leaves a cell blank.
+// xlsx builds a workbook shaped like RBF's: the rates on the first sheet under
+// title rows, and an empty second sheet. Each row is written from column A; nil
+// leaves a cell blank.
 func xlsx(t *testing.T, rows [][]any) []byte {
 	t.Helper()
 	f := excelize.NewFile()
@@ -166,8 +167,9 @@ func save(t *testing.T, f *excelize.File) []byte {
 	return buf.Bytes()
 }
 
-// Covers title rows above the header, padded labels, fractional date serials, text cells in data rows, zero,
-// negative and blank rates, unmapped columns, rows without a date, and the inclusive after bound.
+// Covers title rows above the header, padded labels, fractional date serials,
+// text cells in data rows, zero, negative and blank rates, unmapped columns,
+// rows without a date, and the inclusive after bound.
 func TestParseFiltersCells(t *testing.T) {
 	data := xlsx(t, [][]any{
 		{"DAILY EXCHANGE RATES"},

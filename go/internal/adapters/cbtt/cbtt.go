@@ -1,11 +1,13 @@
-// Package cbtt fetches rates from the Central Bank of Trinidad and Tobago, which publishes daily buying and selling
-// rates for 8 currencies against the Trinidad and Tobago dollar (TTD), weighted averages of the day's
+// Package cbtt fetches rates from the Central Bank of Trinidad and Tobago,
+// which publishes daily buying and selling rates for 8 currencies against the
+// Trinidad and Tobago dollar (TTD), weighted averages of the day's
 // authorised-dealer transactions (GYD and JMD are not weighted).
 //
-// The adapter takes the mid. A leg with no trades that day comes back null, and the mid is skipped when either is
-// missing. History runs from 1991 via a public WordPress REST route that takes a year span; the latest-only route uses
-// a different key shape (and carries JPY without a history) and is not used. Unlike most adapters, after is
-// inclusive, as in Ruby.
+// The adapter takes the mid. A leg with no trades that day comes back null, and
+// the mid is skipped when either is missing. History runs from 1991 via a
+// public WordPress REST route that takes a year span; the latest-only route
+// uses a different key shape (and carries JPY without a history) and is not
+// used. Unlike most adapters, after is inclusive, as in Ruby.
 package cbtt
 
 import (
@@ -83,7 +85,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	if !ok {
 		return nil, fmt.Errorf("no cbttdailyforexrates in payload from %s", baseURL)
 	}
-	// A span with no rows comes back as a single all-null object rather than an empty array.
+	// A span with no rows comes back as a single all-null object rather than an
+	// empty array.
 	if !bytes.HasPrefix(bytes.TrimSpace(raw), []byte("[")) {
 		return nil, nil
 	}
@@ -126,7 +129,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// price reads a leg that may be null, a string or a number, failing on anything else as BigDecimal() raises.
+// price reads a leg that may be null, a string or a number, failing on anything
+// else as BigDecimal() raises.
 func price(v any) (*float64, error) {
 	var s string
 	switch v := v.(type) {

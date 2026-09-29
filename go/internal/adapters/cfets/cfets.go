@@ -1,11 +1,14 @@
-// Package cfets fetches rates from the China Foreign Exchange Trade System, the PBOC's interbank platform, which
-// publishes the daily RMB central parity rate (the official fixing, 09:15 Beijing) for 25 pairs.
+// Package cfets fetches rates from the China Foreign Exchange Trade System, the
+// PBOC's interbank platform, which publishes the daily RMB central parity rate
+// (the official fixing, 09:15 Beijing) for 25 pairs.
 //
-// The history endpoint returns every pair when currency is blank, names them in data.head (e.g. "USD/CNY",
-// "100JPY/CNY", "CNY/THB") and aligns each record's values to it. Direction is per label: the first ten pairs are
-// foreign-per-CNY, the rest CNY-per-foreign. Missing values are "---". The endpoint refuses spans of a year or more and
-// any pageSize above 50. As in Ruby, rows dated on after are kept: the query's startDate is inclusive and the result is
-// not windowed.
+// The history endpoint returns every pair when currency is blank, names them in
+// data.head (e.g. "USD/CNY", "100JPY/CNY", "CNY/THB") and aligns each record's
+// values to it. Direction is per label: the first ten pairs are
+// foreign-per-CNY, the rest CNY-per-foreign. Missing values are "---". The
+// endpoint refuses spans of a year or more and any pageSize above 50. As in
+// Ruby, rows dated on after are kept: the query's startDate is inclusive and
+// the result is not windowed.
 package cfets
 
 import (
@@ -83,7 +86,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return rates, nil
 }
 
-// fetchPage posts with the parameters in the query string and no body, as http.rb's post(url, params:) does.
+// fetchPage posts with the parameters in the query string and no body, as
+// http.rb's post(url, params:) does.
 func (a *Adapter) fetchPage(ctx context.Context, start, end time.Time, page int) ([]byte, error) {
 	q := url.Values{
 		"startDate": {start.Format(time.DateOnly)},
@@ -179,7 +183,8 @@ type pair struct {
 
 var labelPattern = regexp.MustCompile(`\A(\d*)([A-Z]{3})/(\d*)([A-Z]{3})\z`)
 
-// parseLabel reads "100JPY/CNY" as base JPY, quote CNY, unit 100. Labels with a quote unit are not understood.
+// parseLabel reads "100JPY/CNY" as base JPY, quote CNY, unit 100. Labels with a
+// quote unit are not understood.
 func parseLabel(label string) *pair {
 	m := labelPattern.FindStringSubmatch(label)
 	if m == nil || m[3] != "" {

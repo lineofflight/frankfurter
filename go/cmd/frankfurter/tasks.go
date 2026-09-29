@@ -20,7 +20,8 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// runMigrate is db:migrate: to the latest version, or to -version (VERSION in the environment, as rake takes it).
+// runMigrate is db:migrate: to the latest version, or to -version (VERSION in
+// the environment, as rake takes it).
 func runMigrate(ctx context.Context, args []string, _ io.Writer) error {
 	fs := flag.NewFlagSet("migrate", flag.ContinueOnError)
 	target := fs.Int("version", -1, "target version (default: latest, or VERSION)")
@@ -74,8 +75,10 @@ func backfill(ctx context.Context, args []string, _ io.Writer) error {
 	})
 }
 
-// backfillWith runs the backfill task on b and then, the wave being over and the process about to exit, flushes any
-// purge the debounce deferred (Cache.purge_pending(ignore_window: true)). An unknown provider aborts before either.
+// backfillWith runs the backfill task on b and then, the wave being over and
+// the process about to exit, flushes any purge the debounce deferred
+// (Cache.purge_pending(ignore_window: true)). An unknown provider aborts before
+// either.
 func backfillWith(ctx context.Context, conn *sql.DB, b provider.Backfiller, c *cache.Cache, name string, full bool) error {
 	providers, err := provider.All(ctx, conn)
 	if err != nil {
@@ -87,8 +90,9 @@ func backfillWith(ctx context.Context, conn *sql.DB, b provider.Backfiller, c *c
 	return c.FlushPending(ctx)
 }
 
-// blendRebuild is blend:rebuild. Rebuilds change served values, so cached responses must not outlive them; a failed
-// rebuild skips the purge, as the task raises before it.
+// blendRebuild is blend:rebuild. Rebuilds change served values, so cached
+// responses must not outlive them; a failed rebuild skips the purge, as the
+// task raises before it.
 func blendRebuild(ctx context.Context, args []string, _ io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("blend-rebuild", flag.ContinueOnError), args, 0); err != nil {
 		return err
@@ -101,8 +105,8 @@ func blendRebuild(ctx context.Context, args []string, _ io.Writer) error {
 	})
 }
 
-// blendParity is blend:parity[samples]: it compares table and live answers and fails unless they agree and grouped
-// coverage is complete.
+// blendParity is blend:parity[samples]: it compares table and live answers and
+// fails unless they agree and grouped coverage is complete.
 func blendParity(ctx context.Context, args []string, stdout io.Writer) error {
 	fs := flag.NewFlagSet("blend-parity", flag.ContinueOnError)
 	seed := fs.Uint64("seed", 42, "seed for the random shapes")
@@ -136,8 +140,8 @@ func blendParity(ctx context.Context, args []string, stdout io.Writer) error {
 	})
 }
 
-// rollupsRebuild is rollups:rebuild[provider]. The purge runs even when the refill fails, since the source changes
-// have committed by then.
+// rollupsRebuild is rollups:rebuild[provider]. The purge runs even when the
+// refill fails, since the source changes have committed by then.
 func rollupsRebuild(ctx context.Context, args []string, _ io.Writer) error {
 	rest, err := flags(flag.NewFlagSet("rollups-rebuild", flag.ContinueOnError), args, 1)
 	if err != nil {
@@ -155,7 +159,8 @@ func rollupsRebuild(ctx context.Context, args []string, _ io.Writer) error {
 	})
 }
 
-// providerKey matches name to a provider key case-insensitively, as the tasks' Provider.detect with casecmp does.
+// providerKey matches name to a provider key case-insensitively, as the tasks'
+// Provider.detect with casecmp does.
 func providerKey(ctx context.Context, conn *sql.DB, name string) (string, error) {
 	providers, err := provider.All(ctx, conn)
 	if err != nil {
@@ -200,8 +205,9 @@ func consensusRecent(ctx context.Context, args []string, _ io.Writer) error {
 	})
 }
 
-// purgeInvalid is db:purge_invalid. When anything was deleted the CDN is purged even if a rebuild failed: the
-// deletion has committed and must not leave old responses cached.
+// purgeInvalid is db:purge_invalid. When anything was deleted the CDN is purged
+// even if a rebuild failed: the deletion has committed and must not leave old
+// responses cached.
 func purgeInvalid(ctx context.Context, args []string, _ io.Writer) error {
 	if _, err := flags(flag.NewFlagSet("purge-invalid", flag.ContinueOnError), args, 0); err != nil {
 		return err

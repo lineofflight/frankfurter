@@ -1,4 +1,5 @@
-// Package vcrtest replays the converted Ruby VCR cassettes in go/testdata/cassettes.
+// Package vcrtest replays the converted Ruby VCR cassettes in
+// go/testdata/cassettes.
 //
 // Client mirrors a Ruby spec's VCR.insert_cassette call:
 //
@@ -8,8 +9,8 @@
 //	// Go
 //	client := vcrtest.Client(t, "banrep", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host), vcrtest.AllowPlaybackRepeats)
 //
-// As in VCR, each recorded interaction plays once unless repeats are allowed, the first unused match wins, and a
-// request that matches nothing fails.
+// As in VCR, each recorded interaction plays once unless repeats are allowed,
+// the first unused match wins, and a request that matches nothing fails.
 package vcrtest
 
 import (
@@ -52,8 +53,10 @@ var (
 		return err == nil && r.URL.Path == u.Path
 	}
 
-	// URI compares scheme, host, port, path and query. Query parameters compare as decoded name/value sets, so order
-	// and escaping differences between http.rb (recorded through WebMock, which sorts them) and net/url don't matter.
+	// URI compares scheme, host, port, path and query. Query parameters compare
+	// as decoded name/value sets, so order and escaping differences between
+	// http.rb (recorded through WebMock, which sorts them) and net/url don't
+	// matter.
 	URI Matcher = func(r *http.Request, _ []byte, rec cassette.Request) bool {
 		u, err := url.Parse(unsecret(rec.URL))
 		if err != nil {
@@ -70,7 +73,8 @@ var (
 			reflect.DeepEqual(live.Query(), u.Query())
 	}
 
-	// Body compares request bodies exactly, or as equal form fields or equal JSON when both sides parse as such.
+	// Body compares request bodies exactly, or as equal form fields or equal
+	// JSON when both sides parse as such.
 	Body Matcher = func(_ *http.Request, body []byte, rec cassette.Request) bool {
 		live, recorded := unsecret(string(body)), unsecret(rec.Body)
 		if live == recorded {
@@ -95,15 +99,18 @@ type config struct {
 	repeats  bool
 }
 
-// MatchOn sets the matchers, like match_requests_on. The default is Method and URI, as in VCR.
+// MatchOn sets the matchers, like match_requests_on. The default is Method and
+// URI, as in VCR.
 func MatchOn(matchers ...Matcher) Option {
 	return func(c *config) { c.matchers = matchers }
 }
 
-// AllowPlaybackRepeats lets an interaction answer more than one request, like allow_playback_repeats: true.
+// AllowPlaybackRepeats lets an interaction answer more than one request, like
+// allow_playback_repeats: true.
 var AllowPlaybackRepeats Option = func(c *config) { c.repeats = true }
 
-// Client returns an HTTP client that answers from the named cassette (no extension) and never touches the network.
+// Client returns an HTTP client that answers from the named cassette (no
+// extension) and never touches the network.
 func Client(t testing.TB, name string, opts ...Option) *http.Client {
 	t.Helper()
 	cfg := config{matchers: []Matcher{Method, URI}}
@@ -142,14 +149,16 @@ func CassetteDir() string {
 	return filepath.Join(filepath.Dir(file), "..", "..", "testdata", "cassettes")
 }
 
-// Secrets are the placeholders spec/helper.rb substitutes for credentials when recording (filter_sensitive_data).
+// Secrets are the placeholders spec/helper.rb substitutes for credentials when
+// recording (filter_sensitive_data).
 var Secrets = []string{
 	"TCMB_API_KEY", "FRED_API_KEY", "BAM_API_KEY", "BANXICO_API_KEY", "BCCH_USER", "BCCH_PASS", "BOT_API_KEY",
 }
 
-// SetSecrets sets every unset credential variable to its placeholder (FRED_API_KEY=<FRED_API_KEY>), so an adapter
-// that reads its key from the environment builds the recorded request. Ruby skips these specs without the variable;
-// Go runs them. Like t.Setenv, it can't be used in parallel tests.
+// SetSecrets sets every unset credential variable to its placeholder
+// (FRED_API_KEY=<FRED_API_KEY>), so an adapter that reads its key from the
+// environment builds the recorded request. Ruby skips these specs without the
+// variable; Go runs them. Like t.Setenv, it can't be used in parallel tests.
 func SetSecrets(t testing.TB) {
 	t.Helper()
 	for _, name := range Secrets {
@@ -159,7 +168,8 @@ func SetSecrets(t testing.TB) {
 	}
 }
 
-// unsecret swaps real credential values for their placeholders, as VCR does when it records.
+// unsecret swaps real credential values for their placeholders, as VCR does
+// when it records.
 func unsecret(s string) string {
 	for _, name := range Secrets {
 		value := os.Getenv(name)

@@ -1,12 +1,15 @@
-// Package xls reads legacy Excel (BIFF8 .xls) workbooks with the cell typing of Ruby's spreadsheet gem, which the
-// Ruby adapters were written against: numbers come back as numbers, text as text, and a number whose format looks like
-// a date as a date.
+// Package xls reads legacy Excel (BIFF8 .xls) workbooks with the cell typing of
+// Ruby's spreadsheet gem, which the Ruby adapters were written against: numbers
+// come back as numbers, text as text, and a number whose format looks like a
+// date as a date.
 //
-// Formula cells read as empty. The gem returns them as Spreadsheet::Formula, which no adapter treats as a number.
+// Formula cells read as empty. The gem returns them as Spreadsheet::Formula,
+// which no adapter treats as a number.
 //
-// BIFF8 is frozen, so this is a small reader rather than a library: github.com/richardlehane/mscfb opens the Compound
-// File container, and biff.go reads only the records the adapters need from its Workbook stream. [MS-XLS] documents
-// the record layouts.
+// BIFF8 is frozen, so this is a small reader rather than a library:
+// github.com/richardlehane/mscfb opens the Compound File container, and biff.go
+// reads only the records the adapters need from its Workbook stream. [MS-XLS]
+// documents the record layouts.
 package xls
 
 import (
@@ -37,7 +40,8 @@ type Cell struct {
 	Date   time.Time // Date, UTC, with any time of day the format shows
 }
 
-// Text renders the cell as Ruby's cell.to_s would, for header and label matching.
+// Text renders the cell as Ruby's cell.to_s would, for header and label
+// matching.
 func (c Cell) Text() string {
 	switch c.Kind {
 	case String, Error:
@@ -55,7 +59,8 @@ func (c Cell) Text() string {
 // Row is a worksheet row, running to its last non-blank cell.
 type Row []Cell
 
-// At returns the cell in column i (zero-based), or an empty cell past the end of the row, as Ruby's row[i] gives nil.
+// At returns the cell in column i (zero-based), or an empty cell past the end
+// of the row, as Ruby's row[i] gives nil.
 func (r Row) At(i int) Cell {
 	if i < 0 || i >= len(r) {
 		return Cell{}
@@ -63,7 +68,8 @@ func (r Row) At(i int) Cell {
 	return r[i]
 }
 
-// Sheet is a worksheet's rows, indexed from the first row as the gem's sheet.each yields them.
+// Sheet is a worksheet's rows, indexed from the first row as the gem's
+// sheet.each yields them.
 type Sheet struct {
 	Name string
 	Rows []Row
@@ -101,7 +107,8 @@ func Open(data []byte) ([]Sheet, error) {
 	return sheets, nil
 }
 
-// number types a NUMBER or RK value by its cell's number format, as the gem does.
+// number types a NUMBER or RK value by its cell's number format, as the gem
+// does.
 func (wb *workbook) number(xf uint16, v float64) Cell {
 	if int(xf) < len(wb.xfs) && isDate(wb.numberFormat(wb.xfs[xf])) {
 		return Cell{Kind: Date, Date: serialDate(v)}
@@ -132,8 +139,8 @@ func (wb *workbook) numberFormat(index uint16) string {
 	return wb.formats[index]
 }
 
-// The gem's Spreadsheet::Format patterns: a format is a date or time when it has date or time tokens and no digit
-// placeholders.
+// The gem's Spreadsheet::Format patterns: a format is a date or time when it
+// has date or time tokens and no digit placeholders.
 var (
 	localePrefix  = regexp.MustCompile(`\A\[\$-\S+\]`)
 	numberPattern = regexp.MustCompile(`[#]|0+`)
@@ -149,7 +156,8 @@ func isDate(format string) bool {
 	return datePattern.MatchString(format) || timePattern.MatchString(format)
 }
 
-// serialDate converts an Excel serial in the 1900 date system, rounding the time of day to the second as the gem does.
+// serialDate converts an Excel serial in the 1900 date system, rounding the
+// time of day to the second as the gem does.
 func serialDate(serial float64) time.Time {
 	days := math.Floor(serial)
 	secs := math.Round((serial - days) * 86400)

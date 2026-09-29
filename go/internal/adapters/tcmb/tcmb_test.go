@@ -45,8 +45,9 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 }
 
 func TestFetchKeepsEveryDigitOfMid(t *testing.T) {
-	// JPY is quoted per 100 units, so its rate lands three orders of magnitude below the rest of the feed. Rounding to
-	// a fixed number of decimal places clipped it: buy 28.0072 and sell 28.1927 average to 28.09995, which is
+	// JPY is quoted per 100 units, so its rate lands three orders of magnitude
+	// below the rest of the feed. Rounding to a fixed number of decimal places
+	// clipped it: buy 28.0072 and sell 28.1927 average to 28.09995, which is
 	// 0.2809995 per yen, and a round(4) stored 0.281.
 	for _, r := range fetch(t) {
 		if r.Base == "JPY" && r.Date.Equal(adapter.Date(2026, 3, 2)) {

@@ -27,7 +27,8 @@ func TestQuoteRequiresData(t *testing.T) {
 	}
 }
 
-// Ruby raises NotImplementedError from Base#formatted and #cache_key; in Go only the concrete quotes have them.
+// Ruby raises NotImplementedError from Base#formatted and #cache_key; in Go
+// only the concrete quotes have them.
 func TestQuoteDoesNotKnowHowToFormatOrKey(t *testing.T) {
 	var q any = baseQuote(nil)
 	if _, ok := q.(interface{ Formatted() any }); ok {
@@ -93,7 +94,8 @@ func TestQuoteRebaseRoundsAndSorts(t *testing.T) {
 	q.Base, q.Amount = "GBP", 100
 	q.Perform(context.Background())
 	got := q.result.days[0].rates
-	// Rates are scaled and rounded first (USD 108, GBP 86, JPY 16000, EUR 100), then divided and rounded again.
+	// Rates are scaled and rounded first (USD 108, GBP 86, JPY 16000, EUR 100),
+	// then divided and rounded again.
 	want := quoteRates{{"EUR", 116.28}, {"JPY", 18605}, {"USD", 125.58}}
 	if len(got) != len(want) {
 		t.Fatalf("rates = %v", got)
@@ -235,7 +237,8 @@ func TestIntervalQuotesGivenDateInterval(t *testing.T) {
 	start, end := intervalDates()
 	gotStart, _ := db.ParseDate(f.StartDate)
 	gotEnd, _ := db.ParseDate(f.EndDate)
-	// The returned start date is the closest working day on or before the requested start, but not far back.
+	// The returned start date is the closest working day on or before the
+	// requested start, but not far back.
 	if gotStart.After(start) || !gotStart.After(start.AddDate(0, 0, -10)) {
 		t.Errorf("start_date = %s", f.StartDate)
 	}
@@ -340,7 +343,8 @@ func TestCurrencyNamesOmitsUnknownAndExpiredCodes(t *testing.T) {
 	}
 }
 
-// spec/versions/v1/roundable_spec.rb (Roundable lives in internal/rates as rates.Round)
+// spec/versions/v1/roundable_spec.rb (Roundable lives in internal/rates as
+// rates.Round)
 
 func TestRoundable(t *testing.T) {
 	for _, c := range []struct {

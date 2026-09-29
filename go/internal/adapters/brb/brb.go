@@ -1,12 +1,15 @@
-// Package brb fetches the Banque de la Republique du Burundi's daily reference rates against BIF for 19 currencies,
-// published as one PDF bulletin per business day and listed on a paginated Drupal index. Each bulletin carries
+// Package brb fetches the Banque de la Republique du Burundi's daily reference
+// rates against BIF for 19 currencies, published as one PDF bulletin per
+// business day and listed on a paginated Drupal index. Each bulletin carries
 // Acheteur (buy), Cours moyen jour (mid) and Vendeur (sell); we keep the mid.
 //
-// The site exposes only the paginated index, no date-range API. We walk the index, collect (date, PDF URL) pairs
-// within the requested window, fetch each PDF and parse its fixed-layout table.
+// The site exposes only the paginated index, no date-range API. We walk the
+// index, collect (date, PDF URL) pairs within the requested window, fetch each
+// PDF and parse its fixed-layout table.
 //
-// Currency labels are French names. DTS is BRB's label for Special Drawing Rights and is emitted as XDR. Eleven
-// currencies carry an asterisk meaning "not accepted by manual exchange bureaus"; it's informational only, so it is
+// Currency labels are French names. DTS is BRB's label for Special Drawing
+// Rights and is emitted as XDR. Eleven currencies carry an asterisk meaning
+// "not accepted by manual exchange bureaus"; it's informational only, so it is
 // stripped from the label.
 //
 // Direction: foreign currency in base, BIF in quote (1 foreign = X BIF).
@@ -77,8 +80,9 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
-// BackfillRange implements adapter.Adapter. Chunk the archive so partial progress survives an unparseable PDF;
-// discovery re-walks the (small) index per chunk.
+// BackfillRange implements adapter.Adapter. Chunk the archive so partial
+// progress survives an unparseable PDF; discovery re-walks the (small) index
+// per chunk.
 func (a *Adapter) BackfillRange() int { return 30 }
 
 type entry struct {
@@ -86,7 +90,8 @@ type entry struct {
 	url  string
 }
 
-// Fetch implements adapter.Adapter. Like the Ruby adapter, `after` is inclusive: a bulletin dated after..upto is kept.
+// Fetch implements adapter.Adapter. Like the Ruby adapter, `after` is
+// inclusive: a bulletin dated after..upto is kept.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
 	if upto.IsZero() {
 		upto = a.Today()
@@ -107,7 +112,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		if err != nil {
 			return nil, err
 		}
-		// Some archive dates return a zero-byte body; treat the date as missing.
+		// Some archive dates return a zero-byte body; treat the date as
+		// missing.
 		if !bytes.HasPrefix(body, []byte("%PDF")) {
 			continue
 		}
@@ -185,7 +191,8 @@ func (a *Adapter) discover(ctx context.Context, after, upto time.Time) ([]entry,
 	return entries, nil
 }
 
-// indexPage returns the bulletins listed on one index page, first link per date.
+// indexPage returns the bulletins listed on one index page, first link per
+// date.
 func (a *Adapter) indexPage(ctx context.Context, page int) ([]entry, error) {
 	var params url.Values
 	if page > 0 {

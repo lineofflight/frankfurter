@@ -1,7 +1,10 @@
-// Package dnb fetches rates from Danmarks Nationalbank, which publishes daily exchange rates for 30 currencies against
-// the Danish krone via Statistics Denmark's Statbank API. Rates are quoted as DKK per 100 units of foreign currency.
+// Package dnb fetches rates from Danmarks Nationalbank, which publishes daily
+// exchange rates for 30 currencies against the Danish krone via Statistics
+// Denmark's Statbank API. Rates are quoted as DKK per 100 units of foreign
+// currency.
 //
-// The date range goes into the request, so Fetch returns what the API sends without clipping it again, as Ruby does.
+// The date range goes into the request, so Fetch returns what the API sends
+// without clipping it again, as Ruby does.
 package dnb
 
 import (
@@ -119,7 +122,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			index[name] = i
 		}
 	}
-	// Ruby's CSV reads an empty field as nil, so an empty field counts as missing.
+	// Ruby's CSV reads an empty field as nil, so an empty field counts as
+	// missing.
 	field := func(row []string, name string) (string, bool) {
 		i, ok := index[name]
 		if !ok || i >= len(row) || row[i] == "" {

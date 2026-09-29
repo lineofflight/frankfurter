@@ -175,7 +175,8 @@ func TestFetchURL(t *testing.T) {
 			rec := &recorder{}
 			a := New(&http.Client{Transport: rec})
 			a.Now = func() time.Time { return time.Date(2026, 9, 29, 12, 0, 0, 0, time.UTC) }
-			// An empty body is not JSON, so the fetch fails after the request is made.
+			// An empty body is not JSON, so the fetch fails after the request
+			// is made.
 			a.Fetch(context.Background(), tt.after, tt.upto)
 			if len(rec.urls) != 1 || rec.urls[0] != tt.want {
 				t.Errorf("urls = %v, want [%s]", rec.urls, tt.want)

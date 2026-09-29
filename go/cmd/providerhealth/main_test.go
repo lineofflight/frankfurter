@@ -9,8 +9,9 @@ import (
 	"testing"
 )
 
-// Locks the staleness calibration: thresholds must catch genuinely frozen feeds (NBC at 10 missed) while tolerating
-// normal lag (FBIL holidays at 4, T+1 at 1, monthly archives in arrears).
+// Locks the staleness calibration: thresholds must catch genuinely frozen feeds
+// (NBC at 10 missed) while tolerating normal lag (FBIL holidays at 4, T+1 at 1,
+// monthly archives in arrears).
 
 func missed(n int) *int { return &n }
 

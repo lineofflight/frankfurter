@@ -10,7 +10,8 @@ import (
 	_ "github.com/lineofflight/frankfurter/go/internal/adapters/all"
 )
 
-// Every adapter registers under a provider key seeded in db/seeds/providers, from a package named after the key.
+// Every adapter registers under a provider key seeded in db/seeds/providers,
+// from a package named after the key.
 func TestRegisteredKeysAreSeededProviders(t *testing.T) {
 	keys := adapter.All()
 	if len(keys) == 0 {

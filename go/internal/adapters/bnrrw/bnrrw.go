@@ -1,13 +1,16 @@
-// Package bnrrw fetches rates from Banque Nationale du Rwanda, which publishes daily reference rates for 16 currencies
-// against the Rwandan franc through a public JSON API at fxrates.bnr.rw. Rates are RWF per unit of the foreign
+// Package bnrrw fetches rates from Banque Nationale du Rwanda, which publishes
+// daily reference rates for 16 currencies against the Rwandan franc through a
+// public JSON API at fxrates.bnr.rw. Rates are RWF per unit of the foreign
 // currency, so RWF is the quote.
 //
-// The endpoint serves one currency per request, so a fetch iterates the currency list. buying_rate, average_rate and
-// selling_rate are published; average_rate is the mid (issue #314). Some historical values carry thousands commas
-// ("1,253.60"). Key BNR is taken by Banca Națională a României.
+// The endpoint serves one currency per request, so a fetch iterates the
+// currency list. buying_rate, average_rate and selling_rate are published;
+// average_rate is the mid (issue #314). Some historical values carry thousands
+// commas ("1,253.60"). Key BNR is taken by Banca Națională a României.
 //
-// Fetch does not clip to the window: it returns whatever the API serves for start_date..end_date, and the API includes
-// start_date, as the Ruby adapter does.
+// Fetch does not clip to the window: it returns whatever the API serves for
+// start_date..end_date, and the API includes start_date, as the Ruby adapter
+// does.
 package bnrrw
 
 import (

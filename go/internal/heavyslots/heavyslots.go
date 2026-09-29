@@ -1,7 +1,9 @@
-// Package heavyslots caps concurrent heavy range computes per process (#650). Live-path daily ranges recompute the
-// blend per date, so a few full-history single-provider requests can hold every worker for the better part of a minute
-// while cheap shapes queue behind them; the request deadline bounds each of them, not their sum. Acquire never blocks:
-// past the cap the request fails fast with ErrBusy (a 503 with Retry-After) instead of waiting.
+// Package heavyslots caps concurrent heavy range computes per process (#650).
+// Live-path daily ranges recompute the blend per date, so a few full-history
+// single-provider requests can hold every worker for the better part of a
+// minute while cheap shapes queue behind them; the request deadline bounds each
+// of them, not their sum. Acquire never blocks: past the cap the request fails
+// fast with ErrBusy (a 503 with Retry-After) instead of waiting.
 package heavyslots
 
 import (
@@ -19,8 +21,9 @@ const RetryAfterSeconds = 30
 // ErrBusy reports that every slot is held.
 var ErrBusy = errors.New("heavy compute slots busy")
 
-// DefaultMax is MAX_HEAVY_COMPUTES, or 2. It parses like Ruby's Integer() (surrounding space, 0x/0o/0b/0 prefixes,
-// underscores), and an unparseable value panics at startup, as Integer() raises on load.
+// DefaultMax is MAX_HEAVY_COMPUTES, or 2. It parses like Ruby's Integer()
+// (surrounding space, 0x/0o/0b/0 prefixes, underscores), and an unparseable
+// value panics at startup, as Integer() raises on load.
 var DefaultMax = defaultMax()
 
 func defaultMax() int {
