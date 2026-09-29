@@ -16,9 +16,15 @@ const Pivot = "USD"
 
 // Test seams. Production leaves them as they are.
 var (
-	wrapChunk   = func(run func() error) error { return run() }             // around each chunk RebuildDaily refreshes
-	beforeBatch = func(table string, buckets []string) error { return nil } // at the start of each grouped batch
-	afterRead   = func() {}                                                 // between Read's coverage and value queries
+	// around each chunk RebuildDaily refreshes
+	wrapChunk = func(run func() error) error { return run() }
+	// at the start of each grouped batch, inside its transaction
+	beforeBatch = func(table string, buckets []string) error { return nil }
+	// between Read's coverage and value queries
+	afterRead = func() {}
+	// RebuildProviderRollups: inside the source transaction once affected buckets are read, and before each refill
+	afterSourceRead = func() {}
+	beforeRefill    = func(table string) {}
 )
 
 // within runs fn in q's transaction when q is one already (a *sql.Tx, or a *sql.Conn inside BEGIN), and otherwise in

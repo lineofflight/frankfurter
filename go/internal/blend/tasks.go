@@ -99,6 +99,7 @@ func RebuildProviderRollups(ctx context.Context, conn *sql.DB, provider string, 
 				return err
 			}
 		}
+		afterSourceRead()
 		for _, t := range rates.Rollups {
 			if _, err := q.ExecContext(ctx, "DELETE FROM "+t.Name+" WHERE "+scope); err != nil {
 				return err
@@ -140,6 +141,7 @@ func RebuildProviderRollups(ctx context.Context, conn *sql.DB, provider string, 
 		if len(affected[r.Table]) == 0 {
 			continue
 		}
+		beforeRefill(r.Table)
 		if _, err := r.Refresh(ctx, conn, affected[r.Table], today); err != nil {
 			return err
 		}
