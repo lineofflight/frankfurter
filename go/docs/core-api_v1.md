@@ -122,11 +122,13 @@ query keys, 422 on infinite or NaN rates, static files on uncleaned paths and OP
 cases of `r.etag`, invalid UTF-8 in `from`/`to`, and a malformed query on an unmatched v1 path.
 
 The second verification found, outside the corpus: type conflicts below the top level of the query and Rack's
-limits (now a full port, `parseRackQuery`), the `captures` query parameter params_capturing appends to, and a stored
-row without a rate (now a 422, as Ruby's `amount * nil` raises; it was skipped). The Ruby outcomes were recorded by
-running the same requests through `api_golden.rb` into a scratch file; `v1_captures_test.go` and `rack_query_test.go`
-hold them. The golden file was not regenerated in that pass, so fold the requests in `TestV1QueryCaptures` and
-`TestV1NestedQueryConflicts` into the corpus the next time it is.
+limits (now a full port, `parseRackQuery`), the `captures` query parameter params_capturing appends to, escaped paths
+(`v1Raw`, raw paths in noindex and deprecation), empty Origin and Access-Control-Request-Method headers and NUL
+paths in Rack::Cors preflights, and a stored row without a rate (now a 422, as Ruby's `amount * nil` raises; it was
+skipped). The Ruby outcomes were recorded by running the same requests through the Ruby app into a scratch file;
+`v1_captures_test.go`, `cors_test.go` and `rack_query_test.go` hold them. The golden file was not regenerated in that
+pass, so fold the requests in `TestV1QueryCaptures`, `TestV1NestedQueryConflicts` and `TestV1EscapedPaths` into the
+corpus the next time it is.
 
 ## Specs ported
 
@@ -152,12 +154,14 @@ versions/v1/roundable_spec (against `rates.Round`).
   takes forms like `20200101` or `Jan 1 2020`. Only the route's own YYYY-MM-DD captures reach it otherwise.
 - V1's error handler turns every exception into 422. Go answers 422 for request errors (amount, currency pair, dates,
   %-encoding, a query `date=` on an interval route) and 500 for database failures.
-- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body. `upcase` is Go's simple case mapping (Ruby maps `ß` to `SS`).
+- Only the query string feeds v1 parameters; Roda's indifferent params would also merge a form body. `upcase` is Go's
+  simple case mapping (Ruby maps `ß` to `SS`).
 - A success response whose body is first written after the deadline becomes a 500 JSON with `no-store` (Puma answers
   a raising body with a bare 500). JSON floats print shortest (`1` where Oj writes `1.0`); `Roundable` values over
   5000 are floats (Ruby returns Integers).
-- `net/http`'s ServeMux cleans paths (`/v1//latest` redirects) and decodes them before matching, where Roda matches
-  the raw PATH_INFO; the noindex and deprecation middleware also read the decoded path.
+- `net/http`'s ServeMux cleans paths before matching (`/v1//latest` redirects with 301; Roda answers 404). Escaped
+  paths do follow Roda: the noindex and deprecation middleware read `URL.EscapedPath()`, and `v1Raw` keeps a path
+  with a %-escape off the v1 routes (`/v1/%6Catest` is 404, as in Ruby). v2 routes need the same care.
 - Static files carry no Last-Modified (embedded files have no mtime); ranges and conditional GETs still work.
 - `Cache` treats empty credentials as unconfigured (Ruby checks only for nil, so an empty env var would try to purge).
 

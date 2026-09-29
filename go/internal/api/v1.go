@@ -29,17 +29,33 @@ var v1RootPayload = struct {
 // the index (r.is and r.root without arguments) has one. So any other v1 path, even one no route matches, fails with
 // 422 on a query Rack cannot parse.
 func (s *Server) routesV1(mux *http.ServeMux) {
-	mux.HandleFunc("/v1", s.v1Root)
-	mux.HandleFunc("/v1/{$}", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/v1", v1Raw(s.v1Root))
+	mux.HandleFunc("/v1/{$}", v1Raw(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			v1Unmatched(w, r)
 			return
 		}
 		s.v1Root(w, r)
-	})
-	mux.HandleFunc("/v1/", v1Unmatched)
-	mux.HandleFunc("/v1/currencies", s.v1Currencies)
-	mux.HandleFunc("/v1/{spec}", s.v1Rates)
+	}))
+	mux.HandleFunc("/v1/", v1Raw(v1Unmatched))
+	mux.HandleFunc("/v1/currencies", v1Raw(s.v1Currencies))
+	mux.HandleFunc("/v1/{spec}", v1Raw(s.v1Rates))
+}
+
+// v1Raw sends a path holding %-escapes where Roda would: it matches the raw PATH_INFO, so /v1/%6Catest is no v1
+// route and /v%31 is not under /v1 at all, although ServeMux decodes both to v1 paths.
+func v1Raw(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		raw := r.URL.EscapedPath()
+		switch {
+		case !strings.Contains(raw, "%"):
+			next(w, r)
+		case strings.HasPrefix(raw, "/v1/"):
+			v1Unmatched(w, r)
+		default:
+			notFound(w, contentTypeJSON)
+		}
+	}
 }
 
 func v1Unmatched(w http.ResponseWriter, r *http.Request) {
@@ -292,7 +308,7 @@ func v1Successor(path string) (string, bool) {
 // app, so static files, preflight requests and errors carry the headers too.
 func v1Deprecation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		successor, ok := v1Successor(r.URL.Path)
+		successor, ok := v1Successor(r.URL.EscapedPath()) // Rack sees the raw path
 		if !ok {
 			next.ServeHTTP(w, r)
 			return

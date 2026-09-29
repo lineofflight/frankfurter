@@ -92,3 +92,37 @@ func TestV1RowWithoutRate(t *testing.T) {
 	a.get("/v1/latest?to=USD")
 	a.status(http.StatusOK)
 }
+
+// Roda and the middleware see the raw path, so a %-escape keeps a path off the v1 routes and the header exemptions
+// even when it decodes to one of them; static files match the decoded path.
+func TestV1EscapedPaths(t *testing.T) {
+	a := newTestApp(t)
+	for _, c := range []struct {
+		target, successor string
+		status            int
+	}{
+		{"/v1/openapi%2Ejson", "/v2/rates", 200},
+		{"/v%31", "", 404},
+		{"/%76%31/openapi.json", "", 200},
+		{"/v1%2F", "", 404},
+		{"/v1/%6Catest", "/v2/rates", 404},
+		{"/v1/%6Catest?foo=1&foo[]=2", "/v2/rates", 422},
+		{"/%76%31/latest?foo=1&foo[]=2", "", 404},
+		{"/v1/a%20b", "/v2/rates", 404},
+	} {
+		a.get(c.target)
+		if a.res.Code != c.status {
+			t.Errorf("%s: status %d, want %d", c.target, a.res.Code, c.status)
+		}
+		if got := a.header("X-Robots-Tag"); got != "noindex" {
+			t.Errorf("%s: X-Robots-Tag = %q", c.target, got)
+		}
+		want := ""
+		if c.successor != "" {
+			want = `<https://api.frankfurter.dev` + c.successor + `>; rel="successor-version"`
+		}
+		if got := a.header("Link"); got != want {
+			t.Errorf("%s: Link = %q, want %q", c.target, got, want)
+		}
+	}
+}

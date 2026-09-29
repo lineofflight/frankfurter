@@ -71,7 +71,7 @@ var noindexExempt = []string{"/", "/v1", "/v2", "/v1/openapi.json", "/v2/openapi
 // which some of them honour.
 func noindex(next http.Handler) http.Handler {
 	return withHeaders(next, func(r *http.Request, _ int, h http.Header) {
-		if !slices.Contains(noindexExempt, r.URL.Path) {
+		if !slices.Contains(noindexExempt, r.URL.EscapedPath()) { // Rack sees the raw path
 			h.Set("X-Robots-Tag", "noindex")
 		}
 	})
@@ -88,11 +88,17 @@ const (
 // headers under whatever the app sets. Every other response carries Vary: Origin.
 func cors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		origin := r.Header.Get("Origin")
-		if origin == "" {
-			origin = r.Header.Get("X-Origin")
+		// Rack::Cors tests the headers for presence, so an empty Origin still counts.
+		_, hasOrigin := r.Header["Origin"]
+		if _, ok := r.Header["X-Origin"]; ok {
+			hasOrigin = true
 		}
-		if origin != "" && r.Method == http.MethodOptions && r.Header.Get("Access-Control-Request-Method") != "" {
+		_, hasMethod := r.Header["Access-Control-Request-Method"]
+		if hasOrigin && r.Method == http.MethodOptions && hasMethod {
+			if strings.Contains(r.URL.Path, "\x00") { // Rack::Utils.valid_path?
+				w.WriteHeader(http.StatusBadRequest)
+				return
+			}
 			method := strings.ToLower(r.Header.Get("Access-Control-Request-Method"))
 			if method == "get" || method == "options" {
 				h := w.Header()
@@ -105,7 +111,7 @@ func cors(next http.Handler) http.Handler {
 			return
 		}
 		withHeaders(next, func(_ *http.Request, _ int, h http.Header) {
-			if origin != "" {
+			if hasOrigin {
 				saved := h.Clone() // the app's own headers win
 				setCORS(h)
 				for k, v := range saved {
