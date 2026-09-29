@@ -87,6 +87,27 @@ func TestParseZeroBuyUsesSell(t *testing.T) {
 	}
 }
 
+func TestParseRowEdges(t *testing.T) {
+	rates, err := parse([]byte(`{"data": [
+		[null, "EURO", "1", "1"],
+		["20 Mar 2026", false, "1", "1"],
+		["20 Mar 2026", "U.S. DOLLAR\u00a0", "155", "150"],
+		[" 20 March 2026 ", " swiss franc ", "180", "170"]
+	]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "CHF" || !rates[0].Date.Equal(adapter.Date(2026, 3, 20)) {
+		t.Errorf("got %+v, want one CHF row on 2026-03-20", rates)
+	}
+}
+
+func TestParseRejectsBlankPrice(t *testing.T) {
+	if _, err := parse([]byte(`{"data": [["20 Mar 2026", "EURO", "186.2883", ""]]}`)); err == nil {
+		t.Error("want an error for a blank buy price, as Ruby's Float raises")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file        string

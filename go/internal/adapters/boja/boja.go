@@ -131,7 +131,8 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 		}
 		return nil
 	}
-	if cell(0) == nil || cell(1) == nil {
+	// Ruby skips a row whose date or name is falsy: nil or false.
+	if falsy(cell(0)) || falsy(cell(1)) {
 		return adapter.Rate{}, false, nil
 	}
 	dateStr, ok1 := cell(0).(string)
@@ -140,11 +141,12 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 		return adapter.Rate{}, false, fmt.Errorf("unexpected row %v", row)
 	}
 
-	date, err := time.Parse("2 Jan 2006", strings.TrimSpace(dateStr))
+	// strptime's %b takes the abbreviated or the full month name.
+	date, err := adapter.ParseDate(rubyStrip(dateStr), "2 Jan 2006", "2 January 2006")
 	if err != nil {
 		return adapter.Rate{}, false, err
 	}
-	iso, ok := currencies[strings.ToUpper(strings.TrimSpace(name))]
+	iso, ok := currencies[strings.ToUpper(rubyStrip(name))]
 	if !ok {
 		return adapter.Rate{}, false, nil
 	}
@@ -174,6 +176,11 @@ func parseRow(row []any) (adapter.Rate, bool, error) {
 		Ask:   adapter.Float(sell),
 	}, true, nil
 }
+
+func falsy(v any) bool { return v == nil || v == false }
+
+// rubyStrip trims what Ruby's String#strip trims: ASCII whitespace and NUL, not U+00A0.
+func rubyStrip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
 // toFloat mirrors Ruby's Float(), which raises on nil and on malformed text.
 func toFloat(v any) (float64, error) {
