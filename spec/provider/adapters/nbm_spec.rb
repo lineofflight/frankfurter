@@ -46,6 +46,53 @@ class Provider < Sequel::Model(:providers)
         metals.each { |r| _(r[:quote]).must_equal("MDL") }
       end
 
+      it "keeps FX rates when the metals endpoint has no data for the day" do
+        VCR.eject_cassette
+
+        fx_xml = <<~XML
+          <?xml version="1.0" encoding="UTF-8"?>
+          <ValCurs Date="04.01.1999" name="Official exchange rate">
+            <Valute ID="44">
+              <NumCode>840</NumCode>
+              <CharCode>USD</CharCode>
+              <Nominal>1</Nominal>
+              <Name>US Dollar</Name>
+              <Value>8.3226</Value>
+            </Valute>
+          </ValCurs>
+        XML
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, /official_exchange_rates/).to_return(status: 200, body: fx_xml)
+            WebMock.stub_request(:get, /official_metal_rates/).to_return(status: 404)
+
+            dataset = adapter.fetch(after: Date.new(1999, 1, 4), upto: Date.new(1999, 1, 4))
+
+            _(dataset.map { |r| r[:base] }).must_equal(["USD"])
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("nbm", match_requests_on: [:method, :uri])
+        end
+      end
+
+      it "raises when the FX endpoint returns 404" do
+        VCR.eject_cassette
+
+        begin
+          VCR.turned_off do
+            WebMock.stub_request(:get, /official_exchange_rates/).to_return(status: 404)
+
+            _(-> { adapter.fetch(after: Date.new(1999, 1, 4), upto: Date.new(1999, 1, 4)) })
+              .must_raise(HTTP::StatusError)
+          end
+        ensure
+          WebMock.reset!
+          VCR.insert_cassette("nbm", match_requests_on: [:method, :uri])
+        end
+      end
+
       it "normalizes metal rates from MDL-per-gram to MDL-per-troy-ounce" do
         xml = <<~XML
           <?xml version="1.0" encoding="UTF-8"?>
