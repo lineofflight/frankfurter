@@ -15,6 +15,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"math"
 	"net/http"
 	"strconv"
@@ -68,6 +69,10 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 	var doc any
 	if err := dec.Decode(&doc); err != nil {
 		return nil, err
+	}
+	// Like Ruby's JSON.parse, reject trailing content after the document.
+	if _, err := dec.Token(); err != io.EOF {
+		return nil, fmt.Errorf("unexpected data after JSON document for %s", code)
 	}
 	entries, ok := doc.([]any)
 	if !ok {

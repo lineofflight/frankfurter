@@ -111,6 +111,48 @@ func TestParseRejectsNonArray(t *testing.T) {
 	}
 }
 
+func TestParseRejectsTrailingData(t *testing.T) {
+	if _, err := parse([]byte(`[[1779408000000, 72.39]] x`), "USD"); err == nil {
+		t.Error("want an error for trailing data")
+	}
+}
+
+func TestParseStringRate(t *testing.T) {
+	rates := mustParse(t, `[[1779408000000, " 72.39 "]]`, "USD")
+	if len(rates) != 1 || rates[0].Rate != 72.39 {
+		t.Errorf("got %+v, want one rate of 72.39", rates)
+	}
+}
+
+func TestParseRejectsInvalidValues(t *testing.T) {
+	for _, data := range []string{
+		`[[1779408000000, "abc"]]`,
+		`[[1779408000000, "NaN"]]`,
+		`[[1779408000000, true]]`,
+		`[["x", 72.39]]`,
+		`[["1.5", 72.39]]`,
+	} {
+		if _, err := parse([]byte(data), "USD"); err == nil {
+			t.Errorf("parse(%s): want an error", data)
+		}
+	}
+}
+
+func TestParseTruncatesFloatEpoch(t *testing.T) {
+	// 2026-05-22T23:59:59.999Z as a float: Integer() truncates and /1000 floors, staying on the 22nd.
+	rates := mustParse(t, `[[1779494399999.9, 72.39]]`, "USD")
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 5, 22)) {
+		t.Errorf("got %+v, want date 2026-05-22", rates)
+	}
+}
+
+func TestParseNegativeEpochFloors(t *testing.T) {
+	rates := mustParse(t, `[[-1, 1.0]]`, "USD")
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(1969, 12, 31)) {
+		t.Errorf("got %+v, want date 1969-12-31", rates)
+	}
+}
+
 func TestFetchUSDPlausibleForMay2026(t *testing.T) {
 	rates := fetch(t, adapter.Date(2026, 5, 21), adapter.Date(2026, 5, 22))
 	i := slices.IndexFunc(rates, func(r adapter.Rate) bool {
