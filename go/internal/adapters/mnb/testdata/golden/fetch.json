@@ -1,0 +1,973 @@
+{
+  "adapter": "MNB",
+  "cassette": "mnb",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2025, 3, 24), upto: Date.new(2025, 3, 28))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 231.48
+    },
+    {
+      "base": "BRL",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 64.16
+    },
+    {
+      "base": "CAD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 256.52
+    },
+    {
+      "base": "CHF",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 416.87
+    },
+    {
+      "base": "CNY",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 50.67
+    },
+    {
+      "base": "CZK",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 15.97
+    },
+    {
+      "base": "DKK",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 53.42
+    },
+    {
+      "base": "EUR",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 398.44
+    },
+    {
+      "base": "GBP",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 476.45
+    },
+    {
+      "base": "HKD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 47.29
+    },
+    {
+      "base": "IDR",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 0.0222
+    },
+    {
+      "base": "ILS",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 98.95
+    },
+    {
+      "base": "INR",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 4.29
+    },
+    {
+      "base": "ISK",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 2.76
+    },
+    {
+      "base": "JPY",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 2.4577
+    },
+    {
+      "base": "KRW",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 0.2506
+    },
+    {
+      "base": "MXN",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 18.21
+    },
+    {
+      "base": "MYR",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 82.9
+    },
+    {
+      "base": "NOK",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 35.0
+    },
+    {
+      "base": "NZD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 211.08
+    },
+    {
+      "base": "PHP",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 6.41
+    },
+    {
+      "base": "PLN",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 95.23
+    },
+    {
+      "base": "RON",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 80.06
+    },
+    {
+      "base": "RSD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 3.4
+    },
+    {
+      "base": "RUB",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 4.4
+    },
+    {
+      "base": "SEK",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 36.4
+    },
+    {
+      "base": "SGD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 274.92
+    },
+    {
+      "base": "THB",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 10.85
+    },
+    {
+      "base": "TRY",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 9.71
+    },
+    {
+      "base": "UAH",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 8.82
+    },
+    {
+      "base": "USD",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 367.6
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-03-24",
+      "quote": "HUF",
+      "rate": 20.23
+    },
+    {
+      "base": "AUD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 232.68
+    },
+    {
+      "base": "BRL",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 64.12
+    },
+    {
+      "base": "CAD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 257.99
+    },
+    {
+      "base": "CHF",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 418.0
+    },
+    {
+      "base": "CNY",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 50.86
+    },
+    {
+      "base": "CZK",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 16.03
+    },
+    {
+      "base": "DKK",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 53.48
+    },
+    {
+      "base": "EUR",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 398.94
+    },
+    {
+      "base": "GBP",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 477.66
+    },
+    {
+      "base": "HKD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 47.5
+    },
+    {
+      "base": "IDR",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 0.0223
+    },
+    {
+      "base": "ILS",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 100.52
+    },
+    {
+      "base": "INR",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 4.31
+    },
+    {
+      "base": "ISK",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 2.77
+    },
+    {
+      "base": "JPY",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 2.4544
+    },
+    {
+      "base": "KRW",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 0.25170000000000003
+    },
+    {
+      "base": "MXN",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 18.45
+    },
+    {
+      "base": "MYR",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 83.27
+    },
+    {
+      "base": "NOK",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 35.15
+    },
+    {
+      "base": "NZD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 211.48
+    },
+    {
+      "base": "PHP",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 6.42
+    },
+    {
+      "base": "PLN",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 95.76
+    },
+    {
+      "base": "RON",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 80.18
+    },
+    {
+      "base": "RSD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 3.4
+    },
+    {
+      "base": "RUB",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 4.37
+    },
+    {
+      "base": "SEK",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 36.74
+    },
+    {
+      "base": "SGD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 276.14
+    },
+    {
+      "base": "THB",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 10.88
+    },
+    {
+      "base": "TRY",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 9.74
+    },
+    {
+      "base": "UAH",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 8.85
+    },
+    {
+      "base": "USD",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 369.39
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-03-25",
+      "quote": "HUF",
+      "rate": 20.28
+    },
+    {
+      "base": "AUD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 234.49
+    },
+    {
+      "base": "BRL",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 65.05
+    },
+    {
+      "base": "CAD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 260.14
+    },
+    {
+      "base": "CHF",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 419.6
+    },
+    {
+      "base": "CNY",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 51.04
+    },
+    {
+      "base": "CZK",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 16.07
+    },
+    {
+      "base": "DKK",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 53.66
+    },
+    {
+      "base": "EUR",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 400.28
+    },
+    {
+      "base": "GBP",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 478.67
+    },
+    {
+      "base": "HKD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 47.69
+    },
+    {
+      "base": "IDR",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 0.022400000000000003
+    },
+    {
+      "base": "ILS",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 101.0
+    },
+    {
+      "base": "INR",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 4.33
+    },
+    {
+      "base": "ISK",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 2.78
+    },
+    {
+      "base": "JPY",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 2.47
+    },
+    {
+      "base": "KRW",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 0.2532
+    },
+    {
+      "base": "MXN",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 18.45
+    },
+    {
+      "base": "MYR",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 83.71
+    },
+    {
+      "base": "NOK",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 35.33
+    },
+    {
+      "base": "NZD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 213.51
+    },
+    {
+      "base": "PHP",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 6.43
+    },
+    {
+      "base": "PLN",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 96.02
+    },
+    {
+      "base": "RON",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 80.44
+    },
+    {
+      "base": "RSD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 3.41
+    },
+    {
+      "base": "RUB",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 4.4
+    },
+    {
+      "base": "SEK",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 36.93
+    },
+    {
+      "base": "SGD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 277.21
+    },
+    {
+      "base": "THB",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 10.91
+    },
+    {
+      "base": "TRY",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 9.77
+    },
+    {
+      "base": "UAH",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 8.92
+    },
+    {
+      "base": "USD",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 370.8
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-03-26",
+      "quote": "HUF",
+      "rate": 20.32
+    },
+    {
+      "base": "AUD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 234.49
+    },
+    {
+      "base": "BRL",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 64.83
+    },
+    {
+      "base": "CAD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 260.24
+    },
+    {
+      "base": "CHF",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 420.45
+    },
+    {
+      "base": "CNY",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 51.17
+    },
+    {
+      "base": "CZK",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 16.07
+    },
+    {
+      "base": "DKK",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 53.68
+    },
+    {
+      "base": "EUR",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 400.47
+    },
+    {
+      "base": "GBP",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 480.4
+    },
+    {
+      "base": "HKD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 47.81
+    },
+    {
+      "base": "IDR",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 0.0225
+    },
+    {
+      "base": "ILS",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 100.77
+    },
+    {
+      "base": "INR",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 4.33
+    },
+    {
+      "base": "ISK",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 2.81
+    },
+    {
+      "base": "JPY",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 2.4634
+    },
+    {
+      "base": "KRW",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 0.25370000000000004
+    },
+    {
+      "base": "MXN",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 18.43
+    },
+    {
+      "base": "MYR",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 83.9
+    },
+    {
+      "base": "NOK",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 35.23
+    },
+    {
+      "base": "NZD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 213.45
+    },
+    {
+      "base": "PHP",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 6.47
+    },
+    {
+      "base": "PLN",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 95.55
+    },
+    {
+      "base": "RON",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 80.45
+    },
+    {
+      "base": "RSD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 3.42
+    },
+    {
+      "base": "RUB",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 4.44
+    },
+    {
+      "base": "SEK",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 36.93
+    },
+    {
+      "base": "SGD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 277.48
+    },
+    {
+      "base": "THB",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 10.97
+    },
+    {
+      "base": "TRY",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 9.79
+    },
+    {
+      "base": "UAH",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 8.97
+    },
+    {
+      "base": "USD",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 371.8
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-03-27",
+      "quote": "HUF",
+      "rate": 20.38
+    },
+    {
+      "base": "AUD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 235.26
+    },
+    {
+      "base": "BRL",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 65.09
+    },
+    {
+      "base": "CAD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 260.85
+    },
+    {
+      "base": "CHF",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 423.43
+    },
+    {
+      "base": "CNY",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 51.46
+    },
+    {
+      "base": "CZK",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 16.13
+    },
+    {
+      "base": "DKK",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 53.96
+    },
+    {
+      "base": "EUR",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 402.61
+    },
+    {
+      "base": "GBP",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 484.0
+    },
+    {
+      "base": "HKD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 48.04
+    },
+    {
+      "base": "IDR",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 0.0226
+    },
+    {
+      "base": "ILS",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 101.47
+    },
+    {
+      "base": "INR",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 4.37
+    },
+    {
+      "base": "ISK",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 2.82
+    },
+    {
+      "base": "JPY",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 2.4817
+    },
+    {
+      "base": "KRW",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 0.2545
+    },
+    {
+      "base": "MXN",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 18.43
+    },
+    {
+      "base": "MYR",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 84.22
+    },
+    {
+      "base": "NOK",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 35.57
+    },
+    {
+      "base": "NZD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 213.73
+    },
+    {
+      "base": "PHP",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 6.51
+    },
+    {
+      "base": "PLN",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 96.28
+    },
+    {
+      "base": "RON",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 80.88
+    },
+    {
+      "base": "RSD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 3.44
+    },
+    {
+      "base": "RUB",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 4.46
+    },
+    {
+      "base": "SEK",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 37.16
+    },
+    {
+      "base": "SGD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 278.56
+    },
+    {
+      "base": "THB",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 11.0
+    },
+    {
+      "base": "TRY",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 9.83
+    },
+    {
+      "base": "UAH",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 9.01
+    },
+    {
+      "base": "USD",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 373.72
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-03-28",
+      "quote": "HUF",
+      "rate": 20.59
+    }
+  ]
+}
