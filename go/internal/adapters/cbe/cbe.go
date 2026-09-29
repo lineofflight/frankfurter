@@ -121,7 +121,8 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 }
 
 func (a *Adapter) ensureSession(ctx context.Context) error {
-	if a.token != "" && a.cookie != "" {
+	// The cookie may be empty (no Set-Cookie); the token alone marks an established session, as in Ruby.
+	if a.token != "" {
 		return nil
 	}
 	req, err := a.NewRequest(ctx, http.MethodGet, historicalURL, nil)
@@ -354,7 +355,9 @@ func cellValue(c cell, strs []string) (any, error) {
 	raw := c.V[0]
 	switch c.T {
 	case "s":
-		i, err := strconv.Atoi(raw)
+		// Base 0 reads prefixes, underscores and a leading-zero octal, as Ruby's Integer() does.
+		n, err := strconv.ParseInt(strings.TrimSpace(raw), 0, 0)
+		i := int(n)
 		if err != nil {
 			return nil, fmt.Errorf("invalid shared string index %q", raw)
 		}

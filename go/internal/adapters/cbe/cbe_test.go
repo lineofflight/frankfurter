@@ -5,7 +5,9 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"math"
+	"net/http"
 	"slices"
 	"strings"
 	"testing"
@@ -39,12 +41,18 @@ func buildXLSX(t *testing.T, rows []xlsxRow) []byte {
 				`<c r="C%[1]d" s="6"><v>%[4]v</v></c><c r="D%[1]d" s="6"><v>%[5]v</v></c></row>`+"\n",
 			n, r.serial, slices.Index(strs, r.name), r.buy, r.sell)
 	}
+	return buildRawXLSX(t, sheetRows.String(), strs)
+}
+
+// buildRawXLSX writes an export with the given data rows after the title and header rows.
+func buildRawXLSX(t *testing.T, sheetRows string, strs []string) []byte {
+	t.Helper()
 	sheet := `<?xml version="1.0" encoding="utf-8"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
   <sheetData>
     <row r="1"><c r="A1" s="2" t="s"><v>0</v></c></row>
     <row r="2"><c r="A2" s="3" t="s"><v>1</v></c><c r="B2" s="3" t="s"><v>2</v></c><c r="C2" s="3" t="s"><v>3</v></c><c r="D2" s="3" t="s"><v>4</v></c></row>
-    ` + sheetRows.String() + `
+    ` + sheetRows + `
   </sheetData>
 </worksheet>
 `
@@ -197,4 +205,102 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseSkipsBlankAndZeroPrices(t *testing.T) {
+	strs := []string{"", "Date", "Currency", "Buy", "Sell", "US Dollar"}
+	rows := `<row r="3"><c r="A3"><v>46142</v></c><c r="B3" t="s"><v>5</v></c><c r="C3" t="str"><v>-</v></c><c r="D3"><v>50</v></c></row>
+<row r="4"><c r="A4"><v>46142</v></c><c r="B4" t="s"><v>5</v></c><c r="C4"/><c r="D4"><v>50</v></c></row>
+<row r="5"><c r="A5"><v>46142</v></c><c r="B5" t="s"><v>5</v></c><c r="C5"><v>0</v></c><c r="D5"><v>0</v></c></row>`
+	rates, err := parse(buildRawXLSX(t, rows, strs))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %v, want none", rates)
+	}
+}
+
+func TestParseErrorsWithoutDataRows(t *testing.T) {
+	if _, err := parse(buildRawXLSX(t, "", []string{"", "Date", "Currency", "Buy", "Sell"})); err == nil {
+		t.Error("want an error for an export without data rows")
+	}
+}
+
+func TestParseReadsSharedStringIndexAsRubyInteger(t *testing.T) {
+	// Ruby's Integer("010") is 8.
+	strs := []string{"", "Date", "Currency", "Buy", "Sell", "a", "b", "c", "US Dollar", "Euro"}
+	rows := `<row r="3"><c r="A3"><v>46142</v></c><c r="B3" t="s"><v>010</v></c><c r="C3"><v>50</v></c><c r="D3"><v>51</v></c></row>`
+	rates, err := parse(buildRawXLSX(t, rows, strs))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "USD" {
+		t.Errorf("got %v, want one USD rate", rates)
+	}
+}
+
+// fakeSite serves the historical-data page (with a token but no Set-Cookie) and the XLSX export.
+type fakeSite struct {
+	xlsx  []byte
+	gets  int
+	posts []*http.Request
+	forms []string
+}
+
+func (f *fakeSite) RoundTrip(req *http.Request) (*http.Response, error) {
+	body := `<input name="__RequestVerificationToken" type="hidden" value="tok123" />`
+	if req.Method == http.MethodGet {
+		f.gets++
+	} else {
+		b, err := io.ReadAll(req.Body)
+		if err != nil {
+			return nil, err
+		}
+		f.posts = append(f.posts, req)
+		f.forms = append(f.forms, string(b))
+		body = string(f.xlsx)
+	}
+	return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: req}, nil
+}
+
+func TestFetchPostsFormAndReusesSession(t *testing.T) {
+	site := &fakeSite{xlsx: buildXLSX(t, []xlsxRow{{46142, "US Dollar", 50, 51}})}
+	a := New(&http.Client{Transport: site})
+	for range 2 {
+		if _, err := a.Fetch(context.Background(), adapter.Date(2026, 4, 1), adapter.Date(2026, 4, 9)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if site.gets != 1 || len(site.posts) != 2 {
+		t.Fatalf("gets = %d, posts = %d, want 1 and 2", site.gets, len(site.posts))
+	}
+	if got := site.posts[0].URL.String(); got != apiURL {
+		t.Errorf("POST to %s, want %s", got, apiURL)
+	}
+	wantPrefix := "__RequestVerificationToken=tok123&DataSourceId=" + dataSourceID +
+		"&FallbackUrl=%2Fen%2Feconomic-research%2Fstatistics%2Fcbe-exchange-rates%2Fhistorical-data&LanguageName=en" +
+		"&FromDateRaw=01%2F04%2F2026&ToDateRaw=09%2F04%2F2026&SelectedSelectOptions=US+Dollar&SelectedSelectOptions=Euro&"
+	form := site.forms[0]
+	if !strings.HasPrefix(form, wantPrefix) || !strings.HasSuffix(form, "&SelectedSelectOptions=Chinese+Yuan&SubmitAction=2") {
+		t.Errorf("form = %s", form)
+	}
+	if n := strings.Count(form, "SelectedSelectOptions="); n != 18 {
+		t.Errorf("form selects %d currencies, want 18", n)
+	}
+	if h := site.posts[0].Header; h.Get("User-Agent") != userAgent || h.Get("Referer") != historicalURL {
+		t.Errorf("headers = %v", h)
+	}
+}
+
+func TestFetchNothingWhenWindowIsEmpty(t *testing.T) {
+	site := &fakeSite{}
+	a := New(&http.Client{Transport: site})
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 4, 10), adapter.Date(2026, 4, 9))
+	if err != nil || rates != nil {
+		t.Fatalf("got %v, %v; want nothing", rates, err)
+	}
+	if site.gets != 0 || len(site.posts) != 0 {
+		t.Errorf("made %d requests, want none", site.gets+len(site.posts))
+	}
 }
