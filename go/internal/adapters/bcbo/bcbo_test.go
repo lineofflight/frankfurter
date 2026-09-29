@@ -1,7 +1,11 @@
 package bcbo
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"slices"
 	"sort"
@@ -197,6 +201,61 @@ func TestParseDailyCurrent(t *testing.T) {
 		if r.Rate == 3.30736 || r.Rate == 0.0355 {
 			t.Errorf("non-currency row leaked: %+v", r)
 		}
+	}
+}
+
+type recorder struct {
+	urls   []string
+	bodies map[string][]byte
+}
+
+func (rt *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	rt.urls = append(rt.urls, req.URL.String())
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(bytes.NewReader(rt.bodies[req.URL.Path])),
+		Header:     http.Header{},
+		Request:    req,
+	}, nil
+}
+
+// Not covered by the Ruby spec: the request plan across the 2008 switch from yearly archives to daily sheets.
+func TestFetchRequestPlan(t *testing.T) {
+	rt := &recorder{bodies: map[string][]byte{
+		"/tiposDeCambioHistorico/xls.php":                     fixture(t, "yearly_months"),
+		"/librerias/indicadores/otras/otras_imprimir2XLS.php": fixture(t, "daily_current"),
+	}}
+	rates, err := New(&http.Client{Transport: rt}).Fetch(context.Background(),
+		adapter.Date(2007, 3, 2), adapter.Date(2008, 1, 7))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := []string{yearURL + "?anio=2007"}
+	for _, day := range []int{1, 2, 3, 4, 7} { // 5 and 6 January 2008 fall on a weekend
+		want = append(want, fmt.Sprintf("%s?qaa=2008&qdd=%d&qmm=1", dailyURL, day))
+	}
+	if !slices.Equal(rt.urls, want) {
+		t.Errorf("requests = %v, want %v", rt.urls, want)
+	}
+
+	// The yearly fixture carries 2 January and 2 March; only the latter is inside the window. Each daily sheet adds 6.
+	if len(rates) != 1+5*6 {
+		t.Fatalf("got %d rates, want 31", len(rates))
+	}
+	if !rates[0].Date.Equal(adapter.Date(2007, 3, 2)) || rates[0].Rate != 6.95 {
+		t.Errorf("first rate = %+v, want 6.95 on 2007-03-02", rates[0])
+	}
+}
+
+func TestFetchEmptyWindowBeforeCoverage(t *testing.T) {
+	rt := &recorder{}
+	rates, err := New(&http.Client{Transport: rt}).Fetch(context.Background(), time.Time{}, adapter.Date(1999, 12, 31))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 || len(rt.urls) != 0 {
+		t.Errorf("got %d rates and requests %v, want none", len(rates), rt.urls)
 	}
 }
 
