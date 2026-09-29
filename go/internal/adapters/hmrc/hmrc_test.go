@@ -210,6 +210,31 @@ func TestParseDropsNonPositiveOrUnparseableRates(t *testing.T) {
 	}
 }
 
+// Ruby's CSV reads empty fields as nil, and parse skips rows missing a code, date or rate.
+func TestParseSkipsRowsWithEmptyFields(t *testing.T) {
+	rates := mustParse(t, header+
+		"USA,Dollar,,1.3554,01/09/2026,30/09/2026\n"+
+		"USA,Dollar,USD,1.3554,,30/09/2026\n"+
+		"USA,Dollar,USD,,01/09/2026,30/09/2026\n"+
+		"USA,Dollar\n"+
+		"Eurozone,Euro,EUR,1.1681,01/09/2026,30/09/2026\n")
+	if got, want := quotes(rates), []string{"EUR"}; !slices.Equal(got, want) {
+		t.Errorf("quotes = %v, want %v", got, want)
+	}
+}
+
+func TestParseRaisesOnMalformedCSV(t *testing.T) {
+	if _, err := parse([]byte(header + "USA,Dol\"lar,USD,1.5,01/09/2026,30/09/2026\n")); err == nil {
+		t.Error("err = nil, want a CSV error")
+	}
+}
+
+func TestParseRaisesOnBadStartDate(t *testing.T) {
+	if _, err := parse([]byte(header + "USA,Dollar,USD,1.5,2026-09-01,30/09/2026\n")); err == nil {
+		t.Error("err = nil, want a date error")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 8, 1), adapter.Date(2026, 9, 1))

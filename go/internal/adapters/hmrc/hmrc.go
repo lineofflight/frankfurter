@@ -113,7 +113,6 @@ func firstOfMonth(t time.Time) time.Time {
 func parse(data []byte) ([]adapter.Rate, error) {
 	r := csv.NewReader(bytes.NewReader(data))
 	r.FieldsPerRecord = -1
-	r.LazyQuotes = true
 
 	header, err := r.Read()
 	if err != nil {
@@ -135,9 +134,10 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		return nil, fmt.Errorf("HMRC: CSV is missing columns %s", strings.Join(missing, ", "))
 	}
 
+	// Ruby's CSV reads a missing or empty field as nil, and the adapter skips rows lacking any of these.
 	field := func(rec []string, name string) (string, bool) {
 		i := index[name]
-		if i >= len(rec) {
+		if i >= len(rec) || rec[i] == "" {
 			return "", false
 		}
 		return rec[i], true
@@ -166,13 +166,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if !ok1 || !ok2 {
 			continue
 		}
-		rawCode = strings.TrimSpace(rawCode)
-
 		date, err := time.Parse("2/1/2006", strings.TrimSpace(start))
 		if err != nil {
 			return nil, fmt.Errorf("parse start date: %w", err)
 		}
-		code := rawCode
+		code := strings.TrimSpace(rawCode)
 		if alias, ok := aliases[code]; ok {
 			code = alias
 		}
