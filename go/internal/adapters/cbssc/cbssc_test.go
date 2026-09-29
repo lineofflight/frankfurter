@@ -136,6 +136,35 @@ func TestParseLiveRaisesWhenCARMissing(t *testing.T) {
 	}
 }
 
+func TestParseLiveRejectsInvalidMid(t *testing.T) {
+	for _, mid := range []string{"NaN", "Inf", "", "n/a"} {
+		json := `{"car":[{"currentDate":"09-Sep-2026","usdmid":"` + mid + `","eurmid":"16.8958","gbpmid":"20.1872"}]}`
+		if _, err := parseLive([]byte(json)); err == nil {
+			t.Errorf("usdmid %q: want an error", mid)
+		}
+	}
+}
+
+func TestParseLiveSkipsZeroAndAcceptsNumbers(t *testing.T) {
+	rates, err := parseLive([]byte(`{"car":[{"currentDate":"9-Sep-2026","usdmid":14.4077,"eurmid":"0","gbpmid":"20.1872"}]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{
+		{Date: adapter.Date(2026, 9, 9), Base: "USD", Quote: "SCR", Rate: 14.4077},
+		{Date: adapter.Date(2026, 9, 9), Base: "GBP", Quote: "SCR", Rate: 20.1872},
+	}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseLiveRaisesWhenMidMissing(t *testing.T) {
+	if _, err := parseLive([]byte(`{"car":[{"currentDate":"09-Sep-2026","usdmid":"14.4","eurmid":"16.9"}]}`)); err == nil {
+		t.Error("want an error when gbpmid is missing")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	cases := []struct {
 		file        string

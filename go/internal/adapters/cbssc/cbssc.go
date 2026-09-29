@@ -258,7 +258,8 @@ func parseLive(data []byte) ([]adapter.Rate, error) {
 	if !ok {
 		return nil, errors.New("live response has no currentDate")
 	}
-	date, err := time.Parse("02-Jan-2006", ds)
+	// "2" rather than "02": strptime's %d also takes a single-digit day.
+	date, err := time.Parse("2-Jan-2006", ds)
 	if err != nil {
 		return nil, err
 	}
@@ -271,9 +272,10 @@ func parseLive(data []byte) ([]adapter.Rate, error) {
 		case float64:
 			rate = v
 		case string:
-			f, err := strconv.ParseFloat(strings.TrimSpace(v), 64)
-			if err != nil {
-				return nil, fmt.Errorf("live %s: %w", field, err)
+			// adapter.ParseFloat rejects NaN and Inf, as Ruby's Float() does.
+			f, ok := adapter.ParseFloat(v)
+			if !ok {
+				return nil, fmt.Errorf("live %s: invalid number %q", field, v)
 			}
 			rate = f
 		default:
