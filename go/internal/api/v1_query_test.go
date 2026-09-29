@@ -122,6 +122,22 @@ func TestQueryRejectsBadCurrencyPair(t *testing.T) {
 	}
 }
 
+// Ruby's upcase raises on invalid UTF-8, but only on the parameter Query reads.
+func TestQueryRejectsInvalidUTF8(t *testing.T) {
+	for _, p := range []v1Params{{"from": "\xff"}, {"base": "\xff"}, {"to": "\xff,USD"}, {"symbols": "\xff"}} {
+		p["date"] = "2014-01-01"
+		if _, err := buildV1Query(p); !errors.Is(err, errInvalidEncoding) {
+			t.Errorf("%q: err = %v", p, err)
+		}
+	}
+	for _, p := range []v1Params{{"from": "USD", "base": "\xff"}, {"to": "USD", "symbols": "\xff"}, {"foo": "\xff"}} {
+		p["date"] = "2014-01-01"
+		if _, err := buildV1Query(p); err != nil {
+			t.Errorf("%q: err = %v", p, err)
+		}
+	}
+}
+
 func TestRubyToF(t *testing.T) {
 	for s, want := range map[string]float64{
 		"100": 100, " 5": 5, "10abc": 10, "abc": 0, "": 0, "1e3": 1000, "1e": 1, "1_000": 1000, "1__0": 1,

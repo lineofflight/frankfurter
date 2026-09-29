@@ -174,33 +174,48 @@ func (s *Server) v1Currencies(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, contentTypeV1, names.Formatted())
 }
 
-// etag sets a strong ETag and answers a request that already holds it, as Roda's r.etag does: 304 to GET and HEAD,
-// 412 to other methods. It reports whether it answered.
+// etag sets a strong ETag and answers a conditional request as Roda's r.etag does: an If-None-Match that holds the tag
+// gets 304 (to GET, HEAD, OPTIONS and TRACE) or 412 (to other methods); an If-Match that does not hold it gets 412. A
+// POST never matches "*". It reports whether it answered.
 func etag(w http.ResponseWriter, r *http.Request, value string) bool {
 	tag := `"` + value + `"`
 	w.Header().Set("ETag", tag)
-	list := r.Header.Get("If-None-Match")
-	if list == "" {
-		return false
+	newResource := r.Method == http.MethodPost
+	if list, ok := r.Header["If-None-Match"]; ok && etagMatches(strings.Join(list, ", "), tag, newResource) {
+		switch r.Method {
+		case http.MethodGet, http.MethodHead, http.MethodOptions, http.MethodTrace:
+			w.WriteHeader(http.StatusNotModified)
+		default:
+			w.WriteHeader(http.StatusPreconditionFailed)
+		}
+		return true
 	}
-	match := list == "*" && r.Method != http.MethodPost
-	if list != "*" {
-		for _, t := range strings.Split(list, ",") {
-			if strings.TrimSpace(t) == tag {
-				match = true
-				break
-			}
+	if list, ok := r.Header["If-Match"]; ok && !etagMatches(strings.Join(list, ", "), tag, newResource) {
+		w.WriteHeader(http.StatusPreconditionFailed)
+		return true
+	}
+	return false
+}
+
+// etagMatches is Roda's etag_matches?: "*" matches unless the request creates a resource; otherwise the list, split
+// on commas and the spaces around them, must hold the tag exactly.
+func etagMatches(list, tag string, newResource bool) bool {
+	if list == "*" {
+		return !newResource
+	}
+	parts := strings.Split(list, ",")
+	for i, p := range parts {
+		if i > 0 {
+			p = strings.TrimLeft(p, " \t\n\v\f\r")
+		}
+		if i < len(parts)-1 {
+			p = strings.TrimRight(p, " \t\n\v\f\r")
+		}
+		if p == tag {
+			return true
 		}
 	}
-	if !match {
-		return false
-	}
-	if r.Method == http.MethodGet || r.Method == http.MethodHead {
-		w.WriteHeader(http.StatusNotModified)
-	} else {
-		w.WriteHeader(http.StatusPreconditionFailed)
-	}
-	return true
+	return false
 }
 
 // v1Successor is the v2 resource that replaces a v1 path.

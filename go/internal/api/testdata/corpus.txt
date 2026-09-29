@@ -170,3 +170,14 @@ GET /v1/latest?amount=1e308
 GET /v1/{bday:30}..{bday:25}?amount=4
 GET /v1/{bday:30}..{bday:25}?amount=5&from=GBP
 GET /v1/{bday:30}?amount=7.5&from=CHF
+GET /v1/latest | If-Match: "nope"
+GET /v1/latest | If-Match: *
+POST /v1/latest | If-Match: *
+GET /v1/currencies | If-Match: "a", "b"
+OPTIONS /v1/latest | If-None-Match: *
+TRACE /v1/latest | If-None-Match: *
+DELETE /v1/latest | If-None-Match: *
+GET /v1/latest | If-None-Match: "a" , *
+GET /v1/latest?from=%FF
+GET /v1/latest?to=%FF,USD
+GET /v1/latest?amount=%FF

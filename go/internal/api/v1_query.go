@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
 )
@@ -114,6 +115,8 @@ var (
 	errBadPair       = errors.New("bad currency pair")
 	errInvalidDate   = errors.New("invalid date")
 	errInvalidParam  = errors.New("invalid parameter")
+
+	errInvalidEncoding = errors.New("invalid byte sequence in UTF-8")
 )
 
 // buildV1Query is Query.build: it parses every parameter and rejects a conversion from a currency to itself.
@@ -125,6 +128,12 @@ func buildV1Query(p v1Params) (v1Query, error) {
 			return q, errInvalidAmount
 		}
 		q.Amount, q.HasAmount = v, true
+	}
+	// Ruby's upcase raises on a string that is not valid UTF-8 (from=%FF).
+	for _, keys := range [][2]string{{"from", "base"}, {"to", "symbols"}} {
+		if v, ok := p[keys[0]]; ok && !utf8.ValidString(v) || !ok && !utf8.ValidString(p[keys[1]]) {
+			return q, errInvalidEncoding
+		}
 	}
 	q.Base, q.HasBase = p.base()
 	q.Symbols = p.symbols()

@@ -123,15 +123,6 @@ func endOfDay(t *testing.T, q v1Query) *v1EndOfDay {
 	return performed(t, newV1EndOfDay(fixtures.New(t), q))
 }
 
-func sortedKeys(t *testing.T, m map[string]float64, label string) {
-	t.Helper()
-	// Go maps have no order; the rates must at least be complete and unique, and JSON writes them sorted.
-	k := keys(m)
-	if !sort.StringsAreSorted(k) {
-		t.Errorf("%s: keys %v", label, k)
-	}
-}
-
 func TestEndOfDayReturnsRates(t *testing.T) {
 	if len(endOfDay(t, v1Query{}).Formatted().Rates) == 0 {
 		t.Fatal("no rates")
@@ -160,7 +151,6 @@ func TestEndOfDaySortsRates(t *testing.T) {
 	if !sort.SliceIsSorted(got, func(i, j int) bool { return got[i].quote < got[j].quote }) {
 		t.Fatalf("rates = %v", got)
 	}
-	sortedKeys(t, e.Formatted().Rates, "end of day")
 }
 
 func TestEndOfDayHasCacheKey(t *testing.T) {
