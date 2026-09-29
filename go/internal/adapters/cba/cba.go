@@ -62,10 +62,10 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 			chunkEnd = end
 		}
 		body, err := a.request(ctx, "ExchangeRatesByDateRangeByISO", fmt.Sprintf(`<ExchangeRatesByDateRangeByISO xmlns="http://www.cba.am/">
-      <ISOCodes>%s</ISOCodes>
-      <DateFrom>%s</DateFrom>
-      <DateTo>%s</DateTo>
-    </ExchangeRatesByDateRangeByISO>`, codes, start.Format(time.DateOnly), chunkEnd.Format(time.DateOnly)))
+  <ISOCodes>%s</ISOCodes>
+  <DateFrom>%s</DateFrom>
+  <DateTo>%s</DateTo>
+</ExchangeRatesByDateRangeByISO>`, codes, start.Format(time.DateOnly), chunkEnd.Format(time.DateOnly)))
 		if err != nil {
 			return nil, err
 		}

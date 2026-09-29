@@ -2,13 +2,19 @@ package cba
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"regexp"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
+	"gopkg.in/dnaeon/go-vcr.v4/pkg/cassette"
 )
 
 func newAdapter(t *testing.T) *Adapter {
@@ -44,6 +50,41 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 	}
 	if n <= 1 {
 		t.Errorf("got %d rates on %v, want several", n, first)
+	}
+}
+
+// The golden replay matches on method and URI only, so this pins the SOAP envelopes (codes, date range) and actions.
+func TestFetchSendsRecordedRequests(t *testing.T) {
+	soapAction := func(r *http.Request, _ []byte, rec cassette.Request) bool {
+		return r.Header.Get("SOAPAction") == rec.Headers.Get("SOAPAction")
+	}
+	a := New(vcrtest.Client(t, "cba", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI, vcrtest.Body, soapAction)))
+	a.Now = func() time.Time { return time.Date(2026, 3, 19, 12, 0, 0, 0, time.UTC) }
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), time.Time{}); err != nil {
+		t.Fatal(err)
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsYearLongChunks(t *testing.T) {
+	var ranges []string
+	dates := regexp.MustCompile(`<DateFrom>(.*)</DateFrom>\s*<DateTo>(.*)</DateTo>`)
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		body, _ := io.ReadAll(r.Body)
+		if m := dates.FindSubmatch(body); m != nil {
+			ranges = append(ranges, string(m[1])+".."+string(m[2]))
+		}
+		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader("<Envelope/>"))}, nil
+	})}
+	if _, err := New(client).Fetch(context.Background(), adapter.Date(2024, 1, 1), adapter.Date(2025, 1, 5)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{"2024-01-01..2024-12-30", "2024-12-31..2025-01-05"}
+	if !slices.Equal(ranges, want) {
+		t.Errorf("ranges = %v, want %v", ranges, want)
 	}
 }
 
