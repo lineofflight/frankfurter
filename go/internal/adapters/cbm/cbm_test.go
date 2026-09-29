@@ -76,3 +76,40 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseSkipsMMK(t *testing.T) {
+	rates, err := parse([]byte(`{"timestamp":1775721600,"rates":{"MMK":"1","USD":2100}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := adapter.Rate{Date: adapter.Date(2026, 4, 9), Base: "USD", Quote: "MMK", Rate: 2100}
+	if len(rates) != 1 || rates[0] != want {
+		t.Errorf("got %+v, want only %+v", rates, want)
+	}
+}
+
+func TestParseTimestampLikeRubyInteger(t *testing.T) {
+	for _, ts := range []string{`" 1775721600 "`, `1775721600.9`} {
+		rates, err := parse([]byte(`{"timestamp":` + ts + `,"rates":{"USD":"2100"}}`))
+		if err != nil {
+			t.Fatalf("%s: %v", ts, err)
+		}
+		if rates[0].Date != adapter.Date(2026, 4, 9) {
+			t.Errorf("%s: date = %v", ts, rates[0].Date)
+		}
+	}
+	if _, err := parse([]byte(`{"timestamp":"1775721600.0","rates":{"USD":"2100"}}`)); err == nil {
+		t.Error("want an error for a decimal timestamp string")
+	}
+}
+
+func TestParseRejectsBadRates(t *testing.T) {
+	for _, rates := range []string{
+		`{"USD":"NaN"}`, `{"USD":"Infinity"}`, `{"USD":"abc"}`, `{"USD":null}`,
+		`{"USD":"2100","USD":"2200"}`,
+	} {
+		if _, err := parse([]byte(`{"timestamp":"1775721600","rates":` + rates + `}`)); err == nil {
+			t.Errorf("%s: want an error", rates)
+		}
+	}
+}

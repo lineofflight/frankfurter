@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math"
 	"net/http"
 	"strconv"
 	"strings"
@@ -56,9 +57,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		return nil, errors.New("timestamp or rates missing from latest response")
 	}
 
-	ts, err := strconv.ParseInt(unquote(doc.Timestamp), 10, 64)
+	ts, err := timestamp(doc.Timestamp)
 	if err != nil {
-		return nil, fmt.Errorf("invalid timestamp %s", doc.Timestamp)
+		return nil, err
 	}
 	t := time.Unix(ts, 0).UTC()
 	date := adapter.Date(t.Year(), t.Month(), t.Day())
@@ -73,7 +74,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			continue
 		}
 		v, err := strconv.ParseFloat(strings.TrimSpace(unquote(p.value)), 64)
-		if err != nil {
+		// Ruby's Float() rejects NaN and Infinity, which ParseFloat accepts.
+		if err != nil || math.IsNaN(v) || math.IsInf(v, 0) {
 			return nil, fmt.Errorf("invalid rate %s for %s", p.value, p.key)
 		}
 		if v == 0 {
@@ -89,18 +91,42 @@ type pair struct {
 	value json.RawMessage
 }
 
-// orderedPairs decodes a JSON object keeping key order, as Ruby's Hash does.
+// timestamp mirrors Ruby's Integer(): a string must hold an integer, surrounding whitespace allowed, while a JSON
+// number is truncated.
+func timestamp(raw json.RawMessage) (int64, error) {
+	var s string
+	if json.Unmarshal(raw, &s) == nil {
+		ts, err := strconv.ParseInt(strings.TrimSpace(s), 10, 64)
+		if err != nil {
+			return 0, fmt.Errorf("invalid timestamp %s", raw)
+		}
+		return ts, nil
+	}
+	var f float64
+	if err := json.Unmarshal(raw, &f); err != nil {
+		return 0, fmt.Errorf("invalid timestamp %s", raw)
+	}
+	return int64(f), nil
+}
+
+// orderedPairs decodes a JSON object keeping key order, as Ruby's Hash does, and rejects duplicate keys as Ruby's
+// JSON.parse does.
 func orderedPairs(raw json.RawMessage) ([]pair, error) {
 	dec := json.NewDecoder(bytes.NewReader(raw))
 	if tok, err := dec.Token(); err != nil || tok != json.Delim('{') {
 		return nil, errors.New("rates is not an object")
 	}
 	var pairs []pair
+	seen := map[string]bool{}
 	for dec.More() {
 		tok, err := dec.Token()
 		if err != nil {
 			return nil, err
 		}
+		if seen[tok.(string)] {
+			return nil, fmt.Errorf("duplicate key %q in rates", tok)
+		}
+		seen[tok.(string)] = true
 		var v json.RawMessage
 		if err := dec.Decode(&v); err != nil {
 			return nil, err
