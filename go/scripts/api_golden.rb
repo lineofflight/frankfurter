@@ -49,8 +49,23 @@ Rate.where(provider: "ECB", date: Fixtures.business_day(100)).delete
 # An unknown code and an expired one on the latest day: raw v1 quotes include them, the v1 catalogue does not.
 insert("ECB", Fixtures.latest_date, "EUR", "ZZZ", mid: 2.0)
 insert("ECB", Fixtures.latest_date, "EUR", "SLL", mid: 2.0)
+# v2: a pegged quote a provider publishes (peg-snapped, contributors excluded), Norges Bank with an index next to
+# its currencies (kept out of blends and the catalogue), and a monthly provider (kept out of blends, served by name).
+insert("ECB", Fixtures.latest_date, "EUR", "AED", mid: 3.97)
+[Fixtures.latest_date, Fixtures.business_day(3)].each do |date|
+  insert("NB", date, "USD", "NOK", mid: 10.0)
+  insert("NB", date, "EUR", "NOK", mid: 11.0)
+end
+insert("NB", Fixtures.latest_date, "I44", "NOK", mid: 110.6)
+[1, 2].each do |months|
+  first = Date.new(TODAY.year, TODAY.month, 1) << months
+  insert("INFOREURO", first, "EUR", "USD", mid: 9.0 + months)
+end
 Fixtures.send(:rebuild_rollups!)
 Fixtures.send(:rebuild_currencies!)
+Provider["NB"].send(:refresh_currency_summaries, ["I44", "NOK", "USD", "EUR"])
+# v2 plain shapes read the materialized blends; providers= and expand=providers still blend live.
+[BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild)
 
 TOKENS = {
   "today" => ->(_) { TODAY },
@@ -109,6 +124,8 @@ responses = File.readlines(ARGV[1], chomp: true).filter_map do |line|
   }
   if text.empty?
     entry[:empty] = true
+  elsif response_headers["content-type"].to_s.include?("ndjson")
+    entry[:ndjson] = text.split("\n").map { |row| JSON.parse(row) }
   elsif response_headers["content-type"].to_s.include?("json")
     entry[:json] = JSON.parse(text)
   elsif text.dup.force_encoding("UTF-8").valid_encoding?

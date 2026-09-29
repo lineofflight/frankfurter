@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"regexp"
 	"sort"
 	"strings"
 	"testing"
@@ -43,6 +44,7 @@ type goldenResponse struct {
 	Response map[string]string `json:"response_headers"`
 	Empty    bool              `json:"empty"`
 	JSON     json.RawMessage   `json:"json"`
+	NDJSON   []json.RawMessage `json:"ndjson"`
 	Text     *string           `json:"text"`
 	SHA256   string            `json:"sha256"`
 }
@@ -54,6 +56,8 @@ type goldenAPI struct {
 }
 
 // goldenHeaders are compared by value, and by absence when Ruby sent none. Content-Type is skipped on empty bodies.
+var relativeCacheRe = regexp.MustCompile(`^public, max-age=\d+, stale-if-error=86400$`)
+
 var goldenHeaders = []string{
 	"cache-control", "content-type", "deprecation", "link", "x-robots-tag", "vary", "etag", "retry-after", "allow",
 	"access-control-allow-origin", "access-control-allow-methods", "access-control-allow-headers",
@@ -179,7 +183,12 @@ func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecord
 		if !rok && len(gv) == 0 {
 			continue
 		}
-		if got := strings.Join(gv, ", "); !rok || got != rb {
+		got := strings.Join(gv, ", ")
+		// A date-relative v2 response lives until the next UTC midnight, counted from when it was served.
+		if name == "cache-control" && relativeCacheRe.MatchString(rb) && relativeCacheRe.MatchString(got) {
+			continue
+		}
+		if !rok || got != rb {
 			t.Errorf("%s: header %s = %q, Ruby %q (present %v)", label, name, got, rb, rok)
 		}
 	}
@@ -205,6 +214,28 @@ func checkGolden(t *testing.T, want goldenResponse, res *httptest.ResponseRecord
 		}
 		for _, d := range diffJSON("", exp, got, want.Status >= 400) {
 			t.Errorf("%s: %s", label, d)
+		}
+	case want.NDJSON != nil:
+		lines := strings.Split(string(body), "\n")
+		if len(lines) == 0 || lines[len(lines)-1] != "" {
+			t.Errorf("%s: NDJSON body does not end in a newline: %.200q", label, body)
+			return
+		}
+		lines = lines[:len(lines)-1]
+		if len(lines) != len(want.NDJSON) {
+			t.Errorf("%s: %d NDJSON lines, Ruby %d", label, len(lines), len(want.NDJSON))
+			return
+		}
+		for i, line := range lines {
+			var got, exp any
+			if err := json.Unmarshal([]byte(line), &got); err != nil {
+				t.Errorf("%s: line %d is not JSON: %v", label, i, err)
+				return
+			}
+			json.Unmarshal(want.NDJSON[i], &exp)
+			for _, d := range diffJSON(fmt.Sprintf("[%d]", i), exp, got, false) {
+				t.Errorf("%s: %s", label, d)
+			}
 		}
 	case want.Text != nil:
 		if string(body) != *want.Text {

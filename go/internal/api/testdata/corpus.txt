@@ -192,3 +192,427 @@ GET /v1/{bday:100}..{bday:99}?from=JPY
 GET /v1/latest?amount=4.9e-324
 GET /v1/latest?amount=1e-400
 GET /v1/latest?from=USD&amount=1e-10
+
+# v1 captures params_capturing appends to, Rack's nested conflicts and depth limit, escaped paths
+GET /v1/latest?captures=x
+GET /v1/latest?captures[x]=1
+GET /v1/latest?captures
+GET /v1/currencies?captures=x
+GET /v1/currencies?captures[x]=1
+GET /v1/{bday:30}?captures=x
+GET /v1/{bday:30}?captures[]={bday:40}
+GET /v1/{bday:30}?captures[]
+GET /v1/{bday:30}?captures[][x]=1
+GET /v1/{bday:30}?captures[]=garbage
+GET /v1/{bday:30}..{bday:20}?captures[]={bday:60}
+GET /v1/{bday:30}..{bday:20}?captures[]={bday:60}&captures[]={bday:50}
+GET /v1/{bday:30}..?captures[]={bday:60}
+GET /v1/{bday:30}..?captures=x
+GET /v1/{bday:30}..?captures[]={bday:60}&captures[]
+GET /v1/{bday:30}..?captures[]={bday:60}&captures[][]=1
+GET /v1/nonexistent?captures[x]=1
+GET /v1?captures[x]=1
+GET /v1/latest?a[b]=1&a[b][c]=2
+GET /v1/latest?a[b][]=1&a[b][c]=2
+GET /v1/latest?a[][b]=1&a[][b]=2&to=USD
+GET /v1/latest?a[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]=1
+GET /v1/latest?a[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]=1
+GET /v1/nonexistent?a[x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x][x]=1
+GET /v1/currencies?a[b]=1&a[b][c]=2
+GET /v1/{bday:30}..?a[b]=1&a[b][c]=2
+GET /v1/openapi%2Ejson
+GET /v%31
+GET /%76%31/openapi.json
+GET /v1%2F
+GET /v1/%6Catest
+GET /v1/%6Catest?foo=1&foo[]=2
+GET /%76%31/latest?foo=1&foo[]=2
+GET /v1/a%20b
+
+# v2 index, routing and type routing
+GET /v2
+HEAD /v2
+POST /v2
+GET /v2/
+POST /v2/
+GET /v2/.json
+GET /v2.json
+GET /v2/nonexistent
+GET /v2/nonexistent | Accept: text/csv
+GET /v2/nonexistent | Accept: application/json
+GET /v2/nonexistent.csv
+GET /v%32/rates
+GET /%76%32/rates
+GET /v2/r%61tes
+GET /v2/rates/
+GET /v2/rates/latest
+HEAD /v2/rates
+POST /v2/rates
+OPTIONS /v2/rates | Origin: https://example.com | Access-Control-Request-Method: GET
+GET /v2/rates?date={bday:30} | Origin: https://example.com
+
+# v2 catalogue
+GET /v2/currencies
+GET /v2/currencies?scope=all
+GET /v2/currencies?scope=
+GET /v2/currencies?scope
+GET /v2/currencies?scope=ALL
+GET /v2/currencies?scope=active
+GET /v2/currencies?scope[]=all
+GET /v2/currencies?scope=invalid&providers=ecb
+GET /v2/currencies?providers=ecb
+GET /v2/currencies?providers=ecb&scope=all
+GET /v2/currencies?providers=ecb,boc
+GET /v2/currencies?providers=nb
+GET /v2/currencies?providers=inforeuro
+GET /v2/currencies?providers=
+GET /v2/currencies?providers
+GET /v2/currencies?providers[]=ecb
+GET /v2/currencies?providers=%FF
+GET /v2/currencies?foo=1
+GET /v2/currencies?foo=%zz
+GET /v2/currencies.csv
+GET /v2/currencies.json
+GET /v2/currencies.xml
+GET /v2/currencies | Accept: text/csv
+GET /v2/currencies | Accept: application/json
+GET /v2/currencies | Accept: text/html;q=0.9, text/csv
+GET /v2/currencies | Accept: application/x-ndjson
+HEAD /v2/currencies
+POST /v2/currencies
+GET /v2/currencies/
+GET /v2/currency/usd
+GET /v2/currency/USD
+GET /v2/currency/eur
+GET /v2/currency/bmd
+GET /v2/currency/ggp
+GET /v2/currency/ang
+GET /v2/currency/xyz
+GET /v2/currency/zzz
+GET /v2/currency/nok
+GET /v2/currency/i44
+GET /v2/currency/sll
+GET /v2/currency/usd.csv
+GET /v2/currency/usd.json
+GET /v2/currency/%55SD
+GET /v2/currency/
+GET /v2/currency/usd/
+POST /v2/currency/usd
+
+# v2 providers
+GET /v2/providers
+GET /v2/providers.json
+GET /v2/providers.csv
+GET /v2/providers/
+GET /v2/providers/ecb
+GET /v2/providers/ECB
+GET /v2/providers/boc
+GET /v2/providers/nb
+GET /v2/providers/inforeuro
+GET /v2/providers/boe
+GET /v2/providers/nope
+GET /v2/providers/ecb.csv
+GET /v2/providers/ecb/
+GET /v2/providers/ecb/foo
+GET /v2/providers/ecb/foo.csv
+GET /v2/providers/ecb/foo | Accept: text/csv
+GET /v2/providers/ecb?providers=boc
+GET /v2/providers/ecb?providers
+GET /v2/providers/ecb?foo=%zz
+POST /v2/providers/ecb
+POST /v2/providers
+GET /v2/providers/%45CB
+GET /v2/providers/ecb/rates
+GET /v2/providers/ECB/rates
+GET /v2/providers/ecb/rates?date={bday:30}
+GET /v2/providers/ecb/rates?from={bday:60}&to={bday:30}
+GET /v2/providers/ecb/rates?base=USD&quotes=EUR,GBP
+GET /v2/providers/ecb/rates?from={ago:365}&to={latest}&group=week
+GET /v2/providers/ecb/rates.csv?from={bday:60}&to={bday:30}
+GET /v2/providers/ecb/rates?from={bday:60}&to={bday:30} | Accept: application/x-ndjson
+GET /v2/providers/ecb/rates?providers=boc
+GET /v2/providers/ecb/rates/
+GET /v2/providers/nope/rates
+POST /v2/providers/ecb/rates
+GET /v2/providers/ecb/rate/EUR/USD
+GET /v2/providers/ecb/rate/EUR/USD?date={bday:30}
+GET /v2/providers/ecb/rate/EUR/ZZZ
+GET /v2/providers/ecb/rate/ZZZ/EUR
+GET /v2/providers/ecb/rate/EUR/QQQ
+GET /v2/providers/boc/rate/EUR/ZZZ
+GET /v2/providers/boc/rate/CAD/SEK
+GET /v2/providers/ecb/rate/EUR/USD/
+GET /v2/providers/nb/rates
+GET /v2/providers/nb/rate/I44/NOK
+GET /v2/providers/nb/rate/NOK/I44
+GET /v2/providers/nb/rates?base=USD&from={bday:5}
+GET /v2/providers/inforeuro/rates
+GET /v2/providers/inforeuro/rates?date={bday:30}
+GET /v2/providers/inforeuro/rates?from={ago:120}&group=month
+GET /v2/providers/boj/rates
+GET /v2/providers/boj/rates?base=GBP
+GET /v2/providers/boj/rates?base=JPY&from={bday:10}
+
+# v2 latest and single dates
+GET /v2/rates
+GET /v2/rates?base=USD
+GET /v2/rates?base=usd
+GET /v2/rates?base=CAD
+GET /v2/rates?base=GBP&quotes=USD,EUR,JPY
+GET /v2/rates?base=BMD
+GET /v2/rates?base=AED
+GET /v2/rates?base=ANG
+GET /v2/rates?base=GGP
+GET /v2/rates?base=BTN
+GET /v2/rates?base=XAU
+GET /v2/rates?base=GHC
+GET /v2/rates?base=SLL
+GET /v2/rates?quotes=USD,GBP
+GET /v2/rates?quotes=EUR,USD
+GET /v2/rates?quotes=USD,BMD,FKP,BTN,ANG
+GET /v2/rates?quotes=AED
+GET /v2/rates?quotes=
+GET /v2/rates?quotes=,USD
+GET /v2/rates?quotes=USD,
+GET /v2/rates?quotes=usd,usd
+GET /v2/rates?quotes=FOO
+GET /v2/rates?base=FOO&quotes=BAR
+GET /v2/rates?quotes=ZZZ
+GET /v2/rates?quotes=NOK
+GET /v2/rates?base=
+GET /v2/rates?base
+GET /v2/rates?providers=ecb
+GET /v2/rates?providers=ECB,BOC
+GET /v2/rates?providers=ecb,ecb
+GET /v2/rates?providers=
+GET /v2/rates?providers=nope
+GET /v2/rates?providers=ecb&base=BMD
+GET /v2/rates?providers=ecb&base=AED
+GET /v2/rates?providers=ecb,boc&base=AED&quotes=USD
+GET /v2/rates?providers=ecb&quotes=ZZZ
+GET /v2/rates?providers=ecb&quotes=PHP
+GET /v2/rates?providers=ecb&base=PHP&quotes=EUR
+GET /v2/rates?providers=boc
+GET /v2/rates?providers=boj
+GET /v2/rates?providers=boj&base=GBP
+GET /v2/rates?providers=nb
+GET /v2/rates?providers=nb,ecb&base=USD
+GET /v2/rates?providers=nb,ecb&base=USD&quotes=EUR&date={latest}&expand=providers
+GET /v2/rates?providers=inforeuro
+GET /v2/rates?providers=inforeuro,ecb&quotes=USD
+GET /v2/rates?expand=providers
+GET /v2/rates?expand=providers&quotes=USD,AED
+GET /v2/rates?expand=providers&base=USD&quotes=AED,GBP
+GET /v2/rates?expand=providers&base=AED
+GET /v2/rates?expand=PROVIDERS&quotes=USD
+GET /v2/rates?expand=providers,&quotes=USD
+GET /v2/rates?expand=,providers
+GET /v2/rates?expand=
+GET /v2/rates?expand=foo
+GET /v2/rates?expand=providers&providers=ecb&quotes=PHP
+GET /v2/rates?expand=providers&providers=ecb&base=GBP&quotes=JPY
+GET /v2/rates?expand=providers&providers=ecb,boc&quotes=USD
+GET /v2/rates?date={bday:30}
+GET /v2/rates?date={bday:30}&base=USD
+GET /v2/rates?date={bday:30}&expand=providers&quotes=GBP
+GET /v2/rates?date={sunday}
+GET /v2/rates?date={sunday}&providers=ecb
+GET /v2/rates?date={bday:100}
+GET /v2/rates?date={bday:100}&providers=ecb
+GET /v2/rates?date={bday:200}&quotes=AUD,USD
+GET /v2/rates?date={bday:195}
+GET /v2/rates?date={bday:195}&providers=ecb
+GET /v2/rates?date={bday:519}
+GET /v2/rates?date={tomorrow}
+GET /v2/rates?date={today}
+GET /v2/rates?date=1901-01-01
+GET /v2/rates?date=2000-02-29
+GET /v2/rates?date=1500-02-29
+GET /v2/rates?date=0000-01-01
+GET /v2/rates?date=1582-10-10
+GET /v2/rates?date=not-a-date
+GET /v2/rates?date=2026-02-30
+GET /v2/rates?date=2026-02-29
+GET /v2/rates?date=20260203
+GET /v2/rates?date=2026-02-03T12:00:00Z
+GET /v2/rates?date=
+GET /v2/rates?date&from={bday:30}
+GET /v2/rates?date={bday:30}&from={bday:60}
+GET /v2/rates?date={bday:30}&to={bday:20}
+GET /v2/rates?from=garbage&date={bday:30}
+GET /v2/rates?to={bday:30}
+GET /v2/rates?to=garbage
+GET /v2/rates?date={latest}&group=week
+GET /v2/rates?date={latest}&group=month&base=CHF&quotes=EUR
+GET /v2/rates?group=day
+GET /v2/rates?group=
+GET /v2/rates?group=week
+GET /v2/rates?provider=ecb
+GET /v2/rates?foo=1&bar=2
+GET /v2/rates?base[]=USD
+GET /v2/rates?base[x]=USD
+GET /v2/rates?date[]=2020-01-01
+GET /v2/rates?providers[]=ecb
+GET /v2/rates?providers[]=ecb&date=garbage
+GET /v2/rates?base=USD&providers[]=ecb
+GET /v2/rates?base=QQQ&providers[]=ecb
+GET /v2/rates?expand[]=providers
+GET /v2/rates?base=%FF
+GET /v2/rates?date=%FF
+GET /v2/rates?quotes=%FF
+GET /v2/rates?base=%zz
+GET /v2/rates?a[b]=1&a[b][c]=2
+GET /v2/rates?base=USD&base=GBP
+
+# v2 daily ranges
+GET /v2/rates?from={bday:60}&to={bday:30}
+GET /v2/rates?from={bday:60}&to={bday:30}&base=USD
+GET /v2/rates?from={bday:60}&to={bday:30}&base=AED&quotes=GBP,USD
+GET /v2/rates?from={bday:60}&to={bday:30}&quotes=EUR,USD
+GET /v2/rates?from={bday:60}&to={bday:56}&providers=ecb&quotes=USD
+GET /v2/rates?from={bday:60}&to={bday:56}&providers=ecb&base=GBP&quotes=JPY,EUR
+GET /v2/rates?from={bday:60}&to={bday:56}&providers=ecb,boc&quotes=USD,GBP
+GET /v2/rates?from={bday:60}&to={bday:56}&expand=providers&quotes=USD
+GET /v2/rates?from={bday:60}&to={bday:56}&expand=providers&base=USD&quotes=AED,CAD
+GET /v2/rates?from={bday:105}&to={bday:95}
+GET /v2/rates?from={bday:105}&to={bday:95}&providers=ecb
+GET /v2/rates?from={bday:205}&to={bday:185}&quotes=AUD,USD
+GET /v2/rates?from={bday:205}&to={bday:185}&providers=ecb&quotes=AUD,USD
+GET /v2/rates?from={sunday}
+GET /v2/rates?from={sunday}&to={sunday}
+GET /v2/rates?from={sunday}&to={sunday}&providers=ecb,boc
+GET /v2/rates?from={ago:10}
+GET /v2/rates?from={latest}&to={latest}
+GET /v2/rates?from={latest}&to={latest}&providers=ecb,boc&base=GBP
+GET /v2/rates?from={tomorrow}
+GET /v2/rates?from={bday:30}&to={bday:60}
+GET /v2/rates?from=2000-01-01
+GET /v2/rates?from=2000-01-01&to=2000-12-31
+GET /v2/rates?from=2000-01-01&providers=ecb&quotes=USD
+GET /v2/rates?from=2000-01-01&providers=ecb,boc
+GET /v2/rates?from=2000-01-01&providers=ecb,boc&quotes=USD
+GET /v2/rates?from=2000-01-01&expand=providers
+GET /v2/rates?from=2000-01-01&expand=providers&quotes=USD
+GET /v2/rates?from={bday:10}&providers=nb,ecb&base=USD
+GET /v2/rates?from={bday:10}&providers=inforeuro
+GET /v2/rates?from={bday:40}&to={bday:30} | Accept: application/x-ndjson
+GET /v2/rates?from={bday:40}&to={bday:30} | Accept: text/csv
+GET /v2/rates?from={bday:40}&to={bday:30}&providers=ecb | Accept: application/x-ndjson
+GET /v2/rates?from={bday:30}&to={bday:40} | Accept: application/x-ndjson
+GET /v2/rates?from={bday:60}&to={bday:30} | If-None-Match: *
+
+# v2 formats
+GET /v2/rates | Accept: application/x-ndjson
+GET /v2/rates | Accept: application/json
+GET /v2/rates | Accept: text/csv
+GET /v2/rates | Accept: application/json, application/x-ndjson
+GET /v2/rates?date=1901-01-01 | Accept: application/x-ndjson
+GET /v2/rates.csv
+GET /v2/rates.csv?quotes=USD&date={bday:30}
+GET /v2/rates.csv?from={bday:60}&to={bday:30}
+GET /v2/rates.csv?from={bday:60}&to={bday:56}&expand=providers&quotes=USD,AED
+GET /v2/rates.csv?expand=providers&quotes=EUR,USD,AED
+GET /v2/rates.csv?date=1901-01-01
+GET /v2/rates.csv?from=1901-01-01&to=1901-02-01
+GET /v2/rates.csv?providers=ecb&from={bday:40}&to={bday:30}&group=month
+GET /v2/rates.csv?providers=%22x%22;y&date={bday:30}
+GET /v2/rates.csv?base=usd&quotes=eur&from=2024-01-01&to=2024-12-31
+GET /v2/rates.csv?from=2024-01-01
+GET /v2/rates.csv?date=garbage
+GET /v2/rates.csv | Accept: application/x-ndjson
+GET /v2/rates.json
+GET /v2/rates.xml
+GET /v2/rates.html
+GET /v2/rates | If-None-Match: *
+GET /v2/rates | If-Match: "nope"
+POST /v2/rates | If-None-Match: *
+
+# v2 grouped ranges
+GET /v2/rates?from={ago:365}&to={latest}&group=week
+GET /v2/rates?from={ago:365}&to={latest}&group=month
+GET /v2/rates?from={ago:370}&group=month&base=CHF&quotes=USD,EUR,GBP,JPY
+GET /v2/rates?from={ago:370}&group=week&base=CHF&quotes=USD,EUR,GBP,JPY
+GET /v2/rates?from={ago:400}&to={ago:300}&group=week&base=AED
+GET /v2/rates?from={ago:400}&to={ago:300}&group=month&base=USD
+GET /v2/rates?from={ago:90}&group=week&expand=providers&quotes=USD
+GET /v2/rates?from={ago:90}&group=week&providers=ecb&quotes=PHP
+GET /v2/rates?from={ago:90}&group=month&providers=ecb,boc
+GET /v2/rates?from={ago:90}&group=month&providers=ecb&base=ZZZ
+GET /v2/rates?from={ago:7}&group=month&providers=ecb&quotes=ZZZ
+GET /v2/rates?from={ago:40}&group=month
+GET /v2/rates?from={ago:20}&group=week
+GET /v2/rates?from={sunday}&group=week
+GET /v2/rates?from={tomorrow}&group=week
+GET /v2/rates?from=2000-01-01&group=month&quotes=USD
+GET /v2/rates?from=1990-01-01&to=1990-12-31&group=week
+GET /v2/rates.csv?from={ago:365}&group=month&quotes=USD,GBP
+GET /v2/rates?from={ago:365}&group=week&quotes=USD | Accept: application/x-ndjson
+GET /v2/rates?from={ago:365}&group=month&providers=inforeuro
+GET /v2/rates?from={ago:365}&group=month&providers=nb
+GET /v2/rates?from={ago:365}&group=month&providers=nb,ecb&base=USD
+
+# v2 single pairs
+GET /v2/rate/EUR/USD
+GET /v2/rate/eur/usd
+GET /v2/rate/USD/USD
+GET /v2/rate/GGP/GBP
+GET /v2/rate/ANG/USD
+GET /v2/rate/AED/USD
+GET /v2/rate/USD/GBP
+GET /v2/rate/GBP/USD
+GET /v2/rate/USD/CAD
+GET /v2/rate/CAD/USD
+GET /v2/rate/USD/EUR
+GET /v2/rate/EUR/GBP
+GET /v2/rate/EUR/USD?date={bday:30}
+GET /v2/rate/EUR/USD?providers=ECB
+GET /v2/rate/EUR/USD?providers=ecb&date={bday:30}
+GET /v2/rate/EUR/USD?from={bday:40}&to={bday:30}
+GET /v2/rate/EUR/USD?quotes=GBP
+GET /v2/rate/EUR/USD?base=GBP
+GET /v2/rate/EUR/USD?expand=providers
+GET /v2/rate/EUR/XYZ
+GET /v2/rate/EUR/ZZZ
+GET /v2/rate/EUR/ZZZ?providers=ECB
+GET /v2/rate/ZZZ/EUR?providers=ECB
+GET /v2/rate/I44/NOK?providers=NB,ECB
+GET /v2/rate/NOK/I44?providers=NB,ECB
+GET /v2/rate/I44/NOK?providers=NB,NB
+GET /v2/rate/EUR/USD.csv
+GET /v2/rate/EUR/USD.json
+GET /v2/rate/EUR/USD/
+GET /v2/rate/EUR/USD/latest
+GET /v2/rate/EUR
+GET /v2/rate/EUR/%55SD
+GET /v2/rate/EUR/USD?date=1901-01-01
+GET /v2/rate/EUR/USD?date=garbage
+GET /v2/rate/EUR/USD?foo=bar
+HEAD /v2/rate/EUR/USD
+POST /v2/rate/EUR/USD
+
+# v2 coverage
+GET /v2/coverage
+GET /v2/coverage?base=usd
+GET /v2/coverage?base=USD&quotes=GBP
+GET /v2/coverage?quotes=AUD
+GET /v2/coverage?quotes=BMD
+GET /v2/coverage?base=AED&quotes=CAD
+GET /v2/coverage?base=AED
+GET /v2/coverage?providers=ecb
+GET /v2/coverage?providers=ecb,boc&base=AED
+GET /v2/coverage?providers=ecb,boc&base=GBP&quotes=JPY
+GET /v2/coverage?providers=nb&base=I44&quotes=NOK
+GET /v2/coverage?providers=inforeuro
+GET /v2/coverage?providers=missing
+GET /v2/coverage?providers=
+GET /v2/coverage?quotes=
+GET /v2/coverage?date=2020-01-01
+GET /v2/coverage?group=month
+GET /v2/coverage?scope=all
+GET /v2/coverage?base=NOTREAL
+GET /v2/coverage?base[]=USD
+GET /v2/coverage?base=%zz
+GET /v2/coverage.csv
+GET /v2/coverage | Accept: text/csv
+POST /v2/coverage
+HEAD /v2/coverage
