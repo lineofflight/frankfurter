@@ -1,0 +1,2497 @@
+{
+  "adapter": "BNA",
+  "cassette": "bna",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 21))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "ALL",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 11.18329
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.65456
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.65456
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 649.99715
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 649.99715
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 542.55258
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 542.55258
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 182.06608
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 182.06608
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 65.56162
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 65.56162
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 663.98778
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 663.98778
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.40853
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.40853
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1159.65964
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1159.65964
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 134.21268
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 134.21268
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.02514
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.02514
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 9.64023
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 9.64023
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 43.67722
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 43.67722
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 141.99325
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 141.99325
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 67.81807
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 67.81807
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 17.20588
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 17.20588
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.85078
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.85078
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1060.8582
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1060.8582
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1224.67275
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1224.67275
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 116.5804
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 116.5804
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 140.83472
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 140.83472
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.94297
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.94297
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.05159
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.05159
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 313.03257
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 313.03257
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 9.45989
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 9.45989
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.82356
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.82356
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.73854
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 5.73854
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 7.05817
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 7.05817
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.60543
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.60543
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2955.5462
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2955.5462
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.93954
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.93954
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.76719
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 2.76719
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.86784
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.86784
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 98.99993
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 98.99993
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 52.67288
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 52.67288
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 229.74362
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 229.74362
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 14.44301
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 14.44301
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.86784
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.86784
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.66586
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.66586
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 98.6129
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 98.6129
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 533.82987
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 533.82987
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 266.90714
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 266.90714
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 3.27928
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 3.27928
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 250.05915
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 250.05915
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 203.05906
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 203.05906
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 12.86079
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 12.86079
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 243.33538
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 243.33538
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 97.30252
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 97.30252
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 712.75935
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 712.75935
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 43.53396
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 43.53396
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 27.97451
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 27.97451
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 135.76318
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 135.76318
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 28.85043
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 28.85043
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.35255
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.35255
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 20.68218
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 20.68218
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.79548
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.79548
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.03465
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.03465
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.61767
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 1.61767
+    },
+    {
+      "base": "XAU",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 4565.82
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.8171
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 54.8171
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.04852
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-19",
+      "quote": "AOA",
+      "rate": 0.04852
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "ALL",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 11.17508
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.653
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.653
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 651.0631
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 651.0631
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 541.61931
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 541.61931
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 181.60982
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 181.60982
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 66.74971
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 66.74971
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 663.79471
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 663.79471
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.40853
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.40853
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1155.84304
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1155.84304
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 134.22649
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 134.22649
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.01883
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.01883
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 9.61516
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 9.61516
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 43.56573
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 43.56573
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 141.75078
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 141.75078
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 67.70241
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 67.70241
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 17.10077
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 17.10077
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.73663
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.73663
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1059.032
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1059.032
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1223.85203
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1223.85203
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 116.57594
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 116.57594
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 140.59619
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 140.59619
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.93333
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.93333
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.05173
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.05173
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 312.41139
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 312.41139
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 9.43058
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 9.43058
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.80973
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.80973
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.74251
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 5.74251
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 7.06473
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 7.06473
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.60662
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.60662
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2955.5462
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2955.5462
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.93629
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.93629
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.74423
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 2.74423
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 55.04346
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 55.04346
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 98.87665
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 98.87665
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 52.58431
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 52.58431
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 230.14896
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 230.14896
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 14.43865
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 14.43865
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 55.04346
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 55.04346
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.6654
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.6654
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 98.43112
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 98.43112
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 533.79867
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 533.79867
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 266.46317
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 266.46317
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 3.27928
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 3.27928
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 249.05654
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 249.05654
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 202.50965
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 202.50965
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 12.88953
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 12.88953
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 243.34835
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 243.34835
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 97.37515
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 97.37515
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 713.31615
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 713.31615
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 43.49683
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 43.49683
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 27.95053
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 27.95053
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 135.87025
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 135.87025
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 28.85681
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 28.85681
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.35162
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.35162
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 20.64449
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 20.64449
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.79056
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.79056
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.03464
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.03464
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.61492
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 1.61492
+    },
+    {
+      "base": "XAU",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 4481.72
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 54.6318
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 54.6318
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.04855
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-20",
+      "quote": "AOA",
+      "rate": 0.04855
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 248.609
+    },
+    {
+      "base": "ALL",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 11.17098
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.65386
+    },
+    {
+      "base": "ARS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.65386
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 650.73831
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 650.73831
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 541.45873
+    },
+    {
+      "base": "BGN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 541.45873
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BMD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BOB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 133.20438
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 182.24049
+    },
+    {
+      "base": "BRL",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 182.24049
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BSD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 66.65859
+    },
+    {
+      "base": "BWP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 66.65859
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 663.11983
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 663.11983
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.40838
+    },
+    {
+      "base": "CDF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.40838
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1157.895
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1157.895
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 134.2561
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 134.2561
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.02044
+    },
+    {
+      "base": "CRC",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.02044
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CUP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 38.0465
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 9.61832
+    },
+    {
+      "base": "CVE",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 9.61832
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 43.60027
+    },
+    {
+      "base": "CZK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 43.60027
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 141.71118
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 141.71118
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 67.68234
+    },
+    {
+      "base": "EEK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 67.68234
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 17.27812
+    },
+    {
+      "base": "EGP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 17.27812
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.7583
+    },
+    {
+      "base": "ETB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.7583
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1058.9407
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1058.9407
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1225.00134
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1225.00134
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 116.55213
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 116.55213
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 140.5529
+    },
+    {
+      "base": "HRK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 140.5529
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.93758
+    },
+    {
+      "base": "HUF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.93758
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.0517
+    },
+    {
+      "base": "IDR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.0517
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 313.20436
+    },
+    {
+      "base": "ILS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 313.20436
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 9.49358
+    },
+    {
+      "base": "INR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 9.49358
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "IQD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.69704
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.82018
+    },
+    {
+      "base": "JMD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.82018
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.73746
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 5.73746
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 7.06036
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 7.06036
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.60512
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.60512
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2951.24758
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2951.24758
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.94239
+    },
+    {
+      "base": "KZT",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.94239
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LBP",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.0102
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.69945
+    },
+    {
+      "base": "LKR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 2.69945
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.18318
+    },
+    {
+      "base": "LSL",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.18318
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 98.87237
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 98.87237
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 52.62886
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 52.62886
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 230.61397
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 230.61397
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 14.44301
+    },
+    {
+      "base": "MZN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 14.44301
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.18284
+    },
+    {
+      "base": "NAD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.18284
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.66603
+    },
+    {
+      "base": "NGN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.66603
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 98.95702
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 98.95702
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 534.92443
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 534.92443
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 267.69745
+    },
+    {
+      "base": "PEN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 267.69745
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 3.27855
+    },
+    {
+      "base": "PKR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 3.27855
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 249.30134
+    },
+    {
+      "base": "PLN",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 249.30134
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 250.51193
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 202.07493
+    },
+    {
+      "base": "RON",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 202.07493
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 12.94587
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 12.94587
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 243.33538
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 243.33538
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 97.50929
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 97.50929
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 713.26043
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 713.26043
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 43.51528
+    },
+    {
+      "base": "STD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 43.51528
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 27.94284
+    },
+    {
+      "base": "THB",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 27.94284
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 135.79347
+    },
+    {
+      "base": "TTD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 135.79347
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 28.90065
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 28.90065
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.35255
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.35255
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 20.64654
+    },
+    {
+      "base": "UAH",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 20.64654
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 913.116
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.7857
+    },
+    {
+      "base": "VEF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.7857
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.03465
+    },
+    {
+      "base": "VND",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.03465
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.61443
+    },
+    {
+      "base": "XAF",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 1.61443
+    },
+    {
+      "base": "XAU",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 4543.25
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.1652
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 55.1652
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.04863
+    },
+    {
+      "base": "ZMK",
+      "date": "2026-05-21",
+      "quote": "AOA",
+      "rate": 0.04863
+    }
+  ]
+}
