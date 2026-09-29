@@ -12,10 +12,8 @@
 package rbf
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
 	"fmt"
 	"math"
 	"net/http"
@@ -25,13 +23,13 @@ import (
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
+	"github.com/xuri/excelize/v2"
 )
 
 const hubURL = "https://www.rbf.gov.fj/statistics/economic-and-financial-statistics/"
 
 var (
 	archiveLink = regexp.MustCompile(`href="(https://www\.rbf\.gov\.fj/wp-content/uploads/\d{4}/\d{2}/8\.8-Exchange-Rates-Daily[^"]*\.xlsx)"`)
-	columnRef   = regexp.MustCompile(`^[A-Z]+`)
 	excelEpoch  = adapter.Date(1899, 12, 30)
 )
 
@@ -82,64 +80,39 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(body, after, upto)
 }
 
-type cell struct {
-	Ref    string   `xml:"r,attr"`
-	Type   string   `xml:"t,attr"`
-	Values []string `xml:"v"`
-}
-
-type row struct {
-	Cells []cell `xml:"c"`
-}
-
-type worksheet struct {
-	Rows []row `xml:"sheetData>row"`
-}
-
-type sharedStrings struct {
-	Items []struct {
-		Texts []string `xml:"t"`
-	} `xml:"si"`
-}
-
 func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data))
 	if err != nil {
 		return nil, err
 	}
-	strs, err := readSharedStrings(zr)
+	defer f.Close()
+	rows, err := f.GetRows(f.GetSheetName(0), excelize.Options{RawCellValue: true})
 	if err != nil {
-		return nil, err
-	}
-	var sheet worksheet
-	if err := unmarshalEntry(zr, "xl/worksheets/sheet1.xml", &sheet); err != nil {
 		return nil, err
 	}
 
 	var rates []adapter.Rate
-	var columns map[string]string
-	for _, r := range sheet.Rows {
+	var columns map[int]string
+	for _, r := range rows {
 		if len(columns) == 0 {
-			columns = columnMap(r, strs)
+			columns = columnMap(r)
 			continue
 		}
 
 		var date time.Time
 		var quotes []string
 		values := map[string]float64{}
-		for _, c := range r.Cells {
-			if c.Ref == "" || c.Type == "s" || len(c.Values) == 0 || c.Values[0] == "" {
+		for i, text := range r {
+			if text == "" {
 				continue
 			}
-			col := columnRef.FindString(c.Ref)
-			text := c.Values[0]
-			if col == "A" {
+			if i == 0 {
 				if serial, ok := excelSerial(text); ok {
 					date = excelEpoch.AddDate(0, 0, serial)
 				}
 				continue
 			}
-			iso, ok := columns[col]
+			iso, ok := columns[i]
 			if !ok {
 				continue
 			}
@@ -166,6 +139,9 @@ func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
 			rates = append(rates, adapter.Rate{Date: date, Base: "FJD", Quote: q, Rate: values[q]})
 		}
 	}
+	if len(columns) == 0 {
+		return nil, fmt.Errorf("currency header row not found in workbook")
+	}
 	return rates, nil
 }
 
@@ -181,41 +157,13 @@ func excelSerial(text string) (int, bool) {
 	return int(math.Trunc(f)), true
 }
 
-// columnMap resolves the header row's shared-string labels to ISO codes, keyed by column letters.
-func columnMap(r row, strs []string) map[string]string {
-	m := map[string]string{}
-	for _, c := range r.Cells {
-		if c.Type != "s" || c.Ref == "" || len(c.Values) == 0 {
-			continue
-		}
-		i, err := strconv.Atoi(strings.TrimSpace(c.Values[0]))
-		if err != nil || i < 0 || i >= len(strs) {
-			continue
-		}
-		if iso, ok := currencies[strings.TrimSpace(strs[i])]; ok {
-			m[columnRef.FindString(c.Ref)] = iso
+// columnMap resolves the header row's labels to ISO codes, keyed by column index.
+func columnMap(r []string) map[int]string {
+	m := map[int]string{}
+	for i, label := range r {
+		if iso, ok := currencies[strings.TrimSpace(label)]; ok {
+			m[i] = iso
 		}
 	}
 	return m
-}
-
-func readSharedStrings(zr *zip.Reader) ([]string, error) {
-	var sst sharedStrings
-	if err := unmarshalEntry(zr, "xl/sharedStrings.xml", &sst); err != nil {
-		return nil, err
-	}
-	strs := make([]string, len(sst.Items))
-	for i, si := range sst.Items {
-		strs[i] = strings.Join(si.Texts, "")
-	}
-	return strs, nil
-}
-
-func unmarshalEntry(zr *zip.Reader, name string, v any) error {
-	f, err := zr.Open(name)
-	if err != nil {
-		return fmt.Errorf("%s missing from workbook: %w", name, err)
-	}
-	defer f.Close()
-	return xml.NewDecoder(f).Decode(v)
 }

@@ -1,7 +1,6 @@
 package rbf
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
 	"io"
@@ -14,6 +13,7 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
 	"github.com/lineofflight/frankfurter/go/internal/vcrtest"
+	"github.com/xuri/excelize/v2"
 )
 
 func fetch(t *testing.T, after, upto time.Time) []adapter.Rate {
@@ -136,39 +136,51 @@ func TestGolden(t *testing.T) {
 	}
 }
 
-func xlsx(t *testing.T, files map[string]string) []byte {
+// xlsx builds a workbook shaped like RBF's: the rates on the first sheet under title rows, and an empty second sheet.
+// Each row is written from column A; nil leaves a cell blank.
+func xlsx(t *testing.T, rows [][]any) []byte {
 	t.Helper()
-	var buf bytes.Buffer
-	zw := zip.NewWriter(&buf)
-	for name, body := range files {
-		w, err := zw.Create(name)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if _, err := io.WriteString(w, body); err != nil {
+	f := excelize.NewFile()
+	defer f.Close()
+	if err := f.SetSheetName("Sheet1", "Exchange Rates"); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := f.NewSheet("Sheet1"); err != nil {
+		t.Fatal(err)
+	}
+	for i, r := range rows {
+		cell, _ := excelize.CoordinatesToCellName(1, i+1)
+		if err := f.SetSheetRow("Exchange Rates", cell, &r); err != nil {
 			t.Fatal(err)
 		}
 	}
-	if err := zw.Close(); err != nil {
+	return save(t, f)
+}
+
+func save(t *testing.T, f *excelize.File) []byte {
+	t.Helper()
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
 		t.Fatal(err)
 	}
 	return buf.Bytes()
 }
 
-// Covers header mapping with padded labels, fractional date serials, string cells in data rows, zero, negative and
-// blank rates, unmapped columns, rows without a date, and the inclusive after bound.
+// Covers title rows above the header, padded labels, fractional date serials, text cells in data rows, zero,
+// negative and blank rates, unmapped columns, rows without a date, and the inclusive after bound.
 func TestParseFiltersCells(t *testing.T) {
-	strs := `<sst><si><t>Date</t></si><si><t> US$ </t></si><si><t>EURO</t></si><si><t>XYZ</t></si><si><t>n/a</t></si></sst>`
-	sheet := `<worksheet><sheetData>
-<row><c r="A1" t="s"><v>0</v></c><c r="B1" t="s"><v>1</v></c><c r="C1" t="s"><v>2</v></c><c r="D1" t="s"><v>3</v></c></row>
-<row><c r="A2"><v>46163</v></c><c r="B2"><v>0.43</v></c></row>
-<row><c r="A3"><v>46164.75</v></c><c r="B3"><v>0.44</v></c><c r="C3"><v>0</v></c><c r="D3"><v>9</v></c></row>
-<row><c r="A4"><v>46165</v></c><c r="B4" t="s"><v>4</v></c><c r="C4"><v></v></c></row>
-<row><c r="A5"><v>46166</v></c><c r="B5"><v>-1</v></c><c r="C5"><v>0.38</v></c></row>
-<row><c r="B6"><v>0.5</v></c></row>
-<row><c r="A7"><v>46167</v></c><c r="B7"><v>0.45</v></c></row>
-</sheetData></worksheet>`
-	data := xlsx(t, map[string]string{"xl/sharedStrings.xml": strs, "xl/worksheets/sheet1.xml": sheet})
+	data := xlsx(t, [][]any{
+		{"DAILY EXCHANGE RATES"},
+		{"(RBF Mid-Rate Per Fiji Dollar)"},
+		{"Period", " US$ ", "EURO", "XYZ"},
+		{},
+		{46163, 0.43},
+		{46164.75, 0.44, 0, 9},
+		{46165, "n/a", nil},
+		{46166, -1, 0.38},
+		{nil, 0.5},
+		{46167, 0.45},
+	})
 
 	rates, err := parse(data, adapter.Date(2026, 5, 22), adapter.Date(2026, 5, 24))
 	if err != nil {
@@ -183,9 +195,46 @@ func TestParseFiltersCells(t *testing.T) {
 	}
 }
 
-func TestParseErrorsWithoutSharedStrings(t *testing.T) {
-	data := xlsx(t, map[string]string{"xl/worksheets/sheet1.xml": `<worksheet><sheetData/></worksheet>`})
-	if _, err := parse(data, time.Time{}, time.Time{}); err == nil {
+func TestParseReadsFirstSheetOnly(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	if _, err := f.NewSheet("Other"); err != nil {
+		t.Fatal(err)
+	}
+	for sheet, rate := range map[string]float64{"Sheet1": 0.45, "Other": 9.99} {
+		if err := f.SetSheetRow(sheet, "A1", &[]any{"Period", "US$"}); err != nil {
+			t.Fatal(err)
+		}
+		if err := f.SetSheetRow(sheet, "A2", &[]any{46164, rate}); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	rates, err := parse(save(t, f), time.Time{}, time.Time{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 5, 22), Base: "FJD", Quote: "USD", Rate: 0.45}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseErrorsOnHTMLPage(t *testing.T) {
+	if _, err := parse([]byte("<html><body>Service unavailable</body></html>"), time.Time{}, time.Time{}); err == nil {
 		t.Fatal("expected an error")
+	}
+}
+
+func TestParseErrorsWithoutHeader(t *testing.T) {
+	for name, rows := range map[string][][]any{
+		"empty":     nil,
+		"no labels": {{"Period", "Rate"}, {46164, 0.45}},
+	} {
+		t.Run(name, func(t *testing.T) {
+			if _, err := parse(xlsx(t, rows), time.Time{}, time.Time{}); err == nil {
+				t.Fatal("expected an error")
+			}
+		})
 	}
 }
