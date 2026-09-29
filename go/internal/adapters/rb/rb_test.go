@@ -2,8 +2,10 @@ package rb
 
 import (
 	"context"
+	"net/http"
 	"slices"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -124,4 +126,60 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseSkipsFalseValue(t *testing.T) {
+	if rates := mustParse(t, `[{"seriesId": "SEKEURPMI", "date": "2026-03-24", "value": false}]`); len(rates) != 0 {
+		t.Errorf("got %d rates, want none", len(rates))
+	}
+}
+
+func TestParseStringValue(t *testing.T) {
+	rates := mustParse(t, `[{"seriesId": "SEKEURPMI", "date": "2026-03-24", "value": "10.8238"}]`)
+	if len(rates) != 1 || rates[0].Rate != 10.8238 {
+		t.Errorf("rates = %+v, want one at 10.8238", rates)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for name, data := range map[string]string{
+		"not an array":  `{"seriesId": "SEKEURPMI"}`,
+		"bad value":     `[{"seriesId": "SEKEURPMI", "date": "2026-03-24", "value": "n/a"}]`,
+		"boolean value": `[{"seriesId": "SEKEURPMI", "date": "2026-03-24", "value": true}]`,
+		"bad date":      `[{"seriesId": "SEKEURPMI", "date": "24/03/2026", "value": 1.5}]`,
+	} {
+		if _, err := parse([]byte(data)); err == nil {
+			t.Errorf("%s: want an error", name)
+		}
+	}
+}
+
+type recorder struct{ urls []string }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.urls = append(r.urls, req.URL.String())
+	return &http.Response{StatusCode: 200, Body: http.NoBody, Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchURL(t *testing.T) {
+	tests := []struct {
+		name        string
+		after, upto time.Time
+		want        string
+	}{
+		{"window", adapter.Date(2026, 3, 24), adapter.Date(2026, 3, 28), baseURL + "/2026-03-24/2026-03-28"},
+		{"open ends", time.Time{}, time.Time{}, baseURL + "//2026-09-29"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			rec := &recorder{}
+			a := New(&http.Client{Transport: rec})
+			a.Now = func() time.Time { return time.Date(2026, 9, 29, 12, 0, 0, 0, time.UTC) }
+			// An empty body is not JSON, so the fetch fails after the request is made.
+			a.Fetch(context.Background(), tt.after, tt.upto)
+			if len(rec.urls) != 1 || rec.urls[0] != tt.want {
+				t.Errorf("urls = %v, want [%s]", rec.urls, tt.want)
+			}
+		})
+	}
 }

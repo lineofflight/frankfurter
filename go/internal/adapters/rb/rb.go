@@ -80,7 +80,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, o := range observations {
-		if o.SeriesID == nil || o.Date == nil || o.Value == nil {
+		// Ruby's `next unless value` skips false as well as nil.
+		if o.SeriesID == nil || o.Date == nil || o.Value == nil || o.Value == false {
 			continue
 		}
 		currency := strings.TrimSuffix(strings.TrimPrefix(*o.SeriesID, "SEK"), "PMI")
