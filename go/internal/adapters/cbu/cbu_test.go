@@ -2,7 +2,10 @@ package cbu
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -108,6 +111,60 @@ func TestParseHandlesEmptyResponse(t *testing.T) {
 func TestParseRejectsNonArray(t *testing.T) {
 	if _, err := parse([]byte(`{"error": true}`)); err == nil {
 		t.Error("want an error for a JSON object")
+	}
+}
+
+func TestParseRejectsUnparseableValues(t *testing.T) {
+	for _, tc := range []struct{ nominal, rate string }{
+		{`"1.5"`, `"1"`},
+		{`""`, `"1"`},
+		{`null`, `"1"`},
+		{`"1"`, `"abc"`},
+		{`"1"`, `"NaN"`},
+		{`"1"`, `"Infinity"`},
+		{`"1"`, `null`},
+	} {
+		s := `[{"Ccy":"USD","Nominal":` + tc.nominal + `,"Rate":` + tc.rate + `,"Date":"01.04.2026"}]`
+		if _, err := parse([]byte(s)); err == nil {
+			t.Errorf("Nominal %s, Rate %s: want an error", tc.nominal, tc.rate)
+		}
+	}
+}
+
+func TestParseReadsValuesLikeRuby(t *testing.T) {
+	rates := mustParse(t, `[
+		{"Ccy":"USD","Nominal":1,"Rate":12194.21,"Date":"01.04.2026"},
+		{"Ccy":"IDR","Nominal":"010","Rate":"8","Date":"01.04.2026"},
+		{"Ccy":"JPY","Nominal":"0","Rate":"8","Date":"01.04.2026"}
+	]`)
+	if len(rates) != 2 {
+		t.Fatalf("got %+v, want 2 rates", rates)
+	}
+	if rates[0].Rate != 12194.21 {
+		t.Errorf("bare numbers: rate = %v, want 12194.21", rates[0].Rate)
+	}
+	if rates[1].Rate != 1 {
+		t.Errorf("octal nominal: rate = %v, want 8/8", rates[1].Rate)
+	}
+}
+
+type roundTrip func(*http.Request) (*http.Response, error)
+
+func (f roundTrip) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsWeekdaysInclusive(t *testing.T) {
+	var urls []string
+	client := &http.Client{Transport: roundTrip(func(r *http.Request) (*http.Response, error) {
+		urls = append(urls, r.URL.String())
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader("[]")), Header: http.Header{}, Request: r}, nil
+	})}
+	// Friday 2026-04-03 through Monday 2026-04-06.
+	if _, err := New(client).Fetch(context.Background(), adapter.Date(2026, 4, 3), adapter.Date(2026, 4, 6)); err != nil {
+		t.Fatal(err)
+	}
+	want := "https://cbu.uz/en/arkhiv-kursov-valyut/json/all/2026-04-03/ https://cbu.uz/en/arkhiv-kursov-valyut/json/all/2026-04-06/"
+	if got := strings.Join(urls, " "); got != want {
+		t.Errorf("requested %s, want %s", got, want)
 	}
 }
 

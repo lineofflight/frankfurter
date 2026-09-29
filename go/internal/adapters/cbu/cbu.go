@@ -111,12 +111,13 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if r.Ccy == nil || !codeRE.MatchString(*r.Ccy) {
 			continue
 		}
-		nominal, err := strconv.Atoi(strings.TrimSpace(string(r.Nominal)))
+		// Base 0 reads prefixes and a leading 0 as octal, as Ruby's Integer() does.
+		nominal, err := strconv.ParseInt(strings.TrimSpace(string(r.Nominal)), 0, 64)
 		if err != nil {
 			return nil, fmt.Errorf("invalid nominal %q", r.Nominal)
 		}
-		rate, err := strconv.ParseFloat(strings.TrimSpace(string(r.Rate)), 64)
-		if err != nil {
+		rate, ok := adapter.ParseFloat(string(r.Rate))
+		if !ok {
 			return nil, fmt.Errorf("invalid rate %q", r.Rate)
 		}
 		if rate == 0 || nominal == 0 {
