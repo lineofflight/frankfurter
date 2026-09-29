@@ -90,13 +90,13 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, e := range entries {
-		iso, ok := nameToISO[strings.ToUpper(strings.TrimSpace(text(e.Currency)))]
+		iso, ok := nameToISO[strings.ToUpper(strip(text(e.Currency)))]
 		if !ok {
 			continue
 		}
 
 		value := text(e.CentralRate)
-		if strings.TrimSpace(value) == "" {
+		if strip(value) == "" {
 			continue
 		}
 		rate, ok := adapter.ParseFloat(value)
@@ -115,6 +115,12 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		rates = append(rates, adapter.Rate{Date: date, Base: iso, Quote: "NGN", Rate: rate})
 	}
 	return rates, nil
+}
+
+// strip is Ruby's String#strip: it trims ASCII whitespace and NUL but not Unicode spaces such as NBSP, so an
+// NBSP-padded name stays unmapped as it does in Ruby.
+func strip(s string) string {
+	return strings.Trim(s, " \t\n\v\f\r\x00")
 }
 
 // text is Ruby's to_s for a decoded JSON scalar: nil becomes "".

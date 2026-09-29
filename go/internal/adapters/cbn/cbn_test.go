@@ -191,6 +191,30 @@ func TestParseSkipsMissingOrZeroCentralRate(t *testing.T) {
 	}
 }
 
+func TestParseKeepsNBSPPaddedNamesUnmapped(t *testing.T) {
+	rates := mustParse(t, `[
+		{"id":1,"currency":"EURO ","ratedate":"2026-05-21","centralrate":"1590.2"},
+		{"id":2,"currency":"\u0000SWISS FRANC\u000b","ratedate":"2026-05-21","centralrate":"1737.5"}
+	]`)
+	if got := bases(rates); !slices.Equal(got, []string{"CHF"}) {
+		t.Errorf("bases = %v, want [CHF]", got)
+	}
+}
+
+func TestParseRejectsNonNumericCentralRate(t *testing.T) {
+	if _, err := parse([]byte(`[{"currency":"EURO","ratedate":"2026-05-21","centralrate":"n/a"}]`)); err == nil {
+		t.Error("want an error for a non-numeric centralrate")
+	}
+}
+
+func TestParseAcceptsNumericCentralRateAndTimestamp(t *testing.T) {
+	rates := mustParse(t, `[{"currency":"EURO","ratedate":"2026-05-21T00:00:00","centralrate":1590.25}]`)
+	want := []adapter.Rate{{Date: adapter.Date(2026, 5, 21), Base: "EUR", Quote: "NGN", Rate: 1590.25}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
 func TestParseRejectsNonArray(t *testing.T) {
 	if _, err := parse([]byte(`{"error":true}`)); err == nil {
 		t.Error("want an error for a JSON object")
