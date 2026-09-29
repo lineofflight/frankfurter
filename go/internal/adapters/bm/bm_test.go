@@ -188,6 +188,24 @@ func TestParseStampsGivenDate(t *testing.T) {
 	}
 }
 
+func TestParseRescalesBidAskAndLeavesMidUnset(t *testing.T) {
+	jpy := find(t, parsed(t), "JPY")
+	if jpy.Bid == nil || *jpy.Bid != 0.51979 || jpy.Ask == nil || *jpy.Ask != 0.53009 {
+		t.Errorf("JPY bid/ask = %v/%v, want 0.51979/0.53009", jpy.Bid, jpy.Ask)
+	}
+	if jpy.Mid != nil {
+		t.Errorf("JPY mid = %v, want unset", *jpy.Mid)
+	}
+}
+
+func TestEscape(t *testing.T) {
+	got := escape("/media/a b/Câmbio_02012018.pdf")
+	want := "/media/a%20b/C%C3%A2mbio_02012018.pdf"
+	if got != want {
+		t.Errorf("escape = %q, want %q", got, want)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	rates, err := New(g.Client(t)).Fetch(context.Background(), adapter.Date(2026, 9, 2), adapter.Date(2026, 9, 4))
