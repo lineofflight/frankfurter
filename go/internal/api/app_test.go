@@ -175,7 +175,6 @@ func TestServesStaticFiles(t *testing.T) {
 	}
 }
 
-// The v2 paths here pass before the v2 routes exist: the header does not depend on the status.
 func TestSetsNoindex(t *testing.T) {
 	a := newTestApp(t)
 	for _, path := range []string{"/robots.txt", "/v1/latest", "/v2/rates", "/v2/currencies", "/nonexistent"} {
@@ -186,10 +185,9 @@ func TestSetsNoindex(t *testing.T) {
 	}
 }
 
-// "/v2" joins this list once the v2 routes exist (app_spec "leaves /v2 indexable").
 func TestLeavesEntryPointsIndexable(t *testing.T) {
 	a := newTestApp(t)
-	for _, path := range []string{"/", "/v1", "/v1/openapi.json", "/v2/openapi.json"} {
+	for _, path := range []string{"/", "/v1", "/v2", "/v1/openapi.json", "/v2/openapi.json"} {
 		a.get(path)
 		if a.res.Code != http.StatusOK {
 			t.Errorf("%s: status = %d", path, a.res.Code)
@@ -212,7 +210,7 @@ func TestReturnsJSONFor404(t *testing.T) {
 	}
 }
 
-// The v2 rows of app_spec's table ("v2 422", "v2 404", "v2 406") belong to the v2 step.
+// The v2 rows of app_spec's table are TestV2ErrorResponsesAreNotCached.
 func TestErrorResponsesAreNotCached(t *testing.T) {
 	a := newTestApp(t)
 	for _, c := range []struct {

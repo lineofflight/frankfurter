@@ -73,7 +73,16 @@ were removed.
 `golden_test.go` compares NDJSON line by line (JSON rules), compares `content-disposition`, and accepts any
 `public, max-age=N, stale-if-error=86400` for a date-relative Ruby answer of that shape (N counts to the next UTC
 midnight from when each side answered). CSV bodies compare exactly: Go prints numbers as Ruby does.
-`TestV2ResponsesMatchOpenAPI` validates the Go answers to the corpus's plain v2 GETs against `v2/openapi.json`.
+`TestV2ResponsesMatchOpenAPI` validates the Go answers to the corpus's v2 GETs (Accept headers included) against
+`v2/openapi.json`; CSV is not in the document, and NDJSON, which the document types as a string, is checked line by
+line against its `Rate` schema.
+
+Verification pass: a regenerated golden file matched the committed one (bar the max-age countdown). A scratch
+differential run then replayed about 16,000 generated v2 requests through both apps: random shapes and malformed
+parameters, with the materialized blends rebuilt and with them empty (live path, range cap). It ran on the fixture plus
+extra providers: BI (IDR, sub-1e-4 and over-5000 rates, gaps), FRED (weekly), RBA (bid/ask only), NBP (consensus
+outliers, XDR) and LB (EUR to LTL base change). Every response matched, and every documented v2 JSON response conformed.
+The generator lives outside the repository; the committed corpus is the durable check.
 
 Regenerate exactly as core-api_v1.md describes (same command).
 

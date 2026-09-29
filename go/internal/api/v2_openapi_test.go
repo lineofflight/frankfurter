@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -55,25 +56,48 @@ func TestV2ResponsesMatchOpenAPI(t *testing.T) {
 	loadGoldenTables(t, conn, g.Tables)
 	h := (&Server{DB: conn, Today: func() time.Time { return today }}).Handler()
 
-	checked := 0
+	rate := doc.Components.Schemas["Rate"].Value
+	checked, ndjson := 0, 0
 	for _, c := range g.Responses {
 		specPath := v2SpecPath(strings.SplitN(c.Path, "?", 2)[0])
-		if c.Method != http.MethodGet || specPath == "" || len(c.Headers) > 0 {
+		if c.Method != http.MethodGet || specPath == "" {
 			continue
 		}
 		req := httptest.NewRequest(c.Method, c.Path, nil)
+		for k, v := range c.Headers {
+			req.Header.Set(k, v)
+		}
 		res := httptest.NewRecorder()
 		h.ServeHTTP(res, req)
 		if doc.Paths.Find(specPath).Get.Responses.Status(res.Code) == nil {
 			continue // 500s and the like are undocumented
 		}
-		if err := validateResponse(t, doc, specPath, req, res); err != nil {
-			t.Errorf("%s (%d): %v", c.Request, res.Code, err)
+		switch ct := res.Header().Get("Content-Type"); {
+		case strings.HasPrefix(ct, contentTypeCSV):
+			continue // CSV is not in the document
+		case strings.HasPrefix(ct, contentTypeNDJSON):
+			// The document types the stream as a string of Rate objects, one per line; check each line.
+			for i, line := range strings.Split(strings.TrimSuffix(res.Body.String(), "\n"), "\n") {
+				if line == "" {
+					continue
+				}
+				var v any
+				if err := json.Unmarshal([]byte(line), &v); err != nil {
+					t.Errorf("%s: line %d: %v", c.Request, i, err)
+				} else if err := rate.VisitJSON(v); err != nil {
+					t.Errorf("%s: line %d does not conform: %v", c.Request, i, err)
+				}
+			}
+			ndjson++
+		default:
+			if err := validateResponse(t, doc, specPath, req, res); err != nil {
+				t.Errorf("%s (%d): %v", c.Request, res.Code, err)
+			}
 		}
 		checked++
 	}
-	if checked < 150 {
-		t.Fatalf("checked only %d responses", checked)
+	if checked < 150 || ndjson < 5 {
+		t.Fatalf("checked only %d responses, %d of them NDJSON", checked, ndjson)
 	}
 }
 
