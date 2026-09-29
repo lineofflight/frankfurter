@@ -28,6 +28,8 @@ func TestNormalize(t *testing.T) {
 		{"keeps the magnitude of very large rates", 260988505.32818, 260988505.328},
 		{"keeps the magnitude of very small rates", 1.2e-9, 1.2e-9},
 		{"passes integers through", 3, 3},
+		{"breaks a decimal tie to even", 1.234567890125, 1.23456789012},
+		{"breaks a decimal tie to even upwards", 1.234567890135, 1.23456789014},
 		{"passes non-finite values through", math.Inf(1), math.Inf(1)},
 	} {
 		if got := rates.Normalize(c.in); got != c.want {
@@ -146,6 +148,14 @@ func TestRound(t *testing.T) {
 		{1.234567, 1.2346},
 		{0.1234567, 0.12346},
 		{0.00001234567, 0.000012},
+		// Ruby rounds the shortest decimal half to even, not the exact double.
+		{214.415, 214.42},
+		{643.965, 643.96},
+		{25.1235, 25.124},
+		{25.1245, 25.124},
+		{1.00005, 1.0},
+		{0.0000125, 0.000012},
+		{0.0001235, 0.00012},
 	} {
 		if got := rates.Round(c.in); got != c.want {
 			t.Errorf("Round(%v) = %v, want %v", c.in, got, c.want)
