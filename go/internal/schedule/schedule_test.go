@@ -3,6 +3,7 @@ package schedule
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"errors"
 	"regexp"
 	"slices"
@@ -13,6 +14,7 @@ import (
 	"github.com/adhocore/gronx"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
+	"github.com/lineofflight/frankfurter/go/internal/blend"
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 	"github.com/lineofflight/frankfurter/go/internal/provider"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
@@ -221,37 +223,75 @@ func populationTimer(t *testing.T, b Blend, c Cache) Func {
 	return found.fn
 }
 
-func TestPopulationBuildsGroupedTablesEvenWhenTheDailyBlendIsReady(t *testing.T) {
-	b := newFakeBlend()
-	job := &Job{}
-	if err := populationTimer(t, b, &fakeCache{})(context.Background(), job); err != nil {
+// readyBlend is the real materialized blend over the spec fixture, with the daily blend already built.
+func readyBlend(t *testing.T) (*sql.DB, provider.Materialized) {
+	t.Helper()
+	conn := fixtures.New(t)
+	m := provider.Materialized{DB: conn, Today: fixtures.Today}
+	if err := m.Rebuild(context.Background()); err != nil {
 		t.Fatal(err)
 	}
-	if !b.populated[rates.Week] || !b.populated[rates.Month] || !job.unscheduled.Load() {
-		t.Fatalf("populated %v, unscheduled %v", b.populated, job.unscheduled.Load())
+	return conn, m
+}
+
+func rollupReady(t *testing.T, conn *sql.DB, r blend.Rollup) bool {
+	t.Helper()
+	ok, err := r.Ready(context.Background(), conn)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return ok
+}
+
+// failingMonthly fails BlendedMonthlyRate.populate while fail is set.
+type failingMonthly struct {
+	provider.Materialized
+	fail bool
+}
+
+func (f *failingMonthly) Populate(ctx context.Context, p rates.Precision) (int, error) {
+	if f.fail && p == rates.Month {
+		return 0, errors.New("database is busy")
+	}
+	return f.Materialized.Populate(ctx, p)
+}
+
+func TestPopulationBuildsGroupedTablesEvenWhenTheDailyBlendIsReady(t *testing.T) {
+	conn, m := readyBlend(t)
+	job := &Job{}
+	if err := populationTimer(t, m, &fakeCache{})(context.Background(), job); err != nil {
+		t.Fatal(err)
+	}
+	if !rollupReady(t, conn, blend.Weekly) || !rollupReady(t, conn, blend.Monthly) || !job.unscheduled.Load() {
+		t.Fatalf("weekly ready %v, monthly ready %v, unscheduled %v", rollupReady(t, conn, blend.Weekly),
+			rollupReady(t, conn, blend.Monthly), job.unscheduled.Load())
 	}
 }
 
 func TestPopulationRetriesAFailedPopulationAndStopsOnlyAfterBothGroupedBuildsFinish(t *testing.T) {
-	b := newFakeBlend()
-	b.populate = map[rates.Precision]func() (int, error){
-		rates.Month: func() (int, error) { return 0, errors.New("database is busy") },
-	}
+	conn, m := readyBlend(t)
+	b := &failingMonthly{Materialized: m, fail: true}
 	timer := populationTimer(t, b, &fakeCache{})
 	job := &Job{}
 	if err := timer(context.Background(), job); err == nil {
 		t.Fatal("want the population error")
 	}
-	if job.unscheduled.Load() || !b.populated[rates.Week] || b.populated[rates.Month] {
-		t.Fatalf("after failure: unscheduled %v, populated %v", job.unscheduled.Load(), b.populated)
+	var monthly int
+	if err := conn.QueryRow("SELECT count(*) FROM " + blend.Monthly.Table).Scan(&monthly); err != nil {
+		t.Fatal(err)
+	}
+	if job.unscheduled.Load() || !rollupReady(t, conn, blend.Weekly) || monthly != 0 {
+		t.Fatalf("after failure: unscheduled %v, weekly ready %v, monthly rows %d", job.unscheduled.Load(),
+			rollupReady(t, conn, blend.Weekly), monthly)
 	}
 
-	b.populate = nil
+	b.fail = false
 	if err := timer(context.Background(), job); err != nil {
 		t.Fatal(err)
 	}
-	if !job.unscheduled.Load() || !b.populated[rates.Month] {
-		t.Fatalf("after retry: unscheduled %v, populated %v", job.unscheduled.Load(), b.populated)
+	if !job.unscheduled.Load() || !rollupReady(t, conn, blend.Monthly) {
+		t.Fatalf("after retry: unscheduled %v, monthly ready %v", job.unscheduled.Load(),
+			rollupReady(t, conn, blend.Monthly))
 	}
 }
 

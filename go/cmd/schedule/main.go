@@ -51,9 +51,9 @@ func run(ctx context.Context, stdout io.Writer, dryRun bool) error {
 
 	in := &provider.Ingester{DB: conn}
 	s := schedule.New(conn.Stats().MaxOpenConnections, slog.Default())
-	// Blend and Cache stay nil until the blending and cache steps provide them; wire them here and into the
-	// Ingester.
-	if err := schedule.Setup(s, schedule.Deps{Providers: providers, Backfill: in.Backfill}); err != nil {
+	// Cache stays nil until the cache step provides it; wire it here and into the Ingester.
+	deps := schedule.Deps{Providers: providers, Backfill: in.Backfill, Blend: provider.Materialized{DB: conn}}
+	if err := schedule.Setup(s, deps); err != nil {
 		return err
 	}
 	s.Run(ctx)

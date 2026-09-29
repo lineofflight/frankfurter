@@ -1,7 +1,7 @@
 # Core step: provider
 
 Provider model, publishing calendar, backfill, the backfill task, the scheduler, provider health and heavy-compute
-slots. `go test ./internal/provider ./internal/schedule ./internal/heavyslots ./cmd/schedule ./cmd/providerhealth`
+slots. `go test ./internal/provider ./internal/schedule ./internal/heavyslots ./cmd/...`
 runs everything.
 
 ## Packages
@@ -28,8 +28,13 @@ runs everything.
     `Blend.RefreshRollupsTx` (blending providers), `rates.RefreshSummaries`, `Blend.RefreshTx(min, max + 14)`
     (blending providers). After commit: `Cache.PurgeDebounced`, `PRAGMA optimize`.
   - `Adapter` overrides the registry (tests use fakes). `Today` defaults to `rates.Today`.
-- `Blend` (`RefreshTx`, `RefreshRollupsTx`) and `Cache` (`PurgeDebounced`) are interfaces the blending and cache steps
-  implement. Both run on the backfill's transaction (`q`), so they must not open their own. Nil skips them.
+- `Blend` (`RefreshTx`, `RefreshRollupsTx`) and `Cache` (`PurgeDebounced`) are interfaces. `Blend` runs on the
+  backfill's transaction (`q`), so it must not open its own. A nil `Ingester.Blend` means `Materialized`; a nil
+  `Cache` is skipped until the cache step provides one.
+- `Materialized{DB, Today}` is the real blend (`internal/blend`) behind both `provider.Blend` (`RefreshTx` =
+  `blend.RefreshDaily`, `RefreshRollupsTx` = weekly and monthly `Rollup.Refresh`, joining the caller's transaction)
+  and `schedule.Blend` (`Refresh`, `Ready` = `DailyReady`, `Rebuild` = `RebuildDaily`, `Populate`, each in its own
+  transactions on `DB`).
 - `BackfillTask(ctx, b Backfiller, providers, name, full, workers)`: the rake task. `cmd/backfill` wraps it.
 
 ### `internal/schedule` (bin/schedule)
@@ -59,16 +64,13 @@ an invalid value panics at startup like Ruby's `Integer()`), `ErrBusy`, `RetryAf
 
 ## For later steps
 
-- **Blending**: implement `provider.Blend` (`RefreshTx`, `RefreshRollupsTx`, joining the caller's transaction) and
-  `schedule.Blend`, then set them in `cmd/schedule` (on both `schedule.Deps` and the `provider.Ingester`) and
-  `cmd/backfill`. Restore spec/provider_spec.rb's "writes blended rows for inserted dates" against the real blend:
-  `TestBackfillWritesBlendedRowsForInsertedDates` checks the stand-in's rows commit with the insert.
 - **Cache**: implement `provider.Cache` / `schedule.Cache`, wire them the same way, and call `PurgePending` with
   ignore-window at the end of `cmd/backfill` (Ruby's `Cache.purge_pending(ignore_window: true)`).
 - **API**: `/v2/providers` needs `StartDate`, `EndDate`, `PublishesMissed(ctx, q, today)` and `UnknownCurrencies`.
 - **Integrator**: once `internal/adapters/all` is regenerated with every adapter, port spec/provider_spec.rb's
   "resolves all seeded providers" (for every row of `provider.All`, `adapter.Lookup(p.Key)` succeeds) into
-  `internal/adapters/all`. It cannot pass before then (four adapters registered today).
+  `internal/adapters/all`. It cannot pass before then (four adapters registered today). A one-off check found an
+  adapter package for every seeded provider key.
 
 ## Deviations
 
@@ -84,11 +86,15 @@ an invalid value panics at startup like Ruby's `Integer()`), `ErrBusy`, `RetryAf
 - The dry run lists every provider, as Ruby does, whether or not its adapter is registered; backfilling a provider
   without one logs "no adapter registered" and moves on.
 - Ruby's scheduler specs spawn `bin/schedule` and stub rufus; Go tests record `Setup`'s registrations with a fake
-  `Registrar` and test `Scheduler` separately. The grouped-blend startup specs run against a fake `schedule.Blend`
-  until the blending step exists.
+  `Registrar` and test `Scheduler` separately. The first two grouped-blend startup specs run against `Materialized`
+  over the spec fixture (a wrapper fails monthly population once); the third stubs readiness and rebuild, as Ruby does.
+- The grouped blend ingestion specs (spec/blended_rollup_spec.rb) also run here, in `ingest_test.go`, against the real
+  backfill and blend. Ruby stubs a grouped refresh or `refresh_batch` to fail; Go makes the insert fail with a SQLite
+  trigger on the blended table (for the batch case, on the newest week, which lands alone in the second batch of 100).
+- `MAX_HEAVY_COMPUTES` parses like `Integer()`: surrounding space, `0x`/`0o`/`0b`/leading-zero octal, underscores.
 - `provider_health`'s flagged sort is stable (Ruby's `sort_by` is not; the specs only use distinct counts).
 
 ## Specs ported
 
-provider_spec (all but "resolves all seeded providers", see above; "writes blended rows" against a stand-in),
-provider_health_spec, schedule_spec, providers_task_spec, heavy_slots_spec.
+provider_spec (all but "resolves all seeded providers", see above), provider_health_spec, schedule_spec,
+providers_task_spec, heavy_slots_spec, and blended_rollup_spec's "Grouped blend ingestion" against the real backfill.

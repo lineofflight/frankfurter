@@ -416,22 +416,23 @@ func TestBackfillRefreshesTheMaterializedBlendOverTheInsertedWindowBeforePurging
 	}
 }
 
-// The blending step owns BlendedRate; here a stand-in writes through the backfill's transaction, which is the
-// contract: rows it writes commit with the insert.
 func TestBackfillWritesBlendedRowsForInsertedDates(t *testing.T) {
 	today := fixtures.Today()
 	e := newEnv(t, "BCB", defaultAdapter(today, nil))
-	e.events.write = func(ctx context.Context, q db.Querier, from, _ time.Time) error {
-		_, err := q.ExecContext(ctx, "INSERT INTO blended_rates (date, quote, rate) VALUES (?, 'EUR', 0.9)", d(from))
-		return err
+	e.in.Blend = nil // the real materialized blend
+	count := func() int {
+		var n int
+		if err := e.conn.QueryRow("SELECT count(*) FROM blended_rates WHERE date = ?", d(today)).Scan(&n); err != nil {
+			t.Fatal(err)
+		}
+		return n
+	}
+	if n := count(); n != 0 {
+		t.Fatalf("%d blended rows before backfill", n)
 	}
 	e.in.Backfill(context.Background(), e.provider)
 
-	var n int
-	if err := e.conn.QueryRow("SELECT count(*) FROM blended_rates WHERE date = ?", d(today)).Scan(&n); err != nil {
-		t.Fatal(err)
-	}
-	if n == 0 {
+	if count() == 0 {
 		t.Fatal("no blended rows")
 	}
 }

@@ -42,7 +42,7 @@ func run(ctx context.Context, name string, full bool) error {
 	if err != nil {
 		return err
 	}
-	// Cache and Blend stay nil until the cache and blending steps provide them. Once Cache exists, flush the purge the
+	// Cache stays nil until the cache step provides it. Once it exists, flush the purge the
 	// debounce deferred here (Cache.purge_pending(ignore_window: true)): the wave is over and the process exits.
 	in := &provider.Ingester{DB: conn}
 	return provider.BackfillTask(ctx, in, providers, name, full, conn.Stats().MaxOpenConnections)

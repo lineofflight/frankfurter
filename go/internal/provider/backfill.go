@@ -16,7 +16,7 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// Blend is the materialized blend, owned by the blending step. Backfill calls it inside its write transaction, so
+// Blend is the materialized blend (Materialized in production). Backfill calls it inside its write transaction, so
 // implementations must run on q and not open a transaction of their own.
 type Blend interface {
 	// RefreshTx recomputes stored daily blends for every anchor date in [from, to] (BlendedRate.refresh).
@@ -40,7 +40,7 @@ type Ingester struct {
 	// Client is handed to registered adapter constructors. Nil means adapter.NewClient().
 	Client *http.Client
 
-	// Blend and Cache are skipped when nil.
+	// Blend defaults to Materialized. Cache is skipped when nil.
 	Blend Blend
 	Cache Cache
 
@@ -66,6 +66,13 @@ func (in *Ingester) today() time.Time {
 		return in.Today()
 	}
 	return rates.Today()
+}
+
+func (in *Ingester) blend() Blend {
+	if in.Blend != nil {
+		return in.Blend
+	}
+	return Materialized{DB: in.DB, Today: in.today}
 }
 
 func (in *Ingester) adapter(key string) (adapter.Adapter, error) {
@@ -214,22 +221,22 @@ func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, recor
 	if err != nil {
 		return err
 	}
-	if p.Blends() && in.Blend != nil {
-		if err := in.Blend.RefreshRollupsTx(ctx, q, buckets); err != nil {
+	if p.Blends() {
+		if err := in.blend().RefreshRollupsTx(ctx, q, buckets); err != nil {
 			return fmt.Errorf("refresh blended rollups: %w", err)
 		}
 	}
 	if err := rates.RefreshSummaries(ctx, q, codes, p.Key); err != nil {
 		return err
 	}
-	if !p.Blends() || in.Blend == nil {
+	if !p.Blends() {
 		return nil
 	}
 	// A late arrival at date d joins the carry-forward contributor set of anchors through d + LookbackDays, so those
 	// stored blends change too. Inside the transaction: the write lock serialises concurrent backfills' refreshes, and
 	// a failed refresh rolls back the insert so the next fetch re-ingests and retries.
 	first, last := slices.MinFunc(dates, time.Time.Compare), slices.MaxFunc(dates, time.Time.Compare)
-	if err := in.Blend.RefreshTx(ctx, q, first, last.AddDate(0, 0, rates.LookbackDays)); err != nil {
+	if err := in.blend().RefreshTx(ctx, q, first, last.AddDate(0, 0, rates.LookbackDays)); err != nil {
 		return fmt.Errorf("refresh blend: %w", err)
 	}
 	return nil
