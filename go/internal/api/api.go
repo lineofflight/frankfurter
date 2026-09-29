@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"path"
 	"strconv"
 	"strings"
 	"time"
@@ -50,13 +51,33 @@ func (s *Server) Handler() http.Handler {
 		register(s, mux)
 	}
 
-	h := staticRoute(mux)
+	h := staticRoute(s.rawPaths(mux))
 	h = cors(h)
 	h = noindex(h)
 	h = noStoreOnError(h)
 	h = requestTimeout(h, s.timeout())
 	h = v1Deprecation(h)
 	return h
+}
+
+// rawPaths routes a path ServeMux would clean and redirect (/v1//latest) the way Roda, which matches the raw path,
+// does: v2 routes it itself, and nothing else matches, so it is a 404.
+func (s *Server) rawPaths(mux http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		p := r.URL.Path
+		if clean := path.Clean(p); p == "" || clean == p || clean != "/" && clean+"/" == p {
+			mux.ServeHTTP(w, r)
+			return
+		}
+		switch {
+		case strings.HasPrefix(p, "/v2/"):
+			s.v2(w, r)
+		case strings.HasPrefix(p, "/v1/"):
+			v1Raw(v1Unmatched)(w, r)
+		default:
+			notFound(w, contentTypeJSON)
+		}
+	})
 }
 
 func (s *Server) today() time.Time {

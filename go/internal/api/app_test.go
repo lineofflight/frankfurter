@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
@@ -226,6 +227,25 @@ func TestErrorResponsesAreNotCached(t *testing.T) {
 		}
 		if got := a.header("Cache-Control"); got != "no-store" {
 			t.Errorf("%s: Cache-Control = %q", c.path, got)
+		}
+	}
+}
+
+// Roda matches the raw path, so paths ServeMux would clean are routed rather than redirected (checked against the
+// Ruby app): an empty segment is captured in v2, and matches nothing elsewhere.
+func TestRoutesUncleanPathsAsRoda(t *testing.T) {
+	a := newTestApp(t)
+	for path, status := range map[string]int{
+		"/v1//latest":          404,
+		"/v1/./latest":         404,
+		"/v2/rate//USD":        422,
+		"/v2/providers//rates": 404,
+		"/v2//rates":           404,
+		"//":                   404,
+	} {
+		a.get(path)
+		if a.res.Code != status || !strings.HasPrefix(a.header("Content-Type"), "application/json") {
+			t.Errorf("%s: %d %s, want %d JSON", path, a.res.Code, a.header("Content-Type"), status)
 		}
 	}
 }
