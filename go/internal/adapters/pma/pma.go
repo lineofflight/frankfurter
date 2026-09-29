@@ -17,20 +17,17 @@
 package pma
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
-	"errors"
 	"fmt"
-	"io"
-	"io/fs"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -114,71 +111,31 @@ func (a *Adapter) export(ctx context.Context, start, end time.Time) ([]byte, err
 	return resp.Body, nil
 }
 
-type cell struct {
-	Ref    string   `xml:"r,attr"`
-	Type   string   `xml:"t,attr"`
-	Value  *string  `xml:"v"`
-	Inline []string `xml:"is>t"`
-}
-
-type worksheet struct {
-	SheetData *struct {
-		Rows []struct {
-			Cells []cell `xml:"c"`
-		} `xml:"row"`
-	} `xml:"sheetData"`
-}
-
-type sst struct {
-	Items []struct {
-		T []string `xml:"t"`
-	} `xml:"si"`
-}
-
-var trailingDigits = regexp.MustCompile(`\d+$`)
-
 func parse(data []byte) ([]adapter.Rate, error) {
-	strs, sheet, err := readWorkbook(data)
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
+	if err != nil {
+		return nil, fmt.Errorf("export workbook: %w", err)
+	}
+	defer f.Close()
+	rows, err := f.GetRows(f.GetSheetName(0))
 	if err != nil {
 		return nil, err
 	}
-	var ws worksheet
-	if err := xml.Unmarshal(sheet, &ws); err != nil {
-		return nil, fmt.Errorf("sheet1.xml: %w", err)
-	}
-	if ws.SheetData == nil {
-		return nil, errors.New("sheetData missing from export workbook")
-	}
 
 	var rates []adapter.Rate
-	for _, row := range ws.SheetData.Rows {
-		cells := map[string]string{}
-		for _, c := range row.Cells {
-			cells[trailingDigits.ReplaceAllString(c.Ref, "")] = c.value(strs)
-		}
-		if r, ok := parseRow(cells["A"], cells["B"], cells["E"]); ok {
+	for _, row := range rows {
+		if r, ok := parseRow(col(row, 0), col(row, 1), col(row, 4)); ok {
 			rates = append(rates, r)
 		}
 	}
 	return rates, nil
 }
 
-func (c cell) value(strs []string) string {
-	var v string
-	if c.Value != nil {
-		v = *c.Value
+func col(row []string, i int) string {
+	if i < len(row) {
+		return row[i]
 	}
-	switch c.Type {
-	case "s":
-		i, _ := strconv.Atoi(strings.TrimSpace(v))
-		if i >= 0 && i < len(strs) {
-			return strs[i]
-		}
-		return ""
-	case "inlineStr":
-		return strings.Join(c.Inline, "")
-	}
-	return v
+	return ""
 }
 
 func parseRow(dateText, pairText, midText string) (adapter.Rate, bool) {
@@ -211,46 +168,4 @@ func parseDate(text string) (time.Time, bool) {
 		return time.Time{}, false
 	}
 	return date, true
-}
-
-func readWorkbook(data []byte) ([]string, []byte, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
-	if err != nil {
-		return nil, nil, err
-	}
-	sheet, err := readEntry(zr, "xl/worksheets/sheet1.xml")
-	if err != nil {
-		return nil, nil, err
-	}
-	if sheet == nil {
-		return nil, nil, errors.New("sheet1.xml missing from export workbook")
-	}
-	stringsXML, err := readEntry(zr, "xl/sharedStrings.xml")
-	if err != nil {
-		return nil, nil, err
-	}
-	if stringsXML == nil {
-		return nil, nil, errors.New("sharedStrings.xml missing from export workbook")
-	}
-	var s sst
-	if err := xml.Unmarshal(stringsXML, &s); err != nil {
-		return nil, nil, fmt.Errorf("sharedStrings.xml: %w", err)
-	}
-	strs := make([]string, len(s.Items))
-	for i, si := range s.Items {
-		strs[i] = strings.Join(si.T, "")
-	}
-	return strs, sheet, nil
-}
-
-func readEntry(zr *zip.Reader, name string) ([]byte, error) {
-	f, err := zr.Open(name)
-	if errors.Is(err, fs.ErrNotExist) {
-		return nil, nil
-	}
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-	return io.ReadAll(f)
 }

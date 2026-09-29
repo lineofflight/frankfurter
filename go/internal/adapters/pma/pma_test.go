@@ -1,14 +1,13 @@
 package pma
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"fmt"
 	"slices"
-	"strings"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -157,49 +156,75 @@ func TestParseSkipsUnparseableRows(t *testing.T) {
 	}
 }
 
-// Ruby's messages start with "PMA:"; Go leaves the provider prefix to the caller (PORTING.md), so the missing-sheet
-// case asserts on the part name instead.
+// A session hiccup can serve an HTML page or nothing at all instead of the workbook.
 func TestParseErrors(t *testing.T) {
-	tests := []struct {
-		name    string
-		entries map[string]string
-		want    string
-	}{
-		{"no sheetData", map[string]string{
-			"xl/worksheets/sheet1.xml": `<worksheet><dimension ref="A1"/></worksheet>`,
-			"xl/sharedStrings.xml":     `<sst></sst>`,
-		}, "sheetData"},
-		{"shared strings missing", map[string]string{
-			"xl/worksheets/sheet1.xml": `<worksheet><sheetData/></worksheet>`,
-		}, "sharedStrings"},
-		{"no sheet", map[string]string{"[Content_Types].xml": ""}, "sheet1.xml"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			_, err := parse(zipOf(t, tt.entries))
-			if err == nil || !strings.Contains(err.Error(), tt.want) {
-				t.Errorf("got error %v, want one mentioning %q", err, tt.want)
+	for name, data := range map[string][]byte{
+		"html error page": []byte("<!DOCTYPE html><html><body>Session expired</body></html>"),
+		"empty body":      nil,
+	} {
+		t.Run(name, func(t *testing.T) {
+			if _, err := parse(data); err == nil {
+				t.Error("got no error")
 			}
 		})
 	}
 }
 
-func TestParseInlineAndPlainCells(t *testing.T) {
-	sheet := `<worksheet><sheetData><row r="2">` +
-		`<c r="A2" t="inlineStr"><is><t>2026/09/01</t></is></c>` +
-		`<c r="B2" t="s"><v>0</v></c>` +
-		`<c r="E2"><v>2.9924</v></c>` +
-		`</row></sheetData></worksheet>`
-	rates, err := parse(zipOf(t, map[string]string{
-		"xl/worksheets/sheet1.xml": sheet,
-		"xl/sharedStrings.xml":     `<sst><si><t>USD/ILS</t></si></sst>`,
-	}))
+func TestParseEmptyWorkbook(t *testing.T) {
+	rates, err := parse(workbook(t, nil))
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 9, 1)) || rates[0].Base != "USD" ||
-		rates[0].Quote != "ILS" || rates[0].Rate != 2.9924 {
+	if len(rates) != 0 {
+		t.Errorf("got %+v, want none", rates)
+	}
+}
+
+// The export uses shared strings throughout, but numeric and rich-text cells read the same.
+func TestParseNumericAndRichTextCells(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	sh := f.GetSheetName(0)
+	if err := f.SetSheetRow(sh, "A2", &[]any{"2026/09/01", "USD/ILS", 2.9903, 2.9944, 2.9924}); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.SetCellStr(sh, "A3", "2026/09/01"); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.SetCellRichText(sh, "B3", []excelize.RichTextRun{{Text: "GBP/"}, {Text: "USD"}}); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.SetCellValue(sh, "E3", 1.3547); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(write(t, f))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 2 || !rates[0].Date.Equal(adapter.Date(2026, 9, 1)) || rates[0].Base != "USD" ||
+		rates[0].Rate != 2.9924 || rates[1].Base != "GBP" || rates[1].Quote != "USD" || rates[1].Rate != 1.3547 {
 		t.Errorf("got %+v", rates)
+	}
+}
+
+func TestParseReadsFirstSheetOnly(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	if err := f.SetSheetRow("Sheet1", "A1", &[]any{"2026/09/01", "USD/ILS", "", "", "2.9924"}); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := f.NewSheet("Other"); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.SetSheetRow("Other", "A1", &[]any{"2026/09/01", "EUR/USD", "", "", "1.1"}); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(write(t, f))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := pairs(rates); !slices.Equal(got, [][2]string{{"USD", "ILS"}}) {
+		t.Errorf("got %v", got)
 	}
 }
 
@@ -213,56 +238,30 @@ func TestGolden(t *testing.T) {
 	g.Check(t, rates)
 }
 
-// workbook builds a workbook shaped like the export: every cell a shared string.
+// workbook builds a workbook shaped like the export: every cell a string, data from row 2.
 func workbook(t *testing.T, rows [][]string) []byte {
 	t.Helper()
-	var strs []string
-	for _, row := range rows {
-		for _, v := range row {
-			if !slices.Contains(strs, v) {
-				strs = append(strs, v)
+	f := excelize.NewFile()
+	defer f.Close()
+	sh := f.GetSheetName(0)
+	for n, row := range rows {
+		for i, v := range row {
+			ref, err := excelize.CoordinatesToCellName(i+1, n+2)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := f.SetCellStr(sh, ref, v); err != nil {
+				t.Fatal(err)
 			}
 		}
 	}
-	var sheetRows strings.Builder
-	for n, row := range rows {
-		r := n + 2
-		fmt.Fprintf(&sheetRows, `<row r="%d">`, r)
-		for i, v := range row {
-			fmt.Fprintf(&sheetRows, `<c r="%c%d" t="s"><v>%d</v></c>`, 'A'+i, r, slices.Index(strs, v))
-		}
-		sheetRows.WriteString(`</row>`)
-	}
-	var si strings.Builder
-	for _, s := range strs {
-		fmt.Fprintf(&si, "<si><t>%s</t></si>", s)
-	}
-	return zipOf(t, map[string]string{
-		"xl/worksheets/sheet1.xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-  <sheetData>` + sheetRows.String() + `</sheetData>
-</worksheet>`,
-		"xl/sharedStrings.xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
-  ` + si.String() + `
-</sst>`,
-	})
+	return write(t, f)
 }
 
-func zipOf(t *testing.T, entries map[string]string) []byte {
+func write(t *testing.T, f *excelize.File) []byte {
 	t.Helper()
 	var buf bytes.Buffer
-	zw := zip.NewWriter(&buf)
-	for name, content := range entries {
-		w, err := zw.Create(name)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if _, err := w.Write([]byte(content)); err != nil {
-			t.Fatal(err)
-		}
-	}
-	if err := zw.Close(); err != nil {
+	if _, err := f.WriteTo(&buf); err != nil {
 		t.Fatal(err)
 	}
 	return buf.Bytes()
