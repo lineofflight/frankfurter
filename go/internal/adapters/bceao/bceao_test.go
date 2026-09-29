@@ -89,3 +89,19 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func TestParseSkipsZeroAndUnknownRows(t *testing.T) {
+	html := "<table><tbody>\n" +
+		"<tr><td>Euro</td><td>0,0000</td></tr>\n" +
+		"<tr><td>Peso mexicain</td><td>32,1000</td></tr>\n" +
+		"<tr><td>Euro </td><td>655,9570</td></tr>\n" +
+		"<tr><td> Livre sterling\n</td><td>780.12</td></tr>\n" +
+		"</tbody></table>"
+	rates, err := parse(html, adapter.Date(2026, 3, 20))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "GBP" || rates[0].Rate != 780.12 {
+		t.Errorf("got %+v, want only GBP 780.12", rates)
+	}
+}

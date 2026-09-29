@@ -118,7 +118,8 @@ func parse(html string, date time.Time) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, m := range rowPattern.FindAllStringSubmatch(html, -1) {
-		iso, ok := currencies[strings.TrimSpace(m[1])]
+		// Trim what Ruby's String#strip trims: ASCII whitespace and NUL, not U+00A0.
+		iso, ok := currencies[strings.Trim(m[1], " \t\n\v\f\r\x00")]
 		if !ok {
 			continue
 		}
