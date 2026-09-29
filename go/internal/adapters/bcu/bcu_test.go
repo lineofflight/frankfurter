@@ -157,6 +157,45 @@ func TestParseSkipsUYUSelfReference(t *testing.T) {
 	}
 }
 
+// Not in the Ruby spec: Ox gives an empty element nil text, so Ruby skips the row instead of failing on Float("").
+func TestParseSkipsBlankFields(t *testing.T) {
+	rates := mustParse(t, soap(
+		datoXML("2225", "DLS. USA BILLETE", "", "39.5"),
+		datoXML("1111", "EURO", "42.2", " "),
+		datoXML("", "BLANK", "1.0", "1.5"),
+		datoXML("1000", "REAL", "7.7", "7.8"),
+	))
+	if len(rates) != 1 || rates[0].Base != "BRL" {
+		t.Fatalf("got %+v, want one BRL rate", rates)
+	}
+}
+
+func TestParseZeroValueSkipsRow(t *testing.T) {
+	if rates := mustParse(t, soap(datoXML("2225", "DLS. USA BILLETE", "0", "39.5"))); len(rates) != 0 {
+		t.Errorf("got %d rates, want 0", len(rates))
+	}
+}
+
+func TestParseInvalidValueErrors(t *testing.T) {
+	if _, err := parse([]byte(soap(datoXML("2225", "DLS. USA BILLETE", "abc", "39.5")))); err == nil {
+		t.Error("want error for unparseable TCC")
+	}
+}
+
+func TestSOAPRequest(t *testing.T) {
+	body := soapRequest("2225", adapter.Date(2026, 3, 27), adapter.Date(2026, 3, 31))
+	for _, want := range []string{
+		"<cot:item>2225</cot:item>",
+		"<cot:FechaDesde>2026-03-27</cot:FechaDesde>",
+		"<cot:FechaHasta>2026-03-31</cot:FechaHasta>",
+		"<cot:Grupo>0</cot:Grupo>",
+	} {
+		if !strings.Contains(body, want) {
+			t.Errorf("request body missing %s", want)
+		}
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))

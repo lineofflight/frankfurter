@@ -138,10 +138,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err := dec.DecodeElement(&d, &start); err != nil {
 			return nil, err
 		}
-		if d.Fecha == nil || d.Moneda == nil || d.TCC == nil || d.TCV == nil {
+		// Ox reads an empty element's text as nil, so Ruby skips blank fields rather than failing to parse them.
+		if blank(d.Fecha) || blank(d.Moneda) || blank(d.TCC) || blank(d.TCV) {
 			continue
 		}
-		base, ok := isoFor(*d.Moneda)
+		base, ok := isoFor(strings.TrimSpace(*d.Moneda))
 		if !ok || base == "UYU" {
 			continue
 		}
@@ -170,6 +171,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		})
 	}
 }
+
+func blank(s *string) bool { return s == nil || strings.TrimSpace(*s) == "" }
 
 func soapRequest(code string, start, end time.Time) string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
