@@ -1,0 +1,61 @@
+{
+  "adapter": "NBKR",
+  "cassette": "nbkr_historical",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "Provider::Adapters::NBKR.send(:remove_const, :CURRENCIES); Provider::Adapters::NBKR.const_set(:CURRENCIES, [{ id: 15, iso: \"USD\", nominal: 1 }, { id: 20, iso: \"EUR\", nominal: 1 }]); fetch(after: Date.new(2005, 6, 1), upto: Date.new(2005, 6, 30))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2005-06-04",
+      "quote": "KGS",
+      "rate": 50.3208
+    },
+    {
+      "base": "USD",
+      "date": "2005-06-04",
+      "quote": "KGS",
+      "rate": 40.9879
+    },
+    {
+      "base": "EUR",
+      "date": "2005-06-11",
+      "quote": "KGS",
+      "rate": 50.1624
+    },
+    {
+      "base": "USD",
+      "date": "2005-06-11",
+      "quote": "KGS",
+      "rate": 41.0511
+    },
+    {
+      "base": "EUR",
+      "date": "2005-06-18",
+      "quote": "KGS",
+      "rate": 49.8469
+    },
+    {
+      "base": "USD",
+      "date": "2005-06-18",
+      "quote": "KGS",
+      "rate": 41.0685
+    },
+    {
+      "base": "EUR",
+      "date": "2005-06-25",
+      "quote": "KGS",
+      "rate": 49.4425
+    },
+    {
+      "base": "USD",
+      "date": "2005-06-25",
+      "quote": "KGS",
+      "rate": 40.9614
+    }
+  ]
+}
