@@ -1,0 +1,133 @@
+{
+  "adapter": "BOJ",
+  "cassette": "boj",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 15))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "USD",
+      "rate": 1.1716
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "JPY",
+      "rate": 156.99
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "USD",
+      "rate": 1.1644
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "JPY",
+      "rate": 157.42
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "USD",
+      "rate": 1.1616
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "JPY",
+      "rate": 157.46
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "USD",
+      "rate": 1.1605
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "JPY",
+      "rate": 157.26
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "USD",
+      "rate": 1.1615
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "JPY",
+      "rate": 157.54
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-09",
+      "quote": "USD",
+      "rate": 1.1564
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-09",
+      "quote": "JPY",
+      "rate": 158.46
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-10",
+      "quote": "USD",
+      "rate": 1.166
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-10",
+      "quote": "JPY",
+      "rate": 157.32
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-11",
+      "quote": "USD",
+      "rate": 1.1618
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-11",
+      "quote": "JPY",
+      "rate": 158.23
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-12",
+      "quote": "USD",
+      "rate": 1.1552
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-12",
+      "quote": "JPY",
+      "rate": 158.8
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-13",
+      "quote": "USD",
+      "rate": 1.1458
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-13",
+      "quote": "JPY",
+      "rate": 159.43
+    }
+  ]
+}
