@@ -127,8 +127,8 @@ Partly ported, the rest needs the API step's `Versions::V2::RateQuery`:
   divergences" (BlendParity's explain_divergence) and "blends range batches in the pivot frame" (RateQuery#derive) are
   not ported.
 - blend_parity_spec and lib/blend_parity.rb (the `blend:parity` task) are not ported: BlendParity replays request
-  shapes through RateQuery's table and live paths. The API step should port it on top of `Read`, `RefreshDaily` and
-  `Blend`.
+  shapes through RateQuery's table and live paths. The api_v2 step ported it (`ratequery.Parity`, `frankfurter
+  blend-parity`).
 
 ## Deviations
 

@@ -159,15 +159,15 @@ versions/v1/roundable_spec (against `rates.Round`).
 - A success response whose body is first written after the deadline becomes a 500 JSON with `no-store` (Puma answers
   a raising body with a bare 500). JSON floats print shortest (`1` where Oj writes `1.0`); `Roundable` values over
   5000 are floats (Ruby returns Integers).
-- `net/http`'s ServeMux cleans paths before matching (`/v1//latest` redirects with 301; Roda answers 404). Escaped
-  paths do follow Roda: the noindex and deprecation middleware read `URL.EscapedPath()`, and `v1Raw` keeps a path
+- Paths ServeMux would clean and redirect (`/v1//latest`) are routed as Roda routes them (`Server.rawPaths`, added
+  at integration): 404 outside v2, v2's own router inside it. Escaped paths follow Roda too: the noindex and deprecation middleware read `URL.EscapedPath()`, and `v1Raw` keeps a path
   with a %-escape off the v1 routes (`/v1/%6Catest` is 404, as in Ruby). v2 routes need the same care.
 - Static files carry no Last-Modified (embedded files have no mtime); ranges and conditional GETs still work.
 - `Cache` treats empty credentials as unconfigured (Ruby checks only for nil, so an empty env var would try to purge).
 
 ## For the integrator
 
-Wire the cache (the provider step left the hooks nil): in `cmd/backfill`, `c := cache.FromEnv()`, set
+Done at integration (`cmd/frankfurter`). Wire the cache (the provider step left the hooks nil): in `cmd/backfill`, `c := cache.FromEnv()`, set
 `provider.Ingester{..., Cache: c}`, and call `c.FlushPending(ctx)` after `BackfillTask` (Ruby's
 `Cache.purge_pending(ignore_window: true)`); in `cmd/schedule`, pass the same kind of instance as `schedule.Deps.Cache`
 and to the ingester. The blend and rollup tasks (`blend.RebuildAll` and friends) leave `Cache.purge` to their callers:

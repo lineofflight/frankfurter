@@ -48,6 +48,7 @@ Rake and Procfile names work as aliases. Logging is `applog.Setup()` (slog text 
 | `rollups-rebuild [provider]` (`rollups:rebuild`) | `rollups:rebuild[provider]` | `blend.RebuildProviderRollups`, then `Cache.Purge` even on error. |
 | `consensus [year]` | `consensus[year]` | `blend.ScanConsensus` / `ScanYearConsensus`. |
 | `consensus-recent` (`consensus:recent`) | consensus:recent | `blend.ScanRecentConsensus`. |
+| `blend-parity [-seed N] [samples]` (`blend:parity`) | `blend:parity[samples]` | `ratequery.Parity` (200 samples, seed 42); refuses while `blended_rates` is empty, prints the report, exits 1 unless it passed. Added at integration. |
 | `purge-invalid` (`db:purge_invalid`) | db:purge_invalid | `rates.ProviderLeads` + `blend.PurgeInvalid`; purges the CDN when totals are non-zero, even if a rebuild failed. |
 | `purge-cache` (`cache:purge`) | cache:purge | `Cache.Purge`. |
 | `healthcheck` | Dockerfile `curl -f --max-time 9 localhost:$PORT` | GET `/` on PORT; exit 1 on error or status >= 400. |
@@ -77,7 +78,6 @@ the image itself is unbuilt; the same `go build` line cross-compiles to a static
 
 ## Not ported
 
-- `blend:parity` (lib/blend_parity.rb): needs the V2 RateQuery; listed as an API gap in core-blend.md.
 - `bin/console` (IRB): no Go counterpart; use `sqlite3` on the database.
 - `rake default`, `rake spec`, `rake rubocop` and the custom cops in `spec/rubocop`: Ruby lint and test tooling,
   intentionally not ported. Go's equivalents are `gofmt`, `go vet` and `go test`.

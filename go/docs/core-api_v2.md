@@ -107,10 +107,6 @@ seven v2 cases. No `t.Skip`.
 
 ## Deviations
 
-- ServeMux cleans paths before any handler runs: `/v2/rate//USD` and `/v2/providers//rates` get a redirect where Roda
-  answers 422 and 404. The router itself follows Roda (an empty segment before a slash is captured;
-  `TestV2CapturesEmptySegmentBeforeSlash`), so only the mux stands in the way; those two requests are not in the
-  corpus.
 - Streaming buffers 4 KB before writing through, and a failure after the first record aborts the connection
   (`http.ErrAbortHandler`), as Puma does when a body raises.
 - Error messages keep Ruby's wording except for internal errors (Ruby's exception text); unknown parameters are
@@ -119,9 +115,11 @@ seven v2 cases. No `t.Skip`.
   but builds the time.Time as a Gregorian date; no rates exist then, so only validity is observable.
 - Provider lookups (`Provider[key]`) query the database per request; Ruby's static cache is not needed.
 
-## For the integrator
+## For the integrator (done)
 
-- `blend:parity` has no binary yet (the ops step owns `cmd/`): it is `ratequery.Parity(ctx, conn, samples, seed,
+- `frankfurter blend-parity [-seed N] [samples]` (alias `blend:parity`) runs `ratequery.Parity(ctx, conn, samples, seed,
   rates.Today())`, printing `report.String()` and failing unless `report.Passed()`; the Ruby task refuses to run while
   `blended_rates` is empty (default samples 200, seed 42).
 - `cmd/frankfurter`'s server needs nothing new: v2 registers itself when `internal/api` is imported.
+- `/v2/rate//USD` and `/v2/providers//rates` now answer 422 and 404 through the whole app, as in Ruby
+  (`TestRoutesUncleanPathsAsRoda`).
