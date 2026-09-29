@@ -2,7 +2,10 @@ package cbllr
 
 import (
 	"context"
+	"io"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
 	"time"
 
@@ -188,4 +191,78 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type pageServer struct {
+	pages     map[string]string
+	requested []string
+}
+
+func (s *pageServer) RoundTrip(req *http.Request) (*http.Response, error) {
+	page := req.URL.Query().Get("page")
+	s.requested = append(s.requested, page)
+	return &http.Response{
+		StatusCode: http.StatusOK,
+		Header:     http.Header{"Content-Type": {"text/html"}},
+		Body:       io.NopCloser(strings.NewReader(s.pages[page])),
+		Request:    req,
+	}, nil
+}
+
+func table(rows ...string) string {
+	return `<div class="view-content"><table>` + strings.Join(rows, "") + `</table></div>`
+}
+
+func row(date, buy, sell string) string {
+	return `<tr><td class="views-field-field-content-post-date"><time datetime="` + date + `T12:00:00Z"></time></td>` +
+		`<td class="views-field-field-buying-us">L$` + buy + `/US$1.00</td>` +
+		`<td class="views-field-field-selling-us">L$` + sell + `/US$1.00</td></tr>`
+}
+
+// Pages walk newest first until one reaches back to after; a date repeated across pages keeps the newer page's row.
+func TestFetchPaginatesAndDedupes(t *testing.T) {
+	srv := &pageServer{pages: map[string]string{
+		"":  table(row("2026-05-21", "182", "184"), row("2026-05-20", "181", "183")),
+		"1": table(row("2026-05-20", "170", "172"), row("2026-05-18", "180", "182")),
+		"2": table(row("2026-05-15", "179", "181")),
+	}}
+	a := New(&http.Client{Transport: srv})
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 18), adapter.Date(2026, 5, 22))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Equal(srv.requested, []string{"", "1"}) {
+		t.Errorf("pages requested = %q, want [\"\" \"1\"]", srv.requested)
+	}
+	if len(rates) != 2 {
+		t.Fatalf("len = %d, want 2: %v", len(rates), rates)
+	}
+	if !rates[0].Date.Equal(adapter.Date(2026, 5, 20)) || rates[0].Rate != 182 {
+		t.Errorf("first = %v %v, want 2026-05-20 182", rates[0].Date, rates[0].Rate)
+	}
+	if !rates[1].Date.Equal(adapter.Date(2026, 5, 21)) || rates[1].Rate != 183 {
+		t.Errorf("second = %v %v, want 2026-05-21 183", rates[1].Date, rates[1].Rate)
+	}
+}
+
+func TestFetchStopsOnEmptyPage(t *testing.T) {
+	srv := &pageServer{pages: map[string]string{"": table(row("2026-05-21", "182", "184"))}}
+	a := New(&http.Client{Transport: srv})
+	rates, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 5, 22))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Equal(srv.requested, []string{"", "1"}) {
+		t.Errorf("pages requested = %q, want [\"\" \"1\"]", srv.requested)
+	}
+	if len(rates) != 1 {
+		t.Errorf("len = %d, want 1", len(rates))
+	}
+}
+
+func TestParseErrorsOnBadDate(t *testing.T) {
+	html := strings.Replace(table(row("2026-05-21", "182", "184")), "2026-05-21T12:00:00Z", "soon", 1)
+	if _, err := parse([]byte(html)); err == nil {
+		t.Error("want error for unparseable date")
+	}
 }
