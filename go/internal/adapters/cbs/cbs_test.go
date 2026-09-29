@@ -1,6 +1,8 @@
 package cbs
 
 import (
+	"archive/zip"
+	"bytes"
 	"context"
 	"slices"
 	"testing"
@@ -168,4 +170,91 @@ func TestGoldenArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+// workbook builds a minimal XLSX from shared-string items and sheet row XML.
+func workbook(t *testing.T, strs string, sheets map[string]string) []byte {
+	t.Helper()
+	files := map[string]string{}
+	if strs != "" {
+		files["xl/sharedStrings.xml"] = `<?xml version="1.0"?><sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">` + strs + `</sst>`
+	}
+	for name, rows := range sheets {
+		files[name] = `<?xml version="1.0"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>` + rows + `</sheetData></worksheet>`
+	}
+	var buf bytes.Buffer
+	zw := zip.NewWriter(&buf)
+	for name, body := range files {
+		w, err := zw.Create(name)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := w.Write([]byte(body)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := zw.Close(); err != nil {
+		t.Fatal(err)
+	}
+	return buf.Bytes()
+}
+
+func TestParseSections(t *testing.T) {
+	// 0 MAY, 1 DATE, 2 TALA/USD, 3 tala/euro, 4 June, 5 OTHER, 6 n/a
+	strs := `<si><t>MAY</t></si><si><t>DATE</t></si><si><t>TALA/USD</t></si><si><t>tala/euro</t></si>` +
+		`<si><t>June</t></si><si><t>OTHER</t></si><si><t>n/a</t></si>`
+	sheet := `<row r="1"><c r="B1" t="s"><v>0</v></c></row>` +
+		`<row r="2"><c r="B2" t="s"><v>1</v></c><c r="C2" t="s"><v>2</v></c><c r="D2" t="s"><v>3</v></c><c r="E2" t="s"><v>5</v></c></row>` +
+		// USD and EUR are kept; the OTHER column is unmapped.
+		`<row r="3"><c r="B3"><v>46143</v></c><c r="C3"><v>0.36847</v></c><c r="D3"><v>0.315</v></c><c r="E3"><v>9</v></c></row>` +
+		// Zero, negative, blank and string rates are dropped.
+		`<row r="4"><c r="B4"><v>46144</v></c><c r="C4"><v>0</v></c><c r="D4"><v>-1</v></c></row>` +
+		`<row r="5"><c r="B5"><v>46145</v></c><c r="C5"><v> </v></c><c r="D5" t="s"><v>6</v></c><c r="F5"><v>1</v></c></row>` +
+		// Out-of-range serials and string labels are not dates.
+		`<row r="6"><c r="B6"><v>30000</v></c><c r="C6"><v>0.4</v></c></row>` +
+		`<row r="7"><c r="B7" t="s"><v>5</v></c><c r="C7"><v>0.4</v></c></row>` +
+		// A month banner resets the header map, so the next row has no columns.
+		`<row r="8"><c r="B8" t="s"><v>4</v></c></row>` +
+		`<row r="9"><c r="B9"><v>46146.5</v></c><c r="C9"><v>0.4</v></c></row>` +
+		`<row r="10"><c r="B10" t="s"><v>1</v></c><c r="C10" t="s"><v>2</v></c></row>` +
+		// Fractional serials truncate to the day.
+		`<row r="11"><c r="B11"><v>46147.75</v></c><c r="C11"><v>0.37</v></c></row>`
+	rates, err := parse(workbook(t, strs, map[string]string{"xl/worksheets/sheet1.xml": sheet}))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{
+		{Date: adapter.Date(2026, 5, 1), Base: "WST", Quote: "USD", Rate: 0.36847},
+		{Date: adapter.Date(2026, 5, 1), Base: "WST", Quote: "EUR", Rate: 0.315},
+		{Date: adapter.Date(2026, 5, 5), Base: "WST", Quote: "USD", Rate: 0.37},
+	}
+	if !slices.Equal(rates, want) {
+		t.Errorf("parse = %v, want %v", rates, want)
+	}
+}
+
+func TestParseSheetsInNameOrder(t *testing.T) {
+	strs := `<si><t>DATE</t></si><si><t>TALA/USD</t></si>`
+	sheet := func(serial, rate string) string {
+		return `<row r="1"><c r="B1" t="s"><v>0</v></c><c r="C1" t="s"><v>1</v></c></row>` +
+			`<row r="2"><c r="B2"><v>` + serial + `</v></c><c r="C2"><v>` + rate + `</v></c></row>`
+	}
+	rates, err := parse(workbook(t, strs, map[string]string{
+		"xl/worksheets/sheet2.xml":  sheet("46143", "0.2"),
+		"xl/worksheets/sheet10.xml": sheet("46144", "0.3"),
+		"xl/worksheets/other.xml":   sheet("46145", "0.4"),
+	}))
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := uniq(rates, func(r adapter.Rate) float64 { return r.Rate })
+	if !slices.Equal(got, []float64{0.3, 0.2}) {
+		t.Errorf("rates = %v, want [0.3 0.2]", got)
+	}
+}
+
+func TestParseErrorsWithoutSharedStrings(t *testing.T) {
+	if _, err := parse(workbook(t, "", map[string]string{"xl/worksheets/sheet1.xml": ""})); err == nil {
+		t.Error("expected an error")
+	}
 }
