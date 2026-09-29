@@ -5,6 +5,7 @@ import (
 	"io"
 	"math"
 	"net/http"
+	"slices"
 	"strings"
 	"testing"
 
@@ -85,13 +86,16 @@ func TestParseGoldNormalizesToTroyOunce(t *testing.T) {
 	}
 }
 
-// notFound answers every request with a 404, as the Ruby spec's WebMock stub does.
-type notFound struct{ hosts []string }
+// stub answers every request with status and an empty body, recording the URLs, as the Ruby spec's WebMock stub does.
+type stub struct {
+	status int
+	urls   []string
+}
 
-func (n *notFound) RoundTrip(req *http.Request) (*http.Response, error) {
-	n.hosts = append(n.hosts, req.URL.Host)
+func (s *stub) RoundTrip(req *http.Request) (*http.Response, error) {
+	s.urls = append(s.urls, req.URL.String())
 	return &http.Response{
-		StatusCode: http.StatusNotFound,
+		StatusCode: s.status,
 		Header:     http.Header{},
 		Body:       io.NopCloser(strings.NewReader("")),
 		Request:    req,
@@ -99,7 +103,7 @@ func (n *notFound) RoundTrip(req *http.Request) (*http.Response, error) {
 }
 
 func TestFetchTreats404AsNoData(t *testing.T) {
-	rt := &notFound{}
+	rt := &stub{status: http.StatusNotFound}
 	a := New(&http.Client{Transport: rt})
 	today := a.Today()
 	rates, err := a.Fetch(context.Background(), today.AddDate(0, 0, -3), today)
@@ -109,13 +113,62 @@ func TestFetchTreats404AsNoData(t *testing.T) {
 	if len(rates) != 0 {
 		t.Errorf("got %d rates, want none", len(rates))
 	}
-	if len(rt.hosts) != 3 {
-		t.Errorf("made %d requests, want 3", len(rt.hosts))
+	if len(rt.urls) != 3 {
+		t.Errorf("made %d requests, want 3", len(rt.urls))
 	}
-	for _, h := range rt.hosts {
-		if h != "api.nbp.pl" {
-			t.Errorf("requested host %s, want api.nbp.pl", h)
+	for _, u := range rt.urls {
+		if !strings.HasPrefix(u, "https://api.nbp.pl/") {
+			t.Errorf("requested %s, want api.nbp.pl", u)
 		}
+	}
+}
+
+func TestFetchSplitsIntoNinetyThreeDayChunks(t *testing.T) {
+	rt := &stub{status: http.StatusNotFound}
+	a := New(&http.Client{Transport: rt})
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 1, 1), adapter.Date(2026, 6, 30)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{
+		"https://api.nbp.pl/api/exchangerates/tables/A/2026-01-01/2026-04-03/?format=json",
+		"https://api.nbp.pl/api/exchangerates/tables/B/2026-01-01/2026-04-03/?format=json",
+		"https://api.nbp.pl/api/cenyzlota/2026-01-01/2026-04-03/?format=json",
+		"https://api.nbp.pl/api/exchangerates/tables/A/2026-04-04/2026-06-30/?format=json",
+		"https://api.nbp.pl/api/exchangerates/tables/B/2026-04-04/2026-06-30/?format=json",
+		"https://api.nbp.pl/api/cenyzlota/2026-04-04/2026-06-30/?format=json",
+	}
+	if !slices.Equal(rt.urls, want) {
+		t.Errorf("requested\n%s\nwant\n%s", strings.Join(rt.urls, "\n"), strings.Join(want, "\n"))
+	}
+}
+
+func TestFetchFailsOnOtherErrors(t *testing.T) {
+	a := New(&http.Client{Transport: &stub{status: http.StatusForbidden}})
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 5)); err == nil {
+		t.Error("want an error for HTTP 403")
+	}
+}
+
+func TestParseSkipsNonISOAndZeroRates(t *testing.T) {
+	rates, err := parse([]byte(`[{"effectiveDate":"2026-03-02","rates":[
+		{"code":"USD","mid":3.9},{"code":"XDR1","mid":5.1},{"code":"eur","mid":4.2},
+		{"code":"ZWL","mid":0},{"code":"VES","mid":null},{"code":"CHF"}]}]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 3, 2), Base: "USD", Quote: "PLN", Rate: 3.9}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseGoldSkipsZeroAndMissingPrices(t *testing.T) {
+	rates, err := parseGold([]byte(`[{"data":"2026-04-24","cena":0},{"data":"2026-04-25","cena":null},{"data":"2026-04-26"}]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 0 {
+		t.Errorf("got %+v, want none", rates)
 	}
 }
 
