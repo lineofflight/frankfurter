@@ -187,6 +187,19 @@ func TestParseRaisesOnUnexpectedDocument(t *testing.T) {
 	}
 }
 
+func TestParseSkipsRowsWithoutNominal(t *testing.T) {
+	rates := mustParse(t, bulletin("08.09.2026", valute("USD", "n/a", "1.7")))
+	if got := bases(rates); !slices.Equal(got, []string{"XAU"}) {
+		t.Errorf("bases = %v, want [XAU]", got)
+	}
+}
+
+func TestFetchNeedsStartDate(t *testing.T) {
+	if _, err := New(nil).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 9, 8)); err == nil {
+		t.Error("want error")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file        string
