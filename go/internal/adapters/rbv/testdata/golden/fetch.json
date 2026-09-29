@@ -1,0 +1,157 @@
+{
+  "adapter": "RBV",
+  "cassette": "rbv",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 83.27
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 135.39
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 156.05
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 0.7315
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 68.21
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "VUV",
+      "rate": 116.18
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 82.9
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 135.39
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 156.27
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 0.7332
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 68.09
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "VUV",
+      "rate": 116.63
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 83.16
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 135.22
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 156.27
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 0.7322
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 68.23
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "VUV",
+      "rate": 116.31
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 83.16
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 135.14
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 156.19
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 0.7316
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 68.37
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-22",
+      "quote": "VUV",
+      "rate": 116.28
+    }
+  ]
+}
