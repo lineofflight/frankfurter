@@ -215,6 +215,45 @@ func TestParseIgnoresUnknownLabels(t *testing.T) {
 	}
 }
 
+// Ruby's strip and \s cover ASCII whitespace only, so NBSP padding makes the Ruby adapter drop a row.
+func TestParseNBSPMatchesRubyStrip(t *testing.T) {
+	rates := mustParse(t, "<div class=\"table-responsive\"><table class=\"table table-striped\"><tbody>"+
+		"<tr><td>USD$</td><td>1</td><td>1</td><td>63.74 </td><td>63.64</td></tr>"+
+		"<tr><td>EURO </td><td>1</td><td>1</td><td>73.5</td><td>73.0</td></tr>"+
+		"<tr><td>\v UAE \t DIRHAM\r\n</td><td>1</td><td>1</td><td>17.25</td><td>17.15</td></tr>"+
+		"</tbody></table></div>")
+	if len(rates) != 1 || rates[0].Base != "AED" {
+		t.Errorf("rates = %+v, want one AED row", rates)
+	}
+}
+
+func TestParseRejectsNonPositiveAndNonNumeric(t *testing.T) {
+	rates := mustParse(t, `<div class="table-responsive"><table class="table table-striped"><tbody>
+<tr><td>USD$</td><td>1</td><td>1</td><td>0</td><td>63.64</td></tr>
+<tr><td>EURO€</td><td>1</td><td>1</td><td>Infinity</td><td>73.0</td></tr>
+<tr><td>POUND£</td><td>1</td><td>1</td><td>-85.5</td><td>85.0</td></tr>
+<tr><td>SWISS₣</td><td>1</td><td>1</td><td>1,081.5</td><td>1,081.0</td></tr>
+</tbody></table></div>`)
+	if len(rates) != 1 || rates[0].Base != "CHF" || rates[0].Rate != 1081.25 {
+		t.Errorf("rates = %+v, want one CHF row at 1081.25", rates)
+	}
+}
+
+func TestParseMissingTable(t *testing.T) {
+	if _, err := parse([]byte(`<html><body>Maintenance</body></html>`), day); err == nil {
+		t.Error("want error for a page without the rates table")
+	}
+}
+
+func TestParseTomanPrices(t *testing.T) {
+	rates := mustParse(t, `<div class="table-responsive"><table class="table table-striped"><tbody>
+<tr><td>IRAN Toman</td><td>1</td><td>1</td><td>0.0008</td><td>0.0004</td></tr>
+</tbody></table></div>`)
+	if len(rates) != 1 || *rates[0].Bid != 0.00004 || *rates[0].Ask != 0.00008 {
+		t.Errorf("rates = %+v, want bid 0.00004 and ask 0.00008", rates)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))

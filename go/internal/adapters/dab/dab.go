@@ -18,9 +18,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -50,8 +52,14 @@ var labelMap = map[string]string{
 
 var (
 	symbols    = regexp.MustCompile(`[$€£₣¥]`)
-	whitespace = regexp.MustCompile(`\s+`)
+	whitespace = regexp.MustCompile(`[\t\n\v\f\r ]+`)
 )
+
+// rubyStrip trims what Ruby's String#strip does: ASCII whitespace and NUL, not Unicode spaces such as NBSP, so a
+// label or cell padded with one is dropped as the Ruby adapter drops it.
+func rubyStrip(s string) string {
+	return strings.Trim(s, " \t\n\v\f\r\x00")
+}
 
 func init() {
 	adapter.Register("DAB", func(c *http.Client) adapter.Adapter { return New(c) })
@@ -146,19 +154,19 @@ func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
 }
 
 func normalizeLabel(text string) string {
-	s := symbols.ReplaceAllString(strings.TrimSpace(text), "")
+	s := symbols.ReplaceAllString(rubyStrip(text), "")
 	s = whitespace.ReplaceAllString(s, " ")
-	return strings.ToUpper(strings.TrimSpace(s))
+	return strings.ToUpper(rubyStrip(s))
 }
 
 // parseDecimal returns a positive number, or false for blank, malformed or non-positive text.
 func parseDecimal(text string) (float64, bool) {
-	s := strings.ReplaceAll(strings.TrimSpace(text), ",", "")
+	s := strings.ReplaceAll(rubyStrip(text), ",", "")
 	if s == "" {
 		return 0, false
 	}
-	v, ok := adapter.ParseFloat(s)
-	if !ok || v <= 0 {
+	v, err := strconv.ParseFloat(s, 64)
+	if err != nil || math.IsNaN(v) || math.IsInf(v, 0) || v <= 0 {
 		return 0, false
 	}
 	return v, true
