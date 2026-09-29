@@ -47,6 +47,9 @@ func (a *Adapter) BackfillRange() int { return 365 }
 // Fetch implements adapter.Adapter. Like the Ruby adapter, it returns what the server sends for the requested range
 // without clipping it further.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
+	if after.IsZero() {
+		return nil, errors.New("start date required")
+	}
 	if upto.IsZero() {
 		upto = a.Today()
 	}
@@ -81,7 +84,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if r.ExchangeDate == nil || r.CC == nil || r.Rate == nil {
 			return nil, errors.New("record missing exchangedate, cc or rate")
 		}
-		date, err := time.Parse("02.01.2006", *r.ExchangeDate)
+		date, err := time.Parse("2.1.2006", *r.ExchangeDate)
 		if err != nil {
 			return nil, err
 		}
@@ -94,9 +97,14 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		}
 		units := 1.0
 		if r.Units != nil {
-			units = toF(r.Units)
+			if units, err = toF(r.Units); err != nil {
+				return nil, err
+			}
 		}
-		rate := toF(r.Rate)
+		rate, err := toF(r.Rate)
+		if err != nil {
+			return nil, err
+		}
 		if rate == 0 || units == 0 {
 			continue
 		}
@@ -110,21 +118,23 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	return rates, nil
 }
 
-// toF mirrors Ruby's to_f on a JSON value: numbers convert, numeric strings parse, anything else (null included) is 0.
-func toF(raw json.RawMessage) float64 {
+var numericPrefix = regexp.MustCompile(`\A\s*[+-]?(?:\d+(?:\.\d+)?|\.\d+)(?:[eE][+-]?\d+)?`)
+
+// toF mirrors Ruby's to_f on a JSON value: numbers convert, strings parse their leading number (0 if none), null is 0,
+// and anything else is an error, as to_f is undefined on it.
+func toF(raw json.RawMessage) (float64, error) {
 	var v any
 	if err := json.Unmarshal(raw, &v); err != nil {
-		return 0
+		return 0, err
 	}
 	switch v := v.(type) {
+	case nil:
+		return 0, nil
 	case float64:
-		return v
+		return v, nil
 	case string:
-		f, err := strconv.ParseFloat(strings.TrimSpace(v), 64)
-		if err != nil {
-			return 0
-		}
-		return f
+		f, _ := strconv.ParseFloat(strings.TrimSpace(numericPrefix.FindString(v)), 64)
+		return f, nil
 	}
-	return 0
+	return 0, fmt.Errorf("non-numeric value %s", raw)
 }

@@ -2,7 +2,10 @@ package nbu
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -73,4 +76,85 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequestsDateRange(t *testing.T) {
+	var got *http.Request
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		got = r
+		return &http.Response{StatusCode: 200, Header: http.Header{},
+			Body: io.NopCloser(strings.NewReader(`[]`)), Request: r}, nil
+	})}
+	a := New(client)
+	a.Now = func() time.Time { return time.Date(2026, 3, 16, 12, 0, 0, 0, time.UTC) }
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), time.Time{}); err != nil {
+		t.Fatal(err)
+	}
+	q := got.URL.Query()
+	if u := got.URL.Scheme + "://" + got.URL.Host + got.URL.Path; u != baseURL {
+		t.Errorf("url = %s, want %s", u, baseURL)
+	}
+	for k, want := range map[string]string{"start": "20260301", "end": "20260316", "sort": "exchangedate", "order": "asc"} {
+		if q.Get(k) != want {
+			t.Errorf("%s = %q, want %q", k, q.Get(k), want)
+		}
+	}
+	if _, ok := q["json"]; !ok {
+		t.Error("missing json param")
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 4)); err == nil {
+		t.Error("want error for zero after")
+	}
+}
+
+func TestParseSkipsAndScales(t *testing.T) {
+	rates, err := parse([]byte(`[
+		{"exchangedate": "07.03.2026", "cc": "USD", "rate": 41.5},
+		{"exchangedate": "09.03.2026", "cc": "XDR", "rate": 56.1},
+		{"exchangedate": "09.03.2026", "cc": "usd", "rate": 41.5},
+		{"exchangedate": "09.03.2026", "cc": "EUR", "rate": 0},
+		{"exchangedate": "09.03.2026", "cc": "GBP", "rate": null},
+		{"exchangedate": "09.03.2026", "cc": "CHF", "units": null, "rate": 47.2},
+		{"exchangedate": "09.03.2026", "cc": "PLN", "units": 0, "rate": 10.9},
+		{"exchangedate": "09.03.2026", "cc": "JPY", "units": 100, "rate": 27.8},
+		{"exchangedate": "9.3.2026", "cc": "CAD", "units": "1", "rate": "30.1abc"}
+	]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 3 {
+		t.Fatalf("got %+v, want XDR, JPY and CAD", rates)
+	}
+	want := []struct {
+		base string
+		rate float64
+	}{{"XDR", 56.1}, {"JPY", 0.278}, {"CAD", 30.1}}
+	for i, w := range want {
+		r := rates[i]
+		if r.Base != w.base || r.Quote != "UAH" || math.Abs(r.Rate-w.rate) > 1e-12 || !r.Date.Equal(adapter.Date(2026, 3, 9)) {
+			t.Errorf("rates[%d] = %+v, want %s %v UAH on 2026-03-09", i, r, w.base, w.rate)
+		}
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for _, body := range []string{
+		`{"exchangedate": "09.03.2026"}`,
+		`[{"cc": "USD", "rate": 41.5}]`,
+		`[{"exchangedate": "09.03.2026", "rate": 41.5}]`,
+		`[{"exchangedate": "09.03.2026", "cc": "USD"}]`,
+		`[{"exchangedate": "31.02.2026", "cc": "USD", "rate": 41.5}]`,
+		`[{"exchangedate": "09.03.2026", "cc": "USD", "rate": true}]`,
+	} {
+		if _, err := parse([]byte(body)); err == nil {
+			t.Errorf("parse(%s): want error", body)
+		}
+	}
 }
