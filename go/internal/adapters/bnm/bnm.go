@@ -95,15 +95,18 @@ func (a *Adapter) currencies(ctx context.Context) ([]string, error) {
 		return nil, err
 	}
 	var doc struct {
-		Data []struct {
+		Data *[]struct {
 			Code string `json:"currency_code"`
 		} `json:"data"`
 	}
 	if err := json.Unmarshal(body, &doc); err != nil {
 		return nil, err
 	}
-	codes := make([]string, len(doc.Data))
-	for i, item := range doc.Data {
+	if doc.Data == nil {
+		return nil, errors.New("bnm: currency list has no data")
+	}
+	codes := make([]string, len(*doc.Data))
+	for i, item := range *doc.Data {
 		codes[i] = item.Code
 	}
 	return codes, nil
@@ -137,19 +140,20 @@ func parseMonth(data []byte, code string, upto time.Time) (rates []adapter.Rate,
 	if cd.Unit != nil {
 		unit = *cd.Unit
 	}
-	var list []rate
+	// A month with one rate carries an object instead of a list. A missing or null rate fails, as in Ruby.
+	var list []*rate
 	if len(cd.Rate) > 0 && cd.Rate[0] == '[' {
 		if err := json.Unmarshal(cd.Rate, &list); err != nil {
 			return nil, false, err
 		}
 	} else {
-		var one rate
+		var one *rate
 		if len(cd.Rate) > 0 {
 			if err := json.Unmarshal(cd.Rate, &one); err != nil {
 				return nil, false, err
 			}
 		}
-		list = []rate{one}
+		list = []*rate{one}
 	}
 
 	base := code
@@ -157,6 +161,9 @@ func parseMonth(data []byte, code string, upto time.Time) (rates []adapter.Rate,
 		base = alias
 	}
 	for _, r := range list {
+		if r == nil {
+			return nil, false, fmt.Errorf("bnm: %s rate entry is missing", code)
+		}
 		if r.Mid == nil {
 			continue
 		}

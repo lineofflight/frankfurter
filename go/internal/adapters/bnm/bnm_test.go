@@ -112,6 +112,29 @@ func TestParseMonthSkipsEmptyData(t *testing.T) {
 	}
 }
 
+func TestParseMonthMissingRateFails(t *testing.T) {
+	for _, body := range []string{
+		`{"data":{"unit":1}}`,
+		`{"data":{"unit":1,"rate":null}}`,
+		`{"data":{"unit":1,"rate":[null]}}`,
+	} {
+		if _, _, err := parseMonth([]byte(body), "USD", adapter.Date(2026, 3, 31)); err == nil {
+			t.Errorf("%s: want an error", body)
+		}
+	}
+}
+
+func TestParseMonthSkipsMissingMiddleRate(t *testing.T) {
+	rates, ok, err := parseMonth([]byte(`{"data":{"unit":1,"rate":[{"date":"2026-03-02"},
+		{"date":"2026-03-03","middle_rate":4.1}]}}`), "USD", adapter.Date(2026, 3, 31))
+	if err != nil || !ok {
+		t.Fatal(ok, err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 3, 3)) {
+		t.Errorf("got %+v, want only 2026-03-03", rates)
+	}
+}
+
 func TestFetchRequiresAfter(t *testing.T) {
 	if _, err := New(nil).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 31)); err == nil {
 		t.Error("want an error without after")
