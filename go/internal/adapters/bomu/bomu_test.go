@@ -214,6 +214,36 @@ func TestParseSkipsIncompleteNonpositiveMalformed(t *testing.T) {
 	}
 }
 
+// Ruby's strip and Float leave a non-breaking space in place, so such a cell is not a number.
+func TestParseSkipsPriceWithNonBreakingSpace(t *testing.T) {
+	html := page(row(func(o *rowOpts) { o.buy = "28.9431&nbsp;" }), row(func(o *rowOpts) { o.sell = " 29.3634" }))
+
+	if rates := mustParse(t, html); len(rates) != 0 {
+		t.Errorf("got %+v, want none", rates)
+	}
+}
+
+func TestParseAcceptsVerticalTabInLabel(t *testing.T) {
+	if n := len(mustParse(t, page(row(func(o *rowOpts) { o.code = "USD\v1" })))); n != 1 {
+		t.Errorf("got %d rates, want 1", n)
+	}
+}
+
+// strptime's %d-%m-%Y takes unpadded days and months.
+func TestParseUnpaddedDate(t *testing.T) {
+	r := mustParse(t, page(row(func(o *rowOpts) { o.date = "3-7-2001" })))[0]
+
+	if !r.Date.Equal(adapter.Date(2001, 7, 3)) {
+		t.Errorf("date = %v", r.Date)
+	}
+}
+
+func TestParseRaisesOnBadDate(t *testing.T) {
+	if _, err := parse([]byte(page(row(func(o *rowOpts) { o.date = "2001-07-03" })))); err == nil {
+		t.Error("parse succeeded, want error")
+	}
+}
+
 func TestParseAcceptsEmptyFilteredView(t *testing.T) {
 	if rates := mustParse(t, `<div class="view-display-id-page"></div>`); len(rates) != 0 {
 		t.Errorf("got %+v, want none", rates)

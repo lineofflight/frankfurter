@@ -29,7 +29,7 @@ const (
 
 var (
 	coverageStart = adapter.Date(2001, 7, 3)
-	labelPattern  = regexp.MustCompile(`\A([A-Z]{3})\s+(\d+)\z`)
+	labelPattern  = regexp.MustCompile(`\A([A-Z]{3})[ \t\n\v\f\r]+([0-9]+)\z`)
 )
 
 func init() {
@@ -133,7 +133,15 @@ func parse(html []byte) ([]adapter.Rate, error) {
 }
 
 func parseRow(row *goquery.Selection) (adapter.Rate, bool, error) {
-	cell := func(class string) string { return strings.TrimSpace(row.Find(class).First().Text()) }
+	// Ruby's strip trims only ASCII whitespace, so a cell padded with a non-breaking space stays unparseable.
+	cell := func(class string) string { return strings.Trim(row.Find(class).First().Text(), " \t\n\v\f\r\x00") }
+	number := func(class string) (float64, bool) {
+		s := cell(class)
+		if strings.TrimSpace(s) != s {
+			return 0, false
+		}
+		return adapter.ParseFloat(s)
+	}
 
 	match := labelPattern.FindStringSubmatch(cell(".views-field-field-currency"))
 	if match == nil {
@@ -144,14 +152,15 @@ func parseRow(row *goquery.Selection) (adapter.Rate, bool, error) {
 		return adapter.Rate{}, false, nil
 	}
 
-	buy, okBuy := adapter.ParseFloat(cell(".views-field-php"))
-	sell, okSell := adapter.ParseFloat(cell(".views-field-php-3"))
+	buy, okBuy := number(".views-field-php")
+	sell, okSell := number(".views-field-php-3")
 	if !okBuy || !okSell || buy <= 0 || sell <= 0 {
 		return adapter.Rate{}, false, nil
 	}
 
 	text := cell(".views-field-field-transaction-date")
-	date, err := time.Parse("02-01-2006", text)
+	// strptime's %d and %m also take a single digit.
+	date, err := time.Parse("2-1-2006", text)
 	if err != nil {
 		return adapter.Rate{}, false, fmt.Errorf("unrecognised date %q", text)
 	}
