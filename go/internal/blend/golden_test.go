@@ -32,10 +32,21 @@ type tasksGolden struct {
 		Dates     int            `json:"dates"`
 	} `json:"consensus"`
 
+	Reads map[string][]goldenRead `json:"reads"` // BlendedRollup.read after blend:rebuild, by table
+
 	Rollups map[string][][]any `json:"rollups"`
 	Blend   map[string][][]any `json:"blend"`
 	ECB     map[string][][]any `json:"ecb"`
 	Purge   map[string][][]any `json:"purge"`
+}
+
+// goldenRead is one BlendedRollup.read: rows nil when Ruby returned nil (fall back to live). With Dropped set, that
+// bucket was deleted first inside a rolled-back transaction.
+type goldenRead struct {
+	From    string  `json:"from"`
+	To      string  `json:"to"`
+	Dropped string  `json:"dropped"`
+	Rows    [][]any `json:"rows"`
 }
 
 func loadTasksGolden(t *testing.T) tasksGolden {
@@ -200,6 +211,7 @@ func TestGoldenTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	compareStage(t, conn, "blend", g.Blend)
+	compareReads(t, conn, g.Reads, today)
 
 	exec(t, conn, "UPDATE rates SET mid = mid * 1.01 WHERE provider = 'ECB' AND quote = 'GBP'")
 	if err := RebuildProviderRollups(ctx, conn, "ecb", today); err != nil {
@@ -222,4 +234,56 @@ func TestGoldenTasks(t *testing.T) {
 		t.Errorf("purge: %q, ruby %q", line, g.PurgeLine)
 	}
 	compareStage(t, conn, "purge", g.Purge)
+}
+
+// compareReads replays each recorded BlendedRollup.read through Rollup.Read: same fallback verdict, same rows in the
+// same order, rates within 1e-9 relative.
+func compareReads(t *testing.T, conn *sql.DB, reads map[string][]goldenRead, today time.Time) {
+	t.Helper()
+	for _, r := range Rollups {
+		if len(reads[r.Table]) == 0 {
+			t.Fatalf("%s: no reads in golden", r.Table)
+		}
+		for _, want := range reads[r.Table] {
+			label := fmt.Sprintf("%s read %s..%s", r.Table, want.From, want.To)
+			start, err := db.ParseDate(want.From)
+			if err != nil {
+				t.Fatal(err)
+			}
+			end, err := db.ParseDate(want.To)
+			if err != nil {
+				t.Fatal(err)
+			}
+			tx, err := conn.BeginTx(ctx, nil)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if want.Dropped != "" {
+				label += " without " + want.Dropped
+				exec(t, tx, "DELETE FROM "+r.Table+" WHERE bucket_date = ?", want.Dropped)
+			}
+			rows, ok, err := r.Read(ctx, tx, start, end, today)
+			tx.Rollback()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if ok != (want.Rows != nil) {
+				t.Errorf("%s: ok = %v, ruby rows %v", label, ok, want.Rows != nil)
+				continue
+			}
+			if len(rows) != len(want.Rows) {
+				t.Errorf("%s: %d rows, ruby %d", label, len(rows), len(want.Rows))
+				continue
+			}
+			for i, w := range want.Rows {
+				g := rows[i]
+				wr := w[3].(float64)
+				if day(g.Date) != w[0] || g.Base != w[1] || g.Quote != w[2] ||
+					math.Abs(g.Rate-wr) > 1e-9*math.Max(math.Abs(wr), math.Abs(g.Rate)) {
+					t.Errorf("%s: row %d = %s %s %s %v, ruby %v", label, i, day(g.Date), g.Base, g.Quote, g.Rate, w)
+					break
+				}
+			}
+		}
+	}
 }

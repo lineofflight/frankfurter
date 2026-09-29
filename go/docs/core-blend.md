@@ -82,9 +82,13 @@ after each into `testdata/golden/tasks.json.gz`:
    and the task's totals line; Ruby's adapter leads are recorded, since the Go test registers no adapters)
 
 It also records the consensus scan of the seeded rates: the `consensus` task's own total line and the per provider and
-quote counts. `TestGoldenTasks` loads the same input rates into a fresh database and runs the Go tasks: every table at
-every stage matches Ruby row for row, every rate bit-identical (the test checks 1e-9 relative), and the consensus
-and purge totals agree.
+quote counts, and, after stage 2, `BlendedRollup.read` over nine ranges per grouped table (snap-back to the nearest
+earlier bucket, across the gap after an isolated old series, a start after today, a range before any data, all history)
+plus one range with an in-range bucket deleted inside a rolled-back transaction (nil: live fallback). Note that
+`Bucket.week` dates are year start plus `%W` weeks, so a weekly bucket can fall after the days it holds and a range
+ending today can miss it; Go reproduces that. `TestGoldenTasks` loads the same input rates into a fresh database and runs the Go tasks: every table at
+every stage matches Ruby row for row, every rate bit-identical (the test checks 1e-9 relative), the consensus
+and purge totals agree, and `Rollup.Read` returns Ruby's rows (or fallback verdict) for every recorded range.
 
 Regenerate (throwaway database in the scratchpad; the script migrates it in a child process, because an in-process
 migration defines `Provider` before its `frequency` column exists and Ruby then blends non-daily providers):

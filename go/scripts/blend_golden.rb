@@ -16,7 +16,8 @@
 #   4. db:purge_invalid after rows beyond the future horizon are inserted and rolled up
 #
 # It also records the consensus scan of the seeded rates: the task's own total line, and per provider and quote counts
-# computed the same way (the task's combo labels are broken, see core-blend.md).
+# computed the same way (the task's combo labels are broken, see core-blend.md). After stage 2 it records
+# BlendedRollup.read over a set of ranges.
 
 require "date"
 require "json"
@@ -150,6 +151,30 @@ out[:rollups] = grouped
 
 invoke("blend:rebuild")
 out[:blend] = grouped.merge(blended_rates: dump(:blended_rates, [:date, :quote, :rate], [:date, :quote]))
+
+# Grouped reads over the rebuilt tables: snap-back to the nearest earlier bucket (including across the gap after T5's
+# isolated rows), a start after today, a range before any data, and, inside a rolled-back transaction, a range whose
+# newest bucket is unmaterialized (nil, so the request falls back to live). Weekly buckets are Bucket.week's
+# year-start-plus-%W-weeks dates, which can fall after the days they hold; a range ending today can miss that bucket.
+read_ranges = [
+  [TODAY - 60, TODAY], [TODAY, TODAY], [TODAY - 2, TODAY - 2], [TODAY + 1, TODAY + 30],
+  [Date.new(2022, 12, 25), Date.new(2023, 1, 10)], [Date.new(2023, 1, 5), Date.new(2023, 2, 1)],
+  [Date.new(2024, 1, 1), Date.new(2024, 2, 1)], [Date.new(2020, 1, 1), Date.new(2020, 2, 1)],
+  [Date.new(2000, 1, 1), TODAY],
+]
+serialize = ->(rows) { rows&.map { |r| [r[:date].to_s, r[:base], r[:quote], r[:rate]] } }
+out[:reads] = [BlendedWeeklyRate, BlendedMonthlyRate].to_h do |model|
+  reads = read_ranges.map do |from, to|
+    { from: from.to_s, to: to.to_s, rows: serialize.call(model.read(from..to)) }
+  end
+  DB.transaction(rollback: :always) do
+    dropped = model.read((TODAY - 60)..TODAY).last[:date].to_s
+    model.where(bucket_date: dropped).delete
+    rows = serialize.call(model.read((TODAY - 60)..TODAY))
+    reads << { from: (TODAY - 60).to_s, to: TODAY.to_s, dropped:, rows: }
+  end
+  [model.table_name, reads]
+end
 
 Rate.where(provider: "ECB", quote: "GBP").update(mid: Sequel[:mid] * 1.01)
 invoke("rollups:rebuild", "ecb")
