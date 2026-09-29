@@ -2,7 +2,10 @@ package bsp
 
 import (
 	"context"
+	"fmt"
+	"io"
 	"math"
+	"net/http"
 	"slices"
 	"strings"
 	"testing"
@@ -152,5 +155,87 @@ func TestGolden(t *testing.T) {
 			}
 			g.Check(t, rates)
 		})
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func item(title, url string) string {
+	return fmt.Sprintf(`{"Title":%q,"AttachmentFiles":{"results":[{"ServerRelativeUrl":%q}]}}`, title, url)
+}
+
+func TestDiscoverPagesUntilWindowStart(t *testing.T) {
+	pages := map[string]string{
+		"page1": `{"d":{"results":[` + item("30May2026", "/30") + `,` + item("29May2026", "/29a") + `,` +
+			item("29May2026", "/29b") + `,` + item("junk", "/junk") + `],"__next":"https://www.bsp.gov.ph/page2"}}`,
+		"/page2": `{"d":{"results":[` + item("28May2026", "/28") + `,` + item("26May2026", "/26") +
+			`],"__next":"https://www.bsp.gov.ph/page3"}}`,
+	}
+	var fetched []string
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		if got := r.Header.Get("Accept"); got != "application/json;odata=verbose" {
+			t.Errorf("Accept = %q", got)
+		}
+		key := r.URL.Path
+		if strings.HasSuffix(key, "/items") {
+			key = "page1"
+		}
+		fetched = append(fetched, key)
+		body, ok := pages[key]
+		if !ok {
+			return nil, fmt.Errorf("unexpected request %s", r.URL)
+		}
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+	})}
+
+	entries, err := New(client).discover(context.Background(), adapter.Date(2026, 5, 27), adapter.Date(2026, 5, 29))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []entry{{adapter.Date(2026, 5, 28), "/28"}, {adapter.Date(2026, 5, 29), "/29a"}}
+	if !slices.Equal(entries, want) {
+		t.Errorf("entries = %v, want %v", entries, want)
+	}
+	if !slices.Equal(fetched, []string{"page1", "/page2"}) {
+		t.Errorf("fetched %v, want page1 and page2 only", fetched)
+	}
+}
+
+func TestParseTitleDate(t *testing.T) {
+	for title, want := range map[string]time.Time{
+		"29May2026":      adapter.Date(2026, 5, 29),
+		" 6Nov2017 ":     adapter.Date(2017, 11, 6),
+		"06November2017": adapter.Date(2017, 11, 6),
+	} {
+		if got, ok := parseTitleDate(title); !ok || !got.Equal(want) {
+			t.Errorf("parseTitleDate(%q) = %v, %v", title, got, ok)
+		}
+	}
+	for _, title := range []string{"", "RERB", "2026-05-29"} {
+		if _, ok := parseTitleDate(title); ok {
+			t.Errorf("parseTitleDate(%q) parsed", title)
+		}
+	}
+}
+
+func TestParseTextDropsZeroReferenceRate(t *testing.T) {
+	rates, err := parseText("BSP Reference Rate:  PHP            0.000", adapter.Date(2026, 5, 29))
+	if err != nil || len(rates) != 0 {
+		t.Errorf("got %v, %v, want no rates", rates, err)
+	}
+}
+
+func TestParseTextStripsThousandsSeparator(t *testing.T) {
+	rates, err := parseText("BSP Reference Rate:  PHP  1,061.600", adapter.Date(2026, 5, 29))
+	if err != nil || len(rates) != 1 || rates[0].Rate != 1061.6 {
+		t.Errorf("got %v, %v, want 1061.6", rates, err)
+	}
+}
+
+func TestParseTextRejectsMalformedReferenceRate(t *testing.T) {
+	if _, err := parseText("BSP Reference Rate:  PHP  61.6.0", adapter.Date(2026, 5, 29)); err == nil {
+		t.Error("want error")
 	}
 }
