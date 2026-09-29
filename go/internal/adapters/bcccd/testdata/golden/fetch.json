@@ -1,0 +1,265 @@
+{
+  "adapter": "BCCCD",
+  "cassette": "bcccd",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 2), upto: Date.new(2026, 9, 3))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 616.76
+    },
+    {
+      "base": "AOA",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 2.47
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 1620.52
+    },
+    {
+      "base": "BIF",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 0.76
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 1632.51
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 2795.3
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 336.94
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 2626.12
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 3064.55
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 23.88
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 14.15
+    },
+    {
+      "base": "KWD",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 7327.34
+    },
+    {
+      "base": "RWF",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 1.54
+    },
+    {
+      "base": "SAR",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 604.01
+    },
+    {
+      "base": "TZS",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 0.86
+    },
+    {
+      "base": "UGX",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 0.6
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 2264.0
+    },
+    {
+      "base": "XAF",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 4.0
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 3100.63
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 140.39
+    },
+    {
+      "base": "ZMW",
+      "date": "2026-09-02",
+      "quote": "CDF",
+      "rate": 118.21
+    },
+    {
+      "base": "AED",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 616.42
+    },
+    {
+      "base": "AOA",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 2.47
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 1617.63
+    },
+    {
+      "base": "BIF",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 0.76
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 1625.67
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 2784.1
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 336.76
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 2620.91
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 3058.53
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 23.85
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 14.18
+    },
+    {
+      "base": "KWD",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 7319.82
+    },
+    {
+      "base": "RWF",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 1.54
+    },
+    {
+      "base": "SAR",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 603.68
+    },
+    {
+      "base": "TZS",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 0.85
+    },
+    {
+      "base": "UGX",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 0.6
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 2263.8
+    },
+    {
+      "base": "XAF",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 4.0
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 3097.85
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 140.26
+    },
+    {
+      "base": "ZMW",
+      "date": "2026-09-03",
+      "quote": "CDF",
+      "rate": 118.56
+    }
+  ]
+}
