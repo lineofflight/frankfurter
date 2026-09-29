@@ -1,0 +1,735 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: tassidicambio.bancaditalia.it
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - tassidicambio.bancaditalia.it
+            User-Agent:
+                - Ruby
+        url: https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates?currencyIsoCode=EUR&lang=en&referenceDate=2026-02-09
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 16187
+        body: |
+            Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
+            AFGHANISTAN (Islamic State of),Afghani,AFN,115,75.5197,Foreign currency amount for 1 Euro.,2026-02-09
+            ALBANIA,Lek,ALL,047,96.74,Foreign currency amount for 1 Euro.,2026-02-09
+            ALGERIA,Algerian Dinar,DZD,106,154.1592,Foreign currency amount for 1 Euro.,2026-02-09
+            ANGOLA,Adjusted Kwanza,AOA,087,1089.423,Foreign currency amount for 1 Euro.,2026-02-09
+            ANTIGUA AND BARBUDA,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            ARGENTINA,Peso,ARS,216,1701.7611,Foreign currency amount for 1 Euro.,2026-02-09
+            ARMENIA,Armenian Dram,AMD,246,448.84,Foreign currency amount for 1 Euro.,2026-02-09
+            ARUBA,Aruban Florin,AWG,211,2.1276,Foreign currency amount for 1 Euro.,2026-02-09
+            AUSTRALIA,Australian Dollar,AUD,109,1.6843,Foreign currency amount for 1 Euro.,2026-02-09
+            AZERBAIJAN,New Azerbaijan Manat,AZN,271,2.0206,Foreign currency amount for 1 Euro.,2026-02-09
+            BAHAMAS (The),Bahamian Dollar,BSD,135,1.1886,Foreign currency amount for 1 Euro.,2026-02-09
+            BAHRAIN,Bahrain Dinar,BHD,136,0.447,Foreign currency amount for 1 Euro.,2026-02-09
+            BANGLADESH,Bangladesh Taka,BDT,174,145.3658,Foreign currency amount for 1 Euro.,2026-02-09
+            BARBADOS,Barbados Dollar,BBD,195,2.377200,Foreign currency amount for 1 Euro.,2026-02-09
+            BELARUS,Belarussian Ruble (new),BYN,280,N.A.,Foreign currency amount for 1 Euro.,2026-02-09
+            BELIZE,Belize Dollar,BZD,152,2.3772,Foreign currency amount for 1 Euro.,2026-02-09
+            BENIN,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            BERMUDA,Bermuda Dollar,BMD,138,1.1886,Foreign currency amount for 1 Euro.,2026-02-09
+            BHUTAN,Ngultrum,BTN,180,107.8375,Foreign currency amount for 1 Euro.,2026-02-09
+            BOLIVIA,Boliviano,BOB,074,8.2132,Foreign currency amount for 1 Euro.,2026-02-09
+            BOSNIA and HERZEGOVINA,Convertible Marks,BAM,240,1.95583,Foreign currency amount for 1 Euro.,2026-02-09
+            BOTSWANA,Botswana Pula,BWP,171,16.0839,Foreign currency amount for 1 Euro.,2026-02-09
+            BRAZIL,Real,BRL,234,6.1725,Foreign currency amount for 1 Euro.,2026-02-09
+            BRUNEI DARUSSALAM,Brunei Dollar,BND,139,1.5067,Foreign currency amount for 1 Euro.,2026-02-09
+            BURKINA FASO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            BURUNDI,Burundi Franc,BIF,140,3536.953,Foreign currency amount for 1 Euro.,2026-02-09
+            CAMBODIA,Cambodian Riel,KHR,141,4789.07,Foreign currency amount for 1 Euro.,2026-02-09
+            CAMEROON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            CANADA,Canadian Dollar,CAD,012,1.6174,Foreign currency amount for 1 Euro.,2026-02-09
+            CAPE VERDE,Cape Verde Escudo,CVE,181,110.265,Foreign currency amount for 1 Euro.,2026-02-09
+            CAYMAN (Islands),Cayman Dollar,KYD,205,0.9747,Foreign currency amount for 1 Euro.,2026-02-09
+            CENTRAL AFRICAN REPUBLIC,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            CHAD,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            CHILE,Chilean Peso,CLP,029,1017.37,Foreign currency amount for 1 Euro.,2026-02-09
+            CHINA (People Republic of),Renminbi,CNY,144,8.2281,Foreign currency amount for 1 Euro.,2026-02-09
+            COLOMBIA,Colombian Peso,COP,040,4372.65,Foreign currency amount for 1 Euro.,2026-02-09
+            COMOROS,Comorian Franc,KMF,210,491.96775,Foreign currency amount for 1 Euro.,2026-02-09
+            CONGO (Democratic Republic of),Franc Congolais,CDF,261,2624.3247,Foreign currency amount for 1 Euro.,2026-02-09
+            CONGO (Republic of),CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            COSTA RICA,Costa Rican Colon,CRC,077,587.7033,Foreign currency amount for 1 Euro.,2026-02-09
+            COTE D IVOIRE,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            CUBA,Cuban Peso,CUP,067,28.5264,Foreign currency amount for 1 Euro.,2026-02-09
+            CZECH REPUBLIC,Czech Koruna,CZK,223,24.2170,Foreign currency amount for 1 Euro.,2026-02-09
+            DENMARK,Danish Krone,DKK,007,7.4692,Foreign currency amount for 1 Euro.,2026-02-09
+            DJIBOUTI,Djibouti Franc,DJF,083,211.239,Foreign currency amount for 1 Euro.,2026-02-09
+            DOMINICA,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            DOMINICAN REPUBLIC,Dominican Peso,DOP,116,74.6448,Foreign currency amount for 1 Euro.,2026-02-09
+            EGYPT,Egyptian Pound,EGP,070,55.7262,Foreign currency amount for 1 Euro.,2026-02-09
+            EL SALVADOR,Salvadoran Colon,SVC,117,10.4003,Foreign currency amount for 1 Euro.,2026-02-09
+            EQUATORIAL GUINEA,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            ERITREA,Nakfa,ERN,243,18.2807,Foreign currency amount for 1 Euro.,2026-02-09
+            ESWATINI (EX SWAZILAND),Lilangeni,SZL,173,18.9883,Foreign currency amount for 1 Euro.,2026-02-09
+            ETHIOPIA,Ethiopian Birr,ETB,068,185.3949,Foreign currency amount for 1 Euro.,2026-02-09
+            FALKLAND or MALVINE (Islands),Falkland Pound,FKP,146,0.87010,Foreign currency amount for 1 Euro.,2026-02-09
+            FIJI,Fiji Dollar,FJD,147,2.6443,Foreign currency amount for 1 Euro.,2026-02-09
+            FRENCH POLINESIA,CFP Franc,XPF,105,119.3317,Foreign currency amount for 1 Euro.,2026-02-09
+            GABON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            GAMBIA (The),Dalasi,GMD,193,86.32,Foreign currency amount for 1 Euro.,2026-02-09
+            GEORGIA,Lari,GEL,230,3.1946,Foreign currency amount for 1 Euro.,2026-02-09
+            GHANA,New Ghana Cedi,GHS,276,13.0534,Foreign currency amount for 1 Euro.,2026-02-09
+            GIBRALTAR,Gibraltar Pound,GIP,044,0.87010,Foreign currency amount for 1 Euro.,2026-02-09
+            GRENADA,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            GUATEMALA,Quetzal,GTQ,078,9.1145,Foreign currency amount for 1 Euro.,2026-02-09
+            GUINEA,Guinean Franc,GNF,129,10404.1658,Foreign currency amount for 1 Euro.,2026-02-09
+            GUINEA BISSAU,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            GUYANA,Guyanan Dollar,GYD,149,248.6789,Foreign currency amount for 1 Euro.,2026-02-09
+            HAITI,Gourde,HTG,151,155.5135,Foreign currency amount for 1 Euro.,2026-02-09
+            HONDURAS,Lempira,HNL,118,31.3979,Foreign currency amount for 1 Euro.,2026-02-09
+            HONG KONG (China),Hong Kong Dollar,HKD,103,9.2888,Foreign currency amount for 1 Euro.,2026-02-09
+            HUNGARY,Forint,HUF,153,377.0800,Foreign currency amount for 1 Euro.,2026-02-09
+            ICELAND,Icelandic Krona,ISK,062,145.00,Foreign currency amount for 1 Euro.,2026-02-09
+            INDIA,Indian Rupee,INR,031,107.8375,Foreign currency amount for 1 Euro.,2026-02-09
+            INDONESIA,Indonesian Rupiah,IDR,123,20000.00,Foreign currency amount for 1 Euro.,2026-02-09
+            INTERNATIONAL MONETARY FUND,SDR,XDR,188,0.863189,Foreign currency amount for 1 Euro.,2026-02-09
+            IRAN (Islamic Republic of),Iranian Rial,IRR,057,N.A.,Foreign currency amount for 1 Euro.,2026-02-09
+            IRAQ,Iraq Dinar,IQD,093,1557.066,Foreign currency amount for 1 Euro.,2026-02-09
+            ISRAEL,New Sheqel,ILS,203,3.6817,Foreign currency amount for 1 Euro.,2026-02-09
+            JAMAICA,Jamaica Dollar,JMD,142,185.8457,Foreign currency amount for 1 Euro.,2026-02-09
+            JAPAN,Japanese Yen,JPY,071,185.6500,Foreign currency amount for 1 Euro.,2026-02-09
+            JORDAN,Jordan Dinar,JOD,089,0.8427,Foreign currency amount for 1 Euro.,2026-02-09
+            KAZAKHSTAN,Tenge,KZT,231,587.61,Foreign currency amount for 1 Euro.,2026-02-09
+            KENYA,Kenya Shilling,KES,022,153.3238,Foreign currency amount for 1 Euro.,2026-02-09
+            KOREA (Democratic People Rep.),North Korean Won,KPW,182,N.A.,Foreign currency amount for 1 Euro.,2026-02-09
+            KOREA (Republic of),South Korean Won,KRW,119,1737.79,Foreign currency amount for 1 Euro.,2026-02-09
+            KUWAIT,Kuwaiti Dinar,KWD,102,0.3643,Foreign currency amount for 1 Euro.,2026-02-09
+            KYRGYZ REPUBLIC,Som,KGS,225,103.9431,Foreign currency amount for 1 Euro.,2026-02-09
+            LAO PEOPLE S DEMOCRATIC REPUBL,Lao Kip,LAK,154,24085,Foreign currency amount for 1 Euro.,2026-02-09
+            LEBANON,Lebanese Pound,LBP,032,106379.70,Foreign currency amount for 1 Euro.,2026-02-09
+            LESOTHO,Loti,LSL,172,18.9883,Foreign currency amount for 1 Euro.,2026-02-09
+            LIBERIA,Liberian Dollar,LRD,155,221.7571,Foreign currency amount for 1 Euro.,2026-02-09
+            LIBYAN ARAB JAMAHIRIYA,Libyan Dinar,LYD,069,7.5089,Foreign currency amount for 1 Euro.,2026-02-09
+            MACAU,Pataca,MOP,156,9.5675,Foreign currency amount for 1 Euro.,2026-02-09
+            MACEDONIA (form. Yugoslav Rep),Macedonian Denar,MKD,236,61.9225,Foreign currency amount for 1 Euro.,2026-02-09
+            MADAGASCAR,Ariary,MGA,268,5244.99,Foreign currency amount for 1 Euro.,2026-02-09
+            MALAWI,Malawi Kwacha,MWK,157,2061.7024,Foreign currency amount for 1 Euro.,2026-02-09
+            MALAYSIA,Ringgit,MYR,055,4.6765,Foreign currency amount for 1 Euro.,2026-02-09
+            MALDIVES,Rufiyaa,MVR,158,18.3282,Foreign currency amount for 1 Euro.,2026-02-09
+            MALI,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            MAURITANIA,Ouguiya,MRU,282,47.294,Foreign currency amount for 1 Euro.,2026-02-09
+            MAURITIUS,Mauritian Rupee,MUR,170,54.6769,Foreign currency amount for 1 Euro.,2026-02-09
+            MEXICO,Mexican Peso,MXN,222,20.4582,Foreign currency amount for 1 Euro.,2026-02-09
+            MOLDOVA,Moldovan Leu,MDL,235,20.1754,Foreign currency amount for 1 Euro.,2026-02-09
+            MONGOLIA,Tugrik,MNT,160,4238.55,Foreign currency amount for 1 Euro.,2026-02-09
+            MOROCCO,Moroccan Dirham,MAD,084,10.891,Foreign currency amount for 1 Euro.,2026-02-09
+            MOZAMBIQUE,New Mozambique Metical,MZN,272,75.86,Foreign currency amount for 1 Euro.,2026-02-09
+            MYANMAR,Kyat,MMK,107,2496.1,Foreign currency amount for 1 Euro.,2026-02-09
+            NAMIBIA,Namibian Dollar,NAD,252,18.9883,Foreign currency amount for 1 Euro.,2026-02-09
+            NEPAL,Nepalese Rupee,NPR,161,172.5400,Foreign currency amount for 1 Euro.,2026-02-09
+            NETHERLANDS ANTILLES,Caribbean guilder,XCG,292,2.1276,Foreign currency amount for 1 Euro.,2026-02-09
+            NEW ZEALAND,New Zealand Dollar,NZD,113,1.9685,Foreign currency amount for 1 Euro.,2026-02-09
+            NICARAGUA,Cordoba,NIO,120,43.7500,Foreign currency amount for 1 Euro.,2026-02-09
+            NIGER,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            NIGERIA,Naira,NGN,081,1623.8653,Foreign currency amount for 1 Euro.,2026-02-09
+            NORWAY,Norwegian Krone,NOK,008,11.4290,Foreign currency amount for 1 Euro.,2026-02-09
+            OMAN,Rial Omani,OMR,184,0.4570,Foreign currency amount for 1 Euro.,2026-02-09
+            PAKISTAN,Pakistan Rupee,PKR,026,332.5668,Foreign currency amount for 1 Euro.,2026-02-09
+            PANAMA,Balboa,PAB,162,1.1886,Foreign currency amount for 1 Euro.,2026-02-09
+            PAPUA NEW GUINEA,Kina,PGK,190,5.1057,Foreign currency amount for 1 Euro.,2026-02-09
+            PARAGUAY,Paraguayan Guarani,PYG,101,7837.59,Foreign currency amount for 1 Euro.,2026-02-09
+            PERU,Nuevo Sol,PEN,201,3.9919,Foreign currency amount for 1 Euro.,2026-02-09
+            PHILIPPINES,Philippine Peso,PHP,066,69.5160,Foreign currency amount for 1 Euro.,2026-02-09
+            POLAND,Zloty,PLN,237,4.2118,Foreign currency amount for 1 Euro.,2026-02-09
+            QATAR,Qatar Riyal,QAR,189,4.3265,Foreign currency amount for 1 Euro.,2026-02-09
+            ROMANIA,New Romanian Leu,RON,270,5.0923,Foreign currency amount for 1 Euro.,2026-02-09
+            RUSSIAN FEDERATION,Russian Ruble,RUB,244,N.A.,Foreign currency amount for 1 Euro.,2026-02-09
+            RWANDA,Rwanda Franc,RWF,163,1729.7632,Foreign currency amount for 1 Euro.,2026-02-09
+            SAO TOME and PRINCIPE,Dobra,STN,283,24.5000,Foreign currency amount for 1 Euro.,2026-02-09
+            SAUDI ARABIA,Saudi Arabian Riyal,SAR,075,4.4573,Foreign currency amount for 1 Euro.,2026-02-09
+            SENEGAL,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            SERBIA,Serbian Dinar,RSD,274,117.9425,Foreign currency amount for 1 Euro.,2026-02-09
+            SEYCHELLES,Seychelles Rupee,SCR,185,17.7169,Foreign currency amount for 1 Euro.,2026-02-09
+            SIERRA LEONE,Leone,SLE,291,28.8383,Foreign currency amount for 1 Euro.,2026-02-09
+            SINGAPORE,Singapore Dollar,SGD,124,1.5067,Foreign currency amount for 1 Euro.,2026-02-09
+            SOLOMON (Islands),Solomon Islands Dollar,SBD,206,9.5855,Foreign currency amount for 1 Euro.,2026-02-09
+            SOMALIA,Somali Shilling,SOS,065,678.3459,Foreign currency amount for 1 Euro.,2026-02-09
+            SOUTH AFRICA,South African Rand,ZAR,082,18.9883,Foreign currency amount for 1 Euro.,2026-02-09
+            SOUTH SUDAN,South Sudanese Pound,SSP,279,5401.9095,Foreign currency amount for 1 Euro.,2026-02-09
+            SRI LANKA,Sri Lanka Rupee,LKR,058,367.8644,Foreign currency amount for 1 Euro.,2026-02-09
+            ST. HELENA,St. Helena Pound,SHP,207,0.87010,Foreign currency amount for 1 Euro.,2026-02-09
+            ST. KITTS AND NEVIS,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            ST. LUCIA,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            ST. VINCENT and the GRENADINES,East Caribbean Dollar,XCD,137,3.2092,Foreign currency amount for 1 Euro.,2026-02-09
+            SUDAN,Sudanese Pound,SDG,275,713.3579,Foreign currency amount for 1 Euro.,2026-02-09
+            SURINAME,Suriname Dollar,SRD,266,45.244,Foreign currency amount for 1 Euro.,2026-02-09
+            SWEDEN,Swedish Krona,SEK,009,10.6505,Foreign currency amount for 1 Euro.,2026-02-09
+            SWITZERLAND,Swiss Franc,CHF,003,0.9150,Foreign currency amount for 1 Euro.,2026-02-09
+            SYRIAN ARAB REPUBLIC,Syrian Pound,SYP,036,131.9346,Foreign currency amount for 1 Euro.,2026-02-09
+            TAIWAN,New Taiwan Dollar,TWD,143,37.5797,Foreign currency amount for 1 Euro.,2026-02-09
+            TAJIKISTAN,Somoni,TJS,264,11.1430,Foreign currency amount for 1 Euro.,2026-02-09
+            TANZANIA,Tanzania Shilling,TZS,125,3056.4282,Foreign currency amount for 1 Euro.,2026-02-09
+            THAILAND,Baht,THB,073,37.055,Foreign currency amount for 1 Euro.,2026-02-09
+            TOGO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-09
+            TONGA,Pa anga,TOP,167,2.7908,Foreign currency amount for 1 Euro.,2026-02-09
+            TRINIDAD and TOBAGO,Trinidad and Tobago Dollar,TTD,166,8.0231,Foreign currency amount for 1 Euro.,2026-02-09
+            TUNISIA,Tunisian Dinar,TND,080,3.3876,Foreign currency amount for 1 Euro.,2026-02-09
+            TURKEY,Turkey Lira (new),TRY,267,51.8099,Foreign currency amount for 1 Euro.,2026-02-09
+            TURKMENISTAN,Turkmen Manat (new),TMT,278,4.1601,Foreign currency amount for 1 Euro.,2026-02-09
+            UGANDA,Uganda Shilling,UGX,126,4230.38,Foreign currency amount for 1 Euro.,2026-02-09
+            UKRAINE,Hryvnia,UAH,241,51.1200,Foreign currency amount for 1 Euro.,2026-02-09
+            UNITED ARAB EMIRATES,U.A.E. Dirham,AED,187,4.3651,Foreign currency amount for 1 Euro.,2026-02-09
+            UNITED KINGDOM,Pound Sterling,GBP,002,0.87010,Foreign currency amount for 1 Euro.,2026-02-09
+            UNITED STATES,U.S. Dollar,USD,001,1.1886,Foreign currency amount for 1 Euro.,2026-02-09
+            URUGUAY,Uruguayan Peso,UYU,053,45.7035,Foreign currency amount for 1 Euro.,2026-02-09
+            UZBEKISTAN,Uzbek Sum,UZS,232,14622.43,Foreign currency amount for 1 Euro.,2026-02-09
+            VANUATU,Vatu,VUV,208,141.15,Foreign currency amount for 1 Euro.,2026-02-09
+            VENEZUELA,Bolivar Soberano,VES,284,454.2277,Foreign currency amount for 1 Euro.,2026-02-09
+            VIETNAM,Dong,VND,145,30832,Foreign currency amount for 1 Euro.,2026-02-09
+            WESTERN SAMOA,Tala,WST,164,3.2060,Foreign currency amount for 1 Euro.,2026-02-09
+            YEMEN,Yemeni Rial,YER,122,283.27,Foreign currency amount for 1 Euro.,2026-02-09
+            ZAMBIA,Zambian Kwacha,ZMW,148,22.3293,Foreign currency amount for 1 Euro.,2026-02-09
+            ZIMBABWE,Zimbabwe Dollar,ZWG,269,30.3944,Foreign currency amount for 1 Euro.,2026-02-09
+
+
+            # DISCLAIMER
+            # The exchange rates posted on the foreign exchange rates portal are not provided in real time and there is a lag between the time they are recorded and the time they are published on the portal.
+            # Except for the cases provided for by Italian law, the exchange rates are only indicative and are not intended to be used as a financial benchmark under Regulation (EU) 2016/1011.
+            # Banca d’Italia is not responsible for any use of the exchange rates for purposes other than those provided for by Italian law and liability for any such use rests solely with the users.
+            # Exchange rates for the major currencies vis-à-vis the euro are compiled based on a daily concertation procedure with the other ESCB central banks.
+            # In the event of changes in the currency systems, Banca d’Italia will update the exchange rates with effect from the date on which they are recorded and verified, and will provide the pertinent information in the ‘Notices’ section.
+            # Banca d’Italia accepts no responsibility for any inaccuracy or error caused for whatever reason.
+            # It is recommended that you refer to the ‘Notices’ section before consulting the exchange rates.
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Cache-Control:
+                - no-cache, no-store, must-revalidate
+            Content-Disposition:
+                - attachment;filename=daily_rates_20260209.csv
+            Content-Type:
+                - text/csv
+            Cross-Origin-Embedder-Policy:
+                - require-corp
+            Cross-Origin-Opener-Policy:
+                - same-origin
+            Cross-Origin-Resource-Policy:
+                - same-origin
+            Date:
+                - Thu, 12 Feb 2026 10:27:52 GMT
+            Permissions-Policy:
+                - accelerometer=(),autoplay=(),camera=(),display-capture=(),document-domain=(),encrypted-media=(),fullscreen=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),midi=(),payment=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),sync-xhr=(self),usb=(),web-share=(),xr-spatial-tracking=()
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - no-referrer
+            Set-Cookie:
+                - TS01d56941=011612bbe9bced9542e6d2e4134f97b1a89701de964e67d725dadefb2ebc41c5c6111f3767810b6e653d265f71fb14553c87b5bdaa; Path=/; Domain=.tassidicambio.bancaditalia.it; Secure; HttpOnly
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: tassidicambio.bancaditalia.it
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - tassidicambio.bancaditalia.it
+            User-Agent:
+                - Ruby
+        url: https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates?currencyIsoCode=EUR&lang=en&referenceDate=2026-02-10
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 16187
+        body: |
+            Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
+            AFGHANISTAN (Islamic State of),Afghani,AFN,115,75.2664,Foreign currency amount for 1 Euro.,2026-02-10
+            ALBANIA,Lek,ALL,047,96.29,Foreign currency amount for 1 Euro.,2026-02-10
+            ALGERIA,Algerian Dinar,DZD,106,153.8636,Foreign currency amount for 1 Euro.,2026-02-10
+            ANGOLA,Adjusted Kwanza,AOA,087,1092.767,Foreign currency amount for 1 Euro.,2026-02-10
+            ANTIGUA AND BARBUDA,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            ARGENTINA,Peso,ARS,216,1687.7459,Foreign currency amount for 1 Euro.,2026-02-10
+            ARMENIA,Armenian Dram,AMD,246,449.11,Foreign currency amount for 1 Euro.,2026-02-10
+            ARUBA,Aruban Florin,AWG,211,2.1290,Foreign currency amount for 1 Euro.,2026-02-10
+            AUSTRALIA,Australian Dollar,AUD,109,1.6830,Foreign currency amount for 1 Euro.,2026-02-10
+            AZERBAIJAN,New Azerbaijan Manat,AZN,271,2.0220,Foreign currency amount for 1 Euro.,2026-02-10
+            BAHAMAS (The),Bahamian Dollar,BSD,135,1.1894,Foreign currency amount for 1 Euro.,2026-02-10
+            BAHRAIN,Bahrain Dinar,BHD,136,0.447,Foreign currency amount for 1 Euro.,2026-02-10
+            BANGLADESH,Bangladesh Taka,BDT,174,145.4696,Foreign currency amount for 1 Euro.,2026-02-10
+            BARBADOS,Barbados Dollar,BBD,195,2.378800,Foreign currency amount for 1 Euro.,2026-02-10
+            BELARUS,Belarussian Ruble (new),BYN,280,N.A.,Foreign currency amount for 1 Euro.,2026-02-10
+            BELIZE,Belize Dollar,BZD,152,2.3788,Foreign currency amount for 1 Euro.,2026-02-10
+            BENIN,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            BERMUDA,Bermuda Dollar,BMD,138,1.1894,Foreign currency amount for 1 Euro.,2026-02-10
+            BHUTAN,Ngultrum,BTN,180,107.6878,Foreign currency amount for 1 Euro.,2026-02-10
+            BOLIVIA,Boliviano,BOB,074,8.2188,Foreign currency amount for 1 Euro.,2026-02-10
+            BOSNIA and HERZEGOVINA,Convertible Marks,BAM,240,1.95583,Foreign currency amount for 1 Euro.,2026-02-10
+            BOTSWANA,Botswana Pula,BWP,171,16.1603,Foreign currency amount for 1 Euro.,2026-02-10
+            BRAZIL,Real,BRL,234,6.1929,Foreign currency amount for 1 Euro.,2026-02-10
+            BRUNEI DARUSSALAM,Brunei Dollar,BND,139,1.5061,Foreign currency amount for 1 Euro.,2026-02-10
+            BURKINA FASO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            BURUNDI,Burundi Franc,BIF,140,3539.571,Foreign currency amount for 1 Euro.,2026-02-10
+            CAMBODIA,Cambodian Riel,KHR,141,4792.22,Foreign currency amount for 1 Euro.,2026-02-10
+            CAMEROON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            CANADA,Canadian Dollar,CAD,012,1.6141,Foreign currency amount for 1 Euro.,2026-02-10
+            CAPE VERDE,Cape Verde Escudo,CVE,181,110.265,Foreign currency amount for 1 Euro.,2026-02-10
+            CAYMAN (Islands),Cayman Dollar,KYD,205,0.9753,Foreign currency amount for 1 Euro.,2026-02-10
+            CENTRAL AFRICAN REPUBLIC,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            CHAD,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            CHILE,Chilean Peso,CLP,029,1014.52,Foreign currency amount for 1 Euro.,2026-02-10
+            CHINA (People Republic of),Renminbi,CNY,144,8.2245,Foreign currency amount for 1 Euro.,2026-02-10
+            COLOMBIA,Colombian Peso,COP,040,4364.50,Foreign currency amount for 1 Euro.,2026-02-10
+            COMOROS,Comorian Franc,KMF,210,491.96775,Foreign currency amount for 1 Euro.,2026-02-10
+            CONGO (Democratic Republic of),Franc Congolais,CDF,261,2616.3595,Foreign currency amount for 1 Euro.,2026-02-10
+            CONGO (Republic of),CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            COSTA RICA,Costa Rican Colon,CRC,077,586.9570,Foreign currency amount for 1 Euro.,2026-02-10
+            COTE D IVOIRE,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            CUBA,Cuban Peso,CUP,067,28.5456,Foreign currency amount for 1 Euro.,2026-02-10
+            CZECH REPUBLIC,Czech Koruna,CZK,223,24.2570,Foreign currency amount for 1 Euro.,2026-02-10
+            DENMARK,Danish Krone,DKK,007,7.4715,Foreign currency amount for 1 Euro.,2026-02-10
+            DJIBOUTI,Djibouti Franc,DJF,083,211.381,Foreign currency amount for 1 Euro.,2026-02-10
+            DOMINICA,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            DOMINICAN REPUBLIC,Dominican Peso,DOP,116,74.7413,Foreign currency amount for 1 Euro.,2026-02-10
+            EGYPT,Egyptian Pound,EGP,070,55.7518,Foreign currency amount for 1 Euro.,2026-02-10
+            EL SALVADOR,Salvadoran Colon,SVC,117,10.4073,Foreign currency amount for 1 Euro.,2026-02-10
+            EQUATORIAL GUINEA,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            ERITREA,Nakfa,ERN,243,18.2930,Foreign currency amount for 1 Euro.,2026-02-10
+            ESWATINI (EX SWAZILAND),Lilangeni,SZL,173,18.9797,Foreign currency amount for 1 Euro.,2026-02-10
+            ETHIOPIA,Ethiopian Birr,ETB,068,184.6386,Foreign currency amount for 1 Euro.,2026-02-10
+            FALKLAND or MALVINE (Islands),Falkland Pound,FKP,146,0.86950,Foreign currency amount for 1 Euro.,2026-02-10
+            FIJI,Fiji Dollar,FJD,147,2.6297,Foreign currency amount for 1 Euro.,2026-02-10
+            FRENCH POLINESIA,CFP Franc,XPF,105,119.3317,Foreign currency amount for 1 Euro.,2026-02-10
+            GABON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            GAMBIA (The),Dalasi,GMD,193,85.08,Foreign currency amount for 1 Euro.,2026-02-10
+            GEORGIA,Lari,GEL,230,3.1929,Foreign currency amount for 1 Euro.,2026-02-10
+            GHANA,New Ghana Cedi,GHS,276,13.0647,Foreign currency amount for 1 Euro.,2026-02-10
+            GIBRALTAR,Gibraltar Pound,GIP,044,0.86950,Foreign currency amount for 1 Euro.,2026-02-10
+            GRENADA,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            GUATEMALA,Quetzal,GTQ,078,9.1185,Foreign currency amount for 1 Euro.,2026-02-10
+            GUINEA,Guinean Franc,GNF,129,10411.1685,Foreign currency amount for 1 Euro.,2026-02-10
+            GUINEA BISSAU,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            GUYANA,Guyanan Dollar,GYD,149,248.8463,Foreign currency amount for 1 Euro.,2026-02-10
+            HAITI,Gourde,HTG,151,155.5809,Foreign currency amount for 1 Euro.,2026-02-10
+            HONDURAS,Lempira,HNL,118,31.4435,Foreign currency amount for 1 Euro.,2026-02-10
+            HONG KONG (China),Hong Kong Dollar,HKD,103,9.2983,Foreign currency amount for 1 Euro.,2026-02-10
+            HUNGARY,Forint,HUF,153,377.9500,Foreign currency amount for 1 Euro.,2026-02-10
+            ICELAND,Icelandic Krona,ISK,062,145.00,Foreign currency amount for 1 Euro.,2026-02-10
+            INDIA,Indian Rupee,INR,031,107.6878,Foreign currency amount for 1 Euro.,2026-02-10
+            INDONESIA,Indonesian Rupiah,IDR,123,19966.00,Foreign currency amount for 1 Euro.,2026-02-10
+            INTERNATIONAL MONETARY FUND,SDR,XDR,188,0.862332,Foreign currency amount for 1 Euro.,2026-02-10
+            IRAN (Islamic Republic of),Iranian Rial,IRR,057,N.A.,Foreign currency amount for 1 Euro.,2026-02-10
+            IRAQ,Iraq Dinar,IQD,093,1558.114,Foreign currency amount for 1 Euro.,2026-02-10
+            ISRAEL,New Sheqel,ILS,203,3.6704,Foreign currency amount for 1 Euro.,2026-02-10
+            JAMAICA,Jamaica Dollar,JMD,142,185.6947,Foreign currency amount for 1 Euro.,2026-02-10
+            JAPAN,Japanese Yen,JPY,071,184.5100,Foreign currency amount for 1 Euro.,2026-02-10
+            JORDAN,Jordan Dinar,JOD,089,0.8433,Foreign currency amount for 1 Euro.,2026-02-10
+            KAZAKHSTAN,Tenge,KZT,231,586.30,Foreign currency amount for 1 Euro.,2026-02-10
+            KENYA,Kenya Shilling,KES,022,153.4171,Foreign currency amount for 1 Euro.,2026-02-10
+            KOREA (Democratic People Rep.),North Korean Won,KPW,182,N.A.,Foreign currency amount for 1 Euro.,2026-02-10
+            KOREA (Republic of),South Korean Won,KRW,119,1738.48,Foreign currency amount for 1 Euro.,2026-02-10
+            KUWAIT,Kuwaiti Dinar,KWD,102,0.3643,Foreign currency amount for 1 Euro.,2026-02-10
+            KYRGYZ REPUBLIC,Som,KGS,225,104.0130,Foreign currency amount for 1 Euro.,2026-02-10
+            LAO PEOPLE S DEMOCRATIC REPUBL,Lao Kip,LAK,154,24076,Foreign currency amount for 1 Euro.,2026-02-10
+            LEBANON,Lebanese Pound,LBP,032,106451.30,Foreign currency amount for 1 Euro.,2026-02-10
+            LESOTHO,Loti,LSL,172,18.9797,Foreign currency amount for 1 Euro.,2026-02-10
+            LIBERIA,Liberian Dollar,LRD,155,221.9301,Foreign currency amount for 1 Euro.,2026-02-10
+            LIBYAN ARAB JAMAHIRIYA,Libyan Dinar,LYD,069,7.5090,Foreign currency amount for 1 Euro.,2026-02-10
+            MACAU,Pataca,MOP,156,9.5772,Foreign currency amount for 1 Euro.,2026-02-10
+            MACEDONIA (form. Yugoslav Rep),Macedonian Denar,MKD,236,61.5342,Foreign currency amount for 1 Euro.,2026-02-10
+            MADAGASCAR,Ariary,MGA,268,5235.16,Foreign currency amount for 1 Euro.,2026-02-10
+            MALAWI,Malawi Kwacha,MWK,157,2062.5941,Foreign currency amount for 1 Euro.,2026-02-10
+            MALAYSIA,Ringgit,MYR,055,4.6666,Foreign currency amount for 1 Euro.,2026-02-10
+            MALDIVES,Rufiyaa,MVR,158,18.3405,Foreign currency amount for 1 Euro.,2026-02-10
+            MALI,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            MAURITANIA,Ouguiya,MRU,282,47.398,Foreign currency amount for 1 Euro.,2026-02-10
+            MAURITIUS,Mauritian Rupee,MUR,170,54.5410,Foreign currency amount for 1 Euro.,2026-02-10
+            MEXICO,Mexican Peso,MXN,222,20.4998,Foreign currency amount for 1 Euro.,2026-02-10
+            MOLDOVA,Moldovan Leu,MDL,235,20.1588,Foreign currency amount for 1 Euro.,2026-02-10
+            MONGOLIA,Tugrik,MNT,160,4241.72,Foreign currency amount for 1 Euro.,2026-02-10
+            MOROCCO,Moroccan Dirham,MAD,084,10.851,Foreign currency amount for 1 Euro.,2026-02-10
+            MOZAMBIQUE,New Mozambique Metical,MZN,272,75.93,Foreign currency amount for 1 Euro.,2026-02-10
+            MYANMAR,Kyat,MMK,107,2497.7,Foreign currency amount for 1 Euro.,2026-02-10
+            NAMIBIA,Namibian Dollar,NAD,252,18.9797,Foreign currency amount for 1 Euro.,2026-02-10
+            NEPAL,Nepalese Rupee,NPR,161,172.3005,Foreign currency amount for 1 Euro.,2026-02-10
+            NETHERLANDS ANTILLES,Caribbean guilder,XCG,292,2.1290,Foreign currency amount for 1 Euro.,2026-02-10
+            NEW ZEALAND,New Zealand Dollar,NZD,113,1.9687,Foreign currency amount for 1 Euro.,2026-02-10
+            NICARAGUA,Cordoba,NIO,120,43.7562,Foreign currency amount for 1 Euro.,2026-02-10
+            NIGER,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            NIGERIA,Naira,NGN,081,1610.7568,Foreign currency amount for 1 Euro.,2026-02-10
+            NORWAY,Norwegian Krone,NOK,008,11.3115,Foreign currency amount for 1 Euro.,2026-02-10
+            OMAN,Rial Omani,OMR,184,0.4573,Foreign currency amount for 1 Euro.,2026-02-10
+            PAKISTAN,Pakistan Rupee,PKR,026,332.7504,Foreign currency amount for 1 Euro.,2026-02-10
+            PANAMA,Balboa,PAB,162,1.1894,Foreign currency amount for 1 Euro.,2026-02-10
+            PAPUA NEW GUINEA,Kina,PGK,190,5.1003,Foreign currency amount for 1 Euro.,2026-02-10
+            PARAGUAY,Paraguayan Guarani,PYG,101,7845.39,Foreign currency amount for 1 Euro.,2026-02-10
+            PERU,Nuevo Sol,PEN,201,3.9938,Foreign currency amount for 1 Euro.,2026-02-10
+            PHILIPPINES,Philippine Peso,PHP,066,69.6050,Foreign currency amount for 1 Euro.,2026-02-10
+            POLAND,Zloty,PLN,237,4.2170,Foreign currency amount for 1 Euro.,2026-02-10
+            QATAR,Qatar Riyal,QAR,189,4.3294,Foreign currency amount for 1 Euro.,2026-02-10
+            ROMANIA,New Romanian Leu,RON,270,5.0912,Foreign currency amount for 1 Euro.,2026-02-10
+            RUSSIAN FEDERATION,Russian Ruble,RUB,244,N.A.,Foreign currency amount for 1 Euro.,2026-02-10
+            RWANDA,Rwanda Franc,RWF,163,1731.1841,Foreign currency amount for 1 Euro.,2026-02-10
+            SAO TOME and PRINCIPE,Dobra,STN,283,24.5000,Foreign currency amount for 1 Euro.,2026-02-10
+            SAUDI ARABIA,Saudi Arabian Riyal,SAR,075,4.4603,Foreign currency amount for 1 Euro.,2026-02-10
+            SENEGAL,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            SERBIA,Serbian Dinar,RSD,274,117.2139,Foreign currency amount for 1 Euro.,2026-02-10
+            SEYCHELLES,Seychelles Rupee,SCR,185,17.6354,Foreign currency amount for 1 Euro.,2026-02-10
+            SIERRA LEONE,Leone,SLE,291,28.7556,Foreign currency amount for 1 Euro.,2026-02-10
+            SINGAPORE,Singapore Dollar,SGD,124,1.5061,Foreign currency amount for 1 Euro.,2026-02-10
+            SOLOMON (Islands),Solomon Islands Dollar,SBD,206,9.5765,Foreign currency amount for 1 Euro.,2026-02-10
+            SOMALIA,Somali Shilling,SOS,065,679.1593,Foreign currency amount for 1 Euro.,2026-02-10
+            SOUTH AFRICA,South African Rand,ZAR,082,18.9797,Foreign currency amount for 1 Euro.,2026-02-10
+            SOUTH SUDAN,South Sudanese Pound,SSP,279,5415.8735,Foreign currency amount for 1 Euro.,2026-02-10
+            SRI LANKA,Sri Lanka Rupee,LKR,058,368.1528,Foreign currency amount for 1 Euro.,2026-02-10
+            ST. HELENA,St. Helena Pound,SHP,207,0.86950,Foreign currency amount for 1 Euro.,2026-02-10
+            ST. KITTS AND NEVIS,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            ST. LUCIA,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            ST. VINCENT and the GRENADINES,East Caribbean Dollar,XCD,137,3.2114,Foreign currency amount for 1 Euro.,2026-02-10
+            SUDAN,Sudanese Pound,SDG,275,713.8430,Foreign currency amount for 1 Euro.,2026-02-10
+            SURINAME,Suriname Dollar,SRD,266,45.222,Foreign currency amount for 1 Euro.,2026-02-10
+            SWEDEN,Swedish Krona,SEK,009,10.6135,Foreign currency amount for 1 Euro.,2026-02-10
+            SWITZERLAND,Swiss Franc,CHF,003,0.9123,Foreign currency amount for 1 Euro.,2026-02-10
+            SYRIAN ARAB REPUBLIC,Syrian Pound,SYP,036,132.0234,Foreign currency amount for 1 Euro.,2026-02-10
+            TAIWAN,New Taiwan Dollar,TWD,143,37.5359,Foreign currency amount for 1 Euro.,2026-02-10
+            TAJIKISTAN,Somoni,TJS,264,11.1725,Foreign currency amount for 1 Euro.,2026-02-10
+            TANZANIA,Tanzania Shilling,TZS,125,3063.9345,Foreign currency amount for 1 Euro.,2026-02-10
+            THAILAND,Baht,THB,073,37.151,Foreign currency amount for 1 Euro.,2026-02-10
+            TOGO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-10
+            TONGA,Pa anga,TOP,167,2.7855,Foreign currency amount for 1 Euro.,2026-02-10
+            TRINIDAD and TOBAGO,Trinidad and Tobago Dollar,TTD,166,8.0359,Foreign currency amount for 1 Euro.,2026-02-10
+            TUNISIA,Tunisian Dinar,TND,080,3.3808,Foreign currency amount for 1 Euro.,2026-02-10
+            TURKEY,Turkey Lira (new),TRY,267,51.8989,Foreign currency amount for 1 Euro.,2026-02-10
+            TURKMENISTAN,Turkmen Manat (new),TMT,278,4.1629,Foreign currency amount for 1 Euro.,2026-02-10
+            UGANDA,Uganda Shilling,UGX,126,4231.97,Foreign currency amount for 1 Euro.,2026-02-10
+            UKRAINE,Hryvnia,UAH,241,51.2517,Foreign currency amount for 1 Euro.,2026-02-10
+            UNITED ARAB EMIRATES,U.A.E. Dirham,AED,187,4.3681,Foreign currency amount for 1 Euro.,2026-02-10
+            UNITED KINGDOM,Pound Sterling,GBP,002,0.86950,Foreign currency amount for 1 Euro.,2026-02-10
+            UNITED STATES,U.S. Dollar,USD,001,1.1894,Foreign currency amount for 1 Euro.,2026-02-10
+            URUGUAY,Uruguayan Peso,UYU,053,45.6334,Foreign currency amount for 1 Euro.,2026-02-10
+            UZBEKISTAN,Uzbek Sum,UZS,232,14649.69,Foreign currency amount for 1 Euro.,2026-02-10
+            VANUATU,Vatu,VUV,208,140.66,Foreign currency amount for 1 Euro.,2026-02-10
+            VENEZUELA,Bolivar Soberano,VES,284,457.6697,Foreign currency amount for 1 Euro.,2026-02-10
+            VIETNAM,Dong,VND,145,30802,Foreign currency amount for 1 Euro.,2026-02-10
+            WESTERN SAMOA,Tala,WST,164,3.1922,Foreign currency amount for 1 Euro.,2026-02-10
+            YEMEN,Yemeni Rial,YER,122,283.46,Foreign currency amount for 1 Euro.,2026-02-10
+            ZAMBIA,Zambian Kwacha,ZMW,148,22.5188,Foreign currency amount for 1 Euro.,2026-02-10
+            ZIMBABWE,Zimbabwe Dollar,ZWG,269,30.4362,Foreign currency amount for 1 Euro.,2026-02-10
+
+
+            # DISCLAIMER
+            # The exchange rates posted on the foreign exchange rates portal are not provided in real time and there is a lag between the time they are recorded and the time they are published on the portal.
+            # Except for the cases provided for by Italian law, the exchange rates are only indicative and are not intended to be used as a financial benchmark under Regulation (EU) 2016/1011.
+            # Banca d’Italia is not responsible for any use of the exchange rates for purposes other than those provided for by Italian law and liability for any such use rests solely with the users.
+            # Exchange rates for the major currencies vis-à-vis the euro are compiled based on a daily concertation procedure with the other ESCB central banks.
+            # In the event of changes in the currency systems, Banca d’Italia will update the exchange rates with effect from the date on which they are recorded and verified, and will provide the pertinent information in the ‘Notices’ section.
+            # Banca d’Italia accepts no responsibility for any inaccuracy or error caused for whatever reason.
+            # It is recommended that you refer to the ‘Notices’ section before consulting the exchange rates.
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Cache-Control:
+                - no-cache, no-store, must-revalidate
+            Content-Disposition:
+                - attachment;filename=daily_rates_20260210.csv
+            Content-Type:
+                - text/csv
+            Cross-Origin-Embedder-Policy:
+                - require-corp
+            Cross-Origin-Opener-Policy:
+                - same-origin
+            Cross-Origin-Resource-Policy:
+                - same-origin
+            Date:
+                - Thu, 12 Feb 2026 10:21:09 GMT
+            Permissions-Policy:
+                - accelerometer=(),autoplay=(),camera=(),display-capture=(),document-domain=(),encrypted-media=(),fullscreen=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),midi=(),payment=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),sync-xhr=(self),usb=(),web-share=(),xr-spatial-tracking=()
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - no-referrer
+            Set-Cookie:
+                - TS01d56941=011612bbe934312d43a0f684b680bd436dcdcffe1d4312d3fca93cb4fe325373f81f6878fad497f550276c10a7f75baa3fdb842ba6; Path=/; Domain=.tassidicambio.bancaditalia.it; Secure; HttpOnly
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: tassidicambio.bancaditalia.it
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - tassidicambio.bancaditalia.it
+            User-Agent:
+                - Ruby
+        url: https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates?currencyIsoCode=EUR&lang=en&referenceDate=2026-02-11
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 16187
+        body: |
+            Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
+            AFGHANISTAN (Islamic State of),Afghani,AFN,115,75.6731,Foreign currency amount for 1 Euro.,2026-02-11
+            ALBANIA,Lek,ALL,047,96.38,Foreign currency amount for 1 Euro.,2026-02-11
+            ALGERIA,Algerian Dinar,DZD,106,153.8738,Foreign currency amount for 1 Euro.,2026-02-11
+            ANGOLA,Adjusted Kwanza,AOA,087,1093.323,Foreign currency amount for 1 Euro.,2026-02-11
+            ANTIGUA AND BARBUDA,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            ARGENTINA,Peso,ARS,216,1671.2422,Foreign currency amount for 1 Euro.,2026-02-11
+            ARMENIA,Armenian Dram,AMD,246,449.38,Foreign currency amount for 1 Euro.,2026-02-11
+            ARUBA,Aruban Florin,AWG,211,2.1301,Foreign currency amount for 1 Euro.,2026-02-11
+            AUSTRALIA,Australian Dollar,AUD,109,1.6737,Foreign currency amount for 1 Euro.,2026-02-11
+            AZERBAIJAN,New Azerbaijan Manat,AZN,271,2.0230,Foreign currency amount for 1 Euro.,2026-02-11
+            BAHAMAS (The),Bahamian Dollar,BSD,135,1.1900,Foreign currency amount for 1 Euro.,2026-02-11
+            BAHRAIN,Bahrain Dinar,BHD,136,0.447,Foreign currency amount for 1 Euro.,2026-02-11
+            BANGLADESH,Bangladesh Taka,BDT,174,145.5430,Foreign currency amount for 1 Euro.,2026-02-11
+            BARBADOS,Barbados Dollar,BBD,195,2.380000,Foreign currency amount for 1 Euro.,2026-02-11
+            BELARUS,Belarussian Ruble (new),BYN,280,N.A.,Foreign currency amount for 1 Euro.,2026-02-11
+            BELIZE,Belize Dollar,BZD,152,2.3800,Foreign currency amount for 1 Euro.,2026-02-11
+            BENIN,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            BERMUDA,Bermuda Dollar,BMD,138,1.1900,Foreign currency amount for 1 Euro.,2026-02-11
+            BHUTAN,Ngultrum,BTN,180,107.9515,Foreign currency amount for 1 Euro.,2026-02-11
+            BOLIVIA,Boliviano,BOB,074,8.2229,Foreign currency amount for 1 Euro.,2026-02-11
+            BOSNIA and HERZEGOVINA,Convertible Marks,BAM,240,1.95583,Foreign currency amount for 1 Euro.,2026-02-11
+            BOTSWANA,Botswana Pula,BWP,171,15.9304,Foreign currency amount for 1 Euro.,2026-02-11
+            BRAZIL,Real,BRL,234,6.1753,Foreign currency amount for 1 Euro.,2026-02-11
+            BRUNEI DARUSSALAM,Brunei Dollar,BND,139,1.5027,Foreign currency amount for 1 Euro.,2026-02-11
+            BURKINA FASO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            BURUNDI,Burundi Franc,BIF,140,3541.619,Foreign currency amount for 1 Euro.,2026-02-11
+            CAMBODIA,Cambodian Riel,KHR,141,4792.40,Foreign currency amount for 1 Euro.,2026-02-11
+            CAMEROON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            CANADA,Canadian Dollar,CAD,012,1.6138,Foreign currency amount for 1 Euro.,2026-02-11
+            CAPE VERDE,Cape Verde Escudo,CVE,181,110.265,Foreign currency amount for 1 Euro.,2026-02-11
+            CAYMAN (Islands),Cayman Dollar,KYD,205,0.9758,Foreign currency amount for 1 Euro.,2026-02-11
+            CENTRAL AFRICAN REPUBLIC,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            CHAD,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            CHILE,Chilean Peso,CLP,029,1019.82,Foreign currency amount for 1 Euro.,2026-02-11
+            CHINA (People Republic of),Renminbi,CNY,144,8.2245,Foreign currency amount for 1 Euro.,2026-02-11
+            COLOMBIA,Colombian Peso,COP,040,4364.27,Foreign currency amount for 1 Euro.,2026-02-11
+            COMOROS,Comorian Franc,KMF,210,491.96775,Foreign currency amount for 1 Euro.,2026-02-11
+            CONGO (Democratic Republic of),Franc Congolais,CDF,261,2656.1767,Foreign currency amount for 1 Euro.,2026-02-11
+            CONGO (Republic of),CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            COSTA RICA,Costa Rican Colon,CRC,077,586.2059,Foreign currency amount for 1 Euro.,2026-02-11
+            COTE D IVOIRE,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            CUBA,Cuban Peso,CUP,067,28.5600,Foreign currency amount for 1 Euro.,2026-02-11
+            CZECH REPUBLIC,Czech Koruna,CZK,223,24.2450,Foreign currency amount for 1 Euro.,2026-02-11
+            DENMARK,Danish Krone,DKK,007,7.4698,Foreign currency amount for 1 Euro.,2026-02-11
+            DJIBOUTI,Djibouti Franc,DJF,083,211.488,Foreign currency amount for 1 Euro.,2026-02-11
+            DOMINICA,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            DOMINICAN REPUBLIC,Dominican Peso,DOP,116,74.5941,Foreign currency amount for 1 Euro.,2026-02-11
+            EGYPT,Egyptian Pound,EGP,070,55.7428,Foreign currency amount for 1 Euro.,2026-02-11
+            EL SALVADOR,Salvadoran Colon,SVC,117,10.4125,Foreign currency amount for 1 Euro.,2026-02-11
+            EQUATORIAL GUINEA,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            ERITREA,Nakfa,ERN,243,18.3022,Foreign currency amount for 1 Euro.,2026-02-11
+            ESWATINI (EX SWAZILAND),Lilangeni,SZL,173,18.8989,Foreign currency amount for 1 Euro.,2026-02-11
+            ETHIOPIA,Ethiopian Birr,ETB,068,184.8208,Foreign currency amount for 1 Euro.,2026-02-11
+            FALKLAND or MALVINE (Islands),Falkland Pound,FKP,146,0.86990,Foreign currency amount for 1 Euro.,2026-02-11
+            FIJI,Fiji Dollar,FJD,147,2.6327,Foreign currency amount for 1 Euro.,2026-02-11
+            FRENCH POLINESIA,CFP Franc,XPF,105,119.3317,Foreign currency amount for 1 Euro.,2026-02-11
+            GABON,CFA Franc,XAF,043,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            GAMBIA (The),Dalasi,GMD,193,85.76,Foreign currency amount for 1 Euro.,2026-02-11
+            GEORGIA,Lari,GEL,230,3.1940,Foreign currency amount for 1 Euro.,2026-02-11
+            GHANA,New Ghana Cedi,GHS,276,13.0746,Foreign currency amount for 1 Euro.,2026-02-11
+            GIBRALTAR,Gibraltar Pound,GIP,044,0.86990,Foreign currency amount for 1 Euro.,2026-02-11
+            GRENADA,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            GUATEMALA,Quetzal,GTQ,078,9.1229,Foreign currency amount for 1 Euro.,2026-02-11
+            GUINEA,Guinean Franc,GNF,129,10416.4205,Foreign currency amount for 1 Euro.,2026-02-11
+            GUINEA BISSAU,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            GUYANA,Guyanan Dollar,GYD,149,248.9718,Foreign currency amount for 1 Euro.,2026-02-11
+            HAITI,Gourde,HTG,151,155.5942,Foreign currency amount for 1 Euro.,2026-02-11
+            HONDURAS,Lempira,HNL,118,31.4655,Foreign currency amount for 1 Euro.,2026-02-11
+            HONG KONG (China),Hong Kong Dollar,HKD,103,9.3013,Foreign currency amount for 1 Euro.,2026-02-11
+            HUNGARY,Forint,HUF,153,379.0300,Foreign currency amount for 1 Euro.,2026-02-11
+            ICELAND,Icelandic Krona,ISK,062,145.20,Foreign currency amount for 1 Euro.,2026-02-11
+            INDIA,Indian Rupee,INR,031,107.9515,Foreign currency amount for 1 Euro.,2026-02-11
+            INDONESIA,Indonesian Rupiah,IDR,123,19992.00,Foreign currency amount for 1 Euro.,2026-02-11
+            INTERNATIONAL MONETARY FUND,SDR,XDR,188,0.861875,Foreign currency amount for 1 Euro.,2026-02-11
+            IRAN (Islamic Republic of),Iranian Rial,IRR,057,N.A.,Foreign currency amount for 1 Euro.,2026-02-11
+            IRAQ,Iraq Dinar,IQD,093,1558.900,Foreign currency amount for 1 Euro.,2026-02-11
+            ISRAEL,New Sheqel,ILS,203,3.6604,Foreign currency amount for 1 Euro.,2026-02-11
+            JAMAICA,Jamaica Dollar,JMD,142,185.7451,Foreign currency amount for 1 Euro.,2026-02-11
+            JAPAN,Japanese Yen,JPY,071,182.7900,Foreign currency amount for 1 Euro.,2026-02-11
+            JORDAN,Jordan Dinar,JOD,089,0.8437,Foreign currency amount for 1 Euro.,2026-02-11
+            KAZAKHSTAN,Tenge,KZT,231,585.41,Foreign currency amount for 1 Euro.,2026-02-11
+            KENYA,Kenya Shilling,KES,022,153.5055,Foreign currency amount for 1 Euro.,2026-02-11
+            KOREA (Democratic People Rep.),North Korean Won,KPW,182,N.A.,Foreign currency amount for 1 Euro.,2026-02-11
+            KOREA (Republic of),South Korean Won,KRW,119,1727.84,Foreign currency amount for 1 Euro.,2026-02-11
+            KUWAIT,Kuwaiti Dinar,KWD,102,0.3641,Foreign currency amount for 1 Euro.,2026-02-11
+            KYRGYZ REPUBLIC,Som,KGS,225,104.0655,Foreign currency amount for 1 Euro.,2026-02-11
+            LAO PEOPLE S DEMOCRATIC REPUBL,Lao Kip,LAK,154,24075,Foreign currency amount for 1 Euro.,2026-02-11
+            LEBANON,Lebanese Pound,LBP,032,106505.00,Foreign currency amount for 1 Euro.,2026-02-11
+            LESOTHO,Loti,LSL,172,18.8989,Foreign currency amount for 1 Euro.,2026-02-11
+            LIBERIA,Liberian Dollar,LRD,155,221.9945,Foreign currency amount for 1 Euro.,2026-02-11
+            LIBYAN ARAB JAMAHIRIYA,Libyan Dinar,LYD,069,7.4964,Foreign currency amount for 1 Euro.,2026-02-11
+            MACAU,Pataca,MOP,156,9.5803,Foreign currency amount for 1 Euro.,2026-02-11
+            MACEDONIA (form. Yugoslav Rep),Macedonian Denar,MKD,236,61.6138,Foreign currency amount for 1 Euro.,2026-02-11
+            MADAGASCAR,Ariary,MGA,268,5237.80,Foreign currency amount for 1 Euro.,2026-02-11
+            MALAWI,Malawi Kwacha,MWK,157,2064.5241,Foreign currency amount for 1 Euro.,2026-02-11
+            MALAYSIA,Ringgit,MYR,055,4.6589,Foreign currency amount for 1 Euro.,2026-02-11
+            MALDIVES,Rufiyaa,MVR,158,18.3498,Foreign currency amount for 1 Euro.,2026-02-11
+            MALI,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            MAURITANIA,Ouguiya,MRU,282,47.422,Foreign currency amount for 1 Euro.,2026-02-11
+            MAURITIUS,Mauritian Rupee,MUR,170,54.3628,Foreign currency amount for 1 Euro.,2026-02-11
+            MEXICO,Mexican Peso,MXN,222,20.4719,Foreign currency amount for 1 Euro.,2026-02-11
+            MOLDOVA,Moldovan Leu,MDL,235,20.1035,Foreign currency amount for 1 Euro.,2026-02-11
+            MONGOLIA,Tugrik,MNT,160,4243.61,Foreign currency amount for 1 Euro.,2026-02-11
+            MOROCCO,Moroccan Dirham,MAD,084,10.847,Foreign currency amount for 1 Euro.,2026-02-11
+            MOZAMBIQUE,New Mozambique Metical,MZN,272,75.93,Foreign currency amount for 1 Euro.,2026-02-11
+            MYANMAR,Kyat,MMK,107,2499.0,Foreign currency amount for 1 Euro.,2026-02-11
+            NAMIBIA,Namibian Dollar,NAD,252,18.8989,Foreign currency amount for 1 Euro.,2026-02-11
+            NEPAL,Nepalese Rupee,NPR,161,172.7224,Foreign currency amount for 1 Euro.,2026-02-11
+            NETHERLANDS ANTILLES,Caribbean guilder,XCG,292,2.1301,Foreign currency amount for 1 Euro.,2026-02-11
+            NEW ZEALAND,New Zealand Dollar,NZD,113,1.9637,Foreign currency amount for 1 Euro.,2026-02-11
+            NICARAGUA,Cordoba,NIO,120,43.7988,Foreign currency amount for 1 Euro.,2026-02-11
+            NIGER,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            NIGERIA,Naira,NGN,081,1607.7138,Foreign currency amount for 1 Euro.,2026-02-11
+            NORWAY,Norwegian Krone,NOK,008,11.2650,Foreign currency amount for 1 Euro.,2026-02-11
+            OMAN,Rial Omani,OMR,184,0.4576,Foreign currency amount for 1 Euro.,2026-02-11
+            PAKISTAN,Pakistan Rupee,PKR,026,332.9457,Foreign currency amount for 1 Euro.,2026-02-11
+            PANAMA,Balboa,PAB,162,1.1900,Foreign currency amount for 1 Euro.,2026-02-11
+            PAPUA NEW GUINEA,Kina,PGK,190,5.1095,Foreign currency amount for 1 Euro.,2026-02-11
+            PARAGUAY,Paraguayan Guarani,PYG,101,7863.02,Foreign currency amount for 1 Euro.,2026-02-11
+            PERU,Nuevo Sol,PEN,201,3.9951,Foreign currency amount for 1 Euro.,2026-02-11
+            PHILIPPINES,Philippine Peso,PHP,066,69.3470,Foreign currency amount for 1 Euro.,2026-02-11
+            POLAND,Zloty,PLN,237,4.2135,Foreign currency amount for 1 Euro.,2026-02-11
+            QATAR,Qatar Riyal,QAR,189,4.3316,Foreign currency amount for 1 Euro.,2026-02-11
+            ROMANIA,New Romanian Leu,RON,270,5.0912,Foreign currency amount for 1 Euro.,2026-02-11
+            RUSSIAN FEDERATION,Russian Ruble,RUB,244,N.A.,Foreign currency amount for 1 Euro.,2026-02-11
+            RWANDA,Rwanda Franc,RWF,163,1732.0696,Foreign currency amount for 1 Euro.,2026-02-11
+            SAO TOME and PRINCIPE,Dobra,STN,283,24.5000,Foreign currency amount for 1 Euro.,2026-02-11
+            SAUDI ARABIA,Saudi Arabian Riyal,SAR,075,4.4625,Foreign currency amount for 1 Euro.,2026-02-11
+            SENEGAL,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            SERBIA,Serbian Dinar,RSD,274,117.3478,Foreign currency amount for 1 Euro.,2026-02-11
+            SEYCHELLES,Seychelles Rupee,SCR,185,17.6438,Foreign currency amount for 1 Euro.,2026-02-11
+            SIERRA LEONE,Leone,SLE,291,28.8737,Foreign currency amount for 1 Euro.,2026-02-11
+            SINGAPORE,Singapore Dollar,SGD,124,1.5027,Foreign currency amount for 1 Euro.,2026-02-11
+            SOLOMON (Islands),Solomon Islands Dollar,SBD,206,9.5736,Foreign currency amount for 1 Euro.,2026-02-11
+            SOMALIA,Somali Shilling,SOS,065,679.8708,Foreign currency amount for 1 Euro.,2026-02-11
+            SOUTH AFRICA,South African Rand,ZAR,082,18.8989,Foreign currency amount for 1 Euro.,2026-02-11
+            SOUTH SUDAN,South Sudanese Pound,SSP,279,5418.6056,Foreign currency amount for 1 Euro.,2026-02-11
+            SRI LANKA,Sri Lanka Rupee,LKR,058,368.2321,Foreign currency amount for 1 Euro.,2026-02-11
+            ST. HELENA,St. Helena Pound,SHP,207,0.86990,Foreign currency amount for 1 Euro.,2026-02-11
+            ST. KITTS AND NEVIS,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            ST. LUCIA,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            ST. VINCENT and the GRENADINES,East Caribbean Dollar,XCD,137,3.2130,Foreign currency amount for 1 Euro.,2026-02-11
+            SUDAN,Sudanese Pound,SDG,275,714.2031,Foreign currency amount for 1 Euro.,2026-02-11
+            SURINAME,Suriname Dollar,SRD,266,45.269,Foreign currency amount for 1 Euro.,2026-02-11
+            SWEDEN,Swedish Krona,SEK,009,10.5640,Foreign currency amount for 1 Euro.,2026-02-11
+            SWITZERLAND,Swiss Franc,CHF,003,0.9136,Foreign currency amount for 1 Euro.,2026-02-11
+            SYRIAN ARAB REPUBLIC,Syrian Pound,SYP,036,132.0900,Foreign currency amount for 1 Euro.,2026-02-11
+            TAIWAN,New Taiwan Dollar,TWD,143,37.4583,Foreign currency amount for 1 Euro.,2026-02-11
+            TAJIKISTAN,Somoni,TJS,264,11.1934,Foreign currency amount for 1 Euro.,2026-02-11
+            TANZANIA,Tanzania Shilling,TZS,125,3061.5403,Foreign currency amount for 1 Euro.,2026-02-11
+            THAILAND,Baht,THB,073,36.991,Foreign currency amount for 1 Euro.,2026-02-11
+            TOGO,CFA Franc,XOF,209,655.957,Foreign currency amount for 1 Euro.,2026-02-11
+            TONGA,Pa anga,TOP,167,2.7810,Foreign currency amount for 1 Euro.,2026-02-11
+            TRINIDAD and TOBAGO,Trinidad and Tobago Dollar,TTD,166,8.0376,Foreign currency amount for 1 Euro.,2026-02-11
+            TUNISIA,Tunisian Dinar,TND,080,3.3821,Foreign currency amount for 1 Euro.,2026-02-11
+            TURKEY,Turkey Lira (new),TRY,267,51.9354,Foreign currency amount for 1 Euro.,2026-02-11
+            TURKMENISTAN,Turkmen Manat (new),TMT,278,4.1650,Foreign currency amount for 1 Euro.,2026-02-11
+            UGANDA,Uganda Shilling,UGX,126,4221.07,Foreign currency amount for 1 Euro.,2026-02-11
+            UKRAINE,Hryvnia,UAH,241,51.2078,Foreign currency amount for 1 Euro.,2026-02-11
+            UNITED ARAB EMIRATES,U.A.E. Dirham,AED,187,4.3703,Foreign currency amount for 1 Euro.,2026-02-11
+            UNITED KINGDOM,Pound Sterling,GBP,002,0.86990,Foreign currency amount for 1 Euro.,2026-02-11
+            UNITED STATES,U.S. Dollar,USD,001,1.1900,Foreign currency amount for 1 Euro.,2026-02-11
+            URUGUAY,Uruguayan Peso,UYU,053,45.6967,Foreign currency amount for 1 Euro.,2026-02-11
+            UZBEKISTAN,Uzbek Sum,UZS,232,14650.01,Foreign currency amount for 1 Euro.,2026-02-11
+            VANUATU,Vatu,VUV,208,140.63,Foreign currency amount for 1 Euro.,2026-02-11
+            VENEZUELA,Bolivar Soberano,VES,284,462.0217,Foreign currency amount for 1 Euro.,2026-02-11
+            VIETNAM,Dong,VND,145,30859,Foreign currency amount for 1 Euro.,2026-02-11
+            WESTERN SAMOA,Tala,WST,164,3.1937,Foreign currency amount for 1 Euro.,2026-02-11
+            YEMEN,Yemeni Rial,YER,122,283.59,Foreign currency amount for 1 Euro.,2026-02-11
+            ZAMBIA,Zambian Kwacha,ZMW,148,22.6693,Foreign currency amount for 1 Euro.,2026-02-11
+            ZIMBABWE,Zimbabwe Dollar,ZWG,269,30.4215,Foreign currency amount for 1 Euro.,2026-02-11
+
+
+            # DISCLAIMER
+            # The exchange rates posted on the foreign exchange rates portal are not provided in real time and there is a lag between the time they are recorded and the time they are published on the portal.
+            # Except for the cases provided for by Italian law, the exchange rates are only indicative and are not intended to be used as a financial benchmark under Regulation (EU) 2016/1011.
+            # Banca d’Italia is not responsible for any use of the exchange rates for purposes other than those provided for by Italian law and liability for any such use rests solely with the users.
+            # Exchange rates for the major currencies vis-à-vis the euro are compiled based on a daily concertation procedure with the other ESCB central banks.
+            # In the event of changes in the currency systems, Banca d’Italia will update the exchange rates with effect from the date on which they are recorded and verified, and will provide the pertinent information in the ‘Notices’ section.
+            # Banca d’Italia accepts no responsibility for any inaccuracy or error caused for whatever reason.
+            # It is recommended that you refer to the ‘Notices’ section before consulting the exchange rates.
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Cache-Control:
+                - no-cache, no-store, must-revalidate
+            Content-Disposition:
+                - attachment;filename=daily_rates_20260211.csv
+            Content-Type:
+                - text/csv
+            Cross-Origin-Embedder-Policy:
+                - require-corp
+            Cross-Origin-Opener-Policy:
+                - same-origin
+            Cross-Origin-Resource-Policy:
+                - same-origin
+            Date:
+                - Thu, 12 Feb 2026 10:33:44 GMT
+            Permissions-Policy:
+                - accelerometer=(),autoplay=(),camera=(),display-capture=(),document-domain=(),encrypted-media=(),fullscreen=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),midi=(),payment=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),sync-xhr=(self),usb=(),web-share=(),xr-spatial-tracking=()
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - no-referrer
+            Set-Cookie:
+                - TS01d56941=011612bbe983583371be81b4e8542bd7208ef630392dfa7eca6172afe57f87b6718426178b2f6bea1a8a1d07ac7f2b1fa7e43dbe21; Path=/; Domain=.tassidicambio.bancaditalia.it; Secure; HttpOnly
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

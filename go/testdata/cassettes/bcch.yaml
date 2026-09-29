@@ -1,0 +1,467 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F073.TCO.PRE.Z.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1814
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal (dólar observado $CLP/USD); tipo de cambio; ; precio; diario; ; Banco Central de Chile; ; \",\r\n    \"descripIng\": \"Nominal exchange rate (Observed dollar $CLP/USD); exchange rate; ; price; daily; ; central bank of chile; ; \",\r\n    \"seriesId\": \"F073.TCO.PRE.Z.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"871.41\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"884.21\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"906.32\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"895.14\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"907.66\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"921.76\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"916.36\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"893.69\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"895.86\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"909.94\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:25 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=1b7e483600b81775
+                - intid;desc=4c271e5132fdf62
+            Set-Cookie:
+                - ASP.NET_SessionId=4ysuo55os0kr4cp4tzb3ea0r; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.EUR.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1656
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal euro\",\r\n    \"descripIng\": \"Euro nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.EUR.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"1029.91\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"1034.53\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"1050.68\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"1041.22\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"1051.14\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"1069.2\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"1061.34\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"1041.35\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"1036.64\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"1048.68\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:26 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=b04e71754573e123
+                - intid;desc=fc1266cf48798c4a
+            Set-Cookie:
+                - ASP.NET_SessionId=u5xybkgbfhiqztgkkrrilfpe; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.GBP.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1676
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal libra esterlina\",\r\n    \"descripIng\": \"Pound sterling nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.GBP.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"1172.83\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"1185.43\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"1207.3\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"1195.75\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"1209.25\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"1234.44\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"1226.56\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"1203.3\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"1201.37\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"1215.36\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:28 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=3bfca0b591e18a32
+                - intid;desc=9025b25a412d4444
+            Set-Cookie:
+                - ASP.NET_SessionId=tx5immnxujr1qc4gdg3fo1od; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.JPY.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1624
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal Yen\",\r\n    \"descripIng\": \"Yen nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.JPY.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"5.59\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"5.62\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"5.74\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"5.7\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"5.76\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"5.84\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"5.79\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"5.67\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"5.64\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"5.71\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:29 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=209e7add9db230d7
+                - intid;desc=8c7d9b4de6f01d63
+            Set-Cookie:
+                - ASP.NET_SessionId=wvzuv1f2pblhkgllptnrkwq2; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.CAD.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1670
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal dólar canadiense\",\r\n    \"descripIng\": \"Canadian dollar nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.CAD.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"639.33\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"645.17\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"662.95\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"654.96\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"662.48\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"677.57\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"674.69\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"658.53\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"659.59\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"667.8\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:31 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=3952dec633209827
+                - intid;desc=b1d0a10c293bc394
+            Set-Cookie:
+                - ASP.NET_SessionId=3zxgy3tz3rovxq43bryncr2z; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.AUD.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1673
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal dólar australiano\",\r\n    \"descripIng\": \"Australian dollar nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.AUD.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"620.13\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"625.59\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"636.42\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"632.7\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"634.37\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"646.67\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"644.92\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"639.68\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"640.45\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"644.94\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:32 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=4bf5dc69ae45f0ce
+                - intid;desc=d9511b8aa37a541e
+            Set-Cookie:
+                - ASP.NET_SessionId=20oidloymbptod5jzidnnfhk; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.CNY.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1646
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal Yuan\",\r\n    \"descripIng\": \"Yuan nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.CNY.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"127.03\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"128.08\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"130.9\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"129.86\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"131.24\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"133.58\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"132.58\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"130.18\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"130.28\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"132.28\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:34 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=b5e0997ae67b150f
+                - intid;desc=d9dd96efa58f6dba
+            Set-Cookie:
+                - ASP.NET_SessionId=2ag1ad05cdltbditxvgxmmm0; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: si3.bcentral.cl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - si3.bcentral.cl
+            User-Agent:
+                - Ruby
+        url: https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?firstdate=2026-03-01&function=GetSeries&lastdate=2026-03-15&pass=<BCCH_PASS>&timeseries=F072.CLP.BRL.N.O.D&user=<BCCH_USER>
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1667
+        body: "{\r\n  \"Codigo\": 0,\r\n  \"Descripcion\": \"Success\",\r\n  \"Series\": {\r\n    \"descripEsp\": \"Tipo de cambio nominal real brasileño\",\r\n    \"descripIng\": \"Brazilian real nominal exchange rate\",\r\n    \"seriesId\": \"F072.CLP.BRL.N.O.D\",\r\n    \"Obs\": [\r\n      {\r\n        \"indexDateString\": \"02-03-2026\",\r\n        \"value\": \"169.61\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"03-03-2026\",\r\n        \"value\": \"170.74\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"04-03-2026\",\r\n        \"value\": \"171.4\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"05-03-2026\",\r\n        \"value\": \"171.41\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"06-03-2026\",\r\n        \"value\": \"172.66\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"07-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"08-03-2026\",\r\n        \"value\": \"NaN\",\r\n        \"statusCode\": \"ND\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"09-03-2026\",\r\n        \"value\": \"174.84\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"10-03-2026\",\r\n        \"value\": \"175.61\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"11-03-2026\",\r\n        \"value\": \"173.91\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"12-03-2026\",\r\n        \"value\": \"173.49\",\r\n        \"statusCode\": \"OK\"\r\n      },\r\n      {\r\n        \"indexDateString\": \"13-03-2026\",\r\n        \"value\": \"174.59\",\r\n        \"statusCode\": \"OK\"\r\n      }\r\n    ]\r\n  },\r\n  \"SeriesInfos\": []\r\n}"
+        headers:
+            Cache-Control:
+                - private,no-cache
+            Content-Security-Policy:
+                - frame-ancestors 'self' https://si3.bcentral.cl https://www.bcentral.cl
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:21:37 GMT
+            Permission-Policy:
+                - geolocation=(self "https://FAKE URL.com")
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin
+            Server:
+                - "0"
+            Server-Timing:
+                - intid;desc=22f26af6f83bec85
+                - intid;desc=28789e0cd9657c44
+            Set-Cookie:
+                - ASP.NET_SessionId=r1hxot0enwxnn3eejvml5dkr; path=/; secure; HttpOnly; SameSite=Lax
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Aspnet-Version:
+                - "0"
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - "0"
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s

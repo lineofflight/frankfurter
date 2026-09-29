@@ -1,0 +1,2435 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=EUR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 464
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"4 983,29","2026-09-22":"4 994,66","2026-09-21":"4 984,87"},"coursMidMax":{"2026-09-23":"5 000,00","2026-09-22":"5 013,00","2026-09-21":"5 005,00"},"coursMidMin":{"2026-09-23":"4 950,00","2026-09-22":"4 980,00","2026-09-21":"4 969,00"},"grapheData":{"2026-09-21":"4984.87","2026-09-22":"4994.66","2026-09-23":"4983.29"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:23:52 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=USD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 464
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"4 391,53","2026-09-22":"4 381,82","2026-09-21":"4 375,16"},"coursMidMax":{"2026-09-23":"4 408,00","2026-09-22":"4 400,00","2026-09-21":"4 395,00"},"coursMidMin":{"2026-09-23":"4 374,00","2026-09-22":"4 364,00","2026-09-21":"4 359,00"},"grapheData":{"2026-09-21":"4375.16","2026-09-22":"4381.82","2026-09-23":"4391.53"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:25 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=GBP
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"5 831,73","2026-09-22":"5 854,77","2026-09-21":"5 860,31"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"5860.31","2026-09-22":"5854.77","2026-09-23":"5831.73"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:23:55 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=CHF
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"5 336,65","2026-09-22":"5 347,27","2026-09-21":"5 327,44"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"5327.44","2026-09-22":"5347.27","2026-09-23":"5336.65"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:23:56 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=JPY
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 307
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"27,81","2026-09-22":"27,88","2026-09-21":"27,83"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"27.83","2026-09-22":"27.88","2026-09-23":"27.81"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:23:57 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=CAD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"3 116,99","2026-09-22":"3 120,84","2026-09-21":"3 125,00"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"3125.00","2026-09-22":"3120.84","2026-09-23":"3116.99"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:31 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=DKK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"670,40","2026-09-22":"671,91","2026-09-21":"672,48"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"672.48","2026-09-22":"671.91","2026-09-23":"670.40"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:23:59 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=NOK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"464,32","2026-09-22":"464,90","2026-09-21":"465,00"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"465.00","2026-09-22":"464.90","2026-09-23":"464.32"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:33 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=SEK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"444,77","2026-09-22":"446,68","2026-09-21":"445,86"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"445.86","2026-09-22":"446.68","2026-09-23":"444.77"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:09 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=DJF
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 307
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"24,66","2026-09-22":"24,61","2026-09-21":"24,57"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"24.57","2026-09-22":"24.61","2026-09-23":"24.66"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:42 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=XDR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"5 992,63","2026-09-22":"5 982,26","2026-09-21":"5 969,62"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"5969.62","2026-09-22":"5982.26","2026-09-23":"5992.63"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:12 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=MUR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 307
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"91,72","2026-09-22":"91,94","2026-09-21":"91,80"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"91.80","2026-09-22":"91.94","2026-09-23":"91.72"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:15 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=ZAR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"268,78","2026-09-22":"269,85","2026-09-21":"269,15"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"269.15","2026-09-22":"269.85","2026-09-23":"268.78"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:16 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=AUD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"3 104,81","2026-09-22":"3 116,35","2026-09-21":"3 122,77"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"3122.77","2026-09-22":"3116.35","2026-09-23":"3104.81"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:50 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=HKD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"559,90","2026-09-22":"558,68","2026-09-21":"557,66"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"557.66","2026-09-22":"558.68","2026-09-23":"559.90"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:22 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=SGD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"3 435,45","2026-09-22":"3 437,67","2026-09-21":"3 432,17"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"3432.17","2026-09-22":"3437.67","2026-09-23":"3435.45"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:56 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=NZD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 322
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"2 499,88","2026-09-22":"2 512,54","2026-09-21":"2 509,37"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"2509.37","2026-09-22":"2512.54","2026-09-23":"2499.88"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:26 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=INR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 307
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"45,87","2026-09-22":"45,84","2026-09-21":"45,66"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"45.66","2026-09-22":"45.84","2026-09-23":"45.87"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:34:59 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2026%2F09%2F21&dateFilterFin=2026%2F09%2F23&filterData=CNY
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 313
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2026-09-23":"654,72","2026-09-22":"653,99","2026-09-21":"653,46"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2026-09-21":"653.46","2026-09-22":"653.99","2026-09-23":"654.72"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:24:28 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=EUR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 559
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"3 884,16","2018-01-04":"3 877,84","2018-01-03":"3 885,75","2018-01-02":"3 873,76"},"coursMidMax":{"2018-01-05":"3 900,00","2018-01-04":"3 900,00","2018-01-03":"3 900,00","2018-01-02":"3 895,00"},"coursMidMin":{"2018-01-05":"3 855,00","2018-01-04":"3 850,00","2018-01-03":"3 855,00","2018-01-02":"3 850,00"},"grapheData":{"2018-01-02":"3873.76","2018-01-03":"3885.75","2018-01-04":"3877.84","2018-01-05":"3884.16"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:28 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=USD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 559
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"3 225,15","2018-01-04":"3 228,58","2018-01-03":"3 225,76","2018-01-02":"3 220,45"},"coursMidMax":{"2018-01-05":"3 235,00","2018-01-04":"3 240,00","2018-01-03":"3 239,00","2018-01-02":"3 252,00"},"coursMidMin":{"2018-01-05":"3 212,00","2018-01-04":"3 212,00","2018-01-03":"3 205,00","2018-01-02":"3 210,00"},"grapheData":{"2018-01-02":"3220.45","2018-01-03":"3225.76","2018-01-04":"3228.58","2018-01-05":"3225.15"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:29 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=GBP
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"4 368,30","2018-01-04":"4 375,86","2018-01-03":"4 374,78","2018-01-02":"4 364,68"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"4364.68","2018-01-03":"4374.78","2018-01-04":"4375.86","2018-01-05":"4368.30"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:31 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=CHF
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"3 302,60","2018-01-04":"3 310,68","2018-01-03":"3 303,73","2018-01-02":"3 315,44"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"3315.44","2018-01-03":"3303.73","2018-01-04":"3310.68","2018-01-05":"3302.60"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:00 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=JPY
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 349
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"28,47","2018-01-04":"28,68","2018-01-03":"28,73","2018-01-02":"28,70"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"28.70","2018-01-03":"28.73","2018-01-04":"28.68","2018-01-05":"28.47"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:34 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=CAD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"2 579,50","2018-01-04":"2 579,97","2018-01-03":"2 575,46","2018-01-02":"2 568,45"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"2568.45","2018-01-03":"2575.46","2018-01-04":"2579.97","2018-01-05":"2579.50"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:04 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 25
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=DKK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"522,06","2018-01-04":"523,19","2018-01-03":"520,58","2018-01-02":"521,91"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"521.91","2018-01-03":"520.58","2018-01-04":"523.19","2018-01-05":"522.06"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:07 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 26
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=NOK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"399,33","2018-01-04":"399,16","2018-01-03":"397,70","2018-01-02":"397,05"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"397.05","2018-01-03":"397.70","2018-01-04":"399.16","2018-01-05":"399.33"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:08 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 27
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=SEK
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"395,69","2018-01-04":"396,75","2018-01-03":"394,46","2018-01-02":"395,36"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"395.36","2018-01-03":"394.46","2018-01-04":"396.75","2018-01-05":"395.69"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:10 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 28
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=DJF
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 349
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"18,23","2018-01-04":"18,25","2018-01-03":"18,23","2018-01-02":"18,20"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"18.20","2018-01-03":"18.23","2018-01-04":"18.25","2018-01-05":"18.23"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:13 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 29
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=XDR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"4 604,84","2018-01-04":"4 604,96","2018-01-03":"4 606,77","2018-01-02":"4 586,34"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"4586.34","2018-01-03":"4606.77","2018-01-04":"4604.96","2018-01-05":"4604.84"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:14 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 30
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=MUR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 349
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"96,47","2018-01-04":"96,38","2018-01-03":"96,29","2018-01-02":"96,42"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"96.42","2018-01-03":"96.29","2018-01-04":"96.38","2018-01-05":"96.47"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:47 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 31
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=ZAR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"260,56","2018-01-04":"262,68","2018-01-03":"261,14","2018-01-02":"260,89"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"260.89","2018-01-03":"261.14","2018-01-04":"262.68","2018-01-05":"260.56"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:17 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 32
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=AUD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"2 529,81","2018-01-04":"2 534,11","2018-01-03":"2 526,74","2018-01-02":"2 521,13"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"2521.13","2018-01-03":"2526.74","2018-01-04":"2534.11","2018-01-05":"2529.81"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:50 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 33
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=HKD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"412,39","2018-01-04":"412,94","2018-01-03":"412,64","2018-01-02":"412,09"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"412.09","2018-01-03":"412.64","2018-01-04":"412.94","2018-01-05":"412.39"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:21 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 34
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=SGD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"2 429,67","2018-01-04":"2 429,42","2018-01-03":"2 425,47","2018-01-02":"2 423,76"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"2423.76","2018-01-03":"2425.47","2018-01-04":"2429.42","2018-01-05":"2429.67"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:23 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 35
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=NZD
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 369
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"2 309,85","2018-01-04":"2 301,17","2018-01-03":"2 291,74","2018-01-02":"2 289,90"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"2289.90","2018-01-03":"2291.74","2018-01-04":"2301.17","2018-01-05":"2309.85"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:35:57 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 36
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=INR
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 349
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"50,89","2018-01-04":"50,92","2018-01-03":"50,77","2018-01-02":"50,73"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"50.73","2018-01-03":"50.77","2018-01-04":"50.92","2018-01-05":"50.89"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:25 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 37
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 74
+        host: www.banky-foibe.mg
+        body: dateFilterDebut=2018%2F01%2F02&dateFilterFin=2018%2F01%2F05&filterData=CNY
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - www.banky-foibe.mg
+            Origin:
+                - https://www.banky-foibe.mg
+            Referer:
+                - https://www.banky-foibe.mg/taux-reference
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 357
+        body: '{"code":"cours-de-mid-en-ar-filter","message":"Cours de Mid en Ariary entre deux dates","data":{"status":200,"data":{"coursMid":{"2018-01-05":"496,93","2018-01-04":"496,97","2018-01-03":"496,23","2018-01-02":"495,99"},"coursMidMax":[],"coursMidMin":[],"grapheData":{"2018-01-02":"495.99","2018-01-03":"496.23","2018-01-04":"496.97","2018-01-05":"496.93"}}}}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - Authorization, Content-Type
+            Access-Control-Allow-Methods:
+                - OPTIONS, GET, POST, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+                - https://www.banky-foibe.mg
+            Access-Control-Expose-Headers:
+                - X-WP-Total, X-WP-TotalPages
+            Allow:
+                - POST
+            Connection:
+                - close
+            Content-Type:
+                - application/json; charset=UTF-8
+            Date:
+                - Sat, 26 Sep 2026 20:25:28 GMT
+            Link:
+                - <https://www.banky-foibe.mg/admin/wp-json/>; rel="https://api.w.org/"
+            Server:
+                - Apache
+            Vary:
+                - Accept-Encoding
+                - Origin
+            X-Content-Type-Options:
+                - nosniff
+            X-Robots-Tag:
+                - noindex
+        status: 200 OK
+        code: 200
+        duration: 0s

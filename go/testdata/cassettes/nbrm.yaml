@@ -1,0 +1,133 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.nbrm.mk
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.nbrm.mk
+            User-Agent:
+                - Ruby
+        url: https://www.nbrm.mk/KLServiceNOV/GetExchangeRate?EndDate=29.05.2026&StartDate=01.03.2026&format=json
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 9212
+        body: '[{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"978","oznaka":"EUR","drzava":"ЕМУ","nomin":1,"sreden":61.6948,"drzavaAng":"EMU","drzavaAl":"UEM","nazivMak":"евро","nazivAng":"Euro","nazivAl":"Euro","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"840","oznaka":"USD","drzava":"С А Д","nomin":1,"sreden":52.2616,"drzavaAng":"USA","drzavaAl":"SHBA","nazivMak":"САД долар","nazivAng":"US dollar","nazivAl":"Dollari Amerikan","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"826","oznaka":"GBP","drzava":"В.Британија","nomin":1,"sreden":70.4037,"drzavaAng":"U.K.","drzavaAl":"Britania e Madhe","nazivMak":"британска фунта","nazivAng":"Pound sterling","nazivAl":"Pondi Britanik","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"756","oznaka":"CHF","drzava":"Швајцарија","nomin":1,"sreden":67.7667,"drzavaAng":"Switzerland","drzavaAl":"Zvicra","nazivMak":"швајцарски франк","nazivAng":"Swiss franc","nazivAl":"Franga Zviceriane","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"752","oznaka":"SEK","drzava":"Шведска","nomin":1,"sreden":5.7852,"drzavaAng":"Sweden","drzavaAl":"Suedia","nazivMak":"шведска круна","nazivAng":"Swedish krona","nazivAl":"Korona Suedeze","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"578","oznaka":"NOK","drzava":"Норвешка","nomin":1,"sreden":5.5043,"drzavaAng":"Norway","drzavaAl":"Norvegjia","nazivMak":"норвешка круна","nazivAng":"Norwegian krone","nazivAl":"Korona Norvegjeze","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"392","oznaka":"JPY","drzava":"Јапонија","nomin":1,"sreden":0.3351,"drzavaAng":"Japan","drzavaAl":"Japonia","nazivMak":"јапонски јен","nazivAng":"Japanese yen","nazivAl":"Jeni Japonez","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"208","oznaka":"DKK","drzava":"Данска","nomin":1,"sreden":8.257,"drzavaAng":"Denmark","drzavaAl":"Danimarka","nazivMak":"данска круна","nazivAng":"Danish krone","nazivAl":"Korona Daneze","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"124","oznaka":"CAD","drzava":"Канада","nomin":1,"sreden":38.2272,"drzavaAng":"Canada","drzavaAl":"Kanada","nazivMak":"канадски долар","nazivAng":"Canadian dollar","nazivAl":"Dollari Kanadez","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"036","oznaka":"AUD","drzava":"Австралија","nomin":1,"sreden":37.1387,"drzavaAng":"Australia","drzavaAl":"Australia","nazivMak":"австралиски долар","nazivAng":"Australian dollar","nazivAl":"Dollari Australian","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"203","oznaka":"CZK","drzava":"Чешка","nomin":1,"sreden":2.5447,"drzavaAng":"Czech Republic","drzavaAl":"Republika Çeke","nazivMak":"чешка круна","nazivAng":"Czech koruna","nazivAl":"Korona Çeke","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"348","oznaka":"HUF","drzava":"Унгарија","nomin":1,"sreden":0.1638,"drzavaAng":"Hungary","drzavaAl":"Hungaria","nazivMak":"унгарска форинта","nazivAng":"Hungarian forint","nazivAl":"Forinta Hungareze","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"985","oznaka":"PLN","drzava":"Полска","nomin":1,"sreden":14.6047,"drzavaAng":"Poland","drzavaAl":"Polonia","nazivMak":"полска злота","nazivAng":"Polish zloty","nazivAl":"Zloty Polonez","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"946","oznaka":"RON","drzava":"Рoманија","nomin":1,"sreden":12.1072,"drzavaAng":"Romania","drzavaAl":"Rumania","nazivMak":"романски леу","nazivAng":"Romanian leu","nazivAl":"Lei Rumun","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"949","oznaka":"TRY","drzava":"Турција","nomin":1,"sreden":1.1888,"drzavaAng":"Turkey","drzavaAl":"Turqia","nazivMak":"турска лира","nazivAng":"Turkish lira","nazivAl":"Lira Turke","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"643","oznaka":"RUB","drzava":"Русија","nomin":1,"sreden":0.6777,"drzavaAng":"Russia","drzavaAl":"Rusia","nazivMak":"руска рубља","nazivAng":"Russian rouble","nazivAl":"Rubla Ruse","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"986","oznaka":"BRL","drzava":"Бразил","nomin":1,"sreden":10.1368,"drzavaAng":"Brazil","drzavaAl":"Brazili","nazivMak":"бразилски реал","nazivAng":"Brasilian real","nazivAl":"Reali Braziljan","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"156","oznaka":"CNY","drzava":"Кина","nomin":1,"sreden":7.6203,"drzavaAng":"China","drzavaAl":"Kina","nazivMak":"кинески јуан","nazivAng":"Chinese yuan renminbi","nazivAl":"Juani Kinez","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"344","oznaka":"HKD","drzava":"Хонг Конг","nomin":1,"sreden":6.6799,"drzavaAng":"Hong Kong","drzavaAl":"Hong Kong","nazivMak":"хонгконшки долар","nazivAng":"Hong kong dollar","nazivAl":"Dollari i Hong Kongut","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"360","oznaka":"IDR","drzava":"Индонезија","nomin":1,"sreden":0.0031,"drzavaAng":"Indonesia","drzavaAl":"Indonezia","nazivMak":"индонезиска рупија","nazivAng":"Indonesian rupiah","nazivAl":"Rupia Indoneziane","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"376","oznaka":"ILS","drzava":"Израел","nomin":1,"sreden":16.6262,"drzavaAng":"Israel","drzavaAl":"Izraeli","nazivMak":"израелски шекел","nazivAng":"Israeli shekel","nazivAl":"Shekeli Izraelit","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"356","oznaka":"INR","drzava":"Индија","nomin":1,"sreden":0.5738,"drzavaAng":"India","drzavaAl":"India","nazivMak":"индиска рупија","nazivAng":"Indian rupee","nazivAl":"Rupia Indiane","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"410","oznaka":"KRW","drzava":"Јужна Кореја","nomin":1,"sreden":0.0362,"drzavaAng":"South  Korea","drzavaAl":"Korea Jugore","nazivMak":"јужнокорејски вон","nazivAng":"South Korean won","nazivAl":"Voni Koreanojugor","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"484","oznaka":"MXN","drzava":"Мексико","nomin":1,"sreden":3.0363,"drzavaAng":"Mexico","drzavaAl":"Meksika","nazivMak":"мексиканско песо","nazivAng":"Mexican peso","nazivAl":"Peso Meksikane","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"458","oznaka":"MYR","drzava":"Малезија","nomin":1,"sreden":13.4315,"drzavaAng":"Malaysia","drzavaAl":"Malajzia","nazivMak":"малезиски рингит","nazivAng":"Malaysian ringgit","nazivAl":"Ringiti Malajzian","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"554","oznaka":"NZD","drzava":"Нов Зеланд","nomin":1,"sreden":31.268,"drzavaAng":"New Zealand","drzavaAl":"Zelanda e Re","nazivMak":"новозеландски долар","nazivAng":"New Zealand dollar","nazivAl":"Dollari i Zelandës së Re","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"608","oznaka":"PHP","drzava":"Филипини","nomin":1,"sreden":0.906,"drzavaAng":"Philppines","drzavaAl":"Filipinet","nazivMak":"филипинско песо","nazivAng":"Philippine peso","nazivAl":"Peso Filipineze","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"702","oznaka":"SGD","drzava":"Сингапур","nomin":1,"sreden":41.2895,"drzavaAng":"Singapore","drzavaAl":"Singapuri","nazivMak":"сингапурски долар","nazivAng":"Singapore dollar","nazivAl":"Dollari i Singapurit","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"764","oznaka":"THB","drzava":"Тајланд","nomin":1,"sreden":1.6812,"drzavaAng":"Thailand","drzavaAl":"Tailanda","nazivMak":"тајландски бахт","nazivAng":"Thai baht","nazivAl":"Bahti Tailandez","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"710","oznaka":"ZAR","drzava":"Јужна Африка","nomin":1,"sreden":3.2785,"drzavaAng":"South Africa","drzavaAl":"Afrika Jugore","nazivMak":"јужноафрикански ранд","nazivAng":"South African rand","nazivAl":"Randi Afrikanojugor","datum_f":"2026-02-27T00:00:00"},{"rBr":39,"datum":"2026-03-01T00:00:00","valuta":"941","oznaka":"RSD","drzava":"Србија","nomin":1,"sreden":0.5253,"drzavaAng":"Serbia","drzavaAl":"Serbia","nazivMak":"српски динар","nazivAng":"Serbian dinar","nazivAl":"Dinari Serb","datum_f":"2026-02-27T00:00:00"}]'
+        headers:
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - a03e3ee3cdfd952f-LHR
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - frame-src https://www.googletagmanager.com http://app.nbrm.mk/ https://app.nbrm.mk/ https://platform.twitter.com/ https://www.youtube.com/ https://e-nabavki.gov.mk/ https://www.google.com/ http://www.nbrm.mk/ https://www.nbrm.mk/
+                - upgrade-insecure-requests;
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sat, 30 May 2026 13:57:03 GMT
+            Nel:
+                - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+            Report-To:
+                - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Ol9Q88KOXTgyL38wxFpmQULdKCX%2FVTvwZQhG0LboiJhoiYSuwJapOYq3SN%2FN%2B2QDp1Vv5YDff%2BSkgX6mpuKkRHT43rsKkbhXlF2sIho2cR8KyU1vMqLTacbXIcku"}]}'
+            Server:
+                - cloudflare
+            Strict-Transport-Security:
+                - max-age=2592000
+                - max-age=31536000
+            X-Content-Type-Options:
+                - nosniff
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+                - SAMEORIGIN
+            X-Sucuri-Cache:
+                - MISS
+            X-Sucuri-Id:
+                - "21017"
+            X-Ua-Compatible:
+                - IE=Edge,chrome=1
+            X-Xss-Protection:
+                - 1; mode=block
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.nbrm.mk
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.nbrm.mk
+            User-Agent:
+                - Ruby
+        url: https://www.nbrm.mk/KLServiceNOV/GetExchangeRate?EndDate=30.05.2026&StartDate=30.05.2026&format=json
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1413
+        body: '[{"rBr":98,"datum":"2026-05-30T00:00:00","valuta":"978","oznaka":"EUR","drzava":"ЕМУ","nomin":1,"sreden":61.695,"drzavaAng":"EMU","drzavaAl":"UEM","nazivMak":"евро","nazivAng":"Euro","nazivAl":"Euro","datum_f":"2026-05-28T00:00:00"},{"rBr":98,"datum":"2026-05-30T00:00:00","valuta":"840","oznaka":"USD","drzava":"С А Д","nomin":1,"sreden":53.1075,"drzavaAng":"USA","drzavaAl":"SHBA","nazivMak":"САД долар","nazivAng":"US dollar","nazivAl":"Dollari Amerikan","datum_f":"2026-05-28T00:00:00"},{"rBr":98,"datum":"2026-05-30T00:00:00","valuta":"826","oznaka":"GBP","drzava":"В.Британија","nomin":1,"sreden":71.1879,"drzavaAng":"U.K.","drzavaAl":"Britania e Madhe","nazivMak":"британска фунта","nazivAng":"Pound sterling","nazivAl":"Pondi Britanik","datum_f":"2026-05-28T00:00:00"},{"rBr":98,"datum":"2026-05-30T00:00:00","valuta":"756","oznaka":"CHF","drzava":"Швајцарија","nomin":1,"sreden":67.3012,"drzavaAng":"Switzerland","drzavaAl":"Zvicra","nazivMak":"швајцарски франк","nazivAng":"Swiss franc","nazivAl":"Franga Zviceriane","datum_f":"2026-05-28T00:00:00"},{"rBr":98,"datum":"2026-05-30T00:00:00","valuta":"392","oznaka":"JPY","drzava":"Јапонија","nomin":1,"sreden":0.3331,"drzavaAng":"Japan","drzavaAl":"Japonia","nazivMak":"јапонски јен","nazivAng":"Japanese yen","nazivAl":"Jeni Japonez","datum_f":"2026-05-28T00:00:00"}]'
+        headers:
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - a03e3ee9cce971de-LHR
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - frame-src https://www.googletagmanager.com http://app.nbrm.mk/ https://app.nbrm.mk/ https://platform.twitter.com/ https://www.youtube.com/ https://e-nabavki.gov.mk/ https://www.google.com/ http://www.nbrm.mk/ https://www.nbrm.mk/
+                - upgrade-insecure-requests;
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sat, 30 May 2026 13:57:03 GMT
+            Nel:
+                - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+            Report-To:
+                - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9xW2b6pUVKntYLq3HYZwE8wQEHK2NoYA2FYd%2BDowJQ7NPaniQsRn8SYX%2B6Pl1ZPyJBDUR%2BAMO%2F%2BPM2dpUJCN4ZlFkg3yJ3HX15wxNJJGWyQpbXEEtLKe8Uv36%2BdjRHKJNLfVhvykmX93"}]}'
+            Server:
+                - cloudflare
+            Strict-Transport-Security:
+                - max-age=2592000
+                - max-age=31536000
+            X-Content-Type-Options:
+                - nosniff
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+                - SAMEORIGIN
+            X-Sucuri-Cache:
+                - EXPIRED
+            X-Sucuri-Id:
+                - "21017"
+            X-Ua-Compatible:
+                - IE=Edge,chrome=1
+            X-Xss-Protection:
+                - 1; mode=block
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

@@ -1,0 +1,79 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.nbkr.kg
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            User-Agent:
+                - Ruby
+        url: https://www.nbkr.kg/index1.jsp?beg_day=01&beg_month=06&beg_year=2005&end_day=30&end_month=06&end_year=2005&item=1562&lang=ENG&valuta_id=15
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 375
+        body: <table><tr><td><!--date-->25.06.2005<!--date--></td><td><!--value-->40,9614<!--value--></td></tr><tr><td><!--date-->18.06.2005<!--date--></td><td><!--value-->41,0685<!--value--></td></tr><tr><td><!--date-->11.06.2005<!--date--></td><td><!--value-->41,0511<!--value--></td></tr><tr><td><!--date-->04.06.2005<!--date--></td><td><!--value-->40,9879<!--value--></td></tr></table>
+        headers:
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html;charset=UTF-8
+            Date:
+                - Sat, 23 May 2026 23:57:51 GMT
+            Server:
+                - nginx/1.22.1
+            Set-Cookie:
+                - JSESSIONID=745ff05eef7b9f4ec50d75cd9718; Path=/; HttpOnly
+            X-Powered-By:
+                - JSP/2.3
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.nbkr.kg
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            User-Agent:
+                - Ruby
+        url: https://www.nbkr.kg/index1.jsp?beg_day=01&beg_month=06&beg_year=2005&end_day=30&end_month=06&end_year=2005&item=1562&lang=ENG&valuta_id=20
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 375
+        body: <table><tr><td><!--date-->25.06.2005<!--date--></td><td><!--value-->49,4425<!--value--></td></tr><tr><td><!--date-->18.06.2005<!--date--></td><td><!--value-->49,8469<!--value--></td></tr><tr><td><!--date-->11.06.2005<!--date--></td><td><!--value-->50,1624<!--value--></td></tr><tr><td><!--date-->04.06.2005<!--date--></td><td><!--value-->50,3208<!--value--></td></tr></table>
+        headers:
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html;charset=UTF-8
+            Date:
+                - Sat, 23 May 2026 23:57:54 GMT
+            Server:
+                - nginx/1.22.1
+            Set-Cookie:
+                - JSESSIONID=7460874ee30eea3443ed17d24441; Path=/; HttpOnly
+            X-Powered-By:
+                - JSP/2.3
+        status: 200 OK
+        code: 200
+        duration: 0s
