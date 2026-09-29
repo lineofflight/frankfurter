@@ -2,7 +2,11 @@ package bam
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"slices"
+	"strings"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -119,4 +123,61 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseScalesPriceComponents(t *testing.T) {
+	rates := mustParse(t, `[{"date": "1999-01-04T14:00:00", "libDevise": "JPY", "achat": 7.4492, "vente": 7.5508, "uniteDevise": 100}]`)
+	if len(rates) != 1 {
+		t.Fatalf("got %d rates, want 1", len(rates))
+	}
+	r := rates[0]
+	if r.Mid != nil {
+		t.Errorf("mid = %v, want nil when moyen is absent", *r.Mid)
+	}
+	if r.Bid == nil || *r.Bid != 0.074492 || r.Ask == nil || *r.Ask != 0.075508 {
+		t.Errorf("bid/ask = %v/%v, want 0.074492/0.075508", r.Bid, r.Ask)
+	}
+	if math.Abs(r.Rate-0.075) > 1e-12 {
+		t.Errorf("rate = %v, want 0.075", r.Rate)
+	}
+}
+
+type recorder struct{ reqs []*http.Request }
+
+func (rt *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	rt.reqs = append(rt.reqs, req)
+	body := io.NopCloser(strings.NewReader("[]"))
+	return &http.Response{StatusCode: http.StatusOK, Body: body, Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchRequestsWeekdaysWithKey(t *testing.T) {
+	t.Setenv("BAM_API_KEY", "secret")
+	rt := &recorder{}
+	a := New(&http.Client{Transport: rt})
+	// Friday 2026-03-27 through Monday 2026-03-30.
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 27), adapter.Date(2026, 3, 30)); err != nil {
+		t.Fatal(err)
+	}
+	var dates []string
+	for _, req := range rt.reqs {
+		if got := req.Header.Get("Ocp-Apim-Subscription-Key"); got != "secret" {
+			t.Errorf("key header = %q", got)
+		}
+		if got := req.URL.Host + req.URL.Path; got != "api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement" {
+			t.Errorf("url = %s", req.URL)
+		}
+		dates = append(dates, req.URL.Query().Get("date"))
+	}
+	want := []string{"2026-03-27T12:30:00", "2026-03-30T12:30:00"}
+	if !slices.Equal(dates, want) {
+		t.Errorf("dates = %v, want %v", dates, want)
+	}
+}
+
+func TestFetchNeedsAPIKey(t *testing.T) {
+	t.Setenv("BAM_API_KEY", "")
+	a := New(&http.Client{Transport: &recorder{}})
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 27), adapter.Date(2026, 3, 27)); err == nil {
+		t.Error("want an error without an API key")
+	}
 }
