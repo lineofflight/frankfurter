@@ -1,0 +1,3019 @@
+{
+  "adapter": "BDI",
+  "cassette": "bdi",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 2, 9), upto: Date.new(2026, 2, 11))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AED",
+      "rate": 4.3651
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AFN",
+      "rate": 75.5197
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ALL",
+      "rate": 96.74
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AMD",
+      "rate": 448.84
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AOA",
+      "rate": 1089.423
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ARS",
+      "rate": 1701.7611
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AUD",
+      "rate": 1.6843
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AWG",
+      "rate": 2.1276
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "AZN",
+      "rate": 2.0206
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BBD",
+      "rate": 2.3772
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BDT",
+      "rate": 145.3658
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BHD",
+      "rate": 0.447
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BIF",
+      "rate": 3536.953
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BMD",
+      "rate": 1.1886
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BND",
+      "rate": 1.5067
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BOB",
+      "rate": 8.2132
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BRL",
+      "rate": 6.1725
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BSD",
+      "rate": 1.1886
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BTN",
+      "rate": 107.8375
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BWP",
+      "rate": 16.0839
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "BZD",
+      "rate": 2.3772
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CAD",
+      "rate": 1.6174
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CDF",
+      "rate": 2624.3247
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CHF",
+      "rate": 0.915
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CLP",
+      "rate": 1017.37
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CNY",
+      "rate": 8.2281
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "COP",
+      "rate": 4372.65
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CRC",
+      "rate": 587.7033
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CUP",
+      "rate": 28.5264
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CVE",
+      "rate": 110.265
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "CZK",
+      "rate": 24.217
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "DJF",
+      "rate": 211.239
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "DKK",
+      "rate": 7.4692
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "DOP",
+      "rate": 74.6448
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "DZD",
+      "rate": 154.1592
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "EGP",
+      "rate": 55.7262
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ERN",
+      "rate": 18.2807
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ETB",
+      "rate": 185.3949
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "FJD",
+      "rate": 2.6443
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "FKP",
+      "rate": 0.8701
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GBP",
+      "rate": 0.8701
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GEL",
+      "rate": 3.1946
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GHS",
+      "rate": 13.0534
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GIP",
+      "rate": 0.8701
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GMD",
+      "rate": 86.32
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GNF",
+      "rate": 10404.1658
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GTQ",
+      "rate": 9.1145
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "GYD",
+      "rate": 248.6789
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "HKD",
+      "rate": 9.2888
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "HNL",
+      "rate": 31.3979
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "HTG",
+      "rate": 155.5135
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "HUF",
+      "rate": 377.08
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "IDR",
+      "rate": 20000.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ILS",
+      "rate": 3.6817
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "INR",
+      "rate": 107.8375
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "IQD",
+      "rate": 1557.066
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ISK",
+      "rate": 145.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "JMD",
+      "rate": 185.8457
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "JOD",
+      "rate": 0.8427
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "JPY",
+      "rate": 185.65
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KES",
+      "rate": 153.3238
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KGS",
+      "rate": 103.9431
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KHR",
+      "rate": 4789.07
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KMF",
+      "rate": 491.96775
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KRW",
+      "rate": 1737.79
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KWD",
+      "rate": 0.3643
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KYD",
+      "rate": 0.9747
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "KZT",
+      "rate": 587.61
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LAK",
+      "rate": 24085.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LBP",
+      "rate": 106379.7
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LKR",
+      "rate": 367.8644
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LRD",
+      "rate": 221.7571
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LSL",
+      "rate": 18.9883
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "LYD",
+      "rate": 7.5089
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MAD",
+      "rate": 10.891
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MDL",
+      "rate": 20.1754
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MGA",
+      "rate": 5244.99
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MKD",
+      "rate": 61.9225
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MMK",
+      "rate": 2496.1
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MNT",
+      "rate": 4238.55
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MOP",
+      "rate": 9.5675
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MRU",
+      "rate": 47.294
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MUR",
+      "rate": 54.6769
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MVR",
+      "rate": 18.3282
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MWK",
+      "rate": 2061.7024
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MXN",
+      "rate": 20.4582
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MYR",
+      "rate": 4.6765
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "MZN",
+      "rate": 75.86
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NAD",
+      "rate": 18.9883
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NGN",
+      "rate": 1623.8653
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NIO",
+      "rate": 43.75
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NOK",
+      "rate": 11.429
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NPR",
+      "rate": 172.54
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "NZD",
+      "rate": 1.9685
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "OMR",
+      "rate": 0.457
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PAB",
+      "rate": 1.1886
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PEN",
+      "rate": 3.9919
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PGK",
+      "rate": 5.1057
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PHP",
+      "rate": 69.516
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PKR",
+      "rate": 332.5668
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PLN",
+      "rate": 4.2118
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "PYG",
+      "rate": 7837.59
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "QAR",
+      "rate": 4.3265
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "RON",
+      "rate": 5.0923
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "RSD",
+      "rate": 117.9425
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "RWF",
+      "rate": 1729.7632
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SAR",
+      "rate": 4.4573
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SBD",
+      "rate": 9.5855
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SCR",
+      "rate": 17.7169
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SDG",
+      "rate": 713.3579
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SEK",
+      "rate": 10.6505
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SGD",
+      "rate": 1.5067
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SHP",
+      "rate": 0.8701
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SLE",
+      "rate": 28.8383
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SOS",
+      "rate": 678.3459
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SRD",
+      "rate": 45.244
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SSP",
+      "rate": 5401.9095
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "STN",
+      "rate": 24.5
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SVC",
+      "rate": 10.4003
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SYP",
+      "rate": 131.9346
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "SZL",
+      "rate": 18.9883
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "THB",
+      "rate": 37.055
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TJS",
+      "rate": 11.143
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TMT",
+      "rate": 4.1601
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TND",
+      "rate": 3.3876
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TOP",
+      "rate": 2.7908
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TRY",
+      "rate": 51.8099
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TTD",
+      "rate": 8.0231
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TWD",
+      "rate": 37.5797
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "TZS",
+      "rate": 3056.4282
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "UAH",
+      "rate": 51.12
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "UGX",
+      "rate": 4230.38
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "USD",
+      "rate": 1.1886
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "UYU",
+      "rate": 45.7035
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "UZS",
+      "rate": 14622.43
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "VES",
+      "rate": 454.2277
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "VND",
+      "rate": 30832.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "VUV",
+      "rate": 141.15
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "WST",
+      "rate": 3.206
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCD",
+      "rate": 3.2092
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XCG",
+      "rate": 2.1276
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XDR",
+      "rate": 0.863189
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "XPF",
+      "rate": 119.3317
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "YER",
+      "rate": 283.27
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ZAR",
+      "rate": 18.9883
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ZMW",
+      "rate": 22.3293
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-09",
+      "quote": "ZWG",
+      "rate": 30.3944
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AED",
+      "rate": 4.3681
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AFN",
+      "rate": 75.2664
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ALL",
+      "rate": 96.29
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AMD",
+      "rate": 449.11
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AOA",
+      "rate": 1092.767
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ARS",
+      "rate": 1687.7459
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AUD",
+      "rate": 1.683
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AWG",
+      "rate": 2.129
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "AZN",
+      "rate": 2.022
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BBD",
+      "rate": 2.3788
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BDT",
+      "rate": 145.4696
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BHD",
+      "rate": 0.447
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BIF",
+      "rate": 3539.571
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BMD",
+      "rate": 1.1894
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BND",
+      "rate": 1.5061
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BOB",
+      "rate": 8.2188
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BRL",
+      "rate": 6.1929
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BSD",
+      "rate": 1.1894
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BTN",
+      "rate": 107.6878
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BWP",
+      "rate": 16.1603
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "BZD",
+      "rate": 2.3788
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CAD",
+      "rate": 1.6141
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CDF",
+      "rate": 2616.3595
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CHF",
+      "rate": 0.9123
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CLP",
+      "rate": 1014.52
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CNY",
+      "rate": 8.2245
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "COP",
+      "rate": 4364.5
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CRC",
+      "rate": 586.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CUP",
+      "rate": 28.5456
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CVE",
+      "rate": 110.265
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "CZK",
+      "rate": 24.257
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "DJF",
+      "rate": 211.381
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "DKK",
+      "rate": 7.4715
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "DOP",
+      "rate": 74.7413
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "DZD",
+      "rate": 153.8636
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "EGP",
+      "rate": 55.7518
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ERN",
+      "rate": 18.293
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ETB",
+      "rate": 184.6386
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "FJD",
+      "rate": 2.6297
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "FKP",
+      "rate": 0.8695
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GBP",
+      "rate": 0.8695
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GEL",
+      "rate": 3.1929
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GHS",
+      "rate": 13.0647
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GIP",
+      "rate": 0.8695
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GMD",
+      "rate": 85.08
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GNF",
+      "rate": 10411.1685
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GTQ",
+      "rate": 9.1185
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "GYD",
+      "rate": 248.8463
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "HKD",
+      "rate": 9.2983
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "HNL",
+      "rate": 31.4435
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "HTG",
+      "rate": 155.5809
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "HUF",
+      "rate": 377.95
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "IDR",
+      "rate": 19966.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ILS",
+      "rate": 3.6704
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "INR",
+      "rate": 107.6878
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "IQD",
+      "rate": 1558.114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ISK",
+      "rate": 145.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "JMD",
+      "rate": 185.6947
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "JOD",
+      "rate": 0.8433
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "JPY",
+      "rate": 184.51
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KES",
+      "rate": 153.4171
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KGS",
+      "rate": 104.013
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KHR",
+      "rate": 4792.22
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KMF",
+      "rate": 491.96775
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KRW",
+      "rate": 1738.48
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KWD",
+      "rate": 0.3643
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KYD",
+      "rate": 0.9753
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "KZT",
+      "rate": 586.3
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LAK",
+      "rate": 24076.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LBP",
+      "rate": 106451.3
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LKR",
+      "rate": 368.1528
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LRD",
+      "rate": 221.9301
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LSL",
+      "rate": 18.9797
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "LYD",
+      "rate": 7.509
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MAD",
+      "rate": 10.851
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MDL",
+      "rate": 20.1588
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MGA",
+      "rate": 5235.16
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MKD",
+      "rate": 61.5342
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MMK",
+      "rate": 2497.7
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MNT",
+      "rate": 4241.72
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MOP",
+      "rate": 9.5772
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MRU",
+      "rate": 47.398
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MUR",
+      "rate": 54.541
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MVR",
+      "rate": 18.3405
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MWK",
+      "rate": 2062.5941
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MXN",
+      "rate": 20.4998
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MYR",
+      "rate": 4.6666
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "MZN",
+      "rate": 75.93
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NAD",
+      "rate": 18.9797
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NGN",
+      "rate": 1610.7568
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NIO",
+      "rate": 43.7562
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NOK",
+      "rate": 11.3115
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NPR",
+      "rate": 172.3005
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "NZD",
+      "rate": 1.9687
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "OMR",
+      "rate": 0.4573
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PAB",
+      "rate": 1.1894
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PEN",
+      "rate": 3.9938
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PGK",
+      "rate": 5.1003
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PHP",
+      "rate": 69.605
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PKR",
+      "rate": 332.7504
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PLN",
+      "rate": 4.217
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "PYG",
+      "rate": 7845.39
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "QAR",
+      "rate": 4.3294
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "RON",
+      "rate": 5.0912
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "RSD",
+      "rate": 117.2139
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "RWF",
+      "rate": 1731.1841
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SAR",
+      "rate": 4.4603
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SBD",
+      "rate": 9.5765
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SCR",
+      "rate": 17.6354
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SDG",
+      "rate": 713.843
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SEK",
+      "rate": 10.6135
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SGD",
+      "rate": 1.5061
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SHP",
+      "rate": 0.8695
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SLE",
+      "rate": 28.7556
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SOS",
+      "rate": 679.1593
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SRD",
+      "rate": 45.222
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SSP",
+      "rate": 5415.8735
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "STN",
+      "rate": 24.5
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SVC",
+      "rate": 10.4073
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SYP",
+      "rate": 132.0234
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "SZL",
+      "rate": 18.9797
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "THB",
+      "rate": 37.151
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TJS",
+      "rate": 11.1725
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TMT",
+      "rate": 4.1629
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TND",
+      "rate": 3.3808
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TOP",
+      "rate": 2.7855
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TRY",
+      "rate": 51.8989
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TTD",
+      "rate": 8.0359
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TWD",
+      "rate": 37.5359
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "TZS",
+      "rate": 3063.9345
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "UAH",
+      "rate": 51.2517
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "UGX",
+      "rate": 4231.97
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "USD",
+      "rate": 1.1894
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "UYU",
+      "rate": 45.6334
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "UZS",
+      "rate": 14649.69
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "VES",
+      "rate": 457.6697
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "VND",
+      "rate": 30802.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "VUV",
+      "rate": 140.66
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "WST",
+      "rate": 3.1922
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCD",
+      "rate": 3.2114
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XCG",
+      "rate": 2.129
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XDR",
+      "rate": 0.862332
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "XPF",
+      "rate": 119.3317
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "YER",
+      "rate": 283.46
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ZAR",
+      "rate": 18.9797
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ZMW",
+      "rate": 22.5188
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-10",
+      "quote": "ZWG",
+      "rate": 30.4362
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AED",
+      "rate": 4.3703
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AFN",
+      "rate": 75.6731
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ALL",
+      "rate": 96.38
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AMD",
+      "rate": 449.38
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AOA",
+      "rate": 1093.323
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ARS",
+      "rate": 1671.2422
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AUD",
+      "rate": 1.6737
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AWG",
+      "rate": 2.1301
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "AZN",
+      "rate": 2.023
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BBD",
+      "rate": 2.38
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BDT",
+      "rate": 145.543
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BHD",
+      "rate": 0.447
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BIF",
+      "rate": 3541.619
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BMD",
+      "rate": 1.19
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BND",
+      "rate": 1.5027
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BOB",
+      "rate": 8.2229
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BRL",
+      "rate": 6.1753
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BSD",
+      "rate": 1.19
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BTN",
+      "rate": 107.9515
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BWP",
+      "rate": 15.9304
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "BZD",
+      "rate": 2.38
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CAD",
+      "rate": 1.6138
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CDF",
+      "rate": 2656.1767
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CHF",
+      "rate": 0.9136
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CLP",
+      "rate": 1019.82
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CNY",
+      "rate": 8.2245
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "COP",
+      "rate": 4364.27
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CRC",
+      "rate": 586.2059
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CUP",
+      "rate": 28.56
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CVE",
+      "rate": 110.265
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "CZK",
+      "rate": 24.245
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "DJF",
+      "rate": 211.488
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "DKK",
+      "rate": 7.4698
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "DOP",
+      "rate": 74.5941
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "DZD",
+      "rate": 153.8738
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "EGP",
+      "rate": 55.7428
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ERN",
+      "rate": 18.3022
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ETB",
+      "rate": 184.8208
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "FJD",
+      "rate": 2.6327
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "FKP",
+      "rate": 0.8699
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GBP",
+      "rate": 0.8699
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GEL",
+      "rate": 3.194
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GHS",
+      "rate": 13.0746
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GIP",
+      "rate": 0.8699
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GMD",
+      "rate": 85.76
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GNF",
+      "rate": 10416.4205
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GTQ",
+      "rate": 9.1229
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "GYD",
+      "rate": 248.9718
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "HKD",
+      "rate": 9.3013
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "HNL",
+      "rate": 31.4655
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "HTG",
+      "rate": 155.5942
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "HUF",
+      "rate": 379.03
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "IDR",
+      "rate": 19992.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ILS",
+      "rate": 3.6604
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "INR",
+      "rate": 107.9515
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "IQD",
+      "rate": 1558.9
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ISK",
+      "rate": 145.2
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "JMD",
+      "rate": 185.7451
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "JOD",
+      "rate": 0.8437
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "JPY",
+      "rate": 182.79
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KES",
+      "rate": 153.5055
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KGS",
+      "rate": 104.0655
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KHR",
+      "rate": 4792.4
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KMF",
+      "rate": 491.96775
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KRW",
+      "rate": 1727.84
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KWD",
+      "rate": 0.3641
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KYD",
+      "rate": 0.9758
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "KZT",
+      "rate": 585.41
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LAK",
+      "rate": 24075.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LBP",
+      "rate": 106505.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LKR",
+      "rate": 368.2321
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LRD",
+      "rate": 221.9945
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LSL",
+      "rate": 18.8989
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "LYD",
+      "rate": 7.4964
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MAD",
+      "rate": 10.847
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MDL",
+      "rate": 20.1035
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MGA",
+      "rate": 5237.8
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MKD",
+      "rate": 61.6138
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MMK",
+      "rate": 2499.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MNT",
+      "rate": 4243.61
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MOP",
+      "rate": 9.5803
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MRU",
+      "rate": 47.422
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MUR",
+      "rate": 54.3628
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MVR",
+      "rate": 18.3498
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MWK",
+      "rate": 2064.5241
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MXN",
+      "rate": 20.4719
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MYR",
+      "rate": 4.6589
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "MZN",
+      "rate": 75.93
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NAD",
+      "rate": 18.8989
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NGN",
+      "rate": 1607.7138
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NIO",
+      "rate": 43.7988
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NOK",
+      "rate": 11.265
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NPR",
+      "rate": 172.7224
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "NZD",
+      "rate": 1.9637
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "OMR",
+      "rate": 0.4576
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PAB",
+      "rate": 1.19
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PEN",
+      "rate": 3.9951
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PGK",
+      "rate": 5.1095
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PHP",
+      "rate": 69.347
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PKR",
+      "rate": 332.9457
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PLN",
+      "rate": 4.2135
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "PYG",
+      "rate": 7863.02
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "QAR",
+      "rate": 4.3316
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "RON",
+      "rate": 5.0912
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "RSD",
+      "rate": 117.3478
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "RWF",
+      "rate": 1732.0696
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SAR",
+      "rate": 4.4625
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SBD",
+      "rate": 9.5736
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SCR",
+      "rate": 17.6438
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SDG",
+      "rate": 714.2031
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SEK",
+      "rate": 10.564
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SGD",
+      "rate": 1.5027
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SHP",
+      "rate": 0.8699
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SLE",
+      "rate": 28.8737
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SOS",
+      "rate": 679.8708
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SRD",
+      "rate": 45.269
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SSP",
+      "rate": 5418.6056
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "STN",
+      "rate": 24.5
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SVC",
+      "rate": 10.4125
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SYP",
+      "rate": 132.09
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "SZL",
+      "rate": 18.8989
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "THB",
+      "rate": 36.991
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TJS",
+      "rate": 11.1934
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TMT",
+      "rate": 4.165
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TND",
+      "rate": 3.3821
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TOP",
+      "rate": 2.781
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TRY",
+      "rate": 51.9354
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TTD",
+      "rate": 8.0376
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TWD",
+      "rate": 37.4583
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "TZS",
+      "rate": 3061.5403
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "UAH",
+      "rate": 51.2078
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "UGX",
+      "rate": 4221.07
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "USD",
+      "rate": 1.19
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "UYU",
+      "rate": 45.6967
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "UZS",
+      "rate": 14650.01
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "VES",
+      "rate": 462.0217
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "VND",
+      "rate": 30859.0
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "VUV",
+      "rate": 140.63
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "WST",
+      "rate": 3.1937
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XAF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCD",
+      "rate": 3.213
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XCG",
+      "rate": 2.1301
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XDR",
+      "rate": 0.861875
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XOF",
+      "rate": 655.957
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "XPF",
+      "rate": 119.3317
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "YER",
+      "rate": 283.59
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ZAR",
+      "rate": 18.8989
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ZMW",
+      "rate": 22.6693
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-11",
+      "quote": "ZWG",
+      "rate": 30.4215
+    }
+  ]
+}
