@@ -9,6 +9,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -38,7 +39,9 @@ type Cache interface {
 
 // Ingester runs backfills: it fetches through each provider's registered
 // adapter, validates and normalises the rows, stores them and refreshes
-// everything derived from them.
+// everything derived from them. Concurrent backfills should share one Ingester
+// so their writes queue on its lock (see writes). It must not be copied after
+// first use.
 type Ingester struct {
 	DB *sql.DB
 
@@ -59,6 +62,12 @@ type Ingester struct {
 	// Adapter resolves a provider key to its adapter. Nil means the adapter
 	// registry; tests swap in fakes.
 	Adapter func(key string) (adapter.Adapter, error)
+
+	// writes is held around every write a backfill makes. SQLite admits one
+	// writer at a time anyway; queueing here instead of on BEGIN IMMEDIATE
+	// means a long batch cannot push another backfill past the busy timeout.
+	// Fetches and reads stay outside it, so network waits overlap.
+	writes sync.Mutex
 }
 
 func (in *Ingester) logger() *slog.Logger {
@@ -172,6 +181,31 @@ func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, re
 		}
 	}
 
+	inserted, err := in.insert(ctx, p, records)
+	if err != nil {
+		return err
+	}
+
+	log.Info("inserted rates", "count", inserted)
+	if inserted == 0 {
+		return nil
+	}
+	// Purge stays last: purging before the blend refresh commits would let the
+	// edge re-cache stale blends.
+	if in.Cache != nil {
+		if err := in.Cache.PurgeDebounced(ctx); err != nil {
+			return fmt.Errorf("purge cache: %w", err)
+		}
+	}
+	return in.optimize(ctx)
+}
+
+// insert stores records and, when any are new, refreshes what they feed, in
+// one write transaction under the write lock. It returns how many rows were
+// new.
+func (in *Ingester) insert(ctx context.Context, p Provider, records []adapter.Rate) (int64, error) {
+	in.writes.Lock()
+	defer in.writes.Unlock()
 	var inserted int64
 	err := db.Immediate(ctx, in.DB, func(q db.Querier) error {
 		for _, r := range records {
@@ -193,22 +227,15 @@ func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, re
 		}
 		return in.refresh(ctx, q, p, records)
 	})
-	if err != nil {
-		return err
-	}
+	return inserted, err
+}
 
-	log.Info("inserted rates", "count", inserted)
-	if inserted == 0 {
-		return nil
-	}
-	// Purge stays last: purging before the blend refresh commits would let the
-	// edge re-cache stale blends.
-	if in.Cache != nil {
-		if err := in.Cache.PurgeDebounced(ctx); err != nil {
-			return fmt.Errorf("purge cache: %w", err)
-		}
-	}
-	_, err = in.DB.ExecContext(ctx, "PRAGMA optimize")
+// optimize runs PRAGMA optimize under the write lock, since the ANALYZE it may
+// run writes the statistics tables.
+func (in *Ingester) optimize(ctx context.Context) error {
+	in.writes.Lock()
+	defer in.writes.Unlock()
+	_, err := in.DB.ExecContext(ctx, "PRAGMA optimize")
 	return err
 }
 

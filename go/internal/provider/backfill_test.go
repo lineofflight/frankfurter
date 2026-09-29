@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -609,5 +610,106 @@ func TestBackfillLogsAMissingAdapter(t *testing.T) {
 	errs := e.log.at(slog.LevelError)
 	if len(errs) != 1 || errs[0].Attrs["error"] != "no adapter registered for BCB" {
 		t.Fatalf("got %+v", errs)
+	}
+}
+
+// await waits for ch to close and gives up after five seconds with an error
+// naming what never happened.
+func await(ch <-chan struct{}, what string) error {
+	select {
+	case <-ch:
+		return nil
+	case <-time.After(5 * time.Second):
+		return errors.New(what)
+	}
+}
+
+// overlapBlend runs inside each backfill's write transaction. It counts the
+// transactions open at once and holds the first open until the other backfill
+// has fetched, then well past the test's busy timeout.
+type overlapBlend struct {
+	calls, active, peak atomic.Int32
+	writing, fetched    chan struct{}
+}
+
+func (b *overlapBlend) RefreshTx(context.Context, db.Querier, time.Time, time.Time) error {
+	n := b.active.Add(1)
+	defer b.active.Add(-1)
+	for p := b.peak.Load(); n > p && !b.peak.CompareAndSwap(p, n); p = b.peak.Load() {
+	}
+	if b.calls.Add(1) > 1 {
+		return nil
+	}
+	close(b.writing)
+	if err := await(b.fetched, "BNR never fetched"); err != nil {
+		return err
+	}
+	time.Sleep(250 * time.Millisecond)
+	return nil
+}
+
+func (b *overlapBlend) RefreshRollupsTx(context.Context, db.Querier, map[rates.Precision][]string) error {
+	return nil
+}
+
+// Concurrent backfills fetch side by side and write one at a time. BCB's fetch
+// is still out when BNR's starts, and BNR's completes while BCB's write
+// transaction is open. BNR then queues for the write lock instead of running
+// into SQLite's, whose busy timeout here is far shorter than BCB's
+// transaction.
+func TestConcurrentBackfillsOverlapFetchesAndSerializeWrites(t *testing.T) {
+	t.Setenv("SQLITE_BUSY_TIMEOUT", "50")
+	conn := fixtures.New(t)
+	today := fixtures.Today()
+	blend := &overlapBlend{writing: make(chan struct{}), fetched: make(chan struct{})}
+	fetching := make(chan struct{})
+	adapters := map[string]adapter.Adapter{
+		"BCB": &fakeAdapter{fetch: func(time.Time, time.Time) ([]adapter.Rate, error) {
+			if err := await(fetching, "BNR never started fetching"); err != nil {
+				return nil, err
+			}
+			return []adapter.Rate{rate(today, "EUR", "USD", 1.1)}, nil
+		}},
+		"BNR": &fakeAdapter{fetch: func(time.Time, time.Time) ([]adapter.Rate, error) {
+			close(fetching)
+			if err := await(blend.writing, "BCB never started writing"); err != nil {
+				return nil, err
+			}
+			close(blend.fetched)
+			return []adapter.Rate{rate(today, "EUR", "RON", 4.97)}, nil
+		}},
+	}
+	log := newLogRecorder()
+	in := &Ingester{
+		DB:      conn,
+		Blend:   blend,
+		Logger:  slog.New(log),
+		Today:   func() time.Time { return today },
+		Adapter: func(key string) (adapter.Adapter, error) { return adapters[key], nil },
+	}
+
+	var wg sync.WaitGroup
+	for _, key := range []string{"BCB", "BNR"} {
+		p, err := Find(context.Background(), conn, key)
+		if err != nil || p == nil {
+			t.Fatalf("find %s: %v", key, err)
+		}
+		wg.Go(func() { in.BackfillAfter(context.Background(), *p, today.AddDate(0, 0, -1)) })
+	}
+	wg.Wait()
+
+	if errs := log.at(slog.LevelError); len(errs) != 0 {
+		t.Fatalf("errors %+v", errs)
+	}
+	if calls, peak := blend.calls.Load(), blend.peak.Load(); calls != 2 || peak != 1 {
+		t.Fatalf("%d write transactions, %d open at once", calls, peak)
+	}
+	var n int
+	if err := conn.QueryRow("SELECT count(*) FROM rates WHERE provider IN ('BCB', 'BNR') AND date = ?", d(today)).
+		Scan(&n); err != nil {
+		t.Fatal(err)
+	}
+	if n != 2 {
+		t.Fatalf("got %d rows", n)
 	}
 }
