@@ -1,0 +1,103 @@
+# API golden corpus: one request per line, replayed through the Ruby app by go/scripts/api_golden.rb and through the
+# Go handler by TestGoldenAPI. Format: METHOD PATH [| Header: value]...
+#
+# Date tokens expand against the fixture as the script seeds it: {today}, {tomorrow}, {latest} (latest business
+# day), {sunday} (latest Sunday), {bday:N} (Fixtures.business_day(N)), {ago:N} (latest business day minus N days).
+# Blank lines and lines starting with # are ignored. Append new requests; regenerate the golden file afterwards.
+
+# App
+GET /
+HEAD /
+POST /
+GET /nonexistent
+GET /favicon.ico
+GET /robots.txt
+HEAD /robots.txt
+POST /robots.txt
+GET /v1/openapi.json
+GET /v2/openapi.json
+GET /v10/latest
+
+# v1 index and catalogue
+GET /v1
+HEAD /v1
+GET /v1/
+HEAD /v1/
+GET /v1/currencies
+HEAD /v1/currencies
+GET /v1/currencies | If-None-Match: *
+
+# v1 latest
+GET /v1/latest
+GET /v1/current
+HEAD /v1/latest
+POST /v1/latest
+GET /v1/latest?amount=10
+GET /v1/latest?amount=1e3
+GET /v1/latest?amount=12abc&from=JPY
+GET /v1/latest?amount=0.5&to=USD,JPY
+GET /v1/latest?amount=0
+GET /v1/latest?amount=-1
+GET /v1/latest?amount=invalid
+GET /v1/latest?amount=
+GET /v1/latest?from=USD
+GET /v1/latest?base=usd&symbols=gbp,jpy
+GET /v1/latest?from=GBP&to=USD&amount=100
+GET /v1/latest?from=JPY&to=USD&amount=1000
+GET /v1/latest?to=USD
+GET /v1/latest?symbols=USD,GBP&to=CHF
+GET /v1/latest?to=
+GET /v1/latest?to=EUR
+GET /v1/latest?to=ZZZ
+GET /v1/latest?to=SLL,USD
+GET /v1/latest?from=USD&to=EUR,GBP
+GET /v1/latest?from=USD&to=GBP,JPY
+GET /v1/latest?from=PHP&to=INR
+GET /v1/latest?from=EUR&to=EUR
+GET /v1/latest?from=usd&to=USD
+GET /v1/latest?base=UAH
+GET /v1/latest?base=USD?callback=?
+GET /v1/latest?to=%zz
+GET /v1/latest | If-None-Match: *
+GET /v1/latest | Origin: https://example.com
+OPTIONS /v1/latest | Origin: https://example.com | Access-Control-Request-Method: GET | Access-Control-Request-Headers: Content-Type
+OPTIONS /v1/latest | Origin: https://example.com | Access-Control-Request-Method: POST
+OPTIONS /v1/latest
+GET /v1/latest/extra
+
+# v1 single dates
+GET /v1/{bday:30}
+GET /v1/{bday:30}?from=CAD&amount=3.5
+GET /v1/{bday:30}?to=USD,GBP,JPY
+GET /v1/{sunday}
+GET /v1/{tomorrow}
+GET /v1/{today}
+GET /v1/{bday:100}
+GET /v1/{bday:100}?from=USD
+GET /v1/{bday:195}
+GET /v1/{bday:195}?to=AUD,USD
+GET /v1/{bday:195}?from=AUD
+GET /v1/{ago:800}
+GET /v1/1999-01-01
+GET /v1/1000-01-01
+GET /v1/2010-31-01
+GET /v1/2014-02-30
+GET /v1/nonexistent
+
+# v1 intervals
+GET /v1/{ago:365}..{latest}
+GET /v1/{ago:365}..
+GET /v1/{ago:365}..?from=USD&to=JPY
+GET /v1/{bday:100}..{bday:90}
+GET /v1/{bday:100}..{bday:90}?from=USD&to=JPY,EUR&amount=2
+GET /v1/{bday:60}..{bday:30}?to=USD,GBP
+GET /v1/{bday:60}..{bday:30}?from=GBP&amount=100
+GET /v1/{bday:210}..{bday:180}
+GET /v1/{bday:210}..{bday:180}?to=AUD
+GET /v1/{sunday}..
+GET /v1/{latest}..{bday:30}
+GET /v1/{tomorrow}..
+GET /v1/{bday:30}..?date=2020-01-01
+GET /v1/{bday:30}..?date=garbage
+GET /v1/2000-01-01..2000-01-31
+GET /v1/{bday:30}.. | If-None-Match: *

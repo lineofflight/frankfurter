@@ -27,12 +27,12 @@ func (s *Server) routesV1(mux *http.ServeMux) {
 	mux.HandleFunc("/v1", s.v1Root)
 	mux.HandleFunc("/v1/{$}", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
-			v1NotFound(w)
+			notFound(w, contentTypeJSON)
 			return
 		}
 		s.v1Root(w, r)
 	})
-	mux.HandleFunc("/v1/", func(w http.ResponseWriter, _ *http.Request) { v1NotFound(w) })
+	mux.HandleFunc("/v1/", func(w http.ResponseWriter, _ *http.Request) { notFound(w, contentTypeJSON) })
 	mux.HandleFunc("/v1/currencies", s.v1Currencies)
 	mux.HandleFunc("/v1/{spec}", s.v1Rates)
 }
@@ -42,7 +42,8 @@ func (s *Server) v1Root(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, contentTypeV1, v1RootPayload)
 }
 
-// v1NotFound is a v1 route that matched nothing, or a quote that found nothing.
+// v1NotFound is a quote that found nothing. A path no v1 route matches gets the app's own not found, as Roda's
+// not_found plugin answers the empty 404 that r.run returns.
 func v1NotFound(w http.ResponseWriter) {
 	w.Header().Set("Cache-Control", cacheOneDay)
 	writeJSON(w, http.StatusNotFound, contentTypeV1, message{Message: "not found"})
@@ -86,7 +87,7 @@ func (s *Server) v1Rates(w http.ResponseWriter, r *http.Request) {
 			params["end_date"] = today
 		}
 	default:
-		v1NotFound(w)
+		notFound(w, contentTypeJSON)
 		return
 	}
 
