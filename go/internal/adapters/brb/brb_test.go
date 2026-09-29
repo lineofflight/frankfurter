@@ -157,3 +157,12 @@ func TestGolden(t *testing.T) {
 		})
 	}
 }
+
+func TestFetchRejectsImpossibleLinkDate(t *testing.T) {
+	// Ruby's Date.new raises on 31-02; the port returns an error rather than normalising to March.
+	index := `<a href="/sites/default/files/2026-02/Cours%20de%20change%20du%2031-02-2026.pdf">bad</a>`
+	client := &http.Client{Transport: stub{indexURL: {index, ""}}}
+	if _, err := New(client).Fetch(context.Background(), adapter.Date(2026, 2, 1), adapter.Date(2026, 3, 31)); err == nil {
+		t.Fatal("want error for impossible date")
+	}
+}
