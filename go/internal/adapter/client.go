@@ -59,6 +59,11 @@ func verifyConnection(cs tls.ConnectionState) error {
 	if len(cs.PeerCertificates) == 0 {
 		return errors.New("tls: server sent no certificate")
 	}
+	// An empty DNSName would skip the hostname check. ServerName is empty when
+	// the host is an IP address (TLS sends no name for one), so fail closed.
+	if cs.ServerName == "" {
+		return errors.New("tls: no server name to verify")
+	}
 	pool := intermediates.Clone()
 	for _, cert := range cs.PeerCertificates[1:] {
 		pool.AddCert(cert)
