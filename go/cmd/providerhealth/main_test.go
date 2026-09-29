@@ -185,6 +185,35 @@ func TestRenderBodyMatchesRuby(t *testing.T) {
 	}
 }
 
+func TestDryRunPrintsTheDecisionAndBodiesWithoutTouchingIssues(t *testing.T) {
+	stale := entry("NBC", "daily", missed(10))
+	unknown := withUnknown(entry("CBKKW", "daily", missed(0)), "ECS")
+	var stderr strings.Builder
+	a := auditor{
+		today:  "2026-09-17",
+		dryRun: true,
+		stderr: &stderr,
+		fetch: func(context.Context) ([]Entry, error) {
+			return []Entry{unknown, entry("OK", "daily", missed(1)), stale}, nil
+		},
+		openIssues: func(context.Context) (map[string]int, error) {
+			t.Error("dry run listed issues")
+			return nil, nil
+		},
+		gh: func(context.Context, ...string) (string, error) {
+			t.Error("dry run ran gh")
+			return "", nil
+		},
+	}
+	if err := a.run(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	want := `DRY_RUN flagged: ["NBC", "CBKKW"]` + "\n" + renderBody(stale, a.today) + renderBody(unknown, a.today)
+	if stderr.String() != want {
+		t.Fatalf("got\n%s\nwant\n%s", stderr.String(), want)
+	}
+}
+
 func TestMarkerRoundTrips(t *testing.T) {
 	m := markerRe.FindStringSubmatch("intro\n" + marker("NBC") + "\n")
 	if m == nil || m[1] != "NBC" {

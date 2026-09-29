@@ -128,11 +128,11 @@ func (a auditor) run(ctx context.Context) error {
 	if a.dryRun {
 		keys := make([]string, len(flaggedEntries))
 		for i, e := range flaggedEntries {
-			keys[i] = e.Key
+			keys[i] = strconv.Quote(e.Key)
 		}
-		fmt.Fprintf(a.stderr, "DRY_RUN flagged: %q\n", keys)
+		fmt.Fprintf(a.stderr, "DRY_RUN flagged: [%s]\n", strings.Join(keys, ", "))
 		for _, e := range flaggedEntries {
-			fmt.Fprintln(a.stderr, renderBody(e, a.today))
+			fmt.Fprint(a.stderr, renderBody(e, a.today))
 		}
 		return nil
 	}
@@ -254,10 +254,12 @@ func getenv(key, fallback string) string {
 func main() {
 	api := getenv("API", "https://api.frankfurter.dev/v2/providers")
 	repo := getenv("REPO", "lineofflight/frankfurter")
+	// Ruby tests DRY_RUN for presence, so even an empty value means a dry run.
+	_, dryRun := os.LookupEnv("DRY_RUN")
 	a := auditor{
 		repo:       repo,
 		today:      time.Now().Format(time.DateOnly),
-		dryRun:     os.Getenv("DRY_RUN") != "",
+		dryRun:     dryRun,
 		stderr:     os.Stderr,
 		fetch:      func(ctx context.Context) ([]Entry, error) { return fetchProviders(ctx, api) },
 		openIssues: func(ctx context.Context) (map[string]int, error) { return openIssuesByKey(ctx, repo) },
