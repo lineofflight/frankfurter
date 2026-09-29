@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -34,15 +35,23 @@ func listen(ctx context.Context, conn *sql.DB) error {
 	if err != nil {
 		return err
 	}
+	ln, err := net.Listen("tcp", ":"+strconv.Itoa(port))
+	if err != nil {
+		return err
+	}
+	return serveOn(ctx, conn, ln)
+}
+
+// serveOn serves the API on ln until ctx ends, then shuts down gracefully.
+func serveOn(ctx context.Context, conn *sql.DB, ln net.Listener) error {
 	srv := &http.Server{
-		Addr:              ":" + strconv.Itoa(port),
 		Handler:           (&api.Server{DB: conn}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	errc := make(chan error, 1)
 	go func() {
-		slog.Info("listening", "addr", srv.Addr)
-		errc <- srv.ListenAndServe()
+		slog.Info("listening", "addr", ln.Addr().String())
+		errc <- srv.Serve(ln)
 	}()
 	select {
 	case err := <-errc:

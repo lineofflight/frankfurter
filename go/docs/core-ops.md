@@ -97,22 +97,37 @@ All in `internal/migrate/spec_test.go`, one database file per test instead of Ru
   subtest per provider. BOTA's "retained SDR rollup" check covers the quote side too, as the other three do.
 
 The specs stub `Cache.purge` to fail, to prove setup never needs the CDN; Go's migrations and seed have no cache
-dependency, so there is nothing to stub. Beyond the specs, a one-off run of the BOTA case with an extra February row
-compared Ruby and Go after migrating: rates, weekly and monthly rollups, coverages, catalogue and exclusions were
-identical.
+dependency, so there is nothing to stub.
+
+Beyond the specs, `TestDataMigrationsMatchRuby` (`internal/migrate/data_test.go`) checks the data migrations against
+Ruby: `testdata/data/phase_vN.sql` is loaded once the database reaches version N (fixtures for 003, 005, 008, 011, 015,
+017-019, 021, 023, 025-028, 034, 036-040), then every table is compared with Ruby's dump (`testdata/data/ruby.json`)
+after migrating up to 40 and after rolling back to 8. Regenerate the dump with `go/scripts/migration_data.rb`:
+
+```sh
+DATABASE_URL=sqlite://$SCRATCH/data.sqlite3 APP_ENV=test \
+  mise exec -- bundle exec ruby -Ilib -r./boot go/scripts/migration_data.rb go/internal/migrate/testdata/data
+```
+
+The ops verification also ran the same fixtures through `rake db:migrate VERSION=N` and `frankfurter migrate -version
+N` side by side, one process per step: identical at 26, 30, 20, 8 (down) and 40; at 28 only `blended_rates` differs, as
+described under Deviations.
 
 `internal/migrate/migrate_test.go` adds the schema checks above, a file-for-file match with `db/migrate`, rollback of
 001-007 to an empty database, and `CheckCurrent`. `cmd/frankfurter/main_test.go` covers dispatch, setup twice,
-`VERSION`, the dry run, the scheduler and backfill cache wiring, which tasks purge, and the healthcheck.
+`VERSION`, the dry run, the scheduler and backfill cache wiring, which tasks purge (purge-invalid both with and without
+deletions), serve answering `/` and shutting down, and the healthcheck.
 
 ## Deviations
 
 - Migrations are transactional (Sequel on SQLite runs them bare). Same end states; a failure can no longer leave a
   half-applied migration.
-- 027 and 028 recompute part of the daily blend in Ruby with today's blend code, which reads columns and tables those
-  old schemas lack. Go clears `blended_rates` instead when the migration relabelled anything, handing the rebuild to
-  the scheduler's existing `DailyReady`/`RebuildDaily` job, as 036-040 do. On databases with nothing to relabel (fresh
-  ones, and production, which is past 040) both leave the blend alone.
+- 027 and 028 recompute part of the daily blend in Ruby with today's blend code (`BlendedRate.refresh`). Go's blend
+  code reads `providers.frequency`, added in 029, so it cannot run there; Ruby's works in a fresh process but fails
+  with `Provider#frequency` when the models load earlier in the migrating process. Go clears `blended_rates` instead
+  when the migration relabelled anything, handing the rebuild to the scheduler's existing `DailyReady`/`RebuildDaily`
+  job, as 036-040 do. Everything else those two migrations touch matches Ruby row for row. On databases with nothing
+  to relabel (fresh ones, and production, which is past 040) both leave the blend alone.
 - 003 deletes its seven providers in one statement; 027 rebuilds rollups over its scope without the redundant bucket
   list. Same rows.
 - `VERSION` must be an integer (Ruby's `to_i` turns a typo into 0 and rolls everything back).
@@ -124,7 +139,5 @@ identical.
 
 - Deploy scripts and workflows that call `bundle exec rake ...`, `bin/schedule` or puma switch to the commands above
   (`docker exec <container> frankfurter backfill`, `frankfurter blend-rebuild`, ...).
-- `internal/api` was mid-edit by the api_v2 step while this step ran, so the package didn't compile in the shared tree.
-  `cmd/frankfurter` was built and tested against the committed `internal/api` through a `go -overlay` that hid the
-  uncommitted files. `serve` only needs `api.Server{DB}` and `Handler()`; if v2 adds a constructor or required fields,
-  update `listen` in `serve.go`.
+- `serve` only needs `api.Server{DB}` and `Handler()` (`serveOn` in `serve.go`); if api adds a constructor or
+  required fields, update it there. It builds and passes against the tree with the api_v2 step's files in place.

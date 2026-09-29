@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"net"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -273,5 +274,57 @@ func TestHealthcheck(t *testing.T) {
 			t.Errorf("status %d: exit %d (%s)", tc.status, code, errw)
 		}
 		srv.Close()
+	}
+}
+
+// db:purge_invalid purges the CDN once it has deleted something: a rate dated past ECB's future-date horizon.
+func TestPurgeInvalidPurgesAfterDeleting(t *testing.T) {
+	path := scratchDB(t)
+	mustRun(t, "setup")
+	hits, _ := purgeRecorder(t)
+	conn := openPath(t, path)
+	future := db.FormatDate(today().AddDate(0, 0, 30))
+	if _, err := conn.Exec("INSERT INTO rates (provider, date, base, quote, mid) VALUES ('ECB', ?, 'EUR', 'USD', 1.1)",
+		future); err != nil {
+		t.Fatal(err)
+	}
+
+	mustRun(t, "db:purge_invalid")
+	if n := hits.Load(); n != 1 {
+		t.Fatalf("%d purges, want 1", n)
+	}
+	var n int
+	if err := conn.QueryRow("SELECT count(*) FROM rates").Scan(&n); err != nil {
+		t.Fatal(err)
+	}
+	if n != 0 {
+		t.Fatalf("%d rates left", n)
+	}
+}
+
+// serve answers the API root, which the container healthcheck polls, and shuts down cleanly when interrupted.
+func TestServeAnswersAndShutsDown(t *testing.T) {
+	path := scratchDB(t)
+	mustRun(t, "setup")
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	done := make(chan error, 1)
+	go func() { done <- serveOn(ctx, openPath(t, path), ln) }()
+
+	res, err := http.Get("http://" + ln.Addr().String() + "/")
+	if err != nil {
+		t.Fatal(err)
+	}
+	res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		t.Fatalf("GET /: status %d", res.StatusCode)
+	}
+	cancel()
+	if err := <-done; err != nil {
+		t.Fatalf("shutdown: %v", err)
 	}
 }
