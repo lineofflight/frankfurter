@@ -2,9 +2,13 @@ package nbm
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -217,4 +221,67 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+type recorder struct{ urls []string }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.urls = append(r.urls, req.URL.String())
+	body := `<ValCurs Date="` + req.URL.Query().Get("date") + `"></ValCurs>`
+	if strings.Contains(req.URL.Path, "metal") {
+		body = `<MetalPrice Date="` + req.URL.Query().Get("date") + `"></MetalPrice>`
+	}
+	return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: req}, nil
+}
+
+func TestFetchRequestsWeekdaysInclusive(t *testing.T) {
+	rec := &recorder{}
+	a := New(&http.Client{Transport: rec})
+	// Friday 2026-04-10 through Monday 2026-04-13: after is inclusive, weekend skipped.
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 4, 10), adapter.Date(2026, 4, 13)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{
+		"https://www.bnm.md/en/official_exchange_rates?date=10.04.2026&get_xml=1",
+		"https://www.bnm.md/en/official_metal_rates?date=10.04.2026&get_xml=1",
+		"https://www.bnm.md/en/official_exchange_rates?date=13.04.2026&get_xml=1",
+		"https://www.bnm.md/en/official_metal_rates?date=13.04.2026&get_xml=1",
+	}
+	if !slices.Equal(rec.urls, want) {
+		t.Errorf("urls = %v", rec.urls)
+	}
+}
+
+func TestFetchRequiresAfter(t *testing.T) {
+	a := New(&http.Client{Transport: &recorder{}})
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 4, 13)); err == nil {
+		t.Error("want error for zero after")
+	}
+}
+
+func TestParseMetalsSkipsOtherMetals(t *testing.T) {
+	rates := mustParse(t, parseMetals, `<MetalPrice Date="24.04.2026">
+  <Metal><CharCode>XPT</CharCode><Nominal>1</Nominal><Value>900</Value></Metal>
+  <Metal><CharCode>XAU</CharCode><Nominal>1</Nominal><Value>0</Value></Metal>
+  <Metal><CharCode>XAG</CharCode><Nominal>10</Nominal><Value>415.55</Value></Metal>
+</MetalPrice>`)
+	if len(rates) != 1 || rates[0].Base != "XAG" || math.Abs(rates[0].Rate-41.555*adapter.GramsPerTroyOunce) > 1e-9 {
+		t.Errorf("got %+v", rates)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for _, tc := range []struct {
+		f   func([]byte) ([]adapter.Rate, error)
+		xml string
+	}{
+		{parse, `<MetalPrice Date="08.04.2026"></MetalPrice>`},
+		{parse, `<ValCurs></ValCurs>`},
+		{parseMetals, `<ValCurs Date="08.04.2026"></ValCurs>`},
+		{parseMetals, `<MetalPrice></MetalPrice>`},
+	} {
+		if _, err := tc.f([]byte(tc.xml)); err == nil {
+			t.Errorf("no error for %s", tc.xml)
+		}
+	}
 }
