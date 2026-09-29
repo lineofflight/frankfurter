@@ -19,22 +19,20 @@
 package cbssc
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
 	"encoding/json"
-	"encoding/xml"
 	"errors"
 	"fmt"
-	"io"
 	"math"
 	"net/http"
 	"net/url"
 	"regexp"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -47,8 +45,6 @@ const (
 var (
 	excelEpoch = adapter.Date(1899, 12, 30)
 	header     = regexp.MustCompile(`\ASCR/([A-Z]{3})\z`)
-	sheetPath  = regexp.MustCompile(`\Axl/worksheets/sheet\d+\.xml\z`)
-	trailingN  = regexp.MustCompile(`\d+\z`)
 )
 
 func init() {
@@ -109,40 +105,17 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 }
 
 func parse(data []byte) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
 		return nil, err
 	}
-	files := map[string]*zip.File{}
-	var paths []string
-	for _, f := range zr.File {
-		files[f.Name] = f
-		if sheetPath.MatchString(f.Name) {
-			paths = append(paths, f.Name)
-		}
-	}
-	sort.Strings(paths)
-
-	ss, ok := files["xl/sharedStrings.xml"]
-	if !ok {
-		return nil, errors.New("xl/sharedStrings.xml missing from workbook")
-	}
-	strs, err := sharedStrings(ss)
-	if err != nil {
-		return nil, err
-	}
+	defer f.Close()
 
 	var rates []adapter.Rate
-	for _, p := range paths {
-		root, err := readXML(files[p])
-		if err != nil {
+	for _, sheet := range f.GetSheetList() {
+		if rates, err = parseSheet(f, sheet, rates); err != nil {
 			return nil, err
 		}
-		sheetData := root.find("sheetData")
-		if sheetData == nil {
-			continue
-		}
-		rates = parseSheet(sheetData.children, strs, rates)
 	}
 	if len(rates) == 0 {
 		return nil, fmt.Errorf("no rates in workbook at %s", archiveURL)
@@ -153,24 +126,27 @@ func parse(data []byte) ([]adapter.Rate, error) {
 // parseSheet reads a currency sheet, which opens with a "Date | SCR/USD" header; rows beneath carry an Excel serial in
 // A and the mid in B. Sheets without such a header (the notes, the hidden yearly averages) emit nothing. A day with no
 // fixing holds a text placeholder in B instead of a number (GBP on 2020-04-09), which numericCell skips.
-func parseSheet(rows []*node, strs []string, rates []adapter.Rate) []adapter.Rate {
+func parseSheet(f *excelize.File, sheet string, rates []adapter.Rate) ([]adapter.Rate, error) {
+	rows, err := f.GetRows(sheet, excelize.Options{RawCellValue: true})
+	if err != nil {
+		return nil, err
+	}
 	iso := ""
-	for _, row := range rows {
-		if iso == "" {
-			if s, ok := stringCell(row, "B", strs); ok {
-				if m := header.FindStringSubmatch(s); m != nil {
-					iso = m[1]
-				}
+	for i, row := range rows {
+		n := strconv.Itoa(i + 1)
+		if iso == "" && len(row) > 1 {
+			if m := header.FindStringSubmatch(row[1]); m != nil && cellType(f, sheet, "B"+n) == excelize.CellTypeSharedString {
+				iso = m[1]
 			}
 		}
-		if iso == "" {
+		if iso == "" || len(row) < 2 {
 			continue
 		}
-		serial, ok := numericCell(row, "A")
+		serial, ok := numericCell(f, sheet, "A"+n, row[0])
 		if !ok {
 			continue
 		}
-		rate, ok := numericCell(row, "B")
+		rate, ok := numericCell(f, sheet, "B"+n, row[1])
 		if !ok || rate <= 0 {
 			continue
 		}
@@ -184,61 +160,26 @@ func parseSheet(rows []*node, strs []string, rates []adapter.Rate) []adapter.Rat
 			Rate:  round4(rate),
 		})
 	}
-	return rates
+	return rates, nil
 }
 
-func cell(row *node, column string) *node {
-	for _, c := range row.children {
-		if r, ok := c.attrs["r"]; ok && trailingN.ReplaceAllString(r, "") == column {
-			return c
-		}
-	}
-	return nil
+func cellType(f *excelize.File, sheet, ref string) excelize.CellType {
+	t, _ := f.GetCellType(sheet, ref)
+	return t
 }
 
-func cellValue(c *node) string {
-	for _, n := range c.children {
-		if n.name == "v" {
-			return strings.TrimSpace(n.firstText())
-		}
-	}
-	return ""
-}
-
-func stringCell(row *node, column string, strs []string) (string, bool) {
-	c := cell(row, column)
-	if c == nil || c.attrs["t"] != "s" {
-		return "", false
-	}
-	i, _ := strconv.Atoi(cellValue(c))
-	if i < 0 || i >= len(strs) {
-		return "", false
-	}
-	return strs[i], true
-}
-
-func numericCell(row *node, column string) (float64, bool) {
-	c := cell(row, column)
-	if c == nil || c.attrs["t"] == "s" {
+// numericCell parses a stored number, rejecting strings that merely look numeric, as the Ruby adapter reads only the
+// <v> of non-shared-string cells.
+func numericCell(f *excelize.File, sheet, ref, value string) (float64, bool) {
+	x, ok := adapter.ParseFloat(strings.TrimSpace(value))
+	if !ok {
 		return 0, false
 	}
-	return adapter.ParseFloat(cellValue(c))
-}
-
-func sharedStrings(f *zip.File) ([]string, error) {
-	root, err := readXML(f)
-	if err != nil {
-		return nil, err
+	switch cellType(f, sheet, ref) {
+	case excelize.CellTypeSharedString, excelize.CellTypeInlineString:
+		return 0, false
 	}
-	strs := make([]string, 0, len(root.children))
-	for _, si := range root.children {
-		var b strings.Builder
-		for _, t := range si.children {
-			b.WriteString(t.firstText())
-		}
-		strs = append(strs, b.String())
-	}
-	return strs, nil
+	return x, true
 }
 
 // parseLive reads the CAR endpoint's JSON, which holds only the current day.
@@ -301,75 +242,4 @@ func round4(x float64) float64 {
 		f--
 	}
 	return f / s
-}
-
-// node is a minimal generic XML tree, standing in for Ox's generic mode.
-type node struct {
-	name     string
-	attrs    map[string]string
-	children []*node
-	text     *string // set for text nodes
-}
-
-func (n *node) find(name string) *node {
-	if n.name == name {
-		return n
-	}
-	for _, c := range n.children {
-		if found := c.find(name); found != nil {
-			return found
-		}
-	}
-	return nil
-}
-
-// firstText returns the first child's text, or "" when it is an element or absent.
-func (n *node) firstText() string {
-	if len(n.children) == 0 || n.children[0].text == nil {
-		return ""
-	}
-	return *n.children[0].text
-}
-
-func readXML(f *zip.File) (*node, error) {
-	rc, err := f.Open()
-	if err != nil {
-		return nil, err
-	}
-	defer rc.Close()
-	dec := xml.NewDecoder(rc)
-	root := &node{}
-	stack := []*node{root}
-	for {
-		tok, err := dec.Token()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return nil, fmt.Errorf("%s: %w", f.Name, err)
-		}
-		top := stack[len(stack)-1]
-		switch t := tok.(type) {
-		case xml.StartElement:
-			n := &node{name: t.Name.Local, attrs: map[string]string{}}
-			for _, a := range t.Attr {
-				n.attrs[a.Name.Local] = a.Value
-			}
-			top.children = append(top.children, n)
-			stack = append(stack, n)
-		case xml.EndElement:
-			stack = stack[:len(stack)-1]
-		case xml.CharData:
-			// Ox skips whitespace-only text by default.
-			if strings.TrimSpace(string(t)) == "" {
-				continue
-			}
-			s := string(t)
-			top.children = append(top.children, &node{text: &s})
-		}
-	}
-	if len(root.children) == 0 {
-		return nil, fmt.Errorf("%s has no root element", f.Name)
-	}
-	return root.children[0], nil
 }

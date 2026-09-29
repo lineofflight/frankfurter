@@ -1,10 +1,13 @@
 package cbssc
 
 import (
+	"bytes"
 	"context"
 	"slices"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -162,6 +165,31 @@ func TestParseLiveSkipsZeroAndAcceptsNumbers(t *testing.T) {
 func TestParseLiveRaisesWhenMidMissing(t *testing.T) {
 	if _, err := parseLive([]byte(`{"car":[{"currentDate":"09-Sep-2026","usdmid":"14.4","eurmid":"16.9"}]}`)); err == nil {
 		t.Error("want an error when gbpmid is missing")
+	}
+}
+
+func TestParseSkipsTextCellsThatLookNumeric(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	f.SetCellStr("Sheet1", "A1", "Date")
+	f.SetCellStr("Sheet1", "B1", "SCR/USD")
+	f.SetCellInt("Sheet1", "A2", 46000)
+	f.SetCellFloat("Sheet1", "B2", 14.616577838181803, -1, 64)
+	f.SetCellInt("Sheet1", "A3", 46001)
+	f.SetCellStr("Sheet1", "B3", "14.6")
+	f.SetCellInt("Sheet1", "A4", 46002)
+	f.SetCellStr("Sheet1", "B4", "n/a")
+	var buf bytes.Buffer
+	if err := f.Write(&buf); err != nil {
+		t.Fatal(err)
+	}
+	rates, err := parse(buf.Bytes())
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: excelEpoch.AddDate(0, 0, 46000), Base: "USD", Quote: "SCR", Rate: 14.6166}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
 	}
 }
 
