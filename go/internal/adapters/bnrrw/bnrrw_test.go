@@ -101,6 +101,10 @@ func TestParseSkips(t *testing.T) {
 		"non-positive rates":   `[{"currency_name":"USD","buying_rate":"0","average_rate":"0","selling_rate":"0","post_date":"22-May-26"}]`,
 		"missing average_rate": `[{"currency_name":"USD","buying_rate":"1458.0","selling_rate":"1468.0","post_date":"22-May-26"}]`,
 		"empty response":       `[]`,
+		"false average_rate":   `[{"currency_name":"USD","average_rate":false,"post_date":"22-May-26"}]`,
+		"string entry":         `["USD"]`,
+		"lowercase code":       `[{"currency_name":"usd","average_rate":"1463.35","post_date":"22-May-26"}]`,
+		"missing post_date":    `[{"currency_name":"USD","average_rate":"1463.35"}]`,
 	}
 	for name, body := range tests {
 		t.Run(name, func(t *testing.T) {
@@ -110,6 +114,33 @@ func TestParseSkips(t *testing.T) {
 			}
 			if len(rates) != 0 {
 				t.Errorf("got %+v, want none", rates)
+			}
+		})
+	}
+}
+
+func TestParseNumericAverageRate(t *testing.T) {
+	rates, err := parse([]byte(`[{"currency_name":"USD","average_rate":1463.3525,"post_date":"4-MAY-26"}]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2026, 5, 4), Base: "USD", Quote: "RWF", Rate: 1463.3525}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	tests := map[string]string{
+		"not an array":         `{"error":"nope"}`,
+		"invalid average_rate": `[{"currency_name":"USD","average_rate":"n/a","post_date":"22-May-26"}]`,
+		"invalid post_date":    `[{"currency_name":"USD","average_rate":"1463.35","post_date":"2026-05-22"}]`,
+		"null entry":           `[null]`,
+	}
+	for name, body := range tests {
+		t.Run(name, func(t *testing.T) {
+			if rates, err := parse([]byte(body)); err == nil {
+				t.Errorf("got %+v, want error", rates)
 			}
 		})
 	}

@@ -96,6 +96,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, e := range entries {
+		if _, ok := e.(string); ok {
+			continue // Ruby's String#[] yields nil for a key, so such an entry is skipped
+		}
 		entry, ok := e.(map[string]any)
 		if !ok {
 			return nil, fmt.Errorf("expected JSON object entry, got %T", e)
@@ -105,7 +108,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			continue
 		}
 		rateVal, ok := entry["average_rate"]
-		if !ok || rateVal == nil {
+		if !ok || rateVal == nil || rateVal == false {
 			continue
 		}
 		text := strings.ReplaceAll(fmt.Sprint(rateVal), ",", "")
