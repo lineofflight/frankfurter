@@ -184,6 +184,25 @@ func TestParseErrors(t *testing.T) {
 	}
 }
 
+func TestParseInlineAndPlainCells(t *testing.T) {
+	sheet := `<worksheet><sheetData><row r="2">` +
+		`<c r="A2" t="inlineStr"><is><t>2026/09/01</t></is></c>` +
+		`<c r="B2" t="s"><v>0</v></c>` +
+		`<c r="E2"><v>2.9924</v></c>` +
+		`</row></sheetData></worksheet>`
+	rates, err := parse(zipOf(t, map[string]string{
+		"xl/worksheets/sheet1.xml": sheet,
+		"xl/sharedStrings.xml":     `<sst><si><t>USD/ILS</t></si></sst>`,
+	}))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 9, 1)) || rates[0].Base != "USD" ||
+		rates[0].Quote != "ILS" || rates[0].Rate != 2.9924 {
+		t.Errorf("got %+v", rates)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))
