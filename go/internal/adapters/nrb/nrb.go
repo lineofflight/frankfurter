@@ -118,6 +118,9 @@ func parse(payload []byte) ([]adapter.Rate, error) {
 		}
 		payload = []byte(s)
 	}
+	if string(payload) == "null" {
+		return nil, errors.New("expected payload array from forex API, got null")
+	}
 	var days []day
 	if err := json.Unmarshal(payload, &days); err != nil {
 		return nil, fmt.Errorf("expected payload array from forex API: %w", err)
@@ -137,7 +140,8 @@ func parse(payload []byte) ([]adapter.Rate, error) {
 			if err != nil {
 				return nil, err
 			}
-			if e.Buy == nil || e.Sell == nil {
+			// Ruby divides by a zero unit into Infinity; skip the row instead.
+			if e.Buy == nil || e.Sell == nil || unit == 0 {
 				continue
 			}
 			buy, err := float(e.Buy)
