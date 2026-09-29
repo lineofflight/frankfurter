@@ -1,0 +1,25 @@
+{
+  "adapter": "BSP",
+  "cassette": "bsp",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 27), upto: Date.new(2026, 5, 29))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2026-05-28",
+      "quote": "PHP",
+      "rate": 61.55
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-29",
+      "quote": "PHP",
+      "rate": 61.6
+    }
+  ]
+}
