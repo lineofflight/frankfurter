@@ -267,3 +267,28 @@ func TestGolden(t *testing.T) {
 		})
 	}
 }
+
+// Not in the Ruby spec: AOK keeps its label outside January and February 2000, and ECU-era rows drop an XEU quote.
+func TestParseAOKWindowAndECUSelfQuote(t *testing.T) {
+	body := []byte(`[{"isoA3Code":"AOK","value":5.5},{"isoA3Code":"XEU","value":1},{"isoA3Code":"FRC","value":2.5}]`)
+	for _, tc := range []struct {
+		date time.Time
+		want []string
+	}{
+		{adapter.Date(1998, 12, 1), []string{"AOK", "CDF"}},
+		{adapter.Date(2000, 1, 1), []string{"AOA", "XEU", "CDF"}},
+		{adapter.Date(2000, 3, 1), []string{"AOK", "XEU", "CDF"}},
+	} {
+		rates, err := parse(body, tc.date)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var got []string
+		for _, r := range rates {
+			got = append(got, r.Quote)
+		}
+		if !slices.Equal(got, tc.want) {
+			t.Errorf("%s quotes = %v, want %v", tc.date.Format(time.DateOnly), got, tc.want)
+		}
+	}
+}
