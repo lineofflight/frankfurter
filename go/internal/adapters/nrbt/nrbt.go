@@ -12,15 +12,13 @@
 package nrbt
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
-	"fmt"
-	"io"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -64,61 +62,69 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	return parse(body, after, upto)
 }
 
-type workbook struct {
-	Sheets []struct {
-		// Matches r:id (or a bare id), since the tag names no namespace.
-		ID string `xml:"id,attr"`
-	} `xml:"sheets>sheet"`
-}
-
-type relationships struct {
-	Rels []struct {
-		ID     string `xml:"Id,attr"`
-		Target string `xml:"Target,attr"`
-	} `xml:"Relationship"`
-}
-
+// worksheet is the cell shape parseSheet reads: each cell's reference, type and raw value.
 type worksheet struct {
-	Rows []struct {
-		Cells []struct {
-			Ref  string  `xml:"r,attr"`
-			Type string  `xml:"t,attr"`
-			V    *string `xml:"v"`
-		} `xml:"c"`
-	} `xml:"sheetData>row"`
+	Rows []row `xml:"sheetData>row"`
+}
+
+type row struct {
+	Cells []cell `xml:"c"`
+}
+
+type cell struct {
+	Ref  string  `xml:"r,attr"`
+	Type string  `xml:"t,attr"`
+	V    *string `xml:"v"`
 }
 
 func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data), excelize.Options{RawCellValue: true})
 	if err != nil {
 		return nil, err
 	}
-	var wb workbook
-	if err := readXML(zr, "xl/workbook.xml", &wb); err != nil {
-		return nil, err
-	}
-	var rels relationships
-	if err := readXML(zr, "xl/_rels/workbook.xml.rels", &rels); err != nil {
-		return nil, err
-	}
-	targets := make(map[string]string, len(rels.Rels))
-	for _, r := range rels.Rels {
-		targets[r.ID] = r.Target
-	}
+	defer f.Close()
 
 	var rates []adapter.Rate
-	for _, s := range wb.Sheets {
-		target, ok := targets[s.ID]
-		if !ok {
-			continue
-		}
-		var ws worksheet
-		if err := readXML(zr, "xl/"+target, &ws); err != nil {
+	for _, name := range f.GetSheetList() {
+		ws, err := readSheet(f, name)
+		if err != nil {
 			return nil, err
 		}
-		rates = append(rates, parseSheet(&ws, after, upto)...)
+		rates = append(rates, parseSheet(ws, after, upto)...)
 	}
 	return rates, nil
+}
+
+// readSheet loads a sheet's raw cell values. String cells (shared or inline) never carry rates, so they are dropped.
+func readSheet(f *excelize.File, name string) (*worksheet, error) {
+	rows, err := f.GetRows(name)
+	if err != nil {
+		return nil, err
+	}
+	ws := &worksheet{Rows: make([]row, len(rows))}
+	for r, values := range rows {
+		for c, v := range values {
+			if v == "" {
+				continue
+			}
+			ref, err := excelize.CoordinatesToCellName(c+1, r+1)
+			if err != nil {
+				return nil, err
+			}
+			// Only a numeric-looking value needs its type checked: anything else fails to parse anyway.
+			if _, ok := adapter.ParseFloat(v); ok {
+				typ, err := f.GetCellType(name, ref)
+				if err != nil {
+					return nil, err
+				}
+				if typ == excelize.CellTypeSharedString || typ == excelize.CellTypeInlineString {
+					continue
+				}
+			}
+			ws.Rows[r].Cells = append(ws.Rows[r].Cells, cell{Ref: ref, V: &v})
+		}
+	}
+	return ws, nil
 }
 
 func parseSheet(ws *worksheet, after, upto time.Time) []adapter.Rate {
@@ -178,20 +184,4 @@ func columnIndex(ref string) (int, bool) {
 		n = n*26 + int(ref[i]-'A'+1)
 	}
 	return n - 1, i > 0
-}
-
-func readXML(zr *zip.Reader, name string, v any) error {
-	f, err := zr.Open(name)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	data, err := io.ReadAll(f)
-	if err != nil {
-		return err
-	}
-	if err := xml.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("%s: %w", name, err)
-	}
-	return nil
 }

@@ -1,12 +1,15 @@
 package nrbt
 
 import (
+	"bytes"
 	"context"
 	"encoding/xml"
 	"math"
 	"slices"
 	"testing"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -153,6 +156,33 @@ func TestParseSheetSkipsZeroBlankAndFlags(t *testing.T) {
 	got = parseSheet(&ws, adapter.Date(2025, 1, 3), adapter.Date(2025, 1, 3))
 	if len(got) != 1 || !got[0].Date.Equal(adapter.Date(2025, 1, 3)) {
 		t.Errorf("windowed = %+v, want only 2025-01-03", got)
+	}
+}
+
+func TestParseSkipsNumericLookingStrings(t *testing.T) {
+	f := excelize.NewFile()
+	defer f.Close()
+	for _, err := range []error{
+		f.SetCellStr("Sheet1", "A1", "45660"),
+		f.SetCellStr("Sheet1", "O1", "1.5"),
+		f.SetCellInt("Sheet1", "A2", 45659),
+		f.SetCellFloat("Sheet1", "O2", 0.6626, -1, 64),
+	} {
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	var buf bytes.Buffer
+	if err := f.Write(&buf); err != nil {
+		t.Fatal(err)
+	}
+	got, err := parse(buf.Bytes(), time.Time{}, time.Time{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(2025, 1, 2), Base: "TOP", Quote: "AUD", Rate: 0.6626}}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %+v, want %+v", got, want)
 	}
 }
 
