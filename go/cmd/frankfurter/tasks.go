@@ -16,6 +16,7 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/cache"
 	"github.com/lineofflight/frankfurter/go/internal/migrate"
 	"github.com/lineofflight/frankfurter/go/internal/provider"
+	"github.com/lineofflight/frankfurter/go/internal/ratequery"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
@@ -97,6 +98,41 @@ func blendRebuild(ctx context.Context, args []string, _ io.Writer) error {
 			return err
 		}
 		return newCache().Purge(ctx)
+	})
+}
+
+// blendParity is blend:parity[samples]: it compares table and live answers and fails unless they agree and grouped
+// coverage is complete.
+func blendParity(ctx context.Context, args []string, stdout io.Writer) error {
+	fs := flag.NewFlagSet("blend-parity", flag.ContinueOnError)
+	seed := fs.Uint64("seed", 42, "seed for the random shapes")
+	rest, err := flags(fs, args, 1)
+	if err != nil {
+		return err
+	}
+	samples := 200
+	if len(rest) == 1 {
+		if samples, err = strconv.Atoi(rest[0]); err != nil {
+			return fmt.Errorf("samples: %w", err)
+		}
+	}
+	return withDB(func(conn *sql.DB) error {
+		var n int
+		if err := conn.QueryRowContext(ctx, "SELECT EXISTS (SELECT 1 FROM blended_rates)").Scan(&n); err != nil {
+			return err
+		}
+		if n == 0 {
+			return errors.New("blended_rates is empty; run frankfurter blend-rebuild first")
+		}
+		report, err := ratequery.Parity(ctx, conn, samples, *seed, today())
+		if err != nil {
+			return err
+		}
+		fmt.Fprintln(stdout, report.String())
+		if !report.Passed() {
+			return errors.New("parity failed or incomplete; see coverage above")
+		}
+		return nil
 	})
 }
 

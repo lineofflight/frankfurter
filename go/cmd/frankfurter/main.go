@@ -49,6 +49,7 @@ func init() {
 		{"setup", []string{"db:setup"}, "", "migrate and seed", runSetup},
 		{"backfill", nil, "[-full] [provider]", "backfill rates, incrementally unless -full or FULL=1", backfill},
 		{"blend-rebuild", []string{"blend:rebuild"}, "", "rebuild the daily, weekly and monthly blends, then purge the CDN", blendRebuild},
+		{"blend-parity", []string{"blend:parity"}, "[-seed N] [samples]", "compare table and live blends and require grouped coverage", blendParity},
 		{"rollups-rebuild", []string{"rollups:rebuild"}, "[provider]", "rebuild weekly and monthly rollups (all or one provider), then purge the CDN", rollupsRebuild},
 		{"consensus", nil, "[year]", "log consensus outliers across all history or one year", consensus},
 		{"consensus-recent", []string{"consensus:recent"}, "", "log consensus outliers over the last 365 days", consensusRecent},

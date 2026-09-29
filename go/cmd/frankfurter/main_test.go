@@ -328,3 +328,20 @@ func TestServeAnswersAndShutsDown(t *testing.T) {
 		t.Fatalf("shutdown: %v", err)
 	}
 }
+
+// blend:parity refuses to run before the daily blend is built, then passes on a rebuilt fixture database.
+func TestBlendParity(t *testing.T) {
+	path := scratchDB(t)
+	mustRun(t, "setup")
+	purgeRecorder(t)
+	if err := fixtures.Seed(context.Background(), openPath(t, path)); err != nil {
+		t.Fatal(err)
+	}
+	if code, _, errw := frankfurter(t, "blend-parity"); code != 1 || !strings.Contains(errw, "blended_rates is empty") {
+		t.Fatalf("empty blend: exit %d: %s", code, errw)
+	}
+	mustRun(t, "blend:rebuild")
+	if out := mustRun(t, "blend:parity", "5"); !strings.Contains(out, " 0 failures") {
+		t.Fatalf("parity output:\n%s", out)
+	}
+}
