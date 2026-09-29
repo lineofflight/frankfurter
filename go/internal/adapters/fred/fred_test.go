@@ -2,7 +2,11 @@ package fred
 
 import (
 	"context"
+	"errors"
+	"io"
 	"net/http"
+	"net/url"
+	"strings"
 	"testing"
 	"time"
 
@@ -73,10 +77,56 @@ func TestParseWithoutObservations(t *testing.T) {
 	}
 }
 
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
 func TestFetchRequiresAPIKey(t *testing.T) {
 	t.Setenv("FRED_API_KEY", "")
-	if _, err := New(&http.Client{}).Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 31)); err == nil {
-		t.Error("want an error without FRED_API_KEY")
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		t.Errorf("unexpected request to %s", r.URL)
+		return nil, errors.New("no requests expected")
+	})}
+	_, err := New(client).Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 31))
+	if err == nil || err.Error() != "no API key" {
+		t.Errorf("got %v, want no API key", err)
+	}
+}
+
+func TestFetchRequestsEverySeries(t *testing.T) {
+	t.Setenv("FRED_API_KEY", "secret")
+	var queries []url.Values
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		if got := r.URL.Scheme + "://" + r.URL.Host + r.URL.Path; got != apiURL {
+			t.Errorf("got URL %s, want %s", got, apiURL)
+		}
+		queries = append(queries, r.URL.Query())
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(`{"observations":[]}`)), Request: r}, nil
+	})}
+
+	for _, tc := range []struct {
+		after time.Time
+		start string
+	}{
+		{time.Time{}, ""},
+		{adapter.Date(2026, 3, 1), "2026-03-01"},
+	} {
+		queries = nil
+		if _, err := New(client).Fetch(context.Background(), tc.after, adapter.Date(2026, 3, 31)); err != nil {
+			t.Fatal(err)
+		}
+		if len(queries) != len(allSeries) {
+			t.Fatalf("got %d requests, want %d", len(queries), len(allSeries))
+		}
+		for i, q := range queries {
+			want := url.Values{"series_id": {allSeries[i].id}, "api_key": {"secret"}, "file_type": {"json"}}
+			if tc.start != "" {
+				want.Set("observation_start", tc.start)
+			}
+			if q.Encode() != want.Encode() {
+				t.Errorf("request %d: got %s, want %s", i, q.Encode(), want.Encode())
+			}
+		}
 	}
 }
 
