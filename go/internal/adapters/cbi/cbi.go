@@ -134,7 +134,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 
 	var rates []adapter.Rate
 	for _, s := range sheets {
-		year, ok := rubyInteger(strings.TrimSpace(s.name))
+		year, ok := rubyInteger(rubyStrip(s.name))
 		if !ok {
 			continue
 		}
@@ -303,7 +303,7 @@ func findCurrencyCode(headerRows []row, buy, sell string) string {
 // extractCode finds an ISO 4217 code at the end of a header ("Saudi Arabian Riyal SAR") or alone in a cell ("USD",
 // "S.FR", "Gold"), rewriting CBI's aliases to ISO codes.
 func extractCode(text string) string {
-	if code, ok := codeAliases[strings.TrimSpace(text)]; ok {
+	if code, ok := codeAliases[rubyStrip(text)]; ok {
 		return code
 	}
 	token := lastCodeToken(text)
@@ -361,7 +361,7 @@ func lastCodeToken(text string) string {
 }
 
 func monthFromLabel(label string) (time.Month, bool) {
-	stripped := strings.TrimSpace(label)
+	stripped := rubyStrip(label)
 	if serial, ok := rubyInteger(stripped); ok && serial >= 30000 {
 		return adapter.Date(1899, 12, 30).AddDate(0, 0, int(serial)).Month(), true
 	}
@@ -373,6 +373,9 @@ func monthFromLabel(label string) (time.Month, bool) {
 	month, ok := monthIndex[token]
 	return month, ok
 }
+
+// rubyStrip is Ruby's String#strip, which leaves non-ASCII spaces such as U+00A0 alone, unlike strings.TrimSpace.
+func rubyStrip(s string) string { return strings.Trim(s, " \t\n\v\f\r\x00") }
 
 // rubyInteger is Ruby's Integer(s, exception: false): surrounding whitespace, a sign, base prefixes, a leading-zero
 // octal and underscores between digits are accepted.
@@ -571,6 +574,9 @@ func cellValue(c *node, sharedStrings []string) *string {
 		return &raw
 	}
 	i := rubyToI(raw)
+	if i < 0 {
+		i += len(sharedStrings) // Ruby's negative index counts from the end
+	}
 	if i < 0 || i >= len(sharedStrings) {
 		return nil
 	}

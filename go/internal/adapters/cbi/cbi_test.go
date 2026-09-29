@@ -180,3 +180,31 @@ func TestGolden(t *testing.T) {
 		})
 	}
 }
+
+// Ruby's strip leaves U+00A0 in place, so "Gold " is not the Gold alias and " Jan." is not a month.
+func TestStripKeepsNonASCIISpace(t *testing.T) {
+	if got := extractCode("Gold "); got != "" {
+		t.Errorf("extractCode = %q, want no code", got)
+	}
+	if got, ok := monthFromLabel(" Jan."); ok {
+		t.Errorf("monthFromLabel = %v, want none", got)
+	}
+	if got := extractCode(" Gold\n"); got != "XAU" {
+		t.Errorf("extractCode = %q, want XAU", got)
+	}
+}
+
+// Ruby indexes shared strings with raw.to_i, so a negative index counts from the end.
+func TestCellValueNegativeSharedIndex(t *testing.T) {
+	doc, err := loadXML([]byte(`<c r="A1" t="s"><v>-1</v></c>`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	c := doc.child("c")
+	if v := cellValue(c, []string{"a", "b"}); v == nil || *v != "b" {
+		t.Errorf("got %v, want b", v)
+	}
+	if v := cellValue(c, nil); v != nil {
+		t.Errorf("got %q, want nil", *v)
+	}
+}
