@@ -1,0 +1,49 @@
+{
+  "adapter": "MMA",
+  "cassette": "mma",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 14), upto: Date.new(2026, 5, 21))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2026-05-14",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-17",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-18",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "MVR",
+      "rate": 15.42
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "MVR",
+      "rate": 15.42
+    }
+  ]
+}
