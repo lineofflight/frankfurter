@@ -1,0 +1,12 @@
+{
+  "key": "BCCR",
+  "name": "Banco Central de Costa Rica",
+  "country_code": "CR",
+  "rate_type": "reference rate",
+  "pivot_currency": "CRC",
+  "data_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/Contenedor/6",
+  "terms_url": "https://sdd.bccr.fi.cr/es/IndicadoresEconomicos/Inicio/TerminosDeUso",
+  "publish_schedule": "*/30 18-20 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2000-01-03"
+}

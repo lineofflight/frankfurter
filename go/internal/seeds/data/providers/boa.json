@@ -1,0 +1,12 @@
+{
+  "key": "BOA",
+  "name": "Bank of Algeria",
+  "country_code": "DZ",
+  "rate_type": "reference rate",
+  "pivot_currency": "DZD",
+  "data_url": "https://www.bank-of-algeria.dz/donnees-historiques/",
+  "terms_url": null,
+  "publish_schedule": "*/30 12-14 * * 1-5",
+  "publish_cadence": "monthly",
+  "coverage_start": "2000-01-03"
+}

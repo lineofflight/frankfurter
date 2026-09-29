@@ -1,0 +1,12 @@
+{
+  "key": "CBE",
+  "name": "Central Bank of Egypt",
+  "country_code": "EG",
+  "rate_type": "official rate",
+  "pivot_currency": "EGP",
+  "data_url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates/historical-data",
+  "terms_url": "https://www.cbe.org.eg/en/disclaimer",
+  "publish_schedule": "*/30 10-12 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2024-03-01"
+}

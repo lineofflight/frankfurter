@@ -1,0 +1,12 @@
+{
+  "key": "BCCCD",
+  "name": "Banque Centrale du Congo",
+  "country_code": "CD",
+  "rate_type": "indicative rate",
+  "pivot_currency": "CDF",
+  "data_url": "https://www.bcc.cd/marche-des-changes/cours-de-change",
+  "terms_url": "https://www.bcc.cd/mentions-legales",
+  "publish_schedule": "*/30 11-13 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2020-10-12"
+}

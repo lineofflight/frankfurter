@@ -1,0 +1,12 @@
+{
+  "key": "CBKKW",
+  "name": "Central Bank of Kuwait",
+  "country_code": "KW",
+  "rate_type": "reference rate",
+  "pivot_currency": "KWD",
+  "data_url": "https://www.cbk.gov.kw/en/monetary-policy/market-operations/exchange-rates",
+  "terms_url": "https://www.cbk.gov.kw/en/footer/disclaimer",
+  "publish_schedule": "*/30 7-9 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2008-01-02"
+}

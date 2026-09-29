@@ -1,0 +1,12 @@
+{
+  "key": "BOTA",
+  "name": "Bank of Tanzania",
+  "country_code": "TZ",
+  "rate_type": "indicative rate",
+  "pivot_currency": "TZS",
+  "data_url": "https://www.bot.go.tz/exchangerate/excrates",
+  "terms_url": null,
+  "publish_schedule": "*/30 8-10 * * *",
+  "publish_cadence": "daily",
+  "coverage_start": "1999-07-01"
+}

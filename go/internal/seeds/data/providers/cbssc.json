@@ -1,0 +1,12 @@
+{
+  "key": "CBSSC",
+  "name": "Central Bank of Seychelles",
+  "country_code": "SC",
+  "rate_type": "mid rate",
+  "pivot_currency": "SCR",
+  "data_url": "https://www.cbs.sc/marketinfo/CAR.html",
+  "terms_url": "https://www.cbs.sc/Disclaimer.html",
+  "publish_schedule": "*/30 11-13 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2000-01-04"
+}

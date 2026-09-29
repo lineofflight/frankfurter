@@ -1,0 +1,12 @@
+{
+  "key": "FBIL",
+  "name": "Financial Benchmarks India",
+  "country_code": "IN",
+  "rate_type": "reference rate",
+  "pivot_currency": "INR",
+  "data_url": "https://www.fbil.org.in/#/refrates",
+  "terms_url": "https://www.fbil.org.in/#/termsandcondition",
+  "publish_schedule": "*/30 8-10 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2018-07-10"
+}

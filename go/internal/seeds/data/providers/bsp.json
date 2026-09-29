@@ -1,0 +1,12 @@
+{
+  "key": "BSP",
+  "name": "Bangko Sentral ng Pilipinas",
+  "country_code": "PH",
+  "rate_type": "reference rate",
+  "pivot_currency": "PHP",
+  "data_url": "https://www.bsp.gov.ph/SitePages/Statistics/ExchangeRate.aspx",
+  "terms_url": "https://www.bsp.gov.ph/Pages/AboutTheBank/Terms-of-Use.aspx",
+  "publish_schedule": "*/30 0-2 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2017-11-06"
+}
