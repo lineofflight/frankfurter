@@ -2,8 +2,12 @@ package cbtt
 
 import (
 	"context"
+	"io"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -106,6 +110,61 @@ func TestParseReturnsNothing(t *testing.T) {
 func TestParseRejectsUnexpectedPayload(t *testing.T) {
 	if _, err := parse([]byte(`{"code":"rest_no_route"}`)); err == nil {
 		t.Error("want an error")
+	}
+}
+
+type recorder struct{ urls []string }
+
+func (r *recorder) RoundTrip(req *http.Request) (*http.Response, error) {
+	r.urls = append(r.urls, req.URL.String())
+	body := `{"cbttdailyforexrates":[{"famedate":"2024-12-31","USD_Buying":"6.7","USD_Selling":"6.8"}]}`
+	return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: req}, nil
+}
+
+func TestFetchRequestsYearSpan(t *testing.T) {
+	tests := []struct {
+		after     time.Time
+		want      string
+		wantRates int
+	}{
+		{adapter.Date(2024, 12, 31), baseURL + "/2024-2025", 1},
+		{adapter.Date(2025, 1, 1), baseURL + "/2025-2025", 0},
+		{time.Time{}, baseURL + "/all", 1},
+	}
+	for _, tt := range tests {
+		rec := &recorder{}
+		rates, err := New(&http.Client{Transport: rec}).Fetch(context.Background(), tt.after, adapter.Date(2025, 1, 2))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if !slices.Equal(rec.urls, []string{tt.want}) {
+			t.Errorf("after %v: urls = %v, want %v", tt.after, rec.urls, tt.want)
+		}
+		if len(rates) != tt.wantRates {
+			t.Errorf("after %v: got %d rates, want %d", tt.after, len(rates), tt.wantRates)
+		}
+	}
+}
+
+func TestParseKeepsLegsAsBidAndAsk(t *testing.T) {
+	rates, err := parse([]byte(`{"cbttdailyforexrates":[{"famedate":"2026-09-08","JMD_Buying":0.0421,"JMD_Selling":"0.0433"}]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || *rates[0].Bid != 0.0421 || *rates[0].Ask != 0.0433 || rates[0].Rate != 0.0427 {
+		t.Errorf("rates = %+v", rates)
+	}
+}
+
+func TestParseRejectsBadRows(t *testing.T) {
+	for _, body := range []string{
+		`{"cbttdailyforexrates":[{"famedate":"2026-09-08","USD_Buying":"n/a","USD_Selling":"6.8"}]}`,
+		`{"cbttdailyforexrates":[{"USD_Buying":"6.7","USD_Selling":"6.8"}]}`,
+		`{"cbttdailyforexrates":[{"famedate":"08/09/2026","USD_Buying":"6.7","USD_Selling":"6.8"}]}`,
+	} {
+		if _, err := parse([]byte(body)); err == nil {
+			t.Errorf("%s: want an error", body)
+		}
 	}
 }
 
