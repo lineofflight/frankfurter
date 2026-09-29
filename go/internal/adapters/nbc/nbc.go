@@ -18,6 +18,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -93,11 +94,11 @@ func (a *Adapter) fetchDate(ctx context.Context, date time.Time) ([]adapter.Rate
 	if err != nil {
 		return nil, err
 	}
-	token, err := extractToken(page.Body)
+	token, ok, err := extractToken(page.Body)
 	if err != nil {
 		return nil, err
 	}
-	if token == "" {
+	if !ok {
 		return nil, errors.New("CSRF token not found on landing page")
 	}
 
@@ -118,13 +119,14 @@ func (a *Adapter) fetchDate(ctx context.Context, date time.Time) ([]adapter.Rate
 	return parse(resp.Body, date)
 }
 
-func extractToken(html []byte) (string, error) {
+// extractToken reports whether the tk input carries a value attribute; an empty value is still posted, as in Ruby.
+func extractToken(html []byte) (string, bool, error) {
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
 	if err != nil {
-		return "", err
+		return "", false, err
 	}
-	token, _ := doc.Find("input[name='tk']").First().Attr("value")
-	return token, nil
+	token, ok := doc.Find("input[name='tk']").First().Attr("value")
+	return token, ok, nil
 }
 
 func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
@@ -157,8 +159,9 @@ func parse(html []byte, date time.Time) ([]adapter.Rate, error) {
 		if err != nil || unit == 0 {
 			return
 		}
-		average, ok := adapter.ParseFloat(strings.ReplaceAll(cell(5), ",", ""))
-		if !ok || average == 0 {
+		// Not adapter.ParseFloat: its TrimSpace drops the &nbsp; that makes Ruby's Float reject a cell.
+		average, err := strconv.ParseFloat(strings.ReplaceAll(cell(5), ",", ""), 64)
+		if err != nil || math.IsNaN(average) || math.IsInf(average, 0) || average == 0 {
 			return
 		}
 		base := m[1]

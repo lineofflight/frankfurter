@@ -182,6 +182,65 @@ func TestFetchSkipsSundays(t *testing.T) {
 	}
 }
 
+func TestFetchErrorsWithoutToken(t *testing.T) {
+	client := stubClient(t, map[string]*http.Response{http.MethodGet: response(200, "<html><body>no form</body></html>")})
+	_, err := New(client).Fetch(context.Background(), adapter.Date(2026, 5, 20), adapter.Date(2026, 5, 20))
+	if err == nil || !strings.Contains(err.Error(), "CSRF token not found") {
+		t.Fatalf("err = %v, want missing token error", err)
+	}
+}
+
+func TestFetchPostsForm(t *testing.T) {
+	var form string
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		if r.Method == http.MethodGet {
+			// An empty token is still posted, as Ruby only raises when the input or its value is missing.
+			resp := response(200, "<input name='tk' value=''>")
+			resp.Header.Add("Set-Cookie", "sid=1; path=/")
+			resp.Header.Add("Set-Cookie", "cf=2; Secure")
+			return resp, nil
+		}
+		body, _ := io.ReadAll(r.Body)
+		form = string(body)
+		if got := r.Header.Get("Cookie"); got != "sid=1; cf=2" {
+			t.Errorf("Cookie = %q", got)
+		}
+		if got := r.Header.Get("Referer"); got != baseURL {
+			t.Errorf("Referer = %q", got)
+		}
+		return response(200, row("European Euro", "EUR/KHR", "1", "4678", "4725", "4,701.50")), nil
+	})}
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2026, 5, 20), adapter.Date(2026, 5, 20))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if form != "exdate=2026-05-20&tk=&view=View" {
+		t.Errorf("form = %q", form)
+	}
+	if len(rates) != 1 || rates[0].Rate != 4701.5 || !rates[0].Date.Equal(adapter.Date(2026, 5, 20)) {
+		t.Errorf("rates = %v", rates)
+	}
+}
+
+func TestParseErrorsWithoutTable(t *testing.T) {
+	if _, err := parse([]byte("<html><body>Request blocked</body></html>"), adapter.Date(2026, 5, 20)); err == nil {
+		t.Fatal("want error for a page without a rates table")
+	}
+}
+
+func TestParseSkipsBadRows(t *testing.T) {
+	html := row("Bad Symbol", "EUR/USD", "1", "1", "1", "4701.50") +
+		row("Zero Unit", "JPY/KHR", "0", "1", "1", "2541.50") +
+		row("Blank Unit", "GBP/KHR", "", "1", "1", "5000") +
+		row("Zero Average", "VND/KHR", "1000", "1", "1", "0") +
+		row("Blank Average", "THB/KHR", "1", "1", "1", "") +
+		row("NBSP Average", "CNY/KHR", "1", "1", "1", "&nbsp;560") +
+		row("NaN Average", "HKD/KHR", "1", "1", "1", "NaN")
+	if rates := mustParse(t, html, adapter.Date(2026, 5, 20)); len(rates) != 0 {
+		t.Errorf("rates = %v, want none", rates)
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))
