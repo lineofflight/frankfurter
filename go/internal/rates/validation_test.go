@@ -243,6 +243,33 @@ func providersAt(t *testing.T, conn *sql.DB, query string, args ...any) []string
 	return out
 }
 
+// Not in the Ruby spec: repair_rollups clears the touched buckets' blends, but only for providers that blend.
+func TestPurgeClearsBlendedBucketsOfBlendingProviders(t *testing.T) {
+	conn := fixtures.New(t)
+	today := fixtures.Today()
+	blending, nonBlending := today.AddDate(0, 0, 365), today.AddDate(0, 0, 400)
+	exec(t, conn, `INSERT INTO rates (provider, date, base, quote, mid) VALUES
+		('ECB', ?, 'EUR', 'USD', 1.1), ('BIS', ?, 'EUR', 'USD', 1.1)`, db.FormatDate(blending), db.FormatDate(nonBlending))
+	for _, r := range rates.Rollups {
+		for _, day := range []time.Time{blending, nonBlending} {
+			exec(t, conn, "INSERT INTO blended_"+r.Name+" (bucket_date, quote, rate) VALUES (?, 'USD', 1.1)",
+				db.FormatDate(rates.Bucket(r.Precision, day)))
+		}
+	}
+
+	purge(t, conn, today)
+
+	for _, r := range rates.Rollups {
+		table := "blended_" + r.Name
+		if n := countWhere(t, conn, table, "bucket_date = ?", db.FormatDate(rates.Bucket(r.Precision, blending))); n != 0 {
+			t.Errorf("%s: ECB bucket kept", table)
+		}
+		if n := countWhere(t, conn, table, "bucket_date = ?", db.FormatDate(rates.Bucket(r.Precision, nonBlending))); n != 1 {
+			t.Errorf("%s: BIS bucket cleared", table)
+		}
+	}
+}
+
 func TestPurgeRetainsTerminalDateRows(t *testing.T) {
 	conn := fixtures.New(t)
 	exec(t, conn, `INSERT INTO rates (provider, date, base, quote, mid) VALUES

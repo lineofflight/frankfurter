@@ -3,6 +3,7 @@ package rates
 import (
 	"context"
 	"database/sql"
+	"math"
 	"sort"
 	"time"
 
@@ -15,7 +16,7 @@ type Row struct {
 	Base     string
 	Quote    string
 	Provider string
-	Rate     float64 // 0 when the stored row resolves no rate (a single published side)
+	Rate     float64 // NaN when the stored row resolves no rate (a single published side), Ruby's nil
 }
 
 // Select runs query, which must yield date, base, quote, provider and rate in that order, and scans the rows.
@@ -34,6 +35,9 @@ func Select(ctx context.Context, q db.Querier, query string, args ...any) ([]Row
 			return nil, err
 		}
 		r.Date, r.Rate = date.Time, rate.Float64
+		if !rate.Valid {
+			r.Rate = math.NaN()
+		}
 		out = append(out, r)
 	}
 	return out, rows.Err()

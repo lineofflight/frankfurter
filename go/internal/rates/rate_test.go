@@ -2,6 +2,7 @@ package rates_test
 
 import (
 	"database/sql"
+	"math"
 	"slices"
 	"sort"
 	"testing"
@@ -141,6 +142,19 @@ func TestCarryForwardClientAheadOfServer(t *testing.T) {
 	current := rates.CarryForward(window(t, conn, today), today, rates.LookbackDays)
 	if !slices.EqualFunc(dates(ahead), dates(current), time.Time.Equal) {
 		t.Errorf("dates %v, want %v", dates(ahead), dates(current))
+	}
+}
+
+// A stored row with a single published side resolves no rate; Ruby reads it back as nil.
+func TestSelectReadsUnresolvedRateAsNaN(t *testing.T) {
+	conn := fixtures.New(t)
+	exec(t, conn, "INSERT INTO rates (provider, date, base, quote, ask) VALUES ('TST', '2000-01-03', 'USD', 'GBP', 103)")
+	rows, err := rates.Select(ctx, conn, "SELECT date, base, quote, provider, rate FROM rates WHERE provider = 'TST'")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rows) != 1 || !math.IsNaN(rows[0].Rate) {
+		t.Errorf("rows = %+v", rows)
 	}
 }
 

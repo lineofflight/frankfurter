@@ -68,7 +68,9 @@ Scopes are SQL text with constants inlined via `db.Lit`, so they compose like Se
   `blended_monthly_rates`. `RebuildRollups(ctx, q)` rebuilds both tables from scratch.
 - `SeedProviders(ctx, *sql.DB)`: `Provider.seed` / `db:seed`, including the recognised-exclusions restore.
 - `Row{Date, Base, Quote, Provider, Rate}`, `Select(ctx, q, query, args...)` (columns date, base, quote, provider,
-  rate), `CarryForward(rows, date, lookback)`, `EachSnapshot(rows, dates, lookback, yield)`, `LookbackDays`.
+  rate), `CarryForward(rows, date, lookback)`, `EachSnapshot(rows, dates, lookback, yield)`, `LookbackDays`. A row
+  whose stored components resolve no rate (a single published side) reads back with `Rate` NaN, Ruby's nil; blending
+  and the API must skip or propagate it, never treat it as zero.
 - `Today()`: Ruby's `Date.today` (local date at UTC midnight). Domain functions take `today` explicitly instead of
   reading the clock, which replaces Ruby's `Date.stub` in tests.
 
@@ -117,6 +119,13 @@ renders `(NULL)`: drop NOT IN conditions for empty lists), `NullDate` (scans DAT
 db_spec, rate_spec (CarryForward, between, only, downsample), rate_scopes_spec, rate_components_spec,
 rate_precision_spec, rate_validation_spec, currency_spec, currency_patches_spec, currency_summary_spec,
 defunct_currency_spec, nascent_currency_spec, peg_spec, peg_anchor_spec, grouped_coverage_index_spec.
+
+Beyond the specs, a one-off parity run compared Ruby and Go on the fixture plus about 3,000 edge rows (every
+terminal-date boundary, aliases, unknown codes, pre-euro dates, non-blending and lead providers, future rows and
+buckets, stored rollups without dailies, blended buckets). Matching results: `Blendable` for all three tables,
+`Between` (raw and blendable, rollups included, order too), `Downsample`, `Only`, `Purge` (totals and every table
+afterwards, blends included), `RefreshSummaries` scoped and unscoped, and the catalogue reads (`All`, `Active`,
+`WithProviders`, `FindCurrency`, `Providers`).
 
 Not ported here, because they need the V2 query layer (RateQuery): `lib/rate_coverage.rb` (a RateQuery mixin that
 calls `raw_dataset`, `each_snapshot`, `acquire_slot!` and friends) and `spec/reciprocal_consistency_spec.rb` (four HTTP
