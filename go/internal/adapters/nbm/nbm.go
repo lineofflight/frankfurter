@@ -83,13 +83,32 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		if err := a.Sleep(ctx, 500*time.Millisecond); err != nil {
 			return nil, err
 		}
-		metals, err := a.get(ctx, metalURL, date, parseMetals)
+		metals, err := a.metals(ctx, date)
 		if err != nil {
 			return nil, err
 		}
 		rates = append(rates, metals...)
 	}
 	return rates, nil
+}
+
+// metals fetches the day's metal prices. The endpoint has no data for older
+// dates (it answers 404 as late as 2010), and a fresh backfill starts in 1999,
+// so a 404 there means no metals that day rather than a failed fetch.
+func (a *Adapter) metals(ctx context.Context, date time.Time) ([]adapter.Rate, error) {
+	u := metalURL + "?" + url.Values{"get_xml": {"1"}, "date": {date.Format("02.01.2006")}}.Encode()
+	req, err := a.NewRequest(ctx, http.MethodGet, u, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := a.Do(req, http.StatusNotFound)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, nil
+	}
+	return parseMetals(resp.Body)
 }
 
 func (a *Adapter) get(ctx context.Context, u string, date time.Time, parse func([]byte) ([]adapter.Rate, error)) ([]adapter.Rate, error) {

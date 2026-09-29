@@ -253,6 +253,41 @@ func TestFetchRequestsWeekdaysInclusive(t *testing.T) {
 	}
 }
 
+// notFound answers 404 on paths containing missing and serves one USD rate on
+// the FX path otherwise.
+type notFound struct{ missing string }
+
+func (n notFound) RoundTrip(req *http.Request) (*http.Response, error) {
+	status, body := 200, `<ValCurs Date="04.01.1999"><Valute><CharCode>USD</CharCode><Nominal>1</Nominal><Value>8.3</Value></Valute></ValCurs>`
+	switch {
+	case strings.Contains(req.URL.Path, n.missing):
+		status, body = 404, "Not Found"
+	case strings.Contains(req.URL.Path, "metal"):
+		body = `<MetalPrice Date="04.01.1999"></MetalPrice>`
+	}
+	return &http.Response{StatusCode: status, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: req}, nil
+}
+
+// The metals endpoint has no data for old dates and answers 404; a backfill
+// from NBM's 1999 coverage start must keep the FX rates.
+func TestFetchSkipsMetalsDaysThatReturn404(t *testing.T) {
+	a := New(&http.Client{Transport: notFound{missing: "metal"}})
+	rates, err := a.Fetch(context.Background(), adapter.Date(1999, 1, 4), adapter.Date(1999, 1, 4))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "USD" || rates[0].Quote != "MDL" {
+		t.Fatalf("rates = %+v, want the one USD/MDL FX rate", rates)
+	}
+}
+
+func TestFetchFailsWhenFXReturns404(t *testing.T) {
+	a := New(&http.Client{Transport: notFound{missing: "exchange"}})
+	if _, err := a.Fetch(context.Background(), adapter.Date(1999, 1, 4), adapter.Date(1999, 1, 4)); err == nil {
+		t.Fatal("want an error for an FX 404")
+	}
+}
+
 func TestFetchRequiresAfter(t *testing.T) {
 	a := New(&http.Client{Transport: &recorder{}})
 	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 4, 13)); err == nil {
