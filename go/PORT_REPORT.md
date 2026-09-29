@@ -156,6 +156,8 @@ The step docs have the full detail. The ones that could matter:
 - `publishes_missed` always uses UTC.
 - The scheduler's cron runs in the local zone, as rufus does. Production is UTC, and so is the distroless image.
 - `frankfurter start` runs web and scheduler in one process instead of foreman's two.
+- The scheduler runs up to `SCHEDULER_WORKERS` jobs at once (default 16) instead of the pool size, and backfills
+  queue their writes on an in-process lock.
 
 **Database**
 - Each migration runs in its own transaction.

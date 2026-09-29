@@ -32,12 +32,28 @@ func scheduleOn(ctx context.Context, conn *sql.DB, stdout io.Writer, dryRun bool
 	if dryRun {
 		return schedule.DryRun(stdout, providers)
 	}
-	s := schedule.New(conn.Stats().MaxOpenConnections, slog.Default())
+	s, err := newScheduler()
+	if err != nil {
+		return err
+	}
 	if err := schedule.Setup(s, scheduleDeps(conn, providers, newCache())); err != nil {
 		return err
 	}
 	s.Run(ctx)
 	return nil
+}
+
+// newScheduler runs up to SCHEDULER_WORKERS jobs at once (default 16). Ruby
+// capped rufus at the pool size because its threads blocked on checkout and
+// the GVL made more useless; here a backfill mostly waits on its source, and
+// its writes queue on the Ingester's lock, so the cap is independent of
+// MAX_THREADS.
+func newScheduler() (*schedule.Scheduler, error) {
+	workers, err := envInt("SCHEDULER_WORKERS", 16)
+	if err != nil {
+		return nil, err
+	}
+	return schedule.New(workers, slog.Default()), nil
 }
 
 // scheduleDeps wires the real backfill, blend and cache into the scheduler. The

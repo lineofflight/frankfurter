@@ -8,7 +8,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -19,6 +21,7 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 	"github.com/lineofflight/frankfurter/go/internal/migrate"
 	"github.com/lineofflight/frankfurter/go/internal/provider"
+	"github.com/lineofflight/frankfurter/go/internal/schedule"
 	"github.com/lineofflight/frankfurter/go/internal/seeds"
 )
 
@@ -190,6 +193,61 @@ func TestScheduleWiresBlendAndOneCache(t *testing.T) {
 	}
 	if _, ok := deps.Blend.(provider.Materialized); !ok || deps.Backfill == nil {
 		t.Fatalf("blend %T, backfill set %v", deps.Blend, deps.Backfill != nil)
+	}
+}
+
+// SCHEDULER_WORKERS (default 16), not the pool, caps concurrent jobs: on a
+// one-connection pool, jobs that each touch the database and then wait for the
+// rest all start.
+func TestSchedulerRunsMoreJobsThanPoolConnections(t *testing.T) {
+	for _, tc := range []struct {
+		workers string // empty leaves SCHEDULER_WORKERS unset
+		jobs    int32
+	}{{"4", 4}, {"", 16}} {
+		t.Run(strconv.Itoa(int(tc.jobs)), func(t *testing.T) {
+			t.Setenv("MAX_THREADS", "1")
+			t.Setenv("SCHEDULER_WORKERS", tc.workers)
+			if tc.workers == "" {
+				os.Unsetenv("SCHEDULER_WORKERS")
+			}
+			conn := openPath(t, filepath.Join(t.TempDir(), "frankfurter.sqlite3"))
+			if n := conn.Stats().MaxOpenConnections; n != 1 {
+				t.Fatalf("pool of %d", n)
+			}
+			s, err := newScheduler()
+			if err != nil {
+				t.Fatal(err)
+			}
+			var started atomic.Int32
+			all := make(chan struct{})
+			for range tc.jobs {
+				s.In("job", 0, func(ctx context.Context, _ *schedule.Job) error {
+					if err := conn.PingContext(ctx); err != nil {
+						return err
+					}
+					if started.Add(1) == tc.jobs {
+						close(all)
+					}
+					select {
+					case <-all:
+					case <-ctx.Done():
+					}
+					return nil
+				})
+			}
+			ctx, cancel := context.WithCancel(context.Background())
+			go func() {
+				select {
+				case <-all:
+				case <-time.After(5 * time.Second):
+				}
+				cancel()
+			}()
+			s.Run(ctx)
+			if n := started.Load(); n != tc.jobs {
+				t.Fatalf("%d of %d jobs running at once", n, tc.jobs)
+			}
+		})
 	}
 }
 

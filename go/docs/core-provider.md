@@ -28,6 +28,9 @@ runs everything.
     `Blend.RefreshRollupsTx` (blending providers), `rates.RefreshSummaries`, `Blend.RefreshTx(min, max + 14)`
     (blending providers). After commit: `Cache.PurgeDebounced`, `PRAGMA optimize`.
   - `Adapter` overrides the registry (tests use fakes). `Today` defaults to `rates.Today`.
+  - A write lock (an unexported mutex) serialises the backfill's writes, the batch transaction and `PRAGMA optimize`,
+    across every backfill sharing the `Ingester`. Fetching, validation and reads (`LastSynced`, the drift check) run
+    outside it, so network waits overlap. The scheduler and the backfill task each share one `Ingester`.
 - `Blend` (`RefreshTx`, `RefreshRollupsTx`) and `Cache` (`PurgeDebounced`) are interfaces. `Blend` runs on the
   backfill's transaction (`q`), so it must not open its own. A nil `Ingester.Blend` means `Materialized`; a nil
   `Cache` is skipped until the cache step provides one.
@@ -48,6 +51,7 @@ runs everything.
   method names: one blending type can implement both.
 - `Scheduler` (`New(workers, log)`, `In`, `Every`, `Cron`, `Run(ctx)`) is the rufus-scheduler subset: a worker cap,
   no-overlap skipping, `Job.Unschedule`, failures and panics logged with the job kept. Cron uses gronx in the local zone.
+  The binary sets the cap from `SCHEDULER_WORKERS` (default 16); `MAX_THREADS` (default 5) sizes the DB pool.
 - `DryRun(w, providers)` prints `startup: backfill[key]` and `cron: <expr> backfill[key]` lines.
 
 ### `internal/heavyslots` (lib/heavy_slots.rb)
@@ -57,7 +61,8 @@ an invalid value panics at startup like Ruby's `Integer()`), `ErrBusy`, `RetryAf
 
 ### Binaries
 
-- `cmd/schedule [--dry-run]`: bin/schedule.
+- `cmd/schedule [--dry-run]`: bin/schedule. Runs up to `SCHEDULER_WORKERS` jobs at once (default 16), independent of
+  `MAX_THREADS`, which sizes the DB pool.
 - `cmd/backfill [-full] [provider]`: `rake backfill[provider]`; `FULL=1` also works.
 - `cmd/providerhealth`: bin/provider_health.rb (API, REPO, DRY_RUN env as in Ruby). Its issue body matches Ruby byte
   for byte (`testdata/body.txt`).
@@ -81,6 +86,12 @@ an invalid value panics at startup like Ruby's `Integer()`), `ErrBusy`, `RetryAf
 - Backfill's transaction is `BEGIN IMMEDIATE` (Ruby: a deferred transaction that the blend refresh then upgrades).
   Same outcome, no lock-upgrade failures under concurrent backfills.
 - Inserted counts come from `RowsAffected` per row instead of `total_changes()`.
+- The scheduler runs up to `SCHEDULER_WORKERS` jobs at once (default 16). Ruby caps rufus at the pool size
+  (`max_work_threads: DB.pool.max_size`, i.e. `MAX_THREADS`) because its threads block on connection checkout and the
+  GVL makes more useless. A backfill mostly waits on its source, so on a cold start the pool-sized cap queued providers
+  and the fill took the sum of the queue rather than about the slowest provider. Writes instead queue on the
+  `Ingester`'s write lock, since SQLite admits one writer and uncoordinated `BEGIN IMMEDIATE`s could run past the busy
+  timeout behind a long batch.
 - Log lines are slog records with attributes (`provider`, `count`, `detail`, `error`) instead of `"KEY: message"`
   strings; floats in the drift detail print shortest (`stored 1` where Ruby says `stored 1.0`).
 - The dry run lists every provider, as Ruby does, whether or not its adapter is registered; backfilling a provider
