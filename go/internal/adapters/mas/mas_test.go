@@ -159,6 +159,12 @@ func TestParseRaisesWithoutHeader(t *testing.T) {
 	}
 }
 
+func TestParseRejectsInvalidDate(t *testing.T) {
+	if _, err := parse([]byte("End of Period,,,S$ Per Unit of Euro\n2026,Feb,30,1.4877\n")); err == nil {
+		t.Error("want an error for 2026-02-30, as Ruby's Date.new raises")
+	}
+}
+
 func TestGolden(t *testing.T) {
 	for _, tc := range []struct {
 		file        string

@@ -228,6 +228,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			continue
 		}
 		date := adapter.Date(year, time.Month(month), day)
+		if date.Day() != day {
+			return nil, fmt.Errorf("invalid date %d-%02d-%02d", year, month, day)
+		}
 
 		for i, value := range row {
 			c, ok := cols[i]
