@@ -209,3 +209,51 @@ func TestGolden(t *testing.T) {
 	}
 	g.Check(t, rates)
 }
+
+func withServer(t *testing.T, h http.HandlerFunc) *Adapter {
+	t.Helper()
+	srv := httptest.NewServer(h)
+	t.Cleanup(srv.Close)
+	old := pageURL
+	pageURL = srv.URL
+	t.Cleanup(func() { pageURL = old })
+	return New(srv.Client())
+}
+
+func TestFetchRequestsHistoryWithRSCAndSkipsWeekends(t *testing.T) {
+	var paths []string
+	a := withServer(t, func(w http.ResponseWriter, r *http.Request) {
+		paths = append(paths, r.URL.Path)
+		if r.URL.Path == "/" {
+			if r.Header.Get("RSC") != "1" {
+				t.Errorf("history request RSC header = %q, want 1", r.Header.Get("RSC"))
+			}
+			_, _ = w.Write([]byte(`"history":{"USD":[]}`))
+			return
+		}
+		http.NotFound(w, r)
+	})
+
+	// Friday 2026-09-04 through Monday 2026-09-07.
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 9, 4), adapter.Date(2026, 9, 7)); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{"/", "/2026-09-04", "/2026-09-07"}
+	if !slices.Equal(paths, want) {
+		t.Errorf("paths = %v, want %v", paths, want)
+	}
+}
+
+func TestFetchFailsOnDatedPageError(t *testing.T) {
+	a := withServer(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/" {
+			_, _ = w.Write([]byte(`"history":{"USD":[]}`))
+			return
+		}
+		http.Error(w, "boom", http.StatusForbidden)
+	})
+
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 9, 4), adapter.Date(2026, 9, 4)); err == nil {
+		t.Error("want an error for a non-404 failure")
+	}
+}
