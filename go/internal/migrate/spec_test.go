@@ -364,7 +364,7 @@ type sdrCase struct {
 	from           int // the version before the provider's migration
 	rows           []rate
 	conflicting    []rate
-	blended        float64 // the daily blend row "leaves ... alone" keeps
+	blended        float64   // the daily blend row "leaves ... alone" keeps
 	orphan         [2]string // base, quote of the stale SDR rollup row
 	merged         [2]string // base, quote of the merged XDR series
 }

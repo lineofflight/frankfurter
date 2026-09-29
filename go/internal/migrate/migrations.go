@@ -383,4 +383,3 @@ func either(codes ...string) string {
 	list := db.LitList(codes)
 	return "(`base` IN " + list + " OR `quote` IN " + list + ")"
 }
-
