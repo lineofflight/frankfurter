@@ -1197,6 +1197,21 @@ func TestV2ProviderRoutesRejectProvidersParam(t *testing.T) {
 	}
 }
 
+// Roda's String matcher captures an empty segment followed by a slash, so /rate//USD reaches the query with base ""
+// (422) and /providers//rates looks up provider "" (404). ServeMux redirects such paths before any handler runs (see
+// docs/core-api_v2.md), so the router is called directly.
+func TestV2CapturesEmptySegmentBeforeSlash(t *testing.T) {
+	a := newV2App(t)
+	for path, status := range map[string]int{"/rate//USD": 422, "/providers//rates": 404, "/rate/EUR/": 404} {
+		res := httptest.NewRecorder()
+		c := &v2Request{s: a.s, w: res, r: httptest.NewRequest(http.MethodGet, "/v2", nil)}
+		c.route(path)
+		if res.Code != status {
+			t.Errorf("%s: %d, want %d (%s)", path, res.Code, status, res.Body.String())
+		}
+	}
+}
+
 func TestV2RejectsTrailingPathSegments(t *testing.T) {
 	a := newV2App(t)
 	for _, path := range []string{"/rates", "/rate/EUR/USD", "/currency/usd", "/currencies", "/providers/ecb/rates",

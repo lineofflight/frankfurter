@@ -5,6 +5,7 @@ import (
 	"errors"
 	"net/http"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -58,7 +59,19 @@ type v2Request struct {
 	parsed    bool
 }
 
-var v2ExtRe = regexp.MustCompile(`^(.*?)\.(json|xml|html|csv)$`)
+var (
+	v2ExtRe = regexp.MustCompile(`^(.*?)\.(json|xml|html|csv)$`)
+
+	acceptSplit  = regexp.MustCompile(`\s*,\s*`)
+	acceptParams = regexp.MustCompile(`\s*;\s*`)
+	acceptTypes  = map[string]string{
+		"text/json": "json", "application/json": "json", "text/xml": "xml", "application/xml": "xml",
+		"text/html": "html", contentTypeCSV: "csv",
+	}
+)
+
+// acceptHeader is Rack's HTTP_ACCEPT: repeated headers joined with commas.
+func acceptHeader(r *http.Request) string { return strings.Join(r.Header.Values("Accept"), ", ") }
 
 func (s *Server) v2(w http.ResponseWriter, r *http.Request) {
 	rest, ok := strings.CutPrefix(r.URL.EscapedPath(), "/v2")
@@ -142,13 +155,9 @@ func (c *v2Request) requestedType() string {
 	if !c.asked {
 		c.asked = true
 		c.accepted = "html"
-		mimes := map[string]string{
-			"text/json": "json", "application/json": "json", "text/xml": "xml", "application/xml": "xml",
-			"text/html": "html", contentTypeCSV: "csv",
-		}
-		for _, part := range regexp.MustCompile(`\s*,\s*`).Split(c.r.Header.Get("Accept"), -1) {
-			mime := regexp.MustCompile(`\s*;\s*`).Split(part, 2)[0]
-			if t, ok := mimes[mime]; ok {
+		for _, part := range acceptSplit.Split(acceptHeader(c.r), -1) {
+			mime := acceptParams.Split(part, 2)[0]
+			if t, ok := acceptTypes[mime]; ok {
 				h := c.w.Header()
 				if vary := h.Get("Vary"); vary != "" {
 					h.Set("Vary", vary+", Accept")
@@ -220,7 +229,7 @@ func (c *v2Request) coverage() {
 	}
 	var unknown []string
 	for k := range params {
-		if !contains(ratequery.CoverageParams, k) {
+		if !slices.Contains(ratequery.CoverageParams, k) {
 			unknown = append(unknown, k)
 		}
 	}
@@ -240,15 +249,6 @@ func (c *v2Request) coverage() {
 		return
 	}
 	writeJSON(c.w, http.StatusOK, contentTypeV2, result)
-}
-
-func contains(list []string, v string) bool {
-	for _, x := range list {
-		if x == v {
-			return true
-		}
-	}
-	return false
 }
 
 // provider serves /providers and everything under it. /providers/<key>/rates and /providers/<key>/rate/<base>/<quote>

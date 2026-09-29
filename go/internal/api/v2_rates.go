@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"context"
 	"database/sql"
-	"encoding/json"
 	"math"
 	"net/http"
 	"strconv"
@@ -86,23 +85,24 @@ func (c *v2Request) rates(params ratequery.Params) {
 		if len(records) == 0 {
 			return
 		}
-		out := csvLine(headers)
+		var out strings.Builder
+		out.WriteString(csvLine(headers))
 		for _, r := range records {
-			out += string(csvRecord(headers, r))
+			out.Write(csvRecord(headers, r))
 		}
-		c.w.Write([]byte(out))
+		c.w.Write([]byte(out.String()))
 		return
 	}
 
 	switch {
-	case strings.Contains(c.r.Header.Get("Accept"), contentTypeNDJSON):
+	case strings.Contains(acceptHeader(c.r), contentTypeNDJSON):
 		c.w.Header().Set("Vary", "Accept")
 		c.stream(q, contentTypeNDJSON, "", "", "", func(r ratequery.Record) ([]byte, error) {
-			b, err := json.Marshal(r)
+			b, err := r.MarshalJSON() // unescaped, as Oj writes it
 			return append(b, '\n'), err
 		})
 	case q.Range():
-		c.stream(q, contentTypeV2, "[", ",", "]", func(r ratequery.Record) ([]byte, error) { return json.Marshal(r) })
+		c.stream(q, contentTypeV2, "[", ",", "]", func(r ratequery.Record) ([]byte, error) { return r.MarshalJSON() })
 	default:
 		records, err := collect(c.ctx(), q)
 		if err != nil {
