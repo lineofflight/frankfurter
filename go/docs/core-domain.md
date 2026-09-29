@@ -55,6 +55,9 @@ Scopes are SQL text with constants inlined via `db.Lit`, so they compose like Se
   same computation in Go (tested against SQLite for every day of 2016-2017).
 - Precision and components: `Digits`, `Normalize`, `PrecisionSQL`, `Midpoint(bid, ask *float64)`,
   `ComponentsOf(adapter.Rate) Components{Mid, Bid, Ask}` (what to write; `rate` is generated), `Round` (Roundable).
+  `Normalize` and `Round` round as Ruby's `format` does: the shortest decimal that round-trips, half to even, not the
+  exact double (`Round(214.415)` is 214.42 and `Round(643.965)` is 643.96, where strconv gives the opposite).
+  `testdata/ruby_format.txt` pins 4,000 Ruby results. Don't swap in `strconv.FormatFloat(v, 'f', n, 64)`.
 - Validation: `Reject(records, leadDays, today) []adapter.Rate` (filters in place; relabels premature codes),
   `Horizon`, `MaxFutureDrift`, `Purge(ctx, *sql.DB, today, leads) (PurgeTotals, error)` in one `BEGIN IMMEDIATE`
   transaction, `ProviderLeads(ctx, q)` (leads of seeded providers whose adapter is registered; import
@@ -101,9 +104,11 @@ renders `(NULL)`: drop NOT IN conditions for empty lists), `NullDate` (scans DAT
 - `Reject` sees NaN where Ruby sees a nil rate; typed dates make Ruby's "accepts a string date" moot.
 - Blended rollup tables (`BlendedWeeklyRate`/`BlendedMonthlyRate`) belong to the blending step. The rate_scopes
   "keeps blends identical" cases compare the blend's entire input (every blendable rollup row in the bucket) before and
-  after instead of the materialised blend.
-- The "keeps forward-dated rows from a provider that publishes ahead" purge case passes HMRC's 31-day lead directly;
-  `ProviderLeads` is tested separately with the JPC adapter (7 days) registered.
+  after instead of the materialised blend, and "omits pairs whose bucket contains only expired observations" skips
+  its assertion on the blended table. The blending step should restore both against `blended_*_rates`.
+- Ruby's `format("%.12g")` also treats a few 16- and 17-digit values that sit just short of a tie as ties (2 of
+  20,000 random samples); `Normalize` treats only exact decimal ties that way. Those values then differ at the 12th
+  significant digit (relative 1e-12), well within tolerance.
 - `SeedProviders` runs in one transaction (Ruby: delete, then a multi-insert transaction, then the refresh).
 - `Currency.find` is `FindCurrency` (the name `Find` is the Money lookup).
 

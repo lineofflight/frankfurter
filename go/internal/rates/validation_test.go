@@ -8,7 +8,8 @@ import (
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
-	_ "github.com/lineofflight/frankfurter/go/internal/adapters/jpc" // registers a provider with a lead
+	_ "github.com/lineofflight/frankfurter/go/internal/adapters/hmrc" // registers providers with a lead
+	_ "github.com/lineofflight/frankfurter/go/internal/adapters/jpc"
 	"github.com/lineofflight/frankfurter/go/internal/db"
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
@@ -66,6 +67,19 @@ func TestRejectDropsBeyondHorizonKeepsGrace(t *testing.T) {
 	}, 0, today)
 	if !reflect.DeepEqual(quotesOf(got), []string{"USD"}) {
 		t.Errorf("got %v", quotesOf(got))
+	}
+}
+
+func TestRejectHorizonIsInclusive(t *testing.T) {
+	today := fixtures.Today()
+	for _, lead := range []int{0, 31} {
+		got := rates.Reject([]adapter.Rate{
+			{Date: today.AddDate(0, 0, rates.MaxFutureDrift+lead), Base: "EUR", Quote: "USD", Rate: 1.1},
+			{Date: today.AddDate(0, 0, rates.MaxFutureDrift+lead+1), Base: "EUR", Quote: "GBP", Rate: 0.85},
+		}, lead, today)
+		if !reflect.DeepEqual(quotesOf(got), []string{"USD"}) {
+			t.Errorf("lead %d: got %v", lead, quotesOf(got))
+		}
 	}
 }
 
@@ -163,7 +177,7 @@ func TestProviderLeadsFromRegisteredAdapters(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if leads["JPC"] != 7 || leads["ECB"] != 0 {
+	if leads["JPC"] != 7 || leads["HMRC"] != 31 || leads["ECB"] != 0 {
 		t.Errorf("leads = %v", leads)
 	}
 }
@@ -203,11 +217,7 @@ func TestPurgeKeepsForwardRowsOfProviderPublishingAhead(t *testing.T) {
 	exec(t, conn, `INSERT INTO monthly_rates (provider, bucket_date, base, quote, rate) VALUES
 		('HMRC', ?, 'GBP', 'USD', 1.3), ('TEST', ?, 'EUR', 'USD', 1.1)`, bucket, bucket)
 
-	// HMRC's adapter declares a 31-day lead; the Go HMRC adapter may not be linked into this test, so the lead is
-	// given directly, as ProviderLeads would find it.
-	if _, err := rates.Purge(ctx, conn, today, map[string]int{"HMRC": 31, "JPC": 7}); err != nil {
-		t.Fatal(err)
-	}
+	purge(t, conn, today)
 
 	if got := providersAt(t, conn, "SELECT provider FROM rates WHERE date = ? AND provider IN ('HMRC', 'TEST')", ahead); !reflect.DeepEqual(got, []string{"HMRC"}) {
 		t.Errorf("rates providers = %v", got)

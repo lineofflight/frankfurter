@@ -315,7 +315,26 @@ func TestOnlyNoMatches(t *testing.T) {
 func downsampleDates(t *testing.T, conn *sql.DB, p rates.Precision) []time.Time {
 	latest := fixtures.LatestDate()
 	q := rates.Daily.Dataset().Between(latest.AddDate(0, 0, -366), latest, fixtures.Today())
-	return scanDates(t, conn, "SELECT date FROM ("+q.Downsample(p)+")")
+	// Scan the query itself: an outer SELECT need not keep a subquery's order.
+	rows, err := conn.QueryContext(ctx, q.Downsample(p))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer rows.Close()
+	var out []time.Time
+	for rows.Next() {
+		var base, provider, quote string
+		var rate float64
+		var d db.NullDate
+		if err := rows.Scan(&base, &provider, &quote, &rate, &d); err != nil {
+			t.Fatal(err)
+		}
+		out = append(out, d.Time)
+	}
+	if err := rows.Err(); err != nil {
+		t.Fatal(err)
+	}
+	return out
 }
 
 func distinct(ds []time.Time) int {
