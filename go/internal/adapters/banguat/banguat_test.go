@@ -2,7 +2,9 @@ package banguat
 
 import (
 	"context"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -78,4 +80,42 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+func TestParseSkipsBlankAndZeroRows(t *testing.T) {
+	xml := `<Vars>
+  <Var><fecha>09/03/2026</fecha><venta>0</venta></Var>
+  <Var><fecha>10/03/2026</fecha><venta></venta></Var>
+  <Var><venta>7.6</venta></Var>
+  <Var><fecha>11/03/2026</fecha><venta>7.65</venta></Var>
+</Vars>`
+	records, err := parse([]byte(xml))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(records) != 1 || !records[0].Date.Equal(adapter.Date(2026, 3, 11)) || records[0].Rate != 7.65 {
+		t.Fatalf("got %+v, want one 2026-03-11 row at 7.65", records)
+	}
+}
+
+func TestParseRejectsInvalidRate(t *testing.T) {
+	if _, err := parse([]byte(`<Vars><Var><fecha>10/03/2026</fecha><venta>n/a</venta></Var></Vars>`)); err == nil {
+		t.Fatal("want error for unparseable venta")
+	}
+}
+
+func TestSOAPRequestFormatsDates(t *testing.T) {
+	body := soapRequest(adapter.Date(2026, 3, 1), adapter.Date(2026, 3, 20))
+	for _, want := range []string{"<fechainit>01/03/2026</fechainit>", "<fechafin>20/03/2026</fechafin>", "<TipoCambioRango "} {
+		if !strings.Contains(body, want) {
+			t.Errorf("request body missing %q", want)
+		}
+	}
+}
+
+func TestFetchRequiresStartDate(t *testing.T) {
+	a := New(vcrtest.Client(t, "banguat", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host)))
+	if _, err := a.Fetch(context.Background(), time.Time{}, adapter.Date(2026, 3, 20)); err == nil {
+		t.Fatal("want error without a start date")
+	}
 }
