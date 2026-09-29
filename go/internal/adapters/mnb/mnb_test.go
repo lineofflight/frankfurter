@@ -118,6 +118,41 @@ func TestParseSkipsZeroRate(t *testing.T) {
 	}
 }
 
+func TestParseEmptyResultErrors(t *testing.T) {
+	if _, err := parse([]byte("  ")); err == nil {
+		t.Error("want error for empty result")
+	}
+}
+
+func TestParseSkipsBadCurrencyAndZeroUnit(t *testing.T) {
+	rates := mustParse(t, `<MNBExchangeRates>
+  <Day date="2025-03-24">
+    <Rate unit="1" curr="eur">398,44</Rate>
+    <Rate unit="0" curr="USD">360,00</Rate>
+    <Rate curr="GBP">470,00</Rate>
+    <Rate unit="100abc" curr="JPY">253,40</Rate>
+  </Day>
+</MNBExchangeRates>`)
+	if len(rates) != 1 || rates[0].Base != "JPY" || math.Abs(rates[0].Rate-2.534) > 1e-9 {
+		t.Errorf("got %v, want only JPY at 2.534", rates)
+	}
+}
+
+func TestParseBadRateErrors(t *testing.T) {
+	xml := `<MNBExchangeRates><Day date="2025-03-24"><Rate unit="1" curr="EUR">n/a</Rate></Day></MNBExchangeRates>`
+	if _, err := parse([]byte(xml)); err == nil {
+		t.Error("want error for unparseable rate")
+	}
+}
+
+func TestToI(t *testing.T) {
+	for in, want := range map[string]int{"100": 100, " 1": 1, "100abc": 100, "": 0, "abc": 0, "-5": -5, "+7": 7} {
+		if got := toI(in); got != want {
+			t.Errorf("toI(%q) = %d, want %d", in, got, want)
+		}
+	}
+}
+
 func TestGolden(t *testing.T) {
 	g := golden.Load(t, "testdata/golden/fetch.json")
 	a := New(g.Client(t))

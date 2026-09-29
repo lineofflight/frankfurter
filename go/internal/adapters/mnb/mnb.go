@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -122,8 +123,9 @@ type exchangeRates struct {
 }
 
 func parse(data []byte) ([]adapter.Rate, error) {
+	// Ruby raises on an empty result (Ox.load("") is nil), so a response without one is an error, not an empty day.
 	if len(bytes.TrimSpace(data)) == 0 {
-		return nil, nil
+		return nil, errors.New("mnb: empty GetExchangeRatesResult")
 	}
 	var doc exchangeRates
 	if err := xml.Unmarshal(data, &doc); err != nil {
@@ -140,8 +142,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if !isoCode.MatchString(r.Currency) {
 				continue
 			}
-			unit, err := strconv.Atoi(strings.TrimSpace(r.Unit))
-			if err != nil || unit == 0 {
+			unit := toI(r.Unit)
+			if unit == 0 {
 				continue
 			}
 			value, err := strconv.ParseFloat(strings.TrimSpace(strings.ReplaceAll(r.Value, ",", ".")), 64)
@@ -155,4 +157,18 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		}
 	}
 	return rates, nil
+}
+
+// toI reads a leading integer the way Ruby's String#to_i does, returning 0 when there is none.
+func toI(s string) int {
+	s = strings.TrimLeft(s, " \t\n\v\f\r")
+	end := 0
+	if end < len(s) && (s[end] == '+' || s[end] == '-') {
+		end++
+	}
+	for end < len(s) && s[end] >= '0' && s[end] <= '9' {
+		end++
+	}
+	n, _ := strconv.Atoi(s[:end])
+	return n
 }
