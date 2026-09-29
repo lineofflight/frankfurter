@@ -2,7 +2,10 @@ package dnb
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -56,6 +59,50 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 	}
 }
 
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchRequest(t *testing.T) {
+	tests := []struct {
+		upto time.Time
+		tid  string
+	}{
+		{adapter.Date(2025, 3, 7), `">=2025M03D03<=2025M03D07"`},
+		{time.Time{}, `">=2025M03D03"`},
+	}
+	for _, tt := range tests {
+		var got *http.Request
+		var body string
+		client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+			got = r
+			b, _ := io.ReadAll(r.Body)
+			body = string(b)
+			return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader("VALUTA;KURTYP;TID;INDHOLD\n")), Request: r}, nil
+		})}
+		if _, err := New(client).Fetch(context.Background(), adapter.Date(2025, 3, 3), tt.upto); err != nil {
+			t.Fatal(err)
+		}
+		if got.Method != http.MethodPost || got.URL.String() != "https://api.statbank.dk/v1/data" {
+			t.Errorf("request = %s %s", got.Method, got.URL)
+		}
+		if ct := got.Header.Get("Content-Type"); ct != "application/json" {
+			t.Errorf("Content-Type = %q", ct)
+		}
+		for _, want := range []string{`"table":"DNVALD"`, `"format":"BULK"`, `"KBH"`, `"ROL","TRL"`, `"code":"Tid","values":[` + tt.tid + `]`} {
+			if !strings.Contains(body, want) {
+				t.Errorf("body %s lacks %s", body, want)
+			}
+		}
+	}
+}
+
+func TestFetchNeedsStartDate(t *testing.T) {
+	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, time.Time{}); err == nil {
+		t.Error("want an error for a zero start date")
+	}
+}
+
 func mustParse(t *testing.T, csv string) []adapter.Rate {
 	t.Helper()
 	rates, err := parse([]byte(csv))
@@ -96,6 +143,9 @@ func TestParseSkips(t *testing.T) {
 	tests := []struct{ name, csv string }{
 		{"missing values marked as ..", "VALUTA;KURTYP;TID;INDHOLD\nDEM;KBH;1977M01D03;..\n"},
 		{"zero rate", "VALUTA;KURTYP;TID;INDHOLD\nUSD;KBH;2025M03D03;0.0000\n"},
+		{"empty rate", "VALUTA;KURTYP;TID;INDHOLD\nUSD;KBH;2025M03D03;\n"},
+		{"empty date", "VALUTA;KURTYP;TID;INDHOLD\nUSD;KBH;;712.6900\n"},
+		{"lower-case code", "VALUTA;KURTYP;TID;INDHOLD\nusd;KBH;2025M03D03;712.6900\n"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -103,6 +153,17 @@ func TestParseSkips(t *testing.T) {
 				t.Errorf("got %d rates, want none", len(rates))
 			}
 		})
+	}
+}
+
+func TestParseErrors(t *testing.T) {
+	for _, csv := range []string{
+		"VALUTA;KURTYP;TID;INDHOLD\nUSD;KBH;2025M03D03;abc\n",
+		"VALUTA;KURTYP;TID;INDHOLD\nUSD;KBH;2025M13D03;712.6900\n",
+	} {
+		if _, err := parse([]byte(csv)); err == nil {
+			t.Errorf("parse(%q) returned no error", csv)
+		}
 	}
 }
 

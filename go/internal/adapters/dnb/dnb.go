@@ -119,9 +119,10 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			index[name] = i
 		}
 	}
+	// Ruby's CSV reads an empty field as nil, so an empty field counts as missing.
 	field := func(row []string, name string) (string, bool) {
 		i, ok := index[name]
-		if !ok || i >= len(row) {
+		if !ok || i >= len(row) || row[i] == "" {
 			return "", false
 		}
 		return row[i], true
