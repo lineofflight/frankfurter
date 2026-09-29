@@ -3,17 +3,17 @@
 // a date as a date.
 //
 // Formula cells read as empty. The gem returns them as Spreadsheet::Formula, which no adapter treats as a number.
+//
+// BIFF8 is frozen, so this is a small reader rather than a library: github.com/richardlehane/mscfb opens the Compound
+// File container, and biff.go reads only the records the adapters need from its Workbook stream. [MS-XLS] documents
+// the record layouts.
 package xls
 
 import (
-	"bytes"
 	"fmt"
 	"math"
 	"regexp"
 	"time"
-	"unicode/utf8"
-
-	"github.com/shakinm/xlsReader/xls"
 )
 
 // Kind is a cell's type.
@@ -71,57 +71,42 @@ type Sheet struct {
 
 // Open parses a workbook.
 func Open(data []byte) ([]Sheet, error) {
-	wb, err := xls.OpenReader(bytes.NewReader(data))
+	stream, err := workbookStream(data)
 	if err != nil {
 		return nil, fmt.Errorf("xls: %w", err)
 	}
-	sheets := make([]Sheet, wb.GetNumberSheets())
-	for i := range sheets {
-		ws, err := wb.GetSheet(i)
+	globals, err := substream(stream, 0)
+	if err != nil {
+		return nil, fmt.Errorf("xls: %w", err)
+	}
+	wb, err := readWorkbook(globals)
+	if err != nil {
+		return nil, fmt.Errorf("xls: %w", err)
+	}
+	sheets := make([]Sheet, len(wb.sheets))
+	for i, bs := range wb.sheets {
+		recs, err := substream(stream, bs.pos)
 		if err != nil {
 			return nil, fmt.Errorf("xls: sheet %d: %w", i, err)
 		}
-		sheets[i].Name = ws.GetName()
-		for _, row := range ws.GetRows() {
-			cols := row.GetCols()
-			cells := make(Row, len(cols))
-			for j, c := range cols {
-				cells[j] = cell(&wb, c)
-			}
-			sheets[i].Rows = append(sheets[i].Rows, trimBlank(cells))
+		rows, err := wb.readRows(recs)
+		if err != nil {
+			return nil, fmt.Errorf("xls: sheet %d: %w", i, err)
 		}
+		for j := range rows {
+			rows[j] = trimBlank(rows[j])
+		}
+		sheets[i] = Sheet{Name: bs.name, Rows: rows}
 	}
 	return sheets, nil
 }
 
-type cellData interface {
-	GetString() string
-	GetFloat64() float64
-	GetInt64() int64
-	GetXFIndex() int
-	GetType() string
-}
-
-func cell(wb *xls.Workbook, c cellData) Cell {
-	switch c.GetType() {
-	case "*record.LabelSSt", "*record.LabelBIFF8", "*record.LabelBIFF5", "*record.Label", "*record.Rstring":
-		return Cell{Kind: String, String: latin1IfInvalid(c.GetString())}
-	case "*record.Number", "*record.Rk":
-		v := c.GetFloat64()
-		xf := wb.GetXFbyIndex(c.GetXFIndex())
-		format := numberFormat(wb, xf.GetFormatIndex())
-		if isDate(format) {
-			return Cell{Kind: Date, Date: serialDate(v)}
-		}
-		return Cell{Kind: Number, Number: v}
-	case "*record.BoolErr":
-		s := c.GetString()
-		if s == "TRUE" || s == "FALSE" {
-			return Cell{Kind: Bool, Number: float64(c.GetInt64())}
-		}
-		return Cell{Kind: Error, String: s}
+// number types a NUMBER or RK value by its cell's number format, as the gem does.
+func (wb *workbook) number(xf uint16, v float64) Cell {
+	if int(xf) < len(wb.xfs) && isDate(wb.numberFormat(wb.xfs[xf])) {
+		return Cell{Kind: Date, Date: serialDate(v)}
 	}
-	return Cell{}
+	return Cell{Kind: Number, Number: v}
 }
 
 func trimBlank(cells Row) Row {
@@ -132,32 +117,19 @@ func trimBlank(cells Row) Row {
 	return cells[:n]
 }
 
-// latin1IfInvalid decodes BIFF8's compressed strings, which the reader hands over as raw Latin-1 bytes.
-func latin1IfInvalid(s string) string {
-	if utf8.ValidString(s) {
-		return s
-	}
-	runes := make([]rune, len(s))
-	for i := 0; i < len(s); i++ {
-		runes[i] = rune(s[i])
-	}
-	return string(runes)
-}
-
 // builtinFormats are Excel's implicit number formats, as the gem names them.
-var builtinFormats = map[int]string{
+var builtinFormats = map[uint16]string{
 	0: "GENERAL", 1: "0", 2: "0.00", 3: "#,##0", 4: "#,##0.00", 9: "0%", 10: "0.00%", 11: "0.00E+00",
 	12: "# ?/?", 13: "# ??/??", 14: "M/D/YY", 15: "D-MMM-YY", 16: "D-MMM", 17: "MMM-YY", 18: "h:mm AM/PM",
 	19: "h:mm:ss AM/PM", 20: "h:mm", 21: "h:mm:ss", 22: "M/D/YY h:mm", 45: "mm:ss", 46: "[h]:mm:ss", 47: "mm:ss.0",
 	48: "##0.0E+0", 49: "@",
 }
 
-func numberFormat(wb *xls.Workbook, index int) string {
+func (wb *workbook) numberFormat(index uint16) string {
 	if f, ok := builtinFormats[index]; ok {
 		return f
 	}
-	format := wb.GetFormatByIndex(index)
-	return format.String()
+	return wb.formats[index]
 }
 
 // The gem's Spreadsheet::Format patterns: a format is a date or time when it has date or time tokens and no digit

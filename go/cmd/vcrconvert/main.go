@@ -22,7 +22,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"go.yaml.in/yaml/v4"
+	"go.yaml.in/yaml/v3"
 	"gopkg.in/dnaeon/go-vcr.v4/pkg/cassette"
 )
 
@@ -71,7 +71,7 @@ func convert(path, outDir string) error {
 
 	name := strings.TrimSuffix(filepath.Base(path), ".yml")
 	c := cassette.New(filepath.Join(outDir, name))
-	c.MarshalFunc = yaml.Marshal
+	c.MarshalFunc = marshal
 	for _, node := range list.Content {
 		i, err := interaction(node)
 		if err != nil {
@@ -80,6 +80,31 @@ func convert(path, outDir string) error {
 		c.AddInteraction(i)
 	}
 	return c.Save()
+}
+
+// marshal encodes a cassette byte for byte as yaml/v4 did when the committed cassettes were converted. The one
+// difference v3 shows on them is quoting strings that YAML 1.1 reads as booleans: v4 single-quotes 'off', v3 double.
+func marshal(v any) ([]byte, error) {
+	var doc yaml.Node
+	if err := doc.Encode(v); err != nil {
+		return nil, err
+	}
+	singleQuoteOldBools(&doc)
+	return yaml.Marshal(&doc)
+}
+
+func singleQuoteOldBools(n *yaml.Node) {
+	if n.Kind == yaml.ScalarNode && n.Style == yaml.DoubleQuotedStyle && oldBools[n.Value] {
+		n.Style = yaml.SingleQuotedStyle
+	}
+	for _, c := range n.Content {
+		singleQuoteOldBools(c)
+	}
+}
+
+var oldBools = map[string]bool{
+	"y": true, "Y": true, "yes": true, "Yes": true, "YES": true, "on": true, "On": true, "ON": true,
+	"n": true, "N": true, "no": true, "No": true, "NO": true, "off": true, "Off": true, "OFF": true,
 }
 
 func interaction(node *yaml.Node) (*cassette.Interaction, error) {
