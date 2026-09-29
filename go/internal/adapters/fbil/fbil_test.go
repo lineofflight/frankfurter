@@ -2,9 +2,13 @@ package fbil
 
 import (
 	"context"
+	"io"
 	"math"
+	"net/http"
 	"slices"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -105,8 +109,45 @@ func TestParseSkips(t *testing.T) {
 }
 
 func TestParseRejectsNonArray(t *testing.T) {
-	if _, err := parse([]byte(`{"error": true}`)); err == nil {
-		t.Error("want an error for a JSON object")
+	for _, body := range []string{`{"error": true}`, `null`} {
+		if _, err := parse([]byte(body)); err == nil {
+			t.Errorf("want an error for %s", body)
+		}
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchSendsWindow(t *testing.T) {
+	tests := []struct {
+		name        string
+		after, upto time.Time
+		from, to    string
+	}{
+		{"bounded", adapter.Date(2026, 3, 17), adapter.Date(2026, 3, 21), "2026-03-17", "2026-03-21"},
+		{"open", time.Time{}, time.Time{}, "", "2026-09-29"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got *http.Request
+			a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+				got = r
+				return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader("[]")), Header: http.Header{}}, nil
+			})})
+			a.Now = func() time.Time { return time.Date(2026, 9, 29, 12, 0, 0, 0, time.UTC) }
+			if _, err := a.Fetch(context.Background(), tt.after, tt.upto); err != nil {
+				t.Fatal(err)
+			}
+			if got.URL.Host != "www.fbil.org.in" || got.URL.Path != "/wasdm/refrates/fetchfiltered" {
+				t.Errorf("url = %s", got.URL)
+			}
+			q := got.URL.Query()
+			if !q.Has("fromDate") || q.Get("fromDate") != tt.from || q.Get("toDate") != tt.to || q.Get("authenticated") != "false" {
+				t.Errorf("query = %v", q)
+			}
+		})
 	}
 }
 

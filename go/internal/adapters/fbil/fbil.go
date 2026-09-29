@@ -68,6 +68,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	if err := json.Unmarshal(data, &records); err != nil {
 		return nil, fmt.Errorf("expected JSON array of reference rates: %w", err)
 	}
+	if records == nil {
+		return nil, fmt.Errorf("expected JSON array of reference rates, got %s", data)
+	}
 
 	var rates []adapter.Rate
 	for _, r := range records {
