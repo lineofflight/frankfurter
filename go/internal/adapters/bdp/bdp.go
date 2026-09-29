@@ -71,7 +71,7 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 			return nil, err
 		}
 		rates = append(rates, parsed...)
-		if res.Extension == nil || res.Extension.NextPage == nil {
+		if res.Extension == nil || res.Extension.NextPage == nil || res.Extension.NextPage == false {
 			return rates, nil
 		}
 		if err := a.Sleep(ctx, 200*time.Millisecond); err != nil {
@@ -100,7 +100,7 @@ type response struct {
 	Value     *[]*float64 `json:"value"`
 	Extension *struct {
 		Series   *[]series `json:"series"`
-		NextPage *string   `json:"next_page"`
+		NextPage any       `json:"next_page"`
 	} `json:"extension"`
 }
 

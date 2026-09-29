@@ -9,6 +9,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -254,4 +255,32 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+// The cassette matcher collapses repeated dim_cats, so pin the full request shape here.
+func TestQuery(t *testing.T) {
+	got := query(adapter.Date(1998, 12, 28), adapter.Date(1998, 12, 31), 2)
+	want := url.Values{
+		"lang":      {"EN"},
+		"page":      {"2"},
+		"dim_cats":  {"13:794", "18:35", "40:4263"},
+		"obs_since": {"1998-12-28"},
+		"obs_to":    {"1998-12-31"},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("query = %v, want %v", got, want)
+	}
+	if q := query(time.Time{}, adapter.Date(1998, 12, 31), 1); q.Has("obs_since") {
+		t.Errorf("query without after = %v, want no obs_since", q)
+	}
+}
+
+func TestDecodeAcceptsFalseNextPage(t *testing.T) {
+	res, err := decode([]byte(`{"value": [], "extension": {"series": [], "next_page": false}, "dimension": {}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Extension.NextPage != false {
+		t.Errorf("next_page = %v, want false", res.Extension.NextPage)
+	}
 }
