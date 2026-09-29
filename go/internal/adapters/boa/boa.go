@@ -14,17 +14,16 @@
 package boa
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
-	"encoding/xml"
 	"fmt"
-	"io"
 	"net/http"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/xuri/excelize/v2"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 )
@@ -38,7 +37,6 @@ var (
 	archiveLink   = regexp.MustCompile(`href="(https://www\.bank-of-algeria\.dz/stoodroa/\d{4}/\d{2}/Cotation-DZD-[^"]+\.xlsx)"`)
 	sheetNameSep  = regexp.MustCompile(`\s*[-/]\s*`)
 	isoCode       = regexp.MustCompile(`^[A-Z]{3}$`)
-	cellColumn    = regexp.MustCompile(`^([A-Z]+)`)
 	excelEpoch    = adapter.Date(1899, 12, 30)
 	nameOverrides = map[string]string{"EURO": "EUR"}
 )
@@ -86,82 +84,41 @@ func archiveURL(hub []byte) (string, error) {
 	return string(m[1]), nil
 }
 
-type workbook struct {
-	Sheets []struct {
-		Name string `xml:"name,attr"`
-		// r:id; encoding/xml matches the local name whatever the namespace.
-		ID string `xml:"id,attr"`
-	} `xml:"sheets>sheet"`
-}
-
-type relationships struct {
-	Rels []struct {
-		ID     string `xml:"Id,attr"`
-		Target string `xml:"Target,attr"`
-	} `xml:"Relationship"`
-}
-
-type worksheet struct {
-	Rows []struct {
-		Cells []struct {
-			Ref  string  `xml:"r,attr"`
-			Type string  `xml:"t,attr"`
-			V    *string `xml:"v"`
-		} `xml:"c"`
-	} `xml:"sheetData>row"`
-}
-
 func parse(data []byte, after, upto time.Time) ([]adapter.Rate, error) {
-	zr, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
+	f, err := excelize.OpenReader(bytes.NewReader(data))
 	if err != nil {
 		return nil, err
 	}
-	var wb workbook
-	if err := readXML(zr, "xl/workbook.xml", &wb); err != nil {
-		return nil, err
-	}
-	var rels relationships
-	if err := readXML(zr, "xl/_rels/workbook.xml.rels", &rels); err != nil {
-		return nil, err
-	}
-	targets := make(map[string]string, len(rels.Rels))
-	for _, r := range rels.Rels {
-		targets[r.ID] = r.Target
-	}
+	defer f.Close()
 
 	var rates []adapter.Rate
-	for _, sheet := range wb.Sheets {
-		base, ok := sheetCurrency(sheet.Name)
+	for _, sheet := range f.GetSheetList() {
+		base, ok := sheetCurrency(sheet)
 		if !ok {
 			continue
 		}
-		target, ok := targets[sheet.ID]
-		if !ok {
-			continue
-		}
-		var ws worksheet
-		if err := readXML(zr, "xl/"+target, &ws); err != nil {
+		rows, err := f.GetRows(sheet, excelize.Options{RawCellValue: true})
+		if err != nil {
 			return nil, err
 		}
-		rates = append(rates, parseSheet(ws, base, after, upto)...)
+		for i, row := range rows {
+			rate, ok := parseRow(row, base, after, upto)
+			if !ok {
+				continue
+			}
+			// Ruby ignores string cells, so a numeric-looking header does not count.
+			if isString(f, sheet, "A", i+1) || isString(f, sheet, "B", i+1) {
+				continue
+			}
+			rates = append(rates, rate)
+		}
 	}
 	return rates, nil
 }
 
-func readXML(zr *zip.Reader, name string, v any) error {
-	f, err := zr.Open(name)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	b, err := io.ReadAll(f)
-	if err != nil {
-		return err
-	}
-	if err := xml.Unmarshal(b, v); err != nil {
-		return fmt.Errorf("%s: %w", name, err)
-	}
-	return nil
+func isString(f *excelize.File, sheet, col string, row int) bool {
+	t, _ := f.GetCellType(sheet, col+strconv.Itoa(row))
+	return t == excelize.CellTypeSharedString || t == excelize.CellTypeInlineString
 }
 
 func sheetCurrency(name string) (string, bool) {
@@ -175,49 +132,34 @@ func sheetCurrency(name string) (string, bool) {
 	return code, isoCode.MatchString(code)
 }
 
-func parseSheet(ws worksheet, base string, after, upto time.Time) []adapter.Rate {
-	var rates []adapter.Rate
-	for _, row := range ws.Rows {
-		var (
-			serial         int
-			value          float64
-			hasSer, hasVal bool
-		)
-		for _, c := range row.Cells {
-			if c.Ref == "" || c.Type == "s" || c.V == nil || *c.V == "" {
-				continue
-			}
-			m := cellColumn.FindStringSubmatch(c.Ref)
-			if m == nil {
-				continue
-			}
-			switch m[1] {
-			case "A":
-				serial, hasSer = parseSerial(*c.V)
-			case "B":
-				value, hasVal = adapter.ParseFloat(*c.V)
-			}
-		}
-		if !hasSer || !hasVal {
-			continue
-		}
-		date := excelEpoch.AddDate(0, 0, serial)
-		if !after.IsZero() && date.Before(after) {
-			continue
-		}
-		if !upto.IsZero() && date.After(upto) {
-			continue
-		}
-		rate := value
-		if base == "JPY" {
-			rate = value / jpyUnits
-		}
-		if rate == 0 {
-			continue
-		}
-		rates = append(rates, adapter.Rate{Date: date, Base: base, Quote: "DZD", Rate: rate})
+// parseRow reads a raw-valued row: Excel serial date in column A, rate in column B.
+func parseRow(cols []string, base string, after, upto time.Time) (adapter.Rate, bool) {
+	if len(cols) < 2 || cols[0] == "" || cols[1] == "" {
+		return adapter.Rate{}, false
 	}
-	return rates
+	serial, ok := parseSerial(cols[0])
+	if !ok {
+		return adapter.Rate{}, false
+	}
+	value, ok := adapter.ParseFloat(cols[1])
+	if !ok {
+		return adapter.Rate{}, false
+	}
+	date := excelEpoch.AddDate(0, 0, serial)
+	if !after.IsZero() && date.Before(after) {
+		return adapter.Rate{}, false
+	}
+	if !upto.IsZero() && date.After(upto) {
+		return adapter.Rate{}, false
+	}
+	rate := value
+	if base == "JPY" {
+		rate = value / jpyUnits
+	}
+	if rate == 0 {
+		return adapter.Rate{}, false
+	}
+	return adapter.Rate{Date: date, Base: base, Quote: "DZD", Rate: rate}, true
 }
 
 // parseSerial mirrors Integer(text, exception: false) || Float(text, exception: false)&.to_i.
