@@ -2,3 +2,4 @@
 Dockerfile
 spec
 db/*.sqlite3*
+go
