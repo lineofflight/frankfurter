@@ -2,6 +2,7 @@ package pdftext
 
 import (
 	"math"
+	"os"
 	"path/filepath"
 	"slices"
 	"strings"
@@ -20,6 +21,15 @@ func recorded(t *testing.T, name string, index int) []byte {
 		t.Fatal(err)
 	}
 	return []byte(c.Interactions[index].Response.Body)
+}
+
+func fixture(t *testing.T, name string) []byte {
+	t.Helper()
+	data, err := os.ReadFile(filepath.Join("testdata", name))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return data
 }
 
 func findRun(runs []Run, text string) (Run, bool) {
@@ -75,6 +85,85 @@ func TestTextMatchesPDFReaderLayout(t *testing.T) {
 	} {
 		if !slices.Contains(lines, want) {
 			t.Errorf("text lacks line %q", want)
+		}
+	}
+}
+
+// rotated.pdf is synthetic: four pages with /Rotate 0, 90, 180 and 270, each
+// drawing the same notice through a matrix that undoes its rotation, so all
+// four display it upright. The values below are pdf-reader's for the same file;
+// the grid's y offset gives the 90 and 180 pages an extra blank line.
+func TestPagesTurnRotatedPagesAsPDFReader(t *testing.T) {
+	pages, err := Pages(fixture(t, "rotated.pdf"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(pages) != 4 {
+		t.Fatalf("got %d pages, want 4", len(pages))
+	}
+	tests := []struct {
+		media Rect
+		x, y  float64 // origin of "U.S. DOLLAR (USD)"
+		gap   string  // between the EUR and GYD rows
+	}{
+		{Rect{0, 0, 612, 792}, 40, 580, "\n\n"},
+		{Rect{0, -792, 612, 0}, 40, -212, "\n\n\n"},
+		{Rect{-612, -792, 0, 0}, -572, -212, "\n\n\n"},
+		{Rect{-612, 0, 0, 792}, -572, 580, "\n\n"},
+	}
+	for i, tt := range tests {
+		p := pages[i]
+		if p.MediaBox != tt.media {
+			t.Errorf("page %d media box = %v, want %v", i+1, p.MediaBox, tt.media)
+		}
+		r, ok := findRun(p.Runs, "U.S. DOLLAR (USD)")
+		if !ok {
+			t.Errorf("page %d: no USD row label", i+1)
+		} else if !near(r.X, tt.x, 0.01) || !near(r.Y, tt.y, 0.01) || !near(r.Width, 92.79, 0.2) || r.FontSize != 10 {
+			t.Errorf("page %d: USD label = %+v, want x=%v y=%v width=92.79 size=10", i+1, r, tt.x, tt.y)
+		}
+		want := strings.Repeat(" ", 29) + "WISSELKOERSNOTERINGEN IN SRD\n\n" +
+			strings.Repeat(" ", 31) + "0" + string(rune('3'+i)) + " JUNI 2013 EN TOT NADER ORDER\n\n\n\n\n\n" +
+			"GELDSOORT" + strings.Repeat(" ", 50) + "AANKOOP*        VERKOOP*       AANKOOP*       VERKOOP*\n\n\n\n" +
+			"U.S. DOLLAR (USD)" + strings.Repeat(" ", 44) + "3,250           3,350          3,250          3,350\n\n\n" +
+			"EURO (EUR)" + strings.Repeat(" ", 51) + "4,228           4,358          4,215          4,368" + tt.gap +
+			"GUYANA DOLLAR (PER 100 GYD)" + strings.Repeat(" ", 34) + "1,580           1,650          1,560          1,660"
+		if got := p.Text(); got != want {
+			t.Errorf("page %d text = %q, want %q", i+1, got, want)
+		}
+	}
+}
+
+// Page 105 of CBVS's 2013 yearly file is a scan turned by /Rotate 270, with no
+// text on it. pdf-reader turns its media box and reads nothing.
+func TestPagesReadRotatedScan(t *testing.T) {
+	pages, err := Pages(fixture(t, "cbvs-2013-p105.pdf"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(pages) != 1 {
+		t.Fatalf("got %d pages, want 1", len(pages))
+	}
+	p := pages[0]
+	if want := (Rect{-612, 0, 0, 792}); p.MediaBox != want {
+		t.Errorf("media box = %v, want %v", p.MediaBox, want)
+	}
+	if len(p.Runs) != 0 || p.Text() != "" {
+		t.Errorf("runs = %+v, text = %q, want none", p.Runs, p.Text())
+	}
+}
+
+func TestRectRotatedAsPDFReader(t *testing.T) {
+	box := Rect{10, 20, 110, 220}
+	tests := map[int]Rect{
+		0:   box,
+		90:  {10, -80, 210, 20},
+		180: {-90, -180, 10, 20},
+		270: {-190, 20, 10, 120},
+	}
+	for degrees, want := range tests {
+		if got := box.rotated(degrees); got != want {
+			t.Errorf("rotated(%d) = %v, want %v", degrees, got, want)
 		}
 	}
 }

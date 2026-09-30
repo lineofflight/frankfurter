@@ -11,7 +11,9 @@
 //   - Page.Text is pdf-reader's Page#text: those runs laid out on a character grid.
 //
 // Coordinates are PDF user space: points, origin at the bottom left, y growing
-// upwards. Rotated pages are not supported.
+// upwards. On a page with a /Rotate of 90, 180 or 270, glyph origins and page
+// boxes are turned by that angle as pdf-reader turns them, so the text reads as
+// the page displays.
 //
 // Where pdf-reader could not decode a glyph (old Japanese fonts without Unicode
 // maps), PDFium usually can, so Go may read real text where Ruby read garbage.
@@ -19,7 +21,6 @@
 package pdftext
 
 import (
-	"errors"
 	"fmt"
 	"math"
 	"strings"
@@ -59,6 +60,35 @@ func (r Rect) Height() float64 { return r.Top - r.Bottom }
 
 func (r Rect) contains(x, y float64) bool {
 	return x >= r.Left && x <= r.Right && y >= r.Bottom && y <= r.Top
+}
+
+// rotated turns the box clockwise by degrees about its bottom left corner, as
+// pdf-reader's Rectangle#apply_rotation.
+func (r Rect) rotated(degrees int) Rect {
+	x, y, w, h := r.Left, r.Bottom, r.Width(), r.Height()
+	switch degrees {
+	case 90:
+		return Rect{x, y - w, x + h, y}
+	case 180:
+		return Rect{x - w, y - h, x, y}
+	case 270:
+		return Rect{x - h, y, x, y + w}
+	}
+	return r
+}
+
+// rotate turns a point clockwise by degrees about the origin, as pdf-reader's
+// PageTextReceiver#apply_rotation.
+func rotate(x, y float64, degrees int) (float64, float64) {
+	switch degrees {
+	case 90:
+		return y, -x
+	case 180:
+		return -x, -y
+	case 270:
+		return -y, x
+	}
+	return x, y
 }
 
 // Page is one page's text.
@@ -137,15 +167,15 @@ func readPage(pdf pdfium.Pdfium, doc references.FPDF_DOCUMENT, index int) (Page,
 	defer pdf.FPDF_ClosePage(&requests.FPDF_ClosePage{Page: loaded.Page})
 	page := requests.Page{ByReference: &loaded.Page}
 
+	// PDFium reads /Rotate as a quarter turn, where pdf-reader would treat an
+	// off value such as -90 as 0. Such pages have not turned up.
 	rotation, err := pdf.FPDFPage_GetRotation(&requests.FPDFPage_GetRotation{Page: page})
 	if err != nil {
 		return Page{}, err
 	}
-	if rotation.PageRotation != 0 {
-		return Page{}, errors.New("rotated pages are not supported")
-	}
+	degrees := 90 * int(rotation.PageRotation)
 
-	media, err := mediaBox(pdf, page)
+	media, err := mediaBox(pdf, page, degrees)
 	if err != nil {
 		return Page{}, err
 	}
@@ -154,19 +184,21 @@ func readPage(pdf pdfium.Pdfium, doc references.FPDF_DOCUMENT, index int) (Page,
 		crop = Rect{float64(box.Left), float64(box.Bottom), float64(box.Right), float64(box.Top)}
 	}
 
-	glyphs, err := readGlyphs(pdf, page)
+	glyphs, err := readGlyphs(pdf, page, degrees)
 	if err != nil {
 		return Page{}, err
 	}
-	return Page{MediaBox: media, Runs: runs(glyphs, crop)}, nil
+	return Page{MediaBox: media.rotated(degrees), Runs: runs(glyphs, crop.rotated(degrees))}, nil
 }
 
-func mediaBox(pdf pdfium.Pdfium, page requests.Page) (Rect, error) {
+// mediaBox returns the page's unrotated media box.
+func mediaBox(pdf pdfium.Pdfium, page requests.Page, degrees int) (Rect, error) {
 	if box, err := pdf.FPDFPage_GetMediaBox(&requests.FPDFPage_GetMediaBox{Page: page}); err == nil {
 		return Rect{float64(box.Left), float64(box.Bottom), float64(box.Right), float64(box.Top)}, nil
 	}
 	// No MediaBox on the page itself (it is inherited): fall back to the page
-	// size PDFium resolved.
+	// size PDFium resolved. It gives that as displayed, so a quarter turn swaps
+	// width and height back.
 	w, err := pdf.FPDF_GetPageWidthF(&requests.FPDF_GetPageWidthF{Page: page})
 	if err != nil {
 		return Rect{}, err
@@ -175,12 +207,16 @@ func mediaBox(pdf pdfium.Pdfium, page requests.Page) (Rect, error) {
 	if err != nil {
 		return Rect{}, err
 	}
-	return Rect{0, 0, float64(w.PageWidth), float64(h.PageHeight)}, nil
+	width, height := float64(w.PageWidth), float64(h.PageHeight)
+	if degrees == 90 || degrees == 270 {
+		width, height = height, width
+	}
+	return Rect{0, 0, width, height}, nil
 }
 
 // readGlyphs returns one run per painted glyph, as pdf-reader's
-// PageTextReceiver collects them.
-func readGlyphs(pdf pdfium.Pdfium, page requests.Page) ([]Run, error) {
+// PageTextReceiver collects them, turned by the page's rotation.
+func readGlyphs(pdf pdfium.Pdfium, page requests.Page, degrees int) ([]Run, error) {
 	text, err := pdf.FPDFText_LoadPage(&requests.FPDFText_LoadPage{Page: page})
 	if err != nil {
 		return nil, err
@@ -232,10 +268,17 @@ func readGlyphs(pdf pdfium.Pdfium, page requests.Page) ([]Run, error) {
 		// size scaled by the text and graphics matrices. PDFium hands the
 		// matrix over in float32, so round its noise away.
 		effective := math.Abs(size.FontSize * float64(matrix.Matrix.B+matrix.Matrix.D))
+		// The width is the glyph box's extent along what the rotation
+		// turns into the x axis.
+		width := float64(box.Rect.Right - box.Rect.Left)
+		if degrees == 90 || degrees == 270 {
+			width = float64(box.Rect.Top - box.Rect.Bottom)
+		}
+		x, y := rotate(origin.X, origin.Y, degrees)
 		glyphs = append(glyphs, Run{
-			X:        origin.X,
-			Y:        origin.Y,
-			Width:    float64(box.Rect.Right - box.Rect.Left),
+			X:        x,
+			Y:        y,
+			Width:    width,
 			FontSize: math.Round(effective*1e4) / 1e4,
 			Text:     char,
 		})

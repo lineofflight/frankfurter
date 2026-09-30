@@ -4,7 +4,10 @@ import (
 	"context"
 	"errors"
 	"io"
+	"math"
 	"net/http"
+	"os"
+	"path/filepath"
 	"reflect"
 	"slices"
 	"strings"
@@ -139,6 +142,65 @@ func TestParseSkipsUnextractablePage(t *testing.T) {
 		t.Errorf("times = %v, want [15:00]", times)
 	}
 }
+
+func readPDF(t *testing.T, name string) []byte {
+	t.Helper()
+	data, err := os.ReadFile(filepath.Join("..", "..", "pdftext", "testdata", name))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return data
+}
+
+// Page 105 of the 2013 yearly file, the notice for 3 June, is a scan turned by
+// /Rotate 270. Ruby reads no text from it and skips it; the rest of the file
+// parses as before.
+func TestParseSkipsRotatedScan(t *testing.T) {
+	fixings, err := parse(readPDF(t, "cbvs-2013-p105.pdf"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(fixings) != 0 {
+		t.Errorf("fixings = %+v, want none", fixings)
+	}
+}
+
+// pdftext's rotated.pdf carries a synthetic notice on four pages turned by
+// /Rotate 0, 90, 180 and 270. Each parses into the rates Ruby reads from it.
+func TestParseRotatedPages(t *testing.T) {
+	fixings, err := parse(readPDF(t, "rotated.pdf"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(fixings) != 4 {
+		t.Fatalf("got %d fixings, want 4", len(fixings))
+	}
+	type quote struct {
+		base           string
+		rate, bid, ask float64
+	}
+	want := []quote{
+		{"USD", 3.3, 3.25, 3.35},
+		{"EUR", 4.293, 4.228, 4.358},
+		{"GYD", 0.01615, 0.0158, 0.0165},
+	}
+	for i, f := range fixings {
+		if date := adapter.Date(2013, time.June, 3+i); !f.date.Equal(date) {
+			t.Errorf("fixing %d date = %s, want %s", i, f.date.Format(time.DateOnly), date.Format(time.DateOnly))
+		}
+		var got []quote
+		for _, r := range f.records {
+			got = append(got, quote{r.Base, r.Rate, *r.Bid, *r.Ask})
+		}
+		if !slices.EqualFunc(got, want, func(a, b quote) bool {
+			return a.base == b.base && near(a.rate, b.rate) && near(a.bid, b.bid) && near(a.ask, b.ask)
+		}) {
+			t.Errorf("fixing %d = %v, want %v", i, got, want)
+		}
+	}
+}
+
+func near(a, b float64) bool { return math.Abs(a-b) <= 1e-9*math.Abs(b) }
 
 func TestParsePageLegacyLayout(t *testing.T) {
 	text := `                           C E N T R A L E B A N K V A N S U R I N A M E
