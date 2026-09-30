@@ -118,3 +118,52 @@ func TestWithCipherSuitesKeepsDefaults(t *testing.T) {
 		t.Error("the original client was changed")
 	}
 }
+
+// versionGet requests example.com with c from a test server limited to TLS
+// versions lo through hi, and returns the error.
+func versionGet(t *testing.T, c *http.Client, lo, hi uint16) error {
+	t.Helper()
+	srv := httptest.NewUnstartedServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		io.WriteString(w, "ok")
+	}))
+	srv.TLS = &tls.Config{MinVersion: lo, MaxVersion: hi}
+	srv.StartTLS()
+	t.Cleanup(srv.Close)
+
+	c.Transport.(*http.Transport).DialContext = func(ctx context.Context, network, _ string) (net.Conn, error) {
+		return (&net.Dialer{}).DialContext(ctx, network, srv.Listener.Addr().String())
+	}
+	resp, err := c.Get("https://example.com/")
+	if err == nil {
+		resp.Body.Close()
+	}
+	return err
+}
+
+// A client capped at TLS 1.2 can't reach a TLS 1.3 only server. Against a TLS
+// 1.2 server the handshake gets as far as verification, which still rejects a
+// certificate that doesn't chain to a system root.
+func TestWithMaxVersionKeepsVerification(t *testing.T) {
+	c := WithMaxVersion(NewClient(), tls.VersionTLS12)
+	if err := versionGet(t, c, tls.VersionTLS13, tls.VersionTLS13); err == nil || !strings.Contains(err.Error(), "protocol version") {
+		t.Fatalf("TLS 1.3 server: err = %v, want a protocol version error", err)
+	}
+
+	c = WithMaxVersion(NewClient(), tls.VersionTLS12)
+	var unknown x509.UnknownAuthorityError
+	if err := versionGet(t, c, tls.VersionTLS12, tls.VersionTLS12); !errors.As(err, &unknown) {
+		t.Fatalf("TLS 1.2 server: err = %v, want x509.UnknownAuthorityError", err)
+	}
+}
+
+func TestWithMaxVersionLeavesOriginal(t *testing.T) {
+	base := NewClient()
+	c := WithMaxVersion(base, tls.VersionTLS12)
+
+	if got := c.Transport.(*http.Transport).TLSClientConfig.MaxVersion; got != tls.VersionTLS12 {
+		t.Errorf("MaxVersion = %#x, want TLS 1.2", got)
+	}
+	if base.Transport.(*http.Transport).TLSClientConfig.MaxVersion != 0 {
+		t.Error("the original client was changed")
+	}
+}

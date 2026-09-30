@@ -88,6 +88,32 @@ func WithCipherSuites(client *http.Client, suites ...uint16) *http.Client {
 	return &c
 }
 
+// WithMaxVersion returns a copy of client that offers TLS versions up to max
+// (tls.VersionTLS12, say) and no higher. It is for the odd server that speaks
+// an older version and whose edge rejects something Go adds to the hello only
+// when it offers a newer one. Certificate verification is unchanged. A nil
+// client means NewClient(); one whose transport is not an *http.Transport, such
+// as the test recorder, is returned as is.
+func WithMaxVersion(client *http.Client, max uint16) *http.Client {
+	if client == nil {
+		client = NewClient()
+	}
+	t, ok := client.Transport.(*http.Transport)
+	if !ok {
+		return client
+	}
+	t = t.Clone()
+	cfg := t.TLSClientConfig.Clone()
+	if cfg == nil {
+		cfg = &tls.Config{}
+	}
+	cfg.MaxVersion = max
+	t.TLSClientConfig = cfg
+	c := *client
+	c.Transport = t
+	return &c
+}
+
 func verifyConnection(cs tls.ConnectionState) error {
 	if len(cs.PeerCertificates) == 0 {
 		return errors.New("tls: server sent no certificate")
