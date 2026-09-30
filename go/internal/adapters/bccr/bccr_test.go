@@ -130,12 +130,20 @@ func TestFetchRequest(t *testing.T) {
 			t.Errorf("%s = %q, want %q", k, q.Get(k), v)
 		}
 	}
-	// http.rb sends the token_csrf header as Token-Csrf.
-	if h := req.Header["Token-Csrf"]; len(h) != 1 || h[0] != "tok" {
-		t.Errorf("Token-Csrf = %q, want tok", h)
-	}
 	if h := req.Header.Get("Origin"); h != "https://sdd.bccr.fi.cr" {
 		t.Errorf("Origin = %q", h)
+	}
+	// The header name must go out as token_csrf, as http.rb sends it: the API
+	// answers 500 to the canonical Token-Csrf. Check the wire form.
+	var wire strings.Builder
+	if err := req.Write(&wire); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(wire.String(), "\r\ntoken_csrf: tok\r\n") {
+		t.Errorf("request lacks token_csrf header:\n%s", wire.String())
+	}
+	if strings.Contains(strings.ToLower(wire.String()), "token-csrf") {
+		t.Errorf("request carries Token-Csrf:\n%s", wire.String())
 	}
 }
 

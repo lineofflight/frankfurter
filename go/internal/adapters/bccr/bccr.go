@@ -74,9 +74,11 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if err != nil {
 		return nil, err
 	}
-	// http.rb sends token_csrf as Token-Csrf, which is what the API was
-	// recorded accepting.
-	req.Header.Set("Token-Csrf", string(token))
+	// The API reads the header as token_csrf, underscore and all, and answers
+	// 500 to Token-Csrf. http.rb sends the name verbatim (the cassette shows
+	// Token-Csrf only because WebMock normalizes names when recording); Set
+	// would canonicalize it, so assign the map entry directly.
+	req.Header["token_csrf"] = []string{string(token)}
 	req.Header.Set("Origin", "https://sdd.bccr.fi.cr")
 	resp, err := a.Do(req)
 	if err != nil {
