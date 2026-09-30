@@ -8,6 +8,7 @@ import (
 	"net"
 	"net/http"
 	"path"
+	"slices"
 	"time"
 )
 
@@ -53,6 +54,38 @@ func NewClient() *http.Client {
 		VerifyConnection:   verifyConnection,
 	}
 	return &http.Client{Transport: t, Timeout: 10 * time.Minute}
+}
+
+// WithCipherSuites returns a copy of client that also offers suites in TLS 1.2
+// handshakes, on top of the ones it already offers (Go's secure defaults unless
+// set). It is for the odd server that accepts only a suite Go no longer offers
+// by default. Certificate verification is unchanged. A nil client means
+// NewClient(); one whose transport is not an *http.Transport, such as the test
+// recorder, is returned as is.
+func WithCipherSuites(client *http.Client, suites ...uint16) *http.Client {
+	if client == nil {
+		client = NewClient()
+	}
+	t, ok := client.Transport.(*http.Transport)
+	if !ok {
+		return client
+	}
+	t = t.Clone()
+	cfg := t.TLSClientConfig.Clone()
+	if cfg == nil {
+		cfg = &tls.Config{}
+	}
+	offered := cfg.CipherSuites
+	if offered == nil {
+		for _, s := range tls.CipherSuites() {
+			offered = append(offered, s.ID)
+		}
+	}
+	cfg.CipherSuites = append(slices.Clone(offered), suites...)
+	t.TLSClientConfig = cfg
+	c := *client
+	c.Transport = t
+	return &c
 }
 
 func verifyConnection(cs tls.ConnectionState) error {

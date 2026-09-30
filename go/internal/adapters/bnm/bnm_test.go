@@ -2,6 +2,12 @@ package bnm
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
+	"errors"
+	"net"
+	"net/http"
+	"net/http/httptest"
 	"slices"
 	"testing"
 	"time"
@@ -157,5 +163,37 @@ func TestGolden(t *testing.T) {
 			}
 			g.Check(t, rates)
 		})
+	}
+}
+
+// api.bnm.gov.my accepts only an RSA key exchange suite. The adapter's client
+// offers it and still rejects a certificate that doesn't chain to a system
+// root: against a server limited to that suite, the handshake gets as far as
+// verification and fails there.
+func TestClientOffersRSAKeyExchange(t *testing.T) {
+	srv := httptest.NewUnstartedServer(http.HandlerFunc(func(http.ResponseWriter, *http.Request) {}))
+	srv.TLS = &tls.Config{
+		MaxVersion:   tls.VersionTLS12,
+		CipherSuites: []uint16{tls.TLS_RSA_WITH_AES_128_GCM_SHA256},
+	}
+	srv.StartTLS()
+	t.Cleanup(srv.Close)
+
+	c := newClient(adapter.NewClient())
+	tr := c.Transport.(*http.Transport)
+	if !slices.Contains(tr.TLSClientConfig.CipherSuites, tls.TLS_RSA_WITH_AES_128_GCM_SHA256) {
+		t.Fatal("TLS_RSA_WITH_AES_128_GCM_SHA256 not offered")
+	}
+	tr.DialContext = func(ctx context.Context, network, _ string) (net.Conn, error) {
+		return (&net.Dialer{}).DialContext(ctx, network, srv.Listener.Addr().String())
+	}
+	resp, err := c.Get("https://example.com/")
+	if err == nil {
+		resp.Body.Close()
+		t.Fatal("Get succeeded against a self-signed certificate")
+	}
+	var unknown x509.UnknownAuthorityError
+	if !errors.As(err, &unknown) {
+		t.Fatalf("err = %v, want x509.UnknownAuthorityError", err)
 	}
 }

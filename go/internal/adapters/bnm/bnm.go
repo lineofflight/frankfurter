@@ -8,6 +8,7 @@ package bnm
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -36,7 +37,14 @@ type Adapter struct {
 
 // New returns an adapter that makes its requests with client.
 func New(client *http.Client) *Adapter {
-	return &Adapter{adapter.NewBase(client)}
+	return &Adapter{adapter.NewBase(newClient(client))}
+}
+
+// newClient adds the one suite api.bnm.gov.my negotiates,
+// TLS_RSA_WITH_AES_128_GCM_SHA256. Go dropped RSA key exchange from its
+// defaults in 1.22; OpenSSL, and so Ruby, still offers it.
+func newClient(client *http.Client) *http.Client {
+	return adapter.WithCipherSuites(client, tls.TLS_RSA_WITH_AES_128_GCM_SHA256)
 }
 
 // BackfillRange implements adapter.Adapter.
