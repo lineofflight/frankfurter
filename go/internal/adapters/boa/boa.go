@@ -21,6 +21,7 @@ package boa
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"fmt"
 	"net/http"
 	"regexp"
@@ -57,7 +58,16 @@ type Adapter struct {
 
 // New returns an adapter that makes its requests with client.
 func New(client *http.Client) *Adapter {
-	return &Adapter{adapter.NewBase(client)}
+	return &Adapter{adapter.NewBase(newClient(client))}
+}
+
+// newClient caps TLS at 1.2. Something in front of www.bank-of-algeria.dz
+// drops any ClientHello whose signature_algorithms_cert lists ML-DSA, which Go
+// (since 1.27) offers only when TLS 1.3 is on; the handshake then times out.
+// OpenSSL, and so Ruby, doesn't send that extension. The server still speaks
+// TLS 1.2 with ECDHE, so the cap costs forward secrecy nothing.
+func newClient(client *http.Client) *http.Client {
+	return adapter.WithMaxVersion(client, tls.VersionTLS12)
 }
 
 // BackfillRange implements adapter.Adapter: each refresh of the consolidated
