@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Backfill no longer skips a day at each window boundary.
+- National Bank of the Kyrgyz Republic backfills up to today.
+
 ## [2.6.0] - 2026-09-30
 
 ### Added

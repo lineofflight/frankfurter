@@ -24,10 +24,10 @@ class Provider
     #    in CURRENCIES alongside the ISO mapping derived from the landing page's
     #    <select> options.
     #
-    # The fetch() dispatcher uses the XML feed for "live" windows (upto unset or in the future) and the HTML scrape for
-    # "historical" windows (upto strictly in the past). Provider#backfill's incremental loop walks history forward via
-    # fetch_each, so a fresh setup drains the archive in 365-day chunks before switching to the live feed once it
-    # catches up to today.
+    # The fetch() dispatcher scrapes the HTML for windows that end in the past and reads the XML feed when there is no
+    # after. An open-ended window (upto unset or not yet past) gets both: the scrape up to yesterday, then the live
+    # snapshot. Provider#backfill's incremental loop walks history forward via fetch_each, so a fresh setup drains the
+    # archive in 365-day chunks, and the last chunk still reaches today.
     #
     # Records are returned in NBKR's native direction: foreign currency as base, KGS as quote (1 unit foreign = X KGS),
     # matching the convention used by other pivot-in-quote adapters (NBG, CBR, BBK).
@@ -112,10 +112,15 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        records = if historical?(after, upto)
+        records = if after.nil?
+                    fetch_live
+                  elsif upto && upto < Date.today
                     fetch_historical(after, upto)
                   else
-                    fetch_live
+                    # An open-ended window must reach today, but the live feed holds only the current snapshot. Scrape
+                    # the archive up to yesterday and append the snapshot; the insert skips any day both return.
+                    yesterday = Date.today - 1
+                    (after <= yesterday ? fetch_historical(after, yesterday) : []) + fetch_live
                   end
 
         records.select! { |r| r[:date] >= after } if after
@@ -164,14 +169,6 @@ class Provider
       end
 
       private
-
-      def historical?(after, upto)
-        # The historical scrape needs both endpoints of the window. Live XML covers the unbounded "catch up to today"
-        # case (upto unset or in the future); any bounded window strictly in the past goes to the HTML scrape.
-        return false if after.nil? || upto.nil?
-
-        upto < Date.today
-      end
 
       def fetch_live
         parse(http.get(DAILY_URL).to_s) + parse(http.get(WEEKLY_URL).to_s)
