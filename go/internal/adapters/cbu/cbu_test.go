@@ -95,6 +95,19 @@ func TestParseRestoresOldRubleBeforeFirstNewRubleBulletin(t *testing.T) {
 	}
 }
 
+func TestParseRelabelsNewLiraPublishedUnderTRL(t *testing.T) {
+	rates := mustParse(t, `[
+		{"id":1,"Code":"792","Ccy":"TRL","CcyNm_EN":"Turkish Lira","Nominal":"1","Rate":"0.00078","Diff":"0","Date":"28.12.2004"},
+		{"id":1,"Code":"792","Ccy":"TRL","CcyNm_EN":"Turkish Lira","Nominal":"1","Rate":"787.09","Diff":"0","Date":"04.01.2005"}
+	]`)
+	if len(rates) != 2 || rates[0].Base != "TRL" || rates[1].Base != "TRY" {
+		t.Fatalf("got %+v, want bases TRL, TRY", rates)
+	}
+	if rates[0].Rate != 0.00078 || rates[1].Rate != 787.09 {
+		t.Errorf("rates = %v, %v, want 0.00078, 787.09", rates[0].Rate, rates[1].Rate)
+	}
+}
+
 func TestParseMapsSDRLabelToXDR(t *testing.T) {
 	rates := mustParse(t, `[
 		{"id":1,"Code":"001","Ccy":"SDR","CcyNm_EN":"Special Drawing Rights","Nominal":"1","Rate":"2044.11","Diff":"","Date":"16.09.2008"},

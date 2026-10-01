@@ -57,6 +57,14 @@ A full local backfill from an empty database turned up these gaps:
 - BDI quotes the frozen old-afghani rate (4750 AFA to the dollar) under AFN until 2004-03-31. The adapter maps AFN to
   AFA before 2004-04-01, and migration 042 relabels stored rows and rebuilds BDI's AFA and AFN rollups (Ruby #741).
   Fixed on both sides.
+- A full backfill opens the day before `coverage_start`, so HMRC asked for a December 2020 file that doesn't exist and
+  aborted; IMF, DNB, MAS and CBAR had the same edge. Each now clamps its first request to the first period the source
+  has (Ruby #744). Fixed on both sides.
+- Ten sources keep a retired code after a redenomination and quote the successor under it (CBG's SLL, CBU's TRL, NBU's
+  RUR, BGL, TRL, ROL, AZM and TMM, BNA's MZM, STD and VEF, BDI's ZWD, NBP's ZWR, BAM's MRO, BOTA's ZMK), LB's BYR
+  carries the 1994 ruble before 2000 and NBKR re-dates a frozen BYR rate weekly. The adapters relabel or skip them,
+  `adapter.SuccessorCode` chains, and migration 043 repairs stored rows and rollups but leaves the blends for
+  `frankfurter blend-rebuild` (Ruby #745). Fixed on both sides.
 
 ## Left outside go/
 

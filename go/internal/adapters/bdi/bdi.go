@@ -38,6 +38,16 @@ var predecessors = map[string]adapter.Predecessor{
 	"AFN": {Code: "AFA", Cutover: adapter.Date(2004, 4, 1)},
 }
 
+// BDI's ZWD series runs through the 2008 and 2009 Zimbabwe redenominations to
+// 2013 without changing label. It jumps ten billionfold on 2008-08-01 into the
+// third dollar (0.13 USD) and again on 2009-02-03 into the fourth, which
+// settles at 361.9 to the dollar from 2010, near the 380 NBP and InforEuro
+// publish as ZWL.
+var successors = map[string]adapter.Successor{
+	"ZWD": {Code: "ZWR", Cutover: adapter.Date(2008, 8, 1)},
+	"ZWR": {Code: "ZWL", Cutover: adapter.Date(2009, 2, 3)},
+}
+
 func init() {
 	adapter.Register("BDI", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -154,9 +164,8 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err != nil {
 			return nil, fmt.Errorf("invalid date %q for %s", dateText, code)
 		}
-		rates = append(rates, adapter.Rate{
-			Date: date, Base: "EUR", Quote: adapter.HistoricalCode(predecessors, code, date), Rate: rate,
-		})
+		quote := adapter.SuccessorCode(successors, adapter.HistoricalCode(predecessors, code, date), date)
+		rates = append(rates, adapter.Rate{Date: date, Base: "EUR", Quote: quote, Rate: rate})
 	}
 	return rates, nil
 }

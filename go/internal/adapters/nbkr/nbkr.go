@@ -72,6 +72,11 @@ var defaultCurrencies = []currency{
 	{184, "IDR", 10},
 }
 
+// The weekly feed still lists BYR at its last rate, 0.3402 KGS per 100 from
+// 2016-06-25, under each new week's date. The archive's BYR series ends on
+// that day.
+var retired = map[string]time.Time{"BYR": adapter.Date(2016, 7, 1)}
+
 func init() {
 	adapter.Register("NBKR", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -225,6 +230,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 	var rates []adapter.Rate
 	for _, c := range doc.Currencies {
 		if !isoCode.MatchString(c.ISOCode) {
+			continue
+		}
+		if end, ok := retired[c.ISOCode]; ok && !date.Before(end) {
 			continue
 		}
 		nominal, _ := strconv.Atoi(strings.TrimSpace(c.Nominal))

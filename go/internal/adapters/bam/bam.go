@@ -25,6 +25,13 @@ const baseURL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVir
 
 var currencyCode = regexp.MustCompile(`\A[A-Z]{3}\z`)
 
+// The ouguiya keeps its MRO label after the 2018 redenomination: 100 MRO =
+// 2.624 MAD on 2018-01-02 and 26.309 on 2018-01-03, with the new ouguiya at
+// 0.263 MAD. It is quoted per 100 throughout, but on 53 days in 2018 the unit
+// field reads 1 (25.857 MAD on 2018-04-17, against 25.864 per 100 the day
+// before).
+var successors = map[string]adapter.Successor{"MRO": {Code: "MRU", Cutover: adapter.Date(2018, 1, 3)}}
+
 func init() {
 	adapter.Register("BAM", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -124,12 +131,15 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			mid = adapter.Midpoint(value(r.Achat), value(r.Vente))
 		}
 		unit := r.UniteDevise
+		if *r.LibDevise == "MRO" && unit == 1 {
+			unit = 100
+		}
 		if mid == 0 || unit == 0 {
 			continue
 		}
 		rates = append(rates, adapter.Rate{
 			Date:  date,
-			Base:  *r.LibDevise,
+			Base:  adapter.SuccessorCode(successors, *r.LibDevise, date),
 			Quote: "MAD",
 			Rate:  mid / unit,
 			Bid:   perUnit(r.Achat, unit),

@@ -120,6 +120,32 @@ func TestParseRelabelsRetiredTableBCodesThatCarryCurrentValues(t *testing.T) {
 	}
 }
 
+func TestParseRelabels2009ZimbabweDollarPublishedUnderZWR(t *testing.T) {
+	rates, err := parse([]byte(`[
+		{"table":"B","no":"5/B/NBP/2009","effectiveDate":"2009-02-04","rates":[
+			{"currency":"dolar Zimbabwe","code":"ZWR","mid":1.0e-08}
+		]},
+		{"table":"B","no":"8/B/NBP/2009","effectiveDate":"2009-02-25","rates":[
+			{"currency":"dolar Zimbabwe","code":"ZWR","mid":0.043749}
+		]}
+	]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	var values []float64
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+		values = append(values, r.Rate)
+	}
+	if want := []string{"2009-02-04 ZWR", "2009-02-25 ZWL"}; !slices.Equal(got, want) {
+		t.Errorf("got %v, want %v", got, want)
+	}
+	if want := []float64{1.0e-08, 0.043749}; !slices.Equal(values, want) {
+		t.Errorf("rates = %v, want %v", values, want)
+	}
+}
+
 // stub answers every request with status and an empty body, recording the URLs,
 // as the Ruby spec's WebMock stub does.
 type stub struct {

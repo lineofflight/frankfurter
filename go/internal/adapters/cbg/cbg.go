@@ -37,6 +37,13 @@ var currencies = []string{
 	"NZD", "AED", "KWD", "NGN", "HKD", "ZAR", "EGP", "CNY", "BRL", "INR", "GHS", "SLL", "TRY", "GNF", "XDR", "SGD",
 }
 
+// The SLL series carries the new leone after the 2022 redenomination without
+// changing its label: 0.01 GMD until August 2021 (the old leone, floored to two
+// decimals), then zeros, then 4.11 on 2022-07-12.
+var successors = map[string]adapter.Successor{
+	"SLL": {Code: "SLE", Cutover: adapter.Date(2022, 7, 1)},
+}
+
 func init() {
 	adapter.Register("CBG", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -107,7 +114,13 @@ func parse(data []byte, code string) ([]adapter.Rate, error) {
 			secs--
 		}
 		t := time.Unix(secs, 0).UTC()
-		rates = append(rates, adapter.Rate{Date: adapter.Date(t.Year(), t.Month(), t.Day()), Base: code, Quote: "GMD", Rate: rate})
+		date := adapter.Date(t.Year(), t.Month(), t.Day())
+		rates = append(rates, adapter.Rate{
+			Date:  date,
+			Base:  adapter.SuccessorCode(successors, code, date),
+			Quote: "GMD",
+			Rate:  rate,
+		})
 	}
 	return rates, nil
 }

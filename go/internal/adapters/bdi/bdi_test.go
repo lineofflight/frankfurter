@@ -4,6 +4,7 @@ import (
 	"context"
 	"slices"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -72,6 +73,25 @@ func TestParseMapsOldAfghaniToAFABeforeSwitch(t *testing.T) {
 	}
 	if !slices.Equal(rates, want) {
 		t.Errorf("rates = %+v, want %+v", rates, want)
+	}
+}
+
+func TestParseRelabelsZimbabweDollarAcrossRedenominations(t *testing.T) {
+	rates, err := parse([]byte(header +
+		"ZIMBABWE,Zimbabwe Dollar,ZWD,51,108471581765.0,Foreign currency amount for 1 Euro.,2008-07-31\n" +
+		"ZIMBABWE,Zimbabwe Dollar,ZWD,51,11.805092,Foreign currency amount for 1 Euro.,2008-08-01\n" +
+		"ZIMBABWE,Zimbabwe Dollar,ZWD,51,15741267667.1,Foreign currency amount for 1 Euro.,2009-02-02\n" +
+		"ZIMBABWE,Zimbabwe Dollar,ZWD,51,28.2678,Foreign currency amount for 1 Euro.,2009-02-03\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Quote)
+	}
+	want := []string{"2008-07-31 ZWD", "2008-08-01 ZWR", "2009-02-02 ZWR", "2009-02-03 ZWL"}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %v, want %v", got, want)
 	}
 }
 

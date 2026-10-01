@@ -79,6 +79,17 @@ func TestParseForeignBaseGMDQuote(t *testing.T) {
 	}
 }
 
+func TestParseRelabelsNewLeonePublishedUnderSLL(t *testing.T) {
+	rates := mustParse(t, `[[1630281600000, 0.01], [1657584000000, 4.11]]`, "SLL")
+	want := []adapter.Rate{
+		{Date: adapter.Date(2021, 8, 30), Base: "SLL", Quote: "GMD", Rate: 0.01},
+		{Date: adapter.Date(2022, 7, 12), Base: "SLE", Quote: "GMD", Rate: 4.11},
+	}
+	if !slices.Equal(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
 func TestParseMillisecondEpochAsUTCDate(t *testing.T) {
 	rates := mustParse(t, `[[1779408000000, 86.28]]`, "EUR")
 	if len(rates) != 1 || !rates[0].Date.Equal(adapter.Date(2026, 5, 22)) {

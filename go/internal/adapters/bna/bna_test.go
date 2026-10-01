@@ -107,6 +107,27 @@ func TestParseSkips(t *testing.T) {
 	}
 }
 
+func TestParseRelabelsSuccessorsPublishedUnderRetiredCodes(t *testing.T) {
+	rates, err := parse([]byte(`{"genericResponse":[
+	  {"taxa":3.1,"tipoCambio":"M","data":"2014-04-22","codigoMoeda":"MZM"},
+	  {"taxa":0.02398,"tipoCambio":"M","data":"2023-02-17","codigoMoeda":"STD"},
+	  {"taxa":21.8914,"tipoCambio":"M","data":"2023-02-22","codigoMoeda":"STD"},
+	  {"taxa":0.002,"tipoCambio":"M","data":"2022-10-10","codigoMoeda":"VEF"},
+	  {"taxa":23.74128,"tipoCambio":"M","data":"2023-10-18","codigoMoeda":"VEF"}
+	],"success":true}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+	}
+	want := []string{"2014-04-22 MZN", "2023-02-17 STD", "2023-02-22 STN", "2022-10-10 VEF", "2023-10-18 VES"}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
 func TestParseRaisesOnUnsuccessfulResponse(t *testing.T) {
 	_, err := parse([]byte(`{"success":false,"message":"Erro"}`))
 	if err == nil || err.Error() != "series request failed: Erro" {
@@ -178,5 +199,31 @@ func TestFetchDefaultsAndListFiltering(t *testing.T) {
 	}
 	if len(rates) != 1 || rates[0].Rate != 663.5 || rates[0].Base != "CAD" || rates[0].Quote != "AOA" {
 		t.Errorf("rates = %+v, want one CAD/AOA at 663.5", rates)
+	}
+}
+
+func TestFetchRelabelledSeriesAfterBNAsOwnSuccessorSeries(t *testing.T) {
+	series := map[string]string{
+		"VEF": `{"genericResponse":[{"taxa":2.48819,"tipoCambio":"M","data":"2026-02-05","codigoMoeda":"VEF"}],
+		  "success":true}`,
+		"VES": `{"genericResponse":[{"taxa":2.487,"tipoCambio":"M","data":"2026-02-05","codigoMoeda":"VES"}],
+		  "success":true}`,
+	}
+	a := New(stubClient(func(r *http.Request) string {
+		if r.URL.Path == "/service/rest/taxas/get/lista/moedas" {
+			return `{"genericResponse":[{"codigoMoeda":"VEF"},{"codigoMoeda":"VES"}],"success":true}`
+		}
+		return series[r.URL.Query().Get("moeda")]
+	}))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 2, 5), adapter.Date(2026, 2, 5))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []float64
+	for _, r := range rates {
+		got = append(got, r.Rate)
+	}
+	if want := []float64{2.487, 2.48819}; !slices.Equal(got, want) {
+		t.Errorf("rates = %v, want %v", got, want)
 	}
 }

@@ -80,13 +80,19 @@ type Successor struct {
 }
 
 // SuccessorCode is HistoricalCode's reverse: it relabels a retired code with
-// its successor for rows dated on or after the cutover. Ruby's historical_code
-// checks PREDECESSORS first and SUCCESSORS second; no adapter declares both.
+// its successor for rows dated on or after the cutover. A successor that is
+// itself retired chains to its own entry. Ruby's historical_code checks
+// PREDECESSORS first and SUCCESSORS second; the adapters that declare both
+// (BDI, CBU, NBU) map disjoint codes, so passing HistoricalCode's result
+// through here gives the same label.
 func SuccessorCode(successors map[string]Successor, code string, date time.Time) string {
-	if s, ok := successors[code]; ok && !date.Before(s.Cutover) {
-		return s.Code
+	for {
+		s, ok := successors[code]
+		if !ok || date.Before(s.Cutover) {
+			return code
+		}
+		code = s.Code
 	}
-	return code
 }
 
 // Float returns a pointer to v, for Rate's optional components.

@@ -31,9 +31,12 @@ var eurAdoption = adapter.Date(2015, 1, 1)
 // official date: the manat was redenominated on 2006-01-01, but LB kept quoting
 // old manat through 2006-01-06 and jumped 5000x on 2006-01-09. The Turkmen
 // manat switched on the official date: 10000 "TMT" = 1.7354 LTL on 2008-12-31,
-// 10 TMT = 8.677 LTL on 2009-01-01.
+// 10 TMT = 8.677 LTL on 2009-01-01. So did the Belarusian ruble, whose BYR
+// series holds the 1994 ruble until 1999-12-31 (0.000004444 LTL) and the 2000
+// ruble from 2000-01-03 (0.0044444).
 var predecessors = map[string]adapter.Predecessor{
 	"AZN": {Code: "AZM", Cutover: adapter.Date(2006, 1, 9)},
+	"BYR": {Code: "BYB", Cutover: adapter.Date(2000, 1, 1)},
 	"TMT": {Code: "TMM", Cutover: adapter.Date(2009, 1, 1)},
 }
 

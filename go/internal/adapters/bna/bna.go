@@ -45,6 +45,18 @@ var (
 	listCode      = regexp.MustCompile(`\A[A-Z]{3,6}\z`)
 )
 
+// Three of those codes switch to their successor's values without changing
+// label. MZM's 2014 to 2016 rows track the new metical (3.1 AOA). STD holds a
+// frozen old-dobra cross until 2023-02-17 (0.024 AOA) and the new dobra from
+// 2023-02-22 (21.89 AOA). VEF holds the last pre-2018 official rate until
+// October 2022 (0.002 AOA) and the current bolivar from 2023-10-18 (23.74 AOA),
+// against BCV's VES.
+var successors = map[string]adapter.Successor{
+	"MZM": {Code: "MZN", Cutover: adapter.Date(2006, 7, 1)},
+	"STD": {Code: "STN", Cutover: adapter.Date(2023, 2, 22)},
+	"VEF": {Code: "VES", Cutover: adapter.Date(2023, 10, 18)},
+}
+
 func init() {
 	adapter.Register("BNA", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -77,6 +89,19 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if err != nil {
 		return nil, err
 	}
+	// Fetch relabelled series last, so a day BNA also publishes under the
+	// successor's own code keeps that row when the insert skips the duplicate.
+	slices.SortStableFunc(codes, func(x, y string) int {
+		_, relabelX := successors[x]
+		_, relabelY := successors[y]
+		switch {
+		case relabelX == relabelY:
+			return 0
+		case relabelX:
+			return 1
+		}
+		return -1
+	})
 
 	var rates []adapter.Rate
 	for i, code := range codes {
@@ -184,7 +209,12 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err != nil {
 			return nil, err
 		}
-		rates = append(rates, adapter.Rate{Date: date, Base: *r.Currency, Quote: "AOA", Rate: rate})
+		rates = append(rates, adapter.Rate{
+			Date:  date,
+			Base:  adapter.SuccessorCode(successors, *r.Currency, date),
+			Quote: "AOA",
+			Rate:  rate,
+		})
 	}
 	return rates, nil
 }

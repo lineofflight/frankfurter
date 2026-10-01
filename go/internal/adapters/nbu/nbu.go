@@ -26,6 +26,31 @@ var predecessors = map[string]adapter.Predecessor{
 	"TJS": {Code: "TJR", Cutover: adapter.Date(2000, 10, 30)},
 }
 
+// The archive keeps six retired codes after their redenominations and quotes
+// the successor under them, until the current codes replace them in April 2014
+// (RUB in 2004). Each entry is the first date in the new unit, which can trail
+// the official one by a few days.
+var successors = map[string]adapter.Successor{
+	"RUR": {Code: "RUB", Cutover: adapter.Date(1998, 1, 1)},
+	"BGL": {Code: "BGN", Cutover: adapter.Date(1999, 8, 1)},
+	"TRL": {Code: "TRY", Cutover: adapter.Date(2005, 1, 6)},
+	"ROL": {Code: "RON", Cutover: adapter.Date(2005, 7, 1)},
+	"AZM": {Code: "AZN", Cutover: adapter.Date(2006, 1, 6)},
+	"TMM": {Code: "TMT", Cutover: adapter.Date(2009, 1, 6)},
+}
+
+// From these dates the rate is per 100 units of the successor while the units
+// field still reads 1000 or 10000: 10000 "TRL" = 372.9741 UAH on 2005-06-27,
+// with the new lira at 3.73 UAH, and 100 TRY = 541.6837 when the label changes
+// on 2014-04-04.
+var perHundred = map[string]time.Time{
+	"BGL": adapter.Date(2000, 1, 1),
+	"TRL": adapter.Date(2005, 1, 6),
+	"ROL": adapter.Date(2005, 7, 1),
+	"AZM": adapter.Date(2006, 1, 6),
+	"TMM": adapter.Date(2009, 1, 6),
+}
+
 var isoCode = regexp.MustCompile(`\A[A-Z]{3}\z`)
 
 func init() {
@@ -102,6 +127,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 				return nil, err
 			}
 		}
+		if from, ok := perHundred[iso]; ok && !date.Before(from) {
+			units = 100
+		}
 		rate, err := toF(r.Rate)
 		if err != nil {
 			return nil, err
@@ -111,7 +139,7 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		}
 		rates = append(rates, adapter.Rate{
 			Date:  date,
-			Base:  adapter.HistoricalCode(predecessors, iso, date),
+			Base:  adapter.SuccessorCode(successors, adapter.HistoricalCode(predecessors, iso, date), date),
 			Quote: "UAH",
 			Rate:  rate / units,
 		})

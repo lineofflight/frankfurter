@@ -109,8 +109,13 @@ var aliases = map[string]string{"AON": "AOA", "BYB": "BYR"}
 
 // AFA rows switch to the new afghani on 2003-01-07 (0.000816 PLN on
 // 2002-12-24, 0.089056 next) and keep the old label until AFN replaces it in
-// the same 2003-11-12 table.
-var successors = map[string]adapter.Successor{"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)}}
+// the same 2003-11-12 table. ZWR rows switch to the 2009 Zimbabwe dollar on
+// 2009-02-25 (0.00000001 PLN on 2009-02-04, 0.043749 next) and keep the old
+// label until ZWL on 2010-06-02.
+var successors = map[string]adapter.Successor{
+	"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)},
+	"ZWR": {Code: "ZWL", Cutover: adapter.Date(2009, 2, 25)},
+}
 
 type table struct {
 	EffectiveDate string `json:"effectiveDate"`

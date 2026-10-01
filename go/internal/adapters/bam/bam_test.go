@@ -8,6 +8,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -81,6 +82,29 @@ func TestParseNormalizesByUniteDevise(t *testing.T) {
 	}
 	if math.Abs(rates[0].Rate-0.0625) > 0.0001 {
 		t.Errorf("rate = %v, want 0.0625", rates[0].Rate)
+	}
+}
+
+func TestParseRelabelsNewOuguiyaAndReadsUnitOneAsPerHundred(t *testing.T) {
+	rates := mustParse(t, `[
+		{"date": "2018-01-02T14:00:00", "libDevise": "MRO", "achat": 2.6161, "vente": 2.6318, "uniteDevise": 100},
+		{"date": "2018-04-16T12:30:00", "libDevise": "MRO", "moyen": 25.864, "uniteDevise": 100},
+		{"date": "2018-04-17T12:30:00", "libDevise": "MRO", "moyen": 25.857, "uniteDevise": 1}
+	]`)
+	var got []string
+	var mids []*float64
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+		mids = append(mids, r.Mid)
+	}
+	if want := []string{"2018-01-02 MRO", "2018-04-16 MRU", "2018-04-17 MRU"}; !slices.Equal(got, want) {
+		t.Fatalf("got %v, want %v", got, want)
+	}
+	if mids[0] != nil || mids[1] == nil || *mids[1] != 0.25864 || mids[2] == nil || *mids[2] != 0.25857 {
+		t.Errorf("mids = %v, want [nil 0.25864 0.25857]", mids)
+	}
+	if math.Abs(rates[0].Rate-0.0262395) > 1e-9 {
+		t.Errorf("rate = %v, want 0.0262395", rates[0].Rate)
 	}
 }
 

@@ -688,13 +688,13 @@
       "rate": 712.75935
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-19",
       "quote": "AOA",
       "rate": 43.53396
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-19",
       "quote": "AOA",
       "rate": 43.53396
@@ -772,13 +772,13 @@
       "rate": 913.116
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-19",
       "quote": "AOA",
       "rate": 1.79548
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-19",
       "quote": "AOA",
       "rate": 1.79548
@@ -1516,13 +1516,13 @@
       "rate": 713.31615
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-20",
       "quote": "AOA",
       "rate": 43.49683
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-20",
       "quote": "AOA",
       "rate": 43.49683
@@ -1600,13 +1600,13 @@
       "rate": 913.116
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-20",
       "quote": "AOA",
       "rate": 1.79056
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-20",
       "quote": "AOA",
       "rate": 1.79056
@@ -2344,13 +2344,13 @@
       "rate": 713.26043
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-21",
       "quote": "AOA",
       "rate": 43.51528
     },
     {
-      "base": "STD",
+      "base": "STN",
       "date": "2026-05-21",
       "quote": "AOA",
       "rate": 43.51528
@@ -2428,13 +2428,13 @@
       "rate": 913.116
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-21",
       "quote": "AOA",
       "rate": 1.7857
     },
     {
-      "base": "VEF",
+      "base": "VES",
       "date": "2026-05-21",
       "quote": "AOA",
       "rate": 1.7857

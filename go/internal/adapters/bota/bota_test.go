@@ -113,6 +113,16 @@ func TestParseMapsMXMLabelToOldMetical(t *testing.T) {
 	}
 }
 
+func TestParseRelabelsKwachaPublishedUnderZMK(t *testing.T) {
+	rates := mustParse(t, `<table><tbody>
+<tr><td>40</td><td>ZMK</td><td>111.1036</td><td>112.2202</td><td>111.6619</td><td>21-Jun-25</td></tr>
+</tbody></table>`)
+	want := []adapter.Rate{{Date: adapter.Date(2025, 6, 21), Base: "ZMW", Quote: "TZS", Rate: 111.6619}}
+	if !reflect.DeepEqual(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
 func TestParseExcludesGoldAndDefunctCurrencies(t *testing.T) {
 	rates := mustParse(t, `<html><body>
 <table><tbody>

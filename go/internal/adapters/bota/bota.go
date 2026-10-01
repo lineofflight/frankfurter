@@ -40,7 +40,11 @@ var (
 	// match the published label, so this survives the MZM exclusion, which
 	// targets the current row: BOTA still lists "MZM" today at new-metical
 	// values.
-	aliases            = map[string]string{"SDR": "XDR", "MXM": "MZM"}
+	aliases = map[string]string{"SDR": "XDR", "MXM": "MZM"}
+	// The kwacha appears as ZMK from 2025-06-21 to 2025-06-24 at ZMW values
+	// (111.66 TZS, against 110.64 as ZMW the day before), twelve years after
+	// the rebasing.
+	successors         = map[string]adapter.Successor{"ZMK": {Code: "ZMW", Cutover: adapter.Date(2013, 1, 1)}}
 	excludedCurrencies = []string{"GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"}
 )
 
@@ -156,5 +160,5 @@ func parseRow(cells *goquery.Selection) (adapter.Rate, bool, error) {
 	if err != nil {
 		return adapter.Rate{}, false, err
 	}
-	return adapter.Rate{Date: d, Base: currency, Quote: "TZS", Rate: rate}, true, nil
+	return adapter.Rate{Date: d, Base: adapter.SuccessorCode(successors, currency, d), Quote: "TZS", Rate: rate}, true, nil
 }

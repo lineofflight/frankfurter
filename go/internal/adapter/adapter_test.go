@@ -218,6 +218,21 @@ func TestSuccessorCode(t *testing.T) {
 	if got := adapter.SuccessorCode(succs, "USD", adapter.Date(2010, 1, 1)); got != "USD" {
 		t.Errorf("unmapped = %s, want USD", got)
 	}
+
+	chain := map[string]adapter.Successor{
+		"ZWD": {Code: "ZWR", Cutover: adapter.Date(2008, 8, 1)},
+		"ZWR": {Code: "ZWL", Cutover: adapter.Date(2009, 2, 3)},
+	}
+	for date, want := range map[time.Time]string{
+		adapter.Date(2008, 7, 31): "ZWD",
+		adapter.Date(2008, 8, 1):  "ZWR",
+		adapter.Date(2009, 2, 2):  "ZWR",
+		adapter.Date(2009, 2, 3):  "ZWL",
+	} {
+		if got := adapter.SuccessorCode(chain, "ZWD", date); got != want {
+			t.Errorf("chained on %s = %s, want %s", date.Format(time.DateOnly), got, want)
+		}
+	}
 }
 
 func TestWindow(t *testing.T) {

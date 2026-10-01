@@ -145,6 +145,30 @@ func TestParseRestoresOldTurkmenManat(t *testing.T) {
 	}
 }
 
+func TestParseRestoresBelarusianRubleBeforeRedenomination(t *testing.T) {
+	rates := mustParse(t, `<?xml version="1.0" encoding="utf-8"?>
+<FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+  <FxRate>
+    <Tp>LT</Tp>
+    <Dt>1999-12-31</Dt>
+    <CcyAmt><Ccy>LTL</Ccy><Amt>4.444</Amt></CcyAmt>
+    <CcyAmt><Ccy>BYR</Ccy><Amt>1000000</Amt></CcyAmt>
+  </FxRate>
+  <FxRate>
+    <Tp>LT</Tp>
+    <Dt>2000-01-03</Dt>
+    <CcyAmt><Ccy>LTL</Ccy><Amt>4.4444</Amt></CcyAmt>
+    <CcyAmt><Ccy>BYR</Ccy><Amt>1000</Amt></CcyAmt>
+  </FxRate>
+</FxRates>`)
+	if got := bases(rates); !slices.Equal(got, []string{"BYB", "BYR"}) {
+		t.Fatalf("bases = %v, want [BYB BYR]", got)
+	}
+	if math.Abs(rates[0].Rate-0.000004444) > 1e-12 {
+		t.Errorf("rate = %v, want 0.000004444", rates[0].Rate)
+	}
+}
+
 func TestParseEUType(t *testing.T) {
 	rates := mustParse(t, `<?xml version="1.0" encoding="utf-8"?>
 <FxRates xmlns="http://www.lb.lt/WebServices/FxRates">

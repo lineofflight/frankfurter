@@ -151,19 +151,34 @@ func TestParseNormalizesByNominal(t *testing.T) {
 	rates, err := parse([]byte(`<?xml version="1.0" encoding="windows-1251" ?>
 <CurrencyRates Name="Weekly Exchange Rates" Date="23.05.2026">
   <Currency ISOCode="JPY"><Nominal>10</Nominal><ValidFor>7</ValidFor><Value>5,4969</Value></Currency>
-  <Currency ISOCode="BYR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,3402</Value></Currency>
+  <Currency ISOCode="IRR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,0064</Value></Currency>
 </CurrencyRates>
 `))
 	if err != nil {
 		t.Fatal(err)
 	}
 	jpy, _ := find(rates, "JPY")
-	byr, _ := find(rates, "BYR")
+	irr, _ := find(rates, "IRR")
 	if math.Abs(jpy.Rate-0.54969) > 0.00001 {
 		t.Errorf("JPY = %v", jpy.Rate)
 	}
-	if math.Abs(byr.Rate-0.003402) > 0.000001 {
-		t.Errorf("BYR = %v", byr.Rate)
+	if math.Abs(irr.Rate-0.000064) > 0.0000001 {
+		t.Errorf("IRR = %v", irr.Rate)
+	}
+}
+
+func TestParseSkipsFrozenBYRListingAfterRedenomination(t *testing.T) {
+	rates, err := parse([]byte(`<?xml version="1.0" encoding="windows-1251" ?>
+<CurrencyRates Name="Weekly Exchange Rates" Date="26.09.2026">
+  <Currency ISOCode="BYR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,3402</Value></Currency>
+  <Currency ISOCode="BYN"><Nominal>1</Nominal><ValidFor>7</ValidFor><Value>28,8456</Value></Currency>
+</CurrencyRates>
+`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 1 || rates[0].Base != "BYN" {
+		t.Errorf("got %+v, want only BYN", rates)
 	}
 }
 

@@ -137,7 +137,7 @@
       "rate": 1.888
     },
     {
-      "base": "MRO",
+      "base": "MRU",
       "date": "2026-03-25",
       "mid": 0.2355,
       "quote": "MAD",
@@ -473,7 +473,7 @@
       "rate": 1.8921
     },
     {
-      "base": "MRO",
+      "base": "MRU",
       "date": "2026-03-26",
       "mid": 0.23569,
       "quote": "MAD",
@@ -753,7 +753,7 @@
       "rate": 1.8953
     },
     {
-      "base": "MRO",
+      "base": "MRU",
       "date": "2026-03-27",
       "mid": 0.23589,
       "quote": "MAD",

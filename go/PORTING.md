@@ -142,7 +142,7 @@ Override only what the Ruby class overrides:
 | `def self.lead_days = 7`          | `func (a *Adapter) LeadDays() int { return 7 }`           |
 | `def self.revises? = true`        | `func (a *Adapter) Revises() bool { return true }`        |
 | `PREDECESSORS = { "AZN" => ["AZM", Date.new(2006, 1, 1)] }` | `var predecessors = map[string]adapter.Predecessor{"AZN": {Code: "AZM", Cutover: adapter.Date(2006, 1, 1)}}` then `adapter.HistoricalCode(predecessors, code, date)` |
-| `SUCCESSORS = { "AFA" => ["AFN", Date.new(2003, 1, 7)] }` | `var successors = map[string]adapter.Successor{"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)}}` then `adapter.SuccessorCode(successors, code, date)` |
+| `SUCCESSORS = { "AFA" => ["AFN", Date.new(2003, 1, 7)] }` | `var successors = map[string]adapter.Successor{"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)}}` then `adapter.SuccessorCode(successors, code, date)`, which chains; with both maps, pass `HistoricalCode`'s result through it |
 | `GRAMS_PER_TROY_OUNCE`            | `adapter.GramsPerTroyOunce`                               |
 | `midpoint(buy, sell)`             | `adapter.Midpoint(buy, sell)`                             |
 | `**prices(bid: b, ask: a)`        | `Bid: adapter.Float(b), Ask: adapter.Float(a)`            |

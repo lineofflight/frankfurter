@@ -12,12 +12,16 @@ import (
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// retiredLabel is one of 041's stored-label repairs: provider's rows carrying
-// from move to to, dated since onwards when since is set, with every
-// component divided by unit when unit is set. An empty to deletes the rows.
+// retiredLabel is one of 041's or 043's stored-label repairs: provider's rows
+// carrying from move to to, dated since onwards and before before when those
+// are set and matching filter (a SQL condition) when that is, with every
+// component divided by unit or multiplied by factor when either is set. An
+// empty to deletes the rows. A conflicting row already stored under to fails
+// the repair unless keepExisting is set, in which case it wins.
 type retiredLabel struct {
-	provider, from, to, since string
-	unit                      float64
+	provider, from, to, since, before, filter string
+	unit, factor                              float64
+	keepExisting                              bool
 }
 
 // retiredLabels are the labels provider health could not place after a
@@ -55,6 +59,12 @@ func (l retiredLabel) scope() string {
 	s := "`provider` = " + db.Lit(l.provider) + " AND " + either(l.from)
 	if l.since != "" {
 		s += " AND `date` >= " + db.Lit(l.since)
+	}
+	if l.before != "" {
+		s += " AND `date` < " + db.Lit(l.before)
+	}
+	if l.filter != "" {
+		s += " AND " + l.filter
 	}
 	return s
 }
@@ -219,8 +229,140 @@ func repairRetiredLabels(ctx context.Context, q db.Querier) error {
 	return exec(ctx, q, "DELETE FROM `blended_rates`")
 }
 
+// successorLabels are 043's repairs: sources that keep a retired code after a
+// redenomination and quote the successor under it, found by comparing each
+// provider's values past the retirement against other providers' successor
+// rates.
+var successorLabels = []retiredLabel{
+	{provider: "CBG", from: "SLL", to: "SLE", since: "2022-07-01"},
+	{provider: "CBU", from: "TRL", to: "TRY", since: "2005-01-04"},
+	{provider: "LB", from: "BYR", to: "BYB", before: "2000-01-01"}, // the 1994 ruble under its successor's code
+	{provider: "NBU", from: "RUR", to: "RUB", since: "1998-01-01"},
+	// Per 100 BGN from 2000, though the units field reads 1000.
+	{provider: "NBU", from: "BGL", to: "BGN", since: "1999-08-01", before: "2000-01-01"},
+	{provider: "NBU", from: "BGL", to: "BGN", since: "2000-01-01", factor: 10},
+	// Per 100 of the successor to 2014, though the units field reads 10000.
+	{provider: "NBU", from: "TRL", to: "TRY", since: "2005-01-06", factor: 100},
+	{provider: "NBU", from: "ROL", to: "RON", since: "2005-07-01", factor: 100},
+	{provider: "NBU", from: "AZM", to: "AZN", since: "2006-01-06", factor: 100},
+	{provider: "NBU", from: "TMM", to: "TMT", since: "2009-01-06", factor: 100},
+	{provider: "BNA", from: "MZM", to: "MZN", since: "2006-07-01"},
+	{provider: "BNA", from: "STD", to: "STN", since: "2023-02-22"},
+	// BNA's own VES row wins the one day it publishes both.
+	{provider: "BNA", from: "VEF", to: "VES", since: "2023-10-18", keepExisting: true},
+	{provider: "BDI", from: "ZWD", to: "ZWR", since: "2008-08-01", before: "2009-02-03"},
+	{provider: "BDI", from: "ZWD", to: "ZWL", since: "2009-02-03"},
+	{provider: "NBP", from: "ZWR", to: "ZWL", since: "2009-02-25"},
+	// 53 rows quoted per 100 under a unit of 1. The new ouguiya trades near
+	// 0.25 MAD, so a stored rate above 1 is a per-100 quote.
+	{provider: "BAM", from: "MRO", to: "MRU", since: "2018-01-03", filter: "`rate` <= 1"},
+	{provider: "BAM", from: "MRO", to: "MRU", since: "2018-01-03", filter: "`rate` > 1", factor: 0.01},
+	{provider: "BOTA", from: "ZMK", to: "ZMW", since: "2013-01-01"},
+	// A frozen 2016 rate the live feed re-dates every week.
+	{provider: "NBKR", from: "BYR", since: "2016-07-01"},
+}
+
+// relabelSuccessorValues is 043. The adapters now emit the successor; this
+// repairs what is stored, since insert-only backfill never rewrites a row.
+// Equal duplicates collapse; a pair that disagrees fails the migration, since
+// picking a winner needs source evidence, unless the source publishes the
+// successor under its own code that day.
+//
+// Rollups are rebuilt for every affected provider bucket and coverage is
+// recomputed. The blend tables are left as they are: the repaired history
+// spans 1994 to today, so refreshing it is a full rebuild, too slow for a
+// migration that runs before the app starts. Clearing them instead, as 041 and
+// 042 did, sends every request to live compute until the scheduler rebuilds
+// them. Run `frankfurter blend-rebuild` after deploy; it rebuilds in place and
+// keeps the tables serving.
+func relabelSuccessorValues(ctx context.Context, q db.Querier) error {
+	checks := make([]string, len(successorLabels))
+	for i, l := range successorLabels {
+		checks[i] = "EXISTS (SELECT 1 FROM `rates` WHERE " + l.scope() + ")"
+	}
+	var needed bool
+	if err := q.QueryRowContext(ctx, "SELECT "+strings.Join(checks, " OR ")).Scan(&needed); err != nil {
+		return err
+	}
+	if !needed {
+		return nil
+	}
+
+	type bucketKey struct {
+		provider string
+		rollup   int // index into retiredRollups
+	}
+	var bucketKeys []bucketKey
+	buckets := map[bucketKey][]string{}
+	var providers []string
+	codes := map[string][]string{}
+	for _, l := range successorLabels {
+		for i, t := range retiredRollups {
+			dates, err := column(ctx, q, "SELECT DISTINCT "+t.bucket+" FROM `rates` WHERE "+l.scope())
+			if err != nil {
+				return err
+			}
+			k := bucketKey{l.provider, i}
+			if _, ok := buckets[k]; !ok {
+				bucketKeys = append(bucketKeys, k)
+			}
+			for _, d := range dates {
+				if !slices.Contains(buckets[k], d) {
+					buckets[k] = append(buckets[k], d)
+				}
+			}
+		}
+		if _, ok := codes[l.provider]; !ok {
+			providers = append(providers, l.provider)
+		}
+		for _, code := range []string{l.from, l.to} {
+			if code != "" && !slices.Contains(codes[l.provider], code) {
+				codes[l.provider] = append(codes[l.provider], code)
+			}
+		}
+
+		if l.to == "" {
+			if err := exec(ctx, q, "DELETE FROM `rates` WHERE "+l.scope()); err != nil {
+				return err
+			}
+			continue
+		}
+		rows, err := legacyRows(ctx, q, l.scope())
+		if err != nil {
+			return err
+		}
+		for _, r := range rows {
+			if err := relabelRetiredRow(ctx, q, l, r); err != nil {
+				return err
+			}
+		}
+	}
+
+	for _, k := range bucketKeys {
+		dates := buckets[k]
+		if len(dates) == 0 {
+			continue
+		}
+		t := retiredRollups[k.rollup]
+		p, list := db.Lit(k.provider), db.LitList(dates)
+		if err := exec(ctx, q,
+			"DELETE FROM `"+t.table+"` WHERE `provider` = "+p+" AND `bucket_date` IN "+list,
+			rollupInsert(t.table, t.bucket, "`provider` = "+p+" AND "+t.bucket+" IN "+list),
+		); err != nil {
+			return err
+		}
+	}
+	for _, p := range providers {
+		if err := rates.RefreshSummaries(ctx, q, codes[p], p); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 // relabelRetiredRow moves one stored row to its corrected label and unit, or
-// deletes it when the corrected row already exists with equal components.
+// deletes it when the corrected row already exists with equal components (or
+// with any, when the label keeps existing rows).
 func relabelRetiredRow(ctx context.Context, q db.Querier, l retiredLabel, r storedRate) error {
 	relabel := func(code string) string {
 		if code == l.from {
@@ -230,14 +372,18 @@ func relabelRetiredRow(ctx context.Context, q db.Querier, l retiredLabel, r stor
 	}
 	base, quote := relabel(r.base), relabel(r.quote)
 	mid, bid, ask := r.mid, r.bid, r.ask
-	if l.unit != 0 {
-		perUnit := func(v sql.NullFloat64) sql.NullFloat64 {
+	if l.unit != 0 || l.factor != 0 {
+		scale := func(v sql.NullFloat64) sql.NullFloat64 {
 			if v.Valid {
-				v.Float64 = rates.Normalize(v.Float64 / l.unit)
+				if l.unit != 0 {
+					v.Float64 = rates.Normalize(v.Float64 / l.unit)
+				} else {
+					v.Float64 = rates.Normalize(v.Float64 * l.factor)
+				}
 			}
 			return v
 		}
-		mid, bid, ask = perUnit(mid), perUnit(bid), perUnit(ask)
+		mid, bid, ask = scale(mid), scale(bid), scale(ask)
 	}
 	key := []any{r.provider, r.date, r.base, r.quote}
 
@@ -247,7 +393,7 @@ func relabelRetiredRow(ctx context.Context, q db.Querier, l retiredLabel, r stor
 			"`base` = ? AND `quote` = ?", r.provider, r.date, base, quote).Scan(&existing.mid, &existing.bid, &existing.ask)
 		switch {
 		case err == nil:
-			if existing.mid != mid || existing.bid != bid || existing.ask != ask {
+			if !l.keepExisting && (existing.mid != mid || existing.bid != bid || existing.ask != ask) {
 				return fmt.Errorf("%s: conflicting %s/%s components on %s", l.provider, l.from, l.to, r.date)
 			}
 			_, err = q.ExecContext(ctx, "DELETE FROM `rates` WHERE `provider` = ? AND `date` = ? AND `base` = ? AND "+

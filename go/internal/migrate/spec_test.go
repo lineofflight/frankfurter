@@ -3,6 +3,7 @@ package migrate
 import (
 	"context"
 	"database/sql"
+	"math"
 	"reflect"
 	"slices"
 	"strings"
@@ -1155,5 +1156,288 @@ func TestOldAfghaniMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *testin
 	}
 	if count(t, conn, "SELECT count(*) FROM rates WHERE quote = 'AFN'") != 1 {
 		t.Fatal("relabelled post-switch row")
+	}
+}
+
+// successorDatabase is spec/successor_values_migration_spec.rb's
+// run_migration_script setup: a database migrated to 42 with providers seeded.
+func successorDatabase(t *testing.T) *sql.DB {
+	t.Helper()
+	conn, _ := empty(t)
+	migrateTo(t, conn, 42)
+	if err := rates.SeedProviders(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	return conn
+}
+
+// spec/successor_values_migration_spec.rb
+func TestSuccessorValuesMigrationRelabelsRescalesAndDropsStoredRowsAndLeavesTheBlendsToARebuild(t *testing.T) {
+	ctx := context.Background()
+	today := rates.Today()
+	conn := successorDatabase(t)
+
+	rows := []rate{
+		{provider: "CBG", date: "2021-08-30", base: "SLL", quote: "GMD", mid: f(0.01)},
+		{provider: "CBG", date: "2022-07-12", base: "SLL", quote: "GMD", mid: f(4.11)},
+		{provider: "CBU", date: "2004-12-28", base: "TRL", quote: "UZS", mid: f(0.00078)},
+		{provider: "CBU", date: "2005-01-04", base: "TRL", quote: "UZS", mid: f(787.09)},
+		{provider: "CBU", date: "2009-02-17", base: "TRL", quote: "UZS", mid: f(849.84)},
+		{provider: "CBU", date: "2009-02-17", base: "TRY", quote: "UZS", mid: f(849.84)},
+		{provider: "LB", date: "1999-12-31", base: "BYR", quote: "LTL", mid: f(0.000004444)},
+		{provider: "LB", date: "2000-01-03", base: "BYR", quote: "LTL", mid: f(0.0044444)},
+		{provider: "NBU", date: "1999-01-04", base: "RUR", quote: "UAH", mid: f(0.16596)},
+		{provider: "NBU", date: "2004-03-31", base: "RUR", quote: "UAH", mid: f(0.18709)},
+		{provider: "NBU", date: "2004-03-31", base: "RUB", quote: "UAH", mid: f(0.18709)},
+		{provider: "NBU", date: "1999-08-02", base: "BGL", quote: "UAH", mid: f(2.2594804)},
+		{provider: "NBU", date: "2000-01-03", base: "BGL", quote: "UAH", mid: f(0.2712867)},
+		{provider: "NBU", date: "2005-01-05", base: "TRL", quote: "UAH", mid: f(0.00000376)},
+		{provider: "NBU", date: "2005-06-27", base: "TRL", quote: "UAH", mid: f(0.03729741)},
+		{provider: "NBU", date: "2005-06-27", base: "USD", quote: "UAH", mid: f(5.055)},
+		{provider: "BNA", date: "2014-04-22", base: "MZM", quote: "AOA", mid: f(3.1)},
+		{provider: "BNA", date: "2023-02-17", base: "STD", quote: "AOA", mid: f(0.02398)},
+		{provider: "BNA", date: "2023-10-18", base: "VEF", quote: "AOA", mid: f(23.74128)},
+		{provider: "BNA", date: "2026-02-05", base: "VEF", quote: "AOA", mid: f(2.48819)},
+		{provider: "BNA", date: "2026-02-05", base: "VES", quote: "AOA", mid: f(2.487)},
+		{provider: "BDI", date: "2008-07-31", base: "EUR", quote: "ZWD", mid: f(108471581765.0)},
+		{provider: "BDI", date: "2008-08-01", base: "EUR", quote: "ZWD", mid: f(11.805092)},
+		{provider: "BDI", date: "2009-02-03", base: "EUR", quote: "ZWD", mid: f(28.2678)},
+		{provider: "NBP", date: "2009-02-04", base: "ZWR", quote: "PLN", mid: f(1.0e-08)},
+		{provider: "NBP", date: "2009-02-25", base: "ZWR", quote: "PLN", mid: f(0.043749)},
+		{provider: "BAM", date: "2018-01-02", base: "MRO", quote: "MAD", mid: f(0.02624)},
+		{provider: "BAM", date: "2018-04-16", base: "MRO", quote: "MAD", mid: f(0.25864)},
+		{provider: "BAM", date: "2018-04-17", base: "MRO", quote: "MAD", mid: f(25.857)},
+		{provider: "BAM", date: "2018-04-17", base: "USD", quote: "MAD", mid: f(9.1664)},
+		{provider: "BOTA", date: "2025-06-21", base: "ZMK", quote: "TZS", mid: f(111.6619)},
+		{provider: "NBKR", date: "2016-06-25", base: "BYR", quote: "KGS", mid: f(0.003402)},
+		{provider: "NBKR", date: "2026-09-26", base: "BYR", quote: "KGS", mid: f(0.003402)},
+		{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "USD", mid: f(1.17)},
+		{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "GBP", mid: f(0.87)},
+	}
+	insertRates(t, conn, rows...)
+	var codes []string
+	for _, r := range rows {
+		codes = append(codes, r.base, r.quote)
+	}
+	if err := rates.RefreshSummaries(ctx, conn, codes, ""); err != nil {
+		t.Fatal(err)
+	}
+	for _, t2 := range rates.Rollups {
+		b := rates.BucketSQL(t2.Precision, "date")
+		mustExec(t, conn, "INSERT INTO "+t2.Name+" (bucket_date, provider, base, quote, rate) SELECT "+b+
+			", provider, base, quote, avg(rate) FROM rates GROUP BY "+b+", provider, base, quote")
+	}
+	rebuildBlends(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'TRL' AND date = '2005-06-27'") == 0 {
+		t.Fatal("fixture blend missing TRL")
+	}
+	blendTables := []string{"blended_rates", "blended_weekly_rates", "blended_monthly_rates"}
+	snapshot := func() map[string][]blendRow {
+		out := map[string][]blendRow{}
+		for _, table := range blendTables {
+			out[table] = blendRows(t, conn, table, "")
+		}
+		return out
+	}
+	before := snapshot()
+
+	setup(t, conn)
+	if v := version(t, conn); v < 43 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	type stored struct {
+		provider, date, base, quote string
+		mid                         float64
+	}
+	result, err := conn.Query("SELECT provider, date(date), base, quote, mid FROM rates WHERE provider != 'ECB' AND " +
+		"base != 'USD' ORDER BY provider, date, base, quote")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []stored
+	for result.Next() {
+		var s stored
+		if err := result.Scan(&s.provider, &s.date, &s.base, &s.quote, &s.mid); err != nil {
+			t.Fatal(err)
+		}
+		got = append(got, s)
+	}
+	result.Close()
+	want := []stored{
+		{"BAM", "2018-01-02", "MRO", "MAD", 0.02624},
+		{"BAM", "2018-04-16", "MRU", "MAD", 0.25864},
+		{"BAM", "2018-04-17", "MRU", "MAD", 0.25857},
+		{"BDI", "2008-07-31", "EUR", "ZWD", 108471581765.0},
+		{"BDI", "2008-08-01", "EUR", "ZWR", 11.805092},
+		{"BDI", "2009-02-03", "EUR", "ZWL", 28.2678},
+		{"BNA", "2014-04-22", "MZN", "AOA", 3.1},
+		{"BNA", "2023-02-17", "STD", "AOA", 0.02398},
+		{"BNA", "2023-10-18", "VES", "AOA", 23.74128},
+		{"BNA", "2026-02-05", "VES", "AOA", 2.487},
+		{"BOTA", "2025-06-21", "ZMW", "TZS", 111.6619},
+		{"CBG", "2021-08-30", "SLL", "GMD", 0.01},
+		{"CBG", "2022-07-12", "SLE", "GMD", 4.11},
+		{"CBU", "2004-12-28", "TRL", "UZS", 0.00078},
+		{"CBU", "2005-01-04", "TRY", "UZS", 787.09},
+		{"CBU", "2009-02-17", "TRY", "UZS", 849.84},
+		{"LB", "1999-12-31", "BYB", "LTL", 0.000004444},
+		{"LB", "2000-01-03", "BYR", "LTL", 0.0044444},
+		{"NBKR", "2016-06-25", "BYR", "KGS", 0.003402},
+		{"NBP", "2009-02-04", "ZWR", "PLN", 1.0e-08},
+		{"NBP", "2009-02-25", "ZWL", "PLN", 0.043749},
+		{"NBU", "1999-01-04", "RUB", "UAH", 0.16596},
+		{"NBU", "1999-08-02", "BGN", "UAH", 2.2594804},
+		{"NBU", "2000-01-03", "BGN", "UAH", 2.712867},
+		{"NBU", "2004-03-31", "RUB", "UAH", 0.18709},
+		{"NBU", "2005-01-05", "TRL", "UAH", 0.00000376},
+		{"NBU", "2005-06-27", "TRY", "UAH", 3.729741},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("wrong repaired rows: %+v", got)
+	}
+
+	type rollup struct {
+		base string
+		rate float64
+	}
+	result, err = conn.Query("SELECT base, rate FROM weekly_rates WHERE provider = 'NBU' AND bucket_date = ? AND "+
+		"base != 'USD'", bucket(rates.Week, "2005-06-27"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var nbu []rollup
+	for result.Next() {
+		var r rollup
+		if err := result.Scan(&r.base, &r.rate); err != nil {
+			t.Fatal(err)
+		}
+		nbu = append(nbu, r)
+	}
+	result.Close()
+	if want := []rollup{{"TRY", 3.729741}}; !reflect.DeepEqual(nbu, want) {
+		t.Fatalf("stale NBU rollup: %+v", nbu)
+	}
+	months, err := column(ctx, conn, "SELECT date(bucket_date) FROM monthly_rates WHERE provider = 'BAM' AND base = 'MRO'")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []string{bucket(rates.Month, "2018-01-02")}; !reflect.DeepEqual(months, want) {
+		t.Fatalf("BAM rollup kept MRO: %v", months)
+	}
+	if count(t, conn, "SELECT count(*) FROM weekly_rates WHERE provider = 'NBKR'") != 1 {
+		t.Fatal("NBKR rollup kept 2026 BYR")
+	}
+
+	coverage := func(provider, code string) [][2]string {
+		t.Helper()
+		result, err := conn.Query("SELECT date(start_date), date(end_date) FROM currency_coverages WHERE "+
+			"provider_key = ? AND iso_code = ?", provider, code)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer result.Close()
+		var out [][2]string
+		for result.Next() {
+			var c [2]string
+			if err := result.Scan(&c[0], &c[1]); err != nil {
+				t.Fatal(err)
+			}
+			out = append(out, c)
+		}
+		return out
+	}
+	for _, c := range []struct {
+		provider, code string
+		want           [][2]string
+	}{
+		{"NBU", "TRL", [][2]string{{"2005-01-05", "2005-01-05"}}},
+		{"NBU", "RUR", nil},
+		{"CBG", "SLE", [][2]string{{"2022-07-12", "2022-07-12"}}},
+		{"LB", "BYB", [][2]string{{"1999-12-31", "1999-12-31"}}},
+	} {
+		if got := coverage(c.provider, c.code); !reflect.DeepEqual(got, c.want) {
+			t.Fatalf("%s %s coverage %v, want %v", c.provider, c.code, got, c.want)
+		}
+	}
+	var mruStart string
+	if err := conn.QueryRow("SELECT date(start_date) FROM currencies WHERE iso_code = 'MRU'").
+		Scan(&mruStart); err != nil || mruStart != "2018-04-16" {
+		t.Fatalf("MRU catalogue start %s (%v)", mruStart, err)
+	}
+
+	if got := snapshot(); !reflect.DeepEqual(got, before) {
+		t.Fatal("touched the blends")
+	}
+
+	rebuildBlends(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'TRL' AND date = '2005-06-27'") != 0 {
+		t.Fatal("TRL still blended in 2005")
+	}
+	blended := func(quote, date string) float64 {
+		t.Helper()
+		var v float64
+		if err := conn.QueryRow("SELECT rate FROM blended_rates WHERE quote = ? AND date = ?", quote, date).
+			Scan(&v); err != nil {
+			t.Fatalf("%s blend on %s: %v", quote, date, err)
+		}
+		return v
+	}
+	if got, want := blended("TRY", "2005-06-27"), 5.055/3.729741; math.Abs(got-want) >= 1e-9 {
+		t.Fatalf("TRY blend %v, want %v", got, want)
+	}
+	if got, want := blended("MRU", "2018-04-17"), 9.1664/0.25857; math.Abs(got-want) >= 1e-9 {
+		t.Fatalf("MRU blend %v, want %v", got, want)
+	}
+}
+
+// "rolls back on conflicting duplicates"
+func TestSuccessorValuesMigrationRollsBackOnConflictingDuplicates(t *testing.T) {
+	conn := successorDatabase(t)
+	insertRates(t, conn,
+		rate{provider: "CBU", date: "2009-02-17", base: "TRL", quote: "UZS", mid: f(849.84)},
+		rate{provider: "CBU", date: "2009-02-17", base: "TRY", quote: "UZS", mid: f(849.85)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2009-02-17', 'UZS', 1390.0)")
+	before := allRates(t, conn)
+
+	err := Up(context.Background(), conn)
+	if err == nil {
+		t.Fatal("accepted conflicting components")
+	}
+	if !strings.Contains(err.Error(), "conflicting TRL/TRY components") {
+		t.Fatal(err)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("partial repair committed")
+	}
+	if v := version(t, conn); v != 42 {
+		t.Fatalf("migration marked complete: version %d", v)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
+	}
+}
+
+// "leaves databases without affected history alone"
+func TestSuccessorValuesMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *testing.T) {
+	conn := successorDatabase(t)
+	insertRates(t, conn,
+		rate{provider: "CBU", date: "2004-12-28", base: "TRL", quote: "UZS", mid: f(0.00078)},
+		rate{provider: "NBU", date: "2014-04-04", base: "TRY", quote: "UAH", mid: f(5.416837)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2014-04-04', 'TRY', 2.14)")
+	before := allRates(t, conn)
+	if err := Up(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	if v := version(t, conn); v < 43 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("changed unaffected rows")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
 	}
 }
