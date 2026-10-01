@@ -13,6 +13,16 @@ class Provider
       TABLE_A_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
       TABLE_B_URL = "https://api.nbp.pl/api/exchangerates/tables/B"
       GOLD_URL = "https://api.nbp.pl/api/cenyzlota"
+
+      # Table B carried retired codes until table 23/B/NBP/2003 (2003-11-12): AON for the kwanza, at AOA values (0.0503
+      # PLN on 2003-10-28, 0.0511 as AOA next), and BYB for the Belarusian ruble in tables 5 to 18 of 2002, with BYR
+      # before and after.
+      ALIASES = { "AON" => "AOA", "BYB" => "BYR" }.freeze
+
+      # AFA rows switch to the new afghani on 2003-01-07 (0.000816 PLN on 2002-12-24, 0.089056 next) and keep the old
+      # label until AFN replaces it in the same 2003-11-12 table.
+      SUCCESSORS = { "AFA" => ["AFN", Date.new(2003, 1, 7)] }.freeze
+
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
         dataset = []
@@ -37,7 +47,7 @@ class Provider
             next unless iso.match?(/\A[A-Z]{3}\z/)
             next if mid.nil? || mid.zero?
 
-            { date:, base: iso, quote: "PLN", rate: mid }
+            { date:, base: historical_code(ALIASES.fetch(iso, iso), date), quote: "PLN", rate: mid }
           end
         end
       end

@@ -16,7 +16,10 @@ class Provider
     class BOTA < Adapter
       BASE_URL = "https://www.bot.go.tz"
       FORM_URL = "#{BASE_URL}/ExchangeRate/previous_rates".freeze
-      ALIASES = { "SDR" => "XDR" }.freeze
+      # The archive's first weeks, to 1999-07-27, label the old metical MXM: 0.0602 TZS with the dollar at 740, about
+      # 12,300 per dollar. Exclusions match the published label, so this survives the MZM exclusion, which targets the
+      # current row: BOTA still lists "MZM" today at new-metical values.
+      ALIASES = { "SDR" => "XDR", "MXM" => "MZM" }.freeze
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
       TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/

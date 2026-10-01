@@ -358,6 +358,39 @@ describe Provider do
       _(Rate.where(provider: provider.key, date: import_date).count).must_equal(1)
     end
 
+    describe "from coverage_start" do
+      let(:coverage_start) { Date.today - 10 }
+
+      it "fetches the coverage start day on a first backfill" do
+        exclusive_adapter = Class.new(Provider::Adapters::Adapter) do
+          define_method(:fetch) do |after: nil, upto: nil|
+            ((after + 1)..(upto || Date.today)).map { |date| { date:, base: "EUR", quote: "USD", rate: 1.1 } }
+          end
+        end
+
+        provider.stub(:coverage_start, coverage_start) do
+          provider.stub(:adapter, exclusive_adapter) { provider.backfill }
+        end
+
+        _(Rate.where(provider: provider.key).min(:date)).must_equal(coverage_start.to_s)
+      end
+
+      it "stores nothing dated before coverage_start" do
+        # LB's archive carries a 1994-03-31 row, one day before the 1994-04-01 it starts publishing from.
+        stray_adapter = Class.new(Provider::Adapters::Adapter) do
+          define_method(:fetch) do |after: nil, upto: nil|
+            (after..(upto || Date.today)).map { |date| { date:, base: "EUR", quote: "USD", rate: 1.1 } }
+          end
+        end
+
+        provider.stub(:coverage_start, coverage_start) do
+          provider.stub(:adapter, stray_adapter) { provider.backfill(after: coverage_start) }
+        end
+
+        _(Rate.where(provider: provider.key).min(:date)).must_equal(coverage_start.to_s)
+      end
+    end
+
     describe "when the adapter revises published values in place" do
       # HMRC may correct a monthly customs rate mid-month. If the correction replaces the row in its file rather than
       # adding one with a later start date, insert-only backfill keeps the stale figure. Surface the drift.
