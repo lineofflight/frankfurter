@@ -78,7 +78,8 @@ func FetchEach(ctx context.Context, a Adapter, after, today time.Time, yield fun
 	}
 	for {
 		var upto time.Time
-		if days := a.BackfillRange(); !after.IsZero() && days > 0 {
+		days := a.BackfillRange()
+		if !after.IsZero() && days > 0 {
 			upto = after.AddDate(0, 0, days-1)
 			if !upto.Before(today) {
 				upto = time.Time{}
@@ -96,7 +97,7 @@ func FetchEach(ctx context.Context, a Adapter, after, today time.Time, yield fun
 		if upto.IsZero() {
 			return nil
 		}
-		if upto.After(after) {
+		if days > 1 {
 			after = upto
 		} else {
 			after = upto.AddDate(0, 0, 1)
