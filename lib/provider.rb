@@ -135,8 +135,8 @@ class Provider < Sequel::Model(:providers)
     end
 
     Log.info("#{key}: backfilling from #{after || "start"}")
-    # Many adapters read after as exclusive, but coverage_start is the first day the source publishes. Start the day
-    # before it, and keep out anything the source dates earlier (LB's archive has a row the day before its start).
+    # Many adapters read after as exclusive, but coverage_start is the first day to store. Start the day before it, and
+    # keep out anything dated earlier: inclusive adapters return that day too, and BCCR pads each window to 100 days.
     floor = coverage_start if after && after == coverage_start
     after -= 1 if floor
     fetched = false
