@@ -67,7 +67,10 @@ class Provider < Sequel::Model(:providers)
             yield records if records.any?
             break unless upto
 
-            after = upto + 1
+            # Step to the window's last day, not past it: an adapter that reads after as exclusive would otherwise never
+            # request upto + 1. One that reads it as inclusive refetches that day, which the insert skips. A one-day
+            # window has no overlap to give.
+            after = backfill_range > 1 ? upto : upto + 1
           end
         end
       end

@@ -59,6 +59,62 @@ class Provider < Sequel::Model(:providers)
           _(params[0][:upto]).must_equal(after + 29)
           _(params[-1][:upto]).must_be_nil
         end
+
+        it "overlaps consecutive windows by exactly one day" do
+          params = []
+          chunked_klass = Class.new(Adapter) do
+            class << self
+              def backfill_range = 30
+            end
+
+            define_method(:fetch) do |after: nil, upto: nil|
+              params << { after:, upto: }
+              []
+            end
+          end
+
+          chunked_klass.fetch_each(after: Date.today - 100) { nil }
+
+          params.each_cons(2) do |window, following|
+            _(following[:after]).must_equal(window[:upto])
+          end
+        end
+
+        it "skips no day across window boundaries for an adapter that treats after as exclusive" do
+          exclusive_klass = Class.new(Adapter) do
+            class << self
+              def backfill_range = 30
+            end
+
+            define_method(:fetch) do |after: nil, upto: nil|
+              ((after + 1)..(upto || Date.today)).map { |date| { date:, base: "EUR", quote: "USD", rate: 1.1 } }
+            end
+          end
+
+          start = Date.today - 100
+          dates = []
+          exclusive_klass.fetch_each(after: start) { |records| dates.concat(records.map { |r| r[:date] }) }
+
+          _(((start + 1)..Date.today).to_a - dates).must_be_empty
+        end
+
+        it "steps a one-day window a day at a time" do
+          afters = []
+          daily_klass = Class.new(Adapter) do
+            class << self
+              def backfill_range = 1
+            end
+
+            define_method(:fetch) do |after: nil, **|
+              afters << after
+              []
+            end
+          end
+
+          daily_klass.fetch_each(after: Date.today - 3) { nil }
+
+          _(afters).must_equal(((Date.today - 3)..Date.today).to_a)
+        end
       end
 
       describe "#midpoint" do
