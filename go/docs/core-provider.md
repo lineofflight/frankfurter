@@ -23,6 +23,14 @@ runs everything.
 - `Ingester{DB, Client, Blend, Cache, Logger, Today, Adapter}`: `Provider#backfill`.
   - `Backfill(ctx, p)` uses Ruby's default cursor (`last_synced || coverage_start`); `BackfillAfter(ctx, p, after)`
     takes an explicit one (zero = from the source's start). Both log and swallow failures, as Ruby rescues.
+  - The cursor is exclusive, so a first backfill (and the full task) starts the day before `coverage_start` to fetch
+    that day too. Rows dated before `coverage_start` are dropped before storing, as an adapter that keeps rows on
+    `after` itself (AMCM, NBKR) would return the day before.
+  - `adapter.FetchEach` starts each window on the previous window's `upto` rather than the day after it. An adapter
+    that takes `after` as exclusive would otherwise never request `upto + 1`, losing a day at every window boundary
+    (BCP lost 2001-01-01 and every 365th day after; BNR lost 2006-01-03, 2007-01-03, ...). Inclusive adapters refetch
+    the shared day, which `ON CONFLICT DO NOTHING` skips. A one-day range still steps past `upto`, since only an
+    inclusive adapter can use one and it would otherwise never advance.
   - Per batch: `rates.Reject`, `rates.Normalize`, drift warning for `Revises()` adapters, then one `BEGIN IMMEDIATE`
     transaction: insert (`ON CONFLICT DO NOTHING`), and when anything was inserted `rates.RefreshRollups`,
     `Blend.RefreshRollupsTx` (blending providers), `rates.RefreshSummaries`, `Blend.RefreshTx(min, max + 14)`

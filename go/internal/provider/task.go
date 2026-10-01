@@ -22,7 +22,7 @@ type Backfiller interface {
 func BackfillTask(ctx context.Context, b Backfiller, providers []Provider, name string, full bool, workers int) error {
 	run := func(p Provider) {
 		if full {
-			b.BackfillAfter(ctx, p, p.CoverageStart)
+			b.BackfillAfter(ctx, p, p.coverageCursor())
 		} else {
 			b.Backfill(ctx, p)
 		}

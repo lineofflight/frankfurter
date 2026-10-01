@@ -28,6 +28,19 @@ func (s *stub) Fetch(_ context.Context, after, upto time.Time) ([]adapter.Rate, 
 	return s.rows, nil
 }
 
+// exclusive serves source through adapter.Window, as most adapters do, with a
+// one-year backfill range.
+type exclusive struct {
+	adapter.Base
+	source []adapter.Rate
+}
+
+func (e *exclusive) BackfillRange() int { return 365 }
+
+func (e *exclusive) Fetch(_ context.Context, after, upto time.Time) ([]adapter.Rate, error) {
+	return adapter.Window(append([]adapter.Rate(nil), e.source...), after, upto), nil
+}
+
 var today = adapter.Date(2026, time.March, 20)
 
 func TestFetchEach(t *testing.T) {
@@ -77,6 +90,67 @@ func TestFetchEach(t *testing.T) {
 		}
 		if !s.windows[3][1].IsZero() {
 			t.Errorf("last window upto = %v, want open", s.windows[3][1])
+		}
+	})
+
+	t.Run("starts each window on the previous upto", func(t *testing.T) {
+		s := &stub{backfillRange: 30}
+		if err := adapter.FetchEach(context.Background(), s, today.AddDate(0, 0, -90), today, func([]adapter.Rate) error { return nil }); err != nil {
+			t.Fatal(err)
+		}
+		for i := 1; i < len(s.windows); i++ {
+			if !s.windows[i][0].Equal(s.windows[i-1][1]) {
+				t.Errorf("window %d after = %v, want previous upto %v", i, s.windows[i][0], s.windows[i-1][1])
+			}
+		}
+	})
+
+	t.Run("skips no day across a boundary for an exclusive adapter", func(t *testing.T) {
+		after := adapter.Date(2025, 1, 1)
+		var source []adapter.Rate
+		for d := after.AddDate(0, 0, 1); !d.After(today); d = d.AddDate(0, 0, 1) {
+			source = append(source, adapter.Rate{Date: d, Base: "EUR", Quote: "USD", Rate: 1.1})
+		}
+		s := &exclusive{source: source}
+		var got []time.Time
+		err := adapter.FetchEach(context.Background(), s, after, today, func(rows []adapter.Rate) error {
+			for _, r := range rows {
+				got = append(got, r.Date)
+			}
+			return nil
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(got) != len(source) {
+			t.Fatalf("got %d days, want %d", len(got), len(source))
+		}
+		for i, r := range source {
+			if !got[i].Equal(r.Date) {
+				t.Fatalf("day %d = %v, want %v", i, got[i], r.Date)
+			}
+		}
+	})
+
+	t.Run("steps a one-day range past upto", func(t *testing.T) {
+		after := today.AddDate(0, 0, -3)
+		s := &stub{backfillRange: 1}
+		if err := adapter.FetchEach(context.Background(), s, after, today, func([]adapter.Rate) error { return nil }); err != nil {
+			t.Fatal(err)
+		}
+		want := [][2]time.Time{
+			{after, after},
+			{after.AddDate(0, 0, 1), after.AddDate(0, 0, 1)},
+			{after.AddDate(0, 0, 2), after.AddDate(0, 0, 2)},
+			{today, {}},
+		}
+		if len(s.windows) != len(want) {
+			t.Fatalf("windows = %v, want %v", s.windows, want)
+		}
+		for i := range want {
+			if !s.windows[i][0].Equal(want[i][0]) || !s.windows[i][1].Equal(want[i][1]) {
+				t.Errorf("window %d = %v, want %v", i, s.windows[i], want[i])
+			}
 		}
 	})
 

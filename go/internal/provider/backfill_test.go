@@ -555,6 +555,59 @@ func TestBackfillChunksWhenAdapterHasBackfillRange(t *testing.T) {
 	}
 }
 
+// inclusiveAdapter serves one EUR/USD row a day from from through to, keeping
+// rows dated on after itself, as AMCM and NBKR do.
+func inclusiveAdapter(from, to time.Time, params *[][2]time.Time) *fakeAdapter {
+	return &fakeAdapter{fetch: func(after, upto time.Time) ([]adapter.Rate, error) {
+		*params = append(*params, [2]time.Time{after, upto})
+		var out []adapter.Rate
+		for d := from; !d.After(to); d = d.AddDate(0, 0, 1) {
+			if d.Before(after) || (!upto.IsZero() && d.After(upto)) {
+				continue
+			}
+			out = append(out, rate(d, "EUR", "USD", 1.1))
+		}
+		return out, nil
+	}}
+}
+
+func TestBackfillFetchesCoverageStartOnAFirstBackfill(t *testing.T) {
+	var params [][2]time.Time
+	today := fixtures.Today()
+	start := today.AddDate(0, 0, -5)
+	e := newEnv(t, "BCB", inclusiveAdapter(start.AddDate(0, 0, -3), today, &params))
+	e.provider.CoverageStart = start
+	e.exec(t, "DELETE FROM rates WHERE provider = 'BCB'")
+	e.in.Backfill(context.Background(), e.provider)
+
+	if len(params) != 1 || !params[0][0].Equal(start.AddDate(0, 0, -1)) {
+		t.Fatalf("windows %v, want one after the day before coverage_start %s", params, d(start))
+	}
+	if n := e.count(t, "date = ?", d(start)); n != 1 {
+		t.Errorf("got %d rows on coverage_start, want 1", n)
+	}
+	if n := e.count(t, "date < ?", d(start)); n != 0 {
+		t.Errorf("stored %d rows before coverage_start", n)
+	}
+}
+
+func TestBackfillStoresNothingBeforeCoverageStart(t *testing.T) {
+	var params [][2]time.Time
+	today := fixtures.Today()
+	start := today.AddDate(0, 0, -5)
+	e := newEnv(t, "BCB", inclusiveAdapter(start.AddDate(0, 0, -3), today, &params))
+	e.provider.CoverageStart = start
+	e.exec(t, "DELETE FROM rates WHERE provider = 'BCB'")
+	e.in.BackfillAfter(context.Background(), e.provider, start.AddDate(0, 0, -10))
+
+	if n := e.count(t, "date < ?", d(start)); n != 0 {
+		t.Errorf("stored %d rows before coverage_start", n)
+	}
+	if n := e.count(t, "date >= ?", d(start)); n != 6 {
+		t.Errorf("got %d rows from coverage_start through today, want 6", n)
+	}
+}
+
 func TestBackfillRefreshesCurrenciesAndCurrencyCoverages(t *testing.T) {
 	e := newEnv(t, "BCB", defaultAdapter(fixtures.Today(), nil))
 	e.exec(t, "DELETE FROM currencies")

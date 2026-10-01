@@ -113,7 +113,7 @@ func Lookup(key string, client *http.Client) (adapter.Adapter, error) {
 }
 
 // Backfill is Provider#backfill with its default cursor: after the newest
-// stored rate, or after coverage_start when there is none, or from the source's
+// stored rate, or from coverage_start when there is none, or from the source's
 // start when neither exists.
 func (in *Ingester) Backfill(ctx context.Context, p Provider) {
 	last, err := p.LastSynced(ctx, in.DB)
@@ -122,9 +122,19 @@ func (in *Ingester) Backfill(ctx context.Context, p Provider) {
 		return
 	}
 	if last.IsZero() {
-		last = p.CoverageStart
+		last = p.coverageCursor()
 	}
 	in.BackfillAfter(ctx, p, last)
+}
+
+// coverageCursor is the cursor that backfills from coverage_start itself: the
+// day before, as adapters take after as exclusive. Zero when coverage_start is
+// NULL. Rows an inclusive adapter returns for that day are dropped in store.
+func (p Provider) coverageCursor() time.Time {
+	if p.CoverageStart.IsZero() {
+		return time.Time{}
+	}
+	return p.CoverageStart.AddDate(0, 0, -1)
 }
 
 // BackfillAfter fetches the provider's rows dated after `after` (zero: from the
@@ -171,6 +181,9 @@ func (in *Ingester) backfill(ctx context.Context, p Provider, after time.Time, l
 func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, records []adapter.Rate, today time.Time,
 	log *slog.Logger,
 ) error {
+	if !p.CoverageStart.IsZero() {
+		records = slices.DeleteFunc(records, func(r adapter.Rate) bool { return r.Date.Before(p.CoverageStart) })
+	}
 	records = rates.Reject(records, a.LeadDays(), today)
 	for i := range records {
 		records[i].Rate = rates.Normalize(records[i].Rate)

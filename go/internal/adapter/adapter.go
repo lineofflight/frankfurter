@@ -66,6 +66,12 @@ type Adapter interface {
 // FetchEach walks from after to today in BackfillRange windows, calling yield
 // with each non-empty batch. The last window is open-ended. It returns
 // immediately when after is today or later.
+//
+// Each window's after is the previous window's upto, so an adapter that takes
+// after as exclusive still gets the day following upto. One that takes it as
+// inclusive refetches upto, which the insert skips. A one-day range steps past
+// upto instead: only an inclusive adapter can use it, and it would otherwise
+// never advance.
 func FetchEach(ctx context.Context, a Adapter, after, today time.Time, yield func([]Rate) error) error {
 	if !after.IsZero() && !after.Before(today) {
 		return nil
@@ -90,7 +96,11 @@ func FetchEach(ctx context.Context, a Adapter, after, today time.Time, yield fun
 		if upto.IsZero() {
 			return nil
 		}
-		after = upto.AddDate(0, 0, 1)
+		if upto.After(after) {
+			after = upto
+		} else {
+			after = upto.AddDate(0, 0, 1)
+		}
 	}
 }
 
