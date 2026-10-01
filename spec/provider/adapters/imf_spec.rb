@@ -36,6 +36,14 @@ class Provider < Sequel::Model(:providers)
         _(keys.size).must_equal(keys.uniq.size)
       end
 
+      it "starts at the first report when a window opens before it" do
+        # A full backfill opens the day before coverage starts. IMF has no report for March 2003.
+        dataset = adapter.fetch(after: Date.new(2003, 3, 31), upto: Date.new(2003, 4, 30))
+
+        _(dataset).wont_be_empty
+        _(dataset.map { |r| r[:date] }.min).must_be(:>=, Date.new(2003, 4, 1))
+      end
+
       it "parses indirect quotes with (1) suffix" do
         tsv = <<~TSV
           Representative Exchange Rates for Selected Currencies for January 2026

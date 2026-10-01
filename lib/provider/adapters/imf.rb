@@ -8,6 +8,8 @@ class Provider
     # currency per USD; currencies marked with (1) are USD per foreign unit.
     class IMF < Adapter
       BASE_URL = "https://www.imf.org/external/np/fin/data/rms_mth.aspx"
+      # The first month with a report. Earlier months redirect to an error page.
+      COVERAGE_START = Date.new(2003, 4, 1)
 
       # Currency name to ISO code mapping
       CURRENCY_MAP = {
@@ -90,7 +92,8 @@ class Provider
         end_date = upto || Date.today
 
         dataset = []
-        cursor = Date.new(after.year, after.month, 1)
+        start_date = [after, COVERAGE_START].max
+        cursor = Date.new(start_date.year, start_date.month, 1)
 
         while cursor <= end_date
           last_day = Date.new(cursor.year, cursor.month, -1)

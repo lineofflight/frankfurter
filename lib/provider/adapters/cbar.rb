@@ -15,6 +15,7 @@ class Provider
     # requested date.
     class CBAR < Adapter
       URL = "https://www.cbar.az/currencies/"
+      COVERAGE_START = Date.new(1993, 11, 26)
 
       # CBAR labels every row in the archive with the currency's current ISO code, including bulletins from before a
       # redenomination, without restating the values: the 2005-12-30 file quotes 1 USD = 4593 "AZN", old manat. Each
@@ -45,7 +46,7 @@ class Provider
         seen = Set.new
 
         first = true
-        (after..end_date).each do |date|
+        ([after, COVERAGE_START].max..end_date).each do |date|
           sleep(0.2) unless first
           first = false
 

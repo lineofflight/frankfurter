@@ -11,6 +11,8 @@ class Provider
     # Statistics Denmark's Statbank API. Rates are quoted as DKK per 100 units of foreign currency.
     class DNB < Adapter
       URL = "https://api.statbank.dk/v1/data"
+      # The first day in the table. Statbank rejects a Tid bound that isn't one of its values, like the Sunday before.
+      COVERAGE_START = Date.new(1977, 1, 3)
       CURRENCIES = [
         "EUR",
         "USD",
@@ -59,7 +61,7 @@ class Provider
       ].freeze
 
       def fetch(after: nil, upto: nil)
-        tid = ">=#{format_date(after)}"
+        tid = ">=#{format_date([after, COVERAGE_START].max)}"
         tid += "<=#{format_date(upto || Date.today)}" if upto
 
         body = Oj.dump(
