@@ -476,7 +476,7 @@
           },
           "providers": {
             "type": "array",
-            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's observation date and published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. Omitted on synthesized peg rows where no provider published the quote.",
+            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's observation date and published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. A one-day typo in a provider's series is left out, so its entry shows the observation before it. Omitted on synthesized peg rows where no provider published the quote.",
             "items": {
               "type": "object",
               "properties": {

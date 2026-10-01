@@ -6,8 +6,10 @@ import (
 	"math"
 	"net/http"
 	"net/url"
+	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -97,6 +99,57 @@ func TestGolden(t *testing.T) {
 	// exact URI instead, which picks the same interactions Ruby did.
 	a := New(vcrtest.Client(t, "nbrm", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
 	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), adapter.Date(2026, 5, 30))
+	if err != nil {
+		t.Fatal(err)
+	}
+	g.Check(t, rates)
+}
+
+// The Ruby spec backfills the rows through Provider and reads back what is
+// stored. Insert-only storage keeps the first row of each date and pair, so
+// the same collapse is applied to the fetched rows here.
+func TestFetchLabelsECUAsXEUAndItsPostEuroQuotesAsEUR(t *testing.T) {
+	a := New(vcrtest.Client(t, "nbrm_ecu", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(1998, 12, 30), adapter.Date(1999, 1, 4))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	type row struct {
+		date, base string
+		rate       float64
+	}
+	var stored []row
+	seen := map[string]bool{}
+	for _, r := range rates {
+		if r.Base == "XBA" {
+			t.Errorf("XBA row on %s", r.Date.Format(time.DateOnly))
+		}
+		key := r.Date.Format(time.DateOnly) + " " + r.Base
+		if !slices.Contains([]string{"XBA", "XEU", "EUR"}, r.Base) || seen[key] {
+			continue
+		}
+		seen[key] = true
+		stored = append(stored, row{r.Date.Format(time.DateOnly), r.Base, r.Rate})
+	}
+	slices.SortStableFunc(stored, func(a, b row) int { return strings.Compare(a.date, b.date) })
+	want := []row{
+		{"1998-12-30", "XEU", 60.914},
+		{"1998-12-31", "XEU", 60.9144},
+		{"1999-01-01", "EUR", 60.5994},
+		{"1999-01-02", "EUR", 60.5994},
+		{"1999-01-03", "EUR", 60.5994},
+		{"1999-01-04", "EUR", 60.5994},
+	}
+	if !slices.Equal(stored, want) {
+		t.Errorf("got %v, want %v", stored, want)
+	}
+}
+
+func TestGoldenECU(t *testing.T) {
+	g := golden.Load(t, "testdata/golden/ecu.json")
+	a := New(g.Client(t))
+	rates, err := a.Fetch(context.Background(), adapter.Date(1998, 12, 30), adapter.Date(1999, 1, 4))
 	if err != nil {
 		t.Fatal(err)
 	}

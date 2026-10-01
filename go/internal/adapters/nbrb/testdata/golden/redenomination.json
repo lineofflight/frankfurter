@@ -1,0 +1,481 @@
+{
+  "adapter": "NBRB",
+  "cassette": "nbrb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2016, 6, 28), upto: Date.new(2016, 7, 5))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 1.4908
+    },
+    {
+      "base": "BGN",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 1.1366
+    },
+    {
+      "base": "CAD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 1.5438
+    },
+    {
+      "base": "CHF",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 2.0467
+    },
+    {
+      "base": "CNY",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.30167
+    },
+    {
+      "base": "CZK",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.08205899999999999
+    },
+    {
+      "base": "DKK",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.29888
+    },
+    {
+      "base": "EUR",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 2.221
+    },
+    {
+      "base": "GBP",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 2.688
+    },
+    {
+      "base": "IRR",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.00006555600000000001
+    },
+    {
+      "base": "ISK",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.016191
+    },
+    {
+      "base": "JPY",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.019523
+    },
+    {
+      "base": "KGS",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.029771000000000002
+    },
+    {
+      "base": "KWD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 6.6427
+    },
+    {
+      "base": "KZT",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.005959
+    },
+    {
+      "base": "MDL",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.10096000000000001
+    },
+    {
+      "base": "NOK",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.23786999999999997
+    },
+    {
+      "base": "NZD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 1.427
+    },
+    {
+      "base": "PLN",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.50248
+    },
+    {
+      "base": "RUB",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.031212
+    },
+    {
+      "base": "SEK",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.23561000000000001
+    },
+    {
+      "base": "SGD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 1.4879
+    },
+    {
+      "base": "TRY",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.69252
+    },
+    {
+      "base": "UAH",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 0.080647
+    },
+    {
+      "base": "USD",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 2.0053
+    },
+    {
+      "base": "XDR",
+      "date": "2016-07-01",
+      "quote": "BYN",
+      "rate": 2.7982
+    },
+    {
+      "base": "AUD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 1.4908
+    },
+    {
+      "base": "BGN",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 1.1366
+    },
+    {
+      "base": "CAD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 1.5438
+    },
+    {
+      "base": "CHF",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 2.0467
+    },
+    {
+      "base": "CNY",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.30167
+    },
+    {
+      "base": "CZK",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.08205899999999999
+    },
+    {
+      "base": "DKK",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.29888
+    },
+    {
+      "base": "EUR",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 2.221
+    },
+    {
+      "base": "GBP",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 2.688
+    },
+    {
+      "base": "IRR",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.00006555600000000001
+    },
+    {
+      "base": "ISK",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.016191
+    },
+    {
+      "base": "JPY",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.019523
+    },
+    {
+      "base": "KGS",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.029771000000000002
+    },
+    {
+      "base": "KWD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 6.6427
+    },
+    {
+      "base": "KZT",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.005959
+    },
+    {
+      "base": "MDL",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.10096000000000001
+    },
+    {
+      "base": "NOK",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.23786999999999997
+    },
+    {
+      "base": "NZD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 1.427
+    },
+    {
+      "base": "PLN",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.50248
+    },
+    {
+      "base": "RUB",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.031212
+    },
+    {
+      "base": "SEK",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.23561000000000001
+    },
+    {
+      "base": "SGD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 1.4879
+    },
+    {
+      "base": "TRY",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.69252
+    },
+    {
+      "base": "UAH",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 0.080647
+    },
+    {
+      "base": "USD",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 2.0053
+    },
+    {
+      "base": "XDR",
+      "date": "2016-07-04",
+      "quote": "BYN",
+      "rate": 2.7982
+    },
+    {
+      "base": "AUD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.5032
+    },
+    {
+      "base": "BGN",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.1368
+    },
+    {
+      "base": "CAD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.5522
+    },
+    {
+      "base": "CHF",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 2.0497
+    },
+    {
+      "base": "CNY",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.29977
+    },
+    {
+      "base": "CZK",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.08210699999999999
+    },
+    {
+      "base": "DKK",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.2988
+    },
+    {
+      "base": "EUR",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 2.2207
+    },
+    {
+      "base": "GBP",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 2.6525
+    },
+    {
+      "base": "IRR",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.00006531399999999999
+    },
+    {
+      "base": "ISK",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.01628
+    },
+    {
+      "base": "JPY",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.019468
+    },
+    {
+      "base": "KGS",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.029636
+    },
+    {
+      "base": "KWD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 6.6228
+    },
+    {
+      "base": "KZT",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.0059322
+    },
+    {
+      "base": "MDL",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.10103
+    },
+    {
+      "base": "NOK",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.23971
+    },
+    {
+      "base": "NZD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.4387
+    },
+    {
+      "base": "PLN",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.5022
+    },
+    {
+      "base": "RUB",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.031318
+    },
+    {
+      "base": "SEK",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.23653
+    },
+    {
+      "base": "SGD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.4855
+    },
+    {
+      "base": "TRY",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.68916
+    },
+    {
+      "base": "UAH",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 0.080496
+    },
+    {
+      "base": "USD",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 1.9979
+    },
+    {
+      "base": "XDR",
+      "date": "2016-07-05",
+      "quote": "BYN",
+      "rate": 2.789
+    }
+  ]
+}

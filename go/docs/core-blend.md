@@ -41,8 +41,9 @@ grouped batches under a savepoint. That is Sequel's `transaction(**(in_transacti
   the source buckets `Between` selects, `ok == false` when any bucket is unmaterialized (the API falls back to live).
   On a `*sql.DB`, `Read` uses one deferred read transaction, so coverage and values come from one snapshot. Buckets
   are stored date text, as `rates.RefreshRollups` returns them.
-- `RefreshProviderRollups(ctx, q, provider, dates, today)` is `Provider#refresh_rollups`: `rates.RefreshRollups` plus,
-  for blending providers, the grouped refreshes of the touched buckets.
+- `RefreshProviderRollups(ctx, q, provider, dates, today)` is `Provider#refresh_rollups` with no rescreened dates:
+  `rates.RefreshRollups` plus, for blending providers, the grouped refreshes of the touched buckets. Backfill adds the
+  buckets of rescreened dates itself (`provider.Ingester`).
 
 ### Tasks
 

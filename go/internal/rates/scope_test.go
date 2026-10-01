@@ -15,11 +15,11 @@ import (
 
 func blendable(t *testing.T, conn *sql.DB, table rates.Table) rates.Query {
 	t.Helper()
-	keys, err := rates.NonBlendingKeys(ctx, conn)
+	filter, err := rates.LoadBlendFilter(ctx, conn)
 	if err != nil {
 		t.Fatal(err)
 	}
-	return table.Blendable(keys)
+	return table.Blendable(filter)
 }
 
 func pairs(t *testing.T, conn *sql.DB, q rates.Query) [][2]string {

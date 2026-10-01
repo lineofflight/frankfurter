@@ -37,22 +37,30 @@ Pure reference data, plus the catalogue reads.
   with `Name()` and `Metadata()`; peg merging and widening as in Ruby. `to_h`/`to_h_with_providers` are left to the API:
   it has every field it needs here.
 
-### `internal/rates` (rate, rate_scopes, rate_components, rate_precision, rate_validation, currency_summary, roundable, bucket, carry_forward, Provider.seed and refresh_rollup)
+### `internal/rates` (rate, rate_scopes, rate_spike, rate_components, rate_precision, rate_validation, currency_summary, roundable, bucket, carry_forward, Provider.seed and refresh_rollup)
 
 Scopes are SQL text with constants inlined via `db.Lit`, so they compose like Sequel datasets.
 
 - Tables: `Daily`, `Weekly`, `Monthly` (`Table{Name, DateColumn, Precision}`), `Tables`, `Rollups`.
 - `Query{Table, From, Select, Where, Order}` with `Filter`, `Columns`, `OrderBy`, `Condition`, `SQL`. `t.Dataset()` is
   the whole table. Scopes:
-  - `t.Blendable(nonBlending)`: named currencies, provider not in `nonBlending` (from `NonBlendingKeys(ctx, q)`),
-    before terminal dates; rollups additionally go through `eligible_rollups` (a subquery aliased to the table name,
-    exactly Ruby's shape; the weekly coverage query still uses the covering index, see `TestWeeklyCoverageUsesCoveringIndex`).
+  - `t.Blendable(f)`: named currencies, provider not in `f.NonBlending`, before terminal dates, and daily rows not
+    flagged in `rate_spikes`; rollups instead go through `eligible_rollups`, which recomputes a pair's average when an
+    expired or spiked observation contaminates its bucket (a subquery aliased to the table name, exactly Ruby's shape;
+    the weekly coverage query still uses the covering index, see `TestWeeklyCoverageUsesCoveringIndex`).
+    `LoadBlendFilter(ctx, q)` reads the `BlendFilter{NonBlending, Spikes}`: `NonBlendingKeys(ctx, q)` and whether
+    `rate_spikes` exists, since migrations before 045 blend through the scope too (Ruby's `RateScopes.spiked` guard).
   - `q.Between(start, end, today)`: Ruby's snap-back range, ordered by date, quote.
   - `q.Only(currencies...)`: pivot-currency pairs, via a join on providers; select list `table.*`.
   - `q.Downsample(p) string`: full SQL; rows of base, provider, quote, rate, date (bucket text).
-  - Building blocks: `NamedCondition()`, `ExpiredCondition(col, p)`, `CurrentCondition(col, p)`.
+  - Building blocks: `NamedCondition()`, `ExpiredCondition(col, p)`, `CurrentCondition(col, p)`, `SpikedCondition()`
+    (names no table, so it holds when coverage re-aliases rates).
 - Buckets: `WeekBucket`, `MonthBucket`, `BucketSQL(p, expr)` are `Bucket.week/month/expression`; `Bucket(p, t)` is the
-  same computation in Go (tested against SQLite for every day of 2016-2017).
+  same computation in Go (tested against SQLite for every day of 2016-2017). `SpanSQL(p, bucket, date)` is
+  `Bucket.span`, a date range around a bucket so `eligible_rollups` can seek the date index.
+- Spikes (`RateSpike`): `DetectSpikes(rows Query) Query` flags an observation `SpikeFactor` (3) times off both
+  neighbours of its pair, which agree, within `SpikeMaxGapDays` (14); `RefreshSpikes(ctx, q, provider, dates)`
+  rescreens the window around inserted dates and returns the dates whose flags changed, sorted.
 - Precision and components: `Digits`, `Normalize`, `PrecisionSQL`, `Midpoint(bid, ask *float64)`,
   `ComponentsOf(adapter.Rate) Components{Mid, Bid, Ask}` (what to write; `rate` is generated), `Round` (Roundable).
   `Normalize` and `Round` round as Ruby's `format` does: the shortest decimal that round-trips, half to even, not the
@@ -65,7 +73,8 @@ Scopes are SQL text with constants inlined via `db.Lit`, so they compose like Se
 - `RefreshSummaries(ctx, q, codes, provider)`: `CurrencySummary.refresh`; `provider == ""` means unscoped.
 - `RefreshRollups(ctx, q, provider, dates) (map[Precision][]string, error)`: the provider-rollup half of
   `Provider#refresh_rollups`; returns touched buckets so the blending step can refresh `blended_weekly_rates` and
-  `blended_monthly_rates`. `RebuildRollups(ctx, q)` rebuilds both tables from scratch.
+  `blended_monthly_rates`. `Buckets(ctx, q, provider, p, dates)` is `Provider#buckets`, which backfill uses to add the
+  buckets of rescreened dates. `RebuildRollups(ctx, q)` rebuilds both tables from scratch.
 - `SeedProviders(ctx, *sql.DB)`: `Provider.seed` / `db:seed`, including the recognised-exclusions restore.
 - `Row{Date, Base, Quote, Provider, Rate}`, `Select(ctx, q, query, args...)` (columns date, base, quote, provider,
   rate), `CarryForward(rows, date, lookback)`, `EachSnapshot(rows, dates, lookback, yield)`, `LookbackDays`. A row
@@ -116,7 +125,9 @@ renders `(NULL)`: drop NOT IN conditions for empty lists), `NullDate` (scans DAT
 
 ## Specs ported
 
-db_spec, rate_spec (CarryForward, between, only, downsample), rate_scopes_spec, rate_components_spec,
+db_spec, rate_spec (CarryForward, between, only, downsample), rate_scopes_spec, rate_spike_spec (`.detect` and the
+late-arrival `refresh`, in `spike_test.go`; its query and backfill cases live in `internal/ratequery/spike_test.go` and
+`internal/provider/spike_test.go`), rate_components_spec,
 rate_precision_spec, rate_validation_spec, currency_spec, currency_patches_spec, currency_summary_spec,
 defunct_currency_spec, nascent_currency_spec, peg_spec, peg_anchor_spec, grouped_coverage_index_spec.
 

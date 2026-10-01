@@ -16,43 +16,51 @@ import (
 // caller's job.
 func RefreshRollups(ctx context.Context, q db.Querier, provider string, dates []time.Time) (map[Precision][]string, error) {
 	touched := map[Precision][]string{}
-	if len(dates) == 0 {
-		return touched, nil
-	}
-	list := make([]string, len(dates))
-	for i, d := range dates {
-		list[i] = db.FormatDate(d)
-	}
 	for _, t := range Rollups {
-		bucket := BucketSQL(t.Precision, "date")
-		rows, err := q.QueryContext(ctx, "SELECT DISTINCT "+bucket+" FROM rates WHERE provider = ? AND date IN "+
-			db.LitList(list), provider)
+		buckets, err := Buckets(ctx, q, provider, t.Precision, dates)
 		if err != nil {
 			return nil, fmt.Errorf("refresh %s: %w", t.Name, err)
-		}
-		var buckets []string
-		for rows.Next() {
-			var b string
-			if err := rows.Scan(&b); err != nil {
-				rows.Close()
-				return nil, err
-			}
-			buckets = append(buckets, b)
-		}
-		rows.Close()
-		if err := rows.Err(); err != nil {
-			return nil, err
 		}
 		if len(buckets) == 0 {
 			continue
 		}
-		sort.Strings(buckets)
 		if err := rebuildBuckets(ctx, q, t, provider, buckets); err != nil {
 			return nil, err
 		}
 		touched[t.Precision] = buckets
 	}
 	return touched, nil
+}
+
+// Buckets lists, sorted, the buckets at precision p of provider's daily rows
+// dated on any of dates (Provider#buckets), as stored date text.
+func Buckets(ctx context.Context, q db.Querier, provider string, p Precision, dates []time.Time) ([]string, error) {
+	if len(dates) == 0 {
+		return nil, nil
+	}
+	list := make([]string, len(dates))
+	for i, d := range dates {
+		list[i] = db.FormatDate(d)
+	}
+	rows, err := q.QueryContext(ctx, "SELECT DISTINCT "+BucketSQL(p, "date")+" FROM rates WHERE provider = ? AND "+
+		"date IN "+db.LitList(list), provider)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var buckets []string
+	for rows.Next() {
+		var b string
+		if err := rows.Scan(&b); err != nil {
+			return nil, err
+		}
+		buckets = append(buckets, b)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	sort.Strings(buckets)
+	return buckets, nil
 }
 
 // RebuildRollups recomputes every provider rollup table from the daily rates.

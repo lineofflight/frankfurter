@@ -26,7 +26,17 @@ const (
 	chunkDays = 90
 )
 
-var isoCode = regexp.MustCompile(`\A[A-Z]{3}\z`)
+var (
+	isoCode = regexp.MustCompile(`\A[A-Z]{3}\z`)
+
+	// The source codes the ECU, which it names the European unit of account,
+	// as XBA/955, the bond-market European Composite Unit, rather than
+	// XEU/954. Its values track the official ECU basket. It keeps the label
+	// until May 1999, quoting the same value it publishes under EUR, since the
+	// ECU converted to the euro one for one.
+	aliases    = map[string]string{"XBA": "XEU"}
+	successors = map[string]adapter.Successor{"XEU": {Code: "EUR", Cutover: adapter.Date(1999, 1, 1)}}
+)
 
 func init() {
 	adapter.Register("NBRM", func(c *http.Client) adapter.Adapter { return New(c) })
@@ -121,7 +131,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err != nil {
 			return nil, err
 		}
-		rates = append(rates, adapter.Rate{Date: date, Base: iso, Quote: "MKD", Rate: rate})
+		if alias, ok := aliases[iso]; ok {
+			iso = alias
+		}
+		rates = append(rates, adapter.Rate{Date: date, Base: adapter.SuccessorCode(successors, iso, date), Quote: "MKD",
+			Rate: rate})
 	}
 	return rates, nil
 }

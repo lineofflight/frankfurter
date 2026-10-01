@@ -47,11 +47,11 @@ func (a *v2App) count(query string, args ...any) int {
 // blendableCount counts table t's blendable rows matching cond.
 func (a *v2App) blendableCount(t rates.Table, cond string) int {
 	a.t.Helper()
-	keys, err := rates.NonBlendingKeys(context.Background(), a.db)
+	filter, err := rates.LoadBlendFilter(context.Background(), a.db)
 	if err != nil {
 		a.t.Fatal(err)
 	}
-	return a.count(t.Blendable(keys).Filter(cond).Columns("count(*)").SQL())
+	return a.count(t.Blendable(filter).Filter(cond).Columns("count(*)").SQL())
 }
 
 // spec/versions/v2/provider_currencies_spec.rb

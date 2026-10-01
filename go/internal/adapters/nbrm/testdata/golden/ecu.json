@@ -1,0 +1,877 @@
+{
+  "adapter": "NBRM",
+  "cassette": "nbrm_ecu",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1998, 12, 30), upto: Date.new(1999, 1, 4))",
+  "rows": [
+    {
+      "base": "ATS",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 4.404024
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 31.78
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 1.50209
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 33.5151
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 37.967437
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 30.983708999999998
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 8.137871
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 0.364213
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 10.189922000000001
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 9.239032
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 87.1107
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 0.184608
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 76.9387
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 0.450658
+    },
+    {
+      "base": "KWD",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 173.0027
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 27.499591
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 6.825711
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 0.302246
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 6.422923
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 51.9008
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-30",
+      "quote": "MKD",
+      "rate": 60.914
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 4.4040539999999995
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 31.7027
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 1.5021930000000001
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 33.3697
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 37.862345
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 30.983916
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 8.136376
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 0.364216
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 10.192159
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 9.238784
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 86.693
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 0.184439
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 76.9486
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 0.449422
+    },
+    {
+      "base": "KWD",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 172.787
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 27.499155000000002
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 6.8567409999999995
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 0.302186
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 6.415220000000001
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 51.8361
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-31",
+      "quote": "MKD",
+      "rate": 60.9144
+    },
+    {
+      "base": "ATS",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 4.404064
+    },
+    {
+      "base": "AUD",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 31.6006
+    },
+    {
+      "base": "BEF",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 1.5021969999999998
+    },
+    {
+      "base": "CAD",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 33.6455
+    },
+    {
+      "base": "CHF",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 37.588972
+    },
+    {
+      "base": "DEM",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 30.983991
+    },
+    {
+      "base": "DKK",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 8.110153
+    },
+    {
+      "base": "ESP",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.364217
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "FIM",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 10.192184
+    },
+    {
+      "base": "FRF",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 9.238187
+    },
+    {
+      "base": "GBP",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 85.8411
+    },
+    {
+      "base": "GRD",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.184448
+    },
+    {
+      "base": "HRK",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 8.285134000000001
+    },
+    {
+      "base": "IEP",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 76.9456
+    },
+    {
+      "base": "ITL",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.457665
+    },
+    {
+      "base": "KWD",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 172.085
+    },
+    {
+      "base": "NLG",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 27.498788
+    },
+    {
+      "base": "NOK",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 6.7933330000000005
+    },
+    {
+      "base": "PTE",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.30228
+    },
+    {
+      "base": "SEK",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 6.380564000000001
+    },
+    {
+      "base": "SIT",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 0.32156199999999996
+    },
+    {
+      "base": "USD",
+      "date": "1999-01-01",
+      "quote": "MKD",
+      "rate": 51.6255
+    },
+    {
+      "base": "ATS",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 4.403932
+    },
+    {
+      "base": "AUD",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 31.9059
+    },
+    {
+      "base": "BEF",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 1.50222
+    },
+    {
+      "base": "CAD",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 33.5521
+    },
+    {
+      "base": "CHF",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 37.691363
+    },
+    {
+      "base": "DEM",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 30.983991
+    },
+    {
+      "base": "DKK",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 8.135482
+    },
+    {
+      "base": "ESP",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.364208
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "FIM",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 10.192091
+    },
+    {
+      "base": "FRF",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 9.238322
+    },
+    {
+      "base": "GBP",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 85.9012
+    },
+    {
+      "base": "GRD",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.183808
+    },
+    {
+      "base": "HRK",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 8.285134000000001
+    },
+    {
+      "base": "IEP",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 76.9452
+    },
+    {
+      "base": "ITL",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.45632100000000003
+    },
+    {
+      "base": "KWD",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 172.085
+    },
+    {
+      "base": "NLG",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 27.498793999999997
+    },
+    {
+      "base": "NOK",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 6.830874
+    },
+    {
+      "base": "PTE",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.302268
+    },
+    {
+      "base": "SEK",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 6.386934
+    },
+    {
+      "base": "SIT",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 0.32156199999999996
+    },
+    {
+      "base": "USD",
+      "date": "1999-01-02",
+      "quote": "MKD",
+      "rate": 51.9387
+    },
+    {
+      "base": "ATS",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 4.403932
+    },
+    {
+      "base": "AUD",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 31.9059
+    },
+    {
+      "base": "BEF",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 1.50222
+    },
+    {
+      "base": "CAD",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 33.5521
+    },
+    {
+      "base": "CHF",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 37.691363
+    },
+    {
+      "base": "DEM",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 30.983991
+    },
+    {
+      "base": "DKK",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 8.135482
+    },
+    {
+      "base": "ESP",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.364208
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "FIM",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 10.192091
+    },
+    {
+      "base": "FRF",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 9.238322
+    },
+    {
+      "base": "GBP",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 85.9012
+    },
+    {
+      "base": "GRD",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.183808
+    },
+    {
+      "base": "HRK",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 8.285134000000001
+    },
+    {
+      "base": "IEP",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 76.9452
+    },
+    {
+      "base": "ITL",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.45632100000000003
+    },
+    {
+      "base": "KWD",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 172.085
+    },
+    {
+      "base": "NLG",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 27.498793999999997
+    },
+    {
+      "base": "NOK",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 6.830874
+    },
+    {
+      "base": "PTE",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.302268
+    },
+    {
+      "base": "SEK",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 6.386934
+    },
+    {
+      "base": "SIT",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 0.32156199999999996
+    },
+    {
+      "base": "USD",
+      "date": "1999-01-03",
+      "quote": "MKD",
+      "rate": 51.9387
+    },
+    {
+      "base": "ATS",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 4.403932
+    },
+    {
+      "base": "AUD",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 31.9059
+    },
+    {
+      "base": "BEF",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 1.50222
+    },
+    {
+      "base": "CAD",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 33.5521
+    },
+    {
+      "base": "CHF",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 37.691363
+    },
+    {
+      "base": "DEM",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 30.983991
+    },
+    {
+      "base": "DKK",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 8.135482
+    },
+    {
+      "base": "ESP",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.364208
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "EUR",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 60.5994
+    },
+    {
+      "base": "FIM",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 10.192091
+    },
+    {
+      "base": "FRF",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 9.238322
+    },
+    {
+      "base": "GBP",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 85.9012
+    },
+    {
+      "base": "GRD",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.183808
+    },
+    {
+      "base": "HRK",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 8.285134000000001
+    },
+    {
+      "base": "IEP",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 76.9452
+    },
+    {
+      "base": "ITL",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.031294
+    },
+    {
+      "base": "JPY",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.45632100000000003
+    },
+    {
+      "base": "KWD",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 173.129
+    },
+    {
+      "base": "NLG",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 27.498793999999997
+    },
+    {
+      "base": "NOK",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 6.830874
+    },
+    {
+      "base": "PTE",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.302268
+    },
+    {
+      "base": "SEK",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 6.386934
+    },
+    {
+      "base": "SIT",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 0.32156199999999996
+    },
+    {
+      "base": "USD",
+      "date": "1999-01-04",
+      "quote": "MKD",
+      "rate": 51.9387
+    }
+  ]
+}

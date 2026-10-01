@@ -1,10 +1,16 @@
 // Package nbrb fetches rates from the National Bank of the Republic of Belarus,
 // which publishes daily rates for about 30 currencies against BYN.
 //
-// BYN was redenominated on 2016-07-01; earlier data uses different currency
-// IDs. Fetch lists today's currencies, then asks the dynamics endpoint for each
-// one in chunks of up to a year. Like the Ruby adapter, the range starts at
-// after inclusive.
+// Rates are keyed by an internal currency ID, and NBRB issues a new ID when a
+// currency's terms change: it renumbered its currencies on 2021-07-09 (USD 145
+// became 431), and BRL moved from a monthly to a daily ID on 2022-08-01. Each
+// ID answers only for its own validity, so the currency reference, which lists
+// every ID with its dates, scale and periodicity, is what reaches back past the
+// latest renumbering.
+//
+// Fetch asks the dynamics endpoint for every daily ID within its own validity,
+// in chunks of up to a year. Like the Ruby adapter, the range starts at after
+// inclusive, and never before the BYN redenomination.
 package nbrb
 
 import (
@@ -20,9 +26,14 @@ import (
 )
 
 const (
-	ratesURL  = "https://api.nbrb.by/exrates/rates"
+	baseURL = "https://api.nbrb.by/exrates"
+	// The dynamics endpoint silently truncates longer ranges to 365 days.
 	chunkDays = 365
 )
+
+// redenomination is when BYN replaced BYR at 10,000:1. IDs that predate it
+// return BYR values before this date.
+var redenomination = adapter.Date(2016, 7, 1)
 
 func init() {
 	adapter.Register("NBRB", func(c *http.Client) adapter.Adapter { return New(c) })
@@ -38,71 +49,117 @@ func New(client *http.Client) *Adapter {
 	return &Adapter{adapter.NewBase(client)}
 }
 
+// BackfillRange implements adapter.Adapter: one dynamics chunk per window.
+func (a *Adapter) BackfillRange() int { return chunkDays }
+
+// currency is one daily ID from the currency reference, valid from From
+// through To.
 type currency struct {
-	ID    int
-	ISO   string
-	Scale int
+	ID       int
+	ISO      string
+	Scale    int
+	From, To time.Time
+}
+
+type reference struct {
+	CurID           *int    `json:"Cur_ID"`
+	CurAbbreviation *string `json:"Cur_Abbreviation"`
+	CurScale        *int    `json:"Cur_Scale"`
+	CurPeriodicity  *int    `json:"Cur_Periodicity"`
+	CurDateStart    *string `json:"Cur_DateStart"`
+	CurDateEnd      *string `json:"Cur_DateEnd"`
 }
 
 type row struct {
-	CurID           *int     `json:"Cur_ID"`
 	Date            *string  `json:"Date"`
-	CurAbbreviation *string  `json:"Cur_Abbreviation"`
-	CurScale        *int     `json:"Cur_Scale"`
 	CurOfficialRate *float64 `json:"Cur_OfficialRate"`
 }
 
 // Fetch implements adapter.Adapter.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
-	if after.IsZero() {
-		return nil, errors.New("a start date is required")
+	start := redenomination
+	if after.After(start) {
+		start = after
 	}
-	if upto.IsZero() {
-		upto = a.Today()
+	stop := upto
+	if stop.IsZero() {
+		stop = a.Today()
 	}
-	currencies, err := a.currentCurrencies(ctx)
+	currencies, err := a.dailyCurrencies(ctx)
 	if err != nil {
 		return nil, err
 	}
 	var rates []adapter.Rate
 	for _, c := range currencies {
-		for start := after; !start.After(upto); {
-			end := start.AddDate(0, 0, chunkDays-1)
-			if end.After(upto) {
-				end = upto
+		from, to := start, stop
+		if c.From.After(from) {
+			from = c.From
+		}
+		if c.To.Before(to) {
+			to = c.To
+		}
+		for chunkStart := from; !chunkStart.After(to); {
+			chunkEnd := chunkStart.AddDate(0, 0, chunkDays-1)
+			if chunkEnd.After(to) {
+				chunkEnd = to
 			}
-			chunk, err := a.fetchDynamics(ctx, c, start, end)
+			chunk, err := a.fetchDynamics(ctx, c, chunkStart, chunkEnd)
 			if err != nil {
 				return nil, err
 			}
 			rates = append(rates, chunk...)
-			start = end.AddDate(0, 0, 1)
+			chunkStart = chunkEnd.AddDate(0, 0, 1)
 		}
 	}
 	return rates, nil
 }
 
-func (a *Adapter) currentCurrencies(ctx context.Context) ([]currency, error) {
-	body, err := a.Get(ctx, ratesURL, url.Values{"periodicity": {"0"}})
+func (a *Adapter) dailyCurrencies(ctx context.Context) ([]currency, error) {
+	body, err := a.Get(ctx, baseURL+"/currencies", nil)
 	if err != nil {
 		return nil, err
 	}
-	var rows []row
-	if err := json.Unmarshal(body, &rows); err != nil {
+	return parseCurrencies(body)
+}
+
+// parseCurrencies keeps the daily IDs (periodicity 0) of the currency
+// reference.
+func parseCurrencies(data []byte) ([]currency, error) {
+	var refs []reference
+	if err := json.Unmarshal(data, &refs); err != nil {
 		return nil, err
 	}
-	currencies := make([]currency, 0, len(rows))
-	for _, r := range rows {
-		if r.CurID == nil || r.CurAbbreviation == nil || r.CurScale == nil {
-			return nil, errors.New("currency row missing Cur_ID, Cur_Abbreviation or Cur_Scale")
+	var currencies []currency
+	for _, r := range refs {
+		if r.CurPeriodicity == nil {
+			return nil, errors.New("currency missing Cur_Periodicity")
 		}
-		currencies = append(currencies, currency{*r.CurID, *r.CurAbbreviation, *r.CurScale})
+		if *r.CurPeriodicity != 0 {
+			continue
+		}
+		if r.CurID == nil || r.CurAbbreviation == nil || r.CurScale == nil || r.CurDateStart == nil ||
+			r.CurDateEnd == nil {
+			return nil, errors.New("currency missing Cur_ID, Cur_Abbreviation, Cur_Scale, Cur_DateStart or Cur_DateEnd")
+		}
+		from, err := parseDate(*r.CurDateStart)
+		if err != nil {
+			return nil, err
+		}
+		to, err := parseDate(*r.CurDateEnd)
+		if err != nil {
+			return nil, err
+		}
+		currencies = append(currencies, currency{*r.CurID, *r.CurAbbreviation, *r.CurScale, from, to})
 	}
 	return currencies, nil
 }
 
+func parseDate(s string) (time.Time, error) {
+	return adapter.ParseDate(s, "2006-01-02T15:04:05", time.DateOnly)
+}
+
 func (a *Adapter) fetchDynamics(ctx context.Context, c currency, start, end time.Time) ([]adapter.Rate, error) {
-	body, err := a.Get(ctx, fmt.Sprintf("%s/dynamics/%d", ratesURL, c.ID), url.Values{
+	body, err := a.Get(ctx, fmt.Sprintf("%s/rates/dynamics/%d", baseURL, c.ID), url.Values{
 		"startDate": {start.Format(time.DateOnly)},
 		"endDate":   {end.Format(time.DateOnly)},
 	})
@@ -145,7 +202,7 @@ func rowDate(r row) (time.Time, error) {
 	if r.Date == nil {
 		return time.Time{}, errors.New("row missing Date")
 	}
-	return adapter.ParseDate(*r.Date, "2006-01-02T15:04:05", time.DateOnly)
+	return parseDate(*r.Date)
 }
 
 func weekend(d time.Time) bool {

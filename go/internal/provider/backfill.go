@@ -152,9 +152,9 @@ func (in *Ingester) backfill(ctx context.Context, p Provider, after time.Time, l
 	log.Info("backfilling", "from", from)
 
 	// Many adapters read after as exclusive, but coverage_start is the first
-	// day the source publishes. Start the day before it, and keep out anything
-	// the source dates earlier (LB's archive has a row the day before its
-	// start).
+	// day to store. Start the day before it, and keep out anything dated
+	// earlier: inclusive adapters return that day too, and BCCR pads each
+	// window to 100 days.
 	var floor time.Time
 	if !after.IsZero() && after.Equal(p.CoverageStart) {
 		floor = after
@@ -258,9 +258,9 @@ func (in *Ingester) optimize(ctx context.Context) error {
 	return err
 }
 
-// refresh rebuilds what the inserted records feed: provider rollups and, for
-// blending providers, their blended buckets, currency summaries, and the stored
-// daily blend.
+// refresh rebuilds what the inserted records feed: the spike screening around
+// them, provider rollups and, for blending providers, their blended buckets,
+// currency summaries, and the stored daily blend.
 func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, records []adapter.Rate) error {
 	var dates []time.Time
 	var codes []string
@@ -275,11 +275,30 @@ func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, recor
 		}
 	}
 
+	// Usually the previous observation, judged now that its successor has
+	// arrived.
+	rescreened, err := rates.RefreshSpikes(ctx, q, p.Key, dates)
+	if err != nil {
+		return err
+	}
 	buckets, err := rates.RefreshRollups(ctx, q, p.Key, dates)
 	if err != nil {
 		return err
 	}
 	if p.Blends() {
+		// Rescreened dates leave the provider's own averages alone but change
+		// the blended buckets that hold them.
+		for _, t := range rates.Rollups {
+			extra, err := rates.Buckets(ctx, q, p.Key, t.Precision, rescreened)
+			if err != nil {
+				return err
+			}
+			for _, b := range extra {
+				if !slices.Contains(buckets[t.Precision], b) {
+					buckets[t.Precision] = append(buckets[t.Precision], b)
+				}
+			}
+		}
 		if err := in.blend().RefreshRollupsTx(ctx, q, buckets); err != nil {
 			return fmt.Errorf("refresh blended rollups: %w", err)
 		}
@@ -291,11 +310,12 @@ func (in *Ingester) refresh(ctx context.Context, q db.Querier, p Provider, recor
 		return nil
 	}
 	// A late arrival at date d joins the carry-forward contributor set of
-	// anchors through d + LookbackDays, so those stored blends change too.
-	// Inside the transaction: the write lock serialises concurrent backfills'
-	// refreshes, and a failed refresh rolls back the insert so the next fetch
-	// re-ingests and retries.
-	first, last := slices.MinFunc(dates, time.Time.Compare), slices.MaxFunc(dates, time.Time.Compare)
+	// anchors through d + LookbackDays, so those stored blends change too, as
+	// do those of a rescreened date. Inside the transaction: the write lock
+	// serialises concurrent backfills' refreshes, and a failed refresh rolls
+	// back the insert so the next fetch re-ingests and retries.
+	changed := append(slices.Clone(dates), rescreened...)
+	first, last := slices.MinFunc(changed, time.Time.Compare), slices.MaxFunc(changed, time.Time.Compare)
 	if err := in.blend().RefreshTx(ctx, q, first, last.AddDate(0, 0, rates.LookbackDays)); err != nil {
 		return fmt.Errorf("refresh blend: %w", err)
 	}

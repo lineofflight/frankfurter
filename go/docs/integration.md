@@ -65,6 +65,11 @@ A full local backfill from an empty database turned up these gaps:
   carries the 1994 ruble before 2000 and NBKR re-dates a frozen BYR rate weekly. The adapters relabel or skip them,
   `adapter.SuccessorCode` chains, and migration 043 repairs stored rows and rollups but leaves the blends for
   `frankfurter blend-rebuild` (Ruby #745). Fixed on both sides.
+- NBRM labels the ECU XBA and keeps the label to May 1999, quoting its EUR value. The adapter emits XEU before the euro
+  and EUR after, and migration 044 repairs stored rows (Ruby #747). Fixed on both sides.
+- NBRB asked only today's currency IDs for history, so everything before its 2021 renumbering was missing. The adapter
+  now reads the currency reference and asks every daily ID within its own validity, from 2016-07-01 (Ruby #748). Fixed
+  on both sides.
 
 ## Left outside go/
 

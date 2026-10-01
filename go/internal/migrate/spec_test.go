@@ -1441,3 +1441,310 @@ func TestSuccessorValuesMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *t
 		t.Fatal("touched the blends")
 	}
 }
+
+// migratedDatabase is the run_migration_script setup of the NBRM ECU and rate
+// spikes migration specs: a database migrated to version with providers
+// seeded.
+func migratedDatabase(t *testing.T, version int) *sql.DB {
+	t.Helper()
+	conn, _ := empty(t)
+	migrateTo(t, conn, version)
+	if err := rates.SeedProviders(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	return conn
+}
+
+// rollUp fills both provider rollup tables from every stored rate, as the
+// migration specs do by hand.
+func rollUp(t *testing.T, conn *sql.DB) {
+	t.Helper()
+	for _, t2 := range rates.Rollups {
+		b := rates.BucketSQL(t2.Precision, "date")
+		mustExec(t, conn, "INSERT INTO "+t2.Name+" (bucket_date, provider, base, quote, rate) SELECT "+b+
+			", provider, base, quote, avg(rate) FROM rates GROUP BY "+b+", provider, base, quote")
+	}
+}
+
+// blendSnapshot reads every blended table.
+func blendSnapshot(t *testing.T, conn *sql.DB) map[string][]blendRow {
+	t.Helper()
+	out := map[string][]blendRow{}
+	for _, table := range []string{"blended_rates", "blended_weekly_rates", "blended_monthly_rates"} {
+		out[table] = blendRows(t, conn, table, "")
+	}
+	return out
+}
+
+// spec/nbrm_ecu_migration_spec.rb
+func TestNBRMECUMigrationRelabelsTheECUCollapsesItsEuroDuplicatesAndLeavesTheBlendsToARebuild(t *testing.T) {
+	ctx := context.Background()
+	today := rates.Today()
+	conn := migratedDatabase(t, 43)
+
+	rows := []rate{
+		{provider: "NBRM", date: "1996-06-03", base: "XBA", quote: "MKD", mid: f(50.2099)},
+		{provider: "NBRM", date: "1996-06-03", base: "USD", quote: "MKD", mid: f(40.781)},
+		{provider: "NBRM", date: "1998-12-31", base: "XBA", quote: "MKD", mid: f(60.9144)},
+		{provider: "NBRM", date: "1999-01-04", base: "XBA", quote: "MKD", mid: f(60.5994)},
+		{provider: "NBRM", date: "1999-01-04", base: "EUR", quote: "MKD", mid: f(60.5994)},
+		{provider: "NBRM", date: "1999-05-04", base: "XBA", quote: "MKD", mid: f(60.6199)},
+		{provider: "NBRM", date: "1999-05-04", base: "EUR", quote: "MKD", mid: f(60.6199)},
+		{provider: "CNB", date: "1996-06-03", base: "XEU", quote: "CZK", mid: f(34.316)},
+		{provider: "CNB", date: "1996-06-03", base: "USD", quote: "CZK", mid: f(27.86)},
+	}
+	insertRates(t, conn, rows...)
+	var codes []string
+	for _, r := range rows {
+		codes = append(codes, r.base, r.quote)
+	}
+	if err := rates.RefreshSummaries(ctx, conn, codes, ""); err != nil {
+		t.Fatal(err)
+	}
+	rollUp(t, conn)
+	rebuildBlends(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'XBA' AND date = '1996-06-03'") == 0 {
+		t.Fatal("fixture blend missing XBA")
+	}
+	if count(t, conn, "SELECT count(*) FROM currencies WHERE iso_code = 'XBA'") == 0 {
+		t.Fatal("fixture catalogue missing XBA")
+	}
+	before := blendSnapshot(t, conn)
+
+	setup(t, conn)
+	if v := version(t, conn); v < 44 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	type stored struct {
+		provider, date, base, quote string
+		mid                         float64
+	}
+	result, err := conn.Query("SELECT provider, date(date), base, quote, mid FROM rates WHERE base != 'USD' " +
+		"ORDER BY provider, date, base, quote")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []stored
+	for result.Next() {
+		var s stored
+		if err := result.Scan(&s.provider, &s.date, &s.base, &s.quote, &s.mid); err != nil {
+			t.Fatal(err)
+		}
+		got = append(got, s)
+	}
+	result.Close()
+	want := []stored{
+		{"CNB", "1996-06-03", "XEU", "CZK", 34.316},
+		{"NBRM", "1996-06-03", "XEU", "MKD", 50.2099},
+		{"NBRM", "1998-12-31", "XEU", "MKD", 60.9144},
+		{"NBRM", "1999-01-04", "EUR", "MKD", 60.5994},
+		{"NBRM", "1999-05-04", "EUR", "MKD", 60.6199},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("wrong repaired rows: %+v", got)
+	}
+
+	if count(t, conn, "SELECT count(*) FROM weekly_rates WHERE base = 'XBA'")+
+		count(t, conn, "SELECT count(*) FROM monthly_rates WHERE base = 'XBA'") != 0 {
+		t.Fatal("rollup kept XBA")
+	}
+	var eur []float64
+	result, err = conn.Query("SELECT rate FROM weekly_rates WHERE provider = 'NBRM' AND bucket_date = ? AND "+
+		"base = 'EUR'", bucket(rates.Week, "1999-05-04"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for result.Next() {
+		var v float64
+		if err := result.Scan(&v); err != nil {
+			t.Fatal(err)
+		}
+		eur = append(eur, v)
+	}
+	result.Close()
+	if want := []float64{60.6199}; !reflect.DeepEqual(eur, want) {
+		t.Fatalf("stale EUR rollup: %v", eur)
+	}
+
+	coverage := func(code string) [][2]string {
+		t.Helper()
+		result, err := conn.Query("SELECT date(start_date), date(end_date) FROM currency_coverages WHERE "+
+			"provider_key = 'NBRM' AND iso_code = ?", code)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer result.Close()
+		var out [][2]string
+		for result.Next() {
+			var c [2]string
+			if err := result.Scan(&c[0], &c[1]); err != nil {
+				t.Fatal(err)
+			}
+			out = append(out, c)
+		}
+		return out
+	}
+	if got := coverage("XBA"); got != nil {
+		t.Fatalf("XBA coverage kept: %v", got)
+	}
+	if got, want := coverage("XEU"), [][2]string{{"1996-06-03", "1998-12-31"}}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("XEU coverage %v", got)
+	}
+	if got, want := coverage("EUR"), [][2]string{{"1999-01-04", "1999-05-04"}}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("EUR coverage %v", got)
+	}
+	if count(t, conn, "SELECT count(*) FROM currencies WHERE iso_code = 'XBA'") != 0 {
+		t.Fatal("XBA still catalogued")
+	}
+
+	if got := blendSnapshot(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("touched the blends")
+	}
+
+	rebuildBlends(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'XBA'") != 0 {
+		t.Fatal("XBA still blended")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'XEU' AND date = '1996-06-03'") == 0 {
+		t.Fatal("XEU blend missing")
+	}
+}
+
+// "rolls back on conflicting duplicates"
+func TestNBRMECUMigrationRollsBackOnConflictingDuplicates(t *testing.T) {
+	conn := migratedDatabase(t, 43)
+	insertRates(t, conn,
+		rate{provider: "NBRM", date: "1999-01-04", base: "XBA", quote: "MKD", mid: f(60.5994)},
+		rate{provider: "NBRM", date: "1999-01-04", base: "EUR", quote: "MKD", mid: f(60.5995)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('1999-01-04', 'MKD', 36.0)")
+	before := allRates(t, conn)
+
+	err := Up(context.Background(), conn)
+	if err == nil {
+		t.Fatal("accepted conflicting components")
+	}
+	if !strings.Contains(err.Error(), "conflicting XBA/EUR components") {
+		t.Fatal(err)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("partial repair committed")
+	}
+	if v := version(t, conn); v != 43 {
+		t.Fatalf("migration marked complete: version %d", v)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
+	}
+}
+
+// "leaves databases without NBRM XBA history alone"
+func TestNBRMECUMigrationLeavesDatabasesWithoutNBRMXBAHistoryAlone(t *testing.T) {
+	conn := migratedDatabase(t, 43)
+	insertRates(t, conn,
+		rate{provider: "NBRM", date: "1999-01-04", base: "EUR", quote: "MKD", mid: f(60.5994)},
+		rate{provider: "CBBH", date: "1998-01-06", base: "XEU", quote: "BAM", mid: f(1.97509972)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('1999-01-04', 'MKD', 36.0)")
+	before := allRates(t, conn)
+	if err := Up(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	if v := version(t, conn); v < 44 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("changed unaffected rows")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
+	}
+}
+
+// spec/rate_spikes_migration_spec.rb
+func TestRateSpikesMigrationFlagsStoredOneDayTyposAndLeavesRatesAndBlendsToARebuild(t *testing.T) {
+	today := rates.Today()
+	conn := migratedDatabase(t, 44)
+
+	var rows []rate
+	for _, d := range []struct {
+		date string
+		mid  float64
+	}{{"2024-01-18", 3.26}, {"2024-01-19", 3.26}, {"2024-01-22", 43.26}, {"2024-01-23", 3.26}} {
+		rows = append(rows,
+			rate{provider: "CBG", date: d.date, base: "SLE", quote: "GMD", mid: f(d.mid)},
+			rate{provider: "CBG", date: d.date, base: "USD", quote: "GMD", mid: f(70.0)},
+		)
+	}
+	// Lebanon's 2023 devaluation persists, so it stays in the blend.
+	for _, d := range []struct {
+		date string
+		mid  float64
+	}{{"2023-01-31", 1507.5}, {"2023-02-01", 15000.0}, {"2023-02-02", 15000.0}} {
+		rows = append(rows, rate{provider: "BDL", date: d.date, base: "USD", quote: "LBP", mid: f(d.mid)})
+	}
+	insertRates(t, conn, rows...)
+	rollUp(t, conn)
+	rebuildBlends(t, conn, today)
+	typo := func() (float64, bool) {
+		t.Helper()
+		var v float64
+		err := conn.QueryRow("SELECT rate FROM blended_rates WHERE quote = 'SLE' AND date = '2024-01-22'").Scan(&v)
+		if err == sql.ErrNoRows {
+			return 0, false
+		}
+		if err != nil {
+			t.Fatal(err)
+		}
+		return v, true
+	}
+	if v, ok := typo(); !ok || math.Abs(v-70.0/43.26) >= 1e-9 {
+		t.Fatalf("fixture blend missing the typo: %v (%v)", v, ok)
+	}
+	before := blendSnapshot(t, conn)
+	stored := allRates(t, conn)
+
+	setup(t, conn)
+	if v := version(t, conn); v < 45 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	result, err := conn.Query("SELECT provider, date(date), base, quote FROM rate_spikes")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var spikes [][4]string
+	for result.Next() {
+		var s [4]string
+		if err := result.Scan(&s[0], &s[1], &s[2], &s[3]); err != nil {
+			t.Fatal(err)
+		}
+		spikes = append(spikes, s)
+	}
+	result.Close()
+	if want := [][4]string{{"CBG", "2024-01-22", "SLE", "GMD"}}; !reflect.DeepEqual(spikes, want) {
+		t.Fatalf("wrong spikes: %v", spikes)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, stored) {
+		t.Fatal("changed rates")
+	}
+	if got := blendSnapshot(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("touched the blends")
+	}
+
+	rebuildBlends(t, conn, today)
+	if _, ok := typo(); ok {
+		t.Fatal("typo still blended")
+	}
+	for _, r := range blendRows(t, conn, "blended_rates", "quote = 'SLE'") {
+		if math.Abs(r.Rate-70.0/3.26) >= 1e-9 {
+			t.Fatalf("SLE blend %v", r)
+		}
+	}
+	var lbp float64
+	if err := conn.QueryRow("SELECT rate FROM blended_rates WHERE quote = 'LBP' AND date = '2023-02-02'").
+		Scan(&lbp); err != nil || lbp != 15000.0 {
+		t.Fatalf("LBP blend %v (%v)", lbp, err)
+	}
+}

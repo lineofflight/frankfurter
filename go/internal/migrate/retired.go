@@ -276,8 +276,33 @@ var successorLabels = []retiredLabel{
 // them. Run `frankfurter blend-rebuild` after deploy; it rebuilds in place and
 // keeps the tables serving.
 func relabelSuccessorValues(ctx context.Context, q db.Querier) error {
-	checks := make([]string, len(successorLabels))
-	for i, l := range successorLabels {
+	return relabelStored(ctx, q, successorLabels)
+}
+
+// nbrmECULabels are 044's repairs. NBRM codes the ECU as XBA, the bond-market
+// European Composite Unit, and keeps the label to May 1999, quoting the same
+// value it publishes under EUR, so the rows from 1999 collapse into NBRM's own
+// EUR rows.
+var nbrmECULabels = []retiredLabel{
+	{provider: "NBRM", from: "XBA", to: "XEU", before: "1999-01-01"},
+	{provider: "NBRM", from: "XBA", to: "EUR", since: "1999-01-01"},
+}
+
+// relabelNBRMECU is 044. The adapter now emits XEU before the euro and EUR
+// after; this repairs what is stored as 043 does, rebuilding NBRM's rollups
+// for every affected bucket and recomputing coverage. The blend tables are
+// left for `frankfurter blend-rebuild`.
+func relabelNBRMECU(ctx context.Context, q db.Querier) error {
+	return relabelStored(ctx, q, nbrmECULabels)
+}
+
+// relabelStored applies 043's and 044's repairs: each label's rows move to
+// their corrected label and unit (or are deleted), the affected provider
+// rollup buckets are rebuilt and the labels' codes resummarized. It does
+// nothing when no label matches a stored row.
+func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) error {
+	checks := make([]string, len(labels))
+	for i, l := range labels {
 		checks[i] = "EXISTS (SELECT 1 FROM `rates` WHERE " + l.scope() + ")"
 	}
 	var needed bool
@@ -296,7 +321,7 @@ func relabelSuccessorValues(ctx context.Context, q db.Querier) error {
 	buckets := map[bucketKey][]string{}
 	var providers []string
 	codes := map[string][]string{}
-	for _, l := range successorLabels {
+	for _, l := range labels {
 		for i, t := range retiredRollups {
 			dates, err := column(ctx, q, "SELECT DISTINCT "+t.bucket+" FROM `rates` WHERE "+l.scope())
 			if err != nil {

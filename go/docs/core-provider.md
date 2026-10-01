@@ -34,9 +34,10 @@ runs everything.
     the shared day, which `ON CONFLICT DO NOTHING` skips. A one-day range still steps past `upto`, since only an
     inclusive adapter can use one and it would otherwise never advance.
   - Per batch: `rates.Reject`, `rates.Normalize`, drift warning for `Revises()` adapters, then one `BEGIN IMMEDIATE`
-    transaction: insert (`ON CONFLICT DO NOTHING`), and when anything was inserted `rates.RefreshRollups`,
-    `Blend.RefreshRollupsTx` (blending providers), `rates.RefreshSummaries`, `Blend.RefreshTx(min, max + 14)`
-    (blending providers). After commit: `Cache.PurgeDebounced`, `PRAGMA optimize`.
+    transaction: insert (`ON CONFLICT DO NOTHING`), and when anything was inserted `rates.RefreshSpikes`,
+    `rates.RefreshRollups`, `Blend.RefreshRollupsTx` (blending providers, with the buckets of rescreened dates added),
+    `rates.RefreshSummaries`, `Blend.RefreshTx(min, max + 14)` over the inserted and rescreened dates (blending
+    providers). After commit: `Cache.PurgeDebounced`, `PRAGMA optimize`.
   - `Adapter` overrides the registry (tests use fakes). `Today` defaults to `rates.Today`.
   - A write lock (an unexported mutex) serialises the backfill's writes, the batch transaction and `PRAGMA optimize`,
     across every backfill sharing the `Ingester`. Fetching, validation and reads (`LastSynced`, the drift check) run

@@ -19,11 +19,11 @@ type v1CurrencyNames struct {
 }
 
 func loadV1CurrencyNames(ctx context.Context, conn *sql.DB, today time.Time) (*v1CurrencyNames, error) {
-	nonBlending, err := rates.NonBlendingKeys(ctx, conn)
+	filter, err := rates.LoadBlendFilter(ctx, conn)
 	if err != nil {
 		return nil, err
 	}
-	query := rates.Daily.Blendable(nonBlending).
+	query := rates.Daily.Blendable(filter).
 		Filter("provider = 'ECB'").
 		Filter("date >= " + db.LitDate(today.AddDate(0, 0, -rates.LookbackDays)) + " AND date <= " + db.LitDate(today)).
 		Columns("date, base, quote, provider, rate").

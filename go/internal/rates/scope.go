@@ -148,48 +148,94 @@ func NonBlendingKeys(ctx context.Context, q db.Querier) ([]string, error) {
 	return keys, rows.Err()
 }
 
-// Blendable restricts t to rows that may enter a blend: named currencies,
-// daily-frequency providers (all but nonBlending), before any terminal date.
-// Rollups also recompute terminal-straddling buckets (see eligibleRollups).
-func (t Table) Blendable(nonBlending []string) Query {
-	q := t.Dataset().Filter(NamedCondition())
-	if len(nonBlending) > 0 {
-		q = q.Filter("provider NOT IN " + db.LitList(nonBlending))
-	}
-	q = q.Filter(CurrentCondition(t.DateColumn, t.Precision))
-	if t.Precision == Day {
-		return q
-	}
-	return eligibleRollups(q)
+// BlendFilter is what Blendable reads from the database besides the rows: the
+// providers whose rows never blend, and whether rate_spikes exists. Migration
+// 045 creates it, and older migrations blend through Blendable too.
+type BlendFilter struct {
+	NonBlending []string
+	Spikes      bool
 }
 
-// eligibleRollups recomputes a terminal-straddling pair only when expired daily
-// observations contaminate its average. Stored precision stays for every
-// unaffected pair, including boundary buckets whose daily history is incomplete
-// or absent.
-func eligibleRollups(q Query) Query {
+// LoadBlendFilter reads the BlendFilter from q.
+func LoadBlendFilter(ctx context.Context, q db.Querier) (BlendFilter, error) {
+	keys, err := NonBlendingKeys(ctx, q)
+	if err != nil {
+		return BlendFilter{}, err
+	}
+	var spikes bool
+	err = q.QueryRowContext(ctx,
+		"SELECT EXISTS (SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'rate_spikes')").Scan(&spikes)
+	return BlendFilter{NonBlending: keys, Spikes: spikes}, err
+}
+
+// SpikedCondition matches a daily observation flagged in rate_spikes
+// (RateScopes.spiked). The flags' columns are renamed so the condition names
+// no table and holds when a caller re-aliases rates, as coverage does.
+func SpikedCondition() string {
+	return "EXISTS (SELECT * FROM (SELECT provider AS spike_provider, date AS spike_date, base AS spike_base, " +
+		"quote AS spike_quote FROM rate_spikes) AS t1 WHERE (spike_provider = provider) AND (spike_date = date) AND " +
+		"(spike_base = base) AND (spike_quote = quote))"
+}
+
+// Blendable restricts t to rows that may enter a blend: named currencies,
+// daily-frequency providers (all but f.NonBlending), before any terminal date,
+// and, once rate_spikes exists, no one-day spikes. Rollups instead recompute
+// the buckets that expired or spiked observations contaminate (see
+// eligibleRollups).
+func (t Table) Blendable(f BlendFilter) Query {
+	q := t.Dataset().Filter(NamedCondition())
+	if len(f.NonBlending) > 0 {
+		q = q.Filter("provider NOT IN " + db.LitList(f.NonBlending))
+	}
+	q = q.Filter(CurrentCondition(t.DateColumn, t.Precision))
+	if t.Precision != Day {
+		return eligibleRollups(q, f.Spikes)
+	}
+	if f.Spikes {
+		q = q.Filter("NOT (" + SpikedCondition() + ")")
+	}
+	return q
+}
+
+// eligibleRollups recomputes a pair's average from its eligible daily
+// observations only when an expired or spiked one contaminates it. Stored
+// precision stays for every unaffected pair, including boundary buckets whose
+// daily history is incomplete or absent.
+func eligibleRollups(q Query, spikes bool) Query {
 	t := q.Table
+	bucket := BucketSQL(t.Precision, "date")
+	samePair := "(provider = " + t.Name + ".provider) AND (base = " + t.Name + ".base) AND (quote = " + t.Name +
+		".quote)"
+	observations := "FROM rates WHERE " + samePair + " AND " + SpanSQL(t.Precision, t.Name+".bucket_date", "date") +
+		" AND (" + bucket + " = " + t.Name + ".bucket_date)"
+	expired := ExpiredCondition("date", Day)
+	eligible := observations + " AND NOT (" + expired + ")"
+	var contaminations []string
+
 	entries := currency.DefunctCurrencies()
-	if len(entries) == 0 {
+	if len(entries) > 0 {
+		boundaries := make([]string, len(entries))
+		for i, e := range entries {
+			last := BucketSQL(t.Precision, db.LitDate(e.TerminalDate.AddDate(0, 0, -1)))
+			terminal := BucketSQL(t.Precision, db.LitDate(e.TerminalDate))
+			code := db.Lit(e.ISOCode)
+			boundaries[i] = "((bucket_date = " + last + ") AND (" + last + " = " + terminal + ") AND ((base = " +
+				code + ") OR (quote = " + code + ")))"
+		}
+		contaminations = append(contaminations, "("+strings.Join(boundaries, " OR ")+") AND (EXISTS (SELECT * "+
+			observations+" AND ("+expired+")))")
+	}
+	if spikes {
+		contaminations = append(contaminations, "EXISTS (SELECT * FROM rate_spikes WHERE "+samePair+" AND ("+
+			bucket+" = "+t.Name+".bucket_date))")
+		eligible += " AND NOT (" + SpikedCondition() + ")"
+	}
+	if len(contaminations) == 0 {
 		return q
 	}
-	boundaries := make([]string, len(entries))
-	for i, e := range entries {
-		last := BucketSQL(t.Precision, db.LitDate(e.TerminalDate.AddDate(0, 0, -1)))
-		terminal := BucketSQL(t.Precision, db.LitDate(e.TerminalDate))
-		code := db.Lit(e.ISOCode)
-		boundaries[i] = "((bucket_date = " + last + ") AND (" + last + " = " + terminal + ") AND ((base = " + code +
-			") OR (quote = " + code + ")))"
-	}
 
-	observations := "FROM rates WHERE (provider = " + t.Name + ".provider) AND (base = " + t.Name + ".base) AND (quote = " +
-		t.Name + ".quote) AND (" + BucketSQL(t.Precision, "date") + " = " + t.Name + ".bucket_date)"
-	expired := ExpiredCondition("date", Day)
-	contaminated := "(" + strings.Join(boundaries, " OR ") + ") AND (EXISTS (SELECT * " + observations + " AND (" +
-		expired + ")))"
-	eligible := observations + " AND NOT (" + expired + ")"
+	contaminated := "(" + strings.Join(contaminations, ") OR (") + ")"
 	value := "(CASE WHEN (" + contaminated + ") THEN (SELECT avg(rate) " + eligible + ") ELSE rate END) AS rate"
-
 	inner := q.Filter("NOT (" + contaminated + ") OR (EXISTS (SELECT * " + eligible + "))").
 		Columns("bucket_date, provider, base, quote, " + value)
 	return Query{Table: t, From: "(" + inner.SQL() + ") AS " + t.Name}

@@ -137,10 +137,10 @@ type Query struct {
 	// Coverage counts grouped chunks by how they were served.
 	Coverage RollupCoverage
 
-	held        *heavyslots.Slots
-	lookback    int
-	nonBlending []string
-	loaded      bool
+	held     *heavyslots.Slots
+	lookback int
+	filter   rates.BlendFilter
+	loaded   bool
 
 	checkHook func()       // test seam: runs on every deadline check
 	emitHook  func() error // test seam: runs before every live blend
@@ -522,17 +522,17 @@ func dateBetween(col string, start, end time.Time) string {
 	return col + " >= " + db.LitDate(start) + " AND " + col + " <= " + db.LitDate(end)
 }
 
-// load reads what the query needs from the providers table: the non-blending
-// keys and the carry-forward window.
+// load reads what the query needs from the database: the blend filter and the
+// carry-forward window.
 func (q *Query) load(ctx context.Context) error {
 	if q.loaded {
 		return nil
 	}
-	keys, err := rates.NonBlendingKeys(ctx, q.db)
+	filter, err := rates.LoadBlendFilter(ctx, q.db)
 	if err != nil {
 		return err
 	}
-	q.nonBlending = keys
+	q.filter = filter
 	// Carry-forward window: the named providers' own, else the blend's (#646).
 	q.lookback = 0
 	for _, key := range q.providers {
@@ -566,7 +566,7 @@ func (q *Query) rawScope(ctx context.Context, t rates.Table) (rates.Query, error
 		return rates.Query{}, err
 	}
 	if q.providers == nil {
-		return t.Blendable(q.nonBlending), nil
+		return t.Blendable(q.filter), nil
 	}
 	scope := t.Dataset().Filter("provider IN " + db.LitList(q.providers))
 	if !q.single() {

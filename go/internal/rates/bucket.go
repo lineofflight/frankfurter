@@ -62,3 +62,16 @@ func Bucket(p Precision, t time.Time) time.Time {
 	}
 	return time.Date(y, m, t.Day(), 0, 0, 0, 0, time.UTC)
 }
+
+// SpanSQL is Bucket.span: a date range holding every date of the bucket
+// bucketExpr names at precision p, so a scan can seek a date index on dateExpr
+// before the exact bucket test. Week buckets count whole weeks from 1 January,
+// so a week's dates sit from 7 days before its bucket date to 5 after.
+func SpanSQL(p Precision, bucketExpr, dateExpr string) string {
+	from, to := "+0 days", "+1 month"
+	if p == Week {
+		from, to = "-7 days", "+6 days"
+	}
+	return "(" + dateExpr + " >= date(" + bucketExpr + ", '" + from + "')) AND (" + dateExpr + " < date(" + bucketExpr +
+		", '" + to + "'))"
+}

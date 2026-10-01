@@ -103,7 +103,7 @@ func TestFetchDedupesWeekendFilesOnBulletinDate(t *testing.T) {
 func TestFetchStartsAtFirstFile(t *testing.T) {
 	// A full backfill opens the day before coverage starts. URLs before the
 	// 26.11.1993 file redirect.
-	rates := fetch(t, adapter.Date(1993, 11, 25), adapter.Date(1993, 11, 26))
+	rates := fetch(t, adapter.Date(1993, 11, 24), adapter.Date(1993, 11, 26))
 	var dates []time.Time
 	for _, r := range rates {
 		if !slices.ContainsFunc(dates, r.Date.Equal) {

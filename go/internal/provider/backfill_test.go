@@ -559,7 +559,8 @@ func TestBackfillChunksWhenAdapterHasBackfillRange(t *testing.T) {
 }
 
 // dailyAdapter serves one EUR/USD row a day through today, from the day after
-// after, or from after itself when inclusive (as LB's archive does).
+// after, or from after itself when inclusive, so an inclusive adapter also
+// returns the day before coverage_start.
 func dailyAdapter(today time.Time, inclusive bool, params *[][2]time.Time) *fakeAdapter {
 	return &fakeAdapter{fetch: func(after, upto time.Time) ([]adapter.Rate, error) {
 		*params = append(*params, [2]time.Time{after, upto})

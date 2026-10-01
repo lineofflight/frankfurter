@@ -121,11 +121,11 @@ func uniq(values []string) []string {
 }
 
 func blendable(ctx context.Context, q db.Querier, t rates.Table) (rates.Query, error) {
-	nonBlending, err := rates.NonBlendingKeys(ctx, q)
+	filter, err := rates.LoadBlendFilter(ctx, q)
 	if err != nil {
 		return rates.Query{}, err
 	}
-	return t.Blendable(nonBlending), nil
+	return t.Blendable(filter), nil
 }
 
 // addMonths is Ruby's Date#>>: the same day n months on, clamped to the end of
