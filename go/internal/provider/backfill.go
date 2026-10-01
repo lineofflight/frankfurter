@@ -122,23 +122,14 @@ func (in *Ingester) Backfill(ctx context.Context, p Provider) {
 		return
 	}
 	if last.IsZero() {
-		last = p.coverageCursor()
+		last = p.CoverageStart
 	}
 	in.BackfillAfter(ctx, p, last)
 }
 
-// coverageCursor is the cursor that backfills from coverage_start itself: the
-// day before, as adapters take after as exclusive. Zero when coverage_start is
-// NULL. Rows an inclusive adapter returns for that day are dropped in store.
-func (p Provider) coverageCursor() time.Time {
-	if p.CoverageStart.IsZero() {
-		return time.Time{}
-	}
-	return p.CoverageStart.AddDate(0, 0, -1)
-}
-
 // BackfillAfter fetches the provider's rows dated after `after` (zero: from the
-// start) and stores them. Each fetched batch commits on its own. Failures are
+// start) and stores them. An after equal to coverage_start backfills from
+// coverage_start itself. Each fetched batch commits on its own. Failures are
 // logged and end the run, as in Ruby, which rescues and moves on to the next
 // provider.
 func (in *Ingester) BackfillAfter(ctx context.Context, p Provider, after time.Time) {
@@ -160,15 +151,33 @@ func (in *Ingester) backfill(ctx context.Context, p Provider, after time.Time, l
 	}
 	log.Info("backfilling", "from", from)
 
+	// Many adapters read after as exclusive, but coverage_start is the first
+	// day the source publishes. Start the day before it, and keep out anything
+	// the source dates earlier (LB's archive has a row the day before its
+	// start).
+	var floor time.Time
+	if !after.IsZero() && after.Equal(p.CoverageStart) {
+		floor = after
+		after = after.AddDate(0, 0, -1)
+	}
+
 	a, err := in.adapter(p.Key)
 	if err != nil {
 		return err
 	}
 	fetched := false
-	err = adapter.FetchEach(ctx, a, after, today, func(records []adapter.Rate) error {
+	yield := func(records []adapter.Rate) error {
+		if !floor.IsZero() {
+			records = slices.DeleteFunc(records, func(r adapter.Rate) bool { return r.Date.Before(floor) })
+		}
 		fetched = true
 		return in.store(ctx, p, a, records, today, log)
-	})
+	}
+	if e, ok := a.(adapter.EachFetcher); ok {
+		err = e.FetchEach(ctx, after, yield)
+	} else {
+		err = adapter.FetchEach(ctx, a, after, today, yield)
+	}
 	if err != nil {
 		return err
 	}
@@ -181,9 +190,6 @@ func (in *Ingester) backfill(ctx context.Context, p Provider, after time.Time, l
 func (in *Ingester) store(ctx context.Context, p Provider, a adapter.Adapter, records []adapter.Rate, today time.Time,
 	log *slog.Logger,
 ) error {
-	if !p.CoverageStart.IsZero() {
-		records = slices.DeleteFunc(records, func(r adapter.Rate) bool { return r.Date.Before(p.CoverageStart) })
-	}
 	records = rates.Reject(records, a.LeadDays(), today)
 	for i := range records {
 		records[i].Rate = rates.Normalize(records[i].Rate)

@@ -4,7 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"io"
 	"log/slog"
+	"net/http"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -12,6 +14,7 @@ import (
 	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
+	"github.com/lineofflight/frankfurter/go/internal/adapters/bis"
 	"github.com/lineofflight/frankfurter/go/internal/db"
 	"github.com/lineofflight/frankfurter/go/internal/fixtures"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
@@ -555,58 +558,130 @@ func TestBackfillChunksWhenAdapterHasBackfillRange(t *testing.T) {
 	}
 }
 
-// inclusiveAdapter serves one EUR/USD row a day from from through to, keeping
-// rows dated on after itself, as AMCM and NBKR do.
-func inclusiveAdapter(from, to time.Time, params *[][2]time.Time) *fakeAdapter {
+// dailyAdapter serves one EUR/USD row a day through today, from the day after
+// after, or from after itself when inclusive (as LB's archive does).
+func dailyAdapter(today time.Time, inclusive bool, params *[][2]time.Time) *fakeAdapter {
 	return &fakeAdapter{fetch: func(after, upto time.Time) ([]adapter.Rate, error) {
 		*params = append(*params, [2]time.Time{after, upto})
+		from := after
+		if !inclusive {
+			from = after.AddDate(0, 0, 1)
+		}
+		if upto.IsZero() {
+			upto = today
+		}
 		var out []adapter.Rate
-		for d := from; !d.After(to); d = d.AddDate(0, 0, 1) {
-			if d.Before(after) || (!upto.IsZero() && d.After(upto)) {
-				continue
-			}
+		for d := from; !d.After(upto); d = d.AddDate(0, 0, 1) {
 			out = append(out, rate(d, "EUR", "USD", 1.1))
 		}
 		return out, nil
 	}}
 }
 
-func TestBackfillFetchesCoverageStartOnAFirstBackfill(t *testing.T) {
-	var params [][2]time.Time
-	today := fixtures.Today()
-	start := today.AddDate(0, 0, -5)
-	e := newEnv(t, "BCB", inclusiveAdapter(start.AddDate(0, 0, -3), today, &params))
+// coverageEnv is a BCB environment with no stored rates and coverage_start ten
+// days ago.
+func coverageEnv(t *testing.T, a adapter.Adapter) (*env, time.Time) {
+	t.Helper()
+	e := newEnv(t, "BCB", a)
+	start := e.today.AddDate(0, 0, -10)
 	e.provider.CoverageStart = start
 	e.exec(t, "DELETE FROM rates WHERE provider = 'BCB'")
+	return e, start
+}
+
+func TestBackfillFetchesTheCoverageStartDayOnAFirstBackfill(t *testing.T) {
+	var params [][2]time.Time
+	e, start := coverageEnv(t, dailyAdapter(fixtures.Today(), false, &params))
 	e.in.Backfill(context.Background(), e.provider)
 
 	if len(params) != 1 || !params[0][0].Equal(start.AddDate(0, 0, -1)) {
 		t.Fatalf("windows %v, want one after the day before coverage_start %s", params, d(start))
 	}
+	var first string
+	if err := e.conn.QueryRow("SELECT min(date) FROM rates WHERE provider = 'BCB'").Scan(&first); err != nil {
+		t.Fatal(err)
+	}
+	if first != d(start) {
+		t.Errorf("first stored date %s, want coverage_start %s", first, d(start))
+	}
+}
+
+func TestBackfillStoresNothingDatedBeforeCoverageStart(t *testing.T) {
+	var params [][2]time.Time
+	e, start := coverageEnv(t, dailyAdapter(fixtures.Today(), true, &params))
+	// The full task passes coverage_start explicitly.
+	e.in.BackfillAfter(context.Background(), e.provider, start)
+
+	if n := e.count(t, "date < ?", d(start)); n != 0 {
+		t.Errorf("stored %d rows before coverage_start", n)
+	}
 	if n := e.count(t, "date = ?", d(start)); n != 1 {
 		t.Errorf("got %d rows on coverage_start, want 1", n)
 	}
-	if n := e.count(t, "date < ?", d(start)); n != 0 {
-		t.Errorf("stored %d rows before coverage_start", n)
-	}
 }
 
-func TestBackfillStoresNothingBeforeCoverageStart(t *testing.T) {
+func TestBackfillStoresWhatAnEarlierExplicitCursorFetches(t *testing.T) {
 	var params [][2]time.Time
-	today := fixtures.Today()
-	start := today.AddDate(0, 0, -5)
-	e := newEnv(t, "BCB", inclusiveAdapter(start.AddDate(0, 0, -3), today, &params))
-	e.provider.CoverageStart = start
-	e.exec(t, "DELETE FROM rates WHERE provider = 'BCB'")
-	e.in.BackfillAfter(context.Background(), e.provider, start.AddDate(0, 0, -10))
+	e, start := coverageEnv(t, dailyAdapter(fixtures.Today(), true, &params))
+	e.in.BackfillAfter(context.Background(), e.provider, start.AddDate(0, 0, -3))
 
-	if n := e.count(t, "date < ?", d(start)); n != 0 {
-		t.Errorf("stored %d rows before coverage_start", n)
+	if len(params) != 1 || !params[0][0].Equal(start.AddDate(0, 0, -3)) {
+		t.Fatalf("windows %v, want one after the explicit cursor", params)
 	}
-	if n := e.count(t, "date >= ?", d(start)); n != 6 {
-		t.Errorf("got %d rows from coverage_start through today, want 6", n)
+	if n := e.count(t, "date < ?", d(start)); n != 3 {
+		t.Errorf("got %d rows before coverage_start, want the 3 fetched", n)
 	}
 }
+
+// walkingAdapter walks its own windows, as BIS does.
+type walkingAdapter struct {
+	fakeAdapter
+	afters []time.Time
+}
+
+func (w *walkingAdapter) FetchEach(_ context.Context, after time.Time, yield func([]adapter.Rate) error) error {
+	w.afters = append(w.afters, after)
+	return yield([]adapter.Rate{rate(fixtures.Today(), "EUR", "USD", 1.1)})
+}
+
+func TestBackfillUsesAnAdaptersOwnFetchEach(t *testing.T) {
+	w := &walkingAdapter{fakeAdapter: fakeAdapter{fetch: func(time.Time, time.Time) ([]adapter.Rate, error) {
+		return nil, errors.New("package FetchEach used")
+	}}}
+	e := newEnv(t, "BCB", w)
+	since := e.today.AddDate(0, 0, -5)
+	e.exec(t, "INSERT INTO rates (date, provider, base, quote, mid) VALUES (?, 'BCB', 'EUR', 'USD', 1.0)", d(since))
+	e.in.Backfill(context.Background(), e.provider)
+
+	if len(w.afters) != 1 || !w.afters[0].Equal(since) {
+		t.Fatalf("own FetchEach afters %v, want [%s]", w.afters, d(since))
+	}
+	if n := e.count(t, "date = ?", d(e.today)); n != 1 {
+		t.Errorf("got %d rows from the own FetchEach, want 1", n)
+	}
+}
+
+func TestBackfillRevisitsAYearForBIS(t *testing.T) {
+	var queries []string
+	a := bis.New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		queries = append(queries, r.URL.RawQuery)
+		body := "FREQ,REF_AREA,CURRENCY,COLLECTION,TIME_PERIOD,OBS_VALUE,UNIT_MULT\n"
+		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: r}, nil
+	})})
+	e := newEnv(t, "BIS", a)
+	a.Now = func() time.Time { return e.today }
+	e.exec(t, "DELETE FROM rates WHERE provider = 'BIS'")
+	e.exec(t, "INSERT INTO rates (date, provider, base, quote, mid) VALUES ('2025-01-31', 'BIS', 'USD', 'JPY', 150)")
+	e.in.Backfill(context.Background(), e.provider)
+
+	if len(queries) == 0 || !strings.Contains(queries[0], "ge:2024-01") {
+		t.Fatalf("queries %v, want the first from 2024-01 (a year before the newest stored 2025-01-31)", queries)
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 
 func TestBackfillRefreshesCurrenciesAndCurrencyCoverages(t *testing.T) {
 	e := newEnv(t, "BCB", defaultAdapter(fixtures.Today(), nil))

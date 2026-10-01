@@ -23,9 +23,11 @@ runs everything.
 - `Ingester{DB, Client, Blend, Cache, Logger, Today, Adapter}`: `Provider#backfill`.
   - `Backfill(ctx, p)` uses Ruby's default cursor (`last_synced || coverage_start`); `BackfillAfter(ctx, p, after)`
     takes an explicit one (zero = from the source's start). Both log and swallow failures, as Ruby rescues.
-  - The cursor is exclusive, so a first backfill (and the full task) starts the day before `coverage_start` to fetch
-    that day too. Rows dated before `coverage_start` are dropped before storing, as an adapter that keeps rows on
-    `after` itself (AMCM, NBKR) would return the day before.
+  - The cursor is exclusive, so a cursor equal to `coverage_start` (a first backfill, or the full task) starts the day
+    before to fetch that day too, and drops rows dated before `coverage_start` (LB's archive has one the day before
+    its start). An explicit earlier cursor stores whatever the source returns. Same condition as Ruby (#739).
+  - An adapter implementing `adapter.EachFetcher` walks its own windows (Ruby's `fetch_each` override); otherwise
+    backfill uses `adapter.FetchEach`. BIS is the one implementer: it revisits the year before the cursor.
   - `adapter.FetchEach` starts each window on the previous window's `upto` rather than the day after it. An adapter
     that takes `after` as exclusive would otherwise never request `upto + 1`, losing a day at every window boundary
     (BCP lost 2001-01-01 and every 365th day after; BNR lost 2006-01-03, 2007-01-03, ...). Inclusive adapters refetch

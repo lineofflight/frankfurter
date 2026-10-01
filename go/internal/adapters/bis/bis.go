@@ -44,6 +44,8 @@ func init() {
 	adapter.Register("BIS", func(c *http.Client) adapter.Adapter { return New(c) })
 }
 
+var _ adapter.EachFetcher = (*Adapter)(nil)
+
 // Adapter fetches BIS rates.
 type Adapter struct {
 	adapter.Base

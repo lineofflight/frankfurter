@@ -63,6 +63,13 @@ type Adapter interface {
 	Revises() bool
 }
 
+// EachFetcher is an adapter that walks its own backfill windows, as a Ruby
+// class overriding fetch_each does. Backfill calls its FetchEach in place of
+// the package-level one, which it may still use underneath.
+type EachFetcher interface {
+	FetchEach(ctx context.Context, after time.Time, yield func([]Rate) error) error
+}
+
 // FetchEach walks from after to today in BackfillRange windows, calling yield
 // with each non-empty batch. The last window is open-ended. It returns
 // immediately when after is today or later.

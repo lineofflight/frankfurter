@@ -51,9 +51,8 @@ func TestBackfillTaskStartsANamedProviderAtCoverageStartForFullHistory(t *testin
 	if err := BackfillTask(context.Background(), b, providers, "ecb", true, 4); err != nil {
 		t.Fatal(err)
 	}
-	// The cursor is exclusive, so the day before fetches coverage_start itself.
 	if len(b.calls) != 1 || b.calls[0].key != "ECB" || b.calls[0].after == nil ||
-		!b.calls[0].after.Equal(providers[1].CoverageStart.AddDate(0, 0, -1)) || providers[1].CoverageStart.IsZero() {
+		!b.calls[0].after.Equal(providers[1].CoverageStart) || providers[1].CoverageStart.IsZero() {
 		t.Fatalf("calls %+v", b.calls)
 	}
 }
@@ -71,8 +70,7 @@ func TestBackfillTaskStartsEveryProviderAtItsOwnCoverageStartForFullHistory(t *t
 		}
 		got[c.key] = *c.after
 	}
-	if len(b.calls) != 2 || !got["ECB"].Equal(providers[0].CoverageStart.AddDate(0, 0, -1)) ||
-		!got["BOC"].Equal(providers[1].CoverageStart.AddDate(0, 0, -1)) {
+	if len(b.calls) != 2 || !got["ECB"].Equal(providers[0].CoverageStart) || !got["BOC"].Equal(providers[1].CoverageStart) {
 		t.Fatalf("calls %+v", b.calls)
 	}
 }
