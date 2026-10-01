@@ -52,6 +52,12 @@ class Provider
         "USM" => Date.new(2007, 1, 5),
       }.freeze
 
+      class << self
+        # A full backfill stores about 300,000 rows. Yearly windows keep each insert, and the blend refresh that follows
+        # it, to one year instead of holding the write lock for the whole history.
+        def backfill_range = CHUNK_SIZE
+      end
+
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
         iso_codes = (current_currency_codes | DROPPED_CODES).join(",")
