@@ -3,6 +3,8 @@ package hmrc
 import (
 	"context"
 	"errors"
+	"fmt"
+	"net/http"
 	"slices"
 	"strings"
 	"testing"
@@ -117,12 +119,41 @@ func TestFetchToleratesUnpublishedFollowingMonth(t *testing.T) {
 }
 
 func TestFetchRaisesWhenPastMonthMissing(t *testing.T) {
-	a := newAdapter(t)
-	a.Now = today(2021, 1, 15)
-	_, err := a.Fetch(context.Background(), adapter.Date(2020, 12, 1), adapter.Date(2020, 12, 31))
+	client := &http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		if !strings.HasSuffix(r.URL.Path, "/monthly_csv_2023-5.csv") {
+			return nil, fmt.Errorf("unexpected request %s", r.URL)
+		}
+		return &http.Response{StatusCode: http.StatusNotFound, Body: http.NoBody, Header: http.Header{}, Request: r}, nil
+	})}
+	_, err := New(client).Fetch(context.Background(), adapter.Date(2023, 5, 1), adapter.Date(2023, 5, 31))
 	var se *adapter.StatusError
-	if !errors.As(err, &se) {
-		t.Fatalf("err = %v, want *adapter.StatusError", err)
+	if !errors.As(err, &se) || se.StatusCode != http.StatusNotFound {
+		t.Fatalf("err = %v, want a 404 *adapter.StatusError", err)
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+func TestFetchStartsAtFirstFile(t *testing.T) {
+	// A full backfill opens the day before coverage starts. HMRC has no file
+	// for December 2020.
+	rates, err := newAdapter(t).Fetch(context.Background(), adapter.Date(2020, 12, 31), adapter.Date(2021, 1, 30))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates")
+	}
+	first := rates[0].Date
+	for _, r := range rates {
+		if r.Date.Before(first) {
+			first = r.Date
+		}
+	}
+	if !first.Equal(adapter.Date(2021, 1, 1)) {
+		t.Errorf("first date = %s, want 2021-01-01", first.Format(time.DateOnly))
 	}
 }
 

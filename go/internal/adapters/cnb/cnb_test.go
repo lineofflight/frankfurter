@@ -189,6 +189,28 @@ func TestFetchRequestsEachYear(t *testing.T) {
 	}
 }
 
+// Ruby's select! returned nil when it removed nothing (#743). Fetch collects
+// the rows in range into a new slice, so a window that keeps every row returns
+// them.
+func TestFetchReturnsRowsWhenEveryRowIsInRange(t *testing.T) {
+	client := &http.Client{Transport: roundTripper(func(r *http.Request) (*http.Response, error) {
+		body := `{"rates":[]}`
+		if r.URL.Query().Get("year") == "1991" {
+			body = `{"rates":[{"validFor":"1991-01-02","currencyCode":"USD","amount":1,"rate":28.0}]}`
+		}
+		return &http.Response{StatusCode: http.StatusOK, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}}, nil
+	})}
+
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(1990, 12, 31), adapter.Date(1991, 12, 31))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{{Date: adapter.Date(1991, 1, 2), Base: "USD", Quote: "CZK", Rate: 28}}
+	if !slices.Equal(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
 func TestFetchNeedsStartDate(t *testing.T) {
 	if _, err := New(http.DefaultClient).Fetch(context.Background(), time.Time{}, adapter.Date(2026, 1, 2)); err == nil {
 		t.Error("want an error without a start date")

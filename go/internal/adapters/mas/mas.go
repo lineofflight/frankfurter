@@ -26,6 +26,10 @@ import (
 
 const baseURL = "https://eservices.mas.gov.sg/statistics/msb/ExchangeRates.aspx"
 
+// coverageStart is the first year in the form's year list. An earlier year
+// renders the form again instead of a CSV.
+var coverageStart = adapter.Date(1988, 1, 1)
+
 func init() {
 	adapter.Register("MAS", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -96,8 +100,12 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		end = a.Today()
 	}
 
+	start := after
+	if start.Before(coverageStart) {
+		start = coverageStart
+	}
 	var dataset []adapter.Rate
-	for date := after; !date.After(end); {
+	for date := start; !date.After(end); {
 		yearEnd := adapter.Date(date.Year(), 12, 31)
 		chunkEnd := yearEnd
 		if end.Before(chunkEnd) {

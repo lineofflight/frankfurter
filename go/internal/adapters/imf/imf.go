@@ -4,7 +4,7 @@
 // from the SDR cross-rate report.
 //
 // Fetch treats after as inclusive, as the Ruby adapter does, and walks calendar
-// months from after's month.
+// months from after's month, or from the first report's when after is earlier.
 package imf
 
 import (
@@ -22,6 +22,10 @@ import (
 )
 
 const baseURL = "https://www.imf.org/external/np/fin/data/rms_mth.aspx"
+
+// coverageStart is the first month with a report. Earlier months redirect to
+// an error page.
+var coverageStart = adapter.Date(2003, 4, 1)
 
 var currencies = map[string]string{
 	"afghan afghani":      "AFN",
@@ -123,8 +127,12 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		end = a.Today()
 	}
 
+	start := after
+	if start.Before(coverageStart) {
+		start = coverageStart
+	}
 	var rates []adapter.Rate
-	for cursor := adapter.Date(after.Year(), after.Month(), 1); !cursor.After(end); cursor = cursor.AddDate(0, 1, 0) {
+	for cursor := adapter.Date(start.Year(), start.Month(), 1); !cursor.After(end); cursor = cursor.AddDate(0, 1, 0) {
 		lastDay := cursor.AddDate(0, 1, -1)
 
 		body, err := a.fetchMonth(ctx, lastDay, "REP")

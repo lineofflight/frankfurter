@@ -531,17 +531,232 @@ interactions:
                 - www.trade-tariff.service.gov.uk
             User-Agent:
                 - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
-        url: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2020-12.csv
+        url: https://www.trade-tariff.service.gov.uk/uk/api/exchange_rates/files/monthly_csv_2021-1.csv
         method: GET
       response:
         proto: HTTP/1.1
         proto_major: 1
         proto_minor: 1
-        content_length: 35
-        body: '{"errors":[{"detail":"not found"}]}'
+        content_length: 8708
+        body: |
+            Country/Territories,Currency,Currency Code,Currency Units per £1,Start date,End date
+            Abu Dhabi,Dirham,AED,4.9576,01/01/2021,31/01/2021
+            Albania,Lek,ALL,136.9400,01/01/2021,31/01/2021
+            Algeria,Dinar,DZD,178.0100,01/01/2021,31/01/2021
+            Angola,Readj Kwanza,AOA,885.2800,01/01/2021,31/01/2021
+            Antigua,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            Argentina,Peso,ARS,111.5200,01/01/2021,31/01/2021
+            Armenia,Dram,AMD,708.4500,01/01/2021,31/01/2021
+            Aruba,Florin,AWG,2.4159,01/01/2021,31/01/2021
+            Australia,Dollar,AUD,1.7842,01/01/2021,31/01/2021
+            Azerbaijan,New Manat,AZN,2.2931,01/01/2021,31/01/2021
+            Bahamas,Dollar,BSD,1.3497,01/01/2021,31/01/2021
+            Bahrain,Dinar,BHD,0.5089,01/01/2021,31/01/2021
+            Bangladesh,Taka,BDT,114.3800,01/01/2021,31/01/2021
+            Barbados,Dollar,BBD,2.6994,01/01/2021,31/01/2021
+            Belarus,Rouble,BYN,3.4034,01/01/2021,31/01/2021
+            Belize,Dollar,BZD,2.6994,01/01/2021,31/01/2021
+            Benin,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Bermuda,Dollar (US),BMD,1.3497,01/01/2021,31/01/2021
+            Bhutan,Ngultrum,BTN,99.3204,01/01/2021,31/01/2021
+            Bolivia,Boliviano,BOB,9.3264,01/01/2021,31/01/2021
+            Bosnia- Herzegovinia,Marka,BAM,2.1661,01/01/2021,31/01/2021
+            Botswana,Pula,BWP,14.6800,01/01/2021,31/01/2021
+            Brazil,Real,BRL,6.9190,01/01/2021,31/01/2021
+            Brunei,Dollar,BND,1.7942,01/01/2021,31/01/2021
+            Bulgaria,Lev,BGN,2.1661,01/01/2021,31/01/2021
+            Burkina Faso,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Burundi,Franc,BIF,2623.8000,01/01/2021,31/01/2021
+            Cambodia,Riel,KHR,5452.7500,01/01/2021,31/01/2021
+            Cameroon Republic,CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Canada,Dollar,CAD,1.7223,01/01/2021,31/01/2021
+            Cape Verde Islands,Escudo,CVE,122.4100,01/01/2021,31/01/2021
+            Cayman Islands,Dollar,KYD,1.1067,01/01/2021,31/01/2021
+            Central African Republic,CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Chad,CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Chile,Peso,CLP,990.8300,01/01/2021,31/01/2021
+            China,Yuan,CNY,8.8229,01/01/2021,31/01/2021
+            Colombia,Peso,COP,4612.4700,01/01/2021,31/01/2021
+            Comoros,Franc,KMF,544.8600,01/01/2021,31/01/2021
+            Congo (Brazaville),CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Congo (DemRep),Congo Fr,CDF,2658.8900,01/01/2021,31/01/2021
+            Costa Rica,Colon,CRC,816.8000,01/01/2021,31/01/2021
+            Cote d'Ivoire,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Croatia,Kuna,HRK,8.3424,01/01/2021,31/01/2021
+            Cuba,Peso,CUP,1.3497,01/01/2021,31/01/2021
+            Czech Republic,Koruna,CZK,29.0200,01/01/2021,31/01/2021
+            Denmark,Krone,DKK,8.2413,01/01/2021,31/01/2021
+            Djibouti,Franc,DJF,239.8600,01/01/2021,31/01/2021
+            Dominica,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            Dominican Republic,Peso,DOP,78.5100,01/01/2021,31/01/2021
+            Dubai,Dirham,AED,4.9576,01/01/2021,31/01/2021
+            Ecuador,Dollar,ECS,1.3497,01/01/2021,31/01/2021
+            Egypt,Pound,EGP,21.1700,01/01/2021,31/01/2021
+            El Salvador,Colon,SVC,11.8100,01/01/2021,31/01/2021
+            Equatorial Guinea,CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Eritrea,Nakfa,ERN,20.2400,01/01/2021,31/01/2021
+            Ethiopia,Birr,ETB,52.0700,01/01/2021,31/01/2021
+            Eurozone,Euro,EUR,1.1075,01/01/2021,31/01/2021
+            Fiji Islands,Dollar,FJD,2.7532,01/01/2021,31/01/2021
+            Fr. Polynesia,CFP Franc,XPF,132.1600,01/01/2021,31/01/2021
+            Gabon,CFA Franc,XAF,726.4900,01/01/2021,31/01/2021
+            Gambia,Dalasi,GMD,69.6700,01/01/2021,31/01/2021
+            Georgia,Lari,GEL,4.4214,01/01/2021,31/01/2021
+            Ghana,Cedi,GHS,7.9092,01/01/2021,31/01/2021
+            Grenada,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            Guatemala,Quetzal,GTQ,10.5200,01/01/2021,31/01/2021
+            Guinea Bissau,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Guinea Republic,Franc,GNF,13448.3400,01/01/2021,31/01/2021
+            Guyana,Dollar,GYD,282.6700,01/01/2021,31/01/2021
+            Haiti,Gourde,HTG,94.3300,01/01/2021,31/01/2021
+            Honduras,Lempira,HNL,32.5900,01/01/2021,31/01/2021
+            Hong Kong,Dollar,HKD,10.4600,01/01/2021,31/01/2021
+            Hungary,Forint,HUF,393.7300,01/01/2021,31/01/2021
+            Iceland,Krona,ISK,171.8800,01/01/2021,31/01/2021
+            India,Rupee,INR,99.3204,01/01/2021,31/01/2021
+            Indonesia,Rupiah,IDR,19064.3900,01/01/2021,31/01/2021
+            Iraq,Dinar,IQD,1606.1300,01/01/2021,31/01/2021
+            Israel,Shekel,ILS,4.3879,01/01/2021,31/01/2021
+            Jamaica,Dollar,JMD,193.4100,01/01/2021,31/01/2021
+            Japan,Yen,JPY,139.7100,01/01/2021,31/01/2021
+            Jordan,Dinar,JOD,0.9569,01/01/2021,31/01/2021
+            Kazakhstan,Tenge,KZT,566.5800,01/01/2021,31/01/2021
+            Kenya,Schilling,KES,150.6200,01/01/2021,31/01/2021
+            Kuwait,Dinar,KWD,0.4113,01/01/2021,31/01/2021
+            Kyrgyz Republic,Som,KGS,112.0100,01/01/2021,31/01/2021
+            Lao People's Dem Rep,Kip,LAK,12538.6300,01/01/2021,31/01/2021
+            Lebanon,Pound,LBP,2048.1500,01/01/2021,31/01/2021
+            Lesotho,Loti,LSL,20.0300,01/01/2021,31/01/2021
+            Liberia,Dollar (US),USD,1.3497,01/01/2021,31/01/2021
+            Libya,Dinar,LYD,1.8153,01/01/2021,31/01/2021
+            Macao,Pataca,MOP,10.7700,01/01/2021,31/01/2021
+            Macedonia,Denar,MKD,68.1900,01/01/2021,31/01/2021
+            Madagascar,Malagasy Ariary,MGA,5027.6000,01/01/2021,31/01/2021
+            Malawi,Kwacha,MWK,1033.1400,01/01/2021,31/01/2021
+            Malaysia,Ringgit,MYR,5.4683,01/01/2021,31/01/2021
+            Maldive Islands,Rufiyaa,MVR,20.7800,01/01/2021,31/01/2021
+            Mali Republic,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Mauritania,Ouguiya,MRU,48.2200,01/01/2021,31/01/2021
+            Mauritius,Rupee,MUR,53.1100,01/01/2021,31/01/2021
+            Mexico,Mexican Peso,MXN,26.9300,01/01/2021,31/01/2021
+            Moldova,Leu,MDL,23.1800,01/01/2021,31/01/2021
+            Mongolia,Tugrik,MNT,3858.7600,01/01/2021,31/01/2021
+            Montserrat,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            Morocco,Dirham,MAD,12.0300,01/01/2021,31/01/2021
+            Mozambique,Metical,MZN,100.9100,01/01/2021,31/01/2021
+            Myanmar,Kyat,MMK,1836.5700,01/01/2021,31/01/2021
+            Nepal,Rupee,NPR,158.9100,01/01/2021,31/01/2021
+            New Caledonia,CFP Franc,XPF,132.1600,01/01/2021,31/01/2021
+            New Zealand,Dollar,NZD,1.9063,01/01/2021,31/01/2021
+            Nicaragua,Gold Cordoba,NIO,46.9600,01/01/2021,31/01/2021
+            Niger Republic,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Nigeria,Naira,NGN,524.3500,01/01/2021,31/01/2021
+            Norway,Norwegian Krone,NOK,11.7300,01/01/2021,31/01/2021
+            Oman,Rial,OMR,0.5196,01/01/2021,31/01/2021
+            Pakistan,Rupee,PKR,216.2800,01/01/2021,31/01/2021
+            Panama,Balboa,PAB,1.3497,01/01/2021,31/01/2021
+            Papua New Guinea,Kina,PGK,4.7400,01/01/2021,31/01/2021
+            Paraguay,Guarani,PYG,9412.7000,01/01/2021,31/01/2021
+            Peru,New Sol,PEN,4.8389,01/01/2021,31/01/2021
+            Philippines,Peso,PHP,64.8700,01/01/2021,31/01/2021
+            Poland,Zloty,PLN,4.9191,01/01/2021,31/01/2021
+            Qatar,Riyal,QAR,4.9142,01/01/2021,31/01/2021
+            Romania,New Leu,RON,5.3939,01/01/2021,31/01/2021
+            Russia,Rouble,RUB,99.2400,01/01/2021,31/01/2021
+            Rwanda,Franc,RWF,1322.0500,01/01/2021,31/01/2021
+            Saotome & Principe,Dobra,STD,27547.2000,01/01/2021,31/01/2021
+            Saudi Arabia,Riyal,SAR,5.0632,01/01/2021,31/01/2021
+            Senegal,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Serbia,Dinar,RSD,130.1900,01/01/2021,31/01/2021
+            Seychelles,Rupee,SCR,28.5700,01/01/2021,31/01/2021
+            Sierra Leone,Leone,SLL,13631.8800,01/01/2021,31/01/2021
+            Singapore,Dollar,SGD,1.7942,01/01/2021,31/01/2021
+            Soloman Islands,Dollar,SBD,10.9200,01/01/2021,31/01/2021
+            Somali Republic,Schilling,SOS,788.2100,01/01/2021,31/01/2021
+            South Africa,Rand,ZAR,20.0300,01/01/2021,31/01/2021
+            South Korea,Won,KRW,1476.4900,01/01/2021,31/01/2021
+            Sri Lanka,Rupee,LKR,252.3200,01/01/2021,31/01/2021
+            St Christopher & Anguilla,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            St Lucia,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            St Vincent,E Caribbean Dollar,XCD,3.6442,01/01/2021,31/01/2021
+            Sudan Republic,Pound,SDG,74.5700,01/01/2021,31/01/2021
+            Surinam,Dollar,SRD,19.1000,01/01/2021,31/01/2021
+            Swaziland,Lilangeni,SZL,20.0300,01/01/2021,31/01/2021
+            Sweden,Krona,SEK,11.2900,01/01/2021,31/01/2021
+            Switzerland,Franc,CHF,1.1946,01/01/2021,31/01/2021
+            Taiwan,Dollar,TWD,37.9600,01/01/2021,31/01/2021
+            Tanzania,Schilling,TZS,3129.9300,01/01/2021,31/01/2021
+            Thailand,Baht,THB,40.4900,01/01/2021,31/01/2021
+            Togo Republic,CFA Franc,XOF,726.4900,01/01/2021,31/01/2021
+            Tonga Islands,Pa'anga (AUS),TOP,1.7842,01/01/2021,31/01/2021
+            Trinidad/Tobago,Dollar,TTD,9.1338,01/01/2021,31/01/2021
+            Tunisia,Dinar,TND,3.6433,01/01/2021,31/01/2021
+            Turkey,Turkish  Lira,TRY,10.5600,01/01/2021,31/01/2021
+            Turkmenistan,New Manat,TMT,4.7239,01/01/2021,31/01/2021
+            UAE,Dirham,AED,4.9576,01/01/2021,31/01/2021
+            USA,Dollar,USD,1.3497,01/01/2021,31/01/2021
+            Uganda,Schilling,UGX,4923.6700,01/01/2021,31/01/2021
+            Ukraine,Hryvnia,UAH,37.5800,01/01/2021,31/01/2021
+            Uruguay,Peso,UYU,57.2600,01/01/2021,31/01/2021
+            Uzbekistan,Sum,UZS,14122.0000,01/01/2021,31/01/2021
+            Vanuatu,Vatu,VUV,148.5900,01/01/2021,31/01/2021
+            Vietnam,Dong,VND,31213.7100,01/01/2021,31/01/2021
+            Wallis & Futuna Islands,CFP Franc,XPF,132.1600,01/01/2021,31/01/2021
+            Western Samoa,Tala,WST,3.4169,01/01/2021,31/01/2021
+            Yemen (Rep of),Rial,YER,337.8200,01/01/2021,31/01/2021
+            Zambia,Kwacha,ZMW,28.4600,01/01/2021,31/01/2021
+            Zimbabwe,Dollar,ZWL,488.4500,01/01/2021,31/01/2021
         headers:
+            Age:
+                - "330"
+            Connection:
+                - close
+            Content-Disposition:
+                - attachment; filename=exrates-monthly-0121.csv
+            Content-Security-Policy:
+                - default-src 'none'; frame-ancestors 'none'
+            Content-Transfer-Encoding:
+                - binary
             Content-Type:
-                - application/json; charset=utf-8
-        status: 404 Not Found
-        code: 404
+                - text/csv; charset=utf-8
+            Date:
+                - Thu, 01 Oct 2026 14:00:40 GMT
+            Etag:
+                - W/"f155608127076eb8908ff8d3bd8d2e76"
+            Last-Modified:
+                - Thu, 01 Oct 2026 05:00:15 GMT
+            Link:
+                - <https://api-docs.trade-tariff.service.gov.uk/llms.txt>; rel="describedby"
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            Vary:
+                - Origin
+            Via:
+                - 1.1 9929448596fb4faec2a082aabe759212.cloudfront.net (CloudFront)
+            X-Amz-Cf-Id:
+                - pxygv70Rv-8CJAAgWKaMaMAnTddkUDDG2l6gNIFxAd2mi_x0Zeamiw==
+            X-Amz-Cf-Pop:
+                - AMS58-P1
+            X-Cache:
+                - Hit from cloudfront
+            X-Content-Type-Options:
+                - nosniff
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - DENY
+            X-Path-Transformed:
+                - ""
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - d230175a-2b90-47f2-b1d1-2a3a6c402249
+            X-Runtime:
+                - "0.090775"
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
         duration: 0s

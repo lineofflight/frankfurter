@@ -94,6 +94,24 @@ func TestFetchRespectsDateBoundaries(t *testing.T) {
 	}
 }
 
+func TestFetchStartsAtFirstYear(t *testing.T) {
+	// A full backfill opens the day before coverage starts, in 1987, which the
+	// form doesn't offer.
+	a := New(vcrtest.Client(t, "mas_coverage_start", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host, vcrtest.Body)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(1987, 12, 31), adapter.Date(1988, 1, 31))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates")
+	}
+	for _, r := range rates {
+		if r.Date.Year() != 1988 {
+			t.Fatalf("got %s, want only 1988", r.Date.Format(time.DateOnly))
+		}
+	}
+}
+
 func TestParseCSVData(t *testing.T) {
 	rates, err := parse([]byte(`MAS: Financial Database - Exchange Rates
 

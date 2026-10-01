@@ -24,6 +24,10 @@ import (
 
 const baseURL = "https://api.statbank.dk/v1/data"
 
+// coverageStart is the first day in the table. Statbank rejects a Tid bound
+// that isn't one of its values, like the Sunday before.
+var coverageStart = adapter.Date(1977, 1, 3)
+
 var currencies = []string{
 	"EUR", "USD", "GBP", "SEK", "NOK", "CHF", "CAD", "JPY", "AUD", "NZD",
 	"PLN", "CZK", "HUF", "HKD", "SGD", "ZAR", "BGN", "RON", "TRY", "KRW",
@@ -66,7 +70,11 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 	if after.IsZero() {
 		return nil, errors.New("fetch needs a start date")
 	}
-	tid := ">=" + formatDate(after)
+	start := after
+	if start.Before(coverageStart) {
+		start = coverageStart
+	}
+	tid := ">=" + formatDate(start)
 	if !upto.IsZero() {
 		tid += "<=" + formatDate(upto)
 	}

@@ -72,8 +72,10 @@ func (a *Adapter) LeadDays() int { return 31 }
 
 // Fetch implements adapter.Adapter.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
+	// A full backfill opens the day before coverage starts, in December 2020,
+	// which has no file.
 	start := after
-	if start.IsZero() {
+	if start.Before(coverageStart) {
 		start = coverageStart
 	}
 	// HMRC publishes the coming month's file on the penultimate Thursday of

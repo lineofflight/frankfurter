@@ -10,8 +10,9 @@
 // previous bulletin. Rows are deduplicated on that attribute, not on the
 // requested date.
 //
-// As in Ruby, Fetch walks every date from after through upto, both inclusive,
-// and does not clip rows to the window.
+// As in Ruby, Fetch walks every date from after (or the first file, when after
+// is earlier) through upto, both inclusive, and does not clip rows to the
+// window.
 package cbar
 
 import (
@@ -29,6 +30,9 @@ import (
 )
 
 const baseURL = "https://www.cbar.az/currencies/"
+
+// coverageStart is the date of the archive's first file.
+var coverageStart = adapter.Date(1993, 11, 26)
 
 // CBAR labels every row in the archive with the currency's current ISO code,
 // including bulletins from before a redenomination, without restating the
@@ -84,10 +88,15 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		end = a.Today()
 	}
 
+	// A full backfill opens the day before coverage starts.
+	start := after
+	if start.Before(coverageStart) {
+		start = coverageStart
+	}
 	var rates []adapter.Rate
 	seen := map[time.Time]bool{}
-	for date := after; !date.After(end); date = date.AddDate(0, 0, 1) {
-		if !date.Equal(after) {
+	for date := start; !date.After(end); date = date.AddDate(0, 0, 1) {
+		if !date.Equal(start) {
 			if err := a.Sleep(ctx, 200*time.Millisecond); err != nil {
 				return nil, err
 			}

@@ -100,6 +100,21 @@ func TestFetchDedupesWeekendFilesOnBulletinDate(t *testing.T) {
 	}
 }
 
+func TestFetchStartsAtFirstFile(t *testing.T) {
+	// A full backfill opens the day before coverage starts. URLs before the
+	// 26.11.1993 file redirect.
+	rates := fetch(t, adapter.Date(1993, 11, 25), adapter.Date(1993, 11, 26))
+	var dates []time.Time
+	for _, r := range rates {
+		if !slices.ContainsFunc(dates, r.Date.Equal) {
+			dates = append(dates, r.Date)
+		}
+	}
+	if want := []time.Time{adapter.Date(1993, 11, 25)}; !slices.EqualFunc(dates, want, time.Time.Equal) {
+		t.Errorf("dates = %v, want %v", dates, want)
+	}
+}
+
 func TestFetchCurrenciesAndMetalsPerDate(t *testing.T) {
 	got := bases(fetch(t, adapter.Date(2026, 9, 8), adapter.Date(2026, 9, 8)))
 	if len(got) <= 30 {

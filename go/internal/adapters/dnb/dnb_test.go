@@ -59,6 +59,28 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 	}
 }
 
+func TestFetchStartsAtFirstDay(t *testing.T) {
+	// A full backfill opens the day before coverage starts, a Sunday that
+	// Statbank rejects as a Tid bound.
+	a := New(vcrtest.Client(t, "dnb_coverage_start", vcrtest.MatchOn(vcrtest.Method, vcrtest.Host, vcrtest.Body)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(1977, 1, 2), adapter.Date(1977, 1, 7))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates")
+	}
+	first := rates[0].Date
+	for _, r := range rates {
+		if r.Date.Before(first) {
+			first = r.Date
+		}
+	}
+	if !first.Equal(adapter.Date(1977, 1, 3)) {
+		t.Errorf("first date = %s, want 1977-01-03", first.Format(time.DateOnly))
+	}
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }

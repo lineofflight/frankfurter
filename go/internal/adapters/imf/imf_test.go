@@ -74,6 +74,24 @@ func TestFetchMultipleCurrenciesPerDateWithoutDuplicates(t *testing.T) {
 	assertNoDuplicates(t, rates)
 }
 
+func TestFetchStartsAtFirstReport(t *testing.T) {
+	// A full backfill opens the day before coverage starts. IMF has no report
+	// for March 2003.
+	a := New(vcrtest.Client(t, "imf", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI)))
+	rates, err := a.Fetch(context.Background(), adapter.Date(2003, 3, 31), adapter.Date(2003, 4, 30))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) == 0 {
+		t.Fatal("no rates")
+	}
+	for _, r := range rates {
+		if r.Date.Before(adapter.Date(2003, 4, 1)) {
+			t.Fatalf("got %s, want nothing before 2003-04-01", r.Date.Format(time.DateOnly))
+		}
+	}
+}
+
 func mustParse(t *testing.T, fn func(string) ([]adapter.Rate, error), tsv string) []adapter.Rate {
 	t.Helper()
 	rates, err := fn(tsv)

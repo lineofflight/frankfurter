@@ -286,3 +286,60 @@ interactions:
         status: 200 OK
         code: 200
         duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbar.az
+        headers:
+            Accept:
+                - '*/*'
+            Connection:
+                - close
+            Host:
+                - www.cbar.az
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+        url: https://www.cbar.az/currencies/26.11.1993.xml
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 5595
+        body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ValCurs Date=\"25.11.1993\" Name=\"AZN məzənnələri\" Description=\"Azərbaycan Respublikası Mərkəzi Bankının 25.11.1993 tarixdən etibarən xarici valyutaların və bank metallarının Azərbaycan manatına qarşı rəsmi məzənnələri bülleteni\">\n\n    <ValType Type=\"Bank metalları\">\n        <Valute Code=\"XPD\">\n            <Nominal>1 t.u.</Nominal>\n            <Name>Palladium</Name>\n            <Value></Value>\n        </Valute>\n        <Valute Code=\"XPT\">\n            <Nominal>1 t.u.</Nominal>\n            <Name>Platin</Name>\n            <Value></Value>\n        </Valute>\n        <Valute Code=\"XAG\">\n            <Nominal>1 t.u.</Nominal>\n            <Name>Gümüş</Name>\n            <Value></Value>\n        </Valute>\n        <Valute Code=\"XAU\">\n            <Nominal>1 t.u.</Nominal>\n            <Name>Qızıl</Name>\n            <Value></Value>\n        </Valute>\n    </ValType>\n\n    <ValType Type=\"Xarici valyutalar\">\n        \n                            <Valute Code=\"USD\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 ABŞ dolları</Name>\n\n\n\n                        \n                    <Value>118</Value>\n                </Valute>\n            \n        \n            \n        \n                            <Valute Code=\"AUD\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Avstraliya dolları</Name>\n\n\n\n                        \n                    <Value>78.31</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"DKK\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Danimarka kronu</Name>\n\n\n\n                        \n                    <Value>17.47</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"GBP\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 İngilis funt sterlinqi</Name>\n\n\n\n                        \n                    <Value>174.2</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"SEK\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 İsveç kronu</Name>\n\n\n\n                        \n                    <Value>14.14</Value>\n                </Valute>\n            \n        \n                            <Valute Code=\"CHF\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 İsveçrə frankı</Name>\n\n\n\n                        \n                    <Value>78.98</Value>\n                </Valute>\n            \n        \n            \n        \n                            <Valute Code=\"CAD\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Kanada dolları</Name>\n\n\n\n                        \n                    <Value>88.99</Value>\n                </Valute>\n            \n        \n                            <Valute Code=\"KWD\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Küveyt dinarı</Name>\n\n\n\n                        \n                    <Value>395.99</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"LBP\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n\n                        <Name>1 Livan funtu</Name>\n\n\n\n                            \n                    <Value>0.07</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"NOK\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Norveç kronu</Name>\n\n\n\n                        \n                    <Value>15.93</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"SGD\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n                        <Name>1 Sinqapur dolları</Name>\n\n\n\n                        \n                    <Value>73.77</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n                            <Valute Code=\"JPY\">\n\n\n\n\n\n                    \n                        <Nominal>1</Nominal>\n\n\n                        <Name>1 Yapon yeni</Name>\n\n\n\n                            \n                    <Value>1.09</Value>\n                </Valute>\n            \n        \n            \n        \n            \n        \n            \n        \n            \n        \n            \n            </ValType>\n</ValCurs>\n"
+        headers:
+            Cache-Control:
+                - no-store, no-cache, must-revalidate
+            Connection:
+                - close
+            Content-Security-Policy:
+                - 'default-src ''self'' http: https: ws: wss: data: blob: ''unsafe-inline''; frame-ancestors ''self'';'
+            Content-Type:
+                - application/xml
+            Date:
+                - Thu, 01 Oct 2026 14:20:57 GMT
+            Expires:
+                - Thu, 19 Nov 1981 08:52:00 GMT
+            Permissions-Policy:
+                - interest-cohort=()
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - no-referrer-when-downgrade
+            Set-Cookie:
+                - PHPSESSID=j4nasc3bg2jbm1tr4dv3tth093; path=/; HttpOnly
+                - PHPSESSID=j4nasc3bg2jbm1tr4dv3tth093; path=/; HttpOnly
+                - TS011d9038=01806c96ee0c1d6aacb21d8982b3195ef4f51d5bcc043babfeefa86be2909f17167dd5c4ece314674ade0e70401f5b2041d7bec9b082e729c9bc05bd27919fab7cd7c9fd9b; Path=/
+                - TS011d9038=01806c96ee0c1d6aacb21d8982b3195ef4f51d5bcc043babfeefa86be2909f17167dd5c4ece314674ade0e70401f5b2041d7bec9b082e729c9bc05bd27919fab7cd7c9fd9b; Path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
