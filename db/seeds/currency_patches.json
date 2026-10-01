@@ -47,6 +47,7 @@
   { "iso_code": "PLZ", "name": "Polish Zloty (1950–1995)", "symbol": "PLZ", "subunit_to_unit": 100, "iso_numeric": "616" },
   { "iso_code": "SDD", "name": "Sudanese Dinar (1992–2007)", "symbol": "SDD", "subunit_to_unit": 100, "iso_numeric": "736" },
   { "iso_code": "SRG", "name": "Surinamese Guilder", "symbol": "SRG", "subunit_to_unit": 100, "iso_numeric": "740" },
+  { "iso_code": "UAK", "name": "Ukrainian Karbovanets", "symbol": "UAK", "subunit_to_unit": 100, "iso_numeric": "804" },
   { "iso_code": "VEB", "name": "Venezuelan Bolívar (1871–2008)", "symbol": "VEB", "subunit_to_unit": 100, "iso_numeric": "862" },
   { "iso_code": "YUM", "name": "Yugoslavian New Dinar (1994–2002)", "symbol": "YUM", "subunit_to_unit": 100, "iso_numeric": "891" },
   { "iso_code": "ZRN", "name": "Zairean New Zaire (1993–1998)", "symbol": "ZRN", "subunit_to_unit": 100, "iso_numeric": "180" }

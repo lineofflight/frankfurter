@@ -37,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Finnish markka, Greek drachma, litas, lats and koruna no longer blend past their euro changeover. (#751)
 - Old Belarusian ruble quotes labelled BYN in National Bank of Kazakhstan and Central Bank of Armenia history. (#752)
 - Central Bank of Armenia's Romanian leu from October 2005 and Turkmen manat from April 2010. (#753)
+- Bank of Lithuania history from June 1993. (#754)
+- Bank of Lithuania history for the retired currencies it quoted. (#754)
+- Bank of Lithuania's 1995 Turkmen manat rows that repeat its Russian ruble rate. (#754)
+- Bank of Lithuania's Belarusian ruble rates before the August 1994 denomination. (#754)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start

@@ -36,6 +36,30 @@ class Provider
         "TMT" => ["TMM", Date.new(2009, 1, 1)],
       }.freeze
 
+      # YUN is ISO's code for the convertible dinar of 1990 to 1992. LB uses it from 1996-05-07 to 1998-07-06 for the
+      # dinar of 1994, at 5 to 11 to the dollar in line with BIS's YUM rates, and quotes YUM at the same level from
+      # 1998-07-07: 1 YUN = 0.3734 LTL on 1998-07-06, 1 YUM = 0.3712 on 1998-07-07.
+      ALIASES = { "YUN" => "YUM" }.freeze
+
+      # From 1995-01-19 LB carried rows for Georgia, Tajikistan and Turkmenistan that repeat its Russian ruble quote to
+      # the digit (on 1995-01-27, the previous day's), until it began quoting each country's own currency. GER, a code
+      # no ISO list carries, does so for its whole run to 1995-09-28, and LB quotes the lari from the next day. TJR does
+      # until 100 TJR = 7.4074 LTL on 1995-07-11, about 84 rubles and in line with BIS's Tajik rate, and TMT until 100
+      # TMT = 0.2759 LTL on 1995-11-30, about 3 rubles. The copies price the ruble, which the RUB row already does, so
+      # they're skipped. Each entry is the date the copying stops.
+      RUBLE_COPIES = {
+        "GER" => Date.new(1995, 9, 29),
+        "TJR" => Date.new(1995, 7, 11),
+        "TMT" => Date.new(1995, 11, 30),
+      }.freeze
+
+      # Belarus denominated its unit of account tenfold on 1994-08-20. Until then prices and non-cash rubles were kept
+      # in nominal rubles, a tenth of a banknote ruble; from then the banknote ruble (BYB) was the unit. LB's first BYR
+      # rows quote the nominal ruble with the same amount field: 100 "BYR" = 0.0140 LTL on 1994-08-19, 0.1421 on
+      # 1994-08-22, while RUB and USD held still. Read as BYB, the old quotes are per 10, which puts them at BIS's
+      # month-end 2,800 BYB to the dollar for July 1994.
+      BYB_DENOMINATION = Date.new(1994, 8, 20)
+
       class << self
         def backfill_range = 30
       end
@@ -79,8 +103,12 @@ class Provider
             quote_amt = Float(first_amt)
             base_quantity = Float(second_amt)
             next if quote_amt.zero? || base_quantity.zero?
+            next if ruble_copy?(second_ccy, date)
 
-            { date:, base: historical_code(second_ccy, date), quote: "LTL", rate: quote_amt / base_quantity }
+            base_quantity /= 10 if second_ccy == "BYR" && date < BYB_DENOMINATION
+
+            base = historical_code(ALIASES.fetch(second_ccy, second_ccy), date)
+            { date:, base:, quote: "LTL", rate: quote_amt / base_quantity }
           else
             rate = Float(second_amt)
             next if rate.zero?
@@ -91,6 +119,11 @@ class Provider
       end
 
       private
+
+      def ruble_copy?(code, date)
+        cutover = RUBLE_COPIES[code]
+        cutover && date < cutover
+      end
 
       def fetch_date(date)
         tp = date < EUR_ADOPTION ? "LT" : "EU"

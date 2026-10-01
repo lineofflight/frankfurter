@@ -1,0 +1,1704 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1994-08-19&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:45 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '6959'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQ1AhZE8fgrEQ; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:45 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DC9T9Bcn%2BN%2Fkmdi3lPDpzVFP4b1AaRJyIB1DrIJ9nJML28D9%2BUG6FHsoIl42nJQGFJX0JyXSqULbXXGEhnwFv2C09CfqtVHHdY5CJ8x4Odmdy2Ys4Y%2Ftvjmm5Lyse4J9jBWPGkvJMA%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede2e7d070d48-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0125</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3662</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9606</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1251</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0140</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9027</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.0717</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1430</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5773</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6480</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3207</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0308</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7764</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7506</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.1658</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0372</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2516</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0401</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3922</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.2727</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9639</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2948</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5848</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0175</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1868</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5074</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6571</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0091</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.8116</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-19</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.8914</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:45 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1994-08-22&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:45 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '6957'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQ1AhZE8fgrEQ; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:45 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=FahW48TwkzDnxVw4sCzzuFlA4SeXJ3wfMySyPifsifFPzZAILoKRGN6QNVu1wHpZ2zeAEsyEM37KpmeuXNlEDvdqBICsX%2F0wWYZWHLI2zOcFY1LWBtIM0GWpJUCkbpVdLprukvdYmg%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede301e2866d5-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0125</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3687</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9554</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1258</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1421</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.91</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.0888</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1437</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5951</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6539</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3224</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0310</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7869</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7558</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2010</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0375</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2539</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0406</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3922</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0878</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.2993</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9639</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3118</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5895</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0175</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1860</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5190</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6615</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0088</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.8340</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1994-08-22</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.9298</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:45 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1993-06-25&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:46 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '5676'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQjzDknnHxWip; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dBndQ3qaXIhkgK%2FrsDbl7lLgJFgv7Vp%2BxKpQ4mN1XepSzKpN5gS1qfAVnuQ7jUa8RdUJSCzSe2IiJpS1IAHb%2BAE%2B7RLZNhzguKyZIjRpa4dbubTIKzd9fcc%2B4fc6Hr2JCwqzdbnPCg%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede31c88ea5c5-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3785</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.0852</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1298</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.5352</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9970</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1579</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6649</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6935</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3462</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0349</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7977</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8073</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6934</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0510</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2947</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0406</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4207</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6435</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0262</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4128</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6199</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.7382</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1131</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.50</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3846</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1993-06-25</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.4270</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:46 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1995-07-10&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:46 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '8046'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQjzDknnHxWip; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9HSwXSX7dlnZ3ct2suTkbLBseqtPcQm5FR5TTdgpJ6Rfx%2BgnaBYc4HUZFb8qTfDBiWHDPjUfJq3AD3Rs5j2uMfRDK2iehDHVgwVfJH%2B9A4fX%2BUsVxUvRtLGaxCYGF9fyzPHFTV7RFQ%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede333eb30df4-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9750</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4098</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8622</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0904</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1402</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9252</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4733</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1545</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8828</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7392</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3617</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3139</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9362</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8263</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.39</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0873</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2465</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2472</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.6506</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3774</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3391</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.8585</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8821</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5733</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6483</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7025</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0873</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5524</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8596</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0873</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0873</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2658</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1329</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2729</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-10</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.3286</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:46 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1995-07-11&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:46 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '8048'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQjzDknnHxWip; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=TBn4Coqi14%2F%2FnONJFuXtBCiuDm%2BESzgnlfXrG9Wcz3NCVwJASdTfGQVaMlR7NLZ8BTYBXHpqPVtdrGFZEwXrUkXEERrgrWoSTl%2F%2BbHiRb1z7dMO3g0QR56ozf9nla6wykJnC%2BGY60Q%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede345e6466b8-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9750</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4071</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8642</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0904</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1393</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9439</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4468</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1538</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8626</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7351</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3605</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3037</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9313</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8219</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3748</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0880</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2332</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.5740</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3781</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.3391</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.8125</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8822</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5552</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6444</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.6920</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0880</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5514</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8484</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4074</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0880</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2658</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1329</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2544</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-07-11</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.2988</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:46 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1995-11-29&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:46 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '8258'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQjzDknnHxWip; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=frVycnG4kpyivmgEaG7%2BNiNsqqEAYx98RgHaiKZV47MXFxEzR0azcpcr2wEmRpHZcAEe8z%2FtfZscjoJpeg%2B%2BWAqeCMSsZUyc2q8Au2rmIxjOR3LDrtAgGSJDvyMt1utiaFGRdfWI7g%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede3579548cb0-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9919</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3957</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9778</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0901</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1355</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9537</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4557</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1508</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.7848</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7196</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3518</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2721</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9374</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8109</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2076</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.20</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9859</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.4080</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IEP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2504</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9388</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3636</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4766</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8730</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4856</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6327</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.6042</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0874</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6108</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8311</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.7660</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0874</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2181</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1111</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.9768</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-29</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.1532</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:46 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1995-11-30&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:46 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '8256'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCEQjzDknnHxWip; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qUQaUaV4%2FpkV3hQ8k03rqAZwA%2FGLcsRFYB23PEnItWJDpqga0aKMrRzlMS%2F8VFRs56gFINoo922w80biEvQ8FC6kdsxBiAN2I45mqwXWC9e7wmmFrBrwh4hlTQ0U9BXC61Zm6jCqww%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede369e55cbb9-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9919</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3971</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9934</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0901</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1359</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9456</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4547</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1512</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.7933</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7212</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3478</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2818</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9387</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8140</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.16</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.2103</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9881</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.36</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IEP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2507</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.9524</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3636</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.2598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.4488</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8731</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4952</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6331</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.5994</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0873</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6147</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8338</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.4388</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2759</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2178</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAK</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1111</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.9608</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1995-11-30</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.1772</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:46 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1998-07-06&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:47 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '13198'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCERUojxMRvEBDE; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IuvK6dMgy%2BxThfiN3HbnViLkOn0aNTwLQQJc6wm8YnCq8SAfQ%2FJxgEKFa9c9JwxzNMZsuglqOrqF8rlboygnsIdQy2KcjhCAN7BC%2FhH%2BM0%2F1AwMPup6JEzlLoSNu2F%2BmJN05XR334Q%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede37ac239727-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0891</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AED</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7972</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3127</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4730</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0357</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1067</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2237</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BGN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5979</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4619</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BRL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.7360</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6208</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.6014</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CYP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4831</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CNY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1225</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1999</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5776</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2750</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5923</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7237</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6562</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6492</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9678</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3180</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GRD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5163</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HKD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6095</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HRK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8177</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.54</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IEP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0901</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ILS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.0937</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>INR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.5811</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ISK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2233</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3734</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YUN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8748</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2089</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2885</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KRW</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.1797</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6834</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8421</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>10.1971</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MTL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9517</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5166</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1484</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1746</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PTE</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4622</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RON</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6417</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4961</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3683</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3665</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SIT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1145</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6316</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>THB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5305</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7692</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1512</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TRL</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1156</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9296</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAH</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7314</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VEB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.3290</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.3606</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-06</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7042</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ZAR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:47 GMT
+- request:
+    method: get
+    uri: https://www.lb.lt/webservices/FxRates/FxRates.asmx/getFxRates?dt=1998-07-07&tp=LT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.lb.lt
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 01 Oct 2026 22:22:47 GMT
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '21811'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 2.0.50727
+      X-Powered-By:
+      - ASP.NET
+      Set-Cookie:
+      - __cflb=02DiuJFtw57keZiWgHa69KQ1Wu4g8NNCERUojxMRvEBDE; HttpOnly; SameSite=Lax;
+        Path=/; Expires=Fri, 02 Oct 2026 21:22:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2FqTCJ70jEJjAdZ4KNY7CpggL4mvW32TfCp22uPacFmMkBlEH36o9A5QvRE%2FSQsawyuIgvw2DKnicHVQcEJ6cXK3XP1aZ%2BxU9ClBgWfjKRf8gn5Gn88zCTu9VAurQtV%2B26Gv6EUeozg%3D%3D"}]}'
+      Cf-Ray:
+      - a43ede38be8cf546-AMS
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FxRates xmlns=\"http://www.lb.lt/WebServices/FxRates\">\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0890</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AED</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6187</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ALL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7972</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AMD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.0006</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ARS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3131</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ATS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.4770</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AUD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0360</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>AZN</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.6393</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BDT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1068</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BEF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2213</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BGN</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>10.6097</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BHD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.60</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BYR</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7233</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BOB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4586</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>BRL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.7321</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6135</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CHF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>7.5286</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CYP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8556</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CLP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4831</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CNY</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9760</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>COP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1234</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>CZK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2026</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DEM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5784</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.7360</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>DZD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7589</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ECS</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2754</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1728</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>EGP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.5961</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ESP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5782</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ETB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7247</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FIM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6572</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>FRF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6356</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GBP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.9674</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GEL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3234</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GNF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3129</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>GRD</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5162</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HKD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6032</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HRK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.8252</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>HUF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2744</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IDR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.5484</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IEP</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3333</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YER</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0892</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ILS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.4206</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>INR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.2825</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>IRR</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.5695</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ISK</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2237</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ITL</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3712</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>YUM</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.6417</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JOD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.8748</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>JPY</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.7283</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KES</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2089</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KGS</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.2949</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KRW</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>13.0378</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.1777</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>KZT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.6488</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LBP</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1065</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LUF</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6951</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LVL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4079</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MAD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.8421</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MDL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7435</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MGF</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.9674</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MYR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4892</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MNT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>10.1231</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MTL</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4462</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MXN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.3735</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>MZN</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9546</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NLG</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5159</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NOK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.0746</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>NZD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PAB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.3659</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PEN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6688</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PHP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>8.6151</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PKR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.1495</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PLN</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.1523</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>PTE</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0988</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>QAR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4598</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RON</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6420</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>RUB</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.0664</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SAR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.4965</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SEK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3644</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SGD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>6.6667</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SYP</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2.3322</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SIT</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1140</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>SKK</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>9.6618</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>THB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.5305</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TJR</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7692</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TMT</Ccy>\r\n      <Amt>1000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.4226</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TND</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1495</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TRL</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.1163</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TWD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6043</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>TZS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>1.9291</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UAH</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.3815</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UYU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>USD</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>2</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>UZS</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.7220</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VEB</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>3.0807</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>VND</Ccy>\r\n      <Amt>10000</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6548</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XAF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>5.3096</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XDR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>4.3630</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XEU</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6547</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>XOF</Ccy>\r\n      <Amt>100</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n
+        \ <FxRate>\r\n    <Tp>LT</Tp>\r\n    <Dt>1998-07-07</Dt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>LTL</Ccy>\r\n      <Amt>0.6314</Amt>\r\n    </CcyAmt>\r\n    <CcyAmt>\r\n
+        \     <Ccy>ZAR</Ccy>\r\n      <Amt>1</Amt>\r\n    </CcyAmt>\r\n  </FxRate>\r\n</FxRates>"
+  recorded_at: Thu, 01 Oct 2026 22:22:47 GMT
+recorded_with: VCR 6.4.0
