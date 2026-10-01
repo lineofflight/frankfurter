@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Backfill no longer skips a day at each window boundary. (#739)
 - National Bank of the Kyrgyz Republic backfills up to today. (#739)
+- Retired and non-ISO currency labels in CBU, BOTA, NBP and BOI history. (#740)
+- Bank of Israel pre-euro rates published per 10, 100 or 1000 units. (#740)
+- Legacy currencies quoted past their redenomination. (#740)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start

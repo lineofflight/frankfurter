@@ -69,6 +69,18 @@ class Provider < Sequel::Model(:providers)
         ])
       end
 
+      it "maps the MXM label to the old metical" do
+        html = <<~HTML
+          <table><tbody>
+          <tr><td>757</td><td>MXM</td><td>0.0599</td><td>0.0605</td><td>0.0602</td><td>01-Jul-99</td></tr>
+          </tbody></table>
+        HTML
+
+        _(adapter.parse(html)).must_equal([
+          { date: Date.new(1999, 7, 1), base: "MZM", quote: "TZS", rate: 0.0602 },
+        ])
+      end
+
       it "excludes GOLD and defunct currencies" do
         html = <<~HTML
           <html><body>
