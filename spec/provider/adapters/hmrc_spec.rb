@@ -50,13 +50,28 @@ class Provider < Sequel::Model(:providers)
         end
 
         it "raises when a past month's file is missing" do
-          _ do
-            Date.stub(:today, Date.new(2021, 1, 15)) do
-              adapter.fetch(after: Date.new(2020, 12, 1), upto: Date.new(2020, 12, 31))
+          VCR.eject_cassette
+
+          begin
+            VCR.turned_off do
+              WebMock.stub_request(:get, /monthly_csv_2023-5\.csv/).to_return(status: 404)
+
+              _ { adapter.fetch(after: Date.new(2023, 5, 1), upto: Date.new(2023, 5, 31)) }
+                .must_raise(HTTP::StatusError)
             end
+          ensure
+            WebMock.reset!
+            VCR.insert_cassette("hmrc", match_requests_on: [:method, :uri])
           end
-            .must_raise(HTTP::StatusError)
         end
+      end
+
+      it "starts at the first file when a window opens before it" do
+        # A full backfill opens the day before coverage starts. HMRC has no file for December 2020.
+        dataset = adapter.fetch(after: Date.new(2020, 12, 31), upto: Date.new(2021, 1, 30))
+
+        _(dataset).wont_be_empty
+        _(dataset.map { |r| r[:date] }.min).must_equal(Date.new(2021, 1, 1))
       end
 
       describe "#parse" do
