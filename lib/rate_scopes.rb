@@ -33,10 +33,33 @@ module RateScopes
       conditions.empty? ? false : Sequel.|(*conditions)
     end
 
-    # Recompute a terminal-straddling pair only when expired daily observations contaminate its average. Keep stored
-    # precision for every unaffected pair, including boundary buckets whose daily history is incomplete or absent.
+    # Matches a daily observation RateSpike screens out of blends. The flags' columns are renamed so the condition names
+    # no table and holds when a caller re-aliases rates, as RateCoverage does. Nil until migration 045 creates the
+    # table, since older migrations blend through these scopes too.
+    def spiked(db)
+      @spikes ||= {}
+      @spikes[db] ||= db.tables.include?(:rate_spikes)
+      return unless @spikes[db]
+
+      columns = [:provider, :date, :base, :quote]
+      flags = db[:rate_spikes].select(*columns.map { |column| Sequel.as(column, :"spike_#{column}") })
+      db.from(flags).where(columns.to_h { |column| [:"spike_#{column}", column] }).exists
+    end
+
+    # Recompute a pair's average from its eligible daily observations only when an expired or spiked one contaminates
+    # it. Keep stored precision for every unaffected pair, including boundary buckets whose daily history is incomplete
+    # or absent.
     def eligible_rollups(dataset, precision)
       table = dataset.model.table_name
+      db = dataset.db
+      bucket = Bucket.expression(precision)
+      same_pair = [:provider, :base, :quote].to_h { |column| [column, Sequel[table][column]] }
+      observations = db[:rates].where(same_pair).where(Bucket.span(precision, Sequel[table][:bucket_date]))
+        .where(bucket => Sequel[table][:bucket_date])
+      expired = expired_currency_condition
+      eligible = observations.exclude(expired)
+      contaminations = []
+
       boundaries = DefunctCurrency.all.map do |entry|
         last_bucket = Bucket.expression(precision, (entry.terminal_date - 1).to_s)
         Sequel.&(
@@ -45,14 +68,15 @@ module RateScopes
           Sequel.|({ base: entry.iso_code }, { quote: entry.iso_code }),
         )
       end
-      return dataset if boundaries.empty?
+      contaminations << Sequel.&(Sequel.|(*boundaries), observations.where(expired).exists) unless boundaries.empty?
 
-      observations = dataset.db[:rates]
-        .where([:provider, :base, :quote].to_h { |column| [column, Sequel[table][column]] })
-        .where(Bucket.expression(precision) => Sequel[table][:bucket_date])
-      expired = expired_currency_condition
-      contaminated = Sequel.&(Sequel.|(*boundaries), observations.where(expired).exists)
-      eligible = observations.exclude(expired)
+      if (spiked = spiked(db))
+        contaminations << db[:rate_spikes].where(same_pair).where(bucket => Sequel[table][:bucket_date]).exists
+        eligible = eligible.exclude(spiked)
+      end
+      return dataset if contaminations.empty?
+
+      contaminated = Sequel.|(*contaminations)
       value = Sequel.case({ contaminated => eligible.select(Sequel.function(:avg, :rate)) }, :rate).as(:rate)
       dataset.where(Sequel.|(Sequel.~(contaminated), eligible.exists))
         .select(:bucket_date, :provider, :base, :quote, value).from_self(alias: table)
@@ -74,7 +98,10 @@ module RateScopes
       end
       precision = { weekly_rates: :week, monthly_rates: :month }[model.table_name]
       scope = RateScopes.current_currencies(scope, model.date_column, precision:)
-      precision ? RateScopes.eligible_rollups(scope, precision) : scope
+      return RateScopes.eligible_rollups(scope, precision) if precision
+
+      spiked = RateScopes.spiked(db)
+      spiked ? scope.exclude(spiked) : scope
     end
 
     def between(interval)

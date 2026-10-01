@@ -23,5 +23,15 @@ module Bucket
       when "month" then month(date_column)
       end
     end
+
+    # A date range holding every date of the bucket, so a scan can seek a date index before the exact bucket test. Week
+    # buckets count whole weeks from 1 January, so a week's dates sit from 7 days before its bucket date to 5 after.
+    def span(precision, bucket_column, date_column = :date)
+      from, to = precision.to_s == "week" ? ["-7 days", "+6 days"] : ["+0 days", "+1 month"]
+      Sequel.&(
+        Sequel[date_column] >= Sequel.function(:date, bucket_column, from),
+        Sequel[date_column] < Sequel.function(:date, bucket_column, to),
+      )
+    end
   end
 end

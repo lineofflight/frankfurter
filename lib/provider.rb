@@ -15,6 +15,7 @@ require "provider/adapters/adapter"
 require "rate"
 require "rate_components"
 require "rate_precision"
+require "rate_spike"
 require "rate_validation"
 
 class Provider < Sequel::Model(:providers)
@@ -157,14 +158,18 @@ class Provider < Sequel::Model(:providers)
         count = db.get(Sequel.lit("total_changes()")) - before
         if count.positive?
           affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq
-          refresh_rollups(records.map { |r| r[:date] }.uniq)
+          dates = records.map { |r| r[:date] }.uniq
+          # Usually the previous observation, judged now that its successor has arrived.
+          rescreened = RateSpike.refresh(key, dates)
+          refresh_rollups(dates, rescreened)
           refresh_currency_summaries(affected_currencies)
           if blends?
             # A late arrival at date d joins the carry-forward contributor set of anchors through d + LOOKBACK_DAYS, so
-            # those stored blends change too. Inside the transaction: the write lock serializes concurrent backfills'
-            # refreshes, and a failed refresh rolls back the insert so the next fetch re-ingests and retries.
-            dates = records.map { |r| r[:date] }
-            BlendedRate.refresh(dates.min..(dates.max + CarryForward::LOOKBACK_DAYS))
+            # those stored blends change too, as do those of a rescreened date. Inside the transaction: the write lock
+            # serializes concurrent backfills' refreshes, and a failed refresh rolls back the insert so the next fetch
+            # re-ingests and retries.
+            changed = dates + rescreened
+            BlendedRate.refresh(changed.min..(changed.max + CarryForward::LOOKBACK_DAYS))
           end
         end
         count
@@ -251,7 +256,8 @@ class Provider < Sequel::Model(:providers)
     count
   end
 
-  def refresh_rollups(dates)
+  # Rescreened dates leave the provider's own averages alone but change the blended buckets that hold them.
+  def refresh_rollups(dates, rescreened = [])
     # Older data migrations load Provider before migration 030 creates these tables. Require the grouped models only
     # when backfill actually needs them; normal application startup always migrates before starting ingestion.
     require "blended_weekly_rate"
@@ -261,8 +267,14 @@ class Provider < Sequel::Model(:providers)
     months = refresh_rollup(:monthly_rates, Bucket.month, dates)
     return unless blends?
 
-    BlendedWeeklyRate.refresh(weeks)
-    BlendedMonthlyRate.refresh(months)
+    BlendedWeeklyRate.refresh(weeks | buckets(Bucket.week, rescreened))
+    BlendedMonthlyRate.refresh(months | buckets(Bucket.month, rescreened))
+  end
+
+  def buckets(bucket_expr, dates)
+    return [] if dates.empty?
+
+    db[:rates].where(provider: key, date: dates).select_map(bucket_expr).uniq
   end
 
   def refresh_currency_summaries(iso_codes)
