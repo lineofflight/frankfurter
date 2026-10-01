@@ -15,7 +15,7 @@
   },
   "AFA": {
     "iso_code": "AFA",
-    "name": "Afghan Afghani (old)",
+    "name": "Afghan Afghani (1927–2002)",
     "symbol": "AFA",
     "iso_numeric": "004",
     "subunit_to_unit": 100
@@ -57,7 +57,7 @@
   },
   "AOR": {
     "iso_code": "AOR",
-    "name": "Angolan Kwanza Reajustado",
+    "name": "Angolan Readjusted Kwanza (1995–1999)",
     "symbol": "AOR",
     "iso_numeric": "982",
     "subunit_to_unit": 100
@@ -92,7 +92,7 @@
   },
   "AZM": {
     "iso_code": "AZM",
-    "name": "Azerbaijani Manat (old)",
+    "name": "Azerbaijani Manat (1993–2006)",
     "symbol": "₼",
     "iso_numeric": "031",
     "subunit_to_unit": 100
@@ -141,7 +141,7 @@
   },
   "BGL": {
     "iso_code": "BGL",
-    "name": "Bulgarian Lev (old)",
+    "name": "Bulgarian Hard Lev",
     "symbol": "BGL",
     "iso_numeric": "100",
     "subunit_to_unit": 100
@@ -197,7 +197,7 @@
   },
   "BRR": {
     "iso_code": "BRR",
-    "name": "Brazilian Cruzeiro Real",
+    "name": "Brazilian Cruzeiro (1993–1994)",
     "symbol": "CR$",
     "iso_numeric": "987",
     "subunit_to_unit": 100
@@ -232,7 +232,7 @@
   },
   "BYB": {
     "iso_code": "BYB",
-    "name": "Belarusian Ruble (1992–2000)",
+    "name": "Belarusian Ruble (1994–1999)",
     "symbol": "BYB",
     "iso_numeric": "112",
     "subunit_to_unit": 100
@@ -246,7 +246,7 @@
   },
   "BYR": {
     "iso_code": "BYR",
-    "name": "Belarusian Ruble",
+    "name": "Belarusian Ruble (2000–2016)",
     "symbol": "Br",
     "iso_numeric": "974",
     "subunit_to_unit": 1
@@ -327,7 +327,7 @@
   },
   "CSD": {
     "iso_code": "CSD",
-    "name": "Serbian Dinar (old)",
+    "name": "Serbian Dinar (2002–2006)",
     "symbol": "CSD",
     "iso_numeric": "891",
     "subunit_to_unit": 100
@@ -355,7 +355,7 @@
   },
   "CYP": {
     "iso_code": "CYP",
-    "name": "Cyprus Pound",
+    "name": "Cypriot Pound",
     "symbol": "£",
     "iso_numeric": "196",
     "subunit_to_unit": 100
@@ -369,7 +369,7 @@
   },
   "DEM": {
     "iso_code": "DEM",
-    "name": "Deutsche Mark",
+    "name": "German Mark",
     "symbol": "DM",
     "iso_numeric": "276",
     "subunit_to_unit": 100
@@ -803,7 +803,7 @@
   },
   "LUF": {
     "iso_code": "LUF",
-    "name": "Luxembourg Franc",
+    "name": "Luxembourgian Franc",
     "symbol": "F",
     "iso_numeric": "442",
     "subunit_to_unit": 100
@@ -880,7 +880,7 @@
   },
   "MRO": {
     "iso_code": "MRO",
-    "name": "Mauritanian Ouguiya",
+    "name": "Mauritanian Ouguiya (1973–2017)",
     "symbol": "UM",
     "iso_numeric": "478",
     "subunit_to_unit": 5
@@ -936,7 +936,7 @@
   },
   "MZM": {
     "iso_code": "MZM",
-    "name": "Mozambican Metical (old)",
+    "name": "Mozambican Metical (1980–2006)",
     "symbol": "MZM",
     "iso_numeric": "508",
     "subunit_to_unit": 100
@@ -1048,7 +1048,7 @@
   },
   "PLZ": {
     "iso_code": "PLZ",
-    "name": "Polish Zloty (old)",
+    "name": "Polish Zloty (1950–1995)",
     "symbol": "PLZ",
     "iso_numeric": "616",
     "subunit_to_unit": 100
@@ -1076,7 +1076,7 @@
   },
   "ROL": {
     "iso_code": "ROL",
-    "name": "Romanian Leu (old)",
+    "name": "Romanian Leu (1952–2006)",
     "symbol": "L",
     "iso_numeric": "642",
     "subunit_to_unit": 100
@@ -1104,7 +1104,7 @@
   },
   "RUR": {
     "iso_code": "RUR",
-    "name": "Russian Ruble (old)",
+    "name": "Russian Ruble (1991–1998)",
     "symbol": "₽",
     "iso_numeric": "810",
     "subunit_to_unit": 100
@@ -1139,7 +1139,7 @@
   },
   "SDD": {
     "iso_code": "SDD",
-    "name": "Sudanese Dinar",
+    "name": "Sudanese Dinar (1992–2007)",
     "symbol": "SDD",
     "iso_numeric": "736",
     "subunit_to_unit": 100
@@ -1195,7 +1195,7 @@
   },
   "SLL": {
     "iso_code": "SLL",
-    "name": "Sierra Leonean Leone",
+    "name": "Sierra Leonean Leone (1964–2022)",
     "symbol": "Le",
     "iso_numeric": "694",
     "subunit_to_unit": 100
@@ -1230,7 +1230,7 @@
   },
   "STD": {
     "iso_code": "STD",
-    "name": "São Tomé and Príncipe Dobra",
+    "name": "São Tomé & Príncipe Dobra (1977–2017)",
     "symbol": "Db",
     "iso_numeric": "678",
     "subunit_to_unit": 100
@@ -1286,7 +1286,7 @@
   },
   "TMM": {
     "iso_code": "TMM",
-    "name": "Turkmenistani Manat (old)",
+    "name": "Turkmenistani Manat (1993–2009)",
     "symbol": "m",
     "iso_numeric": "795",
     "subunit_to_unit": 100
@@ -1314,7 +1314,7 @@
   },
   "TRL": {
     "iso_code": "TRL",
-    "name": "Turkish Lira (old)",
+    "name": "Turkish Lira (1922–2005)",
     "symbol": "₤",
     "iso_numeric": "792",
     "subunit_to_unit": 1
@@ -1391,14 +1391,14 @@
   },
   "VEB": {
     "iso_code": "VEB",
-    "name": "Venezuelan Bolivar (old)",
+    "name": "Venezuelan Bolívar (1871–2008)",
     "symbol": "VEB",
     "iso_numeric": "862",
     "subunit_to_unit": 100
   },
   "VEF": {
     "iso_code": "VEF",
-    "name": "Venezuelan Bolívar",
+    "name": "Venezuelan Bolívar (2008–2018)",
     "symbol": "Bs.F",
     "iso_numeric": "937",
     "subunit_to_unit": 100
@@ -1566,7 +1566,7 @@
   },
   "YUM": {
     "iso_code": "YUM",
-    "name": "Yugoslav Dinar",
+    "name": "Yugoslavian New Dinar (1994–2002)",
     "symbol": "YUM",
     "iso_numeric": "891",
     "subunit_to_unit": 100
@@ -1580,7 +1580,7 @@
   },
   "ZMK": {
     "iso_code": "ZMK",
-    "name": "Zambian Kwacha (old)",
+    "name": "Zambian Kwacha (1968–2012)",
     "symbol": "ZK",
     "iso_numeric": "894",
     "subunit_to_unit": 100
@@ -1594,14 +1594,14 @@
   },
   "ZRN": {
     "iso_code": "ZRN",
-    "name": "Zairean New Zaire",
+    "name": "Zairean New Zaire (1993–1998)",
     "symbol": "ZRN",
     "iso_numeric": "180",
     "subunit_to_unit": 100
   },
   "ZWD": {
     "iso_code": "ZWD",
-    "name": "Zimbabwean Dollar",
+    "name": "Zimbabwean Dollar (1980–2008)",
     "symbol": "$",
     "iso_numeric": "716",
     "subunit_to_unit": 100
@@ -1615,7 +1615,7 @@
   },
   "ZWL": {
     "iso_code": "ZWL",
-    "name": "Zimbabwean Dollar",
+    "name": "Zimbabwean Dollar (2009–2024)",
     "symbol": "$",
     "iso_numeric": "932",
     "subunit_to_unit": 100
@@ -1629,7 +1629,7 @@
   },
   "ZWR": {
     "iso_code": "ZWR",
-    "name": "Zimbabwean Dollar",
+    "name": "Zimbabwean Dollar (2008)",
     "symbol": "$",
     "iso_numeric": "935",
     "subunit_to_unit": 100

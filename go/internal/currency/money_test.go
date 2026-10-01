@@ -58,6 +58,18 @@ func TestAppliesAllPatches(t *testing.T) {
 	}
 }
 
+func TestNamesRetiredCurrenciesAfterCLDR(t *testing.T) {
+	for code, name := range map[string]string{
+		"VEB": "Venezuelan Bolívar (1871–2008)",
+		"VEF": "Venezuelan Bolívar (2008–2018)",
+		"SLL": "Sierra Leonean Leone (1964–2022)",
+	} {
+		if info, _ := Find(code); info.Name != name {
+			t.Errorf("%s name = %q, want %q", code, info.Name, name)
+		}
+	}
+}
+
 func TestRegistersEcuadorianSucre(t *testing.T) {
 	info, _ := Find("ECS")
 	if info.Name != "Ecuadorian Sucre" || info.ISONumeric != "218" || info.SubunitToUnit != 100 {
