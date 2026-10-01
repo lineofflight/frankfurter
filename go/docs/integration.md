@@ -46,6 +46,10 @@ A full local backfill from an empty database turned up these gaps:
 - AMCM stamps rows before mid-2012 with a time of day (`2012-05-14 14:00:00`). Go kept it, which put the row after
   midnight of `upto` and dropped each window's last day. It now keeps the date only, as Ruby's `Date.parse` does.
   Go only.
+- NBKR's last backfill window is open-ended, which took the live feed and its single snapshot, so up to a year before
+  today was never fetched. A window from `after` that reaches today now scrapes the historical page from the day after
+  `after` through yesterday, then appends the live snapshot. A routine run, resuming from yesterday, still requests
+  only the live feed. Fixed on both sides.
 
 ## Left outside go/
 

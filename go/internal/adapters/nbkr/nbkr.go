@@ -10,10 +10,13 @@
 //     NBKR's internal valuta_id, for the requested window. Nominals are not in the response, so they live in
 //     defaultCurrencies alongside the ISO mapping taken from the landing page's <select> options.
 //
-// Fetch uses the XML feed when the window is open or reaches today, and the
-// HTML scrape for bounded windows strictly in the past. Rows keep NBKR's
-// direction: foreign currency as base, KGS as quote. Unlike most adapters,
-// after is inclusive, as in the Ruby adapter.
+// Fetch uses the HTML scrape for bounded windows strictly in the past and the
+// XML feed when after is unset. A window from after that reaches today, as
+// backfill's last one does, scrapes the day after after through yesterday and
+// appends the XML snapshot, since the feed holds only the latest rates. A
+// routine run resuming from yesterday requests the feed alone. Rows keep NBKR's
+// direction: foreign currency as base, KGS as quote. Unlike most adapters, the
+// window keeps rows dated on after itself, as in the Ruby adapter.
 package nbkr
 
 import (
@@ -91,14 +94,18 @@ func (a *Adapter) BackfillRange() int { return 365 }
 
 // Fetch implements adapter.Adapter.
 func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.Rate, error) {
+	today := a.Today()
 	var (
 		rates []adapter.Rate
 		err   error
 	)
-	if !after.IsZero() && !upto.IsZero() && upto.Before(a.Today()) {
-		rates, err = a.fetchHistorical(ctx, after, upto)
-	} else {
+	switch {
+	case after.IsZero():
 		rates, err = a.fetchLive(ctx)
+	case !upto.IsZero() && upto.Before(today):
+		rates, err = a.fetchHistorical(ctx, after, upto)
+	default:
+		rates, err = a.fetchRecent(ctx, after, today)
 	}
 	if err != nil {
 		return nil, err
@@ -112,6 +119,26 @@ func (a *Adapter) Fetch(ctx context.Context, after, upto time.Time) ([]adapter.R
 		out = append(out, r)
 	}
 	return out, nil
+}
+
+// fetchRecent serves a window from after that reaches today: the historical
+// page from the day after after through yesterday, skipped when that is empty,
+// then the live snapshot. after is the newest stored day or the previous
+// window's upto, both already fetched.
+func (a *Adapter) fetchRecent(ctx context.Context, after, today time.Time) ([]adapter.Rate, error) {
+	var rates []adapter.Rate
+	if from, to := after.AddDate(0, 0, 1), today.AddDate(0, 0, -1); !from.After(to) {
+		historical, err := a.fetchHistorical(ctx, from, to)
+		if err != nil {
+			return nil, err
+		}
+		rates = historical
+	}
+	live, err := a.fetchLive(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return append(rates, live...), nil
 }
 
 func (a *Adapter) fetchLive(ctx context.Context) ([]adapter.Rate, error) {

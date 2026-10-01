@@ -5,6 +5,7 @@ import (
 	"io"
 	"math"
 	"net/http"
+	"net/url"
 	"slices"
 	"strings"
 	"testing"
@@ -28,6 +29,8 @@ func find(rates []adapter.Rate, base string) (adapter.Rate, bool) {
 func fetchLive(t *testing.T, after time.Time) []adapter.Rate {
 	t.Helper()
 	a := New(vcrtest.Client(t, "nbkr_live", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI), vcrtest.AllowPlaybackRepeats))
+	// The day after the cassette's daily feed, so a set after scrapes nothing.
+	a.Now = func() time.Time { return time.Date(2026, 5, 25, 12, 0, 0, 0, time.UTC) }
 	rates, err := a.Fetch(context.Background(), after, time.Time{})
 	if err != nil {
 		t.Fatal(err)
@@ -264,8 +267,16 @@ func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { retu
 // recordingAdapter answers every request with an empty feed and records the
 // requested paths.
 func recordingAdapter(paths *[]string) *Adapter {
+	return queryRecordingAdapter(paths, nil)
+}
+
+// queryRecordingAdapter is recordingAdapter that also records each query.
+func queryRecordingAdapter(paths *[]string, queries *[]url.Values) *Adapter {
 	a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 		*paths = append(*paths, r.URL.Path)
+		if queries != nil {
+			*queries = append(*queries, r.URL.Query())
+		}
 		body := `<CurrencyRates Date="23.05.2026"></CurrencyRates>`
 		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: r}, nil
 	})})
@@ -277,16 +288,21 @@ func recordingAdapter(paths *[]string) *Adapter {
 func TestFetchDispatchesByWindow(t *testing.T) {
 	today := adapter.Date(2026, 5, 23)
 	live := []string{"/XML/daily.xml", "/XML/weekly.xml"}
+	both := []string{"/index1.jsp", "/XML/daily.xml", "/XML/weekly.xml"}
 	tests := []struct {
 		name        string
 		after, upto time.Time
 		want        []string
 	}{
 		{"open window", time.Time{}, time.Time{}, live},
-		{"after only", today.AddDate(0, 0, -10), time.Time{}, live},
+		{"after only", today.AddDate(0, 0, -10), time.Time{}, both},
 		{"upto only in past", time.Time{}, today.AddDate(0, 0, -1), live},
-		{"upto today", today.AddDate(0, 0, -10), today, live},
+		{"upto today", today.AddDate(0, 0, -10), today, both},
+		{"upto in future", today.AddDate(0, 0, -10), today.AddDate(0, 0, 1), both},
 		{"upto yesterday", today.AddDate(0, 0, -10), today.AddDate(0, 0, -1), []string{"/index1.jsp"}},
+		{"after two days ago", today.AddDate(0, 0, -2), time.Time{}, both},
+		{"after yesterday", today.AddDate(0, 0, -1), time.Time{}, live},
+		{"after today", today, time.Time{}, live},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -298,6 +314,64 @@ func TestFetchDispatchesByWindow(t *testing.T) {
 				t.Errorf("paths = %v, want %v", paths, tt.want)
 			}
 		})
+	}
+}
+
+func TestFetchScrapesHistoryBeforeTheLiveSnapshot(t *testing.T) {
+	var paths []string
+	var queries []url.Values
+	a := queryRecordingAdapter(&paths, &queries)
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 1, 10), time.Time{}); err != nil {
+		t.Fatal(err)
+	}
+	if len(queries) != 3 || paths[0] != "/index1.jsp" {
+		t.Fatalf("paths = %v, want the historical page then the live feed", paths)
+	}
+	q := queries[0]
+	from := q.Get("beg_year") + "-" + q.Get("beg_month") + "-" + q.Get("beg_day")
+	to := q.Get("end_year") + "-" + q.Get("end_month") + "-" + q.Get("end_day")
+	if from != "2026-01-11" || to != "2026-05-22" {
+		t.Errorf("scraped %s..%s, want 2026-01-11..2026-05-22 (after exclusive, through yesterday)", from, to)
+	}
+}
+
+func TestFetchOpenWindowReturnsHistoryAndTheLiveSnapshot(t *testing.T) {
+	a := New(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		body := `<CurrencyRates Date="23.05.2026"><Currency ISOCode="USD"><Nominal>1</Nominal><Value>87,45</Value></Currency></CurrencyRates>`
+		if r.URL.Path == "/index1.jsp" {
+			body = `<tr><td><!--date-->22.05.2026<!--date--></td><td><!--value-->87,40<!--value--></td></tr>
+<tr><td><!--date-->21.05.2026<!--date--></td><td><!--value-->87,35<!--value--></td></tr>`
+		}
+		return &http.Response{StatusCode: 200, Body: io.NopCloser(strings.NewReader(body)), Header: http.Header{}, Request: r}, nil
+	})})
+	a.currencies = []currency{{15, "USD", 1}}
+	a.Now = func() time.Time { return time.Date(2026, 5, 23, 12, 0, 0, 0, time.UTC) }
+	rates, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 20), time.Time{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	for _, r := range rates {
+		if r.Base == "USD" {
+			got = append(got, r.Date.Format(time.DateOnly))
+		}
+	}
+	// Two USD rows from the live feed: daily and weekly answer alike here.
+	want := []string{"2026-05-22", "2026-05-21", "2026-05-23", "2026-05-23"}
+	if !slices.Equal(got, want) {
+		t.Errorf("USD dates = %v, want %v", got, want)
+	}
+}
+
+func TestFetchRoutineRunRequestsOnlyTheLiveFeed(t *testing.T) {
+	var paths []string
+	a := recordingAdapter(&paths)
+	// Backfill resumes from the newest stored day: yesterday on a routine run.
+	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 5, 22), time.Time{}); err != nil {
+		t.Fatal(err)
+	}
+	if want := []string{"/XML/daily.xml", "/XML/weekly.xml"}; !slices.Equal(paths, want) {
+		t.Errorf("paths = %v, want %v", paths, want)
 	}
 }
 
