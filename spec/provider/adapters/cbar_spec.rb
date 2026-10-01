@@ -47,6 +47,13 @@ class Provider < Sequel::Model(:providers)
         _(dates).must_equal([Date.new(2026, 9, 4), Date.new(2026, 9, 7), Date.new(2026, 9, 8)])
       end
 
+      it "starts at the first file when a window opens before it" do
+        # A full backfill opens the day before coverage starts. URLs before the 26.11.1993 file redirect.
+        dataset = adapter.fetch(after: Date.new(1993, 11, 25), upto: Date.new(1993, 11, 26))
+
+        _(dataset.map { |r| r[:date] }.uniq).must_equal([Date.new(1993, 11, 25)])
+      end
+
       it "fetches currencies and metals per date" do
         dataset = adapter.fetch(after: Date.new(2026, 9, 8), upto: Date.new(2026, 9, 8))
         bases = dataset.map { |r| r[:base] }
