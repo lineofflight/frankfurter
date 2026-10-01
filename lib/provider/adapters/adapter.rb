@@ -20,6 +20,10 @@ class Provider < Sequel::Model(:providers)
       # in the successor unit, which can trail the official date. historical_code applies the map per row.
       PREDECESSORS = {}.freeze
 
+      # The reverse: a source that keeps a retired code after a redenomination and quotes the successor's values under
+      # it. SUCCESSORS maps the old code to its successor and the first date the source's values are in the new unit.
+      SUCCESSORS = {}.freeze
+
       # Raises on any response that is not 2xx. Stricter than http.rb's built-in raise_error feature (>= 400 only): a
       # redirect from a moved or retired page must fail loudly, not parse as an empty day. 429 passes through so the
       # client's retriable layer can honor Retry-After; exhaustion raises HTTP::OutOfRetriesError, so no 429 reaches an
@@ -83,7 +87,10 @@ class Provider < Sequel::Model(:providers)
 
       def historical_code(code, date)
         predecessor, cutover = self.class::PREDECESSORS[code]
-        predecessor && date < cutover ? predecessor : code
+        return predecessor if predecessor && date < cutover
+
+        successor, cutover = self.class::SUCCESSORS[code]
+        successor && date >= cutover ? successor : code
       end
 
       # Many sources publish a buy and a sell price rather than a reference rate, so the mid is our own synthesis, with

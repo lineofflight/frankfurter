@@ -54,6 +54,35 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(407.18 * Adapter::GRAMS_PER_TROY_OUNCE, 0.0001)
       end
 
+      it "relabels retired Table B codes that carry current values" do
+        json = <<~JSON
+          [
+            {"table":"B","no":"5/B/NBP/2002","effectiveDate":"2002-02-26","rates":[
+              {"currency":"rubel","code":"BYB","mid":0.002494}
+            ]},
+            {"table":"B","no":"27/B/NBP/2002","effectiveDate":"2002-12-24","rates":[
+              {"currency":"afgani","code":"AFA","mid":0.000816}
+            ]},
+            {"table":"B","no":"1/B/NBP/2003","effectiveDate":"2003-01-07","rates":[
+              {"currency":"afgani","code":"AFA","mid":0.089056}
+            ]},
+            {"table":"B","no":"22/B/NBP/2003","effectiveDate":"2003-10-28","rates":[
+              {"currency":"kwanza","code":"AON","mid":0.0503}
+            ]}
+          ]
+        JSON
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| [r[:date].to_s, r[:base]] }).must_equal([
+          ["2002-02-26", "BYR"],
+          ["2002-12-24", "AFA"],
+          ["2003-01-07", "AFN"],
+          ["2003-10-28", "AOA"],
+        ])
+        _(records.map { |r| r[:rate] }).must_equal([0.002494, 0.000816, 0.089056, 0.0503])
+      end
+
       it "treats 404 as a no-data window" do
         VCR.eject_cassette
 

@@ -30,8 +30,8 @@ describe DefunctCurrency do
   it "covers the known defunct codes" do
     codes = DefunctCurrency.all.map(&:iso_code)
 
-    ["ATS", "BEF", "BGN", "BYR", "CUC", "DEM", "ECS", "EEK", "ESP", "FRF", "HRK", "IEP", "ITL", "NLG", "PTE", "SLL",
-     "STD", "VEF", "ZMK",].each do |code|
+    ["ADP", "AFA", "ATS", "BEF", "BGL", "BGN", "BYB", "BYR", "CUC", "DEM", "ECS", "EEK", "ESP", "FRF", "HRK", "IEP",
+     "ITL", "MGF", "MZM", "NLG", "PTE", "SDD", "SLL", "SRG", "STD", "VEB", "VEF", "ZMK",].each do |code|
       _(codes).must_include(code)
     end
   end
@@ -51,6 +51,17 @@ describe DefunctCurrency do
     _(entry.terminal_date).must_equal(Date.new(2000, 9, 9))
     _(entry.successor).must_equal("USD")
     _(entry.ratio).must_equal(25000)
+  end
+
+  it "retires redenominated legacy codes on their changeover dates" do
+    { "BGL" => [Date.new(1999, 7, 5), "BGN"], "MZM" => [Date.new(2006, 7, 1), "MZN"],
+      "VEB" => [Date.new(2008, 1, 1), "VEF"], }.each do |code, (terminal_date, successor)|
+      entry = DefunctCurrency.find(code)
+
+      _(entry.terminal_date).must_equal(terminal_date)
+      _(entry.successor).must_equal(successor)
+      _(entry.ratio).must_equal(1000)
+    end
   end
 
   it "returns nil for an unknown iso_code" do

@@ -18,6 +18,10 @@ class Provider
         "RUB" => ["RUR", Date.new(1998, 1, 6)],
       }.freeze
 
+      # Bulletins up to 2008-09-16 list the SDR under its own label (code 001). That day's bulletin also carries XDR
+      # (code 960) at the same rate, and later ones only XDR.
+      ALIASES = { "SDR" => "XDR" }.freeze
+
       class << self
         def backfill_range = 30
       end
@@ -53,7 +57,7 @@ class Provider
 
           date = Date.strptime(row["Date"], "%d.%m.%Y")
 
-          { date:, base: historical_code(code, date), quote: "UZS", rate: rate / nominal }
+          { date:, base: historical_code(ALIASES.fetch(code, code), date), quote: "UZS", rate: rate / nominal }
         end
       end
 
