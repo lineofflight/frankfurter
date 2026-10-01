@@ -107,6 +107,31 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.00017354, 1e-9)
       end
 
+      it "restores the 1994 Belarusian ruble code before the 2000 redenomination" do
+        xml = <<~XML
+          <?xml version="1.0" encoding="utf-8"?>
+          <FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>1999-12-31</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>4.444</Amt></CcyAmt>
+              <CcyAmt><Ccy>BYR</Ccy><Amt>1000000</Amt></CcyAmt>
+            </FxRate>
+            <FxRate>
+              <Tp>LT</Tp>
+              <Dt>2000-01-03</Dt>
+              <CcyAmt><Ccy>LTL</Ccy><Amt>4.4444</Amt></CcyAmt>
+              <CcyAmt><Ccy>BYR</Ccy><Amt>1000</Amt></CcyAmt>
+            </FxRate>
+          </FxRates>
+        XML
+
+        records = adapter.parse(xml)
+
+        _(records.map { |r| r[:base] }).must_equal(["BYB", "BYR"])
+        _(records.first[:rate]).must_be_close_to(0.000004444, 1e-12)
+      end
+
       it "parses EU-type XML with correct base and quote" do
         xml = <<~XML
           <?xml version="1.0" encoding="utf-8"?>

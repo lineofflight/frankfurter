@@ -81,6 +81,18 @@ class Provider < Sequel::Model(:providers)
         ])
       end
 
+      it "relabels the kwacha published under ZMK" do
+        html = <<~HTML
+          <table><tbody>
+          <tr><td>40</td><td>ZMK</td><td>111.1036</td><td>112.2202</td><td>111.6619</td><td>21-Jun-25</td></tr>
+          </tbody></table>
+        HTML
+
+        _(adapter.parse(html)).must_equal([
+          { date: Date.new(2025, 6, 21), base: "ZMW", quote: "TZS", rate: 111.6619 },
+        ])
+      end
+
       it "excludes GOLD and defunct currencies" do
         html = <<~HTML
           <html><body>

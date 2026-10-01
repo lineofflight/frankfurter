@@ -105,6 +105,10 @@ class Provider
         { id: 184, iso: "IDR", nominal: 10 },
       ].freeze
 
+      # The weekly feed still lists BYR at its last rate, 0.3402 KGS per 100 from 2016-06-25, under each new week's
+      # date. The archive's BYR series ends on that day.
+      RETIRED = { "BYR" => Date.new(2016, 7, 1) }.freeze
+
       class << self
         # Per-currency historical pages return up to ~366 rows. One year per chunk keeps each request bounded and means
         # a full backfill from 1999 is a series of single-year, per-currency fetches.
@@ -144,6 +148,9 @@ class Provider
         root.locate("Currency").filter_map do |node|
           code = node[:ISOCode]
           next unless code&.match?(/\A[A-Z]{3}\z/)
+
+          retired = RETIRED[code]
+          next if retired && date >= retired
 
           nominal = node.locate("Nominal").first&.text.to_i
           next if nominal.zero?

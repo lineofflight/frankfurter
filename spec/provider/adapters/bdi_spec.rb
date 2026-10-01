@@ -58,6 +58,25 @@ class Provider < Sequel::Model(:providers)
         ])
       end
 
+      it "relabels the Zimbabwe dollar series across the 2008 and 2009 redenominations" do
+        csv = <<~CSV
+          Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
+          ZIMBABWE,Zimbabwe Dollar,ZWD,51,108471581765.0,Foreign currency amount for 1 Euro.,2008-07-31
+          ZIMBABWE,Zimbabwe Dollar,ZWD,51,11.805092,Foreign currency amount for 1 Euro.,2008-08-01
+          ZIMBABWE,Zimbabwe Dollar,ZWD,51,15741267667.1,Foreign currency amount for 1 Euro.,2009-02-02
+          ZIMBABWE,Zimbabwe Dollar,ZWD,51,28.2678,Foreign currency amount for 1 Euro.,2009-02-03
+        CSV
+
+        records = adapter.parse(csv)
+
+        _(records.map { |r| [r[:date].to_s, r[:quote]] }).must_equal([
+          ["2008-07-31", "ZWD"],
+          ["2008-08-01", "ZWR"],
+          ["2009-02-02", "ZWR"],
+          ["2009-02-03", "ZWL"],
+        ])
+      end
+
       it "skips N.A. rates" do
         csv = <<~CSV
           Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)

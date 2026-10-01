@@ -141,16 +141,28 @@ class Provider < Sequel::Model(:providers)
             <?xml version="1.0" encoding="windows-1251" ?>
             <CurrencyRates Name="Weekly Exchange Rates" Date="23.05.2026">
               <Currency ISOCode="JPY"><Nominal>10</Nominal><ValidFor>7</ValidFor><Value>5,4969</Value></Currency>
-              <Currency ISOCode="BYR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,3402</Value></Currency>
+              <Currency ISOCode="IRR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,0064</Value></Currency>
             </CurrencyRates>
           XML
 
           records = adapter.parse(xml)
           jpy = records.find { |r| r[:base] == "JPY" }
-          byr = records.find { |r| r[:base] == "BYR" }
+          irr = records.find { |r| r[:base] == "IRR" }
 
           _(jpy[:rate]).must_be_close_to(0.54969, 0.00001)
-          _(byr[:rate]).must_be_close_to(0.003402, 0.000001)
+          _(irr[:rate]).must_be_close_to(0.000064, 0.0000001)
+        end
+
+        it "skips the frozen BYR listing after the 2016 redenomination" do
+          xml = <<~XML
+            <?xml version="1.0" encoding="windows-1251" ?>
+            <CurrencyRates Name="Weekly Exchange Rates" Date="26.09.2026">
+              <Currency ISOCode="BYR"><Nominal>100</Nominal><ValidFor>7</ValidFor><Value>0,3402</Value></Currency>
+              <Currency ISOCode="BYN"><Nominal>1</Nominal><ValidFor>7</ValidFor><Value>28,8456</Value></Currency>
+            </CurrencyRates>
+          XML
+
+          _(adapter.parse(xml).map { |r| r[:base] }).must_equal(["BYN"])
         end
 
         it "skips invalid or empty values" do

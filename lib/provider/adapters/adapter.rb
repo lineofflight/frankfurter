@@ -21,7 +21,8 @@ class Provider < Sequel::Model(:providers)
       PREDECESSORS = {}.freeze
 
       # The reverse: a source that keeps a retired code after a redenomination and quotes the successor's values under
-      # it. SUCCESSORS maps the old code to its successor and the first date the source's values are in the new unit.
+      # it. SUCCESSORS maps the old code to its successor and the first date the source's values are in the new unit. A
+      # successor that is itself retired chains to its own entry.
       SUCCESSORS = {}.freeze
 
       # Raises on any response that is not 2xx. Stricter than http.rb's built-in raise_error feature (>= 400 only): a
@@ -89,8 +90,12 @@ class Provider < Sequel::Model(:providers)
         predecessor, cutover = self.class::PREDECESSORS[code]
         return predecessor if predecessor && date < cutover
 
-        successor, cutover = self.class::SUCCESSORS[code]
-        successor && date >= cutover ? successor : code
+        loop do
+          successor, cutover = self.class::SUCCESSORS[code]
+          return code unless successor && date >= cutover
+
+          code = successor
+        end
       end
 
       # Many sources publish a buy and a sell price rather than a reference rate, so the mid is our own synthesis, with
