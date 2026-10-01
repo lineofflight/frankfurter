@@ -34,6 +34,26 @@ class Provider < Sequel::Model(:providers)
         _(dataset.none? { |r| r[:base] == "MKD" && r[:quote] == "MKD" }).must_equal(true)
       end
 
+      it "labels the ECU XEU and its post-euro quotes EUR" do
+        rows = VCR.use_cassette("nbrm_ecu", match_requests_on: [:method, :uri], exclusive: true) do
+          adapter.fetch(after: Date.new(1998, 12, 30), upto: Date.new(1999, 1, 4))
+        end
+        batch = ->(**, &block) { block.call(rows) }
+        NBRM.stub(:fetch_each, batch) { Provider["NBRM"].backfill(after: Date.new(1998, 12, 30)) }
+        stored = Rate.where(provider: "NBRM", base: ["XBA", "XEU", "EUR"]).order(:date)
+          .select_map([:date, :base, :rate]).map { |date, base, rate| [date.to_s, base, rate] }
+
+        _(rows.map { |r| r[:base] }).wont_include("XBA")
+        _(stored).must_equal([
+          ["1998-12-30", "XEU", 60.914],
+          ["1998-12-31", "XEU", 60.9144],
+          ["1999-01-01", "EUR", 60.5994],
+          ["1999-01-02", "EUR", 60.5994],
+          ["1999-01-03", "EUR", 60.5994],
+          ["1999-01-04", "EUR", 60.5994],
+        ])
+      end
+
       it "parses rates from JSON" do
         json = [
           { "oznaka" => "EUR", "sreden" => "61.5", "datum" => "2026-03-01T00:00:00", "nomin" => "1" },

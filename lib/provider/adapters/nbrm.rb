@@ -10,6 +10,11 @@ class Provider
     class NBRM < Adapter
       BASE_URL = "https://www.nbrm.mk/KLServiceNOV/GetExchangeRate"
       CHUNK_DAYS = 90
+      # The source codes the ECU, which it names the European unit of account, as XBA/955, the bond-market European
+      # Composite Unit, rather than XEU/954. Its values track the official ECU basket. It keeps the label until May
+      # 1999, quoting the same value it publishes under EUR, since the ECU converted to the euro one for one.
+      ALIASES = { "XBA" => "XEU" }.freeze
+      SUCCESSORS = { "XEU" => ["EUR", Date.new(1999, 1, 1)] }.freeze
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
@@ -36,7 +41,7 @@ class Provider
 
           date = Date.strptime(row["datum"].split("T").first, "%Y-%m-%d")
 
-          { date:, base: iso, quote: "MKD", rate: }
+          { date:, base: historical_code(ALIASES.fetch(iso, iso), date), quote: "MKD", rate: }
         end
       end
 
