@@ -5,6 +5,7 @@ import (
 	"io"
 	"math"
 	"net/http"
+	"reflect"
 	"regexp"
 	"slices"
 	"strings"
@@ -50,19 +51,6 @@ func TestFetchMultipleCurrenciesPerDate(t *testing.T) {
 	}
 	if n <= 1 {
 		t.Errorf("got %d rates on %v, want several", n, first)
-	}
-}
-
-// The golden replay matches on method and URI only, so this pins the SOAP
-// envelopes (codes, date range) and actions.
-func TestFetchSendsRecordedRequests(t *testing.T) {
-	soapAction := func(r *http.Request, _ []byte, rec cassette.Request) bool {
-		return r.Header.Get("SOAPAction") == rec.Headers.Get("SOAPAction")
-	}
-	a := New(vcrtest.Client(t, "cba", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI, vcrtest.Body, soapAction)))
-	a.Now = func() time.Time { return time.Date(2026, 3, 19, 12, 0, 0, 0, time.UTC) }
-	if _, err := a.Fetch(context.Background(), adapter.Date(2026, 3, 1), time.Time{}); err != nil {
-		t.Fatal(err)
 	}
 }
 
@@ -128,4 +116,149 @@ func TestGolden(t *testing.T) {
 		t.Fatal(err)
 	}
 	g.Check(t, rates)
+}
+
+// CBA history (cba_history cassette). The cassette matches on method, URI and
+// body, as in Ruby, so it pins the SOAP envelopes (codes, date range); the
+// SOAPAction header is pinned too.
+
+func fetchHistory(t *testing.T, after, upto time.Time) []adapter.Rate {
+	t.Helper()
+	soapAction := func(r *http.Request, _ []byte, rec cassette.Request) bool {
+		return r.Header.Get("SOAPAction") == rec.Headers.Get("SOAPAction")
+	}
+	a := New(vcrtest.Client(t, "cba_history", vcrtest.MatchOn(vcrtest.Method, vcrtest.URI, vcrtest.Body, soapAction)))
+	rates, err := a.Fetch(context.Background(), after, upto)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return rates
+}
+
+// series maps each date of code's rows to its rate.
+func series(rates []adapter.Rate, code string) map[time.Time]float64 {
+	out := map[time.Time]float64{}
+	for _, r := range rates {
+		if r.Base == code {
+			out[r.Date] = r.Rate
+		}
+	}
+	return out
+}
+
+func TestFetchRequestsSeriesCBANoLongerQuotesUnderTheirCurrentCodes(t *testing.T) {
+	day := adapter.Date(2001, 12, 28)
+	rates := fetchHistory(t, day, day)
+	var bases []string
+	for _, r := range rates {
+		bases = append(bases, r.Base)
+	}
+
+	for _, code := range []string{"DEM", "DKK", "BYR", "ARS", "BGN", "BRL", "PLN", "UZS", "XDR"} {
+		if !slices.Contains(bases, code) {
+			t.Errorf("want %s among bases", code)
+		}
+	}
+	for _, code := range []string{"ARP", "BGL", "BRC", "PLZ", "SDR", "USM", "TAD", "TMM", "TMT", "TRL", "ROL"} {
+		if slices.Contains(bases, code) {
+			t.Errorf("unexpected base %s", code)
+		}
+	}
+	if got := series(rates, "PLN")[day]; got != 140.83 {
+		t.Errorf("PLN = %v, want 140.83", got)
+	}
+}
+
+func TestFetchReadsTheSomPer10BeforeCBAsUZSSeriesTakesOver(t *testing.T) {
+	rates := fetchHistory(t, adapter.Date(2006, 12, 30), adapter.Date(2007, 1, 5))
+	uzs := series(rates, "UZS")
+
+	for date, want := range map[time.Time]float64{adapter.Date(2006, 12, 30): 0.293, adapter.Date(2007, 1, 5): 0.294} {
+		if got := uzs[date]; math.Abs(got-want) > 1e-9 {
+			t.Errorf("UZS on %s = %v, want %v", date.Format(time.DateOnly), got, want)
+		}
+	}
+	var dates []time.Time
+	for d := range series(rates, "PLN") {
+		dates = append(dates, d)
+	}
+	slices.SortFunc(dates, time.Time.Compare)
+	if len(dates) == 0 || !dates[0].Equal(adapter.Date(2006, 12, 30)) || !dates[len(dates)-1].Equal(adapter.Date(2007, 1, 5)) {
+		t.Errorf("PLN dates %v, want 2006-12-30 through 2007-01-05", dates)
+	}
+}
+
+func TestFetchRestoresTheTajikRubleBeforeTheSomoni(t *testing.T) {
+	rates := fetchHistory(t, adapter.Date(2000, 10, 30), adapter.Date(2000, 11, 1))
+
+	tjr := series(rates, "TJR")
+	if len(tjr) != 1 || math.Abs(tjr[adapter.Date(2000, 10, 30)]-0.2671) > 1e-9 {
+		t.Errorf("TJR = %v, want 0.2671 on 2000-10-30 only", tjr)
+	}
+	tjs := series(rates, "TJS")
+	if want := map[time.Time]float64{adapter.Date(2000, 11, 1): 250.74}; !reflect.DeepEqual(tjs, want) {
+		t.Errorf("TJS = %v, want %v", tjs, want)
+	}
+}
+
+func TestFetchReadsTheTengePer10BeforeCBACorrectedItsAmount(t *testing.T) {
+	kzt := series(fetchHistory(t, adapter.Date(2004, 12, 30), adapter.Date(2005, 1, 4)), "KZT")
+
+	for date, want := range map[time.Time]float64{adapter.Date(2004, 12, 30): 3.737, adapter.Date(2005, 1, 4): 3.739} {
+		if got := kzt[date]; math.Abs(got-want) > 1e-9 {
+			t.Errorf("KZT on %s = %v, want %v", date.Format(time.DateOnly), got, want)
+		}
+	}
+}
+
+func TestFetchReadsTheKronaPer10BeforeCBACorrectedItsAmount(t *testing.T) {
+	isk := series(fetchHistory(t, adapter.Date(2015, 3, 6), adapter.Date(2015, 3, 9)), "ISK")
+
+	for date, want := range map[time.Time]float64{adapter.Date(2015, 3, 6): 3.54, adapter.Date(2015, 3, 9): 3.512} {
+		if got := isk[date]; math.Abs(got-want) > 1e-9 {
+			t.Errorf("ISK on %s = %v, want %v", date.Format(time.DateOnly), got, want)
+		}
+	}
+}
+
+func TestFetchCollapsesTheSDRAndXDRDuplicates(t *testing.T) {
+	day := adapter.Date(2017, 3, 17)
+	n := 0
+	for _, r := range fetchHistory(t, day, day) {
+		if r.Base == "XDR" {
+			n++
+		}
+	}
+	if n != 1 {
+		t.Errorf("got %d XDR rows, want 1", n)
+	}
+}
+
+func TestGoldenHistory(t *testing.T) {
+	for _, tc := range []struct {
+		name        string
+		after, upto time.Time
+	}{
+		{"dropped", adapter.Date(2001, 12, 28), adapter.Date(2001, 12, 28)},
+		{"som", adapter.Date(2006, 12, 30), adapter.Date(2007, 1, 5)},
+		{"ruble", adapter.Date(2000, 10, 30), adapter.Date(2000, 11, 1)},
+		{"tenge", adapter.Date(2004, 12, 30), adapter.Date(2005, 1, 4)},
+		{"krona", adapter.Date(2015, 3, 6), adapter.Date(2015, 3, 9)},
+		{"sdr", adapter.Date(2017, 3, 17), adapter.Date(2017, 3, 17)},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			g := golden.Load(t, "testdata/golden/history_"+tc.name+".json")
+			rates, err := New(g.Client(t)).Fetch(context.Background(), tc.after, tc.upto)
+			if err != nil {
+				t.Fatal(err)
+			}
+			g.Check(t, rates)
+		})
+	}
+}
+
+func TestBackfillRangeIsOneYear(t *testing.T) {
+	if got := New(nil).BackfillRange(); got != 365 {
+		t.Errorf("BackfillRange() = %d, want 365", got)
+	}
 }

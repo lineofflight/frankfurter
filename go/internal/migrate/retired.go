@@ -7,21 +7,24 @@ import (
 	"fmt"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
 	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
-// retiredLabel is one of 041's or 043's stored-label repairs: provider's rows
-// carrying from move to to, dated since onwards and before before when those
-// are set and matching filter (a SQL condition) when that is, with every
-// component divided by unit or multiplied by factor when either is set. An
-// empty to deletes the rows. A conflicting row already stored under to fails
-// the repair unless keepExisting is set, in which case it wins.
+// retiredLabel is one of 041's, 043's, 044's or 046's stored-label repairs:
+// provider's rows carrying from move to to, dated since onwards and before
+// before when those are set and matching filter (a SQL condition) when that
+// is, with every component divided by unit or multiplied by factor when either
+// is set. With perUnit, factor rescales the rate of one unit of from, so a row
+// quoting against from takes its reciprocal. An empty to deletes the rows. A
+// conflicting row already stored under to fails the repair unless keepExisting
+// is set, in which case it wins.
 type retiredLabel struct {
 	provider, from, to, since, before, filter string
 	unit, factor                              float64
-	keepExisting                              bool
+	perUnit, keepExisting                     bool
 }
 
 // retiredLabels are the labels provider health could not place after a
@@ -276,7 +279,8 @@ var successorLabels = []retiredLabel{
 // them. Run `frankfurter blend-rebuild` after deploy; it rebuilds in place and
 // keeps the tables serving.
 func relabelSuccessorValues(ctx context.Context, q db.Querier) error {
-	return relabelStored(ctx, q, successorLabels)
+	_, err := relabelStored(ctx, q, successorLabels)
+	return err
 }
 
 // nbrmECULabels are 044's repairs. NBRM codes the ECU as XBA, the bond-market
@@ -293,24 +297,67 @@ var nbrmECULabels = []retiredLabel{
 // for every affected bucket and recomputing coverage. The blend tables are
 // left for `frankfurter blend-rebuild`.
 func relabelNBRMECU(ctx context.Context, q db.Querier) error {
-	return relabelStored(ctx, q, nbrmECULabels)
+	_, err := relabelStored(ctx, q, nbrmECULabels)
+	return err
 }
 
-// relabelStored applies 043's and 044's repairs: each label's rows move to
-// their corrected label and unit (or are deleted), the affected provider
-// rollup buckets are rebuilt and the labels' codes resummarized. It does
-// nothing when no label matches a stored row.
-func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) error {
+// lbAndCBALabels are 046's repairs. LB labels five redenominated currencies'
+// old values with the new code until a day or more after the switch, so each
+// series stepped by 1000x or 10000x; its values are already in the old unit
+// (1000 "PLN" = 0.1641 LTL on 1995-01-02, when the old zloty traded near
+// 24,500 to the dollar). CBA's amount field understated two series tenfold:
+// its Tajik ruble came out at 10 to 12 times NBU's and CBR's TJR rates, and
+// its tenge at 9 to 10 times the KZT median.
+var lbAndCBALabels = []retiredLabel{
+	{provider: "LB", from: "PLN", to: "PLZ", before: "1995-01-03"},
+	{provider: "LB", from: "RUB", to: "RUR", before: "1998-01-05"},
+	{provider: "LB", from: "BGN", to: "BGL", before: "1999-07-07"},
+	{provider: "LB", from: "RON", to: "ROL", before: "2005-07-04"},
+	{provider: "LB", from: "MZN", to: "MZM", before: "2006-07-10"},
+	// Per 100 rubles, though the amount field reads 10.
+	{provider: "CBA", from: "TJS", to: "TJR", before: "2000-11-01", factor: 0.1, perUnit: true},
+	// Per 10 tenge, though the amount field reads 1.
+	{provider: "CBA", from: "KZT", to: "KZT", before: "2005-01-04", factor: 0.1, perUnit: true},
+}
+
+// relabelLBAndCBAUnits is 046. The adapters now emit the right code and unit;
+// this repairs what is stored as 043 does, then rescreens the repaired dates
+// for spikes. The blend tables are left for `frankfurter blend-rebuild`.
+func relabelLBAndCBAUnits(ctx context.Context, q db.Querier) error {
+	affected, err := relabelStored(ctx, q, lbAndCBALabels)
+	if err != nil {
+		return err
+	}
+	for _, a := range affected {
+		if _, err := rates.RefreshSpikes(ctx, q, a.provider, a.dates); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// relabelled is the dates of one provider's rows a repair touched.
+type relabelled struct {
+	provider string
+	dates    []time.Time
+}
+
+// relabelStored applies 043's, 044's and 046's repairs: each label's rows move
+// to their corrected label and unit (or are deleted), the affected provider
+// rollup buckets are rebuilt and the labels' codes resummarized. It returns
+// the dates of the rows it touched per provider, and does nothing when no
+// label matches a stored row.
+func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) ([]relabelled, error) {
 	checks := make([]string, len(labels))
 	for i, l := range labels {
 		checks[i] = "EXISTS (SELECT 1 FROM `rates` WHERE " + l.scope() + ")"
 	}
 	var needed bool
 	if err := q.QueryRowContext(ctx, "SELECT "+strings.Join(checks, " OR ")).Scan(&needed); err != nil {
-		return err
+		return nil, err
 	}
 	if !needed {
-		return nil
+		return nil, nil
 	}
 
 	type bucketKey struct {
@@ -321,20 +368,34 @@ func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) err
 	buckets := map[bucketKey][]string{}
 	var providers []string
 	codes := map[string][]string{}
+	dates := map[string][]time.Time{}
 	for _, l := range labels {
 		for i, t := range retiredRollups {
-			dates, err := column(ctx, q, "SELECT DISTINCT "+t.bucket+" FROM `rates` WHERE "+l.scope())
+			list, err := column(ctx, q, "SELECT DISTINCT "+t.bucket+" FROM `rates` WHERE "+l.scope())
 			if err != nil {
-				return err
+				return nil, err
 			}
 			k := bucketKey{l.provider, i}
 			if _, ok := buckets[k]; !ok {
 				bucketKeys = append(bucketKeys, k)
 			}
-			for _, d := range dates {
+			for _, d := range list {
 				if !slices.Contains(buckets[k], d) {
 					buckets[k] = append(buckets[k], d)
 				}
+			}
+		}
+		touched, err := column(ctx, q, "SELECT DISTINCT date(`date`) FROM `rates` WHERE "+l.scope())
+		if err != nil {
+			return nil, err
+		}
+		for _, text := range touched {
+			d, err := db.ParseDate(text)
+			if err != nil {
+				return nil, err
+			}
+			if !slices.ContainsFunc(dates[l.provider], d.Equal) {
+				dates[l.provider] = append(dates[l.provider], d)
 			}
 		}
 		if _, ok := codes[l.provider]; !ok {
@@ -348,17 +409,17 @@ func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) err
 
 		if l.to == "" {
 			if err := exec(ctx, q, "DELETE FROM `rates` WHERE "+l.scope()); err != nil {
-				return err
+				return nil, err
 			}
 			continue
 		}
 		rows, err := legacyRows(ctx, q, l.scope())
 		if err != nil {
-			return err
+			return nil, err
 		}
 		for _, r := range rows {
 			if err := relabelRetiredRow(ctx, q, l, r); err != nil {
-				return err
+				return nil, err
 			}
 		}
 	}
@@ -374,15 +435,17 @@ func relabelStored(ctx context.Context, q db.Querier, labels []retiredLabel) err
 			"DELETE FROM `"+t.table+"` WHERE `provider` = "+p+" AND `bucket_date` IN "+list,
 			rollupInsert(t.table, t.bucket, "`provider` = "+p+" AND "+t.bucket+" IN "+list),
 		); err != nil {
-			return err
+			return nil, err
 		}
 	}
-	for _, p := range providers {
+	affected := make([]relabelled, len(providers))
+	for i, p := range providers {
 		if err := rates.RefreshSummaries(ctx, q, codes[p], p); err != nil {
-			return err
+			return nil, err
 		}
+		affected[i] = relabelled{p, dates[p]}
 	}
-	return nil
+	return affected, nil
 }
 
 // relabelRetiredRow moves one stored row to its corrected label and unit, or
@@ -398,12 +461,18 @@ func relabelRetiredRow(ctx context.Context, q db.Querier, l retiredLabel, r stor
 	base, quote := relabel(r.base), relabel(r.quote)
 	mid, bid, ask := r.mid, r.bid, r.ask
 	if l.unit != 0 || l.factor != 0 {
+		factor := l.factor
+		if l.perUnit && r.quote == l.from {
+			// The rate stands for one unit of the base, so a per-10 quote of
+			// the base shrinks, and a quote against it grows.
+			factor = 1 / factor
+		}
 		scale := func(v sql.NullFloat64) sql.NullFloat64 {
 			if v.Valid {
 				if l.unit != 0 {
 					v.Float64 = rates.Normalize(v.Float64 / l.unit)
 				} else {
-					v.Float64 = rates.Normalize(v.Float64 * l.factor)
+					v.Float64 = rates.Normalize(v.Float64 * factor)
 				}
 			}
 			return v

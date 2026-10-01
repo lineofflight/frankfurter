@@ -70,6 +70,11 @@ A full local backfill from an empty database turned up these gaps:
 - NBRB asked only today's currency IDs for history, so everything before its 2021 renumbering was missing. The adapter
   now reads the currency reference and asks every daily ID within its own validity, from 2016-07-01 (Ruby #748). Fixed
   on both sides.
+- LB labels the old zloty, ruble, lev, leu and metical with the new code until a day or more after each
+  redenomination. CBA asked only today's codes, so it missed every series it has since dropped, and its amount field
+  understates KZT, ISK, USM and the Tajik ruble tenfold. The adapters map the labels and units, CBA requests the
+  dropped codes by name in yearly windows, FIM, GRD, LTL, LVL and SKK join the defunct seeds, and migration 046 repairs
+  stored rows and rescreens them for spikes (Ruby #751). Fixed on both sides.
 
 ## Left outside go/
 

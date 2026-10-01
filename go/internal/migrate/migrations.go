@@ -360,6 +360,7 @@ end_date = (
 	{Version: 43, Name: "relabel_successor_values", Up: relabelSuccessorValues},
 	{Version: 44, Name: "relabel_nbrm_ecu", Up: relabelNBRMECU},
 	{Version: 45, Name: "screen_rate_spikes", Up: screenRateSpikes, Down: sqlStep("DROP TABLE `rate_spikes`")},
+	{Version: 46, Name: "relabel_lb_and_cba_units", Up: relabelLBAndCBAUnits},
 }
 
 // renameProvider re-keys a provider in each table (provider, or

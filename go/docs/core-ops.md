@@ -5,18 +5,18 @@ Migrations, the single `frankfurter` binary (Procfile processes, rake tasks, bin
 
 ## Package `internal/migrate` (db/migrate, the db:migrate task)
 
-The 45 migrations, applied through Sequel's own bookkeeping table (`schema_info`, one row, `version`). A database the
-Ruby app migrated opens at its version and is left alone at 45; a database migrated here passes Ruby's
+The 46 migrations, applied through Sequel's own bookkeeping table (`schema_info`, one row, `version`). A database the
+Ruby app migrated opens at its version and is left alone at 46; a database migrated here passes Ruby's
 `Sequel::Migrator.check_current` (checked by hand both ways against the Ruby test database and a Go-built one).
 
-- `Migration{Version, Name, Up, Down}`, `Migrations()`, `Latest()` (45), `ErrIrreversible` (008's down).
+- `Migration{Version, Name, Up, Down}`, `Migrations()`, `Latest()` (46), `ErrIrreversible` (008's down).
 - `Up(ctx, conn)`, `To(ctx, conn, target)` (up or down, like `IntegerMigrator` with `target:`), `Current(ctx, q)` (0
   without a `schema_info` table), `CheckCurrent(ctx, q)`.
 - Each migration and its version bump commit together in one `BEGIN IMMEDIATE` transaction; the first failure stops
   the run at the last good version.
 - DDL is the SQL Sequel emitted on SQLite, table rebuilds included (031's `set_column_allow_null` and its down), so
   `sqlite_master` is identical to Ruby's at every version. `testdata/schemas.json` records Ruby's schema after each step
-  up from 0 to 45 and down from 45 to 8, where 008 refuses; `go/scripts/migration_schemas.rb` regenerates it:
+  up from 0 to 46 and down from 46 to 8, where 008 refuses; `go/scripts/migration_schemas.rb` regenerates it:
 
   ```sh
   DATABASE_URL=sqlite://$SCRATCH/schemas.sqlite3 APP_ENV=test \
@@ -25,9 +25,10 @@ Ruby app migrated opens at its version and is left alone at 45; a database migra
   ```
 
 - Data migrations reuse the domain packages: 025 `rates.PrecisionSQL`, rollups `rates.WeekBucket`/`MonthBucket`, 034
-  `currency.Codes()` (the Money table, 234 codes, same as Ruby's), 036-044 and 037 `rates.RefreshSummaries`, 041
-  `rates.Normalize` and `rates.BucketSQL`, 045 `rates.DetectSpikes`. 042-044 reuse 041's row relabel
-  (`relabelRetiredRow`), 043 and 044 through `relabelStored` with `retiredLabel`'s date window, rate filter, factor and
+  `currency.Codes()` (the Money table, 234 codes, same as Ruby's), 036-044, 046 and 037 `rates.RefreshSummaries`,
+  041 `rates.Normalize` and `rates.BucketSQL`, 045 `rates.DetectSpikes`, 046 `rates.RefreshSpikes`. 042-044 and 046
+  reuse 041's row relabel (`relabelRetiredRow`), 043, 044 and 046 through `relabelStored` with `retiredLabel`'s date
+  window, rate filter, factor (per unit of the code for 046, so a quote against it takes the reciprocal) and
   keep-existing rule.
 - `internal/db.Schema` (what `dbtest` and `fixtures` create) must stay equal to the migrated schema:
   `TestLatestMatchesEmbeddedSchema` fails when they drift. For a new Ruby migration: add the Go migration, regenerate
@@ -112,14 +113,18 @@ All in `internal/migrate/spec_test.go`, one database file per test instead of Ru
 - nbrm_ecu_migration_spec: `TestNBRMECUMigrationRelabelsTheECUCollapsesItsEuroDuplicatesAndLeavesTheBlendsToARebuild`,
   `TestNBRMECUMigrationRollsBackOnConflictingDuplicates`, `TestNBRMECUMigrationLeavesDatabasesWithoutNBRMXBAHistoryAlone`.
 - rate_spikes_migration_spec: `TestRateSpikesMigrationFlagsStoredOneDayTyposAndLeavesRatesAndBlendsToARebuild`.
+- lb_and_cba_units_migration_spec:
+  `TestLBAndCBAUnitsMigrationRelabelsAndRescalesStoredRowsAndLeavesTheBlendsToARebuild`,
+  `TestLBAndCBAUnitsMigrationRollsBackOnConflictingDuplicates`,
+  `TestLBAndCBAUnitsMigrationLeavesDatabasesWithoutAffectedRowsAlone`.
 
 The specs stub `Cache.purge` to fail, to prove setup never needs the CDN; Go's migrations and seed have no cache
 dependency, so there is nothing to stub.
 
 Beyond the specs, `TestDataMigrationsMatchRuby` (`internal/migrate/data_test.go`) checks the data migrations against
 Ruby: `testdata/data/phase_vN.sql` is loaded once the database reaches version N (fixtures for 003, 005, 008, 011, 015,
-017-019, 021, 023, 025-028, 034, 036-045), then every table is compared with Ruby's dump (`testdata/data/ruby.json`)
-after migrating up to 45 and after rolling back to 8. Regenerate the dump with `go/scripts/migration_data.rb`:
+017-019, 021, 023, 025-028, 034, 036-046), then every table is compared with Ruby's dump (`testdata/data/ruby.json`)
+after migrating up to 46 and after rolling back to 8. Regenerate the dump with `go/scripts/migration_data.rb`:
 
 ```sh
 DATABASE_URL=sqlite://$SCRATCH/data.sqlite3 APP_ENV=test \

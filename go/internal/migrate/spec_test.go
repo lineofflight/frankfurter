@@ -1748,3 +1748,199 @@ func TestRateSpikesMigrationFlagsStoredOneDayTyposAndLeavesRatesAndBlendsToARebu
 		t.Fatalf("LBP blend %v (%v)", lbp, err)
 	}
 }
+
+// spec/lb_and_cba_units_migration_spec.rb
+func TestLBAndCBAUnitsMigrationRelabelsAndRescalesStoredRowsAndLeavesTheBlendsToARebuild(t *testing.T) {
+	ctx := context.Background()
+	conn := migratedDatabase(t, 45)
+
+	rows := []rate{
+		{provider: "LB", date: "1995-01-02", base: "PLN", quote: "LTL", mid: f(0.0001641)},
+		{provider: "LB", date: "1995-01-03", base: "PLN", quote: "LTL", mid: f(1.646)},
+		{provider: "LB", date: "1998-01-02", base: "RUB", quote: "LTL", mid: f(0.0006694)},
+		{provider: "LB", date: "1998-01-05", base: "RUB", quote: "LTL", mid: f(0.6672)},
+		{provider: "LB", date: "1999-07-06", base: "BGN", quote: "LTL", mid: f(0.0021467)},
+		{provider: "LB", date: "1999-07-07", base: "BGN", quote: "LTL", mid: f(2.0952)},
+		{provider: "LB", date: "2005-07-01", base: "RON", quote: "LTL", mid: f(0.000095538)},
+		{provider: "LB", date: "2005-07-04", base: "RON", quote: "LTL", mid: f(0.95814)},
+		{provider: "LB", date: "2006-07-07", base: "MZN", quote: "LTL", mid: f(0.00010536)},
+		{provider: "LB", date: "2006-07-10", base: "MZN", quote: "LTL", mid: f(0.10531)},
+		{provider: "CBA", date: "2000-10-30", base: "TJS", quote: "AMD", mid: f(2.671)},
+		{provider: "CBA", date: "2000-11-01", base: "TJS", quote: "AMD", mid: f(250.74)},
+		{provider: "CBA", date: "2004-12-30", base: "KZT", quote: "AMD", mid: f(37.37)},
+		{provider: "CBA", date: "2005-01-04", base: "KZT", quote: "AMD", mid: f(3.739)},
+		{provider: "NBU", date: "1997-12-31", base: "RUR", quote: "UAH", mid: f(0.000315)},
+	}
+	insertRates(t, conn, rows...)
+	var codes []string
+	for _, r := range rows {
+		codes = append(codes, r.base, r.quote)
+	}
+	if err := rates.RefreshSummaries(ctx, conn, codes, ""); err != nil {
+		t.Fatal(err)
+	}
+	rollUp(t, conn)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('1995-01-02', 'PLN', 24495.0)")
+	mustExec(t, conn, "INSERT INTO rate_spikes (provider, date, base, quote) VALUES ('LB', '1995-01-02', 'PLN', 'LTL')")
+	before := blendSnapshot(t, conn)
+
+	setup(t, conn)
+	if v := version(t, conn); v < 46 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	type stored struct {
+		provider, date, base string
+		mid                  float64
+	}
+	result, err := conn.Query("SELECT provider, date(date), base, mid FROM rates ORDER BY provider, date, base")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []stored
+	for result.Next() {
+		var s stored
+		if err := result.Scan(&s.provider, &s.date, &s.base, &s.mid); err != nil {
+			t.Fatal(err)
+		}
+		got = append(got, s)
+	}
+	result.Close()
+	want := []stored{
+		{"CBA", "2000-10-30", "TJR", 0.2671},
+		{"CBA", "2000-11-01", "TJS", 250.74},
+		{"CBA", "2004-12-30", "KZT", 3.737},
+		{"CBA", "2005-01-04", "KZT", 3.739},
+		{"LB", "1995-01-02", "PLZ", 0.0001641},
+		{"LB", "1995-01-03", "PLN", 1.646},
+		{"LB", "1998-01-02", "RUR", 0.0006694},
+		{"LB", "1998-01-05", "RUB", 0.6672},
+		{"LB", "1999-07-06", "BGL", 0.0021467},
+		{"LB", "1999-07-07", "BGN", 2.0952},
+		{"LB", "2005-07-01", "ROL", 0.000095538},
+		{"LB", "2005-07-04", "RON", 0.95814},
+		{"LB", "2006-07-07", "MZM", 0.00010536},
+		{"LB", "2006-07-10", "MZN", 0.10531},
+		{"NBU", "1997-12-31", "RUR", 0.000315},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("wrong repaired rows: %+v", got)
+	}
+
+	rollup := func(table, where string, args ...any) []float64 {
+		t.Helper()
+		result, err := conn.Query("SELECT rate FROM "+table+" WHERE "+where, args...)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer result.Close()
+		var out []float64
+		for result.Next() {
+			var v float64
+			if err := result.Scan(&v); err != nil {
+				t.Fatal(err)
+			}
+			out = append(out, v)
+		}
+		return out
+	}
+	kzt := rollup("monthly_rates", "provider = 'CBA' AND base = 'KZT' AND bucket_date = ?", bucket(rates.Month,
+		"2004-12-30"))
+	if !reflect.DeepEqual(kzt, []float64{3.737}) {
+		t.Fatalf("stale KZT rollup: %v", kzt)
+	}
+	if pln := rollup("weekly_rates", "provider = 'LB' AND base = 'PLN'"); !reflect.DeepEqual(pln, []float64{1.646}) {
+		t.Fatalf("rollup kept PLN: %v", pln)
+	}
+
+	coverage := func(provider, code string) [][2]string {
+		t.Helper()
+		result, err := conn.Query("SELECT date(start_date), date(end_date) FROM currency_coverages WHERE "+
+			"provider_key = ? AND iso_code = ?", provider, code)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer result.Close()
+		var out [][2]string
+		for result.Next() {
+			var c [2]string
+			if err := result.Scan(&c[0], &c[1]); err != nil {
+				t.Fatal(err)
+			}
+			out = append(out, c)
+		}
+		return out
+	}
+	for _, c := range []struct {
+		provider, code string
+		want           [2]string
+	}{
+		{"LB", "PLN", [2]string{"1995-01-03", "1995-01-03"}},
+		{"LB", "PLZ", [2]string{"1995-01-02", "1995-01-02"}},
+		{"CBA", "TJR", [2]string{"2000-10-30", "2000-10-30"}},
+		{"NBU", "RUR", [2]string{"1997-12-31", "1997-12-31"}},
+	} {
+		if got := coverage(c.provider, c.code); !reflect.DeepEqual(got, [][2]string{c.want}) {
+			t.Fatalf("%s %s coverage %v, want %v", c.provider, c.code, got, c.want)
+		}
+	}
+
+	if count(t, conn, "SELECT count(*) FROM rate_spikes WHERE provider = 'LB'") != 0 {
+		t.Fatal("kept a stale spike flag")
+	}
+	if got := blendSnapshot(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("touched the blends")
+	}
+}
+
+// "rolls back on conflicting duplicates"
+func TestLBAndCBAUnitsMigrationRollsBackOnConflictingDuplicates(t *testing.T) {
+	conn := migratedDatabase(t, 45)
+	insertRates(t, conn,
+		rate{provider: "LB", date: "1995-01-02", base: "PLN", quote: "LTL", mid: f(0.0001641)},
+		rate{provider: "LB", date: "1995-01-02", base: "PLZ", quote: "LTL", mid: f(0.0001642)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('1995-01-02', 'PLN', 24495.0)")
+	before := allRates(t, conn)
+
+	err := Up(context.Background(), conn)
+	if err == nil {
+		t.Fatal("accepted conflicting components")
+	}
+	if !strings.Contains(err.Error(), "conflicting PLN/PLZ components") {
+		t.Fatal(err)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("partial repair committed")
+	}
+	if v := version(t, conn); v != 45 {
+		t.Fatalf("migration marked complete: version %d", v)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
+	}
+}
+
+// "leaves databases without affected rows alone"
+func TestLBAndCBAUnitsMigrationLeavesDatabasesWithoutAffectedRowsAlone(t *testing.T) {
+	conn := migratedDatabase(t, 45)
+	insertRates(t, conn,
+		rate{provider: "LB", date: "1995-01-03", base: "PLN", quote: "LTL", mid: f(1.646)},
+		rate{provider: "CBA", date: "2005-01-04", base: "KZT", quote: "AMD", mid: f(3.739)},
+		rate{provider: "NBP", date: "1994-12-30", base: "USD", quote: "PLN", mid: f(2.4372)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('1995-01-03', 'PLN', 2.43)")
+	before := allRates(t, conn)
+	if err := Up(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	if v := version(t, conn); v < 46 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("changed unaffected rows")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("touched the blends")
+	}
+}

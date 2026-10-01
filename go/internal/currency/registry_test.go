@@ -38,8 +38,8 @@ func TestDefunctRequiresCodeDateAndSource(t *testing.T) {
 
 func TestDefunctCoversKnownCodes(t *testing.T) {
 	for _, code := range []string{"ADP", "AFA", "ATS", "BEF", "BGL", "BGN", "BYB", "BYR", "CUC", "DEM", "ECS", "EEK",
-		"ESP", "FRF", "HRK", "IEP", "ITL", "MGF", "MZM", "NLG", "PTE", "SDD", "SLL", "SRG", "STD", "VEB", "VEF",
-		"ZMK"} {
+		"ESP", "FIM", "FRF", "GRD", "HRK", "IEP", "ITL", "LTL", "LVL", "MGF", "MZM", "NLG", "PTE", "SDD", "SKK", "SLL",
+		"SRG", "STD", "VEB", "VEF", "ZMK"} {
 		if _, ok := FindDefunct(code); !ok {
 			t.Errorf("missing %s", code)
 		}

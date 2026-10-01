@@ -145,6 +145,37 @@ func TestParseRestoresOldTurkmenManat(t *testing.T) {
 	}
 }
 
+func TestParseRestoresPredecessorCodesUntilLBsValuesSwitchToTheRedenominatedUnit(t *testing.T) {
+	quotes := []struct {
+		date, code, amount, ltl string
+	}{
+		{"1995-01-02", "PLN", "1000", "0.1641"}, {"1995-01-03", "PLN", "1", "1.646"},
+		{"1998-01-02", "RUB", "1000", "0.6694"}, {"1998-01-05", "RUB", "1", "0.6672"},
+		{"1999-07-06", "BGN", "1000", "2.1467"}, {"1999-07-07", "BGN", "1", "2.0952"},
+		{"2005-07-01", "RON", "100000", "9.5538"}, {"2005-07-04", "RON", "10", "9.5814"},
+		{"2006-07-07", "MZN", "10000", "1.0536"}, {"2006-07-10", "MZN", "10", "1.0531"},
+	}
+	var xml strings.Builder
+	xml.WriteString(`<?xml version="1.0" encoding="utf-8"?><FxRates xmlns="http://www.lb.lt/WebServices/FxRates">`)
+	for _, q := range quotes {
+		xml.WriteString("<FxRate><Tp>LT</Tp><Dt>" + q.date + "</Dt><CcyAmt><Ccy>LTL</Ccy><Amt>" + q.ltl +
+			"</Amt></CcyAmt><CcyAmt><Ccy>" + q.code + "</Ccy><Amt>" + q.amount + "</Amt></CcyAmt></FxRate>")
+	}
+	xml.WriteString("</FxRates>")
+
+	rates := mustParse(t, xml.String())
+	want := []string{"PLZ", "PLN", "RUR", "RUB", "BGL", "BGN", "ROL", "RON", "MZM", "MZN"}
+	if got := bases(rates); !slices.Equal(got, want) {
+		t.Fatalf("bases = %v, want %v", got, want)
+	}
+	if math.Abs(rates[0].Rate-0.0001641) > 1e-10 {
+		t.Errorf("first rate = %v, want 0.0001641", rates[0].Rate)
+	}
+	if math.Abs(rates[1].Rate-1.646) > 1e-9 {
+		t.Errorf("second rate = %v, want 1.646", rates[1].Rate)
+	}
+}
+
 func TestParseRestoresBelarusianRubleBeforeRedenomination(t *testing.T) {
 	rates := mustParse(t, `<?xml version="1.0" encoding="utf-8"?>
 <FxRates xmlns="http://www.lb.lt/WebServices/FxRates">

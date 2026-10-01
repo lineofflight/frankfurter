@@ -31,4 +31,4 @@ CREATE TABLE `currency_exclusions` (`provider_key` varchar(255) NOT NULL, `iso_c
 CREATE INDEX `weekly_rates_bucket_date_provider_base_quote_index` ON `weekly_rates` (`bucket_date`, `provider`, `base`, `quote`);
 CREATE INDEX `monthly_rates_bucket_date_provider_base_quote_index` ON `monthly_rates` (`bucket_date`, `provider`, `base`, `quote`);
 CREATE TABLE `rate_spikes` (`provider` varchar(255) NOT NULL, `date` date NOT NULL, `base` varchar(255) NOT NULL, `quote` varchar(255) NOT NULL, PRIMARY KEY (`provider`, `base`, `quote`, `date`));
-INSERT INTO schema_info (version) VALUES (45);
+INSERT INTO schema_info (version) VALUES (46);

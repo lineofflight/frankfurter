@@ -1,0 +1,344 @@
+{
+  "adapter": "CBA",
+  "cassette": "cba_history",
+  "match_requests_on": [
+    "method",
+    "uri",
+    "body"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2001, 12, 28), upto: Date.new(2001, 12, 28))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 153.07
+    },
+    {
+      "base": "ARS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 562.2
+    },
+    {
+      "base": "ATS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 35.95
+    },
+    {
+      "base": "AUD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 285.54
+    },
+    {
+      "base": "BEF",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 12.261
+    },
+    {
+      "base": "BGN",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 257.06
+    },
+    {
+      "base": "BRL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 240.62
+    },
+    {
+      "base": "BYR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.356
+    },
+    {
+      "base": "CAD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 352.81
+    },
+    {
+      "base": "CHF",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 336.0
+    },
+    {
+      "base": "CNY",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 67.93
+    },
+    {
+      "base": "CZK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 15.55
+    },
+    {
+      "base": "DEM",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 252.9
+    },
+    {
+      "base": "DKK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 65.47
+    },
+    {
+      "base": "EEK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 31.89
+    },
+    {
+      "base": "EGP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 139.16
+    },
+    {
+      "base": "ESP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 2.973
+    },
+    {
+      "base": "EUR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 494.62
+    },
+    {
+      "base": "FIM",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 83.19
+    },
+    {
+      "base": "FRF",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 75.4
+    },
+    {
+      "base": "GBP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 814.97
+    },
+    {
+      "base": "GEL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 271.59
+    },
+    {
+      "base": "GRD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 1.452
+    },
+    {
+      "base": "HUF",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 2.02
+    },
+    {
+      "base": "IEP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 628.04
+    },
+    {
+      "base": "ILS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 128.56
+    },
+    {
+      "base": "INR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 11.68
+    },
+    {
+      "base": "IRR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.3208
+    },
+    {
+      "base": "ISK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 5.513
+    },
+    {
+      "base": "ITL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.2555
+    },
+    {
+      "base": "JPY",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 4.282
+    },
+    {
+      "base": "KGS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 11.72
+    },
+    {
+      "base": "KRW",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.4288
+    },
+    {
+      "base": "KWD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 1826.16
+    },
+    {
+      "base": "KZT",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 3.743
+    },
+    {
+      "base": "LBP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.37450000000000006
+    },
+    {
+      "base": "LTL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 140.55
+    },
+    {
+      "base": "LVL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 889.56
+    },
+    {
+      "base": "MDL",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 42.94
+    },
+    {
+      "base": "MXN",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 61.81
+    },
+    {
+      "base": "NLG",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 224.45
+    },
+    {
+      "base": "NOK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 62.42
+    },
+    {
+      "base": "PLN",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 140.83
+    },
+    {
+      "base": "PTE",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 2.467
+    },
+    {
+      "base": "RUB",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 18.47
+    },
+    {
+      "base": "SAR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 149.91
+    },
+    {
+      "base": "SEK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 52.04
+    },
+    {
+      "base": "SGD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 304.83
+    },
+    {
+      "base": "SKK",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 11.61
+    },
+    {
+      "base": "SYP",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 12.25
+    },
+    {
+      "base": "TJS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 234.25
+    },
+    {
+      "base": "UAH",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 106.21
+    },
+    {
+      "base": "USD",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 562.2
+    },
+    {
+      "base": "UZS",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 0.818
+    },
+    {
+      "base": "XDR",
+      "date": "2001-12-28",
+      "quote": "AMD",
+      "rate": 717.25
+    }
+  ]
+}
