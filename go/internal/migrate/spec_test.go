@@ -923,3 +923,237 @@ func TestRetiredLabelsMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *tes
 		t.Fatal("unnecessary invalidation")
 	}
 }
+
+// afghaniDatabase is spec/bdi_old_afghani_migration_spec.rb's
+// run_migration_script setup: a database migrated to 41 with providers
+// seeded.
+func afghaniDatabase(t *testing.T) *sql.DB {
+	t.Helper()
+	conn, _ := empty(t)
+	migrateTo(t, conn, 41)
+	if err := rates.SeedProviders(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	return conn
+}
+
+// spec/bdi_old_afghani_migration_spec.rb
+func TestOldAfghaniMigrationRelabelsBDIRowsBeforeSwitch(t *testing.T) {
+	ctx := context.Background()
+	today := rates.Today()
+	conn := afghaniDatabase(t)
+
+	insertRates(t, conn,
+		rate{provider: "BDI", date: "2002-10-04", base: "EUR", quote: "AFN", mid: f(4685.87)},
+		rate{provider: "BDI", date: "2002-10-04", base: "EUR", quote: "USD", mid: f(0.9865)},
+		rate{provider: "BDI", date: "2004-03-31", base: "EUR", quote: "AFN", mid: f(5806.4)},
+		rate{provider: "BDI", date: "2004-03-31", base: "EUR", quote: "AFA", mid: f(5806.4)},
+		rate{provider: "BDI", date: "2004-03-31", base: "EUR", quote: "USD", mid: f(1.2224)},
+		rate{provider: "BDI", date: "2004-04-01", base: "EUR", quote: "AFN", mid: f(58.52)},
+		rate{provider: "BDI", date: "2004-04-01", base: "EUR", quote: "USD", mid: f(1.232)},
+		rate{provider: "NBP", date: "2004-03-31", base: "AFN", quote: "PLN", mid: f(0.0789)},
+		rate{provider: "NBP", date: "2004-03-31", base: "USD", quote: "PLN", mid: f(3.9077)},
+		rate{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "USD", mid: f(1.17)},
+	)
+	if err := rates.RefreshSummaries(ctx, conn, []string{"AFA", "AFN", "EUR", "USD", "PLN"}, ""); err != nil {
+		t.Fatal(err)
+	}
+	for _, t2 := range rates.Rollups {
+		b := rates.BucketSQL(t2.Precision, "date")
+		mustExec(t, conn, "INSERT INTO "+t2.Name+" (bucket_date, provider, base, quote, rate) SELECT "+b+
+			", provider, base, quote, avg(rate) FROM rates GROUP BY "+b+", provider, base, quote")
+	}
+	rebuildBlends(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'AFN' AND date = '2002-10-04'") == 0 {
+		t.Fatal("fixture blend missing old AFN")
+	}
+	affectedBucket := bucket(rates.Week, "2002-10-04")
+	unaffectedBucket := bucket(rates.Week, "2026-01-20")
+	unaffected := blendRows(t, conn, "blended_weekly_rates", "bucket_date = "+db.Lit(unaffectedBucket))
+	if len(unaffected) == 0 {
+		t.Fatal("missing unaffected fixture")
+	}
+
+	setup(t, conn)
+	if v := version(t, conn); v < 42 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	type pair struct{ date, quote string }
+	pairs := func(query string) []pair {
+		t.Helper()
+		result, err := conn.Query(query)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer result.Close()
+		var out []pair
+		for result.Next() {
+			var p pair
+			if err := result.Scan(&p.date, &p.quote); err != nil {
+				t.Fatal(err)
+			}
+			out = append(out, p)
+		}
+		return out
+	}
+	type stored struct {
+		date, quote string
+		mid         float64
+	}
+	result, err := conn.Query("SELECT date(date), quote, mid FROM rates WHERE provider = 'BDI' AND quote != 'USD' " +
+		"ORDER BY date")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []stored
+	for result.Next() {
+		var s stored
+		if err := result.Scan(&s.date, &s.quote, &s.mid); err != nil {
+			t.Fatal(err)
+		}
+		got = append(got, s)
+	}
+	result.Close()
+	want := []stored{{"2002-10-04", "AFA", 4685.87}, {"2004-03-31", "AFA", 5806.4}, {"2004-04-01", "AFN", 58.52}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("wrong relabelled rows: %+v", got)
+	}
+	if count(t, conn, "SELECT count(*) FROM rates WHERE provider = 'NBP' AND base = 'AFN'") != 1 {
+		t.Fatal("touched other providers")
+	}
+
+	weekly := pairs("SELECT date(bucket_date), quote FROM weekly_rates WHERE provider = 'BDI' AND quote != 'USD' " +
+		"ORDER BY bucket_date, quote")
+	straddle := bucket(rates.Week, "2004-03-31")
+	if want := []pair{{affectedBucket, "AFA"}, {straddle, "AFA"}, {straddle, "AFN"}}; !reflect.DeepEqual(weekly, want) {
+		t.Fatalf("wrong weekly rollups: %+v", weekly)
+	}
+	monthly := pairs("SELECT date(bucket_date), quote FROM monthly_rates WHERE provider = 'BDI' AND quote = 'AFN'")
+	if want := []pair{{bucket(rates.Month, "2004-04-01"), "AFN"}}; !reflect.DeepEqual(monthly, want) {
+		t.Fatalf("AFN monthly rollup retained: %+v", monthly)
+	}
+
+	type coverage struct{ code, provider, start, end string }
+	result, err = conn.Query("SELECT iso_code, provider_key, date(start_date), date(end_date) FROM currency_coverages " +
+		"WHERE iso_code IN ('AFA', 'AFN') ORDER BY iso_code, provider_key")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var coverages []coverage
+	for result.Next() {
+		var c coverage
+		if err := result.Scan(&c.code, &c.provider, &c.start, &c.end); err != nil {
+			t.Fatal(err)
+		}
+		coverages = append(coverages, c)
+	}
+	result.Close()
+	wantCoverages := []coverage{
+		{"AFA", "BDI", "2002-10-04", "2002-10-04"},
+		{"AFN", "BDI", "2004-04-01", "2004-04-01"},
+		{"AFN", "NBP", "2004-03-31", "2004-03-31"},
+	}
+	if !reflect.DeepEqual(coverages, wantCoverages) {
+		t.Fatalf("wrong coverage: %+v", coverages)
+	}
+	for code, start := range map[string]string{"AFN": "2004-03-31", "AFA": "2002-10-04"} {
+		var got string
+		if err := conn.QueryRow("SELECT date(start_date) FROM currencies WHERE iso_code = ?", code).
+			Scan(&got); err != nil || got != start {
+			t.Fatalf("%s catalogue start %s (%v), want %s", code, got, err, start)
+		}
+	}
+
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 0 {
+		t.Fatal("partial daily invalidation")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_weekly_rates WHERE bucket_date = ?", affectedBucket) != 0 {
+		t.Fatal("kept affected bucket")
+	}
+	if got := blendRows(t, conn, "blended_weekly_rates", "bucket_date = "+db.Lit(unaffectedBucket)); !reflect.DeepEqual(got, unaffected) {
+		t.Fatalf("changed unrelated bucket: %v, want %v", got, unaffected)
+	}
+
+	if err := blend.RebuildDaily(ctx, conn, today); err != nil {
+		t.Fatal(err)
+	}
+	populate(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'AFN' AND date < '2004-03-31'") != 0 {
+		t.Fatal("old afghani blended as AFN")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'AFA' AND date = '2002-10-04'") == 0 {
+		t.Fatal("AFA missing from blend")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'AFA' AND date >= '2002-10-07'") != 0 {
+		t.Fatal("expired AFA blended")
+	}
+	if !dailyReady(t, conn) {
+		t.Fatal("blended_rates not ready")
+	}
+	recoveredDaily := blendRows(t, conn, "blended_rates", "")
+	mustExec(t, conn, "DELETE FROM blended_rates")
+	if err := blend.RebuildDaily(ctx, conn, today); err != nil {
+		t.Fatal(err)
+	}
+	if got := blendRows(t, conn, "blended_rates", ""); !reflect.DeepEqual(got, recoveredDaily) {
+		t.Fatal("rebuild mismatch for blended_rates")
+	}
+	for _, r := range blend.Rollups {
+		if !groupedReady(t, conn, r) {
+			t.Fatalf("%s not ready", r.Table)
+		}
+		recovered := blendRows(t, conn, r.Table, "")
+		mustExec(t, conn, "DELETE FROM "+r.Table)
+		if err := r.Rebuild(ctx, conn, today); err != nil {
+			t.Fatal(err)
+		}
+		if got := blendRows(t, conn, r.Table, ""); !reflect.DeepEqual(got, recovered) {
+			t.Fatalf("rebuild mismatch for %s", r.Table)
+		}
+	}
+}
+
+// "rolls back on conflicting duplicates"
+func TestOldAfghaniMigrationRollsBackOnConflictingDuplicates(t *testing.T) {
+	conn := afghaniDatabase(t)
+	insertRates(t, conn,
+		rate{provider: "BDI", date: "2004-03-31", base: "EUR", quote: "AFN", mid: f(5806.4)},
+		rate{provider: "BDI", date: "2004-03-31", base: "EUR", quote: "AFA", mid: f(5806.5)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2004-03-31', 'AFN', 4750.0)")
+	before := allRates(t, conn)
+
+	err := Up(context.Background(), conn)
+	if err == nil {
+		t.Fatal("accepted conflicting components")
+	}
+	if !strings.Contains(err.Error(), "conflicting AFN/AFA components") {
+		t.Fatal(err)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("partial repair committed")
+	}
+	if v := version(t, conn); v != 41 {
+		t.Fatalf("migration marked complete: version %d", v)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("invalidated blends after failure")
+	}
+}
+
+// "leaves databases without affected history alone"
+func TestOldAfghaniMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *testing.T) {
+	conn := afghaniDatabase(t)
+	insertRates(t, conn, rate{provider: "BDI", date: "2004-04-01", base: "EUR", quote: "AFN", mid: f(58.52)})
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2004-04-01', 'AFN', 47.5)")
+	if err := Up(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("unnecessary invalidation")
+	}
+	if count(t, conn, "SELECT count(*) FROM rates WHERE quote = 'AFN'") != 1 {
+		t.Fatal("relabelled post-switch row")
+	}
+}

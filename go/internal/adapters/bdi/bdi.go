@@ -30,6 +30,14 @@ const baseURL = "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v
 
 var isoCode = regexp.MustCompile(`^[A-Z]{3}$`)
 
+// BDI labels its old-afghani quotes AFN. Until 2004-03-31 they hold the frozen
+// official rate of 4750 AFA to the dollar (5806.4 per euro with the dollar at
+// 1.2224), long past the October 2002 redenomination. On 2004-04-01 they
+// switch to 47.5 new afghani to the dollar (58.52 per euro at 1.232).
+var predecessors = map[string]adapter.Predecessor{
+	"AFN": {Code: "AFA", Cutover: adapter.Date(2004, 4, 1)},
+}
+
 func init() {
 	adapter.Register("BDI", func(c *http.Client) adapter.Adapter { return New(c) })
 }
@@ -146,7 +154,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err != nil {
 			return nil, fmt.Errorf("invalid date %q for %s", dateText, code)
 		}
-		rates = append(rates, adapter.Rate{Date: date, Base: "EUR", Quote: code, Rate: rate})
+		rates = append(rates, adapter.Rate{
+			Date: date, Base: "EUR", Quote: adapter.HistoricalCode(predecessors, code, date), Rate: rate,
+		})
 	}
 	return rates, nil
 }

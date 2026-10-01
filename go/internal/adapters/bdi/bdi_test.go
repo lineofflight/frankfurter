@@ -2,6 +2,7 @@ package bdi
 
 import (
 	"context"
+	"slices"
 	"testing"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
@@ -55,6 +56,22 @@ func TestParseBaseAndQuote(t *testing.T) {
 	want := adapter.Rate{Date: adapter.Date(2026, 2, 10), Base: "EUR", Quote: "USD", Rate: 1.1894}
 	if rates[0] != want {
 		t.Errorf("rate = %+v, want %+v", rates[0], want)
+	}
+}
+
+func TestParseMapsOldAfghaniToAFABeforeSwitch(t *testing.T) {
+	rates, err := parse([]byte(header +
+		"AFGHANISTAN (Islamic State of),Afghani,AFN,115,5806.4,Foreign currency amount for 1 Euro.,2004-03-31\n" +
+		"AFGHANISTAN (Islamic State of),Afghani,AFN,115,58.52,Foreign currency amount for 1 Euro.,2004-04-01\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []adapter.Rate{
+		{Date: adapter.Date(2004, 3, 31), Base: "EUR", Quote: "AFA", Rate: 5806.4},
+		{Date: adapter.Date(2004, 4, 1), Base: "EUR", Quote: "AFN", Rate: 58.52},
+	}
+	if !slices.Equal(rates, want) {
+		t.Errorf("rates = %+v, want %+v", rates, want)
 	}
 }
 

@@ -54,6 +54,9 @@ A full local backfill from an empty database turned up these gaps:
   post-2003 AFA, BOI's BEL and CBK_L. BOI's pre-euro series also turned out to be quoted per 10, 100 or 1000 units.
   The adapters map them, nine legacy codes join the defunct seeds, and migration 041 repairs stored rows (Ruby #740).
   Fixed on both sides.
+- BDI quotes the frozen old-afghani rate (4750 AFA to the dollar) under AFN until 2004-03-31. The adapter maps AFN to
+  AFA before 2004-04-01, and migration 042 relabels stored rows and rebuilds BDI's AFA and AFN rollups (Ruby #741).
+  Fixed on both sides.
 
 ## Left outside go/
 

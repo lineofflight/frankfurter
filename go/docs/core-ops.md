@@ -5,18 +5,18 @@ Migrations, the single `frankfurter` binary (Procfile processes, rake tasks, bin
 
 ## Package `internal/migrate` (db/migrate, the db:migrate task)
 
-The 41 migrations, applied through Sequel's own bookkeeping table (`schema_info`, one row, `version`). A database the
-Ruby app migrated opens at its version and is left alone at 41; a database migrated here passes Ruby's
+The 42 migrations, applied through Sequel's own bookkeeping table (`schema_info`, one row, `version`). A database the
+Ruby app migrated opens at its version and is left alone at 42; a database migrated here passes Ruby's
 `Sequel::Migrator.check_current` (checked by hand both ways against the Ruby test database and a Go-built one).
 
-- `Migration{Version, Name, Up, Down}`, `Migrations()`, `Latest()` (41), `ErrIrreversible` (008's down).
+- `Migration{Version, Name, Up, Down}`, `Migrations()`, `Latest()` (42), `ErrIrreversible` (008's down).
 - `Up(ctx, conn)`, `To(ctx, conn, target)` (up or down, like `IntegerMigrator` with `target:`), `Current(ctx, q)` (0
   without a `schema_info` table), `CheckCurrent(ctx, q)`.
 - Each migration and its version bump commit together in one `BEGIN IMMEDIATE` transaction; the first failure stops
   the run at the last good version.
 - DDL is the SQL Sequel emitted on SQLite, table rebuilds included (031's `set_column_allow_null` and its down), so
   `sqlite_master` is identical to Ruby's at every version. `testdata/schemas.json` records Ruby's schema after each step
-  up from 0 to 41 and down from 41 to 8, where 008 refuses; `go/scripts/migration_schemas.rb` regenerates it:
+  up from 0 to 42 and down from 42 to 8, where 008 refuses; `go/scripts/migration_schemas.rb` regenerates it:
 
   ```sh
   DATABASE_URL=sqlite://$SCRATCH/schemas.sqlite3 APP_ENV=test \
@@ -25,8 +25,8 @@ Ruby app migrated opens at its version and is left alone at 41; a database migra
   ```
 
 - Data migrations reuse the domain packages: 025 `rates.PrecisionSQL`, rollups `rates.WeekBucket`/`MonthBucket`, 034
-  `currency.Codes()` (the Money table, 234 codes, same as Ruby's), 036-041 and 037 `rates.RefreshSummaries`, 041
-  `rates.Normalize` and `rates.BucketSQL`.
+  `currency.Codes()` (the Money table, 234 codes, same as Ruby's), 036-042 and 037 `rates.RefreshSummaries`, 041
+  `rates.Normalize` and `rates.BucketSQL`. 042 reuses 041's row relabel (`relabelRetiredRow`).
 - `internal/db.Schema` (what `dbtest` and `fixtures` create) must stay equal to the migrated schema:
   `TestLatestMatchesEmbeddedSchema` fails when they drift. For a new Ruby migration: add the Go migration, regenerate
   `schemas.json`, and redump `internal/db/schema.sql` with its version.
@@ -100,14 +100,17 @@ All in `internal/migrate/spec_test.go`, one database file per test instead of Ru
   `TestRetiredLabelsMigrationRelabelsRescalesAndDropsStoredRowsAndRetiresLegacySeries`,
   `TestRetiredLabelsMigrationRollsBackOnConflictingDuplicates`,
   `TestRetiredLabelsMigrationLeavesDatabasesWithoutAffectedHistoryAlone`.
+- bdi_old_afghani_migration_spec: `TestOldAfghaniMigrationRelabelsBDIRowsBeforeSwitch`,
+  `TestOldAfghaniMigrationRollsBackOnConflictingDuplicates`,
+  `TestOldAfghaniMigrationLeavesDatabasesWithoutAffectedHistoryAlone`.
 
 The specs stub `Cache.purge` to fail, to prove setup never needs the CDN; Go's migrations and seed have no cache
 dependency, so there is nothing to stub.
 
 Beyond the specs, `TestDataMigrationsMatchRuby` (`internal/migrate/data_test.go`) checks the data migrations against
 Ruby: `testdata/data/phase_vN.sql` is loaded once the database reaches version N (fixtures for 003, 005, 008, 011, 015,
-017-019, 021, 023, 025-028, 034, 036-041), then every table is compared with Ruby's dump (`testdata/data/ruby.json`)
-after migrating up to 41 and after rolling back to 8. Regenerate the dump with `go/scripts/migration_data.rb`:
+017-019, 021, 023, 025-028, 034, 036-042), then every table is compared with Ruby's dump (`testdata/data/ruby.json`)
+after migrating up to 42 and after rolling back to 8. Regenerate the dump with `go/scripts/migration_data.rb`:
 
 ```sh
 DATABASE_URL=sqlite://$SCRATCH/data.sqlite3 APP_ENV=test \

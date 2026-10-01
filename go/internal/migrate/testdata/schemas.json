@@ -1,5 +1,5 @@
 {
-  "latest": 41,
+  "latest": 42,
   "up": {
     "1": [
       {
@@ -4324,9 +4324,385 @@
         "tbl_name": "weekly_rates",
         "sql": "CREATE INDEX `weekly_rates_bucket_date_quote_index` ON `weekly_rates` (`bucket_date`, `quote`)"
       }
+    ],
+    "42": [
+      {
+        "type": "table",
+        "name": "blended_monthly_rates",
+        "tbl_name": "blended_monthly_rates",
+        "sql": "CREATE TABLE `blended_monthly_rates` (`bucket_date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `bucket_date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_monthly_rates_bucket_date_index",
+        "tbl_name": "blended_monthly_rates",
+        "sql": "CREATE INDEX `blended_monthly_rates_bucket_date_index` ON `blended_monthly_rates` (`bucket_date`)"
+      },
+      {
+        "type": "table",
+        "name": "blended_rates",
+        "tbl_name": "blended_rates",
+        "sql": "CREATE TABLE `blended_rates` (`date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_rates_date_index",
+        "tbl_name": "blended_rates",
+        "sql": "CREATE INDEX `blended_rates_date_index` ON `blended_rates` (`date`)"
+      },
+      {
+        "type": "table",
+        "name": "blended_weekly_rates",
+        "tbl_name": "blended_weekly_rates",
+        "sql": "CREATE TABLE `blended_weekly_rates` (`bucket_date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `bucket_date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_weekly_rates_bucket_date_index",
+        "tbl_name": "blended_weekly_rates",
+        "sql": "CREATE INDEX `blended_weekly_rates_bucket_date_index` ON `blended_weekly_rates` (`bucket_date`)"
+      },
+      {
+        "type": "table",
+        "name": "currencies",
+        "tbl_name": "currencies",
+        "sql": "CREATE TABLE `currencies` (`iso_code` varchar(255) NOT NULL PRIMARY KEY, `start_date` date NOT NULL, `end_date` date NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "currency_coverages",
+        "tbl_name": "currency_coverages",
+        "sql": "CREATE TABLE `currency_coverages` (`provider_key` varchar(255) NOT NULL, `iso_code` varchar(255) NOT NULL, `start_date` date, `end_date` date, PRIMARY KEY (`provider_key`, `iso_code`))"
+      },
+      {
+        "type": "table",
+        "name": "currency_exclusions",
+        "tbl_name": "currency_exclusions",
+        "sql": "CREATE TABLE `currency_exclusions` (`provider_key` varchar(255) NOT NULL, `iso_code` varchar(255) NOT NULL, `start_date` date NOT NULL, `end_date` date NOT NULL, PRIMARY KEY (`provider_key`, `iso_code`))"
+      },
+      {
+        "type": "table",
+        "name": "monthly_rates",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE TABLE `monthly_rates` (`bucket_date` date NOT NULL, `provider` varchar(255) NOT NULL, `base` varchar(255) NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`provider`, `bucket_date`, `base`, `quote`))"
+      },
+      {
+        "type": "index",
+        "name": "monthly_rates_bucket_date_provider_base_quote_index",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE INDEX `monthly_rates_bucket_date_provider_base_quote_index` ON `monthly_rates` (`bucket_date`, `provider`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "monthly_rates_bucket_date_quote_index",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE INDEX `monthly_rates_bucket_date_quote_index` ON `monthly_rates` (`bucket_date`, `quote`)"
+      },
+      {
+        "type": "table",
+        "name": "providers",
+        "tbl_name": "providers",
+        "sql": "CREATE TABLE `providers` (`key` varchar(255) NOT NULL PRIMARY KEY, `name` varchar(255) NOT NULL, \"data_url\" varchar(255), `terms_url` varchar(255), `coverage_start` date, `pivot_currency` varchar(255), `rate_type` varchar(255), `country_code` varchar(2), `publish_schedule` varchar(255), `publish_cadence` varchar(255), `frequency` varchar(255) DEFAULT ('daily') NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "rates",
+        "tbl_name": "rates",
+        "sql": "CREATE TABLE `rates`(`date` date DEFAULT (NULL) NOT NULL, `base` varchar(255) DEFAULT (NULL) NOT NULL, `quote` varchar(255) DEFAULT (NULL) NOT NULL, `mid` double precision DEFAULT (NULL) NULL, `provider` varchar(255) DEFAULT (NULL) NOT NULL, `bid` double precision, `ask` double precision, rate REAL GENERATED ALWAYS AS (\n  COALESCE(mid,\n    CASE\n      WHEN provider = 'BOJA' AND bid = 0 THEN ask\n      WHEN bid IS NOT NULL AND ask IS NOT NULL\n        THEN CAST(printf('%.12g', (bid + ask) / 2.0) AS REAL)\n    END\n  )\n) VIRTUAL)"
+      },
+      {
+        "type": "index",
+        "name": "rates_date_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_date_index` ON `rates` (`date`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_base_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_provider_base_index` ON `rates` (`provider`, `base`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_date_base_quote_index",
+        "tbl_name": "rates",
+        "sql": "CREATE UNIQUE INDEX `rates_provider_date_base_quote_index` ON `rates` (`provider`, `date`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_quote_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_provider_quote_index` ON `rates` (`provider`, `quote`)"
+      },
+      {
+        "type": "table",
+        "name": "schema_info",
+        "tbl_name": "schema_info",
+        "sql": "CREATE TABLE `schema_info` (`version` integer DEFAULT (0) NOT NULL)"
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_monthly_rates_1",
+        "tbl_name": "blended_monthly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_rates_1",
+        "tbl_name": "blended_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_weekly_rates_1",
+        "tbl_name": "blended_weekly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currencies_1",
+        "tbl_name": "currencies",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currency_coverages_1",
+        "tbl_name": "currency_coverages",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currency_exclusions_1",
+        "tbl_name": "currency_exclusions",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_monthly_rates_1",
+        "tbl_name": "monthly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_providers_1",
+        "tbl_name": "providers",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_weekly_rates_1",
+        "tbl_name": "weekly_rates",
+        "sql": null
+      },
+      {
+        "type": "table",
+        "name": "weekly_rates",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE TABLE `weekly_rates` (`bucket_date` date NOT NULL, `provider` varchar(255) NOT NULL, `base` varchar(255) NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`provider`, `bucket_date`, `base`, `quote`))"
+      },
+      {
+        "type": "index",
+        "name": "weekly_rates_bucket_date_provider_base_quote_index",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE INDEX `weekly_rates_bucket_date_provider_base_quote_index` ON `weekly_rates` (`bucket_date`, `provider`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "weekly_rates_bucket_date_quote_index",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE INDEX `weekly_rates_bucket_date_quote_index` ON `weekly_rates` (`bucket_date`, `quote`)"
+      }
     ]
   },
   "down": {
+    "41": [
+      {
+        "type": "table",
+        "name": "blended_monthly_rates",
+        "tbl_name": "blended_monthly_rates",
+        "sql": "CREATE TABLE `blended_monthly_rates` (`bucket_date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `bucket_date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_monthly_rates_bucket_date_index",
+        "tbl_name": "blended_monthly_rates",
+        "sql": "CREATE INDEX `blended_monthly_rates_bucket_date_index` ON `blended_monthly_rates` (`bucket_date`)"
+      },
+      {
+        "type": "table",
+        "name": "blended_rates",
+        "tbl_name": "blended_rates",
+        "sql": "CREATE TABLE `blended_rates` (`date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_rates_date_index",
+        "tbl_name": "blended_rates",
+        "sql": "CREATE INDEX `blended_rates_date_index` ON `blended_rates` (`date`)"
+      },
+      {
+        "type": "table",
+        "name": "blended_weekly_rates",
+        "tbl_name": "blended_weekly_rates",
+        "sql": "CREATE TABLE `blended_weekly_rates` (`bucket_date` date NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`quote`, `bucket_date`))"
+      },
+      {
+        "type": "index",
+        "name": "blended_weekly_rates_bucket_date_index",
+        "tbl_name": "blended_weekly_rates",
+        "sql": "CREATE INDEX `blended_weekly_rates_bucket_date_index` ON `blended_weekly_rates` (`bucket_date`)"
+      },
+      {
+        "type": "table",
+        "name": "currencies",
+        "tbl_name": "currencies",
+        "sql": "CREATE TABLE `currencies` (`iso_code` varchar(255) NOT NULL PRIMARY KEY, `start_date` date NOT NULL, `end_date` date NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "currency_coverages",
+        "tbl_name": "currency_coverages",
+        "sql": "CREATE TABLE `currency_coverages` (`provider_key` varchar(255) NOT NULL, `iso_code` varchar(255) NOT NULL, `start_date` date, `end_date` date, PRIMARY KEY (`provider_key`, `iso_code`))"
+      },
+      {
+        "type": "table",
+        "name": "currency_exclusions",
+        "tbl_name": "currency_exclusions",
+        "sql": "CREATE TABLE `currency_exclusions` (`provider_key` varchar(255) NOT NULL, `iso_code` varchar(255) NOT NULL, `start_date` date NOT NULL, `end_date` date NOT NULL, PRIMARY KEY (`provider_key`, `iso_code`))"
+      },
+      {
+        "type": "table",
+        "name": "monthly_rates",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE TABLE `monthly_rates` (`bucket_date` date NOT NULL, `provider` varchar(255) NOT NULL, `base` varchar(255) NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`provider`, `bucket_date`, `base`, `quote`))"
+      },
+      {
+        "type": "index",
+        "name": "monthly_rates_bucket_date_provider_base_quote_index",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE INDEX `monthly_rates_bucket_date_provider_base_quote_index` ON `monthly_rates` (`bucket_date`, `provider`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "monthly_rates_bucket_date_quote_index",
+        "tbl_name": "monthly_rates",
+        "sql": "CREATE INDEX `monthly_rates_bucket_date_quote_index` ON `monthly_rates` (`bucket_date`, `quote`)"
+      },
+      {
+        "type": "table",
+        "name": "providers",
+        "tbl_name": "providers",
+        "sql": "CREATE TABLE `providers` (`key` varchar(255) NOT NULL PRIMARY KEY, `name` varchar(255) NOT NULL, \"data_url\" varchar(255), `terms_url` varchar(255), `coverage_start` date, `pivot_currency` varchar(255), `rate_type` varchar(255), `country_code` varchar(2), `publish_schedule` varchar(255), `publish_cadence` varchar(255), `frequency` varchar(255) DEFAULT ('daily') NOT NULL)"
+      },
+      {
+        "type": "table",
+        "name": "rates",
+        "tbl_name": "rates",
+        "sql": "CREATE TABLE `rates`(`date` date DEFAULT (NULL) NOT NULL, `base` varchar(255) DEFAULT (NULL) NOT NULL, `quote` varchar(255) DEFAULT (NULL) NOT NULL, `mid` double precision DEFAULT (NULL) NULL, `provider` varchar(255) DEFAULT (NULL) NOT NULL, `bid` double precision, `ask` double precision, rate REAL GENERATED ALWAYS AS (\n  COALESCE(mid,\n    CASE\n      WHEN provider = 'BOJA' AND bid = 0 THEN ask\n      WHEN bid IS NOT NULL AND ask IS NOT NULL\n        THEN CAST(printf('%.12g', (bid + ask) / 2.0) AS REAL)\n    END\n  )\n) VIRTUAL)"
+      },
+      {
+        "type": "index",
+        "name": "rates_date_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_date_index` ON `rates` (`date`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_base_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_provider_base_index` ON `rates` (`provider`, `base`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_date_base_quote_index",
+        "tbl_name": "rates",
+        "sql": "CREATE UNIQUE INDEX `rates_provider_date_base_quote_index` ON `rates` (`provider`, `date`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "rates_provider_quote_index",
+        "tbl_name": "rates",
+        "sql": "CREATE INDEX `rates_provider_quote_index` ON `rates` (`provider`, `quote`)"
+      },
+      {
+        "type": "table",
+        "name": "schema_info",
+        "tbl_name": "schema_info",
+        "sql": "CREATE TABLE `schema_info` (`version` integer DEFAULT (0) NOT NULL)"
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_monthly_rates_1",
+        "tbl_name": "blended_monthly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_rates_1",
+        "tbl_name": "blended_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_blended_weekly_rates_1",
+        "tbl_name": "blended_weekly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currencies_1",
+        "tbl_name": "currencies",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currency_coverages_1",
+        "tbl_name": "currency_coverages",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_currency_exclusions_1",
+        "tbl_name": "currency_exclusions",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_monthly_rates_1",
+        "tbl_name": "monthly_rates",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_providers_1",
+        "tbl_name": "providers",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_weekly_rates_1",
+        "tbl_name": "weekly_rates",
+        "sql": null
+      },
+      {
+        "type": "table",
+        "name": "weekly_rates",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE TABLE `weekly_rates` (`bucket_date` date NOT NULL, `provider` varchar(255) NOT NULL, `base` varchar(255) NOT NULL, `quote` varchar(255) NOT NULL, `rate` double precision NOT NULL, PRIMARY KEY (`provider`, `bucket_date`, `base`, `quote`))"
+      },
+      {
+        "type": "index",
+        "name": "weekly_rates_bucket_date_provider_base_quote_index",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE INDEX `weekly_rates_bucket_date_provider_base_quote_index` ON `weekly_rates` (`bucket_date`, `provider`, `base`, `quote`)"
+      },
+      {
+        "type": "index",
+        "name": "weekly_rates_bucket_date_quote_index",
+        "tbl_name": "weekly_rates",
+        "sql": "CREATE INDEX `weekly_rates_bucket_date_quote_index` ON `weekly_rates` (`bucket_date`, `quote`)"
+      }
+    ],
     "40": [
       {
         "type": "table",

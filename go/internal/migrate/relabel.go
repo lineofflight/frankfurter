@@ -6,6 +6,7 @@ import (
 	"slices"
 
 	"github.com/lineofflight/frankfurter/go/internal/db"
+	"github.com/lineofflight/frankfurter/go/internal/rates"
 )
 
 // relabelOldManat is 027. The Bank of Lithuania labels its old-manat series as
@@ -144,4 +145,73 @@ func resummarize(ctx context.Context, q db.Querier, codes []string) error {
 		}
 	}
 	return nil
+}
+
+// relabelOldAfghani is 042. Banca d'Italia labels its old-afghani quotes AFN.
+// Until 2004-03-31 they hold the frozen official rate of 4750 AFA per dollar,
+// long past the October 2002 redenomination, and on 2004-04-01 they switch to
+// 47.5 new afghani. The adapter now emits AFA before that date; this relabels
+// what is stored. The values are right and only the code is wrong, so rows are
+// updated in place rather than refetched.
+//
+// BDI was the only daily AFN source before NBP joined on 2003-11-12, so the
+// AFN blend ran at old-afghani magnitudes from 1999 and averaged them with
+// NBP's new afghani until the switch. BDI's AFA and AFN rollups are rebuilt for
+// the affected buckets and both codes' coverage is recomputed; AFA's defunct
+// entry keeps the rows from 2002-10-07 out of blends and the catalogue. As in
+// 041, the grouped blends for those buckets are dropped and the daily blend is
+// cleared for the scheduler to rebuild.
+func relabelOldAfghani(ctx context.Context, q db.Querier) error {
+	label := retiredLabel{provider: "BDI", from: "AFN", to: "AFA"}
+	scope := "`provider` = 'BDI' AND " + either("AFN") + " AND `date` < '2004-04-01'"
+	var needed bool
+	if err := q.QueryRowContext(ctx, "SELECT EXISTS (SELECT 1 FROM `rates` WHERE "+scope+")").
+		Scan(&needed); err != nil {
+		return err
+	}
+	if !needed {
+		return nil
+	}
+
+	buckets := make([][]string, len(retiredRollups))
+	for i, t := range retiredRollups {
+		dates, err := column(ctx, q, "SELECT DISTINCT "+t.bucket+" FROM `rates` WHERE "+scope)
+		if err != nil {
+			return err
+		}
+		buckets[i] = dates
+	}
+	rows, err := legacyRows(ctx, q, scope)
+	if err != nil {
+		return err
+	}
+	for _, r := range rows {
+		// Equal duplicates collapse. A disagreement needs source evidence, not
+		// an arbitrary winner.
+		if err := relabelRetiredRow(ctx, q, label, r); err != nil {
+			return err
+		}
+	}
+
+	codes := []string{"AFA", "AFN"}
+	bdi := "`provider` = 'BDI' AND " + either(codes...)
+	for i, t := range retiredRollups {
+		list := db.LitList(buckets[i])
+		if err := exec(ctx, q,
+			"DELETE FROM `"+t.blended+"` WHERE `bucket_date` IN "+list,
+			"DELETE FROM `"+t.table+"` WHERE "+bdi+" AND `bucket_date` IN "+list,
+			rollupInsert(t.table, t.bucket, bdi+" AND "+t.bucket+" IN "+list),
+		); err != nil {
+			return err
+		}
+	}
+	if err := rates.RefreshSummaries(ctx, q, codes, "BDI"); err != nil {
+		return err
+	}
+
+	// Daily readiness checks only the earliest date. Partial invalidation
+	// could serve an incomplete table, so clear it entirely. The scheduler
+	// rebuilds daily history and populates missing grouped buckets after
+	// startup.
+	return exec(ctx, q, "DELETE FROM `blended_rates`")
 }
