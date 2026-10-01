@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HMRC, IMF, DNB, MAS and CBAR full backfills no longer fail at their coverage start. (#744)
 - Successor currencies quoted under retired codes in NBU, BNA, BAM, BDI, CBG, CBU, LB, NBP and BOTA history. (#745)
 - National Bank of the Kyrgyz Republic no longer re-dates its frozen BYR rate each week. (#745)
+- National Bank of the Republic of North Macedonia's ECU quotes, labelled XBA until May 1999.
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
