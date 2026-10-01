@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Retired currencies use CLDR names with year ranges instead of '(old)'.
+
 ### Fixed
 
 - Backfill no longer skips a day at each window boundary. (#739)

@@ -15,6 +15,11 @@ describe "Currency patches" do
     end
   end
 
+  it "names retired currencies after CLDR" do
+    _(Money::Currency.find("VEB").name).must_equal("Venezuelan Bolívar (1871–2008)")
+    _(Money::Currency.find("VEF").name).must_equal("Venezuelan Bolívar (2008–2018)")
+  end
+
   it "registers the Ecuadorian sucre" do
     currency = Money::Currency.find("ECS")
 
