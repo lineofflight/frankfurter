@@ -72,6 +72,30 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.3069, 0.0001)
       end
 
+      it "restores the old Belarusian ruble before NBK switches to the new one" do
+        bulletin = lambda do |date, rate, quant|
+          adapter.parse(<<~XML).first
+            <?xml version="1.0" encoding="UTF-8"?>
+            <rates>
+              <date>#{date}</date>
+              <item>
+                <fullname>БЕЛОРУССКИЙ РУБЛЬ</fullname>
+                <title>BYN</title>
+                <description>#{rate}</description>
+                <quant>#{quant}</quant>
+              </item>
+            </rates>
+          XML
+        end
+        old = bulletin.call("01.07.2016", "1.68", "100")
+        new = bulletin.call("04.07.2016", "170.73", "1")
+
+        _(old[:base]).must_equal("BYR")
+        _(old[:rate]).must_be_close_to(0.0168, 1e-9)
+        _(new[:base]).must_equal("BYN")
+        _(new[:rate]).must_equal(170.73)
+      end
+
       it "skips zero rates" do
         xml = <<~XML
           <?xml version="1.0" encoding="UTF-8"?>

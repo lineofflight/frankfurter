@@ -38,8 +38,16 @@ class Provider
       }.freeze
 
       # CBA's TJS series holds the Tajik ruble until the somoni takes over: 10 "TJS" = 26.71 AMD on 2000-10-30, and the
-      # somoni at 1 TJS = 250.74 AMD on 2000-11-01.
-      PREDECESSORS = { "TJS" => ["TJR", Date.new(2000, 11, 1)] }.freeze
+      # somoni at 1 TJS = 250.74 AMD on 2000-11-01. A stray BYN row on 2016-01-08 repeats that day's BYR quote for the
+      # old Belarusian ruble, 10 = 0.26 AMD.
+      PREDECESSORS = {
+        "BYN" => ["BYR", Date.new(2016, 7, 1)],
+        "TJS" => ["TJR", Date.new(2000, 11, 1)],
+      }.freeze
+
+      # Three BYR rows after the 2016-07-01 redenomination quote the new ruble: 10 "BYR" = 249.91 AMD on 2016-10-25,
+      # between 1 BYN = 249.53 AMD on 2016-10-24 and 248.86 AMD on 2016-10-28.
+      SUCCESSORS = { "BYR" => ["BYN", Date.new(2016, 7, 1)] }.freeze
 
       # Series whose amount field understates the quote tenfold, keyed by label with the first date it is right: 1 KZT =
       # 37.37 AMD on 2004-12-30, 10 KZT = 37.39 AMD on 2005-01-04, and 1 ISK = 35.40 AMD on 2015-03-06, 10 ISK = 35.12
@@ -51,6 +59,10 @@ class Provider
         "TJS" => Date.new(2000, 11, 1),
         "USM" => Date.new(2007, 1, 5),
       }.freeze
+
+      # The reverse, keyed by label with the first date the amount field overstates the quote tenfold: BYR rows after
+      # the switch quote one new ruble under the old ruble's amount of 10.
+      OVERSTATED_AMOUNTS = { "BYR" => Date.new(2016, 7, 1) }.freeze
 
       class << self
         # A full backfill stores about 300,000 rows. Yearly windows keep each insert, and the blend refresh that follows
@@ -70,7 +82,7 @@ class Provider
           chunk_start = chunk_end + 1
         end
 
-        # SDR and XDR overlap in early 2017 with equal values.
+        # SDR and XDR overlap in early 2017, and BYN and BYR on 2016-01-08, with equal values.
         records.uniq { |record| record.values_at(:date, :base, :quote) }
       end
 
@@ -136,6 +148,7 @@ class Provider
       def extract_rate(node, iso, date)
         amount = Integer(node.locate("Amount").first.text)
         amount *= 10 if (corrected = UNDERSTATED_AMOUNTS[iso]) && date < corrected
+        amount /= 10 if (overstated = OVERSTATED_AMOUNTS[iso]) && date >= overstated
         rate = Float(node.locate("Rate").first.text)
         rate *= TROY_OUNCE_GRAMS if PRECIOUS_METALS.include?(iso)
         rate / amount

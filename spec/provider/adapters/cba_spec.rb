@@ -90,6 +90,23 @@ class Provider < Sequel::Model(:providers)
         _(isk[Date.new(2015, 3, 9)]).must_be_close_to(3.512, 1e-9)
       end
 
+      it "collapses the stray BYN row into the old ruble's BYR quote" do
+        dataset = adapter.fetch(after: Date.new(2016, 1, 8), upto: Date.new(2016, 1, 8))
+
+        _(rates(dataset, "BYN")).must_be_empty
+        _(dataset.count { |r| r[:base] == "BYR" }).must_equal(1)
+        _(rates(dataset, "BYR")[Date.new(2016, 1, 8)]).must_be_close_to(0.026, 1e-9)
+      end
+
+      it "reads BYR rows after the switch as one new ruble" do
+        dataset = adapter.fetch(after: Date.new(2016, 10, 24), upto: Date.new(2016, 10, 28))
+        byn = rates(dataset, "BYN")
+
+        _(rates(dataset, "BYR")).must_be_empty
+        _(byn.keys.sort).must_equal((Date.new(2016, 10, 24)..Date.new(2016, 10, 28)).to_a)
+        _(byn[Date.new(2016, 10, 25)]).must_equal(249.91)
+      end
+
       it "collapses the SDR and XDR duplicates" do
         dataset = adapter.fetch(after: Date.new(2017, 3, 17), upto: Date.new(2017, 3, 17))
 

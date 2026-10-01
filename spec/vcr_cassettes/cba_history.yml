@@ -1049,4 +1049,477 @@ http_interactions:
         diffgr:id="ExchangeRatesByRange57" msdata:rowOrder="56"><Rate>62.28</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.05</Diff><RateDate>2017-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
         diffgr:id="ExchangeRatesByRange58" msdata:rowOrder="57"><Rate>655.67</Rate><Amount>1</Amount><ISO>XDR</ISO><Diff>2.53</Diff><RateDate>2017-03-17T00:00:00+04:00</RateDate></ExchangeRatesByRange></DocumentElement></diffgr:diffgram></ExchangeRatesByDateRangeByISOResult></ExchangeRatesByDateRangeByISOResponse></soap:Body></soap:Envelope>
   recorded_at: Thu, 01 Oct 2026 20:16:32 GMT
+- request:
+    method: post
+    uri: https://api.cba.am/exchangerates.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <ExchangeRatesByDateRangeByISO xmlns="http://www.cba.am/">
+          <ISOCodes>USD,GBP,AUD,EUR,XDR,IRR,PLN,CAD,INR,NOK,JPY,SEK,CHF,CZK,CNY,SGD,BRL,AED,KGS,KZT,RUB,UAH,UZS,BYN,TJS,GEL,HKD,XAU,XAG,NZD,ARP,ARS,ATS,BEF,BGL,BGN,BRC,BYR,DEM,DKK,EEK,EGP,ESP,FIM,FRF,GRD,HUF,IEP,ILS,ISK,ITL,KRW,KWD,LBP,LTL,LVL,MDL,MXN,NLG,PLZ,PTE,SAR,SDR,SKK,SYP,TRY,USM</ISOCodes>
+          <DateFrom>2016-10-24</DateFrom>
+          <DateTo>2016-10-28</DateTo>
+        </ExchangeRatesByDateRangeByISO>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - '"http://www.cba.am/ExchangeRatesByDateRangeByISO"'
+      Connection:
+      - close
+      Host:
+      - api.cba.am
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Thu, 01 Oct 2026 21:24:52 GMT
+      Connection:
+      - close
+      Content-Length:
+      - '61974'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ExchangeRatesByDateRangeByISOResponse
+        xmlns="http://www.cba.am/"><ExchangeRatesByDateRangeByISOResult><xs:schema
+        id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><xs:element
+        name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ExchangeRatesByRange"
+        msdata:UseCurrentLocale="true"><xs:complexType><xs:choice minOccurs="0" maxOccurs="unbounded"><xs:element
+        name="ExchangeRatesByRange"><xs:complexType><xs:sequence><xs:element name="Rate"
+        type="xs:decimal" minOccurs="0" /><xs:element name="Amount" type="xs:int"
+        minOccurs="0" /><xs:element name="ISO" minOccurs="0"><xs:simpleType><xs:restriction
+        base="xs:string"><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element><xs:element
+        name="Diff" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" /><xs:element
+        name="RateDate" type="xs:dateTime" minOccurs="0" /></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1"><DocumentElement
+        xmlns=""><ExchangeRatesByRange diffgr:id="ExchangeRatesByRange1" msdata:rowOrder="0"><Rate>475.30</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.04</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange2" msdata:rowOrder="1"><Rate>581.77</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>0.53</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange3" msdata:rowOrder="2"><Rate>362.70</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-0.21</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange4" msdata:rowOrder="3"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange5" msdata:rowOrder="4"><Rate>31.41</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>0.05</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange6" msdata:rowOrder="5"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange7" msdata:rowOrder="6"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange8" msdata:rowOrder="7"><Rate>69.57</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>-0.08</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange9" msdata:rowOrder="8"><Rate>53.52</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>-0.02</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange10" msdata:rowOrder="9"><Rate>517.46</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-0.62</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange11" msdata:rowOrder="10"><Rate>652.84</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>-2.03</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange12" msdata:rowOrder="11"><Rate>154.58</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>0.18</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange13" msdata:rowOrder="12"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange14" msdata:rowOrder="13"><Rate>1.34</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange15" msdata:rowOrder="14"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange16" msdata:rowOrder="15"><Rate>123.18</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>-0.31</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange17" msdata:rowOrder="16"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange18" msdata:rowOrder="17"><Rate>119.74</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>0.05</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange19" msdata:rowOrder="18"><Rate>31.39</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange20" msdata:rowOrder="19"><Rate>356.35</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-2.72</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange21" msdata:rowOrder="20"><Rate>7.11</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange22" msdata:rowOrder="21"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange23" msdata:rowOrder="22"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange24" msdata:rowOrder="23"><Rate>16.80</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange25" msdata:rowOrder="24"><Rate>45.73</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.04</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange26" msdata:rowOrder="25"><Rate>57.66</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.12</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange27" msdata:rowOrder="26"><Rate>53.30</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.21</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange28" msdata:rowOrder="27"><Rate>478.17</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>0.19</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange29" msdata:rowOrder="28"><Rate>19.15</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange30" msdata:rowOrder="29"><Rate>70.22</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.13</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange31" msdata:rowOrder="30"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange32" msdata:rowOrder="31"><Rate>341.46</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.51</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange33" msdata:rowOrder="32"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange34" msdata:rowOrder="33"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange35" msdata:rowOrder="34"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange36" msdata:rowOrder="35"><Rate>42.02</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>0.14</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange37" msdata:rowOrder="36"><Rate>150.59</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-0.67</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange38" msdata:rowOrder="37"><Rate>25.63</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>0.11</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange39" msdata:rowOrder="38"><Rate>126.72</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange40" msdata:rowOrder="39"><Rate>2.23</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange41" msdata:rowOrder="40"><Rate>129.40</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange42" msdata:rowOrder="41"><Rate>1567.56</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>-0.70</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange43" msdata:rowOrder="42"><Rate>264.61</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>-0.07</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange44" msdata:rowOrder="43"><Rate>41.55</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>0.15</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange45" msdata:rowOrder="44"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange46" msdata:rowOrder="45"><Rate>149.88</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>-0.07</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange47" msdata:rowOrder="46"><Rate>6.98</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange48" msdata:rowOrder="47"><Rate>14.34</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.04</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange49" msdata:rowOrder="48"><Rate>23.75</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>0.03</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange50" msdata:rowOrder="49"><Rate>7.64</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange51" msdata:rowOrder="50"><Rate>18.54</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange52" msdata:rowOrder="51"><Rate>1.55</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange53" msdata:rowOrder="52"><Rate>249.53</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>0.23</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange54" msdata:rowOrder="53"><Rate>60.35</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.00</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange55" msdata:rowOrder="54"><Rate>200.65</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.52</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange56" msdata:rowOrder="55"><Rate>61.27</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.01</Diff><RateDate>2016-10-24T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange57" msdata:rowOrder="56"><Rate>475.40</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.10</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange58" msdata:rowOrder="57"><Rate>581.84</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>0.07</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange59" msdata:rowOrder="58"><Rate>363.25</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>0.55</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange60" msdata:rowOrder="59"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange61" msdata:rowOrder="60"><Rate>31.39</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>-0.02</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange62" msdata:rowOrder="61"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange63" msdata:rowOrder="62"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange64" msdata:rowOrder="63"><Rate>69.56</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>-0.01</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange65" msdata:rowOrder="64"><Rate>53.53</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>0.01</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange66" msdata:rowOrder="65"><Rate>517.47</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>0.01</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange67" msdata:rowOrder="66"><Rate>653.01</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>0.17</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange68" msdata:rowOrder="67"><Rate>154.46</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>-0.12</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange69" msdata:rowOrder="68"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange70" msdata:rowOrder="69"><Rate>1.34</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange71" msdata:rowOrder="70"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange72" msdata:rowOrder="71"><Rate>123.66</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>0.48</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange73" msdata:rowOrder="72"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange74" msdata:rowOrder="73"><Rate>120.12</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>0.38</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange75" msdata:rowOrder="74"><Rate>31.39</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange76" msdata:rowOrder="75"><Rate>356.91</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>0.56</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange77" msdata:rowOrder="76"><Rate>7.11</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange78" msdata:rowOrder="77"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange79" msdata:rowOrder="78"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange80" msdata:rowOrder="79"><Rate>16.80</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange81" msdata:rowOrder="80"><Rate>45.51</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.22</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange82" msdata:rowOrder="81"><Rate>57.58</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.08</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange83" msdata:rowOrder="82"><Rate>53.34</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.04</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange84" msdata:rowOrder="83"><Rate>478.32</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>0.15</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange85" msdata:rowOrder="84"><Rate>19.15</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange86" msdata:rowOrder="85"><Rate>70.18</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.04</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange87" msdata:rowOrder="86"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange88" msdata:rowOrder="87"><Rate>341.67</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.21</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange89" msdata:rowOrder="88"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange90" msdata:rowOrder="89"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange91" msdata:rowOrder="90"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange92" msdata:rowOrder="91"><Rate>41.95</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>-0.07</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange93" msdata:rowOrder="92"><Rate>152.26</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>1.67</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange94" msdata:rowOrder="93"><Rate>25.69</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>0.06</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange95" msdata:rowOrder="94"><Rate>126.77</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>0.05</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange96" msdata:rowOrder="95"><Rate>2.23</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange97" msdata:rowOrder="96"><Rate>129.43</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.03</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange98" msdata:rowOrder="97"><Rate>1567.68</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>0.12</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange99" msdata:rowOrder="98"><Rate>264.57</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>-0.04</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange100" msdata:rowOrder="99"><Rate>41.49</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>-0.06</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange101" msdata:rowOrder="100"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange102" msdata:rowOrder="101"><Rate>149.85</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>-0.03</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange103" msdata:rowOrder="102"><Rate>6.98</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange104" msdata:rowOrder="103"><Rate>14.40</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.06</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange105" msdata:rowOrder="104"><Rate>23.76</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>0.01</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange106" msdata:rowOrder="105"><Rate>7.66</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>0.02</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange107" msdata:rowOrder="106"><Rate>18.54</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.00</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange108" msdata:rowOrder="107"><Rate>1.54</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.01</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange109" msdata:rowOrder="108"><Rate>249.91</Rate><Amount>10</Amount><ISO>BYR</ISO><Diff>249.67</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange110" msdata:rowOrder="109"><Rate>60.37</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.02</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange111" msdata:rowOrder="110"><Rate>198.70</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-1.95</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange112" msdata:rowOrder="111"><Rate>61.29</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.02</Diff><RateDate>2016-10-25T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange113" msdata:rowOrder="112"><Rate>475.55</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.15</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange114" msdata:rowOrder="113"><Rate>580.65</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-1.19</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange115" msdata:rowOrder="114"><Rate>365.51</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>2.26</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange116" msdata:rowOrder="115"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange117" msdata:rowOrder="116"><Rate>31.22</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>-0.17</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange118" msdata:rowOrder="117"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange119" msdata:rowOrder="118"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange120" msdata:rowOrder="119"><Rate>69.85</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>0.29</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange121" msdata:rowOrder="120"><Rate>53.55</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>0.02</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange122" msdata:rowOrder="121"><Rate>519.54</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>2.07</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange123" msdata:rowOrder="122"><Rate>652.55</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>-0.46</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange124" msdata:rowOrder="123"><Rate>154.18</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>-0.28</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange125" msdata:rowOrder="124"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange126" msdata:rowOrder="125"><Rate>1.34</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange127" msdata:rowOrder="126"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange128" msdata:rowOrder="127"><Rate>123.81</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>0.15</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange129" msdata:rowOrder="128"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange130" msdata:rowOrder="129"><Rate>120.23</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>0.11</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange131" msdata:rowOrder="130"><Rate>31.40</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>0.01</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange132" msdata:rowOrder="131"><Rate>356.00</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.91</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange133" msdata:rowOrder="132"><Rate>7.12</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.01</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange134" msdata:rowOrder="133"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange135" msdata:rowOrder="134"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange136" msdata:rowOrder="135"><Rate>16.80</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange137" msdata:rowOrder="136"><Rate>45.66</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.15</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange138" msdata:rowOrder="137"><Rate>57.43</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.15</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange139" msdata:rowOrder="138"><Rate>53.38</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>0.04</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange140" msdata:rowOrder="139"><Rate>479.87</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>1.55</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange141" msdata:rowOrder="140"><Rate>19.22</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>0.07</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange142" msdata:rowOrder="141"><Rate>70.24</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>0.06</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange143" msdata:rowOrder="142"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange144" msdata:rowOrder="143"><Rate>342.25</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>0.58</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange145" msdata:rowOrder="144"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange146" msdata:rowOrder="145"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange147" msdata:rowOrder="146"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange148" msdata:rowOrder="147"><Rate>41.94</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>-0.01</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange149" msdata:rowOrder="148"><Rate>152.78</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>0.52</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange150" msdata:rowOrder="149"><Rate>25.54</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>-0.15</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange151" msdata:rowOrder="150"><Rate>126.80</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>0.03</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange152" msdata:rowOrder="151"><Rate>2.24</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>0.01</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange153" msdata:rowOrder="152"><Rate>129.47</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.04</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange154" msdata:rowOrder="153"><Rate>1568.28</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>0.60</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange155" msdata:rowOrder="154"><Rate>265.60</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>1.03</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange156" msdata:rowOrder="155"><Rate>41.74</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>0.25</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange157" msdata:rowOrder="156"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange158" msdata:rowOrder="157"><Rate>150.45</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>0.60</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange159" msdata:rowOrder="158"><Rate>6.96</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.02</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange160" msdata:rowOrder="159"><Rate>14.41</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>0.01</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange161" msdata:rowOrder="160"><Rate>23.73</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>-0.03</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange162" msdata:rowOrder="161"><Rate>7.64</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.02</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange163" msdata:rowOrder="162"><Rate>18.64</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.10</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange164" msdata:rowOrder="163"><Rate>1.54</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange165" msdata:rowOrder="164"><Rate>250.24</Rate><Amount>10</Amount><ISO>BYR</ISO><Diff>0.33</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange166" msdata:rowOrder="165"><Rate>60.39</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.02</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange167" msdata:rowOrder="166"><Rate>198.46</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.24</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange168" msdata:rowOrder="167"><Rate>61.32</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.03</Diff><RateDate>2016-10-26T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange169" msdata:rowOrder="168"><Rate>475.23</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>-0.32</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange170" msdata:rowOrder="169"><Rate>581.16</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>0.51</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange171" msdata:rowOrder="170"><Rate>361.98</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-3.53</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange172" msdata:rowOrder="171"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange173" msdata:rowOrder="172"><Rate>31.25</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>0.03</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange174" msdata:rowOrder="173"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange175" msdata:rowOrder="174"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange176" msdata:rowOrder="175"><Rate>69.72</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>-0.13</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange177" msdata:rowOrder="176"><Rate>53.53</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>-0.02</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange178" msdata:rowOrder="177"><Rate>518.48</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.06</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange179" msdata:rowOrder="178"><Rate>652.99</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>0.44</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange180" msdata:rowOrder="179"><Rate>153.22</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>-0.96</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange181" msdata:rowOrder="180"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange182" msdata:rowOrder="181"><Rate>1.34</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange183" msdata:rowOrder="182"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange184" msdata:rowOrder="183"><Rate>123.68</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>-0.13</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange185" msdata:rowOrder="184"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange186" msdata:rowOrder="185"><Rate>119.80</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.43</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange187" msdata:rowOrder="186"><Rate>31.38</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>-0.02</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange188" msdata:rowOrder="187"><Rate>355.23</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.77</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange189" msdata:rowOrder="188"><Rate>7.11</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.01</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange190" msdata:rowOrder="189"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange191" msdata:rowOrder="190"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange192" msdata:rowOrder="191"><Rate>16.77</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>-0.03</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange193" msdata:rowOrder="192"><Rate>45.38</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.28</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange194" msdata:rowOrder="193"><Rate>57.80</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>0.37</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange195" msdata:rowOrder="194"><Rate>53.04</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.34</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange196" msdata:rowOrder="195"><Rate>478.48</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-1.39</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange197" msdata:rowOrder="196"><Rate>19.21</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.01</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange198" msdata:rowOrder="197"><Rate>70.16</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.08</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange199" msdata:rowOrder="198"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange200" msdata:rowOrder="199"><Rate>341.36</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-0.89</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange201" msdata:rowOrder="200"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange202" msdata:rowOrder="201"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange203" msdata:rowOrder="202"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange204" msdata:rowOrder="203"><Rate>41.60</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>-0.34</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange205" msdata:rowOrder="204"><Rate>151.32</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-1.46</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange206" msdata:rowOrder="205"><Rate>25.28</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>-0.26</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange207" msdata:rowOrder="206"><Rate>126.71</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>-0.09</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange208" msdata:rowOrder="207"><Rate>2.23</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>-0.01</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange209" msdata:rowOrder="208"><Rate>129.38</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>-0.09</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange210" msdata:rowOrder="209"><Rate>1566.97</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>-1.31</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange211" msdata:rowOrder="210"><Rate>265.34</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>-0.26</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange212" msdata:rowOrder="211"><Rate>41.78</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>0.04</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange213" msdata:rowOrder="212"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange214" msdata:rowOrder="213"><Rate>150.30</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>-0.15</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange215" msdata:rowOrder="214"><Rate>6.96</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange216" msdata:rowOrder="215"><Rate>14.35</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.06</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange217" msdata:rowOrder="216"><Rate>23.68</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>-0.05</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange218" msdata:rowOrder="217"><Rate>7.54</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.10</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange219" msdata:rowOrder="218"><Rate>18.63</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>-0.01</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange220" msdata:rowOrder="219"><Rate>1.54</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange221" msdata:rowOrder="220"><Rate>249.90</Rate><Amount>10</Amount><ISO>BYR</ISO><Diff>-0.34</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange222" msdata:rowOrder="221"><Rate>60.35</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-0.04</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange223" msdata:rowOrder="222"><Rate>197.60</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-0.86</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange224" msdata:rowOrder="223"><Rate>61.28</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>-0.04</Diff><RateDate>2016-10-27T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange225" msdata:rowOrder="224"><Rate>475.34</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.11</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange226" msdata:rowOrder="225"><Rate>577.02</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-4.14</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange227" msdata:rowOrder="226"><Rate>360.17</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-1.81</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange228" msdata:rowOrder="227"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange229" msdata:rowOrder="228"><Rate>31.33</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>0.08</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange230" msdata:rowOrder="229"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange231" msdata:rowOrder="230"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange232" msdata:rowOrder="231"><Rate>69.71</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>-0.01</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange233" msdata:rowOrder="232"><Rate>53.53</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange234" msdata:rowOrder="233"><Rate>518.50</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>0.02</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange235" msdata:rowOrder="234"><Rate>653.01</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>0.02</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange236" msdata:rowOrder="235"><Rate>152.40</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>-0.82</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange237" msdata:rowOrder="236"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange238" msdata:rowOrder="237"><Rate>1.34</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange239" msdata:rowOrder="238"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange240" msdata:rowOrder="239"><Rate>123.24</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>-0.44</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange241" msdata:rowOrder="240"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange242" msdata:rowOrder="241"><Rate>119.67</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-0.13</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange243" msdata:rowOrder="242"><Rate>31.41</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>0.03</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange244" msdata:rowOrder="243"><Rate>354.97</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-0.26</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange245" msdata:rowOrder="244"><Rate>7.11</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange246" msdata:rowOrder="245"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange247" msdata:rowOrder="246"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange248" msdata:rowOrder="247"><Rate>16.76</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>-0.01</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange249" msdata:rowOrder="248"><Rate>45.16</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>-0.22</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange250" msdata:rowOrder="249"><Rate>57.45</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.35</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange251" msdata:rowOrder="250"><Rate>52.60</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.44</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange252" msdata:rowOrder="251"><Rate>477.92</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-0.56</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange253" msdata:rowOrder="252"><Rate>19.19</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.02</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange254" msdata:rowOrder="253"><Rate>70.05</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.11</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange255" msdata:rowOrder="254"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange256" msdata:rowOrder="255"><Rate>340.91</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-0.45</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange257" msdata:rowOrder="256"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange258" msdata:rowOrder="257"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange259" msdata:rowOrder="258"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange260" msdata:rowOrder="259"><Rate>41.52</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>-0.08</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange261" msdata:rowOrder="260"><Rate>150.12</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-1.20</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange262" msdata:rowOrder="261"><Rate>25.23</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>-0.05</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange263" msdata:rowOrder="262"><Rate>126.75</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>0.04</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange264" msdata:rowOrder="263"><Rate>2.23</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange265" msdata:rowOrder="264"><Rate>129.42</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.04</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange266" msdata:rowOrder="265"><Rate>1566.04</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>-0.93</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange267" msdata:rowOrder="266"><Rate>265.18</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>-0.16</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange268" msdata:rowOrder="267"><Rate>41.82</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>0.04</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange269" msdata:rowOrder="268"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange270" msdata:rowOrder="269"><Rate>150.22</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>-0.08</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange271" msdata:rowOrder="270"><Rate>6.94</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>-0.02</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange272" msdata:rowOrder="271"><Rate>14.29</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.06</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange273" msdata:rowOrder="272"><Rate>23.68</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange274" msdata:rowOrder="273"><Rate>7.55</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>0.01</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange275" msdata:rowOrder="274"><Rate>18.73</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.10</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange276" msdata:rowOrder="275"><Rate>1.54</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange277" msdata:rowOrder="276"><Rate>248.86</Rate><Amount>1</Amount><ISO>BYN</ISO><Diff>-0.67</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange278" msdata:rowOrder="277"><Rate>60.35</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>0.00</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange279" msdata:rowOrder="278"><Rate>198.89</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>1.29</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange280" msdata:rowOrder="279"><Rate>61.30</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.02</Diff><RateDate>2016-10-28T00:00:00+04:00</RateDate></ExchangeRatesByRange></DocumentElement></diffgr:diffgram></ExchangeRatesByDateRangeByISOResult></ExchangeRatesByDateRangeByISOResponse></soap:Body></soap:Envelope>
+  recorded_at: Thu, 01 Oct 2026 21:24:53 GMT
+- request:
+    method: post
+    uri: https://api.cba.am/exchangerates.asmx
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+            <ExchangeRatesByDateRangeByISO xmlns="http://www.cba.am/">
+          <ISOCodes>USD,GBP,AUD,EUR,XDR,IRR,PLN,CAD,INR,NOK,JPY,SEK,CHF,CZK,CNY,SGD,BRL,AED,KGS,KZT,RUB,UAH,UZS,BYN,TJS,GEL,HKD,XAU,XAG,NZD,ARP,ARS,ATS,BEF,BGL,BGN,BRC,BYR,DEM,DKK,EEK,EGP,ESP,FIM,FRF,GRD,HUF,IEP,ILS,ISK,ITL,KRW,KWD,LBP,LTL,LVL,MDL,MXN,NLG,PLZ,PTE,SAR,SDR,SKK,SYP,TRY,USM</ISOCodes>
+          <DateFrom>2016-01-08</DateFrom>
+          <DateTo>2016-01-08</DateTo>
+        </ExchangeRatesByDateRangeByISO>
+          </soap:Body>
+        </soap:Envelope>
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Content-Type:
+      - text/xml; charset=utf-8
+      Soapaction:
+      - '"http://www.cba.am/ExchangeRatesByDateRangeByISO"'
+      Connection:
+      - close
+      Host:
+      - api.cba.am
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/10.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Thu, 01 Oct 2026 21:24:52 GMT
+      Connection:
+      - close
+      Content-Length:
+      - '13744'
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ExchangeRatesByDateRangeByISOResponse
+        xmlns="http://www.cba.am/"><ExchangeRatesByDateRangeByISOResult><xs:schema
+        id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><xs:element
+        name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ExchangeRatesByRange"
+        msdata:UseCurrentLocale="true"><xs:complexType><xs:choice minOccurs="0" maxOccurs="unbounded"><xs:element
+        name="ExchangeRatesByRange"><xs:complexType><xs:sequence><xs:element name="Rate"
+        type="xs:decimal" minOccurs="0" /><xs:element name="Amount" type="xs:int"
+        minOccurs="0" /><xs:element name="ISO" minOccurs="0"><xs:simpleType><xs:restriction
+        base="xs:string"><xs:maxLength value="3" /></xs:restriction></xs:simpleType></xs:element><xs:element
+        name="Diff" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" /><xs:element
+        name="RateDate" type="xs:dateTime" minOccurs="0" /></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1"><DocumentElement
+        xmlns=""><ExchangeRatesByRange diffgr:id="ExchangeRatesByRange1" msdata:rowOrder="0"><Rate>484.68</Rate><Amount>1</Amount><ISO>USD</ISO><Diff>0.93</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange2" msdata:rowOrder="1"><Rate>708.31</Rate><Amount>1</Amount><ISO>GBP</ISO><Diff>-9.38</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange3" msdata:rowOrder="2"><Rate>340.34</Rate><Amount>1</Amount><ISO>AUD</ISO><Diff>-12.56</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange4" msdata:rowOrder="3"><Rate>0.00</Rate><Amount>1</Amount><ISO>ATS</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange5" msdata:rowOrder="4"><Rate>34.91</Rate><Amount>1</Amount><ISO>ARS</ISO><Diff>-2.41</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange6" msdata:rowOrder="5"><Rate>0.00</Rate><Amount>10</Amount><ISO>BEF</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange7" msdata:rowOrder="6"><Rate>0.00</Rate><Amount>1</Amount><ISO>DEM</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange8" msdata:rowOrder="7"><Rate>70.64</Rate><Amount>1</Amount><ISO>DKK</ISO><Diff>-0.22</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange9" msdata:rowOrder="8"><Rate>61.97</Rate><Amount>1</Amount><ISO>EGP</ISO><Diff>0.11</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange10" msdata:rowOrder="9"><Rate>526.85</Rate><Amount>1</Amount><ISO>EUR</ISO><Diff>-1.84</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange11" msdata:rowOrder="10"><Rate>670.96</Rate><Amount>1</Amount><ISO>SDR</ISO><Diff>-0.99</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange12" msdata:rowOrder="11"><Rate>162.27</Rate><Amount>1</Amount><ISO>TRY</ISO><Diff>-3.88</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange13" msdata:rowOrder="12"><Rate>0.00</Rate><Amount>1</Amount><ISO>IEP</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange14" msdata:rowOrder="13"><Rate>1.61</Rate><Amount>100</Amount><ISO>IRR</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange15" msdata:rowOrder="14"><Rate>0.00</Rate><Amount>10</Amount><ISO>ESP</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange16" msdata:rowOrder="15"><Rate>123.44</Rate><Amount>1</Amount><ISO>ILS</ISO><Diff>-0.60</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange17" msdata:rowOrder="16"><Rate>0.00</Rate><Amount>100</Amount><ISO>ITL</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange18" msdata:rowOrder="17"><Rate>121.26</Rate><Amount>1</Amount><ISO>PLN</ISO><Diff>-3.19</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange19" msdata:rowOrder="18"><Rate>32.02</Rate><Amount>100</Amount><ISO>LBP</ISO><Diff>0.06</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange20" msdata:rowOrder="19"><Rate>343.53</Rate><Amount>1</Amount><ISO>CAD</ISO><Diff>-5.70</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange21" msdata:rowOrder="20"><Rate>7.27</Rate><Amount>1</Amount><ISO>INR</ISO><Diff>-0.01</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange22" msdata:rowOrder="21"><Rate>0.00</Rate><Amount>1</Amount><ISO>NLG</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange23" msdata:rowOrder="22"><Rate>0.00</Rate><Amount>10</Amount><ISO>GRD</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange24" msdata:rowOrder="23"><Rate>16.72</Rate><Amount>10</Amount><ISO>HUF</ISO><Diff>-0.15</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange25" msdata:rowOrder="24"><Rate>40.97</Rate><Amount>10</Amount><ISO>JPY</ISO><Diff>0.82</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange26" msdata:rowOrder="25"><Rate>54.51</Rate><Amount>1</Amount><ISO>NOK</ISO><Diff>-0.84</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange27" msdata:rowOrder="26"><Rate>56.96</Rate><Amount>1</Amount><ISO>SEK</ISO><Diff>-0.85</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange28" msdata:rowOrder="27"><Rate>484.05</Rate><Amount>1</Amount><ISO>CHF</ISO><Diff>-4.09</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange29" msdata:rowOrder="28"><Rate>19.49</Rate><Amount>1</Amount><ISO>CZK</ISO><Diff>-0.06</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange30" msdata:rowOrder="29"><Rate>73.84</Rate><Amount>1</Amount><ISO>CNY</ISO><Diff>-0.70</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange31" msdata:rowOrder="30"><Rate>0.00</Rate><Amount>1</Amount><ISO>PTE</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange32" msdata:rowOrder="31"><Rate>337.29</Rate><Amount>1</Amount><ISO>SGD</ISO><Diff>-5.21</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange33" msdata:rowOrder="32"><Rate>0.00</Rate><Amount>1</Amount><ISO>SKK</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange34" msdata:rowOrder="33"><Rate>0.00</Rate><Amount>1</Amount><ISO>FIM</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange35" msdata:rowOrder="34"><Rate>0.00</Rate><Amount>1</Amount><ISO>FRF</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange36" msdata:rowOrder="35"><Rate>40.46</Rate><Amount>100</Amount><ISO>KRW</ISO><Diff>-0.79</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange37" msdata:rowOrder="36"><Rate>119.84</Rate><Amount>1</Amount><ISO>BRL</ISO><Diff>-5.42</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange38" msdata:rowOrder="37"><Rate>27.26</Rate><Amount>1</Amount><ISO>MXN</ISO><Diff>-0.74</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange39" msdata:rowOrder="38"><Rate>129.03</Rate><Amount>1</Amount><ISO>SAR</ISO><Diff>0.16</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange40" msdata:rowOrder="39"><Rate>2.18</Rate><Amount>1</Amount><ISO>SYP</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange41" msdata:rowOrder="40"><Rate>131.96</Rate><Amount>1</Amount><ISO>AED</ISO><Diff>0.26</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange42" msdata:rowOrder="41"><Rate>1594.13</Rate><Amount>1</Amount><ISO>KWD</ISO><Diff>0.54</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange43" msdata:rowOrder="42"><Rate>269.37</Rate><Amount>1</Amount><ISO>BGN</ISO><Diff>-0.78</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange44" msdata:rowOrder="43"><Rate>37.23</Rate><Amount>10</Amount><ISO>ISK</ISO><Diff>-0.13</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange45" msdata:rowOrder="44"><Rate>0.00</Rate><Amount>1</Amount><ISO>LVL</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange46" msdata:rowOrder="45"><Rate>152.59</Rate><Amount>1</Amount><ISO>LTL</ISO><Diff>-0.44</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange47" msdata:rowOrder="46"><Rate>6.39</Rate><Amount>1</Amount><ISO>KGS</ISO><Diff>0.01</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange48" msdata:rowOrder="47"><Rate>14.05</Rate><Amount>10</Amount><ISO>KZT</ISO><Diff>-0.28</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange49" msdata:rowOrder="48"><Rate>23.89</Rate><Amount>1</Amount><ISO>MDL</ISO><Diff>-0.69</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange50" msdata:rowOrder="49"><Rate>6.58</Rate><Amount>1</Amount><ISO>RUB</ISO><Diff>-0.04</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange51" msdata:rowOrder="50"><Rate>20.84</Rate><Amount>1</Amount><ISO>UAH</ISO><Diff>0.81</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange52" msdata:rowOrder="51"><Rate>1.73</Rate><Amount>10</Amount><ISO>UZS</ISO><Diff>-0.01</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange53" msdata:rowOrder="52"><Rate>0.26</Rate><Amount>10</Amount><ISO>BYR</ISO><Diff>0.00</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange54" msdata:rowOrder="53"><Rate>67.07</Rate><Amount>1</Amount><ISO>TJS</ISO><Diff>-4.79</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange55" msdata:rowOrder="54"><Rate>200.28</Rate><Amount>1</Amount><ISO>GEL</ISO><Diff>-2.13</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange56" msdata:rowOrder="55"><Rate>62.48</Rate><Amount>1</Amount><ISO>HKD</ISO><Diff>0.06</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange><ExchangeRatesByRange
+        diffgr:id="ExchangeRatesByRange57" msdata:rowOrder="56"><Rate>0.26</Rate><Amount>10</Amount><ISO>BYN</ISO><Diff>0</Diff><RateDate>2016-01-08T00:00:00+04:00</RateDate></ExchangeRatesByRange></DocumentElement></diffgr:diffgram></ExchangeRatesByDateRangeByISOResult></ExchangeRatesByDateRangeByISOResponse></soap:Body></soap:Envelope>
+  recorded_at: Thu, 01 Oct 2026 21:24:53 GMT
 recorded_with: VCR 6.4.0

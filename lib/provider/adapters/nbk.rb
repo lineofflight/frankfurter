@@ -11,6 +11,11 @@ class Provider
     class NBK < Adapter
       URL = "https://nationalbank.kz/rss/get_rates.cfm"
 
+      # NBK labels the Belarusian ruble BYN from the start of its series in 2004, but quotes the old ruble until the
+      # first bulletin after the 2016-07-01 redenomination: 100 "BYN" = 1.68 KZT on 2016-07-01, 1 BYN = 170.73 KZT on
+      # 2016-07-04.
+      PREDECESSORS = { "BYN" => ["BYR", Date.new(2016, 7, 4)] }.freeze
+
       class << self
         def backfill_range = 30
       end
@@ -47,7 +52,7 @@ class Provider
           quant = item.locate("quant").first&.text.to_f
           next if rate.zero? || quant.zero?
 
-          { date:, base: code, quote: "KZT", rate: rate / quant }
+          { date:, base: historical_code(code, date), quote: "KZT", rate: rate / quant }
         end
       end
 
