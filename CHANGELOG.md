@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - National Bank of Kazakhstan history from November 1999. (#748)
 - Bank of Tanzania history from June 1999. (#748)
 - Full backfills keep the first days of CBAR, HNB and BCCH history. (#748)
+- Banco Central de Costa Rica history from 1983.
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
