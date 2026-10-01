@@ -50,6 +50,16 @@ class Provider < Sequel::Model(:providers)
 
           _(Date.stub(:today, today) { adapter.fetch(after: today) }).must_be_empty
         end
+
+        it "requests only the live feed when the last stored day is yesterday" do
+          today = Date.new(2026, 5, 25)
+          WebMock::RequestRegistry.instance.reset!
+
+          dataset = Date.stub(:today, today) { adapter.fetch(after: today - 1) }
+
+          _(dataset).wont_be_empty
+          WebMock.assert_not_requested(:get, %r{\Ahttps://www\.nbkr\.kg/index1\.jsp})
+        end
       end
 
       describe "historical HTML scrape" do
@@ -94,9 +104,9 @@ class Provider < Sequel::Model(:providers)
         end
 
         it "scrapes the archive up to yesterday and appends the live snapshot for an open-ended window" do
-          # Today is stubbed to the day after the recorded archive window, so the scrape requests exactly those pages.
+          # The scrape starts the day after after and ends yesterday, so these stubs request exactly the recorded pages.
           dataset = VCR.use_cassette("nbkr_live", match_requests_on: [:method, :uri]) do
-            Date.stub(:today, upto + 1) { adapter.fetch(after:) }
+            Date.stub(:today, upto + 1) { adapter.fetch(after: after - 1) }
           end
           dates = dataset.map { |r| r[:date] }
 

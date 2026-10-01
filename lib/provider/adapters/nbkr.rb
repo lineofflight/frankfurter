@@ -118,9 +118,11 @@ class Provider
                     fetch_historical(after, upto)
                   else
                     # An open-ended window must reach today, but the live feed holds only the current snapshot. Scrape
-                    # the archive up to yesterday and append the snapshot; the insert skips any day both return.
+                    # the archive for the days between after and today first. A routine run, whose after is yesterday,
+                    # has none to scrape.
+                    from = after + 1
                     yesterday = Date.today - 1
-                    (after <= yesterday ? fetch_historical(after, yesterday) : []) + fetch_live
+                    (from <= yesterday ? fetch_historical(from, yesterday) : []) + fetch_live
                   end
 
         records.select! { |r| r[:date] >= after } if after
