@@ -34,8 +34,13 @@ const (
 )
 
 var (
-	tokenPattern       = regexp.MustCompile(`name="` + tokenField + `"[^>]*value="([^"]+)"`)
-	aliases            = map[string]string{"SDR": "XDR"}
+	tokenPattern = regexp.MustCompile(`name="` + tokenField + `"[^>]*value="([^"]+)"`)
+	// The archive's first weeks, to 1999-07-27, label the old metical MXM:
+	// 0.0602 TZS with the dollar at 740, about 12,300 per dollar. Exclusions
+	// match the published label, so this survives the MZM exclusion, which
+	// targets the current row: BOTA still lists "MZM" today at new-metical
+	// values.
+	aliases            = map[string]string{"SDR": "XDR", "MXM": "MZM"}
 	excludedCurrencies = []string{"GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"}
 )
 

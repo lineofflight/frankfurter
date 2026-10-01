@@ -101,6 +101,17 @@ func (a *Adapter) fetchRange(ctx context.Context, src source, start, end time.Ti
 	return src.parse(resp.Body)
 }
 
+// Table B carried retired codes until table 23/B/NBP/2003 (2003-11-12): AON
+// for the kwanza, at AOA values (0.0503 PLN on 2003-10-28, 0.0511 as AOA
+// next), and BYB for the Belarusian ruble in tables 5 to 18 of 2002, with BYR
+// before and after.
+var aliases = map[string]string{"AON": "AOA", "BYB": "BYR"}
+
+// AFA rows switch to the new afghani on 2003-01-07 (0.000816 PLN on
+// 2002-12-24, 0.089056 next) and keep the old label until AFN replaces it in
+// the same 2003-11-12 table.
+var successors = map[string]adapter.Successor{"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)}}
+
 type table struct {
 	EffectiveDate string `json:"effectiveDate"`
 	Rates         []struct {
@@ -124,7 +135,13 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			if !isoCode.MatchString(r.Code) || r.Mid == nil || *r.Mid == 0 {
 				continue
 			}
-			rates = append(rates, adapter.Rate{Date: date, Base: r.Code, Quote: "PLN", Rate: *r.Mid})
+			code := r.Code
+			if alias, ok := aliases[code]; ok {
+				code = alias
+			}
+			rates = append(rates, adapter.Rate{
+				Date: date, Base: adapter.SuccessorCode(successors, code, date), Quote: "PLN", Rate: *r.Mid,
+			})
 		}
 	}
 	return rates, nil

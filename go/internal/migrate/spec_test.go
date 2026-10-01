@@ -670,3 +670,256 @@ func TestSDRMigrationLeavesDatabasesWithoutHistoryAlone(t *testing.T) {
 		})
 	}
 }
+
+// retiredDatabase is spec/retired_currency_labels_migration_spec.rb's
+// run_migration_script setup: a database migrated to 40 with providers
+// seeded.
+func retiredDatabase(t *testing.T) *sql.DB {
+	t.Helper()
+	conn, _ := empty(t)
+	migrateTo(t, conn, 40)
+	if err := rates.SeedProviders(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	return conn
+}
+
+// spec/retired_currency_labels_migration_spec.rb
+func TestRetiredLabelsMigrationRelabelsRescalesAndDropsStoredRowsAndRetiresLegacySeries(t *testing.T) {
+	ctx := context.Background()
+	today := rates.Today()
+	conn := retiredDatabase(t)
+
+	rows := []rate{
+		{provider: "CBU", date: "2008-09-09", base: "SDR", quote: "UZS", mid: f(2048.52)},
+		{provider: "CBU", date: "2008-09-09", base: "USD", quote: "UZS", mid: f(1326.0)},
+		{provider: "CBU", date: "2008-09-16", base: "SDR", quote: "UZS", mid: f(2044.11)},
+		{provider: "CBU", date: "2008-09-16", base: "XDR", quote: "UZS", mid: f(2044.11)},
+		{provider: "CBU", date: "2008-09-16", base: "USD", quote: "UZS", mid: f(1326.38)},
+		{provider: "BOTA", date: "1999-07-01", base: "MXM", quote: "TZS", mid: f(0.0602)},
+		{provider: "BOTA", date: "1999-07-01", base: "USD", quote: "TZS", mid: f(740.0)},
+		{provider: "NBP", date: "2002-02-26", base: "BYB", quote: "PLN", mid: f(0.002494)},
+		{provider: "NBP", date: "2002-02-26", base: "USD", quote: "PLN", mid: f(4.189)},
+		{provider: "NBP", date: "2002-12-24", base: "AFA", quote: "PLN", mid: f(0.000816)},
+		{provider: "NBP", date: "2002-12-24", base: "USD", quote: "PLN", mid: f(3.8388)},
+		{provider: "NBP", date: "2003-01-07", base: "AFA", quote: "PLN", mid: f(0.089056)},
+		{provider: "NBP", date: "2003-01-07", base: "USD", quote: "PLN", mid: f(3.8582)},
+		{provider: "NBP", date: "2003-10-28", base: "AON", quote: "PLN", mid: f(0.0503)},
+		{provider: "NBP", date: "2003-10-28", base: "USD", quote: "PLN", mid: f(3.9745)},
+		{provider: "BOI", date: "2000-01-03", base: "BEL", quote: "ILS", mid: f(1.0313)},
+		{provider: "BOI", date: "2000-01-03", base: "ATS", quote: "ILS", mid: f(3.0234)},
+		{provider: "BOI", date: "2000-01-03", base: "ESP", quote: "ILS", mid: f(2.5004)},
+		{provider: "BOI", date: "2000-01-03", base: "ITL", quote: "ILS", mid: f(2.1486)},
+		{provider: "BOI", date: "2000-01-03", base: "CBK_L", quote: "ILS", mid: f(4.387)},
+		{provider: "BOI", date: "2000-01-03", base: "USD", quote: "ILS", mid: f(4.124)},
+		{provider: "BDI", date: "1999-07-02", base: "EUR", quote: "BGL", mid: f(1955.83)},
+		{provider: "BDI", date: "1999-07-02", base: "EUR", quote: "USD", mid: f(1.0315)},
+		{provider: "BDI", date: "2001-06-01", base: "EUR", quote: "BGL", mid: f(1947.0)},
+		{provider: "BDI", date: "2001-06-01", base: "EUR", quote: "BGN", mid: f(1.947)},
+		{provider: "BDI", date: "2001-06-01", base: "EUR", quote: "USD", mid: f(0.85)},
+		{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "USD", mid: f(1.17)},
+		{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "GBP", mid: f(0.87)},
+	}
+	insertRates(t, conn, rows...)
+	var codes []string
+	for _, r := range rows {
+		codes = append(codes, r.base, r.quote)
+	}
+	if err := rates.RefreshSummaries(ctx, conn, codes, ""); err != nil {
+		t.Fatal(err)
+	}
+	// Before its defunct entry, BGL's coverage ran to BDI's last quote.
+	mustExec(t, conn, "UPDATE currency_coverages SET end_date = '2001-06-01' WHERE provider_key = 'BDI' AND "+
+		"iso_code = 'BGL'")
+	mustExec(t, conn, "UPDATE currencies SET end_date = '2001-06-01' WHERE iso_code = 'BGL'")
+	for _, t2 := range rates.Rollups {
+		b := rates.BucketSQL(t2.Precision, "date")
+		mustExec(t, conn, "INSERT INTO "+t2.Name+" (bucket_date, provider, base, quote, rate) SELECT "+b+
+			", provider, base, quote, avg(rate) FROM rates GROUP BY "+b+", provider, base, quote")
+	}
+	rebuildBlends(t, conn, today)
+	unaffectedBucket := bucket(rates.Week, "2026-01-20")
+	unaffected := blendRows(t, conn, "blended_weekly_rates", "bucket_date = "+db.Lit(unaffectedBucket))
+	if len(unaffected) == 0 {
+		t.Fatal("missing unaffected fixture")
+	}
+	expiredBucket := bucket(rates.Week, "2001-06-01")
+	if count(t, conn, "SELECT count(*) FROM blended_weekly_rates WHERE bucket_date = ?", expiredBucket) == 0 {
+		t.Fatal("missing expired fixture")
+	}
+
+	setup(t, conn)
+	if v := version(t, conn); v < 41 {
+		t.Fatalf("migration incomplete: version %d", v)
+	}
+
+	type stored struct {
+		provider, date, base string
+		mid                  float64
+	}
+	result, err := conn.Query("SELECT provider, date(date), base, mid FROM rates WHERE provider NOT IN ('BDI', 'ECB') " +
+		"ORDER BY provider, date, base")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []stored
+	for result.Next() {
+		var s stored
+		if err := result.Scan(&s.provider, &s.date, &s.base, &s.mid); err != nil {
+			t.Fatal(err)
+		}
+		got = append(got, s)
+	}
+	result.Close()
+	expected := []stored{
+		{"BOI", "2000-01-03", "ATS", 0.30234},
+		{"BOI", "2000-01-03", "BEF", 0.10313},
+		{"BOI", "2000-01-03", "ESP", 0.025004},
+		{"BOI", "2000-01-03", "ITL", 0.0021486},
+		{"BOI", "2000-01-03", "USD", 4.124},
+		{"BOTA", "1999-07-01", "MZM", 0.0602},
+		{"BOTA", "1999-07-01", "USD", 740.0},
+		{"CBU", "2008-09-09", "USD", 1326.0},
+		{"CBU", "2008-09-09", "XDR", 2048.52},
+		{"CBU", "2008-09-16", "USD", 1326.38},
+		{"CBU", "2008-09-16", "XDR", 2044.11},
+		{"NBP", "2002-02-26", "BYR", 0.002494},
+		{"NBP", "2002-02-26", "USD", 4.189},
+		{"NBP", "2002-12-24", "AFA", 0.000816},
+		{"NBP", "2002-12-24", "USD", 3.8388},
+		{"NBP", "2003-01-07", "AFN", 0.089056},
+		{"NBP", "2003-01-07", "USD", 3.8582},
+		{"NBP", "2003-10-28", "AOA", 0.0503},
+		{"NBP", "2003-10-28", "USD", 3.9745},
+	}
+	if !reflect.DeepEqual(got, expected) {
+		t.Fatalf("wrong repaired rows:\ngot  %+v\nwant %+v", got, expected)
+	}
+	if count(t, conn, "SELECT count(*) FROM rates WHERE provider = 'BDI'") != 5 {
+		t.Fatal("touched BDI rows")
+	}
+
+	for _, key := range []string{"CBU", "BOTA", "NBP", "BOI"} {
+		if codes := unknown(t, conn, key); len(codes) != 0 {
+			t.Fatalf("%s still reports %v", key, codes)
+		}
+	}
+	for _, code := range []string{"SDR", "MXM", "AON", "BEL", "CBK_L"} {
+		if count(t, conn, "SELECT count(*) FROM weekly_rates WHERE base = ?", code) != 0 {
+			t.Fatalf("%s rollup retained", code)
+		}
+	}
+	var ats float64
+	if err := conn.QueryRow("SELECT rate FROM monthly_rates WHERE provider = 'BOI' AND base = 'ATS'").
+		Scan(&ats); err != nil || ats != 0.30234 {
+		t.Fatalf("stale ATS rollup: %v (%v)", ats, err)
+	}
+	var coverageEnd, catalogueEnd string
+	if err := conn.QueryRow("SELECT date(end_date) FROM currency_coverages WHERE provider_key = 'BDI' AND " +
+		"iso_code = 'BGL'").Scan(&coverageEnd); err != nil || coverageEnd != "1999-07-02" {
+		t.Fatalf("BGL coverage past retirement: %s (%v)", coverageEnd, err)
+	}
+	if err := conn.QueryRow("SELECT date(end_date) FROM currencies WHERE iso_code = 'BGL'").
+		Scan(&catalogueEnd); err != nil || catalogueEnd != "1999-07-02" {
+		t.Fatalf("BGL catalogue past retirement: %s (%v)", catalogueEnd, err)
+	}
+	if count(t, conn, "SELECT count(*) FROM currency_coverages WHERE provider_key = 'NBP' AND iso_code = 'AFN'") != 1 {
+		t.Fatal("AFN coverage missing")
+	}
+
+	if dailyReady(t, conn) {
+		t.Fatal("daily blend stayed ready")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 0 {
+		t.Fatal("partial daily invalidation")
+	}
+	if got := blendRows(t, conn, "blended_weekly_rates", "bucket_date = "+db.Lit(unaffectedBucket)); !reflect.DeepEqual(got, unaffected) {
+		t.Fatalf("changed unrelated bucket: %v, want %v", got, unaffected)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_weekly_rates WHERE bucket_date = ?", expiredBucket) != 0 {
+		t.Fatal("kept expired BGL bucket")
+	}
+	for _, r := range blend.Rollups {
+		if groupedReady(t, conn, r) {
+			t.Fatalf("%s stayed ready", r.Table)
+		}
+	}
+
+	// Exercise the same recovery lifecycle as bin/schedule, then compare it
+	// with a clean full rebuild.
+	if err := blend.RebuildDaily(ctx, conn, today); err != nil {
+		t.Fatal(err)
+	}
+	populate(t, conn, today)
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'BGL' AND date >= '1999-07-05'") != 0 {
+		t.Fatal("expired BGL blended")
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates WHERE quote = 'XDR' AND date = '2008-09-09'") == 0 {
+		t.Fatal("relabelled XDR missing")
+	}
+	if !dailyReady(t, conn) {
+		t.Fatal("blended_rates not ready")
+	}
+	recoveredDaily := blendRows(t, conn, "blended_rates", "")
+	mustExec(t, conn, "DELETE FROM blended_rates")
+	if err := blend.RebuildDaily(ctx, conn, today); err != nil {
+		t.Fatal(err)
+	}
+	if got := blendRows(t, conn, "blended_rates", ""); !reflect.DeepEqual(got, recoveredDaily) {
+		t.Fatal("rebuild mismatch for blended_rates")
+	}
+	for _, r := range blend.Rollups {
+		if !groupedReady(t, conn, r) {
+			t.Fatalf("%s not ready", r.Table)
+		}
+		recovered := blendRows(t, conn, r.Table, "")
+		mustExec(t, conn, "DELETE FROM "+r.Table)
+		if err := r.Rebuild(ctx, conn, today); err != nil {
+			t.Fatal(err)
+		}
+		if got := blendRows(t, conn, r.Table, ""); !reflect.DeepEqual(got, recovered) {
+			t.Fatalf("rebuild mismatch for %s", r.Table)
+		}
+	}
+}
+
+// "rolls back on conflicting duplicates"
+func TestRetiredLabelsMigrationRollsBackOnConflictingDuplicates(t *testing.T) {
+	conn := retiredDatabase(t)
+	insertRates(t, conn,
+		rate{provider: "CBU", date: "2008-09-16", base: "SDR", quote: "UZS", mid: f(2044.11)},
+		rate{provider: "CBU", date: "2008-09-16", base: "XDR", quote: "UZS", mid: f(2044.12)},
+	)
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2008-09-16', 'UZS', 1326.38)")
+	before := allRates(t, conn)
+
+	err := Up(context.Background(), conn)
+	if err == nil {
+		t.Fatal("accepted conflicting components")
+	}
+	if !strings.Contains(err.Error(), "conflicting SDR/XDR components") {
+		t.Fatal(err)
+	}
+	if got := allRates(t, conn); !reflect.DeepEqual(got, before) {
+		t.Fatal("partial repair committed")
+	}
+	if v := version(t, conn); v != 40 {
+		t.Fatalf("migration marked complete: version %d", v)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("invalidated blends after failure")
+	}
+}
+
+// "leaves databases without affected history alone"
+func TestRetiredLabelsMigrationLeavesDatabasesWithoutAffectedHistoryAlone(t *testing.T) {
+	conn := retiredDatabase(t)
+	insertRates(t, conn, rate{provider: "ECB", date: "2026-01-20", base: "EUR", quote: "USD", mid: f(1.17)})
+	mustExec(t, conn, "INSERT INTO blended_rates (date, quote, rate) VALUES ('2026-01-20', 'EUR', 0.85)")
+	if err := Up(context.Background(), conn); err != nil {
+		t.Fatal(err)
+	}
+	if count(t, conn, "SELECT count(*) FROM blended_rates") != 1 {
+		t.Fatal("unnecessary invalidation")
+	}
+}

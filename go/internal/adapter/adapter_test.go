@@ -207,6 +207,19 @@ func TestHistoricalCode(t *testing.T) {
 	}
 }
 
+func TestSuccessorCode(t *testing.T) {
+	succs := map[string]adapter.Successor{"AFA": {Code: "AFN", Cutover: adapter.Date(2003, 1, 7)}}
+	if got := adapter.SuccessorCode(succs, "AFA", adapter.Date(2003, 1, 6)); got != "AFA" {
+		t.Errorf("before cutover = %s, want AFA", got)
+	}
+	if got := adapter.SuccessorCode(succs, "AFA", adapter.Date(2003, 1, 7)); got != "AFN" {
+		t.Errorf("on cutover = %s, want AFN", got)
+	}
+	if got := adapter.SuccessorCode(succs, "USD", adapter.Date(2010, 1, 1)); got != "USD" {
+		t.Errorf("unmapped = %s, want USD", got)
+	}
+}
+
 func TestWindow(t *testing.T) {
 	var rows []adapter.Rate
 	for d := 1; d <= 5; d++ {

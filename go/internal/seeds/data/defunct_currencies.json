@@ -1,5 +1,21 @@
 [
   {
+    "iso_code": "ADP",
+    "terminal_date": "2002-03-01",
+    "successor": "EUR",
+    "ratio": 166.386,
+    "source": "https://en.wikipedia.org/wiki/Andorran_peseta",
+    "note": "Pegged 1:1 to the Spanish peseta, which lost legal tender status in Spain and Andorra after 28 February 2002. Converted at 166.386 ADP per EUR."
+  },
+  {
+    "iso_code": "AFA",
+    "terminal_date": "2002-10-07",
+    "successor": "AFN",
+    "ratio": 1000,
+    "source": "https://www.elibrary.imf.org/display/book/9781589063242/ch05.xml",
+    "note": "Afghanistan began converting old afghanis on 7 October 2002 at 1000 AFA = 1 AFN (2000 for Dostum issues), over a three-month exchange period."
+  },
+  {
     "iso_code": "ATS",
     "terminal_date": "2002-03-01",
     "successor": "EUR",
@@ -16,11 +32,27 @@
     "note": "Belgium adopted the euro at 40.3399 BEF per EUR. The franc ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
   },
   {
+    "iso_code": "BGL",
+    "terminal_date": "1999-07-05",
+    "successor": "BGN",
+    "ratio": 1000,
+    "source": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_law/regulations_oldnotescoinsde_en.pdf",
+    "note": "Bulgaria redenominated the lev on 5 July 1999 at 1000 BGL = 1 BGN. Old notes and coins remained legal tender until 31 December 1999."
+  },
+  {
     "iso_code": "BGN",
     "terminal_date": "2026-01-01",
     "successor": "EUR",
     "source": "https://www.consilium.europa.eu/en/press/press-releases/2025/07/08/bulgaria-ready-to-use-the-euro-from-1-january-2026-council-takes-final-steps/",
     "note": "Bulgaria adopted the euro at 1.95583 BGN per EUR. Council Decision of 8 July 2025."
+  },
+  {
+    "iso_code": "BYB",
+    "terminal_date": "2000-01-01",
+    "successor": "BYR",
+    "ratio": 1000,
+    "source": "https://en.wikipedia.org/wiki/Belarusian_ruble",
+    "note": "Belarus redenominated the ruble on 1 January 2000 at 1000 BYB = 1 BYR. The 1992 series was withdrawn from circulation on 1 January 2001."
   },
   {
     "iso_code": "BYR",
@@ -100,6 +132,22 @@
     "note": "Italy adopted the euro at 1936.27 ITL per EUR. The lira ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
   },
   {
+    "iso_code": "MGF",
+    "terminal_date": "2005-01-01",
+    "successor": "MGA",
+    "ratio": 5,
+    "source": "https://en.wikipedia.org/wiki/Malagasy_franc",
+    "note": "The ariary replaced the franc as the currency of Madagascar on 1 January 2005 at 5 MGF = 1 MGA."
+  },
+  {
+    "iso_code": "MZM",
+    "terminal_date": "2006-07-01",
+    "successor": "MZN",
+    "ratio": 1000,
+    "source": "https://en.wikipedia.org/wiki/Mozambican_metical",
+    "note": "Mozambique redenominated the metical on 1 July 2006 at 1000 MZM = 1 MZN. Old meticais remained usable until 31 December 2006."
+  },
+  {
     "iso_code": "NLG",
     "terminal_date": "2002-01-28",
     "successor": "EUR",
@@ -116,6 +164,14 @@
     "note": "Portugal adopted the euro at 200.482 PTE per EUR. The escudo ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
   },
   {
+    "iso_code": "SDD",
+    "terminal_date": "2007-01-10",
+    "successor": "SDG",
+    "ratio": 100,
+    "source": "https://en.wikipedia.org/wiki/Sudanese_dinar",
+    "note": "Sudan introduced the second pound on 10 January 2007 at 100 SDD = 1 SDG. The pound became sole legal tender on 1 July 2007."
+  },
+  {
     "iso_code": "SLL",
     "terminal_date": "2022-07-01",
     "successor": "SLE",
@@ -124,12 +180,28 @@
     "note": "Bank of Sierra Leone redenominated the leone on 1 July 2022 at 1000 SLL = 1 SLE. Old leone remained legal tender during transition until 1 January 2024."
   },
   {
+    "iso_code": "SRG",
+    "terminal_date": "2004-01-01",
+    "successor": "SRD",
+    "ratio": 1000,
+    "source": "https://en.wikipedia.org/wiki/Surinamese_guilder",
+    "note": "The Surinamese dollar replaced the guilder on 1 January 2004 at 1000 SRG = 1 SRD."
+  },
+  {
     "iso_code": "STD",
     "terminal_date": "2018-01-01",
     "successor": "STN",
     "ratio": 1000,
     "source": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe_dobra",
     "note": "Banco Central de São Tomé e Príncipe redenominated the dobra on 1 January 2018 at 1000 STD = 1 STN."
+  },
+  {
+    "iso_code": "VEB",
+    "terminal_date": "2008-01-01",
+    "successor": "VEF",
+    "ratio": 1000,
+    "source": "https://en.wikipedia.org/wiki/Venezuelan_bol%C3%ADvar",
+    "note": "Venezuela redenominated the bolívar on 1 January 2008 at 1000 VEB = 1 VEF."
   },
   {
     "iso_code": "VEF",

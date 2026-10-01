@@ -50,6 +50,10 @@ A full local backfill from an empty database turned up these gaps:
   today was never fetched. A window from `after` that reaches today now scrapes the historical page from the day after
   `after` through yesterday, then appends the live snapshot. A routine run, resuming from yesterday, still requests
   only the live feed. Fixed on both sides.
+- Provider health then flagged labels the retained history carries: CBU's SDR, BOTA's MXM, NBP's AON, BYB and
+  post-2003 AFA, BOI's BEL and CBK_L. BOI's pre-euro series also turned out to be quoted per 10, 100 or 1000 units.
+  The adapters map them, nine legacy codes join the defunct seeds, and migration 041 repairs stored rows (Ruby #740).
+  Fixed on both sides.
 
 ## Left outside go/
 

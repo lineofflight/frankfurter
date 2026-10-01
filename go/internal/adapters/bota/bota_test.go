@@ -103,6 +103,16 @@ func TestParseNormalizesSDRToXDR(t *testing.T) {
 	}
 }
 
+func TestParseMapsMXMLabelToOldMetical(t *testing.T) {
+	rates := mustParse(t, `<table><tbody>
+<tr><td>757</td><td>MXM</td><td>0.0599</td><td>0.0605</td><td>0.0602</td><td>01-Jul-99</td></tr>
+</tbody></table>`)
+	want := []adapter.Rate{{Date: adapter.Date(1999, 7, 1), Base: "MZM", Quote: "TZS", Rate: 0.0602}}
+	if !reflect.DeepEqual(rates, want) {
+		t.Errorf("got %+v, want %+v", rates, want)
+	}
+}
+
 func TestParseExcludesGoldAndDefunctCurrencies(t *testing.T) {
 	rates := mustParse(t, `<html><body>
 <table><tbody>

@@ -95,6 +95,19 @@ func TestParseRestoresOldRubleBeforeFirstNewRubleBulletin(t *testing.T) {
 	}
 }
 
+func TestParseMapsSDRLabelToXDR(t *testing.T) {
+	rates := mustParse(t, `[
+		{"id":1,"Code":"001","Ccy":"SDR","CcyNm_EN":"Special Drawing Rights","Nominal":"1","Rate":"2044.11","Diff":"","Date":"16.09.2008"},
+		{"id":22,"Code":"960","Ccy":"XDR","CcyNm_EN":"Special Drawing Rights","Nominal":"1","Rate":"2044.11","Diff":"","Date":"16.09.2008"}
+	]`)
+	if len(rates) != 2 || rates[0].Base != "XDR" || rates[1].Base != "XDR" {
+		t.Fatalf("got %+v, want bases XDR, XDR", rates)
+	}
+	if rates[0].Rate != 2044.11 || rates[1].Rate != 2044.11 {
+		t.Errorf("rates = %v, %v, want 2044.11", rates[0].Rate, rates[1].Rate)
+	}
+}
+
 func TestParseSkipsInvalidCurrencyCodes(t *testing.T) {
 	rates := mustParse(t, `[{"id":1,"Code":"999","Ccy":"XX","CcyNm_EN":"Invalid","Nominal":"1","Rate":"1.5","Diff":"0","Date":"01.04.2026"}]`)
 	if len(rates) != 0 {

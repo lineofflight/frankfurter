@@ -127,3 +127,48 @@ func TestParseRejectsBadNumbers(t *testing.T) {
 		}
 	}
 }
+
+func TestParseSkipsCurrencyBasketAndOtherNonCurrencySeries(t *testing.T) {
+	rates, err := parse([]byte(header +
+		"RER_CBK_ILS,D,CBK_L,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,4.387,YP\n" +
+		"RER_USD_ILS,D,USD,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,4.124,YP\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var bases []string
+	for _, r := range rates {
+		bases = append(bases, r.Base)
+	}
+	if !slices.Equal(bases, []string{"USD"}) {
+		t.Errorf("bases = %v, want [USD]", bases)
+	}
+}
+
+func TestParseNormalizesPreEuroSeriesPublishedPer10100Or1000Units(t *testing.T) {
+	rates, err := parse([]byte(header +
+		"RER_ATS_ILS,D,ATS,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,3.0234,YP\n" +
+		"RER_BEL_ILS,D,BEL,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,1.0313,YP\n" +
+		"RER_ESP_ILS,D,ESP,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,2.5004,YP\n" +
+		"RER_ITL_ILS,D,ITL,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,2.1486,YP\n" +
+		"RER_DEM_ILS,D,DEM,ILS,ILS,OF00,BOI_MRKT,V,F,Y,0,,2000-01-03,2.1271,YP\n"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var bases []string
+	records := map[string]float64{}
+	for _, r := range rates {
+		bases = append(bases, r.Base)
+		records[r.Base] = r.Rate
+	}
+	if want := []string{"ATS", "BEF", "ESP", "ITL", "DEM"}; !slices.Equal(bases, want) {
+		t.Fatalf("bases = %v, want %v", bases, want)
+	}
+	for code, want := range map[string]float64{"ATS": 0.30234, "BEF": 0.10313, "ESP": 0.025004, "ITL": 0.0021486} {
+		if math.Abs(records[code]-want) > 1e-12 {
+			t.Errorf("%s = %v, want %v", code, records[code], want)
+		}
+	}
+	if records["DEM"] != 2.1271 {
+		t.Errorf("DEM = %v, want 2.1271", records["DEM"])
+	}
+}

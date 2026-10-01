@@ -17,6 +17,7 @@ import (
 	"math"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -25,6 +26,18 @@ import (
 )
 
 const baseURL = "https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow/BOI.STATISTICS/EXR/1.0/"
+
+// The pre-euro series to January 2002 quote some currencies per 10, 100 or
+// 1000 units while UNIT_MULT says units: on 2000-01-03, with EUR at 4.1603
+// ILS, ATS reads 3.0234 and ESP 2.5004, ten and a hundred times the euro
+// conversion rates, and every day of the series holds the same multiple.
+var nominalOverrides = map[string]float64{"ATS": 10, "BEL": 10, "ESP": 100, "ITL": 1000}
+
+// BOI's codelist names BEL the financial franc, abolished in 1990, but its
+// 1999-2002 series tracks 10 BEF at the euro conversion rate.
+var aliases = map[string]string{"BEL": "BEF"}
+
+var codeRE = regexp.MustCompile(`\A[A-Z]{3}\z`)
 
 func init() {
 	adapter.Register("BOI", func(c *http.Client) adapter.Adapter { return New(c) })
@@ -103,6 +116,11 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if base == "" || dateStr == "" || rateStr == "" {
 			continue
 		}
+		// Aggregates such as CBK_L, the currency basket, share the flow with
+		// currencies.
+		if !codeRE.MatchString(base) {
+			continue
+		}
 
 		rate, ok := adapter.ParseFloat(rateStr)
 		if !ok {
@@ -116,6 +134,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 			}
 			rate /= math.Pow10(n)
 		}
+		if nominal, ok := nominalOverrides[base]; ok {
+			rate /= nominal
+		}
 		if rate == 0 {
 			continue
 		}
@@ -123,6 +144,9 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		date, err := time.Parse(time.DateOnly, strings.TrimSpace(dateStr))
 		if err != nil {
 			return nil, err
+		}
+		if alias, ok := aliases[base]; ok {
+			base = alias
 		}
 		rates = append(rates, adapter.Rate{Date: date, Base: base, Quote: "ILS", Rate: rate})
 	}

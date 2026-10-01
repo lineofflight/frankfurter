@@ -8,6 +8,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/lineofflight/frankfurter/go/internal/adapter"
 	"github.com/lineofflight/frankfurter/go/internal/golden"
@@ -83,6 +84,39 @@ func TestParseGoldNormalizesToTroyOunce(t *testing.T) {
 	}
 	if want := 407.18 * adapter.GramsPerTroyOunce; math.Abs(r.Rate-want) > 0.0001 {
 		t.Errorf("rate = %v, want %v", r.Rate, want)
+	}
+}
+
+func TestParseRelabelsRetiredTableBCodesThatCarryCurrentValues(t *testing.T) {
+	rates, err := parse([]byte(`[
+		{"table":"B","no":"5/B/NBP/2002","effectiveDate":"2002-02-26","rates":[
+			{"currency":"rubel","code":"BYB","mid":0.002494}
+		]},
+		{"table":"B","no":"27/B/NBP/2002","effectiveDate":"2002-12-24","rates":[
+			{"currency":"afgani","code":"AFA","mid":0.000816}
+		]},
+		{"table":"B","no":"1/B/NBP/2003","effectiveDate":"2003-01-07","rates":[
+			{"currency":"afgani","code":"AFA","mid":0.089056}
+		]},
+		{"table":"B","no":"22/B/NBP/2003","effectiveDate":"2003-10-28","rates":[
+			{"currency":"kwanza","code":"AON","mid":0.0503}
+		]}
+	]`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var got []string
+	var values []float64
+	for _, r := range rates {
+		got = append(got, r.Date.Format(time.DateOnly)+" "+r.Base)
+		values = append(values, r.Rate)
+	}
+	want := []string{"2002-02-26 BYR", "2002-12-24 AFA", "2003-01-07 AFN", "2003-10-28 AOA"}
+	if !slices.Equal(got, want) {
+		t.Errorf("got %v, want %v", got, want)
+	}
+	if want := []float64{0.002494, 0.000816, 0.089056, 0.0503}; !slices.Equal(values, want) {
+		t.Errorf("rates = %v, want %v", values, want)
 	}
 }
 

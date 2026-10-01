@@ -355,6 +355,7 @@ end_date = (
 	{Version: 38, Name: "normalize_rba_sdr", Up: normalizeSDR("RBA", "AUD")},
 	{Version: 39, Name: "normalize_bnm_sdr", Up: normalizeSDR("BNM", "MYR")},
 	{Version: 40, Name: "normalize_rbm_sdr", Up: normalizeSDR("RBM", "MWK")},
+	{Version: 41, Name: "repair_retired_currency_labels", Up: repairRetiredLabels},
 }
 
 // renameProvider re-keys a provider in each table (provider, or

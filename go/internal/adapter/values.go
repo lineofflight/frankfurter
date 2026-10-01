@@ -71,6 +71,24 @@ func HistoricalCode(predecessors map[string]Predecessor, code string, date time.
 	return code
 }
 
+// Successor names the code that replaced a retired one, for a source that
+// keeps the retired code after a redenomination and quotes the successor's
+// values under it.
+type Successor struct {
+	Code    string    // the successor's ISO code
+	Cutover time.Time // first date the source's values are in the new unit
+}
+
+// SuccessorCode is HistoricalCode's reverse: it relabels a retired code with
+// its successor for rows dated on or after the cutover. Ruby's historical_code
+// checks PREDECESSORS first and SUCCESSORS second; no adapter declares both.
+func SuccessorCode(successors map[string]Successor, code string, date time.Time) string {
+	if s, ok := successors[code]; ok && !date.Before(s.Cutover) {
+		return s.Code
+	}
+	return code
+}
+
 // Float returns a pointer to v, for Rate's optional components.
 func Float(v float64) *float64 { return &v }
 

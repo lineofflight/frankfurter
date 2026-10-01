@@ -30,6 +30,11 @@ var predecessors = map[string]adapter.Predecessor{
 	"RUB": {Code: "RUR", Cutover: adapter.Date(1998, 1, 6)},
 }
 
+// Bulletins up to 2008-09-16 list the SDR under its own label (code 001).
+// That day's bulletin also carries XDR (code 960) at the same rate, and later
+// ones only XDR.
+var aliases = map[string]string{"SDR": "XDR"}
+
 var codeRE = regexp.MustCompile(`\A[A-Z]{3}\z`)
 
 func init() {
@@ -132,9 +137,13 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if err != nil {
 			return nil, err
 		}
+		code := *r.Ccy
+		if alias, ok := aliases[code]; ok {
+			code = alias
+		}
 		rates = append(rates, adapter.Rate{
 			Date:  date,
-			Base:  adapter.HistoricalCode(predecessors, *r.Ccy, date),
+			Base:  adapter.HistoricalCode(predecessors, code, date),
 			Quote: "UZS",
 			Rate:  rate / float64(nominal),
 		})

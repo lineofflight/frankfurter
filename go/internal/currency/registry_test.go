@@ -37,8 +37,9 @@ func TestDefunctRequiresCodeDateAndSource(t *testing.T) {
 }
 
 func TestDefunctCoversKnownCodes(t *testing.T) {
-	for _, code := range []string{"ATS", "BEF", "BGN", "BYR", "CUC", "DEM", "ECS", "EEK", "ESP", "FRF", "HRK", "IEP",
-		"ITL", "NLG", "PTE", "SLL", "STD", "VEF", "ZMK"} {
+	for _, code := range []string{"ADP", "AFA", "ATS", "BEF", "BGL", "BGN", "BYB", "BYR", "CUC", "DEM", "ECS", "EEK",
+		"ESP", "FRF", "HRK", "IEP", "ITL", "MGF", "MZM", "NLG", "PTE", "SDD", "SLL", "SRG", "STD", "VEB", "VEF",
+		"ZMK"} {
 		if _, ok := FindDefunct(code); !ok {
 			t.Errorf("missing %s", code)
 		}
@@ -56,6 +57,22 @@ func TestDefunctRetiresSucreAfterWithdrawalPeriod(t *testing.T) {
 	e, _ := FindDefunct("ECS")
 	if !e.TerminalDate.Equal(day(2000, 9, 9)) || e.Successor != "USD" || e.Ratio != 25000 {
 		t.Errorf("ECS = %+v", e)
+	}
+}
+
+func TestDefunctRetiresRedenominatedLegacyCodesOnChangeoverDates(t *testing.T) {
+	for code, want := range map[string]struct {
+		terminal  time.Time
+		successor string
+	}{
+		"BGL": {day(1999, 7, 5), "BGN"},
+		"MZM": {day(2006, 7, 1), "MZN"},
+		"VEB": {day(2008, 1, 1), "VEF"},
+	} {
+		e, ok := FindDefunct(code)
+		if !ok || !e.TerminalDate.Equal(want.terminal) || e.Successor != want.successor || e.Ratio != 1000 {
+			t.Errorf("%s = %+v", code, e)
+		}
 	}
 }
 
