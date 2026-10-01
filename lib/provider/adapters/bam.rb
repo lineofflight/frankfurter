@@ -10,6 +10,12 @@ class Provider
     # mid-rate field; the adapter averages buy/sell.
     class BAM < Adapter
       URL = "https://api.centralbankofmorocco.ma/cours/Version1/api/CoursVirement"
+
+      # The ouguiya keeps its MRO label after the 2018 redenomination: 100 MRO = 2.624 MAD on 2018-01-02 and 26.309 on
+      # 2018-01-03, with the new ouguiya at 0.263 MAD. It is quoted per 100 throughout, but on 53 days in 2018 the unit
+      # field reads 1 (25.857 MAD on 2018-04-17, against 25.864 per 100 the day before).
+      SUCCESSORS = { "MRO" => ["MRU", Date.new(2018, 1, 3)] }.freeze
+
       class << self
         def api_key = ENV["BAM_API_KEY"] || raise("no API key")
 
@@ -37,9 +43,10 @@ class Provider
           date = Date.parse(record["date"])
           mid = record["moyen"]&.to_f || midpoint(record["achat"].to_f, record["vente"].to_f)
           unite = record["uniteDevise"].to_f
+          unite = 100.0 if code == "MRO" && unite == 1
           next if mid.zero? || unite.zero?
 
-          { date:, base: code, quote: "MAD", rate: mid / unite,
+          { date:, base: historical_code(code, date), quote: "MAD", rate: mid / unite,
             **prices(bid: record["achat"], ask: record["vente"], mid: record["moyen"], unit: unite), }
         end
       end

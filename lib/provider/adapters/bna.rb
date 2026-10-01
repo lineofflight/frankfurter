@@ -32,13 +32,25 @@ class Provider
       # provider routes; their terminal dates apply to the blend and catalogue.
       EXCLUDED_CODES = ["XDRUSD", "XAU"].freeze
 
+      # Three of those codes switch to their successor's values without changing label. MZM's 2014 to 2016 rows track
+      # the new metical (3.1 AOA). STD holds a frozen old-dobra cross until 2023-02-17 (0.024 AOA) and the new dobra
+      # from 2023-02-22 (21.89 AOA). VEF holds the last pre-2018 official rate until October 2022 (0.002 AOA) and the
+      # current bolivar from 2023-10-18 (23.74 AOA), against BCV's VES.
+      SUCCESSORS = {
+        "MZM" => ["MZN", Date.new(2006, 7, 1)],
+        "STD" => ["STN", Date.new(2023, 2, 22)],
+        "VEF" => ["VES", Date.new(2023, 10, 18)],
+      }.freeze
+
       def fetch(after: nil, upto: nil)
         start_date = after || Date.new(2000, 1, 1)
         end_date = upto || Date.today
         # Window sanity: a caller-supplied range can be empty
         return [] if start_date > end_date
 
-        codes = currency_codes
+        # Fetch relabelled series last, so a day BNA also publishes under the successor's own code keeps that row when
+        # the insert skips the duplicate.
+        codes = currency_codes.partition { |code| !SUCCESSORS.key?(code) }.flatten
         dataset = []
 
         codes.each_with_index do |code, idx|
@@ -64,7 +76,8 @@ class Provider
           rate = Float(row["taxa"], exception: false)
           next if rate.nil? || rate.zero?
 
-          { date: Date.parse(row["data"]), base: code, quote: "AOA", rate: rate }
+          date = Date.parse(row["data"])
+          { date:, base: historical_code(code, date), quote: "AOA", rate: rate }
         end
       end
 

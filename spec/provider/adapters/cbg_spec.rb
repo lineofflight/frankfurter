@@ -46,6 +46,15 @@ class Provider < Sequel::Model(:providers)
         _(usd[:date]).must_equal(Date.new(2026, 5, 22))
       end
 
+      it "relabels the new leone published under SLL" do
+        records = adapter.parse([[1630281600000, 0.01], [1657584000000, 4.11]], "SLL")
+
+        _(records.map { |r| [r[:date].to_s, r[:base], r[:rate]] }).must_equal([
+          ["2021-08-30", "SLL", 0.01],
+          ["2022-07-12", "SLE", 4.11],
+        ])
+      end
+
       it "parses millisecond epoch timestamps as UTC dates" do
         records = adapter.parse([[1779408000000, 86.28]], "EUR")
 

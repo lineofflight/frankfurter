@@ -51,6 +51,16 @@ class Provider < Sequel::Model(:providers)
         _(dataset.any? { |r| r[:date] <= Date.new(2026, 3, 10) }).must_equal(true)
       end
 
+      it "starts at the first year when a window opens before it" do
+        # A full backfill opens the day before coverage starts, in 1987, which the form doesn't offer.
+        VCR.use_cassette("mas_coverage_start", match_requests_on: [:method, :host, :body], exclusive: true) do
+          dataset = adapter.fetch(after: Date.new(1987, 12, 31), upto: Date.new(1988, 1, 31))
+
+          _(dataset).wont_be_empty
+          _(dataset.map { |r| r[:date] }.min.year).must_equal(1988)
+        end
+      end
+
       it "parses CSV data" do
         csv = <<~CSV
           MAS: Financial Database - Exchange Rates

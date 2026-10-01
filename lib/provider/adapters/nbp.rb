@@ -20,8 +20,12 @@ class Provider
       ALIASES = { "AON" => "AOA", "BYB" => "BYR" }.freeze
 
       # AFA rows switch to the new afghani on 2003-01-07 (0.000816 PLN on 2002-12-24, 0.089056 next) and keep the old
-      # label until AFN replaces it in the same 2003-11-12 table.
-      SUCCESSORS = { "AFA" => ["AFN", Date.new(2003, 1, 7)] }.freeze
+      # label until AFN replaces it in the same 2003-11-12 table. ZWR rows switch to the 2009 Zimbabwe dollar on
+      # 2009-02-25 (0.00000001 PLN on 2009-02-04, 0.043749 next) and keep the old label until ZWL on 2010-06-02.
+      SUCCESSORS = {
+        "AFA" => ["AFN", Date.new(2003, 1, 7)],
+        "ZWR" => ["ZWL", Date.new(2009, 2, 25)],
+      }.freeze
 
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today

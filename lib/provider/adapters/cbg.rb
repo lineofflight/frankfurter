@@ -62,6 +62,10 @@ class Provider
         "SGD",
       ].freeze
 
+      # The SLL series carries the new leone after the 2022 redenomination without changing its label: 0.01 GMD until
+      # August 2021 (the old leone, floored to two decimals), then zeros, then 4.11 on 2022-07-12.
+      SUCCESSORS = { "SLL" => ["SLE", Date.new(2022, 7, 1)] }.freeze
+
       def fetch(after: nil, upto: nil)
         CURRENCIES.flat_map do |code|
           records = fetch_currency(code)
@@ -85,7 +89,7 @@ class Provider
           next if rate.zero?
 
           date = Time.at(Integer(epoch_ms) / 1000).utc.to_date
-          { date:, base: code, quote: "GMD", rate: }
+          { date:, base: historical_code(code, date), quote: "GMD", rate: }
         end
       end
 

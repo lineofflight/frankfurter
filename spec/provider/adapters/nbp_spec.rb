@@ -83,6 +83,26 @@ class Provider < Sequel::Model(:providers)
         _(records.map { |r| r[:rate] }).must_equal([0.002494, 0.000816, 0.089056, 0.0503])
       end
 
+      it "relabels the 2009 Zimbabwe dollar published under ZWR" do
+        json = <<~JSON
+          [
+            {"table":"B","no":"5/B/NBP/2009","effectiveDate":"2009-02-04","rates":[
+              {"currency":"dolar Zimbabwe","code":"ZWR","mid":1.0e-08}
+            ]},
+            {"table":"B","no":"8/B/NBP/2009","effectiveDate":"2009-02-25","rates":[
+              {"currency":"dolar Zimbabwe","code":"ZWR","mid":0.043749}
+            ]}
+          ]
+        JSON
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| [r[:date].to_s, r[:base], r[:rate]] }).must_equal([
+          ["2009-02-04", "ZWR", 1.0e-08],
+          ["2009-02-25", "ZWL", 0.043749],
+        ])
+      end
+
       it "treats 404 as a no-data window" do
         VCR.eject_cassette
 

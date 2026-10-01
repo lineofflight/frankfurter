@@ -17,6 +17,14 @@ class Provider
       # they switch to 47.5 new afghani to the dollar (58.52 per euro at 1.232).
       PREDECESSORS = { "AFN" => ["AFA", Date.new(2004, 4, 1)] }.freeze
 
+      # BDI's ZWD series runs through the 2008 and 2009 Zimbabwe redenominations to 2013 without changing label. It
+      # jumps ten billionfold on 2008-08-01 into the third dollar (0.13 USD) and again on 2009-02-03 into the fourth,
+      # which settles at 361.9 to the dollar from 2010, near the 380 NBP and InforEuro publish as ZWL.
+      SUCCESSORS = {
+        "ZWD" => ["ZWR", Date.new(2008, 8, 1)],
+        "ZWR" => ["ZWL", Date.new(2009, 2, 3)],
+      }.freeze
+
       class << self
         def backfill_range = 30
       end

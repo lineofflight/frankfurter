@@ -20,6 +20,9 @@ class Provider
       # 12,300 per dollar. Exclusions match the published label, so this survives the MZM exclusion, which targets the
       # current row: BOTA still lists "MZM" today at new-metical values.
       ALIASES = { "SDR" => "XDR", "MXM" => "MZM" }.freeze
+      # The kwacha appears as ZMK from 2025-06-21 to 2025-06-24 at ZMW values (111.66 TZS, against 110.64 as ZMW the day
+      # before), twelve years after the rebasing.
+      SUCCESSORS = { "ZMK" => ["ZMW", Date.new(2013, 1, 1)] }.freeze
       EXCLUDED_CURRENCIES = ["GOLD", "ATS", "NLG", "MZM", "ZWD", "CUC"].freeze
       TOKEN_FIELD = "__RequestVerificationToken"
       TOKEN_PATTERN = /name="#{TOKEN_FIELD}"[^>]*value="([^"]+)"/
@@ -109,7 +112,7 @@ class Provider
 
         date = Date.parse(date_str.strip)
 
-        { date:, base: currency, quote: "TZS", rate: }
+        { date:, base: historical_code(currency, date), quote: "TZS", rate: }
       end
 
       def cell_text(node)

@@ -43,7 +43,8 @@ class Provider
       end
 
       def fetch(after: nil, upto: nil)
-        start_date = after || COVERAGE_START
+        # A full backfill opens the day before coverage starts, in December 2020, which has no file.
+        start_date = [after || COVERAGE_START, COVERAGE_START].max
         # HMRC publishes the coming month's file on the penultimate Thursday of this one. Look one month past the window
         # so the rows dated the coming 1st are stored the day they appear rather than the first poll after they apply.
         end_date = upto || (Date.today >> 1)

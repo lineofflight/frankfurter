@@ -16,6 +16,29 @@ class Provider
         "TJS" => ["TJR", Date.new(2000, 10, 30)],
       }.freeze
 
+      # The archive keeps six retired codes after their redenominations and quotes the successor under them, until the
+      # current codes replace them in April 2014 (RUB in 2004). Each entry is the first date in the new unit, which can
+      # trail the official one by a few days.
+      SUCCESSORS = {
+        "RUR" => ["RUB", Date.new(1998, 1, 1)],
+        "BGL" => ["BGN", Date.new(1999, 8, 1)],
+        "TRL" => ["TRY", Date.new(2005, 1, 6)],
+        "ROL" => ["RON", Date.new(2005, 7, 1)],
+        "AZM" => ["AZN", Date.new(2006, 1, 6)],
+        "TMM" => ["TMT", Date.new(2009, 1, 6)],
+      }.freeze
+
+      # From these dates the rate is per 100 units of the successor while the units field still reads 1000 or 10000:
+      # 10000 "TRL" = 372.9741 UAH on 2005-06-27, with the new lira at 3.73 UAH, and 100 TRY = 541.6837 when the label
+      # changes on 2014-04-04.
+      PER_HUNDRED = {
+        "BGL" => Date.new(2000, 1, 1),
+        "TRL" => Date.new(2005, 1, 6),
+        "ROL" => Date.new(2005, 7, 1),
+        "AZM" => Date.new(2006, 1, 6),
+        "TMM" => Date.new(2009, 1, 6),
+      }.freeze
+
       class << self
         def backfill_range = 365
       end
@@ -43,6 +66,8 @@ class Provider
           next unless iso.match?(/\A[A-Z]{3}\z/)
 
           units = row.fetch("units", 1).to_f
+          per_hundred = PER_HUNDRED[iso]
+          units = 100.0 if per_hundred && date >= per_hundred
           rate = row.fetch("rate").to_f
           next if rate.zero? || units.zero?
 

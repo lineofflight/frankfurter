@@ -30,6 +30,15 @@ class Provider < Sequel::Model(:providers)
         _(sample.size).must_be(:>, 1)
       end
 
+      it "starts at the first day when a window opens before it" do
+        # A full backfill opens the day before coverage starts, a Sunday that Statbank rejects as a Tid bound.
+        VCR.use_cassette("dnb_coverage_start", match_requests_on: [:method, :host, :body], exclusive: true) do
+          dataset = adapter.fetch(after: Date.new(1977, 1, 2), upto: Date.new(1977, 1, 7))
+
+          _(dataset.map { |r| r[:date] }.min).must_equal(Date.new(1977, 1, 3))
+        end
+      end
+
       it "parses CSV with correct base and quote" do
         csv = <<~CSV
           VALUTA;KURTYP;TID;INDHOLD

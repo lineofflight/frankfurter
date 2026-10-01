@@ -53,6 +53,25 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.0625, 0.0001)
       end
 
+      it "relabels the new ouguiya and reads it per 100 when the unit field reads 1" do
+        json = <<~JSON
+          [
+            {"date": "2018-01-02T14:00:00", "libDevise": "MRO", "achat": 2.6161, "vente": 2.6318, "uniteDevise": 100},
+            {"date": "2018-04-16T12:30:00", "libDevise": "MRO", "moyen": 25.864, "uniteDevise": 100},
+            {"date": "2018-04-17T12:30:00", "libDevise": "MRO", "moyen": 25.857, "uniteDevise": 1}
+          ]
+        JSON
+        records = adapter.parse(json)
+
+        _(records.map { |r| [r[:date].to_s, r[:base]] }).must_equal([
+          ["2018-01-02", "MRO"],
+          ["2018-04-16", "MRU"],
+          ["2018-04-17", "MRU"],
+        ])
+        _(records.map { |r| r[:mid] }).must_equal([nil, 0.25864, 0.25857])
+        _(records.first[:rate]).must_be_close_to(0.0262395, 1e-9)
+      end
+
       it "skips zero rates" do
         json = <<~JSON
           [{"date": "2026-03-25T12:30:00", "libDevise": "USD", "moyen": 0.0, "uniteDevise": 1}]

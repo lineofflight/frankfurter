@@ -11,6 +11,8 @@ class Provider
     # foreign currency. Data available from 1988.
     class MAS < Adapter
       URL = "https://eservices.mas.gov.sg/statistics/msb/ExchangeRates.aspx"
+      # The form's year list starts at 1988. An earlier year renders the form again instead of a CSV.
+      COVERAGE_START = Date.new(1988, 1, 1)
 
       # Column header patterns mapped to ISO currency codes and units. Per-unit currencies have unit=1, per-100-unit
       # currencies have unit=100.
@@ -61,7 +63,7 @@ class Provider
         end_date = upto || Date.today
         dataset = []
 
-        each_year(after, end_date) do |start_month, start_year, end_month, end_year|
+        each_year([after, COVERAGE_START].max, end_date) do |start_month, start_year, end_month, end_year|
           csv = download_csv(start_month, start_year, end_month, end_year)
           dataset.concat(parse(csv))
           sleep(1)
