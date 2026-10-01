@@ -101,12 +101,28 @@
     "note": "Spain adopted the euro at 166.386 ESP per EUR. The peseta ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
   },
   {
+    "iso_code": "FIM",
+    "terminal_date": "2002-03-01",
+    "successor": "EUR",
+    "ratio": 5.94573,
+    "source": "https://en.wikipedia.org/wiki/Finnish_markka",
+    "note": "Finland adopted the euro at 5.94573 FIM per EUR. The markka ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
+  },
+  {
     "iso_code": "FRF",
     "terminal_date": "2002-02-18",
     "successor": "EUR",
     "ratio": 6.55957,
     "source": "https://en.wikipedia.org/wiki/French_franc",
     "note": "France adopted the euro at 6.55957 FRF per EUR. The franc ceased to be legal tender after 17 February 2002; the euro became sole legal tender from 18 February 2002."
+  },
+  {
+    "iso_code": "GRD",
+    "terminal_date": "2002-03-01",
+    "successor": "EUR",
+    "ratio": 340.75,
+    "source": "https://en.wikipedia.org/wiki/Greek_drachma",
+    "note": "Greece adopted the euro at 340.750 GRD per EUR on 1 January 2001. The drachma ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
   },
   {
     "iso_code": "HRK",
@@ -130,6 +146,20 @@
     "ratio": 1936.27,
     "source": "https://en.wikipedia.org/wiki/Italian_lira",
     "note": "Italy adopted the euro at 1936.27 ITL per EUR. The lira ceased to be legal tender after 28 February 2002; the euro became sole legal tender from 1 March 2002."
+  },
+  {
+    "iso_code": "LTL",
+    "terminal_date": "2015-01-01",
+    "successor": "EUR",
+    "source": "https://www.ecb.europa.eu/euro/changeover/lithuania/html/index.en.html",
+    "note": "Lithuania adopted the euro at 3.45280 LTL per EUR on 1 January 2015. The euro became sole legal tender on 16 January 2015."
+  },
+  {
+    "iso_code": "LVL",
+    "terminal_date": "2014-01-01",
+    "successor": "EUR",
+    "source": "https://www.ecb.europa.eu/euro/changeover/latvia/html/index.en.html",
+    "note": "Latvia adopted the euro at 0.702804 LVL per EUR on 1 January 2014. Lats ceased to be legal tender on 15 January 2014."
   },
   {
     "iso_code": "MGF",
@@ -170,6 +200,13 @@
     "ratio": 100,
     "source": "https://en.wikipedia.org/wiki/Sudanese_dinar",
     "note": "Sudan introduced the second pound on 10 January 2007 at 100 SDD = 1 SDG. The pound became sole legal tender on 1 July 2007."
+  },
+  {
+    "iso_code": "SKK",
+    "terminal_date": "2009-01-01",
+    "successor": "EUR",
+    "source": "https://www.ecb.europa.eu/euro/changeover/slovakia/html/index.en.html",
+    "note": "Slovakia adopted the euro at 30.1260 SKK per EUR on 1 January 2009. Koruna remained legal tender until 16 January 2009."
   },
   {
     "iso_code": "SLL",
