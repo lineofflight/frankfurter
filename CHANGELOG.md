@@ -31,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full backfills keep the first days of CBAR, HNB and BCCH history. (#748)
 - Banco Central de Costa Rica history from 1983.
 - One-day provider typos no longer skew blends. (#749)
+- Bank of Lithuania's old zloty, ruble, lev, leu and metical quotes, labelled with the new codes. (#751)
+- Central Bank of Armenia history for the currencies it no longer quotes. (#751)
+- Central Bank of Armenia's pre-2005 tenge and 2000 Tajik ruble rates, published per 10 or 100 units. (#751)
+- Finnish markka, Greek drachma, litas, lats and koruna no longer blend past their euro changeover. (#751)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start

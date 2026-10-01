@@ -6,16 +6,61 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of Armenia. Publishes daily rates for ~30 currencies against AMD.
+    # Central Bank of Armenia. Publishes daily rates for ~30 currencies against AMD, and has published about 70 since
+    # 2000.
     class CBA < Adapter
       URL = URI("https://api.cba.am/exchangerates.asmx")
       CHUNK_SIZE = 365
       TROY_OUNCE_GRAMS = 31.1035
       PRECIOUS_METALS = ["XAU", "XAG"].freeze
 
+      # The range endpoint returns only the codes it is asked for, and the latest bulletin lists only what CBA still
+      # quotes, so the series it has since dropped are requested by name: the legacy euro currencies, the litas, lats,
+      # kroon and koruna, and the currencies it stopped quoting after 2022-02-28. Left out are TAD and TMM, which copy
+      # the TJS and TMT series through 2000, and the TMT, TRL, ROL and RON series, whose values stray from other sources
+      # by 2x to 500x for months or years at a time.
+      DROPPED_CODES = [
+        "ARP", "ARS", "ATS", "BEF", "BGL", "BGN", "BRC", "BYR", "DEM", "DKK", "EEK", "EGP", "ESP", "FIM", "FRF", "GRD",
+        "HUF", "IEP", "ILS", "ISK", "ITL", "KRW", "KWD", "LBP", "LTL", "LVL", "MDL", "MXN", "NLG", "PLZ", "PTE", "SAR",
+        "SDR", "SKK", "SYP", "TRY", "USM",
+      ].freeze
+
+      # Labels CBA uses for a current currency: retired codes for the Argentine peso, lev, real and zloty (its history
+      # starts in 2000, after each of them was redenominated), SDR for the XDR, and USM for the Uzbek som. Each hands
+      # over to the right code without a break: 1 "PLZ" = 124.89 AMD on 2006-12-30, 1 PLN = 125.18 on 2007-01-05.
+      ALIASES = {
+        "ARP" => "ARS",
+        "BGL" => "BGN",
+        "BRC" => "BRL",
+        "PLZ" => "PLN",
+        "SDR" => "XDR",
+        "USM" => "UZS",
+      }.freeze
+
+      # CBA's TJS series holds the Tajik ruble until the somoni takes over: 10 "TJS" = 26.71 AMD on 2000-10-30, and the
+      # somoni at 1 TJS = 250.74 AMD on 2000-11-01.
+      PREDECESSORS = { "TJS" => ["TJR", Date.new(2000, 11, 1)] }.freeze
+
+      # Series whose amount field understates the quote tenfold, keyed by label with the first date it is right: 1 KZT =
+      # 37.37 AMD on 2004-12-30, 10 KZT = 37.39 AMD on 2005-01-04, and 1 ISK = 35.40 AMD on 2015-03-06, 10 ISK = 35.12
+      # AMD on 2015-03-09. USM is per 10 som throughout, 1 "USM" = 2.93 AMD on 2006-12-30 against 10 UZS = 2.94 AMD on
+      # 2007-01-05, and so is the Tajik ruble under TJS, which otherwise comes out at ten times NBU's and CBR's rates.
+      UNDERSTATED_AMOUNTS = {
+        "ISK" => Date.new(2015, 3, 9),
+        "KZT" => Date.new(2005, 1, 4),
+        "TJS" => Date.new(2000, 11, 1),
+        "USM" => Date.new(2007, 1, 5),
+      }.freeze
+
+      class << self
+        # A full backfill stores about 300,000 rows. Yearly windows keep each insert, and the blend refresh that follows
+        # it, to one year instead of holding the write lock for the whole history.
+        def backfill_range = CHUNK_SIZE
+      end
+
       def fetch(after: nil, upto: nil)
         end_date = upto || Date.today
-        iso_codes = current_currency_codes
+        iso_codes = (current_currency_codes | DROPPED_CODES).join(",")
         records = []
         chunk_start = after
 
@@ -25,7 +70,8 @@ class Provider
           chunk_start = chunk_end + 1
         end
 
-        records
+        # SDR and XDR overlap in early 2017 with equal values.
+        records.uniq { |record| record.values_at(:date, :base, :quote) }
       end
 
       private
@@ -36,11 +82,11 @@ class Provider
         XML
 
         result = response.locate("soap:Envelope/soap:Body/ExchangeRatesLatestResponse/ExchangeRatesLatestResult").first
-        return "" unless result
+        return [] unless result
 
         result.locate("Rates/ExchangeRate").filter_map do |node|
           node.locate("ISO").first&.text
-        end.join(",")
+        end
       end
 
       def range(start_date, end_date, iso_codes)
@@ -60,7 +106,9 @@ class Provider
             iso = row.locate("ISO").first&.text
             next unless iso
 
-            { date: Date.parse(row.locate("RateDate").first.text), base: iso, quote: "AMD", rate: extract_rate(row) }
+            date = Date.parse(row.locate("RateDate").first.text)
+            base = historical_code(ALIASES.fetch(iso, iso), date)
+            { date:, base:, quote: "AMD", rate: extract_rate(row, iso, date) }
           end
       end
 
@@ -85,9 +133,9 @@ class Provider
         Ox.load(response.to_s)
       end
 
-      def extract_rate(node)
-        iso = node.locate("ISO").first&.text
+      def extract_rate(node, iso, date)
         amount = Integer(node.locate("Amount").first.text)
+        amount *= 10 if (corrected = UNDERSTATED_AMOUNTS[iso]) && date < corrected
         rate = Float(node.locate("Rate").first.text)
         rate *= TROY_OUNCE_GRAMS if PRECIOUS_METALS.include?(iso)
         rate / amount
