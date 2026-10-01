@@ -18,7 +18,7 @@ class Provider
           dataset.concat(fetch_year(year))
         end
 
-        dataset.select! { |r| r[:date].between?(after, end_date) }
+        dataset.select { |r| r[:date].between?(after, end_date) }
       end
 
       def parse(json)

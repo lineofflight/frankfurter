@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Israel pre-euro rates published per 10, 100 or 1000 units. (#740)
 - Legacy currencies quoted past their redenomination. (#740)
 - Banca d'Italia's old afghani quotes, labelled AFN until April 2004. (#741)
+- Czech National Bank backfill no longer fails when a window holds whole years.
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
