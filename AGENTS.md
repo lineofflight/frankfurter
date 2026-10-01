@@ -62,9 +62,19 @@ end
 
 Changes to blend rules, peg definitions, or provider eligibility require `rake blend:rebuild`.
 
+## Bad Data
+
+`rates` is the source's record; blends are ours. Provider queries return what the source published, mistakes included.
+
+- **Reject at ingest** only what can't be a rate: non-positive values and dates past the future horizon (`RateValidation`).
+- **Fix labels, not values.** When a source quotes a currency under the wrong code or unit (a retired code for its successor, a units field that disagrees with the quote), relabel or rescale in the adapter (`PREDECESSORS`, `SUCCESSORS`, `ALIASES`, unit overrides) with a spec, and repair stored rows in a data migration. Confirm the unit against other providers on the same dates first.
+- **Delete only rows the source didn't publish for that date**, such as a frozen rate a live feed re-dates every week, or history the source has since withdrawn.
+- **Never delete a row because its value looks wrong.** Typos and spikes stay in `rates`. The blend screens them: `Consensus` drops outliers when at least four providers quote a currency, and the defunct and nascent windows keep retired and not-yet-live codes out.
+- **Data migrations leave blend tables alone.** Clearing them sends every request to live compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy instead; it rebuilds in place.
+
 ## Conventions
 
-- **Data integrity:** Relay what providers publish. Don't editorialize.
+- **Data integrity:** Relay what providers publish. Don't editorialize. See [Bad Data](#bad-data).
 - **Adding providers:** Follow [.agents/skills/implementing-providers/SKILL.md](.agents/skills/implementing-providers/SKILL.md).
 - **Git commits:** Imperative mood, present tense, under 72 characters. Put issue references on the final line (`closes #123`).
 - **Changelog (`CHANGELOG.md`):**
