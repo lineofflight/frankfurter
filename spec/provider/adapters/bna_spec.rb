@@ -78,6 +78,43 @@ class Provider < Sequel::Model(:providers)
         _(adapter.parse(json)).must_be_empty
       end
 
+      it "relabels successors published under retired codes" do
+        rows = [
+          ["MZM", "2014-04-22", 3.1],
+          ["STD", "2023-02-17", 0.02398],
+          ["STD", "2023-02-22", 21.8914],
+          ["VEF", "2022-10-10", 0.002],
+          ["VEF", "2023-10-18", 23.74128],
+        ].map do |code, date, taxa|
+          { taxa:, tipoCambio: "M", data: date, codigoMoeda: code }
+        end
+        json = Oj.dump({ genericResponse: rows, success: true }, mode: :compat)
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| [r[:date].to_s, r[:base]] }).must_equal([
+          ["2014-04-22", "MZN"],
+          ["2023-02-17", "STD"],
+          ["2023-02-22", "STN"],
+          ["2022-10-10", "VEF"],
+          ["2023-10-18", "VES"],
+        ])
+      end
+
+      it "fetches relabelled series after BNA's own successor series" do
+        series = {
+          "VEF" => [{ date: Date.new(2026, 2, 5), base: "VES", quote: "AOA", rate: 2.48819 }],
+          "VES" => [{ date: Date.new(2026, 2, 5), base: "VES", quote: "AOA", rate: 2.487 }],
+        }
+        adapter.stub(:currency_codes, ["VEF", "VES"]) do
+          adapter.stub(:fetch_currency, ->(code, *) { series.fetch(code) }) do
+            records = adapter.fetch(after: Date.new(2026, 2, 5), upto: Date.new(2026, 2, 5))
+
+            _(records.map { |r| r[:rate] }).must_equal([2.487, 2.48819])
+          end
+        end
+      end
+
       it "handles empty response" do
         _(adapter.parse('{"genericResponse":[],"success":true}')).must_be_empty
       end
