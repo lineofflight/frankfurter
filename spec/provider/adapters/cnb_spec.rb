@@ -30,6 +30,15 @@ class Provider < Sequel::Model(:providers)
         _(sample.size).must_be(:>, 1)
       end
 
+      it "returns rows when every fetched row is in range" do
+        rows = [{ date: Date.new(1991, 1, 2), base: "USD", quote: "CZK", rate: 28.0 }]
+        dataset = adapter.stub(:fetch_year, ->(year) { year == 1991 ? rows : [] }) do
+          adapter.fetch(after: Date.new(1990, 12, 31), upto: Date.new(1991, 12, 31))
+        end
+
+        _(dataset).must_equal(rows)
+      end
+
       it "parses JSON with correct base and quote" do
         json = {
           "rates" => [
