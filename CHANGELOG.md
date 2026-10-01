@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Backfill no longer skips a day at each window boundary. (#739)
 - National Bank of the Kyrgyz Republic backfills up to today. (#739)
 
+Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
+`bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
+and skips rows already stored, so it is safe but slow.
+
 ## [2.6.0] - 2026-09-30
 
 ### Added
