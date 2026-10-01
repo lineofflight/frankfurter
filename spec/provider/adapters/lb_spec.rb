@@ -217,5 +217,56 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
     end
+
+    describe "LB archive" do
+      before do
+        VCR.insert_cassette("lb_archive", match_requests_on: [:method, :uri])
+      end
+
+      after { VCR.eject_cassette }
+
+      let(:adapter) { LB.new }
+
+      def rates(date)
+        adapter.fetch(after: date, upto: date).to_h { |r| [r[:base], r[:rate]] }
+      end
+
+      it "fetches the first bulletin, with the karbovanets and the old ruble and zloty" do
+        first = rates(Date.new(1993, 6, 25))
+
+        _(first["UAK"]).must_be_close_to(0.001131, 1e-9)
+        _(first["RUR"]).must_be_close_to(0.004128, 1e-9)
+        _(first["PLZ"]).must_be_close_to(0.000262, 1e-9)
+        _(first.keys & ["RUB", "PLN"]).must_be_empty
+      end
+
+      it "skips rows that repeat the Russian ruble under other countries' codes" do
+        copies = rates(Date.new(1995, 7, 10))
+        tajik = rates(Date.new(1995, 7, 11))
+        before = rates(Date.new(1995, 11, 29))
+        turkmen = rates(Date.new(1995, 11, 30))
+
+        _(copies["RUR"]).must_be_close_to(0.000873, 1e-9)
+        _(copies.keys & ["GER", "TJR", "TMM"]).must_be_empty
+        _(tajik["TJR"]).must_be_close_to(0.074074, 1e-9)
+        _(tajik.keys & ["GER", "TMM"]).must_be_empty
+        _(before.keys).wont_include("TMM")
+        _(turkmen["TMM"]).must_be_close_to(0.002759, 1e-9)
+      end
+
+      it "reads the Belarusian ruble before the 1994 denomination per 10" do
+        _(rates(Date.new(1994, 8, 19))["BYB"]).must_be_close_to(0.0014, 1e-9)
+        _(rates(Date.new(1994, 8, 22))["BYB"]).must_be_close_to(0.001421, 1e-9)
+      end
+
+      it "relabels the dinar LB quotes as YUN" do
+        yun = rates(Date.new(1998, 7, 6))
+        yum = rates(Date.new(1998, 7, 7))
+
+        _(yun.keys).wont_include("YUN")
+        _(yun["YUM"]).must_be_close_to(0.3734, 1e-9)
+        _(yum["YUM"]).must_be_close_to(0.3712, 1e-9)
+      end
+    end
   end
 end
