@@ -24,11 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Successor currencies quoted under retired codes in NBU, BNA, BAM, BDI, CBG, CBU, LB, NBP and BOTA history. (#745)
 - National Bank of the Kyrgyz Republic no longer re-dates its frozen BYR rate each week. (#745)
 - National Bank of the Republic of North Macedonia's ECU quotes, labelled XBA until May 1999. (#747)
-- National Bank of the Republic of Belarus history from July 2016.
-- Bulgarian lev rates from the National Bank of the Republic of Belarus, to December 2025.
-- National Bank of Kazakhstan history from November 1999.
-- Bank of Tanzania history from June 1999.
-- Full backfills keep the first days of CBAR, HNB and BCCH history.
+- National Bank of the Republic of Belarus history from July 2016. (#748)
+- Bulgarian lev rates from the National Bank of the Republic of Belarus, to December 2025. (#748)
+- National Bank of Kazakhstan history from November 1999. (#748)
+- Bank of Tanzania history from June 1999. (#748)
+- Full backfills keep the first days of CBAR, HNB and BCCH history. (#748)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
