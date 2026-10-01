@@ -18,10 +18,21 @@ class Provider
       # redenominated on 2006-01-01, but LB kept quoting old manat through 2006-01-06 and jumped 5000x on 2006-01-09.
       # The Turkmen manat switched on the official date: 10000 "TMT" = 1.7354 LTL on 2008-12-31, 10 TMT = 8.677 LTL on
       # 2009-01-01. So did the Belarusian ruble, whose BYR series holds the 1994 ruble until 1999-12-31 (0.000004444
-      # LTL) and the 2000 ruble from 2000-01-03 (0.0044444).
+      # LTL) and the 2000 ruble from 2000-01-03 (0.0044444). The rest trail by a day or more:
+      #
+      #   1000 "PLN" = 0.1641 LTL on 1995-01-02, 1 PLN = 1.646 on 1995-01-03       10000:1 on 1995-01-01
+      #   1000 "RUB" = 0.6694 LTL on 1998-01-02, 1 RUB = 0.6672 on 1998-01-05      1000:1 on 1998-01-01
+      #   1000 "BGN" = 2.1467 LTL on 1999-07-06, 1 BGN = 2.0952 on 1999-07-07      1000:1 on 1999-07-05
+      #   100000 "RON" = 9.5538 LTL on 2005-07-01, 10 RON = 9.5814 on 2005-07-04   10000:1 on 2005-07-01
+      #   10000 "MZN" = 1.0536 LTL on 2006-07-07, 10 MZN = 1.0531 on 2006-07-10    1000:1 on 2006-07-01
       PREDECESSORS = {
         "AZN" => ["AZM", Date.new(2006, 1, 9)],
+        "BGN" => ["BGL", Date.new(1999, 7, 7)],
         "BYR" => ["BYB", Date.new(2000, 1, 1)],
+        "MZN" => ["MZM", Date.new(2006, 7, 10)],
+        "PLN" => ["PLZ", Date.new(1995, 1, 3)],
+        "RON" => ["ROL", Date.new(2005, 7, 4)],
+        "RUB" => ["RUR", Date.new(1998, 1, 5)],
         "TMT" => ["TMM", Date.new(2009, 1, 1)],
       }.freeze
 
