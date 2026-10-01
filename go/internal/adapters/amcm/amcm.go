@@ -114,9 +114,16 @@ func parse(data []byte) ([]adapter.Rate, error) {
 		if rate <= 0 {
 			continue
 		}
-		date, err := adapter.ParseDate(*r.Date, time.DateTime, time.DateOnly)
+		// Before mid-2012 rows carry a time of day ("2012-05-14 14:00:00").
+		// Ruby's Date.parse drops it; keeping it would put the row after
+		// midnight of upto and out of the window.
+		s := *r.Date
+		if len(s) > len(time.DateOnly) {
+			s = s[:len(time.DateOnly)]
+		}
+		date, err := time.Parse(time.DateOnly, s)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("unrecognised date %q", *r.Date)
 		}
 		if alias, ok := codeAliases[code]; ok {
 			code = alias

@@ -37,6 +37,16 @@ requests, 99 matched, 57 Go v2 answers conform to the document.
 holds only fixture data (3 providers, 8,840 rates, 1.9 GB of free pages), the signature of a Ruby spec run without
 `APP_ENV=test` wiping it. Both apps matched on it too, apart from the two issues above, but it exercises little.
 
+## Backfill fixes
+
+A full local backfill from an empty database turned up these gaps:
+
+- Every window boundary lost a day, and a first backfill skipped `coverage_start` (see core-provider.md). Fixed on both
+  sides.
+- AMCM stamps rows before mid-2012 with a time of day (`2012-05-14 14:00:00`). Go kept it, which put the row after
+  midnight of `upto` and dropped each window's last day. It now keeps the date only, as Ruby's `Date.parse` does.
+  Go only.
+
 ## Left outside go/
 
 The CI workflow (`.github/workflows/ci.yml`), `Procfile` and the root Dockerfile still call `bundle exec rake`,

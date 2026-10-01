@@ -156,6 +156,23 @@ func TestFetchRequestParamsAndWindow(t *testing.T) {
 	}
 }
 
+func TestFetchKeepsATimeStampedRowDatedOnUpto(t *testing.T) {
+	client := &http.Client{Transport: roundTrip(func(r *http.Request) (*http.Response, error) {
+		body := `{"message":"OK","data":[
+			{"date":"2012-05-11 14:00:00","currency":"USD","unit":1.0,"usdMeanValue":8.01},
+			{"date":"2012-05-14 14:00:00","currency":"USD","unit":1.0,"usdMeanValue":8.02}
+		]}`
+		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(body)), Request: r}, nil
+	})}
+	rates, err := New(client).Fetch(context.Background(), adapter.Date(2012, 5, 11), adapter.Date(2012, 5, 14))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(rates) != 2 || !rates[0].Date.Equal(adapter.Date(2012, 5, 11)) || !rates[1].Date.Equal(adapter.Date(2012, 5, 14)) {
+		t.Errorf("rates = %+v, want 2012-05-11 and 2012-05-14 at midnight", rates)
+	}
+}
+
 func TestParseStringValuesAndInvalidRows(t *testing.T) {
 	rates := mustParse(t, `{"message":"OK","data":[
 		{"date":"2026-05-22","currency":"KRW","unit":"100","usdMeanValue":"0.5412"},
