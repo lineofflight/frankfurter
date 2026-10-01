@@ -12,6 +12,11 @@ class Provider
     class BDI < Adapter
       URL = "https://tassidicambio.bancaditalia.it/terzevalute-wf-web/rest/v1.0/dailyRates"
 
+      # BDI labels its old-afghani quotes AFN. Until 2004-03-31 they hold the frozen official rate of 4750 AFA to the
+      # dollar (5806.4 per euro with the dollar at 1.2224), long past the October 2002 redenomination. On 2004-04-01
+      # they switch to 47.5 new afghani to the dollar (58.52 per euro at 1.232).
+      PREDECESSORS = { "AFN" => ["AFA", Date.new(2004, 4, 1)] }.freeze
+
       class << self
         def backfill_range = 30
       end
@@ -51,7 +56,7 @@ class Provider
 
           date = Date.parse(date_str)
 
-          { date:, base: "EUR", quote: code, rate: rate_value }
+          { date:, base: "EUR", quote: historical_code(code, date), rate: rate_value }
         end
       end
 

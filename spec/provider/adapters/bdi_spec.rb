@@ -43,6 +43,21 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:date]).must_equal(Date.new(2026, 2, 10))
       end
 
+      it "maps old-afghani rows labelled AFN to AFA before BDI's switch" do
+        csv = <<~CSV
+          Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
+          AFGHANISTAN (Islamic State of),Afghani,AFN,115,5806.4,Foreign currency amount for 1 Euro.,2004-03-31
+          AFGHANISTAN (Islamic State of),Afghani,AFN,115,58.52,Foreign currency amount for 1 Euro.,2004-04-01
+        CSV
+
+        records = adapter.parse(csv)
+
+        _(records.map { |r| [r[:date].to_s, r[:quote], r[:rate]] }).must_equal([
+          ["2004-03-31", "AFA", 5806.4],
+          ["2004-04-01", "AFN", 58.52],
+        ])
+      end
+
       it "skips N.A. rates" do
         csv = <<~CSV
           Country,Currency,ISO Code,UIC Code,Rate,Rate convention,Reference date (CET)
