@@ -17,13 +17,22 @@ class Provider
       # The range endpoint returns only the codes it is asked for, and the latest bulletin lists only what CBA still
       # quotes, so the series it has since dropped are requested by name: the legacy euro currencies, the litas, lats,
       # kroon and koruna, and the currencies it stopped quoting after 2022-02-28. Left out are TAD and TMM, which copy
-      # the TJS and TMT series through 2000, and the TMT, TRL, ROL and RON series, whose values stray from other sources
-      # by 2x to 500x for months or years at a time.
+      # the TJS and TMT series through 2000, and the TRL and ROL series, whose values stray from other sources by 2x to
+      # 500x for months or years at a time.
       DROPPED_CODES = [
         "ARP", "ARS", "ATS", "BEF", "BGL", "BGN", "BRC", "BYR", "DEM", "DKK", "EEK", "EGP", "ESP", "FIM", "FRF", "GRD",
-        "HUF", "IEP", "ILS", "ISK", "ITL", "KRW", "KWD", "LBP", "LTL", "LVL", "MDL", "MXN", "NLG", "PLZ", "PTE", "SAR",
-        "SDR", "SKK", "SYP", "TRY", "USM",
+        "HUF", "IEP", "ILS", "ISK", "ITL", "KRW", "KWD", "LBP", "LTL", "LVL", "MDL", "MXN", "NLG", "PLZ", "PTE", "RON",
+        "SAR", "SDR", "SKK", "SYP", "TMT", "TRY", "USM",
       ].freeze
+
+      # Series CBA gets right only from a later date, keyed by label with the first date kept. RON stays about five
+      # times off other sources until 31.07 AMD on 2005-10-11 gives way to 149.75 on 2005-10-12, and TMT holds the old
+      # manat per 100 until 2.82 AMD on 2010-04-01 gives way to 141.09 on 2010-04-02. From then on CBA's RON is a median
+      # 0.2% from 10 to 13 other providers, and its TMT tracks the 2.85 and 3.5 dollar pegs.
+      SERIES_START = {
+        "RON" => Date.new(2005, 10, 12),
+        "TMT" => Date.new(2010, 4, 2),
+      }.freeze
 
       # Labels CBA uses for a current currency: retired codes for the Argentine peso, lev, real and zloty (its history
       # starts in 2000, after each of them was redenominated), SDR for the XDR, and USM for the Uzbek som. Each hands
@@ -119,6 +128,8 @@ class Provider
             next unless iso
 
             date = Date.parse(row.locate("RateDate").first.text)
+            next if (start = SERIES_START[iso]) && date < start
+
             base = historical_code(ALIASES.fetch(iso, iso), date)
             { date:, base:, quote: "AMD", rate: extract_rate(row, iso, date) }
           end
