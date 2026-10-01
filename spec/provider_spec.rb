@@ -376,7 +376,7 @@ describe Provider do
       end
 
       it "stores nothing dated before coverage_start" do
-        # LB's archive carries a 1994-03-31 row, one day before the 1994-04-01 it starts publishing from.
+        # An adapter that reads after as inclusive also returns the day before coverage_start.
         stray_adapter = Class.new(Provider::Adapters::Adapter) do
           define_method(:fetch) do |after: nil, upto: nil|
             (after..(upto || Date.today)).map { |date| { date:, base: "EUR", quote: "USD", rate: 1.1 } }

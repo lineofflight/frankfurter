@@ -23,13 +23,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HMRC, IMF, DNB, MAS and CBAR full backfills no longer fail at their coverage start. (#744)
 - Successor currencies quoted under retired codes in NBU, BNA, BAM, BDI, CBG, CBU, LB, NBP and BOTA history. (#745)
 - National Bank of the Kyrgyz Republic no longer re-dates its frozen BYR rate each week. (#745)
+- National Bank of the Republic of North Macedonia's ECU quotes, labelled XBA until May 1999. (#747)
+- National Bank of the Republic of Belarus history from July 2016. (#748)
+- Bulgarian lev rates from the National Bank of the Republic of Belarus, to December 2025. (#748)
+- National Bank of Kazakhstan history from November 1999. (#748)
+- Bank of Tanzania history from June 1999. (#748)
+- Full backfills keep the first days of CBAR, HNB and BCCH history. (#748)
+- Banco Central de Costa Rica history from 1983.
+- One-day provider typos no longer skew blends. (#749)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
 and skips rows already stored, so it is safe but slow.
 
-Blends keep their old values for the relabelled history until rebuilt. Run `bundle exec rake blend:rebuild` once after
-upgrading; it rebuilds in place, so queries keep reading the tables while it runs.
+Blends keep their old values for the relabelled history and the screened typos until rebuilt. Run
+`bundle exec rake blend:rebuild` once after upgrading; it rebuilds in place, so queries keep reading the tables while it
+runs.
 
 ## [2.6.0] - 2026-09-30
 
