@@ -132,6 +132,28 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.000004444, 1e-12)
       end
 
+      it "restores predecessor codes until LB's values switch to the redenominated unit" do
+        quotes = [
+          ["1995-01-02", "PLN", 1000, 0.1641], ["1995-01-03", "PLN", 1, 1.646],
+          ["1998-01-02", "RUB", 1000, 0.6694], ["1998-01-05", "RUB", 1, 0.6672],
+          ["1999-07-06", "BGN", 1000, 2.1467], ["1999-07-07", "BGN", 1, 2.0952],
+          ["2005-07-01", "RON", 100_000, 9.5538], ["2005-07-04", "RON", 10, 9.5814],
+          ["2006-07-07", "MZN", 10_000, 1.0536], ["2006-07-10", "MZN", 10, 1.0531],
+        ]
+        rates = quotes.map do |date, code, amount, ltl|
+          "<FxRate><Tp>LT</Tp><Dt>#{date}</Dt><CcyAmt><Ccy>LTL</Ccy><Amt>#{ltl}</Amt></CcyAmt>" \
+            "<CcyAmt><Ccy>#{code}</Ccy><Amt>#{amount}</Amt></CcyAmt></FxRate>"
+        end
+        xml = %(<?xml version="1.0" encoding="utf-8"?><FxRates xmlns="http://www.lb.lt/WebServices/FxRates">#{rates.join}</FxRates>)
+
+        records = adapter.parse(xml)
+        bases = ["PLZ", "PLN", "RUR", "RUB", "BGL", "BGN", "ROL", "RON", "MZM", "MZN"]
+
+        _(records.map { |r| r[:base] }).must_equal(bases)
+        _(records.first[:rate]).must_be_close_to(0.0001641, 1e-10)
+        _(records[1][:rate]).must_be_close_to(1.646, 1e-9)
+      end
+
       it "parses EU-type XML with correct base and quote" do
         xml = <<~XML
           <?xml version="1.0" encoding="utf-8"?>
