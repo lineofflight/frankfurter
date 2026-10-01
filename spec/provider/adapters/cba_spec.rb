@@ -107,6 +107,18 @@ class Provider < Sequel::Model(:providers)
         _(byn[Date.new(2016, 10, 25)]).must_equal(249.91)
       end
 
+      it "takes the leu from the day CBA gets it right" do
+        dataset = adapter.fetch(after: Date.new(2005, 10, 11), upto: Date.new(2005, 10, 12))
+
+        _(rates(dataset, "RON")).must_equal(Date.new(2005, 10, 12) => 149.75)
+      end
+
+      it "takes the manat from the day CBA gets it right" do
+        dataset = adapter.fetch(after: Date.new(2010, 4, 1), upto: Date.new(2010, 4, 2))
+
+        _(rates(dataset, "TMT")).must_equal(Date.new(2010, 4, 2) => 141.09)
+      end
+
       it "collapses the SDR and XDR duplicates" do
         dataset = adapter.fetch(after: Date.new(2017, 3, 17), upto: Date.new(2017, 3, 17))
 
