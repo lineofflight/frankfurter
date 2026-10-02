@@ -87,6 +87,20 @@ class Provider < Sequel::Model(:providers)
         _(records).must_be_empty
       end
 
+      it "skips the LIQ interest rate where the archive files it like a currency" do
+        json = <<~JSON
+          {"message":"OK","data":[
+            {"id":1,"date":"1994-03-31 14:00:00","currency":"LIQ","unit":1.0,"usdMean":"3.1250","usdMeanValue":3.12500000,"bid":"3.125"},
+            {"id":2,"date":"2012-10-19 14:00:00","currency":"LIQ","unit":1.0,"usdMean":"0.0100","usdMeanValue":0.01000000,"bid":"0.01"},
+            {"id":3,"date":"2012-10-19 14:00:00","currency":"HKD","unit":1.0,"usdMean":"1.0300","usdMeanValue":1.03000000,"bid":"0"}
+          ]}
+        JSON
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["HKD"])
+      end
+
       it "skips records with non-positive rates" do
         json = <<~JSON
           {"message":"OK","data":[

@@ -35,6 +35,7 @@
   { "iso_code": "XOF", "name": "West African CFA Franc" },
   { "iso_code": "XPF", "name": "CFP Franc" },
   { "iso_code": "CMD", "name": "COMESA Dollar" },
+  { "iso_code": "XCU", "name": "Czech-Slovak Clearing ECU" },
   { "iso_code": "ADP", "name": "Andorran Peseta", "symbol": "ADP", "subunit_to_unit": 1, "iso_numeric": "020" },
   { "iso_code": "AFA", "name": "Afghan Afghani (1927–2002)", "symbol": "AFA", "subunit_to_unit": 100, "iso_numeric": "004" },
   { "iso_code": "AOR", "name": "Angolan Readjusted Kwanza (1995–1999)", "symbol": "AOR", "subunit_to_unit": 100, "iso_numeric": "982" },
@@ -50,5 +51,6 @@
   { "iso_code": "UAK", "name": "Ukrainian Karbovanets", "symbol": "UAK", "subunit_to_unit": 100, "iso_numeric": "804" },
   { "iso_code": "VEB", "name": "Venezuelan Bolívar (1871–2008)", "symbol": "VEB", "subunit_to_unit": 100, "iso_numeric": "862" },
   { "iso_code": "YUM", "name": "Yugoslavian New Dinar (1994–2002)", "symbol": "YUM", "subunit_to_unit": 100, "iso_numeric": "891" },
+  { "iso_code": "YUN", "name": "Yugoslavian Convertible Dinar (1990–1992)", "symbol": "YUN", "subunit_to_unit": 100, "iso_numeric": "890" },
   { "iso_code": "ZRN", "name": "Zairean New Zaire (1993–1998)", "symbol": "ZRN", "subunit_to_unit": 100, "iso_numeric": "180" }
 ]

@@ -39,6 +39,13 @@ class Provider
         "TMM" => Date.new(2009, 1, 6),
       }.freeze
 
+      # Between the Tajik ruble's last row on 2000-10-01 and the somoni's first under TJS on 2002-12-01, the archive
+      # files the somoni under ZAL, the financial rand South Africa abolished in 1995. ZAL fills that gap exactly,
+      # tracks the somoni's official rate (1 "ZAL" = 2.4713 UAH on 2000-11-01 with USD at 5.4369, or 2.20 to the dollar,
+      # as CBA, CBAR and CBR have the somoni that day) and runs into TJS: 1 "ZAL" = 1.8052 UAH on 2002-11-01, 100 TJS =
+      # 180.5263 on 2002-12-01. The rand itself was worth 0.45 to 0.72 UAH.
+      ALIASES = { "ZAL" => "TJS" }.freeze
+
       class << self
         def backfill_range = 365
       end
@@ -71,7 +78,7 @@ class Provider
           rate = row.fetch("rate").to_f
           next if rate.zero? || units.zero?
 
-          { date:, base: historical_code(iso, date), quote: "UAH", rate: rate / units }
+          { date:, base: historical_code(ALIASES.fetch(iso, iso), date), quote: "UAH", rate: rate / units }
         end
       end
     end
