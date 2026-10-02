@@ -1,0 +1,12 @@
+{
+  "key": "BCT",
+  "name": "Banque Centrale de Tunisie",
+  "country_code": "TN",
+  "rate_type": "reference rate",
+  "pivot_currency": "TND",
+  "data_url": "https://www.bct.gov.tn/bct/siteprod/cours_archive.jsp",
+  "terms_url": null,
+  "publish_schedule": "*/30 17-19 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2004-12-23"
+}

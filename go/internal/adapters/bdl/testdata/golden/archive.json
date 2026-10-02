@@ -1,0 +1,476 @@
+{
+  "adapter": "BDL",
+  "cassette": "bdl",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 10221.0
+    },
+    {
+      "base": "CAD",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 11310.51
+    },
+    {
+      "base": "CHF",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 17699.12
+    },
+    {
+      "base": "EUR",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 16504.5
+    },
+    {
+      "base": "GBP",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 19063.5
+    },
+    {
+      "base": "JPY",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 105.89
+    },
+    {
+      "base": "USD",
+      "date": "2024-01-02",
+      "quote": "LBP",
+      "rate": 15000.0
+    },
+    {
+      "base": "AUD",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 9792.0
+    },
+    {
+      "base": "CAD",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 11034.28
+    },
+    {
+      "base": "CHF",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 16567.26
+    },
+    {
+      "base": "EUR",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 16245.0
+    },
+    {
+      "base": "GBP",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 18946.5
+    },
+    {
+      "base": "JPY",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 99.23
+    },
+    {
+      "base": "USD",
+      "date": "2024-03-27",
+      "quote": "LBP",
+      "rate": 15000.0
+    },
+    {
+      "base": "AUD",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 58112.35
+    },
+    {
+      "base": "CAD",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 65813.66
+    },
+    {
+      "base": "CHF",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 98851.34
+    },
+    {
+      "base": "EUR",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 96534.7
+    },
+    {
+      "base": "GBP",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 112868.45
+    },
+    {
+      "base": "JPY",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 591.11
+    },
+    {
+      "base": "USD",
+      "date": "2024-03-28",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 58309.25
+    },
+    {
+      "base": "CAD",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 63805.52
+    },
+    {
+      "base": "CHF",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 112536.15
+    },
+    {
+      "base": "EUR",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 103811.05
+    },
+    {
+      "base": "GBP",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 117826.75
+    },
+    {
+      "base": "JPY",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 578.05
+    },
+    {
+      "base": "USD",
+      "date": "2025-11-17",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 58192.9
+    },
+    {
+      "base": "CAD",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 63778.24
+    },
+    {
+      "base": "CHF",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 112267.94
+    },
+    {
+      "base": "EUR",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 103658.9
+    },
+    {
+      "base": "GBP",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 117611.95
+    },
+    {
+      "base": "JPY",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 575.9
+    },
+    {
+      "base": "USD",
+      "date": "2025-11-18",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 64090.95
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 64407.02
+    },
+    {
+      "base": "CHF",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 110671.45
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 103828.95
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 121227.75
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 560.43
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-31",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 63894.05
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 64518.45
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 110521.12
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 103784.2
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 121218.8
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 559.48
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-01",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 63750.85
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 64212.94
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 109815.95
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 103587.3
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 120816.05
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 559.9
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-02",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 64323.65
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 64808.11
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 110534.77
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 103864.75
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 120789.2
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 571.74
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-03",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 64448.95
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 64850.37
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 110698.82
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 104016.9
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 121191.95
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 572.47
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-04",
+      "quote": "LBP",
+      "rate": 89500.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 64610.05
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 64728.43
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 110562.08
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 104016.9
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 121147.2
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 579.33
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-07",
+      "quote": "LBP",
+      "rate": 89500.0
+    }
+  ]
+}

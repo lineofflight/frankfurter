@@ -1,0 +1,12 @@
+{
+  "key": "BOE",
+  "name": "Bank of England",
+  "country_code": "GB",
+  "rate_type": "spot rate",
+  "pivot_currency": "GBP",
+  "data_url": "https://www.bankofengland.co.uk/boeapps/database/Rates.asp?into=GBP",
+  "terms_url": "https://www.bankofengland.co.uk/legal",
+  "publish_schedule": "*/30 16-18 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2000-01-04"
+}

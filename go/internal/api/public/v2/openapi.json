@@ -1,0 +1,631 @@
+{
+  "openapi": "3.1.2",
+  "info": {
+    "title": "Frankfurter API",
+    "description": "Frankfurter is an open-source API for current and historical foreign exchange rates published by central banks.",
+    "version": "2.1.1",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/lineofflight/frankfurter/blob/main/LICENSE"
+    },
+    "contact": {
+      "url": "https://github.com/lineofflight/frankfurter/issues"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.frankfurter.dev/v2"
+    }
+  ],
+  "paths": {
+    "/coverage": {
+      "get": {
+        "operationId": "getCoverage",
+        "summary": "Get queryable history coverage",
+        "description": "Returns the first and last eligible observation dates at which /rates with the same base, quotes and providers returns at least one record. Defaults to the EUR-based daily blended feed. Supplying providers selects their history, including non-daily observations. Null bounds mean no queryable pair. Bounds are request dates, not necessarily returned record dates: a carried quote can predate the bridge required to convert its base. Interior gaps are possible. Bounds do not extend beyond stored observation dates merely because carry-forward can answer later requests. With several quotes, at least one must be available. Only base, quotes and providers are accepted. Use start_date from this endpoint for a headline describing default rate history; provider and currency publication dates are not pair coverage.",
+        "parameters": [
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/providers" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coverage of the selected rate query",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Coverage" }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/rates": {
+      "get": {
+        "operationId": "getRates",
+        "summary": "Get exchange rates",
+        "description": "Returns exchange rates blended across providers. Without date params, returns the latest rates. Each record is a single currency pair. The response includes an identity record for the base currency (base equals quote, rate 1), subject to the quotes filter like any other record. Daily date ranges of any length are served, including full history. Limit: requests using `providers` or `expand=providers` recompute the blend per date, so at daily granularity they return 422 for ranges longer than 5 years. A single provider is exempt and serves any range. With `providers` naming 2 to 5 providers, a `quotes` list of at most 5 currencies lifts the cap; without `providers`, `expand=providers` ranges compute every currency regardless of `quotes`, so aggregate with `group=week` or `group=month`, add `providers`, or split the range into shorter requests.",
+        "parameters": [
+          { "$ref": "#/components/parameters/date" },
+          { "$ref": "#/components/parameters/from" },
+          { "$ref": "#/components/parameters/to" },
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/providers" },
+          { "$ref": "#/components/parameters/group" },
+          { "$ref": "#/components/parameters/expand" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Rate" }
+                },
+                "example": [
+                  { "date": "2024-01-15", "base": "EUR", "quote": "EUR", "rate": 1.0 },
+                  { "date": "2024-01-15", "base": "EUR", "quote": "GBP", "rate": 0.8623 },
+                  { "date": "2024-01-15", "base": "EUR", "quote": "USD", "rate": 1.089 }
+                ]
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "NDJSON stream of Rate objects, one JSON object per line"
+                },
+                "example": "{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"USD\", \"rate\": 1.089 }\n{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"GBP\", \"rate\": 0.8623 }\n"
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/rate/{base}/{quote}": {
+      "get": {
+        "operationId": "getRate",
+        "summary": "Get a single exchange rate pair",
+        "description": "Returns the blended exchange rate for a single currency pair. Without a date param, returns the latest rate. A same-currency pair returns the identity rate of 1.",
+        "parameters": [
+          {
+            "name": "base",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "EUR" }
+          },
+          {
+            "name": "quote",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "USD" }
+          },
+          { "$ref": "#/components/parameters/date" },
+          { "$ref": "#/components/parameters/providers" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rate",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Rate" },
+                "example": { "date": "2026-03-25", "base": "EUR", "quote": "USD", "rate": 1.1568 }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/providers/{provider}": {
+      "get": {
+        "operationId": "getProvider",
+        "summary": "Get a provider",
+        "description": "One entry from `/providers`, by key (case-insensitive).",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": { "type": "string", "example": "ECB" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provider",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/providers/{provider}/rates": {
+      "get": {
+        "operationId": "getProviderRates",
+        "summary": "Get a provider's exchange rates",
+        "description": "Returns one provider's rates as published, unblended. Identical to `/rates?providers={provider}`: same parameters, same records, same limits. Native-base records carry the provider's published digits; other bases are derived. Sending `providers` here returns 422. Unknown provider returns 404.",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": {
+              "type": "string",
+              "example": "ECB"
+            }
+          },
+          { "$ref": "#/components/parameters/date" },
+          { "$ref": "#/components/parameters/from" },
+          { "$ref": "#/components/parameters/to" },
+          { "$ref": "#/components/parameters/base" },
+          { "$ref": "#/components/parameters/quotes" },
+          { "$ref": "#/components/parameters/group" },
+          { "$ref": "#/components/parameters/expand" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Rate" }
+                },
+                "example": [
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "EUR",
+                    "rate": 1.0
+                  },
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "GBP",
+                    "rate": 0.8623
+                  },
+                  {
+                    "date": "2024-01-15",
+                    "base": "EUR",
+                    "quote": "USD",
+                    "rate": 1.089
+                  }
+                ]
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string",
+                  "description": "NDJSON stream of Rate objects, one JSON object per line"
+                },
+                "example": "{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"USD\", \"rate\": 1.089 }\n{ \"date\": \"2024-01-15\", \"base\": \"EUR\", \"quote\": \"GBP\", \"rate\": 0.8623 }\n"
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/providers/{provider}/rate/{base}/{quote}": {
+      "get": {
+        "operationId": "getProviderRate",
+        "summary": "Get a single pair from a provider",
+        "description": "Returns one provider's rate for a single currency pair. Identical to `/rate/{base}/{quote}?providers={provider}`. The pair may be published directly or derived from the provider's own rates for both currencies. Returns 404 when the provider has no data for either currency on the date.",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "schema": {
+              "type": "string",
+              "example": "ECB"
+            }
+          },
+          {
+            "name": "base",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "EUR"
+            }
+          },
+          {
+            "name": "quote",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            }
+          },
+          { "$ref": "#/components/parameters/date" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange rate",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Rate" },
+                "example": {
+                  "date": "2026-03-25",
+                  "base": "EUR",
+                  "quote": "USD",
+                  "rate": 1.1568
+                }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "503": { "$ref": "#/components/responses/ServiceUnavailable" }
+        }
+      }
+    },
+    "/currency/{code}": {
+      "get": {
+        "operationId": "getCurrency",
+        "summary": "Get a single currency",
+        "description": "Returns details for a single currency, including provider information or peg metadata.",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "USD" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Currency details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CurrencyDetail" },
+                "example": { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "providers": ["ECB", "BOC", "FED"] }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/currencies": {
+      "get": {
+        "operationId": "getCurrencies",
+        "summary": "Get available currencies",
+        "description": "Returns available currencies with their names and publication date ranges. Without providers, the catalogue covers eligible daily sources plus pegged currencies; scope=all also includes historical currencies. With providers, it covers recognized currencies published by those sources, including period-only history. These dates do not guarantee a queryable base/quote pair; use /coverage with matching query filters. By default, only active currencies are included.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Set to 'all' to include legacy currencies. Omit for the default list. Other values, including an empty string, return 422.",
+            "required": false,
+            "schema": { "type": "string", "enum": ["all"] }
+          },
+          { "$ref": "#/components/parameters/providers" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available currencies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Currency" }
+                },
+                "example": [
+                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "start_date": "1999-01-04", "end_date": "2026-03-17" },
+                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "start_date": "1999-01-04", "end_date": "2026-03-17" }
+                ]
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      }
+    },
+    "/providers": {
+      "get": {
+        "operationId": "getProviders",
+        "summary": "Get available data providers",
+        "description": "Returns available exchange rate data providers with their publication coverage. A provider start_date can predate the daily blend or the availability of a requested base or quote. Use /coverage for queryable history.",
+        "responses": {
+          "200": {
+            "description": "Available providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Provider" }
+                },
+                "example": [
+                  { "key": "ECB", "name": "European Central Bank", "country_code": "EU", "rate_type": "reference", "pivot_currency": "EUR", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "date": {
+        "name": "date",
+        "in": "query",
+        "description": "Specific date (YYYY-MM-DD). Cannot be combined with from/to.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "example": "2024-01-15"
+        }
+      },
+      "from": {
+        "name": "from",
+        "in": "query",
+        "description": "Start of date range (YYYY-MM-DD)",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "example": "2024-01-01"
+        }
+      },
+      "to": {
+        "name": "to",
+        "in": "query",
+        "description": "End of date range (YYYY-MM-DD). Defaults to today.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "example": "2024-01-31"
+        }
+      },
+      "base": {
+        "name": "base",
+        "in": "query",
+        "description": "Base currency (default: EUR)",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "EUR",
+          "example": "USD"
+        }
+      },
+      "quotes": {
+        "name": "quotes",
+        "in": "query",
+        "description": "Comma-separated list of quote currencies to include",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "USD,GBP,JPY"
+        }
+      },
+      "providers": {
+        "name": "providers",
+        "in": "query",
+        "description": "Comma-separated list of data providers to include. A single provider includes its stored non-currency series. Selecting multiple providers blends only registered currencies and accounting units.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "ECB,TCMB"
+        }
+      },
+      "group": {
+        "name": "group",
+        "in": "query",
+        "description": "Downsample rates by time period. Only applies to date ranges.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["week", "month"],
+          "example": "month"
+        }
+      },
+      "expand": {
+        "name": "expand",
+        "in": "query",
+        "description": "Comma-separated list of optional fields to include per record. Currently supports `providers`, which adds an array of `{ key, date, rate }` objects per record showing each provider's individual observation date and rate. Outliers excluded from the blend (and providers whose rate was overridden by a currency peg) are flagged with `excluded: true`. The field is omitted on synthesized peg rows where no provider published the quote. In CSV output, the `providers` column is encoded as `KEY:RATE` pairs joined by `|`, with a trailing `*` on excluded entries (e.g. `ECB:0.92|FED:1.50*`).",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["providers"],
+          "example": "providers"
+        }
+      }
+    },
+    "schemas": {
+      "Rate": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the rate"
+          },
+          "base": {
+            "type": "string",
+            "description": "Base currency or accounting unit code"
+          },
+          "quote": {
+            "type": "string",
+            "description": "Quote currency or accounting unit code"
+          },
+          "rate": {
+            "type": "number",
+            "description": "Exchange rate value",
+            "exclusiveMinimum": 0
+          },
+          "providers": {
+            "type": "array",
+            "description": "Per-provider rates for this pair. Present only when `expand=providers` is set. Each entry has the provider's observation date and published rate (rebased to the row's base). Entries with `excluded: true` did not contribute to the blended `rate` — either flagged as outliers by the consensus filter, or overridden by a currency peg. A one-day typo in a provider's series is left out, so its entry shows the observation before it. Omitted on synthesized peg rows where no provider published the quote.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": { "type": "string", "description": "Provider key" },
+                "date": { "type": "string", "format": "date", "description": "Provider observation date used for this entry" },
+                "rate": { "type": "number", "exclusiveMinimum": 0, "description": "Provider's rate, rebased to the row's base" },
+                "excluded": { "type": "boolean", "description": "Present and true when this entry did not contribute to the blended rate" }
+              },
+              "required": ["key", "date", "rate"]
+            }
+          }
+        },
+        "required": ["date", "base", "quote", "rate"]
+      },
+      "Coverage": {
+        "type": "object",
+        "properties": {
+          "base": { "type": "string", "description": "Requested base currency, EUR by default" },
+          "quotes": { "type": ["array", "null"], "items": { "type": "string" }, "description": "Requested quotes, or null for all" },
+          "providers": { "type": ["array", "null"], "items": { "type": "string" }, "description": "Selected providers, or null for the default daily blend" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "First eligible observation date with a nonempty matching rates query" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Last eligible observation date with a nonempty matching rates query" }
+        },
+        "required": ["base", "quotes", "providers", "start_date", "end_date"]
+      },
+      "Currency": {
+        "type": "object",
+        "properties": {
+          "iso_code": { "type": "string", "description": "Currency or accounting unit code" },
+          "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
+          "name": { "type": "string", "description": "Full currency name" },
+          "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date; use /coverage for queryable pairs" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date; use /coverage for queryable pairs" }
+        },
+        "required": ["iso_code", "name"]
+      },
+      "CurrencyDetail": {
+        "type": "object",
+        "properties": {
+          "iso_code": { "type": "string", "description": "Currency or accounting unit code" },
+          "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
+          "name": { "type": "string", "description": "Full currency name" },
+          "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "providers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Provider keys that publish this currency"
+          },
+          "peg": {
+            "type": "object",
+            "properties": {
+              "base": { "type": "string" },
+              "rate": { "type": "number" },
+              "authority": { "type": "string" },
+              "source": { "type": "string", "format": "uri" }
+            },
+            "description": "Peg metadata, present only for pegged currencies"
+          }
+        },
+        "required": ["iso_code", "name"]
+      },
+      "Provider": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string", "description": "Provider identifier" },
+          "name": { "type": "string", "description": "Full provider name" },
+          "country_code": { "type": ["string", "null"], "description": "ISO 3166-1 alpha-2 country code" },
+          "rate_type": { "type": ["string", "null"], "description": "Official rate type as used by the source" },
+          "pivot_currency": { "type": ["string", "null"], "description": "Base currency for published rates" },
+          "data_url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
+          "terms_url": { "type": ["string", "null"], "format": "uri", "description": "Link to terms of use" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date; use /coverage for queryable pairs" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date; use /coverage for queryable pairs" },
+          "publish_cadence": {
+            "type": ["string", "null"],
+            "enum": ["daily", "weekly", "monthly", "quarterly", null],
+            "description": "How often the provider publishes rates. Determines the unit of publishes_missed: a count of days, ISO weeks, calendar months, or calendar quarters. Null for historical-only providers with no scheduled cadence."
+          },
+          "frequency": {
+          "type": "string",
+          "enum": ["daily", "monthly", "quarterly"],
+          "description": "The period each observation stands for, after SDMX FREQ. A daily value is dated on the day observed. A monthly or quarterly value is dated on the day it takes effect and stands for the period until the next one. Values coarser than daily never enter the blend: query them by provider."
+        },
+        "publishes_missed": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Number of expected publishes missed since end_date, in units of publish_cadence. For daily providers, counts scheduled publish days strictly between end_date and today. For weekly, monthly and quarterly providers, counts ISO weeks, calendar months or calendar quarters between the latest imported bucket and the bucket whose publish window has already started. Null when the provider has no scheduled cadence or no imported data."
+          },
+          "currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Recognised currency codes within their valid date ranges covered by this provider"
+          },
+          "unknown_currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Unreviewed published codes absent from the currency registry. Available through single-provider rates but excluded from blends and the currency catalogue. Known non-currency series do not trigger this alert."
+          }
+        },
+        "required": ["key", "name", "currencies"]
+      }
+    },
+    "responses": {
+      "UnprocessableEntity": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "No data found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "The request deadline expired before the response could be computed, or the worker process is already running its limit of concurrent live daily-range computes (any daily range served live: with providers, with expand=providers, or before the precomputed blend is ready). In the second case a Retry-After header says how many seconds to wait before retrying. Otherwise retry with a narrower request: filter with quotes, aggregate with group, or split the range into shorter requests.",
+        "headers": {
+          "Retry-After": {
+            "description": "Seconds to wait before retrying. Sent when the server is at its limit of concurrent daily range computes.",
+            "schema": { "type": "integer" }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

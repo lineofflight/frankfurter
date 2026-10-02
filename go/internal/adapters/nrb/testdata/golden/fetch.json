@@ -1,0 +1,893 @@
+{
+  "adapter": "NRB",
+  "cassette": "nrb",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 1), upto: Date.new(2026, 4, 5))",
+  "rows": [
+    {
+      "ask": 41.4,
+      "base": "AED",
+      "bid": 41.24,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 41.32
+    },
+    {
+      "ask": 104.51,
+      "base": "AUD",
+      "bid": 104.1,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 104.305
+    },
+    {
+      "ask": 403.29,
+      "base": "BHD",
+      "bid": 401.7,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 402.495
+    },
+    {
+      "ask": 109.06,
+      "base": "CAD",
+      "bid": 108.63,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 108.845
+    },
+    {
+      "ask": 189.93,
+      "base": "CHF",
+      "bid": 189.18,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 189.555
+    },
+    {
+      "ask": 22.01,
+      "base": "CNY",
+      "bid": 21.93,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 21.97
+    },
+    {
+      "ask": 23.34,
+      "base": "DKK",
+      "bid": 23.25,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 23.295
+    },
+    {
+      "ask": 174.38,
+      "base": "EUR",
+      "bid": 173.69,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 174.035
+    },
+    {
+      "ask": 200.85,
+      "base": "GBP",
+      "bid": 200.06,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 200.455
+    },
+    {
+      "ask": 19.39,
+      "base": "HKD",
+      "bid": 19.32,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 19.355
+    },
+    {
+      "ask": 1.6015,
+      "base": "INR",
+      "bid": 1.6,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 1.60075
+    },
+    {
+      "ask": 0.953,
+      "base": "JPY",
+      "bid": 0.949,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 0.951
+    },
+    {
+      "ask": 0.0996,
+      "base": "KRW",
+      "bid": 0.0992,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 0.09939999999999999
+    },
+    {
+      "ask": 495.32,
+      "base": "KWD",
+      "bid": 493.37,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 494.345
+    },
+    {
+      "ask": 37.55,
+      "base": "MYR",
+      "bid": 37.4,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 37.475
+    },
+    {
+      "ask": 394.9,
+      "base": "OMR",
+      "bid": 393.35,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 394.125
+    },
+    {
+      "ask": 41.71,
+      "base": "QAR",
+      "bid": 41.55,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 41.63
+    },
+    {
+      "ask": 40.52,
+      "base": "SAR",
+      "bid": 40.36,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 40.44
+    },
+    {
+      "ask": 15.93,
+      "base": "SEK",
+      "bid": 15.86,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 15.895
+    },
+    {
+      "ask": 117.86,
+      "base": "SGD",
+      "bid": 117.39,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 117.625
+    },
+    {
+      "ask": 4.62,
+      "base": "THB",
+      "bid": 4.61,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 4.615
+    },
+    {
+      "ask": 152.04,
+      "base": "USD",
+      "bid": 151.44,
+      "date": "2026-04-01",
+      "quote": "NPR",
+      "rate": 151.74
+    },
+    {
+      "ask": 41.4,
+      "base": "AED",
+      "bid": 41.24,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 41.32
+    },
+    {
+      "ask": 105.62,
+      "base": "AUD",
+      "bid": 105.21,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 105.415
+    },
+    {
+      "ask": 402.7,
+      "base": "BHD",
+      "bid": 401.11,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 401.905
+    },
+    {
+      "ask": 109.42,
+      "base": "CAD",
+      "bid": 108.98,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 109.2
+    },
+    {
+      "ask": 191.85,
+      "base": "CHF",
+      "bid": 191.09,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 191.47
+    },
+    {
+      "ask": 22.12,
+      "base": "CNY",
+      "bid": 22.03,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 22.075
+    },
+    {
+      "ask": 23.6,
+      "base": "DKK",
+      "bid": 23.51,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 23.555
+    },
+    {
+      "ask": 176.36,
+      "base": "EUR",
+      "bid": 175.66,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 176.01
+    },
+    {
+      "ask": 202.4,
+      "base": "GBP",
+      "bid": 201.6,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 202.0
+    },
+    {
+      "ask": 19.4,
+      "base": "HKD",
+      "bid": 19.32,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 19.36
+    },
+    {
+      "ask": 1.6015,
+      "base": "INR",
+      "bid": 1.6,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 1.60075
+    },
+    {
+      "ask": 0.959,
+      "base": "JPY",
+      "bid": 0.955,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 0.9570000000000001
+    },
+    {
+      "ask": 0.101,
+      "base": "KRW",
+      "bid": 0.1006,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 0.1008
+    },
+    {
+      "ask": 495.65,
+      "base": "KWD",
+      "bid": 493.69,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 494.67
+    },
+    {
+      "ask": 37.76,
+      "base": "MYR",
+      "bid": 37.61,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 37.685
+    },
+    {
+      "ask": 394.96,
+      "base": "OMR",
+      "bid": 393.4,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 394.18
+    },
+    {
+      "ask": 41.7,
+      "base": "QAR",
+      "bid": 41.54,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 41.62
+    },
+    {
+      "ask": 40.51,
+      "base": "SAR",
+      "bid": 40.35,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 40.43
+    },
+    {
+      "ask": 16.19,
+      "base": "SEK",
+      "bid": 16.13,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 16.16
+    },
+    {
+      "ask": 118.55,
+      "base": "SGD",
+      "bid": 118.08,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 118.315
+    },
+    {
+      "ask": 4.67,
+      "base": "THB",
+      "bid": 4.66,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 4.665
+    },
+    {
+      "ask": 152.04,
+      "base": "USD",
+      "bid": 151.44,
+      "date": "2026-04-02",
+      "quote": "NPR",
+      "rate": 151.74
+    },
+    {
+      "ask": 40.64,
+      "base": "AED",
+      "bid": 40.48,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 40.56
+    },
+    {
+      "ask": 102.44,
+      "base": "AUD",
+      "bid": 102.03,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 102.235
+    },
+    {
+      "ask": 395.36,
+      "base": "BHD",
+      "bid": 393.78,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 394.57
+    },
+    {
+      "ask": 107.22,
+      "base": "CAD",
+      "bid": 106.79,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 107.005
+    },
+    {
+      "ask": 186.53,
+      "base": "CHF",
+      "bid": 185.78,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 186.155
+    },
+    {
+      "ask": 21.64,
+      "base": "CNY",
+      "bid": 21.55,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 21.595
+    },
+    {
+      "ask": 23.01,
+      "base": "DKK",
+      "bid": 22.92,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 22.965
+    },
+    {
+      "ask": 171.93,
+      "base": "EUR",
+      "bid": 171.24,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 171.585
+    },
+    {
+      "ask": 196.92,
+      "base": "GBP",
+      "bid": 196.13,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 196.525
+    },
+    {
+      "ask": 19.05,
+      "base": "HKD",
+      "bid": 18.97,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 19.01
+    },
+    {
+      "ask": 1.6015,
+      "base": "INR",
+      "bid": 1.6,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 1.60075
+    },
+    {
+      "ask": 0.934,
+      "base": "JPY",
+      "bid": 0.931,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 0.9324999999999999
+    },
+    {
+      "ask": 0.0984,
+      "base": "KRW",
+      "bid": 0.098,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 0.09820000000000001
+    },
+    {
+      "ask": 486.46,
+      "base": "KWD",
+      "bid": 484.5,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 485.48
+    },
+    {
+      "ask": 36.96,
+      "base": "MYR",
+      "bid": 36.81,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 36.885
+    },
+    {
+      "ask": 387.76,
+      "base": "OMR",
+      "bid": 386.21,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 386.985
+    },
+    {
+      "ask": 40.94,
+      "base": "QAR",
+      "bid": 40.78,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 40.86
+    },
+    {
+      "ask": 39.77,
+      "base": "SAR",
+      "bid": 39.61,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 39.69
+    },
+    {
+      "ask": 15.71,
+      "base": "SEK",
+      "bid": 15.65,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 15.68
+    },
+    {
+      "ask": 115.91,
+      "base": "SGD",
+      "bid": 115.44,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 115.675
+    },
+    {
+      "ask": 4.55,
+      "base": "THB",
+      "bid": 4.53,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 4.54
+    },
+    {
+      "ask": 149.27,
+      "base": "USD",
+      "bid": 148.67,
+      "date": "2026-04-03",
+      "quote": "NPR",
+      "rate": 148.97
+    },
+    {
+      "ask": 40.64,
+      "base": "AED",
+      "bid": 40.48,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 40.56
+    },
+    {
+      "ask": 103.12,
+      "base": "AUD",
+      "bid": 102.71,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 102.915
+    },
+    {
+      "ask": 395.42,
+      "base": "BHD",
+      "bid": 393.83,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 394.625
+    },
+    {
+      "ask": 107.19,
+      "base": "CAD",
+      "bid": 106.76,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 106.975
+    },
+    {
+      "ask": 186.97,
+      "base": "CHF",
+      "bid": 186.22,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 186.595
+    },
+    {
+      "ask": 21.69,
+      "base": "CNY",
+      "bid": 21.61,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 21.65
+    },
+    {
+      "ask": 23.06,
+      "base": "DKK",
+      "bid": 22.96,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 23.01
+    },
+    {
+      "ask": 172.31,
+      "base": "EUR",
+      "bid": 171.62,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 171.965
+    },
+    {
+      "ask": 197.55,
+      "base": "GBP",
+      "bid": 196.76,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 197.155
+    },
+    {
+      "ask": 19.05,
+      "base": "HKD",
+      "bid": 18.97,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 19.01
+    },
+    {
+      "ask": 1.6015,
+      "base": "INR",
+      "bid": 1.6,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 1.60075
+    },
+    {
+      "ask": 0.936,
+      "base": "JPY",
+      "bid": 0.932,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 0.9339999999999999
+    },
+    {
+      "ask": 0.0989,
+      "base": "KRW",
+      "bid": 0.0985,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 0.0987
+    },
+    {
+      "ask": 486.46,
+      "base": "KWD",
+      "bid": 484.5,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 485.48
+    },
+    {
+      "ask": 37.03,
+      "base": "MYR",
+      "bid": 36.88,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 36.955
+    },
+    {
+      "ask": 387.76,
+      "base": "OMR",
+      "bid": 386.21,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 386.985
+    },
+    {
+      "ask": 40.94,
+      "base": "QAR",
+      "bid": 40.78,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 40.86
+    },
+    {
+      "ask": 39.75,
+      "base": "SAR",
+      "bid": 39.59,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 39.67
+    },
+    {
+      "ask": 15.82,
+      "base": "SEK",
+      "bid": 15.76,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 15.79
+    },
+    {
+      "ask": 116.11,
+      "base": "SGD",
+      "bid": 115.65,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 115.88
+    },
+    {
+      "ask": 4.58,
+      "base": "THB",
+      "bid": 4.57,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 4.575
+    },
+    {
+      "ask": 149.27,
+      "base": "USD",
+      "bid": 148.67,
+      "date": "2026-04-04",
+      "quote": "NPR",
+      "rate": 148.97
+    },
+    {
+      "ask": 40.64,
+      "base": "AED",
+      "bid": 40.48,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 40.56
+    },
+    {
+      "ask": 103.12,
+      "base": "AUD",
+      "bid": 102.71,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 102.915
+    },
+    {
+      "ask": 395.42,
+      "base": "BHD",
+      "bid": 393.83,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 394.625
+    },
+    {
+      "ask": 107.19,
+      "base": "CAD",
+      "bid": 106.76,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 106.975
+    },
+    {
+      "ask": 186.97,
+      "base": "CHF",
+      "bid": 186.22,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 186.595
+    },
+    {
+      "ask": 21.69,
+      "base": "CNY",
+      "bid": 21.61,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 21.65
+    },
+    {
+      "ask": 23.06,
+      "base": "DKK",
+      "bid": 22.96,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 23.01
+    },
+    {
+      "ask": 172.31,
+      "base": "EUR",
+      "bid": 171.62,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 171.965
+    },
+    {
+      "ask": 197.55,
+      "base": "GBP",
+      "bid": 196.76,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 197.155
+    },
+    {
+      "ask": 19.05,
+      "base": "HKD",
+      "bid": 18.97,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 19.01
+    },
+    {
+      "ask": 1.6015,
+      "base": "INR",
+      "bid": 1.6,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 1.60075
+    },
+    {
+      "ask": 0.936,
+      "base": "JPY",
+      "bid": 0.932,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 0.9339999999999999
+    },
+    {
+      "ask": 0.0989,
+      "base": "KRW",
+      "bid": 0.0985,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 0.0987
+    },
+    {
+      "ask": 486.46,
+      "base": "KWD",
+      "bid": 484.5,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 485.48
+    },
+    {
+      "ask": 37.03,
+      "base": "MYR",
+      "bid": 36.88,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 36.955
+    },
+    {
+      "ask": 387.76,
+      "base": "OMR",
+      "bid": 386.21,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 386.985
+    },
+    {
+      "ask": 40.94,
+      "base": "QAR",
+      "bid": 40.78,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 40.86
+    },
+    {
+      "ask": 39.75,
+      "base": "SAR",
+      "bid": 39.59,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 39.67
+    },
+    {
+      "ask": 15.82,
+      "base": "SEK",
+      "bid": 15.76,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 15.79
+    },
+    {
+      "ask": 116.11,
+      "base": "SGD",
+      "bid": 115.65,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 115.88
+    },
+    {
+      "ask": 4.58,
+      "base": "THB",
+      "bid": 4.57,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 4.575
+    },
+    {
+      "ask": 149.27,
+      "base": "USD",
+      "bid": 148.67,
+      "date": "2026-04-05",
+      "quote": "NPR",
+      "rate": 148.97
+    }
+  ]
+}

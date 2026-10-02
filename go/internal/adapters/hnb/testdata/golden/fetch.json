@@ -1,0 +1,404 @@
+{
+  "adapter": "HNB",
+  "cassette": "hnb",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2023, 1, 2), upto: Date.new(2023, 1, 6))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "AUD",
+      "rate": 1.5693
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "CAD",
+      "rate": 1.444
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "CHF",
+      "rate": 0.9847
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "CZK",
+      "rate": 24.116
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "DKK",
+      "rate": 7.4365
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "GBP",
+      "rate": 0.88693
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "HUF",
+      "rate": 400.87
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "JPY",
+      "rate": 140.66
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "NOK",
+      "rate": 10.5138
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "PLN",
+      "rate": 4.6808
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "SEK",
+      "rate": 11.1218
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-02",
+      "quote": "USD",
+      "rate": 1.0666
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "AUD",
+      "rate": 1.5699
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "CAD",
+      "rate": 1.4506
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "CHF",
+      "rate": 0.9873
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "CZK",
+      "rate": 24.176
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "DKK",
+      "rate": 7.4374
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "GBP",
+      "rate": 0.8863
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "HUF",
+      "rate": 401.03
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "JPY",
+      "rate": 139.62
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "NOK",
+      "rate": 10.5135
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "PLN",
+      "rate": 4.6813
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "SEK",
+      "rate": 11.1663
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-03",
+      "quote": "USD",
+      "rate": 1.0683
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "AUD",
+      "rate": 1.5708
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "CAD",
+      "rate": 1.4414
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "CHF",
+      "rate": 0.9879
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "CZK",
+      "rate": 24.124
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "DKK",
+      "rate": 7.437
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "GBP",
+      "rate": 0.88048
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "HUF",
+      "rate": 403.33
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "JPY",
+      "rate": 137.93
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "NOK",
+      "rate": 10.528
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "PLN",
+      "rate": 4.6831
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "SEK",
+      "rate": 11.143
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-04",
+      "quote": "USD",
+      "rate": 1.0545
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "AUD",
+      "rate": 1.5452
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "CAD",
+      "rate": 1.4363
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "CHF",
+      "rate": 0.9843
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "CZK",
+      "rate": 24.028
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "DKK",
+      "rate": 7.4374
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "GBP",
+      "rate": 0.88076
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "HUF",
+      "rate": 395.85
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "JPY",
+      "rate": 138.74
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "NOK",
+      "rate": 10.738
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "PLN",
+      "rate": 4.6685
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "SEK",
+      "rate": 11.1653
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-05",
+      "quote": "USD",
+      "rate": 1.0599
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "AUD",
+      "rate": 1.5515
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "CAD",
+      "rate": 1.4316
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "CHF",
+      "rate": 0.9839
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "CZK",
+      "rate": 24.028
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "DKK",
+      "rate": 7.4373
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "GBP",
+      "rate": 0.88303
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "HUF",
+      "rate": 396.88
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "JPY",
+      "rate": 140.95
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "NOK",
+      "rate": 10.7248
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "PLN",
+      "rate": 4.67
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "SEK",
+      "rate": 11.1848
+    },
+    {
+      "base": "EUR",
+      "date": "2023-01-06",
+      "quote": "USD",
+      "rate": 1.0601
+    }
+  ]
+}

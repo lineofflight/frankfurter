@@ -1,0 +1,103 @@
+{
+  "adapter": "CBSSC",
+  "cassette": "cbssc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 8, 3), upto: Date.new(2026, 8, 7))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 16.5514
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 19.5729
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 14.4827
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 16.6052
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 19.4317
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 14.4846
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 16.7051
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 19.4198
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 14.5618
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 17.025
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 19.427
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 14.6212
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 16.6065
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 19.391
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 14.5675
+    }
+  ]
+}

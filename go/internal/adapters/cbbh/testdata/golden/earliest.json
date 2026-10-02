@@ -1,0 +1,277 @@
+{
+  "adapter": "CBBH",
+  "cassette": "cbbh",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1998, 1, 6), upto: Date.new(1998, 1, 8))",
+  "rows": [
+    {
+      "base": "ATS",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.1421367521
+    },
+    {
+      "base": "AUD",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.17350427
+    },
+    {
+      "base": "BEF",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0484615385
+    },
+    {
+      "base": "CAD",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.26430199
+    },
+    {
+      "base": "CHF",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.2307977208
+    },
+    {
+      "base": "DEM",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.0
+    },
+    {
+      "base": "DKK",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.2626210826
+    },
+    {
+      "base": "ESP",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0118233618
+    },
+    {
+      "base": "FIM",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.3304843305
+    },
+    {
+      "base": "FRF",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.2989173789
+    },
+    {
+      "base": "GBP",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 2.95509972
+    },
+    {
+      "base": "GRD",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0063247863
+    },
+    {
+      "base": "IEP",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 2.56270655
+    },
+    {
+      "base": "ITL",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.001025641
+    },
+    {
+      "base": "JPY",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0137037037
+    },
+    {
+      "base": "NLG",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.8872079772
+    },
+    {
+      "base": "NOK",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.2438176638
+    },
+    {
+      "base": "PTE",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0097720798
+    },
+    {
+      "base": "SEK",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.2267521368
+    },
+    {
+      "base": "SIT",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 0.0107122507
+    },
+    {
+      "base": "USD",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.80310541
+    },
+    {
+      "base": "XEU",
+      "date": "1998-01-06",
+      "quote": "BAM",
+      "rate": 1.97509972
+    },
+    {
+      "base": "ATS",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.1421490428
+    },
+    {
+      "base": "AUD",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.17020852
+    },
+    {
+      "base": "BEF",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0484845032
+    },
+    {
+      "base": "CAD",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.27210574
+    },
+    {
+      "base": "CHF",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.2324521422
+    },
+    {
+      "base": "DEM",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.0
+    },
+    {
+      "base": "DKK",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.2625911577
+    },
+    {
+      "base": "ESP",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0117935278
+    },
+    {
+      "base": "FIM",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.3305606199
+    },
+    {
+      "base": "FRF",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.2988263446
+    },
+    {
+      "base": "GBP",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 2.97550137
+    },
+    {
+      "base": "GRD",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0063240656
+    },
+    {
+      "base": "IEP",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 2.55059253
+    },
+    {
+      "base": "ITL",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0010255242
+    },
+    {
+      "base": "JPY",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0136166819
+    },
+    {
+      "base": "NLG",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.8877620784
+    },
+    {
+      "base": "NOK",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.2452427074
+    },
+    {
+      "base": "PTE",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0097709663
+    },
+    {
+      "base": "SEK",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.2268687329
+    },
+    {
+      "base": "SIT",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 0.0106255697
+    },
+    {
+      "base": "USD",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.81281335
+    },
+    {
+      "base": "XEU",
+      "date": "1998-01-08",
+      "quote": "BAM",
+      "rate": 1.97558683
+    }
+  ]
+}

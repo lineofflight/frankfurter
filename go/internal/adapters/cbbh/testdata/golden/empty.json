@@ -1,0 +1,12 @@
+{
+  "adapter": "CBBH",
+  "cassette": "cbbh",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2025, 1, 5), upto: Date.new(2025, 1, 6))",
+  "rows": []
+}

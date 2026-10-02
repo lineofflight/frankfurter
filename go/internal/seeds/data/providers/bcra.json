@@ -1,0 +1,12 @@
+{
+  "key": "BCRA",
+  "name": "Banco Central de la República Argentina",
+  "country_code": "AR",
+  "rate_type": "reference rate",
+  "pivot_currency": "ARS",
+  "data_url": "https://www.bcra.gob.ar/en/monetary-and-financial-statistics/exchange-statistics/",
+  "terms_url": "https://www.bcra.gob.ar/aviso-legal/",
+  "publish_schedule": "*/30 16-18 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2000-01-03"
+}

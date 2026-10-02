@@ -1,0 +1,3549 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/lista/moedas
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 5361
+        body: '{"genericResponse":[{"idMoeda":99,"designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"idMoeda":346,"designacaoMoeda":"LEK ALBANÊS","codigoMoeda":"ALL"},{"idMoeda":73,"designacaoMoeda":"KWANZA","codigoMoeda":"AOA"},{"idMoeda":140,"designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"idMoeda":20,"designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"idMoeda":394,"designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"idMoeda":426,"designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"idMoeda":309,"designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"idMoeda":97,"designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"idMoeda":237,"designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"idMoeda":280,"designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"idMoeda":5,"designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"idMoeda":193,"designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"idMoeda":6,"designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"idMoeda":98,"designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"idMoeda":412,"designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"idMoeda":275,"designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"idMoeda":12,"designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"idMoeda":292,"designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"idMoeda":8,"designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"idMoeda":424,"designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"idMoeda":423,"designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"idMoeda":277,"designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"idMoeda":10,"designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"idMoeda":19,"designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"idMoeda":135,"designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"idMoeda":260,"designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"idMoeda":362,"designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"idMoeda":374,"designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"idMoeda":413,"designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"idMoeda":137,"designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"idMoeda":388,"designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"idMoeda":314,"designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"idMoeda":31,"designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"idMoeda":357,"designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"idMoeda":321,"designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"idMoeda":355,"designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"idMoeda":385,"designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"idMoeda":334,"designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"idMoeda":409,"designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"idMoeda":378,"designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"idMoeda":217,"designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"idMoeda":298,"designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"idMoeda":324,"designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"idMoeda":432,"designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"idMoeda":53,"designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"idMoeda":397,"designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"idMoeda":14,"designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"idMoeda":242,"designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"idMoeda":235,"designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"idMoeda":336,"designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"idMoeda":376,"designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"idMoeda":420,"designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"idMoeda":222,"designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"idMoeda":229,"designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"idMoeda":226,"designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"idMoeda":281,"designacaoMoeda":"LIBRA SUDANESA","codigoMoeda":"SDG"},{"idMoeda":17,"designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"idMoeda":304,"designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"idMoeda":311,"designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"idMoeda":325,"designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"idMoeda":238,"designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"idMoeda":344,"designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"idMoeda":333,"designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"idMoeda":380,"designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"idMoeda":18,"designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"idMoeda":381,"designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"idMoeda":312,"designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"idMoeda":138,"designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"idMoeda":113,"designacaoMoeda":"OURO","codigoMoeda":"XAU"},{"idMoeda":455,"designacaoMoeda":"SPECIAL DRAWING RIGHTS TO US DOLLAR","codigoMoeda":"XDRUSD"},{"idMoeda":16,"designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"idMoeda":134,"designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:04 GMT
+            Server:
+                - nginx/1.31.0
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=AED&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 519
+        body: '{"genericResponse":[{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:05 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ALL&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 35027
+        body: '{"genericResponse":[{"taxa":663.98778,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"taxa":1159.65964,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"taxa":141.99325,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"taxa":1060.8582,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"taxa":9.64023,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"taxa":98.6129,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"taxa":54.8171,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"taxa":97.30252,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"taxa":1224.67275,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"taxa":649.99715,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"taxa":5.73854,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"taxa":54.86784,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"taxa":182.06608,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"taxa":134.21268,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"taxa":4565.82,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"OURO","codigoMoeda":"XAU"},{"taxa":0.04852,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"},{"taxa":116.5804,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"taxa":9.45989,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"taxa":1.61767,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"taxa":0.65456,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"taxa":0.40853,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"taxa":98.99993,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"taxa":203.05906,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"taxa":243.33538,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"taxa":12.86079,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"taxa":266.90714,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"taxa":135.76318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"taxa":533.82987,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"taxa":140.83472,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"taxa":5.85078,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"taxa":65.56162,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"taxa":43.67722,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"taxa":52.67288,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"taxa":712.75935,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"taxa":43.53396,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"taxa":0.03465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"taxa":5.82356,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"taxa":0.60543,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"taxa":229.74362,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"taxa":27.97451,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"taxa":0.35255,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"taxa":3.27928,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"taxa":28.85043,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"taxa":11.18329,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LEK ALBANÊS","codigoMoeda":"ALL"},{"taxa":2955.5462,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"taxa":7.05817,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"taxa":2.94297,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"taxa":0.05159,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"taxa":250.05915,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"taxa":54.86784,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"taxa":20.68218,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"taxa":1.79548,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"taxa":1.93954,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"taxa":542.55258,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"taxa":0.66586,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"taxa":2.76719,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"taxa":2.02514,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"taxa":313.03257,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"taxa":17.20588,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"taxa":67.81807,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"taxa":14.44301,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"taxa":1248.17479,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"SPECIAL DRAWING RIGHTS TO US DOLLAR","codigoMoeda":"XDRUSD"},{"taxa":663.79471,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"taxa":1155.84304,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"taxa":141.75078,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"taxa":1059.032,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"taxa":9.61516,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"taxa":98.43112,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"taxa":54.6318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"taxa":97.37515,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"taxa":1223.85203,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"taxa":651.0631,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"taxa":5.74251,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"taxa":55.04346,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"taxa":181.60982,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"taxa":134.22649,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"taxa":4481.72,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"OURO","codigoMoeda":"XAU"},{"taxa":0.04855,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"},{"taxa":116.57594,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"taxa":9.43058,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"taxa":1.61492,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"taxa":0.653,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"taxa":0.40853,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"taxa":98.87665,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"taxa":202.50965,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"taxa":243.34835,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"taxa":12.88953,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"taxa":266.46317,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"taxa":135.87025,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"taxa":533.79867,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"taxa":140.59619,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"taxa":5.73663,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"taxa":66.74971,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"taxa":43.56573,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"taxa":52.58431,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"taxa":713.31615,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"taxa":43.49683,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"taxa":0.03464,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"taxa":5.80973,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"taxa":0.60662,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"taxa":230.14896,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"taxa":27.95053,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"taxa":0.35162,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"taxa":3.27928,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"taxa":28.85681,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"taxa":11.17508,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LEK ALBANÊS","codigoMoeda":"ALL"},{"taxa":2955.5462,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"taxa":7.06473,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"taxa":2.93333,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"taxa":0.05173,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"taxa":249.05654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"taxa":55.04346,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"taxa":20.64449,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"taxa":1.79056,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"taxa":1.93629,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"taxa":541.61931,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"taxa":0.6654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"taxa":2.74423,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"taxa":2.01883,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"taxa":312.41139,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"taxa":17.10077,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"taxa":67.70241,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"taxa":14.43865,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"taxa":1248.19356,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"SPECIAL DRAWING RIGHTS TO US DOLLAR","codigoMoeda":"XDRUSD"},{"taxa":663.11983,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"taxa":1157.895,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"taxa":141.71118,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"taxa":1058.9407,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"taxa":9.61832,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"taxa":98.95702,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"taxa":55.1652,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"taxa":97.50929,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"taxa":1225.00134,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"taxa":650.73831,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"taxa":5.73746,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"taxa":55.18284,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"taxa":182.24049,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"taxa":134.2561,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"taxa":248.609,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR EMIRATES","codigoMoeda":"AED"},{"taxa":4543.25,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"OURO","codigoMoeda":"XAU"},{"taxa":0.04863,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"},{"taxa":116.55213,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"taxa":9.49358,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"taxa":1.61443,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"taxa":0.65386,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"taxa":0.40838,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"taxa":98.87237,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"taxa":202.07493,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"taxa":243.33538,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"taxa":12.94587,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"taxa":267.69745,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"taxa":135.79347,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"taxa":534.92443,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"taxa":140.5529,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"taxa":5.7583,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"taxa":66.65859,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"taxa":43.60027,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"taxa":52.62886,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"taxa":713.26043,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"taxa":43.51528,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"taxa":0.03465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"taxa":5.82018,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"taxa":0.60512,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"taxa":230.61397,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"taxa":27.94284,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"taxa":0.35255,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"taxa":3.27855,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"taxa":28.90065,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"taxa":11.17098,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LEK ALBANÊS","codigoMoeda":"ALL"},{"taxa":2951.24758,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"taxa":7.06036,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"taxa":2.93758,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"taxa":0.0517,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"taxa":249.30134,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"taxa":55.18318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"taxa":20.64654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"taxa":1.7857,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"taxa":1.94239,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"taxa":541.45873,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"taxa":0.66603,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"taxa":2.69945,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"taxa":2.02044,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"taxa":313.20436,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"taxa":17.27812,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"taxa":67.68234,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"taxa":14.44301,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"taxa":1247.52678,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"SPECIAL DRAWING RIGHTS TO US DOLLAR","codigoMoeda":"XDRUSD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:19 GMT
+            Server:
+                - nginx/1.31.0
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ARS&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 517
+        body: '{"genericResponse":[{"taxa":0.65456,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"taxa":0.653,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"},{"taxa":0.65386,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO ARGENTINO","codigoMoeda":"ARS"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:07 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=AUD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 539
+        body: '{"genericResponse":[{"taxa":649.99715,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"taxa":651.0631,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"},{"taxa":650.73831,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR AUSTTRALIANO","codigoMoeda":"AUD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:07 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BGN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 534
+        body: '{"genericResponse":[{"taxa":542.55258,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"taxa":541.61931,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"},{"taxa":541.45873,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LEV NOVO BÚLGARO","codigoMoeda":"BGN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:22 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BMD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 534
+        body: '{"genericResponse":[{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DAS BERMUDAS","codigoMoeda":"BMD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:23 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BOB&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 510
+        body: '{"genericResponse":[{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"},{"taxa":133.20438,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BOLIVIANO","codigoMoeda":"BOB"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:10 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BRL&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 528
+        body: '{"genericResponse":[{"taxa":182.06608,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"taxa":181.60982,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"},{"taxa":182.24049,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"REAL BRASILEIRO","codigoMoeda":"BRL"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:25 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BSD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DAS BAHAMAS","codigoMoeda":"BSD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:25 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=BWP&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":65.56162,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"taxa":66.74971,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"},{"taxa":66.65859,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PULA BOTSUANESA","codigoMoeda":"BWP"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:13 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CAD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":663.98778,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"taxa":663.79471,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"},{"taxa":663.11983,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR CANADENSE","codigoMoeda":"CAD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:14 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CDF&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":0.40853,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"taxa":0.40853,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"},{"taxa":0.40838,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO CONGOLES","codigoMoeda":"CDF"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:15 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CHF&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: '{"genericResponse":[{"taxa":1159.65964,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"taxa":1155.84304,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"},{"taxa":1157.895,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO SUIÇO","codigoMoeda":"CHF"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:30 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CNY&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 515
+        body: '{"genericResponse":[{"taxa":134.21268,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"taxa":134.22649,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"},{"taxa":134.2561,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"YUAN CHINES","codigoMoeda":"CNY"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:17 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CRC&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 534
+        body: '{"genericResponse":[{"taxa":2.02514,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"taxa":2.01883,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"},{"taxa":2.02044,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COLON DA COSTA RICA","codigoMoeda":"CRC"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:17 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CUP&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 510
+        body: '{"genericResponse":[{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"},{"taxa":38.0465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO CUBANO","codigoMoeda":"CUP"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:18 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CVE&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 537
+        body: '{"genericResponse":[{"taxa":9.64023,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"taxa":9.61516,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"},{"taxa":9.61832,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"ESCUDO DE CABO VERDE","codigoMoeda":"CVE"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:33 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=CZK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 513
+        body: '{"genericResponse":[{"taxa":43.67722,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"taxa":43.56573,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"},{"taxa":43.60027,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA CHECA","codigoMoeda":"CZK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:34 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=DKK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 537
+        body: '{"genericResponse":[{"taxa":141.99325,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"taxa":141.75078,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"},{"taxa":141.71118,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA DINAMARQUESA","codigoMoeda":"DKK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:34 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EEK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":67.81807,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"taxa":67.70241,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"},{"taxa":67.68234,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA ESTONIANA","codigoMoeda":"EEK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:35 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EGP&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":17.20588,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"taxa":17.10077,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"},{"taxa":17.27812,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA EGÍPCIA","codigoMoeda":"EGP"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:36 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ETB&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 512
+        body: '{"genericResponse":[{"taxa":5.85078,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"taxa":5.73663,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"},{"taxa":5.7583,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BIRR ETÍOPE","codigoMoeda":"ETB"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:23 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=EUR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 554
+        body: '{"genericResponse":[{"taxa":1060.8582,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"taxa":1059.032,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"},{"taxa":1058.9407,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"MOEDA DA UNIÃO EUROPEIA","codigoMoeda":"EUR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:37 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=GBP&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 528
+        body: '{"genericResponse":[{"taxa":1224.67275,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"taxa":1223.85203,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"},{"taxa":1225.00134,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA ESTRELIM","codigoMoeda":"GBP"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:24 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 25
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HKD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 536
+        body: '{"genericResponse":[{"taxa":116.5804,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"taxa":116.57594,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"},{"taxa":116.55213,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOLAR DE HONG KONG","codigoMoeda":"HKD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:39 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 26
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HRK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 515
+        body: '{"genericResponse":[{"taxa":140.83472,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"taxa":140.59619,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"},{"taxa":140.5529,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"KUNA CROATA","codigoMoeda":"HRK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:26 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 27
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=HUF&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":2.94297,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"taxa":2.93333,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"},{"taxa":2.93758,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FORINTE HÚNGARO","codigoMoeda":"HUF"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:27 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 28
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=IDR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: '{"genericResponse":[{"taxa":0.05159,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"taxa":0.05173,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"},{"taxa":0.0517,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA INDONÉSIA","codigoMoeda":"IDR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:42 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 29
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ILS&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 546
+        body: '{"genericResponse":[{"taxa":313.03257,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"taxa":312.41139,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"},{"taxa":313.20436,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"SHEQEL NOVO ISRAELITA","codigoMoeda":"ILS"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:43 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 30
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=INR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 516
+        body: '{"genericResponse":[{"taxa":9.45989,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"taxa":9.43058,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"},{"taxa":9.49358,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA INDIANA","codigoMoeda":"INR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:44 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 31
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=IQD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"},{"taxa":0.69704,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR IRAQUIANO","codigoMoeda":"IQD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:45 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 32
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=JMD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":5.82356,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"taxa":5.80973,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"},{"taxa":5.82018,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR JAMAICANO","codigoMoeda":"JMD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:45 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 33
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=JPY&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 510
+        body: '{"genericResponse":[{"taxa":5.73854,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"taxa":5.74251,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"},{"taxa":5.73746,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"YEN JAPONES","codigoMoeda":"JPY"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:46 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 34
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KES&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 519
+        body: '{"genericResponse":[{"taxa":7.05817,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"taxa":7.06473,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"},{"taxa":7.06036,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"XELIM QUENIANO","codigoMoeda":"KES"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:33 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 35
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KRW&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":0.60543,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"taxa":0.60662,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"},{"taxa":0.60512,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"WON SUL-COREANO","codigoMoeda":"KRW"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:47 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 36
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KWD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 532
+        body: '{"genericResponse":[{"taxa":2955.5462,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"taxa":2955.5462,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"},{"taxa":2951.24758,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DINAR COVEITIANO","codigoMoeda":"KWD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:35 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 37
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=KZT&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 540
+        body: '{"genericResponse":[{"taxa":1.93954,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"taxa":1.93629,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"},{"taxa":1.94239,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"TENGE DO CAZAQUISTÃO","codigoMoeda":"KZT"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:49 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 38
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LBP&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 516
+        body: '{"genericResponse":[{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"},{"taxa":0.0102,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LIBRA LIBANESA","codigoMoeda":"LBP"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:50 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 39
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LKR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":2.76719,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"taxa":2.74423,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"},{"taxa":2.69945,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA DO SRI LANKA","codigoMoeda":"LKR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:37 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 40
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=LSL&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":54.86784,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"taxa":55.04346,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"},{"taxa":55.18318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LOTI DO LESOTO","codigoMoeda":"LSL"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:38 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 41
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MAD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":98.99993,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"taxa":98.87665,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"},{"taxa":98.87237,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DIRÉM MARROQUINO","codigoMoeda":"MAD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:39 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 42
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MXN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 519
+        body: '{"genericResponse":[{"taxa":52.67288,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"taxa":52.58431,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"},{"taxa":52.62886,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"PESO MEXICANO","codigoMoeda":"MXN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:54 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 43
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MYR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":229.74362,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"taxa":230.14896,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"},{"taxa":230.61397,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RINGGIT MALAIO","codigoMoeda":"MYR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:55 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 44
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=MZN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 546
+        body: '{"genericResponse":[{"taxa":14.44301,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"taxa":14.43865,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"},{"taxa":14.44301,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"METICAL DO MOÇAMBIQUE","codigoMoeda":"MZN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:56 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 45
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NAD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":54.86784,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"taxa":55.04346,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"},{"taxa":55.18284,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOLAR NAMIBIANO","codigoMoeda":"NAD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:56 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 46
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NGN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 521
+        body: '{"genericResponse":[{"taxa":0.66586,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"taxa":0.6654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"},{"taxa":0.66603,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"NAIRA NIGERIANA","codigoMoeda":"NGN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:57 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 47
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NOK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 527
+        body: '{"genericResponse":[{"taxa":98.6129,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"taxa":98.43112,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"},{"taxa":98.95702,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA NORUEGUESA","codigoMoeda":"NOK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:59 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 48
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=NZD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 555
+        body: '{"genericResponse":[{"taxa":533.82987,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"taxa":533.79867,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"},{"taxa":534.92443,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DA NOVA ZELÂNDIA","codigoMoeda":"NZD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:59 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 49
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PEN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":266.90714,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"taxa":266.46317,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"},{"taxa":267.69745,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"SOL NOVO PERUANO","codigoMoeda":"PEN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:47 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 50
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PKR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":3.27928,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"taxa":3.27928,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"},{"taxa":3.27855,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUPIA PAQUISTANESA","codigoMoeda":"PKR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:01 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 51
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=PLN&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":250.05915,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"taxa":249.05654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"},{"taxa":249.30134,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"ZLOTI POLONÊS","codigoMoeda":"PLN"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:02 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 52
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=QAR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"},{"taxa":250.51193,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RIAL CATARIANO","codigoMoeda":"QAR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:03 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 53
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=RON&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 513
+        body: '{"genericResponse":[{"taxa":203.05906,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"taxa":202.50965,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"},{"taxa":202.07493,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"LEU ROMENO","codigoMoeda":"RON"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:50 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 54
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=RUB&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 513
+        body: '{"genericResponse":[{"taxa":12.86079,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"taxa":12.88953,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"},{"taxa":12.94587,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RUBLO RUSSO","codigoMoeda":"RUB"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:51 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 55
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SAR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 519
+        body: '{"genericResponse":[{"taxa":243.33538,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"taxa":243.34835,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"},{"taxa":243.33538,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RIAL SAUDITA","codigoMoeda":"SAR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:06 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 56
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SDG&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 37
+        body: '{"genericResponse":[],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:53 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 57
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SEK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 513
+        body: '{"genericResponse":[{"taxa":97.30252,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"taxa":97.37515,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"},{"taxa":97.50929,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"COROA SUECA","codigoMoeda":"SEK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:07 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 58
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=SGD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 540
+        body: '{"genericResponse":[{"taxa":712.75935,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"taxa":713.31615,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"},{"taxa":713.26043,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DE CINGAPURA","codigoMoeda":"SGD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:54 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 59
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=STD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 573
+        body: '{"genericResponse":[{"taxa":43.53396,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"taxa":43.49683,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"},{"taxa":43.51528,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DOBRA DE SÃO TOMÉ E PRÍNCIPE","codigoMoeda":"STD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:55 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 60
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=THB&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":27.97451,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"taxa":27.95053,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"},{"taxa":27.94284,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BAHT TAILANDÊS","codigoMoeda":"THB"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:10 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 61
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TTD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 564
+        body: '{"genericResponse":[{"taxa":135.76318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"taxa":135.87025,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"},{"taxa":135.79347,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR DE TRINIDAD E TOBAGO","codigoMoeda":"TTD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:11 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 62
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TWD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 543
+        body: '{"genericResponse":[{"taxa":28.85043,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"taxa":28.85681,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"},{"taxa":28.90065,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR NOVO DE TAIWAN","codigoMoeda":"TWD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:15:58 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 63
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=TZS&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":0.35255,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"taxa":0.35162,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"},{"taxa":0.35255,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"XELIM DA TANZÂNIA","codigoMoeda":"TZS"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:02 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 64
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=UAH&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 531
+        body: '{"genericResponse":[{"taxa":20.68218,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"taxa":20.64449,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"},{"taxa":20.64654,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"HRYVNIA UCRANIANO","codigoMoeda":"UAH"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:03 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 65
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=USD&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: '{"genericResponse":[{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"},{"taxa":913.116,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DÓLAR AMERICANO","codigoMoeda":"USD"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:04 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 66
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=VEF&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 557
+        body: '{"genericResponse":[{"taxa":1.79548,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"taxa":1.79056,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"},{"taxa":1.7857,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"BOLÍVAR V ENEZUELANO FORTE","codigoMoeda":"VEF"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:18 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 67
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=VND&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":0.03465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"taxa":0.03464,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"},{"taxa":0.03465,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"DONG VIETNAMITA","codigoMoeda":"VND"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:19 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 68
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=XAF&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 546
+        body: '{"genericResponse":[{"taxa":1.61767,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"taxa":1.61492,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"},{"taxa":1.61443,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"FRANCO CFA BEAC CENTRAL","codigoMoeda":"XAF"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:20 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 69
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ZAR&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 543
+        body: '{"genericResponse":[{"taxa":54.8171,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"taxa":54.6318,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"},{"taxa":55.1652,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"RANDE - ÁFRICA DO SUL","codigoMoeda":"ZAR"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:21 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 70
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bna.ao
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bna.ao
+            User-Agent:
+                - Ruby
+        url: https://www.bna.ao/service/rest/taxas/get/evolucao/taxa/intervalo?datafim=2026-05-21&datainicio=2026-05-18&moeda=ZMK&tipocambio=M
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: '{"genericResponse":[{"taxa":0.04852,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-19","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"},{"taxa":0.04855,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-20","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"},{"taxa":0.04863,"descricaoTipoCambio":"Taxa de Referência - MEDIO","tipoCambio":"M","data":"2026-05-21","designacaoMoeda":"KWACHA ZAMBIANO","codigoMoeda":"ZMK"}],"success":true}'
+        headers:
+            Access-Control-Allow-Credentials:
+                - "true"
+            Access-Control-Allow-Headers:
+                - origin, Content-Type, accept, authorization, chave, X-Requested-With
+            Access-Control-Allow-Methods:
+                - GET, HEAD, POST, PUT, DELETE, OPTIONS
+            Access-Control-Allow-Origin:
+                - '*'
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/json
+            Date:
+                - Fri, 22 May 2026 13:16:22 GMT
+            Server:
+                - nginx/1.31.0
+            Vary:
+                - Accept-Encoding
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - 'Servlet/4.0 JSP/2.3 (Payara Server  5.2022.4 #badassfish Java/Azul Systems, Inc./17)'
+        status: 200 OK
+        code: 200
+        duration: 0s

@@ -1,0 +1,61 @@
+{
+  "adapter": "CBLLR",
+  "cassette": "cbllr",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 15), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "ask": 184.04,
+      "base": "USD",
+      "bid": 182.1187,
+      "date": "2026-05-16",
+      "quote": "LRD",
+      "rate": 183.07935
+    },
+    {
+      "ask": 184.0141,
+      "base": "USD",
+      "bid": 182.0951,
+      "date": "2026-05-18",
+      "quote": "LRD",
+      "rate": 183.0546
+    },
+    {
+      "ask": 184.0427,
+      "base": "USD",
+      "bid": 182.1207,
+      "date": "2026-05-19",
+      "quote": "LRD",
+      "rate": 183.0817
+    },
+    {
+      "ask": 184.0427,
+      "base": "USD",
+      "bid": 182.1207,
+      "date": "2026-05-20",
+      "quote": "LRD",
+      "rate": 183.0817
+    },
+    {
+      "ask": 183.9991,
+      "base": "USD",
+      "bid": 182.1161,
+      "date": "2026-05-21",
+      "quote": "LRD",
+      "rate": 183.0576
+    },
+    {
+      "ask": 183.9653,
+      "base": "USD",
+      "bid": 182.0819,
+      "date": "2026-05-22",
+      "quote": "LRD",
+      "rate": 183.0236
+    }
+  ]
+}

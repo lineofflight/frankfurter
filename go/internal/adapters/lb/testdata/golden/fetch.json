@@ -1,0 +1,1597 @@
+{
+  "adapter": "LB",
+  "cassette": "lb",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2014, 12, 29), upto: Date.new(2014, 12, 31))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.76881
+    },
+    {
+      "base": "AFN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.048611
+    },
+    {
+      "base": "ALL",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.024689000000000003
+    },
+    {
+      "base": "AMD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0061387
+    },
+    {
+      "base": "ARS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.33025000000000004
+    },
+    {
+      "base": "AUD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.2918
+    },
+    {
+      "base": "AZN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 3.5999
+    },
+    {
+      "base": "BAM",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.7681
+    },
+    {
+      "base": "BDT",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.036213999999999996
+    },
+    {
+      "base": "BGN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.7652
+    },
+    {
+      "base": "BHD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 7.4896
+    },
+    {
+      "base": "BOB",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.40865
+    },
+    {
+      "base": "BRL",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.0592
+    },
+    {
+      "base": "BYR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.00025834999999999996
+    },
+    {
+      "base": "CAD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.4314
+    },
+    {
+      "base": "CHF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.8688
+    },
+    {
+      "base": "CLP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0046398
+    },
+    {
+      "base": "CNY",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.45377
+    },
+    {
+      "base": "COP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0012127
+    },
+    {
+      "base": "CZK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.12512
+    },
+    {
+      "base": "DJF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.015909
+    },
+    {
+      "base": "DKK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.46403999999999995
+    },
+    {
+      "base": "DZD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.032371
+    },
+    {
+      "base": "EGP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.39493
+    },
+    {
+      "base": "ETB",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.13992
+    },
+    {
+      "base": "EUR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 3.4528
+    },
+    {
+      "base": "GBP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 4.3999
+    },
+    {
+      "base": "GEL",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.4917
+    },
+    {
+      "base": "GNF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.00040168
+    },
+    {
+      "base": "HKD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.36399
+    },
+    {
+      "base": "HRK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.45043
+    },
+    {
+      "base": "HUF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.011004
+    },
+    {
+      "base": "IDR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0002266
+    },
+    {
+      "base": "ILS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.72152
+    },
+    {
+      "base": "INR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.044518
+    },
+    {
+      "base": "IQD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0024598
+    },
+    {
+      "base": "IRR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.00010442
+    },
+    {
+      "base": "ISK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.022291
+    },
+    {
+      "base": "JOD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 3.9616
+    },
+    {
+      "base": "JPY",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.023499
+    },
+    {
+      "base": "KES",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.031254
+    },
+    {
+      "base": "KGS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.04794400000000001
+    },
+    {
+      "base": "KRW",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0025612
+    },
+    {
+      "base": "KWD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 9.6487
+    },
+    {
+      "base": "KZT",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.015505999999999999
+    },
+    {
+      "base": "LBP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0018664
+    },
+    {
+      "base": "LKR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.021515
+    },
+    {
+      "base": "MAD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.31436000000000003
+    },
+    {
+      "base": "MDL",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.17992
+    },
+    {
+      "base": "MGA",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0010840000000000001
+    },
+    {
+      "base": "MKD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.056072
+    },
+    {
+      "base": "MNT",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0015076
+    },
+    {
+      "base": "MXN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.19290000000000002
+    },
+    {
+      "base": "MYR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.80738
+    },
+    {
+      "base": "MZN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.083004
+    },
+    {
+      "base": "NOK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.38085
+    },
+    {
+      "base": "NZD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.1836
+    },
+    {
+      "base": "PAB",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.8238
+    },
+    {
+      "base": "PEN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.95061
+    },
+    {
+      "base": "PHP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.06317199999999999
+    },
+    {
+      "base": "PKR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.028103
+    },
+    {
+      "base": "PLN",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.81013
+    },
+    {
+      "base": "QAR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.77545
+    },
+    {
+      "base": "RON",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.77226
+    },
+    {
+      "base": "RSD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.028471000000000003
+    },
+    {
+      "base": "RUB",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.051039
+    },
+    {
+      "base": "SAR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.7524
+    },
+    {
+      "base": "SEK",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.36271
+    },
+    {
+      "base": "SGD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.1341
+    },
+    {
+      "base": "SYP",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.01582
+    },
+    {
+      "base": "THB",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.08580399999999999
+    },
+    {
+      "base": "TJS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.5401
+    },
+    {
+      "base": "TMT",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.99063
+    },
+    {
+      "base": "TND",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.5118
+    },
+    {
+      "base": "TRY",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 1.219
+    },
+    {
+      "base": "TWD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.088939
+    },
+    {
+      "base": "TZS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0016533
+    },
+    {
+      "base": "UAH",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.17753000000000002
+    },
+    {
+      "base": "USD",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 2.8238
+    },
+    {
+      "base": "UYU",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.11756
+    },
+    {
+      "base": "UZS",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0011677
+    },
+    {
+      "base": "VEF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.44878
+    },
+    {
+      "base": "VND",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.00013205
+    },
+    {
+      "base": "XAF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0052534999999999995
+    },
+    {
+      "base": "XDR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 4.1028
+    },
+    {
+      "base": "XOF",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.0052462
+    },
+    {
+      "base": "YER",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.013130999999999999
+    },
+    {
+      "base": "ZAR",
+      "date": "2014-12-29",
+      "quote": "LTL",
+      "rate": 0.24419
+    },
+    {
+      "base": "AED",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.76881
+    },
+    {
+      "base": "AFN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.048611
+    },
+    {
+      "base": "ALL",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.024689000000000003
+    },
+    {
+      "base": "AMD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0061387
+    },
+    {
+      "base": "ARS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.33025000000000004
+    },
+    {
+      "base": "AUD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.2973
+    },
+    {
+      "base": "AZN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 3.5999
+    },
+    {
+      "base": "BAM",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.7681
+    },
+    {
+      "base": "BDT",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.036213999999999996
+    },
+    {
+      "base": "BGN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.7589
+    },
+    {
+      "base": "BHD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 7.4896
+    },
+    {
+      "base": "BOB",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.40865
+    },
+    {
+      "base": "BRL",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.0592
+    },
+    {
+      "base": "BYR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.00025671
+    },
+    {
+      "base": "CAD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.4296
+    },
+    {
+      "base": "CHF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.8588
+    },
+    {
+      "base": "CLP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0046398
+    },
+    {
+      "base": "CNY",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.45377999999999996
+    },
+    {
+      "base": "COP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0012127
+    },
+    {
+      "base": "CZK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.12405
+    },
+    {
+      "base": "DJF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.015909
+    },
+    {
+      "base": "DKK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.46247
+    },
+    {
+      "base": "DZD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.032371
+    },
+    {
+      "base": "EGP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.39493
+    },
+    {
+      "base": "ETB",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.13992
+    },
+    {
+      "base": "EUR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 3.4528
+    },
+    {
+      "base": "GBP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 4.3958
+    },
+    {
+      "base": "GEL",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.4917
+    },
+    {
+      "base": "GNF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.00040168
+    },
+    {
+      "base": "HKD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.36399
+    },
+    {
+      "base": "HRK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.44887
+    },
+    {
+      "base": "HUF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.010878
+    },
+    {
+      "base": "IDR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0002266
+    },
+    {
+      "base": "ILS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.72152
+    },
+    {
+      "base": "INR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.044518
+    },
+    {
+      "base": "IQD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0024598
+    },
+    {
+      "base": "IRR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.00010442
+    },
+    {
+      "base": "ISK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.022232
+    },
+    {
+      "base": "JOD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 3.9616
+    },
+    {
+      "base": "JPY",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.023464
+    },
+    {
+      "base": "KES",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.031254
+    },
+    {
+      "base": "KGS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.04794400000000001
+    },
+    {
+      "base": "KRW",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0025612
+    },
+    {
+      "base": "KWD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 9.6487
+    },
+    {
+      "base": "KZT",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.015472
+    },
+    {
+      "base": "LBP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0018664
+    },
+    {
+      "base": "LKR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.021515
+    },
+    {
+      "base": "MAD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.31436000000000003
+    },
+    {
+      "base": "MDL",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.18061
+    },
+    {
+      "base": "MGA",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0010840000000000001
+    },
+    {
+      "base": "MKD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.056072
+    },
+    {
+      "base": "MNT",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0015076
+    },
+    {
+      "base": "MXN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.19290000000000002
+    },
+    {
+      "base": "MYR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.80738
+    },
+    {
+      "base": "MZN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.083004
+    },
+    {
+      "base": "NOK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.37719
+    },
+    {
+      "base": "NZD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.1836
+    },
+    {
+      "base": "PAB",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.8238
+    },
+    {
+      "base": "PEN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.95061
+    },
+    {
+      "base": "PHP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.06317199999999999
+    },
+    {
+      "base": "PKR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.028103
+    },
+    {
+      "base": "PLN",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.79488
+    },
+    {
+      "base": "QAR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.77545
+    },
+    {
+      "base": "RON",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.76974
+    },
+    {
+      "base": "RSD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.028471000000000003
+    },
+    {
+      "base": "RUB",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.049857
+    },
+    {
+      "base": "SAR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.7524
+    },
+    {
+      "base": "SEK",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.36174
+    },
+    {
+      "base": "SGD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.1341
+    },
+    {
+      "base": "SYP",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.01582
+    },
+    {
+      "base": "THB",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.08580399999999999
+    },
+    {
+      "base": "TJS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.5401
+    },
+    {
+      "base": "TMT",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.99063
+    },
+    {
+      "base": "TND",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.5118
+    },
+    {
+      "base": "TRY",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 1.2149
+    },
+    {
+      "base": "TWD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.088939
+    },
+    {
+      "base": "TZS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0016533
+    },
+    {
+      "base": "UAH",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.17851
+    },
+    {
+      "base": "USD",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 2.8238
+    },
+    {
+      "base": "UYU",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.11756
+    },
+    {
+      "base": "UZS",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0011677
+    },
+    {
+      "base": "VEF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.44878
+    },
+    {
+      "base": "VND",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.00013205
+    },
+    {
+      "base": "XAF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0052534999999999995
+    },
+    {
+      "base": "XDR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 4.0919
+    },
+    {
+      "base": "XOF",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.0052462
+    },
+    {
+      "base": "YER",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.013130999999999999
+    },
+    {
+      "base": "ZAR",
+      "date": "2014-12-30",
+      "quote": "LTL",
+      "rate": 0.24419
+    },
+    {
+      "base": "AED",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.76881
+    },
+    {
+      "base": "AFN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.048611
+    },
+    {
+      "base": "ALL",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.024689000000000003
+    },
+    {
+      "base": "AMD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0061387
+    },
+    {
+      "base": "ARS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.33025000000000004
+    },
+    {
+      "base": "AUD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.3138
+    },
+    {
+      "base": "AZN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 3.5999
+    },
+    {
+      "base": "BAM",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.7681
+    },
+    {
+      "base": "BDT",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.036213999999999996
+    },
+    {
+      "base": "BGN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.7654
+    },
+    {
+      "base": "BHD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 7.4896
+    },
+    {
+      "base": "BOB",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.40865
+    },
+    {
+      "base": "BRL",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.0592
+    },
+    {
+      "base": "BYR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.00024056000000000001
+    },
+    {
+      "base": "CAD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.44
+    },
+    {
+      "base": "CHF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.8702
+    },
+    {
+      "base": "CLP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0046398
+    },
+    {
+      "base": "CNY",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.45718
+    },
+    {
+      "base": "COP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0012127
+    },
+    {
+      "base": "CZK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.12462999999999999
+    },
+    {
+      "base": "DJF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.015909
+    },
+    {
+      "base": "DKK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.46379000000000004
+    },
+    {
+      "base": "DZD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.032371
+    },
+    {
+      "base": "EGP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.39493
+    },
+    {
+      "base": "ETB",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.13992
+    },
+    {
+      "base": "EUR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 3.4528
+    },
+    {
+      "base": "GBP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 4.408
+    },
+    {
+      "base": "GEL",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.4917
+    },
+    {
+      "base": "GNF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.00040168
+    },
+    {
+      "base": "HKD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.36399
+    },
+    {
+      "base": "HRK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.45072999999999996
+    },
+    {
+      "base": "HUF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.010965
+    },
+    {
+      "base": "IDR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0002266
+    },
+    {
+      "base": "ILS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.72152
+    },
+    {
+      "base": "INR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.044518
+    },
+    {
+      "base": "IQD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0024598
+    },
+    {
+      "base": "IRR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.00010442
+    },
+    {
+      "base": "ISK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.022334
+    },
+    {
+      "base": "JOD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 3.9616
+    },
+    {
+      "base": "JPY",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.023698
+    },
+    {
+      "base": "KES",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.031254
+    },
+    {
+      "base": "KGS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.04794400000000001
+    },
+    {
+      "base": "KRW",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0025612
+    },
+    {
+      "base": "KWD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 9.6487
+    },
+    {
+      "base": "KZT",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.015553999999999998
+    },
+    {
+      "base": "LBP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0018664
+    },
+    {
+      "base": "LKR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.021515
+    },
+    {
+      "base": "MAD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.31436000000000003
+    },
+    {
+      "base": "MDL",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.18179
+    },
+    {
+      "base": "MGA",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0010840000000000001
+    },
+    {
+      "base": "MKD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.056072
+    },
+    {
+      "base": "MNT",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0015076
+    },
+    {
+      "base": "MXN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.19290000000000002
+    },
+    {
+      "base": "MYR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.80738
+    },
+    {
+      "base": "MZN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.083004
+    },
+    {
+      "base": "NOK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.37991
+    },
+    {
+      "base": "NZD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.1836
+    },
+    {
+      "base": "PAB",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.8238
+    },
+    {
+      "base": "PEN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.95061
+    },
+    {
+      "base": "PHP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.06317199999999999
+    },
+    {
+      "base": "PKR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.028103
+    },
+    {
+      "base": "PLN",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.80454
+    },
+    {
+      "base": "QAR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.77545
+    },
+    {
+      "base": "RON",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.77156
+    },
+    {
+      "base": "RSD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.028471000000000003
+    },
+    {
+      "base": "RUB",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.050251000000000004
+    },
+    {
+      "base": "SAR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.7524
+    },
+    {
+      "base": "SEK",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.36246
+    },
+    {
+      "base": "SGD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.1341
+    },
+    {
+      "base": "SYP",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.01582
+    },
+    {
+      "base": "THB",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.08580399999999999
+    },
+    {
+      "base": "TJS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.5401
+    },
+    {
+      "base": "TMT",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.99063
+    },
+    {
+      "base": "TND",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.5118
+    },
+    {
+      "base": "TRY",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 1.223
+    },
+    {
+      "base": "TWD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.088939
+    },
+    {
+      "base": "TZS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0016533
+    },
+    {
+      "base": "UAH",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.17945
+    },
+    {
+      "base": "USD",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 2.8387
+    },
+    {
+      "base": "UYU",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.11756
+    },
+    {
+      "base": "UZS",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0011677
+    },
+    {
+      "base": "VEF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.44878
+    },
+    {
+      "base": "VND",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.00013205
+    },
+    {
+      "base": "XAF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0052534999999999995
+    },
+    {
+      "base": "XDR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 4.1124
+    },
+    {
+      "base": "XOF",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.0052462
+    },
+    {
+      "base": "YER",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.013130999999999999
+    },
+    {
+      "base": "ZAR",
+      "date": "2014-12-31",
+      "quote": "LTL",
+      "rate": 0.24419
+    }
+  ]
+}

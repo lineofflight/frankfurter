@@ -1,0 +1,12 @@
+{
+  "key": "BCC",
+  "name": "Banco Central de Cuba",
+  "country_code": "CU",
+  "rate_type": "informal market rate",
+  "pivot_currency": "CUP",
+  "data_url": "https://api.bc.gob.cu/v1/tasas-de-cambio/activas",
+  "terms_url": null,
+  "publish_schedule": "*/30 4-6 * * *",
+  "publish_cadence": "daily",
+  "coverage_start": "2025-12-19"
+}

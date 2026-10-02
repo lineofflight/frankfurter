@@ -1,0 +1,1003 @@
+{
+  "adapter": "CBSL",
+  "cassette": "cbsl",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2025, 5, 15), upto: Date.new(2025, 5, 19))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 81.3193
+    },
+    {
+      "base": "AUD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 192.2666
+    },
+    {
+      "base": "BDT",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 2.4584
+    },
+    {
+      "base": "BHD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 792.2804
+    },
+    {
+      "base": "BND",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 229.8232
+    },
+    {
+      "base": "BRL",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 52.9789
+    },
+    {
+      "base": "CAD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 213.8156
+    },
+    {
+      "base": "CHF",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 355.6677
+    },
+    {
+      "base": "CNH",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 41.4068
+    },
+    {
+      "base": "CNY",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 41.3915
+    },
+    {
+      "base": "CZK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 13.4059
+    },
+    {
+      "base": "DKK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 44.7968
+    },
+    {
+      "base": "EGP",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 5.9276
+    },
+    {
+      "base": "EUR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 334.2487
+    },
+    {
+      "base": "GBP",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 396.4956
+    },
+    {
+      "base": "GHS",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 24.0879
+    },
+    {
+      "base": "HKD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 38.256
+    },
+    {
+      "base": "HUF",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.8288
+    },
+    {
+      "base": "IDR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.018
+    },
+    {
+      "base": "INR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 3.4996
+    },
+    {
+      "base": "IRR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.0071
+    },
+    {
+      "base": "JOD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 421.2831
+    },
+    {
+      "base": "JPY",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 2.0417
+    },
+    {
+      "base": "KES",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 2.3109
+    },
+    {
+      "base": "KRW",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.2132
+    },
+    {
+      "base": "KWD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 971.1907
+    },
+    {
+      "base": "MMK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.1422
+    },
+    {
+      "base": "MOP",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 37.1228
+    },
+    {
+      "base": "MUR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 6.5074
+    },
+    {
+      "base": "MVR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 19.3202
+    },
+    {
+      "base": "MYR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 69.5679
+    },
+    {
+      "base": "NGN",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.1866
+    },
+    {
+      "base": "NOK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 28.7435
+    },
+    {
+      "base": "NPR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 2.1892
+    },
+    {
+      "base": "NZD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 176.3613
+    },
+    {
+      "base": "OMR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 775.8577
+    },
+    {
+      "base": "PGK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 73.0296
+    },
+    {
+      "base": "PHP",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 5.3539
+    },
+    {
+      "base": "PKR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 1.0601
+    },
+    {
+      "base": "PLN",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 78.9975
+    },
+    {
+      "base": "QAR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 81.9473
+    },
+    {
+      "base": "RON",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 65.5072
+    },
+    {
+      "base": "RUB",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 3.7162
+    },
+    {
+      "base": "SAR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 79.6336
+    },
+    {
+      "base": "SBD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 36.2012
+    },
+    {
+      "base": "SCR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 19.9502
+    },
+    {
+      "base": "SEK",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 30.6773
+    },
+    {
+      "base": "SGD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 229.8232
+    },
+    {
+      "base": "THB",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 8.9281
+    },
+    {
+      "base": "TWD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 9.893
+    },
+    {
+      "base": "USD",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 298.6897
+    },
+    {
+      "base": "VND",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 0.0115
+    },
+    {
+      "base": "XAU",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 945076.6125
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 16.3612
+    },
+    {
+      "base": "ZMW",
+      "date": "2025-05-15",
+      "quote": "LKR",
+      "rate": 11.2184
+    },
+    {
+      "base": "AED",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 81.2693
+    },
+    {
+      "base": "AUD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 191.2256
+    },
+    {
+      "base": "BDT",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 2.4569
+    },
+    {
+      "base": "BHD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 791.8565
+    },
+    {
+      "base": "BND",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 230.4119
+    },
+    {
+      "base": "BRL",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 52.5356
+    },
+    {
+      "base": "CAD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 213.9474
+    },
+    {
+      "base": "CHF",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 358.2479
+    },
+    {
+      "base": "CNH",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 41.4623
+    },
+    {
+      "base": "CNY",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 41.4465
+    },
+    {
+      "base": "CZK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 13.4117
+    },
+    {
+      "base": "DKK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 44.8351
+    },
+    {
+      "base": "EGP",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 5.9523
+    },
+    {
+      "base": "EUR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 334.4656
+    },
+    {
+      "base": "GBP",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 397.3319
+    },
+    {
+      "base": "GHS",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 23.9767
+    },
+    {
+      "base": "HKD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 38.2272
+    },
+    {
+      "base": "HUF",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.8309
+    },
+    {
+      "base": "IDR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.0182
+    },
+    {
+      "base": "INR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 3.495
+    },
+    {
+      "base": "IRR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.0071
+    },
+    {
+      "base": "JOD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 421.0298
+    },
+    {
+      "base": "JPY",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 2.0549
+    },
+    {
+      "base": "KES",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 2.3096
+    },
+    {
+      "base": "KRW",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.2138
+    },
+    {
+      "base": "KWD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 971.5861
+    },
+    {
+      "base": "MMK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.1421
+    },
+    {
+      "base": "MOP",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 37.0958
+    },
+    {
+      "base": "MUR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 6.5063
+    },
+    {
+      "base": "MVR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 19.3085
+    },
+    {
+      "base": "MYR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 69.9414
+    },
+    {
+      "base": "NGN",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.1865
+    },
+    {
+      "base": "NOK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 28.6874
+    },
+    {
+      "base": "NPR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 2.1807
+    },
+    {
+      "base": "NZD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 175.3448
+    },
+    {
+      "base": "OMR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 775.4013
+    },
+    {
+      "base": "PGK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 72.9857
+    },
+    {
+      "base": "PHP",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 5.3692
+    },
+    {
+      "base": "PKR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 1.0595
+    },
+    {
+      "base": "PLN",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 78.7335
+    },
+    {
+      "base": "QAR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 81.8845
+    },
+    {
+      "base": "RON",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 65.5037
+    },
+    {
+      "base": "RUB",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 3.7314
+    },
+    {
+      "base": "SAR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 79.5857
+    },
+    {
+      "base": "SBD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 35.0451
+    },
+    {
+      "base": "SCR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 20.9966
+    },
+    {
+      "base": "SEK",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 30.721
+    },
+    {
+      "base": "SGD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 230.4119
+    },
+    {
+      "base": "THB",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 9.0075
+    },
+    {
+      "base": "TWD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 9.9173
+    },
+    {
+      "base": "USD",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 298.5101
+    },
+    {
+      "base": "VND",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 0.0115
+    },
+    {
+      "base": "XAU",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 962211.4861
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 16.5635
+    },
+    {
+      "base": "ZMW",
+      "date": "2025-05-16",
+      "quote": "LKR",
+      "rate": 11.1906
+    },
+    {
+      "base": "AED",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 81.3615
+    },
+    {
+      "base": "AUD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 191.885
+    },
+    {
+      "base": "BDT",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 2.4594
+    },
+    {
+      "base": "BHD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 792.6693
+    },
+    {
+      "base": "BND",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 230.1864
+    },
+    {
+      "base": "BRL",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 52.7595
+    },
+    {
+      "base": "CAD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 213.9906
+    },
+    {
+      "base": "CHF",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 357.8855
+    },
+    {
+      "base": "CNH",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 41.418
+    },
+    {
+      "base": "CNY",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 41.4074
+    },
+    {
+      "base": "CZK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 13.4432
+    },
+    {
+      "base": "DKK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 44.8054
+    },
+    {
+      "base": "EGP",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 5.9644
+    },
+    {
+      "base": "EUR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 334.3159
+    },
+    {
+      "base": "GBP",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 397.5305
+    },
+    {
+      "base": "GHS",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 24.294
+    },
+    {
+      "base": "HKD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 38.2111
+    },
+    {
+      "base": "HUF",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.8303
+    },
+    {
+      "base": "IDR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.0181
+    },
+    {
+      "base": "INR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 3.4961
+    },
+    {
+      "base": "IRR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.0071
+    },
+    {
+      "base": "JOD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 421.4619
+    },
+    {
+      "base": "JPY",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 2.0596
+    },
+    {
+      "base": "KES",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 2.3119
+    },
+    {
+      "base": "KRW",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.2136
+    },
+    {
+      "base": "KWD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 972.7416
+    },
+    {
+      "base": "MMK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.1423
+    },
+    {
+      "base": "MOP",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 37.0786
+    },
+    {
+      "base": "MUR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 6.4805
+    },
+    {
+      "base": "MVR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 19.3284
+    },
+    {
+      "base": "MYR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 69.339
+    },
+    {
+      "base": "NGN",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.1859
+    },
+    {
+      "base": "NOK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 28.7672
+    },
+    {
+      "base": "NPR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 2.1841
+    },
+    {
+      "base": "NZD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 176.2719
+    },
+    {
+      "base": "OMR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 776.1972
+    },
+    {
+      "base": "PGK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 71.9102
+    },
+    {
+      "base": "PHP",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 5.3554
+    },
+    {
+      "base": "PKR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 1.0606
+    },
+    {
+      "base": "PLN",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 78.1026
+    },
+    {
+      "base": "QAR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 81.9843
+    },
+    {
+      "base": "RON",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 66.2991
+    },
+    {
+      "base": "RUB",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 3.6891
+    },
+    {
+      "base": "SAR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 79.6674
+    },
+    {
+      "base": "SBD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 35.0811
+    },
+    {
+      "base": "SCR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 21.0181
+    },
+    {
+      "base": "SEK",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 30.5859
+    },
+    {
+      "base": "SGD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 230.1864
+    },
+    {
+      "base": "THB",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 8.9991
+    },
+    {
+      "base": "TWD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 9.908
+    },
+    {
+      "base": "USD",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 298.8165
+    },
+    {
+      "base": "VND",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 0.0115
+    },
+    {
+      "base": "XAU",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 963884.9136
+    },
+    {
+      "base": "ZAR",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 16.5611
+    },
+    {
+      "base": "ZMW",
+      "date": "2025-05-19",
+      "quote": "LKR",
+      "rate": 11.1176
+    }
+  ]
+}

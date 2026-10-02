@@ -1,0 +1,374 @@
+{
+  "adapter": "NRBT",
+  "cassette": "nrbt",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2024, 12, 30), upto: Date.new(2025, 1, 6))",
+  "rows": [
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "AUD",
+      "rate": 0.6626
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "CAD",
+      "rate": 0.5909
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "CHF",
+      "rate": 0.3664
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "EUR",
+      "rate": 0.392
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "FJD",
+      "rate": 0.9451
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "GBP",
+      "rate": 0.3247
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "JPY",
+      "rate": 64.7451
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "NZD",
+      "rate": 0.7237
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "SEK",
+      "rate": 4.5086
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "SGD",
+      "rate": 0.5604
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "USD",
+      "rate": 0.411
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-30",
+      "quote": "WST",
+      "rate": 1.1561
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "AUD",
+      "rate": 0.6627
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "CAD",
+      "rate": 0.589
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "CHF",
+      "rate": 0.3693
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "EUR",
+      "rate": 0.3937
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "FJD",
+      "rate": 0.9458
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "GBP",
+      "rate": 0.326
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "JPY",
+      "rate": 64.4827
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "NZD",
+      "rate": 0.7235
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "SEK",
+      "rate": 4.5212
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "SGD",
+      "rate": 0.5621
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "USD",
+      "rate": 0.4114
+    },
+    {
+      "base": "TOP",
+      "date": "2024-12-31",
+      "quote": "WST",
+      "rate": 1.1556
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "AUD",
+      "rate": 0.6651
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "CAD",
+      "rate": 0.5879
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "CHF",
+      "rate": 0.3683
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "EUR",
+      "rate": 0.3942
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "FJD",
+      "rate": 0.9461
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "GBP",
+      "rate": 0.3257
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "JPY",
+      "rate": 64.3751
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "NZD",
+      "rate": 0.7266
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "SEK",
+      "rate": 4.5168
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "SGD",
+      "rate": 0.5621
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "USD",
+      "rate": 0.4106
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-02",
+      "quote": "WST",
+      "rate": 1.1583
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "AUD",
+      "rate": 0.6643
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "CAD",
+      "rate": 0.5887
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "CHF",
+      "rate": 0.3691
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "EUR",
+      "rate": 0.398
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "FJD",
+      "rate": 0.9455
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "GBP",
+      "rate": 0.3296
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "JPY",
+      "rate": 64.5127
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "NZD",
+      "rate": 0.7263
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "SEK",
+      "rate": 4.5456
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "SGD",
+      "rate": 0.5645
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "USD",
+      "rate": 0.4101
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-03",
+      "quote": "WST",
+      "rate": 1.1614
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "AUD",
+      "rate": 0.663
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "CAD",
+      "rate": 0.5915
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "CHF",
+      "rate": 0.3691
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "EUR",
+      "rate": 0.3965
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "FJD",
+      "rate": 0.9437
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "GBP",
+      "rate": 0.3285
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "JPY",
+      "rate": 64.441
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "NZD",
+      "rate": 0.7255
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "SEK",
+      "rate": 4.5348
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "SGD",
+      "rate": 0.5648
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "USD",
+      "rate": 0.4107
+    },
+    {
+      "base": "TOP",
+      "date": "2025-01-06",
+      "quote": "WST",
+      "rate": 1.1554
+    }
+  ]
+}
