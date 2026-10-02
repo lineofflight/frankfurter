@@ -40,6 +40,21 @@ class Provider < Sequel::Model(:providers)
         _(records.first[:rate]).must_be_close_to(0.0027776, 1e-9)
       end
 
+      it "reads the somoni filed under the financial rand's code" do
+        json = [
+          { "exchangedate" => "01.09.2000", "r030" => 762, "cc" => "TJS", "units" => 1000, "rate" => 2.7776 },
+          { "exchangedate" => "01.11.2000", "r030" => 991, "cc" => "ZAL", "units" => 1, "rate" => 2.4713 },
+          { "exchangedate" => "01.11.2002", "r030" => 991, "cc" => "ZAL", "units" => 1, "rate" => 1.8052 },
+          { "exchangedate" => "02.12.2002", "r030" => 972, "cc" => "TJS", "units" => 100, "rate" => 180.5263 },
+        ]
+
+        records = adapter.parse(json)
+
+        _(records.map { |r| r[:base] }).must_equal(["TJR", "TJS", "TJS", "TJS"])
+        _(records.map { |r| r[:rate] }[1..2]).must_equal([2.4713, 1.8052])
+        _(records.last[:rate]).must_be_close_to(1.805263, 1e-9)
+      end
+
       it "relabels successors published under retired codes" do
         json = [
           { "exchangedate" => "31.12.1997", "cc" => "RUR", "units" => 10000, "rate" => 3.19 },
