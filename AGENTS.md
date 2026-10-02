@@ -34,27 +34,18 @@ Separate SQLite databases per environment (`APP_ENV`). Minitest suite with VCR/W
 
 ## Replacing Provider History
 
-`rates` table inserts use `ON CONFLICT DO NOTHING`. Modifying historical rates requires deleting existing rows and explicitly invalidating downstream blends in the same transaction:
+`rates` table inserts use `ON CONFLICT DO NOTHING`. Modifying historical rates requires deleting existing rows, refetching, and rebuilding downstream blends. Leave the blend tables in place: they keep serving the old values until the rebuild replaces them, whereas emptying them sends every request to live compute.
 
 ```ruby
 provider = Provider["CBK"]
 provider.adapter # Resolve before deleting
 DB.transaction do
-  if provider.blends?
-    [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
-      old_dates = model.source.where(provider: provider.key).select(:bucket_date)
-      model.dataset.where(bucket_date: old_dates).delete
-    end
-    BlendedRate.dataset.delete
-  end
   [Rate, WeeklyRate, MonthlyRate].each { |model| model.where(provider: provider.key).delete }
 end
-Cache.purge
 provider.backfill(after: provider.coverage_start)
 
 begin
-  [BlendedWeeklyRate, BlendedMonthlyRate].each(&:populate)
-  BlendedRate.rebuild if provider.blends?
+  [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild) if provider.blends?
 ensure
   Cache.purge
 end
