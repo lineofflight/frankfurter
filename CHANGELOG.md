@@ -41,10 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Lithuania history for the retired currencies it quoted. (#754)
 - Bank of Lithuania's 1995 Turkmen manat rows that repeat its Russian ruble rate. (#754)
 - Bank of Lithuania's Belarusian ruble rates before the August 1994 denomination. (#754)
-- Autoridade Monetária de Macau's interest rate, stored as a currency LIQ to October 2012.
-- Czech National Bank's 1991 Belgian franc and dinar quotes, labelled BEC and YUD.
-- Czech National Bank's clearing ECU (XCU) of 1993 to 1995, missing from the currency catalogue.
-- Natsionalnyi Bank Ukrainy's somoni quotes, labelled ZAL from November 2000 to November 2002.
+- Autoridade Monetária de Macau's interest rate, stored as a currency LIQ to October 2012. (#762)
+- Czech National Bank's 1991 Belgian franc and dinar quotes, labelled BEC and YUD. (#762)
+- Czech National Bank's clearing ECU (XCU) of 1993 to 1995, missing from the currency catalogue. (#762)
+- Natsionalnyi Bank Ukrainy's somoni quotes, labelled ZAL from November 2000 to November 2002. (#762)
 
 Existing installs keep the days the old backfill skipped, since backfill resumes from the newest stored date. Run
 `bundle exec rake backfill FULL=1` once after upgrading to fill them; it refetches from each provider's coverage start
