@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.1] - 2026-10-02
+
 ### Changed
 
-- Retired currencies use CLDR names with year ranges instead of '(old)'.
+- Retired currencies use CLDR names with year ranges instead of '(old)'. (#742)
 
 ### Fixed
 
@@ -19,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Israel pre-euro rates published per 10, 100 or 1000 units. (#740)
 - Legacy currencies quoted past their redenomination. (#740)
 - Banca d'Italia's old afghani quotes, labelled AFN until April 2004. (#741)
-- Czech National Bank backfill no longer fails when a window holds whole years.
+- Czech National Bank backfill no longer fails when a window holds whole years. (#743)
 - HMRC, IMF, DNB, MAS and CBAR full backfills no longer fail at their coverage start. (#744)
 - Successor currencies quoted under retired codes in NBU, BNA, BAM, BDI, CBG, CBU, LB, NBP and BOTA history. (#745)
 - National Bank of the Kyrgyz Republic no longer re-dates its frozen BYR rate each week. (#745)
@@ -29,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - National Bank of Kazakhstan history from November 1999. (#748)
 - Bank of Tanzania history from June 1999. (#748)
 - Full backfills keep the first days of CBAR, HNB and BCCH history. (#748)
-- Banco Central de Costa Rica history from 1983.
+- Banco Central de Costa Rica history from 1983. (#750)
 - One-day provider typos no longer skew blends. (#749)
 - Bank of Lithuania's old zloty, ruble, lev, leu and metical quotes, labelled with the new codes. (#751)
 - Central Bank of Armenia history for the currencies it no longer quotes. (#751)
@@ -317,7 +319,8 @@ New multi-provider API at `/v2/`. The v1 API is unchanged and remains available 
 - Migrated database storage from PostgreSQL to SQLite.
 - Moved domain to <https://api.frankfurter.dev>.
 
-[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.6.0...HEAD
+[Unreleased]: https://github.com/lineofflight/frankfurter/compare/v2.6.1...HEAD
+[2.6.1]: https://github.com/lineofflight/frankfurter/compare/v2.6.0...v2.6.1
 [2.6.0]: https://github.com/lineofflight/frankfurter/compare/v2.5.1...v2.6.0
 [2.5.1]: https://github.com/lineofflight/frankfurter/compare/v2.5.0...v2.5.1
 [2.5.0]: https://github.com/lineofflight/frankfurter/compare/v2.4.0...v2.5.0
