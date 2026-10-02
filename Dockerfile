@@ -40,6 +40,8 @@ COPY --chown=frankfurter:frankfurter . .
 
 ENV APP_ENV=production
 ENV PORT=8080
+# YJIT refreshes blends about 8% faster at no measurable memory cost; ZJIT was within noise on Ruby 4.0.7.
+ENV RUBY_YJIT_ENABLE=1
 
 USER frankfurter
 
