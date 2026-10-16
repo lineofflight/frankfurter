@@ -1,0 +1,355 @@
+{
+  "adapter": "BOT",
+  "cassette": "bot",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 1), upto: Date.new(2026, 4, 3))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 22.4862
+    },
+    {
+      "base": "BND",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 25.4004
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 23.4457
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 40.7996
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 4.7373
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 5.0475
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 37.6819
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 43.1684
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 4.164
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 0.0019282
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 0.3508
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 0.205513
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 8.0968
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 3.3684
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 18.7232
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 0.5383
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 3.4493
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 25.3417
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-01",
+      "quote": "THB",
+      "rate": 32.6266
+    },
+    {
+      "base": "AUD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 22.5802
+    },
+    {
+      "base": "BND",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 25.4423
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 23.4941
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 41.0725
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 4.7469
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 5.0587
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 37.7903
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 43.4122
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 4.1684
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 0.0019322
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 0.3508
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 0.205758
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 8.1334
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 3.3553
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 18.7704
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 0.5389
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 3.4621
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 25.4329
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-02",
+      "quote": "THB",
+      "rate": 32.6611
+    },
+    {
+      "base": "AUD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 22.519
+    },
+    {
+      "base": "BND",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 25.3993
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 23.4601
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 40.9271
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 4.7398
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 5.0435
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 37.6686
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 43.1528
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 4.1666
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 0.0019296
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 0.3543
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 0.20483200000000001
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 8.0994
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 3.353
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 18.6671
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 0.5399
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 3.4625
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 25.3897
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-03",
+      "quote": "THB",
+      "rate": 32.6448
+    }
+  ]
+}

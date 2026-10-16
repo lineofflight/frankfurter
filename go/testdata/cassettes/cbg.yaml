@@ -1,0 +1,1955 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/USD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 89
+        body: '[[1779408000000,72.39],[1779321600000,72.84],[1779235200000,72.41],[1779148800000,73.53]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:43 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:43 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=e6lcgb4ldfdsltui72a0sl96bb; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/EUR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 89
+        body: '[[1779408000000,86.28],[1779321600000,85.95],[1779235200000,86.14],[1779148800000,86.05]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:43 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:43 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=bf6jnnlhueqsjpbdua49art73r; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/GBP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 89
+        body: '[[1779408000000,97.99],[1779321600000,96.68],[1779235200000,95.53],[1779148800000,96.66]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:44 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:44 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=0k76vnvh7av13j4ciu90q2b3l4; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/CHF
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 88
+        body: '[[1779408000000,91.71],[1779321600000,91.13],[1779235200000,93.2],[1779148800000,91.12]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:44 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:44 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=7tu2dotc70pltoh11048djvrvf; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/SEK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 92
+        body: '[[1779408000000,771.61],[1779321600000,780.2],[1779235200000,770.07],[1779148800000,765.45]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:44 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:44 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=sjcq2j7i9etam5476nl6im3a9q; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/CAD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 87
+        body: '[[1779408000000,52.5],[1779321600000,52.98],[1779235200000,52.64],[1779148800000,53.5]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:45 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:45 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=5kg3en28i7fbm78842i2r16unc; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/XOF
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 93
+        body: '[[1779408000000,646.22],[1779321600000,642.93],[1779235200000,644.56],[1779148800000,641.39]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:45 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:45 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=e12ft2a7qfsdhfbcg84ggeff63; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/NOK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 46
+        body: '[[1779408000000,781.27],[1779148800000,793.8]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:46 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:46 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=1r59pvb3p1eikgddvjmisvei2c; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/DKK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 37
+        body: '[[1779408000000,1],[1779148800000,1]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:46 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:46 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=9sh9jk0dt3vc23j7dgg28u1j3c; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/SAR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 44
+        body: '[[1779408000000,19.3],[1779148800000,19.61]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:46 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:46 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=4mvstbrhan24mf23145h65devq; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/JPY
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 44
+        body: '[[1779408000000,45.47],[1779148800000,46.3]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:47 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:47 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=8d7cv5ouc5d3mf9nankokojlaj; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/AUD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 45
+        body: '[[1779408000000,51.63],[1779148800000,52.64]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:47 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:47 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=3gs32cm8bd07e7tg5sq3dbj70q; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/TWD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,2.29],[1779148800000,2.33]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:48 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:48 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=s53epfepkjtrh92qnngn4skd4c; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/LKR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,0.21],[1779148800000,0.22]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:48 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:48 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=p8k77hoa6oo166f9tlfhgh25ah; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/THB
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,2.22],[1779148800000,2.26]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:48 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:48 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=eh0ehraei4c7h0482auoca54db; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/PHP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,1.17],[1779148800000,1.19]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:49 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:49 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=lk24tg43uiipf5v8f25rfbciqv; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/NZD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 45
+        body: '[[1779408000000,42.39],[1779148800000,43.14]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:49 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:49 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=og94dkhp4ddgmb6aa08jfvhbpf; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/AED
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 45
+        body: '[[1779408000000,19.71],[1779148800000,20.02]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:49 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:49 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=had94rcs8vktbpkg67fd85744d; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/KWD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 46
+        body: '[[1779408000000,234.13],[1779148800000,238.8]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:50 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:50 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=495d6rihp7i2ukrbjjj40rfj0v; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/NGN
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,0.05],[1779148800000,0.05]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:50 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:50 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=9htu5pd870lvu5ke37upc3gnv1; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/HKD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,9.24],[1779148800000,9.39]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:51 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:51 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=qbtl9d43n72dkf8gd791sab96e; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/ZAR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,4.38],[1779148800000,4.42]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:51 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:51 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=v9beljg0njqkr96mu8kjkf07th; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/EGP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,1.37],[1779148800000,1.38]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:51 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:51 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=27ahipmq723rr3eleh958d59br; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/CNY
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 45
+        body: '[[1779408000000,10.64],[1779148800000,10.81]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:52 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:52 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=fkq0reiggksbimvu179opomlm9; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/BRL
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 45
+        body: '[[1779408000000,14.46],[1779148800000,14.68]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:52 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:52 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=ha4pvmlhmvvqd0tchv3bbgnju5; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 25
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/INR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,0.75],[1779148800000,0.76]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:52 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:52 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=db9upar7pel30j4443vohpdj8j; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 26
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/GHS
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,6.17],[1779148800000,6.33]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:53 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:53 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=mh6e1fbs8ntdgi71ufvv949ruk; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 27
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/SLL
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,3.26],[1779148800000,3.26]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:53 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:53 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=9a27d3m46n2of5vpmk31ppntcj; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 28
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/TRY
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,1.59],[1779148800000,1.61]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:54 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:54 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=kq669rrdfkckhrr9u8uoahchk8; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 29
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/GNF
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 43
+        body: '[[1779408000000,0.01],[1779148800000,0.01]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:54 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:54 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=i76k8hcnunlvnmsar5i7qdke84; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 30
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/XDR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 68
+        body: '[[1779408000000,98.9],[1779148800000,100.64],[1779148800000,100.64]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:54 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:54 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=783lvjp6519pp5mji0r0e7nmrf; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 31
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbg.gm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbg.gm
+            User-Agent:
+                - Ruby
+        url: https://www.cbg.gm/ajax/indicative-exchange-rates/SGD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 44
+        body: '[[1779408000000,56.55],[1779148800000,57.5]]'
+        headers:
+            Cache-Control:
+                - no-cache, must-revalidate
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - upgrade-insecure-requests
+            Content-Type:
+                - application/json
+            Date:
+                - Sun, 24 May 2026 06:41:56 GMT
+            Expires:
+                - Mon, 24 May 2027 06:41:56 +0000
+            Permissions-Policy:
+                - geolocation=self
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - PHPSESSID=kdb82tvoq6lo1g3cvam2ushaed; path=/
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - PHP/7.3.27
+                - PleskLin
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

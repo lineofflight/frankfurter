@@ -1,0 +1,643 @@
+{
+  "adapter": "BCV",
+  "cassette": "bcv",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 8, 3), upto: Date.new(2026, 8, 7))",
+  "rows": [
+    {
+      "base": "ANG",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 429.32538271
+    },
+    {
+      "base": "ARS",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 0.50287871
+    },
+    {
+      "base": "BOB",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 61.88317355
+    },
+    {
+      "base": "BRL",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 147.45695155
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 533.87120693
+    },
+    {
+      "base": "CLP",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 0.80785689
+    },
+    {
+      "base": "CNY",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 110.9247452
+    },
+    {
+      "base": "COP",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 0.23819391
+    },
+    {
+      "base": "CUC",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 748.7864
+    },
+    {
+      "base": "DOP",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 12.885672
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 861.1867265
+    },
+    {
+      "base": "INR",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 7.85138303
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 4.70431865
+    },
+    {
+      "base": "MXN",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 43.17463905
+    },
+    {
+      "base": "NIO",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 20.58309945
+    },
+    {
+      "base": "PEN",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 220.56863438
+    },
+    {
+      "base": "RUB",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 9.44969661
+    },
+    {
+      "base": "TRY",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 15.75728956
+    },
+    {
+      "base": "TTD",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 111.50785543
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 748.7864
+    },
+    {
+      "base": "UYU",
+      "date": "2026-08-03",
+      "quote": "VES",
+      "rate": 18.62467416
+    },
+    {
+      "base": "ANG",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 431.22200561
+    },
+    {
+      "base": "ARS",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 0.50357837
+    },
+    {
+      "base": "BOB",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 62.31104391
+    },
+    {
+      "base": "BRL",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 148.0792085
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 535.53475555
+    },
+    {
+      "base": "CLP",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 0.8139901
+    },
+    {
+      "base": "CNY",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 111.39167333
+    },
+    {
+      "base": "COP",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 0.23330157
+    },
+    {
+      "base": "CUC",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 752.0943
+    },
+    {
+      "base": "DOP",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 12.93814381
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 865.17919894
+    },
+    {
+      "base": "INR",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 7.88962518
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 4.79694806
+    },
+    {
+      "base": "MXN",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 43.41819409
+    },
+    {
+      "base": "NIO",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 20.68608402
+    },
+    {
+      "base": "PEN",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 221.59525633
+    },
+    {
+      "base": "RUB",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 9.37890385
+    },
+    {
+      "base": "TRY",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 15.82511193
+    },
+    {
+      "base": "TTD",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 111.55855348
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 752.0943
+    },
+    {
+      "base": "UYU",
+      "date": "2026-08-04",
+      "quote": "VES",
+      "rate": 18.67490129
+    },
+    {
+      "base": "ANG",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 432.97700819
+    },
+    {
+      "base": "ARS",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 0.50579718
+    },
+    {
+      "base": "BOB",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 63.10102444
+    },
+    {
+      "base": "BRL",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 148.22077412
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 536.8541834
+    },
+    {
+      "base": "CLP",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 0.82597423
+    },
+    {
+      "base": "CNY",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 111.83011239
+    },
+    {
+      "base": "COP",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 0.23509703
+    },
+    {
+      "base": "CUC",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 755.1552
+    },
+    {
+      "base": "DOP",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 13.01318628
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 870.04451212
+    },
+    {
+      "base": "INR",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 7.91832899
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 4.80036615
+    },
+    {
+      "base": "MXN",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 43.73223996
+    },
+    {
+      "base": "NIO",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 20.77301548
+    },
+    {
+      "base": "PEN",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 223.32619625
+    },
+    {
+      "base": "RUB",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 9.28964448
+    },
+    {
+      "base": "TRY",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 15.88452744
+    },
+    {
+      "base": "TTD",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 112.01257842
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 755.1552
+    },
+    {
+      "base": "UYU",
+      "date": "2026-08-05",
+      "quote": "VES",
+      "rate": 18.99455685
+    },
+    {
+      "base": "ANG",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 433.40410526
+    },
+    {
+      "base": "ARS",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 0.50511536
+    },
+    {
+      "base": "BOB",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 62.88686356
+    },
+    {
+      "base": "BRL",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 148.06183769
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 538.28303472
+    },
+    {
+      "base": "CLP",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 0.83095165
+    },
+    {
+      "base": "CNY",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 111.99847389
+    },
+    {
+      "base": "COP",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 0.23730891
+    },
+    {
+      "base": "CUC",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 755.9001
+    },
+    {
+      "base": "DOP",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 13.01480888
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 872.83784547
+    },
+    {
+      "base": "INR",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 7.94789132
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 4.80024956
+    },
+    {
+      "base": "MXN",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 43.93720682
+    },
+    {
+      "base": "NIO",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 20.79453603
+    },
+    {
+      "base": "PEN",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 223.35493307
+    },
+    {
+      "base": "RUB",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 9.36124699
+    },
+    {
+      "base": "TRY",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 15.88848884
+    },
+    {
+      "base": "TTD",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 113.55477939
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 755.9001
+    },
+    {
+      "base": "UYU",
+      "date": "2026-08-06",
+      "quote": "VES",
+      "rate": 18.7773276
+    },
+    {
+      "base": "ANG",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 433.86749612
+    },
+    {
+      "base": "ARS",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 0.50582105
+    },
+    {
+      "base": "BOB",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 64.07352243
+    },
+    {
+      "base": "BRL",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 148.38872438
+    },
+    {
+      "base": "CAD",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 539.23487493
+    },
+    {
+      "base": "CLP",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 0.8282981
+    },
+    {
+      "base": "CNY",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 112.13317428
+    },
+    {
+      "base": "COP",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 0.24004958
+    },
+    {
+      "base": "CUC",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 756.7083
+    },
+    {
+      "base": "DOP",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 13.05344661
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 871.89443742
+    },
+    {
+      "base": "INR",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 7.94778174
+    },
+    {
+      "base": "JPY",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 4.77626411
+    },
+    {
+      "base": "MXN",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 43.95607925
+    },
+    {
+      "base": "NIO",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 20.81316217
+    },
+    {
+      "base": "PEN",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 224.07044505
+    },
+    {
+      "base": "RUB",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 9.30254769
+    },
+    {
+      "base": "TRY",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 15.89903686
+    },
+    {
+      "base": "TTD",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 113.32549084
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 756.7083
+    },
+    {
+      "base": "UYU",
+      "date": "2026-08-07",
+      "quote": "VES",
+      "rate": 18.80721511
+    }
+  ]
+}

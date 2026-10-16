@@ -1,0 +1,12 @@
+{
+  "key": "CBSL",
+  "name": "Central Bank of Sri Lanka",
+  "country_code": "LK",
+  "rate_type": "indicative rate",
+  "pivot_currency": "LKR",
+  "data_url": "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-indicative-exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 4-6 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2011-01-20"
+}

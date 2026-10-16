@@ -1,0 +1,925 @@
+{
+  "adapter": "RBM",
+  "cassette": "rbm",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2024, 1, 2), upto: Date.new(2024, 1, 5))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 458.3832
+    },
+    {
+      "base": "ARS",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 2.0822
+    },
+    {
+      "base": "AUD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1151.2558
+    },
+    {
+      "base": "BWP",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 126.4206
+    },
+    {
+      "base": "CAD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1271.905
+    },
+    {
+      "base": "CHF",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 2055.0756
+    },
+    {
+      "base": "CMD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "CNY",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 236.3216
+    },
+    {
+      "base": "DKK",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 249.1661
+    },
+    {
+      "base": "ETB",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 30.0618
+    },
+    {
+      "base": "EUR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1912.8024
+    },
+    {
+      "base": "GBP",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 2207.9066
+    },
+    {
+      "base": "HKD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 215.4819
+    },
+    {
+      "base": "IDR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 0.1089
+    },
+    {
+      "base": "IEP",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1201.7178
+    },
+    {
+      "base": "INR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 20.2048
+    },
+    {
+      "base": "JPY",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 11.9092
+    },
+    {
+      "base": "KES",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 10.7563
+    },
+    {
+      "base": "KRW",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1.2942
+    },
+    {
+      "base": "KWD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 5482.0279
+    },
+    {
+      "base": "LKR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 5.2523
+    },
+    {
+      "base": "MGA",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 0.3701
+    },
+    {
+      "base": "MYR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 366.3075
+    },
+    {
+      "base": "MZN",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 26.6145
+    },
+    {
+      "base": "NOK",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 165.5
+    },
+    {
+      "base": "NZD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1063.537
+    },
+    {
+      "base": "PHP",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 30.2982
+    },
+    {
+      "base": "PKR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 5.9821
+    },
+    {
+      "base": "SAR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 448.9097
+    },
+    {
+      "base": "SEK",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 166.7228
+    },
+    {
+      "base": "SGD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1274.3121
+    },
+    {
+      "base": "THB",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 49.2645
+    },
+    {
+      "base": "TRY",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 56.7487
+    },
+    {
+      "base": "TZS",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 0.672
+    },
+    {
+      "base": "USD",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "XDR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 2258.5213
+    },
+    {
+      "base": "ZAR",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 94.7898
+    },
+    {
+      "base": "ZMW",
+      "date": "2024-01-02",
+      "quote": "MWK",
+      "rate": 65.5848
+    },
+    {
+      "base": "AED",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 458.4081
+    },
+    {
+      "base": "ARS",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 2.0767
+    },
+    {
+      "base": "AUD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1138.7947
+    },
+    {
+      "base": "BWP",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 126.5889
+    },
+    {
+      "base": "CAD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1263.0299
+    },
+    {
+      "base": "CHF",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 2041.0445
+    },
+    {
+      "base": "CMD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "CNY",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 235.6501
+    },
+    {
+      "base": "DKK",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 247.332
+    },
+    {
+      "base": "ETB",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 30.0464
+    },
+    {
+      "base": "EUR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1899.2782
+    },
+    {
+      "base": "GBP",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 2189.8744
+    },
+    {
+      "base": "HKD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 215.4185
+    },
+    {
+      "base": "IDR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 0.1087
+    },
+    {
+      "base": "IEP",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1210.1843
+    },
+    {
+      "base": "INR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 20.2078
+    },
+    {
+      "base": "JPY",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 11.8522
+    },
+    {
+      "base": "KES",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 10.7563
+    },
+    {
+      "base": "KRW",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1.2885
+    },
+    {
+      "base": "KWD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 5476.4991
+    },
+    {
+      "base": "LKR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 5.2392
+    },
+    {
+      "base": "MGA",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 0.3702
+    },
+    {
+      "base": "MYR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 363.578
+    },
+    {
+      "base": "MZN",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 26.6145
+    },
+    {
+      "base": "NOK",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 162.8392
+    },
+    {
+      "base": "NZD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1055.9979
+    },
+    {
+      "base": "PHP",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 30.222
+    },
+    {
+      "base": "PKR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 5.98
+    },
+    {
+      "base": "SAR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 448.9097
+    },
+    {
+      "base": "SEK",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 165.193
+    },
+    {
+      "base": "SGD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1269.8901
+    },
+    {
+      "base": "THB",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 49.1781
+    },
+    {
+      "base": "TRY",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 56.5433
+    },
+    {
+      "base": "TZS",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 0.6707
+    },
+    {
+      "base": "USD",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "XDR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 2254.3806
+    },
+    {
+      "base": "ZAR",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 93.5153
+    },
+    {
+      "base": "ZMW",
+      "date": "2024-01-03",
+      "quote": "MWK",
+      "rate": 65.4955
+    },
+    {
+      "base": "AED",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 458.4081
+    },
+    {
+      "base": "ARS",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 2.0766
+    },
+    {
+      "base": "AUD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1135.2619
+    },
+    {
+      "base": "BWP",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 124.7372
+    },
+    {
+      "base": "CAD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1262.083
+    },
+    {
+      "base": "CHF",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 2042.2465
+    },
+    {
+      "base": "CMD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "CNY",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 235.2647
+    },
+    {
+      "base": "DKK",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 246.6941
+    },
+    {
+      "base": "ETB",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 30.0464
+    },
+    {
+      "base": "EUR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1894.4234
+    },
+    {
+      "base": "GBP",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 2196.1163
+    },
+    {
+      "base": "HKD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 215.6199
+    },
+    {
+      "base": "IDR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 0.1084
+    },
+    {
+      "base": "IEP",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1213.4119
+    },
+    {
+      "base": "INR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 20.2054
+    },
+    {
+      "base": "JPY",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 11.7153
+    },
+    {
+      "base": "KES",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 10.7221
+    },
+    {
+      "base": "KRW",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1.2843
+    },
+    {
+      "base": "KWD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 5476.8555
+    },
+    {
+      "base": "LKR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 5.223
+    },
+    {
+      "base": "MGA",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 0.3702
+    },
+    {
+      "base": "MYR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 362.7945
+    },
+    {
+      "base": "MZN",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 26.6145
+    },
+    {
+      "base": "NOK",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 162.9306
+    },
+    {
+      "base": "NZD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1054.4765
+    },
+    {
+      "base": "PHP",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 30.3145
+    },
+    {
+      "base": "PKR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 5.9864
+    },
+    {
+      "base": "SAR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 448.8977
+    },
+    {
+      "base": "SEK",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 163.8042
+    },
+    {
+      "base": "SGD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1266.4507
+    },
+    {
+      "base": "THB",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 48.6663
+    },
+    {
+      "base": "TRY",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 56.5406
+    },
+    {
+      "base": "TZS",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 0.6707
+    },
+    {
+      "base": "USD",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "XDR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 2249.1787
+    },
+    {
+      "base": "ZAR",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 92.6721
+    },
+    {
+      "base": "ZMW",
+      "date": "2024-01-04",
+      "quote": "MWK",
+      "rate": 65.3912
+    },
+    {
+      "base": "AED",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 458.4081
+    },
+    {
+      "base": "ARS",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 2.0739
+    },
+    {
+      "base": "AUD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1127.8836
+    },
+    {
+      "base": "BWP",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 124.5692
+    },
+    {
+      "base": "CAD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1259.7218
+    },
+    {
+      "base": "CHF",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 2038.1654
+    },
+    {
+      "base": "CMD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "CNY",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 234.8905
+    },
+    {
+      "base": "DKK",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 246.7736
+    },
+    {
+      "base": "ETB",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 30.0464
+    },
+    {
+      "base": "EUR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1894.7702
+    },
+    {
+      "base": "GBP",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 2196.4631
+    },
+    {
+      "base": "HKD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 215.5702
+    },
+    {
+      "base": "IDR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 0.1085
+    },
+    {
+      "base": "IEP",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1212.9747
+    },
+    {
+      "base": "INR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 20.241
+    },
+    {
+      "base": "JPY",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 11.6142
+    },
+    {
+      "base": "KES",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 10.7084
+    },
+    {
+      "base": "KRW",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1.2785
+    },
+    {
+      "base": "KWD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 5473.294
+    },
+    {
+      "base": "LKR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 5.2238
+    },
+    {
+      "base": "MGA",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 0.3702
+    },
+    {
+      "base": "MYR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 362.248
+    },
+    {
+      "base": "MZN",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 26.6145
+    },
+    {
+      "base": "NOK",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 163.5559
+    },
+    {
+      "base": "NZD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1049.0878
+    },
+    {
+      "base": "PHP",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 30.2383
+    },
+    {
+      "base": "PKR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 5.9906
+    },
+    {
+      "base": "SAR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 448.8857
+    },
+    {
+      "base": "SEK",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 164.6759
+    },
+    {
+      "base": "SGD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1265.2133
+    },
+    {
+      "base": "THB",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 48.6803
+    },
+    {
+      "base": "TRY",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 56.4267
+    },
+    {
+      "base": "TZS",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 0.6707
+    },
+    {
+      "base": "USD",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 1683.3663
+    },
+    {
+      "base": "XDR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 2250.2731
+    },
+    {
+      "base": "ZAR",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 92.6706
+    },
+    {
+      "base": "ZMW",
+      "date": "2024-01-05",
+      "quote": "MWK",
+      "rate": 65.31
+    }
+  ]
+}

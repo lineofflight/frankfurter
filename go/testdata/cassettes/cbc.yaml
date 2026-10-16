@@ -1,0 +1,67 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: cpx.cbc.gov.tw
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - cpx.cbc.gov.tw
+            User-Agent:
+                - Ruby
+        url: https://cpx.cbc.gov.tw/API/DataAPI/Get?FileName=BP01D01
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1895
+        body: '{"meta":{"title":"我國與主要貿易對手通貨對美元之匯率依期間","sender":"中央銀行","prepared":"2026/3/31 上午 06:35:24","filename":"BP01D01.px","links":"https://cpx.cbc.gov.tw/api/DataAPI/Get?FileName=BP01D01","note":"1.本匯率資料僅供研究參考之用，國際貿易的出、進口匯率宜使用銀行對顧客#的買入、賣出匯率。#2.日資料係台灣當日時間16:00各通貨銀行間即期交易的即時匯率；月、年資料#部分，新台幣由本行計算，其餘匯率來源為IMF之國際金融統計，若IMF尚未#公布數字，則以本行計算日資料與月資料平均值暫代。#3.另配合歐元於2002年3月1日成為歐元區唯一法償貨幣，自2002年起不再有#馬克、法郎及荷蘭幣之匯率資料。","refperiod":"","last_updated":"2026-03-02","units":"匯率","matrix":"BP01"},"data":{"dataSets":[["20260130","31.468","153.80","1.3770","7.8066","1440.4","1.3514","1.2666","6.9486","0.6999","16785.0","31.365","3.9390","58.888","1.1938","-","-","-","25911.5"],["20260203","31.570","155.40","1.3697","7.8135","1442.2","1.3656","1.2685","6.9362","0.7043","16760.0","31.400","3.9255","58.911","1.1816","-","-","-","26006.5"],["20260206","31.678","156.89","1.3567","7.8124","1469.0","1.3689","1.2740","6.9401","0.6960","16865.0","31.685","3.9490","58.590","1.1792","-","-","-","25970.0"]],"structure":{"Table1":[{"data":"新台幣NTD/USD"},{"data":"日圓JPY/USD"},{"data":"英鎊USD/GBP"},{"data":"港幣HKD/USD"},{"data":"韓元KRW/USD"},{"data":"加拿大幣CAD/USD"},{"data":"新加坡元SGD/USD"},{"data":"人民幣CNY/USD"},{"data":"澳幣USD/AUD"},{"data":"印尼盾IDR/USD"},{"data":"泰銖THB/USD"},{"data":"馬來西亞幣MYR/USD"},{"data":" 菲律賓披索PHP/USD"},{"data":"歐元USD/EUR"},{"data":"馬克DEM/USD"},{"data":"法國法郎FRF/USD"},{"data":"荷蘭幣NLG/USD"},{"data":"越南盾VND/USD"}]}}}'
+        headers:
+            Access-Control-Allow-Origin:
+                - https://petstore.swagger.io
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - img-src 'self';frame-ancestors 'none'
+            Content-Type:
+                - text/plain; charset=utf-8
+            Date:
+                - Mon, 30 Mar 2026 22:40:21 GMT
+            Expires:
+                - "-1"
+            Permissions-Policy:
+                - fullscreen=()
+            Pragma:
+                - no-cache
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Server:
+                - HiNetCDN
+            Strict-Transport-Security:
+                - max-age=63072000;includeSubDomains;preload
+            Vary:
+                - Accept-Encoding
+            X-Cache:
+                - HIT
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Request-Id:
+                - 6eb37b2927b137e3b68e586af8079d6a
+            X-Ua-Compatible:
+                - IE=Edge
+        status: 200 OK
+        code: 200
+        duration: 0s

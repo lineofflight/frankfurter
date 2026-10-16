@@ -1,0 +1,457 @@
+{
+  "adapter": "BNR",
+  "cassette": "bnr",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 1), upto: Date.new(2026, 4, 5))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 1.2044
+    },
+    {
+      "base": "AUD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 3.0413
+    },
+    {
+      "base": "BRL",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.858
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 3.1785
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 5.5314
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.6415
+    },
+    {
+      "base": "CZK",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.2078
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.6823
+    },
+    {
+      "base": "EGP",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0814
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 5.0986
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 5.84
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.5643
+    },
+    {
+      "base": "HUF",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.013298
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.00026
+    },
+    {
+      "base": "ILS",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 1.4068
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0475
+    },
+    {
+      "base": "ISK",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.035309
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.027717000000000002
+    },
+    {
+      "base": "KRW",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0029210000000000004
+    },
+    {
+      "base": "MDL",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.2513
+    },
+    {
+      "base": "MXN",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.2467
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 1.0951
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.4544
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 2.528
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.073
+    },
+    {
+      "base": "PLN",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 1.1892
+    },
+    {
+      "base": "RSD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0434
+    },
+    {
+      "base": "RUB",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0551
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.466
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 3.4371
+    },
+    {
+      "base": "THB",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.1351
+    },
+    {
+      "base": "TRY",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.0995
+    },
+    {
+      "base": "UAH",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.1009
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 4.4232
+    },
+    {
+      "base": "XAU",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 20458.66644483552
+    },
+    {
+      "base": "XDR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 6.0132
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-04-02",
+      "quote": "RON",
+      "rate": 0.2607
+    },
+    {
+      "base": "AED",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 1.2027
+    },
+    {
+      "base": "AUD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 3.0502
+    },
+    {
+      "base": "BRL",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.8565
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 3.1732
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 5.5318
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.6419
+    },
+    {
+      "base": "CZK",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.208
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.6822
+    },
+    {
+      "base": "EGP",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0813
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 5.0978
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 5.8451
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.5635
+    },
+    {
+      "base": "HUF",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.013229
+    },
+    {
+      "base": "IDR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.00026
+    },
+    {
+      "base": "ILS",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 1.409
+    },
+    {
+      "base": "INR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0476
+    },
+    {
+      "base": "ISK",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.035303
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.027676
+    },
+    {
+      "base": "KRW",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0029249999999999996
+    },
+    {
+      "base": "MDL",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.2513
+    },
+    {
+      "base": "MXN",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.2474
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 1.0957
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.4531
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 2.5206
+    },
+    {
+      "base": "PHP",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0733
+    },
+    {
+      "base": "PLN",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 1.1916
+    },
+    {
+      "base": "RSD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0434
+    },
+    {
+      "base": "RUB",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0551
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.4683
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 3.4354
+    },
+    {
+      "base": "THB",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.1355
+    },
+    {
+      "base": "TRY",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.0988
+    },
+    {
+      "base": "UAH",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.1012
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 4.4169
+    },
+    {
+      "base": "XAU",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 20655.39282524784
+    },
+    {
+      "base": "XDR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 6.0097
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-04-03",
+      "quote": "RON",
+      "rate": 0.2603
+    }
+  ]
+}

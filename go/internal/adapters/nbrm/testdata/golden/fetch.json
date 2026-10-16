@@ -1,0 +1,229 @@
+{
+  "adapter": "NBRM",
+  "cassette": "nbrm",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 5, 30))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 37.1387
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 10.1368
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 38.2272
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 67.7667
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 7.6203
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 2.5447
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 8.257
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 61.6948
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 70.4037
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 6.6799
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.1638
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.0031
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 16.6262
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.5738
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.3351
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.0362
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 3.0363
+    },
+    {
+      "base": "MYR",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 13.4315
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 5.5043
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 31.268
+    },
+    {
+      "base": "PHP",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.906
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 14.6047
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 12.1072
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.5253
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 0.6777
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 5.7852
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 41.2895
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 1.6812
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 1.1888
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 52.2616
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-01",
+      "quote": "MKD",
+      "rate": 3.2785
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-30",
+      "quote": "MKD",
+      "rate": 67.3012
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-30",
+      "quote": "MKD",
+      "rate": 61.695
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-30",
+      "quote": "MKD",
+      "rate": 71.1879
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-30",
+      "quote": "MKD",
+      "rate": 0.3331
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-30",
+      "quote": "MKD",
+      "rate": 53.1075
+    }
+  ]
+}

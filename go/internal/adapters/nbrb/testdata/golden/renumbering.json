@@ -1,0 +1,1123 @@
+{
+  "adapter": "NBRB",
+  "cassette": "nbrb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2021, 7, 5), upto: Date.new(2021, 7, 13))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 1.8945
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 1.537
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 2.0462
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 2.7434
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.3923
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.117523
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.40423
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 3.0073
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 3.4959
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.000060537999999999995
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.020435
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.022803
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.029981
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 8.4354
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.0059518
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.14051
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.29333
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 1.7684
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.66353
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.034546
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.29596
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 1.8815
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.29165
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 0.092762
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 2.5426
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-05",
+      "quote": "BYN",
+      "rate": 3.6205
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 1.9102
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 1.5399
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 2.0536
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 2.753
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.39247
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.11773600000000001
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.40499
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 3.0105
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 3.5131
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.000060376000000000006
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.020472999999999998
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.022879
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.029901
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 8.4215
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.005946900000000001
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.14021999999999998
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.2956
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 1.7811
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.6679
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.034608
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.29687
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 1.8855
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.29216000000000003
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 0.092979
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 2.5358
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-06",
+      "quote": "BYN",
+      "rate": 3.6108
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 1.9203
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 1.534
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 2.0508
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 2.7433
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.3919
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.117171
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.40346000000000004
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 3.0035
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 3.5086
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.000060333
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.020397
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.022871000000000002
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.029879
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 8.4166
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.0059427
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.14039
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.29447
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 1.7946
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.66674
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.03456
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.29584
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 1.8841
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.29209
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 0.09287200000000001
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 2.534
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-07",
+      "quote": "BYN",
+      "rate": 3.6082
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 1.9205
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 1.5453
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 2.0548
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 2.7685
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.39532
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.117909
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.40646000000000004
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 3.0223
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 3.529
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.000060838
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.020659
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.023071
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.030126
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 8.4873
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.005963199999999999
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.1416
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.29452
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 1.7966
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.66896
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.034495
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.29713
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 1.8965
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.29446
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 0.09369300000000001
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 2.5552
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-08",
+      "quote": "BYN",
+      "rate": 3.6392
+    },
+    {
+      "base": "AMD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.0052035
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 1.9271
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 1.5684
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 2.0621
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 2.8247
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.39991
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.118822
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.41247
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 3.0649
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 3.5706
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.000061717
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.020966
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.023585
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.030556999999999997
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 8.6079
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.0060205
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.14389000000000002
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.29561000000000004
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 1.8057
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.67567
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.034504
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.30102
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 1.9174
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.29816
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 0.094875
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 2.5921
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-09",
+      "quote": "BYN",
+      "rate": 3.6892
+    },
+    {
+      "base": "AMD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.0051656
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 1.9197
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 1.5605
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 2.0578
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 2.8153
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.3968
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.118495
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.41041
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 3.0502
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 3.5516
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.000061293
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.02086
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.023397
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.030349
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 8.5499
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.005998
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.14242
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.29506
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 1.7927
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.6707099999999999
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.034617
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.29954000000000003
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 1.902
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.29645
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 0.094185
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 2.5743
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-12",
+      "quote": "BYN",
+      "rate": 3.665
+    },
+    {
+      "base": "AMD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.0051568
+    },
+    {
+      "base": "AUD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 1.918
+    },
+    {
+      "base": "BGN",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 1.5577
+    },
+    {
+      "base": "CAD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 2.0576
+    },
+    {
+      "base": "CHF",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 2.8064
+    },
+    {
+      "base": "CNY",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.39699
+    },
+    {
+      "base": "CZK",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.118294
+    },
+    {
+      "base": "DKK",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.4096
+    },
+    {
+      "base": "EUR",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 3.0521
+    },
+    {
+      "base": "GBP",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 3.5624
+    },
+    {
+      "base": "IRR",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.0000612
+    },
+    {
+      "base": "ISK",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.020823
+    },
+    {
+      "base": "JPY",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.023344
+    },
+    {
+      "base": "KGS",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.03033
+    },
+    {
+      "base": "KWD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 8.5455
+    },
+    {
+      "base": "KZT",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.0059931
+    },
+    {
+      "base": "MDL",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.1426
+    },
+    {
+      "base": "NOK",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.29452
+    },
+    {
+      "base": "NZD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 1.7903
+    },
+    {
+      "base": "PLN",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.6685800000000001
+    },
+    {
+      "base": "RUB",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.034456
+    },
+    {
+      "base": "SEK",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.29862
+    },
+    {
+      "base": "SGD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 1.9018
+    },
+    {
+      "base": "TRY",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.29749
+    },
+    {
+      "base": "UAH",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 0.094124
+    },
+    {
+      "base": "USD",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 2.5704
+    },
+    {
+      "base": "XDR",
+      "date": "2021-07-13",
+      "quote": "BYN",
+      "rate": 3.6619
+    }
+  ]
+}

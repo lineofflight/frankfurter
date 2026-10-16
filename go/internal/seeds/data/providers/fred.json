@@ -1,0 +1,12 @@
+{
+  "key": "FRED",
+  "name": "Federal Reserve Bank of St. Louis",
+  "country_code": "US",
+  "rate_type": "H.10",
+  "pivot_currency": "USD",
+  "data_url": "https://www.federalreserve.gov/releases/h10/",
+  "terms_url": "https://fred.stlouisfed.org/legal/",
+  "publish_schedule": "*/30 21-23 * * 1",
+  "publish_cadence": "weekly",
+  "coverage_start": null
+}

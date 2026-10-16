@@ -1,0 +1,19 @@
+{
+  "adapter": "BIS",
+  "cassette": "bis",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1900, 1, 1), upto: Date.new(1900, 1, 31))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "1900-01-31",
+      "quote": "ZAR",
+      "rate": 0.4107
+    }
+  ]
+}

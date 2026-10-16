@@ -1,0 +1,43 @@
+{
+  "adapter": "BANREP",
+  "cassette": "banrep",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 16), upto: Date.new(2026, 3, 24))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2026-03-17",
+      "quote": "COP",
+      "rate": 3691.9
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-18",
+      "quote": "COP",
+      "rate": 3689.97
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-19",
+      "quote": "COP",
+      "rate": 3704.17
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "COP",
+      "rate": 3692.48
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-21",
+      "quote": "COP",
+      "rate": 3704.87
+    }
+  ]
+}

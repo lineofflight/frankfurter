@@ -1,0 +1,131 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: api.nbp.pl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - api.nbp.pl
+            User-Agent:
+                - Ruby
+        url: https://api.nbp.pl/api/exchangerates/tables/A/2026-03-01/2026-03-05/?format=json
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 7821
+        body: '[{"table":"A","no":"041/A/NBP/2026","effectiveDate":"2026-03-02","rates":[{"currency":"bat (Tajlandia)","code":"THB","mid":0.1146},{"currency":"dolar amerykański","code":"USD","mid":3.6056},{"currency":"dolar australijski","code":"AUD","mid":2.5522},{"currency":"dolar Hongkongu","code":"HKD","mid":0.4609},{"currency":"dolar kanadyjski","code":"CAD","mid":2.6410},{"currency":"dolar nowozelandzki","code":"NZD","mid":2.1465},{"currency":"dolar singapurski","code":"SGD","mid":2.8361},{"currency":"euro","code":"EUR","mid":4.2304},{"currency":"forint (Węgry)","code":"HUF","mid":0.011155},{"currency":"frank szwajcarski","code":"CHF","mid":4.6696},{"currency":"funt szterling","code":"GBP","mid":4.8215},{"currency":"hrywna (Ukraina)","code":"UAH","mid":0.0833},{"currency":"jen (Japonia)","code":"JPY","mid":0.022963},{"currency":"korona czeska","code":"CZK","mid":0.1744},{"currency":"korona duńska","code":"DKK","mid":0.5662},{"currency":"korona islandzka","code":"ISK","mid":0.02948},{"currency":"korona norweska","code":"NOK","mid":0.3785},{"currency":"korona szwedzka","code":"SEK","mid":0.3952},{"currency":"lej rumuński","code":"RON","mid":0.8300},{"currency":"lira turecka","code":"TRY","mid":0.0819},{"currency":"nowy izraelski szekel","code":"ILS","mid":1.1713},{"currency":"peso chilijskie","code":"CLP","mid":0.004127},{"currency":"peso filipińskie","code":"PHP","mid":0.0619},{"currency":"peso meksykańskie","code":"MXN","mid":0.2084},{"currency":"rand (Republika Południowej Afryki)","code":"ZAR","mid":0.2240},{"currency":"real (Brazylia)","code":"BRL","mid":0.7028},{"currency":"ringgit (Malezja)","code":"MYR","mid":0.9181},{"currency":"rupia indonezyjska","code":"IDR","mid":0.00021385},{"currency":"rupia indyjska","code":"INR","mid":0.039415},{"currency":"won południowokoreański","code":"KRW","mid":0.002475},{"currency":"yuan renminbi (Chiny)","code":"CNY","mid":0.5238},{"currency":"SDR (MFW)","code":"XDR","mid":4.9266}]},{"table":"A","no":"042/A/NBP/2026","effectiveDate":"2026-03-03","rates":[{"currency":"bat (Tajlandia)","code":"THB","mid":0.1162},{"currency":"dolar amerykański","code":"USD","mid":3.6820},{"currency":"dolar australijski","code":"AUD","mid":2.5923},{"currency":"dolar Hongkongu","code":"HKD","mid":0.4715},{"currency":"dolar kanadyjski","code":"CAD","mid":2.6876},{"currency":"dolar nowozelandzki","code":"NZD","mid":2.1685},{"currency":"dolar singapurski","code":"SGD","mid":2.8814},{"currency":"euro","code":"EUR","mid":4.2732},{"currency":"forint (Węgry)","code":"HUF","mid":0.011089},{"currency":"frank szwajcarski","code":"CHF","mid":4.6853},{"currency":"funt szterling","code":"GBP","mid":4.8962},{"currency":"hrywna (Ukraina)","code":"UAH","mid":0.0846},{"currency":"jen (Japonia)","code":"JPY","mid":0.023353},{"currency":"korona czeska","code":"CZK","mid":0.1755},{"currency":"korona duńska","code":"DKK","mid":0.5720},{"currency":"korona islandzka","code":"ISK","mid":0.029737},{"currency":"korona norweska","code":"NOK","mid":0.3807},{"currency":"korona szwedzka","code":"SEK","mid":0.3984},{"currency":"lej rumuński","code":"RON","mid":0.8329},{"currency":"lira turecka","code":"TRY","mid":0.0836},{"currency":"nowy izraelski szekel","code":"ILS","mid":1.1869},{"currency":"peso chilijskie","code":"CLP","mid":0.004175},{"currency":"peso filipińskie","code":"PHP","mid":0.0630},{"currency":"peso meksykańskie","code":"MXN","mid":0.2106},{"currency":"rand (Republika Południowej Afryki)","code":"ZAR","mid":0.2258},{"currency":"real (Brazylia)","code":"BRL","mid":0.7120},{"currency":"ringgit (Malezja)","code":"MYR","mid":0.9331},{"currency":"rupia indonezyjska","code":"IDR","mid":0.00021845},{"currency":"rupia indyjska","code":"INR","mid":0.039979},{"currency":"won południowokoreański","code":"KRW","mid":0.002492},{"currency":"yuan renminbi (Chiny)","code":"CNY","mid":0.5336},{"currency":"SDR (MFW)","code":"XDR","mid":5.0066}]},{"table":"A","no":"043/A/NBP/2026","effectiveDate":"2026-03-04","rates":[{"currency":"bat (Tajlandia)","code":"THB","mid":0.1169},{"currency":"dolar amerykański","code":"USD","mid":3.6770},{"currency":"dolar australijski","code":"AUD","mid":2.5880},{"currency":"dolar Hongkongu","code":"HKD","mid":0.4703},{"currency":"dolar kanadyjski","code":"CAD","mid":2.6888},{"currency":"dolar nowozelandzki","code":"NZD","mid":2.1729},{"currency":"dolar singapurski","code":"SGD","mid":2.8808},{"currency":"euro","code":"EUR","mid":4.2685},{"currency":"forint (Węgry)","code":"HUF","mid":0.011059},{"currency":"frank szwajcarski","code":"CHF","mid":4.6935},{"currency":"funt szterling","code":"GBP","mid":4.9125},{"currency":"hrywna (Ukraina)","code":"UAH","mid":0.0841},{"currency":"jen (Japonia)","code":"JPY","mid":0.02339},{"currency":"korona czeska","code":"CZK","mid":0.1751},{"currency":"korona duńska","code":"DKK","mid":0.5713},{"currency":"korona islandzka","code":"ISK","mid":0.02954},{"currency":"korona norweska","code":"NOK","mid":0.3814},{"currency":"korona szwedzka","code":"SEK","mid":0.3983},{"currency":"lej rumuński","code":"RON","mid":0.8373},{"currency":"lira turecka","code":"TRY","mid":0.0835},{"currency":"nowy izraelski szekel","code":"ILS","mid":1.1925},{"currency":"peso chilijskie","code":"CLP","mid":0.004046},{"currency":"peso filipińskie","code":"PHP","mid":0.0628},{"currency":"peso meksykańskie","code":"MXN","mid":0.2086},{"currency":"rand (Republika Południowej Afryki)","code":"ZAR","mid":0.2243},{"currency":"real (Brazylia)","code":"BRL","mid":0.6969},{"currency":"ringgit (Malezja)","code":"MYR","mid":0.9329},{"currency":"rupia indonezyjska","code":"IDR","mid":0.00021777},{"currency":"rupia indyjska","code":"INR","mid":0.039922},{"currency":"won południowokoreański","code":"KRW","mid":0.002506},{"currency":"yuan renminbi (Chiny)","code":"CNY","mid":0.5319},{"currency":"SDR (MFW)","code":"XDR","mid":5.0143}]},{"table":"A","no":"044/A/NBP/2026","effectiveDate":"2026-03-05","rates":[{"currency":"bat (Tajlandia)","code":"THB","mid":0.1164},{"currency":"dolar amerykański","code":"USD","mid":3.6771},{"currency":"dolar australijski","code":"AUD","mid":2.5905},{"currency":"dolar Hongkongu","code":"HKD","mid":0.4701},{"currency":"dolar kanadyjski","code":"CAD","mid":2.6950},{"currency":"dolar nowozelandzki","code":"NZD","mid":2.1771},{"currency":"dolar singapurski","code":"SGD","mid":2.8813},{"currency":"euro","code":"EUR","mid":4.2739},{"currency":"forint (Węgry)","code":"HUF","mid":0.01107},{"currency":"frank szwajcarski","code":"CHF","mid":4.7205},{"currency":"funt szterling","code":"GBP","mid":4.9108},{"currency":"hrywna (Ukraina)","code":"UAH","mid":0.0839},{"currency":"jen (Japonia)","code":"JPY","mid":0.023397},{"currency":"korona czeska","code":"CZK","mid":0.1752},{"currency":"korona duńska","code":"DKK","mid":0.5720},{"currency":"korona islandzka","code":"ISK","mid":0.029536},{"currency":"korona norweska","code":"NOK","mid":0.3808},{"currency":"korona szwedzka","code":"SEK","mid":0.3998},{"currency":"lej rumuński","code":"RON","mid":0.8390},{"currency":"lira turecka","code":"TRY","mid":0.0836},{"currency":"nowy izraelski szekel","code":"ILS","mid":1.1954},{"currency":"peso chilijskie","code":"CLP","mid":0.004101},{"currency":"peso filipińskie","code":"PHP","mid":0.0629},{"currency":"peso meksykańskie","code":"MXN","mid":0.2085},{"currency":"rand (Republika Południowej Afryki)","code":"ZAR","mid":0.2234},{"currency":"real (Brazylia)","code":"BRL","mid":0.7029},{"currency":"ringgit (Malezja)","code":"MYR","mid":0.9326},{"currency":"rupia indonezyjska","code":"IDR","mid":0.00021785},{"currency":"rupia indyjska","code":"INR","mid":0.040145},{"currency":"won południowokoreański","code":"KRW","mid":0.002504},{"currency":"yuan renminbi (Chiny)","code":"CNY","mid":0.5334},{"currency":"SDR (MFW)","code":"XDR","mid":5.0119}]}]'
+        headers:
+            Cache-Control:
+                - no-cache
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 26 Apr 2026 22:52:59 GMT
+            Etag:
+                - '"iJDwSEXsMkwdQTZRw1eEGhEDm2iVHscqAvJtn+VJw7A="'
+            Expires:
+                - "-1"
+            Pragma:
+                - no-cache
+            Set-Cookie:
+                - ee3la5eizeiY4Eix=ud5ahSho; path=/
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: api.nbp.pl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - api.nbp.pl
+            User-Agent:
+                - Ruby
+        url: https://api.nbp.pl/api/exchangerates/tables/B/2026-03-01/2026-03-05/?format=json
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 7042
+        body: '[{"table":"B","no":"009/B/NBP/2026","effectiveDate":"2026-03-04","rates":[{"currency":"afgani (Afganistan)","code":"AFN","mid":0.056626},{"currency":"ariary (Madagaskar)","code":"MGA","mid":0.000881},{"currency":"balboa (Panama)","code":"PAB","mid":3.6770},{"currency":"birr etiopski","code":"ETB","mid":0.0238},{"currency":"boliwar soberano (Wenezuela)","code":"VES","mid":0.0087},{"currency":"boliwiano (Boliwia)","code":"BOB","mid":0.5314},{"currency":"colon kostarykański","code":"CRC","mid":0.007803},{"currency":"colon salwadorski","code":"SVC","mid":0.4203},{"currency":"cordoba oro (Nikaragua)","code":"NIO","mid":0.1000},{"currency":"dalasi (Gambia)","code":"GMD","mid":0.0496},{"currency":"denar (Macedonia Północna)","code":"MKD","mid":0.069872},{"currency":"dinar algierski","code":"DZD","mid":0.028106},{"currency":"dinar bahrajski","code":"BHD","mid":9.7532},{"currency":"dinar iracki","code":"IQD","mid":0.002809},{"currency":"dinar jordański","code":"JOD","mid":5.1947},{"currency":"dinar kuwejcki","code":"KWD","mid":12.0172},{"currency":"dinar libijski","code":"LYD","mid":0.5788},{"currency":"dinar serbski","code":"RSD","mid":0.0364},{"currency":"dinar tunezyjski","code":"TND","mid":1.2660},{"currency":"dirham marokański","code":"MAD","mid":0.3953},{"currency":"dirham ZEA (Zjednoczone Emiraty Arabskie)","code":"AED","mid":1.0018},{"currency":"dobra (Wyspy Świętego Tomasza i Książęca)","code":"STN","mid":0.1724},{"currency":"dolar bahamski","code":"BSD","mid":3.6770},{"currency":"dolar barbadoski","code":"BBD","mid":1.8270},{"currency":"dolar belizeński","code":"BZD","mid":1.8296},{"currency":"dolar brunejski","code":"BND","mid":2.8800},{"currency":"dolar Fidżi","code":"FJD","mid":1.6628},{"currency":"dolar gujański","code":"GYD","mid":0.017588},{"currency":"dolar jamajski","code":"JMD","mid":0.0236},{"currency":"dolar liberyjski","code":"LRD","mid":0.0201},{"currency":"dolar namibijski","code":"NAD","mid":0.2229},{"currency":"dolar surinamski","code":"SRD","mid":0.0978},{"currency":"dolar Trynidadu i Tobago","code":"TTD","mid":0.5431},{"currency":"dolar wschodniokaraibski","code":"XCD","mid":1.3594},{"currency":"dolar Wysp Salomona","code":"SBD","mid":0.4620},{"currency":"dong (Wietnam)","code":"VND","mid":0.00014035},{"currency":"dram (Armenia)","code":"AMD","mid":0.009774},{"currency":"escudo Zielonego Przylądka","code":"CVE","mid":0.0385},{"currency":"florin arubański","code":"AWG","mid":2.0331},{"currency":"frank burundyjski","code":"BIF","mid":0.00124},{"currency":"frank CFA BCEAO ","code":"XOF","mid":0.006553},{"currency":"frank CFA BEAC","code":"XAF","mid":0.006394},{"currency":"frank CFP  ","code":"XPF","mid":0.035771},{"currency":"frank Dżibuti","code":"DJF","mid":0.020664},{"currency":"frank gwinejski","code":"GNF","mid":0.00042},{"currency":"frank Komorów","code":"KMF","mid":0.008657},{"currency":"frank kongijski (Dem. Republika Konga)","code":"CDF","mid":0.0016},{"currency":"frank rwandyjski","code":"RWF","mid":0.002518},{"currency":"funt egipski","code":"EGP","mid":0.0735},{"currency":"funt gibraltarski","code":"GIP","mid":4.9125},{"currency":"funt libański","code":"LBP","mid":0.000041},{"currency":"funt południowosudański","code":"SSP","mid":0.00081},{"currency":"funt sudański","code":"SDG","mid":0.006131},{"currency":"funt syryjski","code":"SYP","mid":0.031859},{"currency":"Ghana cedi ","code":"GHS","mid":0.3431},{"currency":"gourde (Haiti)","code":"HTG","mid":0.0281},{"currency":"guarani (Paragwaj)","code":"PYG","mid":0.000565},{"currency":"gulden karaibski","code":"XCG","mid":2.0417},{"currency":"kina (Papua-Nowa Gwinea)","code":"PGK","mid":0.8548},{"currency":"kip (Laos)","code":"LAK","mid":0.000172},{"currency":"kwacha malawijska","code":"MWK","mid":0.002122},{"currency":"kwacha zambijska","code":"ZMW","mid":0.1919},{"currency":"kwanza (Angola)","code":"AOA","mid":0.004005},{"currency":"kyat (Myanmar, Birma)","code":"MMK","mid":0.001752},{"currency":"lari (Gruzja)","code":"GEL","mid":1.3583},{"currency":"lej Mołdawii","code":"MDL","mid":0.2126},{"currency":"lek (Albania)","code":"ALL","mid":0.044348},{"currency":"lempira (Honduras)","code":"HNL","mid":0.1390},{"currency":"leone (Sierra Leone)","code":"SLE","mid":0.1508},{"currency":"lilangeni (Eswatini)","code":"SZL","mid":0.2229},{"currency":"loti (Lesotho)","code":"LSL","mid":0.2229},{"currency":"manat azerbejdżański","code":"AZN","mid":2.1646},{"currency":"metical (Mozambik)","code":"MZN","mid":0.0576},{"currency":"naira (Nigeria)","code":"NGN","mid":0.002666},{"currency":"nakfa (Erytrea)","code":"ERN","mid":0.2441},{"currency":"nowy dolar tajwański","code":"TWD","mid":0.1161},{"currency":"nowy manat (Turkmenistan)","code":"TMT","mid":1.0514},{"currency":"ouguiya (Mauretania)","code":"MRU","mid":0.0918},{"currency":"pa''anga (Tonga)","code":"TOP","mid":1.5607},{"currency":"pataca (Makau)","code":"MOP","mid":0.4567},{"currency":"peso argentyńskie","code":"ARS","mid":0.002601},{"currency":"peso dominikańskie","code":"DOP","mid":0.0620},{"currency":"peso kolumbijskie","code":"COP","mid":0.00097},{"currency":"peso kubańskie","code":"CUP","mid":3.6770},{"currency":"peso urugwajskie","code":"UYU","mid":0.0949},{"currency":"pula (Botswana)","code":"BWP","mid":0.2731},{"currency":"quetzal (Gwatemala)","code":"GTQ","mid":0.4798},{"currency":"rial irański","code":"IRR","mid":0.0000028},{"currency":"rial jemeński","code":"YER","mid":0.015429},{"currency":"rial katarski","code":"QAR","mid":1.0088},{"currency":"rial omański","code":"OMR","mid":9.5578},{"currency":"rial saudyjski","code":"SAR","mid":0.9799},{"currency":"riel (Kambodża)","code":"KHR","mid":0.000918},{"currency":"rubel białoruski","code":"BYN","mid":1.2615},{"currency":"rubel rosyjski","code":"RUB","mid":0.0474},{"currency":"rupia lankijska","code":"LKR","mid":0.011867},{"currency":"rupia (Malediwy)","code":"MVR","mid":0.2380},{"currency":"rupia Mauritiusu","code":"MUR","mid":0.0778},{"currency":"rupia nepalska","code":"NPR","mid":0.024921},{"currency":"rupia pakistańska","code":"PKR","mid":0.0132},{"currency":"rupia seszelska","code":"SCR","mid":0.2688},{"currency":"sol (Peru)","code":"PEN","mid":1.0764},{"currency":"som (Kirgistan)","code":"KGS","mid":0.0421},{"currency":"somoni (Tadżykistan)","code":"TJS","mid":0.3842},{"currency":"sum (Uzbekistan)","code":"UZS","mid":0.000302},{"currency":"szyling kenijski","code":"KES","mid":0.028481},{"currency":"szyling somalijski","code":"SOS","mid":0.00645},{"currency":"szyling tanzański","code":"TZS","mid":0.001426},{"currency":"szyling ugandyjski","code":"UGX","mid":0.000996},{"currency":"taka (Bangladesz)","code":"BDT","mid":0.030112},{"currency":"tala (Samoa)","code":"WST","mid":1.3616},{"currency":"tenge (Kazachstan)","code":"KZT","mid":0.007372},{"currency":"tugrik (Mongolia)","code":"MNT","mid":0.001031},{"currency":"vatu (Vanuatu)","code":"VUV","mid":0.030644},{"currency":"wymienialna marka (Bośnia i Hercegowina)","code":"BAM","mid":2.1801},{"currency":"złoto Zimbabwe","code":"ZWG","mid":0.1429}]}]'
+        headers:
+            Cache-Control:
+                - no-cache
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 26 Apr 2026 22:52:59 GMT
+            Etag:
+                - '"ZeYPQLGZT7CBDWSQDYW4NYhaTXeePdWvLoVJMKEFJqM="'
+            Expires:
+                - "-1"
+            Pragma:
+                - no-cache
+            Set-Cookie:
+                - ee3la5eizeiY4Eix=ud5ahSho; path=/
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: api.nbp.pl
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - api.nbp.pl
+            User-Agent:
+                - Ruby
+        url: https://api.nbp.pl/api/cenyzlota/2026-03-01/2026-03-05/?format=json
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 145
+        body: '[{"data":"2026-03-02","cena":595.71},{"data":"2026-03-03","cena":624.92},{"data":"2026-03-04","cena":624.32},{"data":"2026-03-05","cena":612.51}]'
+        headers:
+            Cache-Control:
+                - no-cache
+            Content-Type:
+                - application/json; charset=utf-8
+            Date:
+                - Sun, 26 Apr 2026 22:53:00 GMT
+            Etag:
+                - '"w2x99mlakyS6ZEEMo2OE0MUhuxuno+a5bfsUcXuBT+M="'
+            Expires:
+                - "-1"
+            Pragma:
+                - no-cache
+            Set-Cookie:
+                - ee3la5eizeiY4Eix=iePaevi0; path=/
+            Vary:
+                - Accept-Encoding
+        status: 200 OK
+        code: 200
+        duration: 0s

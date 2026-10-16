@@ -1,0 +1,12 @@
+{
+  "key": "BDL",
+  "name": "Banque du Liban",
+  "country_code": "LB",
+  "rate_type": "official rate",
+  "pivot_currency": "LBP",
+  "data_url": "https://www.bdl.gov.lb/currentrate.php",
+  "terms_url": "https://www.bdl.gov.lb/disclaimer.php",
+  "publish_schedule": "*/30 10-12 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2024-01-02"
+}

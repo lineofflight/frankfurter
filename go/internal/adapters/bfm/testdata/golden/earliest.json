@@ -1,0 +1,470 @@
+{
+  "adapter": "BFM",
+  "cassette": "bfm",
+  "match_requests_on": [
+    "method",
+    "uri",
+    "body"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2018, 1, 2), upto: Date.new(2018, 1, 5))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 2521.13
+    },
+    {
+      "base": "CAD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 2568.45
+    },
+    {
+      "base": "CHF",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 3315.44
+    },
+    {
+      "base": "CNY",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 495.99
+    },
+    {
+      "base": "DJF",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 18.2
+    },
+    {
+      "base": "DKK",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 521.91
+    },
+    {
+      "base": "EUR",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 3873.76
+    },
+    {
+      "base": "GBP",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 4364.68
+    },
+    {
+      "base": "HKD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 412.09
+    },
+    {
+      "base": "INR",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 50.73
+    },
+    {
+      "base": "JPY",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 28.7
+    },
+    {
+      "base": "MUR",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 96.42
+    },
+    {
+      "base": "NOK",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 397.05
+    },
+    {
+      "base": "NZD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 2289.9
+    },
+    {
+      "base": "SEK",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 395.36
+    },
+    {
+      "base": "SGD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 2423.76
+    },
+    {
+      "base": "USD",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 3220.45
+    },
+    {
+      "base": "XDR",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 4586.34
+    },
+    {
+      "base": "ZAR",
+      "date": "2018-01-02",
+      "quote": "MGA",
+      "rate": 260.89
+    },
+    {
+      "base": "AUD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 2526.74
+    },
+    {
+      "base": "CAD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 2575.46
+    },
+    {
+      "base": "CHF",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 3303.73
+    },
+    {
+      "base": "CNY",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 496.23
+    },
+    {
+      "base": "DJF",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 18.23
+    },
+    {
+      "base": "DKK",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 520.58
+    },
+    {
+      "base": "EUR",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 3885.75
+    },
+    {
+      "base": "GBP",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 4374.78
+    },
+    {
+      "base": "HKD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 412.64
+    },
+    {
+      "base": "INR",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 50.77
+    },
+    {
+      "base": "JPY",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 28.73
+    },
+    {
+      "base": "MUR",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 96.29
+    },
+    {
+      "base": "NOK",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 397.7
+    },
+    {
+      "base": "NZD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 2291.74
+    },
+    {
+      "base": "SEK",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 394.46
+    },
+    {
+      "base": "SGD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 2425.47
+    },
+    {
+      "base": "USD",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 3225.76
+    },
+    {
+      "base": "XDR",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 4606.77
+    },
+    {
+      "base": "ZAR",
+      "date": "2018-01-03",
+      "quote": "MGA",
+      "rate": 261.14
+    },
+    {
+      "base": "AUD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 2534.11
+    },
+    {
+      "base": "CAD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 2579.97
+    },
+    {
+      "base": "CHF",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 3310.68
+    },
+    {
+      "base": "CNY",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 496.97
+    },
+    {
+      "base": "DJF",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 18.25
+    },
+    {
+      "base": "DKK",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 523.19
+    },
+    {
+      "base": "EUR",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 3877.84
+    },
+    {
+      "base": "GBP",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 4375.86
+    },
+    {
+      "base": "HKD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 412.94
+    },
+    {
+      "base": "INR",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 50.92
+    },
+    {
+      "base": "JPY",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 28.68
+    },
+    {
+      "base": "MUR",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 96.38
+    },
+    {
+      "base": "NOK",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 399.16
+    },
+    {
+      "base": "NZD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 2301.17
+    },
+    {
+      "base": "SEK",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 396.75
+    },
+    {
+      "base": "SGD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 2429.42
+    },
+    {
+      "base": "USD",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 3228.58
+    },
+    {
+      "base": "XDR",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 4604.96
+    },
+    {
+      "base": "ZAR",
+      "date": "2018-01-04",
+      "quote": "MGA",
+      "rate": 262.68
+    },
+    {
+      "base": "AUD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 2529.81
+    },
+    {
+      "base": "CAD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 2579.5
+    },
+    {
+      "base": "CHF",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 3302.6
+    },
+    {
+      "base": "CNY",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 496.93
+    },
+    {
+      "base": "DJF",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 18.23
+    },
+    {
+      "base": "DKK",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 522.06
+    },
+    {
+      "base": "EUR",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 3884.16
+    },
+    {
+      "base": "GBP",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 4368.3
+    },
+    {
+      "base": "HKD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 412.39
+    },
+    {
+      "base": "INR",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 50.89
+    },
+    {
+      "base": "JPY",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 28.47
+    },
+    {
+      "base": "MUR",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 96.47
+    },
+    {
+      "base": "NOK",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 399.33
+    },
+    {
+      "base": "NZD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 2309.85
+    },
+    {
+      "base": "SEK",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 395.69
+    },
+    {
+      "base": "SGD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 2429.67
+    },
+    {
+      "base": "USD",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 3225.15
+    },
+    {
+      "base": "XDR",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 4604.84
+    },
+    {
+      "base": "ZAR",
+      "date": "2018-01-05",
+      "quote": "MGA",
+      "rate": 260.56
+    }
+  ]
+}

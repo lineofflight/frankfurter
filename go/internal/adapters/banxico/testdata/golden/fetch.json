@@ -1,0 +1,313 @@
+{
+  "adapter": "BANXICO",
+  "cassette": "banxico",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 15))",
+  "rows": [
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "MXN",
+      "rate": 12.6646
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "MXN",
+      "rate": 20.3541
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "MXN",
+      "rate": 23.2652
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "MXN",
+      "rate": 0.1105
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "MXN",
+      "rate": 17.3485
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "MXN",
+      "rate": 12.9099
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "MXN",
+      "rate": 20.5505
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "MXN",
+      "rate": 23.558
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "MXN",
+      "rate": 0.1124
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "MXN",
+      "rate": 17.7228
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "MXN",
+      "rate": 12.8601
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "MXN",
+      "rate": 20.4121
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "MXN",
+      "rate": 23.4719
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "MXN",
+      "rate": 0.1116
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "MXN",
+      "rate": 17.5445
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "MXN",
+      "rate": 12.9483
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "MXN",
+      "rate": 20.5256
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "MXN",
+      "rate": 23.6129
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "MXN",
+      "rate": 0.1123
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "MXN",
+      "rate": 17.677
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-06",
+      "quote": "MXN",
+      "rate": 13.0787
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "MXN",
+      "rate": 20.5769
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "MXN",
+      "rate": 23.7036
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "MXN",
+      "rate": 0.1127
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "MXN",
+      "rate": 17.7962
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-09",
+      "quote": "MXN",
+      "rate": 13.1079
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-09",
+      "quote": "MXN",
+      "rate": 20.5388
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-09",
+      "quote": "MXN",
+      "rate": 23.7159
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-09",
+      "quote": "MXN",
+      "rate": 0.1121
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-09",
+      "quote": "MXN",
+      "rate": 17.7687
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-10",
+      "quote": "MXN",
+      "rate": 12.9266
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-10",
+      "quote": "MXN",
+      "rate": 20.3717
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-10",
+      "quote": "MXN",
+      "rate": 23.5328
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-10",
+      "quote": "MXN",
+      "rate": 0.1109
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-10",
+      "quote": "MXN",
+      "rate": 17.5037
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-11",
+      "quote": "MXN",
+      "rate": 12.9887
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-11",
+      "quote": "MXN",
+      "rate": 20.4719
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-11",
+      "quote": "MXN",
+      "rate": 23.7088
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-11",
+      "quote": "MXN",
+      "rate": 0.1114
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-11",
+      "quote": "MXN",
+      "rate": 17.6543
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-12",
+      "quote": "MXN",
+      "rate": 13.0839
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-12",
+      "quote": "MXN",
+      "rate": 20.6131
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-12",
+      "quote": "MXN",
+      "rate": 23.896
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-12",
+      "quote": "MXN",
+      "rate": 0.1124
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-12",
+      "quote": "MXN",
+      "rate": 17.8368
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-13",
+      "quote": "MXN",
+      "rate": 13.0259
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-13",
+      "quote": "MXN",
+      "rate": 20.5536
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-13",
+      "quote": "MXN",
+      "rate": 23.7562
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-13",
+      "quote": "MXN",
+      "rate": 0.1125
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-13",
+      "quote": "MXN",
+      "rate": 17.9218
+    }
+  ]
+}

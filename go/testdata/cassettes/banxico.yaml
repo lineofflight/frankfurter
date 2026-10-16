@@ -1,0 +1,52 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.banxico.org.mx
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Bmx-Token:
+                - <BANXICO_API_KEY>
+            Host:
+                - www.banxico.org.mx
+            User-Agent:
+                - Ruby
+        url: https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718,SF46410,SF46407,SF46406,SF60632/datos/2026-03-01/2026-03-15
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 2772
+        body: '{"bmx":{"series":[{"idSerie":"SF43718","titulo":"Tipo de cambio                                          Pesos por dólar E.U.A. Tipo de cambio para solventar obligaciones denominadas en moneda extranjera Fecha de determinación (FIX)","datos":[{"fecha":"02/03/2026","dato":"17.3485"},{"fecha":"03/03/2026","dato":"17.7228"},{"fecha":"04/03/2026","dato":"17.5445"},{"fecha":"05/03/2026","dato":"17.6770"},{"fecha":"06/03/2026","dato":"17.7962"},{"fecha":"09/03/2026","dato":"17.7687"},{"fecha":"10/03/2026","dato":"17.5037"},{"fecha":"11/03/2026","dato":"17.6543"},{"fecha":"12/03/2026","dato":"17.8368"},{"fecha":"13/03/2026","dato":"17.9218"}]},{"idSerie":"SF46406","titulo":"Cotización de las divisas que conforman la canasta del DEG Respecto al peso mexicano Yen japonés","datos":[{"fecha":"02/03/2026","dato":"0.1105"},{"fecha":"03/03/2026","dato":"0.1124"},{"fecha":"04/03/2026","dato":"0.1116"},{"fecha":"05/03/2026","dato":"0.1123"},{"fecha":"06/03/2026","dato":"0.1127"},{"fecha":"09/03/2026","dato":"0.1121"},{"fecha":"10/03/2026","dato":"0.1109"},{"fecha":"11/03/2026","dato":"0.1114"},{"fecha":"12/03/2026","dato":"0.1124"},{"fecha":"13/03/2026","dato":"0.1125"}]},{"idSerie":"SF46410","titulo":"Cotización de las divisas que conforman la canasta del DEG Respecto al peso mexicano Euro","datos":[{"fecha":"02/03/2026","dato":"20.3541"},{"fecha":"03/03/2026","dato":"20.5505"},{"fecha":"04/03/2026","dato":"20.4121"},{"fecha":"05/03/2026","dato":"20.5256"},{"fecha":"06/03/2026","dato":"20.5769"},{"fecha":"09/03/2026","dato":"20.5388"},{"fecha":"10/03/2026","dato":"20.3717"},{"fecha":"11/03/2026","dato":"20.4719"},{"fecha":"12/03/2026","dato":"20.6131"},{"fecha":"13/03/2026","dato":"20.5536"}]},{"idSerie":"SF60632","titulo":"Cotización de la divisa Respecto al peso mexicano Dólar Canadiense","datos":[{"fecha":"02/03/2026","dato":"12.6646"},{"fecha":"03/03/2026","dato":"12.9099"},{"fecha":"04/03/2026","dato":"12.8601"},{"fecha":"05/03/2026","dato":"12.9483"},{"fecha":"06/03/2026","dato":"13.0787"},{"fecha":"09/03/2026","dato":"13.1079"},{"fecha":"10/03/2026","dato":"12.9266"},{"fecha":"11/03/2026","dato":"12.9887"},{"fecha":"12/03/2026","dato":"13.0839"},{"fecha":"13/03/2026","dato":"13.0259"}]},{"idSerie":"SF46407","titulo":"Cotización de las divisas que conforman la canasta del DEG Respecto al peso mexicano Libra esterlina","datos":[{"fecha":"02/03/2026","dato":"23.2652"},{"fecha":"03/03/2026","dato":"23.5580"},{"fecha":"04/03/2026","dato":"23.4719"},{"fecha":"05/03/2026","dato":"23.6129"},{"fecha":"06/03/2026","dato":"23.7036"},{"fecha":"09/03/2026","dato":"23.7159"},{"fecha":"10/03/2026","dato":"23.5328"},{"fecha":"11/03/2026","dato":"23.7088"},{"fecha":"12/03/2026","dato":"23.8960"},{"fecha":"13/03/2026","dato":"23.7562"}]}]}}'
+        headers:
+            Access-Control-Allow-Headers:
+                - Bmx-Token, Accept, Accept-Encoding, Content-Type
+            Access-Control-Allow-Methods:
+                - GET
+            Access-Control-Allow-Origin:
+                - '*'
+            Cache-Control:
+                - no-store
+            Content-Language:
+                - es
+            Content-Security-Policy:
+                - script-src 'self'
+            Content-Type:
+                - application/json;charset=UTF-8
+            Date:
+                - Tue, 31 Mar 2026 11:23:24 GMT
+            Set-Cookie:
+                - Hex11701280=!GJiSdALwvt9JHHNXnI/D94h9/K2URzo4Z6h+HLkXLxKk8ig5yqIS65oiQi7azil/eNsPAIVYtbGIZqc=; expires=Tue, 31-Mar-2026 19:23:25 GMT; path=/; Httponly
+                - TS012f422b=01ab44a5a812fd50ee106963050340934df127c0430a274f2f53753359567fc4b2874a7f5d3f3de8190faf46af630451bd0ff91036d674fc76f989d738e610e59ea29722fe; Path=/
+        status: 200 OK
+        code: 200
+        duration: 0s
