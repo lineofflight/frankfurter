@@ -10,6 +10,7 @@ task :spec do
   test_db = "db/frankfurter_test.sqlite3"
 
   # Ensure base test database is clean and WAL checkpointed
+  Sequel::DATABASES.each(&:disconnect) if defined?(Sequel)
   if File.exist?(test_db)
     system("sqlite3", test_db, "PRAGMA wal_checkpoint(TRUNCATE);", out: File::NULL)
   end
