@@ -196,8 +196,8 @@ describe Provider do
       end
     end
 
-    describe "with weekly cadence (FRED-style, Monday publishing covers prior ISO week)" do
-      let(:fred) { build_provider("*/30 21-23 * * 1", cadence: "weekly") }
+    describe "with weekly cadence (FRED-style, Mon-Tue publishing covers prior ISO week)" do
+      let(:fred) { build_provider("*/30 21-23 * * 1-2", cadence: "weekly") }
 
       it "returns 0 when end_date is in the week FRED's last batch covered" do
         # Today 2026-04-21 (Tue). Last Monday fire Apr 20 covers prior ISO week Apr 13-19. end_date = 2026-04-19 → same
