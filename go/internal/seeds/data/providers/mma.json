@@ -1,0 +1,12 @@
+{
+  "key": "MMA",
+  "name": "Maldives Monetary Authority",
+  "country_code": "MV",
+  "rate_type": "reference rate",
+  "pivot_currency": "MVR",
+  "data_url": "https://www.mma.gov.mv/JSON/referencerates.json",
+  "terms_url": null,
+  "publish_schedule": "*/30 3-5 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2011-04-21"
+}

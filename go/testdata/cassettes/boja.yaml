@@ -1,0 +1,141 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: boj.org.jm
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - boj.org.jm
+            User-Agent:
+                - Ruby
+        url: https://boj.org.jm/market/foreign-exchange/counter-rates/
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 211
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><title>BOJ Counter Rates</title></head>
+            <body>
+              <input type="hidden" id="wdtNonceFrontendServerSide_134" name="wdtNonceFrontendServerSide_134" value="5a1cc1896f" />
+            </body>
+            </html>
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000, h3-29=":443"; ma=2592000, h3-Q050=":443"; ma=2592000, h3-Q046=":443"; ma=2592000, h3-Q043=":443"; ma=2592000, quic=":443"; ma=2592000; v="43,46"
+            Cache-Control:
+                - no-cache, must-revalidate, max-age=0, no-store, private
+            Connection:
+                - Keep-Alive
+            Content-Security-Policy:
+                - object-src 'self'
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Mon, 23 Mar 2026 00:32:37 GMT
+            Edit:
+                - Set-Cookie (.*) "$1;Secure;SameSite=None"
+            Keep-Alive:
+                - timeout=5, max=100
+            Link:
+                - <https://boj.org.jm/?p=3382>; rel=shortlink
+                - <https://boj.org.jm/wp-json/>; rel="https://api.w.org/"
+                - <https://boj.org.jm/wp-json/wp/v2/pages/3382>; rel="alternate"; title="JSON"; type="application/json"
+            Permissions-Policy:
+                - accelerometer 'none' ; ambient-light-sensor 'none' ; autoplay 'none' ; camera 'none' ; encrypted-media 'none' ; fullscreen 'none' ; geolocation 'none' ; gyroscope 'none' ; magnetometer 'none' ; microphone 'none' ; midi 'none' ; payment 'none' ; speaker 'none' ; sync-xhr 'none' ; usb 'none' ; notifications 'none' ; vibrate 'none' ; push 'none' ; vr 'none'
+            Referrer-Policy:
+                - same-origin
+            Strict-Transport-Security:
+                - max-age=63072000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Litespeed-Cache-Control:
+                - no-cache
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 44
+        host: boj.org.jm
+        body: draw=1&start=0&length=-1&wdtNonce=5a1cc1896f
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Content-Type:
+                - application/x-www-form-urlencoded
+            Host:
+                - boj.org.jm
+            User-Agent:
+                - Ruby
+        url: https://boj.org.jm/wp-admin/admin-ajax.php?action=get_wdtable&table_id=134
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 2554
+        body: '{"draw":1,"recordsTotal":34,"recordsFiltered":34,"data":[["19 Mar 2026","AUSTRALIAN DOLLAR","108.8818","97.9900","0.0000","112.1881"],["19 Mar 2026","BAHAMAS DOLLAR","153.8639","138.4800","0.0000","158.5361"],["19 Mar 2026","BARBADOS DOLLAR","76.9320","69.2400","0.0000","79.2681"],["19 Mar 2026","BELIZE DOLLAR","76.9320","69.2400","0.0000","79.2681"],["19 Mar 2026","CANADA DOLLAR","112.3097","106.6900","0.0000","117.1630"],["19 Mar 2026","CAYMAN DOLLAR","187.6389","168.8800","0.0000","193.3367"],["19 Mar 2026","DOMINICAN REP. PESO ","2.6013","2.3400","0.0000","2.6802"],["19 Mar 2026","E. C. DOLLAR","56.9866","51.2900","0.0000","58.7171"],["19 Mar 2026","EURO","182.8439","173.7000","0.0000","183.0696"],["19 Mar 2026","GIBRALTAR POUND","204.9698","184.4700","0.0000","211.1939"],["19 Mar 2026","GREAT BRITAIN POUND","209.5466","199.0700","0.0000","210.5787"],["19 Mar 2026","GUYANA DOLLAR","0.7406","0.6700","0.0000","0.7631"],["19 Mar 2026","HONG KONG DOLLAR","19.6346","17.6700","0.0000","20.2309"],["19 Mar 2026","JAPANESE YEN","0.9647","0.8700","0.0000","0.9940"],["19 Mar 2026","NORTHERN IRELAND POUND","224.9182","202.4300","0.0000","231.7481"],["19 Mar 2026","SWISS FRANC","194.9495","175.4500","0.0000","200.8693"],["19 Mar 2026","U.S. DOLLAR","156.2070","148.4000","128.4000","158.5361"],["20 Mar 2026","AUSTRALIAN DOLLAR","108.5317","97.6800","0.0000","111.6328"],["20 Mar 2026","BAHAMAS DOLLAR","154.2520","138.8300","0.0000","158.6594"],["20 Mar 2026","BARBADOS DOLLAR","77.1260","69.4100","0.0000","79.3297"],["20 Mar 2026","BELIZE DOLLAR","77.1260","69.4100","0.0000","79.3297"],["20 Mar 2026","CANADA DOLLAR","111.3872","105.8200","0.0000","116.8291"],["20 Mar 2026","CAYMAN DOLLAR","188.1122","169.3000","0.0000","193.4871"],["20 Mar 2026","DOMINICAN REP. PESO ","2.5677","2.3100","0.0000","2.6410"],["20 Mar 2026","E. C. DOLLAR","57.1304","51.4200","0.0000","58.7627"],["20 Mar 2026","EURO","182.4722","173.3500","0.0000","183.8523"],["20 Mar 2026","GIBRALTAR POUND","206.0575","185.4500","0.0000","211.9452"],["20 Mar 2026","GREAT BRITAIN POUND","210.9645","200.4200","0.0000","212.5276"],["20 Mar 2026","GUYANA DOLLAR","0.7425","0.6700","0.0000","0.7637"],["20 Mar 2026","HONG KONG DOLLAR","19.6916","17.7200","0.0000","20.2542"],["20 Mar 2026","JAPANESE YEN","0.9753","0.8800","0.0000","1.0032"],["20 Mar 2026","NORTHERN IRELAND POUND","225.5010","202.9500","0.0000","231.9442"],["20 Mar 2026","SWISS FRANC","194.6275","175.1600","0.0000","200.1885"],["20 Mar 2026","U.S. DOLLAR","156.6010","148.7700","128.7700","158.6594"]]}'
+        headers:
+            Alt-Svc:
+                - h3=":443"; ma=2592000, h3-29=":443"; ma=2592000, h3-Q050=":443"; ma=2592000, h3-Q046=":443"; ma=2592000, h3-Q043=":443"; ma=2592000, quic=":443"; ma=2592000; v="43,46"
+            Cache-Control:
+                - no-cache, must-revalidate, max-age=0, no-store, private
+            Connection:
+                - Keep-Alive
+            Content-Security-Policy:
+                - object-src 'self'
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Mon, 23 Mar 2026 00:32:45 GMT
+            Edit:
+                - Set-Cookie (.*) "$1;Secure;SameSite=None"
+            Expires:
+                - Wed, 11 Jan 1984 05:00:00 GMT
+            Keep-Alive:
+                - timeout=5, max=100
+            Permissions-Policy:
+                - accelerometer 'none' ; ambient-light-sensor 'none' ; autoplay 'none' ; camera 'none' ; encrypted-media 'none' ; fullscreen 'none' ; geolocation 'none' ; gyroscope 'none' ; magnetometer 'none' ; microphone 'none' ; midi 'none' ; payment 'none' ; speaker 'none' ; sync-xhr 'none' ; usb 'none' ; notifications 'none' ; vibrate 'none' ; push 'none' ; vr 'none'
+            Referrer-Policy:
+                - strict-origin-when-cross-origin
+            Strict-Transport-Security:
+                - max-age=63072000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Litespeed-Cache-Control:
+                - no-cache
+            X-Robots-Tag:
+                - noindex
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

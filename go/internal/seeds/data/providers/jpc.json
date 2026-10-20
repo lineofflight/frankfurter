@@ -1,0 +1,13 @@
+{
+  "key": "JPC",
+  "name": "Japan Customs",
+  "country_code": "JP",
+  "rate_type": "weekly customs rate",
+  "pivot_currency": "JPY",
+  "data_url": "https://www.customs.go.jp/tetsuzuki/kawase/",
+  "terms_url": "https://www.customs.go.jp/copyright_e.htm",
+  "publish_schedule": "0 0 * * 1-5",
+  "publish_cadence": "weekly",
+  "frequency": "weekly",
+  "coverage_start": "2002-01-06"
+}

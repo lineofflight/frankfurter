@@ -1,0 +1,50 @@
+{
+  "adapter": "SBP",
+  "cassette": "sbp",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 14), upto: Date.new(2026, 4, 17))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 328.36043557692307
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 377.20513400000004
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 279.19464285714287
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 328.7753811538462
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 377.34445919999996
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 279.1482142857143
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "adapter": "CBC",
+  "cassette": "cbc",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 2, 1), upto: Date.new(2026, 2, 5))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-02-03",
+      "quote": "USD",
+      "rate": 0.7043
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-03",
+      "quote": "USD",
+      "rate": 1.1816
+    },
+    {
+      "base": "GBP",
+      "date": "2026-02-03",
+      "quote": "USD",
+      "rate": 1.3697
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "CAD",
+      "rate": 1.3656
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "CNY",
+      "rate": 6.9362
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "HKD",
+      "rate": 7.8135
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "IDR",
+      "rate": 16760.0
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "JPY",
+      "rate": 155.4
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "KRW",
+      "rate": 1442.2
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "MYR",
+      "rate": 3.9255
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "PHP",
+      "rate": 58.911
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "SGD",
+      "rate": 1.2685
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "THB",
+      "rate": 31.4
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "TWD",
+      "rate": 31.57
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-03",
+      "quote": "VND",
+      "rate": 26006.5
+    }
+  ]
+}

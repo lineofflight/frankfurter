@@ -1,0 +1,110 @@
+{
+  "adapter": "BOA",
+  "cassette": "boa",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 30), upto: Date.new(2026, 4, 30))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 36.0858
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 96.9767
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 167.9992
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 19.3956
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 20.7452
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 154.7637
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 178.9066
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 0.828057
+    },
+    {
+      "base": "KWD",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 432.0877
+    },
+    {
+      "base": "LYD",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 20.8768
+    },
+    {
+      "base": "MAD",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 14.3316
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 14.1897
+    },
+    {
+      "base": "SAR",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 35.3401
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 14.2594
+    },
+    {
+      "base": "TND",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 45.4194
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-30",
+      "quote": "DZD",
+      "rate": 132.5429
+    }
+  ]
+}

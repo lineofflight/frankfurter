@@ -1,0 +1,709 @@
+{
+  "adapter": "RB",
+  "cassette": "rb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 24), upto: Date.new(2026, 3, 28))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 6.5
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 1.77588
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 6.80314
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 11.83576
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 1.35688
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.4422
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 1.44876
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 10.8238
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 12.50714
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 1.19501
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.02776
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.00055
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 2.98893
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.09967
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.07517
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.05885
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.00624
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.52295
+    },
+    {
+      "base": "MYR",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 2.36405
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.96379
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 5.44046
+    },
+    {
+      "base": "PHP",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.15597
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 2.5323
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 2.12435
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 7.304
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.28639
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.21091
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 9.35344
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-24",
+      "quote": "SEK",
+      "rate": 0.54692
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 6.47054
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 1.77569
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 6.74188
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 11.76827
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 1.34679
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.44079
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 1.44164
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 10.7715
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 12.44426
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 1.18842
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.02768
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.00055
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 2.9767
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.09891
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.07512
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.05845
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.0062
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.52305
+    },
+    {
+      "base": "MYR",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 2.34357
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.95445
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 5.40711
+    },
+    {
+      "base": "PHP",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.15471
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 2.52154
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 2.11426
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 7.26381
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.28513
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.20949
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 9.29218
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-25",
+      "quote": "SEK",
+      "rate": 0.5494
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 6.49404
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 1.79404
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 6.79059
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 11.84625
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 1.35953
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.44287
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 1.45082
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 10.8405
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 12.5302
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 1.20075
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.02791
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.00056
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 3.00299
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.09982
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.0756
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.05885
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.00624
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.52725
+    },
+    {
+      "base": "MYR",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 2.35218
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.9743
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 5.43166
+    },
+    {
+      "base": "PHP",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.15602
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 2.5362
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 2.12671
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 7.31428
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.28555
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.21175
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 9.39466
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-26",
+      "quote": "SEK",
+      "rate": 0.55076
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 6.5017
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 1.79698
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 6.80982
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 11.85226
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 1.36614
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.44324
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 1.45582
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 10.878
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 12.54382
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 1.20568
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.02791
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.00056
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 2.9943
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.09962
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.07575
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.05907
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.00625
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.52305
+    },
+    {
+      "base": "MYR",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 2.35363
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.97225
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 5.43384
+    },
+    {
+      "base": "PHP",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.15595
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 2.53714
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 2.1334
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 7.33464
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.28665
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.21246
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 9.44517
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-27",
+      "quote": "SEK",
+      "rate": 0.54944
+    }
+  ]
+}

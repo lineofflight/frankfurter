@@ -1,0 +1,781 @@
+{
+  "adapter": "SBI",
+  "cassette": "sbi",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 24), upto: Date.new(2026, 3, 28))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 86.48
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 23.626
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 90.51
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 157.46
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 18.052
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 5.883
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 19.274
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 144.0
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 166.4
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 15.898
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 0.3693
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 39.765
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 1.326
+    },
+    {
+      "base": "JMD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 0.7932
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 0.783
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 0.083
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 405.86
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 6.957
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 0.0899
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 12.822
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 72.38
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 33.69
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 33.129
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 13.304
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 97.17
+    },
+    {
+      "base": "SRD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 3.313
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 3.8101
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 2.81
+    },
+    {
+      "base": "TWD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 3.8783
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 124.44
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 169.6
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-24",
+      "quote": "ISK",
+      "rate": 7.276
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 86.14
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 23.64
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 89.75
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 156.67
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 17.93
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 5.868
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 19.192
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 143.4
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 165.67
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 15.821
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 0.3685
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 39.629
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 1.3168
+    },
+    {
+      "base": "JMD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 0.7897
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 0.7782
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 0.0826
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 403.55
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 6.963
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 0.0893
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 12.707
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 71.98
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 33.569
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 32.962
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 13.313
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 96.7
+    },
+    {
+      "base": "SRD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 3.295
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 3.7959
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 2.79
+    },
+    {
+      "base": "TWD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 3.8655
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 123.71
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 168.7
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-25",
+      "quote": "ISK",
+      "rate": 7.314
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 85.9
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 23.732
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 89.83
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 156.7
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 17.984
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 5.858
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 19.192
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 143.4
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 165.75
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 15.884
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 0.3693
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 39.724
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 1.3204
+    },
+    {
+      "base": "JMD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 0.7923
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 0.7785
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 0.0825
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 404.46
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 6.975
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 0.0896
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 12.888
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 71.85
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 33.549
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 33.131
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 13.228
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 96.75
+    },
+    {
+      "base": "SRD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 3.314
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 3.7774
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 2.8
+    },
+    {
+      "base": "TWD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 3.8887
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 124.27
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 169.1
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-26",
+      "quote": "ISK",
+      "rate": 7.286
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 85.83
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 23.727
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 89.94
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 156.48
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 18.037
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 5.851
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 19.218
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 143.6
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 165.58
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 15.919
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 0.3684
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 39.524
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 1.315
+    },
+    {
+      "base": "JMD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 0.7953
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 0.7798
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 0.0825
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 404.96
+    },
+    {
+      "base": "MXN",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 6.902
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 0.0902
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 12.831
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 71.72
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 33.488
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 33.233
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 13.2
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 96.84
+    },
+    {
+      "base": "SRD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 3.323
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 3.7852
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 2.8
+    },
+    {
+      "base": "TWD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 3.9015
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 124.71
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 169.49
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-27",
+      "quote": "ISK",
+      "rate": 7.256
+    }
+  ]
+}

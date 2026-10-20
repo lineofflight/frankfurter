@@ -1,0 +1,12 @@
+{
+  "key": "BRB",
+  "name": "Banque de la Republique du Burundi",
+  "country_code": "BI",
+  "rate_type": "official rate",
+  "pivot_currency": "BIF",
+  "data_url": "https://www.brb.bi/en/affichagetoustauxchange",
+  "terms_url": null,
+  "publish_schedule": "*/30 7-9 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2024-09-02"
+}

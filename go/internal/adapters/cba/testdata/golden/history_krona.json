@@ -1,0 +1,674 @@
+{
+  "adapter": "CBA",
+  "cassette": "cba_history",
+  "match_requests_on": [
+    "method",
+    "uri",
+    "body"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2015, 3, 6), upto: Date.new(2015, 3, 9))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 130.57
+    },
+    {
+      "base": "ARS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 54.8
+    },
+    {
+      "base": "ATS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "AUD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 374.32
+    },
+    {
+      "base": "BEF",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "BGN",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 269.05
+    },
+    {
+      "base": "BRL",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 159.7
+    },
+    {
+      "base": "BYR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.032
+    },
+    {
+      "base": "CAD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 384.26
+    },
+    {
+      "base": "CHF",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 491.08
+    },
+    {
+      "base": "CNY",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 77.94
+    },
+    {
+      "base": "CZK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 19.29
+    },
+    {
+      "base": "DEM",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "DKK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 70.6
+    },
+    {
+      "base": "EGP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 63.28
+    },
+    {
+      "base": "ESP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "EUR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 526.06
+    },
+    {
+      "base": "FIM",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "FRF",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "GBP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 729.12
+    },
+    {
+      "base": "GEL",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 219.21
+    },
+    {
+      "base": "GRD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "HKD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 61.82
+    },
+    {
+      "base": "HUF",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 1.73
+    },
+    {
+      "base": "IEP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "ILS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 119.7
+    },
+    {
+      "base": "INR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 7.71
+    },
+    {
+      "base": "IRR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0173
+    },
+    {
+      "base": "ISK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 3.54
+    },
+    {
+      "base": "ITL",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "JPY",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 3.995
+    },
+    {
+      "base": "KGS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 7.81
+    },
+    {
+      "base": "KRW",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.4365
+    },
+    {
+      "base": "KWD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 1609.96
+    },
+    {
+      "base": "KZT",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 2.59
+    },
+    {
+      "base": "LBP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.317
+    },
+    {
+      "base": "LTL",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 152.4
+    },
+    {
+      "base": "MDL",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 24.85
+    },
+    {
+      "base": "MXN",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 31.52
+    },
+    {
+      "base": "NLG",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "NOK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 61.56
+    },
+    {
+      "base": "PLN",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 127.44
+    },
+    {
+      "base": "PTE",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "RUB",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 8.04
+    },
+    {
+      "base": "SAR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 127.88
+    },
+    {
+      "base": "SEK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 57.25
+    },
+    {
+      "base": "SGD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 349.81
+    },
+    {
+      "base": "SKK",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "SYP",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 2.35
+    },
+    {
+      "base": "TJS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 87.81
+    },
+    {
+      "base": "TRY",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 184.11
+    },
+    {
+      "base": "UAH",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 21.1
+    },
+    {
+      "base": "USD",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 479.59
+    },
+    {
+      "base": "UZS",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 0.194
+    },
+    {
+      "base": "XDR",
+      "date": "2015-03-06",
+      "quote": "AMD",
+      "rate": 670.14
+    },
+    {
+      "base": "AED",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 130.55
+    },
+    {
+      "base": "ARS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 54.74
+    },
+    {
+      "base": "ATS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "AUD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 370.95
+    },
+    {
+      "base": "BEF",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "BGN",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 267.12
+    },
+    {
+      "base": "BRL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 156.5
+    },
+    {
+      "base": "BYR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.032
+    },
+    {
+      "base": "CAD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 380.78
+    },
+    {
+      "base": "CHF",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 487.8
+    },
+    {
+      "base": "CNY",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 77.89
+    },
+    {
+      "base": "CZK",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 19.16
+    },
+    {
+      "base": "DEM",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "DKK",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 70.08
+    },
+    {
+      "base": "EGP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 63.26
+    },
+    {
+      "base": "ESP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "EUR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 522.19
+    },
+    {
+      "base": "FIM",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "FRF",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "GBP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 724.59
+    },
+    {
+      "base": "GEL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 220.82
+    },
+    {
+      "base": "GRD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "HKD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 61.8
+    },
+    {
+      "base": "HUF",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 1.7129999999999999
+    },
+    {
+      "base": "IEP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "ILS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 119.44
+    },
+    {
+      "base": "INR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 7.66
+    },
+    {
+      "base": "IRR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0173
+    },
+    {
+      "base": "ISK",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 3.5119999999999996
+    },
+    {
+      "base": "ITL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "JPY",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 3.97
+    },
+    {
+      "base": "KGS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 7.81
+    },
+    {
+      "base": "KRW",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.4311
+    },
+    {
+      "base": "KWD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 1606.24
+    },
+    {
+      "base": "KZT",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 2.589
+    },
+    {
+      "base": "LBP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.31679999999999997
+    },
+    {
+      "base": "LTL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 151.31
+    },
+    {
+      "base": "LVL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "MDL",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 25.37
+    },
+    {
+      "base": "MXN",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 31.1
+    },
+    {
+      "base": "NLG",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "NOK",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 60.83
+    },
+    {
+      "base": "PLN",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 126.61
+    },
+    {
+      "base": "PTE",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "RUB",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 7.89
+    },
+    {
+      "base": "SAR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 127.86
+    },
+    {
+      "base": "SEK",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 56.66
+    },
+    {
+      "base": "SGD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 347.69
+    },
+    {
+      "base": "SYP",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 2.3
+    },
+    {
+      "base": "TJS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 87.73
+    },
+    {
+      "base": "TRY",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 184.94
+    },
+    {
+      "base": "UAH",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 21.34
+    },
+    {
+      "base": "USD",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 479.51
+    },
+    {
+      "base": "UZS",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 0.194
+    },
+    {
+      "base": "XDR",
+      "date": "2015-03-09",
+      "quote": "AMD",
+      "rate": 667.46
+    }
+  ]
+}

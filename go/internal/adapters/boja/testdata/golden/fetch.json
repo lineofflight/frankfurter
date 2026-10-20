@@ -1,0 +1,285 @@
+{
+  "adapter": "BOJA",
+  "cassette": "boja",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1))",
+  "rows": [
+    {
+      "ask": 108.8818,
+      "base": "AUD",
+      "bid": 97.99,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 103.4359
+    },
+    {
+      "ask": 76.932,
+      "base": "BBD",
+      "bid": 69.24,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 73.086
+    },
+    {
+      "ask": 153.8639,
+      "base": "BSD",
+      "bid": 138.48,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 146.17195
+    },
+    {
+      "ask": 76.932,
+      "base": "BZD",
+      "bid": 69.24,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 73.086
+    },
+    {
+      "ask": 112.3097,
+      "base": "CAD",
+      "bid": 106.69,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 109.49985
+    },
+    {
+      "ask": 194.9495,
+      "base": "CHF",
+      "bid": 175.45,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 185.19975
+    },
+    {
+      "ask": 2.6013,
+      "base": "DOP",
+      "bid": 2.34,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 2.47065
+    },
+    {
+      "ask": 182.8439,
+      "base": "EUR",
+      "bid": 173.7,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 178.27195
+    },
+    {
+      "ask": 209.5466,
+      "base": "GBP",
+      "bid": 199.07,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 204.3083
+    },
+    {
+      "ask": 224.9182,
+      "base": "GBP",
+      "bid": 202.43,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 213.6741
+    },
+    {
+      "ask": 204.9698,
+      "base": "GIP",
+      "bid": 184.47,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 194.7199
+    },
+    {
+      "ask": 0.7406,
+      "base": "GYD",
+      "bid": 0.67,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 0.7053
+    },
+    {
+      "ask": 19.6346,
+      "base": "HKD",
+      "bid": 17.67,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 18.6523
+    },
+    {
+      "ask": 0.9647,
+      "base": "JPY",
+      "bid": 0.87,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 0.91735
+    },
+    {
+      "ask": 187.6389,
+      "base": "KYD",
+      "bid": 168.88,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 178.25945
+    },
+    {
+      "ask": 156.207,
+      "base": "USD",
+      "bid": 148.4,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 152.3035
+    },
+    {
+      "ask": 56.9866,
+      "base": "XCD",
+      "bid": 51.29,
+      "date": "2026-03-19",
+      "quote": "JMD",
+      "rate": 54.1383
+    },
+    {
+      "ask": 108.5317,
+      "base": "AUD",
+      "bid": 97.68,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 103.10585
+    },
+    {
+      "ask": 77.126,
+      "base": "BBD",
+      "bid": 69.41,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 73.268
+    },
+    {
+      "ask": 154.252,
+      "base": "BSD",
+      "bid": 138.83,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 146.541
+    },
+    {
+      "ask": 77.126,
+      "base": "BZD",
+      "bid": 69.41,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 73.268
+    },
+    {
+      "ask": 111.3872,
+      "base": "CAD",
+      "bid": 105.82,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 108.6036
+    },
+    {
+      "ask": 194.6275,
+      "base": "CHF",
+      "bid": 175.16,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 184.89375
+    },
+    {
+      "ask": 2.5677,
+      "base": "DOP",
+      "bid": 2.31,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 2.43885
+    },
+    {
+      "ask": 182.4722,
+      "base": "EUR",
+      "bid": 173.35,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 177.9111
+    },
+    {
+      "ask": 210.9645,
+      "base": "GBP",
+      "bid": 200.42,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 205.69225
+    },
+    {
+      "ask": 225.501,
+      "base": "GBP",
+      "bid": 202.95,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 214.2255
+    },
+    {
+      "ask": 206.0575,
+      "base": "GIP",
+      "bid": 185.45,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 195.75375
+    },
+    {
+      "ask": 0.7425,
+      "base": "GYD",
+      "bid": 0.67,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 0.70625
+    },
+    {
+      "ask": 19.6916,
+      "base": "HKD",
+      "bid": 17.72,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 18.7058
+    },
+    {
+      "ask": 0.9753,
+      "base": "JPY",
+      "bid": 0.88,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 0.92765
+    },
+    {
+      "ask": 188.1122,
+      "base": "KYD",
+      "bid": 169.3,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 178.7061
+    },
+    {
+      "ask": 156.601,
+      "base": "USD",
+      "bid": 148.77,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 152.6855
+    },
+    {
+      "ask": 57.1304,
+      "base": "XCD",
+      "bid": 51.42,
+      "date": "2026-03-20",
+      "quote": "JMD",
+      "rate": 54.2752
+    }
+  ]
+}

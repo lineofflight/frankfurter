@@ -1,0 +1,12 @@
+{
+  "key": "BCV",
+  "name": "Banco Central de Venezuela",
+  "country_code": "VE",
+  "rate_type": "reference rate",
+  "pivot_currency": "VES",
+  "data_url": "https://www.bcv.org.ve/estadisticas/tipo-cambio-de-referencia-smc",
+  "terms_url": "https://www.bcv.org.ve/terminos-condiciones",
+  "publish_schedule": "*/30 19-22 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2021-10-04"
+}

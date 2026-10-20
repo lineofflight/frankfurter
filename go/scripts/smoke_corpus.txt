@@ -1,0 +1,124 @@
+# Live-data smoke corpus for go/scripts/smoke_parity.sh: one request per line, sent to the Ruby and Go servers.
+# Format: METHOD PATH [| Header: value]... Blank lines and lines starting with # are ignored.
+#
+# Dates are fixed, so the corpus suits a snapshot ending mid-September 2026 (the 2026-09-13 daily backup). "latest"
+# requests still run: against an older snapshot both sides answer empty or 404 alike.
+
+# App
+GET /
+HEAD /
+GET /robots.txt
+GET /nonexistent
+GET /v1/openapi.json
+GET /v2/openapi.json
+
+# v1 latest and historical
+GET /v1
+GET /v1/latest
+GET /v1/latest?from=USD
+GET /v1/2026-09-10
+GET /v1/2026-09-10?from=USD
+GET /v1/2026-09-10?base=GBP&symbols=USD,JPY,CHF
+GET /v1/2026-09-10?amount=250&from=CHF&to=EUR,USD
+GET /v1/2026-09-06
+GET /v1/2026-09-05?to=USD
+GET /v1/2020-01-02
+GET /v1/1999-01-04
+GET /v1/2010-03-15?from=JPY
+GET /v1/1990-01-01
+HEAD /v1/2026-09-10
+
+# v1 ranges
+GET /v1/2026-08-01..2026-08-31
+GET /v1/2026-08-01..2026-08-31?to=USD,GBP
+GET /v1/2026-09-01..?from=USD&to=EUR
+GET /v1/2025-01-01..2025-12-31?to=USD
+GET /v1/2000-01-01..2003-12-31?symbols=USD
+GET /v1/2026-09-06..2026-09-06
+
+# v1 catalogue and errors
+GET /v1/currencies
+GET /v1/2026-09-10?from=XXX
+GET /v1/2026-09-10?to=XXX
+GET /v1/2026-13-45
+GET /v1/2026-09-10?amount=abc
+GET /v1//latest
+
+# v2 snapshots
+GET /v2
+GET /v2/rates
+GET /v2/rates?date=2026-09-10
+GET /v2/rates?date=2026-09-10&base=USD
+GET /v2/rates?date=2026-09-10&quotes=USD,GBP,JPY,CNY
+GET /v2/rates?date=2026-09-10&base=JPY&quotes=EUR,USD,KRW
+GET /v2/rates?date=2026-09-06&quotes=USD
+GET /v2/rates?date=2026-09-05&base=GBP
+GET /v2/rates?date=2020-03-16&quotes=USD,CHF
+GET /v2/rates?date=1999-01-04&quotes=USD
+GET /v2/rates?date=1975-06-02&base=USD&quotes=GBP,JPY
+GET /v2/rates?date=2026-09-10&base=AED&quotes=USD,SAR
+GET /v2/rates?date=2026-09-10&quotes=USD&expand=providers
+
+# v2 ranges and rollups
+GET /v2/rates?from=2026-08-01&to=2026-09-12&quotes=USD,GBP
+GET /v2/rates?from=2026-06-01&quotes=USD,JPY&base=GBP
+GET /v2/rates?from=2026-01-01&to=2026-09-12&group=week&quotes=USD,CHF
+GET /v2/rates?from=2020-01-01&to=2026-09-12&group=month&quotes=USD
+GET /v2/rates?from=2024-01-01&to=2024-12-31&group=month&base=USD&quotes=EUR,JPY,TRY
+GET /v2/rates?from=2026-09-05&to=2026-09-07&quotes=USD
+GET /v2/rates?from=2026-08-01&to=2026-08-31&quotes=USD&expand=providers
+GET /v2/rates?from=2026-09-12&to=2026-08-01
+GET /v2/rate/EUR/USD
+GET /v2/rate/EUR/USD?date=2026-09-10
+GET /v2/rate/USD/JPY?date=2026-09-06
+GET /v2/rate/GBP/CHF?date=2015-01-15
+GET /v2/rate/USD/USD?date=2026-09-10
+
+# v2 provider filters
+GET /v2/rates?date=2026-09-10&providers=ECB
+GET /v2/rates?date=2026-09-10&providers=ECB,BOC&quotes=USD,CAD
+GET /v2/rates?from=2026-08-01&to=2026-09-12&providers=FRED&quotes=USD
+GET /v2/rates?date=2026-08-31&providers=UST&base=USD&quotes=EUR,GBP
+GET /v2/rates?from=2026-01-01&to=2026-09-12&providers=IMF&group=month&quotes=USD
+GET /v2/providers/ECB/rates?date=2026-09-10
+GET /v2/providers/ECB/rates?from=2026-09-01&to=2026-09-12&quotes=USD
+GET /v2/providers/BOC/rate/CAD/USD?date=2026-09-10
+GET /v2/providers/NBP/rates?from=2026-07-01&to=2026-09-12&group=week&base=PLN&quotes=EUR
+
+# v2 catalogue and coverage
+GET /v2/currencies
+GET /v2/currencies?scope=all
+GET /v2/currencies?providers=ECB
+GET /v2/currency/USD
+GET /v2/currency/XAU
+GET /v2/currency/XYZ
+GET /v2/providers
+GET /v2/providers/ECB
+GET /v2/providers/BDP
+GET /v2/providers/NOPE
+GET /v2/coverage
+GET /v2/coverage?base=USD&quotes=EUR,JPY
+GET /v2/coverage?providers=ECB
+
+# v2 exports and streaming
+GET /v2/rates.csv?from=2026-08-01&to=2026-08-31&quotes=USD,GBP
+GET /v2/rates.ndjson?from=2026-08-01&to=2026-08-31&quotes=USD,GBP
+GET /v2/rates?from=2026-08-01&to=2026-08-31&quotes=USD | Accept: application/x-ndjson
+GET /v2/rates?from=2026-08-01&to=2026-08-31&quotes=USD | Accept: text/csv
+GET /v2/rates.csv?date=2026-09-10&expand=providers&quotes=USD
+GET /v2/rates.json?from=2025-01-01&to=2026-09-12&quotes=USD,JPY,GBP,CHF
+
+# v2 errors
+GET /v2/rates?date=2026-99-01
+GET /v2/rates?date=2026-09-10&from=2026-09-01
+GET /v2/rates?base=XXX
+GET /v2/rates?quotes=USD,NOPE
+GET /v2/rates?group=year&from=2026-01-01
+GET /v2/rates?providers=NOPE
+GET /v2/rates?expand=nope
+GET /v2/rates?foo=bar
+GET /v2/rates?from=1900-01-01&to=2026-09-12
+GET /v2/rate/EUR
+GET /v2/rate//USD
+GET /v2/providers//rates
+POST /v2/rates

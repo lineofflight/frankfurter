@@ -1,0 +1,12 @@
+{
+  "key": "CBI",
+  "name": "Central Bank of Iraq",
+  "country_code": "IQ",
+  "rate_type": "indicative rate",
+  "pivot_currency": "IQD",
+  "data_url": "https://cbi.iq/page/144",
+  "terms_url": null,
+  "publish_schedule": "*/30 10-12 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2009-01-01"
+}

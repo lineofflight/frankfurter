@@ -1,0 +1,865 @@
+{
+  "adapter": "BIS",
+  "cassette": "bis",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2021, 9, 30), upto: Date.new(2021, 9, 30))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AED",
+      "rate": 3.6725
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ALL",
+      "rate": 104.79
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AMD",
+      "rate": 484.2
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ANG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AOA",
+      "rate": 606.65005
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ARS",
+      "rate": 98.735
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AUD",
+      "rate": 1.390016
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AWG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "AZN",
+      "rate": 1.7
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BAM",
+      "rate": 1.678248
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BBD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BDT",
+      "rate": 85.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BHD",
+      "rate": 0.376
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BIF",
+      "rate": 1991.16
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BND",
+      "rate": 1.3611
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BOB",
+      "rate": 6.91
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BRL",
+      "rate": 5.4090163226531
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BSD",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BTN",
+      "rate": 74.2551
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BWP",
+      "rate": 11.2973
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BYN",
+      "rate": 2.5083
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "BZD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CAD",
+      "rate": 1.273858
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CDF",
+      "rate": 1995.1101
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CHF",
+      "rate": 0.935314
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CLP",
+      "rate": 803.59
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CNY",
+      "rate": 6.46403
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "COP",
+      "rate": 3834.68
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CRC",
+      "rate": 626.475
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CVE",
+      "rate": 94.616
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "CZK",
+      "rate": 22.018309
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "DJF",
+      "rate": 177.721
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "DKK",
+      "rate": 6.421971
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "DOP",
+      "rate": 56.4094
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "DZD",
+      "rate": 137.1705
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "EGP",
+      "rate": 15.66
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ERN",
+      "rate": 15.075
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ETB",
+      "rate": 46.1007
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "EUR",
+      "rate": 0.863632
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "FJD",
+      "rate": 2.1186
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GBP",
+      "rate": 0.743182
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GEL",
+      "rate": 3.1228
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GHS",
+      "rate": 5.8863
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GMD",
+      "rate": 51.55
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GTQ",
+      "rate": 7.72938
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "GYD",
+      "rate": 208.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "HKD",
+      "rate": 7.788583
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "HNL",
+      "rate": 24.0813
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "HTG",
+      "rate": 97.3918
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "HUF",
+      "rate": 311.071768
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "IDR",
+      "rate": 14312.142672
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ILS",
+      "rate": 3.22679
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "INR",
+      "rate": 74.338544
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "IQD",
+      "rate": 1450.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "IRR",
+      "rate": 42000.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ISK",
+      "rate": 130.32
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "JMD",
+      "rate": 146.3464
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "JOD",
+      "rate": 0.71
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "JPY",
+      "rate": 111.987218
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KES",
+      "rate": 110.485882
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KGS",
+      "rate": 84.7907
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KHR",
+      "rate": 4124.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KMF",
+      "rate": 424.879307
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KRW",
+      "rate": 1184.540979
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KWD",
+      "rate": 0.30165
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KYD",
+      "rate": 0.833333
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "KZT",
+      "rate": 425.7
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LAK",
+      "rate": 9855.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LBP",
+      "rate": 1507.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LKR",
+      "rate": 199.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LRD",
+      "rate": 170.9347
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LSL",
+      "rate": 15.163761
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "LYD",
+      "rate": 4.5599
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MAD",
+      "rate": 9.0648
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MDL",
+      "rate": 17.6627
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MGA",
+      "rate": 3941.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MKD",
+      "rate": 52.94
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MMK",
+      "rate": 1921.6
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MNT",
+      "rate": 2849.2
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MOP",
+      "rate": 8.0187
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MRO",
+      "rate": 361.2
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MUR",
+      "rate": 42.7681
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MVR",
+      "rate": 15.4
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MWK",
+      "rate": 822.165468
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MXN",
+      "rate": 20.506002
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MYR",
+      "rate": 4.186458
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "MZN",
+      "rate": 63.83
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NAD",
+      "rate": 15.1314
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NGN",
+      "rate": 410.8
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NIO",
+      "rate": 35.3441
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NOK",
+      "rate": 8.778824
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NPR",
+      "rate": 117.59
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "NZD",
+      "rate": 1.455912
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "OMR",
+      "rate": 0.3845
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PAB",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PEN",
+      "rate": 4.134
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PGK",
+      "rate": 3.508772
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PHP",
+      "rate": 51.011314
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PKR",
+      "rate": 170.66505
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PLN",
+      "rate": 3.989723
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "PYG",
+      "rate": 6907.23
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "QAR",
+      "rate": 3.64
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "RON",
+      "rate": 4.272821
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "RSD",
+      "rate": 101.292
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "RUB",
+      "rate": 72.837983
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "RWF",
+      "rate": 997.531493
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SAR",
+      "rate": 3.75
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SBD",
+      "rate": 8.077544
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SCR",
+      "rate": 14.682
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SDG",
+      "rate": 439.1062
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SEK",
+      "rate": 8.781674
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SGD",
+      "rate": 1.361085
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SLE",
+      "rate": 10.57098
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SRD",
+      "rate": 21.428
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SSP",
+      "rate": 401.4333
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "STD",
+      "rate": 20979.6
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "SZL",
+      "rate": 15.163761
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "THB",
+      "rate": 33.884619
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TJS",
+      "rate": 11.3095
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TMT",
+      "rate": 3.5
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TND",
+      "rate": 2.8332
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TOP",
+      "rate": 2.275831
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TRY",
+      "rate": 8.8937732101218
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TTD",
+      "rate": 6.7466
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TWD",
+      "rate": 27.84
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "TZS",
+      "rate": 2296.902624
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "UAH",
+      "rate": 26.576
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "UGX",
+      "rate": 3542.67
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "UYU",
+      "rate": 42.94
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "UZS",
+      "rate": 10691.91
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "VES",
+      "rate": 4128271.016399
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "VND",
+      "rate": 23162.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "VUV",
+      "rate": 112.35
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "WST",
+      "rate": 2.602811
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "XAF",
+      "rate": 566.505743
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "XCD",
+      "rate": 2.7
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "XDR",
+      "rate": 0.709788
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "XOF",
+      "rate": 566.505743
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "YER",
+      "rate": 1156.0
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ZAR",
+      "rate": 15.16789
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ZMW",
+      "rate": 16.796563
+    },
+    {
+      "base": "USD",
+      "date": "2021-09-30",
+      "quote": "ZWL",
+      "rate": 87.6653
+    }
+  ]
+}

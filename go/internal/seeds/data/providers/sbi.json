@@ -1,0 +1,12 @@
+{
+  "key": "SBI",
+  "name": "Seðlabanki Íslands",
+  "country_code": "IS",
+  "rate_type": "official rate",
+  "pivot_currency": "ISK",
+  "data_url": "https://www.sedlabanki.is/hagtolur/opinbert-gengi/",
+  "terms_url": null,
+  "publish_schedule": "*/30 16-18 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1981-01-01"
+}

@@ -1,0 +1,12 @@
+{
+  "key": "BOMU",
+  "name": "Bank of Mauritius",
+  "country_code": "MU",
+  "rate_type": "indicative retail transfer midpoint",
+  "pivot_currency": "MUR",
+  "data_url": "https://www.bom.mu/markets/foreign-exchange/consolidated-indicative-exchange-rates",
+  "terms_url": "https://www.bom.mu/disclaimer",
+  "publish_schedule": "0 6,10,14 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2001-07-03"
+}

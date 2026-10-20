@@ -1,0 +1,241 @@
+{
+  "adapter": "BRB",
+  "cassette": "brb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 2125.5928
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 2172.865
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 3784.6148
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 439.1464
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 463.9726
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 3467.7664
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 4003.0021
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 18.8068
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 23.1012
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 9679.2792
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 322.3496
+    },
+    {
+      "base": "RWF",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 2.0437
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 797.3093
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 317.7018
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 1.1448
+    },
+    {
+      "base": "UGX",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 0.7933
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 2989.91
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 4087.0963
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-20",
+      "quote": "BIF",
+      "rate": 179.1418
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 2135.9244
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 2168.348
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 3801.8158
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 439.823
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 464.8019
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 3473.2015
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 4015.7963
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 18.796
+    },
+    {
+      "base": "KES",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 23.0563
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 9683.4006
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 323.4307
+    },
+    {
+      "base": "RWF",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 2.044
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 797.4293
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 320.3187
+    },
+    {
+      "base": "TZS",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 1.1488
+    },
+    {
+      "base": "UGX",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 0.7911
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 2990.36
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 4086.8353
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-22",
+      "quote": "BIF",
+      "rate": 181.7372
+    }
+  ]
+}

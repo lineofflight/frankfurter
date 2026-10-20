@@ -1,0 +1,883 @@
+{
+  "adapter": "BIS",
+  "cassette": "bis",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2001, 5, 31), upto: Date.new(2001, 5, 31))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AED",
+      "rate": 3.6725
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AFN",
+      "rate": 47.5048
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ALL",
+      "rate": 150.25
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AMD",
+      "rate": 556.23
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ANG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AOA",
+      "rate": 19.62864
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ARS",
+      "rate": 0.9999528301887
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AUD",
+      "rate": 1.972524
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AWG",
+      "rate": 1.79
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "AZN",
+      "rate": 0.9262
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BAM",
+      "rate": 2.286986
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BBD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BDT",
+      "rate": 57.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BHD",
+      "rate": 0.376
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BIF",
+      "rate": 894.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BND",
+      "rate": 1.8075
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BOB",
+      "rate": 6.56
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BRL",
+      "rate": 2.3412735849057
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BSD",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BTN",
+      "rate": 46.99
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BWP",
+      "rate": 5.6274
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BYN",
+      "rate": 0.1358
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "BZD",
+      "rate": 2.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CAD",
+      "rate": 1.550236
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CDF",
+      "rate": 104.4199881839
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CHF",
+      "rate": 1.79316
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CLP",
+      "rate": 610.53
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CNY",
+      "rate": 8.277005
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "COP",
+      "rate": 2324.98
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CRC",
+      "rate": 326.39
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CVE",
+      "rate": 128.844
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "CZK",
+      "rate": 40.324292
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "DJF",
+      "rate": 177.721
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "DKK",
+      "rate": 8.791981
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "DOP",
+      "rate": 16.66
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "DZD",
+      "rate": 79.583962
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "EGP",
+      "rate": 3.85
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ERN",
+      "rate": 10.2
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ETB",
+      "rate": 8.437
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "EUR",
+      "rate": 1.179245
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "FJD",
+      "rate": 2.2994
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GBP",
+      "rate": 0.704363
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GEL",
+      "rate": 2.049
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GHS",
+      "rate": 0.723586
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GMD",
+      "rate": 15.1955
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GNF",
+      "rate": 1947.286
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GTQ",
+      "rate": 7.762
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "GYD",
+      "rate": 186.75
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "HKD",
+      "rate": 7.799764
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "HNL",
+      "rate": 15.3872
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "HTG",
+      "rate": 23.5197
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "HUF",
+      "rate": 299.233491
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "IDR",
+      "rate": 11125.67217
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ILS",
+      "rate": 4.135967
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "INR",
+      "rate": 47.008255
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "IQD",
+      "rate": 1938.662266
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "IRR",
+      "rate": 1754.740736
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ISK",
+      "rate": 104.98
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "JMD",
+      "rate": 45.7261
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "JOD",
+      "rate": 0.708999
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "JPY",
+      "rate": 119.103774
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KES",
+      "rate": 78.5233
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KGS",
+      "rate": 49.101
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KHR",
+      "rate": 3920.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KMF",
+      "rate": 580.150649
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KRW",
+      "rate": 1281.002358
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KWD",
+      "rate": 0.30798
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KYD",
+      "rate": 0.833333
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "KZT",
+      "rate": 146.1
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LAK",
+      "rate": 8520.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LBP",
+      "rate": 1507.5
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LKR",
+      "rate": 92.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LRD",
+      "rate": 51.5
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LSL",
+      "rate": 8.0235
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "LYD",
+      "rate": 0.561328
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MAD",
+      "rate": 11.914033
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MDL",
+      "rate": 12.9592
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MGA",
+      "rate": 1371.12
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MKD",
+      "rate": 71.2
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MMK",
+      "rate": 6.8429
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MNT",
+      "rate": 1095.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MOP",
+      "rate": 8.0333
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MRO",
+      "rate": 256.4
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MUR",
+      "rate": 28.8315
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MVR",
+      "rate": 11.77
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MWK",
+      "rate": 75.8329
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MXN",
+      "rate": 9.176061
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MYR",
+      "rate": 3.800472
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "MZN",
+      "rate": 20.60817
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NAD",
+      "rate": 8.0235
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NGN",
+      "rate": 112.6
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NIO",
+      "rate": 13.3759
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NOK",
+      "rate": 9.351415
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NPR",
+      "rate": 74.75
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "NZD",
+      "rate": 2.432547
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "OMR",
+      "rate": 0.3845
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PAB",
+      "rate": 1.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PEN",
+      "rate": 3.622
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PGK",
+      "rate": 3.305785
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PHP",
+      "rate": 50.505896
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PKR",
+      "rate": 61.60005
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PLN",
+      "rate": 4.001179
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "PYG",
+      "rate": 3856.2
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "QAR",
+      "rate": 3.64
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "RON",
+      "rate": 2.876415
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "RSD",
+      "rate": 69.4746
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "RUB",
+      "rate": 29.175708
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "RWF",
+      "rate": 439.0701
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SAR",
+      "rate": 3.7504
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SBD",
+      "rate": 5.252101
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SCR",
+      "rate": 5.6433
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SDG",
+      "rate": 2.574
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SEK",
+      "rate": 10.760613
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SGD",
+      "rate": 1.80967
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SLE",
+      "rate": 1.906745
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SRD",
+      "rate": 2.1785
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "STD",
+      "rate": 8968.84
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SVC",
+      "rate": 8.75
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SYP",
+      "rate": 11.225
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "SZL",
+      "rate": 8.0235
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "THB",
+      "rate": 45.382665
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TJS",
+      "rate": 2.35
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TMT",
+      "rate": 1.04
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TND",
+      "rate": 1.4984
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TOP",
+      "rate": 2.123142
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TRY",
+      "rate": 1.1733490566038
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TTD",
+      "rate": 6.2365
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TWD",
+      "rate": 33.957547
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "TZS",
+      "rate": 889.2
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "UAH",
+      "rate": 5.4152
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "UGX",
+      "rate": 1784.64
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "UYU",
+      "rate": 13.1575
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "UZS",
+      "rate": 355.26
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "VEF",
+      "rate": 0.716
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "VND",
+      "rate": 14662.0
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "VUV",
+      "rate": 146.3
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "WST",
+      "rate": 3.508772
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "XAF",
+      "rate": 773.534198
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "XCD",
+      "rate": 2.7
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "XDR",
+      "rate": 0.79732
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "XOF",
+      "rate": 773.534198
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "YER",
+      "rate": 167.3
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ZAR",
+      "rate": 8.001769
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ZMW",
+      "rate": 3.45744
+    },
+    {
+      "base": "USD",
+      "date": "2001-05-31",
+      "quote": "ZWL",
+      "rate": 0.057051
+    }
+  ]
+}

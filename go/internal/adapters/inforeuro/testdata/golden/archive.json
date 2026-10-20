@@ -1,0 +1,943 @@
+{
+  "adapter": "INFOREURO",
+  "cassette": "inforeuro",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1994, 1, 1), upto: Date.new(1994, 3, 1))",
+  "rows": [
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "AED",
+      "rate": 4.14427
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "AFA",
+      "rate": 2077.74
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ALL",
+      "rate": 124.181
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ANG",
+      "rate": 2.00948
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ARS",
+      "rate": 1.12824
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ATS",
+      "rate": 13.6103
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "AUD",
+      "rate": 1.56751
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "AWG",
+      "rate": 2.00948
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BBD",
+      "rate": 2.25784
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BDT",
+      "rate": 45.2203
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BEF",
+      "rate": 39.8875
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BGL",
+      "rate": 41.7057
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BHD",
+      "rate": 0.425603
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BIF",
+      "rate": 294.509
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BND",
+      "rate": 1.78647
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BOB",
+      "rate": 5.10272
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BSD",
+      "rate": 1.12892
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BTN",
+      "rate": 35.2764
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BWP",
+      "rate": 2.9122
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "BZD",
+      "rate": 2.25784
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CAD",
+      "rate": 1.52065
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CHF",
+      "rate": 1.61605
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CLP",
+      "rate": 515.149
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CNY",
+      "rate": 9.82025
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "COP",
+      "rate": 922.282
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CRC",
+      "rate": 173.255
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CUP",
+      "rate": 1.49051
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CVE",
+      "rate": 95.8757
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CYP",
+      "rate": 0.582337
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "CZK",
+      "rate": 33.6
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "DEM",
+      "rate": 1.93553
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "DJF",
+      "rate": 200.633
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "DKK",
+      "rate": 7.58013
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "DOP",
+      "rate": 14.5631
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "DZD",
+      "rate": 27.1098
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ECS",
+      "rate": 2192.66
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "EEK",
+      "rate": 15.5047
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "EGP",
+      "rate": 3.794
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ESP",
+      "rate": 157.857
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ETB",
+      "rate": 6.57031
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "FIM",
+      "rate": 6.2672
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "FJD",
+      "rate": 1.67954
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "FKP",
+      "rate": 0.760522
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "FRF",
+      "rate": 6.58329
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GBP",
+      "rate": 0.760522
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GHC",
+      "rate": 1049.9
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GMD",
+      "rate": 10.8184
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GNF",
+      "rate": 1093.96
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GRD",
+      "rate": 280.457
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GTQ",
+      "rate": 6.62676
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GWP",
+      "rate": 13832.3
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "GYD",
+      "rate": 148.166
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "HKD",
+      "rate": 8.80558
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "HNL",
+      "rate": 8.20725
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "HTG",
+      "rate": 15.669
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "HUF",
+      "rate": 116.64
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "IDR",
+      "rate": 2407.82
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "IEP",
+      "rate": 0.792002
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ILS",
+      "rate": 3.34499
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "INR",
+      "rate": 35.2764
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "IQD",
+      "rate": 0.352788
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "IRR",
+      "rate": 1970.34
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ISK",
+      "rate": 82.1289
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ITL",
+      "rate": 1900.59
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "JMD",
+      "rate": 37.7234
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "JOD",
+      "rate": 0.78676
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "JPY",
+      "rate": 118.48
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KES",
+      "rate": 75.4699
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KHR",
+      "rate": 3951.22
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KMF",
+      "rate": 493.747
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KPW",
+      "rate": 2.42718
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KRW",
+      "rate": 917.135
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KWD",
+      "rate": 0.335515
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "KYD",
+      "rate": 0.925714
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LAK",
+      "rate": 811.693
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LBP",
+      "rate": 1909.08
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LKR",
+      "rate": 55.3735
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LRD",
+      "rate": 1.12892
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LSL",
+      "rate": 3.92102
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LTL",
+      "rate": 4.40279
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LUF",
+      "rate": 39.8875
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LVL",
+      "rate": 0.645968
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "LYD",
+      "rate": 0.362541
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MAD",
+      "rate": 10.7612
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MGF",
+      "rate": 2183.22
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MMK",
+      "rate": 6.99151
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MNT",
+      "rate": 451.568
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MOP",
+      "rate": 9.01804
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MRO",
+      "rate": 139.859
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MTL",
+      "rate": 0.443148
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MUR",
+      "rate": 20.6657
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MVR",
+      "rate": 12.5367
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MWK",
+      "rate": 7.03306
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MXN",
+      "rate": 3.50586
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MYR",
+      "rate": 3.1384
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "MZM",
+      "rate": 6149.94
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NAD",
+      "rate": 3.92102
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NGN",
+      "rate": 24.5835
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NIO",
+      "rate": 7.24767
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NLG",
+      "rate": 2.17385
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NOK",
+      "rate": 8.39408
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NPR",
+      "rate": 52.3561
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "NZD",
+      "rate": 1.95585
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "OMR",
+      "rate": 0.434634
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PAB",
+      "rate": 1.12892
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PEN",
+      "rate": 2.4554
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PGK",
+      "rate": 1.10403
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PHP",
+      "rate": 31.1438
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PKR",
+      "rate": 33.9243
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PLZ",
+      "rate": 24813.7
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PTE",
+      "rate": 197.279
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "PYG",
+      "rate": 2024.15
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "QAR",
+      "rate": 4.1104
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ROL",
+      "rate": 1670.8
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "RUR",
+      "rate": 1789.34
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "RWF",
+      "rate": 164.13
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SAR",
+      "rate": 4.2339
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SBD",
+      "rate": 3.65636
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SCR",
+      "rate": 5.80963
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SDD",
+      "rate": 24.3847
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SEK",
+      "rate": 9.02571
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SGD",
+      "rate": 1.78647
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SHP",
+      "rate": 0.760522
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SIT",
+      "rate": 153.543
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SKK",
+      "rate": 37.336
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SLL",
+      "rate": 649.965
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SOS",
+      "rate": 2957.77
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SRG",
+      "rate": 121.235
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "STD",
+      "rate": 671.673
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SVC",
+      "rate": 9.91192
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SYP",
+      "rate": 25.9652
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "SZL",
+      "rate": 3.92102
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "THB",
+      "rate": 28.5843
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TND",
+      "rate": 1.1875
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TOP",
+      "rate": 1.49768
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TRL",
+      "rate": 20452.5
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TTD",
+      "rate": 6.56219
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TWD",
+      "rate": 29.8035
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "TZS",
+      "rate": 560.017
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "UGX",
+      "rate": 1244.05
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "USD",
+      "rate": 1.12892
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "UYU",
+      "rate": 5.1761
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "VEB",
+      "rate": 124.859
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "VND",
+      "rate": 12260.1
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "VUV",
+      "rate": 132.641
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "WST",
+      "rate": 2.85792
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "XAF",
+      "rate": 658.329
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "XCD",
+      "rate": 3.04808
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "XOF",
+      "rate": 658.329
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "XPF",
+      "rate": 119.696
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "YER",
+      "rate": 20.3233
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ZAR",
+      "rate": 3.92102
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ZMK",
+      "rate": 731.832
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ZRN",
+      "rate": 134.36
+    },
+    {
+      "base": "XEU",
+      "date": "1994-03-01",
+      "quote": "ZWD",
+      "rate": 9.19077
+    }
+  ]
+}

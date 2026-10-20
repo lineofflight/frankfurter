@@ -1,0 +1,1177 @@
+{
+  "adapter": "JPC",
+  "cassette": "jpc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2007, 12, 30), upto: Date.new(2008, 1, 6))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 30.82
+    },
+    {
+      "base": "ANG",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 63.57
+    },
+    {
+      "base": "ARS",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 36.06
+    },
+    {
+      "base": "AUD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 97.2
+    },
+    {
+      "base": "BBD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 56.86
+    },
+    {
+      "base": "BDT",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.65
+    },
+    {
+      "base": "BGN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 83.18
+    },
+    {
+      "base": "BHD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 301.34
+    },
+    {
+      "base": "BIF",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.101
+    },
+    {
+      "base": "BOB",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 15.03
+    },
+    {
+      "base": "BRL",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 62.74
+    },
+    {
+      "base": "BTN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 2.88
+    },
+    {
+      "base": "CAD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 112.46
+    },
+    {
+      "base": "CHF",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 98.09
+    },
+    {
+      "base": "CLP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.2269
+    },
+    {
+      "base": "CNY",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 15.35
+    },
+    {
+      "base": "COP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0565
+    },
+    {
+      "base": "CUP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 113.15
+    },
+    {
+      "base": "CYP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 278.27
+    },
+    {
+      "base": "CZK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 6.17
+    },
+    {
+      "base": "DKK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 21.82
+    },
+    {
+      "base": "DOP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 3.42
+    },
+    {
+      "base": "DZD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.7
+    },
+    {
+      "base": "EEK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 10.39
+    },
+    {
+      "base": "EGP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 20.51
+    },
+    {
+      "base": "ETB",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 12.37
+    },
+    {
+      "base": "EUR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 162.76
+    },
+    {
+      "base": "FJD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 71.81
+    },
+    {
+      "base": "GBP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 226.97
+    },
+    {
+      "base": "GHS",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 118.76
+    },
+    {
+      "base": "GTQ",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 14.88
+    },
+    {
+      "base": "GYD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.5573
+    },
+    {
+      "base": "HKD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 14.51
+    },
+    {
+      "base": "HRK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 22.28
+    },
+    {
+      "base": "HUF",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.6392
+    },
+    {
+      "base": "IDR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0121
+    },
+    {
+      "base": "ILS",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 28.64
+    },
+    {
+      "base": "INR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 2.87
+    },
+    {
+      "base": "IQD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0932
+    },
+    {
+      "base": "IRR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0121
+    },
+    {
+      "base": "ISK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.79
+    },
+    {
+      "base": "JMD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.6
+    },
+    {
+      "base": "JOD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 159.99
+    },
+    {
+      "base": "KES",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.81
+    },
+    {
+      "base": "KRW",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.1208
+    },
+    {
+      "base": "KWD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 412.4
+    },
+    {
+      "base": "LBP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0749
+    },
+    {
+      "base": "LKR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.04
+    },
+    {
+      "base": "LVL",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 233.65
+    },
+    {
+      "base": "MAD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 14.37
+    },
+    {
+      "base": "MGA",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0629
+    },
+    {
+      "base": "MMK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 17.63
+    },
+    {
+      "base": "MNT",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0965
+    },
+    {
+      "base": "MOP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 14.11
+    },
+    {
+      "base": "MTL",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 379.17
+    },
+    {
+      "base": "MUR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 4.0
+    },
+    {
+      "base": "MWK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.82
+    },
+    {
+      "base": "MXN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 10.44
+    },
+    {
+      "base": "MYR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 33.85
+    },
+    {
+      "base": "NGN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.96
+    },
+    {
+      "base": "NOK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 20.33
+    },
+    {
+      "base": "NPR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.78
+    },
+    {
+      "base": "NZD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 85.74
+    },
+    {
+      "base": "OMR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 294.62
+    },
+    {
+      "base": "PEN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 38.05
+    },
+    {
+      "base": "PGK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 39.86
+    },
+    {
+      "base": "PHP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 2.72
+    },
+    {
+      "base": "PKR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.86
+    },
+    {
+      "base": "PLN",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 44.93
+    },
+    {
+      "base": "QAR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 31.11
+    },
+    {
+      "base": "RON",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 46.09
+    },
+    {
+      "base": "RSD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 2.08
+    },
+    {
+      "base": "RUB",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 4.58
+    },
+    {
+      "base": "SAR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 30.15
+    },
+    {
+      "base": "SBD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 15.15
+    },
+    {
+      "base": "SCR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 14.16
+    },
+    {
+      "base": "SEK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 17.24
+    },
+    {
+      "base": "SGD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 77.6
+    },
+    {
+      "base": "SKK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 4.84
+    },
+    {
+      "base": "SYP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 2.22
+    },
+    {
+      "base": "THB",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 3.72
+    },
+    {
+      "base": "TND",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 91.38
+    },
+    {
+      "base": "TOP",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 58.62
+    },
+    {
+      "base": "TRY",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 95.05
+    },
+    {
+      "base": "TTD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 18.08
+    },
+    {
+      "base": "TWD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 3.49
+    },
+    {
+      "base": "TZS",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0999
+    },
+    {
+      "base": "USD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 113.15
+    },
+    {
+      "base": "VEB",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0528
+    },
+    {
+      "base": "VND",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0071
+    },
+    {
+      "base": "VUV",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.197
+    },
+    {
+      "base": "WST",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 44.69
+    },
+    {
+      "base": "XCD",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 42.7
+    },
+    {
+      "base": "XOF",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.2483
+    },
+    {
+      "base": "XPF",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 1.3766
+    },
+    {
+      "base": "ZAR",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 16.27
+    },
+    {
+      "base": "ZMK",
+      "date": "2007-12-30",
+      "quote": "JPY",
+      "rate": 0.0297
+    },
+    {
+      "base": "AED",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 31.08
+    },
+    {
+      "base": "ANG",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 64.12
+    },
+    {
+      "base": "ARS",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 36.27
+    },
+    {
+      "base": "AUD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 99.65
+    },
+    {
+      "base": "BBD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 57.35
+    },
+    {
+      "base": "BDT",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.67
+    },
+    {
+      "base": "BGN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 84.56
+    },
+    {
+      "base": "BHD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 303.93
+    },
+    {
+      "base": "BIF",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.1015
+    },
+    {
+      "base": "BOB",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 15.16
+    },
+    {
+      "base": "BRL",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 63.83
+    },
+    {
+      "base": "BTN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 2.91
+    },
+    {
+      "base": "CAD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 116.01
+    },
+    {
+      "base": "CHF",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 99.14
+    },
+    {
+      "base": "CLP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.2302
+    },
+    {
+      "base": "CNY",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 15.56
+    },
+    {
+      "base": "COP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.057
+    },
+    {
+      "base": "CUP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 114.13
+    },
+    {
+      "base": "CYP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 282.86
+    },
+    {
+      "base": "CZK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 6.25
+    },
+    {
+      "base": "DKK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 22.15
+    },
+    {
+      "base": "DOP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 3.44
+    },
+    {
+      "base": "DZD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.71
+    },
+    {
+      "base": "EEK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 10.62
+    },
+    {
+      "base": "EGP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 20.67
+    },
+    {
+      "base": "ETB",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 12.47
+    },
+    {
+      "base": "EUR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 165.21
+    },
+    {
+      "base": "FJD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 73.0
+    },
+    {
+      "base": "GBP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 226.35
+    },
+    {
+      "base": "GHS",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 119.57
+    },
+    {
+      "base": "GTQ",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 14.96
+    },
+    {
+      "base": "GYD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.5617
+    },
+    {
+      "base": "HKD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 14.62
+    },
+    {
+      "base": "HRK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 22.57
+    },
+    {
+      "base": "HUF",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.6544
+    },
+    {
+      "base": "IDR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0122
+    },
+    {
+      "base": "ILS",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 29.42
+    },
+    {
+      "base": "INR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 2.9
+    },
+    {
+      "base": "IQD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.094
+    },
+    {
+      "base": "IRR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0122
+    },
+    {
+      "base": "ISK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.81
+    },
+    {
+      "base": "JMD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.62
+    },
+    {
+      "base": "JOD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 161.53
+    },
+    {
+      "base": "KES",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.8
+    },
+    {
+      "base": "KRW",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.1215
+    },
+    {
+      "base": "KWD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 416.79
+    },
+    {
+      "base": "LBP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0756
+    },
+    {
+      "base": "LKR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.05
+    },
+    {
+      "base": "LVL",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 237.63
+    },
+    {
+      "base": "MAD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 14.62
+    },
+    {
+      "base": "MGA",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0636
+    },
+    {
+      "base": "MMK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 17.78
+    },
+    {
+      "base": "MNT",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0976
+    },
+    {
+      "base": "MOP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 14.23
+    },
+    {
+      "base": "MTL",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 385.68
+    },
+    {
+      "base": "MUR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 4.18
+    },
+    {
+      "base": "MWK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.82
+    },
+    {
+      "base": "MXN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 10.52
+    },
+    {
+      "base": "MYR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 34.19
+    },
+    {
+      "base": "NGN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.97
+    },
+    {
+      "base": "NOK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 20.65
+    },
+    {
+      "base": "NPR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.8
+    },
+    {
+      "base": "NZD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 87.83
+    },
+    {
+      "base": "OMR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 296.75
+    },
+    {
+      "base": "PEN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 38.21
+    },
+    {
+      "base": "PGK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 40.25
+    },
+    {
+      "base": "PHP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 2.76
+    },
+    {
+      "base": "PKR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.86
+    },
+    {
+      "base": "PLN",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 46.06
+    },
+    {
+      "base": "QAR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 31.38
+    },
+    {
+      "base": "RON",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 47.23
+    },
+    {
+      "base": "RSD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 2.09
+    },
+    {
+      "base": "RUB",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 4.63
+    },
+    {
+      "base": "SAR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 30.44
+    },
+    {
+      "base": "SBD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 15.05
+    },
+    {
+      "base": "SCR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 14.27
+    },
+    {
+      "base": "SEK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 17.45
+    },
+    {
+      "base": "SGD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 78.63
+    },
+    {
+      "base": "SKK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 4.94
+    },
+    {
+      "base": "SYP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 2.24
+    },
+    {
+      "base": "THB",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 3.79
+    },
+    {
+      "base": "TND",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 92.68
+    },
+    {
+      "base": "TOP",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 59.11
+    },
+    {
+      "base": "TRY",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 97.01
+    },
+    {
+      "base": "TTD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 18.22
+    },
+    {
+      "base": "TWD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 3.52
+    },
+    {
+      "base": "TZS",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.1019
+    },
+    {
+      "base": "USD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 114.13
+    },
+    {
+      "base": "VEB",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0532
+    },
+    {
+      "base": "VND",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.0071
+    },
+    {
+      "base": "VUV",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.2007
+    },
+    {
+      "base": "WST",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 44.72
+    },
+    {
+      "base": "XCD",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 43.07
+    },
+    {
+      "base": "XOF",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.2519
+    },
+    {
+      "base": "XPF",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 1.3948
+    },
+    {
+      "base": "ZAR",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 16.53
+    },
+    {
+      "base": "ZMK",
+      "date": "2008-01-06",
+      "quote": "JPY",
+      "rate": 0.03
+    }
+  ]
+}
