@@ -1,0 +1,575 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F03+12%3A00%3A00+AM&DateTo=2025%2F01%2F08+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '299'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:45 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2c39e00fbe1b5170314500050111a2bae34ce4e3b30941cf1d634b114e33c54e26eb3e4c5d3f99afefa2169c2413e5af465c6a06c002ccde11f2f96c1ae1dbb19;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250103-20250108-3.csv; filename*=UTF-8''kl-20250103-20250108-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:44 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDI4MCxHZXJtYW55LERFTSwxLDU5Ljg4MDINCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSwyODAsR2VybWFueSxERU0sMSw1OS44ODAyDQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsNzU2LFN3aXR6ZXJsYW5kLENIRiwxLDEyNC4zNjE2DQo=
+  recorded_at: Tue, 20 Oct 2026 08:03:43 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F03+12%3A00%3A00+AM&DateTo=2025%2F01%2F05+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '196'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:45 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2a9d7419375c5cf44b796f5953dc427c1a4cfcd9f1c5d30bccbdedd21ec4aa2b3299600243b0e98c3927ee4f18d47c19770bd8467995bd6de2571b09730a887fa;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250103-20250105-3.csv; filename*=UTF-8''kl-20250103-20250105-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:44 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:44 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F03+12%3A00%3A00+AM&DateTo=2025%2F01%2F04+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '196'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:45 GMT; path=/
+      - TS0158a2e7=01ec1f7bd24f1c929879ad9dcef5bfcfc05c3e89d1f3568fade2075267c3d55fee1dd520591ec74c6b0d85d10da255ab892013f4bf0bf532a85792118e605e79f056ec4aa4;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250103-20250104-3.csv; filename*=UTF-8''kl-20250103-20250104-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:44 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:44 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F03+12%3A00%3A00+AM&DateTo=2025%2F01%2F03+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '196'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:45 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2205eb4e2e6498a5cdb3632b19666b3b3fbbeee73a4bd588284c1cc2767a0d153d4c206d0e790880f34ba6817bfc2e33821cf2f7ac0a98af042adfb17262dcb47;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250103-20250103-3.csv; filename*=UTF-8''kl-20250103-20250103-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:45 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:44 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F03+12%3A00%3A00+AM&DateTo=2025%2F01%2F03+12%3A00%3A00+AM&WorkingDays=2&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1988'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:45 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2ac4041648d444c6e47f55fe97b28ce5bfa0a3fd9485a030b69aa1e0440ec29b0b562b3be5df15e2e31c1d1d56c0459f3d9c288c9044253a0a7a42a272a8c542e;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250103-20250103-3.csv; filename*=UTF-8''kl-20250103-20250103-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:45 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDM2LEF1c3RyYWxpYSxBVUQsMSw3MC44NjMxDQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsOTYwLCxYRFIsMSwxNDguMTMyOA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDc1NixTd2l0emVybGFuZCxDSEYsMSwxMjUuMDQzMg0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDI1MCxGcmFuY2UsRlJGLDEsMTcuODU0MQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDQ0MixMdXhlbWJvdXJnLExVRiwxMDAsMjkwLjMyMTcNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwzNDgsSHVuZ2FyeSxIVUYsMTAwLDI4LjMwOTMNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSw4MDcsUmVwdWJsaWMgb2YgTm9ydGggTWFjZWRvbmlhLE1LRCwxLDEuOTAzNA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDM4MCxJdGFseSxJVEwsMTAwLDYuMDQ4NQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDU3OCxOb3J3YXksTk9LLDEsMTAuMDExNA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDk4NSxQb2xhbmQsUExOLDEsMjcuMzkyMg0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDcyNCxTcGFpbixFU1AsMTAwLDcwLjM4NzgNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwyODAsR2VybWFueSxERU0sMSw1OS44ODAyDQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsOTc4LEVNVSxFVVIsMSwxMTcuMTE1NQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDU2LEJlbGdpdW0sQkVGLDEwMCwyOTAuMzIxNw0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDM5MixKYXBhbixKUFksMTAwLDcyLjQ3NjkNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwzMDAsR3JlZWNlLEdSRCwxMDAsMzQuMzY5OQ0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDc1MixTd2VkZW4sU0VLLDEsMTAuMjMxMA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDc4NCxVbml0ZWQgQXJhYiBFbWlyYXRlcyxBRUQsMSwzMS4wMjg5DQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsMTI0LENhbmFkYSxDQUQsMSw3OS4yMDE3DQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsODI2LFVuaXRlZCBLaW5nZG9tLEdCUCwxLDE0MS4yNzMyDQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsNDE0LEt1d2FpdCxLV0QsMSwzNjkuMjE2Ng0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDYyMCxQb3J0dWdhbCxQVEUsMTAwLDU4LjQxNzANCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSw5NzcsQm9zbmlhIGFuZCBIZXJ6ZWdvdmluYSxCQU0sMSw1OS44ODAyDQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsNjQzLFJ1c3NpYW4gRmVkZXJhdGlvbixSVUIsMSwxLjAyNjgNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwyMDgsRGVubWFyayxES0ssMSwxNS42OTY2DQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsOTQ2LFJvbWFuaWEsUk9OLDEsMjMuNTI1Mg0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDE1NixDaGluYSxDTlksMSwxNS42MTUwDQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsOTc1LEJ1bGdhcmlhLEJHTiwxLDU5Ljg4MDINCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwyMDMsQ3plY2ggUmVwdWJsaWMsQ1pLLDEsNC42NDg3DQowMy4wMS4yMDI1LDAzLjAxLjIwMjUsNDAsQXVzdHJpYSxBVFMsMSw4LjUxMTENCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwzNzIsSXJlbGFuZCxJRVAsMSwxNDguNzA2MA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDg0MCxVbml0ZWQgU3RhdGVzICxVU0QsMSwxMTMuOTU4OA0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDkzMyxCZWxhcnVzLEJZTiwxLDM0Ljc1OTYNCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSw5NDksVHVya2V5LFRSWSwxLDMuMjE5Nw0KMDMuMDEuMjAyNSwwMy4wMS4yMDI1LDM1NixJbmRpYSxJTlIsMSwxLjMyOTINCjAzLjAxLjIwMjUsMDMuMDEuMjAyNSwyNDYsRmlubGFuZCxGSU0sMSwxOS42OTc0DQo=
+  recorded_at: Tue, 20 Oct 2026 08:03:44 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F04+12%3A00%3A00+AM&DateTo=2025%2F01%2F04+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '147'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:46 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2d27ddecaa4cb7c9ee0f66e95502cb52eb2751a5c0836ae50449ad080e5e36f9ef2dd27ab0b0b69836bf7e74d24af7c2e920155bc99fc47950052eb9e465cee52;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250104-20250104-3.csv; filename*=UTF-8''kl-20250104-20250104-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:45 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0K
+  recorded_at: Tue, 20 Oct 2026 08:03:45 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F05+12%3A00%3A00+AM&DateTo=2025%2F01%2F05+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '147'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:46 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2e2f72fb108aaa6c8ff0b533296befd98b4a957115ea9684c3ac8cfe4d042dcf37fe397f6e6ba5413d243e503902e4684556e7753600ce930561be7ac4486db52;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250105-20250105-3.csv; filename*=UTF-8''kl-20250105-20250105-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:45 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0K
+  recorded_at: Tue, 20 Oct 2026 08:03:45 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F06+12%3A00%3A00+AM&DateTo=2025%2F01%2F08+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '250'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:46 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2c8a6c920ec01b484944fceec864533e674a54c56a5185e9479e13731bdba040411d3ed299b18efc5921223c9ead0725780e1beadeb6dbe79595c6ec7258038b2;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250106-20250108-3.csv; filename*=UTF-8''kl-20250106-20250108-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:45 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDI4MCxHZXJtYW55LERFTSwxLDU5Ljg4MDINCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw3NTYsU3dpdHplcmxhbmQsQ0hGLDEsMTI0LjM2MTYNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:45 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F06+12%3A00%3A00+AM&DateTo=2025%2F01%2F07+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '196'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:46 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2b9817e40b0b1c185f9fab9a90201ebd15e84068f8d399e81833d30c7c0127b0b397f89a9488c1bdeaf1e48cbcec870aab23203a9666653c061f5fe6397aed1b5;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250106-20250107-3.csv; filename*=UTF-8''kl-20250106-20250107-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:46 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:45 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F06+12%3A00%3A00+AM&DateTo=2025%2F01%2F06+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '196'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:47 GMT; path=/
+      - TS0158a2e7=01ec1f7bd208f0d4b1b54a9ac9b26698084e03b17802bd38507a9156e69ab469857e8e69b1b16d78a1219e43ccf9aee6fb74e770e4d11e7659115e0c49211aee8eb23f8d44;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250106-20250106-3.csv; filename*=UTF-8''kl-20250106-20250106-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:46 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:45 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F06+12%3A00%3A00+AM&DateTo=2025%2F01%2F06+12%3A00%3A00+AM&WorkingDays=2&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1988'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:47 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2c41f5cf22797c3553d2c6f81b64f6b75a5c4dcafa1a096ebb0ceec814930e5a148250eca649feb1175c7067b98e57474ba732d0b1a82f81376b7bcec20d57322;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250106-20250106-3.csv; filename*=UTF-8''kl-20250106-20250106-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:46 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NzQNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSwzNTYsSW5kaWEsSU5SLDEsMS4zMjkyDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsOTQ5LFR1cmtleSxUUlksMSwzLjIxOTcNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw5MzMsQmVsYXJ1cyxCWU4sMSwzNC43NTk2DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsODQwLFVuaXRlZCBTdGF0ZXMgLFVTRCwxLDExMy45NTg4DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsMzcyLElyZWxhbmQsSUVQLDEsMTQ4LjcwNjANCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw0MCxBdXN0cmlhLEFUUywxLDguNTExMQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDIwMyxDemVjaCBSZXB1YmxpYyxDWkssMSw0LjY0ODcNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw5NzUsQnVsZ2FyaWEsQkdOLDEsNTkuODgwMg0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDE1NixDaGluYSxDTlksMSwxNS42MTUwDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsOTQ2LFJvbWFuaWEsUk9OLDEsMjMuNTI1Mg0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDIwOCxEZW5tYXJrLERLSywxLDE1LjY5NjYNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw2NDMsUnVzc2lhbiBGZWRlcmF0aW9uLFJVQiwxLDEuMDI2OA0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDk3NyxCb3NuaWEgYW5kIEhlcnplZ292aW5hLEJBTSwxLDU5Ljg4MDINCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw2MjAsUG9ydHVnYWwsUFRFLDEwMCw1OC40MTcwDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsNDE0LEt1d2FpdCxLV0QsMSwzNjkuMjE2Ng0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDgyNixVbml0ZWQgS2luZ2RvbSxHQlAsMSwxNDEuMjczMg0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDEyNCxDYW5hZGEsQ0FELDEsNzkuMjAxNw0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDc4NCxVbml0ZWQgQXJhYiBFbWlyYXRlcyxBRUQsMSwzMS4wMjg5DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsNzUyLFN3ZWRlbixTRUssMSwxMC4yMzEwDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsMzAwLEdyZWVjZSxHUkQsMTAwLDM0LjM2OTkNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSwzOTIsSmFwYW4sSlBZLDEwMCw3Mi40NzY5DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsNTYsQmVsZ2l1bSxCRUYsMTAwLDI5MC4zMjE3DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsOTc4LEVNVSxFVVIsMSwxMTcuMTE1NQ0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDI4MCxHZXJtYW55LERFTSwxLDU5Ljg4MDINCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw3MjQsU3BhaW4sRVNQLDEwMCw3MC4zODc4DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsOTg1LFBvbGFuZCxQTE4sMSwyNy4zOTIyDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsNTc4LE5vcndheSxOT0ssMSwxMC4wMTE0DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsMjUwLEZyYW5jZSxGUkYsMSwxNy44NTQxDQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsMzYsQXVzdHJhbGlhLEFVRCwxLDcwLjg2MzENCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw3NTYsU3dpdHplcmxhbmQsQ0hGLDEsMTI1LjA0MzINCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSwzNDgsSHVuZ2FyeSxIVUYsMTAwLDI4LjMwOTMNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSwzODAsSXRhbHksSVRMLDEwMCw2LjA0ODUNCjAzLjAxLjIwMjUsMDYuMDEuMjAyNSw0NDIsTHV4ZW1ib3VyZyxMVUYsMTAwLDI5MC4zMjE3DQowMy4wMS4yMDI1LDA2LjAxLjIwMjUsOTYwLCxYRFIsMSwxNDguMTMyOA0KMDMuMDEuMjAyNSwwNi4wMS4yMDI1LDgwNyxSZXB1YmxpYyBvZiBOb3J0aCBNYWNlZG9uaWEsTUtELDEsMS45MDM0DQo=
+  recorded_at: Tue, 20 Oct 2026 08:03:46 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F07+12%3A00%3A00+AM&DateTo=2025%2F01%2F07+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '147'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:47 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2ce426a4e038d3127c3f416121ad7a3ac336059bc9111e03d512ca5cd706c956d45272c7de9a995fadc1d28866a8dd6790803c067938f1eb7e08c632bce75a838;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250107-20250107-3.csv; filename*=UTF-8''kl-20250107-20250107-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:46 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0K
+  recorded_at: Tue, 20 Oct 2026 08:03:46 GMT
+- request:
+    method: post
+    uri: https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/DownloadPeriod
+    body:
+      encoding: ASCII-8BIT
+      string: ExchangeRateListTypeID=3&DateFrom=2025%2F01%2F08+12%3A00%3A00+AM&DateTo=2025%2F01%2F08+12%3A00%3A00+AM&WorkingDays=1&Format=csv
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - webappcenter.nbs.rs
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1987'
+      Content-Type:
+      - text/csv
+      Strict-Transport-Security:
+      - max-age=2592000
+      Set-Cookie:
+      - NBS.WebAppCenter.FrontOfficeExchangeRate.WebApp.MyCookie=%5B%7B%22Type%22%3A%22http%3A%2F%2Fschemas.xmlsoap.org%2Fws%2F2005%2F05%2Fidentity%2Fclaims%2Fname%22%2C%22Value%22%3A%22System.Anonimous%22%7D%2C%7B%22Type%22%3A%22http%3A%2F%2Fschemas.microsoft.com%2Fws%2F2008%2F06%2Fidentity%2Fclaims%2Frole%22%2C%22Value%22%3A%22StandardView%22%7D%5D;
+        expires=Tue, 20 Oct 2026 08:18:47 GMT; path=/
+      - TS0158a2e7=01ec1f7bd2a52146b92269c1f6e0e157002dca359b2510b3b66cbe726c9b9493723121c8d8057076507d09c85690322557254d45fd7719f4f5e46360f3c6c61c3e1ea3b326;
+        Path=/
+      Content-Disposition:
+      - attachment; filename=kl-20250108-20250108-3.csv; filename*=UTF-8''kl-20250108-20250108-3.csv
+      Date:
+      - Tue, 20 Oct 2026 08:03:46 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        0JTQsNGC0YPQvCDRhNC+0YDQvNC40YDQsNGa0LAsINCU0LDRgtGD0Lwg0L/RgNC40LzQtdC90LUsINCS0LDQu9GD0YLQsCwg0J3QsNC30LjQsiDQt9C10LzRmdC1LCDQntC30L3QsNC60LAsINCS0LDQttC4INC30LAsINCh0YDQtdC00ZrQuCDQutGD0YDRgQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDI0NixGaW5sYW5kLEZJTSwxLDE5LjY5NDYNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSwzNTYsSW5kaWEsSU5SLDEsMS4zMTY5DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsOTQ5LFR1cmtleSxUUlksMSwzLjE5NjANCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw5MzMsQmVsYXJ1cyxCWU4sMSwzNC40NzYzDQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsODQwLFVuaXRlZCBTdGF0ZXMgLFVTRCwxLDExMy4wMjk4DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsMzcyLElyZWxhbmQsSUVQLDEsMTQ4LjY4NDkNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw0MCxBdXN0cmlhLEFUUywxLDguNTA5OQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDIwMyxDemVjaCBSZXB1YmxpYyxDWkssMSw0LjY1NzUNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw5NzUsQnVsZ2FyaWEsQkdOLDEsNTkuODcxNw0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDE1NixDaGluYSxDTlksMSwxNS40MjEzDQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsOTQ2LFJvbWFuaWEsUk9OLDEsMjMuNTMwNA0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDIwOCxEZW5tYXJrLERLSywxLDE1LjY5MzENCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw2NDMsUnVzc2lhbiBGZWRlcmF0aW9uLFJVQiwxLDEuMDcxNA0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDk3NyxCb3NuaWEgYW5kIEhlcnplZ292aW5hLEJBTSwxLDU5Ljg3MTcNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw2MjAsUG9ydHVnYWwsUFRFLDEwMCw1OC40MDg3DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsNDE0LEt1d2FpdCxLV0QsMSwzNjYuNTA2Nw0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDgyNixVbml0ZWQgS2luZ2RvbSxHQlAsMSwxNDEuMTg1MQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDEyNCxDYW5hZGEsQ0FELDEsNzguODI3OQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDc4NCxVbml0ZWQgQXJhYiBFbWlyYXRlcyxBRUQsMSwzMC43NzQyDQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsNzUyLFN3ZWRlbixTRUssMSwxMC4xODE1DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsMzAwLEdyZWVjZSxHUkQsMTAwLDM0LjM2NTANCjA4LjAxLjIwMjUsMDguMDEuMjAyNSwzOTIsSmFwYW4sSlBZLDEwMCw3MS40ODQ2DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsNTYsQmVsZ2l1bSxCRUYsMTAwLDI5MC4yODA2DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsOTc4LEVNVSxFVVIsMSwxMTcuMDk4OQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDI4MCxHZXJtYW55LERFTSwxLDU5Ljg3MTcNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw3MjQsU3BhaW4sRVNQLDEwMCw3MC4zNzc5DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsOTg1LFBvbGFuZCxQTE4sMSwyNy40NTcxDQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsNTc4LE5vcndheSxOT0ssMSw5Ljk3OTENCjA4LjAxLjIwMjUsMDguMDEuMjAyNSwyNTAsRnJhbmNlLEZSRiwxLDE3Ljg1MTYNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSwzNixBdXN0cmFsaWEsQVVELDEsNzAuNDY1MQ0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDc1NixTd2l0emVybGFuZCxDSEYsMSwxMjQuMzYxNg0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDM0OCxIdW5nYXJ5LEhVRiwxMDAsMjguMTc1Mg0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDM4MCxJdGFseSxJVEwsMTAwLDYuMDQ3Nw0KMDguMDEuMjAyNSwwOC4wMS4yMDI1LDQ0MixMdXhlbWJvdXJnLExVRiwxMDAsMjkwLjI4MDYNCjA4LjAxLjIwMjUsMDguMDEuMjAyNSw5NjAsLFhEUiwxLDE0Ny4zODE4DQowOC4wMS4yMDI1LDA4LjAxLjIwMjUsODA3LFJlcHVibGljIG9mIE5vcnRoIE1hY2Vkb25pYSxNS0QsMSwxLjg4NDQNCg==
+  recorded_at: Tue, 20 Oct 2026 08:03:46 GMT
+recorded_with: VCR 6.4.0

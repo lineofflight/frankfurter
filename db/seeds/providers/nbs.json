@@ -1,0 +1,12 @@
+{
+  "key": "NBS",
+  "name": "Narodna banka Srbije",
+  "country_code": "RS",
+  "rate_type": "official middle rate",
+  "pivot_currency": "RSD",
+  "data_url": "https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/CurrentMiddleRate",
+  "terms_url": "https://www.nbs.rs/en/copyright/index.html",
+  "publish_schedule": "*/30 6-8 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2002-05-15"
+}
