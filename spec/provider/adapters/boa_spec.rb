@@ -63,6 +63,16 @@ class Provider < Sequel::Model(:providers)
         _(usd[:rate]).must_be_close_to(132.5, 5.0)
       end
 
+      it "finds an archive link with a prefixed file name" do
+        url = "https://www.bank-of-algeria.dz/stoodroa/2026/10/clean_Cotation-DZD-2000-2026-journalier.xlsx"
+        hub = %(<a href="https://www.bank-of-algeria.dz/stoodroa/2026/01/Cours-moyens-annuels-1994-2025.xlsx">
+          <a href="#{url}">)
+
+        adapter.stub(:download, hub) do
+          _(adapter.send(:locate_archive_url)).must_equal(url)
+        end
+      end
+
       it "raises when the archive link is missing from the hub page" do
         adapter.stub(:download, "<html><body>no link here</body></html>") do
           assert_raises(RuntimeError) { adapter.fetch }

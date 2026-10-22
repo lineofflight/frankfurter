@@ -30,7 +30,7 @@ class Provider
     # used by other pivot-in-quote adapters (e.g. NBG, BBK).
     class BOA < Adapter
       HUB_URL = "https://www.bank-of-algeria.dz/donnees-historiques/"
-      ARCHIVE_LINK = %r{href="(https://www\.bank-of-algeria\.dz/stoodroa/\d{4}/\d{2}/Cotation-DZD-[^"]+\.xlsx)"}
+      ARCHIVE_LINK = %r{href="(https://www\.bank-of-algeria\.dz/stoodroa/\d{4}/\d{2}/[^"/]*Cotation-DZD-[^"]+\.xlsx)"}
       EXCEL_EPOCH = Date.new(1899, 12, 30)
       JPY_UNITS = 100
 
