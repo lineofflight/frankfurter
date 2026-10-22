@@ -16,66 +16,66 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { BI.new }
 
-      it "fetches rates" do
-        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))
+      def chart_page(*rows)
+        data = rows.map do |code, qty, buy, sell, period|
+          { mataUang: "#{code}  ", qty:, beli: buy, jual: sell, TimePeriod: "#{period} 12:00:00 AM" }
+        end
 
-        _(dataset).wont_be_empty
+        <<~HTML
+          <script>
+            function renderHighchart2(data, lang) {}
+            if (typeof renderHighchart2 === 'function') {
+              renderHighchart2(#{JSON.generate(data)}, 'en');
+            }
+          </script>
+        HTML
+      end
+
+      # One currency keeps the cassette small: each page carries a quarter-megabyte view state.
+      it "fetches rates" do
+        dataset = adapter.stub(:extract_currencies, ["JPY  "]) do
+          adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))
+        end
+
+        _(dataset.map { |r| r[:date] }).must_equal((Date.new(2026, 3, 2)..Date.new(2026, 3, 5)).to_a)
+        _(dataset.map { |r| r[:base] }.uniq).must_equal(["JPY"])
+        _(dataset.first[:rate]).must_be_close_to(107.49915)
       end
 
       it "stores foreign currency as base and IDR as quote" do
-        html = <<~HTML
-          <table id="foo_gvSearchResult2">
-          <tr><th>Value</th><th>Sell</th><th>Buy</th><th>Date</th></tr>
-          <tr><td>1.00</td><td>4,627.79</td><td>4,580.24</td><td>5 Mar 2026</td></tr>
-          </table>
-        HTML
-
-        records = adapter.parse(html, currency: "AED  ")
+        records = adapter.parse(chart_page(["AED", 1, 4580.24, 4627.79, "3/5/2026"]), currency: "AED  ")
 
         _(records.first[:base]).must_equal("AED")
         _(records.first[:quote]).must_equal("IDR")
+        _(records.first[:date]).must_equal(Date.new(2026, 3, 5))
       end
 
       it "computes mid-rate from buy and sell" do
-        html = <<~HTML
-          <table id="foo_gvSearchResult2">
-          <tr><th>Value</th><th>Sell</th><th>Buy</th><th>Date</th></tr>
-          <tr><td>1.00</td><td>4,627.79</td><td>4,580.24</td><td>5 Mar 2026</td></tr>
-          </table>
-        HTML
-
-        records = adapter.parse(html, currency: "AED  ")
+        records = adapter.parse(chart_page(["AED", 1, 4580.24, 4627.79, "3/5/2026"]), currency: "AED  ")
 
         _(records.first[:rate]).must_equal(4604.015)
       end
 
-      it "parses rates with thousands separators" do
-        html = <<~HTML
-          <table id="foo_gvSearchResult2">
-          <tr><th>Value</th><th>Sell</th><th>Buy</th><th>Date</th></tr>
-          <tr><td>1.00</td><td>19,743.74</td><td>19,543.91</td><td>3 Mar 2026</td></tr>
-          </table>
-        HTML
+      it "normalises JPY from per-100 to per-unit" do
+        records = adapter.parse(chart_page(["JPY", 100, 10695.13, 10804.7, "3/2/2026"]), currency: "JPY  ")
 
-        records = adapter.parse(html, currency: "EUR  ")
-
-        _(records.first[:rate]).must_equal(19643.825)
+        _(records.first[:rate]).must_be_close_to(107.49915)
+        _(records.first[:bid]).must_be_close_to(106.9513)
+        _(records.first[:ask]).must_be_close_to(108.047)
       end
 
-      it "returns empty when the search form renders without a results table" do
-        html = %(<html><body><input name="ctl00$PlaceHolderMain$g$btnSearch1"></body></html>)
-
-        records = adapter.parse(html, currency: "USD  ")
+      it "returns empty for a window without working days" do
+        records = adapter.parse(chart_page, currency: "USD  ")
 
         _(records).must_be_empty
       end
 
-      it "raises when the response has neither results table nor search form" do
+      it "raises when the response has no chart data" do
         error = assert_raises(RuntimeError) do
           adapter.parse("<html><body>No data</body></html>", currency: "USD  ")
         end
 
-        _(error.message).must_match(/neither results table nor search form/)
+        _(error.message).must_match(/no chart data/)
       end
     end
   end

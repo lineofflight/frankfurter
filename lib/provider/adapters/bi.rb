@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require "json"
+
 require "provider/adapters/adapter"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
     # Bank Indonesia. Fetches daily transaction exchange rates for 26 currencies against the Indonesian rupiah (IDR).
-    # The page is SharePoint-based; we POST a search per currency and parse the HTML result table. Rates are buy/sell;
-    # we compute the mid-rate as (sell + buy) / 2.
+    # The page is SharePoint-based; we POST a search per currency and parse the results, which the page embeds as JSON
+    # for its chart. Rates are buy/sell per quoted unit (100 for JPY); we compute the mid-rate per one unit.
     class BI < Adapter
       BASE_URL = "https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx"
 
@@ -20,7 +22,7 @@ class Provider < Sequel::Model(:providers)
         to_str = end_date.strftime("%d-%b-%Y")
 
         page = load_page
-        prefix = extract_prefix(page)
+        prefix = extract_prefix(page) || raise("BI: search form not found on #{BASE_URL}")
         tokens = extract_tokens(page)
         cookies = @cookies
         currencies = extract_currencies(page)
@@ -40,32 +42,21 @@ class Provider < Sequel::Model(:providers)
       end
 
       def parse(html, currency:)
-        table = html[%r{gvSearchResult2"[^>]*>(.*?)</table>}mi, 1]
-        unless table
-          # No-result searches re-render the page without a gvSearchResult2 table (observed for weekend-only windows);
-          # the search web part is still present in those re-renders.
-          return [] if html.include?("btnSearch1")
+        # Weekend-only windows render an empty array.
+        json = html[/renderHighchart2\((\[.*?\])\s*,/m, 1]
+        raise "BI: no chart data in response for #{currency.strip}" unless json
 
-          raise "BI: neither results table nor search form in response for #{currency.strip}"
+        JSON.parse(json).filter_map do |row|
+          unit = row["qty"].to_i
+          buy = row["beli"]
+          sell = row["jual"]
+          next unless unit.positive? && buy.to_f.positive? && sell.to_f.positive?
+
+          date = Date.strptime(row["TimePeriod"], "%m/%d/%Y")
+          rate = midpoint(buy, sell) / unit
+
+          { date:, base: row["mataUang"].strip, quote: "IDR", rate:, **prices(bid: buy, ask: sell, unit:) }
         end
-
-        records = []
-        table.scan(%r{<tr[^>]*>(.*?)</tr>}mi) do |row_html,|
-          cells = row_html.scan(%r{<td[^>]*>(.*?)</td>}mi).flatten.map { |c| c.strip.gsub(/<[^>]+>/, "").strip }
-          next if cells.length < 4
-
-          _value, sell_str, buy_str, date_str = cells
-          sell = Float(sell_str.delete(","), exception: false)
-          buy = Float(buy_str.delete(","), exception: false)
-          next unless sell && buy && sell.positive? && buy.positive?
-
-          mid = midpoint(sell, buy)
-          date = Date.parse(date_str)
-
-          records << { date:, base: currency.strip, quote: "IDR", rate: mid, **prices(bid: buy, ask: sell) }
-        end
-
-        records
       end
 
       private
@@ -93,7 +84,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       def extract_prefix(html)
-        html[/name="(ctl00\$PlaceHolderMain\$[^"]*)\$txtFrom"/, 1]
+        html[/name="(ctl00\$[^"]*)\$txtFrom"/, 1]
       end
 
       def extract_tokens(html)
