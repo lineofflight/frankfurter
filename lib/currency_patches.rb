@@ -5,6 +5,7 @@ require "money/currency"
 
 # Patches the Money gem's currency table:
 # - Registers historical ISO 4217 codes (pre-euro, pre-redenomination) the gem doesn't include.
+# - Registers the crypto assets ESTV values that the gem lacks (it already carries BTC and BCH).
 # - Corrects names where the gem mangled an acronym (e.g. "Cfa" → "CFA").
 # - Names retired currencies after CLDR 48 English display names (as in Intl.DisplayNames), whose year ranges tell
 #   successive redenominations apart. Ranges use en dashes, though CLDR spells SLL's with an em dash.

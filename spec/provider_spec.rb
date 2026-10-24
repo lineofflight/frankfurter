@@ -30,6 +30,7 @@ describe Provider do
         _(data).wont_include("publish_days")
         _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["publish_cadence"])
         _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["frequency"])
+        _([nil, false]).must_include(data["blends"])
         _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
         next if data["publish_schedule"].nil?
 
@@ -102,6 +103,13 @@ describe Provider do
       _(in_arrears.lookback_days).must_equal(45)
       _(weekly.lookback_days).must_equal(14)
       _(unscheduled.lookback_days).must_equal(14)
+    end
+
+    it "keeps a daily provider out of the blend when its seed opts out" do
+      _(Provider.new { |p| p.blends = false }.blends?).must_equal(false)
+      _(Provider["ESTV"].frequency).must_equal("daily")
+      _(Provider.non_blending_keys).must_include("ESTV")
+      _(Provider["ECB"].blends?).must_equal(true)
     end
 
     it "lists the keys of providers that do not blend" do

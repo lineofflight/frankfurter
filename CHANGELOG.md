@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - National Bank of Serbia (NBS) as a data provider. (#301)
+- Swiss Federal Tax Administration (ESTV) as a data provider, with daily values for BTC, BCH, ETH, LTC and XRP. It
+  stays out of the blend and is served only when requested with `providers=ESTV`. (#770)
 
 ### Fixed
 
