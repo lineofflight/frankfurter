@@ -1,0 +1,494 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.ictax.admin.ch/extern/api/authentication/session.json
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Set-Cookie:
+      - 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; path=/;
+        HttpOnly; Secure; SameSite=None
+      - 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; path=/;
+        HttpOnly; Secure; SameSite=None
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; Path=/extern; Secure; HttpOnly;
+        SameSite=Strict
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; Path=/extern; Secure; HttpOnly;
+        SameSite=Strict
+      - cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4;Expires=Sat, 23 Oct 2027 23:58:54
+        GMT;Path=/;Secure;HttpOnly
+      - cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4;Expires=Sat, 23 Oct 2027 23:58:54
+        GMT;Path=/;Secure;HttpOnly
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:54 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '328'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"timeout":1800000,"sessionId":"9D1124F4446CBA39E9DC8BD163733A34","login":null,"name":null,"permissions":[],"authenticated":false,"language":null,"csrfToken":"rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb","role":null},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:54 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/tokenGadget.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792368000000,"tokens":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:55 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '569'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792368000000,"tokens":[{"token":{"categoryShortName":"TOKEN","shortName":"BCH"},"value":231.189334,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"BTC"},"value":67961.337588,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"ETH"},"value":1992.48466,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"LTC"},"value":49.583285,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"XRP"},"value":1.07958,"denomination":1}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:55 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/exchangeRates.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792368000000,"currencies":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:55 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '1588'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792368000000,"currencies":[{"currency":{"categoryShortName":"CURREN","shortName":"AUD"},"country":{"categoryShortName":"COUNTR","shortName":"AU"},"value":0.576743,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2950998},{"currency":{"categoryShortName":"CURREN","shortName":"CAD"},"country":{"categoryShortName":"COUNTR","shortName":"CA"},"value":0.586048,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951042},{"currency":{"categoryShortName":"CURREN","shortName":"EUR"},"country":{"categoryShortName":"COUNTR","shortName":"EU"},"value":0.92625,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951012},{"currency":{"categoryShortName":"CURREN","shortName":"GBP"},"country":{"categoryShortName":"COUNTR","shortName":"GB"},"value":1.099732,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951154},{"currency":{"categoryShortName":"CURREN","shortName":"HKD"},"country":{"categoryShortName":"COUNTR","shortName":"HK"},"value":10.5216,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951019},{"currency":{"categoryShortName":"CURREN","shortName":"JPY"},"country":{"categoryShortName":"COUNTR","shortName":"JP"},"value":0.5211,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951035},{"currency":{"categoryShortName":"CURREN","shortName":"USD"},"country":{"categoryShortName":"COUNTR","shortName":"US"},"value":0.82575,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951145}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:55 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/tokenGadget.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792454400000,"tokens":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:56 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '571'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792454400000,"tokens":[{"token":{"categoryShortName":"TOKEN","shortName":"BCH"},"value":227.907454,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"BTC"},"value":68022.901187,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"ETH"},"value":2005.422316,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"LTC"},"value":49.183298,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"XRP"},"value":1.085165,"denomination":1}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:56 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/exchangeRates.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792454400000,"currencies":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:56 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '1587'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792454400000,"currencies":[{"currency":{"categoryShortName":"CURREN","shortName":"AUD"},"country":{"categoryShortName":"COUNTR","shortName":"AU"},"value":0.578766,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2950998},{"currency":{"categoryShortName":"CURREN","shortName":"CAD"},"country":{"categoryShortName":"COUNTR","shortName":"CA"},"value":0.587539,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951042},{"currency":{"categoryShortName":"CURREN","shortName":"EUR"},"country":{"categoryShortName":"COUNTR","shortName":"EU"},"value":0.9284,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951012},{"currency":{"categoryShortName":"CURREN","shortName":"GBP"},"country":{"categoryShortName":"COUNTR","shortName":"GB"},"value":1.105238,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951154},{"currency":{"categoryShortName":"CURREN","shortName":"HKD"},"country":{"categoryShortName":"COUNTR","shortName":"HK"},"value":10.5192,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951019},{"currency":{"categoryShortName":"CURREN","shortName":"JPY"},"country":{"categoryShortName":"COUNTR","shortName":"JP"},"value":0.5226,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951035},{"currency":{"categoryShortName":"CURREN","shortName":"USD"},"country":{"categoryShortName":"COUNTR","shortName":"US"},"value":0.82555,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951145}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:56 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/tokenGadget.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792540800000,"tokens":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:58 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '571'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792540800000,"tokens":[{"token":{"categoryShortName":"TOKEN","shortName":"BCH"},"value":237.961061,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"BTC"},"value":69636.722241,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"ETH"},"value":2064.136858,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"LTC"},"value":51.024493,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"XRP"},"value":1.134679,"denomination":1}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:58 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/exchangeRates.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792540800000,"currencies":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:58:58 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '1587'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792540800000,"currencies":[{"currency":{"categoryShortName":"CURREN","shortName":"AUD"},"country":{"categoryShortName":"COUNTR","shortName":"AU"},"value":0.580064,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2950998},{"currency":{"categoryShortName":"CURREN","shortName":"CAD"},"country":{"categoryShortName":"COUNTR","shortName":"CA"},"value":0.587048,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951042},{"currency":{"categoryShortName":"CURREN","shortName":"EUR"},"country":{"categoryShortName":"COUNTR","shortName":"EU"},"value":0.92645,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951012},{"currency":{"categoryShortName":"CURREN","shortName":"GBP"},"country":{"categoryShortName":"COUNTR","shortName":"GB"},"value":1.104757,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951154},{"currency":{"categoryShortName":"CURREN","shortName":"HKD"},"country":{"categoryShortName":"COUNTR","shortName":"HK"},"value":10.5191,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951019},{"currency":{"categoryShortName":"CURREN","shortName":"JPY"},"country":{"categoryShortName":"COUNTR","shortName":"JP"},"value":0.522,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951035},{"currency":{"categoryShortName":"CURREN","shortName":"USD"},"country":{"categoryShortName":"COUNTR","shortName":"US"},"value":0.82545,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951145}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:58:58 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/tokenGadget.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792627200000,"tokens":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:59:00 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '570'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792627200000,"tokens":[{"token":{"categoryShortName":"TOKEN","shortName":"BCH"},"value":225.321607,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"BTC"},"value":67080.203013,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"ETH"},"value":1971.85767,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"LTC"},"value":48.333684,"denomination":1},{"token":{"categoryShortName":"TOKEN","shortName":"XRP"},"value":1.085571,"denomination":1}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:59:00 GMT
+- request:
+    method: post
+    uri: https://www.ictax.admin.ch/extern/api/coreGadget/exchangeRates.json
+    body:
+      encoding: UTF-8
+      string: '{"referenceDate":1792627200000,"currencies":[]}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)
+      Accept:
+      - application/json
+      Cookie:
+      - JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34; 55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20;
+        cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4; JSESSIONID=9D1124F4446CBA39E9DC8BD163733A34;
+        55f524cac18dc2fcb2ded9d5fce0eedb=01585ff9c7cca16e2883cd35f337af20; cookiesession1=678A3E6A9D7743A0A638B18D25DCA1E4
+      X-Csrf-Token:
+      - rHUOFGaaa8eE3njtQA1ewXef0zjhtjdqxfwdCdABHv4knof4lUFscVWjUqKp7UjVeSBq-Bb8_lmF0AJH_Z0sOOU0KcYUq7Wb
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - www.ictax.admin.ch
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      X-Frame-Options:
+      - DENY
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 23 Oct 2026 23:59:01 GMT
+      Connection:
+      - close
+      Strict-Transport-Security:
+      - max-age=15552000
+      Content-Length:
+      - '1587'
+    body:
+      encoding: UTF-8
+      string: '{"status":"SUCCESS","error":null,"data":{"referenceDate":1792627200000,"currencies":[{"currency":{"categoryShortName":"CURREN","shortName":"AUD"},"country":{"categoryShortName":"COUNTR","shortName":"AU"},"value":0.577439,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2950998},{"currency":{"categoryShortName":"CURREN","shortName":"CAD"},"country":{"categoryShortName":"COUNTR","shortName":"CA"},"value":0.586846,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951042},{"currency":{"categoryShortName":"CURREN","shortName":"EUR"},"country":{"categoryShortName":"COUNTR","shortName":"EU"},"value":0.9222,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951012},{"currency":{"categoryShortName":"CURREN","shortName":"GBP"},"country":{"categoryShortName":"COUNTR","shortName":"GB"},"value":1.100674,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951154},{"currency":{"categoryShortName":"CURREN","shortName":"HKD"},"country":{"categoryShortName":"COUNTR","shortName":"HK"},"value":10.5094,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951019},{"currency":{"categoryShortName":"CURREN","shortName":"JPY"},"country":{"categoryShortName":"COUNTR","shortName":"JP"},"value":0.5238,"valueNote":null,"valueMiddle":null,"denomination":100,"valorNumber":2951035},{"currency":{"categoryShortName":"CURREN","shortName":"USD"},"country":{"categoryShortName":"COUNTR","shortName":"US"},"value":0.82355,"valueNote":null,"valueMiddle":null,"denomination":1,"valorNumber":2951145}]},"totalItems":null}'
+  recorded_at: Fri, 23 Oct 2026 23:59:01 GMT
+recorded_with: VCR 6.4.0
