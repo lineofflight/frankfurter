@@ -33,10 +33,14 @@ class Provider < Sequel::Model(:providers)
   # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts.
   NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
 
+  # Values for seed keys only some provider files carry.
+  SEED_DEFAULTS = { "frequency" => "daily", "blends" => true }.freeze
+
   class << self
-    # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
-    # catalogue: a value that stands for a month or a quarter is observed once and served for the whole period, so on
-    # most days it is weeks stale, and the recency decay, which counts from the row date, cannot see that.
+    # Keys of providers whose values stand for longer than a day, or that opt out in their seed. Their rows never enter
+    # the blend or the currency catalogue: a value that stands for a month or a quarter is observed once and served for
+    # the whole period, so on most days it is weeks stale, and the recency decay, which counts from the row date, cannot
+    # see that.
     def non_blending_keys
       all.reject(&:blends?).map(&:key)
     end
@@ -46,10 +50,13 @@ class Provider < Sequel::Model(:providers)
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
       data = Dir["#{dir}/*.json"].map { |f| JSON.parse(File.read(f)) }
-      # multi_insert takes its column list from the first row, so a key only some files carry (frequency) would be
-      # dropped from the rest. Normalise every row to the union of keys first.
-      keys = data.flat_map(&:keys).uniq
-      rows = data.map { |d| keys.to_h { |k| [k, d.fetch(k) { k == "frequency" ? "daily" : nil }] } }
+      # multi_insert takes its column list from the first row, so a key only some files carry (frequency, blends) would
+      # be dropped from the rest. Normalise every row to the union of keys first. Migration specs seed at older schema
+      # versions, so an optional key whose column does not exist yet is left out. Ask the table, not the model: db:setup
+      # loads Provider during older migrations, so its cached columns predate the newer ones.
+      columns = dataset.columns!
+      keys = data.flat_map(&:keys).uniq.reject { |k| SEED_DEFAULTS.key?(k) && !columns.include?(k.to_sym) }
+      rows = data.map { |d| keys.to_h { |k| [k, d.fetch(k) { SEED_DEFAULTS[k] }] } }
       dataset.delete
       dataset.multi_insert(rows)
       load_cache
@@ -83,8 +90,11 @@ class Provider < Sequel::Model(:providers)
     super || "daily"
   end
 
+  # A daily provider whose seed sets blends to false is served only when requested by name: ESTV's crypto values are
+  # official but not something to answer an unfiltered query with (#770). Read by key, as migrations older than 050 load
+  # Provider before the column exists.
   def blends?
-    frequency == "daily"
+    frequency == "daily" && self[:blends] != false
   end
 
   # The wider of the frequency and cadence windows. A provider that releases a month of daily fixings in arrears has

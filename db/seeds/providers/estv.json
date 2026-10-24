@@ -1,0 +1,13 @@
+{
+  "key": "ESTV",
+  "name": "Swiss Federal Tax Administration",
+  "country_code": "CH",
+  "rate_type": "tax valuation rate",
+  "pivot_currency": "CHF",
+  "data_url": "https://www.ictax.admin.ch/extern/en.html#/ratelist",
+  "terms_url": "https://www.admin.ch/gov/en/start/terms-and-conditions.html",
+  "publish_schedule": "*/30 16-20 * * 1-5",
+  "publish_cadence": "daily",
+  "blends": false,
+  "coverage_start": "2018-01-02"
+}
