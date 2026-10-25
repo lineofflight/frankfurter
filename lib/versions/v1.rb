@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "oj"
+require "plain_decimal"
 require "roda"
 
 require "versions/v1/currency_names"
@@ -47,7 +47,7 @@ module Versions
 
     plugin :json,
            content_type: "application/json; charset=utf-8",
-           serializer: ->(o) { Oj.dump(o, mode: :compat) }
+           serializer: ->(o) { PlainDecimal.dump(o) }
 
     plugin :caching
     plugin :indifferent_params

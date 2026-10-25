@@ -141,6 +141,27 @@ describe Versions::V2 do
     _(pairs).must_equal(pairs.uniq)
   end
 
+  it "writes small rates as plain decimals" do
+    date = Fixtures.latest_date
+    Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "VND", mid: 28_000.0)
+    Provider["ECB"].send(:refresh_rollups, [date])
+    Provider["ECB"].send(:refresh_currency_summaries, ["EUR", "VND"])
+    query = "base=VND&quotes=EUR&providers=ECB"
+
+    get "/rates?#{query}&date=#{date}"
+
+    _(last_response.body).must_include('"rate":0.000035714')
+    get "/rates?#{query}&from=#{date}&to=#{date}"
+
+    _(last_response.body).must_include('"rate":0.000035714')
+    get "/rates?#{query}&from=#{date}&to=#{date}", {}, { "HTTP_ACCEPT" => "application/x-ndjson" }
+
+    _(last_response.body).must_include('"rate":0.000035714')
+    get "/rates.csv?#{query}&date=#{date}&expand=providers"
+
+    _(last_response.body).must_include(",0.000035714,ECB:0.000035714")
+  end
+
   it "rebases to a different currency" do
     get "/rates?base=USD"
 

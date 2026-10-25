@@ -4,7 +4,7 @@ require "csv"
 require "currency"
 require "currency_exclusion"
 require "heavy_slots"
-require "oj"
+require "plain_decimal"
 require "provider"
 require "request_timeout"
 require "roda"
@@ -23,7 +23,7 @@ module Versions
 
     plugin :json,
            content_type: "application/json; charset=utf-8",
-           serializer: ->(o) { Oj.dump(o, mode: :compat) }
+           serializer: ->(o) { PlainDecimal.dump(o) }
 
     plugin :type_routing,
            types: { csv: "text/csv" }
@@ -158,10 +158,10 @@ module Versions
         response["Content-Type"] = "application/x-ndjson"
         stream_query(query) do |out|
           if first
-            out << Oj.dump(first, mode: :compat)
+            out << PlainDecimal.dump(first)
             out << "\n"
             rest.each do |record|
-              out << Oj.dump(record, mode: :compat)
+              out << PlainDecimal.dump(record)
               out << "\n"
             end
           end
@@ -172,10 +172,10 @@ module Versions
         stream_query(query) do |out|
           out << "["
           if first
-            out << Oj.dump(first, mode: :compat)
+            out << PlainDecimal.dump(first)
             rest.each do |record|
               out << ","
-              out << Oj.dump(record, mode: :compat)
+              out << PlainDecimal.dump(record)
             end
           end
           out << "]"
@@ -252,9 +252,13 @@ module Versions
     end
 
     def csv_value(value)
+      return PlainDecimal.format(value) if value.is_a?(Float)
       return value unless value.is_a?(Array)
 
-      value.map { |p| p[:excluded] ? "#{p[:key]}:#{p[:rate]}*" : "#{p[:key]}:#{p[:rate]}" }.join("|")
+      value.map do |p|
+        rate = PlainDecimal.format(p[:rate])
+        p[:excluded] ? "#{p[:key]}:#{rate}*" : "#{p[:key]}:#{rate}"
+      end.join("|")
     end
 
     def currencies(params)
