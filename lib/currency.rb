@@ -102,12 +102,18 @@ class Currency < Sequel::Model(:currencies)
   def to_h
     {
       iso_code: iso_code,
-      iso_numeric: metadata&.iso_numeric,
+      iso_numeric: iso_numeric,
       name: metadata&.name || iso_code,
       symbol: metadata&.symbol,
       start_date: start_date.to_s,
       end_date: end_date.to_s,
     }
+  end
+
+  # The Money gem writes "" for currencies without a numeric code (BTC, CNH, JEP); the API documents null.
+  def iso_numeric
+    numeric = metadata&.iso_numeric
+    numeric unless numeric.to_s.empty?
   end
 
   def providers
