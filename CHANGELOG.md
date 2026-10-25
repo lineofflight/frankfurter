@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Algeria archive renamed with a prefix.
 - Rates below 1 keep five significant figures. Fixed decimals cut small values to one or two digits, and IRR to USD
   came out at nearly twice its value.
+- `iso_numeric` is null, not an empty string, for BTC, BCH, CNH, GGP, IMP and JEP.
 
 ## [2.6.1] - 2026-10-02
 

@@ -84,6 +84,12 @@ describe Currency do
     _(usd.to_h[:iso_numeric]).must_equal("840")
   end
 
+  it "returns nil for a currency without an ISO numeric code" do
+    btc = Currency.new(iso_code: "BTC", start_date: Date.new(2018, 1, 2), end_date: Date.new(2026, 10, 23))
+
+    _(btc.to_h[:iso_numeric]).must_be_nil
+  end
+
   it "includes providers" do
     usd = Currency.find("USD")
 
