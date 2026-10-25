@@ -5,6 +5,9 @@
 # are usually quoted to three decimal places and exchange rates greater than 80 are quoted to two decimal places.
 # Currencies over 5000 are usually quoted with no decimal places.
 #
+# Below 1, fixed decimals run out of digits: IRR to USD, at 0.00000054, would round to 0.000001. Those keep five
+# significant figures instead, which for values from 0.1 to 1 is the same five decimal places.
+#
 # https://en.wikipedia.org/wiki/Exchange_rate#Quotations
 module Roundable
   def round(value)
@@ -16,10 +19,8 @@ module Roundable
       Float(format("%<value>.3f", value:))
     elsif value > 1
       Float(format("%<value>.4f", value:))
-    elsif value > 0.0001
-      Float(format("%<value>.5f", value:))
     else
-      Float(format("%<value>.6f", value:))
+      Float(format("%<value>.5g", value:))
     end
   end
 end

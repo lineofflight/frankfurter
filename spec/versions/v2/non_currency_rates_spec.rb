@@ -76,7 +76,7 @@ describe "Non-currency provider observations" do
     get "/providers/NB/rate/NOK/I44", date: date.to_s
 
     _(last_response.status).must_equal(200)
-    _(Oj.load(last_response.body)["rate"]).must_equal(0.00904)
+    _(Oj.load(last_response.body)["rate"]).must_equal(0.0090416)
 
     [Rate, WeeklyRate, MonthlyRate].each do |model|
       _(model.where(provider: "NB", base: ["I44", "TWI"]).count).must_equal(2)

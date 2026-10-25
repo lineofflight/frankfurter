@@ -25,11 +25,14 @@ describe Roundable do
     _(round(1.123456)).must_equal(1.1235)
   end
 
-  it "rounds values below 1 to five decimal places" do
+  it "rounds values below 1 to five significant figures" do
     _(round(0.123456)).must_equal(0.12346)
+    _(round(0.0123456)).must_equal(0.012346)
+    _(round(0.0000655)).must_equal(0.0000655)
   end
 
-  it "rounds values below 0.0001 to six decimal places" do
-    _(round(0.0000655)).must_equal(0.000066)
+  it "keeps the digits of values far below 1" do
+    _(round(1 / 1_840_216.0)).must_equal(0.00000054341)
+    _(round(1 / 84_362.0)).must_equal(0.000011854)
   end
 end
