@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - National Bank of Serbia (NBS) as a data provider. (#301)
 - Swiss Federal Tax Administration (ESTV) as a data provider, with daily values for BTC, BCH, ETH, LTC and XRP. (#770)
 
+### Changed
+
+- Rates under 0.0001 come as plain decimals (0.000038749) rather than in exponent notation (3.8749e-05), in JSON and
+  CSV.
+
 ### Fixed
 
 - Bank Indonesia rates after its site redesign, and its JPY rates, published per 100 yen.
