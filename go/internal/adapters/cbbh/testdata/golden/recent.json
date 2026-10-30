@@ -1,0 +1,319 @@
+{
+  "adapter": "CBBH",
+  "cassette": "cbbh",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 24), upto: Date.new(2026, 9, 26))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 1.21134
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 1.216539
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 2.082886
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.255537
+    },
+    {
+      "base": "CZK",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.080213
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.261628
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 2.275544
+    },
+    {
+      "base": "HUF",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.00536888
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.01085366
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.181112
+    },
+    {
+      "base": "RSD",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.01665592
+    },
+    {
+      "base": "RUB",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.020317
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.173512
+    },
+    {
+      "base": "TRY",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 0.035096
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 1.713987
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-24",
+      "quote": "BAM",
+      "rate": 2.328279
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 1.209019
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 1.218813
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 2.07868
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.256327
+    },
+    {
+      "base": "CZK",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.08016
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.261628
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 2.274591
+    },
+    {
+      "base": "HUF",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.00534161
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.01083142
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.181272
+    },
+    {
+      "base": "RSD",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.01665358
+    },
+    {
+      "base": "RUB",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.020232
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.173628
+    },
+    {
+      "base": "TRY",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 0.035219
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 1.720621
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-25",
+      "quote": "BAM",
+      "rate": 2.33354
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 1.205814
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 1.212767
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 2.070757
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.255494
+    },
+    {
+      "base": "CZK",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.080338
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.261632
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 1.95583
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 2.273032
+    },
+    {
+      "base": "HUF",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.00535433
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.01088386
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.180427
+    },
+    {
+      "base": "RSD",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.01664776
+    },
+    {
+      "base": "RUB",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.020362
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.173236
+    },
+    {
+      "base": "TRY",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 0.035052
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 1.715189
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-26",
+      "quote": "BAM",
+      "rate": 2.337784
+    }
+  ]
+}

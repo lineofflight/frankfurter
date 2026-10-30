@@ -1,0 +1,1057 @@
+{
+  "adapter": "CBR",
+  "cassette": "cbr",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 21.0139
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.204769
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 54.7468
+    },
+    {
+      "base": "AZN",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 45.3961
+    },
+    {
+      "base": "BDT",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.630679
+    },
+    {
+      "base": "BHD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 205.4705
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 11.1684
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 14.9875
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 26.8887
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 56.5704
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 99.9655
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 11.196
+    },
+    {
+      "base": "CUP",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 3.21556
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 3.75704
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 12.1928
+    },
+    {
+      "base": "DZD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.592589
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 1.56754
+    },
+    {
+      "base": "ETB",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.494601
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 90.7307
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 103.7442
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 28.8402
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 9.88262
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.238779
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0045994
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.843873
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0000588139
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.493436
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.882534
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0541758
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.155104
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 4.50279
+    },
+    {
+      "base": "MMK",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0367492
+    },
+    {
+      "base": "MNT",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0216378
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.0566038
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 8.12805
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 46.0918
+    },
+    {
+      "base": "OMR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 200.7111
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 21.4038
+    },
+    {
+      "base": "QAR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 21.2015
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 17.7696
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.772793
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 20.5796
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 8.54282
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 60.8911
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 2.4649
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 8.09998
+    },
+    {
+      "base": "TMT",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 22.0495
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 1.76036
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 1.79058
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 77.1734
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.00633058
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 0.00308225
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 6943.540160832
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 403022.367531696
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 106.0957
+    },
+    {
+      "base": "XPD",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 138371.903448768
+    },
+    {
+      "base": "XPT",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 182592.027450096
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-03",
+      "quote": "RUB",
+      "rate": 4.77257
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 21.1326
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.205866
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 55.1336
+    },
+    {
+      "base": "AZN",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 45.6525
+    },
+    {
+      "base": "BDT",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.634331
+    },
+    {
+      "base": "BHD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 206.3631
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 11.2314
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 14.9254
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 26.8581
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 56.6988
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 98.7521
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 11.221
+    },
+    {
+      "base": "CUP",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 3.23372
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 3.74255
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 12.1517
+    },
+    {
+      "base": "DZD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.594608
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 1.55564
+    },
+    {
+      "base": "ETB",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.497878
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 90.3098
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 103.7714
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 28.8275
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 9.96396
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.233707
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.00460644
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.84864
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.0000588139
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.493039
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.887476
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.0540681
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.154416
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 4.50366
+    },
+    {
+      "base": "MMK",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.0369568
+    },
+    {
+      "base": "MNT",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.02176
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.0563192
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 8.11253
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 46.1426
+    },
+    {
+      "base": "OMR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 201.8447
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 21.078
+    },
+    {
+      "base": "QAR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 21.3212
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 17.6626
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.771526
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 20.6958
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 8.47846
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 60.9848
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 2.47882
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 8.13285
+    },
+    {
+      "base": "TMT",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 22.1741
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 1.76688
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 1.79509
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 77.6093
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.00635628
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 0.00309867
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 7343.53087248
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 412407.841656096
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 106.369
+    },
+    {
+      "base": "XPD",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 138299.743382592
+    },
+    {
+      "base": "XPT",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 180751.945762608
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-04",
+      "quote": "RUB",
+      "rate": 4.77085
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 21.1847
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.205899
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 54.4295
+    },
+    {
+      "base": "AZN",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 45.7652
+    },
+    {
+      "base": "BDT",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.63606
+    },
+    {
+      "base": "BHD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 206.8726
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 11.2592
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 14.7163
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 26.9291
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 56.8554
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 99.3118
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 11.2488
+    },
+    {
+      "base": "CUP",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 3.2417
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 3.70304
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 12.0871
+    },
+    {
+      "base": "DZD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.595306
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 1.55019
+    },
+    {
+      "base": "ETB",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.498771
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 90.7458
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 103.4908
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 28.8986
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 9.97064
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.23403
+    },
+    {
+      "base": "IDR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.00461179
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.84307
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.0000588139
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.493473
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.889662
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.0531245
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.156198
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 4.46475
+    },
+    {
+      "base": "MMK",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.037048
+    },
+    {
+      "base": "MNT",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.0218177
+    },
+    {
+      "base": "NGN",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.0562027
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 8.02733
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 45.7197
+    },
+    {
+      "base": "OMR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 202.343
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 21.1588
+    },
+    {
+      "base": "QAR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 21.3739
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 17.7628
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.76844
+    },
+    {
+      "base": "SAR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 20.7469
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 8.41801
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 60.9057
+    },
+    {
+      "base": "THB",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 2.45716
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 8.14047
+    },
+    {
+      "base": "TMT",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 22.2288
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 1.77099
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 1.79039
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 77.8009
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.00638769
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 0.00310558
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 6325.514076816
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 391622.32121496
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 106.073
+    },
+    {
+      "base": "XPD",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 130005.068189568
+    },
+    {
+      "base": "XPT",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 164470.830831648
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-05",
+      "quote": "RUB",
+      "rate": 4.71535
+    }
+  ]
+}

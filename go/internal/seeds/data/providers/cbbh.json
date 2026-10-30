@@ -1,0 +1,12 @@
+{
+  "key": "CBBH",
+  "name": "Central Bank of Bosnia and Herzegovina",
+  "country_code": "BA",
+  "rate_type": "middle rate",
+  "pivot_currency": "BAM",
+  "data_url": "https://www.cbbh.ba/CurrencyExchange/",
+  "terms_url": "https://www.cbbh.ba/Content/Read/473",
+  "publish_schedule": "*/30 0-2 * * 2-6",
+  "publish_cadence": "daily",
+  "coverage_start": "1998-01-06"
+}

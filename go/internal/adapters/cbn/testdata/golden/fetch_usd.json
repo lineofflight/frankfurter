@@ -1,0 +1,85 @@
+{
+  "adapter": "CBN",
+  "cassette": "cbn",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 21))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 373.4538
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 1737.5654
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 201.5942
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 212.7461
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 1590.1997
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 1839.5944
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 8.6147
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 365.5425
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 1371.8079
+    },
+    {
+      "base": "XDR",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 1884.041
+    },
+    {
+      "base": "XOF",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 2.42
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-05-21",
+      "quote": "NGN",
+      "rate": 82.9178
+    }
+  ]
+}

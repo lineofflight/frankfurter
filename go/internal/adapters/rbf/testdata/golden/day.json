@@ -1,0 +1,62 @@
+{
+  "adapter": "RBF",
+  "cassette": "rbf",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 22), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "AUD",
+      "rate": 0.6296
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "CHF",
+      "rate": 0.3541
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "EUR",
+      "rate": 0.3875
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "GBP",
+      "rate": 0.3351
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "JPY",
+      "rate": 71.58
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "NZD",
+      "rate": 0.7663
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "USD",
+      "rate": 0.4502
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "XDR",
+      "rate": 0.329404
+    }
+  ]
+}

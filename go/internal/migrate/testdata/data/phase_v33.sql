@@ -1,0 +1,18 @@
+INSERT INTO rates (date, base, quote, mid, bid, ask, provider) VALUES
+('2026-01-01','SDR','TZS',3607.4158,NULL,NULL,'BOTA'),
+('2026-01-03','SDR','TZS',3608.1256,NULL,NULL,'BOTA'),
+('2026-01-03','XDR','TZS',3608.1256,NULL,NULL,'BOTA'),
+('2026-01-05','TZS','SDR',0.0002771,NULL,NULL,'BOTA'),
+('2026-01-06','SDR','TZS',NULL,3600.1234,3610.5678,'BOTA'),
+('2026-01-01','AUD','SDR',0.5131,NULL,NULL,'RBA'),
+('2026-01-02','AUD','USD',0.6828,NULL,NULL,'RBA'),
+('2026-01-01','SDR','MYR',5.3538,NULL,NULL,'BNM'),
+('2026-01-01','SDR','MWK',2200.5,NULL,NULL,'RBM'),
+('2026-01-01','CMD','MWK',100.0,NULL,NULL,'RBM'),
+('2026-01-01','USD','MWK',1700.0,NULL,NULL,'RBM'),
+('2026-01-01','USD','GHC',2.0,NULL,NULL,'BOC'),
+('2026-01-02','USD','JPY',NULL,0,150.1,'BOJA'),
+('2026-01-02','USD','GBP',NULL,0.79,0.7911,'ECB');
+INSERT INTO weekly_rates (bucket_date, provider, base, quote, rate) VALUES ('2025-12-01','BOTA','SDR','TZS',999);
+INSERT INTO blended_rates (date, quote, rate) VALUES ('2026-01-01','EUR',0.9);
+INSERT INTO blended_weekly_rates (bucket_date, quote, rate) VALUES ('2025-12-01','EUR',0.9),('2025-12-29','EUR',0.9);

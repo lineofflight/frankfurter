@@ -1,0 +1,301 @@
+{
+  "adapter": "BOMU",
+  "cassette": "bomu",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 23), upto: Date.new(2026, 9, 25))",
+  "rows": [
+    {
+      "ask": 35.8508,
+      "base": "AUD",
+      "bid": 34.0986,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 34.9747
+    },
+    {
+      "ask": 35.6254,
+      "base": "CAD",
+      "bid": 33.7664,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 34.6959
+    },
+    {
+      "ask": 59.1413,
+      "base": "CHF",
+      "bid": 57.4281,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 58.2847
+    },
+    {
+      "ask": 7.6768,
+      "base": "CNY",
+      "bid": 7.0773,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 7.37705
+    },
+    {
+      "ask": 55.5251,
+      "base": "EUR",
+      "bid": 53.9144,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 54.71975
+    },
+    {
+      "ask": 64.7123,
+      "base": "GBP",
+      "bid": 62.8377,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 63.775
+    },
+    {
+      "ask": 0.5346,
+      "base": "INR",
+      "bid": 0.5002,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 0.5174
+    },
+    {
+      "ask": 0.308491,
+      "base": "JPY",
+      "bid": 0.29953,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 0.3040105
+    },
+    {
+      "ask": 28.4604,
+      "base": "NZD",
+      "bid": 27.1071,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 27.78375
+    },
+    {
+      "ask": 39.0373,
+      "base": "SGD",
+      "bid": 37.182,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 38.10965
+    },
+    {
+      "ask": 48.5885,
+      "base": "USD",
+      "bid": 47.1873,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 47.8879
+    },
+    {
+      "ask": 3.1635,
+      "base": "ZAR",
+      "bid": 2.9483,
+      "date": "2026-09-23",
+      "quote": "MUR",
+      "rate": 3.0559
+    },
+    {
+      "ask": 35.2134,
+      "base": "AUD",
+      "bid": 33.4847,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 34.34905
+    },
+    {
+      "ask": 35.2626,
+      "base": "CAD",
+      "bid": 33.4159,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 34.33925
+    },
+    {
+      "ask": 58.4539,
+      "base": "CHF",
+      "bid": 56.7623,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 57.6081
+    },
+    {
+      "ask": 7.6047,
+      "base": "CNY",
+      "bid": 7.0094,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 7.30705
+    },
+    {
+      "ask": 54.8357,
+      "base": "EUR",
+      "bid": 53.2452,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 54.04045
+    },
+    {
+      "ask": 63.7938,
+      "base": "GBP",
+      "bid": 61.942,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 62.8679
+    },
+    {
+      "ask": 0.5291,
+      "base": "INR",
+      "bid": 0.4956,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 0.51235
+    },
+    {
+      "ask": 0.304233,
+      "base": "JPY",
+      "bid": 0.295424,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 0.2998285
+    },
+    {
+      "ask": 28.1155,
+      "base": "NZD",
+      "bid": 26.7777,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 27.4466
+    },
+    {
+      "ask": 38.6116,
+      "base": "SGD",
+      "bid": 36.7687,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 37.69015
+    },
+    {
+      "ask": 48.1566,
+      "base": "USD",
+      "bid": 46.7577,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 47.45715
+    },
+    {
+      "ask": 3.0987,
+      "base": "ZAR",
+      "bid": 2.8891,
+      "date": "2026-09-24",
+      "quote": "MUR",
+      "rate": 2.9939
+    },
+    {
+      "ask": 35.1457,
+      "base": "AUD",
+      "bid": 33.4206,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 34.28315
+    },
+    {
+      "ask": 35.1869,
+      "base": "CAD",
+      "bid": 33.343,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 34.26495
+    },
+    {
+      "ask": 58.1573,
+      "base": "CHF",
+      "bid": 56.4749,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 57.3161
+    },
+    {
+      "ask": 7.6137,
+      "base": "CNY",
+      "bid": 7.0182,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 7.31595
+    },
+    {
+      "ask": 54.8362,
+      "base": "EUR",
+      "bid": 53.2458,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 54.041
+    },
+    {
+      "ask": 63.733,
+      "base": "GBP",
+      "bid": 61.8821,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 62.80755
+    },
+    {
+      "ask": 0.5296,
+      "base": "INR",
+      "bid": 0.496,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 0.5128
+    },
+    {
+      "ask": 0.30453,
+      "base": "JPY",
+      "bid": 0.295717,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 0.3001235
+    },
+    {
+      "ask": 28.0214,
+      "base": "NZD",
+      "bid": 26.6859,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 27.35365
+    },
+    {
+      "ask": 38.6642,
+      "base": "SGD",
+      "bid": 36.8214,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 37.7428
+    },
+    {
+      "ask": 48.2278,
+      "base": "USD",
+      "bid": 46.8343,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 47.53105
+    },
+    {
+      "ask": 3.0942,
+      "base": "ZAR",
+      "bid": 2.885,
+      "date": "2026-09-25",
+      "quote": "MUR",
+      "rate": 2.9896
+    }
+  ]
+}

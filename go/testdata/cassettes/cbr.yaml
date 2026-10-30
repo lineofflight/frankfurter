@@ -1,0 +1,3377 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_daily.asp
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 9516
+        body: !!binary |
+            PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0id2luZG93cy0xMjUxIj8+PFZhbEN1cn
+            MgRGF0ZT0iMjUuMDQuMjAyNiIgbmFtZT0iRm9yZWlnbiBDdXJyZW5jeSBNYXJrZXQiPjxW
+            YWx1dGUgSUQ9IlIwMTAxMCI+PE51bUNvZGU+MDM2PC9OdW1Db2RlPjxDaGFyQ29kZT5BVU
+            Q8L0NoYXJDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE5hbWU+wOLx8vDg6+jp8ero6SDk
+            7uvr4PA8L05hbWU+PFZhbHVlPjUzLDgzNTk8L1ZhbHVlPjxWdW5pdFJhdGU+NTMsODM1OT
+            wvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTAyMEEiPjxOdW1Db2RlPjk0
+            NDwvTnVtQ29kZT48Q2hhckNvZGU+QVpOPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbm
+            FsPjxOYW1lPsDn5fDh4Onk5uDt8ero6SDs4O3g8jwvTmFtZT48VmFsdWU+NDQsNDI3ODwv
+            VmFsdWU+PFZ1bml0UmF0ZT40NCw0Mjc4PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZS
+            BJRD0iUjAxMDMwIj48TnVtQ29kZT4wMTI8L051bUNvZGU+PENoYXJDb2RlPkRaRDwvQ2hh
+            ckNvZGU+PE5vbWluYWw+MTAwPC9Ob21pbmFsPjxOYW1lPsDr5ujw8ero9SDk6O3g8O7iPC
+            9OYW1lPjxWYWx1ZT41NywwMDA2PC9WYWx1ZT48VnVuaXRSYXRlPjAsNTcwMDA2PC9WdW5p
+            dFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMDM1Ij48TnVtQ29kZT44MjY8L051bU
+            NvZGU+PENoYXJDb2RlPkdCUDwvQ2hhckNvZGU+PE5vbWluYWw+MTwvTm9taW5hbD48TmFt
+            ZT7U8+3yIPHy5fDr6O3j7uI8L05hbWU+PFZhbHVlPjEwMiwwMzc0PC9WYWx1ZT48VnVuaX
+            RSYXRlPjEwMiwwMzc0PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMDYw
+            Ij48TnVtQ29kZT4wNTE8L051bUNvZGU+PENoYXJDb2RlPkFNRDwvQ2hhckNvZGU+PE5vbW
+            luYWw+MTAwPC9Ob21pbmFsPjxOYW1lPsDw7P/t8ero9SDk8ODs7uI8L05hbWU+PFZhbHVl
+            PjIwLDMxMjM8L1ZhbHVlPjxWdW5pdFJhdGU+MCwyMDMxMjM8L1Z1bml0UmF0ZT48L1ZhbH
+            V0ZT48VmFsdXRlIElEPSJSMDEwODAiPjxOdW1Db2RlPjA0ODwvTnVtQ29kZT48Q2hhckNv
+            ZGU+QkhEPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW1lPsHg9fDl6e3x6u
+            jpIOTo7eDwPC9OYW1lPjxWYWx1ZT4yMDAsODI3MTwvVmFsdWU+PFZ1bml0UmF0ZT4yMDAs
+            ODI3MTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTA5MEIiPjxOdW1Db2
+            RlPjkzMzwvTnVtQ29kZT48Q2hhckNvZGU+QllOPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9O
+            b21pbmFsPjxOYW1lPsHl6+7w8/Hx6ujpIPDz4ev8PC9OYW1lPjxWYWx1ZT4yNiw3OTYwPC
+            9WYWx1ZT48VnVuaXRSYXRlPjI2LDc5NjwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUg
+            SUQ9IlIwMTEwNSI+PE51bUNvZGU+MDY4PC9OdW1Db2RlPjxDaGFyQ29kZT5CT0I8L0NoYX
+            JDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE5hbWU+we7r6OLo4O3uPC9OYW1lPjxWYWx1
+            ZT4xMCw5MzAxPC9WYWx1ZT48VnVuaXRSYXRlPjEwLDkzMDE8L1Z1bml0UmF0ZT48L1ZhbH
+            V0ZT48VmFsdXRlIElEPSJSMDExMTUiPjxOdW1Db2RlPjk4NjwvTnVtQ29kZT48Q2hhckNv
+            ZGU+QlJMPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW1lPsHw4Ofo6/zx6u
+            jpIPDl4Os8L05hbWU+PFZhbHVlPjE1LDI0NzA8L1ZhbHVlPjxWdW5pdFJhdGU+MTUsMjQ3
+            PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMTM1Ij48TnVtQ29kZT4zND
+            g8L051bUNvZGU+PENoYXJDb2RlPkhVRjwvQ2hhckNvZGU+PE5vbWluYWw+MTAwPC9Ob21p
+            bmFsPjxOYW1lPtTu8Ojt8u7iPC9OYW1lPjxWYWx1ZT4yNCwwNjA5PC9WYWx1ZT48VnVuaX
+            RSYXRlPjAsMjQwNjA5PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMTUw
+            Ij48TnVtQ29kZT43MDQ8L051bUNvZGU+PENoYXJDb2RlPlZORDwvQ2hhckNvZGU+PE5vbW
+            luYWw+MTAwMDA8L05vbWluYWw+PE5hbWU+xO7t4+7iPC9OYW1lPjxWYWx1ZT4zMCwwNzUw
+            PC9WYWx1ZT48VnVuaXRSYXRlPjAsMDAzMDA3NTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYW
+            x1dGUgSUQ9IlIwMTIwMCI+PE51bUNvZGU+MzQ0PC9OdW1Db2RlPjxDaGFyQ29kZT5IS0Q8
+            L0NoYXJDb2RlPjxOb21pbmFsPjEwPC9Ob21pbmFsPjxOYW1lPsPu7eru7ePx6uj1IOTu6+
+            vg8O7iPC9OYW1lPjxWYWx1ZT45Niw1Njk5PC9WYWx1ZT48VnVuaXRSYXRlPjksNjU2OTk8
+            L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDEyMTAiPjxOdW1Db2RlPjk4MT
+            wvTnVtQ29kZT48Q2hhckNvZGU+R0VMPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFs
+            PjxOYW1lPsvg8Og8L05hbWU+PFZhbHVlPjI4LDAzOTU8L1ZhbHVlPjxWdW5pdFJhdGU+Mj
+            gsMDM5NTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTIxNSI+PE51bUNv
+            ZGU+MjA4PC9OdW1Db2RlPjxDaGFyQ29kZT5ES0s8L0NoYXJDb2RlPjxOb21pbmFsPjE8L0
+            5vbWluYWw+PE5hbWU+xODy8erg/yDq8O7t4DwvTmFtZT48VmFsdWU+MTEsODE4NzwvVmFs
+            dWU+PFZ1bml0UmF0ZT4xMSw4MTg3PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD
+            0iUjAxMjMwIj48TnVtQ29kZT43ODQ8L051bUNvZGU+PENoYXJDb2RlPkFFRDwvQ2hhckNv
+            ZGU+PE5vbWluYWw+MTwvTm9taW5hbD48TmFtZT7E6PD14OwgzsDdPC9OYW1lPjxWYWx1ZT
+            4yMCw1NjU2PC9WYWx1ZT48VnVuaXRSYXRlPjIwLDU2NTY8L1Z1bml0UmF0ZT48L1ZhbHV0
+            ZT48VmFsdXRlIElEPSJSMDEyMzUiPjxOdW1Db2RlPjg0MDwvTnVtQ29kZT48Q2hhckNvZG
+            U+VVNEPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW1lPsTu6+vg8CDR2MA8
+            L05hbWU+PFZhbHVlPjc1LDUyNzM8L1ZhbHVlPjxWdW5pdFJhdGU+NzUsNTI3MzwvVnVuaX
+            RSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTIzOSI+PE51bUNvZGU+OTc4PC9OdW1D
+            b2RlPjxDaGFyQ29kZT5FVVI8L0NoYXJDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE5hbW
+            U+xeLw7jwvTmFtZT48VmFsdWU+ODgsMjgyNjwvVmFsdWU+PFZ1bml0UmF0ZT44OCwyODI2
+            PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMjQwIj48TnVtQ29kZT44MT
+            g8L051bUNvZGU+PENoYXJDb2RlPkVHUDwvQ2hhckNvZGU+PE5vbWluYWw+MTA8L05vbWlu
+            YWw+PE5hbWU+xePo7+Xy8ero9SD08+3y7uI8L05hbWU+PFZhbHVlPjE0LDM1MDc8L1ZhbH
+            VlPjxWdW5pdFJhdGU+MSw0MzUwNzwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9
+            IlIwMTI3MCI+PE51bUNvZGU+MzU2PC9OdW1Db2RlPjxDaGFyQ29kZT5JTlI8L0NoYXJDb2
+            RlPjxOb21pbmFsPjEwMDwvTm9taW5hbD48TmFtZT7I7eTo6fHq6PUg8PPv6Ok8L05hbWU+
+            PFZhbHVlPjgwLDA5NjE8L1ZhbHVlPjxWdW5pdFJhdGU+MCw4MDA5NjE8L1Z1bml0UmF0ZT
+            48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDEyODAiPjxOdW1Db2RlPjM2MDwvTnVtQ29kZT48
+            Q2hhckNvZGU+SURSPC9DaGFyQ29kZT48Tm9taW5hbD4xMDAwMDwvTm9taW5hbD48TmFtZT
+            7Q8+/o6TwvTmFtZT48VmFsdWU+NDMsNjM3MjwvVmFsdWU+PFZ1bml0UmF0ZT4wLDAwNDM2
+            MzcyPC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxMzAwIj48TnVtQ29kZT
+            4zNjQ8L051bUNvZGU+PENoYXJDb2RlPklSUjwvQ2hhckNvZGU+PE5vbWluYWw+MTAwMDAw
+            MDwvTm9taW5hbD48TmFtZT7I8ODt8ero9SDw6ODr7uI8L05hbWU+PFZhbHVlPjUzLDkyNT
+            Y8L1ZhbHVlPjxWdW5pdFJhdGU+NSwzOTI1NkUtMDU8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48
+            VmFsdXRlIElEPSJSMDEzMzUiPjxOdW1Db2RlPjM5ODwvTnVtQ29kZT48Q2hhckNvZGU+S1
+            pUPC9DaGFyQ29kZT48Tm9taW5hbD4xMDA8L05vbWluYWw+PE5hbWU+0uXt4+U8L05hbWU+
+            PFZhbHVlPjE2LDMxNzI8L1ZhbHVlPjxWdW5pdFJhdGU+MCwxNjMxNzI8L1Z1bml0UmF0ZT
+            48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDEzNTAiPjxOdW1Db2RlPjEyNDwvTnVtQ29kZT48
+            Q2hhckNvZGU+Q0FEPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW1lPsrg7e
+            Dk8ero6SDk7uvr4PA8L05hbWU+PFZhbHVlPjU1LDE3Nzc8L1ZhbHVlPjxWdW5pdFJhdGU+
+            NTUsMTc3NzwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTM1NSI+PE51bU
+            NvZGU+NjM0PC9OdW1Db2RlPjxDaGFyQ29kZT5RQVI8L0NoYXJDb2RlPjxOb21pbmFsPjE8
+            L05vbWluYWw+PE5hbWU+yuDy4PDx6ujpIPDo4Os8L05hbWU+PFZhbHVlPjIwLDc0OTM8L1
+            ZhbHVlPjxWdW5pdFJhdGU+MjAsNzQ5MzwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUg
+            SUQ9IlIwMTM3MCI+PE51bUNvZGU+NDE3PC9OdW1Db2RlPjxDaGFyQ29kZT5LR1M8L0NoYX
+            JDb2RlPjxOb21pbmFsPjEwMDwvTm9taW5hbD48TmFtZT7R7uzu4jwvTmFtZT48VmFsdWU+
+            ODYsNDEyNTwvVmFsdWU+PFZ1bml0UmF0ZT4wLDg2NDEyNTwvVnVuaXRSYXRlPjwvVmFsdX
+            RlPjxWYWx1dGUgSUQ9IlIwMTM3NSI+PE51bUNvZGU+MTU2PC9OdW1Db2RlPjxDaGFyQ29k
+            ZT5DTlk8L0NoYXJDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE5hbWU+3uDt/DwvTmFtZT
+            48VmFsdWU+MTEsMDI3MDwvVmFsdWU+PFZ1bml0UmF0ZT4xMSwwMjc8L1Z1bml0UmF0ZT48
+            L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDEzOTUiPjxOdW1Db2RlPjE5MjwvTnVtQ29kZT48Q2
+            hhckNvZGU+Q1VQPC9DaGFyQ29kZT48Tm9taW5hbD4xMDwvTm9taW5hbD48TmFtZT7K8+Ho
+            7fHq6PUg7+Xx7jwvTmFtZT48VmFsdWU+MzEsNDY5NzwvVmFsdWU+PFZ1bml0UmF0ZT4zLD
+            E0Njk3PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxNTAwIj48TnVtQ29k
+            ZT40OTg8L051bUNvZGU+PENoYXJDb2RlPk1ETDwvQ2hhckNvZGU+PE5vbWluYWw+MTA8L0
+            5vbWluYWw+PE5hbWU+zO7r5ODi8ero9SDr5eXiPC9OYW1lPjxWYWx1ZT40Myw1MTY4PC9W
+            YWx1ZT48VnVuaXRSYXRlPjQsMzUxNjg8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIE
+            lEPSJSMDE1MDMiPjxOdW1Db2RlPjQ5NjwvTnVtQ29kZT48Q2hhckNvZGU+TU5UPC9DaGFy
+            Q29kZT48Tm9taW5hbD4xMDAwPC9Ob21pbmFsPjxOYW1lPtLz4/Do6u7iPC9OYW1lPjxWYW
+            x1ZT4yMSwxMjA2PC9WYWx1ZT48VnVuaXRSYXRlPjAsMDIxMTIwNjwvVnVuaXRSYXRlPjwv
+            VmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTUyMCI+PE51bUNvZGU+NTY2PC9OdW1Db2RlPjxDaG
+            FyQ29kZT5OR048L0NoYXJDb2RlPjxOb21pbmFsPjEwMDA8L05vbWluYWw+PE5hbWU+zeDp
+            8DwvTmFtZT48VmFsdWU+NTUsNzg0NzwvVmFsdWU+PFZ1bml0UmF0ZT4wLDA1NTc4NDc8L1
+            Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE1MzAiPjxOdW1Db2RlPjU1NDwv
+            TnVtQ29kZT48Q2hhckNvZGU+TlpEPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPj
+            xOYW1lPs3u4u7n5evg7eTx6ujpIOTu6+vg8DwvTmFtZT48VmFsdWU+NDQsMjU1MjwvVmFs
+            dWU+PFZ1bml0UmF0ZT40NCwyNTUyPC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD
+            0iUjAxNTM1Ij48TnVtQ29kZT41Nzg8L051bUNvZGU+PENoYXJDb2RlPk5PSzwvQ2hhckNv
+            ZGU+PE5vbWluYWw+MTA8L05vbWluYWw+PE5hbWU+ze7w4uXm8ero9SDq8O7tPC9OYW1lPj
+            xWYWx1ZT44MCw5MzI4PC9WYWx1ZT48VnVuaXRSYXRlPjgsMDkzMjg8L1Z1bml0UmF0ZT48
+            L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE1NDAiPjxOdW1Db2RlPjUxMjwvTnVtQ29kZT48Q2
+            hhckNvZGU+T01SPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW1lPs7s4O3x
+            6ujpIPDo4Os8L05hbWU+PFZhbHVlPjE5Niw0Mjk5PC9WYWx1ZT48VnVuaXRSYXRlPjE5Ni
+            w0Mjk5PC9WdW5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxNTY1Ij48TnVtQ29k
+            ZT45ODU8L051bUNvZGU+PENoYXJDb2RlPlBMTjwvQ2hhckNvZGU+PE5vbWluYWw+MTwvTm
+            9taW5hbD48TmFtZT7H6+7y++k8L05hbWU+PFZhbHVlPjIwLDgwOTk8L1ZhbHVlPjxWdW5p
+            dFJhdGU+MjAsODA5OTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTU4MC
+            I+PE51bUNvZGU+NjgyPC9OdW1Db2RlPjxDaGFyQ29kZT5TQVI8L0NoYXJDb2RlPjxOb21p
+            bmFsPjE8L05vbWluYWw+PE5hbWU+0eDz5O7i8ero6SDw6P/rPC9OYW1lPjxWYWx1ZT4yMC
+            wxNDA2PC9WYWx1ZT48VnVuaXRSYXRlPjIwLDE0MDY8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48
+            VmFsdXRlIElEPSJSMDE1ODVGIj48TnVtQ29kZT45NDY8L051bUNvZGU+PENoYXJDb2RlPl
+            JPTjwvQ2hhckNvZGU+PE5vbWluYWw+MTwvTm9taW5hbD48TmFtZT7Q8+z77fHq6Okg6+Xp
+            PC9OYW1lPjxWYWx1ZT4xNywzMzA3PC9WYWx1ZT48VnVuaXRSYXRlPjE3LDMzMDc8L1Z1bm
+            l0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE1ODkiPjxOdW1Db2RlPjk2MDwvTnVt
+            Q29kZT48Q2hhckNvZGU+WERSPC9DaGFyQ29kZT48Tm9taW5hbD4xPC9Ob21pbmFsPjxOYW
+            1lPtHE0CAo8e/l9ujg6/zt++Ug7/Dg4uAg5+Do7PHy4u7i4O3o/yk8L05hbWU+PFZhbHVl
+            PjEwMywzODkzPC9WYWx1ZT48VnVuaXRSYXRlPjEwMywzODkzPC9WdW5pdFJhdGU+PC9WYW
+            x1dGU+PFZhbHV0ZSBJRD0iUjAxNjI1Ij48TnVtQ29kZT43MDI8L051bUNvZGU+PENoYXJD
+            b2RlPlNHRDwvQ2hhckNvZGU+PE5vbWluYWw+MTwvTm9taW5hbD48TmFtZT7R6O3j4O/z8P
+            Hq6Okg5O7r6+DwPC9OYW1lPjxWYWx1ZT41OSwwNTE4PC9WYWx1ZT48VnVuaXRSYXRlPjU5
+            LDA1MTg8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE2NzAiPjxOdW1Db2
+            RlPjk3MjwvTnVtQ29kZT48Q2hhckNvZGU+VEpTPC9DaGFyQ29kZT48Tm9taW5hbD4xMDwv
+            Tm9taW5hbD48TmFtZT7R7uzu7eg8L05hbWU+PFZhbHVlPjgwLDA4NjY8L1ZhbHVlPjxWdW
+            5pdFJhdGU+OCwwMDg2NjwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTY3
+            NSI+PE51bUNvZGU+NzY0PC9OdW1Db2RlPjxDaGFyQ29kZT5USEI8L0NoYXJDb2RlPjxOb2
+            1pbmFsPjEwPC9Ob21pbmFsPjxOYW1lPsHg8u7iPC9OYW1lPjxWYWx1ZT4yMywyNTI4PC9W
+            YWx1ZT48VnVuaXRSYXRlPjIsMzI1Mjg8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIE
+            lEPSJSMDE2ODUiPjxOdW1Db2RlPjA1MDwvTnVtQ29kZT48Q2hhckNvZGU+QkRUPC9DaGFy
+            Q29kZT48Tm9taW5hbD4xMDA8L05vbWluYWw+PE5hbWU+0uDqPC9OYW1lPjxWYWx1ZT42MS
+            w0NDIxPC9WYWx1ZT48VnVuaXRSYXRlPjAsNjE0NDIxPC9WdW5pdFJhdGU+PC9WYWx1dGU+
+            PFZhbHV0ZSBJRD0iUjAxNzAwSiI+PE51bUNvZGU+OTQ5PC9OdW1Db2RlPjxDaGFyQ29kZT
+            5UUlk8L0NoYXJDb2RlPjxOb21pbmFsPjEwPC9Ob21pbmFsPjxOYW1lPtLz8OX26uj1IOvo
+            8DwvTmFtZT48VmFsdWU+MTYsODM4NjwvVmFsdWU+PFZ1bml0UmF0ZT4xLDY4Mzg2PC9WdW
+            5pdFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxNzEwQSI+PE51bUNvZGU+OTM0PC9O
+            dW1Db2RlPjxDaGFyQ29kZT5UTVQ8L0NoYXJDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE
+            5hbWU+ze7i++kg8vPw6uzl7fHq6Okg7ODt4PI8L05hbWU+PFZhbHVlPjIxLDU3OTI8L1Zh
+            bHVlPjxWdW5pdFJhdGU+MjEsNTc5MjwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSU
+            Q9IlIwMTcxNyI+PE51bUNvZGU+ODYwPC9OdW1Db2RlPjxDaGFyQ29kZT5VWlM8L0NoYXJD
+            b2RlPjxOb21pbmFsPjEwMDAwPC9Ob21pbmFsPjxOYW1lPtPn4eXq8ero9SDx8+zu4jwvTm
+            FtZT48VmFsdWU+NjIsODMyMjwvVmFsdWU+PFZ1bml0UmF0ZT4wLDAwNjI4MzIyPC9WdW5p
+            dFJhdGU+PC9WYWx1dGU+PFZhbHV0ZSBJRD0iUjAxNzIwIj48TnVtQ29kZT45ODA8L051bU
+            NvZGU+PENoYXJDb2RlPlVBSDwvQ2hhckNvZGU+PE5vbWluYWw+MTA8L05vbWluYWw+PE5h
+            bWU+w/Do4uXtPC9OYW1lPjxWYWx1ZT4xNywxNjM4PC9WYWx1ZT48VnVuaXRSYXRlPjEsNz
+            E2Mzg8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE3NjAiPjxOdW1Db2Rl
+            PjIwMzwvTnVtQ29kZT48Q2hhckNvZGU+Q1pLPC9DaGFyQ29kZT48Tm9taW5hbD4xMDwvTm
+            9taW5hbD48TmFtZT7X5fjx6uj1IOrw7u08L05hbWU+PFZhbHVlPjM2LDMwNzc8L1ZhbHVl
+            PjxWdW5pdFJhdGU+Myw2MzA3NzwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9Il
+            IwMTc3MCI+PE51bUNvZGU+NzUyPC9OdW1Db2RlPjxDaGFyQ29kZT5TRUs8L0NoYXJDb2Rl
+            PjxOb21pbmFsPjEwPC9Ob21pbmFsPjxOYW1lPtji5eTx6uj1IOrw7u08L05hbWU+PFZhbH
+            VlPjgxLDkzNDg8L1ZhbHVlPjxWdW5pdFJhdGU+OCwxOTM0ODwvVnVuaXRSYXRlPjwvVmFs
+            dXRlPjxWYWx1dGUgSUQ9IlIwMTc3NSI+PE51bUNvZGU+NzU2PC9OdW1Db2RlPjxDaGFyQ2
+            9kZT5DSEY8L0NoYXJDb2RlPjxOb21pbmFsPjE8L05vbWluYWw+PE5hbWU+2OLl6fbg8PHq
+            6Okg9PDg7eo8L05hbWU+PFZhbHVlPjk2LDA1NDE8L1ZhbHVlPjxWdW5pdFJhdGU+OTYsMD
+            U0MTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTgwMCI+PE51bUNvZGU+
+            MjMwPC9OdW1Db2RlPjxDaGFyQ29kZT5FVEI8L0NoYXJDb2RlPjxOb21pbmFsPjEwMDwvTm
+            9taW5hbD48TmFtZT7d9Oju7/Hq6PUg4fvw7uI8L05hbWU+PFZhbHVlPjQ3LDk2Mjk8L1Zh
+            bHVlPjxWdW5pdFJhdGU+MCw0Nzk2Mjk8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIE
+            lEPSJSMDE4MDVGIj48TnVtQ29kZT45NDE8L051bUNvZGU+PENoYXJDb2RlPlJTRDwvQ2hh
+            ckNvZGU+PE5vbWluYWw+MTAwPC9Ob21pbmFsPjxOYW1lPtHl8OHx6uj1IOTo7eDw7uI8L0
+            5hbWU+PFZhbHVlPjc1LDEyNDM8L1ZhbHVlPjxWdW5pdFJhdGU+MCw3NTEyNDM8L1Z1bml0
+            UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElEPSJSMDE4MTAiPjxOdW1Db2RlPjcxMDwvTnVtQ2
+            9kZT48Q2hhckNvZGU+WkFSPC9DaGFyQ29kZT48Tm9taW5hbD4xMDwvTm9taW5hbD48TmFt
+            ZT7Q/e3k7uI8L05hbWU+PFZhbHVlPjQ1LDQyMjk8L1ZhbHVlPjxWdW5pdFJhdGU+NCw1ND
+            IyOTwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTgxNSI+PE51bUNvZGU+
+            NDEwPC9OdW1Db2RlPjxDaGFyQ29kZT5LUlc8L0NoYXJDb2RlPjxOb21pbmFsPjEwMDA8L0
+            5vbWluYWw+PE5hbWU+wu7tPC9OYW1lPjxWYWx1ZT41MSwwMTEzPC9WYWx1ZT48VnVuaXRS
+            YXRlPjAsMDUxMDExMzwvVnVuaXRSYXRlPjwvVmFsdXRlPjxWYWx1dGUgSUQ9IlIwMTgyMC
+            I+PE51bUNvZGU+MzkyPC9OdW1Db2RlPjxDaGFyQ29kZT5KUFk8L0NoYXJDb2RlPjxOb21p
+            bmFsPjEwMDwvTm9taW5hbD48TmFtZT7I5e08L05hbWU+PFZhbHVlPjQ3LDI2MzY8L1ZhbH
+            VlPjxWdW5pdFJhdGU+MCw0NzI2MzY8L1Z1bml0UmF0ZT48L1ZhbHV0ZT48VmFsdXRlIElE
+            PSJSMDIwMDUiPjxOdW1Db2RlPjEwNDwvTnVtQ29kZT48Q2hhckNvZGU+TU1LPC9DaGFyQ2
+            9kZT48Tm9taW5hbD4xMDAwPC9Ob21pbmFsPjxOYW1lPsr8//Lu4jwvTmFtZT48VmFsdWU+
+            MzUsOTY1NDwvVmFsdWU+PFZ1bml0UmF0ZT4wLDAzNTk2NTQ8L1Z1bml0UmF0ZT48L1ZhbH
+            V0ZT48L1ZhbEN1cnM+
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:58 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240858; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+                - __ddg1_=lXPrb9zF30457NqMqk5P; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:58 GMT
+                - __ddg8_=akEfgNX3pXDQNXdX; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01010&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01010" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01010"><Nominal>1</Nominal><Value>54,7468</Value><VunitRate>54,7468</VunitRate></Record><Record Date="04.03.2026" Id="R01010"><Nominal>1</Nominal><Value>55,1336</Value><VunitRate>55,1336</VunitRate></Record><Record Date="05.03.2026" Id="R01010"><Nominal>1</Nominal><Value>54,4295</Value><VunitRate>54,4295</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:58 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240858; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+                - __ddg1_=hfZ2eUQziBhDwmpxD2Nr; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:58 GMT
+                - __ddg8_=RckH1zXEF5BgEfIg; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:58 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01020A&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01020A" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01020A"><Nominal>1</Nominal><Value>45,3961</Value><VunitRate>45,3961</VunitRate></Record><Record Date="04.03.2026" Id="R01020A"><Nominal>1</Nominal><Value>45,6525</Value><VunitRate>45,6525</VunitRate></Record><Record Date="05.03.2026" Id="R01020A"><Nominal>1</Nominal><Value>45,7652</Value><VunitRate>45,7652</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=dFgxD6OB8pIo1DFOoq3c; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=rtCjzcAmxQIKLVGA; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01030&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01030" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01030"><Nominal>100</Nominal><Value>59,2589</Value><VunitRate>0,592589</VunitRate></Record><Record Date="04.03.2026" Id="R01030"><Nominal>100</Nominal><Value>59,4608</Value><VunitRate>0,594608</VunitRate></Record><Record Date="05.03.2026" Id="R01030"><Nominal>100</Nominal><Value>59,5306</Value><VunitRate>0,595306</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=jQ4sSiRAdsyddeDuhfOM; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=nBjR8sPardDhvZFd; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01035&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 526
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01035" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01035"><Nominal>1</Nominal><Value>103,7442</Value><VunitRate>103,7442</VunitRate></Record><Record Date="04.03.2026" Id="R01035"><Nominal>1</Nominal><Value>103,7714</Value><VunitRate>103,7714</VunitRate></Record><Record Date="05.03.2026" Id="R01035"><Nominal>1</Nominal><Value>103,4908</Value><VunitRate>103,4908</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=2mGwzB0xJ6PpjEXuZbN2; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=YtXLghbUJBMm2bbB; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01060&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01060" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01060"><Nominal>100</Nominal><Value>20,4769</Value><VunitRate>0,204769</VunitRate></Record><Record Date="04.03.2026" Id="R01060"><Nominal>100</Nominal><Value>20,5866</Value><VunitRate>0,205866</VunitRate></Record><Record Date="05.03.2026" Id="R01060"><Nominal>100</Nominal><Value>20,5899</Value><VunitRate>0,205899</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=rilvjoG1jEtGAVrU3YhD; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=YeaCAAADJZQGTNIN; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01080&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 526
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01080" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01080"><Nominal>1</Nominal><Value>205,4705</Value><VunitRate>205,4705</VunitRate></Record><Record Date="04.03.2026" Id="R01080"><Nominal>1</Nominal><Value>206,3631</Value><VunitRate>206,3631</VunitRate></Record><Record Date="05.03.2026" Id="R01080"><Nominal>1</Nominal><Value>206,8726</Value><VunitRate>206,8726</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=yYtpneRN9ixwtnNqNEk3; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=p9Fe2lTRpREwpLNq; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01090B&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01090B" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01090B"><Nominal>1</Nominal><Value>26,8887</Value><VunitRate>26,8887</VunitRate></Record><Record Date="04.03.2026" Id="R01090B"><Nominal>1</Nominal><Value>26,8581</Value><VunitRate>26,8581</VunitRate></Record><Record Date="05.03.2026" Id="R01090B"><Nominal>1</Nominal><Value>26,9291</Value><VunitRate>26,9291</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=cyNYoj8g0vI6Zpqigxm9; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=tstffLTrYfeVRYLM; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01105&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01105" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01105"><Nominal>1</Nominal><Value>11,1684</Value><VunitRate>11,1684</VunitRate></Record><Record Date="04.03.2026" Id="R01105"><Nominal>1</Nominal><Value>11,2314</Value><VunitRate>11,2314</VunitRate></Record><Record Date="05.03.2026" Id="R01105"><Nominal>1</Nominal><Value>11,2592</Value><VunitRate>11,2592</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:00:59 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=lGPyt0tLpG8dds1Lwf4U; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=8fTJ8DkYRPBiXklq; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01115&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01115" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01115"><Nominal>1</Nominal><Value>14,9875</Value><VunitRate>14,9875</VunitRate></Record><Record Date="04.03.2026" Id="R01115"><Nominal>1</Nominal><Value>14,9254</Value><VunitRate>14,9254</VunitRate></Record><Record Date="05.03.2026" Id="R01115"><Nominal>1</Nominal><Value>14,7163</Value><VunitRate>14,7163</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240859; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg1_=iohF9pxbZIZzCk0CnUSo; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:00:59 GMT
+                - __ddg8_=JjGCosRpQfLQo42T; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:20:59 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01135&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 528
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01135" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01135"><Nominal>100</Nominal><Value>23,8779</Value><VunitRate>0,238779</VunitRate></Record><Record Date="04.03.2026" Id="R01135"><Nominal>100</Nominal><Value>23,3707</Value><VunitRate>0,233707</VunitRate></Record><Record Date="05.03.2026" Id="R01135"><Nominal>100</Nominal><Value>23,4030</Value><VunitRate>0,23403</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=eyFZz84vjEiVtjwTtHMs; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=sbde7Ld0qw5lcUfj; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01150&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 541
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01150" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01150"><Nominal>10000</Nominal><Value>30,8225</Value><VunitRate>0,00308225</VunitRate></Record><Record Date="04.03.2026" Id="R01150"><Nominal>10000</Nominal><Value>30,9867</Value><VunitRate>0,00309867</VunitRate></Record><Record Date="05.03.2026" Id="R01150"><Nominal>10000</Nominal><Value>31,0558</Value><VunitRate>0,00310558</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=zHYduDI0AYoSrWeANnzO; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=GjcJ1qeacPbLTWKp; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01200&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01200" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01200"><Nominal>10</Nominal><Value>98,8262</Value><VunitRate>9,88262</VunitRate></Record><Record Date="04.03.2026" Id="R01200"><Nominal>10</Nominal><Value>99,6396</Value><VunitRate>9,96396</VunitRate></Record><Record Date="05.03.2026" Id="R01200"><Nominal>10</Nominal><Value>99,7064</Value><VunitRate>9,97064</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=eQQSCMT2EuK73WUpUqEw; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=t6dpvBmhI4WiFowc; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01210&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01210" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01210"><Nominal>1</Nominal><Value>28,8402</Value><VunitRate>28,8402</VunitRate></Record><Record Date="04.03.2026" Id="R01210"><Nominal>1</Nominal><Value>28,8275</Value><VunitRate>28,8275</VunitRate></Record><Record Date="05.03.2026" Id="R01210"><Nominal>1</Nominal><Value>28,8986</Value><VunitRate>28,8986</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=L7wLIeygbnJxBxDwMstb; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=HvsVi9G7R6FsZ1PY; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01215&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01215" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01215"><Nominal>1</Nominal><Value>12,1928</Value><VunitRate>12,1928</VunitRate></Record><Record Date="04.03.2026" Id="R01215"><Nominal>1</Nominal><Value>12,1517</Value><VunitRate>12,1517</VunitRate></Record><Record Date="05.03.2026" Id="R01215"><Nominal>1</Nominal><Value>12,0871</Value><VunitRate>12,0871</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=MbpwxiSm5WkaeW2Sgj2f; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=K7UHRWueDcp1pdzA; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01230&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01230" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01230"><Nominal>1</Nominal><Value>21,0139</Value><VunitRate>21,0139</VunitRate></Record><Record Date="04.03.2026" Id="R01230"><Nominal>1</Nominal><Value>21,1326</Value><VunitRate>21,1326</VunitRate></Record><Record Date="05.03.2026" Id="R01230"><Nominal>1</Nominal><Value>21,1847</Value><VunitRate>21,1847</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=5NslrUmztJvfS82CMUAR; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=EiP5dyy734recOGn; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01235&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01235" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01235"><Nominal>1</Nominal><Value>77,1734</Value><VunitRate>77,1734</VunitRate></Record><Record Date="04.03.2026" Id="R01235"><Nominal>1</Nominal><Value>77,6093</Value><VunitRate>77,6093</VunitRate></Record><Record Date="05.03.2026" Id="R01235"><Nominal>1</Nominal><Value>77,8009</Value><VunitRate>77,8009</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:00 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=iDcvilQhHHDgBP7AhoTW; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=vidQJE3DggEFOGEg; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01239&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01239" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01239"><Nominal>1</Nominal><Value>90,7307</Value><VunitRate>90,7307</VunitRate></Record><Record Date="04.03.2026" Id="R01239"><Nominal>1</Nominal><Value>90,3098</Value><VunitRate>90,3098</VunitRate></Record><Record Date="05.03.2026" Id="R01239"><Nominal>1</Nominal><Value>90,7458</Value><VunitRate>90,7458</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240860; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg1_=k8PGw9OAYsfiuliak3O6; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:00 GMT
+                - __ddg8_=FQdcdUFcY36m9cyP; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:00 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01240&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01240" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01240"><Nominal>10</Nominal><Value>15,6754</Value><VunitRate>1,56754</VunitRate></Record><Record Date="04.03.2026" Id="R01240"><Nominal>10</Nominal><Value>15,5564</Value><VunitRate>1,55564</VunitRate></Record><Record Date="05.03.2026" Id="R01240"><Nominal>10</Nominal><Value>15,5019</Value><VunitRate>1,55019</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=XITcb2A0l6g0Bo2Hq8aU; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=TT3H2eVjKLqEYP0g; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01270&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 527
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01270" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01270"><Nominal>100</Nominal><Value>84,3873</Value><VunitRate>0,843873</VunitRate></Record><Record Date="04.03.2026" Id="R01270"><Nominal>100</Nominal><Value>84,8640</Value><VunitRate>0,84864</VunitRate></Record><Record Date="05.03.2026" Id="R01270"><Nominal>100</Nominal><Value>84,3070</Value><VunitRate>0,84307</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=duqIJHArZxjZXVFhOHtV; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=BP4dAgmm2x0frR7j; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01280&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 540
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01280" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01280"><Nominal>10000</Nominal><Value>45,9940</Value><VunitRate>0,0045994</VunitRate></Record><Record Date="04.03.2026" Id="R01280"><Nominal>10000</Nominal><Value>46,0644</Value><VunitRate>0,00460644</VunitRate></Record><Record Date="05.03.2026" Id="R01280"><Nominal>10000</Nominal><Value>46,1179</Value><VunitRate>0,00461179</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=WeTZHTqxYLC6Wc3OrHud; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=FT4dG8R5UvuwKnq7; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01300&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 550
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01300" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01300"><Nominal>1000000</Nominal><Value>58,8139</Value><VunitRate>5,88139E-05</VunitRate></Record><Record Date="04.03.2026" Id="R01300"><Nominal>1000000</Nominal><Value>58,8139</Value><VunitRate>5,88139E-05</VunitRate></Record><Record Date="05.03.2026" Id="R01300"><Nominal>1000000</Nominal><Value>58,8139</Value><VunitRate>5,88139E-05</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=x5rFYpZsr0J82iSCp7Lf; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=M5Ko4u0tfSZ9cByI; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01335&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01335" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01335"><Nominal>100</Nominal><Value>15,5104</Value><VunitRate>0,155104</VunitRate></Record><Record Date="04.03.2026" Id="R01335"><Nominal>100</Nominal><Value>15,4416</Value><VunitRate>0,154416</VunitRate></Record><Record Date="05.03.2026" Id="R01335"><Nominal>100</Nominal><Value>15,6198</Value><VunitRate>0,156198</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=SJ9IiO6DQiBDiV5riAEn; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=QXbrVc1LaOczMXpp; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01350&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01350" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01350"><Nominal>1</Nominal><Value>56,5704</Value><VunitRate>56,5704</VunitRate></Record><Record Date="04.03.2026" Id="R01350"><Nominal>1</Nominal><Value>56,6988</Value><VunitRate>56,6988</VunitRate></Record><Record Date="05.03.2026" Id="R01350"><Nominal>1</Nominal><Value>56,8554</Value><VunitRate>56,8554</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:01 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=6a3WGADfVIURp8EZiJn1; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=LQcibKsTdsm7RvNY; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01355&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01355" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01355"><Nominal>1</Nominal><Value>21,2015</Value><VunitRate>21,2015</VunitRate></Record><Record Date="04.03.2026" Id="R01355"><Nominal>1</Nominal><Value>21,3212</Value><VunitRate>21,3212</VunitRate></Record><Record Date="05.03.2026" Id="R01355"><Nominal>1</Nominal><Value>21,3739</Value><VunitRate>21,3739</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240861; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg1_=1sB4J1ltlVTg00JLFjp7; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:01 GMT
+                - __ddg8_=axSw5gBbR7YArD8W; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:01 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 25
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01370&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01370" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01370"><Nominal>100</Nominal><Value>88,2534</Value><VunitRate>0,882534</VunitRate></Record><Record Date="04.03.2026" Id="R01370"><Nominal>100</Nominal><Value>88,7476</Value><VunitRate>0,887476</VunitRate></Record><Record Date="05.03.2026" Id="R01370"><Nominal>100</Nominal><Value>88,9662</Value><VunitRate>0,889662</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=nV9f6Xw7jHnVB4cKFmZv; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=ibYFr8Lt4aZbLlks; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 26
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01375&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 518
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01375" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01375"><Nominal>1</Nominal><Value>11,1960</Value><VunitRate>11,196</VunitRate></Record><Record Date="04.03.2026" Id="R01375"><Nominal>1</Nominal><Value>11,2210</Value><VunitRate>11,221</VunitRate></Record><Record Date="05.03.2026" Id="R01375"><Nominal>1</Nominal><Value>11,2488</Value><VunitRate>11,2488</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=SE5LP0RfU7j2M4qijHGS; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=eCV6x39QWcKMkhUN; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 27
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01395&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01395" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01395"><Nominal>10</Nominal><Value>32,1556</Value><VunitRate>3,21556</VunitRate></Record><Record Date="04.03.2026" Id="R01395"><Nominal>10</Nominal><Value>32,3372</Value><VunitRate>3,23372</VunitRate></Record><Record Date="05.03.2026" Id="R01395"><Nominal>10</Nominal><Value>32,4170</Value><VunitRate>3,2417</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=Y1nxdvmNmln5Eu3yA5Y7; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=l5oPlcoEu765I2hK; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 28
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01500&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01500" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01500"><Nominal>10</Nominal><Value>45,0279</Value><VunitRate>4,50279</VunitRate></Record><Record Date="04.03.2026" Id="R01500"><Nominal>10</Nominal><Value>45,0366</Value><VunitRate>4,50366</VunitRate></Record><Record Date="05.03.2026" Id="R01500"><Nominal>10</Nominal><Value>44,6475</Value><VunitRate>4,46475</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=CEPwbj2yPnn9uIgJrrsP; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=DVsNOpcP3T35rxjT; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 29
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01503&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 533
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01503" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01503"><Nominal>1000</Nominal><Value>21,6378</Value><VunitRate>0,0216378</VunitRate></Record><Record Date="04.03.2026" Id="R01503"><Nominal>1000</Nominal><Value>21,7600</Value><VunitRate>0,02176</VunitRate></Record><Record Date="05.03.2026" Id="R01503"><Nominal>1000</Nominal><Value>21,8177</Value><VunitRate>0,0218177</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=lLXd4Ehm4pFXUxNCUur4; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=6UdqSveqLEecfgVX; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 30
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01520&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 535
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01520" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01520"><Nominal>1000</Nominal><Value>56,6038</Value><VunitRate>0,0566038</VunitRate></Record><Record Date="04.03.2026" Id="R01520"><Nominal>1000</Nominal><Value>56,3192</Value><VunitRate>0,0563192</VunitRate></Record><Record Date="05.03.2026" Id="R01520"><Nominal>1000</Nominal><Value>56,2027</Value><VunitRate>0,0562027</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:02 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=vAKlU47so37xRLF8L4jO; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=6cK9Vpc4JOXAjyk3; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 31
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01530&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01530" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01530"><Nominal>1</Nominal><Value>46,0918</Value><VunitRate>46,0918</VunitRate></Record><Record Date="04.03.2026" Id="R01530"><Nominal>1</Nominal><Value>46,1426</Value><VunitRate>46,1426</VunitRate></Record><Record Date="05.03.2026" Id="R01530"><Nominal>1</Nominal><Value>45,7197</Value><VunitRate>45,7197</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240862; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg1_=XXDkVVYzEmQte7NTCRJU; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:02 GMT
+                - __ddg8_=aMS6dWvVybiaEf7C; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:02 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 32
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01535&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01535" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01535"><Nominal>10</Nominal><Value>81,2805</Value><VunitRate>8,12805</VunitRate></Record><Record Date="04.03.2026" Id="R01535"><Nominal>10</Nominal><Value>81,1253</Value><VunitRate>8,11253</VunitRate></Record><Record Date="05.03.2026" Id="R01535"><Nominal>10</Nominal><Value>80,2733</Value><VunitRate>8,02733</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=b9tds4i0VDliKXXRt0j1; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=CF4LVCcAhTFIF3AX; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 33
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01540&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 525
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01540" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01540"><Nominal>1</Nominal><Value>200,7111</Value><VunitRate>200,7111</VunitRate></Record><Record Date="04.03.2026" Id="R01540"><Nominal>1</Nominal><Value>201,8447</Value><VunitRate>201,8447</VunitRate></Record><Record Date="05.03.2026" Id="R01540"><Nominal>1</Nominal><Value>202,3430</Value><VunitRate>202,343</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=6n4H4ubAsOt9i99JVtYU; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=bg95GiJBZc0QjzpO; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 34
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01565&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 519
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01565" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01565"><Nominal>1</Nominal><Value>21,4038</Value><VunitRate>21,4038</VunitRate></Record><Record Date="04.03.2026" Id="R01565"><Nominal>1</Nominal><Value>21,0780</Value><VunitRate>21,078</VunitRate></Record><Record Date="05.03.2026" Id="R01565"><Nominal>1</Nominal><Value>21,1588</Value><VunitRate>21,1588</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=A1sHBNE4UEjX7wfapNiY; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=TQKCLPYZ7qDRAg9F; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 35
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01580&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01580" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01580"><Nominal>1</Nominal><Value>20,5796</Value><VunitRate>20,5796</VunitRate></Record><Record Date="04.03.2026" Id="R01580"><Nominal>1</Nominal><Value>20,6958</Value><VunitRate>20,6958</VunitRate></Record><Record Date="05.03.2026" Id="R01580"><Nominal>1</Nominal><Value>20,7469</Value><VunitRate>20,7469</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=bv6DPK51NpGeuIP7Jsjn; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=GN0xK5tmnDVe1FdR; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 36
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01585F&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01585F" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01585F"><Nominal>1</Nominal><Value>17,7696</Value><VunitRate>17,7696</VunitRate></Record><Record Date="04.03.2026" Id="R01585F"><Nominal>1</Nominal><Value>17,6626</Value><VunitRate>17,6626</VunitRate></Record><Record Date="05.03.2026" Id="R01585F"><Nominal>1</Nominal><Value>17,7628</Value><VunitRate>17,7628</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=RVDdAguEXBTFfI0r8lsh; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=6odXgaHxAdtmm34z; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 37
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01589&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01589" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01589"><Nominal>1</Nominal><Value>106,0957</Value><VunitRate>106,0957</VunitRate></Record><Record Date="04.03.2026" Id="R01589"><Nominal>1</Nominal><Value>106,3690</Value><VunitRate>106,369</VunitRate></Record><Record Date="05.03.2026" Id="R01589"><Nominal>1</Nominal><Value>106,0730</Value><VunitRate>106,073</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=jPpGDoGCejV2QU6H1lXm; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=xbOAlrp379Yi62lY; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 38
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01625&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01625" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01625"><Nominal>1</Nominal><Value>60,8911</Value><VunitRate>60,8911</VunitRate></Record><Record Date="04.03.2026" Id="R01625"><Nominal>1</Nominal><Value>60,9848</Value><VunitRate>60,9848</VunitRate></Record><Record Date="05.03.2026" Id="R01625"><Nominal>1</Nominal><Value>60,9057</Value><VunitRate>60,9057</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:03 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240863; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg1_=s4KUxzZH2gv8rr5kDe60; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:03 GMT
+                - __ddg8_=7t09wuKxtKdOW8Ue; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:03 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 39
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01670&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01670" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01670"><Nominal>10</Nominal><Value>80,9998</Value><VunitRate>8,09998</VunitRate></Record><Record Date="04.03.2026" Id="R01670"><Nominal>10</Nominal><Value>81,3285</Value><VunitRate>8,13285</VunitRate></Record><Record Date="05.03.2026" Id="R01670"><Nominal>10</Nominal><Value>81,4047</Value><VunitRate>8,14047</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=avTyALcP4NB0Yn3IA9yB; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=LBvzsapT1F3pTofD; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 40
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01675&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 522
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01675" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01675"><Nominal>10</Nominal><Value>24,6490</Value><VunitRate>2,4649</VunitRate></Record><Record Date="04.03.2026" Id="R01675"><Nominal>10</Nominal><Value>24,7882</Value><VunitRate>2,47882</VunitRate></Record><Record Date="05.03.2026" Id="R01675"><Nominal>10</Nominal><Value>24,5716</Value><VunitRate>2,45716</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=4nDWHPwNLgUuNZXgJlw3; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=7H9zqcGfZHwk1zDx; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 41
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01685&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 528
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01685" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01685"><Nominal>100</Nominal><Value>63,0679</Value><VunitRate>0,630679</VunitRate></Record><Record Date="04.03.2026" Id="R01685"><Nominal>100</Nominal><Value>63,4331</Value><VunitRate>0,634331</VunitRate></Record><Record Date="05.03.2026" Id="R01685"><Nominal>100</Nominal><Value>63,6060</Value><VunitRate>0,63606</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=Po8o2apkFq79A3UM7efs; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=ClhLj2caHxNeUDKv; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 42
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01700J&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 527
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01700J" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01700J"><Nominal>10</Nominal><Value>17,6036</Value><VunitRate>1,76036</VunitRate></Record><Record Date="04.03.2026" Id="R01700J"><Nominal>10</Nominal><Value>17,6688</Value><VunitRate>1,76688</VunitRate></Record><Record Date="05.03.2026" Id="R01700J"><Nominal>10</Nominal><Value>17,7099</Value><VunitRate>1,77099</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=dt9qldK5wUiYjgO5yNcn; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=7pwtTuRtUfO5K89n; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 43
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01710A&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 524
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01710A" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01710A"><Nominal>1</Nominal><Value>22,0495</Value><VunitRate>22,0495</VunitRate></Record><Record Date="04.03.2026" Id="R01710A"><Nominal>1</Nominal><Value>22,1741</Value><VunitRate>22,1741</VunitRate></Record><Record Date="05.03.2026" Id="R01710A"><Nominal>1</Nominal><Value>22,2288</Value><VunitRate>22,2288</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=lGwx7g9QfbIktbYkkpDT; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=N4ymHdMbB0BgPUfI; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 44
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01717&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 541
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01717" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01717"><Nominal>10000</Nominal><Value>63,3058</Value><VunitRate>0,00633058</VunitRate></Record><Record Date="04.03.2026" Id="R01717"><Nominal>10000</Nominal><Value>63,5628</Value><VunitRate>0,00635628</VunitRate></Record><Record Date="05.03.2026" Id="R01717"><Nominal>10000</Nominal><Value>63,8769</Value><VunitRate>0,00638769</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=RsMpvSXSej5gohhxlNLd; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=hOvZFGshOLnCHnDJ; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 45
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01720&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01720" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01720"><Nominal>10</Nominal><Value>17,9058</Value><VunitRate>1,79058</VunitRate></Record><Record Date="04.03.2026" Id="R01720"><Nominal>10</Nominal><Value>17,9509</Value><VunitRate>1,79509</VunitRate></Record><Record Date="05.03.2026" Id="R01720"><Nominal>10</Nominal><Value>17,9039</Value><VunitRate>1,79039</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=wpJD2hcIOi4Z0eevizUf; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=gMf0T6DOAKFtUkV0; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 46
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01760&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01760" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01760"><Nominal>10</Nominal><Value>37,5704</Value><VunitRate>3,75704</VunitRate></Record><Record Date="04.03.2026" Id="R01760"><Nominal>10</Nominal><Value>37,4255</Value><VunitRate>3,74255</VunitRate></Record><Record Date="05.03.2026" Id="R01760"><Nominal>10</Nominal><Value>37,0304</Value><VunitRate>3,70304</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:04 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240864; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg1_=CuMRCxzLsIgJHAYkSw9i; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:04 GMT
+                - __ddg8_=KlK39XAgub7AEs4Y; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:04 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 47
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01770&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01770" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01770"><Nominal>10</Nominal><Value>85,4282</Value><VunitRate>8,54282</VunitRate></Record><Record Date="04.03.2026" Id="R01770"><Nominal>10</Nominal><Value>84,7846</Value><VunitRate>8,47846</VunitRate></Record><Record Date="05.03.2026" Id="R01770"><Nominal>10</Nominal><Value>84,1801</Value><VunitRate>8,41801</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=hcA9scsj4V6TjJYLmRxt; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=7w9K3XF1twKygIat; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 48
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01775&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 520
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01775" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01775"><Nominal>1</Nominal><Value>99,9655</Value><VunitRate>99,9655</VunitRate></Record><Record Date="04.03.2026" Id="R01775"><Nominal>1</Nominal><Value>98,7521</Value><VunitRate>98,7521</VunitRate></Record><Record Date="05.03.2026" Id="R01775"><Nominal>1</Nominal><Value>99,3118</Value><VunitRate>99,3118</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=LMVr6D36DivtIrh9GX98; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=eYX558h6bnGWaAyq; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 49
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01800&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01800" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01800"><Nominal>100</Nominal><Value>49,4601</Value><VunitRate>0,494601</VunitRate></Record><Record Date="04.03.2026" Id="R01800"><Nominal>100</Nominal><Value>49,7878</Value><VunitRate>0,497878</VunitRate></Record><Record Date="05.03.2026" Id="R01800"><Nominal>100</Nominal><Value>49,8771</Value><VunitRate>0,498771</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=OJabkyWQ14rNtTx7IkjB; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=h3MhRctShJuZkVdS; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 50
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01805F&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 532
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01805F" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01805F"><Nominal>100</Nominal><Value>77,2793</Value><VunitRate>0,772793</VunitRate></Record><Record Date="04.03.2026" Id="R01805F"><Nominal>100</Nominal><Value>77,1526</Value><VunitRate>0,771526</VunitRate></Record><Record Date="05.03.2026" Id="R01805F"><Nominal>100</Nominal><Value>76,8440</Value><VunitRate>0,76844</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=LP6jEVc8lfDatGJPDGAO; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=5st4dCHhJJPaB443; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 51
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01810&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 523
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01810" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01810"><Nominal>10</Nominal><Value>47,7257</Value><VunitRate>4,77257</VunitRate></Record><Record Date="04.03.2026" Id="R01810"><Nominal>10</Nominal><Value>47,7085</Value><VunitRate>4,77085</VunitRate></Record><Record Date="05.03.2026" Id="R01810"><Nominal>10</Nominal><Value>47,1535</Value><VunitRate>4,71535</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=VK2bkENQQ6o6n14bNd5L; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=ciofIQw1WEestQ00; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 52
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01815&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 535
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01815" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01815"><Nominal>1000</Nominal><Value>54,1758</Value><VunitRate>0,0541758</VunitRate></Record><Record Date="04.03.2026" Id="R01815"><Nominal>1000</Nominal><Value>54,0681</Value><VunitRate>0,0540681</VunitRate></Record><Record Date="05.03.2026" Id="R01815"><Nominal>1000</Nominal><Value>53,1245</Value><VunitRate>0,0531245</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=Ltjf4WFq0rKRKu1H99N7; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=eSfkk0NKGAURGzK5; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 53
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R01820&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 529
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R01820" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R01820"><Nominal>100</Nominal><Value>49,3436</Value><VunitRate>0,493436</VunitRate></Record><Record Date="04.03.2026" Id="R01820"><Nominal>100</Nominal><Value>49,3039</Value><VunitRate>0,493039</VunitRate></Record><Record Date="05.03.2026" Id="R01820"><Nominal>100</Nominal><Value>49,3473</Value><VunitRate>0,493473</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:05 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=WnJvdBgCJJmji97PgtFK; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=9AdFCh21vA0k7Ge3; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 54
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/XML_dynamic.asp?VAL_NM_RQ=R02005&date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 534
+        body: <?xml version="1.0" encoding="windows-1251"?><ValCurs ID="R02005" DateRange1="01.03.2026" DateRange2="05.03.2026" name="Foreign Currency Market Dynamic"><Record Date="03.03.2026" Id="R02005"><Nominal>1000</Nominal><Value>36,7492</Value><VunitRate>0,0367492</VunitRate></Record><Record Date="04.03.2026" Id="R02005"><Nominal>1000</Nominal><Value>36,9568</Value><VunitRate>0,0369568</VunitRate></Record><Record Date="05.03.2026" Id="R02005"><Nominal>1000</Nominal><Value>37,0480</Value><VunitRate>0,037048</VunitRate></Record></ValCurs>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:06 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240865; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg1_=bHWmGTqDRfbYccWrLKaJ; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:05 GMT
+                - __ddg8_=v1XGbZ1b13PdTR7Y; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:05 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 55
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.cbr.ru
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.cbr.ru
+            User-Agent:
+                - Ruby
+        url: https://www.cbr.ru/scripts/xml_metall.asp?date_req1=01/03/2026&date_req2=05/03/2026
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 1116
+        body: <?xml version="1.0" encoding="windows-1251"?><Metall FromDate="20260301" ToDate="20260305" name="Precious metals quotations"><Record Date="03.03.2026" Code="1"><Buy>12957,47</Buy><Sell>12957,47</Sell></Record><Record Date="03.03.2026" Code="2"><Buy>223,24</Buy><Sell>223,24</Sell></Record><Record Date="03.03.2026" Code="3"><Buy>5870,47</Buy><Sell>5870,47</Sell></Record><Record Date="03.03.2026" Code="4"><Buy>4448,76</Buy><Sell>4448,76</Sell></Record><Record Date="04.03.2026" Code="1"><Buy>13259,22</Buy><Sell>13259,22</Sell></Record><Record Date="04.03.2026" Code="2"><Buy>236,1</Buy><Sell>236,1</Sell></Record><Record Date="04.03.2026" Code="3"><Buy>5811,31</Buy><Sell>5811,31</Sell></Record><Record Date="04.03.2026" Code="4"><Buy>4446,44</Buy><Sell>4446,44</Sell></Record><Record Date="05.03.2026" Code="1"><Buy>12590,95</Buy><Sell>12590,95</Sell></Record><Record Date="05.03.2026" Code="2"><Buy>203,37</Buy><Sell>203,37</Sell></Record><Record Date="05.03.2026" Code="3"><Buy>5287,86</Buy><Sell>5287,86</Sell></Record><Record Date="05.03.2026" Code="4"><Buy>4179,76</Buy><Sell>4179,76</Sell></Record></Metall>
+        headers:
+            Cache-Control:
+                - no-cache
+            Connection:
+                - keep-alive
+            Content-Type:
+                - application/xml; charset=windows-1251
+            Date:
+                - Sun, 26 Apr 2026 22:01:06 GMT
+            Expires:
+                - "-1"
+            Keep-Alive:
+                - timeout=60
+            Pragma:
+                - no-cache
+            Server:
+                - ddos-guard
+            Set-Cookie:
+                - __ddg10_=1777240866; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:06 GMT
+                - __ddg1_=3NavTPdEoEj4pAl8s5Mu; Domain=.cbr.ru; HttpOnly; Path=/; Expires=Mon, 26-Apr-2027 22:01:06 GMT
+                - __ddg8_=ZfrGsnaqa8z3vQ5n; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:06 GMT
+                - __ddg9_=62.194.146.254; Domain=.cbr.ru; Path=/; Expires=Sun, 26-Apr-2026 22:21:06 GMT
+            Vary:
+                - Accept-Encoding
+            X-Aspnet-Version:
+                - 4.0.30319
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Powered-By:
+                - ASP.NET
+        status: 200 OK
+        code: 200
+        duration: 0s

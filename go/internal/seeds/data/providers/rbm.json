@@ -1,0 +1,12 @@
+{
+  "key": "RBM",
+  "name": "Reserve Bank of Malawi",
+  "country_code": "MW",
+  "rate_type": "reference rate",
+  "pivot_currency": "MWK",
+  "data_url": "https://www.rbm.mw/Statistics/MajorRates",
+  "terms_url": null,
+  "publish_schedule": "*/30 14-16 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2011-06-20"
+}

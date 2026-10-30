@@ -1,0 +1,8 @@
+{
+  "quote": "OMR",
+  "base": "USD",
+  "rate": 0.3845,
+  "since": "1986-01-01",
+  "authority": "Central Bank of Oman",
+  "source": "https://cbo.gov.om/Pages/FixedPeg.aspx"
+}

@@ -1,0 +1,12 @@
+{
+  "key": "CBLLR",
+  "name": "Central Bank of Liberia",
+  "country_code": "LR",
+  "rate_type": "indicative",
+  "pivot_currency": "USD",
+  "data_url": "https://www.cbl.org.lr/research/buying-selling-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 13-15 * * 1-6",
+  "publish_cadence": "daily",
+  "coverage_start": "2012-07-05"
+}
