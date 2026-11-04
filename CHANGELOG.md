@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - National Bank of Serbia (NBS) as a data provider. (#301)
 - Swiss Federal Tax Administration (ESTV) as a data provider, with daily values for BTC, BCH, ETH, LTC and XRP. (#770)
+- Japan Virtual and Crypto assets Exchange Association (JVCEA) as a data provider. (#785)
+- Coin Metrics (CM) as a data provider. (#785)
 
 ### Changed
 
