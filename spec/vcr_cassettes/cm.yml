@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc,bch,eth,ltc,xrp&end_time=2026-10-22&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2026-10-20
+    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=ada,bch,btc,dot,etc,eth,fil,ltc,pol,sol,sui,uni,xlm,xrp,xtz,zec&end_time=2026-10-22&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2026-10-20
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 04 Nov 2026 15:11:45 GMT
+      - Wed, 04 Nov 2026 17:17:24 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - 6000, 6000;w=20;comment="sliding window"
       X-Ratelimit-Remaining:
-      - '5998'
+      - '5999'
       X-Ratelimit-Reset:
       - '20'
       Server:
@@ -55,11 +55,11 @@ http_interactions:
       Cf-Cache-Status:
       - DYNAMIC
       Cf-Ray:
-      - a5548d955a59fea7-AMS
+      - a55545a2ab063ed0-AMS
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: UTF-8
-      string: '{"data":[{"asset":"bch","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"282.855034233117"},{"asset":"bch","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"286.21796037055"},{"asset":"bch","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"274.482683612637"},{"asset":"btc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"82898.9101560549"},{"asset":"btc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"84176.0796455874"},{"asset":"btc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"81257.0175825248"},{"asset":"eth","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"2446.29682080655"},{"asset":"eth","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"2473.58110337814"},{"asset":"eth","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"2382.64542241964"},{"asset":"ltc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"61.3799396020135"},{"asset":"ltc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"61.3970314449861"},{"asset":"ltc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"58.662754709489"},{"asset":"xrp","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.33415446414505"},{"asset":"xrp","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.36439549988007"},{"asset":"xrp","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"1.30628248893106"}]}'
-  recorded_at: Wed, 04 Nov 2026 15:11:45 GMT
+      string: '{"data":[{"asset":"ada","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"0.223703393605741"},{"asset":"ada","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"0.225324889010406"},{"asset":"ada","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.211717403438866"},{"asset":"bch","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"282.855034233117"},{"asset":"bch","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"286.21796037055"},{"asset":"bch","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"274.482683612637"},{"asset":"btc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"82898.9101560549"},{"asset":"btc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"84176.0796455874"},{"asset":"btc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"81257.0175825248"},{"asset":"dot","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.14765994058965"},{"asset":"dot","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.14517932416227"},{"asset":"dot","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"1.11065495161557"},{"asset":"etc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"7.92475349695354"},{"asset":"etc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"8.08173668911769"},{"asset":"etc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"7.69122657038829"},{"asset":"eth","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"2446.29682080655"},{"asset":"eth","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"2473.58110337814"},{"asset":"eth","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"2382.64542241964"},{"asset":"fil","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.03072828140188"},{"asset":"fil","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.05467057269231"},{"asset":"fil","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.976208493771003"},{"asset":"ltc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"61.3799396020135"},{"asset":"ltc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"61.3970314449861"},{"asset":"ltc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"58.662754709489"},{"asset":"pol","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"0.0947173986937268"},{"asset":"pol","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"0.0946347863613201"},{"asset":"pol","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.0902017104808928"},{"asset":"sol","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"106.400928041517"},{"asset":"sol","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"106.895523324318"},{"asset":"sol","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"103.374528735869"},{"asset":"sui","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.02939546620794"},{"asset":"sui","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.02866175186324"},{"asset":"sui","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.971961905080901"},{"asset":"uni","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"7.4379364838214"},{"asset":"uni","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"7.45225871994416"},{"asset":"uni","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"6.98833206908816"},{"asset":"xlm","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"0.181976312192926"},{"asset":"xlm","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"0.183659016040965"},{"asset":"xlm","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.174998049632909"},{"asset":"xrp","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.33415446414505"},{"asset":"xrp","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.36439549988007"},{"asset":"xrp","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"1.30628248893106"},{"asset":"xtz","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"0.313063305311077"},{"asset":"xtz","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"0.315505206405806"},{"asset":"xtz","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"0.300308202548038"},{"asset":"zec","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1259.40408348916"},{"asset":"zec","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1317.21924924699"},{"asset":"zec","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"1214.93074215278"}]}'
+  recorded_at: Wed, 04 Nov 2026 17:17:24 GMT
 recorded_with: VCR 6.4.0

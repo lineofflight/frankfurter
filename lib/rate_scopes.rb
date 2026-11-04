@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "bucket"
+require "currency_patches"
 require "defunct_currency"
 require "money/currency"
 

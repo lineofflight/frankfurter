@@ -14,13 +14,13 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { JVCEA.new }
 
-      it "fetches daily JPY reference rates for all five crypto assets" do
+      it "fetches daily JPY reference rates for all six crypto assets" do
         dataset = adapter.fetch(after: Date.new(2026, 10, 20), upto: Date.new(2026, 10, 22))
         dates = dataset.map { |r| r[:date] }.uniq.sort
         bases = dataset.map { |r| r[:base] }.uniq.sort
 
         _(dates).must_equal((Date.new(2026, 10, 20)..Date.new(2026, 10, 22)).to_a)
-        _(bases).must_equal(["BCH", "BTC", "ETH", "LTC", "XRP"])
+        _(bases).must_equal(["BCH", "BTC", "ETH", "LTC", "SOL", "XRP"])
         _(dataset.map { |r| r[:quote] }.uniq).must_equal(["JPY"])
       end
 

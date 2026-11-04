@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc,bch,eth,ltc,xrp&end_time=2010-07-20&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2010-07-18
+    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=ada,bch,btc,dot,etc,eth,fil,ltc,pol,sol,sui,uni,xlm,xrp,xtz,zec&end_time=2010-07-20&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2010-07-18
     body:
       encoding: ASCII-8BIT
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 04 Nov 2026 15:11:45 GMT
+      - Wed, 04 Nov 2026 17:17:24 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -43,7 +43,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - 6000, 6000;w=20;comment="sliding window"
       X-Ratelimit-Remaining:
-      - '5999'
+      - '5998'
       X-Ratelimit-Reset:
       - '20'
       Server:
@@ -55,11 +55,11 @@ http_interactions:
       Cf-Cache-Status:
       - DYNAMIC
       Cf-Ray:
-      - a5548d93d94c1c0a-AMS
+      - a55545a41994bd33-AMS
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: UTF-8
       string: '{"data":[{"asset":"btc","time":"2010-07-18T00:00:00.000000000Z","PriceUSD":"0.08584"},{"asset":"btc","time":"2010-07-19T00:00:00.000000000Z","PriceUSD":"0.0808"},{"asset":"btc","time":"2010-07-20T00:00:00.000000000Z","PriceUSD":"0.0747357288135593"}]}'
-  recorded_at: Wed, 04 Nov 2026 15:11:45 GMT
+  recorded_at: Wed, 04 Nov 2026 17:17:24 GMT
 recorded_with: VCR 6.4.0
