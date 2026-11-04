@@ -8,6 +8,8 @@ class Provider
   module Adapters
     # Bank of Mauritius. Daily averages of banks' indicative retail transfer buy/sell rates, in MUR per foreign unit.
     # Both date filters are required: omitting the end date asks Drupal for the entire remaining archive.
+    #
+    # TLS quirk: www.bom.mu omits its Sectigo intermediate; see config/ca_bundles.
     class BOMU < Adapter
       URL = "https://www.bom.mu/markets/foreign-exchange/consolidated-indicative-exchange-rates"
       COVERAGE_START = Date.new(2001, 7, 3)
