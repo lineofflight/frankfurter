@@ -21,7 +21,7 @@ class Provider
     class JVCEA < Adapter
       API_URL = "https://rf-dat.jvcea.or.jp/ReferRate/referratefile"
       EXCEL_EPOCH = Date.new(1899, 12, 30)
-      PAIRS = ["BTC", "BCH", "ETH", "LTC", "XRP"].freeze
+      PAIRS = ["BTC", "BCH", "ETH", "LTC", "SOL", "XRP"].freeze
 
       class << self
         def revises? = true

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "currency_coverage"
+require "currency_patches"
 require "money/currency"
 require "peg"
 

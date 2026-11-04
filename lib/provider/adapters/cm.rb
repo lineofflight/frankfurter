@@ -12,7 +12,10 @@ class Provider
     # License (CC BY-NC 4.0): https://raw.githubusercontent.com/coinmetrics/data/master/LICENSE
     class CM < Adapter
       API_URL = "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics"
-      ASSETS = ["btc", "bch", "eth", "ltc", "xrp"].freeze
+      ASSETS = [
+        "ada", "bch", "btc", "dot", "etc", "eth", "fil", "ltc",
+        "pol", "sol", "sui", "uni", "xlm", "xrp", "xtz", "zec",
+      ].freeze
       COVERAGE_START = Date.new(2010, 7, 18)
 
       class << self
