@@ -112,6 +112,7 @@ module Versions
 
       r.is("currency", String) do |code|
         r.get do
+          response.cache_control(public: true, max_age: 3600)
           found = Currency.find(code)
           found ? found.to_h_with_providers : request.halt(404)
         end
@@ -119,6 +120,7 @@ module Versions
 
       r.is("currencies") do
         r.get do
+          response.cache_control(public: true, max_age: 3600)
           currencies(r.params)
         end
       end
