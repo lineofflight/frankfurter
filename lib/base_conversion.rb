@@ -25,7 +25,7 @@ class BaseConversion
     return rows if unreached.empty? || rows.empty?
 
     fallback = rows.group_by { |r| r[:quote] }.to_h do |quote, group|
-      [[base, quote], { rate: group.sum { |r| r[:rate] } / group.size }]
+      [[base, quote], { rate: median(group.map { |r| r[:rate] }) }]
     end
 
     bridged = unreached.flat_map do |provider, group|
@@ -35,6 +35,12 @@ class BaseConversion
   end
 
   private
+
+  def median(values)
+    sorted = values.sort
+    mid = sorted.size / 2
+    sorted.size.odd? ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0
+  end
 
   # A provider can reach the same quote by more than one bridge during a pivot-currency transition (e.g. Banque du Liban
   # quoting against both LTL and EUR around Lithuania's 2015 euro adoption). Collapse such duplicates into one averaged

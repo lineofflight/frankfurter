@@ -153,16 +153,18 @@ describe BaseConversion do
     _(jpy[:provider]).must_equal("FRED")
   end
 
-  it "falls back to other providers' converted rates when a provider has no path to base" do
+  it "falls back to the median of other providers' converted rates when a provider has no path to base" do
     rates = [
       { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "BOJ" },
-      { date: date, base: "BTC", quote: "JPY", rate: 15_000_000.0, provider: "JVCEA" },
+      { date: date, base: "USD", quote: "JPY", rate: 150.2, provider: "ECB" },
+      { date: date, base: "USD", quote: "JPY", rate: 3800.0, provider: "BCC" },
+      { date: date, base: "BTC", quote: "JPY", rate: 15_020_000.0, provider: "JVCEA" },
     ]
 
     result = BaseConversion.new(rates, base: "USD").convert
     btc = result.find { |r| r[:quote] == "BTC" }
 
-    _(btc[:rate]).must_be_close_to(150.0 / 15_000_000.0)
+    _(btc[:rate]).must_be_close_to(150.2 / 15_020_000.0)
     _(btc[:provider]).must_equal("JVCEA")
   end
 end
