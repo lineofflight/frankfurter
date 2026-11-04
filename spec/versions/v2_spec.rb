@@ -623,6 +623,7 @@ describe Versions::V2 do
     get "/currencies?scope=all"
 
     _(last_response).must_be(:ok?)
+    _(last_response.headers["Cache-Control"]).must_equal("public, max-age=3600")
     assert_conform_schema(200)
     usd = json.find { |c| c["iso_code"] == "USD" }
 
