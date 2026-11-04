@@ -183,7 +183,8 @@ class Provider < Sequel::Model(:providers)
           VCR.insert_cassette("bct", match_requests_on: [:method, :host], allow_playback_repeats: true)
         end
 
-        _(captured_user_agent).must_equal("Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)")
+        _(captured_user_agent)
+          .must_equal("Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)")
       end
     end
   end

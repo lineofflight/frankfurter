@@ -2,8 +2,10 @@
 
 require_relative "../boot"
 require_relative "fixtures"
+require "web_bot_auth"
 
 Fixtures.seed!
+WebBotAuth.private_key = false
 
 require "minitest/autorun"
 require "minitest/mock"
@@ -27,11 +29,30 @@ end
 
 module Minitest
   class Spec
+    def turn_on_web_bot_auth(key = OpenSSL::PKey.generate_key("ED25519"))
+      WebBotAuth.private_key = key.private_to_pem
+      key
+    end
+
+    def assert_signed(headers, components, key)
+      label, params = headers.fetch("Signature-Input").split("=", 2)
+      names = params[/\A\(([^)]*)\)/, 1].scan(/"[^"]+"(?:;req)?/)
+      base = names.map do |name|
+        "#{name}: #{components.fetch(name)}"
+      end.push(%("@signature-params": #{params})).join("\n")
+      signature = headers.fetch("Signature")[/\A#{label}=:([^:]+):\z/, 1]
+
+      assert OpenSSL::PKey.read(key.public_to_pem).verify(nil, signature.unpack1("m0"), base), "signature"
+    end
+
     around do |test|
       Sequel::Model.db.transaction do
         test.call
         raise Sequel::Rollback
       end
+    ensure
+      WebBotAuth.private_key = false
+      WebBotAuth.authority = nil
     end
   end
 end

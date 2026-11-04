@@ -8,6 +8,7 @@ require "noindex"
 require "request_timeout"
 require "versions/v1"
 require "versions/v2"
+require "web_bot_auth"
 
 class App < Roda
   use Versions::V1::Deprecation
@@ -51,6 +52,16 @@ class App < Roda
         docs: "https://frankfurter.dev",
         source: "https://github.com/lineofflight/frankfurter",
       }
+    end
+
+    r.get(".well-known/http-message-signatures-directory") do
+      next unless WebBotAuth.configured? && r.host.casecmp?(WebBotAuth.authority)
+
+      body = WebBotAuth.directory
+      response.cache_control(public: true, max_age: 86400)
+      response["content-type"] = WebBotAuth::MEDIA_TYPE
+      WebBotAuth.directory_headers(body).each { |name, value| response[name] = value }
+      body
     end
 
     r.on("v1") do

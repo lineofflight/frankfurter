@@ -247,4 +247,69 @@ describe App do
       assert headers.key?("Access-Control-Allow-Methods")
     end
   end
+
+  describe "Web Bot Auth key directory" do
+    let(:path) { "/.well-known/http-message-signatures-directory" }
+
+    before { header "Host", "api.frankfurter.dev" }
+
+    it "answers 404 without a key" do
+      get path
+
+      _(last_response.status).must_equal(404)
+    end
+
+    it "lists the public key, signed with it" do
+      key = turn_on_web_bot_auth
+      get path
+
+      _(last_response).must_be(:ok?)
+      _(headers["Content-Type"]).must_equal("application/http-message-signatures-directory+json")
+      _(headers["Cache-Control"]).must_equal("public, max-age=86400")
+
+      keys = Oj.load(last_response.body).fetch("keys")
+
+      _(keys.size).must_equal(1)
+      jwk = keys.first
+
+      _(jwk.keys.sort).must_equal(["crv", "kid", "kty", "use", "x"])
+      _(jwk["x"].tr("-_", "+/").unpack1("m")).must_equal(key.raw_public_key)
+      _(jwk["kid"]).must_equal(WebBotAuth.keyid)
+
+      digest = "sha-256=:#{Digest::SHA256.base64digest(last_response.body)}:"
+
+      _(headers["Content-Digest"]).must_equal(digest)
+      _(headers["Signature-Input"]).must_match(/;keyid="#{jwk["kid"]}";.*;tag="http-message-signatures-directory"\z/)
+      assert_signed(headers, { '"@authority";req' => "api.frankfurter.dev", '"content-digest"' => digest }, key)
+    end
+
+    # Signing for whatever Host a request names would let anyone have our key vouch for a directory on their own host.
+    it "signs for no other host" do
+      turn_on_web_bot_auth
+
+      ["frankfurter.dev", "www.frankfurter.dev", "evil.example", "api.frankfurter.dev.evil.example"].each do |host|
+        header "Host", host
+        get path
+
+        _(last_response.status).must_equal(404)
+        _(headers["Signature"]).must_be_nil
+        _(headers["Signature-Input"]).must_be_nil
+      end
+    end
+
+    it "signs only for api.frankfurter.dev, whatever the request says about its host" do
+      key = turn_on_web_bot_auth
+      header "X-Forwarded-Host", "api.frankfurter.dev"
+      header "Host", "evil.example"
+      get path
+
+      _(last_response).must_be(:ok?)
+      digest = headers["Content-Digest"]
+
+      assert_signed(headers, { '"@authority";req' => "api.frankfurter.dev", '"content-digest"' => digest }, key)
+      assert_raises(Minitest::Assertion) do
+        assert_signed(headers, { '"@authority";req' => "evil.example", '"content-digest"' => digest }, key)
+      end
+    end
+  end
 end

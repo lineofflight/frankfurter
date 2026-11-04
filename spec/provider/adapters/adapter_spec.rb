@@ -181,13 +181,72 @@ class Provider < Sequel::Model(:providers)
         end
 
         it "identifies as Frankfurter" do
+          user_agent = "Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)"
           stub = WebMock.stub_request(:get, url)
-            .with(headers: { "User-Agent" => "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)" })
+            .with(headers: { "User-Agent" => user_agent })
             .to_return(status: 200, body: "ok")
 
           client.get(url).to_s
 
           WebMock.assert_requested(stub)
+        end
+
+        it "sends requests unsigned without a Web Bot Auth key" do
+          signature_headers = ["Signature", "Signature-Input", "Signature-Agent"]
+          WebMock.stub_request(:get, url).to_return(status: 200, body: "ok")
+
+          client.get(url).to_s
+
+          WebMock.assert_requested(:get, url) do |request|
+            signature_headers.none? { |name| request.headers.key?(name) }
+          end
+        end
+
+        it "links to the bot page and signs each request once there is a Web Bot Auth key" do
+          key = turn_on_web_bot_auth
+          signed = []
+          WebMock.stub_request(:get, %r{\Ahttps://example\.test:8443/}).to_return do |request|
+            signed << request.headers
+            { status: 200, body: "ok" }
+          end
+
+          client.get("https://Example.Test:8443/rates").to_s
+          client.get("https://Example.Test:8443/more").to_s
+
+          assert_equal(2, signed.size)
+          signed.each do |headers|
+            assert_equal("Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/bot)", headers["User-Agent"])
+            assert_equal('"https://api.frankfurter.dev"', headers["Signature-Agent"])
+            assert_signed(
+              headers,
+              { '"@authority"' => "example.test:8443", '"signature-agent"' => '"https://api.frankfurter.dev"' },
+              key,
+            )
+          end
+          refute_equal(signed.first["Signature"], signed.last["Signature"])
+        end
+
+        it "lets a self-hosted instance sign with its own authority without claiming our bot page" do
+          key = turn_on_web_bot_auth
+          WebBotAuth.authority = "fx.example.test"
+          headers = nil
+          WebMock.stub_request(:get, url).to_return do |request|
+            headers = request.headers
+            { status: 200, body: "ok" }
+          end
+
+          client.get(url).to_s
+
+          assert_equal(
+            "Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)",
+            headers["User-Agent"],
+          )
+          assert_equal('"https://fx.example.test"', headers["Signature-Agent"])
+          assert_signed(
+            headers,
+            { '"@authority"' => "example.test", '"signature-agent"' => '"https://fx.example.test"' },
+            key,
+          )
         end
       end
     end

@@ -4,11 +4,12 @@ require "bigdecimal"
 require "http/cookie"
 require "http"
 require "rate_components"
+require "web_bot_auth"
 
 class Provider < Sequel::Model(:providers)
   module Adapters
     class Adapter
-      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev)"
+      USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)"
 
       # ISO 4217 defines XAU/XAG/XPT/XPD as one troy ounce. Adapters whose source publishes precious-metal rates per
       # gram multiply by this to convert into the per-ounce convention used across the app.
@@ -124,10 +125,10 @@ class Provider < Sequel::Model(:providers)
       # (#576). `*/*` means what the absent header already meant, and adapters needing a specific type override it.
       def http
         @http ||= HTTP
-          .use(ensure_success: { ignore: [429] })
+          .use(:web_bot_auth, ensure_success: { ignore: [429] })
           .retriable(retry_statuses: [429])
           .timeout(connect: 10, write: 60, read: 120)
-          .headers("User-Agent" => USER_AGENT, "Accept" => "*/*")
+          .headers("User-Agent" => WebBotAuth.ours? ? WebBotAuth::USER_AGENT : USER_AGENT, "Accept" => "*/*")
       end
     end
   end
