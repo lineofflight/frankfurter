@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc,bch,eth,ltc,xrp&end_time=2010-07-20&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2010-07-18
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - application/json
+      Connection:
+      - close
+      Host:
+      - community-api.coinmetrics.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 04 Nov 2026 15:11:45 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Access-Control-Expose-Headers:
+      - x-ratelimit-limit, x-ratelimit-remaining, x-ratelimit-reset, x-ratelimit-plan
+      X-Ratelimit-Plan:
+      - download
+      X-Ratelimit-Limit:
+      - 6000, 6000;w=20;comment="sliding window"
+      X-Ratelimit-Remaining:
+      - '5999'
+      X-Ratelimit-Reset:
+      - '20'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a5548d93d94c1c0a-AMS
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"asset":"btc","time":"2010-07-18T00:00:00.000000000Z","PriceUSD":"0.08584"},{"asset":"btc","time":"2010-07-19T00:00:00.000000000Z","PriceUSD":"0.0808"},{"asset":"btc","time":"2010-07-20T00:00:00.000000000Z","PriceUSD":"0.0747357288135593"}]}'
+  recorded_at: Wed, 04 Nov 2026 15:11:45 GMT
+recorded_with: VCR 6.4.0

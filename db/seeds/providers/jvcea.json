@@ -1,0 +1,12 @@
+{
+  "key": "JVCEA",
+  "name": "Japan Virtual and Crypto assets Exchange Association",
+  "country_code": "JP",
+  "rate_type": "reference rate",
+  "pivot_currency": "JPY",
+  "data_url": "https://jvcea.or.jp/statistics/refer_rate/",
+  "terms_url": "https://jvcea.or.jp/statistics/refer_rate/",
+  "publish_schedule": "*/30 8-11 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2020-05-01"
+}

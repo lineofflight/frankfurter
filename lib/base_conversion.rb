@@ -9,10 +9,29 @@ class BaseConversion
   end
 
   def convert
-    rates.group_by { |r| r[:provider] }.flat_map do |provider, group|
+    direct = {}
+    unreached = {}
+
+    rates.group_by { |r| r[:provider] }.each do |provider, group|
       converted = convert_group(group).map { |r| r.merge(provider:) }
-      reconcile(converted)
+      if converted.empty?
+        unreached[provider] = group
+      else
+        direct[provider] = reconcile(converted)
+      end
     end
+
+    rows = direct.values.flatten
+    return rows if unreached.empty? || rows.empty?
+
+    fallback = rows.group_by { |r| r[:quote] }.to_h do |quote, group|
+      [[base, quote], { rate: group.sum { |r| r[:rate] } / group.size }]
+    end
+
+    bridged = unreached.flat_map do |provider, group|
+      reconcile(convert_group(group, fallback).map { |r| r.merge(provider:) })
+    end
+    rows + bridged
   end
 
   private
@@ -30,10 +49,10 @@ class BaseConversion
     end
   end
 
-  def convert_group(group)
+  def convert_group(group, fallback = {})
     # Index rows by [base, quote] once so cross_convert resolves bridges in O(1) instead of rescanning the group per
     # row; keep the first occurrence to match Array#find semantics.
-    index = {}
+    index = fallback.dup
     group.each { |r| index[[r[:base], r[:quote]]] ||= r }
 
     group.filter_map do |rate|

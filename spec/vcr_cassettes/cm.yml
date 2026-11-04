@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc,bch,eth,ltc,xrp&end_time=2026-10-22&metrics=PriceUSD&page_size=10000&paging_from=start&start_time=2026-10-20
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - application/json
+      Connection:
+      - close
+      Host:
+      - community-api.coinmetrics.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 04 Nov 2026 15:11:45 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Access-Control-Expose-Headers:
+      - x-ratelimit-limit, x-ratelimit-remaining, x-ratelimit-reset, x-ratelimit-plan
+      X-Ratelimit-Plan:
+      - download
+      X-Ratelimit-Limit:
+      - 6000, 6000;w=20;comment="sliding window"
+      X-Ratelimit-Remaining:
+      - '5998'
+      X-Ratelimit-Reset:
+      - '20'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a5548d955a59fea7-AMS
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"asset":"bch","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"282.855034233117"},{"asset":"bch","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"286.21796037055"},{"asset":"bch","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"274.482683612637"},{"asset":"btc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"82898.9101560549"},{"asset":"btc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"84176.0796455874"},{"asset":"btc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"81257.0175825248"},{"asset":"eth","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"2446.29682080655"},{"asset":"eth","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"2473.58110337814"},{"asset":"eth","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"2382.64542241964"},{"asset":"ltc","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"61.3799396020135"},{"asset":"ltc","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"61.3970314449861"},{"asset":"ltc","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"58.662754709489"},{"asset":"xrp","time":"2026-10-20T00:00:00.000000000Z","PriceUSD":"1.33415446414505"},{"asset":"xrp","time":"2026-10-21T00:00:00.000000000Z","PriceUSD":"1.36439549988007"},{"asset":"xrp","time":"2026-10-22T00:00:00.000000000Z","PriceUSD":"1.30628248893106"}]}'
+  recorded_at: Wed, 04 Nov 2026 15:11:45 GMT
+recorded_with: VCR 6.4.0

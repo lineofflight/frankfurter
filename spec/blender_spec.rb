@@ -107,4 +107,21 @@ describe Blender do
       { key: "D", date: date, rate: 9.99, excluded: true },
     ])
   end
+
+  it "bridges a provider that does not quote the blend base through the blended pivot rate" do
+    rates = [
+      { date: date, base: "USD", quote: "JPY", rate: 150.0, provider: "BOJ" },
+      { date: date, base: "BTC", quote: "USD", rate: 80_000.0, provider: "CM" },
+      { date: date, base: "BTC", quote: "JPY", rate: 12_150_000.0, provider: "JVCEA" },
+      { date: date, base: "ETH", quote: "JPY", rate: 375_000.0, provider: "JVCEA" },
+    ]
+
+    result = Blender.new(rates, base: "USD").blend
+    btc = result.find { |r| r[:quote] == "BTC" }
+    jpy = result.find { |r| r[:quote] == "JPY" }
+
+    _(btc[:providers].map { |p| p[:key] }.sort).must_equal(["CM", "JVCEA"])
+    _(btc[:rate]).must_be_close_to(((1.0 / 80_000.0) + (150.0 / 12_150_000.0)) / 2.0, 1e-10)
+    _(jpy[:providers].map { |p| p[:key] }).must_equal(["BOJ"])
+  end
 end
