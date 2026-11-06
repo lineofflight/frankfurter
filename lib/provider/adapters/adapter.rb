@@ -3,7 +3,10 @@
 require "bigdecimal"
 require "http/cookie"
 require "http"
+require "openssl"
 require "rate_components"
+require "socket"
+require "timeout"
 require "web_bot_auth"
 
 class Provider < Sequel::Model(:providers)
@@ -43,6 +46,127 @@ class Provider < Sequel::Model(:providers)
         end
 
         HTTP::Options.register_feature(:ensure_success, self)
+      end
+
+      # Some provider sites serve their leaf certificate without the intermediate that issued it (or alongside a stale
+      # one), so OpenSSL fails with "unable to get local issuer certificate". Browsers fetch the missing link on the fly
+      # from the leaf's Authority Information Access (CA Issuers) extension; OpenSSL does not. When a handshake fails
+      # for a missing issuer, read the peer's leaf, walk its CA Issuers links, and add the fetched intermediates to
+      # Ruby's default trust store once OpenSSL confirms the chain reaches a system root.
+      class CompleteChain < HTTP::Feature
+        ISSUER_ERROR = /unable to get (?:local )?issuer certificate/
+        CA_ISSUERS_URI = %r{CA Issuers - URI:(https?://\S+)}
+        MAX_DEPTH = 3
+        TIMEOUT = 10
+        MUTEX = Mutex.new
+
+        def initialize(store: OpenSSL::SSL::SSLContext::DEFAULT_CERT_STORE)
+          super()
+          @store = store
+        end
+
+        def around_request(request)
+          chased = false
+          begin
+            yield request
+          rescue OpenSSL::SSL::SSLError => e
+            raise if chased || !e.message.match?(ISSUER_ERROR) || !complete_chain?(request.uri)
+
+            chased = true
+            retry
+          end
+        end
+
+        private
+
+        def complete_chain?(uri)
+          return false unless uri.https?
+
+          leaf = fetch_leaf(uri.host, uri.port || 443)
+          return false unless leaf
+
+          certs = []
+          seen = [leaf.to_der]
+          current = leaf
+          MAX_DEPTH.times do
+            fetched = fetch_issuers(current)
+            break if fetched.empty?
+
+            fetched.each { |c| certs << c unless certs.any? { |existing| existing.to_der == c.to_der } }
+            advanced = false
+            while (issuer = certs.find { |c| !seen.include?(c.to_der) && issued_by?(current, c) })
+              seen << issuer.to_der
+              current = issuer
+              advanced = true
+            end
+            break unless advanced
+
+            next unless (intermediates = verified_intermediates(leaf, certs))
+
+            MUTEX.synchronize do
+              intermediates.each { |cert| add_cert(cert) }
+            end
+            return true
+          end
+
+          false
+        end
+
+        def fetch_leaf(host, port)
+          Socket.tcp(host, port, connect_timeout: TIMEOUT) do |tcp|
+            context = OpenSSL::SSL::SSLContext.new
+            context.verify_mode = OpenSSL::SSL::VERIFY_NONE
+            ssl = OpenSSL::SSL::SSLSocket.new(tcp, context)
+            ssl.hostname = host
+            Timeout.timeout(TIMEOUT) { ssl.connect }
+            ssl.peer_cert
+          ensure
+            ssl&.close
+          end
+        rescue StandardError
+          nil
+        end
+
+        def fetch_issuers(cert)
+          ext = cert.extensions.find { |e| e.oid == "authorityInfoAccess" }
+          url = ext&.value&.slice(CA_ISSUERS_URI, 1)
+          return [] unless url
+
+          response = HTTP.timeout(connect: TIMEOUT, write: TIMEOUT, read: TIMEOUT).follow(max_hops: 3).get(url)
+          return [] unless response.status.success?
+
+          parse_certificates(response.to_s)
+        rescue StandardError
+          []
+        end
+
+        def parse_certificates(bytes)
+          OpenSSL::X509::Certificate.load(bytes)
+        rescue OpenSSL::X509::CertificateError
+          OpenSSL::PKCS7.new(bytes).certificates || []
+        end
+
+        def issued_by?(child, issuer)
+          child.issuer == issuer.subject && child.verify(issuer.public_key)
+        rescue OpenSSL::X509::CertificateError, OpenSSL::PKey::PKeyError
+          false
+        end
+
+        def verified_intermediates(leaf, certs)
+          ctx = OpenSSL::X509::StoreContext.new(@store, leaf, certs)
+          return unless ctx.verify
+
+          intermediates = ctx.chain&.slice(1..-2)
+          intermediates if intermediates&.any?
+        end
+
+        def add_cert(cert)
+          @store.add_cert(cert)
+        rescue OpenSSL::X509::StoreError
+          # Already in store.
+        end
+
+        HTTP::Options.register_feature(:complete_chain, self)
       end
 
       class << self
@@ -125,7 +249,7 @@ class Provider < Sequel::Model(:providers)
       # (#576). `*/*` means what the absent header already meant, and adapters needing a specific type override it.
       def http
         @http ||= HTTP
-          .use(:web_bot_auth, ensure_success: { ignore: [429] })
+          .use(:complete_chain, :web_bot_auth, ensure_success: { ignore: [429] })
           .retriable(retry_statuses: [429])
           .timeout(connect: 10, write: 60, read: 120)
           .headers("User-Agent" => WebBotAuth.ours? ? WebBotAuth::USER_AGENT : USER_AGENT, "Accept" => "*/*")

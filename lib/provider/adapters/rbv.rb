@@ -17,8 +17,6 @@ class Provider < Sequel::Model(:providers)
     #
     # Rates are VUV per 1 unit of foreign currency. JPY is published per single unit (not per 100), so no normalization
     # is needed.
-    #
-    # TLS quirk: www.rbv.gov.vu omits its Trustico intermediate; see config/ca_bundles.
     class RBV < Adapter
       URL = "https://www.rbv.gov.vu/index.php/en/exchange-rates"
       PAGE_SIZE = 100_000

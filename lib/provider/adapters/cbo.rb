@@ -20,8 +20,6 @@ class Provider
     # Rates are OMR per unit of foreign currency (1 USD = 0.3845 OMR), so foreign goes in base and OMR in quote,
     # matching the pivot-in-quote convention of NBG and BBK. Buy and sell are coerced to a mid via midpoint. A date can
     # carry several intraday rows when the bank revised its fixing; the latest timestamp wins.
-    #
-    # TLS quirk: cbo.gov.om omits its DigiCert intermediate; see config/ca_bundles.
     class CBO < Adapter
       URL = "https://cbo.gov.om/Pages/DFESearch.aspx"
 

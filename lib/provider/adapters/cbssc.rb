@@ -24,8 +24,6 @@ class Provider
     # The workbook stores the raw dealer average to full float precision (14.616577838181803) while every published view
     # of the same figure (the CAR page, the archived feed) shows four decimals. Round to four so a day caught live and
     # the same day read from the workbook agree.
-    #
-    # TLS quirk: www.cbs.sc omits its Sectigo intermediate; see config/ca_bundles.
     class CBSSC < Adapter
       ARCHIVE_URL = "https://www.cbs.sc/Downloads/StaExcel/Exchange%20Rates-Daily.xlsx"
       LIVE_URL = "https://www.cbs.sc/Controller/MarketinfoController.jsp"

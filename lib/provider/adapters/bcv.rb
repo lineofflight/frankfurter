@@ -35,8 +35,6 @@ class Provider
     # sheet, before and after, prices "VES". The first post-redenomination value date is 2021-10-04, and the series
     # starts there so the two scales never share a code.
     #
-    # TLS quirk: www.bcv.org.ve sends a stale Sectigo intermediate that did not issue its leaf; see config/ca_bundles.
-    #
     # Rates are emitted in BCV's native direction: foreign currency as base, VES as quote (1 USD = X VES).
     class BCV < Adapter
       DATA_URL = "https://www.bcv.org.ve/estadisticas/tipo-cambio-de-referencia-smc"
