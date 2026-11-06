@@ -8,6 +8,8 @@ class Provider
   module Adapters
     # Banky Foiben'i Madagasikara. Published reference rates in ariary per foreign unit. MID means the interbank FX
     # market; coursMid is the reference, while coursMidMin/Max are daily extremes, not bid/ask prices.
+    #
+    # TLS quirk: www.banky-foibe.mg omits its SSL.com intermediate; see config/ca_bundles.
     class BFM < Adapter
       URL = "https://www.banky-foibe.mg/admin/wp-json/bfm/cours_mid_en_ar_filter"
       COVERAGE_START = Date.new(2018, 1, 2)
