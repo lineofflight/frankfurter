@@ -215,7 +215,10 @@ class Provider < Sequel::Model(:providers)
 
           assert_equal(2, signed.size)
           signed.each do |headers|
-            assert_equal("Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/requests)", headers["User-Agent"])
+            assert_equal(
+              "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/requests)",
+              headers["User-Agent"],
+            )
             assert_equal('"https://api.frankfurter.dev"', headers["Signature-Agent"])
             assert_signed(
               headers,
