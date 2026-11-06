@@ -15,6 +15,14 @@ describe "Currency patches" do
     end
   end
 
+  it "registers every crypto asset, codes longer than three letters included" do
+    require "currency"
+
+    _(Currency::CRYPTO.reject { |code| Money::Currency.find(code) }).must_be_empty
+    _(Money::Currency.find("USDT").name).must_equal("Tether")
+    _(Money::Currency.find("USDC").name).must_equal("USD Coin")
+  end
+
   it "names retired currencies after CLDR" do
     _(Money::Currency.find("VEB").name).must_equal("Venezuelan Bolívar (1871–2008)")
     _(Money::Currency.find("VEF").name).must_equal("Venezuelan Bolívar (2008–2018)")

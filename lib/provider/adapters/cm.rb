@@ -13,8 +13,9 @@ class Provider
     class CM < Adapter
       API_URL = "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics"
       ASSETS = [
-        "ada", "bch", "btc", "dot", "etc", "eth", "fil", "ltc",
-        "pol", "sol", "sui", "uni", "xlm", "xrp", "xtz", "zec",
+        "aave", "ada", "algo", "apt", "arb", "atom", "avax", "axs", "bch", "btc", "chz", "crv",
+        "dot", "ena", "etc", "eth", "fil", "hbar", "icp", "link", "ltc", "mana", "near", "ondo",
+        "pol", "snx", "sol", "sui", "uni", "usdc", "usdt", "xlm", "xrp", "xtz", "zec",
       ].freeze
       COVERAGE_START = Date.new(2010, 7, 18)
 
