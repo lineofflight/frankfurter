@@ -655,6 +655,39 @@ describe Versions::V2 do
     _(Oj.load(last_response.body)["type"]).must_equal("crypto")
   end
 
+  it "serves crypto assets with codes longer than three letters and sub-cent prices" do
+    require "provider/adapters/cm"
+
+    date = Fixtures.latest_date
+    records = [
+      { date:, base: "USDT", quote: "USD", rate: 0.99987 },
+      { date:, base: "ONDO", quote: "USD", rate: 4.123456789e-06 },
+    ]
+    Provider::Adapters::CM.stub(:fetch_each, ->(**, &block) { block.call(records) }) do
+      Provider["CM"].backfill(after: date - 1)
+    end
+
+    get "/rate/usdt/usd"
+
+    assert_conform_schema(200)
+    _(json["rate"]).must_equal(0.99987)
+
+    get "/rate/ONDO/USD"
+
+    _(last_response.body).must_include('"rate":0.0000041235')
+
+    get "/providers/CM/rate/ONDO/USD"
+
+    _(last_response.body).must_include('"rate":0.000004123456789')
+
+    get "/currency/usdt"
+
+    assert_conform_schema(200)
+    usdt = Oj.load(last_response.body)
+
+    _(usdt.values_at("name", "type", "providers")).must_equal(["Tether", "crypto", ["CM"]])
+  end
+
   it "returns COMESA Dollar as a named accounting unit" do
     date = Fixtures.latest_date
     Rate.dataset.multi_insert([

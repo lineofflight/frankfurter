@@ -11,8 +11,9 @@ class Currency < Sequel::Model(:currencies)
   METALS = ["XAG", "XAU", "XPD", "XPT"].freeze
   # The coins our crypto providers (CM, ESTV, JVCEA) value.
   CRYPTO = [
-    "ADA", "BCH", "BTC", "DOT", "ETC", "ETH", "FIL", "LTC",
-    "POL", "SOL", "SUI", "UNI", "XLM", "XRP", "XTZ", "ZEC",
+    "AAVE", "ADA", "ALGO", "APT", "ARB", "ATOM", "AVAX", "AXS", "BCH", "BTC", "CHZ", "CRV",
+    "DOT", "ENA", "ETC", "ETH", "FIL", "HBAR", "ICP", "LINK", "LTC", "MANA", "NEAR", "ONDO",
+    "POL", "SNX", "SOL", "SUI", "UNI", "USDC", "USDT", "XLM", "XRP", "XTZ", "ZEC",
   ].freeze
 
   unrestrict_primary_key
