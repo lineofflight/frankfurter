@@ -202,7 +202,7 @@ class Provider < Sequel::Model(:providers)
           end
         end
 
-        it "links to the bot page and signs each request once there is a Web Bot Auth key" do
+        it "links to the requests page and signs each request once there is a Web Bot Auth key" do
           key = turn_on_web_bot_auth
           signed = []
           WebMock.stub_request(:get, %r{\Ahttps://example\.test:8443/}).to_return do |request|
@@ -215,7 +215,7 @@ class Provider < Sequel::Model(:providers)
 
           assert_equal(2, signed.size)
           signed.each do |headers|
-            assert_equal("Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/bot)", headers["User-Agent"])
+            assert_equal("Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/requests)", headers["User-Agent"])
             assert_equal('"https://api.frankfurter.dev"', headers["Signature-Agent"])
             assert_signed(
               headers,
@@ -226,7 +226,7 @@ class Provider < Sequel::Model(:providers)
           refute_equal(signed.first["Signature"], signed.last["Signature"])
         end
 
-        it "lets a self-hosted instance sign with its own authority without claiming our bot page" do
+        it "lets a self-hosted instance sign with its own authority without claiming our requests page" do
           key = turn_on_web_bot_auth
           WebBotAuth.authority = "fx.example.test"
           headers = nil

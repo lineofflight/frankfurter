@@ -20,7 +20,7 @@ module WebBotAuth
   DEFAULT_AUTHORITY = "api.frankfurter.dev"
   DIRECTORY = "/.well-known/http-message-signatures-directory"
   MEDIA_TYPE = "application/http-message-signatures-directory+json"
-  USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/bot)"
+  USER_AGENT = "Mozilla/5.0 (compatible; Frankfurter; +https://frankfurter.dev/requests)"
 
   # How long a request's signature holds: room for a slow request and a clock a little off. The draft recommends under a
   # day, Cloudflare a minute.
