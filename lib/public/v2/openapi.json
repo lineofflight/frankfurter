@@ -296,7 +296,7 @@
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/CurrencyDetail" },
-                "example": { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "providers": ["ECB", "BOC", "FED"] }
+                "example": { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "type": "currency", "providers": ["ECB", "BOC", "FED"] }
               }
             }
           },
@@ -308,7 +308,7 @@
       "get": {
         "operationId": "getCurrencies",
         "summary": "Get available currencies",
-        "description": "Returns available currencies with their names and publication date ranges. Without providers, the catalogue covers eligible daily sources plus pegged currencies; scope=all also includes historical currencies. With providers, it covers recognized currencies published by those sources, including period-only history. These dates do not guarantee a queryable base/quote pair; use /coverage with matching query filters. By default, only active currencies are included.",
+        "description": "Returns available currencies, precious metals and crypto assets with their names, types and publication date ranges. Without providers, the catalogue covers eligible daily sources plus pegged currencies; scope=all also includes historical currencies. With providers, it covers recognized currencies published by those sources, including period-only history. These dates do not guarantee a queryable base/quote pair; use /coverage with matching query filters. By default, only active currencies are included.",
         "parameters": [
           {
             "name": "scope",
@@ -329,8 +329,8 @@
                   "items": { "$ref": "#/components/schemas/Currency" }
                 },
                 "example": [
-                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "start_date": "1999-01-04", "end_date": "2026-03-17" },
-                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "start_date": "1999-01-04", "end_date": "2026-03-17" }
+                  { "iso_code": "EUR", "iso_numeric": "978", "name": "Euro", "symbol": "\u20ac", "type": "currency", "start_date": "1999-01-04", "end_date": "2026-03-17" },
+                  { "iso_code": "USD", "iso_numeric": "840", "name": "United States Dollar", "symbol": "$", "type": "currency", "start_date": "1999-01-04", "end_date": "2026-03-17" }
                 ]
               }
             }
@@ -509,10 +509,11 @@
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "type": { "type": "string", "enum": ["currency", "metal", "crypto"], "description": "Asset class: a currency or accounting unit, a precious metal, or a crypto asset" },
           "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date; use /coverage for queryable pairs" },
           "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date; use /coverage for queryable pairs" }
         },
-        "required": ["iso_code", "name"]
+        "required": ["iso_code", "name", "type"]
       },
       "CurrencyDetail": {
         "type": "object",
@@ -521,6 +522,7 @@
           "iso_numeric": { "type": ["string", "null"], "description": "ISO 4217 numeric code" },
           "name": { "type": "string", "description": "Full currency name" },
           "symbol": { "type": ["string", "null"], "description": "Currency symbol" },
+          "type": { "type": "string", "enum": ["currency", "metal", "crypto"], "description": "Asset class: a currency or accounting unit, a precious metal, or a crypto asset" },
           "providers": {
             "type": "array",
             "items": { "type": "string" },
@@ -537,7 +539,7 @@
             "description": "Peg metadata, present only for pegged currencies"
           }
         },
-        "required": ["iso_code", "name"]
+        "required": ["iso_code", "name", "type"]
       },
       "Provider": {
         "type": "object",

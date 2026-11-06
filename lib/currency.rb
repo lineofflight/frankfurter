@@ -8,6 +8,13 @@ require "peg"
 # Model backed by the materialized currencies table. Populated incrementally during Provider#backfill. Derives one row
 # per currency with date range.
 class Currency < Sequel::Model(:currencies)
+  METALS = ["XAG", "XAU", "XPD", "XPT"].freeze
+  # The coins our crypto providers (CM, ESTV, JVCEA) value.
+  CRYPTO = [
+    "ADA", "BCH", "BTC", "DOT", "ETC", "ETH", "FIL", "LTC",
+    "POL", "SOL", "SUI", "UNI", "XLM", "XRP", "XTZ", "ZEC",
+  ].freeze
+
   unrestrict_primary_key
 
   one_to_many :currency_coverages, key: :iso_code
@@ -106,9 +113,18 @@ class Currency < Sequel::Model(:currencies)
       iso_numeric: iso_numeric,
       name: metadata&.name || iso_code,
       symbol: metadata&.symbol,
+      type:,
       start_date: start_date.to_s,
       end_date: end_date.to_s,
     }
+  end
+
+  def type
+    case iso_code
+    when *METALS then "metal"
+    when *CRYPTO then "crypto"
+    else "currency"
+    end
   end
 
   # The Money gem writes "" for currencies without a numeric code (BTC, CNH, JEP); the API documents null.

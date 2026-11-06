@@ -90,6 +90,26 @@ describe Currency do
     _(btc.to_h[:iso_numeric]).must_be_nil
   end
 
+  it "types metals, crypto and everything else" do
+    types = ["XAU", "XPD", "BTC", "ETH", "USD", "XDR", "CNH", "GGP", "CMD"].to_h do |code|
+      [code, Currency.new(iso_code: code).to_h[:type]]
+    end
+
+    _(types).must_equal(
+      "XAU" => "metal", "XPD" => "metal", "BTC" => "crypto", "ETH" => "crypto", "USD" => "currency",
+      "XDR" => "currency", "CNH" => "currency", "GGP" => "currency", "CMD" => "currency",
+    )
+  end
+
+  it "types every coin a crypto provider values as crypto" do
+    require "provider/adapters/cm"
+    require "provider/adapters/jvcea"
+
+    coins = Provider::Adapters::CM::ASSETS.map(&:upcase) | Provider::Adapters::JVCEA::PAIRS
+
+    _(coins - Currency::CRYPTO).must_be_empty
+  end
+
   it "includes providers" do
     usd = Currency.find("USD")
 
