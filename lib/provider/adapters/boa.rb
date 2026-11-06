@@ -17,8 +17,6 @@ class Provider
     # The XLSX URL embeds the publication year and month under /stoodroa/YYYY/MM/, so the adapter scrapes the
     # donnees-historiques hub for the current link rather than hardcoding a path.
     #
-    # TLS quirk: bank-of-algeria.dz omits its DigiCert intermediate; see config/ca_bundles.
-    #
     # Each sheet is named "<CCY> - DZD" (with "EURO" used in place of "EUR") and contains two columns: Excel serial
     # dates in column A, "1 CCY = X DZD" rates in column B. We emit records with the foreign currency as base and DZD as
     # quote. JPY is published per 100, normalised here.

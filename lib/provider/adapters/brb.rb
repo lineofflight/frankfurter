@@ -24,8 +24,6 @@ class Provider
     #
     # Direction: foreign currency in base, BIF in quote (1 foreign = X BIF), matching the convention used by other
     # pivot-in-quote adapters (e.g. NBG, BBK).
-    #
-    # TLS quirk: www.brb.bi omits its RapidSSL intermediate; see config/ca_bundles.
     class BRB < Adapter
       HOST = "https://www.brb.bi"
       INDEX_URL = "#{HOST}/en/affichagetoustauxchange".freeze

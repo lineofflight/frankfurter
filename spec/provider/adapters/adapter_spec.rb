@@ -248,6 +248,159 @@ class Provider < Sequel::Model(:providers)
             key,
           )
         end
+
+        describe "TLS chain completion" do
+          let(:store) { OpenSSL::X509::Store.new }
+
+          before { WebMock.disable_net_connect!(allow_localhost: true) }
+          after { WebMock.disable_net_connect! }
+
+          def issue_cert(common_name, issuer: nil, issuer_key: nil, ca_cert: false, ca_issuers_url: nil, san: nil)
+            key = OpenSSL::PKey::EC.generate("prime256v1")
+            cert = OpenSSL::X509::Certificate.new
+            cert.version = 2
+            cert.serial = Random.rand(1..1_000_000)
+            cert.subject = OpenSSL::X509::Name.parse("/CN=#{common_name}")
+            cert.issuer = issuer ? issuer.subject : cert.subject
+            cert.public_key = key
+            cert.not_before = Time.now - 60
+            cert.not_after = Time.now + 3600
+
+            ef = OpenSSL::X509::ExtensionFactory.new
+            ef.subject_certificate = cert
+            ef.issuer_certificate = issuer || cert
+            cert.add_extension(ef.create_extension("basicConstraints", ca_cert ? "CA:TRUE" : "CA:FALSE", true))
+            cert.add_extension(ef.create_extension("subjectKeyIdentifier", "hash", false))
+            cert.add_extension(ef.create_extension("authorityKeyIdentifier", "keyid:always", false))
+            cert.add_extension(ef.create_extension("subjectAltName", san, false)) if san
+            if ca_issuers_url
+              cert.add_extension(ef.create_extension("authorityInfoAccess", "CA Issuers;URI:#{ca_issuers_url}", false))
+            end
+
+            cert.sign(issuer_key || key, OpenSSL::Digest.new("SHA256"))
+            [cert, key]
+          end
+
+          def with_tls_server(cert, key)
+            tcp_server = TCPServer.new("127.0.0.1", 0)
+            port = tcp_server.addr[1]
+            ctx = OpenSSL::SSL::SSLContext.new
+            ctx.cert = cert
+            ctx.key = key
+            ssl_server = OpenSSL::SSL::SSLServer.new(tcp_server, ctx)
+            ssl_server.start_immediately = true
+
+            thread = Thread.new do
+              loop do
+                client_sock = ssl_server.accept
+                begin
+                  if client_sock.gets
+                    client_sock.write("HTTP/1.1 200 OK\r\nContent-Length: 2\r\nConnection: close\r\n\r\nok")
+                  end
+                rescue OpenSSL::SSL::SSLError, IOError, SystemCallError
+                  # Expected on the initial failed handshake and the leaf-inspection probe.
+                ensure
+                  client_sock&.close
+                end
+              rescue IOError, OpenSSL::SSL::SSLError, SystemCallError
+                break if tcp_server.closed?
+              end
+            end
+
+            VCR.turned_off do
+              yield "https://127.0.0.1:#{port}/rates"
+            end
+          ensure
+            thread&.kill
+            tcp_server&.close
+          end
+
+          it "fetches a missing intermediate from CA Issuers, verifies it against the root store, and retries" do
+            root, root_key = issue_cert("Root CA", ca_cert: true)
+            intermediate, inter_key = issue_cert("Intermediate CA", issuer: root, issuer_key: root_key, ca_cert: true)
+            leaf, leaf_key = issue_cert(
+              "127.0.0.1",
+              issuer: intermediate,
+              issuer_key: inter_key,
+              ca_issuers_url: "http://ca.example.test/intermediate.cer",
+              san: "IP:127.0.0.1",
+            )
+            store.add_cert(root)
+
+            WebMock.stub_request(:get, "http://ca.example.test/intermediate.cer")
+              .to_return(status: 200, body: intermediate.to_der)
+
+            with_tls_server(leaf, leaf_key) do |server_url|
+              chasing_client = HTTP.use(complete_chain: { store: })
+              response = chasing_client.get(server_url, ssl: { cert_store: store })
+
+              assert_equal("ok", response.to_s)
+              assert(store.verify(leaf))
+            end
+          end
+
+          it "walks multiple missing intermediates up to a trusted root" do
+            root, root_key = issue_cert("Root CA", ca_cert: true)
+            inter1, inter1_key = issue_cert("Intermediate 1", issuer: root, issuer_key: root_key, ca_cert: true)
+            inter2, inter2_key = issue_cert(
+              "Intermediate 2",
+              issuer: inter1,
+              issuer_key: inter1_key,
+              ca_cert: true,
+              ca_issuers_url: "http://ca.example.test/inter1.cer",
+            )
+            leaf, leaf_key = issue_cert(
+              "127.0.0.1",
+              issuer: inter2,
+              issuer_key: inter2_key,
+              ca_issuers_url: "http://ca.example.test/inter2.cer",
+              san: "IP:127.0.0.1",
+            )
+            store.add_cert(root)
+
+            WebMock.stub_request(:get, "http://ca.example.test/inter2.cer")
+              .to_return(status: 200, body: inter2.to_der)
+            WebMock.stub_request(:get, "http://ca.example.test/inter1.cer")
+              .to_return(status: 200, body: inter1.to_der)
+
+            with_tls_server(leaf, leaf_key) do |server_url|
+              chasing_client = HTTP.use(complete_chain: { store: })
+              response = chasing_client.get(server_url, ssl: { cert_store: store })
+
+              assert_equal("ok", response.to_s)
+              assert(store.verify(leaf))
+            end
+          end
+
+          it "rejects an intermediate that does not chain to a trusted root" do
+            untrusted_root, untrusted_key = issue_cert("Untrusted Root", ca_cert: true)
+            intermediate, inter_key = issue_cert(
+              "Untrusted Intermediate",
+              issuer: untrusted_root,
+              issuer_key: untrusted_key,
+              ca_cert: true,
+            )
+            leaf, leaf_key = issue_cert(
+              "127.0.0.1",
+              issuer: intermediate,
+              issuer_key: inter_key,
+              ca_issuers_url: "http://ca.example.test/intermediate.cer",
+              san: "IP:127.0.0.1",
+            )
+
+            WebMock.stub_request(:get, "http://ca.example.test/intermediate.cer")
+              .to_return(status: 200, body: intermediate.to_der)
+
+            with_tls_server(leaf, leaf_key) do |server_url|
+              chasing_client = HTTP.use(complete_chain: { store: })
+
+              assert_raises(OpenSSL::SSL::SSLError) do
+                chasing_client.get(server_url, ssl: { cert_store: store })
+              end
+              refute(store.verify(leaf))
+            end
+          end
+        end
       end
     end
   end
