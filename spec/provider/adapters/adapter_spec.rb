@@ -400,6 +400,35 @@ class Provider < Sequel::Model(:providers)
               refute(store.verify(leaf))
             end
           end
+
+          it "extracts only the verified intermediate from a multi-certificate PKCS#7 bundle" do
+            root, root_key = issue_cert("Root CA", ca_cert: true)
+            intermediate, inter_key = issue_cert("Intermediate CA", issuer: root, issuer_key: root_key, ca_cert: true)
+            rogue_ca, rogue_key = issue_cert("Rogue CA", ca_cert: true)
+            leaf, leaf_key = issue_cert(
+              "127.0.0.1",
+              issuer: intermediate,
+              issuer_key: inter_key,
+              ca_issuers_url: "http://ca.example.test/bundle.p7c",
+              san: "IP:127.0.0.1",
+            )
+            store.add_cert(root)
+
+            p7 = OpenSSL::PKCS7.sign(rogue_ca, rogue_key, "", [intermediate], OpenSSL::PKCS7::NOCERTS)
+            p7.certificates = [rogue_ca, intermediate]
+
+            WebMock.stub_request(:get, "http://ca.example.test/bundle.p7c")
+              .to_return(status: 200, body: p7.to_der)
+
+            with_tls_server(leaf, leaf_key) do |server_url|
+              chasing_client = HTTP.use(complete_chain: { store: })
+              response = chasing_client.get(server_url, ssl: { cert_store: store })
+
+              assert_equal("ok", response.to_s)
+              assert(store.verify(leaf))
+              refute(store.verify(rogue_ca))
+            end
+          end
         end
       end
     end

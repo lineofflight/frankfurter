@@ -86,23 +86,30 @@ class Provider < Sequel::Model(:providers)
           return false unless leaf
 
           certs = []
+          seen = [leaf.to_der]
           current = leaf
           MAX_DEPTH.times do
-            break if @store.verify(leaf, certs)
+            fetched = fetch_issuers(current)
+            break if fetched.empty?
 
-            issuer = fetch_issuer(current)
-            break if !issuer || certs.any? { |c| c.to_der == issuer.to_der }
+            fetched.each { |c| certs << c unless certs.any? { |existing| existing.to_der == c.to_der } }
+            advanced = false
+            while (issuer = certs.find { |c| !seen.include?(c.to_der) && issued_by?(current, c) })
+              seen << issuer.to_der
+              current = issuer
+              advanced = true
+            end
+            break unless advanced
 
-            certs << issuer
-            current = issuer
+            next unless (intermediates = verified_intermediates(leaf, certs))
+
+            MUTEX.synchronize do
+              intermediates.each { |cert| add_cert(cert) }
+            end
+            return true
           end
 
-          return false unless certs.any? && @store.verify(leaf, certs)
-
-          MUTEX.synchronize do
-            certs.each { |cert| add_cert(cert) }
-          end
-          true
+          false
         end
 
         def fetch_leaf(host, port)
@@ -120,23 +127,37 @@ class Provider < Sequel::Model(:providers)
           nil
         end
 
-        def fetch_issuer(cert)
+        def fetch_issuers(cert)
           ext = cert.extensions.find { |e| e.oid == "authorityInfoAccess" }
           url = ext&.value&.slice(CA_ISSUERS_URI, 1)
-          return unless url
+          return [] unless url
 
           response = HTTP.timeout(connect: TIMEOUT, write: TIMEOUT, read: TIMEOUT).follow(max_hops: 3).get(url)
-          return unless response.status.success?
+          return [] unless response.status.success?
 
-          parse_certificate(response.to_s)
+          parse_certificates(response.to_s)
         rescue StandardError
-          nil
+          []
         end
 
-        def parse_certificate(bytes)
-          OpenSSL::X509::Certificate.new(bytes)
+        def parse_certificates(bytes)
+          OpenSSL::X509::Certificate.load(bytes)
         rescue OpenSSL::X509::CertificateError
-          OpenSSL::PKCS7.new(bytes).certificates&.first
+          OpenSSL::PKCS7.new(bytes).certificates || []
+        end
+
+        def issued_by?(child, issuer)
+          child.issuer == issuer.subject && child.verify(issuer.public_key)
+        rescue OpenSSL::X509::CertificateError, OpenSSL::PKey::PKeyError
+          false
+        end
+
+        def verified_intermediates(leaf, certs)
+          ctx = OpenSSL::X509::StoreContext.new(@store, leaf, certs)
+          return unless ctx.verify
+
+          intermediates = ctx.chain&.slice(1..-2)
+          intermediates if intermediates&.any?
         end
 
         def add_cert(cert)
