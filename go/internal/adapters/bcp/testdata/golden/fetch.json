@@ -1,0 +1,247 @@
+{
+  "adapter": "BCP",
+  "cassette": "bcp",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2024, 6, 2), upto: Date.new(2024, 6, 5))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 2050.0
+    },
+    {
+      "base": "ARS",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 8.4
+    },
+    {
+      "base": "AUD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 5032.2
+    },
+    {
+      "base": "BOB",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 1099.01
+    },
+    {
+      "base": "BRL",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 1438.31
+    },
+    {
+      "base": "CAD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 5526.09
+    },
+    {
+      "base": "CHF",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 8408.54
+    },
+    {
+      "base": "CLP",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 8.33
+    },
+    {
+      "base": "CNY",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 1039.75
+    },
+    {
+      "base": "COP",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 1.95
+    },
+    {
+      "base": "DKK",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 1099.41
+    },
+    {
+      "base": "EUR",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 8199.25
+    },
+    {
+      "base": "GBP",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 9632.18
+    },
+    {
+      "base": "JPY",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 48.26
+    },
+    {
+      "base": "MXN",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 428.05
+    },
+    {
+      "base": "NOK",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 719.79
+    },
+    {
+      "base": "NZD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 4655.71
+    },
+    {
+      "base": "PEN",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 2019.32
+    },
+    {
+      "base": "SEK",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 723.56
+    },
+    {
+      "base": "SGD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 5590.92
+    },
+    {
+      "base": "TWD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 232.43
+    },
+    {
+      "base": "USD",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 7529.85
+    },
+    {
+      "base": "UYU",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 194.29
+    },
+    {
+      "base": "XAU",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 17639727.8
+    },
+    {
+      "base": "ZAR",
+      "date": "2024-06-03",
+      "quote": "PYG",
+      "rate": 407.06
+    },
+    {
+      "base": "AUD",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 5002.9
+    },
+    {
+      "base": "CAD",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 5504.0
+    },
+    {
+      "base": "CHF",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 8462.22
+    },
+    {
+      "base": "EUR",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 8193.55
+    },
+    {
+      "base": "GBP",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 9629.19
+    },
+    {
+      "base": "JPY",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 48.65
+    },
+    {
+      "base": "USD",
+      "date": "2024-06-04",
+      "quote": "PYG",
+      "rate": 7532.22
+    },
+    {
+      "base": "AUD",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 4999.97
+    },
+    {
+      "base": "CAD",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 5494.4
+    },
+    {
+      "base": "CHF",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 8422.91
+    },
+    {
+      "base": "EUR",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 8179.93
+    },
+    {
+      "base": "GBP",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 9613.65
+    },
+    {
+      "base": "JPY",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 48.2
+    },
+    {
+      "base": "USD",
+      "date": "2024-06-05",
+      "quote": "PYG",
+      "rate": 7530.08
+    }
+  ]
+}

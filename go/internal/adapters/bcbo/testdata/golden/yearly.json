@@ -1,0 +1,29 @@
+{
+  "adapter": "BCBO",
+  "cassette": "bcbo",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2007, 12, 27), upto: Date.new(2007, 12, 28))",
+  "rows": [
+    {
+      "ask": 7.69,
+      "base": "USD",
+      "bid": 7.59,
+      "date": "2007-12-27",
+      "quote": "BOB",
+      "rate": 7.64
+    },
+    {
+      "ask": 7.69,
+      "base": "USD",
+      "bid": 7.59,
+      "date": "2007-12-28",
+      "quote": "BOB",
+      "rate": 7.64
+    }
+  ]
+}

@@ -1,0 +1,1003 @@
+{
+  "adapter": "BCRA",
+  "cassette": "bcra",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 16), upto: Date.new(2026, 3, 20))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 983.81975
+    },
+    {
+      "base": "AWG",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 779.050279
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 202.189358
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 266.065023
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1015.88111
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1764.296559
+    },
+    {
+      "base": "CLP",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1.527232
+    },
+    {
+      "base": "CNH",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 202.430031
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 202.430031
+    },
+    {
+      "base": "COP",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 0.378833
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 65.846944
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 215.773349
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1612.042
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1869.04835
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 178.031125
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 446.411422
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 15.053299
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 8.834896
+    },
+    {
+      "base": "NIO",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 37.89464
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 146.647457
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 815.64305
+    },
+    {
+      "base": "PEN",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 404.378715
+    },
+    {
+      "base": "PYG",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 0.214028
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 13.719992
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 16.215116
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 149.605201
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1090.304926
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 31.483459
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1394.5
+    },
+    {
+      "base": "UYU",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 34.292389
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 0.053040965
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 1894.5677
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-19",
+      "quote": "ARS",
+      "rate": 82.813706
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 978.0777
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 978.0777
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 978.0777
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 978.0777
+    },
+    {
+      "base": "AWG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 776.815642
+    },
+    {
+      "base": "AWG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 776.815642
+    },
+    {
+      "base": "AWG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 776.815642
+    },
+    {
+      "base": "AWG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 776.815642
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 202.07525
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 202.07525
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 202.07525
+    },
+    {
+      "base": "BOB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 202.07525
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 262.393146
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 262.393146
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 262.393146
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 262.393146
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1014.37117
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1014.37117
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1014.37117
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1014.37117
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1763.69863
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1763.69863
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1763.69863
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1763.69863
+    },
+    {
+      "base": "CLP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1.493186
+    },
+    {
+      "base": "CLP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1.493186
+    },
+    {
+      "base": "CLP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1.493186
+    },
+    {
+      "base": "CLP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1.493186
+    },
+    {
+      "base": "CNH",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.372898
+    },
+    {
+      "base": "CNH",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.372898
+    },
+    {
+      "base": "CNH",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.372898
+    },
+    {
+      "base": "CNH",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.372898
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.41957
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.41957
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.41957
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 201.41957
+    },
+    {
+      "base": "COP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.374263
+    },
+    {
+      "base": "COP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.374263
+    },
+    {
+      "base": "COP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.374263
+    },
+    {
+      "base": "COP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.374263
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 65.542939
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 65.542939
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 65.542939
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 65.542939
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 215.127793
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 215.127793
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 215.127793
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 215.127793
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1607.418
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1607.418
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1607.418
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1607.418
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1854.78795
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1854.78795
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1854.78795
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1854.78795
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 177.497798
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 177.497798
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 177.497798
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 177.497798
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 447.62426
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 447.62426
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 447.62426
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 447.62426
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 14.837539
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 14.837539
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 14.837539
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 14.837539
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 8.733748
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 8.733748
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 8.733748
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 8.733748
+    },
+    {
+      "base": "NIO",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 37.783478
+    },
+    {
+      "base": "NIO",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 37.783478
+    },
+    {
+      "base": "NIO",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 37.783478
+    },
+    {
+      "base": "NIO",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 37.783478
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 145.278071
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 145.278071
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 145.278071
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 145.278071
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 811.63485
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 811.63485
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 811.63485
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 811.63485
+    },
+    {
+      "base": "PEN",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 400.063297
+    },
+    {
+      "base": "PEN",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 400.063297
+    },
+    {
+      "base": "PEN",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 400.063297
+    },
+    {
+      "base": "PEN",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 400.063297
+    },
+    {
+      "base": "PYG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.21294
+    },
+    {
+      "base": "PYG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.21294
+    },
+    {
+      "base": "PYG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.21294
+    },
+    {
+      "base": "PYG",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.21294
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 13.682616
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 13.682616
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 13.682616
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 13.682616
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 16.702703
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 16.702703
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 16.702703
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 16.702703
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 148.584679
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 148.584679
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 148.584679
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 148.584679
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1085.225942
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1085.225942
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1085.225942
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1085.225942
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 31.379691
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 31.379691
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 31.379691
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 31.379691
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1390.5
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1390.5
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1390.5
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1390.5
+    },
+    {
+      "base": "UYU",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 34.131075
+    },
+    {
+      "base": "UYU",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 34.131075
+    },
+    {
+      "base": "UYU",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 34.131075
+    },
+    {
+      "base": "UYU",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 34.131075
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.052868712000000005
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.052868712000000005
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.052868712000000005
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 0.052868712000000005
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1895.72427
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1895.72427
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1895.72427
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 1895.72427
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 81.561906
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 81.561906
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 81.561906
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-20",
+      "quote": "ARS",
+      "rate": 81.561906
+    }
+  ]
+}

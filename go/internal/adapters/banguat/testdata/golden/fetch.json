@@ -1,0 +1,133 @@
+{
+  "adapter": "BANGUAT",
+  "cassette": "banguat",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 20))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2026-03-01",
+      "quote": "GTQ",
+      "rate": 7.66476
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "GTQ",
+      "rate": 7.66143
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "GTQ",
+      "rate": 7.6658
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "GTQ",
+      "rate": 7.66344
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "GTQ",
+      "rate": 7.66314
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "GTQ",
+      "rate": 7.66271
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-07",
+      "quote": "GTQ",
+      "rate": 7.66271
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-08",
+      "quote": "GTQ",
+      "rate": 7.66271
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-09",
+      "quote": "GTQ",
+      "rate": 7.65904
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-10",
+      "quote": "GTQ",
+      "rate": 7.65857
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-11",
+      "quote": "GTQ",
+      "rate": 7.66069
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-12",
+      "quote": "GTQ",
+      "rate": 7.6605
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-13",
+      "quote": "GTQ",
+      "rate": 7.65814
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-14",
+      "quote": "GTQ",
+      "rate": 7.65814
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-15",
+      "quote": "GTQ",
+      "rate": 7.65814
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-16",
+      "quote": "GTQ",
+      "rate": 7.65284
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-17",
+      "quote": "GTQ",
+      "rate": 7.65213
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-18",
+      "quote": "GTQ",
+      "rate": 7.65267
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-19",
+      "quote": "GTQ",
+      "rate": 7.65445
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-20",
+      "quote": "GTQ",
+      "rate": 7.65366
+    }
+  ]
+}

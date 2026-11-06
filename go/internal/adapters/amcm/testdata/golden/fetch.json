@@ -1,0 +1,523 @@
+{
+  "adapter": "AMCM",
+  "cassette": "amcm",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 5.7466
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 5.8605
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 10.2423
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 1.1831
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 1.2531
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 9.3647
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 10.7332
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 1.03
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 0.050739
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 0.0054
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 2.0282
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 0.8652
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 4.6995
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 0.8519
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 6.2936
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 0.2555
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-18",
+      "quote": "MOP",
+      "rate": 8.0643
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 5.7668
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 5.8665
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 10.2706
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 1.1857
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 1.2568
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 9.3919
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 10.8227
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 1.03
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 0.050718
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 0.0054
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 2.0293
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 0.8704
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 4.726
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 0.858
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 6.3029
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 0.2553
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "MOP",
+      "rate": 8.0655
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 5.7238
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 5.8646
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 10.2225
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 1.1838
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 1.2527
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 9.361
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 10.8041
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 1.03
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 0.050745
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 0.0053
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 2.0266
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 0.8694
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 4.6982
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 0.8575
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 6.2924
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 0.2546
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "MOP",
+      "rate": 8.0691
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 5.7664
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 5.867
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 10.2498
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 1.1863
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 1.2553
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 9.3808
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 10.8398
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 1.03
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 0.050777
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 0.0054
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 2.0377
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 0.8714
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 4.7297
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 0.8641
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 6.3128
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 0.2551
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "MOP",
+      "rate": 8.0671
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 5.7635
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 5.8548
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 10.2567
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 1.1871
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 1.2544
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 9.3731
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 10.835
+    },
+    {
+      "base": "HKD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 1.03
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 0.050727
+    },
+    {
+      "base": "KRW",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 0.0054
+    },
+    {
+      "base": "MYR",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 2.038
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 0.873
+    },
+    {
+      "base": "NZD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 4.7398
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 0.8636
+    },
+    {
+      "base": "SGD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 6.3135
+    },
+    {
+      "base": "TWD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 0.2556
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-22",
+      "quote": "MOP",
+      "rate": 8.0705
+    }
+  ]
+}

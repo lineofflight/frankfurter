@@ -1,0 +1,205 @@
+{
+  "adapter": "CBSSC",
+  "cassette": "cbssc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 5.427
+    },
+    {
+      "base": "GBP",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 8.6949
+    },
+    {
+      "base": "USD",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 5.3441
+    },
+    {
+      "base": "EUR",
+      "date": "2020-04-09",
+      "quote": "SCR",
+      "rate": 18.5231
+    },
+    {
+      "base": "USD",
+      "date": "2020-04-09",
+      "quote": "SCR",
+      "rate": 16.8043
+    },
+    {
+      "base": "EUR",
+      "date": "2026-07-31",
+      "quote": "SCR",
+      "rate": 16.5947
+    },
+    {
+      "base": "GBP",
+      "date": "2026-07-31",
+      "quote": "SCR",
+      "rate": 19.9912
+    },
+    {
+      "base": "USD",
+      "date": "2026-07-31",
+      "quote": "SCR",
+      "rate": 14.6171
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 16.5514
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 19.5729
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-03",
+      "quote": "SCR",
+      "rate": 14.4827
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 16.6052
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 19.4317
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-04",
+      "quote": "SCR",
+      "rate": 14.4846
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 16.7051
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 19.4198
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-05",
+      "quote": "SCR",
+      "rate": 14.5618
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 17.025
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 19.427
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-06",
+      "quote": "SCR",
+      "rate": 14.6212
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 16.6065
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 19.391
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-07",
+      "quote": "SCR",
+      "rate": 14.5675
+    },
+    {
+      "base": "EUR",
+      "date": "2026-08-10",
+      "quote": "SCR",
+      "rate": 16.6195
+    },
+    {
+      "base": "GBP",
+      "date": "2026-08-10",
+      "quote": "SCR",
+      "rate": 19.5372
+    },
+    {
+      "base": "USD",
+      "date": "2026-08-10",
+      "quote": "SCR",
+      "rate": 14.6206
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 16.8674
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 19.3936
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 14.6166
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 16.8958
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 20.1872
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 14.4077
+    }
+  ]
+}

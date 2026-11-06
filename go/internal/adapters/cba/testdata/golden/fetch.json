@@ -1,0 +1,2353 @@
+{
+  "adapter": "CBA",
+  "cassette": "cba",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": "2026-03-19",
+  "call": "fetch(after: Date.new(2026, 3, 1))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 102.61
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 267.13
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 73.535
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 132.07
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 276.08
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 487.62
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 54.766
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 18.226
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 442.38
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 505.17
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 140.04
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 48.177
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 4.1211
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 0.00028685
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 2.402
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 4.3113
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 0.75518
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 39.546
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 224.7
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 104.56
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 4.8762
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 41.372
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 296.43
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 40.128
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 8.7141
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 376.88
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 0.030930000000000003
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 33909.0357
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 1968167.273
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-02",
+      "quote": "AMD",
+      "rate": 518.12
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 102.64
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 264.8
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 72.848
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 131.35
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 274.97
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 478.9
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 54.594
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 17.936
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 436.97
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 500.79
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 139.8
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 48.307
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 4.1223
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 0.00028676
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 2.3890000000000002
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 4.3125
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 0.7544299999999999
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 38.767
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 221.37
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 101.99
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 4.8556
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 40.645
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 294.59
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 40.139
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 8.6652
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 376.99
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 0.030888
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 35669.4938
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 2003283.1245
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-03",
+      "quote": "AMD",
+      "rate": 516.69
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 102.88
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 266.28
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 71.669
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 130.77
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 276.4
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 483.75
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 54.776
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 18.049
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 439.56
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 505.5
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 138.73
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 48.335
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 4.0946
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 0.00028801
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 2.4023
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 4.3223
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 0.75956
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 39.187
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 223.39
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 103.04
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 4.8543
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 41.06
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 296.31
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 40.232
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 8.6467
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 377.86
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 0.031014000000000003
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 30721.860055
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 1902010.1285
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-04",
+      "quote": "AMD",
+      "rate": 515.17
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 102.8
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 266.01
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 72.18
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 130.69
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 276.76
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 483.66
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 54.77
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 17.98
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 438.31
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 504.01
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 138.06
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 48.273
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 4.1209
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 0.00028699
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 2.4001
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 4.3193
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 0.76582
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 39.103
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 223.46
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 102.63
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 4.8168
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 41.011
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 295.78
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 39.921
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 8.6168
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 377.59
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 0.030999
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 32770.6476
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 1944030.957
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-05",
+      "quote": "AMD",
+      "rate": 515.81
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 102.73
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 264.49
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 71.679
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 130.05
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 276.22
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 482.8
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 54.625
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 17.89
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 436.81
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 503.37
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 138.21
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 48.256
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 4.1154
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 0.00028576000000000003
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 2.3902
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 4.3162
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 0.7639199999999999
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 39.061
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 221.86
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 102.01
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 4.7767
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 40.859
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 294.64
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 39.87
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 8.616
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 377.31
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 0.030952
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 31775.335600000002
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 1925804.306
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-06",
+      "quote": "AMD",
+      "rate": 515.02
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 102.72
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 264.71
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 72.027
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 128.95
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 278.69
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 484.57
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 54.548
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 17.864
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 436.15
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 503.49
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 137.62
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 48.267
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 4.0892
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 0.00028646
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 2.3811
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 4.3158
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 0.75779
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 39.076
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 222.87
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 101.91
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 4.8215
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 40.809
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 294.67
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 39.836
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 8.5884
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 377.29
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 0.030951
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 31066.175799999997
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 1934575.493
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-09",
+      "quote": "AMD",
+      "rate": 513.91
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 102.76
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 268.26
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 73.177
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 129.3
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 278.08
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 486.23
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 54.906
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 18.031
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 439.27
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 507.62
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 137.62
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 48.236
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 4.1015
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 0.00028587
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 2.3922
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 4.3171
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 0.77332
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 39.341
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 224.03
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 103.2
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 4.7901
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 41.423
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 296.66
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 39.744
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 8.6038
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 377.41
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 0.031002999999999996
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 31492.29375
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 1919645.813
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-10",
+      "quote": "AMD",
+      "rate": 513.93
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 102.71
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 270.24
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 73.129
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 129.06
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 278.08
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 484.67
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 54.943
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 17.971
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 437.9
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 507.31
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 138.38
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 48.203
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 4.1041
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 0.00028581
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 2.3837
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 4.3156
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 0.76834
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 39.14
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 223.8
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 102.81
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 4.7436
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 41.093
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 296.5
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 39.765
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 8.5724
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 377.27
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 0.031038
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 33398.9383
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 1965461.2685
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-11",
+      "quote": "AMD",
+      "rate": 515.73
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 102.76
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 269.3
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 73.194
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 128.99
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 277.71
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 483.4
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 54.934
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 17.873
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 436.25
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 505.51
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 138.23
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 48.221
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 4.0869
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 0.00028555000000000003
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 2.3785
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 4.3175
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 0.77057
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 39.008
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 222.92
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 102.39
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 4.7633
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 40.755
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 296.03
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 39.318
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 8.5394
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 377.44
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 0.0311
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 32546.702400000002
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 1956036.908
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-12",
+      "quote": "AMD",
+      "rate": 515.2
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 102.79
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 265.86
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 71.969
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 129.02
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 276.06
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 479.17
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 54.762
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 17.713
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 432.7
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 500.62
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 138.5
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 48.232
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 4.0841
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 0.00028642
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 2.3691
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 4.3186
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 0.7716700000000001
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 38.718
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 219.88
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 101.44
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 4.6847
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 40.162
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 294.88
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 39.282
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 8.5517
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 377.54
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 0.031215
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 32857.737400000005
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 1936814.945
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-13",
+      "quote": "AMD",
+      "rate": 514.7
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 102.75
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 266.0
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 70.892
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 128.67
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 275.64
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 478.76
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 54.761
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 17.725
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 432.96
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 500.79
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 138.19
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 48.196
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 4.0847
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 0.00028611
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 2.3701
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 4.3169
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 0.78011
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 38.862
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 220.33
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 101.57
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 4.6571
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 40.23
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 295.06
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 39.286
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 8.5612
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 377.41
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 0.031191000000000003
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 31588.7146
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 1903876.3385
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-16",
+      "quote": "AMD",
+      "rate": 512.5
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 102.76
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 267.43
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 72.16
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 128.11
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 275.52
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 479.68
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 54.792
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 17.76
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 434.27
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 502.89
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 138.74
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 48.167
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 4.0825
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 0.00028597999999999997
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 2.372
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 4.3228
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 0.78562
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 39.185
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 220.32
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 101.82
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 4.5869
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 40.502
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 295.31
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 39.277
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 8.5845
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 377.46
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 0.031073
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 29798.708175
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 1885369.756
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-17",
+      "quote": "AMD",
+      "rate": 512.83
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 102.74
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 268.02
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 72.667
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 127.52
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 275.53
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 480.2
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 54.905
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 17.821
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 435.55
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 504.04
+    },
+    {
+      "base": "GEL",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 138.8
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 48.145
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 4.082
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 0.00028677
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 2.3735
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 4.3164
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 0.78183
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 39.33
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 221.04
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 102.21
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 4.5256
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 40.551
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 295.6
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 39.296
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 8.5853
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 377.39
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 0.031002999999999996
+    },
+    {
+      "base": "XAG",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 30272.41448
+    },
+    {
+      "base": "XAU",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 1893301.1485000001
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-18",
+      "quote": "AMD",
+      "rate": 513.32
+    }
+  ]
+}

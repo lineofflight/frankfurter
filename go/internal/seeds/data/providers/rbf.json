@@ -1,0 +1,12 @@
+{
+  "key": "RBF",
+  "name": "Reserve Bank of Fiji",
+  "country_code": "FJ",
+  "rate_type": "mid rate",
+  "pivot_currency": "FJD",
+  "data_url": "https://www.rbf.gov.fj/statistics/economic-and-financial-statistics/",
+  "terms_url": null,
+  "publish_schedule": "*/30 2-4 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2001-01-02"
+}

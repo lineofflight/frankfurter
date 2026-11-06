@@ -1,0 +1,8 @@
+{
+  "quote": "SAR",
+  "base": "USD",
+  "rate": 3.75,
+  "since": "1986-06-01",
+  "authority": "Saudi Central Bank",
+  "source": "https://www.sama.gov.sa/en-US/MonetaryPolicy/Pages/ExchangeRatePolicy.aspx"
+}

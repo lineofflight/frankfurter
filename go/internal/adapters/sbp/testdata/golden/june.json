@@ -1,0 +1,290 @@
+{
+  "adapter": "SBP",
+  "cassette": "sbp",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 6, 1), upto: Date.new(2026, 6, 30))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 75.903448
+    },
+    {
+      "base": "AUD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 199.783142
+    },
+    {
+      "base": "BHD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 738.208283
+    },
+    {
+      "base": "CAD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 201.72041
+    },
+    {
+      "base": "CHF",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 355.515744
+    },
+    {
+      "base": "CNY",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 41.188182
+    },
+    {
+      "base": "DKK",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 43.460044
+    },
+    {
+      "base": "EUR",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 324.436402
+    },
+    {
+      "base": "GBP",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 374.694791
+    },
+    {
+      "base": "HKD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 35.588416
+    },
+    {
+      "base": "JPY",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 1.747837
+    },
+    {
+      "base": "KWD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 907.668767
+    },
+    {
+      "base": "MYR",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 70.285142
+    },
+    {
+      "base": "NOK",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 30.17763
+    },
+    {
+      "base": "NZD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 166.767803
+    },
+    {
+      "base": "OMR",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 722.52165
+    },
+    {
+      "base": "QAR",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 76.389233
+    },
+    {
+      "base": "SAR",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 74.270139
+    },
+    {
+      "base": "SEK",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 30.157578
+    },
+    {
+      "base": "SGD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 218.05273
+    },
+    {
+      "base": "THB",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 8.572663
+    },
+    {
+      "base": "TRY",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 6.087638
+    },
+    {
+      "base": "USD",
+      "date": "2026-06-01",
+      "quote": "PKR",
+      "rate": 278.717857
+    },
+    {
+      "base": "AED",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 75.808095
+    },
+    {
+      "base": "AUD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 191.833555
+    },
+    {
+      "base": "BHD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 737.402733
+    },
+    {
+      "base": "CAD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 196.155853
+    },
+    {
+      "base": "CHF",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 344.449894
+    },
+    {
+      "base": "CNY",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 41.00365
+    },
+    {
+      "base": "DKK",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 42.485209
+    },
+    {
+      "base": "EUR",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 317.6933
+    },
+    {
+      "base": "GBP",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 368.765058
+    },
+    {
+      "base": "HKD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 35.521509
+    },
+    {
+      "base": "JPY",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 1.718256
+    },
+    {
+      "base": "KWD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 903.0536
+    },
+    {
+      "base": "MYR",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 68.412132
+    },
+    {
+      "base": "NOK",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 28.016987
+    },
+    {
+      "base": "NZD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 157.676975
+    },
+    {
+      "base": "OMR",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 721.71585
+    },
+    {
+      "base": "QAR",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 76.281833
+    },
+    {
+      "base": "SAR",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 74.15085
+    },
+    {
+      "base": "SEK",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 28.691219
+    },
+    {
+      "base": "SGD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 215.274237
+    },
+    {
+      "base": "THB",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 8.397179
+    },
+    {
+      "base": "TRY",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 5.986838
+    },
+    {
+      "base": "USD",
+      "date": "2026-06-30",
+      "quote": "PKR",
+      "rate": 278.4375
+    }
+  ]
+}

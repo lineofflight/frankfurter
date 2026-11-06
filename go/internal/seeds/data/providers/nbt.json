@@ -1,0 +1,12 @@
+{
+  "key": "NBT",
+  "name": "National Bank of Tajikistan",
+  "country_code": "TJ",
+  "rate_type": "official rate",
+  "pivot_currency": "TJS",
+  "data_url": "https://www.nbt.tj/en/kurs/",
+  "terms_url": null,
+  "publish_schedule": "*/30 4-6 * * *",
+  "publish_cadence": "daily",
+  "coverage_start": "2001-01-01"
+}

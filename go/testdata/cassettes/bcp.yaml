@@ -1,0 +1,2007 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=USD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA USD</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>7.529,12</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>7.529,85</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>7.532,22</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>7.530,08</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfea7efb21add-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:51 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05a2e6af-5354-1a10-9678-7698d4d11d50_3029159329_2749719281_00000000004388587020; Path=/; Expires=Fri, 22-May-2026 12:59:06 GMT
+                - PHPSESSID=d11pr66q23qe6qr7tas9iiu270; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:04 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 1
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=EUR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA EUR</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.162,32</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.199,25</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.193,55</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.179,93</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeaabad9b8e1-AMS
+            Connection:
+                - keep-alive
+            Content-Security-Policy-Report-Only:
+                - script-src 'unsafe-inline' 'unsafe-eval'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=miOzN__3yhlmAkJNEhjcVqSOMHSdNM.e9MuG7olTa.4-1779454731.9590275-1.0.1.1-iO8HwqaqJzXfjldrrvwx8qnrG3try4r3.bP3sGdba_dScrb948XFZ9xR6uELjbawMLWVqXN7PkKm9tSKjsX2MhRsLYC9tw3ubGw8IwbRHFfgI9UAYfTmj8fDQ3ecrnpW807lET3WJpTPyqaVf_DvlOaUZp.dGnEiHl.3WS4bbBM; report-to cf-csp-endpoint
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:52 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Report-To:
+                - '{"group":"cf-csp-endpoint","max_age":86400,"endpoints":[{"url":"https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=miOzN__3yhlmAkJNEhjcVqSOMHSdNM.e9MuG7olTa.4-1779454731.9590275-1.0.1.1-iO8HwqaqJzXfjldrrvwx8qnrG3try4r3.bP3sGdba_dScrb948XFZ9xR6uELjbawMLWVqXN7PkKm9tSKjsX2MhRsLYC9tw3ubGw8IwbRHFfgI9UAYfTmj8fDQ3ecrnpW807lET3WJpTPyqaVf_DvlOaUZp.dGnEiHl.3WS4bbBM"}]}'
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059a6ae5-5355-1a10-9678-7698d4d11d50_3903081889_4291584753_00000000004388587042; Path=/; Expires=Fri, 22-May-2026 12:59:07 GMT
+                - PHPSESSID=o237vdiq5k71i550mb2eoum8c5; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:05 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 2
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=GBP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA GBP</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>9.580,05</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>9.632,18</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>9.629,19</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>9.613,65</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfead9e539d31-AMS
+            Connection:
+                - keep-alive
+            Content-Security-Policy-Report-Only:
+                - script-src 'unsafe-inline' 'unsafe-eval'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=GIXAuI6phd._VDThk2lukpVlIdMxe7qN74JTsdwz3pc-1779454732.4163842-1.0.1.1-PP0UEXozJo8G8r4YNaNAD8MZfrb.glfE3lNGX8Ft9cRgvg39ta1AF0vWoUPFIY3E5nuhbmVuRctb3kWEPpPs5a5upMVnpiwTJBAtF5HK8mZgQxdbUeR_50BmrQsl9sJgOQ75ZT8xvMcjYeBADyA6SGyRAjkcgC2MUEdLxDi1gkY; report-to cf-csp-endpoint
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:52 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Report-To:
+                - '{"group":"cf-csp-endpoint","max_age":86400,"endpoints":[{"url":"https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=GIXAuI6phd._VDThk2lukpVlIdMxe7qN74JTsdwz3pc-1779454732.4163842-1.0.1.1-PP0UEXozJo8G8r4YNaNAD8MZfrb.glfE3lNGX8Ft9cRgvg39ta1AF0vWoUPFIY3E5nuhbmVuRctb3kWEPpPs5a5upMVnpiwTJBAtF5HK8mZgQxdbUeR_50BmrQsl9sJgOQ75ZT8xvMcjYeBADyA6SGyRAjkcgC2MUEdLxDi1gkY"}]}'
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05a177bb-5355-1a10-9678-7698d4d11d50_2734509473_3046466289_00000000004388587079; Path=/; Expires=Fri, 22-May-2026 12:59:07 GMT
+                - PHPSESSID=fdaesm5kmonfo1c3840av112o7; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:05 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 3
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=JPY
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 893
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA JPY</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>47,88</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>48,26</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>48,65</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>48,20</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeb0dbc112f7-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:53 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059a01b2-5356-1a10-9678-7698d4d11d50_3119074721_2927715057_00000000004388587111; Path=/; Expires=Fri, 22-May-2026 12:59:08 GMT
+                - PHPSESSID=jru29alkur3do06dhunam6mhk6; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:06 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 4
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=CHF
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA CHF</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.329,59</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.408,54</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.462,22</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8.422,91</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeb40cef6644-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:53 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04bbdc4c-5356-1a10-9678-7698d4d11d50_2184924577_3315032817_00000000000078508249; Path=/; Expires=Fri, 22-May-2026 12:59:08 GMT
+                - PHPSESSID=956akshq42t1eaqd4cvjf56bi0; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:06 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 5
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=CAD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA CAD</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.516,24</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.526,09</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.504,00</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.494,40</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeb76e92c716-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:54 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04b41429-5357-1a10-9678-7698d4d11d50_1130384801_1409835761_00000000000078508262; Path=/; Expires=Fri, 22-May-2026 12:59:09 GMT
+                - PHPSESSID=ldbpapqk5sujc90j8c9pf376h4; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:07 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 6
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=AUD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 905
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA AUD</th></tr></thead>
+              <tbody>
+                <tr><th>31</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>4.995,57</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.032,20</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>4</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.002,90</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+            <tr><th>5</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>4.999,97</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeba9d297c14-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:54 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05a2c470-5357-1a10-9678-7698d4d11d50_0780946849_0971268849_00000000004388587252; Path=/; Expires=Fri, 22-May-2026 12:59:09 GMT
+                - PHPSESSID=v64d2dlp2o56jrummovbv5atf1; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:07 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 7
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=CNY
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA CNY</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>1.039,75</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfebdeff27869-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:56 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05970147-5359-1a10-9678-7698d4d11d50_4271459745_3924910833_00000000004388587397; Path=/; Expires=Fri, 22-May-2026 12:59:10 GMT
+                - PHPSESSID=v4hcoep0oq99kbs7iomvl47d60; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:09 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 8
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=BRL
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA BRL</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>1.438,31</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfec76e7c66d3-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:56 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04bcdaf5-5359-1a10-9678-7698d4d11d50_0033639841_1168990961_00000000000078508442; Path=/; Expires=Fri, 22-May-2026 12:59:11 GMT
+                - PHPSESSID=1d6f8s4unfbivmopvclmerk761; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:09 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 9
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=ARS
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 426
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA ARS</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8,40</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfecabb9dfea6-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:57 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04b57484-535a-1a10-9678-7698d4d11d50_2876394913_3973997297_00000000000078508462; Path=/; Expires=Fri, 22-May-2026 12:59:12 GMT
+                - PHPSESSID=266sv11u5semao1gmd7bh8eha4; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:10 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 10
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=CLP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 426
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA CLP</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>8,33</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfecd6dfc6563-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:57 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04bc23a6-535a-1a10-9678-7698d4d11d50_1566920097_0466182897_00000000000078508515; Path=/; Expires=Fri, 22-May-2026 12:59:12 GMT
+                - PHPSESSID=3pf81hn0kta7pqepn0ks43ufb2; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:10 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 11
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=MXN
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA MXN</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>428,05</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfed01ee6f5f2-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:58 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059a0f2a-535b-1a10-9678-7698d4d11d50_1636388257_0067396337_00000000004388587559; Path=/; Expires=Fri, 22-May-2026 12:59:13 GMT
+                - PHPSESSID=1k1308vfeoe24i5pi3uv1f1rv5; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:11 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 12
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=UYU
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA UYU</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>194,29</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfed2cd79a55c-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:58 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05a07bc3-535b-1a10-9678-7698d4d11d50_3691400609_3413009137_00000000004388587577; Path=/; Expires=Fri, 22-May-2026 12:59:13 GMT
+                - PHPSESSID=e9b4toueelhe2df2tuciqiffg5; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:11 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 13
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=COP
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 426
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA COP</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>1,95</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfed57cf1b8e1-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:59 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=0597b9c6-535c-1a10-9678-7698d4d11d50_1449872801_1090740977_00000000004388587628; Path=/; Expires=Fri, 22-May-2026 12:59:13 GMT
+                - PHPSESSID=ub32h0q9pd0dhsfh3qe63b2ou6; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:12 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 14
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=BOB
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA BOB</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>1.099,01</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfed81c19c5b0-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:58:59 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059e8040-535c-1a10-9678-7698d4d11d50_0754011553_3008586481_00000000004388587653; Path=/; Expires=Fri, 22-May-2026 12:59:14 GMT
+                - PHPSESSID=94pv6a1knbh4u8i56jl6usng85; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:12 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 15
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=NZD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA NZD</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>4.655,71</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfedb792a25b4-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:00 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059773a7-535d-1a10-9678-7698d4d11d50_2585415073_2373083889_00000000004388587676; Path=/; Expires=Fri, 22-May-2026 12:59:14 GMT
+                - PHPSESSID=6qi6qktah0g7lhm6tkqms0add1; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:13 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 16
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=ZAR
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA ZAR</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>407,06</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfedebac5d9e0-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:00 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059f14ea-535d-1a10-9678-7698d4d11d50_2465353121_2241487601_00000000004388587709; Path=/; Expires=Fri, 22-May-2026 12:59:15 GMT
+                - PHPSESSID=eavtf2n3rtldkone5qsq418q01; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:13 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 17
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=SEK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA SEK</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>723,56</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfee22ec5b8a9-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:01 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04b1b83a-535e-1a10-9678-7698d4d11d50_1651068321_0633692913_00000000000078508656; Path=/; Expires=Fri, 22-May-2026 12:59:15 GMT
+                - PHPSESSID=vf7phtvb5psaidvasj0ev874k3; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:14 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 18
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=DKK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA DKK</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>1.099,41</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfee54f0721d7-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:01 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059fd48c-535e-1a10-9678-7698d4d11d50_1318800801_1509122801_00000000004388587770; Path=/; Expires=Fri, 22-May-2026 12:59:16 GMT
+                - PHPSESSID=2uceq5uiiqor5n1l9k9uh0mtd2; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:14 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 19
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=NOK
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA NOK</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>719,79</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfee879ba4b63-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:02 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05985e84-535f-1a10-9678-7698d4d11d50_3902885281_4291388145_00000000004388587800; Path=/; Expires=Fri, 22-May-2026 12:59:16 GMT
+                - PHPSESSID=n4eknvu0jfrg1aklt1rg3qo742; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:15 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 20
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=AED
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA AED</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>2.050,00</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeebca530b81-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:02 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04ba4029-535f-1a10-9678-7698d4d11d50_2631617953_3682034417_00000000000078508743; Path=/; Expires=Fri, 22-May-2026 12:59:17 GMT
+                - PHPSESSID=ike6c9blrpd7vso0l5r366pie0; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:15 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 21
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=PEN
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA PEN</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>2.019,32</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfeef087e4e47-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:03 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=05990ad7-5360-1a10-9678-7698d4d11d50_3918744993_4277887729_00000000004388587914; Path=/; Expires=Fri, 22-May-2026 12:59:17 GMT
+                - PHPSESSID=vlq3htj8u7r168q5u9g7r8gr67; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:16 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 22
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=SGD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 430
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA SGD</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>5.590,92</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfef24ae36612-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:03 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04bafbef-5360-1a10-9678-7698d4d11d50_3739897249_2571526897_00000000000078508812; Path=/; Expires=Fri, 22-May-2026 12:59:18 GMT
+                - PHPSESSID=7eh0q1e47oh5qf51o7acubbvu2; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:16 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 23
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=TWD
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 428
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA TWD</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>232,43</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfef59ed6d94b-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:04 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=059a4391-5361-1a10-9678-7698d4d11d50_2000768417_3907216113_00000000004388587974; Path=/; Expires=Fri, 22-May-2026 12:59:19 GMT
+                - PHPSESSID=58fpsbdf7crtlfr2l0a853vtl2; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:17 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s
+    - id: 24
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: www.bcp.gov.py
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - www.bcp.gov.py
+            User-Agent:
+                - Mozilla/5.0 (compatible; Frankfurter/2.0; +https://frankfurter.dev)
+        url: https://www.bcp.gov.py/webapps/web/cotizacion/monedas-historica?anho=2024&moneda=XAU
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 435
+        body: |
+            <!DOCTYPE html>
+            <html>
+            <head><meta charset="UTF-8"><title>BCP</title></head>
+            <body>
+            <table id="cotizacion-interbancaria">
+              <thead><tr><th colspan="5">PLANILLA DE COTIZACIONES DEL AÑO 2024 DE MONEDA XAU</th></tr></thead>
+              <tbody>
+                <tr><th>3</th><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>17.639.727,80</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td><td>ND</td></tr>
+              </tbody>
+            </table>
+            </body>
+            </html>
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Alt-Svc:
+                - h3=":443"; ma=86400
+            Cache-Control:
+                - no-cache
+                - no-cache
+            Cf-Cache-Status:
+                - DYNAMIC
+            Cf-Ray:
+                - 9ffbfef8f83066c3-AMS
+            Connection:
+                - keep-alive
+            Content-Type:
+                - text/html; charset=UTF-8
+            Date:
+                - Fri, 22 May 2026 12:59:04 GMT
+            Entidad:
+                - Banco Central del Paraguay
+            Server:
+                - cloudflare
+            Set-Cookie:
+                - NSC_ESNS=04bbafe9-5361-1a10-9678-7698d4d11d50_2665368993_3648152305_00000000000078508885; Path=/; Expires=Fri, 22-May-2026 12:59:19 GMT
+                - PHPSESSID=0b5j3lantrjg6gag1a0r7d1vs1; path=/;HttpOnly;Secure
+                - www_bcp_old=ffffffffc3a0501645525d5f4f58455e445a4a42378b;expires=Fri, 22-May-2026 13:02:17 GMT;path=/;secure;httponly
+            Speculation-Rules:
+                - '"/cdn-cgi/speculation"'
+            Strict-Transport-Security:
+                - max-age=15552000; includeSubDomains
+            Vary:
+                - Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - SAMEORIGIN
+            X-Via-Nscopi:
+                - "1.0"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

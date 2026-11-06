@@ -1,0 +1,13 @@
+{
+  "key": "INFOREURO",
+  "name": "European Commission",
+  "country_code": "EU",
+  "rate_type": "monthly accounting rate",
+  "pivot_currency": "EUR",
+  "data_url": "https://commission.europa.eu/funding-and-tenders/procedures-guidelines-tenders/information-contractors-and-beneficiaries/exchange-rate-inforeuro_en",
+  "terms_url": "https://commission.europa.eu/legal-notice_en",
+  "publish_schedule": "0 12 1-5 * *",
+  "publish_cadence": "monthly",
+  "frequency": "monthly",
+  "coverage_start": "1994-03-01"
+}

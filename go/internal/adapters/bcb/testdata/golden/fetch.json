@@ -1,0 +1,313 @@
+{
+  "adapter": "BCB",
+  "cassette": "bcb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 7))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 3.6702
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 3.7957
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 6.6659
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 0.813
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 6.0742
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 6.9541
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 0.03297
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 0.5423
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 0.5672
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "BRL",
+      "rate": 5.2001
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 3.6998
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 3.8591
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 6.7385
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 0.8191
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 6.1197
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 7.0344
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 0.0335
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 0.5435
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 0.5682
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "BRL",
+      "rate": 5.287
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 3.6844
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 3.814
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 6.68
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 0.8116
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 6.0639
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 6.9625
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 0.03316
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 0.5404
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 0.5678
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "BRL",
+      "rate": 5.2091
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 3.6781
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 3.8333
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 6.7076
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 0.8131
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 6.0749
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 6.9875
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 0.03328
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 0.542
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 0.568
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "BRL",
+      "rate": 5.2447
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 3.7046
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 3.8812
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 6.7853
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 0.8195
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 6.1238
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 7.065
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 0.03355
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 0.5504
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 0.5741
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "BRL",
+      "rate": 5.2878
+    }
+  ]
+}

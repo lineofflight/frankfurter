@@ -1,0 +1,12 @@
+{
+  "key": "PMA",
+  "name": "Palestine Monetary Authority",
+  "country_code": "PS",
+  "rate_type": "middle rate",
+  "pivot_currency": "USD",
+  "data_url": "https://www.pma.ps/currency-exchange-rates",
+  "terms_url": "https://www.pma.ps/terms-of-use",
+  "publish_schedule": "*/30 11-13 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2020-09-01"
+}

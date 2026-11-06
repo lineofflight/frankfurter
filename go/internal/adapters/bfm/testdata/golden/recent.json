@@ -1,0 +1,356 @@
+{
+  "adapter": "BFM",
+  "cassette": "bfm",
+  "match_requests_on": [
+    "method",
+    "uri",
+    "body"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 21), upto: Date.new(2026, 9, 23))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 3122.77
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 3125.0
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 5327.44
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 653.46
+    },
+    {
+      "base": "DJF",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 24.57
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 672.48
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 4984.87
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 5860.31
+    },
+    {
+      "base": "HKD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 557.66
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 45.66
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 27.83
+    },
+    {
+      "base": "MUR",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 91.8
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 465.0
+    },
+    {
+      "base": "NZD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 2509.37
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 445.86
+    },
+    {
+      "base": "SGD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 3432.17
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 4375.16
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 5969.62
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-09-21",
+      "quote": "MGA",
+      "rate": 269.15
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 3116.35
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 3120.84
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 5347.27
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 653.99
+    },
+    {
+      "base": "DJF",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 24.61
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 671.91
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 4994.66
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 5854.77
+    },
+    {
+      "base": "HKD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 558.68
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 45.84
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 27.88
+    },
+    {
+      "base": "MUR",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 91.94
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 464.9
+    },
+    {
+      "base": "NZD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 2512.54
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 446.68
+    },
+    {
+      "base": "SGD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 3437.67
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 4381.82
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 5982.26
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-09-22",
+      "quote": "MGA",
+      "rate": 269.85
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 3104.81
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 3116.99
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 5336.65
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 654.72
+    },
+    {
+      "base": "DJF",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 24.66
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 670.4
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 4983.29
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 5831.73
+    },
+    {
+      "base": "HKD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 559.9
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 45.87
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 27.81
+    },
+    {
+      "base": "MUR",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 91.72
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 464.32
+    },
+    {
+      "base": "NZD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 2499.88
+    },
+    {
+      "base": "SEK",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 444.77
+    },
+    {
+      "base": "SGD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 3435.45
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 4391.53
+    },
+    {
+      "base": "XDR",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 5992.63
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-09-23",
+      "quote": "MGA",
+      "rate": 268.78
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "adapter": "DAB",
+  "cassette": "dab",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 20))",
+  "rows": [
+    {
+      "ask": 17.2836,
+      "base": "AED",
+      "bid": 17.2236,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 17.2536
+    },
+    {
+      "ask": 81.5886,
+      "base": "CHF",
+      "bid": 81.3886,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 81.4886
+    },
+    {
+      "ask": 9.7726,
+      "base": "CNY",
+      "bid": 9.5726,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 9.6726
+    },
+    {
+      "ask": 73.7838,
+      "base": "EUR",
+      "bid": 73.5238,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 73.6538
+    },
+    {
+      "ask": 85.3996,
+      "base": "GBP",
+      "bid": 85.0996,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 85.2496
+    },
+    {
+      "ask": 0.7475,
+      "base": "INR",
+      "bid": 0.7435,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 0.7455
+    },
+    {
+      "ask": 0.00008,
+      "base": "IRR",
+      "bid": 0.00004,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 0.000059999999999999995
+    },
+    {
+      "ask": 0.2222,
+      "base": "PKR",
+      "bid": 0.2202,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 0.2212
+    },
+    {
+      "ask": 16.6927,
+      "base": "SAR",
+      "bid": 16.6327,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 16.6627
+    },
+    {
+      "ask": 64.0267,
+      "base": "USD",
+      "bid": 63.9267,
+      "date": "2026-05-18",
+      "quote": "AFN",
+      "rate": 63.9767
+    },
+    {
+      "ask": 17.2961,
+      "base": "AED",
+      "bid": 17.2361,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 17.2661
+    },
+    {
+      "ask": 81.5129,
+      "base": "CHF",
+      "bid": 81.3129,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 81.4129
+    },
+    {
+      "ask": 9.7862,
+      "base": "CNY",
+      "bid": 9.5862,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 9.6862
+    },
+    {
+      "ask": 73.6631,
+      "base": "EUR",
+      "bid": 73.4031,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 73.5331
+    },
+    {
+      "ask": 85.4,
+      "base": "GBP",
+      "bid": 85.1,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 85.25
+    },
+    {
+      "ask": 0.7533,
+      "base": "INR",
+      "bid": 0.7493,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 0.7513
+    },
+    {
+      "ask": 0.00008,
+      "base": "IRR",
+      "bid": 0.00004,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 0.000059999999999999995
+    },
+    {
+      "ask": 0.2213,
+      "base": "PKR",
+      "bid": 0.2193,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 0.2203
+    },
+    {
+      "ask": 16.6864,
+      "base": "SAR",
+      "bid": 16.6264,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 16.6564
+    },
+    {
+      "ask": 63.7736,
+      "base": "USD",
+      "bid": 63.6736,
+      "date": "2026-05-19",
+      "quote": "AFN",
+      "rate": 63.7236
+    },
+    {
+      "ask": 17.2663,
+      "base": "AED",
+      "bid": 17.2063,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 17.2363
+    },
+    {
+      "ask": 81.3688,
+      "base": "CHF",
+      "bid": 81.1688,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 81.2688
+    },
+    {
+      "ask": 9.7992,
+      "base": "CNY",
+      "bid": 9.5992,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 9.6992
+    },
+    {
+      "ask": 73.29,
+      "base": "EUR",
+      "bid": 73.03,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 73.16
+    },
+    {
+      "ask": 85.3657,
+      "base": "GBP",
+      "bid": 85.0657,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 85.2157
+    },
+    {
+      "ask": 0.7546,
+      "base": "INR",
+      "bid": 0.7506,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 0.7526
+    },
+    {
+      "ask": 0.00008,
+      "base": "IRR",
+      "bid": 0.00004,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 0.000059999999999999995
+    },
+    {
+      "ask": 0.2221,
+      "base": "PKR",
+      "bid": 0.2201,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 0.2211
+    },
+    {
+      "ask": 16.681,
+      "base": "SAR",
+      "bid": 16.621,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 16.651
+    },
+    {
+      "ask": 63.744,
+      "base": "USD",
+      "bid": 63.644,
+      "date": "2026-05-20",
+      "quote": "AFN",
+      "rate": 63.694
+    }
+  ]
+}

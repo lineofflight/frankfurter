@@ -1,0 +1,589 @@
+{
+  "adapter": "BDP",
+  "cassette": "bdp",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1998, 12, 28), upto: Date.new(1998, 12, 31))",
+  "rows": [
+    {
+      "base": "ATS",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 14.574
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 104.814
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 4.9708
+    },
+    {
+      "base": "BRL",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 142.768
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 111.17
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 125.287
+    },
+    {
+      "base": "CVE",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 1.8182
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 102.535
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 26.949
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 1.205
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 33.726
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 30.576
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 288.532
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 0.60978
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 254.645
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 0.10353
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 1.4821
+    },
+    {
+      "base": "MOP",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 21.607
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 90.998
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 22.513
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 21.365
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 172.392
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 201.43
+    },
+    {
+      "base": "ZAR",
+      "date": "1998-12-28",
+      "quote": "PTE",
+      "rate": 29.269
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 14.573
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 104.977
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 4.9707
+    },
+    {
+      "base": "BRL",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 142.181
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 110.931
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 125.616
+    },
+    {
+      "base": "CVE",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 1.8182
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 102.528
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 26.935
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 1.2051
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 33.721
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 30.573
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 288.186
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 0.61047
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 254.629
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 0.10355
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 1.4889
+    },
+    {
+      "base": "MOP",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 21.526
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 90.993
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 22.556
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 21.249
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 171.755
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 201.324
+    },
+    {
+      "base": "ZAR",
+      "date": "1998-12-29",
+      "quote": "PTE",
+      "rate": 29.143
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 14.571
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 104.931
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 4.9701
+    },
+    {
+      "base": "BRL",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 141.586
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 110.31
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 125.171
+    },
+    {
+      "base": "CVE",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 1.8182
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 102.515
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 26.919
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 1.205
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 33.721
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 30.568
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 286.14
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 0.6084
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 254.596
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 0.10354
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 1.4842
+    },
+    {
+      "base": "MOP",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 21.433
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 90.982
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 22.69
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 21.293
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 171.036
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 200.991
+    },
+    {
+      "base": "ZAR",
+      "date": "1998-12-30",
+      "quote": "PTE",
+      "rate": 29.036
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 14.57
+    },
+    {
+      "base": "AUD",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 105.555
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 4.9698
+    },
+    {
+      "base": "BRL",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 142.254
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 111.001
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 124.694
+    },
+    {
+      "base": "CVE",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 1.8182
+    },
+    {
+      "base": "DEM",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 102.505
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 26.915
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 1.2049
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 33.719
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 30.563
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 284.188
+    },
+    {
+      "base": "GRD",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 0.60809
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 254.56
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 0.10354
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 1.5097
+    },
+    {
+      "base": "MOP",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 21.535
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 90.975
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 22.599
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 21.13
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 171.829
+    },
+    {
+      "base": "XEU",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 200.482
+    },
+    {
+      "base": "ZAR",
+      "date": "1998-12-31",
+      "quote": "PTE",
+      "rate": 29.272
+    }
+  ]
+}

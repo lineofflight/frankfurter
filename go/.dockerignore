@@ -1,0 +1,4 @@
+**/testdata
+**/*_test.go
+docs
+scripts

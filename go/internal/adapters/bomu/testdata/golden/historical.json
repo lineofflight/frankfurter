@@ -1,0 +1,93 @@
+{
+  "adapter": "BOMU",
+  "cassette": "bomu",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2005, 1, 4), upto: Date.new(2005, 1, 4))",
+  "rows": [
+    {
+      "ask": 22.29,
+      "base": "AUD",
+      "bid": 21.6,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 21.945
+    },
+    {
+      "ask": 23.72,
+      "base": "CAD",
+      "bid": 23.02,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 23.37
+    },
+    {
+      "ask": 24.914,
+      "base": "CHF",
+      "bid": 24.082,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 24.498
+    },
+    {
+      "ask": 38.504,
+      "base": "EUR",
+      "bid": 37.0683,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 37.78615
+    },
+    {
+      "ask": 54.426,
+      "base": "GBP",
+      "bid": 52.438,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 53.432
+    },
+    {
+      "ask": 0.2786,
+      "base": "JPY",
+      "bid": 0.26961,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 0.274105
+    },
+    {
+      "ask": 20.55,
+      "base": "NZD",
+      "bid": 19.82,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 20.185
+    },
+    {
+      "ask": 17.61,
+      "base": "SGD",
+      "bid": 17.02,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 17.315
+    },
+    {
+      "ask": 28.5116,
+      "base": "USD",
+      "bid": 27.4995,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 28.00555
+    },
+    {
+      "ask": 5.14,
+      "base": "ZAR",
+      "bid": 4.92,
+      "date": "2005-01-04",
+      "quote": "MUR",
+      "rate": 5.03
+    }
+  ]
+}

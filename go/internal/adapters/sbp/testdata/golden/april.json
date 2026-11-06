@@ -1,0 +1,224 @@
+{
+  "adapter": "SBP",
+  "cassette": "sbp",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 4, 1), upto: Date.new(2026, 4, 30))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 76.082652375
+    },
+    {
+      "base": "AUD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 192.929678
+    },
+    {
+      "base": "BHD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 738.93075
+    },
+    {
+      "base": "CAD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 200.811497
+    },
+    {
+      "base": "CHF",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 350.20489586
+    },
+    {
+      "base": "CNY",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 40.613015
+    },
+    {
+      "base": "DKK",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 43.281344
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 323.0306855769231
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 369.9565962
+    },
+    {
+      "base": "HKD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 35.666231
+    },
+    {
+      "base": "JPY",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 1.759259
+    },
+    {
+      "base": "KWD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 909.4965
+    },
+    {
+      "base": "MYR",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 69.23827635714285
+    },
+    {
+      "base": "NOK",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 28.89639335
+    },
+    {
+      "base": "NZD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 160.88058199999998
+    },
+    {
+      "base": "OMR",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 724.34745
+    },
+    {
+      "base": "QAR",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 76.55315
+    },
+    {
+      "base": "SAR",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 74.43103676086956
+    },
+    {
+      "base": "SEK",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 29.608971937499994
+    },
+    {
+      "base": "SGD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 217.25766715789473
+    },
+    {
+      "base": "THB",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 8.574766625
+    },
+    {
+      "base": "TRY",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 6.300050000000001
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-01",
+      "quote": "PKR",
+      "rate": 279.35178571428565
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-13",
+      "quote": "PKR",
+      "rate": 326.261670673077
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-13",
+      "quote": "PKR",
+      "rate": 374.21649600000006
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-13",
+      "quote": "PKR",
+      "rate": 279.23035714285714
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 328.36043557692307
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 377.20513400000004
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-14",
+      "quote": "PKR",
+      "rate": 279.19464285714287
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 328.7753811538462
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 377.34445919999996
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-17",
+      "quote": "PKR",
+      "rate": 279.1482142857143
+    },
+    {
+      "base": "EUR",
+      "date": "2026-04-20",
+      "quote": "PKR",
+      "rate": 328.131165
+    },
+    {
+      "base": "GBP",
+      "date": "2026-04-20",
+      "quote": "PKR",
+      "rate": 376.7767908
+    },
+    {
+      "base": "USD",
+      "date": "2026-04-20",
+      "quote": "PKR",
+      "rate": 279.14642857142854
+    }
+  ]
+}

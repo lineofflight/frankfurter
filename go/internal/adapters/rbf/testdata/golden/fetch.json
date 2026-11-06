@@ -1,0 +1,206 @@
+{
+  "adapter": "RBF",
+  "cassette": "rbf",
+  "match_requests_on": [
+    "method",
+    "host",
+    "path"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "AUD",
+      "rate": 0.6284
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "CHF",
+      "rate": 0.3534
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "EUR",
+      "rate": 0.3865
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "GBP",
+      "rate": 0.3354
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "JPY",
+      "rate": 71.58
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "NZD",
+      "rate": 0.7666
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "USD",
+      "rate": 0.4507
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-19",
+      "quote": "XDR",
+      "rate": 0.329715
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "AUD",
+      "rate": 0.6313
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "CHF",
+      "rate": 0.354
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "EUR",
+      "rate": 0.3866
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "GBP",
+      "rate": 0.3349
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "JPY",
+      "rate": 71.38
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "NZD",
+      "rate": 0.7688
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "USD",
+      "rate": 0.4487
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-20",
+      "quote": "XDR",
+      "rate": 0.328247
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "AUD",
+      "rate": 0.6293
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "CHF",
+      "rate": 0.3544
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "EUR",
+      "rate": 0.3873
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "GBP",
+      "rate": 0.3351
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "JPY",
+      "rate": 71.55
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "NZD",
+      "rate": 0.7667
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "USD",
+      "rate": 0.4503
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-21",
+      "quote": "XDR",
+      "rate": 0.329593
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "AUD",
+      "rate": 0.6296
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "CHF",
+      "rate": 0.3541
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "EUR",
+      "rate": 0.3875
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "GBP",
+      "rate": 0.3351
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "JPY",
+      "rate": 71.58
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "NZD",
+      "rate": 0.7663
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "USD",
+      "rate": 0.4502
+    },
+    {
+      "base": "FJD",
+      "date": "2026-05-22",
+      "quote": "XDR",
+      "rate": 0.329404
+    }
+  ]
+}

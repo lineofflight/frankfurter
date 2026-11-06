@@ -1,0 +1,637 @@
+{
+  "adapter": "CBKKW",
+  "cassette": "cbkkw",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 6), upto: Date.new(2026, 9, 8))",
+  "rows": [
+    {
+      "base": "USD",
+      "date": "2026-09-06",
+      "quote": "KWD",
+      "rate": 0.30685
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-07",
+      "quote": "KWD",
+      "rate": 0.30685
+    },
+    {
+      "base": "AED",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.083488
+    },
+    {
+      "base": "AFN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.004749
+    },
+    {
+      "base": "ALL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.003864
+    },
+    {
+      "base": "AMD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000843
+    },
+    {
+      "base": "AOA",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000334
+    },
+    {
+      "base": "ARS",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000203
+    },
+    {
+      "base": "AUD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.2212
+    },
+    {
+      "base": "AZN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.180382
+    },
+    {
+      "base": "BAM",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.182048
+    },
+    {
+      "base": "BBD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.152252
+    },
+    {
+      "base": "BDT",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002497
+    },
+    {
+      "base": "BHD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.815382
+    },
+    {
+      "base": "BIF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000102
+    },
+    {
+      "base": "BMD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.30665
+    },
+    {
+      "base": "BND",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.24243
+    },
+    {
+      "base": "BOB",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.024581
+    },
+    {
+      "base": "BRL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.059821
+    },
+    {
+      "base": "BSD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.30665
+    },
+    {
+      "base": "BTN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.003245
+    },
+    {
+      "base": "BWP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.021941
+    },
+    {
+      "base": "BZD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.152471
+    },
+    {
+      "base": "CAD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.222106
+    },
+    {
+      "base": "CDF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000133
+    },
+    {
+      "base": "CHF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.378838
+    },
+    {
+      "base": "CLP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000328
+    },
+    {
+      "base": "CNY",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.045695
+    },
+    {
+      "base": "COP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000098
+    },
+    {
+      "base": "CRC",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000676
+    },
+    {
+      "base": "CUP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.012777
+    },
+    {
+      "base": "CVE",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.003224
+    },
+    {
+      "base": "CZK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.014728
+    },
+    {
+      "base": "DJF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001722
+    },
+    {
+      "base": "DKK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.047684
+    },
+    {
+      "base": "DOP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.005181
+    },
+    {
+      "base": "DZD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002303
+    },
+    {
+      "base": "ECS",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000012
+    },
+    {
+      "base": "EGP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.006022
+    },
+    {
+      "base": "ERN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.020342
+    },
+    {
+      "base": "ETB",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001902
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.35645
+    },
+    {
+      "base": "FJD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.139725
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.415097
+    },
+    {
+      "base": "GEL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.117761
+    },
+    {
+      "base": "GHS",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.026887
+    },
+    {
+      "base": "GMD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.004102
+    },
+    {
+      "base": "GNF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000035
+    },
+    {
+      "base": "GTQ",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.040169
+    },
+    {
+      "base": "GYD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001466
+    },
+    {
+      "base": "HKD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.039111
+    },
+    {
+      "base": "HNL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.011428
+    },
+    {
+      "base": "HTG",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002345
+    },
+    {
+      "base": "HUF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.00098
+    },
+    {
+      "base": "IDR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000017
+    },
+    {
+      "base": "INR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.003239
+    },
+    {
+      "base": "IQD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000234
+    },
+    {
+      "base": "IRR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000007
+    },
+    {
+      "base": "ISK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002539
+    },
+    {
+      "base": "JMD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001931
+    },
+    {
+      "base": "JOD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.432511
+    },
+    {
+      "base": "JPY",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001998
+    },
+    {
+      "base": "KES",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002369
+    },
+    {
+      "base": "KGS",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.003506
+    },
+    {
+      "base": "KHR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000076
+    },
+    {
+      "base": "KMF",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000723
+    },
+    {
+      "base": "KPW",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002359
+    },
+    {
+      "base": "KRW",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000228
+    },
+    {
+      "base": "KZT",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000676
+    },
+    {
+      "base": "LAK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000014
+    },
+    {
+      "base": "LBP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000003
+    },
+    {
+      "base": "LRD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001752
+    },
+    {
+      "base": "LSL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.019174
+    },
+    {
+      "base": "LYD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.048324
+    },
+    {
+      "base": "MAD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.032605
+    },
+    {
+      "base": "MDL",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.01779
+    },
+    {
+      "base": "MGA",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000071
+    },
+    {
+      "base": "MMK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000146
+    },
+    {
+      "base": "MNT",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000085
+    },
+    {
+      "base": "MOP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.037952
+    },
+    {
+      "base": "MRU",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.007626
+    },
+    {
+      "base": "MUR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.006543
+    },
+    {
+      "base": "MVR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.019835
+    },
+    {
+      "base": "MWK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000177
+    },
+    {
+      "base": "MXN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.018085
+    },
+    {
+      "base": "MYR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.075618
+    },
+    {
+      "base": "MZN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.004823
+    },
+    {
+      "base": "NAD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.019176
+    },
+    {
+      "base": "NGN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000232
+    },
+    {
+      "base": "NIO",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.008333
+    },
+    {
+      "base": "NOK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.03309
+    },
+    {
+      "base": "NPR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.002024
+    },
+    {
+      "base": "NZD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.179544
+    },
+    {
+      "base": "OMR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.797529
+    },
+    {
+      "base": "PAB",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.30665
+    },
+    {
+      "base": "PEN",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.09142
+    },
+    {
+      "base": "PGK",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.069088
+    },
+    {
+      "base": "PHP",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.004905
+    },
+    {
+      "base": "PKR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.001104
+    },
+    {
+      "base": "PYG",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.000052
+    },
+    {
+      "base": "QAR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.084244
+    },
+    {
+      "base": "SAR",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.081773
+    },
+    {
+      "base": "SVC",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.035028
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-08",
+      "quote": "KWD",
+      "rate": 0.30665
+    }
+  ]
+}

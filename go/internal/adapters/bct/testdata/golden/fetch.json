@@ -1,0 +1,373 @@
+{
+  "adapter": "BCT",
+  "cassette": "bct",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 20))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.7954
+    },
+    {
+      "base": "BHD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 7.7456
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 2.1252
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 3.7235199999999997
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.4294
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.45554
+    },
+    {
+      "base": "DZD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.02198
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 3.3965
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 3.9132
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.018409300000000003
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 9.5218
+    },
+    {
+      "base": "LYD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.4582
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.31652
+    },
+    {
+      "base": "MRU",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.07292
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.31519600000000003
+    },
+    {
+      "base": "OMR",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 7.5876
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.80145
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.7783800000000001
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 0.31103000000000003
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-18",
+      "quote": "TND",
+      "rate": 2.9034
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.79733
+    },
+    {
+      "base": "BHD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 7.765
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 2.1274
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 3.7100999999999997
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.4303
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.454923
+    },
+    {
+      "base": "DZD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.02204
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 3.3907
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 3.923
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.0184088
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 9.5449
+    },
+    {
+      "base": "LYD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.4594
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.31747000000000003
+    },
+    {
+      "base": "MRU",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.07309
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.31572500000000003
+    },
+    {
+      "base": "OMR",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 7.606
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.80334
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.78032
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 0.31115
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "TND",
+      "rate": 2.9021
+    },
+    {
+      "base": "AED",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.79781
+    },
+    {
+      "base": "BHD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 7.7703
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 2.1293
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 3.70745
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.4305
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.45466500000000004
+    },
+    {
+      "base": "DZD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.02202
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 3.3891
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 3.9277
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.018423
+    },
+    {
+      "base": "KWD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 9.5507
+    },
+    {
+      "base": "LYD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.46
+    },
+    {
+      "base": "MAD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.31683
+    },
+    {
+      "base": "MRU",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.07308
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.315689
+    },
+    {
+      "base": "OMR",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 7.6107
+    },
+    {
+      "base": "QAR",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.8038299999999999
+    },
+    {
+      "base": "SAR",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.78086
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 0.31235
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "TND",
+      "rate": 2.9048
+    }
+  ]
+}

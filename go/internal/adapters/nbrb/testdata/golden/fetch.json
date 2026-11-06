@@ -1,0 +1,913 @@
+{
+  "adapter": "NBRB",
+  "cassette": "nbrb",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 2), upto: Date.new(2026, 3, 6))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.77702
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.0075765
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 2.0297
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.55431
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 2.0876
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 3.6923
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.42142
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.13880599999999998
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.4505
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 3.3659
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 3.8476
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.031363
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.000002172
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.023500999999999998
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.018285
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.032631
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 9.3072
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.0057317
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.16673
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.30042
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 1.7086
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.79718
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.037489
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.31593
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 2.2546
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.06491
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.066016
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 2.8536
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 0.000109518
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-02",
+      "quote": "BYN",
+      "rate": 3.9255
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.78151
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.0076176
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 2.0316
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.5589500000000001
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 2.1022
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 3.7173
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.42051
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.138837
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.4508
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 3.3675
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 3.8373
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.031339
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.000002184
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.023479
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.018283
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.03282
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 9.3458
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.0057188
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.16726000000000002
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.30127000000000004
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 1.7087
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.79603
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.037503
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.31467999999999996
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 2.2576
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.06528
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.066527
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 2.8701
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 0.00010951599999999999
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-03",
+      "quote": "BYN",
+      "rate": 3.9457
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.78682
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.007649700000000001
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 2.0351
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.55755
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 2.1092
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 3.6766
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.42057
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.137839
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.44888000000000006
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 3.3532
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 3.8382
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.031371
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.000002198
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.023353000000000002
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.018326
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.033045
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 9.3971
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.0057933
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.16702999999999998
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.29869
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 1.7014
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.7847500000000001
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.037438
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.3126
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 2.261
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.06570000000000001
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.066563
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 2.8896
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 0.00011026300000000001
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-04",
+      "quote": "BYN",
+      "rate": 3.9604
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.7866799999999999
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.0076718
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 2.0329
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.5473399999999999
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 2.1124
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 3.6879
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.42092999999999997
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.137572
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.44884
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 3.3538
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 3.8593
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.031349
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.000002198
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.02329
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.018373999999999998
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.033037000000000004
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 9.3954
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.0057846
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.16695
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.29961000000000004
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 1.7069
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.78578
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.037458
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.31289
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 2.2635
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.06571
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.06622499999999999
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 2.8891
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 0.00011017799999999999
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-05",
+      "quote": "BYN",
+      "rate": 3.939
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.79001
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.0077002
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 2.0443
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.5542900000000001
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 2.126
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 3.7244
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.42487
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.138264
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.45132000000000005
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 3.3722
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 3.8749
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.031637
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.0000022
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.023305
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.018462
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.033177
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 9.4321
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.0058968
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.16775
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.30046
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 1.7181
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.78893
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.037365
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.31544
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 2.2734
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.06594
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.06614300000000001
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 2.9013
+    },
+    {
+      "base": "VND",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 0.00011065200000000001
+    },
+    {
+      "base": "XDR",
+      "date": "2026-03-06",
+      "quote": "BYN",
+      "rate": 3.9633
+    }
+  ]
+}

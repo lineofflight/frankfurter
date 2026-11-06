@@ -1,0 +1,661 @@
+{
+  "adapter": "BBK",
+  "cassette": "bbk",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(1998, 12, 29), upto: Date.new(1998, 12, 30))",
+  "rows": [
+    {
+      "base": "ATS",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.14214000000000002
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.048482000000000004
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 1.074
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 1.2309999999999999
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.26292000000000004
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.011753
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.32897
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.29821000000000003
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 2.8035
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 2.484
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.0010098
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.01443
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.048482000000000004
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.88738
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.21789999999999998
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.009754
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 0.20800000000000002
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-21",
+      "quote": "DEM",
+      "rate": 1.6647
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.14212999999999998
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.048482000000000004
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 1.0789
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 1.22995
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.26285000000000003
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.011753
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.32895
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.29822
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 2.809
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 2.484
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.0010098
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.014265000000000002
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.048482000000000004
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.8874200000000001
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.2177
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.009754
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 0.2089
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-22",
+      "quote": "DEM",
+      "rate": 1.6704
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.14214000000000002
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.048483
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 1.0785
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 1.2266
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.26289999999999997
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.011753
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.32898000000000005
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.29821000000000003
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 2.803
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 2.4836
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.0010098
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.014419999999999999
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.048483
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.88739
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.21792
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.009752
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 0.20925000000000002
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-23",
+      "quote": "DEM",
+      "rate": 1.672
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.14212999999999998
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.048480999999999996
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 1.0848
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 1.22248
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.26285000000000003
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.011752
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.32893
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.29821000000000003
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 2.8158
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 2.484
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.0010098
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.014455
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.048480999999999996
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.8875
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.21975
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.00975
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 0.20855
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-28",
+      "quote": "DEM",
+      "rate": 1.6818
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.14214000000000002
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.048479999999999995
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 1.0817
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 1.2254
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.26265
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.011755
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.32888
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.29819
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 2.8115
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 2.4832
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.00101
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.014544999999999999
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.048479999999999995
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.88755
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.22030000000000002
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.009755
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 0.2073
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-29",
+      "quote": "DEM",
+      "rate": 1.6751
+    },
+    {
+      "base": "ATS",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.14214000000000002
+    },
+    {
+      "base": "BEF",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.048483
+    },
+    {
+      "base": "CAD",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 1.077
+    },
+    {
+      "base": "CHF",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 1.222
+    },
+    {
+      "base": "DKK",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.2626
+    },
+    {
+      "base": "ESP",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.011755
+    },
+    {
+      "base": "FIM",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.32895
+    },
+    {
+      "base": "FRF",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.29818
+    },
+    {
+      "base": "GBP",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 2.798
+    },
+    {
+      "base": "IEP",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 2.4835
+    },
+    {
+      "base": "ITL",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.00101
+    },
+    {
+      "base": "JPY",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.014504999999999999
+    },
+    {
+      "base": "LUF",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.048483
+    },
+    {
+      "base": "NLG",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.88753
+    },
+    {
+      "base": "NOK",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.2213
+    },
+    {
+      "base": "PTE",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.009753
+    },
+    {
+      "base": "SEK",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 0.20704999999999998
+    },
+    {
+      "base": "USD",
+      "date": "1998-12-30",
+      "quote": "DEM",
+      "rate": 1.673
+    }
+  ]
+}

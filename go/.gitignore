@@ -1,0 +1,2 @@
+# The repository's .gitignore ignores every docs directory; the port's step notes live in go/docs.
+!docs

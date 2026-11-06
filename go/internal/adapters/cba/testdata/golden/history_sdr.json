@@ -1,0 +1,356 @@
+{
+  "adapter": "CBA",
+  "cassette": "cba_history",
+  "match_requests_on": [
+    "method",
+    "uri",
+    "body"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2017, 3, 17), upto: Date.new(2017, 3, 17))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 131.64
+    },
+    {
+      "base": "ARS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 31.14
+    },
+    {
+      "base": "ATS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "AUD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 371.77
+    },
+    {
+      "base": "BEF",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "BGN",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 266.26
+    },
+    {
+      "base": "BRL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 155.02
+    },
+    {
+      "base": "BYN",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 254.73
+    },
+    {
+      "base": "CAD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 362.86
+    },
+    {
+      "base": "CHF",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 485.94
+    },
+    {
+      "base": "CNY",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 70.2
+    },
+    {
+      "base": "CZK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 19.27
+    },
+    {
+      "base": "DEM",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "DKK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 70.07
+    },
+    {
+      "base": "EEK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "EGP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 26.64
+    },
+    {
+      "base": "ESP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "EUR",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 520.89
+    },
+    {
+      "base": "FIM",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "FRF",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "GBP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 598.97
+    },
+    {
+      "base": "GEL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 195.45
+    },
+    {
+      "base": "GRD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "HKD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 62.28
+    },
+    {
+      "base": "HUF",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 1.6829999999999998
+    },
+    {
+      "base": "IEP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "ILS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 133.29
+    },
+    {
+      "base": "INR",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 7.38
+    },
+    {
+      "base": "IRR",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0134
+    },
+    {
+      "base": "ISK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 4.452
+    },
+    {
+      "base": "ITL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "JPY",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 4.271
+    },
+    {
+      "base": "KGS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 6.98
+    },
+    {
+      "base": "KRW",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.42719999999999997
+    },
+    {
+      "base": "KWD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 1585.54
+    },
+    {
+      "base": "KZT",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 1.522
+    },
+    {
+      "base": "LBP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.31980000000000003
+    },
+    {
+      "base": "LTL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 150.84
+    },
+    {
+      "base": "LVL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "MDL",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 24.55
+    },
+    {
+      "base": "MXN",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 25.19
+    },
+    {
+      "base": "NLG",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "NOK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 57.2
+    },
+    {
+      "base": "PLN",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 121.13
+    },
+    {
+      "base": "PTE",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "RUB",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 8.37
+    },
+    {
+      "base": "SAR",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 128.93
+    },
+    {
+      "base": "SEK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 54.99
+    },
+    {
+      "base": "SGD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 345.13
+    },
+    {
+      "base": "SKK",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.0
+    },
+    {
+      "base": "SYP",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 2.27
+    },
+    {
+      "base": "TJS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 59.5
+    },
+    {
+      "base": "TRY",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 134.07
+    },
+    {
+      "base": "UAH",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 17.99
+    },
+    {
+      "base": "USD",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 483.51
+    },
+    {
+      "base": "UZS",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 0.13799999999999998
+    },
+    {
+      "base": "XDR",
+      "date": "2017-03-17",
+      "quote": "AMD",
+      "rate": 655.67
+    }
+  ]
+}

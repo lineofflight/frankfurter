@@ -1,0 +1,493 @@
+{
+  "adapter": "BCCH",
+  "cassette": "bcch",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 15))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 620.13
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 169.61
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 639.33
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 127.03
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 1029.91
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 1172.83
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 5.59
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-02",
+      "quote": "CLP",
+      "rate": 871.41
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 625.59
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 170.74
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 645.17
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 128.08
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 1034.53
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 1185.43
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 5.62
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "CLP",
+      "rate": 884.21
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 636.42
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 171.4
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 662.95
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 130.9
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 1050.68
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 1207.3
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 5.74
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-04",
+      "quote": "CLP",
+      "rate": 906.32
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 632.7
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 171.41
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 654.96
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 129.86
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 1041.22
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 1195.75
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 5.7
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-05",
+      "quote": "CLP",
+      "rate": 895.14
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 634.37
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 172.66
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 662.48
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 131.24
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 1051.14
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 1209.25
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 5.76
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-06",
+      "quote": "CLP",
+      "rate": 907.66
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 646.67
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 174.84
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 677.57
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 133.58
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 1069.2
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 1234.44
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 5.84
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-09",
+      "quote": "CLP",
+      "rate": 921.76
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 644.92
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 175.61
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 674.69
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 132.58
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 1061.34
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 1226.56
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 5.79
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-10",
+      "quote": "CLP",
+      "rate": 916.36
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 639.68
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 173.91
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 658.53
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 130.18
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 1041.35
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 1203.3
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 5.67
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-11",
+      "quote": "CLP",
+      "rate": 893.69
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 640.45
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 173.49
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 659.59
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 130.28
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 1036.64
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 1201.37
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 5.64
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-12",
+      "quote": "CLP",
+      "rate": 895.86
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 644.94
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 174.59
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 667.8
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 132.28
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 1048.68
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 1215.36
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 5.71
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-13",
+      "quote": "CLP",
+      "rate": 909.94
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "key": "DNB",
+  "name": "Danmarks Nationalbank",
+  "country_code": "DK",
+  "rate_type": "indicative rate",
+  "pivot_currency": "DKK",
+  "data_url": "https://www.nationalbanken.dk/en/what-we-do/stable-prices-monetary-policy-and-the-danish-economy/exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 14-16 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1977-01-03"
+}

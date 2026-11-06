@@ -1,0 +1,12 @@
+{
+  "key": "CBVS",
+  "name": "Centrale Bank van Suriname",
+  "country_code": "SR",
+  "rate_type": "indicative rate",
+  "pivot_currency": "SRD",
+  "data_url": "https://www.cbvs.sr/statistieken/financiele-markten-statistieken/dagelijkse-publicaties",
+  "terms_url": "https://www.cbvs.sr/copyright",
+  "publish_schedule": "*/30 18-20 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2009-09-01"
+}

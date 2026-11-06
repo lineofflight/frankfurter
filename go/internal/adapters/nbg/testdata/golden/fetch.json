@@ -1,0 +1,769 @@
+{
+  "adapter": "NBG",
+  "cassette": "nbg",
+  "match_requests_on": [
+    "method",
+    "host"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 3, 2), upto: Date.new(2026, 3, 4))",
+  "rows": [
+    {
+      "base": "AED",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.72853
+    },
+    {
+      "base": "AMD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.007096
+    },
+    {
+      "base": "AUD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 1.9028
+    },
+    {
+      "base": "AZN",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 1.5741
+    },
+    {
+      "base": "BRL",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.5208
+    },
+    {
+      "base": "BYN",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.9282
+    },
+    {
+      "base": "CAD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 1.9576
+    },
+    {
+      "base": "CHF",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 3.4635
+    },
+    {
+      "base": "CNY",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.3901
+    },
+    {
+      "base": "CZK",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.13023
+    },
+    {
+      "base": "DKK",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.42264999999999997
+    },
+    {
+      "base": "EGP",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.055810000000000005
+    },
+    {
+      "base": "EUR",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 3.1581
+    },
+    {
+      "base": "GBP",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 3.6066
+    },
+    {
+      "base": "HKD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.34199999999999997
+    },
+    {
+      "base": "HUF",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.008408
+    },
+    {
+      "base": "ILS",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.8524100000000001
+    },
+    {
+      "base": "INR",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.029411999999999997
+    },
+    {
+      "base": "IRR",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.00000204
+    },
+    {
+      "base": "ISK",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.022037
+    },
+    {
+      "base": "JPY",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.017157
+    },
+    {
+      "base": "KGS",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.030609
+    },
+    {
+      "base": "KRW",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.0018578
+    },
+    {
+      "base": "KWD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 8.7277
+    },
+    {
+      "base": "KZT",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.005374
+    },
+    {
+      "base": "MDL",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.15603
+    },
+    {
+      "base": "NOK",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.28121
+    },
+    {
+      "base": "NZD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 1.6018
+    },
+    {
+      "base": "PLN",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.74794
+    },
+    {
+      "base": "QAR",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.73409
+    },
+    {
+      "base": "RON",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.61978
+    },
+    {
+      "base": "RSD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.02689
+    },
+    {
+      "base": "RUB",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.034619
+    },
+    {
+      "base": "SEK",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.29586999999999997
+    },
+    {
+      "base": "SGD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 2.114
+    },
+    {
+      "base": "TJS",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.28491
+    },
+    {
+      "base": "TMT",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.76454
+    },
+    {
+      "base": "TRY",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.0609
+    },
+    {
+      "base": "UAH",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.06204
+    },
+    {
+      "base": "USD",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 2.6759
+    },
+    {
+      "base": "UZS",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.00022
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-02-28",
+      "quote": "GEL",
+      "rate": 0.16805
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7329100000000001
+    },
+    {
+      "base": "AED",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7329100000000001
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0071407
+    },
+    {
+      "base": "AMD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0071407
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.9088
+    },
+    {
+      "base": "AUD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.9088
+    },
+    {
+      "base": "AZN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.5836
+    },
+    {
+      "base": "AZN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.5836
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.5253
+    },
+    {
+      "base": "BRL",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.5253
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.9307
+    },
+    {
+      "base": "BYN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.9307
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.9727
+    },
+    {
+      "base": "CAD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.9727
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.4855
+    },
+    {
+      "base": "CHF",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.4855
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.39121
+    },
+    {
+      "base": "CNY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.39121
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.13032
+    },
+    {
+      "base": "CZK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.13032
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.42304
+    },
+    {
+      "base": "DKK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.42304
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.05467999999999999
+    },
+    {
+      "base": "EGP",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.05467999999999999
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.1606
+    },
+    {
+      "base": "EUR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.1606
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.6065
+    },
+    {
+      "base": "GBP",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 3.6065
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.34417
+    },
+    {
+      "base": "HKD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.34417
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.008347
+    },
+    {
+      "base": "HUF",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.008347
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.87531
+    },
+    {
+      "base": "ILS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.87531
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.029431
+    },
+    {
+      "base": "INR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.029431
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0000020500000000000003
+    },
+    {
+      "base": "IRR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0000020500000000000003
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.021995
+    },
+    {
+      "base": "ISK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.021995
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.017162
+    },
+    {
+      "base": "JPY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.017162
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.030796999999999998
+    },
+    {
+      "base": "KGS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.030796999999999998
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0018464
+    },
+    {
+      "base": "KRW",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0018464
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 8.7665
+    },
+    {
+      "base": "KWD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 8.7665
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.005381
+    },
+    {
+      "base": "KZT",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.005381
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.15655
+    },
+    {
+      "base": "MDL",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.15655
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.28263
+    },
+    {
+      "base": "NOK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.28263
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.6054
+    },
+    {
+      "base": "NZD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 1.6054
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.74752
+    },
+    {
+      "base": "PLN",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.74752
+    },
+    {
+      "base": "QAR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7381599999999999
+    },
+    {
+      "base": "QAR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7381599999999999
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.62005
+    },
+    {
+      "base": "RON",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.62005
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.026922
+    },
+    {
+      "base": "RSD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.026922
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.034826
+    },
+    {
+      "base": "RUB",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.034826
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.29563
+    },
+    {
+      "base": "SEK",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.29563
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 2.1187
+    },
+    {
+      "base": "SGD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 2.1187
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.28664999999999996
+    },
+    {
+      "base": "TJS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.28664999999999996
+    },
+    {
+      "base": "TMT",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7692
+    },
+    {
+      "base": "TMT",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.7692
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0612
+    },
+    {
+      "base": "TRY",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0612
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.06225000000000001
+    },
+    {
+      "base": "UAH",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.06225000000000001
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 2.6922
+    },
+    {
+      "base": "USD",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 2.6922
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0002209
+    },
+    {
+      "base": "UZS",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.0002209
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.16763999999999998
+    },
+    {
+      "base": "ZAR",
+      "date": "2026-03-03",
+      "quote": "GEL",
+      "rate": 0.16763999999999998
+    }
+  ]
+}

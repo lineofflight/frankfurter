@@ -1,0 +1,12 @@
+{
+  "key": "BOJA",
+  "name": "Bank of Jamaica",
+  "country_code": "JM",
+  "rate_type": "counter rate",
+  "pivot_currency": "JMD",
+  "data_url": "https://boj.org.jm/market/foreign-exchange/counter-rates/",
+  "terms_url": "https://boj.org.jm/disclaimer/",
+  "publish_schedule": "*/30 18-20 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "2006-01-03"
+}

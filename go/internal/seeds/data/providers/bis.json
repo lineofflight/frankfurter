@@ -1,0 +1,13 @@
+{
+  "key": "BIS",
+  "name": "Bank for International Settlements",
+  "country_code": null,
+  "rate_type": "monthly end-period rate, restated history",
+  "pivot_currency": "USD",
+  "data_url": "https://data.bis.org/topics/XRU",
+  "terms_url": "https://data.bis.org/help/legal",
+  "publish_schedule": "0 18 * * 4",
+  "publish_cadence": "monthly",
+  "frequency": "monthly",
+  "coverage_start": "1900-01-31"
+}

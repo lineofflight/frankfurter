@@ -1,0 +1,80 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 49
+        host: www.mongolbank.mn
+        body: '{"startDate":"2026-05-19","endDate":"2026-05-22"}'
+        headers:
+            Accept:
+                - application/json
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Content-Type:
+                - application/json
+            User-Agent:
+                - Ruby
+        url: https://www.mongolbank.mn/en/currency-rate-movement/data
+        method: POST
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 5826
+        body: '{"success":true,"data":[{"RATE_DATE":"2026-05-22","USD":"3,576.42","EUR":"4,151.69","JPY":"22.47","CHF":"4,549.00","SEK":"382.31","GBP":"4,801.52","BGN":"2,148.00","HUF":"11.55","EGP":"67.58","INR":"37.30","HKD":"456.40","RUB":"49.98","KZT":"7.59","CNY":"526.35","KRW":"2.36","KPW":"27.51","CAD":"2,593.39","AUD":"2,551.60","CZK":"170.98","TWD":"113.52","THB":"109.45","IDR":"0.20","MYR":"901.77","SGD":"2,794.73","AED":"973.77","KWD":"11,657.17","NZD":"2,097.03","DKK":"555.59","PLN":"977.99","UAH":"80.77","NOK":"386.72","NPR":"23.31","ZAR":"216.82","TRY":"78.19","VND":"0.14","XAU":"16,172,267.24","XAG":"271,833.67","SDR":"4,887.93"},{"RATE_DATE":"2026-05-21","USD":"3,576.50","EUR":"4,151.42","JPY":"22.49","CHF":"4,541.30","SEK":"381.81","GBP":"4,803.06","BGN":"2,148.05","HUF":"11.53","EGP":"67.42","INR":"37.10","HKD":"456.56","RUB":"50.51","KZT":"7.58","CNY":"525.70","KRW":"2.38","KPW":"27.51","CAD":"2,596.56","AUD":"2,545.93","CZK":"170.79","TWD":"113.39","THB":"109.42","IDR":"0.20","MYR":"901.11","SGD":"2,795.12","AED":"973.83","KWD":"11,657.43","NZD":"2,095.47","DKK":"555.55","PLN":"976.99","UAH":"80.84","NOK":"385.49","NPR":"23.19","ZAR":"216.46","TRY":"78.41","VND":"0.14","XAU":"16,164,724.93","XAG":"267,554.57","SDR":"4,886.31"},{"RATE_DATE":"2026-05-20","USD":"3,576.17","EUR":"4,145.85","JPY":"22.48","CHF":"4,524.51","SEK":"379.96","GBP":"4,786.88","BGN":"2,147.85","HUF":"11.47","EGP":"67.13","INR":"36.91","HKD":"456.58","RUB":"50.18","KZT":"7.59","CNY":"525.44","KRW":"2.37","KPW":"27.51","CAD":"2,596.60","AUD":"2,541.58","CZK":"170.42","TWD":"113.05","THB":"109.28","IDR":"0.20","MYR":"900.46","SGD":"2,791.70","AED":"973.73","KWD":"11,656.36","NZD":"2,086.52","DKK":"554.78","PLN":"974.51","UAH":"80.87","NOK":"384.75","NPR":"23.07","ZAR":"214.63","TRY":"78.43","VND":"0.14","XAU":"16,016,753.51","XAG":"268,176.45","SDR":"4,888.48"},{"RATE_DATE":"2026-05-19","USD":"3,575.99","EUR":"4,160.66","JPY":"22.48","CHF":"4,553.66","SEK":"380.68","GBP":"4,792.72","BGN":"2,147.74","HUF":"11.56","EGP":"67.28","INR":"37.08","HKD":"456.58","RUB":"50.01","KZT":"7.59","CNY":"525.58","KRW":"2.37","KPW":"27.51","CAD":"2,600.81","AUD":"2,548.25","CZK":"171.26","TWD":"112.94","THB":"109.73","IDR":"0.20","MYR":"899.62","SGD":"2,792.98","AED":"973.67","KWD":"11,655.77","NZD":"2,092.31","DKK":"556.76","PLN":"981.47","UAH":"81.00","NOK":"386.14","NPR":"23.18","ZAR":"215.38","TRY":"78.46","VND":"0.14","XAU":"16,296,912.87","XAG":"273,466.86","SDR":"4,888.17"}],"langData":{"root":{"title":"The Central Bank of Mongolia","description":"The official website of The Central Bank of Mongolia.","keywords":"mongolbank, монголбанк, central bank, төв банк, bank of mongolia","author":"mongolbank","generator":"mongolbank","canonical":"https://www.mongolbank.mn/en","image":"/en/images/mongolbank-1.jpg","type":"article","card":"summary_large_image"},"currencyNames":{"USD":{"name":"US dollar","code":"USD","svg":"us.svg"},"EUR":{"name":"Euro","code":"EUR","svg":"eu.svg"},"JPY":{"name":"Japan yen","code":"JPY","svg":"jp.svg"},"CHF":{"name":"Swiss Franc","code":"CHF","svg":"ch.svg"},"SEK":{"name":"Sweden krone","code":"SEK","svg":"se.svg"},"GBP":{"name":"British Pound","code":"GBP","svg":"gb.svg"},"BGN":{"name":"Bulgarian lev","code":"BGN","svg":"bg.svg"},"HUF":{"name":"Hungarian forint","code":"HUF","svg":"hu.svg"},"EGP":{"name":"Egypt pound","code":"EGP","svg":"eg.svg"},"INR":{"name":"Indian rupee","code":"INR","svg":"in.svg"},"HKD":{"name":"Hong Kong dollar","code":"HKD","svg":"hk.svg"},"RUB":{"name":"Russian rubel","code":"RUB","svg":"ru.svg"},"KZT":{"name":"Kazakhstan tenge","code":"KZT","svg":"kz.svg"},"CNY":{"name":"China yuan","code":"CNY","svg":"cn.svg"},"KRW":{"name":"South Korea won","code":"KRW","svg":"kr.svg"},"KPW":{"name":"North Korea won","code":"KPW","svg":"kp.svg"},"CAD":{"name":"Canada dollar","code":"CAD","svg":"ca.svg"},"AUD":{"name":"Australia dollar","code":"AUD","svg":"au.svg"},"CZK":{"name":"Czech krone","code":"CZK","svg":"cz.svg"},"TWD":{"name":"Taiwan dollar","code":"TWD","svg":"tw.svg"},"THB":{"name":"Thai baht","code":"THB","svg":"th.svg"},"IDR":{"name":"Indonesian rupiah","code":"IDR","svg":"id.svg"},"MYR":{"name":"Malaysia ringgit","code":"MYR","svg":"my.svg"},"SGD":{"name":"Singapore dollar","code":"SGD","svg":"sg.svg"},"AED":{"name":"Arabic dihram","code":"AED","svg":"ae.svg"},"KWD":{"name":"Kuwaiti dinar","code":"KWD","svg":"kw.svg"},"NZD":{"name":"New Zealand dollar","code":"NZD","svg":"nz.svg"},"DKK":{"name":"Danish krone","code":"DKK","svg":"dk.svg"},"PLN":{"name":"Poland zloty","code":"PLN","svg":"pl.svg"},"UAH":{"name":"Ukraine hrywnja","code":"UAH","svg":"ua.svg"},"NOK":{"name":"Norwegian krone","code":"NOK","svg":"no.svg"},"NPR":{"name":"Nepalese rupee","code":"NPR","svg":"np.svg"},"ZAR":{"name":"South African rand","code":"ZAR","svg":"za.svg"},"TRY":{"name":"Turkish lira","code":"TRY","svg":"tr.svg"},"VND":{"name":"Vietnam dong","code":"VND","svg":"vn.svg"},"XAU":{"name":"Gold /Ounce/","code":"XAU","svg":"xau.svg"},"XAG":{"name":"Silver /Ounce/","code":"XAG","svg":"xag.svg"},"SDR":{"name":"Special drawing rights","code":"SDR","svg":"sdr.svg"}},"breadcrumb":{"node1":"Statistic","node2":"Exchange rate","node3":"Foreign exchange rate movements"},"title":"Foreign exchange rate movements","placeholders":{"node0":"Date","node1":"Start date","node2":"End date","node3":"Find","node4":"Download Excel"},"meta":{"title":"Foreign exchange rate movements","description":"The official website of The Central Bank of Mongolia.","keywords":"mongolbank, монголбанк, central bank, төв банк, bank of mongolia","author":"mongolbank","generator":"mongolbank","canonical":"https://www.mongolbank.mn/mn/currency-rate-movement","image":"/en/images/mongolbank-1.jpg","type":"article","card":"summary_large_image"}}}'
+        headers:
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - 'default-src ''self'' https:; script-src ''self'' https: ''unsafe-inline'' ''unsafe-eval''; style-src ''self'' https: ''unsafe-inline''; img-src ''self'' data: https:;'
+            Content-Type:
+                - application/json; charset=utf-8
+            Cross-Origin-Opener-Policy:
+                - unsafe-none
+            Cross-Origin-Resource-Policy:
+                - cross-origin
+            Date:
+                - Fri, 22 May 2026 12:52:10 GMT
+            Etag:
+                - W/"48c422-Kl+TH7a1f1BPILLqCAlons4IKQQ"
+            Expect-Ct:
+                - max-age=86400, enforce
+            Permissions-Policy:
+                - geolocation=(), microphone=(), camera=(), payment=(), fullscreen=(self)
+            Referrer-Policy:
+                - no-referrer-when-downgrade
+                - strict-origin-when-cross-origin
+            Server:
+                - nginx
+            Set-Cookie:
+                - language=en; Max-Age=2592000; Path=/; Expires=Sun, 21 Jun 2026 12:52:09 GMT
+                - session.sig=RDy6b7sKgvTz-eT8KFkhywtbTdU; path=/; expires=Sat, 23 May 2026 12:52:10 GMT; httponly
+                - session=eyJsYW5ndWFnZSI6ImVuIn0=; path=/; expires=Sat, 23 May 2026 12:52:10 GMT; httponly
+            Strict-Transport-Security:
+                - max-age=31536000; includeSubDomains; preload
+                - max-age=31536000; includeSubDomains; preload
+            Vary:
+                - Origin, Accept-Encoding
+            X-Content-Type-Options:
+                - nosniff
+                - nosniff
+            X-Dns-Prefetch-Control:
+                - 'on'
+            X-Download-Options:
+                - noopen
+            X-Frame-Options:
+                - SAMEORIGIN
+                - SAMEORIGIN
+            X-Permitted-Cross-Domain-Policies:
+                - none
+            X-Request-Id:
+                - 1367a41d-eea5-4a53-9008-20a7513a8f8c
+            X-Xss-Protection:
+                - "0"
+        status: 200 OK
+        code: 200
+        duration: 0s

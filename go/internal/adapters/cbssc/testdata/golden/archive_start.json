@@ -1,0 +1,31 @@
+{
+  "adapter": "CBSSC",
+  "cassette": "cbssc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2000, 1, 4), upto: Date.new(2000, 1, 4))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 5.427
+    },
+    {
+      "base": "GBP",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 8.6949
+    },
+    {
+      "base": "USD",
+      "date": "2000-01-04",
+      "quote": "SCR",
+      "rate": 5.3441
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        host: api.hkma.gov.hk
+        headers:
+            Accept:
+                - '*/*'
+            Accept-Encoding:
+                - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+            Host:
+                - api.hkma.gov.hk
+            User-Agent:
+                - Ruby
+        url: https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-eeri-daily?choose=end_of_day&from=2026-02-25&offset=0&pagesize=100&sortby=end_of_day&sortorder=desc&to=2026-02-28
+        method: GET
+      response:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 2879
+        body: '{"header":{"success":true,"err_code":"0000","err_msg":"No error found"},"result":{"datasize":4,"records":[{"end_of_day":"2026-02-28","usd":7.8245000000000005,"gbp":10.549,"jpy":0.05012,"cad":5.7355,"aud":5.5855,"sgd":6.1855,"twd":0.255,"chf":10.169,"cny":1.14015,"krw":0.005433,"thb":0.25235,"myr":2.01045,"dem":null,"nlg":null,"bef":null,"frf":null,"itl":null,"eur":9.245,"php":0.1345,"inr":0.0855,"idr":0.0004666,"zar":0.4915,"special_drawing_rights":null,"neeri_1983_trade_wgt":null,"neeri_1983_import_wgt":null,"neeri_1983_export_wgt":null,"neeri_2000_trade_wgt":null,"neeri_2000_import_wgt":null,"neeri_2000_export_wgt":null,"neeri_2010_trade_wgt":null,"neeri_2010_import_wgt":null,"neeri_2010_export_wgt":null,"neeri_2020_trade_wgt":101.2,"neeri_2020_import_wgt":101.8,"neeri_2020_export_wgt":100.5},{"end_of_day":"2026-02-27","usd":7.825,"gbp":10.536,"jpy":0.05015,"cad":5.7235,"aud":5.574,"sgd":6.188,"twd":0.255,"chf":10.1195,"cny":1.1417,"krw":0.005433,"thb":0.25235,"myr":2.0116,"dem":null,"nlg":null,"bef":null,"frf":null,"itl":null,"eur":9.236,"php":0.1345,"inr":0.0855,"idr":0.0004666,"zar":0.492,"special_drawing_rights":10.75757525,"neeri_1983_trade_wgt":null,"neeri_1983_import_wgt":null,"neeri_1983_export_wgt":null,"neeri_2000_trade_wgt":null,"neeri_2000_import_wgt":null,"neeri_2000_export_wgt":null,"neeri_2010_trade_wgt":null,"neeri_2010_import_wgt":null,"neeri_2010_export_wgt":null,"neeri_2020_trade_wgt":101.1,"neeri_2020_import_wgt":101.7,"neeri_2020_export_wgt":100.4},{"end_of_day":"2026-02-26","usd":7.825,"gbp":10.6045,"jpy":0.05013,"cad":5.726,"aud":5.577,"sgd":6.199,"twd":0.255,"chf":10.1335,"cny":1.14465,"krw":0.005485,"thb":0.25215,"myr":2.0138,"dem":null,"nlg":null,"bef":null,"frf":null,"itl":null,"eur":9.247,"php":0.1345,"inr":0.0855,"idr":0.000467,"zar":0.493,"special_drawing_rights":10.76430475,"neeri_1983_trade_wgt":null,"neeri_1983_import_wgt":null,"neeri_1983_export_wgt":null,"neeri_2000_trade_wgt":null,"neeri_2000_import_wgt":null,"neeri_2000_export_wgt":null,"neeri_2010_trade_wgt":null,"neeri_2010_import_wgt":null,"neeri_2010_export_wgt":null,"neeri_2020_trade_wgt":100.9,"neeri_2020_import_wgt":101.5,"neeri_2020_export_wgt":100.3},{"end_of_day":"2026-02-25","usd":7.822,"gbp":10.578,"jpy":0.0502,"cad":5.7185,"aud":5.564,"sgd":6.187,"twd":0.255,"chf":10.1255,"cny":1.13945,"krw":0.005473,"thb":0.25245,"myr":2.0128,"dem":null,"nlg":null,"bef":null,"frf":null,"itl":null,"eur":9.235,"php":0.1345,"inr":0.0855,"idr":0.0004659,"zar":0.4915,"special_drawing_rights":10.74250014,"neeri_1983_trade_wgt":null,"neeri_1983_import_wgt":null,"neeri_1983_export_wgt":null,"neeri_2000_trade_wgt":null,"neeri_2000_import_wgt":null,"neeri_2000_export_wgt":null,"neeri_2010_trade_wgt":null,"neeri_2010_import_wgt":null,"neeri_2010_export_wgt":null,"neeri_2020_trade_wgt":101.2,"neeri_2020_import_wgt":101.8,"neeri_2020_export_wgt":100.6}]}}'
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Access-Control-Expose-Headers:
+                - X-Auth-Token
+            Connection:
+                - keep-alive
+            Content-Security-Policy:
+                - default-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.aliyun.com;
+            Content-Type:
+                - application/json
+            Date:
+                - Mon, 30 Mar 2026 20:28:04 GMT
+            Set-Cookie:
+                - SERVERCORSID=180c039dd3c477baa89ba3a34b2095cf|1774902483|1774902483;Path=/;SameSite=None;Secure
+                - SERVERID=180c039dd3c477baa89ba3a34b2095cf|1774902483|1774902483;Path=/
+                - acw_tc=2f3478b517749024833398982e22ec0ea67bed909e921e8933a8bb83b4caa9;path=/;HttpOnly;Max-Age=1800
+            Strict-Transport-Security:
+                - max-age=31536000
+            Vary:
+                - Accept-Encoding
+                - Origin
+            Via:
+                - kong/2.5.1
+            X-Content-Type-Options:
+                - nosniff
+            X-Frame-Options:
+                - DENY
+            X-Kong-Proxy-Latency:
+                - "1"
+            X-Kong-Upstream-Latency:
+                - "1361"
+            X-Xss-Protection:
+                - 1; mode=block
+        status: 200 OK
+        code: 200
+        duration: 0s

@@ -1,0 +1,2779 @@
+{
+  "adapter": "INFOREURO",
+  "cassette": "inforeuro",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2000, 1, 1), upto: Date.new(2000, 3, 1))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AED",
+      "rate": 3.69914
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AFA",
+      "rate": 4712.8
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ALL",
+      "rate": 134.864
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AMD",
+      "rate": 526.408
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ANG",
+      "rate": 1.79282
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AOA",
+      "rate": 5.54714
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ARS",
+      "rate": 1.007
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AUD",
+      "rate": 1.5532
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AWG",
+      "rate": 1.79282
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "AZM",
+      "rate": 4414.56
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BBD",
+      "rate": 2.00433
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BDT",
+      "rate": 51.3773
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BHD",
+      "rate": 0.379714
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BIF",
+      "rate": 634.441
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BMD",
+      "rate": 1.0072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BND",
+      "rate": 1.6881
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BOB",
+      "rate": 6.03313
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BRL",
+      "rate": 1.83285
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BSD",
+      "rate": 1.0072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BTN",
+      "rate": 43.83
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BWP",
+      "rate": 4.61698
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BYB",
+      "rate": 319282.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "BZD",
+      "rate": 2.0144
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CAD",
+      "rate": 1.4613
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CDF",
+      "rate": 4.78835
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CHF",
+      "rate": 1.6059
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CLP",
+      "rate": 540.151
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CNY",
+      "rate": 8.33921
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "COP",
+      "rate": 1880.46
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CRC",
+      "rate": 299.793
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CUP",
+      "rate": 21.1512
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CYP",
+      "rate": 0.57683
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "CZK",
+      "rate": 36.107
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "DJF",
+      "rate": 179.001
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "DKK",
+      "rate": 7.4425
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "DOP",
+      "rate": 16.0246
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "DZD",
+      "rate": 68.8504
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ECS",
+      "rate": 19076.4
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "EGP",
+      "rate": 3.4717
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ERN",
+      "rate": 9.895
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ETB",
+      "rate": 8.1116
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "FJD",
+      "rate": 1.98596
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "FKP",
+      "rate": 0.6226
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GBP",
+      "rate": 0.6226
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GEL",
+      "rate": 1.99426
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GHC",
+      "rate": 3448.83
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GIP",
+      "rate": 0.6226
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GMD",
+      "rate": 11.725
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GNF",
+      "rate": 1383.73
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GRD",
+      "rate": 330.25
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GTQ",
+      "rate": 7.7353
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "GYD",
+      "rate": 181.888
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "HKD",
+      "rate": 7.85616
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "HNL",
+      "rate": 14.695
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "HRK",
+      "rate": 7.6618
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "HTG",
+      "rate": 17.8778
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "HUF",
+      "rate": 254.63
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "IDR",
+      "rate": 7210.77
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ILS",
+      "rate": 4.21362
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "INR",
+      "rate": 43.83
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "IQD",
+      "rate": 0.313138
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "IRR",
+      "rate": 1765.12
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ISK",
+      "rate": 72.9397
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "JMD",
+      "rate": 41.7063
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "JOD",
+      "rate": 0.7151
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "JPY",
+      "rate": 103.02
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KES",
+      "rate": 74.5051
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KGS",
+      "rate": 46.5037
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KHR",
+      "rate": 3779.01
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KPW",
+      "rate": 2.21584
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KRW",
+      "rate": 1151.31
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KWD",
+      "rate": 0.30639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KYD",
+      "rate": 0.8117
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "KZT",
+      "rate": 142.22
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LAK",
+      "rate": 7889.24
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LBP",
+      "rate": 1570.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LKR",
+      "rate": 72.6045
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LRD",
+      "rate": 1.0072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LSL",
+      "rate": 6.19932
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LTL",
+      "rate": 4.0288
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LVL",
+      "rate": 0.588778
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "LYD",
+      "rate": 0.465
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MAD",
+      "rate": 10.1515
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MDL",
+      "rate": 11.7537
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MGF",
+      "rate": 6567.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MKD",
+      "rate": 58.9772
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MMK",
+      "rate": 6.4083
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MNT",
+      "rate": 1078.53
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MOP",
+      "rate": 8.08207
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MRO",
+      "rate": 222.86
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MTL",
+      "rate": 0.41505
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MUR",
+      "rate": 25.835
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MVR",
+      "rate": 11.1396
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MWK",
+      "rate": 47.054
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MXN",
+      "rate": 9.372
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MYR",
+      "rate": 3.8688
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "MZM",
+      "rate": 13754.3
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NAD",
+      "rate": 6.19932
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NGN",
+      "rate": 97.7488
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NIO",
+      "rate": 14.0404
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NOK",
+      "rate": 8.071
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NPR",
+      "rate": 69.2148
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "NZD",
+      "rate": 1.9321
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "OMR",
+      "rate": 0.387772
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PAB",
+      "rate": 1.0072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PEN",
+      "rate": 3.49196
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PGK",
+      "rate": 2.71518
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PHP",
+      "rate": 40.9547
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PKR",
+      "rate": 51.984
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PLN",
+      "rate": 4.1772
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "PYG",
+      "rate": 3344.83
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "QAR",
+      "rate": 3.6655
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ROL",
+      "rate": 18456.9
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "RUB",
+      "rate": 27.23
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "RWF",
+      "rate": 345.67
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SAR",
+      "rate": 3.7773
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SBD",
+      "rate": 5.06591
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SCR",
+      "rate": 5.4185
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SDD",
+      "rate": 259.052
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SEK",
+      "rate": 8.564
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SGD",
+      "rate": 1.6881
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SHP",
+      "rate": 0.6226
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SIT",
+      "rate": 198.762
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SKK",
+      "rate": 42.6085
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SLL",
+      "rate": 2279.51
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SOS",
+      "rate": 2573.56
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SRG",
+      "rate": 994.61
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "STD",
+      "rate": 7472.91
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SVC",
+      "rate": 8.78278
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SYP",
+      "rate": 46.3312
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "SZL",
+      "rate": 6.19932
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "THB",
+      "rate": 38.5654
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TJR",
+      "rate": 1446.34
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TMM",
+      "rate": 5237.44
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TND",
+      "rate": 1.2679
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TOP",
+      "rate": 1.50744
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TRL",
+      "rate": 545112.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TTD",
+      "rate": 6.34615
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TWD",
+      "rate": 31.7802
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "TZS",
+      "rate": 803.01
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "UAH",
+      "rate": 5.25527
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "UGX",
+      "rate": 1515.55
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "USD",
+      "rate": 1.0072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "UYU",
+      "rate": 11.6634
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "UZS",
+      "rate": 654.68
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "VEB",
+      "rate": 648.133
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "VND",
+      "rate": 14264.5
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "VUV",
+      "rate": 131.191
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "WST",
+      "rate": 3.10292
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "XCD",
+      "rate": 2.71944
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "YER",
+      "rate": 161.65
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ZAR",
+      "rate": 6.19932
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ZMK",
+      "rate": 2650.73
+    },
+    {
+      "base": "EUR",
+      "date": "2000-01-01",
+      "quote": "ZWD",
+      "rate": 38.157
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AED",
+      "rate": 3.61707
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AFA",
+      "rate": 4677.8
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ALL",
+      "rate": 136.986
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AMD",
+      "rate": 508.519
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ANG",
+      "rate": 1.75294
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AOA",
+      "rate": 5.78925
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ARS",
+      "rate": 0.984603
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AUD",
+      "rate": 1.5178
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AWG",
+      "rate": 1.75294
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "AZM",
+      "rate": 4317.36
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BBD",
+      "rate": 1.95975
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BDT",
+      "rate": 50.2346
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BHD",
+      "rate": 0.37127
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BIF",
+      "rate": 635.49
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BMD",
+      "rate": 0.9848
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BND",
+      "rate": 1.6732
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BOB",
+      "rate": 5.9285
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BRL",
+      "rate": 1.77839
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BSD",
+      "rate": 0.9848
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BTN",
+      "rate": 42.9435
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BWP",
+      "rate": 4.58583
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BYB",
+      "rate": 329.908
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "BZD",
+      "rate": 1.9696
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CAD",
+      "rate": 1.4178
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CDF",
+      "rate": 9.47181
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CHF",
+      "rate": 1.6121
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CLP",
+      "rate": 508.708
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CNY",
+      "rate": 8.15365
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "COP",
+      "rate": 1914.33
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CRC",
+      "rate": 295.154
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CUP",
+      "rate": 20.6808
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CYP",
+      "rate": 0.576
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "CZK",
+      "rate": 35.75
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "DJF",
+      "rate": 175.02
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "DOP",
+      "rate": 15.7863
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "DZD",
+      "rate": 67.9367
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ECS",
+      "rate": 24595.4
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "EGP",
+      "rate": 3.4724
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ERN",
+      "rate": 9.6816
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ETB",
+      "rate": 8.25043
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "FJD",
+      "rate": 1.94191
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "FKP",
+      "rate": 0.6051
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GBP",
+      "rate": 0.6051
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GEL",
+      "rate": 2.00604
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GHC",
+      "rate": 3531.86
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GIP",
+      "rate": 0.6051
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GMD",
+      "rate": 11.875
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GNF",
+      "rate": 1817.74
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GRD",
+      "rate": 331.8
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GTQ",
+      "rate": 7.76022
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "GYD",
+      "rate": 178.583
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "HKD",
+      "rate": 7.68144
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "HNL",
+      "rate": 14.4372
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "HRK",
+      "rate": 7.71235
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "HTG",
+      "rate": 18.1696
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "HUF",
+      "rate": 255.33
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "IDR",
+      "rate": 7347.94
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ILS",
+      "rate": 4.02448
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "INR",
+      "rate": 42.9435
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "IQD",
+      "rate": 0.306174
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "IRR",
+      "rate": 1725.86
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ISK",
+      "rate": 72.2376
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "JMD",
+      "rate": 41.0893
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "JOD",
+      "rate": 0.717
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "JPY",
+      "rate": 103.74
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KES",
+      "rate": 68.8651
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KGS",
+      "rate": 45.9779
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KHR",
+      "rate": 3737.32
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KPW",
+      "rate": 2.16656
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KRW",
+      "rate": 1102.87
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KWD",
+      "rate": 0.300561
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KYD",
+      "rate": 0.7859
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "KZT",
+      "rate": 145.73
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LAK",
+      "rate": 7628.79
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LBP",
+      "rate": 1530.41
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LKR",
+      "rate": 72.7563
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LRD",
+      "rate": 0.9848
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LSL",
+      "rate": 6.18454
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LTL",
+      "rate": 3.9392
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LVL",
+      "rate": 0.59328
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "LYD",
+      "rate": 0.4536
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MAD",
+      "rate": 10.1425
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MDL",
+      "rate": 12.1306
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MGF",
+      "rate": 6702.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MKD",
+      "rate": 58.647
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MMK",
+      "rate": 6.2665
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MNT",
+      "rate": 1042.53
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MOP",
+      "rate": 7.91494
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MRO",
+      "rate": 225.985
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MTL",
+      "rate": 0.41028
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MUR",
+      "rate": 25.775
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MVR",
+      "rate": 11.5911
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MWK",
+      "rate": 46.8365
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MXN",
+      "rate": 9.35068
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MYR",
+      "rate": 3.8623
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "MZM",
+      "rate": 13419.3
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NAD",
+      "rate": 6.18454
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NGN",
+      "rate": 102.419
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NIO",
+      "rate": 12.1311
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NOK",
+      "rate": 8.044
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NPR",
+      "rate": 67.6804
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "NZD",
+      "rate": 1.992
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "OMR",
+      "rate": 0.379148
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PAB",
+      "rate": 0.9848
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PEN",
+      "rate": 3.44138
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PGK",
+      "rate": 3.06138
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PHP",
+      "rate": 41.4021
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PKR",
+      "rate": 50.7133
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PLN",
+      "rate": 4.0991
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "PYG",
+      "rate": 3292.46
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "QAR",
+      "rate": 3.58398
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ROL",
+      "rate": 18172.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "RUB",
+      "rate": 28.72
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "RWF",
+      "rate": 337.225
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SAR",
+      "rate": 3.69359
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SBD",
+      "rate": 5.07209
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SCR",
+      "rate": 5.747
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SDD",
+      "rate": 253.488
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SEK",
+      "rate": 8.524
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SGD",
+      "rate": 1.6732
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SHP",
+      "rate": 0.6051
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SIT",
+      "rate": 200.279
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SKK",
+      "rate": 42.3367
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SLL",
+      "rate": 2350.86
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SOS",
+      "rate": 2580.18
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SRG",
+      "rate": 997.5
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "STD",
+      "rate": 8042.08
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SVC",
+      "rate": 8.61208
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SYP",
+      "rate": 45.3008
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "SZL",
+      "rate": 6.18454
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "THB",
+      "rate": 37.6089
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TJR",
+      "rate": 1526.44
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TMM",
+      "rate": 5120.96
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TND",
+      "rate": 1.24754
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TOP",
+      "rate": 1.46507
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TRL",
+      "rate": 547219.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TTD",
+      "rate": 6.30265
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TWD",
+      "rate": 30.2629
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "TZS",
+      "rate": 785.378
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "UAH",
+      "rate": 5.43521
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "UGX",
+      "rate": 1511.5
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "USD",
+      "rate": 0.9848
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "UYU",
+      "rate": 11.5025
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "UZS",
+      "rate": 640.12
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "VEB",
+      "rate": 643.567
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "VND",
+      "rate": 14094.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "VUV",
+      "rate": 128.633
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "WST",
+      "rate": 2.98741
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "XCD",
+      "rate": 2.65896
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "YER",
+      "rate": 156.515
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ZAR",
+      "rate": 6.18454
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ZMK",
+      "rate": 2655.33
+    },
+    {
+      "base": "EUR",
+      "date": "2000-02-01",
+      "quote": "ZWD",
+      "rate": 37.878
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AED",
+      "rate": 3.5404
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AFA",
+      "rate": 4578.53
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ALL",
+      "rate": 136.144
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AMD",
+      "rate": 515.958
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ANG",
+      "rate": 1.71574
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AOA",
+      "rate": 5.68025
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ARS",
+      "rate": 0.963707
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AUD",
+      "rate": 1.571
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AWG",
+      "rate": 1.71574
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "AZM",
+      "rate": 4242.12
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BBD",
+      "rate": 1.91816
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BDT",
+      "rate": 49.1685
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BHD",
+      "rate": 0.36339
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BIF",
+      "rate": 637.109
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BMD",
+      "rate": 0.9639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BND",
+      "rate": 1.6744
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BOB",
+      "rate": 5.84123
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BRL",
+      "rate": 1.79405
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BSD",
+      "rate": 0.9639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BTN",
+      "rate": 43.72
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BWP",
+      "rate": 4.61223
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BYB",
+      "rate": 380.741
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "BZD",
+      "rate": 1.9278
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CAD",
+      "rate": 1.3969
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CDF",
+      "rate": 9.46777
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CHF",
+      "rate": 1.6064
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CLP",
+      "rate": 490.895
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CNY",
+      "rate": 7.97868
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "COP",
+      "rate": 1871.45
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CRC",
+      "rate": 290.471
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CUP",
+      "rate": 20.2419
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CYP",
+      "rate": 0.57531
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "CZK",
+      "rate": 35.496
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "DJF",
+      "rate": 171.305
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "DKK",
+      "rate": 7.4469
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "DOP",
+      "rate": 15.4706
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "DZD",
+      "rate": 66.849
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ECS",
+      "rate": 24097.5
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "EGP",
+      "rate": 3.4197
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ERN",
+      "rate": 9.5594
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ETB",
+      "rate": 8.24274
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "FJD",
+      "rate": 1.97592
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "FKP",
+      "rate": 0.6072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GBP",
+      "rate": 0.6072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GEL",
+      "rate": 1.9037
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GHC",
+      "rate": 3590.63
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GIP",
+      "rate": 0.6072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GMD",
+      "rate": 11.85
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GNF",
+      "rate": 1673.67
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GRD",
+      "rate": 334.05
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GTQ",
+      "rate": 7.46396
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "GYD",
+      "rate": 175.517
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "HKD",
+      "rate": 7.51842
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "HNL",
+      "rate": 14.1693
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "HRK",
+      "rate": 7.72724
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "HTG",
+      "rate": 18.5069
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "HUF",
+      "rate": 256.78
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "IDR",
+      "rate": 7396.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ILS",
+      "rate": 3.9063
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "INR",
+      "rate": 43.72
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "IQD",
+      "rate": 0.299677
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "IRR",
+      "rate": 1689.23
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ISK",
+      "rate": 70.8972
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "JMD",
+      "rate": 40.484
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "JOD",
+      "rate": 0.6949
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "JPY",
+      "rate": 105.22
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KES",
+      "rate": 73.7906
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KGS",
+      "rate": 45.2478
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KHR",
+      "rate": 3633.9
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KPW",
+      "rate": 2.12058
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KRW",
+      "rate": 1092.47
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KWD",
+      "rate": 0.295339
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KYD",
+      "rate": 0.785
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "KZT",
+      "rate": 141.59
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LAK",
+      "rate": 7497.89
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LBP",
+      "rate": 1536.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LKR",
+      "rate": 72.307
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LRD",
+      "rate": 0.9639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LSL",
+      "rate": 6.10872
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LTL",
+      "rate": 3.8556
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LVL",
+      "rate": 0.588783
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "LYD",
+      "rate": 0.4522
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MAD",
+      "rate": 10.1855
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MDL",
+      "rate": 12.0603
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MGF",
+      "rate": 6690.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MKD",
+      "rate": 58.5782
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MMK",
+      "rate": 6.3011
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MNT",
+      "rate": 1031.37
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MOP",
+      "rate": 7.74947
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MRO",
+      "rate": 228.06
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MTL",
+      "rate": 0.40875
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MUR",
+      "rate": 25.235
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MVR",
+      "rate": 11.3451
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MWK",
+      "rate": 44.8899
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MXN",
+      "rate": 9.03656
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MYR",
+      "rate": 3.7561
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "MZM",
+      "rate": 13727.1
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NAD",
+      "rate": 6.10872
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NGN",
+      "rate": 101.21
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NIO",
+      "rate": 11.9646
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NOK",
+      "rate": 8.0625
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NPR",
+      "rate": 66.3289
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "NZD",
+      "rate": 1.9889
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "OMR",
+      "rate": 0.371005
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PAB",
+      "rate": 0.9639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PEN",
+      "rate": 3.33365
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PGK",
+      "rate": 3.1506
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PHP",
+      "rate": 40.0521
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PKR",
+      "rate": 50.6225
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PLN",
+      "rate": 4.0359
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "PYG",
+      "rate": 3423.18
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "QAR",
+      "rate": 3.5086
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ROL",
+      "rate": 18215.3
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "RUB",
+      "rate": 28.35
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "RWF",
+      "rate": 344.196
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SAR",
+      "rate": 3.6153
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SBD",
+      "rate": 4.97705
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SCR",
+      "rate": 5.4131
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SDD",
+      "rate": 248.204
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SEK",
+      "rate": 8.417
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SGD",
+      "rate": 1.6744
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SHP",
+      "rate": 0.6072
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SIT",
+      "rate": 202.218
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SKK",
+      "rate": 41.9336
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SLL",
+      "rate": 2388.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SOS",
+      "rate": 2525.42
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SRG",
+      "rate": 991.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "STD",
+      "rate": 7781.05
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SVC",
+      "rate": 8.43123
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SYP",
+      "rate": 44.3394
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "SZL",
+      "rate": 6.10872
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "THB",
+      "rate": 37.3662
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TJR",
+      "rate": 1523.93
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TMM",
+      "rate": 5012.28
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TND",
+      "rate": 1.23505
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TOP",
+      "rate": 1.47015
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TRL",
+      "rate": 552445.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TTD",
+      "rate": 6.24305
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TWD",
+      "rate": 29.6544
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "TZS",
+      "rate": 771.12
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "UAH",
+      "rate": 5.38762
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "UGX",
+      "rate": 1496.08
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "USD",
+      "rate": 0.9639
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "UYU",
+      "rate": 11.3451
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "UZS",
+      "rate": 645.813
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "VEB",
+      "rate": 636.294
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "VND",
+      "rate": 13939.0
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "VUV",
+      "rate": 129.42
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "WST",
+      "rate": 3.04117
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "XCD",
+      "rate": 2.60253
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "YER",
+      "rate": 157.706
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ZAR",
+      "rate": 6.10872
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ZMK",
+      "rate": 2704.17
+    },
+    {
+      "base": "EUR",
+      "date": "2000-03-01",
+      "quote": "ZWD",
+      "rate": 37.1892
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "adapter": "CBSSC",
+  "cassette": "cbssc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": false,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 9, 1), upto: Date.new(2026, 9, 9))",
+  "rows": [
+    {
+      "base": "EUR",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 16.8674
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 19.3936
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-08",
+      "quote": "SCR",
+      "rate": 14.6166
+    },
+    {
+      "base": "EUR",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 16.8958
+    },
+    {
+      "base": "GBP",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 20.1872
+    },
+    {
+      "base": "USD",
+      "date": "2026-09-09",
+      "quote": "SCR",
+      "rate": 14.4077
+    }
+  ]
+}

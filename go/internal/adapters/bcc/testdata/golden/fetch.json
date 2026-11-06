@@ -1,0 +1,325 @@
+{
+  "adapter": "BCC",
+  "cassette": "bcc",
+  "match_requests_on": [
+    "method",
+    "uri"
+  ],
+  "allow_playback_repeats": true,
+  "today": null,
+  "call": "fetch(after: Date.new(2026, 5, 19), upto: Date.new(2026, 5, 22))",
+  "rows": [
+    {
+      "base": "AUD",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 359.2061
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 365.25029
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 639.40899
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 73.82082
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 78.21995
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 584.5288
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 673.5585
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 0.31668
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 29.02397
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 54.18855
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 6.92796
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 53.38608
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-19",
+      "quote": "CUP",
+      "rate": 502.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 360.65445
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 368.72727
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 642.87073
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 74.39526
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 78.78053
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 588.6777
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 679.81095
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 0.31348
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 29.15024
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 54.71351
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 7.12079
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 53.98499
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-20",
+      "quote": "CUP",
+      "rate": 507.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 362.63175
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 368.91508
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 643.80952
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 74.54402
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 78.86754
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 589.26075
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 681.33195
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 0.31337
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 29.31161
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 54.74689
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 7.08992
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 54.31464
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-21",
+      "quote": "CUP",
+      "rate": 507.0
+    },
+    {
+      "base": "AUD",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 362.98665
+    },
+    {
+      "base": "CAD",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 367.96458
+    },
+    {
+      "base": "CHF",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 644.54615
+    },
+    {
+      "base": "CNY",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 74.5243
+    },
+    {
+      "base": "DKK",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 78.83688
+    },
+    {
+      "base": "EUR",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 589.134
+    },
+    {
+      "base": "GBP",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 681.3573
+    },
+    {
+      "base": "JPY",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 0.31355
+    },
+    {
+      "base": "MXN",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 29.33816
+    },
+    {
+      "base": "NOK",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 54.85855
+    },
+    {
+      "base": "RUB",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 7.11979
+    },
+    {
+      "base": "SEK",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 54.32977
+    },
+    {
+      "base": "USD",
+      "date": "2026-05-22",
+      "quote": "CUP",
+      "rate": 507.0
+    }
+  ]
+}

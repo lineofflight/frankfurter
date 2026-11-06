@@ -1,0 +1,12 @@
+{
+  "key": "DAB",
+  "name": "Da Afghanistan Bank",
+  "country_code": "AF",
+  "rate_type": "indicative rate",
+  "pivot_currency": "AFN",
+  "data_url": "https://www.dab.gov.af/exchange-rates",
+  "terms_url": null,
+  "publish_schedule": "*/30 5-7 * * 0-4,6",
+  "publish_cadence": "daily",
+  "coverage_start": "2019-03-31"
+}
