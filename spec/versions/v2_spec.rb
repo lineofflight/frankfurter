@@ -630,6 +630,29 @@ describe Versions::V2 do
     _(usd["name"]).must_equal("United States Dollar")
     _(usd["symbol"]).must_equal("$")
     _(usd["iso_numeric"]).must_equal("840")
+    _(usd["type"]).must_equal("currency")
+  end
+
+  it "returns the type of a metal and a crypto asset" do
+    date = Fixtures.latest_date
+    Rate.dataset.multi_insert([
+      { provider: "CM", date:, base: "BTC", quote: "USD", mid: 100_000.0 },
+      { provider: "BNR", date:, base: "XAU", quote: "RON", mid: 600.0 },
+    ])
+    Provider["CM"].send(:refresh_currency_summaries, ["BTC"])
+    Provider["BNR"].send(:refresh_currency_summaries, ["XAU"])
+
+    get "/currencies"
+
+    assert_conform_schema(200)
+    types = json.to_h { |c| [c["iso_code"], c["type"]] }
+
+    _(types.values_at("BTC", "XAU", "USD")).must_equal(["crypto", "metal", "currency"])
+
+    get "/currency/btc"
+
+    assert_conform_schema(200)
+    _(Oj.load(last_response.body)["type"]).must_equal("crypto")
   end
 
   it "returns COMESA Dollar as a named accounting unit" do
