@@ -30,11 +30,11 @@ def scan_dates(from, to)
   dates = Rate.select(:date).distinct.where(date: from..to).order(:date).select_map(:date)
 
   dates.each do |date|
-    rows = Rate.where(date:).all
+    rows = Rate.where(date:).labelled.naked.all
     blender = Blender.new(rows, base: "EUR")
     blender.blend
-    blender.outliers.each do |provider, quote|
-      counts["#{provider} #{quote}"] += 1
+    blender.outliers.each do |outlier|
+      counts["#{outlier[:provider]} #{outlier[:quote]}"] += 1
       total += 1
     end
   end

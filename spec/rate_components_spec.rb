@@ -4,7 +4,7 @@ require_relative "helper"
 require "rate_components"
 
 describe RateComponents do
-  let(:identity) { { provider: "TST", date: Date.new(2026, 9, 1), base: "USD", quote: "GBP" } }
+  let(:identity) { { dataset_key: "TST", date: Date.new(2026, 9, 1), base: "USD", quote: "GBP" } }
 
   def stored(**components)
     Rate.dataset.insert(identity.merge(components))
@@ -34,8 +34,8 @@ describe RateComponents do
   end
 
   it "keeps BOJA's existing zero-buy convention without inventing a published mid" do
-    Rate.dataset.insert(identity.merge(provider: "BOJA", bid: 0, ask: 103))
-    record = Rate.where(identity.merge(provider: "BOJA")).first
+    Rate.dataset.insert(identity.merge(dataset_key: "BOJA", bid: 0, ask: 103))
+    record = Rate.where(identity.merge(dataset_key: "BOJA")).first
 
     _(record[:rate]).must_equal(103)
     _(record[:mid]).must_be_nil

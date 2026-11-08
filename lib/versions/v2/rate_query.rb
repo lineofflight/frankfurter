@@ -15,6 +15,7 @@ require "monthly_rate"
 require "roundable"
 require "blender"
 require "carry_forward"
+require "dataset"
 require "money/currency"
 require "peg"
 require "peg_anchor"
@@ -103,7 +104,7 @@ module Versions
       # because providers= is not checked against known keys and lands in a response header.
       def csv_filename
         parts = []
-        parts << providers.first if providers&.uniq&.size == 1
+        parts << labels.first if single_provider?
         parts << (quotes&.uniq&.size == 1 ? "#{base}-#{quotes.first}" : "#{base}-rates")
         parts << (range? ? "#{date_scope.begin}_#{date_scope.end}" : date&.to_s || "latest")
         parts << "#{group}ly" if rollup?
@@ -280,15 +281,15 @@ module Versions
       def apply_filters(dataset)
         return dataset.blendable unless providers
 
-        selected = dataset.where(provider: providers)
-        providers.uniq.size == 1 ? selected : RateScopes.named_currencies(selected)
+        selected = dataset.where(dataset_key: dataset_keys).labelled
+        single_provider? ? selected : RateScopes.named_currencies(selected)
       end
 
-      # Carry-forward window: the named providers' own, else the blend's (#646).
+      # Carry-forward window: the named datasets' own, else the blend's (#646).
       def lookback
         return CarryForward::LOOKBACK_DAYS unless providers
 
-        providers.filter_map { |k| Provider[k]&.lookback_days }.max || CarryForward::LOOKBACK_DAYS
+        dataset_keys.filter_map { |k| Dataset[k]&.lookback_days }.max || CarryForward::LOOKBACK_DAYS
       end
 
       def raw_dataset
@@ -315,6 +316,24 @@ module Versions
 
       def providers
         @params[:providers]&.upcase&.split(",")
+      end
+
+      # The datasets providers= selects: a provider key stands for its default datasets.
+      def dataset_keys
+        return @dataset_keys if defined?(@dataset_keys)
+
+        @dataset_keys = providers && Dataset.resolve(providers)
+      end
+
+      # The keys the selected rows report. One label is one provider's own view, however many datasets it spans.
+      def labels
+        return @labels if defined?(@labels)
+
+        @labels = dataset_keys&.map { |key| Dataset.label(key) }&.uniq
+      end
+
+      def single_provider?
+        labels&.size == 1
       end
 
       def group
@@ -391,9 +410,9 @@ module Versions
 
       def available_currency?(code)
         return true if Money::Currency.find(code)
-        return false unless providers && providers.uniq.size == 1
+        return false unless single_provider?
 
-        Rate.where(provider: providers).where(Sequel.|({ base: code }, { quote: code })).any?
+        Rate.where(dataset_key: dataset_keys).where(Sequel.|({ base: code }, { quote: code })).any?
       end
 
       def validate_range_cost!
@@ -403,14 +422,14 @@ module Versions
         # One provider is a fetch plus a one-contributor blend per date, not a cross-provider recompute: measured in
         # prod at 7s for five years of the largest provider (BDI, 173 quotes), so full history stays inside the request
         # deadline (#644).
-        return if providers && providers.uniq.size == 1
+        return if single_provider?
 
         # A SHORT provider list bounds the fetch, so a small quotes list on top stays cheap; naming every provider
         # reproduces the unbounded workload, hence the provider-count bound. Nothing else bounds work anymore: quotes=
         # filters rows only, after blending, so neither a provider-unbounded expand=providers range nor a plain range on
         # the not-ready live fallback gets a quotes exemption.
         if providers && quotes &&
-           providers.uniq.size <= MAX_DAILY_RANGE_PROVIDERS &&
+           labels.size <= MAX_DAILY_RANGE_PROVIDERS &&
            quotes.uniq.size <= MAX_DAILY_RANGE_QUOTES
           return
         end
@@ -462,7 +481,7 @@ module Versions
           record = { date: r[:date].to_s, base: r[:base], quote: r[:quote], rate: }
           if expand_providers? && r[:providers]
             record[:providers] = r[:providers].map do |p|
-              p_rate = if passthrough_active && p[:key] == providers.first && stored_rate
+              p_rate = if passthrough_active && p[:key] == labels.first && stored_rate
                          stored_rate
                        else
                          round(p[:rate])
@@ -495,12 +514,12 @@ module Versions
       end
 
       def provider_peg_base?
-        providers && providers.uniq.size > 1 && base_peg
+        providers && labels.size > 1 && base_peg
       end
 
       def pivot_path_blend(rows)
         # One provider is that provider's own view, pegged base or not: its cross is the answer the caller asked for.
-        return single_provider_blend(rows) if providers && providers.uniq.size == 1
+        return single_provider_blend(rows) if single_provider?
         # Restricting the source set to several providers bypasses the peg layer entirely, so a pegged request base has
         # no anchor to rebase through; mirror the fast path's refusal instead of answering from whatever the named
         # providers happen to publish.

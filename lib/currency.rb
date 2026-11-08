@@ -19,7 +19,6 @@ class Currency < Sequel::Model(:currencies)
   unrestrict_primary_key
 
   one_to_many :currency_coverages, key: :iso_code
-  many_to_many :providers, join_table: :currency_coverages, left_key: :iso_code, right_key: :provider_key
 
   dataset_module do
     def active
@@ -28,7 +27,9 @@ class Currency < Sequel::Model(:currencies)
     end
 
     def with_providers(keys)
-      coverage = CurrencyCoverage.where(provider_key: keys)
+      require "dataset"
+
+      coverage = CurrencyCoverage.where(dataset_key: Dataset.resolve(keys))
         .group(:iso_code)
         .select(:iso_code, Sequel.function(:min, :start_date).as(:start_date),
                 Sequel.function(:max, :end_date).as(:end_date),)
@@ -134,10 +135,11 @@ class Currency < Sequel::Model(:currencies)
     numeric unless numeric.to_s.empty?
   end
 
+  # Keys of the providers and datasets that quote the currency, as a caller would name them to get those rows.
   def providers
-    CurrencyCoverage.where(iso_code: iso_code)
-      .order(:provider_key)
-      .select_map(:provider_key)
+    require "dataset"
+
+    CurrencyCoverage.where(iso_code: iso_code).select_map(:dataset_key).map { |key| Dataset.label(key) }.uniq.sort
   end
 
   def to_h_with_providers

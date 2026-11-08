@@ -20,7 +20,7 @@ describe "Grouped maintenance writer lock" do
       load "lib/tasks/rollups.rake"
       Provider.seed
       Cache.define_singleton_method(:purge) {}
-      row = {provider: "ECB", date: Date.new(2024, 1, 1), base: "USD", quote: "EUR", mid: 0.8}
+      row = {dataset_key: "ECB", date: Date.new(2024, 1, 1), base: "USD", quote: "EUR", mid: 0.8}
       DB[:rates].insert(row)
       writer = Sequel.connect(ENV.fetch("DATABASE_URL"), after_connect: proc { |connection|
         connection.busy_handler_timeout = 1
@@ -49,7 +49,7 @@ describe "Grouped maintenance writer lock" do
         writer[:rates].insert(row.merge(date: Date.new(2024, 1, 2)))
         recompute.call(dates)
       end
-      rebuild_rollups(DB[:rates].where(provider: "ECB"), "ECB")
+      rebuild_rollups(DB[:rates].where(dataset_key: "ECB"), "ECB", ["ECB"])
       abort "source read was not protected by the writer lock" unless attempted && blocked
       abort "missing grouped output" if BlendedWeeklyRate.empty?
       writer.disconnect

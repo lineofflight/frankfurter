@@ -21,6 +21,9 @@ require "bucket"
 #   is recomputed, with the carry-forward lookback past LB's last old-manat row.
 Sequel.migration do
   up do
+    # A fresh database has nothing to relabel, and today's models no longer read this schema.
+    next if from(:rates).empty?
+
     # Loaded here, not at the top: the migrator loads every file before running any, and the models bind to tables that
     # do not exist yet on a fresh database.
     require "blended_rate"

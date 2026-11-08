@@ -43,7 +43,7 @@ class Provider
         _(rows.map { |r| r[:base] }).must_include("ESP")
         _(rows.map { |r| r[:base] }).must_include("XEU")
         _(Provider["CBBH"].unknown_currencies).must_be_empty
-        _(Rate.where(provider: "CBBH", base: ["ESB", "XBA"]).count).must_equal(0)
+        _(Rate.where(dataset_key: "CBBH", base: ["ESB", "XBA"]).count).must_equal(0)
         get "/rates", providers: "CBBH", date: "1998-01-06", base: "ESP", quotes: "BAM"
 
         _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(0.0118233618)

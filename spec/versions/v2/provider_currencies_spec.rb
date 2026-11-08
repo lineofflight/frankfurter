@@ -11,7 +11,7 @@ describe "Provider currency routes" do
   let(:date) { Fixtures.latest_date }
 
   before do
-    Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "ZZZ", mid: 2.345678)
+    Rate.dataset.insert(dataset_key: "ECB", date:, base: "EUR", quote: "ZZZ", mid: 2.345678)
     Provider["ECB"].send(:refresh_rollups, [date])
   end
 
@@ -39,7 +39,7 @@ describe "Provider currency routes" do
   end
 
   it "serves modern sucre observations only through provider routes" do
-    Rate.dataset.insert(provider: "CBKKW", date:, base: "ECS", quote: "KWD", mid: 0.000012)
+    Rate.dataset.insert(dataset_key: "CBKKW", date:, base: "ECS", quote: "KWD", mid: 0.000012)
     Provider["CBKKW"].send(:refresh_rollups, [date])
 
     get "/providers/CBKKW/rate/ECS/KWD"
@@ -73,9 +73,9 @@ describe "Provider currency routes" do
   end
 
   it "keeps a provider visible when all its currency codes are unknown" do
-    Rate.dataset.where(provider: "ECB").delete
-    CurrencyCoverage.where(provider_key: "ECB").delete
-    Rate.dataset.insert(provider: "ECB", date:, base: "ZZZ", quote: "QQQ", mid: 2.0)
+    Rate.dataset.where(dataset_key: "ECB").delete
+    CurrencyCoverage.where(dataset_key: "ECB").delete
+    Rate.dataset.insert(dataset_key: "ECB", date:, base: "ZZZ", quote: "QQQ", mid: 2.0)
     Provider["ECB"].send(:refresh_currency_summaries, ["ZZZ", "QQQ"])
     get "/providers/ECB"
 

@@ -16,7 +16,7 @@ Sequel.migration do
       primary_key [:provider, :base, :quote, :date]
     end
 
-    from(:rate_spikes).insert([:provider, :date, :base, :quote], RateSpike.detect(from(:rates)))
+    from(:rate_spikes).insert([:provider, :date, :base, :quote], RateSpike.detect(from(:rates), key: :provider))
   end
 
   down do

@@ -87,17 +87,17 @@ module Fixtures
       db[:weekly_rates].delete
       week_bucket = Bucket.week
       db[:weekly_rates].insert(
-        [:bucket_date, :provider, :base, :quote, :rate],
-        db[:rates].select(week_bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
-          .group(:provider, :base, :quote, week_bucket),
+        [:bucket_date, :dataset_key, :base, :quote, :rate],
+        db[:rates].select(week_bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+          .group(:dataset_key, :base, :quote, week_bucket),
       )
 
       db[:monthly_rates].delete
       month_bucket = Bucket.month
       db[:monthly_rates].insert(
-        [:bucket_date, :provider, :base, :quote, :rate],
-        db[:rates].select(month_bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
-          .group(:provider, :base, :quote, month_bucket),
+        [:bucket_date, :dataset_key, :base, :quote, :rate],
+        db[:rates].select(month_bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+          .group(:dataset_key, :base, :quote, month_bucket),
       )
     end
 
@@ -121,15 +121,15 @@ module Fixtures
 
       db[:currency_coverages].delete
       db.run(<<~SQL)
-        INSERT INTO currency_coverages (provider_key, iso_code, start_date, end_date)
-        SELECT provider, iso_code, MIN(date), MAX(date)
+        INSERT INTO currency_coverages (dataset_key, iso_code, start_date, end_date)
+        SELECT dataset_key, iso_code, MIN(date), MAX(date)
         FROM (
-          SELECT provider, quote AS iso_code, date FROM rates
+          SELECT dataset_key, quote AS iso_code, date FROM rates
           UNION ALL
-          SELECT provider, base AS iso_code, date FROM rates
+          SELECT dataset_key, base AS iso_code, date FROM rates
         )
-        GROUP BY provider, iso_code
-        ORDER BY provider, iso_code
+        GROUP BY dataset_key, iso_code
+        ORDER BY dataset_key, iso_code
       SQL
     end
 
@@ -142,12 +142,12 @@ module Fixtures
           jitter = 1.0 + (((date.jd % 100) - 50) * 0.001) # deterministic jitter from date
           if config[:mixed]
             config[:mixed].each do |pair|
-              records << { provider:, date:, base: pair[:base], quote: pair[:quote],
+              records << { dataset_key: provider, date:, base: pair[:base], quote: pair[:quote],
                            mid: (pair[:rate] * jitter).round(4), }
             end
           else
             config[:quotes].each do |quote, rate|
-              records << { provider:, date:, base: config[:base], quote:, mid: (rate * jitter).round(4) }
+              records << { dataset_key: provider, date:, base: config[:base], quote:, mid: (rate * jitter).round(4) }
             end
           end
         end

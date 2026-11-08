@@ -20,7 +20,7 @@ module Versions
 
       it "omits stored unknown and expired codes from the legacy catalogue" do
         ["ZZZ", "SLL"].each do |quote|
-          Rate.dataset.insert(provider: "ECB", date: Fixtures.latest_date, base: "EUR", quote:, mid: 2.0)
+          Rate.dataset.insert(dataset_key: "ECB", date: Fixtures.latest_date, base: "EUR", quote:, mid: 2.0)
         end
 
         names = currency_names.formatted

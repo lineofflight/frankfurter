@@ -17,7 +17,7 @@ describe Rate do
     it "snaps to nearest prior date when requested date has no rates" do
       sunday = Fixtures.recent_sunday
       friday = Fixtures.preceding_friday(sunday)
-      rows = Rate.where(provider: "ECB", date: (sunday - 14)..sunday).naked.all
+      rows = Rate.where(dataset_key: "ECB", date: (sunday - 14)..sunday).naked.all
       data = CarryForward.apply(rows, date: sunday)
 
       _(data.map { |r| r[:date] }.uniq).must_equal([friday])
@@ -27,7 +27,7 @@ describe Rate do
       date = Fixtures.latest_date
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
-      providers = data.map { |r| r[:provider] }.uniq.sort
+      providers = data.map { |r| r[:dataset_key] }.uniq.sort
 
       _(providers).must_include("ECB")
       _(providers).must_include("BOC")
@@ -35,11 +35,11 @@ describe Rate do
 
     it "excludes providers more than 14 days behind the target" do
       date = Fixtures.latest_date
-      Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", mid: 1.08, provider: "STALE")
+      Rate.dataset.insert(date: date - 20, base: "EUR", quote: "XTS", mid: 1.08, dataset_key: "STALE")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
-      providers = data.map { |r| r[:provider] }.uniq
+      providers = data.map { |r| r[:dataset_key] }.uniq
 
       _(providers).must_include("ECB")
       _(providers).wont_include("STALE")
@@ -47,11 +47,11 @@ describe Rate do
 
     it "includes providers within 14 days of the target" do
       date = Fixtures.latest_date
-      Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", mid: 0.92, provider: "FRED")
+      Rate.dataset.insert(date: date - 10, base: "USD", quote: "XTS", mid: 0.92, dataset_key: "FRED")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
-      providers = data.map { |r| r[:provider] }.uniq
+      providers = data.map { |r| r[:dataset_key] }.uniq
 
       _(providers).must_include("ECB")
       _(providers).must_include("FRED")
@@ -60,11 +60,11 @@ describe Rate do
     it "includes rates from different dates within the same provider" do
       date = Fixtures.latest_date
       older_date = date - 3
-      Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", mid: 0.05, provider: "ECB")
+      Rate.dataset.insert(date: older_date, base: "XTS", quote: "PLN", mid: 0.05, dataset_key: "ECB")
 
       rows = Rate.where(date: (date - 14)..date).naked.all
       data = CarryForward.apply(rows, date:)
-      quotes = data.select { |r| r[:provider] == "ECB" }.map { |r| r[:quote] }
+      quotes = data.select { |r| r[:dataset_key] == "ECB" }.map { |r| r[:quote] }
 
       _(quotes).must_include("PLN")
     end
@@ -146,7 +146,7 @@ describe Rate do
     it "includes rates from providers where currency appears as base" do
       date = Fixtures.latest_date
       data = Rate.where(date: (date - 14)..date).only("USD", "EUR").all
-      providers = data.map(&:provider).uniq
+      providers = data.map(&:dataset_key).uniq
 
       _(providers).must_include("BOC")
     end
@@ -154,7 +154,7 @@ describe Rate do
     it "includes providers whose rates span both sides of the pair" do
       date = Fixtures.latest_date
       data = Rate.where(date: (date - 14)..date).only("JPY", "EUR").all
-      providers = data.map(&:provider).uniq
+      providers = data.map(&:dataset_key).uniq
 
       _(providers).must_include("BOJ")
     end

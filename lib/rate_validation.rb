@@ -46,29 +46,30 @@ module RateValidation
       # Rollup buckets anchor to a fixed weekday (weekly) or the first of the month (monthly), so the live period's
       # bucket can sit a few days ahead of the latest date it actually summarises. Comparing such a bucket against the
       # raw daily horizon wrongly purges the current rollup; bucket the horizon to the table's precision so only buckets
-      # whose whole period is beyond the horizon are dropped. A provider with a lead gets its own, later bound.
+      # whose whole period is beyond the horizon are dropped. A dataset whose adapter has a lead gets its own, later
+      # bound.
       def reject_scope(dataset, date_column, precision = nil)
-        leads = provider_leads
+        leads = dataset_leads
         default = Sequel[date_column] > horizon_bound(precision, horizon)
-        default = Sequel.&(default, Sequel.~(provider: leads.keys)) unless leads.empty?
+        default = Sequel.&(default, Sequel.~(dataset_key: leads.keys)) unless leads.empty?
         conditions = leads.map do |key, lead_days|
-          Sequel.&({ provider: key }, Sequel[date_column] > horizon_bound(precision, horizon(lead_days)))
+          Sequel.&({ dataset_key: key }, Sequel[date_column] > horizon_bound(precision, horizon(lead_days)))
         end
         dataset.where(Sequel.|(default, *conditions))
       end
 
       private
 
-      # Leads by provider key, for providers whose adapter declares one. Keys without an adapter (test fixtures) have
-      # none.
-      def provider_leads
+      # Leads by dataset key, for datasets whose provider's adapter declares one. Keys without an adapter (test
+      # fixtures) have none.
+      def dataset_leads
         require "provider"
         require "provider/adapters"
-        Provider.all.filter_map do |provider|
-          next unless Provider::Adapters.const_defined?(provider.key)
+        Dataset.all.filter_map do |dataset|
+          next unless Provider::Adapters.const_defined?(dataset.provider_key)
 
-          lead_days = Provider::Adapters.const_get(provider.key).lead_days
-          [provider.key, lead_days] unless lead_days.zero?
+          lead_days = Provider::Adapters.const_get(dataset.provider_key).lead_days
+          [dataset.key, lead_days] unless lead_days.zero?
         end.to_h
       end
 
@@ -125,8 +126,8 @@ module RateValidation
             scope = rule.reject_scope(db[table], date_column, precision)
             affected.concat(scope.select_map(:base), scope.select_map(:quote))
             if precision
-              scope.select(:provider, :bucket_date).distinct.each do |row|
-                (repairs[table][row[:provider]] ||= []) << row[:bucket_date]
+              scope.select(:dataset_key, :bucket_date).distinct.each do |row|
+                (repairs[table][row[:dataset_key]] ||= []) << row[:bucket_date]
               end
             else
               capture_rollup_repairs(scope, repairs)
@@ -151,28 +152,28 @@ module RateValidation
     def capture_rollup_repairs(scope, repairs)
       PRECISION.each do |table, precision|
         bucket = Bucket.expression(precision).as(:bucket_date)
-        scope.select(:provider, bucket).distinct.each do |row|
-          (repairs[table][row[:provider]] ||= []) << row[:bucket_date]
+        scope.select(:dataset_key, bucket).distinct.each do |row|
+          (repairs[table][row[:dataset_key]] ||= []) << row[:bucket_date]
         end
       end
     end
 
     def repair_rollups(db, repairs)
-      repairs.each do |table, providers|
+      repairs.each do |table, datasets|
         bucket = Bucket.expression(PRECISION.fetch(table))
-        providers.each do |provider, dates|
+        datasets.each do |dataset_key, dates|
           dates.uniq!
           # Captured dates drive deletion even when no daily rows survive. Rebuild retained periods from the remaining
           # observations after purging any wholly future buckets.
-          db[table].where(provider:, bucket_date: dates).delete
+          db[table].where(dataset_key:, bucket_date: dates).delete
           db[table].insert(
-            [:bucket_date, :provider, :base, :quote, :rate],
-            db[:rates].where(provider:).where(bucket => dates)
-              .select(bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
-              .group(:provider, :base, :quote, bucket),
+            [:bucket_date, :dataset_key, :base, :quote, :rate],
+            db[:rates].where(dataset_key:).where(bucket => dates)
+              .select(bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+              .group(:dataset_key, :base, :quote, bucket),
           )
           blended_table = :"blended_#{table}"
-          if !Provider.non_blending_keys.include?(provider) && db.table_exists?(blended_table)
+          if !Dataset.non_blending_keys.include?(dataset_key) && db.table_exists?(blended_table)
             db[blended_table].where(bucket_date: dates).delete
           end
         end

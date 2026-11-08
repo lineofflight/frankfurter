@@ -4,8 +4,8 @@ require "blended_rate"
 require "bucket"
 require "cache"
 require "carry_forward"
+require "dataset"
 require "db"
-require "fugit"
 require "json"
 require "log"
 require "money/currency"
@@ -18,41 +18,34 @@ require "rate_precision"
 require "rate_spike"
 require "rate_validation"
 
+# An institution that publishes exchange rates in one or more datasets. One adapter fetches all of them.
 class Provider < Sequel::Model(:providers)
   plugin :static_cache
-
-  one_to_many :rates, key: :provider
-  one_to_many :currency_coverages, key: :provider_key
-  one_to_many :currency_exclusions, key: :provider_key
-  many_to_many :currencies, join_table: :currency_coverages, left_key: :provider_key, right_key: :iso_code
-
-  # Carry-forward window per observation frequency and publish cadence (#646). A daily value goes stale in two weeks; a
-  # monthly or quarterly value stands for its whole period plus the lag before the next one lands.
-  LOOKBACK_DAYS = { "daily" => 14, "weekly" => 14, "monthly" => 45, "quarterly" => 120 }.freeze
 
   # Reviewed non-currency labels remain available in provider history without triggering unknown-currency alerts.
   NON_CURRENCY_CODES = { "NB" => ["I44", "TWI"], "RBA" => ["FXRTWI"] }.freeze
 
-  class << self
-    # Keys of providers whose values stand for longer than a day. Their rows never enter the blend or the currency
-    # catalogue: a value that stands for a month or a quarter is observed once and served for the whole period, so on
-    # most days it is weeks stale, and the recency decay, which counts from the row date, cannot see that.
-    def non_blending_keys
-      all.reject(&:blends?).map(&:key)
-    end
+  PROVIDER_FIELDS = ["key", "name", "country_code", "terms_url"].freeze
+  DATASET_FIELDS = [
+    "key", "default", "blends", "rate_type", "frequency", "publish_cadence", "publish_schedule", "pivot_currency",
+    "data_url", "coverage_start",
+  ].freeze
 
+  class << self
     # Provider metadata is config-as-data — JSON files in db/seeds/providers are the source of truth. Re-seeding on
     # every boot syncs changes from the image (new providers, updated schedules) without manual intervention.
     def seed
       dir = File.expand_path("../db/seeds/providers", __dir__)
-      data = Dir["#{dir}/*.json"].map { |f| JSON.parse(File.read(f)) }
-      # multi_insert takes its column list from the first row, so a key only some files carry (frequency) would be
-      # dropped from the rest. Normalise every row to the union of keys first.
-      keys = data.flat_map(&:keys).uniq
-      rows = data.map { |d| keys.to_h { |k| [k, d.fetch(k) { k == "frequency" ? "daily" : nil }] } }
-      dataset.delete
-      dataset.multi_insert(rows)
+      files = Dir["#{dir}/*.json"].to_h { |f| [File.basename(f), JSON.parse(File.read(f))] }
+      providers, datasets = parse_seeds(files)
+      db.transaction do
+        Dataset.dataset.delete
+        dataset.delete
+        dataset.multi_insert(providers)
+        Dataset.dataset.multi_insert(datasets)
+      end
       load_cache
+      Dataset.load_cache
       return unless db.table_exists?(:currency_exclusions)
 
       recognized = db[:currency_exclusions].select_map(:iso_code).uniq.select { |code| Money::Currency.find(code) }
@@ -62,36 +55,100 @@ class Provider < Sequel::Model(:providers)
         .select(:base, :quote).distinct.all.flat_map(&:values)
       CurrencySummary.refresh(db, recognized | counterparts)
     end
+
+    private
+
+    # A file describes one provider. Its `datasets` array lists the series it publishes; without one, the file is its
+    # own single default dataset. Every file is checked before anything is replaced.
+    def parse_seeds(files)
+      parsed = files.map do |name, data|
+        key = data["key"]
+        entries = data.key?("datasets") ? data["datasets"] : [data.slice(*DATASET_FIELDS).merge("default" => true)]
+        allowed = PROVIDER_FIELDS + (data.key?("datasets") ? ["datasets"] : DATASET_FIELDS - ["default"])
+        check_seed(name, data.keys - allowed, "unknown fields")
+        raise ArgumentError, "#{name}: datasets must be a non-empty list" unless entries.is_a?(Array) && entries.any?
+
+        entries.each do |entry|
+          check_seed(name, entry.keys - DATASET_FIELDS, "unknown dataset fields")
+          next unless data.key?("datasets")
+          next if /\A#{Regexp.escape(key.to_s)}\.[A-Z0-9]+\z/.match?(entry["key"].to_s)
+
+          raise ArgumentError, "#{name}: dataset key #{entry["key"].inspect} is not #{key}.<SUFFIX>"
+        end
+        raise ArgumentError, "#{name}: no default dataset" if entries.none? { |entry| entry["default"] == true }
+
+        [PROVIDER_FIELDS.to_h { |field| [field.to_sym, data[field]] }, entries.map { |entry| dataset_row(key, entry) }]
+      end
+
+      providers = parsed.map(&:first)
+      datasets = parsed.flat_map(&:last)
+      [providers, datasets].each do |rows|
+        check_seed("seeds", rows.map { |row| row[:key] }.tally.select { |_, count| count > 1 }.keys, "duplicate keys")
+      end
+      [providers, datasets]
+    end
+
+    def dataset_row(provider_key, entry)
+      {
+        key: entry["key"],
+        provider_key:,
+        is_default: entry["default"] == true,
+        blends: entry["blends"],
+        rate_type: entry["rate_type"],
+        frequency: entry["frequency"] || "daily",
+        publish_cadence: entry["publish_cadence"],
+        publish_schedule: entry["publish_schedule"],
+        pivot_currency: entry["pivot_currency"],
+        data_url: entry["data_url"],
+        coverage_start: entry["coverage_start"],
+      }
+    end
+
+    def check_seed(name, offending, problem)
+      raise ArgumentError, "#{name}: #{problem}: #{offending.join(", ")}" if offending.any?
+    end
+  end
+
+  def datasets
+    Dataset.all.select { |dataset| dataset.provider_key == key }.sort_by(&:key)
+  end
+
+  # The datasets the bare provider key selects.
+  def default_datasets
+    datasets.select(&:is_default)
+  end
+
+  # Provider-level metadata comes from the first default dataset.
+  def primary_dataset
+    default_datasets.first
+  end
+
+  [:rate_type, :pivot_currency, :data_url, :publish_cadence, :publish_schedule, :frequency].each do |field|
+    define_method(field) { primary_dataset&.public_send(field) }
+  end
+
+  def coverage_start
+    datasets.filter_map(&:coverage_start).min
+  end
+
+  # Coverage and exclusions combine across the default datasets, as the bare key does.
+  def currency_coverages
+    CurrencyCoverage.where(dataset_key: default_datasets.map(&:key)).all
   end
 
   # Older migrations load Provider before the exclusions table exists.
-  def currency_exclusions(*)
+  def currency_exclusions
     require "currency_exclusion"
-    super
+    CurrencyExclusion.where(dataset_key: default_datasets.map(&:key)).all
   end
 
-  def unknown_currencies
-    codes = currency_exclusions.map(&:iso_code) - NON_CURRENCY_CODES.fetch(key, [])
+  def unknown_currencies(exclusions = currency_exclusions)
+    codes = exclusions.map(&:iso_code).uniq - NON_CURRENCY_CODES.fetch(key, [])
     codes.reject { |code| Money::Currency.find(code) }.sort
   end
 
   def adapter
     Adapters.const_get(key)
-  end
-
-  def frequency
-    super || "daily"
-  end
-
-  def blends?
-    frequency == "daily"
-  end
-
-  # The wider of the frequency and cadence windows. A provider that releases a month of daily fixings in arrears has
-  # nothing newer than the last batch for weeks at a time, and the daily window alone would leave its latest query empty
-  # for most of every month.
-  def lookback_days
-    [frequency, publish_cadence].compact.map { |key| LOOKBACK_DAYS.fetch(key) }.max
   end
 
   def start_date
@@ -102,31 +159,16 @@ class Provider < Sequel::Model(:providers)
     (currency_coverages + currency_exclusions).map { |c| c.end_date.to_s }.max
   end
 
+  # The oldest across the datasets, so one fetch catches up every series. Nil while any dataset has none, which sends
+  # backfill back to coverage_start.
   def last_synced
-    # There seems to be no Sequel-level way to make the aggregate auto-cast.
-    date = Rate.where(provider: key).max(:date)
-    Date.parse(date) if date
+    dates = datasets.map(&:last_synced)
+    dates.min unless dates.empty? || dates.include?(nil)
   end
 
+  # Judged against the first default dataset's schedule, from the provider's latest observation.
   def publishes_missed(reference_date: Date.today)
-    return unless publish_schedule
-    return unless end_date
-
-    cron = Fugit::Cron.parse(publish_schedule)
-    last_date = Date.parse(end_date)
-
-    case publish_cadence
-    when "daily"
-      count_fire_days(cron, last_date, reference_date)
-    when "weekly"
-      count_missed_buckets(cron, last_date, reference_date, :week)
-    when "monthly"
-      count_missed_buckets(cron, last_date, reference_date, :month)
-    when "quarterly"
-      count_missed_buckets(cron, last_date, reference_date, :quarter)
-    else
-      raise ArgumentError, "#{key}: unknown publish_cadence #{publish_cadence.inspect}"
-    end
+    primary_dataset&.publishes_missed(reference_date:, last_date: end_date)
   end
 
   def backfill(after: last_synced || coverage_start)
@@ -140,38 +182,24 @@ class Provider < Sequel::Model(:providers)
     # keep out anything dated earlier: inclusive adapters return that day too, and BCCR pads each window to 100 days.
     floor = coverage_start if after && after == coverage_start
     after -= 1 if floor
+    series = datasets.to_h { |dataset| [dataset.key, dataset] }
     fetched = false
     adapter.fetch_each(after:) do |records|
       records.reject! { |r| r[:date] < floor } if floor
       fetched = true
       RateValidation.reject!(records, lead_days: adapter.lead_days)
       records.each do |r|
-        r[:provider] = key
+        r[:dataset_key] = dataset_key_for(r, series)
         r[:rate] = RatePrecision.normalize(r[:rate])
       end
       warn_revisions(records) if adapter.revises?
 
       inserted = db.transaction(savepoint: true) do
         before = db.get(Sequel.lit("total_changes()"))
-        Rate.dataset.insert_conflict(target: [:provider, :date, :base, :quote])
+        Rate.dataset.insert_conflict(target: [:dataset_key, :date, :base, :quote])
           .multi_insert(records.map { |record| RateComponents.attributes(record) })
         count = db.get(Sequel.lit("total_changes()")) - before
-        if count.positive?
-          affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq
-          dates = records.map { |r| r[:date] }.uniq
-          # Usually the previous observation, judged now that its successor has arrived.
-          rescreened = RateSpike.refresh(key, dates)
-          refresh_rollups(dates, rescreened)
-          refresh_currency_summaries(affected_currencies)
-          if blends?
-            # A late arrival at date d joins the carry-forward contributor set of anchors through d + LOOKBACK_DAYS, so
-            # those stored blends change too, as do those of a rescreened date. Inside the transaction: the write lock
-            # serializes concurrent backfills' refreshes, and a failed refresh rolls back the insert so the next fetch
-            # re-ingests and retries.
-            changed = dates + rescreened
-            BlendedRate.refresh(changed.min..(changed.max + CarryForward::LOOKBACK_DAYS))
-          end
-        end
+        refresh_derived(records, series) if count.positive?
         count
       end
 
@@ -189,12 +217,42 @@ class Provider < Sequel::Model(:providers)
 
   private
 
+  # An adapter tags each record with its dataset when the provider publishes several. An untagged record belongs to the
+  # provider's only one.
+  def dataset_key_for(record, series)
+    tag = record.delete(:dataset)
+    return tag if tag && series.key?(tag)
+    raise ArgumentError, "unknown dataset #{tag.inspect}" if tag
+    raise ArgumentError, "untagged record from a provider with several datasets" unless series.size == 1
+
+    series.keys.first
+  end
+
+  def refresh_derived(records, series)
+    affected_currencies = records.flat_map { |r| [r[:base], r[:quote]] }.uniq
+    dates = records.map { |r| r[:date] }.uniq
+    keys = records.map { |r| r[:dataset_key] }.uniq
+    # Usually the previous observation, judged now that its successor has arrived.
+    rescreened = keys.flat_map { |dataset_key| RateSpike.refresh(dataset_key, dates) }.uniq
+    refresh_rollups(dates, rescreened)
+    refresh_currency_summaries(affected_currencies)
+    return unless keys.any? { |dataset_key| series.fetch(dataset_key).blends? }
+
+    # A late arrival at date d joins the carry-forward contributor set of anchors through d + LOOKBACK_DAYS, so those
+    # stored blends change too, as do those of a rescreened date. Inside the transaction: the write lock serializes
+    # concurrent backfills' refreshes, and a failed refresh rolls back the insert so the next fetch re-ingests and
+    # retries.
+    changed = dates + rescreened
+    BlendedRate.refresh(changed.min..(changed.max + CarryForward::LOOKBACK_DAYS))
+  end
+
   # Insert-only backfill never rewrites a stored row, so a source that revises a published value in place leaves us
   # holding the old one. Report the drift; the fix is the documented delete-and-refetch.
   def warn_revisions(records)
-    stored = Rate.where(provider: key, date: records.map { |r| r[:date] }.uniq).as_hash([:date, :base, :quote], :rate)
+    stored = Rate.where(dataset_key: records.map { |r| r[:dataset_key] }.uniq, date: records.map { |r| r[:date] }.uniq)
+      .as_hash([:dataset_key, :date, :base, :quote], :rate)
     drifted = records.filter_map do |r|
-      value = stored[[r[:date], r[:base], r[:quote]]]
+      value = stored[[r[:dataset_key], r[:date], r[:base], r[:quote]]]
       [r, value] if value && value != r[:rate]
     end
     return if drifted.empty?
@@ -206,98 +264,56 @@ class Provider < Sequel::Model(:providers)
     Log.warn("#{key}: #{noun} from source: #{detail.join(", ")}")
   end
 
-  def count_fire_days(cron, last_date, reference_date)
-    count = 0
-    ((last_date + 1)..(reference_date - 1)).each do |date|
-      count += 1 if cron_fires_on?(cron, date)
-    end
-    count
-  end
-
-  def cron_fires_on?(cron, date)
-    start = Time.utc(date.year, date.month, date.day) - 1
-    eod = Time.utc(date.year, date.month, date.day, 23, 59, 59).to_i
-    cron.next_time(start).to_i <= eod
-  end
-
-  def count_missed_buckets(cron, last_date, reference_date, granularity)
-    today_utc = Time.utc(reference_date.year, reference_date.month, reference_date.day, 23, 59, 59)
-    prev_fire = cron.previous_time(today_utc)
-    return 0 unless prev_fire
-
-    prev_fire_date = Date.new(prev_fire.year, prev_fire.month, prev_fire.day)
-    expected_data_end = bucket_start(prev_fire_date, granularity) - 1
-    expected_bucket = bucket_start(expected_data_end, granularity)
-    our_bucket = bucket_start(last_date, granularity)
-    return 0 if our_bucket >= expected_bucket
-
-    count_buckets_between(our_bucket, expected_bucket, granularity)
-  end
-
-  def bucket_start(date, granularity)
-    case granularity
-    when :week  then date - (date.cwday - 1)
-    when :month then Date.new(date.year, date.month, 1)
-    when :quarter then Date.new(date.year, (((date.month - 1) / 3) * 3) + 1, 1)
-    end
-  end
-
-  def count_buckets_between(from_bucket, to_bucket, granularity)
-    count = 0
-    cursor = from_bucket
-    while cursor < to_bucket
-      cursor = case granularity
-               when :week  then cursor + 7
-               when :month then cursor.next_month
-               when :quarter then cursor >> 3
-               end
-      count += 1
-    end
-    count
-  end
-
-  # Rescreened dates leave the provider's own averages alone but change the blended buckets that hold them.
+  # Rescreened dates leave a dataset's own averages alone but change the blended buckets that hold them.
   def refresh_rollups(dates, rescreened = [])
     # Older data migrations load Provider before migration 030 creates these tables. Require the grouped models only
     # when backfill actually needs them; normal application startup always migrates before starting ingestion.
     require "blended_weekly_rate"
     require "blended_monthly_rate"
 
-    weeks = refresh_rollup(:weekly_rates, Bucket.week, dates)
-    months = refresh_rollup(:monthly_rates, Bucket.month, dates)
-    return unless blends?
+    weeks = []
+    months = []
+    datasets.each do |dataset|
+      dataset_weeks = refresh_rollup(:weekly_rates, Bucket.week, dataset.key, dates)
+      dataset_months = refresh_rollup(:monthly_rates, Bucket.month, dataset.key, dates)
+      next unless dataset.blends?
 
-    BlendedWeeklyRate.refresh(weeks | buckets(Bucket.week, rescreened))
-    BlendedMonthlyRate.refresh(months | buckets(Bucket.month, rescreened))
+      weeks |= dataset_weeks | buckets(Bucket.week, dataset.key, rescreened)
+      months |= dataset_months | buckets(Bucket.month, dataset.key, rescreened)
+    end
+    return unless datasets.any?(&:blends?)
+
+    BlendedWeeklyRate.refresh(weeks)
+    BlendedMonthlyRate.refresh(months)
   end
 
-  def buckets(bucket_expr, dates)
+  def buckets(bucket_expr, dataset_key, dates)
     return [] if dates.empty?
 
-    db[:rates].where(provider: key, date: dates).select_map(bucket_expr).uniq
+    db[:rates].where(dataset_key:, date: dates).select_map(bucket_expr).uniq
   end
 
   def refresh_currency_summaries(iso_codes)
-    CurrencySummary.refresh(db, iso_codes, provider: key)
+    datasets.each { |dataset| CurrencySummary.refresh(db, iso_codes, dataset: dataset.key) }
   end
 
-  def refresh_rollup(table, bucket_expr, dates)
+  def refresh_rollup(table, bucket_expr, dataset_key, dates)
     buckets = db[:rates]
-      .where(provider: key, date: dates)
+      .where(dataset_key:, date: dates)
       .select_map(bucket_expr)
       .uniq
 
     return [] if buckets.empty?
 
-    db[table].where(provider: key, bucket_date: buckets).delete
+    db[table].where(dataset_key:, bucket_date: buckets).delete
 
     db[table].insert(
-      [:bucket_date, :provider, :base, :quote, :rate],
+      [:bucket_date, :dataset_key, :base, :quote, :rate],
       db[:rates]
-        .where(provider: key)
+        .where(dataset_key:)
         .where(bucket_expr => buckets)
-        .select(bucket_expr, :provider, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:provider, :base, :quote, bucket_expr),
+        .select(bucket_expr, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+        .group(:dataset_key, :base, :quote, bucket_expr),
     )
     buckets
   end

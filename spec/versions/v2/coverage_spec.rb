@@ -14,7 +14,7 @@ describe "Queryable history coverage" do
   end
 
   def observation(provider, date, base, quote, mid = 1.2)
-    Rate.dataset.insert(provider:, date:, base:, quote:, mid:)
+    Rate.dataset.insert(dataset_key: provider, date:, base:, quote:, mid:)
   end
 
   def coverage(params = {})

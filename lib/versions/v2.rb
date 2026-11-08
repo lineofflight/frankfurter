@@ -2,6 +2,7 @@
 
 require "csv"
 require "currency"
+require "currency_coverage"
 require "currency_exclusion"
 require "heavy_slots"
 require "plain_decimal"
@@ -281,28 +282,40 @@ module Versions
     end
 
     def providers
-      Provider.eager(:currency_coverages, :currency_exclusions).all.sort_by(&:key)
-        .filter_map { |provider| provider_entry(provider) }
+      coverages = CurrencyCoverage.to_hash_groups(:dataset_key)
+      exclusions = CurrencyExclusion.to_hash_groups(:dataset_key)
+      Provider.all.sort_by(&:key).filter_map do |provider|
+        keys = provider.default_datasets.map(&:key)
+        provider_entry(
+          provider,
+          coverages: coverages.values_at(*keys).compact.flatten,
+          exclusions: exclusions.values_at(*keys).compact.flatten,
+        )
+      end
     end
 
-    def provider_entry(provider)
-      return if provider.currency_coverages.empty? && provider.currency_exclusions.empty?
+    # Combines the default datasets a bare provider key selects. Metadata comes from the first of them.
+    def provider_entry(provider, coverages: provider.currency_coverages, exclusions: provider.currency_exclusions)
+      return if coverages.empty? && exclusions.empty?
 
+      primary = provider.primary_dataset
+      dated = coverages + exclusions
+      end_date = dated.map { |c| c.end_date.to_s }.max
       {
         key: provider.key,
         name: provider.name,
         country_code: provider.country_code,
-        rate_type: provider.rate_type,
-        pivot_currency: provider.pivot_currency,
-        data_url: provider.data_url,
+        rate_type: primary.rate_type,
+        pivot_currency: primary.pivot_currency,
+        data_url: primary.data_url,
         terms_url: provider.terms_url,
-        start_date: provider.start_date,
-        end_date: provider.end_date,
-        publish_cadence: provider.publish_cadence,
-        frequency: provider.frequency,
-        publishes_missed: provider.publishes_missed,
-        currencies: provider.currency_coverages.map(&:iso_code).sort,
-        unknown_currencies: provider.unknown_currencies,
+        start_date: dated.map { |c| c.start_date.to_s }.min,
+        end_date:,
+        publish_cadence: primary.publish_cadence,
+        frequency: primary.frequency,
+        publishes_missed: primary.publishes_missed(last_date: end_date),
+        currencies: coverages.map(&:iso_code).uniq.sort,
+        unknown_currencies: provider.unknown_currencies(exclusions),
       }
     end
   end

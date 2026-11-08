@@ -131,18 +131,18 @@ describe RateValidation do
     it "deletes future-dated rows across rate tables and keeps in-window rows" do
       future = Date.today + 365
       db[:rates].multi_insert([
-        { provider: "TEST", date: future, base: "EUR", quote: "USD", mid: 1.1 },
-        { provider: "TEST", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
+        { dataset_key: "TEST", date: future, base: "EUR", quote: "USD", mid: 1.1 },
+        { dataset_key: "TEST", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
       ])
-      db[:weekly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
-      db[:monthly_rates].insert(provider: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
+      db[:weekly_rates].insert(dataset_key: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
+      db[:monthly_rates].insert(dataset_key: "TEST", bucket_date: future, base: "EUR", quote: "USD", rate: 1.1)
 
       RateValidation.purge(db)
 
-      _(db[:rates].where(provider: "TEST", date: future).count).must_equal(0)
-      _(db[:rates].where(provider: "TEST", date: Date.today).count).must_equal(1)
-      _(db[:weekly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
-      _(db[:monthly_rates].where(provider: "TEST", bucket_date: future).count).must_equal(0)
+      _(db[:rates].where(dataset_key: "TEST", date: future).count).must_equal(0)
+      _(db[:rates].where(dataset_key: "TEST", date: Date.today).count).must_equal(1)
+      _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: future).count).must_equal(0)
+      _(db[:monthly_rates].where(dataset_key: "TEST", bucket_date: future).count).must_equal(0)
     end
 
     it "keeps forward-dated rows from a provider that publishes ahead" do
@@ -150,28 +150,28 @@ describe RateValidation do
       ahead = today + 14
       bucket = Bucket.month((today >> 1).to_s)
       db[:rates].multi_insert([
-        { provider: "HMRC", date: ahead, base: "GBP", quote: "USD", mid: 1.3 },
-        { provider: "TEST", date: ahead, base: "EUR", quote: "USD", mid: 1.1 },
+        { dataset_key: "HMRC", date: ahead, base: "GBP", quote: "USD", mid: 1.3 },
+        { dataset_key: "TEST", date: ahead, base: "EUR", quote: "USD", mid: 1.1 },
       ])
       db[:monthly_rates].multi_insert([
-        { provider: "HMRC", bucket_date: bucket, base: "GBP", quote: "USD", rate: 1.3 },
-        { provider: "TEST", bucket_date: bucket, base: "EUR", quote: "USD", rate: 1.1 },
+        { dataset_key: "HMRC", bucket_date: bucket, base: "GBP", quote: "USD", rate: 1.3 },
+        { dataset_key: "TEST", bucket_date: bucket, base: "EUR", quote: "USD", rate: 1.1 },
       ])
 
       Date.stub(:today, today) { RateValidation.purge(db) }
 
       ours = ["HMRC", "TEST"]
 
-      _(db[:rates].where(date: ahead, provider: ours).select_map(:provider)).must_equal(["HMRC"])
-      _(db[:monthly_rates].where(bucket_date: bucket, provider: ours).select_map(:provider)).must_equal(["HMRC"])
+      _(db[:rates].where(date: ahead, dataset_key: ours).select_map(:dataset_key)).must_equal(["HMRC"])
+      _(db[:monthly_rates].where(bucket_date: bucket, dataset_key: ours).select_map(:dataset_key)).must_equal(["HMRC"])
     end
 
     it "retains stored terminal-date rows on either side" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", mid: 0.00005 },
-        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TEST", date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", mid: 1.1 },
+        { dataset_key: "TEST", date: Date.new(2016, 7, 1), base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TEST", date: Date.new(2017, 1, 1), base: "BYR", quote: "USD", mid: 0.00005 },
+        { dataset_key: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TEST", date: Date.new(2016, 7, 1), base: "EUR", quote: "USD", mid: 1.1 },
       ])
 
       totals = RateValidation.purge(db)
@@ -185,24 +185,24 @@ describe RateValidation do
 
     it "retains stored premature codes for explicit reingestion" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", mid: 0.10448 },
-        { provider: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", mid: 0.10500 },
+        { dataset_key: "TEST", date: Date.new(1998, 12, 31), base: "SEK", quote: "EUR", mid: 0.10448 },
+        { dataset_key: "TEST", date: Date.new(1999, 1, 4), base: "SEK", quote: "EUR", mid: 0.10500 },
       ])
 
       RateValidation.purge(db)
 
-      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1998, 12, 31)).count).must_equal(1)
-      _(db[:rates].where(provider: "TEST", quote: "EUR", date: Date.new(1999, 1, 4)).count).must_equal(1)
+      _(db[:rates].where(dataset_key: "TEST", quote: "EUR", date: Date.new(1998, 12, 31)).count).must_equal(1)
+      _(db[:rates].where(dataset_key: "TEST", quote: "EUR", date: Date.new(1999, 1, 4)).count).must_equal(1)
     end
 
     it "retains provider rollup rows past the terminal date" do
       db[:weekly_rates].multi_insert([
-        { provider: "TEST", bucket_date: Date.new(2016, 7, 4), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TEST", bucket_date: Date.new(2016, 6, 27), base: "USD", quote: "BYR", rate: 22000.0 },
+        { dataset_key: "TEST", bucket_date: Date.new(2016, 7, 4), base: "USD", quote: "BYR", rate: 22000.0 },
+        { dataset_key: "TEST", bucket_date: Date.new(2016, 6, 27), base: "USD", quote: "BYR", rate: 22000.0 },
       ])
       db[:monthly_rates].multi_insert([
-        { provider: "TEST", bucket_date: Date.new(2016, 8, 1), base: "USD", quote: "BYR", rate: 22000.0 },
-        { provider: "TEST", bucket_date: Date.new(2016, 6, 1), base: "USD", quote: "BYR", rate: 22000.0 },
+        { dataset_key: "TEST", bucket_date: Date.new(2016, 8, 1), base: "USD", quote: "BYR", rate: 22000.0 },
+        { dataset_key: "TEST", bucket_date: Date.new(2016, 6, 1), base: "USD", quote: "BYR", rate: 22000.0 },
       ])
 
       totals = RateValidation.purge(db)
@@ -217,30 +217,31 @@ describe RateValidation do
       # Weekly/monthly buckets anchor to a fixed weekday / first of the month, so the live period's bucket can sit a few
       # days ahead of the latest date it summarises. The daily future horizon must not purge it.
       RateValidation::FutureDate.stub(:horizon, Date.new(2026, 6, 15)) do # a Monday
+        # The current and the next week, then the current and the next month.
         db[:weekly_rates].multi_insert([
-          { provider: "TEST", bucket_date: Date.new(2026, 6, 18), base: "EUR", quote: "USD", rate: 1.1 }, # current week
-          { provider: "TEST", bucket_date: Date.new(2026, 6, 25), base: "EUR", quote: "USD", rate: 1.1 }, # next week
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 18), base: "EUR", quote: "USD", rate: 1.1 },
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 25), base: "EUR", quote: "USD", rate: 1.1 },
         ])
         db[:monthly_rates].multi_insert([
-          { provider: "TEST", bucket_date: Date.new(2026, 6, 1), base: "EUR", quote: "USD", rate: 1.1 }, # current month
-          { provider: "TEST", bucket_date: Date.new(2026, 7, 1), base: "EUR", quote: "USD", rate: 1.1 }, # next month
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 1), base: "EUR", quote: "USD", rate: 1.1 },
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 7, 1), base: "EUR", quote: "USD", rate: 1.1 },
         ])
 
         RateValidation.purge(db)
 
-        _(db[:weekly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 18)).count).must_equal(1)
-        _(db[:weekly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 25)).count).must_equal(0)
-        _(db[:monthly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 6, 1)).count).must_equal(1)
-        _(db[:monthly_rates].where(provider: "TEST", bucket_date: Date.new(2026, 7, 1)).count).must_equal(0)
+        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 18)).count).must_equal(1)
+        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 25)).count).must_equal(0)
+        _(db[:monthly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 1)).count).must_equal(1)
+        _(db[:monthly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 7, 1)).count).must_equal(0)
       end
     end
 
     it "keeps a currency only a non-daily provider covers out of the catalogue after a purge" do
-      db[:providers].insert(key: "TST", name: "Test", frequency: "monthly")
-      Provider.load_cache
+      db[:datasets].insert(key: "TST", provider_key: "TST", is_default: true, frequency: "monthly")
+      Dataset.load_cache
       db[:rates].multi_insert([
-        { provider: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currency_coverages].where(iso_code: "BYR").delete
@@ -248,22 +249,22 @@ describe RateValidation do
       RateValidation.purge(db)
 
       _(db[:currencies].where(iso_code: "BYR").first).must_be_nil
-      _(db[:currency_coverages].where(iso_code: "BYR", provider_key: "TST").first).wont_be_nil
+      _(db[:currency_coverages].where(iso_code: "BYR", dataset_key: "TST").first).wont_be_nil
     ensure
-      db[:providers].where(key: "TST").delete
-      Provider.load_cache
+      db[:datasets].where(key: "TST").delete
+      Dataset.load_cache
     end
 
     it "refreshes currency summaries for affected codes" do
       db[:rates].multi_insert([
-        { provider: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
-        { provider: "TEST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TEST", date: Date.new(2016, 6, 30), base: "USD", quote: "BYR", mid: 22000.0 },
+        { dataset_key: "TEST", date: Date.today + 365, base: "USD", quote: "BYR", mid: 22000.0 },
       ])
       db[:currencies].where(iso_code: "BYR").delete
       db[:currencies].insert(iso_code: "BYR", start_date: "2016-06-30", end_date: "2017-01-01")
       db[:currency_coverages].where(iso_code: "BYR").delete
       db[:currency_coverages].insert(
-        provider_key: "TEST",
+        dataset_key: "TEST",
         iso_code: "BYR",
         start_date: "2016-06-30",
         end_date: "2017-01-01",
@@ -272,7 +273,7 @@ describe RateValidation do
       RateValidation.purge(db)
 
       currency = db[:currencies].where(iso_code: "BYR").first
-      coverage = db[:currency_coverages].where(iso_code: "BYR", provider_key: "TEST").first
+      coverage = db[:currency_coverages].where(iso_code: "BYR", dataset_key: "TEST").first
 
       _(currency[:end_date].to_s).must_equal("2016-06-30")
       _(coverage[:end_date].to_s).must_equal("2016-06-30")
@@ -280,7 +281,7 @@ describe RateValidation do
 
     it "removes currency rows entirely when no surviving rates remain" do
       db[:rates].insert(
-        provider: "TEST",
+        dataset_key: "TEST",
         date: Date.today + 365,
         base: "USD",
         quote: "BYR",
@@ -290,7 +291,7 @@ describe RateValidation do
       db[:currencies].insert(iso_code: "BYR", start_date: "2017-01-01", end_date: "2017-01-01")
       db[:currency_coverages].where(iso_code: "BYR").delete
       db[:currency_coverages].insert(
-        provider_key: "TEST",
+        dataset_key: "TEST",
         iso_code: "BYR",
         start_date: "2017-01-01",
         end_date: "2017-01-01",

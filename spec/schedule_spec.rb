@@ -16,7 +16,7 @@ describe "bin/schedule --dry-run" do
 
   let(:enabled_count) { Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) } }
   let(:scheduled_count) do
-    Provider.all.count { |p| Provider::Adapters.const_defined?(p.key) && p.publish_schedule }
+    Dataset.all.count { |d| Provider::Adapters.const_defined?(d.provider_key) && d.publish_schedule }
   end
 
   it "schedules enabled providers at startup and configured providers with valid cron expressions" do

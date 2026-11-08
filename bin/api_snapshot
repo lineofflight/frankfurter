@@ -198,7 +198,7 @@ module ApiSnapshot
         requests << "/v2/currency/#{code}"
       end
 
-      providers = Provider.eager(:currency_coverages, :currency_exclusions).all.sort_by(&:key)
+      providers = Provider.all.sort_by(&:key)
 
       providers.each do |provider|
         key = provider.key

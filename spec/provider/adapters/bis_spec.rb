@@ -29,7 +29,7 @@ class Provider
 
           _(last_response).must_be(:ok?)
           _(JSON.parse(last_response.body).first.fetch("rate")).must_equal(rate)
-          _(Rate.where(provider: "BIS", date:, quote:).get(:rate)).must_equal(rate)
+          _(Rate.where(dataset_key: "BIS", date:, quote:).get(:rate)).must_equal(rate)
         end
       end
 
@@ -90,13 +90,13 @@ class Provider
         provider = Provider["BIS"].dup
         [Rate, WeeklyRate, MonthlyRate].each do |model|
           field = model == Rate ? :mid : :rate
-          model.dataset.insert(provider: "BIS", model.date_column => "2025-01-31", base: "USD", quote: "JPY",
+          model.dataset.insert(dataset_key: "BIS", model.date_column => "2025-01-31", base: "USD", quote: "JPY",
                                field => 154.77,)
 
-          _(model.where(provider: "BIS").count).must_equal(1)
-          _(model.where(provider: "BIS").blendable.count).must_equal(0)
+          _(model.where(dataset_key: "BIS").count).must_equal(1)
+          _(model.where(dataset_key: "BIS").blendable.count).must_equal(0)
         end
-        _(provider.lookback_days).must_equal(45)
+        _(Dataset["BIS"].lookback_days).must_equal(45)
         provider.define_singleton_method(:end_date) { "2025-01-31" }
 
         _(provider.publishes_missed(reference_date: Date.new(2025, 2, 6))).must_equal(0)

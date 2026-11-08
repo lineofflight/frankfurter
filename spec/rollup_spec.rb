@@ -12,20 +12,20 @@ describe "Rollup tables" do
 
     it "weekly rollup covers the same providers and currencies as downsample" do
       expected_keys = Rate.between(interval).downsample("week").all
-        .map { |r| [r[:provider], r[:base], r[:quote]] }.uniq.sort
+        .map { |r| [r[:dataset_key], r[:base], r[:quote]] }.uniq.sort
 
       actual_keys = WeeklyRate.between(interval).all
-        .map { |r| [r[:provider], r[:base], r[:quote]] }.uniq.sort
+        .map { |r| [r[:dataset_key], r[:base], r[:quote]] }.uniq.sort
 
       _(actual_keys).must_equal(expected_keys)
     end
 
     it "monthly rollup covers the same providers and currencies as downsample" do
       expected_keys = Rate.between(interval).downsample("month").all
-        .map { |r| [r[:provider], r[:base], r[:quote]] }.uniq.sort
+        .map { |r| [r[:dataset_key], r[:base], r[:quote]] }.uniq.sort
 
       actual_keys = MonthlyRate.between(interval).all
-        .map { |r| [r[:provider], r[:base], r[:quote]] }.uniq.sort
+        .map { |r| [r[:dataset_key], r[:base], r[:quote]] }.uniq.sort
 
       _(actual_keys).must_equal(expected_keys)
     end
@@ -33,14 +33,14 @@ describe "Rollup tables" do
     it "weekly rollup rates match downsample for inner buckets" do
       # Skip boundary buckets where partial-bucket averages differ
       ds_rows = Rate.between(interval).downsample("week").all
-        .sort_by { |r| [r[:date].to_s, r[:provider], r[:base], r[:quote]] }
+        .sort_by { |r| [r[:date].to_s, r[:dataset_key], r[:base], r[:quote]] }
       bucket_dates = ds_rows.map { |r| r[:date].to_s }.uniq.sort
       inner_dates = bucket_dates[1...-1]
 
       expected = ds_rows.select { |r| inner_dates.include?(r[:date].to_s) }
       actual = WeeklyRate.between(interval).all
         .select { |r| inner_dates.include?(r[:bucket_date].to_s) }
-        .sort_by { |r| [r[:bucket_date].to_s, r[:provider], r[:base], r[:quote]] }
+        .sort_by { |r| [r[:bucket_date].to_s, r[:dataset_key], r[:base], r[:quote]] }
 
       _(actual.size).must_equal(expected.size)
       actual.zip(expected).each do |a, e|
@@ -54,19 +54,19 @@ describe "Rollup tables" do
       provider = Provider.find(key: "ECB")
       date = Fixtures.latest_date
 
-      WeeklyRate.where(provider: "ECB")
+      WeeklyRate.where(dataset_key: "ECB")
         .order(Sequel.desc(:bucket_date)).first
 
-      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 42.0, provider: "ECB")
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 42.0, dataset_key: "ECB")
       provider.send(:refresh_rollups, [date])
 
-      week_row = WeeklyRate.where(provider: "ECB", quote: "XTS").first
+      week_row = WeeklyRate.where(dataset_key: "ECB", quote: "XTS").first
 
       _(week_row).wont_be_nil
       _(week_row[:rate]).must_be_close_to(42.0, 0.01)
 
       # Unrelated provider buckets untouched
-      boc_count_after = WeeklyRate.where(provider: "BOC").count
+      boc_count_after = WeeklyRate.where(dataset_key: "BOC").count
 
       _(boc_count_after).must_be(:>, 0)
     end
@@ -75,10 +75,10 @@ describe "Rollup tables" do
       provider = Provider.find(key: "ECB")
       date = Fixtures.latest_date
 
-      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 99.0, provider: "ECB")
+      Rate.dataset.insert(date:, base: "EUR", quote: "XTS", mid: 99.0, dataset_key: "ECB")
       provider.send(:refresh_rollups, [date])
 
-      month_row = MonthlyRate.where(provider: "ECB", quote: "XTS").first
+      month_row = MonthlyRate.where(dataset_key: "ECB", quote: "XTS").first
 
       _(month_row).wont_be_nil
       _(month_row[:rate]).must_be_close_to(99.0, 0.01)
@@ -89,7 +89,7 @@ describe "Rollup tables" do
     describe WeeklyRate do
       it "filters by provider with ecb" do
         data = WeeklyRate.ecb.all
-        providers = data.map(&:provider).uniq
+        providers = data.map(&:dataset_key).uniq
 
         _(providers).must_equal(["ECB"])
       end
@@ -116,7 +116,7 @@ describe "Rollup tables" do
       it "filters by provider with ecb" do
         data = MonthlyRate.ecb.all
 
-        _(data.map(&:provider).uniq).must_equal(["ECB"])
+        _(data.map(&:dataset_key).uniq).must_equal(["ECB"])
       end
 
       it "filters by date range with between" do
@@ -182,7 +182,7 @@ describe "Rollup tables" do
       # Insert a new rate on the existing latest date and refresh rollups; the raw max date is unchanged so the cache
       # key should be stable
       Rate.dataset.insert(
-        date: Fixtures.latest_date, base: "EUR", quote: "XTS", mid: 42.0, provider: "ECB",
+        date: Fixtures.latest_date, base: "EUR", quote: "XTS", mid: 42.0, dataset_key: "ECB",
       )
       Provider.find(key: "ECB").send(:refresh_rollups, [Fixtures.latest_date])
 
