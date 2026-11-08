@@ -1,0 +1,12 @@
+{
+  "key": "BOG",
+  "name": "Bank of Ghana",
+  "country_code": "GH",
+  "rate_type": "interbank middle rate",
+  "pivot_currency": "GHS",
+  "data_url": "https://www.bog.gov.gh/treasury-and-the-markets/historical-interbank-fx-rates/",
+  "terms_url": "https://www.bog.gov.gh/legal/",
+  "publish_schedule": "*/30 16-19 * * 1-5",
+  "publish_cadence": "daily",
+  "coverage_start": "1996-01-02"
+}
