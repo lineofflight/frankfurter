@@ -1,0 +1,12 @@
+{
+  "key": "BB",
+  "name": "Bangladesh Bank",
+  "country_code": "BD",
+  "rate_type": "interbank rate",
+  "pivot_currency": "BDT",
+  "data_url": "https://www.bb.org.bd/en/index.php/econdata/exchangerate",
+  "terms_url": null,
+  "publish_schedule": "*/30 4-6 * * 0-4",
+  "publish_cadence": "daily",
+  "coverage_start": "2006-03-21"
+}
