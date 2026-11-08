@@ -194,4 +194,37 @@ describe RateSpike do
       end
     end
   end
+  # A provider's default datasets roll up together, and a pair can move between them mid-bucket (RUB left NBP's Table A
+  # for Table B on 2022-03-09). Screening has to read the pool as the one series its bare key serves.
+  describe "across a dataset pool" do
+    def nbp(key, date, mid)
+      { dataset_key: key, date: Date.parse(date), base: "RUB", quote: "PLN", mid: }
+    end
+
+    it "keeps a spike stored under one table out of a rollup stored under the other" do
+      rows = [
+        nbp("NBP.A", "2025-03-03", 0.03), nbp("NBP.A", "2025-03-04", 0.30), nbp("NBP.A", "2025-03-05", 0.03),
+        nbp("NBP.B", "2025-03-12", 0.03),
+      ]
+      Rate.dataset.multi_insert(rows)
+      dates = rows.map { |row| row[:date] }
+      RateSpike.refresh(["NBP.A", "NBP.B"], dates)
+      Provider["NBP"].dup.send(:refresh_rollups, dates)
+
+      _(RateSpike.dataset.select_map([:dataset_key, :date]).map { |key, date| [key, date.to_s] })
+        .must_equal([["NBP.A", "2025-03-04"]])
+      _(MonthlyRate.where(base: "RUB", bucket_date: "2025-03-01").select_map([:dataset_key, :rate]))
+        .must_equal([["NBP.B", 0.0975]])
+      _(MonthlyRate.blendable.where(base: "RUB", bucket_date: "2025-03-01").get(:rate)).must_be_close_to(0.03, 1e-12)
+    end
+
+    it "judges the last observation before a move against the first after it" do
+      Rate.dataset.multi_insert([
+        nbp("NBP.A", "2025-03-03", 0.03), nbp("NBP.A", "2025-03-04", 0.30), nbp("NBP.B", "2025-03-05", 0.03),
+      ])
+
+      _(RateSpike.detect(DB[:rates].where(dataset_key: ["NBP.A", "NBP.B"])).select_map([:dataset_key, :date])
+        .map { |key, date| [key, date.to_s] }).must_equal([["NBP.A", "2025-03-04"]])
+    end
+  end
 end

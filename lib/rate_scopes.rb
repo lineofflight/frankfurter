@@ -49,12 +49,17 @@ module RateScopes
 
     # Recompute a pair's average from its eligible daily observations only when an expired or spiked one contaminates
     # it. Keep stored precision for every unaffected pair, including boundary buckets whose daily history is incomplete
-    # or absent.
+    # or absent. A rollup averages its whole pool (RateRollup), so its observations and spikes come from every dataset
+    # in that pool, not only the one it is stored under.
     def eligible_rollups(dataset, precision)
+      require "dataset"
       table = dataset.model.table_name
       db = dataset.db
       bucket = Bucket.expression(precision)
-      same_pair = [:dataset_key, :base, :quote].to_h { |column| [column, Sequel[table][column]] }
+      same_pair = Sequel.&(
+        Dataset.pooled(:dataset_key, Sequel[table][:dataset_key]),
+        { base: Sequel[table][:base], quote: Sequel[table][:quote] },
+      )
       observations = db[:rates].where(same_pair).where(Bucket.span(precision, Sequel[table][:bucket_date]))
         .where(bucket => Sequel[table][:bucket_date])
       expired = expired_currency_condition

@@ -23,9 +23,16 @@ module RateSpike
     end
 
     # Spikes among the given rates rows, as dataset key, date, base, quote. Neighbours come from the same rows, so the
-    # scope must reach MAX_GAP_DAYS past every observation to be judged. Migration 045 names the key column it had.
+    # scope must reach MAX_GAP_DAYS past every observation to be judged. A pool's datasets (Dataset.pool) are one
+    # series, so a pair that moves between them is judged across the move. Migration 045 names the key column it had.
     def detect(rates, key: :dataset_key)
-      window = { partition: [key, :base, :quote], order: :date }
+      series = if key == :dataset_key
+                 require "dataset"
+                 Dataset.label_expression
+               else
+                 key
+               end
+      window = { partition: [series, :base, :quote], order: [:date, key] }
       neighbours = rates.select(
         key, :date, :base, :quote, :rate,
         Sequel.function(:lag, :rate).over(**window).as(:prev_rate),
@@ -46,17 +53,20 @@ module RateSpike
         .select(key, :date, :base, :quote)
     end
 
-    # Rescreens the dataset's observations around newly inserted dates and returns the dates whose screening changed,
-    # whose blends the caller must refresh. Typically the previous observation, now that its successor has arrived.
-    def refresh(dataset_key, dates)
+    # Rescreens the datasets' observations, with the rest of their pools, around newly inserted dates and returns the
+    # dates whose screening changed, whose blends the caller must refresh. Typically the previous observation, now that
+    # its successor has arrived.
+    def refresh(dataset_keys, dates)
+      require "dataset"
       return [] if dates.empty?
 
+      dataset_key = Array(dataset_keys).flat_map { |key| Dataset.pool(key) }.uniq
       judged = (dates.min - MAX_GAP_DAYS)..(dates.max + MAX_GAP_DAYS)
       scope = DB[:rates].where(dataset_key:, date: (judged.begin - MAX_GAP_DAYS)..(judged.end + MAX_GAP_DAYS))
       found = detect(scope).where(date: judged).all
       stored = dataset.where(dataset_key:, date: judged)
-      key = ->(row) { [row[:date].to_s, row[:base], row[:quote]] }
-      changed = (found.to_set(&key) ^ stored.all.to_set(&key)).map { |date, _, _| Date.parse(date) }.uniq
+      key = ->(row) { [row[:dataset_key], row[:date].to_s, row[:base], row[:quote]] }
+      changed = (found.to_set(&key) ^ stored.all.to_set(&key)).map { |_, date, _, _| Date.parse(date) }.uniq
       return [] if changed.empty?
 
       stored.delete

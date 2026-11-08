@@ -49,6 +49,13 @@ class Dataset < Sequel::Model(:datasets)
       keys.empty? ? [key] : keys
     end
 
+    # SQL matching rows of `column` that pool with the dataset in `other`: the same dataset, or any dataset of a shared
+    # pool `other` belongs to. Plain key equality, which indexes serve, wherever no pool is shared.
+    def pooled(column, other)
+      shared = all.group_by(&:label).values.select { |pool| pool.size > 1 }.map { |pool| pool.map(&:key) }
+      Sequel.|({ column => other }, *shared.map { |keys| Sequel.&({ other => keys }, { column => keys }) })
+    end
+
     # SQL for Dataset#label over a dataset_key column.
     def label_expression(column = :dataset_key)
       relabelled = all.reject { |dataset| dataset.label == dataset.key }.to_h { |dataset| [dataset.key, dataset.label] }

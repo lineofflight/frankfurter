@@ -234,7 +234,7 @@ class Provider < Sequel::Model(:providers)
     dates = records.map { |r| r[:date] }.uniq
     keys = records.map { |r| r[:dataset_key] }.uniq
     # Usually the previous observation, judged now that its successor has arrived.
-    rescreened = keys.flat_map { |dataset_key| RateSpike.refresh(dataset_key, dates) }.uniq
+    rescreened = RateSpike.refresh(keys, dates)
     refresh_rollups(dates, rescreened)
     refresh_currency_summaries(affected_currencies)
     return unless keys.any? { |dataset_key| series.fetch(dataset_key).blends? }
