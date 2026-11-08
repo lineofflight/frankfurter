@@ -1,0 +1,215 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.sama.gov.sa/en-US/_LAYOUTS/15/SAMA.Portal/PortalHandler.ashx?date=09/04/2021&isArabic=false&limit=1000&op=filterCurrenciesWithCount&page=0
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.sama.gov.sa
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Sharepointhealthscore:
+      - '0'
+      Sprequestguid:
+      - e7f34ca2-39d4-1064-f7ba-6678bf5883bd
+      Request-Id:
+      - e7f34ca2-39d4-1064-f7ba-6678bf5883bd
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com
+        *.teams.microsoft.us local.teams.office.com *.powerapps.com *.yammer.com *.officeapps.live.com
+        *.office.com *.stream.azure-test.net *.microsoftstream.com *.dynamics.com
+        *.microsoft.com onedrive.live.com *.onedrive.live.com;
+      Sprequestduration:
+      - '232'
+      Spiislatency:
+      - '1'
+      Microsoftsharepointteamservices:
+      - 16.0.0.10417
+      X-Content-Type-Options:
+      - nosniff
+      X-Ms-Invokeapp:
+      - 1; RequireReadOnly
+      Sp:
+      - W4
+      Server-Timing:
+      - dtSInfo;desc="0", dtRpid;desc="563123744"
+      Set-Cookie:
+      - IDCCookie=!yc8iydSrWXzcG+VB6SuvOVu8fOsjtGF/KEucuzOMOP8Uzh6DLexCmpyTwEeM/sScM2Biaw77Mec0ZQ==;
+        path=/; Httponly; Secure
+      - TS013bfec3=01acabd1ce337a4086a1bcd6ea00a1c7f50de04e40a99ba390ed774389dcf774db2634e8b24fbdc3be3cebfaa5dee3d8c4f0903dfd6c6a922f1f30bb97d5b7ee5d841e600b74b3e704953fa805127bc3848759b375;
+        Path=/; Domain=.www.sama.gov.sa; Secure; HttpOnly
+      - dtCookie4ng7jg3h=v_4_srv_3_sn_9012D4CDED3107C1E90AA3051AB4E285_perc_100000_ol_0_mul_1_app-3Adfb419151df3b71e_1_rcs-3Acss_0;
+        Path=/; Domain=.sama.gov.sa
+      Date:
+      - Sun, 08 Nov 2026 21:30:12 GMT
+      Connection:
+      - close
+      Content-Length:
+      - '26'
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"itemsCount":0,"data":[]}'
+  recorded_at: Sun, 08 Nov 2026 21:30:13 GMT
+- request:
+    method: get
+    uri: https://www.sama.gov.sa/en-US/_LAYOUTS/15/SAMA.Portal/PortalHandler.ashx?date=10/04/2021&isArabic=false&limit=1000&op=filterCurrenciesWithCount&page=0
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - www.sama.gov.sa
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Sharepointhealthscore:
+      - '0'
+      Sprequestguid:
+      - e7f34ca2-39ff-1064-f7ba-673ad32eab95
+      Request-Id:
+      - e7f34ca2-39ff-1064-f7ba-673ad32eab95
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self' teams.microsoft.com *.teams.microsoft.com *.skype.com
+        *.teams.microsoft.us local.teams.office.com *.powerapps.com *.yammer.com *.officeapps.live.com
+        *.office.com *.stream.azure-test.net *.microsoftstream.com *.dynamics.com
+        *.microsoft.com onedrive.live.com *.onedrive.live.com;
+      Sprequestduration:
+      - '270'
+      Spiislatency:
+      - '1'
+      Microsoftsharepointteamservices:
+      - 16.0.0.10417
+      X-Content-Type-Options:
+      - nosniff
+      X-Ms-Invokeapp:
+      - 1; RequireReadOnly
+      Sp:
+      - W4
+      Server-Timing:
+      - dtSInfo;desc="0", dtRpid;desc="1345752393"
+      Set-Cookie:
+      - IDCCookie=!0FDvC7h91W1YGWRB6SuvOVu8fOsjtNqtbtY9nRI2zwPEO/gn1Kd/VrOa3k2NnlKEhbuAZSEOxbE05A==;
+        path=/; Httponly; Secure
+      - TS013bfec3=01acabd1ced92b5d13c9cc983d2847956a652d9a1cd6fab6035d7a36bcd03eb1e215f27ad3026ade1f480d5de4d2552b5431fae1e03fa05026a5b6a348584b0e1aac5443bd06f44badae26543f2c39d295f02c0d65;
+        Path=/; Domain=.www.sama.gov.sa; Secure; HttpOnly
+      - dtCookie4ng7jg3h=v_4_srv_5_sn_48E9072198140427906BBFC66B94B3F7_perc_100000_ol_0_mul_1_app-3Adfb419151df3b71e_1_rcs-3Acss_0;
+        Path=/; Domain=.sama.gov.sa
+      Date:
+      - Sun, 08 Nov 2026 21:30:13 GMT
+      Connection:
+      - close
+      Content-Length:
+      - '13063'
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"itemsCount":75,"data":[{"CurrencyCode":"SAR=","Title":"SAUDI RIYAL","CurrencyRate":1.00000000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"USD=","Title":"US
+        DOLLAR","CurrencyRate":3.75000000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"EUR=","Title":"EURO","CurrencyRate":4.45856000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"GBP=","Title":"POUND
+        STERLING","CurrencyRate":5.14875000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CHF=","Title":"SWISS
+        FRANC","CurrencyRate":4.05295000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"JPY=","Title":"JAPANESE
+        YEN","CurrencyRate":0.03421000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CNY=","Title":"YUAN
+        RENMINBI","CurrencyRate":0.57174000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"PKR=","Title":"PAKISTN
+        RUPEE","CurrencyRate":0.02452000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"INR=","Title":"INDIAN
+        RUPEE ","CurrencyRate":0.05017000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"QAR=","Title":"QATRI
+        RIAL","CurrencyRate":1.02972000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"KWD=","Title":"KUWAITI
+        DINAR","CurrencyRate":12.42544000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"OMR=","Title":"RIAL
+        OMAINI","CurrencyRate":9.74025000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BHD=","Title":"BAHRAINI
+        DINAR","CurrencyRate":9.94694000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"JOD=","Title":"JORDANIAN
+        DINA","CurrencyRate":5.28913000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BAM=","Title":"BOSNIA
+        HERZ","CurrencyRate":2.27963000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BDT=","Title":"BANGLADESH
+        TAK","CurrencyRate":0.04428000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BGN=","Title":"LEV
+        BULGARIA","CurrencyRate":2.27949000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BND=","Title":"BRUNEI
+        DOLLAR","CurrencyRate":2.79675000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"BRL=","Title":"BRAZILIAN
+        REAL","CurrencyRate":0.66463000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CAD=","Title":"CANADIAN
+        DOLLA","CurrencyRate":2.98721000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"ALL=","Title":"LEK
+        ALBANIA","CurrencyRate":0.03623000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CUP=","Title":"CUBA
+        PESOS","CurrencyRate":0.15625000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CYP=","Title":"CYPRUS
+        POUND","CurrencyRate":7.61808000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"CZK=","Title":"CZECH
+        KORUNA","CurrencyRate":0.17147000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"DJF=","Title":"DJIBOUTI
+        FRANC","CurrencyRate":0.02106000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"DKK=","Title":"DANISH
+        KRONE","CurrencyRate":0.59953000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"DZD=","Title":"ALGERIAN
+        DINAR","CurrencyRate":0.02823000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"EGP=","Title":"EGYPTION
+        POUND","CurrencyRate":0.23870000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"ETB=","Title":"ETHIOPIAN
+        BIRR","CurrencyRate":0.09279000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"AFN=","Title":"AFGHANI
+        STAN","CurrencyRate":0.04785000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"ARS=","Title":"ARGENTINE
+        PESO","CurrencyRate":0.04056000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"GNF=","Title":"GUINEA
+        FRANC","CurrencyRate":0.00037000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"HKD=","Title":"HONKONG
+        DOLLAR","CurrencyRate":0.48212000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"AED=","Title":"UAE
+        DIRHAM","CurrencyRate":1.02092000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"IDR=","Title":"INDONESIA
+        RUPI","CurrencyRate":0.00025000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"ISK=","Title":"ICELAND
+        KRONA","CurrencyRate":0.02938000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"AUD=","Title":"AUSTRAL.DOLLAR","CurrencyRate":2.86068000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"KES=","Title":"KENYAN
+        SHILLIN","CurrencyRate":0.03494000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"KRW=","Title":"SOUTH
+        KOREN","CurrencyRate":0.00334000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"LBP=","Title":"LEBANAN
+        LIRA","CurrencyRate":0.00246000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"LKR=","Title":"SIRLANKA
+        RUPEE","CurrencyRate":0.01864000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"LYD=","Title":"LIBYAN
+        DINAR","CurrencyRate":0.83025000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MAD=","Title":"MOROCCO
+        DIRHAM","CurrencyRate":0.41790000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MGA=","Title":"MADAGASCAR
+        ARI","CurrencyRate":0.00098000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MMK=","Title":"KYAT
+        MYANMAR","CurrencyRate":0.00254000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MRO=","Title":"OUGUIYA
+        MAURIT","CurrencyRate":0.01048000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MTL=","Title":"MALTESE
+        LIRA","CurrencyRate":10.39162000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MUR=","Title":"MAURITIUS
+        RUPE","CurrencyRate":0.09282000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MXN=","Title":"MEXICAN
+        PESO","CurrencyRate":0.18599000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"MYR=","Title":"MALAYSIA
+        RINGG","CurrencyRate":0.90689000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"NGN=","Title":"NAIRA
+        NIGERIA","CurrencyRate":0.00917000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"NOK=","Title":"NORWEGIAN
+        KRON","CurrencyRate":0.44045000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"NZD=","Title":"N.ZEALAND
+        DOLL","CurrencyRate":2.64131000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"PHP=","Title":"PHILIPPINE
+        PES","CurrencyRate":0.07725000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"PLN=","Title":"ZLOTY
+        POLAND","CurrencyRate":0.98257000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"RON=","Title":"NEW
+        ROMANIAN L","CurrencyRate":0.90637000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"RUB=","Title":"RUSSIAN
+        RUBLE","CurrencyRate":0.04846000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"SDR=","Title":"S.DRAWING
+        RIGH","CurrencyRate":5.33790000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"SEK=","Title":"SWEDISH
+        KRONA","CurrencyRate":0.43861000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"SGD=","Title":"SINGAPORE
+        DOLL","CurrencyRate":2.79642000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"SKK=","Title":"SLOVAK
+        KORUNA","CurrencyRate":0.14799000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"SOS=","Title":"SOMALI
+        SHILLIN","CurrencyRate":0.00648000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"THB=","Title":"BAHT
+        THAILAND","CurrencyRate":0.11921000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"TJS=","Title":"TAJIKI.
+        SOMONI","CurrencyRate":0.33112000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"TND=","Title":"TUNISIAN
+        DINAR","CurrencyRate":1.35562000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"TRY=","Title":"NEW
+        TURKISH LI","CurrencyRate":0.45773000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"TWD=","Title":"TAIWAN
+        DOLLAR","CurrencyRate":0.13189000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"TZS=","Title":"TANZAN
+        SHILLIN","CurrencyRate":0.00161000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"UGX=","Title":"UGANDA
+        SHILLIN","CurrencyRate":0.00102000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"VND=","Title":"DONG
+        VIET NAM","CurrencyRate":0.00016000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"XAF=","Title":"CAMEROON
+        FRANC","CurrencyRate":0.00679000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"XOF=","Title":"NIGER
+        FRANC","CurrencyRate":0.00679000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"YER=","Title":"YEMENI
+        RIAL","CurrencyRate":0.01486000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"ZAR=","Title":"RAND
+        SOUTH AFR","CurrencyRate":0.25682000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"},{"CurrencyCode":"HUF=","Title":"HUNGARY
+        FORINT","CurrencyRate":0.01247000,"PrevRate":-1.0,"PrevDate":"0001-01-01T00:00:00","IsGCC":false,"CurrencyDate":"2021-04-10T00:00:00"}]}'
+  recorded_at: Sun, 08 Nov 2026 21:30:13 GMT
+recorded_with: VCR 6.4.0
