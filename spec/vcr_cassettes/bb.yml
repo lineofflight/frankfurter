@@ -1,0 +1,639 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.bb.org.bd/en/index.php/econdata/exchangerate
+    body:
+      encoding: ASCII-8BIT
+      string: currencies=all&date_picker=November%2C+2026
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - www.bb.org.bd
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 08 Nov 2026 21:49:49 GMT
+      Content-Security-Policy:
+      - default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
+        frame-ancestors 'self'; form-action 'self'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=16070400; includeSubDomains
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, max-age=0
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Permissions-Policy:
+      - camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(),
+        gyroscope=(), magnetometer=(), fullscreen=(self)
+      Set-Cookie:
+      - TS016f3068=0176acbaed935e9f95a1ddab832dffc49a2b781aa24e9c2731b4e874dbca333d6340a89f25da2448a2b04991fcfb7d36c88c419d603ac8cc869db4c0a8540ac470e4978d36dc1e6decc1e7ab47e82a55e55a25203d3f7450c6465bf80162c8858d60538ad6;
+        Path=/; Domain=.www.bb.org.bd; Secure; HttpOnly
+      - bb_cookie=!65pMD6GXXPLhST15SSoIEX/aE5Rexlbc+TT532yVfn5SzpjVDGxlrdyMoPxmzBjQI2BjJRzk3N/ivg==;
+        path=/; Httponly; Secure
+      - bbavraaaaaaaaaaaaaaaa_session_=IDBMBNGIKFABDAIACJFDLGCNMNJLBHGDAIECKLEHBEGIOAFMNPHMHDAICICODCGNMDGDKKAECOGGEKGNFBBAHBDPDODHFHBGFILHLBGGOPHNACNFPBNFAJMOGMIMMEBG;
+        HttpOnly; secure;
+      - ci_session=d5eov6dpts3n6qc89sgip58cql5ves0s; path=/; secure; HttpOnly
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "\uFEFF\uFEFF\n\n\n\n<!DOCTYPE html>\n<html>\n<head>\n\t<meta name=\"referrer\"
+        content=\"strict-origin-when-cross-origin\">\n\t<meta charset=\"utf-8\">\n\t<meta
+        http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\t\n\t<!-- Tell the browser
+        to be responsive to screen width -->\n\t<meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1\">\n\t<title>Bangladesh Bank</title>\n\t<link rel=\"icon\"
+        type=\"image/png\" href=\"/en/assets/img/website/favicon.png\">\n\t\n\t<!--
+        Font Awesome -->\n\t <!--<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900\">-->\n\t<script
+        src=\"/en/assets/js/jquery.min.js\"></script>\n\t<link rel=\"stylesheet\"
+        href=\"/en/assets/fonts/fonts.css\">\n\n\t<link rel=\"stylesheet\" href=\"/en/assets/plugins/font-awesome/css/font-awesome.min.css\">\n\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/en/assets/css/bbicons.css\">\n\t<link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/en/assets/plugins/swiper/swiper.css\">\n\t<link
+        rel=\"stylesheet\" href=\"/en/assets/css/datatables.min.css\">\n\n\t<link
+        rel=\"stylesheet\" href=\"/en/assets/css/datepicker.css\">\n\t<link rel=\"stylesheet\"
+        href=\"/en/assets/css/jquery.more.css\">\n\n\t<!--<link rel=\"stylesheet\"
+        type=\"text/css\" href=\"\">-->\n    <link rel=\"stylesheet\" href=\"/en/assets/css/bbwebsite.css\">\n\n\t<style>\n\t\tnav
+        > ul > li {\n    \t\tpadding: 0 6px!important;\n\t\t}\n\t</style>\n\n\t\n\t\n\n\n</head>\n\n<body
+        class=\"layout-boxed\">\n<div class=\"wrapper\">\n\t<div class=\"content-overlay\"></div>\n\t<!--
+        Sidenav -->\n\t<div class=\"sidenav\" id=\"sidenav\">\n\n\t\t<!-- close -->\n\t\t<div
+        class=\"sidenav__close\">\n\t\t\t<button class=\"sidenav__close-button\" id=\"sidenav__close-button\"
+        aria-label=\"close sidenav\">\n\n\t\t\t\t<i class=\"fa fa-times sidenav__close-icon\"></i>\n\t\t\t</button>\n\t\t</div>\n\n\t\t<!--
+        Nav -->\n\t\t<nav class=\"sidenav__menu-container\">\n\t\t\t<ul class=\"sidenav__menu\"
+        role=\"menubar\">\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\" class=\"sidenav__menu-url\">About
+        us</a>\n\t\t\t\t\t<button class=\"sidenav__menu-toggle\" aria-haspopup=\"true\"
+        aria-label=\"Open dropdown\"><i class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul
+        class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/about/dept_and_offices\">Department and Offices</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/mission_vision\">Vision
+        and Mission</a></li>\n\t\t\t\t\t\n\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/about/bbhierarchy\">Organogram/hierarchy</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/foreign_visit_info\">Foreign
+        tours & visit</a></li>\n\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/about/board_of_director\">Board Of Directors</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/bbgovernors\">Governors</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/deputygovernor\">Deputy
+        Governors</a></li>\n\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/about/executives\">Executives</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/director\">Directors</a></li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/about/citiChart_deptoffices\">Citizen
+        Charter</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"#\" class=\"sidenav__menu-url\">Monetary Policy</a>\n\t\t\t\t\t<button
+        class=\"sidenav__menu-toggle\" aria-haspopup=\"true\" aria-label=\"Open dropdown\"><i
+        class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/monetarypolicy\">Monetary
+        Policy Statements</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/monetaryactivity/auc_calendar\">Auction Calendar</a></li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/treasury\">Treasury
+        Bill/Bond auctions</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/monetaryactivity/auc_notice\">Auction Notice</a></li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/tbillnbond\">Data
+        Of Treasury Bills &amp; Bonds</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t\t\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"#\" class=\"sidenav__menu-url\">Financial System</a>\n\t\t\t\t\t<button
+        class=\"sidenav__menu-toggle\" aria-haspopup=\"true\" aria-label=\"Open dropdown\"><i
+        class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul class=\"sidenav__menu-dropdown\">\n\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/index\">Overview</a></li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/finmarket\">Financial
+        Markets</a></li>\n\t\t\t\t\t\t\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialactivity/govsecmrkt/index\">Government Securities
+        Market</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialactivity/interbank_moneymarket\">Inter Bank
+        Money Market</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/monetaryactivity/money_market_ref_rate\">Money Market
+        Reference Rate</a></li>\n\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialactivity/paysystems\">Payment Systems</a></li>\n\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/did\">Deposit
+        Insurance</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialsystems/regulator\">Regulators</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/credit_rating_of_banks\">Credit
+        Rating Of Banks</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialactivity/schedule_charg\">Schedule Of Charges
+        Of Banks</a></li>\n\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/financialactivity/bankfi\">Banks & FCs</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/insurance\">Insurance</a></li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/mfi\">MFIS</a></li>\n\n\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t\t\n\t\t\t\t<li>\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t<a
+        href=\"/en/index.php/fxmarket/index\" class=\"sidenav__menu-url\">FX Market</a>\n\t\t\t\t\t\t<button
+        class=\"sidenav__menu-toggle\" aria-haspopup=\"true\" aria-label=\"Open dropdown\"><i
+        class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t\t\t<ul class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/fxmarket/interbank_fxmarket\"><i
+        class=\"fa fa-angle-right\"></i>Interbank FX Market</a></li>\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=/en/index.php/econdata/exchangerate
+        target=\"_blank\"><i class=\"fa fa-angle-right\"></i>Exchange Rates</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/econdata/rfrexrate\"><i
+        class=\"fa fa-angle-right\"></i>FX Reference Rate</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/fxmarket/fx_auction_result\"><i
+        class=\"fa fa-angle-right\"></i>FX Auction Result</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/fxmarket/acu_payment\"><i
+        class=\"fa fa-angle-right\"></i>ACU Payment</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/fxmarket/edf_dashboard\"><i
+        class=\"fa fa-angle-right\"></i>Export Development Fund (EDF)</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/fxmarket/fc_clearing\"><i
+        class=\"fa fa-angle-right\"></i>FC Clearing</a></li>\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/econdata/intreserve\"><i
+        class=\"fa fa-angle-right\"></i>Foreign Exchange Reserve</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/econdata/wageremitance\"><i
+        class=\"fa fa-angle-right\"></i>Remittances</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/econdata/bopindex
+        \"><i class=\"fa fa-angle-right\"></i>BOP, Export & Import</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"../../../../../econdata/nsdp/nsdp_bb.php\"><i
+        class=\"fa fa-angle-right\"></i><font class=\"no-transform\">Macroeconomic
+        and Financial Data</font></a></li>\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t</li>\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"/en/index.php/financialactivity/govsecmrkt/index\" class=\"sidenav__menu-url\">G-Sec
+        Market</a>\n\t\t\t\t\t\t<button class=\"sidenav__menu-toggle\" aria-haspopup=\"true\"
+        aria-label=\"Open dropdown\"><i class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t\t\t<ul
+        class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/govsecmrkt/index\">Government
+        Securities Market</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/treasury\">Primary
+        Auction of Treasury Bill &amp; Bond</a></li>\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=/en/index.php/monetaryactivity/tbillnbond
+        target=\"_blank\">Secondary Trading of Treasury Bills and Bonds</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/gsecinvprcs\">G-Sec
+        Investment Process</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/bgis_home\">BD
+        Govt Investment Sukuk (BGIS)</a></li>\n\t\t\t\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/financialactivity/govsecmrkt_faq\">Faq
+        on Government Securities Market</a></li>\n\t\t\t\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/bcr_rate\">91
+        Days BCR</a></li>\t\t\t\t\t\t\t\n\t\t\t\t\t\t<!--li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/monetaryactivity/call_money_market\">Call
+        Money Rate</a></li-->\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t</li>\t\t\t\t\t\t\t\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"#\" class=\"sidenav__menu-url\">Publication</a>\n\t\t\t\t\t<button
+        class=\"sidenav__menu-toggle\" aria-haspopup=\"true\" aria-label=\"Open dropdown\"><i
+        class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul class=\"sidenav__menu-dropdown\">\n\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/5/8\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Weekly</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/4/25\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Fortnightly</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/3/10\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Monthly</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/2/7\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Quarterly</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/1/24\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Half Yearly</a>\n\t\t\t\t\t\t</li>\n\n\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/0/2\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Annual</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/researchindex\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Research Work</a>\n\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/publication/sp_research_worklist\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Special Publication</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/publication/publictn/8/55\"><i\n\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Others</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"#\" class=\"sidenav__menu-url\">MEDIA & Press Release</a>\n\t\t\t\t\t<button
+        class=\"sidenav__menu-toggle\" aria-haspopup=\"true\" aria-label=\"Open dropdown\"><i
+        class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/mediaroom/circular\">Circulars/Circular
+        Letters</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"../../../../mediaroom/press_release/pressrelease.php\">Press Release</a></li>\n\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a
+        href=\"/en/index.php/Financialstability/\" class=\"sidenav__menu-url\">Financial
+        Stability</a>\n\t\t\t\t\t<button class=\"sidenav__menu-toggle\" aria-haspopup=\"true\"
+        aria-label=\"Open dropdown\"><i class=\"fa fa-angle-right\"></i></button>\n\t\t\t\t\t<ul
+        class=\"sidenav__menu-dropdown\">\n\t\t\t\t\t\t<li class=\"list_item\"><a
+        class=\"sidenav__menu-url\" href=\"/en/index.php/Financialstability/finstabilitycommittee\">Financial
+        Stability Committee</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/Financialstability/macrosuper\">Macroprudential Supervision</a></li>\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a class=\"sidenav__menu-url\" href=\"/en/index.php/Financialstability/reportscirulars\">Guidelines,
+        Circulars and Reports</a></li>\n\t\t\t\t\t\t<li class=\"list_item\"><a class=\"sidenav__menu-url\"
+        href=\"/en/index.php/Financialstability/stabilityissues\">Contemporary Financial
+        Stability Issues</a></li>\n\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\n\n\n\t\t\t</ul>\n\t\t</nav>\n\n\t</div>
+        <!-- end sidenav -->\n\t<div class=\"wrapper_inner\">\n\n\t\t<header class=\"header\">\n\t\t\t<div
+        class=\"header_top\">\n\t\t\t\t<div class=\"container\">\n\n\t\t\t\t\t<div
+        class=\"row\">\n\t\t\t\t\t\t<div class=\"col-lg-12\">\n\t\t\t\t\t\t\t<div
+        class=\"header_content\">\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<button class=\"nav-icon-toggle\"
+        id=\"nav-icon-toggle\" aria-label=\"Open side menu\">\n              \t\t\t\t\t\t<span
+        class=\"nav-icon-toggle__box\">\n                \t\t\t\t\t\t<span class=\"nav-icon-toggle__inner\"></span>\n
+        \            \t\t\t\t\t\t </span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t<div
+        class=\"search_box\">\n\t\t\t\t\t\t\t\t\t<form action=\"/en/index.php/home/search\"
+        class=\"search\" method=\"post\">\n\t\t\t\t\t\t\t\t\t\t<input type=\"text\"
+        class=\"search_input\" name=\"keyword\"  placeholder=\"Search\">\n\t\t\t\t\t\t\t\t\t\t<button
+        class=\"search_button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search search_icon\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</form>\n\t\t\t\t\t\t\t\t</div>\n\n\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<span
+        class=\"globe\"><a href=\"/en/index.php/home/switch_lang\">বাংলা</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t</div>\n\n\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div
+        class=\"header_inner\">\n\t\t\t\t<div class=\"container\">\n\n\t\t\t\t\t<div
+        class=\"row\">\n\n\t\t\t\t\t\t<div class=\"logo_banner\">\n\t\t\t\t\t\t\t\n\n\t\t\t\t\t\t\t<!--Navigation
+        bar start-->\n\t\t\t\t\t\t\t<div class=\"navigation\">\n\n\t\t\t\t\t\t\t\t<div
+        id=\"navigation-bar\">\n\n\t\t\t\t\t\t\t\t\t<nav >\n\t\t\t\t\t\t\t\t\t\t<ul
+        class=\"menu\" id=\"navmenu\">\n\t\t\t\t\t\t\t\t\t\t\t<li class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a
+        href='/en/index.php/about/index'>About us</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        src=\"/en/assets/img/website/menu_about.png\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/dept_and_offices\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Department and Offices</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/mission_vision\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Vision and Mission</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--li
+        class=\"list_item\"><a href=\"/en/index.php/about/strategic_plan\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Strategic Plan</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--li
+        class=\"list_item\"><a href=\"< ?php echo site_url('about/citizenCharter')
+        ?>\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i><
+        ?php echo get_lan('citizen_charter'); ?></a></li-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/citiChart_deptoffices\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Citizen Charter</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/bbhierarchy\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Organogram/hierarchy</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/foreign_visit_info\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Foreign tours & visit</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/board_of_director\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Board Of Directors</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/mpc\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Monetary Policy Committee</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/bbgovernors\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Governors</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/deputygovernor\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Deputy Governors</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/advisers\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Advisers</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/executives\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Executives</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/director\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Directors</a></li>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\t\t\t\t\t\t\t\t\t\t\t<li class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a
+        href='/en/index.php/monetaryactivity/index'>Monetary Policy</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--<span class=\"icon-monetary_policy
+        img-thumbnail\"></span>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        src=\"/en/assets/img/website/menu_monetarypolicy.png\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/monetarypolicy\"><i
+        class=\"fa fa-angle-right\"></i>Monetary Policy Statements</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/mpc\"><i class=\"fa
+        fa-angle-right\"></i>Monetary Policy Committee</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/mpc_resolution\"><i
+        class=\"fa fa-angle-right\"></i>MPC Resolution</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/mptools\"><i
+        class=\"fa fa-angle-right\"></i>Monetary Policy Tools</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/smart\"><i class=\"fa
+        fa-angle-right\"></i>SMART</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\t\t\t\t\t\t\t\t\t\t\t<li class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a
+        href='/en/index.php/financialactivity/index'>Financial System</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        src=\"/en/assets/img/website/menu_financialsystem.png\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/index\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Overview</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/finmarket\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Financial Markets</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/Financialstability/\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Financial Stability</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+        \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/paysystems\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Payment Systems</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/interbank_moneymarket\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Inter Bank Money Market</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/money_market_ref_rate\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Money Market Reference Rate</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/did\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Deposit Insurance</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialsystems/regulator\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Regulators</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/credit_rating_of_banks\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Credit Rating Of Banks</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/schedule_charg\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Schedule Of Charges Of Banks</a></li>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/bankfi\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Banks & FCs</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/insurance\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Insurance</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/mfi\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>MFIS</a></li>\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a
+        href='/en/index.php/fxmarket/index'>FX Market</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--<span class=\"icon-monetary_policy
+        img-thumbnail\"></span>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        src=\"/en/assets/img/website/menu_fxmarket.jpg\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"no-transform\"><a href=\"/en/index.php/fxmarket/index\"><i class=\"fa
+        fa-angle-right\"></i>Overview of the FX Market</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/fxmarket/interbank_fxmarket\"><i
+        class=\"fa fa-angle-right\"></i>Interbank FX Market</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/econdata/exchangerate\"><i class=\"fa
+        fa-angle-right\"></i>Exchange Rates</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/econdata/rfrexrate\"><i class=\"fa
+        fa-angle-right\"></i>FX Reference Rate</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/fxmarket/fx_auction_result\"><i
+        class=\"fa fa-angle-right\"></i>FX Auction Result</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/fxmarket/acu_payment\"><i class=\"fa
+        fa-angle-right\"></i>ACU Payment</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/fxmarket/edf_dashboard\"><i class=\"fa
+        fa-angle-right\"></i>Export Development Fund (EDF)</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/fxmarket/fc_clearing\"><i class=\"fa
+        fa-angle-right\"></i>FC Clearing</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/econdata/intreserve\"><i class=\"fa
+        fa-angle-right\"></i>Foreign Exchange Reserve</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/econdata/wageremitance\"><i class=\"fa
+        fa-angle-right\"></i>Remittances</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/econdata/bopindex \"><i class=\"fa
+        fa-angle-right\"></i>BOP, Export & Import</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"../../../../../econdata/nsdp/nsdp_bb.php\"><i
+        class=\"fa fa-angle-right\"></i><font class=\"no-transform\">Macroeconomic
+        and Financial Data</font></a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<li
+        class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a href='/en/index.php/financialactivity/govsecmrkt/index'>G-Sec
+        Market</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item\">\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img
+        class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t src=\"/en/assets/img/website/menu_govsec.png\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/govsecmrkt/index\"><i
+        class=\"fa fa-angle-right\"></i>Government Securities Market</a></li>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"no-transform\"><a href=\"/en/index.php/monetaryactivity/treasury\"><i
+        class=\"fa fa-angle-right\"></i>Primary Auction of Treasury Bill &amp; Bond</a></li>\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t<li
+        class=\"no-transform\"><a href=/en/index.php/monetaryactivity/tbillnbond target=\"_blank\"><i
+        class=\"fa fa-angle-right\"></i>Secondary Trading of Treasury Bills and Bonds</a></li>\n\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/bcr_rate\"><i
+        class=\"fa fa-angle-right\"></i>91 Days BCR</a>\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/call_money_market\"><i
+        class=\"fa fa-angle-right\"></i>Call Money</a-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/gsecinvprcs\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>G-Sec Investment Process</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/monetaryactivity/bgis_home\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>BD Govt Investment Sukuk (BGIS)</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"no-transform\"><a href=\"/en/index.php/financialactivity/govsecmrkt_faq\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>FAQ on Government Securities Market</a></li>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\t\t\t\t\t\t\t\t\t\t\t<li class='dropdown'>\n\t\t\t\t\t\t\t\t\t\t\t\t<a
+        href='/en/index.php/publication/index'>Publication</a>\n\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class='mega-menu'>\n\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mega-menu-container\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img class=\"img-thumbnail\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        src=\"/en/assets/img/website/menu_publications.png\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+        alt=\"titleToAlt\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div> <!-- /.item -->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/5/8\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Weekly</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/4/25\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Fortnightly</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/3/10\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Monthly</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/2/7\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Quarterly</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/1/24\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Half Yearly</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div
+        class=\"item\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<!--   <h3>Contact</h3>-->\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/0/2\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Annual</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/researchindex\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Research Work</a>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/7/38\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Special Publication</a></li>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/publication/publictn/8/55\"><i\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Others</a></li>\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div><!--
+        /.container -->\n\t\t\t\t\t\t\t\t\t\t\t\t</div><!-- /.mega-menu -->\n\t\t\t\t\t\t\t\t\t\t\t</li><!--
+        /.dropdown -->\n\n\n\t\t\t\t\t\t\t\t\t\t</ul><!-- .container -->\n\t\t\t\t\t\t\t\t\t</nav>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<!--Navigation
+        bar end-->\n\t\t\t\t\t\t</div>\n\n\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</header>\n<style>\r\n.table-wrapper
+        {\r\n  max-height: 400px;\r\n  overflow: auto;\r\n  border: 1px solid #ccc;\r\n}\r\n\r\ntable
+        {\r\n  border-collapse: collapse;\r\n  width: 100%;\r\n  min-width: 600px;\r\n}\r\n\r\nth,
+        td {\r\n  border: 1px solid #ddd;\r\n  padding: 8px;\r\n  white-space: nowrap;\r\n}\r\n\r\n/*thead
+        th {\r\n  position: sticky;\r\n  top: 0;\r\n  background: #f9f9f9;\r\n  z-index:
+        2;\r\n}*/\r\n.header-top {\r\n  position: sticky;\r\n  top: 0;\r\n  background:
+        #f9f9f9;\r\n  z-index: 3;\r\n}\r\n\r\n.header-sub {\r\n  position: sticky;\r\n
+        \ top: 30px; /* height of first header row */\r\n  background: #f1f1f1;\r\n
+        \ z-index: 2;\r\n}\r\ntbody td:first-child,\r\nthead th:first-child {\r\n
+        \ position: sticky;\r\n  left: 0;\r\n  background: #fff;\r\n  z-index: 1;\r\n}\r\n.exchange-download
+        {\r\n    margin: 0;\r\n    font-size: 14px;\r\n    line-height: 1.6;\r\n    color:
+        #333;\r\n}\r\n\r\n.exchange-download span {\r\n    color: #666 !important;\r\n}\r\n\r\n.exchange-download
+        a {\r\n    color: #555;\r\n    text-decoration: none;\r\n    border-bottom:
+        1px solid #ccc;\r\n    transition: all 0.2s ease;\r\n}\r\n\r\n.exchange-download
+        a:hover {\r\n    color: #000;\r\n    border-bottom-color: #000;\r\n}\r\n</style>\r\n\r\n\r\n\r\n<div
+        class=\"content-wrapper\">\r\n\t<section class=\"content\">\r\n\t\t<section
+        class=\"breadcrumbs\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div
+        class=\"row\">\r\n\t\t\t\t\t<div class=\"col-12\">\r\n\t\t\t\t\t\t<ul class='bread-list'><li
+        \ class=\"active\"><a href=\"/en/\">Home<i class=\"fa fa-angle-right\"></i>
+        </a></li><li  class=\"active\"><a href=\"/en/index.php/fxmarket/index\">FX
+        Market<i class=\"fa fa-angle-right\"></i> </a></li><li class=\"active\">Exchange
+        Rate of Taka</li></ul>\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</section>\r\n\t\t<div
+        class=\"container\">\r\n\t\t\t<div class=\"row\">\r\n\t\t\t\t<div class=\"col-lg-3\">\r\n\t\t\t\t\t<div
+        class=\"bbsidebar-sidebar\">\r\n\t\t\t\t\t\t<div class=\"single-widget categories\">\r\n\t\t\t\t\t\t\t<h3
+        class=\"title\">search previous data</h3><br>\r\n\t\t\t\t\t\t\t<div class=\"form\">\r\n\t\t\t\t\t\t\t\t<span
+        class=\"form-msg\"></span>\r\n\t\t\t\t\t\t\t\t<form method=\"post\" action=\"/en/index.php/econdata/exchangerate\"\r\n\t\t\t\t\t\t\t\t\t
+        \ id=\"search-form\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"input-group mb-3\">\r\n\t\t\t\t\t\t\t\t\t\t<div
+        class=\"input-group-prepend\">\r\n\t\t\t\t\t\t\t\t\t\t\t<label class=\"input-group-text\"
+        for=\"inputGroupSelect01\"><i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i></label>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t<select
+        class=\"custom-select\" name=\"currencies\" id=\"currencies\"><!-- id=\"inputGroupSelect01\"-->\r\n\t\t\t\t\t\t\t\t\t\t\t<option
+        value=\"\" selected>Select Currency</option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option
+        value=\"all\" Selected>All Currency</option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option
+        value=\"usd\" >USD</option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option value=\"others\"
+        >Others</option>\r\n\t\t\t\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t<div
+        class=\"input-group mb-3\">\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"input-group-prepend\"
+        \ >\r\n\t\t\t\t\t\t\t\t\t\t\t<label class=\"input-group-text\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<i
+        class=\"fa fa-calendar\" aria-hidden=\"true\"></i>\r\n\t\t\t\t\t\t\t\t\t\t\t</label>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t<input
+        type=\"text\"  required name=\"date_picker\"  class=\"datepicker-here form-control\"
+        data-language=\"en\"  data-date-format=\"MM, yyyy\" data-min-view=\"months\"\r\n\t\t\t\t\t\t\t\t\t\t\t
+        \  data-view=\"months\"  value='November, 2026' /> \r\n\t\t\t\t\t\t\t\t\t\t\t
+        \  \r\n\t\t\t\t\t\t\t\t\t\t\t   \r\n\t\t\t\t\t\t\t\t\t\t\t   \r\n\t\t\t\t\t\t\t\t\t</div>\r\n\r\n\r\n\t\t\t\t\t\t\t\t\t<div
+        class=\"form_group\">\r\n\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"form_submit\">Search</button>\r\n\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</form>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<p
+        class=\"exchange-download\" style=\"text-align: unset!important;\">FX Rate
+        Sheet effective for 08/11/2026<br><span style=\"color: #605a5a!impportant;\">
+        (Download <a href=\"/econdata/exchange_rate/exchange_rate_08_11_2026.xls\"
+        download>.xls</a> or <a href=\"/econdata/exchange_rate/exchange_rate_08_11_2026.pdf\"
+        target=\"_blank\">.pdf</a>)</span></p>\t\t\t\t\t\t\t<a href=\"/en/index.php/econdata/exchangerate_archive\">View
+        Archive</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<!--div class=\"single-widget
+        categories\">\r\n\t\t\t\t\t\t\t<h3 class=\"title\">Dealer Banks rate</h3><br>\r\n\t\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t\t<li><a
+        href=\"http://exp.bb.org.bd/ords/f?p=104\"\r\n\t\t\t\t\t\t\t\t\t\t   target=\"_blank\"><i
+        class=\"fa fa-angle-right\"></i>Declared Exchange Rates of\r\n\t\t\t\t\t\t\t\t\t\t\tBanks</a></li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t\t<h1>Rates
+        of specific dealer banks may be seen in their respective websites, such\r\n\t\t\t\t\t\t\t\t\tas:</h1>\r\n\t\t\t\t\t\t\t\t\t<select
+        class=\"custom-select\" id=\"banklink\" name=\"banklink\" id=\"currencies\">\r\n\t\t\t\t\t\t\t\t\t\t<option
+        value=\"\" disabled selected>Select Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option
+        value=\"https://www.agranibank.org/index.php/home/exchange_rates\">Agrani
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://abbl.com/exchange-rates/\">AB
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://www.sonalibank.com.bd/\">Sonali
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://www.jb.com.bd/\">Janata
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://www.agranibank.org/rates/Rate.pdf\">Islami
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://www.agranibank.org/rates/Rate.pdf\">BASIC
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"https://www.agranibank.org/rates/Rate.pdf\">Prime
+        Bank</option>\r\n\t\t\t\t\t\t\t\t\t</select-->\r\n\t\t\t\t\t\t\t\t<!--ul>\r\n\t\t\t\t\t\t\t\t\t<li><a
+        href=\"https://www.agranibank.org/rates/Rate.pdf\" target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Agrani Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"http://www.abbank.com.bd/exchange-rates.html\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>AB
+        Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.sonalibank.com.bd/\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>Sonali
+        Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.jb.com.bd/index.php/Exchange_rate/exrate.pdf\"\r\n\t\t\t\t\t\t\t\t\t\t
+        \  target=\"_blank\"><i class=\"fa fa-angle-right\"></i>Janata Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a
+        href=\"https://www.islamibankbd.com/\" target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>Islami Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.basicbanklimited.com/\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>BASIC
+        Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.thecitybank.com/home\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>The
+        City Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"http://www.rsinc.com/\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>Prime
+        Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.uttarabank-bd.com/HTML/forexRates.htm\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>Uttara
+        Bank</a></li>\r\n\t\t\t\t\t\t\t\t\t<li><a href=\"https://www.hsbc.com.bd/1/2/\"
+        target=\"_blank\"><i\r\n\t\t\t\t\t\t\t\t\t\t\t\tclass=\"fa fa-angle-right\"></i>HSBC</a></li>\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t</ul-->\r\n\t\t\t\t\t\t\t<!--/div>\r\n\r\n\r\n\t\t\t\t\t\t</div-->\r\n\t\t\t\t\t\t<div
+        class=\"single-widget categories\">\r\n\t\t\t\t\t\t\t<h3 class=\"title\">Related
+        Links</h3>\r\n\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t<li><a href=\"/en/index.php/fxmarket/interbank_fxmarket\"><i
+        class=\"fa fa-angle-right\"></i>Interbank FX Market</a></li>\r\n\t\t\t\t\t\t\t\t<!--li><a
+        href=\"/en/index.php/econdata/exchangerate\"><i class=\"fa fa-angle-right\"></i>Exchange
+        Rates</a></li-->\r\n\t\t\t\t\t\t\t\t<li><a href=\"/en/index.php/econdata/rfrexrate\"><i
+        class=\"fa fa-angle-right\"></i>FX Reference Rate</a></li>\r\n\t\t\t\t\t\t\t\t<li><a
+        href=\"/en/index.php/fxmarket/fx_auction_result\"><i class=\"fa fa-angle-right\"></i>FX
+        Auction Result</a></li>\r\n\t\t\t\t\t\t\t\t<li><a href=\"/en/index.php/fxmarket/acu_payment\"><i
+        class=\"fa fa-angle-right\"></i>ACU Payment</a></li>\r\n\t\t\t\t\t\t\t\t<li><a
+        href=\"/en/index.php/fxmarket/edf_dashboard\"><i class=\"fa fa-angle-right\"></i>Export
+        Development Fund (EDF)</li>\r\n\t\t\t\t\t\t\t\t<li><a href=\"/en/index.php/fxmarket/fc_clearing\"><i
+        class=\"fa fa-angle-right\"></i>FC Clearing</li>\r\n\t\t\t\t\t\t\t\t<li><a
+        href=\"/en/index.php/econdata/intreserve\"><i class=\"fa fa-angle-right\"></i>Foreign
+        Exchange Reserve</a></li>\r\n\t\t\t\t\t\t\t\t<li><a href=\"/en/index.php/econdata/wageremitance\"><i
+        class=\"fa fa-angle-right\"></i>Remittances</a></li>\r\n\t\t\t\t\t\t\t\t<li><a
+        href=\"/en/index.php/econdata/bopindex \"><i class=\"fa fa-angle-right\"></i>BOP,
+        Export & Import</a></li>\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t<li class=\"no-transform\"><a
+        href=\"../../../../../econdata/nsdp/nsdp_bb.php\"><i class=\"fa fa-angle-right\"></i>Macroeconomic
+        and Financial Data</a></li>\r\n\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<!--Right
+        side of the content-->\r\n\t\t\t\t<div class=\"col-lg-9\">\r\n\t\t\t\t\t<div
+        class=\"row\">\r\n\t\t\t\t\t\t<div class=\"page_header no-transform\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tExchange
+        Rate of Taka&nbsp;&nbsp;\t\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t\t<p>\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\tThe
+        exchange rate of the Taka against the US Dollar is determined based on interbank
+        transactions in the domestic foreign exchange market. This rate is primarily
+        influenced by market-driven demand and supply dynamics.\r\n</p>\r\n<p>The
+        USD/BDT bid and ask rates shown below represent the highest and lowest interbank
+        exchange rates at Dhaka close on the previous business day, while BDT cross
+        rates against other foreign currencies are based on New York and Dhaka closing
+        rates of that day.\r\n</p>\r\n<p>Bangladesh Bank applies the following exchange
+        rates for purchase and sale transactions with the Government and international
+        organizations.</p>\r\n\r\n\r\n\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<h3 style=\"color:red;\">Data
+        for the Month: November, 26</h3><br><div class=\"table-wrapper\"><table><thead><tr
+        \ class=\"header-top\"><th>Date</th><th colspan='3'>USD</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th
+        colspan='2'>EUR</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th colspan='2'>GBP</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th
+        colspan='2'>AUD</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th colspan='2'>JPY</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th
+        colspan='2'>CAD</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th colspan='2'>SEK</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th
+        colspan='2'>SGD</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th colspan='2'>CNH</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th
+        colspan='2'>INR</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th colspan='2'>LKR</th></tr><tr><td></td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>WAR</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Bid
+        Rate</td>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<td>Ask Rate</td></tr></thead><tbody><tr><td
+        style='position: sticky;'>08/11/26</td><td>124.3100</td><td>124.3500</td><td>124.3500</td><td>138.5186</td><td>138.5881</td><td>165.9414</td><td>166.0321</td><td>85.3140</td><td>85.4160</td><td>0.7843</td><td>0.7848</td><td>87.9697</td><td>88.0167</td><td>12.5614</td><td>12.5718</td><td>96.8675</td><td>96.9591</td><td>18.6263</td><td>18.6331</td><td>1.3236</td><td>1.3243</td><td>2.6739</td><td>2.6756</td><tr><tr><td
+        style='position: sticky;'>05/11/26</td><td>124.3200</td><td>124.3500</td><td>124.3400</td><td>139.5741</td><td>139.6450</td><td>167.4715</td><td>167.5243</td><td>87.0737</td><td>87.1320</td><td>0.7845</td><td>0.7849</td><td>88.9270</td><td>88.9676</td><td>12.7725</td><td>12.7795</td><td>97.1705</td><td>97.2700</td><td>18.6247</td><td>18.6301</td><td>1.3143</td><td>1.3153</td><td>2.6755</td><td>2.6770</td><tr><tr><td
+        style='position: sticky;'>04/11/26</td><td>124.3500</td><td>124.3500</td><td>124.3500</td><td>139.1850</td><td>139.2098</td><td>166.7658</td><td>166.8528</td><td>86.6222</td><td>86.6471</td><td>0.7836</td><td>0.7838</td><td>88.7517</td><td>88.7580</td><td>12.6844</td><td>12.7112</td><td>97.0196</td><td>97.0574</td><td>18.6423</td><td>18.6435</td><td>1.3124</td><td>1.3125</td><td>2.6747</td><td>2.6755</td><tr><tr><td
+        style='position: sticky;'>03/11/26</td><td>124.3500</td><td>124.3500</td><td>124.3500</td><td>139.0855</td><td>139.1352</td><td>166.6912</td><td>166.7285</td><td>86.9953</td><td>87.0699</td><td>0.7873</td><td>0.7873</td><td>88.8913</td><td>88.9103</td><td>12.6956</td><td>12.7155</td><td>97.2016</td><td>97.2396</td><td>18.7037</td><td>18.7102</td><td>1.3102</td><td>1.3103</td><td>2.6731</td><td>2.6739</td><tr><tr><td
+        style='position: sticky;'>02/11/26</td><td>124.3000</td><td>124.3000</td><td>124.3000</td><td>138.6939</td><td>138.7437</td><td>166.4501</td><td>166.4874</td><td>87.3829</td><td>87.4575</td><td>0.7889</td><td>0.7891</td><td>88.9509</td><td>88.9573</td><td>12.6325</td><td>12.6665</td><td>97.2157</td><td>97.2918</td><td>18.6836</td><td>18.6839</td><td>1.3088</td><td>1.3104</td><td>2.6754</td><td>2.6766</td><tr><tr><td
+        style='position: sticky;'>01/11/26</td><td>124.2900</td><td>124.3000</td><td>124.3000</td><td>138.6828</td><td>138.7437</td><td>166.4367</td><td>166.4874</td><td>87.3759</td><td>87.4575</td><td>0.7888</td><td>0.7891</td><td>88.9438</td><td>88.9573</td><td>12.6315</td><td>12.6665</td><td>97.2079</td><td>97.2918</td><td>18.6821</td><td>18.6839</td><td>1.3087</td><td>1.3104</td><td>2.6754</td><td>2.6768</td><tr></tbody></table></div>\t\t\t\t\t\t\t<!--p>\r\n\t\t\t\t\t\t\t\tDisclaimer:
+        The Cross-currency rates (FC against BDT) are derived from the FC against
+        FC deals and USD/BDT deals done in the interbank FC market and reported to
+        BAFEDA by the dealer banks. If there is no deal of a particular currency in
+        the interbank market on a specific day, there will be no cross-currency rates
+        of that currency on that day.\r\n\t\t\t\t\t\t\t</p-->\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</section>\r\n\r\n<footer
+        class=\"footer\">\n\t<div class=\"row\">\n\t\t<div class=\"col-sm-4\">\n\t\t\t<div
+        class=\"colwrapper\">\n\t\t\t\t<div class=\"contact\">\n\t\t\t\t\t<h2>Contact</h2>\n\t\t\t\t\t<div
+        class=\"widget\">\n\t\t\t\t\t\t<!-- <i class=\"fa fa-map-marker\"></i>-->\n\t\t\t\t\t\t<svg
+        version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\"\n\t\t\t\t\t\t\t
+        viewBox=\"0 0 20 20\">\n\t\t\t\t\t\t\t<title>location-pin</title>\n\t\t\t\t\t\t\t<path
+        d=\"M10 2.009c-2.762 0-5 2.229-5 4.99 0 4.774 5 11 5 11s5-6.227 5-11c0-2.76-2.238-4.99-5-4.99zM10
+        9.76c-1.492 0-2.7-1.209-2.7-2.7s1.208-2.7 2.7-2.7c1.49 0 2.699 1.209 2.699
+        2.7s-1.209 2.7-2.699 2.7z\"></path>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t<span>Bangladesh
+        Bank, Motijheel, Dhaka</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"widget\">\n\t\t\t\t\t\t<!--<i
+        class=\"fa fa-phone\"></i>-->\n\n\t\t\t\t\t\t<svg  version=\"1.1\" id=\"Capa_1\"
+        xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"
+        x=\"0px\" y=\"0px\"\n\t\t\t\t\t\t\t  width=\"34.545px\" height=\"34.545px\"
+        viewBox=\"0 0 34.545 34.545\" style=\"enable-background:new 0 0 34.545 34.545;\"\n\t\t\t\t\t\t\t
+        \ xml:space=\"preserve\"><g><path d=\"M34.371,13.114c-0.043,0.217-0.045,0.441-0.129,0.646c-0.498,1.202-1.429,2.197-2.116,3.305\n\t\tc-0.885,1.414-8.404-1.633-7.435-3.521c0.365-0.698,1.788-2.626,1.896-3.401c0.098-0.691-0.818-1.233-1.664-1.303\n\t\tc-2.231-0.18-5.084-0.017-7.453-0.002V8.84c-0.063,0-0.133,0-0.197-0.001C17.208,8.84,17.138,8.84,17.076,8.84V8.838\n\t\tc-2.37-0.015-5.221-0.178-7.453,0.002C8.777,8.91,7.861,9.452,7.959,10.144c0.107,0.775,1.531,2.703,1.896,3.401\n\t\tc0.971,1.888-6.551,4.935-7.436,3.521c-0.688-1.107-1.617-2.103-2.115-3.305c-0.084-0.205-0.087-0.43-0.13-0.646\n\t\tc-1.103-4.93,3.149-9.96,9.551-10.475c2.446-0.199,4.897-0.311,7.351-0.354V2.272c0.066,0.002,0.131,0.006,0.197,0.007\n\t\tc0.066-0.001,0.131-0.005,0.197-0.007v0.013c2.453,0.044,4.904,0.155,7.35,0.354C31.223,3.154,35.475,8.186,34.371,13.114z\n\t\t
+        M29.975,30.124c0.069,1.183-0.703,2.148-1.723,2.148H6.293c-1.017,0-1.792-0.967-1.722-2.148l0.641-10.783\n\t\tc2.327-0.545,5.301-1.969,6.38-3.737c0.601-0.985,0.665-2.094,0.171-3.055c-0.125-0.24-0.359-0.615-0.628-1.033l-0.001-0.002\n\t\tc-0.008-0.019-0.008-0.019-0.014-0.032h11.953c-0.006,0.017-0.008,0.02-0.018,0.044c-0.15,0.361-0.201,0.638-0.173,0.847\n\t\tc-0.034,0.061-0.082,0.138-0.108,0.188c-0.488,0.948-0.424,2.058,0.177,3.042c1.079,1.77,4.051,3.191,6.378,3.736L29.975,30.124z\n\t\t
+        M21.473,18.932c-2.302-2.301-6.043-2.301-8.346,0c-2.301,2.301-2.301,6.044,0,8.345c2.083,2.083,5.345,2.273,7.651,0.586\n\t\tl-1.443-1.441c-1.502,0.922-3.494,0.742-4.794-0.559c-1.521-1.521-1.521-3.995,0.001-5.517c1.521-1.521,3.995-1.521,5.517,0\n\t\tc1.294,1.294,1.477,3.272,0.568,4.772l1.445,1.445C23.746,24.257,23.549,21.009,21.473,18.932z\"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>\n\t\t\t\t\t\t<span>Phone:
+        +880-255665001-6</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"widget\">\n\t\t\t\t\t\t<!--<i
+        class=\"fa fa-envelope-o\"></i>-->\n\t\t\t\t\t\t<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"
+        width=\"20\" height=\"20\"\n\t\t\t\t\t\t\t viewBox=\"0 0 20 20\">\n\t\t\t\t\t\t\t<title>mail</title>\n\t\t\t\t\t\t\t<path
+        d=\"M1.574 5.286c0.488 0.262 7.248 3.894 7.5 4.029s0.578 0.199 0.906 0.199c0.328
+        0 0.654-0.064 0.906-0.199s7.012-3.767 7.5-4.029c0.489-0.263 0.951-1.286 0.054-1.286h-16.919c-0.897
+        0-0.435 1.023 0.053 1.286zM18.613 7.489c-0.555 0.289-7.387 3.849-7.727 4.027s-0.578
+        0.199-0.906 0.199-0.566-0.021-0.906-0.199-7.133-3.739-7.688-4.028c-0.39-0.204-0.386
+        0.035-0.386 0.219s0 7.293 0 7.293c0 0.42 0.566 1 1 1h16c0.434 0 1-0.58 1-1
+        0 0 0-7.108 0-7.292s0.004-0.423-0.387-0.219z\"></path>\n\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t<span
+        class=\"tooltip-top\"  data-tooltip=\"Only for BB Website related feedback/query\">E-mail:
+        webmaster@bb.org.bd</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"other_purpouse\"><span><a
+        href=\"/en/index.php/about/contact\">Contact for other purposes</a></span></div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\n\t\t</div>\n\t\t<div
+        class=\"col-sm-4\">\n\t\t\t<div class=\"colwrapper\">\n\t\t\t\t<h2>Useful
+        Links</h2>\n\t\t\t\t<ul class=\"list\">\n\t\t\t\t<li class=\"list_item\"><a
+        href=\"../feidportal/index.php\"><i class=\"fa fa-angle-right\"></i>\n\t\t\t\tForeign
+        Investment and Financing Portal\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/financialactivity/paysystems\"><i
+        class=\"fa fa-angle-right\"></i>\n\t\t\t\t\t\t\tPayment Systems\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/guidelist\"><i class=\"fa
+        fa-angle-right\"></i>\n\t\t\t\t\t\t\tRegulations And Guidelines\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/museum/index\"><i class=\"fa fa-angle-right\"></i>\n\t\t\t\t\t\t\tCurrency
+        Museum</a> | <a href=\"/en/index.php/currency/index\">Banknotes and Coins</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/saarcfinance/saarcfinance\"><i
+        class=\"fa fa-angle-right\"></i>\n\t\t\t\t\t\t\tSAARCFINANCE\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t<!--li
+        class=\"list_item\"><a href=\"https://bidaquickserv.org\" target='_new'><i
+        class=\"fa fa-angle-right\"></i>\n\t\t\t\t\t\t\tBIDA One Stop Service (OSS)
+        Portal\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</li-->\n\t\t\t\t\t<!--li class=\"list_item\"><a
+        href=\"https://finlit.bb.org.bd\"  rel = \"noopener noreferrer\"  target=\"_blank\"><i\n\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>\n\t\t\t\t\t\t\tFinancial Literacy\t\t\t\t\t\t</a>\n\t\t\t\t\t</li-->\n\t\t\t\t\t\n\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"/en/index.php/about/national_ict_policy\"><i\n\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>\n\t\t\t\t\t\t\tNational ICT Policy\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\t\t\t\t\t\n\t\t\t\t\t\t<li
+        class=\"list_item\"><a href=\"https://www.bb.org.bd/bbta_portal/index.php/bbta/bbtajournal\"><i\n\t\t\t\t\t\t\t\tclass=\"fa
+        fa-angle-right\"></i>\n\t\t\t\t\t\t\tBBTA Journal: Thoughts on Banking and
+        Finance\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</li>\n\n\n\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t</div>\n\t\t<div
+        class=\"col-sm-4\">\n\t\t\t<div class=\"colwrapper\">\n\t\t\t\t<div class=\"stay-connected\">\n\t\t\t\t\t<h2
+        >Stay connected</h2>\n\t\t\t\t\t<div class=\"social-icons circle social-hover\">\n\t\t\t\t\t\t<ul
+        class=\"list-inline\">\n\t\t\t\t\t\t\t<li class=\"social-facebook\"><a href='https://www.facebook.com/BangladeshBankOfficial'
+        class=\"tooltip-top\" target=\"_blank\" href=\"#\" data-tooltip=\"Facebook\"><i
+        class=\"fa fa-facebook\" aria-hidden=\"true\"></i></a></li>\n\t\t\t\t\t\t\t<li
+        class=\"social-twitter\"><a href='https://x.com/centralbankbd?s=11' class=\"tooltip-top\"
+        target=\"_blank\" href=\"#\" data-tooltip=\"Twitter\"><i class=\"fa fa-twitter\"
+        aria-hidden=\"true\"></i></a></li>\n\t\t\t\t\t\t\t<li class=\"social-linkedin\"><a
+        href='https://www.youtube.com/c/BangladeshBankOfficial' class=\" tooltip-top\"
+        target=\"_blank\" href=\"#\" data-tooltip=\"Youtube\"><i class=\"fa fa-youtube\"
+        aria-hidden=\"true\"></i></a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div
+        class=\"top-line\">\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-sm-12\">\n\t\t\t\t<ul
+        class=\"info_list\">\n\t\t\t\t\t<li class=\"info_list_item\"><a href=\"/en/\">Home</a></li>\n\t\t\t\t\t<li
+        class=\"info_list_item\"><a href=\"/en/index.php/home/sitemap\">Sitemap</a></li>\n\t\t\t\t\t<li
+        class=\"info_list_item\"><a href=\"mailto:webmaster@bb.org.bd?subject=Feedback
+        on Bangladesh Bank Website\" title='eMail Feedback'>Feedback</a></li>\n\t\t\t\t</ul>\n\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<!--copyright
+        section-->\n\t<div class=\"row\">\n\t\t<div class=\"col-sm-12 copyright\"><span><b
+        style=\"font-weight: 600;\">Disclaimer:</b> \tWhile every effort is made to
+        ensure accuracy of the information in this website, Bangladesh Bank assumes
+        no responsibility for any damages or losses to users resulting from any error/omission/inadvertent
+        alteration in information provided by this website.</span></div>\n\t</div>\n</footer>\n<!--
+        Begining of footer -->\n</div><!-- end of wrapper_inner -->\n\n</div>\n<!--
+        ./wrapper -->\n\n\n<script src=\"/en/assets/js/jquery.min.js\"></script>\n<script
+        src=\"/en/assets/js/easing.min.js\"></script>\n<script src=\"/en/assets/js/jquery.plugin.js\"></script>\n<script
+        src=\"/en/assets/js/jquery.newsTicker.min.js\"></script>\n<script src=\"/en/assets/plugins/swiper/swiper.js\"></script>\n<!--<script
+        src=\"\"></script>-->\n<script src=\"/en/assets/js/wow.min.js\"></script>\n<script
+        src=\"/en/assets/js/jquery.scrollUp.min.js\"></script>\n\n<script src=\"/en/assets/js/datepicker.min.js\"></script>\n<script
+        src=\"/en/assets/js/datepicker.en.js\"></script>\n<script src=\"/en/assets/js/jquery.more.js\"></script>\n<script
+        src=\"/en/assets/js/modernizr-custom.js\"></script>\n<script src=\"/en/assets/js/polyfill.js\"></script>\n<script
+        src=\"/en/assets/js/main.js\"></script>\n<script src=\"/en/assets/js/datatables.min.js\"></script>\n\n\n</body>\n</html>\n"
+  recorded_at: Sun, 08 Nov 2026 21:49:46 GMT
+recorded_with: VCR 6.4.0
