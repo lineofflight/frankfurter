@@ -15,6 +15,7 @@ require "provider/adapters/adapter"
 require "rate"
 require "rate_components"
 require "rate_precision"
+require "rate_rollup"
 require "rate_spike"
 require "rate_validation"
 
@@ -273,13 +274,14 @@ class Provider < Sequel::Model(:providers)
 
     weeks = []
     months = []
-    datasets.each do |dataset|
-      dataset_weeks = refresh_rollup(:weekly_rates, Bucket.week, dataset.key, dates)
-      dataset_months = refresh_rollup(:monthly_rates, Bucket.month, dataset.key, dates)
-      next unless dataset.blends?
-
-      weeks |= dataset_weeks | buckets(Bucket.week, dataset.key, rescreened)
-      months |= dataset_months | buckets(Bucket.month, dataset.key, rescreened)
+    datasets.group_by(&:label).each_value do |pool|
+      keys = pool.map(&:key)
+      pool_weeks = refresh_rollup(:weekly_rates, Bucket.week, keys, dates)
+      pool_months = refresh_rollup(:monthly_rates, Bucket.month, keys, dates)
+      pool.select(&:blends?).each do |dataset|
+        weeks |= pool_weeks | buckets(Bucket.week, dataset.key, rescreened)
+        months |= pool_months | buckets(Bucket.month, dataset.key, rescreened)
+      end
     end
     return unless datasets.any?(&:blends?)
 
@@ -297,24 +299,18 @@ class Provider < Sequel::Model(:providers)
     datasets.each { |dataset| CurrencySummary.refresh(db, iso_codes, dataset: dataset.key) }
   end
 
-  def refresh_rollup(table, bucket_expr, dataset_key, dates)
+  # Replaces the pool's rollups in every bucket holding one of the dates.
+  def refresh_rollup(table, bucket_expr, dataset_keys, dates)
     buckets = db[:rates]
-      .where(dataset_key:, date: dates)
+      .where(dataset_key: dataset_keys, date: dates)
       .select_map(bucket_expr)
       .uniq
 
     return [] if buckets.empty?
 
-    db[table].where(dataset_key:, bucket_date: buckets).delete
-
-    db[table].insert(
-      [:bucket_date, :dataset_key, :base, :quote, :rate],
-      db[:rates]
-        .where(dataset_key:)
-        .where(bucket_expr => buckets)
-        .select(bucket_expr, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:dataset_key, :base, :quote, bucket_expr),
-    )
+    db[table].where(dataset_key: dataset_keys, bucket_date: buckets).delete
+    rows = db[:rates].where(dataset_key: dataset_keys).where(bucket_expr => buckets)
+    db[table].insert(RateRollup::COLUMNS, RateRollup.source(rows, bucket_expr))
     buckets
   end
 end

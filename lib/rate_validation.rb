@@ -8,6 +8,7 @@ require "bucket"
 require "currency_summary"
 require "defunct_currency"
 require "nascent_currency"
+require "rate_rollup"
 
 # Ingest policy keeps provider-published rows, rejecting invalid values and implausible future dates. Premature
 # successor codes are relabelled with their known predecessor; currency eligibility is applied when blending.
@@ -161,19 +162,15 @@ module RateValidation
     def repair_rollups(db, repairs)
       repairs.each do |table, datasets|
         bucket = Bucket.expression(PRECISION.fetch(table))
-        datasets.each do |dataset_key, dates|
-          dates.uniq!
+        datasets.group_by { |dataset_key, _| Dataset.pool(dataset_key) }.each do |keys, entries|
+          dates = entries.flat_map(&:last).uniq
           # Captured dates drive deletion even when no daily rows survive. Rebuild retained periods from the remaining
           # observations after purging any wholly future buckets.
-          db[table].where(dataset_key:, bucket_date: dates).delete
-          db[table].insert(
-            [:bucket_date, :dataset_key, :base, :quote, :rate],
-            db[:rates].where(dataset_key:).where(bucket => dates)
-              .select(bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-              .group(:dataset_key, :base, :quote, bucket),
-          )
+          db[table].where(dataset_key: keys, bucket_date: dates).delete
+          rows = db[:rates].where(dataset_key: keys).where(bucket => dates)
+          db[table].insert(RateRollup::COLUMNS, RateRollup.source(rows, bucket))
           blended_table = :"blended_#{table}"
-          if !Dataset.non_blending_keys.include?(dataset_key) && db.table_exists?(blended_table)
+          if (keys - Dataset.non_blending_keys).any? && db.table_exists?(blended_table)
             db[blended_table].where(bucket_date: dates).delete
           end
         end

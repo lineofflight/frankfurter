@@ -42,6 +42,13 @@ class Dataset < Sequel::Model(:datasets)
       self[key]&.label || key
     end
 
+    # Keys whose rows roll up together with the given dataset's (RateRollup): a provider's default datasets pool, and
+    # any other dataset, or an unknown key, stands alone.
+    def pool(key)
+      keys = all.select { |dataset| dataset.label == label(key) }.map(&:key)
+      keys.empty? ? [key] : keys
+    end
+
     # SQL for Dataset#label over a dataset_key column.
     def label_expression(column = :dataset_key)
       relabelled = all.reject { |dataset| dataset.label == dataset.key }.to_h { |dataset| [dataset.key, dataset.label] }

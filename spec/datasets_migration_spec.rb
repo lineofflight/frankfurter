@@ -79,9 +79,9 @@ describe "Datasets migration" do
         nbp["2002-01-02", "AED", 1.1],
         nbp["2002-12-31", "RUB", 0.12],
         nbp["2003-01-07", "RUB", 0.121],
-        nbp["2022-03-07", "RUB", 0.035],
-        nbp["2022-03-08", "RUB", 0.03],
-        nbp["2022-03-09", "RUB", 0.04],
+        nbp["2022-03-07", "RUB", 0.03125],
+        nbp["2022-03-08", "RUB", 0.0390625],
+        nbp["2022-03-09", "RUB", 0.046875],
         nbp["2013-01-02", "XAU", 5200.0],
         nbp["2020-01-01", "ZZZ", 2.0],
         { dataset_key: "ECB", date: "2022-03-08", base: "EUR", quote: "RUB", mid: 120.0 },
@@ -146,6 +146,21 @@ describe "Datasets migration" do
         .select_hash(:iso_code, [Sequel.function(:min, :start_date).as(:s), Sequel.function(:max, :end_date).as(:e)])
       abort "coverage moved" unless merged.transform_values { |v| v.map(&:to_s) } == coverage.transform_values { |v| v.map(&:to_s) }
       abort "exclusion stayed" unless DB[:currency_exclusions].select_map([:dataset_key, :iso_code]) == [["NBP.B", "ZZZ"]]
+
+      # Rebuilding NBP's rollups pools the two tables again, so it reproduces what the migration stored.
+      require "provider"
+      require "rake"
+      load "lib/tasks/rollups.rake"
+      Provider.seed
+      Cache.define_singleton_method(:purge) {}
+      rollups = lambda do
+        [:weekly_rates, :monthly_rates].to_h do |table|
+          [table, DB[table].order(:bucket_date, :base).select_map([:bucket_date, :dataset_key, :base, :rate])]
+        end
+      end
+      stored = rollups.call
+      rebuild_rollups(DB[:rates].where(dataset_key: ["NBP.A", "NBP.B"]), "NBP", ["NBP.A", "NBP.B"])
+      abort "rebuild changed rollups: #{rollups.call.inspect}" unless rollups.call == stored
       DB.disconnect
     RUBY
   end

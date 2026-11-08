@@ -9,6 +9,7 @@ task "rollups:rebuild", [:provider] do |_t, args|
   require "db"
   require "log"
   require "provider"
+  require "rate_rollup"
 
   if args[:provider]
     provider = Provider.detect { |p| p.key.casecmp(args[:provider]).zero? }
@@ -32,17 +33,8 @@ def rebuild_rollups(source, label = "all", dataset_keys = nil)
     DB[:weekly_rates].where(scope).delete
     DB[:monthly_rates].where(scope).delete
 
-    DB[:weekly_rates].insert(
-      [:bucket_date, :dataset_key, :base, :quote, :rate],
-      source.select(Bucket.week, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:dataset_key, :base, :quote, Bucket.week),
-    )
-
-    DB[:monthly_rates].insert(
-      [:bucket_date, :dataset_key, :base, :quote, :rate],
-      source.select(Bucket.month, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:dataset_key, :base, :quote, Bucket.month),
-    )
+    DB[:weekly_rates].insert(RateRollup::COLUMNS, RateRollup.source(source, Bucket.week))
+    DB[:monthly_rates].insert(RateRollup::COLUMNS, RateRollup.source(source, Bucket.month))
 
     models.each do |model|
       dates = model.source.blendable.where(scope).select(:bucket_date).distinct.select_map(:bucket_date)

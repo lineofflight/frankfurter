@@ -3,6 +3,7 @@
 require "bucket"
 require "provider"
 require "rate"
+require "rate_rollup"
 
 # Generates realistic test data for ECB and BOC providers. All dates are relative to today so tests never go stale.
 module Fixtures
@@ -85,20 +86,10 @@ module Fixtures
       db = Sequel::Model.db
 
       db[:weekly_rates].delete
-      week_bucket = Bucket.week
-      db[:weekly_rates].insert(
-        [:bucket_date, :dataset_key, :base, :quote, :rate],
-        db[:rates].select(week_bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-          .group(:dataset_key, :base, :quote, week_bucket),
-      )
+      db[:weekly_rates].insert(RateRollup::COLUMNS, RateRollup.source(db[:rates], Bucket.week))
 
       db[:monthly_rates].delete
-      month_bucket = Bucket.month
-      db[:monthly_rates].insert(
-        [:bucket_date, :dataset_key, :base, :quote, :rate],
-        db[:rates].select(month_bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
-          .group(:dataset_key, :base, :quote, month_bucket),
-      )
+      db[:monthly_rates].insert(RateRollup::COLUMNS, RateRollup.source(db[:rates], Bucket.month))
     end
 
     def rebuild_currencies!

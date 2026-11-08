@@ -231,6 +231,23 @@ describe Provider do
       _(Rate.where(dataset_key: ["TST.A", "TST.B", "TST.X"]).count).must_equal(0)
     end
 
+    it "pools a pair that changes table mid-bucket into one rollup under the newer table" do
+      row = ->(key, date, mid) { { dataset_key: key, date:, base: "RUB", quote: "PLN", mid: } }
+      Rate.dataset.multi_insert([
+        row["TST.A", "2022-03-07", 0.03125],
+        row["TST.A", "2022-03-08", 0.0390625],
+        row["TST.B", "2022-03-09", 0.046875],
+        row["TST.X", "2022-03-09", 0.5],
+      ])
+      provider.send(:refresh_rollups, ["2022-03-07", "2022-03-08", "2022-03-09"].map { |d| Date.parse(d) })
+
+      [WeeklyRate, MonthlyRate].each do |model|
+        rollups = model.where(base: "RUB").order(:dataset_key).select_map([:dataset_key, :rate])
+
+        _(rollups).must_equal([["TST.B", 0.0390625], ["TST.X", 0.5]])
+      end
+    end
+
     it "judges missed publishes on the first default's schedule from the provider's latest observation" do
       provider.stub(:end_date, "2026-04-13") do
         _(provider.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
