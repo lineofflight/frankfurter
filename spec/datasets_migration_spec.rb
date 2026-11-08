@@ -165,6 +165,30 @@ describe "Datasets migration" do
     RUBY
   end
 
+  it "refuses to migrate a populated database older than 049 and leaves it alone" do
+    Dir.mktmpdir do |dir|
+      env = { "DATABASE_URL" => "sqlite://#{dir}/old.sqlite3", "APP_ENV" => "test" }
+      setup = <<~RUBY
+        require "db"
+        Sequel.extension(:migration)
+        Sequel::Migrator.run(DB, "db/migrate", target: 48)
+        DB[:rates].insert(provider: "ECB", date: "2026-01-02", base: "EUR", quote: "USD", mid: 1.17)
+      RUBY
+      output, status = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", setup)
+
+      _(status.success?).must_equal(true, output)
+
+      output, status = Open3.capture2e(env, "bundle", "exec", "rake", "db:migrate")
+
+      _(status.success?).must_equal(false)
+      _(output).must_include("v2.6.1")
+      check = 'require "db"; print DB[:schema_info].get(:version), " ", DB[:rates].count'
+      output, = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", check)
+
+      _(output).must_equal("48 1")
+    end
+  end
+
   it "installs from scratch" do
     run_script(<<~RUBY)
       require "rake"

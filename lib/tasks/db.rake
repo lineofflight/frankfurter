@@ -10,6 +10,14 @@ namespace :db do
 
     Sequel.extension(:migration)
     db = Sequel::DATABASES.first
+    # Data migrations up to 049 run today's models, which no longer read their schemas, so a database holding rates has
+    # to reach 049 on an older release first. Stop before touching it.
+    version = db.table_exists?(:schema_info) ? db[:schema_info].get(:version).to_i : 0
+    if version < 49 && db.table_exists?(:rates) && !db[:rates].empty?
+      abort "Database schema #{version} holds rates and is too old to migrate from here. Run v2.6.1, or any later " \
+            "release before provider datasets, until it migrates, then upgrade. Nothing was changed."
+    end
+
     dir = File.expand_path("../../db/migrate", __dir__)
     opts = {}
     opts.update(target: ENV["VERSION"].to_i) if ENV["VERSION"]

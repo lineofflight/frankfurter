@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rates under 0.0001 come as plain decimals (0.000038749) rather than in exponent notation (3.8749e-05), in JSON and
   CSV.
+- Self-hosted databases from before 2.6.1 must run 2.6.1 once before upgrading. (#797)
 
 ### Fixed
 
