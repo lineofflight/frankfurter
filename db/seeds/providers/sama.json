@@ -1,0 +1,12 @@
+{
+  "key": "SAMA",
+  "name": "Saudi Central Bank",
+  "country_code": "SA",
+  "rate_type": "indicative rate",
+  "pivot_currency": "SAR",
+  "data_url": "https://www.sama.gov.sa/en-US/Currency/FinExc/Pages/Currency.aspx",
+  "terms_url": "https://www.sama.gov.sa/en-us/pages/termsofuse.aspx",
+  "publish_schedule": "*/30 3-5 * * *",
+  "publish_cadence": "daily",
+  "coverage_start": "2021-04-10"
+}

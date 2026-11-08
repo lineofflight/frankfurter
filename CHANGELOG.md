@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Swiss Federal Tax Administration (ESTV) as a data provider, with daily values for BTC, BCH, ETH, LTC and XRP. (#770)
 - Japan Virtual and Crypto assets Exchange Association (JVCEA) as a data provider. (#785)
 - Coin Metrics (CM) as a data provider. (#785)
+- Bangladesh Bank (BB) as a data provider. (#365)
+- Bank of Ghana (BOG) as a data provider. (#369)
+- Saudi Central Bank (SAMA) as a data provider. (#248)
 - `type` on currencies: `currency`, `metal` or `crypto`.
 - Crypto assets with CME futures or a CME CF Reference Rate, whatever their code length, and the USDT and USDC
   stablecoins: AAVE, ALGO, APT, ARB, ATOM, AVAX, AXS, CHZ, CRV, ENA, HBAR, ICP, LINK, MANA, NEAR, ONDO, SNX, USDC and

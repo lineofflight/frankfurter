@@ -170,6 +170,14 @@
     "note": "The ariary replaced the franc as the currency of Madagascar on 1 January 2005 at 5 MGF = 1 MGA."
   },
   {
+    "iso_code": "MRO",
+    "terminal_date": "2018-01-01",
+    "successor": "MRU",
+    "ratio": 10,
+    "source": "https://en.wikipedia.org/wiki/Mauritanian_ouguiya",
+    "note": "Banque Centrale de Mauritanie redenominated the ouguiya on 1 January 2018 at 10 MRO = 1 MRU. Old notes remained legal tender until 30 June 2018."
+  },
+  {
     "iso_code": "MZM",
     "terminal_date": "2006-07-01",
     "successor": "MZN",
