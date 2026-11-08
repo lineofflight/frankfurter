@@ -67,13 +67,97 @@ describe "Datasets migration" do
     RUBY
   end
 
+  it "splits NBP's stored rows by table without touching a value" do
+    run_script(<<~'RUBY')
+      require "db"
+      require "bucket"
+      Sequel.extension(:migration)
+      Sequel::Migrator.run(DB, "db/migrate", target: 51)
+      nbp = ->(date, base, mid) { { dataset_key: "NBP", date:, base:, quote: "PLN", mid: } }
+      DB[:rates].multi_insert([
+        nbp["2002-01-02", "USD", 3.9],
+        nbp["2002-01-02", "AED", 1.1],
+        nbp["2002-12-31", "RUB", 0.12],
+        nbp["2003-01-07", "RUB", 0.121],
+        nbp["2022-03-07", "RUB", 0.035],
+        nbp["2022-03-08", "RUB", 0.03],
+        nbp["2022-03-09", "RUB", 0.04],
+        nbp["2013-01-02", "XAU", 5200.0],
+        nbp["2020-01-01", "ZZZ", 2.0],
+        { dataset_key: "ECB", date: "2022-03-08", base: "EUR", quote: "RUB", mid: 120.0 },
+      ])
+      DB[:rate_spikes].multi_insert([
+        { dataset_key: "NBP", date: "2022-03-08", base: "RUB", quote: "PLN" },
+        { dataset_key: "NBP", date: "2022-03-09", base: "RUB", quote: "PLN" },
+      ])
+      { weekly_rates: Bucket.week, monthly_rates: Bucket.month }.each do |table, bucket|
+        DB[table].insert(
+          [:bucket_date, :dataset_key, :base, :quote, :rate],
+          DB[:rates].select(bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+            .group(bucket, :dataset_key, :base, :quote),
+        )
+      end
+      [[:currency_coverages, ["USD", "AED", "RUB", "XAU", "PLN"]], [:currency_exclusions, ["ZZZ"]]].each do |table, codes|
+        codes.each do |code|
+          rows = DB[:rates].where(dataset_key: "NBP").where(Sequel.|({ base: code }, { quote: code }))
+          DB[table].insert(dataset_key: "NBP", iso_code: code, start_date: rows.min(:date), end_date: rows.max(:date))
+        end
+      end
+      snapshot = lambda do
+        {
+          rates: DB[:rates].order(:date, :base).select_map([:date, :base, :quote, :rate]),
+          weekly: DB[:weekly_rates].order(:bucket_date, :base).select_map([:bucket_date, :base, :rate]),
+          monthly: DB[:monthly_rates].order(:bucket_date, :base).select_map([:bucket_date, :base, :rate]),
+          spikes: DB[:rate_spikes].order(:date).select_map([:date, :base]),
+        }
+      end
+      before = snapshot.call
+      coverage = DB[:currency_coverages].select_hash(:iso_code, [:start_date, :end_date])
+
+      Sequel::Migrator.run(DB, "db/migrate", target: 52)
+
+      abort "values changed" unless snapshot.call == before
+      tables = [:rates, :rate_spikes, :weekly_rates, :monthly_rates, :currency_coverages, :currency_exclusions]
+      tables.each { |table| abort "#{table} kept NBP" unless DB[table].where(dataset_key: "NBP").empty? }
+      labels = DB[:rates].exclude(dataset_key: "ECB").order(:date, :base).select_map([:date, :base, :dataset_key])
+        .map { |date, base, key| "#{date} #{base} #{key}" }
+      expected = [
+        "2002-01-02 AED NBP.B", "2002-01-02 USD NBP.A", "2002-12-31 RUB NBP.B", "2003-01-07 RUB NBP.A",
+        "2013-01-02 XAU NBP.A", "2020-01-01 ZZZ NBP.B", "2022-03-07 RUB NBP.A", "2022-03-08 RUB NBP.A",
+        "2022-03-09 RUB NBP.B",
+      ]
+      abort "wrong tables: #{labels.inspect}" unless labels == expected
+      spikes = DB[:rate_spikes].order(:date).select_map([:date, :dataset_key]).map { |date, key| "#{date} #{key}" }
+      abort "spikes stayed: #{spikes.inspect}" unless spikes == ["2022-03-08 NBP.A", "2022-03-09 NBP.B"]
+      # RUB's March 2022 move spans one week and one month, which keep their average under the table it moved to.
+      straddled = [[:weekly_rates, Bucket.week("2022-03-08")], [:monthly_rates, "2022-03-01"]].map do |table, bucket|
+        DB[table].where(base: "RUB", bucket_date: DB.get(Sequel.as(bucket, :b))).select_map(:dataset_key)
+      end
+      abort "straddled buckets: #{straddled.inspect}" unless straddled == [["NBP.B"], ["NBP.B"]]
+      split = DB[:currency_coverages].exclude(dataset_key: "ECB").order(:iso_code, :dataset_key)
+        .select_map([:iso_code, :dataset_key, :start_date, :end_date]).map { |row| row.map(&:to_s).join(" ") }
+      abort "wrong coverage: #{split.inspect}" unless split == [
+        "AED NBP.B 2002-01-02 2002-01-02",
+        "PLN NBP.A 2002-01-02 2022-03-08", "PLN NBP.B 2002-01-02 2022-03-09",
+        "RUB NBP.A 2003-01-07 2022-03-08", "RUB NBP.B 2002-12-31 2022-03-09",
+        "USD NBP.A 2002-01-02 2002-01-02", "XAU NBP.A 2013-01-02 2013-01-02",
+      ]
+      merged = DB[:currency_coverages].exclude(dataset_key: "ECB").group(:iso_code)
+        .select_hash(:iso_code, [Sequel.function(:min, :start_date).as(:s), Sequel.function(:max, :end_date).as(:e)])
+      abort "coverage moved" unless merged.transform_values { |v| v.map(&:to_s) } == coverage.transform_values { |v| v.map(&:to_s) }
+      abort "exclusion stayed" unless DB[:currency_exclusions].select_map([:dataset_key, :iso_code]) == [["NBP.B", "ZZZ"]]
+      DB.disconnect
+    RUBY
+  end
+
   it "installs from scratch" do
     run_script(<<~RUBY)
       require "rake"
       load "lib/tasks/db.rake"
       Rake::Task["db:setup"].invoke
       require "provider"
-      abort "no datasets" unless Dataset.count == Provider.count && Provider["ECB"].primary_dataset.key == "ECB"
+      abort "no datasets" unless Provider.all.all?(&:primary_dataset) && Provider["ECB"].primary_dataset.key == "ECB"
+      abort "NBP not split" unless Provider["NBP"].default_datasets.map(&:key) == ["NBP.A", "NBP.B"]
       DB.disconnect
     RUBY
   end

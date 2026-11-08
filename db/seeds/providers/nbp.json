@@ -2,11 +2,29 @@
   "key": "NBP",
   "name": "Narodowy Bank Polski",
   "country_code": "PL",
-  "rate_type": "average rate",
-  "pivot_currency": "PLN",
-  "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
   "terms_url": null,
-  "publish_schedule": "*/30 11-13 * * 1-5",
-  "publish_cadence": "daily",
-  "coverage_start": "2002-01-02"
+  "datasets": [
+    {
+      "key": "NBP.A",
+      "default": true,
+      "rate_type": "average rate",
+      "pivot_currency": "PLN",
+      "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
+      "publish_schedule": "*/30 11-13 * * 1-5",
+      "publish_cadence": "daily",
+      "coverage_start": "2002-01-02"
+    },
+    {
+      "key": "NBP.B",
+      "default": true,
+      "blends": true,
+      "rate_type": "average rate",
+      "frequency": "weekly",
+      "pivot_currency": "PLN",
+      "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
+      "publish_schedule": "*/30 11-13 * * 3",
+      "publish_cadence": "weekly",
+      "coverage_start": "2002-01-02"
+    }
+  ]
 }

@@ -35,6 +35,33 @@ class Provider < Sequel::Model(:providers)
         _(bases).must_include("ALL")
       end
 
+      it "tags Table A and gold as NBP.A and Table B as NBP.B" do
+        dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))
+        tags = dataset.group_by { |r| r[:dataset] }.transform_values { |rows| rows.map { |r| r[:base] }.uniq }
+
+        _(tags.keys.sort).must_equal(["NBP.A", "NBP.B"])
+        _(tags["NBP.A"]).must_include("USD")
+        _(tags["NBP.A"]).must_include("XAU")
+        _(tags["NBP.B"]).must_include("ALL")
+        _(tags["NBP.A"] & tags["NBP.B"]).must_be_empty
+      end
+
+      it "keeps Table A's rate when Table B repeats it on the same date" do
+        table = lambda do |name, mid|
+          [{ "table" => name, "effectiveDate" => "2002-01-02",
+             "rates" => [{ "code" => "USD", "mid" => mid }, { "code" => name == "A" ? "EUR" : "ALL", "mid" => 1.0 }], }]
+        end
+        adapter.define_singleton_method(:fetch_rates) do |url, *|
+          parse(url.end_with?("/A") ? table.call("A", 4.0) : table.call("B", 4.1))
+        end
+        adapter.define_singleton_method(:fetch_gold) { |*| [] }
+        dataset = adapter.fetch(after: Date.new(2002, 1, 2), upto: Date.new(2002, 1, 2))
+
+        _(dataset.map { |r| [r[:dataset], r[:base], r[:rate]] }.sort).must_equal([
+          ["NBP.A", "EUR", 1.0], ["NBP.A", "USD", 4.0], ["NBP.B", "ALL", 1.0],
+        ])
+      end
+
       it "fetches XAU against PLN" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 1), upto: Date.new(2026, 3, 5))
         gold = dataset.select { |r| r[:base] == "XAU" }

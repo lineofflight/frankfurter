@@ -215,7 +215,7 @@ describe Provider do
       end
       provider.stub(:adapter, tagged) { provider.backfill(after: Date.today - 1) }
 
-      _(Rate.where(base: ["USD", "AED"], date: Date.today).order(:base).select_map([:dataset_key, :base]))
+      _(Rate.where(dataset_key: ["TST.A", "TST.B"]).order(:base).select_map([:dataset_key, :base]))
         .must_equal([["TST.B", "AED"], ["TST.A", "USD"]])
       _(CurrencyCoverage.where(iso_code: "AED").select_map(:dataset_key)).must_equal(["TST.B"])
     end
