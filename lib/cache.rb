@@ -2,7 +2,9 @@
 
 require "net/http"
 
-# Purges the CDN cache after data imports. Currently supports Cloudflare. No-ops when credentials are not configured.
+# Purges the CDN cache after data imports. Currently supports Cloudflare. No-ops outside production or when credentials
+# are not configured, so local maintenance tasks never purge the live CDN even when a shell exports Cloudflare
+# credentials.
 class Cache
   DEBOUNCE_SECONDS = Integer(ENV.fetch("CACHE_PURGE_DEBOUNCE_SECONDS", 300))
 
@@ -71,11 +73,12 @@ class Cache
     end
   end
 
-  attr_reader :zone_id, :api_token
+  attr_reader :zone_id, :api_token, :env
 
-  def initialize(zone_id: ENV["CLOUDFLARE_ZONE_ID"], api_token: ENV["CLOUDFLARE_API_TOKEN"])
+  def initialize(zone_id: ENV["CLOUDFLARE_ZONE_ID"], api_token: ENV["CLOUDFLARE_API_TOKEN"], env: ENV["APP_ENV"])
     @zone_id = zone_id
     @api_token = api_token
+    @env = env
   end
 
   def purge
@@ -95,6 +98,6 @@ class Cache
   private
 
   def configured?
-    zone_id && api_token
+    env == "production" && zone_id && api_token
   end
 end
