@@ -6,17 +6,15 @@ require "tmpdir"
 
 describe "Successor values migration" do
   def run_migration_script(script)
+    # The migration runs on its own schema, before provider datasets, so the setup touches tables only.
     setup = <<~RUBY
       require "db"
+      require "bucket"
       Sequel.extension(:migration)
-      require "provider"
-      require "blended_weekly_rate"
-      require "blended_monthly_rate"
-      Provider.seed
-      Cache.define_singleton_method(:purge) { raise IOError, "cache unavailable" }
     RUBY
     Dir.mktmpdir do |dir|
-      env = { "DATABASE_URL" => "sqlite://#{File.join(dir, "migration.sqlite3")}", "APP_ENV" => "test" }
+      path = File.join(dir, "migration.sqlite3")
+      env = { "DATABASE_URL" => "sqlite://#{path}", "APP_ENV" => "test", "CLOUDFLARE_API_TOKEN" => nil }
       initialize = 'require "db"; Sequel.extension(:migration); Sequel::Migrator.run(DB, "db/migrate", target: 42)'
       output, status = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", initialize)
 
@@ -27,7 +25,7 @@ describe "Successor values migration" do
     end
   end
 
-  it "relabels, rescales and drops stored rows and leaves the blends to a rebuild" do
+  it "relabels, rescales and drops stored rows, and the upgrade rebuilds what derives from them" do
     run_migration_script(<<~'RUBY')
       rows = [
         { provider: "CBG", date: "2021-08-30", base: "SLL", quote: "GMD", mid: 0.01 },
@@ -67,7 +65,6 @@ describe "Successor values migration" do
         { provider: "ECB", date: "2026-01-20", base: "EUR", quote: "GBP", mid: 0.87 },
       ]
       DB[:rates].multi_insert(rows)
-      CurrencySummary.refresh(DB, rows.flat_map { |row| row.values_at(:base, :quote) })
       [:weekly_rates, :monthly_rates].zip([Bucket.week, Bucket.month]).each do |table, bucket|
         DB[table].insert(
           [:bucket_date, :provider, :base, :quote, :rate],
@@ -75,19 +72,14 @@ describe "Successor values migration" do
             .group(bucket, :provider, :base, :quote),
         )
       end
-      blends = [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate]
-      blends.each(&:rebuild)
-      abort "fixture blend missing TRL" if DB[:blended_rates].where(quote: "TRL", date: "2005-06-27").empty?
-      snapshot = -> { blends.to_h { |model| [model, model.dataset.order(*model.primary_key).all] } }
-      before = snapshot.call
 
       require "rake"
       load "lib/tasks/db.rake"
       Rake::Task["db:setup"].invoke
       abort "migration incomplete" unless DB[:schema_info].get(:version) >= 43
 
-      stored = DB[:rates].exclude(provider: "ECB").exclude(base: "USD").order(:provider, :date, :base, :quote)
-        .select_map([:provider, :date, :base, :quote, :mid])
+      stored = DB[:rates].exclude(dataset_key: "ECB").exclude(base: "USD").order(:dataset_key, :date, :base, :quote)
+        .select_map([:dataset_key, :date, :base, :quote, :mid])
         .map { |provider, date, base, quote, mid| [provider, date.to_s, base, quote, mid] }
       expected = [
         ["BAM", "2018-01-02", "MRO", "MAD", 0.02624],
@@ -109,8 +101,8 @@ describe "Successor values migration" do
         ["LB", "1999-12-31", "BYB", "LTL", 0.000004444],
         ["LB", "2000-01-03", "BYR", "LTL", 0.0044444],
         ["NBKR", "2016-06-25", "BYR", "KGS", 0.003402],
-        ["NBP", "2009-02-04", "ZWR", "PLN", 1.0e-08],
-        ["NBP", "2009-02-25", "ZWL", "PLN", 0.043749],
+        ["NBP.B", "2009-02-04", "ZWR", "PLN", 1.0e-08],
+        ["NBP.B", "2009-02-25", "ZWL", "PLN", 0.043749],
         ["NBU", "1999-01-04", "RUB", "UAH", 0.16596],
         ["NBU", "1999-08-02", "BGN", "UAH", 2.2594804],
         ["NBU", "2000-01-03", "BGN", "UAH", 2.712867],
@@ -121,14 +113,14 @@ describe "Successor values migration" do
       abort "wrong repaired rows: #{stored.inspect}" unless stored == expected
 
       week = DB.get(Bucket.week("2005-06-27"))
-      nbu = DB[:weekly_rates].where(provider: "NBU", bucket_date: week).exclude(base: "USD").select_map([:base, :rate])
+      nbu = DB[:weekly_rates].where(dataset_key: "NBU", bucket_date: week).exclude(base: "USD").select_map([:base, :rate])
       abort "stale NBU rollup: #{nbu.inspect}" unless nbu == [["TRY", 3.729741]]
-      abort "BAM rollup kept MRO" unless DB[:monthly_rates].where(provider: "BAM", base: "MRO")
+      abort "BAM rollup kept MRO" unless DB[:monthly_rates].where(dataset_key: "BAM", base: "MRO")
         .select_map(:bucket_date).map(&:to_s) == [DB.get(Bucket.month("2018-01-02")).to_s]
-      abort "NBKR rollup kept 2026 BYR" unless DB[:weekly_rates].where(provider: "NBKR").count == 1
+      abort "NBKR rollup kept 2026 BYR" unless DB[:weekly_rates].where(dataset_key: "NBKR").count == 1
 
       coverage = ->(provider, code) do
-        DB[:currency_coverages].where(provider_key: provider, iso_code: code).select_map([:start_date, :end_date])
+        DB[:currency_coverages].where(dataset_key: provider, iso_code: code).select_map([:start_date, :end_date])
           .map { |dates| dates.map(&:to_s) }
       end
       abort "TRL coverage past 2005" unless coverage["NBU", "TRL"] == [["2005-01-05", "2005-01-05"]]
@@ -137,9 +129,8 @@ describe "Successor values migration" do
       abort "BYB coverage missing" unless coverage["LB", "BYB"] == [["1999-12-31", "1999-12-31"]]
       abort "MRU catalogue missing" unless DB[:currencies].where(iso_code: "MRU").get(:start_date).to_s == "2018-04-16"
 
-      abort "touched the blends" unless snapshot.call == before
 
-      blends.each(&:rebuild)
+      # The upgrade rebuilt the blends from the repaired rows.
       abort "TRL still blended in 2005" unless DB[:blended_rates].where(quote: "TRL", date: "2005-06-27").empty?
       try = DB[:blended_rates].where(quote: "TRY", date: "2005-06-27").get(:rate)
       abort "TRY blend #{try.inspect}" unless try && (try - (5.055 / 3.729741)).abs < 1e-9
@@ -178,8 +169,8 @@ describe "Successor values migration" do
       ])
       DB[:blended_rates].insert(date: "2014-04-04", quote: "TRY", rate: 2.14)
       before = DB[:rates].order(:provider).all
-      Sequel::Migrator.run(DB, "db/migrate")
-      abort "migration incomplete" unless DB[:schema_info].get(:version) >= 43
+      Sequel::Migrator.run(DB, "db/migrate", target: 43)
+      abort "migration incomplete" unless DB[:schema_info].get(:version) == 43
       abort "changed unaffected rows" unless DB[:rates].order(:provider).all == before
       abort "touched the blends" unless DB[:blended_rates].count == 1
       DB.disconnect

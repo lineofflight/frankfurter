@@ -22,12 +22,14 @@ module RateSpike
       DB[:rate_spikes]
     end
 
-    # Spikes among the given rates rows, as provider, date, base, quote. Neighbours come from the same rows, so the
-    # scope must reach MAX_GAP_DAYS past every observation to be judged.
+    # Spikes among the given rates rows, as dataset key, date, base, quote. Neighbours come from the same rows, so the
+    # scope must reach MAX_GAP_DAYS past every observation to be judged. A pool's datasets (Dataset.pool) are one
+    # series, so a pair that moves between them is judged across the move.
     def detect(rates)
-      window = { partition: [:provider, :base, :quote], order: :date }
+      require "dataset"
+      window = { partition: [Dataset.label_expression, :base, :quote], order: [:date, :dataset_key] }
       neighbours = rates.select(
-        :provider, :date, :base, :quote, :rate,
+        :dataset_key, :date, :base, :quote, :rate,
         Sequel.function(:lag, :rate).over(**window).as(:prev_rate),
         Sequel.function(:lead, :rate).over(**window).as(:next_rate),
         Sequel.function(:lag, :date).over(**window).as(:prev_date),
@@ -43,20 +45,23 @@ module RateSpike
         .where(days.call(:date, :next_date) <= MAX_GAP_DAYS)
         .where(high < low * FACTOR)
         .where(Sequel.|(Sequel[:rate] >= high * FACTOR, Sequel[:rate] * FACTOR <= low))
-        .select(:provider, :date, :base, :quote)
+        .select(:dataset_key, :date, :base, :quote)
     end
 
-    # Rescreens the provider's observations around newly inserted dates and returns the dates whose screening changed,
-    # whose blends the caller must refresh. Typically the previous observation, now that its successor has arrived.
-    def refresh(provider, dates)
+    # Rescreens the datasets' observations, with the rest of their pools, around newly inserted dates and returns the
+    # dates whose screening changed, whose blends the caller must refresh. Typically the previous observation, now that
+    # its successor has arrived.
+    def refresh(dataset_keys, dates)
+      require "dataset"
       return [] if dates.empty?
 
+      dataset_key = Array(dataset_keys).flat_map { |key| Dataset.pool(key) }.uniq
       judged = (dates.min - MAX_GAP_DAYS)..(dates.max + MAX_GAP_DAYS)
-      scope = DB[:rates].where(provider:, date: (judged.begin - MAX_GAP_DAYS)..(judged.end + MAX_GAP_DAYS))
+      scope = DB[:rates].where(dataset_key:, date: (judged.begin - MAX_GAP_DAYS)..(judged.end + MAX_GAP_DAYS))
       found = detect(scope).where(date: judged).all
-      stored = dataset.where(provider:, date: judged)
-      key = ->(row) { [row[:date].to_s, row[:base], row[:quote]] }
-      changed = (found.to_set(&key) ^ stored.all.to_set(&key)).map { |date, _, _| Date.parse(date) }.uniq
+      stored = dataset.where(dataset_key:, date: judged)
+      key = ->(row) { [row[:dataset_key], row[:date].to_s, row[:base], row[:quote]] }
+      changed = (found.to_set(&key) ^ stored.all.to_set(&key)).map { |_, date, _, _| Date.parse(date) }.uniq
       return [] if changed.empty?
 
       stored.delete

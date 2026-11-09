@@ -6,17 +6,15 @@ require "tmpdir"
 
 describe "Unknown archive codes migration" do
   def run_migration_script(script)
+    # The migration runs on its own schema, before provider datasets, so the setup touches tables only.
     setup = <<~RUBY
       require "db"
+      require "bucket"
       Sequel.extension(:migration)
-      require "provider"
-      require "blended_weekly_rate"
-      require "blended_monthly_rate"
-      Provider.seed
-      Cache.define_singleton_method(:purge) { raise IOError, "cache unavailable" }
     RUBY
     Dir.mktmpdir do |dir|
-      env = { "DATABASE_URL" => "sqlite://#{File.join(dir, "migration.sqlite3")}", "APP_ENV" => "test" }
+      path = File.join(dir, "migration.sqlite3")
+      env = { "DATABASE_URL" => "sqlite://#{path}", "APP_ENV" => "test", "CLOUDFLARE_API_TOKEN" => nil }
       initialize = 'require "db"; Sequel.extension(:migration); Sequel::Migrator.run(DB, "db/migrate", target: 48)'
       output, status = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", initialize)
 
@@ -27,7 +25,7 @@ describe "Unknown archive codes migration" do
     end
   end
 
-  it "drops the interest rate, relabels the rest and leaves the blends to a rebuild" do
+  it "drops the interest rate and relabels the rest, and the upgrade rebuilds what derives from them" do
     run_migration_script(<<~'RUBY')
       rows = [
         { provider: "AMCM", date: "1994-03-31", base: "LIQ", quote: "MOP", mid: 3.125 },
@@ -44,10 +42,7 @@ describe "Unknown archive codes migration" do
         { provider: "NBU", date: "2002-12-02", base: "TJS", quote: "UAH", mid: 1.805263 },
       ]
       DB[:rates].multi_insert(rows)
-      CurrencySummary.refresh(DB, rows.flat_map { |row| row.values_at(:base, :quote) })
       # As stored before XCU was registered.
-      DB[:currency_coverages].where(iso_code: "XCU").delete
-      DB[:currencies].where(iso_code: "XCU").delete
       DB[:currency_exclusions].insert(
         provider_key: "CNB", iso_code: "XCU", start_date: "1993-03-10", end_date: "1993-03-10",
       )
@@ -60,19 +55,15 @@ describe "Unknown archive codes migration" do
       end
       DB[:blended_rates].insert(date: "2000-11-01", quote: "TJS", rate: 2.2)
       DB[:rate_spikes].insert(provider: "AMCM", date: "1994-03-31", base: "LIQ", quote: "MOP")
-      unknown = ->(key) { Provider[key].unknown_currencies }
-      abort "wrong setup: #{unknown["CNB"]}" unless unknown["CNB"] == ["BEC", "YUD"] && unknown["NBU"] == ["ZAL"]
-      abort "wrong setup: #{unknown["AMCM"]}" unless unknown["AMCM"] == ["LIQ"]
-      blends = [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate]
-      snapshot = -> { blends.to_h { |model| [model, model.dataset.order(*model.primary_key).all] } }
-      before = snapshot.call
 
       require "rake"
       load "lib/tasks/db.rake"
       Rake::Task["db:setup"].invoke
       abort "migration incomplete" unless DB[:schema_info].get(:version) >= 49
+      require "provider"
+      unknown = ->(key) { Provider[key].unknown_currencies }
 
-      stored = DB[:rates].order(:provider, :date, :base).select_map([:provider, :date, :base, :quote, :mid])
+      stored = DB[:rates].order(:dataset_key, :date, :base).select_map([:dataset_key, :date, :base, :quote, :mid])
         .map { |provider, date, base, quote, mid| [provider, date.to_s, base, quote, mid] }
       expected = [
         ["AMCM", "1994-03-31", "USD", "MOP", 7.985],
@@ -89,16 +80,18 @@ describe "Unknown archive codes migration" do
       ]
       abort "wrong repaired rows: #{stored.inspect}" unless stored == expected
 
-      weekly = ->(provider, base) { DB[:weekly_rates].where(provider:, base:).order(:bucket_date).select_map(:rate) }
+      weekly = lambda do |dataset_key, base|
+        DB[:weekly_rates].where(dataset_key:, base:).order(:bucket_date).select_map(:rate)
+      end
       abort "rollup kept LIQ" unless weekly["AMCM", "LIQ"].empty? && weekly["AMCM", "USD"] == [7.985]
       abort "rollup kept BEC" unless weekly["CNB", "BEC"].empty? && weekly["CNB", "BEF"].map { it.round(6) } == [0.8915]
       abort "rollup kept YUD" unless weekly["CNB", "YUD"].empty? && weekly["CNB", "YUN"] == [2.04]
       abort "rollup kept ZAL" unless weekly["NBU", "ZAL"].empty? && weekly["NBU", "TJS"] == [2.4713, 1.8052, 1.805263]
-      monthly = DB[:monthly_rates].where(provider: "NBU", base: "TJS").order(:bucket_date).select_map(:rate)
+      monthly = DB[:monthly_rates].where(dataset_key: "NBU", base: "TJS").order(:bucket_date).select_map(:rate)
       abort "monthly rollup: #{monthly}" unless monthly == [2.4713, 1.8052, 1.805263]
 
       coverage = ->(provider, code) do
-        DB[:currency_coverages].where(provider_key: provider, iso_code: code).select_map([:start_date, :end_date])
+        DB[:currency_coverages].where(dataset_key: provider, iso_code: code).select_map([:start_date, :end_date])
           .map { |dates| dates.map(&:to_s) }
       end
       abort "BEF coverage" unless coverage["CNB", "BEF"] == [["1991-01-24", "1991-01-25"]]
@@ -106,13 +99,13 @@ describe "Unknown archive codes migration" do
       abort "XCU coverage" unless coverage["CNB", "XCU"] == [["1993-03-10", "1993-03-10"]]
       abort "TJS coverage" unless coverage["NBU", "TJS"] == [["2000-11-01", "2002-12-02"]]
       abort "XCU missing from the catalogue" unless DB[:currencies].where(iso_code: "XCU").count == 1
-      abort "kept unknown codes" unless DB[:currency_exclusions].where(provider_key: ["AMCM", "CNB", "NBU"]).empty?
+      abort "kept unknown codes" unless DB[:currency_exclusions].where(dataset_key: ["AMCM", "CNB", "NBU"]).empty?
       ["AMCM", "CNB", "NBU"].each do |key|
         abort "#{key} still fails provider health" unless unknown[key].empty?
       end
 
-      abort "kept a stale spike flag" unless DB[:rate_spikes].where(provider: "AMCM").empty?
-      abort "touched the blends" unless snapshot.call == before
+      abort "kept a stale spike flag" unless DB[:rate_spikes].where(dataset_key: "AMCM").empty?
+      abort "rebuilt no blends" if DB[:blended_rates].empty?
       DB.disconnect
     RUBY
   end
@@ -150,8 +143,8 @@ describe "Unknown archive codes migration" do
       ])
       DB[:blended_rates].insert(date: "2002-12-02", quote: "TJS", rate: 3.0)
       before = DB[:rates].order(:provider, :base).all
-      Sequel::Migrator.run(DB, "db/migrate")
-      abort "migration incomplete" unless DB[:schema_info].get(:version) >= 49
+      Sequel::Migrator.run(DB, "db/migrate", target: 49)
+      abort "migration incomplete" unless DB[:schema_info].get(:version) == 49
       abort "changed unaffected rows" unless DB[:rates].order(:provider, :base).all == before
       abort "touched the blends" unless DB[:blended_rates].count == 1
       DB.disconnect

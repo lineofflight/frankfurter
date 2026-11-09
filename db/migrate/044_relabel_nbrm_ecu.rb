@@ -13,8 +13,6 @@ require "bucket"
 # are. Run `rake blend:rebuild` after deploy; it rebuilds in place and keeps the tables serving.
 Sequel.migration do
   up do
-    require "currency_summary"
-
     changes = [
       { from: "XBA", to: "XEU", before: "1999-01-01" },
       { from: "XBA", to: "EUR", since: "1999-01-01" },
@@ -64,7 +62,7 @@ Sequel.migration do
             .group(:provider, :base, :quote, bucket),
         )
       end
-      CurrencySummary.refresh(self, ["XBA", "XEU", "EUR"], provider:)
+      # Coverage is rebuilt with every derived table after the last migration (db:migrate).
     end
   end
 

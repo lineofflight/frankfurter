@@ -20,14 +20,10 @@ require "bucket"
 # CBA carry restated RUB and TJS), and the TMT peg anchors every stored TMT row to 3.5 regardless of who quoted it, so a
 # relabelled TMT row would carry the peg value into TMM. The blend is recomputed instead over one window from the
 # earliest relabelled row to the latest plus the carry-forward lookback, 1993 to January 2013, which takes about a
-# minute against prod.
+# minute against prod. Since provider datasets, it is rebuilt with every derived table after the last migration
+# (db:migrate).
 Sequel.migration do
   up do
-    # Required here, not at file top: BlendedRate loads the Rate model, whose table does not exist yet when the migrator
-    # loads every file on a fresh database.
-    require "blended_rate"
-    require "carry_forward"
-
     series = [
       { provider: "LB", code: "TMT", predecessor: "TMM", cutover: "2009-01-01" },
       { provider: "SARB", code: "ZMW", predecessor: "ZMK", cutover: "2013-01-01" },
@@ -40,15 +36,8 @@ Sequel.migration do
 
     either_side = ->(codes) { Sequel.|({ base: codes }, { quote: codes }) }
 
-    first = nil
-    last = nil
     series.each do |s|
       scope = from(:rates).where(provider: s[:provider]).where(either_side[s[:code]]).where { date < s[:cutover] }
-      bounds = scope.select { [min(date).as(:first), max(date).as(:last)] }.first # rubocop:disable Performance/Detect
-      next unless bounds[:first]
-
-      first = [first, bounds[:first].to_s].compact.min
-      last = [last, bounds[:last].to_s].compact.max
       scope.where(base: s[:code]).update(base: s[:predecessor])
       scope.where(quote: s[:code]).update(quote: s[:predecessor])
     end
@@ -91,8 +80,6 @@ Sequel.migration do
 
       from(:currencies).insert(iso_code: code, start_date: global[:start_date], end_date: global[:end_date])
     end
-
-    BlendedRate.refresh(Date.parse(first)..(Date.parse(last) + CarryForward::LOOKBACK_DAYS)) if first
   end
 
   down do

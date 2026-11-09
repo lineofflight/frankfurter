@@ -25,7 +25,7 @@ describe "Grouped blend maintenance" do
   it "refreshes grouped values when provider rollups are rebuilt" do
     BlendedWeeklyRate.rebuild
     BlendedMonthlyRate.rebuild
-    Rate.where(provider: "ECB", quote: "USD").update(mid: 1.3)
+    Rate.where(dataset_key: "ECB", quote: "USD").update(mid: 1.3)
     invoke_task("rollups:rebuild", "ecb")
 
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
@@ -38,7 +38,7 @@ describe "Grouped blend maintenance" do
 
   it "invalidates grouped values in the same transaction as an invalid-data purge" do
     date = Date.today + 500
-    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", mid: 1.2)
+    Rate.dataset.insert(date:, dataset_key: "ECB", base: "EUR", quote: "USD", mid: 1.2)
     Provider["ECB"].send(:refresh_rollups, [date])
 
     _(BlendedWeeklyRate.dataset.count).must_be(:>, 0)
@@ -55,7 +55,7 @@ describe "Grouped blend maintenance" do
 
   it "repopulates grouped tables after the purge task" do
     date = Date.today + 500
-    Rate.dataset.insert(date:, provider: "ECB", base: "EUR", quote: "USD", mid: 1.2)
+    Rate.dataset.insert(date:, dataset_key: "ECB", base: "EUR", quote: "USD", mid: 1.2)
     Provider["ECB"].send(:refresh_rollups, [date])
     invoke_task("db:purge_invalid")
 
@@ -88,16 +88,16 @@ describe "Grouped blend maintenance" do
 
   it "leaves changed buckets absent and unrelated history readable when maintenance refresh fails" do
     date = Date.new(2000, 1, 1)
-    WeeklyRate.dataset.insert(bucket_date: date, provider: "BOC", base: "USD", quote: "EUR", rate: 0.8)
+    WeeklyRate.dataset.insert(bucket_date: date, dataset_key: "BOC", base: "USD", quote: "EUR", rate: 0.8)
     [BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild)
     prior = BlendedWeeklyRate.where(bucket_date: date).all.map(&:values)
-    Rate.where(provider: "ECB", quote: "USD").update(mid: 1.3)
+    Rate.where(dataset_key: "ECB", quote: "USD").update(mid: 1.3)
 
     BlendedWeeklyRate.stub(:refresh, ->(*) { raise "failed refresh" }) do
       _ { invoke_task("rollups:rebuild", "ecb") }.must_raise(RuntimeError)
     end
 
-    _(WeeklyRate.where(provider: "ECB", quote: "USD").get(:rate)).must_equal(1.3)
+    _(WeeklyRate.where(dataset_key: "ECB", quote: "USD").get(:rate)).must_equal(1.3)
     _(BlendedWeeklyRate.where(bucket_date: date).all.map(&:values)).must_equal(prior)
     _(BlendedWeeklyRate.where { bucket_date > date }.count).must_equal(0)
   end
@@ -115,12 +115,12 @@ describe "Grouped blend maintenance" do
     removed = Date.new(2000, 1, 1)
     kept = removed + 40
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
-      model.source.dataset.insert(bucket_date: removed, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8)
-      model.source.dataset.insert(bucket_date: kept, provider: "BOC", base: "USD", quote: "EUR", rate: 0.9)
+      model.source.dataset.insert(bucket_date: removed, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.8)
+      model.source.dataset.insert(bucket_date: kept, dataset_key: "BOC", base: "USD", quote: "EUR", rate: 0.9)
       model.rebuild
     end
     date = Date.new(2001, 3, 12)
-    Rate.dataset.insert(date:, provider: "ECB", base: "USD", quote: "EUR", mid: 0.7)
+    Rate.dataset.insert(date:, dataset_key: "ECB", base: "USD", quote: "EUR", mid: 0.7)
     invoke_task("rollups:rebuild", "ecb")
 
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
@@ -134,7 +134,7 @@ describe "Grouped blend maintenance" do
 
   it "repairs purged grouped buckets and purges the cache even if the daily rebuild fails" do
     date = Date.today + 500
-    Rate.dataset.insert(date:, provider: "ECB", base: "USD", quote: "XDR", mid: 3.0)
+    Rate.dataset.insert(date:, dataset_key: "ECB", base: "USD", quote: "XDR", mid: 3.0)
     Provider["ECB"].send(:refresh_rollups, [date])
     [BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild)
     purged = false
@@ -155,16 +155,16 @@ describe "Grouped blend maintenance" do
     dates = [Date.new(2030, 2, 28), Date.new(2030, 3, 1)]
     rates = [15.0, 30.0]
     dates.zip(rates).each do |date, rate|
-      Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
+      Rate.dataset.insert(dataset_key: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
     end
     Provider["ECB"].send(:refresh_rollups, dates)
     bucket = DB.get(Bucket.week(dates.last.to_s))
 
-    _(WeeklyRate.where(provider: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(22.5)
+    _(WeeklyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(22.5)
 
     RateValidation::FutureDate.stub(:horizon, dates.first) { RateValidation.purge(DB) }
 
-    _(WeeklyRate.where(provider: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(15.0)
+    _(WeeklyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(15.0)
     _(BlendedWeeklyRate.where(bucket_date: bucket).count).must_equal(0)
     BlendedWeeklyRate.populate
 
@@ -174,55 +174,55 @@ describe "Grouped blend maintenance" do
   it "recomputes a monthly average when a daily observation crosses a mid-month future horizon" do
     dates = [Date.new(2030, 8, 19), Date.new(2030, 8, 20)]
     dates.zip([100.0, 300.0]).each do |date, rate|
-      Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
+      Rate.dataset.insert(dataset_key: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
     end
     Provider["ECB"].send(:refresh_rollups, dates)
     bucket = DB.get(Bucket.month(dates.last.to_s))
 
-    _(MonthlyRate.where(provider: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(200.0)
+    _(MonthlyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(200.0)
 
     RateValidation::FutureDate.stub(:horizon, dates.first) { RateValidation.purge(DB) }
 
-    _(MonthlyRate.where(provider: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(100.0)
+    _(MonthlyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(100.0)
     _(BlendedMonthlyRate.where(bucket_date: bucket).count).must_equal(0)
   end
 
   it "removes stale source buckets when their last daily observation is purged" do
     date = Date.today + 500
-    Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "XDR", mid: 30.0)
+    Rate.dataset.insert(dataset_key: "ECB", date:, base: "USD", quote: "XDR", mid: 30.0)
     Provider["ECB"].send(:refresh_rollups, [date])
     bucket = DB.get(Bucket.week(date.to_s))
 
     RateValidation.purge(DB)
 
-    _(WeeklyRate.where(provider: "ECB", bucket_date: bucket).count).must_equal(0)
+    _(WeeklyRate.where(dataset_key: "ECB", bucket_date: bucket).count).must_equal(0)
     _(BlendedWeeklyRate.where(bucket_date: bucket).count).must_equal(0)
   end
 
   it "keeps repaired source buckets stable across repeated future purges" do
     dates = [Date.new(2030, 1, 1), Date.new(2030, 1, 4)]
     dates.zip([2.0, 100.0]).each do |date, rate|
-      Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "EUR", mid: rate)
+      Rate.dataset.insert(dataset_key: "ECB", date:, base: "USD", quote: "EUR", mid: rate)
     end
     Provider["ECB"].send(:refresh_rollups, dates)
     bucket = DB.get(Bucket.month(dates.last.to_s))
 
     RateValidation::FutureDate.stub(:horizon, dates.first) { RateValidation.purge(DB) }
 
-    _(Rate.where(provider: "ECB", quote: "EUR", date: dates).select_map(:date)).must_equal([dates.first])
-    _(MonthlyRate.where(provider: "ECB", bucket_date: bucket, quote: "EUR").get(:rate)).must_equal(2.0)
+    _(Rate.where(dataset_key: "ECB", quote: "EUR", date: dates).select_map(:date)).must_equal([dates.first])
+    _(MonthlyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "EUR").get(:rate)).must_equal(2.0)
 
     RateValidation::FutureDate.stub(:horizon, dates.first) { RateValidation.purge(DB) }
 
-    _(MonthlyRate.where(provider: "ECB", bucket_date: bucket, quote: "EUR").get(:rate)).must_equal(2.0)
+    _(MonthlyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "EUR").get(:rate)).must_equal(2.0)
   end
 
   it "repairs excluded provider averages without invalidating the eligible grouped blend" do
     dates = [Date.new(2030, 2, 28), Date.new(2030, 3, 1)]
-    Rate.dataset.insert(provider: "ECB", date: dates.first, base: "USD", quote: "EUR", mid: 0.8)
+    Rate.dataset.insert(dataset_key: "ECB", date: dates.first, base: "USD", quote: "EUR", mid: 0.8)
     Provider["ECB"].send(:refresh_rollups, [dates.first])
     dates.zip([15.0, 30.0]).each do |date, rate|
-      Rate.dataset.insert(provider: "UST", date:, base: "USD", quote: "XDR", mid: rate)
+      Rate.dataset.insert(dataset_key: "UST", date:, base: "USD", quote: "XDR", mid: rate)
     end
     Provider["UST"].send(:refresh_rollups, dates)
     bucket = DB.get(Bucket.week(dates.last.to_s))
@@ -230,14 +230,14 @@ describe "Grouped blend maintenance" do
 
     RateValidation::FutureDate.stub(:horizon, dates.first) { RateValidation.purge(DB) }
 
-    _(WeeklyRate.where(provider: "UST", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(15.0)
+    _(WeeklyRate.where(dataset_key: "UST", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(15.0)
     _(BlendedWeeklyRate.where(bucket_date: bucket).order(:quote).all.map(&:values)).must_equal(prior)
   end
 
   it "rolls back daily deletion and grouped invalidation if provider bucket repair fails" do
     dates = [Date.new(2030, 2, 28), Date.new(2030, 3, 1)]
     dates.zip([15.0, 30.0]).each do |date, rate|
-      Rate.dataset.insert(provider: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
+      Rate.dataset.insert(dataset_key: "ECB", date:, base: "USD", quote: "XDR", mid: rate)
     end
     Provider["ECB"].send(:refresh_rollups, dates)
     bucket = DB.get(Bucket.week(dates.last.to_s))
@@ -252,8 +252,8 @@ describe "Grouped blend maintenance" do
       DB.run("DROP TRIGGER fail_rollup_repair")
     end
 
-    _(Rate.where(provider: "ECB", quote: "XDR").count).must_equal(2)
-    _(WeeklyRate.where(provider: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(22.5)
+    _(Rate.where(dataset_key: "ECB", quote: "XDR").count).must_equal(2)
+    _(WeeklyRate.where(dataset_key: "ECB", bucket_date: bucket, quote: "XDR").get(:rate)).must_equal(22.5)
     _(BlendedWeeklyRate.where(bucket_date: bucket).order(:quote).all.map(&:values)).must_equal(prior)
   end
 end

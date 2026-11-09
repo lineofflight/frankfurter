@@ -354,7 +354,7 @@
                   "items": { "$ref": "#/components/schemas/Provider" }
                 },
                 "example": [
-                  { "key": "ECB", "name": "European Central Bank", "country_code": "EU", "rate_type": "reference", "pivot_currency": "EUR", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }
+                  { "key": "ECB", "name": "European Central Bank", "country_code": "EU", "rate_type": "reference", "pivot_currency": "EUR", "data_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html", "terms_url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html", "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"], "datasets": [{ "key": "ECB", "default": true, "start_date": "1999-01-04", "end_date": "2026-03-17", "currencies": ["USD", "GBP"] }] }
                 ]
               }
             }
@@ -422,7 +422,7 @@
       "providers": {
         "name": "providers",
         "in": "query",
-        "description": "Comma-separated list of data providers to include. A single provider includes its stored non-currency series. Selecting multiple providers blends only registered currencies and accounting units.",
+        "description": "Comma-separated list of data providers to include. A provider key selects its default datasets; a dataset key such as NBP.B selects that dataset alone (see `datasets` on `/providers`). A single provider includes its stored non-currency series. Selecting multiple providers blends only registered currencies and accounting units.",
         "required": false,
         "schema": {
           "type": "string",
@@ -560,7 +560,7 @@
           },
           "frequency": {
           "type": "string",
-          "enum": ["daily", "monthly", "quarterly"],
+          "enum": ["daily", "weekly", "monthly", "quarterly"],
           "description": "The period each observation stands for, after SDMX FREQ. A daily value is dated on the day observed. A monthly or quarterly value is dated on the day it takes effect and stands for the period until the next one. Values coarser than daily never enter the blend: query them by provider."
         },
         "publishes_missed": {
@@ -577,9 +577,52 @@
             "type": "array",
             "items": { "type": "string" },
             "description": "Unreviewed published codes absent from the currency registry. Available through single-provider rates but excluded from blends and the currency catalogue. Known non-currency series do not trigger this alert."
+          },
+          "datasets": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Dataset" },
+            "description": "The rate series the provider publishes, each with its own coverage and publishing health. A provider that publishes one series has one dataset, keyed like the provider. The fields above combine the default datasets, which the provider key selects, and take their metadata from the first of them."
           }
         },
-        "required": ["key", "name", "currencies"]
+        "required": ["key", "name", "currencies", "datasets"]
+      },
+      "Dataset": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string", "description": "Dataset identifier, the provider key for a provider's only series or the provider key with a suffix (NBP.A, NBP.B). Usable in providers=." },
+          "default": { "type": "boolean", "description": "Whether the provider key selects this dataset. Rates from a default dataset report the provider key; others report the dataset key." },
+          "rate_type": { "type": ["string", "null"], "description": "Official rate type as used by the source" },
+          "pivot_currency": { "type": ["string", "null"], "description": "Base currency for published rates" },
+          "data_url": { "type": ["string", "null"], "format": "uri", "description": "Link to the data source" },
+          "start_date": { "type": ["string", "null"], "format": "date", "description": "Earliest publication coverage date of this dataset" },
+          "end_date": { "type": ["string", "null"], "format": "date", "description": "Latest publication coverage date of this dataset" },
+          "publish_cadence": {
+            "type": ["string", "null"],
+            "enum": ["daily", "weekly", "monthly", "quarterly", null],
+            "description": "How often this dataset is published. Determines the unit of publishes_missed."
+          },
+          "frequency": {
+            "type": "string",
+            "enum": ["daily", "weekly", "monthly", "quarterly"],
+            "description": "The period each observation stands for, as on the provider."
+          },
+          "publishes_missed": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Expected publishes of this dataset missed since its own end_date, in units of its publish_cadence. Null when it has no scheduled cadence or no imported data."
+          },
+          "currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Recognised currency codes this dataset covers"
+          },
+          "unknown_currencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Unreviewed published codes in this dataset absent from the currency registry"
+          }
+        },
+        "required": ["key", "default", "currencies"]
       }
     },
     "responses": {

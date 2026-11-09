@@ -30,7 +30,6 @@ require "bucket"
 # scheduler rebuilds them. Run `rake blend:rebuild` after deploy; it rebuilds in place and keeps the tables serving.
 Sequel.migration do
   up do
-    require "currency_summary"
     require "rate_precision"
 
     changes = [
@@ -69,12 +68,10 @@ Sequel.migration do
       next if changes.all? { |change| scope_for[change].empty? }
 
       buckets = Hash.new { |hash, key| hash[key] = [] }
-      codes = Hash.new { |hash, key| hash[key] = [] }
       changes.each do |change|
         provider = change[:provider]
         scope = scope_for[change]
         rollups.each { |table, bucket| buckets[[provider, table]] |= scope.select_map(bucket) }
-        codes[provider] |= [change[:from], change[:to]].compact
 
         unless change[:to]
           scope.delete
@@ -114,7 +111,7 @@ Sequel.migration do
             .group(:provider, :base, :quote, bucket),
         )
       end
-      codes.each { |provider, iso_codes| CurrencySummary.refresh(self, iso_codes, provider:) }
+      # Coverage is rebuilt with every derived table after the last migration (db:migrate).
     end
   end
 

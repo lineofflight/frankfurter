@@ -74,7 +74,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "keeps weekly observations out of blends" do
-        _(Provider["JPC"].blends?).must_equal(false)
+        _(Dataset["JPC"].blends?).must_equal(false)
       end
 
       describe "#parse_runs" do

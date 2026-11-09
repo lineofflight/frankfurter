@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bank of Ghana (BOG) as a data provider. (#369)
 - Saudi Central Bank (SAMA) as a data provider. (#248)
 - `type` on currencies: `currency`, `metal` or `crypto`.
+- `datasets` on providers, each with its own coverage and health, such as NBP's Table A and B. (#797)
+- `providers=` takes dataset keys, such as `NBP.B`. (#797)
 - Crypto assets with CME futures or a CME CF Reference Rate, whatever their code length, and the USDT and USDC
   stablecoins: AAVE, ALGO, APT, ARB, ATOM, AVAX, AXS, CHZ, CRV, ENA, HBAR, ICP, LINK, MANA, NEAR, ONDO, SNX, USDC and
   USDT, from CM.
@@ -25,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rates under 0.0001 come as plain decimals (0.000038749) rather than in exponent notation (3.8749e-05), in JSON and
   CSV.
+- The first boot after upgrading a self-hosted install from before 2.6.1 rebuilds coverage, rollups and blends. (#797)
 
 ### Fixed
 

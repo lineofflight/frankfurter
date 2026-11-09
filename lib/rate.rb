@@ -15,10 +15,10 @@ class Rate < Sequel::Model(:rates)
     def downsample(precision)
       sampler = Bucket.expression(precision)
 
-      select(:base, :provider, :quote)
+      select(:base, :dataset_key, :quote)
         .select_append { avg(rate).as(rate) }
         .select_append(sampler.as(:date))
-        .group(:base, :provider, :quote, sampler)
+        .group(:base, :dataset_key, :quote, sampler)
         .order(:date)
     end
   end

@@ -16,6 +16,7 @@ bundle exec rake backfill             # Backfill all providers (or backfill[key]
 bundle exec rake blend:rebuild        # Full rebuild of materialized blend tables
 bundle exec rake blend:parity         # Verify table vs live blend query parity
 bundle exec rake rollups:rebuild      # Rebuild weekly and monthly rollups
+bundle exec rake db:rebuild           # Rebuild coverage, spike flags, rollups and blends from rates
 
 # Local server
 bundle exec puma -C config/puma.rb    # Web server on :8080
@@ -29,7 +30,8 @@ Separate SQLite databases per environment (`APP_ENV`). Minitest suite with VCR/W
 - **Pipeline:** Native provider rates, less one-day spikes (`RateSpike`), rebase to USD pivot (`BaseConversion`), outlier-screened (`Consensus`), recency-decay weighted (`WeightedAverage`), and peg-anchored (`PegAnchor`).
 - **Materialized Blends:** Sparse tables (`blended_rates`, `blended_weekly_rates`, `blended_monthly_rates`) store precomputed USD blends. Plain V2 queries hit these tables directly; missing buckets or filtered queries fall back to live computation.
 - **APIs:** Legacy V1 (ECB-only) and V2 (multi-provider/blended) mounted in `lib/app.rb`. OpenAPI specs at `lib/public/v1/openapi.json` and `lib/public/v2/openapi.json`.
-- **Provider Ingestion:** Scheduled in `bin/schedule` via cron expressions in `db/seeds/providers/*.json`. Adapters (`lib/provider/adapters/`) handle pure fetch and parse. Use `midpoint(buy, sell)` for bid/ask sources to avoid float noise.
+- **Datasets:** A provider publishes one or more datasets, its rate series. `rates` and everything derived from it are keyed by `dataset_key`. A one-series provider's dataset is keyed like the provider; several are suffixed (`NBP.A`, `NBP.B`). A bare provider key selects its default datasets, and rows report the key that selects them (`Dataset#label`). Rollups pool a provider's default datasets (`RateRollup`).
+- **Provider Ingestion:** Scheduled in `bin/schedule` via each dataset's cron expression in `db/seeds/providers/*.json`. Adapters (`lib/provider/adapters/`) handle pure fetch and parse, one per provider. Use `midpoint(buy, sell)` for bid/ask sources to avoid float noise.
 - **Currency Patches:** Historical currencies and name overrides are configured in `db/seeds/currency_patches.json` and loaded via `lib/currency_patches.rb`.
 
 ## Replacing Provider History
@@ -40,12 +42,12 @@ Separate SQLite databases per environment (`APP_ENV`). Minitest suite with VCR/W
 provider = Provider["CBK"]
 provider.adapter # Resolve before deleting
 DB.transaction do
-  [Rate, WeeklyRate, MonthlyRate].each { |model| model.where(provider: provider.key).delete }
+  [Rate, WeeklyRate, MonthlyRate].each { |model| model.where(dataset_key: provider.datasets.map(&:key)).delete }
 end
 provider.backfill(after: provider.coverage_start)
 
 begin
-  [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild) if provider.blends?
+  [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate].each(&:rebuild) if provider.datasets.any?(&:blends?)
 ensure
   Cache.purge
 end
@@ -63,7 +65,7 @@ Changes to blend rules, peg definitions, or provider eligibility require `rake b
 - **Match the code to the unit of the number.** A series a source restated in today's unit (BIS, ECB's pre-2005 RON) keeps the new code even before the currency existed. Old-unit values under the new code move to the predecessor code up to that source's own switch date, which can trail the redenomination by days (`PREDECESSORS`, plus a data migration if already imported). An old code the app doesn't know needs a currency patch first.
 - **Delete only rows the source didn't publish for that date**, such as a frozen rate a live feed re-dates every week, or history the source has since withdrawn.
 - **Never delete a row because its value looks wrong.** Typos and spikes stay in `rates`. The blend screens them: `RateSpike` drops a one-day spike (3x off both neighbours, which agree) at any provider count, `Consensus` drops outliers when at least four providers quote a currency, and the defunct and nascent windows keep retired and not-yet-live codes out.
-- **Data migrations leave blend tables alone.** Clearing them sends every request to live compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy instead; it rebuilds in place. A migration that relabels or deletes rows rescreens them with `RateSpike.refresh(provider, dates)`.
+- **Data migrations leave blend tables alone.** Clearing them sends every request to live compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy instead; it rebuilds in place. A migration that relabels or deletes rows rescreens them with `RateSpike.refresh(dataset_key, dates)`.
 
 ## Conventions
 

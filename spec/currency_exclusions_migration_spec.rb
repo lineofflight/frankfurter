@@ -17,7 +17,7 @@ describe "Currency exclusions migration" do
         { provider: "BOC", date: "2000-01-05", base: "USD", quote: "GHC", mid: 2.0 },
         { provider: "BOC", date: "2000-01-05", base: "GHC", quote: "USD", mid: 0.5 },
       ])
-      Sequel::Migrator.run(DB, "db/migrate")
+      Sequel::Migrator.run(DB, "db/migrate", target: 34)
       abort "missing exclusions table" unless DB.table_exists?(:currency_exclusions)
       rows = DB[:currency_exclusions].all
       abort "wrong exclusions" unless rows.size == 1 && rows.first[:iso_code] == "SDR"

@@ -1,0 +1,460 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "date"
+require "digest"
+require "fileutils"
+require "optparse"
+require "time"
+
+module ApiSnapshot
+  DEFAULT_CLOCK = "2026-09-13T12:00:00Z"
+  CAPTURED_HEADERS = ["Content-Type", "Cache-Control", "ETag", "Content-Disposition"].freeze
+
+  ROOT_REQUESTS = [
+    "/",
+    "/v1",
+    "/v2",
+  ].freeze
+
+  V1_REQUESTS = [
+    "/v1/currencies",
+    "/v1/latest",
+    "/v1/latest?base=USD",
+    "/v1/latest?symbols=USD,GBP,JPY,PLN",
+    "/v1/latest?amount=100&base=USD&symbols=EUR,GBP",
+    "/v1/current",
+    "/v1/2026-09-09",
+    "/v1/2026-09-09?base=USD&symbols=EUR,GBP,PLN",
+    "/v1/2026-08-15..2026-09-11",
+    "/v1/2026-08-15..2026-09-11?base=USD&symbols=EUR,GBP",
+    "/v1/2026-09-01..",
+  ].freeze
+
+  CATALOGUE_REQUESTS = [
+    "/v2/providers",
+    "/v2/currencies",
+    "/v2/currencies?scope=all",
+    "/v2/currencies?providers=ECB",
+    "/v2/currencies?providers=NBP",
+    "/v2/currencies?providers=NBP,ECB",
+    "/v2/currencies?providers=FED,BOE,BOJ",
+  ].freeze
+
+  BLEND_REQUESTS = [
+    "/v2/rates",
+    "/v2/rates.csv",
+    "/v2/rates?base=USD",
+    "/v2/rates?base=AED",
+    "/v2/rates?base=BAM",
+    "/v2/rates?quotes=USD,GBP,JPY,PLN,AED",
+    "/v2/rates?base=USD&quotes=EUR,GBP,AED,PLN",
+    "/v2/rates?expand=providers",
+    "/v2/rates.csv?expand=providers",
+    "/v2/rates?base=USD&expand=providers",
+    "/v2/rates.csv?base=USD&expand=providers",
+    "/v2/rates?base=AED&quotes=USD,EUR,GBP&expand=providers",
+    "/v2/rates?date=2026-09-09",
+    "/v2/rates.csv?date=2026-09-09",
+    "/v2/rates?date=2026-09-09&base=USD",
+    "/v2/rates?date=2026-09-09&base=AED",
+    "/v2/rates?date=2026-09-09&quotes=USD,GBP,JPY,PLN,AED",
+    "/v2/rates?date=2026-09-09&expand=providers",
+    "/v2/rates.csv?date=2026-09-09&expand=providers",
+    "/v2/rates?date=2026-08-14",
+    "/v2/rates?date=2026-08-14&base=USD&expand=providers",
+    "/v2/rates?date=2025-06-15",
+    "/v2/rates?date=2020-03-18",
+    "/v2/rates?date=1999-01-04",
+    "/v2/rates?from=2026-08-15&to=2026-09-11",
+    "/v2/rates.csv?from=2026-08-15&to=2026-09-11",
+    "/v2/rates?from=2026-08-15&to=2026-09-11&base=USD",
+    "/v2/rates?from=2026-08-15&to=2026-09-11&base=AED",
+    "/v2/rates?from=2026-08-15&to=2026-09-11&quotes=USD,GBP,PLN,AED",
+    "/v2/rates?from=2026-08-25&to=2026-09-11&expand=providers",
+    "/v2/rates.csv?from=2026-08-25&to=2026-09-11&expand=providers",
+    "/v2/rates?from=2026-08-25&to=2026-09-11&base=USD&quotes=EUR,PLN,GBP&expand=providers",
+    "/v2/rates?from=2026-09-01",
+    "/v2/rates?from=2026-06-01&to=2026-09-11&group=week",
+    "/v2/rates?from=2026-01-01&to=2026-09-11&group=month",
+    "/v2/rates.csv?from=2026-06-01&to=2026-09-11&group=week",
+    "/v2/rates.csv?from=2026-01-01&to=2026-09-11&group=month",
+    "/v2/rates?from=2026-06-01&to=2026-09-11&group=week&base=USD",
+    "/v2/rates?from=2026-06-01&to=2026-09-11&group=week&base=AED",
+    "/v2/rates?from=2026-06-01&to=2026-09-11&group=week&quotes=USD,GBP,PLN",
+    "/v2/rates?from=2026-07-01&to=2026-09-11&group=week&expand=providers",
+    "/v2/rates.csv?from=2026-07-01&to=2026-09-11&group=week&expand=providers",
+    "/v2/rates?from=2026-06-01&to=2026-09-11&group=month&expand=providers",
+    "/v2/rates.csv?from=2026-06-01&to=2026-09-11&group=month&expand=providers",
+    "/v2/rate/EUR/USD",
+    "/v2/rate/USD/EUR",
+    "/v2/rate/EUR/PLN",
+    "/v2/rate/USD/AED",
+    "/v2/rate/AED/EUR",
+    "/v2/rate/EUR/USD?date=2026-09-09",
+    "/v2/rate/EUR/PLN?date=2026-09-09&expand=providers",
+    "/v2/providers/ECB/rate/EUR/USD",
+    "/v2/coverage",
+    "/v2/coverage?base=USD&quotes=EUR,PLN",
+    "/v2/coverage?providers=NBP",
+  ].freeze
+
+  NBP_REQUESTS = [
+    "/v2/providers/NBP/rates?date=2026-09-09&quotes=AFN,MGA,GEL,EUR,USD",
+    "/v2/providers/NBP/rates?date=2026-09-10&quotes=AFN,MGA,GEL,EUR,USD",
+    "/v2/providers/NBP/rates?date=2026-09-11&quotes=AFN,MGA,GEL,EUR,USD",
+    "/v2/providers/NBP/rates?date=2026-09-09&base=PLN&quotes=AFN,MGA,EUR,USD&expand=providers",
+    "/v2/providers/NBP/rates?date=2026-09-10&base=PLN&quotes=AFN,MGA,EUR,USD&expand=providers",
+    "/v2/providers/NBP/rate/PLN/AFN?date=2026-09-09",
+    "/v2/providers/NBP/rate/PLN/AFN?date=2026-09-10",
+    "/v2/providers/NBP/rate/EUR/AFN?date=2026-09-09",
+    "/v2/providers/NBP/rate/EUR/AFN?date=2026-09-10",
+    "/v2/rate/PLN/AFN?providers=NBP&date=2026-09-09",
+    "/v2/rate/PLN/AFN?providers=NBP&date=2026-09-10",
+    "/v2/rates?date=2026-09-09&quotes=AFN,MGA,PLN&expand=providers",
+    "/v2/rates?date=2026-09-10&quotes=AFN,MGA,PLN&expand=providers",
+    "/v2/rates?providers=NBP,ECB",
+    "/v2/rates?providers=NBP,ECB&date=2026-09-09",
+    "/v2/rates?providers=NBP,ECB&date=2026-09-10",
+    "/v2/rates?providers=NBP,ECB&date=2026-09-09&expand=providers",
+    "/v2/rates?providers=NBP,ECB&date=2026-09-10&expand=providers",
+    "/v2/rates?providers=NBP,ECB&from=2026-08-05&to=2026-09-11&quotes=USD,GBP,AFN,MGA",
+    "/v2/rates?providers=NBP,ECB&from=2026-08-05&to=2026-09-11&quotes=USD,GBP,AFN,MGA&expand=providers",
+    "/v2/rates?providers=NBP,ECB&from=2026-08-05&to=2026-09-11&group=week",
+    "/v2/rates?providers=NBP,ECB&from=2026-07-01&to=2026-09-11&group=month",
+    "/v2/providers/NBP/rates.csv?expand=providers",
+    "/v2/providers/NBP/rates.csv?date=2026-09-09&expand=providers",
+    "/v2/providers/NBP/rates.csv?date=2026-09-10&expand=providers",
+    "/v2/providers/NBP/rates.csv?from=2026-08-05&to=2026-09-11&expand=providers",
+    "/v2/rates.csv?providers=NBP&from=2026-08-05&to=2026-09-11&expand=providers",
+    "/v2/rates.csv?providers=NBP,ECB&date=2026-09-10&expand=providers",
+    "/v2/providers/NBP/rates?from=2026-07-15&to=2026-09-11",
+    "/v2/providers/NBP/rates?from=2026-07-15&to=2026-09-11&expand=providers",
+    "/v2/providers/NBP/rates?from=2026-07-15&to=2026-09-11&quotes=EUR,USD,AFN,MGA,GEL",
+    "/v2/providers/NBP/rates?from=2026-07-15&to=2026-09-11&group=week",
+    "/v2/providers/NBP/rates?from=2026-06-01&to=2026-09-11&group=month",
+  ].freeze
+
+  class << self
+    def cli(argv = ARGV)
+      args = argv.dup
+      command = args.first
+      if command == "diff"
+        args.shift
+        run_diff_cli(args)
+      else
+        args.shift if command == "record"
+        run_record_cli(args)
+      end
+    end
+
+    def pin_clock!(clock_str)
+      normalized = /\A\d{4}-\d{2}-\d{2}\z/.match?(clock_str) ? "#{clock_str}T12:00:00Z" : clock_str
+      pinned_time = Time.iso8601(normalized).utc
+      pinned_date = Date.new(pinned_time.year, pinned_time.month, pinned_time.day)
+      pinned_datetime = DateTime.iso8601(normalized).new_offset(0)
+
+      Date.singleton_class.alias_method(:__orig_today, :today) unless Date.respond_to?(:__orig_today)
+      Date.singleton_class.send(:remove_method, :today) if Date.singleton_class.method_defined?(:today, false)
+      Date.define_singleton_method(:today) { pinned_date }
+
+      Time.singleton_class.alias_method(:__orig_now, :now) unless Time.respond_to?(:__orig_now)
+      Time.singleton_class.send(:remove_method, :now) if Time.singleton_class.method_defined?(:now, false)
+      Time.define_singleton_method(:now) { |*_a, **_k| pinned_time.dup }
+
+      DateTime.singleton_class.alias_method(:__orig_now, :now) unless DateTime.respond_to?(:__orig_now)
+      DateTime.singleton_class.send(:remove_method, :now) if DateTime.singleton_class.method_defined?(:now, false)
+      DateTime.define_singleton_method(:now) { |*_a, **_k| pinned_datetime }
+
+      normalized
+    end
+
+    def unpin_clock!
+      if Date.respond_to?(:__orig_today)
+        Date.singleton_class.send(:remove_method, :today) if Date.singleton_class.method_defined?(:today, false)
+        Date.singleton_class.alias_method(:today, :__orig_today)
+      end
+      if Time.respond_to?(:__orig_now)
+        Time.singleton_class.send(:remove_method, :now) if Time.singleton_class.method_defined?(:now, false)
+        Time.singleton_class.alias_method(:now, :__orig_now)
+      end
+      return unless DateTime.respond_to?(:__orig_now)
+
+      DateTime.singleton_class.send(:remove_method, :now) if DateTime.singleton_class.method_defined?(:now, false)
+      DateTime.singleton_class.alias_method(:now, :__orig_now)
+    end
+
+    def generate_requests(_db = nil)
+      require "currency"
+      require "currency_exclusion"
+      require "provider"
+
+      requests = []
+      requests.concat(ROOT_REQUESTS)
+      requests.concat(V1_REQUESTS)
+      requests.concat(CATALOGUE_REQUESTS)
+
+      Currency.all.map(&:iso_code).sort.each do |code|
+        requests << "/v2/currency/#{code}"
+      end
+
+      providers = Provider.all.sort_by(&:key)
+
+      providers.each do |provider|
+        key = provider.key
+        end_str = provider.end_date || "2026-09-11"
+        end_date = Date.parse(end_str.to_s)
+        past_date = (end_date - 10).to_s
+        month_start = (end_date - 30).to_s
+        rollup_start = (end_date - 60).to_s
+        end_iso = end_date.to_s
+
+        requests.push(
+          "/v2/providers/#{key}",
+          "/v2/providers/#{key}/rates",
+          "/v2/providers/#{key}/rates?date=#{past_date}",
+          "/v2/providers/#{key}/rates?from=#{month_start}&to=#{end_iso}",
+          "/v2/providers/#{key}/rates?from=#{rollup_start}&to=#{end_iso}&group=week",
+          "/v2/providers/#{key}/rates?from=#{rollup_start}&to=#{end_iso}&group=month",
+          "/v2/providers/#{key}/rates.csv?from=#{month_start}&to=#{end_iso}",
+        )
+      end
+
+      requests.concat(BLEND_REQUESTS)
+      requests.concat(NBP_REQUESTS)
+      requests.uniq
+    end
+
+    def format_response(uri, response)
+      lines = [
+        "Request: GET #{uri}",
+        "Status: #{response.status}",
+      ]
+      CAPTURED_HEADERS.each do |header|
+        value = response.get_header(header.downcase) || response.headers[header]
+        lines << "#{header}: #{value}" if value
+      end
+      "#{lines.join("\n")}\n\n#{response.body}"
+    end
+
+    def filename_for(index, uri)
+      slug = uri.sub(%r{\A/+}, "").gsub(/[^A-Za-z0-9._-]+/, "_").delete_suffix("_")
+      slug = "root" if slug.empty?
+      slug = slug[0, 120]
+      format("%<idx>04d_%<slug>s.http", idx: index + 1, slug:)
+    end
+
+    def write_requests_file(path, requests, clock)
+      FileUtils.mkdir_p(File.dirname(path))
+      content = "#{"# clock: #{clock}\n"}#{requests.join("\n")}\n"
+      File.write(path, content)
+    end
+
+    def read_requests_file(path)
+      lines = File.readlines(path, chomp: true)
+      clock = nil
+      requests = []
+      lines.each do |line|
+        stripped = line.strip
+        next if stripped.empty?
+
+        if stripped.start_with?("# clock:")
+          clock = stripped.sub("# clock:", "").strip
+        elsif !stripped.start_with?("#")
+          requests << stripped
+        end
+      end
+      [requests, clock]
+    end
+
+    def diff_dirs(dir_a, dir_b)
+      files_a = response_files(dir_a)
+      files_b = response_files(dir_b)
+      all_names = (files_a.keys | files_b.keys).sort
+
+      identical = []
+      differing = []
+      missing = []
+
+      all_names.each do |name|
+        path_a = files_a[name]
+        path_b = files_b[name]
+        if path_a.nil? || path_b.nil?
+          missing << { name:, missing_in: path_a.nil? ? dir_a : dir_b, uri: extract_uri(path_a || path_b) }
+        elsif File.binread(path_a) == File.binread(path_b)
+          identical << name
+        else
+          differing << { name:, uri: extract_uri(path_a) }
+        end
+      end
+
+      {
+        total: all_names.size,
+        identical: identical.size,
+        differing:,
+        missing:,
+      }
+    end
+
+    def find_matching_files(dir_a, dir_b, query)
+      files_a = response_files(dir_a)
+      files_b = response_files(dir_b)
+      all_names = (files_a.keys | files_b.keys).sort
+      idx_prefix = /\A\d+\z/.match?(query) ? format("%<idx>04d_", idx: Integer(query, 10)) : nil
+
+      exact = all_names.select do |name|
+        uri = extract_uri(files_a[name] || files_b[name])
+        name == query || (idx_prefix && name.start_with?(idx_prefix)) || uri == query
+      end
+      return exact unless exact.empty?
+
+      all_names.select do |name|
+        uri = extract_uri(files_a[name] || files_b[name])
+        name.include?(query) || uri.include?(query)
+      end
+    end
+
+    private
+
+    def run_record_cli(args)
+      requests_opt = ENV["REQUESTS"]
+      clock_opt = ENV["CLOCK"]
+
+      parser = OptionParser.new do |opts|
+        opts.banner = "Usage: bin/api_snapshot [record] <db_path> <out_dir> [--requests FILE] [--clock TIME]"
+        opts.on("-r", "--requests FILE", "Request list file to read or write") { |v| requests_opt = v }
+        opts.on("-c", "--clock TIME", "Pinned UTC time (ISO 8601)") { |v| clock_opt = v }
+      end
+      parser.parse!(args)
+
+      db_path, out_dir = args
+      abort parser.banner unless db_path && out_dir
+
+      db_abs = File.expand_path(db_path)
+      abort "Database not found: #{db_abs}" unless File.exist?(db_abs)
+
+      requests_path = resolve_requests_path(out_dir, requests_opt)
+      preloaded_requests, file_clock = if requests_path && File.exist?(requests_path)
+                                         read_requests_file(requests_path)
+                                       else
+                                         [nil, nil]
+                                       end
+
+      active_clock = pin_clock!(clock_opt || file_clock || DEFAULT_CLOCK)
+
+      ENV["DATABASE_URL"] = "sqlite://#{db_abs}"
+      require_relative "../boot"
+      require "app"
+      require "rack/mock_request"
+
+      ensure_clean_wal_state!(db_abs)
+      before_sha = Digest::SHA256.file(db_abs).hexdigest
+
+      requests = preloaded_requests || generate_requests(DB)
+      write_requests_file(requests_path, requests, active_clock) if requests_path && !preloaded_requests
+
+      FileUtils.rm_rf(out_dir)
+      FileUtils.mkdir_p(out_dir)
+      write_requests_file(File.join(out_dir, "requests.txt"), requests, active_clock)
+
+      mock = Rack::MockRequest.new(App.freeze.app)
+      started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+      requests.each_with_index do |uri, idx|
+        response = mock.get(uri)
+        out_file = File.join(out_dir, filename_for(idx, uri))
+        File.binwrite(out_file, format_response(uri, response))
+      end
+
+      elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+      total_changes = DB.get(Sequel.lit("total_changes()"))
+      DB.disconnect
+      after_sha = Digest::SHA256.file(db_abs).hexdigest
+
+      if total_changes.positive? || before_sha != after_sha || File.exist?("#{db_abs}-wal")
+        abort "Database modified during snapshot! " \
+              "total_changes=#{total_changes} before=#{before_sha} after=#{after_sha}"
+      end
+
+      puts "Recorded #{requests.size} requests to #{out_dir} in #{format("%<sec>.2f", sec: elapsed)}s " \
+           "(clock=#{active_clock}, sha256=#{after_sha[0, 12]})"
+    end
+
+    def run_diff_cli(args)
+      dir_a, dir_b, query = args
+      abort "Usage: bin/api_snapshot diff <dir_a> <dir_b> [request_query]" unless dir_a && dir_b
+
+      if query
+        matches = find_matching_files(dir_a, dir_b, query)
+        abort "No requests matching #{query.inspect}" if matches.empty?
+
+        any_diff = false
+        matches.each do |name|
+          path_a = File.join(dir_a, name)
+          path_b = File.join(dir_b, name)
+          unless File.exist?(path_a) && File.exist?(path_b)
+            puts "MISSING #{name}: present only in #{File.exist?(path_a) ? dir_a : dir_b}"
+            any_diff = true
+            next
+          end
+          next if File.binread(path_a) == File.binread(path_b)
+
+          any_diff = true
+          system("diff", "-u", path_a, path_b)
+        end
+        puts "Identical (#{matches.size} matched)" unless any_diff
+        exit(any_diff ? 1 : 0)
+      end
+
+      report = diff_dirs(dir_a, dir_b)
+      puts "total: #{report[:total]}, identical: #{report[:identical]}, " \
+           "differing: #{report[:differing].size}, missing: #{report[:missing].size}"
+
+      report[:differing].each do |entry|
+        puts "DIFF #{entry[:name]} (#{entry[:uri]})"
+      end
+      report[:missing].each do |entry|
+        puts "MISSING #{entry[:name]} (#{entry[:uri]}) in #{entry[:missing_in]}"
+      end
+
+      exit(report[:differing].empty? && report[:missing].empty? ? 0 : 1)
+    end
+
+    def resolve_requests_path(out_dir, requests_opt)
+      if requests_opt
+        return File.join(requests_opt, "requests.txt") if File.directory?(requests_opt)
+
+        return requests_opt
+      end
+
+      sibling_baseline = File.join(File.dirname(File.expand_path(out_dir)), "baseline", "requests.txt")
+      if File.expand_path(File.join(out_dir, "requests.txt")) != sibling_baseline && File.exist?(sibling_baseline)
+        return sibling_baseline
+      end
+
+      nil
+    end
+
+    def ensure_clean_wal_state!(db_abs)
+      return if File.binread(db_abs, 2, 18) == "\x02\x02" &&
+                !File.exist?("#{db_abs}-wal") &&
+                !File.exist?("#{db_abs}-shm")
+
+      DB.synchronize { nil }
+      DB.disconnect
+    end
+
+    def response_files(dir)
+      Dir.glob(File.join(dir, "*.http")).to_h { |path| [File.basename(path), path] }
+    end
+
+    def extract_uri(path)
+      return "" unless path && File.exist?(path)
+
+      first_line = File.open(path, &:gets).to_s.chomp
+      first_line.delete_prefix("Request: GET ")
+    end
+  end
+end
+
+ApiSnapshot.cli(ARGV) if $PROGRAM_NAME == __FILE__

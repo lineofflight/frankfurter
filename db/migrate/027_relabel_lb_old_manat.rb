@@ -18,13 +18,10 @@ require "bucket"
 # - Blend. LB was the only provider quoting AZN before 2006-01-02, so every stored AZN blend up to then was computed
 #   from exactly these rows and is unchanged under the new code: relabelling those blend rows is equivalent to
 #   recomputing them. From 2006-01-02 BDI, NBT and NBKR join with new manat while LB still quotes old, so that window
-#   is recomputed, with the carry-forward lookback past LB's last old-manat row.
+#   is recomputed, with the carry-forward lookback past LB's last old-manat row. Since provider datasets, that blend
+#   window, like every derived table, is rebuilt once after the last migration (db:migrate).
 Sequel.migration do
   up do
-    # Loaded here, not at the top: the migrator loads every file before running any, and the models bind to tables that
-    # do not exist yet on a fresh database.
-    require "blended_rate"
-
     cutover = Date.new(2006, 1, 9)
     codes = ["AZN", "AZM"]
 
@@ -72,7 +69,6 @@ Sequel.migration do
       .exclude(date: existing_azm)
       .update(quote: "AZM")
     from(:blended_rates).where(quote: "AZN").where { date < Date.new(2006, 1, 2) }.delete
-    BlendedRate.refresh(Date.new(2006, 1, 2)..Date.new(2006, 1, 31))
   end
 
   down do

@@ -9,33 +9,29 @@ describe Provider do
   let(:provider) { Provider.first }
 
   describe "schema" do
-    let(:columns) { Provider.db.schema(:providers).map(&:first) }
-
-    it "has publish_schedule, publish_cadence, and no publish_time or publish_days" do
-      _(columns).must_include(:publish_schedule)
-      _(columns).must_include(:publish_cadence)
-      _(columns).wont_include(:publish_time)
-      _(columns).wont_include(:publish_days)
+    it "keeps series metadata on datasets" do
+      _(Provider.db.schema(:providers).map(&:first)).must_equal([:key, :name, :terms_url, :country_code])
+      _(Dataset.db.schema(:datasets).map(&:first)).must_include(:publish_schedule)
+      _(Dataset.db.schema(:datasets).map(&:first)).must_include(:publish_cadence)
     end
 
-    it "seeds every provider with publish_schedule, publish_cadence, and valid cron" do
+    it "seeds every dataset with publish_schedule, publish_cadence, and valid cron" do
       require "fugit"
       dir = File.expand_path("../db/seeds/providers", __dir__)
       Dir["#{dir}/*.json"].each do |path|
-        data = JSON.parse(File.read(path))
+        file = JSON.parse(File.read(path))
+        (file["datasets"] || [file]).each do |data|
+          _(data).must_include("publish_schedule")
+          _(data).must_include("publish_cadence")
+          _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["publish_cadence"])
+          _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["frequency"])
+          _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
+          next if data["publish_schedule"].nil?
 
-        _(data).must_include("publish_schedule")
-        _(data).must_include("publish_cadence")
-        _(data).wont_include("publish_time")
-        _(data).wont_include("publish_days")
-        _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["publish_cadence"])
-        _([nil, "daily", "weekly", "monthly", "quarterly"]).must_include(data["frequency"])
-        _(data["publish_cadence"].nil?).must_equal(data["publish_schedule"].nil?)
-        next if data["publish_schedule"].nil?
+          parsed = Fugit::Cron.parse(data["publish_schedule"])
 
-        parsed = Fugit::Cron.parse(data["publish_schedule"])
-
-        _(parsed).wont_be_nil("#{File.basename(path)}: invalid cron #{data["publish_schedule"].inspect}")
+          _(parsed).wont_be_nil("#{File.basename(path)}: invalid cron #{data["publish_schedule"].inspect}")
+        end
       end
     end
   end
@@ -65,258 +61,196 @@ describe Provider do
   end
 
   describe ".seed" do
+    def parse(files)
+      Provider.send(:parse_seeds, files)
+    end
+
+    let(:single) do
+      { "key" => "TST", "name" => "Test", "pivot_currency" => "EUR", "publish_cadence" => "daily" }
+    end
+
+    let(:multi) do
+      {
+        "key" => "TST",
+        "name" => "Test",
+        "datasets" => [
+          { "key" => "TST.A", "default" => true, "frequency" => "daily" },
+          { "key" => "TST.B", "default" => true, "blends" => true, "frequency" => "weekly" },
+          { "key" => "TST.X" },
+        ],
+      }
+    end
+
     it "keeps a key only some seed files carry" do
       Provider.seed
 
       _(Provider["UST"].frequency).must_equal("quarterly")
       _(Provider["ECB"].frequency).must_equal("daily")
-      _(Provider.non_blending_keys).must_include("UST")
+      _(Dataset.non_blending_keys).must_include("UST")
+    end
+
+    it "makes a single-series file its provider's one default dataset" do
+      providers, datasets = parse("tst.json" => single)
+
+      _(providers).must_equal([{ key: "TST", name: "Test", country_code: nil, terms_url: nil }])
+      _(datasets.size).must_equal(1)
+      _(datasets.first).must_equal(
+        key: "TST", provider_key: "TST", is_default: true, blends: nil, rate_type: nil, frequency: "daily",
+        publish_cadence: "daily", publish_schedule: nil, pivot_currency: "EUR", data_url: nil, coverage_start: nil,
+      )
+    end
+
+    it "lists each dataset of a multi-series file" do
+      _, datasets = parse("tst.json" => multi)
+
+      _(datasets.map { |d| d.values_at(:key, :is_default, :blends, :frequency) }).must_equal([
+        ["TST.A", true, nil, "daily"],
+        ["TST.B", true, true, "weekly"],
+        ["TST.X", false, nil, "daily"],
+      ])
+    end
+
+    it "rejects a dataset key that is not the provider's key with a suffix" do
+      multi["datasets"][2]["key"] = "TSTX"
+
+      _ { parse("tst.json" => multi) }.must_raise(ArgumentError)
+    end
+
+    it "rejects a provider without a default dataset" do
+      multi["datasets"].each { |dataset| dataset.delete("default") }
+
+      _ { parse("tst.json" => multi) }.must_raise(ArgumentError)
+    end
+
+    it "rejects duplicate keys" do
+      _ { parse("a.json" => single, "b.json" => single) }.must_raise(ArgumentError)
+    end
+
+    it "rejects unknown fields" do
+      _ { parse("tst.json" => single.merge("schedule" => "* * * * *")) }.must_raise(ArgumentError)
+      multi["datasets"][0]["name"] = "Table A"
+
+      _ { parse("tst.json" => multi) }.must_raise(ArgumentError)
+    end
+
+    it "replaces nothing when a file is invalid" do
+      before = [Provider.count, Dataset.count]
+
+      Provider.stub(:parse_seeds, ->(_) { raise ArgumentError, "bad seed" }) do
+        _ { Provider.seed }.must_raise(ArgumentError)
+      end
+
+      _([Provider.dataset.count, Dataset.dataset.count]).must_equal(before)
     end
   end
 
-  describe "#frequency" do
-    it "defaults to daily, blends, and carries forward two weeks" do
-      provider = Provider.new { |p| p.key = "EXAMPLE" }
-
-      _(provider.frequency).must_equal("daily")
-      _(provider.blends?).must_equal(true)
-      _(provider.lookback_days).must_equal(14)
-    end
-
-    it "keeps monthly and quarterly values out of the blend and carries them across their period" do
-      monthly = Provider.new { |p| p.frequency = "monthly" }
-      quarterly = Provider.new { |p| p.frequency = "quarterly" }
-
-      _(monthly.blends?).must_equal(false)
-      _(monthly.lookback_days).must_equal(45)
-      _(quarterly.blends?).must_equal(false)
-      _(quarterly.lookback_days).must_equal(120)
-    end
-
-    it "widens the carry-forward window to the publish cadence when values arrive in arrears" do
-      in_arrears = Provider.new { |p| p.publish_cadence = "monthly" }
-      weekly = Provider.new { |p| p.publish_cadence = "weekly" }
-      unscheduled = Provider.new { |p| p.publish_cadence = nil }
-
-      _(in_arrears.blends?).must_equal(true)
-      _(in_arrears.lookback_days).must_equal(45)
-      _(weekly.lookback_days).must_equal(14)
-      _(unscheduled.lookback_days).must_equal(14)
-    end
-
-    it "lists the keys of providers that do not blend" do
-      Provider.dataset.insert(key: "TST", name: "Test", frequency: "monthly")
+  describe "datasets" do
+    before do
+      Provider.dataset.insert(key: "TST", name: "Test")
+      Dataset.dataset.multi_insert([
+        { key: "TST.B", provider_key: "TST", is_default: true, frequency: "weekly", publish_cadence: "weekly",
+          publish_schedule: "0 12 * * 3", coverage_start: "2020-01-01", },
+        { key: "TST.A", provider_key: "TST", is_default: true, frequency: "daily", publish_cadence: "daily",
+          publish_schedule: "0 12 * * 1-5", coverage_start: "2021-01-01", },
+        { key: "TST.X", provider_key: "TST", is_default: false, frequency: "daily", publish_cadence: nil,
+          publish_schedule: nil, coverage_start: "2019-01-01", },
+      ])
       Provider.load_cache
+      Dataset.load_cache
+    end
 
-      _(Provider.non_blending_keys).must_include("TST")
-    ensure
+    after do
+      Dataset.dataset.where(provider_key: "TST").delete
       Provider.dataset.where(key: "TST").delete
       Provider.load_cache
-    end
-  end
-
-  describe "#publishes_missed" do
-    def build_provider(schedule, cadence: "daily")
-      Provider.new do |p|
-        p.key = "EXAMPLE"
-        p.name = "Example"
-        p.publish_schedule = schedule
-        p.publish_cadence = cadence if schedule
-      end
+      Dataset.load_cache
     end
 
-    it "returns nil when publish_schedule is nil" do
-      provider = build_provider(nil, cadence: nil)
+    let(:provider) { Provider["TST"].dup }
 
-      provider.stub(:end_date, "2026-04-01") do
-        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_be_nil
-      end
+    it "takes metadata from the first default dataset" do
+      _(provider.datasets.map(&:key)).must_equal(["TST.A", "TST.B", "TST.X"])
+      _(provider.default_datasets.map(&:key)).must_equal(["TST.A", "TST.B"])
+      _(provider.publish_schedule).must_equal("0 12 * * 1-5")
+      _(provider.publish_cadence).must_equal("daily")
+      _(provider.frequency).must_equal("daily")
+      _(provider.coverage_start).must_equal(Date.new(2019, 1, 1))
     end
 
-    it "returns nil when end_date is nil" do
-      provider = build_provider("*/30 14-16 * * 1-5")
+    it "combines coverage across the default datasets" do
+      CurrencyCoverage.dataset.multi_insert([
+        { dataset_key: "TST.A", iso_code: "PLN", start_date: "2021-01-04", end_date: "2026-01-02" },
+        { dataset_key: "TST.A", iso_code: "USD", start_date: "2021-01-04", end_date: "2026-01-02" },
+        { dataset_key: "TST.B", iso_code: "PLN", start_date: "2020-01-08", end_date: "2025-12-31" },
+        { dataset_key: "TST.B", iso_code: "AED", start_date: "2020-01-08", end_date: "2025-12-31" },
+        { dataset_key: "TST.X", iso_code: "BRL", start_date: "2019-01-02", end_date: "2026-01-05" },
+      ])
 
-      provider.stub(:end_date, nil) do
-        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_be_nil
-      end
+      _(provider.currency_coverages.map(&:iso_code).uniq.sort).must_equal(["AED", "PLN", "USD"])
+      _(provider.start_date).must_equal("2020-01-08")
+      _(provider.end_date).must_equal("2026-01-02")
     end
 
-    it "raises ArgumentError when publish_cadence is unrecognised" do
-      bad = build_provider("*/30 14-16 * * 1-5", cadence: "biweekly")
+    it "resumes from the oldest dataset and restarts while any dataset has nothing" do
+      Rate.dataset.multi_insert([
+        { dataset_key: "TST.A", date: "2025-12-31", base: "USD", quote: "PLN", mid: 3.6 },
+        { dataset_key: "TST.B", date: "2025-12-24", base: "AED", quote: "PLN", mid: 1.0 },
+      ])
 
-      bad.stub(:end_date, "2026-04-01") do
-        _ { bad.publishes_missed(reference_date: Date.new(2026, 4, 20)) }.must_raise(ArgumentError)
-      end
+      _(provider.last_synced).must_be_nil
+
+      Rate.dataset.insert(dataset_key: "TST.X", date: "2026-01-02", base: "BRL", quote: "PLN", mid: 0.7)
+
+      _(provider.last_synced).must_equal(Date.new(2025, 12, 24))
     end
 
-    describe "with daily cadence, Mon-Fri publishing (ECB-style)" do
-      let(:mon_fri) { build_provider("*/30 14-16 * * 1-5") }
-
-      it "returns 0 when end_date is Friday and reference is the following Monday" do
-        # Fri 2026-04-17 to Mon 2026-04-20 exclusive: only Sat 18 and Sun 19 sit between — neither is a publish day.
-        mon_fri.stub(:end_date, "2026-04-17") do
-          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
+    it "stores each tagged record under its dataset" do
+      tagged = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.today, base: "USD", quote: "PLN", rate: 3.6, dataset: "TST.A" },
+            { date: Date.today, base: "AED", quote: "PLN", rate: 1.0, dataset: "TST.B" },
+          ]
         end
       end
+      provider.stub(:adapter, tagged) { provider.backfill(after: Date.today - 1) }
 
-      it "counts weekdays missed between end_date and reference" do
-        # Last update Mon 2026-04-13, reference Fri 2026-04-17 exclusive: Tue 14, Wed 15, Thu 16 = 3.
-        mon_fri.stub(:end_date, "2026-04-13") do
-          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
-        end
-      end
-
-      it "ignores weekends" do
-        # Fri 2026-04-10 exclusive to Mon 2026-04-20 exclusive: Mon-Fri 13,14,15,16,17 = 5.
-        mon_fri.stub(:end_date, "2026-04-10") do
-          _(mon_fri.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(5)
-        end
-      end
+      _(Rate.where(dataset_key: ["TST.A", "TST.B"]).order(:base).select_map([:dataset_key, :base]))
+        .must_equal([["TST.B", "AED"], ["TST.A", "USD"]])
+      _(CurrencyCoverage.where(iso_code: "AED").select_map(:dataset_key)).must_equal(["TST.B"])
     end
 
-    describe "with daily cadence, seven-day publishing" do
-      let(:daily) { build_provider("*/30 14-16 * * *") }
-
-      it "counts every day between end_date and reference" do
-        # (2026-04-10, 2026-04-20) exclusive = 9 days.
-        daily.stub(:end_date, "2026-04-10") do
-          _(daily.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(9)
-        end
+    it "stores nothing from a provider with several datasets when a record is untagged" do
+      untagged = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) { |**| [{ date: Date.today, base: "USD", quote: "PLN", rate: 3.6 }] }
       end
+      Log.stub(:error, ->(_) {}) do
+        provider.stub(:adapter, untagged) { provider.backfill(after: Date.today - 1) }
+      end
+
+      _(Rate.where(dataset_key: ["TST.A", "TST.B", "TST.X"]).count).must_equal(0)
     end
 
-    describe "with daily cadence, Mondays-only cron" do
-      let(:mondays) { build_provider("*/30 21-23 * * 1") }
+    it "pools a pair that changes table mid-bucket into one rollup under the newer table" do
+      row = ->(key, date, mid) { { dataset_key: key, date:, base: "RUB", quote: "PLN", mid: } }
+      Rate.dataset.multi_insert([
+        row["TST.A", "2022-03-07", 0.03125],
+        row["TST.A", "2022-03-08", 0.0390625],
+        row["TST.B", "2022-03-09", 0.046875],
+        row["TST.X", "2022-03-09", 0.5],
+      ])
+      provider.send(:refresh_rollups, ["2022-03-07", "2022-03-08", "2022-03-09"].map { |d| Date.parse(d) })
 
-      it "counts only Mondays between end_date and reference" do
-        # Mon 2026-04-06 exclusive to Fri 2026-04-24 exclusive: Mondays are 13, 20 = 2.
-        mondays.stub(:end_date, "2026-04-06") do
-          _(mondays.publishes_missed(reference_date: Date.new(2026, 4, 24))).must_equal(2)
-        end
-      end
-    end
+      [WeeklyRate, MonthlyRate].each do |model|
+        rollups = model.where(base: "RUB").order(:dataset_key).select_map([:dataset_key, :rate])
 
-    describe "with weekly cadence (FRED-style, Mon-Tue publishing covers prior ISO week)" do
-      let(:fred) { build_provider("*/30 21-23 * * 1-2", cadence: "weekly") }
-
-      it "returns 0 when end_date is in the week FRED's last batch covered" do
-        # Today 2026-04-21 (Tue). Last Monday fire Apr 20 covers prior ISO week Apr 13-19. end_date = 2026-04-19 → same
-        # ISO week bucket as Apr 13 → 0 missed.
-        fred.stub(:end_date, "2026-04-19") do
-          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(0)
-        end
-      end
-
-      it "returns 0 when end_date's ISO week matches expected coverage bucket" do
-        # end_date = Saturday 2026-04-18 (same ISO week as Apr 13-19). Still 0 missed.
-        fred.stub(:end_date, "2026-04-18") do
-          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(0)
-        end
-      end
-
-      it "returns 1 when end_date is one ISO week behind expected" do
-        # end_date in week Apr 6-12; expected = week Apr 13-19 → 1 missed.
-        fred.stub(:end_date, "2026-04-12") do
-          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 21))).must_equal(1)
-        end
-      end
-
-      it "returns 0 on Sunday before Monday batch arrives (expected is 2 weeks ago)" do
-        # Today Sun 2026-04-19. Last Mon fire Apr 13 covers prior week Apr 6-12. end_date = Apr 12 (covered) → 0.
-        fred.stub(:end_date, "2026-04-12") do
-          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 19))).must_equal(0)
-        end
-      end
-
-      it "reports 1 missed on Monday morning when prior week's batch did not arrive" do
-        # Today Mon 2026-04-20 (FRED's first publish day of this ISO week). end_date Sun 2026-04-12 = end of ISO week
-        # Apr 6-12; expected = ISO week Apr 13-19 → 1 missed.
-        fred.stub(:end_date, "2026-04-12") do
-          _(fred.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(1)
-        end
+        _(rollups).must_equal([["TST.B", 0.0390625], ["TST.X", 0.5]])
       end
     end
 
-    describe "with monthly cadence (HKMA-style, day-of-month publishing covers prior month)" do
-      let(:hkma) { build_provider("*/30 1-10 3-12 * *", cadence: "monthly") }
-
-      it "returns 0 when current with March data and today is past April's window" do
-        hkma.stub(:end_date, "2026-03-31") do
-          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(0)
-        end
-      end
-
-      it "returns 0 when current with March data and today is before April's window" do
-        hkma.stub(:end_date, "2026-03-31") do
-          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 2))).must_equal(0)
-        end
-      end
-
-      it "returns 0 when last business day is not last calendar day (March 30 edge)" do
-        # Nov 30 2025 was a Sunday; last HKMA date was Nov 29. Should still count as Nov covered.
-        hkma.stub(:end_date, "2025-11-29") do
-          _(hkma.publishes_missed(reference_date: Date.new(2025, 12, 15))).must_equal(0)
-        end
-      end
-
-      it "returns 1 when April batch did not arrive and today is past May's window" do
-        hkma.stub(:end_date, "2026-03-31") do
-          _(hkma.publishes_missed(reference_date: Date.new(2026, 5, 15))).must_equal(1)
-        end
-      end
-
-      it "returns 2 when two monthly batches are missed" do
-        hkma.stub(:end_date, "2026-01-31") do
-          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 20))).must_equal(2)
-        end
-      end
-
-      it "reports 1 missed on the first publish day of the window when prior month did not arrive" do
-        # Today Apr 3 = first day of HKMA's publish window (DOM 3-12). end_date Feb 28; expected = March → 1 missed.
-        hkma.stub(:end_date, "2026-02-28") do
-          _(hkma.publishes_missed(reference_date: Date.new(2026, 4, 3))).must_equal(1)
-        end
-      end
-    end
-
-    describe "with quarterly cadence (Treasury-style, fires early in the quarter)" do
-      let(:ust) { build_provider("0 12 1-10 1,4,7,10 *", cadence: "quarterly") }
-
-      it "returns 0 when the latest quarter-end is the last one due" do
-        ust.stub(:end_date, "2026-03-31") do
-          _(ust.publishes_missed(reference_date: Date.new(2026, 5, 20))).must_equal(0)
-        end
-      end
-
-      it "counts each quarter missed once its window has started" do
-        ust.stub(:end_date, "2025-09-30") do
-          _(ust.publishes_missed(reference_date: Date.new(2026, 5, 20))).must_equal(2)
-        end
-      end
-    end
-
-    describe "with monthly cadence on a daily weekday schedule (CBC-style)" do
-      # CBC polls a multi-currency open-data file refreshed in monthly batches in arrears: April's daily rows all land
-      # in early May. The schedule stays daily so the scheduler keeps polling and catches each batch promptly, but the
-      # cadence is monthly so the pre-batch lag is not counted as missed.
-      it "reports no missed publishes once the cadence is monthly" do
-        cbc = build_provider("*/30 8-10 * * 1-5", cadence: "monthly")
-
-        # end_date Apr 30, today late May: April is the latest expected bucket until the May batch is due, so nothing is
-        # missed.
-        cbc.stub(:end_date, "2026-04-30") do
-          _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_equal(0)
-        end
-      end
-
-      it "would report a large count under the old daily cadence" do
-        cbc = build_provider("*/30 8-10 * * 1-5", cadence: "daily")
-
-        # Same end_date and reference, but daily cadence counts every weekday since the last data date — the false
-        # pre-batch peak.
-        cbc.stub(:end_date, "2026-04-30") do
-          _(cbc.publishes_missed(reference_date: Date.new(2026, 5, 29))).must_be(:>=, 20)
-        end
+    it "judges missed publishes on the first default's schedule from the provider's latest observation" do
+      provider.stub(:end_date, "2026-04-13") do
+        _(provider.publishes_missed(reference_date: Date.new(2026, 4, 17))).must_equal(3)
       end
     end
   end
@@ -342,7 +276,7 @@ describe Provider do
         provider.backfill
       end
 
-      record = Rate.where(provider: provider.key, date: import_date).first
+      record = Rate.where(dataset_key: provider.key, date: import_date).first
 
       _(record.base).must_equal("EUR")
       _(record.quote).must_equal("USD")
@@ -355,7 +289,7 @@ describe Provider do
         provider.backfill(after: Date.today - 1)
       end
 
-      _(Rate.where(provider: provider.key, date: import_date).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, date: import_date).count).must_equal(1)
     end
 
     describe "from coverage_start" do
@@ -372,7 +306,7 @@ describe Provider do
           provider.stub(:adapter, exclusive_adapter) { provider.backfill }
         end
 
-        _(Rate.where(provider: provider.key).min(:date)).must_equal(coverage_start.to_s)
+        _(Rate.where(dataset_key: provider.key).min(:date)).must_equal(coverage_start.to_s)
       end
 
       it "stores nothing dated before coverage_start" do
@@ -387,7 +321,7 @@ describe Provider do
           provider.stub(:adapter, stray_adapter) { provider.backfill(after: coverage_start) }
         end
 
-        _(Rate.where(provider: provider.key).min(:date)).must_equal(coverage_start.to_s)
+        _(Rate.where(dataset_key: provider.key).min(:date)).must_equal(coverage_start.to_s)
       end
     end
 
@@ -397,7 +331,7 @@ describe Provider do
       let(:revising_adapter) { Class.new(adapter) { def self.revises? = true } }
 
       before do
-        Rate.create(provider: provider.key, date: import_date, base: "EUR", quote: "USD", mid: 1.0)
+        Rate.create(dataset_key: provider.key, date: import_date, base: "EUR", quote: "USD", mid: 1.0)
       end
 
       it "warns when a fetched value differs from the stored row" do
@@ -415,7 +349,7 @@ describe Provider do
           provider.stub(:adapter, revising_adapter) { provider.backfill(after: import_date - 1) }
         end
 
-        _(Rate.where(provider: provider.key, date: import_date, quote: "USD").first.rate).must_equal(1.0)
+        _(Rate.where(dataset_key: provider.key, date: import_date, quote: "USD").first.rate).must_equal(1.0)
       end
 
       it "stays quiet for an adapter that does not revise" do
@@ -442,7 +376,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, date: ahead).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, date: ahead).count).must_equal(1)
     end
 
     it "retains unrecognised currency codes" do
@@ -459,7 +393,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "SDR").count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "SDR").count).must_equal(1)
     end
 
     it "excludes non-positive rates" do
@@ -477,9 +411,9 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, date: Date.today, quote: "USD").count).must_equal(1)
-      _(Rate.where(provider: provider.key, date: Date.today, quote: "GBP").count).must_equal(0)
-      _(Rate.where(provider: provider.key, date: Date.today, quote: "JPY").count).must_equal(0)
+      _(Rate.where(dataset_key: provider.key, date: Date.today, quote: "USD").count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, date: Date.today, quote: "GBP").count).must_equal(0)
+      _(Rate.where(dataset_key: provider.key, date: Date.today, quote: "JPY").count).must_equal(0)
     end
 
     it "strips float noise from synthesized rates on the way in" do
@@ -498,8 +432,8 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(181.6432)
-      _(Rate.where(provider: provider.key, quote: "GBP", date: Date.today).first.rate).must_equal(7.4492)
+      _(Rate.where(dataset_key: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(181.6432)
+      _(Rate.where(dataset_key: provider.key, quote: "GBP", date: Date.today).first.rate).must_equal(7.4492)
     end
 
     it "keeps every digit a provider actually publishes" do
@@ -513,7 +447,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(0.0001234567891)
+      _(Rate.where(dataset_key: provider.key, quote: "USD", date: Date.today).first.rate).must_equal(0.0001234567891)
     end
 
     it "drops records dated implausibly far in the future" do
@@ -532,8 +466,8 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today).count).must_equal(1)
-      _(Rate.where(provider: provider.key, quote: "GBP").count).must_equal(0)
+      _(Rate.where(dataset_key: provider.key, quote: "USD", date: Date.today).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "GBP").count).must_equal(0)
     end
 
     it "keeps records dated within the near-future grace window" do
@@ -549,7 +483,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "USD", date: Date.today + 1).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "USD", date: Date.today + 1).count).must_equal(1)
     end
 
     it "retains records dated on or after a defunct currency's terminal date" do
@@ -571,10 +505,10 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(1)
-      _(Rate.where(provider: provider.key, base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(1)
-      _(Rate.where(provider: provider.key, quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
-      _(Rate.where(provider: provider.key, quote: "USD", date: Date.new(2016, 7, 1)).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "BYR", date: Date.new(2016, 7, 1)).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, base: "BYR", date: Date.new(2017, 1, 1)).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "BYR", date: Date.new(2016, 6, 30)).count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "USD", date: Date.new(2016, 7, 1)).count).must_equal(1)
     end
 
     it "leaves records for codes not in the terminal-date table unchanged" do
@@ -591,7 +525,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, date: Date.today).count).must_equal(2)
+      _(Rate.where(dataset_key: provider.key, date: Date.today).count).must_equal(2)
     end
 
     it "ingests XDR" do
@@ -608,7 +542,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(Rate.where(provider: provider.key, quote: "XDR").count).must_equal(1)
+      _(Rate.where(dataset_key: provider.key, quote: "XDR").count).must_equal(1)
     end
 
     it "requests a debounced cache purge when new rates are inserted" do
@@ -664,10 +598,10 @@ describe Provider do
           end
 
           _(refreshed).must_be_empty
-          _(Rate.where(provider: key, date: import_date).first.rate).must_equal(1.1)
-          _(WeeklyRate.where(provider: key, bucket_date: "2025-01-29").first.rate).must_equal(1.1)
-          _(MonthlyRate.where(provider: key, bucket_date: "2025-01-01").first.rate).must_equal(1.1)
-          coverages = CurrencyCoverage.where(provider_key: key).order(:iso_code)
+          _(Rate.where(dataset_key: key, date: import_date).first.rate).must_equal(1.1)
+          _(WeeklyRate.where(dataset_key: key, bucket_date: "2025-01-29").first.rate).must_equal(1.1)
+          _(MonthlyRate.where(dataset_key: key, bucket_date: "2025-01-01").first.rate).must_equal(1.1)
+          coverages = CurrencyCoverage.where(dataset_key: key).order(:iso_code)
 
           _(coverages.select_map(:iso_code).join(",")).must_equal("EUR,USD")
           coverages.each do |coverage|
@@ -696,7 +630,7 @@ describe Provider do
 
     it "skips when already up to date" do
       Rate.dataset.insert(
-        date: Date.today, provider: provider.key, base: "EUR", quote: "USD", mid: 1.1,
+        date: Date.today, dataset_key: provider.key, base: "EUR", quote: "USD", mid: 1.1,
       )
 
       called = false
@@ -717,7 +651,7 @@ describe Provider do
     it "chunks when adapter has backfill_range" do
       since = Date.today - 90
       Rate.dataset.insert(
-        date: since, provider: provider.key, base: "EUR", quote: "USD", mid: 1.0,
+        date: since, dataset_key: provider.key, base: "EUR", quote: "USD", mid: 1.0,
       )
 
       ranged_adapter = Class.new(adapter) do
@@ -744,7 +678,7 @@ describe Provider do
         provider.backfill
       end
 
-      _(CurrencyCoverage.where(provider_key: provider.key).count).must_be(:>, 0)
+      _(CurrencyCoverage.where(dataset_key: provider.key).count).must_be(:>, 0)
       _(Currency.where(iso_code: "USD").count).must_equal(1)
       _(Currency.where(iso_code: "EUR").count).must_equal(1)
     end
@@ -756,7 +690,7 @@ describe Provider do
         provider.backfill
       end
 
-      coverage = CurrencyCoverage.where(provider_key: provider.key, iso_code: "USD").first
+      coverage = CurrencyCoverage.where(dataset_key: provider.key, iso_code: "USD").first
 
       _(coverage.start_date.to_s).must_equal(import_date.to_s)
       _(coverage.end_date.to_s).must_equal(import_date.to_s)
@@ -777,7 +711,7 @@ describe Provider do
       end
 
       _(logged).must_equal("#{provider.key}: RuntimeError: boom, skipping")
-      _(Rate.where(provider: provider.key, date: import_date).count).must_equal(0)
+      _(Rate.where(dataset_key: provider.key, date: import_date).count).must_equal(0)
     end
   end
 end

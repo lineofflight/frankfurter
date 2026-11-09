@@ -76,8 +76,8 @@ transition_bases = ["USD", "EUR", "LTL", "AED"]
       d1 = Date.new(2024, 1, 1)
       d2 = d1 + 40
       model.source.dataset.multi_insert([
-        { bucket_date: d1, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8 },
-        { bucket_date: d2, provider: "ECB", base: "EUR", quote: "JPY", rate: 160.0 },
+        { bucket_date: d1, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.8 },
+        { bucket_date: d2, dataset_key: "ECB", base: "EUR", quote: "JPY", rate: 160.0 },
       ])
       model.rebuild
       params = { from: d2.to_s, to: (d2 + 1).to_s, group:, base: "USD" }
@@ -90,7 +90,7 @@ transition_bases = ["USD", "EUR", "LTL", "AED"]
       model.source.dataset.delete
       date = Date.new(2015, 1, 1)
       rows = transition_pairs.map do |provider, base, quote, rate|
-        { bucket_date: date, provider:, base:, quote:, rate: }
+        { bucket_date: date, dataset_key: provider, base:, quote:, rate: }
       end
       model.source.dataset.multi_insert(rows)
       model.rebuild
@@ -135,7 +135,7 @@ transition_bases = ["USD", "EUR", "LTL", "AED"]
       model.source.dataset.delete
       dates = [Date.new(2005, 12, 29), Date.new(2006, 1, 5), Date.new(2020, 1, 2)]
       dates.each do |date|
-        model.source.dataset.insert(bucket_date: date, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8)
+        model.source.dataset.insert(bucket_date: date, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.8)
       end
       model.rebuild
       params = { from: "2005-12-30", to: "2020-01-03", base: "USD", quotes: "EUR", group: }

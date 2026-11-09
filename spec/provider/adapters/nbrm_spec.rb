@@ -40,7 +40,7 @@ class Provider < Sequel::Model(:providers)
         end
         batch = ->(**, &block) { block.call(rows) }
         NBRM.stub(:fetch_each, batch) { Provider["NBRM"].backfill(after: Date.new(1998, 12, 30)) }
-        stored = Rate.where(provider: "NBRM", base: ["XBA", "XEU", "EUR"]).order(:date)
+        stored = Rate.where(dataset_key: "NBRM", base: ["XBA", "XEU", "EUR"]).order(:date)
           .select_map([:date, :base, :rate]).map { |date, base, rate| [date.to_s, base, rate] }
 
         _(rows.map { |r| r[:base] }).wont_include("XBA")

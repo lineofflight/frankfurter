@@ -22,9 +22,6 @@ require "bucket"
 # keeps the tables serving.
 Sequel.migration do
   up do
-    require "currency_summary"
-    require "rate_spike"
-
     changes = [
       { provider: "AMCM", from: "LIQ" },
       { provider: "CNB", from: "BEC", to: "BEF" },
@@ -41,14 +38,10 @@ Sequel.migration do
       next if changes.all? { |change| scope_for[change].empty? }
 
       buckets = Hash.new { |hash, key| hash[key] = [] }
-      codes = Hash.new { |hash, key| hash[key] = [] }
-      dates = Hash.new { |hash, key| hash[key] = [] }
       changes.each do |change|
         provider = change[:provider]
         scope = scope_for[change]
         rollups.each { |table, bucket| buckets[[provider, table]] |= scope.select_map(bucket) }
-        codes[provider] |= [change[:from], change[:to]].compact
-        dates[provider] |= scope.select_map(:date)
 
         # Not an exchange rate, so there is no code to move it to.
         unless change[:to]
@@ -84,8 +77,7 @@ Sequel.migration do
             .group(:provider, :base, :quote, bucket),
         )
       end
-      codes.each { |provider, iso_codes| CurrencySummary.refresh(self, iso_codes, provider:) }
-      dates.each { |provider, list| RateSpike.refresh(provider, list) }
+      # Coverage and spike flags are rebuilt with every derived table after the last migration (db:migrate).
     end
   end
 

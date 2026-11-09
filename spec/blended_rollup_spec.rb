@@ -20,9 +20,9 @@ end
       @model.dataset.delete
       @date = Date.new(2024, 1, 1)
       source.dataset.multi_insert([
-        { bucket_date: @date, provider: "ECB", base: "EUR", quote: "USD", rate: 2.0 },
-        { bucket_date: @date, provider: "ECB", base: "EUR", quote: "CHF", rate: 1.0 },
-        { bucket_date: @date, provider: "BOC", base: "USD", quote: "EUR", rate: 0.5 },
+        { bucket_date: @date, dataset_key: "ECB", base: "EUR", quote: "USD", rate: 2.0 },
+        { bucket_date: @date, dataset_key: "ECB", base: "EUR", quote: "CHF", rate: 1.0 },
+        { bucket_date: @date, dataset_key: "BOC", base: "USD", quote: "EUR", rate: 0.5 },
       ])
     end
 
@@ -36,7 +36,7 @@ end
 
     it "refreshes changed buckets and leaves other stored values untouched" do
       other = @date + 40
-      source.dataset.insert(bucket_date: other, provider: "ECB", base: "USD", quote: "EUR", rate: 0.75)
+      source.dataset.insert(bucket_date: other, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.75)
       @model.rebuild
       source.dataset.where(bucket_date: @date, quote: "CHF").update(rate: 1.5)
       @model.refresh([@date])
@@ -47,7 +47,7 @@ end
 
     it "removes every stored bucket whose source disappeared" do
       other = @date + 40
-      source.dataset.insert(bucket_date: other, provider: "ECB", base: "USD", quote: "EUR", rate: 0.75)
+      source.dataset.insert(bucket_date: other, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.75)
       @model.rebuild
       source.dataset.where(bucket_date: @date).delete
       @model.rebuild
@@ -62,7 +62,7 @@ end
 
     it "falls back when any requested source bucket has not been materialized" do
       other = @date + 40
-      source.dataset.insert(bucket_date: other, provider: "ECB", base: "USD", quote: "EUR", rate: 0.75)
+      source.dataset.insert(bucket_date: other, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.75)
       @model.refresh([@date])
 
       _(@model.ready?).must_equal(false)
@@ -73,7 +73,7 @@ end
     it "does not snap back over a bucket without a USD bridge" do
       @model.rebuild
       empty = @date + 40
-      source.dataset.insert(bucket_date: empty, provider: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
+      source.dataset.insert(bucket_date: empty, dataset_key: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
       @model.refresh([empty])
 
       _(@model.read(empty..empty)).must_be_nil
@@ -84,7 +84,7 @@ end
       @model.rebuild
       before = @model.where(bucket_date: @date, quote: "EUR").get(:rate)
       other = @date + 40
-      source.dataset.insert(bucket_date: other, provider: "ECB", base: "USD", quote: "EUR", rate: 0.75)
+      source.dataset.insert(bucket_date: other, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.75)
       calls = []
       original = @model.method(:refresh)
       @model.stub(:refresh, lambda { |dates|
@@ -101,7 +101,7 @@ end
     it "does not report a changed cache when missing buckets have no computable blend" do
       _(@model.respond_to?(:populate)).must_equal(true)
       @model.rebuild
-      source.dataset.insert(bucket_date: @date + 40, provider: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
+      source.dataset.insert(bucket_date: @date + 40, dataset_key: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
 
       _(@model.populate).must_equal(0)
     end
@@ -143,7 +143,7 @@ end
       source.dataset.delete
       dates = Array.new(205) { |i| @date + (i * 7) }
       dates.each do |date|
-        source.dataset.insert(bucket_date: date, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8)
+        source.dataset.insert(bucket_date: date, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.8)
       end
       sizes = []
       logger = Object.new
@@ -202,11 +202,11 @@ describe "Grouped blend ingestion" do
     end
 
     _(purged).must_equal(true)
-    stored = Rate.where(provider: @provider.key, date: @date, base: "EUR", quote: "USD")
+    stored = Rate.where(dataset_key: @provider.key, date: @date, base: "EUR", quote: "USD")
 
     _(stored.get([:mid, :bid, :ask, :rate])).must_equal([nil, 1.2, 1.4, 1.3])
     [WeeklyRate, MonthlyRate].zip(buckets).each do |model, bucket|
-      _(model.where(provider: @provider.key, bucket_date: bucket, base: "EUR", quote: "USD").get(:rate))
+      _(model.where(dataset_key: @provider.key, bucket_date: bucket, base: "EUR", quote: "USD").get(:rate))
         .must_equal(1.3)
     end
     models.zip(buckets, before).each do |model, bucket, prior|
@@ -229,7 +229,7 @@ describe "Grouped blend ingestion" do
       end
     end
 
-    _(Rate.where(provider: "BCB", date: @date).count).must_equal(0)
+    _(Rate.where(dataset_key: "BCB", date: @date).count).must_equal(0)
     _(WeeklyRate.dataset.count).must_equal(weekly)
     _(MonthlyRate.dataset.count).must_equal(monthly)
     models.zip(before).each do |model, prior|
@@ -250,9 +250,9 @@ describe "Grouped blend ingestion" do
       end
     end
 
-    _(Rate.where(provider: "UST", date: @date).count).must_equal(1)
-    _(WeeklyRate.where(provider: "UST").count).must_be(:>, 0)
-    _(MonthlyRate.where(provider: "UST").count).must_be(:>, 0)
+    _(Rate.where(dataset_key: "UST", date: @date).count).must_equal(1)
+    _(WeeklyRate.where(dataset_key: "UST").count).must_be(:>, 0)
+    _(MonthlyRate.where(dataset_key: "UST").count).must_be(:>, 0)
     _(called).must_equal(false)
   end
 
@@ -283,7 +283,7 @@ describe "Grouped blend ingestion" do
     end
 
     _(batches).must_equal(2)
-    _(Rate.where(provider: "BCB").count).must_equal(0)
+    _(Rate.where(dataset_key: "BCB").count).must_equal(0)
     _([WeeklyRate.count, MonthlyRate.count]).must_equal(source_counts)
     models.zip(before).each do |model, prior|
       _(model.dataset.order(:bucket_date, :quote).all.map(&:values)).must_equal(prior)
@@ -302,14 +302,14 @@ describe "Grouped read consistency" do
         database.run("PRAGMA journal_mode=WAL")
         database.create_table(:rates) do
           Date :date
-          String :provider
+          String :dataset_key
           String :base
           String :quote
           Float :rate
         end
         database.create_table(:weekly_rates) do
           Date :bucket_date
-          String :provider
+          String :dataset_key
           String :base
           String :quote
           Float :rate
@@ -329,7 +329,7 @@ describe "Grouped read consistency" do
         end
         model.define_singleton_method(:source) { source }
         date = Date.new(2024, 1, 1)
-        database[:weekly_rates].insert(bucket_date: date, provider: "ECB", base: "USD", quote: "EUR", rate: 0.8)
+        database[:weekly_rates].insert(bucket_date: date, dataset_key: "ECB", base: "USD", quote: "EUR", rate: 0.8)
         model.refresh([date])
         writer = Sequel.sqlite(File.join(dir, "snapshot.sqlite3"))
         changed = false

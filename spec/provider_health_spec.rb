@@ -98,17 +98,17 @@ describe "provider_health" do
     end
   end
 
-  describe "issue lifecycle" do
-    def audit(entries, open_issues)
-      commands = []
-      stub(:fetch_providers, entries) do
-        stub(:open_issues_by_key, open_issues) do
-          stub(:gh, ->(*args) { commands << args }) { main }
-        end
+  def audit(entries, open_issues)
+    commands = []
+    stub(:fetch_providers, entries) do
+      stub(:open_issues_by_key, open_issues) do
+        stub(:gh, ->(*args) { commands << args }) { main }
       end
-      commands
     end
+    commands
+  end
 
+  describe "issue lifecycle" do
     it "opens an issue naming the provider and unknown currency" do
       entry = provider("CBKKW", "daily", 0).merge("unknown_currencies" => ["ECS"])
       commands = audit([entry], {})
@@ -133,6 +133,65 @@ describe "provider_health" do
       _(commands.map { |args| args.take(3) }).must_equal([
         ["issue", "comment", "123"], ["issue", "close", "123"],
       ])
+    end
+  end
+
+  describe "datasets" do
+    def nbp(table_a_missed, table_b_missed)
+      provider("NBP", "daily", table_a_missed).merge(
+        "datasets" => [
+          provider("NBP.A", "daily", table_a_missed).except("name"),
+          provider("NBP.B", "weekly", table_b_missed).except("name"),
+        ],
+      )
+    end
+
+    it "checks a provider with several datasets per dataset, under the provider's name" do
+      entries = subjects([nbp(0, 7), provider("ECB", "daily", 0).merge("datasets" => [provider("ECB", "daily", 0)])])
+
+      _(entries.map { |entry| entry["key"] }).must_equal(["NBP.A", "NBP.B", "ECB"])
+      _(entries.map { |entry| entry["name"] }.uniq).must_equal(["NBP Bank", "ECB Bank"])
+      _(flagged(entries).map { |entry| entry["key"] }).must_equal(["NBP.B"])
+    end
+
+    it "judges a provider without a datasets array as a whole" do
+      _(subjects([provider("ECB", "daily", 9)]).map { |entry| entry["key"] }).must_equal(["ECB"])
+    end
+
+    it "opens an issue for the stale dataset alone, named and marked by its key" do
+      commands = audit([nbp(0, 7)], {})
+
+      _(commands.size).must_equal(1)
+      _(commands.first.take(2)).must_equal(["issue", "create"])
+      _(commands.first).must_include("Stale provider: NBP.B")
+      _(commands.first.last).must_include("<!-- provider-health: NBP.B -->")
+    end
+
+    it "edits the dataset's open issue instead of opening another" do
+      commands = audit([nbp(0, 7)], { "NBP.B" => 456 })
+
+      _(commands.map { |args| args.take(3) }).must_equal([["issue", "edit", "456"]])
+      _(commands.first).must_include("Stale provider: NBP.B")
+    end
+
+    it "closes an issue opened for the whole provider before it was checked per dataset" do
+      commands = audit([nbp(0, 7)], { "NBP" => 123 })
+
+      _(commands.map { |args| args.take(3) }).must_equal([
+        ["issue", "create", "--repo"], ["issue", "comment", "123"], ["issue", "close", "123"],
+      ])
+      _(commands[1].last).must_equal("NBP is now checked per dataset (NBP.A, NBP.B). Closing.")
+    end
+
+    it "finds open issues by dataset keys" do
+      issues = [
+        { "number" => 1, "body" => "<!-- provider-health: NBP.B -->" },
+        { "number" => 2, "body" => "<!-- provider-health: ECB -->" },
+      ]
+
+      stub(:gh, JSON.generate(issues)) do
+        _(open_issues_by_key).must_equal({ "NBP.B" => 1, "ECB" => 2 })
+      end
     end
   end
 

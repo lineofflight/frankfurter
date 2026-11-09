@@ -27,7 +27,7 @@ module Versions
         def fetch_data
           require "rate"
 
-          scope = Rate.where(provider: "ECB").between(date)
+          scope = Rate.where(dataset_key: "ECB").between(date)
           scope = scope.only(*(symbols + [base])) if symbols
 
           scope.naked

@@ -14,9 +14,9 @@ describe "Non-currency provider observations" do
   before do
     [Rate, WeeklyRate, MonthlyRate].each { |model| model.dataset.delete }
     Rate.dataset.multi_insert([
-      { provider: "NB", date: date - 3, base: "USD", quote: "NOK", mid: 10.0 },
-      { provider: "NB", date: date - 3, base: "EUR", quote: "NOK", mid: 11.0 },
-      { provider: "ECB", date: date - 7, base: "EUR", quote: "USD", mid: 1.2 },
+      { dataset_key: "NB", date: date - 3, base: "USD", quote: "NOK", mid: 10.0 },
+      { dataset_key: "NB", date: date - 3, base: "EUR", quote: "NOK", mid: 11.0 },
+      { dataset_key: "ECB", date: date - 7, base: "EUR", quote: "USD", mid: 1.2 },
     ])
     Provider["NB"].send(:refresh_rollups, [date - 3])
     Provider["ECB"].send(:refresh_rollups, [date - 7])
@@ -24,8 +24,8 @@ describe "Non-currency provider observations" do
 
   def add_indices
     Rate.dataset.multi_insert([
-      { provider: "NB", date:, base: "I44", quote: "NOK", mid: 110.6 },
-      { provider: "NB", date:, base: "TWI", quote: "NOK", mid: 115.432 },
+      { dataset_key: "NB", date:, base: "I44", quote: "NOK", mid: 110.6 },
+      { dataset_key: "NB", date:, base: "TWI", quote: "NOK", mid: 115.432 },
     ])
     Provider["NB"].send(:refresh_rollups, [date])
     Provider["NB"].send(:refresh_currency_summaries, ["I44", "TWI", "NOK"])
@@ -79,7 +79,7 @@ describe "Non-currency provider observations" do
     _(Oj.load(last_response.body)["rate"]).must_equal(0.0090416)
 
     [Rate, WeeklyRate, MonthlyRate].each do |model|
-      _(model.where(provider: "NB", base: ["I44", "TWI"]).count).must_equal(2)
+      _(model.where(dataset_key: "NB", base: ["I44", "TWI"]).count).must_equal(2)
       _(model.blendable.where(base: ["I44", "TWI"]).count).must_equal(0)
     end
 
@@ -104,8 +104,8 @@ describe "Non-currency provider observations" do
   it "acknowledges reviewed indices but still reports new labels and other providers" do
     add_indices
     Rate.dataset.multi_insert([
-      { provider: "NB", date:, base: "ZZZ", quote: "NOK", mid: 100 },
-      { provider: "ECB", date:, base: "EUR", quote: "I44", mid: 100 },
+      { dataset_key: "NB", date:, base: "ZZZ", quote: "NOK", mid: 100 },
+      { dataset_key: "ECB", date:, base: "EUR", quote: "I44", mid: 100 },
     ])
     Provider["NB"].send(:refresh_currency_summaries, ["ZZZ"])
     Provider["ECB"].send(:refresh_currency_summaries, ["I44"])
@@ -122,7 +122,7 @@ describe "Non-currency provider observations" do
 
   it "ingests RBA's index without changing currency conversions or stored blends" do
     provider = Provider["RBA"]
-    Rate.dataset.insert(provider: "RBA", date: date - 3, base: "AUD", quote: "USD", mid: 0.7)
+    Rate.dataset.insert(dataset_key: "RBA", date: date - 3, base: "AUD", quote: "USD", mid: 0.7)
     provider.send(:refresh_rollups, [date - 3])
     models = [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate]
     models.each(&:rebuild)
@@ -157,7 +157,7 @@ describe "Non-currency provider observations" do
     _(Provider["RBA"].unknown_currencies).must_be_empty
     _(Currency.find("FXRTWI")).must_be_nil
     [Rate, WeeklyRate, MonthlyRate].each do |model|
-      _(model.where(provider: "RBA", quote: "FXRTWI").count).must_equal(1)
+      _(model.where(dataset_key: "RBA", quote: "FXRTWI").count).must_equal(1)
     end
   end
 end

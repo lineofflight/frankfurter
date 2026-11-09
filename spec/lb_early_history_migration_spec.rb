@@ -6,17 +6,15 @@ require "tmpdir"
 
 describe "LB early history migration" do
   def run_migration_script(script)
+    # The migration runs on its own schema, before provider datasets, so the setup touches tables only.
     setup = <<~RUBY
       require "db"
+      require "bucket"
       Sequel.extension(:migration)
-      require "provider"
-      require "blended_weekly_rate"
-      require "blended_monthly_rate"
-      Provider.seed
-      Cache.define_singleton_method(:purge) { raise IOError, "cache unavailable" }
     RUBY
     Dir.mktmpdir do |dir|
-      env = { "DATABASE_URL" => "sqlite://#{File.join(dir, "migration.sqlite3")}", "APP_ENV" => "test" }
+      path = File.join(dir, "migration.sqlite3")
+      env = { "DATABASE_URL" => "sqlite://#{path}", "APP_ENV" => "test", "CLOUDFLARE_API_TOKEN" => nil }
       initialize = 'require "db"; Sequel.extension(:migration); Sequel::Migrator.run(DB, "db/migrate", target: 47)'
       output, status = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", initialize)
 
@@ -27,7 +25,7 @@ describe "LB early history migration" do
     end
   end
 
-  it "drops ruble copies, rescales the old Belarusian ruble and leaves the blends to a rebuild" do
+  it "drops ruble copies, rescales the old Belarusian ruble, and the upgrade rebuilds what derives from them" do
     run_migration_script(<<~'RUBY')
       rows = [
         { provider: "LB", date: "1995-07-10", base: "RUR", quote: "LTL", mid: 0.000873 },
@@ -42,7 +40,6 @@ describe "LB early history migration" do
         { provider: "INFOREURO", date: "1995-02-01", base: "XEU", quote: "BYB", mid: 9000.0 },
       ]
       DB[:rates].multi_insert(rows)
-      CurrencySummary.refresh(DB, rows.flat_map { |row| row.values_at(:base, :quote) })
       [:weekly_rates, :monthly_rates].zip([Bucket.week, Bucket.month]).each do |table, bucket|
         DB[table].insert(
           [:bucket_date, :provider, :base, :quote, :rate],
@@ -52,16 +49,13 @@ describe "LB early history migration" do
       end
       DB[:blended_rates].insert(date: "1995-07-10", quote: "TMM", rate: 5000.0)
       DB[:rate_spikes].insert(provider: "LB", date: "1994-08-19", base: "BYB", quote: "LTL")
-      blends = [BlendedRate, BlendedWeeklyRate, BlendedMonthlyRate]
-      snapshot = -> { blends.to_h { |model| [model, model.dataset.order(*model.primary_key).all] } }
-      before = snapshot.call
 
       require "rake"
       load "lib/tasks/db.rake"
       Rake::Task["db:setup"].invoke
       abort "migration incomplete" unless DB[:schema_info].get(:version) >= 48
 
-      stored = DB[:rates].order(:provider, :date, :base).select_map([:provider, :date, :base, :quote, :mid])
+      stored = DB[:rates].order(:dataset_key, :date, :base).select_map([:dataset_key, :date, :base, :quote, :mid])
         .map { |provider, date, base, quote, mid| [provider, date.to_s, base, quote, mid] }
       expected = [
         ["INFOREURO", "1995-02-01", "XEU", "BYB", 9000.0],
@@ -74,23 +68,22 @@ describe "LB early history migration" do
       ]
       abort "wrong repaired rows: #{stored.inspect}" unless stored == expected
 
-      weekly = ->(base) { DB[:weekly_rates].where(provider: "LB", base:).select_map(:rate) }
+      weekly = ->(base) { DB[:weekly_rates].where(dataset_key: "LB", base:).select_map(:rate) }
       abort "rollup kept a copy" unless weekly["TMM"] == [0.002759] && weekly["GER"].empty?
       abort "rollup kept the old ruble" unless weekly["BYB"].sort == [0.0014, 0.001421]
       abort "rollup kept YUN" unless weekly["YUN"].empty? && weekly["YUM"] == [0.7935]
 
       coverage = ->(code) do
-        DB[:currency_coverages].where(provider_key: "LB", iso_code: code).select_map([:start_date, :end_date])
+        DB[:currency_coverages].where(dataset_key: "LB", iso_code: code).select_map([:start_date, :end_date])
           .map { |dates| dates.map(&:to_s) }
       end
       abort "TMM coverage" unless coverage["TMM"] == [["1995-11-30", "1995-11-30"]]
       abort "TJR coverage" unless coverage["TJR"] == [["1995-07-11", "1995-07-11"]]
       abort "YUM coverage" unless coverage["YUM"] == [["1996-05-07", "1996-05-07"]]
-      abort "kept unknown codes" unless DB[:currency_exclusions].where(provider_key: "LB").empty?
+      abort "kept unknown codes" unless DB[:currency_exclusions].where(dataset_key: "LB").empty?
 
-      abort "kept a stale spike flag" unless DB[:rate_spikes].where(provider: "LB").empty?
-      abort "touched the blends" unless snapshot.call == before
-      DB.disconnect
+      abort "kept a stale spike flag" unless DB[:rate_spikes].where(dataset_key: "LB").empty?
+            DB.disconnect
     RUBY
   end
 
@@ -103,8 +96,8 @@ describe "LB early history migration" do
       ])
       DB[:blended_rates].insert(date: "1995-11-30", quote: "TMM", rate: 1450.0)
       before = DB[:rates].order(:provider).all
-      Sequel::Migrator.run(DB, "db/migrate")
-      abort "migration incomplete" unless DB[:schema_info].get(:version) >= 48
+      Sequel::Migrator.run(DB, "db/migrate", target: 48)
+      abort "migration incomplete" unless DB[:schema_info].get(:version) == 48
       abort "changed unaffected rows" unless DB[:rates].order(:provider).all == before
       abort "touched the blends" unless DB[:blended_rates].count == 1
       DB.disconnect

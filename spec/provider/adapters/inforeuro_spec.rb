@@ -60,7 +60,7 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "keeps monthly observations out of blends" do
-        _(Provider["INFOREURO"].blends?).must_equal(false)
+        _(Dataset["INFOREURO"].blends?).must_equal(false)
       end
 
       it "preserves long published rates through ingestion and the provider API" do

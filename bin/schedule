@@ -62,15 +62,26 @@ Provider.all.shuffle.each_with_index do |provider, index|
   end
 end
 
-# Schedule each provider based on its publish_schedule cron expression.
-Provider.all.each do |provider|
-  next unless provider.publish_schedule
+# Each dataset's publish_schedule triggers its provider's backfill, which fetches every dataset the provider publishes.
+# Datasets of one provider can fire together (NBP's two tables on Wednesdays), so a backfill already running for that
+# provider covers the other.
+locks = Provider.all.to_h { |provider| [provider.key, Mutex.new] }
+Dataset.all.each do |dataset|
+  next unless dataset.publish_schedule
 
+  provider = dataset.provider
   if dry_run
-    puts "cron: #{provider.publish_schedule} backfill[#{provider.key.downcase}]"
+    puts "cron: #{dataset.publish_schedule} backfill[#{provider.key.downcase}]"
   else
-    scheduler.cron(provider.publish_schedule, overlap: false) do
-      provider.backfill
+    scheduler.cron(dataset.publish_schedule, overlap: false) do
+      lock = locks.fetch(provider.key)
+      next unless lock.try_lock
+
+      begin
+        provider.backfill
+      ensure
+        lock.unlock
+      end
     end
   end
 end

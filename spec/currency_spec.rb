@@ -7,10 +7,10 @@ describe Currency do
   before do
     Rate.dataset.delete
     Rate.multi_insert([
-      { provider: "ECB", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
-      { provider: "ECB", date: Date.today, base: "EUR", quote: "GBP", mid: 0.85 },
-      { provider: "BOC", date: Date.today, base: "CAD", quote: "USD", mid: 0.74 },
-      { provider: "ECB", date: Date.today - 365, base: "EUR", quote: "SEK", mid: 11.0 },
+      { dataset_key: "ECB", date: Date.today, base: "EUR", quote: "USD", mid: 1.1 },
+      { dataset_key: "ECB", date: Date.today, base: "EUR", quote: "GBP", mid: 0.85 },
+      { dataset_key: "BOC", date: Date.today, base: "CAD", quote: "USD", mid: 0.74 },
+      { dataset_key: "ECB", date: Date.today - 365, base: "EUR", quote: "SEK", mid: 11.0 },
     ])
 
     db = Sequel::Model.db
@@ -31,15 +31,15 @@ describe Currency do
 
     db[:currency_coverages].delete
     db.run(<<~SQL)
-      INSERT OR REPLACE INTO currency_coverages (provider_key, iso_code, start_date, end_date)
-      SELECT provider, iso_code, MIN(date), MAX(date)
+      INSERT OR REPLACE INTO currency_coverages (dataset_key, iso_code, start_date, end_date)
+      SELECT dataset_key, iso_code, MIN(date), MAX(date)
       FROM (
-        SELECT provider, quote AS iso_code, date FROM rates
+        SELECT dataset_key, quote AS iso_code, date FROM rates
         UNION ALL
-        SELECT provider, base AS iso_code, date FROM rates
+        SELECT dataset_key, base AS iso_code, date FROM rates
       )
-      GROUP BY provider, iso_code
-      ORDER BY provider, iso_code
+      GROUP BY dataset_key, iso_code
+      ORDER BY dataset_key, iso_code
     SQL
   end
 
@@ -130,7 +130,7 @@ describe Currency do
   end
 
   it "includes a provider-only historical currency without widening the global catalogue" do
-    CurrencyCoverage.create(provider_key: "INFOREURO", iso_code: "ADP", start_date: "1994-03-01",
+    CurrencyCoverage.create(dataset_key: "INFOREURO", iso_code: "ADP", start_date: "1994-03-01",
                             end_date: "1998-01-01",)
 
     currency = Currency.with_providers(["INFOREURO"]).first
@@ -145,7 +145,7 @@ describe Currency do
   end
 
   it "uses the selected provider's dates instead of global currency dates" do
-    CurrencyCoverage.create(provider_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01",
+    CurrencyCoverage.create(dataset_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01",
                             end_date: "1998-01-01",)
 
     currency = Currency.with_providers(["INFOREURO"]).first
@@ -158,9 +158,9 @@ describe Currency do
   it "merges dates only across selected providers without duplicating currencies" do
     CurrencyCoverage.where(iso_code: "USD").delete
     CurrencyCoverage.multi_insert([
-      { provider_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01", end_date: "1998-01-01" },
-      { provider_key: "ECB", iso_code: "USD", start_date: "1999-01-04", end_date: "2001-01-01" },
-      { provider_key: "BOC", iso_code: "USD", start_date: "1990-01-01", end_date: "2010-01-01" },
+      { dataset_key: "INFOREURO", iso_code: "USD", start_date: "1994-03-01", end_date: "1998-01-01" },
+      { dataset_key: "ECB", iso_code: "USD", start_date: "1999-01-04", end_date: "2001-01-01" },
+      { dataset_key: "BOC", iso_code: "USD", start_date: "1990-01-01", end_date: "2010-01-01" },
     ])
 
     currencies = Currency.with_providers(["INFOREURO", "ECB", "INFOREURO"]).where(iso_code: "USD").all
@@ -204,14 +204,14 @@ describe Currency do
     # further.
     db = Sequel::Model.db
     Rate.multi_insert([
-      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
-      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
+      { dataset_key: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
+      { dataset_key: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
     ])
     db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
                                                      end_date: Date.today.to_s,)
     db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s,
                                                      end_date: Date.today.to_s,)
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED",
+    db[:currency_coverages].insert_conflict(:replace).insert(dataset_key: "TCMB", iso_code: "AED",
                                                              start_date: Date.today.to_s, end_date: Date.today.to_s,)
 
     aed = Currency.find("AED")
@@ -224,14 +224,14 @@ describe Currency do
   it "extends start_date in currency list for pegged currencies with provider data" do
     db = Sequel::Model.db
     Rate.multi_insert([
-      { provider: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
-      { provider: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
+      { dataset_key: "ECB", date: "1990-01-02", base: "EUR", quote: "USD", mid: 1.0 },
+      { dataset_key: "TCMB", date: Date.today, base: "USD", quote: "AED", mid: 3.6725 },
     ])
     db[:currencies].insert_conflict(:replace).insert(iso_code: "USD", start_date: "1990-01-02",
                                                      end_date: Date.today.to_s,)
     db[:currencies].insert_conflict(:replace).insert(iso_code: "AED", start_date: Date.today.to_s,
                                                      end_date: Date.today.to_s,)
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "TCMB", iso_code: "AED",
+    db[:currency_coverages].insert_conflict(:replace).insert(dataset_key: "TCMB", iso_code: "AED",
                                                              start_date: Date.today.to_s, end_date: Date.today.to_s,)
 
     aed = Currency.all.find { |c| c.iso_code == "AED" }
@@ -244,7 +244,7 @@ describe Currency do
     # ANG is pegged to USD. Insert a stale ANG row (end_date in the past) but USD is current. The peg should extend
     # ANG's end_date to match USD.
     db[:currencies].insert_conflict(:replace).insert(iso_code: "ANG", start_date: "1999-01-04", end_date: "2025-03-28")
-    db[:currency_coverages].insert_conflict(:replace).insert(provider_key: "BDI", iso_code: "ANG",
+    db[:currency_coverages].insert_conflict(:replace).insert(dataset_key: "BDI", iso_code: "ANG",
                                                              start_date: "1999-01-04", end_date: "2025-03-28",)
 
     usd = Currency.find("USD")

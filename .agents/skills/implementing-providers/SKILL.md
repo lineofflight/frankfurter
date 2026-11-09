@@ -50,7 +50,7 @@ Inherit from `Provider::Adapters::Adapter`. See any existing adapter for the pat
 
 Required:
 - `fetch(after: nil, upto: nil)` — fetches from the source API, returns an array of records
-- Each record: `{ date:, base:, quote:, rate: }` (no `provider:` — the Provider model stamps that during import)
+- Each record: `{ date:, base:, quote:, rate: }`. Backfill stamps the dataset key during import. An adapter for a provider with several datasets tags each record with its dataset key (`dataset: "NBP.B"`).
 - **Rate direction**: match the provider's native convention. `pivot_currency` may appear as either `base` or `quote` depending on the source — don't invert.
   - ECB publishes `1 EUR = X foreign`, pivot EUR goes in `base` (see `lib/provider/adapters/ecb.rb`).
   - NBG and BBK publish `1 foreign = X pivot`, pivot goes in `quote` (see `lib/provider/adapters/nbg.rb` and `lib/provider/adapters/bbk.rb`).
@@ -138,6 +138,15 @@ VCR cassettes (`spec/vcr_cassettes/<key>.yml`) are auto-created on the first liv
 
 Create a single JSON file (not an array) with: `key`, `name`, `description`, `pivot_currency`, `data_url`, `terms_url` (nullable), `publish_schedule` (5-field cron expression in UTC, e.g. `"*/30 14-16 * * 1-5"` for daily Mon-Fri with a 3-hour polling window starting at 14:00 UTC; `null` for providers without a recurring cadence), `publish_cadence` (one of `"daily"`, `"weekly"`, `"monthly"`, or `null` for historical-only providers; dispatches `publishes_missed` to the right algorithm — per-fire-day count for daily, ISO-week bucket for weekly, year-month bucket for monthly), `coverage_start` (earliest date for historical data, or null if unknown). Each provider has its own file — no shared file to conflict on.
 
+The file is the provider's one dataset. A provider that publishes several rate series lists them in a `datasets` array instead, each with its own series fields, a key of the form `<KEY>.<SUFFIX>`, and `"default": true` on the ones its bare key selects (see `nbp.json`). Optional `"blends"` overrides the default, which blends daily series only.
+
+Naming datasets:
+
+- A provider with one dataset has no suffix: its dataset key is the provider key (`ECB`).
+- Once a provider has two or more, every dataset gets a suffix. Give the existing one a suffix too and keep it default, so the bare key, its labels and its responses don't change. Moving its stored rows to the new key takes one UPDATE per table: rates, rollups, spikes, coverage, exclusions.
+- The suffix is the source's own English name for the series, shortened to one upper-case word where possible: NBP's Tables A and B are `NBP.A` and `NBP.B`; TCMB's forex and banknote rates (Döviz, Efektif) are `TCMB.FOREX` and `TCMB.BANKNOTE`; CBIC's import and export rates are `CBIC.IMPORT` and `CBIC.EXPORT`. If the source has no English name, translate its own term plainly rather than describing the series in our words.
+- Keys are public API identifiers. Never rename a dataset once it has shipped.
+
 The adapter class is auto-discovered from `lib/provider/adapters/` — no need to edit any wiring files.
 
 ### 4. Verify
@@ -159,8 +168,8 @@ After local backfill, compare the new provider's rates against an independent so
 
 ```ruby
 # In a console or one-liner: compare a sample of the new provider's rates against ECB
-new_rates = Rate.where(provider: "<KEY>").where(date: Date.today - 7..Date.today).all
-ecb_rates = Rate.where(provider: "ECB").where(date: Date.today - 7..Date.today).all
+new_rates = Rate.where(dataset_key: "<KEY>").where(date: Date.today - 7..Date.today).all
+ecb_rates = Rate.where(dataset_key: "ECB").where(date: Date.today - 7..Date.today).all
 # Rebase both to EUR and compare overlapping quotes
 ```
 

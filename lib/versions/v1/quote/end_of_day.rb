@@ -29,7 +29,7 @@ module Versions
           require "carry_forward"
 
           date_val = date || Date.today
-          scope = Rate.where(provider: "ECB").where(date: (date_val - 14)..date_val)
+          scope = Rate.where(dataset_key: "ECB").where(date: (date_val - 14)..date_val)
           scope = scope.only(*(symbols + [base])) if symbols
 
           CarryForward.apply(scope.naked.all, date: date_val)

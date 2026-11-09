@@ -2,26 +2,28 @@
 
 desc "Rebuild weekly and monthly rollups (all or one provider)"
 task "rollups:rebuild", [:provider] do |_t, args|
-  require "bucket"
-  require "blended_weekly_rate"
-  require "blended_monthly_rate"
-  require "cache"
   require "db"
-  require "log"
   require "provider"
 
   if args[:provider]
     provider = Provider.detect { |p| p.key.casecmp(args[:provider]).zero? }
     abort "Unknown provider: #{args[:provider]}" unless provider
-    rebuild_rollups(DB[:rates].where(provider: provider.key), provider.key)
+    keys = provider.datasets.map(&:key)
+    rebuild_rollups(DB[:rates].where(dataset_key: keys), provider.key, keys)
   else
     rebuild_rollups(DB[:rates])
   end
 end
 
-def rebuild_rollups(source, provider = nil)
-  scope = provider ? { provider: } : {}
-  label = provider || "all"
+def rebuild_rollups(source, label = "all", dataset_keys = nil)
+  require "bucket"
+  require "blended_weekly_rate"
+  require "blended_monthly_rate"
+  require "cache"
+  require "log"
+  require "rate_rollup"
+
+  scope = dataset_keys ? { dataset_key: dataset_keys } : {}
   models = [BlendedWeeklyRate, BlendedMonthlyRate]
   affected = {}
 
@@ -32,17 +34,8 @@ def rebuild_rollups(source, provider = nil)
     DB[:weekly_rates].where(scope).delete
     DB[:monthly_rates].where(scope).delete
 
-    DB[:weekly_rates].insert(
-      [:bucket_date, :provider, :base, :quote, :rate],
-      source.select(Bucket.week, :provider, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:provider, :base, :quote, Bucket.week),
-    )
-
-    DB[:monthly_rates].insert(
-      [:bucket_date, :provider, :base, :quote, :rate],
-      source.select(Bucket.month, :provider, :base, :quote, Sequel.function(:avg, :rate))
-        .group(:provider, :base, :quote, Bucket.month),
-    )
+    DB[:weekly_rates].insert(RateRollup::COLUMNS, RateRollup.source(source, Bucket.week))
+    DB[:monthly_rates].insert(RateRollup::COLUMNS, RateRollup.source(source, Bucket.month))
 
     models.each do |model|
       dates = model.source.blendable.where(scope).select(:bucket_date).distinct.select_map(:bucket_date)

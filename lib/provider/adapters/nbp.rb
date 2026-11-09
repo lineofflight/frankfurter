@@ -8,7 +8,7 @@ class Provider
   module Adapters
     # National Bank of Poland. Publishes daily mid-market rates (Table A) for ~32 currencies and weekly mid-market rates
     # (Table B) for ~150 additional currencies against PLN, plus a daily gold reference price. Gold values come in PLN
-    # per gram and are normalized here to per troy ounce.
+    # per gram and are normalized here to per troy ounce. Table A and gold are the NBP.A dataset, Table B is NBP.B.
     class NBP < Adapter
       TABLE_A_URL = "https://api.nbp.pl/api/exchangerates/tables/A"
       TABLE_B_URL = "https://api.nbp.pl/api/exchangerates/tables/B"
@@ -32,9 +32,12 @@ class Provider
         dataset = []
 
         each_chunk(after, end_date) do |chunk_start, chunk_end|
-          dataset.concat(fetch_rates(TABLE_A_URL, chunk_start, chunk_end))
-          dataset.concat(fetch_rates(TABLE_B_URL, chunk_start, chunk_end))
-          dataset.concat(fetch_gold(chunk_start, chunk_end))
+          daily = fetch_rates(TABLE_A_URL, chunk_start, chunk_end) + fetch_gold(chunk_start, chunk_end)
+          published = daily.to_set { |r| r.values_at(:date, :base, :quote) }
+          # Until 2004 Table B repeated a few Table A currencies on its dates. Table A's rate stands, as it always has.
+          weekly = fetch_rates(TABLE_B_URL, chunk_start, chunk_end)
+            .reject { |r| published.include?(r.values_at(:date, :base, :quote)) }
+          dataset.concat(daily.each { |r| r[:dataset] = "NBP.A" }, weekly.each { |r| r[:dataset] = "NBP.B" })
         end
 
         dataset

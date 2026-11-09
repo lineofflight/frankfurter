@@ -22,9 +22,6 @@ require "bucket"
 # cleared for the scheduler to rebuild, and populate refills the grouped buckets.
 Sequel.migration do
   up do
-    require "blended_weekly_rate"
-    require "blended_monthly_rate"
-    require "currency_summary"
     require "rate_precision"
 
     relabels = [
@@ -45,8 +42,8 @@ Sequel.migration do
       "VEB" => "2008-01-01",
     }
     rollups = {
-      weekly_rates: [Bucket.week, :week, BlendedWeeklyRate],
-      monthly_rates: [Bucket.month, :month, BlendedMonthlyRate],
+      weekly_rates: [Bucket.week, :week, :blended_weekly_rates],
+      monthly_rates: [Bucket.month, :month, :blended_monthly_rates],
     }
     either_side = ->(code) { Sequel.|({ base: code }, { quote: code }) }
 
@@ -68,7 +65,6 @@ Sequel.migration do
       next if relabels.all? { |change| change[:scope].empty? } && !leftovers && expired.values.all?(&:empty?)
 
       buckets = Hash.new { |hash, key| hash[key] = [] }
-      codes = Hash.new { |hash, key| hash[key] = [] }
       relabels.each do |change|
         provider = change[:provider]
         rollups.each do |table, (bucket, *)|
@@ -76,7 +72,6 @@ Sequel.migration do
           buckets[[provider, table]] |= change[:scope].select_map(bucket) | stored.select_map(:bucket_date)
         end
         rows = change[:scope].all
-        codes[provider] |= [change[:from], change[:to]].compact | rows.flat_map { |row| row.values_at(:base, :quote) }
 
         unless change[:to]
           change[:scope].delete
@@ -109,7 +104,7 @@ Sequel.migration do
         next if dates.empty?
 
         bucket, _, blend = rollups.fetch(table)
-        blend.dataset.where(bucket_date: dates).delete
+        from(blend).where(bucket_date: dates).delete
         from(table).where(provider:, bucket_date: dates).delete
         from(table).insert(
           [:bucket_date, :provider, :base, :quote, :rate],
@@ -118,7 +113,7 @@ Sequel.migration do
             .group(:provider, :base, :quote, bucket),
         )
       end
-      codes.each { |provider, iso_codes| CurrencySummary.refresh(self, iso_codes, provider:) }
+      # Coverage is rebuilt with every derived table after the last migration (db:migrate).
 
       expired.each do |code, providers|
         terminal = Date.parse(retired.fetch(code))
@@ -127,9 +122,8 @@ Sequel.migration do
             # The bucket holding the last valid day straddles the cutoff, so it changes too.
             first = get(Bucket.expression(precision, (terminal - 1).to_s))
             stale = from(table).where(provider:).where(either_side[code]).where(Sequel[:bucket_date] >= first)
-            blend.dataset.where(bucket_date: stale.select(:bucket_date)).delete
+            from(blend).where(bucket_date: stale.select(:bucket_date)).delete
           end
-          CurrencySummary.refresh(self, [code], provider:)
         end
       end
 

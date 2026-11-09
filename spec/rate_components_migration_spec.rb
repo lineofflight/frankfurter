@@ -10,11 +10,11 @@ describe "Rate component migrations" do
       require "db"
       Sequel.extension(:migration)
       Sequel::Migrator.run(DB, "db/migrate")
-      identity = {provider: "TST", date: Date.new(2026, 9, 1), base: "USD"}
+      identity = {dataset_key: "TST", date: Date.new(2026, 9, 1), base: "USD"}
       DB[:rates].multi_insert([
         identity.merge(quote: "EUR", mid: 100, bid: 99, ask: 103),
         identity.merge(quote: "GBP", bid: 1830.59054685, ask: 1831.5063),
-        identity.merge(provider: "BOJA", quote: "JPY", bid: 0, ask: 103),
+        identity.merge(dataset_key: "BOJA", quote: "JPY", bid: 0, ask: 103),
       ])
       expected = DB[:rates].order(:quote).select_map(:rate)
 

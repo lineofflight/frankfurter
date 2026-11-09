@@ -42,19 +42,24 @@ module RateScopes
       @spikes[db] ||= db.tables.include?(:rate_spikes)
       return unless @spikes[db]
 
-      columns = [:provider, :date, :base, :quote]
+      columns = [:dataset_key, :date, :base, :quote]
       flags = db[:rate_spikes].select(*columns.map { |column| Sequel.as(column, :"spike_#{column}") })
       db.from(flags).where(columns.to_h { |column| [:"spike_#{column}", column] }).exists
     end
 
     # Recompute a pair's average from its eligible daily observations only when an expired or spiked one contaminates
     # it. Keep stored precision for every unaffected pair, including boundary buckets whose daily history is incomplete
-    # or absent.
+    # or absent. A rollup averages its whole pool (RateRollup), so its observations and spikes come from every dataset
+    # in that pool, not only the one it is stored under.
     def eligible_rollups(dataset, precision)
+      require "dataset"
       table = dataset.model.table_name
       db = dataset.db
       bucket = Bucket.expression(precision)
-      same_pair = [:provider, :base, :quote].to_h { |column| [column, Sequel[table][column]] }
+      same_pair = Sequel.&(
+        Dataset.pooled(:dataset_key, Sequel[table][:dataset_key]),
+        { base: Sequel[table][:base], quote: Sequel[table][:quote] },
+      )
       observations = db[:rates].where(same_pair).where(Bucket.span(precision, Sequel[table][:bucket_date]))
         .where(bucket => Sequel[table][:bucket_date])
       expired = expired_currency_condition
@@ -80,29 +85,32 @@ module RateScopes
       contaminated = Sequel.|(*contaminations)
       value = Sequel.case({ contaminated => eligible.select(Sequel.function(:avg, :rate)) }, :rate).as(:rate)
       dataset.where(Sequel.|(Sequel.~(contaminated), eligible.exists))
-        .select(:bucket_date, :provider, :base, :quote, value).from_self(alias: table)
+        .select(:bucket_date, :dataset_key, :base, :quote, value).from_self(alias: table)
     end
   end
 
   module ScopeMethods
     def ecb
-      where(provider: "ECB")
+      where(dataset_key: "ECB")
     end
 
-    # Provider frequency is guarded because migration 028 rebuilds before 029 adds the column.
     def blendable
-      require "provider"
+      require "dataset"
       scope = RateScopes.named_currencies(self)
-      if Provider.columns.include?(:frequency)
-        keys = Provider.non_blending_keys
-        scope = scope.exclude(provider: keys) unless keys.empty?
-      end
+      keys = Dataset.non_blending_keys
+      scope = scope.exclude(dataset_key: keys) unless keys.empty?
       precision = { weekly_rates: :week, monthly_rates: :month }[model.table_name]
       scope = RateScopes.current_currencies(scope, model.date_column, precision:)
-      return RateScopes.eligible_rollups(scope, precision) if precision
+      return RateScopes.eligible_rollups(scope, precision).labelled if precision
 
       spiked = RateScopes.spiked(db)
-      spiked ? scope.exclude(spiked) : scope
+      (spiked ? scope.exclude(spiked) : scope).labelled
+    end
+
+    # Adds each row's Dataset#label as `provider`, the key blends group contributors by and responses report.
+    def labelled
+      require "dataset"
+      select_all(model.table_name).select_append(Dataset.label_expression.as(:provider))
     end
 
     def between(interval)
@@ -120,8 +128,8 @@ module RateScopes
     end
 
     def only(*currencies)
-      pivot_currency = Sequel[:providers][:pivot_currency]
-      join(:providers, key: :provider)
+      pivot_currency = Sequel[:datasets][:pivot_currency]
+      join(:datasets, key: :dataset_key)
         .where(Sequel.|({ base: pivot_currency, quote: currencies }, { quote: pivot_currency, base: currencies }))
         .select_all(model.table_name)
     end

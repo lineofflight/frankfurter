@@ -97,7 +97,7 @@ describe "grouped parity coverage" do
     [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
       bucket = model.source.max(:bucket_date)
       model.source.where(bucket_date: bucket).delete
-      model.source.dataset.insert(bucket_date: bucket, provider: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
+      model.source.dataset.insert(bucket_date: bucket, dataset_key: "ECB", base: "EUR", quote: "JPY", rate: 150.0)
       model.refresh([bucket])
     end
 

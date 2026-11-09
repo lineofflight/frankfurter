@@ -2,6 +2,7 @@
 
 require "csv"
 require "currency"
+require "currency_coverage"
 require "currency_exclusion"
 require "heavy_slots"
 require "plain_decimal"
@@ -281,28 +282,56 @@ module Versions
     end
 
     def providers
-      Provider.eager(:currency_coverages, :currency_exclusions).all.sort_by(&:key)
-        .filter_map { |provider| provider_entry(provider) }
+      coverages = CurrencyCoverage.to_hash_groups(:dataset_key)
+      exclusions = CurrencyExclusion.to_hash_groups(:dataset_key)
+      Provider.all.sort_by(&:key).filter_map { |provider| provider_entry(provider, coverages:, exclusions:) }
     end
 
-    def provider_entry(provider)
-      return if provider.currency_coverages.empty? && provider.currency_exclusions.empty?
+    # Coverage rows come grouped by dataset key. The top level combines the default datasets a bare provider key
+    # selects, with metadata from the first of them; `datasets` lists every dataset on its own.
+    def provider_entry(provider, coverages: nil, exclusions: nil)
+      keys = provider.datasets.map(&:key)
+      coverages ||= CurrencyCoverage.where(dataset_key: keys).to_hash_groups(:dataset_key)
+      exclusions ||= CurrencyExclusion.where(dataset_key: keys).to_hash_groups(:dataset_key)
+      rows = ->(groups, datasets) { groups.values_at(*datasets.map(&:key)).compact.flatten }
+      defaults = provider.default_datasets
+      return if rows[coverages, defaults].empty? && rows[exclusions, defaults].empty?
 
+      primary = provider.primary_dataset
       {
         key: provider.key,
         name: provider.name,
         country_code: provider.country_code,
-        rate_type: provider.rate_type,
-        pivot_currency: provider.pivot_currency,
-        data_url: provider.data_url,
+        rate_type: primary.rate_type,
+        pivot_currency: primary.pivot_currency,
+        data_url: primary.data_url,
         terms_url: provider.terms_url,
-        start_date: provider.start_date,
-        end_date: provider.end_date,
-        publish_cadence: provider.publish_cadence,
-        frequency: provider.frequency,
-        publishes_missed: provider.publishes_missed,
-        currencies: provider.currency_coverages.map(&:iso_code).sort,
-        unknown_currencies: provider.unknown_currencies,
+        **coverage_fields(provider, primary, rows[coverages, defaults], rows[exclusions, defaults]),
+        datasets: provider.datasets.map do |dataset|
+          {
+            key: dataset.key,
+            default: dataset.is_default,
+            rate_type: dataset.rate_type,
+            pivot_currency: dataset.pivot_currency,
+            data_url: dataset.data_url,
+            **coverage_fields(provider, dataset, rows[coverages, [dataset]], rows[exclusions, [dataset]]),
+          }
+        end,
+      }
+    end
+
+    # Dates, cadence, health and currencies from coverage rows, judged on the given dataset's schedule.
+    def coverage_fields(provider, schedule, coverages, exclusions)
+      dated = coverages + exclusions
+      end_date = dated.map { |c| c.end_date.to_s }.max
+      {
+        start_date: dated.map { |c| c.start_date.to_s }.min,
+        end_date:,
+        publish_cadence: schedule.publish_cadence,
+        frequency: schedule.frequency,
+        publishes_missed: schedule.publishes_missed(last_date: end_date),
+        currencies: coverages.map(&:iso_code).uniq.sort,
+        unknown_currencies: provider.unknown_currencies(exclusions),
       }
     end
   end

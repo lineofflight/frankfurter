@@ -67,7 +67,7 @@ describe Versions::V2 do
   it "orders range query rows by date when carry-forward surfaces older quotes" do
     from = Fixtures.business_day(40)
     to = Fixtures.business_day(36)
-    Rate.where(provider: "ECB", quote: "USD", date: from..to).delete
+    Rate.where(dataset_key: "ECB", quote: "USD", date: from..to).delete
 
     get "/rates?providers=ecb&quotes=USD,GBP&from=#{from}&to=#{to}"
 
@@ -143,7 +143,7 @@ describe Versions::V2 do
 
   it "writes small rates as plain decimals" do
     date = Fixtures.latest_date
-    Rate.dataset.insert(provider: "ECB", date:, base: "EUR", quote: "VND", mid: 28_000.0)
+    Rate.dataset.insert(dataset_key: "ECB", date:, base: "EUR", quote: "VND", mid: 28_000.0)
     Provider["ECB"].send(:refresh_rollups, [date])
     Provider["ECB"].send(:refresh_currency_summaries, ["EUR", "VND"])
     query = "base=VND&quotes=EUR&providers=ECB"
@@ -293,7 +293,7 @@ describe Versions::V2 do
   # BOA observes a daily fixing but releases a month of them at once, so its newest row can be weeks old with nothing
   # missed. BOE publishes every day, so a row that old means the feed has stalled.
   it "carries a daily fixing published in arrears across the wait for the next batch" do
-    Rate.dataset.insert(provider: "BOA", date: Date.today - 20, base: "EUR", quote: "DZD", mid: 145.0)
+    Rate.dataset.insert(dataset_key: "BOA", date: Date.today - 20, base: "EUR", quote: "DZD", mid: 145.0)
 
     get "/providers/boa/rates"
 
@@ -305,7 +305,7 @@ describe Versions::V2 do
   end
 
   it "still drops a daily publisher's row after two weeks" do
-    Rate.dataset.insert(provider: "BOE", date: Date.today - 20, base: "EUR", quote: "GBP", mid: 0.86)
+    Rate.dataset.insert(dataset_key: "BOE", date: Date.today - 20, base: "EUR", quote: "GBP", mid: 0.86)
 
     get "/providers/boe/rates"
 
@@ -636,8 +636,8 @@ describe Versions::V2 do
   it "returns the type of a metal and a crypto asset" do
     date = Fixtures.latest_date
     Rate.dataset.multi_insert([
-      { provider: "CM", date:, base: "BTC", quote: "USD", mid: 100_000.0 },
-      { provider: "BNR", date:, base: "XAU", quote: "RON", mid: 600.0 },
+      { dataset_key: "CM", date:, base: "BTC", quote: "USD", mid: 100_000.0 },
+      { dataset_key: "BNR", date:, base: "XAU", quote: "RON", mid: 600.0 },
     ])
     Provider["CM"].send(:refresh_currency_summaries, ["BTC"])
     Provider["BNR"].send(:refresh_currency_summaries, ["XAU"])
@@ -691,8 +691,8 @@ describe Versions::V2 do
   it "returns COMESA Dollar as a named accounting unit" do
     date = Fixtures.latest_date
     Rate.dataset.multi_insert([
-      { provider: "RBM", date:, base: "CMD", quote: "MWK", mid: 100.0 },
-      { provider: "RBM", date:, base: "USD", quote: "MWK", mid: 90.0 },
+      { dataset_key: "RBM", date:, base: "CMD", quote: "MWK", mid: 100.0 },
+      { dataset_key: "RBM", date:, base: "USD", quote: "MWK", mid: 90.0 },
     ])
     Provider["RBM"].send(:refresh_currency_summaries, ["CMD", "MWK"])
 
@@ -773,9 +773,9 @@ describe Versions::V2 do
 
   it "lists a monthly provider's historical coverage without changing global catalogues" do
     Rate.multi_insert([
-      { provider: "INFOREURO", date: "1994-03-01", base: "XEU", quote: "ADP", mid: 160.0 },
-      { provider: "INFOREURO", date: "1998-01-01", base: "XEU", quote: "ADP", mid: 165.092 },
-      { provider: "INFOREURO", date: "1999-01-01", base: "EUR", quote: "XYZ", mid: 2.0 },
+      { dataset_key: "INFOREURO", date: "1994-03-01", base: "XEU", quote: "ADP", mid: 160.0 },
+      { dataset_key: "INFOREURO", date: "1998-01-01", base: "XEU", quote: "ADP", mid: 165.092 },
+      { dataset_key: "INFOREURO", date: "1999-01-01", base: "EUR", quote: "XYZ", mid: 2.0 },
     ])
     Provider["INFOREURO"].send(:refresh_currency_summaries, ["XEU", "ADP", "XYZ"])
     get "/currencies?scope=all"
@@ -1016,7 +1016,7 @@ describe Versions::V2 do
     get "/providers"
 
     keys = json.map { |p| p["key"] }
-    without_rates = (Provider.all.map(&:key) - Rate.distinct.select_map(:provider)).sample
+    without_rates = (Provider.all.map(&:key) - Rate.distinct.select_map(:dataset_key)).sample
 
     _(keys).wont_include(without_rates)
   end

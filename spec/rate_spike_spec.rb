@@ -13,9 +13,9 @@ describe RateSpike do
   end
 
   def detect(series)
-    Rate.dataset.multi_insert(series.map { |date, mid| { provider: "T1", date:, base: "USD", quote: "SLE", mid: } })
+    Rate.dataset.multi_insert(series.map { |date, mid| { dataset_key: "T1", date:, base: "USD", quote: "SLE", mid: } })
 
-    RateSpike.detect(DB[:rates].where(provider: "T1")).select_map(:date).map(&:to_s).sort
+    RateSpike.detect(DB[:rates].where(dataset_key: "T1")).select_map(:date).map(&:to_s).sort
   end
 
   describe ".detect" do
@@ -54,7 +54,7 @@ describe RateSpike do
 
     it "judges each pair against its own neighbours" do
       Rate.dataset.multi_insert(daily(43.26, 43.26, 43.26).map do |date, mid|
-        { provider: "T1", date:, base: "USD", quote: "GMD", mid: }
+        { dataset_key: "T1", date:, base: "USD", quote: "GMD", mid: }
       end)
 
       _(detect(daily(3.26, 3.26, 3.26))).must_be_empty
@@ -72,8 +72,8 @@ describe RateSpike do
     def cbg_rows(dates)
       dates.flat_map do |date|
         [
-          { provider: "CBG", date:, base: "USD", quote: "GMD", mid: 70.0 },
-          { provider: "CBG", date:, base: "SLE", quote: "GMD", mid: date == typo_day ? 43.26 : 3.26 },
+          { dataset_key: "CBG", date:, base: "USD", quote: "GMD", mid: 70.0 },
+          { dataset_key: "CBG", date:, base: "SLE", quote: "GMD", mid: date == typo_day ? 43.26 : 3.26 },
         ]
       end
     end
@@ -81,8 +81,8 @@ describe RateSpike do
     def other_rows
       days.flat_map do |date|
         [
-          { provider: "T1", date:, base: "USD", quote: "SLE", mid: 21.5 },
-          { provider: "T2", date:, base: "USD", quote: "SLE", mid: 21.6 },
+          { dataset_key: "T1", date:, base: "USD", quote: "SLE", mid: 21.5 },
+          { dataset_key: "T2", date:, base: "USD", quote: "SLE", mid: 21.6 },
         ]
       end
     end
@@ -90,10 +90,10 @@ describe RateSpike do
     def roll_up(providers)
       [[:weekly_rates, Bucket.week], [:monthly_rates, Bucket.month]].each do |table, bucket|
         DB[table].insert(
-          [:bucket_date, :provider, :base, :quote, :rate],
-          DB[:rates].where(provider: providers, date: days)
-            .select(bucket, :provider, :base, :quote, Sequel.function(:avg, :rate))
-            .group(bucket, :provider, :base, :quote),
+          [:bucket_date, :dataset_key, :base, :quote, :rate],
+          DB[:rates].where(dataset_key: providers, date: days)
+            .select(bucket, :dataset_key, :base, :quote, Sequel.function(:avg, :rate))
+            .group(bucket, :dataset_key, :base, :quote),
         )
       end
     end
@@ -118,7 +118,7 @@ describe RateSpike do
       it "screens the typo out of the daily blend and carries CBG's previous observation" do
         BlendedRate.rebuild
 
-        _(RateSpike.dataset.select_map([:provider, :base, :quote])).must_equal([["CBG", "SLE", "GMD"]])
+        _(RateSpike.dataset.select_map([:dataset_key, :base, :quote])).must_equal([["CBG", "SLE", "GMD"]])
         _(BlendedRate.first(quote: "SLE", date: typo_day).rate).must_be_within_delta(screened, 1e-9)
 
         row = query({ date: typo_day.to_s, base: "USD", quotes: "SLE", expand: "providers" }).first
@@ -144,7 +144,7 @@ describe RateSpike do
       it "screens the typo out of weekly and monthly blends but not out of CBG's own averages" do
         [BlendedWeeklyRate, BlendedMonthlyRate].each do |model|
           model.rebuild
-          cbg = model.source.where(provider: "CBG", base: "SLE", bucket_date: bucket(model))
+          cbg = model.source.where(dataset_key: "CBG", base: "SLE", bucket_date: bucket(model))
 
           _(cbg.get(:rate)).must_be(:>, 3.26)
           _(cbg.blendable.get(:rate)).must_be_within_delta(3.26, 1e-9)
@@ -157,7 +157,7 @@ describe RateSpike do
       let(:provider) { Provider["CBG"].dup }
 
       def adapter(dates)
-        records = cbg_rows(dates).map { |row| row.except(:provider, :mid).merge(rate: row[:mid]) }
+        records = cbg_rows(dates).map { |row| row.except(:dataset_key, :mid).merge(rate: row[:mid]) }
         Class.new(Provider::Adapters::Adapter) do
           define_method(:fetch) { |after: nil, **| records.select { |r| after.nil? || r[:date] > after } }
         end
@@ -187,11 +187,44 @@ describe RateSpike do
 
         _(RateSpike.dataset.count).must_equal(1)
 
-        Rate.dataset.insert(provider: "CBG", date: days[4], base: "SLE", quote: "GMD", mid: 43.26)
+        Rate.dataset.insert(dataset_key: "CBG", date: days[4], base: "SLE", quote: "GMD", mid: 43.26)
 
         _(RateSpike.refresh("CBG", [days[4]])).must_equal([typo_day])
         _(RateSpike.dataset.count).must_equal(0)
       end
+    end
+  end
+  # A provider's default datasets roll up together, and a pair can move between them mid-bucket (RUB left NBP's Table A
+  # for Table B on 2022-03-09). Screening has to read the pool as the one series its bare key serves.
+  describe "across a dataset pool" do
+    def nbp(key, date, mid)
+      { dataset_key: key, date: Date.parse(date), base: "RUB", quote: "PLN", mid: }
+    end
+
+    it "keeps a spike stored under one table out of a rollup stored under the other" do
+      rows = [
+        nbp("NBP.A", "2025-03-03", 0.03), nbp("NBP.A", "2025-03-04", 0.30), nbp("NBP.A", "2025-03-05", 0.03),
+        nbp("NBP.B", "2025-03-12", 0.03),
+      ]
+      Rate.dataset.multi_insert(rows)
+      dates = rows.map { |row| row[:date] }
+      RateSpike.refresh(["NBP.A", "NBP.B"], dates)
+      Provider["NBP"].dup.send(:refresh_rollups, dates)
+
+      _(RateSpike.dataset.select_map([:dataset_key, :date]).map { |key, date| [key, date.to_s] })
+        .must_equal([["NBP.A", "2025-03-04"]])
+      _(MonthlyRate.where(base: "RUB", bucket_date: "2025-03-01").select_map([:dataset_key, :rate]))
+        .must_equal([["NBP.B", 0.0975]])
+      _(MonthlyRate.blendable.where(base: "RUB", bucket_date: "2025-03-01").get(:rate)).must_be_close_to(0.03, 1e-12)
+    end
+
+    it "judges the last observation before a move against the first after it" do
+      Rate.dataset.multi_insert([
+        nbp("NBP.A", "2025-03-03", 0.03), nbp("NBP.A", "2025-03-04", 0.30), nbp("NBP.B", "2025-03-05", 0.03),
+      ])
+
+      _(RateSpike.detect(DB[:rates].where(dataset_key: ["NBP.A", "NBP.B"])).select_map([:dataset_key, :date])
+        .map { |key, date| [key, date.to_s] }).must_equal([["NBP.A", "2025-03-04"]])
     end
   end
 end
