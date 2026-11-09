@@ -161,7 +161,7 @@
             "name": "provider",
             "in": "path",
             "required": true,
-            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "description": "Provider or dataset key, case-insensitive, such as ECB or NBP.B. See `/providers` for the list.",
             "schema": {
               "type": "string",
               "example": "ECB"
@@ -230,7 +230,7 @@
             "name": "provider",
             "in": "path",
             "required": true,
-            "description": "Provider key, case-insensitive. See `/providers` for the list.",
+            "description": "Provider or dataset key, case-insensitive, such as ECB or NBP.B. See `/providers` for the list.",
             "schema": {
               "type": "string",
               "example": "ECB"
