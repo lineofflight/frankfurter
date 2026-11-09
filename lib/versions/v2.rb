@@ -81,17 +81,21 @@ module Versions
         end
 
         # /providers/<key>/rates and /providers/<key>/rate/<base>/<quote> alias /rates?providers=<key> byte for byte
-        # (#643): one code path, so single-provider behaviour cannot drift between the two URLs.
+        # (#643): one code path, so single-provider behaviour cannot drift between the two URLs. The rate routes take a
+        # dataset key as providers= does (NBP.B); details stay per provider.
         r.on(String) do |key|
-          provider = Provider[key.upcase] || r.halt(404)
+          key = key.upcase
+          provider = Provider[key]
+          r.halt(404) unless provider || Dataset[key]
           if r.params.key?("providers")
             raise RateQuery::ValidationError, "providers is implied by the route; drop the parameter"
           end
 
-          params = r.params.merge("providers" => provider.key)
+          params = r.params.merge("providers" => key)
 
           r.is do
             r.get do
+              r.halt(404) unless provider
               response.cache_control(public: true, max_age: 3600)
               provider_entry(provider) || r.halt(404)
             end

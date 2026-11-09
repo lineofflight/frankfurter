@@ -106,6 +106,27 @@ describe "Provider datasets" do
       _(json.map { |row| row["quote"] }).must_equal(["AED", "PLN"])
     end
 
+    it "serves a dataset key on the provider rate routes as providers= does" do
+      get "/rates", providers: "NBP.B", base: "PLN", date: "2025-02-26"
+      expected = last_response.body
+      get "/providers/nbp.b/rates", base: "PLN", date: "2025-02-26"
+
+      _(last_response).must_be(:ok?)
+      _(last_response.body).must_equal(expected)
+      get "/providers/NBP.B/rate/PLN/AED", date: "2025-02-26"
+
+      _(json["quote"]).must_equal("AED")
+      get "/providers/NBP.B/rates"
+
+      _(last_response.status).must_equal(422)
+    end
+
+    it "keeps provider details to provider keys" do
+      get "/providers/NBP.B"
+
+      _(last_response.status).must_equal(404)
+    end
+
     it "leaves an unknown provider selecting nothing" do
       get "/rates", providers: "NOPE"
 

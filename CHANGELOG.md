@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `type` on currencies: `currency`, `metal` or `crypto`.
 - `datasets` on providers, each with its own coverage and health, such as NBP's Table A and B. (#797)
 - `providers=` takes dataset keys, such as `NBP.B`. (#797)
+- Provider rate routes take dataset keys, such as `/v2/providers/NBP.B/rates`.
 - Crypto assets with CME futures or a CME CF Reference Rate, whatever their code length, and the USDT and USDC
   stablecoins: AAVE, ALGO, APT, ARB, ATOM, AVAX, AXS, CHZ, CRV, ENA, HBAR, ICP, LINK, MANA, NEAR, ONDO, SNX, USDC and
   USDT, from CM.
