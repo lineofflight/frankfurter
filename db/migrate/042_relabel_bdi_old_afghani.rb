@@ -14,14 +14,10 @@ require "bucket"
 # scheduler to rebuild.
 Sequel.migration do
   up do
-    require "blended_weekly_rate"
-    require "blended_monthly_rate"
-    require "currency_summary"
-
     codes = ["AFA", "AFN"]
     rollups = {
-      weekly_rates: [Bucket.week, BlendedWeeklyRate],
-      monthly_rates: [Bucket.month, BlendedMonthlyRate],
+      weekly_rates: [Bucket.week, :blended_weekly_rates],
+      monthly_rates: [Bucket.month, :blended_monthly_rates],
     }
     either_side = ->(code) { Sequel.|({ base: code }, { quote: code }) }
 
@@ -49,7 +45,7 @@ Sequel.migration do
 
       rollups.each do |table, (bucket, blend)|
         dates = buckets.fetch(table)
-        blend.dataset.where(bucket_date: dates).delete
+        from(blend).where(bucket_date: dates).delete
         from(table).where(provider: "BDI", bucket_date: dates).where(either_side[codes]).delete
         from(table).insert(
           [:bucket_date, :provider, :base, :quote, :rate],
@@ -58,7 +54,7 @@ Sequel.migration do
             .group(:provider, :base, :quote, bucket),
         )
       end
-      CurrencySummary.refresh(self, codes, provider: "BDI")
+      # Coverage is rebuilt with every derived table after the last migration (db:migrate).
 
       # Daily readiness checks only the earliest date. Partial invalidation could serve an incomplete table, so clear it
       # entirely. The scheduler rebuilds daily history and populates missing grouped buckets after startup.

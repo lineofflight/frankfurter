@@ -6,8 +6,6 @@
 # compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy; it rebuilds in place.
 Sequel.migration do
   up do
-    require "rate_spike"
-
     create_table(:rate_spikes) do
       String :provider, null: false
       Date :date, null: false
@@ -15,8 +13,7 @@ Sequel.migration do
       String :quote, null: false
       primary_key [:provider, :base, :quote, :date]
     end
-
-    from(:rate_spikes).insert([:provider, :date, :base, :quote], RateSpike.detect(from(:rates), key: :provider))
+    # The flags are set when every derived table is rebuilt after the last migration (db:migrate).
   end
 
   down do

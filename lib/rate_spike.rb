@@ -24,17 +24,12 @@ module RateSpike
 
     # Spikes among the given rates rows, as dataset key, date, base, quote. Neighbours come from the same rows, so the
     # scope must reach MAX_GAP_DAYS past every observation to be judged. A pool's datasets (Dataset.pool) are one
-    # series, so a pair that moves between them is judged across the move. Migration 045 names the key column it had.
-    def detect(rates, key: :dataset_key)
-      series = if key == :dataset_key
-                 require "dataset"
-                 Dataset.label_expression
-               else
-                 key
-               end
-      window = { partition: [series, :base, :quote], order: [:date, key] }
+    # series, so a pair that moves between them is judged across the move.
+    def detect(rates)
+      require "dataset"
+      window = { partition: [Dataset.label_expression, :base, :quote], order: [:date, :dataset_key] }
       neighbours = rates.select(
-        key, :date, :base, :quote, :rate,
+        :dataset_key, :date, :base, :quote, :rate,
         Sequel.function(:lag, :rate).over(**window).as(:prev_rate),
         Sequel.function(:lead, :rate).over(**window).as(:next_rate),
         Sequel.function(:lag, :date).over(**window).as(:prev_date),
@@ -50,7 +45,7 @@ module RateSpike
         .where(days.call(:date, :next_date) <= MAX_GAP_DAYS)
         .where(high < low * FACTOR)
         .where(Sequel.|(Sequel[:rate] >= high * FACTOR, Sequel[:rate] * FACTOR <= low))
-        .select(key, :date, :base, :quote)
+        .select(:dataset_key, :date, :base, :quote)
     end
 
     # Rescreens the datasets' observations, with the rest of their pools, around newly inserted dates and returns the

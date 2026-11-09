@@ -4,11 +4,6 @@ require "bucket"
 
 Sequel.migration do
   up do
-    require "blended_rate"
-    require "blended_weekly_rate"
-    require "blended_monthly_rate"
-    require "currency_summary"
-
     transaction do
       legacy = from(:rates).where(provider: "BOTA").where(Sequel.|({ base: "SDR" }, { quote: "SDR" }))
       old_code = Sequel.|({ base: "SDR" }, { quote: "SDR" })
@@ -21,7 +16,6 @@ Sequel.migration do
       codes = ["SDR", "XDR"]
       pairs = Sequel.|({ base: codes }, { quote: codes })
       rows = legacy.all
-      counterparts = rows.flat_map { |row| row.values_at(:base, :quote) }
 
       rows.each do |row|
         key = row.slice(:provider, :date, :base, :quote)
@@ -41,8 +35,8 @@ Sequel.migration do
       end
 
       {
-        weekly_rates: [Bucket.week, BlendedWeeklyRate],
-        monthly_rates: [Bucket.month, BlendedMonthlyRate],
+        weekly_rates: [Bucket.week, :blended_weekly_rates],
+        monthly_rates: [Bucket.month, :blended_monthly_rates],
       }.each do |table, (bucket, blend)|
         source = from(:rates).where(provider: "BOTA").where(pairs)
         rollups = from(table).where(provider: "BOTA").where(pairs)
@@ -50,7 +44,7 @@ Sequel.migration do
         buckets = rollups.select_map(:bucket_date) | source.select_map(bucket)
         next if buckets.empty?
 
-        blend.dataset.where(bucket_date: buckets).delete
+        from(blend).where(bucket_date: buckets).delete
         rollups.delete
         from(table).insert(
           [:bucket_date, :provider, :base, :quote, :rate],
@@ -59,9 +53,9 @@ Sequel.migration do
         )
       end
 
-      CurrencySummary.refresh(self, codes | counterparts | ["TZS"], provider: "BOTA")
-      # Daily readiness checks only the earliest date. Partial invalidation could serve an incomplete table, so clear it
-      # entirely. The scheduler rebuilds daily history and populates missing grouped buckets after startup.
+      # Coverage is rebuilt with every derived table after the last migration (db:migrate). Daily readiness checks only
+      # the earliest date. Partial invalidation could serve an incomplete table, so clear it entirely. The scheduler
+      # rebuilds daily history and populates missing grouped buckets after startup.
       from(:blended_rates).delete
     end
   end

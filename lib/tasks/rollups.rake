@@ -2,14 +2,8 @@
 
 desc "Rebuild weekly and monthly rollups (all or one provider)"
 task "rollups:rebuild", [:provider] do |_t, args|
-  require "bucket"
-  require "blended_weekly_rate"
-  require "blended_monthly_rate"
-  require "cache"
   require "db"
-  require "log"
   require "provider"
-  require "rate_rollup"
 
   if args[:provider]
     provider = Provider.detect { |p| p.key.casecmp(args[:provider]).zero? }
@@ -22,6 +16,13 @@ task "rollups:rebuild", [:provider] do |_t, args|
 end
 
 def rebuild_rollups(source, label = "all", dataset_keys = nil)
+  require "bucket"
+  require "blended_weekly_rate"
+  require "blended_monthly_rate"
+  require "cache"
+  require "log"
+  require "rate_rollup"
+
   scope = dataset_keys ? { dataset_key: dataset_keys } : {}
   models = [BlendedWeeklyRate, BlendedMonthlyRate]
   affected = {}

@@ -165,27 +165,78 @@ describe "Datasets migration" do
     RUBY
   end
 
-  it "refuses to migrate a populated database older than 049 and leaves it alone" do
+  # Migrations up to 049 repair rates in place on their own schema, and db:migrate rebuilds what derives from rates once
+  # the last one has run. The upgraded tables have to match a rebuild of the same rates on a fresh install.
+  it "upgrades a populated database from before 049 in place" do
     Dir.mktmpdir do |dir|
-      env = { "DATABASE_URL" => "sqlite://#{dir}/old.sqlite3", "APP_ENV" => "test" }
-      setup = <<~RUBY
+      old = File.join(dir, "old.sqlite3")
+      env = ->(path) { { "DATABASE_URL" => "sqlite://#{path}", "APP_ENV" => "test", "CLOUDFLARE_API_TOKEN" => nil } }
+      run = lambda do |path, *command|
+        output, status = Open3.capture2e(env.call(path), *command)
+
+        _(status.success?).must_equal(true, output)
+      end
+      ruby = ->(path, script) { run.call(path, RbConfig.ruby, "-Ilib", "-r./boot", "-e", script) }
+
+      ruby.call(old, <<~RUBY)
         require "db"
         Sequel.extension(:migration)
         Sequel::Migrator.run(DB, "db/migrate", target: 48)
-        DB[:rates].insert(provider: "ECB", date: "2026-01-02", base: "EUR", quote: "USD", mid: 1.17)
+        row = ->(provider, date, base, quote, mid) { { provider:, date:, base:, quote:, mid: } }
+        ecb = (2..12).map { |day| Date.new(2026, 1, day) }.reject { |date| date.saturday? || date.sunday? }
+        DB[:rates].multi_insert(
+          [
+            row["AMCM", "2020-01-02", "LIQ", "MOP", 1.5],
+            row["CNB", "1991-01-23", "BEC", "CZK", 0.8],
+            row["NBU", "2001-05-02", "ZAL", "UAH", 1.8],
+            row["NBP", "2026-01-07", "USD", "PLN", 3.6],
+            row["NBP", "2026-01-07", "AED", "PLN", 0.98],
+          ] + ecb.flat_map do |date|
+            [row["ECB", date, "EUR", "USD", 1.17], row["ECB", date, "EUR", "JPY", date.day == 7 ? 1830.0 : 183.0]]
+          end,
+        )
+        # Stale derived rows an older release left behind.
+        DB[:currency_coverages].insert(provider_key: "NBU", iso_code: "ZAL", start_date: "2001-05-02", end_date: "2001-05-02")
+        DB[:blended_rates].insert(date: "1999-01-04", quote: "XEU", rate: 1.0)
       RUBY
-      output, status = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", setup)
+      run.call(old, "bundle", "exec", "rake", "db:migrate")
 
-      _(status.success?).must_equal(true, output)
+      ruby.call(old, <<~RUBY)
+        require "db"
+        abort "not migrated" unless DB[:schema_info].get(:version) == 52
+        abort "rebuild still owed" if DB.table_exists?(:derived_rebuild_owed)
+        rates = DB[:rates].order(:dataset_key, :date, :base).select_map([:dataset_key, :base, :quote])
+        abort "LIQ kept" if rates.any? { |_, base, _| base == "LIQ" }
+        abort "049 not applied" unless [["CNB", "BEF", "CZK"], ["NBU", "TJS", "UAH"]].all? { |r| rates.include?(r) }
+        abort "NBP not split" unless rates.include?(["NBP.A", "USD", "PLN"]) && rates.include?(["NBP.B", "AED", "PLN"])
+        abort "spike not flagged" unless DB[:rate_spikes].select_map([:dataset_key, :quote]) == [["ECB", "JPY"]]
+        abort "stale coverage kept" unless DB[:currency_coverages].where(iso_code: "ZAL").empty?
+        abort "no blends" if DB[:blended_rates].empty? || DB[:blended_weekly_rates].empty?
+      RUBY
 
-      output, status = Open3.capture2e(env, "bundle", "exec", "rake", "db:migrate")
-
-      _(status.success?).must_equal(false)
-      _(output).must_include("v2.6.1")
-      check = 'require "db"; print DB[:schema_info].get(:version), " ", DB[:rates].count'
-      output, = Open3.capture2e(env, RbConfig.ruby, "-Ilib", "-r./boot", "-e", check)
-
-      _(output).must_equal("48 1")
+      fresh = File.join(dir, "fresh.sqlite3")
+      ruby.call(fresh, <<~RUBY)
+        require "rake"
+        load "lib/tasks/db.rake"
+        Rake::Task["db:setup"].invoke
+        require "derived_tables"
+        columns = [:dataset_key, :date, :base, :quote, :mid, :bid, :ask]
+        DB.run("ATTACH DATABASE '#{old}' AS old")
+        DB[:rates].insert(columns, DB[Sequel[:old][:rates]].select(*columns))
+        DB.run("DETACH DATABASE old")
+        DerivedTables.rebuild
+        DB.run("ATTACH DATABASE '#{old}' AS old")
+        tables = [
+          :currency_coverages, :currency_exclusions, :currencies, :rate_spikes, :weekly_rates, :monthly_rates,
+          :blended_rates, :blended_weekly_rates, :blended_monthly_rates,
+        ]
+        tables.each do |table|
+          ours = DB[table]
+          theirs = DB[Sequel[:old][table]]
+          abort "\#{table} differs" unless ours.except(theirs).empty? && theirs.except(ours).empty?
+          abort "\#{table} empty" if ours.empty? && table != :currency_exclusions
+        end
+      RUBY
     end
   end
 

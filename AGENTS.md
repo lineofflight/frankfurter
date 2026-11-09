@@ -16,6 +16,7 @@ bundle exec rake backfill             # Backfill all providers (or backfill[key]
 bundle exec rake blend:rebuild        # Full rebuild of materialized blend tables
 bundle exec rake blend:parity         # Verify table vs live blend query parity
 bundle exec rake rollups:rebuild      # Rebuild weekly and monthly rollups
+bundle exec rake db:rebuild           # Rebuild coverage, spike flags, rollups and blends from rates
 
 # Local server
 bundle exec puma -C config/puma.rb    # Web server on :8080

@@ -6,12 +6,10 @@
 # the existing populate job to repair.
 Sequel.migration do
   up do
-    require "currency_summary"
-
     cmd = Sequel.|({ base: "CMD" }, { quote: "CMD" })
     next unless from(:rates).where(provider: "RBM").where(cmd).any?
 
-    CurrencySummary.refresh(self, ["CMD", "MWK"])
+    # Coverage is rebuilt with every derived table after the last migration (db:migrate).
     from(:blended_rates).delete
     {
       weekly_rates: :blended_weekly_rates,
