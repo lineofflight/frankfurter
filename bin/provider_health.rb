@@ -4,7 +4,9 @@
 # Provider health monitor.
 #
 # Fetches the live /v2/providers feed and flags missed publishes or unknown currency codes, keeping one GitHub issue per
-# affected provider. This surfaces silent freezes and published labels that need a currency registry update.
+# affected provider. This surfaces silent freezes and published labels that need a currency registry update. A provider
+# that publishes several datasets is checked per dataset, with one issue per affected dataset, so a stale weekly table
+# shows even while a daily one of the same provider is current.
 #
 # Issues carry two labels: `provider` (the umbrella every provider issue shares, human-filed or auto) and `health`
 # (bot-owned; the discriminator used to find the rolling issues this script manages). `health` must never be applied by
@@ -46,6 +48,17 @@ def fetch_providers
 
     sleep(2**attempts)
     retry
+  end
+end
+
+# The entries health is judged on: each provider, or each of its datasets when it publishes several. A dataset keeps the
+# provider's name.
+def subjects(providers)
+  providers.flat_map do |provider|
+    datasets = Array(provider["datasets"])
+    next [provider] if datasets.size <= 1
+
+    datasets.map { |dataset| dataset.merge("name" => provider["name"]) }
   end
 end
 
@@ -117,13 +130,14 @@ def open_issues_by_key
     "100",
   )
   JSON.parse(json).each_with_object({}) do |issue, map|
-    key = issue["body"].to_s[/<!-- provider-health: (\w+) -->/, 1]
+    key = issue["body"].to_s[/<!-- provider-health: ([\w.]+) -->/, 1]
     map[key] = issue["number"] if key
   end
 end
 
 def main
-  stale = flagged(fetch_providers)
+  providers = fetch_providers
+  stale = flagged(subjects(providers))
   today = Date.today.to_s
 
   if ENV["DRY_RUN"]
@@ -162,11 +176,21 @@ def main
     end
   end
 
+  # An issue opened for a whole provider before it was checked per dataset closes too: any dataset still failing has its
+  # own issue now.
+  split = providers.filter_map do |provider|
+    keys = Array(provider["datasets"]).map { |dataset| dataset["key"] }
+    [provider["key"], keys] if keys.size > 1
+  end.to_h
   recovered = open_issues.keys - stale.map { |provider| provider["key"] }
   recovered.each do |key|
     number = open_issues[key]
-    gh("issue", "comment", number.to_s, "--repo", REPO, "--body",
-       "#{key} passes provider health checks again. Closing.",)
+    comment = if split.key?(key)
+                "#{key} is now checked per dataset (#{split[key].join(", ")}). Closing."
+              else
+                "#{key} passes provider health checks again. Closing."
+              end
+    gh("issue", "comment", number.to_s, "--repo", REPO, "--body", comment)
     gh("issue", "close", number.to_s, "--repo", REPO)
   end
 end
