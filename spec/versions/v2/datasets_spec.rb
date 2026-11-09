@@ -77,4 +77,42 @@ describe "Provider datasets" do
       _(dataset.slice(*shared)).must_equal(ecb.slice(*shared))
     end
   end
+
+  # Table A quotes the ruble with a one-day typo on March 4, then the ruble moves to Table B. NBP's stored March rollup
+  # pools both tables under NBP.B.
+  describe "grouped by one table" do
+    before do
+      store([
+        nbp("NBP.A", "2025-03-03", "RUB", 0.03), nbp("NBP.A", "2025-03-04", "RUB", 0.30),
+        nbp("NBP.A", "2025-03-05", "RUB", 0.03), nbp("NBP.B", "2025-03-12", "RUB", 0.03),
+      ])
+      RateSpike.refresh(["NBP.A", "NBP.B"], [Date.new(2025, 3, 4)])
+    end
+
+    def monthly(providers)
+      get "/rates", providers:, base: "RUB", quotes: "PLN", from: "2025-03-01", to: "2025-03-31", group: "month"
+
+      Oj.load(last_response.body).map { |row| [row["date"], row["rate"]] }
+    end
+
+    it "averages each table's own daily rows instead of the pooled rollup" do
+      _(monthly("NBP.B")).must_equal([["2025-03-01", 0.03]])
+      _(monthly("NBP.A")).must_equal([["2025-03-01", 0.12]])
+      _(monthly("NBP")).must_equal([["2025-03-01", 0.0975]])
+    end
+
+    it "averages weeks the same way" do
+      get "/rates", providers: "NBP.A", base: "RUB", quotes: "PLN", from: "2025-03-01", to: "2025-03-16", group: "week"
+
+      _(json.map { |row| row["rate"] }).must_equal([0.12])
+    end
+
+    # Provider queries serve what the source published, typos included: the spike flag keeps the typo out of blends
+    # only, as it does for the pooled NBP rollup and every provider's own averages.
+    it "keeps the flagged typo in the table's own average, as in the pooled one" do
+      _(RateSpike.dataset.select_map([:dataset_key, :date]).map { |key, date| [key, date.to_s] })
+        .must_equal([["NBP.A", "2025-03-04"]])
+      _(monthly("NBP.A")).must_equal([["2025-03-01", 0.12]])
+    end
+  end
 end

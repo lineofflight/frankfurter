@@ -297,7 +297,16 @@ module Versions
       end
 
       def range_dataset
-        apply_filters(rollup? ? rollup_model.dataset : Rate.dataset)
+        return apply_filters(Rate.dataset) unless rollup?
+        return apply_filters(rollup_model.dataset) unless partial_pool?
+
+        # A stored rollup averages its whole pool (RateRollup), so a dataset selected without the rest of its pool has
+        # no rollup of its own. Average its daily rows per bucket instead, in the rollup table's shape.
+        bucket = Bucket.expression(group)
+        daily = Rate.dataset.where(dataset_key: dataset_keys)
+          .select(bucket.as(:bucket_date), :dataset_key, :base, :quote, Sequel.function(:avg, :rate).as(:rate))
+          .group(bucket, :dataset_key, :base, :quote)
+        apply_filters(rollup_model.dataset.from(daily.as(rollup_model.table_name)))
       end
 
       def base
@@ -334,6 +343,13 @@ module Versions
 
       def single_provider?
         labels&.size == 1
+      end
+
+      # Whether providers= names a dataset without the rest of its pool (NBP.A without NBP.B).
+      def partial_pool?
+        return false unless providers
+
+        dataset_keys.any? { |key| !(Dataset.pool(key) - dataset_keys).empty? }
       end
 
       def group
