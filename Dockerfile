@@ -45,7 +45,7 @@ ENV RUBY_YJIT_ENABLE=1
 
 USER frankfurter
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=300s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=900s --retries=3 \
     CMD exec curl -f --max-time 9 "http://localhost:${PORT:-8080}"
 
 CMD ["sh", "-c", "bundle exec rake db:setup && exec bundle exec foreman start"]
