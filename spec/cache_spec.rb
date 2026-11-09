@@ -5,7 +5,13 @@ require "cache"
 
 describe Cache do
   it "does nothing when not configured" do
-    cache = Cache.new(zone_id: nil, api_token: nil)
+    cache = Cache.new(zone_id: nil, api_token: nil, env: "production")
+
+    _(cache.purge).must_be_nil
+  end
+
+  it "does nothing outside production, even with credentials" do
+    cache = Cache.new(zone_id: "z", api_token: "t", env: "development")
 
     _(cache.purge).must_be_nil
   end
@@ -14,14 +20,14 @@ describe Cache do
     WebMock.stub_request(:post, "https://api.cloudflare.com/client/v4/zones/z/purge_cache")
       .to_return(status: 503)
 
-    _ { Cache.new(zone_id: "z", api_token: "t").purge }.must_raise(Net::HTTPFatalError)
+    _ { Cache.new(zone_id: "z", api_token: "t", env: "production").purge }.must_raise(Net::HTTPFatalError)
   end
 
   it "succeeds quietly on a 2xx purge response" do
     WebMock.stub_request(:post, "https://api.cloudflare.com/client/v4/zones/z/purge_cache")
       .to_return(status: 200, body: '{"success":true}')
 
-    Cache.new(zone_id: "z", api_token: "t").purge
+    Cache.new(zone_id: "z", api_token: "t", env: "production").purge
   end
 
   describe "debounced purging" do
