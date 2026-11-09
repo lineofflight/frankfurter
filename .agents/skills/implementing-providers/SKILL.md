@@ -140,6 +140,13 @@ Create a single JSON file (not an array) with: `key`, `name`, `description`, `pi
 
 The file is the provider's one dataset. A provider that publishes several rate series lists them in a `datasets` array instead, each with its own series fields, a key of the form `<KEY>.<SUFFIX>`, and `"default": true` on the ones its bare key selects (see `nbp.json`). Optional `"blends"` overrides the default, which blends daily series only.
 
+Naming datasets:
+
+- A provider with one dataset has no suffix: its dataset key is the provider key (`ECB`).
+- Once a provider has two or more, every dataset gets a suffix. Give the existing one a suffix too and keep it default, so the bare key, its labels and its responses don't change. Moving its stored rows to the new key takes one UPDATE per table: rates, rollups, spikes, coverage, exclusions.
+- The suffix is the source's own English name for the series, shortened to one upper-case word where possible: NBP's Tables A and B are `NBP.A` and `NBP.B`; TCMB's forex and banknote rates (Döviz, Efektif) are `TCMB.FOREX` and `TCMB.BANKNOTE`; CBIC's import and export rates are `CBIC.IMPORT` and `CBIC.EXPORT`. If the source has no English name, translate its own term plainly rather than describing the series in our words.
+- Keys are public API identifiers. Never rename a dataset once it has shipped.
+
 The adapter class is auto-discovered from `lib/provider/adapters/` — no need to edit any wiring files.
 
 ### 4. Verify
