@@ -284,23 +284,20 @@ module Versions
     def providers
       coverages = CurrencyCoverage.to_hash_groups(:dataset_key)
       exclusions = CurrencyExclusion.to_hash_groups(:dataset_key)
-      Provider.all.sort_by(&:key).filter_map do |provider|
-        keys = provider.default_datasets.map(&:key)
-        provider_entry(
-          provider,
-          coverages: coverages.values_at(*keys).compact.flatten,
-          exclusions: exclusions.values_at(*keys).compact.flatten,
-        )
-      end
+      Provider.all.sort_by(&:key).filter_map { |provider| provider_entry(provider, coverages:, exclusions:) }
     end
 
-    # Combines the default datasets a bare provider key selects. Metadata comes from the first of them.
-    def provider_entry(provider, coverages: provider.currency_coverages, exclusions: provider.currency_exclusions)
-      return if coverages.empty? && exclusions.empty?
+    # Coverage rows come grouped by dataset key. The top level combines the default datasets a bare provider key
+    # selects, with metadata from the first of them; `datasets` lists every dataset on its own.
+    def provider_entry(provider, coverages: nil, exclusions: nil)
+      keys = provider.datasets.map(&:key)
+      coverages ||= CurrencyCoverage.where(dataset_key: keys).to_hash_groups(:dataset_key)
+      exclusions ||= CurrencyExclusion.where(dataset_key: keys).to_hash_groups(:dataset_key)
+      rows = ->(groups, datasets) { groups.values_at(*datasets.map(&:key)).compact.flatten }
+      defaults = provider.default_datasets
+      return if rows[coverages, defaults].empty? && rows[exclusions, defaults].empty?
 
       primary = provider.primary_dataset
-      dated = coverages + exclusions
-      end_date = dated.map { |c| c.end_date.to_s }.max
       {
         key: provider.key,
         name: provider.name,
@@ -309,11 +306,30 @@ module Versions
         pivot_currency: primary.pivot_currency,
         data_url: primary.data_url,
         terms_url: provider.terms_url,
+        **coverage_fields(provider, primary, rows[coverages, defaults], rows[exclusions, defaults]),
+        datasets: provider.datasets.map do |dataset|
+          {
+            key: dataset.key,
+            default: dataset.is_default,
+            rate_type: dataset.rate_type,
+            pivot_currency: dataset.pivot_currency,
+            data_url: dataset.data_url,
+            **coverage_fields(provider, dataset, rows[coverages, [dataset]], rows[exclusions, [dataset]]),
+          }
+        end,
+      }
+    end
+
+    # Dates, cadence, health and currencies from coverage rows, judged on the given dataset's schedule.
+    def coverage_fields(provider, schedule, coverages, exclusions)
+      dated = coverages + exclusions
+      end_date = dated.map { |c| c.end_date.to_s }.max
+      {
         start_date: dated.map { |c| c.start_date.to_s }.min,
         end_date:,
-        publish_cadence: primary.publish_cadence,
-        frequency: primary.frequency,
-        publishes_missed: primary.publishes_missed(last_date: end_date),
+        publish_cadence: schedule.publish_cadence,
+        frequency: schedule.frequency,
+        publishes_missed: schedule.publishes_missed(last_date: end_date),
         currencies: coverages.map(&:iso_code).uniq.sort,
         unknown_currencies: provider.unknown_currencies(exclusions),
       }
