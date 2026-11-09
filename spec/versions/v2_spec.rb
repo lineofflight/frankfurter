@@ -451,6 +451,7 @@ describe Versions::V2 do
     def slow_query.range? = true
     def slow_query.date_relative? = false
     def slow_query.cache_key = "x"
+    def slow_query.validate_base_quoted! = nil
 
     def slow_query.each
       return to_enum(:each) unless block_given?
@@ -1100,11 +1101,11 @@ describe Versions::V2 do
 
   it "excludes pegs when providers filter is set" do
     # BMD pegs 1:1 to USD; ECB does not publish BMD. Pegs are a source of rate data, so scoping ?providers= to ECB
-    # excludes pegs along with all other unlisted sources.
+    # excludes pegs along with all other unlisted sources, and ECB alone can't reach BMD.
     get "/rates?base=BMD&providers=ecb"
 
-    _(last_response).must_be(:ok?)
-    _(json).must_be_empty
+    _(last_response.status).must_equal(422)
+    _(json["message"]).must_equal("ECB doesn't quote BMD; try base=EUR")
   end
 
   it "includes pegged currencies in currencies list" do

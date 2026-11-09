@@ -177,6 +177,7 @@ describe App do
     def slow_query.range? = true
     def slow_query.date_relative? = false
     def slow_query.cache_key = "x"
+    def slow_query.validate_base_quoted! = nil
 
     def slow_query.each
       return to_enum(:each) unless block_given?
