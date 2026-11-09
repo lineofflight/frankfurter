@@ -131,6 +131,7 @@ module Versions
 
     def rates_response(params)
       query = RateQuery.new(params)
+      query.validate_base_quoted!
       response["cache-control"] = cache_control_for(query)
       request.etag(query.cache_key)
 
@@ -191,6 +192,7 @@ module Versions
     def rate_response(params, base_currency, quote_currency)
       params = params.merge("base" => base_currency.upcase, "quotes" => quote_currency.upcase)
       query = RateQuery.new(params)
+      query.validate_base_quoted!
       response["cache-control"] = cache_control_for(query)
       query.to_a.first || request.halt(404)
     end

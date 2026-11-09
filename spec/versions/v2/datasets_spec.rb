@@ -78,6 +78,42 @@ describe "Provider datasets" do
     end
   end
 
+  # Table B quotes neither the euro nor the dollar, so on its own it can't reach the default base.
+  describe "with a base the selection never quotes" do
+    before do
+      store([nbp("NBP.A", "2025-02-26", "USD", 3.91), nbp("NBP.B", "2025-02-26", "AED", 1.06)])
+    end
+
+    it "refuses the base and names the one to use" do
+      get "/rates", providers: "NBP.B"
+
+      _(last_response.status).must_equal(422)
+      _(json["message"]).must_equal("NBP.B doesn't quote EUR; try base=PLN")
+    end
+
+    it "refuses it on the single-pair route too" do
+      get "/rate/USD/AED", providers: "NBP.B"
+
+      _(last_response.status).must_equal(422)
+    end
+
+    it "answers once one selected dataset quotes it" do
+      get "/rates", providers: "NBP.B", base: "PLN", date: "2025-02-26"
+
+      _(json.map { |row| row["quote"] }).must_equal(["AED", "PLN"])
+      get "/rates", providers: "NBP", base: "USD", date: "2025-02-26"
+
+      _(json.map { |row| row["quote"] }).must_equal(["AED", "PLN"])
+    end
+
+    it "leaves an unknown provider selecting nothing" do
+      get "/rates", providers: "NOPE"
+
+      _(last_response).must_be(:ok?)
+      _(json).must_equal([])
+    end
+  end
+
   # Table A quotes the ruble with a one-day typo on March 4, then the ruble moves to Table B. NBP's stored March rollup
   # pools both tables under NBP.B.
   describe "grouped by one table" do

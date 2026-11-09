@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rates under 0.0001 come as plain decimals (0.000038749) rather than in exponent notation (3.8749e-05), in JSON and
   CSV.
 - The first boot after upgrading a self-hosted install from before 2.6.1 rebuilds coverage, rollups and blends. (#797)
+- A base the selected providers never quote returns 422 rather than an empty list.
 
 ### Fixed
 

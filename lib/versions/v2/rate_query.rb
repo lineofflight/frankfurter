@@ -120,6 +120,23 @@ module Versions
         slots&.release
       end
 
+      # Provider queries rebase through the selection's own rates, so a base none of it quotes can only come back empty.
+      # The rate routes say so instead and name the base it can reach; coverage keeps answering with no dates. Unknown
+      # keys select nothing, as they always have.
+      def validate_base_quoted!
+        datasets = dataset_keys&.filter_map { |key| Dataset[key] }
+        return if datasets.nil? || datasets.empty?
+
+        rates = Rate.where(dataset_key: datasets.map(&:key))
+        return if rates.where(quote: base).any? || rates.where(base:).any?
+
+        selection = providers.size == 1 ? "#{providers.first} doesn't" : "none of #{providers.join(",")}"
+        pivots = datasets.filter_map(&:pivot_currency).uniq.map { |pivot| "base=#{pivot}" }
+        message = "#{selection} quote #{base}"
+        message += "; try #{pivots.join(" or ")}" if pivots.any?
+        raise ValidationError, message
+      end
+
       private
 
       def acquire_slot!
