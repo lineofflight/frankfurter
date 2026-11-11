@@ -65,7 +65,13 @@ Changes to blend rules, peg definitions, or provider eligibility require `rake b
 - **Match the code to the unit of the number.** A series a source restated in today's unit (BIS, ECB's pre-2005 RON) keeps the new code even before the currency existed. Old-unit values under the new code move to the predecessor code up to that source's own switch date, which can trail the redenomination by days (`PREDECESSORS`, plus a data migration if already imported). An old code the app doesn't know needs a currency patch first.
 - **Delete only rows the source didn't publish for that date**, such as a frozen rate a live feed re-dates every week, or history the source has since withdrawn.
 - **Never delete a row because its value looks wrong.** Typos and spikes stay in `rates`. The blend screens them: `RateSpike` drops a one-day spike (3x off both neighbours, which agree) at any provider count, `Consensus` drops outliers when at least four providers quote a currency, and the defunct and nascent windows keep retired and not-yet-live codes out.
-- **Data migrations leave blend tables alone.** Clearing them sends every request to live compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy instead; it rebuilds in place. A migration that relabels or deletes rows rescreens them with `RateSpike.refresh(dataset_key, dates)`.
+- **Data migrations leave blend tables alone.** Clearing them sends every request to live compute until the scheduler rebuilds. Run `rake blend:rebuild` after deploy instead; it rebuilds in place. A migration that relabels or deletes rows rescreens them with `RateSpike.refresh(dataset_key, dates)`. When relabelling a currency in `blended_rates` (`UNIQUE(quote, date)`), exclude dates where `new_code` already exists before updating `old_code`, then delete remaining `old_code` rows. Test data migrations against a copy of `/home/deploy/frankfurter/data/frankfurter.sqlite3` in a throwaway container (`docker run --rm`) before deploying.
+
+## Deploy
+
+1. Confirm `test` and `publish` succeeded on `main` (`gh run list --branch main --limit 1`).
+2. Deploy on `frank`: `ssh frank 'frankfurter/deploy'`, then check `ssh frank 'docker logs --tail 30 frankfurter'` and `curl -s 'https://api.frankfurter.dev/v2/rates?quotes=USD,GBP,JPY'`.
+3. If the release alters blend rules or historical series, wait until startup backfills and cache purges finish in container logs before running `ssh frank 'docker exec frankfurter bundle exec rake blend:rebuild'`.
 
 ## Conventions
 
