@@ -1,0 +1,278 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://foservices.icegate.gov.in/cbu/icegateapi/getnotdetails
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Host:
+      - foservices.icegate.gov.in
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Allow:
+      - GET, POST
+      Vary:
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      Cache-Control:
+      - no-cache, must-revalidate, private
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - frame-ancestors 'none'; default-src 'self' *.icegate.gov.in;style-src 'self'
+        *.icegate.gov.in 'unsafe-inline' 'unsafe-eval';script-src 'self' *.icegate.gov.in
+        'unsafe-inline' 'unsafe-eval';
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Access-Control-Request-Method:
+      - GET,POST,OPTIONS
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 10:23:01 GMT
+      Connection:
+      - close
+      Set-Cookie:
+      - 6afabf730d0cdfe793f5c5a3ee3849e3=7875b2e6dc4bf9a895324425c2e7019a; path=/;
+        HttpOnly; Secure; SameSite=Strict
+      - ADRUM_BT1=R:0|i:18845; Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:31 GMT;
+        Path=/; Secure
+      - ADRUM_BT1=R:0|i:18845|e:15; Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:31
+        GMT; Path=/; Secure
+      - ADRUM_BT1=R:0|i:18845|e:15|t:1794824581486; Max-Age=30; Expires=Mon, 16-Nov-2026
+        10:23:31 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:bda022be-a1bd-4c1b-9645-a1c0cd28e255; Max-Age=30; Expires=Mon,
+        16-Nov-2026 10:23:31 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:bda022be-a1bd-4c1b-9645-a1c0cd28e255|n:customer1_146791c6-5905-4c94-a364-534a6ffabd90;
+        Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:31 GMT; Path=/; Secure
+      - SESSION_AFFINITY=!RP908h7aGufvozrDLrEpjN7Yrm+xSoBejO1Sy0Jmubkl20bOpBHOAbI0qhQPpoyzFHemA1mYOlcnm3k=;
+        path=/; Httponly; Secure
+      - TS01ca5df0=01bd28ccdb91c61e556b7313c0db0f587341d0fe5aa7ac852f996d1c5ef1e6a297d2671b3efc40c661459583a726da68c8b3eaae47fad11f905645519f0e4c68e1d72b49e5b8818b154635ad466f42096d28360d56794232b45184d39826f0cde06be7e01240a4c4ee7329bcc8ea5b5024e865410d5a79cff1e2926d9345d9b427eda5b815967a3a6fefcccb94f6167fa28c37f15a31bcd0b7198cdb774279bf121d47769f;
+        Path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"notificationNumber":"30/2026","notPublishDate":"05-11-2026"},{"notificationNumber":"29/2026","notPublishDate":"15-10-2026"},{"notificationNumber":"28/2026","notPublishDate":"01-10-2026"},{"notificationNumber":"27/2026","notPublishDate":"17-09-2026"},{"notificationNumber":"26/2026","notPublishDate":"16-09-2026"},{"notificationNumber":"25/2026","notPublishDate":"03-09-2026"},{"notificationNumber":"24/2026","notPublishDate":"20-08-2026"},{"notificationNumber":"23/2026","notPublishDate":"06-08-2026"},{"notificationNumber":"22/2026","notPublishDate":"16-07-2026"},{"notificationNumber":"21/2026","notPublishDate":"15-07-2026"},{"notificationNumber":"20/2026","notPublishDate":"14-07-2026"},{"notificationNumber":"19/2026","notPublishDate":"02-07-2026"},{"notificationNumber":"18/2026","notPublishDate":"18-06-2026"},{"notificationNumber":"17/2026","notPublishDate":"04-06-2026"},{"notificationNumber":"16/2026","notPublishDate":"21-05-2026"},{"notificationNumber":"15/2026","notPublishDate":"20-05-2026"},{"notificationNumber":"14/2026","notPublishDate":"07-05-2026"},{"notificationNumber":"13/2026","notPublishDate":"16-04-2026"},{"notificationNumber":"12/2026","notPublishDate":"02-04-2026"},{"notificationNumber":"11/2026","notPublishDate":"19-03-2026"},{"notificationNumber":"10/2026","notPublishDate":"05-03-2026"},{"notificationNumber":"09/2026","notPublishDate":"19-02-2026"},{"notificationNumber":"08/2026","notPublishDate":"06-02-2026"},{"notificationNumber":"07/2026","notPublishDate":"05-02-2026"},{"notificationNumber":"06/2026","notPublishDate":"03-02-2026"},{"notificationNumber":"05/2026","notPublishDate":"28-01-2026"},{"notificationNumber":"04/2026","notPublishDate":"27-01-2026"},{"notificationNumber":"03/2026","notPublishDate":"23-01-2026"},{"notificationNumber":"02/2026","notPublishDate":"15-01-2026"},{"notificationNumber":"01/2026","notPublishDate":"01-01-2026"},{"notificationNumber":"44/2025","notPublishDate":"18-12-2025"},{"notificationNumber":"43/2025","notPublishDate":"04-12-2025"},{"notificationNumber":"42/2025","notPublishDate":"20-11-2025"},{"notificationNumber":"41/2025","notPublishDate":"06-11-2025"},{"notificationNumber":"40/2025","notPublishDate":"16-10-2025"},{"notificationNumber":"39/2025","notPublishDate":"02-10-2025"},{"notificationNumber":"38/2025","notPublishDate":"18-09-2025"},{"notificationNumber":"37/2025","notPublishDate":"04-09-2025"},{"notificationNumber":"36/2025","notPublishDate":"21-08-2025"},{"notificationNumber":"35/2024","notPublishDate":"07-08-2025"},{"notificationNumber":"34/2024","notPublishDate":"04-08-2025"},{"notificationNumber":"33/2024","notPublishDate":"31-07-2025"},{"notificationNumber":"32/2024","notPublishDate":"17-07-2025"},{"notificationNumber":"31/2024","notPublishDate":"03-07-2025"},{"notificationNumber":"30/2024","notPublishDate":"27-06-2025"},{"notificationNumber":"29/2024","notPublishDate":"19-06-2025"},{"notificationNumber":"28/2024","notPublishDate":"05-06-2025"},{"notificationNumber":"27/2024","notPublishDate":"15-05-2025"},{"notificationNumber":"26/2024","notPublishDate":"01-05-2025"},{"notificationNumber":"25/2024","notPublishDate":"17-04-2025"},{"notificationNumber":"24/2024","notPublishDate":"11-04-2025"},{"notificationNumber":"23/2024","notPublishDate":"09-04-2025"},{"notificationNumber":"22/2024","notPublishDate":"03-04-2025"},{"notificationNumber":"21/2024","notPublishDate":"20-03-2025"},{"notificationNumber":"20/2024","notPublishDate":"06-03-2025"},{"notificationNumber":"19/2024","notPublishDate":"20-02-2025"},{"notificationNumber":"18/2024","notPublishDate":"06-02-2025"},{"notificationNumber":"17/2024","notPublishDate":"04-02-2025"},{"notificationNumber":"16/2024","notPublishDate":"31-01-2025"},{"notificationNumber":"15/2024","notPublishDate":"16-01-2025"},{"notificationNumber":"14/2024","notPublishDate":"02-01-2025"},{"notificationNumber":"13/2024","notPublishDate":"19-12-2024"},{"notificationNumber":"12/2024","notPublishDate":"05-12-2024"},{"notificationNumber":"11/2024","notPublishDate":"21-11-2024"},{"notificationNumber":"10/2024","notPublishDate":"14-11-2024"},{"notificationNumber":"9/2024","notPublishDate":"07-11-2024"},{"notificationNumber":"8/2024","notPublishDate":"17-10-2024"},{"notificationNumber":"7/2024","notPublishDate":"03-10-2024"},{"notificationNumber":"6/2024","notPublishDate":"19-09-2024"},{"notificationNumber":"5/2024","notPublishDate":"05-09-2024"},{"notificationNumber":"4/2024","notPublishDate":"14-08-2024"},{"notificationNumber":"3/2024","notPublishDate":"01-08-2024"},{"notificationNumber":"2/2024","notPublishDate":"19-07-2024"},{"notificationNumber":"1/2024","notPublishDate":"04-07-2024"}]'
+  recorded_at: Mon, 16 Nov 2026 10:23:01 GMT
+- request:
+    method: post
+    uri: https://foservices.icegate.gov.in/cbu/icegateapi/igexratepublishnot
+    body:
+      encoding: UTF-8
+      string: '{"notNum":"29/2026"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - foservices.icegate.gov.in
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Allow:
+      - GET, POST
+      Vary:
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      Cache-Control:
+      - no-cache, must-revalidate, private
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - frame-ancestors 'none'; default-src 'self' *.icegate.gov.in;style-src 'self'
+        *.icegate.gov.in 'unsafe-inline' 'unsafe-eval';script-src 'self' *.icegate.gov.in
+        'unsafe-inline' 'unsafe-eval';
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Access-Control-Request-Method:
+      - GET,POST,OPTIONS
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 10:23:02 GMT
+      Connection:
+      - close
+      Set-Cookie:
+      - 6afabf730d0cdfe793f5c5a3ee3849e3=951c31e42feeeb22a570d6ba2df99e2d; path=/;
+        HttpOnly; Secure; SameSite=Strict
+      - ADRUM_BT1=R:0|i:18844; Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:32 GMT;
+        Path=/; Secure
+      - ADRUM_BT1=R:0|i:18844|t:1794824582226; Max-Age=30; Expires=Mon, 16-Nov-2026
+        10:23:32 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:18e533ca-bf77-4d3b-8fb3-25b0f625d518; Max-Age=30; Expires=Mon,
+        16-Nov-2026 10:23:32 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:18e533ca-bf77-4d3b-8fb3-25b0f625d518|n:customer1_146791c6-5905-4c94-a364-534a6ffabd90;
+        Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:32 GMT; Path=/; Secure
+      - SESSION_AFFINITY=!R7mBKsmYozLvSGvDLrEpjN7Yrm+xSiYnyPTc/9z1IxwxStrajt+Jf4Ah1s+mrM7vBv04k2+bXHyYLVM=;
+        path=/; Httponly; Secure
+      - TS01ca5df0=01bd28ccdb453bf3707b3d380f7860ffde51bc693bf02eb74bf92854b36a7f28965458a0fdff0d4ed91094eedabf7091cae8e3e0d32f0b18c8dd657d62ce08059ad323f531203eb7e3dc9980c802d06a25c25cbc7c1c38c1ac1e1d017fc689a9036ae15822b17ecb428a82be48c09b8354686df570e642b2204743639bc1fbc950d828e9127260de6731f8e91e346e36c7301d86e8;
+        Path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"notificationNumber":"29/2026","status":1,"notPublishDate":"16-10-2026","currencyDetail":[{"currencyCode":"AED","currencyDesc":"UAE
+        Dirham","cbicImport":26.65,"cbicExport":25.15,"units":"1.0"},{"currencyCode":"AUD","currencyDesc":"Australian
+        Dollar","cbicImport":67.6,"cbicExport":64.65,"units":"1.0"},{"currencyCode":"BHD","currencyDesc":"Bahraini
+        Dinar","cbicImport":267.55,"cbicExport":237.15,"units":"1.0"},{"currencyCode":"CAD","currencyDesc":"Canadian
+        Dollar","cbicImport":68.0,"cbicExport":65.85,"units":"1.0"},{"currencyCode":"CHF","currencyDesc":"Swiss
+        Franc","cbicImport":117.2,"cbicExport":112.25,"units":"1.0"},{"currencyCode":"CNY","currencyDesc":"Chinese
+        Yuan","cbicImport":14.45,"cbicExport":13.95,"units":"1.0"},{"currencyCode":"DKK","currencyDesc":"Danish
+        Kroner","cbicImport":14.45,"cbicExport":14.1,"units":"1.0"},{"currencyCode":"EUR","currencyDesc":"EURO","cbicImport":108.55,"cbicExport":104.85,"units":"1.0"},{"currencyCode":"GBP","currencyDesc":"Pound
+        Sterling","cbicImport":127.95,"cbicExport":123.95,"units":"1.0"},{"currencyCode":"HKD","currencyDesc":"Hong
+        Kong Dollar","cbicImport":12.25,"cbicExport":11.95,"units":"1.0"},{"currencyCode":"JPY","currencyDesc":"Japanese
+        Yen","cbicImport":61.2,"cbicExport":59.35,"units":"100.0"},{"currencyCode":"KRW","currencyDesc":"Korean
+        won","cbicImport":7.25,"cbicExport":6.85,"units":"100.0"},{"currencyCode":"KWD","currencyDesc":"Kuwaiti
+        Dinar","cbicImport":314.7,"cbicExport":295.9,"units":"1.0"},{"currencyCode":"NOK","currencyDesc":"Norwegian
+        Kroner","cbicImport":10.15,"cbicExport":9.9,"units":"1.0"},{"currencyCode":"NZD","currencyDesc":"New
+        Zealand Dollar","cbicImport":54.8,"cbicExport":52.1,"units":"1.0"},{"currencyCode":"QAR","currencyDesc":"Qatari
+        Riyal","cbicImport":27.9,"cbicExport":24.45,"units":"1.0"},{"currencyCode":"SAR","currencyDesc":"Saudi
+        Arabian Riyal","cbicImport":26.95,"cbicExport":24.9,"units":"1.0"},{"currencyCode":"SEK","currencyDesc":"Swedish
+        Kroner","cbicImport":9.65,"cbicExport":9.45,"units":"1.0"},{"currencyCode":"SGD","currencyDesc":"Singapore
+        Dollar","cbicImport":75.4,"cbicExport":72.9,"units":"1.0"},{"currencyCode":"TRY","currencyDesc":"Turkish
+        Lira","cbicImport":2.0,"cbicExport":1.85,"units":"1.0"},{"currencyCode":"USD","currencyDesc":"US
+        Dollar","cbicImport":95.9,"cbicExport":94.2,"units":"1.0"},{"currencyCode":"ZAR","currencyDesc":"South
+        African Rand","cbicImport":5.9,"cbicExport":5.6,"units":"1.0"}],"error":null}'
+  recorded_at: Mon, 16 Nov 2026 10:23:02 GMT
+- request:
+    method: post
+    uri: https://foservices.icegate.gov.in/cbu/icegateapi/igexratepublishnot
+    body:
+      encoding: UTF-8
+      string: '{"notNum":"28/2026"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; Frankfurter; +https://github.com/lineofflight/frankfurter)
+      Accept:
+      - "*/*"
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - foservices.icegate.gov.in
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Allow:
+      - GET, POST
+      Vary:
+      - Access-Control-Request-Headers
+      - Access-Control-Request-Method
+      - Origin
+      Cache-Control:
+      - no-cache, must-revalidate, private
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Security-Policy:
+      - frame-ancestors 'none'; default-src 'self' *.icegate.gov.in;style-src 'self'
+        *.icegate.gov.in 'unsafe-inline' 'unsafe-eval';script-src 'self' *.icegate.gov.in
+        'unsafe-inline' 'unsafe-eval';
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Access-Control-Request-Method:
+      - GET,POST,OPTIONS
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Nov 2026 10:23:02 GMT
+      Connection:
+      - close
+      Set-Cookie:
+      - 6afabf730d0cdfe793f5c5a3ee3849e3=45aba4b23b9a4046653757d40f6e19c4; path=/;
+        HttpOnly; Secure; SameSite=Strict
+      - ADRUM_BT1=R:0|i:18844; Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:32 GMT;
+        Path=/; Secure
+      - ADRUM_BT1=R:0|i:18844|e:15; Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:32
+        GMT; Path=/; Secure
+      - ADRUM_BT1=R:0|i:18844|e:15|t:1794824582932; Max-Age=30; Expires=Mon, 16-Nov-2026
+        10:23:32 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:71fa1b47-1886-4941-8573-0521609848b8; Max-Age=30; Expires=Mon,
+        16-Nov-2026 10:23:32 GMT; Path=/; Secure
+      - ADRUM_BTa=R:0|g:71fa1b47-1886-4941-8573-0521609848b8|n:customer1_146791c6-5905-4c94-a364-534a6ffabd90;
+        Max-Age=30; Expires=Mon, 16-Nov-2026 10:23:32 GMT; Path=/; Secure
+      - SESSION_AFFINITY=!2aArovQucrS1ge7DLrEpjN7Yrm+xSu58u2eKccrc89xtj12Bi3pp+0YOp8RDyKyOOzvf74HPVWynj38=;
+        path=/; Httponly; Secure
+      - TS01ca5df0=01bd28ccdb51fb57305b0e1b103378765df6e22209972c4ffaeda1281dfa3920c27c38b13245980d98bd8ccd7690d9862d52ac20ef4330a4e2330abe73db2cb6fe4e43a5fa47acbb75131cafffc08122ae201c7031f644dce7e392fb37668156233965337b22a4c430124fbde9f85799523da9fc26dd8ed3d4b6e81b7e9980b12f7c4696ad9209e13af6234ca60982b4cddc493bf169151e2cafc67e7f7ca9d95c8de9bbdb;
+        Path=/
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"notificationNumber":"28/2026","status":1,"notPublishDate":"02-10-2026","currencyDetail":[{"currencyCode":"AED","currencyDesc":"UAE
+        Dirham","cbicImport":26.95,"cbicExport":25.4,"units":"1.0"},{"currencyCode":"AUD","currencyDesc":"Australian
+        Dollar","cbicImport":68.2,"cbicExport":65.25,"units":"1.0"},{"currencyCode":"BHD","currencyDesc":"Bahraini
+        Dinar","cbicImport":270.15,"cbicExport":239.65,"units":"1.0"},{"currencyCode":"CAD","currencyDesc":"Canadian
+        Dollar","cbicImport":68.55,"cbicExport":66.4,"units":"1.0"},{"currencyCode":"CHF","currencyDesc":"Swiss
+        Franc","cbicImport":117.3,"cbicExport":112.5,"units":"1.0"},{"currencyCode":"CNY","currencyDesc":"Chinese
+        Yuan","cbicImport":14.55,"cbicExport":14.1,"units":"1.0"},{"currencyCode":"DKK","currencyDesc":"Danish
+        Kroner","cbicImport":14.7,"cbicExport":14.35,"units":"1.0"},{"currencyCode":"EUR","currencyDesc":"EURO","cbicImport":110.5,"cbicExport":106.8,"units":"1.0"},{"currencyCode":"GBP","currencyDesc":"Pound
+        Sterling","cbicImport":129.25,"cbicExport":125.2,"units":"1.0"},{"currencyCode":"HKD","currencyDesc":"Hong
+        Kong Dollar","cbicImport":12.4,"cbicExport":12.1,"units":"1.0"},{"currencyCode":"JPY","currencyDesc":"Japanese
+        Yen","cbicImport":61.6,"cbicExport":59.75,"units":"100.0"},{"currencyCode":"KRW","currencyDesc":"Korean
+        won","cbicImport":7.25,"cbicExport":6.85,"units":"100.0"},{"currencyCode":"KWD","currencyDesc":"Kuwaiti
+        Dinar","cbicImport":320.9,"cbicExport":301.8,"units":"1.0"},{"currencyCode":"NOK","currencyDesc":"Norwegian
+        Kroner","cbicImport":10.1,"cbicExport":9.85,"units":"1.0"},{"currencyCode":"NZD","currencyDesc":"New
+        Zealand Dollar","cbicImport":55.3,"cbicExport":52.55,"units":"1.0"},{"currencyCode":"QAR","currencyDesc":"Qatari
+        Riyal","cbicImport":27.15,"cbicExport":25.6,"units":"1.0"},{"currencyCode":"SAR","currencyDesc":"Saudi
+        Arabian Riyal","cbicImport":26.8,"cbicExport":24.25,"units":"1.0"},{"currencyCode":"SEK","currencyDesc":"Swedish
+        Kroner","cbicImport":9.7,"cbicExport":9.45,"units":"1.0"},{"currencyCode":"SGD","currencyDesc":"Singapore
+        Dollar","cbicImport":76.35,"cbicExport":73.8,"units":"1.0"},{"currencyCode":"TRY","currencyDesc":"Turkish
+        Lira","cbicImport":2.0,"cbicExport":1.9,"units":"1.0"},{"currencyCode":"USD","currencyDesc":"US
+        Dollar","cbicImport":96.95,"cbicExport":95.25,"units":"1.0"},{"currencyCode":"ZAR","currencyDesc":"South
+        African Rand","cbicImport":6.0,"cbicExport":5.65,"units":"1.0"}],"error":null}'
+  recorded_at: Mon, 16 Nov 2026 10:23:03 GMT
+recorded_with: VCR 6.4.0

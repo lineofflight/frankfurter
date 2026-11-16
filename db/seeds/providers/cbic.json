@@ -1,0 +1,30 @@
+{
+  "key": "CBIC",
+  "name": "Central Board of Indirect Taxes and Customs",
+  "country_code": "IN",
+  "terms_url": "https://www.icegate.gov.in/terms-conditions",
+  "datasets": [
+    {
+      "key": "CBIC.IMPORT",
+      "default": true,
+      "rate_type": "import customs rate",
+      "frequency": "weekly",
+      "pivot_currency": "INR",
+      "data_url": "https://foservices.icegate.gov.in/#/services/notifyPublishScreen",
+      "publish_schedule": "*/30 12-15 * * *",
+      "publish_cadence": "monthly",
+      "coverage_start": "2024-07-05"
+    },
+    {
+      "key": "CBIC.EXPORT",
+      "default": false,
+      "rate_type": "export customs rate",
+      "frequency": "weekly",
+      "pivot_currency": "INR",
+      "data_url": "https://foservices.icegate.gov.in/#/services/notifyPublishScreen",
+      "publish_schedule": "*/30 12-15 * * *",
+      "publish_cadence": "monthly",
+      "coverage_start": "2024-07-05"
+    }
+  ]
+}
