@@ -196,12 +196,17 @@ class Provider < Sequel::Model(:providers)
       warn_revisions(records) if adapter.revises?
 
       inserted = db.transaction(savepoint: true) do
-        before = db.get(Sequel.lit("total_changes()"))
-        Rate.dataset.insert_conflict(target: [:dataset_key, :date, :base, :quote])
-          .multi_insert(records.map { |record| RateComponents.attributes(record) })
-        count = db.get(Sequel.lit("total_changes()")) - before
-        refresh_derived(records, series) if count.positive?
-        count
+        counts = records.group_by { |r| r[:dataset_key] }.transform_values do |rows|
+          before = db.get(Sequel.lit("total_changes()"))
+          Rate.dataset.insert_conflict(target: [:dataset_key, :date, :base, :quote])
+            .multi_insert(rows.map { |record| RateComponents.attributes(record) })
+          db.get(Sequel.lit("total_changes()")) - before
+        end
+        # A dataset that gained nothing leaves what derives from it as it was. A provider's new dataset refetches
+        # history its other datasets already hold, and refreshing those would re-blend years for identical values.
+        fresh = records.select { |r| counts.fetch(r[:dataset_key]).positive? }
+        refresh_derived(fresh, series) if fresh.any?
+        counts.values.sum
       end
 
       Log.info("#{key}: inserted #{inserted} rates")

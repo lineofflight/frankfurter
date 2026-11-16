@@ -191,6 +191,7 @@ describe "Datasets migration" do
             row["NBU", "2001-05-02", "ZAL", "UAH", 1.8],
             row["NBP", "2026-01-07", "USD", "PLN", 3.6],
             row["NBP", "2026-01-07", "AED", "PLN", 0.98],
+            row["TCMB", "2026-01-07", "USD", "TRY", 43.0],
           ] + ecb.flat_map do |date|
             [row["ECB", date, "EUR", "USD", 1.17], row["ECB", date, "EUR", "JPY", date.day == 7 ? 1830.0 : 183.0]]
           end,
@@ -203,12 +204,13 @@ describe "Datasets migration" do
 
       ruby.call(old, <<~RUBY)
         require "db"
-        abort "not migrated" unless DB[:schema_info].get(:version) == 52
+        abort "not migrated" unless DB[:schema_info].get(:version) == 53
         abort "rebuild still owed" if DB.table_exists?(:derived_rebuild_owed)
         rates = DB[:rates].order(:dataset_key, :date, :base).select_map([:dataset_key, :base, :quote])
         abort "LIQ kept" if rates.any? { |_, base, _| base == "LIQ" }
         abort "049 not applied" unless [["CNB", "BEF", "CZK"], ["NBU", "TJS", "UAH"]].all? { |r| rates.include?(r) }
         abort "NBP not split" unless rates.include?(["NBP.A", "USD", "PLN"]) && rates.include?(["NBP.B", "AED", "PLN"])
+        abort "TCMB not suffixed" unless rates.include?(["TCMB.FOREX", "USD", "TRY"])
         abort "spike not flagged" unless DB[:rate_spikes].select_map([:dataset_key, :quote]) == [["ECB", "JPY"]]
         abort "stale coverage kept" unless DB[:currency_coverages].where(iso_code: "ZAL").empty?
         abort "no blends" if DB[:blended_rates].empty? || DB[:blended_weekly_rates].empty?
@@ -238,6 +240,40 @@ describe "Datasets migration" do
         end
       RUBY
     end
+  end
+
+  it "suffixes the existing datasets of TCMB, DAB and BCT" do
+    run_script(<<~'RUBY')
+      require "db"
+      Sequel.extension(:migration)
+      Sequel::Migrator.run(DB, "db/migrate", target: 52)
+      keys = ["TCMB", "DAB", "BCT", "ECB"]
+      keys.each do |key|
+        DB[:rates].insert(dataset_key: key, date: "2026-01-02", base: "USD", quote: "XXX", mid: 1.5)
+        DB[:weekly_rates].insert(dataset_key: key, bucket_date: "2025-12-31", base: "USD", quote: "XXX", rate: 1.5)
+        DB[:monthly_rates].insert(dataset_key: key, bucket_date: "2026-01-01", base: "USD", quote: "XXX", rate: 1.5)
+        DB[:rate_spikes].insert(dataset_key: key, date: "2026-01-02", base: "USD", quote: "XXX")
+        DB[:currency_coverages].insert(dataset_key: key, iso_code: "USD", start_date: "2026-01-02", end_date: "2026-01-02")
+        DB[:currency_exclusions].insert(dataset_key: key, iso_code: "XXX", start_date: "2026-01-02", end_date: "2026-01-02")
+      end
+      tables = [:rates, :weekly_rates, :monthly_rates, :rate_spikes, :currency_coverages, :currency_exclusions]
+
+      Sequel::Migrator.run(DB, "db/migrate", target: 53)
+
+      expected = ["BCT.INTERBANK", "DAB.TRANSFER", "ECB", "TCMB.FOREX"]
+      tables.each do |table|
+        found = DB[table].order(:dataset_key).select_map(:dataset_key)
+        abort "#{table}: #{found.inspect}" unless found == expected
+      end
+
+      Sequel::Migrator.run(DB, "db/migrate", target: 52)
+
+      tables.each do |table|
+        found = DB[table].order(:dataset_key).select_map(:dataset_key)
+        abort "#{table} not restored: #{found.inspect}" unless found == keys.sort
+      end
+      DB.disconnect
+    RUBY
   end
 
   it "installs from scratch" do

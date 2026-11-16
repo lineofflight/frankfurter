@@ -220,6 +220,28 @@ describe Provider do
       _(CurrencyCoverage.where(iso_code: "AED").select_map(:dataset_key)).must_equal(["TST.B"])
     end
 
+    it "refreshes what derives from rates only for datasets that gained rows" do
+      Rate.dataset.insert(dataset_key: "TST.A", date: Date.today, base: "USD", quote: "PLN", mid: 3.6)
+      tagged = Class.new(Provider::Adapters::Adapter) do
+        define_method(:fetch) do |**|
+          [
+            { date: Date.today, base: "USD", quote: "PLN", rate: 3.6, dataset: "TST.A" },
+            { date: Date.today, base: "BRL", quote: "PLN", rate: 0.7, dataset: "TST.X" },
+          ]
+        end
+      end
+      rescreened = []
+      RateSpike.stub(:refresh, lambda { |keys, _dates|
+        rescreened << keys
+        []
+      },) do
+        provider.stub(:adapter, tagged) { provider.backfill(after: Date.today - 1) }
+      end
+
+      _(rescreened).must_equal([["TST.X"]])
+      _(Rate.where(dataset_key: "TST.X").select_map(:base)).must_equal(["BRL"])
+    end
+
     it "stores nothing from a provider with several datasets when a record is untagged" do
       untagged = Class.new(Provider::Adapters::Adapter) do
         define_method(:fetch) { |**| [{ date: Date.today, base: "USD", quote: "PLN", rate: 3.6 }] }

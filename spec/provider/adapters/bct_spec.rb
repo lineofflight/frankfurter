@@ -97,7 +97,17 @@ class Provider < Sequel::Model(:providers)
         _(aed[:rate]).must_be_close_to(0.79781, 0.00001)
       end
 
-      it "ignores the manual-exchange table below the first table" do
+      it "tags interbank and bureau rates with their datasets" do
+        dataset = adapter.fetch(after: Date.new(2026, 5, 18), upto: Date.new(2026, 5, 20))
+        interbank = dataset.select { |r| r[:dataset] == "BCT.INTERBANK" }.map { |r| r[:base] }
+        bureau = dataset.select { |r| r[:dataset] == "BCT.BUREAU" }.map { |r| r[:base] }
+
+        _(interbank).must_include("USD")
+        _(bureau).must_include("USD")
+        _(bureau - interbank).must_be_empty
+      end
+
+      it "reads the manual-exchange table below the first as the bureau rates" do
         html = <<~HTML
           <h3>Cours Moyens des Devises Cotées</h3>
           <h5>Journée du 20/05/2026</h5>
@@ -122,10 +132,8 @@ class Provider < Sequel::Model(:providers)
 
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
 
-        usd = records.select { |r| r[:base] == "USD" }
-
-        _(usd.length).must_equal(1)
-        _(usd.first[:rate]).must_be_close_to(2.9048, 0.0001)
+        _(records.map { |r| [r[:dataset], r[:base], r[:rate]] })
+          .must_equal([["BCT.INTERBANK", "USD", 2.9048], ["BCT.BUREAU", "USD", 2.924]])
       end
 
       it "rejects responses whose echoed date does not match the request" do
