@@ -6,13 +6,13 @@ require "provider/adapters/adapter"
 
 class Provider
   module Adapters
-    # Central Bank of the Republic of Turkey. Uses EVDS3 bulk API with buying (A) and selling (S) rates in TRY. Each
-    # currency's mid-market rate is derived from the average of buy/sell. Requires TCMB_API_KEY environment variable.
+    # Central Bank of the Republic of Turkey. Uses the EVDS3 bulk API for indicative buying (A) and selling (S) rates in
+    # TRY, in two series: forex (Döviz) as TCMB.FOREX and banknote (Efektif) as TCMB.BANKNOTE. Each rate is the mid of
+    # buying and selling. Requires TCMB_API_KEY environment variable.
     class TCMB < Adapter
       EVDS_URL = "https://evds3.tcmb.gov.tr/igmevdsms-dis"
-      # Buy/sell rates in TRY for each currency. Hardcoded because the EVDS3 catalog API doesn't expose a clean list and
-      # the series rarely change. Browse: https://evds3.tcmb.gov.tr
-      # > Exchange Rates > Indicative Exchange Rates
+      # Hardcoded because the EVDS3 catalog API doesn't expose a clean list and the series rarely change. Browse:
+      # https://evds3.tcmb.gov.tr > Exchange Rates > Indicative Exchange Rates
       CURRENCIES = [
         "AED",
         "AUD",
@@ -37,11 +37,19 @@ class Provider
         "USD",
       ].freeze
 
-      SERIES = CURRENCIES.flat_map do |c|
-        [["#{c}_BUY", "TP.DK.#{c}.A.YTL"], ["#{c}_SELL", "TP.DK.#{c}.S.YTL"]]
-      end.to_h.freeze
+      # Series code infix per dataset: TP.DK.USD.A.YTL is the forex buying rate, TP.DK.USD.A.EF.YTL the banknote one.
+      DATASETS = { "TCMB.FOREX" => "", "TCMB.BANKNOTE" => ".EF" }.freeze
 
-      COLUMNS = SERIES.to_h { |code, series| [series.tr(".", "_"), code] }.freeze
+      # JPY is quoted per 100 units in both series (confirmed via series metadata).
+      UNITS = { "JPY" => 100 }.freeze
+
+      SIDES = { buy: "A", sell: "S" }.freeze
+
+      SERIES = DATASETS.flat_map do |dataset, infix|
+        CURRENCIES.flat_map do |currency|
+          SIDES.map { |side, code| ["TP.DK.#{currency}.#{code}#{infix}.YTL", [dataset, currency, side]] }
+        end
+      end.to_h.freeze
 
       class << self
         def api_key = ENV["TCMB_API_KEY"] || raise("no API key")
@@ -52,38 +60,32 @@ class Provider
         start_date = after || Date.new(2012, 1, 2)
         end_date = upto || Date.today
 
-        url = "#{EVDS_URL}/series=#{SERIES.values.join("-")}" \
+        url = "#{EVDS_URL}/series=#{SERIES.keys.join("-")}" \
               "&startDate=#{start_date.strftime("%d-%m-%Y")}" \
               "&endDate=#{end_date.strftime("%d-%m-%Y")}" \
               "&type=json&frequency=1"
 
-        response = http.headers("key" => self.class.api_key).get(url).to_s
-        data = JSON.parse(response)
-        items = data["items"] || []
+        parse(http.headers("key" => self.class.api_key).get(url).to_s)
+      end
 
-        items.flat_map do |item|
+      def parse(json)
+        JSON.parse(json).fetch("items", []).flat_map do |item|
           date = Date.strptime(item["Tarih"], "%d-%m-%Y")
-          raw = {}
-
-          COLUMNS.each do |column, code|
-            value = item[column]
-            next if value.nil?
-
-            raw[code] = Float(value)
+          quotes = {}
+          SERIES.each do |series, (dataset, currency, side)|
+            value = item[series.tr(".", "_")]
+            (quotes[[dataset, currency]] ||= {})[side] = Float(value) if value
           end
 
-          # Mid of buying and selling for each currency → X→TRY rate. JPY is quoted per 100 units in TCMB data
-          # (confirmed via series metadata).
-          CURRENCIES.filter_map do |currency|
-            buy = raw["#{currency}_BUY"]
-            sell = raw["#{currency}_SELL"]
-            next unless buy && sell
+          # The API returns zero for a currency without a rate in the series, as most have none in banknotes.
+          quotes.filter_map do |(dataset, currency), quote|
+            buy = quote[:buy]
+            sell = quote[:sell]
+            next unless buy&.positive? && sell&.positive?
 
-            rate = midpoint(buy, sell)
-            rate /= 100.0 if currency == "JPY"
-
-            { date:, base: currency, quote: "TRY", rate:,
-              **prices(bid: buy, ask: sell, unit: currency == "JPY" ? 100 : 1), }
+            unit = UNITS.fetch(currency, 1)
+            { dataset:, date:, base: currency, quote: "TRY", rate: midpoint(buy, sell) / unit,
+              **prices(bid: buy, ask: sell, unit:), }
           end
         end
       end

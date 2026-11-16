@@ -10,8 +10,8 @@ class Provider
     # (TND) on the interbank market.
     #
     # The endpoint accepts a single date per request and returns an HTML fragment with two tables: the interbank
-    # reference rates ("Cours Moyens des Devises Cotees") and a manual-exchange table below. We parse only the first
-    # table.
+    # reference rates ("Cours Moyens des Devises Cotees") as BCT.INTERBANK, and the average rates for manual exchange
+    # and traveller's cheques below it ("Cours Moyens ... pour le Change Manuel") as BCT.BUREAU.
     #
     # Caveats handled here:
     # - The meta tag declares ISO-8859-1 but the HTTP header (and observed
@@ -33,6 +33,9 @@ class Provider
       DATE_RE = %r{Journée du\s*(\d{2})/(\d{2})/(\d{4})}
       SIGLE_RE = /\A([A-Z]{3})\z/
       NUMBER_RE = /[\d.,]+/
+
+      # The page's tables, in order.
+      DATASETS = ["BCT.INTERBANK", "BCT.BUREAU"].freeze
 
       class << self
         def backfill_range = 30
@@ -67,28 +70,26 @@ class Provider
         # No-data days otherwise silently fall back to a nearby trading day; drop the mismatched page
         return [] unless echoed == date
 
-        doc = Nokogiri::HTML.parse(html)
+        tables = Nokogiri::HTML.parse(html).css("table")
+        raise "BCT: no rates table on page for #{date}" if tables.empty?
 
-        # Keep only the first interbank table; the second table is for manual exchange.
-        table = doc.at_css("table")
-        raise "BCT: no rates table on page for #{date}" unless table
+        DATASETS.zip(tables).flat_map do |dataset, table|
+          next [] unless table
 
-        records = []
-        table.css("tr").each do |row|
-          cells = row.css("td").map { |c| c.text.strip }
-          next if cells.length < 4
+          table.css("tr").filter_map do |row|
+            cells = row.css("td").map { |c| c.text.strip }
+            next if cells.length < 4
 
-          _name, sigle, unit_str, value_str = cells
-          next unless SIGLE_RE.match?(sigle)
+            _name, sigle, unit_str, value_str = cells
+            next unless SIGLE_RE.match?(sigle)
 
-          unit = parse_number(unit_str)
-          value = parse_number(value_str)
-          next if unit.nil? || unit.zero? || value.nil? || value.zero?
+            unit = parse_number(unit_str)
+            value = parse_number(value_str)
+            next if unit.nil? || unit.zero? || value.nil? || value.zero?
 
-          records << { date:, base: sigle, quote: "TND", rate: value / unit }
+            { dataset:, date:, base: sigle, quote: "TND", rate: value / unit }
+          end
         end
-
-        records
       end
 
       private

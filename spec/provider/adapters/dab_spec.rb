@@ -35,7 +35,16 @@ class Provider < Sequel::Model(:providers)
         _(dataset.map { |r| r[:base] }).must_include("USD")
       end
 
-      it "parses the daily table as the transfer mid" do
+      it "tags transfer and cash rates with their datasets" do
+        dataset = adapter.fetch(after: Date.new(2026, 5, 20), upto: Date.new(2026, 5, 20))
+        transfer = dataset.select { |r| r[:dataset] == "DAB.TRANSFER" }.map { |r| r[:base] }
+        cash = dataset.select { |r| r[:dataset] == "DAB.CASH" }.map { |r| r[:base] }
+
+        _(transfer).must_include("USD")
+        _(cash.sort).must_equal(transfer.sort)
+      end
+
+      it "parses the daily table as the transfer and cash mids" do
         html = <<~HTML
           <div class="table-responsive">
             <table class="table table-striped">
@@ -51,8 +60,8 @@ class Provider < Sequel::Model(:providers)
               <tbody>
                 <tr>
                   <td>USD$</td>
-                  <td>63.7940</td>
-                  <td>63.5940</td>
+                  <td>64.0000</td>
+                  <td>63.5000</td>
                   <td>63.7440</td>
                   <td>63.6440</td>
                 </tr>
@@ -60,12 +69,16 @@ class Provider < Sequel::Model(:providers)
             </table>
           </div>
         HTML
-        records = adapter.parse(html, date: Date.new(2026, 5, 20))
+        records = adapter.parse(html, date: Date.new(2026, 5, 20)).to_h { |r| [r[:dataset], r] }
 
-        _(records.length).must_equal(1)
-        _(records.first[:base]).must_equal("USD")
-        _(records.first[:quote]).must_equal("AFN")
-        _(records.first[:rate]).must_be_close_to(63.694, 0.0001)
+        _(records.keys).must_equal(["DAB.TRANSFER", "DAB.CASH"])
+        _(records.values.map { |r| [r[:base], r[:quote]] }.uniq).must_equal([["USD", "AFN"]])
+        _(records["DAB.TRANSFER"][:rate]).must_equal(63.694)
+        _(records["DAB.TRANSFER"][:bid]).must_equal(63.644)
+        _(records["DAB.TRANSFER"][:ask]).must_equal(63.744)
+        _(records["DAB.CASH"][:rate]).must_equal(63.75)
+        _(records["DAB.CASH"][:bid]).must_equal(63.5)
+        _(records["DAB.CASH"][:ask]).must_equal(64.0)
       end
 
       it "maps descriptive currency labels to ISO codes" do
@@ -86,7 +99,7 @@ class Provider < Sequel::Model(:providers)
           </div>
         HTML
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
-        codes = records.map { |r| r[:base] }
+        codes = records.map { |r| r[:base] }.uniq
 
         _(codes).must_equal(["EUR", "GBP", "CHF", "INR", "PKR", "CNY", "AED", "SAR"])
       end
@@ -98,8 +111,8 @@ class Provider < Sequel::Model(:providers)
               <tbody>
                 <tr>
                   <td>IRAN Toman</td>
-                  <td>0.0009</td>
-                  <td>0.0003</td>
+                  <td>0.0010</td>
+                  <td>0.0004</td>
                   <td>0.0008</td>
                   <td>0.0004</td>
                 </tr>
@@ -107,13 +120,14 @@ class Provider < Sequel::Model(:providers)
             </table>
           </div>
         HTML
-        records = adapter.parse(html, date: Date.new(2026, 5, 20))
+        records = adapter.parse(html, date: Date.new(2026, 5, 20)).to_h { |r| [r[:dataset], r] }
 
-        _(records.length).must_equal(1)
-        _(records.first[:base]).must_equal("IRR")
-        _(records.first[:quote]).must_equal("AFN")
+        _(records.values.map { |r| [r[:base], r[:quote]] }.uniq).must_equal([["IRR", "AFN"]])
         # Transfer mid for Toman: (0.0008 + 0.0004) / 2 = 0.0006 IRR = Toman / 10 = 0.00006
-        _(records.first[:rate]).must_be_close_to(0.00006, 1e-7)
+        _(records["DAB.TRANSFER"][:rate]).must_be_close_to(0.00006, 1e-12)
+        # Cash mid for Toman: (0.0010 + 0.0004) / 2 = 0.0007 IRR = Toman / 10 = 0.00007
+        _(records["DAB.CASH"][:rate]).must_be_close_to(0.00007, 1e-12)
+        _(records["DAB.CASH"][:bid]).must_be_close_to(0.00004, 1e-12)
       end
 
       it "ignores the Average Rates table" do
@@ -135,8 +149,8 @@ class Provider < Sequel::Model(:providers)
         HTML
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
 
-        _(records.length).must_equal(1)
-        _(records.first[:rate]).must_be_close_to(63.69, 0.01)
+        _(records.length).must_equal(2)
+        records.each { |r| _(r[:rate]).must_be_close_to(63.69, 0.01) }
       end
 
       it "returns empty for no-data responses" do
@@ -159,8 +173,23 @@ class Provider < Sequel::Model(:providers)
         HTML
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
 
-        _(records.length).must_equal(1)
-        _(records.first[:base]).must_equal("USD")
+        _(records.map { |r| r[:dataset] }).must_equal(["DAB.TRANSFER", "DAB.CASH"])
+        _(records.map { |r| r[:base] }.uniq).must_equal(["USD"])
+      end
+
+      it "skips a dataset whose cells are empty" do
+        html = <<~HTML
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <tbody>
+                <tr><td>USD$</td><td></td><td></td><td>63.74</td><td>63.64</td></tr>
+              </tbody>
+            </table>
+          </div>
+        HTML
+        records = adapter.parse(html, date: Date.new(2026, 5, 20))
+
+        _(records.map { |r| r[:dataset] }).must_equal(["DAB.TRANSFER"])
       end
 
       it "ignores unknown currency labels" do
@@ -176,8 +205,8 @@ class Provider < Sequel::Model(:providers)
         HTML
         records = adapter.parse(html, date: Date.new(2026, 5, 20))
 
-        _(records.length).must_equal(1)
-        _(records.first[:base]).must_equal("USD")
+        _(records.map { |r| r[:dataset] }).must_equal(["DAB.TRANSFER", "DAB.CASH"])
+        _(records.map { |r| r[:base] }.uniq).must_equal(["USD"])
       end
     end
   end
