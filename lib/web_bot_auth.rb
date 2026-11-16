@@ -28,6 +28,10 @@ module WebBotAuth
   # How long the directory's signature holds, well past a day's caching.
   DIRECTORY_LIFETIME = 604_800
 
+  # Hosts whose firewalls reject a signed request, so we send theirs unsigned. www.bct.gov.tn answers HTTP 500 to any
+  # header containing "=(", an old Shellshock filter that Signature-Input's component list trips (#807).
+  UNSIGNED_HOSTS = ["www.bct.gov.tn"].freeze
+
   class << self
     # Tests set these in place of ENV, or false for no key.
     attr_writer :private_key, :authority
@@ -132,11 +136,13 @@ module WebBotAuth
     end
   end
 
-  # Signs each request Adapter#http sends once there is a key. http.rb has set the Host header by now, which is the
-  # authority a verifier checks.
+  # Signs each request Adapter#http sends once there is a key, except to UNSIGNED_HOSTS. http.rb has set the Host header
+  # by now, which is the authority a verifier checks.
   class Signer < HTTP::Feature
     def wrap_request(request)
-      request.headers.merge!(WebBotAuth.request_headers(request.headers["Host"])) if WebBotAuth.configured?
+      return request if !WebBotAuth.configured? || UNSIGNED_HOSTS.include?(request.uri.host)
+
+      request.headers.merge!(WebBotAuth.request_headers(request.headers["Host"]))
       request
     end
 
