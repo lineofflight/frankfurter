@@ -202,6 +202,18 @@ class Provider < Sequel::Model(:providers)
           end
         end
 
+        it "leaves requests to hosts that reject signatures unsigned" do
+          turn_on_web_bot_auth
+          bct = "https://www.bct.gov.tn/bct/siteprod/cours_archiv.jsp"
+          WebMock.stub_request(:get, bct).to_return(status: 200, body: "ok")
+
+          client.get(bct).to_s
+
+          WebMock.assert_requested(:get, bct) do |request|
+            ["Signature", "Signature-Input", "Signature-Agent"].none? { |name| request.headers.key?(name) }
+          end
+        end
+
         it "links to the requests page and signs each request once there is a Web Bot Auth key" do
           key = turn_on_web_bot_auth
           signed = []
