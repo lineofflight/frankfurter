@@ -156,6 +156,38 @@ describe "Rollup tables" do
 
       _(dates.size).must_be(:>=, 3, "expected at least 3 weekly buckets for a 20-day range")
     end
+
+    it "keys every week on its ISO Monday without splitting or reordering New Year weeks" do
+      Rate.dataset.delete
+      WeeklyRate.dataset.delete
+      BlendedWeeklyRate.dataset.delete
+      observations = {
+        "2024-12-30" => 1.04, "2024-12-31" => 1.06, "2025-01-02" => 1.08, "2025-01-03" => 1.10,
+        "2025-12-15" => 1.12, "2025-12-29" => 1.16, "2026-01-02" => 1.20,
+        "2026-01-05" => 1.22, "2026-01-19" => 1.24, "2026-01-20" => 1.26,
+      }
+      observations.each do |date, mid|
+        Rate.dataset.insert(dataset_key: "ECB", date: Date.iso8601(date), base: "EUR", quote: "USD", mid:)
+      end
+      Provider["ECB"].send(:refresh_rollups, observations.keys.map { |d| Date.iso8601(d) })
+
+      monday_year = Versions::V2::RateQuery.new(
+        base: "EUR", quotes: "USD", from: "2024-12-30", to: "2025-01-05", group: "week",
+      ).to_a
+
+      _(monday_year.map { |r| [r[:date], r[:rate]] }).must_equal([["2024-12-30", 1.07]])
+
+      midweek_year = Versions::V2::RateQuery.new(
+        base: "EUR", quotes: "USD", from: "2025-12-15", to: "2026-01-20", group: "week",
+      ).to_a
+
+      _(midweek_year.map { |r| [r[:date], r[:rate]] }).must_equal([
+        ["2025-12-15", 1.12],
+        ["2025-12-29", 1.18],
+        ["2026-01-05", 1.22],
+        ["2026-01-19", 1.25],
+      ])
+    end
   end
 
   describe "single-date grouped query" do

@@ -213,14 +213,12 @@ describe RateValidation do
       _(db[:monthly_rates].where(quote: "BYR", bucket_date: Date.new(2016, 6, 1)).count).must_equal(1)
     end
 
-    it "keeps the current period's rollup whose bucket anchor sits past the daily horizon" do
-      # Weekly/monthly buckets anchor to a fixed weekday / first of the month, so the live period's bucket can sit a few
-      # days ahead of the latest date it summarises. The daily future horizon must not purge it.
-      RateValidation::FutureDate.stub(:horizon, Date.new(2026, 6, 15)) do # a Monday
+    it "keeps the current period's rollup and purges buckets whose period starts past the horizon" do
+      RateValidation::FutureDate.stub(:horizon, Date.new(2026, 6, 17)) do # a Wednesday
         # The current and the next week, then the current and the next month.
         db[:weekly_rates].multi_insert([
-          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 18), base: "EUR", quote: "USD", rate: 1.1 },
-          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 25), base: "EUR", quote: "USD", rate: 1.1 },
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 15), base: "EUR", quote: "USD", rate: 1.1 },
+          { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 22), base: "EUR", quote: "USD", rate: 1.1 },
         ])
         db[:monthly_rates].multi_insert([
           { dataset_key: "TEST", bucket_date: Date.new(2026, 6, 1), base: "EUR", quote: "USD", rate: 1.1 },
@@ -229,8 +227,8 @@ describe RateValidation do
 
         RateValidation.purge(db)
 
-        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 18)).count).must_equal(1)
-        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 25)).count).must_equal(0)
+        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 15)).count).must_equal(1)
+        _(db[:weekly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 22)).count).must_equal(0)
         _(db[:monthly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 6, 1)).count).must_equal(1)
         _(db[:monthly_rates].where(dataset_key: "TEST", bucket_date: Date.new(2026, 7, 1)).count).must_equal(0)
       end

@@ -432,7 +432,7 @@
       "group": {
         "name": "group",
         "in": "query",
-        "description": "Downsample rates by time period. Only applies to date ranges.",
+        "description": "Downsample rates by time period. Only applies to date ranges. Weekly buckets cover ISO weeks (Monday to Sunday), dated on Monday; monthly buckets cover calendar months, dated on the first of the month.",
         "required": false,
         "schema": {
           "type": "string",
