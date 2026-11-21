@@ -16,34 +16,27 @@ class Provider < Sequel::Model(:providers)
 
       let(:adapter) { BCCR.new }
 
-      it "fetches rates" do
+      let(:csv) do
+        "﻿US Dollar purchase and sale rates\r\n" \
+          "Banco Central de Costa Rica Reference Rate, in Costa Rican currency (colones)\r\n" \
+          "\r\n" \
+          "\r\n" \
+          "Date;Sales Exchange Rate\r\n" \
+          "2026-03-20;469.49000000\r\n" \
+          "2026-03-21;\r\n" \
+          "2026-03-22;468.29000000\r\n"
+      end
+
+      it "fetches every date in the range" do
         dataset = adapter.fetch(after: Date.new(2026, 3, 16), upto: Date.new(2026, 3, 24))
 
-        _(dataset).wont_be_empty
+        _(dataset.map { |r| r[:date] }).must_equal((Date.new(2026, 3, 16)..Date.new(2026, 3, 24)).to_a)
+        _(dataset.map { |r| [r[:base], r[:quote]] }.uniq).must_equal([["USD", "CRC"]])
       end
 
       it "parses response with correct structure" do
-        records = adapter.parse({
-          "columnas" => [
-            { "field" => "nombre", "tituloIngles" => "Indicators" },
-            { "field" => "serie1", "tituloIngles" => "20 mar 2026" },
-            { "field" => "serie2", "tituloIngles" => "21 mar 2026" },
-          ],
-          "indicadoresRaiz" => [
-            {
-              "idIndicador" => 317,
-              "nombreIngles" => "Buy",
-              "series" => { "serie1Ingles" => "463.24", "serie2Ingles" => "463.50" },
-            },
-            {
-              "idIndicador" => 318,
-              "nombreIngles" => "Sell",
-              "series" => { "serie1Ingles" => "469.49", "serie2Ingles" => "468.29" },
-            },
-          ],
-        })
+        records = adapter.parse(csv)
 
-        _(records.length).must_equal(2)
         _(records.first[:base]).must_equal("USD")
         _(records.first[:quote]).must_equal("CRC")
         _(records.first[:rate]).must_equal(469.49)
@@ -51,22 +44,13 @@ class Provider < Sequel::Model(:providers)
       end
 
       it "skips empty series values" do
-        records = adapter.parse({
-          "columnas" => [
-            { "field" => "nombre", "tituloIngles" => "Indicators" },
-            { "field" => "serie1", "tituloIngles" => "20 mar 2026" },
-            { "field" => "serie2", "tituloIngles" => "21 mar 2026" },
-          ],
-          "indicadoresRaiz" => [
-            {
-              "idIndicador" => 318,
-              "nombreIngles" => "Sell",
-              "series" => { "serie1Ingles" => "469.49", "serie2Ingles" => "" },
-            },
-          ],
-        })
+        records = adapter.parse(csv)
 
-        _(records.length).must_equal(1)
+        _(records.map { |r| r[:date] }).must_equal([Date.new(2026, 3, 20), Date.new(2026, 3, 22)])
+      end
+
+      it "raises when the CSV header is missing" do
+        _ { adapter.parse("Date;Purchase Exchange Rate\r\n2026-03-20;463.24000000\r\n") }.must_raise(RuntimeError)
       end
     end
   end

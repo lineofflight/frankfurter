@@ -7,59 +7,52 @@ require "provider/adapters/adapter"
 class Provider
   module Adapters
     # Banco Central de Costa Rica (BCCR). Fetches the daily reference exchange rate for the US dollar against the Costa
-    # Rican colón via the SDDE API. The API returns a pivoted table (dates as columns) with a maximum of 100 date
-    # columns per request, so backfill is chunked in 90-day periods.
+    # Rican colón via the SDDE site's CSV download, which returns any date range in one request. The table endpoint the
+    # site renders from caps each request at five dates.
     class BCCR < Adapter
       BASE_URL = "https://apim.bccr.fi.cr/SDDE/api"
       TOKEN_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno.ServiciosUsuario.API/Token/GenereCSRF".freeze
-      DATA_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno." \
-                 "GrupoVariables.API/CuadroGrupoVariables/ObtenerDatosCuadro".freeze
+      DATA_URL = "#{BASE_URL}/Bccr.GE.SDDE.IndicadoresSitioExterno.GrupoVariables.API/Documento/DescargueCsv".freeze
       # IdGrupoVariable=1 is the USD buy/sell reference rate group
       GROUP_ID = 1
 
-      # Indicator 318 is the sell (venta) rate — CRC per 1 USD
+      # Indicator 318 is the sell (venta) rate: CRC per 1 USD
       SELL_INDICATOR = 318
 
-      class << self
-        def backfill_range = 90
-      end
+      HEADER = "Date;Sales Exchange Rate"
 
       def fetch(after: nil, upto: nil)
         token = fetch_token
 
-        response = http.headers("token_csrf" => token, "Origin" => "https://sdd.bccr.fi.cr").get(DATA_URL, params: {
-          "IdGrupoVariable" => GROUP_ID,
-          "FechaInicio" => "#{after}T00:00:00",
+        response = http.headers("token_csrf" => token, "Origin" => "https://sdd.bccr.fi.cr").post(DATA_URL, json: {
+          "FechaInicio" => after.to_s,
           "FechaFin" => (upto || Date.today).to_s,
-          "CantidadSeriesAMostrar" => 100,
+          "Periodicidad" => 0,
+          "IdGrupoVariable" => GROUP_ID,
+          "Idioma" => "EN",
+          "Indicadores" => [SELL_INDICATOR],
         },).to_s
 
-        parse(response)
+        # The CSV comes base64-encoded in a JSON envelope; estado is false when the range holds no rates.
+        data = JSON.parse(response)
+        raise "BCCR: no data between #{after} and #{upto || Date.today}" unless data["estado"]
+
+        parse(data["datos"].unpack1("m").force_encoding(Encoding::UTF_8))
       end
 
-      def parse(json)
-        data = json.is_a?(String) ? JSON.parse(json) : json
-        columns = data["columnas"]
-        indicators = data["indicadoresRaiz"]
-        raise "BCCR: response missing columnas/indicadoresRaiz envelope" unless columns && indicators
+      def parse(csv)
+        lines = csv.delete_prefix("﻿").lines(chomp: true)
+        header = lines.index(HEADER)
+        raise "BCCR: CSV missing #{HEADER.inspect} header" unless header
 
-        sell = indicators.find { |i| i["idIndicador"] == SELL_INDICATOR }
-        raise "BCCR: sell indicator #{SELL_INDICATOR} missing from group #{GROUP_ID} response" unless sell
-
-        series = sell["series"]
-
-        columns.drop(1).filter_map do |col|
-          index = col["field"].delete_prefix("serie")
-          value_str = series["serie#{index}Ingles"]
+        lines.drop(header + 1).filter_map do |line|
+          date_str, value_str = line.split(";")
           next if value_str.nil? || value_str.empty?
-
-          date = parse_date(col["tituloIngles"])
-          next unless date
 
           rate_value = Float(value_str)
           next if rate_value.zero?
 
-          { date:, base: "USD", quote: "CRC", rate: rate_value }
+          { date: Date.iso8601(date_str), base: "USD", quote: "CRC", rate: rate_value }
         end
       end
 
@@ -67,10 +60,6 @@ class Provider
 
       def fetch_token
         http.get(TOKEN_URL).to_s
-      end
-
-      def parse_date(date_str)
-        Date.parse(date_str)
       end
     end
   end

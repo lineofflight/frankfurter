@@ -180,7 +180,7 @@ class Provider < Sequel::Model(:providers)
 
     Log.info("#{key}: backfilling from #{after || "start"}")
     # Many adapters read after as exclusive, but coverage_start is the first day to store. Start the day before it, and
-    # keep out anything dated earlier: inclusive adapters return that day too, and BCCR pads each window to 100 days.
+    # keep out anything dated earlier: inclusive adapters return that day too.
     floor = coverage_start if after && after == coverage_start
     after -= 1 if floor
     series = datasets.to_h { |dataset| [dataset.key, dataset] }
