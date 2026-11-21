@@ -621,7 +621,7 @@ describe Provider do
 
           _(refreshed).must_be_empty
           _(Rate.where(dataset_key: key, date: import_date).first.rate).must_equal(1.1)
-          _(WeeklyRate.where(dataset_key: key, bucket_date: "2025-01-29").first.rate).must_equal(1.1)
+          _(WeeklyRate.where(dataset_key: key, bucket_date: "2025-01-27").first.rate).must_equal(1.1)
           _(MonthlyRate.where(dataset_key: key, bucket_date: "2025-01-01").first.rate).must_equal(1.1)
           coverages = CurrencyCoverage.where(dataset_key: key).order(:iso_code)
 

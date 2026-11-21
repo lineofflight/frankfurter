@@ -204,7 +204,7 @@ describe "Datasets migration" do
 
       ruby.call(old, <<~RUBY)
         require "db"
-        abort "not migrated" unless DB[:schema_info].get(:version) == 53
+        abort "not migrated" unless DB[:schema_info].get(:version) >= 53
         abort "rebuild still owed" if DB.table_exists?(:derived_rebuild_owed)
         rates = DB[:rates].order(:dataset_key, :date, :base).select_map([:dataset_key, :base, :quote])
         abort "LIQ kept" if rates.any? { |_, base, _| base == "LIQ" }

@@ -58,6 +58,7 @@ describe RateScopes do
 
   sides = [:base, :quote]
   [[:week, BlendedWeeklyRate, "BYR", "2016-06-30", "2016-07-01"],
+   [:week, BlendedWeeklyRate, "BGN", "2025-12-31", "2026-01-01"],
    [:month, BlendedMonthlyRate, "VEF", "2018-08-19", "2018-08-20"],].each do |precision, model, code, before, terminal|
     sides.each do |side|
       it "preserves the stored #{precision} boundary #{side} average when daily observations are all eligible" do

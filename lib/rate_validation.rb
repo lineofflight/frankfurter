@@ -44,11 +44,8 @@ module RateValidation
         date > horizon(lead_days)
       end
 
-      # Rollup buckets anchor to a fixed weekday (weekly) or the first of the month (monthly), so the live period's
-      # bucket can sit a few days ahead of the latest date it actually summarises. Comparing such a bucket against the
-      # raw daily horizon wrongly purges the current rollup; bucket the horizon to the table's precision so only buckets
-      # whose whole period is beyond the horizon are dropped. A dataset whose adapter has a lead gets its own, later
-      # bound.
+      # Bucket the horizon to the table's precision so only periods starting past the horizon are dropped; a dataset
+      # whose adapter declares a lead gets its own, later bound.
       def reject_scope(dataset, date_column, precision = nil)
         leads = dataset_leads
         default = Sequel[date_column] > horizon_bound(precision, horizon)

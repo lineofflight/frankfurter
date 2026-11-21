@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Weekly buckets (`group=week`) use ISO weeks dated on Monday. (#818)
 - Bank Indonesia rates after its site redesign, and its JPY rates, published per 100 yen.
 - Bank of Algeria archive renamed with a prefix.
 - Rates below 1 keep five significant figures. Fixed decimals cut small values to one or two digits, and IRR to USD

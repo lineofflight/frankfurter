@@ -7,10 +7,7 @@ require "sequel"
 module Bucket
   class << self
     def week(date_column = :date)
-      week_num = Sequel.cast(Sequel.function(:strftime, "%W", date_column), Integer)
-      day_offset = Sequel.join(["+", week_num * 7, " days"])
-      year_start = Sequel.function(:strftime, "%Y-01-01", date_column)
-      Sequel.function(:date, Sequel.function(:strftime, "%Y-%m-%d", year_start, day_offset))
+      Sequel.function(:date, date_column, "-6 days", "weekday 1")
     end
 
     def month(date_column = :date)
@@ -24,12 +21,13 @@ module Bucket
       end
     end
 
-    # A date range holding every date of the bucket, so a scan can seek a date index before the exact bucket test. Week
-    # buckets count whole weeks from 1 January, so a week's dates sit from 7 days before its bucket date to 5 after.
+    # A date range holding every date of the bucket, so a scan can seek a date index before the exact bucket test. Both
+    # weekly and monthly buckets are dated at their start (Monday and the 1st), so observations sit within one period
+    # after the bucket date.
     def span(precision, bucket_column, date_column = :date)
-      from, to = precision.to_s == "week" ? ["-7 days", "+6 days"] : ["+0 days", "+1 month"]
+      to = precision.to_s == "week" ? "+7 days" : "+1 month"
       Sequel.&(
-        Sequel[date_column] >= Sequel.function(:date, bucket_column, from),
+        Sequel[date_column] >= Sequel.function(:date, bucket_column),
         Sequel[date_column] < Sequel.function(:date, bucket_column, to),
       )
     end
