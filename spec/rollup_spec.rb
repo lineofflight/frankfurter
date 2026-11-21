@@ -188,6 +188,35 @@ describe "Rollup tables" do
         ["2026-01-19", 1.25],
       ])
     end
+
+    it "cuts cleanly between Sunday and the next Monday for both bucket membership and range bounds" do
+      Rate.dataset.delete
+      WeeklyRate.dataset.delete
+      BlendedWeeklyRate.dataset.delete
+      observations = {
+        "2025-12-29" => 1.10, # Monday of week 2025-12-29
+        "2026-01-04" => 1.20, # Sunday of week 2025-12-29
+        "2026-01-05" => 1.30, # Monday of week 2026-01-05
+        "2026-01-11" => 1.40, # Sunday of week 2026-01-05
+        "2026-01-12" => 1.50, # Monday of week 2026-01-12
+      }
+      observations.each do |date, mid|
+        Rate.dataset.insert(dataset_key: "ECB", date: Date.iso8601(date), base: "EUR", quote: "USD", mid:)
+      end
+      Provider["ECB"].send(:refresh_rollups, observations.keys.map { |d| Date.iso8601(d) })
+
+      ask = lambda do |from, to|
+        Versions::V2::RateQuery.new(base: "EUR", quotes: "USD", from:, to:, group: "week").to_a
+          .map { |r| [r[:date], r[:rate]] }
+      end
+
+      # Sunday `from` snaps back to its own Monday; `to` on Sunday stops before next Monday's bucket.
+      _(ask.call("2026-01-04", "2026-01-04")).must_equal([["2025-12-29", 1.15]])
+      # Next-Monday `from` starts on that Monday without leaking the prior week; `to` on Monday includes it.
+      _(ask.call("2026-01-05", "2026-01-05")).must_equal([["2026-01-05", 1.35]])
+      _(ask.call("2026-01-05", "2026-01-11")).must_equal([["2026-01-05", 1.35]])
+      _(ask.call("2026-01-05", "2026-01-12")).must_equal([["2026-01-05", 1.35], ["2026-01-12", 1.5]])
+    end
   end
 
   describe "single-date grouped query" do

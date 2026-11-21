@@ -93,7 +93,10 @@ module Versions
       end
 
       def cache_key
-        Digest::MD5.hexdigest([max_date, expand].join("|"))
+        parts = [max_date, expand]
+        # Salt weekly range ETags after moving Bucket.week to ISO Mondays so pre-change If-None-Match validators miss.
+        parts << "iso-week" if rollup? && group == "week"
+        Digest::MD5.hexdigest(parts.join("|"))
       end
 
       def expand_providers?

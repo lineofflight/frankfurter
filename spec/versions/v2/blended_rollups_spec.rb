@@ -182,4 +182,41 @@ describe "Grouped HTTP responses" do
       end
     end
   end
+
+  it "invalidates pre-ISO-Monday weekly ETags on conditional GET while matching new ones" do
+    Rate.dataset.delete
+    WeeklyRate.dataset.delete
+    BlendedWeeklyRate.dataset.delete
+    observations = { "2025-12-15" => 1.12, "2025-12-29" => 1.16, "2026-01-02" => 1.20, "2026-01-15" => 1.22 }
+    observations.each do |date, mid|
+      Rate.dataset.insert(dataset_key: "ECB", date: Date.iso8601(date), base: "EUR", quote: "USD", mid:)
+    end
+    Provider["ECB"].send(:refresh_rollups, observations.keys.map { |d| Date.iso8601(d) })
+
+    params = { "base" => "EUR", "quotes" => "USD", "from" => "2025-12-15", "to" => "2026-01-20" }
+    # Pre-change weekly queries hashed only [max_date, expand], matching the daily and monthly ETag for the same window.
+    get "/rates", params
+    legacy_etag = last_response.headers["etag"]
+
+    get "/rates", params.merge("group" => "month")
+
+    _(last_response.headers["etag"]).must_equal(legacy_etag)
+
+    get "/rates", { "base" => "EUR", "quotes" => "USD", "date" => "2026-01-15" }
+    snapshot_etag = last_response.headers["etag"]
+    get "/rates", { "base" => "EUR", "quotes" => "USD", "date" => "2026-01-15", "group" => "week" }
+
+    _(last_response.headers["etag"]).must_equal(snapshot_etag)
+
+    get "/rates", params.merge("group" => "week"), "HTTP_IF_NONE_MATCH" => legacy_etag
+
+    _(last_response.status).must_equal(200)
+    _(last_response.headers["etag"]).wont_equal(legacy_etag)
+    _(JSON.parse(last_response.body).map { |r| r["date"] }).must_equal(["2025-12-15", "2025-12-29", "2026-01-12"])
+
+    get "/rates", params.merge("group" => "week"), "HTTP_IF_NONE_MATCH" => last_response.headers["etag"]
+
+    _(last_response.status).must_equal(304)
+    _(last_response.body).must_be_empty
+  end
 end
