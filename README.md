@@ -1,6 +1,6 @@
 # Frankfurter
 
-[Frankfurter](https://frankfurter.dev) is a free, open-source exchange rate API for [over 200 currencies](https://frankfurter.dev/currencies/) from [over 100 central banks and official sources](https://frankfurter.dev/providers/). Rates update daily and go back to 1948.
+[Frankfurter](https://frankfurter.dev) is a free, open-source exchange rate API for [over 200 currencies](https://frankfurter.dev/currencies/) from [over 100 central banks and other official sources](https://frankfurter.dev/providers/). Rates update daily and go back to 1948.
 
 ## History coverage
 
